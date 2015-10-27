@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KML document loaded by NetworkLinksLocal.xml. -->
+<!--$Id: NetworkLink04.kml 14652 2011-02-09 20:44:42Z dcollins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Placemark>
+        <name>NetworkLink04</name>
+        <description>Point placemark with local image, loaded via NetworkLink (NetworkLink04.kml).</description>
+        <Style>
+            <IconStyle>
+                <Icon>
+                    <href>icon21.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Point>
+            <altitudeMode>relativeToGround</altitudeMode>
+            <coordinates>-75,35,100000</coordinates>
+        </Point>
+    </Placemark>
+</kml>

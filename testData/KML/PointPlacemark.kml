@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--$Id: PointPlacemark.kml 13753 2010-09-09 17:56:12Z tgaskins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <Placemark>
+            <name>Simple placemark</name>
+            <description>Attached to the ground. Intelligently places itself
+                at the height of the underlying terrain.
+            </description>
+            <Style>
+                <IconStyle>
+                    <Icon>
+                        <href>http://maps.google.com/mapfiles/kml/pal3/icon21.png</href>
+                    </Icon>
+                </IconStyle>
+            </Style>
+            <Point>
+                <coordinates>-122.0822035425683,37.42228990140251,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <Placemark>
+            <name>Placemark without image</name>
+            <description>This placemark draws text, but not an image.</description>
+            <Style>
+                <IconStyle>
+                    <scale>0.0</scale>
+                </IconStyle>
+                <LabelStyle>
+                    <scale>1.0</scale>
+                </LabelStyle>
+            </Style>
+            <Point>
+                <coordinates>-90,45,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <Placemark>
+            <name>Placemark with red label</name>
+            <description>This placemark uses the deprecated labelColor tag.</description>
+            <Style>
+                <labelColor>FF0000FF</labelColor>
+            </Style>
+
+            <Point>
+                <coordinates>-80,45,0</coordinates>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><g transform="scale(120) translate(1.02222 0.988889) translate(-0.458333 -0.666667)"><path d="M1.05415 1.24589 C1.08652 1.24859 1.15801 1.28049 1.19202 1.29136 C1.22428 1.30167     1.31008 1.27272 1.3537 1.27272 L1.3537 1.11176 L1.05415 1.11176 z" style="fill:none"/><path d="M1.05415 1.11176 L1.3537 1.11176 L1.3537 1.27271 C1.31008 1.27271 1.22428 1.30167     1.19202 1.29136 C1.15801 1.28049 1.08652 1.24858 1.05415 1.24589 zM0.522119     1.11176 L0.982619 1.11176 L0.982619 1.27719 C0.982619 1.29383 1.06546 1.3157     1.08406 1.32328 C1.09384 1.32728 1.19248 1.36217 1.19307 1.36461 L1.39225     1.34028 L1.41371 1.41517 L1.44312 1.51861 C1.45046 1.52957 1.46994 1.58506 1.46994     1.60356 L1.46994 1.60803 C1.46994 1.63952 1.45206 1.66122 1.45206 1.70639     L1.82792 1.70629 L1.80233 1.62225 L1.78689 1.57383 L1.70243 1.29507 C1.69589     1.28531 1.68901 1.27602 1.68901 1.2593 C1.68901 1.22437 1.79677 1.14446     1.8183 1.11189 L1.74266 0.87928 L0.522122 0.87928 L0.522122 1.11176 z" style="fill:rgb(0,0,0)"/></g><path d="M213.778 223.339 L192.889 206.894 L114.667 206.006 L115.556 270.894 L196 270.45 L214.222    248.672 z" style="fill:rgb(255,255,255);stroke:rgb(0,0,0);stroke-width:4" transform="matrix(1 0 0 1 0 0)"/><line style="stroke:rgb(0,0,0);stroke-width:2" transform="matrix(1 0 0 1 0 0)" x1="201" x2="221" y1="240" y2="188"/><text style="fill:rgb(0,0,0);font-family:Arial;font-size:55;font-weight:bold" x="145" y="258">$</text></svg>

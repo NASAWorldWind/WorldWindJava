@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--
+  ~ World Wind data-file store configuration
+  ~
+  ~ $Id: DataFileStore.xml 1171 2013-02-11 21:45:02Z dcollins $
+  -->
+<dataFileStore>
+    <readLocations>
+        <!-- The read locations are searched, in the given order, when World Wind needs a data or image file. -->
+        <!-- The write location selected from the writeLocations list is searched before these locations. -->
+        <location property="gov.nasa.worldwind.platform.alluser.store" wwDir="WorldWindData"/>
+        <location property="gov.nasa.worldwind.platform.user.store"    wwDir="WorldWindData"/>
+        <location property="user.dir"  wwDir="WorldWindData"/>
+        <location property="user.home" wwDir="WorldWindData"/>
+        <!-- The standard install locations are searched after the standard read locations. -->
+        <location property="gov.nasa.worldwind.platform.alluser.store" wwDir="WorldWindInstalled" isInstall="true" isMarkWhenUsed="true"/>
+        <location property="gov.nasa.worldwind.platform.user.store"    wwDir="WorldWindInstalled" isInstall="true" isMarkWhenUsed="true"/>
+        <location property="user.dir"  wwDir="WorldWindInstalled" isInstall="true" isMarkWhenUsed="true"/>
+        <location property="user.home" wwDir="WorldWindInstalled" isInstall="true" isMarkWhenUsed="true"/>
+    </readLocations>
+    <writeLocations>
+        <!-- The first writable location in this list is used as the session's data and image file store. -->
+        <!-- If a location does not exist and the create attribute is "true", an attempt is made to create it.-->
+        <!-- If that creation attempt succeeds, the location becomes the first writable location and thus is used. -->
+        <!-- Only the first location that's writable or creatable is used. Subsequent locations are ignored. -->
+        <!-- The chosen writable location is also the first search location, searched prior to any readLocations. -->
+        <location property="gov.nasa.worldwind.platform.alluser.store" wwDir="WorldWindData" create="true"/>
+        <location property="gov.nasa.worldwind.platform.user.store"    wwDir="WorldWindData" create="true"/>
+        <location property="java.io.tmpdir" wwDir="WorldWindData" create="true"/>
+    </writeLocations>
+</dataFileStore>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KML document loaded by NetworkLink05.xml. -->
+<!--$Id: NetworkLink05_nested.kml 14652 2011-02-09 20:44:42Z dcollins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Placemark>
+        <name>NetworkLink05_nested</name>
+        <description>Point placemark with remote image, loaded via NetworkLink (NetworkLink05_nested.kml via
+            NetworkLink05.kml).
+        </description>
+        <Style>
+            <IconStyle>
+                <Icon>
+                    <href>http://kml-samples.googlecode.com/svn/trunk/resources/crosshairs.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Point>
+            <altitudeMode>relativeToGround</altitudeMode>
+            <coordinates>-65,35,100000</coordinates>
+        </Point>
+    </Placemark>
+</kml>

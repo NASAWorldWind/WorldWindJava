@@ -1,0 +1,213 @@
+<!-- $Id: overview.html 914 2012-11-28 02:21:56Z pabercrombie $ -->
+<html>
+<body>
+
+<p>
+    World Wind is a collection of components that interactively display 3D geographic information within Java
+    applications or applets. Applications and applets use World Wind by placing one or more {@link
+    gov.nasa.worldwind.WorldWindow} components in their user interface. The World Wind components are extensible. The
+    API is defined primarily by interfaces, so components can be selectively replaced by alternative components.</p>
+
+<p>
+    To use World Wind as an applet, see the package {@link gov.nasa.worldwindx.examples.applet}. </p>
+
+<p>
+    <code>WorldWindow</code> is an interface. Toolkit-specific implementations of the interface are provided for
+                             Swing/AWT and, in the future, SWT-Eclipse. See {@link
+                             gov.nasa.worldwind.awt.WorldWindowGLCanvas}.</p>
+
+<p>
+    In addition to <code>WorldWindow</code>, there are five major World Wind interfaces. They are:
+<ul>
+    <li>{@link gov.nasa.worldwind.globes.Globe} &mdash; represents a planet's shape and terrain.</li>
+    <li>{@link gov.nasa.worldwind.layers.Layer} &mdash; applies imagery or information to a <code>Globe</code>.</li>
+    <li>{@link gov.nasa.worldwind.Model} &mdash; aggregates a <code>Globe</code> and the <code>Layer</code>s to apply to
+        it.
+    </li>
+    <li>{@link gov.nasa.worldwind.SceneController} &mdash; controls the rendering of a <code>Model</code>.</li>
+
+    <li>{@link gov.nasa.worldwind.View} &mdash; interactively controls the user's view of the model.</li>
+</ul>
+</p>
+
+<p>
+    In typical usage, applications associate a <code>Globe</code> and several <code>Layer</code>s with a <code>
+    Model</code> They then pass that model to a <code>SceneController</code> that displays the globe and its layers in a
+    <code>WorldWindow</code>. The scene controller subsequently manages the display of the globe and its layers in
+    conjunction with an interactive <code>View</code> that defines the user's view of the planet. </p>
+
+<p>
+    The objects implementing the above interfaces may be those provided by World Wind or those created by application
+    developers. Objects implementing a particular interface may be used wherever that interface is called for. World
+    Wind provides several <code>Globe</code> objects representing Earth, Mars and the Earth's moon, and provides basic
+    implementations of <code>Model</code>, <code>SceneController</code> and <code>View</code>. </p>
+
+<p>
+    Most of World Wind's components are defined by interfaces. This allows application developers to create their own
+    implementations and easily integrate them into World Wind. </p>
+
+<h2>The <code>WorldWind</code> Class</h2>
+
+<p>TODO</p>
+
+<h2>Multiple World Wind Windows</h2>
+
+<p>TODO</p>
+
+<h2>Data Retrieval</h2>
+
+<p>
+    World Wind works with enormous quantities of data and information, all of which exist primarily on remote data
+    servers. Retrieval and local caching of that data is therefore a primary feature of World Wind. The classes that
+    implement retrieval are {@link gov.nasa.worldwind.retrieve.Retriever} and {@link
+    gov.nasa.worldwind.retrieve.RetrievalService}. </p>
+
+<p>
+    {@link gov.nasa.worldwind.retrieve.Retriever} encapsulates a single network retrieval request. It is an interface.
+    The most commonly used concrete <code>Retriever</code> is {@link gov.nasa.worldwind.retrieve.HTTPRetriever}, which
+    retrieves data via http. Retrievers are typically created by a {@link gov.nasa.worldwind.layers.Layer} to retrieve
+    the data the layer displays, and by an {@link gov.nasa.worldwind.globes.ElevationModel} to retrieve elevation data.
+</p>
+
+<p>
+    {@link gov.nasa.worldwind.retrieve.RetrievalService} manages a thread pool for retrieval tasks. Objects retrieve
+    data by passing the retrieval service a <code>Retriever</code>. The service runs each retriever in an individual
+    thread. Access to the retrieval service is through {@link gov.nasa.worldwind.WorldWind}, which holds a singleton
+    instance. </p>
+
+<p>
+    When a retriever's data arrives, the retrieval service calls the retriever's {@link
+    gov.nasa.worldwind.retrieve.RetrievalPostProcessor}, which was specified to the retriever's constructor. The <code>
+    RetrievalPostProcessor</code> is passed the data immediately upon download and determines how to persist it.
+    Persistence and any processing prior to it is object specific. {@link gov.nasa.worldwind.layers.TiledImageLayer},
+    for instance, can convert non-DDS formats to DDS, or simply store the data as-is in the file cache. {@link
+    gov.nasa.worldwind.terrain.BasicElevationModel} just persists the raw data. The post processor runs in the same
+    thread as the retriever, which is neither the event-dispatching (UI) thread nor the rendering thread, but the one
+    created by the retrieval service for that retriever. </p>
+
+<p>
+    Data that has been previously retrieved or is otherwise local (on disk) is brought into memory in a thread separate
+    from the event-dispatching thread or the rendering thread. One of the World Wind conventions is that no code may
+    access the computer's disk in any way during rendering. Therefore loading the data from disk is dispatched to
+    another thread pool, the {@link gov.nasa.worldwind.util.ThreadedTaskService}. This service has a similar interface
+    to RetrievalService. Tasks it runs typically read the data from disk and add it to the global memory cache
+    (described below). </p>
+
+<p>
+    One consequence of the disk-access restriction is that <em>determining</em> whether needed data is on disk and can
+    be loaded directly, or is not local and therefore must be retrieved, must not be done in the rendering thread. (A
+    disk access is necessary to determine whether the data exists locally.) Objects that load data therefore follow the
+    convention of first checking the memory cache for the desired data, and if it's not there create a {@link
+    java.lang.Runnable} to determine in a separate thread where the data must be drawn from, disk or network. If it's on
+    the disk then the task can simply read it and cache it right away. If it's remote then the task creates a <code>
+    Retriever</code> and requests retrieval. Later, after retrieval has placed the data on disk, the situation will be
+    the local case and data can be loaded into memory within the <code>Runnable</code>. </p>
+
+<h2>Memory Cache</h2>
+
+<p>So that data can be shared among caching objects, most cached data used within World Wind is cached in a {@link
+   gov.nasa.worldwind.cache.MemoryCache}. <code>MemoryCache</code> enable cached data to be shared among all
+   WorldWindWindow instantiations in an application. Thus two Earth globes each displayed in a separate window will
+   share any image or elevation tiles that they are using simultaneously. The same would be true of any place name
+   collections. The constraint this imposes is that cached data that is to be shared must base <code>equals()</code> and
+    <code>hashCode()</code> on fields that are not instance specific to the caching object.</p>
+
+<h2>File Cache</h2>
+
+<p>All data persisted to or drawn from the local computer is done so by the {@link gov.nasa.worldwind.cache.FileStore}
+   No object manages its own storage. The file cache cache manages multiple disk storage locations and unifies access to
+   them. The file cache is a singleton, accessible through the <code>WorldWind</code> singleton.</p>
+
+<h2>Picking and Selection</h2>
+
+<p>World Wind can determine the displayed objects at a given screen position in a <code>WorldWindow</code>. When the
+   application wants to know what's displayed at a particular point, say the cursor position, it calls a method on
+    <code>WorldWindow</code> that accepts the point and returns a description of what's drawn there. In general the
+   application specifies a pick region rather than a single point, with the region a few pixels wide and high and
+   centered on the point. This provides a pick tolerance and allows the user to indicate something close to but not
+   exactly at the screen position. Since several objects may intersect the pick region, descriptions of all these
+   objects are returned to the application. Which of these objects are meaningful is determined by the application.</p>
+
+<p>World Wind uses a method similar to drawing to detect objects in the pick region. During picking, the frame
+   controller invokes each layer's {@link gov.nasa.worldwind.layers.AbstractLayer#doPick(DrawContext, java.awt.Point)}.
+   As in drawing, the methods are invoked in turn, according to the layer's position in the model's layer list. During
+   the call, each layer is responsible for determining which of its items, if any, are picked. Prior to traversing the
+   layer list, the frame controller sets the current view's viewport to the pick region specified by the application.
+   When a layer identifies an object that intersects that pick region, it adds a description of that object to the draw
+   context's pick list. Once all layers are traversed, the list of picked items is returned to the application.</p>
+
+<p>It's typically not straightforward for a layer to determine which of its contents intersect a screen-space pick
+   region. To do that usually requires transforming the screen point into model coordinates and determining intersection
+   in that coordinate system. But depth values are ambiguous with only a two-dimensional screen point as input,
+   complicating transformation to model coordinates, and geometric intersection determination can be very difficult and
+   time consuming. To overcome this, World Wind implements a widely used method of sampling the window's color buffer to
+   detect intersection, and makes this method easy for layers to use.</p>
+
+<p>The method works as follows: The frame controller precedes a pick traversal by first setting the current view's
+   viewport to the specified pick region and clearing the color buffer in that region. This clearing occurs in the
+   window's back buffer and is therefore not visible to the user. During traversal, each layer draws itself not in its
+   normal colors but in a set of colors that serve as pick identifiers. Since the result of pick traversal is never
+   displayed, the specific colors used don't matter visually. Each individual pickable item within a layer is drawn with
+   a unique color that makes the item individually identifiable in the color buffer. By reading the region of the color
+   buffer corresponding to the pick region, the specific items intersecting the region can be determined. The layer
+   performs this read and makes this determination after drawing its pickable items.</p>
+
+<p>Since one layer does not know how subsequently traversed layers might overwrite or otherwise affect it once drawn,
+   items it determines have been picked could end up obscured by other layers. The items that intersect the pick region
+    <em>and</em> are visible can be determined only after all layers are drawn. The frame controller therefore reads the
+   final colors from the pick region of the color buffer and passes them to the list of picked items so that those items
+   can compare their pick identifiers with the final colors and mark themselves as "on top." The application then
+   receives the full list of picked items, with the truly visible ones marked as such.</p>
+
+<p>World Wind provides utility classes to make it simple for layers to participate in this picking scheme. See {@link
+   gov.nasa.worldwind.pick.PickSupport} </p>
+
+<h2>Use of Proxies</h2>
+
+<p></p>A proxy is set by calling {@link gov.nasa.worldwind.Configuration#setValue} for each of the following keys:
+<ul>
+    <li>{@link gov.nasa.worldwind.avlist.AVKey#URL_PROXY_HOST} &mdash; indicates the proxy host address</li>
+    <li>{@link gov.nasa.worldwind.avlist.AVKey#URL_PROXY_PORT} &mdash; indicates the port to use on that host</li>
+    <li>{@link gov.nasa.worldwind.avlist.AVKey#URL_PROXY_TYPE} &mdash; One of the values defined by java.net.Proxy.Type
+    </li>
+</ul>
+
+<p>After these values are set, all retrievals from the network will go through the specified proxy.</p>
+
+<h2>Offline Mode</h2>
+
+<p>World Wind's use of the network can be disabled by calling {@link gov.nasa.worldwind.WorldWind#setOfflineMode}. Prior
+   to attempting retrieval of a network resource &mdash; anything addressed by a URL &mdash; World Wind checks the
+   offline-mode setting and does not attempt retrieval if the value is true.</p>
+
+<h2><a name="path-types">Path Types</a></h2>
+
+<p>There is only one way to draw a straight line on a plane, but there are several ways to draw a straight line on the
+   surface of a globe. Most shapes support the following path types:</p>
+
+<ul>
+    <li>{@link gov.nasa.worldwind.avlist.AVKey#LINEAR} &mdash; A line interpolated by treating latitude and longitude as
+        a rectangular grid. The result is a straight line in the <a
+                href="http://mathworld.wolfram.com/EquirectangularProjection.html" target="_blank">Equirectangular</a>
+        map projection. This type of path is not the shortest distance between points on a sphere, and does not follow a
+        constant compass bearing.
+    </li>
+
+    <li>{@link gov.nasa.worldwind.avlist.AVKey#RHUMB_LINE} or {@link gov.nasa.worldwind.avlist.AVKey#LOXODROME} &mdash;
+        A line of constant bearing. Such a path is a straight line in the <a
+                href="http://mathworld.wolfram.com/MercatorProjection.html" target="_blank"> Mercator</a> map
+        projection. This type of path is not the shortest distance between points on a sphere.
+    </li>
+
+    <li>{@link gov.nasa.worldwind.avlist.AVKey#GREAT_CIRCLE} &mdash; A line that follows <a
+            href="http://mathworld.wolfram.com/GreatCircle.html" target="_blank">great circle</a> arc. This is the
+        shortest path between two points on a sphere.
+    </li>
+</ul>
+
+<p>Set the {@code pathType} attribute to change how the lines of a shape are drawn (for example, {@link
+   gov.nasa.worldwind.render.Path#setPathType}). The {@link gov.nasa.worldwind.geom.LatLon} class provides utility
+   methods to calculate points along each type of path.</p>
+
+</body>
+</html>

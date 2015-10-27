@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinkControl. -->
+<!--$Id: Create01D.kml 391 2012-02-17 01:13:45Z tgaskins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <NetworkLinkControl>
+        <Update>
+            <targetHref>Create01B.kml</targetHref>
+            <Create>
+                <Folder targetId="targetFolder">
+                    <Placemark>
+                        <name>Newly Created Placemark</name>
+                        <visibility>1</visibility>
+                        <Snippet>This Location</Snippet>
+                        <description>this is a new placemark</description>
+                        <Point>
+                            <coordinates>-111,36</coordinates>
+                        </Point>
+                    </Placemark>
+                </Folder>
+            </Create>
+        </Update>
+    </NetworkLinkControl>
+</kml>

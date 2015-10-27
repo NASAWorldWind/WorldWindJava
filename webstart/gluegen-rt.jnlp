@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: gluegen-rt.jnlp 1934 2014-04-15 19:24:07Z dcollins $ -->
+<jnlp codebase="http://worldwind.arc.nasa.gov/java/2.0.0/webstart/"
+      href="gluegen-rt.jnlp" version="v2.1.5">
+
+    <!--
+        Provides a description of the GlueGen library.
+    -->
+    <information>
+        <title>GlueGen Runtime v2</title>
+        <vendor>JogAmp Community</vendor>
+        <homepage href="http://jogamp.org/"/>
+        <description>GlueGen Runtime Library</description>
+        <description kind="short">Run-time support classes and native code for applications and libraries built using
+            the GlueGen tool.
+        </description>
+        <offline-allowed/>
+    </information>
+
+    <update check="background" policy="always"/>
+
+    <!--
+        Requests a trusted application environment. The GlueGen library requires access to the local filesystem. The
+        GlueGen JAR files hosted as part of the World Wind Java SDK are signed with a digital signature associated with
+        NASA.
+    -->
+    <security>
+        <all-permissions/>
+    </security>
+
+    <!--
+        Specifies the resources required by the GlueGen library:
+        * GlueGen JAR file.
+        * GlueGen native libraries.
+    -->
+    <resources>
+        <jar href="gluegen-rt.jar"/>
+    </resources>
+    <resources os="Windows" arch="x86">
+        <nativelib href="gluegen-rt-natives-windows-i586.jar"/>
+    </resources>
+    <resources os="Windows" arch="amd64">
+        <nativelib href="gluegen-rt-natives-windows-amd64.jar"/>
+    </resources>
+    <resources os="Windows" arch="x86_64">
+        <nativelib href="gluegen-rt-natives-windows-amd64.jar"/>
+    </resources>
+    <resources os="Linux" arch="i386">
+        <nativelib href="gluegen-rt-natives-linux-i586.jar"/>
+    </resources>
+    <resources os="Linux" arch="x86">
+        <nativelib href="gluegen-rt-natives-linux-i586.jar"/>
+    </resources>
+    <resources os="Linux" arch="amd64">
+        <nativelib href="gluegen-rt-natives-linux-amd64.jar"/>
+    </resources>
+    <resources os="Linux" arch="x86_64">
+        <nativelib href="gluegen-rt-natives-linux-amd64.jar"/>
+    </resources>
+    <resources os="Mac OS X" arch="i386">
+        <nativelib href="gluegen-rt-natives-macosx-universal.jar"/>
+    </resources>
+    <resources os="Mac OS X" arch="x86_64">
+        <nativelib href="gluegen-rt-natives-macosx-universal.jar"/>
+    </resources>
+
+    <!--
+        Indicates that this Java Web Start file describes a component. This element is intentionally left blank, since
+        it is used only as an indicator.
+    -->
+    <component-desc/>
+
+</jnlp>

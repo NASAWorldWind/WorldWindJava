@@ -1,0 +1,530 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<html>
+<head>
+<title>
+    Search and Rescue Help
+</title>
+</head>
+
+<style type="text/css"><!--
+body,td,a,p {font-family:arial,sans-serif}
+blockquote {background-color: #f0f0f0; padding: 10px; border:1px solid lightgray;}
+h2 {margin-top: 2em; color: SaddleBrown; background-color: #dedede; padding-left: 12px;}
+h3 {margin-top: 2em; color: midnightblue; border-bottom:1px solid gray;}
+tt {font-size: 1.3em; color: Navy;}
+img {display: block; margin:6px auto;} 
+--></style>
+
+<body>
+<h2>World Wind Search and Rescue Instructions</h2>
+
+<h3>Panels and Controls</h3>
+<img src="images/help-application-frame.jpg" alt="SAR Application Frame" />
+
+<p>
+There are three panels in the application:
+</p>
+<ul>
+    <li>The main graphics window. See <a href="#ViewingControls">Viewing Controls</a> below for interaction controls.</li>
+    <li>The Tracks panel, listing the currently loaded tracks and the points of the current track. Any field of
+        the displayed track can be edited by double-clicking it and entering a new value. Positions can be added,
+        inserted or deleted via the context menu (right-click menu). New tracks can be added via the File menu in the
+        menu bar. An offset can be added to all positions via the Offset spinner at top right. An offset value can be
+        set explicitly by entering it in the field.
+    </li>
+    <li>The Position panel, for position control along the current track. This panel displays the current track
+        position and provides ways to move the position either directly or under timed control. The leftmost number box
+        and the slider adjacent to it indicate and control the current track position within a track segment. The box
+        identifies the first point of the segment. The slider indicates the relative distance between the two segment
+        points.
+    </li>
+</ul>
+<p>
+    A menu bar and a tool bar located at the top of the window provide access to the application functions, tools
+    and options. See <a href="#MenuBar">Menu bar description</a> and <a href="#ToolBar">Tool bar description</a> below.
+</p>
+
+<a name="MenuBar"></a>
+<h3>Menu bar description</h3>
+<p>
+    From left to right:
+</p>
+<ul>
+    <li><p><b>File</b> - provide options for managing tracks and downloading imagery and elevation data for a particular sector.</p>
+        <ul>
+            <li><b>New Track...</b> - Create a new track - (Ctrl-N).</li>
+            <li><b>Open Track File...</b> - Open a track from a local file - (Ctrl-O).</li>
+            <li><b>Open Track URL...</b> - Open a track from a remote URL - (Ctrl-U).</li>
+            <li><b>Close Track</b> - Close the current track - (Ctrl-F4).</li>
+            <li><b>Save Track</b> - Save the current track - (Ctrl-S).</li>
+            <li><b>Save Track As...</b> - Save the current track in a different file or location - (Ctrl-Shift-S).</li>
+            <li><b>Preferences...</b> - Open the Preference window - track auto save...</li>
+            <li><b>Bulk Download...</b> - Open the Bulk Download window - (Ctrl-B).</li>
+            <li><b>Exit</b> - Quit the application - (Alt-F4).</li>
+        </ul>
+    </li>
+    <li><p><b>Units</b> - Meter vs Feet and Decimal Degrees vs DMS.</p>
+        <ul>
+            <li><b>Meters</b> - Set the distance units to meter and kilometers - (Ctrl - M).</li>
+            <li><b>Feet</b> - Set the distance unit to feet and miles - (Alt - M).</li>
+            <li><b>Angle DD</b> - Set the angular display to decimal degrees - (Ctrl - D).</li>
+            <li><b>Angle DMS</b> - Set the angular display to degrees, minutes and seconds - (Alt - D).</li>
+        </ul>
+    </li>
+    <li><p><b>Annotation</b> - add or remove annotations. See <a href="#Annotations">Annotations</a></p>
+        <ul>
+            <li><b>New Annotation...</b> - Add an annotation on the terrain - (Ctrl-A).</li>
+            <li><b>Remove Annotation</b> - Remove the currently selected annotation - (Ctrl-Shift-A).</li>
+            <li><b>Show Annotations</b> - Turn on and off annotation display - (Alt-A).</li>
+        </ul>
+    </li>
+    <li><p><b>View</b> - turn on and off display options. Terrain profile and cloud contour controls.</p>
+        <ul>
+            <li><b>Scalebar</b> - Turn on and off the scalebar display.</li>
+            <li><b>Aircraft Location</b> - Turn on and off the aircraft location display.</li>
+            <li><b>Crosshair</b> - Turn on and off the crosshair display.</li>
+            <li><b>Compass</b> - Turn on and off the compass display.</li>
+            <li><b>Terrain Profile...</b> - Open the Terrain Profile control window. See <a href="#TerrainProfile">Terrain Profile Modes</a> - (Ctrl-T)</li>
+            <li><b>Cloud Contour...</b> - Open the Cloud Contour control window. See <a href="#CloudContour">Cloud Contour</a> - (Ctrl-C)</li>
+        </ul>
+    </li>
+    <li><p><b>Layers</b> - turn on and off imagery layers.</p>
+        <ul>
+            <li><b>NASA Blue Marble</b> - The NASA Blue Marble Next Generation 250m Earth global imagery.</li>
+            <li><b>I-Cubed Lansat</b> - Landsat 7 Global 15m imagery</li>
+            <li><b>MS Virtual Earth Aerial</b> - Global Microsoft layerset with resolutions of 1m and less in some parts of the world.</li>
+            <li><b>NAIP California</b> - USDA NAIP 1m imagery for California</li>
+            <li><b>USGS Digital Ortho</b> - Black and white 1m imagery for continental US. This layer is applied with some tranparency.</li>
+            <li><b>USGS Urban Area Ortho</b> - Color 1m or less imagery for some US urban areas</li>
+            <li><b>USGS Topographics Maps</b> - US Topographic maps</li>
+        </ul>
+    </li>
+    <li><p><b>Help</b>.</p>
+        <ul>
+            <li><b>Help</b> - Displays this documentation - (F1).</li>
+            <li><b>About</b> - Displays informations about this application.</li>
+        </ul>
+    </li>
+</ul>
+
+<a name="ToolBar"></a>
+<h3>Tool bar description</h3>
+<img src="images/help-toolbar.jpg" alt="SAR Tollbar" />
+
+<p>
+    From left to right:
+</p>
+<ul>
+    <li><p><b>Track managment</b> - See <a href="#TrackManagment">Track Management</a>.</p>
+        <ul>
+            <li><b>Open Track File</b> - Open a track from a local file - (Ctrl-O).</li>
+            <li><b>New Track</b> - Create a new track - (Ctrl-N).</li>
+            <li><b>Save Track</b> - Save the current track - (Ctrl-S).</li>
+        </ul>
+    </li>
+    <li><p><b>View Modes</b> - See <a href="#ViewModes">View Modes</a>.</p>
+        <ul>
+            <li><b>Examine</b>.</li>
+            <li><b>Fly-It</b>.</li>
+            <li><b>Free</b>.</li>
+        </ul>
+    </li>
+    <li><p><b>Track Info</b> - turns on and off current track segment information display.</p></li>
+    <li><p><b>Track extension</b> - See <a href="#TrackExtension">Track Extension</a>.</p>
+        <ul>
+            <li><b>Extension with segment plane</b>.</li>
+            <li><b>Extension in the air</b>.</li>
+            <li><b>Extension on the ground</b>.</li>
+            <li><b>Remove last track point</b>.</li>
+            <li><b>Move to next point</b>.</li>
+        </ul>
+    </li>
+    <li><p><b>Tools</b>.</p>
+        <ul>
+            <li><b>Terrain Profile</b> - Open the Terrain Profile control window. See <a href="TerrainProfile">Terrain Profile Modes</a> - (Ctrl-T)</li>
+            <li><b>Cloud Contour</b> - Open the Cloud Contour control window. See <a href="CloudContour">Cloud Contour</a> - (Ctrl-C)</li>
+        </ul>
+    </li>
+    <li><p><b>Help</b>.</p></li>
+</ul>
+
+<a name="TrackManagment"></a>
+<h3>Track Management</h3>
+
+<p><b>Loading and saving tracks</b></p>
+
+<ul>
+    <li>To load a track from a local file either click on the 'folder' icon in the tool bar, or select
+        the File->Open track file... menu option, or use the keyboard shortcut Ctrl-O. Select the proper
+        file and click "Open".</li>
+    <li>To load a track from a remote file either select the File->Open track URL... menu option, or use the
+        keyboard shortcut Ctrl-U. Enter the file URL and click "OK".</li>
+    <li>To create a new track either click on the 'blank page' icon in the tool bar, or select the File->New Track...
+        menu option or use the keyboard shortcut Ctrl-N. Enter a track name and click "OK". To build the track path see
+        <a href="#ManagingTrackPoints">Managing track points</a> below.</li>
+    <li>To Save the current track either click on the 'floppy disk' icon in the tool bar, or select the
+        File->Save Track menu option or use the keyboard shortcut Ctrl-S. Note that tracks are automaticaly saved
+        every minutes - see File->Preferences...</li>
+    <li>To save the current track in a different file or location, select the File->Save Track As... menu option or
+        use the keyboard shortcut Ctrl-Shift-S.</li>
+    <li>To close the current track select the File->Close Track menu option or use the keyboard shortcut Ctrl-F4.
+        If the track as been edited since it was opened, a dialog window will offer to save it before closing it.</li>
+</ul>
+
+<a name="ManagingTrackPoints"></a>
+<p><b>Managing track points</b></p>
+
+<p>A track is made of a list of points each with a geographic position and altitude. Track points are displayed
+   and managed in the track panel on the left of the graphic window. Any field of the displayed list  
+   can be edited by double-clicking it and entering a new value. New points can be added, inserted or deleted via
+   the context menu (right-click menu).</p>
+
+<img src="images/help-track-panel-context-menu.jpg" alt="SAR Track Panel Context Menu" />
+
+<p>To add a position to the current track, right click on the track panel and select "Append New Position to Track" 
+   in the context menu. A new track point is added to the track with the same location and altitude as the previous
+   point if there is one. Double click on the new point latitude, longitude or altitude to edit the values.</p>
+
+<p>To remove a track point, first click on the corresponding row in the list to select it, then right click and
+   choose the "Delete Selected Position" option in the context menu.</p>
+
+<p>In a similar way, new positions can be inserted before or after the selected row.</p>
+
+<p>The "Add Offset to Selected Positions" option will increment or decrement the selected points altitude of the current
+track offset value - at top right of the track panel.</p>
+
+
+<a name="TrackExtension"></a>
+<h3>Track extension</h3>
+
+<p>
+    New track points can also be added by visualy placing them in the graphic window.
+</p>
+<img src="images/help-extension-tools.jpg" alt="SAR Track Extension Tools" />
+
+<p>
+   To activate one of the three extension modes, click on the corresponding icon in the tool bar - the other
+   two icons become 'disabled', use the tool to add new track points, then click again on the icon in the tool bar
+   to deactivate the extension mode.
+</p>
+<img src="images/help-extension-plane.jpg" alt="SAR Track Extension Plane" />
+
+<ul>
+    <li><b>Extension using the '3D segment plane'</b>. This mode displays a vertical 'extension plane' at the end
+        of the track. The plane can be orientated using the green corner 'handles' and extended with the pink side
+        'handles'. Once the plane is in the suitable position a new track point can be added by clicking inside
+        the plane. After a point has been added, it's position can be adjusted with the mouse cursor. To place yet
+        another point, click on the "Move to next point" icon in the tool bar. The extension plane will move at the
+        track end and you can repeat the process.</li>
+    <li><b>Extension in the air</b>. This mode lets you add new track points by clicking on the terrain surface
+        while holding down the Alt key. Each new point will have the same altitude as the preceding one. To add a
+        new point, press and hold the Alt key, position the mouse cursor at the approximate location where the new
+        point should appear and press the left mouse button. While holding down the mouse button, move the cursor
+        to adjust the new point location. Release the mouse button when done. Note that you don't need to keep the
+        Alt key pressed while adjusting the new point location.</li>
+    <li><b>Extension on the ground</b>. This mode works exactly like the 'in air' extension mode except new points
+        will be placed at ground elevation. Double click on the new points altitude cells in the track panel to edit
+        the values.</li>
+</ul>
+
+<p>While an extension mode is active, the last track point can be removed by clicking on the "Remove last track point"
+   icon in the tool bar.</p>
+
+
+<a name="ViewModes"></a>
+<h3>View Modes</h3>
+<img src="images/help-view-modes.jpg" alt="SAR View Modes" />
+
+<p>
+    The three view modes allow you to explore tracks in different ways:
+</p>
+<ul>
+    <li>
+        <p>
+            <b>FREE</b> mode provides unconstrained viewing control. You use it to explore tracks and terrain from any
+            angle and position.
+        </p>
+    </li>
+    <li>
+        <p>
+            <b>FLY-IT</b> mode simulates the pilot's view. Selecting this mode positions the view
+            at the current track position indicated in the Position panel.
+            The view's heading is to that from the first to last positions of the segment.
+            Moving the current position, either manually via the position slider or
+            timed via the player controls, moves the view along the segment either forward or backwards.
+        </p>
+
+        <p>
+            The speed of timed movement can be controlled via the Speed spinner located below the player controls.
+        </p>
+    </li>
+    <li>
+        <p>
+            <b>EXAMINE</b> mode is similar to Fly-It mode but the view follows the track from the side, at any angle and
+            distance the user desires. This is the view a chaser aircraft would have. This mode attempts to keep the
+            view focussed on a point on the ground just below the current position while the user manipulates the
+            view to useful perspectives.
+        </p>
+    </li>
+</ul>
+
+<a name="TerrainProfile"></a>
+<h3>Terrain Profile</h3>
+
+<p>
+    To bring up the terrain profile control window, either:
+</p>
+<ul>
+    <li>Click on the "Terrain Profile" icon in the tool bar.</li>
+    <li>Use the keyboard shortcut Ctrl-T</li>
+    <li>Select the View->Terrain Profile... menu option</li>
+</ul>
+<img src="images/help-terrain-profile.jpg" alt="SAR Terrain Profile" />
+
+<p>
+    The top-left 'pulldown' menu lets you set the terrain profile graph size to "Small", "Medium" or "Large".
+</p>
+<p>
+    The top-right 'pulldown' menu in the terrain profile panel determines the terrain cross section position. The yellow line
+    in the graphics window shows the cross section's current position. At all times the terrain profile
+    displays the elevations of the terrain intersected by this line. The "Profile at/under..." selection can have the following
+    values:
+</p>
+<ul>
+    <li>
+        <p>
+            <b>Profile at Screen Center</b> places the terrain cross section constantly at the center of the view. You manipulate the
+            globe to change the terrain measured.
+        </p>
+    </li>
+    <li>
+        <p>
+            <b>Profile Under Cursor</b> places the center of the cross section at the cursor (mouse) position. Moving the
+            cursor moves the cross section over the globe's surface.
+        </p>
+    </li>
+    <li>
+        <p>
+            <b>Profile Under Eye</b> is meant to be used in "Fly-It" view mode described in the <em>View Modes</em> section
+            above. It positions the cross section on the surface directly below the pilot, perpendicular to the
+            current heading and centered on the current track position. The profile graph displays the cross section
+            directly to the pilot's left and right. This terrain profile mode is not intended to be used with view modes
+            other than Fly-It.
+        </p>
+    </li>
+    <li>
+        <p>
+            <b>Profile Under Aircraft</b> positions the cross section perpendicular to and centered on the current track at the
+            current track position. This mode enables you to watch the cross section move along the track while in
+            Examine or Free view modes. In Examine mode the view will follow the current track position, therefore the
+            cross section will remain centered in the graphics window while the view moves along the current track. In
+            Free mode the view will be stationary but the cross section will move along the track, requiring the user
+            to continually adjust the view to keep the cross section in sight.
+        </p>
+        <p>
+            When the profile is set to be under the aircraft, a second profile is also displayed in the right portion
+            of the graphic window. This one is perpendicular to the other and follows the track direction.
+        </p>
+    </li>
+    <li>
+        <p>
+            <b>No Profile</b> Turn off the cross section and terrain profile.
+        </p>
+    </li>
+</ul>
+
+<p><b>Terrain Profile Controls</b></p>
+
+<p>
+    The following controls let you adjust the terrain profile size and behavior:
+</p>
+<ul>
+    <li><b>Proportional</b>: determines whether the width and height of the profile graph are to the
+    same scale.</li>
+    <li><b>MSL Base</b> determines whether the graph shows elevations relative to mean sea level or the current minimum elevation along the
+    cross section.</li>
+    <li><b>Show A/C Position</b> determines whether the aircraft position should be indicated in the profile. The
+    aircraft point can be shown only when the terrain profile position is "Under Aircraft".</li>
+    <li><b>Profile Width</b> lets you increase the perpendicular profile extent on both sides of the track.</li>
+    <li><b>Profile Length</b> when the profile is set to be under the aircraft, lets you increase the 'along the track'
+    profile extent both ahead and behind the aircraft.</li>
+    <li><b>Same Size</b> when checked both profiles will have the same extent.</li>
+    <li><b>Whole Track Length</b> when checked, the 'along the track' profile will cover the whole track length.</li>
+</ul>
+
+<p>
+    Anytime, one graph or the other can be either 'minimized' - and becomes an icon, or 'maximized' - it will then
+    fill the whole screen, by clicking on the + and - buttons in the upper right corner of each graph display.
+</p>
+
+<a name="CloudContour"></a>
+<h3>Cloud contour</h3>
+<p>
+    To activate and control the cloud contour visualization either:
+</p>
+<ul>
+    <li>Click on the Cloud icon in the tool bar</li>
+    <li>Use the keyboad shortcut Ctrl-C</li>
+    <li>Select the View->Cloud Contour... menu option</li>
+</ul>
+<img src="images/help-cloud-contour.jpg" alt="SAR Cloud Contour" />
+
+<p>
+    This brings up a separate window that lets you turn the visualization on and off, and control the cloud
+    ceiling. To set up a cloud layer at a given altitude, follow these steps:
+</p>
+<ul>
+    <li>Check the "Show contour" check box to activate the visualization</li>
+    <li>Enter the cloud ceiling altitude in the "Base" text field and press "Enter". The cloud layer should now be
+        visible around the current plane location on the track.</li>
+    <li>Adjust the layer altitude with the "Up" and "Down" buttons. Note that the "Base" altitude does not change.
+        The modified altitude is displayed in between the two buttons. To reset the cloud altitude to the original
+        base value, click the "Reset" button. How much the "Up" and "Down" buttons do alter the layer altitude can
+        be changed with the "Base Increment" spinner.</li>
+</ul>
+<p>
+   To add a second cloud layer type an altitude delta value in the "Delta" text field and press "Enter". This will
+   activate a second cloud layer above the first one at the base altitude. To have the second layer below the base
+   altitude, select the "-" radio button. To have one layer below and the other above the base altitude, select
+   the "+/-" radio button. To remove the second layer, enter a zero delta value.
+</p>
+<p>
+    To turn off the cloud contour visualization, uncheck the "Show contour" check box.
+</p>
+<p><b>Advanced options</b></p>
+<p>
+    Clicking on the "Advanced..." label will unveil additional controls that let you determine around what track
+    segments the clouds are displayed and their appearance.
+</p>
+
+
+<a name="Annotations"></a>
+<h3>Annotations</h3>
+<p>
+    Text annotations can be added at any place on the terrain surface. To add a new annotation follow these steps:
+</p>
+<ul>
+    <li>Select the Annotation->New Annotation... menu option or use the keyboard shortcut Ctrl-A.</li>
+    <li>Enter some text in the dialog window that comes up and click the "OK" button. A new annotation appears on the 
+        terrain in the middle of the graphic window. Its border is yellow which means it is currently 'selected'
+        and can be moved around with the mouse cursor.</li>
+    <li>Click on the annotation and move it to the right place while holding down the left mouse button.</li>
+    <li>Click once on the terrain to 'deselect' the annotation - its border becomes black. When an annotation
+        is not selected it cannot be moved by mistake while moving around the view with the mouse.</li>
+</ul>
+<p>
+    To edit an annotation, double click on it, edit the text in the dialog window that comes up and click
+    the "Save" button.
+</p>
+<p>
+    To remove an annotation either double click on it and then click the "Delete" button in the dialog window,
+    or click on the annotation once to select it (its border becomes yellow) and then select the
+    Annotation->Remove Annotation menu option (or use the keyboard shortcut Alt-A).
+</p>
+<p>
+    To move an annotation first click once on it to select it - its border becomes yellow, and then click again
+    and move it around while keeping the left mouse button down. To deselect the annotation click once on the terrain
+    or select another annotation.
+</p>
+
+
+<a name="ViewingControls"></a>
+<h3>Viewing Controls</h3>
+<p><b>Mouse</b></p>
+<ul>
+    <li>
+        <b>Rotate Globe:</b> Move mouse while pressing left mouse button.
+    </li>
+    <li>
+        <b>Tilt Globe:</b> Move mouse while pressing right mouse button.
+    </li>
+    <li>
+        <b>Zoom:</b> Rotate the mouse wheel.
+    </li>
+    <li>
+        <b>Fast Zoom:</b> Hold down the mouse middle button and drag up to zoom-in or down to zoom-out.
+    </li>
+</ul>
+
+<p><b>Keyboard</b></p>
+<ul>
+    <li>
+        <b>Rotate Globe:</b> Arrow keys.
+    </li>
+    <li>
+        <b>Tilt Globe:</b> Shift + Up or Down arrow.
+    </li>
+    <li>
+        <b>Zoom:</b> Control + Up or Down arrow.
+    </li>
+    <li>
+        <b>Reset the view to 'vertical and north':</b> R.
+    </li>
+    <li>
+        <b>Reset the view heading to 'north':</b> N.
+    </li>
+</ul>
+
+
+<a name="BulkDownload"></a>
+<h3>Bulk download</h3>
+<p>
+    To work offline (with no network connection) or to speedup imagery and terrain loading, you may want to pre-load
+    imagery and elevation data for a selected area.
+</p>
+<p><b>CAUTION:</b> trying to download imagery and elevations for a large area will likely involve large amounts of
+   data which will result in both extended time to fetch the files from the servers and large disk space to store them.
+   The Bulk Download panel provides an estimated data size for the selected sector and layers.
+</p>
+<p>
+    To download imagery or elevation data follow these steps:
+</p>
+<ul>
+    <li>Select the "Free View" mode from the tool bar and navigate to the area you are interested in. Set a plain
+        vertical/north view (keyboard key R) and adjust the zoom so as to have a comfortable overview.</li>
+    <li>Bring up the Bulk Download control panel by either selecting the File->Bulk Download menu option or using the
+        keyboad shortcut Ctrl-B.</li>
+    <li>Click on the "Select Sector" button then press down the left mouse button at a corner of the terrain area
+        you want to select, and while keeping the left mouse mutton down, drag the cursor to the opposite corner
+        of the area. Once you have released the mouse button you can adjust the sector boundaries by dragging the
+        sides or the whole rectangle.</li>
+    <li>Check the layers you are interested in. Each will provide an estimate of the involved data size. Be sure to
+        consider the implications. While some layers are selected you can still adjust the selected sector boundaries
+        and watch the estimate change.</li>
+    <li>Once you are satisfied with the selected sector and layers, click on the "Start Download" button. One progress
+    bar will appear for each layer involved. Depending on the selected sector size, nothing may seem to happen for a
+    short time while the process starts evaluating a more precise estimate of the data size involved. Once this is
+    done a more accurate size estimate will be displayed and the download will start showing some progress.</li>
+</ul>
+<p>
+    Each download process will retreive the requested data from the appropriate servers at it's own pace. Once a
+    process has finished it's progress bar will indicate 100% and the "Cancel" button will turn into a green "Remove"
+    button. Clicking the "Remove" button will remove the finished process from the list but will not affect the
+    downloaded data.
+</p>
+<p>
+   At any time a layer download process can be canceled by clicking on the "Cancel" button. Be aware that once
+   canceled a process cannot be restarted unless a similar sector is selected, the corresponding layer is checked and
+   a new download is initiated - which can be done while other process are currently downloading data.
+</p>
+<p>
+    <b>Caution:</b> depending on the network and server condition at the time of the download, some data may not be
+    retrieved properly. This may result in a process ending with a less the 100% progress. In that case the "Cancel"
+    button will turn into an orange "Remove" button. If you think some data are missing, restart download processes
+    for a similar sector and the relevant layers. If most of the data has already been downloaded retrieving the
+    missing portions should be fast.
+</p>
+<p>
+   While download is proceeding the Bulk Download control window can be minimized. Attempting to close the window 
+   while downloads are active will bring up a dialog window inquiering whether you want to cancel all downloads.
+</p>
+
+<p style="text-align: center;">oOo</p>
+
+</body>
+</html>    

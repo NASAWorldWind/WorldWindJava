@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for remote NetworkLinks. -->
+<!--$Id: NetworkLinksRemote.kml 14652 2011-02-09 20:44:42Z dcollins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+
+        <Placemark>
+            <name>Remote NetworkLinks</name>
+            <description>Test suite for remote NetworkLinks.</description>
+            <Style>
+                <IconStyle>
+                    <Icon>
+                        <href>http://kml-samples.googlecode.com/svn/trunk/resources/ge_icon.jpg</href>
+                    </Icon>
+                </IconStyle>
+                <BalloonStyle>
+                    <text>
+                        <![CDATA[
+                        <h3>$[name]</h3>
+                        $[description]
+                        ]]>
+                    </text>
+                </BalloonStyle>
+            </Style>
+            <Point>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>-90,45,100000</coordinates>
+            </Point>
+        </Placemark>
+
+        <NetworkLink>
+            <name>NetworkLink: Simple remote file (Google sample).</name>
+            <Link>
+                <href>
+                    http://kml-samples.googlecode.com/svn/trunk/morekml/Network_Links/Targets/Network_Links.Targets.Simple.kml
+                </href>
+            </Link>
+        </NetworkLink>
+
+        <NetworkLink>
+            <name>NetworkLink: Remote file with Fly-to-View (Google sample).</name>
+            <flyToView>1</flyToView>
+            <Link>
+                <href>
+                    http://kml-samples.googlecode.com/svn/trunk/morekml/Network_Links/Targets/Network_Links.Targets.With_LookAt.kml
+                </href>
+            </Link>
+        </NetworkLink>
+
+    </Document>
+</kml>

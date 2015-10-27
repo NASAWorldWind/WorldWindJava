@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="enfamc---------.svg">
+  <metadata
+     id="metadata22">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs20" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="705"
+     inkscape:window-height="480"
+     id="namedview18"
+     showgrid="false"
+     inkscape:zoom="0.47749043"
+     inkscape:cx="259.44669"
+     inkscape:cy="225.94002"
+     inkscape:window-x="96"
+     inkscape:window-y="72"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <polygon
+     id="polygon6"
+     style="fill:#ffffff;stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+     points="0.824142,1.01246 0.824142,1.04224 0.891146,1.04224 0.891146,0.647642 0.824142,0.647642 0.824142,0.677425 0.336484,0.677425 0.336484,1.01246 "
+     transform="matrix(100,0,0,100,74,73)" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path8"
+     style="fill:#ffffff;stroke:#000000;stroke-opacity:1;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:12,6;stroke-dashoffset:0"
+     d="m 173.9138,151.9902 -0.003,0.2921 c 20.2473,0 40.4233,3.0004 51.4733,12.1823 7.146,5.9378 7.716,11.2254 7.716,23.9264 0,10.211 1.322,20.847 11.167,20.847 l 1.861,0 c 4.278,0 7.074,-6.474 7.074,-10.796 l 0,-2.233 c 0,-12.756 -8.283,-26.7431 -14.798,-33.2238 -3.912,-3.8906 -8.846,-7.5292 -15.131,-9.0662 -5.413,-1.324 -15.103,-2.7535 -21.443,-2.7535 l -4.473,-0.1386 z"
+     sodipodi:nodetypes="ccssssssccccc" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path14"
+     style="fill:#ffffff;stroke:#000000;stroke-opacity:1;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:12,6;stroke-dashoffset:0"
+     d="m 107.6484,228.223 0,33.503 183.8946,0 0,-32.759 -7.786,1.323 -2.637,-0.206 c -5.56,0 -9.083,-1.737 -12.287,-4.092 -1.486,-1.092 -2.753,-2.767 -3.788,-4.401 -0.992,-1.565 -0.68,-5.28 -2.538,-5.28 l -1.117,0 c -1.962,0 -1.815,3.854 -2.969,5.593 -1.092,1.646 -2.215,3.088 -3.873,4.316 -3.215,2.381 -7.445,3.864 -12.887,3.864 l -2.234,0 c -7.891,0 -17.124,-5.278 -17.124,-12.656 -0.767,-0.514 -0.966,-1.117 -1.861,-1.117 l -0.744,0 c -1.786,0 -1.958,3.712 -2.842,5.348 -0.828,1.532 -2.5,3.388 -3.787,4.402 -2.996,2.362 -6.738,4.023 -11.984,4.023 l -2.234,0 c -8.767,0 -18.241,-5.271 -18.241,-13.401 -0.834,-0.195 -0.856,-0.372 -1.861,-0.372 l -0.744,0 c -1.413,0 -1.492,3.73 -2.675,5.515 -1.3666,2.06 -1.8335,2.81 -3.8709,4.319 -3.148,2.331 -6.7768,3.939 -12.0673,3.939 l -2.6059,0 c -8.7709,0 -16.8343,-5.447 -17.4961,-13.401 -0.8351,-0.195 -0.8559,-0.372 -1.8614,-0.372 l -0.3721,0 c -1.652,0 -1.924,3.781 -2.9878,5.574 -0.987,1.663 -2.2224,3.134 -3.8551,4.334 -3.448,2.534 -6.7142,3.865 -12.5146,3.865 l -2.6055,0 c -2.8445,0 -5.5929,-0.881 -7.4453,-1.861 z" />
+</svg>

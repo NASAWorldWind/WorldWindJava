@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><polygon points="125,250 125,200 175,200 175,150 225,150 225,200 275,200 275,250" style="fill:rgb(255,255,255);stroke:rgb(0,0,0);stroke-width:10;stroke-dasharray:10"/><ellipse cx="250" cy="255" rx="20" ry="20" style="fill:rgb(255,255,255);stroke:rgb(0,0,0);stroke-width:10;stroke-dasharray:10"/><ellipse cx="150" cy="255" rx="20" ry="20" style="fill:rgb(255,255,255);stroke:rgb(0,0,0);stroke-width:10;stroke-dasharray:10"/><rect height="37" style="fill:none;stroke:rgb(0,0,0);stroke-width:5;stroke-dasharray:10" transform="matrix(1 0 0 1 0 0) translate(214 200) scale(0.842857 0.881081) translate(-214 -200) translate(0 1.13497) translate(-1.18644 0) translate(-1.18644 0) translate(0 -1.13497) translate(0 1.13497) translate(0 -1.13497) translate(0 -1.13497) translate(0 -1.13497) translate(0 -1.13497) translate(1.18644 0) translate(-1.18644 0) translate(0 1.13497) translate(0 1.13497) translate(0 1.13497) translate(0 1.13497) translate(0 1.13497) translate(0 1.13497) translate(200 200) scale(1 1.30675) translate(-200 -200) translate(214 181.5) scale(1.11864 1) translate(-214 -181.5) translate(186 181.5) scale(1.09091 1) translate(-186 -181.5) translate(0 -0.868545) translate(200 200) scale(1 0.982928) translate(-200 -200) translate(200 163) scale(1 1.00597) translate(-200 -163) translate(200 163) scale(1 0.997032) translate(-200 -163)" width="28" x="186" y="163"/><line style="stroke:rgb(0,0,0);stroke-width:10;stroke-dasharray:10" transform="matrix(1 0 0 1 0 0)" x1="200" x2="200" y1="202" y2="249"/></svg>

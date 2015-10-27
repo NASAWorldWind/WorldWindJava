@@ -1,0 +1,268 @@
+LIZARDTECH COMPUTER SOFTWARE LICENSE AGREEMENT
+FOR MRSID(R) DECODER SDK
+
+11 April 2008 revision
+
+THIS COMPUTER SOFTWARE LICENSE AGREEMENT ("Agreement") is entered into by 
+and between CELARTEM, INC., an Oregon corporation doing business as LIZARDTECH, with 
+a principal business address at 1800 SW First Ave, Suite 500, Portland, OR 97201 
+("LIZARDTECH"), and 				a 			corporation with a 
+principal business address at 				, Tel. No: 			, Fax No: 	
+		 ("LICENSEE"). The Agreement is effective ("Effective Date") as of the date 
+executed by the later party to execute.
+
+RECITALS
+
+	LIZARDTECH is party to a Technology Licensing Agreement with THE REGENTS OF 
+THE UNIVERSITY OF CALIFORNIA ("UNIVERSITY") through which it has an exclusive 
+right to commercialize technology for storage and retrieval of large digital images, originally 
+developed at the Los Alamos National Laboratory ("LANL"), including all patent rights arising 
+under U.S. Patent No. 5,710,835 "Storage and Retrieval of Large Digital Images" and certain 
+foreign patents pending ("TECHNOLOGY").  The U.S. Government and UNIVERSITY have 
+certain reserved rights in the TECHNOLOGY as set forth in Appendix A of this Agreement.
+
+	LIZARDTECH is engaged in the business of designing, developing, and marketing 
+MrSID(R) Decoder SDK computer software and related products arising from or developed based 
+on the TECHNOLOGY ("DSDK").  DSDK consists of libraries that allow licensees to write 
+software, or engineer a process, that enables end-users to view MrSID-formatted files and other 
+supported file types.
+
+	LICENSEE desires to design, develop or market software products that use DSDK to 
+permit (among other functionality developed by LICENSEE) an end-user to view *. sid-
+formatted files and other supported formatted files ("Licensed Products").
+
+	In consideration of the premises and mutual covenants of this Agreement, LIZARDTECH 
+agrees to license DSDK to LICENSEE for LICENSEE's use in the development of Licensed 
+Products, and LICENSEE's subsequent sublicensing of DSDK with the Licensed Products 
+pursuant to the terms and conditions which follow.
+
+1.	LICENSE GRANT
+
+	1.1	DSDK.  In addition to the patent rights described above, DSDK and any and all 
+associated media, printed materials, and "online" or electronic documentation provided with 
+DSDK are protected by copyright laws and international copyright treaties, as well as other 
+intellectual property laws and treaties, and is licensed, not sold.  LICENSEE shall not modify, 
+reverse engineer, disassemble or decompile or otherwise seek to discover the source code or 
+trade secrets of DSDK.  LICENSEE shall not use DSDK to develop products or allow others to 
+develop products that encode files into the MrSID format.  
+
+      1.2	Development License Grant.  LIZARDTECH hereby grants to LICENSEE a 
+non-exclusive license to install DSDK on a reasonable number of CPUs in LICENSEE's own 
+facilities only for its own internal use and development of Licensed Products that use DSDK to 
+view *.sid files.
+      
+      1.3	Distribution License Grant.  Subject to the terms and conditions of this 
+Agreement, LIZARDTECH hereby grants to LICENSEE a non-exclusive, worldwide, non-
+transferable right to distribute DSDK in object code format with the Licensed Products.  For 
+avoidance of ambiguity, LICENSEE is not permitted to distribute DSDK source code libraries.  
+LICENSEE may distribute DSDK with the Licensed Products to sublicensees (and such 
+sublicensees may further sublicense DSDK with the Licensed Products to other sublicensees) 
+provided:
+      
+      (a)	a notice regarding LIZARDTECH or its licensors' ownership rights shall 
+be provided with the Licensed Products as set forth in Subsection 2.2 below;
+      
+      (b)	DSDK shall only be sublicensed under license terms as set forth in 
+Subsection 1.3(d) below and any and all distribution of DSDK with the Licensed Product 
+does not cause, or could be interpreted or asserted to cause, DSDK to become subject to 
+the terms of any Open Source license, including but not limited to the GNU Public 
+License; 
+      
+      (c)	any and all distribution of DSDK shall not (i) create, or purport to create, 
+any obligations for LIZARDTECH or its licensors with respect to DSDK; or (ii) grant, or 
+purport to grant, to any third party any rights to or immunities under LIZARDTECH or its 
+licensors' intellectual property or proprietary rights in DSDK;
+      
+      (d)	DSDK shall be sublicensed to any and all sublicensees subject to a license 
+agreement that provides LIZARDTECH and its licensors with the same protections and 
+requirements as set forth in Sections 1.1, 1.3, 1.4, 2, 3, 4, 6.1 and Appendix A.  For the 
+avoidance of ambiguity, LICENSEE and any and all sublicensees may not sublicense 
+DSDK separately from the Licensed Products.
+      
+	1.4	Rights in DSDK. LIZARDTECH and its licensors retain all right, title to, and 
+ownership of all applicable intellectual property rights such as patent, copyrights and trade 
+secrets in DSDK (including Updates as defined in Section 2.3) and any associated 
+documentation. Without limiting its rights in any way, LIZARDTECH hereby specifically 
+reserves the worldwide non-exclusive right to develop, use, reproduce and distribute DSDK 
+directly to other integrators, distributors and/or end-users.  DSDK, including features and related 
+information, are unpublished software, trade secret, confidential or proprietary information of 
+LIZARDTECH or its licensors.  DSDK is comprised of "commercial items", "commercial 
+computer software" and "commercial computer software documentation" as defined in FAR 
+2.101, DFAR 252.227-7014(a)(1) and DFAR 252.227-7014(a)(5).  Consistent with DFAR 
+227.7202 and FAR 12.212, any use, reproduction, display, or disclosure by the US Government 
+shall be governed by the license terms hereunder.  Except as expressly permitted pursuant to 
+Section 1.3, LICENSEE shall not rent, sell, lease, disclose or otherwise provide DSDK, 
+associated documentation or any related information to any third party and will use such efforts, 
+and in no event less than a commercially reasonable effort to protect DSDK, associated 
+documentation or related information as LICENSEE uses to protect its own trade secret, 
+confidential or proprietary information.  
+
+2.	OBLIGATIONS OF LICENSEE
+
+	2.1	Trademark Usage. LICENSEE may use any LIZARDTECH trademark, logo or 
+other elements of its branding, provided, however, such use shall be subject to the terms and 
+conditions located at www.lizardtech.com/co-branding.php.  LICENSEE agrees to abide by the 
+above referenced terms and conditions and LICENSEE further agrees to monitor the above 
+referenced sites for any updates or amendments to such terms and conditions.  
+
+	2.2	Proprietary Rights Notice. LICENSEE must include in all Licensed Products the 
+following statement of ownership/copyright notice in the README, About Box, or other similar 
+location where LICENSEE places proprietary rights notices pertaining to third party software 
+incorporated in the Licensed Products:
+
+Portions of this computer program are copyright (C) 1995-2008 Celartem, Inc., doing 
+business as LizardTech.  All rights reserved. MrSID is protected by U.S. Patent No. 
+5,710,835. Foreign Patents Pending.
+
+	2.3	Licensed Product Support and Updates. LICENSEE is responsible for the 
+support of all Licensed Products.  LICENSEE agrees to use commercially reasonable efforts to 
+implement Updates provided by LIZARDTECH into the next scheduled release of the Licensed 
+Products.  LIZARDTECH may, but is not obligated to, provide such Updates to DSDK.  Updates 
+shall mean maintenance revisions that correct identified errors in, or provide bug fixes for DSDK 
+and may also include support for additional file formats.
+
+3.	DISCLAIMER OF WARRANTIES.  LIZARDTECH AND ITS LICENSORS 
+PROVIDE DSDK "AS IS" AND WITH ALL FAULTS.  LIZARDTECH, ON BEHALF OF 
+ITSELF AND ITS LICENSORS, DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED OR 
+STATUTORY, AS TO ANY MATTER WHATSOEVER RELATING TO THE DSDK, 
+INCLUDING BUT NOT LIMITED TO ANY (IF ANY) IMPLIED WARRANTIES OR 
+CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OF 
+REASONABLE CARE OR WORKMANLIKE EFFORT, OF RESULTS, OF LACK OF 
+NEGLIGENCE, OR OF A LACK OF VIRUSES, ALL WITH REGARD TO DSDK.  THERE IS 
+NO WARRANTY OF TITLE, QUIET ENJOYMENT, QUIET POSSESSION, 
+CORRESPONDENCE TO DESCRIPTION, AUTHORITY, OR NONINFRINGEMENT WITH 
+RESPECT TO DSDK.
+
+4.	LIMITATION OF LIABILITY.  IN NO EVENT SHALL LIZARDTECH OR ITS 
+LICENSORS BE LIABLE FOR ANY DAMAGES FROM ANY CAUSE WHATSOEVER, 
+WHETHER RESULTING FROM LOST PROFITS, DATA, USE OR REVENUE, OR FOR 
+ANY INCIDENTAL, DIRECT, INDIRECT, SPECIAL, CONSEQUENTIAL OR PUNITIVE 
+DAMAGES, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  This 
+limitation of liability shall apply regardless of the form of action whether in contract or in tort, 
+including negligence or any other basis.
+
+5.	TERM AND TERMINATION
+
+	5.1	Term and Termination. The initial term of this Agreement will commence as 
+of the Effective Date of this Agreement.  Either party may terminate this Agreement upon thirty 
+(30) days prior written notice to the other party if the other party is in material breach of any 
+provision of this Agreement and fails to cure such breach within the thirty (30) day period. 
+Either party may terminate this Agreement without cause upon the delivery of thirty (30) days 
+prior written notice of termination to the other party.
+
+	5.2	Obligations Upon Termination. Upon any termination of this Agreement, all 
+licenses granted to LICENSEE shall terminate and LICENSEE must return to LIZARDTECH or 
+destroy all copies of DSDK in its possession, custody, or control, whether modified or not. In the 
+event this Agreement is terminated without cause, LICENSEE may (a) retain a reasonable 
+number of copies of Licensed Products, not to exceed five (5) copies, for purposes of its internal 
+use solely to facilitate customer support for existing customers only; and (b) exhaust its current 
+stock of Licensed Products over a period of no more than thirty (30) days after the date of 
+termination. Any remaining inventory at the end of such period must be destroyed.
+
+	5.3	Survival Provisions. Except as otherwise provided herein, the provisions of 
+Sections 3, 4, 5.2, 5.3, 6.2, 6.3 and 6.6 of this Agreement survive any termination or expiration of 
+this Agreement.
+
+6.	MISCELLANEOUS
+
+	6.1	Export Controls. LICENSEE shall not export or reexport DSDK or any direct 
+product thereof without the appropriate United States or foreign government export licenses, 
+notifications or approvals.
+
+	6.2	Governing Law, Jurisdiction and Dispute Resolution. This Agreement shall be 
+governed by and construed under the laws of the State of Oregon, USA without regard to conflict 
+of laws provisions.  Any disputes under this Agreement shall be resolved either in the federal or 
+state courts located in Multnomah County, Oregon, or under the Commercial Arbitration Rules 
+of the American Arbitration Association in an arbitration proceeding to be held in Portland, 
+Oregon. The prevailing party in any dispute under this Agreement will be entitled to its attorney 
+fees.
+
+	6.3	Entire Agreement. This Agreement together with the attached Appendices sets 
+forth the entire agreement and understanding of the parties relating to the subject matter herein 
+and merges all prior discussion(s) between them. No modification of or amendment to this 
+Agreement will be effective unless set forth in writing signed by officers of both parties hereto.
+
+	6.4	Notices. Any notice required or permitted by this Agreement shall be in writing 
+and either delivered by hand or sent by prepaid, registered or certified mail, return receipt 
+requested, or by nationally recognized overnight courier service, addressed to the other party at 
+the address shown at the beginning of this Agreement or at such other address for which such 
+party gives notice hereunder. Such notice will be deemed to have been given when delivered or, 
+if delivery is not accomplished due to action or inaction of the addressee, when tendered.
+
+	6.5	Assignment and Binding Effect. LICENSEE may not transfer or assign its rights 
+or obligations under this Agreement without the prior written consent of LIZARDTECH, except 
+to a successor in interest or purchaser of all or substantially all of LICENSEE's assets which 
+specifically assumes the obligations of this Agreement. LICENSEE will notify LIZARDTECH 
+within ten (10) days of such event. Subject to the foregoing sentence, this Agreement will be 
+binding upon and inure to the benefit of the parties hereto, their successors and assigns.
+
+	6.6	Partial Invalidity and No Waiver. If any provision of this Agreement is held to 
+be invalid by a court of competent jurisdiction, then the remaining provisions will nevertheless 
+remain in full force and effect. The parties agree to renegotiate in good faith any term held 
+invalid and to be bound by the mutually agreed substitute provision.  No waiver of any term or 
+condition of this Agreement will be valid or binding on either party unless the same will have 
+been mutually assented to in writing by an officer of both parties. The failure of either party at 
+any time to enforce any of the provisions of the Agreement, or the failure to require at any time 
+performance by the other party of any of the provisions of this Agreement, will in no way be 
+construed to be a present or future waiver of such provisions, nor in any way affect the validity of 
+an effort by either party to enforce each and every such provision thereafter.
+
+
+
+LIZARDTECH					LICENSEE
+
+By:							By:					
+Name:							Name:					
+Title:							Title:					
+Date:							Date:					
+
+
+
+
+APPENDIX A
+
+GOVERNMENT RESERVED RIGHTS
+
+1.	Los Alamos National Laboratory.  Some of the TECHNOLOGY incorporated in the 
+Software was developed in part through a project at the Los Alamos National Laboratory 
+(LANL) funded by the U.S. Government, managed under contract by the UNIVERSITY. The 
+MrSID TECHNOLOGY, subject of U.S. Patent No. 5,710,835, is under exclusive commercial 
+license to LIZARDTECH. The U.S. Government and the UNIVERSITY have certain reserved 
+rights in the TECHNOLOGY as set forth in this Agreement.
+
+(a) The U.S. Government has a non-exclusive, nontransferable, irrevocable, paid-up license to 
+practice or have practiced throughout the world, for or on behalf of the United States, inventions 
+covered by the UNIVERSITY's Patent Rights, and has other rights under 35 U.S.C. sect. 200-212 
+and applicable implementing regulations and under the U.S. Department of Energy (DOE) 
+Assignment and Confirmatory License through which the DOE's rights in the TECHNOLOGY 
+were assigned to the UNIVERSITY.
+
+(b) Under 35 U.S.C. sect 203, the DOE has the right to require LIZARDTECH to grant a non-
+exclusive, partially exclusive or exclusive license under the Patent Rights in any field of use to a 
+responsible applicant(s) upon terms reasonable under the circumstances, if LIZARDTECH does 
+not adequately attempt to commercialize the MrSID Technology. See, 37 CFR 401.6.
+
+(c) LIZARDTECH maintains a discount program for sales of Software to the U.S. Government 
+or any agency thereof or any U.S. Government contractor who certifies that its purchase of the 
+Software is for or on behalf of the U.S. Government.
+
+(d) The UNIVERSITY may assign its rights in its License with LIZARDTECH. 
+
+(e) The UNIVERSITY makes no warranty or representation as to the validity or scope of its 
+Patent Rights, nor that the Software will not infringe any patent or other proprietary right and has 
+no obligation to bring or prosecute any actions for patent infringement to protect LICENSEE's 
+use of the Software. The UNIVERSITY has no obligation to furnish any know-how, technical 
+assistance, or technical data to LICENSEE.
+
+2.	Termination of LIZARDTECH Rights in TECHNOLOGY.   Should 
+LIZARDTECH's rights in the TECHNOLOGY under its license with the UNIVERSITY for any 
+reason terminate during the term of this Agreement, such event will automatically operate as an 
+assignment by LIZARDTECH to the UNIVERSITY of all LIZARDTECH's rights, title, and 
+interest in the license. In such case, if LICENSEE is not in default of the terms and conditions 
+herein, it may elect to continue this Agreement as an Agreement directly with the UNIVERSITY 
+on the same terms.
+
+
+
+
+Decoder SDK License (rev. 11 April 2008)	6

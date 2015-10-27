@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: build.xml 1941 2014-04-16 02:11:51Z dcollins $ -->
+<project name="worldwind" default="worldwind.jarfile" basedir=".">
+    <description>
+        Build script for the World Wind Java SDK. Compiles the World Wind source, creates World Wind API documentation,
+        and builds World Wind JAR files. The default target 'worldwind.jarfile' builds the World Wind core JAR file. Use
+        the target 'build' creates all the necessary World Wind JAR files and World Wind API documentation.
+    </description>
+
+    <!-- Import the World Wind build properties. All properties expected by ANT are defined in build.properties. -->
+    <property file="build/build.properties"/>
+    <!-- Import the World Wind test targets. -->
+    <import file="build/test.xml"/>
+    <!-- Import the World Wind release targets. -->
+    <import file="build/release.xml"/>
+    <!-- Import the World Wind resource targets. -->
+    <import file="build/resources.xml"/>
+    <!-- Import the World Wind general utility targets. -->
+    <import file="build/util.xml"/>
+    <!-- Import the World Wind Web Start site targets. -->
+    <import file="build/webstart.xml"/>
+
+    <!-- Main build target for the World Wind Java SDK. Compiles the World Wind source, creates the World Wind API
+         documentation, and builds the World Wind JAR files. -->
+    <target name="build" depends="compile,
+                                  javadocs,
+                                  worldwind.jarfile,
+                                  worldwind.extensions.jarfile"
+            description="Main build target for the World Wind Java SDK. Compiles the World Wind source, creates the World Wind API documentation, and builds the World Wind JAR files."/>
+
+    <!-- Compiles all World Wind Java sources under the 'src' folder into Java class files under the 'classes'
+         folder. Note that this excludes the Java sources under the 'test' folder.
+
+         The parameters 'source' and 'target' are configured in order to explicitly define the Java compiler version
+         used to build World Wind classes. Without these parameters, the javac task would use the most recent compiler
+         available on the current machine, and the Java compiler version used to build WorldWind classes would be
+         unpredictable. The Java compiler version used by the javac task is defined by the build parameter
+         'worldwind.jdk.version'. By default, this parameter is defined in the file 'build/build.properties'. See the
+         following link for more detail:
+         http://ant.apache.org/manual/CoreTasks/javac.html
+
+         The compiler argument '-Xlint:unchecked' is specified in order to give more detail for unchecked conversion
+         warnings. This argument is specified in the World Wind Java IntelliJ IDEA project. Its use here keeps the ANT
+         build output in sync with the IntelliJ IDEA project output.
+
+         The compiler argument '-Xlint:-options' suppresses warnings about the compiling for Java 1.6 on a Java 1.7
+         platform without specifying the bootstrap class path. See the following link for more detail:
+         https://blogs.oracle.com/darcy/entry/bootclasspath_older_source -->
+    <target name="compile"
+            description="Compiles all World Wind Java sources under the 'src' folder into Java class files under the 'classes' folder.">
+        <mkdir dir="${worldwind.classes.dir}"/>
+        <javac srcdir="${worldwind.src.dir}"
+               destdir="${worldwind.classes.dir}"
+               source="${worldwind.jdk.version}"
+               target="${worldwind.jdk.version}"
+               encoding="UTF-8"
+               fork="true"
+               includeantruntime="false"
+               memoryMaximumSize="512m">
+            <classpath>
+                <pathelement location="jogl-all.jar"/>
+                <pathelement location="gluegen-rt.jar"/>
+                <pathelement location="gdal.jar"/>
+                <pathelement location="plugin.jar"/>
+            </classpath>
+            <compilerarg value="-Xlint:unchecked"/>
+            <compilerarg value="-Xlint:-options"/>
+        </javac>
+    </target>
+
+    <!-- Builds the World Wind API documentation for all core and extension packages into the 'doc' folder. Includes all
+         World Wind core classes under the packages 'gov.nasa.worldwind' and World Wind extension classes under the
+         package 'gov.nasa.worldwindx'. Excludes World Wind format classes under the package
+         'gov.nasa.worldwind.formats' -->
+    <target name="javadocs" depends="clean.javadocs"
+            description="Builds the World Wind API documentation for all core and extension packages into the 'doc' folder.">
+        <javadoc destdir="${worldwind.doc.dir}"
+                 overview="${worldwind.src.dir}/overview.html"
+                 encoding="UTF-8"
+                 windowtitle="NASA World Wind" doctitle="NASA World Wind API" header="NASA World Wind"
+                 splitindex="true" protected="true" nodeprecated="true" version="false" author="false" use="true"
+                 maxmemory="512m">
+            <packageset dir="${worldwind.src.dir}" defaultexcludes="yes">
+                <include name="gov/nasa/worldwind/**"/>
+                <include name="gov/nasa/worldwindx/**"/>
+                <exclude name="gov/nasa/worldwind/formats/**"/>
+            </packageset>
+            <classpath>
+                <pathelement location="jogl-all.jar"/>
+                <pathelement location="gluegen-rt.jar"/>
+                <pathelement location="gdal.jar"/>
+                <pathelement location="plugin.jar"/>
+            </classpath>
+            <link href="http://download.oracle.com/javase/6/docs/api/"/>
+            <link href="http://jogamp.org/deployment/v2.1.5/javadoc/jogl/javadoc/"/>
+        </javadoc>
+    </target>
+
+    <!-- Builds the World Wind SDK core Jar file 'worldwind.jar'. Includes all World Wind core class files, property
+         files, configuration files, and image files. Excludes files added by Subversion, and files added by the
+         operating system. The resultant Jar file is dependent on jogl-all.jar, gluegen-rt.jar, gdal.jar, and has these
+         Jar files added to its class-path. -->
+    <target name="worldwind.jarfile" depends="compile"
+            description="Builds the World Wind core JAR file 'worldwind.jar'.">
+        <jar jarfile="${basedir}/${worldwind.jarfile}">
+            <!-- Add the World Wind extensions Jar file's dependencies to the class path, and specify the Permissions
+                 attribute. The Permissions attribute is ignored for locally launched applications, but is required for
+                 signed Web Start Applications and Applets starting in Java 7 update 45. This property must match the
+                 setting specified in the JNLP file or Applet used to launch the application. See
+                 http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/manifest.html#permissions -->
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+                <attribute name="Class-Path" value="jogl-all.jar gluegen-rt.jar gdal.jar"/>
+            </manifest>
+            <!-- Include the World Wind core package gov.nasa.worldwind, as well as the 3rd party packages
+                 com.zebraimaging and org.codehaus.jackson. The zebraimaging package includes an alternative input
+                 handler for the Zebra Imaging display controller. The jackson package includes the Jackson JSON parsing
+                 library which is used by gov.nasa.worldwind.formats.geojson. -->
+            <fileset dir="${worldwind.classes.dir}">
+                <include name="gov/nasa/worldwind/**/*.class"/>
+                <include name="com/zebraimaging/**/*.class"/>
+                <include name="org/codehaus/jackson/**/*.class"/>
+                <type type="file"/>
+            </fileset>
+            <!-- Include the MessageStrings properties files, and all resource files under the config and images
+                 packages. We include the entire config and images packages rather than defining patterns for resource
+                 file extensions for two reasons: (a) this avoids packaging unnecessary resources in the Jar file, and
+                 (b) this ensures that anything added to config or images is included without requiring changes to this
+                 build target. -->
+            <fileset dir="${worldwind.src.dir}">
+                <include name="gov/nasa/worldwind/util/**/*.properties"/>
+                <include name="config/**"/>
+                <include name="images/**"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+    </target>
+
+    <!-- Builds the World Wind SDK extensions Jar file 'worldwindx.jar'. Includes all World Wind extension class files,
+         configuration files, image files, and data resource files. Excludes files added by Subversion and files added
+         by the operating system. The resultant Jar file is dependent on the the World Wind core Jar file, and has that
+         Jar file added to its class-path. -->
+    <target name="worldwind.extensions.jarfile" depends="compile"
+            description="Builds the World Wind extensions JAR file 'worldwindx.jar'.">
+        <jar jarfile="${basedir}/${worldwind.extensions.jarfile}">
+            <!-- Add the World Wind extensions Jar file's dependencies to the class path, and specify the Permissions
+                 attribute and the Caller-Allowable-Codebase attribute. The Permissions attribute is ignored for locally
+                 launched applications, but is required for signed Web Start Applications and Applets starting in Java 7
+                 update 45. This property must match the setting specified in the JNLP file or Applet used to launch the
+                 application. The Caller-Allowable-Codebase attribute is required for Java Applets to enable JavaScript
+                 to Java communication, and defines the domains on which this communication is enabled. See
+                 http://docs.oracle.com/javase/8/docs/technotes/guides/jweb/security/manifest.html -->
+            <manifest>
+                <attribute name="Class-Path" value="${worldwind.jarfile}"/>
+                <attribute name="Main-Class" value="${worldwind.extensions.jarfile.mainclass}"/>
+                <attribute name="Permissions" value="all-permissions"/>
+                <attribute name="Caller-Allowable-Codebase"
+                           value="worldwind.arc.nasa.gov worldwindserver.net goworldwind.org"/>
+            </manifest>
+            <!-- Include class files for the World Wind extensions package gov.nasa.worldwindx. -->
+            <fileset dir="${worldwind.classes.dir}">
+                <include name="gov/nasa/worldwindx/**/*.class"/>
+                <type type="file"/>
+            </fileset>
+            <!-- Include all the SAR application configuration files and images, the WorldWindow framework configuration
+                 files and images, and example data and image files. We include the entire data, config, and images
+                 packages rather than defining patterns for resource file extensions for two reasons: (a) this avoids
+                 packaging unnecessary resources in the Jar file, and (b) this ensures that anything added to config or
+                 images is included without requiring changes to this build target. -->
+            <fileset dir="${worldwind.src.dir}">
+                <include name="gov/nasa/worldwindx/applications/eurogeoss/images/**"/>
+                <include name="gov/nasa/worldwindx/applications/sar/*.html"/>
+                <include name="gov/nasa/worldwindx/applications/sar/config/**"/>
+                <include name="gov/nasa/worldwindx/applications/sar/data/**"/>
+                <include name="gov/nasa/worldwindx/applications/sar/images/**"/>
+                <include name="gov/nasa/worldwindx/applications/worldwindow/config/**"/>
+                <include name="gov/nasa/worldwindx/applications/worldwindow/images/**"/>
+                <include name="gov/nasa/worldwindx/examples/data/**"/>
+                <include name="gov/nasa/worldwindx/examples/images/**"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+    </target>
+
+    <!-- Individual clean targets corresponding to each build target above. -->
+    <target name="clean.classes">
+        <delete dir="${worldwind.classes.dir}"/>
+    </target>
+    <target name="clean.javadocs">
+        <delete dir="${worldwind.doc.dir}"/>
+    </target>
+    <target name="clean.worldwind.jarfile">
+        <delete file="${basedir}/${worldwind.jarfile}"/>
+    </target>
+    <target name="clean.worldwind.extensions.jarfile">
+        <delete file="${basedir}/${worldwind.extensions.jarfile}"/>
+    </target>
+    <target name="clean.build" depends="clean.classes,
+                                        clean.javadocs,
+                                        clean.worldwind.jarfile,
+                                        clean.worldwind.extensions.jarfile"/>
+    <!-- Main clean target for the World Wind Java SDK. Removes all files and directories created by all World Wind
+         build targets. -->
+    <target name="clean.all" depends="clean.build,
+                                      clean.test.all,
+                                      clean.worldwind.release,
+                                      clean.resources.all,
+                                      clean.build.util.all,
+                                      clean.webstart.site"
+            description="Main clean target for the World Wind Java SDK. Removes all files and directories created by all World Wind build targets."/>
+
+</project>

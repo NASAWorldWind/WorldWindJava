@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="euoacd---------.svg">
+  <metadata
+     id="metadata30">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs28" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="705"
+     inkscape:window-height="480"
+     id="namedview26"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="334"
+     inkscape:window-y="210"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="scale(100) translate(0.74 0.7)"
+     id="g4"
+     style="stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0">
+    <path
+       d="M0.95676 0.723846 L0.956748 1.11999 L0.903973 1.11999 L0.903973 0.724169 L0.91987     0.72246 zM0.698146 0.78222 L0.861752 0.78222 L0.861752 1.05666 L0.698146 1.05666     zM1.627 0.80861 C1.627 0.796448 1.63067 0.792775 1.64283 0.792775 L1.67978     0.792775 C1.69194 0.792775 1.69561 0.796448 1.69561 0.80861 L1.69561 1.03555     L1.627 1.03555 zM1.00425 0.776944 L1.57409 0.836307 L1.57423 0.998602     L1.00425 1.0461 zM0.328717 1.07249 L0.65065 1.07249 L0.65065 1.09888 L0.857807     1.10058 L0.88835 1.16089 L0.930362 1.16748 C0.943972 1.16966 0.955744 1.16221     0.976279 1.16016 L0.998878 1.14637 L1.0041 1.08637 L1.57423 1.0461 C1.60412     1.1084 1.67819 1.08638 1.73783 1.07249 C1.7392 1.05598 1.74311 1.05374     1.74311 1.03555 L1.74311 0.798055 C1.74311 0.759578 1.72295 0.745279 1.68505     0.745279 L1.63228 0.745279 C1.53741 0.745279 1.63627 0.808275 1.50772 0.785393     C1.45429 0.775877 1.39136 0.775184 1.34089 0.767519 C1.25911 0.755098 1.08119     0.734724 1.00425 0.734724 C1.00251 0.656925 0.863845 0.651275 0.861751     0.745279 L0.650649 0.745279 L0.650649 0.76111 L0.327023 0.76111 L0.328716 1.07249     z"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="path18" />
+    <path
+       d="M1.64811 1.89052 L1.70088 1.85885 C1.70485 1.90652 1.74539 1.95902 1.78533 1.96968     C1.78119 1.98517 1.76121 2.00135 1.74311 2.00135 C1.69161 2.00135 1.64811     1.94968 1.64811 1.89052 zM1.55839 1.81135 C1.55839 1.96275 1.64058 2.08109 1.78513     2.08598 C1.95864 2.09185 2.04791 2.04337 2.08934 1.89899 C2.13271 1.74785     2.01902 1.64104 1.96483 1.54741 C1.93268 1.49185 1.91357 1.44069 1.89282     1.37137 C1.87194 1.30156 1.86949 1.22903 1.81699 1.19388 C1.78114 1.34776     1.77129 1.39328 1.7027 1.51763 C1.66892 1.57887 1.55839 1.73941 1.55839 1.81135     z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="path20" />
+  </g>
+</svg>

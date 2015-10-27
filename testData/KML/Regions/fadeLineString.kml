@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
+    <Document>
+        <name>Region in Placemark LineString</name>
+        <description>
+            The LineString box is visible between
+            ~4000km and ~500km.
+            The LineString corners mark the extent
+            of the Region LatLonAltBox.
+            The LineString minFadeExtent (at greatest range)
+            is 1/4 of the maxFadeExtent (at closest range)..
+        </description>
+        <Placemark>
+            <name>Region LineString</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>50</north>
+                    <south>45</south>
+                    <east>28</east>
+                    <west>22</west>
+                </LatLonAltBox>
+                <Lod>
+                    <minLodPixels>128</minLodPixels>
+                    <maxLodPixels>1024</maxLodPixels>
+                    <minFadeExtent>128</minFadeExtent>
+                    <maxFadeExtent>512</maxFadeExtent>
+                </Lod>
+            </Region>
+            <LineString>
+                <tessellate>1</tessellate>
+                <coordinates>
+                    22,50,0
+                    28,50,0
+                    28,45,0
+                    22,45,0
+                    22,50,0
+                </coordinates>
+            </LineString>
+        </Placemark>
+    </Document>
+</kml>

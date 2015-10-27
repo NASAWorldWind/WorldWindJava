@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <name>Region Test</name>
+        <!-- Empty Region -->
+        <Placemark>
+            <name>Empty Region (clampToGround)</name>
+            <Region>
+            </Region>
+            <Polygon>
+                <altitudeMode>clampToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -110.1,37.9 -109.9,37.9 -109.9,38.1 -110.1,38.1 -110.1,37.9
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <!-- Empty LatLonAltBox-->
+        <Placemark>
+            <name>Empty LatLonAltBox (clampToGround)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north/>
+                </LatLonAltBox>
+            </Region>
+            <Polygon>
+                <altitudeMode>clampToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -109.1,37.9 -108.9,37.9 -108.9,38.1 -109.1,38.1 -109.1,37.9
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <!-- No Altitudes -->
+        <Placemark>
+            <name>No Altitudes (clampToGround)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>38.1</north>
+                    <south>37.9</south>
+                    <east>-107.9</east>
+                    <west>-108.1</west>
+                </LatLonAltBox>
+            </Region>
+            <Polygon>
+                <altitudeMode>clampToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -108.1,37.9 -107.9,37.9 -107.9,38.1 -108.1,38.1 -108.1,37.9
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <!-- Min Altitude Only -->
+        <Placemark>
+            <name>Min Altitude Only (absolute)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>38.1</north>
+                    <south>37.9</south>
+                    <east>-106.9</east>
+                    <west>-107.1</west>
+                    <minAltitude>-2e4</minAltitude>
+                    <altitudeMode>absolute</altitudeMode>
+                </LatLonAltBox>
+            </Region>
+            <Polygon>
+                <extrude>1</extrude>
+                <altitudeMode>absolute</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -107.1,37.9,-2e4 -106.9,37.9,-2e4 -106.9,38.1,-2e4 -107.1,38.1,-2e4 -107.1,37.9,-2e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <!-- Max Altitude Only -->
+        <Placemark>
+            <name>Max Altitude Only (absolute)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>38.1</north>
+                    <south>37.9</south>
+                    <east>-105.9</east>
+                    <west>-106.1</west>
+                    <minAltitude>2e4</minAltitude>
+                    <altitudeMode>absolute</altitudeMode>
+                </LatLonAltBox>
+            </Region>
+            <Polygon>
+                <extrude>1</extrude>
+                <altitudeMode>absolute</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -106.1,37.9,2e4 -105.9,37.9,2e4 -105.9,38.1,2e4 -106.1,38.1,2e4 -106.1,37.9,2e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <!-- At Altitude -->
+        <Placemark>
+            <name>At Altitude (absolute)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>38.1</north>
+                    <south>37.9</south>
+                    <east>-104.9</east>
+                    <west>-105.1</west>
+                    <minAltitude>2e4</minAltitude>
+                    <maxAltitude>2e4</maxAltitude>
+                    <altitudeMode>absolute</altitudeMode>
+                </LatLonAltBox>
+            </Region>
+            <Polygon>
+                <extrude>0</extrude>
+                <altitudeMode>absolute</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -105.1,37.9,2e4 -104.9,37.9,2e4 -104.9,38.1,2e4 -105.1,38.1,2e4 -105.1,37.9,2e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <!-- Above Ground Level -->
+        <Placemark>
+            <name>Above Ground Level (relativeToGround)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>38.1</north>
+                    <south>37.9</south>
+                    <east>-103.9</east>
+                    <west>-104.1</west>
+                    <minAltitude>1e3</minAltitude>
+                    <maxAltitude>2e4</maxAltitude>
+                    <altitudeMode>relativeToGround</altitudeMode>
+                </LatLonAltBox>
+            </Region>
+            <Polygon>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -104.1,37.9,2e4 -103.9,37.9,2e4 -103.9,38.1,2e4 -104.1,38.1,2e4 -104.1,37.9,2e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <!-- Empty LOD -->
+        <Placemark>
+            <name>Empty LOD (clampToGround)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>38.1</north>
+                    <south>37.9</south>
+                    <east>-102.9</east>
+                    <west>-103.1</west>
+                </LatLonAltBox>
+                <Lod>
+                </Lod>
+            </Region>
+            <Polygon>
+                <altitudeMode>clampToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -103.1,37.9 -102.9,37.9 -102.9,38.1 -103.1,38.1 -103.1,37.9
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <!-- Min LOD Only -->
+        <Placemark>
+            <name>Min LOD Only (clampToGround)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>38.1</north>
+                    <south>37.9</south>
+                    <east>-101.9</east>
+                    <west>-102.1</west>
+                </LatLonAltBox>
+                <Lod>
+                    <minLodPixels>32</minLodPixels>
+                </Lod>
+            </Region>
+            <Polygon>
+                <altitudeMode>clampToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -102.1,37.9 -101.9,37.9 -101.9,38.1 -102.1,38.1 -102.1,37.9
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Min LOD Only (relativeToGround)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>39.1</north>
+                    <south>38.9</south>
+                    <east>-101.9</east>
+                    <west>-102.1</west>
+                    <minAltitude>1e3</minAltitude>
+                    <maxAltitude>2e4</maxAltitude>
+                    <altitudeMode>relativeToGround</altitudeMode>
+                </LatLonAltBox>
+                <Lod>
+                    <minLodPixels>32</minLodPixels>
+                </Lod>
+            </Region>
+            <Polygon>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -102.1,38.9,2e4 -101.9,38.9,2e4 -101.9,39.1,2e4 -102.1,39.1,2e4 -102.1,38.9,2e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Min LOD Only (absolute)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>40.1</north>
+                    <south>39.9</south>
+                    <east>-101.9</east>
+                    <west>-102.1</west>
+                    <minAltitude>2e4</minAltitude>
+                    <maxAltitude>2e4</maxAltitude>
+                    <altitudeMode>absolute</altitudeMode>
+                </LatLonAltBox>
+                <Lod>
+                    <minLodPixels>32</minLodPixels>
+                </Lod>
+            </Region>
+            <Polygon>
+                <extrude>0</extrude>
+                <altitudeMode>absolute</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -102.1,39.9,2e4 -101.9,39.9,2e4 -101.9,40.1,2e4 -102.1,40.1,2e4 -102.1,39.9,2e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <!-- Max LOD Only -->
+        <Placemark>
+            <name>Max LOD Only (clampToGround)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>38.1</north>
+                    <south>37.9</south>
+                    <east>-100.9</east>
+                    <west>-101.1</west>
+                </LatLonAltBox>
+                <Lod>
+                    <maxLodPixels>64</maxLodPixels>
+                </Lod>
+            </Region>
+            <Polygon>
+                <altitudeMode>clampToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -101.1,37.9 -100.9,37.9 -100.9,38.1 -101.1,38.1 -101.1,37.9
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Max LOD Only (relativeToGround)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>39.1</north>
+                    <south>38.9</south>
+                    <east>-100.9</east>
+                    <west>-101.1</west>
+                    <minAltitude>1e3</minAltitude>
+                    <maxAltitude>2e4</maxAltitude>
+                    <altitudeMode>relativeToGround</altitudeMode>
+                </LatLonAltBox>
+                <Lod>
+                    <maxLodPixels>64</maxLodPixels>
+                </Lod>
+            </Region>
+            <Polygon>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -101.1,38.9,2e4 -100.9,38.9,2e4 -100.9,39.1,2e4 -101.1,39.1,2e4 -101.1,38.9,2e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Max LOD Only (absolute)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>40.1</north>
+                    <south>39.9</south>
+                    <east>-100.9</east>
+                    <west>-101.1</west>
+                    <minAltitude>2e4</minAltitude>
+                    <maxAltitude>2e4</maxAltitude>
+                    <altitudeMode>absolute</altitudeMode>
+                </LatLonAltBox>
+                <Lod>
+                    <maxLodPixels>64</maxLodPixels>
+                </Lod>
+            </Region>
+            <Polygon>
+                <extrude>0</extrude>
+                <altitudeMode>absolute</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -101.1,39.9,2e4 -100.9,39.9,2e4 -100.9,40.1,2e4 -101.1,40.1,2e4 -101.1,39.9,2e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <!-- Min and Max LOD -->
+        <Placemark>
+            <name>Min and Max LOD (clampToGround)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>38.1</north>
+                    <south>37.9</south>
+                    <east>-99.9</east>
+                    <west>-100.1</west>
+                </LatLonAltBox>
+                <Lod>
+                    <minLodPixels>32</minLodPixels>
+                    <maxLodPixels>64</maxLodPixels>
+                </Lod>
+            </Region>
+            <Polygon>
+                <altitudeMode>clampToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -100.1,37.9 -99.9,37.9 -99.9,38.1 -100.1,38.1 -100.1,37.9
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Min and Max LOD (relativeToGround)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>39.1</north>
+                    <south>38.9</south>
+                    <east>-99.9</east>
+                    <west>-100.1</west>
+                    <minAltitude>1e3</minAltitude>
+                    <maxAltitude>2e4</maxAltitude>
+                    <altitudeMode>relativeToGround</altitudeMode>
+                </LatLonAltBox>
+                <Lod>
+                    <minLodPixels>32</minLodPixels>
+                    <maxLodPixels>64</maxLodPixels>
+                </Lod>
+            </Region>
+            <Polygon>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -100.1,38.9,2e4 -99.9,38.9,2e4 -99.9,39.1,2e4 -100.1,39.1,2e4 -100.1,38.9,2e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Min and Max LOD (absolute)</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>40.1</north>
+                    <south>39.9</south>
+                    <east>-99.9</east>
+                    <west>-100.1</west>
+                    <minAltitude>2e4</minAltitude>
+                    <maxAltitude>2e4</maxAltitude>
+                    <altitudeMode>absolute</altitudeMode>
+                </LatLonAltBox>
+                <Lod>
+                    <minLodPixels>32</minLodPixels>
+                    <maxLodPixels>64</maxLodPixels>
+                </Lod>
+            </Region>
+            <Polygon>
+                <extrude>0</extrude>
+                <altitudeMode>absolute</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -100.1,39.9,2e4 -99.9,39.9,2e4 -99.9,40.1,2e4 -100.1,40.1,2e4 -100.1,39.9,2e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

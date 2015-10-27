@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!--
+  ~ Copyright (C) 2014 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<WCS_Capabilities version="1.0.0" updateSequence="2013-06-28T16:26:00Z" xmlns="http://www.opengis.net/wcs" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs http://schemas.opengis.net/wcs/1.0.0/wcsCapabilities.xsd">
+<Service>
+  <metadataLink metadataType="TC211" xlink:type="simple" xlink:href="http://worldwind26.arc.nasa.gov"/>  <description>World Wind MapServer Elevation test</description>
+  <name>MapServer WCS</name>
+  <label>World Wind MapServer Elevation</label>
+  <keywords>
+    <keyword>wcs</keyword>
+    <keyword>test</keyword>
+    <keyword>FAA</keyword>
+    <keyword>charts</keyword>
+    <keyword>aeronautical</keyword>
+  </keywords>
+<responsibleParty>
+    <individualName>Randolph Kim</individualName>
+    <organisationName>NASA</organisationName>
+    <positionName>manager</positionName>
+  <contactInfo>
+    <phone>
+    <voice>000-000-0000</voice>
+    <facsimile>000-000-0000</facsimile>
+    </phone>
+    <address>
+    <deliveryPoint>NASA Ames Research Center</deliveryPoint>
+    <city>Moffett Field</city>
+    <administrativeArea>CA</administrativeArea>
+    <postalCode>94035</postalCode>
+    <country>USA</country>
+    <electronicMailAddress>none@nasa.gov</electronicMailAddress>
+    </address>
+    <onlineResource xlink:type="simple" xlink:href="http://worldwind26.arc.nasa.gov/wms2?"/>
+  </contactInfo>
+</responsibleParty>
+  <fees>none</fees>
+  <accessConstraints>
+    none
+  </accessConstraints>
+</Service>
+<Capability>
+  <Request>
+    <GetCapabilities>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xlink:type="simple" xlink:href="http://worldwind26.arc.nasa.gov/wms2?"/></Get>
+        </HTTP>
+      </DCPType>
+      <DCPType>
+        <HTTP>
+          <Post><OnlineResource xlink:type="simple" xlink:href="http://worldwind26.arc.nasa.gov/wms2?"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetCapabilities>
+    <DescribeCoverage>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xlink:type="simple" xlink:href="http://worldwind26.arc.nasa.gov/wms2?"/></Get>
+        </HTTP>
+      </DCPType>
+      <DCPType>
+        <HTTP>
+          <Post><OnlineResource xlink:type="simple" xlink:href="http://worldwind26.arc.nasa.gov/wms2?"/></Post>
+        </HTTP>
+      </DCPType>
+    </DescribeCoverage>
+    <GetCoverage>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xlink:type="simple" xlink:href="http://worldwind26.arc.nasa.gov/wms2?"/></Get>
+        </HTTP>
+      </DCPType>
+      <DCPType>
+        <HTTP>
+          <Post><OnlineResource xlink:type="simple" xlink:href="http://worldwind26.arc.nasa.gov/wms2?"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetCoverage>
+  </Request>
+  <Exception>
+    <Format>application/vnd.ogc.se_xml</Format>
+  </Exception>
+</Capability>
+<ContentMetadata>
+  <CoverageOfferingBrief>
+    <name>aster_v2</name>
+    <label>ASTER version 2</label>
+    <lonLatEnvelope srsName="urn:ogc:def:crs:OGC:1.3:CRS84">
+      <gml:pos>-180 -83</gml:pos>
+      <gml:pos>180 83</gml:pos>
+    </lonLatEnvelope>
+  </CoverageOfferingBrief>
+  <CoverageOfferingBrief>
+    <name>USGS-NED</name>
+    <label>USGS NED</label>
+    <lonLatEnvelope srsName="urn:ogc:def:crs:OGC:1.3:CRS84">
+      <gml:pos>-125 25</gml:pos>
+      <gml:pos>-65.5 50</gml:pos>
+    </lonLatEnvelope>
+  </CoverageOfferingBrief>
+  <CoverageOfferingBrief>
+    <name>NASA_SRTM30_900m_Tiled</name>
+    <label>NASA_SRTM30 (bathy)</label>
+    <lonLatEnvelope srsName="urn:ogc:def:crs:OGC:1.3:CRS84">
+      <gml:pos>-180 -90</gml:pos>
+      <gml:pos>180 90</gml:pos>
+    </lonLatEnvelope>
+  </CoverageOfferingBrief>
+  <CoverageOfferingBrief>
+    <name>ASTERimagetest</name>
+    <label>ASTERsample</label>
+    <lonLatEnvelope srsName="urn:ogc:def:crs:OGC:1.3:CRS84">
+      <gml:pos>-30.0001388888889 -83.0001388888889</gml:pos>
+      <gml:pos>-28.9998611111111 -81.9998611111111</gml:pos>
+    </lonLatEnvelope>
+  </CoverageOfferingBrief>
+  <CoverageOfferingBrief>
+    <name>NEDimagetest</name>
+    <label>NEDsample</label>
+    <lonLatEnvelope srsName="urn:ogc:def:crs:OGC:1.3:CRS84">
+      <gml:pos>-155.0005555556 18.99944444444</gml:pos>
+      <gml:pos>-153.999444444484 20.0005555555555</gml:pos>
+    </lonLatEnvelope>
+  </CoverageOfferingBrief>
+  <CoverageOfferingBrief>
+    <name>bathyimagetest</name>
+    <label>bathysample</label>
+    <lonLatEnvelope srsName="urn:ogc:def:crs:OGC:1.3:CRS84">
+      <gml:pos>100 -10</gml:pos>
+      <gml:pos>140 40</gml:pos>
+    </lonLatEnvelope>
+  </CoverageOfferingBrief>
+</ContentMetadata>
+</WCS_Capabilities>

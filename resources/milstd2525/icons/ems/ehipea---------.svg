@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><g transform="scale(120) translate(0.391667 0.55) translate(-0.0333333 0)"><polygon points="0.808362,1.15726 0.947598,1.15726 0.947598,0.809165 0.808362,0.809165" style="fill:rgb(255,255,255)"/><polygon points="1.7134,1.15726 1.78302,1.15726 1.78302,1.05283 1.7134,1.05283" style="fill:rgb(255,255,255)"/><polygon points="0.599508,1.29649 1.92225,1.29649 1.92225,1.22687 0.599508,1.22687" style="fill:rgb(255,255,255)"/><polygon points="1.7134,1.47054 1.78302,1.47054 1.78302,1.36611 1.7134,1.36611" style="fill:rgb(255,255,255)"/><polygon points="0.808362,1.7142 0.947598,1.7142 0.947598,1.36611 0.808362,1.36611" style="fill:rgb(255,255,255)"/><path d="M0.808362 1.36611 L0.947598 1.36611 L0.947598 1.7142 L0.808362 1.7142 zM1.78302 1.47054     L1.7134 1.47054 L1.7134 1.36611 L1.78302 1.36611 zM0.599506 1.29649 L0.599506     1.22687 L1.92225 1.22687 L1.92225 1.29649 zM1.78302 1.15726 L1.7134     1.15726 L1.7134 1.05283 L1.78302 1.05283 zM0.808362 0.809165 L0.947598 0.809165     L0.947598 1.15726 L0.808362 1.15726 zM0.738744 1.15726 L0.52989 1.15726     L0.52989 1.36611 L0.738744 1.36611 L0.738744 1.78382 L1.01722 1.78382 L1.01722     1.36611 L1.64378 1.36611 L1.64378 1.54016 L1.85263 1.54016 L1.85263 1.36611     L1.99187 1.36611 L1.99187 1.15726 L1.85263 1.15726 L1.85263 0.983213 L1.64378     0.983213 L1.64378 1.15726 L1.01722 1.15726 L1.01722 0.739547 L0.738744     0.739547 z" style="fill:rgb(0,0,0)"/></g><text style="fill:rgb(0,0,0);font-family:arial;font-size:65;font-weight:bold;text-anchor:middle" transform="translate(2.11846 -3.39014) scale(1 1) translate(-2.11846 3.39014) translate(139.44 63.52) scale(1 1) translate(-139.44 -63.52) translate(1 0) translate(1 0) translate(1 0) translate(1 0)" x="200" y="170">A</text></svg>

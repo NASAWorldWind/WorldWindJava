@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: webstart.xml 1686 2013-10-23 17:55:56Z dcollins $ -->
+<project name="webstart">
+
+    <!-- Builds the World Wind Java Web Start site in the 'webstart' directory. When a keystore.properties file is
+         located in the World Wind project root folder, the result is a deployable Java Web Start site for the World
+         Wind Java SDK. -->
+    <target name="webstart.site" depends="webstart.worldwind.jarfiles,
+                                          webstart.jogl.jarfiles,
+                                          webstart.gdal.jarfiles,
+                                          webstart.signjar"
+            description="Builds a deployable World Wind Java Web Start site in the 'webstart' directory."/>
+
+    <!-- Packages the World Wind Java Web Start site into the ZIP archive 'worldwind-webstart-version.zip', where
+         'version' is the current version. -->
+    <target name="webstart.site.zipfile" depends="webstart.site"
+            description="Packages the World Wind Java Web Start site into the ZIP archive 'worldwind-webstart-version.zip'.">
+        <zip destfile="${webstart.zipfile}">
+            <fileset dir="${webstart.dir}"/>
+        </zip>
+    </target>
+
+    <!-- Places copies of the World Wind JAR files necessary for Java Web Start deployment in the 'webstart' directory. -->
+    <target name="webstart.worldwind.jarfiles" depends="build">
+        <!-- Copy the World Wind core and extensions JAR files into the Web Start directory. -->
+        <copy todir="${webstart.dir}">
+            <fileset dir="${basedir}">
+                <include name="${worldwind.jarfile}"/>
+                <include name="${worldwind.extensions.jarfile}"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+        <!-- Create the WebView native library JAR files in the Web Start directory. The Permissions attribute is
+             ignored for locally launched applications, but is required for signed Web Start Applications and Applets
+             starting in Java 7 update 45. This property must match the setting specified in the JNLP file or Applet
+             used to launch the application. See
+             http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/manifest.html#permissions-->
+        <jar jarfile="${webstart.dir}/${webview.macosx.jarfile}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}">
+                <include name="libwebview.jnilib"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.dir}/${webview.windows.jarfile}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}">
+                <include name="WebView32.dll"/>
+                <include name="WebView64.dll"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+    </target>
+
+    <!-- Places copies of the JOGL and GlueGen JAR files necessary for Java Web Start deployment in the 'webstart'
+         directory. -->
+    <target name="webstart.jogl.jarfiles">
+        <!-- Copy the JOGL JAR file, the GlueGen JAR file, and their associated native library JAR files into the
+             Web Start directory. -->
+        <copy todir="${webstart.dir}">
+            <fileset dir="${basedir}">
+                <include name="jogl-all.jar"/>
+                <include name="jogl-all-natives-macosx-universal.jar"/>
+                <include name="jogl-all-natives-windows-i586.jar"/>
+                <include name="jogl-all-natives-windows-amd64.jar"/>
+                <include name="jogl-all-natives-linux-i586.jar"/>
+                <include name="jogl-all-natives-linux-amd64.jar"/>
+                <include name="gluegen-rt.jar"/>
+                <include name="gluegen-rt-natives-macosx-universal.jar"/>
+                <include name="gluegen-rt-natives-windows-i586.jar"/>
+                <include name="gluegen-rt-natives-windows-amd64.jar"/>
+                <include name="gluegen-rt-natives-linux-i586.jar"/>
+                <include name="gluegen-rt-natives-linux-amd64.jar"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <!-- Places copies of the GDAL JAR files necessary for Java Web Start deployment in the 'webstart' directory. -->
+    <target name="webstart.gdal.jarfiles">
+        <!-- Copy the World Wind GDAL JAR file to the Web Start directory. -->
+        <copy file="${basedir}/${gdal.jarfile}" todir="${webstart.dir}"/>
+        <!-- Create the World Wind GDAL data JAR file and the World Wind GDAL native library JAR files in the Web Start
+             directory. The Permissions attribute is ignored for locally launched applications, but is required for
+             signed Web Start Applications and Applets starting in Java 7 update 45. This property must match the
+             setting specified in the JNLP file or Applet used to launch the application. See
+             http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/manifest.html#permissions -->
+        <jar jarfile="${webstart.dir}/${gdal.data.jarfile}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${gdal.dir}/data">
+                <include name="**"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.dir}/${gdal.macosx.jarfile}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${gdal.dir}">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="libgdalalljni.jnilib"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.dir}/${gdal.win32.jarfile}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${gdal.dir}">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="gdalminjni32.dll"/>
+                <include name="gdalalljni32.dll"/>
+                <include name="gdalalljni32.dll.manifest"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.dir}/${gdal.win64.jarfile}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${gdal.dir}">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="gdalminjni64.dll"/>
+                <include name="gdalalljni64.dll"/>
+                <include name="gdalalljni64.dll.manifest"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.dir}/${gdal.linux32.jarfile}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${gdal.dir}">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="libgdalalljni32.so"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.dir}/${gdal.linux64.jarfile}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${gdal.dir}">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="libgdalalljni64.so"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+    </target>
+
+    <!-- Signs all JAR files in the 'webstart' directory provided that a keystore.properties file is located in the
+         World Wind project root folder.  -->
+    <target name="webstart.signjar" depends="signjar.setup" if="signjar.enabled">
+        <signjar keystore="${keystore.file}" alias="${keystore.alias}" storepass="${keystore.storepass}"
+                 tsaurl="${keystore.tsaurl}">
+            <path>
+                <fileset dir="${webstart.dir}">
+                    <include name="*.jar"/>
+                    <type type="file"/>
+                </fileset>
+            </path>
+        </signjar>
+    </target>
+
+    <!-- Individual clean targets corresponding to each build target above. -->
+    <target name="clean.webstart.worldwind.jarfiles">
+        <delete>
+            <fileset dir="${webstart.dir}">
+                <include name="${worldwind.jarfile}"/>
+                <include name="${worldwind.extensions.jarfile}"/>
+                <include name="${webview.macosx.jarfile}"/>
+                <include name="${webview.windows.jarfile}"/>
+                <type type="file"/>
+            </fileset>
+        </delete>
+    </target>
+    <target name="clean.webstart.jogl.jarfiles">
+        <delete>
+            <fileset dir="${webstart.dir}">
+                <include name="jogl-all.jar"/>
+                <include name="jogl-all-natives-macosx-universal.jar"/>
+                <include name="jogl-all-natives-windows-i586.jar"/>
+                <include name="jogl-all-natives-windows-amd64.jar"/>
+                <include name="jogl-all-natives-linux-i586.jar"/>
+                <include name="jogl-all-natives-linux-amd64.jar"/>
+                <include name="gluegen-rt.jar"/>
+                <include name="gluegen-rt-natives-macosx-universal.jar"/>
+                <include name="gluegen-rt-natives-windows-i586.jar"/>
+                <include name="gluegen-rt-natives-windows-amd64.jar"/>
+                <include name="gluegen-rt-natives-linux-i586.jar"/>
+                <include name="gluegen-rt-natives-linux-amd64.jar"/>
+                <type type="file"/>
+            </fileset>
+        </delete>
+    </target>
+    <target name="clean.webstart.gdal.jarfiles">
+        <delete>
+            <fileset dir="${webstart.dir}">
+                <include name="${gdal.jarfile}"/>
+                <include name="${gdal.data.jarfile}"/>
+                <include name="${gdal.macosx.jarfile}"/>
+                <include name="${gdal.win32.jarfile}"/>
+                <include name="${gdal.win64.jarfile}"/>
+                <include name="${gdal.linux32.jarfile}"/>
+                <include name="${gdal.linux64.jarfile}"/>
+                <type type="file"/>
+            </fileset>
+        </delete>
+    </target>
+    <!-- Main clean target for Web Start build targets. Removes all files and directories created by all Web Start build
+         targets. -->
+    <target name="clean.webstart.site" depends="clean.webstart.worldwind.jarfiles,
+                                                clean.webstart.jogl.jarfiles,
+                                                clean.webstart.gdal.jarfiles"/>
+
+</project>

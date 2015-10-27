@@ -1,0 +1,37 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--
+Illustrates how to embed a World Wind Applet in a web page and configure the initial viewing parameters from Applet
+parameters.
+
+Version: $Id: WWJAppletParams.html 956 2012-12-05 22:43:26Z dcollins $
+-->
+<html>
+<head>
+    <title>NASA World Wind Java Applet Test Page - Initial values params</title>
+</head>
+
+<body>
+
+<!-- Include the World Wind Java Applet example in this page using Java Web Start, Oracle's recommended deployment
+     mechanism. The containing document specifies the Applet attributes that affect its display and enable
+     Java-to-Javascript communication. The specified Applet parameter jnlp_href defines the Applet's code and its
+     dependencies. This mechanism requires Java 6 update 10 on Windows and Linux, and requires Java 7 on Mac OS X. See
+     the following Oracle document for details on this Applet deployment mechanism:
+     http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/applet/applet_deployment.html -->
+<script src="http://www.java.com/js/deployJava.js"></script>
+<script>
+    var attributes = {id:'wwjApplet', mayscript:'true', width:'100%', height:'70%'};
+    var parameters = {jnlp_href:'WWJApplet.jnlp', InitialLatitude:'43.68', InitialLongitude:'7.25',
+                      InitialAltitude:'15000', InitialHeading:'10', InitialPitch:'70'};
+    deployJava.runApplet(attributes, parameters, '1.6'); // runApplet automatically looks for JRE 1.6+
+</script>
+
+<center>Nice, France - lat 43.68, lon 7.25</center>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinkControl. -->
+<!--$Id: Delete01-OpenFirst.kml 391 2012-02-17 01:13:45Z tgaskins $-->
+<!--This test creates two default markers over the southern tip of South America, then deletes the east one.-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <NetworkLink>
+        <name>Deleting Placemarks example</name>
+        <description>Check the box to see the Placemark</description>
+        <Link>
+            <href>Delete01B.kml</href>
+        </Link>
+    </NetworkLink>
+</kml>

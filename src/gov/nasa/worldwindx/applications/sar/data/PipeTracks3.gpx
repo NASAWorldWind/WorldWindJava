@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="MapSource 6.12.2" version="1.1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <name>ACTIVE LOG 024</name>
+        <trkseg>
+            <trkpt lat="42" lon="-109">
+                <ele>0</ele>
+                <time>2007-06-11T17:33:23Z</time>
+            </trkpt>
+            <trkpt lat="42.5" lon="-109.2">
+                <ele>1000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="43" lon="-109.4">
+                <ele>2000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="43.5" lon="-109.6">
+                <ele>3000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="44" lon="-109.8">
+                <ele>3000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="44.5" lon="-110">
+                <ele>3000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="45" lon="-110.2">
+                <ele>3000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="45.5" lon="-110.3">
+                <ele>3000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="46" lon="-110.4">
+                <ele>3000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="46.5" lon="-110.5">
+                <ele>3000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>

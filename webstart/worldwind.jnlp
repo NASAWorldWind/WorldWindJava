@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: worldwind.jnlp 958 2012-12-05 22:57:10Z dcollins $ -->
+<jnlp codebase="http://worldwind.arc.nasa.gov/java/2.0.0/webstart/"
+      href="worldwind.jnlp" version="2.0.0">
+
+    <!--
+        Provides a description of the World Wind SDK core library.
+    -->
+    <information>
+        <title>NASA World Wind Java</title>
+        <vendor>NASA</vendor>
+        <homepage href="http://worldwind.arc.nasa.gov"/>
+        <description>NASA World Wind Java</description>
+        <description kind="short">NASA World Wind Java Planetary Visualization SDK, version 2.0.0</description>
+        <offline-allowed/>
+    </information>
+
+    <!--
+        Requests a trusted application environment. The World Wind SDK core library requires access to the network and
+        the local filesystem. All World Wind JAR files are signed with a digital signature associated with NASA.
+    -->
+    <security>
+        <all-permissions/>
+    </security>
+
+    <!--
+        Specifies the resources required by the World Wind SDK core library:
+        * World Wind core JAR file.
+        * World Wind GDAL JAR file. World Wind must include the GDAL JAR file on its class path, even when the GDAL
+          native libraries are not used. We include the GDAL JAR file at the GDAL webstart site to avoid a version
+          conflict should the application choose to include the GDAL Web Start component.
+        * JOGL version 2.0 Web Start component. World Wind depends on the JOGL library to communicate with the platform
+          native OpenGL libraries.
+        * WebView native library JAR archives for Mac OS X, Windows 32-bit and Windows 64-bit. The WebView native
+          libraries are required by implementations of the World Wind BrowserBalloon class.
+        * Disable the use of DirectDraw by Java2D on Windows. This is necessary for correct operation of JOGL on Windows
+          and is accomplished by setting the sun.java2d.noddraw property to true. See the JOGL Userguide for details:
+          http://jogamp.org/jogl/doc/userguide/
+    -->
+    <resources>
+        <jar href="worldwind.jar"/>
+        <jar href="gdal.jar"/>
+        <extension name="jogl" href="jogl-all.jnlp"/>
+    </resources>
+    <resources os="Mac OS X">
+        <nativelib href="webview-natives-macosx.jar"/>
+    </resources>
+    <resources os="Windows">
+        <nativelib href="webview-natives-windows.jar"/>
+        <property name="sun.java2d.noddraw" value="true"/>
+    </resources>
+
+    <!--
+        Indicates that this Java Web Start file describes a component. This element is intentionally left blank, since
+        it is used only as an indicator.
+    -->
+    <component-desc/>
+
+</jnlp>

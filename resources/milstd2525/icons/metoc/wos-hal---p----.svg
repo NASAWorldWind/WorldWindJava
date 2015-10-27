@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- SVG content generated using Symbology Configuration Management System (SCMS) -->
+
+<!-- Systematic Software Engineering Ltd. - www.systematic.co.uk - do not remove  -->
+
+<svg
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    id="WOS-HAL---P----"
+    width="330"
+    height="330"
+    viewBox="0 0 330 330"
+    version="1.1"
+    inkscape:version="0.48.2 r9819"
+    sodipodi:docname="wos-hal---p----.svg">
+    <metadata
+        id="metadata14">
+        <rdf:RDF>
+            <cc:Work
+                rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                    rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <defs
+        id="defs12"/>
+    <sodipodi:namedview
+        pagecolor="#ffffff"
+        bordercolor="#666666"
+        borderopacity="1"
+        objecttolerance="10"
+        gridtolerance="10"
+        guidetolerance="10"
+        inkscape:pageopacity="0"
+        inkscape:pageshadow="2"
+        inkscape:window-width="640"
+        inkscape:window-height="480"
+        id="namedview10"
+        showgrid="false"
+        inkscape:zoom="0.59"
+        inkscape:cx="150"
+        inkscape:cy="180"
+        inkscape:window-x="0"
+        inkscape:window-y="0"
+        inkscape:window-maximized="0"
+        inkscape:current-layer="WOS-HAL---P----"/>
+    <g
+        id="g3"
+        transform="translate(-50,-50)">
+        <svg
+            viewBox="0 0 400 400"
+            id="_0.WOS-HAL---P----"
+            width="400"
+            height="400"
+            version="1.1"
+            inkscape:version="0.48.2 r9819">
+            <circle
+                cx="300"
+                cy="300"
+                r="75"
+                style="fill:#ff00ff;stroke:#ff00ff;stroke-width:10"
+                id="circle6"
+                sodipodi:cx="300"
+                sodipodi:cy="300"
+                sodipodi:rx="75"
+                sodipodi:ry="75"
+                d="m 375,300 c 0,41.42136 -33.57864,75 -75,75 -41.42136,0 -75,-33.57864 -75,-75 0,-41.42136 33.57864,-75 75,-75 41.42136,0 75,33.57864 75,75 z"/>
+            <polyline
+                points="233,343.5 50,50 343.5,233"
+                style="fill:#ff00ff;stroke-width:10"
+                id="polyline8"/>
+        </svg>
+    </g>
+</svg>

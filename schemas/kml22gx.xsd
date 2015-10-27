@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+  XSD of Google extensions to OGC KML 2.2.
+  NOTE: This BETA specification is subject to change without notice.
+
+  The URL to this schema is:
+  http://code.google.com/apis/kml/schema/kml22gx.xsd
+
+  Full documentation for these extensions is available at:
+  http://code.google.com/apis/kml/
+
+  The minimum required version of Google Earth to support all these extensions
+  is version 5.2 (Free, Pro, and Enterprise). Earlier versions of Google Earth
+  support a smaller set of extensions.
+
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:gx="http://www.google.com/kml/ext/2.2"
+  xmlns:kml="http://www.opengis.net/kml/2.2"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+  targetNamespace="http://www.google.com/kml/ext/2.2"
+  elementFormDefault="qualified"
+  version="090102 BETA">
+
+  <!-- Import the language we are extending: OGC KML 2.2 -->
+  <import namespace="http://www.opengis.net/kml/2.2"
+    schemaLocation="http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd"/>
+
+   <!-- Simple types -->
+  <simpleType name="altitudeModeEnumType">
+    <restriction base="string">
+      <enumeration value="clampToSeaFloor"/>
+      <enumeration value="relativeToSeaFloor"/>
+    </restriction>
+  </simpleType>
+  
+  <simpleType name="flyToModeEnumType">
+    <restriction base="string">
+      <enumeration value="bounce"/>
+      <enumeration value="smooth"/>
+    </restriction>
+  </simpleType>
+  
+  <simpleType name="playModeEnumType">
+    <restriction base="string">
+      <enumeration value="pause"/>
+    </restriction>
+  </simpleType>
+
+  <!-- Simple elements -->
+  
+  <!-- altitudeMode has no XSD default.  OGC KML 2.2 altitudeModeGroup
+    is considered to have the same default as altitudeMode: clampToGround -->
+  <element name="AbstractTrackSimpleExtensionGroup" abstract="true"
+    type="anySimpleType"/>
+  <element name="altitudeMode" type="gx:altitudeModeEnumType"
+    substitutionGroup="kml:altitudeModeGroup"/>
+  <element name="angles" type="string"/>
+  <element name="balloonVisibility" type="boolean" default="true"
+    substitutionGroup="kml:AbstractFeatureSimpleExtensionGroup"/>
+  <element name="coord" type="string"/>
+  <element name="duration" type="double" default="0.0"/>
+  <element name="flyToMode" type="gx:flyToModeEnumType" default="bounce"/>
+  <element name="interpolate" type="boolean" default="false"/>
+  <element name="playMode" type="gx:playModeEnumType" default="pause"/>
+  <element name="rank" type="double"
+    substitutionGroup="kml:AbstractFeatureSimpleExtensionGroup"
+    default="0.0"/>
+  <element name="value" type="string"/>
+
+  <element name="x" type="integer"
+    substitutionGroup="kml:BasicLinkSimpleExtensionGroup"/>
+  <element name="y" type="integer"
+    substitutionGroup="kml:BasicLinkSimpleExtensionGroup"/>
+  <element name="w" type="integer"
+    substitutionGroup="kml:BasicLinkSimpleExtensionGroup"/>
+  <element name="h" type="integer"
+    substitutionGroup="kml:BasicLinkSimpleExtensionGroup"/>
+
+
+
+  <!-- Complex types and elements -->
+  
+  <element name="AbstractTourPrimitiveGroup" type="gx:AbstractTourPrimitiveType"
+    abstract="true" substitutionGroup="kml:AbstractObjectGroup"/>
+  <element name="AbstractTourPrimitive" type="gx:AbstractTourPrimitiveType"/>
+  <complexType name="AbstractTourPrimitiveType">
+    <complexContent>
+      <extension base="kml:AbstractObjectType"/>
+    </complexContent>
+  </complexType>
+  
+  <element name="AnimatedUpdate" type="gx:AnimatedUpdateType"
+    substitutionGroup="gx:AbstractTourPrimitiveGroup"/>
+  <complexType name="AnimatedUpdateType">
+    <complexContent>
+      <extension base="gx:AbstractTourPrimitiveType">
+        <sequence>
+          <element ref="gx:duration" minOccurs="0"/>
+          <element ref="kml:Update" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="FlyTo" type="gx:FlyToType"
+    substitutionGroup="gx:AbstractTourPrimitiveGroup"/>
+  <complexType name="FlyToType">
+    <complexContent>
+      <extension base="gx:AbstractTourPrimitiveType">
+        <sequence>
+          <element ref="gx:duration" minOccurs="0"/>
+          <element ref="gx:flyToMode" minOccurs="0"/>
+          <element ref="kml:AbstractViewGroup" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="Playlist" type="gx:PlaylistType"
+    substitutionGroup="kml:AbstractObjectGroup"/>
+  <complexType name="PlaylistType">
+    <complexContent>
+      <extension base="kml:AbstractObjectType">
+        <sequence>
+          <element ref="gx:AbstractTourPrimitiveGroup" minOccurs="0"
+            maxOccurs="unbounded"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="SoundCue" type="gx:SoundCueType"
+    substitutionGroup="gx:AbstractTourPrimitiveGroup"/>
+  <complexType name="SoundCueType">
+    <complexContent>
+      <extension base="gx:AbstractTourPrimitiveType">
+        <sequence>
+          <element ref="kml:href" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="Tour" type="gx:TourType"
+    substitutionGroup="kml:AbstractFeatureGroup"/>
+  <complexType name="TourType">
+    <complexContent>
+      <extension base="kml:AbstractFeatureType">
+        <sequence>
+          <element ref="gx:Playlist" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- Declare TimeStamp and TimeSpan elements in this extension namespace of
+       the same type as in OGC standard KML to add it to the substitution group. -->
+   <element name="TimeStamp" type="kml:TimeStampType"
+     substitutionGroup="kml:AbstractViewObjectExtensionGroup"/>
+   <element name="TimeSpan" type="kml:TimeSpanType"
+     substitutionGroup="kml:AbstractViewObjectExtensionGroup"/>
+  
+  <element name="TourControl" type="gx:TourControlType"
+    substitutionGroup="gx:AbstractTourPrimitiveGroup"/>
+  <complexType name="TourControlType">
+    <complexContent>
+      <extension base="gx:AbstractTourPrimitiveType">
+        <sequence>
+          <element ref="gx:playMode" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <element name="Wait" type="gx:WaitType"
+    substitutionGroup="gx:AbstractTourPrimitiveGroup"/>
+  <complexType name="WaitType">
+    <complexContent>
+      <extension base="gx:AbstractTourPrimitiveType">
+        <sequence>
+          <element ref="gx:duration" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <element name="LatLonQuad" type="gx:LatLonQuadType"
+    substitutionGroup="kml:GroundOverlayObjectExtensionGroup"/>
+  <complexType name="LatLonQuadType">
+    <complexContent>
+      <extension base="kml:AbstractObjectType">
+        <sequence>
+          <element ref="kml:coordinates" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <element name="Track" type="gx:TrackType"
+    substitutionGroup="kml:AbstractGeometryGroup"/>
+
+  <complexType name="TrackType">
+    <complexContent>
+      <extension base="kml:AbstractGeometryType">
+        <sequence>
+          <element ref="kml:extrude" minOccurs="0"/>
+          <element ref="kml:tessellate" minOccurs="0"/>
+          <element ref="kml:altitudeModeGroup" minOccurs="0"/>
+          <element ref="kml:when" minOccurs="0" maxOccurs="unbounded"/>
+          <element ref="gx:coord" minOccurs="0" maxOccurs="unbounded"/>
+          <element ref="gx:angles" minOccurs="0" maxOccurs="unbounded"/>
+          <element ref="kml:Model" minOccurs="0"/>
+          <element ref="kml:ExtendedData" minOccurs="0"/>
+          <element ref="gx:AbstractTrackSimpleExtensionGroup" minOccurs="0"
+            maxOccurs="unbounded"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <element name="MultiTrack" type="gx:MultiTrackType"
+    substitutionGroup="kml:AbstractGeometryGroup"/>
+
+  <complexType name="MultiTrackType">
+    <complexContent>
+      <extension base="kml:AbstractGeometryType">
+        <sequence>
+          <element ref="kml:altitudeModeGroup" minOccurs="0"/>
+          <element ref="gx:interpolate" minOccurs="0"/>
+          <element ref="gx:Track" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <element name="SimpleArrayField" type="gx:SimpleArrayFieldType"
+    substitutionGroup="kml:SchemaExtension"/>
+
+  <complexType name="SimpleArrayFieldType">
+    <sequence>
+      <element ref="kml:displayName" minOccurs="0"/>
+      <element ref="gx:SimpleArrayFieldExtension" minOccurs="0"
+        maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="type" type="string"/>
+    <attribute name="name" type="string"/>
+  </complexType>
+  <element name="SimpleArrayFieldExtension" abstract="true"/>
+
+  <element name="SimpleArrayData" type="gx:SimpleArrayDataType"
+    substitutionGroup="kml:SchemaDataExtension"/>
+
+  <complexType name="SimpleArrayDataType">
+    <complexContent>
+      <extension base="kml:AbstractObjectType">
+        <sequence>
+          <element ref="gx:value" minOccurs="0" maxOccurs="unbounded"/>
+          <element ref="gx:SimpleArrayDataExtension" minOccurs="0"
+            maxOccurs="unbounded"/>
+        </sequence>
+        <attribute name="name" type="string"/>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="SimpleArrayDataExtension" abstract="true"/>
+ 
+</schema>

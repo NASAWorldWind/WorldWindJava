@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- SVG content generated using Symbology Configuration Management System (SCMS) -->
+
+<!-- Systematic Software Engineering Ltd. - www.systematic.co.uk - do not remove  -->
+
+<svg
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    id="G*MPOB----****X"
+    width="275.17059"
+    height="369.88385"
+    viewBox="0 0 275.17059 369.88385"
+    version="1.1"
+    inkscape:version="0.48.2 r9819"
+    sodipodi:docname="g-mpob--------x.svg">
+    <metadata
+        id="metadata18">
+        <rdf:RDF>
+            <cc:Work
+                rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                    rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <defs
+        id="defs16"/>
+    <sodipodi:namedview
+        pagecolor="#ffffff"
+        bordercolor="#666666"
+        borderopacity="1"
+        objecttolerance="10"
+        gridtolerance="10"
+        guidetolerance="10"
+        inkscape:pageopacity="0"
+        inkscape:pageshadow="2"
+        inkscape:window-width="640"
+        inkscape:window-height="480"
+        id="namedview14"
+        showgrid="false"
+        inkscape:zoom="0.59"
+        inkscape:cx="134.83537"
+        inkscape:cy="178.83535"
+        inkscape:window-x="0"
+        inkscape:window-y="0"
+        inkscape:window-maximized="0"
+        inkscape:current-layer="G*MPOB----****X"/>
+    <g
+        id="g3"
+        transform="translate(-65.164634,-8.9514923)">
+        <svg
+            viewBox="0 0 400 400"
+            id="_0.G-MPOB--------X"
+            width="400"
+            height="400"
+            version="1.1"
+            inkscape:version="0.48.2 r9819">
+            <g
+                transform="matrix(3.5,0,0,3.5,-660,-660)"
+                id="g6">
+                <line
+                    x1="216"
+                    y1="253"
+                    x2="244.718"
+                    y2="192.94099"
+                    style="fill:#ffffff;stroke:#ffffff;stroke-width:2"
+                    id="line8"/>
+                <line
+                    x1="244.625"
+                    y1="192.129"
+                    x2="275"
+                    y2="253"
+                    style="fill:#ffffff;stroke:#ffffff;stroke-width:2"
+                    id="line10"/>
+                <ellipse
+                    cx="256"
+                    cy="281"
+                    rx="48"
+                    ry="33"
+                    transform="matrix(0.80208318,0,0,0.818182,41.166687,39.090861)"
+                    style="fill:none;stroke:#ffffff;stroke-width:2"
+                    id="ellipse12"
+                    d="m 304,281 c 0,18.2254 -21.49033,33 -48,33 -26.50967,0 -48,-14.7746 -48,-33 0,-18.2254 21.49033,-33 48,-33 26.50967,0 48,14.7746 48,33 z"
+                    sodipodi:cx="256"
+                    sodipodi:cy="281"
+                    sodipodi:rx="48"
+                    sodipodi:ry="33"/>
+            </g>
+        </svg>
+    </g>
+</svg>

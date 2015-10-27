@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><g transform="translate(40 50) scale(0.8 0.8)"><line style="stroke:rgb(255,255,255);stroke-width:10" x1="200" x2="200" y1="155" y2="225"/><line style="stroke:rgb(255,255,255);stroke-width:10" x1="110" x2="110" y1="155" y2="255"/><line style="stroke:rgb(255,255,255);stroke-width:10" x1="290" x2="290" y1="155" y2="255"/><line style="stroke:rgb(255,255,255);stroke-width:10" x1="105" x2="295" y1="155" y2="155"/></g><g transform="translate(59 0) scale(0.7 0.7)"><text style="fill:rgb(255,255,255);font-family:Arial;font-size:90;font-weight:bold;text-anchor:middle" x="200" y="232">CBT</text></g><text style="fill:rgb(255,255,255);font-family:Arial;font-size:65;font-weight:bold;text-anchor:middle" x="200" y="307">M</text></svg>

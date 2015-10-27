@@ -1,0 +1,635 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- $Id: KMLManualTest.html 1972 2014-04-30 00:02:05Z dcollins $ --><!--suppress HtmlPresentationalElement -->
+<html>
+<head>
+    <title>KML Manual Tests</title>
+</head>
+<body>
+
+<p>Describes the steps to execute a manual validation test of the World Wind KML implementation.</p>
+
+<h4>Tests Files</h4>
+All tests files are located at <a href="http://wwdev.tomgaskins.net/KMLTestFiles">http://wwdev.tomgaskins.net/KMLTestFiles</a>.
+Note: to view the current frame rate in Google Earth, press Control+Shift+A.
+
+<ol>
+<!-- Aero_Charts.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Aero_Charts.kml">Aero_Charts.kml</a>
+
+    <p><b>Expected Result</b> <br/> Nothing displays by default. Clicking the "About" folder in the KML tree displays a
+                                    screen balloon describing the data. Clicking the "Legends" folder in the KML tree
+                                    displays a screen balloon with links to data legends, which open in a new window.
+                                    Children of the "Charts" folder are radio buttons. Clicking either "Sectionals"
+                                    displays the FAA sectional charts for that area. Clicking "Terminal Area" or
+                                    "Flyways" displays local flight maps. Clicking either "3D Airspace" displays
+                                    extruded polygons of the flight paths.
+
+    <p><b>Source</b> <br/> WWJ <a href="http://forum.worldwindcentral.com/showpost.php?p=64180&postcount=109">forum
+                                                                                                              post</a>.
+
+    <p><b>Issues</b> <br/> - Network links using the deprecated URL element don not work: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-289">WWJINT-289</a>. <br/> - Clicking on tree items
+                           with a balloon style does not display the balloon: <a
+                href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-288">WWJINT-288</a>. <br/> - WW does not
+                           support the radio button list style.
+</li>
+
+<!-- Atlantic Hurricanes.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/AtlanticHurricanes.kmz">AtlanticHurricanes.kmz</a>
+
+    <p><b>Expected Result</b> <br/> By default, nothing is rendered. The KML tree loads nodes of storm data for
+                                    different decades. Turn on each of the decades loads green and yellow placemarks and
+                                    lines showing storm paths.
+
+    <p><b>Source</b> <br/> <a href="http://www.srh.noaa.gov/gis/kml/">http://www.srh.noaa.gov/gis/kml/</a>
+
+    <p><b>Issues</b> <br/> None.
+</li>
+
+<!-- BayAreaEQProbability.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/BayAreaEQProbability.kmz">BayAreaEQProbability.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Several thick red and yellow lines appear over San Francisco (they're actually
+                                    extruded polygons if you zoom in close). Text labels appear over the lines. A legend
+                                    and USGS logo appear on the left side of the window.
+
+    <p><b>Source</b> <br/> <a href="http://earthquake.usgs.gov/learn/kml.php">USGS</a>.
+
+    <p><b>Issues</b> <br/> WW labels and placemark icons are larger than GE. Unclear if this is a bug or just a
+                           difference.
+</li>
+
+<!-- Biodiversity_Hotspots_nw.km -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Biodiversity_Hotspots_nw.kmz">Biodiversity_Hotspots_nw.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Black icons appear all around the globe. Clicking on each one brings up a balloon
+                                    with information and images about the biodiversity of that region.
+
+    <p><b>Source</b> <a href="http://earth.tryse.net/">http://earth.tryse.net/</a>
+
+    <p><b>Issues</b> <br/>None
+</li>
+
+<!-- Earths_Tectonic_Plates.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Earths_Tectonic_Plates.kmz">Earths_Tectonic_Plates.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Colored lines are drawn to indicate plate boundaries. A legend appears at the left
+                                    edge of the screen.
+
+    <p><b>Source</b> <br/> <a href="http://earthquake.usgs.gov/learn/kml.php">USGS</a>.
+
+    <p><b>Issues</b> <br/> Difference between GE and WW: GE does not draw placemark icons. WW draws the default yellow
+                           pin.
+</li>
+
+<!-- EDGE_Mammals_nw.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/EDGE_Mammals_nw.kmz">EDGE_Mammals_nw.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Placemark icons appear around the globe. Click on each brings up a balloon with
+                                    information about an endangered mammal. The animals territory is drawn as a green
+                                    polygon (this is easiest to see over Africa and Asia).
+
+    <p><b>Source</b> <br/> <a href="http://earth.tryse.net/">http://earth.tryse.net/</a>
+
+    <p><b>Issues</b> <br/>None
+</li>
+
+<!-- eqs7day-age.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/eqs7day-age.kmz">eqs7day-age.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Lines are drawn to indicate tectonic plates. Arrows are drawn to indicate the
+                                    direction of plate movement. Clicking on the arrow brings up a info balloon with
+                                    data about the rate of continental drift. Yellow dots indicate the positions of
+                                    earthquakes.
+
+    <p><b>Issues</b> <br/> - WW does not draw lines to indicate plate boundaries, and draws yellow pushpins instead of
+                           the arrow icons that should be drawn. <br/> - Text that should be transparent draws in black.
+        <br/> - Note: Earthquake dots do not draw because they are fetched by a network link with query parameters.
+</li>
+
+<!-- EYX_Radar_data.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/EYX_Radar_data.kmz">EYX_Radar_data.kmz</a>
+
+    <p><b>Expected Result</b> <br/>Ground overlay shows weather radar over Edwards Airforce Base in Southern California.
+
+    <p><b>Source</b> <br/> <a href="http://www.srh.noaa.gov/gis/kml/">http://www.srh.noaa.gov/gis/kml/</a>
+
+    <p><b>Issues</b> <br/> Throws an exception on Mac OS: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-282">WWJINT-282</a>.
+</li>
+
+<!-- GarminTrainingCenter.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/GarminTrainingCenter.kml">GarminTrainingCenter.kml</a>
+
+    <p><b>Expected Result</b> <br/> Upon loading, the view flys to a region near Cankaya, Turkey. Displays a long
+                                    sequence of placemarks connected by a terrain-following line.
+
+    <p><b>Source</b> <br/> WWJ <a href="http://forum.worldwindcentral.com/showpost.php?p=70151&postcount=23">forum
+                                                                                                             post</a>.
+
+    <p><b>Issues</b> <br/> - Clicking document in KML tree does not fly there: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-290">WWJINT-290</a>. <br/> - Difference between GE
+                           and WW: GE flys to the document upon loading; WW does not.
+
+    <p><b>Performance</b> <br/> GE: 60 fps, WW: 60 fps (Mac OS, 3GHz Quad i7, ATI Radeon HD 5750).
+
+</li>
+
+<!-- GLERL-NL-gltemp.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/GLERL-NL-gltemp.kml">GLERL-NL-gltemp.kml</a>
+
+    <p><b>Expected Result</b> <br/>Overlays are drawn over the Great Lakes.
+
+    <p><b>Source</b> <br/> <a href="http://www.srh.noaa.gov/gis/kml/">http://www.srh.noaa.gov/gis/kml/</a>
+
+    <p><b>Issues</b> <br/> None.
+
+    <p><b>Performance</b> <br/> GE: 60 fps, WW: 45 fps (Mac OS, 2 Ghz Core2 duo, Nvidia GeForce 9400)
+</li>
+
+<!-- HaywardFaultTour.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/HaywardFaultTour.kmz">HaywardFaultTour.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Lines are drawn around the Hayward Fault that runs along the length of California. A
+                                    terrain overlay is loaded over this region. Around San Francisco there are some
+                                    placemark icons, click on each brings up a balloon with an image and text about the
+                                    fault.
+
+    <p><b>Issues</b> <br/> This file currently does not work in WW due to a bug in KMLSurfaceImageImpl: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-281">WWJINT-281</a>.
+</li>
+
+<!-- Hist_Eqs_Glen_Ellen.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Hist_Eqs_Glen_Ellen.kmz">Hist_Eqs_Glen_Ellen.kmz</a>
+
+    <p><b>Expected Result</b> <br/> A cluster of placemark pins appear just north of San Francisco.
+
+    <p><b>Source</b> <br/> <a href="http://earthquake.usgs.gov/learn/kml.php">USGS</a>.
+
+    <p><b>Issues</b> <br/> Very poor performance. 7 fps when zoomed in on the placemarks. (Mac OS, 2 Ghz Core2 duo,
+                           Nvidia GeForce 9400).
+</li>
+
+<!-- Historic.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Historic.kmz">Historic.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Thin red lines draw to indicate fault lines.
+
+    <p><b>Source</b> <br/> <a href="http://earthquake.usgs.gov/learn/kml.php">USGS</a>.
+
+    <p><b>Issues</b> <br/> WW frame rate is much lower than GE: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-283">WWJINT-283</a>.
+
+    <p><b>Performance</b> <br/> GE: 20 fps, WW: 4 fps (Mac OS, 2 Ghz Core2 duo, Nvidia GeForce 9400)
+</li>
+
+<!-- iowa_caucus_n.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/iowa_caucus_n.kmz">iowa_caucus_n.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Polygons are drawn over the state of Iowa to represent voting districts. A placemark
+                                    appears in the center of each. Clicking on the placemark brings up a balloon with
+                                    details for that district. Note: this file uses a ListStyle definition that WW
+                                    currently does not support.
+
+    <p><b>Issues</b> <br/> Loading this KMZ in WW does not load anything.
+</li>
+
+<!-- kmlForestTest.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/kmlForestTest.kml">kmlForestTest.kml</a>
+
+    <p><b>Expected Result</b> <br/> Upon loading, the view flys to a region near Santa Barbara, CA. KML tree
+                                    automatically opens to display a portion of the KML hierarchy. Clicking feature
+                                    "networklink a" retrieves that NetworkLink's resource and opens it in the KML tree
+                                    upon retrieval.
+
+    <p><b>Source</b> <br/> <a href="http://code.google.com/p/kmltree/">kmltree</a> project.
+
+    <p><b>Issues</b> <br/> - WW labels and placemark icons are larger than GE. Unclear if this is a bug or just a
+                           difference. <br/> - WW does not support the radio button list style. <br/> - Difference
+                           between GE and WW: GE flys to the document upon loading; WW does not
+</li>
+
+<!-- legend_sumatrawide.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/legend_sumatrawide.kml">legend_sumatrawide.kml</a>
+
+    <p><b>Expected Result</b> <br/> Displays a legend as a screen image in the lower left corner.
+
+    <p><b>Source</b> <br/> WWJ <a href="http://forum.worldwindcentral.com/showpost.php?p=84720&postcount=1">forum
+                                                                                                            post</a>.
+
+    <p><b>Issues</b> <br/> None.
+</li>
+
+<!-- LineStringTest.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/LineStringTest.kml">LineStringTest.kml</a>
+
+    <p><b>Expected Result</b> <br/> Displays six lines with different properties: white tessellated path, white
+                                    non-tesselated path, yellow extruded path, pink non-extruded path, red/blue extruded
+                                    path, black non-extruded path. Yellow and pink paths are absolute altitude mode, red
+                                    and black paths are relative to ground. Yellow and black paths should be at constant
+                                    altitude, red and black paths should stay a fixed distance above terrain.
+
+    <p><b>Source</b> <br/> WWJ <a href="http://forum.worldwindcentral.com/showthread.php?p=83064#post83064">forum
+                                                                                                            post</a>.
+
+    <p><b>Issues</b> <br/> Non-tessellated path is rendered tessellated. See <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-295">WWJINT-295</a>.
+</li>
+
+<!-- NetworkLink_WithURL.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/NetworkLink_WithURL.kml">NetworkLink_WithURL.kml</a>
+
+    <p><b>Expected Result</b> <br/> Nothing displays by default. Clicking the "NWS Watch and Warning..." folder in the
+                                    KML tree displays a screen balloon describing the data. Clicking any of the
+                                    "SPC...Outlook" folders displays features on the map.
+
+    <p><b>Source</b> <br/> WWJ <a href="http://forum.worldwindcentral.com/showpost.php?p=85567&postcount=1">forum
+                                                                                                            post</a>.
+
+    <p><b>Issues</b> <br/> - Network links using the deprecated URL element do not work: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-289">WWJINT-289</a>.
+</li>
+
+<!-- NetworkLinksLocal.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/NetworkLinksLocal.kmz">NetworkLinksLocal.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Displays a KML icon placemark, a red surface polygon, a green extruded polygon, a
+                                    rotated ground overlay, and a building icon placemark. Clicking the link in the KML
+                                    icon placemark's balloon loads a ground overlay in Sicily.
+
+    <p><b>Source</b> <br/> WWJ development team.
+
+    <p><b>Issues</b> <br/> KML files embedded in a KMZ and loaded via NetworkLink cannot access KMZ resources: <a
+            href="http://issues.worldwind.arc.nasa.gov/jira/browse/WWJINT-292">WWJINT-292</a>. NetworkLinksLocal.kmz was
+                           modified to use standard KML network link patterns after resolving WWJINT-292 as Won't Fix.
+</li>
+
+<!-- NetworkLinksRemote.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/NetworkLinksRemote.kml">NetworkLinksRemote.kml</a>
+
+    <p><b>Expected Result</b> <br/>Upon loading, the view flys to the Google campus in Mountain View, CA. A point
+                                   placemark with no icon displays at (0,0).
+
+    <p><b>Source</b> <br/> WWJ development team.
+
+    <p><b>Issues</b> <br/> None.
+</li>
+
+<!-- NoCal_GeoES_LiDAR_hs.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/NoCal_GeoES_LiDAR_hs.kmz">NoCal_GeoES_LiDAR_hs.kmz</a>
+
+    <p><b>Source</b> <br/> <a href="http://earthquake.usgs.gov/learn/kml.php">USGS</a>.
+
+    <p><b>Issues</b> <br/> This file currently does not work in WW due to a bug in KMLSurfaceImageImpl: WWJINT-281.
+</li>
+
+<!-- Oil_Spills_nw.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Oil_Spills_nw.kmz">Oil_Spills_nw.kmz</a>
+
+    <p><b>Expected Result</b> <br/>Placemarks appear around the globe to mark oil spills. Each placemark is accompanied
+                                   by an extruded circle. Clicking on the placemarks brings up info balloons with data
+                                   about the spill.
+
+    <p><b>Source</b> <br/> <a href="http://earth.tryse.net/">http://earth.tryse.net/</a>
+
+    <p><b>Issues</b> <br/> Labels should be transparent, but draw in black.
+
+    <p><b>Performance</b> <br/> GE: 55 fps, WW: 30 fps (Mac OS, 2 Ghz Core2 duo, Nvidia GeForce 9400)
+</li>
+
+<!-- OMAR_Last_10_Images_For_View.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/OMAR_Last_10_Images_For_View.kml">OMAR_Last_10_Images_For_View.kml</a>
+
+    <p><b>Expected Result</b> <br/> This file should display nothing until we provide support for NetworkLink refresh
+                                    and query parameters.
+
+    <p><b>Source</b> <br/> STL.
+
+    <p><b>Issues</b> <br/> None.
+</li>
+
+<!-- plateboundaries.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/plateboundaries.kmz">plateboundaries.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Displays multi-colored lines outlining each tectonic plate on Earth. An arrow and a
+                                    placemark on each plate boundary visualizes the plate's velocity.
+
+    <p><b>Source</b> <br/>USGS <a href="http://earthquake.usgs.gov/regional/nca/virtualtour/kml/">Earthquake Hazards
+                                                                                                  Program.</a> <br/> WWJ
+        <a href="http://forum.worldwindcentral.com/showpost.php?p=82081&postcount=3">forum post</a>.
+
+    <p><b>Issues</b> <br/> None.
+
+    <p><b>Performance</b> <br/> GE: 60 fps, WW: 40 fps (Mac OS, 3GHz Quad i7, ATI Radeon HD 5750).
+</li>
+
+<!-- Qfaults2008.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Qfaults2008.kmz">Qfaults2008.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Displays multi-colored lines indicating surface faults in California.
+
+    <p><b>Source</b> <br/> WWJ <a href="http://forum.worldwindcentral.com/showpost.php?p=82123&postcount=1">forum
+                                                                                                            post</a>.
+
+    <p><b>Issues</b> <br/> WW frame rate is much lower than GE: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-283">WWJINT-283</a>.
+
+    <p><b>Performance</b> <br/> GE: 30 fps, WW: 5 fps (Mac OS, 3GHz Quad i7, ATI Radeon HD 5750).
+</li>
+
+<!-- quads.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/quads.kmz">quads.kmz</a>
+
+    <p><b>Expected Result</b> <br/> a grid is drawn of the San Francisco area. A placemark appears in the center of each
+                                    cell. Clicking the placemark brings up a balloon with links to other KMZ files. For
+                                    example, clicking the "Earthquakes" link loads point placemarks to indicates
+                                    earthquakes that occurred in that grid cell.
+
+    <p><b>Issues</b> <br/> Broken image links in balloons.
+</li>
+
+<!-- real.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/real.kmz">real.kmz</a>
+
+    <p><b>Expected Result</b> <br/> colored dots appear all over the US to indicate stream flow data. A legend loads at
+                                    the top of the screen.
+
+    <p><b>Source</b> <br/> <a href="http://www.srh.noaa.gov/gis/kml/">http://www.srh.noaa.gov/gis/kml/</a>
+
+    <p><b>Issues</b> <br/> None.
+
+    <p><b>Performance</b> <br/> GE: 7 fps, WW: 5 fps (Mac OS, 2 Ghz Core2 duo, Nvidia GeForce 9400)
+</li>
+
+<!-- Santa_Cruz_County.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Santa_Cruz_County.kmz">Santa_Cruz_County.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Lines and polygons draw to show the geology of Santa Cruz county.
+
+    <p><b>Source</b> <br/> <a href="http://earthquake.usgs.gov/learn/kml.php">USGS</a>.
+
+    <p><b>Issues</b> <br/> WW frame rate is much lower than GE: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-283">WWJINT-283</a>.
+
+    <p><b>Performance</b> <br/> GE: 25 fps, WW: 4 fps (Mac OS, 2 Ghz Core2 duo, Nvidia GeForce 9400)
+</li>
+
+<!-- Sarawak_dams_nw.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Sarawak_dams_nw.kmz">Sarawak_dams_nw.kmz</a>
+
+    <p><b>Expected Result</b> <br/>A map is overlayed over Borneo showing a proposed dam project. The map should be
+                                   rotated to match the coastline, and semi-transparent. Placemarks appear over the map.
+                                   Clicking the placemarks brings up info balloons.
+
+    <p><b>Issues</b> <br/> Map is not rotated to match coastline, and map is fully opaque. (Should be semi-transparent.)
+</li>
+
+<!-- SihhiyeBinalar.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/SihhiyeBinalar.kmz">SihhiyeBinalar.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Upon loading, the view flys to Ankara, Turkey. Displays extruded polygons colored
+                                    orange and brown in a rectangular region.
+
+    <p><b>Source</b> <br/> WWJ <a href="http://forum.worldwindcentral.com/showpost.php?p=85815&postcount=6">forum
+                                                                                                            post</a>.
+
+    <p><b>Issues</b> <br/> WW frame rate is much lower than GE: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-283">WWJINT-283</a>. <br/> - Difference between GE
+                           and WW: GE draws some polygons in a brown material, WW draws all polygons in a yellow
+                           material. This is likely a bug in GE, because the KML file defines only one polygon style.
+
+    <p><b>Performance</b> <br/> GE: 60 fps, WW: 6 fps (Mac OS, 3GHz Quad i7, ATI Radeon HD 5750).
+</li>
+
+<!-- snotelwithlabels.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/snotelwithlabels.kmz">snotelwithlabels.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Colored dots appear over the US to indicate snowfall.
+
+    <p><b>Source</b> <br/> <a href="http://www.srh.noaa.gov/gis/kml/">http://www.srh.noaa.gov/gis/kml/</a>
+
+    <p><b>Issues</b> <br/> GE draws smaller icons than WW. Not sure if it's a bug or just a difference.
+</li>
+
+<!-- Sumatran_Forest.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Sumatran_Forest.kml">Sumatran_Forest.kml</a>
+
+    <p><b>Expected Result</b> <br/> Upon loading, the view flys to Sumatra. Displays a legend as a screen image in the
+                                    lower left corner. Displays green and red surface polygons visualizing
+                                    deforestation. Transparent surface polygons visualize reserve areas. Clicking any
+                                    point placemark with a tree icon displays a table of data about that region.
+
+    <p>
+        Note: This file should display nothing until we provide support for Region and LOD.
+
+    <p><b>Source</b> <br/> <a href="http://www.sumatranforest.org/sumatranWide.php">Sumatranforest.org</a>. <br/> WWJ <a
+            href="http://forum.worldwindcentral.com/showpost.php?p=84464&postcount=1">forum post</a>.
+
+    <p><b>Issues</b> <br/> None.
+</li>
+
+<!-- US_MEXICO_Border.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/US_MEXICO_Border.kmz">US_MEXICO_Border.kmz</a>
+
+    <p><b>Expected Result</b> <br/> This file should display nothing until we provide support for NetworkLink refresh
+                                    and query parameters.
+
+    <p><b>Source</b> <br/> STL.
+
+    <p><b>Issues</b> <br/> None.
+</li>
+
+<!-- USGS_EDC_High_Res_Ortho.kml -->
+<li>
+
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/USGS_EDC_High_Res_Ortho.kml">USGS_EDC_High_Res_Ortho.kml</a>
+
+    <p><b>Expected Result</b> <br/> This file should display nothing until we provide support for NetworkLink refresh
+                                    and query parameters.
+
+    <p><b>Source</b> <br/> STL.
+
+    <p><b>Issues</b> <br/> None.
+</li>
+
+<!-- USGS_EDC_Ortho_NAIP.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/USGS_EDC_Ortho_NAIP.kml">USGS_EDC_Ortho_NAIP.kml</a>
+
+    <p><b>Expected Result</b> <br/> This file should display nothing until we provide support for NetworkLink refresh
+                                    and query parameters.
+
+    <p><b>Source</b> <br/> STL.
+
+    <p><b>Issues</b> <br/> None.
+</li>
+
+<!-- VeryManySurfacePolygons.kml -->
+<li>
+
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/VeryManySurfacePolygons.kml">VeryManySurfacePolygons.kml</a>
+
+    <p><b>Expected Result</b> <br/> Displays 10,000 surface polygons randomly distributed around the globe.
+
+    <p><b>Source</b> <br/> WWJ development team.
+
+    <p><b>Issues</b> <br/> GE: 15 fps, WW: 40 fps (Mac OS, 3GHz Quad i7, ATI Radeon HD 5750).
+</li>
+
+<!-- wind.kmz -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/wind.kmz">wind.kmz</a>
+
+    <p><b>Expected Result</b> <br/> Displays gray, green, light green, and yellow point placemarks with an arrow image
+                                    indicating wind direction. The placemarks maintain a heading relative to the globe
+                                    but always face the view. Clicking a placemark displays a balloon with a table of
+                                    information about that data point.
+
+    <p><b>Source</b> <br/> Unknown.
+
+    <p><b>Issues</b> <br/> - Difference between GE and WW: GE interprets icon heading relative to the globe, WW
+                           interprets icon heading relative to the screen. <br/> - The balloon style's background color
+                           is not applied: <a
+                href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-293">WWJINT-293</a>. <br/> - The balloon's
+                           default size is too small <a href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-294">WWJINT-294</a>.
+
+    <p><b>Performance</b> <br/> GE: 50 fps, WW: 15 fps (Mac OS, 3GHz Quad i7, ATI Radeon HD 5750).
+</li>
+
+<!-- yellowstone_notable.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/yellowstone_notable.kml">yellowstone_notable.kml</a>
+
+    <p><b>Expected Result</b> <br/> Displays a balloon containing HTML formatting, an image, and a link to the USGS
+                                    Yellowstone Volcano Observatory.
+
+    <p><b>Source</b> <br/> <a href="http://ge.images.alaska.edu/workshop/advanced.htm">University of Alaska Fairbanks,
+                                                                                       Arctic Region Supercomputing
+                                                                                       Center (ARSC)</a>.
+
+    <p><b>Issues</b> <br/> - The balloon style's background color is not applied: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-293">WWJINT-293</a>. <br/> - The balloon's default
+                           size is too small <a
+                href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-294">WWJINT-294</a>.
+</li>
+
+<!-- yellowstone_table.kml -->
+<li>
+    <a href="http://wwdev.tomgaskins.net/KMLTestFiles/yellowstone_table.kml">yellowstone_table.kml</a>
+
+    <p><b>Expected Result</b> <br/> Displays a balloon containing HTML formatting, an image, a table of information
+                                    about Yellowstone, a link to the USGS Yellowstone Volcano Observatory, and a link to
+                                    the USGS Volcano Hazards Program.
+
+    <p><b>Source</b> <br/> <a href="http://ge.images.alaska.edu/workshop/advanced.htm">University of Alaska Fairbanks,
+                                                                                       Arctic Region Supercomputing
+                                                                                       Center (ARSC)</a>.
+
+    <p><b>Issues</b> <br/> - The balloon style's background color is not applied: <a
+            href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-293">WWJINT-293</a>. <br/> - The balloon's default
+                           size is too small <a
+                href="http://issues.worldwind.arc.nasa.gov/browse/WWJINT-294">WWJINT-294</a>.
+</li>
+
+<!-- macky-normal.kml -->
+<li>
+    <a href="http://kml-samples.googlecode.com/svn/trunk/kml/Model/ResourceMap/macky-normal.kml">macky-normal.kml</a>
+
+    <p><b>Expected Result</b> <br/> COLLADA model of Macky auditorium at CU Boulder.
+
+    <p><b>Source</b> <br/> Google KML samples</p>
+</li>
+
+<!-- macky-nl.kml -->
+<li>
+    <a href="http://kml-samples.googlecode.com/svn/trunk/kml/Model/ResourceMap/macky-normal.kmz">macky-normal.kmz</a>
+
+    <p><b>Expected Result</b> <br/> COLLADA model of Macky auditorium at CU Boulder (same as above).
+
+    <p><b>Source</b> <br/> Google KML samples</p>
+</li>
+
+<!-- macky-nl.kml -->
+<li>
+    <a href="http://kml-samples.googlecode.com/svn/trunk/kml/Model/ResourceMap/macky-nl.kml">macky-nl.kml</a>
+
+    <p><b>Expected Result</b> <br/> COLLADA model of Macky auditorium at CU Boulder (same as above).
+
+    <p><b>Source</b> <br/> Google KML samples</p>
+</li>
+
+<!-- macky-alt.kml -->
+<li>
+    <a href="http://kml-samples.googlecode.com/svn/trunk/kml/Model/ResourceMap/macky-alt.kml">macky-alt.kml</a>
+
+    <p><b>Expected Result</b> <br/> COLLADA model of Macky auditorium at CU Boulder, with alternative textures applied.
+                                    the walls should have a greenish, fabric texture.
+
+    <p><b>Source</b> <br/> Google KML samples</p>
+</li>
+
+<!-- macky-alt.kmz -->
+<li>
+    <a href="http://kml-samples.googlecode.com/svn/trunk/kml/Model/ResourceMap/macky-alt.kmz">macky-alt.kmz</a>
+
+    <p><b>Expected Result</b> <br/> COLLADA model of Macky auditorium at CU Boulder, with alternative textures applie
+                                    (same as above).
+
+    <p><b>Source</b> <br/> Google KML samples</p>
+</li>
+
+<!-- tower bridge -->
+<li>
+    <a href="http://sketchup.google.com/3dwarehouse/download?mid=74544132a520acd4af304f2ecb647df&rtyp=ks&fn=Tower03_sketchup&ctyp=other&prevstart=0&ts=1202486826000">tower
+                                                                                                                                                                      bridge</a>
+
+    <p><b>Expected Result</b> <br/> COLLADA model of the Tower Bridge in London.
+
+    <p><b>Source</b> <br/> Trimble 3D Warehouse</p>
+</li>
+
+</ol>
+
+</body>
+</html>

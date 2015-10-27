@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ScreenOverlay samples from Interactive KML sampler -->
+<!-- $Id: ScreenOverlay.kml 13795 2010-09-14 22:21:19Z pabercrombie $ -->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+
+  <ScreenOverlay>
+    <name>Absolute Positioning: Top left</name>
+    <visibility>1</visibility>
+    <Icon>
+      <href>http://kml-samples.googlecode.com/svn/trunk/resources/top_left.jpg</href>
+    </Icon>
+    <overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+    <screenXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+    <rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+    <size x="0" y="0" xunits="fraction" yunits="fraction"/>
+  </ScreenOverlay>
+
+    <ScreenOverlay>
+    <name>Simple crosshairs</name>
+    <visibility>1</visibility>
+    <description>This screen overlay uses fractional positioning to put the
+          image in the exact center of the screen</description>
+    <Icon>
+      <href>http://kml-samples.googlecode.com/svn/trunk/resources/crosshairs.png</href>
+    </Icon>
+    <overlayXY x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
+    <screenXY x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
+    <rotationXY x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
+    <size x="0" y="0" xunits="pixels" yunits="pixels"/>
+  </ScreenOverlay>
+
+    <ScreenOverlay>
+    <name>Dynamic Positioning: Right of screen</name>
+    <visibility>1</visibility>
+    <Icon>
+      <href>http://kml-samples.googlecode.com/svn/trunk/resources/dynamic_right.jpg</href>
+    </Icon>
+    <overlayXY x="1" y="1" xunits="fraction" yunits="fraction"/>
+    <screenXY x="1" y="1" xunits="fraction" yunits="fraction"/>
+    <rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+    <size x="0" y="1" xunits="fraction" yunits="fraction"/>
+  </ScreenOverlay>
+
+ </Document>
+  </kml>

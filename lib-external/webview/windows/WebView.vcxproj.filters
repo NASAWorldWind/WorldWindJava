@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Standard Headers">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{87729271-0e38-4f62-ad4d-5d35925fb41a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dllmain.h">
+      <Filter>Standard Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Standard Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Standard Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="util\MutexLock.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\WinUtil.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLMoniker.h" />
+    <ClInclude Include="AWTEventSupport.h" />
+    <ClInclude Include="NotificationAdapter.h" />
+    <ClInclude Include="WebViewWindow.h" />
+    <ClInclude Include="WindowsWebViewJNI.h" />
+    <ClInclude Include="util\JNIUtil.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\Logging.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkParams.h" />
+    <ClInclude Include="WebViewProtocolFactory.h" />
+    <ClInclude Include="WebViewProtocol.h" />
+    <ClInclude Include="LinkParamCollection.h" />
+    <ClInclude Include="WebResourceResolver.h" />
+    <ClInclude Include="WebViewControl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="util\WinUtil.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="AWTEventSupport.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="HTMLMoniker.cpp" />
+    <ClCompile Include="NotificationAdapter.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="WebViewWindow.cpp" />
+    <ClCompile Include="WindowsWebViewJNI.cpp" />
+    <ClCompile Include="util\JNIUtil.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\Logging.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="WebViewProtocol.cpp" />
+    <ClCompile Include="WebViewProtocolFactory.cpp" />
+    <ClCompile Include="WebResourceResolver.cpp" />
+    <ClCompile Include="WebViewControl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: gdal.jnlp 958 2012-12-05 22:57:10Z dcollins $ -->
+<jnlp codebase="http://worldwind.arc.nasa.gov/java/2.0.0/webstart/"
+      href="gdal.jnlp" version="2.0.0">
+
+    <!--
+        Provides a description of the World Wind GDAL library.
+    -->
+    <information>
+        <title>NASA World Wind Java GDAL</title>
+        <vendor>NASA</vendor>
+        <homepage href="http://worldwind.arc.nasa.gov"/>
+        <description>NASA World Wind Java GDAL</description>
+        <description kind="short">NASA World Wind Java GDAL Bindings, version 2.0.0</description>
+        <offline-allowed/>
+    </information>
+
+    <!--
+        Requests a trusted application environment. The World Wind GDAL library requires access to the local filesystem.
+        All World Wind JAR files are signed with a digital signature associated with NASA.
+    -->
+    <security>
+        <all-permissions/>
+    </security>
+
+    <!--
+        Specifies the resources required by the World Wind GDAL library:
+        * World Wind GDAL JAR file.
+        * World Wind GDAL data JAR file.
+        * World Wind GDAL native libraries.
+    -->
+    <resources>
+        <jar href="gdal.jar"/>
+        <jar href="gdaldata.jar"/>
+    </resources>
+    <resources os="Windows" arch="x86">
+        <nativelib href="gdal-natives-windows-i586.jar"/>
+    </resources>
+    <resources os="Windows" arch="amd64">
+        <nativelib href="gdal-natives-windows-amd64.jar"/>
+    </resources>
+    <resources os="Windows" arch="x86_64">
+        <nativelib href="gdal-natives-windows-amd64.jar"/>
+    </resources>
+    <resources os="SunOS" arch="sparc">
+        <nativelib href="gdal-natives-solaris-sparc.jar"/>
+    </resources>
+    <resources os="SunOS" arch="sparcv9">
+        <nativelib href="gdal-natives-solaris-sparcv9.jar"/>
+    </resources>
+    <resources os="SunOS" arch="x86">
+        <nativelib href="gdal-natives-solaris-i586.jar"/>
+    </resources>
+    <resources os="SunOS" arch="amd64">
+        <nativelib href="gdal-natives-solaris-amd64.jar"/>
+    </resources>
+    <resources os="SunOS" arch="x86_64">
+        <nativelib href="gdal-natives-solaris-amd64.jar"/>
+    </resources>
+    <resources os="Linux" arch="i386">
+        <nativelib href="gdal-natives-linux-i586.jar"/>
+    </resources>
+    <resources os="Linux" arch="x86">
+        <nativelib href="gdal-natives-linux-i586.jar"/>
+    </resources>
+    <resources os="Linux" arch="amd64">
+        <nativelib href="gdal-natives-linux-amd64.jar"/>
+    </resources>
+    <resources os="Linux" arch="x86_64">
+        <nativelib href="gdal-natives-linux-amd64.jar"/>
+    </resources>
+    <resources os="Mac OS X" arch="ppc">
+        <nativelib href="gdal-natives-macosx-ppc.jar"/>
+    </resources>
+    <resources os="Mac OS X" arch="i386">
+        <nativelib href="gdal-natives-macosx-universal.jar"/>
+    </resources>
+    <resources os="Mac OS X" arch="x86_64">
+        <nativelib href="gdal-natives-macosx-universal.jar"/>
+    </resources>
+
+    <!--
+        Indicates that this Java Web Start file describes a component. This element is intentionally left blank, since
+        it is used only as an indicator.
+    -->
+    <component-desc/>
+
+</jnlp>

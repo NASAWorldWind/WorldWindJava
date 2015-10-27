@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: worldwind.xml 2348 2014-09-25 23:35:46Z dcollins $-->
+<!--Default World Wind configuration values-->
+<!--Any of these can be overridden by specifying an application configuration document-->
+<!--An alternate document to this one can also be specified-->
+<!--See the javadoc for the Configuration class for details-->
+<WorldWindConfiguration version="1">
+    <!--The initial layer list can be embedded here or linked as below. To change the set of initial layers,-->
+    <!--modify the file identified by the href or replace the link with your own-->
+    <LayerList href="config/worldwind.layers.xml"/>
+    <!--Most configuration information is defined in attribute-value pairs-->
+    <Property name="gov.nasa.worldwind.avkey.ModelClassName" value="gov.nasa.worldwind.BasicModel"/>
+    <Property name="gov.nasa.worldwind.avkey.GlobeClassName"
+              value="gov.nasa.worldwind.globes.Earth"/>
+    <Property name="gov.nasa.worldwind.avkey.EarthElevationModelConfigFile"
+              value="config/Earth/EarthElevations2.xml"/>
+    <Property name="gov.nasa.worldwind.globes.GeographicProjectionClassName"
+              value="gov.nasa.worldwind.globes.projections.ProjectionEquirectangular"/>
+    <Property name="gov.nasa.worldwind.avkey.InitialLatitude" value="38"/>
+    <Property name="gov.nasa.worldwind.avkey.InitialAltitude" value="19.07e6"/>
+    <Property name="gov.nasa.worldwind.avkey.ViewClassName" value="gov.nasa.worldwind.view.orbit.BasicOrbitView"/>
+    <Property name="gov.nasa.worldwind.avkey.ViewInputHandlerClassName"
+              value="gov.nasa.worldwind.view.orbit.OrbitViewInputHandler"/>
+    <Property name="gov.nasa.worldwind.avkey.InputHandlerClassName" value="gov.nasa.worldwind.awt.AWTInputHandler"/>
+    <Property name="gov.nasa.worldwind.avkey.LoggerName" value="gov.nasa.worldwind"/>
+    <Property name="gov.nasa.worldwind.avkey.WorldWindowClassName"
+              value="gov.nasa.worldwind.WorldWindowGLAutoDrawable"/>
+    <Property name="gov.nasa.worldwind.avkey.ElevationModelFactory"
+              value="gov.nasa.worldwind.terrain.BasicElevationModelFactory"/>
+    <Property name="gov.nasa.worldwind.avkey.LayerFactory" value="gov.nasa.worldwind.layers.BasicLayerFactory"/>
+    <Property name="gov.nasa.worldwind.avkey.ShapefileLayerFactory"
+              value="gov.nasa.worldwind.formats.shapefile.ShapefileLayerFactory"/>
+    <Property name="gov.nasa.worldwind.avkey.WebViewFactory"
+              value="gov.nasa.worldwind.util.webview.BasicWebViewFactory"/>
+    <Property name="gov.nasa.worldwind.avkey.TessellatorClassName"
+              value="gov.nasa.worldwind.terrain.RectangularTessellator"/>
+    <Property name="gov.nasa.worldwind.avkey.MemoryCacheSetClassName"
+              value="gov.nasa.worldwind.cache.BasicMemoryCacheSet"/>
+    <Property name="gov.nasa.worldwind.avkey.SessionCacheClassName" value="gov.nasa.worldwind.cache.BasicSessionCache"/>
+    <Property name="gov.nasa.worldwind.avkey.RetrievalServiceClassName"
+              value="gov.nasa.worldwind.retrieve.BasicRetrievalService"/>
+    <Property name="gov.nasa.worldwind.avkey.SceneControllerClassName"
+              value="gov.nasa.worldwind.StereoOptionSceneController"/>
+    <Property name="gov.nasa.worldwind.avkey.NetworkStatusClassName"
+              value="gov.nasa.worldwind.util.BasicNetworkStatus"/>
+    <Property name="gov.nasa.worldwind.render.PointPlacemarkAttributes.DefaultImagePath"
+              value="images/pushpins/plain-yellow.png"/>
+    <Property name="gov.nasa.worldwind.render.PointPlacemarkAttributes.DefaultLabelFont"
+              value="Arial-BOLD-14"/>
+    <!-- The following lists the sites to test for public network access. Specify an empty string, "", for no sites.-->
+    <!-- Don't specify the property at all to use the default list. -->
+    <Property name="gov.nasa.worldwind.avkey.NetworkStatusTestSites"
+              value="www.nasa.gov, worldwind.arc.nasa.gov, google.com, microsoft.com, yahoo.com"/>
+    <Property name="gov.nasa.worldwind.avkey.TaskServiceClassName" value="gov.nasa.worldwind.util.ThreadedTaskService"/>
+    <Property name="gov.nasa.worldwind.avkey.DataFileStoreClassName"
+              value="gov.nasa.worldwind.cache.BasicDataFileStore"/>
+    <Property name="gov.nasa.worldwind.avkey.DataRasterReaderFactoryClassName"
+              value="gov.nasa.worldwind.data.BasicDataRasterReaderFactory"/>
+    <Property name="gov.nasa.worldwind.avkey.DataFileStoreConfigurationFileName" value="config/DataFileStore.xml"/>
+    <Property name="gov.nasa.worldwind.avkey.WorldMapImagePath" value="images/earth-map-512x256.dds"/>
+    <Property name="gov.nasa.worldwind.StarsLayer.StarsFileName" value="config/Hipparcos_Stars_Mag6x5044.dat"/>
+    <!--The following are tuning parameters for various World Wind internals-->
+    <Property name="gov.nasa.worldwind.avkey.RetrievalPoolSize" value="4"/>
+    <Property name="gov.nasa.worldwind.avkey.RetrievalQueueSize" value="200"/>
+    <Property name="gov.nasa.worldwind.avkey.RetrievalStaleRequestLimit" value="9000"/>
+    <Property name="gov.nasa.worldwind.avkey.TaskPoolSize" value="4"/>
+    <Property name="gov.nasa.worldwind.avkey.TaskQueueSize" value="20"/>
+    <Property name="gov.nasa.worldwind.avkey.ScheduledTaskPoolSize" value="1"/>
+    <Property name="gov.nasa.worldwind.avkey.VerticalExaggeration" value="1"/>
+    <Property name="gov.nasa.worldwind.avkey.URLConnectTimeout" value="8000"/>
+    <Property name="gov.nasa.worldwind.avkey.URLReadTimeout" value="10000"/>
+    <Property name="gov.nasa.worldwind.avkey.TextureCacheSize" value="500000000"/>
+    <Property name="gov.nasa.worldwind.avkey.ElevationTileCacheSize" value="20000000"/>
+    <Property name="gov.nasa.worldwind.avkey.ElevationExtremesLookupCacheSize" value="20000000"/>
+    <Property name="gov.nasa.worldwind.avkey.SectorGeometryCacheSize" value="10000000"/>
+    <Property name="gov.nasa.worldwind.avkey.TextureTileCacheSize" value="10000000"/>
+    <Property name="gov.nasa.worldwind.avkey.PlacenameLayerCacheSize" value="4000000"/>
+    <Property name="gov.nasa.worldwind.avkey.AirspaceGeometryCacheSize" value="32000000"/>
+    <Property name="gov.nasa.worldwind.avkey.VBOUsage" value="true"/>
+    <Property name="gov.nasa.worldwind.avkey.VBOThreshold" value="30"/>
+    <Property name="gov.nasa.worldwind.avkey.OfflineMode" value="false"/>
+    <Property name="gov.nasa.worldwind.avkey.RectangularTessellatorMaxLevel" value="30"/>
+    <Property name="gov.nasa.worldwind.StereoFocusAngle" value="1.6"/>
+    <Property name="gov.nasa.worldwind.avkey.ForceRedrawOnMousePressed" value="f"/>
+    <!-- Here's one way to specify proxy settings -->
+    <!--<Property name="gov.nasa.worldwind.avkey.UrlProxyHost" value="100.215.10.20"/>-->
+    <!--<Property name="gov.nasa.worldwind.avkey.UrlProxyPort" value="8080"/>-->
+    <!--<Property name="gov.nasa.worldwind.avkey.UrlProxyType" value="Proxy.Type.Http"/>-->
+
+    <!-- Location of icons for MIL-STD-2525C symbol set. This can be a URL to a web server, to a local zip or jar archive.
+         See http://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use for more information on how
+         to configure a local symbol repository.
+         Examples: http://myserver.com/milstd2525/   (web server)
+                   jar:file:milstd2525-symbols.zip!  (local zip archive)  -->
+    <Property name="gov.nasa.worldwind.avkey.MilStd2525IconRetrieverPath"
+              value="http://worldwind.arc.nasa.gov/milstd2525c/rev1/"/>
+</WorldWindConfiguration>

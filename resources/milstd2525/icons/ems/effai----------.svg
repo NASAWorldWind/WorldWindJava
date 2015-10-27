@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg3773"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="effai----------.svg">
+  <metadata
+     id="metadata3799">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3797" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1234"
+     inkscape:window-height="823"
+     id="namedview3795"
+     showgrid="false"
+     inkscape:zoom="1.668772"
+     inkscape:cx="204.36371"
+     inkscape:cy="159.07507"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g3775" />
+  <g
+     transform="scale(100) translate(0.74 0.57)"
+     id="g3775">
+    <path
+       style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;stroke-width:4.50000000000000000;stroke-miterlimit:4;stroke-dasharray:4.50000000000000000, 4.50000000000000000;stroke-dashoffset:0"
+       d="M 197 114.65625 C 177.426 114.65625 155.5386 124.85795 145.5 134.34375 C 138.3669 141.08395 134.4162 144.6954 128.75 153.1875 C 126.0255 157.2699 124.9173 160.643 122.5 164.75 C 120.2248 168.616 119.5296 174.5945 117.375 177.8125 C 117.375 181.0775 115.6181 184.35 115.5625 188.5 C 115.5023 192.999 115.125 196.18775 115.125 200.96875 L 115.0625 208.96875 L 116.46875 217.875 L 123.25 217.90625 L 121.375 201.84375 L 121.375 197.40625 C 121.375 177.21025 133.77135 152.7036 144.59375 143.6875 C 158.44415 132.1489 173.67225 120.875 198.78125 120.875 L 201 120.875 C 223.364 120.875 243.7215 131.80565 254.9375 143.03125 C 262.8655 150.96675 265.182 154.7926 271 164.75 C 274.484 170.713 279.28125 185.63275 279.28125 194.71875 L 279.28125 205.40625 C 279.28125 208.93125 277.5 213.00725 277.5 216.53125 L 277.5 217.875 L 284.34375 217.875 L 285.96875 201.84375 L 285.96875 192.5 C 285.96875 188.488 283.42025 179.4355 282.40625 176.0625 C 280.52825 169.8115 279.257 167.0695 276.625 161.8125 C 271.87 152.3133 267.07975 145.7262 259.84375 138.5625 C 248.33975 127.1747 225.94675 114.65625 203.21875 114.65625 L 197 114.65625 z "
+       id="path3777"
+       transform="matrix(0.01,0,0,0.01,-0.74,-0.57)" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:6, 6;stroke-dashoffset:0"
+       d="M 117.375 227.21875 L 117.375 234.3125 L 282.84375 234.3125 L 282.84375 227.21875 L 117.375 227.21875 z "
+       transform="matrix(0.01,0,0,0.01,-0.74,-0.57)"
+       id="polygon3779" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:6, 6;stroke-dashoffset:0"
+       d="M 110.25 242.34375 L 110.25 249.90625 L 290.40625 249.90625 L 290.40625 242.34375 L 110.25 242.34375 z "
+       transform="matrix(0.01,0,0,0.01,-0.74,-0.57)"
+       id="polygon3781" />
+  </g>
+  <ellipse
+     cx="170"
+     cy="165"
+     rx="12"
+     ry="12"
+     style="fill:none;stroke:#ffffff;stroke-width:4.70000000000000018;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:4.70000000000000018, 4.70000000000000018;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     id="ellipse3783" />
+  <ellipse
+     cx="230"
+     cy="165"
+     rx="12"
+     ry="12"
+     style="fill:none;stroke:#ffffff;stroke-width:4.70000000000000018;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:4.70000000000000018, 4.70000000000000018;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     id="ellipse3785" />
+  <line
+     style="stroke:#ffffff;stroke-width:4.70000000000000018;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:4.70000000000000018, 4.70000000000000018;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     x1="170"
+     x2="170"
+     y1="176"
+     y2="216"
+     id="line3787" />
+  <line
+     style="stroke:#ffffff;stroke-width:4.70000000000000018;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:4.70000000000000018, 4.70000000000000018;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     x1="230"
+     x2="230"
+     y1="176"
+     y2="216"
+     id="line3789" />
+  <line
+     style="stroke:#ffffff;stroke-width:4.70000000000000018;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:4.70000000000000018, 4.70000000000000018;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     x1="158"
+     x2="182"
+     y1="190"
+     y2="190"
+     id="line3791" />
+  <line
+     style="stroke:#ffffff;stroke-width:4.70000000000000018;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:4.70000000000000018, 4.70000000000000018;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     x1="218"
+     x2="242"
+     y1="190"
+     y2="190"
+     id="line3793" />
+</svg>

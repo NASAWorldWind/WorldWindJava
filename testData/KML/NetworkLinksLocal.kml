@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinks. -->
+<!--$Id: NetworkLinksLocal.kml 15814 2011-06-29 01:39:28Z pabercrombie $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+
+        <Placemark>
+            <name>Local NetworkLinks</name>
+            <description>Test suite for local NetworkLinks.</description>
+            <Style>
+                Style>
+                <IconStyle>
+                    <Icon>
+                        <href>http://kml-samples.googlecode.com/svn/trunk/resources/ge_icon.jpg</href>
+                    </Icon>
+                </IconStyle>
+                <BalloonStyle>
+                    <text>
+                        <![CDATA[
+                        <h3>$[name]</h3>
+                        $[description]
+                        ]]>
+                    </text>
+                </BalloonStyle>
+            </Style>
+            <Point>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>-90,45,100000</coordinates>
+            </Point>
+        </Placemark>
+
+        <NetworkLink>
+            <name>NetworkLink: local KML file, relative path (NetworkLink01.kml).</name>
+            <Link>
+                <href>NetworkLink01.kml</href>
+            </Link>
+        </NetworkLink>
+
+        <NetworkLink>
+            <name>NetworkLink: local KML file, relative path (NetworkLink02.kml).</name>
+            <Link>
+                <href>NetworkLink02.kml</href>
+            </Link>
+        </NetworkLink>
+
+        <NetworkLink>
+            <name>NetworkLink: local KMZ file, relative path (NetworkLinks03.kmz).</name>
+            <Link>
+                <href>NetworkLink03.kmz</href>
+            </Link>
+        </NetworkLink>
+
+        <NetworkLink>
+            <name>NetworkLink: local KML file, relative path (NetworkLink04.kml).</name>
+            <Link>
+                <href>NetworkLink04.kml</href>
+            </Link>
+        </NetworkLink>
+
+        <NetworkLink>
+            <name>NetworkLink: nested NetworkLink (NetworkLink05.kml links NetworkLinks05_nested.kml).</name>
+            <Link>
+                <href>NetworkLink05.kml</href>
+            </Link>
+        </NetworkLink>
+
+        <NetworkLink>
+            <name>Link to non-KML file</name>
+            <description>This link should log a warning.</description>
+            <Link>
+                <href>icon21.png</href>
+            </Link>
+        </NetworkLink>
+
+    </Document>
+</kml>

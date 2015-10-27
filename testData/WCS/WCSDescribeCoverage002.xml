@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CoverageDescription xmlns="http://www.opengis.net/wcs" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs http://schemas.opengeospatial.net/wcs/1.0.0/describeCoverage.xsd" version="1.0.0">
+<CoverageOffering>
+    <description>elevation/dted0</description>
+    <name>1</name>
+    <label>dted0_1</label>
+    <lonLatEnvelope srsName="WGS84(DD)">
+      <gml:pos dimension="2">-179.99999999999991 -89.999999999999943</gml:pos>
+      <gml:pos dimension="2">180.00000000000003 84.00416666700005</gml:pos>
+    </lonLatEnvelope>
+    <domainSet>
+      <spatialDomain>
+        <gml:Envelope srsName="EPSG:4326">
+          <gml:pos dimension="2">-179.99999999999991 -89.999999999999943</gml:pos>
+          <gml:pos dimension="2">180.00000000000003 84.00416666700005</gml:pos>
+        </gml:Envelope>
+        <gml:RectifiedGrid srsName="EPSG:4326" dimension="2">
+          <gml:limits>
+            <gml:GridEnvelope>
+              <gml:low>0 0</gml:low> 
+              <gml:high>43199 20880</gml:high>
+            </gml:GridEnvelope>
+          </gml:limits>
+          <gml:axisName>Raster_Pixel_Columns(X-axis)</gml:axisName>
+          <gml:axisName>Raster_Pixel_Rows(Y-axis)</gml:axisName>
+          <gml:origin>
+            <gml:pos>-179.99583333333325 84.000000100105098</gml:pos>
+          </gml:origin>
+          <gml:offsetVector>0.0083333333333333315 0</gml:offsetVector>
+          <gml:offsetVector>0 -0.0083331337899046985</gml:offsetVector>
+        </gml:RectifiedGrid>
+      </spatialDomain>
+    </domainSet>
+    <rangeSet>
+      <RangeSet>
+        <name>RangeSet_1</name>
+        <label>dted0_1 RangeSet</label>
+      <axisDescription>
+          <AxisDescription>
+            <name>Band</name>
+            <label>Band Numbers</label>
+            <values>
+              <singleValue>1</singleValue>
+            </values>
+          </AxisDescription>
+      </axisDescription>
+      <nullValues>
+      <singleValue>32767</singleValue>
+      </nullValues>
+      </RangeSet>
+    </rangeSet>
+    <supportedCRSs>
+      <requestResponseCRSs>EPSG:4326</requestResponseCRSs>
+      <nativeCRSs>EPSG:4326</nativeCRSs>
+    </supportedCRSs>
+    <supportedFormats nativeFormat="GeoTIFF">
+  <formats>GeoTIFF</formats>
+  <formats>NITF</formats>
+  <formats>HDF</formats>
+  <formats>JPEG2000</formats>
+    </supportedFormats>
+    <supportedInterpolations default="nearest neighbor">
+      <interpolationMethod>nearest neighbor</interpolationMethod>
+      <interpolationMethod>bilinear</interpolationMethod>
+      <interpolationMethod>bicubic</interpolationMethod>
+    </supportedInterpolations>
+</CoverageOffering>
+</CoverageDescription>

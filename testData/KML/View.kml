@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--$Id: View.kml 14519 2011-01-19 21:13:26Z pabercrombie $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+
+    <Document>
+        <Placemark>
+            <name>Treasure Island (Look At)</name>
+            <LookAt>
+                <longitude>-122.363</longitude>
+                <latitude>37.81</latitude>
+                <altitude>2000</altitude>
+
+                <heading>0</heading>
+                <tilt>45</tilt>
+                <range>500</range>
+
+                <altitudeMode>relativeToGround</altitudeMode>
+            </LookAt>
+            <Point>
+                <coordinates>-122.363,37.82,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <Placemark>
+            <name>Machu Picchu, Peru (LookAt)</name>
+            <LookAt>
+                <longitude>-72.503364</longitude>
+                <latitude>-13.209676</latitude>
+                <altitude>0</altitude>
+                <heading>71.131493</heading>
+                <tilt>66.768762</tilt>
+                <range>14794.882995</range>
+            </LookAt>
+            <styleUrl>#msn_icon12</styleUrl>
+            <Point>
+                <coordinates>-72.516244,-13.162806,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <Placemark>
+            <name>Golden Gate Bridge (Camera)</name>
+            <Camera>
+              <longitude>-122.4790</longitude>
+              <latitude>37.8110</latitude>
+              <altitude>127</altitude>
+              <heading>18.0</heading>
+              <tilt>85</tilt>
+              <altitudeMode>absolute</altitudeMode>
+            </Camera>
+        </Placemark>
+
+        <Placemark>
+          <name>Golden Gate Bridge, looking east (Camera)</name>
+          <Camera>
+            <longitude>-122.4783</longitude>
+            <latitude>37.8120</latitude>
+            <altitude>100</altitude>
+            <heading>90</heading>
+            <!-- east -->
+            <tilt>90</tilt>
+            <!-- level -->
+            <altitudeMode>absolute</altitudeMode>
+          </Camera>
+        </Placemark>
+
+        <Placemark>
+            <name>Mt. Whitney (LookAt)</name>
+            <LookAt>
+                <longitude>-118.2928444763039</longitude>
+                <latitude>36.57944945465359</latitude>
+                <altitude>0</altitude>
+                <heading>-45</heading>
+                <tilt>45</tilt>
+                <range>1000</range>
+                <altitudeMode>clampToGround</altitudeMode>
+            </LookAt>
+            <Point>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>-118.2928444763039,36.57944945465359,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <Placemark>
+            <name>Mt. Rainier (Camera)</name>
+            <Camera>
+                <longitude>-121.7677354918061</longitude>
+                <latitude>46.84571941720705</latitude>
+                <altitude>10</altitude>
+                <heading>-155.0594082107585</heading>
+                <tilt>80</tilt>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Camera>
+        </Placemark>
+
+        <Placemark>
+            <name>Roll left</name>
+            <Camera>
+                <longitude>-122.4783</longitude>
+                <latitude>37.8120</latitude>
+                <altitude>100</altitude>
+                <heading>90</heading>
+                <!-- east -->
+                <tilt>90</tilt>
+                <!-- level -->
+                <roll>45</roll>
+                <altitudeMode>absolute</altitudeMode>
+            </Camera>
+        </Placemark>
+        
+    </Document>
+</kml>
+

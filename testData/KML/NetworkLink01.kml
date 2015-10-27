@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KML document loaded by NetworkLinksLocal.xml. -->
+<!--$Id: NetworkLink01.kml 14652 2011-02-09 20:44:42Z dcollins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Placemark>
+        <name>NetworkLink01</name>
+        <description>Surface polygon, loaded via NetworkLink (NetworkLink01.kml).</description>
+        <Style>
+            <LineStyle>
+                <color>ffffffff</color>
+                <width>3</width>
+            </LineStyle>
+            <PolyStyle>
+                <color>7f0000ff</color>
+            </PolyStyle>
+            <BalloonStyle>
+                <text>
+                    <![CDATA[
+                        <h3>Balloon With Remote Link</h3>
+                        Open <a href="http://worldwind.arc.nasa.gov" target="_blank">World Wind Java</a> website in a new window.
+                        ]]>
+                </text>
+            </BalloonStyle>
+        </Style>
+        <Polygon>
+            <altitudeMode>clampToGround</altitudeMode>
+            <outerBoundaryIs>
+                <LinearRing>
+                    <coordinates>
+                        -120,40 -100,40 -100,50 -120,50 -120,40
+                    </coordinates>
+                </LinearRing>
+            </outerBoundaryIs>
+        </Polygon>
+    </Placemark>
+</kml>

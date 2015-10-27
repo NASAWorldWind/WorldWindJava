@@ -1,0 +1,32 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--
+Illustrates the simplest possible way to embed a World Wind Applet in a web page.
+
+Version: $Id: WWJAppletFullscreen.html 1955 2014-04-22 17:30:33Z dcollins $
+-->
+<html>
+<head>
+    <title>NASA World Wind Java Applet Test Page - Full page</title>
+</head>
+<body style="margin: 0px;">
+
+<!-- Include the World Wind Java Applet example in this page using Java Web Start, Oracle's recommended deployment
+     mechanism. The containing document specifies the Applet attributes that affect its display. The specified Applet
+     parameter jnlp_href defines the Applet's code and its dependencies. This mechanism requires Java 6 update 10 on
+     Windows and Linux, and requires Java 7 on Mac OS X. See the following Oracle document for details on this Applet
+     deployment mechanism:
+     http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/applet/applet_deployment.html -->
+<script src="http://www.java.com/js/deployJava.js"></script>
+<script>
+    var attributes = {width:'100%', height:'100%'};
+    var parameters = {jnlp_href:'WWJAppletMinimal.jnlp'};
+    deployJava.runApplet(attributes, parameters, '1.6'); // runApplet automatically looks for JRE 1.6+
+</script>
+
+</body>
+</html>

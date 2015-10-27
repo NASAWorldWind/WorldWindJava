@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="effamf---------.svg">
+  <metadata
+     id="metadata18">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs16" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview14"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <rect
+     height="25"
+     style="fill:#ffffff;stroke:none"
+     width="34"
+     x="166"
+     y="262"
+     id="rect4" />
+  <path
+     inkscape:connector-curvature="0"
+     d="m 115.5,242.289 c -28.528397,-31.12199 26.641,-36.40099 44,-41.99999 13.876,-4.477 13.567,-16.276 23.5,-23.5 12.984,-9.443 34.969,-1.816 49,-10 11.29,-6.586 23.494,-27.50001 36.5,-29.00001 23.291,-2.688 34.995,33.34101 25,50.00001 -7.7,12.833 -30.139,7.548 -38.5,18 -12.154,15.191 3.345,34.90099 -21.5,41.99999"
+     style="fill:#ffffff;stroke:#000000;stroke-width:4;stroke-dasharray:10"
+     id="path6" />
+  <rect
+     height="22"
+     style="fill:#000000;stroke:#000000;stroke-width:1;stroke-dasharray:10"
+     width="130"
+     x="115"
+     y="241"
+     id="rect8" />
+  <line
+     style="stroke:#000000;stroke-width:6;stroke-dasharray:10"
+     x1="166"
+     x2="166"
+     y1="257"
+     y2="287"
+     id="line10" />
+  <line
+     style="stroke:#000000;stroke-width:6;stroke-dasharray:10"
+     x1="200"
+     x2="200"
+     y1="258"
+     y2="287"
+     id="line12" />
+</svg>

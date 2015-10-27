@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinkControl. -->
+<!--$Id: ChangePoint01D.kml 391 2012-02-17 01:13:45Z tgaskins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <NetworkLinkControl>
+        <Update>
+            <targetHref>ChangePoint01B.kml</targetHref>
+            <Change>
+                <Point targetId="targetPoint">
+                    <coordinates>-112,37</coordinates>
+                </Point>
+            </Change>
+        </Update>
+    </NetworkLinkControl>
+</kml>

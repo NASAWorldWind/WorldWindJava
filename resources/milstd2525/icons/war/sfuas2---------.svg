@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="sfuas2---------.svg">
+  <metadata
+     id="metadata12">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview8"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     style="font-size:75px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:none;font-family:Arial"
+     id="text6">
+    <path
+       inkscape:connector-curvature="0"
+       d="m 159.53369,297 0,-53.68652 17.39502,0 c 6.59177,5e-5 10.88864,0.2686 12.89063,0.80566 3.07613,0.80572 5.65181,2.55742 7.72705,5.25513 2.07515,2.6978 3.11274,6.1829 3.11279,10.45532 -5e-5,3.29593 -0.59819,6.06693 -1.79443,8.31299 -1.19634,2.24612 -2.71611,4.01003 -4.55933,5.29175 -1.8433,1.28176 -3.71708,2.13014 -5.62134,2.54516 -2.58792,0.51272 -6.33548,0.76907 -11.24267,0.76905 l -7.06787,0 0,20.25146 z m 10.83985,-44.60449 0,15.23437 5.93261,0 c 4.27244,3e-5 7.12888,-0.28073 8.56934,-0.84228 1.4404,-0.5615 2.56954,-1.4404 3.38745,-2.63672 0.81784,-1.19626 1.22677,-2.58786 1.22681,-4.17481 -4e-5,-1.95308 -0.57377,-3.56441 -1.7212,-4.83398 -1.14749,-1.26949 -2.60012,-2.06294 -4.35791,-2.38037 -1.29397,-0.2441 -3.89406,-0.36617 -7.80029,-0.36621 z"
+       style="font-size:75px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:none;font-family:Arial"
+       id="path2997" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 242.11426,287.44189 0,9.55811 -36.07178,0 c 0.39062,-3.61328 1.5625,-7.03735 3.51563,-10.27222 1.95311,-3.23485 5.81053,-7.52561 11.57226,-12.87231 4.63865,-4.32126 7.48289,-7.25095 8.53272,-8.78906 1.41598,-2.12399 2.12399,-4.2236 2.12402,-6.29883 -3e-5,-2.29488 -0.61648,-4.0588 -1.84937,-5.29175 -1.23293,-1.23287 -2.93581,-1.84932 -5.10864,-1.84937 -2.14845,5e-5 -3.85744,0.64702 -5.12695,1.94092 -1.26955,1.29399 -2.00197,3.44243 -2.19727,6.44532 l -10.2539,-1.0254 c 0.61034,-5.66401 2.52685,-9.72895 5.74951,-12.19482 3.22264,-2.46577 7.25096,-3.69868 12.08496,-3.69873 5.29782,5e-5 9.46042,1.42828 12.48779,4.28467 3.02731,2.85649 4.54098,6.40873 4.54102,10.65674 -4e-5,2.41702 -0.43339,4.71805 -1.30005,6.90307 -0.86674,2.18509 -2.24003,4.47391 -4.11987,6.86646 -1.24515,1.58694 -3.49124,3.86965 -6.73829,6.84814 -3.24709,2.97853 -5.30397,4.95607 -6.17065,5.93262 -0.86672,0.97657 -1.56862,1.92872 -2.10571,2.85644 z"
+       style="font-size:75px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:none;font-family:Arial"
+       id="path2999" />
+  </g>
+  <polygon
+     points="310,180 260,230 140,230 90,180 140,130 260,130 "
+     style="fill:#ffffff;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 6;stroke-dashoffset:0"
+     id="polygon4" />
+</svg>

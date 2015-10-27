@@ -1,0 +1,203 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--
+Illustrates how to embed a World Wind Applet in a web page and save or restore the current location using Cookies.
+
+Version: $Id: WWJAppletCookie.html 956 2012-12-05 22:43:26Z dcollins $
+-->
+<html>
+<head>
+<title>NASA World Wind Java Applet Test Page - Javascript saved locations with a cookie</title>
+
+<script language="javascript">
+<!--
+// Author: Patrick Murris
+
+var theApplet = null;
+
+function getWWJApplet()
+{
+   if (theApplet == null) {
+      theApplet = document.getElementById('wwjApplet');
+   }
+   return theApplet;
+}
+
+// Applet init, start and stop - called from java at the end of applet init() and start()
+// and at the begining of stop()
+
+function appletInit() {
+}
+
+function appletStart() {
+   // Fly to first location in the list after a delay
+   var locations = document.controlPanel.locations;
+   if(locations.options.length > 0)
+      setTimeout("goto(document.controlPanel.locations.options[0].value)", 1000); // 1 second
+}
+
+function appletStop() {
+}
+
+// Locations select options handling
+
+function goto(locationString) {
+   var params = locationString.split(';');
+   if(params.length == 3)	// Lat/lon
+      getWWJApplet().gotoLatLon(parseFloat(params[1]), parseFloat(params[2]));
+   else if(params.length == 4)	// Lat/lon and zoom
+      getWWJApplet().gotoLatLon(parseFloat(params[1]), parseFloat(params[2]), parseFloat(params[3]), 0, 0);
+   else if(params.length == 5)	// Lat/lon/zoom and heading
+      getWWJApplet().gotoLatLon(parseFloat(params[1]), parseFloat(params[2]), parseFloat(params[3]), parseFloat(params[4]), 0);
+   else if(params.length == 6)	// Lat/lon/zoom/heading and pitch
+      getWWJApplet().gotoLatLon(parseFloat(params[1]), parseFloat(params[2]), parseFloat(params[3]), parseFloat(params[4]), parseFloat(params[5]));
+}
+
+function addLocation() {
+   // Read view states from ww applet
+   var lat = getWWJApplet().getOrbitView().getCenterPosition().getLatitude().degrees;
+   var lon = getWWJApplet().getOrbitView().getCenterPosition().getLongitude().degrees;
+   var zoom = getWWJApplet().getOrbitView().getZoom();
+   var head = getWWJApplet().getOrbitView().getHeading().degrees;
+   var pitch = getWWJApplet().getOrbitView().getPitch().degrees;
+   var name = prompt("Location name :", "New location");
+   if(name != null) {
+      var locationString = name + ';' + lat + ';' + lon + ';' + zoom + ';' + head + ';' + pitch;
+      document.controlPanel.locations.options[document.controlPanel.locations.options.length] = new Option(name,locationString);
+      saveLocations();
+   }
+}
+
+function removeLocation(i) {
+   if(i >= 0 && i < document.controlPanel.locations.options.length) {
+      document.controlPanel.locations.options[i] = null;
+      saveLocations();
+   }
+}
+
+function moveLocation(i, delta) {
+   if(i == -1) return;
+   if( i + delta >= 0 && i + delta < document.controlPanel.locations.options.length) {
+      var locations = document.controlPanel.locations;
+      var temp = new Option(locations.options[i].text, locations.options[i].value);
+      locations.options[i] = new Option(locations.options[i + delta].text, locations.options[i + delta].value);
+      locations.options[i + delta] = temp;
+      locations.selectedIndex = i + delta;
+      saveLocations();
+   }
+}
+
+function saveLocations() {
+   var value = '';
+   var locations = document.controlPanel.locations;
+   for(var i = 0; i < locations.options.length; i++) {
+      value += locations.options[i].value + '|';
+   }
+   if(value.length > 0) value = value.substring(0, value.length - 1);
+   setCookie('NASA_WWJ_Locations', value, 999);
+}
+
+function loadLocations() {
+   var value = getCookie('NASA_WWJ_Locations');
+   if(value != '') {
+      var locationList = value.split('|');
+      var locations = document.controlPanel.locations;
+      locations.options.length = 0;
+      for(var i = 0; i < locationList.length; i++) {
+         var name = locationList[i].split(';')[0];
+         locations.options[i] = new Option(name, locationList[i]);
+      }
+   }
+}
+
+// Cookies
+
+function setCookie(name, value, days) {
+  if(value != "") {
+    var date1 = new Date(); 
+    var date2 = new Date(); 
+    date2.setTime(date1.getTime() + 1000*60*60*24*days);
+    document.cookie = name + '=' + escape(value) + '; expires=' + date2.toGMTString();
+  }
+}
+
+function getCookie(name) {
+  var gato = document.cookie; 
+  i1 = gato.indexOf(name+'=');
+  if(i1 == -1) return "";
+  i2 = gato.indexOf(';', i1);
+  if(i2 == -1) i2 = gato.length;
+  return unescape(gato.substring(i1 + name.length + 1, i2))
+}
+// -->
+</script>
+</head>
+
+<body onLoad="loadLocations()">
+
+<!-- Include the World Wind Java Applet example in this page using Java Web Start, Oracle's recommended deployment
+     mechanism. The containing document specifies the Applet attributes that affect its display and enable
+     Java-to-Javascript communication. The specified Applet parameter jnlp_href defines the Applet's code and its
+     dependencies. This mechanism requires Java 6 update 10 on Windows and Linux, and requires Java 7 on Mac OS X. See
+     the following Oracle document for details on this Applet deployment mechanism:
+     http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/applet/applet_deployment.html -->
+<script src="http://www.java.com/js/deployJava.js"></script>
+<script>
+    var attributes = {id:'wwjApplet', mayscript:'true', width:'100%', height:'70%'};
+    var parameters = {jnlp_href:'WWJApplet.jnlp'};
+    deployJava.runApplet(attributes, parameters, '1.6'); // runApplet automatically looks for JRE 1.6+
+</script>
+
+<form name="controlPanel" id="controlPanel">
+
+<table cellspacing="20"><tr>
+<td valign="top">
+<select name="locations" id="locations" size="8" style="width: 250px" onDblClick="goto(this.options[this.selectedIndex].value);return false;">
+    <option value="Mount St-Helens, USA;46.1956;-122.1911;30000;140;80" selected>Mount St-Helens, USA</option>
+    <option value="Grand Canyon, USA;36.1;-112.1;100000;30;45">Grand Canyon, USA - Overview</option>
+    <option value="Grand Canyon, USA;36.1;-112.0;50000;270;60">Grand Canyon, USA - Close up 1</option>
+    <option value="Grand Canyon, USA;36.2;-112.2;30000;100;75">Grand Canyon, USA - Close up 2</option>
+    <option value="Nice, France;43.705;7.28;25000;30;80">Nice, France</option>
+    <option value="Sydney, Australia;-33.8579;151.2135;30000;0;60">Sydney, Australia</option>
+</select>
+</td>
+<td valign="top">
+<input type="BUTTON" value="&gt; Fly to location" onClick="goto(this.form.locations.options[this.form.locations.selectedIndex].value);"><br />
+<br />
+<input type="BUTTON" value="&lt; Save current location" onClick="addLocation();"><br />
+<br />
+<input type="BUTTON" value="Move up" onClick="moveLocation(this.form.locations.selectedIndex, -1);">
+<input type="BUTTON" value="Move down" onClick="moveLocation(this.form.locations.selectedIndex, 1);"><br />
+<input type="BUTTON" value="x Remove location" onClick="removeLocation(this.form.locations.selectedIndex);"><br />
+<!-- <input type="BUTTON" value="Save" onClick="saveLocations();"> -->
+<!-- <input type="BUTTON" value="Load" onClick="loadLocations();"> -->
+</td>
+<td valign="top">
+Distance:<br /> 
+<!-- This change the eye distance or zoom -->
+<input type="BUTTON" value="10km" onClick="getWWJApplet().setZoom(10000);"><br />
+<input type="BUTTON" value="20km" onClick="getWWJApplet().setZoom(20000);"><br />
+<input type="BUTTON" value="100km" onClick="getWWJApplet().setZoom(100000);"><br />
+<input type="BUTTON" value="500km" onClick="getWWJApplet().setZoom(500000);"><br />
+<input type="BUTTON" value="2000km" onClick="getWWJApplet().setZoom(2000000);"><br />
+</td>
+<td valign="top">
+<!-- This change the heading and pitch-->
+Looking:<br /> 
+<input type="BUTTON" value="North" onClick="getWWJApplet().setHeadingAndPitch(0, 60);"><br />
+<input type="BUTTON" value="East" onClick="getWWJApplet().setHeadingAndPitch(90, 60);"><br />
+<input type="BUTTON" value="South" onClick="getWWJApplet().setHeadingAndPitch(180, 60);"><br />
+<input type="BUTTON" value="West" onClick="getWWJApplet().setHeadingAndPitch(-90, 60);"><br />
+<input type="BUTTON" value="Reset" onClick="getWWJApplet().setHeadingAndPitch(0, 0);"><br />
+</td>
+</tr></table>
+
+</form>
+
+
+</body>
+</html>

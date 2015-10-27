@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="euiaa----------.svg">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="705"
+     inkscape:window-height="480"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="142"
+     inkscape:window-y="93"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="scale(100) translate(0.73 0.72) translate(0.01 0) translate(0.01 0)"
+     id="g4"
+     style="stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0">
+    <path
+       d="M1.16313 1.58838 L1.33982 1.58838 L1.33982 1.2939 L1.9484 1.2939 L1.9484 0.672227     L1.79135 0.672227 L1.79135 1.13685 L1.33982 1.13685 L1.33982 0.868546 C1.33982     0.845081 1.39195 0.837058 1.41415 0.825089 C1.43311 0.814877 1.46765 0.789428     1.4823 0.775444 C1.51974 0.739684 1.56218 0.685503 1.57685 0.627869 C1.61705     0.46994 1.57109 0.364215 1.48221 0.274625 C1.40658 0.198396 1.25118 0.152523     1.12371 0.207447 C1.03355 0.246298 0.914462 0.361187 0.914462 0.482451     L0.914462 0.560983 C0.914462 0.630341 0.961966 0.716353 0.997796 0.752491     C1.02241 0.777325 1.04209 0.79577 1.07361 0.814097 C1.09787 0.828207 1.16313     0.847526 1.16313 0.868546 L1.16313 1.13685 L0.7116 1.13685 L0.7116 0.672227     L0.554545 0.672227 L0.554545 1.2939 L1.16313 1.2939 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="path6" />
+    <polygon
+       points="1.16313,1.58838 0.986445,1.58838 0.986445,2.30167 1.16313,2.30167"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon8" />
+    <polygon
+       points="1.33981,1.58838 1.33981,2.30167 1.5165,2.30167 1.5165,1.58838"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon10" />
+  </g>
+</svg>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- SVG content generated using Symbology Configuration Management System (SCMS) -->
+
+<!-- Systematic Software Engineering Ltd. - www.systematic.co.uk - do not remove  -->
+
+<svg
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    id="G*OPEV----****X"
+    width="310"
+    height="220"
+    viewBox="0 0 310 220"
+    preserveAspectRatio="xMidYMid meet"
+    zoomAndPan="magnify"
+    version="1.1"
+    contentScriptType="application/ecmascript"
+    contentStyleType="text/css"
+    inkscape:version="0.48.2 r9819"
+    sodipodi:docname="g-oaev--------x.svg">
+    <metadata
+        id="metadata19">
+        <rdf:RDF>
+            <cc:Work
+                rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                    rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <defs
+        id="defs17"/>
+    <sodipodi:namedview
+        pagecolor="#ffffff"
+        bordercolor="#666666"
+        borderopacity="1"
+        objecttolerance="10"
+        gridtolerance="10"
+        guidetolerance="10"
+        inkscape:pageopacity="0"
+        inkscape:pageshadow="2"
+        inkscape:window-width="640"
+        inkscape:window-height="480"
+        id="namedview15"
+        showgrid="false"
+        inkscape:zoom="0.59"
+        inkscape:cx="155"
+        inkscape:cy="105"
+        inkscape:window-x="0"
+        inkscape:window-y="0"
+        inkscape:window-maximized="0"
+        inkscape:current-layer="G*OPEV----****X"/>
+    <g
+        id="g3"
+        transform="translate(-45,-85)">
+        <svg
+            viewBox="0 0 400 400"
+            id="_0.G-O-E---------W"
+            width="400"
+            height="400"
+            preserveAspectRatio="xMidYMid meet"
+            zoomAndPan="magnify"
+            version="1.1"
+            contentScriptType="application/ecmascript"
+            contentStyleType="text/css"
+            inkscape:version="0.48.2 r9819">
+            <polyline
+                points="50,300 100,250 150,300 200,250 250,300 300,250 350,300"
+                style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:square;stroke-dasharray:20"
+                id="polyline6"/>
+        </svg>
+    </g>
+    <g
+        id="g8"
+        transform="translate(-45,-85)">
+        <svg
+            viewBox="0 0 400 400"
+            id="_1.G-O-EV--------X"
+            width="400"
+            height="400"
+            preserveAspectRatio="xMidYMid meet"
+            zoomAndPan="magnify"
+            version="1.1"
+            contentScriptType="application/ecmascript"
+            contentStyleType="text/css"
+            inkscape:version="0.48.2 r9819">
+            <polygon
+                points="280,270 250,300 200,250 190,260 120,190 120,110 "
+                style="fill:none;stroke:#ffffff;stroke-width:10;stroke-dasharray:20"
+                id="polygon11"/>
+            <line
+                x1="210"
+                y1="200"
+                x2="320"
+                y2="90"
+                style="fill:none;stroke:#ffffff;stroke-width:10;stroke-dasharray:20"
+                id="line13"/>
+        </svg>
+    </g>
+</svg>

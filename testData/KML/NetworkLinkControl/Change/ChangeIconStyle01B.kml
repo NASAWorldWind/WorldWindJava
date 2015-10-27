@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinkControl. -->
+<!--$Id: ChangeIconStyle01B.kml 391 2012-02-17 01:13:45Z tgaskins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Folder>
+        <Placemark>
+            <Style>
+                <IconStyle id="targetStyle">
+                    <color>a1ff00ff</color>
+                    <scale>1.399999976158142</scale>
+                    <Icon>
+                        <href>http://maps.google.com/mapfiles/kml/paddle/red-stars.png</href>
+                    </Icon>
+                </IconStyle>
+            </Style>
+            <Point>
+                <coordinates>-111,36</coordinates>
+            </Point>
+        </Placemark>
+    </Folder>
+</kml>

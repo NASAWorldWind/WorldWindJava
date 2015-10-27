@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: InitialLayerConfiguration.xml 1958 2014-04-24 19:25:37Z tgaskins $-->
+<!--This document specifies the initial layers to load into the layer manager-->
+<LayerList title="Base Layers">
+    <Layer className="gov.nasa.worldwind.layers.StarsLayer" title="Stars" actuate="onLoad"/>
+    <Layer className="gov.nasa.worldwind.layers.SkyGradientLayer" title="Sky" actuate="onLoad"/>
+    <Layer className="gov.nasa.worldwind.layers.Earth.BMNGOneImage" title="Earth Image" actuate="onLoad"/>
+    <Layer href="config/Earth/BMNGWMSLayer2.xml" title="Blue Marble" actuate="onLoad"/>
+    <Layer href="config/Earth/LandsatI3WMSLayer2.xml" title="Landsat 7 ICube" actuate="onLoad"/>
+    <Layer href="config/Earth/MSVirtualEarthAerialLayer.xml" title="MS Virtual Earth Satellite" actuate="onRequest"/>
+    <Layer className="gov.nasa.worldwind.layers.Earth.NASAWFSPlaceNameLayer" title="Place Names" actuate="onLoad"/>
+</LayerList>

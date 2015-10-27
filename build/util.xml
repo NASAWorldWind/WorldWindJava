@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: util.xml 1688 2013-10-23 18:05:29Z dcollins $ -->
+<project name="util">
+
+    <!-- JAR signing support target. Verifies that a file named 'keystore.properties' is located in the World Wind
+         project root folder, and outputs a warning message otherwise. The result of this verification is stored in the
+         signjar.enabled property. The keystore.properties file must define the following properties:
+            keystore.file
+            keystore.alias
+            keystore.storepass
+            keystore.tsaurl
+        These properties coincide with the jarsigner properties of the same name. -->
+    <target name="signjar.setup" depends="signjar.verify" unless="signjar.enabled">
+        <echo level="info">JAR files will not be signed. The keystore.properties file cannot be found, or does not
+            contain the required properties.
+            (to suppress this message, enable the quiet option: -quiet, -q)
+
+            Follow these instructions to enable JAR file signing:
+
+            1. Create a plain text file named 'keystore.properties' in the World Wind project root folder.
+
+            2. Give the file 'keystore.properties' the following contents:
+            keystore.file=[myKeystore]
+            keystore.alias=[myAlais]
+            keystore.storepass=[myPassword]
+            keystore.tsaurl=[URL for timestamp authority]
+
+            3. If you don't have a keystore, you can create a temporary one as follows (use [myPassword] as the
+            password):
+            keytool -genkey -Keystore ./[myKeystore] -alias [myAlias]
+            keytool -selfcert -Keystore ./[myKeystore] -alias [myAlias]
+
+            For help with keystores or signing JAR files, see
+            http://java.sun.com/j2se/1.5.0/docs/guide/security/SecurityToolsSummary.html
+        </echo>
+    </target>
+
+    <target name="signjar.verify">
+        <copy todir="${basedir}">
+            <fileset dir="${keystore.dir}"/>
+        </copy>
+        <property file="${keystore.properties}"/>
+        <condition property="signjar.enabled">
+            <and>
+                <isset property="keystore.file"/>
+                <isset property="keystore.alias"/>
+                <isset property="keystore.storepass"/>
+                <isset property="keystore.tsaurl"/>
+                <available file="${keystore.file}"/>
+            </and>
+        </condition>
+    </target>
+
+    <!-- Rasterizes a directory heirarchy of SVG image files into PNG image files of a specified width and height. The
+         maxwidth and height parameters define the output images maximum width and fixed height. The width is not
+         explicitly specified in order to maintain the source SVG image's aspect ratio. The destdir parameter specifies
+         an output directory in which to place the rasterized PNG files. Files maintain their relative path in the
+         source and destination directories. The optional force parameter causes this task to overwrite any existing
+         files.
+
+         The optional background parameter controls the background color of the rasterized files. The default is
+         background is transparent. The format of the parameters is "A.R.G.B" where A, R, G, and B are integers in the
+         range 0-255. For example, "255.255.255.255" is opaque white.
+
+         The following example demonstrates basic usage:
+         <rasterize-svgdirs maxwidth="128" height="128" destdir="my/dest/path">
+            <svgdirs>
+                <dirset dir="my/src/path"/>
+            </svgdirs>
+         </rasterize-svgdirs>
+
+         Note: This task depends on the Apache Batik Rasterizer JAR file at build/lib/batik/batik-rasterizer.jar.
+         -->
+    <macrodef name="rasterize-svgdirs">
+        <attribute name="maxwidth"/>
+        <attribute name="height"/>
+        <attribute name="destdir"/>
+        <attribute name="force" default="false"/>
+        <attribute name="background" default="0.0.0.0"/>
+        <element name="svgdirs"/>
+        <sequential>
+            <apply executable="java" dest="@{destdir}" force="@{force}" failonerror="true">
+                <arg value="-jar"/>
+                <arg value="${basedir}/build/lib/batik/batik-rasterizer.jar"/>
+                <arg value="-bg"/>
+                <arg value="@{background}"/>
+                <arg value="-m"/>
+                <arg value="image/png"/>
+                <arg value="-maxw"/>
+                <arg value="@{maxwidth}"/>
+                <arg value="-h"/>
+                <arg value="@{height}"/>
+                <arg value="-d"/>
+                <targetfile/>
+                <svgdirs/>
+                <mapper type="identity"/>
+            </apply>
+        </sequential>
+    </macrodef>
+
+    <!-- Rasterizes SVG image files into PNG images of a specified width and height. The maxwidth and height parameters
+         define the output images maximum width and fixed height. The width is not explicitly specified in order to
+         maintain the source SVG image's aspect ratio. The destdir parameter specifies an output directory in which to
+         place the rasterized PNG files. Files maintain their relative path in the source and  destination directories.
+         The optional force parameter causes this task to overwrite any existing files.
+
+         The following example demonstrates basic usage:
+         <rasterize-svgdirs maxwidth="128" height="128" destdir="my/dest/path">
+            <svgfiles>
+                <fileset dir="my/src/path">
+                    <include name="**/*.svg"/>
+                    <type type="file"/>
+                </fileset>
+            </svgfiles>
+         </rasterize-svgdirs>
+
+         Note: This task depends on the Apache Batik Rasterizer JAR file at build/lib/batik/batik-rasterizer.jar.
+         -->
+    <macrodef name="rasterize-svgfiles">
+        <attribute name="maxwidth"/>
+        <attribute name="height"/>
+        <attribute name="destdir"/>
+        <attribute name="force" default="false"/>
+        <element name="svgfiles"/>
+        <sequential>
+            <apply executable="java" dest="@{destdir}" force="@{force}" failonerror="true">
+                <arg value="-jar"/>
+                <arg value="${basedir}/build/lib/batik/batik-rasterizer.jar"/>
+                <arg value="-m"/>
+                <arg value="image/png"/>
+                <arg value="-maxw"/>
+                <arg value="@{maxwidth}"/>
+                <arg value="-h"/>
+                <arg value="@{height}"/>
+                <arg value="-d"/>
+                <targetfile/>
+                <svgfiles/>
+                <mapper type="glob" from="*.svg" to="*.png"/>
+            </apply>
+        </sequential>
+    </macrodef>
+
+    <!-- Trims transparent borders around image files, and saves the result to the source file. Files are specified by
+         including an <imagefiles> element with an embedded <fileset> element. Supports the following file formats:
+         JPEG, PNG, GIF, BMP and WBMP.
+
+         The following example demonstrates basic usage:
+         <trimimages>
+            <imagefiles>
+                <fileset dir="my/src/path">
+                    <include name="**/*.png"/>
+                    <type type="file"/>
+                </fileset>
+            </imagefiles>
+         </trimimages>
+
+         This task depends on the World World build utility JAR file at build/lib/worldwind-buildutil.jar.
+         -->
+    <macrodef name="trimimages">
+        <attribute name="force" default="false"/>
+        <element name="imagefiles"/>
+        <sequential>
+            <apply executable="java" force="@{force}" failonerror="true" parallel="true" maxparallel="100">
+                <arg value="-cp"/>
+                <arg value="${basedir}/build/lib/worldwind-buildutil.jar"/>
+                <arg value="gov.nasa.worldwindx.buildutil.TrimImage"/>
+                <imagefiles/>
+            </apply>
+        </sequential>
+
+    </macrodef>
+
+    <!-- Compiles all World Wind build utility sources under the 'build/util/src' folder into Java class files under the
+         'build/util/classes' folder. We configure the javac task parameters 'source' and 'target' in order to
+         explicitly control the Java compiler version used to build World Wind classes. Without these parameters, the
+         javac task would use the most recent compiler available on the current machine, and the Java compiler version
+         used to build WorldWind classes would be unpredictable. For this reason, the Apache ANT manual strongly
+         recommends specifying the 'source' and 'target' parameters. See the following link for more detail:
+         http://ant.apache.org/manual/CoreTasks/javac.html
+
+         The Java compiler version used by the javac task is defined by the build parameter 'worldwind.jdk.version'.
+         By default, this parameter is defined in the file 'build/build.properties'. -->
+    <target name="build.util.compile">
+        <mkdir dir="${build.util.classes.dir}"/>
+        <javac srcdir="${build.util.src.dir}"
+               destdir="${build.util.classes.dir}"
+               source="${worldwind.jdk.version}"
+               target="${worldwind.jdk.version}"
+               encoding="UTF-8"
+               fork="true"
+               includeantruntime="false"
+               memoryMaximumSize="512m">
+            <compilerarg value="-Xlint:unchecked"/>
+            <compilerarg value="-Xlint:-options"/>
+        </javac>
+    </target>
+
+    <!-- Builds the World Wind build utility Jar file 'worldwind-buildutil.jar'. Includes all World Wind build utility
+         class files. Excludes files added by Subversion, and files added by the operating system. The resultant Jar
+         file is dependent only on the Java Runtime. -->
+    <target name="build.util.jarfile" depends="build.util.compile">
+        <jar jarfile="${basedir}/build/util/${build.util.jarfile}">
+            <!-- Include the World Wind build package gov.nasa.worldwindx.buildutil. -->
+            <fileset dir="${build.util.classes.dir}">
+                <include name="gov/nasa/worldwindx/buildutil/**/*.class"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+    </target>
+
+    <!-- Extracts the JOGL and GlueGen Jar files to the folder 'jogl-jarfiles'. Each Jar file is extracted to a folder
+         matching the filename without its suffix. This target is used to modify JOGL and GlueGen Jar file manifests in
+         order to deploy these files from the World Wind Java Web Start site. -->
+    <target name="jogl.jarfiles.unpack">
+        <property name="jogl.jarfiles.dir" location="jogl-jarfiles"/>
+        <mkdir dir="${jogl.jarfiles.dir}"/>
+        <unzip src="jogl-all.jar" dest="${jogl.jarfiles.dir}/jogl-all"/>
+        <unzip src="jogl-all-natives-macosx-universal.jar"
+               dest="${jogl.jarfiles.dir}/jogl-all-natives-macosx-universal"/>
+        <unzip src="jogl-all-natives-windows-i586.jar" dest="${jogl.jarfiles.dir}/jogl-all-natives-windows-i586"/>
+        <unzip src="jogl-all-natives-windows-amd64.jar" dest="${jogl.jarfiles.dir}/jogl-all-natives-windows-amd64"/>
+        <unzip src="jogl-all-natives-linux-i586.jar" dest="${jogl.jarfiles.dir}/jogl-all-natives-linux-i586"/>
+        <unzip src="jogl-all-natives-linux-amd64.jar" dest="${jogl.jarfiles.dir}/jogl-all-natives-linux-amd64"/>
+        <unzip src="gluegen-rt.jar" dest="${jogl.jarfiles.dir}/gluegen-rt"/>
+        <unzip src="gluegen-rt-natives-macosx-universal.jar"
+               dest="${jogl.jarfiles.dir}/gluegen-rt-natives-macosx-universal"/>
+        <unzip src="gluegen-rt-natives-windows-i586.jar" dest="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-i586"/>
+        <unzip src="gluegen-rt-natives-windows-amd64.jar" dest="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-amd64"/>
+        <unzip src="gluegen-rt-natives-linux-i586.jar" dest="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-i586"/>
+        <unzip src="gluegen-rt-natives-linux-amd64.jar" dest="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-amd64"/>
+    </target>
+
+    <!-- Creates JOGL and GlueGen Jar files from the contents of the 'jogl-jarfiles' folder. Each Jar file is created
+         from the contents of a folder corresponding to the Jar file's name without its suffix. This target is used to
+         modify JOGL and GlueGen Jar file manifests in order to deploy these files from the World Wind Java Web Start
+         site. -->
+    <target name="jogl.jarfiles.pack">
+        <property name="jogl.jarfiles.dir" location="jogl-jarfiles"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all.jar" basedir="${jogl.jarfiles.dir}/jogl-all" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all.jar" basedir="${jogl.jarfiles.dir}/jogl-all" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all-natives-macosx-universal.jar"
+             basedir="${jogl.jarfiles.dir}/jogl-all-natives-macosx-universal" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all-natives-macosx-universal/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all-natives-windows-i586.jar"
+             basedir="${jogl.jarfiles.dir}/jogl-all-natives-windows-i586" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all-natives-windows-i586/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all-natives-windows-amd64.jar"
+             basedir="${jogl.jarfiles.dir}/jogl-all-natives-windows-amd64" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all-natives-windows-amd64/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all-natives-linux-i586.jar"
+             basedir="${jogl.jarfiles.dir}/jogl-all-natives-linux-i586" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all-natives-linux-i586/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all-natives-linux-amd64.jar"
+             basedir="${jogl.jarfiles.dir}/jogl-all-natives-linux-amd64" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all-natives-linux-amd64/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt.jar" basedir="${jogl.jarfiles.dir}/gluegen-rt"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt-natives-macosx-universal.jar"
+             basedir="${jogl.jarfiles.dir}/gluegen-rt-natives-macosx-universal"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-macosx-universal/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-i586.jar"
+             basedir="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-i586"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-i586/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-amd64.jar"
+             basedir="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-amd64"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-amd64/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-i586.jar"
+             basedir="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-i586"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-i586/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-amd64.jar"
+             basedir="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-amd64"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-amd64/META-INF/MANIFEST.MF"/>
+    </target>
+
+    <!-- Extracts the contents of the GDAL Jar file to the folder 'gdal-jar'. This target is used to modify the contents
+         of the GDAL JAR file, which are currently not under source control. -->
+    <target name="gdal.jarfile.unpack">
+        <property name="gdal.jarfile.dir" location="gdal-jar"/>
+        <mkdir dir="${gdal.jarfile.dir}"/>
+        <unzip src="gdal.jar" dest="${gdal.jarfile.dir}"/>
+    </target>
+
+    <!-- Creates the GDAL Jar file from the contents of the folder 'gdal-jar'. This target is used to modify the
+         contents of the GDAL JAR file, which are currently not under source control. -->
+    <target name="gdal.jarfile.pack">
+        <property name="gdal.jarfile.dir" location="gdal-jar"/>
+        <delete file="gdal.jar"/>
+        <jar destfile="gdal.jar" basedir="${gdal.jarfile.dir}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Extracts the contents of the VPF Symbols Jar file to the folder 'vpf-symbols-jar'. This target is used to
+         modify the contents of the VPF Symbols JAR file, which are currently not under source control. -->
+    <target name="vpf.jarfile.unpack">
+        <property name="vpf.jarfile.dir" location="vpf-symbols-jar"/>
+        <mkdir dir="${vpf.jarfile.dir}"/>
+        <unzip src="vpf-symbols.jar" dest="${vpf.jarfile.dir}"/>
+    </target>
+
+    <!-- Creates the VPF Symbols Jar file from the contents of the folder 'vpf-symbols-jar'. This target is used to
+         modify the contents of the VPF Symbols JAR file, which are currently not under source control. -->
+    <target name="vpf.jarfile.pack">
+        <property name="vpf.jarfile.dir" location="vpf-symbols-jar"/>
+        <delete file="vpf-symbols.jar"/>
+        <jar destfile="vpf-symbols.jar" basedir="${vpf.jarfile.dir}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Builds the WebView native library for the current platform. The native libraries are placed in the World Wind
+         project root folder and overwrite any existing files of the same name.
+
+         On Mac OS X this compiles the Objective-C sources under the folder 'lib-external/webview/macosx' into
+         'libwebview.jnilib', and requires that the XCode and Java development toolkits for Mac are installed.
+
+         On Windows this compiles the C and C++ sources under 'lib-external/webview/windows' into 'WebView32.dll' and
+         'WebView64.dll', and requires that the Microsoft Visual C++ build tools are avialable on the path. -->
+    <target name="webview.libraries">
+        <!-- Build the WebView library on Mac OSX. -->
+        <exec os="Mac OS X" dir="${basedir}/lib-external/webview/macosx" executable="/bin/sh" failonerror="true">
+            <arg value="build.sh"/>
+        </exec>
+        <!-- Build the WebView library on Windows. This target requires that the Microsoft Visual C++ build tools are
+             available on the path. -->
+        <exec osfamily="Windows" dir="${basedir}/lib-external/webview/windows" executable="nmake" failonerror="true">
+            <arg value="clean"/>
+            <arg value="all"/>
+        </exec>
+    </target>
+
+    <!-- Individual clean targets corresponding to each build target above. -->
+    <target name="clean.build.util.classes">
+        <delete dir="${build.util.classes.dir}"/>
+    </target>
+    <target name="clean.build.util.jarfile">
+        <delete file="${basedir}/build/util/${build.util.jarfile}"/>
+    </target>
+    <!-- Main clean target for resource build targets. Removes all files and directories created by all resource build
+         targets. -->
+    <target name="clean.build.util.all" depends="clean.build.util.classes, clean.build.util.jarfile"/>
+
+</project>

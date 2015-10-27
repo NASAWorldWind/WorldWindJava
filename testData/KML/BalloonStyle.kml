@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <name>BalloonStyle.kml</name>
+        <open>1</open>
+
+        <Style id="exampleBalloonStyle">
+            <BalloonStyle>
+                <!-- a background color for the balloon -->
+                <bgColor>ffffffbb</bgColor>
+                <!-- styling of the balloon text -->
+                <text><![CDATA[
+      <b><font color="#CC0000" size="+3">$[name]</font></b>
+      <br/><br/>
+      <font face="Courier">$[description]</font>
+      <br/><br/>
+      Extra text that will appear in the description balloon
+      <br/><br/>
+      <!-- insert the to/from hyperlinks -->
+      $[geDirections]
+      ]]></text>
+            </BalloonStyle>
+        </Style>
+
+        <Style id="exampleBalloonStyleHidden">
+            <BalloonStyle>
+                <!-- styling of the balloon text -->
+                <text><![CDATA[
+      <b><font color="#CC0000" size="+3">$[name]</font></b>
+      <br/><br/>
+      <font face="Courier">$[description]</font>
+      ]]></text>
+                <displayMode>hide</displayMode>
+            </BalloonStyle>
+        </Style>
+
+        <Style id="displayName-value">
+            <BalloonStyle>
+                <text>
+                    <![CDATA[
+          This is $[name]<br/>
+          $[holeNumber/displayName] $[holeNumber]<br/>
+          $[holePar/displayName] $[holePar]<br/>
+          $[holeYardage/displayName] $[holeYardage]
+            ]]>
+                </text>
+                <displayMode>default</displayMode>
+            </BalloonStyle>
+        </Style>
+
+        <Style id="trailhead-balloon-template">
+            <BalloonStyle>
+                <text>
+                    <![CDATA[
+          <h2>My favorite trails!</h2>
+          <br/><br/>
+          The $[TrailHeadType/TrailHeadName/displayName] is <i>$[TrailHeadType/TrailHeadName]</i>.
+          The trail is $[TrailHeadType/TrailLength] miles.         <br/>
+          The climb is $[TrailHeadType/ElevationGain] meters.         <br/><br/>
+        ]]>
+                </text>
+                <displayMode>default</displayMode>
+            </BalloonStyle>
+        </Style>
+
+        <StyleMap id="highlightBalloon">
+            <Pair>
+                <key>normal</key>
+                <Style>
+                    <BalloonStyle>
+                        <text>Roll over this balloon to see the text change</text>
+                    </BalloonStyle>
+                </Style>
+            </Pair>
+            <Pair>
+                <key>highlight</key>
+                <Style>
+                    <BalloonStyle>
+                        <bgColor>ffffffbb</bgColor>
+                        <text>The balloon is now highlighted</text>
+                    </BalloonStyle>
+                </Style>
+            </Pair>
+        </StyleMap>
+
+        <Schema name="TrailHeadType" id="TrailHeadTypeId">
+            <SimpleField type="string" name="TrailHeadName">
+                <displayName><![CDATA[<b>Trail Head Name</b>]]></displayName>
+            </SimpleField>
+            <SimpleField type="double" name="TrailLength">
+                <displayName><![CDATA[<i>The length in miles</i>]]></displayName>
+            </SimpleField>
+            <SimpleField type="int" name="ElevationGain">
+                <displayName><![CDATA[<i>change in altitude</i>]]></displayName>
+            </SimpleField>
+        </Schema>
+
+        <!-- Simple balloon style -->
+        <Placemark>
+            <name>BalloonStyle</name>
+            <description>An example of BalloonStyle</description>
+            <styleUrl>#exampleBalloonStyle</styleUrl>
+            <Point>
+                <coordinates>-122.370533,37.823842,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <Placemark>
+            <name>Hidden balloon</name>
+            <description>The balloon on this placemark is hidden</description>
+            <styleUrl>#exampleBalloonStyleHidden</styleUrl>
+            <Point>
+                <coordinates>-122,37,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <!-- Simple balloon style -->
+        <Placemark>
+            <name>HighlightBalloon</name>
+            <description>An example of a highlight BalloonStyle</description>
+            <styleUrl>#highlightBalloon</styleUrl>
+            <Point>
+                <coordinates>-110.0,23.0,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <!-- Balloon style using extended data -->
+        <Placemark>
+            <name>Club house</name>
+            <styleUrl>#displayName-value</styleUrl>
+            <ExtendedData>
+                <Data name="holeNumber">
+                    <displayName><![CDATA[
+            <b>This is hole </b>
+          ]]></displayName>
+                    <value>1</value>
+                </Data>
+                <Data name="holePar">
+                    <displayName><![CDATA[
+            <i>The par for this hole is </i>
+          ]]></displayName>
+                    <value>4</value>
+                </Data>
+                <Data name="holeYardage">
+                    <displayName><![CDATA[
+            <b><i>The yardage is </i></b>
+          ]]></displayName>
+                    <value>234</value>
+                </Data>
+            </ExtendedData>
+            <Point>
+                <coordinates>-111.956,33.5043</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>By the lake</name>
+            <styleUrl>#displayName-value</styleUrl>
+            <ExtendedData>
+                <Data name="holeNumber">
+                    <displayName><![CDATA[
+            <b>This is hole </b>
+          ]]></displayName>
+                    <value>5</value>
+                </Data>
+                <Data name="holePar">
+                    <displayName><![CDATA[
+            <i>The par for this hole is </i>
+          ]]></displayName>
+                    <value>5</value>
+                </Data>
+                <Data name="holeYardage">
+                    <displayName><![CDATA[
+            <b><i>The yardage is </i></b>
+          ]]></displayName>
+                    <value>523</value>
+                </Data>
+            </ExtendedData>
+            <Point>
+                <coordinates>-111.95,33.5024</coordinates>
+            </Point>
+        </Placemark>
+
+        <!-- Placemarks using typed schema data -->
+        <Placemark>
+            <name>Easy trail</name>
+            <styleUrl>#trailhead-balloon-template</styleUrl>
+            <ExtendedData>
+                <SchemaData schemaUrl="#TrailHeadTypeId">
+                    <SimpleData name="TrailHeadName">Pi in the sky</SimpleData>
+                    <SimpleData name="TrailLength">3.14159</SimpleData>
+                    <SimpleData name="ElevationGain">10</SimpleData>
+                </SchemaData>
+            </ExtendedData>
+            <Point>
+                <coordinates>-122.000,37.002</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Difficult trail</name>
+            <styleUrl>#trailhead-balloon-template</styleUrl>
+            <ExtendedData>
+                <SchemaData schemaUrl="#TrailHeadTypeId">
+                    <SimpleData name="TrailHeadName">Mount Everest</SimpleData>
+                    <SimpleData name="TrailLength">347.45</SimpleData>
+                    <SimpleData name="ElevationGain">10000</SimpleData>
+                </SchemaData>
+            </ExtendedData>
+            <Point>
+                <coordinates>-121.998,37.0078</coordinates>
+            </Point>
+        </Placemark>
+
+        <Placemark>
+            <name>Extended data, default balloon</name>
+            <ExtendedData>
+                <Data name="holeNumber">
+                    <displayName><![CDATA[
+            <b>This is hole </b>
+          ]]></displayName>
+                    <value>5</value>
+                </Data>
+                <Data name="holePar">
+                    <displayName><![CDATA[
+            <i>The par for this hole is </i>
+          ]]></displayName>
+                    <value>5</value>
+                </Data>
+                <Data name="holeYardage">
+                    <value>523</value>
+                </Data>
+            </ExtendedData>
+            <Point>
+                <coordinates>-86,34</coordinates>
+            </Point>
+        </Placemark>
+
+        <Placemark>
+            <name>SchemaData, default balloon</name>
+            <ExtendedData>
+                <SchemaData schemaUrl="#TrailHeadTypeId">
+                    <SimpleData name="TrailHeadName">Pi in the sky</SimpleData>
+                    <SimpleData name="TrailLength">3.14159</SimpleData>
+                    <SimpleData name="ElevationGain">10</SimpleData>
+                </SchemaData>
+            </ExtendedData>
+            <Point>
+                <coordinates>-92,40</coordinates>
+            </Point>
+        </Placemark>
+
+
+        <!-- LineString placemark -->
+        <Placemark>
+            <name>Line String</name>
+            <description>Clamp to ground</description>
+            <styleUrl>#exampleBalloonStyle</styleUrl>
+            <LineString>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    -119,28,10000 -119,35,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+
+        <Placemark>
+            <name>Polygon</name>
+            <description>Default Attributes and properties</description>
+            <styleUrl>#exampleBalloonStyle</styleUrl>
+            <Polygon>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -106,28,3e4 -104,35,3e4 -107,35,3e4 -107,28,3e4 -106,28,3e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+                <innerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -106.4,29,4e4 -106.4,30,4e4 -106.8,29,7e4 -106.4,29,4e4
+                        </coordinates>
+                    </LinearRing>
+                </innerBoundaryIs>
+            </Polygon>
+        </Placemark>
+
+        <Placemark>
+            <name>Extruded Polygon</name>
+            <description>This is an extruded polygon</description>
+            <styleUrl>#exampleBalloonStyle</styleUrl>
+            <Polygon>
+                <extrude>1</extrude>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -102,28,3e4 -100,35,3e4 -103,35,3e4 -103,28,3e4 -102,28,3e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+                <innerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -102.4,29,4e4 -102.4,30,4e4 -102.8,29,7e4 -102.4,29,4e4
+                        </coordinates>
+                    </LinearRing>
+                </innerBoundaryIs>
+            </Polygon>
+        </Placemark>
+
+    </Document>
+</kml>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KML document loaded by NetworkLinksLocal.xml. -->
+<!--$Id: NetworkLink02.kml 14652 2011-02-09 20:44:42Z dcollins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Placemark>
+        <name>NetworkLink02</name>
+        <description>Extruded polygon, loaded via NetworkLink (NetworkLink02.kml).</description>
+        <Style>
+            <LineStyle>
+                <color>ffffffff</color>
+                <width>3</width>
+            </LineStyle>
+            <PolyStyle>
+                <color>7f00ff00</color>
+            </PolyStyle>
+            <BalloonStyle>
+                <text>
+                    <![CDATA[
+                        <h3>Balloon With Local Link</h3>
+                        Load local KML <a href="NetworkLink06.kml">NetworkLink06.kml</a>.
+                        ]]>
+                </text>
+            </BalloonStyle>
+        </Style>
+        <Polygon>
+            <altitudeMode>relativeToGround</altitudeMode>
+            <outerBoundaryIs>
+                <LinearRing>
+                    <coordinates>
+                        -80,40,100000 -60,40,100000 -60,50,100000 -80,50,100000 -80,40,100000
+                    </coordinates>
+                </LinearRing>
+            </outerBoundaryIs>
+        </Polygon>
+    </Placemark>
+</kml>

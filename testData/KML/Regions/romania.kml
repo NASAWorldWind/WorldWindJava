@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <name>Nested Regions</name>
+        <Region>
+            <LatLonAltBox>
+                <north>56.25</north>
+                <south>45</south>
+                <east>33.75</east>
+                <west>22.5</west>
+            </LatLonAltBox>
+            <Lod>
+                <minLodPixels>128</minLodPixels>
+                <maxLodPixels>1024</maxLodPixels>
+            </Lod>
+        </Region>
+        <Placemark>
+            <name>ukraineRegion</name>
+            <LineString>
+                <tessellate>1</tessellate>
+                <coordinates>
+                    22.5,45,0
+                    33.75,45,0
+                    33.75,56.25,0
+                    22.5,56.25,0
+                    22.5,45,0
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <NetworkLink>
+            <name>romania NetworkLink</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>50.625</north>
+                    <south>45</south>
+                    <east>28.125</east>
+                    <west>22.5</west>
+                </LatLonAltBox>
+                <Lod>
+                    <minLodPixels>128</minLodPixels>
+                    <maxLodPixels>1024</maxLodPixels>
+                </Lod>
+            </Region>
+            <Link>
+                <href>romaniaRegion.kml</href>
+                <viewRefreshMode>onRegion</viewRefreshMode>
+            </Link>
+        </NetworkLink>
+    </Document>
+</kml>

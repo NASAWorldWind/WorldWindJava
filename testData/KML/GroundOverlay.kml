@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- $Id: GroundOverlay.kml 15607 2011-06-14 04:28:40Z pabercrombie $ -->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+
+        <!-- Overlay image from KML interactive sampler. Places photo of volcano in Sicily. -->
+        <GroundOverlay>
+            <name>Large-scale overlay on terrain</name>
+            <visibility>1</visibility>
+            <description>Overlay shows Mount Etna erupting on July 13th, 2001.</description>
+            <Icon>
+                <href>http://kml-samples.googlecode.com/svn/trunk/resources/etna.jpg</href>
+            </Icon>
+            <LatLonBox>
+                <north>37.91904192681665</north>
+                <south>37.46543388598137</south>
+                <east>15.35832653742206</east>
+                <west>14.60128369746704</west>
+                <rotation>-0.1556640799496235</rotation>
+            </LatLonBox>
+        </GroundOverlay>
+
+        <!-- Example from OGC KML spec. Places Google logo on Treasure Island in San Francisco. -->
+        <GroundOverlay>
+            <name>Rotated overlay</name>
+            <color>7fffffff</color>
+            <drawOrder>1</drawOrder>
+            <Icon>
+                <href>http://www.google.com/intl/en/images/logo.gif</href>
+            </Icon>
+            <LatLonBox>
+                <north>37.83234</north>
+                <south>37.832122</south>
+                <east>-122.373033</east>
+                <west>-122.373724</west>
+                <rotation>45</rotation>
+            </LatLonBox>
+        </GroundOverlay>
+
+        <GroundOverlay>
+            <name>Overlay without an image</name>
+            <visibility>1</visibility>
+            <color>ff0000ff</color>
+            <LatLonBox>
+                <north>38</north>
+                <south>36</south>
+                <east>-119</east>
+                <west>-120</west>
+                <rotation>45</rotation>
+            </LatLonBox>
+        </GroundOverlay>
+
+    </Document>
+</kml>

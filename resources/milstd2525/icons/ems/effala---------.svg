@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="effala---------.svg">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="54"
+     inkscape:window-y="21"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     style="font-size:95px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 6;stroke-dashoffset:0;font-family:arial"
+     id="text4">
+    <path
+       inkscape:connector-curvature="0"
+       d="m 170.54443,235 -14.93652,0 -5.9375,-15.44678 -27.18262,0 L 116.875,235 l -14.56543,0 26.48682,-68.00293 14.51904,0 z m -25.28076,-26.9043 -9.37012,-25.23437 -9.18457,25.23437 z"
+       style="font-size:95px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 6;stroke-dashoffset:0;font-family:arial"
+       id="path2988" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 193.18115,235 0,-56.49902 -20.17822,0 0,-11.50391 54.04053,0 0,11.50391 -20.13184,0 0,56.49902 z"
+       style="font-size:95px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 6;stroke-dashoffset:0;font-family:arial"
+       id="path2990" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 279.46045,209.99756 13.31299,4.22119 c -2.04108,7.42189 -5.43504,12.93417 -10.18189,16.53687 -4.74695,3.6027 -10.76949,5.40405 -18.06762,5.40405 -9.02998,0 -16.45185,-3.08472 -22.26563,-9.25415 -5.81381,-6.16942 -8.72071,-14.60407 -8.7207,-25.30396 -1e-5,-11.31831 2.92235,-20.10859 8.76709,-26.37085 5.8447,-6.26214 13.52943,-9.39324 23.0542,-9.39331 8.31864,7e-5 15.07563,2.45857 20.27099,7.37549 3.09239,2.90696 5.41172,7.08176 6.95801,12.52441 l -13.59131,3.24707 c -0.80408,-3.52534 -2.48173,-6.30854 -5.03296,-8.3496 -2.55131,-2.04096 -5.65148,-3.06147 -9.30053,-3.06153 -5.04072,6e-5 -9.13048,1.80914 -12.26929,5.42725 -3.13886,3.61821 -4.70827,9.47839 -4.70825,17.58056 -2e-5,8.59704 1.5462,14.72008 4.63867,18.36915 3.09242,3.6491 7.1126,5.47364 12.06055,5.47363 3.64905,1e-5 6.78788,-1.15966 9.4165,-3.47901 2.62853,-2.31932 4.51492,-5.9684 5.65918,-10.94726 z"
+       style="font-size:95px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 6;stroke-dashoffset:0;font-family:arial"
+       id="path2992" />
+  </g>
+</svg>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: KMLViewer.jnlp 1291 2013-04-23 16:16:30Z dcollins $ -->
+<jnlp codebase="http://worldwindserver.net/java/2.0.0/demos/"
+      href="KMLViewer.jnlp">
+
+    <!--
+        Provides a description of this World Wind demo application.
+    -->
+    <information>
+        <title>World Wind KML Viewer</title>
+        <vendor>NASA</vendor>
+        <homepage href="http://goworldwind.org/demos/"/>
+        <offline-allowed/>
+    </information>
+
+    <!--
+        Requests a trusted application environment. The World Wind SDK core library requires access to the network and
+        the local filesystem. All World Wind JAR files are signed with a digital signature associated with NASA.
+    -->
+    <security>
+        <all-permissions/>
+    </security>
+
+    <!--
+        Specifies the resources required by the this World Wind demo application:
+        * Java Runtime Environment version 1.6 or newer, with a maximum heap size of at least 512 MB. The World Wind SDK
+          requires at least 512 MB of heap space. This heap size must be specified in the application's Web Start file.
+        * World Wind extensions Java Web Start component. This downloads and adds the World Wind SDK extensions JAR file
+          and its dependencies ot the class path at runtime.
+    -->
+    <resources>
+        <java version="1.6+" max-heap-size="512m"/>
+        <extension name="worldwindx" href="http://worldwind.arc.nasa.gov/java/2.0.0/webstart/worldwindx.jnlp"/>
+    </resources>
+
+    <!--
+        Indicates that this Java Web Start file describes an application. The main-class element indicates the class
+        who's main method is executed when this Web Start file launches.
+    -->
+    <application-desc main-class="gov.nasa.worldwindx.examples.kml.KMLViewer"/>
+
+</jnlp>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><g transform="translate(155 88) scale(6 5.5)"><path d="M2.051 22.066 C0.684 20.695 0 18.996 0 16.973 C0 15.239 0.646 13.651 1.943 12.205    C3.478 10.568 5.302 9.748 7.416 9.748 C9.287 9.748 10.824 10.279 12.023 11.338    C13.511 12.639 14.255 14.518 14.255 16.973 C14.255 18.996 13.569 20.696 12.202    22.067 C10.835 23.44 9.143 24.126 7.128 24.126 C5.111 24.125 3.418 23.439    2.051 22.066 zM11.295 20.939 C12.432 19.814 13 18.439 13 16.812 C13 15.187    12.432 13.812 11.295 12.687 C10.158 11.562 8.77 11 7.125 11 C5.48 11 4.09 11.563    2.953 12.688 C1.816 13.813 1.25 15.188 1.25 16.813 C1.25 18.44 1.816 19.815    2.953 20.94 C4.09 22.065 5.48 22.626 7.125 22.626 C8.77 22.626 10.158 22.064    11.295 20.939 zM7.488 0 L2.004 5.656 L3.363 7.033 L6.375 3.988 L6.375 9.748    L8.25 9.674 L8.25 3.791 L11.318 7.07 L13 5.572 zM2.305 30.268 L2.305 28.25    L6.375 28.25 L6.375 30.268 zM6.375 22.625 L8.25 22.625 L8.25 11 L6.375 11 zM6.375    40.75 L8.25 40.75 L8.25 24.125 L6.375 24.125 zM8.25 30.34 L8.25 28.25 L12.385    28.25 L12.385 30.27 z" style="fill:rgb(255,255,255)"/></g></svg>

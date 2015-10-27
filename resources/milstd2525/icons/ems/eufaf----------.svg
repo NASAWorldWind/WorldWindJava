@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="eufaf----------.svg">
+  <metadata
+     id="metadata34">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs32" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="705"
+     inkscape:window-height="480"
+     id="namedview30"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="167"
+     inkscape:window-y="96"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="scale(100) translate(0.75 0.7)"
+     id="g4"
+     style="stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0">
+    <path
+       d="M0.613965 0.769417 L1.90342 0.769417 C1.86795 0.744767 1.26133 0.445724 1.25604 0.445724     C1.25138 0.445724 0.633334 0.752578 0.61396 0.769417 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="path6" />
+    <path
+       d="M0.613965 0.769417 C0.633339 0.752578 1.25139 0.445724 1.25604 0.445724 C1.26134     0.445724 1.86796 0.744767 1.90343 0.769417 L0.61397 0.769417 zM0.412323 0.801256     L0.412323 0.81187 C0.412323 0.826201 0.414855 0.8265 0.41763 0.838401 C0.429528     0.841173 0.429827 0.843708 0.444162 0.843708 L2.06793 0.843708 C2.08538     0.843708 2.11038 0.827551 2.11038 0.817173 C2.11038 0.761075 2.06721 0.758653     2.02899 0.739374 C1.9907 0.720055 1.95622 0.702933 1.91935 0.684515 C1.84621     0.647968 1.7733 0.614122 1.69827 0.576598 C1.65492 0.554917 1.26485     0.360822 1.25605 0.360822 C1.24925 0.360822 0.866503 0.552952 0.826227 0.573078     C0.754821 0.60876 0.684601 0.641197 0.61218 0.677421 C0.574695 0.696169     0.543554 0.711725 0.50605 0.730484 C0.476951 0.74504 0.412325 0.763197 0.412325     0.801256 z"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="path8" />
+    <polygon
+       points="1.81322,0.97637 1.86628,0.97637 1.86803,1.08787 1.85037,1.61314 1.81322,1.61314 1.81322,1.70866     2.00956,1.70866 2.00956,1.61314 1.97241,1.61314 1.97431,1.59184     1.95119,1.01351 1.95119,0.97637 2.00956,0.97637 2.00956,0.896772 1.81322,0.896772"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon10" />
+    <polygon
+       points="1.43646,1.42211 1.42585,1.61314 1.39401,1.61314 1.39401,1.70866 1.58504,1.70866 1.58504,1.61314     1.54858,1.61312 1.53198,0.97637 1.58504,0.97637 1.58504,0.896772     1.39401,0.896772 1.39401,0.97637 1.44838,0.976409"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon12" />
+    <polygon
+       points="0.667031,1.61314 0.656417,1.39557 0.645807,0.97637 0.704177,0.97637 0.704177,0.896772     0.502531,0.896772 0.502531,0.97637 0.563311,0.976461 0.539677,1.61314 0.502531,1.61314     0.502531,1.70866 0.704177,1.70866 0.704177,1.61314"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon14" />
+    <polygon
+       points="0.667031,1.61314 0.656417,1.39557"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon16" />
+    <polygon
+       points="1.42585,1.61314 1.43646,1.42211"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon18" />
+    <polygon
+       points="0.985417,1.02943 0.964157,1.59191 0.964189,1.61314 0.927047,1.61314 0.927047,1.70866     1.12339,1.70866 1.12339,1.61314 1.08093,1.61314 1.08093,1.56007 1.06583,1.0294     1.06501,0.97637 1.12339,0.97637 1.12339,0.896772 0.927047,0.896772 0.927047,0.97637     0.985417,0.97637"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon20" />
+    <polygon
+       points="0.465386,1.83601 2.0467,1.83601 2.0467,1.76172 0.465386,1.76172"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon22" />
+    <polygon
+       points="0.412323,1.9952 2.10507,1.9952 2.10507,1.92091 0.412323,1.92091"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon24" />
+    <polygon
+       points="0.667035,1.61313 0.656429,1.39557 0.645799,0.97637 0.704181,0.97637 0.704181,0.89676     0.502524,0.89676 0.502524,0.97637 0.563283,0.976472 0.539673,1.61313 0.502524,1.61313     0.502524,1.70865 0.704181,1.70865 0.704181,1.61313"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon26" />
+    <polygon
+       points="1.43648,1.42211 1.42585,1.61313 1.39402,1.61313 1.39402,1.70865 1.58505,1.70865 1.58505,1.61313     1.54859,1.6131 1.53196,0.97637 1.58505,0.97637 1.58505,0.89676     1.39402,0.89676 1.39402,0.97637 1.44837,0.976429"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="polygon28" />
+  </g>
+</svg>

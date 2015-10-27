@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- SVG content generated using Symbology Configuration Management System (SCMS) -->
+
+<!-- Systematic Software Engineering Ltd. - www.systematic.co.uk - do not remove  -->
+
+<svg
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    id="WO-DHPBA---L---"
+    width="380"
+    height="160"
+    viewBox="0 0 380 160"
+    version="1.1"
+    inkscape:version="0.48.2 r9819"
+    sodipodi:docname="wo-dhpba---l---.svg">
+    <metadata
+        id="metadata37">
+        <rdf:RDF>
+            <cc:Work
+                rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                    rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <defs
+        id="defs35"/>
+    <sodipodi:namedview
+        pagecolor="#ffffff"
+        bordercolor="#666666"
+        borderopacity="1"
+        objecttolerance="10"
+        gridtolerance="10"
+        guidetolerance="10"
+        inkscape:pageopacity="0"
+        inkscape:pageshadow="2"
+        inkscape:window-width="640"
+        inkscape:window-height="480"
+        id="namedview33"
+        showgrid="false"
+        inkscape:zoom="0.59"
+        inkscape:cx="190"
+        inkscape:cy="80"
+        inkscape:window-x="0"
+        inkscape:window-y="0"
+        inkscape:window-maximized="0"
+        inkscape:current-layer="WO-DHPBA---L---"/>
+    <g
+        transform="matrix(0.5,0,0,0.5,140,-20)"
+        id="g3">
+        <svg
+            viewBox="0 0 400 400"
+            id="_0.WOS-HPBA--P----"
+            width="400"
+            height="400"
+            version="1.1"
+            inkscape:version="0.48.2 r9819">
+            <line
+                x1="200"
+                y1="50"
+                x2="200"
+                y2="350"
+                style="fill:none;stroke:#ff00ff;stroke-width:20"
+                id="line6"/>
+            <line
+                x1="75"
+                y1="125"
+                x2="325"
+                y2="125"
+                style="fill:none;stroke:#ff00ff;stroke-width:20"
+                id="line8"/>
+            <path
+                d="m 35,280 c 5,50 165,70 165,70 0,0 160,-20 165,-70"
+                style="fill:none;stroke:#ff00ff;stroke-width:20"
+                id="path10"
+                inkscape:connector-curvature="0"/>
+        </svg>
+    </g>
+    <g
+        transform="translate(-160,-120)"
+        id="g12">
+        <svg
+            viewBox="0 0 400 400"
+            id="_1.WO-DHPBA---L---"
+            width="400"
+            height="400"
+            version="1.1"
+            inkscape:version="0.48.2 r9819">
+            <line
+                x1="165"
+                y1="185"
+                x2="235"
+                y2="185"
+                style="fill:none;stroke:#ff00ff;stroke-width:10"
+                id="line15"/>
+            <path
+                d="m 174,185 c 14,40 38,40 52,0"
+                style="fill:none;stroke:#ff00ff;stroke-width:10"
+                id="path17"
+                inkscape:connector-curvature="0"/>
+        </svg>
+    </g>
+    <g
+        transform="translate(-60,-120)"
+        id="g19">
+        <svg
+            viewBox="0 0 400 400"
+            id="_2.WO-DHPBA---L---"
+            width="400"
+            height="400"
+            version="1.1"
+            inkscape:version="0.48.2 r9819">
+            <line
+                x1="165"
+                y1="185"
+                x2="235"
+                y2="185"
+                style="fill:none;stroke:#ff00ff;stroke-width:10"
+                id="line22"/>
+            <path
+                d="m 174,185 c 14,40 38,40 52,0"
+                style="fill:none;stroke:#ff00ff;stroke-width:10"
+                id="path24"
+                inkscape:connector-curvature="0"/>
+        </svg>
+    </g>
+    <g
+        transform="translate(140,-120)"
+        id="g26">
+        <svg
+            viewBox="0 0 400 400"
+            id="_3.WO-DHPBA---L---"
+            width="400"
+            height="400"
+            version="1.1"
+            inkscape:version="0.48.2 r9819">
+            <line
+                x1="165"
+                y1="185"
+                x2="235"
+                y2="185"
+                style="fill:none;stroke:#ff00ff;stroke-width:10"
+                id="line29"/>
+            <path
+                d="m 174,185 c 14,40 38,40 52,0"
+                style="fill:none;stroke:#ff00ff;stroke-width:10"
+                id="path31"
+                inkscape:connector-curvature="0"/>
+        </svg>
+    </g>
+</svg>

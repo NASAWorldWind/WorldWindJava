@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="ehfai----------.svg">
+  <metadata
+     id="metadata28">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs26" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1230"
+     inkscape:window-height="610"
+     id="namedview24"
+     showgrid="false"
+     inkscape:zoom="1.18"
+     inkscape:cx="75.668182"
+     inkscape:cy="186.353"
+     inkscape:window-x="171"
+     inkscape:window-y="175"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g4" />
+  <g
+     transform="scale(100) translate(0.74 0.57)"
+     id="g4">
+    <path
+       d="M0.433602 1.20826 C0.433602 1.24091 0.416193 1.27335 0.415637 1.31485 C0.415035 1.35984     0.411358 1.39177 0.411358 1.43958 L0.410704 1.51976 L0.424704 1.60863     L0.49246 1.60911 L0.473637 1.44848 L0.473637 1.404 C0.473637 1.20204 0.597846     0.956995 0.70607 0.866834 C0.844574 0.751448 0.99659 0.63885 1.24768 0.63885     L1.26992 0.63885 C1.49356 0.63885 1.69714 0.747913 1.8093 0.860169 C1.88858     0.939524 1.91186 0.977976 1.97004 1.07755 C2.00488 1.13718 2.05286 1.28644     2.05286 1.3773 L2.05286 1.48407 C2.05286 1.51932 2.03507 1.56004 2.03507     1.59528 L2.03507 1.60863 L2.10337 1.60882 L2.11959 1.44848 L2.11959 1.35506     C2.11959 1.31494 2.09414 1.2242 2.084 1.19047 C2.06522 1.12796 2.05246 1.10072     2.02614 1.04815 C1.97859 0.953158 1.93067 0.887248 1.85831 0.815611 C1.74327     0.701733 1.51944 0.576572 1.29216 0.576572 L1.22988 0.576572 C1.03414 0.576572     0.81533 0.678533 0.714944 0.773391 C0.643613 0.840793 0.604145 0.876895     0.547483 0.961816 C0.520238 1.00264 0.509301 1.03633 0.485128 1.0774 C0.462376     1.11606 0.455148 1.17608 0.433602 1.20826 z"
+       style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;stroke-width:0.04100000000000000;stroke-miterlimit:4;stroke-dasharray:0.04100000000000000, 0.04100000000000000;stroke-dashoffset:0"
+       id="path6" />
+    <polygon
+       points="0.433602,1.77322 2.08845,1.77322 2.08845,1.70204 0.433602,1.70204"
+       style="fill:none;stroke:#ffffff;stroke-opacity:1;stroke-width:0.04200000000000000;stroke-miterlimit:4;stroke-dasharray:0.04200000000000000, 0.04200000000000000;stroke-dashoffset:0"
+       id="polygon8" />
+    <polygon
+       points="0.362425,1.92892 2.16407,1.92892 2.16407,1.85329 0.362425,1.85329"
+       style="fill:none;fill-opacity:1;stroke-width:0.04200000000000000;stroke-miterlimit:4;stroke-dasharray:0.04200000000000000, 0.04200000000000000;stroke:#ffffff;stroke-opacity:1;stroke-dashoffset:0"
+       id="polygon10" />
+  </g>
+  <ellipse
+     cx="170"
+     cy="165"
+     rx="12"
+     ry="12"
+     style="fill:none;stroke:#ffffff;stroke-width:5;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:5, 5;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     id="ellipse12" />
+  <ellipse
+     cx="230"
+     cy="165"
+     rx="12"
+     ry="12"
+     style="fill:none;stroke:#ffffff;stroke-width:5;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:5, 5;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     id="ellipse14" />
+  <line
+     style="stroke:#ffffff;stroke-width:5;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:5, 5;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     x1="170"
+     x2="170"
+     y1="176"
+     y2="216"
+     id="line16" />
+  <line
+     style="stroke:#ffffff;stroke-width:5;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:5, 5;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     x1="230"
+     x2="230"
+     y1="176"
+     y2="216"
+     id="line18" />
+  <line
+     style="stroke:#ffffff;stroke-width:5;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:5, 5;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     x1="158"
+     x2="182"
+     y1="190"
+     y2="190"
+     id="line20" />
+  <line
+     style="stroke:#ffffff;stroke-width:5;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:5, 5;stroke-dashoffset:0"
+     transform="matrix(1 0 0 1 0 0)"
+     x1="218"
+     x2="242"
+     y1="190"
+     y2="190"
+     id="line22" />
+</svg>

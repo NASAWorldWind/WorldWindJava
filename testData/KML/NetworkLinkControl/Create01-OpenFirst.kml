@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinkControl. -->
+<!--$Id: Create01-OpenFirst.kml 391 2012-02-17 01:13:45Z tgaskins $-->
+<!--This test creates a default placemark over the US Midwest. See Create01D.kml for the menu and balloon text.-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <NetworkLink>
+        <name>Creating Placemarks example</name>
+        <description>Check the box to see the Placemark</description>
+        <Link>
+            <href>Create01B.kml</href>
+        </Link>
+    </NetworkLink>
+</kml>

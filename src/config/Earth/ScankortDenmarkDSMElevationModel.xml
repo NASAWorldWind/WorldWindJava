@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: ScankortDenmarkDSMElevationModel.xml 1171 2013-02-11 21:45:02Z dcollins $-->
+<ElevationModel version="1">
+    <DisplayName>Scankort Denmark DSM</DisplayName>
+    <Service serviceName="OGC:WMS" version="1.3">
+        <GetCapabilitiesURL>http://data.worldwind.arc.nasa.gov/elev</GetCapabilitiesURL>
+        <GetMapURL>http://data.worldwind.arc.nasa.gov/elev</GetMapURL>
+        <LayerNames>ScankortElevationsDenmarkDSM</LayerNames>
+    </Service>
+    <!-- day month year hours:minutes:seconds timezone -->
+    <LastUpdate>25 06 2009 22:45:32 GMT</LastUpdate>
+    <DataCacheName>Earth/ScankortElevationsDenmarkDSM</DataCacheName>
+    <ImageFormat>application/bil32</ImageFormat>
+    <DataType type="Float32" byteOrder="LittleEndian"/>
+    <FormatSuffix>.bil</FormatSuffix>
+    <ExtremeElevations min="-100" max="1000"/>
+    <DataDetailHint>0.30</DataDetailHint>
+    <NumLevels count="14" numEmpty="9"/>
+    <MissingData signal="-9999"/>
+    <TileOrigin>
+        <LatLon units="degrees" latitude="-90" longitude="-180"/>
+    </TileOrigin>
+    <LevelZeroTileDelta>
+        <LatLon units="degrees" latitude="20" longitude="20"/>
+    </LevelZeroTileDelta>
+    <TileSize>
+        <Dimension width="150" height="150"/>
+    </TileSize>
+    <Sector>
+        <SouthWest>
+            <LatLon units="degrees" latitude="54.3" longitude="8.0"/>
+        </SouthWest>
+        <NorthEast>
+            <LatLon units="degrees" latitude="57.8" longitude="15.6"/>
+        </NorthEast>
+    </Sector>
+</ElevationModel>

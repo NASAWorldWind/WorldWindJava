@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--$Id: WCSCapabilities001.xml 1981 2014-05-08 03:59:04Z tgaskins $-->
+<wcs:Capabilities version="1.1.1" xmlns:wcs="http://www.opengis.net/wcs/1.1.1"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ogc="http://www.opengis.net/ogc"
+                  xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://10.0.1.198:8080/geoserver/schemas/wcs/1.1.1/wcsGetCapabilities.xsd"
+                  updateSequence="99">
+    <ows:ServiceIdentification>
+        <ows:Title>Web Coverage Service</ows:Title>
+        <ows:Abstract>This server implements the WCS specification 1.0 and 1.1.1, it's reference implementation of WCS
+            1.1.1. All layers published by this service are available on WMS also.
+        </ows:Abstract>
+        <ows:Keywords>
+            <ows:Keyword>WCS</ows:Keyword>
+            <ows:Keyword>WMS</ows:Keyword>
+            <ows:Keyword>GEOSERVER</ows:Keyword>
+        </ows:Keywords>
+        <ows:ServiceType>WCS</ows:ServiceType>
+        <ows:ServiceTypeVersion>1.1.0</ows:ServiceTypeVersion>
+        <ows:ServiceTypeVersion>1.1.1</ows:ServiceTypeVersion>
+        <ows:Fees>NONE</ows:Fees>
+        <ows:AccessConstraints>NONE</ows:AccessConstraints>
+    </ows:ServiceIdentification>
+    <ows:ServiceProvider>
+        <ows:ProviderName>The ancient geographes INC</ows:ProviderName>
+        <ows:ProviderSite xlink:href="http://geoserver.org"/>
+        <ows:ServiceContact>
+            <ows:IndividualName>Claudius Ptolomaeus</ows:IndividualName>
+            <ows:PositionName>Chief geographer</ows:PositionName>
+            <ows:ContactInfo>
+                <ows:Phone/>
+                <ows:Address>
+                    <ows:City>Alexandria</ows:City>
+                    <ows:Country>Egypt</ows:Country>
+                    <ows:ElectronicMailAddress>claudius.ptolomaeus@gmail.com</ows:ElectronicMailAddress>
+                </ows:Address>
+                <ows:OnlineResource xlink:href="http://geoserver.org"/>
+            </ows:ContactInfo>
+        </ows:ServiceContact>
+    </ows:ServiceProvider>
+    <ows:OperationsMetadata>
+        <ows:Operation name="GetCapabilities">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://10.0.1.198:8080/geoserver/wcs?"/>
+                </ows:HTTP>
+            </ows:DCP>
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Post xlink:href="http://10.0.1.198:8080/geoserver/wcs?"/>
+                </ows:HTTP>
+            </ows:DCP>
+        </ows:Operation>
+        <ows:Operation name="DescribeCoverage">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://10.0.1.198:8080/geoserver/wcs?"/>
+                </ows:HTTP>
+            </ows:DCP>
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Post xlink:href="http://10.0.1.198:8080/geoserver/wcs?"/>
+                </ows:HTTP>
+            </ows:DCP>
+        </ows:Operation>
+        <ows:Operation name="GetCoverage">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://10.0.1.198:8080/geoserver/wcs?"/>
+                </ows:HTTP>
+            </ows:DCP>
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Post xlink:href="http://10.0.1.198:8080/geoserver/wcs?"/>
+                </ows:HTTP>
+            </ows:DCP>
+            <ows:Parameter name="store">
+                <ows:AllowedValues>
+                    <ows:Value>True</ows:Value>
+                    <ows:Value>False</ows:Value>
+                </ows:AllowedValues>
+            </ows:Parameter>
+        </ows:Operation>
+        <ows:Constraint name="PostEncoding">
+            <ows:AllowedValues>
+                <ows:Value>XML</ows:Value>
+            </ows:AllowedValues>
+        </ows:Constraint>
+    </ows:OperationsMetadata>
+    <wcs:Contents>
+        <wcs:CoverageSummary>
+            <ows:Title>A sample ArcGrid file</ows:Title>
+            <ows:Abstract>Generated from arcGridSample</ows:Abstract>
+            <ows:Keywords>
+                <ows:Keyword>WCS</ows:Keyword>
+                <ows:Keyword>arcGridSample</ows:Keyword>
+                <ows:Keyword>arcGridSample_Coverage</ows:Keyword>
+            </ows:Keywords>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-180.0 -90.0</ows:LowerCorner>
+                <ows:UpperCorner>180.0 90.0</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <wcs:Identifier>Arc_Sample</wcs:Identifier>
+        </wcs:CoverageSummary>
+        <wcs:CoverageSummary>
+            <ows:Title>ASTER</ows:Title>
+            <ows:Abstract>Generated from ImageMosaic</ows:Abstract>
+            <ows:Keywords>
+                <ows:Keyword>WCS</ows:Keyword>
+                <ows:Keyword>ImageMosaic</ows:Keyword>
+                <ows:Keyword>ASTER</ows:Keyword>
+            </ows:Keywords>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-180.0001388888889 -83.0001388888889</ows:LowerCorner>
+                <ows:UpperCorner>180.00013888888887 83.00013888888888</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <wcs:Identifier>aster_v2</wcs:Identifier>
+        </wcs:CoverageSummary>
+        <wcs:CoverageSummary>
+            <ows:Title>FAAChartsCroppedReprojected</ows:Title>
+            <ows:Abstract>Generated from ImageMosaic</ows:Abstract>
+            <ows:Keywords>
+                <ows:Keyword>WCS</ows:Keyword>
+                <ows:Keyword>ImageMosaic</ows:Keyword>
+                <ows:Keyword>FAAChartsCroppedReprojected</ows:Keyword>
+            </ows:Keywords>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-173.4897609604564 50.896520942672375</ows:LowerCorner>
+                <ows:UpperCorner>178.65474058869506 72.33574978977076</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <wcs:Identifier>FAAChartsCroppedReprojected</wcs:Identifier>
+        </wcs:CoverageSummary>
+        <wcs:CoverageSummary>
+            <ows:Title>NASA_SRTM30_900m_Tiled</ows:Title>
+            <ows:Abstract>Generated from ImageMosaic</ows:Abstract>
+            <ows:Keywords>
+                <ows:Keyword>WCS</ows:Keyword>
+                <ows:Keyword>ImageMosaic</ows:Keyword>
+                <ows:Keyword>NASA_SRTM30_900m_Tiled</ows:Keyword>
+            </ows:Keywords>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-180.0 -90.0</ows:LowerCorner>
+                <ows:UpperCorner>180.0 90.0</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <wcs:Identifier>NASA_SRTM30_900m_Tiled</wcs:Identifier>
+        </wcs:CoverageSummary>
+        <wcs:CoverageSummary>
+            <ows:Title>North America sample imagery</ows:Title>
+            <ows:Abstract>A very rough imagery of North America</ows:Abstract>
+            <ows:Keywords>
+                <ows:Keyword>WCS</ows:Keyword>
+                <ows:Keyword>worldImageSample</ows:Keyword>
+                <ows:Keyword>worldImageSample_Coverage</ows:Keyword>
+            </ows:Keywords>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-130.85168 20.7052</ows:LowerCorner>
+                <ows:UpperCorner>-62.0054 54.1141</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <wcs:Identifier>Img_Sample</wcs:Identifier>
+        </wcs:CoverageSummary>
+        <wcs:CoverageSummary>
+            <ows:Title>mosaic</ows:Title>
+            <ows:Abstract>Generated from ImageMosaic</ows:Abstract>
+            <ows:Keywords>
+                <ows:Keyword>WCS</ows:Keyword>
+                <ows:Keyword>ImageMosaic</ows:Keyword>
+                <ows:Keyword>mosaic</ows:Keyword>
+            </ows:Keywords>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>6.346 36.492</ows:LowerCorner>
+                <ows:UpperCorner>20.83 46.591</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <wcs:Identifier>mosaic</wcs:Identifier>
+        </wcs:CoverageSummary>
+        <wcs:CoverageSummary>
+            <ows:Title>sfdem is a Tagged Image File Format with Geographic information</ows:Title>
+            <ows:Abstract>Generated from sfdem</ows:Abstract>
+            <ows:Keywords>
+                <ows:Keyword>WCS</ows:Keyword>
+                <ows:Keyword>sfdem</ows:Keyword>
+                <ows:Keyword>sfdem</ows:Keyword>
+            </ows:Keywords>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-103.87108701853181 44.370187074132616</ows:LowerCorner>
+                <ows:UpperCorner>-103.62940739432703 44.5016011535299</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <wcs:Identifier>sfdem</wcs:Identifier>
+        </wcs:CoverageSummary>
+    </wcs:Contents>
+</wcs:Capabilities>

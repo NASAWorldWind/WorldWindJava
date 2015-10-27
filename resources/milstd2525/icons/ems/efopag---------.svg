@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><g transform="scale(100) translate(0.72 0.74)"><polygon points="0.487972,0.762087 2.06017,0.764602 1.27455,0.384268" style="fill:rgb(255,255,255)"/><polygon points="0.909799,1.38793 1.14798,1.38793 1.14798,1.62611 1.40137,1.62611 1.40137,1.38793     1.63955,1.38793 1.63955,1.12948 1.40137,1.12948 1.40137,0.886224 1.14798,0.886224     1.14798,1.12948 0.909799,1.12948" style="fill:rgb(255,255,255)"/><polygon points="0.575331,0.921701 0.60574,0.921701 0.60574,1.61597 0.575331,1.61597 0.575331,1.71226     0.757772,1.71226 0.757772,1.61597 0.722295,1.61597 0.722295,0.921701 0.757772,0.921701     0.757772,0.83048 0.575331,0.83048" style="fill:rgb(255,255,255)"/><polygon points="1.79158,0.921701 1.82199,0.921701 1.82199,1.61597 1.79158,1.61597 1.79158,1.71226     1.97402,1.71226 1.97402,1.61597 1.93854,1.61597 1.93854,0.921701 1.97402,0.921701     1.97402,0.83048 1.79158,0.83048" style="fill:rgb(255,255,255)"/><polygon points="0.529724,1.81868 2.01456,1.81868 2.01456,1.74267 0.529724,1.74267" style="fill:rgb(255,255,255)"/><polygon points="0.484114,1.96565 2.06524,1.96565 2.06524,1.8947 0.484114,1.8947" style="fill:rgb(255,255,255)"/></g></svg>

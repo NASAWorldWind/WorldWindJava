@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--$Id: LongLineString.kml 14816 2011-02-25 04:38:25Z pabercrombie $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <Placemark>
+            <name>Clamp to ground, Tessellate</name>
+            <LineString>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    -120,28,10000 0,85,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+    </Document>
+</kml>

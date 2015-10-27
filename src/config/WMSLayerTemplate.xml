@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: WMSLayerTemplate.xml 1171 2013-02-11 21:45:02Z dcollins $-->
+<!--Example configuration file for a WMS image layer. This file contains instructions on how to configure a WMS image-->
+<!--layer by defining only the necessary configuration parameters.-->
+<!--The root element defines the configuration file's version and the layer type it represents. As of March 2011, the-->
+<!--version should always be "1", and the layerType should be "TiledImageLayer" to define a WMS image layer.-->
+<Layer version="1" layerType="TiledImageLayer">
+    <!--The name displayed in the layer list. Replace this to provide a description of your layer.-->
+    <DisplayName>YOUR LAYER NAME</DisplayName>
+    <!--The WMS URL, WMS service parameters, and WMS layer parameters. The LayerNames element must contain either a-->
+    <!--single name, or a comma delimited list of names. Replace the serviceName and version as appropriate for your-->
+    <!--WMS server. Replace the GetCapabilitiesURL and GetMapURL to reference your WMS server's URL. Replace-->
+    <!--LayerNames with a list of the WMS layers you want to display.-->
+    <Service serviceName="OGC:WMS" version="1.3">
+        <GetCapabilitiesURL>http://YOUR_SERVER_URL</GetCapabilitiesURL>
+        <GetMapURL>http://YOUR_SERVER_URL</GetMapURL>
+        <LayerNames>LAYER_NAME_1,LAYER_NAME_2,LAYER_NAME_3</LayerNames>
+    </Service>
+    <!--The location to store downloaded tiles in the WorldWind data cache. This path must be unique, and may contain-->
+    <!--any of the following characters: a-z, A-Z, 0-9, "_", and "/". Replace this with a cache path describing your-->
+    <!--WMS server and layers.-->
+    <DataCacheName>YOUR_CACHE_PATH</DataCacheName>
+    <!--The image format used by tiles in the WorldWind data cache. Storing downloaded tiles in the PNG image format-->
+    <!--is necessary to support the layer's image composition feature when the network is disconnected, or when the-->
+    <!--WMS server is not available.-->
+    <FormatSuffix>.png</FormatSuffix>
+    <!--The image format to use when requesting image tiles from the WMS. Tiles are downloaded in this format, but-->
+    <!--their format in the WorldWind data cache is specified by the FormatSuffix element. Replace this with an image-->
+    <!--format accepted by your WMS, if necessary.-->
+    <ImageFormat>image/png</ImageFormat>
+    <!--The list of image formats supported by your WMS, ordered by decreasing preference (the preferred format is on-->
+    <!--top). This list is used by the layer's image composition feature to determine the image format to use when-->
+    <!--composing an image from one or more WMS layers. Replace this with a list of image formats supported by your-->
+    <!--WMS, ordered by decreasing preference.-->
+    <AvailableImageFormats>
+        <ImageFormat>image/png</ImageFormat>
+        <ImageFormat>image/jpg</ImageFormat>
+    </AvailableImageFormats>
+    <!--The number of subdivision levels in this layer. This value corresponds to the layer's maximum resolution. 19-->
+    <!--levels is approximately 0.1 meters per pixel. Replace this with a larger or smaller integer value to increase-->
+    <!--or decrease resolution, respectively.-->
+    <NumLevels count="19" numEmpty="0"/>
+    <!--The bounding sector of the WMS layers. Replace this with a sector that bounds the layers in your WMS server.-->
+    <!--If the sector contains regions in which the WMS layer does not provide coverage, the empty regions are-->
+    <!--represented as transparent pixels in the downloaded tiles. The UseTransparentTextures element's value must be-->
+    <!--'true' for the transparent pixels to display correctly.-->
+    <Sector>
+        <SouthWest>
+            <LatLon units="degrees" latitude="YOUR_MIN_LAT" longitude="YOUR_MIN_LON"/>
+        </SouthWest>
+        <NorthEast>
+            <LatLon units="degrees" latitude="YOUR_MAX_LAT" longitude="YOUR_MAX_LON"/>
+        </NorthEast>
+    </Sector>
+    <!--Transparent textures must be enabled if any of the layers contain transparent regions in the above Sector.-->
+    <UseTransparentTextures>true</UseTransparentTextures>
+</Layer>

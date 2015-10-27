@@ -1,0 +1,290 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: Design and Coding Guidelines.html 1171 2013-02-11 21:45:02Z dcollins $ -->
+<body>
+<h1>World Wind Multi-Platform Design and Coding Guidelines</h1>
+
+<h2>General</h2>
+<ul>
+    <li>
+        Our required target platforms are OS X, Windows XP and Vista, and the most popular versions of Linux. All code
+        and all products must run on all those systems.
+    </li>
+    <li>
+        Read the World Wind API's Overview section for a description of World Wind architecture, design and usage. Read
+        the overview pages of each World Wind package for descriptions of those. These descriptions contain critical
+        information that is not repeated elsewhere. To avoid making mistakes, everyone working on World Wind must read
+        them before using or modifying the code.
+    </li>
+    <li>
+        The project's development IDE is IntelliJ IDEA. The IDEA configuration files for this project are checked in to
+        the code repository. They define within them global and local library links, formatting rules, etc.
+    </li>
+    <li>
+        Most major classes need a no-argument constructor so that the declarative instantiation mechanism can work. WW
+        objects should avoid constructors with arguments so that they can be created generically by name. This means
+        they should self-configure if at all possible, drawing their parameterized info from Configuration. They should
+        also contain an interface to set the configuration details programmatically.
+    </li>
+    <li>
+        Make field and variable names clear and easy to read. Don't label them with "my" or "m_" or some other goofy
+        notation. Within a class refer to all member fields with "this", e.g., this.tileCount.
+    </li>
+    <li>
+        The buffers one must use to pass arrays of info to JOGL must have their byte order set to that of the machine
+        they're used on. Call nativeByteOrder() on NIO buffers when you deal with them, use the methods in
+        com.jogamp.common.nio.Buffers.
+    </li>
+    <li>
+        Favor immutability (all fields final) in classes representing some small entity like a Point or Vector.
+        Immutable classes are fully thread safe and generally less error prone.
+    </li>
+    <li>
+        Don't worry too much about frequent memory allocations. Java is now so optimized for this that allocating an
+        object on the heap has similar performance to allocating it on the stack, and this includes the cost of garbage
+        collection. There is still a cost to executing any code, however, so be smart about allocation frequency.
+    </li>
+    <li>
+        Configuration items typically have two values and thus two attribute names: a DEFAULT value that is used if not
+        overridden, and a non-default value that can be set programmatically (in Configuration) to a current value
+        without losing the ability to recover the default value.
+    </li>
+    <li>
+        Classes such as BasicDataFileStore and the logger are effectively singletons but they are not defined in their
+        class definition as such. Their singleton nature comes from their 1:1 association with the truly singleton
+        WorldWind class, which provides access to instances of these "singleton" classes.
+    </li>
+    <li>
+        Do not use classes that are not available in the standard 1.6 JRE. Don't incur additional or external
+        dependencies. The only 3rd-party library we rely on is JOGL.
+    </li>
+    <li>
+        Constants are defined as String and namespace qualified. This enables easy and non-conflicting extension.
+    </li>
+    <li>
+        Do not use GUI builders to generate interfaces for examples or applications. They prevent others from being able
+        to maintain the code.
+    </li>
+    <li>
+        Protect OpenGL state within a rendering unit, such as a layer, by bracketing state changes within try/finally
+        clauses. The util.OpenGLStackHandler utility class makes this easy. It manages both attribute state and matrix
+        stack state. The goal is to isolate any OpenGL state changes to the rendering unit, both when the unit succeeds
+        and when it fails.
+    </li>
+    <li>
+        World Wind never crashes. Always catch exceptions at least at the highest entry point from the runtime, e.g., UI
+        listeners, thread run() methods.
+    </li>
+    <li>
+        Within a rendering pass World Wind does not touch the disk or the network. Always fork off a thread to do that.
+        Use the TaskManager and Retriever systems to start threads during rendering. These are set up to govern thread
+        usage to avoid swamping the local machine and the server.
+    </li>
+    <li>
+        Too much micromanagement of state makes the code brittle. Try to design so that the right thing just happens
+        once things are set up, and the effect of something going wrong is benign. For example, Layers fork off
+        Retriever objects to retrieve data from the network. But they don't try to keep track of these. If the retriever
+        succeeds then the data will be available the next time the layer looks for it. The fact that it's not there
+        because of a timeout or something tells the layer to ask for it again if it needs it.
+    </li>
+    <li>
+        DOMs are expensive in memory and time. Use an event for any documents that might be large. Use the parser in
+        gov.nasa.worldwind.util.xml when appropriate.
+    </li>
+</ul>
+
+<h2>Exceptions</h2>
+<ul>
+    <li>
+        WW objects running in the Main thread pass exceptions through to the application unless there's good
+        reactive/corrective behavior that can be applied within WW.
+    </li>
+    <li>
+        Log any exceptions prior to throwing them. Use the same message for the log as for the exception.
+    </li>
+    <li>
+        Ensure all exception messages are generated using the i18n method details below.
+    </li>
+    <li>
+        Public methods validate their arguments and throw the appropriate exception, typically InvalidArgumentException,
+        and identify the exception message the parameter name and the problem -- null, out of range, etc. See the
+        message resource file, util.MessageStrings.properties, for common messages and their identifiers.
+    </li>
+    <li>
+        In Retriever threads, do not catch Throwable. Catch and react to Exception if there's a good reactive/corrective
+        behavior to apply, otherwise allow them to pass up the stack. Retriever threads should have an uncaught
+        Exception handler specified for the thread. The method should log the Exception or Throwable and then return.
+    </li>
+    <li>
+        Private and protected methods whose calling client can't be trusted validate their arguments and throw an
+        appropriate exception.
+    </li>
+    <li>
+        The audience for exceptions is not primarily the user of the client program, but the application or World Wind
+        developer. Throw exceptions that would let them know immediately that they're using faulty logic or data.
+    </li>
+</ul>
+
+<h2>Logging</h2>
+<ul>
+    <li>
+        Logging using java.util.logging has the nice feature of capturing the class and method name at the site of the
+        logging call. That's why there is the common idiom of create message, log message, throw exception. Wrapping
+        these three actions in some utility method would lose the class and method-name feature, so don't do that. Don't
+        use any logging system other than that in the JRE.
+    </li>
+    <li>
+        Log all exceptional conditions before rethrowing or throwing a new exception.
+    </li>
+    <li>
+        Ensure all logging uses i18n messages as detailed below.
+    </li>
+    <li>
+        Use level SEVERE for things that prevent the intended action,e.g., file can't be written. Use level WARN for
+        things that don't stop the action but seem exceptional, e.g., a file was retrieved or written redundantly. Use
+        level FINE for simple notifications. Use FINER for method traces. Using the "FINE"series prevents screen display
+        of these when the default JAVA logging settings are used. Since we're a component, we don't communicate such
+        things directly to the application's user; the application does.
+    </li>
+</ul>
+
+<h2>Concurrency</h2>
+<ul>
+    <li>
+        Use collection classes from the java.util.concurrent package if there's any chance at all that the collection
+        may be accessed from multiple threads.
+    </li>
+    <li>
+        Except for simple atomic variables (but not long or double) the safest way to manage multi-thread access is
+        through the blocking queue classes of java.util.concurrent.
+    </li>
+    <li>
+        Making a class' fields final avoids concurrency problems, but it makes the class much less extensible. If using
+        private, make sure there are overridable set/get accessors.
+    </li>
+</ul>
+
+<h2>Offline Mode</h2>
+
+<p>World Wind's use of the network can be disabled by calling {@link gov.nasa.WorldWind.setOfflineMode}. Prior to
+   attempting retrieval of a network resource -- anything addressed by a URL -- World Wind checks the offline-mode
+   setting and does not attempt retrieval if the value is true. To honor this contract, all code must check network
+   status prior to attempting retrieval of a resource on the network.</p>
+
+<h2>Documentation</h2>
+<ul>
+    <li>
+        Use the appropriate Ant target to generate worldwind.jar and javadoc API documentation. Do not use the IDEA
+        Tools command because it's not configured appropriately, only the Ant targets are.
+    </li>
+    <li>
+        All public and protected classes, methods and fields should be commented for javadoc documentation generation.
+    </li>
+    <li>
+        Descriptions of classes, methods, etc. should start with a capital letter. Parameter descriptions and
+        return-value description should start with a lower-case letter. All descriptions end with a period.
+    </li>
+    <li>
+        If a class overrides methods from {@link Object} such as <code>toString()</code> and <code>equals()</code>,
+        their behavior for the specific class should be described. For <code>equals()</code> that would be the fields
+        compared. For <code>toString()</code> that would be the representation returned.
+    </li>
+    <li>
+        Use links liberally, e.g., {@link WorldWind}. They help the reader get to information fast.
+    </li>
+</ul>
+
+<h2>Code Formatting</h2>
+<ul>
+    <li>
+        Use the code formatting and style that's in the IDEA project file. It makes it possible to review previous code
+        modifications.
+    </li>
+    <li>
+        Use the code formatting rules specified in WorldWindJ.ipr. They are in the project file under (Settings Project
+        Settings Project Code Style). To apply them, simply use Code Auto-indent Lines. You can also just check the box
+        at Subversion check-in time and the formatting will be applied before check-in. Be sure the formatting rules are
+        not overridden in your IDEA workspace.
+    </li>
+    <li>
+        We generally use the traditional Sun coding conventions. Constants are in all upper case with words separated by
+        underscores. Everything else is in camel case. Class names start with an upper case character, variables start
+        in lower case.
+    </li>
+    <li>
+        White space is preferred over packing code into a small space. Please use white space liberally.
+    </li>
+    <li>
+        Set up IDEA to automatically place the standard project header in newly created files by putting the following
+        as the File Header in the Includes tab of IDEA in the File Templates dialog: <br> <code> <br>/* Copyright (C)
+                                                                                                     2001, 2011 United
+                                                                                                     States Government
+                                                                                                     as represented by
+        <br>the Administrator of the National Aeronautics and Space Administration. <br>All Rights Reserved. <br>*/ <br>package
+                                                                                                     ${PACKAGE_NAME};
+        <br> <br>/** <br> * @author ${USER} <br> * @version $Id: Design and Coding Guidelines.html 1171 2013-02-11 21:45:02Z dcollins $ <br> */ </code>
+
+        <p>
+            Then remove the package name property from first line of the Class and Interface items of the Templates tab
+            in the File Templates dialog. (The package name is in the "include" now, so it gets inserted after the
+            copyright.) Test it out by creating a dummy class. Unfortunately this set-up is a personal configuration in
+            IDEA, not project specific.</p></li>
+    <li>
+        When creating a new file, the Id subversion keyword has to be explicitly set via Version Control --> Set
+        Property --> Property name: svn:keywords, and the term Id included in the text box. If the property is not
+        included in this list then Subversion doesn�t replace the property string when updating the file.
+    </li>
+    <li>
+        Resolve all IDEA warnings before checking in a file. If the warning refers to an intentional case, add an
+        exception statement.
+    </li>
+
+</ul>
+
+<h2>Internationalization (i18n)</h2>
+<ul>
+    <li>
+        String "constants" are stored in separate resource files (e.g. MessageStrings.properties). These files must end
+        in ".properties" and must be stored in the src directory. Strings are stored with the format:&nbsp;
+        packageOfClass.className.nameOfString=value of the string
+    </li>
+    <li>
+        Access the string constants by using the following pattern:&nbsp; (e.g.
+        Logging.getMessage("myPackage.myClass.targetStringName");).
+    </li>
+</ul>
+
+<h2>Books</h2>
+The books we go back to again and again are the following:
+<ul>
+    <li>
+        <i>Core Java</i>, Horstmann & Cornell, Volumes 1 and 2, Prentice Hall. Be sure to get the editions covering at
+                        least J2SE 5. Get the newest edition (currently 8).
+    </li>
+    <li>
+        <i>The Java Programming Language</i>, Arnold & Gosling, Addison Wesley. Be sure to get the most recent edition
+                                            covering at least Java 6.
+    </li>
+    <li>
+        <i>Concurrent Programming in Java</i>, Lea, Addison Wesley
+    </li>
+    <li>
+        <i>Java Threads</i>, Oaks & Wong, O�Reilly
+    </li>
+    <li>
+        <i>Java Cookbook</i>, Darwin, O�Reilly
+    </li>
+    <li>
+        <i>OpenGL Programming Guide</i>, Shreiner & Woo & et al, Addison Wesley. Be sure to get the version covering
+                                       OpenGL 2.0, which is currently the Fifth Edition.
+    </li>
+    <li>
+        <i>Mathematics for 3D Game Programming & Computer Graphics</i>, Lengyel, Charles River Media. Be sure to get the
+                                                                      Second (or later if there is one) edition.
+    </li>
+</ul>
+</body>

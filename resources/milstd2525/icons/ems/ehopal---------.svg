@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><g transform="scale(100) translate(0.8 0.74)"><path d="M0.83763 0.60552 L1.16706 0.60552 C1.24333 0.60552 1.32163 0.700418 1.31834 0.787051     C1.31494 0.876795 1.24546 0.952594 1.15529 0.952594 L0.83763 0.952594 zM0.619973     1.75263 L0.83763 1.75263 L0.83763 1.19378 L0.896453 1.19378 C0.910713     1.19378 1.23765 1.59644 1.23765 1.62321 C1.23765 1.63869 0.89626 2.03924     0.861158 2.10559 L1.12351 2.10356 L1.38068 1.79828 L1.62001 2.10559 L1.89246     2.10415 L1.5121 1.62155 L1.87296 1.17614 L1.6176 1.17393 L1.3753 1.44351 L1.19058     1.19378 C1.40361 1.14416 1.54354 1.02316 1.54354 0.764355 C1.54354 0.562564     1.36727 0.381985 1.16706 0.381985 L0.619973 0.381985 z" style="fill:rgb(255,255,255)"/></g></svg>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--$Id$-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <Placemark>
+            <name>Clamp to ground, Tessellate</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    -120,28,10000 -120,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Clamp to ground</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    -119,28,10000 -119,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Relative to ground, Tessellate, Extrude</name>
+            <LinearRing>
+                <extrude>1</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    -118,28,10000 -118,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Relative to ground, Tessellate</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    -117,28,10000 -117,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Relative to ground, Extrude</name>
+            <LinearRing>
+                <extrude>1</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    -116,28,10000 -116,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Relative to ground</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    -115,28,10000 -115,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Absolute, Extrude</name>
+            <LinearRing>
+                <extrude>1</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>absolute</altitudeMode>
+                <coordinates>
+                    -114,28,10000 -114,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Absolute</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>absolute</altitudeMode>
+                <coordinates>
+                    -113,28,10000 -113,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Defaults (CG)</name>
+            <LinearRing>
+                <coordinates>
+                    -112,28,10000 -112,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+
+        <Placemark>
+            <name>Multi-point, Clamp to ground, Tessellate</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    -111,28,10000 -111.5,31,10000 -111,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Multi-point, Clamp to ground</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    -110,28,10000 -110.5,31,10000 -110,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Multi-point, Relative to ground, Tessellate, Extrude</name>
+            <LinearRing>
+                <extrude>1</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    -109,28,10000 -109.5,31,10000 -109,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Multi-point, Relative to ground, Tessellate</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    -108,28,10000 -108.5,31,10000 -108,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Multi-point, Relative to ground, Extrude</name>
+            <LinearRing>
+                <extrude>1</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    -107,28,10000 -107.5,31,10000 -107,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Multi-point, Relative to ground</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    -106,28,10000 -106.5,31,10000 -106,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Multi-point, Absolute, Extrude</name>
+            <LinearRing>
+                <extrude>1</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>absolute</altitudeMode>
+                <coordinates>
+                    -105,28,10000 -105.5,31,10000 -105,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Multi-point, Absolute</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>absolute</altitudeMode>
+                <coordinates>
+                    -104,28,10000 -104.5,31,10000 -104,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Multi-point, Defaults (CG)</name>
+            <LinearRing>
+                <coordinates>
+                    -103,28,10000 -103.5,31,10000 -103,35,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+
+    </Document>
+</kml>

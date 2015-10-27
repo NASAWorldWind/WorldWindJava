@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="efiacc---------.svg">
+  <metadata
+     id="metadata18">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs16" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview14"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="matrix(100,0,0,100,73,69)"
+     id="g4"
+     style="stroke:#000000;stroke-width:0.06;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.12, 0.06;stroke-dashoffset:0">
+    <path
+       inkscape:connector-curvature="0"
+       d="m 1.1607,0.756886 c 0,-0.117102 0.09378,-0.223862 0.09378,-0.301079 l 0,-0.009874 c 0,-0.029606 -0.001,-0.087457 -0.02468,-0.09378 C 1.20567,0.455728 1.14929,0.536468 1.09294,0.610149 1.06405,0.647925 1.0387,0.685539 1.00966,0.724306 0.986641,0.755047 0.93859,0.803921 0.93859,0.850664 c 0,0.033201 0.14111,0.409666 0.0691,0.409666 -0.0025,0 -0.086588,-0.05848 -0.096758,-0.06612 C 0.878889,1.17014 0.856133,1.14159 0.833952,1.10831 0.763267,1.00225 0.777712,1.0061 0.746098,0.870408 0.711629,0.879609 0.687176,0.985388 0.678968,1.03032 0.668932,1.08524 0.672724,1.18408 0.684759,1.23776 0.699468,1.3034 0.715917,1.35349 0.74281,1.40675 0.756948,1.43475 0.813299,1.53365 0.815196,1.55648 0.765047,1.54479 0.6522,1.45075 0.61646,1.41465 0.581578,1.37942 0.489405,1.22312 0.479566,1.21591 c 0,0.22816 0.115102,0.52626 0.225736,0.63802 C 0.776216,1.92557 0.851034,2.00119 0.939471,2.0541 0.996144,2.08802 1.18166,2.1537 1.26929,2.1537 l 0.05429,0 c 0.06599,0 0.24946,-0.07029 0.29784,-0.09702 C 1.70011,2.01321 1.77989,1.94722 1.82908,1.87442 1.93041,1.72447 2.01459,1.52865 2.01459,1.28007 l 0,-0.02961 -0.01025,-0.1337 C 1.98844,1.1255 1.95335,1.21782 1.94618,1.23635 1.93442,1.26679 1.8991,1.31521 1.88037,1.34328 1.84764,1.39232 1.75915,1.4881 1.6987,1.50218 l 0,-0.02468 c 0,-0.10146 0.06416,-0.20303 0.06416,-0.28627 l 0,-0.04442 L 1.73347,0.865446 1.71844,0.86547 C 1.71098,0.955159 1.6802,1.04807 1.64047,1.10832 1.61009,1.1544 1.5187,1.2372 1.46178,1.25046 1.45665,1.24076 1.45191,1.2359 1.45191,1.22084 l 0,-0.05429 c 0,-0.11717 0.0691,-0.205258 0.0691,-0.296144 l 0,-0.019744 C 1.52101,0.815544 1.47282,0.761304 1.45391,0.730201 1.43814,0.70426 1.39838,0.63041 1.37294,0.623618 l 0,0.029614 c 0,0.142138 -0.03152,0.244752 -0.12833,0.291209 C 1.21904,0.906256 1.1607,0.872583 1.1607,0.801303 l 0,-0.044421 z"
+       style="fill:#000000;stroke:#000000;stroke-width:0.06;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.12, 0.06;stroke-dashoffset:0"
+       id="path6" />
+  </g>
+  <ellipse
+     sodipodi:ry="28.5"
+     sodipodi:rx="28.5"
+     sodipodi:cy="238"
+     sodipodi:cx="200.5"
+     cx="200.5"
+     cy="238"
+     rx="28.5"
+     ry="28.5"
+     style="fill:#ffffff;stroke:#000000;stroke-width:1"
+     transform="translate(-1.8072301,-10.24097)"
+     id="ellipse8" />
+  <line
+     style="stroke:#000000;stroke-width:6.04185247;stroke-miterlimit:4;stroke-dasharray:12.08370474, 6.04185236;stroke-dashoffset:0"
+     x1="182"
+     x2="215.79999"
+     y1="210.99998"
+     y2="244.59999"
+     id="line10" />
+  <line
+     style="stroke:#000000;stroke-width:6.6172471;stroke-miterlimit:4;stroke-dasharray:13.23449493, 6.61724746;stroke-dashoffset:0"
+     x1="181.60001"
+     x2="214.4001"
+     y1="245.60004"
+     y2="210.00015"
+     id="line12" />
+</svg>

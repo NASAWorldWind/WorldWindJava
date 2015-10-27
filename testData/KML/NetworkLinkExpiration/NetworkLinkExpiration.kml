@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for remote NetworkLinks. Open this document in KMLViewer. The label on each placemark should change
+     every 5 seconds. -->
+<!--$Id: NetworkLinkExpiration.kml 700 2012-07-13 23:26:28Z pabercrombie $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <name>NetworkLink Expiration Test Suite</name>
+        <description>The label of each placemark should update every 5 seconds. NetworkLinkControl requires that the
+            client and server clocks be synchronized.
+        </description>
+        <open>1</open>
+
+        <NetworkLink>
+            <name>Expires</name>
+            <open>1</open>
+            <Link>
+                <href>
+                    http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_expires.php
+                </href>
+                <refreshMode>onExpire</refreshMode>
+            </Link>
+        </NetworkLink>
+
+        <NetworkLink>
+            <name>Cache-Control</name>
+            <open>1</open>
+            <Link>
+                <href>
+                    http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_max_age.php
+                </href>
+                <refreshMode>onExpire</refreshMode>
+            </Link>
+        </NetworkLink>
+
+        <NetworkLink>
+            <name>Expires and Cache-Control</name>
+            <open>1</open>
+            <Link>
+                <href>
+                    http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_expires_and_max_age.php
+                </href>
+                <refreshMode>onExpire</refreshMode>
+            </Link>
+        </NetworkLink>
+
+        <NetworkLink>
+            <name>Cache-Control and NetworkLinkControl</name>
+            <open>1</open>
+            <Link>
+                <href>
+                    http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_expires_and_link_control.php
+                </href>
+                <refreshMode>onExpire</refreshMode>
+            </Link>
+        </NetworkLink>
+
+    </Document>
+</kml>

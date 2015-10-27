@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="efiaca---------.svg">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="705"
+     inkscape:window-height="480"
+     id="namedview10"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="212"
+     inkscape:window-y="134"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="scale(100) translate(0.71 0.7)"
+     id="g4"
+     style="stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0">
+    <path
+       d="M0.993673 1.80992 C0.993673 1.94399 1.11169 2.07875 1.23806 2.07875 L1.28694 2.07875     C1.40997 2.07875 1.52644 1.94373 1.52644 1.81481 C1.52644 1.68175 1.41235     1.55087 1.28694 1.55087 L1.23806 1.55087 C1.11367 1.55087 0.993673 1.67976     0.993673 1.80992 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="path6" />
+    <path
+       d="M0.993673 1.80992 C0.993673 1.67976 1.11367 1.55087 1.23806 1.55087 L1.28694 1.55087     C1.41235 1.55087 1.52644 1.68175 1.52644 1.81481 C1.52644 1.94373 1.40997     2.07875 1.28694 2.07875 L1.23806 2.07875 C1.11169 2.07875 0.993673 1.94399     0.993673 1.80992 zM1.17452 0.76883 C1.17452 0.652865 1.26739 0.547145 1.26739     0.470676 L1.26739 0.4609 C1.26739 0.431582 1.26639 0.374294 1.24295 0.368034     C1.21905 0.470601 1.16322 0.550554 1.10742 0.623522 C1.07881 0.660928 1.0537     0.698176 1.02495 0.736565 C1.00215 0.76701 0.954571 0.815408 0.954571 0.861695     C0.954571 0.950168 1.08007 1.1688 1.03278 1.26738 C0.9812 1.25536 0.882043     1.16351 0.852905 1.11977 C0.781606 1.01272 0.795945 1.01858 0.763949     0.881246 C0.729815 0.89036 0.705602 0.995108 0.697472 1.0396 C0.687535 1.09399     0.691291 1.19187 0.703204 1.24503 C0.717775 1.31003 0.734063 1.35963 0.760697     1.41238 C0.774697 1.4401 0.830496 1.53804 0.832378 1.56064 C0.782716 1.54907     0.670965 1.45594 0.635571 1.42019 C0.604086 1.3884 0.505681 1.22719 0.500012     1.22339 C0.500012 1.44871 0.614055 1.74459 0.723551 1.8552 C0.799279     1.9317 0.861153 1.99416 0.956523 2.05235 C1.01449 2.08773 1.19259 2.15206 1.28205     2.15206 L1.33581 2.15206 C1.40172 2.15206 1.58248 2.08266 1.63076 2.05598     C1.70868 2.01293 1.78768 1.94758 1.8364 1.87549 C1.93674 1.727 2.0201 1.53309     2.0201 1.28693 L2.0201 1.2576 L2.00995 1.1252 C1.99107 1.13616 1.96364     1.22001 1.95328 1.24454 C1.94135 1.27277 1.90502 1.3228 1.88718 1.34952 C1.85478     1.39808 1.76715 1.49293 1.70728 1.50687 L1.70728 1.48244 C1.70728 1.37882     1.77082 1.28476 1.77082 1.19406 L1.77082 1.15496 L1.74172 0.876331 L1.72683     0.876359 C1.71942 0.965378 1.68895 1.0572 1.64962 1.11685 C1.61953 1.16248     1.52904 1.24447 1.47267 1.2576 C1.46759 1.248 1.4629 1.24319 1.4629 1.22828     L1.4629 1.17451 C1.4629 1.05848 1.53132 0.971244 1.53132 0.881244 L1.53132     0.861693 C1.53132 0.830177 1.40646 0.642669 1.38469 0.636858 L1.38469 0.666185     C1.38469 0.806941 1.35348 0.908555 1.25761 0.954559 C1.23229 0.916748 1.17452     0.883401 1.17452 0.812815 L1.17452 0.768826 z"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.06;stroke-miterlimit:4;stroke-dasharray:0.12,0.06;stroke-dashoffset:0"
+       id="path8" />
+  </g>
+</svg>

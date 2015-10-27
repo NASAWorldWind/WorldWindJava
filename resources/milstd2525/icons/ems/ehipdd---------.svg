@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><g transform="scale(100) translate(0.72 0.81) translate(0.005 -0.04) translate(-0.272 -0.248) translate(0.01 0) translate(0.01 0) translate(0.01 0) translate(0.01 0) translate(0 -0.01) translate(-0.01 0) translate(0 0.01) translate(0.01 0) translate(0 0.01) translate(-0.01 0) translate(0 -0.01)"><g transform="scale(1.2)"><polygon points="1.61724,0.558059 1.36382,0.891465 1.3219,0.446858 1.21938,0.7565 1.10196,0.574488      1.07028,0.922642 0.8415,0.663122 0.920665,0.959224 0.618791,0.944248 0.616579,0.94878      0.897283,1.15174 0.420205,1.18332 0.835024,1.30427 0.835815,1.31076      0.543693,1.47979 0.54511,1.48424 0.923433,1.43886 0.80185,1.647 1.02469,1.55437      0.944343,1.89686 1.15496,1.6217 1.27063,2.06354 1.27926,2.06369 1.30159,1.6202      1.52698,1.89418 1.4481,1.53294 1.70798,1.67725 1.55027,1.48757      1.93928,1.59901 1.68411,1.36337 2.01337,1.31305 1.6382,1.2095 2.07963,0.985236      1.68128,1.02125 1.84289,0.761118 1.49451,0.949874" style="fill:rgb(0,0,0)"/></g></g><g transform="scale(100) translate(0.72 0.81) translate(0.005 -0.04)"><polygon points="1.61724,0.558059 1.36382,0.891465 1.3219,0.446858 1.21938,0.7565 1.10196,0.574488     1.07028,0.922642 0.8415,0.663122 0.920665,0.959224 0.618791,0.944248 0.616579,0.94878     0.897283,1.15174 0.420205,1.18332 0.835024,1.30427 0.835815,1.31076     0.543693,1.47979 0.54511,1.48424 0.923433,1.43886 0.80185,1.647 1.02469,1.55437     0.944343,1.89686 1.15496,1.6217 1.27063,2.06354 1.27926,2.06369 1.30159,1.6202     1.52698,1.89418 1.4481,1.53294 1.70798,1.67725 1.55027,1.48757 1.93928,1.59901     1.68411,1.36337 2.01337,1.31305 1.6382,1.2095 2.07963,0.985236     1.68128,1.02125 1.84289,0.761118 1.49451,0.949874" style="fill:rgb(255,255,255)"/></g><text style="fill:rgb(0,0,0);font-family:Arial;font-size:81;font-weight:bold;text-anchor:middle" x="200" y="232">?</text></svg>

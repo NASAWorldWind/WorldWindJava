@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><g transform="scale(100) translate(0.75 0.89)"><path d="M1.1116 1.10947 L1.3864 1.11129 C1.40147 1.11129 1.54745 0.889297 1.5621 0.861612     L0.938836 0.860962 z" style="fill:rgb(255,255,255)"/><polygon points="0.781354,0.950858 0.947516,1.20903 0.974646,1.19005 0.813114,0.935713" style="fill:rgb(255,255,255)"/><polygon points="1.52805,1.19344 1.56411,1.20675 1.72389,0.949567 1.69325,0.936673" style="fill:rgb(255,255,255)"/><polygon points="1.07661,1.25001 1.42339,1.25001 1.42339,1.20839 1.07661,1.20839" style="fill:rgb(255,255,255)"/><polygon points="0.596079,0.977752 0.836783,1.36211 0.870579,1.34582 0.627768,0.958165" style="fill:rgb(255,255,255)"/><path d="M1.6407 1.33786 C1.6407 1.35283 1.65687 1.35486 1.66766 1.36048 L1.908 0.974214 L1.87652     0.95871 C1.86288 1.00977 1.6407 1.32217 1.6407 1.33786 z" style="fill:rgb(255,255,255)"/><polygon points="0.947146,1.40721 1.55748,1.40721 1.55748,1.3656 0.947146,1.3656" style="fill:rgb(255,255,255)"/><polygon points="0.409091,1.00232 0.725244,1.50437 0.760295,1.4841 0.442449,0.980736" style="fill:rgb(255,255,255)"/><path d="M1.75168 1.48119 C1.75168 1.48536 1.7752 1.50148 1.77841 1.50366 L2.09898 1.00232     L2.10457 1.00254 L2.06609 0.981827 C2.03406 1.04236 1.75168 1.4654 1.75168     1.48119 z" style="fill:rgb(255,255,255)"/><polygon points="0.817681,1.5598 1.69157,1.5598 1.69157,1.51819 0.817681,1.51819" style="fill:rgb(255,255,255)"/><path d="M1.85848 1.62482 C1.86442 1.62791 1.88273 1.6384 1.89039 1.6384 C1.89522 1.6384 2.25181     1.07753 2.28828 1.0228 L2.25085 1.00945 z" style="fill:rgb(255,255,255)"/><polygon points="0.225937,1.02363 0.618957,1.63859 0.646209,1.62478 0.253484,1.00938" style="fill:rgb(255,255,255)"/><polygon points="0.688217,1.717 1.81641,1.717 1.81641,1.68002 0.688217,1.68002" style="fill:rgb(255,255,255)"/></g></svg>

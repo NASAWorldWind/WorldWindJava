@@ -1,0 +1,174 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--
+Illustrates how to embed a World Wind Applet in a web page and navigate to pre-defined locations using hyperlinks in the
+browser.
+
+Version: $Id: WWJAppletTextAndLinks.html 956 2012-12-05 22:43:26Z dcollins $
+-->
+<html>
+<head>
+<title>NASA World Wind Java Applet Test Page - Link to WW positions on the globe</title>
+
+<style type="text/css"><!--
+body,td,a,p {font-family:arial,sans-serif}
+blockquote {background-color: #f0f0f0; padding: 10px; border:1px solid lightgray;}
+h2 {margin-top: 2em;color: SaddleBrown; background-color: #dedede; padding-left: 12px;}
+h3 {margin-top: 2em; color: DimGray;}
+tt {font-size: 1.3em; color: Navy;}
+--></style>
+
+
+<script language="javascript">
+<!--
+// Author: Patrick Murris
+
+var theApplet = null;
+
+function getWWJApplet()
+{
+   if (theApplet == null) {
+      theApplet = document.getElementById('wwjApplet');
+   }
+   return theApplet;
+}
+
+// Applet init, start and stop - called from java at the end of applet init() and start()
+// and at the begining of stop()
+
+function appletInit() {
+}
+
+function appletStart() {
+   // Fly to a location after a delay
+   setTimeout("startup()", 1000); // 1 second
+}
+
+function startup() {
+   // Add labels
+   addLocationLabel(MOUNT_RAINIER, 14);
+   addLocationLabel(MOUNT_SAINT_HELENS, 12);
+   addLocationLabel(MOUNT_ADAMS, 12);
+   addLocationLabel(MOUNT_HOOD, 12);
+   addLocationLabel(MOUNT_JEFFERSON, 12);
+   addLocationLabel(THREE_FINGERED_JACK, 12);
+   addLocationLabel(MOUNT_WASHINGTON, 12);
+   addLocationLabel(THREE_SISTERS, 12);
+   addLocationLabel(MOUNT_BACHELOR, 12);
+   addLocationLabel(NEWBERRY_VOLCANO, 12);
+   addLocationLabel(MOUNT_BAILEY, 12);
+   addLocationLabel(MOUNT_THIELSEN, 12);
+   addLocationLabel(MOUNT_MAZAMA, 12);
+   addLocationLabel(MOUNT_MCLOUGHLIN, 12);
+   addLocationLabel(MEDICINE_LAKE, 12);
+   addLocationLabel(MOUNT_SHASTA, 14);
+   addLocationLabel(LASSEN_PEAK, 12);
+
+   // Move to show the Cascade range
+   gotoLocation(CASCADE_RANGE);
+}
+
+function appletStop() {
+}
+
+// Go to location handling
+
+var CASCADE_RANGE = "Cascade Range;44.397;-121.891;1200000;45;60";
+var MOUNT_RAINIER = "Mount Rainier;46.854;-121.764;30000;190;80";
+var MOUNT_SAINT_HELENS = "Mount St-Helens;46.1956;-122.1911;25000;140;70";
+var MOUNT_ADAMS = "Mount Adams;46.206;-121.492;25000;270;70";
+var MOUNT_HOOD = "Mount Hood;45.373;-121.698;25000;330;70";
+var MOUNT_JEFFERSON = "Mount Jefferson;44.677;-121.799;20000;200;70";
+var THREE_FINGERED_JACK = "Three Fingered Jack;44.478;-121.845;10000;30;30";
+var MOUNT_WASHINGTON = "Mount Washington;44.332;-121.838;15000;90;40";
+var THREE_SISTERS = "Three Sisters;44.141;-121.7776;30000;270;70";
+var BROKEN_TOP = "Broken Top;44.082;-121.700;10000;260;40";
+var MOUNT_BACHELOR = "Mount Bachelor;43.979;-121.688;15000;0;40";
+var NEWBERRY_VOLCANO = "Newberry volcano and caldera;43.724;-121.235;25000;250;60";
+var MOUNT_BAILEY = "Mount Bailey;43.155;-122.220;20000;45;60";
+var MOUNT_THIELSEN = "Mount Thielsen;43.153;-122.066;15000;340;40";
+var MOUNT_MAZAMA = "Mount Mazama;42.943;-122.108;25000;340;70";
+var MOUNT_SCOTT = "Mount Scott;42.922;-122.016;10000;0;30";
+var MOUNT_MCLOUGHLIN = "Mount McLoughlin;42.445;-122.315;20000;90;70";
+var MEDICINE_LAKE = "Medicine Lake;41.582;-121.600;10000;330;30";
+var MOUNT_SHASTA = "Mount Shasta;41.403;-122.199;30000;30;70";
+var LASSEN_PEAK = "Lassen Peak;40.489;-121.509;25000;340;80";
+
+
+function gotoLocation(locationString) {
+   var params = locationString.split(';');
+   if(params.length == 3)	// Lat/lon
+      getWWJApplet().gotoLatLon(parseFloat(params[1]), parseFloat(params[2]));
+   else if(params.length == 4)	// Lat/lon and zoom
+      getWWJApplet().gotoLatLon(parseFloat(params[1]), parseFloat(params[2]), parseFloat(params[3]), 0, 0);
+   else if(params.length == 5)	// Lat/lon/zoom and heading
+      getWWJApplet().gotoLatLon(parseFloat(params[1]), parseFloat(params[2]), parseFloat(params[3]), parseFloat(params[4]), 0);
+   else if(params.length == 6)	// Lat/lon/zoom/heading and pitch
+      getWWJApplet().gotoLatLon(parseFloat(params[1]), parseFloat(params[2]), parseFloat(params[3]), parseFloat(params[4]), parseFloat(params[5]));
+}
+
+function addLocationLabel(locationString, fontSize) {
+   var params = locationString.split(';');
+   getWWJApplet().addLabel(params[0], parseFloat(params[1]), parseFloat(params[2]), 'Arial-BoldItalic-' + fontSize, '#33ff00');
+}
+
+// -->
+</script>
+</head>
+
+<body>
+
+<h1>US Cascade Range Volcanoes</h1>
+
+<span style="float: right; padding: 0px 0px 12px 12px; background-color: white;">
+<!-- Include the World Wind Java Applet example in this page using Java Web Start, Oracle's recommended deployment
+     mechanism. The containing document specifies the Applet attributes that affect its display and enable
+     Java-to-Javascript communication. The specified Applet parameter jnlp_href defines the Applet's code and its
+     dependencies. This mechanism requires Java 6 update 10 on Windows and Linux, and requires Java 7 on Mac OS X. See
+     the following Oracle document for details on this Applet deployment mechanism:
+     http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/applet/applet_deployment.html -->
+<script src="http://www.java.com/js/deployJava.js"></script>
+<script>
+    var attributes = {id:'wwjApplet', mayscript:'true', width:'600', height:'380'};
+    var parameters = {jnlp_href:'WWJApplet.jnlp'};
+    deployJava.runApplet(attributes, parameters, '1.6'); // runApplet automatically looks for JRE 1.6+
+</script>
+</span>
+
+<p>
+The <a href="javascript:gotoLocation(CASCADE_RANGE);">Cascade Range</a> is a major mountain range of western North America, extending from southern British Columbia through Washington and Oregon to Northern California. It includes both non-volcanic mountains, including the rugged spires of the North Cascades, and the notable volcanoes known as the High Cascades.
+</p>
+<h2>High Cascades:</h2>
+<p>
+<ul>
+  <li><a href="javascript:gotoLocation(MOUNT_RAINIER);">Mount Rainier</a> (southeast of Tacoma, Washington) � highest peak in the Cascades, it dominates the surrounding landscape. There is no other higher peak northward until the Yukon-Alaska-BC border apex beyond the Alsek River.</li>
+  <li><a href="javascript:gotoLocation(MOUNT_SAINT_HELENS);">Mount St. Helens</a> (southern Washington) � Erupted in 1980, leveling forests to the north of the mountain and sending ash across the northwest. The northern part of the mountain was destroyed in the blast 1980 Mount St. Helens eruption).</li>
+  <li><a href="javascript:gotoLocation(MOUNT_ADAMS);">Mount Adams</a> (east of Mount St. Helens) � the second highest peak in Washington and third highest in the Cascade Range.</li>
+  <li><a href="javascript:gotoLocation(MOUNT_HOOD);">Mount Hood</a> (northern Oregon) � the highest peak in Oregon and arguably the most frequently climbed major peak in the Cascades.</li>
+  <li><a href="javascript:gotoLocation(MOUNT_JEFFERSON);">Mount Jefferson</a> (northcentral Oregon) � the second highest peak in Oregon.</li>
+  <li><a href="javascript:gotoLocation(THREE_FINGERED_JACK);">Three Fingered Jack</a> (northcentral Oregon) � Highly eroded Pleistocene volcano.</li>
+  <li><a href="javascript:gotoLocation(MOUNT_WASHINGTON);">Mount Washington</a> (between Santiam and McKenzie passes) � a highly eroded shield volcano.</li>
+  <li><a href="javascript:gotoLocation(THREE_SISTERS);">Three Sisters</a> (near the city of Bend, Oregon) � South Sister is the highest and youngest, with a well defined crater. Middle Sister is more pyramidal and eroded. North Sister is the oldest and has a crumbling rock pinnacle.</li>
+  <li><a href="javascript:gotoLocation(BROKEN_TOP);">Broken Top</a> (to the southeast of South Sister) � a highly eroded extinct stratovolcano. Contains Bend Glacier.</li>
+  <li><a href="javascript:gotoLocation(NEWBERRY_VOLCANO);">Newberry Volcano and Newberry Caldera</a> � isolated caldera with two crater lakes. Very variable lavas. Flows from here have reached the city of Bend.</li>
+  <li><a href="javascript:gotoLocation(MOUNT_BACHELOR);">Mount Bachelor</a> (near Three Sisters) � a geologically young (less than 15,000 years) shield-to-stratovolcano which is now the site of a popular ski resort.</li>
+  <li><a href="javascript:gotoLocation(MOUNT_BAILEY);">Mount Bailey</a> (north of Mount Mazama)</li>
+  <li><a href="javascript:gotoLocation(MOUNT_THIELSEN);">Mount Thielsen</a> (east of Mount Bailey) � highly eroded volcano with a prominent spire, making it the Lightning Rod of the Cascades.</li>
+  <li><a href="javascript:gotoLocation(MOUNT_MAZAMA);">Mount Mazama</a> (southern Oregon) � better known as Crater Lake, which is a caldera formed by a catastrophic eruption which took out most of the summit roughly 6,900 years ago. Mount Mazama is estimated to have been about 11,000 ft. (3,350 m) elevation prior to the blast.</li>
+  <li><a href="javascript:gotoLocation(MOUNT_SCOTT);">Mount Scott</a> (southern Oregon) � on the southeastern flank of Crater Lake. At 8,929 feet (2,721 m) elevation, this small stratovolcano is the highest peak in Crater Lake National Park.</li>
+  <li><a href="javascript:gotoLocation(MOUNT_MCLOUGHLIN);">Mount McLoughlin</a> (near Klamath Falls, Oregon) � presents a symmetrical appearance when viewed from Klamath Lake.</li>
+  <li><a href="javascript:gotoLocation(MEDICINE_LAKE);">Medicine Lake Volcano</a> � a shield volcano in northern California which is the largest volcano by volume in the Cascades.</li>
+  <li><a href="javascript:gotoLocation(MOUNT_SHASTA);">Mount Shasta</a> (northern California) � second highest peak in the Cascades. Can be seen in the Sacramento Valley as far as 140 miles (225 km) away, as it is a dominating feature of the region.</li>
+  <li><a href="javascript:gotoLocation(LASSEN_PEAK);">Lassen Peak</a> (south of Mount Shasta) � southernmost volcano in the Cascades and the most easily climbed peak in the Cascades. It erupted from 1914 to 1921, and like Mount Shasta, it too can be seen in the Sacramento Valley, up to 120 miles (193 km) away.</li>
+</ul>
+</p>
+<p>
+From <a href="http://en.wikipedia.org/wiki/Cascade_Range">Wikipedia: Cascade range article</a>.
+</p>
+
+</body>
+</html>

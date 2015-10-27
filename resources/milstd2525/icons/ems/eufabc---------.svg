@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="eufabc---------.svg">
+  <metadata
+     id="metadata32">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs30" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="705"
+     inkscape:window-height="480"
+     id="namedview28"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="128"
+     inkscape:window-y="69"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="scale(120) translate(0.5 0.491667)"
+     id="g4"
+     style="stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0">
+    <path
+       d="M0.933701 1.2202 L1.12894 1.21946 L1.3261 0.958598 L1.18524 0.958598 C1.17063 0.958598     0.952 1.19287 0.933701 1.2202 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       id="path6" />
+    <path
+       d="M1.14969 1.22497 L1.33616 1.43149 C1.34832 1.42259 1.54243 1.14197 1.54243 1.13971     C1.54243 1.13261 1.37378 0.975345 1.35508 0.962687 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       id="path8" />
+    <path
+       d="M0.639425 1.43417 L0.727437 1.43652 C0.756638 1.39292 0.808968 1.32955 0.844524 1.28698     C0.878496 1.24631 0.95191 1.17765 0.973949 1.14474 L0.915657 1.14195 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       id="path10" />
+    <path
+       d="M0.752591 1.43652 L1.31101 1.43652 C1.30615 1.4183 1.13374 1.24032 1.11984 1.24032     L0.92867 1.24032 C0.910741 1.24032 0.768005 1.41351 0.752591 1.43652 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       id="path12" />
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       d="M 1.35992,1.43554 1.44458,1.43858 1.66317,1.14474 1.5636,1.14548 z"
+       id="polygon14" />
+    <path
+       d="M1.23555 1.45665 L1.43678 1.45665 C1.44558 1.45665 1.62452 1.64779 1.63801 1.66795     L1.06953 1.66795 C1.07499 1.64749 1.22453 1.45665 1.23555 1.45665 zM0.626822     1.45665 L0.833086 1.45665 C0.845523 1.45665 1.00388 1.64504 1.01922 1.66795     L0.450744 1.66795 C0.456461 1.64654 0.613342 1.45665 0.626823 1.45665 zM0.866913     1.45785 L1.18716 1.45801 L1.04388 1.66334 zM0.75259 1.43653 C0.768003     1.41352 0.91074 1.24033 0.928669 1.24033 L1.11984 1.24033 C1.13374 1.24033     1.30614 1.41831 1.31101 1.43653 zM1.6635 1.66313 L1.46709 1.44668 L1.68316     1.14991 L1.88596 1.3268 L1.66349 1.66313 zM1.5636 1.14548 L1.66317 1.14474 L1.44458     1.43858 L1.35992 1.43555 zM0.915657 1.14195 L0.973949 1.14474 C0.951909     1.17765 0.878496 1.24631 0.844524 1.28698 C0.808968 1.32955 0.756638 1.39292     0.727437 1.43653 L0.639425 1.43417 zM1.35508 0.962688 C1.37378 0.975346     1.54243 1.13261 1.54243 1.13971 C1.54243 1.14197 1.34832 1.42259 1.33616 1.4315     L1.14969 1.22497 zM0.9337 1.2202 C0.951999 1.19288 1.17063 0.958602 1.18524     0.958602 L1.3261 0.958602 L1.12894 1.21946 zM0.99407 1.12462 L0.898484     1.12462 C0.872901 1.16283 0.808999 1.22668 0.773964 1.2617 C0.730188 1.30547     0.691861 1.35411 0.648196 1.39753 C0.62018 1.4254 0.415566 1.66406 0.410495     1.68304 C0.421778 1.68567 0.422062 1.68807 0.435652 1.68807 L1.67102 1.6866     L1.91298 1.32302 L1.90626 1.32447 L1.68831 1.12462 L1.56758 1.12462 C1.53568     1.10326 1.36752 0.938481 1.35125 0.938481 L1.1802 0.938481 C1.16199 0.938481     1.02312 1.10517 0.994066 1.12462 z"
+       style="fill:rgb(0, 0, 0);stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       id="path16" />
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       d="M 1.04388,1.66334 1.18717,1.458 0.866913,1.45784 z"
+       id="polygon18" />
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       d="M 1.88596,1.3268 1.68317,1.14991 1.46709,1.44668 1.6635,1.66313 z"
+       id="polygon20" />
+    <path
+       d="M0.626823 1.45665 C0.613343 1.45665 0.456461 1.64654 0.450744 1.66795 L1.01922 1.66795     C1.00389 1.64504 0.845523 1.45665 0.833086 1.45665 L0.626822 1.45665 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       id="path22" />
+    <path
+       d="M1.23555 1.45665 C1.22453 1.45665 1.07499 1.64749 1.06953 1.66795 L1.63801 1.66795     C1.62452 1.64779 1.44558 1.45665 1.43678 1.45665 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       id="path24" />
+  </g>
+  <text
+     style="fill:rgb(0,0,0);font-family:Arial;font-size:52;font-weight:bold;text-anchor:middle"
+     x="200"
+     y="148"
+     id="text26">STOR</text>
+</svg>

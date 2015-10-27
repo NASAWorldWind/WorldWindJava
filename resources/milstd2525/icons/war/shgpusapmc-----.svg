@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><text style="fill:rgb(255,255,255);font-family:Arial;font-size:90;font-weight:bold;text-anchor:middle" x="200" y="232">JIB</text><polyline xmlns="http://www.w3.org/2000/svg" points="330,155 300,200 330,245" style="fill:none;stroke:rgb(255,255,255);stroke-width:10"/></svg>

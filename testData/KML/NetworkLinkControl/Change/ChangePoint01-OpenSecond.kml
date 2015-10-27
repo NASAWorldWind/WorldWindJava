@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinkControl. -->
+<!--$Id: ChangePoint01-OpenSecond.kml 391 2012-02-17 01:13:45Z tgaskins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <NetworkLink>
+        <Link>
+            <href>ChangePoint01D.kml</href>
+        </Link>
+    </NetworkLink>
+</kml>

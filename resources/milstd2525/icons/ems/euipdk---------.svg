@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><ellipse cx="200" cy="200" rx="30" ry="30" style="fill:rgb(255,255,255);stroke:rgb(255,255,255);stroke-width:1" transform="matrix(1 0 0 1 0 0)"/><g transform="matrix(6.12303e-017 1 -1 6.12303e-017 393.816 6.15962) translate(-6.85714 -5.71429)"><path d="M114 250 C96 220 96 180 114 150 L161 177 C153 190 153 210 161 223 z" id="1" style="fill:rgb(255,255,255);stroke:rgb(255,255,255);stroke-width:1"/><path d="M114 250 C96 220 96 180 114 150 L161 177 C153 190 153 210 161 223 z" id="2" style="fill:rgb(255,255,255);stroke:rgb(255,255,255);stroke-width:1" transform="rotate(120.132 130.75 200) translate(-104.35 -60.2598) rotate(0.357613 125.778 193.304) translate(-0.861723 0.507379) translate(0.861723 -0.507379) rotate(0.574712 125.695 193.451) rotate(358.362 125.566 193.689) rotate(0.854696 126.051 193.203) rotate(359.838 125.743 193.365) rotate(359.839 125.781 193.298)"/><path d="M114 250 C96 220 96 180 114 150 L161 177 C153 190 153 210 161 223 z" id="3" style="fill:rgb(255,255,255);stroke:rgb(255,255,255);stroke-width:1" transform="rotate(240.116 130.75 200) translate(-103.619 59.8911)"/></g></svg>

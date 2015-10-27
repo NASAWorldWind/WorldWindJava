@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinkControl. -->
+<!--$Id: ChangePlacemark01D.kml 391 2012-02-17 01:13:45Z tgaskins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <NetworkLinkControl>
+        <Update>
+            <targetHref>ChangePlacemark01B.kml</targetHref>
+            <Change>
+                <Placemark targetId="targetPlacemark">
+                    <name>Replacement Placemark</name>
+                    <visibility>1</visibility>
+                    <Point>
+                        <coordinates>-112,37</coordinates>
+                    </Point>
+                </Placemark>
+            </Change>
+        </Update>
+    </NetworkLinkControl>
+</kml>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
+    <Document>
+        <name>SuperOverlay: MV DOQQ</name>
+        <Snippet>
+            The original is a 7008 x 6720 DOQQ of Mountain View in 1991. (Source:
+            http://gis.ca.gov/).
+        </Snippet>
+        <description>
+            The original is a 7008 x 6720 DOQQ of Mountain View in 1991. (Source:
+            http://gis.ca.gov/). This is a Region NetworkLink hierarchy of 900+
+            GroundOverlays each of 256 x 256 pixels arranged in a hierarchy such
+            that more detailed images are loaded and shown as the viewpoint nears.
+            Enable the &quot;Boxes&quot; NetworkLink to see a LineString for
+            each Region. Tour the &quot;Boxes&quot; to visit each tile. Visit the
+            &quot;A&quot; and &quot;B&quot; Placemarks to see multiple levels of
+            hierarchy together. Use the slider on various images in the hierarchy
+            to see how the resolution varies and of the entire hierarchy to see
+            the imagery below. (Find the Google Campus...).
+        </description>
+        <LookAt>
+            <longitude>-122.096</longitude>
+            <latitude>37.401</latitude>
+            <range>17000</range>
+        </LookAt>
+        <NetworkLink>
+            <open>1</open>
+            <Style>
+                <ListStyle>
+                    <listItemType>checkHideChildren</listItemType>
+                </ListStyle>
+            </Style>
+            <Region>
+                <LatLonAltBox>
+                    <north>37.44140625</north>
+                    <south>37.265625</south>
+                    <east>-121.9921875</east>
+                    <west>-122.16796875</west>
+                </LatLonAltBox>
+                <Lod>
+                    <minLodPixels>128</minLodPixels>
+                    <maxLodPixels>-1</maxLodPixels>
+                </Lod>
+            </Region>
+            <Link>
+                <href>http://mw1.google.com/mw-earth-vectordb/kml-samples/mv-070501/1.kml</href>
+                <viewRefreshMode>onRegion</viewRefreshMode>
+            </Link>
+        </NetworkLink>
+        <NetworkLink>
+            <name>Boxes</name>
+            <visibility>0</visibility>
+            <Link>
+                <href>http://mw1.google.com/mw-earth-vectordb/kml-samples/mv-070501/qidboxes.kml</href>
+            </Link>
+        </NetworkLink>
+        <Placemark>
+            <name>A</name>
+            <visibility>0</visibility>
+            <LookAt>
+                <longitude>-122.1198115439602</longitude>
+                <latitude>37.38327509913652</latitude>
+                <altitude>0</altitude>
+                <range>3724.326998450705</range>
+                <tilt>59.5501297365467</tilt>
+                <heading>40.22980991388826</heading>
+            </LookAt>
+            <Point>
+                <coordinates>-122.1198115439602,37.38327509913652,0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>B</name>
+            <visibility>0</visibility>
+            <LookAt>
+                <longitude>-122.0744937468166</longitude>
+                <latitude>37.38095869430078</latitude>
+                <altitude>0</altitude>
+                <range>2271.276826196118</range>
+                <tilt>78.37668049754895</tilt>
+                <heading>-58.34372468495401</heading>
+            </LookAt>
+            <Point>
+                <coordinates>-122.0744937468166,37.38095869430078,0</coordinates>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>

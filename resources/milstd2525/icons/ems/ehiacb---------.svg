@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="ehiacb---------.svg">
+  <metadata
+     id="metadata32">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs30" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview28"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="98"
+     inkscape:window-y="63"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="matrix(100,0,0,100,73.3333,79.3333)"
+     id="g4"
+     style="fill:#000000">
+    <path
+       inkscape:connector-curvature="0"
+       d="m 0.754035,0.616189 0.090409,0 0,0.670071 0.207406,0 0,-0.670071 0.08508,0 0,0.12763 C 1.14364,0.73891 1.16884,0.711126 1.16884,0.701276 l 0,-0.116996 -0.1489,0 0,0.67007 -0.14891,0 0,-0.67007 -0.143583,0 0,0.67007 -0.122315,0 0,0.76579 1.281638,0 0,-0.71793 C 1.87782,1.30821 1.86019,1.32635 1.86019,1.33944 l 0,0.64347 -1.228464,0 0,-0.69665 0.122311,0 0,-0.670071 z"
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.06;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.12, 0.06;stroke-dashoffset:0"
+       id="path6" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 1.13693,1.28626 0.08509,0 C 1.21849,1.2711 1.2138,1.25435 1.19543,1.25435 l -0.02659,0 0,-0.06381 c 0,-0.02163 -0.02099,-0.05657 -0.03191,-0.06914 z"
+       style="fill:#ffffff"
+       id="path8" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 1.48261,0.66937 c 0,-0.080701 0.07977,-0.173791 0.07977,-0.21272 0,-0.032118 -0.01779,-0.097402 -0.04255,-0.106362 0,0.166413 -0.20208,0.300535 -0.20208,0.366941 l 0,0.010638 c 0,0.016437 0.04514,0.122492 0.05325,0.154146 C 1.38131,0.922249 1.40486,1.01269 1.40816,1.05226 1.26421,1.04906 1.23798,0.822029 1.16885,0.77573 L 1.1623,0.844734 1.16353,0.951222 c 0,0.109408 0.07869,0.267428 0.13153,0.325818 0.02329,0.02573 0.09729,0.08554 0.12901,0.09967 0.02007,0.00893 0.14663,0.06909 0.15426,0.06909 0.03385,0 0.21507,-0.16969 0.24605,-0.20067 0.05879,-0.05879 0.0943,-0.22436 0.0943,-0.347085 l 0,-0.015957 L 1.90201,0.748434 C 1.87956,0.762221 1.85245,0.880517 1.83722,0.912296 1.80179,0.986201 1.79612,0.984638 1.71128,1.0044 1.70492,0.718859 1.8672,0.810496 1.64747,0.557689 1.64747,0.671665 1.62555,0.741992 1.55174,0.781047 1.51999,0.764248 1.48261,0.716846 1.48261,0.66937 z"
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.06;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.12, 0.06;stroke-dashoffset:0"
+       id="path10" />
+    <polygon
+       points="0.897622,1.5947 0.897622,1.45111 0.764673,1.45111 0.764673,1.5947 "
+       style="fill:#ffffff"
+       id="polygon12" />
+    <polygon
+       points="1.1848,1.5947 1.1848,1.45111 1.04653,1.45111 1.04653,1.5947 "
+       style="fill:#ffffff"
+       id="polygon14" />
+    <polygon
+       points="1.47197,1.5947 1.47197,1.45111 1.32838,1.45111 1.32838,1.5947 "
+       style="fill:#ffffff"
+       id="polygon16" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 1.61024,1.5947 0.14359,0 0,-0.14359 -0.0585,0 c -0.02819,0 -0.05838,0.03542 -0.08509,0.04255 z"
+       style="fill:#ffffff"
+       id="path18" />
+    <polygon
+       points="0.897622,1.84465 0.897622,1.70638 0.764673,1.70638 0.764673,1.84465 "
+       style="fill:#ffffff"
+       id="polygon20" />
+    <polygon
+       points="1.1848,1.84465 1.1848,1.70638 1.04653,1.70638 1.04653,1.84465 "
+       style="fill:#ffffff"
+       id="polygon22" />
+    <polygon
+       points="1.47197,1.84465 1.47197,1.70638 1.32838,1.70638 1.32838,1.84465 "
+       style="fill:#ffffff"
+       id="polygon24" />
+    <polygon
+       points="1.75382,1.84465 1.75382,1.70638 1.61024,1.70638 1.61024,1.84465 "
+       style="fill:#ffffff"
+       id="polygon26" />
+  </g>
+</svg>

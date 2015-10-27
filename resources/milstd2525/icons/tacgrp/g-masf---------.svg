@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- SVG content generated using Symbology Configuration Management System (SCMS) -->
+
+<!-- Systematic Software Engineering Ltd. - www.systematic.co.uk - do not remove  -->
+
+<svg
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    id="G*MPSF----****X"
+    width="346.66681"
+    height="356.00012"
+    viewBox="0 0 346.66681 356.00012"
+    preserveAspectRatio="xMidYMid meet"
+    zoomAndPan="magnify"
+    version="1.1"
+    contentScriptType="application/ecmascript"
+    contentStyleType="text/css"
+    inkscape:version="0.48.2 r9819"
+    sodipodi:docname="g-masf--------x.svg">
+    <metadata
+        id="metadata22">
+        <rdf:RDF>
+            <cc:Work
+                rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                    rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <defs
+        id="defs20"/>
+    <sodipodi:namedview
+        pagecolor="#ffffff"
+        bordercolor="#666666"
+        borderopacity="1"
+        objecttolerance="10"
+        gridtolerance="10"
+        guidetolerance="10"
+        inkscape:pageopacity="0"
+        inkscape:pageshadow="2"
+        inkscape:window-width="640"
+        inkscape:window-height="480"
+        id="namedview18"
+        showgrid="false"
+        inkscape:zoom="0.59"
+        inkscape:cx="176.6668"
+        inkscape:cy="179.33332"
+        inkscape:window-x="0"
+        inkscape:window-y="0"
+        inkscape:window-maximized="0"
+        inkscape:current-layer="G*MPSF----****X"/>
+    <g
+        id="g3"
+        transform="translate(-23.3332,-23.3332)">
+        <svg
+            viewBox="0 0 400 400"
+            id="_0.G-MPSF--------X"
+            width="400"
+            height="400"
+            preserveAspectRatio="xMidYMid meet"
+            zoomAndPan="magnify"
+            version="1.1"
+            contentScriptType="application/ecmascript"
+            contentStyleType="text/css"
+            inkscape:version="0.48.2 r9819">
+            <g
+                transform="matrix(4,0,0,4,-790,-690)"
+                id="g6">
+                <rect
+                    x="160"
+                    y="170"
+                    width="52"
+                    height="53"
+                    transform="translate(61,27)"
+                    style="fill:none;stroke:#ffffff;stroke-width:2;stroke-dasharray:10"
+                    id="rect8"/>
+                <line
+                    x1="272"
+                    y1="197"
+                    x2="288"
+                    y2="180"
+                    transform="translate(1,0)"
+                    style="fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-dasharray:8"
+                    id="line10"/>
+                <line
+                    x1="258"
+                    y1="259"
+                    x2="242"
+                    y2="242"
+                    transform="translate(-37.6667,-62.6667)"
+                    style="fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-dasharray:8"
+                    id="line12"/>
+                <line
+                    x1="258"
+                    y1="259"
+                    x2="242"
+                    y2="242"
+                    transform="translate(30.3333,7.33333)"
+                    style="fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-dasharray:8"
+                    id="line14"/>
+                <line
+                    x1="242"
+                    y1="259"
+                    x2="258"
+                    y2="242"
+                    transform="translate(-37,7.33333)"
+                    style="fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-dasharray:8"
+                    id="line16"/>
+            </g>
+        </svg>
+    </g>
+</svg>

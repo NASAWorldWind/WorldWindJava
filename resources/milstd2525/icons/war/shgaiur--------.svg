@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="shgaiur--------.svg">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="705"
+     inkscape:window-height="480"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     style="font-size:90px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8,4;stroke-dashoffset:0;font-family:Arial"
+     id="text4">
+    <path
+       inkscape:connector-curvature="0"
+       d="m 109.0332,232 0,-64.42383 27.37793,0 c 6.88473,7e-5 11.88716,0.57868 15.00733,1.73584 3.12006,1.15729 5.61762,3.21539 7.49267,6.17432 1.87494,2.95904 2.81244,6.34282 2.8125,10.15137 -6e-5,4.83402 -1.42095,8.82572 -4.26269,11.97509 -2.84185,3.14945 -7.08989,5.13431 -12.74414,5.95459 2.81245,1.64065 5.13423,3.44241 6.96533,5.40528 1.831,1.96291 4.29926,5.44923 7.40478,10.45898 L 166.95312,232 l -15.55664,0 -9.40429,-14.01855 c -3.33988,-5.00975 -5.62504,-8.16649 -6.85547,-9.47022 -1.2305,-1.30369 -2.53421,-2.19724 -3.91113,-2.68066 -1.37698,-0.48338 -3.5596,-0.72507 -6.54786,-0.7251 l -2.63671,0 0,26.89453 z m 13.00782,-37.17773 9.62402,0 c 6.2402,3e-5 10.13668,-0.26364 11.68945,-0.79102 1.55269,-0.52731 2.76851,-1.43551 3.64746,-2.72461 0.87886,-1.28902 1.31832,-2.90035 1.31836,-4.83398 -4e-5,-2.16792 -0.57866,-3.91841 -1.73584,-5.25147 -1.15727,-1.33295 -2.79057,-2.17524 -4.8999,-2.52685 -1.05473,-0.14643 -4.21878,-0.21968 -9.49219,-0.21973 l -10.15136,0 z"
+       style="font-size:90px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8,4;stroke-dashoffset:0;font-family:Arial"
+       id="path2988" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 231.02539,224.13379 -7.4707,9.53613 c -3.66216,-1.78711 -7.17779,-4.24804 -10.54688,-7.38281 -2.60746,2.34375 -5.37601,4.07227 -8.30566,5.18555 -2.92972,1.11328 -6.41605,1.66992 -10.45899,1.66992 -8.02736,0 -14.06251,-2.25586 -18.10546,-6.76758 -3.13478,-3.48632 -4.70216,-7.49999 -4.70215,-12.04102 -1e-5,-4.13083 1.23046,-7.84421 3.6914,-11.14013 2.46093,-3.29587 6.13768,-6.15964 11.03028,-8.59131 -2.19729,-2.60738 -3.85256,-5.09029 -4.96582,-7.44873 -1.1133,-2.35835 -1.66994,-4.59224 -1.66993,-6.70166 -1e-5,-3.89643 1.56005,-7.19965 4.68018,-9.90967 3.1201,-2.7099 7.56589,-4.06488 13.3374,-4.06494 5.56637,6e-5 9.91695,1.42096 13.05176,4.26269 3.13472,2.84186 4.7021,6.31354 4.70215,10.41504 -5e-5,2.60747 -0.77642,5.08306 -2.3291,7.42676 -1.55278,2.34379 -4.68754,4.99516 -9.4043,7.9541 l 8.96484,11.82129 c 1.05465,-1.87497 1.96285,-4.32126 2.72461,-7.33887 l 11.16211,2.54883 c -1.11334,3.95511 -2.08013,6.84817 -2.90039,8.6792 -0.82037,1.83107 -1.69927,3.36183 -2.63672,4.59229 1.3769,1.28907 3.15669,2.70265 5.33936,4.24072 2.18256,1.5381 3.78656,2.55616 4.81201,3.0542 z m -33.61816,-35.02442 3.33984,-2.54882 c 2.4609,-1.90425 3.69137,-3.7939 3.69141,-5.66895 -4e-5,-1.58198 -0.5933,-2.92963 -1.77979,-4.04297 -1.18656,-1.11322 -2.79056,-1.66986 -4.81201,-1.66992 -1.96292,6e-5 -3.501,0.49078 -4.61426,1.47217 -1.1133,0.9815 -1.66994,2.11675 -1.66992,3.40576 -2e-5,1.52349 0.93747,3.36919 2.8125,5.53711 z m -4.83399,13.40333 c -2.84182,1.43557 -4.96584,3.16408 -6.37207,5.18554 -1.40627,2.02151 -2.10939,4.08694 -2.10937,6.19629 -2e-5,2.66603 0.87156,4.84132 2.61474,6.52588 1.74315,1.68458 4.07957,2.52686 7.00928,2.52686 1.93357,0 3.79392,-0.38085 5.58105,-1.14258 1.78708,-0.76171 3.73532,-2.02147 5.84473,-3.7793 z"
+       style="font-size:90px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8,4;stroke-dashoffset:0;font-family:Arial"
+       id="path2990" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 239.02344,167.57617 23.77441,0 c 5.36129,7e-5 9.4482,0.41022 12.26074,1.23047 3.77925,1.11334 7.01656,3.09088 9.71192,5.93262 2.69526,2.84185 4.74603,6.32085 6.15234,10.43701 1.40619,4.11625 2.10932,9.19193 2.10938,15.22705 -6e-5,5.30276 -0.65924,9.87307 -1.97754,13.71094 -1.61139,4.68751 -3.91119,8.48145 -6.89942,11.38183 -2.25591,2.19727 -5.30278,3.91114 -9.14062,5.14161 -2.87113,0.9082 -6.70902,1.3623 -11.51367,1.3623 l -24.47754,0 z m 13.00781,10.89844 0,42.6709 9.71191,0 c 3.63278,1e-5 6.25485,-0.20507 7.86621,-0.61524 2.10934,-0.52733 3.85983,-1.42088 5.25147,-2.68066 1.39156,-1.25975 2.52681,-3.3325 3.40576,-6.21826 0.87886,-2.88572 1.31831,-6.81882 1.31836,-11.79932 -5e-5,-4.98043 -0.4395,-8.80367 -1.31836,-11.46973 -0.87895,-2.66596 -2.10942,-4.74604 -3.6914,-6.24023 -1.58208,-1.49409 -3.58891,-2.50483 -6.02051,-3.03223 -1.81644,-0.4101 -5.37601,-0.61518 -10.67871,-0.61523 z"
+       style="font-size:90px;font-weight:bold;text-anchor:middle;fill:#ffffff;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8,4;stroke-dashoffset:0;font-family:Arial"
+       id="path2992" />
+  </g>
+</svg>

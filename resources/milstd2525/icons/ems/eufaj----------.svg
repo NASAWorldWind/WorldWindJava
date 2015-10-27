@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="eufaj----------.svg">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="705"
+     inkscape:window-height="480"
+     id="namedview10"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="185"
+     inkscape:window-y="72"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="scale(120) translate(0.35 0.491667)"
+     id="g4"
+     style="stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0">
+    <path
+       d="M0.956079 0.593748 C0.966902 0.602791 0.966402 0.653937 0.966402 0.676335 L1.01802     1.29056 L1.54782 1.29136 L1.75612 1.77059 C1.78756 1.76797 1.86997 1.73869     1.90387 1.72736 C1.92913 1.7189 2.04001 1.69837 2.04001 1.67252 L2.04001 1.66736     C2.04001 1.65231 2.00116 1.56768 1.99792 1.53596 L1.84083 1.59123 L1.65289     1.14087 L1.15563 1.14101 L1.14705 1.017 L1.50837 1.017 L1.50837 0.903444     L1.139 0.903243 L1.11609 0.635038 C1.1702 0.630538 1.22448 0.553932 1.22448     0.495676 L1.22448 0.449223 L1.21416 0.449223 L1.21416 0.433739 C1.21416 0.417818     1.17127 0.370074 1.15847 0.360389 C1.13828 0.345109 1.09061 0.327361     1.05725 0.333353 C1.01235 0.34142 0.990973 0.349499 0.964945 0.375503 C0.951233     0.389208 0.919945 0.441531 0.919945 0.464708 L0.919945 0.490515 C0.919945     0.540066 0.936485 0.564483 0.956079 0.593747 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       id="path6" />
+    <path
+       d="M0.77026 1.38347 C0.77026 1.30336 0.790543 1.26305 0.818406 1.20967 C0.848835 1.15136     0.886906 1.1309 0.914784 1.08926 L0.892441 0.919155 C0.837134 0.934151     0.731205 1.05496 0.700988 1.10774 C0.65248 1.19247 0.620575 1.27199 0.620575     1.40412 L0.620575 1.47122 C0.620575 1.51653 0.665465 1.63923 0.684571 1.67046     C0.725283 1.73701 0.747059 1.76485 0.799933 1.81834 C0.874886 1.89417 1.0225     1.96673 1.17286 1.96673 L1.19351 1.96673 C1.29665 1.96673 1.39963 1.93231     1.46502 1.89241 C1.5001 1.871 1.64257 1.76322 1.64257 1.7293 C1.64257 1.70529     1.57896 1.59095 1.57031 1.55381 C1.54744 1.58672 1.53726 1.61728 1.50978     1.65329 C1.48571 1.68486 1.4615 1.71006 1.43009 1.73361 C1.37496 1.77494 1.28791     1.81705 1.19351 1.81705 L1.1677 1.81705 C0.954519 1.81705 0.770259 1.6305     0.770259 1.41444 z"
+       style="fill:rgb(255, 255, 255);stroke:#000000;stroke-opacity:1;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:0.1,0.05;stroke-dashoffset:0"
+       id="path8" />
+  </g>
+</svg>

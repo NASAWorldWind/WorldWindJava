@@ -1,0 +1,82 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- $Id: BrowserBalloonExample.html 1171 2013-02-11 21:45:02Z dcollins $ -->
+
+<html>
+<head></head>
+<body>
+
+<table width="580" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="3" align="left" valign="top">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td align="left" valign="middle">
+                        <img src="http://worldwind.arc.nasa.gov/java/demos/Images/nasa-logo-98x84.png" alt="logo"/>
+                    </td>
+                    <td align="left" valign="middle">
+                        <font color="#CC3333" size="+2"><strong>NASA World Wind Java SDK</strong></font>
+                        <hr/>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" valign="top">
+            <font color="#666666"><strong>Browser Balloons</strong></font> <br/> <font color="#999999">
+            World Wind Java browser balloons embed web content into a World Window using the system's native browser.
+            Supports HTML, JavaScript, and Flash.</font>
+            <p>
+
+                <a href="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=NASA+Headquarters,+Washington+D.C.&aq=&sll=38.886223,-77.019632&sspn=0.019859,0.025985&ie=UTF8&hq=nasa+headquarters&hnear=Washington+D.C.,+District+of+Columbia&ll=38.887392,-77.015491&spn=0.039718,0.05197&z=15&iwloc=B"><strong>
+                <font color="#CC3333">NASA in Google Maps</font></strong></a>
+            </p>
+
+            <a href="http://earthquake.usgs.gov/earthquakes/catalogs/eqs7day-age.kmz"><strong><font color="#CC3333">USGS Real-Time Earthquakes in KML</font></strong></a>
+        </td>
+
+        <td width="10" align="left" valign="top">&nbsp;</td>
+
+        <td align="right" valign="top">
+            <table border="0" cellspacing="0" cellpadding="0" bgcolor="white">
+                <tr>
+                    <td align="center">
+                        <!--Embed the YouTube video located at http://www.youtube.com/watch?v=oY59wZdCDo0 using an-->
+                        <!--embedded object. Embedded objects currently work with BrowserBalloons on Mac and Windows,-->
+                        <!--whereas iframe elements work only on Windows.-->
+                        <object width="400" height="250">
+                            <param name="movie" value="http://www.youtube.com/v/rlG7W0gkjjE?version=3&amp;hl=en_US"/>
+                            <param name="allowFullScreen" value="true"/>
+                            <param name="allowscriptaccess" value="always"/>
+                            <embed src="http://www.youtube.com/v/rlG7W0gkjjE?version=3&amp;hl=en_US"
+                                   type="application/x-shockwave-flash" width="400" height="250"
+                                   allowscriptaccess="always" allowfullscreen="true"></embed>
+                        </object>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" valign="top">
+                        <dl>
+                            <dt><font color="#666666"><strong>The Space Shuttle (Narrated by William Shatner)</strong></font></dt>
+                            <dd><font color="#999999">by NASAtelevision</font></dd>
+                        </dl>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" align="right" valign="top"><font color="#999999">2011 NASA World Wind SDK</font></td>
+    </tr>
+</table>
+
+</body>
+</html>

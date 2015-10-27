@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KML document loaded by NetworkLink06.kml. -->
+<!--$Id: NetworkLink06_nested.kml 14652 2011-02-09 20:44:42Z dcollins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <!-- Overlay image from KML interactive sampler. Places photo of volcano in Sicily. -->
+    <GroundOverlay>
+        <name>BalloonLink_nested</name>
+        <description>Ground overlay with local image, loaded via Balloon link (NetworkLink06_nested.kml from
+            NetworkLink06.kml).
+        </description>
+        <Icon>
+            <href>etna.jpg</href>
+        </Icon>
+        <LatLonBox>
+            <north>37.91904192681665</north>
+            <south>37.46543388598137</south>
+            <east>15.35832653742206</east>
+            <west>14.60128369746704</west>
+            <rotation>-0.1556640799496235</rotation>
+        </LatLonBox>
+        <LookAt>
+            <longitude>14.97980511744455</longitude>
+            <latitude>37.69223790639901</latitude>
+            <altitude>0</altitude>
+
+            <heading>0</heading>
+            <tilt>45</tilt>
+            <range>200000</range>
+
+            <altitudeMode>relativeToGround</altitudeMode>
+        </LookAt>
+    </GroundOverlay>
+</kml>

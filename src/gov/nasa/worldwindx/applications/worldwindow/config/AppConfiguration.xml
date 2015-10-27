@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<Configuration version="1">
+    <!-- Order matters in the instantiation of some of these -->
+    <!-- Core infrastructure classes must be instantiated first, and in the order given here -->
+    <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.core.MenuBarImpl"/>-->
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.ToolBarImpl"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.WWPanelImpl"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager.ControlsPanelImpl"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.AppPanelImpl"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.NetworkActivitySignal"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.StatusPanelImpl"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.AppFrameImpl"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.ExternalLinkController"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.IconController"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.ToolTipController"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.InfoPanelController"/>
+    <!-- Features should and in some cases must be instantiated before the menus that refer to them -->
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.ScaleBar"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.Compass"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager.LayerManagerDialog"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.CoordinatesDisplay"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.Crosshair"/>
+    <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.features.ExportImage" accelerator="control P"/>-->
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.GazetteerPanel"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager.ActiveLayersPanel"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager.LayerManagerPanel"/>
+    <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.features.Measurement"/>-->
+    <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.features.WMS"/>-->
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.WMSDialog"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.YahooGazetteer"/>
+    <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.features.MeasurementDialog" featureID="gov.nasa.worldwindx.applications.worldwindow.feature.MeasurementDialog" actuate="onDemand"/>-->
+    <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.features.NASACopyrightDialog"/>-->
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.Navigation"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.Graticule"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.LatLonGraticule"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.UTMGraticule"/>
+    <!-- Menus just point to other things, so instantiate them last -->
+</Configuration>

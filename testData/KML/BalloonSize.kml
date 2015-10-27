@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ This file contains several Placemarks with balloons designed to test different aspects of BrowserBalloon auto-sizing.
+ Use this file with test/gov/nasa/worldwind/render/BalloonSizeTest.html.
+-->
+
+<!--$Id $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <name>Balloon Size test</name>
+        <open>1</open>
+
+        <Placemark>
+            <name>Simple placemark</name>
+            <description>Attached to the ground. Intelligently places itself
+                at the height of the underlying terrain.
+            </description>
+            <Point>
+                <coordinates>-120.0822035425683,37.42228990140251,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <Placemark>
+            <name>Simple placemark with Doctype</name>
+            <description><![CDATA[
+                <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+                <html>
+                    This description contains a Doctype declaration, which causes Internet Explorer to render it in
+                    standards mode.
+
+                    <p/>Otherwise, it's just a simple placemark, attached to the ground. Intelligently places itself
+                    at the height of the underlying terrain.
+                </html>
+                ]]>
+            </description>
+            <Point>
+                <coordinates>-100.1822035425683,37.52228990140251,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <!-- Balloon that contains only one very long line. -->
+        <Placemark>
+            <name>Wide balloon</name>
+            <description><![CDATA[
+                    <table width="800" border="1">
+                       <tr><td>
+                         This balloon contains a table that is very wide.
+                       </td></tr>
+                    </table>
+      ]]></description>
+            <Point>
+                <coordinates>-109.370533,37.823842,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <!-- Balloon style using extended data -->
+        <Placemark>
+            <name>Description with URL</name>
+            <description>http://www.leuchtturmwelt.net/HTML/LTPHILA/ORIGINAL/NKO04_2.JPG
+                Date unknown. Active; focal plane 25 m (82 ft); two white flashes every 6 s. 7 m (23 ft) square concrete tower, probably with lantern and gallery and attached to a small equipment building. Entire lighthouse is white. Huelse has a postage stamp image, identified as Yubundo, that might depict this lighthouse. Located on an islet about 13 km (8 mi) southeast of the Yalu River entrance. Located on the highest point of the island. Site and tower closed. ARLHS NKR-031; Admiralty M4105; NGA 18164.</description>
+            <Point>
+                <coordinates>-111.956,33.5043</coordinates>
+            </Point>
+        </Placemark>
+
+    </Document>
+</kml>

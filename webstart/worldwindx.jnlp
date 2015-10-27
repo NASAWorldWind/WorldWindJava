@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: worldwindx.jnlp 958 2012-12-05 22:57:10Z dcollins $ -->
+<jnlp codebase="http://worldwind.arc.nasa.gov/java/2.0.0/webstart/"
+      href="worldwindx.jnlp" version="2.0.0">
+
+    <!--
+        Provides a description of the World Wind SDK extensions library.
+    -->
+    <information>
+        <title>NASA World Wind Java Extensions</title>
+        <vendor>NASA</vendor>
+        <homepage href="http://worldwind.arc.nasa.gov"/>
+        <description>NASA World Wind Java Extensions</description>
+        <description kind="short">NASA World Wind Java Planetary Visualization SDK Extensions, version 2.0.0
+        </description>
+        <offline-allowed/>
+    </information>
+
+    <!--
+        Requests a trusted application environment. The World Wind SDK extensions library requires access to the network
+        and the local filesystem. All World Wind JAR files are signed with a digital signature associated with NASA.
+    -->
+    <security>
+        <all-permissions/>
+    </security>
+
+    <!--
+        Specifies the resources required by the World Wind SDK extensions library:
+        * World Wind extensions JAR file.
+        * World Wind core Java Web Start component.
+    -->
+    <resources>
+        <jar href="worldwindx.jar"/>
+        <extension name="worldwind" href="worldwind.jnlp"/>
+    </resources>
+
+    <!--
+        Indicates that this Java Web Start file describes a component. This element is intentionally left blank, since
+        it is used only as an indicator.
+    -->
+    <component-desc/>
+
+</jnlp>

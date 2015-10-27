@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: resources.xml 1171 2013-02-11 21:45:02Z dcollins $ -->
+<project name="resources">
+
+    <!-- Rasterization height for the Forward Edge of Battle (FEBA, 2.X.2.4.2.1) image. -->
+    <property name="resources.rasterize.height.feba" value="16"/>
+
+    <!-- Creates the World Wind Symbol Icons package in the folder 'milstd2525-symbols'. -->
+    <target name="resources.milstd2525.symbols"
+            description="Creates the World Wind Symbol Icons package in the folder 'milstd2525-symbols'.">
+        <!-- Create a directory to store the rasterized output from the MIL-STD-2525 SVG sources. -->
+        <mkdir dir="${resources.milstd2525.symbols.dir}"/>
+        <!-- Rasterize all MIL-STD-2525 SVG source directories. Excludes empty directories in order to suppress
+             erroneous error messages from the Apache Batik Rasterizer. Special cases are handled below. -->
+        <rasterize-svgdirs maxwidth="${resources.rasterize.width}" height="${resources.rasterize.height}"
+                           destdir="${resources.milstd2525.symbols.dir}">
+            <svgdirs>
+                <dirset dir="${resources.milstd2525.dir}">
+                    <exclude name="fills"/>
+                    <exclude name="frames"/>
+                    <exclude name="icons"/>
+                </dirset>
+            </svgdirs>
+        </rasterize-svgdirs>
+        <!-- Rasterize the Forward Edge of Battle (FEBA, 2.X.2.4.2.1) image. This image is not used in the same way as
+             other MIL-STD-2525 tactical point graphics, and therefore must be rasterized with a different height. -->
+        <rasterize-svgfiles maxwidth="${resources.rasterize.width}" height="${resources.rasterize.height.feba}"
+                            destdir="${resources.milstd2525.symbols.dir}" force="true">
+            <svgfiles>
+                <fileset dir="${resources.milstd2525.dir}">
+                    <include name="**/g-g?dlf--------.svg"/>
+                    <type type="file"/>
+                </fileset>
+            </svgfiles>
+        </rasterize-svgfiles>
+        <!-- Trim all MIL-STD-2525 modifier images under 'milstd2525-symbols/modifiers'. -->
+        <trimimages force="true">
+            <imagefiles>
+                <fileset dir="${resources.milstd2525.symbols.dir}">
+                    <include name="modifiers/**/*"/>
+                    <type type="file"/>
+                </fileset>
+            </imagefiles>
+        </trimimages>
+    </target>
+
+    <!-- Creates the World Wind Symbol Icons with a gray background in the folder 'milstd2525-symbols-preview'. This target
+         is useful for viewing the rasterized symbols outside of World Wind. Because the symbols are mostly white on a
+         transparent background, it is difficult to view them in most image editors. Note that this target is intended
+         for test purposes only. It should not be used to generate symbols for production use. -->
+    <target name="resources.milstd2525.symbols.preview"
+            description="Creates the World Wind Symbol Icons with a gray background in the folder 'milstd2525-symbols-preview' (for testing).">
+        <!-- Create a directory to store the rasterized output from the MIL-STD-2525 SVG sources. -->
+        <mkdir dir="${resources.milstd2525.symbols.preview.dir}"/>
+        <!-- Rasterize all MIL-STD-2525 SVG source directories. Excludes empty directories in order to suppress
+             erroneous error messages from the Apache Batik Rasterizer. Special cases are handled below. -->
+        <rasterize-svgdirs maxwidth="${resources.rasterize.width}" height="${resources.rasterize.height}"
+                           destdir="${resources.milstd2525.symbols.preview.dir}"
+                           background="255.200.200.200">
+            <svgdirs>
+                <dirset dir="${resources.milstd2525.dir}">
+                    <exclude name="fills"/>
+                    <exclude name="frames"/>
+                    <exclude name="icons"/>
+                </dirset>
+            </svgdirs>
+        </rasterize-svgdirs>
+    </target>
+
+    <!-- Packages the World Wind MIL-STD-2525 Symbol Icons ZIP archive into the file 'milstd2525-symbols.zip'. -->
+    <target name="resources.milstd2525.symbols.zipfile" depends="resources.milstd2525.symbols"
+            description="Packages the World Wind MIL-STD-2525 Symbol Icons ZIP archive into the file 'milstd2525-symbols.zip'.">
+        <zip destfile="${resources.milstd2525.symbols.zipfile}">
+            <fileset dir="${resources.milstd2525.symbols.dir}"/>
+        </zip>
+    </target>
+
+    <!-- Individual clean targets corresponding to each build target above. -->
+    <target name="clean.resources.milstd2525.symbols">
+        <delete dir="${resources.milstd2525.symbols.dir}"/>
+        <delete dir="${resources.milstd2525.symbols.preview.dir}"/>
+        <delete file="${resources.milstd2525.symbols.zipfile}"/>
+    </target>
+    <!-- Main clean target for resource build targets. Removes all files and directories created by all resource build
+         targets. -->
+    <target name="clean.resources.all" depends="clean.resources.milstd2525.symbols"/>
+
+</project>

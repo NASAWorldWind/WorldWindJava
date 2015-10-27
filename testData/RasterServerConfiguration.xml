@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RasterServer version="1.0">
+    <Sector>
+        <SouthWest>
+            <LatLon latitude="-50.0" longitude="178.0" units="degrees"/>
+        </SouthWest>
+        <NorthEast>
+            <LatLon latitude="-47.0" longitude="180.0" units="degrees"/>
+        </NorthEast>
+    </Sector>
+    <Property name="gov.nasa.worldwind.avkey.DisplayName" value="Desktop DTEDfromSTL 30m DTED2  Elevations"/>
+    <Property name="gov.nasa.worldwind.avkey.DatasetNameKey" value="Desktop DTEDfromSTL 30m DTED2  Elevations"/>
+    <Property name="gov.nasa.worldwind.avkey.DataCacheNameKey" value="Desktop DTEDfromSTL 30m DTED2  Elevations"/>
+    <Sources>
+        <Source path="/Users/tag/Desktop/DTEDfromSTL/30m DTED2/s48 e179.dt2" type="file">
+            <Sector>
+                <SouthWest>
+                    <LatLon latitude="-48.0" longitude="179.0" units="degrees"/>
+                </SouthWest>
+                <NorthEast>
+                    <LatLon latitude="-47.0" longitude="180.0" units="degrees"/>
+                </NorthEast>
+            </Sector>
+        </Source>
+        <Source path="/Users/tag/Desktop/DTEDfromSTL/30m DTED2/s50 e178.dt2" type="file">
+            <Sector>
+                <SouthWest>
+                    <LatLon latitude="-50.0" longitude="178.0" units="degrees"/>
+                </SouthWest>
+                <NorthEast>
+                    <LatLon latitude="-49.0" longitude="179.0" units="degrees"/>
+                </NorthEast>
+            </Sector>
+        </Source>
+    </Sources>
+</RasterServer>

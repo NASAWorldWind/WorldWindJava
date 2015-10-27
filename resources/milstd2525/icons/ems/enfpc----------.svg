@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><g transform="scale(100) translate(0.74 0.63)"><path d="M1.10993 1.0681 C1.10993 1.05171 1.12942 1.02826 1.1418 1.02826 L1.38481 1.02826     C1.39627 1.02826 1.41668 1.06377 1.41668 1.07208 L1.41668 1.08802 C1.41668 1.11034     1.38481 1.10548 1.38481 1.12387 L1.38481 1.25135 C1.38481 1.26343 1.6318     1.59506 1.6318 1.62183 L1.6318 1.70549 C1.6318 1.78202 1.46326 1.84891 1.37684     1.84891 L1.14977 1.84891 C1.09872 1.84891 1.02488 1.83092 0.993583 1.80989     C0.970977 1.7947 0.894811 1.73852 0.894811 1.70947 L0.894811 1.67362 C0.894811     1.61258 0.984441 1.49752 1.01245 1.44866 C1.02936 1.41915 1.13782 1.24875     1.13782 1.23143 L1.13782 1.12387 C1.13782 1.10535 1.10993 1.1089 1.10993     1.0681 zM1.37684 0.968506 L0.512374 0.968506 L0.512374 1.89273 L2.01423     1.89273 L2.01423 0.968506 L1.84692 0.968506 L1.84692 0.633876 L1.73538 0.633876     L1.73538 0.968506 L1.48838 0.968506 L1.48838 0.633876 L1.37684 0.633876 z" style="fill:rgb(255,255,255)"/><path d="M1.37683 0.633874 L1.48837 0.633874 L1.48837 0.968504 L1.73536 0.968504 L1.73536     0.633874 L1.84691 0.633874 L1.84691 0.968504 L2.01422 0.968504 L2.01422 1.89272     L0.512363 1.89272 L0.512363 0.968504 L1.37683 0.968504 zM0.48448 1.92459     L2.04211 1.92459 L2.04211 0.936633 L1.88276 0.936633 L1.88276 0.602003 L1.7035     0.602003 L1.7035 0.936633 L1.52423 0.936633 L1.52423 0.602003 L1.34496 0.602003     L1.34496 0.936633 L0.48448 0.936633 z" style="fill:rgb(0,0,0)"/></g><rect height="90" style="fill:rgb(255,255,255);stroke:rgb(255,255,255);stroke-width:1" transform="matrix(1 0 0 1 0 0)" width="141" x="131" y="161"/><text style="fill:rgb(0,0,0);font-family:arial;font-size:85;font-weight:bold;text-anchor:middle" x="200" y="235">$</text></svg>

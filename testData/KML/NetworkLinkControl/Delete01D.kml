@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinkControl. -->
+<!--$Id: Delete01D.kml 391 2012-02-17 01:13:45Z tgaskins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <NetworkLinkControl>
+        <Update>
+            <targetHref>Delete01B.kml</targetHref>
+            <Delete>
+                <Placemark targetId="eastMarker"></Placemark>
+            </Delete>
+        </Update>
+    </NetworkLinkControl>
+</kml>

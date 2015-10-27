@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="ehfaja---------.svg">
+  <metadata
+     id="metadata18">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs16" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview14"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="225"
+     inkscape:window-y="78"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="matrix(115,0,0,115,59.99999,29.000015)"
+     id="g4"
+     style="stroke:#000000;stroke-width:0.05217391;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.10434783, 0.05217391;stroke-dashoffset:0">
+    <path
+       inkscape:connector-curvature="0"
+       d="m 0.916713,0.668618 0,0.037776 c 0,0.013094 0.021205,0.044937 0.030291,0.053661 0.012575,0.012067 0.038776,0.026091 0.062056,0.026091 l 0.02098,0 c 0.04443,0 0.09235,-0.046713 0.09235,-0.088146 l 0,-0.029382 c 0,-0.035433 -0.05436,-0.083949 -0.09654,-0.083949 l -0.01679,0 c -0.039485,0 -0.092347,0.047083 -0.092347,0.083949 z"
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.05217391;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.10434783, 0.05217391;stroke-dashoffset:0"
+       id="path6" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 1.53374,1.00861 0,0.03358 c 0,0.03285 0.05104,0.08395 0.09235,0.08395 l 0.01678,0 c 0.04648,0 0.09235,-0.04997 0.09235,-0.09654 l 0,-0.01679 c 0,-0.048196 -0.04818,-0.09235 -0.09654,-0.09235 l -0.0042,0 c -0.05128,0 -0.10074,0.043689 -0.10074,0.08815 z"
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.05217391;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.10434783, 0.05217391;stroke-dashoffset:0"
+       id="path8" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 0.87474,1.21849 c 0,-0.04831 0.071386,-0.10515 0.096539,-0.14272 0.030671,0.02054 0.031711,0.0391 0.074141,0.06018 0.02991,0.01487 0.0562,0.03005 0.08823,0.04189 0.05341,0.01973 0.04833,-0.00303 0.09264,0.04168 0.0198,0.02 0.04015,0.05354 0.07659,0.05354 0.0084,0 0.01679,-0.01745 0.01679,-0.02939 l 0,-0.02098 c 0,-0.0611 -0.07084,-0.0792 -0.11625,-0.09782 C 1.15609,1.10547 1.08969,1.089 1.07253,1.04169 1.05411,0.990895 1.02497,0.941284 1.00852,0.891627 0.993409,0.846029 0.967724,0.78195 0.908318,0.78195 l -0.008393,0 c -0.06626,0 -0.160067,0.164307 -0.176035,0.22693 C 0.711165,1.05878 0.689405,1.11094 0.678972,1.16543 0.667563,1.22503 0.665661,1.2779 0.654795,1.33854 0.647614,1.3786 0.65702,1.38892 0.642205,1.42669 0.632268,1.45202 0.623937,1.47512 0.614437,1.49966 0.59576,1.54792 0.578086,1.59893 0.560468,1.64717 0.543839,1.6927 0.454992,1.90396 0.454992,1.94045 c 0,0.05552 0.135232,0.0279 0.167898,0.02518 C 0.621961,1.9238 0.573737,1.93145 0.555733,1.90687 0.600276,1.84035 0.637524,1.76965 0.68082,1.70036 0.703229,1.6645 0.780698,1.50067 0.799186,1.48713 c 0.013177,0.00882 0.065571,0.0677 0.082905,0.08499 0.042107,0.04199 0.043292,0.04015 0.059748,0.10395 0.02376,0.09209 0.042036,0.1668 0.042036,0.28537 L 1.02151,1.96657 1.114,1.96563 c 0.02791,0 0.03892,-0.00389 0.05036,-0.02098 C 1.14927,1.92211 1.09593,1.906 1.06363,1.89848 l 0,-0.02519 c 0,-0.00941 -0.00333,-0.00921 -0.0084,-0.01679 l 0,-0.26444 C 1.02265,1.5434 0.991556,1.48556 0.956981,1.43846 0.931536,1.40381 0.874741,1.32481 0.874741,1.27306 l 0,-0.05457 z"
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.05217391;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.10434783, 0.05217391;stroke-dashoffset:0"
+       id="path10" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 1.39942,1.68021 0,-0.0042 c 0,-0.3383 0.48691,-0.31889 0.48691,-0.01259 l 0,0.02938 c 0,0.11781 -0.11637,0.22667 -0.23506,0.22667 l -0.01259,0 C 1.5094,1.91947 1.39942,1.80926 1.39942,1.68021 z M 1.36584,1.1975 l 0.10074,0 0,0.21827 c 0,3.5e-4 -0.06993,0.07179 -0.0826,0.09369 -0.0105,0.01813 -0.04752,0.10312 -0.04752,0.12458 l 0,0.05037 c 0,0.14839 0.14274,0.29802 0.28963,0.29802 l 0.02098,0 c 0.12454,0 0.23428,-0.10914 0.23926,-0.10914 l 0.1553,0 0,-0.04197 -0.07136,0 C 1.97555,1.82135 1.98707,1.80273 1.98707,1.78934 l 0,-0.23925 c 0,-0.04186 -0.02112,-0.07137 -0.04618,-0.08815 l -0.07135,0 L 1.85181,1.44608 C 1.87497,1.43997 1.89472,1.42562 1.89472,1.39898 l 0,-0.0084 c 0,-0.01018 -0.02147,-0.03777 -0.03358,-0.03777 l -0.10913,0 0,-0.11753 C 1.75201,1.177 1.71873,1.14294 1.65966,1.14294 l -0.04617,0 c -0.128,0 -0.10074,0.12655 -0.10074,0.25184 L 1.50066,1.40379 1.50016,1.16812 C 1.49259,1.16305 1.49278,1.15972 1.48337,1.15972 l -0.11753,0 z"
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.05217391;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.10434783, 0.05217391;stroke-dashoffset:0"
+       id="path12" />
+  </g>
+</svg>

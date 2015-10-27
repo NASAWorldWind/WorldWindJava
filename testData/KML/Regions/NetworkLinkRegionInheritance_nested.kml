@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <name>NetworkLink Region Inheritance (nested)</name>
+        <!-- Inherits region from parent. -->
+        <Placemark>
+            <name>Inherits parent NetworkLink's region</name>
+            <Point>
+                <coordinates>-110,43</coordinates>
+            </Point>
+        </Placemark>
+        <!-- Overrides parent's region. -->
+        <Placemark>
+            <name>Overrides parent NetworkLink's region</name>
+            <Region>
+                <LatLonAltBox>
+                    <north>48</north>
+                    <south>-28</south>
+                    <east>-95</east>
+                    <west>-115</west>
+                </LatLonAltBox>
+                <Lod>
+                    <minLodPixels>0</minLodPixels>
+                    <maxLodPixels>-1</maxLodPixels>
+                </Lod>
+            </Region>
+            <Point>
+                <coordinates>-100,43</coordinates>
+            </Point>
+        </Placemark>
+        <Folder>
+            <!-- Inherits ancestor's region. -->
+            <Placemark>
+                <name>Inherits ancestor NetworkLink's region</name>
+                <Point>
+                    <coordinates>-110,33</coordinates>
+                </Point>
+            </Placemark>
+            <!-- Overrides ancestor's region. -->
+            <Placemark>
+                <name>Overrides ancestor NetworkLink's region</name>
+                <Region>
+                    <LatLonAltBox>
+                        <north>48</north>
+                        <south>-28</south>
+                        <east>-95</east>
+                        <west>-115</west>
+                    </LatLonAltBox>
+                    <Lod>
+                        <minLodPixels>0</minLodPixels>
+                        <maxLodPixels>-1</maxLodPixels>
+                    </Lod>
+                </Region>
+                <Point>
+                    <coordinates>-100,33</coordinates>
+                </Point>
+            </Placemark>
+        </Folder>
+    </Document>
+</kml>

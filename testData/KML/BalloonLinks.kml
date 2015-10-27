@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ This file contains several Placemarks that link to each other and to other files using anchors in description
+ balloons. It is intended as an example of how to link to features in KML documents, and a test file to exercise
+ the URL handling code.
+-->
+
+<!--$Id: BalloonLinks.kml 15748 2011-06-24 22:31:49Z pabercrombie $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <name>BalloonStyle.kml</name>
+        <open>1</open>
+
+        <Style id="exampleBalloonStyle">
+            <BalloonStyle>
+                <!-- styling of the balloon text -->
+                <text><![CDATA[
+                    <h3>Point Placemark</h3>
+                    <a href="#myPlacemark">Fly to</a><br/>
+                    <a href="#myPlacemark;balloon">Open balloon</a><br/>
+                    <a href="#myPlacemark;balloonFlyto">Fly to balloon</a><br/>
+                    <a href="#hiddenBalloonPlacemark;balloonFlyto">Fly to hidden balloon</a>
+
+                    <h3>Polygon Placemark</h3>
+                    <a href="#myPoly">Fly to</a></br>
+                    <a href="#myPoly;balloon">Open balloon</a></br>
+                    <a href="#myPoly;balloonFlyto">Fly to balloon</a></br>
+                    <a href="#floatingPoly">Fly to floating polygon</a>
+
+                    <h3>Line Placemark</h3>
+                    <a href="#myLine">Fly to</a><br/>
+                    <a href="#myLine;balloon">Open balloon</a><br/>
+                    <a href="#myLine;balloonFlyto">Fly to balloon</a><br/>
+
+                    <h3>Overlays</h3>
+                    <a href="#crosshairs;balloon">Screen overlay balloon</a><br/>
+                    <a href="#groundOverlay">Ground overlay fly to</a><br/>
+                    <a href="#groundOverlay;balloonFlyto">Ground overlay fly to balloon</a>
+
+                    <h3>Links to documents</h3>
+                    <a href="http://worldwind.arc.nasa.gov">Remote HTML doc</a><br/>
+                    <a href="http://worldwind.arc.nasa.gov" target="_blank">HTML doc in new window</a><br/>
+                    <a href="http://kml-samples.googlecode.com/svn/trunk/kml/Region/ScreenOverlay/continents.kmz">Remote KMZ doc</a><br/>
+
+                    <h3>Links to features</h3>
+                    <a href="http://kml-samples.googlecode.com/svn/trunk/kml/feature-anchor/feature-anchor-semi.kml#my-office">Feature in remote document</a><br/>
+                    <a href="#$[target]">Link to $[target] using entity replacement</a></li>
+      ]]></text>
+            </BalloonStyle>
+        </Style>
+
+        <Style id="simpleBalloon">
+            <BalloonStyle>
+                <!-- styling of the balloon text -->
+                <text><![CDATA[
+      <b><font color="#CC0000" size="+3">$[name]</font></b>
+      <br/><br/>
+      <font face="Courier">$[description]</font><br/>
+      <a href="#start;balloonFlyto">Go back to start</a>
+      ]]></text>
+            </BalloonStyle>
+        </Style>
+
+        <Style id="hiddenBalloon">
+            <BalloonStyle>
+                <!-- styling of the balloon text -->
+                <text><![CDATA[
+      <b><font color="#CC0000" size="+3">$[name]</font></b>
+      <br/><br/>
+      <font face="Courier">$[description]</font>
+      ]]></text>
+                <displayMode>hide</displayMode>
+            </BalloonStyle>
+        </Style>
+
+        <!-- Simple balloon style -->
+        <Placemark id="start">
+            <name>Start here</name>
+            <description>This placemark contains test links to other placemarks</description>
+            <styleUrl>#exampleBalloonStyle</styleUrl>
+            <ExtendedData>
+                <!-- Link target using entity replacement -->
+                <Data name="target">
+                    <value>myPlacemark</value>
+                </Data>
+            </ExtendedData>
+            <Point>
+                <coordinates>-122.370533,37.823842,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <Placemark id="hiddenBalloonPlacemark">
+            <name>Hidden balloon</name>
+            <description>The balloon on this placemark is hidden</description>
+            <styleUrl>#exampleBalloonStyleHidden</styleUrl>
+            <Point>
+                <coordinates>-122,37,0</coordinates>
+            </Point>
+        </Placemark>
+
+        <!-- Balloon style using extended data -->
+        <Placemark id="myPlacemark">
+            <name>Club house</name>
+            <styleUrl>#simpleBalloon</styleUrl>
+            <Point>
+                <coordinates>-111.956,33.5043</coordinates>
+            </Point>
+        </Placemark>
+
+        <!-- Balloon with URLs in text. URLs are automatically converted to links. -->
+        <Placemark id="myAutoLinkPlacemark">
+            <name>Auto link URLs</name>
+            <description><![CDATA[
+                URLs below should be links:<br/>
+                <br/>
+                http://www.nasa.gov<br/>
+                www.nasa.gov<br/>
+                <a href="http://worldwind.arc.nasa.gov" target="_blank">www.nasa.gov</a> (Link to WW site, not NASA)
+            ]]>
+            </description>
+            <Point>
+                <coordinates>-95,30</coordinates>
+            </Point>
+        </Placemark>
+
+        <!-- Balloon with URLs in text. This text is includes the HTML tag, so URLs should NOT be converted to links. -->
+        <Placemark id="dontAutoLinkPlacemark">
+            <name>Don't auto link URLs in HTML</name>
+            <description><![CDATA[
+                <html>
+                URL below should NOT be linked:<br/>
+                <br/>
+                http://www.nasa.gov<br/><br/>
+                (This balloon includes HTML tag, so hyperlinks are not processed.)
+                </html>
+            ]]>
+            </description>
+            <Point>
+                <coordinates>-90,30</coordinates>
+            </Point>
+        </Placemark>
+
+        <!-- LineString placemark -->
+        <Placemark id="myLine">
+            <name>Line String</name>
+            <description>Clamp to ground</description>
+            <styleUrl>#simpleBalloon</styleUrl>
+            <LineString>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    -119,28,10000 -119,35,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+
+        <Placemark id="myPoly">
+            <name>Polygon</name>
+            <description>Default Attributes and properties</description>
+            <styleUrl>#simpleBalloon</styleUrl>
+            <Polygon>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -106,28,3e4 -104,35,3e4 -107,35,3e4 -107,28,3e4 -106,28,3e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+
+        <Placemark id="floatingPoly">
+            <name>Floating Polygon</name>
+            <description>This is a floating polygon</description>
+            <styleUrl>#simpleBalloon</styleUrl>
+            <Polygon>
+                <extrude>0</extrude>
+                <altitudeMode>absolute</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -102,28,3e5 -100,35,3e5 -103,35,3e5 -103,28,3e5 -102,28,3e5
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+
+        <ScreenOverlay id="crosshairs">
+            <name>Simple crosshairs</name>
+            <visibility>1</visibility>
+            <description>This screen overlay uses fractional positioning to put the
+                image in the exact center of the screen
+            </description>
+            <styleUrl>#simpleBalloon</styleUrl>
+            <Icon>
+                <href>http://kml-samples.googlecode.com/svn/trunk/resources/crosshairs.png</href>
+            </Icon>
+            <overlayXY x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
+            <screenXY x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
+            <rotationXY x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
+            <size x="0" y="0" xunits="pixels" yunits="pixels"/>
+        </ScreenOverlay>
+
+        <GroundOverlay id="groundOverlay">
+            <name>Large-scale overlay on terrain</name>
+            <visibility>1</visibility>
+            <description>Overlay shows Mount Etna erupting on July 13th, 2001.</description>
+            <styleUrl>#simpleBalloon</styleUrl>
+            <Icon>
+                <href>http://kml-samples.googlecode.com/svn/trunk/resources/etna.jpg</href>
+            </Icon>
+            <LatLonBox>
+                <north>37.91904192681665</north>
+                <south>37.46543388598137</south>
+                <east>15.35832653742206</east>
+                <west>14.60128369746704</west>
+                <rotation>-0.1556640799496235</rotation>
+            </LatLonBox>
+        </GroundOverlay>
+
+    </Document>
+</kml>

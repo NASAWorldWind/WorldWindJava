@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><line style="stroke:rgb(255,255,255);stroke-width:10" x1="140" x2="260" y1="200" y2="200"/><path d="M285 175 C250 175 250 225 285 225" style="fill:none;stroke:rgb(255,255,255);stroke-width:10"/><path d="M115 175 C150 175 150 225 115 225" style="fill:none;stroke:rgb(255,255,255);stroke-width:10"/><g transform="translate(80 21) scale(0.6 0.6)"><path d="M170 276 L170 144 C170 119 230 119 230 144 L230 276" style="fill:none;stroke:rgb(255,255,255);stroke-width:10" transform="translate(0 0) translate(0 0)"/><line style="stroke:rgb(255,255,255);stroke-width:10" transform="translate(200 184) scale(1 1) translate(-200 -184)" x1="200" x2="200" y1="276" y2="124"/></g><polyline xmlns="http://www.w3.org/2000/svg" points="380,80 330,200 380,320" style="fill:none;stroke:rgb(255,255,255);stroke-width:10"/></svg>

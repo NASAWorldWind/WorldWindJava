@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KML document loaded by NetworkLink02.kml. -->
+<!--$Id: NetworkLink06.kml 14652 2011-02-09 20:44:42Z dcollins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <NetworkLink>
+        <description>Nested NetworkLink. Local file - relative path (NetworkLink06_nested.kml).</description>
+        <flyToView>1</flyToView>
+        <Link>
+            <href>NetworkLink06_nested.kml</href>
+        </Link>
+    </NetworkLink>
+</kml>

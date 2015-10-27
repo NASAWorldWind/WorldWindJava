@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dateline spanning shapes-->
+<!--$Id: DatelineSpanners.kml 13778 2010-09-11 07:34:12Z tgaskins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <Placemark>
+            <name>Dateline\nLineString\nClampToGround\nTessellate</name>
+            <LineString>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    180,90,10000 180,-90,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>LineString\nClampToGround\nTessellate</name>
+            <LineString>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    175,40,10000 -170,40,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>LineString\nClampToGround</name>
+            <LineString>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    175,39,10000 -170,39,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>LineString\nRelativeToGround\nExtrude\nTessellate</name>
+            <LineString>
+                <extrude>1</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    175,38,10000 -170,38,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>LineString\nRelativeToGround\nTessellate</name>
+            <LineString>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    175,37,10000 -170,37,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>LineString\nRelativeToGround\nExtrude</name>
+            <LineString>
+                <extrude>1</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    175,36,10000 -170,36,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>LineString\nRelativeToGround</name>
+            <LineString>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    175,35,10000 -170,35,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>LineString\nAbsolute\nExtrude</name>
+            <LineString>
+                <extrude>1</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>absolute</altitudeMode>
+                <coordinates>
+                    175,34,10000 -170,34,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>LineString\nAbsolute</name>
+            <LineString>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>absolute</altitudeMode>
+                <coordinates>
+                    175,33,10000 180,33,10000 -170,33,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>All defaults</name>
+            <LineString>
+                <coordinates>
+                    175,32,10000 -170,32,10000
+                </coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>LinearRing\nClampToGround\nTessellate</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    175,31,10000 -170,31,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>LinearRing\nClampToGround</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>clampToGround</altitudeMode>
+                <coordinates>
+                    175,30,10000 -170,30,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>LinearRing\nRelativeToGround\nExtrude\nTessellate</name>
+            <LinearRing>
+                <extrude>1</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    175,29,10000 -170,29,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>LinearRing\nRelativeToGround\nTessellate</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    175,28,10000 -170,28,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>LinearRing\nRelativeToGround\nExtrude</name>
+            <LinearRing>
+                <extrude>1</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    175,27,10000 -170,27,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>LinearRing\nRelativeToGround</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <coordinates>
+                    175,26,10000 -170,26,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>LinearRing\nAbsolute\nExtrude</name>
+            <LinearRing>
+                <extrude>1</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>absolute</altitudeMode>
+                <coordinates>
+                    175,25,10000 -170,25,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>LinearRing\nAbsolute</name>
+            <LinearRing>
+                <extrude>0</extrude>
+                <tessellate>0</tessellate>
+                <altitudeMode>absolute</altitudeMode>
+                <coordinates>
+                    175,24,10000 180,24,10000 -170,24,10000
+                </coordinates>
+            </LinearRing>
+        </Placemark>
+        <Placemark>
+            <name>Polygon\nOne boundary\nAbsolute</name>
+            <Polygon>
+                <altitudeMode>absolute</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            178,23,20000 -177,23,20000 180,23.5,20000 178,23,20000
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Polygon\nTwo boundaries\nAbsolute</name>
+            <Polygon>
+                <altitudeMode>absolute</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            178,21,20000 -177,21,20000 -177,22,20000 178,22,20000 178,21,20000
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+                <innerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            178.5,21.2,20000 -177.5,21.2,20000 -177.5,21.8,20000 178.5,21.8,20000 178.5,21.2,20000
+                        </coordinates>
+                    </LinearRing>
+                </innerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Polygon\nTwo boundaries\nRelativeToGround</name>
+            <Polygon>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            178,19,20000 -177,19,20000 -177,20,20000 178,20,20000 178,19,20000
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+                <innerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            178.5,19.2,20000 -177.5,19.2,20000 -177.5,19.8,20000 178.5,19.8,20000 178.5,19.2,20000
+                        </coordinates>
+                    </LinearRing>
+                </innerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Polygon\nTwo boundaries\nRelativeToGround\nExtruded</name>
+            <Polygon>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            178,17,20000 -177,17,20000 -177,18,20000 178,18,20000 178,17,20000
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+                <innerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            178.3,17.2,20000 -177.6,17.2,20000 -177.6,17.8,20000 178.3,17.8,20000 178.3,17.2,20000
+                        </coordinates>
+                    </LinearRing>
+                </innerBoundaryIs>
+                <innerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            178.5,17.4,20000 -177.8,17.4,20000 -177.8,17.6,20000 178.5,17.6,20000 178.5,17.4,20000
+                        </coordinates>
+                    </LinearRing>
+                </innerBoundaryIs>
+            </Polygon>
+        </Placemark>
+
+    </Document>
+</kml>

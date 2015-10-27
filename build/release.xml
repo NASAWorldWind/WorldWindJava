@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!-- $Id: release.xml 1171 2013-02-11 21:45:02Z dcollins $ -->
+<project name="release">
+
+    <!-- Creates the World Wind SDK release in the folder 'worldwind-release'. Includes the entire contents of the World
+         Wind project, the World Wind core JAR file, and the World Wind extensions JAR file. -->
+    <target name="worldwind.release" depends="clean.build,
+                                              clean.worldwind.release,
+                                              build"
+            description="Creates the World Wind SDK release in the folder 'worldwind-release'.">
+        <mkdir dir="${worldwind.release.dir}"/>
+        <copy todir="${worldwind.release.dir}">
+            <fileset dir="${basedir}">
+                <include name=".idea/**"/>
+                <include name="build/**"/>
+                <include name="build.xml"/>
+                <include name="demos/**"/>
+                <include name="doc/**"/>
+                <include name="lib-external/**"/>
+                <include name="resources/**"/>
+                <include name="schemas/**"/>
+                <include name="src/**"/>
+                <include name="test/**"/>
+                <include name="testData/**"/>
+                <include name="webstart/**"/>
+                <include name="**/*.iml"/>
+                <include name="*.bash"/>
+                <include name="*.bat"/>
+                <include name="*.dll"/>
+                <include name="*.html"/>
+                <include name="*.jar"/>
+                <include name="*.jnilib"/>
+                <include name="*.properties"/>
+                <include name="*.so"/>
+                <include name="*.txt"/>
+                <!-- Exclude the digital signature files.-->
+                <exclude name="**/keystore.*"/>
+                <exclude name="**/*wwstore*"/>
+                <!-- Exclude files added by the Bamboo build server. -->
+                <exclude name="**/build-number.txt"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+        <!-- Change the permissions of any unix scripts in the root folder to make them executable. -->
+        <chmod perm="ugo+rwx">
+            <fileset dir="${worldwind.release.dir}">
+                <include name="*.bash"/>
+            </fileset>
+        </chmod>
+    </target>
+
+    <!-- Packages the World Wind SDK release into the ZIP archive 'worldwind-version.zip', where 'version' is the
+         current version. -->
+    <target name="worldwind.release.zipfile" depends="worldwind.release"
+            description="Packages the World Wind SDK release into the ZIP archive 'worldwind-version.zip'.">
+        <zip destfile="${worldwind.release.zipfile}">
+            <fileset dir="${worldwind.release.dir}"/>
+        </zip>
+    </target>
+
+    <!-- Creates the World Wind API documentation release in the folder 'worldwind-docs'. Includes the World Wind
+         Javadoc-style documentation under the folder 'worldwind-docs/api'. -->
+    <target name="worldwind.doc.release" depends="clean.javadocs, javadocs"
+            description="Creates the World Wind API documentation release in the folder 'worldwind-docs'.">
+        <!-- Copy the World Wind API documentation to the 'api' folder under the docs release folder. -->
+        <mkdir dir="${worldwind.doc.release.dir}/api"/>
+        <copy todir="${worldwind.doc.release.dir}/api">
+            <fileset dir="${basedir}/doc">
+                <include name="**"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <!-- Packages the World Wind API documentation release into the ZIP archive 'worldwind-docs-version.zip', where
+         'version' is the current version. -->
+    <target name="worldwind.doc.release.zipfile" depends="worldwind.doc.release"
+            description="Packages the World Wind API documentation release into the ZIP archive 'worldwind-docs-version.zip'.">
+        <zip destfile="${worldwind.doc.release.zipfile}">
+            <fileset dir="${worldwind.doc.release.dir}"/>
+        </zip>
+    </target>
+
+    <!-- Makes the World Wind SDK release and World Wind API documentation publicly available by copying them to a
+         specified deployment folder. This copies the World Wind SDK release ZIP archive to a 'builds' folder within the
+         deployment folder, and copies the World Wind API documentation ZIP archive to a 'docs' folder within the
+         deployment folder. This also copies the unzipped World Wind API documentation to a 'docs/api' folder within the
+         deployment folder. -->
+    <target name="worldwind.deploy" depends="worldwind.release.zipfile, worldwind.doc.release.zipfile"
+            description="Makes the World Wind SDK release and World Wind API documentation publicly available by copying them to a specified deployment folder.">
+        <!--Copy the World Wind SDK release package to the deployment folder. -->
+        <mkdir dir="${worldwind.release.deployment.dir}"/>
+        <copy file="${worldwind.release.zipfile}" todir="${worldwind.release.deployment.dir}"/>
+        <!--Copy the World Wind API documentation release package to the deployment folder. -->
+        <mkdir dir="${worldwind.doc.deployment.dir}"/>
+        <copy file="${worldwind.doc.release.zipfile}" todir="${worldwind.doc.deployment.dir}"/>
+        <!--Copy the World Wind API documentation to the deployment folder as a live website. -->
+        <delete dir="${worldwind.doc.deployment.dir}/api"/>
+        <mkdir dir="${worldwind.doc.deployment.dir}/api"/>
+        <copy todir="${worldwind.doc.deployment.dir}">
+            <fileset dir="${worldwind.doc.release.dir}">
+                <include name="api/**"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <!-- Main clean target for release build targets. Removes all files and directories created by all release build
+         targets. -->
+    <target name="clean.worldwind.release">
+        <delete dir="${worldwind.release.dir}"/>
+        <delete file="${worldwind.release.zipfile}"/>
+        <delete dir="${worldwind.doc.release.dir}"/>
+        <delete file="${worldwind.doc.release.zipfile}"/>
+    </target>
+
+</project>

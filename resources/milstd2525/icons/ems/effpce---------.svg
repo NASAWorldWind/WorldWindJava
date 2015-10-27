@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="400px" viewBox="0 0 400 400" width="400px"><g transform="scale(150) translate(0.72 0.73) translate(-0.66 -0.54)"><path d="M0.906547 1.24253 L0.906547 1.34972 L0.99587 1.34972 L0.99587 1.1532 C0.984102 1.16109     0.906547 1.23159 0.906547 1.24253 z" style="fill:rgb(255,255,255)"/><polygon points="1.10605,1.04457 1.10306,1.34972 1.21025,1.34972 1.20934,0.94237" style="fill:rgb(255,255,255)"/><path d="M1.33531 1.34972 L1.4425 1.34972 L1.4425 1.05048 C1.4425 1.03946 1.34841 0.952067     1.33531 0.943291 z" style="fill:rgb(255,255,255)"/><path d="M1.54969 1.34972 L1.63901 1.34972 L1.63901 1.25146 C1.63901 1.23439 1.63764 1.24984     1.6426 1.23896 L1.54969 1.1532 z" style="fill:rgb(255,255,255)"/><polygon points="1.27167,1.82876 1.75513,1.36312 0.790134,1.36342" style="fill:rgb(255,255,255)"/><path d="M0.790134 1.36342 L1.75513 1.36312 L1.27167 1.82876 zM1.33531 0.94329 C1.34841 0.952066     1.4425 1.03946 1.4425 1.05048 L1.4425 1.34972 L1.33531 1.34972 zM1.20934     0.942373 L1.21025 1.34972 L1.10306 1.34972 L1.10605 1.04457 L1.20934 0.942372     zM0.906547 1.24253 C0.906547 1.23159 0.984102 1.16109 0.99587 1.1532 L0.99587     1.34972 L0.906547 1.34972 zM1.54969 1.1532 L1.6426 1.23895 C1.63764     1.24984 1.63901 1.23439 1.63901 1.25146 L1.63901 1.34972 L1.54969 1.34972 zM1.78608     1.35832 L1.27338 0.857813 L0.761902 1.35689 L1.27335 1.85499 z" style="fill:rgb(0,0,0)"/></g><text style="fill:rgb(0,0,0);font-family:Arial;font-size:52;font-weight:bold;text-anchor:middle" x="200" y="148">STOR</text></svg>

@@ -1,0 +1,73 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--
+Illustrates how to embed a World Wind Applet in a web page and perform navigation actions from JavaScript code running
+in the browser.
+
+Version: $Id: WWJApplet.html 956 2012-12-05 22:43:26Z dcollins $
+-->
+<html>
+<head>
+<title>NASA World Wind Java Applet Test Page - Simple javascript controls</title>
+<script language="javascript">
+<!--
+var theApplet = null;
+
+function getWWJApplet()
+{
+   if (theApplet == null) {
+      theApplet = document.getElementById('wwjApplet');
+   }
+   return theApplet;
+}
+// -->
+</script>
+</head>
+
+<body>
+
+<!-- Include the World Wind Java Applet example in this page using Java Web Start, Oracle's recommended deployment
+     mechanism. The containing document specifies the Applet attributes that affect its display and enable
+     Java-to-Javascript communication. The specified Applet parameter jnlp_href defines the Applet's code and its
+     dependencies. This mechanism requires Java 6 update 10 on Windows and Linux, and requires Java 7 on Mac OS X. See
+     the following Oracle document for details on this Applet deployment mechanism:
+     http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/applet/applet_deployment.html -->
+<script src="http://www.java.com/js/deployJava.js"></script>
+<script>
+    var attributes = {id:'wwjApplet', mayscript:'true', width:'100%', height:'70%'};
+    var parameters = {jnlp_href:'WWJApplet.jnlp'};
+    deployJava.runApplet(attributes, parameters, '1.6'); // runApplet automatically looks for JRE 1.6+
+</script>
+
+<form>
+<!-- This change the current view position -->
+Location:
+<input type="BUTTON" value="Nice, France" onClick="getWWJApplet().gotoLatLon(43.705, 7.28, 30000, 45, 80);">
+<input type="BUTTON" value="Sydney, Australia" onClick="getWWJApplet().gotoLatLon(-33.8579, 151.2135, 30000, 0, 60);">
+<input type="BUTTON" value="Mt-St-Helens, USA" onClick="getWWJApplet().gotoLatLon(46.1956, -122.1911, 30000, 120, 70);">
+<br />
+<!-- This change the eye distance or zoom -->
+Distance:
+<input type="BUTTON" value="10km" onClick="getWWJApplet().setZoom(10000);">
+<input type="BUTTON" value="20km" onClick="getWWJApplet().setZoom(20000);">
+<input type="BUTTON" value="100km" onClick="getWWJApplet().setZoom(100000);">
+<input type="BUTTON" value="500km" onClick="getWWJApplet().setZoom(500000);">
+<input type="BUTTON" value="2000km" onClick="getWWJApplet().setZoom(2000000);">
+<br />
+<!-- This change the heading and pitch-->
+Looking:
+<input type="BUTTON" value="North" onClick="getWWJApplet().setHeadingAndPitch(0, 60);">
+<input type="BUTTON" value="East" onClick="getWWJApplet().setHeadingAndPitch(90, 60);">
+<input type="BUTTON" value="South" onClick="getWWJApplet().setHeadingAndPitch(180, 60);">
+<input type="BUTTON" value="West" onClick="getWWJApplet().setHeadingAndPitch(-90, 60);">
+<input type="BUTTON" value="Reset" onClick="getWWJApplet().setHeadingAndPitch(0, 0);">
+<br />
+
+</form>
+
+</body>
+</html>

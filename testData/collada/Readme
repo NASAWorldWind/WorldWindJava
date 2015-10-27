@@ -1,0 +1,2 @@
+Test files for the COLLADA model loader. This directory holds only COLLADA files and associated resources.
+See testData/KML/models for COLLADA models contained within KMZ archives.

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinkControl. -->
+<!--$Id: ChangeStyle01D.kml 391 2012-02-17 01:13:45Z tgaskins $-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <NetworkLinkControl>
+        <Update>
+            <targetHref>ChangeStyle01B.kml</targetHref>
+            <Change>
+                <Style targetId="targetStyle">
+                    <IconStyle>
+                        <color>ffffffff</color>
+                        <scale>2.0</scale>
+                        <Icon>
+                            <href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+                        </Icon>
+                    </IconStyle>
+                </Style>
+            </Change>
+        </Update>
+    </NetworkLinkControl>
+</kml>

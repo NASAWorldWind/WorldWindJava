@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jsobjectplugin">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/plugin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

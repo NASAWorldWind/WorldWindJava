@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="sffagpa--------.svg">
+  <metadata
+     id="metadata24">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs22" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="705"
+     inkscape:window-height="480"
+     id="namedview20"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="104"
+     inkscape:window-y="44"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="scale(0.8 0.8) translate(50 -30)"
+     id="g4"
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:7.5;stroke-miterlimit:4;stroke-dasharray:15,7.5;stroke-dashoffset:0">
+    <path
+       d="M200 200 L145 175 C90 150 90 250 145 225 L200 200 L255 175 C310 150 310 250 255 225     L200 200"
+       style="fill:none;stroke:#000000;stroke-dasharray:15,7.5;fill-opacity:1;stroke-opacity:1;stroke-width:7.5;stroke-miterlimit:4;stroke-dashoffset:0"
+       id="path6" />
+  </g>
+  <g
+     transform="scale(0.7 0.7) translate(80 120)"
+     id="g8">
+    <polyline
+       points="120,160 120,240 210,240 250,280 250,120 210,160 120,160 120,240"
+       style="fill:rgb(255,255,255);stroke:rgb(0,0,0);stroke-width:10;stroke-dasharray:10"
+       id="polyline10" />
+    <line
+       style="stroke:rgb(0,0,0);stroke-width:10;stroke-dasharray:10"
+       x1="250"
+       x2="290"
+       y1="217"
+       y2="217"
+       id="line12" />
+    <line
+       style="stroke:rgb(0,0,0);stroke-width:10;stroke-dasharray:10"
+       x1="250"
+       x2="290"
+       y1="183"
+       y2="183"
+       id="line14" />
+    <line
+       style="stroke:rgb(0,0,0);stroke-width:10;stroke-dasharray:10"
+       transform="translate(270 150) scale(1 1) translate(-270 -150)"
+       x1="250"
+       x2="290"
+       y1="150"
+       y2="150"
+       id="line16" />
+    <line
+       style="stroke:rgb(0,0,0);stroke-width:10;stroke-dasharray:10"
+       x1="250"
+       x2="290"
+       y1="250"
+       y2="250"
+       id="line18" />
+  </g>
+</svg>

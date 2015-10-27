@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- SVG content generated using Symbology Configuration Management System (SCMS) -->
+
+<!-- Systematic Software Engineering Ltd. - www.systematic.co.uk - do not remove  -->
+
+<svg
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    id="G*GPGPWD--****X"
+    width="310"
+    height="263.46097"
+    viewBox="0 0 310 263.46097"
+    version="1.1"
+    inkscape:version="0.48.2 r9819"
+    sodipodi:docname="g-gpgpwd------x.svg">
+    <metadata
+        id="metadata12">
+        <rdf:RDF>
+            <cc:Work
+                rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                    rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <defs
+        id="defs10"/>
+    <sodipodi:namedview
+        pagecolor="#ffffff"
+        bordercolor="#666666"
+        borderopacity="1"
+        objecttolerance="10"
+        gridtolerance="10"
+        guidetolerance="10"
+        inkscape:pageopacity="0"
+        inkscape:pageshadow="2"
+        inkscape:window-width="640"
+        inkscape:window-height="480"
+        id="namedview8"
+        showgrid="false"
+        inkscape:zoom="0.59"
+        inkscape:cx="155"
+        inkscape:cy="133.46097"
+        inkscape:window-x="0"
+        inkscape:window-y="0"
+        inkscape:window-maximized="0"
+        inkscape:current-layer="G*GPGPWD--****X"/>
+    <g
+        id="g3"
+        transform="translate(-45,-70)">
+        <svg
+            viewBox="0 0 400 400"
+            id="_0.G-GPGPWD------X"
+            width="400"
+            height="400"
+            version="1.1"
+            inkscape:version="0.48.2 r9819">
+            <path
+                d="m 50,75 0,175 c 10,100 140,100 150,25 l 0,-200 0,200 c 10,75 140,75 150,-25 l 0,-175"
+                style="fill:none;stroke:#ffffff;stroke-width:10"
+                id="path6"
+                inkscape:connector-curvature="0"/>
+        </svg>
+    </g>
+</svg>

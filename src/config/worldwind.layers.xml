@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: worldwind.layers.xml 2256 2014-08-22 17:46:18Z tgaskins $-->
+<!--This document specifies the initial layers to load in World Wind-->
+<!--This list can be overridden by specifying an alternate list in worldwind.xml, or by specifying an-->
+<!--alternate configuration document-->
+<!--See the javadoc for the Configuration class for details-->
+<LayerList>
+    <Layer className="gov.nasa.worldwind.layers.StarsLayer">
+        <!--Individual properties can be specified within Layer entries, like this:-->
+        <Property name="Name" value="Stars"/>
+    </Layer>
+    <Layer className="gov.nasa.worldwind.layers.SkyGradientLayer"/>
+    <Layer className="gov.nasa.worldwind.layers.Earth.BMNGOneImage">
+        <Property name="MinActiveAltitude" value="3e6"/>
+    </Layer>
+    <Layer href="config/Earth/BMNGWMSLayer2.xml" actuate="onLoad"/>
+    <Layer href="config/Earth/LandsatI3WMSLayer2.xml" actuate="onLoad"/>
+    <Layer href="config/Earth/USDANAIPWMSImageLayer.xml" actuate="onRequest"/>
+    <Layer href="config/Earth/USDANAIPUSGSWMSImageLayer.xml" actuate="onRequest"/>
+    <Layer href="config/Earth/MSVirtualEarthAerialLayer.xml" actuate="onRequest"/>
+    <Layer href="config/Earth/BingImagery.xml" actuate="onRequest"/>
+    <Layer href="config/Earth/USGSTopoLowResLayer.xml" actuate="onRequest"/>
+    <Layer href="config/Earth/USGSTopoMedResLayer.xml" actuate="onRequest"/>
+    <Layer href="config/Earth/USGSTopoHighResLayer.xml" actuate="onRequest"/>
+    <Layer href="config/Earth/USGSUrbanAreaOrthoLayer.xml" actuate="onRequest"/>
+    <!--<Layer className="gov.nasa.worldwind.layers.Earth.OSMMapnikLayer" actuate="onRequest"/>-->
+    <!--<Layer className="gov.nasa.worldwind.layers.Earth.OSMCycleMapLayer" actuate="onRequest"/>-->
+    <Layer className="gov.nasa.worldwind.layers.Earth.CountryBoundariesLayer" actuate="onRequest"/>
+    <Layer href="config/Earth/OpenStreetMap.xml" actuate="onRequest"/>
+    <!--<Layer href="config/Earth/WorldBordersShapefile.xml" actuate="onRequest"/>-->
+    <Layer href="config/Earth/EarthAtNightLayer.xml" actuate="onRequest"/>
+    <Layer className="gov.nasa.worldwind.layers.Earth.NASAWFSPlaceNameLayer"/>
+    <Layer className="gov.nasa.worldwind.layers.WorldMapLayer"/>
+    <Layer className="gov.nasa.worldwind.layers.ScalebarLayer"/>
+    <Layer className="gov.nasa.worldwind.layers.CompassLayer"/>
+</LayerList>

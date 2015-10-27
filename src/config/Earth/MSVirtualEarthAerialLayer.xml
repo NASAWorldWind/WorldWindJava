@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: MSVirtualEarthAerialLayer.xml 1171 2013-02-11 21:45:02Z dcollins $-->
+<Layer version="1" layerType="TiledImageLayer">
+    <DisplayName>MS Virtual Earth Aerial</DisplayName>
+    <Service serviceName="WWTileService">
+        <URL>http://worldwind28.arc.nasa.gov/vewms/vewms.aspx</URL>
+    </Service>
+    <!-- day month year hours:minutes:seconds timezone -->
+    <LastUpdate>19 09 2009 04:10:00 GMT</LastUpdate>
+    <DatasetName>a</DatasetName>
+    <DataCacheName>Earth/MS Virtual Earth a</DataCacheName>
+    <ImageFormat>image/jpg</ImageFormat>
+    <AvailableImageFormats>
+        <ImageFormat>image/jpg</ImageFormat>
+    </AvailableImageFormats>
+    <FormatSuffix>.dds</FormatSuffix>
+    <NumLevels count="16" numEmpty="4"/>
+    <TileOrigin>
+        <LatLon units="degrees" latitude="-90" longitude="-180"/>
+    </TileOrigin>
+    <LevelZeroTileDelta>
+        <LatLon units="degrees" latitude="36" longitude="36"/>
+    </LevelZeroTileDelta>
+    <TileSize>
+        <Dimension width="512" height="512"/>
+    </TileSize>
+    <Sector>
+        <SouthWest>
+            <LatLon units="degrees" latitude="-90" longitude="-180"/>
+        </SouthWest>
+        <NorthEast>
+            <LatLon units="degrees" latitude="90" longitude="180"/>
+        </NorthEast>
+    </Sector>
+    <ActiveAltitudes max="1000e3"/>
+    <UseTransparentTextures>true</UseTransparentTextures>
+</Layer>

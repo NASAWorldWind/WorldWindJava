@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <Placemark>
+            <name>Default Attributes and properties</name>
+            <Polygon>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -106,28,3e4 -104,35,3e4 -107,35,3e4 -107,28,3e4 -106,28,3e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+                <innerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -106.4,29,4e4 -106.4,30,4e4 -106.8,29,7e4 -106.4,29,4e4
+                        </coordinates>
+                    </LinearRing>
+                </innerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Relative to ground, Line and fill color, line width</name>
+            <Style>
+                <LineStyle>
+                    <color>ffffff00</color>
+                    <width>4</width>
+                </LineStyle>
+                <PolyStyle>
+                    <color>ffff00ff</color>
+                </PolyStyle>
+            </Style>
+            <Polygon>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -110,28,1e4 -108,35,1e4 -111,35,1e4 -111,28,1e4 -110,28,1e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Extruded</name>
+            <Polygon>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -102,28,3e4 -100,35,3e4 -103,35,3e4 -103,28,3e4 -102,28,3e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+                <innerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -102.4,29,4e4 -102.4,30,4e4 -102.8,29,7e4 -102.4,29,4e4
+                        </coordinates>
+                    </LinearRing>
+                </innerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark>
+            <name>Absolute, Line and fill color, line width</name>
+            <Style>
+                <LineStyle>
+                    <color>ffffff00</color>
+                    <width>4</width>
+                </LineStyle>
+                <PolyStyle>
+                    <color>ffff00ff</color>
+                </PolyStyle>
+            </Style>
+            <Polygon>
+                <altitudeMode>absolute</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>
+                            -114,28,1e4 -112,35,1e4 -115,35,1e4 -115,28,1e4 -114,28,1e4
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

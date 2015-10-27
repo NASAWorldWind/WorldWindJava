@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (C) 2012 United States Government as represented by the Administrator of the
+National Aeronautics and Space Administration.
+All Rights Reserved.
+-->
+
+<!--
+MIL-STD-2525 tactical symbol icon image. During icon composition this image is multiplied by the desired frame color 
+(e.g. black), then drawn on top of the frame and fill.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400px"
+   viewBox="0 0 400 400"
+   width="400px"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="sufanu---------.svg">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="177"
+     inkscape:window-y="60"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     style="font-size:75px;fill:#ffffff;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 6;stroke-dashoffset:0;font-family:Arial"
+     id="text4">
+    <path
+       inkscape:connector-curvature="0"
+       d="m 166.01562,174.31348 7.1045,0 0,31.01806 c -5e-5,5.39553 -0.6104,9.68019 -1.83106,12.85401 -1.22075,3.17383 -3.42411,5.75562 -6.6101,7.74536 -3.18608,1.98974 -7.36698,2.98462 -12.54273,2.98462 -5.02932,0 -9.14308,-0.8667 -12.34131,-2.6001 -3.19825,-1.7334 -5.48096,-4.24194 -6.84814,-7.52564 -1.3672,-3.28367 -2.05079,-7.76975 -2.05078,-13.45825 l 0,-31.01806 7.10449,0 0,30.98144 c -1e-5,4.66311 0.43333,8.09938 1.30005,10.30884 0.86668,2.20948 2.35594,3.91236 4.46777,5.10864 2.1118,1.1963 4.69358,1.79444 7.74536,1.79444 5.22458,0 8.94772,-1.18408 11.16944,-3.55225 2.22164,-2.36815 3.33247,-6.92137 3.33251,-13.65967 z"
+       style="font-size:75px;fill:#ffffff;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 6;stroke-dashoffset:0;font-family:Arial"
+       id="path2988" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 184.98535,228 0,-53.68652 18.49365,0 c 4.17478,5e-5 7.36081,0.2564 9.55811,0.76904 3.07613,0.70806 5.70064,1.9898 7.87353,3.84521 2.83199,2.39263 4.94991,5.45049 6.35376,9.17359 1.40376,3.72318 2.10567,7.97733 2.10572,12.76245 -5e-5,4.07717 -0.47613,7.69045 -1.42823,10.83984 -0.95219,3.14943 -2.17289,5.75563 -3.6621,7.81861 -1.48931,2.06299 -3.11894,3.68653 -4.88892,4.8706 -1.77006,1.18409 -3.90629,2.0813 -6.40869,2.69165 C 210.47971,227.69482 207.60495,228 204.35791,228 z m 7.10449,-6.33545 11.46241,0 c 3.54001,1e-5 6.3171,-0.32958 8.33129,-0.98877 2.01413,-0.65917 3.61935,-1.5869 4.81568,-2.7832 1.68453,-1.68456 2.99678,-3.94896 3.93677,-6.79321 0.9399,-2.84422 1.40987,-6.29271 1.40991,-10.34546 -4e-5,-5.61521 -0.92167,-9.93039 -2.76489,-12.94556 -1.8433,-3.01509 -4.08329,-5.03536 -6.71997,-6.06079 -1.90433,-0.73238 -4.96829,-1.09859 -9.1919,-1.09863 l -11.2793,0 z"
+       style="font-size:75px;fill:#ffffff;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 6;stroke-dashoffset:0;font-family:Arial"
+       id="path2990" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 252.84424,228 0,-47.35107 -17.68799,0 0,-6.33545 42.55371,0 0,6.33545 -17.76123,0 0,47.35107 z"
+       style="font-size:75px;fill:#ffffff;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 6;stroke-dashoffset:0;font-family:Arial"
+       id="path2992" />
+  </g>
+</svg>

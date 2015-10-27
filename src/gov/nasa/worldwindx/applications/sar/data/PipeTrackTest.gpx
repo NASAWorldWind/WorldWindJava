@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="MapSource 6.12.2" version="1.1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <trk>
+        <name>ACTIVE LOG 023</name>
+        <trkseg>
+            <trkpt lat="50" lon="-130">
+                <ele>1000</ele>
+                <time>2007-06-11T17:33:23Z</time>
+            </trkpt>
+            <trkpt lat="49" lon="-129">
+                <ele>1000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="48" lon="-128">
+                <ele>1200</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="47" lon="-127">
+                <ele>1400</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="46" lon="-126">
+                <ele>1600</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="45" lon="-125">
+                <ele>1800</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="44" lon="-124">
+                <ele>2000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="43" lon="-123">
+                <ele>2000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="42" lon="-122">
+                <ele>1600</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="41" lon="-121">
+                <ele>1400</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="40" lon="-120">
+                <ele>1200</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="39" lon="-119">
+                <ele>1000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="38" lon="-118">
+                <ele>1000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+            <trkpt lat="37" lon="-117">
+                <ele>1000</ele>
+                <time>2007-06-11T17:33:28Z</time>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>

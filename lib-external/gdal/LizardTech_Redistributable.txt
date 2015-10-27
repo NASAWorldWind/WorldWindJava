@@ -1,0 +1,27 @@
+The following information is provided to aid you in understanding what your
+rights and responsibilities are, under the terms of the license, when using
+and distributing the GeoExpress Decode SDK.  These comments are NOT to be
+considered legally binding.  Please contact LizardTech or your own legal
+counsel for specific interpretation and guidance.
+
+  * If you are shipping an application or similar package in binary
+    (executable) form, your application may link either statically or
+    dynamically to our SDK libraries.  You may ship our DLLs and SOs alongside
+    your application.
+    [section 1.3]
+
+  * If you are providing an application or similar package in source form,
+    e.g. for a "build-kit" style distribution, you may include in your
+    distribution any of the files in the Decode SDK.  (This is intended to
+    specifically allow your customers to "build" your MrSID-enabled package
+    without requiring them to download anything from our website.)
+    [section 1.3]
+
+  * Your application must include the statement of ownership / copyright
+    notice given in section 2.2.  Depending on the nature of your
+    application, this notice can be given in an "About Box", in a "CREDITS"
+    or "COPYRIGHTS" file, or other similar means.
+    [section 2.2]
+
+
+$Id: LizardTech_Redistributable.txt 1 2011-07-16 23:22:47Z dcollins $

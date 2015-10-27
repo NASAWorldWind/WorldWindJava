@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test Suite for local NetworkLinkControl. -->
+<!--$Id: ChangeStyle01-OpenFirst.kml 391 2012-02-17 01:13:45Z tgaskins $-->
+<!--This test creates a Placemark over the U.S. Midwest then changes the Icon of its IconStyle.-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <NetworkLink>
+        <Link>
+            <href>ChangeStyle01B.kml</href>
+        </Link>
+    </NetworkLink>
+</kml>
