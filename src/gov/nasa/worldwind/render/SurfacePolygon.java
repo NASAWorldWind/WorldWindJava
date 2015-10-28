@@ -83,7 +83,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
     {
         super(source);
 
-        this.boundaries = source.boundaries;
+        this.boundaries.addAll(source.boundaries);
     }
 
     /**
