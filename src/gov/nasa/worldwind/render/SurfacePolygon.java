@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * @author dcollins
- * @version $Id: SurfacePolygon.java 3430 2015-10-01 04:27:40Z dcollins $
+ * @version $Id: SurfacePolygon.java 3436 2015-10-28 17:43:24Z tgaskins $
  */
 @SuppressWarnings("unchecked")
 public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
@@ -297,8 +297,8 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
 
         if (shapeData == null)
         {
-            double edgeIntervalsPerDegree = this.computeEdgeIntervalsPerDegree(sdc);
-            List<List<Vertex>> contours = this.assembleContours(edgeIntervalsPerDegree);
+            Angle degreesPerInterval = Angle.fromDegrees(1.0 / this.computeEdgeIntervalsPerDegree(sdc));
+            List<List<Vertex>> contours = this.assembleContours(degreesPerInterval);
             shapeData = this.tessellateContours(contours);
 
             if (shapeData == null)
@@ -349,7 +349,8 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
         {
             GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
             OGLUtil.applyBlending(gl, true);
-            OGLUtil.applyColor(gl, attributes.getInteriorMaterial().getDiffuse(), attributes.getInteriorOpacity(), true);
+            OGLUtil.applyColor(gl, attributes.getInteriorMaterial().getDiffuse(), attributes.getInteriorOpacity(),
+                true);
 
             if (this.explicitTexture.bind(dc))
             {
@@ -365,7 +366,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
         }
     }
 
-    protected List<List<Vertex>> assembleContours(double edgeIntervalsPerDegree)
+    protected List<List<Vertex>> assembleContours(Angle maxEdgeLength)
     {
         List<List<Vertex>> result = new ArrayList<List<Vertex>>();
 
@@ -391,21 +392,21 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
 
             // Interpolate the contour vertices according to this polygon's path type and number of edge intervals.
             this.closeContour(contour);
-            List<Vertex> interpolated = this.interpolateContour(contour, edgeIntervalsPerDegree);
+            this.subdivideContour(contour, maxEdgeLength);
 
             // Modify the contour vertices to compensate for the spherical nature of geographic coordinates.
-            String pole = LatLon.locationsContainPole(interpolated);
+            String pole = LatLon.locationsContainPole(contour);
             if (pole != null)
             {
-                result.add(this.clipWithPole(interpolated, pole));
+                result.add(this.clipWithPole(contour, pole, maxEdgeLength));
             }
-            else if (LatLon.locationsCrossDateLine(interpolated))
+            else if (LatLon.locationsCrossDateLine(contour))
             {
-                result.addAll(this.clipWithDateline(interpolated));
+                result.addAll(this.clipWithDateline(contour));
             }
             else
             {
-                result.add(interpolated);
+                result.add(contour);
             }
         }
 
@@ -420,39 +421,45 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
         }
     }
 
-    protected List<Vertex> interpolateContour(List<Vertex> contour, double edgeIntervalsPerDegree)
+    protected void subdivideContour(List<Vertex> contour, Angle maxEdgeLength)
     {
-        List<Vertex> result = new ArrayList<Vertex>();
-        Vertex prev = null;
+        List<Vertex> original = new ArrayList<Vertex>(contour.size());
+        original.addAll(contour);
+        contour.clear();
 
-        for (Vertex cur : contour)
+        for (int i = 0; i < original.size() - 1; i++)
         {
-            if (prev != null)
-            {
-                Angle pathLength = LatLon.pathDistance(this.pathType, prev, cur);
-                double edgeIntervals = WWMath.clamp(edgeIntervalsPerDegree * pathLength.degrees,
-                    this.minEdgeIntervals, this.maxEdgeIntervals);
-                int numEdgeIntervals = (int) Math.ceil(edgeIntervals);
-
-                for (int j = 1; j <= numEdgeIntervals; j++)
-                {
-                    double amount = j / (double) (numEdgeIntervals + 1);
-                    LatLon location = LatLon.interpolate(this.pathType, amount, prev, cur);
-                    Vertex vertex = new Vertex(location);
-                    vertex.u = prev.u * (1 - amount) + cur.u * amount;
-                    vertex.v = prev.v * (1 - amount) + cur.v * amount;
-                    result.add(vertex);
-                }
-            }
-
-            result.add(cur);
-            prev = cur;
+            Vertex begin = original.get(i);
+            Vertex end = original.get(i + 1);
+            contour.add(begin);
+            this.subdivideEdge(begin, end, maxEdgeLength, contour);
         }
 
-        return result;
+        Vertex last = original.get(original.size() - 1);
+        contour.add(last);
     }
 
-    protected List<Vertex> clipWithPole(List<Vertex> contour, String pole)
+    protected void subdivideEdge(Vertex begin, Vertex end, Angle maxEdgeLength, List<Vertex> result)
+    {
+        Vertex center = new Vertex(LatLon.interpolate(this.pathType, 0.5, begin, end));
+        center.u = 0.5 * (begin.u + end.u);
+        center.v = 0.5 * (begin.v + end.v);
+        center.edgeFlag = begin.edgeFlag || end.edgeFlag;
+
+        Angle edgeLength = LatLon.linearDistance(begin, end);
+        if (edgeLength.compareTo(maxEdgeLength) > 0)
+        {
+            this.subdivideEdge(begin, center, maxEdgeLength, result);
+            result.add(center);
+            this.subdivideEdge(center, end, maxEdgeLength, result);
+        }
+        else
+        {
+            result.add(center);
+        }
+    }
+
+    protected List<Vertex> clipWithPole(List<Vertex> contour, String pole, Angle maxEdgeLength)
     {
         List<Vertex> newVertices = new ArrayList<Vertex>();
 
@@ -481,12 +488,30 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
                     //        | |
                     //      1 | v 4
                     // --->---- ------>
-                    Vertex one = new Vertex(lat, thisSideLon, 0, 0);
-                    Vertex two = new Vertex(poleLat, thisSideLon, 0, 0);
-                    Vertex three = new Vertex(poleLat, otherSideLon, 0, 0);
-                    Vertex four = new Vertex(lat, otherSideLon, 0, 0);
-                    one.edgeFlag = two.edgeFlag = three.edgeFlag = four.edgeFlag = false;
-                    newVertices.addAll(Arrays.asList(one, two, three, four));
+                    Vertex in = new Vertex(lat, thisSideLon, 0, 0);
+                    Vertex inPole = new Vertex(poleLat, thisSideLon, 0, 0);
+                    Vertex centerPole = new Vertex(poleLat, Angle.ZERO, 0, 0);
+                    Vertex outPole = new Vertex(poleLat, otherSideLon, 0, 0);
+                    Vertex out = new Vertex(lat, otherSideLon, 0, 0);
+                    in.edgeFlag = inPole.edgeFlag = centerPole.edgeFlag = outPole.edgeFlag = out.edgeFlag = false;
+
+                    double vertexDistance = LatLon.linearDistance(vertex, in).degrees;
+                    double nextVertexDistance = LatLon.linearDistance(nextVertex, out).degrees;
+                    double a = vertexDistance / (vertexDistance + nextVertexDistance);
+                    in.u = out.u = WWMath.mix(a, vertex.u, nextVertex.u);
+                    in.v = out.v = WWMath.mix(a, vertex.v, nextVertex.v);
+
+                    double[] uv = this.uvWeightedAverage(contour, centerPole);
+                    inPole.u = outPole.u = centerPole.u = uv[0];
+                    inPole.v = outPole.v = centerPole.v = uv[1];
+
+                    newVertices.add(in);
+                    newVertices.add(inPole);
+                    this.subdivideEdge(inPole, centerPole, maxEdgeLength, newVertices);
+                    newVertices.add(centerPole);
+                    this.subdivideEdge(centerPole, outPole, maxEdgeLength, newVertices);
+                    newVertices.add(outPole);
+                    newVertices.add(out);
                 }
             }
             vertex = nextVertex;
@@ -494,6 +519,29 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
         newVertices.add(vertex);
 
         return newVertices;
+    }
+
+    protected double[] uvWeightedAverage(List<Vertex> contour, Vertex vertex)
+    {
+        double[] weight = new double[contour.size()];
+        double sumOfWeights = 0;
+        for (int i = 0; i < contour.size(); i++)
+        {
+            double distance = LatLon.greatCircleDistance(contour.get(i), vertex).degrees;
+            weight[i] = 1 / distance;
+            sumOfWeights += weight[i];
+        }
+
+        double u = 0;
+        double v = 0;
+        for (int i = 0; i < contour.size(); i++)
+        {
+            double factor = weight[i] / sumOfWeights;
+            u += contour.get(i).u * factor;
+            v += contour.get(i).v * factor;
+        }
+
+        return new double[] {u, v};
     }
 
     protected List<List<Vertex>> clipWithDateline(List<Vertex> contour)
