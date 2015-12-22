@@ -233,7 +233,7 @@ public class RadarVolume extends AbstractShape
     {
         ShapeData shapeData = this.getCurrent();
 
-        return shapeData.triangleVertices != null;
+        return shapeData.triangleVertices != null && shapeData.triangleVertices.capacity() > 0;
     }
 
     @Override
