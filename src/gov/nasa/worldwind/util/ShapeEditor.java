@@ -21,6 +21,7 @@ import gov.nasa.worldwind.render.markers.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.*;
 import java.util.*;
 import java.util.List;
 
@@ -40,7 +41,7 @@ import java.util.List;
  * @author tag
  * @version $Id: ShapeEditor.java 3423 2015-09-23 20:59:03Z tgaskins $
  */
-public class ShapeEditor implements SelectListener
+public class ShapeEditor implements SelectListener, PropertyChangeListener
 {
     // Control point purposes
     /**
@@ -680,6 +681,7 @@ public class ShapeEditor implements SelectListener
         this.updateControlPoints();
 
         this.getWwd().addSelectListener(this);
+        this.getWwd().getSceneController().addPropertyChangeListener(this);
     }
 
     /**
@@ -695,6 +697,7 @@ public class ShapeEditor implements SelectListener
         layers.remove(this.getShadowLayer());
 
         getWwd().removeSelectListener(this);
+        getWwd().getSceneController().removePropertyChangeListener(this);
 
         ((Component) this.getWwd()).setCursor(null);
     }
@@ -843,6 +846,28 @@ public class ShapeEditor implements SelectListener
             }
 
             this.getWwd().redraw(); // update the display
+        }
+    }
+
+    /**
+     * The property change listener, the method called when a property of the Scene Controller changes
+     * (vertical exaggeration, etc.). Does not necessarily indicate a property associated with this editor.
+     *
+     * @param event the property change event indicating the property name and its associated value.
+     */
+    public void propertyChange(PropertyChangeEvent event)
+    {
+        if (event == null)
+        {
+            String msg = Logging.getMessage("nullValue.EventIsNull");
+            Logging.logger().log(java.util.logging.Level.FINE, msg);
+            throw new IllegalArgumentException(msg);
+        }
+
+        if (event.getPropertyName().equals(AVKey.VERTICAL_EXAGGERATION))
+        {
+            // The orientation line altitudes depend on the vertical exaggeration.
+            this.updateControlPoints();
         }
     }
 
@@ -1230,11 +1255,17 @@ public class ShapeEditor implements SelectListener
             rotationLine.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             rotationLine.setFollowTerrain(true);
 
-            // Add a little altitude so that the line isn't lost during depth buffering.
-            cAltitude = 100 + centerPosition.getAltitude() - this.getWwd().getModel().getGlobe().getElevation(
+            // Set the line's altitude relative to the ground.
+            cAltitude = centerPosition.getAltitude() - this.getWwd().getModel().getGlobe().getElevation(
                 centerPosition.getLatitude(), centerPosition.getLongitude());
-            rAltitude = 100 + controlPoint.getAltitude() - this.getWwd().getModel().getGlobe().getElevation(
+            rAltitude = controlPoint.getAltitude() - this.getWwd().getModel().getGlobe().getElevation(
                 controlPoint.getLatitude(), controlPoint.getLongitude());
+            // Path does not incorporate vertical exaggeration, but airspace shapes do. Compensate for that difference here.
+            cAltitude *= this.getWwd().getSceneController().getVerticalExaggeration();
+            rAltitude *= this.getWwd().getSceneController().getVerticalExaggeration();
+            // Add a little altitude so that the line isn't lost during depth buffering.
+            cAltitude += 100;
+            rAltitude += 100;
         }
         else if (this.getShapeAltitudeMode() == WorldWind.CLAMP_TO_GROUND)
         {

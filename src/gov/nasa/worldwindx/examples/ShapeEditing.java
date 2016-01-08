@@ -6,7 +6,7 @@
 
 package gov.nasa.worldwindx.examples;
 
-import gov.nasa.worldwind.WorldWind;
+import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.geom.*;
@@ -123,7 +123,7 @@ public class ShapeEditing extends ApplicationTemplate
             sphere.setAttributes(attrs);
             sphere.setHighlightAttributes(highlightAttrs);
             sphere.setAltitudeDatum(AVKey.ABOVE_GROUND_LEVEL, AVKey.ABOVE_GROUND_LEVEL);
-            sphere.setAltitudes(1e4, 2e4);
+            sphere.setAltitude(1.5e4);
             layer.addRenderable(sphere);
 
             PartialCappedCylinder partialCylinder = new PartialCappedCylinder(LatLon.fromDegrees(40.5, -105), 5e4);
@@ -234,7 +234,7 @@ public class ShapeEditing extends ApplicationTemplate
 
             if (event.getEventAction().equals(SelectEvent.LEFT_CLICK))
             {
-                if (topObject != null && topObject.getObject() instanceof Renderable)
+                if (topObject != null && this.isEditableShape(topObject.getObject()))
                 {
                     if (this.editor == null)
                     {
@@ -266,6 +266,11 @@ public class ShapeEditing extends ApplicationTemplate
                     }
                 }
             }
+        }
+
+        protected boolean isEditableShape(Object object)
+        {
+            return object instanceof Airspace || object instanceof SurfaceShape;
         }
 
         protected void keepShapeHighlighted(boolean tf)

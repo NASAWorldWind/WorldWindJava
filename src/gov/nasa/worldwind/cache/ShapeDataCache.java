@@ -56,7 +56,7 @@ public class ShapeDataCache implements Iterable<ShapeDataCache.ShapeDataCacheEnt
         public ShapeDataCacheEntry(DrawContext dc, long minExpiryTime, long maxExpiryTime)
         {
             this.timer = new TimedExpirySupport(Math.max(minExpiryTime, 0), Math.max(maxExpiryTime, 0));
-            this.globeStateKey = dc != null ? dc.getGlobe().getGlobeStateKey(dc) : null;
+            this.globeStateKey = dc != null ? dc.getGlobe().getGlobeStateKey() : null;
             this.verticalExaggeration = dc != null ? dc.getVerticalExaggeration() : 1d;
         }
 
