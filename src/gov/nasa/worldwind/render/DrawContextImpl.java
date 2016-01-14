@@ -171,12 +171,12 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
 
     public final int getDrawableHeight()
     {
-        return this.getGLDrawable().getHeight();
+        return this.getGLDrawable().getSurfaceHeight();
     }
 
     public final int getDrawableWidth()
     {
-        return this.getGLDrawable().getWidth();
+        return this.getGLDrawable().getSurfaceWidth();
     }
 
     public final GLDrawable getGLDrawable()
