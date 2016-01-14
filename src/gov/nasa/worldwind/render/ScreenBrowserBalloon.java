@@ -8,7 +8,7 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.awt.*;
 
 /**

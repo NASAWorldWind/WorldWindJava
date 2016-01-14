@@ -8,11 +8,11 @@ package gov.nasa.worldwindx.examples;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 
 /**
  * Illustrates how to capture OpenGL errors into the log during development. By defining a custom <code>{@link
- * gov.nasa.worldwind.WorldWindowGLDrawable}</code> and installing JOGL's {@link javax.media.opengl.DebugGL2},
+ * gov.nasa.worldwind.WorldWindowGLDrawable}</code> and installing JOGL's {@link com.jogamp.opengl.DebugGL2},
  * applications can receive log error messages when an OpenGL error occurs. This technique is intended for use during
  * application development, and should not be used in a deployed application.
  *
@@ -44,7 +44,7 @@ public class DebuggingGLErrors extends ApplicationTemplate
 
     /**
      * Subclass of {@link gov.nasa.worldwind.WorldWindowGLAutoDrawable} which overrides the method {@link
-     * gov.nasa.worldwind.WorldWindowGLAutoDrawable#init(javax.media.opengl.GLAutoDrawable)} to configure the OpenGL
+     * gov.nasa.worldwind.WorldWindowGLAutoDrawable#init(com.jogamp.opengl.GLAutoDrawable)} to configure the OpenGL
      * error logger.
      */
     public static class MyGLAutoDrawable extends WorldWindowGLAutoDrawable
@@ -56,7 +56,7 @@ public class DebuggingGLErrors extends ApplicationTemplate
 
         /**
          * Overridden to configure the OpenGL features used by the World Wind SDK. See {@link
-         * javax.media.opengl.GLEventListener#init(javax.media.opengl.GLAutoDrawable)}.
+         * com.jogamp.opengl.GLEventListener#init(com.jogamp.opengl.GLAutoDrawable)}.
          *
          * @param glAutoDrawable the drawable
          */

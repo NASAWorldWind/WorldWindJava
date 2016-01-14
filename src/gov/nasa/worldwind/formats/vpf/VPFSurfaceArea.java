@@ -11,8 +11,8 @@ import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.*;
 import java.nio.IntBuffer;
 import java.util.*;
 

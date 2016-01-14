@@ -12,7 +12,7 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 

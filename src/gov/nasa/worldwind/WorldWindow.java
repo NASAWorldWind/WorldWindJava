@@ -13,7 +13,7 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.pick.PickedObjectList;
 import gov.nasa.worldwind.util.PerformanceStatistic;
 
-import javax.media.opengl.GLContext;
+import com.jogamp.opengl.GLContext;
 import java.util.*;
 
 /**

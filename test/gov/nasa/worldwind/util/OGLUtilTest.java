@@ -11,7 +11,7 @@ import gov.nasa.worldwind.Configuration;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.io.*;
 import java.net.URL;
 
