@@ -7,7 +7,7 @@ package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.geom.Sector;
 
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.glu.*;
 
 // TODO: Consider replacing the clipping capability in PolygonTessellator2 with use of this independent component.
 // TODO: Consider clipping contour coordinates to the sector bounds, rather than just reducing complexity.

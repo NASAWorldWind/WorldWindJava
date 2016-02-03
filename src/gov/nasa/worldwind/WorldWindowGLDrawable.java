@@ -8,7 +8,7 @@ package gov.nasa.worldwind;
 
 import gov.nasa.worldwind.cache.*;
 
-import javax.media.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLAutoDrawable;
 
 /**
  * @author tag

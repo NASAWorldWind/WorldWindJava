@@ -3,7 +3,7 @@ package com.zebraimaging;
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.awt.*;
 
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;

@@ -71,7 +71,7 @@ public interface AirspaceAttributes extends ShapeAttributes
      * @param enableMaterial true to set OpenGL material state, false to set OpenGL color state.
      *
      * @throws IllegalArgumentException if the drawing context is null.
-     * @deprecated Use {@link Material#apply(javax.media.opengl.GL2, int)} or make OpenGL state changes directly.
+     * @deprecated Use {@link Material#apply(com.jogamp.opengl.GL2, int)} or make OpenGL state changes directly.
      */
     void applyInterior(DrawContext dc, boolean enableMaterial);
 
@@ -84,7 +84,7 @@ public interface AirspaceAttributes extends ShapeAttributes
      * @param enableMaterial true to set OpenGL material state, false to set OpenGL color state.
      *
      * @throws IllegalArgumentException if the drawing context is null.
-     * @deprecated Use {@link Material#apply(javax.media.opengl.GL2, int)} or make OpenGL state changes directly.
+     * @deprecated Use {@link Material#apply(com.jogamp.opengl.GL2, int)} or make OpenGL state changes directly.
      */
     void applyOutline(DrawContext dc, boolean enableMaterial);
 }

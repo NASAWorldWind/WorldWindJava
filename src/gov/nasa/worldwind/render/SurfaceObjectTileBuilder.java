@@ -14,7 +14,7 @@ import gov.nasa.worldwind.layers.TextureTile;
 import gov.nasa.worldwind.pick.PickedObject;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.awt.*;
 import java.util.*;
 import java.util.List;

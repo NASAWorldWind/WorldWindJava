@@ -20,7 +20,7 @@ public class JOGLVersionInfo
     private JOGLVersionInfo()
     {
         ClassLoader classLoader = getClass().getClassLoader();
-        this.p = pkgInfo(classLoader, "javax.media.opengl", "GL");
+        this.p = pkgInfo(classLoader, "com.jogamp.opengl", "GL");
     }
 
     private static Package pkgInfo(ClassLoader classLoader, String pkgName, String className)

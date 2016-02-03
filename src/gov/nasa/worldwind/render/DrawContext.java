@@ -15,8 +15,8 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.terrain.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.GLU;
 import java.awt.*;
 import java.nio.FloatBuffer;
 import java.util.*;
@@ -30,10 +30,10 @@ import java.util.Queue;
 public interface DrawContext extends WWObject, Disposable
 {
     /**
-     * Assigns this <code>DrawContext</code> a new </code>javax.media.opengl.GLContext</code>. May throw a
+     * Assigns this <code>DrawContext</code> a new </code>com.jogamp.opengl.GLContext</code>. May throw a
      * <code>NullPointerException</code> if <code>glContext</code> is null.
      *
-     * @param glContext the new <code>javax.media.opengl.GLContext</code>
+     * @param glContext the new <code>com.jogamp.opengl.GLContext</code>
      *
      * @throws NullPointerException if glContext is null
      * @since 1.5
@@ -41,17 +41,17 @@ public interface DrawContext extends WWObject, Disposable
     void setGLContext(GLContext glContext);
 
     /**
-     * Retrieves this <code>DrawContext</code>s </code>javax.media.opengl.GLContext</code>. If this method returns null,
+     * Retrieves this <code>DrawContext</code>s </code>com.jogamp.opengl.GLContext</code>. If this method returns null,
      * then there are potentially no active <code>GLContext</code>s and rendering should be aborted.
      *
-     * @return this <code>DrawContext</code>s </code>javax.media.opengl.GLContext</code>.
+     * @return this <code>DrawContext</code>s </code>com.jogamp.opengl.GLContext</code>.
      *
      * @since 1.5
      */
     GLContext getGLContext();
 
     /**
-     * Retrieves the current <code>javax.media.opengl.GL</code>. A <code>GL</code> or <code>GLU</code> is required for
+     * Retrieves the current <code>com.jogamp.opengl.GL</code>. A <code>GL</code> or <code>GLU</code> is required for
      * all graphical rendering in World Wind.
      *
      * @return the current <code>GL</code> if available, null otherwise
@@ -61,7 +61,7 @@ public interface DrawContext extends WWObject, Disposable
     GL getGL();
 
     /**
-     * Retrieves the current <code>javax.media.opengl.glu.GLU</code>. A <code>GLU</code> or <code>GL</code> is required
+     * Retrieves the current <code>com.jogamp.opengl.glu.GLU</code>. A <code>GLU</code> or <code>GL</code> is required
      * for all graphical rendering in World Wind.
      *
      * @return the current <code>GLU</code> if available, null otherwise
@@ -71,7 +71,7 @@ public interface DrawContext extends WWObject, Disposable
     GLU getGLU();
 
     /**
-     * Retrieves the current <code>javax.media.opengl.GLDrawable</code>. A <code>GLDrawable</code> can be used to create
+     * Retrieves the current <code>com.jogamp.opengl.GLDrawable</code>. A <code>GLDrawable</code> can be used to create
      * a <code>GLContext</code>, which can then be used for rendering.
      *
      * @return the current <code>GLDrawable</code>, null if none available
@@ -126,7 +126,7 @@ public interface DrawContext extends WWObject, Disposable
      * Initializes this <code>DrawContext</code>. This method should be called at the beginning of each frame to prepare
      * the <code>DrawContext</code> for the coming render pass.
      *
-     * @param glContext the <code>javax.media.opengl.GLContext</code> to use for this render pass
+     * @param glContext the <code>com.jogamp.opengl.GLContext</code> to use for this render pass
      *
      * @since 1.5
      */

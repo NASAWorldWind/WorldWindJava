@@ -16,9 +16,9 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.terrain.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.GLU;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.GLU;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import java.awt.*;
 import java.nio.*;
 import java.util.*;
@@ -147,7 +147,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     /**
      * Free internal resources held by this draw context. A GL context must be current when this method is called.
      *
-     * @throws javax.media.opengl.GLException - If an OpenGL context is not current when this method is called.
+     * @throws com.jogamp.opengl.GLException - If an OpenGL context is not current when this method is called.
      */
     public void dispose()
     {
@@ -171,12 +171,12 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
 
     public final int getDrawableHeight()
     {
-        return this.getGLDrawable().getHeight();
+        return this.getGLDrawable().getSurfaceHeight();
     }
 
     public final int getDrawableWidth()
     {
-        return this.getGLDrawable().getWidth();
+        return this.getGLDrawable().getSurfaceWidth();
     }
 
     public final GLDrawable getGLDrawable()
