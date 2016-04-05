@@ -78,7 +78,7 @@ public class BasicDragger implements SelectListener
 
         if (event.getEventAction().equals(SelectEvent.DRAG_END))
         {
-        	this.isGround = false;
+            this.isGround = false;
             this.dragging = false;
             event.consume();
         }
