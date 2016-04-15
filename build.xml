@@ -59,6 +59,7 @@
                destdir="${worldwind.classes.dir}"
                source="${worldwind.jdk.version}"
                target="${worldwind.jdk.version}"
+               debug="${worldwind.javac.debug}"
                encoding="UTF-8"
                fork="true"
                includeantruntime="false"
@@ -125,7 +126,7 @@
             <fileset dir="${worldwind.classes.dir}">
                 <include name="gov/nasa/worldwind/**/*.class"/>
                 <include name="com/zebraimaging/**/*.class"/>
-                <include name="org/codehaus/jackson/**/*.class"/>
+                <include name="org/codehaus/jackson/**/*.class" unless="worldwind.exclude.jackson"/>
                 <type type="file"/>
             </fileset>
             <!-- Include the MessageStrings properties files, and all resource files under the config and images
