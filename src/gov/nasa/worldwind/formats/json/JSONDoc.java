@@ -7,7 +7,7 @@ package gov.nasa.worldwind.formats.json;
 
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.util.*;
-import org.codehaus.jackson.*;
+import gov.nasa.worldwind.shaded.org.codehaus.jackson.*;
 
 import java.io.*;
 
