@@ -70,9 +70,7 @@ public class ViewLimits extends ApplicationTemplate
         {
             if (sector == null)
             {
-                String message = Logging.getMessage("nullValue.SectorIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.ignoreComponentEvents = true;
@@ -102,9 +100,7 @@ public class ViewLimits extends ApplicationTemplate
         {
             if (min == null || max == null)
             {
-                String message = Logging.getMessage("nullValue.MinOrMaxAngleIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.ignoreComponentEvents = true;
@@ -132,9 +128,7 @@ public class ViewLimits extends ApplicationTemplate
         {
             if (min == null || max == null)
             {
-                String message = Logging.getMessage("nullValue.MinOrMaxAngleIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.ignoreComponentEvents = true;

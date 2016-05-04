@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.rpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author dcollins
  * @version $Id: RPFProducer.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -74,9 +72,7 @@ public enum RPFProducer
     {
         if (id == null)
         {
-            String message = Logging.getMessage("nullValue.CharacterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         RPFProducer[] alphabet = enumConstantAlphabet();
         int index = indexFor(Character.toUpperCase(id));
@@ -87,18 +83,14 @@ public enum RPFProducer
     {
         if (id == null)
         {
-            String message = Logging.getMessage("nullValue.CharacterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         RPFProducer producer;
         RPFProducer[] alphabet = enumConstantAlphabet();
         int index = indexFor(Character.toUpperCase(id));
         if (index < 0 || index >= alphabet.length || (producer = alphabet[index]) == null)
         {
-            String message = Logging.getMessage("generic.EnumNotFound", id);
-            Logging.logger().severe(message);
-            throw new EnumConstantNotPresentException(RPFZone.class, message);
+            throw new EnumConstantNotPresentException(RPFZone.class, null);
         }
         return producer;
     }

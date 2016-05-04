@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.util.webview;
 
 import gov.nasa.worldwind.avlist.AVList;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -88,8 +87,6 @@ public class WindowsWebViewJNI
         }
         catch (Throwable t)
         {
-            String message = Logging.getMessage("WebView.ExceptionCreatingWebView", t);
-            Logging.logger().severe(message);
         }
     }
 

@@ -7,7 +7,6 @@ package gov.nasa.worldwindx.applications.sar.render;
 
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import java.awt.*;
@@ -63,9 +62,7 @@ public class ScreenElevationLine implements Renderable
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.color = color;

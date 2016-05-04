@@ -85,9 +85,7 @@ public class CrosshairLayer extends AbstractLayer
     {
         if (iconFilePath == null)
         {
-            String message = Logging.getMessage("nullValue.IconFilePath");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.iconFilePath = iconFilePath;
     }
@@ -220,9 +218,7 @@ public class CrosshairLayer extends AbstractLayer
                 iconTexture = dc.getTextureCache().getTexture(this.getIconFilePath());
                 if (iconTexture == null)
                 {
-                    String msg = Logging.getMessage("generic.ImageReadFailed");
-                    Logging.logger().finer(msg);
-                    return;
+                            return;
                 }
             }
 
@@ -370,9 +366,7 @@ public class CrosshairLayer extends AbstractLayer
         }
         catch (IOException e)
         {
-            String msg = Logging.getMessage("layers.IOExceptionDuringInitialization");
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg, e);
+            throw new WWRuntimeException(e);
         }
 
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR);//_MIPMAP_LINEAR);
@@ -388,6 +382,6 @@ public class CrosshairLayer extends AbstractLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.CrosshairLayer.Name");
+        return null;
     }
 }

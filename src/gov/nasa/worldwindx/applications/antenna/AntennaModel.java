@@ -12,7 +12,6 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.terrain.Terrain;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import javax.xml.stream.*;
@@ -115,9 +114,7 @@ public class AntennaModel extends AbstractShape
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;

@@ -18,7 +18,6 @@ import java.io.*;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.regex.*;
 
 /**
@@ -71,9 +70,7 @@ public abstract class KMLAbstractBalloon implements Balloon, WebResourceResolver
     {
         if (feature == null)
         {
-            String msg = Logging.getMessage("nullValue.FeatureIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.parent = feature;
@@ -476,9 +473,7 @@ public abstract class KMLAbstractBalloon implements Balloon, WebResourceResolver
     {
         if (displayMode == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.displayMode = displayMode;
@@ -513,7 +508,6 @@ public abstract class KMLAbstractBalloon implements Balloon, WebResourceResolver
         }
         catch (IOException e)
         {
-            Logging.logger().log(Level.WARNING, Logging.getMessage("KML.UnableToResolvePath", address), e.getMessage());
         }
 
         return null;

@@ -146,9 +146,7 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.path.setPositions(positions);

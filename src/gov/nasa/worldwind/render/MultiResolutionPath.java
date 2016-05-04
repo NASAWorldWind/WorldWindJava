@@ -8,7 +8,6 @@ package gov.nasa.worldwind.render;
 
 import com.jogamp.common.nio.Buffers;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.nio.IntBuffer;
@@ -162,9 +161,7 @@ public class MultiResolutionPath extends Path
     {
         if (computer == null)
         {
-            String message = Logging.getMessage("nullValue.CallbackIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.skipCountComputer = computer;

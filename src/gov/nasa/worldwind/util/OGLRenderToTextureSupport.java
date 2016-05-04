@@ -109,9 +109,7 @@ public class OGLRenderToTextureSupport
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.colorTarget == texture)
@@ -149,16 +147,12 @@ public class OGLRenderToTextureSupport
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.colorTarget == null)
@@ -187,9 +181,7 @@ public class OGLRenderToTextureSupport
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.flushColor(dc);
@@ -216,9 +208,7 @@ public class OGLRenderToTextureSupport
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -271,9 +261,7 @@ public class OGLRenderToTextureSupport
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -459,23 +447,23 @@ public class OGLRenderToTextureSupport
         switch (status)
         {
             case GL.GL_FRAMEBUFFER_COMPLETE:
-                return Logging.getMessage("OGL.FramebufferComplete");
+                return null;
             case GL.GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-                return Logging.getMessage("OGL.FramebufferIncompleteAttachment");
+                return null;
             case GL.GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-                return Logging.getMessage("OGL.FramebufferIncompleteDimensions");
+                return null;
             case GL2.GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:
-                return Logging.getMessage("OGL.FramebufferIncompleteDrawBuffer");
+                return null;
             case GL.GL_FRAMEBUFFER_INCOMPLETE_FORMATS:
-                return Logging.getMessage("OGL.FramebufferIncompleteFormats");
+                return null;
             case GL.GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-                return Logging.getMessage("OGL.FramebufferIncompleteMissingAttachment");
+                return null;
             case GL2.GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:
-                return Logging.getMessage("OGL.FramebufferIncompleteMultisample");
+                return null;
             case GL2.GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:
-                return Logging.getMessage("OGL.FramebufferIncompleteReadBuffer");
+                return null;
             case GL.GL_FRAMEBUFFER_UNSUPPORTED:
-                return Logging.getMessage("OGL.FramebufferUnsupported");
+                return null;
             default:
                 return null;
         }

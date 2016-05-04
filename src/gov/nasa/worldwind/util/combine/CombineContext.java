@@ -145,9 +145,7 @@ public class CombineContext implements Disposable
     {
         if (globe == null)
         {
-            String msg = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         GLUtessellatorCallback cb = new TessCallbackAdapter(this); // forward GLU tessellator callbacks to tess* methods
@@ -198,9 +196,7 @@ public class CombineContext implements Disposable
     {
         if (globe == null)
         {
-            String msg = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.globe = globe;
@@ -229,9 +225,7 @@ public class CombineContext implements Disposable
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.sector = sector;
@@ -294,9 +288,7 @@ public class CombineContext implements Disposable
     {
         if (contour == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.contours.addContour(contour);
@@ -339,8 +331,7 @@ public class CombineContext implements Disposable
     protected void tessError(int errno)
     {
         String errstr = GLUTessellatorSupport.convertGLUTessErrorToString(errno);
-        String msg = Logging.getMessage("generic.ExceptionWhileTessellating", errstr);
-        Logging.logger().severe(msg);
+        String msg = null;
     }
 
     /**
@@ -391,9 +382,7 @@ public class CombineContext implements Disposable
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.boundingSectors.add(sector);

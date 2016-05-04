@@ -124,14 +124,10 @@ public class BasicElevationModelBulkDownloader extends BulkRetrievalThread
         }
         catch (InterruptedException e)
         {
-            String message = Logging.getMessage("generic.BulkRetrievalInterrupted", elevationModel.getName());
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionDuringBulkRetrieval", elevationModel.getName());
-            Logging.logger().severe(message);
-            throw new RuntimeException(message);
+            throw new RuntimeException();
         }
     }
 
@@ -284,9 +280,7 @@ public class BasicElevationModelBulkDownloader extends BulkRetrievalThread
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionDuringDataSizeEstimate", this.getName());
-            Logging.logger().severe(message);
-            throw new RuntimeException(message);
+            throw new RuntimeException();
         }
 
         // Extrapolate total missing count
@@ -369,9 +363,7 @@ public class BasicElevationModelBulkDownloader extends BulkRetrievalThread
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         // Find the first level exceeding the desired resolution
@@ -408,9 +400,7 @@ public class BasicElevationModelBulkDownloader extends BulkRetrievalThread
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Level targetLevel = this.elevationModel.getLevels().getLastLevel();
@@ -444,9 +434,7 @@ public class BasicElevationModelBulkDownloader extends BulkRetrievalThread
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Level targetLevel = this.elevationModel.getLevels().getLastLevel();

@@ -133,9 +133,7 @@ public class KMLStyleMap extends KMLAbstractStyleSelector
     {
         if (!(sourceValues instanceof KMLStyleMap))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.applyChange(sourceValues);

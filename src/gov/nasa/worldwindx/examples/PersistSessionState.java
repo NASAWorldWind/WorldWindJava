@@ -7,11 +7,9 @@
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.Configuration;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwindx.examples.util.SessionState;
 
 import java.awt.event.*;
-import java.util.logging.Level;
 
 /**
  * @author dcollins
@@ -70,7 +68,6 @@ public class PersistSessionState extends ApplicationTemplate
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, "Unable to save session state", e);
             }
         }
 
@@ -87,7 +84,6 @@ public class PersistSessionState extends ApplicationTemplate
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, "Unable to restore session state", e);
             }
         }
     }

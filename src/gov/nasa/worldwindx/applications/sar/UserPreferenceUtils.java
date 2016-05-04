@@ -25,9 +25,7 @@ public class UserPreferenceUtils
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Document doc = WWXML.createDocumentBuilder(true).newDocument();
@@ -45,16 +43,12 @@ public class UserPreferenceUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();
@@ -68,16 +62,12 @@ public class UserPreferenceUtils
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element el = WWXML.appendElementPath(domElement, "PropertyList");
@@ -96,9 +86,7 @@ public class UserPreferenceUtils
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // By default, automatically save tracks every minute.
@@ -127,7 +115,6 @@ public class UserPreferenceUtils
         }
         catch (NumberFormatException e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, "Configuration.ConversionError", v);
             return false;
         }
     }

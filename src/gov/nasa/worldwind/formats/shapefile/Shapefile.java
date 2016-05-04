@@ -21,7 +21,6 @@ import java.net.*;
 import java.nio.*;
 import java.nio.channels.*;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * Parses an ESRI Shapefile (.shp) and provides access to its contents. For details on the Shapefile format see the ESRI
@@ -203,9 +202,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (source == null || WWUtil.isEmpty(source))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -222,17 +219,12 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
                 this.initializeFromPath((String) source, params);
             else
             {
-                String message = Logging.getMessage("generic.UnrecognizedSourceType", source);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("SHP.ExceptionAttemptingToReadShapefile",
-                this.getValue(AVKey.DISPLAY_NAME));
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -283,9 +275,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (shpStream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -295,9 +285,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("SHP.ExceptionAttemptingToReadShapefile", shpStream);
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -494,24 +482,18 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (!this.open)
         {
-            String message = Logging.getMessage("SHP.ShapefileClosed", this.getStringValue(AVKey.DISPLAY_NAME));
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (this.header == null) // This should never happen, but we check anyway.
         {
-            String message = Logging.getMessage("SHP.HeaderIsNull", this.getStringValue(AVKey.DISPLAY_NAME));
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         int contentLength = this.header.fileLength - HEADER_LENGTH;
         if (contentLength <= 0 || this.numBytesRead >= contentLength)
         {
-            String message = Logging.getMessage("SHP.NoRecords", this.getStringValue(AVKey.DISPLAY_NAME));
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         ShapefileRecord record;
@@ -521,10 +503,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("SHP.ExceptionAttemptingToReadShapefileRecord",
-                this.getStringValue(AVKey.DISPLAY_NAME));
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
 
         this.numRecordsRead++;
@@ -602,9 +581,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", file.getPath());
-            Logging.logger().severe(message);
-            throw new FileNotFoundException(message);
+            throw new FileNotFoundException();
         }
 
         // Attempt to map the Shapefile into system memory in copy-on-write mode. We open in copy-on-write mode so that
@@ -618,12 +595,9 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             {
                 // Memory map the Shapefile in copy-on-write mode.
                 this.mappedShpBuffer = WWIO.mapFile(file, FileChannel.MapMode.PRIVATE);
-                Logging.logger().finer(Logging.getMessage("SHP.MemoryMappingEnabled", file.getPath()));
             }
             catch (IOException e)
             {
-                Logging.logger().log(Level.WARNING,
-                    Logging.getMessage("SHP.ExceptionAttemptingToMemoryMap", file.getPath()), e);
             }
         }
 
@@ -673,7 +647,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         String message = this.validateURLConnection(connection, SHAPE_CONTENT_TYPES);
         if (message != null)
         {
-            throw new IOException(message);
+            throw new IOException();
         }
 
         this.shpChannel = Channels.newChannel(WWIO.getBufferedInputStream(connection.getInputStream()));
@@ -687,7 +661,8 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         {
             message = this.validateURLConnection(shxConnection, INDEX_CONTENT_TYPES);
             if (message != null)
-                Logging.logger().warning(message);
+            {
+            }
             else
             {
                 InputStream shxStream = this.getURLStream(shxConnection);
@@ -701,7 +676,8 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         {
             message = this.validateURLConnection(prjConnection, PROJECTION_CONTENT_TYPES);
             if (message != null)
-                Logging.logger().warning(message);
+            {
+            }
             else
             {
                 InputStream prjStream = this.getURLStream(prjConnection);
@@ -781,9 +757,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             return;
         }
 
-        String message = Logging.getMessage("generic.UnrecognizedSourceType", path);
-        Logging.logger().severe(message);
-        throw new IllegalArgumentException(message);
+        throw new IllegalArgumentException();
     }
 
     /**
@@ -807,8 +781,6 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         }
         catch (IOException e)
         {
-            Logging.logger().log(Level.WARNING,
-                Logging.getMessage("SHP.ExceptionAttemptingToReadProjection", this.getStringValue(AVKey.DISPLAY_NAME)), e);
         }
 
         // Set the Shapefile's caller specified parameters. We do this after reading the projection parameters to give
@@ -825,7 +797,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         String message = this.validateCoordinateSystem(this);
         if (message != null)
         {
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         // Attempt to read this Shapefile's index resource. If reading the index resource fails, log the exception and
@@ -838,8 +810,6 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         }
         catch (IOException e)
         {
-            Logging.logger().log(Level.WARNING,
-                Logging.getMessage("SHP.ExceptionAttemptingToReadIndex", this.getStringValue(AVKey.DISPLAY_NAME)), e);
         }
 
         // Read this Shapefile's header and flag the Shapefile as open. We read the header after reading any projection
@@ -896,13 +866,12 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             if (connection instanceof HttpURLConnection &&
                 ((HttpURLConnection) connection).getResponseCode() != HttpURLConnection.HTTP_OK)
             {
-                return Logging.getMessage("HTTP.ResponseCode", ((HttpURLConnection) connection).getResponseCode(),
-                    connection.getURL());
+                return null;
             }
         }
         catch (Exception e)
         {
-            return Logging.getMessage("URLRetriever.ErrorOpeningConnection", connection.getURL());
+            return null;
         }
 
         String contentType = connection.getContentType();
@@ -916,7 +885,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         }
 
         // Return an exception if the content type does not match the expected type.
-        return Logging.getMessage("HTTP.UnexpectedContentType", contentType, Arrays.toString(acceptedContentTypes));
+        return null;
     }
 
     //**************************************************************//
@@ -946,7 +915,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         if (buffer.remaining() < HEADER_LENGTH)
         {
             // Let the caller catch and log the message.
-            throw new WWRuntimeException(Logging.getMessage("generic.InvalidFileLength", buffer.remaining()));
+            throw new WWRuntimeException();
         }
 
         return this.readHeaderFromBuffer(buffer);
@@ -979,7 +948,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             if (fileCode != FILE_CODE)
             {
                 // Let the caller catch and log the message.
-                throw new WWUnrecognizedException(Logging.getMessage("SHP.UnrecognizedShapefile", fileCode));
+                throw new WWUnrecognizedException();
             }
 
             // Skip 5 unused ints
@@ -1001,7 +970,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             if (shapeType == null)
             {
                 // Let the caller catch and log the message.
-                throw new WWRuntimeException(Logging.getMessage("SHP.UnsupportedShapeType", type));
+                throw new WWRuntimeException();
             }
 
             // Assemble header
@@ -1064,8 +1033,6 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         {
             // Log a warning that we could not allocate enough memory to hold the Shapefile index. Shapefile parsing
             // can continue without the optional index, so we catch the exception and return immediately.
-            Logging.logger().log(Level.WARNING,
-                Logging.getMessage("SHP.OutOfMemoryAllocatingIndex", this.getStringValue(AVKey.DISPLAY_NAME)), e);
             return null;
         }
 
@@ -1129,8 +1096,6 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
         if (!this.hasKey(AVKey.COORDINATE_SYSTEM))
         {
-            Logging.logger().warning(
-                Logging.getMessage("generic.UnspecifiedCoordinateSystem", this.getStringValue(AVKey.DISPLAY_NAME)));
             return null;
         }
         else if (AVKey.COORDINATE_SYSTEM_GEOGRAPHIC.equals(o))
@@ -1143,7 +1108,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         }
         else
         {
-            return Logging.getMessage("generic.UnsupportedCoordinateSystem", o);
+            return null;
         }
     }
 
@@ -1166,22 +1131,22 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             // Validate the UTM zone.
             Object o = params.getValue(AVKey.PROJECTION_ZONE);
             if (o == null)
-                sb.append(Logging.getMessage("generic.ZoneIsMissing"));
+                sb.append((String) null);
             else if (!(o instanceof Integer) || ((Integer) o) < 1 || ((Integer) o) > 60)
-                sb.append(Logging.getMessage("generic.ZoneIsInvalid", o));
+                sb.append((String) null);
 
             // Validate the UTM hemisphere.
             o = params.getValue(AVKey.PROJECTION_HEMISPHERE);
             if (o == null)
-                sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("generic.HemisphereIsMissing"));
+                sb.append(sb.length() > 0 ? ", " : "").append((String) null);
             else if (!o.equals(AVKey.NORTH) && !o.equals(AVKey.SOUTH))
-                sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("generic.HemisphereIsInvalid", o));
+                sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
             return sb.length() > 0 ? sb.toString() : null;
         }
         else
         {
-            return Logging.getMessage("generic.UnsupportedProjection", proj);
+            return null;
         }
     }
 
@@ -1435,7 +1400,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         if (shapeType == null)
         {
             // Let the caller catch and log the exception.
-            throw new WWRuntimeException(Logging.getMessage("SHP.UnsupportedShapeType", type));
+            throw new WWRuntimeException();
         }
 
         return shapeType;
@@ -1559,8 +1524,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
                 {
                     // Let the caller catch and log the exception. If we cannot allocate enough memory to hold the
                     // point buffer, we throw an exception indicating that the read operation should be terminated.
-                    throw new WWRuntimeException(Logging.getMessage("SHP.OutOfMemoryAllocatingPointBuffer",
-                        this.getStringValue(AVKey.DISPLAY_NAME)), e);
+                    throw new WWRuntimeException(e);
                 }
 
                 this.pointBuffer = new VecBufferSequence(
@@ -1622,7 +1586,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
         // The shape type should have been checked before calling this method, so we shouldn't reach this code.
         // Let the caller catch and log the exception.
-        throw new WWRuntimeException(Logging.getMessage("SHP.UnsupportedShapeType", shapeType));
+        throw new WWRuntimeException();
     }
 
     /**
@@ -1661,7 +1625,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         {
             // The Shapefile's coordinate system is unsupported. This should never happen because the coordinate system
             // is validated during initialization, but we check anyway. Let the caller catch and log the message.
-            throw new WWRuntimeException(Logging.getMessage("generic.UnsupportedCoordinateSystem", o));
+            throw new WWRuntimeException();
         }
     }
 
@@ -1743,7 +1707,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             // The Shapefile's coordinate system projection is unsupported. This should never happen because the
             // projection is validated during initialization, but we check anyway. Let the caller catch and log the
             // message.
-            throw new WWRuntimeException(Logging.getMessage("generic.UnsupportedProjection", o));
+            throw new WWRuntimeException();
         }
     }
 
@@ -1793,7 +1757,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         {
             // The Shapefile's coordinate system is unsupported. This should never happen because the coordinate system
             // is validated during initialization, but we check anyway. Let the caller catch and log the message.
-            throw new WWRuntimeException(Logging.getMessage("generic.UnsupportedCoordinateSystem", o));
+            throw new WWRuntimeException();
         }
     }
 
@@ -1908,7 +1872,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             // The Shapefile's coordinate system projection is unsupported. This should never happen because the
             // projection is validated during initialization, but we check anyway. Let the caller catch and log the
             // message.
-            throw new WWRuntimeException(Logging.getMessage("generic.UnsupportedProjection", o));
+            throw new WWRuntimeException();
         }
     }
 
@@ -1950,9 +1914,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return measureTypes.contains(shapeType);
@@ -1971,9 +1933,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return zTypes.contains(shapeType);
@@ -1992,9 +1952,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return shapeType.equals(Shapefile.SHAPE_NULL);
@@ -2014,9 +1972,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return shapeType.equals(Shapefile.SHAPE_POINT) || shapeType.equals(Shapefile.SHAPE_POINT_Z)
@@ -2037,9 +1993,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return shapeType.equals(Shapefile.SHAPE_MULTI_POINT) || shapeType.equals(Shapefile.SHAPE_MULTI_POINT_Z)
@@ -2060,9 +2014,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return shapeType.equals(Shapefile.SHAPE_POLYLINE) || shapeType.equals(Shapefile.SHAPE_POLYLINE_Z)
@@ -2081,9 +2033,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return shapeType.equals(Shapefile.SHAPE_POLYGON) || shapeType.equals(Shapefile.SHAPE_POLYGON_Z)
@@ -2102,16 +2052,12 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (output == null)
         {
-            String message = Logging.getMessage("nullValue.OutputBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -2120,7 +2066,6 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         }
         catch (XMLStreamException e)
         {
-            Logging.logger().throwing(getClass().getName(), "export", e);
             throw new IOException(e);
         }
     }
@@ -2147,9 +2092,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (KMLConstants.KML_MIME_TYPE.equals(mimeType))
@@ -2180,8 +2123,6 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("Export.Exception.ShapefileRecord");
-                Logging.logger().log(Level.WARNING, message, e);
 
                 continue; // keep processing the records
             }
@@ -2204,8 +2145,6 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("Export.Exception.ShapefileRecord");
-                Logging.logger().log(Level.WARNING, message, e);
 
                 continue; // keep processing the records
             }

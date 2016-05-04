@@ -60,9 +60,7 @@ public class RestorableSupport
     {
         if (doc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.doc = doc;
@@ -84,9 +82,7 @@ public class RestorableSupport
     {
         if (WWUtil.isEmpty(documentElementName))
         {
-            String message = Logging.getMessage("nullValue.DocumentElementNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         javax.xml.parsers.DocumentBuilderFactory docBuilderFactory =
@@ -102,9 +98,7 @@ public class RestorableSupport
         }
         catch (javax.xml.parsers.ParserConfigurationException e)
         {
-            String message = Logging.getMessage("generic.ExceptionCreatingParser");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message, e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -132,9 +126,7 @@ public class RestorableSupport
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         javax.xml.parsers.DocumentBuilderFactory docBuilderFactory =
@@ -149,21 +141,15 @@ public class RestorableSupport
         }
         catch (java.io.IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
         catch (org.xml.sax.SAXException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
         catch (javax.xml.parsers.ParserConfigurationException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message, e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -176,15 +162,11 @@ public class RestorableSupport
     {
         if (doc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (tagName == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Document already has a root element.
@@ -219,14 +201,10 @@ public class RestorableSupport
         }
         catch (javax.xml.transform.TransformerConfigurationException e)
         {
-            String message = Logging.getMessage("generic.ExceptionWritingXml");
-            Logging.logger().severe(message);
             return null;
         }
         catch (javax.xml.transform.TransformerException e)
         {
-            String message = Logging.getMessage("generic.ExceptionWritingXml");
-            Logging.logger().severe(message);
             return null;
         }
     }
@@ -256,9 +234,7 @@ public class RestorableSupport
         {
             if (element == null)
             {
-                String message = Logging.getMessage("nullValue.ElementIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.elem = element;
@@ -285,9 +261,7 @@ public class RestorableSupport
         {
             if (name == null)
             {
-                String message = Logging.getMessage("nullValue.StringIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.elem.setAttribute("name", name);
@@ -317,9 +291,7 @@ public class RestorableSupport
         {
             if (value == null)
             {
-                String message = Logging.getMessage("nullValue.StringIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.elem.setTextContent(value);
@@ -361,9 +333,7 @@ public class RestorableSupport
     {
         if (stateObjectTagName == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.stateObjectTagName = stateObjectTagName;
@@ -373,9 +343,7 @@ public class RestorableSupport
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Search for the state element with the specified name.
@@ -405,9 +373,7 @@ public class RestorableSupport
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Search for the state elements beneath the context with the specified name.
@@ -512,9 +478,7 @@ public class RestorableSupport
     {
         if (elem == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return elem.getOwnerDocument().equals(this.doc);
@@ -534,9 +498,7 @@ public class RestorableSupport
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return getStateObject(null, name);
@@ -559,15 +521,11 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return findStateObject(context != null ? context.elem : null, name);
@@ -589,9 +547,7 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return extractStateObjects(context != null ? context.elem : null);
@@ -611,9 +567,7 @@ public class RestorableSupport
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return getAllStateObjects(null, name);
@@ -637,15 +591,11 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return findAllStateObjects(context != null ? context.elem : null, name);
@@ -665,9 +615,7 @@ public class RestorableSupport
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return addStateObject(null, name);
@@ -692,15 +640,11 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Create the state object with no value.
@@ -725,15 +669,11 @@ public class RestorableSupport
     {
         if (stateObject == null)
         {
-            String message = Logging.getMessage("nullValue.StateObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!containsElement(stateObject.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return stateObject.getValue();
@@ -800,8 +740,6 @@ public class RestorableSupport
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", stringValue);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -867,8 +805,6 @@ public class RestorableSupport
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", stringValue);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -934,8 +870,6 @@ public class RestorableSupport
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", stringValue);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1001,8 +935,6 @@ public class RestorableSupport
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", stringValue);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1069,8 +1001,6 @@ public class RestorableSupport
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", stringValue);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1130,23 +1060,17 @@ public class RestorableSupport
     {
         if (stateObject == null)
         {
-            String message = Logging.getMessage("nullValue.StateObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!containsElement(stateObject.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Double lat = getStateValueAsDouble(stateObject, "latitudeDegrees");
         Double lon = getStateValueAsDouble(stateObject, "longitudeDegrees");
         if (lat == null || lon == null)
         {
-            String message = Logging.getMessage("generic.ConversionError", stateObject.getName());
-            Logging.logger().log(java.util.logging.Level.SEVERE, message);
             return null;
         }
 
@@ -1181,15 +1105,11 @@ public class RestorableSupport
     {
         if (stateObject == null)
         {
-            String message = Logging.getMessage("nullValue.StateObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!containsElement(stateObject.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Double lat = getStateValueAsDouble(stateObject, "latitudeDegrees");
@@ -1197,8 +1117,6 @@ public class RestorableSupport
         Double elevation = getStateValueAsDouble(stateObject, "elevation");
         if (lat == null || lon == null || elevation == null)
         {
-            String message = Logging.getMessage("generic.ConversionError", stateObject.getName());
-            Logging.logger().log(java.util.logging.Level.SEVERE, message);
             return null;
         }
 
@@ -1233,15 +1151,11 @@ public class RestorableSupport
     {
         if (stateObject == null)
         {
-            String message = Logging.getMessage("nullValue.StateObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!containsElement(stateObject.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject[] llsos = getAllStateObjects(stateObject, "location");
@@ -1292,15 +1206,11 @@ public class RestorableSupport
     {
         if (stateObject == null)
         {
-            String message = Logging.getMessage("nullValue.StateObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!containsElement(stateObject.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject[] offsetsLists = getAllStateObjects(stateObject, "face");
@@ -1353,15 +1263,11 @@ public class RestorableSupport
     {
         if (stateObject == null)
         {
-            String message = Logging.getMessage("nullValue.StateObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!containsElement(stateObject.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float[] upperLeftOffset = getStateValueAsOffsetPair(stateObject, "upperLeftOffset");
@@ -1371,8 +1277,6 @@ public class RestorableSupport
 
         if (upperLeftOffset == null || upperRightOffset == null || lowerLeftOffset == null || lowerRightOffset == null)
         {
-            String message = Logging.getMessage("generic.ConversionError", stateObject.getName());
-            Logging.logger().log(java.util.logging.Level.SEVERE, message);
             return null;
         }
 
@@ -1415,15 +1319,11 @@ public class RestorableSupport
     {
         if (stateObject == null)
         {
-            String message = Logging.getMessage("nullValue.StateObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!containsElement(stateObject.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Float uOffset = getStateValueAsFloat(stateObject, "uOffset");
@@ -1431,8 +1331,6 @@ public class RestorableSupport
 
         if (uOffset == null || vOffset == null)
         {
-            String message = Logging.getMessage("generic.ConversionError", stateObject.getName());
-            Logging.logger().log(java.util.logging.Level.SEVERE, message);
             return null;
         }
 
@@ -1472,15 +1370,11 @@ public class RestorableSupport
     {
         if (stateObject == null)
         {
-            String message = Logging.getMessage("nullValue.StateObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!containsElement(stateObject.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject[] imageSourceList = getAllStateObjects(stateObject, "imageSource");
@@ -1534,15 +1428,11 @@ public class RestorableSupport
     {
         if (stateObject == null)
         {
-            String message = Logging.getMessage("nullValue.StateObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!containsElement(stateObject.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Double minLat = getStateValueAsDouble(stateObject, "minLatitudeDegrees");
@@ -1551,8 +1441,6 @@ public class RestorableSupport
         Double maxLon = getStateValueAsDouble(stateObject, "maxLongitudeDegrees");
         if (minLat == null || maxLat == null || minLon == null || maxLon == null)
         {
-            String message = Logging.getMessage("generic.ConversionError", stateObject.getName());
-            Logging.logger().log(java.util.logging.Level.SEVERE, message);
             return null;
         }
 
@@ -1664,15 +1552,11 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null || value == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         createStateObject(context != null ? context.elem : null, name, value, escapeValue);
@@ -1710,15 +1594,11 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         addStateValueAsString(context, name, Integer.toString(intValue));
@@ -1756,15 +1636,11 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         addStateValueAsString(context, name, Double.toString(doubleValue));
@@ -1802,15 +1678,11 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         addStateValueAsString(context, name, Boolean.toString(booleanValue));
@@ -1825,21 +1697,15 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (location == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject pStateObj = addStateObject(context, name);
@@ -1859,21 +1725,15 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject pStateObj = addStateObject(context, name);
@@ -1889,21 +1749,15 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (locations == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject stateObject = addStateObject(context, name);
@@ -1920,21 +1774,15 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (offsets == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject stateObject = addStateObject(context, name);
@@ -1953,21 +1801,15 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (offsets == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject pStateObj = addStateObject(context, name);
@@ -1984,21 +1826,15 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (offsetPair == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetPairIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject pStateObj = addStateObject(context, name);
@@ -2019,21 +1855,15 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (imageSources == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSourcesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject stateObject = addStateObject(context, name);
@@ -2055,21 +1885,15 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject pStateObj = addStateObject(context, name);
@@ -2091,21 +1915,15 @@ public class RestorableSupport
     {
         if (context != null && !containsElement(context.elem))
         {
-            String message = Logging.getMessage("RestorableSupport.InvalidStateObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String value = encodeColor(color);
@@ -2130,9 +1948,7 @@ public class RestorableSupport
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Encode the red, green, blue, and alpha components
@@ -2158,9 +1974,7 @@ public class RestorableSupport
     {
         if (encodedString == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!encodedString.startsWith("0x") && !encodedString.startsWith("0X"))
@@ -2176,8 +1990,6 @@ public class RestorableSupport
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", encodedString);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
 

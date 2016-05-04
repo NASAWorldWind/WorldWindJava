@@ -158,7 +158,6 @@ public class DataInstallerApp
         }
         catch (Exception e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, "Exception at application start", e);
             return null;
         }
     }

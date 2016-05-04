@@ -8,7 +8,6 @@ package gov.nasa.worldwind.layers.rpf.wizard;
 import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.layers.rpf.RPFTiledImageProcessor;
 import gov.nasa.worldwind.layers.rpf.RPFFileIndex;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.wizard.DefaultPanelDescriptor;
 import gov.nasa.worldwind.util.wizard.Wizard;
 import gov.nasa.worldwind.util.wizard.WizardModel;
@@ -165,7 +164,6 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
         catch (Exception e)
         {
             String message = "Exception while preprocessing: " + (set != null ? set.getTitle() : "null");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             layer = null;
         }
 
@@ -184,7 +182,6 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
 
         long endTime = System.currentTimeMillis();
         String message = String.format("Preprocessor completed \'%s\' in %,d (millis)", (set != null ? set.getTitle() : "null"), endTime - startTime);
-        Logging.logger().fine(message);
     }
 
     private void finished()

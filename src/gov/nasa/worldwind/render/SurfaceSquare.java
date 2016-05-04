@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author dcollins
@@ -114,9 +113,7 @@ public class SurfaceSquare extends SurfaceQuad
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("Geom.SizeIsNegative", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setSize(size, size);

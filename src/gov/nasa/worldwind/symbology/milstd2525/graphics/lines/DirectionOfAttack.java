@@ -14,7 +14,6 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.symbology.TacticalGraphicUtil;
 import gov.nasa.worldwind.symbology.milstd2525.AbstractMilStd2525TacticalGraphic;
 import gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -93,16 +92,12 @@ public class DirectionOfAttack extends AbstractMilStd2525TacticalGraphic
     {
         if (arrowAngle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (arrowAngle.degrees <= 0)
         {
-            String msg = Logging.getMessage("generic.AngleOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.arrowAngle = arrowAngle;
@@ -128,9 +123,7 @@ public class DirectionOfAttack extends AbstractMilStd2525TacticalGraphic
     {
         if (arrowLength < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.arrowLength = arrowLength;
@@ -157,9 +150,7 @@ public class DirectionOfAttack extends AbstractMilStd2525TacticalGraphic
     {
         if (outlineWidth < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.outlineWidth = outlineWidth;
@@ -174,9 +165,7 @@ public class DirectionOfAttack extends AbstractMilStd2525TacticalGraphic
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -187,9 +176,7 @@ public class DirectionOfAttack extends AbstractMilStd2525TacticalGraphic
         }
         catch (NoSuchElementException e)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.paths = null; // Need to recompute path for the new control points

@@ -128,9 +128,7 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
     {
         if (limit < 1)
         {
-            String message = Logging.getMessage("NetworkStatus.InvalidAttemptLimit");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.attemptLimit.set(limit);
@@ -141,9 +139,7 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
     {
         if (interval < 0)
         {
-            String message = Logging.getMessage("NetworkStatus.InvalidTryAgainInterval");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.tryAgainInterval.set(interval);
@@ -184,9 +180,7 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
 
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String hostName = url.getHost();
@@ -221,9 +215,7 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
 
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String hostName = url.getHost();
@@ -245,9 +237,7 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
 
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String hostName = url.getHost();
@@ -319,8 +309,6 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
         if (now - this.lastNetworkStatusReportTime.get() > NETWORK_STATUS_REPORT_INTERVAL)
         {
             this.lastNetworkStatusReportTime.set(now);
-            String message = Logging.getMessage("NetworkStatus.NetworkUnreachable");
-            Logging.logger().info(message);
         }
 
         this.lastNetworkUnavailableResult.set(true); // if no successful contact then network is unreachable
@@ -352,14 +340,10 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
         }
         catch (UnknownHostException e)
         {
-            String message = Logging.getMessage("NetworkStatus.UnreachableTestHost", hostName);
-            Logging.logger().fine(message);
             return false;
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("NetworkStatus.ExceptionTestingHost", hostName);
-            Logging.logger().info(message);
             return false;
         }
 
@@ -384,8 +368,6 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("NetworkStatus.ExceptionTestingHost", hostName);
-            Logging.logger().info(message);
         }
         finally
         {

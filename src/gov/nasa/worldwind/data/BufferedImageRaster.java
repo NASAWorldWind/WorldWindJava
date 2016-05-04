@@ -39,9 +39,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
 
         if (bufferedImage == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.bufferedImage = bufferedImage;
@@ -53,15 +51,11 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
 
         if (width < 1)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (height < 1)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.bufferedImage = ImageUtil.createCompatibleImage(width, height, transparency);
@@ -88,15 +82,11 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
     {
         if (canvas == null)
         {
-            String message = Logging.getMessage("nullValue.DestinationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!(canvas instanceof BufferedImageRaster))
         {
-            String message = Logging.getMessage("DataRaster.IncompatibleRaster", canvas);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.doDrawOnTo((BufferedImageRaster) canvas);
@@ -106,9 +96,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.awt.Graphics2D g2d = this.getGraphics();
@@ -178,7 +166,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
 //        {
 //            String message = Logging.getMessage("nullValue.SectorIsNull");
 //            Logging.logger().severe(message);
-//            throw new IllegalArgumentException(message);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        if (!sector.intersects(canvas.getSector()))
@@ -273,9 +261,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
         Sector sector = this.getSector();
         if (null == sector)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!sector.intersects(canvas.getSector()))
@@ -337,7 +323,6 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
         catch (Throwable t)
         {
             String reason = WWUtil.extractExceptionReason(t);
-            Logging.logger().log(java.util.logging.Level.SEVERE, reason, t);
         }
         finally
         {
@@ -361,7 +346,6 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
             }
             catch (Throwable t)
             {
-                Logging.logger().log(java.util.logging.Level.FINEST, WWUtil.extractExceptionReason(t), t);
             }
         }
     }
@@ -396,16 +380,12 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
     {
         if (null == image)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (null == params)
         {
-            String msg = Logging.getMessage("nullValue.AVListIsNull");
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (params.hasKey(AVKey.WIDTH))
@@ -413,9 +393,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
             int width = (Integer) params.getValue(AVKey.WIDTH);
             if (width != image.getWidth())
             {
-                String msg = Logging.getMessage("generic.InvalidWidth", "" + width + "!=" + image.getWidth());
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
         else
@@ -428,9 +406,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
             int height = (Integer) params.getValue(AVKey.HEIGHT);
             if (height != image.getHeight())
             {
-                String msg = Logging.getMessage("generic.InvalidHeight", "" + height + "!=" + image.getHeight());
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
         else
@@ -455,16 +431,12 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
     {
         if (null == image)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (null == params)
         {
-            String msg = Logging.getMessage("nullValue.AVListIsNull");
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (params.hasKey(AVKey.WIDTH))
@@ -472,9 +444,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
             int width = (Integer) params.getValue(AVKey.WIDTH);
             if (width != image.getWidth())
             {
-                String msg = Logging.getMessage("generic.InvalidWidth", "" + width + "!=" + image.getWidth());
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -483,25 +453,19 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
             int height = (Integer) params.getValue(AVKey.HEIGHT);
             if (height != image.getHeight())
             {
-                String msg = Logging.getMessage("generic.InvalidHeight", "" + height + "!=" + image.getHeight());
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
         if (!params.hasKey(AVKey.SECTOR))
         {
-            String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.SECTOR);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Sector sector = (Sector) params.getValue(AVKey.SECTOR);
         if (null == sector)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!params.hasKey(AVKey.COORDINATE_SYSTEM))
@@ -520,9 +484,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
             }
             else
             {
-                String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.PROJECTION_EPSG_CODE);
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -537,9 +499,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
             }
             else
             {
-                String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.PIXEL_WIDTH);
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -554,9 +514,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
             }
             else
             {
-                String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.PIXEL_HEIGHT);
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -566,10 +524,7 @@ public class BufferedImageRaster extends AbstractDataRaster implements Cacheable
         }
         else if (!AVKey.IMAGE.equals(params.getStringValue(AVKey.PIXEL_FORMAT)))
         {
-            String msg = Logging.getMessage("generic.UnknownValueForKey",
-                params.getStringValue(AVKey.PIXEL_FORMAT), AVKey.PIXEL_FORMAT);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!params.hasKey(AVKey.ORIGIN) && AVKey.COORDINATE_SYSTEM_GEOGRAPHIC.equals(cs))

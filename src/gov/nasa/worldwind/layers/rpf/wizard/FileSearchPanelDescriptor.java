@@ -5,11 +5,10 @@
  */
 package gov.nasa.worldwind.layers.rpf.wizard;
 
+import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.wizard.DefaultPanelDescriptor;
 import gov.nasa.worldwind.util.wizard.Wizard;
 import gov.nasa.worldwind.util.wizard.WizardModel;
-import gov.nasa.worldwind.util.FileTree;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.formats.rpf.RPFFrameFilename;
 import gov.nasa.worldwind.formats.rpf.RPFDataSeries;
 
@@ -212,7 +211,6 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor
         catch (Throwable t)
         {
             String message = String.format("Exception while searching file: %s", fileToSearch);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, t);
             fileList = null;
         }
         return fileList;

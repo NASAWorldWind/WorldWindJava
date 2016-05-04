@@ -106,10 +106,7 @@ public class BasicMercatorTiledImageLayer extends MercatorTiledImageLayer
                     this.layer.getDataFileStore().removeFile(
                         textureURL);
                     layer.getLevels().markResourceAbsent(tile);
-                    String message = Logging.getMessage(
-                        "generic.DeletedCorruptDataFile", textureURL);
-                    Logging.logger().info(message);
-                }
+                        }
             }
 
             this.layer.downloadTexture(this.tile);
@@ -126,9 +123,7 @@ public class BasicMercatorTiledImageLayer extends MercatorTiledImageLayer
         {
             if (that == null)
             {
-                String msg = Logging.getMessage("nullValue.RequestTaskIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
             return this.tile.getPriority() == that.tile.getPriority() ? 0
                 : this.tile.getPriority() < that.tile.getPriority() ? -1
@@ -167,9 +162,6 @@ public class BasicMercatorTiledImageLayer extends MercatorTiledImageLayer
 
         // The file has expired. Delete it.
         this.getDataFileStore().removeFile(textureURL);
-        String message = Logging.getMessage("generic.DataFileExpired",
-            textureURL);
-        Logging.logger().fine(message);
         return true;
     }
 
@@ -201,8 +193,6 @@ public class BasicMercatorTiledImageLayer extends MercatorTiledImageLayer
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("layers.TextureLayer.ExceptionAttemptingToReadTextureFile", url.toString());
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             return null;
         }
     }
@@ -230,11 +220,6 @@ public class BasicMercatorTiledImageLayer extends MercatorTiledImageLayer
         }
         catch (java.net.MalformedURLException e)
         {
-            Logging.logger().log(
-                java.util.logging.Level.SEVERE,
-                Logging.getMessage(
-                    "layers.TextureLayer.ExceptionCreatingTextureUrl",
-                    tile), e);
             return;
         }
 
@@ -247,8 +232,6 @@ public class BasicMercatorTiledImageLayer extends MercatorTiledImageLayer
         }
         else
         {
-            Logging.logger().severe(
-                Logging.getMessage("layers.TextureLayer.UnknownRetrievalProtocol", url.toString()));
             return;
         }
 
@@ -296,9 +279,7 @@ public class BasicMercatorTiledImageLayer extends MercatorTiledImageLayer
         {
             if (retriever == null)
             {
-                String msg = Logging.getMessage("nullValue.RetrieverIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             try
@@ -357,7 +338,6 @@ public class BasicMercatorTiledImageLayer extends MercatorTiledImageLayer
                             sb.append((char) buffer.get());
                         }
                         // TODO: parse out the message if the content is xml or html.
-                        Logging.logger().severe(sb.toString());
 
                         return null;
                     }
@@ -411,8 +391,6 @@ public class BasicMercatorTiledImageLayer extends MercatorTiledImageLayer
             catch (java.io.IOException e)
             {
                 this.layer.getLevels().markResourceAbsent(this.tile);
-                Logging.logger().log(java.util.logging.Level.SEVERE,
-                    Logging.getMessage("layers.TextureLayer.ExceptionSavingRetrievedTextureFile", tile.getPath()), e);
             }
             return null;
         }

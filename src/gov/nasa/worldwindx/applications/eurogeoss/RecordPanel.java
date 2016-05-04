@@ -18,7 +18,6 @@ import java.net.URI;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.logging.Level;
 
 /**
  * @author dcollins
@@ -49,16 +48,12 @@ public class RecordPanel extends JPanel implements ActionListener
     {
         if (record == null)
         {
-            String msg = Logging.getMessage("nullValue.RecordIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.record = record;
@@ -214,7 +209,6 @@ public class RecordPanel extends JPanel implements ActionListener
             this.layerList = Collections.emptyList();
             this.statusCode |= STATUS_NO_ONLINE_RESOURCES;
             String msg = "Record has no WMS online resources " + this.record.getTitle();
-            Logging.logger().warning(msg);
         }
     }
 
@@ -238,7 +232,6 @@ public class RecordPanel extends JPanel implements ActionListener
                 }
 
                 String msg = "Online resource has no name " + onlineResource + ", using all layers";
-                Logging.logger().warning(msg);
             }
             else // OnlineResource names one layer; attempt to identify that layer in the WMS capabilities doc.
             {
@@ -255,7 +248,6 @@ public class RecordPanel extends JPanel implements ActionListener
                 {
                     this.statusCode |= STATUS_INVALID_LAYER_NAME;
                     String msg = "Unable to find layer for online resource " + onlineResource;
-                    Logging.logger().warning(msg);
                 }
                 else
                 {
@@ -267,8 +259,6 @@ public class RecordPanel extends JPanel implements ActionListener
         {
             this.statusCode |= STATUS_EXCEPTION_CREATING_LAYER;
             String msg = "Exception creating layer for online resource " + onlineResource;
-            Logging.logger().log(Level.WARNING, msg); // Log just the message at the warning level.
-            Logging.logger().log(Level.FINEST, msg, e); // Log the message and the exception at the fine level.
         }
     }
 

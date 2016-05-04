@@ -54,9 +54,7 @@ public class ImportedDataPanel extends ShadedPanel
 
         if (controller == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.controller = controller;
@@ -76,9 +74,7 @@ public class ImportedDataPanel extends ShadedPanel
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.addToWorldWindow(domElement, params);
@@ -184,9 +180,6 @@ public class ImportedDataPanel extends ShadedPanel
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.CreationFromConfigurationFailed",
-                DataConfigurationUtils.getDataConfigDisplayName(domElement));
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -220,9 +213,6 @@ public class ImportedDataPanel extends ShadedPanel
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.CreationFromConfigurationFailed",
-                DataConfigurationUtils.getDataConfigDisplayName(domElement));
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
 
         if (em == null)

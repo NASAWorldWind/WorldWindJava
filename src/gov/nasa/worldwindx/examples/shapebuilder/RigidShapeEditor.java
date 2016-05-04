@@ -141,8 +141,7 @@ public class RigidShapeEditor extends AbstractShapeEditor
         if (shape == null)
         {
             String message = "nullValue.Shape";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.shape = (RigidShape) shape;

@@ -28,9 +28,7 @@ public class VPFTableReader
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -40,9 +38,7 @@ public class VPFTableReader
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("VPF.ExceptionAttemptingToReadTable", file.getPath());
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -73,9 +69,7 @@ public class VPFTableReader
         // variable-length record index associated with this table. In this case, we cannot read the table body.
         if (recordIndex == null)
         {
-            String message = Logging.getMessage("VPF.VariableLengthIndexFileMissing");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         // Read the table record data.
@@ -200,9 +194,7 @@ public class VPFTableReader
         String s = VPFUtils.readDelimitedText(buffer, '=');
         if (s == null)
         {
-            String message = Logging.getMessage("VPF.MissingColumnName");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         Column col = new Column(s);
@@ -430,9 +422,7 @@ public class VPFTableReader
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("VPF.ExceptionAttemptingToReadRecordIndex", file.getPath());
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 

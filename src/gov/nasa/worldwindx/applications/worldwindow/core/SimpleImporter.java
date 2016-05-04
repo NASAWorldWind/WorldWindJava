@@ -85,8 +85,7 @@ public class SimpleImporter
     {
         if (this.source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull"); // TODO: show error dialog for all errors
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (this.isKML(this.source))
@@ -95,8 +94,7 @@ public class SimpleImporter
             this.openShapefile(this.source);
         else
         {
-            String message = Logging.getMessage("generic.UnrecognizedSourceType", source.toString());
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
     }
 
@@ -114,9 +112,7 @@ public class SimpleImporter
             KMLRoot kmlRoot = KMLRoot.create(source);
             if (kmlRoot == null)
             {
-                String message = Logging.getMessage("generic.UnrecognizedSourceType", source.toString(),
-                    source.toString());
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             kmlRoot.parse();

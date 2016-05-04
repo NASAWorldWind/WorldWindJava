@@ -6,11 +6,9 @@
 package gov.nasa.worldwind.formats.shapefile;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
-import gov.nasa.worldwind.util.Logging;
 
 import java.nio.*;
 import java.text.*;
-import java.util.logging.Level;
 
 /**
  * @author Patrick Murris
@@ -26,16 +24,12 @@ public class DBaseRecord extends AVListImpl
     {
         if (dbaseFile == null)
         {
-            String message = Logging.getMessage("nullValue.DBaseFileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.readFromBuffer(dbaseFile, buffer, recordNumber);
@@ -117,7 +111,6 @@ public class DBaseRecord extends AVListImpl
             catch (Exception e)
             {
                 // Log warning but keep reading.
-                Logging.logger().log(Level.WARNING, Logging.getMessage("SHP.FieldParsingError", field, value), e);
             }
         }
     }

@@ -229,9 +229,7 @@ public class Polygon extends AbstractShape
 
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setOuterBoundary(corners);
@@ -252,9 +250,7 @@ public class Polygon extends AbstractShape
 
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setOuterBoundary(corners.list);
@@ -344,9 +340,7 @@ public class Polygon extends AbstractShape
     {
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.boundaries.set(0, this.fillBoundary(corners));
@@ -376,9 +370,7 @@ public class Polygon extends AbstractShape
 
         if (list.size() < 3)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Close the list if not already closed.
@@ -403,9 +395,7 @@ public class Polygon extends AbstractShape
     {
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.boundaries.add(this.fillBoundary(corners));
@@ -491,16 +481,12 @@ public class Polygon extends AbstractShape
 
         if (texCoords == null)
         {
-            String message = Logging.getMessage("generic.ListIsEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (texCoordCount < 3 || texCoords.length < 2 * texCoordCount)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.texture = this.makeTexture(imageSource);
@@ -1173,9 +1159,7 @@ public class Polygon extends AbstractShape
             // doesn't work either.
             if (normal == null)
             {
-                String message = Logging.getMessage("Geom.ShapeNormalVectorNotComputable", this);
-                Logging.logger().log(java.util.logging.Level.SEVERE, message);
-                shapeData.tessellationError = true;
+                    shapeData.tessellationError = true;
                 return;
             }
 
@@ -1183,15 +1167,13 @@ public class Polygon extends AbstractShape
         }
         catch (OutOfMemoryError e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileTessellating", this);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
 
             shapeData.tessellationError = true;
 
             if (dc != null)
             {
                 //noinspection ThrowableInstanceNeverThrown
-                dc.addRenderingException(new WWRuntimeException(message, e));
+                dc.addRenderingException(new WWRuntimeException(e));
             }
         }
     }
@@ -1429,9 +1411,7 @@ public class Polygon extends AbstractShape
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isOuterBoundaryValid())
@@ -1473,16 +1453,12 @@ public class Polygon extends AbstractShape
     {
         if (globe == null)
         {
-            String msg = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isOuterBoundaryValid())

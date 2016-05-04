@@ -9,13 +9,11 @@ import com.jogamp.opengl.util.texture.Texture;
 import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.AVList;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * @author dcollins
@@ -30,17 +28,12 @@ public class MacWebView extends AbstractWebView
     {
         if (frameSize == null)
         {
-            String message = Logging.getMessage("nullValue.SizeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!Configuration.isMacOS())
         {
-            String message = Logging.getMessage("NativeLib.UnsupportedOperatingSystem", "Mac WebView",
-                System.getProperty("os.name"));
-            Logging.logger().severe(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
 
         this.frameSize = frameSize;
@@ -241,7 +234,6 @@ public class MacWebView extends AbstractWebView
             {
                 // Log an exception indicating that updating the texture failed, but do not re-throw it. This is called
                 // from within the rendering loop, and we want to avoid causing any other rendering code to fail.
-                Logging.logger().log(Level.SEVERE, Logging.getMessage("WebView.ExceptionUpdatingTexture"), e);
                 // Indicate that updating this WebViewTexture's OpenGL texture failed to avoid subsequent attempts.
                 this.textureUpdateFailed = true;
             }

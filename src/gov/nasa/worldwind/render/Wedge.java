@@ -63,37 +63,27 @@ public class Wedge extends RigidShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (radius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "height <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (angle.getRadians() < 0 || angle.getRadians() > 2 * Math.PI)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "angle < 0 or angle > 2 PI");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centerPosition = centerPosition;
@@ -122,30 +112,22 @@ public class Wedge extends RigidShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (angle.getRadians() < 0 || angle.getRadians() > 2 * Math.PI)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "angle < 0 or angle > 2 PI");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centerPosition = centerPosition;
@@ -178,30 +160,22 @@ public class Wedge extends RigidShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (angle.getRadians() < 0 || angle.getRadians() > 2 * Math.PI)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "angle < 0 or angle > 2 PI");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centerPosition = centerPosition;
@@ -243,16 +217,12 @@ public class Wedge extends RigidShape
     {
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (angle.getRadians() < 0 || angle.getRadians() > 2 * Math.PI)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "wedgeAngle < 0 or wedgeAngle > 2 PI");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.wedgeAngle = angle;
 
@@ -315,14 +285,11 @@ public class Wedge extends RigidShape
         if (dc.getView() == null)
         {
             String message = "nullValue.DrawingContextViewIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (shapeData == null)
@@ -370,9 +337,7 @@ public class Wedge extends RigidShape
     {
         if (this.wedgeAngle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // attempt to retrieve a cached unit wedge with the same angle and number of subdivisions
@@ -424,7 +389,7 @@ public class Wedge extends RigidShape
         {
             String message = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float radius = 1.0f;
@@ -462,9 +427,7 @@ public class Wedge extends RigidShape
     {
         if (this.wedgeAngle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float radius = 1.0f;
@@ -512,8 +475,7 @@ public class Wedge extends RigidShape
         if (elementBuffer == null)
         {
             String message = "nullValue.ElementBufferIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Geometry mesh = shapeData.getMesh(face);
@@ -521,8 +483,7 @@ public class Wedge extends RigidShape
         if (mesh.getBuffer(Geometry.VERTEX) == null)
         {
             String message = "nullValue.VertexBufferIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -640,9 +601,7 @@ public class Wedge extends RigidShape
     @Override
     protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
     {
-        String message = Logging.getMessage("generic.UnsupportedOperation", "doExportAsKML");
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 
     @Override

@@ -8,7 +8,6 @@ package gov.nasa.worldwind.formats.csv;
 import gov.nasa.worldwind.tracks.Track;
 import gov.nasa.worldwind.tracks.TrackPoint;
 import gov.nasa.worldwind.tracks.TrackSegment;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author dcollins
@@ -23,9 +22,7 @@ public class CSVWriter
     {
         if (path == null)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.printWriter = new java.io.PrintWriter(new java.io.BufferedWriter(new java.io.FileWriter(path)));
@@ -35,9 +32,7 @@ public class CSVWriter
     {
         if (stream == null)
         {
-            String msg = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.printWriter = new java.io.PrintWriter(new java.io.BufferedWriter(new java.io.OutputStreamWriter(stream)));
@@ -47,9 +42,7 @@ public class CSVWriter
     {
         if (track == null)
         {
-            String msg = Logging.getMessage("nullValue.TrackIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         doWriteTrack(track,this.printWriter);

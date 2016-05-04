@@ -92,16 +92,14 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
     {
         if (null == o)
         {
-            String message = Logging.getMessage("nullValue.ObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
 //        if (null == rootElement)
 //        {
 //            String message = Logging.getMessage("generic.UnexpectedObjectType", o.getClass().getName());
 //            Logging.logger().severe(message);
-//            throw new IllegalArgumentException(message);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        String rootElementName = rootElement.getNodeName();
@@ -109,7 +107,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
 //        {
 //            String message = Logging.getMessage("generic.InvalidDataSource", rootElementName);
 //            Logging.logger().severe(message);
-//            throw new IllegalArgumentException(message);
+//            throw new IllegalArgumentException();
 //        }
 
         RasterServerConfiguration config = new RasterServerConfiguration(o);
@@ -119,10 +117,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
         }
         catch (XMLStreamException e)
         {
-            String message = Logging.getMessage("generic.InvalidDataSource", "");
-            message += "\n" + e.getMessage();
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.extractProperties(config);
@@ -130,15 +125,11 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
         if( this.readRasterSources(config) )
         {
             // success, all raster sources are available
-            String message = Logging.getMessage("generic.DataSetAvailable", this.getDataSetName() );
-            Logging.logger().finest(message);
         }
         else
         {
             // some (or all) required source rasters are not available (either missing or unreadable)
             // and therefore the dataset may not generate high resolution on-the-fly
-            String message = Logging.getMessage("generic.DataSetLimitedAvailability", this.getDataSetName() );
-            Logging.logger().severe(message);
         }
     }
 
@@ -219,16 +210,14 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
                     if( !rasterSourceFile.exists() )
                     {
                         hasUnavailableRasterSources = true;
-                        String reason = Logging.getMessage("generic.FileDoesNotExists", rasterSourcePath );
-                        Logging.logger().warning(reason);
+                        String reason = null;
                         continue;
                     }
 
                     if( !rasterSourceFile.canRead() )
                     {
                         hasUnavailableRasterSources = true;
-                        String reason = Logging.getMessage("generic.FileNoReadPermission", rasterSourcePath );
-                        Logging.logger().warning(reason);
+                        String reason = null;
                         continue;
                     }
 
@@ -236,9 +225,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
                     if (null == rasterReader)
                     {
                         hasUnavailableRasterSources = true;
-                        String reason = Logging.getMessage("generic.UnknownFileFormatOrMatchingReaderNotFound",
-                            rasterSourcePath );
-                        Logging.logger().warning(reason);
+                        String reason = null;
                         continue;
                     }
 
@@ -264,8 +251,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
                         if (!datasetPixelFormat.equals(rasterPixelFormat))
                         {
                             hasUnavailableRasterSources = true;
-                            String reason = Logging.getMessage("generic.UnexpectedRasterType", rasterSourcePath );
-                            Logging.logger().warning(reason);
+                            String reason = null;
                             continue;
                         }
                     }
@@ -278,8 +264,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
                         else
                         {
                             hasUnavailableRasterSources = true;
-                            String reason = Logging.getMessage("generic.UnknownFileFormat", rasterSourcePath );
-                            Logging.logger().warning(reason);
+                            String reason = null;
                             continue;
                         }
                     }
@@ -294,15 +279,13 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
                     else
                     {
                         hasUnavailableRasterSources = true;
-                        String reason = Logging.getMessage("generic.NoSectorSpecified", rasterSourcePath );
-                        Logging.logger().warning(reason);
+                        String reason = null;
                     }
                 }
                 catch (Throwable t)
                 {
                     String message = t.getMessage();
                     message = (WWUtil.isEmpty(message)) ? t.getCause().getMessage() : message;
-                    Logging.logger().log(java.util.logging.Level.WARNING, message, t);
                 }
             }
 
@@ -315,12 +298,9 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
         {
             String message = t.getMessage();
             message = (WWUtil.isEmpty(message)) ? t.getCause().getMessage() : message;
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, t);
         }
         finally
         {
-            Logging.logger().finest(this.getStringValue(AVKey.DISPLAY_NAME) + ": " + numSources
-                + " files in " + (System.currentTimeMillis() - startTime) + " milli-seconds");
         }
 
         return !hasUnavailableRasterSources;
@@ -330,9 +310,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         params = (null == params) ? new AVListImpl() : params;
@@ -354,9 +332,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
                 // Reading the input source's metadata caused an exception. This exception does not prevent us from
                 // determining if the source represents elevation data, but we want to make a note of it. Therefore we
                 // log the exception with level FINE.
-                String message = Logging.getMessage("generic.ExceptionWhileReading", source);
-                Logging.logger().finest(message);
-            }
+                }
         }
 
         return reader;
@@ -389,38 +365,28 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
 
         if (null == reqParams)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!reqParams.hasKey(AVKey.WIDTH))
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.WIDTH);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!reqParams.hasKey(AVKey.HEIGHT))
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.HEIGHT);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = reqParams.getValue(AVKey.SECTOR);
         if (null == o || !(o instanceof Sector))
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.SECTOR);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Sector reqSector = (Sector) o;
         Sector rasterExtent = this.getSector();
         if (!reqSector.intersects(rasterExtent))
         {
-            String message = Logging.getMessage("generic.SectorRequestedOutsideCoverageArea", reqSector, rasterExtent);
-            Logging.logger().finest(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         try
@@ -452,9 +418,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
             }
             else
             {
-                String msg = Logging.getMessage("generic.UnrecognizedSourceType", this.getValue(AVKey.PIXEL_FORMAT));
-                Logging.logger().severe(msg);
-                throw new WWRuntimeException(msg);
+                    throw new WWRuntimeException();
             }
 
             int numIntersectedRasters = 0;
@@ -474,9 +438,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
 
             if (numIntersectedRasters == 0)
             {
-                String message = Logging.getMessage("generic.SectorRequestedOutsideCoverageArea", reqSector, "");
-                Logging.logger().finest(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
         }
         catch (WWRuntimeException wwe)
@@ -487,8 +449,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
         {
             String message = t.getMessage();
             message = (WWUtil.isEmpty(message)) ? t.getCause().getMessage() : message;
-            Logging.logger().log(java.util.logging.Level.FINE, message, t);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         return reqRaster;
@@ -519,16 +480,12 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
             ? params.getStringValue(AVKey.IMAGE_FORMAT) : this.getStringValue(AVKey.IMAGE_FORMAT);
         if (WWUtil.isEmpty(format))
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.IMAGE_FORMAT);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         if (this.dataRasterList.isEmpty())
         {
-            String message = Logging.getMessage("generic.NoImagesAvailable");
-            Logging.logger().finest(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         try
@@ -551,9 +508,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
                 }
                 else
                 {
-                    String msg = Logging.getMessage("generic.UnknownFileFormat", format);
-                    Logging.logger().severe(msg);
-                    throw new WWRuntimeException(msg);
+                            throw new WWRuntimeException();
                 }
             }
             else if (raster instanceof ByteBufferRaster)
@@ -563,20 +518,16 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
             }
             else
             {
-                String msg = Logging.getMessage("generic.UnexpectedRasterType", raster.getClass().getName());
-                Logging.logger().severe(msg);
-                throw new WWRuntimeException(msg);
+                    throw new WWRuntimeException();
             }
         }
         catch (WWRuntimeException wwe)
         {
-            Logging.logger().finest(wwe.getMessage());
         }
         catch (Throwable t)
         {
             String message = t.getMessage();
             message = (WWUtil.isEmpty(message)) ? t.getCause().getMessage() : message;
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, t);
         }
 
         return null;

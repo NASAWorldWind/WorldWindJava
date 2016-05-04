@@ -39,16 +39,12 @@ public abstract class AbstractAnnotationLayout implements AnnotationLayoutManage
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bounds == null)
         {
-            String message = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -59,9 +55,7 @@ public abstract class AbstractAnnotationLayout implements AnnotationLayoutManage
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -79,8 +73,6 @@ public abstract class AbstractAnnotationLayout implements AnnotationLayoutManage
             // Trap and log exceptions thrown by computing an annotation's preferred size. This will prevent one
             // annotation from throwing an exception and preventing all other anotations from reporting their
             // preferred size.
-            String message = Logging.getMessage("generic.ExceptionWhileComputingSize", annotation);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
 
         return null;
@@ -100,8 +92,6 @@ public abstract class AbstractAnnotationLayout implements AnnotationLayoutManage
         {
             // Trap and log exceptions thrown by rendering an annotation. This will prevent one annotation from
             // throwing an exception and preventing all other anotations from rendering.
-            String message = Logging.getMessage("generic.ExceptionWhileRenderingAnnotation", annotation);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 }

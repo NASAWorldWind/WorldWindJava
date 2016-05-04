@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.dds;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * Compressor for DXT1 color blocks. This class is not thread safe. Unsynchronized access will result in unpredictable
  * behavior. Access to methods of this class must be synchronized by the caller.
@@ -61,21 +59,15 @@ public class BlockDXT1Compressor
     {
         if (colorBlock == null)
         {
-            String message = Logging.getMessage("nullValue.ColorBlockIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dxtBlock == null)
         {
-            String message = Logging.getMessage("nullValue.DXTBlockIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.chooseMinMaxColors(colorBlock, attributes, this.minColor, this.maxColor);
@@ -114,21 +106,15 @@ public class BlockDXT1Compressor
     {
         if (colorBlock == null)
         {
-            String message = Logging.getMessage("nullValue.ColorBlockIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dxtBlock == null)
         {
-            String message = Logging.getMessage("nullValue.DXTBlockIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.chooseMinMaxColors(colorBlock, attributes, this.minColor, this.maxColor);

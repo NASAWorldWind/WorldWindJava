@@ -194,16 +194,12 @@ public class MilStd2525TacticalSymbol extends AbstractTacticalSymbol
     {
         if (value == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!SymbologyConstants.STATUS_ALL.contains(value.toUpperCase()))
         {
-            String msg = Logging.getMessage("Symbology.InvalidStatus", value);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.symbolCode.setStatus(value);

@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.rpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author dcollins
  * @version $Id: RPFZone.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -90,17 +88,13 @@ public enum RPFZone
         int index = indexFor(zoneCode);
         if (index < 0 || index >= alphabet.length)
         {
-            String message = Logging.getMessage("generic.EnumNotFound", zoneCode);
-            Logging.logger().fine(message);
-            throw new EnumConstantNotPresentException(RPFZone.class, message);
+            throw new EnumConstantNotPresentException(RPFZone.class, null);
         }
 
         RPFZone zone = alphabet[index];
         if (zone == null)
         {
-            String message = Logging.getMessage("generic.EnumNotFound", zoneCode);
-            Logging.logger().fine(message);
-            throw new EnumConstantNotPresentException(RPFZone.class, message);
+            throw new EnumConstantNotPresentException(RPFZone.class, null);
         }
 
         return zone;

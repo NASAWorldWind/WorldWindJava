@@ -5,7 +5,6 @@
  */
 package gov.nasa.worldwind.formats.tiff;
 
-import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.geom.*;
 
 import java.util.*;
@@ -51,9 +50,7 @@ class GeoCodec
     {
         if (values == null || values.length == 0 || (values.length % 6) != 0)
         {
-            String message = Logging.getMessage("GeoCodec.BadTiePoints");
-            Logging.logger().severe(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
 
         for (int i = 0; i < values.length; i += 6)
@@ -84,9 +81,7 @@ class GeoCodec
     {
         if (values == null || values.length != 3)
         {
-            String message = Logging.getMessage("GeoCodec.BadPixelValues");
-            Logging.logger().severe(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
 
         this.setModelPixelScale( values[0], values[1], values[2] );
@@ -119,9 +114,7 @@ class GeoCodec
     {
         if (matrix == null || matrix.length != 16)
         {
-            String message = Logging.getMessage("GeoCodec.BadMatrix");
-            Logging.logger().severe(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
 
         this.setModelTransformation( Matrix.fromArray(matrix, 0, true) );
@@ -188,9 +181,7 @@ class GeoCodec
     {
         if (this.tiePoints.size() == 0 )
         {
-            String message = Logging.getMessage("GeotiffReader.NotSimpleGeotiff");
-            Logging.logger().severe(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
 
         double[] xy = new double[2];
@@ -218,9 +209,7 @@ class GeoCodec
         {
             if (entry.array != this.shortParams)
             {
-                String message = Logging.getMessage("GeoCodec.NotIntegerKey", key);
-                Logging.logger().severe(message);
-                throw new UnsupportedOperationException(message);
+                    throw new UnsupportedOperationException();
             }
 
             vals = new int[entry.count];

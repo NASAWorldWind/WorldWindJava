@@ -49,9 +49,7 @@ public class KMZInputStream implements KMLDoc
     {
         if (sourceStream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.zipStream = new ZipInputStream(sourceStream);
@@ -131,9 +129,7 @@ public class KMZInputStream implements KMLDoc
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Regardless of whether the next entry in the stream is the requested file, copy each entry encountered to
@@ -178,9 +174,7 @@ public class KMZInputStream implements KMLDoc
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Regardless of whether the next entry in the stream is the requested file, copy each entry encountered to
@@ -226,8 +220,6 @@ public class KMZInputStream implements KMLDoc
 
         if (this.tempDir == null) // unlikely to occur, but define a reaction
         {
-            String message = Logging.getMessage("generic.UnableToCreateTempDir", this.tempDir);
-            Logging.logger().warning(message);
             return;
         }
 

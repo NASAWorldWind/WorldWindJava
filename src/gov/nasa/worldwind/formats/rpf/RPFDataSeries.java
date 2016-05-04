@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.rpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.*;
 
 /**
@@ -138,17 +136,13 @@ public enum RPFDataSeries
     {
         if (seriesCode == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RPFDataSeries dataSeries = enumConstantDirectory().get(seriesCode);
         if (dataSeries == null)
         {
-            String message = Logging.getMessage("generic.EnumNotFound", seriesCode);
-            Logging.logger().fine(message);
-            throw new EnumConstantNotPresentException(RPFDataSeries.class, message);
+            throw new EnumConstantNotPresentException(RPFDataSeries.class, null);
         }
         return dataSeries;
     }
@@ -157,9 +151,7 @@ public enum RPFDataSeries
     {
         if (seriesCode == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return enumConstantDirectory().get(seriesCode) != null;
@@ -177,9 +169,7 @@ public enum RPFDataSeries
     {
         if (rpfDataType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (String s : RPF_DATA_TYPES)
@@ -194,9 +184,7 @@ public enum RPFDataSeries
     {
         if (rpfDataType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return CADRG_DATA_TYPE.equalsIgnoreCase(rpfDataType);
@@ -206,9 +194,7 @@ public enum RPFDataSeries
     {
         if (rpfDataType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return CIB_DATA_TYPE.equalsIgnoreCase(rpfDataType);
@@ -218,9 +204,7 @@ public enum RPFDataSeries
     {
         if (seriesCode == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RPFDataSeries dataSeries = dataSeriesFor(seriesCode);
@@ -231,9 +215,7 @@ public enum RPFDataSeries
     {
         if (seriesCode == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RPFDataSeries dataSeries = dataSeriesFor(seriesCode);

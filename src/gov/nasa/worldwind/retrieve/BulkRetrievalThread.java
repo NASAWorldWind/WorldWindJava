@@ -9,7 +9,6 @@ package gov.nasa.worldwind.retrieve;
 import gov.nasa.worldwind.cache.FileStore;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.geom.Sector;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.event.*;
 
@@ -54,30 +53,24 @@ public abstract class BulkRetrievalThread extends Thread
     {
         if (retrievable == null)
         {
-            String msg = Logging.getMessage("nullValue.RetrievableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (fileStore == null)
         {
-            String msg = Logging.getMessage("nullValue.FileStoreIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 //
 //        if (resolution <= 0)
 //        {
 //            String msg = Logging.getMessage("generic.ResolutionInvalid", resolution);
 //            Logging.logger().severe(msg);
-//            throw new IllegalArgumentException(msg);
+//            throw new IllegalArgumentException();
 //        }
 
         this.retrievable = retrievable;

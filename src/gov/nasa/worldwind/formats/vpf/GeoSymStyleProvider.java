@@ -45,9 +45,7 @@ public class GeoSymStyleProvider
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileReading", filePath);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
     }
 
@@ -56,9 +54,7 @@ public class GeoSymStyleProvider
         InputStream inputStream = WWIO.openFileOrResourceStream(filePath, this.getClass());
         if (inputStream == null)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileReading", filePath);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         this.attributes = new HashMap<String, VPFSymbolAttributes>();

@@ -51,16 +51,12 @@ public class DDSCompressor
     {
         if (inputStream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.awt.image.BufferedImage image = javax.imageio.ImageIO.read(inputStream);
@@ -93,9 +89,7 @@ public class DDSCompressor
     {
         if (inputStream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return compressImageStream(inputStream, getDefaultCompressionAttributes());
@@ -124,16 +118,12 @@ public class DDSCompressor
     {
         if (imageBuffer == null)
         {
-            String message = Logging.getMessage("nullValue.Image");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.io.InputStream inputStream = WWIO.getInputStreamFromByteBuffer(imageBuffer);
@@ -160,9 +150,7 @@ public class DDSCompressor
     {
         if (imageBuffer == null)
         {
-            String message = Logging.getMessage("nullValue.Image");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return compressImageBuffer(imageBuffer, getDefaultCompressionAttributes());
@@ -193,23 +181,17 @@ public class DDSCompressor
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!file.exists() || !file.canRead())
         {
-            String message = Logging.getMessage("DDSConverter.NoFileOrNoPermission");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.awt.image.BufferedImage image = javax.imageio.ImageIO.read(file);
@@ -242,16 +224,12 @@ public class DDSCompressor
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!file.exists() || !file.canRead())
         {
-            String message = Logging.getMessage("DDSConverter.NoFileOrNoPermission");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return compressImageFile(file, getDefaultCompressionAttributes());
@@ -280,16 +258,12 @@ public class DDSCompressor
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.awt.image.BufferedImage image = javax.imageio.ImageIO.read(url);
@@ -322,9 +296,7 @@ public class DDSCompressor
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return compressImageURL(url, getDefaultCompressionAttributes());
@@ -345,15 +317,11 @@ public class DDSCompressor
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!WWMath.isPowerOfTwo(image.getWidth()) || !WWMath.isPowerOfTwo(image.getHeight()))
         {
-            String message = Logging.getMessage("generic.InvalidImageSize", image.getWidth(), image.getHeight());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         DDSCompressor compressor = new DDSCompressor();
@@ -397,21 +365,15 @@ public class DDSCompressor
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!WWMath.isPowerOfTwo(image.getWidth()) || !WWMath.isPowerOfTwo(image.getHeight()))
         {
-            String message = Logging.getMessage("generic.InvalidImageSize", image.getWidth(), image.getHeight());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         DXTCompressor compressor = this.getDXTCompressor(image, attributes);
@@ -435,21 +397,15 @@ public class DDSCompressor
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!WWMath.isPowerOfTwo(image.getWidth()) || !WWMath.isPowerOfTwo(image.getHeight()))
         {
-            String message = Logging.getMessage("generic.InvalidImageSize", image.getWidth(), image.getHeight());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         DXT1Compressor compressor = new DXT1Compressor();
@@ -473,21 +429,15 @@ public class DDSCompressor
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!WWMath.isPowerOfTwo(image.getWidth()) || !WWMath.isPowerOfTwo(image.getHeight()))
         {
-            String message = Logging.getMessage("generic.InvalidImageSize", image.getWidth(), image.getHeight());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         DXT3Compressor compressor = new DXT3Compressor();

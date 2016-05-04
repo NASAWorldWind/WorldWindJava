@@ -47,23 +47,17 @@ public class CappedEllipticalCylinder extends AbstractAirspace
     {
         if (location == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (minorRadius < 0 | majorRadius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "minor radius=" + minorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (majorRadius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "major radius=" + majorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.center = location;
@@ -166,9 +160,7 @@ public class CappedEllipticalCylinder extends AbstractAirspace
     {
         if (location == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.center = location;
@@ -208,30 +200,22 @@ public class CappedEllipticalCylinder extends AbstractAirspace
     {
         if (innerMinorRadius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "innerMinorRadius=" + innerMinorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (outerMinorRadius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "outerMinorRadius=" + outerMinorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (innerMajorRadius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "innerMajorRadius=" + innerMajorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (outerMajorRadius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "outerMajorRadius=" + outerMajorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.innerMinorRadius = innerMinorRadius;
@@ -254,16 +238,12 @@ public class CappedEllipticalCylinder extends AbstractAirspace
     {
         if (outerMinorRadius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "outerMinorRadius=" + outerMinorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (outerMajorRadius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "outerMajorRadius=" + outerMajorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setRadii(0, 0, outerMinorRadius, outerMajorRadius);
@@ -366,14 +346,12 @@ public class CappedEllipticalCylinder extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<LatLon> oldLocations = new ArrayList<LatLon>(1);
@@ -389,14 +367,12 @@ public class CappedEllipticalCylinder extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.doMoveTo(oldRef, newRef);
@@ -448,9 +424,7 @@ public class CappedEllipticalCylinder extends AbstractAirspace
     {
         if (slices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.slices = slices;
@@ -470,9 +444,7 @@ public class CappedEllipticalCylinder extends AbstractAirspace
     {
         if (loops < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.loops = loops;
@@ -486,16 +458,12 @@ public class CappedEllipticalCylinder extends AbstractAirspace
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] altitudes = this.getAltitudes(dc.getVerticalExaggeration());
@@ -507,16 +475,12 @@ public class CappedEllipticalCylinder extends AbstractAirspace
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LatLon center = this.getCenter();

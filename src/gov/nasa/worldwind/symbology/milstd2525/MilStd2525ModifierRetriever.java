@@ -9,7 +9,6 @@ package gov.nasa.worldwind.symbology.milstd2525;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.symbology.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -53,26 +52,20 @@ public class MilStd2525ModifierRetriever extends AbstractIconRetriever
     {
         if (symbolId == null)
         {
-            String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Compose a path from the modifier code and value.
         String path = this.composePath(symbolId, params);
         if (path == null)
         {
-            String msg = Logging.getMessage("Symbology.SymbolIconNotFound", symbolId);
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         BufferedImage image = this.readImage(path);
         if (image == null)
         {
-            String msg = Logging.getMessage("Symbology.SymbolIconNotFound", symbolId);
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         if (this.mustApplyColor(symbolId))

@@ -9,7 +9,6 @@ import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.view.*;
 
 import javax.media.opengl.GL;
@@ -87,9 +86,7 @@ public class BasicFlyView extends BasicView
     {
         if (eyePosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.getGlobe() != null)
@@ -115,24 +112,18 @@ public class BasicFlyView extends BasicView
     {
         if (eyePosition == null || centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (this.globe == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Vec4 newEyePoint = this.globe.computePointFromPosition(eyePosition);
         Vec4 newCenterPoint = this.globe.computePointFromPosition(centerPosition);
         if (newEyePoint == null || newCenterPoint == null)
         {
-            String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // If eye lat/lon != center lat/lon, then the surface normal at the center point will be a good value
@@ -156,9 +147,7 @@ public class BasicFlyView extends BasicView
 
         if (up == null)
         {
-            String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Matrix modelViewMatrix = ViewUtil.computeModelViewMatrix(this.globe, newEyePoint, newCenterPoint, up);
@@ -170,25 +159,19 @@ public class BasicFlyView extends BasicView
     {
         if (eyePosition == null || centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.globe == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Vec4 newEyePoint = this.globe.computePointFromPosition(eyePosition);
         Vec4 newCenterPoint = this.globe.computePointFromPosition(centerPosition);
         if (newEyePoint == null || newCenterPoint == null)
         {
-            String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // If eye lat/lon != center lat/lon, then the surface normal at the center point will be a good value
@@ -211,9 +194,7 @@ public class BasicFlyView extends BasicView
 
         if (up == null)
         {
-            String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ViewUtil.ViewState viewState = ViewUtil.computeViewState(this.globe, newEyePoint, newCenterPoint, up);
@@ -226,23 +207,17 @@ public class BasicFlyView extends BasicView
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Update DrawContext and Globe references.
@@ -309,9 +284,7 @@ public class BasicFlyView extends BasicView
     {
         if (viewState == null)
         {
-            String message = Logging.getMessage("nullValue.ViewStateIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (viewState.getPosition() != null)
@@ -333,9 +306,7 @@ public class BasicFlyView extends BasicView
     {
         if (heading == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.heading = ViewUtil.normalizedHeading(heading);
@@ -349,9 +320,7 @@ public class BasicFlyView extends BasicView
     {
         if (pitch == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.pitch = ViewUtil.normalizedPitch(pitch);

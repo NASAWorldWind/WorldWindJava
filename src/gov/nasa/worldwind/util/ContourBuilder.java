@@ -200,30 +200,22 @@ public class ContourBuilder
     {
         if (width < 1)
         {
-            String msg = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (height < 1)
         {
-            String msg = Logging.getMessage("generic.InvalidHeight", height);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (values == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (values.length != width * height)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", values.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.width = width;
@@ -290,9 +282,7 @@ public class ContourBuilder
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.assembleContourCells(value);
@@ -412,9 +402,7 @@ public class ContourBuilder
                 {
                     if (contours.get(0).size() == 0 && contours.get(1).size() == 0)
                     {
-                        String msg = Logging.getMessage("generic.UnexpectedCondition", "both contours are of zero length");
-                        Logging.logger().severe(msg);
-                    }
+                                }
                     else
                     {
                         Collections.reverse(contours.get(0));
@@ -428,9 +416,7 @@ public class ContourBuilder
 
             if (contours.size() != 0)
             {
-                String msg = Logging.getMessage("generic.UnexpectedCondition", "non-empty contours list");
-                Logging.logger().severe(msg);
-            }
+                }
         }
     }
 
@@ -484,9 +470,7 @@ public class ContourBuilder
                 yIntersect += cell.edgeWeights.get(dir); // interpolate along the west edge
                 break;
             default:
-                String msg = Logging.getMessage("generic.UnexpectedDirection", dirNext);
-                Logging.logger().severe(msg);
-                break;
+                    break;
         }
 
         this.currentContour.add(new double[] {xIntersect, yIntersect});
@@ -516,9 +500,7 @@ public class ContourBuilder
             case WEST:
                 return this.getContourCell(x - 1, y);
             default:
-                String msg = Logging.getMessage("generic.UnexpectedDirection", dirNext);
-                Logging.logger().severe(msg);
-                return null;
+                    return null;
         }
     }
 

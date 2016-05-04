@@ -31,27 +31,23 @@ public class TileKey implements Comparable<TileKey>
     {
         if (level < 0)
         {
-            String msg = Logging.getMessage("TileKey.levelIsLessThanZero");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 //        if (row < 0)
 //        {
 //            String msg = Logging.getMessage("generic.RowIndexOutOfRange", row);
 //            Logging.logger().severe(msg);
-//            throw new IllegalArgumentException(msg);
+//            throw new IllegalArgumentException();
 //        }
 //        if (col < 0)
 //        {
 //            String msg = Logging.getMessage("generic.ColumnIndexOutOfRange", col);
 //            Logging.logger().severe(msg);
-//            throw new IllegalArgumentException(msg);
+//            throw new IllegalArgumentException();
 //        }
         if (cacheName == null || cacheName.length() < 1)
         {
-            String msg = Logging.getMessage("TileKey.cacheNameIsNullOrEmpty");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.level = level;
         this.row = row;
@@ -70,15 +66,11 @@ public class TileKey implements Comparable<TileKey>
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (levelSet == null)
         {
-            String msg = Logging.getMessage("nullValue.LevelSetIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         Level l = levelSet.getLevel(levelNumber);
         this.level = levelNumber;
@@ -96,9 +88,7 @@ public class TileKey implements Comparable<TileKey>
     {
         if (tile == null)
         {
-            String msg = Logging.getMessage("nullValue.TileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.level = tile.getLevelNumber();
         this.row = tile.getRow();
@@ -150,9 +140,7 @@ public class TileKey implements Comparable<TileKey>
     {
         if (key == null)
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // No need to compare Sectors because they are redundant with row and column

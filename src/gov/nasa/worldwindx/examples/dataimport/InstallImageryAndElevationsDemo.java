@@ -97,9 +97,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
         {
             if (fileStore == null)
             {
-                String msg = Logging.getMessage("nullValue.FileStoreIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             this.fileStore = fileStore;
@@ -165,7 +163,6 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
                     catch (Exception e)
                     {
                         final String message = e.getMessage();
-                        Logging.logger().log(java.util.logging.Level.FINEST, message, e);
 
                         // Show a message dialog indicating that the installation failed, and why.
                         SwingUtilities.invokeLater(new Runnable()
@@ -430,8 +427,6 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
         File installLocation = DataInstallUtil.getDefaultInstallLocation(fileStore);
         if (installLocation == null)
         {
-            String message = Logging.getMessage("generic.NoDefaultImportLocation");
-            Logging.logger().severe(message);
             return null;
         }
 
@@ -516,9 +511,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
             {
                 Thread.interrupted();
 
-                String msg = Logging.getMessage("generic.OperationCancelled", "Import");
-                Logging.logger().info(msg);
-                throw new WWRuntimeException(msg);
+                    throw new WWRuntimeException();
             }
 
             datasetName = WWIO.replaceIllegalFileNameCharacters((String) o);
@@ -548,9 +541,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
             {
                 Thread.interrupted();
 
-                String msg = Logging.getMessage("generic.OperationCancelled", "Import");
-                Logging.logger().info(msg);
-                throw new WWRuntimeException(msg);
+                    throw new WWRuntimeException();
             }
         }
     }
@@ -650,9 +641,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
     {
         if (files == null || files.length == 0)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String commonPixelFormat = null;
@@ -667,9 +656,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
                 {
                     if (WWUtil.isEmpty(pixelFormat))
                     {
-                        String message = Logging.getMessage("generic.UnrecognizedSourceType", file.getAbsolutePath());
-                        Logging.logger().severe(message);
-                        throw new IllegalArgumentException(message);
+                                    throw new IllegalArgumentException();
                     }
                     else
                     {
@@ -680,17 +667,13 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
                 {
                     if (WWUtil.isEmpty(pixelFormat))
                     {
-                        String message = Logging.getMessage("generic.UnrecognizedSourceType", file.getAbsolutePath());
-                        Logging.logger().severe(message);
-                        throw new IllegalArgumentException(message);
+                                    throw new IllegalArgumentException();
                     }
                     else
                     {
-                        String reason = Logging.getMessage("generic.UnexpectedRasterType", pixelFormat);
+                        String reason = null;
                         String details = file.getAbsolutePath() + ": " + reason;
-                        String message = Logging.getMessage("DataRaster.IncompatibleRaster", details);
-                        Logging.logger().severe(message);
-                        throw new IllegalArgumentException(message);
+                                    throw new IllegalArgumentException();
                     }
                 }
             }
@@ -711,9 +694,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
             return new TiledElevationProducer();
         }
 
-        String message = Logging.getMessage("generic.UnexpectedRasterType", commonPixelFormat);
-        Logging.logger().severe(message);
-        throw new IllegalArgumentException(message);
+        throw new IllegalArgumentException();
     }
 
     protected static class InstallableDataFilter extends javax.swing.filechooser.FileFilter

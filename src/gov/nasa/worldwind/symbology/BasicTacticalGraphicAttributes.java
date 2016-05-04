@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.symbology;
 
 import gov.nasa.worldwind.render.Material;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 
@@ -58,9 +57,7 @@ public class BasicTacticalGraphicAttributes implements TacticalGraphicAttributes
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.scale = attributes.getScale();
@@ -106,9 +103,7 @@ public class BasicTacticalGraphicAttributes implements TacticalGraphicAttributes
     {
         if (scale != null && scale < 0d)
         {
-            String msg = Logging.getMessage("generic.ScaleOutOfRange", scale);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.scale = scale;
@@ -149,9 +144,7 @@ public class BasicTacticalGraphicAttributes implements TacticalGraphicAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.interiorMaterial = material;
@@ -180,9 +173,7 @@ public class BasicTacticalGraphicAttributes implements TacticalGraphicAttributes
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.interiorOpacity = opacity;
@@ -199,9 +190,7 @@ public class BasicTacticalGraphicAttributes implements TacticalGraphicAttributes
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlineOpacity = opacity;
@@ -218,9 +207,7 @@ public class BasicTacticalGraphicAttributes implements TacticalGraphicAttributes
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlineWidth = width;

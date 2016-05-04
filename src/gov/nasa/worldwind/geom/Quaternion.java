@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.geom;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author Chris Maxwell
  * @version $Id: Quaternion.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -71,15 +69,11 @@ public class Quaternion
     {
         if (compArray == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if ((compArray.length - offset) < NUM_ELEMENTS)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", compArray.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         //noinspection PointlessArithmeticExpression                
@@ -94,15 +88,11 @@ public class Quaternion
     {
         if (compArray == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if ((compArray.length - offset) < NUM_ELEMENTS)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", compArray.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         
         //noinspection PointlessArithmeticExpression
@@ -173,15 +163,11 @@ public class Quaternion
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (axis == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return fromAxisAngle(angle, axis.x, axis.y, axis.z, true);
@@ -191,9 +177,7 @@ public class Quaternion
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         return fromAxisAngle(angle, axisX, axisY, axisZ, true);
     }
@@ -202,9 +186,7 @@ public class Quaternion
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (normalize)
@@ -227,9 +209,7 @@ public class Quaternion
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         
         double t = 1.0 + matrix.m11 + matrix.m22 + matrix.m33;
@@ -285,9 +265,7 @@ public class Quaternion
     {
         if (x == null || y == null || z == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double cx = x.cosHalfAngle();
@@ -347,9 +325,7 @@ public class Quaternion
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double clat = latitude.cosHalfAngle();
@@ -401,9 +377,7 @@ public class Quaternion
     {
         if (quaternion == null)
         {
-            String msg = Logging.getMessage("nullValue.QuaternionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Quaternion(
@@ -417,9 +391,7 @@ public class Quaternion
     {
         if (quaternion == null)
         {
-            String msg = Logging.getMessage("nullValue.QuaternionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Quaternion(
@@ -442,9 +414,7 @@ public class Quaternion
     {
         if (quaternion == null)
         {
-            String msg = Logging.getMessage("nullValue.QuaternionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Quaternion(
@@ -458,9 +428,7 @@ public class Quaternion
     {
         if (isZero(value))
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", value);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Quaternion(
@@ -474,9 +442,7 @@ public class Quaternion
     {
         if (quaternion == null)
         {
-            String msg = Logging.getMessage("nullValue.QuaternionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Quaternion(
@@ -543,9 +509,7 @@ public class Quaternion
     {
         if (quaternion == null)
         {
-            String msg = Logging.getMessage("nullValue.QuaternionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return (this.x * quaternion.x) + (this.y * quaternion.y) + (this.z * quaternion.z) + (this.w * quaternion.w);
@@ -577,9 +541,7 @@ public class Quaternion
     {
         if ((value1 == null) || (value2 == null))
         {
-            String msg = Logging.getMessage("nullValue.QuaternionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (amount < 0.0)
@@ -599,9 +561,7 @@ public class Quaternion
     {
         if ((value1 == null) || (value2 == null))
         {
-            String msg = Logging.getMessage("nullValue.QuaternionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (amount < 0.0)

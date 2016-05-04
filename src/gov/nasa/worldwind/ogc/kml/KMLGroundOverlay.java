@@ -11,7 +11,6 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.ogc.kml.gx.GXLatLongQuad;
 import gov.nasa.worldwind.ogc.kml.impl.*;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -174,9 +173,7 @@ public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderabl
     {
         if (!(sourceValues instanceof KMLGroundOverlay))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.renderable = null;

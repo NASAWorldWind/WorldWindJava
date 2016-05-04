@@ -213,9 +213,7 @@ public class Offset
     {
         if (restorableSupport == null)
         {
-            String message = Logging.getMessage("nullValue.RestorableSupportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.getX() != null)
@@ -245,9 +243,7 @@ public class Offset
     {
         if (restorableSupport == null)
         {
-            String message = Logging.getMessage("nullValue.RestorableSupportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Double d = restorableSupport.getStateValueAsDouble(context, "x");

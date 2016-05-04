@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.ogc.collada.impl;
 
 import gov.nasa.worldwind.geom.Matrix;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.Stack;
 
@@ -55,9 +54,7 @@ public class ColladaTraversalContext
     {
         if (m == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.matrixStack.push(m);
@@ -82,9 +79,7 @@ public class ColladaTraversalContext
     {
         if (m == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Matrix top = this.popMatrix();

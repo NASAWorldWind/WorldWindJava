@@ -183,9 +183,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.text = text;
@@ -200,9 +198,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AnnotationAttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.attributes = attributes;
@@ -237,9 +233,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (annotation == null)
         {
-            String message = Logging.getMessage("nullValue.AnnotationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.childList.add(annotation);
@@ -249,9 +243,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (annotation == null)
         {
-            String message = Logging.getMessage("nullValue.AnnotationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.childList.remove(annotation);
@@ -271,9 +263,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (layoutManager == null)
         {
-            String message = Logging.getMessage("nullValue.LayoutIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.layoutManager = layoutManager;
@@ -288,9 +278,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (pickSupport == null)
         {
-            String message = Logging.getMessage("nullValue.PickSupportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.pickSupport = pickSupport;
@@ -315,9 +303,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.getAttributes().isVisible())
@@ -336,9 +322,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.getAttributes().isVisible())
@@ -358,9 +342,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Clamp the caller specified size.
@@ -391,9 +373,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.getAttributes().isVisible())
@@ -409,9 +389,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double finalOpacity = opacity * this.computeOpacity(dc);
@@ -423,9 +401,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         OGLStackHandler stackHandler = new OGLStackHandler();
@@ -507,9 +483,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getView().getViewport() == null)
@@ -1310,8 +1284,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
                 {
                     // Parsing the document specified by the superclass failed.
                     String message =
-                        Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", attributesStateInXml);
-                    Logging.logger().severe(message);
+                        null;
                 }
             }
         }
@@ -1347,9 +1320,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport restorableSupport;
@@ -1360,9 +1331,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         AnnotationAttributes attribs = this.attributes;

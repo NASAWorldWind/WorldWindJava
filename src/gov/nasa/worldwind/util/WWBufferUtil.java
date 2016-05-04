@@ -44,9 +44,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return allocateDirect ? newDirectByteBuffer(size) : ByteBuffer.allocate(size);
@@ -67,9 +65,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return allocateDirect ? newDirectByteBuffer(SIZEOF_SHORT * size).asShortBuffer() : ShortBuffer.allocate(size);
@@ -90,9 +86,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return allocateDirect ? newDirectByteBuffer(SIZEOF_INT * size).asIntBuffer() : IntBuffer.allocate(size);
@@ -113,9 +107,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return allocateDirect ? newDirectByteBuffer(SIZEOF_FLOAT * size).asFloatBuffer() : FloatBuffer.allocate(size);
@@ -136,9 +128,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return allocateDirect ? newDirectByteBuffer(SIZEOF_DOUBLE * size).asDoubleBuffer()
@@ -160,9 +150,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return (allocateDirect ? newDirectByteBuffer(SIZEOF_CHAR * size).asCharBuffer() : CharBuffer.allocate(size));
@@ -184,9 +172,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ByteBuffer buffer = newByteBuffer(size, allocateDirect);
@@ -209,9 +195,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ShortBuffer buffer = newShortBuffer(size, allocateDirect);
@@ -234,9 +218,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         IntBuffer buffer = newIntBuffer(size, allocateDirect);
@@ -259,9 +241,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FloatBuffer buffer = newFloatBuffer(size, allocateDirect);
@@ -284,9 +264,7 @@ public class WWBufferUtil
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         DoubleBuffer buffer = newDoubleBuffer(size, allocateDirect);
@@ -311,9 +289,7 @@ public class WWBufferUtil
     {
         if (newSize < 0 || newSize < buffer.remaining())
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ByteBuffer newBuffer = newByteBuffer(newSize, buffer.isDirect());
@@ -350,9 +326,7 @@ public class WWBufferUtil
     {
         if (newSize < 0 || newSize < buffer.remaining())
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         CharBuffer newBuffer = newCharBuffer(newSize, buffer.isDirect());
@@ -389,9 +363,7 @@ public class WWBufferUtil
     {
         if (newSize < 0 || newSize < buffer.remaining())
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ShortBuffer newBuffer = newShortBuffer(newSize, buffer.isDirect());
@@ -428,9 +400,7 @@ public class WWBufferUtil
     {
         if (newSize < 0 || newSize < buffer.remaining())
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         IntBuffer newBuffer = newIntBuffer(newSize, buffer.isDirect());
@@ -467,9 +437,7 @@ public class WWBufferUtil
     {
         if (newSize < 0 || newSize < buffer.remaining())
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FloatBuffer newBuffer = newFloatBuffer(newSize, buffer.isDirect());
@@ -506,9 +474,7 @@ public class WWBufferUtil
     {
         if (newSize < 0 || newSize < buffer.remaining())
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         DoubleBuffer newBuffer = newDoubleBuffer(newSize, buffer.isDirect());
@@ -543,9 +509,7 @@ public class WWBufferUtil
     {
         if (dataType == null)
         {
-            String message = Logging.getMessage("nullValue.DataTypeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (AVKey.INT8.equals(dataType))
@@ -579,9 +543,7 @@ public class WWBufferUtil
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double min = Double.MAX_VALUE;
@@ -621,9 +583,7 @@ public class WWBufferUtil
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return computeExtremeValues(buffer, Double.NaN);
@@ -648,16 +608,12 @@ public class WWBufferUtil
     {
         if (array == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (Vec4 v : array)

@@ -225,9 +225,7 @@ public class PointPlacemark extends WWObjectImpl
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;
@@ -244,9 +242,7 @@ public class PointPlacemark extends WWObjectImpl
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;
@@ -679,9 +675,7 @@ public class PointPlacemark extends WWObjectImpl
         // whether to add the placemark and its optional line to the ordered renderable list during pick and render.
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getSurfaceGeometry() == null)
@@ -1697,9 +1691,7 @@ public class PointPlacemark extends WWObjectImpl
     {
         if (delta == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position refPos = this.getReferencePosition();
@@ -1719,9 +1711,7 @@ public class PointPlacemark extends WWObjectImpl
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.setPosition(position);
@@ -1749,16 +1739,12 @@ public class PointPlacemark extends WWObjectImpl
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (output == null)
         {
-            String message = Logging.getMessage("nullValue.OutputBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
@@ -1769,15 +1755,12 @@ public class PointPlacemark extends WWObjectImpl
             }
             catch (XMLStreamException e)
             {
-                Logging.logger().throwing(getClass().getName(), "export", e);
                 throw new IOException(e);
             }
         }
         else
         {
-            String message = Logging.getMessage("Export.UnsupportedFormat", mimeType);
-            Logging.logger().warning(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
     }
 
@@ -1813,9 +1796,7 @@ public class PointPlacemark extends WWObjectImpl
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         xmlWriter.writeStartElement("Placemark");

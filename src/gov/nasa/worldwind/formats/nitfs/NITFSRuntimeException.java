@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.formats.nitfs;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author Lado Garakanidze
  * @version $Id: NITFSRuntimeException.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -16,43 +14,31 @@ public final class NITFSRuntimeException extends java.lang.RuntimeException
 {
     public NITFSRuntimeException()
     {
-        super();
+        super((String) null);
+        log();
     }
 
-    public NITFSRuntimeException(String messageID)
+    public NITFSRuntimeException(String params)
     {
-        super(Logging.getMessage(messageID));
-        log(this.getMessage());
-    }
-
-    public NITFSRuntimeException(String messageID, String params)
-    {
-        super(Logging.getMessage(messageID) + params);
-        log(this.getMessage());
+        super(null + params);
+        log();
     }
 
     public NITFSRuntimeException(Throwable throwable)
     {
-        super(throwable);
-        log(this.getMessage());
+        super(null, throwable);
+        log();
     }
 
-    public NITFSRuntimeException(String messageID, Throwable throwable)
+    public NITFSRuntimeException(String params, Throwable throwable)
     {
-        super(Logging.getMessage(messageID), throwable);
-        log(this.getMessage());
-    }
-
-    public NITFSRuntimeException(String messageID, String params, Throwable throwable)
-    {
-        super(Logging.getMessage(messageID) + params, throwable);
-        log(this.getMessage());
+        super(null + params, throwable);
+        log();
     }
 
     // TODO: Calling the logger from here causes the wrong method to be listed in the log record. Must call the
     // logger from the site with the problem and generating the exception.
-    private void log(String s)
+    private void log()
     {
-        Logging.logger().fine(s);
     }
 }

@@ -36,16 +36,12 @@ public class CompoundStringBuilder
     {
         if (stringBuilder == null)
         {
-            String message = Logging.getMessage("nullValue.StringBuilderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (capacity < 1)
         {
-            String message = Logging.getMessage("generic.CapacityIsInvalid", capacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.buffer = stringBuilder;
@@ -95,9 +91,7 @@ public class CompoundStringBuilder
     {
         if (index < 0 || index >= this.count)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.lengths[index];
@@ -116,9 +110,7 @@ public class CompoundStringBuilder
     {
         if (index < 0 || index >= this.count)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         CharSequence cs = this.subSequence(index);
@@ -138,9 +130,7 @@ public class CompoundStringBuilder
     {
         if (index < 0 || index >= this.count)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int off = this.offsets[index];
@@ -163,9 +153,7 @@ public class CompoundStringBuilder
     {
         if (charSequence == null)
         {
-            String message = Logging.getMessage("nullValue.CharSequenceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int newCount = 1 + this.count;

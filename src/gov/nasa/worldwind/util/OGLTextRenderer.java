@@ -98,16 +98,12 @@ public class OGLTextRenderer extends TextRenderer
     {
         if (cache == null)
         {
-            String message = Logging.getMessage("nullValue.CacheIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         TextRendererCache.CacheKey key = new TextRendererCache.CacheKey(font, antialiased, useFractionalMetrics,
@@ -127,16 +123,12 @@ public class OGLTextRenderer extends TextRenderer
     {
         if (cache == null)
         {
-            String message = Logging.getMessage("nullValue.CacheIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return getOrCreateTextRenderer(cache, font, DEFAULT_ANTIALIAS, DEFAULT_USE_FRACTIONAL_METRICS, DEFAULT_MIPMAP);

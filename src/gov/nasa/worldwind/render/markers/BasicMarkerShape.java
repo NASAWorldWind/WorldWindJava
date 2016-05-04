@@ -11,7 +11,6 @@ import gov.nasa.worldwind.cache.GpuResourceCache;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.*;
@@ -45,9 +44,7 @@ public class BasicMarkerShape
     {
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // String identity rather than equality is wanted here, to avoid a bunch of unnecessary string compares

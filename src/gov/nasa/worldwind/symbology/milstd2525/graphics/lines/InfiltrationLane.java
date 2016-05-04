@@ -92,9 +92,7 @@ public class InfiltrationLane extends AbstractMilStd2525TacticalGraphic
     {
         if (intervals < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intervals = intervals;
@@ -122,9 +120,7 @@ public class InfiltrationLane extends AbstractMilStd2525TacticalGraphic
     {
         if (factor < 0.0 || factor > 1.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.curvature = factor;
     }
@@ -138,9 +134,7 @@ public class InfiltrationLane extends AbstractMilStd2525TacticalGraphic
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -152,9 +146,7 @@ public class InfiltrationLane extends AbstractMilStd2525TacticalGraphic
         }
         catch (NoSuchElementException e)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.paths = null; // Need to recompute path for the new control points

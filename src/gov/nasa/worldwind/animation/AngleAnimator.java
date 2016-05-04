@@ -54,15 +54,11 @@ public class AngleAnimator extends BasicAnimator
        }
        if (begin == null || end == null)
        {
-           String message = Logging.getMessage("nullValue.AngleIsNull");
-           Logging.logger().severe(message);
-           throw new IllegalArgumentException(message);
+           throw new IllegalArgumentException();
        }
        if (propertyAccessor == null)
        {
-           String message = Logging.getMessage("nullValue.ViewPropertyAccessorIsNull");
-           Logging.logger().severe(message);
-           throw new IllegalArgumentException(message);
+           throw new IllegalArgumentException();
        }
 
        this.begin = begin;

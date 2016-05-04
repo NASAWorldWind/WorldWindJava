@@ -144,9 +144,7 @@ public class KMLUtil
     {
         if (box == null)
         {
-            String message = Logging.getMessage("nullValue.BoxIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (box.getNorth() == null || box.getSouth() == null || box.getEast() == null || box.getWest() == null)
@@ -280,21 +278,15 @@ public class KMLUtil
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (rotation == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LatLon[] corners = sector.getCorners();

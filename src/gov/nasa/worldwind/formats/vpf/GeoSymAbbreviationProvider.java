@@ -39,9 +39,7 @@ public class GeoSymAbbreviationProvider
         InputStream inputStream = WWIO.openFileOrResourceStream(filePath, this.getClass());
         if (inputStream == null)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileReading", filePath);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         readTables(new Scanner(inputStream));

@@ -69,9 +69,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
     {
         if (retriever == null)
         {
-            String message = Logging.getMessage("nullValue.RetrieverIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.retriever = retriever;
@@ -334,7 +332,6 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
 
             if (WWUtil.isEmpty(contentType))
             {
-                Logging.logger().severe(Logging.getMessage("nullValue.ContentTypeIsNullOrEmpty"));
                 return null;
             }
         }
@@ -368,15 +365,10 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
     {
         if (e instanceof ClosedByInterruptException)
         {
-            Logging.logger().log(java.util.logging.Level.FINE,
-                Logging.getMessage("generic.OperationCancelled",
-                    "retrieval post-processing for " + this.getRetriever().getName()), e);
         }
         else if (e instanceof IOException)
         {
             this.markResourceAbsent();
-            Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("generic.ExceptionWhileSavingRetreivedData", this.getRetriever().getName()), e);
         }
     }
 
@@ -388,8 +380,6 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      */
     protected ByteBuffer handleUnknownContentType()
     {
-        Logging.logger().log(java.util.logging.Level.WARNING,
-            Logging.getMessage("generic.UnknownContentType", this.getRetriever().getContentType()));
 
         return null;
     }
@@ -458,8 +448,6 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
     {
         if (buffer == null || !buffer.hasRemaining())
             return;
-
-        Logging.logger().warning(WWIO.byteBufferToString(buffer, 2048, null));
     }
 
     /**
@@ -509,7 +497,6 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
 
         sb.append("\n");
         sb.append(WWIO.byteBufferToString(this.getRetriever().getBuffer(), 2048, null));
-        Logging.logger().warning(sb.toString());
 
         return null;
     }

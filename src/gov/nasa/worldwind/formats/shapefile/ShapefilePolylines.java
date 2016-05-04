@@ -189,9 +189,7 @@ public class ShapefilePolylines extends ShapefileRenderable implements OrderedRe
     {
         if (shapefile == null)
         {
-            String msg = Logging.getMessage("nullValue.ShapefileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.init(shapefile, null, null, null);
@@ -219,9 +217,7 @@ public class ShapefilePolylines extends ShapefileRenderable implements OrderedRe
     {
         if (shapefile == null)
         {
-            String msg = Logging.getMessage("nullValue.ShapefileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.init(shapefile, normalAttrs, highlightAttrs, attributeDelegate);
@@ -252,9 +248,7 @@ public class ShapefilePolylines extends ShapefileRenderable implements OrderedRe
     {
         if (outlinePickWidth < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlinePickWidth = outlinePickWidth;
@@ -271,9 +265,7 @@ public class ShapefilePolylines extends ShapefileRenderable implements OrderedRe
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.visible)
@@ -314,9 +306,7 @@ public class ShapefilePolylines extends ShapefileRenderable implements OrderedRe
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.visible)
@@ -351,9 +341,7 @@ public class ShapefilePolylines extends ShapefileRenderable implements OrderedRe
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.visible)

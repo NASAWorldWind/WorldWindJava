@@ -240,9 +240,7 @@ public class ScrollBar implements Renderable
     {
         if (minValue < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "minValue < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.minValue = minValue;
 
@@ -272,9 +270,7 @@ public class ScrollBar implements Renderable
     {
         if (maxValue < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "maxValue < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.maxValue = maxValue;
 
@@ -326,9 +322,7 @@ public class ScrollBar implements Renderable
     {
         if (unitIncrement <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "unitIncrement <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.unitIncrement = unitIncrement;
@@ -365,9 +359,7 @@ public class ScrollBar implements Renderable
     {
         if (orientation == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.orientation = orientation;
@@ -483,9 +475,7 @@ public class ScrollBar implements Renderable
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.lineColor = color;
@@ -504,15 +494,11 @@ public class ScrollBar implements Renderable
     {
         if (color1 == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (color2 == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.knobColor1 = color1;
@@ -572,9 +558,7 @@ public class ScrollBar implements Renderable
     {
         if (delay < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", delay);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.autoScrollDelay = delay;

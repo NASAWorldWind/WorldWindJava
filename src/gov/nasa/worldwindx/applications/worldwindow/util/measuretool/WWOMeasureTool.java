@@ -141,16 +141,12 @@ public class WWOMeasureTool extends AVListImpl
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (shape == null)
         {
-            String msg = Logging.getMessage("nullValue.Shape");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -207,9 +203,7 @@ public class WWOMeasureTool extends AVListImpl
     {
         if (unitsFormat == null)
         {
-            String msg = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.unitsFormat = unitsFormat;
@@ -328,9 +322,7 @@ public class WWOMeasureTool extends AVListImpl
     {
         if (line == null)
         {
-            String msg = Logging.getMessage("nullValue.Shape");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.setArmed(false);
         this.clear();
@@ -356,9 +348,7 @@ public class WWOMeasureTool extends AVListImpl
     {
         if (newShape == null)
         {
-            String msg = Logging.getMessage("nullValue.Shape");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.setArmed(false);
@@ -577,9 +567,7 @@ public class WWOMeasureTool extends AVListImpl
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (point.getValue("Control") != null)
@@ -619,16 +607,12 @@ public class WWOMeasureTool extends AVListImpl
     {
         if (distance == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (azimuth == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.isRegularShape())

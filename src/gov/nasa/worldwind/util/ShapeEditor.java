@@ -303,30 +303,22 @@ public class ShapeEditor implements SelectListener, PropertyChangeListener
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (originalShape == null)
         {
-            String msg = Logging.getMessage("nullValue.Shape");
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!(originalShape instanceof Movable2))
         {
-            String msg = Logging.getMessage("generic.Movable2NotSupported");
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!(originalShape instanceof Attributable))
         {
-            String msg = Logging.getMessage("generic.AttributableNotSupported");
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -732,9 +724,7 @@ public class ShapeEditor implements SelectListener, PropertyChangeListener
     {
         if (event == null)
         {
-            String msg = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().log(java.util.logging.Level.FINE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.currentEvent = event;
@@ -859,9 +849,7 @@ public class ShapeEditor implements SelectListener, PropertyChangeListener
     {
         if (event == null)
         {
-            String msg = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().log(java.util.logging.Level.FINE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (event.getPropertyName().equals(AVKey.VERTICAL_EXAGGERATION))

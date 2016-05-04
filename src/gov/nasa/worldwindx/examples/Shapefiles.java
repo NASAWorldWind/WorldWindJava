@@ -70,7 +70,6 @@ public class Shapefiles extends ApplicationTemplate
                             @Override
                             public void exception(Exception e)
                             {
-                                Logging.logger().log(java.util.logging.Level.SEVERE, e.getMessage(), e);
                             }
                         });
                 }

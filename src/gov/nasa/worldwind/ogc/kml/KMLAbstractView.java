@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.event.Message;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * Represents the KML <i>AbstractView</i> element.
@@ -27,9 +26,7 @@ public abstract class KMLAbstractView extends KMLAbstractObject
     {
         if (!(sourceValues instanceof KMLAbstractView))
         {
-            String message = Logging.getMessage("KML.InvalidElementType", sourceValues.getClass().getName());
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.applyChange(sourceValues);

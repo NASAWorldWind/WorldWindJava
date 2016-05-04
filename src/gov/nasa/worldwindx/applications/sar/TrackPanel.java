@@ -253,9 +253,7 @@ public class TrackPanel extends JPanel
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -266,9 +264,7 @@ public class TrackPanel extends JPanel
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         this.doRestoreState(rs, null);

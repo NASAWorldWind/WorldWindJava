@@ -127,7 +127,6 @@ public class FileSetFinder
             DataRasterReader reader = readerFactory.findReaderFor(file, params);
             if (reader == null)
             {
-                Logging.logger().fine("No reader for " + file.getPath());
                 continue;
             }
 
@@ -137,9 +136,7 @@ public class FileSetFinder
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("generic.ExceptionWhileReading", e.getMessage());
-                Logging.logger().finest(message);
-            }
+                }
 
             // Set the file set's pixel format and data type.
             if (fileSet.getDataType() == null)
@@ -156,7 +153,6 @@ public class FileSetFinder
             Sector fileSector = (Sector) params.getValue(AVKey.SECTOR);
             if (fileSector == null)
             {
-                Logging.logger().fine("No sector for " + file.getPath());
                 continue;
             }
 

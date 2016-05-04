@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.animation;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.Date;
 
 /**
@@ -27,9 +25,7 @@ public class ScheduledInterpolator implements Interpolator
     {
         if (lengthMillis < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", lengthMillis);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (startTime != null)
@@ -41,16 +37,12 @@ public class ScheduledInterpolator implements Interpolator
     {
         if (startTime == null || stopTime == null)
         {
-            String message = Logging.getMessage("nullValue.DateIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (startTime.after(stopTime))
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", startTime);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.startTime = startTime.getTime();

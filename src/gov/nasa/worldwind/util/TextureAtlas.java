@@ -90,7 +90,7 @@ public class TextureAtlas
         public boolean additionFailed(Rect cause, int attemptNumber)
         {
             if (!isEvictOldElements() || !removeLeastRecentlyUsedEntry())
-                throw new WWRuntimeException(Logging.getMessage("TextureAtlas.AtlasIsFull"));
+                throw new WWRuntimeException();
             else
                 return true;
         }
@@ -196,9 +196,7 @@ public class TextureAtlas
         {
             if (that == null)
             {
-                String msg = Logging.getMessage("nullValue.EntryIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             return this.lastUsed < that.lastUsed ? -1 : this.lastUsed == that.lastUsed ? 0 : 1;
@@ -330,30 +328,22 @@ public class TextureAtlas
     {
         if (initialWidth < 1)
         {
-            String msg = Logging.getMessage("TextureAtlas.InitialWidthInvalid", initialWidth);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (initialHeight < 1)
         {
-            String msg = Logging.getMessage("TextureAtlas.InitialHeightInvalid", initialHeight);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (maxWidth < initialWidth)
         {
-            String msg = Logging.getMessage("TextureAtlas.MaxWidthInvalid", maxWidth);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (maxHeight < initialHeight)
         {
-            String msg = Logging.getMessage("TextureAtlas.MaxWidthInvalid", maxHeight);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Create a JOGL rectangle packer with the specified initial and maximum dimensions. The rectangle packer
@@ -514,24 +504,18 @@ public class TextureAtlas
     {
         if (key == null)
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (image == null)
         {
-            String msg = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Add two to account for the 1 pixel border we add to the image.
         if (image.getWidth() + 2 > this.maxWidth || image.getHeight() + 2 > this.maxHeight)
         {
-            String msg = Logging.getMessage("TextureAtlas.ImageTooLarge", key);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -542,9 +526,7 @@ public class TextureAtlas
         {
             // doAdd throws a WWRuntimeException when the rectangle packer cannot fit the specified image into the
             // backing store.
-            String msg = Logging.getMessage("TextureAtlas.AtlasIsFull", key);
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
     }
 
@@ -610,9 +592,7 @@ public class TextureAtlas
     {
         if (key == null)
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Entry entry = this.entryMap.remove(key);
@@ -663,9 +643,7 @@ public class TextureAtlas
     {
         if (key == null)
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.entryMap.containsKey(key);
@@ -684,9 +662,7 @@ public class TextureAtlas
     {
         if (key == null)
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Entry entry = this.entryMap.get(key);
@@ -715,9 +691,7 @@ public class TextureAtlas
     {
         if (key == null)
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Entry entry = this.entryMap.get(key);
@@ -774,9 +748,7 @@ public class TextureAtlas
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Remove textures corresponding to this texture atlas' disposed backing images from the draw context's GPU
@@ -1208,8 +1180,6 @@ public class TextureAtlas
         Texture texture = this.getTexture(dc);
         if (texture == null) // This should never happen, but we check anyway.
         {
-            String msg = Logging.getMessage("nullValue.TextureIsNull");
-            Logging.logger().warning(msg);
             return null;
         }
 

@@ -20,7 +20,6 @@ import java.io.*;
 import java.nio.*;
 import java.util.*;
 import java.util.concurrent.PriorityBlockingQueue;
-import java.util.logging.Level;
 
 /**
  * @author Paul Collins
@@ -73,9 +72,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
     {
         if (placeNameServiceSet == null)
         {
-            String message = Logging.getMessage("nullValue.PlaceNameServiceSetIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         //  
@@ -320,9 +317,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
         {
             if (delta == null || latitude == null)
             {
-                String msg = Logging.getMessage("nullValue.AngleIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
             return (int) ((latitude.getDegrees() + 90d) / delta.getDegrees());
         }
@@ -331,9 +326,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
         {
             if (delta == null || longitude == null)
             {
-                String msg = Logging.getMessage("nullValue.AngleIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
             return (int) ((longitude.getDegrees() + 180d) / delta.getDegrees());
         }
@@ -342,9 +335,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
         {
             if (delta == null)
             {
-                String msg = Logging.getMessage("nullValue.AngleIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
             return Angle.fromDegrees(-90d + delta.getDegrees() * row);
         }
@@ -353,9 +344,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
         {
             if (delta == null)
             {
-                String msg = Logging.getMessage("nullValue.AngleIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
             return Angle.fromDegrees(-180 + delta.getDegrees() * column);
         }
@@ -588,9 +577,6 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
                     }
                     catch (Exception e)
                     {
-                        Logging.logger().log(Level.FINE,
-                            Logging.getMessage("layers.PlaceNameLayer.ExceptionRenderingTile"),
-                            e);
                     }
                 }
             }
@@ -818,9 +804,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
         {
             if (that == null)
             {
-                String msg = Logging.getMessage("nullValue.RequestTaskIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
             return this.tile.getPriority() == that.tile.getPriority() ? 0 :
                 this.tile.getPriority() < that.tile.getPriority() ? -1 : 1;
@@ -856,8 +840,6 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
         {
             // The file has expired. Delete it then request download of newer.
             this.getDataFileStore().removeFile(url);
-            String message = Logging.getMessage("generic.DataFileExpired", url);
-            Logging.logger().fine(message);
             return false;
         }
 
@@ -873,8 +855,6 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
             this.getDataFileStore().removeFile(url);
             tile.getPlaceNameService().markResourceAbsent(tile.getPlaceNameService().getTileNumber(tile.row,
                 tile.column));
-            String message = Logging.getMessage("generic.DeletedCorruptDataFile", url);
-            Logging.logger().fine(message);
             return false;
         }
 
@@ -903,8 +883,6 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
         catch (Exception e)
         {
             //todo log actual error 
-            Logging.logger().log(Level.FINE,
-                Logging.getMessage("layers.PlaceNameLayer.ExceptionAttemptingToReadFile", url.toString()), e);
         }
         finally
         {
@@ -915,8 +893,6 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
             }
             catch (java.io.IOException e)
             {
-                Logging.logger().log(Level.FINE,
-                    Logging.getMessage("layers.PlaceNameLayer.ExceptionAttemptingToReadFile", url.toString()), e);
             }
         }
 
@@ -990,8 +966,6 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
             }
             catch (NumberFormatException e)
             {
-                Logging.logger().log(Level.FINE,
-                    Logging.getMessage("layers.PlaceNameLayer.ExceptionAttemptingToReadFile", ""), e);
             }
             return value;
         }
@@ -1095,8 +1069,6 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
         }
         catch (java.net.MalformedURLException e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("layers.PlaceNameLayer.ExceptionCreatingUrl", tile), e);
             return;
         }
 
@@ -1111,8 +1083,6 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
         }
         else
         {
-            Logging.logger().severe(
-                Logging.getMessage("layers.PlaceNameLayer.UnknownRetrievalProtocol", url.toString()));
             return;
         }
 
@@ -1212,7 +1182,6 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
 
                 sb.append("\n");
                 sb.append(WWIO.byteBufferToString(this.getRetriever().getBuffer(), 2048, null));
-                Logging.logger().warning(sb.toString());
 
                 return null;
             }
@@ -1330,9 +1299,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionDuringDataSizeEstimate", this.getName());
-            Logging.logger().severe(message);
-            throw new RuntimeException(message);
+            throw new RuntimeException();
         }
     }
 }

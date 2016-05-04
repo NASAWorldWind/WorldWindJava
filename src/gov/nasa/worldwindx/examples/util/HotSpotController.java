@@ -48,9 +48,7 @@ public class HotSpotController implements SelectListener, MouseMotionListener
     {
         if (wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -79,7 +77,6 @@ public class HotSpotController implements SelectListener, MouseMotionListener
         catch (Exception e)
         {
             // Wrap the handler in a try/catch to keep exceptions from bubbling up.
-            Logging.logger().warning(e.getMessage() != null ? e.getMessage() : e.toString());
         }
     }
 

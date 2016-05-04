@@ -62,9 +62,7 @@ public class BasicTreeNode extends WWObjectImpl implements TreeNode
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.text = text.trim();

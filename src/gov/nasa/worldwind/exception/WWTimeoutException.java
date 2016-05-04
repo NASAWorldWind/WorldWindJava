@@ -14,8 +14,8 @@ package gov.nasa.worldwind.exception;
  */
 public class WWTimeoutException extends WWRuntimeException
 {
-    public WWTimeoutException(String message)
+    public WWTimeoutException()
     {
-        super(message);
+        super();
     }
 }

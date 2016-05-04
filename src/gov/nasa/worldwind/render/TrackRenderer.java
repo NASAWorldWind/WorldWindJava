@@ -12,7 +12,6 @@ import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.terrain.SectorGeometryList;
 import gov.nasa.worldwind.tracks.TrackPoint;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import javax.media.opengl.glu.*;
@@ -81,9 +80,7 @@ public class TrackRenderer implements Disposable
     {
         if (material == null)
         {
-            String msg = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // don't validate material's colors - material does that.

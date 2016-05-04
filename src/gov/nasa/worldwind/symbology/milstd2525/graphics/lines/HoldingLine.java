@@ -88,9 +88,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Ensure that the position list provides at least 3 control points.
@@ -103,9 +101,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
         }
         catch (NoSuchElementException e)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.path = null; // Need to regenerate
@@ -145,9 +141,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
     {
         if (curvature < 0.0 || curvature > 1.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", curvature);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.curvature = curvature;
@@ -173,9 +167,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
     {
         if (intervals < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intervals = intervals;

@@ -44,9 +44,7 @@ public class UserFacingIcon extends AVListImpl implements WWIcon, Movable
     {
         if (iconPath == null)
         {
-            String message = Logging.getMessage("nullValue.IconFilePath");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageTexture = new BasicWWTexture(iconPath, true);
@@ -58,9 +56,7 @@ public class UserFacingIcon extends AVListImpl implements WWIcon, Movable
     {
         if (imageSource == null)
         {
-            String message = Logging.getMessage("nullValue.IconFilePath");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageTexture = new BasicWWTexture(imageSource, true);
@@ -239,9 +235,7 @@ public class UserFacingIcon extends AVListImpl implements WWIcon, Movable
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.iconPosition = this.iconPosition.add(position);
@@ -251,9 +245,7 @@ public class UserFacingIcon extends AVListImpl implements WWIcon, Movable
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.iconPosition = position;
@@ -378,9 +370,7 @@ public class UserFacingIcon extends AVListImpl implements WWIcon, Movable
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport restorableSupport;
@@ -391,9 +381,7 @@ public class UserFacingIcon extends AVListImpl implements WWIcon, Movable
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         // The imagePath property should exist only if the imageSource property was a simple String path.

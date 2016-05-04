@@ -36,21 +36,17 @@ public class PolyArc extends Polygon
 
         if (radius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius=" + radius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (leftAzimuth == null)
         {
             String message = "nullValue.LeftAzimuthIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (rightAzimuth == null)
         {
             String message = "nullValue.RightAzimuthIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.radius = radius;
@@ -124,9 +120,7 @@ public class PolyArc extends Polygon
     {
         if (radius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius=" + radius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.radius = radius;
@@ -146,14 +140,12 @@ public class PolyArc extends Polygon
         if (leftAzimuth == null)
         {
             String message = "nullValue.LeftAzimuthIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (rightAzimuth == null)
         {
             String message = "nullValue.RightAzimuthIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.leftAzimuth = leftAzimuth;
@@ -170,9 +162,7 @@ public class PolyArc extends Polygon
     {
         if (slices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.slices = slices;

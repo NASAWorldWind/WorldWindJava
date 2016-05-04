@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.tiff;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.nio.channels.FileChannel;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -88,7 +86,6 @@ class TIFFIFDFactory
         }
         catch(Exception e)
         {
-            Logging.logger().finest( e.getMessage() );
 
         }
         finally
@@ -101,7 +98,6 @@ class TIFFIFDFactory
                 }
                 catch(Exception e2)
                 {
-                    Logging.logger().finest( e2.getMessage() );
                 }
             }
         }

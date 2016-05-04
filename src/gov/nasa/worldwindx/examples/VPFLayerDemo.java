@@ -104,9 +104,7 @@ public class VPFLayerDemo extends ApplicationTemplate
         {
             if (file == null)
             {
-                String message = Logging.getMessage("nullValue.FileIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             return file.isDirectory() || this.filter.accept(file);

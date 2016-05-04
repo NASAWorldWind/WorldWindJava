@@ -250,16 +250,12 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
     {
         if (tc == null)
         {
-            String message = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isFeatureActive(tc, dc))
@@ -273,16 +269,12 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
     {
         if (tc == null)
         {
-            String message = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isFeatureActive(tc, dc))
@@ -390,9 +382,7 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
     {
         if (!(sourceValues instanceof KMLAbstractFeature))
         {
-            String message = Logging.getMessage("KML.InvalidElementType", sourceValues.getClass().getName());
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.applyChange(sourceValues);

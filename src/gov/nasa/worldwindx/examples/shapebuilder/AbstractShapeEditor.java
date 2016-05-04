@@ -143,9 +143,7 @@ public abstract class AbstractShapeEditor extends AbstractLayer implements Mouse
     {
         if (labelName == null)
         {
-            String msg = Logging.getMessage("nullValue.LabelName");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         String label = this.getStringValue(labelName);
@@ -208,27 +206,27 @@ public abstract class AbstractShapeEditor extends AbstractLayer implements Mouse
 
     protected void setInitialLabels()
     {
-        this.setLabel(ACCUMULATED_LABEL, Logging.getMessage(ACCUMULATED_LABEL));
-        this.setLabel(ANGLE_LABEL, Logging.getMessage(ANGLE_LABEL));
-        this.setLabel(AREA_LABEL, Logging.getMessage(AREA_LABEL));
-        this.setLabel(CENTER_LATITUDE_LABEL, Logging.getMessage(CENTER_LATITUDE_LABEL));
-        this.setLabel(CENTER_LONGITUDE_LABEL, Logging.getMessage(CENTER_LONGITUDE_LABEL));
-        this.setLabel(CENTER_ALTITUDE_LABEL, Logging.getMessage(CENTER_ALTITUDE_LABEL));
-        this.setLabel(HEADING_LABEL, Logging.getMessage(HEADING_LABEL));
-        this.setLabel(TILT_LABEL, Logging.getMessage(TILT_LABEL));
-        this.setLabel(ROLL_LABEL, Logging.getMessage(ROLL_LABEL));
-        this.setLabel(EAST_SKEW_LABEL, Logging.getMessage(EAST_SKEW_LABEL));
-        this.setLabel(NORTH_SKEW_LABEL, Logging.getMessage(NORTH_SKEW_LABEL));
-        this.setLabel(HEIGHT_LABEL, Logging.getMessage(HEIGHT_LABEL));
-        this.setLabel(LATITUDE_LABEL, Logging.getMessage(LATITUDE_LABEL));
-        this.setLabel(LONGITUDE_LABEL, Logging.getMessage(LONGITUDE_LABEL));
-        this.setLabel(ALTITUDE_LABEL, Logging.getMessage(ALTITUDE_LABEL));
-        this.setLabel(LENGTH_LABEL, Logging.getMessage(LENGTH_LABEL));
-        this.setLabel(MAJOR_AXIS_LABEL, Logging.getMessage(MAJOR_AXIS_LABEL));
-        this.setLabel(MINOR_AXIS_LABEL, Logging.getMessage(MINOR_AXIS_LABEL));
-        this.setLabel(PERIMETER_LABEL, Logging.getMessage(PERIMETER_LABEL));
-        this.setLabel(RADIUS_LABEL, Logging.getMessage(RADIUS_LABEL));
-        this.setLabel(WIDTH_LABEL, Logging.getMessage(WIDTH_LABEL));
+        this.setLabel(ACCUMULATED_LABEL, null);
+        this.setLabel(ANGLE_LABEL, null);
+        this.setLabel(AREA_LABEL, null);
+        this.setLabel(CENTER_LATITUDE_LABEL, null);
+        this.setLabel(CENTER_LONGITUDE_LABEL, null);
+        this.setLabel(CENTER_ALTITUDE_LABEL, null);
+        this.setLabel(HEADING_LABEL, null);
+        this.setLabel(TILT_LABEL, null);
+        this.setLabel(ROLL_LABEL, null);
+        this.setLabel(EAST_SKEW_LABEL, null);
+        this.setLabel(NORTH_SKEW_LABEL, null);
+        this.setLabel(HEIGHT_LABEL, null);
+        this.setLabel(LATITUDE_LABEL, null);
+        this.setLabel(LONGITUDE_LABEL, null);
+        this.setLabel(ALTITUDE_LABEL, null);
+        this.setLabel(LENGTH_LABEL, null);
+        this.setLabel(MAJOR_AXIS_LABEL, null);
+        this.setLabel(MINOR_AXIS_LABEL, null);
+        this.setLabel(PERIMETER_LABEL, null);
+        this.setLabel(RADIUS_LABEL, null);
+        this.setLabel(WIDTH_LABEL, null);
     }
 
     protected boolean arePositionsRedundant(Position posA, Position posB)

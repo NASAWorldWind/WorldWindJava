@@ -96,16 +96,12 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
     {
         if (arrowAngle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (arrowAngle.degrees <= 0 || arrowAngle.degrees >= 90)
         {
-            String msg = Logging.getMessage("generic.AngleOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.arrowAngle = arrowAngle;
@@ -131,9 +127,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
     {
         if (arrowLength < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.arrowLength = arrowLength;
@@ -184,9 +178,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -198,9 +190,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
         }
         catch (NoSuchElementException e)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.paths = null; // Need to recompute path for the new control points

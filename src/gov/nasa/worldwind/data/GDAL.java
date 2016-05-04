@@ -8,7 +8,6 @@ package gov.nasa.worldwind.data;
 
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.gdal.GDALUtils;
 import org.gdal.gdal.Dataset;
 import org.gdal.osr.*;
@@ -82,9 +81,7 @@ public class GDAL
         {
             if (null == ds)
             {
-                String message = Logging.getMessage("nullValue.DataSetIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (null == srs)
             {
@@ -94,16 +91,12 @@ public class GDAL
 
                 if (null == srs)
                 {
-                    String message = Logging.getMessage("nullValue.SpatialReferenceIsNull");
-                    Logging.logger().severe(message);
-                    throw new IllegalArgumentException(message);
+                            throw new IllegalArgumentException();
                 }
             }
             if (srs.IsGeographic() == 0 && srs.IsProjected() == 0)
             {
-                String message = Logging.getMessage("generic.UnexpectedCoordinateSystem", srs.ExportToWkt());
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.srs = srs.Clone();
@@ -132,16 +125,12 @@ public class GDAL
         {
             if (null == srs)
             {
-                String message = Logging.getMessage("nullValue.SpatialReferenceIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (null == corners)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             Sector bbox = null;
@@ -170,9 +159,7 @@ public class GDAL
             {
                 String error = GDALUtils.getErrorMessage();
                 String reason = (null != error && error.length() > 0) ? error : t.getMessage();
-                String message = Logging.getMessage("generic.ExceptionWhileTransformation", reason);
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
             return bbox;
         }
@@ -182,15 +169,11 @@ public class GDAL
         {
             if (null == srs)
             {
-                String message = Logging.getMessage("nullValue.SpatialReferenceIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (srs.IsGeographic() == 0 && srs.IsProjected() == 0)
             {
-                String message = Logging.getMessage("generic.UnexpectedCoordinateSystem", srs.ExportToWkt());
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.srs = srs.Clone();
@@ -225,22 +208,16 @@ public class GDAL
         {
             if (null == sector)
             {
-                String message = Logging.getMessage("nullValue.SectorIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (null == srs)
             {
-                String message = Logging.getMessage("nullValue.SpatialReferenceIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (srs.IsGeographic() == 0 && srs.IsProjected() == 0)
             {
-                String message = Logging.getMessage("generic.UnexpectedCoordinateSystem", srs.ExportToWkt());
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.srs = srs;
@@ -338,9 +315,7 @@ public class GDAL
 
             if (this.srs.IsSame(that.getSpatialReference()) == 0)
             {
-                String message = Logging.getMessage("generic.SectorMismatch", this, that);
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             double minY = Math.max(this.getMinY(), that.getMinY());
@@ -363,9 +338,7 @@ public class GDAL
 
             if (this.srs.IsSame(that.getSpatialReference()) == 0)
             {
-                String message = Logging.getMessage("generic.SectorMismatch", this, that);
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             if (that.getMinX() < this.getMinX())
@@ -405,9 +378,7 @@ public class GDAL
         {
             if (null == clipArea)
             {
-                String message = Logging.getMessage("nullValue.AreaIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             java.awt.geom.AffineTransform geoToRaster =
@@ -436,9 +407,7 @@ public class GDAL
     {
         if (null == ds)
         {
-            String message = Logging.getMessage("nullValue.DataSetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] gt = new double[6];
@@ -456,23 +425,17 @@ public class GDAL
     {
         if (null == ds)
         {
-            String message = Logging.getMessage("nullValue.DataSetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (newWidth <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", newWidth);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (newHeight <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", newHeight);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         AffineTransform atx = getAffineTransform(ds);
@@ -501,9 +464,7 @@ public class GDAL
     {
         if (null == points)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double min = Double.MAX_VALUE;
@@ -519,9 +480,7 @@ public class GDAL
     {
         if (null == points)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double max = -Double.MAX_VALUE;
@@ -537,9 +496,7 @@ public class GDAL
     {
         if (null == points)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double min = Double.MAX_VALUE;
@@ -555,9 +512,7 @@ public class GDAL
     {
         if (null == points)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double max = -Double.MAX_VALUE;

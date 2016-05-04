@@ -7,7 +7,6 @@ package gov.nasa.worldwind.layers;
 
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.util.*;
@@ -77,9 +76,7 @@ public class GraticuleSupport
     {
         if (renderable == null)
         {
-            String message = Logging.getMessage("nullValue.ObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.renderables.add(new Pair(renderable, paramsKey));
@@ -99,9 +96,7 @@ public class GraticuleSupport
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.namedShapeAttributes.clear();
@@ -140,9 +135,7 @@ public class GraticuleSupport
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GraticuleRenderingParams value = this.namedParams.get(key);
@@ -168,9 +161,7 @@ public class GraticuleSupport
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         initRenderingParams(renderingParams);
@@ -191,9 +182,7 @@ public class GraticuleSupport
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.AVListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params.getValue(GraticuleRenderingParams.KEY_DRAW_LINES) == null)

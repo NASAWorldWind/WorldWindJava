@@ -30,9 +30,7 @@ public abstract class AbstractTrackReader implements TrackReader
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -41,16 +39,12 @@ public abstract class AbstractTrackReader implements TrackReader
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToReadFrom", source);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
         catch (WWUnrecognizedException e)
         {
             // Source type is passed up the call stack in the WWUnrecognizedException's message.
-            String message = Logging.getMessage("generic.UnrecognizedSourceType", e.getMessage());
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -138,7 +132,7 @@ public abstract class AbstractTrackReader implements TrackReader
 
         // Pass the source type up the call stack in the WWUnrecognizedException's message. This enables us to be more
         // specific about the source type if a subclass has more detailed information to offer.
-        throw new WWUnrecognizedException(source.toString());
+        throw new WWUnrecognizedException();
     }
 
     protected Track[] doRead(String filePath) throws IOException

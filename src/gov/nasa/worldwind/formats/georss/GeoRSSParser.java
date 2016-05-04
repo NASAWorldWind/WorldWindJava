@@ -8,7 +8,6 @@ package gov.nasa.worldwind.formats.georss;
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 import org.w3c.dom.*;
 import org.xml.sax.*;
 
@@ -16,7 +15,6 @@ import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.*;
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * @author tag
@@ -37,9 +35,7 @@ public class GeoRSSParser
     {
         if (docString == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (docString.length() < 1) // avoid empty strings
@@ -56,7 +52,6 @@ public class GeoRSSParser
 
             if (shapes == null || shapes.size() < 1)
             {
-                Logging.logger().log(Level.WARNING, "GeoRSS.NoShapes", docString);
                 return null;
             }
 
@@ -64,21 +59,15 @@ public class GeoRSSParser
         }
         catch (ParserConfigurationException e)
         {
-            String message = Logging.getMessage("GeoRSS.ParserConfigurationException");
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("GeoRSS.IOExceptionParsing", docString);
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
         catch (SAXException e)
         {
-            String message = Logging.getMessage("GeoRSS.IOExceptionParsing", docString);
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -138,9 +127,7 @@ public class GeoRSSParser
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -154,7 +141,6 @@ public class GeoRSSParser
 
             if (shapes == null || shapes.size() < 1)
             {
-                Logging.logger().log(Level.WARNING, "GeoRSS.NoShapes", file.getPath());
                 return null;
             }
 
@@ -162,21 +148,15 @@ public class GeoRSSParser
         }
         catch (ParserConfigurationException e)
         {
-            String message = Logging.getMessage("GeoRSS.ParserConfigurationException");
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("GeoRSS.IOExceptionParsing", file.getPath());
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
         catch (SAXException e)
         {
-            String message = Logging.getMessage("GeoRSS.IOExceptionParsing", file.getPath());
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -184,9 +164,7 @@ public class GeoRSSParser
     {
         if (xmlDoc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<Node> shapeNodes = new ArrayList<Node>();
@@ -280,7 +258,6 @@ public class GeoRSSParser
         if (typeNode != null)
             return makeGMLPointShape(typeNode);
 
-        Logging.logger().log(Level.WARNING, "GeoRSS.MissingElementContent", "where");
         return null;
     }
 
@@ -289,14 +266,12 @@ public class GeoRSSParser
         Node n = findChildByLocalName(node, "exterior");
         if (n == null)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.MissingElement", "exterior");
             return null;
         }
 
         n = findChildByLocalName(n, "LinearRing");
         if (n == null)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.MissingElement", "LinearRing");
             return null;
         }
 
@@ -308,14 +283,12 @@ public class GeoRSSParser
         String valuesString = node.getTextContent();
         if (valuesString == null)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.NoCoordinates", node.getLocalName());
             return null;
         }
 
         ArrayList<Double> values = getDoubleValues(valuesString);
         if (values.size() < 8 || values.size() % 2 != 0)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.InvalidCoordinateCount", node.getLocalName());
             return null;
         }
 
@@ -345,42 +318,36 @@ public class GeoRSSParser
         Node n = findChildByLocalName(node, "lowerCorner");
         if (n == null)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.MissingElement", " lowerCorner");
             return null;
         }
 
         String lowerCornerString = n.getTextContent();
         if (lowerCornerString == null)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.InvalidCoordinateCount", " lowerCorner");
             return null;
         }
 
         n = findChildByLocalName(node, "upperCorner");
         if (n == null)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.InvalidCoordinateCount", " upperCorner");
             return null;
         }
 
         String upperCornerString = n.getTextContent();
         if (upperCornerString == null)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.InvalidCoordinateCount", " upperCorner");
             return null;
         }
 
         ArrayList<Double> lv = getDoubleValues(lowerCornerString);
         if (lv.size() != 2)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.InvalidCoordinateCount", " lowerCorner");
             return null;
         }
 
         ArrayList<Double> uv = getDoubleValues(upperCornerString);
         if (uv.size() != 2)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.InvalidCoordinateCount", " upperCorner");
             return null;
         }
 
@@ -392,14 +359,12 @@ public class GeoRSSParser
         String valuesString = node.getTextContent();
         if (valuesString == null)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.NoCoordinates", node.getLocalName());
             return null;
         }
 
         ArrayList<Double> p = getDoubleValues(valuesString);
         if (p.size() != 4)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.InvalidCoordinateCount", node.getLocalName());
             return null;
         }
 
@@ -416,7 +381,6 @@ public class GeoRSSParser
         Node n = findChildByLocalName(node, "posList");
         if (n == null)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.MissingElement", "posList");
             return null;
         }
 
@@ -428,14 +392,12 @@ public class GeoRSSParser
         String valuesString = node.getTextContent();
         if (valuesString == null)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.NoCoordinates", node.getLocalName());
             return null;
         }
 
         ArrayList<Double> values = getDoubleValues(valuesString);
         if (values.size() < 4)
         {
-            Logging.logger().log(Level.WARNING, "GeoRSS.InvalidCoordinateCount", node.getLocalName());
             return null;
         }
 
@@ -519,7 +481,6 @@ public class GeoRSSParser
             }
             catch (NumberFormatException e)
             {
-                Logging.logger().log(Level.SEVERE, "GeoRSS.NumberFormatException", s);
                 continue;
             }
 
@@ -543,7 +504,6 @@ public class GeoRSSParser
             }
             else
             {
-                Logging.logger().log(Level.WARNING, "GeoRSS.MissingElementContent",  "elev");
             }
         }
 

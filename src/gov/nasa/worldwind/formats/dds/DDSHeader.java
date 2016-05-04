@@ -5,8 +5,7 @@
  */
 package gov.nasa.worldwind.formats.dds;
 
-import gov.nasa.worldwind.util.Logging;
-import gov.nasa.worldwind.util.WWIO;
+import gov.nasa.worldwind.util.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -122,9 +121,7 @@ public class DDSHeader
     {
         if (pixelFormat == null)
         {
-            String message = Logging.getMessage("nullValue.PixelFormatIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.pixelFormat = pixelFormat;
@@ -208,9 +205,7 @@ public class DDSHeader
     {
         if (null == buffer)
         {
-            String message = Logging.getMessage("nullValue.BufferNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.order() != ByteOrder.LITTLE_ENDIAN)
@@ -222,25 +217,19 @@ public class DDSHeader
         if (buffer.remaining() < ddsHeaderSize)
         {
             String reason = buffer.remaining() + " < " + ddsHeaderSize;
-            String message = Logging.getMessage("generic.LengthIsInvalid", reason);
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         int signature = buffer.getInt();
         if (DDSConstants.MAGIC != signature)
         {
-            String message = Logging.getMessage("generic.UnknownFileFormat", signature);
-            Logging.logger().fine(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         int dwSize = buffer.getInt();
         if (dwSize != DDSConstants.DDS_HEADER_SIZE)
         {
-            String message = Logging.getMessage("generic.UnknownContentType", dwSize);
-            Logging.logger().fine(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         DDSHeader ddsHeader = new DDSHeader();
@@ -260,9 +249,7 @@ public class DDSHeader
         dwSize = buffer.getInt();
         if (dwSize != DDSConstants.DDS_PIXEL_FORMAT_SIZE)
         {
-            String message = Logging.getMessage("generic.UnknownContentType", dwSize);
-            Logging.logger().fine(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         pixelFormat.setFlags(buffer.getInt());

@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.wms;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.net.*;
 
 /**
@@ -35,9 +33,7 @@ public final class CapabilitiesRequest extends Request
 
         if (uri == null)
         {
-            String message = Logging.getMessage("nullValue.URIIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
     }
 
@@ -56,16 +52,12 @@ public final class CapabilitiesRequest extends Request
 
         if (uri == null)
         {
-            String message = Logging.getMessage("nullValue.URIIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (service == null)
         {
-            String message = Logging.getMessage("nullValue.WMSServiceNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
     }
 

@@ -10,13 +10,11 @@ package gov.nasa.worldwind.util.xml;
 //import gov.nasa.worldwind.ogc.kml.*;
 
 import gov.nasa.worldwind.ogc.kml.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.xml.XMLConstants;
 import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
 
 /**
  * Provides a global registry of XML parsers. Enables registration of parsers for specific mime types and namespace
@@ -66,9 +64,7 @@ public class XMLEventParserContextFactory
             }
             catch (NoSuchMethodException e)
             {
-                String message = Logging.getMessage("XML.NoCopyConstructor");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
         }
     }
@@ -107,16 +103,12 @@ public class XMLEventParserContextFactory
     {
         if (mimeTypes == null || mimeTypes.length == 0)
         {
-            String message = Logging.getMessage("nullValue.MimeTypeListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (prototypeContext == null)
         {
-            String message = Logging.getMessage("nullValue.ParserContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         parsers.add(new ParserTableEntry(mimeTypes, prototypeContext));
@@ -138,16 +130,12 @@ public class XMLEventParserContextFactory
     {
         if (mimeTypes == null || mimeTypes.length == 0)
         {
-            String message = Logging.getMessage("nullValue.MimeTypeListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (prototypeContext == null)
         {
-            String message = Logging.getMessage("nullValue.ParserContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         parsers.add(0, new ParserTableEntry(mimeTypes, prototypeContext));
@@ -175,9 +163,7 @@ public class XMLEventParserContextFactory
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.MimeTypeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (ParserTableEntry entry : parsers)
@@ -197,9 +183,7 @@ public class XMLEventParserContextFactory
                         }
                         catch (Exception e)
                         {
-                            String message = Logging.getMessage("XML.ExceptionCreatingParserContext", e.getMessage());
-                            Logging.logger().log(Level.WARNING, message);
-                            // continue on to subsequent entries
+                                            // continue on to subsequent entries
                         }
                 }
             }

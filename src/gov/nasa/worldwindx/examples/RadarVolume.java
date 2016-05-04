@@ -105,37 +105,27 @@ public class RadarVolume extends AbstractShape
     {
         if (positions == null || obstructionFlags == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (width < 2)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 2)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (positions.size() < 2 * (width * height))
         {
-            String message = Logging.getMessage("generic.ListLengthInsufficient", positions.size());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (obstructionFlags.length < positions.size())
         {
-            String message = Logging.getMessage("generic.ListLengthInsufficient", obstructionFlags.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.positions = positions;

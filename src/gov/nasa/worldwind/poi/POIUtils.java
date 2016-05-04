@@ -57,24 +57,20 @@ public class POIUtils
             }
             else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST)
             {
-                throw new NoItemException(responseMessage);
+                throw new NoItemException();
             }
             else
             {
-                throw new ServiceException(responseMessage);
+                throw new ServiceException();
             }
         }
         catch (MalformedURLException e) // occurs only if protocol of URL is unknown
         {
-            String msg = Logging.getMessage("generic.MalformedURL", urlString);
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
         catch (IOException e)
         {
-            String msg = Logging.getMessage("POI.ServiceError", urlString);
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-            throw new ServiceException(msg);
+            throw new ServiceException();
         }
         finally
         {

@@ -10,8 +10,7 @@ import gov.nasa.worldwind.WWObjectImpl;
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.AVList;
 import gov.nasa.worldwind.avlist.AVKey;
-import gov.nasa.worldwind.util.Logging;
-import gov.nasa.worldwind.util.WWIO;
+import gov.nasa.worldwind.util.*;
 
 import java.awt.*;
 import java.io.File;
@@ -48,14 +47,12 @@ public class LicenseAgreement extends WWObjectImpl
         if (license == null)
         {
             String message = "nullValue.licenseIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (licenseKey == null)
         {
             String message = "nullValue.licenseKeyIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);   
+            throw new IllegalArgumentException();
         }
 
         this.license = license;
@@ -125,7 +122,6 @@ public class LicenseAgreement extends WWObjectImpl
         catch (Exception e)
         {
             String message = "Exception while installing license key file";
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -141,7 +137,6 @@ public class LicenseAgreement extends WWObjectImpl
         catch (Exception e)
         {
             String message = "Exception while searching license key file";
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
         return keyFile;
     }

@@ -18,10 +18,8 @@ public class ThreadedTaskService extends WWObjectImpl implements TaskService, Th
 {
     static final private int DEFAULT_CORE_POOL_SIZE = 1;
     static final private int DEFAULT_QUEUE_SIZE = 10;
-    private static final String RUNNING_THREAD_NAME_PREFIX = Logging.getMessage(
-        "ThreadedTaskService.RunningThreadNamePrefix");
-    private static final String IDLE_THREAD_NAME_PREFIX = Logging.getMessage(
-        "ThreadedTaskService.IdleThreadNamePrefix");
+    private static final String RUNNING_THREAD_NAME_PREFIX = null;
+    private static final String IDLE_THREAD_NAME_PREFIX = null;
     private ConcurrentLinkedQueue<Runnable> activeTasks; // tasks currently allocated a thread
     private TaskExecutor executor; // thread pool for running retrievers
 
@@ -49,8 +47,6 @@ public class ThreadedTaskService extends WWObjectImpl implements TaskService, Th
 
     public void uncaughtException(Thread thread, Throwable throwable)
     {
-        String message = Logging.getMessage("ThreadedTaskService.UncaughtExceptionDuringTask", thread.getName());
-        Logging.logger().fine(message);
         Thread.currentThread().getThreadGroup().uncaughtException(thread, throwable);
     }
 
@@ -79,9 +75,7 @@ public class ThreadedTaskService extends WWObjectImpl implements TaskService, Th
                         ThreadPoolExecutor threadPoolExecutor)
                     {
                         // Interposes logging for rejected execution
-                        String message = Logging.getMessage("ThreadedTaskService.ResourceRejected", runnable);
-                        Logging.logger().fine(message);
-                        super.rejectedExecution(runnable, threadPoolExecutor);
+                                    super.rejectedExecution(runnable, threadPoolExecutor);
                     }
                 });
         }
@@ -90,25 +84,19 @@ public class ThreadedTaskService extends WWObjectImpl implements TaskService, Th
         {
             if (thread == null)
             {
-                String msg = Logging.getMessage("nullValue.ThreadIsNull");
-                Logging.logger().fine(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (runnable == null)
             {
-                String msg = Logging.getMessage("nullValue.RunnableIsNull");
-                Logging.logger().fine(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (ThreadedTaskService.this.activeTasks.contains(runnable))
             {
                 // Duplicate requests are simply interrupted here. The task itself must check the thread's isInterrupted
                 // flag and actually terminate the task.
-                String message = Logging.getMessage("ThreadedTaskService.CancellingDuplicateTask", runnable);
-                Logging.logger().finer(message);
-                thread.interrupt();
+                    thread.interrupt();
                 return;
             }
 
@@ -126,9 +114,7 @@ public class ThreadedTaskService extends WWObjectImpl implements TaskService, Th
         {
             if (runnable == null)
             {
-                String msg = Logging.getMessage("nullValue.RunnableIsNull");
-                Logging.logger().fine(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             super.afterExecute(runnable, throwable);
@@ -160,9 +146,7 @@ public class ThreadedTaskService extends WWObjectImpl implements TaskService, Th
     {
         if (runnable == null)
         {
-            String message = Logging.getMessage("nullValue.RunnableIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Do not queue duplicates.

@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.gpx;
 
 import gov.nasa.worldwind.tracks.TrackPoint;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.geom.Position;
 
 /**
@@ -34,9 +33,7 @@ public class GpxTrackPoint extends gov.nasa.worldwind.formats.gpx.ElementParser 
 
         if (attributes == null)
         {
-            String msg = Logging.getMessage("nullValue.org.xml.sax.AttributesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (int i = 0; i < attributes.getLength(); i++)
@@ -73,9 +70,7 @@ public class GpxTrackPoint extends gov.nasa.worldwind.formats.gpx.ElementParser 
     {
         if (lname == null)
         {
-            String msg = Logging.getMessage("nullValue.LNameIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         // don't validate uri or qname - they aren't used.
 
@@ -102,9 +97,7 @@ public class GpxTrackPoint extends gov.nasa.worldwind.formats.gpx.ElementParser 
     {
         if (latitude > 90 || latitude < -90)
         {
-            String msg = Logging.getMessage("generic.AngleOutOfRange", latitude);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.latitude = latitude;
@@ -123,9 +116,7 @@ public class GpxTrackPoint extends gov.nasa.worldwind.formats.gpx.ElementParser 
     {
         if (longitude > 180 || longitude < -180)
         {
-            String msg = Logging.getMessage("generic.AngleOutOfRange", longitude);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.longitude = longitude;
@@ -150,9 +141,7 @@ public class GpxTrackPoint extends gov.nasa.worldwind.formats.gpx.ElementParser 
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.latitude = position.getLatitude().getDegrees();
@@ -173,9 +162,7 @@ public class GpxTrackPoint extends gov.nasa.worldwind.formats.gpx.ElementParser 
     {
         if (time == null)
         {
-            String msg = Logging.getMessage("nullValue.TimeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.time = time;
     }

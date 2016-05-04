@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.rpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author dcollins
  * @version $Id: RPFNonpolarFrameStructure.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -37,21 +35,15 @@ class RPFNonpolarFrameStructure extends RPFFrameStructure
     {
         if (!RPFZone.isZoneCode(zoneCode))
         {
-            String message = Logging.getMessage("RPFZone.UnknownZoneCode", zoneCode);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (rpfDataType == null || !RPFDataSeries.isRPFDataType(rpfDataType))
         {
-            String message = Logging.getMessage("RPFDataSeries.UnkownDataType", rpfDataType);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (resolution < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", rpfDataType);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Constant zone properties.

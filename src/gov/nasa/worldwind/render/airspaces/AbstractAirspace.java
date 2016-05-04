@@ -186,8 +186,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
         if (attributes == null)
         {
             String message = "nullValue.AirspaceAttributesIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.attributes = attributes;
@@ -253,8 +252,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
         if (attributes == null)
         {
             String message = "nullValue.AirspaceAttributesIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.attributes = attributes;
@@ -360,9 +358,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (lowerAltitudeDatum == null || upperAltitudeDatum == null)
         {
-            String message = Logging.getMessage("nullValue.AltitudeDatumIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.lowerAltitudeDatum = lowerAltitudeDatum;
@@ -444,9 +440,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (outlinePickWidth < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlinePickWidth = outlinePickWidth;
@@ -550,15 +544,12 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getView() == null)
         {
             String message = "nullValue.DrawingContextViewIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // A null extent indicates an airspace which has no geometry.
@@ -578,9 +569,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeExtent(globe, verticalExaggeration);
@@ -590,16 +579,12 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.getAirspaceInfo(dc).extent;
@@ -696,9 +681,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())
@@ -778,9 +761,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
 
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.pickSupport.clearPickList();
@@ -805,9 +786,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
 
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())
@@ -922,9 +901,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position referencePos = this.getReferencePosition();
@@ -939,9 +916,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position oldRef = this.getReferencePosition();
@@ -962,9 +937,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position oldRef = this.getReferencePosition();
@@ -981,14 +954,12 @@ public abstract class AbstractAirspace extends WWObjectImpl
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] altitudes = this.getAltitudes();
@@ -1001,14 +972,12 @@ public abstract class AbstractAirspace extends WWObjectImpl
         if (locations == null)
         {
             String message = "nullValue.LocationsIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (altitudes == null)
         {
             String message = "nullValue.AltitudesIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int count = locations.size();
@@ -1218,8 +1187,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
         if (gb == null)
         {
             String message = "nullValue.GeometryBuilderIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.geometryBuilder = gb;
@@ -1229,9 +1197,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Iterable<DetailLevel> detailLevels = this.getDetailLevels();
@@ -1261,23 +1227,18 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (geom == null)
         {
             String message = "nullValue.AirspaceGeometryIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = geom.getValue(EXPIRY_TIME);
@@ -1296,16 +1257,12 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         long expiryTime = this.getExpiryTime();
@@ -1341,9 +1298,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         long expiryTime;
@@ -1376,21 +1331,15 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double newElevation = elevation;
@@ -1407,21 +1356,15 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Globe globe;
@@ -1460,16 +1403,13 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (locations == null)
         {
             String message = "nullValue.LocationsIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] altitudes = this.getAltitudes();
@@ -1561,9 +1501,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -1574,9 +1512,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         this.doRestoreState(rs, null);

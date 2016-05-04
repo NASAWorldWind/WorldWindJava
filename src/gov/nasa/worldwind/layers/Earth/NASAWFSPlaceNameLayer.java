@@ -11,7 +11,7 @@ import gov.nasa.worldwind.geom.Sector;
 import gov.nasa.worldwind.layers.placename.PlaceNameLayer;
 import gov.nasa.worldwind.layers.placename.PlaceNameService;
 import gov.nasa.worldwind.layers.placename.PlaceNameServiceSet;
-import gov.nasa.worldwind.util.Logging;
+
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -295,6 +295,6 @@ public class NASAWFSPlaceNameLayer extends PlaceNameLayer {
 
     @Override
     public String toString() {
-        return Logging.getMessage("layers.Earth.PlaceName.Name");
+        return null;
     }
 }

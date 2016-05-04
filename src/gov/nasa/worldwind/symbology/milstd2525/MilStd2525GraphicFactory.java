@@ -12,7 +12,6 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.symbology.*;
 import gov.nasa.worldwind.symbology.milstd2525.graphics.areas.*;
 import gov.nasa.worldwind.symbology.milstd2525.graphics.lines.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -152,9 +151,7 @@ public class MilStd2525GraphicFactory implements TacticalGraphicFactory
 
         if (!MilStd2525TacticalGraphic.class.isAssignableFrom(clazz))
         {
-            String msg = Logging.getMessage("Symbology.CannotCast", clazz, MilStd2525TacticalGraphic.class);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         MilStd2525TacticalGraphic graphic;
@@ -170,8 +167,6 @@ public class MilStd2525GraphicFactory implements TacticalGraphicFactory
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("Symbology.ExceptionCreatingGraphic", e.getMessage());
-            Logging.logger().severe(msg);
             throw new WWRuntimeException(e);
         }
 
@@ -198,9 +193,7 @@ public class MilStd2525GraphicFactory implements TacticalGraphicFactory
         else if (graphic != null)
         {
             String className = graphic.getClass().getName();
-            String msg = Logging.getMessage("Symbology.CannotCast", className, TacticalPoint.class.getName());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return null;
@@ -219,9 +212,7 @@ public class MilStd2525GraphicFactory implements TacticalGraphicFactory
         else if (graphic != null)
         {
             String className = graphic.getClass().getName();
-            String msg = Logging.getMessage("Symbology.CannotCast", className, TacticalCircle.class.getName());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return null;
@@ -238,9 +229,7 @@ public class MilStd2525GraphicFactory implements TacticalGraphicFactory
         else if (graphic != null)
         {
             String className = graphic.getClass().getName();
-            String msg = Logging.getMessage("Symbology.CannotCast", className, TacticalQuad.class.getName());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return null;
@@ -260,9 +249,7 @@ public class MilStd2525GraphicFactory implements TacticalGraphicFactory
         else if (graphic != null)
         {
             String className = graphic.getClass().getName();
-            String msg = Logging.getMessage("Symbology.CannotCast", className, TacticalRoute.class.getName());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return null;

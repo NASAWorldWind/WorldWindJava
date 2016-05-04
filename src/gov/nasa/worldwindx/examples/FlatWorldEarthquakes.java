@@ -24,7 +24,6 @@ import java.awt.event.*;
 import java.nio.DoubleBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
 
 /**
  * Using the EarthFlat and FlatOrbitView to display USGS latest earthquakes rss feed.
@@ -414,7 +413,6 @@ public class FlatWorldEarthquakes extends ApplicationTemplate
                     }
                     catch (Exception e)
                     {
-                        Logging.logger().log(Level.WARNING, "Exception adding earthquake", e);
                     }
                 }
             };

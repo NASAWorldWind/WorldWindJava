@@ -430,16 +430,12 @@ public class WWMath
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (extent == null)
         {
-            String message = Logging.getMessage("nullValue.ExtentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double distance = dc.getView().getEyePoint().distanceTo3(extent.getCenter()) - extent.getRadius();
@@ -462,16 +458,12 @@ public class WWMath
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (extent == null)
         {
-            String message = Logging.getMessage("nullValue.ExtentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Estimate the size in window coordinates W from as follows. Given
@@ -511,23 +503,17 @@ public class WWMath
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (radius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative", radius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (radius == 0)
@@ -685,9 +671,7 @@ public class WWMath
     {
         if (a == null || b == null || c == null)
         {
-            String message = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double x = ((b.y - a.y) * (c.z - a.z)) - ((b.z - a.z) * (c.y - a.y));
@@ -717,9 +701,7 @@ public class WWMath
     {
         if (points == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.util.Iterator<? extends Vec4> iter = points.iterator();
@@ -766,9 +748,7 @@ public class WWMath
     {
         if (locations == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.util.Iterator<? extends LatLon> iter = locations.iterator();
@@ -815,9 +795,7 @@ public class WWMath
     {
         if (points == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double area = computePolygonAreaFromVertices(points);
@@ -843,9 +821,7 @@ public class WWMath
     {
         if (points == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Compute the covariance matrix of the specified points Iterable. Note that Matrix.fromCovarianceOfVertices
@@ -907,16 +883,12 @@ public class WWMath
     {
         if (coordinates == null)
         {
-            String message = Logging.getMessage("nullValue.CoordinatesAreNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (stride < 3)
         {
-            String msg = Logging.getMessage("generic.StrideIsInvalid");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Compute the covariance matrix of the specified points Iterable. Note that Matrix.fromCovarianceOfVertices
@@ -968,9 +940,7 @@ public class WWMath
     {
         if (locations == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.util.Iterator<? extends LatLon> iter = locations.iterator();
@@ -1005,9 +975,7 @@ public class WWMath
     {
         if (points == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.util.Iterator<? extends Vec4> iter = points.iterator();
@@ -1041,9 +1009,7 @@ public class WWMath
     {
         if (location == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.util.Iterator<? extends LatLon> iter = locations.iterator();
@@ -1106,9 +1072,7 @@ public class WWMath
     {
         if (p0 == null || p1 == null || p2 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 v0 = p1.subtract3(p0);
@@ -1180,9 +1144,7 @@ public class WWMath
     {
         if (line == null)
         {
-            String message = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Algorithm from "3-D Computer Graphics" by Samuel R. Buss, 2005, Section X.1.4.
@@ -1274,16 +1236,12 @@ public class WWMath
     {
         if (width <= 0)
         {
-            String message = Logging.getMessage("Geom.WidthInvalid", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("Geom.HeightInvalid", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numIndices = (height - 1) * (2 * width) + (2 * (height - 2));
@@ -1330,16 +1288,12 @@ public class WWMath
     {
         if (width <= 0)
         {
-            String message = Logging.getMessage("Geom.WidthInvalid", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("Geom.HeightInvalid", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numIndices = 2 * (width + height - 2);
@@ -1392,16 +1346,12 @@ public class WWMath
     {
         if (indices == null)
         {
-            String message = Logging.getMessage("nullValue.IndexBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (vertices == null)
         {
-            String message = Logging.getMessage("nullValue.VertexBufferNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numIndices = indices.remaining();
@@ -1638,23 +1588,17 @@ public class WWMath
     {
         if (controlPositions == null || leftPositions == null || rightPositions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (controlPositions.size() < 2)
         {
-            String message = Logging.getMessage("generic.LengthIsInvalid");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Starting at the start of the line, take points three at a time. B is the current control point, A is the next
@@ -1729,23 +1673,17 @@ public class WWMath
     {
         if ((point == null) || (prev == null && next == null))
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (leftPositions == null || rightPositions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Vec4 offset;

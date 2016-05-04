@@ -14,7 +14,6 @@ import gov.nasa.worldwind.globes.EllipsoidalGlobe;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -63,9 +62,7 @@ public class SectorSelector extends WWObjectImpl
     {
         if (worldWindow == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = worldWindow;
@@ -79,23 +76,17 @@ public class SectorSelector extends WWObjectImpl
     {
         if (worldWindow == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (shape == null)
         {
-            String msg = Logging.getMessage("nullValue.Shape");
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (rLayer == null)
         {
-            String msg = Logging.getMessage("nullValue.Layer");
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = worldWindow;
@@ -349,9 +340,7 @@ public class SectorSelector extends WWObjectImpl
     {
         if (event == null)
         {
-            String msg = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().log(java.util.logging.Level.FINE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.getOperation() == NONE
@@ -754,9 +743,7 @@ public class SectorSelector extends WWObjectImpl
         {
             if (shape == null)
             {
-                String message = Logging.getMessage("nullValue.Shape");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.borderShape = shape;

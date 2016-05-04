@@ -112,9 +112,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
     {
         if (imageSource == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageSource = imageSource;
@@ -314,9 +312,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
 
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Texture texture = this.getTexture(dc);
@@ -338,9 +334,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Texture texture = this.getTexture(dc);
@@ -416,9 +410,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
     {
         if (this.getImageSource() == null || !(this.getImageSource() instanceof BufferedImage))
         {
-            String message = Logging.getMessage("generic.NotABufferedImage");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         try
@@ -434,8 +426,6 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("generic.IOExceptionDuringTextureInitialization");
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             this.textureInitializationFailed = true;
             return null;
         }
@@ -453,16 +443,12 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (this.getTextureData() == null) // texture not in cache yet texture data is null, can't initialize
         {
-            String msg = Logging.getMessage("nullValue.TextureDataIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         try
@@ -489,8 +475,6 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
         catch (Exception e)
         {
             String name = this.isBufferedImageSource() ? "BufferedImage" : this.getImageSource().toString();
-            String msg = Logging.getMessage("generic.ExceptionAttemptingToCreateTexture", name);
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             return null;
         }
     }
@@ -549,9 +533,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
         {
             if (wwTexture == null)
             {
-                String message = Logging.getMessage("nullValue.TextureIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.wwTexture = wwTexture;
@@ -634,9 +616,6 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("layers.TextureLayer.ExceptionAttemptingToReadTextureFile",
-                this.getImageSource());
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             this.textureInitializationFailed = true;
             return null;
         }

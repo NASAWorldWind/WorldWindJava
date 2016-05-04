@@ -63,9 +63,7 @@ public class WWXML
             }
             catch (ParserConfigurationException e)
             {   // Note it and continue on. Some Java5 parsers don't support the feature.
-                String message = Logging.getMessage("XML.NonvalidatingNotSupported");
-                Logging.logger().finest(message);
-            }
+                }
         }
 
         try
@@ -74,8 +72,6 @@ public class WWXML
         }
         catch (ParserConfigurationException e)
         {
-            String message = Logging.getMessage("XML.ParserConfigurationException");
-            Logging.logger().finest(message);
             throw new WWRuntimeException(e);
         }
     }
@@ -97,8 +93,6 @@ public class WWXML
         }
         catch (TransformerConfigurationException e)
         {
-            String message = Logging.getMessage("XML.TransformerConfigurationException");
-            Logging.logger().finest(message);
             throw new WWRuntimeException(e);
         }
     }
@@ -117,8 +111,7 @@ public class WWXML
     {
         if (docSource == null || WWUtil.isEmpty(docSource))
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (docSource instanceof URL)
@@ -135,8 +128,7 @@ public class WWXML
         }
         else if (!(docSource instanceof String))
         {
-            String message = Logging.getMessage("generic.UnrecognizedSourceType", docSource.toString());
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String sourceName = (String) docSource;
@@ -166,8 +158,7 @@ public class WWXML
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         InputStream inputStream = WWIO.openFileOrResourceStream(filePath, c);
@@ -191,8 +182,7 @@ public class WWXML
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -202,8 +192,7 @@ public class WWXML
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseXml", url.toString());
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -227,8 +216,7 @@ public class WWXML
     {
         if (inputStream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -237,13 +225,11 @@ public class WWXML
         }
         catch (SAXException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseXml", inputStream);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseXml", inputStream);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -261,16 +247,12 @@ public class WWXML
     {
         if (doc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -281,8 +263,6 @@ public class WWXML
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToWriteXml", filePath);
-            Logging.logger().severe(message);
             throw new WWRuntimeException(e);
         }
     }
@@ -301,16 +281,12 @@ public class WWXML
     {
         if (doc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (outputStream == null)
         {
-            String message = Logging.getMessage("nullValue.OutputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Source source = new DOMSource(doc);
@@ -323,8 +299,6 @@ public class WWXML
         }
         catch (TransformerException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToWriteXml", outputStream);
-            Logging.logger().severe(message);
             throw new WWRuntimeException(e);
         }
     }
@@ -345,9 +319,7 @@ public class WWXML
     {
         if (inputStream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
@@ -360,8 +332,7 @@ public class WWXML
         }
         catch (XMLStreamException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseXml", inputStream);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -380,9 +351,7 @@ public class WWXML
     {
         if (inputStream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return openEventReaderStream(inputStream, true);
@@ -406,9 +375,7 @@ public class WWXML
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         InputStream inputStream = WWIO.openFileOrResourceStream(filePath, c);
@@ -432,9 +399,7 @@ public class WWXML
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -444,8 +409,7 @@ public class WWXML
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseXml", url.toString());
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -479,9 +443,7 @@ public class WWXML
     {
         if (docSource == null || WWUtil.isEmpty(docSource))
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (docSource instanceof URL)
@@ -503,9 +465,7 @@ public class WWXML
         }
         else if (!(docSource instanceof String))
         {
-            String message = Logging.getMessage("generic.UnrecognizedSourceType", docSource.toString());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String sourceName = (String) docSource;
@@ -523,7 +483,7 @@ public class WWXML
      * @param eventReader the event reader to close. If null, this method does nothing.
      * @param name        the name of the event reader to place in the log message if an exception is encountered.
      */
-    public static void closeEventReader(XMLEventReader eventReader, String name)
+    public static void closeEventReader(XMLEventReader eventReader)
     {
         if (eventReader == null)
             return;
@@ -534,9 +494,6 @@ public class WWXML
         }
         catch (XMLStreamException e)
         {
-            String message = Logging.getMessage("generic.ExceptionClosingXmlEventReader",
-                name != null ? name : "Unknown");
-            Logging.logger().severe(message);
         }
     }
 
@@ -557,9 +514,7 @@ public class WWXML
     {
         if (output == null)
         {
-            String message = Logging.getMessage("nullValue.OutputIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (output instanceof OutputStream)
@@ -584,9 +539,7 @@ public class WWXML
     {
         if (eventReader == null)
         {
-            String message = Logging.getMessage("nullValue.EventReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -603,8 +556,6 @@ public class WWXML
         }
         catch (XMLStreamException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseXml", eventReader);
-            Logging.logger().finest(message);
         }
 
         return null;
@@ -628,9 +579,7 @@ public class WWXML
     {
         if (eventReader == null)
         {
-            String message = Logging.getMessage("nullValue.EventReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder();
@@ -671,8 +620,6 @@ public class WWXML
         }
         catch (XMLStreamException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseXml", eventReader);
-            Logging.logger().finest(message);
         }
 
         return sb.toString();
@@ -693,9 +640,7 @@ public class WWXML
     {
         if (doc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -712,8 +657,6 @@ public class WWXML
         }
         catch (XPathExpressionException e)
         {
-            String message = Logging.getMessage("XML.XPathExpressionException");
-            Logging.logger().warning(message);
             return null;
         }
     }
@@ -738,9 +681,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return (context.getLocalName() != null) ? context.getLocalName() : context.getTagName();
@@ -760,9 +701,7 @@ public class WWXML
     {
         if (event == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return (event.getName() != null) ? event.getName().getLocalPart() : null;
@@ -799,16 +738,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (xpath == null)
@@ -840,16 +775,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (xpath == null)
@@ -893,16 +824,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (xpath == null)
@@ -938,16 +865,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (xpath == null)
@@ -963,8 +886,6 @@ public class WWXML
         }
         catch (XPathExpressionException e)
         {
-            String message = Logging.getMessage("XML.InvalidXPathExpression", "internal expression");
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
             return null;
         }
     }
@@ -985,16 +906,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (xpath == null)
@@ -1017,8 +934,6 @@ public class WWXML
         }
         catch (XPathExpressionException e)
         {
-            String message = Logging.getMessage("XML.InvalidXPathExpression", "internal expression");
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
             return null;
         }
     }
@@ -1042,23 +957,17 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (uniqueTag == null)
         {
-            String message = Logging.getMessage("nullValue.UniqueTagIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (xpath == null)
@@ -1096,16 +1005,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String s = null;
@@ -1120,8 +1025,6 @@ public class WWXML
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", s);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1143,16 +1046,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String s = null;
@@ -1167,8 +1066,6 @@ public class WWXML
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", s);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1190,16 +1087,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String s = null;
@@ -1214,8 +1107,6 @@ public class WWXML
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", s);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1237,16 +1128,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String s = null;
@@ -1261,8 +1148,6 @@ public class WWXML
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", s);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1285,9 +1170,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -1310,15 +1193,11 @@ public class WWXML
                 return LatLon.fromRadians(lat, lon);
 
             // Warn that units are not recognized
-            String message = Logging.getMessage("XML.UnitsUnrecognized", units);
-            Logging.logger().warning(message);
 
             return null;
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", path);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1341,9 +1220,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -1361,8 +1238,6 @@ public class WWXML
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", path);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1385,9 +1260,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element el = path == null ? context : getElement(context, path, xpath);
@@ -1422,9 +1295,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element el = path == null ? context : getElement(context, path, xpath);
@@ -1458,9 +1329,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -1488,15 +1357,11 @@ public class WWXML
                 return (long) WWMath.convertHoursToMillis(value);
 
             // Warn that units are not recognized
-            String message = Logging.getMessage("XML.UnitsUnrecognized", units);
-            Logging.logger().warning(message);
 
             return null;
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", path);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1520,16 +1385,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(pattern))
         {
-            String message = Logging.getMessage("nullValue.PatternIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -1551,8 +1412,6 @@ public class WWXML
         }
         catch (ParseException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", path);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -1576,9 +1435,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element el = path == null ? context : WWXML.getElement(context, path, xpath);
@@ -1603,16 +1460,12 @@ public class WWXML
             else
             {
                 // Warn that the FileName property is missing.
-                String message = Logging.getMessage("generic.FileNameIsMissing");
-                Logging.logger().warning(message);
 
                 return null;
             }
         }
 
         // Warn that the screen credit type is unrecognized.
-        String message = Logging.getMessage("generic.UnrecognizedScreenCreditType", type);
-        Logging.logger().warning(message);
 
         return null;
     }
@@ -1632,16 +1485,12 @@ public class WWXML
     {
         if (doc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(name))
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Create a namespace-aware Element node, which supports DOM Level 1 and Level 2 features. This ensures the
@@ -1676,9 +1525,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(name))
@@ -1715,9 +1562,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(path))
@@ -1767,16 +1612,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (string == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element el = appendElementPath(context, path);
@@ -1806,16 +1647,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (strings == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element[] els = new Element[strings.length];
@@ -1850,9 +1687,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return appendText(context, path, Double.toString(value));
@@ -1875,9 +1710,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return appendText(context, path, Integer.toString(value));
@@ -1900,9 +1733,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return appendText(context, path, Long.toString(value));
@@ -1925,9 +1756,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return appendText(context, path, Boolean.toString(value));
@@ -1950,16 +1779,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (ll == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element el = appendElementPath(context, path);
@@ -1987,16 +1812,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element el = appendElementPath(context, path);
@@ -2025,16 +1846,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sectorResolution == null)
         {
-            String message = Logging.getMessage("nullValue.LevelSet.SectorResolutionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element el = appendElementPath(context, path);
@@ -2061,9 +1878,7 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element el = appendElementPath(context, path);
@@ -2090,16 +1905,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (screenCredit == null)
         {
-            String message = Logging.getMessage("nullValue.ScreenCreditIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (screenCredit instanceof ScreenCreditImage)
@@ -2119,17 +1930,12 @@ public class WWXML
             else
             {
                 // Warn that the image source property cannot be written to the document.
-                String message = Logging.getMessage("generic.UnrecognizedImageSourceType",
-                    (imageSource != null) ? imageSource.getClass().getName() : null);
-                Logging.logger().warning(message);
-            }
+                }
 
             return el;
         }
 
         // Warn that the screen credit type is unrecognized.
-        String message = Logging.getMessage("generic.UnrecognizedScreenCreditType", screenCredit);
-        Logging.logger().warning(message);
 
         return null;
     }
@@ -2148,16 +1954,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(name))
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Create a namespace-aware attribute node, which supports DOM Level 1 and Level 2 features. This ensures the
@@ -2180,16 +1982,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         setTextAttribute(context, name, Double.toString(value));
@@ -2209,16 +2007,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         setTextAttribute(context, name, Integer.toString(value));
@@ -2238,16 +2032,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         setTextAttribute(context, name, Long.toString(value));
@@ -2267,16 +2057,12 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         setTextAttribute(context, name, Boolean.toString(value));
@@ -2301,30 +2087,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String s = params.getStringValue(paramKey);
@@ -2355,30 +2133,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2409,30 +2179,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2463,30 +2225,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2517,30 +2271,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2571,30 +2317,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2625,30 +2363,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2679,30 +2409,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2733,30 +2455,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2773,30 +2487,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2838,30 +2544,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2892,30 +2590,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -2957,30 +2647,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3011,30 +2693,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3067,37 +2741,27 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(pattern))
         {
-            String message = Logging.getMessage("nullValue.PatternIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3128,30 +2792,22 @@ public class WWXML
     {
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3178,23 +2834,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String s = params.getStringValue(paramKey);
@@ -3219,23 +2869,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3264,23 +2908,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Double d = AVListImpl.getDoubleValue(params, paramKey);
@@ -3305,23 +2943,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Integer i = AVListImpl.getIntegerValue(params, paramKey);
@@ -3346,23 +2978,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Long l = AVListImpl.getLongValue(params, paramKey);
@@ -3387,23 +3013,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3428,23 +3048,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3469,23 +3083,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3511,23 +3119,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3561,23 +3163,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3603,23 +3199,17 @@ public class WWXML
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(paramKey);
@@ -3633,9 +3223,7 @@ public class WWXML
     {
         if (gms == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         gms = gms.trim();
@@ -3664,9 +3252,7 @@ public class WWXML
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         s = s.trim().toLowerCase();
@@ -3676,8 +3262,6 @@ public class WWXML
             return AVKey.BIG_ENDIAN;
 
         // Warn that the byte order is unrecognized.
-        String message = Logging.getMessage("generic.UnrecognizedByteOrder", s);
-        Logging.logger().warning(message);
 
         return null;
     }
@@ -3697,9 +3281,7 @@ public class WWXML
     {
         if (byteOrder == null)
         {
-            String message = Logging.getMessage("nullValue.ByteOrderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (byteOrder.equals(AVKey.LITTLE_ENDIAN))
@@ -3708,8 +3290,6 @@ public class WWXML
             return "BigEndian";
 
         // Warn that the byte order is unrecognized.
-        String message = Logging.getMessage("generic.UnrecognizedByteOrder", byteOrder);
-        Logging.logger().warning(message);
 
         return null;
     }
@@ -3730,9 +3310,7 @@ public class WWXML
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (s.equals("Float32"))
@@ -3745,8 +3323,6 @@ public class WWXML
             return AVKey.INT8;
 
         // Warn that the data type is unrecognized.
-        String message = Logging.getMessage("generic.UnrecognizedDataType", s);
-        Logging.logger().warning(message);
 
         return null;
     }
@@ -3767,9 +3343,7 @@ public class WWXML
     {
         if (dataType == null)
         {
-            String message = Logging.getMessage("nullValue.DataTypeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dataType.equals(AVKey.FLOAT32))
@@ -3782,8 +3356,6 @@ public class WWXML
             return "Int8";
 
         // Warn that the data type is unrecognized.
-        String message = Logging.getMessage("generic.UnrecognizedDataType", dataType);
-        Logging.logger().warning(message);
 
         return null;
     }
@@ -3804,9 +3376,7 @@ public class WWXML
     {
         if (element == null)
         {
-            String message = Logging.getMessage("nullValue.ElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -3831,8 +3401,6 @@ public class WWXML
         }
         catch (XPathExpressionException e) // should not occur, but log just if it does
         {
-            String message = Logging.getMessage("XML.InvalidXPathExpression", "internal expression");
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
         }
 
         return params;
@@ -3853,16 +3421,12 @@ public class WWXML
     {
         if (parent == null)
         {
-            String message = Logging.getMessage("nullValue.nullValue.ParentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element[] elements = WWXML.getElements(domElement, "Property", null);
@@ -3890,14 +3454,10 @@ public class WWXML
             }
             catch (InvocationTargetException e)
             {
-                String message = Logging.getMessage("generic.ExceptionInvokingPropertyMethod", propertyName, e);
-                Logging.logger().warning(message);
-            }
+                }
             catch (IllegalAccessException e)
             {
-                String message = Logging.getMessage("generic.ExceptionInvokingPropertyMethod", propertyName, e);
-                Logging.logger().warning(message);
-            }
+                }
         }
     }
 }

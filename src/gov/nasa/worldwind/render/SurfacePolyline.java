@@ -71,9 +71,7 @@ public class SurfacePolyline extends AbstractSurfaceShape implements Exportable
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.locations = iterable;
@@ -97,9 +95,7 @@ public class SurfacePolyline extends AbstractSurfaceShape implements Exportable
 
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.locations = iterable;
@@ -130,9 +126,7 @@ public class SurfacePolyline extends AbstractSurfaceShape implements Exportable
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.locations = iterable;
@@ -281,9 +275,7 @@ public class SurfacePolyline extends AbstractSurfaceShape implements Exportable
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         xmlWriter.writeStartElement("Placemark");

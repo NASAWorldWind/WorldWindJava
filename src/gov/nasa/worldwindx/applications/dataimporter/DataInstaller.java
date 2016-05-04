@@ -48,8 +48,6 @@ public class DataInstaller extends AVListImpl
         File installLocation = this.getDefaultInstallLocation(WorldWind.getDataFileStore());
         if (installLocation == null)
         {
-            String message = Logging.getMessage("generic.NoDefaultImportLocation");
-            Logging.logger().severe(message);
             return null;
         }
 
@@ -84,9 +82,7 @@ public class DataInstaller extends AVListImpl
     {
         if (fileSet == null || fileSet.getLength() == 0)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String commonPixelFormat = this.determineCommonPixelFormat(fileSet);
@@ -100,18 +96,14 @@ public class DataInstaller extends AVListImpl
             return new TiledElevationProducer();
         }
 
-        String message = Logging.getMessage("generic.UnexpectedRasterType", commonPixelFormat);
-        Logging.logger().severe(message);
-        throw new IllegalArgumentException(message);
+        throw new IllegalArgumentException();
     }
 
     protected String determineCommonPixelFormat(FileSet fileSet) throws IllegalArgumentException
     {
         if (fileSet == null || fileSet.getLength() == 0)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String commonPixelFormat = null;
@@ -126,10 +118,7 @@ public class DataInstaller extends AVListImpl
                 {
                     if (WWUtil.isEmpty(pixelFormat))
                     {
-                        String message = Logging.getMessage("generic.UnrecognizedSourceType",
-                            file.getAbsolutePath());
-                        Logging.logger().severe(message);
-                        throw new IllegalArgumentException(message);
+                                    throw new IllegalArgumentException();
                     }
                     else
                     {
@@ -140,18 +129,13 @@ public class DataInstaller extends AVListImpl
                 {
                     if (WWUtil.isEmpty(pixelFormat))
                     {
-                        String message = Logging.getMessage("generic.UnrecognizedSourceType",
-                            file.getAbsolutePath());
-                        Logging.logger().severe(message);
-                        throw new IllegalArgumentException(message);
+                                    throw new IllegalArgumentException();
                     }
                     else
                     {
-                        String reason = Logging.getMessage("generic.UnexpectedRasterType", pixelFormat);
+                        String reason = null;
                         String details = file.getAbsolutePath() + ": " + reason;
-                        String message = Logging.getMessage("DataRaster.IncompatibleRaster", details);
-                        Logging.logger().severe(message);
-                        throw new IllegalArgumentException(message);
+                                    throw new IllegalArgumentException();
                     }
                 }
             }
@@ -243,9 +227,7 @@ public class DataInstaller extends AVListImpl
             {
                 Thread.interrupted();
 
-                String msg = Logging.getMessage("generic.OperationCancelled", "Import");
-                Logging.logger().info(msg);
-                throw new WWRuntimeException(msg);
+                    throw new WWRuntimeException();
             }
 
             return WWIO.replaceIllegalFileNameCharacters((String) o);
@@ -338,9 +320,7 @@ public class DataInstaller extends AVListImpl
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         DataRasterReaderFactory readerFactory;
@@ -369,9 +349,7 @@ public class DataInstaller extends AVListImpl
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("generic.ExceptionWhileReading", e.getMessage());
-                Logging.logger().finest(message);
-            }
+                }
         }
 
         return AVKey.IMAGE.equals(params.getStringValue(AVKey.PIXEL_FORMAT))
@@ -382,9 +360,7 @@ public class DataInstaller extends AVListImpl
     {
         if (fileStore == null)
         {
-            String message = Logging.getMessage("nullValue.FileStoreIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (File location : fileStore.getLocations())
@@ -428,9 +404,6 @@ public class DataInstaller extends AVListImpl
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.CreationFromConfigurationFailed",
-                DataConfigurationUtils.getDataConfigDisplayName(domElement));
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
 
         if (layer == null)
@@ -502,9 +475,6 @@ public class DataInstaller extends AVListImpl
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.CreationFromConfigurationFailed",
-                DataConfigurationUtils.getDataConfigDisplayName(domElement));
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
 
         if (elevationModel == null)

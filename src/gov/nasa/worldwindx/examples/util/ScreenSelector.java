@@ -110,9 +110,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         {
             if (point == null)
             {
-                String msg = Logging.getMessage("nullValue.PointIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             this.startPoint.setLocation(point);
@@ -124,9 +122,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         {
             if (point == null)
             {
-                String msg = Logging.getMessage("nullValue.PointIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             this.endPoint.setLocation(point);
@@ -210,9 +206,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         {
             if (dc == null)
             {
-                String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (dc.isOrderedRenderingMode())
@@ -305,9 +299,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
     {
         if (worldWindow == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = worldWindow;
@@ -404,9 +396,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
     {
         if (listener == null)
         {
-            String msg = Logging.getMessage("nullValue.ListenerIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.messageListeners.add(listener);
@@ -416,9 +406,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
     {
         if (listener == null)
         {
-            String msg = Logging.getMessage("nullValue.ListenerIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.messageListeners.remove(listener);
@@ -434,9 +422,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionInvokingMessageListener");
-                Logging.logger().severe(msg);
-                // Don't throw an exception, just log a severe message and continue to the next listener.
+                    // Don't throw an exception, just log a severe message and continue to the next listener.
             }
         }
     }

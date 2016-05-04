@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.formats.tiff;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.io.IOException;
 import java.nio.*;
 import java.nio.channels.FileChannel;
@@ -390,9 +388,7 @@ class TIFFReader
     {
         if (null == colorMapEntry)
         {
-            String message = Logging.getMessage("GeotiffReader.MissingColormap");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         // NOTE: TIFF gives total number of cmap values, which is 3 times the size of cmap table...
@@ -461,7 +457,6 @@ class TIFFReader
         }
         catch(Exception e)
         {
-            Logging.logger().severe(e.getMessage());
         }
         return null;
     }

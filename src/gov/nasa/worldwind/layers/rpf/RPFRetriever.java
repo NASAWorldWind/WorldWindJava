@@ -9,13 +9,11 @@ import gov.nasa.worldwind.WWObjectImpl;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.formats.dds.DDSCompressor;
 import gov.nasa.worldwind.retrieve.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.image.*;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
 
 /**
  * @author dcollins
@@ -48,20 +46,15 @@ class RPFRetriever extends WWObjectImpl implements Retriever
         if (service == null)
         {
             String message = "Service is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (postProcessor == null)
         {
-            String message = Logging.getMessage("nullValue.PostProcessorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.service = service;
@@ -219,8 +212,6 @@ class RPFRetriever extends WWObjectImpl implements Retriever
         catch (Exception e)
         {
             setState(RETRIEVER_STATE_ERROR);
-            Logging.logger().log(Level.SEVERE,
-                Logging.getMessage("URLRetriever.ErrorAttemptingToRetrieve", this.url.toString()), e);
         }
         finally
         {
@@ -242,8 +233,6 @@ class RPFRetriever extends WWObjectImpl implements Retriever
         if (Thread.currentThread().isInterrupted())
         {
             setState(RETRIEVER_STATE_INTERRUPTED);
-            String message = Logging.getMessage("URLRetriever.RetrievalInterruptedFor", this.url.toString());
-            Logging.logger().fine(message);
             return true;
         }
         return false;
@@ -261,8 +250,6 @@ class RPFRetriever extends WWObjectImpl implements Retriever
         catch (Exception e)
         {
             setState(RETRIEVER_STATE_ERROR);
-            Logging.logger().log(Level.SEVERE,
-                Logging.getMessage("Retriever.ErrorPostProcessing", this.url.toString()), e);
             throw e;
         }
     }

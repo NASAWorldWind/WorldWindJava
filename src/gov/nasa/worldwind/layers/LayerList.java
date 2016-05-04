@@ -9,7 +9,6 @@ package gov.nasa.worldwind.layers;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.event.Message;
-import gov.nasa.worldwind.util.Logging;
 
 import java.beans.*;
 import java.util.*;
@@ -31,9 +30,7 @@ public class LayerList extends CopyOnWriteArrayList<Layer> implements WWObject
     {
         if (layers == null)
         {
-            String message = Logging.getMessage("nullValue.LayersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.addAll(Arrays.asList(layers));
@@ -87,9 +84,7 @@ public class LayerList extends CopyOnWriteArrayList<Layer> implements WWObject
     {
         if (lists == null || lists.length == 0)
         {
-            String message = Logging.getMessage("nullValue.LayersListArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LayerList list = lists[0];
@@ -125,9 +120,7 @@ public class LayerList extends CopyOnWriteArrayList<Layer> implements WWObject
     {
         if (layer == null)
         {
-            String message = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LayerList copy = makeShallowCopy(this);
@@ -142,9 +135,7 @@ public class LayerList extends CopyOnWriteArrayList<Layer> implements WWObject
     {
         if (layer == null)
         {
-            String message = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LayerList copy = makeShallowCopy(this);
@@ -157,9 +148,7 @@ public class LayerList extends CopyOnWriteArrayList<Layer> implements WWObject
     {
         if (layer == null)
         {
-            String msg = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.contains(layer))
@@ -213,9 +202,7 @@ public class LayerList extends CopyOnWriteArrayList<Layer> implements WWObject
     {
         if (layer == null)
         {
-            String message = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Layer oldLayer = this.get(index);
@@ -395,9 +382,7 @@ public class LayerList extends CopyOnWriteArrayList<Layer> implements WWObject
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (Layer l : this)
@@ -413,9 +398,7 @@ public class LayerList extends CopyOnWriteArrayList<Layer> implements WWObject
     {
         if (classToFind == null)
         {
-            String message = Logging.getMessage("nullValue.ClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<Layer> layers = new ArrayList<Layer>();

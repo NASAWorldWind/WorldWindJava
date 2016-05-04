@@ -13,7 +13,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
-import java.net.URL;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -33,7 +32,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
     private String angleFormat = Angle.ANGLE_FORMAT_DD;
 
     protected final JLabel latDisplay = new JLabel("");
-    protected final JLabel lonDisplay = new JLabel(Logging.getMessage("term.OffGlobe"));
+    protected final JLabel lonDisplay = new JLabel((String) null);
     protected final JLabel altDisplay = new JLabel("");
     protected final JLabel eleDisplay = new JLabel("");
 
@@ -45,7 +44,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
     {
         super(new GridLayout(1, 0));
 
-        final JLabel heartBeat = new JLabel(Logging.getMessage("term.Downloading"));
+        final JLabel heartBeat = new JLabel((String) null);
 
         altDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         latDisplay.setHorizontalAlignment(SwingConstants.CENTER);
@@ -74,7 +73,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
 
                 if (!isNetworkAvailable.get())
                 {
-                    heartBeat.setText(Logging.getMessage("term.NoNetwork"));
+                    heartBeat.setText(null);
                     heartBeat.setForeground(new Color(255, 0, 0, MAX_ALPHA));
                     return;
                 }
@@ -83,7 +82,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
                 int alpha = color.getAlpha();
                 if (isNetworkAvailable.get() && WorldWind.getRetrievalService().hasActiveTasks())
                 {
-                    heartBeat.setText(Logging.getMessage("term.Downloading"));
+                    heartBeat.setText(null);
                     if (alpha >= MAX_ALPHA)
                         alpha = MAX_ALPHA;
                     else
@@ -106,10 +105,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
                 public void propertyChange(PropertyChangeEvent evt)
                 {
                     Object nv = evt.getNewValue();
-                    String message = Logging.getMessage("NetworkStatus.UnavailableHost",
-                        nv != null && nv instanceof URL ? ((URL) nv).getHost() : "Unknown");
-                    Logging.logger().info(message);
-                }
+                        }
             });
 
         WorldWind.getNetworkStatus().addPropertyChangeListener(NetworkStatus.HOST_AVAILABLE,
@@ -118,10 +114,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
                 public void propertyChange(PropertyChangeEvent evt)
                 {
                     Object nv = evt.getNewValue();
-                    String message = Logging.getMessage("NetworkStatus.HostNowAvailable",
-                        nv != null && nv instanceof URL ? ((URL) nv).getHost() : "Unknown");
-                    Logging.logger().info(message);
-                }
+                        }
             });
     }
 
@@ -195,9 +188,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
     {
         if (unit == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.elevationUnit = unit;
@@ -212,9 +203,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
     {
         if (format == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.angleFormat = format;
@@ -223,7 +212,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
     protected String makeCursorElevationDescription(double metersElevation)
     {
         String s;
-        String elev = Logging.getMessage("term.Elev");
+        String elev = null;
         if (UNIT_IMPERIAL.equals(elevationUnit))
             s = String.format(elev + " %,7d feet", (int) (WWMath.convertMetersToFeet(metersElevation)));
         else // Default to metric units.
@@ -234,7 +223,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
     protected String makeEyeAltitudeDescription(double metersAltitude)
     {
         String s;
-        String altitude = Logging.getMessage("term.Altitude");
+        String altitude = null;
         if (UNIT_IMPERIAL.equals(elevationUnit))
         {
             double miles = WWMath.convertMetersToMiles(metersAltitude);
@@ -276,7 +265,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
         else
         {
             latDisplay.setText("");
-            lonDisplay.setText(Logging.getMessage("term.OffGlobe"));
+            lonDisplay.setText(null);
             eleDisplay.setText("");
         }
     }
@@ -294,7 +283,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
                     altDisplay.setText(makeEyeAltitudeDescription(
                         eventSource.getView().getEyePosition().getElevation()));
                 else
-                    altDisplay.setText(Logging.getMessage("term.Altitude"));
+                    altDisplay.setText(null);
             }
         });
     }

@@ -1350,9 +1350,7 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
     {
         if (attributes == null)
         {
-            String msg = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.normalAttributes = attributes;
@@ -1377,9 +1375,7 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
     {
         if (attributes == null)
         {
-            String msg = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.highlightAttributes = attributes;
@@ -1849,15 +1845,11 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
         {
             if (text == null)
             {
-                String message = Logging.getMessage("nullValue.StringIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (font == null)
             {
-                String message = Logging.getMessage("nullValue.FontIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.text = text;
@@ -1931,9 +1923,7 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
         {
             if (node == null)
             {
-                String message = Logging.getMessage("nullValue.TreeNodeIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.node = node;

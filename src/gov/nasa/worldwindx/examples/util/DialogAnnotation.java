@@ -8,7 +8,6 @@ package gov.nasa.worldwindx.examples.util;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.GL2;
 
@@ -186,9 +185,7 @@ public abstract class DialogAnnotation extends GlobeAnnotation implements java.a
         {
             if (angle == null)
             {
-                String message = Logging.getMessage("nullValue.AngleIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             double a = angle.degrees % 360;
@@ -205,9 +202,7 @@ public abstract class DialogAnnotation extends GlobeAnnotation implements java.a
         {
             if (angle == null)
             {
-                String message = Logging.getMessage("nullValue.AngleIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.increment = angle;

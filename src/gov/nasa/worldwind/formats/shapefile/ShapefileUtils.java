@@ -25,9 +25,7 @@ public class ShapefileUtils
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         InputStream shpStream = null, shxStream = null, dbfStream = null, prjStream = null;
@@ -65,14 +63,12 @@ public class ShapefileUtils
         catch (Exception e)
         {
             throw new WWRuntimeException(
-                Logging.getMessage("generic.ExceptionAttemptingToReadFrom", file.getPath()), e);
+                e);
         }
 
         if (shpStream == null)
         {
-            String message = Logging.getMessage("SHP.UnrecognizedShapefile", file.getPath());
-            Logging.logger().severe(message);
-            throw new WWUnrecognizedException(message);
+            throw new WWUnrecognizedException();
         }
 
         return new Shapefile(shpStream, shxStream, dbfStream, prjStream);
@@ -92,9 +88,7 @@ public class ShapefileUtils
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int[] array = new int[numEntries];
@@ -120,9 +114,7 @@ public class ShapefileUtils
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] array = new double[numEntries];

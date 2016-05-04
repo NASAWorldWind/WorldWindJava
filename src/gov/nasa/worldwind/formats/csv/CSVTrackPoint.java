@@ -5,7 +5,6 @@
  */
 package gov.nasa.worldwind.formats.csv;
 
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.tracks.TrackPoint;
 
@@ -28,15 +27,11 @@ public class CSVTrackPoint implements TrackPoint
     {
         if (words == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (words.length < 2)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", words.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.doValues(words);
@@ -94,9 +89,7 @@ public class CSVTrackPoint implements TrackPoint
     {
         if (latitude > 90 || latitude < -90)
         {
-            String msg = Logging.getMessage("generic.AngleOutOfRange", latitude);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.latitude = latitude;
@@ -115,9 +108,7 @@ public class CSVTrackPoint implements TrackPoint
     {
         if (longitude > 180 || longitude < -180)
         {
-            String msg = Logging.getMessage("generic.AngleOutOfRange", longitude);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.longitude = longitude;
@@ -132,9 +123,7 @@ public class CSVTrackPoint implements TrackPoint
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.latitude = position.getLatitude().getDegrees();

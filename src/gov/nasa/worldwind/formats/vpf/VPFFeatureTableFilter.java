@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.vpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.io.FileFilter;
 
 /**
@@ -33,9 +31,7 @@ public class VPFFeatureTableFilter implements FileFilter
     {
         if (file == null)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return VPFUtils.getFeatureTypeName(file.getName()) != null;

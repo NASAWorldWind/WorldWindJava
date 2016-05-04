@@ -159,9 +159,7 @@ public class Box implements Extent, Renderable
     {
         if (axes == null || axes[0] == null || axes[1] == null || axes[2] == null)
         {
-            String msg = Logging.getMessage("nullValue.AxesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.ru = axes[0];
@@ -206,9 +204,7 @@ public class Box implements Extent, Renderable
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.ru = new Vec4(1, 0, 0, 1);
@@ -451,17 +447,13 @@ public class Box implements Extent, Renderable
     {
         if (points == null)
         {
-            String msg = Logging.getMessage("nullValue.PointListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4[] axes = WWMath.computePrincipalAxes(points);
         if (axes == null)
         {
-            String msg = Logging.getMessage("generic.ListIsEmpty");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 r = axes[0];
@@ -534,24 +526,18 @@ public class Box implements Extent, Renderable
     {
         if (coordinates == null)
         {
-            String msg = Logging.getMessage("nullValue.CoordinatesAreNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (stride < 3)
         {
-            String msg = Logging.getMessage("generic.StrideIsInvalid", stride);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4[] axes = WWMath.computePrincipalAxes(coordinates, stride);
         if (axes == null)
         {
-            String msg = Logging.getMessage("generic.ListIsEmpty");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 r = axes[0];
@@ -618,9 +604,7 @@ public class Box implements Extent, Renderable
     {
         if (iterable == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<Box> boxes = new ArrayList<Box>();
@@ -666,10 +650,8 @@ public class Box implements Extent, Renderable
 
         if (frustum == null)
         {
-            String message = Logging.getMessage("nullValue.FrustumIsNull");
 
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double intersectionPoint;
@@ -773,9 +755,7 @@ public class Box implements Extent, Renderable
     {
         if (plane == null)
         {
-            String message = Logging.getMessage("nullValue.PlaneIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double effectiveRadius = this.getEffectiveRadius(plane);
@@ -812,9 +792,7 @@ public class Box implements Extent, Renderable
     {
         if (line == null)
         {
-            String message = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return WWMath.polytopeIntersect(line, this.planes) != null;
@@ -825,9 +803,7 @@ public class Box implements Extent, Renderable
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Implementation based on "Real-time Bounding Box Area Computation" by Dieter Schmalstieg and Robert F. Tobler,
@@ -1007,9 +983,7 @@ public class Box implements Extent, Renderable
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.isPickingMode())

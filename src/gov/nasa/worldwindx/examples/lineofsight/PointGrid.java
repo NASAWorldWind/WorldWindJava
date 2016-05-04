@@ -411,9 +411,7 @@ public class PointGrid extends WWObjectImpl implements OrderedRenderable, Highli
         // line to the ordered renderable list during pick and render. The third call just draws the ordered renderable.
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getSurfaceGeometry() == null)

@@ -99,9 +99,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
 
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.colladaDoc = docSource;
@@ -122,9 +120,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
 
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.colladaDoc = new ColladaFile(docSource);
@@ -146,9 +142,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
 
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         URLConnection conn = docSource.openConnection();
@@ -171,9 +165,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
 
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.colladaDoc = new ColladaInputStream(docSource, null);
@@ -196,9 +188,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     {
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (docSource instanceof File)
@@ -244,9 +234,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
 
         if (colladaRoot == null)
         {
-            String message = Logging.getMessage("generic.UnrecognizedSourceTypeOrUnavailableSource",
-                docSource.toString());
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         colladaRoot.parse();
@@ -265,7 +253,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
         this.eventStream = new BufferedInputStream(this.getColladaDoc().getInputStream());
         this.eventReader = this.createReader(this.eventStream);
         if (this.eventReader == null)
-            throw new WWRuntimeException(Logging.getMessage("XML.UnableToOpenDocument", this.getColladaDoc()));
+            throw new WWRuntimeException();
 
         this.parserContext = this.createParserContext(this.eventReader);
     }
@@ -301,9 +289,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;
@@ -478,9 +464,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     {
         if (link == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -524,8 +508,6 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.UnableToResolveReference", link);
-            Logging.logger().warning(message);
         }
 
         return null;
@@ -550,9 +532,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     {
         if (linkBase == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -581,8 +561,6 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.UnableToResolveReference", linkBase + "/" + linkRef);
-            Logging.logger().warning(message);
             return null;
         }
     }
@@ -610,9 +588,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     {
         if (linkBase == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -651,8 +627,6 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.UnableToResolveReference", linkBase + "/" + linkRef);
-            Logging.logger().warning(message);
             return null;
         }
     }
@@ -793,8 +767,6 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionClosingXmlEventReader");
-            Logging.logger().warning(message);
         }
     }
 
@@ -827,9 +799,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     {
         if (tc == null)
         {
-            String message = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ColladaScene scene = this.getScene();

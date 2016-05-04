@@ -64,16 +64,12 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (opacity < 0.0 || opacity > 1.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "opacity=" + opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Configure this AirspaceAttributes to preserve the original defaults of BasicAirspaceAttributes and
@@ -142,9 +138,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setInteriorMaterial(material);
@@ -169,9 +163,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setInteriorOpacity(opacity);
@@ -186,9 +178,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.applyMaterial(dc, this.getInteriorMaterial(), this.getInteriorOpacity(), enableMaterial);
@@ -203,9 +193,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.applyMaterial(dc, this.getOutlineMaterial(), this.getOutlineOpacity(), enableMaterial);

@@ -8,7 +8,6 @@ package gov.nasa.worldwind.util.measure;
 
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.render.Polyline;
 
 import java.util.ArrayList;
@@ -68,9 +67,7 @@ public class LengthMeasurer implements MeasurableLength
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<Position> newPositions = new ArrayList<Position>();
@@ -86,9 +83,7 @@ public class LengthMeasurer implements MeasurableLength
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.positions = positions;
@@ -159,9 +154,7 @@ public class LengthMeasurer implements MeasurableLength
     {
         if (length <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.maxSegmentLength != length)
@@ -212,9 +205,7 @@ public class LengthMeasurer implements MeasurableLength
     {
         if (steps < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", steps);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.lengthTerrainSamplingSteps != steps)
@@ -238,9 +229,7 @@ public class LengthMeasurer implements MeasurableLength
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.length = this.computeLength(globe, this.followTerrain);

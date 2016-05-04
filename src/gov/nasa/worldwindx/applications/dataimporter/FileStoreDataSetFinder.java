@@ -42,9 +42,7 @@ public class FileStoreDataSetFinder
     {
         if (cacheRoot == null)
         {
-            String message = Logging.getMessage("nullValue.FileStorePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String[] configFilePaths = WWIO.listDescendantFilenames(cacheRoot, new DataConfigurationFilter(), false);

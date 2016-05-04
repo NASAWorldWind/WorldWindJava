@@ -87,9 +87,9 @@ public class RPFColorMap
     private void loadColorMaps(java.nio.ByteBuffer buffer, int colormapSubsectionOffset)
     {
         if (0 == this.numOfColorRecords)
-            throw new NITFSRuntimeException("NITFSReader.InvalidNumberOfColorRecords");
+            throw new NITFSRuntimeException();
         if (0 == this.colorElementLength)
-            throw new NITFSRuntimeException("NITFSReader.InvalidLengthOfColorRecordElement");
+            throw new NITFSRuntimeException();
 
         buffer.position((int) (colormapSubsectionOffset + this.colorTableOffset));
         int mapLength = (int)(this.numOfColorRecords * this.colorElementLength);
@@ -100,9 +100,9 @@ public class RPFColorMap
     private void loadHistogram(java.nio.ByteBuffer buffer, int colormapSubsectionOffset)
     {
         if (0 == this.numOfColorRecords)
-            throw new NITFSRuntimeException("NITFSReader.InvalidNumberOfColorRecords");
+            throw new NITFSRuntimeException();
         if (0 == this.histogramRecordLength)
-            throw new NITFSRuntimeException("NITFSReader.InvalidLengthOfHistogramRecordElement");
+            throw new NITFSRuntimeException();
         // skip the loading of the histogram table, just increment a position in the buffer
         buffer.position((int) (colormapSubsectionOffset + this.histogramTableOffset
             + (this.numOfColorRecords * this.histogramRecordLength)));

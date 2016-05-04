@@ -8,7 +8,6 @@ package gov.nasa.worldwind.geom.coords;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.globes.*;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * Class with static methods for datum transformation.  Currently shifts between NAD27 and WGS84. Other shifts will be
@@ -41,9 +40,7 @@ public class DatumTransformation
     {
         if (pos == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         //todo cite source for shift values
@@ -68,9 +65,7 @@ public class DatumTransformation
     {
         if (pos == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         //todo cite source for shift values

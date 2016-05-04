@@ -8,7 +8,6 @@ package gov.nasa.worldwindx.examples.util;
 import gov.nasa.worldwind.View;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.view.ViewUtil;
 
 import java.awt.*;
@@ -207,30 +206,22 @@ public class ExtentVisibilitySupport
     {
         if (frustum == null)
         {
-            String message = Logging.getMessage("nullValue.FrustumIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (viewport == null)
         {
-            String message = Logging.getMessage("nullValue.ViewportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (viewport.getWidth() <= 0d)
         {
-            String message = Logging.getMessage("Geom.ViewportWidthInvalid", viewport.getWidth());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (viewport.getHeight() <= 0d)
         {
-            String message = Logging.getMessage("Geom.ViewportHeightInvalid", viewport.getHeight());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Iterable<? extends Extent> extents = this.getExtents();
@@ -283,9 +274,7 @@ public class ExtentVisibilitySupport
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.areExtentsContained(view.getFrustumInModelCoordinates(), view.getViewport());
@@ -326,52 +315,39 @@ public class ExtentVisibilitySupport
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (eyePoint == null)
         {
-            String message = Logging.getMessage("nullValue.EyeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (centerPoint == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (upVector == null)
         {
-            String message = Logging.getMessage("nullValue.UpIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (fieldOfView == null)
         {
-            String message = Logging.getMessage("nullValue.FOVIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (viewport == null)
         {
-            String message = Logging.getMessage("nullValue.ViewportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String message = this.validate(eyePoint, centerPoint, upVector, fieldOfView, viewport,
             nearClipDistance, farClipDistance);
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Gather the model coordinate and screen coordinate extents associated with this ExtentVisibilitySupport.
@@ -446,16 +422,12 @@ public class ExtentVisibilitySupport
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Vec4 eye = view.getEyePoint();
@@ -476,22 +448,22 @@ public class ExtentVisibilitySupport
         Vec4 u = up.normalize3();
 
         if (eye.distanceTo3(center) <= EPSILON)
-            return Logging.getMessage("Geom.EyeAndCenterInvalid", eye, center);
+            return null;
 
         if (f.dot3(u) >= 1d - EPSILON)
-            return Logging.getMessage("Geom.UpAndLineOfSightInvalid", up, f);
+            return null;
 
         if (fieldOfView.compareTo(Angle.ZERO) < 0 || fieldOfView.compareTo(Angle.POS180) > 0)
-            return Logging.getMessage("Geom.ViewFrustum.FieldOfViewOutOfRange");
+            return null;
 
         if (viewport.getWidth() <= 0d)
-            return Logging.getMessage("Geom.ViewportWidthInvalid", viewport.getWidth());
+            return null;
 
         if (viewport.getHeight() <= 0d)
-            return Logging.getMessage("Geom.ViewportHeightInvalid", viewport.getHeight());
+            return null;
 
         if (nearClipDistance < 0d || farClipDistance < 0d || nearClipDistance > farClipDistance)
-            return Logging.getMessage("Geom.ViewFrustum.ClippingDistanceOutOfRange");
+            return null;
 
         return null;
     }

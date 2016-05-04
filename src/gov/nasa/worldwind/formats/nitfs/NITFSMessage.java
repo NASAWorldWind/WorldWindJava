@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.formats.nitfs;
 
 import gov.nasa.worldwind.formats.rpf.RPFUserDefinedHeaderSegment;
-import gov.nasa.worldwind.util.Logging;
 
 import java.io.IOException;
 
@@ -128,7 +127,7 @@ public class NITFSMessage
                     break;
 
                 default:
-                    throw new NITFSRuntimeException("NITFSReader.UnknownOrUnsupportedSegment", segType.toString());
+                    throw new NITFSRuntimeException(segType.toString());
 
             }
             this.segments.add(segment);
@@ -149,7 +148,7 @@ public class NITFSMessage
         String fmtId = NITFSUtil.getString(roBuffer, 0, 4);
         if( 0 != "NITF".compareTo(fmtId) && 0 != "NSIF".compareTo(fmtId))
         {
-            throw new NITFSRuntimeException("NITFSReader.UnknownOrUnsupportedNITFSFormat", file.getCanonicalPath());
+            throw new NITFSRuntimeException(file.getCanonicalPath());
         }
 
         return new NITFSMessage(roBuffer);
@@ -159,13 +158,11 @@ public class NITFSMessage
         throws IOException, IllegalArgumentException, NITFSRuntimeException {
         if (null == file)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!file.exists() || !file.canRead())
         {
-            throw new NITFSRuntimeException("NITFSReader.NoFileOrNoPermission", file.getCanonicalPath());
+            throw new NITFSRuntimeException(file.getCanonicalPath());
         }
     }
 }

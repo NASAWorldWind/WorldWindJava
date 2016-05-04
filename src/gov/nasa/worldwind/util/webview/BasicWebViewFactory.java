@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.util.webview;
 
 import gov.nasa.worldwind.Configuration;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 
@@ -30,9 +29,7 @@ public class BasicWebViewFactory implements WebViewFactory
     {
         if (frameSize == null)
         {
-            String message = Logging.getMessage("nullValue.SizeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (Configuration.isLinuxOS())
@@ -100,9 +97,6 @@ public class BasicWebViewFactory implements WebViewFactory
     @SuppressWarnings( {"UnusedDeclaration"})
     protected WebView createUnknownOSWebView(Dimension frameSize)
     {
-        String message = Logging.getMessage("NativeLib.UnsupportedOperatingSystem", "WebView",
-            System.getProperty("os.name"));
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 }

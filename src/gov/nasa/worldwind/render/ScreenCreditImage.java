@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.render;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.awt.*;
 
 /**
@@ -24,9 +22,7 @@ public class ScreenCreditImage extends ScreenImage implements ScreenCredit
     {
         if (imageSource == null)
         {
-            String msg = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.name = name;
@@ -37,9 +33,7 @@ public class ScreenCreditImage extends ScreenImage implements ScreenCredit
     {
         if (viewport == null)
         {
-            String msg = Logging.getMessage("nullValue.ViewportIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.viewport = viewport;

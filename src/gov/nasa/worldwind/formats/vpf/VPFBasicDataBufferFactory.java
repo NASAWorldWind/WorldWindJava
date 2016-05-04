@@ -192,9 +192,7 @@ public abstract class VPFBasicDataBufferFactory implements VPFDataBufferFactory
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         switch (s.length())
@@ -412,15 +410,11 @@ public abstract class VPFBasicDataBufferFactory implements VPFDataBufferFactory
             }
             catch (IllegalCharsetNameException e)
             {
-                String message = Logging.getMessage("generic.InvalidCharsetName", charsetName);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             catch (UnsupportedCharsetException e)
             {
-                String message = Logging.getMessage("generic.InvalidCharsetName", charsetName);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
         }
 

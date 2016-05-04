@@ -493,14 +493,10 @@ public class SlideShowAnnotationController extends DialogAnnotationController
             }
             else
             {
-                String message = Logging.getMessage("generic.UnrecognizedSourceType", source);
-                Logging.logger().severe(message);
-            }
+                }
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToReadFrom", source);
-            Logging.logger().severe(message);
         }
 
         return null;

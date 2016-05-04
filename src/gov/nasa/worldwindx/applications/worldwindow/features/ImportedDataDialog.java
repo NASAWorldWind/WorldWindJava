@@ -360,8 +360,6 @@ public class ImportedDataDialog extends AbstractFeatureDialog implements Network
         File importLocation = DataImportUtil.getDefaultImportLocation(fileStore);
         if (importLocation == null)
         {
-            String message = Logging.getMessage("generic.NoDefaultImportLocation");
-            Logging.logger().severe(message);
             return null;
         }
 

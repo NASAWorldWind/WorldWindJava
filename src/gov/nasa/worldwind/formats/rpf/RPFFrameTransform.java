@@ -7,7 +7,6 @@ package gov.nasa.worldwind.formats.rpf;
 
 import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwind.geom.Sector;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.image.*;
 
@@ -25,21 +24,15 @@ public abstract class RPFFrameTransform
     {
         if (!RPFZone.isZoneCode(zoneCode))
         {
-            String message = Logging.getMessage("RPFZone.UnknownZoneCode", zoneCode);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (rpfDataType == null || !RPFDataSeries.isRPFDataType(rpfDataType))
         {
-            String message = Logging.getMessage("RPFDataSeries.UnkownDataType", rpfDataType);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (resolution < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", resolution);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return newFrameTransform(zoneCode, rpfDataType, resolution);

@@ -55,9 +55,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
 
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.makeLevelZeroCells(sector);
@@ -92,9 +90,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
 
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.allowDuplicates = allowDuplicates;
@@ -191,16 +187,12 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
     {
         if (item == null)
         {
-            String message = Logging.getMessage("nullValue.ItemIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (itemCoords == null)
         {
-            String message = Logging.getMessage("nullValue.CoordinatesAreNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.currentItem = item;
@@ -388,9 +380,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
     {
         if (location == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FindIntersectingBitsOp op = new FindIntersectingBitsOp(this);
@@ -415,9 +405,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
     {
         if (locations == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FindIntersectingBitsOp op = new FindIntersectingBitsOp(this);
@@ -447,9 +435,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
     {
         if (testSector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FindIntersectingBitsOp op = new FindIntersectingBitsOp(this);
@@ -474,9 +460,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
     {
         if (testSectors == null)
         {
-            String message = Logging.getMessage("nullValue.SectorListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FindIntersectingBitsOp op = new FindIntersectingBitsOp(this);
@@ -507,9 +491,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
     {
         if (geometryList == null)
         {
-            String message = Logging.getMessage("nullValue.SectorGeometryListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FindIntersectingBitsOp op = new FindIntersectingBitsOp(this);

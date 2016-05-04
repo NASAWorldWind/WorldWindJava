@@ -51,16 +51,12 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
 
         if (tc == null)
         {
-            String msg = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (overlay == null)
         {
-            String msg = Logging.getMessage("nullValue.ParentIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Positions are specified either as a kml:LatLonBox or a gx:LatLonQuad

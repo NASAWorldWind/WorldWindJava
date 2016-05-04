@@ -75,7 +75,6 @@ public class BasicGLCapabilitiesChooser extends DefaultGLCapabilitiesChooser
         }
         catch (NativeWindowException e)  // superclass cannot find a match
         {
-            Logging.logger().warning(Logging.getMessage("generic.StereoNotSupported"));
         }
 
         GLCapabilities fallback = (GLCapabilities) desired.cloneMutable();

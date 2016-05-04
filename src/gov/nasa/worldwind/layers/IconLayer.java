@@ -53,15 +53,11 @@ public class IconLayer extends AbstractLayer
     {
         if (icon == null)
         {
-            String msg = Logging.getMessage("nullValue.Icon");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (this.iconsOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.icons.add(icon, icon.getPosition().asDegreesArray());
@@ -80,15 +76,11 @@ public class IconLayer extends AbstractLayer
     {
         if (icons == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (this.iconsOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         for (WWIcon icon : icons)
@@ -112,15 +104,11 @@ public class IconLayer extends AbstractLayer
     {
         if (icon == null)
         {
-            String msg = Logging.getMessage("nullValue.Icon");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (this.iconsOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.icons.remove(icon);
@@ -136,9 +124,7 @@ public class IconLayer extends AbstractLayer
     {
         if (this.iconsOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.clearIcons();
@@ -435,6 +421,6 @@ public class IconLayer extends AbstractLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.IconLayer.Name");
+        return null;
     }
 }

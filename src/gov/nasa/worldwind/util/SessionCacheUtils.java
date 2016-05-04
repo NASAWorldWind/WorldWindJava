@@ -44,23 +44,17 @@ public class SessionCacheUtils
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cache == null)
         {
-            String message = Logging.getMessage("nullValue.CacheIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cacheKey == null)
         {
-            String message = Logging.getMessage("nullValue.CacheKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WorldWind.getNetworkStatus().isHostUnavailable(url))
@@ -81,8 +75,6 @@ public class SessionCacheUtils
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("layers.TiledImageLayer.ExceptionRetrievingResources", url.toString());
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -105,16 +97,12 @@ public class SessionCacheUtils
     {
         if (cache == null)
         {
-            String message = Logging.getMessage("nullValue.CacheIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cacheKey == null)
         {
-            String message = Logging.getMessage("nullValue.CacheKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = cache.get(cacheKey);
@@ -144,23 +132,17 @@ public class SessionCacheUtils
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cache == null)
         {
-            String message = Logging.getMessage("nullValue.CacheIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cacheKey == null)
         {
-            String message = Logging.getMessage("nullValue.CacheKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         WMSCapabilities caps = getSessionCapabilities(cache, cacheKey, url.toString());

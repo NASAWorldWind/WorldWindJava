@@ -136,9 +136,7 @@ public class Cake extends AbstractAirspace
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // If the parent Cake is not visible, then return false immediately without testing the child layers.        
@@ -208,14 +206,12 @@ public class Cake extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.doMoveTo(oldRef, newRef);
@@ -233,14 +229,12 @@ public class Cake extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.doMoveTo(oldRef, newRef);
@@ -262,9 +256,7 @@ public class Cake extends AbstractAirspace
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())
@@ -287,9 +279,7 @@ public class Cake extends AbstractAirspace
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())

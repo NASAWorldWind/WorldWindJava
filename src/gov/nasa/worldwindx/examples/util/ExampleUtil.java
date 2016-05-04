@@ -37,9 +37,7 @@ public class ExampleUtil
     {
         if (WWUtil.isEmpty(path))
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         InputStream stream = null;
@@ -83,9 +81,7 @@ public class ExampleUtil
     {
         if (WWUtil.isEmpty(path))
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         InputStream stream = null;
@@ -122,16 +118,12 @@ public class ExampleUtil
     {
         if (wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Create a bounding box for the specified sector in order to estimate its size in model coordinates.
@@ -164,9 +156,7 @@ public class ExampleUtil
     {
         if (WWUtil.isEmpty(path))
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<Double> list = new ArrayList<Double>();

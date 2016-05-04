@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.vpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author dcollins
  * @version $Id: VPFSymbolKey.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -48,9 +46,7 @@ public class VPFSymbolKey implements Comparable<VPFSymbolKey>
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return (this.symbolCode < key.symbolCode) ? -1 : (this.symbolCode > key.symbolCode ? 1 : 0);

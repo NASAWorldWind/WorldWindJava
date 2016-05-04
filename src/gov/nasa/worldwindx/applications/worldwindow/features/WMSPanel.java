@@ -212,7 +212,7 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
         {
             String msg = "LayerNode is null";
             Util.getLogger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (layerNode.getWmsLayerInfo() != null)

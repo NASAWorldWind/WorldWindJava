@@ -28,9 +28,7 @@ public class GeoSymTableReader
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object streamOrException = null;
@@ -56,9 +54,7 @@ public class GeoSymTableReader
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -67,9 +63,7 @@ public class GeoSymTableReader
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("VPF.ExceptionAttemptingToReadTable", filePath);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -137,9 +131,7 @@ public class GeoSymTableReader
         String s = tokens[0].trim();
         if (s == null)
         {
-            String message = Logging.getMessage("VPF.MissingColumnName");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         GeoSymColumn col = new GeoSymColumn(s);

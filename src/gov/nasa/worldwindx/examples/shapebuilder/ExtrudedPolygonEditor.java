@@ -61,8 +61,7 @@ public class ExtrudedPolygonEditor extends AbstractShapeEditor
         if (polygon == null)
         {
             String message = "nullValue.Shape";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.polygon = polygon;

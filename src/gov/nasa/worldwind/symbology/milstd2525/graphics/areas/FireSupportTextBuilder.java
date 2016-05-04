@@ -37,9 +37,7 @@ public class FireSupportTextBuilder
     {
         if (graphic == null)
         {
-            String message = Logging.getMessage("nullValue.GraphicIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String[] result;

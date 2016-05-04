@@ -77,23 +77,17 @@ public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Mo
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (defaults == null)
         {
-            String message = Logging.getMessage("nullValue.AnnotationAttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setText(text);
@@ -105,16 +99,12 @@ public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Mo
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setText(text);
@@ -203,9 +193,7 @@ public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Mo
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.position = this.position.add(position);
@@ -215,9 +203,7 @@ public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Mo
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;
@@ -470,9 +456,7 @@ public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Mo
             catch (Exception e)
             {
                 // Parsing the document specified by the superclass failed.
-                String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", superStateInXml);
-                Logging.logger().severe(message);
-            }
+                }
         }
 
         // Create our own state document from scratch.
@@ -518,9 +502,7 @@ public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Mo
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Allow the superclass to restore it's state.
@@ -541,9 +523,7 @@ public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Mo
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         // Restore the position property only if all parts are available.

@@ -58,9 +58,7 @@ public class FileSetFilter extends FileFilter implements java.io.FileFilter
 
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         DataRasterReaderFactory readerFactory;
@@ -85,8 +83,6 @@ public class FileSetFilter extends FileFilter implements java.io.FileFilter
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileReading", e.getMessage());
-            Logging.logger().finest(message);
         }
 
         if (!(AVKey.IMAGE.equals(params.getStringValue(AVKey.PIXEL_FORMAT))

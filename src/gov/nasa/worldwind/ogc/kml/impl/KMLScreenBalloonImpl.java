@@ -7,7 +7,6 @@ package gov.nasa.worldwind.ogc.kml.impl;
 
 import gov.nasa.worldwind.ogc.kml.KMLAbstractFeature;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 
@@ -34,9 +33,7 @@ public class KMLScreenBalloonImpl extends KMLAbstractBalloon implements ScreenBa
 
         if (balloon == null)
         {
-            String msg = Logging.getMessage("nullValue.BalloonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.balloon = balloon;
         this.initialize(balloon);

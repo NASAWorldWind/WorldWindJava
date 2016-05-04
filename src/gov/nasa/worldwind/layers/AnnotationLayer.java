@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.layers;
 
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * The <code>AnnotationLayer</code> class manages a collection of {@link gov.nasa.worldwind.render.Annotation} objects
@@ -44,15 +43,11 @@ public class AnnotationLayer extends AbstractLayer
     {
         if (annotation == null)
         {
-            String msg = Logging.getMessage("nullValue.AnnotationIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (this.annotationsOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.annotations.add(annotation);
@@ -71,15 +66,11 @@ public class AnnotationLayer extends AbstractLayer
     {
         if (annotations == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (this.annotationsOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         for (Annotation annotation : annotations)
@@ -104,15 +95,11 @@ public class AnnotationLayer extends AbstractLayer
     {
         if (annotation == null)
         {
-            String msg = Logging.getMessage("nullValue.IconIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (this.annotationsOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.annotations.remove(annotation);
@@ -128,9 +115,7 @@ public class AnnotationLayer extends AbstractLayer
     {
         if (this.annotationsOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         clearAnnotations();
@@ -240,9 +225,7 @@ public class AnnotationLayer extends AbstractLayer
     {
         if (annotationRenderer == null)
         {
-            String msg = Logging.getMessage("nullValue.RendererIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.annotationRenderer = annotationRenderer;
@@ -263,6 +246,6 @@ public class AnnotationLayer extends AbstractLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.AnnotationLayer.Name");
+        return null;
     }
 }

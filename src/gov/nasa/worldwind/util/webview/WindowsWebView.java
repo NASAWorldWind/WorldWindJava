@@ -18,7 +18,6 @@ import java.awt.event.*;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
 
 /**
  * {@link WebView} implementation for Windows. This implementation uses the Window's native web browser control and the
@@ -76,17 +75,12 @@ public class WindowsWebView extends AbstractWebView
     {
         if (frameSize == null)
         {
-            String message = Logging.getMessage("nullValue.SizeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!Configuration.isWindowsOS())
         {
-            String message = Logging.getMessage("NativeLib.UnsupportedOperatingSystem", "Windows WebView",
-                System.getProperty("os.name"));
-            Logging.logger().severe(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
 
         this.frameSize = frameSize;
@@ -103,9 +97,7 @@ public class WindowsWebView extends AbstractWebView
             this.webViewWindowPtr = WindowsWebViewJNI.newWebViewWindow(webViewMessageLoop);
             if (this.webViewWindowPtr == 0)
             {
-                String message = Logging.getMessage("WebView.NativeExceptionInitializingWebView");
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             WindowsWebViewJNI.setFrameSize(this.webViewWindowPtr, this.frameSize.width, this.frameSize.height);
@@ -142,8 +134,6 @@ public class WindowsWebView extends AbstractWebView
         }
         catch (Throwable t)
         {
-            String message = Logging.getMessage("WebView.ExceptionStoppingWebViewThread", t);
-            Logging.logger().severe(message);
         }
     }
 
@@ -179,7 +169,6 @@ public class WindowsWebView extends AbstractWebView
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, Logging.getMessage("generic.ExceptionAttemptingToDisposeRenderable"), e);
         }
     }
 
@@ -378,9 +367,7 @@ public class WindowsWebView extends AbstractWebView
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Only set the color if it actually changed

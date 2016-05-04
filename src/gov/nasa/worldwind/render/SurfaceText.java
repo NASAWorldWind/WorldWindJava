@@ -112,9 +112,7 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.text = text;
@@ -140,9 +138,7 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.location = position;
@@ -160,9 +156,7 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     {
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Only set the font if it is different than the active font
@@ -185,9 +179,7 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!color.equals(this.color))
@@ -208,9 +200,7 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     {
         if (background == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bgColor == null || !bgColor.equals(background))
@@ -259,9 +249,7 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     {
         if (offset == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!offset.equals(this.offset))
@@ -320,9 +308,7 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return Arrays.asList(this.computeSector(dc));

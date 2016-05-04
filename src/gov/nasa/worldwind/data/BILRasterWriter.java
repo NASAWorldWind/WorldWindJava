@@ -62,8 +62,7 @@ public class BILRasterWriter extends AbstractDataRasterWriter
             String message = this.validate(worldFileParams, raster);
             if (message != null)
             {
-                Logging.logger().severe(message);
-                throw new java.io.IOException(message);
+                throw new java.io.IOException();
             }
 
             java.io.File dir = file.getParentFile();
@@ -203,30 +202,30 @@ public class BILRasterWriter extends AbstractDataRasterWriter
 
         Object o = worldFileParams.getValue(WorldFile.WORLD_FILE_IMAGE_SIZE);
         if (o == null || !(o instanceof int[]))
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("WorldFile.NoSizeSpecified", dataSource));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         o = worldFileParams.getValue(AVKey.SECTOR);
         if (o == null || !(o instanceof Sector))
             sb.append(sb.length() > 0 ? ", " : "").append(
-                Logging.getMessage("WorldFile.NoSectorSpecified", dataSource));
+                (String) null);
 
         o = worldFileParams.getValue(AVKey.BYTE_ORDER);
         if (o == null || !(o instanceof String))
             sb.append(sb.length() > 0 ? ", " : "").append(
-                Logging.getMessage("WorldFile.NoByteOrderSpecified", dataSource));
+                (String) null);
 
         o = worldFileParams.getValue(AVKey.PIXEL_FORMAT);
         if (o == null)
             sb.append(sb.length() > 0 ? ", " : "").append(
-                Logging.getMessage("WorldFile.NoPixelFormatSpecified", dataSource));
+                (String) null);
         else if (!AVKey.ELEVATION.equals(o))
             sb.append(sb.length() > 0 ? ", " : "").append(
-                Logging.getMessage("WorldFile.InvalidPixelFormat", dataSource));
+                (String) null);
 
         o = worldFileParams.getValue(AVKey.DATA_TYPE);
         if (o == null)
             sb.append(sb.length() > 0 ? ", " : "").append(
-                Logging.getMessage("WorldFile.NoDataTypeSpecified", dataSource));
+                (String) null);
 
         if (sb.length() == 0)
             return null;

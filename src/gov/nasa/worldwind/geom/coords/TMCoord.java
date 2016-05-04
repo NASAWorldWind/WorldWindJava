@@ -7,7 +7,6 @@ package gov.nasa.worldwind.geom.coords;
 
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.globes.Globe;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * This class holds a set of Transverse Mercator coordinates along with the
@@ -55,15 +54,11 @@ public class TMCoord
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (originLatitude == null || centralMeridian == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final TMCoordConverter converter = new TMCoordConverter();
@@ -84,9 +79,7 @@ public class TMCoord
 
         if (err != TMCoordConverter.TRANMERC_NO_ERROR && err != TMCoordConverter.TRANMERC_LON_WARNING)
         {
-            String message = Logging.getMessage("Coord.TMConversionError");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new TMCoord(latitude, longitude, converter.getEasting(), converter.getNorthing(),
@@ -117,9 +110,7 @@ public class TMCoord
     {
         if (originLatitude == null || centralMeridian == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final TMCoordConverter converter = new TMCoordConverter();
@@ -141,9 +132,7 @@ public class TMCoord
 
         if (err != TMCoordConverter.TRANMERC_NO_ERROR && err != TMCoordConverter.TRANMERC_LON_WARNING)
         {
-            String message = Logging.getMessage("Coord.TMConversionError");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new TMCoord(Angle.fromRadians(converter.getLatitude()), Angle.fromRadians(converter.getLongitude()),
@@ -172,15 +161,11 @@ public class TMCoord
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (originLatitude == null || centralMeridian == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.latitude = latitude;

@@ -13,7 +13,6 @@ import gov.nasa.worldwind.layers.AbstractLayer;
 import gov.nasa.worldwind.pick.PickedObject;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.render.airspaces.editor.AirspaceEditorUtil;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 
@@ -104,15 +103,11 @@ public class SegmentPlaneEditor extends AbstractLayer
     {
         if (wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (pickedObject == null)
         {
-            String message = Logging.getMessage("nullValue.PickedObject");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Include this test to ensure any derived implementation performs it.

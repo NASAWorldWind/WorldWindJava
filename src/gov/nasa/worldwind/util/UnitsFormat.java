@@ -134,16 +134,12 @@ public class UnitsFormat extends AVListImpl
     {
         if (lengthUnits == null)
         {
-            String msg = Logging.getMessage("nullValue.LengthUnit");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (areaUnits == null)
         {
-            String msg = Logging.getMessage("nullValue.AreaUnit");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.setDefaultLabels();
@@ -163,17 +159,17 @@ public class UnitsFormat extends AVListImpl
      */
     protected void setDefaultLabels()
     {
-        this.setLabel(LABEL_LATITUDE, Logging.getMessage(LABEL_LATITUDE));
-        this.setLabel(LABEL_LONGITUDE, Logging.getMessage(LABEL_LONGITUDE));
-        this.setLabel(LABEL_LATLON_LAT, Logging.getMessage(LABEL_LATLON_LAT));
-        this.setLabel(LABEL_LATLON_LON, Logging.getMessage(LABEL_LATLON_LON));
-        this.setLabel(LABEL_HEADING, Logging.getMessage(LABEL_HEADING));
-        this.setLabel(LABEL_EYE_ALTITUDE, Logging.getMessage(LABEL_EYE_ALTITUDE));
-        this.setLabel(LABEL_PITCH, Logging.getMessage(LABEL_PITCH));
-        this.setLabel(LABEL_UTM_ZONE, Logging.getMessage(LABEL_UTM_ZONE));
-        this.setLabel(LABEL_UTM_EASTING, Logging.getMessage(LABEL_UTM_EASTING));
-        this.setLabel(LABEL_UTM_NORTHING, Logging.getMessage(LABEL_UTM_NORTHING));
-        this.setLabel(LABEL_TERRAIN_HEIGHT, Logging.getMessage(LABEL_TERRAIN_HEIGHT));
+        this.setLabel(LABEL_LATITUDE, null);
+        this.setLabel(LABEL_LONGITUDE, null);
+        this.setLabel(LABEL_LATLON_LAT, null);
+        this.setLabel(LABEL_LATLON_LON, null);
+        this.setLabel(LABEL_HEADING, null);
+        this.setLabel(LABEL_EYE_ALTITUDE, null);
+        this.setLabel(LABEL_PITCH, null);
+        this.setLabel(LABEL_UTM_ZONE, null);
+        this.setLabel(LABEL_UTM_EASTING, null);
+        this.setLabel(LABEL_UTM_NORTHING, null);
+        this.setLabel(LABEL_TERRAIN_HEIGHT, null);
         this.setLabel(LABEL_DATUM, "Datum:");
     }
 
@@ -210,16 +206,12 @@ public class UnitsFormat extends AVListImpl
     {
         if (labelName == null)
         {
-            String msg = Logging.getMessage("nullValue.LabelKey");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (label == null)
         {
-            String msg = Logging.getMessage("nullValue.Label");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.setValue(labelName, label);
@@ -238,9 +230,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (labelName == null)
         {
-            String msg = Logging.getMessage("nullValue.LabelKey");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.getStringValue(labelName);
@@ -260,16 +250,12 @@ public class UnitsFormat extends AVListImpl
     {
         if (formatName == null)
         {
-            String msg = Logging.getMessage("nullValue.FormatKey");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (format == null)
         {
-            String msg = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.setValue(formatName, format);
@@ -288,9 +274,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (formatName == null)
         {
-            String msg = Logging.getMessage("nullValue.FormatKey");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.getStringValue(formatName);
@@ -350,9 +334,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (lengthUnits == null)
         {
-            String msg = Logging.getMessage("nullValue.LengthUnit");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.lengthUnits = lengthUnits;
@@ -434,9 +416,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (altitudeUnits == null)
         {
-            String msg = Logging.getMessage("nullValue.AltitudeUnit");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.altitudeUnits = altitudeUnits;
@@ -507,9 +487,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (areaUnits == null)
         {
-            String msg = Logging.getMessage("nullValue.AreaUnit");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.areaUnits = areaUnits;
@@ -585,9 +563,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (unitsSystem == null)
         {
-            String msg = Logging.getMessage("nullValue.UnitsSystem");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (unitsSystem.equals(UnitsFormat.IMPERIAL_SYSTEM))
@@ -651,9 +627,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.angleNL(this.getLabel(LABEL_LATITUDE), angle);
@@ -674,9 +648,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.angle(this.getLabel(LABEL_LATITUDE), angle);
@@ -695,9 +667,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.angleNL(this.getLabel(LABEL_LONGITUDE), angle);
@@ -718,9 +688,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.angle(this.getLabel(LABEL_LONGITUDE), angle);
@@ -757,9 +725,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.angle(this.getLabel(LABEL_HEADING), angle);
@@ -811,9 +777,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (latlon == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.latLon(latlon) + NL;
@@ -835,9 +799,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (latlon == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return String.format("%s %s", this.angle(this.getLabel(LABEL_LATLON_LAT), latlon.getLatitude()),
@@ -857,9 +819,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (latlon == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.latLon2(latlon) + NL;
@@ -879,9 +839,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (latlon == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         String latAngle = this.angle("", Angle.fromDegrees(Math.abs(latlon.getLatitude().degrees)));
@@ -909,9 +867,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.angle(label, angle) + NL;
@@ -931,9 +887,7 @@ public class UnitsFormat extends AVListImpl
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         String s;

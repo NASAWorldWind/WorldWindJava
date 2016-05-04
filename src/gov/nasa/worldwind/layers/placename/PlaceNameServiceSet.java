@@ -5,7 +5,6 @@
  */
 package gov.nasa.worldwind.layers.placename;
 
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.*;
 
@@ -40,9 +39,7 @@ public class PlaceNameServiceSet extends WWObjectImpl implements AVList
     {
         if (placeNameService == null)
         {
-            String message = Logging.getMessage("nullValue.PlaceNameServiceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (int i = 0; i < this.serviceList.size(); i++)

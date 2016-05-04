@@ -48,21 +48,15 @@ public class ByteBufferRaster extends BufferWrapperRaster
     {
         if (width < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (height < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "height < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object dataType = params.getValue(AVKey.DATA_TYPE);
@@ -90,56 +84,42 @@ public class ByteBufferRaster extends BufferWrapperRaster
     {
         if (null == params)
         {
-            String msg = Logging.getMessage("nullValue.AVListIsNull");
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!params.hasKey(AVKey.WIDTH))
         {
-            String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.WIDTH);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         int width = (Integer) params.getValue(AVKey.WIDTH);
 
         if (!(width > 0))
         {
-            String msg = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!params.hasKey(AVKey.HEIGHT))
         {
-            String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.HEIGHT);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         int height = (Integer) params.getValue(AVKey.HEIGHT);
 
         if (!(height > 0))
         {
-            String msg = Logging.getMessage("generic.InvalidWidth", height);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!params.hasKey(AVKey.SECTOR))
         {
-            String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.SECTOR);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Sector sector = (Sector) params.getValue(AVKey.SECTOR);
         if (null == sector)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!params.hasKey(AVKey.COORDINATE_SYSTEM))
@@ -158,9 +138,7 @@ public class ByteBufferRaster extends BufferWrapperRaster
             }
             else
             {
-                String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.PROJECTION_EPSG_CODE);
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -175,9 +153,7 @@ public class ByteBufferRaster extends BufferWrapperRaster
             }
             else
             {
-                String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.PIXEL_WIDTH);
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -192,34 +168,26 @@ public class ByteBufferRaster extends BufferWrapperRaster
             }
             else
             {
-                String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.PIXEL_HEIGHT);
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
         if (!params.hasKey(AVKey.PIXEL_FORMAT))
         {
-            String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.PIXEL_FORMAT);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         else
         {
             String pixelFormat = params.getStringValue(AVKey.PIXEL_FORMAT);
             if (!AVKey.ELEVATION.equals(pixelFormat) && !AVKey.IMAGE.equals(pixelFormat))
             {
-                String msg = Logging.getMessage("generic.UnknownValueForKey", pixelFormat, AVKey.PIXEL_FORMAT);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
         if (!params.hasKey(AVKey.DATA_TYPE))
         {
-            String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.DATA_TYPE);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // validate elevation parameters
@@ -228,9 +196,7 @@ public class ByteBufferRaster extends BufferWrapperRaster
             String type = params.getStringValue(AVKey.DATA_TYPE);
             if (!AVKey.FLOAT32.equals(type) && !AVKey.INT16.equals(type))
             {
-                String msg = Logging.getMessage("generic.UnknownValueForKey", type, AVKey.DATA_TYPE);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -243,9 +209,7 @@ public class ByteBufferRaster extends BufferWrapperRaster
 
         if (!params.hasKey(AVKey.BYTE_ORDER))
         {
-            String msg = Logging.getMessage("generic.MissingRequiredParameter", AVKey.BYTE_ORDER);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!params.hasKey(AVKey.DATE_TIME))

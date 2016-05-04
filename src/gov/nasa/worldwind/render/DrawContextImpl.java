@@ -193,9 +193,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (capabilities == null)
         {
-            String message = Logging.getMessage("nullValue.GLRuntimeCapabilitiesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.glRuntimeCaps = capabilities;
@@ -205,9 +203,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (glContext == null)
         {
-            String message = Logging.getMessage("nullValue.GLContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.glContext = glContext;
@@ -291,9 +287,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (glContext == null)
         {
-            String message = Logging.getMessage("nullValue.GLContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.glContext = glContext;
@@ -323,9 +317,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (gpuResourceCache == null)
         {
-            String msg = Logging.getMessage("nullValue.GpuResourceCacheIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.gpuResourceCache = gpuResourceCache;
@@ -340,9 +332,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (textRendererCache == null)
         {
-            String msg = Logging.getMessage("nullValue.TextRendererCacheIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.textRendererCache = textRendererCache;
@@ -357,9 +347,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (ar == null)
         {
-            String msg = Logging.getMessage("nullValue.RendererIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         annotationRenderer = ar;
     }
@@ -418,9 +406,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (pickedObjects == null)
         {
-            String msg = Logging.getMessage("nullValue.PickedObjectList");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.pickedObjects == null)
@@ -439,9 +425,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (null == pickedObject)
         {
-            String msg = Logging.getMessage("nullValue.PickedObject");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (null == this.pickedObjects)
@@ -464,9 +448,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (pickedObject == null)
         {
-            String msg = Logging.getMessage("nullValue.PickedObject");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.objectsInPickRect.add(pickedObject);
@@ -520,9 +502,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Translate the point from AWT screen coordinates to OpenGL screen coordinates.
@@ -548,9 +528,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (rectangle == null)
         {
-            String msg = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Rectangle viewport = this.getView().getViewport();
@@ -685,8 +663,6 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (null == orderedRenderable)
         {
-            String msg = Logging.getMessage("nullValue.OrderedRenderable");
-            Logging.logger().warning(msg);
             return; // benign event
         }
 
@@ -698,8 +674,6 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (null == orderedRenderable)
         {
-            String msg = Logging.getMessage("nullValue.OrderedRenderable");
-            Logging.logger().warning(msg);
             return; // benign event
         }
 
@@ -836,8 +810,6 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (orderedRenderable == null)
         {
-            String msg = Logging.getMessage("nullValue.OrderedRenderable");
-            Logging.logger().warning(msg);
             return; // benign event
         }
 
@@ -953,9 +925,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.getVisibleSector() == null)
@@ -1003,16 +973,12 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
 
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (displayName == null)
         {
-            String message = Logging.getMessage("nullValue.DisplayNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.perFrameStatisticsKeys.contains(key) || this.perFrameStatisticsKeys.contains(PerformanceStatistic.ALL))
@@ -1023,9 +989,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (stats == null)
         {
-            String message = Logging.getMessage("nullValue.ListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.perFrameStatistics == null || this.perFrameStatisticsKeys == null)
@@ -1051,16 +1015,12 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (resolutions == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (timeLimit <= 0)
         {
-            String message = Logging.getMessage("generic.TimeNegative", timeLimit);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
@@ -1100,9 +1060,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (credit == null)
         {
-            String message = Logging.getMessage("nullValue.ScreenCreditIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.credits.put(credit, this.frameTimestamp);
@@ -1132,16 +1090,12 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (dim == null)
         {
-            String message = Logging.getMessage("nullValue.DimensionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dim.width < 3 || dim.height < 3)
         {
-            String message = Logging.getMessage("DrawContext.PickPointFrustumDimensionTooSmall");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.pickPointFrustumDimension = new Dimension(dim);
@@ -1267,9 +1221,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
 
         if (t == null)
         {
-            String message = Logging.getMessage("nullValue.ThrowableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.renderingExceptions.add(t);
@@ -1462,9 +1414,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         {
             if (position == null)
             {
-                String msg = Logging.getMessage("nullValue.PositionIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             SectorGeometryList sectorGeometry = DrawContextImpl.this.getSurfaceGeometry();
@@ -1486,9 +1436,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         {
             if (latitude == null || longitude == null)
             {
-                String msg = Logging.getMessage("nullValue.LatLonIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             SectorGeometryList sectorGeometry = DrawContextImpl.this.getSurfaceGeometry();
@@ -1526,9 +1474,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         {
             if (pA == null || pB == null)
             {
-                String msg = Logging.getMessage("nullValue.PositionIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             // The intersect method expects altitudes to be relative to ground, so make them so if they aren't already.
@@ -1552,9 +1498,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         {
             if (location == null)
             {
-                String msg = Logging.getMessage("nullValue.LatLonIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             Vec4 pt = this.getSurfacePoint(location.getLatitude(), location.getLongitude(), 0);
@@ -1589,9 +1533,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 point;

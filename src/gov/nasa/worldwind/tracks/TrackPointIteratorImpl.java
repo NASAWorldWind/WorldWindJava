@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.tracks;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.NoSuchElementException;
 
 /**
@@ -30,9 +28,7 @@ public class TrackPointIteratorImpl implements TrackPointIterator
     {
         if (this.trackIterable == null)
         {
-            String msg = Logging.getMessage("nullValue.TracksIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.tracks = this.trackIterable.iterator();
@@ -74,9 +70,7 @@ public class TrackPointIteratorImpl implements TrackPointIterator
     {
         if (!this.hasNext())
         {
-            String msg = Logging.getMessage("TrackPointIterator.NoMoreTrackPoints");
-            Logging.logger().severe(msg);
-            throw new NoSuchElementException(msg);
+            throw new NoSuchElementException();
         }
 
         return this.positions.next();
@@ -84,9 +78,8 @@ public class TrackPointIteratorImpl implements TrackPointIterator
 
     public void remove()
     {
-        String msg = Logging.getMessage("TrackPointIterator.RemoveNotSupported");
-        Logging.logger().severe(msg);
-        throw new UnsupportedOperationException(msg);
+        String msg = null;
+        throw new UnsupportedOperationException();
     }
 
     public int getNumPoints()

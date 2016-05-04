@@ -282,18 +282,14 @@ public class AnalyticSurfaceDemo extends ApplicationTemplate
             AVList metadata = reader.readMetadata(file, null);
             if (metadata == null || !AVKey.ELEVATION.equals(metadata.getStringValue(AVKey.PIXEL_FORMAT)))
             {
-                String msg = Logging.getMessage("ElevationModel.SourceNotElevations", file.getAbsolutePath());
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             // Read the file into the raster.
             DataRaster[] rasters = reader.read(file, null);
             if (rasters == null || rasters.length == 0)
             {
-                String msg = Logging.getMessage("ElevationModel.CannotReadElevations", file.getAbsolutePath());
-                Logging.logger().severe(msg);
-                throw new WWRuntimeException(msg);
+                    throw new WWRuntimeException();
             }
 
             // Determine the sector covered by the elevations. This information is in the GeoTIFF file or auxiliary
@@ -301,9 +297,7 @@ public class AnalyticSurfaceDemo extends ApplicationTemplate
             Sector sector = (Sector) rasters[0].getValue(AVKey.SECTOR);
             if (sector == null)
             {
-                String msg = Logging.getMessage("DataRaster.MissingMetadata", AVKey.SECTOR);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             // Request a sub-raster that contains the whole file. This step is necessary because only sub-rasters
@@ -316,9 +310,7 @@ public class AnalyticSurfaceDemo extends ApplicationTemplate
             // Verify that the sub-raster can create a ByteBuffer, then create one.
             if (!(subRaster instanceof BufferWrapperRaster))
             {
-                String msg = Logging.getMessage("ElevationModel.CannotCreateElevationBuffer", path);
-                Logging.logger().severe(msg);
-                throw new WWRuntimeException(msg);
+                    throw new WWRuntimeException();
             }
 
             return (BufferWrapperRaster) subRaster;

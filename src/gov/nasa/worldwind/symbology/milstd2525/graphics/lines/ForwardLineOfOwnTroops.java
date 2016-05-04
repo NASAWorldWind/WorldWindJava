@@ -11,7 +11,6 @@ import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.symbology.SymbologyConstants;
 import gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -126,9 +125,7 @@ public class ForwardLineOfOwnTroops extends PhaseLine
     {
         if (intervals < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intervals = intervals;
@@ -141,9 +138,7 @@ public class ForwardLineOfOwnTroops extends PhaseLine
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position oldPosition = this.getReferencePosition();
@@ -295,23 +290,17 @@ public class ForwardLineOfOwnTroops extends PhaseLine
         {
             if (positions == null)
             {
-                String message = Logging.getMessage("nullValue.PositionsListIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (globe == null)
             {
-                String message = Logging.getMessage("nullValue.GlobeIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (interval <= 0)
             {
-                String message = Logging.getMessage("generic.LengthIsInvalid");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.interval = Angle.fromRadians(interval / globe.getRadius());

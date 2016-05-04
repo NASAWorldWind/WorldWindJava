@@ -7,7 +7,6 @@ package gov.nasa.worldwind.layers;
 
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.render.airspaces.Airspace;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * AirspaceLayer manages a list of airspaces for rendering and picking. AirspaceLayer was originally designed as a
@@ -45,14 +44,11 @@ public class AirspaceLayer extends AbstractLayer
         if (airspace == null)
         {
             String msg = "nullValue.AirspaceIsNull";
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (this.airspacesOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.airspaces.add(airspace);
@@ -73,15 +69,11 @@ public class AirspaceLayer extends AbstractLayer
     {
         if (airspaces == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (this.airspacesOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         for (Airspace airspace : airspaces)
@@ -109,14 +101,11 @@ public class AirspaceLayer extends AbstractLayer
         if (airspace == null)
         {
             String msg = "nullValue.AirspaceIsNull";
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (this.airspacesOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.airspaces.remove(airspace);
@@ -133,9 +122,7 @@ public class AirspaceLayer extends AbstractLayer
     {
         if (this.airspacesOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         clearAirspaces();
@@ -479,9 +466,7 @@ public class AirspaceLayer extends AbstractLayer
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionWhileRenderingAirspace");
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                // continue to next airspace
+                    // continue to next airspace
             }
         }
     }
@@ -498,9 +483,7 @@ public class AirspaceLayer extends AbstractLayer
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionWhileRenderingAirspace");
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                // continue to next airspace
+                    // continue to next airspace
             }
         }
     }
@@ -508,6 +491,6 @@ public class AirspaceLayer extends AbstractLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.AirspaceLayer.Name");
+        return null;
     }
 }

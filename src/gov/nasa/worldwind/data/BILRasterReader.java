@@ -51,9 +51,7 @@ public class BILRasterReader extends AbstractDataRasterReader
     {
         if (largeFileThreshold < 0L)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "largeFileThreshold < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.largeFileThreshold = largeFileThreshold;
@@ -73,7 +71,6 @@ public class BILRasterReader extends AbstractDataRasterReader
         {
             if (!WorldFile.hasWorldFiles(source))
             {
-                Logging.logger().fine(error);
                 return false;
             }
         }
@@ -138,24 +135,24 @@ public class BILRasterReader extends AbstractDataRasterReader
         Object o = (params != null) ? params.getValue(AVKey.BYTE_ORDER) : null;
         if (o == null || !(o instanceof String))
         {
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("WorldFile.NoByteOrderSpecified", source));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
         }
 
         o = (params != null) ? params.getValue(AVKey.PIXEL_FORMAT) : null;
         if (o == null)
         {
             sb.append(sb.length() > 0 ? ", " : "").append(
-                Logging.getMessage("WorldFile.NoPixelFormatSpecified", source));
+                (String) null);
         }
         else if (!AVKey.ELEVATION.equals(o))
         {
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("WorldFile.InvalidPixelFormat", source));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
         }
 
         o = (params != null) ? params.getValue(AVKey.DATA_TYPE) : null;
         if (o == null)
         {
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("WorldFile.NoDataTypeSpecified", source));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
         }
 
         if (sb.length() == 0)
@@ -170,9 +167,7 @@ public class BILRasterReader extends AbstractDataRasterReader
     {
         if (!(source instanceof java.io.File) && !(source instanceof java.net.URL))
         {
-            String message = Logging.getMessage("DataRaster.CannotRead", source);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         File file = (source instanceof java.io.File) ? (File) source : null;

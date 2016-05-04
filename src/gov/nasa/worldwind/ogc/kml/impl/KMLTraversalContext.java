@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.ogc.kml.impl;
 
 import gov.nasa.worldwind.ogc.kml.KMLRegion;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -61,9 +60,7 @@ public class KMLTraversalContext
     {
         if (region == null)
         {
-            String message = Logging.getMessage("nullValue.RegionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.regionStack.push(region);

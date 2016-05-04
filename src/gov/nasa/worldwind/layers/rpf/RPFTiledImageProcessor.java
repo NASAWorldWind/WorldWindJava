@@ -63,21 +63,15 @@ public class RPFTiledImageProcessor
     {
         if (rootFile == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dataSeriesId == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (fileIterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RPFFileIndex result = null;
@@ -115,14 +109,12 @@ public class RPFTiledImageProcessor
         if (fileIndex == null)
         {
             String message = "RPFFileIndex is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (fileIndex.getIndexProperties() == null)
         {
             String message = "RPFFileIndex.IndexProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Layer result = null;
@@ -205,7 +197,6 @@ public class RPFTiledImageProcessor
                             firePropertyChange(SUB_TASK_STEP_COMPLETE, null, file.getName());
                         } catch (Throwable t) {
                             String message = String.format("Exception while processing file: %s", file);
-                            Logging.logger().log(java.util.logging.Level.SEVERE, message, t);
                             firePropertyChange(SUB_TASK_STEP_FAILED, null, file.getName());
                         }
                     }
@@ -227,14 +218,12 @@ public class RPFTiledImageProcessor
         if (fileIndex == null)
         {
             String message = "RPFFileIndex is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (record == null)
         {
             String message = "RPFFileIndex.Record is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File file = null;
@@ -403,7 +392,6 @@ public class RPFTiledImageProcessor
             // Computing the file's coverage failed. Log the condition and return null.
             // This at allows the coverage to be re-computed at a later time.
             String message = String.format("Exception while getting file sector: %s", rpfFile != null ? rpfFile.getFile() : "");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             sector = null;
         }
         return sector;
@@ -432,7 +420,6 @@ public class RPFTiledImageProcessor
             // Computing the file's coverage failed. Log the condition and return null.
             // This at allows the coverage to be re-computed at a later time.
             String message = String.format("Exception while computing file sector: %s", file);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             sector = null;
         }
         return sector;
@@ -478,7 +465,6 @@ public class RPFTiledImageProcessor
                         firePropertyChange(SUB_TASK_STEP_COMPLETE, null, tile.getPath());
                     } catch (Throwable t) {
                         String message = String.format("Exception while processing image: %s", tile.getPath());
-                        Logging.logger().log(java.util.logging.Level.SEVERE, message, t);
                         firePropertyChange(SUB_TASK_STEP_FAILED, null, tile.getPath());
                     }
                 }
@@ -498,14 +484,12 @@ public class RPFTiledImageProcessor
         if (tile == null)
         {
             String message = "Tile is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (service == null)
         {
             String message = "RPFGenerator.RPFServiceInstance is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File outFile = null;
@@ -560,7 +544,6 @@ public class RPFTiledImageProcessor
         catch (Exception e)
         {
             String message = String.format("Exception while saving RPFFileIndex: %s", file);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -604,7 +587,6 @@ public class RPFTiledImageProcessor
         catch (Exception e)
         {
             String message = "Exception while executing tasks";
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -637,7 +619,6 @@ public class RPFTiledImageProcessor
         catch (Exception e)
         {
             String message = "Exception while executing tasks";
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 

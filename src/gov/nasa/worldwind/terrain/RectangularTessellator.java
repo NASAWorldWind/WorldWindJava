@@ -412,16 +412,12 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getView() == null)
         {
-            String msg = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         if (!WorldWind.getMemoryCacheSet().containsCache(CACHE_ID))
@@ -774,16 +770,12 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (numTextureUnits < 1)
         {
-            String msg = Logging.getMessage("generic.NumTextureUnitsLessThanOne");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.render(dc, tile, numTextureUnits);
@@ -793,9 +785,7 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.render(dc, tile, 1);
@@ -825,9 +815,7 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
     {
         if (tile.ri == null)
         {
-            String msg = Logging.getMessage("nullValue.RenderInfoIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         if (dc.getGLRuntimeCapabilities().isUseVertexBufferObject())
@@ -1004,16 +992,12 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (tile.ri == null)
         {
-            String msg = Logging.getMessage("nullValue.RenderInfoIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         dc.getView().pushReferenceCenter(dc, tile.ri.referenceCenter);
@@ -1140,16 +1124,12 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (pickPoints == null)
         {
-            String msg = Logging.getMessage("nullValue.PickPointList");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (pickPoints.size() == 0)
@@ -1172,9 +1152,7 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (tile.ri == null || tile.ri.vertices == null)
@@ -1387,9 +1365,7 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
     {
         if (line == null)
         {
-            String msg = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (tile.ri.vertices == null)
@@ -1655,9 +1631,7 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!tile.sector.contains(latitude, longitude))
@@ -1868,16 +1842,12 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
     {
         if (sg == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorGeometryIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (computer == null)
         {
-            String msg = Logging.getMessage("nullValue.TextureCoordinateComputerIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         RectTile rt = (RectTile) sg;

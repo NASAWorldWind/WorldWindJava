@@ -9,7 +9,6 @@ package gov.nasa.worldwind.ogc.collada;
 import gov.nasa.worldwind.geom.Box;
 import gov.nasa.worldwind.ogc.collada.impl.*;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * Represents the COLLADA <i>scene</i> element and provides access to its contents.
@@ -53,9 +52,7 @@ public class ColladaScene extends ColladaAbstractObject implements ColladaRender
     {
         if (tc == null)
         {
-            String message = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ColladaInstanceVisualScene sceneInstance = this.getInstanceVisualScene();

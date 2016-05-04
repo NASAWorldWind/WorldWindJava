@@ -75,9 +75,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("Awt.WorldWindowGLSurface.UnabletoCreateWindow");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -112,9 +110,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("Awt.WorldWindowGLSurface.UnabletoCreateWindow");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -151,9 +147,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("Awt.WorldWindowGLSurface.UnabletoCreateWindow");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -195,9 +189,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("Awt.WorldWindowGLSurface.UnabletoCreateWindow");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 

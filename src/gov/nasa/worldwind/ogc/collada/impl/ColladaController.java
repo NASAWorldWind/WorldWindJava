@@ -8,7 +8,6 @@ package gov.nasa.worldwind.ogc.collada.impl;
 
 import gov.nasa.worldwind.ogc.collada.ColladaRoot;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * Executes the mapping from COLLADA to World Wind. Traverses a parsed COLLADA document and creates the appropriate
@@ -54,9 +53,7 @@ public class ColladaController implements Renderable, PreRenderable
     {
         if (colladaRoot == null)
         {
-            String msg = Logging.getMessage("nullValue.ObjectIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.colladaRoot = colladaRoot;
@@ -81,9 +78,7 @@ public class ColladaController implements Renderable, PreRenderable
     {
         if (tc == null)
         {
-            String msg = Logging.getMessage("nullValue.ObjectIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.tc = tc;

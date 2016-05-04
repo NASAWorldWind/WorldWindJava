@@ -9,7 +9,6 @@ package gov.nasa.worldwind.globes.projections;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * Defines a polar equidistant projection centered on a specified pole.
@@ -46,9 +45,7 @@ public class ProjectionPolarEquidistant extends AbstractGeographicProjection
 
         if (pole == null)
         {
-            String message = Logging.getMessage("nullValue.HemisphereIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.pole = pole.equals(AVKey.SOUTH) ? SOUTH : NORTH;

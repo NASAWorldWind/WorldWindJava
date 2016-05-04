@@ -7,7 +7,6 @@ package gov.nasa.worldwind.layers;
 
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import java.awt.*;
@@ -54,9 +53,7 @@ public class SkyColorLayer extends RenderableLayer
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.color = color;
     }
@@ -176,7 +173,7 @@ public class SkyColorLayer extends RenderableLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.Earth.SkyColorLayer.Name");
+        return null;
     }
 
 }

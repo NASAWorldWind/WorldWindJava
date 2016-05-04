@@ -72,14 +72,12 @@ public class AbsentResourceList
     {
         if (maxTries < 1)
         {
-            String message = Logging.getMessage("AbsentResourceList.MaxTriesLessThanOne");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (minCheckInterval < 0)
         {
-            String message = Logging.getMessage("AbsentResourceList.CheckIntervalLessThanZero");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.maxTries = maxTries;
@@ -104,26 +102,22 @@ public class AbsentResourceList
     {
         if (maxTries < 1)
         {
-            String message = Logging.getMessage("AbsentResourceList.MaxTriesLessThanOne");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (minCheckInterval < 0)
         {
-            String message = Logging.getMessage("AbsentResourceList.CheckIntervalLessThanZero");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (tryAgainInterval < 0)
         {
-            String message = Logging.getMessage("AbsentResourceList.RetryIntervalLessThanZero");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cacheSize != null && cacheSize < 1)
         {
-            String message = Logging.getMessage("AbsentResourceList.MaximumListSizeLessThanOne");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cacheSize != null)
@@ -155,8 +149,7 @@ public class AbsentResourceList
     {
         if (maxTries < 1)
         {
-            String message = Logging.getMessage("AbsentResourceList.MaxTriesLessThanOne");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.maxTries = maxTries;
@@ -185,8 +178,7 @@ public class AbsentResourceList
     {
         if (minCheckInterval < 0)
         {
-            String message = Logging.getMessage("AbsentResourceList.CheckIntervalLessThanZero");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.minCheckInterval = minCheckInterval;
@@ -215,8 +207,7 @@ public class AbsentResourceList
     {
         if (tryAgainInterval < 0)
         {
-            String message = Logging.getMessage("AbsentResourceList.RetryIntervalLessThanZero");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.tryAgainInterval = tryAgainInterval;

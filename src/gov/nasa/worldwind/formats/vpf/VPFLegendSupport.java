@@ -157,8 +157,6 @@ public class VPFLegendSupport
             Object streamOrException = WWIO.getFileOrResourceAsStream(path, this.getClass());
             if (streamOrException == null || streamOrException instanceof Exception)
             {
-                Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionAttemptingToReadImageFile",
-                    streamOrException != null ? streamOrException : path);
                 return null;
             }
 
@@ -168,8 +166,6 @@ public class VPFLegendSupport
             }
             catch (Exception e)
             {
-                Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionAttemptingToReadImageFile",
-                    path);
                 return null;
             }
         }

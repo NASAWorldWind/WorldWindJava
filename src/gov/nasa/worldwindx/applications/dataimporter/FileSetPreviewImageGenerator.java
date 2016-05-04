@@ -8,12 +8,10 @@ package gov.nasa.worldwindx.applications.dataimporter;
 
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.data.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.*;
 import java.awt.image.*;
 import java.io.File;
-import java.util.logging.Level;
 
 /**
  * Generates a preview image for a file set.
@@ -76,7 +74,6 @@ public class FileSetPreviewImageGenerator extends AVListImpl implements Runnable
             DataRasterReader reader = readerFactory.findReaderFor(file, params);
             if (reader == null)
             {
-                Logging.logger().fine("No reader for " + file.getPath());
                 continue;
             }
 
@@ -89,13 +86,10 @@ public class FileSetPreviewImageGenerator extends AVListImpl implements Runnable
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("generic.ExceptionWhileReading", e.getMessage());
-                Logging.logger().finest(message);
-            }
+                }
 
             if (raster == null)
             {
-                Logging.logger().fine("No raster for " + file.getPath());
                 continue;
             }
 
@@ -105,7 +99,6 @@ public class FileSetPreviewImageGenerator extends AVListImpl implements Runnable
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, "Exception composing preview image", e);
                 continue;
             }
             finally

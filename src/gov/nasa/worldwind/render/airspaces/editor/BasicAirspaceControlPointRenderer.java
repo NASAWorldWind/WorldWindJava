@@ -10,7 +10,6 @@ import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.render.markers.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import java.awt.*;
@@ -40,9 +39,7 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     {
         if (controlPointMarker == null)
         {
-            String message = Logging.getMessage("nullValue.MarkerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.enableLighting = true;
@@ -84,9 +81,7 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     {
         if (marker == null)
         {
-            String message = Logging.getMessage("nullValue.MarkerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.controlPointMarker = marker;
@@ -101,9 +96,7 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     {
         if (material != null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.lightMaterial = material;
@@ -118,9 +111,7 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     {
         if (direction != null)
         {
-            String message = Logging.getMessage("nullValue.DirectionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.lightDirection = direction;
@@ -140,15 +131,11 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.draw(dc, controlPoints);
@@ -159,15 +146,11 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.pickSupport.clearPickList();

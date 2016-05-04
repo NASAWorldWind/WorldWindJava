@@ -6,8 +6,7 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Position;
-import gov.nasa.worldwind.util.RestorableSupport;
-import gov.nasa.worldwind.util.Logging;
+import gov.nasa.worldwind.util.*;
 
 /**
  * @author tag
@@ -63,9 +62,7 @@ public class Pedestal extends UserFacingIcon
             catch (Exception e)
             {
                 // Parsing the document specified by the superclass failed.
-                String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", superStateInXml);
-                Logging.logger().severe(message);
-            }
+                }
         }
 
         // Create our own state document from scratch.
@@ -95,9 +92,7 @@ public class Pedestal extends UserFacingIcon
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Allow the superclass to restore it's state.
@@ -118,9 +113,7 @@ public class Pedestal extends UserFacingIcon
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         Double spacingPixelsState = restorableSupport.getStateValueAsDouble("spacingPixels");

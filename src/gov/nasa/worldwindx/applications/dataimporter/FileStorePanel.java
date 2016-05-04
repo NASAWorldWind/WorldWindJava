@@ -220,7 +220,6 @@ public class FileStorePanel extends JPanel implements ListSelectionListener
         }
         catch (WWRuntimeException e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, "Exception making data set active", e);
         }
 
         if (doc == null)

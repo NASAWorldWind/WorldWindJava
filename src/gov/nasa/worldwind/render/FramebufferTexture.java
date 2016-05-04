@@ -36,23 +36,17 @@ public class FramebufferTexture implements WWTexture
     {
         if (imageSource == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.LocationsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sourceTexture = imageSource;
@@ -106,9 +100,7 @@ public class FramebufferTexture implements WWTexture
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Texture t = dc.getTextureCache().getTexture(this);

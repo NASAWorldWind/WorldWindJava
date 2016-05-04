@@ -76,9 +76,7 @@ public class BasicWWTexture implements WWTexture
     {
         if (imageSource == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageSource = imageSource;
@@ -182,9 +180,7 @@ public class BasicWWTexture implements WWTexture
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Texture t = this.getTextureFromCache(dc);
@@ -212,9 +208,7 @@ public class BasicWWTexture implements WWTexture
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         // Use the tile's texture if available.
@@ -239,9 +233,7 @@ public class BasicWWTexture implements WWTexture
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (this.textureInitializationFailed)
@@ -258,8 +250,6 @@ public class BasicWWTexture implements WWTexture
             Object streamOrException = WWIO.getFileOrResourceAsStream(path, this.getClass());
             if (streamOrException == null || streamOrException instanceof Exception)
             {
-                Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionAttemptingToReadImageFile",
-                    streamOrException != null ? streamOrException : path);
                 this.textureInitializationFailed = true;
                 return null;
             }
@@ -273,10 +263,7 @@ public class BasicWWTexture implements WWTexture
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("layers.TextureLayer.ExceptionAttemptingToReadTextureFile",
-                    imageSource);
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                this.textureInitializationFailed = true;
+                    this.textureInitializationFailed = true;
                 return null;
             }
         }
@@ -291,9 +278,7 @@ public class BasicWWTexture implements WWTexture
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.IOExceptionDuringTextureInitialization");
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                this.textureInitializationFailed = true;
+                    this.textureInitializationFailed = true;
                 return null;
             }
         }
@@ -304,8 +289,6 @@ public class BasicWWTexture implements WWTexture
                 InputStream stream = ((URL) imageSource).openStream();
                 if (stream == null)
                 {
-                    Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionAttemptingToReadImageFile",
-                        imageSource);
                     this.textureInitializationFailed = true;
                     return null;
                 }
@@ -316,25 +299,18 @@ public class BasicWWTexture implements WWTexture
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("layers.TextureLayer.ExceptionAttemptingToReadTextureFile",
-                    imageSource);
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                this.textureInitializationFailed = true;
+                    this.textureInitializationFailed = true;
                 return null;
             }
         }
         else
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, "generic.UnrecognizedImageSourceType",
-                imageSource.getClass().getName());
             this.textureInitializationFailed = true;
             return null;
         }
 
         if (t == null) // In case JOGL TextureIO returned null
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, "generic.TextureUnreadable",
-                imageSource instanceof String ? imageSource : imageSource.getClass().getName());
             this.textureInitializationFailed = true;
             return null;
         }

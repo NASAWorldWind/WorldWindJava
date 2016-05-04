@@ -48,9 +48,7 @@ public abstract class CompoundVecBuffer
     {
         if (capacity < 1)
         {
-            String message = Logging.getMessage("generic.CapacityIsInvalid", capacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.capacity = capacity;
@@ -116,9 +114,7 @@ public abstract class CompoundVecBuffer
     {
         if (coordsPerVec < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", coordsPerVec);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new EmptyCompoundVecBuffer(coordsPerVec);
@@ -158,9 +154,7 @@ public abstract class CompoundVecBuffer
     {
         if (index < 0 || index >= this.count)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int off = this.offsets.get(index);
@@ -194,23 +188,17 @@ public abstract class CompoundVecBuffer
     {
         if (beginIndex < 0 || beginIndex >= this.count)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", beginIndex);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (endIndex < 0 || endIndex >= this.count)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", endIndex);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (beginIndex > endIndex)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", beginIndex);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.createSlice(beginIndex, endIndex);
@@ -235,32 +223,24 @@ public abstract class CompoundVecBuffer
     {
         if (indices == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (length < 0 || length > indices.length)
         {
-            String message = Logging.getMessage("generic.LengthIsInvalid", length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (offset < 0 || offset + length > indices.length)
         {
-            String message = Logging.getMessage("generic.OffsetIsInvalid", offset);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (int i = offset; i < offset + length; i++)
         {
             if (indices[i] < 0 || indices[i] >= this.count)
             {
-                String message = Logging.getMessage("generic.indexOutOfRange", indices[i]);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -283,9 +263,7 @@ public abstract class CompoundVecBuffer
     {
         if (indices == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.slice(indices, 0, indices.length);
@@ -654,9 +632,7 @@ public abstract class CompoundVecBuffer
 
             if (coordsPerVec < 1)
             {
-                String message = Logging.getMessage("generic.ArgumentOutOfRange", coordsPerVec);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.coordsPerVec = coordsPerVec;
@@ -676,9 +652,7 @@ public abstract class CompoundVecBuffer
         {
             if (index < 0 || index >= this.count)
             {
-                String message = Logging.getMessage("generic.indexOutOfRange", index);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             return 0;

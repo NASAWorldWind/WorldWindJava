@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.vpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.*;
 
 /**
@@ -56,9 +54,7 @@ public class GeoSymTableHeader
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.columnMap.containsKey(name);
@@ -68,9 +64,7 @@ public class GeoSymTableHeader
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.columnMap.get(name);
@@ -98,9 +92,7 @@ public class GeoSymTableHeader
     {
         if (column == null)
         {
-            String message = Logging.getMessage("nullValue.ColumnIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.columnMap.put(column.getName(), column);
@@ -110,9 +102,7 @@ public class GeoSymTableHeader
     {
         if (collection == null)
         {
-            String message = Logging.getMessage("nullValue.CollectionIsNulln");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (GeoSymColumn col : collection)
@@ -125,9 +115,7 @@ public class GeoSymTableHeader
     {
         if (column == null)
         {
-            String message = Logging.getMessage("nullValue.ColumnIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.columnMap.remove(column.getName());

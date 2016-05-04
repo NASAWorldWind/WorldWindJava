@@ -11,9 +11,7 @@ import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.formats.tiff.GeotiffImageReaderSpi;
 import gov.nasa.worldwind.formats.worldfile.WorldFile;
 import gov.nasa.worldwind.geom.Sector;
-import gov.nasa.worldwind.util.ImageUtil;
-import gov.nasa.worldwind.util.Logging;
-import gov.nasa.worldwind.util.WWIO;
+import gov.nasa.worldwind.util.*;
 
 /**
  * @author dcollins
@@ -192,9 +190,7 @@ public class ImageIORasterReader extends AbstractDataRasterReader
         {
             if (reader == null)
             {
-                String message = Logging.getMessage("generic.UnrecognizedImageSourceType", source);
-                Logging.logger().severe(message);
-                throw new java.io.IOException(message);
+                    throw new java.io.IOException();
             }
 
             reader.setInput(iis, true, true);
@@ -217,9 +213,7 @@ public class ImageIORasterReader extends AbstractDataRasterReader
     {
         if (!(source instanceof java.io.File))
         {
-            String message = Logging.getMessage("DataRaster.CannotRead", source);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         // If an image is not specified in the metadata values, then attempt to construct the image size from other
@@ -278,9 +272,7 @@ public class ImageIORasterReader extends AbstractDataRasterReader
         }
         else if (streamOrException instanceof Exception)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToReadImageFile", path);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, streamOrException);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         return (java.io.InputStream) streamOrException;

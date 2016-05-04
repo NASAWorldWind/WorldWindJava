@@ -7,7 +7,6 @@ package gov.nasa.worldwind.geom.coords;
 
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.globes.Globe;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * This class holds an immutable MGRS coordinate string along with
@@ -86,9 +85,7 @@ public class MGRSCoord
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final MGRSCoordConverter converter = new MGRSCoordConverter(globe);
@@ -96,9 +93,7 @@ public class MGRSCoord
 
         if (err != MGRSCoordConverter.MGRS_NO_ERROR)
         {
-            String message = Logging.getMessage("Coord.MGRSConversionError");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new MGRSCoord(latitude, longitude, converter.getMGRSString());
@@ -124,9 +119,7 @@ public class MGRSCoord
     {
         if (MGRSString == null || MGRSString.length() == 0)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         MGRSString = MGRSString.toUpperCase().replaceAll(" ", "");
@@ -136,9 +129,7 @@ public class MGRSCoord
 
         if (err != MGRSCoordConverter.MGRS_NO_ERROR)
         {
-            String message = Logging.getMessage("Coord.MGRSConversionError");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new MGRSCoord(Angle.fromRadians(converter.getLatitude()), Angle.fromRadians(converter.getLongitude()), MGRSString);
@@ -158,21 +149,15 @@ public class MGRSCoord
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (MGRSString == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (MGRSString.length() == 0)
         {
-            String message = Logging.getMessage("generic.StringIsEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.latitude = latitude;
         this.longitude = longitude;

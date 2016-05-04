@@ -81,9 +81,7 @@ public class GLRuntimeCapabilities
     {
         if (glContext == null)
         {
-            String message = Logging.getMessage("nullValue.GLContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL gl = glContext.getGL();
@@ -372,9 +370,7 @@ public class GLRuntimeCapabilities
     {
         if (maxTextureSize < 1)
         {
-            String message = Logging.getMessage("generic.DepthBitsLessThanOne");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.depthBits = depthBits;
@@ -429,9 +425,7 @@ public class GLRuntimeCapabilities
     {
         if (maxTextureSize < 1)
         {
-            String message = Logging.getMessage("generic.MaxTextureSizeLessThanOne");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.maxTextureSize = maxTextureSize;
@@ -458,9 +452,7 @@ public class GLRuntimeCapabilities
     {
         if (numTextureUnits < 1)
         {
-            String message = Logging.getMessage("generic.NumTextureUnitsLessThanOne");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.numTextureUnits = numTextureUnits;

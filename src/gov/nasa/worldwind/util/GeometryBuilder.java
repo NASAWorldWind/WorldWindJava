@@ -84,15 +84,11 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int[] indexArray = new int[ICOSAHEDRON_INDEX_COUNT];
@@ -147,15 +143,11 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         IntBuffer indexBuffer = Buffers.newDirectIntBuffer(ICOSAHEDRON_INDEX_COUNT);
@@ -288,15 +280,11 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         IntBuffer indexBuffer = Buffers.newDirectIntBuffer(BOX_INDEX_COUNT);
@@ -341,21 +329,15 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (face < 0 || face >= 6)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "face < 0 or face >= 6");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         IntBuffer indexBuffer = Buffers.newDirectIntBuffer(BOX_INDEX_COUNT / 6);
@@ -490,15 +472,11 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         IntBuffer indexBuffer = Buffers.newDirectIntBuffer(PYRAMID_INDEX_COUNT);
@@ -542,15 +520,11 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // default values for pyramid side
@@ -677,15 +651,11 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, index;
@@ -832,15 +802,11 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, index;
@@ -1008,21 +974,15 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (angle.getRadians() < 0 || angle.getRadians() > 2 * Math.PI)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "angle < 0 or angle > 2 PI");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, index;
@@ -1196,21 +1156,15 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (angle.getRadians() < 0 || angle.getRadians() > 2 * Math.PI)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "angle < 0 or angle > 2 PI");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, index;
@@ -1411,15 +1365,11 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, index;
@@ -1548,15 +1498,11 @@ public class GeometryBuilder
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // face 0 = base
@@ -1744,21 +1690,15 @@ public class GeometryBuilder
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (slices < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = 2.0 * Math.PI / slices;
@@ -1779,21 +1719,15 @@ public class GeometryBuilder
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (slices < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = 2.0 * Math.PI / slices;
@@ -1821,39 +1755,29 @@ public class GeometryBuilder
 
         if (terrain == null)
         {
-            String message = Logging.getMessage("nullValue.TerrainIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (refPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = 2.0 * Math.PI / slices;
@@ -1881,39 +1805,29 @@ public class GeometryBuilder
 
         if (terrain == null)
         {
-            String message = Logging.getMessage("nullValue.TerrainIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (refPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = 2.0 * Math.PI / (slices - 1);
@@ -1945,21 +1859,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y, z;
@@ -1999,21 +1909,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y;
@@ -2055,21 +1961,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double x, y;
@@ -2113,21 +2015,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, j;
@@ -2171,21 +2069,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i;
@@ -2250,21 +2144,15 @@ public class GeometryBuilder
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (slices < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = sweep / slices;
@@ -2288,39 +2176,29 @@ public class GeometryBuilder
 
         if (terrain == null)
         {
-            String message = Logging.getMessage("nullValue.TerrainIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (refPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = sweep / slices;
@@ -2347,21 +2225,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y, z;
@@ -2403,21 +2277,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y;
@@ -2457,21 +2327,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, j;
@@ -2520,21 +2386,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i;
@@ -2581,27 +2443,19 @@ public class GeometryBuilder
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (slices < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (loops < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "loops < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = 2.0 * Math.PI / slices;
@@ -2627,27 +2481,19 @@ public class GeometryBuilder
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (slices < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (loops < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "loops < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double innerMinorRadius = radii[0];
@@ -2688,39 +2534,29 @@ public class GeometryBuilder
 
         if (terrain == null)
         {
-            String message = Logging.getMessage("nullValue.TerrainIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (refPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = 2.0 * Math.PI / slices;
@@ -2749,39 +2585,29 @@ public class GeometryBuilder
 
         if (terrain == null)
         {
-            String message = Logging.getMessage("nullValue.TerrainIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (refPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double innerMinorRadius = radii[0];
@@ -2821,21 +2647,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y;
@@ -2871,21 +2693,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int s, l;
@@ -2920,27 +2738,22 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (srcVerts == null)
         {
             String message = "nullValue.SourceVertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int s, l;
@@ -3084,21 +2897,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int s, l;
@@ -3167,27 +2976,19 @@ public class GeometryBuilder
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (slices < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (loops < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "loops < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = sweep / slices;
@@ -3219,39 +3020,29 @@ public class GeometryBuilder
 
         if (terrain == null)
         {
-            String message = Logging.getMessage("nullValue.TerrainIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (refPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = sweep / slices;
@@ -3280,21 +3071,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y;
@@ -3330,21 +3117,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int s, l;
@@ -3379,27 +3162,22 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (srcVerts == null)
         {
             String message = "nullValue.SourceVertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int s, l;
@@ -3541,21 +3319,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "slices=" + slices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int s, l;
@@ -3637,40 +3411,29 @@ public class GeometryBuilder
 
         if (terrain == null)
         {
-            String message = Logging.getMessage("nullValue.TerrainIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "pillars=" + pillars
-                + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (refPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double a = angle;
@@ -3697,22 +3460,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "pillars=" + pillars
-                + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y, z;
@@ -3756,22 +3514,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "pillars=" + pillars
-                + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y;
@@ -3809,22 +3562,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "pillars=" + pillars
-                + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int p, s;
@@ -3873,22 +3621,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "pillars=" + pillars
-                + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int vertex;
@@ -3946,27 +3689,19 @@ public class GeometryBuilder
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center1 == null || center2 == null)
         {
-            String message = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (arcSlices < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (lengthSlices < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "lengthSlices < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double az1 = LatLon.greatCircleAzimuth(center1, center2).radians;
@@ -4025,40 +3760,29 @@ public class GeometryBuilder
 
         if (terrain == null)
         {
-            String message = Logging.getMessage("nullValue.TerrainIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center1 == null || center2 == null)
         {
-            String message = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices
-                + " lengthSlices=" + lengthSlices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (refPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double az1 = LatLon.greatCircleAzimuth(center1, center2).radians;
@@ -4118,22 +3842,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices
-                + " lengthSlices=" + lengthSlices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y, z;
@@ -4198,22 +3917,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices
-                + " lengthSlices=" + lengthSlices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y;
@@ -4272,22 +3986,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices
-                + " lengthSlices=" + lengthSlices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int slices;
@@ -4342,22 +4051,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices
-                + " lengthSlices=" + lengthSlices + " stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int slices = 2 * (arcSlices + 1) + 2 * (lengthSlices - 1);
@@ -4407,33 +4111,23 @@ public class GeometryBuilder
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center1 == null || center2 == null)
         {
-            String message = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (arcSlices < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (lengthSlices < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "lengthSlices < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (loops < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "loops < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double az1 = LatLon.greatCircleAzimuth(center1, center2).radians;
@@ -4499,40 +4193,29 @@ public class GeometryBuilder
 
         if (terrain == null)
         {
-            String message = Logging.getMessage("nullValue.TerrainIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center1 == null || center2 == null)
         {
-            String message = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices
-                + " lengthSlices=" + lengthSlices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (refPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double az1 = LatLon.greatCircleAzimuth(center1, center2).radians;
@@ -4595,22 +4278,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices
-                + " lengthSlices=" + lengthSlices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y;
@@ -4671,22 +4349,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices
-                + " lengthSlices=" + lengthSlices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int slices;
@@ -4725,28 +4398,22 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices
-                + " lengthSlices=" + lengthSlices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (srcVerts == null)
         {
             String message = "nullValue.SourceVertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int slices;
@@ -4948,22 +4615,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices
-                + " lengthSlices=" + lengthSlices + " loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numIndices)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int slices;
@@ -5034,27 +4696,20 @@ public class GeometryBuilder
     {
         if (pos < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "pos=" + pos);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (count < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "count=" + count);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (points == null)
         {
             String message = "nullValue.PointsIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (points.length < (pos + count))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "points.length < " + (pos + count));
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float area;
@@ -5078,21 +4733,16 @@ public class GeometryBuilder
     {
         if (count < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "count=" + count);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices == null)
         {
             String message = "nullValue.VertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices.length < (pos + count))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "vertices.length=" + vertices.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         TessellatorCallback cb;
@@ -5137,21 +4787,16 @@ public class GeometryBuilder
     {
         if (count < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "count=" + count);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices == null)
         {
             String message = "nullValue.VertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices.length < (pos + count))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "vertices.length=" + vertices.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.tessellatePolygon(pos, count, vertices, Vec4.UNIT_Z);
@@ -5341,8 +4986,7 @@ public class GeometryBuilder
         if (itb == null)
         {
             String message = "nullValue.IndexedTriangleArray";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int indexCount;
@@ -5393,8 +5037,7 @@ public class GeometryBuilder
         if (itb == null)
         {
             String message = "nullValue.IndexedTriangleArray";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numCoords = 3 * itb.vertexCount;
@@ -5402,14 +5045,12 @@ public class GeometryBuilder
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.capacity() < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.capacity();
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.makeIndexedTriangleBufferNormals(0, itb.getIndexCount(), itb.getIndices(),
@@ -5423,38 +5064,29 @@ public class GeometryBuilder
         if (indices == null)
         {
             String message = "nullValue.IndexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (indices.capacity() < (indexPos + indexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "indices.length=" + indices.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices == null)
         {
             String message = "nullValue.VertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices.capacity() < (vertexPos + vertexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "vertices.length=" + vertices.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.capacity() < (vertexPos + vertexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "dest.length=" + dest.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, v;
@@ -5524,8 +5156,7 @@ public class GeometryBuilder
         if (itb == null)
         {
             String message = "nullValue.IndexedTriangleArray";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numCoords = 3 * itb.vertexCount;
@@ -5533,14 +5164,12 @@ public class GeometryBuilder
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.capacity() < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.capacity();
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.makeEllipsoidNormals(0, itb.getIndexCount(), itb.getIndices(),
@@ -5554,38 +5183,29 @@ public class GeometryBuilder
         if (indices == null)
         {
             String message = "nullValue.IndexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (indices.capacity() < (indexPos + indexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "indices.length=" + indices.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices == null)
         {
             String message = "nullValue.VertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices.capacity() < (vertexPos + vertexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "vertices.length=" + vertices.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.capacity() < (vertexPos + vertexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "dest.length=" + dest.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, v;
@@ -5618,8 +5238,7 @@ public class GeometryBuilder
         if (itb == null)
         {
             String message = "nullValue.IndexedTriangleArray";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numCoords = 3 * itb.vertexCount;
@@ -5627,14 +5246,12 @@ public class GeometryBuilder
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.capacity() < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.capacity();
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.makeCylinderNormals(0, itb.getIndexCount(), itb.getIndices(),
@@ -5648,38 +5265,29 @@ public class GeometryBuilder
         if (indices == null)
         {
             String message = "nullValue.IndexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (indices.capacity() < (indexPos + indexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "indices.length=" + indices.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices == null)
         {
             String message = "nullValue.VertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices.capacity() < (vertexPos + vertexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "vertices.length=" + vertices.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.capacity() < (vertexPos + vertexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "dest.length=" + dest.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, v;
@@ -5834,15 +5442,11 @@ public class GeometryBuilder
     {
         if (itb == null)
         {
-            String message = Logging.getMessage("nullValue.IndexedTriangleBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (sourceIndex >= itb.vertexCount)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "sourceIndex > vertexCount");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // ensure there is room in the vertex buffer for one new vertex
@@ -5874,8 +5478,7 @@ public class GeometryBuilder
         if (itb == null)
         {
             String message = "nullValue.IndexedTriangleArray";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numCoords = 2 * itb.vertexCount;
@@ -5883,14 +5486,12 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (texCoords.capacity() < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + texCoords.capacity();
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.makeUnitSphereTextureCoordinates(itb.getVertexCount(), itb.getVertices(), texCoords, -1);
@@ -5904,8 +5505,7 @@ public class GeometryBuilder
         if (itb == null)
         {
             String message = "nullValue.IndexedTriangleArray";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numCoords = 2 * itb.vertexCount;
@@ -5913,14 +5513,12 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (texCoords.capacity() < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + texCoords.capacity();
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.makeUnitSphereTextureCoordinates(itb.getVertexCount(), itb.getVertices(),
@@ -5933,26 +5531,20 @@ public class GeometryBuilder
         if (vertices == null)
         {
             String message = "nullValue.VertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices.capacity() < 3 * vertexCount)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "vertices.length=" + vertices.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (texCoords.capacity() < 2 * vertexCount)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "dest.length=" + texCoords.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i;
@@ -6000,14 +5592,11 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (texCoords.capacity() < 2 * vertexCount)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "dest.length=" + texCoords.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // create uv texture coordinates for each of the 6 box faces and place them in the texCoords buffer.
@@ -6036,14 +5625,11 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (texCoords.capacity() < 2 * vertexCount)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "dest.length=" + texCoords.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // create uv texture coordinates for each of the 6 box faces and place them in the texCoords buffer.
@@ -6071,14 +5657,11 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (texCoords.capacity() < 2 * vertexCount)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "dest.length=" + texCoords.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // create uv texture coordinates for each of the 4 pyramid faces and for the base, and place them
@@ -6121,14 +5704,11 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (texCoords.capacity() < 2 * vertexCount)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "dest.length=" + texCoords.capacity());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // create uv texture coordinates for either one of the 4 pyramid faces or for the base, and place them
@@ -6174,14 +5754,11 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // create uv texture coordinates for the cylinder top, bottom and core, and place them
@@ -6253,14 +5830,11 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // create uv texture coordinates for the wedge top, bottom, core and sides, and place them
@@ -6338,14 +5912,11 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // create uv texture coordinates for the wedge top, bottom, core and sides, and place them
@@ -6448,14 +6019,11 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // create uv texture coordinates for the cone bottom and core, and place them
@@ -6513,14 +6081,11 @@ public class GeometryBuilder
         if (texCoords == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // create uv texture coordinates for the cone base and core, and place them
@@ -6634,8 +6199,7 @@ public class GeometryBuilder
         if (ita == null)
         {
             String message = "nullValue.IndexedTriangleArray";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int indexCount;
@@ -6689,26 +6253,20 @@ public class GeometryBuilder
         if (indices == null)
         {
             String message = "nullValue.IndexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (indices.length < indexCount)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "indices.length=" + indices.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices == null)
         {
             String message = "nullValue.VertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices.length < numCoords)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "vertices.length=" + vertices.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         IndexedTriangleArray ita = new IndexedTriangleArray(indexCount, indices, vertexCount, vertices);
@@ -6722,8 +6280,7 @@ public class GeometryBuilder
         if (ita == null)
         {
             String message = "nullValue.IndexedTriangleArray";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numCoords = 3 * ita.vertexCount;
@@ -6731,14 +6288,12 @@ public class GeometryBuilder
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.makeIndexedTriangleArrayNormals(0, ita.indexCount, ita.indices, 0, ita.vertexCount, ita.vertices, dest);
@@ -6751,38 +6306,29 @@ public class GeometryBuilder
         if (indices == null)
         {
             String message = "nullValue.IndexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (indices.length < (indexPos + indexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "indices.length=" + indices.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices == null)
         {
             String message = "nullValue.VertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices.length < (vertexPos + vertexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "vertices.length=" + vertices.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < (vertexPos + vertexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "dest.length=" + dest.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, v;
@@ -6827,38 +6373,29 @@ public class GeometryBuilder
         if (indices == null)
         {
             String message = "nullValue.IndexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (indices.length < indexPos + indexCount)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "indices.length=" + indices.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices == null)
         {
             String message = "nullValue.VertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (vertices.length < 3 * (vertexPos + vertexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "vertices.length=" + vertices.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < 3 * (vertexPos + vertexCount))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "dest.length=" + dest.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int i, v;
@@ -7017,21 +6554,17 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions=" + subdivisions);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < numCoords)
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int first, last;
@@ -7124,22 +6657,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "uStacks=" + uStacks
-                + " vStacks=" + vStacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < (numIndices + destPos))
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int ui, vi;
@@ -7189,22 +6717,17 @@ public class GeometryBuilder
 
         if (numIndices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "uStacks=" + uStacks
-                + " vStacks=" + vStacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < (numIndices + destPos))
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int ui, vi;
@@ -7265,33 +6788,26 @@ public class GeometryBuilder
         if (control == null)
         {
             String message = "nullValue.ControlPointArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (control.length < 12)
         {
             String message = "generic.ControlPointArrayInvalidLength " + control.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "uStacks=" + uStacks
-                + " vStacks=" + vStacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < (numCoords + 3 * destPos))
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float x, y, z;
@@ -7341,28 +6857,22 @@ public class GeometryBuilder
 
         if (numPoints < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "uStacks=" + uStacks
-                + " vStacks=" + vStacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (srcVerts == null)
         {
             String message = "nullValue.SourceVertexArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest == null)
         {
             String message = "nullValue.DestinationArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dest.length < (numCoords + 3 * destPos))
         {
             String message = "generic.DestinationArrayInvalidLength " + dest.length;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int ui, vi;
@@ -7468,23 +6978,17 @@ public class GeometryBuilder
     {
         if (majorRadius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (minorRadius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (slices < 0)
         {
-            String message = Logging.getMessage("generic.NumSlicesIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Return a buffer with only the first point at angle 0 if the number of slices is zero or one.
@@ -7551,30 +7055,22 @@ public class GeometryBuilder
     {
         if (majorRadius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (minorRadius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (slices < 0)
         {
-            String message = Logging.getMessage("generic.NumSlicesIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (leaderWidth < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Return an ellipse without a leader if the leader width is zero.
@@ -7702,16 +7198,12 @@ public class GeometryBuilder
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 0)
         {
-            String message = Logging.getMessage("Geom.HeightIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // The buffer contains eight coordinate pairs: two pairs for each corner.
@@ -7766,30 +7258,22 @@ public class GeometryBuilder
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 0)
         {
-            String message = Logging.getMessage("Geom.HeightIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cornerRadius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cornerSlices < 0)
         {
-            String message = Logging.getMessage("generic.NumSlicesIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Limit the corner radius to half of the rectangles width or height, whichever is smaller.
@@ -7874,23 +7358,17 @@ public class GeometryBuilder
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 0)
         {
-            String message = Logging.getMessage("Geom.HeightIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (leaderWidth < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Return a rectangle without a leader if the leader width is zero.
@@ -8095,37 +7573,27 @@ public class GeometryBuilder
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 0)
         {
-            String message = Logging.getMessage("Geom.HeightIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cornerRadius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cornerSlices < 0)
         {
-            String message = Logging.getMessage("generic.NumSlicesIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (leaderWidth < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Limit the corner radius to half of the rectangles width or height, whichever is smaller.
@@ -8428,27 +7896,20 @@ public class GeometryBuilder
     {
         if (pos < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "pos=" + pos);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (count < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "count=" + count);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (points == null)
         {
             String message = "nullValue.PointsIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (points.length < (pos + count))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "points.length < " + (pos + count));
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         T tmp;

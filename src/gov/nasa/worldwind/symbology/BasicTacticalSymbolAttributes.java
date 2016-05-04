@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.symbology;
 
 import gov.nasa.worldwind.render.Material;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 
@@ -81,16 +80,12 @@ public class BasicTacticalSymbolAttributes implements TacticalSymbolAttributes
     {
         if (scale != null && scale < 0d)
         {
-            String msg = Logging.getMessage("generic.ScaleOutOfRange", scale);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (opacity != null && (opacity < 0d || opacity > 1d))
         {
-            String msg = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.scale = scale;
@@ -124,9 +119,7 @@ public class BasicTacticalSymbolAttributes implements TacticalSymbolAttributes
     {
         if (scale != null && scale < 0d)
         {
-            String msg = Logging.getMessage("generic.ScaleOutOfRange", scale);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.scale = scale;
@@ -153,9 +146,7 @@ public class BasicTacticalSymbolAttributes implements TacticalSymbolAttributes
     {
         if (opacity != null && (opacity < 0d || opacity > 1d))
         {
-            String msg = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.opacity = opacity;

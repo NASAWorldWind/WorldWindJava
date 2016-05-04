@@ -8,7 +8,6 @@ package gov.nasa.worldwind.render.markers;
 
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author tag
@@ -29,9 +28,7 @@ public class BasicMarker implements Marker
     {
         if (attrs == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;
@@ -42,9 +39,7 @@ public class BasicMarker implements Marker
     {
         if (attrs == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;

@@ -85,9 +85,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
     {
         if (intervals < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intervals = intervals;
@@ -113,9 +111,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
     {
         if (bowTieLength < 0.0 || bowTieLength > 1.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", bowTieLength);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.bowTieLength = bowTieLength;
@@ -140,9 +136,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
     {
         if (bowTieWidth < 0.0 || bowTieWidth > 1.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", bowTieWidth);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.bowTieWidth = bowTieWidth;
@@ -169,9 +163,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
     {
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.curvature = angle;
     }

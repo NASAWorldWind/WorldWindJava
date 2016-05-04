@@ -78,7 +78,7 @@ public class WebBrowserBalloons extends ApplicationTemplate
             }
 
             if (htmlString == null)
-                htmlString = Logging.getMessage("generic.ExceptionAttemptingToReadFile", BROWSER_BALLOON_CONTENT_PATH);
+                htmlString = null;
 
             Position balloonPosition = Position.fromDegrees(38.883056, -77.016389);
 

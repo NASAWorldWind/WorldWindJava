@@ -10,7 +10,6 @@ import gov.nasa.worldwind.animation.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.glu.GLU;
 import javax.media.opengl.glu.gl2.GLUgl2;
@@ -91,9 +90,7 @@ public class ViewUtil
     {
         if (begin == null || end == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final long MIN_LENGTH_MILLIS = 500;
@@ -119,9 +116,7 @@ public class ViewUtil
     {
         if (begin == null || end == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final long MIN_LENGTH_MILLIS = 500;
@@ -147,9 +142,7 @@ public class ViewUtil
     {
         if (begin == null || end == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final long MIN_LENGTH_MILLIS = 500;
@@ -181,9 +174,7 @@ public class ViewUtil
         if (beginHeading == null || endHeading == null || beginPitch == null || endPitch == null || beginRoll == null
             || endRoll == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final long MIN_LENGTH_MILLIS = 500;
@@ -227,15 +218,11 @@ public class ViewUtil
     {
         if (heading == null)
         {
-            String message = Logging.getMessage("nullValue.HeadingIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (pitch == null)
         {
-            String message = Logging.getMessage("nullValue.PitchIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // To get a yaw-pitch-roll transform, do the view transform in reverse (i.e. roll-pitch-yaw)
@@ -253,15 +240,11 @@ public class ViewUtil
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // The view eye position will be the same as the center position.
@@ -289,27 +272,22 @@ public class ViewUtil
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (eyePoint == null)
         {
             String message = "nullValue.EyePointIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (centerPoint == null)
         {
             String message = "nullValue.CenterPointIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (up == null)
         {
             String message = "nullValue.UpIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Matrix modelview = Matrix.fromViewLookAt(eyePoint, centerPoint, up);
@@ -325,21 +303,17 @@ public class ViewUtil
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (eyePoint == null)
         {
             String message = "nullValue.EyePointIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (centerPoint == null)
         {
             String message = "nullValue.CenterPointIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (up == null)
         {
@@ -356,15 +330,12 @@ public class ViewUtil
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (modelTransform == null)
         {
             String message = "nullValue.ModelTransformIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Compute the center position.
@@ -374,9 +345,7 @@ public class ViewUtil
         Matrix centerTransformInv = centerTransform.getInverse();
         if (centerTransformInv == null)
         {
-            String message = Logging.getMessage("generic.NoninvertibleMatrix");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         // Compute the heading-pitch-zoom transform.
@@ -395,8 +364,7 @@ public class ViewUtil
         if (headingPitchZoomTransform == null)
         {
             String message = "nullValue.HeadingPitchZoomTransformTransformIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return headingPitchZoomTransform.getRotationZ();
@@ -407,8 +375,7 @@ public class ViewUtil
         if (transform == null)
         {
             String message = "nullValue.HeadingPitchZoomTransformTransformIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Angle a = transform.getRotationX();
@@ -422,8 +389,7 @@ public class ViewUtil
         if (transform == null)
         {
             String message = "nullValue.HeadingPitchZoomTransformTransformIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return transform.getRotationY();
@@ -434,8 +400,7 @@ public class ViewUtil
         if (transform == null)
         {
             String message = "nullValue.HeadingPitchZoomTransformTransformIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         Vec4 v = transform.getTranslation();
         Position p = globe.computePositionFromPoint(v);
@@ -459,9 +424,7 @@ public class ViewUtil
     {
         if (unnormalizedPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new Position(
@@ -474,9 +437,7 @@ public class ViewUtil
     {
         if (unnormalizedHeading == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double degrees = unnormalizedHeading.degrees;
@@ -488,9 +449,7 @@ public class ViewUtil
     {
         if (unnormalizedPitch == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Normalize pitch to the range [-180, 180].
@@ -503,9 +462,7 @@ public class ViewUtil
     {
         if (unnormalizedRoll == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double degrees = unnormalizedRoll.degrees;
@@ -518,15 +475,11 @@ public class ViewUtil
     {
         if (modelview == null || projection == null)
         {
-            String message = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (viewport == null)
         {
-            String message = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Compute a ray originating from the view, and passing through the screen point (x, y).
@@ -557,15 +510,11 @@ public class ViewUtil
     {
         if (fieldOfView == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (viewport == null)
         {
-            String message = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // If the viewport width is zero, than replace it with 1, which effectively ignores the viewport width.
@@ -579,9 +528,7 @@ public class ViewUtil
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (elevation <= 0)
@@ -606,16 +553,12 @@ public class ViewUtil
     {
         if (horizontalFieldOfView == null)
         {
-            String message = Logging.getMessage("nullValue.FOVIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (viewport == null)
         {
-            String message = Logging.getMessage("nullValue.ViewportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Taken form "Mathematics for 3D Game Programming and Computer Graphics", page 114.
@@ -631,22 +574,16 @@ public class ViewUtil
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         Globe globe = dc.getGlobe();
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position surfacePosition = null;
@@ -679,16 +616,12 @@ public class ViewUtil
     {
         if (fieldOfView == null)
         {
-            String msg = Logging.getMessage("nullValue.FOVIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (distanceToObject < 0)
         {
-            String msg = Logging.getMessage("generic.DistanceLessThanZero");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double tanHalfFov = fieldOfView.tanHalfAngle();
@@ -713,23 +646,17 @@ public class ViewUtil
     {
         if (farDistance < 0)
         {
-            String msg = Logging.getMessage("generic.DistanceLessThanZero");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (farResolution < 0)
         {
-            String msg = Logging.getMessage("generic.ResolutionLessThanZero");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (depthBits < 1)
         {
-            String msg = Logging.getMessage("generic.DepthBitsLessThanOne");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (farDistance == 0 || farResolution == 0)
@@ -762,30 +689,22 @@ public class ViewUtil
     {
         if (modelPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (modelview == null)
         {
-            String message = Logging.getMessage("nullValue.ModelViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (projection == null)
         {
-            String message = Logging.getMessage("nullValue.ProjectionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (viewport == null)
         {
-            String message = Logging.getMessage("nullValue.ViewportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GLU glu = new GLUgl2();
@@ -832,30 +751,22 @@ public class ViewUtil
     {
         if (windowPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (modelview == null)
         {
-            String message = Logging.getMessage("nullValue.ModelViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (projection == null)
         {
-            String message = Logging.getMessage("nullValue.ProjectionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (viewport == null)
         {
-            String message = Logging.getMessage("nullValue.ViewportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GLU glu = new GLUgl2();

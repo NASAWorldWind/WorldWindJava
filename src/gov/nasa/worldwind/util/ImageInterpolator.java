@@ -184,38 +184,27 @@ public class ImageInterpolator
     {
         if (gridSize == null)
         {
-            String message = Logging.getMessage("nullValue.DimensionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (gridSize.width < 2 || gridSize.height < 2)
         {
-            String message = Logging.getMessage("generic.DimensionsTooSmall");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message,
-                new Object[] {gridSize.width, gridSize.height});
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (xs == null || ys == null || xs.length < 4 || ys.length < 4)
         {
-            String message = Logging.getMessage("Grid.ArraysInvalid");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (depth < 0)
         {
-            String message = Logging.getMessage("Grid.DepthInvalid");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (cellSize < 1)
         {
-            String message = Logging.getMessage("Grid.CellSizeInvalid");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.gridSize = gridSize;

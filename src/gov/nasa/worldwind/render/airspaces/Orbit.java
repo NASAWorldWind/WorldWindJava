@@ -52,26 +52,21 @@ public class Orbit extends AbstractAirspace
         if (location1 == null)
         {
             String message = "nullValue.Location1IsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (location2 == null)
         {
             String message = "nullValue.Location2IsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (orbitType == null)
         {
             String message = "nullValue.OrbitTypeIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (width < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width=" + width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.location1 = location1;
@@ -171,14 +166,12 @@ public class Orbit extends AbstractAirspace
         if (location1 == null)
         {
             String message = "nullValue.Location1IsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (location2 == null)
         {
             String message = "nullValue.Location2IsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.location1 = location1;
@@ -223,8 +216,7 @@ public class Orbit extends AbstractAirspace
         if (orbitType == null)
         {
             String message = "nullValue.OrbitTypeIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.orbitType = orbitType;
@@ -240,9 +232,7 @@ public class Orbit extends AbstractAirspace
     {
         if (width < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width=" + width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.width = width;
@@ -294,14 +284,12 @@ public class Orbit extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<LatLon> newLocations = LatLon.computeShiftedLocations(globe, oldRef, newRef,
@@ -316,14 +304,12 @@ public class Orbit extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.doMoveTo(oldRef, newRef);
@@ -374,9 +360,7 @@ public class Orbit extends AbstractAirspace
     {
         if (arcSlices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "arcSlices=" + arcSlices);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.arcSlices = arcSlices;
@@ -391,9 +375,7 @@ public class Orbit extends AbstractAirspace
     {
         if (lengthSlices < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "lengthSlices=" + lengthSlices);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.lengthSlices = lengthSlices;
@@ -413,9 +395,7 @@ public class Orbit extends AbstractAirspace
     {
         if (loops < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "loops=" + loops);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.loops = loops;
@@ -429,15 +409,11 @@ public class Orbit extends AbstractAirspace
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Globe globe = dc.getGlobe();
@@ -456,9 +432,7 @@ public class Orbit extends AbstractAirspace
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] altitudes = this.getAltitudes(verticalExaggeration);
@@ -487,21 +461,15 @@ public class Orbit extends AbstractAirspace
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LatLon[] locations = this.getAdjustedLocations(dc.getGlobe());

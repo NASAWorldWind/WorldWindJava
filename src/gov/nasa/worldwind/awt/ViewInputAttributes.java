@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.awt;
 
 import gov.nasa.worldwind.Configuration;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.event.*;
 import java.util.*;
@@ -130,9 +129,7 @@ public class ViewInputAttributes
         {
             if (attributes == null)
             {
-                String message = Logging.getMessage("nullValue.AttributesIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.minValue = attributes.minValue;
@@ -152,15 +149,11 @@ public class ViewInputAttributes
         {
             if (minValue <= 0)
             {
-                String message = Logging.getMessage("generic.ArgumentOutOfRange", "minValue <= 0");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (maxValue <= 0)
             {
-                String message = Logging.getMessage("generic.ArgumentOutOfRange", "maxValue <= 0");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.minValue = minValue;
@@ -191,10 +184,7 @@ public class ViewInputAttributes
         {
             if (smoothingValue < 0 || smoothingValue >= 1.0)
             {
-                String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                    "smoothingValue < 0 || smoothingValue >= 1");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.smoothingValue = smoothingValue;
@@ -270,9 +260,7 @@ public class ViewInputAttributes
         {
             if (attributes == null)
             {
-                String message = Logging.getMessage("nullValue.AttributesIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.sensitivity = attributes.sensitivity;
@@ -287,9 +275,7 @@ public class ViewInputAttributes
         {
             if (sensitivity <= 0)
             {
-                String message = Logging.getMessage("generic.ArgumentOutOfRange", "sensitivity <= 0");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.sensitivity = sensitivity;
@@ -308,9 +294,7 @@ public class ViewInputAttributes
         {
             if (actionKey == null)
             {
-                String message = Logging.getMessage("nullValue.ActionKeyIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             return this.actionMap.get(actionKey);
@@ -320,15 +304,11 @@ public class ViewInputAttributes
         {
             if (actionKey == null)
             {
-                String message = Logging.getMessage("nullValue.ActionKeyIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (attributes == null)
             {
-                String message = Logging.getMessage("nullValue.AttributesIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.actionMap.put(actionKey, attributes);
@@ -605,9 +585,7 @@ public class ViewInputAttributes
     {
         if (deviceKey == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.deviceActionMap.get(deviceKey);
@@ -617,15 +595,11 @@ public class ViewInputAttributes
     {
         if (deviceKey == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (map == null)
         {
-            String message = Logging.getMessage("nullValue.MapIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.deviceActionMap.put(deviceKey, map);
@@ -646,9 +620,7 @@ public class ViewInputAttributes
         ActionAttributes actionAttrs = getActionAttributes(device, action);
         if (actionAttrs == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -661,9 +633,7 @@ public class ViewInputAttributes
         ActionAttributes actionAttrs = getActionAttributes(device, action);
         if (actionAttrs == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -691,9 +661,7 @@ public class ViewInputAttributes
         Map<Object, ArrayList> deviceModActionMap = this.getModifierActionMap(device);
         if (deviceModActionMap == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         return (deviceModActionMap.get(modifier));
     }
@@ -702,9 +670,7 @@ public class ViewInputAttributes
     {
         if (deviceKey == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.deviceMap.get(deviceKey);
@@ -714,15 +680,11 @@ public class ViewInputAttributes
     {
         if (deviceKey == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.deviceMap.put(deviceKey, attributes);
@@ -732,9 +694,7 @@ public class ViewInputAttributes
     {
         if (deviceKey == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.deviceModActionMap.get(deviceKey);
@@ -744,15 +704,11 @@ public class ViewInputAttributes
     {
         if (deviceKey == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (map == null)
         {
-            String message = Logging.getMessage("nullValue.MapIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.deviceModActionMap.put(deviceKey, map);
@@ -762,15 +718,11 @@ public class ViewInputAttributes
     {
         if (deviceKey == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (actionKey == null)
         {
-            String message = Logging.getMessage("nullValue.ActionKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ActionAttributesMap map = this.getActionMap(deviceKey);
@@ -785,15 +737,11 @@ public class ViewInputAttributes
     {
         if (deviceKey == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (actionKey == null)
         {
-            String message = Logging.getMessage("nullValue.ActionKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         // Add this action to the Device -> Modifier -> Action map
         addModifierAction(deviceKey, modifier, actionAttrs);
@@ -835,29 +783,21 @@ public class ViewInputAttributes
     {
         if (deviceKey == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (actionKey == null)
         {
-            String message = Logging.getMessage("nullValue.ActionKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         ActionAttributesMap deviceActionMap = this.getActionMap(deviceKey);
         if (deviceActionMap == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceNotDefined");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         ActionAttributes actions = deviceActionMap.getActionAttributes(actionKey);
         if (actions == null)
         {
-            String message = Logging.getMessage("nullValue.DeviceActionNotDefined");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (actions.getMouseActions() != null)

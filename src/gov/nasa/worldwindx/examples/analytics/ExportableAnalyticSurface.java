@@ -142,16 +142,12 @@ public class ExportableAnalyticSurface extends AnalyticSurface implements Export
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (output == null)
         {
-            String message = Logging.getMessage("nullValue.OutputBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
@@ -162,15 +158,12 @@ public class ExportableAnalyticSurface extends AnalyticSurface implements Export
             }
             catch (XMLStreamException e)
             {
-                Logging.logger().throwing(getClass().getName(), "export", e);
                 throw new IOException(e);
             }
         }
         else
         {
-            String message = Logging.getMessage("Export.UnsupportedFormat", mimeType);
-            Logging.logger().warning(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
     }
 
@@ -214,15 +207,11 @@ public class ExportableAnalyticSurface extends AnalyticSurface implements Export
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.exportImagePath == null || this.exportImageName == null)
         {
-            String message = Logging.getMessage("Export.UnableToExportImageSource", "Image path or name unspecified");
-            Logging.logger().severe(message);
         }
         else
         {
@@ -235,9 +224,7 @@ public class ExportableAnalyticSurface extends AnalyticSurface implements Export
             }
             catch (IOException e)
             {
-                String message = Logging.getMessage("Export.UnableToExportImageSource", file.getAbsolutePath(), e);
-                Logging.logger().severe(message);
-            }
+                }
         }
 
         xmlWriter.writeStartElement("GroundOverlay");

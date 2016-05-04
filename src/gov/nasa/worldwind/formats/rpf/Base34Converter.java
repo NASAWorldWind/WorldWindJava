@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.rpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author dcollins
  * @version $Id: Base34Converter.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -25,15 +23,11 @@ class Base34Converter
     {
         if (dest == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (offset < 0 || count < 0 || (offset + count) >= dest.length)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().fine(message);
-            throw new IndexOutOfBoundsException(message);
+            throw new IndexOutOfBoundsException();
         }
 
         for (int digit = count + offset - 1; digit >= offset; digit--)
@@ -50,15 +44,11 @@ class Base34Converter
     {
         if (src == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (offset < 0 || count < 0 || (offset + count) >= src.length)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().fine(message);
-            throw new IndexOutOfBoundsException(message);
+            throw new IndexOutOfBoundsException();
         }
 
         int i = 0;
@@ -76,9 +66,7 @@ class Base34Converter
                 index = 23 + charUpper - 'P';
             else
             {
-                String message = Logging.getMessage("Base34Converter.Base34Error");
-                Logging.logger().fine(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             i = (i * 34) + index;
         }
@@ -89,15 +77,11 @@ class Base34Converter
     {
         if (src == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (offset < 0 || count < 0 || (offset + count) >= src.length)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().fine(message);
-            throw new IndexOutOfBoundsException(message);
+            throw new IndexOutOfBoundsException();
         }
 
         for (int digit = offset; digit < offset + count; digit++)

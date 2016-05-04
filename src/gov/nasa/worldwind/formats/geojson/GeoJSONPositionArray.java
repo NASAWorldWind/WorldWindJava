@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.geojson;
 
 import gov.nasa.worldwind.geom.Position;
-import gov.nasa.worldwind.util.Logging;
 
 import java.nio.DoubleBuffer;
 import java.util.Iterator;
@@ -26,16 +25,12 @@ public class GeoJSONPositionArray implements Iterable<Position>
     {
         if (positionSize < 2)
         {
-            String message = Logging.getMessage("generic.InvalidTupleSize", positionSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.positionSize = positionSize;

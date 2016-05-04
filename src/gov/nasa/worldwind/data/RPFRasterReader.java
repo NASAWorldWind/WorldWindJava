@@ -53,9 +53,7 @@ public class RPFRasterReader extends AbstractDataRasterReader
     {
         if (!(source instanceof java.io.File))
         {
-            String message = Logging.getMessage("DataRaster.CannotRead", source);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         java.io.File file = (java.io.File) source;
@@ -74,9 +72,7 @@ public class RPFRasterReader extends AbstractDataRasterReader
     {
         if (!(source instanceof java.io.File))
         {
-            String message = Logging.getMessage("DataRaster.CannotRead", source);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         java.io.File file = (java.io.File) source;
@@ -190,7 +186,6 @@ public class RPFRasterReader extends AbstractDataRasterReader
             // Computing the file's coverage failed. Log the condition and return null.
             // This at allows the coverage to be re-computed at a later time.
             String message = String.format("Exception while computing file sector: %s", file);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             sector = null;
         }
         return sector;
@@ -228,7 +223,6 @@ public class RPFRasterReader extends AbstractDataRasterReader
             // Computing the file's coverage failed. Log the condition and return null.
             // This at allows the coverage to be re-computed at a later time.
             String message = String.format("Exception while getting file sector: %s", file);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             sector = null;
         }
         return sector;

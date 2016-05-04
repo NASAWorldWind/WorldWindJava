@@ -11,11 +11,9 @@ import gov.nasa.worldwind.avlist.AVList;
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.formats.dds.DDSDecompressor;
 import gov.nasa.worldwind.formats.dds.DDSHeader;
-import gov.nasa.worldwind.util.Logging;
-import gov.nasa.worldwind.util.WWUtil;
+import gov.nasa.worldwind.util.*;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 /**
  * @author Lado Garakanidze
@@ -52,7 +50,6 @@ public class DDSRasterReader extends AbstractDataRasterReader
         {
             String message = e.getMessage();
             message = (null == message && null != e.getCause()) ? e.getCause().getMessage() : message;
-            Logging.logger().log(Level.FINEST, message, e);
         }
         return false;
     }
@@ -62,9 +59,7 @@ public class DDSRasterReader extends AbstractDataRasterReader
     {
         if (null == params || !params.hasKey(AVKey.SECTOR))
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.SECTOR);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         DataRaster raster = null;
@@ -86,8 +81,7 @@ public class DDSRasterReader extends AbstractDataRasterReader
         {
             String message = t.getMessage();
             message = (WWUtil.isEmpty(message) && null != t.getCause()) ? t.getCause().getMessage() : message;
-            Logging.logger().log(Level.FINEST, message, t);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         return (null != raster) ? new DataRaster[]{raster} : null;
@@ -110,8 +104,7 @@ public class DDSRasterReader extends AbstractDataRasterReader
         {
             String message = e.getMessage();
             message = (WWUtil.isEmpty(message) && null != e.getCause()) ? e.getCause().getMessage() : message;
-            Logging.logger().log(Level.FINEST, message, e);
-            throw new IOException(message);
+            throw new IOException();
         }
     }
 }

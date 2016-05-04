@@ -114,16 +114,12 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         {
             if (offset == null)
             {
-                String message = Logging.getMessage("nullValue.OffsetIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (WWUtil.isEmpty(imageSource))
             {
-                String message = Logging.getMessage("nullValue.ImageSource");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.setAction(action);
@@ -136,23 +132,17 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         {
             if (offset == null)
             {
-                String message = Logging.getMessage("nullValue.OffsetIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (size == null)
             {
-                String message = Logging.getMessage("nullValue.SizeIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (WWUtil.isEmpty(imageSource))
             {
-                String message = Logging.getMessage("nullValue.ImageSource");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.setValue(AVKey.ACTION, action);
@@ -190,9 +180,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         {
             if (offset == null)
             {
-                String message = Logging.getMessage("nullValue.OffsetIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.offset = offset;
@@ -207,9 +195,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         {
             if (size == null)
             {
-                String message = Logging.getMessage("nullValue.SizeIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.size = size;
@@ -244,9 +230,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         {
             if (WWUtil.isEmpty(imageSource))
             {
-                String message = Logging.getMessage("nullValue.ImageSource");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.imageSource = imageSource;
@@ -536,9 +520,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlinePickWidth = width;
@@ -553,9 +535,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     {
         if (browserControl == null)
         {
-            String message = Logging.getMessage("nullValue.BrowserControlIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.browserControls.add(browserControl);
@@ -565,16 +545,12 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     {
         if (offset == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(imageSource))
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         BrowserControl browserControl = new BrowserControl(action, offset, imageSource);
@@ -587,23 +563,17 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     {
         if (offset == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (size == null)
         {
-            String message = Logging.getMessage("nullValue.SizeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(imageSource))
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         BrowserControl browserControl = new BrowserControl(action, offset, size, imageSource);
@@ -616,9 +586,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (BrowserControl browserControl : iterable)
@@ -634,9 +602,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     {
         if (browserControl == null)
         {
-            String message = Logging.getMessage("nullValue.BrowserControlIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.browserControls.remove(browserControl);
@@ -718,9 +684,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     {
         if (visibilityAction == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.visibilityAction = visibilityAction;
@@ -764,9 +728,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         OrderedBrowserBalloon obb = this.orderedRenderables.get(dc.getGlobe().getGlobeStateKey());
@@ -808,9 +770,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())
@@ -1500,7 +1460,6 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
             if (url == null)
             {
-                Logging.logger().warning(Logging.getMessage("generic.URIInvalid", resourceResolver));
             }
 
             this.webView.setHTMLString(text, url);
@@ -1509,7 +1468,6 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         {
             if (resourceResolver != null)
             {
-                Logging.logger().warning(Logging.getMessage("generic.UnrecognizedResourceResolver", resourceResolver));
             }
 
             this.webView.setHTMLString(text);
@@ -1531,8 +1489,6 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         }
         catch (Throwable t)
         {
-            String message = Logging.getMessage("WebView.ExceptionCreatingWebView", t);
-            Logging.logger().severe(message);
 
             dc.addRenderingException(t);
 
@@ -1733,7 +1689,6 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
             }
             catch (Exception e)
             {
-                Logging.logger().severe(Logging.getMessage("generic.ExceptionWhileRenderingBrowserControl", control));
             }
         }
     }

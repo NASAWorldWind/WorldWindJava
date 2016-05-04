@@ -32,9 +32,7 @@ public class SurfacePolylines extends AbstractSurfaceShape
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.buffer = buffer;
@@ -44,15 +42,11 @@ public class SurfacePolylines extends AbstractSurfaceShape
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sectors = Arrays.asList(sector);
@@ -74,9 +68,7 @@ public class SurfacePolylines extends AbstractSurfaceShape
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // SurfacePolylines does not interpolate between caller specified positions, therefore it has no path type.
@@ -90,9 +82,7 @@ public class SurfacePolylines extends AbstractSurfaceShape
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.getLocations();

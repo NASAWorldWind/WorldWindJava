@@ -9,7 +9,6 @@ import gov.nasa.worldwind.WWObjectImpl;
 import gov.nasa.worldwind.render.markers.BasicMarkerShape;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -33,15 +32,11 @@ public class SegmentPlane extends WWObjectImpl
         {
             if (owner == null)
             {
-                String message = Logging.getMessage("nullValue.OwnerIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (key == null)
             {
-                String message = Logging.getMessage("nullValue.KeyIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.owner = owner;
@@ -207,9 +202,7 @@ public class SegmentPlane extends WWObjectImpl
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.attributes = attributes;
@@ -247,14 +240,12 @@ public class SegmentPlane extends WWObjectImpl
         if (location1 == null)
         {
             String message = "nullValue.Location1IsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (location2 == null)
         {
             String message = "nullValue.Location2IsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LatLon[] oldLocations = this.getPlaneLocations();
@@ -275,15 +266,11 @@ public class SegmentPlane extends WWObjectImpl
     {
         if (width <= 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (height <= 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "height <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] oldGridDimensions = this.getGridCellDimensions();
@@ -327,14 +314,12 @@ public class SegmentPlane extends WWObjectImpl
         if (position1 == null)
         {
             String message = "nullValue.Position1IsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (position2 == null)
         {
             String message = "nullValue.Position2IsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setSegmentBeginPosition(position1);
@@ -345,9 +330,7 @@ public class SegmentPlane extends WWObjectImpl
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position oldPosition = this.segmentBeginPosition;
@@ -360,9 +343,7 @@ public class SegmentPlane extends WWObjectImpl
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position oldPosition = this.segmentEndPosition;
@@ -380,9 +361,7 @@ public class SegmentPlane extends WWObjectImpl
     {
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.controlPointList.clear();
@@ -397,9 +376,7 @@ public class SegmentPlane extends WWObjectImpl
     {
         if (controlPoint.getOwner() != this)
         {
-            String message = Logging.getMessage("generic.OwnerIsInvalid", controlPoint.getOwner());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.controlPointList.add(controlPoint);
@@ -414,9 +391,7 @@ public class SegmentPlane extends WWObjectImpl
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         BilinearInterpolator interp = this.createPlaneInterpolator(globe);
@@ -439,9 +414,7 @@ public class SegmentPlane extends WWObjectImpl
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] altitudes = this.getPlaneAltitudes();

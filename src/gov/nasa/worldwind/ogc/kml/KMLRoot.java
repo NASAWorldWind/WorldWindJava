@@ -102,9 +102,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (docSource instanceof File)
@@ -154,9 +152,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
 
         if (kmlRoot == null)
         {
-            String message = Logging.getMessage("generic.UnrecognizedSourceTypeOrUnavailableSource",
-                docSource.toString());
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -205,9 +201,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
 
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.kmlDoc = docSource;
@@ -244,9 +238,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
 
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWIO.isContentType(docSource, KMLConstants.KML_MIME_TYPE))
@@ -266,7 +258,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
             }
         }
         else
-            throw new WWUnrecognizedException(Logging.getMessage("KML.UnrecognizedKMLFileType"));
+            throw new WWUnrecognizedException();
 
         this.initialize(namespaceAware);
     }
@@ -306,9 +298,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
 
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (contentType != null && contentType.equals(KMLConstants.KMZ_MIME_TYPE))
@@ -362,9 +352,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
 
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         URLConnection conn = docSource.openConnection();
@@ -417,9 +405,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
 
         if (docSource == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.kmlDoc = docSource;
@@ -440,7 +426,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         this.eventStream = this.getKMLDoc().getKMLStream();
         this.eventReader = this.createReader(this.eventStream, namespaceAware);
         if (this.eventReader == null)
-            throw new WWRuntimeException(Logging.getMessage("XML.UnableToOpenDocument", this.getKMLDoc()));
+            throw new WWRuntimeException();
 
         this.parserContext = this.createParserContext(this.eventReader);
     }
@@ -569,9 +555,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (link == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (absentResourceList.isResourceAbsent(link))
@@ -622,9 +606,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (link == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -668,8 +650,6 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.UnableToResolveReference", link);
-            Logging.logger().warning(message);
         }
 
         return null;
@@ -697,9 +677,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (linkBase == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -728,8 +706,6 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.UnableToResolveReference", linkBase + "/" + linkRef);
-            Logging.logger().warning(message);
             return null;
         }
     }
@@ -757,9 +733,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (linkBase == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Store remote files in the World Wind cache by default. This provides backward compatibility with applications
@@ -797,9 +771,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (linkBase == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -854,8 +826,6 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.UnableToResolveReference", linkBase + "/" + linkRef);
-            Logging.logger().warning(message);
             return null;
         }
     }
@@ -888,9 +858,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (link == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = null;
@@ -939,8 +907,6 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.UnableToResolveReference", link);
-            Logging.logger().warning(message);
         }
 
         return o;
@@ -972,8 +938,6 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         }
         catch (URISyntaxException e)
         {
-            String message = Logging.getMessage("generic.UnableToResolveReference", link);
-            Logging.logger().warning(message);
         }
     }
 
@@ -1004,8 +968,6 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.UnableToResolveReference", link);
-            Logging.logger().warning(message);
         }
 
         return 0;
@@ -1118,8 +1080,6 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionClosingXmlEventReader");
-            Logging.logger().warning(message);
         }
     }
 
@@ -1269,9 +1229,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (listener == null)
         {
-            String msg = Logging.getMessage("nullValue.ListenerIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.getChangeSupport().addPropertyChangeListener(listener);
     }
@@ -1288,9 +1246,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (listener == null)
         {
-            String msg = Logging.getMessage("nullValue.ListenerIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.getChangeSupport().addPropertyChangeListener(listener);
     }
@@ -1304,9 +1260,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (propertyChangeEvent == null)
         {
-            String msg = Logging.getMessage("nullValue.PropertyChangeEventIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.getChangeSupport().firePropertyChange(propertyChangeEvent);
     }
@@ -1322,9 +1276,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     {
         if (propertyName == null)
         {
-            String msg = Logging.getMessage("nullValue.PropertyNameIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.getChangeSupport().firePropertyChange(propertyName, oldValue, newValue);
     }

@@ -11,7 +11,6 @@ import gov.nasa.worldwind.cache.FileStore;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.retrieve.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.net.URL;
 import java.nio.ByteBuffer;
@@ -106,14 +105,10 @@ public class PlaceNameLayerBulkDownloader extends BulkRetrievalThread
         }
         catch (InterruptedException e)
         {
-            String message = Logging.getMessage("generic.BulkRetrievalInterrupted", layer.getName());
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionDuringBulkRetrieval", layer.getName());
-            Logging.logger().severe(message);
-            throw new RuntimeException(message);
+            throw new RuntimeException();
         }
     }
 
@@ -198,9 +193,7 @@ public class PlaceNameLayerBulkDownloader extends BulkRetrievalThread
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionDuringDataSizeEstimate", this.getName());
-            Logging.logger().severe(message);
-            throw new RuntimeException(message);
+            throw new RuntimeException();
         }
         return tileCount * AVG_TILE_SIZE;
     }

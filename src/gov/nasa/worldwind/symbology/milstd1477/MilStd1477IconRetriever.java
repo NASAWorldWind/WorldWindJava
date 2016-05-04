@@ -8,7 +8,6 @@ package gov.nasa.worldwind.symbology.milstd1477;
 
 import gov.nasa.worldwind.avlist.AVList;
 import gov.nasa.worldwind.symbology.AbstractIconRetriever;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.image.*;
 import java.util.MissingResourceException;
@@ -30,9 +29,7 @@ public class MilStd1477IconRetriever extends AbstractIconRetriever
     {
         if (symbolId == null)
         {
-            String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // retrieve desired symbol and convert to bufferedImage
@@ -44,9 +41,7 @@ public class MilStd1477IconRetriever extends AbstractIconRetriever
 
         if (img == null)
         {
-            String msg = Logging.getMessage("Symbology.SymbolIconNotFound", symbolId);
-            Logging.logger().severe(msg);
-            throw new MissingResourceException(msg, BufferedImage.class.getName(), filename);
+            throw new MissingResourceException(null, BufferedImage.class.getName(), filename);
         }
 
         return img;

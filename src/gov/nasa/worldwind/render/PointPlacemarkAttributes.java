@@ -603,16 +603,12 @@ public class PointPlacemarkAttributes implements Exportable
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (output == null)
         {
-            String message = Logging.getMessage("nullValue.OutputBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
@@ -623,15 +619,12 @@ public class PointPlacemarkAttributes implements Exportable
             }
             catch (XMLStreamException e)
             {
-                Logging.logger().throwing(getClass().getName(), "export", e);
                 throw new IOException(e);
             }
         }
         else
         {
-            String message = Logging.getMessage("Export.UnsupportedFormat", mimeType);
-            Logging.logger().warning(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
     }
 
@@ -666,9 +659,7 @@ public class PointPlacemarkAttributes implements Exportable
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         xmlWriter.writeStartElement("Style");

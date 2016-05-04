@@ -50,7 +50,7 @@ public class UserDefinedImageSubheader
             if( RPFFrameFileComponents.DATA_TAG.equals(tag) )
                 this.rpfFrameFileComponents = new RPFFrameFileComponents(buffer);
             else
-                throw new NITFSRuntimeException("NITFSReader.UnknownOrUnsupportedUserDefinedImageSubheader");
+                throw new NITFSRuntimeException();
         }
     }
 }

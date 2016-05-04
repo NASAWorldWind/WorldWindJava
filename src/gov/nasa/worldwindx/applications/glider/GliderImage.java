@@ -92,23 +92,17 @@ public class GliderImage extends AVListImpl
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (imageSource == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.LocationsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.name = name;
@@ -136,7 +130,7 @@ public class GliderImage extends AVListImpl
 //        {
 //            String message = Logging.getMessage("nullValue.ImageIsNull");
 //            Logging.logger().severe(message);
-//            throw new IllegalArgumentException(message);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        this.name = image.getName();
@@ -198,9 +192,7 @@ public class GliderImage extends AVListImpl
     {
         if (newSource == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setImageSource(newSource, newSource);
@@ -219,16 +211,12 @@ public class GliderImage extends AVListImpl
     {
         if (newName == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (newSource == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
 //        GliderImage oldImage = new GliderImage(this);
@@ -269,9 +257,7 @@ public class GliderImage extends AVListImpl
     {
         if (region == null)
         {
-            String message = Logging.getMessage("nullValue.RegionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         region.removePropertyChangeListener(this.regionListener); // prevent duplicate registrations
@@ -292,9 +278,7 @@ public class GliderImage extends AVListImpl
     {
         if (region == null)
         {
-            String message = Logging.getMessage("nullValue.RegionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         region.removePropertyChangeListener(this.regionListener);

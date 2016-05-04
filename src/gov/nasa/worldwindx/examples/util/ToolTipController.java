@@ -91,7 +91,6 @@ public class ToolTipController implements SelectListener, Disposable
         catch (Exception e)
         {
             // Wrap the handler in a try/catch to keep exceptions from bubbling up
-            Logging.logger().warning(e.getMessage() != null ? e.getMessage() : e.toString());
         }
     }
 

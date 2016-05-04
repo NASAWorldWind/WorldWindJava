@@ -66,16 +66,12 @@ public abstract class ShapefileRenderable extends WWObjectImpl
         {
             if (shapefileRenderable == null)
             {
-                String msg = Logging.getMessage("nullValue.RenderableIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (shapefileRecord == null)
             {
-                String msg = Logging.getMessage("nullValue.RecordIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             this.shapefileRenderable = shapefileRenderable;
@@ -169,9 +165,7 @@ public abstract class ShapefileRenderable extends WWObjectImpl
         {
             if (index < 0 || index >= this.numberOfParts)
             {
-                String msg = Logging.getMessage("generic.indexOutOfRange", index);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             synchronized (this.pointBuffer) // synchronize access to the Shapefile's shared pointBuffer
@@ -184,9 +178,7 @@ public abstract class ShapefileRenderable extends WWObjectImpl
         {
             if (index < 0 || index >= this.numberOfParts)
             {
-                String msg = Logging.getMessage("generic.indexOutOfRange", index);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             VecBuffer points = this.getBoundaryPoints(index);
@@ -304,9 +296,7 @@ public abstract class ShapefileRenderable extends WWObjectImpl
     {
         if (this.records == null || ordinal < 0 || ordinal >= this.records.size())
         {
-            String msg = Logging.getMessage("generic.indexOutOfRange", ordinal);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.records.get(ordinal);

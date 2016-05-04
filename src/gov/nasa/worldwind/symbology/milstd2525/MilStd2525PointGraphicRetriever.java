@@ -9,7 +9,6 @@ package gov.nasa.worldwind.symbology.milstd2525;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.symbology.*;
 import gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -73,9 +72,7 @@ public class MilStd2525PointGraphicRetriever extends AbstractIconRetriever
     {
         if (sidc == null)
         {
-            String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Retrieve desired symbol and convert to BufferedImage
@@ -85,9 +82,7 @@ public class MilStd2525PointGraphicRetriever extends AbstractIconRetriever
 
         if (srcImg == null)
         {
-            String msg = Logging.getMessage("Symbology.SymbolIconNotFound", symbolCode);
-            Logging.logger().severe(msg);
-            throw new MissingResourceException(msg, BufferedImage.class.getName(), filename);
+            throw new MissingResourceException(null, BufferedImage.class.getName(), filename);
         }
 
         int width = srcImg.getWidth();
@@ -137,9 +132,7 @@ public class MilStd2525PointGraphicRetriever extends AbstractIconRetriever
 
         if (fill == null)
         {
-            String msg = Logging.getMessage("Symbology.SymbolIconNotFound", symbolCode);
-            Logging.logger().severe(msg);
-            throw new MissingResourceException(msg, BufferedImage.class.getName(), fillPath);
+            throw new MissingResourceException(null, BufferedImage.class.getName(), fillPath);
         }
 
         int width = srcImg.getWidth();

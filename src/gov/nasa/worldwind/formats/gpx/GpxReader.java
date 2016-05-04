@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.gpx;
 
 import gov.nasa.worldwind.tracks.*;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.geom.Position;
 
 import java.util.Iterator;
@@ -38,16 +37,12 @@ public class GpxReader // TODO: I18N, proper exception handling, remove stack-tr
     {
         if (path == null)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         java.io.File file = new java.io.File(path);
         if (!file.exists())
         {
-            String msg = Logging.getMessage("generic.FileNotFound", path);
-            Logging.logger().severe(msg);
             throw new java.io.FileNotFoundException(path);
         }
 
@@ -65,9 +60,7 @@ public class GpxReader // TODO: I18N, proper exception handling, remove stack-tr
     {
         if (stream == null)
         {
-            String msg = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.doRead(stream);
@@ -142,7 +135,7 @@ public class GpxReader // TODO: I18N, proper exception handling, remove stack-tr
             if (this.firstElement)
             {
                 if (!lname.equalsIgnoreCase("gpx"))
-                    throw new IllegalArgumentException(Logging.getMessage("formats.notGPX", uri));
+                    throw new IllegalArgumentException((String) null);
                 else
                     this.firstElement = false;
             }

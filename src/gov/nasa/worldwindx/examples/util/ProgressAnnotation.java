@@ -81,9 +81,7 @@ public class ProgressAnnotation extends ScreenAnnotation
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlineColor = color;
@@ -98,9 +96,7 @@ public class ProgressAnnotation extends ScreenAnnotation
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.interiorColor = color;
@@ -116,9 +112,7 @@ public class ProgressAnnotation extends ScreenAnnotation
     {
         if (insets == null)
         {
-            String message = Logging.getMessage("nullValue.InsetsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Class java.awt.Insets is known to override the method Object.clone().

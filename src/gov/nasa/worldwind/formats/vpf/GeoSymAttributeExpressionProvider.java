@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.vpf;
 
 import gov.nasa.worldwind.avlist.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -45,9 +44,7 @@ public class GeoSymAttributeExpressionProvider
             Integer sequenceNumber = AVListImpl.getIntegerValue(row, "seq");
             if (symbolId == null || sequenceNumber == null)
             {
-                String message = Logging.getMessage("VPF.GeoSymInvalidAttributeExpression", row);
-                Logging.logger().warning(message);
-                continue;
+                    continue;
             }
 
             Set<AVList> list = map.get(symbolId);

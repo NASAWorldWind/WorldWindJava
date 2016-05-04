@@ -64,7 +64,7 @@ public class TiledElevationProducer extends TiledRasterProducer
     public String getDataSourceDescription()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(Logging.getMessage("TiledElevationProducer.Description"));
+        sb.append((String) null);
         sb.append(" (").append(super.getDataSourceDescription()).append(")");
         return sb.toString();
     }
@@ -112,7 +112,7 @@ public class TiledElevationProducer extends TiledRasterProducer
         // TiledElevationProducer does not accept null data sources.
         if (source == null)
         {
-            return Logging.getMessage("nullValue.SourceIsNull");
+            return null;
         }
 
         // TiledElevationProducer accepts BufferWrapperRaster as a data source. If the data source is a DataRaster, then
@@ -123,7 +123,7 @@ public class TiledElevationProducer extends TiledRasterProducer
 
             if (!(raster instanceof BufferWrapperRaster))
             {
-                return Logging.getMessage("TiledRasterProducer.UnrecognizedDataSource", raster);
+                return null;
             }
 
             String s = this.validateDataSourceParams(raster, String.valueOf(raster));
@@ -140,7 +140,7 @@ public class TiledElevationProducer extends TiledRasterProducer
                 this.getDataRasterReaders());
             if (reader == null)
             {
-                return Logging.getMessage("TiledRasterProducer.UnrecognizedDataSource", source);
+                return null;
             }
 
             // Copy the parameter list to insulate changes from the caller.
@@ -152,7 +152,7 @@ public class TiledElevationProducer extends TiledRasterProducer
             }
             catch (IOException e)
             {
-                return Logging.getMessage("TiledRasterProducer.ExceptionWhileReading", source, e.getMessage());
+                return null;
             }
 
             String s = this.validateDataSourceParams(params, String.valueOf(source));
@@ -169,8 +169,7 @@ public class TiledElevationProducer extends TiledRasterProducer
     {
         if (params.hasKey(AVKey.PIXEL_FORMAT) && params.getValue(AVKey.PIXEL_FORMAT) != AVKey.ELEVATION)
         {
-            return Logging.getMessage("TiledRasterProducer.UnrecognizedRasterType",
-                params.getValue(AVKey.PIXEL_FORMAT), name);
+            return null;
         }
 
         if (params.hasKey(AVKey.COORDINATE_SYSTEM)
@@ -179,8 +178,7 @@ public class TiledElevationProducer extends TiledRasterProducer
             )
 
         {
-            return Logging.getMessage("TiledRasterProducer.UnrecognizedCoordinateSystem",
-                params.getValue(AVKey.COORDINATE_SYSTEM), name);
+            return null;
         }
 
         if (params.hasKey(AVKey.ELEVATION_UNIT)
@@ -188,13 +186,12 @@ public class TiledElevationProducer extends TiledRasterProducer
             && params.getValue(AVKey.ELEVATION_UNIT) != AVKey.UNIT_FOOT
             )
         {
-            return Logging.getMessage("TiledElevationProducer.UnrecognizedElevationUnit",
-                params.getValue(AVKey.ELEVATION_UNIT), name);
+            return null;
         }
 
         if (params.getValue(AVKey.SECTOR) == null)
         {
-            return Logging.getMessage("TiledRasterProducer.NoSector", name);
+            return null;
         }
 
         return null;
@@ -312,8 +309,6 @@ public class TiledElevationProducer extends TiledRasterProducer
     {
         if (!(raster instanceof BufferWrapperRaster))
         {
-            String message = Logging.getMessage("DataRaster.IncompatibleRaster", raster);
-            Logging.logger().severe(message);
             return;
         }
 

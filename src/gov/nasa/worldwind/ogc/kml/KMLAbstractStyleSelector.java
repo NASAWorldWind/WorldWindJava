@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.avlist.AVKey;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.List;
 
@@ -59,9 +58,7 @@ public abstract class KMLAbstractStyleSelector extends KMLAbstractObject
     {
         if (subStyle == null)
         {
-            String message = Logging.getMessage("nullValue.SymbolIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (styleUrl != null)
@@ -113,9 +110,7 @@ public abstract class KMLAbstractStyleSelector extends KMLAbstractObject
     {
         if (subStyle == null)
         {
-            String message = Logging.getMessage("nullValue.SymbolIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (styleUrl != null)

@@ -6,13 +6,10 @@
 
 package gov.nasa.worldwind.formats.dds;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.logging.Level;
 
 /**
  * @author Lado Garakanidze
@@ -32,16 +29,12 @@ public class DXT1Decompressor implements DXTDecompressor
     {
         if (null == buffer)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (width <= 0 || height <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidImageSize", width, height);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // TODO check buffer's remaining with image size
@@ -54,16 +47,12 @@ public class DXT1Decompressor implements DXTDecompressor
     {
         if (null == buffer)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (width < DXT1_BLOCK_SIZE || height < DXT1_BLOCK_SIZE)
         {
-            String message = Logging.getMessage("generic.InvalidImageSize", width, height);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -110,7 +99,6 @@ public class DXT1Decompressor implements DXTDecompressor
         {
             String message = t.getMessage();
             message = (null == message) ? t.getCause().getMessage() : message;
-            Logging.logger().log(Level.FINEST, message, t);
         }
 
         return null;

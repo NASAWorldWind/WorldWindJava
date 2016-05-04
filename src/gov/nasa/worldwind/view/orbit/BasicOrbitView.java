@@ -99,9 +99,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
         Vec4 center = view.getCenterPoint();
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         setOrientation(view.getEyePosition(), globe.computePositionFromPoint(center));
     }
@@ -121,15 +119,11 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (center.getLatitude().degrees < -90 || center.getLatitude().degrees > 90)
         {
-            String message = Logging.getMessage("generic.LatitudeOutOfRange", center.getLatitude());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.center = normalizedCenterPosition(center);
@@ -143,9 +137,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (heading == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.heading = normalizedHeading(heading);
@@ -159,9 +151,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (pitch == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.pitch = normalizedPitch(pitch);
@@ -180,9 +170,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (zoom < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", zoom);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.zoom = zoom;
@@ -217,9 +205,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.viewLimits = viewLimits;
@@ -229,9 +215,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (unnormalizedPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new Position(
@@ -244,9 +228,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (unnormalizedHeading == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double degrees = unnormalizedHeading.degrees;
@@ -258,9 +240,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (unnormalizedPitch == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Normalize pitch to the range [-180, 180].
@@ -331,8 +311,6 @@ public class BasicOrbitView extends BasicView implements OrbitView
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileChangingView");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             // If updating the View's focus failed, raise the flag again.
             this.setViewOutOfFocus(true);
         }
@@ -370,23 +348,17 @@ public class BasicOrbitView extends BasicView implements OrbitView
             return;
         if (this.dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
         if (this.globe == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Position viewportCenterPos = this.dc.getViewportCenterPosition();
         if (viewportCenterPos == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextViewportCenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         // We want the actual "geometric point" here, which must be adjusted for vertical exaggeration.
@@ -435,15 +407,11 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (this.dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
         if (this.globe == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (this.dc.getSurfaceGeometry() == null)
@@ -484,9 +452,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (eyePosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double elevation = eyePosition.getElevation();
@@ -547,25 +513,19 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (eyePosition == null || centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (this.globe == null)
         {
 
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Vec4 newEyePoint = this.globe.computePointFromPosition(eyePosition);
         Vec4 newCenterPoint = this.globe.computePointFromPosition(centerPosition);
         if (newEyePoint == null || newCenterPoint == null)
         {
-            String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // If eye lat/lon != center lat/lon, then the surface normal at the center point will be a good value
@@ -589,18 +549,14 @@ public class BasicOrbitView extends BasicView implements OrbitView
 
         if (up == null)
         {
-            String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         OrbitViewInputSupport.OrbitViewState modelCoords = OrbitViewInputSupport.computeOrbitViewState(
             this.globe, newEyePoint, newCenterPoint, up);
         if (!validateModelCoordinates(modelCoords))
         {
-            String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         setModelCoordinates(modelCoords);
@@ -610,21 +566,15 @@ public class BasicOrbitView extends BasicView implements OrbitView
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Update the draw context and the globe, then re-apply the current view property limits. Apply view property

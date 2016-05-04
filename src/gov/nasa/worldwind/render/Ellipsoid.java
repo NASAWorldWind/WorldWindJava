@@ -54,16 +54,12 @@ public class Ellipsoid extends RigidShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centerPosition = centerPosition;
@@ -91,16 +87,12 @@ public class Ellipsoid extends RigidShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centerPosition = centerPosition;
@@ -164,14 +156,11 @@ public class Ellipsoid extends RigidShape
         if (dc.getView() == null)
         {
             String message = "nullValue.DrawingContextViewIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (shapeData == null)
@@ -285,8 +274,7 @@ public class Ellipsoid extends RigidShape
         if (elementBuffer == null)
         {
             String message = "nullValue.ElementBufferIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Geometry mesh = shapeData.getMesh(face);
@@ -294,8 +282,7 @@ public class Ellipsoid extends RigidShape
         if (mesh.getBuffer(Geometry.VERTEX) == null)
         {
             String message = "nullValue.VertexBufferIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -437,8 +424,6 @@ public class Ellipsoid extends RigidShape
     @Override
     protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
     {
-        String message = Logging.getMessage("generic.UnsupportedOperation", "doExportAsKML");
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 }

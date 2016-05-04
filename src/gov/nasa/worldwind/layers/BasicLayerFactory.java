@@ -56,8 +56,7 @@ public class BasicLayerFactory extends BasicFactory
 
         if (layerOrLists == null)
         {
-            String msg = Logging.getMessage("generic.UnrecognizedDocument", configSource);
-            throw new WWUnrecognizedException(msg);
+            throw new WWUnrecognizedException();
         }
 
         return layerOrLists;
@@ -70,9 +69,7 @@ public class BasicLayerFactory extends BasicFactory
         if (serviceName == null || !(serviceName.equalsIgnoreCase(OGCConstants.WMS_SERVICE_NAME)
             || serviceName.contains("WMS")))
         {
-            String message = Logging.getMessage("WMS.NotWMSService", serviceName != null ? serviceName : "null");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -85,9 +82,7 @@ public class BasicLayerFactory extends BasicFactory
 
             if (namedLayers == null || namedLayers.size() == 0 || namedLayers.get(0) == null)
             {
-                String message = Logging.getMessage("WMS.NoLayersFound");
-                Logging.logger().severe(message);
-                throw new IllegalStateException(message);
+                    throw new IllegalStateException();
             }
 
             params.setValue(AVKey.LAYER_NAMES, namedLayers.get(0).getName());
@@ -179,9 +174,7 @@ public class BasicLayerFactory extends BasicFactory
                     }
                     else
                     {
-                        String msg = Logging.getMessage("LayerFactory.UnexpectedTypeForLayer", o.getClass().getName());
-                        Logging.logger().log(java.util.logging.Level.WARNING, msg);
-                    }
+                                }
 
                     continue;
                 }
@@ -201,7 +194,6 @@ public class BasicLayerFactory extends BasicFactory
             }
             catch (Exception e)
             {
-                Logging.logger().log(java.util.logging.Level.WARNING, e.getMessage(), e);
                 // keep going to create other layers
             }
         }
@@ -232,7 +224,6 @@ public class BasicLayerFactory extends BasicFactory
             }
             catch (Exception e)
             {
-                Logging.logger().log(java.util.logging.Level.WARNING, e.getMessage(), e);
                 // keep going to create other layers
             }
         }
@@ -282,8 +273,7 @@ public class BasicLayerFactory extends BasicFactory
 
             if (!(o instanceof Layer))
             {
-                String msg = Logging.getMessage("LayerFactory.UnexpectedTypeForLayer", o.getClass().getName());
-                throw new WWRuntimeException(msg);
+                    throw new WWRuntimeException();
             }
 
             layer = (Layer) o;
@@ -301,8 +291,7 @@ public class BasicLayerFactory extends BasicFactory
             }
             else
             {
-                String msg = Logging.getMessage("generic.UnrecognizedLayerType", layerType);
-                throw new WWUnrecognizedException(msg);
+                    throw new WWUnrecognizedException();
             }
         }
 
@@ -352,8 +341,7 @@ public class BasicLayerFactory extends BasicFactory
         }
         else
         {
-            String msg = Logging.getMessage("generic.UnrecognizedServiceName", serviceName);
-            throw new WWUnrecognizedException(msg);
+            throw new WWUnrecognizedException();
         }
 //
 //        String name = layer.getStringValue(AVKey.DISPLAY_NAME);

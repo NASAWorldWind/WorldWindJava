@@ -94,9 +94,7 @@ public class MultiLineTextRenderer
     {
         if (textRenderer == null)
         {
-            String msg = Logging.getMessage("nullValue.TextRendererIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.textRenderer = textRenderer;
     }
@@ -105,9 +103,7 @@ public class MultiLineTextRenderer
     {
         if (font == null)
         {
-            String msg = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.textRenderer = new TextRenderer(font, true, false);
         this.textRenderer.setUseVertexArrays(false);
@@ -184,9 +180,7 @@ public class MultiLineTextRenderer
     {
         if (!align.equals(AVKey.LEFT) && !align.equals(AVKey.CENTER) && !align.equals(AVKey.RIGHT))
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", align);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.textAlign = align;
     }
@@ -210,9 +204,7 @@ public class MultiLineTextRenderer
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.textColor = color;
         this.textRenderer.setColor(color);
@@ -237,9 +229,7 @@ public class MultiLineTextRenderer
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.backColor = color;
     }
@@ -263,9 +253,7 @@ public class MultiLineTextRenderer
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.linkColor = color;
     }
@@ -313,9 +301,7 @@ public class MultiLineTextRenderer
     {
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         int width = 0;
@@ -385,9 +371,7 @@ public class MultiLineTextRenderer
     {
         if (effect == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (effect.equals(AVKey.TEXT_EFFECT_SHADOW))
@@ -424,9 +408,7 @@ public class MultiLineTextRenderer
     {
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         String[] lines = text.split("\n");
@@ -461,21 +443,15 @@ public class MultiLineTextRenderer
     {
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (pickSupport == null)
         {
-            String msg = Logging.getMessage("nullValue.PickSupportIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         String[] lines = text.split("\n");
@@ -551,9 +527,7 @@ public class MultiLineTextRenderer
     {
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         String[] lines = text.split("\n");
@@ -678,9 +652,7 @@ public class MultiLineTextRenderer
     {
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Matcher matcher = SGMLPattern.matcher(text);
@@ -698,9 +670,7 @@ public class MultiLineTextRenderer
     {
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         text = text.replaceAll("\n", ""); // Remove all new line characters
@@ -721,9 +691,7 @@ public class MultiLineTextRenderer
     {
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return text.replaceAll("<[^\\s].*?>", "");
@@ -742,9 +710,7 @@ public class MultiLineTextRenderer
     {
         if (text == null || attributeName == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Look for name="..." - will not work for other variants
@@ -770,15 +736,11 @@ public class MultiLineTextRenderer
     {
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (renderers == null)
         {
-            String msg = Logging.getMessage("nullValue.TextRendererCacheIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         DrawState ds = new DrawState(renderers, this.textRenderer.getFont(), null, this.textColor);
@@ -877,15 +839,11 @@ public class MultiLineTextRenderer
     {
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (renderers == null)
         {
-            String msg = Logging.getMessage("nullValue.TextRendererCacheIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         DrawState ds = new DrawState(renderers, this.textRenderer.getFont(), null, this.textColor);
@@ -992,15 +950,11 @@ public class MultiLineTextRenderer
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (pickSupport == null)
         {
-            String msg = Logging.getMessage("nullValue.PickSupportIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Set picking
@@ -1034,15 +988,11 @@ public class MultiLineTextRenderer
     {
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (renderers == null)
         {
-            String msg = Logging.getMessage("nullValue.TextRendererCacheIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Draw attributes

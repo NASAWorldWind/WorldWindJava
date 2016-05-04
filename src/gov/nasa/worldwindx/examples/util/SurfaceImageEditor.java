@@ -14,7 +14,6 @@ import gov.nasa.worldwind.pick.PickedObject;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.render.markers.*;
 import gov.nasa.worldwind.terrain.SectorGeometryList;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -58,15 +57,11 @@ public class SurfaceImageEditor implements SelectListener
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().log(java.util.logging.Level.FINE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (shape == null)
         {
-            String msg = Logging.getMessage("nullValue.Shape");
-            Logging.logger().log(java.util.logging.Level.FINE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -132,9 +127,7 @@ public class SurfaceImageEditor implements SelectListener
     {
         if (event == null)
         {
-            String msg = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().log(java.util.logging.Level.FINE, msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (event.getTopObject() != null && !(event.getTopObject() == this.shape

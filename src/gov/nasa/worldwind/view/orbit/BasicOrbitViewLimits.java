@@ -43,9 +43,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centerLocationLimits = sector;
@@ -100,16 +98,12 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Sector sector = this.centerLocationLimits;
@@ -126,9 +120,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double minZoom = this.minZoom;
@@ -162,15 +154,11 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         view.setCenterPosition(limitCenterPosition(view.getCenterPosition(), viewLimits));
@@ -193,15 +181,11 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new Position(
@@ -223,15 +207,11 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Sector limits = viewLimits.getCenterLocationLimits();
@@ -272,9 +252,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
     {
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] limits = viewLimits.getCenterElevationLimits();
@@ -305,9 +283,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
     {
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] limits = viewLimits.getZoomLimits();

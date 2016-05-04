@@ -38,9 +38,7 @@ public class RPFTiledImageLayer extends TiledImageLayer
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.LayerConfigParams");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LevelSet levels = new LevelSet(initParams(params));
@@ -101,9 +99,7 @@ public class RPFTiledImageLayer extends TiledImageLayer
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new RPFTiledImageLayer(stateInXml);
@@ -121,9 +117,7 @@ public class RPFTiledImageLayer extends TiledImageLayer
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         Boolean b = rs.getStateValueAsBoolean("rpf.LayerEnabled");
@@ -201,9 +195,7 @@ public class RPFTiledImageLayer extends TiledImageLayer
             fileIndex = initFileIndex(file);
             if (fileIndex == null)
             {
-                String message = Logging.getMessage("nullValue.RPFFileIndexIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             params.setValue(RPFGenerator.RPF_FILE_INDEX, fileIndex);
         }
@@ -225,25 +217,19 @@ public class RPFTiledImageLayer extends TiledImageLayer
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.LayerConfigParams");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String rootPath = params.getStringValue(RPF_ROOT_PATH);
         if (rootPath == null)
         {
-            String message = Logging.getMessage("nullValue.RPFRootPath");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String dataSeriesId = params.getStringValue(RPF_DATA_SERIES_ID);
         if (dataSeriesId == null)
         {
-            String message = Logging.getMessage("nullValue.RPFDataSeriesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Use a dummy value for service.
@@ -285,9 +271,7 @@ public class RPFTiledImageLayer extends TiledImageLayer
 
             if (sector == null)
             {
-                String message = Logging.getMessage("RPFTiledImageLayer.NoGeographicBoundingBox");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             params.setValue(AVKey.SECTOR, sector);
@@ -312,7 +296,6 @@ public class RPFTiledImageLayer extends TiledImageLayer
         catch (Exception e)
         {
             String message = "Exception while attempting to map file: " + file;
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             buffer = null;
         }
 
@@ -328,7 +311,6 @@ public class RPFTiledImageLayer extends TiledImageLayer
         catch (Exception e)
         {
             String message = "Exception while attempting to load RPFFileIndex: " + file;
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             fileIndex = null;
         }
 
@@ -436,9 +418,7 @@ public class RPFTiledImageLayer extends TiledImageLayer
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -449,9 +429,7 @@ public class RPFTiledImageLayer extends TiledImageLayer
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         AVList params = new AVListImpl();
@@ -537,9 +515,7 @@ public class RPFTiledImageLayer extends TiledImageLayer
 
     public void restoreState(String stateInXml)
     {
-        String message = Logging.getMessage("RestorableSupport.RestoreRequiresConstructor");
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 
     private static class URLBuilder implements TileUrlBuilder
@@ -636,9 +612,7 @@ public class RPFTiledImageLayer extends TiledImageLayer
                     // Assume that something's wrong with the file and delete it.
                     gov.nasa.worldwind.WorldWind.getDataFileStore().removeFile(textureURL);
                     layer.getLevels().markResourceAbsent(tile);
-                    String message = Logging.getMessage("generic.DeletedCorruptDataFile", textureURL);
-                    Logging.logger().info(message);
-                }
+                        }
             }
 
             this.layer.downloadTexture(tile);
@@ -651,8 +625,6 @@ public class RPFTiledImageLayer extends TiledImageLayer
         {
             // The file has expired. Delete it then request download of newer.
             gov.nasa.worldwind.WorldWind.getDataFileStore().removeFile(textureURL);
-            String message = Logging.getMessage("generic.DataFileExpired", textureURL);
-            Logging.logger().fine(message);
             return false;
         }
 
@@ -681,8 +653,6 @@ public class RPFTiledImageLayer extends TiledImageLayer
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("layers.TextureLayer.ExceptionAttemptingToReadTextureFile", url.toString());
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             return null;
         }
     }
@@ -705,8 +675,6 @@ public class RPFTiledImageLayer extends TiledImageLayer
         }
         catch (java.net.MalformedURLException e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("layers.TextureLayer.ExceptionCreatingTextureUrl", tile), e);
             return;
         }
 
@@ -818,8 +786,6 @@ public class RPFTiledImageLayer extends TiledImageLayer
             }
             catch (Exception e)
             {
-                Logging.logger().log(
-                    java.util.logging.Level.SEVERE, "layers.TextureLayer.ExceptionAttemptingToCreateTileImage", e);
                 this.layer.getLevels().markResourceAbsent(tile);
             }
         }
@@ -875,9 +841,7 @@ public class RPFTiledImageLayer extends TiledImageLayer
         {
             if (that == null)
             {
-                String msg = Logging.getMessage("nullValue.RequestTaskIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
             return this.tile.getPriority() == that.tile.getPriority() ? 0 :
                 this.tile.getPriority() < that.tile.getPriority() ? -1 : 1;

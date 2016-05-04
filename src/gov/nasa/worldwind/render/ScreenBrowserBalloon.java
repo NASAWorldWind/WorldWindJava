@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.render;
 
-import gov.nasa.worldwind.util.Logging;
-
 import javax.media.opengl.GL;
 import java.awt.*;
 
@@ -43,9 +41,7 @@ public class ScreenBrowserBalloon extends AbstractBrowserBalloon implements Scre
 
         if (point == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.screenLocation = point;
@@ -68,9 +64,7 @@ public class ScreenBrowserBalloon extends AbstractBrowserBalloon implements Scre
     {
         if (point == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.screenLocation = point;

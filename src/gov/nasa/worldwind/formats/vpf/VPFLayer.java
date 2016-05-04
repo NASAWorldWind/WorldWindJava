@@ -320,9 +320,7 @@ public class VPFLayer extends AbstractLayer
         {
             if (that == null)
             {
-                String msg = Logging.getMessage("nullValue.RequestTaskIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             return 0;

@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.shapefile;
 
 import gov.nasa.worldwind.exception.WWRuntimeException;
-import gov.nasa.worldwind.util.Logging;
 
 import java.nio.*;
 
@@ -32,16 +31,12 @@ public class DBaseField
     {
         if (dbaseFile == null)
         {
-            String message = Logging.getMessage("nullValue.DBaseFileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.readFromBuffer(dbaseFile, buffer);
@@ -81,9 +76,7 @@ public class DBaseField
         this.type = getFieldType(this.typeCode);
         if (this.type == null)
         {
-            String message = Logging.getMessage("SHP.UnsupportedDBaseFieldType", this.typeCode);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         // Skip four bytes

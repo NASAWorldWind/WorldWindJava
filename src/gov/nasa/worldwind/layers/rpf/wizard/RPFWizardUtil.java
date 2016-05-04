@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.layers.rpf.wizard;
 
 import gov.nasa.worldwind.util.wizard.WizardProperties;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.layers.Layer;
 
 import java.io.File;
@@ -29,8 +28,7 @@ public class RPFWizardUtil
         if (properties == null)
         {
             String message = "WizardProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File file = null;
@@ -45,8 +43,7 @@ public class RPFWizardUtil
         if (properties == null)
         {
             String message = "WizardProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         properties.setProperty(SELECTED_FILE, file);
@@ -58,8 +55,7 @@ public class RPFWizardUtil
         if (properties == null)
         {
             String message = "WizardProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<File> fileList = null;
@@ -74,8 +70,7 @@ public class RPFWizardUtil
         if (properties == null)
         {
             String message = "WizardProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         properties.setProperty(FILE_LIST, fileList);
@@ -86,8 +81,7 @@ public class RPFWizardUtil
         if (properties == null)
         {
             String message = "WizardProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         boolean isFileListCurrent = false;
@@ -102,8 +96,7 @@ public class RPFWizardUtil
         if (properties == null)
         {
             String message = "WizardProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         properties.setProperty(IS_FILE_LIST_CURRENT, current);
@@ -115,8 +108,7 @@ public class RPFWizardUtil
         if (properties == null)
         {
             String message = "WizardProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<FileSet> fileSets = null;
@@ -131,8 +123,7 @@ public class RPFWizardUtil
         if (properties == null)
         {
             String message = "WizardProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         properties.setProperty(FILE_SET_LIST, fileSetList);
@@ -144,8 +135,7 @@ public class RPFWizardUtil
         if (properties == null)
         {
             String message = "WizardProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<Layer> fileSets = null;
@@ -160,8 +150,7 @@ public class RPFWizardUtil
         if (properties == null)
         {
             String message = "WizardProperties is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         properties.setProperty(LAYER_LIST, layerList);
@@ -171,9 +160,7 @@ public class RPFWizardUtil
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder();
@@ -189,9 +176,7 @@ public class RPFWizardUtil
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder();
@@ -207,9 +192,7 @@ public class RPFWizardUtil
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder();

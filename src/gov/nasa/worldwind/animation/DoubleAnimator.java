@@ -31,9 +31,7 @@ public class DoubleAnimator extends BasicAnimator
        
        if (propertyAccessor == null)
        {
-           String message = Logging.getMessage("nullValue.ViewPropertyAccessorIsNull");
-           Logging.logger().severe(message);
-           throw new IllegalArgumentException(message);
+           throw new IllegalArgumentException();
        }
 
        this.begin = begin;

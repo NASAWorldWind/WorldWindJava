@@ -14,16 +14,7 @@ public class WWAbsentRequirementException extends WWRuntimeException
 {
     public WWAbsentRequirementException()
     {
-    }
-
-    public WWAbsentRequirementException(String s)
-    {
-        super(s);
-    }
-
-    public WWAbsentRequirementException(String s, Throwable throwable)
-    {
-        super(s, throwable);
+        super();
     }
 
     public WWAbsentRequirementException(Throwable throwable)

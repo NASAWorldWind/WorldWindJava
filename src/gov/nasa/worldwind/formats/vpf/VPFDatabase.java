@@ -31,9 +31,7 @@ public class VPFDatabase extends AVListImpl
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.filePath = filePath;
@@ -53,33 +51,27 @@ public class VPFDatabase extends AVListImpl
     {
         if (WWUtil.isEmpty(filePath))
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File file = new File(filePath);
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", filePath);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         // Database tables.
         VPFBufferedRecordData dht = VPFUtils.readTable(file);
         if (dht == null)
         {
-            String message = Logging.getMessage("VPF.DatabaseHeaderTableMissing");
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         VPFBufferedRecordData lat = VPFUtils.readTable(
             new File(file.getParent(), VPFConstants.LIBRARY_ATTRIBUTE_TABLE));
         if (lat == null)
         {
-            String message = Logging.getMessage("VPF.LibraryAttributeTableMissing");
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         VPFDatabase database = new VPFDatabase(file.getParent());
@@ -106,9 +98,7 @@ public class VPFDatabase extends AVListImpl
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File file = new File(filePath);
@@ -171,9 +161,7 @@ public class VPFDatabase extends AVListImpl
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.libraryMap.containsKey(name);
@@ -183,9 +171,7 @@ public class VPFDatabase extends AVListImpl
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.libraryMap.get(name);
@@ -213,9 +199,7 @@ public class VPFDatabase extends AVListImpl
     {
         if (library == null)
         {
-            String message = Logging.getMessage("nullValue.LibraryIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.libraryMap.put(library.getName(), library);
@@ -225,9 +209,7 @@ public class VPFDatabase extends AVListImpl
     {
         if (collection == null)
         {
-            String message = Logging.getMessage("nullValue.CollectionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (VPFLibrary lib : collection)
@@ -240,9 +222,7 @@ public class VPFDatabase extends AVListImpl
     {
         if (library == null)
         {
-            String message = Logging.getMessage("nullValue.LibraryIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.libraryMap.remove(library.getName());
@@ -274,9 +254,7 @@ public class VPFDatabase extends AVListImpl
     {
         if (table == null)
         {
-            String message = Logging.getMessage("nullValue.TableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.databaseHeaderTable = table;
@@ -303,9 +281,7 @@ public class VPFDatabase extends AVListImpl
     {
         if (table == null)
         {
-            String message = Logging.getMessage("nullValue.TableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.libraryAttributeTable = table;

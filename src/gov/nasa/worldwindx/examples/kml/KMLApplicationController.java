@@ -11,7 +11,6 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwindx.examples.util.BalloonController;
 import gov.nasa.worldwind.ogc.kml.*;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.tree.TreeNode;
 
 import java.awt.*;
@@ -54,9 +53,7 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
     {
         if (wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -163,7 +160,6 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
         catch (Exception e)
         {
             // Wrap the handler in a try/catch to keep exceptions from bubbling up.
-            Logging.logger().warning(e.getMessage() != null ? e.getMessage() : e.toString());
         }
     }
 

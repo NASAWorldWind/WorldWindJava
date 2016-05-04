@@ -7,7 +7,6 @@ package gov.nasa.worldwind.util.layertree;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.ogc.kml.*;
-import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.tree.*;
 import gov.nasa.worldwind.util.EntityMap;
 
@@ -42,9 +41,7 @@ public class KMLFeatureTreeNode extends BasicTreeNode
 
         if (feature == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.feature = feature;
@@ -74,9 +71,7 @@ public class KMLFeatureTreeNode extends BasicTreeNode
     {
         if (feature == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (feature instanceof KMLNetworkLink)
@@ -139,9 +134,7 @@ public class KMLFeatureTreeNode extends BasicTreeNode
     {
         if (tree == null)
         {
-            String message = Logging.getMessage("nullValue.TreeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.mustExpandNode())

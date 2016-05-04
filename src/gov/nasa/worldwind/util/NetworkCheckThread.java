@@ -40,16 +40,12 @@ public class NetworkCheckThread extends Thread
     {
         if (showNetStatus == null)
         {
-            String msg = Logging.getMessage("nullValue.StatusReferenceIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (isNetAvailable == null)
         {
-            String msg = Logging.getMessage("nullValue.ReturnReferenceIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.showNetStatus = showNetStatus;

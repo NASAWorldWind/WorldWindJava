@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwindx.applications.sar.tracks;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author dcollins
  * @version $Id: CompoundFilter.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -39,9 +37,7 @@ public class CompoundFilter extends javax.swing.filechooser.FileFilter implement
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (file.isDirectory())

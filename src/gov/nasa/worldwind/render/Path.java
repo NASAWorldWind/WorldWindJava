@@ -475,9 +475,7 @@ public class Path extends AbstractShape
         {
             if (path == null)
             {
-                String message = Logging.getMessage("nullValue.PathIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.pickablePositions.add(new PickablePositions(minColorCode, maxColorCode, path));
@@ -510,9 +508,7 @@ public class Path extends AbstractShape
         {
             if (dc == null)
             {
-                String message = Logging.getMessage("nullValue.DrawContextIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (this.getPickableObjects().isEmpty() && this.getPickablePositions().isEmpty())
@@ -727,9 +723,7 @@ public class Path extends AbstractShape
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setPositions(positions.list);
@@ -747,9 +741,7 @@ public class Path extends AbstractShape
     {
         if (posA == null || posB == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<Position> endPoints = new ArrayList<Position>(2);
@@ -804,9 +796,7 @@ public class Path extends AbstractShape
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.positions = positions;
@@ -2474,9 +2464,7 @@ public class Path extends AbstractShape
     {
         if (delta == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position refPos = this.getReferencePosition();
@@ -2494,9 +2482,7 @@ public class Path extends AbstractShape
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.numPositions == 0)
@@ -2521,9 +2507,7 @@ public class Path extends AbstractShape
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.numPositions == 0)

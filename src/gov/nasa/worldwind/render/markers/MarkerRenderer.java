@@ -11,13 +11,11 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * @author tag
@@ -79,16 +77,12 @@ public class MarkerRenderer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (markers == null)
         {
-            String message = Logging.getMessage("nullValue.MarkerListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.draw(dc, markers);
@@ -443,8 +437,6 @@ public class MarkerRenderer
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, Logging.getMessage("generic.ExceptionWhilePickingMarker", this),
-                    e);
             }
             finally
             {
@@ -462,8 +454,6 @@ public class MarkerRenderer
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, Logging.getMessage("generic.ExceptionWhileRenderingMarker", this),
-                    e);
             }
             finally
             {

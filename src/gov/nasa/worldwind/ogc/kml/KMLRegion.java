@@ -12,7 +12,6 @@ import gov.nasa.worldwind.event.Message;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.ogc.kml.impl.*;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -386,16 +385,12 @@ public class KMLRegion extends KMLAbstractObject
     {
         if (tc == null)
         {
-            String message = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.makeRegionData(dc);
@@ -545,8 +540,6 @@ public class KMLRegion extends KMLAbstractObject
         // TODO: this warning when such regions are supported. See WWJINT-482.
         if (!this.isSectorSupported(sector))
         {
-            String message = Logging.getMessage("KML.UnsupportedRegion", sector);
-            Logging.logger().warning(message);
             return;
         }
 
@@ -581,8 +574,6 @@ public class KMLRegion extends KMLAbstractObject
 
         if (!this.isSectorSupported(sector))
         {
-            String message = Logging.getMessage("KML.UnsupportedRegion", sector);
-            Logging.logger().warning(message);
             return;
         }
 
@@ -617,8 +608,6 @@ public class KMLRegion extends KMLAbstractObject
 
         if (!this.isSectorSupported(sector))
         {
-            String message = Logging.getMessage("KML.UnsupportedRegion", sector);
-            Logging.logger().warning(message);
             return;
         }
 
@@ -951,9 +940,7 @@ public class KMLRegion extends KMLAbstractObject
     {
         if (!(sourceValues instanceof KMLRegion))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.reset();

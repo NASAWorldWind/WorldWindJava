@@ -5,7 +5,6 @@
  */
 package gov.nasa.worldwind.formats.gpx;
 
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.tracks.Track;
 import gov.nasa.worldwind.tracks.TrackSegment;
 import gov.nasa.worldwind.tracks.TrackPoint;
@@ -23,9 +22,7 @@ public class GpxWriter
     {
         if (path == null)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
@@ -38,9 +35,7 @@ public class GpxWriter
     {
         if (stream == null)
         {
-            String msg = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
@@ -53,9 +48,7 @@ public class GpxWriter
     {
         if (track == null)
         {
-            String msg = Logging.getMessage("nullValue.TrackIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         doWriteTrack(track, this.doc.getDocumentElement());

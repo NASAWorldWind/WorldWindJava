@@ -49,9 +49,7 @@ public class ProjectionUPS extends AbstractGeographicProjection
 
         if (pole == null)
         {
-            String message = Logging.getMessage("nullValue.HemisphereIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.pole = pole.equals(AVKey.SOUTH) ? SOUTH : NORTH;

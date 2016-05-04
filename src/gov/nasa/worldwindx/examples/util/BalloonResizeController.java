@@ -42,16 +42,12 @@ public class BalloonResizeController extends AbstractResizeHotSpot
     {
         if (wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (balloon == null)
         {
-            String message = Logging.getMessage("nullValue.BalloonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;

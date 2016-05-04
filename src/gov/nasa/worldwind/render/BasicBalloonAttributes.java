@@ -103,9 +103,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Copies both common attributes inherited from ShapeAttributes and balloon-specific attributes.
@@ -164,9 +162,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (shape == null)
         {
-            String message = Logging.getMessage("nullValue.Shape");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.balloonShape = shape;
@@ -183,9 +179,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (size == null)
         {
-            String message = Logging.getMessage("nullValue.SizeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.size = size;
@@ -214,9 +208,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (shape == null)
         {
-            String message = Logging.getMessage("nullValue.Shape");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.leaderShape = shape;
@@ -233,9 +225,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.leaderWidth = width;
@@ -252,9 +242,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative", radius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.cornerRadius = radius;
@@ -271,9 +259,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (offset == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.offset = offset;
@@ -290,9 +276,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (insets == null)
         {
-            String message = Logging.getMessage("nullValue.InsetsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.insets = insets;
@@ -309,9 +293,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.font = font;
@@ -328,9 +310,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.textColor = color;
@@ -347,9 +327,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (offset == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageOffset = offset;
@@ -366,9 +344,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageOpacity = opacity;
@@ -385,9 +361,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (repeat == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageRepeat = repeat;
@@ -398,9 +372,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (restorableSupport == null)
         {
-            String message = Logging.getMessage("nullValue.RestorableSupportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.getRestorableState(restorableSupport, context);
@@ -466,9 +438,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     {
         if (restorableSupport == null)
         {
-            String message = Logging.getMessage("nullValue.RestorableSupportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.restoreState(restorableSupport, context);

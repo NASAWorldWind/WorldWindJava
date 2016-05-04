@@ -25,9 +25,7 @@ public class CatalogConnection
     {
         if (serviceUrl == null)
         {
-            String msg = Logging.getMessage("nullValue.ServiceIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.serviceUrl = serviceUrl;
@@ -62,9 +60,7 @@ public class CatalogConnection
     {
         if (request == null)
         {
-            String msg = Logging.getMessage("nullValue.RequestIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         HttpURLConnection conn = null;
@@ -106,8 +102,7 @@ public class CatalogConnection
 
         if (connection.getResponseCode() != HttpURLConnection.HTTP_OK)
         {
-            String msg = Logging.getMessage("HTTP.ResponseCode", connection.getResponseCode(), connection.getURL());
-            throw new IOException(msg);
+            throw new IOException();
         }
 
         InputStream in = connection.getInputStream();

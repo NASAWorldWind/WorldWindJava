@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.cache;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.lang.ref.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
@@ -96,7 +94,6 @@ public class BasicRasterServerCache extends BasicMemoryCache
         }
         catch (Throwable t)
         {
-            Logging.logger().finest(t.getMessage());
         }
     }
 

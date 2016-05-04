@@ -14,8 +14,8 @@ package gov.nasa.worldwind.exception;
  */
 public class NoItemException extends WWRuntimeException
 {
-    public NoItemException(String string)
+    public NoItemException()
     {
-        super(string);
+        super();
     }
 }

@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.animation;
 
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author jym
@@ -86,9 +85,7 @@ public class AnimationSupport
     {
         if (x == null || y == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double unclampedRatio = x.divide(y);

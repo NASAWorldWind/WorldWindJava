@@ -8,7 +8,6 @@ package gov.nasa.worldwindx.examples;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.layers.Earth.UTMBaseGraticuleLayer;
 import gov.nasa.worldwind.layers.Earth.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -72,9 +71,7 @@ public class MGRSAttributesPanel extends JPanel
     {
         if (mgrsGraticuleLayer == null)
         {
-            String message = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.layer = mgrsGraticuleLayer;
@@ -109,9 +106,7 @@ public class MGRSAttributesPanel extends JPanel
     {
         if (mgrsGraticuleLayer == null)
         {
-            String message = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         JDialog dialog;
@@ -151,9 +146,7 @@ public class MGRSAttributesPanel extends JPanel
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.itemList.setSelectedValue(graticuleType, true);
@@ -450,9 +443,7 @@ public class MGRSAttributesPanel extends JPanel
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GraticuleAttributesPanel panel = new GraticuleAttributesPanel();
@@ -546,7 +537,6 @@ public class MGRSAttributesPanel extends JPanel
         catch (Exception e)
         {
             String message = "Exception while loading icon";
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
         }
         return icon;
     }

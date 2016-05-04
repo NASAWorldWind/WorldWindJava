@@ -51,9 +51,7 @@ public class ProjectionTransverseMercator extends AbstractGeographicProjection
 
         if (centralMeridian == null)
         {
-            String message = Logging.getMessage("nullValue.CentralMeridianIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centralMeridian = centralMeridian;
@@ -71,16 +69,12 @@ public class ProjectionTransverseMercator extends AbstractGeographicProjection
 
         if (centralMeridian == null)
         {
-            String message = Logging.getMessage("nullValue.CentralMeridianIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (centralLatitude == null)
         {
-            String message = Logging.getMessage("nullValue.CentralLatitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centralMeridian = centralMeridian;
@@ -112,9 +106,7 @@ public class ProjectionTransverseMercator extends AbstractGeographicProjection
     {
         if (centralMeridian == null)
         {
-            String message = Logging.getMessage("nullValue.CentralMeridianIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centralMeridian = centralMeridian;
@@ -140,9 +132,7 @@ public class ProjectionTransverseMercator extends AbstractGeographicProjection
     {
         if (centralLatitude == null)
         {
-            String message = Logging.getMessage("nullValue.CentralLatitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centralLatitude = centralLatitude;
@@ -169,9 +159,7 @@ public class ProjectionTransverseMercator extends AbstractGeographicProjection
     {
         if (width == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.width = width;

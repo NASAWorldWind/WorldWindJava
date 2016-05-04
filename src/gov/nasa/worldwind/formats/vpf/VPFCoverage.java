@@ -34,9 +34,7 @@ public class VPFCoverage extends AVListImpl
     {
         if (library == null)
         {
-            String message = Logging.getMessage("nullValue.LibraryIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.library = library;
@@ -58,32 +56,25 @@ public class VPFCoverage extends AVListImpl
     {
         if (library == null)
         {
-            String message = Logging.getMessage("nullValue.LibraryIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(name))
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File file = new File(library.getFilePath(), name);
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", file.getPath());
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         // Coverage tables.
         VPFBufferedRecordData fcs = VPFUtils.readTable(new File(file, VPFConstants.FEATURE_CLASS_SCHEMA_TABLE));
         if (fcs == null)
         {
-            String message = Logging.getMessage("VPF.FeatureClassSchemaTableMissing");
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         VPFBufferedRecordData fca = VPFUtils.readTable(
@@ -169,9 +160,7 @@ public class VPFCoverage extends AVListImpl
     {
         if (featureTableFilter == null)
         {
-            String message = Logging.getMessage("nullValue.FilterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // List the file names in the coverage directory matching the specified feature table file filter.
@@ -211,9 +200,7 @@ public class VPFCoverage extends AVListImpl
     {
         if (className == null)
         {
-            String message = Logging.getMessage("nullValue.ClassNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<VPFRelation> rels = new ArrayList<VPFRelation>();

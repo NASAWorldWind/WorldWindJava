@@ -10,7 +10,6 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.symbology.*;
 import gov.nasa.worldwind.symbology.milstd2525.AbstractMilStd2525TacticalGraphic;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -76,9 +75,7 @@ public class AbstractRectangularGraphic extends AbstractMilStd2525TacticalGraphi
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Iterator<? extends Position> iterator = positions.iterator();
@@ -98,9 +95,7 @@ public class AbstractRectangularGraphic extends AbstractMilStd2525TacticalGraphi
         }
         catch (NoSuchElementException e)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
     }
 

@@ -6,7 +6,6 @@
 
 package gov.nasa.worldwind.ogc.kml;
 
-import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.xml.XMLEventParserContext;
 
 import javax.xml.stream.XMLStreamException;
@@ -87,9 +86,7 @@ public class KMLPolygon extends KMLAbstractGeometry
     {
         if (!(sourceValues instanceof KMLPolygon))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         KMLPolygon sourcePolygon = (KMLPolygon) sourceValues;

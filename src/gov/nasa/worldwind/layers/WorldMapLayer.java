@@ -113,9 +113,7 @@ public class WorldMapLayer extends AbstractLayer
     {
         if (iconFilePath == null || iconFilePath.length() == 0)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.iconFilePath = iconFilePath;
     }
@@ -229,9 +227,7 @@ public class WorldMapLayer extends AbstractLayer
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.position = position;
     }
@@ -296,9 +292,7 @@ public class WorldMapLayer extends AbstractLayer
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.backColor = color;
     }
@@ -368,9 +362,7 @@ public class WorldMapLayer extends AbstractLayer
                 iconTexture = dc.getTextureCache().getTexture(this.getIconFilePath());
                 if (iconTexture == null)
                 {
-                    String msg = Logging.getMessage("generic.ImageReadFailed");
-                    Logging.logger().finer(msg);
-                    return;
+                            return;
                 }
             }
             gl.glDisable(GL.GL_DEPTH_TEST);
@@ -619,9 +611,7 @@ public class WorldMapLayer extends AbstractLayer
         }
         catch (IOException e)
         {
-            String msg = Logging.getMessage("layers.IOExceptionDuringInitialization");
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg, e);
+            throw new WWRuntimeException(e);
         }
 
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR);//_MIPMAP_LINEAR);
@@ -723,6 +713,6 @@ public class WorldMapLayer extends AbstractLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.Earth.WorldMapLayer.Name");
+        return null;
     }
 }

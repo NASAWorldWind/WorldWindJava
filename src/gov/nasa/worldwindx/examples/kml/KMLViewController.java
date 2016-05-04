@@ -11,7 +11,6 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.ogc.kml.*;
 import gov.nasa.worldwind.ogc.kml.impl.KMLUtil;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.view.firstperson.BasicFlyView;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
@@ -55,9 +54,7 @@ public abstract class KMLViewController
     {
         if (wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         View view = wwd.getView();
@@ -68,7 +65,6 @@ public abstract class KMLViewController
             return new KMLFlyViewController(wwd);
         else
         {
-            Logging.logger().warning(Logging.getMessage("generic.UnrecognizedView", view));
             return null; // Unknown view
         }
     }
@@ -94,9 +90,7 @@ public abstract class KMLViewController
     {
         if (feature == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         // First look for a KML view in the feature
@@ -124,9 +118,7 @@ public abstract class KMLViewController
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (view instanceof KMLLookAt)
@@ -134,7 +126,8 @@ public abstract class KMLViewController
         else if (view instanceof KMLCamera)
             this.goTo((KMLCamera) view);
         else
-            Logging.logger().warning(Logging.getMessage("generic.UnrecognizedView", view));
+        {
+        }
     }
 
     /**
@@ -236,9 +229,7 @@ public abstract class KMLViewController
             Extent extent = Sector.computeBoundingCylinder(globe, ve, sector, minElevation, maxElevation);
             if (extent == null)
             {
-                String message = Logging.getMessage("nullValue.SectorIsNull");
-                Logging.logger().warning(message);
-                return;
+                    return;
             }
             Angle fov = view.getFieldOfView();
 

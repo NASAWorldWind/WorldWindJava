@@ -276,9 +276,7 @@ public class TacticalGraphicLabel
     {
         if (textAlign == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.textAlign = textAlign;
@@ -310,9 +308,7 @@ public class TacticalGraphicLabel
     {
         if (offset == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.offset = offset;
@@ -337,9 +333,7 @@ public class TacticalGraphicLabel
     {
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (font != this.font)
@@ -368,9 +362,7 @@ public class TacticalGraphicLabel
     {
         if (lineSpacing < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.lineSpacing = lineSpacing;
@@ -395,9 +387,7 @@ public class TacticalGraphicLabel
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.material = material;
@@ -452,9 +442,7 @@ public class TacticalGraphicLabel
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.opacity = opacity;
@@ -485,9 +473,7 @@ public class TacticalGraphicLabel
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.interiorOpacity = interiorOpacity;
@@ -539,9 +525,7 @@ public class TacticalGraphicLabel
     {
         if (insets == null)
         {
-            String message = Logging.getMessage("nullValue.InsetsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.insets = insets;
@@ -568,9 +552,7 @@ public class TacticalGraphicLabel
     {
         if (effect == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.effect = effect;
@@ -663,9 +645,7 @@ public class TacticalGraphicLabel
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.computeGeometryIfNeeded(dc);
@@ -855,9 +835,7 @@ public class TacticalGraphicLabel
 
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.makeOrderedRenderable(dc);
@@ -870,9 +848,7 @@ public class TacticalGraphicLabel
 
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.pickSupport.clearPickList();
@@ -1235,9 +1211,7 @@ public class TacticalGraphicLabel
     {
         if (this.lines == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (int i = 0; i < this.lines.length; i++)

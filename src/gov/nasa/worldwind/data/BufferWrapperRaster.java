@@ -25,17 +25,13 @@ public class BufferWrapperRaster extends AbstractDataRaster implements Cacheable
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int expectedValues = width * height;
         if (buffer.length() < expectedValues)
         {
-            String message = Logging.getMessage("generic.BufferSize", "buffer.length() < " + expectedValues);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.buffer = buffer;
@@ -64,9 +60,7 @@ public class BufferWrapperRaster extends AbstractDataRaster implements Cacheable
     {
         if ((row < 0) || (col < 0) || (row > (this.getHeight() - 1)) || (col > (this.getWidth() - 1)))
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", String.format("%d, %d", row, col));
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.getBuffer().getDouble(indexFor(col, row));
@@ -76,9 +70,7 @@ public class BufferWrapperRaster extends AbstractDataRaster implements Cacheable
     {
         if ((row < 0) || (col < 0) || (row > (this.getHeight() - 1)) || (col > (this.getWidth() - 1)))
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", String.format("%d, %d", row, col));
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.getBuffer().putDouble(indexFor(col, row), value);
@@ -163,16 +155,12 @@ public class BufferWrapperRaster extends AbstractDataRaster implements Cacheable
     {
         if (canvas == null)
         {
-            String message = Logging.getMessage("nullValue.DestinationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!(canvas instanceof BufferWrapperRaster))
         {
-            String message = Logging.getMessage("DataRaster.IncompatibleRaster", canvas);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.doDrawOnTo((BufferWrapperRaster) canvas);

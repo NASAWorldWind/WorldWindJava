@@ -25,9 +25,7 @@ public class GetRecordsRequest
     {
         if (request == null)
         {
-            String msg = Logging.getMessage("nullValue.RequestIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.startPosition = request.startPosition;

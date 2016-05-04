@@ -15,7 +15,6 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.*;
 import java.awt.*;
@@ -156,9 +155,7 @@ public class ExportImageOrElevations extends ApplicationTemplate
             {
                 if (file == null)
                 {
-                    String message = Logging.getMessage("nullValue.FileIsNull");
-                    Logging.logger().severe(message);
-                    throw new IllegalArgumentException(message);
+                            throw new IllegalArgumentException();
                 }
 
                 return file.isDirectory() || file.getName().toLowerCase().endsWith(".tif");

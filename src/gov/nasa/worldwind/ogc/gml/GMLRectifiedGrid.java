@@ -54,9 +54,7 @@ public class GMLRectifiedGrid extends GMLGrid
                 }
                 catch (NumberFormatException e)
                 {
-                    String message = Logging.getMessage("generic.NumberFormatException");
-                    Logging.logger().log(java.util.logging.Level.WARNING, message, e);
-                    return Collections.emptyList();
+                            return Collections.emptyList();
                 }
             }
             vectors.add(new Vec4(arr[0], arr[1], arr[2], arr[3]));

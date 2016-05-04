@@ -9,7 +9,6 @@ package gov.nasa.worldwindx.examples.kml;
 import gov.nasa.worldwind.Exportable;
 import gov.nasa.worldwind.ogc.kml.KMLConstants;
 import gov.nasa.worldwind.ogc.kml.gx.GXConstants;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.xml.stream.*;
 import java.io.*;
@@ -39,9 +38,7 @@ public class KMZDocumentBuilder
     {
         if (stream == null)
         {
-            String message = Logging.getMessage("nullValue.OutputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.zipStream = new ZipOutputStream(stream);

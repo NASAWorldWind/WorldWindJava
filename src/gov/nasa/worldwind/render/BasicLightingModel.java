@@ -63,9 +63,7 @@ public class BasicLightingModel implements LightingModel
     {
         if (lightDirection == null)
         {
-            String message = Logging.getMessage("nullValue.LightDirectionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.lightDirection = lightDirection;
@@ -92,9 +90,7 @@ public class BasicLightingModel implements LightingModel
     {
         if (lightMaterial == null)
         {
-            String message = Logging.getMessage("nullValue.LightMaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.lightMaterial = lightMaterial;

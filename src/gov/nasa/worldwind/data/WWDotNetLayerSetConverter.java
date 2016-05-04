@@ -42,7 +42,7 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
 
     public String getDataSourceDescription()
     {
-        return Logging.getMessage("WWDotNetLayerSetConverter.Description");
+        return null;
     }
 
     public void removeProductionState()
@@ -122,24 +122,24 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
 
         Object o = parameters.getValue(AVKey.FILE_STORE_LOCATION);
         if (o == null || !(o instanceof String) || ((String) o).length() < 1)
-            sb.append((sb.length() > 0 ? ", " : "")).append(Logging.getMessage("term.fileStoreLocation"));
+            sb.append((sb.length() > 0 ? ", " : "")).append((String) null);
 
         o = parameters.getValue(AVKey.DATA_CACHE_NAME);
         // It's okay if the cache path is empty, but if specified it must be a String.
         if (o != null && !(o instanceof String))
-            sb.append((sb.length() > 0 ? ", " : "")).append(Logging.getMessage("term.fileStoreFolder"));
+            sb.append((sb.length() > 0 ? ", " : "")).append((String) null);
 
         if (sb.length() == 0)
             return null;
 
-        return Logging.getMessage("DataStoreProducer.InvalidDataStoreParamters", sb.toString());
+        return null;
     }
 
     protected String validateDataSource(Object source, AVList params)
     {
         File file = this.getSourceConfigFile(source);
         if (file == null)
-            return Logging.getMessage("WWDotNetLayerSetConverter.NoSourceLocation");
+            return null;
 
         // Open the document in question as an XML event stream. Since we're only interested in testing the document
         // element, we avoiding any unecessary overhead incurred from parsing the entire document as a DOM.
@@ -148,23 +148,22 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
         {
             eventReader = WWXML.openEventReader(file);
             if (eventReader == null)
-                return Logging.getMessage("WWDotNetLayerSetConverter.CannotReadLayerSetConfigFile", file);
+                return null;
 
             // Get the first start element event, if any exists, then determine if it represents a LayerSet 
             // configuration document.
             XMLEvent event = WWXML.nextStartElementEvent(eventReader);
             if (event == null || !DataConfigurationUtils.isWWDotNetLayerSetConfigEvent(event))
-                return Logging.getMessage("WWDotNetLayerSetConverter.FileNotLayerSet", file);
+                return null;
         }
         catch (Exception e)
         {
-            Logging.logger().fine(Logging.getMessage("generic.ExceptionAttemptingToParseXml", file));
 
-            return Logging.getMessage("WWDotNetLayerSetConverter.CannotReadLayerSetConfigFile", file);
+            return null;
         }
         finally
         {
-            WWXML.closeEventReader(eventReader, file.getPath());
+            WWXML.closeEventReader(eventReader);
         }
 
         // Return null, indicating the DataSource is a valid LayerSet configuration document.
@@ -180,22 +179,16 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseXml", source);
-            Logging.logger().fine(message);
         }
 
         if (doc == null)
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.CannotReadLayerSetConfigFile", source);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         if (!DataConfigurationUtils.isWWDotNetLayerSetConfigDocument(doc.getDocumentElement()))
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.FileNotLayerSet", source);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         return doc;
@@ -210,41 +203,30 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
         File sourceConfigFile = this.getSourceConfigFile(source);
         if (sourceConfigFile == null)
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.NoSourceLocation");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         File sourceDataFile = sourceConfigFile.getParentFile();
         if (sourceDataFile == null)
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.FileWithoutParent", sourceConfigFile);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         File destConfigFile = this.getDestConfigFile(productionState.productionParams);
         if (destConfigFile == null)
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.NoInstallLocation", sourceConfigFile);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         File destDataFile = destConfigFile.getParentFile();
         if (destDataFile == null)
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.FileWithoutParent", destConfigFile);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         if (WWIO.isAncestorOf(sourceDataFile, destDataFile) || WWIO.isAncestorOf(destDataFile, sourceDataFile))
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.CannotInstallToSelf", sourceDataFile,
-                destDataFile);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         if (this.isStopped())
@@ -264,9 +246,7 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
             // Back out all file system changes made so far.
             WWIO.deleteDirectory(destDataFile);
 
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.CannotInstallLayerSet", sourceConfigFile);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         if (this.isStopped())
@@ -285,9 +265,7 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
             //noinspection ResultOfMethodCallIgnored
             destConfigFile.delete();
 
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.CannotWriteLayerConfigFile", destConfigFile);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         if (this.isStopped())
@@ -378,9 +356,7 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
 
         if (!destination.exists())
         {
-            String message = Logging.getMessage("generic.CannotCreateFile", destination);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         java.io.File[] fileList = source.listFiles();
@@ -416,9 +392,7 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
 
             if (!destFile.exists())
             {
-                String message = Logging.getMessage("generic.CannotCreateFile", destFile);
-                Logging.logger().severe(message);
-                throw new java.io.IOException(message);
+                    throw new java.io.IOException();
             }
         }
 
@@ -609,24 +583,18 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
         File sourceConfigFile = this.getSourceConfigFile(source);
         if (sourceConfigFile == null)
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.NoSourceLocation");
-            Logging.logger().warning(message);
             return;
         }
 
         File destConfigFile = this.getDestConfigFile(params);
         if (destConfigFile == null)
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.NoInstallLocation", sourceConfigFile);
-            Logging.logger().warning(message);
             return;
         }
 
         File destDataFile = destConfigFile.getParentFile();
         if (destDataFile == null)
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.FileWithoutParent", destConfigFile);
-            Logging.logger().warning(message);
             return;
         }
 
@@ -636,9 +604,6 @@ public class WWDotNetLayerSetConverter extends AbstractDataStoreProducer
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("WWDotNetLayerSetConverter.ExceptionRemovingProductionState",
-                sourceConfigFile);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 }

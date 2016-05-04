@@ -60,16 +60,12 @@ public class Box extends RigidShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.centerPosition = centerPosition;
         this.northSouthRadius = northSouthRadius;
@@ -96,16 +92,12 @@ public class Box extends RigidShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centerPosition = centerPosition;
@@ -269,8 +261,7 @@ public class Box extends RigidShape
         if (elementBuffer == null)
         {
             String message = "nullValue.ElementBufferIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Geometry mesh = shapeData.getMesh(face);
@@ -278,8 +269,7 @@ public class Box extends RigidShape
         if (mesh.getBuffer(Geometry.VERTEX) == null)
         {
             String message = "nullValue.VertexBufferIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -399,9 +389,7 @@ public class Box extends RigidShape
     @Override
     protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
     {
-        String message = Logging.getMessage("generic.UnsupportedOperation", "doExportAsKML");
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 }
 

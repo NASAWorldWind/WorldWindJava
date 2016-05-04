@@ -51,23 +51,17 @@ public class Box extends AbstractAirspace
     {
         if (beginLocation == null || endLocation == null)
         {
-            String message = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (leftWidth < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "leftWidth < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (rightWidth < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "rightWidth < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.beginLocation = beginLocation;
@@ -166,9 +160,7 @@ public class Box extends AbstractAirspace
     {
         if (beginLocation == null || endLocation == null)
         {
-            String message = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.beginLocation = beginLocation;
@@ -188,15 +180,11 @@ public class Box extends AbstractAirspace
     {
         if (leftWidth < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "leftWidth=" + leftWidth);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (rightWidth < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "rightWidth=" + rightWidth);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.leftWidth = leftWidth;
@@ -327,14 +315,12 @@ public class Box extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<LatLon> locations = new ArrayList<LatLon>(2);
@@ -352,14 +338,12 @@ public class Box extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.doMoveTo(oldRef, newRef);
@@ -394,9 +378,7 @@ public class Box extends AbstractAirspace
     {
         if (pillars < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "pillars=" + pillars);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.pillars = pillars;
@@ -411,9 +393,7 @@ public class Box extends AbstractAirspace
     {
         if (stacks < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "stacks=" + stacks);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.stacks = stacks;
@@ -438,15 +418,11 @@ public class Box extends AbstractAirspace
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] altitudes = this.getAltitudes(dc.getVerticalExaggeration());

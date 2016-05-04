@@ -79,8 +79,6 @@ public class StarsConvertor
         }
         catch (IOException e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("generic.ExceptionAttemptingToWriteTo", datFileName), e);
         }
     }
 
@@ -224,12 +222,10 @@ public class StarsConvertor
             // TODO: Log proper message
             //String message = WorldWind.retrieveErrMsg("generic.IOExceptionWhileLoadingData");
             String message = "IOException while loading stars data from " + starsFileName;
-            Logging.logger().severe(message);
         }
         catch (Exception e)
         {
             String message = "Error while loading stars data from " + starsFileName;
-            Logging.logger().severe(message);
         }
 
         return null;
@@ -311,8 +307,6 @@ public class StarsConvertor
             }
             catch (NumberFormatException e)
             {
-                String message = Logging.getMessage("generic.NumberFormatException");
-                Logging.logger().warning(message);
 
                 ans = JOptionPane.showInputDialog(
                     "<html><font color=#ff0000>INVALID VALUE: Please enter a floating point number."

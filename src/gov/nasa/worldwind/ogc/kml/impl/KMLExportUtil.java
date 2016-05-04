@@ -9,7 +9,6 @@ import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwind.ogc.kml.KMLConstants;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.xml.stream.*;
 import java.io.IOException;
@@ -47,9 +46,7 @@ public class KMLExportUtil
                 kmlAltitude = "absolute";
                 break;
             default:
-                String message = Logging.getMessage("generic.InvalidAltitudeMode", altitudeMode);
-                Logging.logger().warning(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
         }
 
         return kmlAltitude;
@@ -160,7 +157,6 @@ public class KMLExportUtil
         }
         else
         {
-            Logging.logger().warning(Logging.getMessage("generic.UnknownSizeMode", sizeMode));
         }
     }
 

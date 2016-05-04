@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.event;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author tag
  * @version $Id: RenderingEvent.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -34,6 +32,6 @@ public class RenderingEvent extends WWEvent
     public String toString()
     {
         return this.getClass().getName() + " "
-            + (this.stage != null ? this.stage : Logging.getMessage("generic.Unknown"));
+            + (this.stage != null ? this.stage : (String) null);
     }
 }

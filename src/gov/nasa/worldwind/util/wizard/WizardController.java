@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.util.wizard;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -23,8 +21,7 @@ class WizardController implements ActionListener
         if (wizard == null)
         {
             String message = "Wizard is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         
         this.wizard = wizard;

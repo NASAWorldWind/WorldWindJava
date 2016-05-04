@@ -89,9 +89,7 @@ public class WWOMeasureDisplay implements WWOMeasureTool.MeasureDisplay
     {
         if (labelName == null)
         {
-            String msg = Logging.getMessage("nullValue.LabelName");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         String label = this.avList.getStringValue(labelName);

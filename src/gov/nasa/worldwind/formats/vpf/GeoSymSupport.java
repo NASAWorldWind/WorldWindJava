@@ -76,16 +76,12 @@ public class GeoSymSupport
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (symbolMimeType == null)
         {
-            String message = Logging.getMessage("nullValue.ImageFomat");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.filePath = filePath;
@@ -96,8 +92,6 @@ public class GeoSymSupport
 
         if (this.assignment == null)
         {
-            String message = Logging.getMessage("VPF.GeoSymSupportDisabled");
-            Logging.logger().warning(message);
         }
         else
         {
@@ -130,16 +124,12 @@ public class GeoSymSupport
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (featureCode == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureCodeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.getAssignment() == null)
@@ -181,9 +171,7 @@ public class GeoSymSupport
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.getAssignment() == null)
@@ -209,9 +197,7 @@ public class GeoSymSupport
     {
         if (symbol == null)
         {
-            String message = Logging.getMessage("nullValue.SymbolIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.getAssignment() == null)
@@ -248,8 +234,6 @@ public class GeoSymSupport
 
         if (!GeoSymAssignment.isGeoSymAssignment(geoSymPath))
         {
-            String message = Logging.getMessage("VPF.GeoSymNotFound");
-            Logging.logger().warning(message);
             return;
         }
 
@@ -259,8 +243,6 @@ public class GeoSymSupport
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileReading", filePath);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -273,8 +255,6 @@ public class GeoSymSupport
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileReading", path);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -287,8 +267,6 @@ public class GeoSymSupport
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileReading", path);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -301,9 +279,6 @@ public class GeoSymSupport
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileReading",
-                GeoSymConstants.ATTRIBUTE_EXPRESSION_FILE);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 

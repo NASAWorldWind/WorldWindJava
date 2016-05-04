@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.ogc.collada;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.nio.FloatBuffer;
 import java.util.*;
 
@@ -128,9 +126,7 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject
     {
         if (buffer == null)
         {
-            String msg = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         int vertsPerShape = this.getVerticesPerShape();
@@ -138,9 +134,7 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject
 
         if (buffer.remaining() < indexCount * floatsPerVertex)
         {
-            String msg = Logging.getMessage("generic.BufferSize");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         int[] indices = this.getIndices(semantic);

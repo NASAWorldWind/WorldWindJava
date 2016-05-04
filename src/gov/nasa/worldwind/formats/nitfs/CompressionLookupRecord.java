@@ -42,13 +42,13 @@ class CompressionLookupRecord
     public byte[] copyValues(byte [] dest, int destOffset, int idx, int len)
     {
         if(len != this.bytesPerRecord)
-            throw new NITFSRuntimeException("NITFSReader.AttemptToCopyWithInvalidSizeOfRecord");
+            throw new NITFSRuntimeException();
         if(idx  >= this.numOfRecords)
-            throw new NITFSRuntimeException("NITFSReader.AttemptToCopyOutOfBoundsAtSource");
+            throw new NITFSRuntimeException();
         if(null == dest)
-            throw new NITFSRuntimeException("NITFSReader.AttemptCopyToIvalidDestination");
+            throw new NITFSRuntimeException();
         if(dest.length < destOffset + len)
-            throw new NITFSRuntimeException("NITFSReader.AttemptToCopyOutOfBoundsAtDestination");
+            throw new NITFSRuntimeException();
 
         System.arraycopy(lut, idx * this.bytesPerRecord, dest, destOffset, this.bytesPerRecord);
 

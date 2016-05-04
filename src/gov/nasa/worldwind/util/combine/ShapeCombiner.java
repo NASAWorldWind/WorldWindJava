@@ -25,9 +25,7 @@ public class ShapeCombiner
     {
         if (globe == null)
         {
-            String msg = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.globe = globe;
@@ -48,9 +46,7 @@ public class ShapeCombiner
     {
         if (shapes == null)
         {
-            String msg = Logging.getMessage("nullValue.ListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         CombineContext cc = this.createContext();
@@ -71,9 +67,7 @@ public class ShapeCombiner
     {
         if (shapes == null)
         {
-            String msg = Logging.getMessage("nullValue.ListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         CombineContext cc = this.createContext();
@@ -97,9 +91,7 @@ public class ShapeCombiner
     {
         if (shapes == null)
         {
-            String msg = Logging.getMessage("nullValue.ListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         CombineContext cc = this.createContext();

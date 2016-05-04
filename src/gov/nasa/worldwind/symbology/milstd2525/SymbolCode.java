@@ -9,7 +9,6 @@ package gov.nasa.worldwind.symbology.milstd2525;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.exception.WWUnrecognizedException;
 import gov.nasa.worldwind.symbology.SymbologyConstants;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * SymbolCode provides a utility for parsing and representing the individual fields of a MIL-STD-2525 symbol
@@ -70,16 +69,12 @@ public class SymbolCode extends AVListImpl
     {
         if (symCode == null)
         {
-            String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (symCode.length() != 15)
         {
-            String msg = Logging.getMessage("Symbology.SymbolCodeLengthInvalid", symCode);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         String s = this.parseSymCode(symCode);
@@ -87,8 +82,7 @@ public class SymbolCode extends AVListImpl
         {
             // A non-null return value indicates the symCode is unrecognized, and contains a message indicating the
             // problematic fields.
-            Logging.logger().severe(s);
-            throw new WWUnrecognizedException(s);
+            throw new WWUnrecognizedException();
         }
     }
 
@@ -708,7 +702,7 @@ public class SymbolCode extends AVListImpl
     {
         // Return a message indicating that the symCode's scheme is not recognized.
         String scheme = symCode.substring(0, 1);
-        return Logging.getMessage("Symbology.SymbolCodeSchemeUnrecognized", scheme, symCode);
+        return null;
     }
 
     /**
@@ -734,28 +728,28 @@ public class SymbolCode extends AVListImpl
         if (s != null && s.equalsIgnoreCase(SymbologyConstants.SCHEME_WARFIGHTING))
             this.setScheme(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.scheme"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Standard Identity/Exercise Amplifying Descriptor (position 2).
         s = symCode.substring(1, 2);
         if (SymbologyConstants.STANDARD_IDENTITY_ALL.contains(s.toUpperCase()))
             this.setStandardIdentity(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.standardIdentity"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Battle Dimension (position 3).
         s = symCode.substring(2, 3);
         if (SymbologyConstants.BATTLE_DIMENSION_ALL.contains(s.toUpperCase()))
             this.setBattleDimension(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.battleDimension"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Status/Operational Condition (position 4).
         s = symCode.substring(3, 4);
         if (SymbologyConstants.STATUS_ALL_UEI_SIGINT_SO_EM.contains(s.toUpperCase()))
             this.setStatus(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.status"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Function ID (positions 5-10).
         s = symCode.substring(4, 10);
@@ -772,7 +766,7 @@ public class SymbolCode extends AVListImpl
             this.setSymbolModifier(s);
         }
         else if (!"--".equals(s)) // "--" is accepted and indicates a null symbol modifier.
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.symbolModifier"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Country Code (positions 13-14).
         s = symCode.substring(12, 14);
@@ -784,10 +778,10 @@ public class SymbolCode extends AVListImpl
         if (SymbologyConstants.ORDER_OF_BATTLE_ALL_UEI_SIGINT_SO_EM.contains(s.toUpperCase()))
             this.setOrderOfBattle(s);
         else if (!"-".equals(s)) // "-" is accepted and indicates a null order of battle.
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.orderOfBattle"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         return sb.length() > 0
-            ? Logging.getMessage("Symbology.SymbolCodeFieldsUnrecognized", sb.toString(), symCode) : null;
+            ? (String) null : null;
     }
 
     /**
@@ -813,28 +807,28 @@ public class SymbolCode extends AVListImpl
         if (s != null && s.equalsIgnoreCase(SymbologyConstants.SCHEME_TACTICAL_GRAPHICS))
             this.setScheme(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.scheme"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Standard Identity/Exercise Amplifying Descriptor (position 2).
         s = symCode.substring(1, 2);
         if (SymbologyConstants.STANDARD_IDENTITY_ALL.contains(s.toUpperCase()))
             this.setStandardIdentity(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.standardIdentity"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Category (position 3).
         s = symCode.substring(2, 3);
         if (SymbologyConstants.CATEGORY_ALL_TACTICAL_GRAPHICS.contains(s.toUpperCase()))
             this.setCategory(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.category"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Status/Operational Condition (position 4).
         s = symCode.substring(3, 4);
         if (SymbologyConstants.STATUS_ALL_TACTICAL_GRAPHICS_METOC.contains(s.toUpperCase()))
             this.setStatus(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.status"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Function ID (positions 5-10).
         s = symCode.substring(4, 10);
@@ -846,7 +840,7 @@ public class SymbolCode extends AVListImpl
         if (SymbologyConstants.ECHELON_ALL.contains(s.toUpperCase()))
             this.setEchelon(s);
         else if (!UNUSED_POSITION_CODE.equals(s)) // "-" is accepted and indicates a null echelon.
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.echelon"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Country Code (positions 13-14).
         s = symCode.substring(12, 14);
@@ -858,10 +852,10 @@ public class SymbolCode extends AVListImpl
         if (SymbologyConstants.ORDER_OF_BATTLE_ALL_TACTICAL_GRAPHICS.contains(s.toUpperCase()))
             this.setOrderOfBattle(s);
         else if (!"-".equals(s)) // "-" is accepted and indicates a null order of battle.
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.orderOfBattle"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         return sb.length() > 0
-            ? Logging.getMessage("Symbology.SymbolCodeFieldsUnrecognized", sb.toString(), symCode) : null;
+            ? (String) null : null;
     }
 
     /**
@@ -882,21 +876,21 @@ public class SymbolCode extends AVListImpl
         if (SymbologyConstants.SCHEME_METOC.equalsIgnoreCase(s))
             this.setScheme(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.scheme"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Category (position 2).
         s = symCode.substring(1, 2);
         if (SymbologyConstants.CATEGORY_ALL_METOC.contains(s.toUpperCase()))
             this.setCategory(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.category"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Static/Dynamic (position 3,4).
         s = symCode.substring(2, 4);
         if (SymbologyConstants.STATIC_DYNAMIC_ALL.contains(s.toUpperCase()))
             this.setStaticDynamic(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.status"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Function ID (positions 5-10).
         s = symCode.substring(4, 10);
@@ -908,12 +902,12 @@ public class SymbolCode extends AVListImpl
         if (SymbologyConstants.GRAPHIC_TYPE_ALL.contains(s.toUpperCase()))
             this.setGraphicType(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.echelon"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Positions 14 and 15 unused
 
         return sb.length() > 0
-            ? Logging.getMessage("Symbology.SymbolCodeFieldsUnrecognized", sb.toString(), symCode) : null;
+            ? (String) null : null;
     }
 
     /**
@@ -938,28 +932,28 @@ public class SymbolCode extends AVListImpl
         if (s != null && s.equalsIgnoreCase(SymbologyConstants.SCHEME_INTELLIGENCE))
             this.setScheme(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.scheme"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Standard Identity/Exercise Amplifying Descriptor (position 2).
         s = symCode.substring(1, 2);
         if (SymbologyConstants.STANDARD_IDENTITY_ALL.contains(s.toUpperCase()))
             this.setStandardIdentity(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.standardIdentity"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Battle Dimension (position 3).
         s = symCode.substring(2, 3);
         if (SymbologyConstants.BATTLE_DIMENSION_ALL_INTELLIGENCE.contains(s.toUpperCase()))
             this.setBattleDimension(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.battleDimension"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Status/Operational Condition (position 4)
         s = symCode.substring(3, 4);
         if (SymbologyConstants.STATUS_ALL_UEI_SIGINT_SO_EM.contains(s.toUpperCase()))
             this.setStatus(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.status"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Function ID (positions 5-10)
         s = symCode.substring(4, 10);
@@ -969,7 +963,7 @@ public class SymbolCode extends AVListImpl
         // Not Used (positions 11-12).
         s = symCode.substring(10, 12);
         if (!"--".equals(s)) // "--" is the only accepted string in positions 11-12.
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.symbolModifier"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Country Code (positions 13-14).
         s = symCode.substring(12, 14);
@@ -981,10 +975,10 @@ public class SymbolCode extends AVListImpl
         if (SymbologyConstants.ORDER_OF_BATTLE_ALL_UEI_SIGINT_SO_EM.contains(s.toUpperCase()))
             this.setOrderOfBattle(s);
         else if (!"-".equals(s)) // "-" is accepted and indicates a null order of battle.
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.orderOfBattle"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         return sb.length() > 0
-            ? Logging.getMessage("Symbology.SymbolCodeFieldsUnrecognized", sb.toString(), symCode) : null;
+            ? (String) null : null;
     }
 
     /**
@@ -1010,28 +1004,28 @@ public class SymbolCode extends AVListImpl
         if (s != null && s.equalsIgnoreCase(SymbologyConstants.SCHEME_STABILITY_OPERATIONS))
             this.setScheme(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.scheme"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Standard Identity/Exercise Amplifying Descriptor (position 2).
         s = symCode.substring(1, 2);
         if (SymbologyConstants.STANDARD_IDENTITY_ALL.contains(s.toUpperCase()))
             this.setStandardIdentity(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.standardIdentity"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Category (position 3).
         s = symCode.substring(2, 3);
         if (SymbologyConstants.CATEGORY_ALL_STABILITY_OPERATIONS.contains(s.toUpperCase()))
             this.setCategory(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.category"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Status/Operational Condition (position 4).
         s = symCode.substring(3, 4);
         if (SymbologyConstants.STATUS_ALL_UEI_SIGINT_SO_EM.contains(s.toUpperCase()))
             this.setStatus(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.status"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Function ID (positions 5-10).
         s = symCode.substring(4, 10);
@@ -1043,7 +1037,7 @@ public class SymbolCode extends AVListImpl
         if (this.isUnitsAndEquipmentSymbolModifier(s) || SymbologyConstants.INSTALLATION_ALL.contains(s.toUpperCase()))
             this.setSymbolModifier(s);
         else if (!"--".equals(s)) // "--" is accepted and indicates a null symbol modifier.
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.symbolModifier"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Country Code (positions 13-14).
         s = symCode.substring(12, 14);
@@ -1055,10 +1049,10 @@ public class SymbolCode extends AVListImpl
         if (SymbologyConstants.ORDER_OF_BATTLE_ALL_UEI_SIGINT_SO_EM.contains(s.toUpperCase()))
             this.setOrderOfBattle(s);
         else if (!"-".equals(s)) // "-" is accepted and indicates a null order of battle.
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.orderOfBattle"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         return sb.length() > 0
-            ? Logging.getMessage("Symbology.SymbolCodeFieldsUnrecognized", sb.toString(), symCode) : null;
+            ? (String) null : null;
     }
 
     /**
@@ -1084,28 +1078,28 @@ public class SymbolCode extends AVListImpl
         if (s != null && s.equalsIgnoreCase(SymbologyConstants.SCHEME_EMERGENCY_MANAGEMENT))
             this.setScheme(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.scheme"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Standard Identity/Exercise Amplifying Descriptor (position 2).
         s = symCode.substring(1, 2);
         if (SymbologyConstants.STANDARD_IDENTITY_ALL.contains(s.toUpperCase()))
             this.setStandardIdentity(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.standardIdentity"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Category (position 3).
         s = symCode.substring(2, 3);
         if (SymbologyConstants.CATEGORY_ALL_EMERGENCY_MANAGEMENT.contains(s.toUpperCase()))
             this.setCategory(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.category"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Status/Operational Condition (position 4).
         s = symCode.substring(3, 4);
         if (SymbologyConstants.STATUS_ALL_UEI_SIGINT_SO_EM.contains(s.toUpperCase()))
             this.setStatus(s);
         else
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.status"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Function ID (positions 5-10).
         s = symCode.substring(4, 10);
@@ -1120,7 +1114,7 @@ public class SymbolCode extends AVListImpl
             this.setSymbolModifier(s);
         }
         else if (!"--".equals(s)) // "--" is accepted and indicates a null symbol modifier.
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.symbolModifier"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         // Country Code (positions 13-14).
         s = symCode.substring(12, 14);
@@ -1132,10 +1126,10 @@ public class SymbolCode extends AVListImpl
         if (SymbologyConstants.ORDER_OF_BATTLE_ALL_UEI_SIGINT_SO_EM.contains(s.toUpperCase()))
             this.setOrderOfBattle(s);
         else if (!"-".equals(s)) // "-" is accepted and indicates a null order of battle.
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("term.orderOfBattle"));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         return sb.length() > 0
-            ? Logging.getMessage("Symbology.SymbolCodeFieldsUnrecognized", sb.toString(), symCode) : null;
+            ? (String) null : null;
     }
 
     /**
@@ -1386,16 +1380,12 @@ public class SymbolCode extends AVListImpl
     {
         if (sb == null)
         {
-            String msg = Logging.getMessage("nullValue.StringBuilderIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (length < 0)
         {
-            String msg = Logging.getMessage("generic.LengthIsInvalid", length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Append the code's characters, starting at character 0 and stopping after the number of character positions

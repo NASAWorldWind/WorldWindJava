@@ -130,9 +130,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.color = color;
@@ -150,9 +148,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     {
         if (!(hint == ANTIALIAS_DONT_CARE || hint == ANTIALIAS_FASTEST || hint == ANTIALIAS_NICEST))
         {
-            String msg = Logging.getMessage("generic.InvalidHint");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.antiAliasHint = hint;
@@ -222,9 +218,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     {
         if (pathType == null)
         {
-            String msg = Logging.getMessage("nullValue.PathTypeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.setPathType(pathType.equals(AVKey.GREAT_CIRCLE) ? GREAT_CIRCLE
@@ -400,9 +394,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     {
         if (highlightColor == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.highlightColor = highlightColor;
@@ -435,9 +427,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
 
         if ((this.filled && this.positions.size() < 3))
         {
-            String msg = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
     }
 
@@ -466,9 +456,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
 
         if (this.filled && this.positions.size() < 3)
         {
-            String msg = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
     }
 
@@ -528,9 +516,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeExtent(globe, verticalExaggeration);
@@ -553,16 +539,12 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ExtentInfo extentInfo = this.extents.get(dc.getGlobe());
@@ -720,9 +702,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
         // renderable list during pick and render. The third call just draws the ordered renderable.
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getSurfaceGeometry() == null)
@@ -1172,9 +1152,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     {
         if (delta == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position refPos = this.getReferencePosition();
@@ -1192,9 +1170,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.reset();
@@ -1315,9 +1291,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport restorableSupport;
@@ -1328,9 +1302,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         String colorState = restorableSupport.getStateValueAsString("color");

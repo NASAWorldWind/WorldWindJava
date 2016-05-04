@@ -63,9 +63,7 @@ public class GeotiffRasterReader extends AbstractDataRasterReader
         String path = WWIO.getSourcePath(source);
         if (path == null)
         {
-            String message = Logging.getMessage("DataRaster.CannotRead", source);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         AVList metadata = new AVListImpl();
@@ -107,9 +105,7 @@ public class GeotiffRasterReader extends AbstractDataRasterReader
         String path = WWIO.getSourcePath(source);
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull", source);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         GeotiffReader reader = null;

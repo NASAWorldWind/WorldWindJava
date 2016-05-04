@@ -45,8 +45,6 @@ public class OGCBoundingBox extends AbstractXMLEventParser
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("XML.ImproperDataType");
-            Logging.logger().severe(message);
             throw e;
         }
 

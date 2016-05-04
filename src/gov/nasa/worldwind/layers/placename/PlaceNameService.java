@@ -74,8 +74,7 @@ public class PlaceNameService
         String message = this.validate();
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.numColumns = this.numColumnsInLevel();
@@ -93,9 +92,7 @@ public class PlaceNameService
     {
         if (row < 0 || column < 0)
         {
-            String message = Logging.getMessage("PlaceNameService.RowOrColumnOutOfRange", row, column);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder(this.fileCachePath);
@@ -134,9 +131,7 @@ public class PlaceNameService
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder(this.service);
@@ -244,9 +239,7 @@ public class PlaceNameService
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return Sector.computeBoundingBox(dc.getGlobe(), dc.getVerticalExaggeration(), this.maskingSector);
@@ -327,9 +320,7 @@ public class PlaceNameService
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.color = color;
@@ -355,10 +346,7 @@ public class PlaceNameService
     {
         if (maxDisplayDistance < this.minDisplayDistance)
         {
-            String message = Logging.getMessage("PlaceNameService.MaxDisplayDistanceLessThanMinDisplayDistance",
-                maxDisplayDistance, this.minDisplayDistance);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.maxDisplayDistance = maxDisplayDistance;
@@ -374,10 +362,7 @@ public class PlaceNameService
     {
         if (minDisplayDistance > this.maxDisplayDistance)
         {
-            String message = Logging.getMessage("PlaceNameService.MinDisplayDistanceGrtrThanMaxDisplayDistance",
-                minDisplayDistance, this.maxDisplayDistance);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.minDisplayDistance = minDisplayDistance;
@@ -408,27 +393,27 @@ public class PlaceNameService
         String msg = "";
         if (this.service == null)
         {
-            msg += Logging.getMessage("nullValue.ServiceIsNull") + ", ";
+            msg += null + ", ";
         }
         if (this.dataset == null)
         {
-            msg += Logging.getMessage("nullValue.DataSetIsNull") + ", ";
+            msg += null + ", ";
         }
         if (this.fileCachePath == null)
         {
-            msg += Logging.getMessage("nullValue.FileStorePathIsNull") + ", ";
+            msg += null + ", ";
         }
         if (this.maskingSector == null)
         {
-            msg += Logging.getMessage("nullValue.SectorIsNull") + ", ";
+            msg += null + ", ";
         }
         if (this.tileDelta == null)
         {
-            msg += Logging.getMessage("nullValue.TileDeltaIsNull") + ", ";
+            msg += null + ", ";
         }
         if (this.font == null)
         {
-            msg += Logging.getMessage("nullValue.FontIsNull") + ", ";
+            msg += null + ", ";
         }
 
         if (msg.length() == 0)

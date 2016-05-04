@@ -12,7 +12,6 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.render.Polyline;
 import gov.nasa.worldwind.render.Renderable;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -62,9 +61,7 @@ public class PlaneModel implements Renderable {
     {
         if (pos == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.position = pos;
         clearRenderables();
@@ -79,9 +76,7 @@ public class PlaneModel implements Renderable {
     {
         if (head == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.heading = head;
         clearRenderables();
@@ -128,9 +123,7 @@ public class PlaneModel implements Renderable {
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if( this.position == null || this.heading == null)
             return;

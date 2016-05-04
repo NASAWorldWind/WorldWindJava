@@ -28,7 +28,6 @@ import java.lang.reflect.*;
 import java.nio.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.logging.Level;
 
 /**
  * @author Lado Garakanidze
@@ -69,9 +68,7 @@ public class GDALUtils
         {
             if (WWUtil.isEmpty(libName))
             {
-                String message = Logging.getMessage("nullValue.LibraryIsNull");
-                Logging.logger().severe(message);
-                throw new java.lang.UnsatisfiedLinkError(message);
+                    throw new java.lang.UnsatisfiedLinkError();
             }
 
             // check if the library is already loaded
@@ -87,26 +84,24 @@ public class GDALUtils
                 {
                     NativeLibraryLoader.loadLibrary(libName);
                     loadedLibraries.add(libName);
-                    Logging.logger().info( Logging.getMessage("generic.LibraryLoadedOK", libName ));
 
                     return; // GOOD! Leaving now
                 }
                 catch (Throwable t)
                 {
                     String reason = WWUtil.extractExceptionReason(t);
-                    message = Logging.getMessage("generic.LibraryNotLoaded", libName, reason);
-                    Logging.logger().finest(message);
+                    message = null;
 
                     failedLibraries.add(libName);
                 }
             }
             else
             {
-                String reason = Logging.getMessage("generic.LibraryNotFound", libName );
-                message = Logging.getMessage("generic.LibraryNotLoaded", libName, reason);
+                String reason = null;
+                message = null;
             }
 
-            throw new UnsatisfiedLinkError(message);
+            throw new UnsatisfiedLinkError();
         }
     }
 
@@ -132,17 +127,13 @@ public class GDALUtils
 
             if (!isKnownBuild)
             {
-                String message = Logging.getMessage("gdal.UnknownBuild", gdal.VersionInfo());
-                Logging.logger().finest(message);
-            }
+                }
         }
         catch (ClassNotFoundException cnf)
         {
-            Logging.logger().finest(cnf.getMessage());
         }
         catch (Throwable t)
         {
-            Logging.logger().finest(t.getMessage());
         }
     }
 
@@ -162,14 +153,14 @@ public class GDALUtils
         {
             NativeLibraryLoader.loadLibrary(gdalalljni);
             loadedLibraries.add(gdalalljni);
-            Logging.logger().info( Logging.getMessage("generic.LibraryLoadedOK", gdalalljni ));
 
             return true;
         }
         catch (Throwable t)
         {
             if( allowLogErrors )
-                Logging.logger().finest(WWUtil.extractExceptionReason(t));
+            {
+            }
         }
 
         return false;
@@ -208,9 +199,7 @@ public class GDALUtils
                     String dataFolder = findGdalDataFolder();
                     if (null != dataFolder)
                     {
-                        String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder);
-                        Logging.logger().finest(msg);
-                        gdal.SetConfigOption(GDAL_DATA_PATH, dataFolder);
+                                    gdal.SetConfigOption(GDAL_DATA_PATH, dataFolder);
                     }
                 }
 
@@ -223,22 +212,16 @@ public class GDALUtils
                  *  "RELEASE_NAME": Returns the GDAL_RELEASE_NAME. ie. "1.1.7"
                  *   "--version": Returns full version , ie. "GDAL 1.1.7, released 2002/04/16"
                  */
-                String msg = Logging.getMessage("generic.LibraryLoadedOK", "GDAL v" + gdal.VersionInfo("RELEASE_NAME"));
-                Logging.logger().info(msg);
-                listAllRegisteredDrivers();
 
                 gdalIsAvailable.set(true);
             }
             else
             {
-                String reason = Logging.getMessage("generic.LibraryNotFound", "GDAL" );
-                String msg = Logging.getMessage("generic.LibraryNotLoaded", "GDAL", reason );
-                Logging.logger().warning(msg);
-            }
+                String reason = null;
+                }
         }
         catch (Throwable t)
         {
-            Logging.logger().log(Level.FINEST, t.getMessage(), t);
         }
     }
 
@@ -248,9 +231,7 @@ public class GDALUtils
 
         if (null == cwd || cwd.length() == 0)
         {
-            String message = Logging.getMessage("generic.UsersHomeDirectoryNotKnown");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
         return cwd;
     }
@@ -270,7 +251,6 @@ public class GDALUtils
         }
         catch (Throwable t)
         {
-            Logging.logger().severe(t.getMessage());
         }
         return null;
     }
@@ -292,19 +272,14 @@ public class GDALUtils
             {
                 if (folders.length > 1)
                 {
-                    String msg = Logging.getMessage("gdal.MultipleDataFoldersFound", buildPathString(folders, false));
-                    Logging.logger().warning(msg);
-                }
+                        }
                 return folders[0];
             }
         }
         catch (Throwable t)
         {
-            Logging.logger().severe(t.getMessage());
         }
 
-        String message = Logging.getMessage("gdal.SharedDataFolderNotFound");
-        Logging.logger().severe(message);
         // throw new WWRuntimeException( message );
         return null;
     }
@@ -333,19 +308,6 @@ public class GDALUtils
         return path.toString();
     }
 
-    protected static void listAllRegisteredDrivers()
-    {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < gdal.GetDriverCount(); i++)
-        {
-            Driver drv = gdal.GetDriver(i);
-            String msg = Logging.getMessage("gdal.DriverDetails", drv.getShortName(), drv.getLongName(),
-                drv.GetDescription());
-            sb.append(msg).append("\n");
-        }
-        Logging.logger().finest(sb.toString());
-    }
-
     /** @return returns an error string, if no errors returns null */
     public static String getErrorMessage()
     {
@@ -356,7 +318,7 @@ public class GDALUtils
                 int errno = gdal.GetLastErrorNo();
                 if (errno != gdalconst.CE_None)
                 {
-                    return Logging.getMessage("gdal.InternalError", errno, gdal.GetLastErrorMsg());
+                    return null;
                 }
             }
         }
@@ -390,9 +352,7 @@ public class GDALUtils
                 return null;
             }
 
-            String message = Logging.getMessage("gdal.GDALNotAvailable");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         File file = WWIO.getFileForLocalAddress(source);
@@ -403,9 +363,7 @@ public class GDALUtils
                 return null;
             }
 
-            String message = Logging.getMessage("generic.UnrecognizedSourceType", source.getClass().getName());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!file.exists())
@@ -415,9 +373,7 @@ public class GDALUtils
                 return null;
             }
 
-            String message = Logging.getMessage("generic.FileNotFound", file.getAbsolutePath());
-            Logging.logger().severe(message);
-            throw new FileNotFoundException(message);
+            throw new FileNotFoundException();
         }
 
         if (!file.canRead())
@@ -427,9 +383,7 @@ public class GDALUtils
                 return null;
             }
 
-            String message = Logging.getMessage("generic.FileNoReadPermission", file.getAbsolutePath());
-            Logging.logger().severe(message);
-            throw new SecurityException(message);
+            throw new SecurityException();
         }
 
         Dataset ds = null;
@@ -451,9 +405,7 @@ public class GDALUtils
                 return null;
             }
 
-            String message = Logging.getMessage("generic.CannotOpenFile", GDALUtils.getErrorMessage());
-            Logging.logger().fine(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         return ds;
@@ -543,15 +495,11 @@ public class GDALUtils
     {
         if (!gdalIsAvailable.get())
         {
-            String message = Logging.getMessage("gdal.GDALNotAvailable");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
         if (null == ds)
         {
-            String message = Logging.getMessage("nullValue.DataSetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         BufferedImage img = null;
@@ -562,9 +510,7 @@ public class GDALUtils
 
         if( bandCount < 1 )
         {
-            String message = Logging.getMessage("generic.UnexpectedBandCount", bandCount );
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Double[] dbls = new Double[16];
@@ -584,9 +530,7 @@ public class GDALUtils
             Band imageBand = ds.GetRasterBand(bandIdx + 1);
             if (null == imageBand)
             {
-                String message = Logging.getMessage("nullValue.RasterBandIsNull`");
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             bandDataType = imageBand.getDataType();
@@ -622,7 +566,7 @@ public class GDALUtils
 
             if (returnVal != gdalconstConstants.CE_None)
             {
-                throw new WWRuntimeException(GDALUtils.getErrorMessage());
+                throw new WWRuntimeException();
             }
 
             int destBandIdx = bandIdx;
@@ -684,7 +628,6 @@ public class GDALUtils
         catch (Exception e)
         {
             reqBandOrder = bandsOrder;
-            Logging.logger().severe(e.getMessage());
         }
 
         DataBuffer imgBuffer = null;
@@ -787,8 +730,6 @@ public class GDALUtils
         }
         else
         {
-            String message = Logging.getMessage("generic.UnrecognizedDataType", bandDataType);
-            Logging.logger().severe(message);
         }
 
         SampleModel sm = new BandedSampleModel(bufferType, width, height, width, bandsOrder, offsets);
@@ -879,9 +820,7 @@ public class GDALUtils
 
         if (sourceImage == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int width = sourceImage.getWidth();
@@ -904,7 +843,6 @@ public class GDALUtils
         }
         catch (Throwable t)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, t.getMessage(), t);
             dest = sourceImage;
         }
 
@@ -1101,9 +1039,7 @@ public class GDALUtils
                 Band maskBand = maskDS.GetRasterBand(1);
                 if (null == maskBand)
                 {
-                    String message = Logging.getMessage("nullValue.RasterBandIsNull");
-                    Logging.logger().severe(message);
-                    return null;
+                            return null;
                 }
 
                 int width = maskDS.getRasterXSize();
@@ -1120,7 +1056,7 @@ public class GDALUtils
 
                 if (returnVal != gdalconstConstants.CE_None)
                 {
-                    throw new WWRuntimeException(GDALUtils.getErrorMessage());
+                    throw new WWRuntimeException();
                 }
 
                 return maskData.asIntBuffer();
@@ -1128,7 +1064,6 @@ public class GDALUtils
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, e.getMessage(), e);
         }
 
         return null;
@@ -1149,21 +1084,15 @@ public class GDALUtils
     {
         if (null == sector)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (0 == width)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (0 == height)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
 //        * geotransform[1] : width of pixel
@@ -1196,9 +1125,7 @@ public class GDALUtils
     {
         if (!gdalIsAvailable.get())
         {
-            String message = Logging.getMessage("gdal.GDALNotAvailable");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         SpatialReference srs = new SpatialReference();
@@ -1210,9 +1137,7 @@ public class GDALUtils
     {
         if (!gdalIsAvailable.get())
         {
-            String message = Logging.getMessage("gdal.GDALNotAvailable");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         java.awt.geom.Point2D geoPoint = GDAL.getGeoPointForRasterPoint(gt, x, y);
@@ -1327,42 +1252,32 @@ public class GDALUtils
 
         if (!gdalIsAvailable.get())
         {
-            String message = Logging.getMessage("gdal.GDALNotAvailable");
-            Logging.logger().finest(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         if (null == ds)
         {
-            String message = Logging.getMessage("nullValue.DataSetIsNull");
-            Logging.logger().finest(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int width = ds.getRasterXSize();
         if (0 >= width)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().finest(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         params.setValue(AVKey.WIDTH, width);
 
         int height = ds.getRasterYSize();
         if (0 >= height)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", height);
-            Logging.logger().finest(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         params.setValue(AVKey.HEIGHT, height);
 
         int bandCount = ds.getRasterCount();
         if (0 >= bandCount)
         {
-            String message = Logging.getMessage("generic.UnexpectedBandCount", bandCount);
-            Logging.logger().finest(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
         params.setValue(AVKey.NUM_BANDS, bandCount);
 
@@ -1419,9 +1334,7 @@ public class GDALUtils
             }
             else
             {
-                String msg = Logging.getMessage("generic.UnrecognizedDataType", dataType);
-                Logging.logger().severe(msg);
-                throw new WWRuntimeException(msg);
+                    throw new WWRuntimeException();
             }
 
             if( "GTiff".equalsIgnoreCase(ds.GetDriver().getShortName())
@@ -1442,7 +1355,6 @@ public class GDALUtils
                 }
                 catch (Throwable t)
                 {
-                    Logging.logger().finest(WWUtil.extractExceptionReason(t));
                 }
                 finally
                 {
@@ -1546,9 +1458,7 @@ public class GDALUtils
             }
             else if (srs.IsGeographic() == 0)
             {
-                String msg = Logging.getMessage("generic.UnexpectedCoordinateSystem", srs.ExportToWkt());
-                Logging.logger().warning(msg);
-                srs = createGeographicSRS();
+                    srs = createGeographicSRS();
             }
         }
 
@@ -1564,10 +1474,8 @@ public class GDALUtils
             if (srs.IsLocal() == 1)
             {
                 params.setValue(AVKey.COORDINATE_SYSTEM, AVKey.COORDINATE_SYSTEM_UNKNOWN);
-                String msg = Logging.getMessage("generic.UnknownCoordinateSystem", proj_wkt);
-                Logging.logger().severe(msg);
-                return params;
-//                throw new WWRuntimeException(msg);
+                    return params;
+//                throw new WWRuntimeException();
             }
 
             // save area in image's native CS and Projection 
@@ -1644,7 +1552,6 @@ public class GDALUtils
                     }
                     else
                     {
-                        Logging.logger().warning(Logging.getMessage("generic.UnknownProjectionUnits", unit));
                     }
                 }
 
@@ -1660,9 +1567,7 @@ public class GDALUtils
             else
             {
                 params.setValue(AVKey.COORDINATE_SYSTEM, AVKey.COORDINATE_SYSTEM_UNKNOWN);
-                String msg = Logging.getMessage("generic.UnknownCoordinateSystem", proj_wkt);
-                Logging.logger().severe(msg);
-//                throw new WWRuntimeException(msg);
+                    //                throw new WWRuntimeException();
             }
         }
 
@@ -1749,9 +1654,7 @@ public class GDALUtils
     {
         if (!gdalIsAvailable.get())
         {
-            String message = Logging.getMessage("gdal.GDALNotAvailable");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         params = extractRasterParameters(ds, params, false);
@@ -1767,9 +1670,7 @@ public class GDALUtils
         }
         else
         {
-            String message = Logging.getMessage("generic.UnexpectedRasterType", pixelFormat);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
     }
 
@@ -1778,21 +1679,15 @@ public class GDALUtils
     {
         if (!gdalIsAvailable.get())
         {
-            String message = Logging.getMessage("gdal.GDALNotAvailable");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
         if (null == ds)
         {
-            String message = Logging.getMessage("nullValue.DataSetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (null == params)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int[] bandsOrder = null;
@@ -1819,25 +1714,19 @@ public class GDALUtils
 
             if (null == bandsOrder)
             {
-                String message = Logging.getMessage("nullValue.BandOrderIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (0 == bandsOrder.length)
             {
-                String message = Logging.getMessage("generic.BandOrderIsEmpty");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             for (int i = 0; i < bandsOrder.length; i++)
             {
                 if (bandsOrder[i] < 0 || bandsOrder[i] >= bandsCount)
                 {
-                    String message = Logging.getMessage("generic.InvalidBandOrder", bandsOrder[i], bandsCount);
-                    Logging.logger().severe(message);
-                    throw new IllegalArgumentException(message);
+                            throw new IllegalArgumentException();
                 }
             }
         }
@@ -1864,17 +1753,13 @@ public class GDALUtils
         String pixelFormat = params.getStringValue(AVKey.PIXEL_FORMAT);
         if (!AVKey.ELEVATION.equals(pixelFormat))
         {
-            String message = Logging.getMessage("generic.UnexpectedRasterType", pixelFormat);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         Object o = params.getValue(AVKey.SECTOR);
         if (null == o || !(o instanceof Sector))
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.SECTOR);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
         Sector sector = (Sector) o;
 
@@ -1882,9 +1767,7 @@ public class GDALUtils
         // we expect here one band (elevation rasters have -32767 or -32768 in void places) data raster
         if (bandCount != 1)
         {
-            String message = Logging.getMessage("generic.UnexpectedBandCount", bandCount);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         ByteOrder byteOrder = ByteOrder.nativeOrder();
@@ -1905,9 +1788,7 @@ public class GDALUtils
         Band band = ds.GetRasterBand(1);
         if (null == band)
         {
-            String message = Logging.getMessage("nullValue.RasterBandIsNull");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         int dataType = band.getDataType();
@@ -1921,9 +1802,7 @@ public class GDALUtils
         }
         catch (Throwable t)
         {
-            String message = Logging.getMessage("generic.MemoryAllocationError", bufferSize);
-            Logging.logger().log(Level.SEVERE, message, t);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         data.order(byteOrder);
@@ -1933,7 +1812,7 @@ public class GDALUtils
 
         if (returnVal != gdalconstConstants.CE_None)
         {
-            throw new WWRuntimeException(GDALUtils.getErrorMessage());
+            throw new WWRuntimeException();
         }
 
         ByteBufferRaster   raster = new ByteBufferRaster(width, height, sector, data, params);
@@ -1977,7 +1856,6 @@ public class GDALUtils
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, e.getMessage(), e);
         }
     }
 

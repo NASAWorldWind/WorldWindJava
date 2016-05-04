@@ -7,12 +7,10 @@ package gov.nasa.worldwind.retrieve;
 
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.net.ssl.SSLHandshakeException;
 import java.net.SocketTimeoutException;
 import java.util.concurrent.*;
-import java.util.logging.Level;
 
 /**
  * Performs threaded retrieval of data.
@@ -29,10 +27,8 @@ public final class BasicRetrievalService extends WWObjectImpl
     private static final long DEFAULT_STALE_REQUEST_LIMIT = 30000; // milliseconds
     private static final int DEFAULT_TIME_PRIORITY_GRANULARITY = 500; // milliseconds
 
-    private static final String RUNNING_THREAD_NAME_PREFIX = Logging.getMessage(
-        "BasicRetrievalService.RunningThreadNamePrefix");
-    private static final String IDLE_THREAD_NAME_PREFIX = Logging.getMessage(
-        "BasicRetrievalService.IdleThreadNamePrefix");
+    private static final String RUNNING_THREAD_NAME_PREFIX = null;
+    private static final String IDLE_THREAD_NAME_PREFIX = null;
 
     private RetrievalExecutor executor; // thread pool for running retrievers
     private ConcurrentLinkedQueue<RetrievalTask> activeTasks; // tasks currently allocated a thread
@@ -82,9 +78,7 @@ public final class BasicRetrievalService extends WWObjectImpl
         {
             if (that == null)
             {
-                String msg = Logging.getMessage("nullValue.RetrieverIsNull");
-                Logging.logger().fine(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (this.priority > 0 && that.priority > 0) // only secondary priority used if either is negative
@@ -136,8 +130,6 @@ public final class BasicRetrievalService extends WWObjectImpl
 
     public void uncaughtException(Thread thread, Throwable throwable)
     {
-        Logging.logger().fine(Logging.getMessage("BasicRetrievalService.UncaughtExceptionDuringRetrieval",
-            thread.getName()));
     }
 
     private class RetrievalExecutor extends ThreadPoolExecutor
@@ -165,8 +157,6 @@ public final class BasicRetrievalService extends WWObjectImpl
                 public void rejectedExecution(Runnable runnable, ThreadPoolExecutor threadPoolExecutor)
                 {
                     // Interposes logging for rejected execution
-                    Logging.logger().finer(Logging.getMessage("BasicRetrievalService.ResourceRejected",
-                        ((RetrievalTask) runnable).getRetriever().getName()));
 
                     super.rejectedExecution(runnable, threadPoolExecutor);
                 }
@@ -186,15 +176,11 @@ public final class BasicRetrievalService extends WWObjectImpl
         {
             if (thread == null)
             {
-                String msg = Logging.getMessage("nullValue.ThreadIsNull");
-                Logging.logger().fine(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
             if (runnable == null)
             {
-                String msg = Logging.getMessage("nullValue.RunnableIsNull");
-                Logging.logger().fine(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             RetrievalTask task = (RetrievalTask) runnable;
@@ -205,16 +191,12 @@ public final class BasicRetrievalService extends WWObjectImpl
             if (task.retriever.getBeginTime() - task.retriever.getSubmitTime() > limit)
             {
                 // Task has been sitting on the queue too long
-                Logging.logger().finer(Logging.getMessage("BasicRetrievalService.CancellingTooOldRetrieval",
-                    task.getRetriever().getName()));
                 task.cancel(true);
             }
 
             if (BasicRetrievalService.this.activeTasks.contains(task))
             {
                 // Task is a duplicate
-                Logging.logger().finer(Logging.getMessage("BasicRetrievalService.CancellingDuplicateRetrieval",
-                    task.getRetriever().getName()));
                 task.cancel(true);
             }
 
@@ -237,9 +219,7 @@ public final class BasicRetrievalService extends WWObjectImpl
         {
             if (runnable == null)
             {
-                String msg = Logging.getMessage("nullValue.RunnableIsNull");
-                Logging.logger().fine(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             super.afterExecute(runnable, throwable);
@@ -252,42 +232,32 @@ public final class BasicRetrievalService extends WWObjectImpl
             {
                 if (throwable != null)
                 {
-                    Logging.logger().log(Level.FINE,
-                        Logging.getMessage("BasicRetrievalService.ExceptionDuringRetrieval",
-                            task.getRetriever().getName()), throwable);
                 }
 
                 task.get(); // Wait for task to finish, cancel or break
             }
             catch (java.util.concurrent.ExecutionException e)
             {
-                String message = Logging.getMessage("BasicRetrievalService.ExecutionExceptionDuringRetrieval",
-                    task.getRetriever().getName());
-                if (e.getCause() instanceof SocketTimeoutException)
+                    if (e.getCause() instanceof SocketTimeoutException)
                 {
-                    Logging.logger().fine(message + " " + e.getCause().getLocalizedMessage());
                 }
                 else if (e.getCause() instanceof SSLHandshakeException)
                 {
                     if (sslExceptionListener != null)
                         sslExceptionListener.onException(e.getCause(), task.getRetriever().getName());
                     else
-                        Logging.logger().fine(message + " " + e.getCause().getLocalizedMessage());
+                    {
+                    }
                 }
                 else
                 {
-                    Logging.logger().log(Level.FINE, message, e);
                 }
             }
             catch (InterruptedException e)
             {
-                Logging.logger().log(Level.FINE, Logging.getMessage("BasicRetrievalService.RetrievalInterrupted",
-                    task.getRetriever().getName()), e);
             }
             catch (java.util.concurrent.CancellationException e)
             {
-                Logging.logger().fine(Logging.getMessage("BasicRetrievalService.RetrievalCancelled",
-                    task.getRetriever().getName()));
             }
             finally
             {
@@ -329,15 +299,11 @@ public final class BasicRetrievalService extends WWObjectImpl
     {
         if (retriever == null)
         {
-            String msg = Logging.getMessage("nullValue.RetrieverIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (retriever.getName() == null)
         {
-            String message = Logging.getMessage("nullValue.RetrieverNameIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Add with secondary priority that removes most recently added requests first.
@@ -356,21 +322,16 @@ public final class BasicRetrievalService extends WWObjectImpl
     {
         if (retriever == null)
         {
-            String message = Logging.getMessage("nullValue.RetrieverIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (retriever.getName() == null)
         {
-            String message = Logging.getMessage("nullValue.RetrieverNameIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isAvailable())
         {
-            Logging.logger().finer(Logging.getMessage("BasicRetrievalService.ResourceRejected", retriever.getName()));
         }
 
         RetrievalTask task = new RetrievalTask(retriever, priority);
@@ -394,9 +355,7 @@ public final class BasicRetrievalService extends WWObjectImpl
     {
         if (poolSize < 1)
         {
-            String message = Logging.getMessage("BasicRetrievalService.RetrieverPoolSizeIsLessThanOne");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.executor.setCorePoolSize(poolSize);
@@ -448,9 +407,7 @@ public final class BasicRetrievalService extends WWObjectImpl
     {
         if (retriever == null)
         {
-            String msg = Logging.getMessage("nullValue.RetrieverIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         RetrievalTask task = new RetrievalTask(retriever, 0d);
         return (this.activeTasks.contains(task) || this.executor.getQueue().contains(task));
@@ -478,9 +435,6 @@ public final class BasicRetrievalService extends WWObjectImpl
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.FINE,
-                    Logging.getMessage("BasicRetrievalService.ExceptionRetrievingContentSizes",
-                        retriever.getName() != null ? retriever.getName() : ""), e);
             }
         }
 
@@ -501,9 +455,8 @@ public final class BasicRetrievalService extends WWObjectImpl
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("BasicRetrievalService.ExceptionRetrievingContentSizes") + (
+                String message = null + (
                     retriever.getName() != null ? retriever.getName() : "");
-                Logging.logger().log(Level.FINE, message, e);
             }
         }
 

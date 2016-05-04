@@ -312,9 +312,7 @@ public class KMLLink extends KMLAbstractObject
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // See if we've already determined the href is a local reference
@@ -542,9 +540,7 @@ public class KMLLink extends KMLAbstractObject
     {
         if (!(sourceValues instanceof KMLLink))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         KMLLink link = (KMLLink) sourceValues;

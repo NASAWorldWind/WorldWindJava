@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.formats.tiff;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * This is a package private class that contains methods of reading TIFF structures
  *
@@ -112,7 +110,6 @@ class BaselineTiff
             }
             catch (Exception e)
             {
-                Logging.logger().finest(e.toString());
             }
         }
         return tiff;

@@ -5,7 +5,6 @@
  */
 package gov.nasa.worldwind.formats.json;
 
-import gov.nasa.worldwind.util.Logging;
 import org.codehaus.jackson.*;
 
 import java.io.IOException;
@@ -24,16 +23,12 @@ public class BasicJSONEvent implements JSONEvent
     {
         if (parser == null)
         {
-            String message = Logging.getMessage("nullValue.ParserIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (token == null)
         {
-            String message = Logging.getMessage("nullValue.TokenIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.token = token;
@@ -61,7 +56,6 @@ public class BasicJSONEvent implements JSONEvent
 
             else
             {
-                Logging.logger().warning(Logging.getMessage("generic.UnexpectedEvent", this.token));
                 this.scalarValue = null;
             }
         }

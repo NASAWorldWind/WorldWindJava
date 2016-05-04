@@ -10,7 +10,6 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.symbology.milstd2525.AbstractMilStd2525TacticalGraphic;
 import gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -81,9 +80,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.labelAngle = angle;
@@ -119,9 +116,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -135,9 +130,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
         }
         catch (NoSuchElementException e)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.positions = positions;

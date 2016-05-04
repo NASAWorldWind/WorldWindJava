@@ -121,9 +121,7 @@ public class SegmentPlaneRenderer
     {
         if (size < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "size < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.minObjectSize = size;
@@ -138,9 +136,7 @@ public class SegmentPlaneRenderer
     {
         if (coefficient < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "coefficient < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.maxObjectSizeCoefficient = coefficient;
@@ -150,15 +146,11 @@ public class SegmentPlaneRenderer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (segmentPlane == null)
         {
-            String message = Logging.getMessage("nullValue.SegmentPlaneIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.draw(dc, segmentPlane, null, null);
@@ -168,15 +160,11 @@ public class SegmentPlaneRenderer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (segmentPlane == null)
         {
-            String message = Logging.getMessage("nullValue.SegmentPlaneIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.pickSupport.beginPicking(dc);
@@ -195,15 +183,11 @@ public class SegmentPlaneRenderer
     {
         if (ray == null)
         {
-            String message = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (segmentPlane == null)
         {
-            String message = Logging.getMessage("nullValue.SegmentPlaneIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RenderInfo renderInfo = this.getRenderInfoFor(globe, segmentPlane);
@@ -220,21 +204,15 @@ public class SegmentPlaneRenderer
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (segmentPlane == null)
         {
-            String message = Logging.getMessage("nullValue.SegmentPlaneIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (controlPoint == null)
         {
-            String message = Logging.getMessage("nullValue.ControlPointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] coords = controlPoint.getCoordinates();
@@ -246,33 +224,23 @@ public class SegmentPlaneRenderer
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (segmentPlane == null)
         {
-            String message = Logging.getMessage("nullValue.SegmentPlaneIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (point == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeObjectSize(view, globe, segmentPlane, key, point, false);

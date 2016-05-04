@@ -319,16 +319,12 @@ public abstract class BufferWrapper
     {
         if (byteBuffer == null)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dataType == null)
         {
-            String message = Logging.getMessage("nullValue.DataTypeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (byteOrder != null)
@@ -366,16 +362,12 @@ public abstract class BufferWrapper
     {
         if (byteBuffer == null)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dataType == null)
         {
-            String message = Logging.getMessage("nullValue.DataTypeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return wrap(byteBuffer, dataType, null);
@@ -399,24 +391,17 @@ public abstract class BufferWrapper
     {
         if (byteBuffer == null)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params.getValue(AVKey.DATA_TYPE) == null)
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter",
-                Logging.getMessage("term.dataType"));
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return wrap(byteBuffer, params.getValue(AVKey.DATA_TYPE), params.getValue(AVKey.BYTE_ORDER));
@@ -434,9 +419,7 @@ public abstract class BufferWrapper
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.BufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.buffer = buffer;
@@ -451,9 +434,7 @@ public abstract class BufferWrapper
         {
             if (array == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -475,9 +456,7 @@ public abstract class BufferWrapper
         {
             if (array == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -499,9 +478,7 @@ public abstract class BufferWrapper
         {
             if (array == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -523,9 +500,7 @@ public abstract class BufferWrapper
         {
             if (array == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -547,9 +522,7 @@ public abstract class BufferWrapper
         {
             if (array == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -571,9 +544,7 @@ public abstract class BufferWrapper
         {
             if (array == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -595,9 +566,7 @@ public abstract class BufferWrapper
         {
             if (array == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -619,9 +588,7 @@ public abstract class BufferWrapper
         {
             if (array == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -643,9 +610,7 @@ public abstract class BufferWrapper
         {
             if (array == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -667,9 +632,7 @@ public abstract class BufferWrapper
         {
             if (array == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -720,9 +683,7 @@ public abstract class BufferWrapper
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.BufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.putSubBuffer(index, buffer, 0, buffer.length());
@@ -732,16 +693,12 @@ public abstract class BufferWrapper
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.BufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (buffer.getBackingBuffer() == this.buffer)
             {
-                String message = Logging.getMessage("generic.CannotCopyBufferToSelf");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (length <= 0)
@@ -865,9 +822,7 @@ public abstract class BufferWrapper
         {
             if (newSize < this.length())
             {
-                String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             ByteBuffer thatBuffer = WWBufferUtil.copyOf(this.buffer, newSize);
@@ -1086,9 +1041,7 @@ public abstract class BufferWrapper
         {
             if (newSize < this.length())
             {
-                String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             ShortBuffer thatBuffer = WWBufferUtil.copyOf(this.buffer, newSize);
@@ -1307,9 +1260,7 @@ public abstract class BufferWrapper
         {
             if (newSize < this.length())
             {
-                String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             IntBuffer thatBuffer = WWBufferUtil.copyOf(this.buffer, newSize);
@@ -1528,9 +1479,7 @@ public abstract class BufferWrapper
         {
             if (newSize < this.length())
             {
-                String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             FloatBuffer thatBuffer = WWBufferUtil.copyOf(this.buffer, newSize);
@@ -1749,9 +1698,7 @@ public abstract class BufferWrapper
         {
             if (newSize < this.length())
             {
-                String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             DoubleBuffer thatBuffer = WWBufferUtil.copyOf(this.buffer, newSize);
@@ -1919,163 +1866,117 @@ public abstract class BufferWrapper
 
         public byte getByte(int index)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putByte(int index, byte value)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public short getShort(int index)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putShort(int index, short value)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public int getInt(int index)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putInt(int index, int value)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public float getFloat(int index)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putFloat(int index, float value)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public double getDouble(int index)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putDouble(int index, double value)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void getByte(int index, byte[] array, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putByte(int index, byte[] array, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void getShort(int index, short[] array, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putShort(int index, short[] array, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void getInt(int index, int[] array, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putInt(int index, int[] array, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void getFloat(int index, float[] array, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putFloat(int index, float[] array, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void getDouble(int index, double[] array, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putDouble(int index, double[] array, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public BufferWrapper getSubBuffer(int index, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putSubBuffer(int index, BufferWrapper buffer)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public void putSubBuffer(int index, BufferWrapper buffer, int offset, int length)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         public BufferWrapper copyOf(int newSize)

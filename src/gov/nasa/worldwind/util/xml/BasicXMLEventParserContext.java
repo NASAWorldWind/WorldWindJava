@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.util.xml;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
@@ -16,7 +15,6 @@ import javax.xml.stream.events.XMLEvent;
 import java.beans.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
 
 /**
  * Provides an implementation of {@link gov.nasa.worldwind.util.xml.XMLEventParserContext}. This class is meant to be
@@ -112,26 +110,7 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
                 if (notificationListener != null)
                 {
                     notificationListener.notify(notification);
-                    return;
                 }
-
-                String msg;
-                if (notification.getEvent() != null)
-                {
-                    msg = Logging.getMessage(notification.getMessage(), notification.getEvent().toString(),
-                        notification.getEvent().getLocation().getLineNumber(),
-                        notification.getEvent().getLocation().getColumnNumber(),
-                        notification.getEvent().getLocation().getCharacterOffset());
-                }
-                else
-                {
-                    msg = Logging.getMessage(notification.getMessage(), "", "");
-                }
-
-                if (notification.getPropertyName().equals(XMLParserNotification.EXCEPTION))
-                    Logging.logger().log(Level.WARNING, msg);
-                else if (notification.getPropertyName().equals(XMLParserNotification.UNRECOGNIZED))
-                    Logging.logger().log(Level.WARNING, msg);
             }
         });
     }
@@ -219,9 +198,7 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull"); // TODO
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.reader = reader;
@@ -292,9 +269,7 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
     {
         if (event == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         QName elementName = event.asStartElement().getName();
@@ -363,9 +338,7 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
     {
         if (event == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return event.isCharacters() ? event.asCharacters().getData() : null;
@@ -399,16 +372,12 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
     {
         if (event == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (elementName == null)
         {
-            String message = Logging.getMessage("nullValue.ElementNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return (event.isStartElement() && this.isSameName(event.asStartElement().getName(), elementName));
@@ -418,16 +387,12 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
     {
         if (event == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (elementName == null)
         {
-            String message = Logging.getMessage("nullValue.ElementNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return (event.isStartElement() && event.asStartElement().getName().getLocalPart().equals(elementName));
@@ -437,9 +402,7 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
     {
         if (event == null || startElement == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return isEndElementEvent(event, startElement);
@@ -449,9 +412,7 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
     {
         if (event == null || startElement == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return (event.isEndElement()
@@ -462,16 +423,12 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
     {
         if (parser == null)
         {
-            String message = Logging.getMessage("nullValue.ParserIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (elementName == null)
         {
-            String message = Logging.getMessage("nullValue.ElementNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.parsers.put(elementName, parser);
@@ -481,9 +438,7 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.ElementNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XMLEventParser factoryParser = this.parsers.get(name);
@@ -513,8 +468,6 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("XML.ParserCreationException", name);
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
             return null;
         }
     }

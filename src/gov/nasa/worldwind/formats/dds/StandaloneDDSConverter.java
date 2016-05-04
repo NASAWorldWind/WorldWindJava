@@ -21,16 +21,12 @@ public class StandaloneDDSConverter
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!file.exists() || !file.canRead())
         {
-            String message = Logging.getMessage("DDSConverter.NoFileOrNoPermission");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (file.isDirectory())

@@ -13,16 +13,7 @@ public class WWRuntimeException extends RuntimeException
 {
     public WWRuntimeException()
     {
-    }
-
-    public WWRuntimeException(String s)
-    {
-        super(s);
-    }
-
-    public WWRuntimeException(String s, Throwable throwable)
-    {
-        super(s, throwable);
+        super();
     }
 
     public WWRuntimeException(Throwable throwable)

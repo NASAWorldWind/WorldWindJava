@@ -7,7 +7,6 @@ package gov.nasa.worldwind.layers.rpf;
 
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.Sector;
-import gov.nasa.worldwind.util.Logging;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,8 +75,7 @@ public class RPFFileIndex
         if (key == Table.INVALID_KEY)
         {
             String message = "key is invalid: " + key;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File file = null;
@@ -94,8 +92,7 @@ public class RPFFileIndex
         if (key == Table.INVALID_KEY)
         {
             String message = "key is invalid: " + key;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File file = null;
@@ -122,9 +119,7 @@ public class RPFFileIndex
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Attempt to create a directory record from the File's parent-file.
@@ -144,9 +139,7 @@ public class RPFFileIndex
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Attempt to create a directory record from the File's parent-file.
@@ -225,17 +218,14 @@ public class RPFFileIndex
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String fileId = getString(buffer, FILE_ID_LENGTH);
         if (!FILE_ID.equals(fileId))
         {
             String message = "buffer does not contain an RPFFileIndex";
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
         //noinspection UnusedDeclaration
         String version = getString(buffer, VERSION_LENGTH);
@@ -329,8 +319,7 @@ public class RPFFileIndex
             if (recordFactory == null)
             {
                 String message = "RecordFactory is null";
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                throw new IllegalArgumentException();
             }
             
             this.recordFactory = recordFactory;
@@ -364,9 +353,7 @@ public class RPFFileIndex
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             // Clear any existing records.
@@ -527,9 +514,7 @@ public class RPFFileIndex
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.filename = getString(buffer, FILENAME_LENGTH);
@@ -545,9 +530,7 @@ public class RPFFileIndex
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             putString(buffer, this.filename, FILENAME_LENGTH);
@@ -605,9 +588,7 @@ public class RPFFileIndex
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.filename = getString(buffer, FILENAME_LENGTH);
@@ -619,9 +600,7 @@ public class RPFFileIndex
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             putString(buffer, this.filename, FILENAME_LENGTH);
@@ -656,9 +635,7 @@ public class RPFFileIndex
         {
             if (path == null)
             {
-                String message = Logging.getMessage("nullValue.StringIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.path = path;
@@ -668,9 +645,7 @@ public class RPFFileIndex
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.path = getString(buffer, PATH_LENGTH);
@@ -680,9 +655,7 @@ public class RPFFileIndex
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             putString(buffer, this.path, PATH_LENGTH);
@@ -774,9 +747,7 @@ public class RPFFileIndex
         {
             if (buffer == null)
             {
-                String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             int savePos = buffer.position();

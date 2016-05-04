@@ -71,16 +71,12 @@ public class TextureAtlasElement implements Disposable
     {
         if (atlas == null)
         {
-            String msg = Logging.getMessage("nullValue.AtlasIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(imageSource))
         {
-            String msg = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.atlas = atlas;
@@ -197,9 +193,7 @@ public class TextureAtlasElement implements Disposable
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.isImageInitializationFailed())
@@ -312,9 +306,7 @@ public class TextureAtlasElement implements Disposable
     {
         if (this.getImage() == null)
         {
-            String msg = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         try
@@ -325,8 +317,6 @@ public class TextureAtlasElement implements Disposable
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("TextureAtlas.ExceptionAddingImage", this.getImageSource().toString());
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             this.imageInitializationFailed = true;
             return false;
         }
@@ -379,9 +369,6 @@ public class TextureAtlasElement implements Disposable
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("generic.ExceptionAttemptingToReadImageFile",
-                this.getImageSource().toString());
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             this.imageInitializationFailed = true;
             return null;
         }
@@ -422,9 +409,7 @@ public class TextureAtlasElement implements Disposable
         {
             if (elem == null)
             {
-                String message = Logging.getMessage("nullValue.ElementIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.elem = elem;

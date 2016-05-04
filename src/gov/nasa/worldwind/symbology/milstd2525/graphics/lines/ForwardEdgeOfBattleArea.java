@@ -13,7 +13,6 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.symbology.*;
 import gov.nasa.worldwind.symbology.milstd2525.*;
 import gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.util.*;
@@ -117,16 +116,12 @@ public class ForwardEdgeOfBattleArea extends AbstractMilStd2525TacticalGraphic
         {
             if (status == null)
             {
-                String msg = Logging.getMessage("nullValue.StringIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (!SymbologyConstants.STATUS_ALL.contains(status.toUpperCase()))
             {
-                String msg = Logging.getMessage("Symbology.InvalidStatus", status);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             SymbolCode code = new SymbolCode(this.symbolCode);
@@ -189,9 +184,7 @@ public class ForwardEdgeOfBattleArea extends AbstractMilStd2525TacticalGraphic
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -202,9 +195,7 @@ public class ForwardEdgeOfBattleArea extends AbstractMilStd2525TacticalGraphic
         }
         catch (NoSuchElementException e)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
     }
 

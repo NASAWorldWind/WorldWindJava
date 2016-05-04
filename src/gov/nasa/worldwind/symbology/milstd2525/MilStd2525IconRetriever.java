@@ -115,9 +115,7 @@ public class MilStd2525IconRetriever extends AbstractIconRetriever
     {
         if (sidc == null)
         {
-            String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         SymbolCode symbolCode = new SymbolCode(sidc);
@@ -245,9 +243,7 @@ public class MilStd2525IconRetriever extends AbstractIconRetriever
         BufferedImage image = this.readImage(path);
         if (image == null)
         {
-            String msg = Logging.getMessage("Symbology.MissingIconComponent", path);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (color != null)

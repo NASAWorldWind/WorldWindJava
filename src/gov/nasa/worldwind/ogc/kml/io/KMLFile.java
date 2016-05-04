@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.ogc.kml.io;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.io.*;
 
 /**
@@ -35,9 +33,7 @@ public class KMLFile implements KMLDoc
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.kmlFile = file;
@@ -78,9 +74,7 @@ public class KMLFile implements KMLDoc
     {
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File pathFile = new File(path);
@@ -96,9 +90,7 @@ public class KMLFile implements KMLDoc
     {
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File pathFile = new File(path);

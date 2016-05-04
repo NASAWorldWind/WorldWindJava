@@ -12,7 +12,6 @@ import gov.nasa.worldwind.geom.coords.UTMCoord;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.layers.GraticuleRenderingParams;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -51,7 +50,7 @@ public class UTMGraticuleLayer extends UTMBaseGraticuleLayer
     {
         initRenderingParams();
         this.setPickEnabled(false);
-        this.setName(Logging.getMessage("layers.Earth.UTMGraticule.Name"));
+        this.setName(null);
         this.metricScaleSupport.setMaxResolution(1e6);
     }
 

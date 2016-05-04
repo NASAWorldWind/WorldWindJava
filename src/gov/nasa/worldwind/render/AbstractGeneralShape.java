@@ -9,7 +9,6 @@ package gov.nasa.worldwind.render;
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.terrain.Terrain;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.xml.stream.*;
 import java.io.IOException;
@@ -285,9 +284,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
     @Override
     protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
     {
-        String message = Logging.getMessage("unsupportedOperation.doExportAsKML");
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 
     /** {@inheritDoc} Not currently supported. */

@@ -18,7 +18,6 @@ import gov.nasa.worldwind.util.*;
 import javax.media.opengl.*;
 import java.awt.*;
 import java.util.Iterator;
-import java.util.logging.Level;
 
 /**
  * IconRenderer processes collections of {@link gov.nasa.worldwind.render.WWIcon} instances for picking and rendering.
@@ -220,9 +219,7 @@ public class IconRenderer
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getVisibleSector() == null)
@@ -235,9 +232,7 @@ public class IconRenderer
 
         if (icons == null)
         {
-            String msg = Logging.getMessage("nullValue.IconIterator");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Iterator<? extends WWIcon> iterator = icons.iterator();
@@ -462,11 +457,9 @@ public class IconRenderer
             }
             catch (WWRuntimeException e)
             {
-                Logging.logger().log(Level.SEVERE, "generic.ExceptionWhileRenderingIcon", e);
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, "generic.ExceptionWhileRenderingIcon", e);
             }
             finally
             {
@@ -487,11 +480,9 @@ public class IconRenderer
             }
             catch (WWRuntimeException e)
             {
-                Logging.logger().log(Level.SEVERE, "generic.ExceptionWhileRenderingIcon", e);
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, "generic.ExceptionWhilePickingIcon", e);
             }
             finally
             {
@@ -617,8 +608,6 @@ public class IconRenderer
     {
         if (uIcon.point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(msg);
 
             // Record feedback data for this WWIcon if feedback is enabled.
             if (uIcon.icon != null)
@@ -802,7 +791,7 @@ public class IconRenderer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.IconLayer.Name");
+        return null;
     }
 
     //**************************************************************//

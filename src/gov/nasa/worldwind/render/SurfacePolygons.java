@@ -14,7 +14,6 @@ import gov.nasa.worldwind.util.*;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.*;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * Renders fast multiple polygons with or without holes in one pass. It relies on a {@link
@@ -178,9 +177,7 @@ public class SurfacePolygons extends SurfacePolylines // TODO: Review
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -189,11 +186,9 @@ public class SurfacePolygons extends SurfacePolylines // TODO: Review
         }
         catch (OutOfMemoryError e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileTessellating", this);
-            Logging.logger().log(Level.SEVERE, message, e);
 
             //noinspection ThrowableInstanceNeverThrown
-            dc.addRenderingException(new WWRuntimeException(message, e));
+            dc.addRenderingException(new WWRuntimeException(e));
 
             this.handleUnsuccessfulInteriorTessellation(dc);
 
@@ -232,11 +227,9 @@ public class SurfacePolygons extends SurfacePolylines // TODO: Review
             glts.endTessellation();
             gl.glDeleteLists(dlResource[0], dlResource[1]);
 
-            String message = Logging.getMessage("generic.ExceptionWhileTessellating", this);
-            Logging.logger().log(Level.SEVERE, message, e);
 
             //noinspection ThrowableInstanceNeverThrown
-            dc.addRenderingException(new WWRuntimeException(message, e));
+            dc.addRenderingException(new WWRuntimeException(e));
 
             this.handleUnsuccessfulInteriorTessellation(dc);
 

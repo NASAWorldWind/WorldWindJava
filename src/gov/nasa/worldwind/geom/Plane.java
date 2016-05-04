@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.geom;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * Represents a <code>Plane</code> in Cartesian coordinates, defined by a normal vector to the plane and a signed scalar
  * value proportional to the distance of the plane from the origin. The sign of the value is relative to the direction
@@ -30,16 +28,12 @@ public final class Plane
     {
         if (vec == null)
         {
-            String message = Logging.getMessage("nullValue.VectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (vec.getLengthSquared3() == 0.0)
         {
-            String message = Logging.getMessage("Geom.Plane.VectorIsZero");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.n = vec;
@@ -59,9 +53,7 @@ public final class Plane
     {
         if (nx == 0.0 && ny == 0.0 && nz == 0.0)
         {
-            String message = Logging.getMessage("Geom.Plane.VectorIsZero");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.n = new Vec4(nx, ny, nz, d);
@@ -84,9 +76,7 @@ public final class Plane
     {
         if (pa == null || pb == null || pc == null)
         {
-            String message = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Vec4 vab = pb.subtract3(pa);
@@ -159,9 +149,7 @@ public final class Plane
     {
         if (p == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.n.x * p.x + this.n.y * p.y + this.n.z * p.z + this.n.w * p.w;
@@ -180,9 +168,7 @@ public final class Plane
     {
         if (line == null)
         {
-            String message = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double t = this.intersectDistance(line);
@@ -211,9 +197,7 @@ public final class Plane
     {
         if (line == null)
         {
-            String message = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double ldotv = this.n.dot3(line.getDirection());
@@ -244,9 +228,7 @@ public final class Plane
     {
         if (pa == null || pb == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -298,9 +280,7 @@ public final class Plane
     {
         if (pa == null || pb == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (pa.equals(pb))
@@ -351,9 +331,7 @@ public final class Plane
     {
         if (pa == null || pb == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double da = this.distanceTo(pa);
@@ -381,9 +359,7 @@ public final class Plane
     {
         if (pts == null)
         {
-            String message = Logging.getMessage("nullValue.PointsArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double d = this.distanceTo(pts[0]);
@@ -395,9 +371,7 @@ public final class Plane
         {
             if (pts[i] == null)
             {
-                String message = Logging.getMessage("nullValue.PointIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             d = this.distanceTo(pts[i]);
@@ -425,9 +399,7 @@ public final class Plane
     {
         if (pa == null || pb == null || pc == null)
         {
-            String message = Logging.getMessage("nullValue.PlaneIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Vec4 na = pa.getNormal();

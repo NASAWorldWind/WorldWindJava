@@ -165,15 +165,11 @@ public class Matrix
     {
         if (compArray == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if ((compArray.length - offset) < NUM_ELEMENTS)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", compArray.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (rowMajor)
@@ -232,15 +228,11 @@ public class Matrix
     {
         if (compArray == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if ((compArray.length - offset) < NUM_ELEMENTS)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", compArray.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (rowMajor)
@@ -493,23 +485,17 @@ public class Matrix
     {
         if (axes == null)
         {
-            String msg = Logging.getMessage("nullValue.AxesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (axes.length < 3)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", axes.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (axes[0] == null || axes[1] == null || axes[2] == null)
         {
-            String msg = Logging.getMessage("nullValue.AxesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 s = axes[0].normalize3();
@@ -528,15 +514,11 @@ public class Matrix
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (axis == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return fromAxisAngle(angle, axis.x, axis.y, axis.z, true);
@@ -546,9 +528,7 @@ public class Matrix
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         return fromAxisAngle(angle, axisX, axisY, axisZ, true);
     }
@@ -557,9 +537,7 @@ public class Matrix
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (normalize)
@@ -602,9 +580,7 @@ public class Matrix
     {
         if (quaternion == null)
         {
-            String msg = Logging.getMessage("nullValue.QuaternionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return fromQuaternion(quaternion.x, quaternion.y, quaternion.z, quaternion.w, true);
@@ -650,9 +626,7 @@ public class Matrix
     {
         if ((xRotation == null) || (yRotation == null) || (zRotation == null))
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double cx = xRotation.cos();
@@ -674,9 +648,7 @@ public class Matrix
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double c = angle.cos();
@@ -694,9 +666,7 @@ public class Matrix
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double c = angle.cos();
@@ -714,9 +684,7 @@ public class Matrix
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double c = angle.cos();
@@ -739,9 +707,7 @@ public class Matrix
     {
         if (scale == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return fromScale(scale.x, scale.y, scale.z);
@@ -762,9 +728,7 @@ public class Matrix
     {
         if (translation == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return fromTranslation(translation.x, translation.y, translation.z);
@@ -830,30 +794,22 @@ public class Matrix
     {
         if (origin == null)
         {
-            String msg = Logging.getMessage("nullValue.OriginIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (axes == null)
         {
-            String msg = Logging.getMessage("nullValue.AxesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (axes.length < 3)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", axes.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (axes[0] == null || axes[1] == null || axes[2] == null)
         {
-            String msg = Logging.getMessage("nullValue.AxesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return fromTranslation(origin).multiply(fromAxes(axes));
@@ -885,16 +841,12 @@ public class Matrix
     {
         if (eye == null || center == null || up == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (eye.distanceTo3(center) <= EPSILON)
         {
-            String msg = Logging.getMessage("Geom.EyeAndCenterInvalid", eye, center);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 forward = center.subtract3(eye);
@@ -905,9 +857,7 @@ public class Matrix
 
         if (s.getLength3() <= EPSILON)
         {
-            String msg = Logging.getMessage("Geom.UpAndLineOfSightInvalid", up, forward);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 u = s.cross3(f);
@@ -947,16 +897,12 @@ public class Matrix
     {
         if (eye == null || center == null || up == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (eye.distanceTo3(center) <= EPSILON)
         {
-            String msg = Logging.getMessage("Geom.EyeAndCenterInvalid", eye, center);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 forward = center.subtract3(eye);
@@ -967,9 +913,7 @@ public class Matrix
 
         if (s.getLength3() <= EPSILON)
         {
-            String msg = Logging.getMessage("Geom.UpAndLineOfSightInvalid", up, forward);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 u = f.cross3(s);
@@ -991,47 +935,33 @@ public class Matrix
     {
         if (horizontalFieldOfView == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double fovX = horizontalFieldOfView.degrees;
         if (fovX <= 0.0 || fovX > 180.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", "horizontalFieldOfView=" + fovX);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (viewportWidth <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", "viewportWidth=" + viewportWidth);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (viewportHeight <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", "viewportHeight=" + viewportHeight);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (near <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", "near=" + near);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (far <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", "far=" + far);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (far <= near)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", "far=" + far + ",near=" + near);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double f = 1.0 / horizontalFieldOfView.tanHalfAngle();
@@ -1048,33 +978,23 @@ public class Matrix
     {
         if (width <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", width);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (height <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", height);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (near <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", near);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (far <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", far);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (far <= near)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", far);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Matrix(
@@ -1088,33 +1008,23 @@ public class Matrix
     {
         if (width <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", width);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (height <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", height);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (near <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", near);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (far <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", far);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (far <= near)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", far);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Matrix(
@@ -1128,15 +1038,11 @@ public class Matrix
     {
         if (width <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", width);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (height <= 0.0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", height);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Matrix(
@@ -1164,15 +1070,11 @@ public class Matrix
     {
         if (imageWidth < 1 || imageHeight < 1)
         {
-            String message = Logging.getMessage("generic.InvalidImageSize", imageWidth, imageHeight);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Transform from grid coordinates to geographic coordinates. Since the grid is parallel with lines of latitude
@@ -1194,9 +1096,7 @@ public class Matrix
     {
         if (worldFileParams == null)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Transform from geographic coordinates to source grid coordinates. Start with the following system of
@@ -1230,9 +1130,7 @@ public class Matrix
     {
         if (worldFileParams == null)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Transform from geographic coordinates to source grid coordinates. Start with the following system of
@@ -1336,27 +1234,19 @@ public class Matrix
     {
         if (imagePoints == null)
         {
-            String message = Logging.getMessage("nullValue.ImagePointsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (geoPoints == null)
         {
-            String message = Logging.getMessage("nullValue.GeoPointsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (imagePoints.length < 3)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "imagePoints.length < 3");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (geoPoints.length < 3)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "geoPoints.length < 3");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Transform from geographic coordinates to source grid coordinates. Start with the following system of
@@ -1423,27 +1313,19 @@ public class Matrix
     {
         if (imagePoints == null)
         {
-            String message = Logging.getMessage("nullValue.ImagePointsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (geoPoints == null)
         {
-            String message = Logging.getMessage("nullValue.GeoPointsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (imagePoints.length < 3)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "imagePoints.length < 3");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (geoPoints.length < 3)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "geoPoints.length < 3");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Transform from geographic coordinates to source grid coordinates. Start with the following system of
@@ -1525,23 +1407,17 @@ public class Matrix
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (width <= 0)
         {
-            String message = Logging.getMessage("Geom.WidthInvalid", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("Geom.HeightInvalid", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Matrix transform = Matrix.IDENTITY;
@@ -1574,23 +1450,17 @@ public class Matrix
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (width <= 0)
         {
-            String message = Logging.getMessage("Geom.WidthInvalid", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("Geom.HeightInvalid", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Matrix transform = Matrix.IDENTITY;
@@ -1628,9 +1498,7 @@ public class Matrix
     {
         if (points == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 mean = Vec4.computeAveragePoint(points);
@@ -1702,16 +1570,12 @@ public class Matrix
     {
         if (coordinates == null)
         {
-            String msg = Logging.getMessage("nullValue.CoordinatesAreNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (stride < 3)
         {
-            String msg = Logging.getMessage("generic.StrideIsInvalid");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 mean = Vec4.computeAveragePoint3(coordinates, stride);
@@ -1770,16 +1634,12 @@ public class Matrix
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (matrix.m12 != matrix.m21 || matrix.m13 != matrix.m31 || matrix.m23 != matrix.m32)
         {
-            String msg = Logging.getMessage("generic.MatrixNotSymmetric", matrix);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Take from "Mathematics for 3D Game Programming and Computer Graphics, Second Edition" by Eric Lengyel,
@@ -1908,9 +1768,7 @@ public class Matrix
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Matrix(
@@ -1924,9 +1782,7 @@ public class Matrix
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Matrix(
@@ -1949,9 +1805,7 @@ public class Matrix
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Matrix(
@@ -1983,9 +1837,7 @@ public class Matrix
     {
         if (isZero(value))
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", value);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Matrix(
@@ -1999,9 +1851,7 @@ public class Matrix
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Matrix(
@@ -2026,9 +1876,7 @@ public class Matrix
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -2494,23 +2342,17 @@ public class Matrix
     {
         if (origin == null)
         {
-            String msg = Logging.getMessage("nullValue.OriginIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (roll == null)
         {
-            String msg = Logging.getMessage("nullValue.RollIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (globe == null)
         {
-            String msg = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Transform the modelview matrix to a local coordinate system at the origin. This eliminates the geographic

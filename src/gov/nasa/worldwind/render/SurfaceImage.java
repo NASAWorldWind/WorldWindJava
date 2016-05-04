@@ -11,7 +11,6 @@ import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.ogc.kml.KMLConstants;
 import gov.nasa.worldwind.ogc.kml.gx.GXConstants;
 import gov.nasa.worldwind.pick.PickSupport;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import javax.xml.stream.*;
@@ -73,16 +72,12 @@ public class SurfaceImage extends WWObjectImpl
     {
         if (imageSource == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setImageSource(imageSource, sector);
@@ -92,16 +87,12 @@ public class SurfaceImage extends WWObjectImpl
     {
         if (imageSource == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.LocationsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setImageSource(imageSource, corners);
@@ -215,9 +206,7 @@ public class SurfaceImage extends WWObjectImpl
     {
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.LocationsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.initializeGeometry(corners);
@@ -232,9 +221,7 @@ public class SurfaceImage extends WWObjectImpl
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return Sector.computeBoundingCylinder(dc.getGlobe(), dc.getVerticalExaggeration(), this.getSector());
@@ -298,9 +285,7 @@ public class SurfaceImage extends WWObjectImpl
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (dc.isPickingMode() && !this.isPickEnabled())
@@ -428,9 +413,7 @@ public class SurfaceImage extends WWObjectImpl
     {
         if (delta == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.moveTo(this.getReferencePosition().add(delta));
@@ -523,16 +506,12 @@ public class SurfaceImage extends WWObjectImpl
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (output == null)
         {
-            String message = Logging.getMessage("nullValue.OutputBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
@@ -543,15 +522,12 @@ public class SurfaceImage extends WWObjectImpl
             }
             catch (XMLStreamException e)
             {
-                Logging.logger().throwing(getClass().getName(), "export", e);
                 throw new IOException(e);
             }
         }
         else
         {
-            String message = Logging.getMessage("Export.UnsupportedFormat", mimeType);
-            Logging.logger().warning(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
     }
 
@@ -587,9 +563,7 @@ public class SurfaceImage extends WWObjectImpl
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         xmlWriter.writeStartElement("GroundOverlay");
@@ -612,9 +586,6 @@ public class SurfaceImage extends WWObjectImpl
         }
         else
         {
-            String message = Logging.getMessage("Export.UnableToExportImageSource",
-                (imgSource != null ? imgSource.getClass().getName() : "null"));
-            Logging.logger().info(message);
         }
 
         xmlWriter.writeStartElement("altitudeMode");

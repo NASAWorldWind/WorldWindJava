@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.vpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.Comparator;
 
 /**
@@ -88,9 +86,7 @@ public class VPFSymbolComparator implements Comparator<VPFSymbol>
     {
         if (a == null || b == null)
         {
-            String message = Logging.getMessage("nullValue.SymbolIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         VPFSymbolAttributes aAttr = a.getAttributes();

@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.animation;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.Arrays;
 
 /**
@@ -41,9 +39,7 @@ public class CompoundAnimator extends BasicAnimator
         super(interpolator);
         if (animators == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
         int numAnimators = animators.length;

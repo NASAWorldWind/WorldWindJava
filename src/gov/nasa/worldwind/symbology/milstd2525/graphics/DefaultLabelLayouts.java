@@ -8,7 +8,6 @@ package gov.nasa.worldwind.symbology.milstd2525.graphics;
 
 import gov.nasa.worldwind.render.Offset;
 import gov.nasa.worldwind.symbology.SymbologyConstants;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -253,9 +252,7 @@ public class DefaultLabelLayouts
     {
         if (offsets.length % 2 != 0)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", offsets.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         LabelLayout layout = new LabelLayout(key);

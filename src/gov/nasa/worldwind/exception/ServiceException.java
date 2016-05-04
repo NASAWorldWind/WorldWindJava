@@ -14,8 +14,8 @@ package gov.nasa.worldwind.exception;
  */
 public class ServiceException extends WWRuntimeException
 {
-    public ServiceException(String message)
+    public ServiceException()
     {
-        super(message);
+        super();
     }
 }

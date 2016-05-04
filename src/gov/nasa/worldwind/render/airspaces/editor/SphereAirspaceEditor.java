@@ -10,7 +10,6 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.render.markers.*;
 import gov.nasa.worldwind.render.airspaces.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 
@@ -78,9 +77,7 @@ public class SphereAirspaceEditor extends AbstractAirspaceEditor
     {
         if (radius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.minRadius = radius;
@@ -95,9 +92,7 @@ public class SphereAirspaceEditor extends AbstractAirspaceEditor
     {
         if (radius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.maxRadius = radius;
@@ -122,9 +117,7 @@ public class SphereAirspaceEditor extends AbstractAirspaceEditor
     {
         if (distance < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "distance < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.radiusControlDrawDistance = distance;

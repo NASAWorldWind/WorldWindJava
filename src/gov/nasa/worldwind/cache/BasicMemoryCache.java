@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.cache;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -34,9 +32,7 @@ public class BasicMemoryCache implements MemoryCache
         {
             if (that == null)
             {
-                String msg = Logging.getMessage("nullValue.CacheEntryIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             return this.lastUsed < that.lastUsed ? -1 : this.lastUsed == that.lastUsed ? 0 : 1;
@@ -117,9 +113,7 @@ public class BasicMemoryCache implements MemoryCache
     {
         if (listener == null)
         {
-            String message = Logging.getMessage("BasicMemoryCache.nullListenerAdded");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.listeners.add(listener);
     }
@@ -135,9 +129,7 @@ public class BasicMemoryCache implements MemoryCache
     {
         if (listener == null)
         {
-            String message = Logging.getMessage("BasicMemoryCache.nullListenerRemoved");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.listeners.remove(listener);
     }
@@ -203,9 +195,7 @@ public class BasicMemoryCache implements MemoryCache
     {
         if (key == null)
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         synchronized (this.lock)
@@ -230,15 +220,6 @@ public class BasicMemoryCache implements MemoryCache
 
         if (key == null || clientObject == null || clientObjectSize <= 0 || clientObjectSize > cap)
         {
-            String message = Logging.getMessage("BasicMemoryCache.CacheItemNotAdded");
-
-            if (clientObjectSize > cap)
-            {
-                message += " - " + Logging.getMessage("BasicMemoryCache.ItemTooLargeForCache");
-            }
-
-            Logging.logger().warning(message);
-
             return false;
             // the logic behind not throwing an exception is that whether we throw an exception or not,
             // the object won't be added. This doesn't matter because that object could be removed before
@@ -284,7 +265,6 @@ public class BasicMemoryCache implements MemoryCache
     {
         if (key == null)
         {
-            Logging.logger().finer("nullValue.KeyIsNull");
 
             return;
         }
@@ -311,7 +291,6 @@ public class BasicMemoryCache implements MemoryCache
     {
         if (key == null)
         {
-            Logging.logger().finer("nullValue.KeyIsNull");
 
             return null;
         }

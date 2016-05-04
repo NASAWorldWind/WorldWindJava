@@ -48,16 +48,12 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
     {
         if (cache == null)
         {
-            String message = Logging.getMessage("nullValue.CacheIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cacheKey == null)
         {
-            String message = Logging.getMessage("nullValue.CacheKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.cache = cache;
@@ -165,9 +161,7 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
     {
         if (retriever == null)
         {
-            String message = Logging.getMessage("nullValue.RetrieverIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String message = this.validate(retriever);
@@ -179,7 +173,6 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
         else
         {
             this.onRetrievalFailed(retriever);
-            Logging.logger().severe(message);
         }
 
         this.signalRetrievalComplete();
@@ -211,10 +204,10 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
     protected String validate(Retriever retriever)
     {
         if (!retriever.getState().equals(Retriever.RETRIEVER_STATE_SUCCESSFUL))
-            return Logging.getMessage("generic.RetrievalFailed", this.toString());
+            return null;
 
         if (retriever.getBuffer() == null || retriever.getBuffer().limit() == 0)
-            return Logging.getMessage("generic.RetrievalReturnedNoContent", this.toString());
+            return null;
 
         return null;
     }
@@ -258,15 +251,10 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
     {
         if (e instanceof ClosedByInterruptException)
         {
-            Logging.logger().log(java.util.logging.Level.FINE,
-                Logging.getMessage("generic.OperationCancelled",
-                    "retrieval post-processing for " + retriever.getName()), e);
         }
         else
         {
             this.onRetrievalFailed(retriever);
-            Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("generic.ExceptionWhileSavingRetreivedData", retriever.getName()), e);
         }
     }
 

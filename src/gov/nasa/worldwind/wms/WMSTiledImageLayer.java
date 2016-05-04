@@ -61,9 +61,7 @@ public class WMSTiledImageLayer extends BasicTiledImageLayer
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         this.doRestoreState(rs, null);
@@ -85,9 +83,7 @@ public class WMSTiledImageLayer extends BasicTiledImageLayer
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -117,9 +113,7 @@ public class WMSTiledImageLayer extends BasicTiledImageLayer
     {
         if (caps == null)
         {
-            String message = Logging.getMessage("nullValue.WMSCapabilities");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -131,15 +125,11 @@ public class WMSTiledImageLayer extends BasicTiledImageLayer
         }
         catch (IllegalArgumentException e)
         {
-            String message = Logging.getMessage("WMS.MissingLayerParameters");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
         catch (WWRuntimeException e)
         {
-            String message = Logging.getMessage("WMS.MissingCapabilityValues");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         setFallbacks(params);
@@ -302,9 +292,7 @@ public class WMSTiledImageLayer extends BasicTiledImageLayer
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Level requestedLevel;
@@ -339,8 +327,6 @@ public class WMSTiledImageLayer extends BasicTiledImageLayer
             if (abortOnError)
                 throw e;
 
-            String message = Logging.getMessage("generic.ExceptionWhileRequestingImage", tile.getPath());
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
         }
 
         return image;
@@ -399,9 +385,7 @@ public class WMSTiledImageLayer extends BasicTiledImageLayer
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -412,9 +396,7 @@ public class WMSTiledImageLayer extends BasicTiledImageLayer
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         AVList params = new AVListImpl();

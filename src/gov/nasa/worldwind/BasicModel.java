@@ -10,10 +10,7 @@ import gov.nasa.worldwind.event.Message;
 import gov.nasa.worldwind.geom.Extent;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.layers.*;
-import gov.nasa.worldwind.util.Logging;
 import org.w3c.dom.Element;
-
-import java.util.logging.Level;
 
 /**
  * This class aggregates the objects making up a model: the globe and layers. Through the globe it also indirectly
@@ -121,7 +118,6 @@ public class BasicModel extends WWObjectImpl implements Model
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.WARNING, Logging.getMessage("BasicModel.LayerNotFound", name), e);
             }
         }
 
@@ -265,9 +261,7 @@ public class BasicModel extends WWObjectImpl implements Model
                 }
                 catch (Exception e)
                 {
-                    String message = Logging.getMessage("generic.ExceptionInvokingMessageListener");
-                    Logging.logger().log(Level.SEVERE, message, e);
-                    // Don't abort; continue on to the next layer.
+                            // Don't abort; continue on to the next layer.
                 }
             }
         }

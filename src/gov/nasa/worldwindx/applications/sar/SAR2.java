@@ -302,9 +302,7 @@ public class SAR2 extends JFrame
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         SARTrack track = null;
@@ -538,9 +536,7 @@ public class SAR2 extends JFrame
     {
         if (track == null)
         {
-            String message = Logging.getMessage("nullValue.TrackIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (file == null)
@@ -1554,21 +1550,15 @@ public class SAR2 extends JFrame
         }
         catch (WWRuntimeException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToReadFrom", file.getPath());
-            Logging.logger().severe(message);
         }
 
         if (doc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
             return;
         }
 
         if (doc.getDocumentElement() == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentElementIsNull");
-            Logging.logger().severe(message);
             return;
         }
 
@@ -1585,17 +1575,13 @@ public class SAR2 extends JFrame
         {
             if (!file.getParentFile().mkdirs())
             {
-                String message = Logging.getMessage("generic.CannotCreateFile", file.getPath());
-                Logging.logger().severe(message);
-                return;
+                    return;
             }
         }
 
         Document doc = UserPreferenceUtils.createUserPreferencesDocument(getUserPreferences());
         if (doc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
             return;
         }
 
@@ -1605,8 +1591,6 @@ public class SAR2 extends JFrame
         }
         catch (WWRuntimeException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToWriteTo", file.getPath());
-            Logging.logger().severe(message);
         }
     }
 
@@ -1681,9 +1665,7 @@ public class SAR2 extends JFrame
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -1694,9 +1676,7 @@ public class SAR2 extends JFrame
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         this.doRestoreState(rs, null);

@@ -109,9 +109,7 @@ public abstract class AbstractDataRasterReader extends AVListImpl implements Dat
     {
         if (!this.canRead(source, params))
         {
-            String message = Logging.getMessage("DataRaster.CannotRead", source);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         return this.doRead(source, params);
@@ -122,8 +120,7 @@ public abstract class AbstractDataRasterReader extends AVListImpl implements Dat
     {
         if (!this.canRead(source, params))
         {
-            String message = Logging.getMessage("DataRaster.CannotRead", source);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -133,7 +130,7 @@ public abstract class AbstractDataRasterReader extends AVListImpl implements Dat
 
         String message = this.validateMetadata(source, params);
         if (message != null)
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
 
         return params;
     }
@@ -144,15 +141,15 @@ public abstract class AbstractDataRasterReader extends AVListImpl implements Dat
 
         Object o = (params != null) ? params.getValue(AVKey.WIDTH) : null;
         if (o == null || !(o instanceof Integer))
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("WorldFile.NoSizeSpecified", source));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         o = (params != null) ? params.getValue(AVKey.HEIGHT) : null;
         if (o == null || !(o instanceof Integer))
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("WorldFile.NoSizeSpecified", source));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         o = (params != null) ? params.getValue(AVKey.SECTOR) : null;
         if (o == null || !(o instanceof Sector))
-            sb.append(sb.length() > 0 ? ", " : "").append(Logging.getMessage("WorldFile.NoSectorSpecified", source));
+            sb.append(sb.length() > 0 ? ", " : "").append((String) null);
 
         if (sb.length() == 0)
             return null;

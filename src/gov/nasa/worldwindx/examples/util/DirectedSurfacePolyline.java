@@ -122,9 +122,7 @@ public class DirectedSurfacePolyline extends SurfacePolyline
     {
         if (arrowLength <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", arrowLength);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.arrowLength != arrowLength)
@@ -155,9 +153,7 @@ public class DirectedSurfacePolyline extends SurfacePolyline
     {
         if (maxScreenSize <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", maxScreenSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.maxScreenSize != maxScreenSize)
@@ -188,16 +184,12 @@ public class DirectedSurfacePolyline extends SurfacePolyline
     {
         if (arrowAngle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if ((arrowAngle.compareTo(Angle.ZERO) <= 0) || (arrowAngle.compareTo(Angle.POS90) >= 0))
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", arrowAngle);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.arrowAngle.equals(arrowAngle))

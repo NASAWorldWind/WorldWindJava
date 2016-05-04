@@ -8,7 +8,6 @@ package gov.nasa.worldwind.symbology.milstd2525.graphics;
 
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -76,23 +75,17 @@ public class TriangleWavePositionIterator implements Iterator
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (waveLength <= 0 || amplitude <= 0)
         {
-            String message = Logging.getMessage("generic.LengthIsInvalid");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.globe = globe;
