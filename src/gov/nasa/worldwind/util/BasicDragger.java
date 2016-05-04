@@ -30,9 +30,7 @@ public class BasicDragger implements SelectListener
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -42,9 +40,7 @@ public class BasicDragger implements SelectListener
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -70,9 +66,7 @@ public class BasicDragger implements SelectListener
     {
         if (event == null)
         {
-            String msg = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (event.getEventAction().equals(SelectEvent.DRAG_END))

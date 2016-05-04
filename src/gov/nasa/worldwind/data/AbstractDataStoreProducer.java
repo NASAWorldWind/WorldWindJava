@@ -7,7 +7,6 @@ package gov.nasa.worldwind.data;
 
 import gov.nasa.worldwind.WWObjectImpl;
 import gov.nasa.worldwind.avlist.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -55,16 +54,13 @@ public abstract class AbstractDataStoreProducer extends WWObjectImpl implements 
     {
         if (parameters == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String message = this.validateProductionParameters(parameters);
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.params = parameters;
@@ -114,17 +110,14 @@ public abstract class AbstractDataStoreProducer extends WWObjectImpl implements 
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         params = (null == params) ? new AVListImpl() : params.copy();
         String message = this.validateDataSource(source, params);
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.dataSourceList.add(new SourceInfo(source, params));
@@ -134,9 +127,7 @@ public abstract class AbstractDataStoreProducer extends WWObjectImpl implements 
     {
         if (sources == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (Object source : sources)
@@ -149,8 +140,6 @@ public abstract class AbstractDataStoreProducer extends WWObjectImpl implements 
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
             return; // Warn but don't throw an exception.
         }
 
@@ -174,16 +163,13 @@ public abstract class AbstractDataStoreProducer extends WWObjectImpl implements 
     {
         if (this.isStopped())
         {
-            String message = Logging.getMessage("DataStoreProducer.Stopped");
-            Logging.logger().warning(message);
             return;
         }
 
         String message = this.validateProductionParameters(this.params);
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.doStartProduction(this.params);

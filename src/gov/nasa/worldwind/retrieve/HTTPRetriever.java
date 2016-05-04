@@ -5,11 +5,8 @@
  */
 package gov.nasa.worldwind.retrieve;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.net.*;
 import java.nio.ByteBuffer;
-import java.util.logging.Level;
 
 /**
  * @author Tom Gaskins
@@ -39,19 +36,13 @@ public class HTTPRetriever extends URLRetriever
     {
         if (connection == null)
         {
-            String msg = Logging.getMessage("nullValue.ConnectionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         HttpURLConnection htpc = (HttpURLConnection) connection;
         this.responseCode = htpc.getResponseCode();
         this.responseMessage = htpc.getResponseMessage();
         String contentType = connection.getContentType();
-
-        Logging.logger().log(Level.FINE, "HTTPRetriever.ResponseInfo", new Object[] {this.responseCode,
-            connection.getContentLength(), contentType != null ? contentType : "content type not returned",
-            connection.getURL()});
 
         if (this.responseCode == HttpURLConnection.HTTP_OK)
             return super.doRead(connection);

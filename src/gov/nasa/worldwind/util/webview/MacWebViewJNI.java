@@ -6,13 +6,11 @@
 package gov.nasa.worldwind.util.webview;
 
 import gov.nasa.worldwind.avlist.AVList;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
-import java.util.logging.Level;
 
 /**
  * @author dcollins
@@ -28,8 +26,6 @@ public class MacWebViewJNI
         }
         catch (Throwable t)
         {
-            String message = Logging.getMessage("WebView.ExceptionCreatingWebView", t);
-            Logging.logger().log(Level.SEVERE, message, t);
         }
     }
 

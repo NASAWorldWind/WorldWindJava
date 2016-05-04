@@ -14,7 +14,6 @@ import gov.nasa.worldwind.util.*;
 import org.w3c.dom.*;
 
 import javax.xml.stream.XMLStreamException;
-import java.util.logging.Level;
 
 /**
  * A basic implementation of the {@link Factory} interface.
@@ -40,14 +39,12 @@ public class BasicFactory implements Factory
     {
         if (factoryKey == null)
         {
-            String message = Logging.getMessage("generic.FactoryKeyIsNull");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(configSource))
         {
-            String message = Logging.getMessage("generic.ConfigurationSourceIsInvalid", configSource);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Factory factory = (Factory) WorldWind.createConfigurationComponent(factoryKey);
@@ -73,14 +70,12 @@ public class BasicFactory implements Factory
     {
         if (factoryKey == null)
         {
-            String message = Logging.getMessage("generic.FactoryKeyIsNull");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(configSource))
         {
-            String message = Logging.getMessage("generic.ConfigurationSourceIsInvalid", configSource);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Factory factory = (Factory) WorldWind.createConfigurationComponent(factoryKey);
@@ -111,9 +106,7 @@ public class BasicFactory implements Factory
     {
         if (WWUtil.isEmpty(configSource))
         {
-            String message = Logging.getMessage("generic.ConfigurationSourceIsInvalid", configSource);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = null;
@@ -137,8 +130,7 @@ public class BasicFactory implements Factory
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("generic.CreationFromConfigurationFileFailed", configSource);
-            throw new WWRuntimeException(msg, e);
+            throw new WWRuntimeException(e);
         }
 
         return o;
@@ -169,9 +161,7 @@ public class BasicFactory implements Factory
     {
         if (WWUtil.isEmpty(capsFileName))
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         WMSCapabilities caps = new WMSCapabilities(capsFileName);
@@ -182,9 +172,7 @@ public class BasicFactory implements Factory
         }
         catch (XMLStreamException e)
         {
-            String message = Logging.getMessage("generic.CannotParseCapabilities", capsFileName);
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
 
         return this.doCreateFromCapabilities(caps, params);

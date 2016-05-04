@@ -116,16 +116,12 @@ public class SectorVisibilityTree
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sectorSize < Angle.SECOND.degrees || sectorSize > 180)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", sectorSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getVisibleSector() == null)
@@ -158,23 +154,17 @@ public class SectorVisibilityTree
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sectorSize < Angle.SECOND.degrees || sectorSize > 180)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", sectorSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (searchSector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sectors = new ArrayList<Sector>();
@@ -205,23 +195,17 @@ public class SectorVisibilityTree
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sectorSize < Angle.SECOND.degrees || sectorSize > 180)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", sectorSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (searchSectors == null)
         {
-            String message = Logging.getMessage("nullValue.SectorListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.swapCylinderLists(dc);

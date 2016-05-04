@@ -46,9 +46,7 @@ public class MeasureToolController extends MouseAdapter
     {
         if (measureTool == null)
         {
-            String msg = Logging.getMessage("nullValue.MeasureToolIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.measureTool = measureTool;

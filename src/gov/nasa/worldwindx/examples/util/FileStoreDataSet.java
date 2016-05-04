@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwindx.examples.util;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.io.*;
 import java.util.*;
 
@@ -41,9 +39,7 @@ public class FileStoreDataSet
     {
         if (root == null)
         {
-            String message = Logging.getMessage("nullValue.FileStorePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.root = root;
@@ -124,9 +120,7 @@ public class FileStoreDataSet
     {
         if (unit == null)
         {
-            String message = Logging.getMessage("nullValue.TimeUnit");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         long previousTime = computeTimeOffset(unit, interval);
@@ -152,9 +146,7 @@ public class FileStoreDataSet
     {
         if (unit == null)
         {
-            String message = Logging.getMessage("nullValue.TimeUnit");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.deleteFiles(this.root, this.exclusionList, computeTimeOffset(unit, interval), echo);
@@ -292,9 +284,7 @@ public class FileStoreDataSet
             }
             catch (IOException e)
             {
-                String message = Logging.getMessage("generic.ExceptionWhileComputingSize", file.getAbsolutePath());
-                Logging.logger().fine(message);
-            }
+                }
         }
 
         return size;
@@ -311,9 +301,7 @@ public class FileStoreDataSet
     {
         if (cacheRoot == null)
         {
-            String message = Logging.getMessage("nullValue.FileStorePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<FileStoreDataSet> datasets = new ArrayList<FileStoreDataSet>();

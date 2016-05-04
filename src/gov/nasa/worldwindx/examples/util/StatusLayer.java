@@ -101,7 +101,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
 
                 if (!isNetworkAvailable.get())
                 {
-                    noNetwork = Logging.getMessage("term.NoNetwork");
+                    noNetwork = null;
                     return;
                 }
                 else
@@ -160,9 +160,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
     {
         if (font == null)
         {
-            String msg = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.defaultFont = font;
@@ -187,9 +185,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
     {
         if (backColor == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.backColor = backColor;
@@ -228,9 +224,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
     {
         if (newEventSource == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.eventSource != null)
@@ -377,7 +371,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
                     altDisplay = makeEyeAltitudeDescription(
                         eventSource.getView().getEyePosition().getElevation());
                 else
-                    altDisplay = (Logging.getMessage("term.Altitude"));
+                    altDisplay = null;
             }
         });
     }
@@ -439,7 +433,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
         else
         {
             latDisplay = "";
-            lonDisplay = Logging.getMessage("term.OffGlobe");
+            lonDisplay = null;
             elevDisplay = "";
         }
 
@@ -468,9 +462,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
         }
         catch (IOException e)
         {
-            String msg = Logging.getMessage("layers.IOExceptionDuringInitialization");
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -495,7 +487,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
 
     protected String makeEyeAltitudeDescription(double metersAltitude)
     {
-        String altitude = Logging.getMessage("term.Altitude");
+        String altitude = null;
         if (UNIT_IMPERIAL.equals(elevationUnit))
             return String.format("%s %,d mi", altitude, (int) Math.round(WWMath.convertMetersToMiles(metersAltitude)));
         else // Default to metric units.
@@ -504,7 +496,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
 
     protected String makeCursorElevationDescription(double metersElevation)
     {
-        String elev = Logging.getMessage("term.Elev");
+        String elev = null;
         if (UNIT_IMPERIAL.equals(elevationUnit))
             return String.format("%s %,d feet", elev, (int) Math.round(WWMath.convertMetersToFeet(metersElevation)));
         else // Default to metric units.
@@ -514,7 +506,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.StatusLayer.Name");
+        return null;
     }
 
     public static class StatusUTMLayer extends StatusLayer
@@ -556,7 +548,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
             else
             {
                 latDisplay = "";
-                lonDisplay = Logging.getMessage("term.OffGlobe");
+                lonDisplay = null;
                 elevDisplay = "";
             }
         }
@@ -601,7 +593,7 @@ public class StatusLayer extends AbstractLayer implements PositionListener, Rend
             else
             {
                 latDisplay = "";
-                lonDisplay = Logging.getMessage("term.OffGlobe");
+                lonDisplay = null;
                 elevDisplay = "";
             }
         }

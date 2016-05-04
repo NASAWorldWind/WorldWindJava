@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.vpf;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author dcollins
@@ -23,16 +22,12 @@ public class VPFFeature extends AVListImpl
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bounds == null)
         {
-            String message = Logging.getMessage("nullValue.BoundingBoxIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.featureClass = featureClass;

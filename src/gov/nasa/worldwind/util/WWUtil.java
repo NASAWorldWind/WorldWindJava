@@ -35,9 +35,7 @@ public class WWUtil
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -51,8 +49,6 @@ public class WWUtil
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", s);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -70,9 +66,7 @@ public class WWUtil
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -86,8 +80,6 @@ public class WWUtil
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", s);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -105,9 +97,7 @@ public class WWUtil
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -121,8 +111,6 @@ public class WWUtil
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", s);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -140,9 +128,7 @@ public class WWUtil
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -159,8 +145,6 @@ public class WWUtil
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", s);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -178,9 +162,7 @@ public class WWUtil
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -195,8 +177,6 @@ public class WWUtil
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", s);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
     }
@@ -316,9 +296,7 @@ public class WWUtil
     {
         if (charSequence == null)
         {
-            String message = Logging.getMessage("nullValue.CharSequenceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int len = charSequence.length();
@@ -438,9 +416,7 @@ public class WWUtil
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float[] hsbComponents = new float[3];
@@ -471,9 +447,7 @@ public class WWUtil
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float[] hsbComponents = new float[3];
@@ -504,9 +478,7 @@ public class WWUtil
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float[] compArray = new float[4];
@@ -538,9 +510,7 @@ public class WWUtil
     {
         if (color1 == null || color2 == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float t = (amount < 0 ? 0 : (amount > 1 ? 1 : (float) amount));
@@ -567,9 +537,7 @@ public class WWUtil
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Encode the red, green, blue, and alpha components
@@ -595,9 +563,7 @@ public class WWUtil
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Encode the red, green, blue, and alpha components
@@ -623,9 +589,7 @@ public class WWUtil
     {
         if (encodedString == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (encodedString.startsWith("#"))
@@ -647,8 +611,6 @@ public class WWUtil
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", encodedString);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
 
@@ -675,9 +637,7 @@ public class WWUtil
     {
         if (encodedString == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (encodedString.startsWith("#"))
@@ -699,8 +659,6 @@ public class WWUtil
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.ConversionError", encodedString);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return null;
         }
 
@@ -769,30 +727,22 @@ public class WWUtil
     {
         if (zone < 1 || zone > 60)
         {
-            String message = Logging.getMessage("generic.ZoneIsInvalid", zone);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!AVKey.NORTH.equals(hemisphere) && !AVKey.SOUTH.equals(hemisphere))
         {
-            String message = Logging.getMessage("generic.HemisphereIsInvalid", hemisphere);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if ((buffer.remaining() % 2) != 0)
         {
-            String message = Logging.getMessage("generic.BufferSize", buffer.remaining());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         while (buffer.hasRemaining())
@@ -824,16 +774,12 @@ public class WWUtil
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if ((buffer.remaining() % 2) != 0)
         {
-            String message = Logging.getMessage("generic.BufferSize", buffer.remaining());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         while (buffer.hasRemaining())
@@ -871,16 +817,12 @@ public class WWUtil
     {
         if (parent == null)
         {
-            String message = Logging.getMessage("nullValue.nullValue.ParentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (propertyName == null)
         {
-            String message = Logging.getMessage("nullValue.PropertyNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String methodName = "set" + propertyName;
@@ -1014,7 +956,7 @@ public class WWUtil
     {
         if (t == null)
         {
-            return Logging.getMessage("generic.Unknown");
+            return null;
         }
 
         StringBuilder sb = new StringBuilder();
@@ -1159,7 +1101,7 @@ public class WWUtil
     {
         if (va == null || vb == null)
         {
-            throw new IllegalArgumentException(Logging.getMessage("nullValue.StringIsNull"));
+            throw new IllegalArgumentException((String) null);
         }
 
         if (va.equals(vb))
@@ -1199,16 +1141,12 @@ public class WWUtil
     {
         if (vertices == null || indices == null || normals == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (normals.limit() < vertices.limit())
         {
-            String message = Logging.getMessage("generic.BufferSize", normals.limit());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (int i = 0; i < indices.limit() - 2; i++)

@@ -45,9 +45,7 @@ public class KMLBalloonTextDecoder extends BasicTextDecoder
     {
         if (feature == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.feature = feature;

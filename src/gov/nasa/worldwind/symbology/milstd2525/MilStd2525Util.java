@@ -11,7 +11,6 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.symbology.SymbologyConstants;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.geom.*;
 import java.util.*;
@@ -77,9 +76,7 @@ public class MilStd2525Util
     {
         if (symbolId == null)
         {
-            String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         SymbolCode symbolCode = new SymbolCode(symbolId);
@@ -319,16 +316,12 @@ public class MilStd2525Util
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (heading == null)
         {
-            String msg = Logging.getMessage("nullValue.HeadingIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         View view = dc.getView();
@@ -360,16 +353,12 @@ public class MilStd2525Util
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (heading == null)
         {
-            String msg = Logging.getMessage("nullValue.HeadingIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         View view = dc.getView();
@@ -426,9 +415,7 @@ public class MilStd2525Util
     {
         if (symbolCode == null)
         {
-            String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (isObstacle(symbolCode))

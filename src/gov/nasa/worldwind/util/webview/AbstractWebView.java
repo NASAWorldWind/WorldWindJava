@@ -8,7 +8,6 @@ package gov.nasa.worldwind.util.webview;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,9 +50,7 @@ public abstract class AbstractWebView extends WWObjectImpl implements WebView, D
     {
         if (size == null)
         {
-            String message = Logging.getMessage("nullValue.SizeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Setting the frame size requires a call into native code, and requires us to regenerate the texture. Only
@@ -74,9 +71,7 @@ public abstract class AbstractWebView extends WWObjectImpl implements WebView, D
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.textureRep == null)

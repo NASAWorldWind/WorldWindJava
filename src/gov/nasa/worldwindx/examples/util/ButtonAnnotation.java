@@ -85,9 +85,7 @@ public class ButtonAnnotation extends ImageAnnotation implements SelectListener
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "opacity < 0 or opacity > 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.disabledOpacity = opacity;

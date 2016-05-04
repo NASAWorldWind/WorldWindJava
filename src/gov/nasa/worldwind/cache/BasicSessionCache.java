@@ -39,9 +39,7 @@ public class BasicSessionCache implements SessionCache
     {
         if (capacity < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "capacity < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.entries = new BoundedHashMap<Object, Object>(capacity);
@@ -75,9 +73,7 @@ public class BasicSessionCache implements SessionCache
     {
         if (capacity < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "capacity < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.entries.setCapacity(capacity);
@@ -117,9 +113,7 @@ public class BasicSessionCache implements SessionCache
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.entries.containsKey(key);
@@ -139,9 +133,7 @@ public class BasicSessionCache implements SessionCache
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.entries.get(key);
@@ -160,9 +152,7 @@ public class BasicSessionCache implements SessionCache
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.entries.put(key, value);
@@ -180,9 +170,7 @@ public class BasicSessionCache implements SessionCache
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.entries.remove(key);

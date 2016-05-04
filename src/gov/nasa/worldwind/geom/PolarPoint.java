@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.geom;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * Represents a point in space defined by a latitude, longitude and distance from the origin.
  * <p/>
@@ -60,9 +58,7 @@ public class PolarPoint
     {
         if (cartesianPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return PolarPoint.fromCartesian(cartesianPoint.x, cartesianPoint.y, cartesianPoint.z);
@@ -96,9 +92,7 @@ public class PolarPoint
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.latitude = latitude;
@@ -160,9 +154,7 @@ public class PolarPoint
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double x = radius * longitude.sin() * latitude.cos();

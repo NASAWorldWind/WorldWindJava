@@ -58,9 +58,7 @@ public class TABRasterReader
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.io.File parent = file.getParentFile();
@@ -148,21 +146,15 @@ public class TABRasterReader
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", file);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!file.canRead())
         {
-            String message = Logging.getMessage("generic.FileNoReadPermission", file);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.io.FileReader fileReader = null;
@@ -183,18 +175,13 @@ public class TABRasterReader
     {
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object streamOrException = WWIO.getFileOrResourceAsStream(path, this.getClass());
         if (streamOrException == null || streamOrException instanceof Exception)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToReadFile",
-                (streamOrException != null) ? streamOrException : path);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.io.InputStream stream = (java.io.InputStream) streamOrException;
@@ -218,15 +205,11 @@ public class TABRasterReader
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.RasterControlPointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -248,15 +231,11 @@ public class TABRasterReader
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.RasterControlPointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.io.BufferedReader br = new java.io.BufferedReader(reader);
@@ -266,17 +245,13 @@ public class TABRasterReader
         String s = this.validateHeaderValues(controlPoints);
         if (s != null)
         {
-            String message = Logging.getMessage("TABReader.MissingHeaderValues", s);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         s = this.validateRasterControlPoints(controlPoints);
         if (s != null)
         {
-            String message = Logging.getMessage("TABReader.MissingRasterData", s);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
     }
 
@@ -285,23 +260,17 @@ public class TABRasterReader
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.RasterControlPointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String line = this.skipToHeader(reader);
         if (line == null || !line.equalsIgnoreCase(TAG_HEADER_TABLE))
         {
-            String message = Logging.getMessage("TABReader.InvalidMagicString", line);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         line = this.nextLine(reader);
@@ -324,15 +293,11 @@ public class TABRasterReader
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.RasterControlPointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String line = this.skipToDefinition(reader);
@@ -371,15 +336,11 @@ public class TABRasterReader
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.RasterControlPointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(
@@ -415,15 +376,11 @@ public class TABRasterReader
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.RasterControlPointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // TODO
@@ -435,9 +392,7 @@ public class TABRasterReader
     {
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.RasterControlPointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // TODO
@@ -483,7 +438,7 @@ public class TABRasterReader
         {
             if (sb.length() > 0)
                 sb.append(", ");
-            sb.append(Logging.getMessage("term.version"));
+            sb.append((String) null);
         }
 
         s = values.getStringValue(CHARSET);
@@ -491,7 +446,7 @@ public class TABRasterReader
         {
             if (sb.length() > 0)
                 sb.append(", ");
-            sb.append(Logging.getMessage("term.charset"));
+            sb.append((String) null);
         }
 
         if (sb.length() > 0)
@@ -508,15 +463,14 @@ public class TABRasterReader
         {
             if (sb.length() > 0)
                 sb.append(", ");
-            sb.append(Logging.getMessage("TABReader.MissingOrInvalidFileName",
-                controlPoints.getStringValue(IMAGE_PATH)));
+            sb.append((String) null);
         }
 
         if (controlPoints.size() < 3)
         {
             if (sb.length() > 0)
                 sb.append(", ");
-            sb.append(Logging.getMessage("TABReader.NotEnoughControlPoints", controlPoints.size()));
+            sb.append((String) null);
         }
 
         if (sb.length() > 0)

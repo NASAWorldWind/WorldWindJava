@@ -46,16 +46,12 @@ public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable
 
         if (tc == null)
         {
-            String msg = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (overlay == null)
         {
-            String msg = Logging.getMessage("nullValue.ParentIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         KMLVec2 xy = this.parent.getScreenXY();
@@ -139,8 +135,6 @@ public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.UnableToResolveReference", href);
-            Logging.logger().warning(message);
         }
 
         return localAddress != null ? localAddress : href;

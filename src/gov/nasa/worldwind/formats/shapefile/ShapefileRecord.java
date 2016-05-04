@@ -56,16 +56,12 @@ public abstract class ShapefileRecord
     {
         if (shapeFile == null)
         {
-            String message = Logging.getMessage("nullValue.ShapefileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Save the buffer's current position.
@@ -182,9 +178,7 @@ public abstract class ShapefileRecord
     {
         if (partNumber < 0 || partNumber >= this.getNumberOfParts())
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", partNumber);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int shapefilePartNumber = this.getFirstPartNumber() + partNumber;
@@ -203,9 +197,7 @@ public abstract class ShapefileRecord
     {
         if (partNumber < 0 || partNumber >= this.getNumberOfParts())
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", partNumber);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int shapefilePartNumber = this.getFirstPartNumber() + partNumber;
@@ -294,16 +286,12 @@ public abstract class ShapefileRecord
     {
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!shapeType.equals(shapefile.getShapeType()) && !shapeType.equals(Shapefile.SHAPE_NULL))
         {
-            String message = Logging.getMessage("SHP.UnsupportedShapeType", shapeType);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
     }
 
@@ -463,9 +451,7 @@ public abstract class ShapefileRecord
     {
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         xmlWriter.writeStartElement("Record");

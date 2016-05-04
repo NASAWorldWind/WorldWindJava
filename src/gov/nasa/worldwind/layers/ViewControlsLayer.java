@@ -8,7 +8,6 @@ package gov.nasa.worldwind.layers;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Vec4;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 
@@ -156,9 +155,7 @@ public class ViewControlsLayer extends RenderableLayer
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.position = position;
         clearControls();
@@ -183,9 +180,7 @@ public class ViewControlsLayer extends RenderableLayer
     {
         if (layout == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!this.layout.equals(layout))
         {
@@ -793,6 +788,6 @@ public class ViewControlsLayer extends RenderableLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.ViewControlsLayer.Name");
+        return null;
     }
 }

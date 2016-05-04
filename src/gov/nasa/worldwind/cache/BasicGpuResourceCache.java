@@ -7,10 +7,8 @@
 package gov.nasa.worldwind.cache;
 
 import com.jogamp.opengl.util.texture.Texture;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
-import java.util.logging.Level;
 
 /**
  * Provides the interface for caching of OpenGL resources that are stored on or registered with a GL context. This cache
@@ -68,9 +66,7 @@ public class BasicGpuResourceCache implements GpuResourceCache
 
             public void removalException(Throwable e, Object key, Object clientObject)
             {
-                String msg = Logging.getMessage("BasicMemoryCache.ExceptionFromRemovalListener", e.getMessage());
-                Logging.logger().log(Level.INFO, msg);
-            }
+                }
         });
     }
 

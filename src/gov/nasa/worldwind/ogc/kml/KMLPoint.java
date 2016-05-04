@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.geom.Position;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.xml.XMLEventParserContext;
 
 import javax.xml.stream.XMLStreamException;
@@ -74,9 +73,7 @@ public class KMLPoint extends KMLAbstractGeometry
     {
         if (!(sourceValues instanceof KMLPoint))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         KMLPoint point = (KMLPoint) sourceValues;

@@ -10,7 +10,6 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -42,7 +41,7 @@ public class LatLonGraticuleLayer extends AbstractGraticuleLayer
     {
         initRenderingParams();
         this.setPickEnabled(false);
-        this.setName(Logging.getMessage("layers.LatLonGraticule.Name"));
+        this.setName(null);
     }
 
     /**
@@ -68,9 +67,7 @@ public class LatLonGraticuleLayer extends AbstractGraticuleLayer
     {
         if (format == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.angleFormat.equals(format))

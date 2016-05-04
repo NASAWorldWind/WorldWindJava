@@ -54,11 +54,11 @@ public class RPFImageFile extends RPFFile
     private void validateRPFImage() throws NITFSRuntimeException
     {
         if ( null == this.imageSegment )
-            throw new NITFSRuntimeException("NITFSReader.ImageSegmentWasNotFound");
+            throw new NITFSRuntimeException();
         if( null == this.imageSegment.getUserDefinedImageSubheader())
-            throw new NITFSRuntimeException("NITFSReader.UserDefinedImageSubheaderWasNotFound");
+            throw new NITFSRuntimeException();
         if( null == this.imageSegment.getUserDefinedImageSubheader().getRPFFrameFileComponents())
-            throw new NITFSRuntimeException("NITFSReader.RPFFrameFileComponentsWereNotFoundInUserDefinedImageSubheader");
+            throw new NITFSRuntimeException();
     }
 
     public int[] getImagePixelsAsArray(int[] dest, RPFImageType imageType)

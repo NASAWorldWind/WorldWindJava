@@ -380,9 +380,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     {
         if (size == null)
         {
-            String message = Logging.getMessage("nullValue.SizeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.maximizedSize = size;
@@ -479,9 +477,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     {
         if (titleBarHeight < 0)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", titleBarHeight);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.titleBarHeight = titleBarHeight;
@@ -662,9 +658,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     {
         if (attributes == null)
         {
-            String msg = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.normalAttributes = attributes;
@@ -689,9 +683,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     {
         if (attributes == null)
         {
-            String msg = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.highlightAttributes = attributes;
@@ -828,7 +820,6 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
         if (texture == null) // This should never happen, but we check anyway.
         {
-            Logging.logger().warning(Logging.getMessage("nullValue.TextureIsNull"));
             return;
         }
 
@@ -2456,9 +2447,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         {
             if (that == null)
             {
-                String msg = Logging.getMessage("nullValue.CacheEntryIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             return this.lastUsed < that.lastUsed ? -1 : this.lastUsed == that.lastUsed ? 0 : 1;

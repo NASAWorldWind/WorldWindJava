@@ -56,9 +56,7 @@ public class WMSBasicElevationModel extends BasicElevationModel
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", restorableStateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         this.doRestoreState(rs, null);
@@ -68,9 +66,7 @@ public class WMSBasicElevationModel extends BasicElevationModel
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -89,16 +85,12 @@ public class WMSBasicElevationModel extends BasicElevationModel
     {
         if (caps == null)
         {
-            String message = Logging.getMessage("nullValue.WMSCapabilities");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ElevationModelConfigParams");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String wmsVersion;
@@ -109,15 +101,11 @@ public class WMSBasicElevationModel extends BasicElevationModel
         }
         catch (IllegalArgumentException e)
         {
-            String message = Logging.getMessage("WMS.MissingLayerParameters");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
         catch (WWRuntimeException e)
         {
-            String message = Logging.getMessage("WMS.MissingCapabilityValues");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         wmsSetFallbacks(params);
@@ -292,16 +280,12 @@ public class WMSBasicElevationModel extends BasicElevationModel
     {
         if (caps == null)
         {
-            String message = Logging.getMessage("nullValue.WMSCapabilities");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ElevationModelConfigParams");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Get common WMS layer parameters.
@@ -311,17 +295,13 @@ public class WMSBasicElevationModel extends BasicElevationModel
         String layerNames = params.getStringValue(AVKey.LAYER_NAMES);
         if (layerNames == null || layerNames.length() == 0)
         {
-            String message = Logging.getMessage("nullValue.WMSLayerNames");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String[] names = layerNames.split(",");
         if (names == null || names.length == 0)
         {
-            String message = Logging.getMessage("nullValue.WMSLayerNames");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Get the layer's extreme elevations.
@@ -422,30 +402,22 @@ public class WMSBasicElevationModel extends BasicElevationModel
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (latlons == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationsBufferIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.length < latlons.size() || tileWidth > latlons.size())
         {
-            String msg = Logging.getMessage("ElevationModel.ElevationsBufferTooSmall", latlons.size());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         ElevationCompositionTile tile = new ElevationCompositionTile(sector, this.getLevels().getLastLevel(),
@@ -529,9 +501,7 @@ public class WMSBasicElevationModel extends BasicElevationModel
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -542,9 +512,7 @@ public class WMSBasicElevationModel extends BasicElevationModel
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         AVList params = new AVListImpl();

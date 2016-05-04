@@ -8,7 +8,6 @@ package gov.nasa.worldwind.util.layertree;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.ogc.kml.*;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.tree.*;
 
 import javax.swing.*;
@@ -44,9 +43,7 @@ public class KMLLayerTreeNode extends LayerTreeNode
 
         if (kmlRoot == null)
         {
-            String message = Logging.getMessage("nullValue.KMLRootIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.kmlRoot = kmlRoot;
@@ -198,9 +195,7 @@ public class KMLLayerTreeNode extends LayerTreeNode
     {
         if (tree == null)
         {
-            String message = Logging.getMessage("nullValue.TreeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.mustExpandNode())

@@ -75,17 +75,13 @@ public class RectangularTarget extends AbstractRectangularGraphic
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Iterator<? extends Position> iterator = positions.iterator();
         if (!iterator.hasNext())
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.quad.setCenter(iterator.next());

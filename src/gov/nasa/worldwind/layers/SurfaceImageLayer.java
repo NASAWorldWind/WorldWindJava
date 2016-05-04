@@ -73,9 +73,7 @@ public class SurfaceImageLayer extends RenderableLayer
         }
         else
         {
-            String message = Logging.getMessage("generic.ImageReadFailed", imagePath);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
     }
 
@@ -113,17 +111,13 @@ public class SurfaceImageLayer extends RenderableLayer
     {
         if (src == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final File rasterFile = WWIO.getFileForLocalAddress(src);
         if (null == rasterFile || !rasterFile.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", src);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (null == params)
@@ -137,9 +131,7 @@ public class SurfaceImageLayer extends RenderableLayer
             DataRaster[] rasters = reader.read(rasterFile, params);
             if (null == rasters || rasters.length == 0 || null == rasters[0])
             {
-                String message = Logging.getMessage("generic.ImageReadFailed", src);
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             raster = rasters[0];
@@ -160,10 +152,8 @@ public class SurfaceImageLayer extends RenderableLayer
 
             if (raster.getSector() == null)
             {
-                String reason = Logging.getMessage("nullValue.SpatialReferenceIsNull");
-                String message = Logging.getMessage("generic.ImageReadFailed", src + ":" + reason);
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                String reason = null;
+                    throw new WWRuntimeException();
             }
         }
         catch (WWRuntimeException wwre)
@@ -173,9 +163,7 @@ public class SurfaceImageLayer extends RenderableLayer
         catch (Throwable t)
         {
             String reason = WWUtil.extractExceptionReason(t);
-            String message = Logging.getMessage("generic.ImageReadFailed", reason);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         return raster;
@@ -211,9 +199,7 @@ public class SurfaceImageLayer extends RenderableLayer
         }
         else
         {
-            String message = Logging.getMessage("generic.ImageReadFailed", imagePath);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
     }
 
@@ -233,23 +219,17 @@ public class SurfaceImageLayer extends RenderableLayer
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.imageTable.contains(name))
@@ -273,9 +253,7 @@ public class SurfaceImageLayer extends RenderableLayer
                 }
                 catch (IOException e)
                 {
-                    String message = Logging.getMessage("generic.ImageReadFailed");
-                    Logging.logger().severe(message);
-                }
+                        }
             }
 
             public void newTile(BufferedImage tileImage, List<? extends LatLon> corners)
@@ -315,9 +293,7 @@ public class SurfaceImageLayer extends RenderableLayer
         }
         else
         {
-            String message = Logging.getMessage("generic.ImageReadFailed", imagePath);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
     }
 
@@ -340,23 +316,17 @@ public class SurfaceImageLayer extends RenderableLayer
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.LocationsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.imageTable.contains(name))
@@ -452,14 +422,11 @@ public class SurfaceImageLayer extends RenderableLayer
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (!this.getRenderables().iterator().hasNext())
         {
-            Logging.logger().severe(Logging.getMessage("generic.NoImagesAvailable"));
             return null;
         }
 
@@ -483,7 +450,6 @@ public class SurfaceImageLayer extends RenderableLayer
             }
             catch (IOException e)
             {
-                Logging.logger().severe(Logging.getMessage("generic.ExceptionAttemptingToReadImageFile", sourceImage));
                 return null;
             }
 

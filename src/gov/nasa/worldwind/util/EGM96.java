@@ -40,9 +40,7 @@ public class EGM96
     {
         if (offsetsFilePath == null)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.offsetsFilePath = offsetsFilePath;
@@ -55,9 +53,7 @@ public class EGM96
         InputStream is = WWIO.openFileOrResourceStream(this.offsetsFilePath, EGM96.class);
         if (is == null)
         {
-            String msg = Logging.getMessage("generic.CannotOpenFile", this.offsetsFilePath);
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         try
@@ -69,8 +65,6 @@ public class EGM96
         }
         catch (IOException e)
         {
-            String msg = Logging.getMessage("generic.ExceptionAttemptingToReadFile", this.offsetsFilePath);
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             throw e;
         }
         finally
@@ -100,9 +94,7 @@ public class EGM96
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Return 0 for all offsets if the file failed to load. A log message of the failure will have been generated

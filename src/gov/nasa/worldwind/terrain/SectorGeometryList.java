@@ -8,7 +8,6 @@ package gov.nasa.worldwind.terrain;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import java.awt.*;
@@ -73,9 +72,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         // TODO: add the beginRendering interface to Tessellator in order to eliminate this type test
@@ -92,9 +89,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (dc.getGlobe().getTessellator() instanceof RectangularTessellator)
@@ -114,9 +109,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (pickPoint == null)
@@ -176,9 +169,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (pickPoints == null || pickPoints.size() < 1)
@@ -358,9 +349,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (int i = 0; i < this.size(); i++)
@@ -389,9 +378,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
     {
         if (line == null)
         {
-            String msg = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<SectorGeometry> sglist = new ArrayList<SectorGeometry>(this);
@@ -452,9 +439,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<SectorGeometry> sglist = new ArrayList<SectorGeometry>(this);

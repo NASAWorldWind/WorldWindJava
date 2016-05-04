@@ -74,9 +74,7 @@ public class MilStd2525UnitsFormat extends UnitsFormat
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.isShowDMS())
@@ -105,9 +103,7 @@ public class MilStd2525UnitsFormat extends UnitsFormat
     {
         if (angle == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.isShowDMS())
@@ -127,9 +123,7 @@ public class MilStd2525UnitsFormat extends UnitsFormat
     {
         if (latlon == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.latitude(latlon.getLatitude()) + this.longitude(latlon.getLongitude());

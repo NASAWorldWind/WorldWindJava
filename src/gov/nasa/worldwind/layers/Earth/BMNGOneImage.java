@@ -8,7 +8,6 @@ package gov.nasa.worldwind.layers.Earth;
 import gov.nasa.worldwind.geom.Sector;
 import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.render.SurfaceImage;
-import gov.nasa.worldwind.util.*;
 
 /**
  * @author tag
@@ -20,7 +19,7 @@ public class BMNGOneImage extends RenderableLayer
 
     public BMNGOneImage()
     {
-        this.setName(Logging.getMessage("layers.Earth.BlueMarbleOneImageLayer.Name"));
+        this.setName(null);
         this.addRenderable(new SurfaceImage(IMAGE_PATH, Sector.FULL_SPHERE));
 
         // Disable picking for the layer because it covers the full sphere and will override a terrain pick.
@@ -30,6 +29,6 @@ public class BMNGOneImage extends RenderableLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.Earth.BlueMarbleOneImageLayer.Name");
+        return null;
     }
 }

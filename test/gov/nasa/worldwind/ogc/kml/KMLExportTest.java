@@ -10,7 +10,6 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwindx.examples.kml.KMLDocumentBuilder;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -131,8 +130,6 @@ public class KMLExportTest
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("XML.ValidationFailed", e.getLocalizedMessage());
-            Logging.logger().warning(message);
             return false;
         }
     }

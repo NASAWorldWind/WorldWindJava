@@ -14,7 +14,6 @@ import gov.nasa.worldwind.util.*;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
 
 /**
  * @author tag
@@ -164,9 +163,7 @@ public class LocalRasterServerRetriever extends WWObjectImpl implements Retrieve
             if (null == this.server)
             {
                 this.setState(RETRIEVER_STATE_ERROR);
-                String message = Logging.getMessage("nullValue.RasterServerIsNull");
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             this.byteBuffer = this.server.getRasterAsByteBuffer(this.copy());
@@ -186,7 +183,6 @@ public class LocalRasterServerRetriever extends WWObjectImpl implements Retrieve
         {
             this.setState(RETRIEVER_STATE_ERROR);
 
-            Logging.logger().log(Level.SEVERE, Logging.getMessage("Retriever.ErrorPostProcessing", this.getName()), e);
             throw e;
         }
 

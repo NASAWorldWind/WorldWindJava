@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.geom;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * Represents a view frustum composed of six planes: left, right, bottom, top, near far.
  * <p/>
@@ -56,9 +54,7 @@ public class Frustum
     {
         if (left == null || right == null || bottom == null || top == null || near == null || far == null)
         {
-            String message = Logging.getMessage("nullValue.PlaneIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.left = left;
         this.right = right;
@@ -202,9 +198,7 @@ public class Frustum
         Matrix m = projectionMatrix;
         if (m == null)
         {
-            String message = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Left Plane = row 4 + row 1:
@@ -279,21 +273,7 @@ public class Frustum
     {
         if (horizontalFieldOfView == null)
         {
-            String message = Logging.getMessage("Geom.ViewFrustum.FieldOfViewIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
-        }
-        double fov = horizontalFieldOfView.getDegrees();
-        double farMinusNear = far - near;
-        String message = null;
-        if (fov <= 0 || fov > 180)
-            message = Logging.getMessage("Geom.ViewFrustum.FieldOfViewOutOfRange", fov);
-        if (near <= 0 || farMinusNear <= 0)
-            message = Logging.getMessage("Geom.ViewFrustum.ClippingDistanceOutOfRange");
-        if (message != null)
-        {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double focalLength = 1d / horizontalFieldOfView.tanHalfAngle();
@@ -328,9 +308,7 @@ public class Frustum
         double farMinusNear = far - near;
         if (farMinusNear <= 0.0 || width <= 0.0 || height <= 0.0)
         {
-            String message = Logging.getMessage("Geom.ViewFrustum.ClippingDistanceOutOfRange");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double width_over_2 = width / 2.0;
@@ -366,17 +344,13 @@ public class Frustum
     {
         if (vTL == null || vTR == null || vBL == null || vBR == null)
         {
-            String message = Logging.getMessage("Geom.ViewFrustum.EdgeVectorIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double farMinusNear = far - near;
         if (near <= 0 || farMinusNear <= 0)
         {
-            String message = Logging.getMessage("Geom.ViewFrustum.ClippingDistanceOutOfRange");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Vec4 lpn = vBL.cross3(vTL).normalize3();
@@ -410,9 +384,7 @@ public class Frustum
     {
         if (extent == null)
         {
-            String msg = Logging.getMessage("nullValue.ExtentIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return extent.intersects(this);
@@ -432,9 +404,7 @@ public class Frustum
     {
         if (pa == null || pb == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // First do a trivial accept test.
@@ -473,9 +443,7 @@ public class Frustum
         // invoked here, as is done above for intersects(Frustum).
         if (extent == null)
         {
-            String msg = Logging.getMessage("nullValue.ExtentIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // See if the extent's bounding sphere is entirely within the frustum. The dot product of the extent's center
@@ -516,9 +484,7 @@ public class Frustum
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // See if the point is entirely within the frustum. The dot product of the point with each plane's vector
@@ -559,9 +525,7 @@ public class Frustum
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Plane left = new Plane(this.left.getVector().transformBy4(matrix));

@@ -371,9 +371,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.centerPosition = centerPosition;
 
@@ -412,9 +410,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (northSouthRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "northSouthRadius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.northSouthRadius = northSouthRadius;
@@ -444,9 +440,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (eastWestRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "eastWestRadius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.eastWestRadius = eastWestRadius;
@@ -476,9 +470,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (verticalRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "verticalRadius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.verticalRadius = verticalRadius;
@@ -608,10 +600,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (skew.compareTo(Angle.POS180) >= 0 || skew.compareTo(Angle.ZERO) <= 0)
         {
-            String message = Logging.getMessage("generic.AngleOutOfRange",
-                "skew >= 180 degrees or skew <= 0 degrees");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.skewNorthSouth = skew;
@@ -639,10 +628,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (skew.compareTo(Angle.POS180) >= 0 || skew.compareTo(Angle.ZERO) <= 0)
         {
-            String message = Logging.getMessage("generic.AngleOutOfRange",
-                "skew >= 180 degrees or skew <= 0 degrees");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.skewEastWest = skew;
@@ -966,9 +952,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // compute a bounding box for vertices transformed to their world coordinates
@@ -1096,9 +1080,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Matrix matrix = Matrix.IDENTITY;
@@ -1188,9 +1170,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Matrix matrix = Matrix.IDENTITY;
@@ -1248,9 +1228,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Matrix matrix = dc.getView().getModelviewMatrix();
@@ -1278,9 +1256,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position oldPosition = this.getReferencePosition();
@@ -1334,8 +1310,7 @@ public abstract class RigidShape extends AbstractShape
         if (mesh.getBuffer(Geometry.ELEMENT) == null)
         {
             String message = "nullValue.ElementBufferIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int mode, count, type;
@@ -1690,9 +1665,7 @@ public abstract class RigidShape extends AbstractShape
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -1703,9 +1676,7 @@ public abstract class RigidShape extends AbstractShape
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         this.doRestoreState(rs, null);

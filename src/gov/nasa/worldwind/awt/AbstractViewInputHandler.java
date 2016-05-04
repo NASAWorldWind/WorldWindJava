@@ -9,7 +9,6 @@ import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.pick.PickedObjectList;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
 import java.awt.*;
@@ -161,9 +160,7 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.attributes = attributes;
@@ -263,9 +260,7 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     {
         if (factor < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "factor < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.dragSlopeFactor = factor;

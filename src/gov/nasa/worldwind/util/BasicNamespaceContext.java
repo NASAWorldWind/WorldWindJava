@@ -51,16 +51,12 @@ public class BasicNamespaceContext implements NamespaceContext
     {
         if (prefix == null)
         {
-            String message = Logging.getMessage("nullValue.PrefixIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (namespaceURI == null)
         {
-            String message = Logging.getMessage("nullValue.NamespaceURIIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.urisByPrefix.put(prefix, namespaceURI);
@@ -82,9 +78,7 @@ public class BasicNamespaceContext implements NamespaceContext
     {
         if (prefix == null)
         {
-            String message = Logging.getMessage("nullValue.PrefixIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.urisByPrefix.containsKey(prefix))
@@ -102,9 +96,7 @@ public class BasicNamespaceContext implements NamespaceContext
     {
         if (namespaceURI == null)
         {
-            String message = Logging.getMessage("nullValue.NamespaceURIIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return (String) this.getPrefixes(namespaceURI).next();
@@ -115,9 +107,7 @@ public class BasicNamespaceContext implements NamespaceContext
     {
         if (namespaceURI == null)
         {
-            String message = Logging.getMessage("nullValue.NamespaceURIIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.prefixesByURI.containsKey(namespaceURI))

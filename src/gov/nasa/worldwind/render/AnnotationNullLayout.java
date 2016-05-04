@@ -28,9 +28,7 @@ public class AnnotationNullLayout extends AbstractAnnotationLayout
     {
         if (annotation == null)
         {
-            String message = Logging.getMessage("nullValue.AnnotationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.constraintMap.get(annotation);
@@ -40,9 +38,7 @@ public class AnnotationNullLayout extends AbstractAnnotationLayout
     {
         if (annotation == null)
         {
-            String message = Logging.getMessage("nullValue.AnnotationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.constraintMap.put(annotation, constraint);
@@ -52,16 +48,12 @@ public class AnnotationNullLayout extends AbstractAnnotationLayout
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (annotations == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Start with an empty bounding rectangle in the lower left hand corner.
@@ -84,23 +76,17 @@ public class AnnotationNullLayout extends AbstractAnnotationLayout
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bounds == null)
         {
-            String message = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (annotations == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.

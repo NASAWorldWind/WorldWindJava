@@ -49,9 +49,7 @@ public class ColladaNode extends ColladaAbstractObject implements ColladaRendera
     {
         if (tc == null)
         {
-            String msg = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Create shapes for this node, if necessary

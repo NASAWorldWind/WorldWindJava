@@ -11,7 +11,6 @@ import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.layers.AbstractLayer;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.render.airspaces.Airspace;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.event.*;
 import java.awt.*;
@@ -39,9 +38,7 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
     {
         if (renderer == null)
         {
-            String message = Logging.getMessage("nullValue.RendererIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.armed = false;
@@ -94,9 +91,7 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
     {
         if (renderer == null)
         {
-            String message = Logging.getMessage("nullValue.RendererIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.controlPointRenderer = renderer;

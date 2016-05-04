@@ -69,9 +69,7 @@ public class LocalElevationModel extends AbstractElevationModel
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.tiles.size() == 0)
@@ -100,9 +98,7 @@ public class LocalElevationModel extends AbstractElevationModel
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.tiles.size() == 0)
@@ -159,9 +155,7 @@ public class LocalElevationModel extends AbstractElevationModel
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.contains(latitude, longitude))
@@ -213,30 +207,22 @@ public class LocalElevationModel extends AbstractElevationModel
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (latlons == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationsBufferIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.length < latlons.size())
         {
-            String msg = Logging.getMessage("ElevationModel.ElevationsBufferTooSmall", latlons.size());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.intersects(sector) == -1)
@@ -285,9 +271,7 @@ public class LocalElevationModel extends AbstractElevationModel
     {
         if (filename == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.addElevations(new File(filename));
@@ -309,16 +293,12 @@ public class LocalElevationModel extends AbstractElevationModel
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", file.getPath());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Create a raster reader for the file type.
@@ -330,18 +310,14 @@ public class LocalElevationModel extends AbstractElevationModel
         AVList metadata = reader.readMetadata(file, null);
         if (metadata == null || !AVKey.ELEVATION.equals(metadata.getStringValue(AVKey.PIXEL_FORMAT)))
         {
-            String msg = Logging.getMessage("ElevationModel.SourceNotElevations", file.getAbsolutePath());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Read the file into the raster.
         DataRaster[] rasters = reader.read(file, null);
         if (rasters == null || rasters.length == 0)
         {
-            String msg = Logging.getMessage("ElevationModel.CannotReadElevations", file.getAbsolutePath());
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         for (DataRaster raster : rasters)
@@ -367,9 +343,7 @@ public class LocalElevationModel extends AbstractElevationModel
         final Sector sector = (Sector) raster.getValue(AVKey.SECTOR);
         if (sector == null)
         {
-            String msg = Logging.getMessage("DataRaster.MissingMetadata", AVKey.SECTOR);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Request a sub-raster that contains the whole file. This step is necessary because only sub-rasters
@@ -382,9 +356,7 @@ public class LocalElevationModel extends AbstractElevationModel
         // Verify that the sub-raster can create a ByteBuffer, then create one.
         if (!(subRaster instanceof ByteBufferRaster))
         {
-            String msg = Logging.getMessage("ElevationModel.CannotCreateElevationBuffer", filename);
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
         ByteBuffer elevations = ((ByteBufferRaster) subRaster).getByteBuffer();
 
@@ -419,23 +391,17 @@ public class LocalElevationModel extends AbstractElevationModel
     {
         if (byteBuffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (parameters == null)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Setup parameters to instruct BufferWrapper on how to interpret the ByteBuffer.
@@ -459,9 +425,7 @@ public class LocalElevationModel extends AbstractElevationModel
         String dataType = bufferParams.getStringValue(AVKey.DATA_TYPE);
         if (WWUtil.isEmpty(dataType))
         {
-            String msg = Logging.getMessage("DataRaster.MissingMetadata", AVKey.DATA_TYPE);
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         BufferWrapper buffer = BufferWrapper.wrap(byteBuffer, bufferParams);

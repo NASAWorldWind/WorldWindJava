@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.event.Message;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.Map;
 
@@ -96,9 +95,7 @@ public class KMLStyle extends KMLAbstractStyleSelector
     {
         if (subStyle == null)
         {
-            String message = Logging.getMessage("nullValue.SymbolIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.hasFields())
@@ -121,9 +118,7 @@ public class KMLStyle extends KMLAbstractStyleSelector
     {
         if (!(sourceValues instanceof KMLStyle))
         {
-            String message = Logging.getMessage("KML.InvalidElementType", sourceValues.getClass().getName());
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.applyChange(sourceValues);

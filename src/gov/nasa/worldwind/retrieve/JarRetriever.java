@@ -6,11 +6,8 @@
 
 package gov.nasa.worldwind.retrieve;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.net.*;
 import java.nio.ByteBuffer;
-import java.util.logging.Level;
 
 /**
  * Retrieves resources identified by a jar url, which has the form jar:<url>!/{entry}, as in:
@@ -44,9 +41,7 @@ public class JarRetriever extends URLRetriever
     {
         if (connection == null)
         {
-            String msg = Logging.getMessage("nullValue.ConnectionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         JarURLConnection htpc = (JarURLConnection) connection;
@@ -54,9 +49,6 @@ public class JarRetriever extends URLRetriever
         this.responseMessage = this.responseCode >= 0 ? "OK" : "FAILED";
 
         String contentType = connection.getContentType();
-        Logging.logger().log(Level.FINE, "HTTPRetriever.ResponseInfo", new Object[] {this.responseCode,
-            connection.getContentLength(), contentType != null ? contentType : "content type not returned",
-            connection.getURL()});
 
         if (this.responseCode == HttpURLConnection.HTTP_OK) // intentionally re-using HTTP constant
             return super.doRead(connection);

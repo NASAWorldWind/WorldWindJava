@@ -12,7 +12,6 @@ import gov.nasa.worldwind.exception.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.render.SurfaceQuad;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -125,9 +124,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     {
         if (globe == null)
         {
-            String msg = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.globe = globe;
@@ -285,9 +282,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -313,9 +308,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     {
         if (location == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 pt = this.getSurfacePoint(location.getLatitude(), location.getLongitude(), 0);
@@ -345,9 +338,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     {
         if (line == null)
         {
-            String msg = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // We need to get two positions to pass to the actual intersection calculator. Make one of those the line's
@@ -370,9 +361,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     {
         if (pA == null || pB == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -396,9 +385,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     {
         if (pA == null || pB == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // The intersect method expects altitudes to be relative to ground, so make them so if they aren't already.
@@ -501,9 +488,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     {
         if (pA == null || pB == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Line line = this.makeLineFromPositions(pA, pB);
@@ -549,9 +534,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -703,9 +686,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     {
         if (pA == null || pB == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         RectTile tileA = this.getContainingTile(pA.getLatitude(), pA.getLongitude());
@@ -1049,7 +1030,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
             if (this.startTime.get() != null && timeout != null)
             {
                 if (System.currentTimeMillis() - this.startTime.get() > timeout)
-                    throw new WWTimeoutException("Terrain convergence timed out");
+                    throw new WWTimeoutException();
             }
         }
     }
@@ -1196,9 +1177,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!tile.sector.contains(latitude, longitude))

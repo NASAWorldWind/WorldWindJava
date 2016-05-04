@@ -97,9 +97,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.drawInterior = attributes.isDrawInterior();
@@ -215,9 +213,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.interiorMaterial = material;
@@ -234,9 +230,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlineMaterial = material;
@@ -253,9 +247,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.interiorOpacity = opacity;
@@ -272,9 +264,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlineOpacity = opacity;
@@ -291,9 +281,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlineWidth = width;
@@ -310,9 +298,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (factor < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "factor < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlineStippleFactor = factor;
@@ -354,9 +340,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (scale <= 0)
         {
-            String message = Logging.getMessage("generic.ScaleOutOfRange", scale);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageScale = scale;
@@ -367,9 +351,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (rs == null)
         {
-            String message = Logging.getMessage("nullValue.RestorableSupportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         rs.addStateValueAsBoolean(so, "drawInterior", this.isDrawInterior());
@@ -405,9 +387,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (rs == null)
         {
-            String message = Logging.getMessage("nullValue.RestorableSupportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Boolean b = rs.getStateValueAsBoolean(so, "drawInterior");
@@ -550,16 +530,12 @@ public class BasicShapeAttributes implements ShapeAttributes
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (output == null)
         {
-            String message = Logging.getMessage("nullValue.OutputBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
@@ -570,15 +546,12 @@ public class BasicShapeAttributes implements ShapeAttributes
             }
             catch (XMLStreamException e)
             {
-                Logging.logger().throwing(getClass().getName(), "export", e);
                 throw new IOException(e);
             }
         }
         else
         {
-            String message = Logging.getMessage("Export.UnsupportedFormat", mimeType);
-            Logging.logger().warning(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
     }
 
@@ -613,9 +586,7 @@ public class BasicShapeAttributes implements ShapeAttributes
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         xmlWriter.writeStartElement("Style");

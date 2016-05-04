@@ -86,9 +86,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
         {
             if (dc == null)
             {
-                String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             this.globe = dc.getGlobe();
@@ -207,9 +205,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // The radius for an ellipsoidal globe is a function of its latitude. The following solution was derived by
@@ -227,9 +223,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (location == null)
         {
-            String msg = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.getRadiusAt(location.latitude, location.longitude);
@@ -266,9 +260,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.elevationModel != null ? this.elevationModel.getExtremeElevations(latitude, longitude)
@@ -279,9 +271,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.elevationModel != null ? this.elevationModel.getExtremeElevations(sector) : new double[] {0, 0};
@@ -301,9 +291,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (frustum == null)
         {
-            String message = Logging.getMessage("nullValue.FrustumIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return frustum.intersects(new Sphere(Vec4.ZERO, this.getRadius()));
@@ -430,9 +418,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return WWMath.computeSphereProjectedArea(view, this.getCenter(), this.getRadius());
@@ -490,9 +476,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.elevationModel == null)
@@ -510,9 +494,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.geodeticToCartesian(position.getLatitude(), position.getLongitude(), position.getElevation());
@@ -522,9 +504,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (location == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.geodeticToCartesian(location.getLatitude(), location.getLongitude(), 0);
@@ -534,9 +514,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latLon == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.geodeticToCartesian(latLon.getLatitude(), latLon.getLongitude(), metersElevation);
@@ -546,9 +524,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.geodeticToCartesian(latitude, longitude, metersElevation);
@@ -558,9 +534,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (point == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.cartesianToGeodetic(point);
@@ -572,30 +546,22 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (numLat <= 0 || numLon <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "numLat <= 0 or numLon <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (metersElevation == null)
         {
-            String message = Logging.getMessage("nullValue.ElevationsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (out == null)
         {
-            String message = Logging.getMessage("nullValue.OutputIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.geodeticToCartesian(sector, numLat, numLon, metersElevation, out);
@@ -613,9 +579,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeEllipsoidalNormalAtLocation(latitude, longitude);
@@ -632,9 +596,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double eqSquared = this.equatorialRadius * this.equatorialRadius;
@@ -651,9 +613,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Latitude is treated clockwise as rotation about the X-axis. We flip the latitude value so that a positive
@@ -697,9 +657,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeEllipsoidalOrientationAtPosition(latitude, longitude, metersElevation);
@@ -710,9 +668,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeSurfaceOrientationAtPosition(position.getLatitude(), position.getLongitude(),
@@ -725,9 +681,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.geodeticToEllipsoidal(latitude, longitude, metersElevation);
@@ -739,9 +693,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeEllipsoidalPointFromPosition(position.getLatitude(), position.getLongitude(),
@@ -754,9 +706,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (location == null)
         {
-            String message = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.geodeticToEllipsoidal(location.getLatitude(), location.getLongitude(), 0);
@@ -768,9 +718,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (ellipsoidalPoint == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.ellipsoidalToGeodetic(ellipsoidalPoint);
@@ -782,9 +730,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double cosLat = latitude.cos();
@@ -808,9 +754,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Vec4 point = this.computeEllipsoidalPointFromPosition(latitude, longitude, metersElevation);
@@ -830,9 +774,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (line == null)
         {
-            String msg = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Intersection[] intersections = this.intersect(line);
@@ -877,9 +819,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double cosLat = Math.cos(latitude.radians);
@@ -978,7 +918,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
 //        {
 //            String message = Logging.getMessage("nullValue.PointIsNull");
 //            Logging.logger().severe(message);
-//            throw new IllegalArgumentException(message);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        // according to
@@ -1044,9 +984,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
         // most recent update.
         if (null == cart)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // According to
@@ -1167,7 +1105,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
 //        {
 //            String msg = Logging.getMessage("nullValue.SectorIsNull");
 //            Logging.logger().severe(msg);
-//            throw new IllegalArgumentException(msg);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        return Sector.computeBoundingCylinder(this, verticalExaggeration, sector);
@@ -1194,7 +1132,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
 //        {
 //            String msg = Logging.getMessage("nullValue.SectorIsNull");
 //            Logging.logger().severe(msg);
-//            throw new IllegalArgumentException(msg);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        // Compute the exaggerated minimum and maximum heights.
@@ -1228,7 +1166,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
 //        {
 //            String msg = Logging.getMessage("nullValue.SectorIsNull");
 //            Logging.logger().severe(msg);
-//            throw new IllegalArgumentException(msg);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        // Compute the exaggerated minimum and maximum heights.
@@ -1300,9 +1238,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
 
             if (this.tessellator == null)
             {
-                String msg = Logging.getMessage("Tessellator.TessellatorUnavailable");
-                Logging.logger().severe(msg);
-                throw new IllegalStateException(msg);
+                    throw new IllegalStateException();
             }
         }
 
@@ -1341,8 +1277,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
     {
         if (key == null)
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Object configSource = Configuration.getStringValue(key, defaultValue);

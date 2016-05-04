@@ -7,7 +7,6 @@
 package gov.nasa.worldwindx.applications.dataimporter;
 
 import gov.nasa.worldwind.WorldWindow;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -16,7 +15,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 /**
  * Displays data sets available to install.
@@ -136,7 +134,6 @@ public class FileSetPanel extends JPanel
                 }
                 catch (Exception e)
                 {
-                    Logging.logger().log(Level.SEVERE, "Exception while finding available data", e);
                 }
                 finally
                 {
@@ -242,7 +239,6 @@ public class FileSetPanel extends JPanel
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, "Exception performing installation", e);
             }
         }
     }

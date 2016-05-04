@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.util.gdal;
 
 import gov.nasa.worldwind.Configuration;
-import gov.nasa.worldwind.util.*;
 
 import java.io.File;
 
@@ -71,7 +70,6 @@ class GDALLibraryFinder extends GDALAbstractFileFilter
         }
         catch (Throwable t)
         {
-            Logging.logger().finest(WWUtil.extractExceptionReason(t));
         }
         return false;
     }

@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.render;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.awt.*;
 
 /**
@@ -35,9 +33,7 @@ public class ScreenAnnotationBalloon extends AbstractAnnotationBalloon implement
 
         if (point == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.screenPoint = point;
@@ -76,9 +72,7 @@ public class ScreenAnnotationBalloon extends AbstractAnnotationBalloon implement
     {
         if (point == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.screenPoint = point;

@@ -42,9 +42,7 @@ public class SurfaceMultiPolygon extends AbstractSurfaceShape
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.boundaries.addContour(iterable);
@@ -54,9 +52,7 @@ public class SurfaceMultiPolygon extends AbstractSurfaceShape
     {
         if (contours == null)
         {
-            String message = Logging.getMessage("nullValue.ContourListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.boundaries.addAllContours(contours);
@@ -68,9 +64,7 @@ public class SurfaceMultiPolygon extends AbstractSurfaceShape
 
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.boundaries.addContour(iterable);
@@ -82,9 +76,7 @@ public class SurfaceMultiPolygon extends AbstractSurfaceShape
 
         if (contours == null)
         {
-            String message = Logging.getMessage("nullValue.ContourListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.boundaries.addAllContours(contours);
@@ -104,9 +96,7 @@ public class SurfaceMultiPolygon extends AbstractSurfaceShape
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.boundaries.addContour(iterable);
@@ -116,9 +106,7 @@ public class SurfaceMultiPolygon extends AbstractSurfaceShape
     {
         if (contours == null)
         {
-            String message = Logging.getMessage("nullValue.ContourListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.boundaries.addAllContours(contours);

@@ -8,7 +8,6 @@ package gov.nasa.worldwindx.examples;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.render.GLRuntimeCapabilities;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.GLAutoDrawable;
 
@@ -85,9 +84,7 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
             GLRuntimeCapabilities glrc = sc.getGLRuntimeCapabilities();
             if (glrc == null)
             {
-                String message = Logging.getMessage("nullValue.GLRuntimeCapabilitiesIsNull");
-                Logging.logger().warning(message);
-                return;
+                    return;
             }
 
             // Configure which OpenGL features may be used by the World Wind SDK. Configuration values for features

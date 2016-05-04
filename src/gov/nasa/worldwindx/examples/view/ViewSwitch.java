@@ -10,7 +10,6 @@ import gov.nasa.worldwind.awt.ViewInputHandler;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwindx.examples.*;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -43,7 +42,7 @@ public class ViewSwitch extends ApplicationTemplate
 
             private WorldWindow eventSource;
             protected final JLabel latDisplay = new JLabel("");
-            protected final JLabel lonDisplay = new JLabel(Logging.getMessage("term.OffGlobe"));
+            protected final JLabel lonDisplay = new JLabel((String) null);
             protected final JLabel eleDisplay = new JLabel("");
             protected final JLabel headingDisplay = new JLabel("");
             protected final JLabel pitchDisplay = new JLabel("");
@@ -209,7 +208,7 @@ public class ViewSwitch extends ApplicationTemplate
             protected String makeEyeAltitudeDescription(double metersAltitude)
             {
                 String s;
-                String altitude = Logging.getMessage("term.Altitude");
+                String altitude = null;
                 if (UNIT_IMPERIAL.equals(elevationUnit))
                     s = String.format(altitude + " %,7d mi", (int) Math.round(metersAltitude * METER_TO_MILE));
                 else // Default to metric units.
@@ -258,7 +257,7 @@ public class ViewSwitch extends ApplicationTemplate
                             else
                             {
                                 latDisplay.setText("");
-                                lonDisplay.setText(Logging.getMessage("term.OffGlobe"));
+                                lonDisplay.setText(null);
                                 eleDisplay.setText("");
                                 pitchDisplay.setText("");
                                 headingDisplay.setText("");
@@ -266,7 +265,7 @@ public class ViewSwitch extends ApplicationTemplate
                         }
                         else
                         {
-                            eleDisplay.setText(Logging.getMessage("term.Altitude"));
+                            eleDisplay.setText(null);
                         }
                     }
                 });

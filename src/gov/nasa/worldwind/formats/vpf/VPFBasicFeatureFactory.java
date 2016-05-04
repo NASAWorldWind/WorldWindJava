@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.vpf;
 
 import gov.nasa.worldwind.avlist.AVList;
-import gov.nasa.worldwind.util.Logging;
 
 import java.io.File;
 import java.util.*;
@@ -49,9 +48,7 @@ public class VPFBasicFeatureFactory implements VPFFeatureFactory
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.doCreateSimpleFeatures(featureClass);
@@ -61,9 +58,7 @@ public class VPFBasicFeatureFactory implements VPFFeatureFactory
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.doCreateSimpleFeatures(featureClass);
@@ -73,9 +68,7 @@ public class VPFBasicFeatureFactory implements VPFFeatureFactory
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.doCreateSimpleFeatures(featureClass);
@@ -85,9 +78,7 @@ public class VPFBasicFeatureFactory implements VPFFeatureFactory
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.doCreateSimpleFeatures(featureClass);
@@ -97,9 +88,7 @@ public class VPFBasicFeatureFactory implements VPFFeatureFactory
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.doCreateComplexFeatures(featureClass);
@@ -113,9 +102,7 @@ public class VPFBasicFeatureFactory implements VPFFeatureFactory
     {
         if (this.primitiveData == null)
         {
-            String message = Logging.getMessage("VPF.NoPrimitiveData");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         ArrayList<VPFFeature> results = new ArrayList<VPFFeature>();

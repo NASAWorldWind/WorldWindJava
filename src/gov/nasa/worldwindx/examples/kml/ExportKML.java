@@ -9,7 +9,6 @@ import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.xml.transform.*;
 import javax.xml.transform.stream.*;
@@ -165,8 +164,6 @@ public class ExportKML
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToWriteXml", e.toString());
-            Logging.logger().severe(message);
             e.printStackTrace();
         }
     }

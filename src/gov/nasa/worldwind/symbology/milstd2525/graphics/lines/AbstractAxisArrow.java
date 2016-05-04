@@ -12,7 +12,6 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.symbology.milstd2525.AbstractMilStd2525TacticalGraphic;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -67,9 +66,7 @@ public abstract class AbstractAxisArrow extends AbstractMilStd2525TacticalGraphi
 
         if (numPaths < 1)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", numPaths);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.paths = new Path[numPaths];
@@ -88,9 +85,7 @@ public abstract class AbstractAxisArrow extends AbstractMilStd2525TacticalGraphi
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Ensure that the position list provides at least 3 control points.
@@ -103,9 +98,7 @@ public abstract class AbstractAxisArrow extends AbstractMilStd2525TacticalGraphi
         }
         catch (NoSuchElementException e)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.positions = positions;
@@ -264,9 +257,7 @@ public abstract class AbstractAxisArrow extends AbstractMilStd2525TacticalGraphi
 
         if (posN == null)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Vec4 pt1 = globe.computePointFromLocation(pos1);

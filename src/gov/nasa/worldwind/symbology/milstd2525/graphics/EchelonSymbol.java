@@ -12,7 +12,6 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.symbology.AbstractTacticalSymbol;
 import gov.nasa.worldwind.symbology.milstd2525.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import java.awt.*;
@@ -51,18 +50,14 @@ public class EchelonSymbol extends AbstractTacticalSymbol
 
         if (sidc == null)
         {
-            String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         SymbolCode symbolCode = new SymbolCode(sidc);
         String echelon = symbolCode.getEchelon();
         if (SymbolCode.isFieldEmpty(echelon))
         {
-            String msg = Logging.getMessage("Symbology.InvalidSymbolCode", sidc);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.sidc = sidc;
 

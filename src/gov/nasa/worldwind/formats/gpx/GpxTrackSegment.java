@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.gpx;
 
 import gov.nasa.worldwind.tracks.*;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author tag
@@ -44,28 +43,20 @@ public class GpxTrackSegment extends gov.nasa.worldwind.formats.gpx.ElementParse
     {
         if (lname == null)
         {
-            String msg = Logging.getMessage("nullValue.LNameIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (uri == null)
         {
-            String msg = Logging.getMessage("nullValue.URIIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (qname == null)
         {
-            String msg = Logging.getMessage("nullValue.QNameIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String msg = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (lname.equalsIgnoreCase("trkpt"))

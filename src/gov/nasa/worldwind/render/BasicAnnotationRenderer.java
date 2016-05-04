@@ -16,7 +16,6 @@ import gov.nasa.worldwind.util.*;
 import javax.media.opengl.*;
 import java.awt.*;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * Basic implementation of AnnotationRenderer. Process Annotation rendering as OrderedRenderable objects batch.
@@ -76,9 +75,7 @@ public class BasicAnnotationRenderer implements AnnotationRenderer
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getVisibleSector() == null)
@@ -91,9 +88,7 @@ public class BasicAnnotationRenderer implements AnnotationRenderer
 
         if (annotations == null)
         {
-            String msg = Logging.getMessage("nullValue.AnnotationIterator");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.isContinuous2DGlobe() && this.currentFrameTime != dc.getFrameTimeStamp())
@@ -173,9 +168,7 @@ public class BasicAnnotationRenderer implements AnnotationRenderer
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.isContinuous2DGlobe() && annotation instanceof ScreenAnnotation
@@ -335,11 +328,9 @@ public class BasicAnnotationRenderer implements AnnotationRenderer
             }
             catch (WWRuntimeException e)
             {
-                Logging.logger().log(Level.SEVERE, "generic.ExceptionWhileRenderingAnnotation", e);
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, "generic.ExceptionWhileRenderingAnnotation", e);
             }
             finally
             {
@@ -366,11 +357,9 @@ public class BasicAnnotationRenderer implements AnnotationRenderer
             }
             catch (WWRuntimeException e)
             {
-                Logging.logger().log(Level.SEVERE, "generic.ExceptionWhilePickingAnnotation", e);
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, "generic.ExceptionWhilePickingAnnotation", e);
             }
             finally
             {

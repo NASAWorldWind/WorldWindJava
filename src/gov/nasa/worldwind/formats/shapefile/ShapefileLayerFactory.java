@@ -274,9 +274,7 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
     {
         if (WWUtil.isEmpty(configSource))
         {
-            String message = Logging.getMessage("generic.ConfigurationSourceIsInvalid", configSource);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.createFromConfigSource(configSource, params, null); // no completion callback
@@ -315,9 +313,7 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
     {
         if (WWUtil.isEmpty(configSource))
         {
-            String message = Logging.getMessage("generic.ConfigurationSourceIsInvalid", configSource);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = null;
@@ -337,8 +333,7 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("generic.CreationFromConfigurationFileFailed", configSource);
-            throw new WWRuntimeException(msg, e);
+            throw new WWRuntimeException(e);
         }
 
         return o;
@@ -371,9 +366,7 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
     {
         if (WWUtil.isEmpty(shapefileSource))
         {
-            String message = Logging.getMessage("generic.ShapefileSourceIsInvalid", shapefileSource);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.createFromShapefileSource(shapefileSource, null); // no completion callback
@@ -410,9 +403,7 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
     {
         if (WWUtil.isEmpty(shapefileSource))
         {
-            String message = Logging.getMessage("generic.ShapefileSourceIsInvalid", shapefileSource);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o;
@@ -423,8 +414,7 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("generic.CreationFromShapefileSourceFailed", shapefileSource);
-            throw new WWRuntimeException(msg, e);
+            throw new WWRuntimeException(e);
         }
 
         return o;
@@ -449,8 +439,7 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
         String shapefileLocation = WWXML.getText(domElement, "ShapefileLocation");
         if (WWUtil.isEmpty(shapefileLocation))
         {
-            String msg = Logging.getMessage("SHP.ShapefileLocationUnspecified");
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         RenderableLayer layer = new RenderableLayer();
@@ -588,8 +577,6 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
         }
         catch (XPathExpressionException e) // should not occur, but log just if it does
         {
-            String message = Logging.getMessage("XML.InvalidXPathExpression", "internal expression");
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
             return null;
         }
     }
@@ -694,8 +681,7 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
         }
         else
         {
-            String msg = Logging.getMessage("generic.UnrecognizedShapeType", shp.getShapeType());
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
     }
 

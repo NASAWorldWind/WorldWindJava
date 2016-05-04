@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.vpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.*;
 
 /**
@@ -39,9 +37,7 @@ public class GeoSymAssignment
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GeoSymAssignment assignment = new GeoSymAssignment();
@@ -63,9 +59,7 @@ public class GeoSymAssignment
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GeoSymTableReader reader = new GeoSymTableReader();
@@ -88,9 +82,7 @@ public class GeoSymAssignment
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.tableMap.get(name);
@@ -100,9 +92,7 @@ public class GeoSymAssignment
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.tableMap.put(name, table);

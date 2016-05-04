@@ -7,7 +7,6 @@ package gov.nasa.worldwind.formats.vpf;
 
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -41,9 +40,7 @@ public class VPFSymbolAttributes extends BasicShapeAttributes
         {
             if (attributes == null)
             {
-                String message = Logging.getMessage("nullValue.AttributesIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.font = attributes.getFont();

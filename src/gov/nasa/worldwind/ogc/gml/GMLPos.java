@@ -6,10 +6,7 @@
 
 package gov.nasa.worldwind.ogc.gml;
 
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.xml.AbstractXMLEventParser;
-
-import java.util.logging.Level;
 
 /**
  * @author tag
@@ -45,8 +42,6 @@ public class GMLPos extends AbstractXMLEventParser
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("generic.NumberFormatException");
-            Logging.logger().log(Level.WARNING, message, e);
             return null;
         }
     }

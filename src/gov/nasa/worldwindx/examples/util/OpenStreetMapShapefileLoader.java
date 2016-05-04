@@ -37,9 +37,7 @@ public class OpenStreetMapShapefileLoader
     {
         if (source == null || WWUtil.isEmpty(source))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String path = WWIO.getSourcePath(source);
@@ -68,9 +66,7 @@ public class OpenStreetMapShapefileLoader
     {
         if (source == null || WWUtil.isEmpty(source))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Shapefile shp = null;
@@ -108,9 +104,7 @@ public class OpenStreetMapShapefileLoader
     {
         if (shp == null)
         {
-            String message = Logging.getMessage("nullValue.ShapefileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         OSMShapes[] shapeArray =

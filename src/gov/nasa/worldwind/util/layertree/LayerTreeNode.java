@@ -8,7 +8,6 @@ package gov.nasa.worldwind.util.layertree;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.layers.Layer;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.tree.BasicTreeNode;
 
 /**
@@ -47,9 +46,7 @@ public class LayerTreeNode extends BasicTreeNode
 
         if (layer == null)
         {
-            String message = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.layer = layer;

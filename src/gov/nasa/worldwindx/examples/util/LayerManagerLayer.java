@@ -12,7 +12,6 @@ import gov.nasa.worldwind.geom.Vec4;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.pick.PickedObject;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 
@@ -59,9 +58,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -131,9 +128,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
     {
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.font.equals(font))
@@ -164,9 +159,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.color = color;
@@ -192,9 +185,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.highlightColor = color;
@@ -331,9 +322,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.ScreenPositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.position = position;
         this.update();
@@ -902,6 +891,6 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.LayerManagerLayer.Name");
+        return null;
     }
 }

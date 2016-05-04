@@ -46,7 +46,7 @@ public class TiledImageProducer extends TiledRasterProducer
     public String getDataSourceDescription()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(Logging.getMessage("TiledImageProducer.Description"));
+        sb.append((String) null);
         sb.append(" (").append(super.getDataSourceDescription()).append(")");
         return sb.toString();
     }
@@ -80,7 +80,7 @@ public class TiledImageProducer extends TiledRasterProducer
     {
         // TiledImageProducer does not accept null data sources.
         if (source == null)
-            return Logging.getMessage("nullValue.SourceIsNull");
+            return null;
 
         // TiledRasterProducer accepts BufferedImageRaster as a data source. If the data source is a DataRaster, then
         // check that it's a BufferedImageRaster.
@@ -90,7 +90,7 @@ public class TiledImageProducer extends TiledRasterProducer
             DataRaster raster = (DataRaster) source;
 
             if (!(raster instanceof BufferedImageRaster))
-                return Logging.getMessage("TiledRasterProducer.UnrecognizedDataSource", raster);
+                return null;
 
             String s = this.validateDataSourceParams(raster, String.valueOf(raster));
             if (s != null)
@@ -107,7 +107,7 @@ public class TiledImageProducer extends TiledRasterProducer
 
             if (reader == null)
             {
-                return Logging.getMessage("TiledRasterProducer.UnrecognizedDataSource", source);
+                return null;
             }
             else if (reader instanceof RPFRasterReader)
             {
@@ -125,7 +125,7 @@ public class TiledImageProducer extends TiledRasterProducer
                 }
                 catch (IOException e)
                 {
-                    return Logging.getMessage("TiledRasterProducer.ExceptionWhileReading", source, e.getMessage());
+                    return null;
                 }
             }
 
@@ -140,8 +140,7 @@ public class TiledImageProducer extends TiledRasterProducer
     {
         if (params.hasKey(AVKey.PIXEL_FORMAT) && params.getValue(AVKey.PIXEL_FORMAT) != AVKey.IMAGE)
         {
-            return Logging.getMessage("TiledRasterProducer.UnrecognizedRasterType",
-                params.getValue(AVKey.PIXEL_FORMAT), name);
+            return null;
         }
 
         if (params.hasKey(AVKey.COORDINATE_SYSTEM)
@@ -149,12 +148,11 @@ public class TiledImageProducer extends TiledRasterProducer
             && params.getValue(AVKey.COORDINATE_SYSTEM) != AVKey.COORDINATE_SYSTEM_PROJECTED
             )
         {
-            return Logging.getMessage("TiledRasterProducer.UnrecognizedCoordinateSystem",
-                params.getValue(AVKey.COORDINATE_SYSTEM), name);
+            return null;
         }
 
         if (params.getValue(AVKey.SECTOR) == null)
-            return Logging.getMessage("TiledRasterProducer.NoSector", name);
+            return null;
 
         return null;
     }

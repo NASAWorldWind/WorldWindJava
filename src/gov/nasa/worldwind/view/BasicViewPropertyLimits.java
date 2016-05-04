@@ -47,9 +47,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.eyeLocationLimits = sector;
@@ -83,9 +81,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (minAngle == null || maxAngle == null)
         {
-            String message = Logging.getMessage("nullValue.MinOrMaxAngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.minHeading = minAngle;
@@ -105,9 +101,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (minAngle == null || maxAngle == null)
         {
-            String message = Logging.getMessage("nullValue.MinOrMaxAngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.minPitch = minAngle;
@@ -127,9 +121,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (minAngle == null || maxAngle == null)
         {
-            String message = Logging.getMessage("nullValue.MinOrMaxAngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.minRoll = minAngle;
@@ -156,16 +148,12 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Sector sector = this.eyeLocationLimits;
@@ -182,16 +170,12 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.isNonContinous2DGlobe(view.getGlobe()))
@@ -208,16 +192,12 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.is2DGlobe(view.getGlobe()))
@@ -234,16 +214,12 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return Angle.clamp(angle, this.minRoll, this.maxRoll);
@@ -272,15 +248,11 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Angle[] limits = viewLimits.getHeadingLimits();
@@ -311,15 +283,11 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Angle[] limits = viewLimits.getPitchLimits();
@@ -349,15 +317,11 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Angle[] limits = viewLimits.getRollLimits();
@@ -387,9 +351,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         double newElevation = elevation;
         double[] elevLimits = viewLimits.getEyeElevationLimits();
@@ -419,15 +381,11 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (viewLimits == null)
         {
-            String message = Logging.getMessage("nullValue.ViewLimitsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Sector limits = viewLimits.getEyeLocationLimits();

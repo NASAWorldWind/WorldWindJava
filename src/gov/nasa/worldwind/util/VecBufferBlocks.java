@@ -42,23 +42,17 @@ public class VecBufferBlocks extends CompoundVecBuffer
 
         if (coordsPerVec < 1)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dataType == null)
         {
-            String message = Logging.getMessage("nullValue.DataTypeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.coordsPerVec = coordsPerVec;
@@ -107,9 +101,7 @@ public class VecBufferBlocks extends CompoundVecBuffer
     {
         if (index < 0 || index >= this.count)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.lengths.get(index) / WWBufferUtil.sizeOfPrimitiveType(this.dataType) / this.coordsPerVec;
@@ -160,16 +152,12 @@ public class VecBufferBlocks extends CompoundVecBuffer
     {
         if (endPos < 0 || endPos > this.buffer.capacity())
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", endPos);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (beginPos < 0 || beginPos > endPos)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", beginPos);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.addSubBuffer(beginPos, endPos - beginPos + 1);

@@ -53,16 +53,16 @@ public class LevelSet extends WWObjectImpl
 
         Object o = params.getValue(AVKey.LEVEL_ZERO_TILE_DELTA);
         if (o == null || !(o instanceof LatLon))
-            sb.append(Logging.getMessage("term.tileDelta")).append(" ");
+            sb.append((String) null).append(" ");
 
         o = params.getValue(AVKey.SECTOR);
         if (o == null || !(o instanceof Sector))
-            sb.append(Logging.getMessage("term.sector")).append(" ");
+            sb.append((String) null).append(" ");
 
         int numLevels = 0;
         o = params.getValue(AVKey.NUM_LEVELS);
         if (o == null || !(o instanceof Integer) || (numLevels = (Integer) o) < 1)
-            sb.append(Logging.getMessage("term.numLevels")).append(" ");
+            sb.append((String) null).append(" ");
 
         int numEmptyLevels = 0;
         o = params.getValue(AVKey.NUM_EMPTY_LEVELS);
@@ -72,7 +72,7 @@ public class LevelSet extends WWObjectImpl
         String[] inactiveLevels = null;
         o = params.getValue(AVKey.INACTIVE_LEVELS);
         if (o != null && !(o instanceof String))
-            sb.append(Logging.getMessage("term.inactiveLevels")).append(" ");
+            sb.append((String) null).append(" ");
         else if (o != null)
             inactiveLevels = ((String) o).split(",");
 
@@ -80,7 +80,7 @@ public class LevelSet extends WWObjectImpl
         o = params.getValue(AVKey.SECTOR_RESOLUTION_LIMITS);
         if (o != null && !(o instanceof SectorResolution[]))
         {
-            sb.append(Logging.getMessage("term.sectorResolutionLimits")).append(" ");
+            sb.append((String) null).append(" ");
         }
         else if (o != null)
         {
@@ -90,8 +90,7 @@ public class LevelSet extends WWObjectImpl
                 if (sr.levelNumber > numLevels - 1)
                 {
                     String message =
-                        Logging.getMessage("LevelSet.sectorResolutionLimitsTooHigh", sr.levelNumber, numLevels - 1);
-                    Logging.logger().warning(message);
+                        null;
                     break;
                 }
             }
@@ -100,9 +99,7 @@ public class LevelSet extends WWObjectImpl
 
         if (sb.length() > 0)
         {
-            String message = Logging.getMessage("layers.LevelSet.InvalidLevelDescriptorFields", sb.toString());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sector = (Sector) params.getValue(AVKey.SECTOR);
@@ -191,9 +188,7 @@ public class LevelSet extends WWObjectImpl
     {
         if (source == null)
         {
-            String msg = Logging.getMessage("nullValue.LevelSetIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.sector = source.sector;
@@ -300,9 +295,7 @@ public class LevelSet extends WWObjectImpl
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.getSector().intersects(sector))
@@ -379,9 +372,7 @@ public class LevelSet extends WWObjectImpl
     {
         if (tile == null)
         {
-            String msg = Logging.getMessage("nullValue.TileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         tile.getLevel().markResourceAbsent(this.getTileNumber(tile));
@@ -400,9 +391,7 @@ public class LevelSet extends WWObjectImpl
     {
         if (tileKey == null)
         {
-            String msg = Logging.getMessage("nullValue.TileKeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Level level = this.getLevel(tileKey.getLevelNumber());
@@ -422,9 +411,7 @@ public class LevelSet extends WWObjectImpl
     {
         if (tile == null)
         {
-            String msg = Logging.getMessage("nullValue.TileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return tile.getLevel().isEmpty() || tile.getLevel().isResourceAbsent(this.getTileNumber(tile));
@@ -441,9 +428,7 @@ public class LevelSet extends WWObjectImpl
     {
         if (tile == null)
         {
-            String msg = Logging.getMessage("nullValue.TileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         tile.getLevel().unmarkResourceAbsent(this.getTileNumber(tile));
@@ -454,9 +439,7 @@ public class LevelSet extends WWObjectImpl
     {
         if (key == null)
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Level level = this.getLevel(key.getLevelNumber());
@@ -478,9 +461,7 @@ public class LevelSet extends WWObjectImpl
     {
         if (key == null)
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Level level = this.getLevel(key.getLevelNumber());

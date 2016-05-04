@@ -50,9 +50,7 @@ public class InstalledDataPanel extends JPanel
     {
         if (worldWindow == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.worldWindow = worldWindow;
@@ -73,9 +71,7 @@ public class InstalledDataPanel extends JPanel
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.addToWorldWindow(domElement, params);
@@ -165,9 +161,6 @@ public class InstalledDataPanel extends JPanel
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.CreationFromConfigurationFailed",
-                DataConfigurationUtils.getDataConfigDisplayName(domElement));
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
 
         if (layer == null)
@@ -189,9 +182,6 @@ public class InstalledDataPanel extends JPanel
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.CreationFromConfigurationFailed",
-                DataConfigurationUtils.getDataConfigDisplayName(domElement));
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
 
         if (em == null)

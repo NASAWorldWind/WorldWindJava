@@ -201,17 +201,13 @@ public class MilStd2525PointGraphic extends AVListImpl implements MilStd2525Tact
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Iterator<? extends Position> iterator = positions.iterator();
         if (!iterator.hasNext())
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setPosition(iterator.next());
@@ -323,9 +319,7 @@ public class MilStd2525PointGraphic extends AVListImpl implements MilStd2525Tact
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.symbol.setPosition(position);
@@ -389,9 +383,7 @@ public class MilStd2525PointGraphic extends AVListImpl implements MilStd2525Tact
     {
         if (delta == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position refPos = this.getReferencePosition();

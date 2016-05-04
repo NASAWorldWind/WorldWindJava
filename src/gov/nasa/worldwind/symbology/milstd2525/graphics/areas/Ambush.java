@@ -14,7 +14,6 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.symbology.TacticalGraphicUtil;
 import gov.nasa.worldwind.symbology.milstd2525.AbstractMilStd2525TacticalGraphic;
 import gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -136,9 +135,7 @@ public class Ambush extends AbstractMilStd2525TacticalGraphic
     {
         if (intervals < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intervals = intervals;
@@ -167,9 +164,7 @@ public class Ambush extends AbstractMilStd2525TacticalGraphic
     {
         if (arcAngle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.arcAngle = arcAngle;
@@ -194,16 +189,12 @@ public class Ambush extends AbstractMilStd2525TacticalGraphic
     {
         if (arrowAngle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (arrowAngle.degrees <= 0 || arrowAngle.degrees >= 90)
         {
-            String msg = Logging.getMessage("generic.AngleOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.arrowAngle = arrowAngle;
@@ -230,9 +221,7 @@ public class Ambush extends AbstractMilStd2525TacticalGraphic
     {
         if (arrowLength < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.arrowLength = arrowLength;
@@ -258,9 +247,7 @@ public class Ambush extends AbstractMilStd2525TacticalGraphic
     {
         if (numLegs < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.numLegs = numLegs;
@@ -288,9 +275,7 @@ public class Ambush extends AbstractMilStd2525TacticalGraphic
     {
         if (legLength < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.legLength = legLength;
@@ -306,9 +291,7 @@ public class Ambush extends AbstractMilStd2525TacticalGraphic
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -320,9 +303,7 @@ public class Ambush extends AbstractMilStd2525TacticalGraphic
         }
         catch (NoSuchElementException e)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.onShapeChanged();

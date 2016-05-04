@@ -92,14 +92,12 @@ public class TrackAirspace extends AbstractAirspace
         if (start == null)
         {
             String message = "nullValue.StartIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (end == null)
         {
             String message = "nullValue.EndIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         boolean[] terrainConformant = this.isTerrainConforming();
@@ -118,8 +116,7 @@ public class TrackAirspace extends AbstractAirspace
         if (leg == null)
         {
             String message = "nullValue.LegIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         leg.setAlwaysOnTop(this.isAlwaysOnTop());
@@ -199,9 +196,7 @@ public class TrackAirspace extends AbstractAirspace
     {
         if (angle == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.smallAngleThreshold = angle;
@@ -259,9 +254,7 @@ public class TrackAirspace extends AbstractAirspace
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // If the parent TrackAirspace is not visible, then return false immediately without testing the child legs.
@@ -357,14 +350,12 @@ public class TrackAirspace extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Don't call super.moveTo(). Each box should move itself according to the properties it was constructed with.
@@ -382,14 +373,12 @@ public class TrackAirspace extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Don't call super.moveTo(). Each box should move itself according to the properties it was constructed with.
@@ -530,9 +519,7 @@ public class TrackAirspace extends AbstractAirspace
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())
@@ -562,9 +549,7 @@ public class TrackAirspace extends AbstractAirspace
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())

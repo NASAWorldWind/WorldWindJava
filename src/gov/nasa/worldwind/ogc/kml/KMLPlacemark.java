@@ -11,7 +11,6 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.event.Message;
 import gov.nasa.worldwind.ogc.kml.impl.*;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.xml.XMLEventParserContext;
 
 import javax.xml.stream.XMLStreamException;
@@ -237,9 +236,7 @@ public class KMLPlacemark extends KMLAbstractFeature
     {
         if (!(sourceValues instanceof KMLPlacemark))
         {
-            String message = Logging.getMessage("KML.InvalidElementType", sourceValues.getClass().getName());
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.applyChange(sourceValues);

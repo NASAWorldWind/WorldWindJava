@@ -5,7 +5,6 @@
  */
 package gov.nasa.worldwind.formats.nmea;
 
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.tracks.Track;
 import gov.nasa.worldwind.tracks.TrackSegment;
 import gov.nasa.worldwind.tracks.TrackPoint;
@@ -31,15 +30,11 @@ public class NmeaWriter
     {
         if (path == null)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (encoding == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.encoding = encoding;
@@ -58,15 +53,11 @@ public class NmeaWriter
     {
         if (stream == null)
         {
-            String msg = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (encoding == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         
         this.encoding = encoding;
@@ -85,9 +76,7 @@ public class NmeaWriter
     {
         if (track == null)
         {
-            String msg = Logging.getMessage("nullValue.TrackIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         doWriteTrack(track, this.printStream);

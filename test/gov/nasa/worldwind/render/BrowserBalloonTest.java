@@ -77,7 +77,7 @@ public class BrowserBalloonTest extends ApplicationTemplate
             String htmlString = getURLContent(url, null);
 
             if (htmlString == null)
-                htmlString = Logging.getMessage("URLRetriever.ErrorOpeningConnection", url.getHost());
+                htmlString = null;
 
             this.balloon.setResourceResolver(url);
             this.balloon.setText(htmlString);

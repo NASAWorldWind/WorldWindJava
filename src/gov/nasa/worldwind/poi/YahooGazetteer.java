@@ -9,14 +9,12 @@ package gov.nasa.worldwind.poi;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.exception.*;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.xml.parsers.*;
 import javax.xml.xpath.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * A gazetteer that uses Yahoo's geocoding service to find locations for requested places.
@@ -122,9 +120,7 @@ public class YahooGazetteer implements Gazetteer
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("Gazetteer.URLException", locationString);
-            Logging.logger().log(Level.SEVERE, msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
     }
 }

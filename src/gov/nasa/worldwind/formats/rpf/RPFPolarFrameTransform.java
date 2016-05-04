@@ -7,7 +7,6 @@ package gov.nasa.worldwind.formats.rpf;
 
 import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwind.geom.Sector;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.image.*;
 
@@ -39,21 +38,15 @@ class RPFPolarFrameTransform extends RPFFrameTransform
     {
         if (!RPFZone.isZoneCode(zoneCode))
         {
-            String message = Logging.getMessage("RPFZone.UnknownZoneCode", zoneCode);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (rpfDataType == null || !RPFDataSeries.isRPFDataType(rpfDataType))
         {
-            String message = Logging.getMessage("RPFDataSeries.UnkownDataType", rpfDataType);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (resolution < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", rpfDataType);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RPFPolarFrameStructure frameStructure = RPFPolarFrameStructure.computeStructure(
@@ -106,9 +99,7 @@ class RPFPolarFrameTransform extends RPFFrameTransform
 
         if (frameNumber < 0 || frameNumber > getMaximumFrameNumber())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", frameNumber);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int originX = pixelColumn(0, frameNumber, this.frameStructure.getPixelRowsPerFrame(),
@@ -129,9 +120,7 @@ class RPFPolarFrameTransform extends RPFFrameTransform
         int maxFrameNumber = getMaximumFrameNumber();
         if (frameNumber < 0 || frameNumber > maxFrameNumber)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", frameNumber);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int minX = pixelColumn(0, frameNumber, this.frameStructure.getPixelRowsPerFrame(),
@@ -204,9 +193,7 @@ class RPFPolarFrameTransform extends RPFFrameTransform
     {
         if (frame == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         PixelTransformer pt = (this.zoneCode == '9') ? northernPixels : southernPixels;

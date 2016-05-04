@@ -9,7 +9,6 @@ package gov.nasa.worldwind.symbology;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -209,16 +208,12 @@ public class TacticalGraphicUtil
     {
         if (coefficients == null || controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (coefficients.length != controlPoints.length)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", coefficients.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (coefficients[0] != 1)
@@ -249,16 +244,12 @@ public class TacticalGraphicUtil
     {
         if (coefficients == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (coefficients.length != n + 1)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", coefficients.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Algorithm from "Data Structures and Algorithms with Object-Oriented Design Patterns in Java" by Bruno R.

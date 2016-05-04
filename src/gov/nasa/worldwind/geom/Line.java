@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.geom;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author Tom Gaskins
  * @version $Id: Line.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -40,20 +38,6 @@ public final class Line// Instances are immutable
      */
     public Line(Vec4 origin, Vec4 direction)
     {
-        String message = null;
-        if (origin == null)
-            message = "nullValue.OriginIsNull";
-        else if (direction == null)
-            message = "nullValue.DirectionIsNull";
-        else if (direction.getLength3() <= 0)
-            message = "Geom.Line.DirectionIsZeroVector";
-        if (message != null)
-        {
-            message = Logging.getMessage(message);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
-        }
-
         this.origin = origin;
         this.direction = direction;
     }
@@ -126,7 +110,7 @@ public final class Line// Instances are immutable
 //        {
 //            String message = Logging.getMessage("nullValue.PointIsNull");
 //            Logging.logger().severe(message);
-//            throw new IllegalArgumentException(message);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        Vec4 origin = this.origin;
@@ -224,17 +208,13 @@ public final class Line// Instances are immutable
     {
         if (pa == null || pb == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (frustum == null)
         {
-            String message = Logging.getMessage("nullValue.FrustumIsNull");
 
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // First do a trivial accept test.

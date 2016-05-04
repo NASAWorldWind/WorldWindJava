@@ -16,7 +16,6 @@ import java.net.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.concurrent.atomic.*;
-import java.util.logging.Level;
 import java.util.regex.*;
 import java.util.zip.*;
 
@@ -64,9 +63,7 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String protocol = url.getProtocol();
@@ -89,9 +86,7 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.url = url;
@@ -270,8 +265,6 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
             this.setState(RETRIEVER_STATE_ERROR);
             if (!(e instanceof java.net.SocketTimeoutException))
             {
-                Logging.logger().log(Level.SEVERE,
-                    Logging.getMessage("URLRetriever.ErrorAttemptingToRetrieve", this.url.toString()), e);
             }
             throw e;
         }
@@ -295,8 +288,6 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
         if (Thread.currentThread().isInterrupted())
         {
             this.setState(RETRIEVER_STATE_INTERRUPTED);
-            String message = Logging.getMessage("URLRetriever.RetrievalInterruptedFor", this.url.toString());
-            Logging.logger().fine(message);
             return true;
         }
         return false;
@@ -314,16 +305,12 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
         }
         catch (java.io.IOException e)
         {
-            Logging.logger().log(Level.SEVERE,
-                Logging.getMessage("URLRetriever.ErrorOpeningConnection", this.url.toString()), e);
             throw e;
         }
 
         if (this.connection == null) // java.net.URL docs imply that this won't happen. We check anyway.
         {
-            String message = Logging.getMessage("URLRetriever.NullReturnedFromOpenConnection", this.url);
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (this.connection instanceof HttpsURLConnection)
@@ -355,8 +342,6 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
         catch (Exception e)
         {
             this.setState(RETRIEVER_STATE_ERROR);
-            Logging.logger().log(Level.SEVERE,
-                Logging.getMessage("Retriever.ErrorPostProcessing", this.url.toString()), e);
             throw e;
         }
     }
@@ -375,8 +360,6 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
             if (!(e instanceof java.net.SocketTimeoutException || e instanceof UnknownHostException
                 || e instanceof SocketException))
             {
-                Logging.logger().log(Level.SEVERE,
-                    Logging.getMessage("URLRetriever.ErrorReadingFromConnection", this.url.toString()), e);
             }
             throw e;
         }
@@ -394,9 +377,7 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
     {
         if (connection == null)
         {
-            String msg = Logging.getMessage("nullValue.ConnectionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.contentLength = this.connection.getContentLength();
@@ -408,7 +389,6 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
             inputStream = this.connection.getInputStream();
             if (inputStream == null)
             {
-                Logging.logger().log(Level.SEVERE, "URLRetriever.InputStreamFromConnectionNull", connection.getURL());
                 return null;
             }
 
@@ -421,7 +401,7 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
             if (this.contentType != null && this.contentType.equalsIgnoreCase("application/zip")
                 && !WWUtil.isEmpty(this.getValue(EXTRACT_ZIP_ENTRY)))
                 // Assume single file in zip and decompress it
-                buffer = this.readZipStream(inputStream, connection.getURL());
+                buffer = this.readZipStream(inputStream);
             else
                 buffer = this.readNonSpecificStream(inputStream, connection);
         }
@@ -437,9 +417,7 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
     {
         if (inputStream == null)
         {
-            String message = Logging.getMessage("URLRetriever.InputStreamNullFor", connection.getURL());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.contentLength < 1)
@@ -461,7 +439,7 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
                 this.contentLengthRead.getAndAdd(count);
             }
             if (count < 0)
-                throw new WWRuntimeException("Premature end of stream from server.");
+                throw new WWRuntimeException();
         }
 
         if (buffer != null)
@@ -512,13 +490,12 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
      *                                  reading.
      * @throws IllegalArgumentException if <code>inputStream</code> is null
      */
-    protected ByteBuffer readZipStream(InputStream inputStream, URL url) throws IOException
+    protected ByteBuffer readZipStream(InputStream inputStream) throws IOException
     {
         ZipInputStream zis = new ZipInputStream(inputStream);
         ZipEntry ze = zis.getNextEntry();
         if (ze == null)
         {
-            Logging.logger().severe(Logging.getMessage("URLRetriever.NoZipEntryFor") + url);
             return null;
         }
 

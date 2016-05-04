@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.dds;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author dcollins
  * @version $Id: DXT3Compressor.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -26,15 +24,11 @@ public class DXT3Compressor implements DXTCompressor
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // TODO: comment, provide documentation reference
@@ -50,21 +44,15 @@ public class DXT3Compressor implements DXTCompressor
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ColorBlock4x4 colorBlock = new ColorBlock4x4();

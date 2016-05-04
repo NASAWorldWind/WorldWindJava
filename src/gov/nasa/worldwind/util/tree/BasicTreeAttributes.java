@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.util.tree;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.awt.*;
 
 /**
@@ -55,9 +53,7 @@ public class BasicTreeAttributes implements TreeAttributes
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.copy(attributes);
@@ -86,9 +82,7 @@ public class BasicTreeAttributes implements TreeAttributes
     {
         if (textColor == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.textColor = textColor;
@@ -111,9 +105,7 @@ public class BasicTreeAttributes implements TreeAttributes
     {
         if (font == null)
         {
-            String msg = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.descriptionFont = font;
@@ -124,9 +116,7 @@ public class BasicTreeAttributes implements TreeAttributes
     {
         if (font == null)
         {
-            String msg = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.font = font;
@@ -155,9 +145,7 @@ public class BasicTreeAttributes implements TreeAttributes
     {
         if (iconSize == null)
         {
-            String message = Logging.getMessage("nullValue.SizeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.iconSize = iconSize;
     }
@@ -185,9 +173,7 @@ public class BasicTreeAttributes implements TreeAttributes
     {
         if (color1 == null || color2 == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.checkBoxColor1 = color1;

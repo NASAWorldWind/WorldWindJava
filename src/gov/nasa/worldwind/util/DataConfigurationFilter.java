@@ -37,9 +37,7 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
     {
         if (file == null)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // First check the file path, optionally returning false if the path cannot be accepted for any reason.
@@ -74,9 +72,7 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
     {
         if (url == null)
         {
-            String msg = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Document doc = null;
@@ -107,9 +103,7 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
     {
         if (inputStream == null)
         {
-            String msg = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Document doc = null;
@@ -141,16 +135,12 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
     {
         if (fileStore == null)
         {
-            String msg = Logging.getMessage("nullValue.FileStoreIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (fileName == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Attempt to locate the named path in the FileStore, optionally checking the class path. If a file with that
@@ -181,16 +171,12 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
     {
         if (doc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (doc.getDocumentElement() == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentElementIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.accept(doc.getDocumentElement());
@@ -209,9 +195,7 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return DataConfigurationUtils.isDataConfig(domElement);
@@ -221,9 +205,7 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return filePath.toLowerCase().endsWith(".xml");

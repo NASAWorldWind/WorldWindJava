@@ -7,7 +7,6 @@ package gov.nasa.worldwind.util.layertree;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.layers.*;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.tree.*;
 
 /**
@@ -72,9 +71,7 @@ public class LayerTreeModel extends BasicTreeModel
     {
         if (layerList == null)
         {
-            String message = Logging.getMessage("nullValue.LayersListArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.initialize();
@@ -135,9 +132,7 @@ public class LayerTreeModel extends BasicTreeModel
     {
         if (layerNode == null)
         {
-            String message = Logging.getMessage("nullValue.TreeNodeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.getRoot().addChild(layerNode);
@@ -158,9 +153,7 @@ public class LayerTreeModel extends BasicTreeModel
     {
         if (layer == null)
         {
-            String message = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LayerTreeNode layerNode = this.createLayerNode(layer);
@@ -205,9 +198,7 @@ public class LayerTreeModel extends BasicTreeModel
     {
         if (layerList == null)
         {
-            String message = Logging.getMessage("nullValue.LayersListArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Replace all the layer nodes in the tree with nodes for the current layers.

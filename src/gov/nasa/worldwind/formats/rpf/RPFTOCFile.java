@@ -41,11 +41,11 @@ public class RPFTOCFile extends RPFFile
             (RPFUserDefinedHeaderSegment)this.getNITFSSegment( NITFSSegmentType.USER_DEFINED_HEADER_SEGMENT);
 
         if(null ==  segment)
-            throw new NITFSRuntimeException("NITFSReader.UserDefinedHeaderSegmentWasNotFound");
+            throw new NITFSRuntimeException();
 
         this.rpfFileComponents = segment.getRPFFileComponents();
         if(null == this.rpfFileComponents)
-            throw new NITFSRuntimeException("NITFSReader.RPFFileComponents.Were.Not.Found.In.UserDefinedHeaderSegment");
+            throw new NITFSRuntimeException();
     }
 
     public static RPFTOCFile load(java.io.File tocFile) throws java.io.IOException

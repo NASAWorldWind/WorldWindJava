@@ -182,9 +182,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         CacheEntry entry = this.extentCache.get(dc.getGlobe().getGlobeStateKey());
@@ -205,9 +203,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())
@@ -224,9 +220,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // This method is called only during ordered picking. Therefore we setup for picking and draw this object to the
@@ -259,9 +253,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())
@@ -592,7 +584,6 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
         SurfaceTileDrawContext sdc = (SurfaceTileDrawContext) dc.getValue(AVKey.SURFACE_TILE_DRAW_CONTEXT);
         if (sdc == null)
         {
-            Logging.logger().warning(Logging.getMessage("nullValue.SurfaceTileDrawContextIsNull"));
             return;
         }
 

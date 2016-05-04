@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.event.Message;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * Represents the KML <i>LatLonBox</i> element and provides access to its contents.
@@ -52,9 +51,7 @@ public abstract class KMLAbstractLatLonBoxType extends KMLAbstractObject
     {
         if (!(sourceValues instanceof KMLAbstractLatLonBoxType))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.applyChange(sourceValues);

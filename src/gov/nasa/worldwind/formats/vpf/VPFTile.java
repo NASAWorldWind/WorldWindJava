@@ -7,7 +7,6 @@ package gov.nasa.worldwind.formats.vpf;
 
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author dcollins
@@ -23,16 +22,12 @@ public class VPFTile implements ExtentHolder
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bounds == null)
         {
-            String message = Logging.getMessage("nullValue.BoundingBoxIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.id = id;
@@ -59,9 +54,7 @@ public class VPFTile implements ExtentHolder
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return Sector.computeBoundingCylinder(globe, verticalExaggeration, this.bounds.toSector());

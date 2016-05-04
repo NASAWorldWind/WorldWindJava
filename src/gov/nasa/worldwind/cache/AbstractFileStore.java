@@ -9,8 +9,6 @@ import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.util.*;
 
-import java.util.logging.Level;
-
 /**
  * @author tag
  * @version $Id: AbstractFileStore.java 2190 2014-08-01 21:54:20Z pabercrombie $
@@ -93,34 +91,25 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
 
             if (this.writeLocation == null)
             {
-                Logging.logger().warning("FileStore.NoWriteLocation");
             }
 
             if (this.readLocations.size() == 0)
             {
                 // This should not happen because the writable location is added to the read list, but check nonetheless
-                String message = Logging.getMessage("FileStore.NoReadLocations");
-                Logging.logger().severe(message);
-                throw new IllegalStateException(message);
+                    throw new IllegalStateException();
             }
         }
         catch (javax.xml.parsers.ParserConfigurationException e)
         {
-            String message = Logging.getMessage("FileStore.ExceptionReadingConfigurationFile");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message, e);
+            throw new IllegalStateException(e);
         }
         catch (org.xml.sax.SAXException e)
         {
-            String message = Logging.getMessage("FileStore.ExceptionReadingConfigurationFile");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message, e);
+            throw new IllegalStateException(e);
         }
         catch (java.io.IOException e)
         {
-            String message = Logging.getMessage("FileStore.ExceptionReadingConfigurationFile");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message, e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -147,8 +136,6 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
                 String path = buildLocationPath(prop, append, wwDir);
                 if (path == null)
                 {
-                    Logging.logger().log(Level.WARNING, "FileStore.LocationInvalid",
-                        prop != null ? prop : Logging.getMessage("generic.Unknown"));
                     continue;
                 }
 
@@ -162,7 +149,6 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
                 java.io.File pathFile = new java.io.File(path);
                 if (pathFile.exists() && !pathFile.isDirectory())
                 {
-                    Logging.logger().log(Level.WARNING, "FileStore.LocationIsFile", pathFile.getPath());
                 }
 
                 boolean pathIsInstall = isInstall != null && (isInstall.contains("t") || isInstall.contains("T"));
@@ -179,9 +165,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
         }
         catch (javax.xml.xpath.XPathExpressionException e)
         {
-            String message = Logging.getMessage("FileStore.ExceptionReadingConfigurationFile");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message, e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -208,22 +192,17 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
                 String path = buildLocationPath(prop, append, wwDir);
                 if (path == null)
                 {
-                    Logging.logger().log(Level.WARNING, "FileStore.LocationInvalid",
-                        prop != null ? prop : Logging.getMessage("generic.Unknown"));
                     continue;
                 }
 
-                Logging.logger().log(Level.FINER, "FileStore.AttemptingWriteDir", path);
                 java.io.File pathFile = new java.io.File(path);
                 if (!pathFile.exists() && create != null && (create.contains("t") || create.contains("T")))
                 {
-                    Logging.logger().log(Level.FINER, "FileStore.MakingDirsFor", path);
                     pathFile.mkdirs();
                 }
 
                 if (pathFile.isDirectory() && pathFile.canWrite() && pathFile.canRead())
                 {
-                    Logging.logger().log(Level.FINER, "FileStore.WriteLocationSuccessful", path);
                     this.writeLocation = new StoreLocation(pathFile);
 
                     // Remove the writable location from search path if it already exists.
@@ -240,9 +219,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
         }
         catch (javax.xml.xpath.XPathExpressionException e)
         {
-            String message = Logging.getMessage("FileStore.ExceptionReadingConfigurationFile");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message, e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -288,7 +265,6 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
             String path = System.getenv("ALLUSERSPROFILE");
             if (path == null)
             {
-                Logging.logger().severe("generic.AllUsersWindowsProfileNotKnown");
                 return null;
             }
             return path + (Configuration.isWindows7OS() ? "" : "\\Application Data");
@@ -300,7 +276,6 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
         }
         else
         {
-            Logging.logger().warning("generic.UnknownOperatingSystem");
             return null;
         }
     }
@@ -310,7 +285,6 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
         String home = getUserHomeDir();
         if (home == null)
         {
-            Logging.logger().warning("generic.UsersHomeDirectoryNotKnown");
             return null;
         }
 
@@ -341,7 +315,6 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
         }
         else
         {
-            Logging.logger().fine("generic.UnknownOperatingSystem");
         }
 
         if (path == null)
@@ -383,16 +356,12 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
     {
         if (newPath == null || newPath.length() == 0)
         {
-            String message = Logging.getMessage("nullValue.FileStorePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (index < 0)
         {
-            String message = Logging.getMessage("generic.InvalidIndex", index);
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         StoreLocation oldLocation = this.storeLocationFor(newPath);
@@ -410,8 +379,6 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
     {
         if (path == null || path.length() == 0)
         {
-            String message = Logging.getMessage("nullValue.FileStorePathIsNull");
-            Logging.logger().severe(message);
             // Just warn and return.
             return;
         }
@@ -422,9 +389,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
 
         if (location.equals(this.writeLocation))
         {
-            String message = Logging.getMessage("FileStore.CannotRemoveWriteLocation", path);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.readLocations.remove(location);
@@ -434,9 +399,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
     {
         if (path == null || path.length() == 0)
         {
-            String message = Logging.getMessage("nullValue.FileStorePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         StoreLocation location = this.storeLocationFor(path);
@@ -495,9 +458,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
     {
         if (fileName == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (checkClassPath)
@@ -537,8 +498,6 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
                 }
                 catch (java.net.MalformedURLException e)
                 {
-                    Logging.logger().log(Level.SEVERE,
-                        Logging.getMessage("FileStore.ExceptionCreatingURLForFile", file.getPath()), e);
                 }
             }
         }
@@ -576,9 +535,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
     {
         if (fileName == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.writeLocation != null)
@@ -603,9 +560,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
                 return file;
             else
             {
-                String msg = Logging.getMessage("generic.CannotCreateFile", fullPath);
-                Logging.logger().severe(msg);
-            }
+                }
         }
 
         return null;
@@ -622,9 +577,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
     {
         if (url == null)
         {
-            String msg = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -650,8 +603,6 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
         }
         catch (java.net.URISyntaxException e)
         {
-            Logging.logger().log(Level.SEVERE, Logging.getMessage("FileStore.ExceptionRemovingFile", url.toString()),
-                e);
         }
     }
 
@@ -698,9 +649,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
     {
         if (filter == null)
         {
-            String msg = Logging.getMessage("nullValue.FilterIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Do not recurse.
@@ -711,9 +660,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
     {
         if (filter == null)
         {
-            String msg = Logging.getMessage("nullValue.FilterIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Recurse, and continue to search each branch after a match is found.
@@ -724,9 +671,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
     {
         if (filter == null)
         {
-            String msg = Logging.getMessage("nullValue.FilterIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Recurse, but stop searching a branch after a match is found.

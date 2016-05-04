@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.layers;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 
@@ -53,9 +52,7 @@ public class GraticuleRenderingParams extends AVListImpl
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         setValue(KEY_LINE_COLOR, color);
@@ -83,9 +80,7 @@ public class GraticuleRenderingParams extends AVListImpl
     {
         if (lineStyle == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         setValue(KEY_LINE_STYLE, lineStyle);
@@ -112,9 +107,7 @@ public class GraticuleRenderingParams extends AVListImpl
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         setValue(KEY_LABEL_COLOR, color);
@@ -130,9 +123,7 @@ public class GraticuleRenderingParams extends AVListImpl
     {
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         setValue(KEY_LABEL_FONT, font);

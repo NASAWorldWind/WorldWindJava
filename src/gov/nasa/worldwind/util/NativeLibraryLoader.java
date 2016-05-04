@@ -19,8 +19,7 @@ public class NativeLibraryLoader
     {
         if (WWUtil.isEmpty(libName))
         {
-            String message = Logging.getMessage("nullValue.LibraryIsNull");
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -29,13 +28,11 @@ public class NativeLibraryLoader
         }
         catch (java.lang.UnsatisfiedLinkError ule)
         {
-            String message = Logging.getMessage("generic.LibraryNotLoaded", libName, ule.getMessage());
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
         catch (Throwable t)
         {
-            String message = Logging.getMessage("generic.LibraryNotLoaded", libName, t.getMessage());
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
     }
 

@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.wms;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author tag
  * @version $Id: BoundingBox.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -38,8 +36,6 @@ public class BoundingBox
         }
         catch (NumberFormatException e)
         {
-            String message = Logging.getMessage("XML.ImproperDataType");
-            Logging.logger().severe(message);
             throw e;
         }
 

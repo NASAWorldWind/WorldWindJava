@@ -7,7 +7,6 @@ package gov.nasa.worldwind.terrain;
 
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.ElevationModel;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -42,9 +41,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (em == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationModelIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Check if the elevation model is one of the models in our list.
@@ -105,9 +102,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (em == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationModelIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.elevationModels.add(em);
@@ -133,9 +128,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (em == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationModelIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.elevationModels.add(index, em); // the list's add method will throw exception for invalid index
@@ -145,9 +138,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (em == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationModelIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (ElevationModel child : this.elevationModels)
@@ -163,9 +154,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (index < 0 || index >= this.elevationModels.size())
         {
-            String msg = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.elevationModels.remove(index);
@@ -175,16 +164,12 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (em == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationModelIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (index < 0 || index >= this.elevationModels.size())
         {
-            String msg = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.elevationModels.set(index, em);
@@ -251,9 +236,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double[] retVal = null;
@@ -284,9 +267,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double[] retVal = null;
@@ -354,9 +335,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Find the first elevation model intersecting the sector, starting with the hightest resolution. Return the
@@ -381,9 +360,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         boolean intersects = false;
@@ -408,9 +385,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (ElevationModel em : this.elevationModels)
@@ -429,9 +404,7 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Find the best elevation available at the specified (latitude, longitude) coordinates.
@@ -543,37 +516,27 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (latlons == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (targetResolution == null)
         {
-            String msg = Logging.getMessage("nullValue.TargetElevationsArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationsBufferIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.length < latlons.size())
         {
-            String msg = Logging.getMessage("ElevationModel.ElevationsBufferTooSmall", latlons.size());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Fill the buffer with ElevationModel contents from lowest resolution to highest, potentially overwriting
@@ -610,30 +573,22 @@ public class CompoundElevationModel extends AbstractElevationModel
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (latlons == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationsBufferIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.length < latlons.size())
         {
-            String msg = Logging.getMessage("ElevationModel.ElevationsBufferTooSmall", latlons.size());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Fill the buffer with ElevationModel contents from back to front, potentially overwriting values at each step.

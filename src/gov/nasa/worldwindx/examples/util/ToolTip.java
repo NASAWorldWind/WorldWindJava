@@ -6,7 +6,6 @@
 package gov.nasa.worldwindx.examples.util;
 
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.*;
 
 /**
  * @author dcollins
@@ -35,9 +34,7 @@ public class ToolTip implements OrderedRenderable
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.doRender(dc);

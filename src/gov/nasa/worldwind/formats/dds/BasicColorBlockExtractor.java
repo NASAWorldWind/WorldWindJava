@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.dds;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * Provides access to 4x4 blocks of pixel data from a <code>BufferedImage</code> via the
  * <code>ColorBlockExtractor</code> interface. This class is not thread safe. Unsynchronized access will result in
@@ -45,9 +43,7 @@ public class BasicColorBlockExtractor implements ColorBlockExtractor
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         
         this.width = image.getWidth();
@@ -88,15 +84,11 @@ public class BasicColorBlockExtractor implements ColorBlockExtractor
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (colorBlock == null)
         {
-            String message = Logging.getMessage("nullValue.ColorBlockIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Image blocks that are smaller than 4x4 are handled by repeating the image pixels that intersect the

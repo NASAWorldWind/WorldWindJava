@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * Subdivides an image into tiles and computes the corresponding sectors. The width and height of the returned tiles can
@@ -78,30 +77,22 @@ public class ImageTiler
     {
         if (baseImage == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (baseSector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (baseImage.getWidth() <= 0 || baseImage.getHeight() <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidImageSize");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (listener == null)
         {
-            String message = Logging.getMessage("nullValue.ListenerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Just return the input image if it's already the desired subimage size
@@ -205,30 +196,22 @@ public class ImageTiler
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.LocationsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (image.getWidth() <= 0 || image.getHeight() <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidImageSize");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (listener == null)
         {
-            String message = Logging.getMessage("nullValue.ListenerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Just return the input image if it's already the desired subimage size
@@ -244,9 +227,7 @@ public class ImageTiler
         {
             if (c == null)
             {
-                String message = Logging.getMessage("nullValue.LocationInListIsNull");
-                Logging.logger().log(Level.SEVERE, message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (++numCorners > 3)
@@ -255,9 +236,7 @@ public class ImageTiler
 
         if (numCorners < 4)
         {
-            String message = Logging.getMessage("nullValue.LocationInListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GeoQuad geoQuad = new GeoQuad(corners);

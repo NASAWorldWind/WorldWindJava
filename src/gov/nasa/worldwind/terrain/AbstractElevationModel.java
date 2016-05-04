@@ -108,9 +108,7 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return 0.0;
@@ -130,9 +128,7 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double e = this.getUnmappedElevation(latitude, longitude);
@@ -163,9 +159,7 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
 
     public void restoreState(String stateInXml)
     {
-        String message = Logging.getMessage("RestorableSupport.RestoreNotSupported");
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 
     public void composeElevations(Sector sector, List<? extends LatLon> latlons, int tileWidth, double[] buffer)
@@ -173,37 +167,27 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (latlons == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationsBufferIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (tileWidth < 1)
         {
-            String msg = Logging.getMessage("generic.SizeOutOfRange", tileWidth);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.length < latlons.size() || tileWidth > latlons.size())
         {
-            String msg = Logging.getMessage("ElevationModel.ElevationsBufferTooSmall", latlons.size());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (int i = 0; i < latlons.size(); i++)
@@ -238,9 +222,7 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();
@@ -269,16 +251,12 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         WWXML.checkAndAppendTextElement(params, AVKey.DISPLAY_NAME, context, "DisplayName");
@@ -328,9 +306,7 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)

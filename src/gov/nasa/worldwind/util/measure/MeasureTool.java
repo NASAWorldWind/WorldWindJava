@@ -189,9 +189,7 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.wwd = wwd;
         this.applicationLayer = applicationLayer; // can be null
@@ -263,21 +261,21 @@ public class MeasureTool extends AVListImpl implements Disposable
 
     protected void setInitialLabels()
     {
-        this.setLabel(ACCUMULATED_LABEL, Logging.getMessage(ACCUMULATED_LABEL));
-        this.setLabel(ANGLE_LABEL, Logging.getMessage(ANGLE_LABEL));
-        this.setLabel(AREA_LABEL, Logging.getMessage(AREA_LABEL));
-        this.setLabel(CENTER_LATITUDE_LABEL, Logging.getMessage(CENTER_LATITUDE_LABEL));
-        this.setLabel(CENTER_LONGITUDE_LABEL, Logging.getMessage(CENTER_LONGITUDE_LABEL));
-        this.setLabel(HEADING_LABEL, Logging.getMessage(HEADING_LABEL));
-        this.setLabel(HEIGHT_LABEL, Logging.getMessage(HEIGHT_LABEL));
-        this.setLabel(LATITUDE_LABEL, Logging.getMessage(LATITUDE_LABEL));
-        this.setLabel(LONGITUDE_LABEL, Logging.getMessage(LONGITUDE_LABEL));
-        this.setLabel(LENGTH_LABEL, Logging.getMessage(LENGTH_LABEL));
-        this.setLabel(MAJOR_AXIS_LABEL, Logging.getMessage(MAJOR_AXIS_LABEL));
-        this.setLabel(MINOR_AXIS_LABEL, Logging.getMessage(MINOR_AXIS_LABEL));
-        this.setLabel(PERIMETER_LABEL, Logging.getMessage(PERIMETER_LABEL));
-        this.setLabel(RADIUS_LABEL, Logging.getMessage(RADIUS_LABEL));
-        this.setLabel(WIDTH_LABEL, Logging.getMessage(WIDTH_LABEL));
+        this.setLabel(ACCUMULATED_LABEL, null);
+        this.setLabel(ANGLE_LABEL, null);
+        this.setLabel(AREA_LABEL, null);
+        this.setLabel(CENTER_LATITUDE_LABEL, null);
+        this.setLabel(CENTER_LONGITUDE_LABEL, null);
+        this.setLabel(HEADING_LABEL, null);
+        this.setLabel(HEIGHT_LABEL, null);
+        this.setLabel(LATITUDE_LABEL, null);
+        this.setLabel(LONGITUDE_LABEL, null);
+        this.setLabel(LENGTH_LABEL, null);
+        this.setLabel(MAJOR_AXIS_LABEL, null);
+        this.setLabel(MINOR_AXIS_LABEL, null);
+        this.setLabel(PERIMETER_LABEL, null);
+        this.setLabel(RADIUS_LABEL, null);
+        this.setLabel(WIDTH_LABEL, null);
     }
 
     public WorldWindow getWwd()
@@ -306,9 +304,7 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (unitsFormat == null)
         {
-            String msg = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.unitsFormat = unitsFormat;
@@ -358,9 +354,7 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (labelName == null)
         {
-            String msg = Logging.getMessage("nullValue.LabelName");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         String label = this.getStringValue(labelName);
@@ -462,9 +456,7 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (newPositions == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (newPositions.size() < 2)
@@ -532,9 +524,7 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.lineColor = color;
         if (this.line != null)
@@ -562,9 +552,7 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.fillColor = color;
         if (this.surfaceShape != null)
@@ -717,9 +705,7 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (shape == null)
         {
-            String msg = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.measureShapeType.equals(shape))
@@ -758,21 +744,15 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (shapeType == null)
         {
-            String msg = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (centerPosition == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (orientation == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (isRegularShape(shapeType))
@@ -807,9 +787,7 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (line == null)
         {
-            String msg = Logging.getMessage("nullValue.Shape");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         setArmed(false);
         this.clear();
@@ -855,9 +833,7 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (surfaceShape == null)
         {
-            String msg = Logging.getMessage("nullValue.Shape");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         setArmed(false);
@@ -1157,9 +1133,7 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (point.getValue(CONTROL_TYPE_REGULAR_SHAPE) != null)
         {
@@ -1199,15 +1173,11 @@ public class MeasureTool extends AVListImpl implements Disposable
     {
         if (distance == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (azimuth == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.isRegularShape())
@@ -2036,9 +2006,7 @@ public class MeasureTool extends AVListImpl implements Disposable
         {
             if (dc == null)
             {
-                String message = Logging.getMessage("nullValue.DrawContextIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (this.leaderLine != null)
@@ -2050,9 +2018,7 @@ public class MeasureTool extends AVListImpl implements Disposable
         {
             if (dc == null)
             {
-                String message = Logging.getMessage("nullValue.DrawContextIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (this.leaderLine != null)
@@ -2065,16 +2031,12 @@ public class MeasureTool extends AVListImpl implements Disposable
         {
             if (begin == null)
             {
-                String message = Logging.getMessage("nullValue.BeginIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (end == null)
             {
-                String message = Logging.getMessage("nullValue.EndIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.leaderLine.setLocations(Arrays.asList(begin, end));

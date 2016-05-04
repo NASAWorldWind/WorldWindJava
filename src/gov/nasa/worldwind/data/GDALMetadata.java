@@ -37,9 +37,7 @@ public class GDALMetadata
     {
         if (null == ds)
         {
-            String message = Logging.getMessage("nullValue.DataSetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (null == extParams)
@@ -70,7 +68,6 @@ public class GDALMetadata
         }
         catch (Throwable t)
         {
-            Logging.logger().log(java.util.logging.Level.FINE, t.getMessage(), t);
         }
 
         return mapExtendedMetadata(ds, extParams, params);
@@ -162,9 +159,7 @@ public class GDALMetadata
                 }
                 catch (Exception e)
                 {
-                    String msg = Logging.getMessage("generic.CannotCreateColor", o);
-                    Logging.logger().severe(msg);
-                }
+                        }
             }
         }
     }
@@ -331,7 +326,6 @@ public class GDALMetadata
             }
             catch (Throwable t)
             {
-                Logging.logger().log(java.util.logging.Level.FINEST, t.getMessage(), t);
             }
         }
 

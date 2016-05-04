@@ -13,7 +13,6 @@ import gov.nasa.worldwind.util.*;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * @author dcollins
@@ -57,9 +56,7 @@ public class SessionState
     {
         if (WWUtil.isEmpty(sessionKey))
         {
-            String msg = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.sessionKey = sessionKey;
@@ -74,9 +71,7 @@ public class SessionState
     {
         if (worldWindow == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.saveViewState(worldWindow);
@@ -87,9 +82,7 @@ public class SessionState
     {
         if (worldWindow == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.restoreViewState(worldWindow);
@@ -120,7 +113,6 @@ public class SessionState
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, "Unable to save view state: " + view, e);
         }
     }
 
@@ -144,16 +136,13 @@ public class SessionState
             String stateInXml = WWIO.readTextFile(stateFile);
             if (WWUtil.isEmpty(stateInXml))
             {
-                String msg = Logging.getMessage("nullValue.RestorableStateIsNull");
-                Logging.logger().warning(msg);
-                return;
+                    return;
             }
 
             worldWindow.getView().restoreState(stateInXml);
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, "Unable to restore view state: " + stateFile, e);
         }
     }
 
@@ -187,7 +176,6 @@ public class SessionState
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, "Unable to save layer list state: " + stateFile, e);
         }
     }
 
@@ -228,7 +216,6 @@ public class SessionState
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, "Unable to restore layer list state: " + stateFile, e);
         }
     }
 
@@ -252,7 +239,6 @@ public class SessionState
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, "Unable to save layer state: " + layer, e);
         }
     }
 
@@ -265,16 +251,13 @@ public class SessionState
             String stateInXml = WWIO.readTextFile(stateFile);
             if (WWUtil.isEmpty(stateInXml))
             {
-                String msg = Logging.getMessage("nullValue.RestorableStateIsNull");
-                Logging.logger().warning(msg);
-                return null;
+                    return null;
             }
 
             // Get the Layer's class name fom its encoded filename.
             LayerStateFilename fn = parseLayerStateFilename(stateFile.getName());
             if (fn == null)
             {
-                Logging.logger().warning("Invalid layer state filename: " + stateFile.getName());
                 return null;
             }
 
@@ -287,7 +270,6 @@ public class SessionState
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, "Unable to restore layer state: " + stateFile, e);
             return null;
         }
     }

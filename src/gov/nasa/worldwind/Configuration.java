@@ -15,7 +15,6 @@ import javax.media.opengl.*;
 import javax.xml.xpath.*;
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * This class manages the initial World Wind configuration. It reads World Wind configuration files and registers their
@@ -97,8 +96,6 @@ public class Configuration // Singleton
         }
         catch (Exception e)
         {
-            Logging.logger(DEFAULT_LOGGER_NAME).log(Level.WARNING, "Configuration.ConfigNotFound",
-                System.getProperty(CONFIG_APP_DOCUMENT_KEY));
             // Don't stop if the app config file can't be found or parsed
         }
 
@@ -115,8 +112,6 @@ public class Configuration // Singleton
         }
         catch (Exception e)
         {
-            Logging.logger(DEFAULT_LOGGER_NAME).log(Level.WARNING, "Configuration.ConfigNotFound",
-                System.getProperty(CONFIG_WW_DOCUMENT_KEY));
         }
 
         // To support old-style configuration, read an existing config properties file and give the properties
@@ -173,7 +168,6 @@ public class Configuration // Singleton
         }
         catch (XPathExpressionException e)
         {
-            Logging.logger(DEFAULT_LOGGER_NAME).log(Level.WARNING, "XML.ParserConfigurationException");
         }
     }
 
@@ -206,8 +200,6 @@ public class Configuration // Singleton
                 }
                 catch (FileNotFoundException e)
                 {
-                    Logging.logger(DEFAULT_LOGGER_NAME).log(Level.FINEST, "Configuration.LocalConfigFileNotFound",
-                        configFileName);
                 }
             }
 
@@ -223,7 +215,6 @@ public class Configuration // Singleton
         // Configuration when this Configuration instance is not yet fully instantiated.
         catch (IOException e)
         {
-            Logging.logger(DEFAULT_LOGGER_NAME).log(Level.SEVERE, "Configuration.ExceptionReadingPropsFile", e);
         }
     }
 
@@ -294,7 +285,6 @@ public class Configuration // Singleton
         }
         catch (NumberFormatException e)
         {
-            Logging.logger().log(Level.SEVERE, "Configuration.ConversionError", v);
             return null;
         }
     }
@@ -334,7 +324,6 @@ public class Configuration // Singleton
         }
         catch (NumberFormatException e)
         {
-            Logging.logger().log(Level.SEVERE, "Configuration.ConversionError", v);
             return null;
         }
     }
@@ -374,7 +363,6 @@ public class Configuration // Singleton
         }
         catch (NumberFormatException e)
         {
-            Logging.logger().log(Level.SEVERE, "Configuration.ConversionError", v);
             return null;
         }
     }
@@ -424,7 +412,6 @@ public class Configuration // Singleton
         }
         else
         {
-            Logging.logger().log(Level.SEVERE, "Configuration.ConversionError", v);
             return null;
         }
     }
@@ -528,8 +515,6 @@ public class Configuration // Singleton
         }
         else
         {
-            String msg = Logging.getMessage("generic.UnknownOperatingSystem");
-            Logging.logger().fine(msg);
             return null;
         }
     }

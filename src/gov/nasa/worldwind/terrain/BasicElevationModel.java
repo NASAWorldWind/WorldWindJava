@@ -73,9 +73,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ElevationModelConfigParams");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String s = params.getStringValue(AVKey.BYTE_ORDER);
@@ -165,9 +163,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", restorableStateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         this.doRestoreState(rs, null);
@@ -309,9 +305,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (dataType == null)
         {
-            String message = Logging.getMessage("nullValue.DataTypeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.elevationDataType = dataType;
@@ -326,9 +320,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (byteOrder == null)
         {
-            String message = Logging.getMessage("nullValue.ByteOrderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.elevationDataByteOrder = byteOrder;
@@ -346,9 +338,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.levels.getSector().contains(latitude, longitude);
@@ -442,19 +432,14 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
                         // Assume that something's wrong with the file and delete it.
                         this.elevationModel.getDataFileStore().removeFile(url);
                         this.elevationModel.levels.markResourceAbsent(tile);
-                        String message = Logging.getMessage("generic.DeletedCorruptDataFile", url);
-                        Logging.logger().info(message);
-                    }
+                                }
                 }
 
                 this.elevationModel.downloadElevations(tile);
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("ElevationModel.ExceptionRequestingElevations",
-                    this.tileKey.toString());
-                Logging.logger().log(java.util.logging.Level.FINE, msg, e);
-            }
+                }
         }
 
         public final boolean equals(Object o)
@@ -491,8 +476,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
 
         // The file has expired. Delete it.
         fileStore.removeFile(fileURL);
-        String message = Logging.getMessage("generic.DataFileExpired", fileURL);
-        Logging.logger().fine(message);
         return true;
     }
 
@@ -551,8 +534,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         }
         catch (Exception e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE,
-                "ElevationModel.ExceptionReadingElevationFile", url.toString());
             throw e;
         }
     }
@@ -582,9 +563,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         DataRasterReader reader = readerFactory.findReaderFor(file, null);
         if (reader == null)
         {
-            String msg = Logging.getMessage("generic.UnknownFileFormatOrMatchingReaderNotFound", file.getPath());
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         // Read the file into the raster.
@@ -596,9 +575,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
 
         if (rasters == null || rasters.length == 0)
         {
-            String msg = Logging.getMessage("ElevationModel.CannotReadElevations", file.getAbsolutePath());
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         DataRaster raster = rasters[0];
@@ -613,9 +590,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         final Sector sector = (Sector) raster.getValue(AVKey.SECTOR);
         if (sector == null)
         {
-            String msg = Logging.getMessage("DataRaster.MissingMetadata", AVKey.SECTOR);
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         DataRaster subRaster = raster.getSubRaster(width, height, sector, raster);
@@ -623,9 +598,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         // Verify that the sub-raster can create a ByteBuffer, then create one.
         if (!(subRaster instanceof ByteBufferRaster))
         {
-            String msg = Logging.getMessage("ElevationModel.CannotCreateElevationBuffer", file.getPath());
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
         ByteBuffer elevations = ((ByteBufferRaster) subRaster).getByteBuffer();
 
@@ -639,9 +612,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         String dataType = bufferParams.getStringValue(AVKey.DATA_TYPE);
         if (WWUtil.isEmpty(dataType))
         {
-            String msg = Logging.getMessage("DataRaster.MissingMetadata", AVKey.DATA_TYPE);
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         BufferWrapper bufferWrapper = BufferWrapper.wrap(elevations, bufferParams);
@@ -862,8 +833,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         }
         catch (java.net.MalformedURLException e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("TiledElevationModel.ExceptionCreatingElevationsUrl", url), e);
             return;
         }
 
@@ -971,7 +940,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
 //            {
 //                String msg = Logging.getMessage("ElevationModel.SourceNotElevations", tmpFile.getAbsolutePath());
 //                Logging.logger().severe(msg);
-//                throw new IllegalArgumentException(msg);
+//                throw new IllegalArgumentException();
 //            }
 //
 //            // Read the file into the raster.
@@ -980,7 +949,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
 //            {
 //                String msg = Logging.getMessage("ElevationModel.CannotReadElevations", tmpFile.getAbsolutePath());
 //                Logging.logger().severe(msg);
-//                throw new WWRuntimeException(msg);
+//                throw new WWRuntimeException();
 //            }
 //
 //            DataRaster raster = rasters[0];
@@ -1012,9 +981,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         {
             if (latitude == null || longitude == null)
             {
-                String msg = Logging.getMessage("nullValue.AngleIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (this.tiles == null)
@@ -1035,8 +1002,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
             {
                 // Throwing an exception within what's likely to be the caller's geometry creation loop
                 // would be hard to recover from, and a reasonable response to the exception can be done here.
-                Logging.logger().log(java.util.logging.Level.SEVERE,
-                    Logging.getMessage("BasicElevationModel.ExceptionComputingElevation", latitude, longitude), e);
 
                 return null;
             }
@@ -1046,9 +1011,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         {
             if (latitude == null || longitude == null)
             {
-                String msg = Logging.getMessage("nullValue.AngleIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (this.extremes != null)
@@ -1160,9 +1123,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.contains(latitude, longitude))
@@ -1225,9 +1186,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.contains(latitude, longitude))
@@ -1253,9 +1212,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("ElevationModel.ExceptionRequestingElevations",
-                tileKey.toString());
-            Logging.logger().log(java.util.logging.Level.FINE, msg, e);
         }
 
         tile = this.getTileFromMemory(tileKey);
@@ -1278,30 +1234,22 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (latlons == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationsBufferIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.length < latlons.size())
         {
-            String msg = Logging.getMessage("ElevationModel.ElevationsBufferTooSmall", latlons.size());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Level targetLevel = this.getTargetLevel(sector, targetResolution);
@@ -1415,9 +1363,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (latitude == null || longitude == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.extremesLevel < 0 || this.extremes == null)
@@ -1445,9 +1391,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("BasicElevationModel.ExceptionDeterminingExtremes",
-                new LatLon(latitude, longitude));
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
 
             return new double[] {this.getMinElevation(), this.getMaxElevation()};
         }
@@ -1457,9 +1400,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -1482,8 +1423,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("BasicElevationModel.ExceptionDeterminingExtremes", sector);
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
 
             return new double[] {this.getMinElevation(), this.getMaxElevation()};
         }
@@ -1493,9 +1432,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (extremesFileName == null)
         {
-            String message = Logging.getMessage("nullValue.ExtremeElevationsFileName");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         InputStream is = null;
@@ -1509,8 +1446,8 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
                 if (file.exists())
                     is = new FileInputStream(file);
                 else
-                    Logging.logger().log(java.util.logging.Level.WARNING, "BasicElevationModel.UnavailableExtremesFile",
-                        extremesFileName);
+                {
+                }
             }
 
             if (is == null)
@@ -1522,8 +1459,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
             if (this.extremesLevel < 0)
             {
                 this.extremes = null;
-                Logging.logger().log(java.util.logging.Level.WARNING, "BasicElevationModel.UnavailableExtremesLevel",
-                    extremesFileName);
                 return;
             }
 
@@ -1535,16 +1470,12 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         }
         catch (FileNotFoundException e)
         {
-            Logging.logger().log(java.util.logging.Level.WARNING,
-                Logging.getMessage("BasicElevationModel.ExceptionReadingExtremeElevations", extremesFileName), e);
             this.extremes = null;
             this.extremesLevel = -1;
             this.extremesLookupCache = null;
         }
         catch (IOException e)
         {
-            Logging.logger().log(java.util.logging.Level.WARNING,
-                Logging.getMessage("BasicElevationModel.ExceptionReadingExtremeElevations", extremesFileName), e);
             this.extremes = null;
             this.extremesLevel = -1;
             this.extremesLookupCache = null;
@@ -1961,7 +1892,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
 //        {
 //            String msg = Logging.getMessage("nullValue.SectorIsNull");
 //            Logging.logger().severe(msg);
-//            throw new IllegalArgumentException(msg);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        // Collect all the elevation tiles intersecting the input sector. If a desired tile is not curently
@@ -2000,8 +1931,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         AVList params = (AVList) this.getValue(AVKey.CONSTRUCTION_PARAMETERS);
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ConstructionParametersIsNull");
-            Logging.logger().warning(message);
             return AVKey.RETRIEVAL_STATE_SUCCESSFUL;
         }
 
@@ -2010,8 +1939,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         URL url = DataConfigurationUtils.getOGCGetCapabilitiesURL(params);
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.CapabilitiesURLIsNull");
-            Logging.logger().warning(message);
             return AVKey.RETRIEVAL_STATE_SUCCESSFUL;
         }
 
@@ -2059,16 +1986,12 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (caps == null)
         {
-            String message = Logging.getMessage("nullValue.CapabilitiesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String[] names = DataConfigurationUtils.getOGCLayerNames(params);
@@ -2173,16 +2096,12 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();
@@ -2293,9 +2212,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -2362,8 +2279,6 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToWriteConfigurationFile");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -2374,9 +2289,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         String fileName = DataConfigurationUtils.getDataConfigFilename(params, ".xml");
         if (fileName == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         // Check if this component needs to write a configuration file. This happens outside of the synchronized block
@@ -2403,16 +2316,12 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         java.io.File file = fileStore.newFile(fileName);
         if (file == null)
         {
-            String message = Logging.getMessage("generic.CannotCreateFile", fileName);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         Document doc = this.createConfigurationDocument(params);
         WWXML.saveDocumentToFile(doc, file.getPath());
 
-        String message = Logging.getMessage("generic.ConfigurationFileCreated", fileName);
-        Logging.logger().fine(message);
     }
 
     protected boolean needsConfigurationFile(FileStore fileStore, String fileName, AVList params,
@@ -2482,9 +2391,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
 
     public void restoreState(String stateInXml)
     {
-        String message = Logging.getMessage("RestorableSupport.RestoreRequiresConstructor");
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 
     protected void doGetRestorableState(RestorableSupport rs, RestorableSupport.StateObject context)
@@ -2610,9 +2517,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -2623,9 +2528,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         AVList params = new AVListImpl();
@@ -2712,9 +2615,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
 
         if (sb.length() > 0)
         {
-            String message = Logging.getMessage("BasicElevationModel.InvalidDescriptorFields", sb.toString());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
     }
 
@@ -2723,9 +2624,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     {
         if (requestedSector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Compute intersection of the requested sector and the sector covered by the elevation model.

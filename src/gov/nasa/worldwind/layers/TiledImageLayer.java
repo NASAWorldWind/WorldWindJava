@@ -64,9 +64,7 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         if (levelSet == null)
         {
-            String message = Logging.getMessage("nullValue.LevelSetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.levels = new LevelSet(levelSet); // the caller's levelSet may change internally, so we copy it.
@@ -699,16 +697,12 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (dc.getView() == null)
         {
-            String message = Logging.getMessage("layers.AbstractLayer.NoViewSpecifiedInDrawingContext");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         return !(dc.getVisibleSector() != null && !this.levels.getSector().intersects(dc.getVisibleSector()));
@@ -855,16 +849,12 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();
@@ -966,9 +956,7 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -1038,9 +1026,7 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -1106,8 +1092,6 @@ public abstract class TiledImageLayer extends AbstractLayer
         {
             // The file has expired. Delete it.
             this.getDataFileStore().removeFile(url);
-            String message = Logging.getMessage("generic.DataFileExpired", url);
-            Logging.logger().fine(message);
         }
         else
         {
@@ -1117,8 +1101,7 @@ public abstract class TiledImageLayer extends AbstractLayer
                 BufferedImage image = ImageIO.read(imageFile);
                 if (image == null)
                 {
-                    String message = Logging.getMessage("generic.ImageReadFailed", imageFile);
-                    throw new RuntimeException(message);
+                            throw new RuntimeException();
                 }
 
                 this.levels.unmarkResourceAbsent(tile);
@@ -1133,9 +1116,7 @@ public abstract class TiledImageLayer extends AbstractLayer
                 // Assume that something's wrong with the file and delete it.
                 this.getDataFileStore().removeFile(url);
                 this.levels.markResourceAbsent(tile);
-                String message = Logging.getMessage("generic.DeletedCorruptDataFile", url);
-                Logging.logger().info(message);
-            }
+                }
         }
 
         return null;
@@ -1168,11 +1149,9 @@ public abstract class TiledImageLayer extends AbstractLayer
         }
         else
         {
-            String message = Logging.getMessage("layers.TextureLayer.UnknownRetrievalProtocol", resourceURL);
-            throw new RuntimeException(message);
+            throw new RuntimeException();
         }
 
-        Logging.logger().log(java.util.logging.Level.FINE, "Retrieving " + resourceURL.toString());
         retriever.setConnectTimeout(10000);
         retriever.setReadTimeout(timeout);
         retriever.call();
@@ -1196,7 +1175,6 @@ public abstract class TiledImageLayer extends AbstractLayer
 
         Retriever retriever = retrieverFactory.createRetriever(avList, new CompositionRetrievalPostProcessor(tile));
 
-        Logging.logger().log(java.util.logging.Level.FINE, "Locally retrieving " + tile.getPath());
         retriever.setReadTimeout(timeout);
         retriever.call();
     }
@@ -1205,9 +1183,7 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         // Find the first level exceeding the desired resolution
@@ -1236,8 +1212,6 @@ public abstract class TiledImageLayer extends AbstractLayer
                 targetLevel = nextLowerLevel;
         }
 
-        Logging.logger().fine(Logging.getMessage("layers.TiledImageLayer.LevelSelection",
-            targetLevel.getLevelNumber(), Double.toString(targetLevel.getTexelSize())));
         return targetLevel.getLevelNumber();
     }
 
@@ -1278,15 +1252,11 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.levels.getSector().intersects(sector))
         {
-            Logging.logger().severe(Logging.getMessage("generic.SectorRequestedOutsideCoverageArea", sector,
-                this.levels.getSector()));
             return image;
         }
 
@@ -1298,8 +1268,6 @@ public abstract class TiledImageLayer extends AbstractLayer
         }
         else if (levelNumber > this.levels.getLastLevel().getLevelNumber())
         {
-            Logging.logger().warning(Logging.getMessage("generic.LevelRequestedGreaterThanMaxLevel",
-                levelNumber, this.levels.getLastLevel().getLevelNumber()));
             levelNumber = this.levels.getLastLevel().getLevelNumber();
         }
 
@@ -1312,7 +1280,6 @@ public abstract class TiledImageLayer extends AbstractLayer
 
         if (tiles.length == 0 || tiles[0].length == 0)
         {
-            Logging.logger().severe(Logging.getMessage("layers.TiledImageLayer.NoImagesAvailable"));
             return image;
         }
 
@@ -1351,9 +1318,7 @@ public abstract class TiledImageLayer extends AbstractLayer
                     if (abortOnError)
                         throw e;
 
-                    String message = Logging.getMessage("generic.ExceptionWhileRequestingImage", tile.getPath());
-                    Logging.logger().log(java.util.logging.Level.WARNING, message, e);
-                }
+                        }
             }
         }
 
@@ -1375,9 +1340,7 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Level targetLevel = this.levels.getLastLevel();
@@ -1411,9 +1374,7 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Level targetLevel = this.levels.getLastLevel();
@@ -1471,8 +1432,8 @@ public abstract class TiledImageLayer extends AbstractLayer
         if (image == null)
         {
             String message =
-                Logging.getMessage("layers.TiledImageLayer.ImageUnavailable", tile.getPath());
-            throw new RuntimeException(message);
+                null;
+            throw new RuntimeException();
         }
 
         return image;
@@ -1492,8 +1453,6 @@ public abstract class TiledImageLayer extends AbstractLayer
             String suffix = WWIO.makeSuffixForMimeType(this.getRetriever().getContentType());
             if (suffix == null)
             {
-                Logging.logger().severe(
-                    Logging.getMessage("generic.UnknownContentType", this.getRetriever().getContentType()));
                 return null;
             }
 

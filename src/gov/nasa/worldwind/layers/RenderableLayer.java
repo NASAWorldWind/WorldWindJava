@@ -10,7 +10,6 @@ import gov.nasa.worldwind.avlist.AVList;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.GL2;
 import java.util.*;
@@ -54,16 +53,12 @@ public class RenderableLayer extends AbstractLayer
     {
         if (renderable == null)
         {
-            String msg = Logging.getMessage("nullValue.RenderableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.renderablesOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.renderables.add(renderable);
@@ -96,23 +91,17 @@ public class RenderableLayer extends AbstractLayer
     {
         if (renderable == null)
         {
-            String msg = Logging.getMessage("nullValue.RenderableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.renderablesOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         if (index < 0 || index > this.renderables.size())
         {
-            String msg = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // The renderables are contained in a ConcurrentLinkedQueue, which does not support element insertion. Make a
@@ -148,16 +137,12 @@ public class RenderableLayer extends AbstractLayer
     {
         if (renderables == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.renderablesOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         for (Renderable renderable : renderables)
@@ -192,16 +177,12 @@ public class RenderableLayer extends AbstractLayer
     {
         if (renderable == null)
         {
-            String msg = Logging.getMessage("nullValue.RenderableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.renderablesOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.renderables.remove(renderable);
@@ -227,9 +208,7 @@ public class RenderableLayer extends AbstractLayer
     {
         if (this.renderablesOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.clearRenderables();
@@ -372,9 +351,7 @@ public class RenderableLayer extends AbstractLayer
     {
         if (this.renderablesOverride != null)
         {
-            String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            throw new IllegalStateException();
         }
 
         this.disposeRenderables();
@@ -398,9 +375,7 @@ public class RenderableLayer extends AbstractLayer
                 }
                 catch (Exception e)
                 {
-                    String msg = Logging.getMessage("generic.ExceptionAttemptingToDisposeRenderable");
-                    Logging.logger().severe(msg);
-                    // continue to next renderable
+                            // continue to next renderable
                 }
             }
         }
@@ -436,9 +411,7 @@ public class RenderableLayer extends AbstractLayer
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionWhilePrerenderingRenderable");
-                Logging.logger().severe(msg);
-                // continue to next renderable
+                    // continue to next renderable
             }
         }
     }
@@ -468,10 +441,7 @@ public class RenderableLayer extends AbstractLayer
                     }
                     catch (Exception e)
                     {
-                        String msg = Logging.getMessage("generic.ExceptionWhilePickingRenderable");
-                        Logging.logger().severe(msg);
-                        Logging.logger().log(java.util.logging.Level.FINER, msg, e); // show exception for this level
-                        continue; // go on to next renderable
+                                    continue; // go on to next renderable
                     }
 //
 //                    gl.glColor4fv(inColor, 0);
@@ -509,9 +479,7 @@ public class RenderableLayer extends AbstractLayer
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionWhileRenderingRenderable");
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                // continue to next renderable
+                    // continue to next renderable
             }
         }
     }
@@ -519,7 +487,7 @@ public class RenderableLayer extends AbstractLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.RenderableLayer.Name");
+        return null;
     }
 
     /**
@@ -541,9 +509,7 @@ public class RenderableLayer extends AbstractLayer
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionInvokingMessageListener");
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                // continue to next renderable
+                    // continue to next renderable
             }
         }
     }

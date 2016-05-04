@@ -8,7 +8,6 @@ package gov.nasa.worldwind.render;
 import com.jogamp.common.nio.Buffers;
 import gov.nasa.worldwind.Movable;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import java.awt.*;
@@ -35,9 +34,7 @@ public class Quadrilateral implements Renderable, Movable // TODO: rename this c
     {
         if (southwestCorner == null || northeastCorner == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.southwestCorner = southwestCorner;
@@ -49,9 +46,7 @@ public class Quadrilateral implements Renderable, Movable // TODO: rename this c
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.southwestCorner = new LatLon(sector.getMinLatitude(), sector.getMinLongitude());
@@ -68,9 +63,7 @@ public class Quadrilateral implements Renderable, Movable // TODO: rename this c
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.color = color;
@@ -101,9 +94,7 @@ public class Quadrilateral implements Renderable, Movable // TODO: rename this c
     {
         if (!(hint == GL.GL_DONT_CARE || hint == GL.GL_FASTEST || hint == GL.GL_NICEST))
         {
-            String msg = Logging.getMessage("generic.InvalidHint");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.antiAliasHint = hint;
@@ -182,9 +173,7 @@ public class Quadrilateral implements Renderable, Movable // TODO: rename this c
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (this.vertices == null)
@@ -271,9 +260,7 @@ public class Quadrilateral implements Renderable, Movable // TODO: rename this c
     {
         if (delta == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.northeastCorner = this.northeastCorner.add(delta);
@@ -286,9 +273,7 @@ public class Quadrilateral implements Renderable, Movable // TODO: rename this c
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position delta = position.subtract(this.getReferencePosition());

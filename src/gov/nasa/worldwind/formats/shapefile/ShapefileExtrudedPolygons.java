@@ -52,16 +52,12 @@ public class ShapefileExtrudedPolygons extends ShapefileRenderable implements Or
         {
             if (line == null)
             {
-                String msg = Logging.getMessage("nullValue.LineIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (terrain == null)
             {
-                String msg = Logging.getMessage("nullValue.TerrainIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (!this.visible) // records marked as not visible don't intersect anything
@@ -210,9 +206,7 @@ public class ShapefileExtrudedPolygons extends ShapefileRenderable implements Or
     {
         if (shapefile == null)
         {
-            String msg = Logging.getMessage("nullValue.ShapefileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.init(shapefile, null, null, null);
@@ -240,9 +234,7 @@ public class ShapefileExtrudedPolygons extends ShapefileRenderable implements Or
     {
         if (shapefile == null)
         {
-            String msg = Logging.getMessage("nullValue.ShapefileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.init(shapefile, normalAttrs, highlightAttrs, attributeDelegate);
@@ -382,9 +374,7 @@ public class ShapefileExtrudedPolygons extends ShapefileRenderable implements Or
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.visible)
@@ -401,9 +391,7 @@ public class ShapefileExtrudedPolygons extends ShapefileRenderable implements Or
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.visible)
@@ -1094,16 +1082,12 @@ public class ShapefileExtrudedPolygons extends ShapefileRenderable implements Or
     {
         if (line == null)
         {
-            String msg = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (terrain == null)
         {
-            String msg = Logging.getMessage("nullValue.TerrainIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<Intersection> intersections = new ArrayList<Intersection>();

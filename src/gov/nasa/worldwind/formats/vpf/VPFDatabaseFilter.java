@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.vpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author dcollins
  * @version $Id: VPFDatabaseFilter.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -31,9 +29,7 @@ public class VPFDatabaseFilter implements java.io.FileFilter
     {
         if (file == null)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // First check the file path, optionally returning false if the path cannot be accepted for any reason.
@@ -57,9 +53,7 @@ public class VPFDatabaseFilter implements java.io.FileFilter
     {
         if (file == null)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return file.getName().equalsIgnoreCase(VPFConstants.DATABASE_HEADER_TABLE);

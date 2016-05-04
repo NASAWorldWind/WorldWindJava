@@ -43,9 +43,7 @@ public class DataImportUtil
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         DataRasterReaderFactory readerFactory;
@@ -72,9 +70,7 @@ public class DataImportUtil
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("generic.ExceptionWhileReading", e.getMessage());
-                Logging.logger().finest(message);
-            }
+                }
         }
 
         return AVKey.IMAGE.equals(params.getStringValue(AVKey.PIXEL_FORMAT))
@@ -97,9 +93,7 @@ public class DataImportUtil
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String path = WWIO.getSourcePath(source);
@@ -124,12 +118,11 @@ public class DataImportUtil
         }
         catch (Exception e)
         {
-            Logging.logger().fine(Logging.getMessage("generic.ExceptionAttemptingToParseXml", source));
             return false;
         }
         finally
         {
-            WWXML.closeEventReader(eventReader, source.toString());
+            WWXML.closeEventReader(eventReader);
         }
     }
 
@@ -152,9 +145,7 @@ public class DataImportUtil
     {
         if (fileStore == null)
         {
-            String message = Logging.getMessage("nullValue.FileStoreIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (File location : fileStore.getLocations())

@@ -118,9 +118,7 @@ public class GeographicTextRenderer
     {
         if (effect == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.effect = effect;
@@ -212,15 +210,11 @@ public class GeographicTextRenderer
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (textIterable == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getVisibleSector() == null)
@@ -279,15 +273,11 @@ public class GeographicTextRenderer
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (dc.getView() == null)
         {
-            String msg = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getVisibleSector() == null)
@@ -444,11 +434,9 @@ public class GeographicTextRenderer
             }
             catch (WWRuntimeException e)
             {
-                Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionWhileRenderingText", e);
             }
             catch (Exception e)
             {
-                Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionWhileRenderingText", e);
             }
             finally
             {
@@ -628,8 +616,6 @@ public class GeographicTextRenderer
     {
         if (uText.point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().fine(msg);
             return null;
         }
 
@@ -730,7 +716,6 @@ public class GeographicTextRenderer
             {
                 // This is likely a known JOGL 1.1.1 bug - see AMZN-287 or 343
                 // Log once and then ignore.
-                Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionWhileRenderingText", e);
                 this.hasJOGLv111Bug = true;
             }
         }

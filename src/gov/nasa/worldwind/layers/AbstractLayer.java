@@ -138,9 +138,7 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
     {
         if (fileStore == null)
         {
-            String message = Logging.getMessage("nullValue.FileStoreIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.dataFileStore = fileStore;
@@ -150,9 +148,7 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         return true;
@@ -162,16 +158,12 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (null == dc.getView())
         {
-            String message = Logging.getMessage("layers.AbstractLayer.NoViewSpecifiedInDrawingContext");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Position eyePos = dc.getView().getEyePosition();
@@ -189,23 +181,17 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
 
         if (null == dc)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (null == dc.getGlobe())
         {
-            String message = Logging.getMessage("layers.AbstractLayer.NoGlobeSpecifiedInDrawingContext");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (null == dc.getView())
         {
-            String message = Logging.getMessage("layers.AbstractLayer.NoViewSpecifiedInDrawingContext");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (!this.isLayerActive(dc))
@@ -230,23 +216,17 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
 
         if (null == dc)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (null == dc.getGlobe())
         {
-            String message = Logging.getMessage("layers.AbstractLayer.NoGlobeSpecifiedInDrawingContext");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (null == dc.getView())
         {
-            String message = Logging.getMessage("layers.AbstractLayer.NoViewSpecifiedInDrawingContext");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (!this.isLayerActive(dc))
@@ -265,23 +245,17 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
 
         if (null == dc)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (null == dc.getGlobe())
         {
-            String message = Logging.getMessage("layers.AbstractLayer.NoGlobeSpecifiedInDrawingContext");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (null == dc.getView())
         {
-            String message = Logging.getMessage("layers.AbstractLayer.NoViewSpecifiedInDrawingContext");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (!this.isLayerActive(dc))
@@ -330,9 +304,7 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
 
     public void restoreState(String stateInXml)
     {
-        String message = Logging.getMessage("RestorableSupport.RestoreNotSupported");
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 
     public void setExpiryTime(long expiryTime)
@@ -372,9 +344,7 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();
@@ -404,16 +374,12 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         WWXML.checkAndAppendTextElement(params, AVKey.DISPLAY_NAME, context, "DisplayName");
@@ -461,9 +427,7 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)

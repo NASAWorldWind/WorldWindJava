@@ -17,8 +17,7 @@ import gov.nasa.worldwind.ogc.OGCConstants;
 import gov.nasa.worldwind.ogc.wcs.wcs100.WCS100Capabilities;
 import gov.nasa.worldwind.ogc.wms.WMSCapabilities;
 import gov.nasa.worldwind.ogc.wms.WMSLayerCapabilities;
-import gov.nasa.worldwind.util.Logging;
-import gov.nasa.worldwind.util.WWXML;
+import gov.nasa.worldwind.util.*;
 import org.w3c.dom.Element;
 
 import java.util.List;
@@ -60,8 +59,7 @@ public class BasicElevationModelFactory extends BasicFactory
         ElevationModel model = (ElevationModel) super.createFromConfigSource(configSource, params);
         if (model == null)
         {
-            String msg = Logging.getMessage("generic.UnrecognizedDocument", configSource);
-            throw new WWUnrecognizedException(msg);
+            throw new WWUnrecognizedException();
         }
 
         return model;
@@ -74,9 +72,7 @@ public class BasicElevationModelFactory extends BasicFactory
         if (serviceName == null || !(serviceName.equalsIgnoreCase(OGCConstants.WMS_SERVICE_NAME)
             || serviceName.equalsIgnoreCase("WMS")))
         {
-            String message = Logging.getMessage("WMS.NotWMSService", serviceName != null ? serviceName : "null");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -89,9 +85,7 @@ public class BasicElevationModelFactory extends BasicFactory
 
             if (namedLayers == null || namedLayers.size() == 0 || namedLayers.get(0) == null)
             {
-                String message = Logging.getMessage("WMS.NoLayersFound");
-                Logging.logger().severe(message);
-                throw new IllegalStateException(message);
+                    throw new IllegalStateException();
             }
 
             params.setValue(AVKey.LAYER_NAMES, namedLayers.get(0).getName());
@@ -174,9 +168,7 @@ public class BasicElevationModelFactory extends BasicFactory
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("ElevationModel.ExceptionCreatingElevationModel");
-                Logging.logger().log(java.util.logging.Level.WARNING, msg, e);
-            }
+                }
         }
 
         return compoundModel;
@@ -222,8 +214,7 @@ public class BasicElevationModelFactory extends BasicFactory
         }
         else
         {
-            String msg = Logging.getMessage("generic.UnrecognizedServiceName", serviceName);
-            throw new WWUnrecognizedException(msg);
+            throw new WWUnrecognizedException();
         }
 
         return em;

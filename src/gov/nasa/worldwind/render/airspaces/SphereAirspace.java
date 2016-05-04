@@ -37,15 +37,11 @@ public class SphereAirspace extends AbstractAirspace
     {
         if (location == null)
         {
-            String message = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (radius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.location = location;
@@ -140,9 +136,7 @@ public class SphereAirspace extends AbstractAirspace
     {
         if (location == null)
         {
-            String message = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.location = location;
@@ -171,9 +165,7 @@ public class SphereAirspace extends AbstractAirspace
     {
         if (radius < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.radius = radius;
@@ -232,16 +224,12 @@ public class SphereAirspace extends AbstractAirspace
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getGlobe() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeExtent(dc);
@@ -265,14 +253,12 @@ public class SphereAirspace extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<LatLon> locations = new ArrayList<LatLon>(1);
@@ -288,14 +274,12 @@ public class SphereAirspace extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.doMoveTo(oldRef, newRef);
@@ -344,9 +328,7 @@ public class SphereAirspace extends AbstractAirspace
     {
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.subdivisions = subdivisions;
@@ -360,15 +342,11 @@ public class SphereAirspace extends AbstractAirspace
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.clearElevationMap();

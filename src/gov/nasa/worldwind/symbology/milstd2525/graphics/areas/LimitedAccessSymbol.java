@@ -12,7 +12,6 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.Offset;
 import gov.nasa.worldwind.symbology.AbstractTacticalSymbol;
 import gov.nasa.worldwind.symbology.milstd2525.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -68,9 +67,7 @@ public class LimitedAccessSymbol extends AbstractTacticalSymbol
         {
             if (symbolId == null)
             {
-                String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             SymbolCode symbolCode = new SymbolCode(symbolId);

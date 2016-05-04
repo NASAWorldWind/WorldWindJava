@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwindx.applications.sar;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author dcollins
  * @version $Id: SARAnnotationWriter.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -20,9 +18,7 @@ public class SARAnnotationWriter
     {
         if (path == null)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
@@ -35,9 +31,7 @@ public class SARAnnotationWriter
     {
         if (stream == null)
         {
-            String msg = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
@@ -51,8 +45,7 @@ public class SARAnnotationWriter
         if (sarAnnotation == null)
         {
             String msg = "nullValue.SARAnnotationIsNull";
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         doWriteAnnotation(sarAnnotation, this.doc.getDocumentElement());
@@ -63,8 +56,7 @@ public class SARAnnotationWriter
         if (sarAnnotations == null)
         {
             String msg = "nullValue.SARAnnotationIterableIsNull";
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (SARAnnotation sa : sarAnnotations)

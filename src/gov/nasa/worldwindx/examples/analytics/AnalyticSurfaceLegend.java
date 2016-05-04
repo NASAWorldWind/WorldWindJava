@@ -87,9 +87,7 @@ public class AnalyticSurfaceLegend implements Renderable
     {
         if (opacity < 0d || opacity > 1d)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.screenImage.setOpacity(opacity);
@@ -104,9 +102,7 @@ public class AnalyticSurfaceLegend implements Renderable
     {
         if (point == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.screenImage.setScreenLocation(point);
@@ -116,9 +112,7 @@ public class AnalyticSurfaceLegend implements Renderable
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.screenImage.getImageWidth(dc);
@@ -128,9 +122,7 @@ public class AnalyticSurfaceLegend implements Renderable
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.screenImage.getImageHeight(dc);
@@ -140,9 +132,7 @@ public class AnalyticSurfaceLegend implements Renderable
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())
@@ -160,9 +150,7 @@ public class AnalyticSurfaceLegend implements Renderable
     {
         if (format == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<AnalyticSurfaceLegend.LabelAttributes> labels
@@ -189,9 +177,7 @@ public class AnalyticSurfaceLegend implements Renderable
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Font font = Font.decode("Arial-BOLD-16");

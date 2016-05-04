@@ -9,7 +9,6 @@ package gov.nasa.worldwind.ogc.kml.impl;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.ogc.kml.KMLAbstractFeature;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * A KML Balloon attached to a point on the globe.
@@ -34,9 +33,7 @@ public class KMLGlobeBalloonImpl extends KMLAbstractBalloon implements GlobeBall
 
         if (balloon == null)
         {
-            String msg = Logging.getMessage("nullValue.BalloonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.balloon = balloon;
         this.initialize(balloon);

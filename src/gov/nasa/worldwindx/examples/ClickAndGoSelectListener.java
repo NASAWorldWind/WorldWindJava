@@ -8,7 +8,6 @@ package gov.nasa.worldwindx.examples;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.geom.Position;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * Handles view 'fly to' on left clicked picked objects with a position.
@@ -27,9 +26,7 @@ public class ClickAndGoSelectListener  implements SelectListener
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -41,15 +38,11 @@ public class ClickAndGoSelectListener  implements SelectListener
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (pickedObjClass == null)
         {
-            String msg = Logging.getMessage("nullValue.ClassIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;

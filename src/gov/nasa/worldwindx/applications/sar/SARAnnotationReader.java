@@ -5,7 +5,6 @@
  */
 package gov.nasa.worldwindx.applications.sar;
 
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.geom.Position;
 
 /**
@@ -29,16 +28,12 @@ public class SARAnnotationReader
     {
         if (path == null)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         java.io.File file = new java.io.File(path);
         if (!file.exists())
         {
-            String msg = Logging.getMessage("generic.FileNotFound", path);
-            Logging.logger().severe(msg);
             throw new java.io.FileNotFoundException(path);
         }
 
@@ -50,9 +45,7 @@ public class SARAnnotationReader
     {
         if (stream == null)
         {
-            String msg = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.doRead(stream);
@@ -184,9 +177,7 @@ public class SARAnnotationReader
         {
             if (lname == null)
             {
-                String msg = Logging.getMessage("nullValue.LNameIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
             // don't validate uri or qname - they aren't used.
 

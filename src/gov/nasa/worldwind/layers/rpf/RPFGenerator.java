@@ -42,9 +42,7 @@ class RPFGenerator
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.AVListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         params = initParams(params.copy());
@@ -62,16 +60,13 @@ class RPFGenerator
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.AVListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params.getValue(RPF_FILE_INDEX) == null)
         {
             String message = "RPFFileIndex is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object o = params.getValue(WAVELET_IMAGE_THRESHOLD);
@@ -119,7 +114,6 @@ class RPFGenerator
                 else
                 {
                     String message = "Ignoring frame file: " + (rpfKey != -1 ? fileIndex.getRPFFile(rpfKey).getPath() : "?");
-                    Logging.logger().fine(message);
                 }
             }
         }
@@ -202,15 +196,12 @@ class RPFGenerator
         {
             if (params == null)
             {
-                String message = Logging.getMessage("nullValue.AVListIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             String message = this.validate(params);
             if (message != null)
             {
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                throw new IllegalArgumentException();
             }
 
             try
@@ -237,7 +228,6 @@ class RPFGenerator
                     {
                         /* ignore this framefile */
                         String msg = String.format("Exception while computing frame bounds: %s", frame.rpfFile);
-                        Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
                         markFrameFileAbsent(frame);
                         continue;
                     }
@@ -289,8 +279,7 @@ class RPFGenerator
             catch (Exception e)
             {
                 String msg = "Exception while processing request";
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                throw new IOException(msg);
+                throw new IOException();
             }
         }
 
@@ -320,9 +309,7 @@ class RPFGenerator
         {
             if (url == null)
             {
-                String message = Logging.getMessage("nullValue.URLIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             AVList params = new AVListImpl();
@@ -391,7 +378,6 @@ class RPFGenerator
                     }
                     catch (NumberFormatException e)
                     {
-                        Logging.logger().log(java.util.logging.Level.WARNING, "Parameter conversion error", e);
                         params.setValue(BBOX, null);
                     }
                 }
@@ -407,7 +393,6 @@ class RPFGenerator
                 }
                 catch (NumberFormatException e)
                 {
-                    Logging.logger().log(java.util.logging.Level.WARNING, "Parameter conversion error", e);
                     params.setValue(WIDTH, null);
                 }
             }
@@ -422,7 +407,6 @@ class RPFGenerator
                 }
                 catch (NumberFormatException e)
                 {
-                    Logging.logger().log(java.util.logging.Level.WARNING, "Parameter conversion error", e);
                     params.setValue(HEIGHT, null);
                 }
             }
@@ -445,7 +429,6 @@ class RPFGenerator
             catch (Exception e)
             {
                 String message = "Exception while reading frame file: " + frame.rpfFile;
-                Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
                 RPFGenerator.this.markFrameFileAbsent(frame);
                 return null;
             }
@@ -489,7 +472,6 @@ class RPFGenerator
             catch (Exception e)
             {
                 String message = "Exception while reading wavelet file: " + frame.waveletFile;
-                Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
                 RPFGenerator.this.markFrameFileAbsent(frame);
                 return null;
             }

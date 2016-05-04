@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.event.*;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.xml.*;
 
 import java.util.Map;
@@ -85,9 +84,7 @@ public abstract class KMLAbstractObject extends AbstractXMLEventParser implement
     {
         if (sourceValues == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (Map.Entry<String, Object> entry : sourceValues.getFields().getEntries())

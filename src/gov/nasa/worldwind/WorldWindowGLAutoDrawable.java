@@ -23,7 +23,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.util.concurrent.*;
-import java.util.logging.Level;
 
 /**
  * A non-platform specific {@link WorldWindow} class. This class can be aggregated into platform-specific classes to
@@ -93,9 +92,7 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
     {
         if (glAutoDrawable == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.drawable = glAutoDrawable;
@@ -119,9 +116,7 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
     {
         if (cache == null)
         {
-            String msg = Logging.getMessage("nullValue.GpuResourceCacheIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.setGpuResourceCache(cache);
@@ -161,9 +156,7 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
     {
         if (propertyChangeEvent == null)
         {
-            String msg = Logging.getMessage("nullValue.PropertyChangeEventIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.redraw(); // Queue a JOGL display request.
@@ -198,9 +191,7 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
     {
         if (!this.isGLContextCompatible(glAutoDrawable.getContext()))
         {
-            String msg = Logging.getMessage("WorldWindowGLAutoDrawable.IncompatibleGLContext",
-                glAutoDrawable.getContext());
-            this.callRenderingExceptionListeners(new WWAbsentRequirementException(msg));
+            this.callRenderingExceptionListeners(new WWAbsentRequirementException());
         }
 
         for (String funcName : this.getRequiredOglFunctions())
@@ -208,7 +199,7 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
             if (!glAutoDrawable.getGL().isFunctionAvailable(funcName))
             {
                 //noinspection ThrowableInstanceNeverThrown
-                this.callRenderingExceptionListeners(new WWAbsentRequirementException(funcName + " not available"));
+                this.callRenderingExceptionListeners(new WWAbsentRequirementException());
             }
         }
 
@@ -217,7 +208,7 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
             if (!glAutoDrawable.getGL().isExtensionAvailable(extName))
             {
                 //noinspection ThrowableInstanceNeverThrown
-                this.callRenderingExceptionListeners(new WWAbsentRequirementException(extName + " not available"));
+                this.callRenderingExceptionListeners(new WWAbsentRequirementException());
             }
         }
 
@@ -294,8 +285,6 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, Logging.getMessage(
-                    "WorldWindowGLCanvas.ExceptionWhileShuttingDownWorldWindow"), e);
             }
             return;
         }
@@ -305,9 +294,7 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
             SceneController sc = this.getSceneController();
             if (sc == null)
             {
-                String msg = Logging.getMessage("WorldWindowGLCanvas.ScnCntrllerNullOnRepaint");
-                Logging.logger().severe(msg);
-                throw new IllegalStateException(msg);
+                    throw new IllegalStateException();
             }
 
             // Determine if the view has changed since the last frame.
@@ -323,8 +310,6 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE,
-                    Logging.getMessage("WorldWindowGLAutoDrawable.ExceptionDuringGLEventListenerDisplay"), e);
             }
 
             int redrawDelay = this.doDisplay();
@@ -351,8 +336,6 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE,
-                    Logging.getMessage("WorldWindowGLAutoDrawable.ExceptionDuringGLEventListenerDisplay"), e);
             }
 
             this.doSwapBuffers(this.drawable);
@@ -419,8 +402,6 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, Logging.getMessage(
-                "WorldWindowGLCanvas.ExceptionAttemptingRepaintWorldWindow"), e);
         }
     }
 

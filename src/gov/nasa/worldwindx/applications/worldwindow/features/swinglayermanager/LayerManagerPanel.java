@@ -373,7 +373,7 @@ public class LayerManagerPanel extends AbstractFeaturePanel implements LayerMana
         {
             String msg = "Layer is null";
             Util.getLogger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         LayerNode layerNode = new LayerTreeNode(layer);
@@ -387,7 +387,7 @@ public class LayerManagerPanel extends AbstractFeaturePanel implements LayerMana
         {
             String msg = "LayerNode or Layer is null";
             Util.getLogger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         LayerTreeNode parentNode = LayerPath.isEmptyPath(pathToParent)
@@ -528,7 +528,7 @@ public class LayerManagerPanel extends AbstractFeaturePanel implements LayerMana
         {
             String msg = "LayerNode is null";
             Util.getLogger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (layerNode.getWmsLayerInfo() != null)

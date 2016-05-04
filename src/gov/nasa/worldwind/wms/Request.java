@@ -62,7 +62,6 @@ public abstract class Request
             }
             catch (URISyntaxException e)
             {
-                Logging.logger().fine(Logging.getMessage("generic.URIInvalid", uri.toString()));
                 throw e;
             }
         }
@@ -82,9 +81,7 @@ public abstract class Request
     {
         if (sourceRequest == null)
         {
-            String message = Logging.getMessage("nullValue.CopyConstructorSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         sourceRequest.copyParamsTo(this);
@@ -101,9 +98,7 @@ public abstract class Request
     {
         if (destinationRequest == null)
         {
-            String message = Logging.getMessage("nullValue.CopyTargetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (Map.Entry<String, String> entry : this.queryParams.entrySet())
@@ -116,9 +111,7 @@ public abstract class Request
     {
         if (uri == null)
         {
-            String message = Logging.getMessage("nullValue.URIIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -128,8 +121,6 @@ public abstract class Request
         }
         catch (URISyntaxException e)
         {
-            String message = Logging.getMessage("generic.URIInvalid", uri.toString());
-            Logging.logger().fine(message);
             throw e;
         }
     }
@@ -148,9 +139,7 @@ public abstract class Request
     {
         if (version == null)
         {
-            String message = Logging.getMessage("nullValue.WMSVersionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setParam("VERSION", version);
@@ -165,9 +154,7 @@ public abstract class Request
     {
         if (service == null)
         {
-            String message = Logging.getMessage("nullValue.WMSServiceNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setParam("SERVICE", service);
@@ -196,8 +183,6 @@ public abstract class Request
         }
         catch (URISyntaxException e)
         {
-            String message = Logging.getMessage("generic.URIInvalid", uri.toString());
-            Logging.logger().fine(message);
             throw e;
         }
     }

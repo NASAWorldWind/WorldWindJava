@@ -6,13 +6,11 @@
 package gov.nasa.worldwindx.applications.eurogeoss;
 
 import gov.nasa.worldwind.WorldWindow;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.concurrent.*;
-import java.util.logging.Level;
 
 /**
  * @author dcollins
@@ -45,16 +43,12 @@ public class CatalogPanel extends JPanel implements ActionListener
     {
         if (serviceUrl == null)
         {
-            String msg = Logging.getMessage("nullValue.ServiceIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.serviceUrl = serviceUrl;
@@ -218,7 +212,6 @@ public class CatalogPanel extends JPanel implements ActionListener
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.SEVERE, "Unable to search catalog " + serviceUrl, e);
 
                 SwingUtilities.invokeLater(new Runnable()
                 {

@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.globes.projections;
 
 import gov.nasa.worldwind.geom.Angle;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * Implements a TransverseMercator projection for a specified UTM zone.
@@ -66,9 +65,7 @@ public class ProjectionUTM extends ProjectionTransverseMercator
     {
         if (zone < 1 || zone > 60)
         {
-            String message = Logging.getMessage("UTM.InvalidZone", zone);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.zone = zone;
@@ -80,9 +77,7 @@ public class ProjectionUTM extends ProjectionTransverseMercator
     {
         if (zone < 1 || zone > 60)
         {
-            String message = Logging.getMessage("UTM.InvalidZone", zone);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return Angle.fromDegrees((3 + (zone - 1) * 6) - (zone > 30 ? 360 : 0));

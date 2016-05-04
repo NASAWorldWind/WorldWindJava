@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.data;
 
 import gov.nasa.worldwind.avlist.AVList;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * Implements a {@link gov.nasa.worldwind.data.DataRasterReaderFactory} with a default list of readers. The list
@@ -55,9 +54,7 @@ public class BasicDataRasterReaderFactory implements DataRasterReaderFactory
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return findReaderFor(source, params, readers);
@@ -68,16 +65,12 @@ public class BasicDataRasterReaderFactory implements DataRasterReaderFactory
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (readers == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (DataRasterReader reader : readers)

@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Position;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 
@@ -28,9 +27,7 @@ public class UserFacingText implements GeographicText
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.CharSequenceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.text = text;
@@ -46,9 +43,7 @@ public class UserFacingText implements GeographicText
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.CharSequenceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.text = text;

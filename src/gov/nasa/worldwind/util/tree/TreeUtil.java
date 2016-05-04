@@ -34,9 +34,7 @@ public class TreeUtil
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -59,16 +57,12 @@ public class TreeUtil
     {
         if (gl == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bounds == null)
         {
-            String message = Logging.getMessage("nullValue.BoundingBoxIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         gl.glRecti(bounds.x, bounds.y, bounds.x + bounds.width, bounds.y + bounds.height);
@@ -79,16 +73,12 @@ public class TreeUtil
     {
         if (gl == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bounds == null)
         {
-            String message = Logging.getMessage("nullValue.BoundingBoxIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         gl.glBegin(GL2.GL_QUADS);

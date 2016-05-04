@@ -75,9 +75,7 @@ public class BasicDataFileStore extends AbstractFileStore
         String configPath = Configuration.getStringValue(AVKey.DATA_FILE_STORE_CONFIGURATION_FILE_NAME);
         if (configPath == null)
         {
-            String message = Logging.getMessage("FileStore.NoConfiguration");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         java.io.InputStream is = null;
@@ -90,9 +88,7 @@ public class BasicDataFileStore extends AbstractFileStore
             }
             catch (FileNotFoundException e)
             {
-                String message = Logging.getMessage("FileStore.LocalConfigFileNotFound", configPath);
-                Logging.logger().finest(message);
-            }
+                }
         }
 
         if (is == null)
@@ -102,9 +98,7 @@ public class BasicDataFileStore extends AbstractFileStore
 
         if (is == null)
         {
-            String message = Logging.getMessage("FileStore.ConfigurationNotFound", configPath);
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.initialize(is);
@@ -119,9 +113,7 @@ public class BasicDataFileStore extends AbstractFileStore
     {
         if (directoryPath == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder("<?xml version=\"1.0\"?>");
@@ -223,9 +215,7 @@ public class BasicDataFileStore extends AbstractFileStore
     {
         if (address == null)
         {
-            String message = Logging.getMessage("nullValue.AddressIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         DBEntry entry = (DBEntry) this.db.getObject(address);
@@ -244,9 +234,7 @@ public class BasicDataFileStore extends AbstractFileStore
     {
         if (address == null)
         {
-            String message = Logging.getMessage("nullValue.AddressIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         // Store remote files in the World Wind cache by default. This provides backward compatibility with applications
@@ -259,9 +247,7 @@ public class BasicDataFileStore extends AbstractFileStore
     {
         if (address == null)
         {
-            String message = Logging.getMessage("nullValue.AddressIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (this.getAbsentResourceList().isResourceAbsent(address))
@@ -324,9 +310,7 @@ public class BasicDataFileStore extends AbstractFileStore
     {
         if (address == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         URL cacheFileUrl = null;
@@ -427,8 +411,6 @@ public class BasicDataFileStore extends AbstractFileStore
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.JarOpenFailed", jarUrl.toString());
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
 
             return -1;
         }
@@ -512,9 +494,7 @@ public class BasicDataFileStore extends AbstractFileStore
             }
             catch (MalformedURLException e)
             {
-                String message = Logging.getMessage("generic.MalformedURL", file.toURI());
-                Logging.logger().finest(message);
-                return null;
+                    return null;
             }
         }
 
@@ -730,8 +710,6 @@ public class BasicDataFileStore extends AbstractFileStore
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.CannotCreateTempFile");
-            Logging.logger().fine(message);
             return null;
         }
     }

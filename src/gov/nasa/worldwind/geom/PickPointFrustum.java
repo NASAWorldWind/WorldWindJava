@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.geom;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.awt.*;
 
 /**
@@ -34,9 +32,7 @@ public class PickPointFrustum extends Frustum
 
         if (rect == null)
         {
-            String message = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.screenRect = rect;
@@ -58,9 +54,7 @@ public class PickPointFrustum extends Frustum
     {
         if (rect == null)
         {
-            String message = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.screenRect.intersects(rect);
@@ -94,9 +88,7 @@ public class PickPointFrustum extends Frustum
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.screenRect.contains(point);
@@ -115,9 +107,7 @@ public class PickPointFrustum extends Frustum
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new PickPointFrustum(super.transformBy(matrix), this.screenRect);

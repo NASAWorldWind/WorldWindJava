@@ -7,7 +7,7 @@ package gov.nasa.worldwind.formats.json;
 
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.util.*;
-import org.codehaus.jackson.*;
+import gov.nasa.worldwind.shaded.org.codehaus.jackson.*;
 
 import java.io.*;
 
@@ -25,9 +25,7 @@ public class JSONDoc implements Closeable
     {
         if (WWUtil.isEmpty(source))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -37,9 +35,7 @@ public class JSONDoc implements Closeable
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileReading", this.displayName);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -58,14 +54,12 @@ public class JSONDoc implements Closeable
     {
         if (this.jsonParser == null)
         {
-            Logging.logger().warning(Logging.getMessage("generic.ParserUninitialized", this.displayName));
             return;
         }
 
         JSONEventParserContext ctx = this.createEventParserContext(this.jsonParser);
         if (ctx == null)
         {
-            Logging.logger().warning(Logging.getMessage("generic.CannotParse", this.displayName));
             return;
         }
 
@@ -75,7 +69,6 @@ public class JSONDoc implements Closeable
         JSONEventParser rootParser = this.createRootObjectParser();
         if (rootParser == null)
         {
-            Logging.logger().warning(Logging.getMessage("generic.CannotParse", this.displayName));
             return;
         }
 

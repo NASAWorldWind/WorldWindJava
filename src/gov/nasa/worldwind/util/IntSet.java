@@ -29,9 +29,7 @@ public class IntSet
         {
             if (initialCapacity < 1)
             {
-                String msg = Logging.getMessage("generic.SizeOutOfRange", initialCapacity);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             this.values = new int[initialCapacity];
@@ -65,16 +63,12 @@ public class IntSet
     {
         if (numBuckets < 1)
         {
-            String msg = Logging.getMessage("generic.SizeOutOfRange", numBuckets);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (bucketInitialCapacity < 1)
         {
-            String msg = Logging.getMessage("generic.SizeOutOfRange", bucketInitialCapacity);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.buckets = new Bucket[numBuckets];

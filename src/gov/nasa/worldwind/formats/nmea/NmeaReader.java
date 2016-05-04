@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.nmea;
 
 import gov.nasa.worldwind.tracks.*;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.geom.Position;
 
 import java.util.Iterator;
@@ -61,9 +60,7 @@ public class NmeaReader implements Track, TrackSegment
     {
         if (path == null)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.name = path;
@@ -71,8 +68,6 @@ public class NmeaReader implements Track, TrackSegment
         java.io.File file = new java.io.File(path);
         if (!file.exists())
         {
-            String msg = Logging.getMessage("generic.FileNotFound", path);
-            Logging.logger().severe(msg);
             throw new java.io.FileNotFoundException(path);
         }
 
@@ -80,7 +75,7 @@ public class NmeaReader implements Track, TrackSegment
         this.doReadStream(fis);
 
         if (this.tracks.isEmpty() || this.tracks.get(0).getNumPoints() == 0)
-            throw new IllegalArgumentException(Logging.getMessage("formats.notNMEA", path));
+            throw new IllegalArgumentException((String) null);
 //        java.nio.ByteBuffer buffer = this.doReadFile(fis);
 //        this.parseBuffer(buffer);
     }
@@ -95,9 +90,7 @@ public class NmeaReader implements Track, TrackSegment
     {
         if (stream == null)
         {
-            String msg = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.name = name != null ? name : "Un-named stream";

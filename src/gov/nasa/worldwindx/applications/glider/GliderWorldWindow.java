@@ -10,7 +10,6 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 import gov.nasa.worldwind.layers.Layer;
-import gov.nasa.worldwind.util.Logging;
 
 import java.beans.*;
 import java.io.IOException;
@@ -41,9 +40,7 @@ public class GliderWorldWindow extends WorldWindowGLCanvas
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.imageTable.contains(image))
@@ -75,9 +72,7 @@ public class GliderWorldWindow extends WorldWindowGLCanvas
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageTable.remove(image);

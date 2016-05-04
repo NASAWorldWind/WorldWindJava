@@ -175,14 +175,12 @@ public class Polygon extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<LatLon> newLocations = LatLon.computeShiftedLocations(globe, oldRef, newRef, this.getLocations());
@@ -196,14 +194,12 @@ public class Polygon extends AbstractAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.doMoveTo(oldRef, newRef);
@@ -250,9 +246,7 @@ public class Polygon extends AbstractAirspace
     {
         if (subdivisions < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions=" + subdivisions);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.subdivisions = subdivisions;
@@ -277,21 +271,16 @@ public class Polygon extends AbstractAirspace
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (locations == null)
         {
             String message = "nullValue.LocationsIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (locations.size() == 0)
@@ -371,41 +360,30 @@ public class Polygon extends AbstractAirspace
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (locations == null)
         {
             String message = "nullValue.LocationsIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (points == null)
         {
             String message = "nullValue.LocationsIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (points.length < (1 + locations.size()))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength",
-                "points.length < " + (1 + locations.size()));
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (transform == null)
         {
             String message = "nullValue.TransformIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (transform.length < 1)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength",
-                "transform.length < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Allocate space to hold the list of locations and location vertices.
@@ -535,11 +513,9 @@ public class Polygon extends AbstractAirspace
         }
         catch (OutOfMemoryError e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileTessellating", this);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
 
             //noinspection ThrowableInstanceNeverThrown
-            dc.addRenderingException(new WWRuntimeException(message, e));
+            dc.addRenderingException(new WWRuntimeException(e));
 
             this.handleUnsuccessfulGeometryCreation();
             return null;

@@ -886,9 +886,7 @@ public class OrbitViewInputHandler extends BasicViewInputHandler
         {
             if (orbitView == null)
             {
-                String message = Logging.getMessage("nullValue.OrbitViewIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.orbitView = orbitView;
@@ -929,9 +927,7 @@ public class OrbitViewInputHandler extends BasicViewInputHandler
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("generic.ExceptionWhileChangingView");
-                Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-                return false;
+                    return false;
             }
 
             // If the view supports surface collision detection, then return false if the collision flag is set,
@@ -1147,9 +1143,7 @@ public class OrbitViewInputHandler extends BasicViewInputHandler
     {
         if (heading == null || pitch == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         View view = this.getView();
         if (view instanceof OrbitView)
@@ -1182,9 +1176,7 @@ public class OrbitViewInputHandler extends BasicViewInputHandler
     {
         if (begin == null || end == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         View view = this.getView();
@@ -1200,9 +1192,7 @@ public class OrbitViewInputHandler extends BasicViewInputHandler
     {
         if (begin == null || end == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         View view = this.getView();

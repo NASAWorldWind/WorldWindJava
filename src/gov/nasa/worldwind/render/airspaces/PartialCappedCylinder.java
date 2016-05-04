@@ -33,14 +33,12 @@ public class PartialCappedCylinder extends CappedCylinder
         if (leftAzimuth == null)
         {
             String message = "nullValue.LeftAzimuthIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (rightAzimuth == null)
         {
             String message = "nullValue.RightAzimuthIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.leftAzimuth = leftAzimuth;
@@ -82,14 +80,12 @@ public class PartialCappedCylinder extends CappedCylinder
         if (leftAzimuth == null)
         {
             String message = "nullValue.LeftAzimuthIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (rightAzimuth == null)
         {
             String message = "nullValue.RightAzimuthIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.leftAzimuth = leftAzimuth;
@@ -194,8 +190,7 @@ public class PartialCappedCylinder extends CappedCylinder
         if (azimuth == null)
         {
             String message = "nullValue.AzimuthIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double degrees = azimuth.degrees;
@@ -207,15 +202,11 @@ public class PartialCappedCylinder extends CappedCylinder
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] angles = this.computeAngles();

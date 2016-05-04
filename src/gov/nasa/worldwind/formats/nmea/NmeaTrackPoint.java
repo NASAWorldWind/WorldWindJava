@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.nmea;
 
 import gov.nasa.worldwind.tracks.TrackPoint;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.geom.Position;
 
 /**
@@ -29,15 +28,11 @@ public class NmeaTrackPoint implements TrackPoint
     {
         if (words == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (words.length < 1)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", words.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (words[0].equalsIgnoreCase("GPGGA"))
@@ -55,9 +50,7 @@ public class NmeaTrackPoint implements TrackPoint
         // words won't be null, but it could be the wrong length
         if (words.length < 6)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", words.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.time = words[1];
@@ -132,9 +125,7 @@ public class NmeaTrackPoint implements TrackPoint
     {
         if (latitude > 90 || latitude < -90)
         {
-            String msg = Logging.getMessage("generic.AngleOutOfRange", latitude);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.latitude = latitude;
@@ -153,9 +144,7 @@ public class NmeaTrackPoint implements TrackPoint
     {
         if (longitude > 180 || longitude < -180)
         {
-            String msg = Logging.getMessage("generic.AngleOutOfRange", longitude);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.longitude = longitude;
@@ -170,9 +159,7 @@ public class NmeaTrackPoint implements TrackPoint
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.latitude = position.getLatitude().getDegrees();

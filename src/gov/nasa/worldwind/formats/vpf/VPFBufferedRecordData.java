@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.vpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.*;
 
 /**
@@ -99,9 +97,7 @@ public class VPFBufferedRecordData implements Iterable<VPFRecord>
     {
         if (parameterName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RecordData data = this.dataMap.get(parameterName);
@@ -112,9 +108,7 @@ public class VPFBufferedRecordData implements Iterable<VPFRecord>
     {
         if (parameterName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (dataBuffer != null)
@@ -131,9 +125,7 @@ public class VPFBufferedRecordData implements Iterable<VPFRecord>
     {
         if (id < 1 || id > this.numRecords)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", id);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new RecordImpl(id);
@@ -143,9 +135,7 @@ public class VPFBufferedRecordData implements Iterable<VPFRecord>
     {
         if (parameterName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RecordData data = this.dataMap.get(parameterName);
@@ -186,9 +176,7 @@ public class VPFBufferedRecordData implements Iterable<VPFRecord>
     {
         if (parameterName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RecordData data = this.dataMap.get(parameterName);

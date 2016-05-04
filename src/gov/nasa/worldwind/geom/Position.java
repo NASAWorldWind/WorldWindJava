@@ -110,9 +110,7 @@ public class Position extends LatLon
     {
         if (value1 == null || value2 == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (amount < 0)
@@ -150,9 +148,7 @@ public class Position extends LatLon
     {
         if (value1 == null || value2 == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LatLon latLon = LatLon.interpolateGreatCircle(amount, value1, value2);
@@ -185,9 +181,7 @@ public class Position extends LatLon
     {
         if (value1 == null || value2 == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         LatLon latLon = LatLon.interpolateRhumb(amount, value1, value2);
@@ -202,9 +196,7 @@ public class Position extends LatLon
     {
         if (positions == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position pos = null;
@@ -244,16 +236,12 @@ public class Position extends LatLon
         // TODO: Account for dateline spanning
         if (oldPosition == null || newPosition == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (positions == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<Position> newPositions = new ArrayList<Position>();
@@ -278,23 +266,17 @@ public class Position extends LatLon
     {
         if (globe == null)
         {
-            String msg = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (oldPosition == null || newPosition == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (positions == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<Position> newPositions = new ArrayList<Position>();

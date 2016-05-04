@@ -50,9 +50,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (AbstractLayer.isLayerConfigDocument(domElement))
@@ -98,9 +96,7 @@ public class DataConfigurationUtils
     {
         if (doc == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element el = doc.getDocumentElement();
@@ -142,9 +138,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (AbstractLayer.isLayerConfigDocument(domElement) || AbstractElevationModel.isElevationModelConfigDocument(
@@ -185,9 +179,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (AbstractLayer.isLayerConfigDocument(domElement))
@@ -238,9 +230,7 @@ public class DataConfigurationUtils
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String path = params.getStringValue(AVKey.DATA_CACHE_NAME);
@@ -288,9 +278,7 @@ public class DataConfigurationUtils
     {
         if (dataConfigCachePath == null || dataConfigCachePath.length() == 0)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -336,16 +324,12 @@ public class DataConfigurationUtils
     {
         if (fileStore == null)
         {
-            String message = Logging.getMessage("nullValue.FileStoreIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (fileName == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Look for an existing configuration file in the store. Return true if a configuration file does not exist,
@@ -362,8 +346,6 @@ public class DataConfigurationUtils
         {
             fileStore.removeFile(url);
 
-            String message = Logging.getMessage("generic.DataFileExpired", url);
-            Logging.logger().fine(message);
         }
 
         return false;
@@ -386,16 +368,12 @@ public class DataConfigurationUtils
     {
         if (fileStore == null)
         {
-            String message = Logging.getMessage("nullValue.FileStoreIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (fileName == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Attempt to find the specified file name in the store. If it exists, then we've found a match and we're done.
@@ -480,16 +458,12 @@ public class DataConfigurationUtils
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();
@@ -556,16 +530,12 @@ public class DataConfigurationUtils
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();
@@ -634,9 +604,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -675,9 +643,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -716,33 +682,25 @@ public class DataConfigurationUtils
     {
         if (caps == null)
         {
-            String message = Logging.getMessage("nullValue.WMSCapabilities");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String layerNames = params.getStringValue(AVKey.LAYER_NAMES);
         String styleNames = params.getStringValue(AVKey.STYLE_NAMES);
         if (layerNames == null || layerNames.length() == 0)
         {
-            String message = Logging.getMessage("nullValue.WMSLayerNames");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String[] names = layerNames.split(",");
         if (names == null || names.length == 0)
         {
-            String message = Logging.getMessage("nullValue.WMSLayerNames");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String coordinateSystem = params.getStringValue(AVKey.COORDINATE_SYSTEM);
@@ -753,7 +711,6 @@ public class DataConfigurationUtils
                 WMSLayerCapabilities layerCaps = caps.getLayerByName(name);
                 if (layerCaps == null)
                 {
-                    Logging.logger().warning(Logging.getMessage("WMS.LayerNameMissing", name));
                     continue;
                 }
 
@@ -794,8 +751,7 @@ public class DataConfigurationUtils
         // Throw an exception if there's no GET_MAP_URL property, or no getMapRequest URL in the WMS Capabilities.
         if (mapRequestURIString == null || mapRequestURIString.length() == 0)
         {
-            Logging.logger().severe("WMS.RequestMapURLMissing");
-            throw new WWRuntimeException(Logging.getMessage("WMS.RequestMapURLMissing"));
+            throw new WWRuntimeException();
         }
 
         // Get the GET_CAPABILITIES_URL from the WMS getCapabilitiesRequest URL.
@@ -838,9 +794,7 @@ public class DataConfigurationUtils
             }
             catch (URISyntaxException e)
             {
-                String message = Logging.getMessage("WMS.RequestMapURLBad", mapRequestURIString);
-                Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
         }
 
@@ -854,8 +808,7 @@ public class DataConfigurationUtils
         // Throw an exception if we cannot determine an image format to request.
         if (params.getStringValue(AVKey.IMAGE_FORMAT) == null)
         {
-            Logging.logger().severe("WMS.NoImageFormats");
-            throw new WWRuntimeException(Logging.getMessage("WMS.NoImageFormats"));
+            throw new WWRuntimeException();
         }
 
         // Determine bounding sector.
@@ -867,7 +820,6 @@ public class DataConfigurationUtils
                 Sector layerSector = caps.getLayerByName(name).getGeographicBoundingBox();
                 if (layerSector == null)
                 {
-                    Logging.logger().log(java.util.logging.Level.SEVERE, "WMS.NoGeographicBoundingBoxForLayer", name);
                     continue;
                 }
 
@@ -876,8 +828,7 @@ public class DataConfigurationUtils
 
             if (sector == null)
             {
-                Logging.logger().severe("WMS.NoGeographicBoundingBox");
-                throw new WWRuntimeException(Logging.getMessage("WMS.NoGeographicBoundingBox"));
+                throw new WWRuntimeException();
             }
             params.setValue(AVKey.SECTOR, sector);
         }
@@ -891,23 +842,17 @@ public class DataConfigurationUtils
     {
         if (caps == null)
         {
-            String message = Logging.getMessage("nullValue.WMSCapabilities");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (coverage == null)
         {
-            String message = Logging.getMessage("nullValue.WCSDescribeCoverage");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         WCS100CoverageOffering offering = coverage.getCoverageOfferings().get(0);
@@ -944,10 +889,7 @@ public class DataConfigurationUtils
             }
             catch (URISyntaxException e)
             {
-                String message = Logging.getMessage("WCS.RequestMapURLBad",
-                    params.getStringValue(AVKey.GET_COVERAGE_URL));
-                Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
         }
 
@@ -1024,9 +966,7 @@ public class DataConfigurationUtils
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String uri = params.getStringValue(AVKey.GET_CAPABILITIES_URL);
@@ -1052,13 +992,9 @@ public class DataConfigurationUtils
         }
         catch (URISyntaxException e)
         {
-            String message = Logging.getMessage("generic.URIInvalid", uri);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
         catch (MalformedURLException e)
         {
-            String message = Logging.getMessage("generic.URIInvalid", uri);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
 
         return null;
@@ -1079,9 +1015,7 @@ public class DataConfigurationUtils
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String s = params.getStringValue(AVKey.LAYER_NAMES);
@@ -1249,16 +1183,12 @@ public class DataConfigurationUtils
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (context == null)
         {
-            String message = Logging.getMessage("nullValue.ContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Title and cache name properties.
@@ -1370,9 +1300,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -1450,9 +1378,7 @@ public class DataConfigurationUtils
     {
         if (levelSet == null)
         {
-            String message = Logging.getMessage("nullValue.LevelSetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -1647,9 +1573,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Element[] els = WWXML.getElements(domElement, "/dataDescriptor", null);
@@ -1672,9 +1596,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();
@@ -1896,9 +1818,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();
@@ -1921,9 +1841,7 @@ public class DataConfigurationUtils
     {
         if (event == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!event.isStartElement())
@@ -1971,9 +1889,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();
@@ -2126,9 +2042,7 @@ public class DataConfigurationUtils
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XPath xpath = WWXML.makeXPath();

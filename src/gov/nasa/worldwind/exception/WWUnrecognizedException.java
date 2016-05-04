@@ -16,21 +16,19 @@ public class WWUnrecognizedException extends WWRuntimeException
     /**
      * Construct an exception with a message string.
      *
-     * @param msg the message.
      */
-    public WWUnrecognizedException(String msg)
+    public WWUnrecognizedException()
     {
-        super(msg);
+        super();
     }
 
     /**
      * Construct an exception with a message string and a intial-cause exception.
      *
-     * @param msg the message.
      * @param t   the exception causing this exception.
      */
-    public WWUnrecognizedException(String msg, Throwable t)
+    public WWUnrecognizedException(Throwable t)
     {
-        super(msg, t);
+        super(t);
     }
 }

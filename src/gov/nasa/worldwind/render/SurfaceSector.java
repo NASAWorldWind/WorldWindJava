@@ -53,9 +53,7 @@ public class SurfaceSector extends AbstractSurfaceShape implements Exportable
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sector = sector;
@@ -77,9 +75,7 @@ public class SurfaceSector extends AbstractSurfaceShape implements Exportable
 
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sector = sector;
@@ -94,9 +90,7 @@ public class SurfaceSector extends AbstractSurfaceShape implements Exportable
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sector = sector;
@@ -225,9 +219,7 @@ public class SurfaceSector extends AbstractSurfaceShape implements Exportable
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         xmlWriter.writeStartElement("Placemark");

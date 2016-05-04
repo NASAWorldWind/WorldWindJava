@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.geom;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.*;
 
 /**
@@ -33,9 +31,7 @@ public final class Intersection // Instances are immutable
     {
         if (intersectionPoint == null)
         {
-            String message = Logging.getMessage("nullValue.IntersectionPointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.intersectionPoint = intersectionPoint;
         this.isTangent = isTangent;
@@ -62,9 +58,7 @@ public final class Intersection // Instances are immutable
     {
         if (intersectionPoint == null)
         {
-            String message = Logging.getMessage("nullValue.IntersectionPointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intersectionPoint = intersectionPoint;

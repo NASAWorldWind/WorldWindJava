@@ -10,7 +10,6 @@ import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.data.*;
 import gov.nasa.worldwind.formats.tiff.GeoTiff;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.io.*;
 import java.nio.*;
@@ -47,23 +46,17 @@ public class DTED
     {
         if (null == file)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", file.getAbsolutePath());
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (!file.canRead())
         {
-            String message = Logging.getMessage("generic.FileNoReadPermission", file.getAbsolutePath());
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         return new RandomAccessFile(file, "r");
@@ -79,7 +72,6 @@ public class DTED
             }
             catch (Exception ex)
             {
-                Logging.logger().finest(ex.getMessage());
             }
         }
     }
@@ -191,9 +183,7 @@ public class DTED
 
             if (expectedChkSum != dataChkSum)
             {
-                String message = Logging.getMessage("DTED.DataRecordChecksumError", expectedChkSum, dataChkSum);
-                Logging.logger().severe(message);
-                throw new IOException(message);
+                    throw new IOException();
             }
         }
 
@@ -207,9 +197,7 @@ public class DTED
     {
         if (null == angle)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         // let's separate DDDMMSSH with spaces and use a standard Angle.fromDMS() method
@@ -291,10 +279,8 @@ public class DTED
         String id = new String(acc, 0, 3);
         if (!"ACC".equalsIgnoreCase(id))
         {
-            String reason = Logging.getMessage("DTED.UnexpectedRecordId", id, "ACC");
-            String message = Logging.getMessage("DTED.BadFileFormat", reason);
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            String reason = null;
+            throw new IOException();
         }
     }
 
@@ -313,10 +299,8 @@ public class DTED
         String id = new String(uhl, 0, 3);
         if (!"UHL".equalsIgnoreCase(id))
         {
-            String reason = Logging.getMessage("DTED.UnexpectedRecordId", id, "UHL");
-            String message = Logging.getMessage("DTED.BadFileFormat", reason);
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            String reason = null;
+            throw new IOException();
         }
 
         metadata.setValue(AVKey.BYTE_ORDER, AVKey.BIG_ENDIAN);
@@ -391,10 +375,8 @@ public class DTED
         String id = new String(dsi, 0, 3);
         if (!"DSI".equalsIgnoreCase(id))
         {
-            String reason = Logging.getMessage("DTED.UnexpectedRecordId", id, "DSI");
-            String message = Logging.getMessage("DTED.BadFileFormat", reason);
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            String reason = null;
+            throw new IOException();
         }
 
         if (!metadata.hasKey(AVKey.CLASS_LEVEL))

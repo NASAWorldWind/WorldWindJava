@@ -68,9 +68,7 @@ public abstract class BitSetQuadTreeFilter
     {
         if (numLevels < 1)
         {
-            String message = Logging.getMessage("generic.DepthOutOfRange", numLevels);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.numLevels = numLevels;
@@ -299,9 +297,7 @@ public abstract class BitSetQuadTreeFilter
         {
             if (testSector == null)
             {
-                String message = Logging.getMessage("nullValue.SectorIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             return this.getOnBits(topRegions, testSector.asDegreesArray(), outIds);
@@ -328,16 +324,12 @@ public abstract class BitSetQuadTreeFilter
         {
             if (topRegions == null)
             {
-                String message = Logging.getMessage("generic.DepthOutOfRange", numLevels);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (testRegion == null)
             {
-                String message = Logging.getMessage("nullValue.ArrayIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.intersectingBits = outIds != null ? outIds : new ArrayList<Integer>();

@@ -8,7 +8,6 @@ package gov.nasa.worldwind;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.event.*;
-import gov.nasa.worldwind.util.*;
 
 /**
  * Implements <code>WWObject</code> functionality. Meant to be either subclassed or aggregated by classes implementing
@@ -41,9 +40,7 @@ public class WWObjectImpl extends AVListImpl implements WWObject
     {
         if (propertyChangeEvent == null)
         {
-            String msg = Logging.getMessage("nullValue.PropertyChangeEventIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Notify all *my* listeners of the change that I caught

@@ -63,23 +63,17 @@ public class KMLModelPlacemarkImpl extends WWObjectImpl implements KMLRenderable
     {
         if (tc == null)
         {
-            String msg = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (placemark == null)
         {
-            String msg = Logging.getMessage("nullValue.ParentIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (geom == null)
         {
-            String msg = Logging.getMessage("nullValue.GeometryIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.model = (KMLModel) geom;
@@ -338,16 +332,12 @@ public class KMLModelPlacemarkImpl extends WWObjectImpl implements KMLRenderable
         {
             if (placemark == null)
             {
-                String message = Logging.getMessage("nullValue.ObjectIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (address == null)
             {
-                String message = Logging.getMessage("nullValue.PathIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.placemark = placemark;
@@ -365,14 +355,10 @@ public class KMLModelPlacemarkImpl extends WWObjectImpl implements KMLRenderable
             }
             catch (IOException e)
             {
-                String message = Logging.getMessage("generic.ExceptionWhileReading", e.getMessage());
-                Logging.logger().warning(message);
-            }
+                }
             catch (XMLStreamException e)
             {
-                String message = Logging.getMessage("generic.ExceptionAttemptingToParseXml", e.getMessage());
-                Logging.logger().warning(message);
-            }
+                }
         }
 
         @Override

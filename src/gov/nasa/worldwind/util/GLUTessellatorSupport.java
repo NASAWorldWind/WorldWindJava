@@ -65,16 +65,12 @@ public class GLUTessellatorSupport
     {
         if (callback == null)
         {
-            String message = Logging.getMessage("nullValue.CallbackIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (normal == null)
         {
-            String message = Logging.getMessage("nullValue.NormalIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.tess = GLU.gluNewTess();
@@ -112,9 +108,7 @@ public class GLUTessellatorSupport
     {
         if (gl == null)
         {
-            String message = Logging.getMessage("nullValue.GLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new OGLDrawPrimitivesCallback(gl);
@@ -157,9 +151,7 @@ public class GLUTessellatorSupport
         {
             if (gl == null)
             {
-                String message = Logging.getMessage("nullValue.GLIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.gl = gl;
@@ -309,9 +301,7 @@ public class GLUTessellatorSupport
         {
             if (type != GL.GL_TRIANGLES)
             {
-                String msg = Logging.getMessage("generic.UnexpectedPrimitiveType", type);
-                Logging.logger().warning(msg);
-            }
+                }
         }
 
         @Override
@@ -411,9 +401,7 @@ public class GLUTessellatorSupport
         {
             if (tessellator == null)
             {
-                String msg = Logging.getMessage("nullValue.TessellatorIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             this.tess = tessellator;
@@ -483,8 +471,6 @@ public class GLUTessellatorSupport
         public void error(int errno)
         {
             String errstr = convertGLUTessErrorToString(errno);
-            String msg = Logging.getMessage("generic.ExceptionWhileTessellating", errstr);
-            Logging.logger().severe(msg);
         }
     }
 }

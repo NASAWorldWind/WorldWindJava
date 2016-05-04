@@ -22,11 +22,9 @@ public class BasicScheduledTaskService extends WWObjectImpl
     /** Default thread pool size. */
     protected static final int DEFAULT_POOL_SIZE = 1;
     /** Name assigned to active threads. */
-    protected static final String RUNNING_THREAD_NAME_PREFIX = Logging.getMessage(
-        "ThreadedTaskService.RunningThreadNamePrefix");
+    protected static final String RUNNING_THREAD_NAME_PREFIX = null;
     /** Name assigned to idle threads. */
-    protected static final String IDLE_THREAD_NAME_PREFIX = Logging.getMessage(
-        "ThreadedTaskService.IdleThreadNamePrefix");
+    protected static final String IDLE_THREAD_NAME_PREFIX = null;
 
     /** Tasks currently running. */
     protected ConcurrentLinkedQueue<Runnable> activeTasks;
@@ -60,8 +58,6 @@ public class BasicScheduledTaskService extends WWObjectImpl
 
     public void uncaughtException(Thread thread, Throwable throwable)
     {
-        String message = Logging.getMessage("ThreadedTaskService.UncaughtExceptionDuringTask", thread.getName());
-        Logging.logger().fine(message);
         Thread.currentThread().getThreadGroup().uncaughtException(thread, throwable);
     }
 
@@ -87,9 +83,7 @@ public class BasicScheduledTaskService extends WWObjectImpl
                     public void rejectedExecution(Runnable runnable, ScheduledThreadPoolExecutor threadPoolExecutor)
                     {
                         // Interposes logging for rejected execution
-                        String message = Logging.getMessage("ThreadedTaskService.ResourceRejected", runnable);
-                        Logging.logger().fine(message);
-                        super.rejectedExecution(runnable, threadPoolExecutor);
+                                    super.rejectedExecution(runnable, threadPoolExecutor);
                     }
                 });
         }
@@ -99,25 +93,19 @@ public class BasicScheduledTaskService extends WWObjectImpl
         {
             if (thread == null)
             {
-                String msg = Logging.getMessage("nullValue.ThreadIsNull");
-                Logging.logger().fine(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (runnable == null)
             {
-                String msg = Logging.getMessage("nullValue.RunnableIsNull");
-                Logging.logger().fine(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (BasicScheduledTaskService.this.activeTasks.contains(runnable))
             {
                 // Duplicate requests are simply interrupted here. The task itself must check the thread's isInterrupted
                 // flag and actually terminate the task.
-                String message = Logging.getMessage("ThreadedTaskService.CancellingDuplicateTask", runnable);
-                Logging.logger().finer(message);
-                thread.interrupt();
+                    thread.interrupt();
                 return;
             }
 
@@ -136,9 +124,7 @@ public class BasicScheduledTaskService extends WWObjectImpl
         {
             if (runnable == null)
             {
-                String msg = Logging.getMessage("nullValue.RunnableIsNull");
-                Logging.logger().fine(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             super.afterExecute(runnable, throwable);
@@ -155,9 +141,7 @@ public class BasicScheduledTaskService extends WWObjectImpl
     {
         if (runnable == null)
         {
-            String message = Logging.getMessage("nullValue.RunnableIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Do not queue duplicates.
@@ -172,9 +156,7 @@ public class BasicScheduledTaskService extends WWObjectImpl
     {
         if (runnable == null)
         {
-            String message = Logging.getMessage("nullValue.RunnableIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Do not queue duplicates.
@@ -190,9 +172,7 @@ public class BasicScheduledTaskService extends WWObjectImpl
     {
         if (runnable == null)
         {
-            String message = Logging.getMessage("nullValue.RunnableIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Do not queue duplicates.

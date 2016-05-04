@@ -17,7 +17,6 @@ import java.io.*;
 import java.net.*;
 import java.nio.ByteBuffer;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * @author tag
@@ -48,9 +47,7 @@ public abstract class Capabilities
     {
         if (uri == null)
         {
-            String message = Logging.getMessage("nullValue.URIIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         InputStream is = null;
@@ -71,9 +68,7 @@ public abstract class Capabilities
 
             if (retriever == null)
             {
-                String message = Logging.getMessage("generic.UnrecognizedProtocol");
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             if (connectTimeout != null)
@@ -86,25 +81,18 @@ public abstract class Capabilities
 
             if (!retriever.getState().equals(URLRetriever.RETRIEVER_STATE_SUCCESSFUL))
             {
-                String message = Logging.getMessage("generic.RetrievalFailed", uri.toString());
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             if (retriever.getBuffer() == null || retriever.getBuffer().limit() == 0)
             {
-                String message = Logging.getMessage("generic.RetrievalReturnedNoContent", uri.toString());
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             if (retriever.getContentType().equalsIgnoreCase("application/vnd.ogc.se_xml"))
             {
                 String exceptionMessage = WWXML.extractOGCServiceException(retriever.getBuffer());
-                String message = Logging.getMessage("WMS.ServiceException",
-                    uri.toString() + ": " + (exceptionMessage != null ? exceptionMessage : ""));
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             // Parse the DOM as a capabilities document.
@@ -118,24 +106,18 @@ public abstract class Capabilities
         }
         catch (URISyntaxException e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("generic.URIInvalid", uri.toString()), e);
             throw e;
         }
         catch (ParserConfigurationException e)
         {
-            Logging.logger().fine(Logging.getMessage("WMS.ParserConfigurationException", uri.toString()));
             throw e;
         }
         catch (IOException e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("generic.ExceptionAttemptingToReadFrom", uri.toString()), e);
             throw e;
         }
         catch (SAXException e)
         {
-            Logging.logger().fine(Logging.getMessage("WMS.ParsingError", uri.toString()));
             throw e;
         }
         finally
@@ -154,9 +136,7 @@ public abstract class Capabilities
             String exceptionMessage = WWXML.checkOGCException(doc);
             if (exceptionMessage != null)
             {
-                String message = Logging.getMessage("WMS.ServiceException", exceptionMessage);
-                Logging.logger().severe(message);
-                throw new ServiceException(exceptionMessage);
+                    throw new ServiceException();
             }
 
             String version = xpath.evaluate(altPaths("*/@wms:version"), doc);
@@ -170,7 +150,6 @@ public abstract class Capabilities
         }
         catch (XPathExpressionException e)
         {
-            Logging.logger().log(Level.SEVERE, "WMS.ParsingError", e);
             return null;
         }
     }
@@ -185,22 +164,17 @@ public abstract class Capabilities
             this.service = (Element) this.xpath.evaluate(altPaths("*/wms:Service"), doc, XPathConstants.NODE);
             if (this.service == null)
             {
-                String message = Logging.getMessage("WMS.NoServiceElement", "XML document");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.capability = (Element) this.xpath.evaluate(altPaths("*/wms:Capability"), doc, XPathConstants.NODE);
             if (this.capability == null)
             {
-                String message = Logging.getMessage("WMS.NoCapabilityElement", "XML document");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
         }
         catch (XPathExpressionException e)
         {
-            Logging.logger().log(Level.SEVERE, "WMS.ParsingError", e);
         }
     }
 
@@ -377,16 +351,12 @@ public abstract class Capabilities
     {
         if (caps == null)
         {
-            String message = Logging.getMessage("nullValue.WMSCapabilities");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (layerNames == null)
         {
-            String message = Logging.getMessage("nullValue.WMSLayerNames");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String lastUpdate = null;
@@ -410,9 +380,7 @@ public abstract class Capabilities
             }
             catch (NumberFormatException e)
             {
-                String message = Logging.getMessage("generic.ConversionError", lastUpdate);
-                Logging.logger().warning(message);
-            }
+                }
         }
 
         return null;
@@ -422,16 +390,12 @@ public abstract class Capabilities
     {
         if (caps == null)
         {
-            String message = Logging.getMessage("nullValue.WMSCapabilities");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (layerNames == null)
         {
-            String message = Logging.getMessage("nullValue.WMSLayerNames");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String extremeMin = null;
@@ -467,10 +431,7 @@ public abstract class Capabilities
             }
             catch (NumberFormatException e)
             {
-                String message = Logging.getMessage("generic.ConversionError",
-                    extremeMin != null ? extremeMin : "" + extremeMax != null ? extremeMax : "");
-                Logging.logger().severe(message);
-            }
+                }
         }
 
         return null;

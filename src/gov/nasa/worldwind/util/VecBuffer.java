@@ -38,16 +38,12 @@ public class VecBuffer
     {
         if (coordsPerVec < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "coordsPerVec < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.coordsPerVec = coordsPerVec;
@@ -112,16 +108,12 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (array == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int index = this.indexFromVectorPosition(position);
@@ -150,16 +142,12 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (array == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int index = this.indexFromVectorPosition(position);
@@ -186,16 +174,12 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (array == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int index = this.indexFromVectorPosition(position);
@@ -220,16 +204,12 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (array == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int index = this.indexFromVectorPosition(position);
@@ -257,17 +237,12 @@ public class VecBuffer
     {
         if (position < 0 || position + count > this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                "position < 0 or position + count >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (array == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int index = this.indexFromVectorPosition(position);
@@ -275,9 +250,7 @@ public class VecBuffer
 
         if (array.length < length)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", array.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.buffer.putDouble(index, array, 0, length);
@@ -297,9 +270,7 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int index = this.indexFromVectorPosition(position);
@@ -325,16 +296,12 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.putSubBuffer(position, buffer, 0, buffer.getSize());
@@ -359,41 +326,31 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Not enough room in buffer.
         if (buffer.getSize() < (offset + size))
         {
-            String message = Logging.getMessage("generic.BufferOverflow", buffer.getSize(), size);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Buffer is incompatible.
         if (this.coordsPerVec != buffer.coordsPerVec)
         {
-            String message = Logging.getMessage("generic.BufferIncompatible", buffer);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Buffer is too large.
         int sizeNeeded = position + size;
         if (this.getSize() < sizeNeeded)
         {
-            String message = Logging.getMessage("generic.BufferOverflow", this.getSize(), sizeNeeded);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int index = this.indexFromVectorPosition(position);
@@ -416,16 +373,12 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4)
         {
-            String message = Logging.getMessage("generic.BufferIncompatible", this);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] compArray = new double[this.coordsPerVec];
@@ -447,23 +400,17 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (vec == null)
         {
-            String message = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4)
         {
-            String message = Logging.getMessage("generic.BufferIncompatible", this);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] compArray = new double[this.coordsPerVec];
@@ -485,16 +432,12 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.coordsPerVec < 2)
         {
-            String message = Logging.getMessage("generic.BufferIncompatible", this);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] compArray = new double[2];
@@ -517,23 +460,17 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (ll == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.coordsPerVec < 2)
         {
-            String message = Logging.getMessage("generic.BufferIncompatible", this);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] compArray = new double[2];
@@ -557,16 +494,12 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.coordsPerVec < 2)
         {
-            String message = Logging.getMessage("generic.BufferIncompatible", this);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] compArray = new double[this.coordsPerVec];
@@ -592,23 +525,17 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (p == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.coordsPerVec < 2)
         {
-            String message = Logging.getMessage("generic.BufferIncompatible", this);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] compArray = new double[3];
@@ -633,9 +560,7 @@ public class VecBuffer
     {
         if (newSize < this.getSize())
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         BufferWrapper newBuffer = this.buffer.copyOf(this.coordsPerVec * newSize);
@@ -709,16 +634,12 @@ public class VecBuffer
     {
         if (position < 0 || position >= this.getSize())
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int pos = position;
@@ -780,9 +701,7 @@ public class VecBuffer
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int pos = position;
@@ -843,9 +762,7 @@ public class VecBuffer
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int pos = position;
@@ -906,9 +823,7 @@ public class VecBuffer
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int pos = position;
@@ -936,17 +851,12 @@ public class VecBuffer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.coordsPerVec != 3 && this.coordsPerVec != 4)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                "coordinates per vertex = " + this.coordsPerVec);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -967,17 +877,12 @@ public class VecBuffer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.coordsPerVec != 3)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                "coordinates per vertex = " + this.coordsPerVec);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -998,17 +903,12 @@ public class VecBuffer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                "coordinates per vertex = " + this.coordsPerVec);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -1030,17 +930,12 @@ public class VecBuffer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.coordsPerVec != 1 && this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                "coordinates per vertex = " + this.coordsPerVec);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -1060,9 +955,7 @@ public class VecBuffer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         dc.getGL().glDrawArrays(drawMode, 0, this.getSize());

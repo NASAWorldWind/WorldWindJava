@@ -170,9 +170,7 @@ public class WMSCapabilities extends OGCCapabilities
     {
         if (layerNames == null)
         {
-            String message = Logging.getMessage("nullValue.WMSLayerNames");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String lastUpdate = null;
@@ -196,9 +194,7 @@ public class WMSCapabilities extends OGCCapabilities
             }
             catch (NumberFormatException e)
             {
-                String message = Logging.getMessage("generic.ConversionError", lastUpdate);
-                Logging.logger().warning(message);
-            }
+                }
         }
 
         return null;
@@ -258,8 +254,6 @@ public class WMSCapabilities extends OGCCapabilities
         }
         catch (ParseException e)
         {
-            String message = Logging.getMessage("WMS.LastUpdateFormatUnrecognized", dateString);
-            Logging.logger().info(message);
             return null;
         }
     }
@@ -268,9 +262,7 @@ public class WMSCapabilities extends OGCCapabilities
     {
         if (layerNames == null)
         {
-            String message = Logging.getMessage("nullValue.WMSLayerNames");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Double extremeMin = null;
@@ -345,16 +337,12 @@ public class WMSCapabilities extends OGCCapabilities
     {
         if (layerNames == null || layerNames.length == 0)
         {
-            String message = Logging.getMessage("nullValue.WMSLayerNames");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(coordSys))
         {
-            String message = Logging.getMessage("nullValue.WMSCoordSys");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (String name : layerNames)

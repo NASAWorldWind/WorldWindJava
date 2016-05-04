@@ -9,7 +9,6 @@ package gov.nasa.worldwind.render;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.pick.PickedObject;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.GL;
 import java.awt.*;
@@ -61,9 +60,7 @@ public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements Globe
 
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;
@@ -80,9 +77,7 @@ public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements Globe
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;

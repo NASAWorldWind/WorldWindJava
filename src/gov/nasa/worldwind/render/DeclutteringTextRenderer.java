@@ -64,16 +64,12 @@ public class DeclutteringTextRenderer
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (textIterable == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getVisibleSector() == null)
@@ -133,9 +129,7 @@ public class DeclutteringTextRenderer
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -177,9 +171,7 @@ public class DeclutteringTextRenderer
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -198,8 +190,6 @@ public class DeclutteringTextRenderer
     {
         if (uText.getPoint() == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().fine(msg);
             return null;
         }
 
@@ -376,7 +366,6 @@ public class DeclutteringTextRenderer
             {
                 // This is likely a known JOGL 1.1.1 bug - see AMZN-287 or 343
                 // Log once and then ignore.
-                Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionWhileRenderingText", e);
                 this.hasJOGLv111Bug = true;
             }
         }

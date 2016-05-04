@@ -62,23 +62,17 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
     {
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 0)
         {
-            String message = Logging.getMessage("Geom.HeightIsNegative", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.center = center;
@@ -103,9 +97,7 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
 
         if (heading == null)
         {
-            String message = Logging.getMessage("nullValue.HeadingIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.heading = heading;
@@ -129,23 +121,17 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
 
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 0)
         {
-            String message = Logging.getMessage("Geom.HeightIsNegative", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.center = center;
@@ -187,9 +173,7 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
 
         if (heading == null)
         {
-            String message = Logging.getMessage("nullValue.HeadingIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.heading = heading;
@@ -204,9 +188,7 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
     {
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.center = center;
@@ -227,9 +209,7 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.width = width;
@@ -240,9 +220,7 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
     {
         if (height < 0)
         {
-            String message = Logging.getMessage("Geom.HeightIsNegative", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.height = height;
@@ -253,16 +231,12 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthIsNegative", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 0)
         {
-            String message = Logging.getMessage("Geom.HeightIsNegative", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.width = width;
@@ -279,9 +253,7 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
     {
         if (heading == null)
         {
-            String message = Logging.getMessage("nullValue.HeadingIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.heading = heading;
@@ -328,9 +300,7 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.width == 0 && this.height == 0)
@@ -465,9 +435,7 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         xmlWriter.writeStartElement("Placemark");

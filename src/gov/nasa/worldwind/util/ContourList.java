@@ -29,9 +29,7 @@ public class ContourList extends WWObjectImpl implements Combinable
     {
         if (that == null)
         {
-            String msg = Logging.getMessage("nullValue.ContourListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.contours.addAll(that.contours);
@@ -47,9 +45,7 @@ public class ContourList extends WWObjectImpl implements Combinable
     {
         if (index < 0 || index >= this.contours.size())
         {
-            String msg = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.contours.get(index);
@@ -59,16 +55,12 @@ public class ContourList extends WWObjectImpl implements Combinable
     {
         if (index < 0 || index >= this.contours.size())
         {
-            String msg = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (contour == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.contours.set(index, contour);
@@ -79,9 +71,7 @@ public class ContourList extends WWObjectImpl implements Combinable
     {
         if (contour == null)
         {
-            String msg = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.contours.add(contour);
@@ -94,9 +84,7 @@ public class ContourList extends WWObjectImpl implements Combinable
     {
         if (that == null)
         {
-            String msg = Logging.getMessage("nullValue.ContourListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.contours.addAll(that.contours);
@@ -131,9 +119,7 @@ public class ContourList extends WWObjectImpl implements Combinable
     {
         if (cc == null)
         {
-            String msg = Logging.getMessage("nullValue.CombineContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (cc.isBoundingSectorMode())

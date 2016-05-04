@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.event;
 
 import gov.nasa.worldwind.pick.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -244,7 +243,7 @@ public class SelectEvent extends WWEvent
     public String toString()
     {
         StringBuilder sb = new StringBuilder(this.getClass().getName() + " "
-            + (this.eventAction != null ? this.eventAction : Logging.getMessage("generic.Unknown")));
+            + (this.eventAction != null ? this.eventAction : (String) null));
         if (this.pickedObjects != null && this.pickedObjects.getTopObject() != null)
             sb.append(", ").append(this.pickedObjects.getTopObject().getClass().getName());
 

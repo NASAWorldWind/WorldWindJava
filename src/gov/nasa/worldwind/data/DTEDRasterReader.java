@@ -68,7 +68,6 @@ public class DTEDRasterReader extends AbstractDataRasterReader
         }
         catch (Throwable t)
         {
-            Logging.logger().finest(t.getMessage());
             canRead = false;
         }
 
@@ -81,9 +80,7 @@ public class DTEDRasterReader extends AbstractDataRasterReader
         File file = this.getFile(source);
         if (null == file)
         {
-            String message = Logging.getMessage("generic.UnrecognizedSourceTypeOrUnavailableSource", source);
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         // This may be the first time the file has been opened, so pass the metadata list to the read method
@@ -101,9 +98,7 @@ public class DTEDRasterReader extends AbstractDataRasterReader
         File file = this.getFile(source);
         if (null == file)
         {
-            String message = Logging.getMessage("generic.UnrecognizedSourceTypeOrUnavailableSource", source);
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         AVList metadata = DTED.readMetadata(file);

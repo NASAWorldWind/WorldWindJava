@@ -38,9 +38,7 @@ public class VPFBasicPrimitiveDataFactory implements VPFPrimitiveDataFactory
     {
         if (coverage == null)
         {
-            String message = Logging.getMessage("nullValue.CoverageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String path = getPrimitiveTablePath(coverage, this.tile, "");

@@ -11,7 +11,6 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.geom.Vec4;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author dcollins
@@ -36,9 +35,7 @@ public class OrbitViewCollisionSupport
     {
         if (collisionThreshold < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", collisionThreshold);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.collisionThreshold = collisionThreshold;
@@ -53,9 +50,7 @@ public class OrbitViewCollisionSupport
     {
         if (numIterations < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", numIterations);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.numIterations = numIterations;
@@ -65,28 +60,20 @@ public class OrbitViewCollisionSupport
     {
         if (orbitView == null)
         {
-            String message = Logging.getMessage("nullValue.OrbitViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (nearDistance < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", nearDistance);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         Globe globe = dc.getGlobe();
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Matrix modelviewInv = getModelviewInverse(globe,
@@ -108,28 +95,20 @@ public class OrbitViewCollisionSupport
     {
         if (orbitView == null)
         {
-            String message = Logging.getMessage("nullValue.OrbitViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (nearDistance < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", nearDistance);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         Globe globe = dc.getGlobe();
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position newCenter = null;
@@ -161,28 +140,20 @@ public class OrbitViewCollisionSupport
     {
         if (orbitView == null)
         {
-            String message = Logging.getMessage("nullValue.OrbitViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (nearDistance < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", nearDistance);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         Globe globe = dc.getGlobe();
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Angle newPitch = null;

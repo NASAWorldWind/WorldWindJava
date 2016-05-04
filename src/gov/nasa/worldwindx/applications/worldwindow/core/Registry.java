@@ -36,7 +36,7 @@ public class Registry
         {
             String msg = "Class name is null or zero length";
             Util.getLogger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -47,7 +47,7 @@ public class Registry
         {
             String msg = "Exception creating object " + className;
             Util.getLogger().log(java.util.logging.Level.SEVERE, msg, e);
-            throw new RuntimeException(msg, e);
+            throw new RuntimeException(e);
         }
         catch (Throwable t)
         {
@@ -64,21 +64,21 @@ public class Registry
         {
             String msg = "Class or class name is null";
             Util.getLogger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!(classOrName instanceof Class || classOrName instanceof String))
         {
             String msg = "Class or class name is not Class or String type";
             Util.getLogger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (classOrName instanceof String && ((String) classOrName).length() == 0)
         {
             String msg = "Class name is null or zero length";
             Util.getLogger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Class<?> c = classOrName instanceof Class ? (Class) classOrName : Class.forName(((String) classOrName).trim());
@@ -109,7 +109,7 @@ public class Registry
         {
             String msg = "Exception creating object " + className;
             Util.getLogger().log(java.util.logging.Level.SEVERE, msg, className);
-            throw new RuntimeException(msg, e);
+            throw new RuntimeException(e);
         }
         catch (Throwable t)
         {
@@ -126,14 +126,14 @@ public class Registry
         {
             String msg = String.format("Object ID %s is null or zero length", objectID);
             Util.getLogger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (classOrName == null || (classOrName instanceof String && WWUtil.isEmpty(classOrName)))
         {
             String msg = String.format("Class name %s for feature %s is zero length", classOrName, objectID);
             Util.getLogger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         registerObject(objectID, createRegistryObject(classOrName));

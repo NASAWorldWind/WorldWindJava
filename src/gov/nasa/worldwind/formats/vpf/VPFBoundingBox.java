@@ -56,9 +56,7 @@ public class VPFBoundingBox
     {
         if (boundingBox == null)
         {
-            String message = Logging.getMessage("nullValue.BoundingBoxIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new VPFBoundingBox(
@@ -84,16 +82,12 @@ public class VPFBoundingBox
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.getCoordsPerVec() < 2)
         {
-            String message = Logging.getMessage("generic.BufferIncompatible", buffer);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double xmin = Double.MAX_VALUE;

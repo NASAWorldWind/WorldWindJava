@@ -42,18 +42,13 @@ public class Cylinder implements Extent, Renderable
     {
         if (bottomCenter == null || topCenter == null || bottomCenter.equals(topCenter))
         {
-            String message = Logging.getMessage(
-                bottomCenter == null || topCenter == null ? "nullValue.EndPointIsNull" : "generic.EndPointsCoincident");
 
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cylinderRadius <= 0)
         {
-            String message = Logging.getMessage("Geom.Cylinder.RadiusIsZeroOrNegative", cylinderRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Convert the bottom center and top center points to points in four-dimensional homogeneous coordinates to
@@ -83,18 +78,13 @@ public class Cylinder implements Extent, Renderable
     {
         if (bottomCenter == null || topCenter == null || bottomCenter.equals(topCenter))
         {
-            String message = Logging.getMessage(
-                bottomCenter == null || topCenter == null ? "nullValue.EndPointIsNull" : "generic.EndPointsCoincident");
 
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (cylinderRadius <= 0)
         {
-            String message = Logging.getMessage("Geom.Cylinder.RadiusIsZeroOrNegative", cylinderRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Convert the bottom center and top center points to points in four-dimensional homogeneous coordinates to
@@ -212,17 +202,13 @@ public class Cylinder implements Extent, Renderable
     {
         if (points == null)
         {
-            String message = Logging.getMessage("nullValue.PointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Vec4[] axes = WWMath.computePrincipalAxes(points);
         if (axes == null)
         {
-            String message = Logging.getMessage("generic.ListIsEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Vec4 r = axes[0];
@@ -294,9 +280,7 @@ public class Cylinder implements Extent, Renderable
     {
         if (line == null)
         {
-            String message = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double[] tVals = new double[2];
@@ -323,9 +307,7 @@ public class Cylinder implements Extent, Renderable
     {
         if (line == null)
         {
-            String message = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return intersect(line) != null;
@@ -504,9 +486,7 @@ public class Cylinder implements Extent, Renderable
     {
         if (plane == null)
         {
-            String message = Logging.getMessage("nullValue.PlaneIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double effectiveRadius = this.getEffectiveRadius(plane);
@@ -518,10 +498,8 @@ public class Cylinder implements Extent, Renderable
     {
         if (frustum == null)
         {
-            String message = Logging.getMessage("nullValue.FrustumIsNull");
 
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double intersectionPoint;
@@ -562,9 +540,7 @@ public class Cylinder implements Extent, Renderable
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // TODO: compute a more exact projected screen area for Cylinder.
@@ -590,16 +566,12 @@ public class Cylinder implements Extent, Renderable
     {
         if (globe == null)
         {
-            String msg = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double[] minAndMaxElevations = globe.getMinAndMaxElevations(sector);
@@ -629,9 +601,7 @@ public class Cylinder implements Extent, Renderable
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Compute the exaggerated minimum and maximum heights.
@@ -677,9 +647,7 @@ public class Cylinder implements Extent, Renderable
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 centerPoint = Vec4.ZERO;
@@ -725,9 +693,7 @@ public class Cylinder implements Extent, Renderable
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Get three non-coincident points on the sector's quadrilateral. We choose the north or south pair that is
@@ -806,9 +772,7 @@ public class Cylinder implements Extent, Renderable
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Compute the top center point as the surface point with maxHeight at the sector's centroid.
@@ -857,9 +821,7 @@ public class Cylinder implements Extent, Renderable
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Compute a matrix that will transform world coordinates to cylinder coordinates. The negative z-axis

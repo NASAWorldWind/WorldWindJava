@@ -11,7 +11,6 @@ import gov.nasa.worldwind.geom.coords.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.layers.GraticuleRenderingParams;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -49,7 +48,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         initRenderingParams();
         this.metricScaleSupport.setScaleModulo((int) 100e3);
-        this.setName(Logging.getMessage("layers.Earth.MGRSGraticule.Name"));
+        this.setName(null);
     }
 
     /**
@@ -86,9 +85,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         boolean pastTarget = false;
@@ -122,9 +119,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return getRenderingParams(graticuleType).getLineColor();
@@ -144,15 +139,11 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getRenderingParams(graticuleType).setLineColor(color);
@@ -172,15 +163,11 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (String type : graticuleType)
@@ -200,9 +187,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String[] graticuleType = getOrderedTypes();
@@ -227,9 +212,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return getRenderingParams(graticuleType).getLineWidth();
@@ -249,9 +232,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getRenderingParams(graticuleType).setLineWidth(lineWidth);
@@ -271,9 +252,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (String type : graticuleType)
@@ -311,9 +290,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return getRenderingParams(graticuleType).getLineStyle();
@@ -334,15 +311,11 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (lineStyle == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getRenderingParams(graticuleType).setLineStyle(lineStyle);
@@ -363,15 +336,11 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (lineStyle == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (String type : graticuleType)
@@ -391,9 +360,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (lineStyle == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String[] graticuleType = getOrderedTypes();
@@ -418,9 +385,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return getRenderingParams(graticuleType).isDrawLabels();
@@ -441,9 +406,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getRenderingParams(graticuleType).setDrawLabels(drawLabels);
@@ -464,9 +427,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (String type : graticuleType)
@@ -505,9 +466,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return getRenderingParams(graticuleType).getLabelColor();
@@ -527,15 +486,11 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getRenderingParams(graticuleType).setLabelColor(color);
@@ -555,15 +510,11 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (String type : graticuleType)
@@ -583,9 +534,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String[] graticuleType = getOrderedTypes();
@@ -610,9 +559,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return getRenderingParams(graticuleType).getLabelFont();
@@ -632,15 +579,11 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getRenderingParams(graticuleType).setLabelFont(font);
@@ -660,15 +603,11 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (graticuleType == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (String type : graticuleType)
@@ -688,9 +627,7 @@ public class MGRSGraticuleLayer extends UTMBaseGraticuleLayer
     {
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String[] graticuleType = getOrderedTypes();

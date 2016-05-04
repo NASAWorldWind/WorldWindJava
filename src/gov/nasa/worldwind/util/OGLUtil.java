@@ -57,9 +57,7 @@ public class OGLUtil
     {
         if (gl == null)
         {
-            String message = Logging.getMessage("nullValue.GLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         gl.glEnable(GL2.GL_ALPHA_TEST);
@@ -109,23 +107,17 @@ public class OGLUtil
     {
         if (gl == null)
         {
-            String message = Logging.getMessage("nullValue.GLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (opacity < 0d || opacity > 1d)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float[] compArray = new float[4];
@@ -159,16 +151,12 @@ public class OGLUtil
     {
         if (gl == null)
         {
-            String message = Logging.getMessage("nullValue.GLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float[] compArray = new float[4];
@@ -200,9 +188,7 @@ public class OGLUtil
     {
         if (gl == null)
         {
-            String message = Logging.getMessage("nullValue.GLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (direction == null)
@@ -398,16 +384,12 @@ public class OGLUtil
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.WidthInvalid", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 0)
         {
-            String message = Logging.getMessage("Geom.HeightInvalid", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numPixels = width * height;

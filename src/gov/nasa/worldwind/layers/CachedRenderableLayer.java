@@ -94,9 +94,7 @@ public class CachedRenderableLayer extends AbstractLayer
     {
         if (!(item instanceof GeographicExtent))
         {
-            String message = Logging.getMessage("GeographicTree.NotGeometricExtent");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // extent tree checks args
@@ -222,9 +220,7 @@ public class CachedRenderableLayer extends AbstractLayer
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionAttemptingToDisposeRenderable");
-                Logging.logger().severe(msg);
-                // continue to next renderable
+                    // continue to next renderable
             }
         }
 
@@ -259,9 +255,7 @@ public class CachedRenderableLayer extends AbstractLayer
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionWhilePrerenderingRenderable");
-                Logging.logger().severe(msg);
-                // continue to next renderable
+                    // continue to next renderable
             }
         }
     }
@@ -291,9 +285,7 @@ public class CachedRenderableLayer extends AbstractLayer
                     }
                     catch (Exception e)
                     {
-                        String msg = Logging.getMessage("generic.ExceptionWhilePickingRenderable");
-                        Logging.logger().severe(msg);
-                        continue; // go on to next renderable
+                                    continue; // go on to next renderable
                     }
 
                     gl.glColor4fv(inColor, 0);
@@ -331,9 +323,7 @@ public class CachedRenderableLayer extends AbstractLayer
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionWhileRenderingRenderable");
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                // continue to next renderable
+                    // continue to next renderable
             }
         }
     }
@@ -341,6 +331,6 @@ public class CachedRenderableLayer extends AbstractLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.CachedRenderableLayer.Name");
+        return null;
     }
 }

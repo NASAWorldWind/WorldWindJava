@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.tiff;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.io.IOException;
 import java.nio.*;
 
@@ -80,9 +78,7 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
 
     public int asShort() throws IllegalStateException {
         if (this.type != Tiff.Type.SHORT) {
-            String message = Logging.getMessage("GeotiffReader.InvalidType", "short", this.tag, this.type);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.count > 0) {
@@ -95,16 +91,12 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
             }
         }
 
-        String message = Logging.getMessage("generic.indexOutOfRange", this.count);
-        Logging.logger().severe(message);
-        throw new IllegalArgumentException(message);
+        throw new IllegalArgumentException();
     }
 
     public int asShort(int index) throws IllegalStateException {
         if (this.type != Tiff.Type.SHORT) {
-            String message = Logging.getMessage("GeotiffReader.InvalidType", "short", this.tag, this.type);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.count > index) {
@@ -113,16 +105,12 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
                 return values[index];
         }
 
-        String message = Logging.getMessage("generic.indexOutOfRange", this.count);
-        Logging.logger().severe(message);
-        throw new IllegalArgumentException(message);
+        throw new IllegalArgumentException();
     }
 
     public int[] getShortsAsInts() {
         if (this.type != Tiff.Type.SHORT) {
-            String message = Logging.getMessage("GeotiffReader.InvalidType", "short", this.tag, this.type);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.count == 1)
@@ -139,16 +127,12 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
             return array;
         }
 
-        String message = Logging.getMessage("generic.indexOutOfRange", this.count);
-        Logging.logger().severe(message);
-        throw new IllegalArgumentException(message);
+        throw new IllegalArgumentException();
     }
 
     public long[] getAsLongs() {
         if (this.type != Tiff.Type.SHORT && this.type != Tiff.Type.LONG) {
-            String message = Logging.getMessage("GeotiffReader.InvalidType", "long", this.tag, this.type);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
 
@@ -180,9 +164,7 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
 
     public short[] getShorts() {
         if (this.type != Tiff.Type.SHORT) {
-            String message = Logging.getMessage("GeotiffReader.InvalidType", "short", this.tag, this.type);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.count == 1)
@@ -209,9 +191,7 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
 
     public double[] getDoubles() throws IOException {
         if (this.type != Tiff.Type.DOUBLE) {
-            String message = Logging.getMessage("GeotiffReader.InvalidType", "double", this.tag, this.type);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.count == 0 || null == this.data)
@@ -231,9 +211,7 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
 
     public float[] getFloats() throws IOException {
         if (this.type != Tiff.Type.FLOAT) {
-            String message = Logging.getMessage("GeotiffReader.InvalidType", "float", this.tag, this.type);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.count == 0)
@@ -261,9 +239,7 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
 
     public String asString() {
         if (this.type != Tiff.Type.ASCII) {
-            String message = Logging.getMessage("GeotiffReader.InvalidType", "ascii", this.tag, this.type);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.count != 1 || null == this.data)

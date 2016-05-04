@@ -89,9 +89,7 @@ public abstract class AbstractIconRetriever implements IconRetriever
     {
         if (retrieverPath == null || retrieverPath.length() == 0)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.retrieverPath = retrieverPath;
@@ -149,9 +147,7 @@ public abstract class AbstractIconRetriever implements IconRetriever
     {
         if (path == null)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder();
@@ -172,8 +168,6 @@ public abstract class AbstractIconRetriever implements IconRetriever
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("generic.ExceptionWhileReading", sb.toString());
-            Logging.logger().fine(msg);
         }
         finally
         {
@@ -195,16 +189,12 @@ public abstract class AbstractIconRetriever implements IconRetriever
     {
         if (src == null)
         {
-            String msg = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dest == null)
         {
-            String msg = Logging.getMessage("nullValue.DestinationIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Graphics2D g = null;
@@ -235,16 +225,12 @@ public abstract class AbstractIconRetriever implements IconRetriever
     {
         if (image == null)
         {
-            String msg = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         int w = image.getWidth();
@@ -301,16 +287,12 @@ public abstract class AbstractIconRetriever implements IconRetriever
     {
         if (image == null)
         {
-            String msg = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         int w = image.getWidth();

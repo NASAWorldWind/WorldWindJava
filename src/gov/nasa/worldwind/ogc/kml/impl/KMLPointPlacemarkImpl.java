@@ -58,16 +58,12 @@ public class KMLPointPlacemarkImpl extends PointPlacemark implements KMLRenderab
 
         if (tc == null)
         {
-            String msg = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (placemark == null)
         {
-            String msg = Logging.getMessage("nullValue.ParentIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.parent = placemark;
@@ -341,9 +337,7 @@ public class KMLPointPlacemarkImpl extends PointPlacemark implements KMLRenderab
             }
             catch (IOException e)
             {
-                String message = Logging.getMessage("generic.UnableToResolveReference", href);
-                Logging.logger().warning(message);
-            }
+                }
             attrs.setImageAddress((localAddress != null ? localAddress : href));
         }
         // If the Icon element is present, but there is no href, draw a point instead of the default icon.

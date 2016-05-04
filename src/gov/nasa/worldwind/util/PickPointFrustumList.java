@@ -38,9 +38,7 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum>
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (PickPointFrustum frustum : this)
@@ -67,9 +65,7 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum>
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (PickPointFrustum frustum : this)
@@ -96,9 +92,7 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum>
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (PickPointFrustum frustum : this)
@@ -148,9 +142,7 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum>
     {
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (PickPointFrustum frustum : this)
@@ -178,9 +170,7 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum>
     {
         if (extent == null)
         {
-            String msg = Logging.getMessage("nullValue.ExtentIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (PickPointFrustum frustum : this)
@@ -207,9 +197,7 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum>
     {
         if (extent == null)
         {
-            String msg = Logging.getMessage("nullValue.ExtentIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (PickPointFrustum frustum : this)
@@ -259,9 +247,7 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum>
     {
         if (rect == null)
         {
-            String msg = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (PickPointFrustum frustum : this)
@@ -290,9 +276,7 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum>
     {
         if (rect == null)
         {
-            String msg = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().fine(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         for (PickPointFrustum frustum : this)

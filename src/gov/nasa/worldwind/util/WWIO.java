@@ -17,7 +17,6 @@ import java.nio.*;
 import java.nio.channels.*;
 import java.nio.charset.Charset;
 import java.util.*;
-import java.util.logging.Level;
 import java.util.zip.*;
 
 /**
@@ -78,9 +77,7 @@ public class WWIO
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return s.replaceAll(ILLEGAL_FILE_PATH_PART_CHARACTERS, "_");
@@ -90,9 +87,7 @@ public class WWIO
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (s.endsWith("/") || s.endsWith("\\"))
@@ -105,9 +100,7 @@ public class WWIO
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (s.startsWith("/") || s.startsWith("\\"))
@@ -120,9 +113,7 @@ public class WWIO
     {
         if (s == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int len = s.length();
@@ -159,9 +150,7 @@ public class WWIO
     {
         if (WWUtil.isEmpty(src))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (src instanceof File)
@@ -207,9 +196,7 @@ public class WWIO
     {
         if (uri == null)
         {
-            String message = Logging.getMessage("nullValue.URIIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -237,9 +224,7 @@ public class WWIO
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -263,16 +248,12 @@ public class WWIO
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FileOutputStream fos = null;
@@ -289,7 +270,6 @@ public class WWIO
             {
                 // The file is being written to, or some other process is keeping it to itself.
                 // This is an okay condition, but worth noting.
-                Logging.logger().log(Level.FINER, "WWIO.UnableToAcquireLockFor", file.getPath());
                 return false;
             }
 
@@ -307,8 +287,6 @@ public class WWIO
         }
         catch (ClosedByInterruptException e)
         {
-            Logging.logger().log(Level.FINE,
-                Logging.getMessage("generic.interrupted", "WWIO.saveBuffer", file.getPath()), e);
 
             if (numBytesWritten > 0) // don't leave behind incomplete files
                 file.delete();
@@ -317,7 +295,6 @@ public class WWIO
         }
         catch (IOException e)
         {
-            Logging.logger().log(Level.SEVERE, Logging.getMessage("WWIO.ErrorSavingBufferTo", file.getPath()), e);
 
             if (numBytesWritten > 0) // don't leave behind incomplete files
                 file.delete();
@@ -343,16 +320,12 @@ public class WWIO
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (fos == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         WritableByteChannel channel;
@@ -401,16 +374,12 @@ public class WWIO
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (mode == null)
         {
-            String message = Logging.getMessage("nullValue.ModelIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String accessMode;
@@ -447,9 +416,7 @@ public class WWIO
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return mapFile(file, FileChannel.MapMode.READ_ONLY);
@@ -470,9 +437,7 @@ public class WWIO
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return readURLContentToBuffer(url, false);
@@ -497,9 +462,7 @@ public class WWIO
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         InputStream is = null;
@@ -535,9 +498,7 @@ public class WWIO
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ByteBuffer buffer = readURLContentToBuffer(url);
@@ -559,9 +520,7 @@ public class WWIO
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return readFileToBuffer(file, false);
@@ -586,9 +545,7 @@ public class WWIO
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FileInputStream is = new FileInputStream(file);
@@ -614,9 +571,7 @@ public class WWIO
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FileInputStream is = new FileInputStream(file);
@@ -644,29 +599,21 @@ public class WWIO
     {
         if (gzFile == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!gzFile.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", gzFile.getAbsolutePath());
-            Logging.logger().severe(message);
-            throw new FileNotFoundException(message);
+            throw new FileNotFoundException();
         }
         if (!gzFile.canRead())
         {
-            String message = Logging.getMessage("generic.FileNoReadPermission", gzFile.getAbsolutePath());
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         int inflatedLength = gzipGetInflatedLength(gzFile);
         if (0 == inflatedLength)
         {
-            String message = Logging.getMessage("generic.LengthIsInvalid", gzFile.getAbsolutePath());
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         ByteBuffer buffer = null;
@@ -712,9 +659,7 @@ public class WWIO
     {
         if (zipFile == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         InputStream is = null;
@@ -724,9 +669,7 @@ public class WWIO
             ZipFile zf = new ZipFile(zipFile);
             if (zf.size() < 1)
             {
-                String message = Logging.getMessage("WWIO.ZipFileIsEmpty", zipFile.getPath());
-                Logging.logger().severe(message);
-                throw new java.io.IOException(message);
+                    throw new java.io.IOException();
             }
 
             if (entryName != null)
@@ -734,9 +677,7 @@ public class WWIO
                 ze = zf.getEntry(entryName);
                 if (ze == null)
                 {
-                    String message = Logging.getMessage("WWIO.ZipFileEntryNIF", entryName, zipFile.getPath());
-                    Logging.logger().severe(message);
-                    throw new IOException(message);
+                            throw new IOException();
                 }
             }
             else
@@ -753,9 +694,7 @@ public class WWIO
                 }
                 if (null == ze)
                 {
-                    String message = Logging.getMessage("WWIO.ZipFileIsEmpty", zipFile.getPath());
-                    Logging.logger().severe(message);
-                    throw new java.io.IOException(message);
+                            throw new java.io.IOException();
                 }
             }
 
@@ -778,15 +717,12 @@ public class WWIO
     {
         if (stream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (numBytes < 1)
         {
-            Logging.logger().severe("WWIO.NumberBytesTransferLessThanOne");
-            throw new IllegalArgumentException(Logging.getMessage("WWIO.NumberBytesTransferLessThanOne"));
+            throw new IllegalArgumentException((String) null);
         }
 
         int bytesRead = 0;
@@ -819,9 +755,7 @@ public class WWIO
     {
         if (inputStream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return readStreamToBuffer(inputStream, false);
@@ -846,9 +780,7 @@ public class WWIO
     {
         if (inputStream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ReadableByteChannel channel = Channels.newChannel(inputStream);
@@ -871,9 +803,7 @@ public class WWIO
     {
         if (stream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return readCharacterStreamToString(
@@ -899,9 +829,7 @@ public class WWIO
     {
         if (channel == null)
         {
-            String message = Logging.getMessage("nullValue.ChannelIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final int PAGE_SIZE = (int) Math.round(Math.pow(2, 16));
@@ -944,16 +872,12 @@ public class WWIO
     {
         if (channel == null)
         {
-            String message = Logging.getMessage("nullValue.ChannelIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int count = 0;
@@ -984,9 +908,7 @@ public class WWIO
     {
         if (channel == null)
         {
-            String message = Logging.getMessage("nullValue.ChannelIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return readCharacterStreamToString(
@@ -1008,9 +930,7 @@ public class WWIO
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder();
@@ -1034,9 +954,7 @@ public class WWIO
     {
         if (in == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String suffix = newSuffix != null ? newSuffix : "";
@@ -1048,9 +966,7 @@ public class WWIO
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int len = filePath.length();
@@ -1081,9 +997,7 @@ public class WWIO
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         filePath = stripTrailingSeparator(filePath);
@@ -1108,9 +1022,7 @@ public class WWIO
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         filePath = stripTrailingSeparator(filePath);
@@ -1138,9 +1050,7 @@ public class WWIO
     {
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String fs = File.separator;
@@ -1188,9 +1098,7 @@ public class WWIO
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File outputFile = java.io.File.createTempFile("WorldWind", suffix != null ? suffix : "");
@@ -1205,9 +1113,7 @@ public class WWIO
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -1223,7 +1129,6 @@ public class WWIO
         }
         catch (URISyntaxException e)
         {
-            Logging.logger().log(Level.SEVERE, "WWIO.ExceptionValidatingFileExpiration", url);
             return false;
         }
     }
@@ -1249,8 +1154,6 @@ public class WWIO
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.WARNING,
-                Logging.getMessage("URLRetriever.ErrorConfiguringProxy", proxyHost), e);
         }
 
         return proxy;
@@ -1307,16 +1210,12 @@ public class WWIO
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.ImageFomat");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (!mimeType.contains("/") || mimeType.endsWith("/"))
         {
-            String message = Logging.getMessage("generic.InvalidImageFormat");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         // Remove any parameters appended to this mime type before using it as a key in the mimeTypeToSuffixMap. Mime
@@ -1349,9 +1248,7 @@ public class WWIO
     {
         if (suffix == null)
         {
-            String message = Logging.getMessage("nullValue.FormatSuffixIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         // Strip the starting period from the suffix string, if any exists.
@@ -1486,16 +1383,12 @@ public class WWIO
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.MimeTypeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!mimeType.contains("/") || mimeType.endsWith("/"))
         {
-            String message = Logging.getMessage("generic.InvalidImageFormat");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (mimeType.equals("application/bil32"))
@@ -1514,8 +1407,7 @@ public class WWIO
     {
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         File file = new File(path);
@@ -1574,9 +1466,7 @@ public class WWIO
     {
         if (string == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         try
@@ -1603,9 +1493,7 @@ public class WWIO
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.hasArray() && buffer.limit() == buffer.capacity()) // otherwise bytes beyond the limit are included
@@ -1629,9 +1517,7 @@ public class WWIO
     {
         if (is == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return (is instanceof BufferedInputStream && BufferedInputStream.class.equals(is.getClass()))
@@ -1642,15 +1528,11 @@ public class WWIO
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (ancestor == null)
         {
-            String message = Logging.getMessage("nullValue.AncestorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Traverse up the directory tree, visiting each node. If any node is equal to the specified ancestor,
@@ -1670,15 +1552,11 @@ public class WWIO
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (destination == null)
         {
-            String message = Logging.getMessage("nullValue.DestinationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FileInputStream fis = null;
@@ -1710,15 +1588,11 @@ public class WWIO
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (destination == null)
         {
-            String message = Logging.getMessage("nullValue.DestinationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!destination.exists())
@@ -1727,9 +1601,7 @@ public class WWIO
 
         if (!destination.exists())
         {
-            String message = Logging.getMessage("generic.CannotCreateFile", destination);
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         File[] fileList = source.listFiles();
@@ -1770,9 +1642,7 @@ public class WWIO
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File[] fileList = file.listFiles();
@@ -1823,14 +1693,10 @@ public class WWIO
             }
             else
             {
-                String message = Logging.getMessage("WWIO.StreamTypeNotSupported", name != null ? name : "Unknown");
-                Logging.logger().warning(message);
-            }
+                }
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionClosingStream", e, name != null ? name : "Unknown");
-            Logging.logger().severe(message);
         }
     }
 
@@ -1847,9 +1713,7 @@ public class WWIO
     {
         if (file == null)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder();
@@ -1866,8 +1730,6 @@ public class WWIO
         }
         catch (IOException e)
         {
-            String msg = Logging.getMessage("generic.ExceptionAttemptingToReadFile", file.getPath());
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
             return null;
         }
         finally
@@ -1890,16 +1752,12 @@ public class WWIO
     {
         if (file == null)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (text == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         BufferedWriter writer = null;
@@ -1910,8 +1768,6 @@ public class WWIO
         }
         catch (IOException e)
         {
-            String msg = Logging.getMessage("generic.ExceptionAttemptingToWriteTo", file.getPath());
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
         }
         finally
         {
@@ -1935,17 +1791,14 @@ public class WWIO
     {
         if (fileName == null)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Object streamOrException = WWIO.getFileOrResourceAsStream(fileName, c);
 
         if (streamOrException instanceof Exception)
         {
-            String msg = Logging.getMessage("generic.CannotOpenFile", fileName);
-            throw new WWRuntimeException(msg, (Exception) streamOrException);
+            throw new WWRuntimeException((Exception) streamOrException);
         }
 
         return (InputStream) streamOrException;
@@ -1969,9 +1822,7 @@ public class WWIO
     {
         if (buffer == null)
         {
-            String msg = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return Charset.forName(encoding != null ? encoding : DEFAULT_CHARACTER_ENCODING).decode(buffer).toString();
@@ -1996,16 +1847,12 @@ public class WWIO
     {
         if (buffer == null)
         {
-            String msg = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (length < 1)
         {
-            String msg = Logging.getMessage("generic.LengthIsInvalid", length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         CharBuffer charBuffer = Charset.forName(encoding != null ? encoding : DEFAULT_CHARACTER_ENCODING).decode(
@@ -2033,9 +1880,7 @@ public class WWIO
     {
         if (string == null)
         {
-            String msg = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return ByteBuffer.wrap(string.getBytes(encoding != null ? encoding : DEFAULT_CHARACTER_ENCODING));
@@ -2088,9 +1933,7 @@ public class WWIO
     {
         if (src == null || WWUtil.isEmpty(src))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (src instanceof InputStream)
@@ -2117,9 +1960,7 @@ public class WWIO
         }
         else if (!(src instanceof String))
         {
-            String message = Logging.getMessage("generic.UnrecognizedSourceType", src.toString());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String sourceName = (String) src;
@@ -2152,9 +1993,7 @@ public class WWIO
     {
         if (src == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String s = null;
@@ -2293,9 +2132,7 @@ public class WWIO
     {
         if (file == null)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // List the file and directory names in the specified file. If the returned array is null, then the specified
@@ -2341,9 +2178,7 @@ public class WWIO
     {
         if (file == null)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return listDescendantFilenames(file, filter, true);
@@ -2370,9 +2205,7 @@ public class WWIO
     {
         if (file == null)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // List the file and directory names in the specified file. If the returned array is null, then the specified
@@ -2442,9 +2275,7 @@ public class WWIO
     {
         if (is == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int byteSkipped = 0;
@@ -2466,30 +2297,23 @@ public class WWIO
     {
         if (pos < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "pos=" + pos);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (count < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "count=" + count);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (array == null)
         {
             String message = "nullValue.ArrayIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (array.length < (pos + count))
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", "points.length < " + (pos + count));
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         float tmp;

@@ -57,9 +57,7 @@ public class SkyGradientLayer extends AbstractLayer
     {
         if (thickness < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.thickness = thickness;
     }
@@ -83,9 +81,7 @@ public class SkyGradientLayer extends AbstractLayer
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         color.getColorComponents(this.horizonColor);
     }
@@ -109,9 +105,7 @@ public class SkyGradientLayer extends AbstractLayer
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         color.getColorComponents(this.zenithColor);
     }
@@ -392,6 +386,6 @@ public class SkyGradientLayer extends AbstractLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.Earth.SkyGradientLayer.Name");
+        return null;
     }
 }

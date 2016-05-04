@@ -9,7 +9,6 @@ import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.pick.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.awt.GLJPanel;
 import javax.swing.event.*;
@@ -73,9 +72,7 @@ public class AWTInputHandler extends WWObjectImpl
     {
         if (newWorldWindow != null && !(newWorldWindow instanceof Component))
         {
-            String message = Logging.getMessage("Awt.AWTInputHandler.EventSourceNotAComponent");
-            Logging.logger().finer(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (newWorldWindow == this.wwd)

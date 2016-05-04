@@ -43,9 +43,7 @@ public class FileStoreDataSet extends AVListImpl
     {
         if (filestorePath == null || dataSetPath == null || configFilePath == null)
         {
-            String message = Logging.getMessage("nullValue.FileStorePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.filestorePath = filestorePath;
@@ -124,9 +122,7 @@ public class FileStoreDataSet extends AVListImpl
             }
             catch (IOException e)
             {
-                String message = Logging.getMessage("generic.ExceptionWhileComputingSize", file.getAbsolutePath());
-                Logging.logger().fine(message);
-            }
+                }
         }
 
         return size;
@@ -143,7 +139,6 @@ public class FileStoreDataSet extends AVListImpl
         }
         catch (WWRuntimeException e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, "Exception reading data configuration", e);
         }
 
         if (doc == null)

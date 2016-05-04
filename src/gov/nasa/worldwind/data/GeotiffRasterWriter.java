@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.data;
 
 import gov.nasa.worldwind.formats.tiff.GeotiffWriter;
-import gov.nasa.worldwind.util.Logging;
 
 import java.io.*;
 
@@ -33,16 +32,12 @@ public class GeotiffRasterWriter extends AbstractDataRasterWriter
     {
         if (null == file)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (null == raster)
         {
-            String message = Logging.getMessage("nullValue.RasterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GeotiffWriter writer = null;

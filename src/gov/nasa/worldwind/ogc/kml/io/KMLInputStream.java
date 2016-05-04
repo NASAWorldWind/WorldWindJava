@@ -39,9 +39,7 @@ public class KMLInputStream implements KMLDoc
     {
         if (sourceStream == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.inputStream = sourceStream;
@@ -71,9 +69,7 @@ public class KMLInputStream implements KMLDoc
     {
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String ref = this.getSupportFilePath(path);
@@ -97,9 +93,7 @@ public class KMLInputStream implements KMLDoc
     {
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.uri != null)

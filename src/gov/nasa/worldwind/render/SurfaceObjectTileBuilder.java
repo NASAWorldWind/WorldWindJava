@@ -146,9 +146,7 @@ public class SurfaceObjectTileBuilder
     {
         if (tileTextureDimension == null)
         {
-            String message = Logging.getMessage("nullValue.DimensionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setTileDimension(tileTextureDimension);
@@ -180,9 +178,7 @@ public class SurfaceObjectTileBuilder
     {
         if (dimension == null)
         {
-            String message = Logging.getMessage("nullValue.DimensionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.tileDimension = dimension;
@@ -334,9 +330,7 @@ public class SurfaceObjectTileBuilder
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object tileInfoKey = this.createTileInfoKey(dc);
@@ -357,9 +351,7 @@ public class SurfaceObjectTileBuilder
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object tileInfoKey = this.createTileInfoKey(dc);
@@ -384,9 +376,7 @@ public class SurfaceObjectTileBuilder
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         TileInfoKey tileInfoKey = this.createTileInfoKey(dc);
@@ -436,9 +426,7 @@ public class SurfaceObjectTileBuilder
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object tileInfoKey = this.createTileInfoKey(dc);
@@ -463,9 +451,7 @@ public class SurfaceObjectTileBuilder
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object tileInfoKey = this.createTileInfoKey(dc);
@@ -485,9 +471,7 @@ public class SurfaceObjectTileBuilder
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object tileInfoKey = this.createTileInfoKey(dc);
@@ -587,7 +571,6 @@ public class SurfaceObjectTileBuilder
 
         if (texture == null) // This should never happen, but we check anyway.
         {
-            Logging.logger().warning(Logging.getMessage("nullValue.TextureIsNull"));
             return;
         }
 

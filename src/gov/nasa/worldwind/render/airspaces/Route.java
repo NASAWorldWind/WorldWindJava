@@ -29,9 +29,7 @@ public class Route extends TrackAirspace
     {
         if (width < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width=" + width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.width = width;
@@ -104,9 +102,7 @@ public class Route extends TrackAirspace
     {
         if (width < 0.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width=" + width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.width = width;
@@ -126,14 +122,12 @@ public class Route extends TrackAirspace
         if (start == null)
         {
             String message = "nullValue.StartIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (end == null)
         {
             String message = "nullValue.EndIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.locations.size() == 0)
@@ -151,8 +145,7 @@ public class Route extends TrackAirspace
             else
             {
                 String message = "Shapes.Route.DisjointLegDetected";
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                throw new IllegalArgumentException();
             }
         }
 
@@ -176,8 +169,6 @@ public class Route extends TrackAirspace
      */
     public void setLegs(Collection<Box> legs)
     {
-        String message = Logging.getMessage("generic.UnsupportedOperation", "setLegs");
-        Logging.logger().severe(message);
         throw new UnsupportedOperationException();
 //
 //        super.setLegs(legs);
@@ -208,8 +199,6 @@ public class Route extends TrackAirspace
     public Box addLeg(LatLon start, LatLon end, double lowerAltitude, double upperAltitude, double leftWidth,
         double rightWidth)
     {
-        String message = Logging.getMessage("generic.UnsupportedOperation", "addLeg");
-        Logging.logger().severe(message);
         throw new UnsupportedOperationException();
 
 //        Box newLeg = super.addLeg(start, end, lowerAltitude, upperAltitude, leftWidth, rightWidth);
@@ -234,14 +223,12 @@ public class Route extends TrackAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<LatLon> newLocations = LatLon.computeShiftedLocations(globe, oldRef, newRef, this.getLocations());
@@ -253,14 +240,12 @@ public class Route extends TrackAirspace
         if (oldRef == null)
         {
             String message = "nullValue.OldRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (newRef == null)
         {
             String message = "nullValue.NewRefIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.doMoveTo(oldRef, newRef);

@@ -144,9 +144,7 @@ public class Size
     {
         if (mode == null)
         {
-            String message = Logging.getMessage("nullValue.SizeModeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.widthMode = mode;
@@ -168,9 +166,7 @@ public class Size
     {
         if (mode == null)
         {
-            String message = Logging.getMessage("nullValue.SizeModeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.heightMode = mode;
@@ -262,30 +258,22 @@ public class Size
     {
         if (rectWidth < 0)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", rectWidth);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (rectHeight < 0)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", rectHeight);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (containerWidth < 0)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", containerWidth);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (containerHeight < 0)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", containerHeight);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double aspectRatio;
@@ -372,9 +360,7 @@ public class Size
     {
         if (restorableSupport == null)
         {
-            String message = Logging.getMessage("nullValue.RestorableSupportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject so = restorableSupport.addStateObject(context, "width");
@@ -412,9 +398,7 @@ public class Size
     {
         if (restorableSupport == null)
         {
-            String message = Logging.getMessage("nullValue.RestorableSupportIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport.StateObject so = restorableSupport.getStateObject(context, "width");

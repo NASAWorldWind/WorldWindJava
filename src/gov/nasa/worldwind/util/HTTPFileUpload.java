@@ -18,7 +18,6 @@ import java.io.*;
 import java.net.*;
 import java.nio.ByteBuffer;
 import java.util.*;
-import java.util.logging.Level;
 
 /** Synchronous file upload using HTTP POST as a multi-part form data */
 public class HTTPFileUpload extends java.util.Observable
@@ -58,9 +57,7 @@ public class HTTPFileUpload extends java.util.Observable
     {
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.url = url;
@@ -119,9 +116,7 @@ public class HTTPFileUpload extends java.util.Observable
             this.requestMethod = "GET";
         else
         {
-            String message = Logging.getMessage("generic.UnknownValueForKey", method, "method={POST|GET}");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
     }
 
@@ -139,9 +134,7 @@ public class HTTPFileUpload extends java.util.Observable
     {
         if (WWUtil.isEmpty(name))
         {
-            String message = Logging.getMessage("nullValue.PropertyNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.requestProperties.setValue(name, value);
     }
@@ -167,23 +160,17 @@ public class HTTPFileUpload extends java.util.Observable
     {
         if (bufferToUpload == null)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(name))
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bufferToUpload.limit() == 0)
         {
-            String message = Logging.getMessage("generic.BufferIsEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.totalBytesToUpload += bufferToUpload.limit();
@@ -230,10 +217,8 @@ public class HTTPFileUpload extends java.util.Observable
                 this.totalFilesFailed++;
 
                 String reason = WWUtil.extractExceptionReason(e);
-                String message = Logging.getMessage("HTTP.FileUploadFailed", info.uploadName, reason);
-                Logging.logger().log(Level.FINEST, message, e);
 
-                throw new WWRuntimeException(message);
+                throw new WWRuntimeException();
             }
         }
     }
@@ -246,9 +231,7 @@ public class HTTPFileUpload extends java.util.Observable
 
         if (null == url)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         HttpURLConnection conn = null;
@@ -301,7 +284,7 @@ public class HTTPFileUpload extends java.util.Observable
         {
             WWIO.closeStream(fis, null);
             WWIO.closeStream(dos, null);
-            this.disconnect(conn, this.url.toString());
+            this.disconnect(conn);
         }
     }
 
@@ -320,11 +303,11 @@ public class HTTPFileUpload extends java.util.Observable
         }
         else
         {
-            throw new IOException(Logging.getMessage("nullValue.ConnectionIsNull"));
+            throw new IOException((String) null);
         }
     }
 
-    protected void disconnect(HttpURLConnection conn, String name)
+    protected void disconnect(HttpURLConnection conn)
     {
         if (null != conn)
         {
@@ -334,9 +317,7 @@ public class HTTPFileUpload extends java.util.Observable
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("WWIO.ErrorTryingToClose", name);
-                Logging.logger().log(Level.WARNING, message, e);
-            }
+                }
         }
     }
 
@@ -344,30 +325,22 @@ public class HTTPFileUpload extends java.util.Observable
     {
         if (null == bufferToUpload)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bufferToUpload.limit() == 0)
         {
-            String message = Logging.getMessage("generic.BufferIsEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (null == url)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(fileName))
         {
-            String message = Logging.getMessage("nullValue.FilenameIsNullOrEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         HttpURLConnection conn = null;
@@ -412,7 +385,7 @@ public class HTTPFileUpload extends java.util.Observable
         finally
         {
             WWIO.closeStream(dos, null);
-            this.disconnect(conn, this.url.toString());
+            this.disconnect(conn);
         }
     }
 
@@ -420,23 +393,17 @@ public class HTTPFileUpload extends java.util.Observable
     {
         if (WWUtil.isEmpty(stringToUpload))
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (null == url)
         {
-            String message = Logging.getMessage("nullValue.URLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(fileName))
         {
-            String message = Logging.getMessage("nullValue.FilenameIsNullOrEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         HttpURLConnection conn = null;
@@ -469,7 +436,7 @@ public class HTTPFileUpload extends java.util.Observable
         finally
         {
             WWIO.closeStream(dos, null);
-            this.disconnect(conn, this.url.toString());
+            this.disconnect(conn);
         }
     }
 

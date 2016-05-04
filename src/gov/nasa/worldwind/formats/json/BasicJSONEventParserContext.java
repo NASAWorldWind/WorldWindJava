@@ -5,8 +5,7 @@
  */
 package gov.nasa.worldwind.formats.json;
 
-import gov.nasa.worldwind.util.Logging;
-import org.codehaus.jackson.*;
+import gov.nasa.worldwind.shaded.org.codehaus.jackson.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -27,9 +26,7 @@ public class BasicJSONEventParserContext implements JSONEventParserContext
     {
         if (parser == null)
         {
-            String message = Logging.getMessage("nullValue.ParserIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.parser = parser;
@@ -62,9 +59,7 @@ public class BasicJSONEventParserContext implements JSONEventParserContext
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.fieldNameStack.push(name);

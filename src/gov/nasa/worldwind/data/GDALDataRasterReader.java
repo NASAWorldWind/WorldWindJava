@@ -12,7 +12,6 @@ import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.gdal.GDALUtils;
 
 import java.io.*;
-import java.util.logging.Level;
 
 /**
  * @author Lado Garakanidze
@@ -131,9 +130,7 @@ public class GDALDataRasterReader extends AbstractDataRasterReader
     {
         if (null == source)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -141,9 +138,7 @@ public class GDALDataRasterReader extends AbstractDataRasterReader
             GDALDataRaster raster = new GDALDataRaster(source, quickReadingMode);
             if (null == raster)
             {
-                String message = Logging.getMessage("generic.CannotOpenFile", GDALUtils.getErrorMessage());
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             return raster;
@@ -154,8 +149,6 @@ public class GDALDataRasterReader extends AbstractDataRasterReader
         }
         catch (Throwable t)
         {
-            String message = Logging.getMessage("generic.CannotOpenFile", GDALUtils.getErrorMessage());
-            Logging.logger().log(Level.SEVERE, message, t);
             throw new WWRuntimeException(t);
         }
     }

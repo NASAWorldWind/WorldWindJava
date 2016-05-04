@@ -9,7 +9,6 @@ package gov.nasa.worldwind.render;
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.util.texture.*;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.GL;
 import java.util.List;
@@ -78,8 +77,7 @@ public class FBOTexture extends FramebufferTexture
             }
             else
             {
-                String msg = Logging.getMessage("FBOTexture.TextureNotCreated");
-                throw new IllegalStateException(msg);
+                    throw new IllegalStateException();
             }
 
             dc.getTextureCache().put(this, t);

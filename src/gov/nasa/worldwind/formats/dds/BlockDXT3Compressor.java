@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.dds;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * Compressor for DXT2/DXT3 alpha and color blocks. This class is not thread safe. Unsynchronized access will result in
  * unpredictable behavior. Access to methods of this class must be synchronized by the caller.
@@ -50,21 +48,15 @@ public class BlockDXT3Compressor
     {
         if (colorBlock == null)
         {
-            String message = Logging.getMessage("nullValue.ColorBlockIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dxtBlock == null)
         {
-            String message = Logging.getMessage("nullValue.DXTBlockIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // The DXT3 color block is compressed exactly like the DXT1 color block, except that the four color palette is

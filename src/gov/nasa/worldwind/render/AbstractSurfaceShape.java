@@ -170,9 +170,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (pathType == null)
         {
-            String message = Logging.getMessage("nullValue.PathTypeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.pathType = pathType;
@@ -188,9 +186,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (texelsPerEdgeInterval <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "texelsPerEdgeInterval <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.texelsPerEdgeInterval = texelsPerEdgeInterval;
@@ -206,16 +202,12 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (minEdgeIntervals < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "minEdgeIntervals < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (maxEdgeIntervals < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "maxEdgeIntervals < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.minEdgeIntervals = minEdgeIntervals;
@@ -244,9 +236,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         CacheEntry entry = this.sectorCache.get(dc.getGlobe().getGlobeStateKey());
@@ -377,9 +367,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<Sector> sectors = this.computeSectors(globe);
@@ -401,9 +389,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -414,9 +400,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         this.doRestoreState(rs, null);
@@ -426,9 +410,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         AreaMeasurer areaMeasurer = this.setupAreaMeasurer(globe);
@@ -439,9 +421,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         AreaMeasurer areaMeasurer = this.setupAreaMeasurer(globe);
@@ -453,9 +433,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         AreaMeasurer areaMeasurer = this.setupAreaMeasurer(globe);
@@ -466,9 +444,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         AreaMeasurer areaMeasurer = this.setupAreaMeasurer(globe);
@@ -479,9 +455,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         AreaMeasurer areaMeasurer = this.setupAreaMeasurer(globe);
@@ -492,9 +466,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         AreaMeasurer areaMeasurer = this.setupAreaMeasurer(globe);
@@ -505,9 +477,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position referencePosition = this.getReferencePosition();
@@ -521,9 +491,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position oldReferencePosition = this.getReferencePosition();
@@ -537,9 +505,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position oldReferencePosition = this.getReferencePosition();
@@ -555,9 +521,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (cc == null)
         {
-            String msg = Logging.getMessage("nullValue.CombineContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (cc.isBoundingSectorMode())
@@ -611,16 +575,12 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sdc == null)
         {
-            String message = Logging.getMessage("nullValue.SurfaceTileDrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.beginDrawing(dc, sdc);
@@ -940,9 +900,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object key = this.createGeometryKey(dc, sdc);
@@ -1304,9 +1262,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -1315,11 +1271,9 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
         }
         catch (OutOfMemoryError e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileTessellating", this);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
 
             //noinspection ThrowableInstanceNeverThrown
-            dc.addRenderingException(new WWRuntimeException(message, e));
+            dc.addRenderingException(new WWRuntimeException(e));
 
             this.handleUnsuccessfulInteriorTessellation(dc);
 
@@ -1392,9 +1346,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.areaMeasurer == null)
@@ -1782,16 +1734,12 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (output == null)
         {
-            String message = Logging.getMessage("nullValue.OutputBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
@@ -1802,15 +1750,12 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
             }
             catch (XMLStreamException e)
             {
-                Logging.logger().throwing(getClass().getName(), "export", e);
                 throw new IOException(e);
             }
         }
         else
         {
-            String message = Logging.getMessage("Export.UnsupportedFormat", mimeType);
-            Logging.logger().warning(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
     }
 

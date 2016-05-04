@@ -13,9 +13,7 @@ import gov.nasa.worldwind.data.DataRaster;
 import gov.nasa.worldwind.data.MipMappedBufferedImageRaster;
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.geom.Sector;
-import gov.nasa.worldwind.util.Logging;
-import gov.nasa.worldwind.util.WWIO;
-import gov.nasa.worldwind.util.WWMath;
+import gov.nasa.worldwind.util.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -56,31 +54,23 @@ public class DDSDecompressor
     {
         if (null == params || !params.hasKey(AVKey.SECTOR))
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.SECTOR);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         File file = WWIO.getFileForLocalAddress(source);
         if (null == file)
         {
-            String message = Logging.getMessage("generic.UnrecognizedSourceType", source.getClass().getName());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", file.getAbsolutePath());
-            Logging.logger().severe(message);
-            throw new FileNotFoundException(message);
+            throw new FileNotFoundException();
         }
 
         if (!file.canRead())
         {
-            String message = Logging.getMessage("generic.FileNoReadPermission", file.getAbsolutePath());
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         RandomAccessFile raf = null;
@@ -102,9 +92,7 @@ public class DDSDecompressor
 
             if (!WWMath.isPowerOfTwo(width) || !WWMath.isPowerOfTwo(height))
             {
-                String message = Logging.getMessage("generic.InvalidImageSize", width, height);
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             int mipMapCount = header.getMipMapCount();
@@ -113,10 +101,8 @@ public class DDSDecompressor
             DDSPixelFormat pixelFormat = header.getPixelFormat();
             if (null == pixelFormat)
             {
-                String reason = Logging.getMessage("generic.MissingRequiredParameter", "DDSD_PIXELFORMAT");
-                String message = Logging.getMessage("generic.InvalidImageFormat", reason);
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                String reason = null;
+                    throw new WWRuntimeException();
             }
 
             DXTDecompressor decompressor = null;
@@ -133,9 +119,7 @@ public class DDSDecompressor
 
             if (null == decompressor)
             {
-                String message = Logging.getMessage("generic.UnsupportedCodec", dxtFormat);
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             Sector sector = (Sector) params.getValue(AVKey.SECTOR);
@@ -195,17 +179,13 @@ public class DDSDecompressor
     {
         if (null == channel || !channel.isOpen())
         {
-            String message = Logging.getMessage("nullValue.ChannelIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (channel.size() < (offset + length))
         {
             String reason = channel.size() + " < " + (offset + length);
-            String message = Logging.getMessage("generic.LengthIsInvalid", reason);
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         return channel.map(FileChannel.MapMode.READ_ONLY, offset, length);

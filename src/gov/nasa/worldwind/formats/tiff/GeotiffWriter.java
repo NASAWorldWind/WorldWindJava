@@ -38,9 +38,7 @@ public class GeotiffWriter
     {
         if (null == filename || 0 == filename.trim().length())
         {
-            String msg = Logging.getMessage("generic.FileNameIsMissing");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // the initializer does the validity checking...
@@ -51,9 +49,7 @@ public class GeotiffWriter
     {
         if (null == file)
         {
-            String msg = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         commonInitializer(file);
@@ -70,9 +66,7 @@ public class GeotiffWriter
             parent = new File(System.getProperty("user.dir"));
         if (!parent.canWrite())
         {
-            String msg = Logging.getMessage("generic.FolderNoWritePermission", parent.getAbsolutePath());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.targetFile = new RandomAccessFile(file, "rw");
@@ -98,23 +92,17 @@ public class GeotiffWriter
     {
         if (null == raster)
         {
-            String msg = Logging.getMessage("nullValue.RasterIsNull");
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!(raster.getWidth() > 0))
         {
-            String msg = Logging.getMessage("generic.InvalidWidth", raster.getWidth());
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!(raster.getHeight() > 0))
         {
-            String msg = Logging.getMessage("generic.InvalidHeight", raster.getHeight());
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (raster instanceof BufferedImageRaster)
@@ -197,22 +185,17 @@ public class GeotiffWriter
     {
         if (image == null)
         {
-            String msg = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (0 == image.getWidth() || 0 == image.getHeight())
         {
-            String msg = Logging.getMessage("generic.InvalidImageSize", image.getWidth(), image.getHeight());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (null == params || 0 == params.getValues().size())
         {
-            String reason = Logging.getMessage("nullValue.AVListIsNull");
-            Logging.logger().finest(Logging.getMessage("GeotiffWriter.GeoKeysMissing", reason));
+            String reason = null;
             params = new AVListImpl();
         }
         else
@@ -299,9 +282,7 @@ public class GeotiffWriter
             case BufferedImage_TYPE_ELEVATION_SHORT16:
             case BufferedImage_TYPE_ELEVATION_FLOAT32:
             {
-                String msg = Logging.getMessage("GeotiffWriter.FeatureNotImplementedd", type);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 //            break;
 
@@ -311,7 +292,7 @@ public class GeotiffWriter
                 ColorModel cm = image.getColorModel();
                 SampleModel sm = image.getSampleModel();
 
-                StringBuffer sb = new StringBuffer(Logging.getMessage("GeotiffWriter.UnsupportedType", type));
+                StringBuffer sb = new StringBuffer(null);
 
                 sb.append("\n");
                 sb.append("NumBands=").append(sm.getNumBands()).append("\n");
@@ -322,8 +303,7 @@ public class GeotiffWriter
                 sb.append("hasAlpha=").append(cm.hasAlpha());
 
                 String msg = sb.toString();
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                throw new IllegalArgumentException();
             }
         }
     }
@@ -522,8 +502,7 @@ public class GeotiffWriter
     {
         if (null == params || 0 == params.getEntries().size())
         {
-            String reason = Logging.getMessage("nullValue.AVListIsNull");
-            Logging.logger().finest(Logging.getMessage("GeotiffWriter.GeoKeysMissing", reason));
+            String reason = null;
             return;
         }
 
@@ -644,16 +623,12 @@ public class GeotiffWriter
                 }
                 else if (AVKey.COORDINATE_SYSTEM_PROJECTED.equals(cs))
                 {
-                    String msg = Logging.getMessage("GeotiffWriter.FeatureNotImplementedd", cs);
-                    Logging.logger().severe(msg);
-                    throw new IllegalArgumentException(msg);
+                            throw new IllegalArgumentException();
                     // TODO extract PCS (Projection Coordinate System)
                 }
                 else
                 {
-                    String msg = Logging.getMessage("GeotiffWriter.UnknownCoordinateSystem", cs);
-                    Logging.logger().severe(msg);
-                    throw new IllegalArgumentException(msg);
+                            throw new IllegalArgumentException();
                 }
             }
         }
@@ -663,17 +638,13 @@ public class GeotiffWriter
     {
         if (null == list || 0 == list.getValues().size())
         {
-            String reason = Logging.getMessage("nullValue.AVListIsNull");
-            String msg = Logging.getMessage("GeotiffWriter.GeoKeysMissing", reason);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            String reason = null;
+            throw new IllegalArgumentException();
         }
 
         if (!(srcWidth > 0 && srcHeight > 0))
         {
-            String msg = Logging.getMessage("generic.InvalidImageSize", srcWidth, srcHeight);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (list.hasKey(AVKey.WIDTH))
@@ -681,9 +652,7 @@ public class GeotiffWriter
             int width = (Integer) list.getValue(AVKey.WIDTH);
             if (width != srcWidth)
             {
-                String msg = Logging.getMessage("GeotiffWriter.ImageWidthMismatch", width, srcWidth);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
         else
@@ -694,9 +663,7 @@ public class GeotiffWriter
             int height = (Integer) list.getValue(AVKey.HEIGHT);
             if (height != srcHeight)
             {
-                String msg = Logging.getMessage("GeotiffWriter.ImageHeightMismatch", height, srcHeight);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
         else
@@ -709,16 +676,12 @@ public class GeotiffWriter
 
         if (null == sector)
         {
-            String msg = Logging.getMessage("GeotiffWriter.NoSectorSpecified");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!list.hasKey(AVKey.COORDINATE_SYSTEM))
         {
-            String msg = Logging.getMessage("GeotiffWriter.GeoKeysMissing", AVKey.COORDINATE_SYSTEM);
-            Logging.logger().finest(msg);
-//            throw new IllegalArgumentException(msg);
+            //            throw new IllegalArgumentException();
 
             // assume Geodetic Coordinate System
             list.setValue(AVKey.COORDINATE_SYSTEM, AVKey.COORDINATE_SYSTEM_GEOGRAPHIC);
@@ -733,9 +696,7 @@ public class GeotiffWriter
             }
             else
             {
-                String msg = Logging.getMessage("GeotiffWriter.GeoKeysMissing", AVKey.PROJECTION_EPSG_CODE);
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -750,9 +711,7 @@ public class GeotiffWriter
             }
             else
             {
-                String msg = Logging.getMessage("GeotiffWriter.GeoKeysMissing", AVKey.PIXEL_WIDTH);
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -767,26 +726,20 @@ public class GeotiffWriter
             }
             else
             {
-                String msg = Logging.getMessage("GeotiffWriter.GeoKeysMissing", AVKey.PIXEL_HEIGHT);
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
         if (!list.hasKey(AVKey.PIXEL_FORMAT))
         {
-            String msg = Logging.getMessage("GeotiffWriter.GeoKeysMissing", AVKey.PIXEL_FORMAT);
-            Logging.logger().finest(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         else
         {
             String pixelFormat = list.getStringValue(AVKey.PIXEL_FORMAT);
             if (!AVKey.ELEVATION.equals(pixelFormat) && !AVKey.IMAGE.equals(pixelFormat))
             {
-                String msg = Logging.getMessage("Geotiff.UnknownGeoKeyValue", pixelFormat, AVKey.PIXEL_FORMAT);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -795,17 +748,13 @@ public class GeotiffWriter
         {
             if (!list.hasKey(AVKey.DATA_TYPE))
             {
-                String msg = Logging.getMessage("GeotiffWriter.GeoKeysMissing", AVKey.DATA_TYPE);
-                Logging.logger().finest(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             String type = list.getStringValue(AVKey.DATA_TYPE);
             if (!AVKey.FLOAT32.equals(type) && !AVKey.INT16.equals(type))
             {
-                String msg = Logging.getMessage("Geotiff.UnknownGeoKeyValue", type, AVKey.DATA_TYPE);
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -820,9 +769,7 @@ public class GeotiffWriter
             && !AVKey.BIG_ENDIAN.equals(list.getStringValue(AVKey.BYTE_ORDER))
             )
         {
-            String msg = Logging.getMessage("generic.UnrecognizedByteOrder", list.getStringValue(AVKey.BYTE_ORDER));
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!list.hasKey(AVKey.DATE_TIME))
@@ -1051,7 +998,6 @@ public class GeotiffWriter
         }
         catch (IOException ioe)
         {
-            Logging.logger().finest(ioe.getMessage());
         }
         return null;
     }
@@ -1071,7 +1017,6 @@ public class GeotiffWriter
         }
         catch (IOException ioe)
         {
-            Logging.logger().finest(ioe.getMessage());
         }
         return null;
     }
@@ -1080,16 +1025,12 @@ public class GeotiffWriter
     {
         if (raster == null)
         {
-            String msg = Logging.getMessage("nullValue.RasterIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (0 == raster.getWidth() || 0 == raster.getHeight())
         {
-            String msg = Logging.getMessage("generic.InvalidImageSize", raster.getWidth(), raster.getHeight());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.validateParameters(raster, raster.getWidth(), raster.getHeight());
@@ -1116,9 +1057,7 @@ public class GeotiffWriter
             }
             else
             {
-                String msg = Logging.getMessage("GeotiffWriter.UnsupportedType", raster.getValue(AVKey.DATA_TYPE));
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
         else if (AVKey.IMAGE.equals(raster.getValue(AVKey.PIXEL_FORMAT)))
@@ -1150,16 +1089,12 @@ public class GeotiffWriter
             }
             else
             {
-                String msg = Logging.getMessage("GeotiffWriter.UnsupportedType", raster.getValue(AVKey.DATA_TYPE));
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
         }
         else
         {
-            String msg = Logging.getMessage("GeotiffWriter.UnsupportedType", raster.getValue(AVKey.PIXEL_FORMAT));
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         int bytesPerSample = numBands * bitsPerSample / Byte.SIZE;

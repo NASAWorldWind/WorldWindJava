@@ -14,7 +14,6 @@ import gov.nasa.worldwind.util.*;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.logging.Level;
 
 /**
  * The <code>CachedDataRaster</code> is used to hold data raster's source and metadata, while the actual data raster may
@@ -63,16 +62,12 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
     {
         if (source == null)
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         params = (null == params) ? new AVListImpl() : params;
@@ -97,9 +92,7 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
         {
             if (!reader.canRead(source, params))
             {
-                String message = Logging.getMessage("DataRaster.CannotRead", source);
-                Logging.logger().severe(message);
-                throw new java.io.IOException(message);
+                    throw new java.io.IOException();
             }
 
             if (!this.hasRequiredMetadata(params, ErrorHandlerMode.DISABLE_EXCEPTIONS))
@@ -146,9 +139,7 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
                 {
                     if (throwException == ErrorHandlerMode.ALLOW_EXCEPTIONS)
                     {
-                        String message = Logging.getMessage("generic.MissingRequiredParameter", key);
-                        Logging.logger().finest(message);
-                        throw new IllegalArgumentException(message);
+                                    throw new IllegalArgumentException();
                     }
                     else
                         return false;
@@ -164,7 +155,7 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
         Object o = this.getValue(AVKey.WIDTH);
         if (null != o && o instanceof Integer)
             return (Integer) o;
-        throw new WWRuntimeException(Logging.getMessage("generic.MissingRequiredParameter", AVKey.WIDTH));
+        throw new WWRuntimeException();
     }
 
     public int getHeight()
@@ -172,7 +163,7 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
         Object o = this.getValue(AVKey.HEIGHT);
         if (null != o && o instanceof Integer)
             return (Integer) o;
-        throw new WWRuntimeException(Logging.getMessage("generic.MissingRequiredParameter", AVKey.HEIGHT));
+        throw new WWRuntimeException();
     }
 
     public Sector getSector()
@@ -180,7 +171,7 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
         Object o = this.getValue(AVKey.SECTOR);
         if (null != o && o instanceof Sector)
             return (Sector) o;
-        throw new WWRuntimeException(Logging.getMessage("generic.MissingRequiredParameter", AVKey.SECTOR));
+        throw new WWRuntimeException();
     }
 
     public Object getDataSource()
@@ -205,9 +196,7 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
 
     public void dispose()
     {
-        String message = Logging.getMessage("generic.ExceptionWhileDisposing", this.dataSource);
-        Logging.logger().severe(message);
-        throw new IllegalStateException(message);
+        throw new IllegalStateException();
     }
 
     protected DataRaster[] getDataRasters() throws IOException, WWRuntimeException
@@ -237,7 +226,6 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
                     }
                     catch (OutOfMemoryError e)
                     {
-                        Logging.logger().finest(this.composeExceptionReason(e));
                         this.releaseMemory();
                         // let's retry after the finalization and GC
 
@@ -250,9 +238,7 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
                 {
                     disposeRasters(rasters); // cleanup in case of exception
                     rasters = null;
-                    String message = Logging.getMessage("DataRaster.CannotRead", this.composeExceptionReason(t));
-                    Logging.logger().severe(message);
-                    throw new WWRuntimeException(message);
+                            throw new WWRuntimeException();
                 }
                 finally
                 {
@@ -269,9 +255,7 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
 
             if (null == rasters || rasters.length == 0)
             {
-                String message = Logging.getMessage("generic.CannotCreateRaster", this.getDataSource());
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
 
             return rasters;
@@ -295,7 +279,6 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
                 }
                 catch (OutOfMemoryError e)
                 {
-                    Logging.logger().finest(this.composeExceptionReason(e));
                     this.releaseMemory();
 
                     rasters = this.getDataRasters();
@@ -308,7 +291,6 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
             catch (Throwable t)
             {
                 String reason = this.composeExceptionReason(t);
-                Logging.logger().log(Level.SEVERE, reason, t);
             }
         }
     }
@@ -327,7 +309,6 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
                 }
                 catch (OutOfMemoryError e)
                 {
-                    Logging.logger().finest(this.composeExceptionReason(e));
                     this.releaseMemory();
 
                     // let's retry after the finalization and GC
@@ -338,12 +319,9 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
             catch (Throwable t)
             {
                 String reason = this.composeExceptionReason(t);
-                Logging.logger().log(Level.SEVERE, reason, t);
             }
 
-            String message = Logging.getMessage("generic.CannotCreateRaster", this.getDataSource());
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
     }
 
@@ -427,7 +405,6 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
             if (clientObject == null || !(clientObject instanceof DataRaster[]))
             {
                 String message = MessageFormat.format("Cannot dispose {0}", clientObject);
-                Logging.logger().warning(message);
                 return;
             }
 
@@ -437,17 +414,13 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("generic.ExceptionWhileDisposing", clientObject);
-                Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            }
+                }
         }
 
         public void removalException(Throwable t, Object key, Object clientObject)
         {
             String reason = t.getMessage();
             reason = (WWUtil.isEmpty(reason) && null != t.getCause()) ? t.getCause().getMessage() : reason;
-            String msg = Logging.getMessage("BasicMemoryCache.ExceptionFromRemovalListener", reason);
-            Logging.logger().info(msg);
         }
     }
 

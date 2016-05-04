@@ -8,7 +8,6 @@ package gov.nasa.worldwind.geom.coords;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.globes.Globe;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * This immutable class holds a set of UPS coordinates along with it's corresponding latitude and longitude.
@@ -57,9 +56,7 @@ public class UPSCoord
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final UPSCoordConverter converter = new UPSCoordConverter(globe);
@@ -67,9 +64,7 @@ public class UPSCoord
 
         if (err != UPSCoordConverter.UPS_NO_ERROR)
         {
-            String message = Logging.getMessage("Coord.UPSConversionError");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new UPSCoord(latitude, longitude, converter.getHemisphere(),
@@ -113,9 +108,7 @@ public class UPSCoord
 
         if (err != UTMCoordConverter.UTM_NO_ERROR)
         {
-            String message = Logging.getMessage("Coord.UTMConversionError");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new UPSCoord(Angle.fromRadians(converter.getLatitude()),
@@ -140,9 +133,7 @@ public class UPSCoord
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.latitude = latitude;

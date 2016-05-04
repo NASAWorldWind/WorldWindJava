@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.render.markers;
 
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 
@@ -34,16 +33,12 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.Shape");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.material = material;
@@ -56,37 +51,27 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.Shape");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (opacity < 0)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (markerPixels < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", markerPixels);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (minMarkerSize < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", minMarkerSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.material = material;
@@ -101,44 +86,32 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.Shape");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (opacity < 0)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (markerPixels < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", markerPixels);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (minMarkerSize < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", minMarkerSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (maxMarkerSize < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", maxMarkerSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.material = material;
@@ -153,9 +126,7 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (that == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.material = that.material;
@@ -177,9 +148,7 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.material = material;
@@ -194,9 +163,7 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.headingMaterial = headingMaterial;
@@ -211,9 +178,7 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (headingScale < 0)
         {
-            String message = Logging.getMessage("generic.ScaleOutOfRange", headingScale);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.headingScale = headingScale;
@@ -228,9 +193,7 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (shapeType == null)
         {
-            String message = Logging.getMessage("nullValue.ShapeType");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.shapeType = shapeType;
@@ -258,9 +221,7 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (opacity < 0)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.opacity = opacity;
@@ -275,9 +236,7 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (markerPixels < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", markerPixels);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.markerPixels = markerPixels;
@@ -292,9 +251,7 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (minMarkerSize < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", minMarkerSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.minMarkerSize = minMarkerSize;
@@ -309,9 +266,7 @@ public class BasicMarkerAttributes implements MarkerAttributes
     {
         if (markerSize < 0)
         {
-            String message = Logging.getMessage("generic.SizeOutOfRange", markerSize);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.maxMarkerSize = markerSize;

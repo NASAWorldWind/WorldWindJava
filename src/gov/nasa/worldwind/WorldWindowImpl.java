@@ -70,8 +70,6 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
                 }
                 catch (Exception e)
                 {
-                    Logging.logger().log(java.util.logging.Level.SEVERE, Logging.getMessage(
-                        "WorldWindowGLCanvas.ExceptionWhileShuttingDownWorldWindow"), e);
                 }
             }
         }

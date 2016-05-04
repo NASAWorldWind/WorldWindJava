@@ -49,9 +49,7 @@ public class WCS100Capabilities extends AbstractXMLEventParser
         }
         catch (URISyntaxException e)
         {
-            String message = Logging.getMessage("OGC.GetCapabilitiesURIInvalid", uri);
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
     }
 

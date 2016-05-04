@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Vec4;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -85,7 +84,6 @@ public class DeclutterableText implements Declutterable
         }
         catch (Exception e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionWhileRenderingText", e);
         }
 
         return this.textBounds;
@@ -103,7 +101,6 @@ public class DeclutterableText implements Declutterable
         }
         catch (Exception e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionWhileRenderingText", e);
         }
     }
 

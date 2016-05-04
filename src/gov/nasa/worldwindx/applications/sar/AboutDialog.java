@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwindx.applications.sar;
 
-import gov.nasa.worldwind.util.Logging;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -94,7 +92,6 @@ public class AboutDialog
         catch (Exception e)
         {
             String message = "Exception while displaying content dialog";
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -122,7 +119,6 @@ public class AboutDialog
         catch (Exception e)
         {
             String message = "Exception while fetching content";
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             editor = null;
         }
         return editor;

@@ -76,23 +76,17 @@ public class ScreenAnnotation extends AbstractAnnotation
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (defaults == null)
         {
-            String message = Logging.getMessage("nullValue.AnnotationAttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setText(text);
@@ -106,16 +100,12 @@ public class ScreenAnnotation extends AbstractAnnotation
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setText(text);
@@ -173,9 +163,7 @@ public class ScreenAnnotation extends AbstractAnnotation
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.screenPoint = position;
     }
@@ -282,9 +270,7 @@ public class ScreenAnnotation extends AbstractAnnotation
             catch (Exception e)
             {
                 // Parsing the document specified by the superclass failed.
-                String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", superStateInXml);
-                Logging.logger().severe(message);
-            }
+                }
         }
 
         // Create our own state document from scratch.
@@ -322,9 +308,7 @@ public class ScreenAnnotation extends AbstractAnnotation
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Allow the superclass to restore it's state.
@@ -345,9 +329,7 @@ public class ScreenAnnotation extends AbstractAnnotation
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         // Restore the screenPoint property only if all parts are available.

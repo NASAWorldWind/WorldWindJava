@@ -35,23 +35,17 @@ public class PowerOfTwoPaddedImage
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (width <= 0)
         {
-            String message = Logging.getMessage("Geom.WidthInvalid", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("Geom.HeightInvalid", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.image = image;
@@ -79,9 +73,7 @@ public class PowerOfTwoPaddedImage
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         BufferedImage potImage = image;
@@ -128,16 +120,12 @@ public class PowerOfTwoPaddedImage
     {
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object streamOrException = WWIO.getFileOrResourceAsStream(path, null);
         if (streamOrException == null || streamOrException instanceof Exception)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionAttemptingToReadImageFile",
-                streamOrException != null ? streamOrException : path);
             return null;
         }
 
@@ -148,8 +136,6 @@ public class PowerOfTwoPaddedImage
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToReadImageFile", path);
-            Logging.logger().severe(message);
             return null;
         }
     }

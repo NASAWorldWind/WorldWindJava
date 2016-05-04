@@ -13,7 +13,6 @@ import gov.nasa.worldwind.util.*;
 import java.awt.image.*;
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
 import java.util.regex.*;
 
 /**
@@ -46,16 +45,12 @@ public class WorldFile
     {
         if (dataFile == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!dataFile.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", dataFile.getPath());
-            Logging.logger().severe(message);
-            throw new FileNotFoundException(message);
+            throw new FileNotFoundException();
         }
 
         File dir = dataFile.getParentFile();
@@ -104,9 +99,7 @@ public class WorldFile
     {
         if (worldFiles == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (values == null)
@@ -116,9 +109,7 @@ public class WorldFile
         {
             if (!file.exists())
             {
-                String message = Logging.getMessage("generic.FileNotFound", file.getPath());
-                Logging.logger().severe(message);
-                throw new FileNotFoundException(message);
+                    throw new FileNotFoundException();
             }
         }
 
@@ -239,9 +230,7 @@ public class WorldFile
                 }
                 else
                 {
-                    String message = Logging.getMessage("SurfaceImage.WorldFileLineMissing", i + 1);
-                    Logging.logger().severe(message);
-                    throw new IllegalStateException(message);
+                            throw new IllegalStateException();
                 }
             }
         }
@@ -399,16 +388,12 @@ public class WorldFile
     {
         if (worldFile == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!worldFile.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", worldFile.getPath());
-            Logging.logger().severe(message);
-            throw new FileNotFoundException(message);
+            throw new FileNotFoundException();
         }
 
         double[] values = new double[6];
@@ -427,9 +412,7 @@ public class WorldFile
                 }
                 else
                 {
-                    String message = Logging.getMessage("SurfaceImage.WorldFileLineMissing", i + 1);
-                    Logging.logger().severe(message);
-                    throw new IllegalStateException(message);
+                            throw new IllegalStateException();
                 }
             }
         }
@@ -649,16 +632,12 @@ public class WorldFile
     {
         if (values == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (imageWidth <= 0 || imageHeight <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidImageSize");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Angle latOrigin = Angle.fromDegrees((Double) values.getValue(WORLD_FILE_Y_LOCATION));
@@ -698,9 +677,7 @@ public class WorldFile
 
         if (!sector.isWithinLatLonLimits())
         {
-            String message = Logging.getMessage("generic.SectorNotGeographic");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         return sector;
@@ -731,30 +708,22 @@ public class WorldFile
 
         if (values.length < 6)
         {
-            String message = Logging.getMessage("WorldFile.TooFewWorldFileValues");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (imageWidth <= 0 || imageHeight <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidImageSize");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (zone < 1 || zone > 60)
         {
-            String message = Logging.getMessage("generic.ZoneIsInvalid", zone);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!AVKey.NORTH.equals(hemisphere) && !AVKey.SOUTH.equals(hemisphere))
         {
-            String msg = Logging.getMessage("generic.HemisphereIsInvalid", hemisphere);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Ref http://en.wikipedia.org/wiki/World_file
@@ -777,9 +746,7 @@ public class WorldFile
 
         if (!sector.isWithinLatLonLimits())
         {
-            String message = Logging.getMessage("generic.SectorNotGeographic");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         return sector;
@@ -821,9 +788,7 @@ public class WorldFile
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -860,7 +825,8 @@ public class WorldFile
                     }
 
                     if (params.getValue(AVKey.PROJECTION_ZONE) == null)
-                        Logging.logger().warning(Logging.getMessage("generic.ZoneIsInvalid", s));
+                    {
+                    }
 
                     // Parse the UTM hemisphere form the coordinate system name.
                     s = projMatcher.group(2);
@@ -874,7 +840,8 @@ public class WorldFile
                     }
 
                     if (params.getValue(AVKey.PROJECTION_HEMISPHERE) == null)
-                        Logging.logger().warning(Logging.getMessage("generic.HemisphereIsInvalid", s));
+                    {
+                    }
                 }
                 else
                 {
@@ -888,8 +855,6 @@ public class WorldFile
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE,
-                Logging.getMessage("generic.ExceptionParsingCoordinateSystem", text), e);
         }
 
         return params;
@@ -946,16 +911,12 @@ public class WorldFile
         File file = WWIO.getFileForLocalAddress(source);
         if (null == file)
         {
-            String message = Logging.getMessage("generic.UnrecognizedSourceType", source);
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         if (null == params)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         java.io.File[] worldFiles = WorldFile.getWorldFiles(file);

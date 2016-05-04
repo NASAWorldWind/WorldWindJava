@@ -57,9 +57,8 @@ public class ElevationsUtil
    {
        if( null == raster )
        {
-           String msg = Logging.getMessage("nullValue.RasterIsNull");
-           Logging.logger().finest(msg);
-           throw new IllegalArgumentException(msg);
+           String msg = null;
+           throw new IllegalArgumentException();
        }
 
        int width = raster.getWidth();
@@ -124,9 +123,7 @@ public class ElevationsUtil
            else
            {
                needsConversion = false;
-               String msg = Logging.getMessage("generic.UnrecognizedElevationUnit", unit);
-               Logging.logger().warning(msg);
-           }
+              }
        }
 
        boolean rasterHasVoids = false;

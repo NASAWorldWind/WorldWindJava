@@ -53,9 +53,7 @@ public class SaveTrackFilter extends javax.swing.filechooser.FileFilter implemen
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String path = file.getPath();

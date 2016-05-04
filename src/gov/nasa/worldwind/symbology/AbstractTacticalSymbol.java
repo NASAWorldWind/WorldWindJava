@@ -153,9 +153,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("Symbology.ExceptionRetrievingTacticalIcon", this.getImageSource());
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                this.textureInitializationFailed = true; // Suppress subsequent requests for this tactical icon.
+                    this.textureInitializationFailed = true; // Suppress subsequent requests for this tactical icon.
                 return null;
             }
         }
@@ -174,9 +172,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
             {
                 if (texture == null)
                 {
-                    String message = Logging.getMessage("nullValue.TextureIsNull");
-                    Logging.logger().severe(message);
-                    throw new IllegalArgumentException(message);
+                            throw new IllegalArgumentException();
                 }
 
                 this.texture = texture;
@@ -266,10 +262,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("Symbology.ExceptionRetrievingGraphicModifier",
-                    this.getImageSource());
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-                this.imageInitializationFailed = true; // Suppress subsequent requests for this modifier.
+                    this.imageInitializationFailed = true; // Suppress subsequent requests for this modifier.
                 return null;
             }
         }
@@ -286,30 +279,22 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
         {
             if (text == null)
             {
-                String msg = Logging.getMessage("nullValue.StringIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (point == null)
             {
-                String msg = Logging.getMessage("nullValue.PointIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (font == null)
             {
-                String msg = Logging.getMessage("nullValue.FontIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             if (color == null)
             {
-                String msg = Logging.getMessage("nullValue.ColorIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             this.text = text;
@@ -351,9 +336,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
         {
             if (points == null)
             {
-                String msg = Logging.getMessage("nullValue.IterableIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             this.points = points;
@@ -665,9 +648,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;
@@ -709,9 +690,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // If a new position is set then it must be reformatted.
@@ -814,9 +793,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
     {
         if (modifier == null)
         {
-            String msg = Logging.getMessage("nullValue.ModifierIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.modifiers.getValue(modifier);
@@ -827,9 +804,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
     {
         if (modifier == null)
         {
-            String msg = Logging.getMessage("nullValue.ModifierIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.modifiers.setValue(modifier, value);
@@ -882,9 +857,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
     {
         if (unitsFormat == null)
         {
-            String msg = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // If the unit format is changing then the position needs to be reformatted.
@@ -917,9 +890,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
     {
         if (delta == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position refPos = this.getReferencePosition();
@@ -939,9 +910,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.setPosition(position);
@@ -1043,9 +1012,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.pickSupport.clearPickList();
@@ -1066,9 +1033,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())

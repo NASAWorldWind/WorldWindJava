@@ -411,8 +411,6 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
         // Anything other than a KMLRoot is not a valid link target
         else if (o != null)
         {
-            String message = Logging.getMessage("KML.InvalidNetworkLinkTarget", address);
-            Logging.logger().warning(message);
             this.invalidTarget = true; // Stop trying to retrieve this resource
         }
     }
@@ -467,9 +465,7 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
     {
         if (!(sourceValues instanceof KMLNetworkLink))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         KMLNetworkLink sourceLink = (KMLNetworkLink) sourceValues;
@@ -520,16 +516,12 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
         {
             if (link == null)
             {
-                String message = Logging.getMessage("nullValue.ObjectIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (address == null)
             {
-                String message = Logging.getMessage("nullValue.PathIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.link = link;

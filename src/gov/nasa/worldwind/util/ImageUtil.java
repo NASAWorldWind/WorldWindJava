@@ -49,15 +49,11 @@ public class ImageUtil
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (canvas == null)
         {
-            String message = Logging.getMessage("nullValue.CanvasIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.awt.Graphics2D g2d = canvas.createGraphics();
@@ -88,21 +84,15 @@ public class ImageUtil
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (canvas == null)
         {
-            String message = Logging.getMessage("nullValue.CanvasIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (canvasToImageTransform == null)
         {
-            String message = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int sourceWidth = image.getWidth();
@@ -158,21 +148,16 @@ public class ImageUtil
     {
         if (sourceImage == null)
         {
-            String message = Logging.getMessage("nullValue.SourceImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (destImage == null)
         {
-            String message = Logging.getMessage("nullValue.DestinationImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         String message = validateControlPoints(3, imagePoints, geoPoints);
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (imagePoints.length >= 4 && geoPoints.length >= 4)
@@ -206,21 +191,16 @@ public class ImageUtil
     {
         if (sourceImage == null)
         {
-            String message = Logging.getMessage("nullValue.SourceImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (destImage == null)
         {
-            String message = Logging.getMessage("nullValue.DestinationImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         String message = validateControlPoints(4, imagePoints, geoPoints);
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // We can only create an affine transform from three of the given points. To increase accruacy, we will compute
@@ -254,21 +234,16 @@ public class ImageUtil
     {
         if (sourceImage == null)
         {
-            String message = Logging.getMessage("nullValue.SourceImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (destImage == null)
         {
-            String message = Logging.getMessage("nullValue.DestinationImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         String message = validateControlPoints(3, imagePoints, geoPoints);
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Compute the destination sector. We want a lat/lon aligned sector that bounds the source image once it is
@@ -321,29 +296,21 @@ public class ImageUtil
     {
         if (sourceImage == null)
         {
-            String message = Logging.getMessage("nullValue.SourceImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (worldFileParams == null)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (destImage == null)
         {
-            String message = Logging.getMessage("nullValue.DestinationImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Matrix imageToGeographic = Matrix.fromImageToGeographic(worldFileParams);
         if (imageToGeographic == null)
         {
-            String message = Logging.getMessage("WorldFile.UnrecognizedValues", "");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         List<LatLon> corners = computeImageCorners(sourceImage.getWidth(), sourceImage.getHeight(), imageToGeographic);
@@ -388,14 +355,12 @@ public class ImageUtil
         String message = validateControlPoints(4, imagePoints, geoPoints);
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         message = validateControlPoints(3, outImagePoints, outGeoPoints);
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Compute the error for each combination of three points, and choose the combination with the least error.
@@ -458,15 +423,11 @@ public class ImageUtil
     {
         if (imageWidth < 1 || imageHeight < 1)
         {
-            String message = Logging.getMessage("generic.InvalidImageSize", imageWidth, imageHeight);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (imageToGeographic == null)
         {
-            String message = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<LatLon> corners = new ArrayList<LatLon>();
@@ -492,19 +453,19 @@ public class ImageUtil
     {
         if (imagePoints == null)
         {
-            return Logging.getMessage("nullValue.ImagePointsIsNull");
+            return null;
         }
         if (geoPoints == null)
         {
-            return Logging.getMessage("nullValue.GeoPointsIsNull");
+            return null;
         }
         if (imagePoints.length < numExpected)
         {
-            return Logging.getMessage("generic.ArrayInvalidLength", imagePoints.length);
+            return null;
         }
         if (geoPoints.length < numExpected)
         {
-            return Logging.getMessage("generic.ArrayInvalidLength", imagePoints.length);
+            return null;
         }
 
         return null;
@@ -538,23 +499,17 @@ public class ImageUtil
     {
         if (canvasSector == null || imageSector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (canvas == null || image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (aspectRatio <= 0)
         {
-            String message = Logging.getMessage("Util.AspectRatioInvalid", aspectRatio);
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (!(canvasSector.intersects(imageSector)))
@@ -716,15 +671,11 @@ public class ImageUtil
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (maxLevel < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "maxLevel < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         BufferedImage[] mipMapLevels = new BufferedImage[1 + maxLevel];
@@ -769,9 +720,7 @@ public class ImageUtil
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int mipmapImageType = getMipmapType(image.getType());
@@ -812,15 +761,11 @@ public class ImageUtil
     {
         if (width < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (height < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "height < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int widthLevels = (int) WWMath.logBase2(width);
@@ -846,9 +791,7 @@ public class ImageUtil
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // If the original image is already a power of two in both dimensions, then simply return it.
@@ -897,9 +840,7 @@ public class ImageUtil
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         long size = 0L;
@@ -977,17 +918,13 @@ public class ImageUtil
         image = ImageIO.read(imageFile);
         if (image == null)
         {
-            String message = Logging.getMessage("generic.ImageReadFailed", imageFile);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         File[] worldFiles = WorldFile.getWorldFiles(imageFile.getAbsoluteFile());
         if (worldFiles == null || worldFiles.length == 0)
         {
-            String message = Logging.getMessage("WorldFile.WorldFileNotFound", imageFile.getAbsolutePath());
-            Logging.logger().severe(message);
-            throw new FileNotFoundException(message);
+            throw new FileNotFoundException();
         }
 
         values.setValue(AVKey.IMAGE, image);
@@ -1001,7 +938,7 @@ public class ImageUtil
         if (sector == null)
         {
             String message = "Problem generating bounding sector for the image";
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         values.setValue(AVKey.SECTOR, sector);
@@ -1082,65 +1019,47 @@ public class ImageUtil
     {
         if (null == params)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (!params.hasKey(AVKey.WIDTH))
         {
-            String message = Logging.getMessage("Geom.WidthInvalid");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (!params.hasKey(AVKey.HEIGHT))
         {
-            String message = Logging.getMessage("Geom.HeightInvalid");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (!params.hasKey(WorldFile.WORLD_FILE_X_PIXEL_SIZE))
         {
-            String message = Logging.getMessage("WorldFile.NoPixelSizeSpecified", "X");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (!params.hasKey(WorldFile.WORLD_FILE_Y_PIXEL_SIZE))
         {
-            String message = Logging.getMessage("WorldFile.NoPixelSizeSpecified", "Y");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (!params.hasKey(WorldFile.WORLD_FILE_X_LOCATION))
         {
-            String message = Logging.getMessage("WorldFile.NoLocationSpecified", "X");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (!params.hasKey(WorldFile.WORLD_FILE_Y_LOCATION))
         {
-            String message = Logging.getMessage("WorldFile.NoLocationSpecified", "Y");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (!params.hasKey(AVKey.PROJECTION_ZONE))
         {
-            String message = Logging.getMessage("generic.ZoneIsMissing");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (!params.hasKey(AVKey.PROJECTION_HEMISPHERE))
         {
-            String message = Logging.getMessage("generic.HemisphereIsMissing");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         int width = (Integer) params.getValue(AVKey.WIDTH);
@@ -1198,9 +1117,7 @@ public class ImageUtil
 
         if (values == null)
         {
-            String message = Logging.getMessage("nullValue.AVListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         BufferedImage image = (BufferedImage) values.getValue(AVKey.IMAGE);
@@ -1444,16 +1361,12 @@ public class ImageUtil
     {
         if (sourceImage == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (latitudes == null || longitudes == null || latitudes.length != longitudes.length)
         {
-            String message = Logging.getMessage("ImageUtil.FieldArrayInvalid");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         int sourceWidth = sourceImage.getWidth();
@@ -1461,16 +1374,12 @@ public class ImageUtil
 
         if (sourceWidth < 1 || sourceHeight < 1)
         {
-            String message = Logging.getMessage("ImageUtil.EmptyImage");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (longitudes.length < sourceWidth * sourceHeight || latitudes.length < sourceWidth * sourceHeight)
         {
-            String message = Logging.getMessage("ImageUtil.FieldArrayTooShort");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         GeographicImageInterpolator grid = new GeographicImageInterpolator(new Dimension(sourceWidth, sourceHeight),
@@ -1608,9 +1517,7 @@ public class ImageUtil
     {
         if (image == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (java.awt.GraphicsEnvironment.isHeadless())
@@ -1640,16 +1547,12 @@ public class ImageUtil
     {
         if (width < 1)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 1)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
 //        if (java.awt.GraphicsEnvironment.isHeadless())
@@ -1690,7 +1593,6 @@ public class ImageUtil
         }
         catch (IOException e)
         {
-            Logging.logger().finest(e.getMessage());
             return null;
         }
     }
@@ -1699,16 +1601,12 @@ public class ImageUtil
     {
         if (sourceImage == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (originalColors == null)
         {
-            String message = Logging.getMessage("nullValue.ColorArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         int width = sourceImage.getWidth();
@@ -1716,9 +1614,7 @@ public class ImageUtil
 
         if (width < 1 || height < 1)
         {
-            String message = Logging.getMessage("ImageUtil.EmptyImage");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         int[] sourceColors = sourceImage.getRGB(0, 0, width, height, null, 0, width);
@@ -1760,7 +1656,6 @@ public class ImageUtil
         }
         catch (IOException e)
         {
-            Logging.logger().finest(e.getMessage());
             return null;
         }
     }
@@ -1769,16 +1664,12 @@ public class ImageUtil
     {
         if (sourceImage == null)
         {
-            String message = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (originalColors == null || newColors == null)
         {
-            String message = Logging.getMessage("nullValue.ColorArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         int width = sourceImage.getWidth();
@@ -1786,9 +1677,7 @@ public class ImageUtil
 
         if (width < 1 || height < 1)
         {
-            String message = Logging.getMessage("ImageUtil.EmptyImage");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         int[] sourceColors = sourceImage.getRGB(0, 0, width, height, null, 0, width);
@@ -1823,9 +1712,7 @@ public class ImageUtil
 
         if (null == raster)
         {
-            String msg = Logging.getMessage("nullValue.RasterIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         BufferedImage image;
@@ -1840,18 +1727,14 @@ public class ImageUtil
         }
         else
         {
-            String msg = Logging.getMessage("generic.UnexpectedRasterType", raster.getClass().getName());
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         ImageOutputStream ios = null;
 
         if (null == image)
         {
-            String msg = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         try
@@ -1883,7 +1766,6 @@ public class ImageUtil
         }
         catch (Throwable t)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, t.getMessage(), t);
         }
         finally
         {
@@ -1899,9 +1781,7 @@ public class ImageUtil
 
         if (null == raster)
         {
-            String msg = Logging.getMessage("nullValue.RasterIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         BufferedImage image;
@@ -1916,18 +1796,14 @@ public class ImageUtil
         }
         else
         {
-            String msg = Logging.getMessage("generic.UnexpectedRasterType", raster.getClass().getName());
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         ImageOutputStream ios = null;
 
         if (null == image)
         {
-            String msg = Logging.getMessage("nullValue.ImageIsNull");
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         try
@@ -1941,7 +1817,6 @@ public class ImageUtil
         }
         catch (Throwable t)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE, t.getMessage(), t);
         }
         finally
         {
@@ -1961,7 +1836,6 @@ public class ImageUtil
             }
             catch (Throwable t)
             {
-                Logging.logger().log(java.util.logging.Level.SEVERE, t.getMessage(), t);
             }
         }
     }
@@ -1978,9 +1852,7 @@ public class ImageUtil
     {
         if (null == raster)
         {
-            String message = Logging.getMessage("nullValue.RasterIsNull");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         // we are building UINT DataBuffer, cannot use negative values as -32768 or -9999, so we will use 0

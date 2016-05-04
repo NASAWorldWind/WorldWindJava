@@ -22,9 +22,7 @@ public class VPFUtils
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!file.exists())
@@ -48,9 +46,7 @@ public class VPFUtils
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!file.exists())
@@ -73,16 +69,12 @@ public class VPFUtils
     {
         if (database == null)
         {
-            String message = Logging.getMessage("nullValue.DatabaseIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -100,16 +92,12 @@ public class VPFUtils
     {
         if (library == null)
         {
-            String message = Logging.getMessage("nullValue.LibraryIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -127,16 +115,12 @@ public class VPFUtils
     {
         if (coverage == null)
         {
-            String message = Logging.getMessage("nullValue.CoverageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (featureTableFilter == null)
         {
-            String message = Logging.getMessage("nullValue.FilterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         VPFFeatureClassSchema[] schemas = coverage.getFeatureClasses(featureTableFilter);
@@ -155,9 +139,7 @@ public class VPFUtils
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         StringBuilder sb = new StringBuilder();
@@ -180,30 +162,22 @@ public class VPFUtils
     {
         if (record == null)
         {
-            String message = Logging.getMessage("nullValue.RecordIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramName == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterNameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (paramKey == null)
         {
-            String message = Logging.getMessage("nullValue.ParameterKeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (record.hasValue(paramName))
@@ -225,9 +199,7 @@ public class VPFUtils
     {
         if (record == null)
         {
-            String message = Logging.getMessage("nullValue.RecordIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new VPFBoundingBox(
@@ -241,9 +213,7 @@ public class VPFUtils
     {
         if (tableName == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String suffix = WWIO.getSuffix(tableName);

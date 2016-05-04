@@ -129,30 +129,22 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (width <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sector = sector;
@@ -258,9 +250,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sector = sector;
@@ -342,16 +332,12 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (width <= 0)
         {
-            String message = Logging.getMessage("Geom.WidthInvalid", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("Geom.HeightInvalid", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.width = width;
@@ -385,9 +371,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.values = iterable;
@@ -444,9 +428,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.surfaceAttributes = attributes.copy();
@@ -506,9 +488,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())
@@ -535,9 +515,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isVisible())
@@ -569,9 +547,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.getAltitudeMode() == WorldWind.CLAMP_TO_GROUND)
@@ -655,9 +631,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double minValue = Double.MAX_VALUE;
@@ -697,9 +671,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return computeExtremeValues(iterable, Double.NaN);
@@ -791,9 +763,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     {
         if (values == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<AnalyticSurface.GridPointAttributes> attributesList
@@ -1050,8 +1020,6 @@ public class AnalyticSurface implements Renderable, PreRenderable
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileUpdating", this);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             this.updateFailed = true;
         }
     }
@@ -1322,9 +1290,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
         {
             if (dc == null)
             {
-                String message = Logging.getMessage("nullValue.DrawContextIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             return Arrays.asList(this.analyticSurface.sector);

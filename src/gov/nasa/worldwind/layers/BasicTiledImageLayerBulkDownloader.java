@@ -122,14 +122,10 @@ public class BasicTiledImageLayerBulkDownloader extends BulkRetrievalThread
         }
         catch (InterruptedException e)
         {
-            String message = Logging.getMessage("generic.BulkRetrievalInterrupted", this.layer.getName());
-            Logging.logger().log(java.util.logging.Level.WARNING, message, e);
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionDuringBulkRetrieval", this.layer.getName());
-            Logging.logger().severe(message);
-            throw new RuntimeException(message);
+            throw new RuntimeException();
         }
     }
 
@@ -293,9 +289,7 @@ public class BasicTiledImageLayerBulkDownloader extends BulkRetrievalThread
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionDuringDataSizeEstimate", this.layer.getName());
-            Logging.logger().severe(message);
-            throw new RuntimeException(message);
+            throw new RuntimeException();
         }
 
         // Extrapolate total missing count

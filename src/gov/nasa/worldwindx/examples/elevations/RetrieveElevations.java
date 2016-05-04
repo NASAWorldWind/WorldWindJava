@@ -8,7 +8,6 @@ package gov.nasa.worldwindx.examples.elevations;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.ElevationModel;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwindx.examples.*;
 
 import javax.swing.*;
@@ -155,7 +154,6 @@ public class RetrieveElevations extends ApplicationTemplate
 
         public void doActionOnButton1()
         {
-            Logging.logger().info("Zooming to Matterhorn");
 
             View view = this.wwd.getView();
 
@@ -192,8 +190,6 @@ public class RetrieveElevations extends ApplicationTemplate
             }
             sb.append("\nresolutionAchieved = ").append(resolutionAchieved);
             sb.append(", requested resolution = ").append(targetResolution);
-
-            Logging.logger().info(sb.toString());
         }
 
         public void doActionOnButton3()
@@ -215,8 +211,6 @@ public class RetrieveElevations extends ApplicationTemplate
                 double e = model.getElevation(ll.getLatitude(), ll.getLongitude());
                 sb.append("\n").append(e);
             }
-
-            Logging.logger().info(sb.toString());
         }
 
         public void doSetVerticalExaggeration(double ve)

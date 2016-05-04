@@ -16,7 +16,6 @@ import gov.nasa.worldwind.util.*;
 import javax.imageio.spi.IIORegistry;
 import javax.media.opengl.GL;
 import java.beans.PropertyChangeListener;
-import java.util.logging.Level;
 
 /**
  * @author Tom Gaskins
@@ -206,8 +205,7 @@ public final class WorldWind
     {
         if (className == null || className.length() == 0)
         {
-            Logging.logger().severe("nullValue.ClassNameIsNull");
-            throw new IllegalArgumentException(Logging.getMessage("nullValue.ClassNameIsNull"));
+            throw new IllegalArgumentException((String) null);
         }
 
         try
@@ -217,13 +215,11 @@ public final class WorldWind
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE, "WorldWind.ExceptionCreatingComponent", className);
-            throw new WWRuntimeException(Logging.getMessage("WorldWind.ExceptionCreatingComponent", className), e);
+            throw new WWRuntimeException(e);
         }
         catch (Throwable t)
         {
-            Logging.logger().log(Level.SEVERE, "WorldWind.ErrorCreatingComponent", className);
-            throw new WWRuntimeException(Logging.getMessage("WorldWind.ErrorCreatingComponent", className), t);
+            throw new WWRuntimeException(t);
         }
     }
 
@@ -241,16 +237,14 @@ public final class WorldWind
     {
         if (classNameKey == null || classNameKey.length() == 0)
         {
-            Logging.logger().severe("nullValue.ClassNameKeyNullZero");
-            throw new IllegalArgumentException(Logging.getMessage("nullValue.ClassNameKeyNullZero"));
+            throw new IllegalArgumentException((String) null);
         }
 
         String name = Configuration.getStringValue(classNameKey);
         if (name == null)
         {
-            Logging.logger().log(Level.SEVERE, "WorldWind.NoClassNameInConfigurationForKey", classNameKey);
             throw new WWRuntimeException(
-                Logging.getMessage("WorldWind.NoClassNameInConfigurationForKey", classNameKey));
+            );
         }
 
         try
@@ -259,9 +253,8 @@ public final class WorldWind
         }
         catch (Throwable e)
         {
-            Logging.logger().log(Level.SEVERE, "WorldWind.UnableToCreateClassForConfigurationKey", name);
             throw new IllegalStateException(
-                Logging.getMessage("WorldWind.UnableToCreateClassForConfigurationKey", name), e);
+                null, e);
         }
     }
 

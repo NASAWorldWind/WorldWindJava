@@ -7,7 +7,6 @@ package gov.nasa.worldwind.formats.geojson;
 
 import com.jogamp.common.nio.Buffers;
 import gov.nasa.worldwind.formats.json.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.io.IOException;
 import java.nio.DoubleBuffer;
@@ -34,9 +33,7 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
     {
         if (!event.isStartArray())
         {
-            String message = Logging.getMessage("generic.InvalidEvent", event);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         JSONEvent nextEvent = ctx.peek();
@@ -54,7 +51,6 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
         }
         else
         {
-            Logging.logger().warning(Logging.getMessage("generic.UnexpectedEvent", event));
             return null;
         }
     }
@@ -77,9 +73,7 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
     {
         if (!event.isStartArray())
         {
-            String message = Logging.getMessage("generic.InvalidEvent", event);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numRead = 0;
@@ -95,7 +89,6 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
 
             if (!event.isNumericValue())
             {
-                Logging.logger().warning(Logging.getMessage("generic.UnexpectedEvent", event));
                 continue;
             }
 
@@ -152,9 +145,7 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
     {
         if (!event.isStartArray())
         {
-            String message = Logging.getMessage("generic.InvalidEvent", event);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.startPositionArray();
@@ -172,9 +163,7 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
     {
         if (!event.isStartArray())
         {
-            String message = Logging.getMessage("generic.InvalidEvent", event);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // This array may either represent an array of tuples or an array of arrays. We advance to the first child
@@ -184,9 +173,7 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
         event = ctx.nextEvent();
         if (event == null || !event.isStartArray())
         {
-            String message = Logging.getMessage("generic.InvalidEvent", event);
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         JSONEvent peek = ctx.peek();
@@ -199,7 +186,6 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
 
         else
         {
-            Logging.logger().warning(Logging.getMessage("generic.UnexpectedEvent", peek));
             return null;
         }
     }
@@ -208,9 +194,7 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
     {
         if (!event.isStartArray())
         {
-            String message = Logging.getMessage("generic.InvalidEvent", event);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int posSize = -1;
@@ -243,9 +227,7 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
     {
         if (!event.isStartArray())
         {
-            String message = Logging.getMessage("generic.InvalidEvent", event);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ArrayList<Object> list = null; // List is lazily constructed below.
@@ -301,7 +283,6 @@ public class GeoJSONCoordinateParser extends GeoJSONEventParser
         }
         else
         {
-            Logging.logger().warning(Logging.getMessage("generic.UnexpectedObjectType", list.get(0)));
             return null;
         }
     }

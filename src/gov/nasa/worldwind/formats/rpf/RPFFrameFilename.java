@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.rpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * <code>
  * <pre>
@@ -63,15 +61,11 @@ public class RPFFrameFilename
     {
         if (filename == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (filename.length() != FILENAME_LENGTH)
         {
-            String message = Logging.getMessage("RPFFrameFilename.BadFilenameLength", filename);
-            Logging.logger().fine(message);
-            throw new RPFFrameFilenameFormatException(message);
+            throw new RPFFrameFilenameFormatException();
         }
 
         char[] buffer = new char[FILENAME_LENGTH];        
@@ -99,9 +93,7 @@ public class RPFFrameFilename
         }
         catch (IllegalArgumentException e)
         {
-            String message = Logging.getMessage("RPFFrameFilename.IntegerNotParsed");
-            Logging.logger().fine(message);
-            throw new RPFFrameFilenameFormatException(message, e);
+            throw new RPFFrameFilenameFormatException(e);
         }
 
         return new RPFFrameFilename(dataSeriesCode, frameNumber, producerId, version, zoneCode);
@@ -210,9 +202,7 @@ public class RPFFrameFilename
     {
         if (str == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (str.length() != FILENAME_LENGTH)

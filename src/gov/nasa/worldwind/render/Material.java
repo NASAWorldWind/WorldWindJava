@@ -40,9 +40,7 @@ public class Material
     {
         if (specular == null || diffuse == null || ambient == null || emission == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.ambient = ambient;
@@ -56,9 +54,7 @@ public class Material
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.ambient = this.makeDarker(color);
@@ -72,9 +68,7 @@ public class Material
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.ambient = this.makeDarker(color);
@@ -113,9 +107,7 @@ public class Material
     {
         if (gl == null)
         {
-            String msg = Logging.getMessage("nullValue.GLIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         glMaterial(gl, face, GL2.GL_AMBIENT, this.ambient);
@@ -129,9 +121,7 @@ public class Material
     {
         if (gl == null)
         {
-            String msg = Logging.getMessage("nullValue.GLIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // The alpha value at a vertex is taken only from the diffuse material's alpha channel. Therefore we specify
@@ -147,15 +137,11 @@ public class Material
     {
         if (gl == null)
         {
-            String msg = Logging.getMessage("nullValue.GLIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         float[] compArray = new float[4];
@@ -167,15 +153,11 @@ public class Material
     {
         if (gl == null)
         {
-            String msg = Logging.getMessage("nullValue.GLIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         float[] compArray = new float[4];
@@ -209,9 +191,7 @@ public class Material
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         float factor = 0.3f;

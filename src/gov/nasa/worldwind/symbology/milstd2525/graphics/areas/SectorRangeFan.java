@@ -123,16 +123,12 @@ public class SectorRangeFan extends AbstractMilStd2525TacticalGraphic implements
     {
         if (arrowAngle == null)
         {
-            String msg = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (arrowAngle.degrees <= 0 || arrowAngle.degrees >= 90)
         {
-            String msg = Logging.getMessage("generic.AngleOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.arrowAngle = arrowAngle;
@@ -158,9 +154,7 @@ public class SectorRangeFan extends AbstractMilStd2525TacticalGraphic implements
     {
         if (arrowLength < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.arrowLength = arrowLength;
@@ -185,9 +179,7 @@ public class SectorRangeFan extends AbstractMilStd2525TacticalGraphic implements
     {
         if (centerOfSectorLength < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.centerOfSectorLength = centerOfSectorLength;
@@ -213,9 +205,7 @@ public class SectorRangeFan extends AbstractMilStd2525TacticalGraphic implements
     {
         if (intervals < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intervals = intervals;
@@ -241,9 +231,7 @@ public class SectorRangeFan extends AbstractMilStd2525TacticalGraphic implements
     {
         if (azimuthFormat == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.azimuthFormat = azimuthFormat;
@@ -268,9 +256,7 @@ public class SectorRangeFan extends AbstractMilStd2525TacticalGraphic implements
     {
         if (radiusFormat == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.radiusFormat = radiusFormat;
@@ -306,17 +292,13 @@ public class SectorRangeFan extends AbstractMilStd2525TacticalGraphic implements
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Iterator<? extends Position> iterator = positions.iterator();
         if (!iterator.hasNext())
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = iterator.next();
@@ -443,9 +425,7 @@ public class SectorRangeFan extends AbstractMilStd2525TacticalGraphic implements
     {
         if (azimuths == null)
         {
-            String message = Logging.getMessage("nullValue.ListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.azimuths = azimuths;
@@ -477,9 +457,7 @@ public class SectorRangeFan extends AbstractMilStd2525TacticalGraphic implements
     {
         if (altitudes == null)
         {
-            String message = Logging.getMessage("nullValue.ListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.altitudes = altitudes;

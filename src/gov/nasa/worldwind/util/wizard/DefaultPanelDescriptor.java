@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.util.wizard;
 
-import gov.nasa.worldwind.util.Logging;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -32,15 +30,12 @@ public class DefaultPanelDescriptor implements WizardPanelDescriptor
     {
         if (id == null)
         {
-            String message = Logging.getMessage("nullValue.ObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (panel == null)
         {
             String message = "Component is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.panelIdentifier = id;
@@ -66,9 +61,7 @@ public class DefaultPanelDescriptor implements WizardPanelDescriptor
     {
         if (panelIdentifier == null)
         {
-            String message = Logging.getMessage("nullValue.ObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.panelIdentifier = panelIdentifier;
@@ -84,8 +77,7 @@ public class DefaultPanelDescriptor implements WizardPanelDescriptor
         if (panel == null)
         {
             String message = "Component is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.panelComponent = panel;

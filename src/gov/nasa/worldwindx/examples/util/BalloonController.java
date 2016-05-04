@@ -111,9 +111,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
     {
         if (wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -200,7 +198,6 @@ public class BalloonController extends MouseAdapter implements SelectListener
         catch (Exception ex)
         {
             // Wrap the handler in a try/catch to keep exceptions from bubbling up
-            Logging.logger().warning(ex.getMessage() != null ? ex.getMessage() : ex.toString());
         }
     }
 
@@ -292,7 +289,6 @@ public class BalloonController extends MouseAdapter implements SelectListener
         catch (Exception e)
         {
             // Wrap the handler in a try/catch to keep exceptions from bubbling up
-            Logging.logger().warning(e.getMessage() != null ? e.getMessage() : e.toString());
         }
     }
 
@@ -558,8 +554,6 @@ public class BalloonController extends MouseAdapter implements SelectListener
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToInvokeWebBrower", url);
-            Logging.logger().warning(message);
         }
     }
 
@@ -1356,7 +1350,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
     /**
      * Asynchronously load a KML document. When the document is available, {@link #onDocumentLoaded(String,
      * gov.nasa.worldwind.ogc.kml.KMLRoot, String) onDocumentLoaded} will be called on the Event Dispatch Thread (EDT).
-     * If the document fails to load, {@link #onDocumentFailed(String, Exception) onDocumentFailed} will be called.
+     * If the document fails to load, {@link #onDocumentFailed(Exception) onDocumentFailed} will be called.
      * Failure will be reported if the document does not load within {@link #retrievalTimeout} milliseconds.
      *
      * @param url        URL of KML doc to open.
@@ -1365,7 +1359,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
      *                   available.
      *
      * @see #onDocumentLoaded(String, gov.nasa.worldwind.ogc.kml.KMLRoot, String)
-     * @see #onDocumentFailed(String, Exception)
+     * @see #onDocumentFailed(Exception)
      */
     protected void requestDocument(String url, KMLRoot context, String featureRef)
     {
@@ -1403,10 +1397,8 @@ public class BalloonController extends MouseAdapter implements SelectListener
      * @param url URL of the document that failed to load.
      * @param e   Exception that caused the failure.
      */
-    protected void onDocumentFailed(String url, Exception e)
+    protected void onDocumentFailed(Exception e)
     {
-        String message = Logging.getMessage("generic.ExceptionWhileReading", url + ": " + e.getMessage());
-        Logging.logger().warning(message);
     }
 
     /**
@@ -1434,8 +1426,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
      * A TimerTask that will request a resource from the {@link gov.nasa.worldwind.cache.FileStore} until it becomes
      * available, or until a timeout is exceeded. When the task finishes it will trigger a callback on the Event
      * Dispatch Thread (EDT) to either {@link BalloonController#onDocumentLoaded(String,
-     * gov.nasa.worldwind.ogc.kml.KMLRoot, String) onDocumentLoaded} or {@link BalloonController#onDocumentFailed(String,
-     * Exception) onDocumentFailed}.
+     * gov.nasa.worldwind.ogc.kml.KMLRoot, String) onDocumentLoaded} or {@link #onDocumentFailed(Exception) onDocumentFailed}.
      * <p/>
      * This task is designed to be repeated periodically. The task will cancel itself when the document becomes
      * available, or the timeout is exceeded.
@@ -1482,7 +1473,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
          * Request the document from the {@link gov.nasa.worldwind.cache.FileStore}. If the document is available, parse
          * it and schedule a callback on the EDT to {@link BalloonController#onDocumentLoaded(String,
          * gov.nasa.worldwind.ogc.kml.KMLRoot, String)}. If an exception occurs, or the timeout is exceeded, schedule a
-         * callback on the EDT to {@link BalloonController#onDocumentFailed(String, Exception)}
+         * callback on the EDT to {@link #onDocumentFailed(Exception)}
          */
         public void run()
         {
@@ -1496,7 +1487,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
 
                 // Check for timeout before doing any work
                 if (System.currentTimeMillis() > this.start + this.timeout)
-                    throw new WWTimeoutException(Logging.getMessage("generic.CannotOpenFile", this.docUrl));
+                    throw new WWTimeoutException();
 
                 // If we have a context document, let that doc resolve the reference. Otherwise, request it from the
                 // file store.
@@ -1540,7 +1531,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
                 {
                     public void run()
                     {
-                        BalloonController.this.onDocumentFailed(docUrl, e);
+                        BalloonController.this.onDocumentFailed(e);
                     }
                 });
                 this.cancel();

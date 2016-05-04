@@ -48,15 +48,11 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
     {
         if (cache == null)
         {
-            String message = Logging.getMessage("nullValue.CacheIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (writeThreadPoolSize < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "writeThreadPoolSize < 1");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.rasterCache = cache;
@@ -136,9 +132,6 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
 
         if (installLocation == null || !installLocation.exists())
         {
-            String message = Logging.getMessage("TiledRasterProducer.NoInstallLocation",
-                this.getStoreParameters().getValue(AVKey.DATASET_NAME));
-            Logging.logger().warning(message);
             return;
         }
 
@@ -148,9 +141,6 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("TiledRasterProducer.ExceptionRemovingProductionState",
-                this.getStoreParameters().getValue(AVKey.DATASET_NAME));
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -211,20 +201,20 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
 
         Object o = parameters.getValue(AVKey.FILE_STORE_LOCATION);
         if (o == null || !(o instanceof String) || ((String) o).length() < 1)
-            sb.append((sb.length() > 0 ? ", " : "")).append(Logging.getMessage("term.fileStoreLocation"));
+            sb.append((sb.length() > 0 ? ", " : "")).append((String) null);
 
         o = parameters.getValue(AVKey.DATA_CACHE_NAME);
         if (o == null || !(o instanceof String) || ((String) o).length() == 0)
-            sb.append((sb.length() > 0 ? ", " : "")).append(Logging.getMessage("term.fileStoreFolder"));
+            sb.append((sb.length() > 0 ? ", " : "")).append((String) null);
 
         o = parameters.getValue(AVKey.DATASET_NAME);
         if (o == null || !(o instanceof String) || ((String) o).length() < 1)
-            sb.append((sb.length() > 0 ? ", " : "")).append(Logging.getMessage("term.datasetName"));
+            sb.append((sb.length() > 0 ? ", " : "")).append((String) null);
 
         if (sb.length() == 0)
             return null;
 
-        return Logging.getMessage("DataStoreProducer.InvalidDataStoreParamters", sb.toString());
+        return null;
     }
 
     protected java.io.File installLocationFor(AVList params)
@@ -748,7 +738,6 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
                     }
                     catch (Throwable t)
                     {
-                        Logging.logger().finest(WWUtil.extractExceptionReason(t));
                     }
                 }
                 else
@@ -760,7 +749,6 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
                     }
                     catch (Throwable t)
                     {
-                        Logging.logger().finest(WWUtil.extractExceptionReason(t));
                     }
                 }
             }
@@ -815,9 +803,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
                 }
                 catch (Throwable t)
                 {
-                    String message = Logging.getMessage("generic.ExceptionWhileWriting", tile);
-                    Logging.logger().log(java.util.logging.Level.SEVERE, message, t);
-                }
+                        }
             }
         });
     }
@@ -843,9 +829,6 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
         }
         catch (InterruptedException e)
         {
-            String msg = Logging.getMessage("generic.interrupted", this.getClass().getName(),
-                "waitForInstallTileTasks()");
-            Logging.logger().finest(msg);
             // Don't swallow interrupts; instead, restore the interrupted status
             Thread.currentThread().interrupt();
         }
@@ -864,8 +847,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
         else
         {
             String message = result.toString();
-            Logging.logger().severe(message);
-            throw new java.io.IOException(message);
+            throw new java.io.IOException();
         }
 
         synchronized (this.fileLock)
@@ -875,9 +857,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
             {
                 if (!dir.mkdirs())
                 {
-                    String message = Logging.getMessage("generic.CannotCreateFile", dir);
-                    Logging.logger().warning(message);
-                }
+                        }
             }
         }
 
@@ -894,9 +874,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
             }
             catch (java.io.IOException e)
             {
-                String message = Logging.getMessage("generic.ExceptionWhileWriting", installLocation);
-                Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            }
+                }
         }
     }
 
@@ -913,7 +891,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
             path = WWIO.appendPathPart(path, s);
 
         if (path == null || path.length() < 1)
-            return Logging.getMessage("TiledRasterProducer.InvalidTile", tile);
+            return null;
 
         return new java.io.File(path);
     }
@@ -928,7 +906,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
         }
 
         // No writer maching this DataRaster/formatSuffix.
-        return Logging.getMessage("DataRaster.CannotWrite", raster, formatSuffix, destination);
+        return null;
     }
 
     //**************************************************************//
@@ -968,9 +946,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Exit if the caller has instructed us to stop production.
@@ -980,10 +956,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
         File configFile = this.getConfigFileInstallLocation(params);
         if (configFile == null)
         {
-            String message = Logging.getMessage("TiledRasterProducer.NoConfigFileInstallLocation",
-                params.getValue(AVKey.DATASET_NAME));
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         // Synchronize construction of the config file's parent directories. One or more tile installation tasks may be
@@ -996,19 +969,14 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
             {
                 if (!dir.mkdirs())
                 {
-                    String message = Logging.getMessage("generic.CannotCreateFile", dir);
-                    Logging.logger().warning(message);
-                }
+                        }
             }
         }
 
         Document configDoc = this.createConfigDoc(params);
         if (configDoc == null)
         {
-            String message = Logging.getMessage("TiledRasterProducer.CannotCreateConfigDoc",
-                params.getValue(AVKey.DATASET_NAME));
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         try
@@ -1017,9 +985,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("TiledRasterProducer.CannotWriteConfigFile", configFile);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         this.getProductionResultsList().add(configDoc);
@@ -1084,9 +1050,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
         }
         else
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.SECTOR);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         Element sources = configDoc.createElementNS(null, "Sources");
@@ -1101,15 +1065,11 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
                 catch (Throwable t)
                 {
                     String reason = WWUtil.extractExceptionReason(t);
-                    Logging.logger().warning(reason);
                 }
             }
             else
             {
-                String message = Logging.getMessage("TiledRasterProducer.UnrecognizedRasterType",
-                    raster.getClass().getName(), raster.getStringValue(AVKey.DATASET_NAME));
-                Logging.logger().severe(message);
-                throw new WWRuntimeException(message);
+                    throw new WWRuntimeException();
             }
         }
 
@@ -1158,17 +1118,13 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
         Object o = raster.getDataSource();
         if (WWUtil.isEmpty(o))
         {
-            String message = Logging.getMessage("nullValue.DataSourceIsNull");
-            Logging.logger().fine(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         File f = WWIO.getFileForLocalAddress(o);
         if (WWUtil.isEmpty(f))
         {
-            String message = Logging.getMessage("TiledRasterProducer.UnrecognizedDataSource", o);
-            Logging.logger().fine(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         Element source = WWXML.appendElement(sources, "Source");
@@ -1178,9 +1134,7 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
         AVList params = raster.getParams();
         if (null == params)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().fine(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         Sector sector = raster.getSector();

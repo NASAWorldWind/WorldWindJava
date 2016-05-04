@@ -50,9 +50,7 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FeatureMap map = this.createFeatureMap(featureClass);
@@ -73,9 +71,7 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FeatureMap map = this.createFeatureMap(featureClass);
@@ -96,9 +92,7 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FeatureMap map = this.createFeatureMap(featureClass);
@@ -119,9 +113,7 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         FeatureMap map = this.createFeatureMap(featureClass);
@@ -142,9 +134,7 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     {
         if (featureClass == null)
         {
-            String message = Logging.getMessage("nullValue.FeatureClassIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         throw new UnsupportedOperationException();

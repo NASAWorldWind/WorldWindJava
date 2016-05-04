@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.util.wizard;
 
-import gov.nasa.worldwind.util.Logging;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -66,8 +64,7 @@ public class Wizard
         if (owner == null)
         {
             String message = "Dialog is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.dialog = new JDialog(owner);
@@ -79,8 +76,7 @@ public class Wizard
         if (owner == null)
         {
             String message = "Frame is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.dialog = new JDialog(owner);
@@ -96,15 +92,12 @@ public class Wizard
     {
         if (id == null)
         {
-            String message = Logging.getMessage("nullValue.ObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (panel == null || panel.getPanelComponent() == null)
         {
             String message = "Panel or PanelComponent is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.cardPanel.add(panel.getPanelComponent(), id);

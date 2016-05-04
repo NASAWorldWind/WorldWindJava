@@ -10,7 +10,6 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.symbology.*;
 import gov.nasa.worldwind.symbology.milstd2525.AbstractMilStd2525TacticalGraphic;
-import gov.nasa.worldwind.util.Logging;
 
 import java.util.*;
 
@@ -72,17 +71,13 @@ public abstract class AbstractCircularGraphic extends AbstractMilStd2525Tactical
     {
         if (positions == null)
         {
-            String message = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Iterator<? extends Position> iterator = positions.iterator();
         if (!iterator.hasNext())
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.circle.setCenter(iterator.next());

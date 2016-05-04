@@ -102,9 +102,7 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
     {
         if (intervals < 3)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intervals = intervals;
@@ -132,9 +130,7 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
     {
         if (factor < 0.0 || factor > 1.0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.curvature = factor;
     }

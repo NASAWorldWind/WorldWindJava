@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.csv;
 
 import gov.nasa.worldwind.tracks.*;
-import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.geom.Position;
 
 import java.io.*;
@@ -59,9 +58,7 @@ public class CSVReader implements Track, TrackSegment
     {
         if (path == null)
         {
-            String msg = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.name = path;
@@ -69,8 +66,6 @@ public class CSVReader implements Track, TrackSegment
         java.io.File file = new java.io.File(path);
         if (!file.exists())
         {
-            String msg = Logging.getMessage("generic.FileNotFound", path);
-            Logging.logger().severe(msg);
             throw new FileNotFoundException(path);
         }
 
@@ -88,9 +83,7 @@ public class CSVReader implements Track, TrackSegment
     {
         if (stream == null)
         {
-            String msg = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.name = name != null ? name : "Un-named stream";

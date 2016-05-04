@@ -8,7 +8,6 @@ package gov.nasa.worldwindx.examples.util;
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.event.*;
 
@@ -27,9 +26,7 @@ public abstract class DialogAnnotationController implements ActionListener, Sele
     {
         if (worldWindow == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = worldWindow;

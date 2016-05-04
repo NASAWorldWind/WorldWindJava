@@ -57,9 +57,7 @@ public class ShapefileLoader
     {
         if (WWUtil.isEmpty(source))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Shapefile shp = null;
@@ -90,9 +88,7 @@ public class ShapefileLoader
     {
         if (shp == null)
         {
-            String message = Logging.getMessage("nullValue.ShapefileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Layer layer = null;
@@ -119,7 +115,6 @@ public class ShapefileLoader
         }
         else
         {
-            Logging.logger().warning(Logging.getMessage("generic.UnrecognizedShapeType", shp.getShapeType()));
         }
 
         if (layer != null && shp.getBoundingRectangle() != null)
@@ -228,8 +223,6 @@ public class ShapefileLoader
             }
             catch (Exception e)
             {
-                Logging.logger().warning(Logging.getMessage("SHP.ExceptionAttemptingToConvertShapefileRecord",
-                    recordNumber, e));
                 // continue with the remaining records
             }
         }

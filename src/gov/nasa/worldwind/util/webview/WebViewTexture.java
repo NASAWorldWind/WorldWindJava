@@ -8,11 +8,9 @@ package gov.nasa.worldwind.util.webview;
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.util.texture.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import java.awt.*;
-import java.util.logging.Level;
 
 /**
  * @author dcollins
@@ -37,9 +35,7 @@ public class WebViewTexture extends BasicWWTexture
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         boolean isBound = super.bind(dc);
@@ -57,9 +53,7 @@ public class WebViewTexture extends BasicWWTexture
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (this.textureInitializationFailed)
@@ -99,8 +93,6 @@ public class WebViewTexture extends BasicWWTexture
         catch (Exception e)
         {
             // TODO: refactor as generic.ExceptionDuringTextureInitialization
-            String message = Logging.getMessage("generic.IOExceptionDuringTextureInitialization");
-            Logging.logger().log(Level.SEVERE, message, e);
             this.textureInitializationFailed = true;
             return null;
         }

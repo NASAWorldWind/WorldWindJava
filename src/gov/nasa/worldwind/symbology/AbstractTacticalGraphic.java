@@ -261,9 +261,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
     {
         if (unitsFormat == null)
         {
-            String msg = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.unitsFormat = unitsFormat;
@@ -302,9 +300,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
     {
         if (delta == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position refPos = this.getReferencePosition();
@@ -322,9 +318,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position oldPosition = this.getReferencePosition();

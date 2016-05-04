@@ -76,23 +76,17 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     {
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (majorRadius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative", majorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (minorRadius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative", majorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.center = center;
@@ -117,9 +111,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
 
         if (heading == null)
         {
-            String message = Logging.getMessage("nullValue.HeadingIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.heading = heading;
@@ -144,9 +136,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
 
         if (intervals < MIN_NUM_INTERVALS)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intervals = intervals;
@@ -170,23 +160,17 @@ public class SurfaceEllipse extends AbstractSurfaceShape
 
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (majorRadius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative", majorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (minorRadius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative", majorRadius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.center = center;
@@ -214,9 +198,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
 
         if (heading == null)
         {
-            String message = Logging.getMessage("nullValue.HeadingIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.heading = heading;
@@ -245,9 +227,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
 
         if (intervals < MIN_NUM_INTERVALS)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intervals = intervals;
@@ -262,9 +242,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     {
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.center = center;
@@ -285,9 +263,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative", radius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.majorRadius = radius;
@@ -298,9 +274,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     {
         if (radius < 0)
         {
-            String message = Logging.getMessage("Geom.RadiusIsNegative", radius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.minorRadius = radius;
@@ -322,9 +296,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     {
         if (heading == null)
         {
-            String message = Logging.getMessage("nullValue.HeadingIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.heading = heading;
@@ -340,9 +312,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     {
         if (intervals < MIN_NUM_INTERVALS)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.intervals = intervals;
@@ -368,9 +338,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeLocations(globe, this.intervals);
@@ -401,9 +369,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.majorRadius == 0 && this.minorRadius == 0)
@@ -449,9 +415,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numEdgeIntervals = this.computeNumEdgeIntervals(globe, edgeIntervalsPerDegree);
@@ -462,9 +426,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int numPositions = 1 + Math.max(MIN_NUM_INTERVALS, intervals);

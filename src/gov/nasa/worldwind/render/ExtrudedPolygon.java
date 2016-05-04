@@ -331,16 +331,12 @@ public class ExtrudedPolygon extends AbstractShape
 
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height != null && height <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "height <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setOuterBoundary(corners, height);
@@ -559,9 +555,7 @@ public class ExtrudedPolygon extends AbstractShape
     {
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.getBoundaries().set(0, this.fillBoundary(corners));
@@ -583,9 +577,7 @@ public class ExtrudedPolygon extends AbstractShape
 
         if (list.size() < 3)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Close the list if not already closed.
@@ -608,9 +600,7 @@ public class ExtrudedPolygon extends AbstractShape
     {
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.LocationInListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.getBoundaries().add(this.fillBoundary(corners));
@@ -632,9 +622,7 @@ public class ExtrudedPolygon extends AbstractShape
     {
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.LocationInListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.getBoundaries().add(this.fillBoundary(corners));
@@ -724,16 +712,12 @@ public class ExtrudedPolygon extends AbstractShape
 
         if (texCoords == null)
         {
-            String message = Logging.getMessage("generic.ListIsEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (texCoordCount < 3 || texCoords.length < 2 * texCoordCount)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.capTexture = this.makeTexture(imageSource);
@@ -804,9 +788,7 @@ public class ExtrudedPolygon extends AbstractShape
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "height <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.height = height;
@@ -875,8 +857,7 @@ public class ExtrudedPolygon extends AbstractShape
         if (attributes == null)
         {
             String message = "nullValue.AttributesIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sideAttributes = attributes;
@@ -926,8 +907,7 @@ public class ExtrudedPolygon extends AbstractShape
         if (attributes == null)
         {
             String message = "nullValue.AttributesIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sideHighlightAttributes = attributes;
@@ -1010,9 +990,7 @@ public class ExtrudedPolygon extends AbstractShape
     {
         if (referenceLocation == null)
         {
-            String message = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.referencePosition = new Position(referenceLocation, 0);
@@ -2108,9 +2086,7 @@ public class ExtrudedPolygon extends AbstractShape
             // doesn't work either.
             if (normal == null)
             {
-                String message = Logging.getMessage("Geom.ShapeNormalVectorNotComputable", this);
-                Logging.logger().log(java.util.logging.Level.SEVERE, message);
-                shapeData.tessellationError = true;
+                    shapeData.tessellationError = true;
                 return;
             }
 
@@ -2118,15 +2094,13 @@ public class ExtrudedPolygon extends AbstractShape
         }
         catch (OutOfMemoryError e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileTessellating", this);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
 
             shapeData.tessellationError = true;
 
             if (dc != null)
             {
                 //noinspection ThrowableInstanceNeverThrown
-                dc.addRenderingException(new WWRuntimeException(message, e));
+                dc.addRenderingException(new WWRuntimeException(e));
             }
         }
     }
@@ -2410,9 +2384,7 @@ public class ExtrudedPolygon extends AbstractShape
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isOuterBoundaryValid())

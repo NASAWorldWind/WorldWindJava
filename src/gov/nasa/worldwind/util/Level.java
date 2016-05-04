@@ -41,17 +41,14 @@ public class Level extends AVListImpl implements Comparable<Level>
     {
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.LevelConfigParams");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.params = params.copy(); // Private copy to insulate from subsequent changes by the app
         String message = this.validate(params);
         if (message != null)
         {
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String ln = this.params.getStringValue(AVKey.LEVEL_NAME);
@@ -99,51 +96,51 @@ public class Level extends AVListImpl implements Comparable<Level>
 
         Object o = params.getValue(AVKey.LEVEL_NUMBER);
         if (o == null || !(o instanceof Integer) || ((Integer) o) < 0)
-            sb.append(Logging.getMessage("term.levelNumber")).append(" ");
+            sb.append((String) null).append(" ");
 
         o = params.getValue(AVKey.LEVEL_NAME);
         if (o == null || !(o instanceof String))
-            sb.append(Logging.getMessage("term.levelName")).append(" ");
+            sb.append((String) null).append(" ");
 
         o = params.getValue(AVKey.TILE_WIDTH);
         if (o == null || !(o instanceof Integer) || ((Integer) o) < 0)
-            sb.append(Logging.getMessage("term.tileWidth")).append(" ");
+            sb.append((String) null).append(" ");
 
         o = params.getValue(AVKey.TILE_HEIGHT);
         if (o == null || !(o instanceof Integer) || ((Integer) o) < 0)
-            sb.append(Logging.getMessage("term.tileHeight")).append(" ");
+            sb.append((String) null).append(" ");
 
         o = params.getValue(AVKey.TILE_DELTA);
         if (o == null || !(o instanceof LatLon))
-            sb.append(Logging.getMessage("term.tileDelta")).append(" ");
+            sb.append((String) null).append(" ");
 
         o = params.getValue(AVKey.DATA_CACHE_NAME);
         if (o == null || !(o instanceof String) || ((String) o).length() < 1)
-            sb.append(Logging.getMessage("term.fileStoreFolder")).append(" ");
+            sb.append((String) null).append(" ");
 
         o = params.getValue(AVKey.TILE_URL_BUILDER);
         if (o == null || !(o instanceof TileUrlBuilder))
-            sb.append(Logging.getMessage("term.tileURLBuilder")).append(" ");
+            sb.append((String) null).append(" ");
 
         o = params.getValue(AVKey.EXPIRY_TIME);
         if (o != null && (!(o instanceof Long) || ((Long) o) < 1))
-            sb.append(Logging.getMessage("term.expiryTime")).append(" ");
+            sb.append((String) null).append(" ");
 
         if (params.getStringValue(AVKey.LEVEL_NAME).length() > 0)
         {
             o = params.getValue(AVKey.DATASET_NAME);
             if (o == null || !(o instanceof String) || ((String) o).length() < 1)
-                sb.append(Logging.getMessage("term.datasetName")).append(" ");
+                sb.append((String) null).append(" ");
 
             o = params.getValue(AVKey.FORMAT_SUFFIX);
             if (o == null || !(o instanceof String) || ((String) o).length() < 1)
-                sb.append(Logging.getMessage("term.formatSuffix")).append(" ");
+                sb.append((String) null).append(" ");
         }
 
         if (sb.length() == 0)
             return null;
 
-        return Logging.getMessage("layers.LevelSet.InvalidLevelDescriptorFields", sb.toString());
+        return null;
     }
 
     public AVList getParams()
@@ -290,9 +287,7 @@ public class Level extends AVListImpl implements Comparable<Level>
     {
         if (tile == null)
         {
-            String msg = Logging.getMessage("nullValue.TileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.urlBuilder.getURL(tile, imageFormat);
@@ -302,15 +297,11 @@ public class Level extends AVListImpl implements Comparable<Level>
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (tileOrigin == null)
         {
-            String message = Logging.getMessage("nullValue.TileOriginIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Compute the tile's SW lat/lon based on its row/col in the level's data set.
@@ -331,9 +322,7 @@ public class Level extends AVListImpl implements Comparable<Level>
     {
         if (that == null)
         {
-            String msg = Logging.getMessage("nullValue.LevelIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         return this.levelNumber < that.levelNumber ? -1 : this.levelNumber == that.levelNumber ? 0 : 1;
     }

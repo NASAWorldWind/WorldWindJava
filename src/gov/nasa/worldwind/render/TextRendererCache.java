@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.Disposable;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * http://java.sun.com/products/java-media/2D/reference/faqs/index.html#Q_What_are_fractional_metrics_Wh
@@ -27,9 +26,7 @@ public class TextRendererCache implements Disposable
         {
             if (font == null)
             {
-                String message = Logging.getMessage("nullValue.FontIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.font = font;
@@ -105,9 +102,7 @@ public class TextRendererCache implements Disposable
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.textRendererMap.get(key);
@@ -117,9 +112,7 @@ public class TextRendererCache implements Disposable
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         TextRenderer oldTextRenderer = this.textRendererMap.put(key, textRenderer);
@@ -134,9 +127,7 @@ public class TextRendererCache implements Disposable
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         TextRenderer textRenderer = this.textRendererMap.remove(key);
@@ -151,9 +142,7 @@ public class TextRendererCache implements Disposable
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.textRendererMap.containsKey(key);

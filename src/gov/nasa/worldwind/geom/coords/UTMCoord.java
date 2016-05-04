@@ -59,9 +59,7 @@ public class UTMCoord
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         final UTMCoordConverter converter = new UTMCoordConverter(globe);
@@ -69,9 +67,7 @@ public class UTMCoord
 
         if (err != UTMCoordConverter.UTM_NO_ERROR)
         {
-            String message = Logging.getMessage("Coord.UTMConversionError");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new UTMCoord(latitude, longitude, converter.getZone(), converter.getHemisphere(),
@@ -82,9 +78,7 @@ public class UTMCoord
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         UTMCoordConverter converter;
@@ -104,9 +98,7 @@ public class UTMCoord
 
         if (err != UTMCoordConverter.UTM_NO_ERROR)
         {
-            String message = Logging.getMessage("Coord.UTMConversionError");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new UTMCoord(latitude, longitude, converter.getZone(), converter.getHemisphere(),
@@ -152,9 +144,7 @@ public class UTMCoord
 
         if (err != UTMCoordConverter.UTM_NO_ERROR)
         {
-            String message = Logging.getMessage("Coord.UTMConversionError");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new UTMCoord(Angle.fromRadians(converter.getLatitude()),
@@ -217,9 +207,7 @@ public class UTMCoord
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.latitude = latitude;

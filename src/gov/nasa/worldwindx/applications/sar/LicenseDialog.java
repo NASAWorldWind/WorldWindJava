@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwindx.applications.sar;
 
-import gov.nasa.worldwind.util.Logging;
-
 import javax.swing.*;
 import java.net.URL;
 import java.net.URI;
@@ -34,8 +32,7 @@ public class LicenseDialog
         if (license == null)
         {
             String message = "nullValue.licenseIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.license = license;
@@ -115,7 +112,6 @@ public class LicenseDialog
         catch (Exception e)
         {
             String message = "Exception while displaying license dialog";
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             return ERROR_OPTION;
         }
         return (result == JOptionPane.YES_OPTION) ? ACCEPT_OPTION : DECLINE_OPTION;
@@ -139,7 +135,6 @@ public class LicenseDialog
         catch (Exception e)
         {
             String msg = "Exception while displaying missing license dialog";
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
         }
     }
 
@@ -157,7 +152,6 @@ public class LicenseDialog
             {
                 if (this.license instanceof URL)
                 {
-                    Logging.logger().fine("Fetching license (URL): " + this.license);
                     editor = new JEditorPane();
                     if (this.contentType != null)
                         editor.setContentType(this.contentType);
@@ -165,7 +159,6 @@ public class LicenseDialog
                 }
                 else if (this.license instanceof File)
                 {
-                    Logging.logger().fine("Fetching license (File): " + this.license);
                     URI uri = ((File) this.license).toURI();
                     URL url = uri.toURL();
                     editor = new JEditorPane();
@@ -175,7 +168,6 @@ public class LicenseDialog
                 }
                 else
                 {
-                    Logging.logger().fine("Fetching license (String): " + this.license.toString());
                     URL url = getClass().getResource(this.license.toString());
                     editor = new JEditorPane();
                     if (this.contentType != null)
@@ -194,7 +186,6 @@ public class LicenseDialog
         catch (Exception e)
         {
             String message = "Exception while fetching license content";
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             editor = null;
         }
         return editor;

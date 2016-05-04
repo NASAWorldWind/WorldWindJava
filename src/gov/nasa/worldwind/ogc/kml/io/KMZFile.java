@@ -45,9 +45,7 @@ public class KMZFile implements KMLDoc
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.zipFile = new ZipFile(file);
@@ -107,9 +105,7 @@ public class KMZFile implements KMLDoc
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Enumeration<? extends ZipEntry> zipEntries = this.zipFile.entries();
@@ -148,9 +144,7 @@ public class KMZFile implements KMLDoc
 
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File file = this.files.get(path);
@@ -189,8 +183,6 @@ public class KMZFile implements KMLDoc
 
         if (this.tempDir == null) // unlikely to occur, but define a reaction
         {
-            String message = Logging.getMessage("generic.UnableToCreateTempDir", this.tempDir);
-            Logging.logger().warning(message);
             return null;
         }
 

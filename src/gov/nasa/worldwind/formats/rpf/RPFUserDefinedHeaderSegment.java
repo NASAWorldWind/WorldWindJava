@@ -25,7 +25,7 @@ public class RPFUserDefinedHeaderSegment extends NITFSUserDefinedHeaderSegment
             this.components = new RPFFileComponents(buffer);
         }
         else
-            throw new NITFSRuntimeException("NITFSReader.RPFHeaderNotFoundInUserDefinedSegment", this.dataTag);
+            throw new NITFSRuntimeException(this.dataTag);
         this.restoreBufferPosition();
     }
 

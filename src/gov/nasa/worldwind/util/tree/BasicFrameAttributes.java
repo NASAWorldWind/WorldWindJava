@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.util.tree;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.awt.*;
 
 /**
@@ -75,9 +73,7 @@ public class BasicFrameAttributes implements FrameAttributes
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.copy(attributes);
@@ -94,9 +90,7 @@ public class BasicFrameAttributes implements FrameAttributes
     {
         if (textColor == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.foregroundColor = textColor;
@@ -113,9 +107,7 @@ public class BasicFrameAttributes implements FrameAttributes
     {
         if (font == null)
         {
-            String msg = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.font = font;
@@ -132,9 +124,7 @@ public class BasicFrameAttributes implements FrameAttributes
     {
         if (textColor == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.textColor = textColor;
@@ -151,9 +141,7 @@ public class BasicFrameAttributes implements FrameAttributes
     {
         if (iconSize == null)
         {
-            String message = Logging.getMessage("nullValue.SizeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.iconSize = iconSize;
     }
@@ -205,9 +193,7 @@ public class BasicFrameAttributes implements FrameAttributes
     {
         if (color1 == null || color2 == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.titleBarColor1 = color1;
@@ -231,9 +217,7 @@ public class BasicFrameAttributes implements FrameAttributes
     {
         if (color1 == null || color2 == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.scrollBarColor1 = color1;
@@ -251,9 +235,7 @@ public class BasicFrameAttributes implements FrameAttributes
     {
         if (minimizeButtonColor == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.minimizeButtonColor = minimizeButtonColor;
@@ -264,9 +246,7 @@ public class BasicFrameAttributes implements FrameAttributes
     {
         if (frameColor1 == null || frameColor2 == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.frameColor1 = frameColor1;

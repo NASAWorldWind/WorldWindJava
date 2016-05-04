@@ -37,9 +37,7 @@ public class VecBufferSequence extends CompoundVecBuffer
 
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.buffer = buffer;
@@ -85,9 +83,7 @@ public class VecBufferSequence extends CompoundVecBuffer
     {
         if (coordsPerVec < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", coordsPerVec);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return new VecBufferSequence(VecBuffer.emptyVecBuffer(coordsPerVec));
@@ -98,9 +94,7 @@ public class VecBufferSequence extends CompoundVecBuffer
     {
         if (index < 0 || index >= this.count)
         {
-            String message = Logging.getMessage("generic.indexOutOfRange", index);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.lengths.get(index);
@@ -144,9 +138,7 @@ public class VecBufferSequence extends CompoundVecBuffer
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int minVecCount = buffer.getSize() + this.vecCount;
@@ -216,9 +208,7 @@ public class VecBufferSequence extends CompoundVecBuffer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.buffer.bindAsNormalBuffer(dc);
@@ -238,9 +228,7 @@ public class VecBufferSequence extends CompoundVecBuffer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.buffer.bindAsVertexBuffer(dc);
@@ -261,9 +249,7 @@ public class VecBufferSequence extends CompoundVecBuffer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.buffer.bindAsTexCoordBuffer(dc);
@@ -282,9 +268,7 @@ public class VecBufferSequence extends CompoundVecBuffer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.buffer.drawArrays(dc, drawMode);
@@ -304,9 +288,7 @@ public class VecBufferSequence extends CompoundVecBuffer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.

@@ -224,9 +224,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionWhileTessellating", this.shape);
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
-            }
+                }
             finally
             {
                 if (this.memoryCache != null && this.memoryCacheKey != null)
@@ -374,9 +372,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
     {
         if (shapefile == null)
         {
-            String msg = Logging.getMessage("nullValue.ShapefileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.init(shapefile, null, null, null);
@@ -404,9 +400,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
     {
         if (shapefile == null)
         {
-            String msg = Logging.getMessage("nullValue.ShapefileIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.init(shapefile, normalAttrs, highlightAttrs, attributeDelegate);
@@ -513,9 +507,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
     {
         if (outlinePickWidth < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlinePickWidth = outlinePickWidth;
@@ -532,9 +524,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.visible)
@@ -594,9 +584,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.visible)
@@ -635,9 +623,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.visible)
@@ -658,9 +644,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
     {
         if (cc == null)
         {
-            String msg = Logging.getMessage("nullValue.CombineContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (cc.isBoundingSectorMode())

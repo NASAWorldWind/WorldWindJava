@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.geom;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author dcollins
  * @version $Id: BilinearInterpolator.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -22,9 +20,7 @@ public class BilinearInterpolator
     {
         if (ll == null || lr == null || ur == null || ul == null)
         {
-            String message = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.ll = ll;
@@ -42,15 +38,11 @@ public class BilinearInterpolator
     {
         if (compArray == null)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (compArray.length < 1)
         {
-            String message = Logging.getMessage("generic.ArrayInvalidLength", compArray.length);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double pll = (1.0 - u) * (1.0 - v);

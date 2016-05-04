@@ -268,9 +268,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
     {
         if (WWUtil.isEmpty(geometries))
         {
-            String message = Logging.getMessage("generic.ListIsEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         this.geometries = new ArrayList<Geometry>(geometries.size());
@@ -381,9 +379,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
 
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.pickSupport.clearPickList();
@@ -687,9 +683,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
     {
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Matrix matrix = dc.getView().getModelviewMatrix();
@@ -809,9 +803,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
     {
         if (tc == null)
         {
-            String message = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int size = this.shapeCount * this.vertsPerShape * ColladaAbstractGeometry.COORDS_PER_VERTEX;

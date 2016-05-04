@@ -156,9 +156,7 @@ public class GeotiffReader implements Disposable
             return ((BufferedImageRaster) raster).getBufferedImage();
         }
 
-        String message = Logging.getMessage("Geotiff.IsNotAnImage");
-        Logging.logger().severe(message);
-        throw new IOException(message);
+        throw new IOException();
     }
 
     public boolean isGeotiff(int imageIndex) throws IOException
@@ -187,58 +185,38 @@ public class GeotiffReader implements Disposable
 
         if (null == tiff)
         {
-            String message = Logging.getMessage("GeotiffReader.BadGeotiff");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (tiff.width <= 0)
         {
-            String msg = Logging.getMessage("GeotiffReader.InvalidIFDEntryValue", tiff.width,
-                "width", Tiff.Tag.IMAGE_WIDTH);
-            Logging.logger().severe(msg);
-            throw new IOException(msg);
+            throw new IOException();
         }
 
         if (tiff.height <= 0)
         {
-            String msg = Logging.getMessage("GeotiffReader.InvalidIFDEntryValue", tiff.height,
-                "height", Tiff.Tag.IMAGE_LENGTH);
-            Logging.logger().severe(msg);
-            throw new IOException(msg);
+            throw new IOException();
         }
 
         if (tiff.samplesPerPixel <= Tiff.Undefined)
         {
-            String msg = Logging.getMessage("GeotiffReader.InvalidIFDEntryValue", tiff.samplesPerPixel,
-                "samplesPerPixel", Tiff.Tag.SAMPLES_PER_PIXEL);
-            Logging.logger().severe(msg);
-            throw new IOException(msg);
+            throw new IOException();
         }
 
         if (tiff.photometric <= Tiff.Photometric.Undefined || tiff.photometric > Tiff.Photometric.YCbCr)
         {
-            String msg = Logging.getMessage("GeotiffReader.InvalidIFDEntryValue", tiff.photometric,
-                "PhotoInterpretation", Tiff.Tag.PHOTO_INTERPRETATION);
-            Logging.logger().severe(msg);
-            throw new IOException(msg);
+            throw new IOException();
         }
 
         if (tiff.rowsPerStrip <= Tiff.Undefined)
         {
-            String msg = Logging.getMessage("GeotiffReader.InvalidIFDEntryValue", tiff.rowsPerStrip,
-                "RowsPerStrip", Tiff.Tag.ROWS_PER_STRIP);
-            Logging.logger().fine(msg);
             tiff.rowsPerStrip = Integer.MAX_VALUE;
         }
 
         if (tiff.planarConfig != Tiff.PlanarConfiguration.PLANAR
             && tiff.planarConfig != Tiff.PlanarConfiguration.CHUNKY)
         {
-            String msg = Logging.getMessage("GeotiffReader.InvalidIFDEntryValue", tiff.planarConfig,
-                "PhotoInterpretation", Tiff.Tag.PHOTO_INTERPRETATION);
-            Logging.logger().severe(msg);
-            throw new IOException(msg);
+            throw new IOException();
         }
 
         for (TiffIFDEntry entry : ifd)
@@ -262,22 +240,17 @@ public class GeotiffReader implements Disposable
             }
             catch (IOException e)
             {
-                Logging.logger().finest(e.toString());
             }
         }
 
         if (null == stripOffsets || 0 == stripOffsets.length)
         {
-            String message = Logging.getMessage("GeotiffReader.MissingRequiredTag", "StripOffsets");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         if (null == stripCounts || 0 == stripCounts.length)
         {
-            String message = Logging.getMessage("GeotiffReader.MissingRequiredTag", "StripCounts");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         TiffIFDEntry notToday = getByTag(ifd, Tiff.Tag.COMPRESSION);
@@ -293,17 +266,13 @@ public class GeotiffReader implements Disposable
         }
         else if (notToday != null && notToday.asLong() != Tiff.Compression.NONE)
         {
-            String message = Logging.getMessage("GeotiffReader.CompressionFormatNotSupported");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         notToday = getByTag(ifd, Tiff.Tag.TILE_WIDTH);
         if (notToday != null)
         {
-            String message = Logging.getMessage("GeotiffReader.NoTiled");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         long offset = stripOffsets[0];
@@ -359,9 +328,7 @@ public class GeotiffReader implements Disposable
             }
             else
             {
-                String message = Logging.getMessage("Geotiff.UnsupportedDataTypeRaster", tiff.toString());
-                Logging.logger().severe(message);
-                throw new IOException(message);
+                    throw new IOException();
             }
 
             ElevationsUtil.rectify( raster );
@@ -427,9 +394,7 @@ public class GeotiffReader implements Disposable
 
             if (null == grayImage)
             {
-                String message = Logging.getMessage("Geotiff.UnsupportedDataTypeRaster", tiff.toString());
-                Logging.logger().severe(message);
-                throw new IOException(message);
+                    throw new IOException();
             }
 
             grayImage = ImageUtil.toCompatibleImage(grayImage);
@@ -448,9 +413,7 @@ public class GeotiffReader implements Disposable
             {
                 if (bits != 8)
                 {
-                    String message = Logging.getMessage("GeotiffReader.Not8bit", bits);
-                    Logging.logger().warning(message);
-                    throw new IOException(message);
+                            throw new IOException();
                 }
             }
 
@@ -540,18 +503,14 @@ public class GeotiffReader implements Disposable
 
             if (null == colorImage)
             {
-                String message = Logging.getMessage("Geotiff.UnsupportedDataTypeRaster", tiff.toString());
-                Logging.logger().severe(message);
-                throw new IOException(message);
+                    throw new IOException();
             }
 
             colorImage = ImageUtil.toCompatibleImage(colorImage);
             return BufferedImageRaster.wrap(colorImage, values);
         }
 
-        String message = Logging.getMessage("Geotiff.UnsupportedDataTypeRaster", tiff.toString());
-        Logging.logger().severe(message);
-        throw new IOException(message);
+        throw new IOException();
     }
 
     /**
@@ -577,24 +536,18 @@ public class GeotiffReader implements Disposable
 
             if (null == tiff)
             {
-                String message = Logging.getMessage("GeotiffReader.BadGeotiff");
-                Logging.logger().severe(message);
-                throw new IOException(message);
+                    throw new IOException();
             }
 
             if (tiff.width == Tiff.Undefined)
             {
-                String message = Logging.getMessage("generic.InvalidWidth", tiff.width);
-                Logging.logger().severe(message);
-                throw new IOException(message);
+                    throw new IOException();
             }
             values.setValue(AVKey.WIDTH, tiff.width);
 
             if (tiff.height == Tiff.Undefined)
             {
-                String message = Logging.getMessage("generic.InvalidHeight", tiff.height);
-                Logging.logger().severe(message);
-                throw new IOException(message);
+                    throw new IOException();
             }
             values.setValue(AVKey.HEIGHT, tiff.height);
 
@@ -686,9 +639,7 @@ public class GeotiffReader implements Disposable
 
             if (!values.hasKey(AVKey.PIXEL_FORMAT) || !values.hasKey(AVKey.DATA_TYPE))
             {
-                String message = Logging.getMessage("Geotiff.UnsupportedDataTypeRaster", tiff.toString());
-                Logging.logger().severe(message);
-//                throw new IOException(message);
+                    //                throw new IOException();
             }
 
             // geo keys
@@ -738,7 +689,6 @@ public class GeotiffReader implements Disposable
                 }
                 catch (Exception e)
                 {
-                    Logging.logger().finest(e.toString());
                 }
             }
 
@@ -760,9 +710,7 @@ public class GeotiffReader implements Disposable
 
         if (this.theChannel == null)
         {
-            String message = Logging.getMessage("GeotiffReader.NullInputFile", this.sourceFilename);
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         // Tiff image-file header (IFH)
@@ -778,9 +726,7 @@ public class GeotiffReader implements Disposable
 
         if (null == byteOrder)
         {
-            String message = Logging.getMessage("GeotiffReader.BadTiffSig");
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
 
         this.tiffReader.setByteOrder(byteOrder);
@@ -989,9 +935,7 @@ public class GeotiffReader implements Disposable
             }
             else
             {
-                String message = Logging.getMessage("generic.UnknownProjection", projection);
-                Logging.logger().severe(message);
-//                throw new IOException(message);
+                    //                throw new IOException();
                 return;
             }
 
@@ -1021,9 +965,7 @@ public class GeotiffReader implements Disposable
         }
         else
         {
-            String msg = Logging.getMessage("Geotiff.UnknownGeoKeyValue", gtModelTypeGeoKey, GeoTiff.GeoKey.ModelType);
-            Logging.logger().severe(msg);
-//            throw new IOException(msg);
+            //            throw new IOException();
         }
     }
 
@@ -1077,9 +1019,7 @@ public class GeotiffReader implements Disposable
         }
         catch (Exception ex)
         {
-            String message = Logging.getMessage("GeotiffReader.BadIFD", ex.getMessage());
-            Logging.logger().severe(message);
-            throw new IOException(message);
+            throw new IOException();
         }
     }
 
@@ -1110,9 +1050,7 @@ public class GeotiffReader implements Disposable
     {
         if (imageIndex < 0 || imageIndex >= getNumImages())
         {
-            String message = Logging.getMessage("GeotiffReader.BadImageIndex", imageIndex, 0, getNumImages());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
     }
 
@@ -1131,7 +1069,6 @@ public class GeotiffReader implements Disposable
         {
             String message = t.getMessage();
             message = (WWUtil.isEmpty(message)) ? t.getCause().getMessage() : message;
-            Logging.logger().log(java.util.logging.Level.FINEST, message, t);
         }
     }
 

@@ -70,9 +70,7 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
     {
         if (levelSet == null)
         {
-            String message = Logging.getMessage("nullValue.LevelSetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.levels = new LevelSet(levelSet); // the caller's levelSet may change internally, so we copy it.
@@ -605,17 +603,12 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (dc.getView() == null)
         {
-            String message = Logging
-                .getMessage("layers.AbstractLayer.NoViewSpecifiedInDrawingContext");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         return !(dc.getVisibleSector() != null && !this.levels.getSector()
@@ -764,8 +757,6 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
         {
             // The file has expired. Delete it.
             this.getDataFileStore().removeFile(url);
-            String message = Logging.getMessage("generic.DataFileExpired", url);
-            Logging.logger().fine(message);
         }
         else
         {
@@ -775,9 +766,7 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
                 BufferedImage image = ImageIO.read(imageFile);
                 if (image == null)
                 {
-                    String message = Logging.getMessage(
-                        "generic.ImageReadFailed", imageFile);
-                    throw new RuntimeException(message);
+                            throw new RuntimeException();
                 }
 
                 this.levels.unmarkResourceAbsent(tile);
@@ -788,10 +777,7 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
                 // Assume that something's wrong with the file and delete it.
                 this.getDataFileStore().removeFile(url);
                 this.levels.markResourceAbsent(tile);
-                String message = Logging.getMessage(
-                    "generic.DeletedCorruptDataFile", url);
-                Logging.logger().info(message);
-            }
+                }
         }
 
         return null;
@@ -813,10 +799,7 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
         }
         else
         {
-            String message = Logging
-                .getMessage("layers.TextureLayer.UnknownRetrievalProtocol",
-                    resourceURL);
-            throw new RuntimeException(message);
+            throw new RuntimeException();
         }
 
         retriever.setConnectTimeout(10000);
@@ -829,16 +812,12 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         double texelSize = 0;
@@ -856,9 +835,6 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
             break;
         }
 
-        Logging.logger().info(
-            Logging.getMessage("layers.TiledImageLayer.LevelSelection",
-                targetLevel.getLevelNumber(), texelSize));
         return targetLevel.getLevelNumber();
     }
 
@@ -868,9 +844,7 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
     {
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (levelNumber < 0)
@@ -879,11 +853,6 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
         }
         else if (levelNumber > this.levels.getLastLevel().getLevelNumber())
         {
-            Logging.logger().warning(
-                Logging.getMessage(
-                    "generic.LevelRequestedGreaterThanMaxLevel",
-                    levelNumber, this.levels.getLastLevel()
-                    .getLevelNumber()));
             levelNumber = this.levels.getLastLevel().getLevelNumber();
         }
 
@@ -892,11 +861,6 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
 
         if (tiles.length == 0 || tiles[0].length == 0)
         {
-            Logging
-                .logger()
-                .severe(
-                    Logging
-                        .getMessage("layers.TiledImageLayer.NoImagesAvailable"));
             return null;
         }
 
@@ -947,12 +911,7 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
                     if (abortOnError)
                         throw new RuntimeException(e);
 
-                    String message = Logging.getMessage(
-                        "generic.ExceptionWhileRequestingImage", tile
-                        .getPath());
-                    Logging.logger().log(java.util.logging.Level.WARNING,
-                        message, e);
-                }
+                        }
             }
         }
 
@@ -963,9 +922,7 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Level targetLevel = this.levels.getLastLevel();
@@ -1006,9 +963,7 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Level targetLevel = this.levels.getLastLevel();
@@ -1073,9 +1028,7 @@ public abstract class MercatorTiledImageLayer extends AbstractLayer
         image = this.requestImage(tile, mimeType);
         if (image == null)
         {
-            String message = Logging.getMessage(
-                "layers.TiledImageLayer.ImageUnavailable", tile.getPath());
-            throw new RuntimeException(message);
+            throw new RuntimeException();
         }
 
         return image;

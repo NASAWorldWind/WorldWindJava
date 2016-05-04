@@ -41,16 +41,12 @@ public class SurfaceTileDrawContext
     {
         if (tile == null)
         {
-            String message = Logging.getMessage("nullValue.TileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (pickCandidates == null)
         {
-            String message = Logging.getMessage("nullValue.PickedObjectList");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sector = tile.getSector();
@@ -103,9 +99,7 @@ public class SurfaceTileDrawContext
     {
         if (referenceLocation == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.modelview.multiply(
@@ -136,9 +130,7 @@ public class SurfaceTileDrawContext
     {
         if (null == pickedObject)
         {
-            String msg = Logging.getMessage("nullValue.PickedObject");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.pickCandidates.add(pickedObject);

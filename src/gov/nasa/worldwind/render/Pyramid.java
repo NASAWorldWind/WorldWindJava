@@ -58,16 +58,12 @@ public class Pyramid extends RigidShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0 || width <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.centerPosition = centerPosition;
         this.northSouthRadius = width / 2;
@@ -91,16 +87,12 @@ public class Pyramid extends RigidShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.centerPosition = centerPosition;
         this.northSouthRadius = northSouthRadius;
@@ -127,16 +119,12 @@ public class Pyramid extends RigidShape
     {
         if (centerPosition == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.centerPosition = centerPosition;
@@ -178,9 +166,7 @@ public class Pyramid extends RigidShape
     {
         if (height <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "height <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.verticalRadius = height / 2;
 
@@ -200,9 +186,7 @@ public class Pyramid extends RigidShape
     {
         if (width <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "width <= 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.northSouthRadius = width / 2;
         this.eastWestRadius = width / 2;
@@ -360,8 +344,7 @@ public class Pyramid extends RigidShape
         if (elementBuffer == null)
         {
             String message = "nullValue.ElementBufferIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Geometry mesh = shapeData.getMesh(face);
@@ -369,8 +352,7 @@ public class Pyramid extends RigidShape
         if (mesh.getBuffer(Geometry.VERTEX) == null)
         {
             String message = "nullValue.VertexBufferIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -489,8 +471,6 @@ public class Pyramid extends RigidShape
     @Override
     protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
     {
-        String message = Logging.getMessage("generic.UnsupportedOperation", "doExportAsKML");
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 }

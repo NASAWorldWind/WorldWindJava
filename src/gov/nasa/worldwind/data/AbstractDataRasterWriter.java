@@ -69,23 +69,17 @@ public abstract class AbstractDataRasterWriter implements DataRasterWriter
     {
         if (raster == null)
         {
-            String message = Logging.getMessage("nullValue.RasterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (formatSuffix == null)
         {
-            String message = Logging.getMessage("nullValue.FormatSuffixIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         formatSuffix = WWUtil.stripLeadingPeriod(formatSuffix);
         if (!this.canWrite(raster, formatSuffix, file))
         {
-            String message = Logging.getMessage("DataRaster.CannotWrite", raster, formatSuffix, file);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.doWrite(raster, formatSuffix, file);

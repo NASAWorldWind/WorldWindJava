@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.layers.rpf.wizard;
 
-import gov.nasa.worldwind.util.Logging;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -64,8 +62,7 @@ public class FileChooserPanel extends JPanel
         if (fileChooser == null)
         {
             String message = "JFileChooser is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         
         this.fileChooser = fileChooser;

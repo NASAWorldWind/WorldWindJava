@@ -31,23 +31,17 @@ public abstract class AbstractDataRaster extends AVListImpl implements DataRaste
 
         if (width < 0)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height < 0)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().finest(message);
-//            throw new IllegalArgumentException(message);
+            //            throw new IllegalArgumentException();
         }
 
         // for performance reasons we are "caching" these parameters in addition to AVList
@@ -100,9 +94,7 @@ public abstract class AbstractDataRaster extends AVListImpl implements DataRaste
     {
         if (null == key)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         // Do not allow to change existing WIDTH or HEIGHT
 
@@ -110,18 +102,14 @@ public abstract class AbstractDataRaster extends AVListImpl implements DataRaste
         {
             if (AVKey.WIDTH.equals(key) && this.getWidth() != (Integer) value)
             {
-                String message = Logging.getMessage("generic.AttemptToChangeReadOnlyProperty", key);
-                Logging.logger().finest(message);
-                // relax restriction, just log and continue
-//                throw new IllegalArgumentException(message);
+                    // relax restriction, just log and continue
+//                throw new IllegalArgumentException();
                 return this;
             }
             else if (AVKey.HEIGHT.equals(key) && this.getHeight() != (Integer) value)
             {
-                String message = Logging.getMessage("generic.AttemptToChangeReadOnlyProperty", key);
-                Logging.logger().finest(message);
-                // relax restriction, just log and continue
-//                throw new IllegalArgumentException(message);
+                    // relax restriction, just log and continue
+//                throw new IllegalArgumentException();
                 return this;
             }
         }
@@ -229,61 +217,45 @@ public abstract class AbstractDataRaster extends AVListImpl implements DataRaste
     {
         if (null == params)
         {
-            String message = Logging.getMessage("nullValue.ParamsIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!params.hasKey(AVKey.WIDTH))
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.WIDTH);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int roiWidth = (Integer) params.getValue(AVKey.WIDTH);
         if (roiWidth <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", roiWidth);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!params.hasKey(AVKey.HEIGHT))
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.HEIGHT);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int roiHeight = (Integer) params.getValue(AVKey.HEIGHT);
         if (roiHeight <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", roiHeight);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!params.hasKey(AVKey.SECTOR))
         {
-            String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.SECTOR);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Sector roiSector = (Sector) params.getValue(AVKey.SECTOR);
         if (null == roiSector || Sector.EMPTY_SECTOR.equals(roiSector))
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (Sector.EMPTY_SECTOR.equals(roiSector))
         {
-            String message = Logging.getMessage("nullValue.SectorGeometryIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // copy parent raster keys/values; only those key/value will be copied that do exist in the parent raster

@@ -19,7 +19,6 @@ import javax.media.opengl.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * @author tag
@@ -206,11 +205,6 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         return this.lastPickedObjects;
     }
 
-    protected void setPickedObjectList(PickedObjectList pol)
-    {
-        this.lastPickedObjects = pol;
-    }
-
     /** {@inheritDoc} */
     public PickedObjectList getObjectsInPickRectangle()
     {
@@ -291,9 +285,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     {
         if (capabilities == null)
         {
-            String message = Logging.getMessage("nullValue.GLRuntimeCapabilitiesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.glRuntimeCaps = capabilities;
@@ -490,9 +482,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     {
         if (dc.getGLContext() == null)
         {
-            String message = Logging.getMessage("BasicSceneController.GLContextNullStartRedisplay");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -559,7 +549,6 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
 
             if (dc.getSurfaceGeometry() == null)
             {
-                Logging.logger().warning("generic.NoSurfaceGeometry");
                 dc.setPerFrameStatistic(PerformanceStatistic.TERRAIN_TILE_COUNT, "Terrain Tiles", 0);
                 // keep going because some layers, etc. may have meaning w/o surface geometry
             }
@@ -585,12 +574,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
                         dc.setCurrentLayer(layer);
                         layer.preRender(dc);
                     }
-                    catch (Exception e)
+                    catch (Exception ignored)
                     {
-                        String message = Logging.getMessage("SceneController.ExceptionWhilePreRenderingLayer",
-                            (layer != null ? layer.getClass().getName() : Logging.getMessage("term.unknown")));
-                        Logging.logger().log(Level.SEVERE, message, e);
-                        // Don't abort; continue on to the next layer.
                     }
                 }
 
@@ -600,10 +585,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
             // Pre-render the deferred/ordered surface renderables.
             this.preRenderOrderedSurfaceRenderables(dc);
         }
-        catch (Exception e)
+        catch (Exception ignored)
         {
-            Logging.logger().log(Level.SEVERE, Logging.getMessage("BasicSceneController.ExceptionDuringPreRendering"),
-                e);
         }
         finally
         {
@@ -657,12 +640,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
                         layer.pick(dc, dc.getPickPoint());
                     }
                 }
-                catch (Exception e)
+                catch (Exception ignored)
                 {
-                    String message = Logging.getMessage("SceneController.ExceptionWhilePickingInLayer",
-                        (layer != null ? layer.getClass().getName() : Logging.getMessage("term.unknown")));
-                    Logging.logger().log(Level.SEVERE, message, e);
-                    // Don't abort; continue on to the next layer.
                 }
             }
 
@@ -793,9 +772,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
                 this.doDeepPick(dc);
             }
         }
-        catch (Throwable e)
+        catch (Throwable ignored)
         {
-            Logging.logger().log(Level.SEVERE, Logging.getMessage("BasicSceneController.ExceptionDuringPick"), e);
         }
         finally
         {
@@ -895,12 +873,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
                             layer.render(dc);
                         }
                     }
-                    catch (Exception e)
+                    catch (Exception ignored)
                     {
-                        String message = Logging.getMessage("SceneController.ExceptionWhileRenderingLayer",
-                            (layer != null ? layer.getClass().getName() : Logging.getMessage("term.unknown")));
-                        Logging.logger().log(Level.SEVERE, message, e);
-                        // Don't abort; continue on to the next layer.
                     }
                 }
 
@@ -926,10 +900,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
                 {
                     dc.pollOrderedRenderables().render(dc);
                 }
-                catch (Exception e)
+                catch (Exception ignored)
                 {
-                    Logging.logger().log(Level.WARNING,
-                        Logging.getMessage("BasicSceneController.ExceptionDuringRendering"), e);
                 }
             }
             dc.setOrderedRenderingMode(false);
@@ -959,29 +931,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
                 gl.glColor4fv(previousColor, 0);
             }
         }
-        catch (Throwable e)
+        catch (Throwable ignored)
         {
-            Logging.logger().log(Level.SEVERE, Logging.getMessage("BasicSceneController.ExceptionDuringRendering"), e);
-        }
-    }
-
-    /**
-     * Called to check for openGL errors. This method includes a "round-trip" between the application and renderer,
-     * which is slow. Therefore, this method is excluded from the "normal" render pass. It is here as a matter of
-     * convenience to developers, and is not part of the API.
-     *
-     * @param dc the relevant <code>DrawContext</code>
-     */
-    @SuppressWarnings({"UNUSED_SYMBOL", "UnusedDeclaration"})
-    protected void checkGLErrors(DrawContext dc)
-    {
-        GL gl = dc.getGL();
-
-        for (int err = gl.glGetError(); err != GL.GL_NO_ERROR; err = gl.glGetError())
-        {
-            String msg = dc.getGLU().gluErrorString(err);
-            msg += err;
-            Logging.logger().severe(msg);
         }
     }
 
@@ -1001,7 +952,6 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         this.buildCompositeSurfaceObjects(dc);
 
         // PreRender the individual deferred/ordered surface renderables.
-        int logCount = 0;
         while (dc.getOrderedSurfaceRenderables().peek() != null)
         {
             try
@@ -1012,12 +962,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
             }
             catch (Exception e)
             {
-                Logging.logger().log(Level.WARNING,
-                    Logging.getMessage("BasicSceneController.ExceptionDuringPreRendering"), e);
-
-                // Limit how many times we log a problem.
-                if (++logCount > Logging.getMaxMessageRepeatCount())
-                    break;
+                break;
             }
         }
 
@@ -1057,10 +1002,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
             {
                 dc.getOrderedSurfaceRenderables().poll().render(dc);
             }
-            catch (Exception e)
+            catch (Exception ignored)
             {
-                Logging.logger().log(Level.WARNING,
-                    Logging.getMessage("BasicSceneController.ExceptionDuringRendering"), e);
             }
         }
 

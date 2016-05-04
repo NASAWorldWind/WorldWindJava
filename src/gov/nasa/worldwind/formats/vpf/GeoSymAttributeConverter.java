@@ -334,9 +334,7 @@ public class GeoSymAttributeConverter
         {
             if (file == null)
             {
-                String msg = Logging.getMessage("nullValue.FileIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
 
             StringBuilder sb = new StringBuilder();
@@ -354,9 +352,7 @@ public class GeoSymAttributeConverter
             }
             catch (IOException e)
             {
-                String msg = Logging.getMessage("generic.ExceptionAttemptingToReadFile", file.getPath());
-                Logging.logger().log(java.util.logging.Level.SEVERE, msg);
-                return null;
+                    return null;
             }
             finally
             {

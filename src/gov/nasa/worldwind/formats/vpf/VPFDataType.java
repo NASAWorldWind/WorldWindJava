@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwind.formats.vpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.*;
 
 /**
@@ -60,9 +58,7 @@ public enum VPFDataType
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return (nameRegistry != null) ? nameRegistry.get(name) : null;
@@ -87,9 +83,7 @@ public enum VPFDataType
     {
         if (numRows < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "numRows < 0");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.dataBufferFactory.newDataBuffer(numRows, elementsPerRow);

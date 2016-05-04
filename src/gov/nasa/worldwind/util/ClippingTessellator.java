@@ -29,16 +29,12 @@ public class ClippingTessellator
     {
         if (tessellator == null)
         {
-            String msg = Logging.getMessage("nullValue.TessellatorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.tessellator = tessellator;

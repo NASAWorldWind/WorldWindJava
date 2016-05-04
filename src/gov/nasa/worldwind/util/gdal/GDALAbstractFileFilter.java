@@ -26,9 +26,7 @@ abstract class GDALAbstractFileFilter implements java.io.FileFilter
     {
         if (null == searchPattern || searchPattern.length() == 0)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.searchPattern = searchPattern;

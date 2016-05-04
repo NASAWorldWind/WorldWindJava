@@ -58,9 +58,7 @@ public class KMLMultiGeometry extends KMLAbstractGeometry
     {
         if (!(sourceValues instanceof KMLMultiGeometry))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         KMLMultiGeometry multiGeometry = (KMLMultiGeometry) sourceValues;

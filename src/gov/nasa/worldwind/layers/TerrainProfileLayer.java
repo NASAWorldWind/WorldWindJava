@@ -184,9 +184,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     {
         if (size == null)
         {
-            String message = Logging.getMessage("nullValue.DimensionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.size = size;
     }
@@ -210,9 +208,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     {
         if (color == null)
         {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.color = color;
     }
@@ -286,9 +282,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.position = position;
     }
@@ -421,9 +415,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     {
         if (font == null)
         {
-            String msg = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.defaultFont = font;
     }
@@ -532,9 +524,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     {
         if (latLon == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.startLatLon = latLon;
     }
@@ -559,9 +549,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     {
         if (latLon == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.endLatLon = latLon;
     }
@@ -672,9 +660,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     {
         if (positions == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionsListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.pathPositions = positions;
     }
@@ -1710,6 +1696,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.Earth.TerrainProfileLayer.Name");
+        return null;
     }
 }

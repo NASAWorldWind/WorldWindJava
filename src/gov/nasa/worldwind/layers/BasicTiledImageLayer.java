@@ -153,9 +153,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", restorableStateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         this.doRestoreState(rs, null);
@@ -165,9 +163,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -258,9 +254,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
                 {
                     // Assume that something is wrong with the file and delete it.
                     this.layer.getDataFileStore().removeFile(textureURL);
-                    String message = Logging.getMessage("generic.DeletedCorruptDataFile", textureURL);
-                    Logging.logger().info(message);
-                }
+                        }
             }
 
             this.layer.retrieveTexture(this.tile, this.layer.createDownloadPostProcessor(this.tile));
@@ -277,9 +271,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         {
             if (that == null)
             {
-                String msg = Logging.getMessage("nullValue.RequestTaskIsNull");
-                Logging.logger().severe(msg);
-                throw new IllegalArgumentException(msg);
+                    throw new IllegalArgumentException();
             }
             return this.tile.getPriority() == that.tile.getPriority() ? 0 :
                 this.tile.getPriority() < that.tile.getPriority() ? -1 : 1;
@@ -316,8 +308,6 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
 
         // The file has expired. Delete it.
         fileStore.removeFile(textureURL);
-        String message = Logging.getMessage("generic.DataFileExpired", textureURL);
-        Logging.logger().fine(message);
         return true;
     }
 
@@ -383,8 +373,6 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("layers.TextureLayer.ExceptionAttemptingToReadTextureFile", url);
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             return null;
         }
     }
@@ -564,8 +552,6 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         }
         catch (java.net.MalformedURLException e)
         {
-            Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("layers.TextureLayer.ExceptionCreatingTextureUrl", tile), e);
             return;
         }
 
@@ -576,8 +562,6 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         retriever = URLRetriever.createRetriever(url, postProcessor);
         if (retriever == null)
         {
-            Logging.logger().severe(
-                Logging.getMessage("layers.TextureLayer.UnknownRetrievalProtocol", url.toString()));
             return;
         }
         retriever.setValue(URLRetriever.EXTRACT_ZIP_ENTRY, "true"); // supports legacy layers
@@ -695,8 +679,6 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         AVList params = (AVList) this.getValue(AVKey.CONSTRUCTION_PARAMETERS);
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ConstructionParametersIsNull");
-            Logging.logger().warning(message);
             return AVKey.RETRIEVAL_STATE_SUCCESSFUL;
         }
 
@@ -705,8 +687,6 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         URL url = DataConfigurationUtils.getOGCGetCapabilitiesURL(params);
         if (url == null)
         {
-            String message = Logging.getMessage("nullValue.CapabilitiesURLIsNull");
-            Logging.logger().warning(message);
             return AVKey.RETRIEVAL_STATE_SUCCESSFUL;
         }
 
@@ -753,16 +733,12 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
     {
         if (caps == null)
         {
-            String message = Logging.getMessage("nullValue.CapabilitiesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ParametersIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         String[] names = DataConfigurationUtils.getOGCLayerNames(params);
@@ -831,8 +807,6 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToWriteConfigurationFile");
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -843,9 +817,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         String fileName = DataConfigurationUtils.getDataConfigFilename(params, ".xml");
         if (fileName == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         // Check if this component needs to write a configuration file. This happens outside of the synchronized block
@@ -872,16 +844,12 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         java.io.File file = fileStore.newFile(fileName);
         if (file == null)
         {
-            String message = Logging.getMessage("generic.CannotCreateFile", fileName);
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         Document doc = this.createConfigurationDocument(params);
         WWXML.saveDocumentToFile(doc, file.getPath());
 
-        String message = Logging.getMessage("generic.ConfigurationFileCreated", fileName);
-        Logging.logger().fine(message);
     }
 
     protected boolean needsConfigurationFile(FileStore fileStore, String fileName, AVList params,
@@ -937,9 +905,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
 
     public void restoreState(String stateInXml)
     {
-        String message = Logging.getMessage("RestorableSupport.RestoreRequiresConstructor");
-        Logging.logger().severe(message);
-        throw new UnsupportedOperationException(message);
+        throw new UnsupportedOperationException();
     }
 
     protected void doGetRestorableState(RestorableSupport rs, RestorableSupport.StateObject context)
@@ -1058,9 +1024,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -1071,9 +1035,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         AVList params = new AVListImpl();

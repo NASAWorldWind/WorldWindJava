@@ -8,7 +8,6 @@ package gov.nasa.worldwind.globes.projections;
 
 import gov.nasa.worldwind.geom.Sector;
 import gov.nasa.worldwind.globes.GeographicProjection;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author tag
@@ -22,9 +21,7 @@ public abstract class AbstractGeographicProjection implements GeographicProjecti
     {
         if (projectionLimits == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.projectionLimits = projectionLimits;
@@ -41,16 +38,12 @@ public abstract class AbstractGeographicProjection implements GeographicProjecti
     {
         if (projectionLimits == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!projectionLimits.isWithinLatLonLimits())
         {
-            String message = Logging.getMessage("generic.AngleOutOfRange", projectionLimits);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.projectionLimits = projectionLimits;

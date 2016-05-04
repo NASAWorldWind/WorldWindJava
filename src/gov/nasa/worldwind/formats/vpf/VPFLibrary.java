@@ -35,9 +35,7 @@ public class VPFLibrary extends AVListImpl
     {
         if (database == null)
         {
-            String message = Logging.getMessage("nullValue.DatabaseIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.database = database;
@@ -58,46 +56,37 @@ public class VPFLibrary extends AVListImpl
     {
         if (database == null)
         {
-            String message = Logging.getMessage("nullValue.DatabaseIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (WWUtil.isEmpty(name))
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File file = new File(database.getFilePath(), name);
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", file.getPath());
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         // Library tables.
         VPFBufferedRecordData lht = VPFUtils.readTable(new File(file, VPFConstants.LIBRARY_HEADER_TABLE));
         if (lht == null)
         {
-            String message = Logging.getMessage("VPF.LibraryHeaderTableMissing");
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         VPFBufferedRecordData cat = VPFUtils.readTable(new File(file, VPFConstants.COVERAGE_ATTRIBUTE_TABLE));
         if (cat == null)
         {
-            String message = Logging.getMessage("VPF.CoverageAttributeTableMissing");
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         VPFBufferedRecordData grt = VPFUtils.readTable(new File(file, VPFConstants.GEOGRAPHIC_REFERENCE_TABLE));
         if (grt == null)
         {
-            String message = Logging.getMessage("VPF.GeographicReferenceTableMissing");
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         VPFLibrary library = new VPFLibrary(database);
@@ -133,9 +122,7 @@ public class VPFLibrary extends AVListImpl
             }
             else
             {
-                String message = Logging.getMessage("VPF.NoTilesInTileReferenceCoverage");
-                Logging.logger().warning(message);
-            }
+                }
         }
 
         // Coverage tiled attributes.
@@ -201,9 +188,7 @@ public class VPFLibrary extends AVListImpl
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.coverageMap.containsKey(name);
@@ -213,9 +198,7 @@ public class VPFLibrary extends AVListImpl
     {
         if (name == null)
         {
-            String message = Logging.getMessage("nullValue.NameIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.coverageMap.get(name);
@@ -243,9 +226,7 @@ public class VPFLibrary extends AVListImpl
     {
         if (coverage == null)
         {
-            String message = Logging.getMessage("nullValue.CoverageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.coverageMap.put(coverage.getName(), coverage);
@@ -255,9 +236,7 @@ public class VPFLibrary extends AVListImpl
     {
         if (collection == null)
         {
-            String message = Logging.getMessage("nullValue.CollectionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (VPFCoverage cov : collection)
@@ -270,9 +249,7 @@ public class VPFLibrary extends AVListImpl
     {
         if (coverage == null)
         {
-            String message = Logging.getMessage("nullValue.CoverageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.coverageMap.remove(coverage.getName());
@@ -360,8 +337,6 @@ public class VPFLibrary extends AVListImpl
         Double unitsCoefficient = parseUnitsCoefficient(s);
         if (unitsCoefficient == null)
         {
-            String message = Logging.getMessage("VPF.UnrecognizedUnits", s);
-            Logging.logger().severe(message);
             return null;
         }
 
@@ -369,8 +344,6 @@ public class VPFLibrary extends AVListImpl
         double[] ellipsoidParams = parseEllipsoidDetail(s);
         if (ellipsoidParams == null || ellipsoidParams.length != 2)
         {
-            String message = Logging.getMessage("VPF.UnrecognizedEllipsoidDetail", s);
-            Logging.logger().severe(message);
             return null;
         }
 
@@ -390,9 +363,7 @@ public class VPFLibrary extends AVListImpl
     {
         if (table == null)
         {
-            String message = Logging.getMessage("nullValue.TableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.libraryHeaderTable = table;
@@ -407,9 +378,7 @@ public class VPFLibrary extends AVListImpl
     {
         if (table == null)
         {
-            String message = Logging.getMessage("nullValue.TableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.geographicReferenceTable = table;
@@ -424,9 +393,7 @@ public class VPFLibrary extends AVListImpl
     {
         if (table == null)
         {
-            String message = Logging.getMessage("nullValue.TableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.coverageAttributeTable = table;

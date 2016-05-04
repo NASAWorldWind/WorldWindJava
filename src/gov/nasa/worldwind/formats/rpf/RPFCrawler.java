@@ -5,12 +5,9 @@
  */
 package gov.nasa.worldwind.formats.rpf;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.locks.*;
-import static java.util.logging.Level.FINE;
 
 /**
  * @author dcollins
@@ -37,9 +34,7 @@ public class RPFCrawler
         {
             if (groupType == null)
             {
-                String message = Logging.getMessage("nullValue.RPFFramePropertyTypeIsNull");
-                Logging.logger().fine(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             this.groupType = groupType;
         }
@@ -63,7 +58,6 @@ public class RPFCrawler
             }
             catch (IOException e)
             {
-                Logging.logger().fine(e.getMessage());
             }
 
             if (rpftocFile == null)
@@ -80,9 +74,7 @@ public class RPFCrawler
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("RPFCrawler.ExceptionParsingFilename", file.getPath());
-                Logging.logger().log(FINE, message, e);
-            }
+                }
 
             if (firstFrameFilename == null)
                 return;
@@ -119,9 +111,7 @@ public class RPFCrawler
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("RPFCrawler.ExceptionParsingFilename", file.getPath());
-                Logging.logger().log(FINE, message, e);
-            }
+                }
             return rpfFrameFilename;
         }
     }
@@ -361,9 +351,7 @@ public class RPFCrawler
         {
             if (this.thread != null || this.thread == deadThread)
             {
-                String message = Logging.getMessage("RPFCrawler.BadStart");
-                Logging.logger().fine(message);
-                throw new IllegalStateException(message);
+                    throw new IllegalStateException();
             }
             File validDir = this.validateDirectory(directory);
             this.thread = new Thread(new RPFRunner(this, validDir, listener, tocFileSearch));
@@ -392,9 +380,7 @@ public class RPFCrawler
     {
         if (directory == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().fine(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         String path = directory.getAbsolutePath();
         if (!path.endsWith("/") && !path.endsWith("\\"))
@@ -404,9 +390,7 @@ public class RPFCrawler
         }
         if (!directory.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", directory.getPath());
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         return directory;
     }

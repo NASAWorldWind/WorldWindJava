@@ -72,9 +72,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
     {
         if (location == null)
         {
-            String message = Logging.getMessage("nullValue.LatLonIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.location = location;
@@ -135,9 +133,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
     {
         if (imageSource == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageSource = imageSource;
@@ -194,9 +190,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
     {
         if (scale <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", "scale must be greater then zero");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.scale = scale;
         this.onPropertyChanged();
@@ -336,9 +330,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.color = color;
         this.onPropertyChanged();
@@ -375,9 +367,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeSectors(dc);
@@ -387,9 +377,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.computeExtent(dc);
@@ -636,9 +624,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
     {
         if (delta == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Position referencePos = this.getReferencePosition();
@@ -652,9 +638,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
     {
         if (position == null)
         {
-            String msg = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.setLocation(position);

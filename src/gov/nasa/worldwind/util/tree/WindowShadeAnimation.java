@@ -99,9 +99,7 @@ public class WindowShadeAnimation implements Animation
     {
         if (duration < 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.duration = duration;

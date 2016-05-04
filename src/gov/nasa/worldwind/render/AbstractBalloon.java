@@ -55,9 +55,7 @@ public abstract class AbstractBalloon extends WWObjectImpl implements Balloon
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setText(text);
@@ -113,9 +111,7 @@ public abstract class AbstractBalloon extends WWObjectImpl implements Balloon
     {
         if (text == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.text = text;
@@ -145,9 +141,7 @@ public abstract class AbstractBalloon extends WWObjectImpl implements Balloon
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.BalloonAttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.attributes = attributes;
@@ -164,9 +158,7 @@ public abstract class AbstractBalloon extends WWObjectImpl implements Balloon
     {
         if (highlightAttributes == null)
         {
-            String message = Logging.getMessage("nullValue.BalloonAttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.highlightAttributes = highlightAttributes;
@@ -219,9 +211,7 @@ public abstract class AbstractBalloon extends WWObjectImpl implements Balloon
     {
         if (decoder == null)
         {
-            String message = Logging.getMessage("nullValue.TextDecoderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.textDecoder = decoder;

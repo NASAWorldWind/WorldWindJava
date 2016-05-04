@@ -12,7 +12,6 @@ import gov.nasa.worldwind.formats.gpx.GpxWriter;
 import gov.nasa.worldwind.formats.nmea.NmeaWriter;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.tracks.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
@@ -69,18 +68,14 @@ public class SARTrack extends WWObjectImpl implements Iterable<Position>
     {
         if (filePath == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File file = new File(filePath);
 
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", filePath);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         SARTrack track = null;
@@ -122,8 +117,6 @@ public class SARTrack extends WWObjectImpl implements Iterable<Position>
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToReadFile", filePath);
-            Logging.logger().severe(message);
         }
 
         if (tracks == null)

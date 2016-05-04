@@ -34,9 +34,7 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -69,9 +67,7 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (!this.isEnabled())
@@ -101,9 +97,7 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (dc.getScreenCredits() == null || dc.getScreenCredits().size() < 1)
@@ -164,18 +158,12 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
             {
                 if (!badURLsReported.contains(credit.getLink())) // report it only once
                 {
-                    String msg = Logging.getMessage("generic.URIInvalid",
-                        credit.getLink() != null ? credit.getLink() : "null");
-                    Logging.logger().warning(msg);
-                    badURLsReported.add(credit.getLink());
+                            badURLsReported.add(credit.getLink());
                 }
             }
             catch (Exception e)
             {
-                String msg = Logging.getMessage("generic.ExceptionAttemptingToInvokeWebBrower for URL",
-                    credit.getLink());
-                Logging.logger().warning(msg);
-            }
+                }
         }
     }
 }

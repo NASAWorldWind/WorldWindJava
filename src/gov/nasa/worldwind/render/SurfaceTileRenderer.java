@@ -14,7 +14,6 @@ import gov.nasa.worldwind.util.*;
 import javax.media.opengl.*;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 /**
  * @author tag
@@ -90,9 +89,7 @@ public abstract class SurfaceTileRenderer implements Disposable
     {
         if (tile == null)
         {
-            String message = Logging.getMessage("nullValue.TileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         ArrayList<SurfaceTile> al = new ArrayList<SurfaceTile>(1);
@@ -121,16 +118,12 @@ public abstract class SurfaceTileRenderer implements Disposable
     {
         if (tiles == null)
         {
-            String message = Logging.getMessage("nullValue.TileIterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -268,8 +261,6 @@ public abstract class SurfaceTileRenderer implements Disposable
         }
         catch (Exception e)
         {
-            Logging.logger().log(Level.SEVERE,
-                Logging.getMessage("generic.ExceptionWhileRenderingLayer", this.getClass().getName()), e);
         }
         finally
         {

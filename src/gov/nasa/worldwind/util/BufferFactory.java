@@ -100,9 +100,7 @@ public abstract class BufferFactory
         {
             if (size < 0)
             {
-                String message = Logging.getMessage("generic.SizeOutOfRange", size);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             return WWBufferUtil.newByteBufferWrapper(size, this.isAllocateDirect());
@@ -144,9 +142,7 @@ public abstract class BufferFactory
         {
             if (size < 0)
             {
-                String message = Logging.getMessage("generic.SizeOutOfRange", size);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             return WWBufferUtil.newShortBufferWrapper(size, this.isAllocateDirect());
@@ -188,9 +184,7 @@ public abstract class BufferFactory
         {
             if (size < 0)
             {
-                String message = Logging.getMessage("generic.SizeOutOfRange", size);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             return WWBufferUtil.newIntBufferWrapper(size, this.isAllocateDirect());
@@ -232,9 +226,7 @@ public abstract class BufferFactory
         {
             if (size < 0)
             {
-                String message = Logging.getMessage("generic.SizeOutOfRange", size);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             return WWBufferUtil.newFloatBufferWrapper(size, this.isAllocateDirect());
@@ -276,9 +268,7 @@ public abstract class BufferFactory
         {
             if (size < 0)
             {
-                String message = Logging.getMessage("generic.SizeOutOfRange", size);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             return WWBufferUtil.newDoubleBufferWrapper(size, this.isAllocateDirect());

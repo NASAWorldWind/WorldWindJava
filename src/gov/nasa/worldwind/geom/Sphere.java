@@ -38,16 +38,12 @@ public final class Sphere implements Extent, Renderable
     {
         if (points == null)
         {
-            String message = Logging.getMessage("nullValue.PointsArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (points.length < 1)
         {
-            String message = Logging.getMessage("Geom.Sphere.NoPointsSpecified");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Creates the sphere around the axis aligned bounding box of the input points.
@@ -74,16 +70,12 @@ public final class Sphere implements Extent, Renderable
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.getBackingBuffer().position() > buffer.getBackingBuffer().limit() - 3)
         {
-            String message = Logging.getMessage("Geom.Sphere.NoPointsSpecified");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Creates the sphere around the axis aligned bounding box of the input points.
@@ -114,9 +106,7 @@ public final class Sphere implements Extent, Renderable
     {
         if (extents == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Vec4 center = null;
@@ -168,16 +158,12 @@ public final class Sphere implements Extent, Renderable
     {
         if (center == null)
         {
-            String message = Logging.getMessage("nullValue.CenterIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (radius <= 0)
         {
-            String message = Logging.getMessage("Geom.Sphere.RadiusIsZeroOrNegative", radius);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.center = center;
@@ -235,9 +221,7 @@ public final class Sphere implements Extent, Renderable
     {
         if (location == null)
         {
-            String msg = Logging.getMessage("nullValue.LocationIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double sinLat = location.getLatitude().sin();
@@ -264,9 +248,7 @@ public final class Sphere implements Extent, Renderable
     {
         if (line == null)
         {
-            String message = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         double a = line.getDirection().getLengthSquared3();
@@ -320,9 +302,7 @@ public final class Sphere implements Extent, Renderable
     {
         if (frustum == null)
         {
-            String message = Logging.getMessage("nullValue.FrustumIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // See if the extent's bounding sphere is within or intersects the frustum. The dot product of the extent's
@@ -363,9 +343,7 @@ public final class Sphere implements Extent, Renderable
     {
         if (line == null)
         {
-            String msg = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         return line.distanceTo(this.center) <= this.radius;
     }
@@ -383,9 +361,7 @@ public final class Sphere implements Extent, Renderable
     {
         if (plane == null)
         {
-            String msg = Logging.getMessage("nullValue.PlaneIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double dq1 = plane.dot(this.center);
@@ -397,9 +373,7 @@ public final class Sphere implements Extent, Renderable
     {
         if (view == null)
         {
-            String message = Logging.getMessage("nullValue.ViewIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return WWMath.computeSphereProjectedArea(view, this.getCenter(), this.getRadius());
@@ -417,9 +391,7 @@ public final class Sphere implements Extent, Renderable
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -480,7 +452,7 @@ public final class Sphere implements Extent, Renderable
 //        {
 //            String message = WorldWind.retrieveErrMsg("nullValue.LineIsNull");
 //            WorldWind.logger().logger(Level.SEVERE, message);
-//            throw new IllegalArgumentException(message);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        double a = line.getDirection().getLengthSquared();

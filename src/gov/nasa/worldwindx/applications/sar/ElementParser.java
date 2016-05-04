@@ -5,8 +5,6 @@
  */
 package gov.nasa.worldwindx.applications.sar;
 
-import gov.nasa.worldwind.util.Logging;
-
 /**
  * @author tag
  * @version $Id: ElementParser.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -25,9 +23,7 @@ public class ElementParser
     {
         if (elementName == null)
         {
-            String msg = Logging.getMessage("nullValue.ElementNameIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.elementName = elementName;
@@ -53,27 +49,19 @@ public class ElementParser
     {
         if (uri == null)
         {
-            String msg = Logging.getMessage("nullValue.URIIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (lname == null)
         {
-            String msg = Logging.getMessage("nullValue.LNameIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (qname == null)
         {
-            String msg = Logging.getMessage("nullValue.QNameIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String msg = Logging.getMessage("nullValue.org.xml.sax.AttributesIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.currentElement != null)
@@ -95,21 +83,15 @@ public class ElementParser
     {
         if (uri == null)
         {
-            String msg = Logging.getMessage("nullValue.URIIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (lname == null)
         {
-            String msg = Logging.getMessage("nullValue.LNameIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (qname == null)
         {
-            String msg = Logging.getMessage("nullValue.QNameIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (this.currentElement != null)
         {
@@ -142,27 +124,19 @@ public class ElementParser
     {
         if (data == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (data.length < 1)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", data.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (start < 0)
         {
-            String msg = Logging.getMessage("generic.indexOutOfRange", start);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (start + length > data.length)
         {
-            String msg = Logging.getMessage("generic.indexOutOfRange", start + length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (this.currentElement != null)

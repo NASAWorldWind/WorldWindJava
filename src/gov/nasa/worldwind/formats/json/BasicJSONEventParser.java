@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.json;
 
 import gov.nasa.worldwind.avlist.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.io.IOException;
 import java.util.*;
@@ -28,16 +27,12 @@ public class BasicJSONEventParser implements JSONEventParser
     {
         if (ctx == null)
         {
-            String message = Logging.getMessage("nullValue.ParserContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (event == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (event.isStartObject())
@@ -51,7 +46,6 @@ public class BasicJSONEventParser implements JSONEventParser
 
         else
         {
-            Logging.logger().warning(Logging.getMessage("generic.UnexpectedEvent", event));
             return null;
         }
     }
@@ -60,16 +54,12 @@ public class BasicJSONEventParser implements JSONEventParser
     {
         if (ctx == null)
         {
-            String message = Logging.getMessage("nullValue.ParserContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (event == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return ctx.allocate(event);
@@ -83,9 +73,7 @@ public class BasicJSONEventParser implements JSONEventParser
     {
         if (!event.isStartObject())
         {
-            String message = Logging.getMessage("generic.InvalidEvent", event);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (event = ctx.nextEvent(); ctx.hasNext(); event = ctx.nextEvent())
@@ -100,7 +88,8 @@ public class BasicJSONEventParser implements JSONEventParser
                 this.parseObjectField(ctx, event);
 
             else
-                Logging.logger().warning(Logging.getMessage("generic.UnexpectedEvent", event));
+            {
+            }
         }
 
         return this.resolveObject(ctx, event);
@@ -110,9 +99,7 @@ public class BasicJSONEventParser implements JSONEventParser
     {
         if (!event.isFieldName())
         {
-            String message = Logging.getMessage("generic.InvalidEvent", event);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         ctx.pushFieldName(event.getFieldName());
@@ -129,7 +116,6 @@ public class BasicJSONEventParser implements JSONEventParser
 
             else
             {
-                Logging.logger().warning(Logging.getMessage("generic.UnexpectedEvent", valueEvent));
             }
         }
         else
@@ -161,9 +147,7 @@ public class BasicJSONEventParser implements JSONEventParser
     {
         if (!event.isStartArray())
         {
-            String message = Logging.getMessage("generic.InvalidEvent", event);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         for (event = ctx.nextEvent(); ctx.hasNext(); event = ctx.nextEvent())
@@ -190,7 +174,6 @@ public class BasicJSONEventParser implements JSONEventParser
 
         else
         {
-            Logging.logger().warning(Logging.getMessage("generic.UnexpectedEvent", event));
         }
     }
 

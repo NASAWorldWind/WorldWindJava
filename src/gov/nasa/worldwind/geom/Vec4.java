@@ -113,30 +113,22 @@ public class Vec4
     {
         if (array == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (offset < 0)
         {
-            String msg = Logging.getMessage("generic.OffsetIsInvalid", offset);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (length < 1)
         {
-            String msg = Logging.getMessage("generic.LengthIsInvalid", length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (array.length < offset + length)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", array.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (length == 1)
@@ -172,30 +164,22 @@ public class Vec4
     {
         if (array == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (offset < 0)
         {
-            String msg = Logging.getMessage("generic.OffsetIsInvalid", offset);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (length < 1)
         {
-            String msg = Logging.getMessage("generic.LengthIsInvalid", length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (array.length < offset + length)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", array.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (length == 2)
@@ -225,9 +209,7 @@ public class Vec4
     {
         if (array == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return fromDoubleArray(array, offset, 2);
@@ -252,9 +234,7 @@ public class Vec4
     {
         if (array == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return fromDoubleArray(array, offset, 3);
@@ -280,9 +260,7 @@ public class Vec4
     {
         if (array == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return fromDoubleArray(array, offset, 4);
@@ -310,30 +288,22 @@ public class Vec4
     {
         if (array == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (offset < 0)
         {
-            String msg = Logging.getMessage("generic.OffsetIsInvalid", offset);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (length < 1)
         {
-            String msg = Logging.getMessage("generic.LengthIsInvalid", length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (array.length < offset + length)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", array.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         array[offset] = this.x;
@@ -370,30 +340,22 @@ public class Vec4
     {
         if (array == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (offset < 0)
         {
-            String msg = Logging.getMessage("generic.OffsetIsInvalid", offset);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (length < 1)
         {
-            String msg = Logging.getMessage("generic.LengthIsInvalid", length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (array.length < offset + length)
         {
-            String msg = Logging.getMessage("generic.ArrayInvalidLength", array.length);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         array[offset] = (float) this.x;
@@ -425,9 +387,7 @@ public class Vec4
     {
         if (array == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return toDoubleArray(array, offset, 2);
@@ -451,9 +411,7 @@ public class Vec4
     {
         if (array == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return toDoubleArray(array, offset, 3);
@@ -478,9 +436,7 @@ public class Vec4
     {
         if (array == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return toDoubleArray(array, offset, 4);
@@ -590,9 +546,7 @@ public class Vec4
     {
         if (origin == null || direction == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -638,9 +592,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -659,9 +611,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -689,9 +639,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -705,9 +653,7 @@ public class Vec4
     {
         if (value == 0)
         {
-            String msg = Logging.getMessage("generic.ArgumentOutOfRange", value);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -721,9 +667,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -784,9 +728,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double dx = vec4.x - this.x;
@@ -798,9 +740,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return Math.sqrt(this.distanceToSquared3(vec4));
@@ -810,9 +750,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double tmp;
@@ -830,9 +768,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return (this.x * vec4.x) + (this.y * vec4.y) + (this.z * vec4.z);
@@ -842,9 +778,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return (this.x * vec4.x) + (this.y * vec4.y) + (this.z * vec4.z) + (this.w * vec4.w);
@@ -864,9 +798,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -879,9 +811,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double a_dot_b = this.dot3(vec4);
@@ -917,16 +847,12 @@ public class Vec4
     {
         if (v1 == null || v2 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (result == null)
         {
-            String msg = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         // Compute rotation angle
@@ -948,9 +874,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double dot = this.dot3(vec4);
@@ -965,9 +889,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.subtract3(projectOnto3(vec4));
@@ -994,9 +916,7 @@ public class Vec4
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -1009,9 +929,7 @@ public class Vec4
     {
         if (quaternion == null)
         {
-            String msg = Logging.getMessage("nullValue.QuaternionIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Quaternion tmp = new Quaternion(this.x, this.y, this.z, 0.0);
@@ -1024,9 +942,7 @@ public class Vec4
     {
         if (matrix == null)
         {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -1044,9 +960,7 @@ public class Vec4
     {
         if ((value1 == null) || (value2 == null))
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -1059,9 +973,7 @@ public class Vec4
     {
         if ((value1 == null) || (value2 == null))
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -1074,9 +986,7 @@ public class Vec4
     {
         if (vec4 == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return new Vec4(
@@ -1089,9 +999,7 @@ public class Vec4
     {
         if ((value1 == null) || (value2 == null))
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (amount < 0.0)
@@ -1121,9 +1029,7 @@ public class Vec4
     {
         if (points == null)
         {
-            String msg = Logging.getMessage("nullValue.PointListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         int count = 0;
@@ -1174,16 +1080,12 @@ public class Vec4
     {
         if (coordinates == null)
         {
-            String msg = Logging.getMessage("nullValue.CoordinatesAreNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (stride < 3)
         {
-            String msg = Logging.getMessage("generic.StrideIsInvalid");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         int count = 0;
@@ -1209,9 +1111,7 @@ public class Vec4
     {
         if ((points == null))
         {
-            String msg = Logging.getMessage("nullValue.PointListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         double totalDistance = 0.0;
@@ -1249,9 +1149,7 @@ public class Vec4
     {
         if (points == null)
         {
-            String message = Logging.getMessage("nullValue.PointsArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (points.length == 0)
@@ -1304,9 +1202,7 @@ public class Vec4
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.BufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.getBackingBuffer().position() > buffer.getBackingBuffer().limit() - 3)
@@ -1370,9 +1266,7 @@ public class Vec4
     {
         if (a == null || b == null || c == null)
         {
-            String msg = Logging.getMessage("nullValue.Vec4IsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 ab = b.subtract3(a).normalize3();

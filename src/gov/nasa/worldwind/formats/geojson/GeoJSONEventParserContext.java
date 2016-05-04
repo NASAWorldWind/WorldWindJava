@@ -5,7 +5,7 @@
  */
 package gov.nasa.worldwind.formats.geojson;
 
-import org.codehaus.jackson.JsonParser;
+import gov.nasa.worldwind.shaded.org.codehaus.jackson.JsonParser;
 import gov.nasa.worldwind.formats.json.*;
 
 import java.io.IOException;

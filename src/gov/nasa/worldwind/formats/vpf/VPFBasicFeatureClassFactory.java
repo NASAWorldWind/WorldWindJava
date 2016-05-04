@@ -6,7 +6,6 @@
 package gov.nasa.worldwind.formats.vpf;
 
 import gov.nasa.worldwind.exception.WWRuntimeException;
-import gov.nasa.worldwind.util.Logging;
 
 import java.io.*;
 import java.util.Collection;
@@ -26,16 +25,12 @@ public class VPFBasicFeatureClassFactory implements VPFFeatureClassFactory
     {
         if (coverage == null)
         {
-            String message = Logging.getMessage("nullValue.CoverageIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (schema == null)
         {
-            String message = Logging.getMessage("nullValue.SchemaIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -44,9 +39,7 @@ public class VPFBasicFeatureClassFactory implements VPFFeatureClassFactory
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("generic.ExceptionWhileReading",
-                coverage.getFilePath() + File.separator + schema.getClassName());
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 

@@ -92,9 +92,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea
     {
         if (steps < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", steps);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.areaTerrainSamplingSteps != steps)
@@ -127,9 +125,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.surfaceArea < 0)
@@ -142,9 +138,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.projectedArea < 0)
@@ -162,9 +156,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Sector sector = getBoundingSector();
@@ -179,9 +171,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea
     {
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Sector sector = getBoundingSector();

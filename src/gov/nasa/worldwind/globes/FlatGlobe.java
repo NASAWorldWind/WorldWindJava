@@ -10,7 +10,6 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.projections.*;
 import gov.nasa.worldwind.render.DrawContext;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * Defines a globe represented as a projection onto a plane. The projection type is modifiable. The default projection
@@ -146,9 +145,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     {
         if (projection == null)
         {
-            String message = Logging.getMessage("nullValue.GeographicProjectionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (projection.equals(PROJECTION_LAT_LON))
@@ -177,9 +174,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     {
         if (projection == null)
         {
-            String message = Logging.getMessage("nullValue.GeographicProjectionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.projection = projection;
@@ -224,9 +219,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     {
         if (frustum == null)
         {
-            String message = Logging.getMessage("nullValue.FrustumIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return Sector.computeBoundingBox(this, 1.0, Sector.FULL_SPHERE, this.getMinElevation(),
@@ -240,9 +233,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
         // Flat World Note: extract altitude from equRadius by subtracting this.equatorialRadius (OK)
         if (line == null)
         {
-            String message = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         // Intersection with world plane
         Plane plane = new Plane(0, 0, 1, -(equRadius - this.equatorialRadius));   // Flat globe plane
@@ -267,9 +258,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
         // Flat World Note: plane/line intersection test (OK)
         if (line == null)
         {
-            String msg = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return this.intersect(line) != null;
@@ -281,9 +270,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
         // Flat World Note: plane/plane intersection test (OK)
         if (plane == null)
         {
-            String msg = Logging.getMessage("nullValue.PlaneIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         Vec4 n = plane.getNormal();
@@ -296,9 +283,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
         // Flat World Note: return constant (OK)
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return Vec4.UNIT_Z;
@@ -310,9 +295,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
         // Flat World Note: return constant (OK)
         if (point == null)
         {
-            String msg = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         return Vec4.UNIT_Z;
@@ -323,9 +306,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.projection.northPointingTangent(this, latitude, longitude);
@@ -336,9 +317,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Compute the origin as the cartesian coordinate at (latitude, longitude, metersElevation).
@@ -358,9 +337,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Flat World Note: return zero if outside the lat/lon normal boundaries (OK)
@@ -387,9 +364,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     {
         if (latitude == null || longitude == null)
         {
-            String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.projection.geographicToCartesian(this, latitude, longitude, metersElevation,
@@ -407,9 +382,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     {
         if (cart == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Position pos = this.projection.cartesianToGeographic(this, cart, this.offsetVector);
@@ -449,7 +422,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
 //        {
 //            String msg = Logging.getMessage("nullValue.SectorIsNull");
 //            Logging.logger().severe(msg);
-//            throw new IllegalArgumentException(msg);
+//            throw new IllegalArgumentException();
 //        }
 //
 //        // Compute the center points of the bounding cylinder's top and bottom planes.

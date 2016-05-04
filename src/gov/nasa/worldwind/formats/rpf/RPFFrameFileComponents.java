@@ -120,7 +120,7 @@ public class RPFFrameFileComponents
             }
         }
         else
-            throw new NITFSRuntimeException("NITFSReader.InvalidNumberOfRPFColorGrayscaleRecords");
+            throw new NITFSRuntimeException();
     }
 
     private void parseColorGrayscaleSection(java.nio.ByteBuffer buffer)

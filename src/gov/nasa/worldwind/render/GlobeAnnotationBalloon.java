@@ -7,7 +7,6 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Position;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * An AnnotationBalloon that is attached to a position on the globe.
@@ -35,9 +34,7 @@ public class GlobeAnnotationBalloon extends AbstractAnnotationBalloon implements
 
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;
@@ -75,9 +72,7 @@ public class GlobeAnnotationBalloon extends AbstractAnnotationBalloon implements
     {
         if (position == null)
         {
-            String message = Logging.getMessage("nullValue.PositionIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.position = position;

@@ -26,9 +26,7 @@ public class AnnotationFlowLayout extends AbstractAnnotationLayout
     {
         if (orientation == null)
         {
-            String message = Logging.getMessage("nullValue.AlignmentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // A null alignment is permitted. This tells the layout to choose the default alignment for the current
@@ -50,9 +48,7 @@ public class AnnotationFlowLayout extends AbstractAnnotationLayout
     {
         if (orientation == null)
         {
-            String message = Logging.getMessage("nullValue.OrientationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (orientation == AVKey.HORIZONTAL)
@@ -86,9 +82,7 @@ public class AnnotationFlowLayout extends AbstractAnnotationLayout
     {
         if (orientation == null)
         {
-            String message = Logging.getMessage("nullValue.OrientationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.orientation = orientation;
@@ -131,16 +125,12 @@ public class AnnotationFlowLayout extends AbstractAnnotationLayout
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (annotations == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.orientation == AVKey.HORIZONTAL)
@@ -161,23 +151,17 @@ public class AnnotationFlowLayout extends AbstractAnnotationLayout
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bounds == null)
         {
-            String message = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (annotations == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.orientation == AVKey.HORIZONTAL)
@@ -195,16 +179,12 @@ public class AnnotationFlowLayout extends AbstractAnnotationLayout
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (bounds == null)
         {
-            String message = Logging.getMessage("nullValue.RectangleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         super.beginDrawAnnotations(dc, bounds);

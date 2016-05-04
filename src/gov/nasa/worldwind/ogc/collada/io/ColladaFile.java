@@ -6,8 +6,6 @@
 
 package gov.nasa.worldwind.ogc.collada.io;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.io.*;
 
 /**
@@ -30,9 +28,7 @@ public class ColladaFile implements ColladaDoc
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.colladaFile = file;
@@ -49,9 +45,7 @@ public class ColladaFile implements ColladaDoc
     {
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         File pathFile = new File(path);

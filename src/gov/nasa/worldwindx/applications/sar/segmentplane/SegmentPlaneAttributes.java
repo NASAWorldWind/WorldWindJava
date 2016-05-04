@@ -8,7 +8,6 @@ package gov.nasa.worldwindx.applications.sar.segmentplane;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.media.opengl.*;
 import java.awt.*;
@@ -34,15 +33,11 @@ public class SegmentPlaneAttributes
         {
             if (material == null)
             {
-                String message = Logging.getMessage("nullValue.MaterialIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (opacity < 0.0 || opacity > 1.0)
             {
-                String message = Logging.getMessage("generic.ArgumentOutOfRange", "opacity < 0 or opacity > 1");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.visible = true;
@@ -106,9 +101,7 @@ public class SegmentPlaneAttributes
         {
             if (material == null)
             {
-                String message = Logging.getMessage("nullValue.MaterialIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.material = material;
@@ -123,9 +116,7 @@ public class SegmentPlaneAttributes
         {
             if (opacity < 0.0 || opacity > 1.0)
             {
-                String message = Logging.getMessage("generic.ArgumentOutOfRange", "opacity < 0 or opacity > 1");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.opacity = opacity;
@@ -140,9 +131,7 @@ public class SegmentPlaneAttributes
         {
             if (size < 0.0)
             {
-                String message = Logging.getMessage("generic.ArgumentOutOfRange", "size < 0");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.size = size;
@@ -157,9 +146,7 @@ public class SegmentPlaneAttributes
         {
             if (size < 0.0)
             {
-                String message = Logging.getMessage("generic.ArgumentOutOfRange", "size < 0");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.pickSize = size;
@@ -174,9 +161,7 @@ public class SegmentPlaneAttributes
         {
             if (vec4 == null)
             {
-                String message = Logging.getMessage("nullValue.Vec4IsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.offset = vec4;
@@ -198,27 +183,19 @@ public class SegmentPlaneAttributes
         {
             if (color == null)
             {
-                String message = Logging.getMessage("nullValue.ColorIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (font == null)
             {
-                String message = Logging.getMessage("nullValue.FontIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (horizontalAlignment == null)
             {
-                String message = Logging.getMessage("nullValue.HorizontalAlignmentIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (verticalAlignment == null)
             {
-                String message = Logging.getMessage("nullValue.VerticalAlignmentIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.visible = true;
@@ -274,9 +251,7 @@ public class SegmentPlaneAttributes
         {
             if (color == null)
             {
-                String message = Logging.getMessage("nullValue.ColorIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.color = color;
@@ -291,9 +266,7 @@ public class SegmentPlaneAttributes
         {
             if (font == null)
             {
-                String message = Logging.getMessage("nullValue.FontIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.font = font;
@@ -308,9 +281,7 @@ public class SegmentPlaneAttributes
         {
             if (horizontalAlignment == null)
             {
-                String message = Logging.getMessage("nullValue.HorizontalAlignmentIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.horizontalAlignment = horizontalAlignment;
@@ -325,9 +296,7 @@ public class SegmentPlaneAttributes
         {
             if (verticalAlignment == null)
             {
-                String message = Logging.getMessage("nullValue.VerticalAlignmentIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.verticalAlignment = verticalAlignment;
@@ -362,9 +331,7 @@ public class SegmentPlaneAttributes
         {
             if (vec4 == null)
             {
-                String message = Logging.getMessage("nullValue.Vec4IsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.offset = vec4;
@@ -374,15 +341,11 @@ public class SegmentPlaneAttributes
         {
             if (segmentPlane == null)
             {
-                String message = Logging.getMessage("nullValue.SegmentPlaneIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
             if (position == null)
             {
-                String message = Logging.getMessage("nullValue.PositionIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             StringBuilder sb = new StringBuilder();
@@ -435,9 +398,7 @@ public class SegmentPlaneAttributes
     {
         if (map == null)
         {
-            String message = Logging.getMessage("nullValue.MapIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.geometryAttributes.clear();
@@ -453,9 +414,7 @@ public class SegmentPlaneAttributes
     {
         if (map == null)
         {
-            String message = Logging.getMessage("nullValue.MapIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.labelAttributes.clear();
@@ -466,9 +425,7 @@ public class SegmentPlaneAttributes
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.geometryAttributes.get(key);
@@ -478,15 +435,11 @@ public class SegmentPlaneAttributes
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.geometryAttributes.put(key, attributes);
@@ -496,9 +449,7 @@ public class SegmentPlaneAttributes
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         return this.labelAttributes.get(key);
@@ -508,15 +459,11 @@ public class SegmentPlaneAttributes
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.labelAttributes.put(key, attributes);
@@ -526,21 +473,15 @@ public class SegmentPlaneAttributes
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!dc.isPickingMode())
@@ -553,21 +494,15 @@ public class SegmentPlaneAttributes
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getGL() == null)
         {
-            String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         applyLineWidth(dc, attributes.getSize(), attributes.getPicksize());

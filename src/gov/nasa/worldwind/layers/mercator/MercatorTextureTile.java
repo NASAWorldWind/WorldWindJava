@@ -29,9 +29,8 @@ public class MercatorTextureTile extends TextureTile
 	{
 		if (nextLevel == null)
 		{
-			String msg = Logging.getMessage("nullValue.LevelIsNull");
-			Logging.logger().severe(msg);
-			throw new IllegalArgumentException(msg);
+			String msg = null;
+			throw new IllegalArgumentException();
 		}
 		double d0 = this.getMercatorSector().getMinLatPercent();
 		double d2 = this.getMercatorSector().getMaxLatPercent();

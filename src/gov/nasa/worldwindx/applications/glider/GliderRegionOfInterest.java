@@ -8,7 +8,6 @@ package gov.nasa.worldwindx.applications.glider;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.util.Logging;
 
 import java.awt.*;
 import java.util.*;
@@ -40,16 +39,12 @@ public class GliderRegionOfInterest extends AVListImpl
     {
         if (locations == null)
         {
-            String message = Logging.getMessage("nullValue.LocationsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.locations = new ArrayList<LatLon>();
@@ -94,9 +89,7 @@ public class GliderRegionOfInterest extends AVListImpl
     {
         if (locations == null)
         {
-            String message = Logging.getMessage("nullValue.LocationsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GliderRegionOfInterest oldRegion = new GliderRegionOfInterest(this);
@@ -129,9 +122,7 @@ public class GliderRegionOfInterest extends AVListImpl
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GliderRegionOfInterest oldRegion = new GliderRegionOfInterest(this);
@@ -182,9 +173,7 @@ public class GliderRegionOfInterest extends AVListImpl
         {
             if (regions == null)
             {
-                String message = Logging.getMessage("nullValue.RegionListIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.regions = Collections.unmodifiableSet(regions);

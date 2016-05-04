@@ -35,8 +35,7 @@ public class WaveletCodec
         if (!isTypeValid(type))
         {
             String message = "Invalid type: " + type;
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.type = type;
@@ -179,8 +178,7 @@ public class WaveletCodec
         if (codec == null)
         {
             String message = "WaveletCodec is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int length = (4 * Integer.SIZE) / 8;
@@ -214,8 +212,7 @@ public class WaveletCodec
         if (codec == null)
         {
             String message = "WaveletCodec is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int biType = -1;
@@ -239,8 +236,7 @@ public class WaveletCodec
         if (image == null)
         {
             String message = "BufferedImage is null";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int type = -1;
@@ -263,9 +259,7 @@ public class WaveletCodec
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int resolutionX = buffer.getInt();
@@ -290,9 +284,7 @@ public class WaveletCodec
     {
         if (buffer == null)
         {
-            String message = Logging.getMessage("nullValue.ByteBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         int resolutionX = buffer.getInt();

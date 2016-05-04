@@ -287,13 +287,13 @@ public class NITFSImageSegment extends NITFSSegment
         RPFFrameFileComponents rpfComponents = this.getRPFFrameFileComponents();
 
         if(1 != this.compressionAlgorithmID )
-            throw new NITFSRuntimeException("NITFSReader.UnsupportedCompressionAlgorithm");
+            throw new NITFSRuntimeException();
         if( ! "B".equals(this.imageMode) )
-            throw new NITFSRuntimeException("NITFSReader.UnsupportedImageMode");
+            throw new NITFSRuntimeException();
         if( 1 != rpfComponents.numOfSpectralGroups )
-            throw new NITFSRuntimeException("NITFSReader.UnsupportedNumberOfSpectralGroups.");
+            throw new NITFSRuntimeException();
         if( 12 != this.imageCodeBitLength )
-            throw new NITFSRuntimeException("NITFSReader.UnsupportedImageCodeBitLength.");
+            throw new NITFSRuntimeException();
 
 
 
@@ -370,7 +370,7 @@ public class NITFSImageSegment extends NITFSSegment
             this.parseImageDisplayParametersSubheader(buffer);
         }
         else
-            throw new NITFSRuntimeException("NITFSReader.ImageDisplayParametersSubheaderNotFound");
+            throw new NITFSRuntimeException();
 
         // [ nitf rpf compression section ]
         if(0 < componentLocationTable.getCompressionSectionSubheaderLength())
@@ -379,7 +379,7 @@ public class NITFSImageSegment extends NITFSSegment
             this.parseRPFCompressionSectionSubheader(buffer);
         }
         else
-            throw new NITFSRuntimeException("NITFSReader.RPFCompressionSectionSubheaderNotFound");
+            throw new NITFSRuntimeException();
 
         // [ nitf rpf compression lookup sub-section ]
         if(0 < componentLocationTable.getCompressionLookupSubsectionLength())
@@ -388,11 +388,11 @@ public class NITFSImageSegment extends NITFSSegment
             this.parseRPFCompressionLookupSubsection(buffer);
         }
         else
-            throw new NITFSRuntimeException("NITFSReader.RPFCompressionLookupSubsectionNotFound");
+            throw new NITFSRuntimeException();
 
         // [ nitf rpf compression parameter subsection ]
         if(0 < componentLocationTable.getCompressionParameterSubsectionLength())
-            throw new NITFSRuntimeException("NITFSReader.RPFCompressionParameterSubsectionNotImplemented");
+            throw new NITFSRuntimeException();
 
         // [ nitf rpf spatial data subsection ]
         if(0 < componentLocationTable.getSpatialDataSubsectionLength())
@@ -402,7 +402,7 @@ public class NITFSImageSegment extends NITFSSegment
             this.parseRPFSpatialDataSubsection(buffer);
         }
         else
-            throw new NITFSRuntimeException("NITFSReader.RPFSpatialDataSubsectionNotFound");
+            throw new NITFSRuntimeException();
     }
 
     private void parseRPFSpatialDataSubsection(java.nio.ByteBuffer buffer) throws NITFSRuntimeException {
@@ -471,7 +471,7 @@ public class NITFSImageSegment extends NITFSSegment
 
     private void parseImageBands(java.nio.ByteBuffer buffer) throws NITFSRuntimeException {
         if(0 == this.NBANDS)
-            throw new NITFSRuntimeException("NITFSReader.InvalidNumberOfImageBands");
+            throw new NITFSRuntimeException();
         this.imageBands = new NITFSImageBand[this.NBANDS];
         for(int i = 0 ; i < this.NBANDS; i++)
             this.imageBands[i] = new NITFSImageBand(buffer);
@@ -545,7 +545,7 @@ public class NITFSImageSegment extends NITFSSegment
         // [ nitf identification , security, structure fields]
         this.partType = NITFSUtil.getString(buffer, 2);
         if(!"IM".equals(this.partType))
-            throw new NITFSRuntimeException("NITFSReader.UnexpectedSegmentType", this.partType);
+            throw new NITFSRuntimeException(this.partType);
 
         this.imageID = NITFSUtil.getString(buffer, 10);
         boolean isSupportedFormat = false;
@@ -558,7 +558,7 @@ public class NITFSImageSegment extends NITFSSegment
             }
         }
         if(!isSupportedFormat)
-            throw new NITFSRuntimeException("NITFSReader.UnsupportedImageFormat", this.imageID);
+            throw new NITFSRuntimeException(this.imageID);
 
         this.dateTime = NITFSUtil.getString(buffer, 14);
         this.targetID = NITFSUtil.getString(buffer, 17);

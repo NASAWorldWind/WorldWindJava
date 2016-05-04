@@ -102,9 +102,7 @@ abstract public class OGCCapabilities extends AbstractXMLEventParser
     {
         if (ctx == null)
         {
-            String message = Logging.getMessage("nullValue.ParserContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XMLEventParser defaultParser = null;

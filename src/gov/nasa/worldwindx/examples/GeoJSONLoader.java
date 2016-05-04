@@ -16,7 +16,6 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 /**
  * Utility class to load data from a GeoJSON source into a layer.
@@ -44,16 +43,12 @@ public class GeoJSONLoader
     {
         if (WWUtil.isEmpty(docSource))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (layer == null)
         {
-            String message = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         GeoJSONDoc doc = null;
@@ -76,20 +71,18 @@ public class GeoJSONLoader
                     }
                     else
                     {
-                        this.handleUnrecognizedObject(o);
+                        this.handleUnrecognizedObject();
                     }
                 }
             }
             else
             {
-                this.handleUnrecognizedObject(doc.getRootObject());
+                this.handleUnrecognizedObject();
             }
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToReadGeoJSON", docSource);
-            Logging.logger().log(Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
         finally
         {
@@ -106,16 +99,12 @@ public class GeoJSONLoader
     {
         if (object == null)
         {
-            String message = Logging.getMessage("nullValue.ObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (layer == null)
         {
-            String message = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (object.isGeometry())
@@ -128,7 +117,7 @@ public class GeoJSONLoader
             this.addRenderableForFeatureCollection(object.asFeatureCollection(), layer);
 
         else
-            this.handleUnrecognizedObject(object);
+            this.handleUnrecognizedObject();
     }
 
     /**
@@ -143,9 +132,7 @@ public class GeoJSONLoader
     {
         if (WWUtil.isEmpty(docSource))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RenderableLayer layer = new RenderableLayer();
@@ -165,9 +152,7 @@ public class GeoJSONLoader
     {
         if (object == null)
         {
-            String message = Logging.getMessage("nullValue.ObjectIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RenderableLayer layer = new RenderableLayer();
@@ -176,9 +161,8 @@ public class GeoJSONLoader
         return layer;
     }
 
-    protected void handleUnrecognizedObject(Object o)
+    protected void handleUnrecognizedObject()
     {
-        Logging.logger().warning(Logging.getMessage("generic.UnrecognizedObjectType", o));
     }
 
     //**************************************************************//
@@ -209,7 +193,7 @@ public class GeoJSONLoader
             this.addRenderableForGeometryCollection(geom.asGeometryCollection(), layer, properties);
 
         else
-            this.handleUnrecognizedObject(geom);
+            this.handleUnrecognizedObject();
     }
 
     protected void addRenderableForGeometryCollection(GeoJSONGeometryCollection c, RenderableLayer layer,
@@ -228,7 +212,6 @@ public class GeoJSONLoader
     {
         if (feature.getGeometry() == null)
         {
-            Logging.logger().warning(Logging.getMessage("nullValue.GeometryIsNull"));
             return;
         }
 

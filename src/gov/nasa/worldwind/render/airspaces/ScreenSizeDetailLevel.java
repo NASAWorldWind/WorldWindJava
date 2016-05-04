@@ -8,7 +8,6 @@ package gov.nasa.worldwind.render.airspaces;
 import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.geom.Extent;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author dcollins
@@ -75,15 +74,12 @@ public class ScreenSizeDetailLevel extends AVListImpl implements DetailLevel
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (dc.getView() == null)
         {
             String message = "nullValue.DrawingContextViewIsNull";
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Extent extent = airspace.getExtent(dc);

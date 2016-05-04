@@ -28,9 +28,7 @@ public class GCPSReader
     {
         if (delimiter == null || delimiter.length() == 0)
         {
-            String message = Logging.getMessage("nullValue.DelimiterIsNullOrEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.delimiter = delimiter;
@@ -40,9 +38,7 @@ public class GCPSReader
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.io.File parent = file.getParentFile();
@@ -128,9 +124,7 @@ public class GCPSReader
             }
             catch (java.io.IOException e)
             {
-                String message = Logging.getMessage("generic.ExceptionClosingStream", stream);
-                Logging.logger().severe(message);
-            }
+                }
         }
     }
     
@@ -138,21 +132,15 @@ public class GCPSReader
     {
         if (file == null)
         {
-            String message = Logging.getMessage("nullValue.FileIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", file);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (!file.canRead())
         {
-            String message = Logging.getMessage("generic.FileNoReadPermission", file);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.io.FileReader fileReader = null;
@@ -172,9 +160,7 @@ public class GCPSReader
             }
             catch (java.io.IOException e)
             {
-                String message = Logging.getMessage("generic.ExceptionClosingStream", file);
-                Logging.logger().severe(message);
-            }
+                }
         }
     }
 
@@ -182,18 +168,13 @@ public class GCPSReader
     {
         if (path == null)
         {
-            String message = Logging.getMessage("nullValue.PathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Object streamOrException = WWIO.getFileOrResourceAsStream(path, this.getClass());
         if (streamOrException == null || streamOrException instanceof Exception)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToReadFile",
-                (streamOrException != null) ? streamOrException : path);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.io.InputStream stream = (java.io.InputStream) streamOrException;
@@ -212,9 +193,7 @@ public class GCPSReader
             }
             catch (java.io.IOException e)
             {
-                String message = Logging.getMessage("generic.ExceptionClosingStream", stream);
-                Logging.logger().severe(message);
-            }
+                }
         }
     }
 
@@ -222,15 +201,11 @@ public class GCPSReader
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.RasterControlPointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -251,15 +226,11 @@ public class GCPSReader
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.RasterControlPointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.io.BufferedReader br = new java.io.BufferedReader(reader);
@@ -271,15 +242,11 @@ public class GCPSReader
     {
         if (reader == null)
         {
-            String message = Logging.getMessage("nullValue.ReaderIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (controlPoints == null)
         {
-            String message = Logging.getMessage("nullValue.RasterControlPointListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         java.util.regex.Pattern pattern = this.createPattern();

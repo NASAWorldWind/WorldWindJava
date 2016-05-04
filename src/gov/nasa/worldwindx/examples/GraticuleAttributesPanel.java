@@ -6,7 +6,6 @@
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.layers.Earth.MGRSGraticuleLayer;
-import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -70,9 +69,7 @@ public class GraticuleAttributesPanel extends JPanel
     {
         if (value == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.lineColorPanel.setColor(value);
@@ -97,9 +94,7 @@ public class GraticuleAttributesPanel extends JPanel
     {
         if (value == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.lineStyle.setSelectedItem(value);
@@ -124,9 +119,7 @@ public class GraticuleAttributesPanel extends JPanel
     {
         if (value == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.labelColorPanel.setColor(value);
@@ -141,9 +134,7 @@ public class GraticuleAttributesPanel extends JPanel
     {
         if (value == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         setFontControls(value);
@@ -232,9 +223,7 @@ public class GraticuleAttributesPanel extends JPanel
     {
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Apply the font name.
@@ -482,9 +471,7 @@ public class GraticuleAttributesPanel extends JPanel
         {
             if (color == null)
             {
-                String message = Logging.getMessage("nullValue.ColorIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             setColorControls(color);
@@ -501,9 +488,7 @@ public class GraticuleAttributesPanel extends JPanel
         {
             if (color == null)
             {
-                String message = Logging.getMessage("nullValue.ColorIsNull");
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             this.colorChooser.setColor(color);
@@ -663,7 +648,6 @@ public class GraticuleAttributesPanel extends JPanel
         catch (Exception e)
         {
             String message = "Exception while creating icon";
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
         return icon;
     }
@@ -679,7 +663,6 @@ public class GraticuleAttributesPanel extends JPanel
         catch (Exception e)
         {
             String message = "Exception while drawing to image";
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 }

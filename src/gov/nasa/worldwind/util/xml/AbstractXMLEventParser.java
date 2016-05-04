@@ -223,9 +223,7 @@ abstract public class AbstractXMLEventParser implements XMLEventParser
     {
         if (ctx == null)
         {
-            String message = Logging.getMessage("nullValue.ParserContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         XMLEventParser parser = ctx.allocate(event);
@@ -240,16 +238,12 @@ abstract public class AbstractXMLEventParser implements XMLEventParser
     {
         if (ctx == null)
         {
-            String message = Logging.getMessage("nullValue.ParserContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (inputEvent == null)
         {
-            String message = Logging.getMessage("nullValue.EventIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try

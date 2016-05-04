@@ -108,36 +108,28 @@ public class LocalRasterServerElevationModel extends BasicElevationModel
     {
         if (params == null)
         {
-            String reason = Logging.getMessage("nullValue.ParamsIsNull");
-            String msg = Logging.getMessage("generic.CannotCreateRasterServer", reason);
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            String reason = null;
+            throw new IllegalStateException();
         }
 
         if (this.getDataFileStore() == null)
         {
-            String reason = Logging.getMessage("nullValue.FileStoreIsNull");
-            String msg = Logging.getMessage("generic.CannotCreateRasterServer", reason);
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            String reason = null;
+            throw new IllegalStateException();
         }
 
         String datasetName = params.getStringValue(AVKey.DATASET_NAME);
         if (WWUtil.isEmpty(datasetName))
         {
-            String reason = Logging.getMessage("generic.MissingRequiredParameter", AVKey.DATASET_NAME);
-            String msg = Logging.getMessage("generic.CannotCreateRasterServer", reason);
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            String reason = null;
+            throw new IllegalStateException();
         }
 
         String dataCacheName = params.getStringValue(AVKey.DATA_CACHE_NAME);
         if (WWUtil.isEmpty(dataCacheName))
         {
-            String reason = Logging.getMessage("generic.MissingRequiredParameter", AVKey.DATA_CACHE_NAME);
-            String msg = Logging.getMessage("generic.CannotCreateRasterServer", reason);
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            String reason = null;
+            throw new IllegalStateException();
         }
 
         String rasterServerConfigFilename = dataCacheName + File.separator + datasetName + ".RasterServer.xml";
@@ -145,10 +137,8 @@ public class LocalRasterServerElevationModel extends BasicElevationModel
         final URL rasterServerFileURL = this.getDataFileStore().findFile(rasterServerConfigFilename, false);
         if (WWUtil.isEmpty(rasterServerFileURL))
         {
-            String reason = Logging.getMessage("Configuration.ConfigNotFound", rasterServerConfigFilename);
-            String msg = Logging.getMessage("generic.CannotCreateRasterServer", reason);
-            Logging.logger().severe(msg);
-            throw new IllegalStateException(msg);
+            String reason = null;
+            throw new IllegalStateException();
         }
 
         final AVList rasterServerParams = params.copy();

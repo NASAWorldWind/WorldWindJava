@@ -8,7 +8,6 @@ package gov.nasa.worldwindx.applications.sar.tracks;
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.formats.gpx.GpxReader;
 import gov.nasa.worldwind.tracks.Track;
-import gov.nasa.worldwind.util.Logging;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -39,14 +38,10 @@ public class GPXTrackReader extends AbstractTrackReader
         }
         catch (ParserConfigurationException e)
         {
-            String message = Logging.getMessage("XML.ParserConfigurationException");
-            Logging.logger().finest(message);
             throw new WWRuntimeException(e);
         }
         catch (SAXException e)
         {
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseXml", inputStream);
-            Logging.logger().severe(message);
             throw new WWRuntimeException(e);
         }
     }

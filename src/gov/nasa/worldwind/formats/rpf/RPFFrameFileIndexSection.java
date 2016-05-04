@@ -102,7 +102,7 @@ public class RPFFrameFileIndexSection
                 if (pathnames.containsKey(offset))
                     rec.setPathname(pathnames.get(offset));
                 else
-                    throw new NITFSRuntimeException("NITFSReader.CorrespondingPathnameWasNotFound");
+                    throw new NITFSRuntimeException();
             }
         }
     }

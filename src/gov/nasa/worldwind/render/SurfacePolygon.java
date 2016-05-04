@@ -111,9 +111,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setOuterBoundary(iterable);
@@ -137,9 +135,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
 
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setOuterBoundary(iterable);
@@ -164,9 +160,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.setOuterBoundary(iterable);
@@ -181,9 +175,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.boundaries.size() > 0)
@@ -198,9 +190,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
     {
         if (iterable == null)
         {
-            String message = Logging.getMessage("nullValue.IterableIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.boundaries.add(iterable);
@@ -252,16 +242,12 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
 
         if (texCoords == null)
         {
-            String message = Logging.getMessage("generic.ListIsEmpty");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (texCoordCount < 3 || texCoords.length < 2 * texCoordCount)
         {
-            String message = Logging.getMessage("generic.InsufficientPositions");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.explicitTexture = new BasicWWTexture(imageSource, true);
@@ -303,8 +289,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
 
             if (shapeData == null)
             {
-                String msg = Logging.getMessage("generic.ExceptionWhileTessellating", this);
-                dc.addRenderingException(new WWRuntimeException(msg));
+                    dc.addRenderingException(new WWRuntimeException());
                 this.handleUnsuccessfulInteriorTessellation(dc); // clears boundaries, preventing repeat attempts
                 return;
             }
@@ -645,16 +630,11 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
         }
         catch (Exception e)
         {
-            String msg = Logging.getMessage("generic.ExceptionWhileTessellating", e.getMessage());
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             return null;
         }
 
         if (tessCallback.getError() != 0)
         {
-            String msg = Logging.getMessage("generic.ExceptionWhileTessellating",
-                GLUTessellatorSupport.convertGLUTessErrorToString(tessCallback.getError()));
-            Logging.logger().log(java.util.logging.Level.SEVERE, msg);
             return null;
         }
 
@@ -872,9 +852,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         xmlWriter.writeStartElement("Placemark");

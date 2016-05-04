@@ -77,19 +77,18 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
             String message;
             if (null != source)
             {
-                message = Logging.getMessage("generic.UnrecognizedSourceType", source.getClass().getName());
+                message = null;
             }
             else
             {
-                message = Logging.getMessage("nullValue.SourceIsNull");
+                message = null;
             }
 
             if (!quickReadingMode)
             {
-                Logging.logger().finest(message);
             }
 
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.srcFile = file;
@@ -106,13 +105,12 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
         {
             String message = GDALUtils.getErrorMessage();
             if( WWUtil.isEmpty(message) )
-                message = Logging.getMessage("nullValue.DataSetIsNull");
+                message = null;
 
             if (!quickReadingMode)
             {
-                Logging.logger().severe(message);
             }
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.init(ds, quickReadingMode);
@@ -131,9 +129,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
     {
         if (null == sector)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (!this.hasKey(AVKey.COORDINATE_SYSTEM)
@@ -179,9 +175,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
             String error = GDALUtils.getErrorMessage();
             if (error != null)
             {
-                String message = Logging.getMessage("gdal.InternalError", error);
-                Logging.logger().severe(message);
-//                throw new WWRuntimeException( message );
+                    //                throw new WWRuntimeException( message );
             }
 
             if (null != this.srs)
@@ -192,9 +186,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
             error = GDALUtils.getErrorMessage();
             if (error != null)
             {
-                String message = Logging.getMessage("gdal.InternalError", error);
-                Logging.logger().severe(message);
-//                throw new WWRuntimeException( message );
+                    //                throw new WWRuntimeException( message );
             }
 
             this.srs = this.readSpatialReference(this.dsVRT);
@@ -205,9 +197,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
     {
         if (null == ds)
         {
-            String message = Logging.getMessage("nullValue.DataSetIsNull");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         String proj = ds.GetProjectionRef();
@@ -237,9 +227,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
             }
             catch (Exception e)
             {
-                String message = Logging.getMessage("generic.UnknownProjection", proj);
-                Logging.logger().severe(message);
-            }
+                }
         }
 
         SpatialReference srs = null;
@@ -264,9 +252,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
 
         if (null == ds)
         {
-            String message = Logging.getMessage("nullValue.DataSetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.init(ds, false);
@@ -349,14 +335,11 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
                 }
                 else
                 {
-                    String message = Logging.getMessage("gdal.InternalError", GDALUtils.getErrorMessage());
-                    Logging.logger().severe(message);
-                    throw new WWRuntimeException(message);
+                            throw new WWRuntimeException();
                 }
             }
             catch (Exception e)
             {
-                Logging.logger().log(java.util.logging.Level.SEVERE, e.getMessage(), e);
             }
         }
     }
@@ -370,9 +353,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
     {
         if (canvas == null)
         {
-            String message = Logging.getMessage("nullValue.DestinationIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.doDrawOnTo(canvas);
@@ -389,9 +370,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
             if ( null == imageSector || null == canvasSector || !this.intersects(canvasSector)
                 || null == (overlap = imageSector.intersection(canvasSector)))
             {
-                String msg = Logging.getMessage("generic.SectorRequestedOutsideCoverageArea", canvasSector, imageSector);
-                Logging.logger().finest(msg);
-                return;
+                    return;
             }
 
             // Compute the region of the destination raster to be be clipped by the specified clipping sector. If no
@@ -417,12 +396,10 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
         }
         catch (WWRuntimeException wwe)
         {
-            Logging.logger().severe(wwe.getMessage());
         }
         catch (Exception e)
         {
             String message = this.composeExceptionReason(e);
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
@@ -466,16 +443,12 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
     {
         if (width <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Driver drvMem = gdal.GetDriverByName("MEM");
@@ -515,27 +488,19 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
     {
         if (reqWidth <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", reqWidth);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (reqHeight <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", reqHeight);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (reqSector == null)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (null == this.dsVRT)
         {
-            String message = Logging.getMessage("nullValue.DataSetIsNull");
-            Logging.logger().severe(message);
-            throw new WWRuntimeException(message);
+            throw new WWRuntimeException();
         }
 
         if (null == this.area)
@@ -546,9 +511,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
         Sector extent = this.getSector();
         if (!this.intersects(reqSector))
         {
-            String msg = Logging.getMessage("generic.SectorRequestedOutsideCoverageArea", reqSector, extent);
-            Logging.logger().finest(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         Object cs = this.getValue(AVKey.COORDINATE_SYSTEM);
@@ -556,8 +519,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
             || (!AVKey.COORDINATE_SYSTEM_GEOGRAPHIC.equals(cs) && !AVKey.COORDINATE_SYSTEM_PROJECTED.equals(cs)))
         {
             String msg = (null == cs) ? "generic.UnspecifiedCoordinateSystem" : "generic.UnsupportedCoordinateSystem";
-            String reason = Logging.getMessage(msg, cs);
-            Logging.logger().finest(Logging.getMessage("generic.CannotCreateRaster", reason));
+            String reason = null;
             return this.dsVRT;
         }
 
@@ -653,8 +615,6 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
                 return this.dsVRT;
             }
 
-            String msg = Logging.getMessage("gdal.UseOverviewRaster", srcWidth, srcHeight, reqWidth, reqHeight);
-            Logging.logger().finest(msg);
 
             Dataset ds = this.buildNonNorthUpDatasetFromOverview(bestOverviewIdx, srcWidth, srcHeight);
 
@@ -670,8 +630,6 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
         }
         else
         {
-            String msg = Logging.getMessage("gdal.UseOverviewRaster", srcWidth, srcHeight, reqWidth, reqHeight);
-            Logging.logger().finest(msg);
         }
 
         return this.buildNorthUpDatasetFromOverview(reqSector, reqWidth, reqHeight, bestOverviewIdx, srcWidth,
@@ -684,9 +642,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
         GDAL.Area cropArea = this.area.intersection(new GDAL.Area(this.srs, reqSector).getBoundingArea());
         if (null == cropArea)
         {
-            String msg = Logging.getMessage("generic.SectorRequestedOutsideCoverageArea", reqSector, this.area);
-            Logging.logger().finest(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         java.awt.geom.AffineTransform geoToRaster = this.area.computeGeoToRasterTransform(srcWidth, srcHeight);
@@ -878,16 +834,12 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
     {
         if (width <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidWidth", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (height <= 0)
         {
-            String message = Logging.getMessage("generic.InvalidHeight", height);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Driver drvMem = gdal.GetDriverByName("MEM");
@@ -1098,11 +1050,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
                 srcDS = this.getBestSuitedDataset(roiWidth, roiHeight, roiSector);
                 if (srcDS == this.dsVRT)
                 {
-                    String message = Logging.getMessage("gdal.UseFullResolutionRaster", this.getWidth(),
-                        this.getHeight(),
-                        roiWidth, roiHeight);
-                    Logging.logger().finest(message);
-                }
+                        }
 
                 cropTime = System.currentTimeMillis() - start;
 
@@ -1138,9 +1086,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
                 String error = GDALUtils.getErrorMessage();
                 if (error != null)
                 {
-                    String message = Logging.getMessage("gdal.InternalError", error);
-                    Logging.logger().severe(message);
-//            throw new WWRuntimeException( message );
+                            //            throw new WWRuntimeException( message );
                 }
 
                 if (null != maskDS)
@@ -1151,11 +1097,6 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
                 start = System.currentTimeMillis();
                 raster = GDALUtils.composeDataRaster(destDS, roiParams);
                 long composeTime = System.currentTimeMillis() - start;
-
-                Logging.logger().finest("doGetSubRaster(): [" + roiWidth + "x" + roiHeight + "] - "
-                    + " totalTime = " + (System.currentTimeMillis() - totalTime)
-                    + " msec { Cropping = " + cropTime + " msec, Reprojection = " + projTime
-                    + " msec, Masking = " + maskTime + " msec, Composing = " + composeTime + " msec }");
             }
             finally
             {

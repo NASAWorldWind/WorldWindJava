@@ -12,7 +12,6 @@ import gov.nasa.worldwind.geom.coords.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
 import java.awt.*;
@@ -45,7 +44,7 @@ public class UTMBaseGraticuleLayer extends AbstractGraticuleLayer
         createUTMRenderables();
         initRenderingParams();
         this.setPickEnabled(false);
-        this.setName(Logging.getMessage("layers.Earth.UTMGraticule.Name"));
+        this.setName(null);
     }
 
     /**
@@ -89,9 +88,7 @@ public class UTMBaseGraticuleLayer extends AbstractGraticuleLayer
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getUTMRenderingParams().setLineColor(color);
@@ -139,9 +136,7 @@ public class UTMBaseGraticuleLayer extends AbstractGraticuleLayer
     {
         if (lineStyle == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getUTMRenderingParams().setLineStyle(lineStyle);
@@ -188,9 +183,7 @@ public class UTMBaseGraticuleLayer extends AbstractGraticuleLayer
     {
         if (color == null)
         {
-            String message = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getUTMRenderingParams().setLabelColor(color);
@@ -217,9 +210,7 @@ public class UTMBaseGraticuleLayer extends AbstractGraticuleLayer
     {
         if (font == null)
         {
-            String message = Logging.getMessage("nullValue.FontIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getUTMRenderingParams().setLabelFont(font);
@@ -256,9 +247,7 @@ public class UTMBaseGraticuleLayer extends AbstractGraticuleLayer
     {
         if (dc == null)
         {
-            String message = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         Sector vs = dc.getVisibleSector();
         OrbitView view = (OrbitView) dc.getView();

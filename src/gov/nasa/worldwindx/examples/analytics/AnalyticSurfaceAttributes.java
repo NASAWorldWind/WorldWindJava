@@ -6,7 +6,6 @@
 package gov.nasa.worldwindx.examples.analytics;
 
 import gov.nasa.worldwind.render.Material;
-import gov.nasa.worldwind.util.Logging;
 
 /**
  * @author dcollins
@@ -28,9 +27,7 @@ public class AnalyticSurfaceAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.interiorMaterial = material;
@@ -46,9 +43,7 @@ public class AnalyticSurfaceAttributes
     {
         if (attributes == null)
         {
-            String message = Logging.getMessage("nullValue.AttributesIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.drawInterior = attributes.isDrawInterior();
@@ -106,9 +101,7 @@ public class AnalyticSurfaceAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.interiorMaterial = material;
@@ -123,9 +116,7 @@ public class AnalyticSurfaceAttributes
     {
         if (material == null)
         {
-            String message = Logging.getMessage("nullValue.MaterialIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlineMaterial = material;
@@ -140,9 +131,7 @@ public class AnalyticSurfaceAttributes
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.interiorOpacity = opacity;
@@ -157,9 +146,7 @@ public class AnalyticSurfaceAttributes
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlineOpacity = opacity;
@@ -174,9 +161,7 @@ public class AnalyticSurfaceAttributes
     {
         if (opacity < 0 || opacity > 1)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.shadowOpacity = opacity;
@@ -191,9 +176,7 @@ public class AnalyticSurfaceAttributes
     {
         if (width < 0)
         {
-            String message = Logging.getMessage("Geom.LineWidthInvalid", width);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.outlineWidth = width;

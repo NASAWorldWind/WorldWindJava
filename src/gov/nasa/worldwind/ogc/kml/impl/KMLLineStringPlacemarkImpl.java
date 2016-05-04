@@ -39,16 +39,12 @@ public class KMLLineStringPlacemarkImpl extends Path implements KMLRenderable
 
         if (tc == null)
         {
-            String msg = Logging.getMessage("nullValue.TraversalContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (placemark == null)
         {
-            String msg = Logging.getMessage("nullValue.ParentIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.parent = placemark;

@@ -52,9 +52,7 @@ public class DBaseFile extends AVListImpl
     {
         if (source == null || WWUtil.isEmpty(source))
         {
-            String message = Logging.getMessage("nullValue.SourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -71,17 +69,12 @@ public class DBaseFile extends AVListImpl
                 this.initializeFromPath((String) source);
             else
             {
-                String message = Logging.getMessage("generic.UnrecognizedSourceType", source);
-                Logging.logger().severe(message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("SHP.ExceptionAttemptingToReadDBase",
-                this.getStringValue(AVKey.DISPLAY_NAME));
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -89,9 +82,7 @@ public class DBaseFile extends AVListImpl
     {
         if (is == null)
         {
-            String message = Logging.getMessage("nullValue.InputStreamIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         try
@@ -101,10 +92,7 @@ public class DBaseFile extends AVListImpl
         }
         catch (Exception e)
         {
-            String message = Logging.getMessage("SHP.ExceptionAttemptingToReadDBase",
-                this.getStringValue(AVKey.DISPLAY_NAME));
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -147,16 +135,12 @@ public class DBaseFile extends AVListImpl
     {
         if (!this.open)
         {
-            String message = Logging.getMessage("SHP.DBaseFileClosed", this.getStringValue(AVKey.DISPLAY_NAME));
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (this.getNumberOfRecords() <= 0 || this.numRecordsRead >= this.getNumberOfRecords())
         {
-            String message = Logging.getMessage("SHP.NoRecords", this.getStringValue(AVKey.DISPLAY_NAME));
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         try
@@ -165,10 +149,7 @@ public class DBaseFile extends AVListImpl
         }
         catch (IOException e)
         {
-            String message = Logging.getMessage("SHP.ExceptionAttemptingToReadDBaseRecord",
-                this.getStringValue(AVKey.DISPLAY_NAME));
-            Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
-            throw new WWRuntimeException(message, e);
+            throw new WWRuntimeException(e);
         }
     }
 
@@ -192,9 +173,7 @@ public class DBaseFile extends AVListImpl
     {
         if (!file.exists())
         {
-            String message = Logging.getMessage("generic.FileNotFound", file.getPath());
-            Logging.logger().severe(message);
-            throw new FileNotFoundException(message);
+            throw new FileNotFoundException();
         }
 
         // DBase record reading performs about 200% better when the FileInputStream is wrapped in a BufferedInputStream.
@@ -211,7 +190,7 @@ public class DBaseFile extends AVListImpl
         String message = this.validateURLConnection(connection, DBASE_CONTENT_TYPES);
         if (message != null)
         {
-            throw new IOException(message);
+            throw new IOException();
         }
 
         this.channel = Channels.newChannel(WWIO.getBufferedInputStream(connection.getInputStream()));
@@ -240,9 +219,7 @@ public class DBaseFile extends AVListImpl
             return;
         }
 
-        String message = Logging.getMessage("generic.UnrecognizedSourceType", path);
-        Logging.logger().severe(message);
-        throw new IllegalArgumentException(message);
+        throw new IllegalArgumentException();
     }
 
     protected void initialize() throws IOException
@@ -259,13 +236,12 @@ public class DBaseFile extends AVListImpl
             if (connection instanceof HttpURLConnection &&
                 ((HttpURLConnection) connection).getResponseCode() != HttpURLConnection.HTTP_OK)
             {
-                return Logging.getMessage("HTTP.ResponseCode", ((HttpURLConnection) connection).getResponseCode(),
-                    connection.getURL());
+                return null;
             }
         }
         catch (Exception e)
         {
-            return Logging.getMessage("URLRetriever.ErrorOpeningConnection", connection.getURL());
+            return null;
         }
 
         String contentType = connection.getContentType();
@@ -279,7 +255,7 @@ public class DBaseFile extends AVListImpl
         }
 
         // Return an exception if the content type does not match the expected type.
-        return Logging.getMessage("HTTP.UnexpectedContentType", contentType, Arrays.toString(acceptedContentTypes));
+        return null;
     }
 
     //**************************************************************//
@@ -302,7 +278,7 @@ public class DBaseFile extends AVListImpl
         if (buffer.remaining() < FIXED_HEADER_LENGTH)
         {
             // Let the caller catch and log the message.
-            throw new WWRuntimeException(Logging.getMessage("generic.InvalidFileLength", buffer.remaining()));
+            throw new WWRuntimeException();
         }
 
         return this.readHeaderFromBuffer(buffer);
@@ -329,7 +305,7 @@ public class DBaseFile extends AVListImpl
         if (fileCode > 5)
         {
             // Let the caller catch and log the message.
-            throw new WWUnrecognizedException(Logging.getMessage("SHP.UnrecognizedDBaseFile", fileCode));
+            throw new WWUnrecognizedException();
         }
 
         // Last update date

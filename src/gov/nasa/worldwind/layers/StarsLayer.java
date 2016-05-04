@@ -69,9 +69,7 @@ public class StarsLayer extends RenderableLayer
     {
         if (WWUtil.isEmpty(starsFileName))
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.initialize(starsFileName, radius);
@@ -120,9 +118,7 @@ public class StarsLayer extends RenderableLayer
     {
         if (WWUtil.isEmpty(fileName))
         {
-            String message = Logging.getMessage("nullValue.FilePathIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.starsFileName = fileName;
@@ -148,9 +144,7 @@ public class StarsLayer extends RenderableLayer
     {
         if (offset == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.latitudeOffset = offset;
     }
@@ -176,9 +170,7 @@ public class StarsLayer extends RenderableLayer
     {
         if (offset == null)
         {
-            String message = Logging.getMessage("nullValue.AngleIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.longitudeOffset = offset;
@@ -310,9 +302,7 @@ public class StarsLayer extends RenderableLayer
                 InputStream starsStream = WWIO.openFileOrResourceStream(this.starsFileName, this.getClass());
                 if (starsStream == null)
                 {
-                    String message = Logging.getMessage("layers.StarLayer.CannotReadStarFile");
-                    Logging.logger().severe(message);
-                    return;
+                            return;
                 }
 
                 //Read in the binary buffer
@@ -329,7 +319,6 @@ public class StarsLayer extends RenderableLayer
             catch (IOException e)
             {
                 String message = "IOException while loading stars data from " + this.starsFileName;
-                Logging.logger().severe(message);
             }
         }
         else
@@ -341,7 +330,6 @@ public class StarsLayer extends RenderableLayer
         if (byteBuffer == null)
         {
             String message = "IOException while loading stars data from " + this.starsFileName;
-            Logging.logger().severe(message);
             return;
         }
 
@@ -382,6 +370,6 @@ public class StarsLayer extends RenderableLayer
     @Override
     public String toString()
     {
-        return Logging.getMessage("layers.Earth.StarsLayer.Name");
+        return null;
     }
 }

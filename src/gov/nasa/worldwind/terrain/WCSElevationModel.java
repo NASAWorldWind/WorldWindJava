@@ -53,9 +53,7 @@ public class WCSElevationModel extends BasicElevationModel
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", restorableStateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         this.doRestoreState(rs, null);
@@ -65,9 +63,7 @@ public class WCSElevationModel extends BasicElevationModel
     {
         if (domElement == null)
         {
-            String message = Logging.getMessage("nullValue.DocumentIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
@@ -86,24 +82,18 @@ public class WCSElevationModel extends BasicElevationModel
     {
         if (caps == null)
         {
-            String message = Logging.getMessage("nullValue.WCSCapabilities");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (params == null)
         {
-            String message = Logging.getMessage("nullValue.ElevationModelConfigParams");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         WCS100DescribeCoverage coverage = (WCS100DescribeCoverage) params.getValue(AVKey.DOCUMENT);
         if (coverage == null)
         {
-            String message = Logging.getMessage("nullValue.WCSDescribeCoverage");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         getWCSElevationModelConfigParams(caps, coverage, params);
@@ -187,39 +177,32 @@ public class WCSElevationModel extends BasicElevationModel
         // Ensure that we found all the necessary information.
         if (params.getStringValue(AVKey.DATASET_NAME) == null)
         {
-            Logging.logger().warning(Logging.getMessage("WCS.NoCoverageName"));
-            throw new WWRuntimeException(Logging.getMessage("WCS.NoCoverageName"));
+            throw new WWRuntimeException();
         }
 
         if (params.getStringValue(AVKey.SERVICE) == null)
         {
-            Logging.logger().warning(Logging.getMessage("WCS.NoGetCoverageURL"));
-            throw new WWRuntimeException(Logging.getMessage("WCS.NoGetCoverageURL"));
+            throw new WWRuntimeException();
         }
 
         if (params.getStringValue(AVKey.DATA_CACHE_NAME) == null)
         {
-            Logging.logger().warning(Logging.getMessage("nullValue.DataCacheIsNull"));
-            throw new WWRuntimeException(Logging.getMessage("nullValue.DataCacheIsNull"));
+            throw new WWRuntimeException();
         }
 
         if (params.getStringValue(AVKey.IMAGE_FORMAT) == null)
         {
-            Logging.logger().severe("WCS.NoImageFormats");
-            throw new WWRuntimeException(Logging.getMessage("WCS.NoImageFormats"));
+            throw new WWRuntimeException();
         }
 
         if (params.getValue(AVKey.SECTOR) == null)
         {
-            Logging.logger().severe("WCS.NoLonLatEnvelope");
-            throw new WWRuntimeException(Logging.getMessage("WCS.NoLonLatEnvelope"));
+            throw new WWRuntimeException();
         }
 
         if (params.getStringValue(AVKey.COORDINATE_SYSTEM) == null)
         {
-            String msg = Logging.getMessage("WCS.RequiredCRSNotSupported", "EPSG:4326");
-            Logging.logger().severe(msg);
-            throw new WWRuntimeException(msg);
+            throw new WWRuntimeException();
         }
 
         return params;
@@ -311,30 +294,22 @@ public class WCSElevationModel extends BasicElevationModel
     {
         if (sector == null)
         {
-            String msg = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (latlons == null)
         {
-            String msg = Logging.getMessage("nullValue.LatLonListIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer == null)
         {
-            String msg = Logging.getMessage("nullValue.ElevationsBufferIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         if (buffer.length < latlons.size() || tileWidth > latlons.size())
         {
-            String msg = Logging.getMessage("ElevationModel.ElevationsBufferTooSmall", latlons.size());
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         WMSBasicElevationModel.ElevationCompositionTile tile = new WMSBasicElevationModel.ElevationCompositionTile(
@@ -394,9 +369,7 @@ public class WCSElevationModel extends BasicElevationModel
     {
         if (stateInXml == null)
         {
-            String message = Logging.getMessage("nullValue.StringIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         RestorableSupport rs;
@@ -407,9 +380,7 @@ public class WCSElevationModel extends BasicElevationModel
         catch (Exception e)
         {
             // Parsing the document specified by stateInXml failed.
-            String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message, e);
+            throw new IllegalArgumentException(e);
         }
 
         AVList params = new AVListImpl();

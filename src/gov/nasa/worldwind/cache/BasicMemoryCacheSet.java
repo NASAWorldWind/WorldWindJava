@@ -29,9 +29,7 @@ public class BasicMemoryCacheSet implements MemoryCacheSet
 
         if (cache == null)
         {
-            String message = Logging.getMessage("MemoryCacheSet.CacheDoesNotExist",  cacheKey);
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         return cache;
@@ -46,16 +44,12 @@ public class BasicMemoryCacheSet implements MemoryCacheSet
     {
         if (this.containsCache(key))
         {
-            String message = Logging.getMessage("MemoryCacheSet.CacheAlreadyExists");
-            Logging.logger().fine(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         if (cache == null)
         {
-            String message = Logging.getMessage("nullValue.CacheIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.caches.put(key, cache);

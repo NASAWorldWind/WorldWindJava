@@ -242,7 +242,7 @@ public class RPFLocationSection
             this.componentAggregateLength = NITFSUtil.getUInt(buffer);
 
             if (this.numOfComponentLocationRecords < 2)
-                throw new NITFSRuntimeException("NITFSReader:InvalidNumberOfComponentLocationRecords");
+                throw new NITFSRuntimeException();
 
             for (int i = 0; i < this.numOfComponentLocationRecords; i++)
             {

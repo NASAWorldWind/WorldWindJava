@@ -11,7 +11,6 @@ import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.ScreenAnnotation;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
 import javax.swing.*;
@@ -57,15 +56,11 @@ public class ViewControlsSelectListener implements SelectListener
     {
         if (wwd == null)
         {
-            String msg = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         if (layer == null)
         {
-            String msg = Logging.getMessage("nullValue.LayerIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.wwd = wwd;
@@ -94,9 +89,7 @@ public class ViewControlsSelectListener implements SelectListener
     {
         if (delay <= 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", delay);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.repeatTimer.setDelay(delay);
     }
@@ -186,9 +179,7 @@ public class ViewControlsSelectListener implements SelectListener
     {
         if (value < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", value);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.pitchStep = value;
     }
@@ -215,9 +206,7 @@ public class ViewControlsSelectListener implements SelectListener
     {
         if (value < 1)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", value);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.fovStep = value;
     }
@@ -244,9 +233,7 @@ public class ViewControlsSelectListener implements SelectListener
     {
         if (value < 0)
         {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", value);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         this.veStep = value;
     }

@@ -260,9 +260,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     {
         if (size == null)
         {
-            String msg = Logging.getMessage("nullValue.SizeIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
 
         this.size = size;
@@ -293,9 +291,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     {
         if (imageSource == null)
         {
-            String message = Logging.getMessage("nullValue.ImageSource");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.imageSource = imageSource;
@@ -373,9 +369,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     {
         if (opacity < 0)
         {
-            String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.opacity = opacity;
@@ -395,9 +389,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.computeOffsets(dc);
         return this.width;
@@ -417,9 +409,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     {
         if (dc == null)
         {
-            String msg = Logging.getMessage("nullValue.DrawContextIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException();
         }
         this.computeOffsets(dc);
         return this.height;
@@ -729,16 +719,12 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     {
         if (mimeType == null)
         {
-            String message = Logging.getMessage("nullValue.Format");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (output == null)
         {
-            String message = Logging.getMessage("nullValue.OutputBufferIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
@@ -749,15 +735,12 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
             }
             catch (XMLStreamException e)
             {
-                Logging.logger().throwing(getClass().getName(), "export", e);
                 throw new IOException(e);
             }
         }
         else
         {
-            String message = Logging.getMessage("Export.UnsupportedFormat", mimeType);
-            Logging.logger().warning(message);
-            throw new UnsupportedOperationException(message);
+            throw new UnsupportedOperationException();
         }
     }
 
@@ -796,9 +779,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
 
         if (xmlWriter == null)
         {
-            String message = Logging.getMessage("Export.UnsupportedOutputObject");
-            Logging.logger().warning(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         xmlWriter.writeStartElement("ScreenOverlay");

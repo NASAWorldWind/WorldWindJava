@@ -264,9 +264,7 @@ public class SARSegmentPlane extends WWObjectImpl
     {
         if (this.wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         return computeAltitudesToFitPositions(this.wwd, this.segmentPlane, positions, this.modifiedSinceLastArm);
@@ -276,9 +274,7 @@ public class SARSegmentPlane extends WWObjectImpl
     {
         if (this.wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         return computeLocationsToFitPositions(this.wwd, this.segmentPlane, position1, position2,
@@ -289,16 +285,12 @@ public class SARSegmentPlane extends WWObjectImpl
     {
         if (line == null)
         {
-            String message = Logging.getMessage("nullValue.LineIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         Globe globe = this.wwd.getModel().getGlobe();
@@ -316,22 +308,16 @@ public class SARSegmentPlane extends WWObjectImpl
     {
         if (key == null)
         {
-            String message = Logging.getMessage("nullValue.KeyIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
         if (point == null)
         {
-            String message = Logging.getMessage("nullValue.PointIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (this.wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalStateException(message);
+            throw new IllegalStateException();
         }
 
         View view = this.wwd.getView();
@@ -857,17 +843,13 @@ public class SARSegmentPlane extends WWObjectImpl
     {
         if (wwd == null)
         {
-            String message = Logging.getMessage("nullValue.WorldWindow");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         Globe globe = wwd.getModel().getGlobe();
         if (globe == null)
         {
-            String message = Logging.getMessage("nullValue.GlobeIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         SectorGeometryList sgl = wwd.getSceneController().getTerrain();

@@ -7,7 +7,6 @@ package gov.nasa.worldwind.util.layertree;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.render.Offset;
-import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.tree.*;
 
 /**
@@ -53,9 +52,7 @@ public class LayerTree extends BasicTree
     {
         if (model == null)
         {
-            String message = Logging.getMessage("nullValue.ModelIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.initialize(model, null);
@@ -73,9 +70,7 @@ public class LayerTree extends BasicTree
     {
         if (offset == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.initialize(null, offset);
@@ -94,16 +89,12 @@ public class LayerTree extends BasicTree
     {
         if (model == null)
         {
-            String message = Logging.getMessage("nullValue.ModelIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (offset == null)
         {
-            String message = Logging.getMessage("nullValue.OffsetIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.initialize(model, offset);

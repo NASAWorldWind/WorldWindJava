@@ -49,16 +49,12 @@ public class MipMappedBufferedImageRaster extends BufferedImageRaster
 
         if (null == sector)
         {
-            String message = Logging.getMessage("nullValue.SectorIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         if (null == images || images.length == 0)
         {
-            String message = Logging.getMessage("nullValue.ArrayIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.levelRasters = new BufferedImageRaster[images.length];

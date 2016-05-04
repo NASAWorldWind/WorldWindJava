@@ -6,10 +6,7 @@
 
 package gov.nasa.worldwind.geom;
 
-import gov.nasa.worldwind.util.Logging;
-
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * @author tag
@@ -33,9 +30,7 @@ public class GeoQuad
     {
         if (corners == null)
         {
-            String message = Logging.getMessage("nullValue.LocationsListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         // Count the corners and check for nulls
@@ -45,9 +40,7 @@ public class GeoQuad
         {
             if (c == null)
             {
-                String message = Logging.getMessage("nullValue.LocationInListIsNull");
-                Logging.logger().log(Level.SEVERE, message);
-                throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException();
             }
 
             if (++numCorners > 3)
@@ -56,9 +49,7 @@ public class GeoQuad
 
         if (numCorners < 4)
         {
-            String message = Logging.getMessage("nullValue.LocationInListIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException();
         }
 
         this.sw = iter.next();
