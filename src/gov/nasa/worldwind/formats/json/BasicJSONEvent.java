@@ -6,7 +6,7 @@
 package gov.nasa.worldwind.formats.json;
 
 import gov.nasa.worldwind.util.Logging;
-import org.codehaus.jackson.*;
+import gov.nasa.worldwind.shaded.org.codehaus.jackson.*;
 
 import java.io.IOException;
 
