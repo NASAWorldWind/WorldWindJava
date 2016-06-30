@@ -367,7 +367,8 @@ public class WorldWindowGLJPanel extends GLJPanel implements WorldWindow, Proper
     public synchronized void addPropertyChangeListener(PropertyChangeListener listener)
     {
         super.addPropertyChangeListener(listener);
-        this.wwd.addPropertyChangeListener(listener);
+        if(wwd!=null)
+            this.wwd.addPropertyChangeListener(listener);
     }
 
     @Override
