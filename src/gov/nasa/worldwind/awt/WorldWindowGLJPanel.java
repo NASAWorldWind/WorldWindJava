@@ -66,6 +66,7 @@ public class WorldWindowGLJPanel extends GLJPanel implements WorldWindow, Proper
         {
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
+            this.wwd.addPropertyChangeListener(this);
             this.wwd.initGpuResourceCache(WorldWindowImpl.createGpuResourceCache());
             this.createView();
             this.createDefaultInputHandler();
@@ -100,6 +101,7 @@ public class WorldWindowGLJPanel extends GLJPanel implements WorldWindow, Proper
         {
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
+            this.wwd.addPropertyChangeListener(this);
             if (shareWith != null)
                 this.wwd.initGpuResourceCache(shareWith.getGpuResourceCache());
             else
@@ -143,6 +145,7 @@ public class WorldWindowGLJPanel extends GLJPanel implements WorldWindow, Proper
         {
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
+            this.wwd.addPropertyChangeListener(this);
             if (shareWith != null)
                 this.wwd.initGpuResourceCache(shareWith.getGpuResourceCache());
             else
@@ -162,6 +165,9 @@ public class WorldWindowGLJPanel extends GLJPanel implements WorldWindow, Proper
 
     public void propertyChange(PropertyChangeEvent evt)
     {
+        if(this.wwd == evt.getSource())
+            this.firePropertyChange(evt);
+
         //noinspection StringEquality
         if (evt.getPropertyName() == WorldWind.SHUTDOWN_EVENT)
             this.shutdown();
@@ -367,29 +373,24 @@ public class WorldWindowGLJPanel extends GLJPanel implements WorldWindow, Proper
     public synchronized void addPropertyChangeListener(PropertyChangeListener listener)
     {
         super.addPropertyChangeListener(listener);
-        if (wwd != null) // defensive condition for NPE that happens when (for example) setting a swing look/feel
-            this.wwd.addPropertyChangeListener(listener);
     }
 
     @Override
     public synchronized void addPropertyChangeListener(String propertyName, PropertyChangeListener listener)
     {
         super.addPropertyChangeListener(propertyName, listener);
-        this.wwd.addPropertyChangeListener(propertyName, listener);
     }
 
     @Override
     public synchronized void removePropertyChangeListener(PropertyChangeListener listener)
     {
         super.removePropertyChangeListener(listener);
-        this.wwd.removePropertyChangeListener(listener);
     }
 
     @Override
     public synchronized void removePropertyChangeListener(String propertyName, PropertyChangeListener listener)
     {
         super.removePropertyChangeListener(listener);
-        this.wwd.removePropertyChangeListener(listener);
     }
 
     @Override
