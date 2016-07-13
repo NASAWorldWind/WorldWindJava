@@ -24,58 +24,47 @@ public class Shapefiles extends ApplicationTemplate
     {
         public AppFrame()
         {
-            // Create an object to generate random attributes.
-            final RandomShapeAttributes randomAttrs = new RandomShapeAttributes();
+            ShapefileLayerFactory factory = new ShapefileLayerFactory();
 
-            // Spawn a thread to load the shapefile.
-            Thread t = new Thread(new Runnable()
+            // Specify an attribute delegate to assign random attributes to each shapefile record.
+            final RandomShapeAttributes randomAttrs = new RandomShapeAttributes();
+            factory.setAttributeDelegate(new ShapefileRenderable.AttributeDelegate()
             {
                 @Override
-                public void run()
+                public void assignAttributes(ShapefileRecord shapefileRecord,
+                    ShapefileRenderable.Record renderableRecord)
                 {
-                    ShapefileLayerFactory factory = new ShapefileLayerFactory();
-
-                    // Specify an attribute delegate to assign attributes for each shapefile record.
-                    factory.setAttributeDelegate(new ShapefileRenderable.AttributeDelegate()
-                    {
-                        @Override
-                        public void assignAttributes(ShapefileRecord shapefileRecord,
-                            ShapefileRenderable.Record renderableRecord)
-                        {
-                            renderableRecord.setAttributes(randomAttrs.nextAttributes().asShapeAttributes());
-                        }
-                    });
-
-                    // Load the shapefile. Define the completion callback.
-                    factory.createFromShapefileSource("testData/shapefiles/TM_WORLD_BORDERS-0.3.shp",
-                        new ShapefileLayerFactory.CompletionCallback()
-                        {
-                            @Override
-                            public void completion(Object result)
-                            {
-                                final Layer layer = (Layer) result; // the result is the layer the factory created
-                                layer.setName(WWIO.getFilename(layer.getName()));
-
-                                // Add the layer to the World Window's layer list on the Event Dispatch Thread.
-                                SwingUtilities.invokeLater(new Runnable()
-                                {
-                                    @Override
-                                    public void run()
-                                    {
-                                        AppFrame.this.getWwd().getModel().getLayers().add(layer);
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void exception(Exception e)
-                            {
-                                Logging.logger().log(java.util.logging.Level.SEVERE, e.getMessage(), e);
-                            }
-                        });
+                    renderableRecord.setAttributes(randomAttrs.nextAttributes().asShapeAttributes());
                 }
             });
-            t.start();
+
+            // Load the shapefile. Define the completion callback.
+            factory.createFromShapefileSource("testData/shapefiles/TM_WORLD_BORDERS-0.3.shp",
+                new ShapefileLayerFactory.CompletionCallback()
+                {
+                    @Override
+                    public void completion(Object result)
+                    {
+                        final Layer layer = (Layer) result; // the result is the layer the factory created
+                        layer.setName(WWIO.getFilename(layer.getName()));
+
+                        // Add the layer to the World Window's layer list on the Event Dispatch Thread.
+                        SwingUtilities.invokeLater(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                AppFrame.this.getWwd().getModel().getLayers().add(layer);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void exception(Exception e)
+                    {
+                        Logging.logger().log(java.util.logging.Level.SEVERE, e.getMessage(), e);
+                    }
+                });
         }
     }
 
