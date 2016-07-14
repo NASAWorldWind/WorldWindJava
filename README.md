@@ -87,6 +87,7 @@ The upcoming features of v2.1.0 are available now through the World Wind Java da
 - Fixed WWJ-547, WorldWindowGLJPanel null pointer exception when setting Java look and feel.
 - Fixed WWJ-548, EGM96 bilinear interpolation error.
 - Fixed WWJ-549, Rhumb line floating point errors when calculating due east or west positions.
+- Fixed WWJ-550, WorldWindowGLJPanel calls wrong super class removePropertyChangeListener method.
 - Fixed an issue where AnalyticSurface returns an incorrect picked object when the altitude mode is CLAMP_TO_GROUND.
 - Fixed an issue with the accuracy of airspace shape projection on the 3D ellipsoid. The geometry for airspace shapes
   with very large dimensions are now displayed correctly. The following airspace shapes are affected: CappedCylinder,

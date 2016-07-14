@@ -390,7 +390,7 @@ public class WorldWindowGLJPanel extends GLJPanel implements WorldWindow, Proper
     @Override
     public synchronized void removePropertyChangeListener(String propertyName, PropertyChangeListener listener)
     {
-        super.removePropertyChangeListener(listener);
+        super.removePropertyChangeListener(propertyName, listener);
     }
 
     @Override
