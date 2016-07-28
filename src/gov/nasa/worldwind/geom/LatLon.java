@@ -24,6 +24,12 @@ public class LatLon
 {
     public static final LatLon ZERO = new LatLon(Angle.ZERO, Angle.ZERO);
 
+    /**
+     * A near zero threshold used in some of the rhumb line calculations where floating point calculations cause
+     * errors.
+     */
+    protected final static double NEAR_ZERO_THRESHOLD = 1e-15;
+
     public final Angle latitude;
     public final Angle longitude;
 
@@ -719,12 +725,18 @@ public class LatLon
         // Taken from http://www.movable-type.co.uk/scripts/latlong.html
         double dLat = lat2 - lat1;
         double dLon = lon2 - lon1;
-        double dPhi = Math.log(Math.tan(lat2 / 2.0 + Math.PI / 4.0) / Math.tan(lat1 / 2.0 + Math.PI / 4.0));
-        double q = dLat / dPhi;
-        if (Double.isNaN(dPhi) || Double.isNaN(q))
+
+        double q;
+        if (Math.abs(dLat) < NEAR_ZERO_THRESHOLD)
         {
             q = Math.cos(lat1);
         }
+        else
+        {
+            double dPhi = Math.log(Math.tan(lat2 / 2.0 + Math.PI / 4.0) / Math.tan(lat1 / 2.0 + Math.PI / 4.0));
+            q = dLat / dPhi;
+        }
+
         // If lonChange over 180 take shorter rhumb across 180 meridian.
         if (Math.abs(dLon) > Math.PI)
         {
@@ -811,13 +823,19 @@ public class LatLon
             return p;
 
         // Taken from http://www.movable-type.co.uk/scripts/latlong.html
-        double lat2 = lat1 + distance * Math.cos(azimuth);
-        double dPhi = Math.log(Math.tan(lat2 / 2.0 + Math.PI / 4.0) / Math.tan(lat1 / 2.0 + Math.PI / 4.0));
-        double q = (lat2 - lat1) / dPhi;
-        if (Double.isNaN(dPhi) || Double.isNaN(q) || Double.isInfinite(q))
+        double dLat = distance * Math.cos(azimuth);
+        double lat2 = lat1 + dLat;
+        double q;
+        if (Math.abs(dLat) < NEAR_ZERO_THRESHOLD)
         {
             q = Math.cos(lat1);
         }
+        else
+        {
+            double dPhi = Math.log(Math.tan(lat2 / 2.0 + Math.PI / 4.0) / Math.tan(lat1 / 2.0 + Math.PI / 4.0));
+            q = (lat2 - lat1) / dPhi;
+        }
+
         double dLon = distance * Math.sin(azimuth) / q;
         // Handle latitude passing over either pole.
         if (Math.abs(lat2) > Math.PI / 2.0)

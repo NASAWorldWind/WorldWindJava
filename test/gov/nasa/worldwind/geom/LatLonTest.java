@@ -653,8 +653,8 @@ public class LatLonTest
             double azimuthRadians = Math.toRadians(90.0);
             double distanceRadians = Math.toRadians(360.0);
             LatLon end = LatLon.rhumbEndPosition(begin, azimuthRadians, distanceRadians);
-            assertEquals("Trivial Azimuth B (lat)", 2.204291436880279e-14, end.getLatitude().degrees, THRESHOLD);
-            assertEquals("Trivial Azimuth B (lon)", -96.67061650574995, end.getLongitude().degrees,
+            assertEquals("Trivial Azimuth B (lat)", 0.0, end.getLatitude().degrees, THRESHOLD);
+            assertEquals("Trivial Azimuth B (lon)", 0.0, end.getLongitude().degrees,
                 1e-1); // Custom threshold
         }
 
@@ -681,6 +681,24 @@ public class LatLonTest
             assertEquals("Known points B (lat)", 56.9679782407693, end.getLatitude().degrees, THRESHOLD);
             assertEquals("Known points B (lon)", 95.78434282105843, end.getLongitude().degrees, THRESHOLD);
         }
+
+        //////////////////////////////////////////////////////////
+        // Test problem points.
+        //////////////////////////////////////////////////////////
+
+        public void testProblemPointsA()
+        {
+            // This specific lat/lon and distance identified a floating point error
+            Angle initialLat = Angle.fromDegrees(4.076552742498428);
+            Angle initialLon = Angle.fromDegrees(-21.377644877408443);
+            Angle azimuth = Angle.fromDegrees(90.0);
+            Angle distance = Angle.fromDegrees(8.963656110719409);
+            LatLon begin = LatLon.fromRadians(initialLat.getRadians(), initialLon.getRadians());
+            LatLon end = LatLon.rhumbEndPosition(begin, azimuth, distance);
+            assertEquals("Problem points A (lat)", initialLat.getDegrees(), end.getLatitude().getDegrees(), THRESHOLD);
+            assertEquals("Problem points A (lon)", -12.391252821313167, end.getLongitude().getDegrees(), THRESHOLD);
+        }
+
     }
 
     public static class EllipsoidalDistanceTests extends TestCase

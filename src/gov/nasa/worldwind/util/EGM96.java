@@ -129,7 +129,7 @@ public class EGM96
             rightCol = 0;
         }
 
-        double latTop = 90 - topRow * INTERVAL.degrees;
+        double latBottom = 90 - bottomRow * INTERVAL.degrees;
         double lonLeft = leftCol * INTERVAL.degrees;
 
         double ul = this.gePostOffset(topRow, leftCol);
@@ -138,7 +138,7 @@ public class EGM96
         double ur = this.gePostOffset(topRow, rightCol);
 
         double u = (lon - lonLeft) / INTERVAL.degrees;
-        double v = (latTop - lat) / INTERVAL.degrees;
+        double v = (lat - latBottom) / INTERVAL.degrees;
 
         double pll = (1.0 - u) * (1.0 - v);
         double plr = u * (1.0 - v);
