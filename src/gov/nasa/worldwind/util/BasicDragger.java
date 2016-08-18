@@ -21,6 +21,7 @@ public class BasicDragger implements SelectListener
     private final WorldWindow wwd;
     private boolean dragging = false;
     private boolean useTerrain = true;
+    private boolean isGround = false;
 
     private Point dragRefCursorPoint;
     private Vec4 dragRefObjectPoint;
@@ -77,6 +78,7 @@ public class BasicDragger implements SelectListener
 
         if (event.getEventAction().equals(SelectEvent.DRAG_END))
         {
+            this.isGround = false;
             this.dragging = false;
             event.consume();
         }
@@ -99,7 +101,15 @@ public class BasicDragger implements SelectListener
                 refPos = ((Movable) dragObject).getReferencePosition();
             if (refPos == null)
                 return;
-
+            
+            //Check if the symbol is a ground symbol
+            if(refPos.getAltitude() == 0)
+            	this.isGround = true;
+            
+            //Change the altitude for ground symbols only
+            if(this.wwd.getCurrentPosition() != null && this.isGround)
+            	refPos = new Position(refPos, this.wwd.getCurrentPosition().getElevation());
+            
             Vec4 refPoint = globe.computePointFromPosition(refPos);
 
             if (!this.isDragging())   // Dragging started
@@ -110,20 +120,23 @@ public class BasicDragger implements SelectListener
                 // Save cursor position
                 this.dragRefCursorPoint = dragEvent.getPreviousPickPoint();
                 // Save start altitude
-                this.dragRefAltitude = globe.computePositionFromPoint(refPoint).getElevation();
+                this.dragRefAltitude = refPos.getElevation();
             }
-
+            
             // Compute screen-coord delta since drag started.
             int dx = dragEvent.getPickPoint().x - this.dragRefCursorPoint.x;
             int dy = dragEvent.getPickPoint().y - this.dragRefCursorPoint.y;
+            double dz = refPos.getElevation() - this.dragRefAltitude;
 
             // Find intersection of screen coord (refObjectPoint + delta) with globe.
             double x = this.dragRefObjectPoint.x + dx;
             double y = event.getMouseEvent().getComponent().getSize().height - this.dragRefObjectPoint.y + dy - 1;
+            double altitude = this.dragRefAltitude + dz;
+            
             Line ray = view.computeRayFromScreenPoint(x, y);
             Position pickPos = null;
             // Use intersection with sphere at reference altitude.
-            Intersection inters[] = globe.intersect(ray, this.dragRefAltitude);
+            Intersection inters[] = globe.intersect(ray, altitude);
             if (inters != null)
                 pickPos = globe.computePositionFromPoint(inters[0].getIntersectionPoint());
 
@@ -131,12 +144,17 @@ public class BasicDragger implements SelectListener
             {
                 // Intersection with globe. Move reference point to the intersection point,
                 // but maintain current altitude.
-                Position p = new Position(pickPos, refPos.getElevation());
+                Position p = new Position(pickPos, altitude);
                 if (dragObject instanceof Movable2)
                     ((Movable2) dragObject).moveTo(globe, p);
                 else
                     ((Movable) dragObject).moveTo(p);
             }
+            
+            //Set ground symbol altitude back to 0 for the next check
+            if(this.isGround)
+            	refPos = new Position(refPos, 0);
+            
             this.dragging = true;
             event.consume();
         }
