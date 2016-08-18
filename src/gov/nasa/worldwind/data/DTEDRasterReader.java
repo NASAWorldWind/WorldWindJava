@@ -48,7 +48,11 @@ public class DTEDRasterReader extends AbstractDataRasterReader
         // times to be excessive.
         if (this.canReadSuffix(source))
         {
-            params.setValue(AVKey.PIXEL_FORMAT, AVKey.ELEVATION); // we know that DTED is elevation data
+            if (null != params)
+            {
+                params.setValue(AVKey.PIXEL_FORMAT, AVKey.ELEVATION); // we know that DTED is elevation data
+            }
+
             return true;
         }
 
