@@ -145,7 +145,6 @@ public class WMSTiledImageLayer extends BasicTiledImageLayer
         setFallbacks(params);
 
         // Setup WMS URL builder.
-        params.setValue(AVKey.WMS_VERSION, caps.getVersion());
         params.setValue(AVKey.TILE_URL_BUILDER, new URLBuilder(params));
         // Setup default WMS tiled image layer behaviors.
         params.setValue(AVKey.USE_TRANSPARENT_TEXTURES, true);
