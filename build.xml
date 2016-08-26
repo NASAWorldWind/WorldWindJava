@@ -65,6 +65,7 @@
                includeantruntime="false"
                memoryMaximumSize="512m">
             <classpath>
+                <pathelement location="jackson-core-asl.jar"/>
                 <pathelement location="jogl-all.jar"/>
                 <pathelement location="gluegen-rt.jar"/>
                 <pathelement location="gdal.jar"/>
@@ -119,14 +120,12 @@
                 <attribute name="Permissions" value="all-permissions"/>
                 <attribute name="Class-Path" value="jogl-all.jar gluegen-rt.jar gdal.jar"/>
             </manifest>
-            <!-- Include the World Wind core package gov.nasa.worldwind, as well as the 3rd party packages
-                 com.zebraimaging and org.codehaus.jackson. The zebraimaging package includes an alternative input
-                 handler for the Zebra Imaging display controller. The jackson package includes the Jackson JSON parsing
-                 library which is used by gov.nasa.worldwind.formats.geojson. -->
+            <!-- Include the World Wind core package gov.nasa.worldwind, as well as the 3rd party package
+                 com.zebraimaging. The zebraimaging package includes an alternative input handler for the Zebra Imaging
+                 display controller. -->
             <fileset dir="${worldwind.classes.dir}">
                 <include name="gov/nasa/worldwind/**/*.class"/>
                 <include name="com/zebraimaging/**/*.class"/>
-                <include name="org/codehaus/jackson/**/*.class" unless="worldwind.exclude.jackson"/>
                 <type type="file"/>
             </fileset>
             <!-- Include the MessageStrings properties files, and all resource files under the config and images
