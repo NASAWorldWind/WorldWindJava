@@ -8,6 +8,8 @@ package gov.nasa.worldwind.util;
 import junit.framework.*;
 import junit.textui.TestRunner;
 import org.junit.*;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import java.net.*;
 
@@ -15,6 +17,7 @@ import java.net.*;
  * @author tag
  * @version $Id: NetworkStatusTest.java 1171 2013-02-11 21:45:02Z dcollins $
  */
+@RunWith(Enclosed.class)
 public class NetworkStatusTest
 {
     public static class Tests extends TestCase

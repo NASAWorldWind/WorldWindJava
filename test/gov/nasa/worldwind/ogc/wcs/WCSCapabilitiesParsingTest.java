@@ -10,6 +10,8 @@ import gov.nasa.worldwind.ogc.ows.*;
 import gov.nasa.worldwind.ogc.wcs.wcs100.*;
 import junit.framework.*;
 import junit.textui.TestRunner;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import javax.xml.stream.XMLStreamException;
 import java.util.*;
@@ -18,6 +20,7 @@ import java.util.*;
  * @author tag
  * @version $Id: WCSCapabilitiesParsingTest.java 2061 2014-06-19 19:59:40Z tgaskins $
  */
+@RunWith(Enclosed.class)
 public class WCSCapabilitiesParsingTest
 {
     public static class Tests extends TestCase

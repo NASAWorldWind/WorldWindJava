@@ -11,6 +11,8 @@ import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.terrain.*;
 import junit.framework.*;
 import junit.textui.TestRunner;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -19,6 +21,7 @@ import java.util.concurrent.*;
  * @author tag
  * @version $Id: HighResolutionTerrainTest.java 2056 2014-06-13 00:55:07Z tgaskins $
  */
+@RunWith(Enclosed.class)
 public class HighResolutionTerrainTest
 {
     public static class Tests extends TestCase

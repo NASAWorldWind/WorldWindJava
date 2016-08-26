@@ -10,7 +10,10 @@ import gov.nasa.worldwind.globes.*;
 import junit.framework.*;
 import junit.textui.TestRunner;
 import org.junit.*;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
+@RunWith(Enclosed.class)
 public class LatLonTest
 {
     public static class GreatCircleDistanceTests extends TestCase

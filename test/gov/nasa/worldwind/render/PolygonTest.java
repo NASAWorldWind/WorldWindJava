@@ -19,7 +19,7 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: PolygonTest.java 563 2012-04-26 18:16:22Z pabercrombie $
  */
-public class PolygonTest
+public class PolygonTest extends TestCase
 {
     protected Globe globe = new Earth();
     protected double verticalExaggeration = 1.0;

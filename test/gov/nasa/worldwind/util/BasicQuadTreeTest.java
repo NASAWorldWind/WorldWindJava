@@ -9,6 +9,8 @@ package gov.nasa.worldwind.util;
 import gov.nasa.worldwind.geom.Sector;
 import junit.framework.*;
 import junit.textui.TestRunner;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import java.util.*;
 
@@ -16,6 +18,7 @@ import java.util.*;
  * @author tag
  * @version $Id: BasicQuadTreeTest.java 1171 2013-02-11 21:45:02Z dcollins $
  */
+@RunWith(Enclosed.class)
 public class BasicQuadTreeTest
 {
     public static class Tests extends TestCase

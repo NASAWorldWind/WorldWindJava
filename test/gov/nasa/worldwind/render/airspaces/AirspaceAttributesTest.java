@@ -9,11 +9,14 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.RestorableSupport;
 import junit.framework.*;
 import junit.textui.TestRunner;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * @author dcollins
  * @version $Id: AirspaceAttributesTest.java 2222 2014-08-13 21:25:29Z dcollins $
  */
+@RunWith(Enclosed.class)
 public class AirspaceAttributesTest
 {
     public static void main(String[] args)

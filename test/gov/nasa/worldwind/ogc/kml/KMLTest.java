@@ -16,6 +16,8 @@ import gov.nasa.worldwind.util.xml.xal.XALConstants;
 import junit.framework.*;
 import junit.textui.TestRunner;
 import org.junit.*;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import java.io.*;
 import java.net.URL;
@@ -25,6 +27,7 @@ import java.util.*;
  * @author tag
  * @version $Id: KMLTest.java 1961 2014-04-25 19:25:18Z dcollins $
  */
+@RunWith(Enclosed.class)
 public class KMLTest
 {
     public static void main(String[] args)

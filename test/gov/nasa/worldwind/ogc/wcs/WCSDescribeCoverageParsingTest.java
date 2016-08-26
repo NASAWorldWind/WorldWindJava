@@ -10,6 +10,8 @@ import gov.nasa.worldwind.ogc.gml.*;
 import gov.nasa.worldwind.ogc.wcs.wcs100.*;
 import junit.framework.*;
 import junit.textui.TestRunner;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import javax.xml.stream.XMLStreamException;
 import java.util.*;
@@ -18,6 +20,7 @@ import java.util.*;
  * @author tag
  * @version $Id: WCSDescribeCoverageParsingTest.java 2066 2014-06-20 20:41:46Z tgaskins $
  */
+@RunWith(Enclosed.class)
 public class WCSDescribeCoverageParsingTest
 {
     public static class Tests extends TestCase

@@ -12,6 +12,8 @@ import gov.nasa.worldwind.ogc.wcs.wcs100.*;
 import gov.nasa.worldwind.terrain.WCSElevationModel;
 import junit.framework.*;
 import junit.textui.TestRunner;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -20,6 +22,7 @@ import java.io.File;
  * @author tag
  * @version $Id: WCSElevationModelCreationTest.java 2137 2014-07-10 01:05:52Z pabercrombie $
  */
+@RunWith(Enclosed.class)
 public class WCSElevationModelCreationTest
 {
     public static class Tests extends TestCase

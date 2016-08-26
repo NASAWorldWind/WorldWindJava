@@ -46,7 +46,9 @@
     <target name="run.tests" depends="clean.test.reports, compile.tests">
         <mkdir dir="${worldwind.test.reports.dir}"/>
         <junit haltonfailure="false"
+               printsummary="true"
                fork="true"
+               forkmode="once"
                maxmemory="512m">
             <classpath>
                 <pathelement location="${worldwind.src.dir}"/>
@@ -62,9 +64,20 @@
             <batchtest todir="${worldwind.test.reports.dir}">
                 <fileset dir="${worldwind.test.classes.dir}">
                     <include name="**/*Test*.class"/>
+                    <exclude name="**/*$*.class"/>
+                    <exclude name="gov/nasa/worldwind/ogc/kml/StyleLocationTests.class"/>
+                    <exclude name="gov/nasa/worldwind/render/BrowserBalloonSizeTest.class"/>
+                    <exclude name="gov/nasa/worldwind/render/BrowserBalloonTest.class"/>
+                    <exclude name="gov/nasa/worldwind/render/BrowserBalloonSizeTest.class"/>
                 </fileset>
             </batchtest>
         </junit>
+        <junitreport todir="${worldwind.test.reports.dir}">
+            <fileset dir="${worldwind.test.reports.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${worldwind.test.reports.dir}"/>
+        </junitreport>
     </target>
 
     <!-- Individual clean targets corresponding to each build target above. -->

@@ -11,9 +11,11 @@ import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.symbology.IconRetriever;
 import junit.framework.*;
 import junit.textui.TestRunner;
+import org.junit.Ignore;
 
 import java.awt.image.*;
 
+@Ignore // Test takes very long to execute.
 public class IconRetrievalTest
 {
     // TODO: test all possible values for Standard Identity and Status

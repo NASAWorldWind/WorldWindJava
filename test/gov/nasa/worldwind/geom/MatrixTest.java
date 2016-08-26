@@ -9,11 +9,14 @@ package gov.nasa.worldwind.geom;
 import junit.framework.*;
 import junit.textui.TestRunner;
 import org.junit.*;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * @author dcollins
  * @version $Id: MatrixTest.java 872 2012-11-01 17:02:57Z dcollins $
  */
+@RunWith(Enclosed.class)
 public class MatrixTest
 {
     public static void main(String[] args)
