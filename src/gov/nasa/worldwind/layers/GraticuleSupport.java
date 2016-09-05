@@ -60,7 +60,7 @@ public class GraticuleSupport
     private Map<String, GraticuleRenderingParams> namedParams = new HashMap<String, GraticuleRenderingParams>();
     private Map<String, ShapeAttributes> namedShapeAttributes = new HashMap<String, ShapeAttributes>();
     private AVList defaultParams;
-    private GeographicTextRenderer textRenderer = new GeographicTextRenderer();
+    private BasicGeographicTextRenderer textRenderer = new BasicGeographicTextRenderer();
 
     public GraticuleSupport()
     {

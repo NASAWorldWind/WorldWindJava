@@ -25,7 +25,7 @@ import java.util.*;
  * @author dcollins
  * @version $Id: GeographicTextRenderer.java 2392 2014-10-20 20:02:44Z tgaskins $
  */
-public class GeographicTextRenderer
+public class BasicGeographicTextRenderer
 {
     private TextRenderer lastTextRenderer = null;
     private final GLU glu = new GLUgl2();
@@ -45,7 +45,7 @@ public class GeographicTextRenderer
 
     private boolean hasJOGLv111Bug = false;
 
-    public GeographicTextRenderer()
+    public BasicGeographicTextRenderer()
     {
     }
 
@@ -369,14 +369,14 @@ public class GeographicTextRenderer
             return this.eyeDistance;
         }
 
-        private GeographicTextRenderer getRenderer()
+        private BasicGeographicTextRenderer getRenderer()
         {
-            return GeographicTextRenderer.this;
+            return BasicGeographicTextRenderer.this;
         }
 
         public void render(DrawContext dc)
         {
-            GeographicTextRenderer.this.beginRendering(dc);
+            BasicGeographicTextRenderer.this.beginRendering(dc);
             try
             {
                 if (cullText)
@@ -389,7 +389,7 @@ public class GeographicTextRenderer
                     while (nextItem != null && nextItem instanceof OrderedText)
                     {
                         OrderedText ot = (OrderedText) nextItem;
-                        if (ot.getRenderer() != GeographicTextRenderer.this)
+                        if (ot.getRenderer() != BasicGeographicTextRenderer.this)
                             break;
 
                         textList.add(ot);
@@ -402,14 +402,14 @@ public class GeographicTextRenderer
                     ArrayList<Rectangle2D> textBounds = new ArrayList<Rectangle2D>();
                     for (OrderedText ot : textList)
                     {
-                        double[] scaleAndOpacity = GeographicTextRenderer.this.computeDistanceScaleAndOpacity(dc, ot);
-                        Rectangle2D newBounds = GeographicTextRenderer.this.computeTextBounds(dc, ot,
+                        double[] scaleAndOpacity = BasicGeographicTextRenderer.this.computeDistanceScaleAndOpacity(dc, ot);
+                        Rectangle2D newBounds = BasicGeographicTextRenderer.this.computeTextBounds(dc, ot,
                             scaleAndOpacity[0]);
                         if (newBounds == null)
                             continue;
 
                         boolean overlap = false;
-                        newBounds = GeographicTextRenderer.this.computeExpandedBounds(newBounds, cullTextMargin);
+                        newBounds = BasicGeographicTextRenderer.this.computeExpandedBounds(newBounds, cullTextMargin);
                         for (Rectangle2D rect : textBounds)
                         {
                             if (rect.intersects(newBounds))
@@ -419,24 +419,24 @@ public class GeographicTextRenderer
                         if (!overlap)
                         {
                             textBounds.add(newBounds);
-                            GeographicTextRenderer.this.drawText(dc, ot, scaleAndOpacity[0], scaleAndOpacity[1]);
+                            BasicGeographicTextRenderer.this.drawText(dc, ot, scaleAndOpacity[0], scaleAndOpacity[1]);
                         }
                     }
                 }
                 else //just draw each label
                 {
-                    double[] scaleAndOpacity = GeographicTextRenderer.this.computeDistanceScaleAndOpacity(dc, this);
-                    GeographicTextRenderer.this.drawText(dc, this, scaleAndOpacity[0], scaleAndOpacity[1]);
+                    double[] scaleAndOpacity = BasicGeographicTextRenderer.this.computeDistanceScaleAndOpacity(dc, this);
+                    BasicGeographicTextRenderer.this.drawText(dc, this, scaleAndOpacity[0], scaleAndOpacity[1]);
                     // Draw as many as we can in a batch to save ogl state switching.
                     Object nextItem = dc.peekOrderedRenderables();
                     while (nextItem != null && nextItem instanceof OrderedText)
                     {
                         OrderedText ot = (OrderedText) nextItem;
-                        if (ot.getRenderer() != GeographicTextRenderer.this)
+                        if (ot.getRenderer() != BasicGeographicTextRenderer.this)
                             break;
 
-                        scaleAndOpacity = GeographicTextRenderer.this.computeDistanceScaleAndOpacity(dc, ot);
-                        GeographicTextRenderer.this.drawText(dc, ot, scaleAndOpacity[0], scaleAndOpacity[1]);
+                        scaleAndOpacity = BasicGeographicTextRenderer.this.computeDistanceScaleAndOpacity(dc, ot);
+                        BasicGeographicTextRenderer.this.drawText(dc, ot, scaleAndOpacity[0], scaleAndOpacity[1]);
                         dc.pollOrderedRenderables(); // take it off the queue
                         nextItem = dc.peekOrderedRenderables();
                     }
@@ -452,7 +452,7 @@ public class GeographicTextRenderer
             }
             finally
             {
-                GeographicTextRenderer.this.endRendering(dc);
+                BasicGeographicTextRenderer.this.endRendering(dc);
             }
         }
 

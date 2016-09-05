@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.util.Iterator;
 
 /**
- * A simplified version of {@link GeographicTextRenderer} that participates in globe text decluttering. See {@link
- * ClutterFilter} for more information on decluttering.
+ * A simplified version of {@link BasicGeographicTextRenderer} that participates in globe text decluttering.
+ * See {@link ClutterFilter} for more information on decluttering.
  *
  * @author tag
  * @version $Id: DeclutteringTextRenderer.java 2392 2014-10-20 20:02:44Z tgaskins $
