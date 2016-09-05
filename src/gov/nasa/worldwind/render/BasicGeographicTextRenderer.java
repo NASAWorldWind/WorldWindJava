@@ -25,7 +25,7 @@ import java.util.*;
  * @author dcollins
  * @version $Id: GeographicTextRenderer.java 2392 2014-10-20 20:02:44Z tgaskins $
  */
-public class BasicGeographicTextRenderer
+public class BasicGeographicTextRenderer implements GeographicTextRenderer
 {
     private TextRenderer lastTextRenderer = null;
     private final GLU glu = new GLUgl2();
@@ -195,7 +195,7 @@ public class BasicGeographicTextRenderer
         this.distanceMinOpacity = opacity;
     }
 
-    public void render(DrawContext dc, Iterable<GeographicText> text)
+    public void render(DrawContext dc, Iterable<? extends GeographicText> text)
     {
         this.drawMany(dc, text);
     }
@@ -208,7 +208,7 @@ public class BasicGeographicTextRenderer
         this.drawOne(dc, text, textPoint);
     }
 
-    private void drawMany(DrawContext dc, Iterable<GeographicText> textIterable)
+    private void drawMany(DrawContext dc, Iterable<? extends GeographicText> textIterable)
     {
         if (dc == null)
         {
@@ -230,7 +230,7 @@ public class BasicGeographicTextRenderer
         if (geos == null)
             return;
 
-        Iterator<GeographicText> iterator = textIterable.iterator();
+        Iterator<? extends GeographicText> iterator = textIterable.iterator();
         if (!iterator.hasNext())
             return;
 

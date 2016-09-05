@@ -27,7 +27,7 @@ import java.util.Iterator;
  * @author tag
  * @version $Id: DeclutteringTextRenderer.java 2392 2014-10-20 20:02:44Z tgaskins $
  */
-public class DeclutteringTextRenderer
+public class DeclutteringTextRenderer implements GeographicTextRenderer
 {
     protected static final Font DEFAULT_FONT = Font.decode("Arial-PLAIN-12");
     protected static final Color DEFAULT_COLOR = Color.white;
