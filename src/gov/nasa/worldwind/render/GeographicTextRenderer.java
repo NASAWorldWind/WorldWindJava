@@ -678,6 +678,10 @@ public class GeographicTextRenderer
                 if (color == null)
                     color = DEFAULT_COLOR;
                 color = this.applyOpacity(color, opacity);
+                
+                Offset offset = geographicText.getOffset();
+                float xOffset = offset.getX().floatValue();
+                float yOffset = offset.getY().floatValue();
 
                 Color background = geographicText.getBackgroundColor();
                 if (background != null)
@@ -686,19 +690,19 @@ public class GeographicTextRenderer
                     textRenderer.setColor(background);
                     if (this.effect.equals(AVKey.TEXT_EFFECT_SHADOW))
                     {
-                        textRenderer.draw3D(charSequence, drawPoint.x + 1, drawPoint.y - 1, 0, 1);
+                        textRenderer.draw3D(charSequence, drawPoint.x + xOffset + 1, drawPoint.y + yOffset - 1, 0, 1);
                     }
                     else if (this.effect.equals(AVKey.TEXT_EFFECT_OUTLINE))
                     {
-                        textRenderer.draw3D(charSequence, drawPoint.x + 1, drawPoint.y - 1, 0, 1);
-                        textRenderer.draw3D(charSequence, drawPoint.x + 1, drawPoint.y + 1, 0, 1);
-                        textRenderer.draw3D(charSequence, drawPoint.x - 1, drawPoint.y - 1, 0, 1);
-                        textRenderer.draw3D(charSequence, drawPoint.x - 1, drawPoint.y + 1, 0, 1);
+                        textRenderer.draw3D(charSequence, drawPoint.x + xOffset + 1, drawPoint.y + yOffset - 1, 0, 1);
+                        textRenderer.draw3D(charSequence, drawPoint.x + xOffset + 1, drawPoint.y + yOffset + 1, 0, 1);
+                        textRenderer.draw3D(charSequence, drawPoint.x + xOffset - 1, drawPoint.y + yOffset - 1, 0, 1);
+                        textRenderer.draw3D(charSequence, drawPoint.x + xOffset - 1, drawPoint.y + yOffset + 1, 0, 1);
                     }
                 }
 
                 textRenderer.setColor(color);
-                textRenderer.draw3D(charSequence, drawPoint.x, drawPoint.y, 0, 1);
+                textRenderer.draw3D(charSequence, drawPoint.x + xOffset, drawPoint.y + yOffset, 0, 1);
                 textRenderer.flush();
 
                 if (scale != 1d)

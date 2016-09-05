@@ -5,6 +5,7 @@
  */
 package gov.nasa.worldwind.render;
 
+import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.util.Logging;
 
@@ -23,6 +24,7 @@ public class UserFacingText implements GeographicText
     private Color textBackgroundColor; // Can be null to indicate no background color.
     private boolean isVisible = true;
     double priority;  //used for label culling
+    protected Offset offset = new Offset(0.0, 0.0, AVKey.FRACTION, AVKey.FRACTION);
 
     public UserFacingText(CharSequence text, Position textPosition)
     {
@@ -62,6 +64,16 @@ public class UserFacingText implements GeographicText
     public void setPriority(double priority)
     {
         this.priority = priority;
+    }
+    
+    public Offset getOffset()
+    {
+        return this.offset;
+    }
+    
+    public void setOffset(Offset offset)
+    {
+        this.offset = offset;
     }
 
     public Position getPosition()

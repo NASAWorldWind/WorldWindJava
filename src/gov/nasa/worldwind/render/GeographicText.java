@@ -116,4 +116,21 @@ public interface GeographicText
      * @param d New priority.
      */
     void setPriority(double d);
+    
+    /**
+     * Returns the text offset. The offset determines how to position the text relative to its geographic position.
+     *
+     * @return the text offset.
+     *
+     * @see #setOffset(Offset)
+     */
+    Offset getOffset();
+    
+    /**
+     * Specifies a location relative to the label position at which to align the label. The label text begins at the
+     * point indicated by the offset.
+     *
+     * @param offset Offset that controls where to position the label relative to its geographic location.
+     */
+    void setOffset(Offset offset);
 }
