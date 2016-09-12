@@ -199,7 +199,7 @@ public class LayerList extends CopyOnWriteArrayList<Layer> implements WWObject
 
     public boolean moveHigher(Layer targetLayer)
     {
-        int index = this.indexOf(targetLayer);
+        int index = this.lastIndexOf(targetLayer);
         if (index < 0)
             return false;
 
