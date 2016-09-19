@@ -186,7 +186,11 @@ public class PhaseLine extends AbstractMilStd2525TacticalGraphic
     @Override
     protected void determineLabelPositions(DrawContext dc)
     {
-        Iterator<? extends Position> iterator = this.path.getPositions().iterator();
+		Iterable<? extends Position> positions = this.path.getPositions();
+        if (positions == null)
+            return;
+	
+        Iterator<? extends Position> iterator = positions.iterator();
 
         // Find the first and last positions on the path
         Position first = iterator.next();
