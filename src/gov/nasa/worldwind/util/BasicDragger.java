@@ -100,7 +100,11 @@ public class BasicDragger implements SelectListener
             if (refPos == null)
                 return;
 
-            Vec4 refPoint = globe.computePointFromPosition(refPos);
+            Vec4 refPoint = null;
+            if (this.isUseTerrain() && refPos.getElevation() < globe.getMaxElevation())
+                refPoint = wwd.getSceneController().getTerrain().getSurfacePoint(refPos);
+            if (refPoint == null)
+                refPoint = globe.computePointFromPosition(refPos);
 
             if (!this.isDragging())   // Dragging started
             {
@@ -122,10 +126,25 @@ public class BasicDragger implements SelectListener
             double y = event.getMouseEvent().getComponent().getSize().height - this.dragRefObjectPoint.y + dy - 1;
             Line ray = view.computeRayFromScreenPoint(x, y);
             Position pickPos = null;
-            // Use intersection with sphere at reference altitude.
-            Intersection inters[] = globe.intersect(ray, this.dragRefAltitude);
-            if (inters != null)
-                pickPos = globe.computePositionFromPoint(inters[0].getIntersectionPoint());
+            if (this.isUseTerrain() && view.getEyePosition().getElevation() < globe.getMaxElevation() * 10)
+            {
+                // Use ray casting below some altitude
+                // Try ray intersection with current terrain geometry
+                Intersection[] intersections = wwd.getSceneController().getTerrain().intersect(ray);
+                if (intersections != null && intersections.length > 0)
+                    pickPos = globe.computePositionFromPoint(intersections[0].getIntersectionPoint());
+                else
+                    // Fallback on raycasting using elevation data
+                    pickPos = RayCastingSupport.intersectRayWithTerrain(globe, ray.getOrigin(), ray.getDirection(),
+                                                                        200, 20);
+            }
+            if (pickPos == null)
+            {
+                // Use intersection with sphere at reference altitude.
+                Intersection inters[] = globe.intersect(ray, this.dragRefAltitude);
+                if (inters != null)
+                    pickPos = globe.computePositionFromPoint(inters[0].getIntersectionPoint());
+            }
 
             if (pickPos != null)
             {
