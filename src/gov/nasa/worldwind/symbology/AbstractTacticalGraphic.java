@@ -6,7 +6,9 @@
 
 package gov.nasa.worldwind.symbology;
 
+import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.*;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
@@ -27,7 +29,7 @@ import java.util.List;
  * @author pabercrombie
  * @version $Id: AbstractTacticalGraphic.java 560 2012-04-26 16:28:24Z pabercrombie $
  */
-public abstract class AbstractTacticalGraphic extends AVListImpl implements TacticalGraphic, Renderable
+public abstract class AbstractTacticalGraphic extends AVListImpl implements TacticalGraphic, Renderable, Draggable
 {
     /** The default highlight color. */
     protected static final Material DEFAULT_HIGHLIGHT_MATERIAL = Material.WHITE;
@@ -51,6 +53,10 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
     protected boolean showTextModifiers = true;
     /** Indicates whether or not to render graphic modifiers. */
     protected boolean showGraphicModifiers = true;
+    /** Indicates whether this object can be dragged. */
+    protected boolean dragEnabled = true;
+    /** Provides additional information for dragging regarding this particular object. */
+    protected DraggableSupport draggableSupport = null;
 
     // Implementation note: by default, show the hostile indicator (the letters "ENY"). Note that this default is
     // different from MilStd2525TacticalSymbol, which does not display the hostile indicator by default. Section 5.5.1.1
@@ -338,6 +344,35 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
 
         if (newPositions != null)
             this.setPositions(newPositions);
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, WorldWind.CLAMP_TO_GROUND);
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     /////////////

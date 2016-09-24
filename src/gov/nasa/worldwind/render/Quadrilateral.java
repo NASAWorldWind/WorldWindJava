@@ -6,7 +6,8 @@
 package gov.nasa.worldwind.render;
 
 import com.jogamp.common.nio.Buffers;
-import gov.nasa.worldwind.Movable;
+import gov.nasa.worldwind.*;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.util.Logging;
 
@@ -18,7 +19,8 @@ import java.nio.DoubleBuffer;
  * @author tag
  * @version $Id: Quadrilateral.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Quadrilateral implements Renderable, Movable // TODO: rename this class; it's a sector, not a quad
+public class Quadrilateral implements Renderable, Movable,
+    Draggable // TODO: rename this class; it's a sector, not a quad
 {
     private LatLon southwestCorner;
     private LatLon northeastCorner;
@@ -30,6 +32,8 @@ public class Quadrilateral implements Renderable, Movable // TODO: rename this c
 
     protected WWTexture texture;
     protected DoubleBuffer textureCoordinates;
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
 
     public Quadrilateral(LatLon southwestCorner, LatLon northeastCorner, double elevation)
     {
@@ -296,5 +300,34 @@ public class Quadrilateral implements Renderable, Movable // TODO: rename this c
             return;
 
         this.move(delta);
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, WorldWind.ABSOLUTE);
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 }

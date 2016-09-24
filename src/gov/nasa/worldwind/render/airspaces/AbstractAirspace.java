@@ -8,6 +8,7 @@ package gov.nasa.worldwind.render.airspaces;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.cache.*;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.layers.Layer;
@@ -26,7 +27,7 @@ import java.util.List;
  * @version $Id: AbstractAirspace.java 3138 2015-06-02 19:13:16Z tgaskins $
  */
 public abstract class AbstractAirspace extends WWObjectImpl
-    implements Airspace, OrderedRenderable, PreRenderable, Movable, Movable2
+    implements Airspace, OrderedRenderable, PreRenderable, Movable, Movable2, Draggable
 {
     protected static final String ARC_SLICES = "ArcSlices";
     protected static final String DISABLE_TERRAIN_CONFORMANCE = "DisableTerrainConformance";
@@ -68,6 +69,8 @@ public abstract class AbstractAirspace extends WWObjectImpl
     // Airspace properties.
     protected boolean visible = true;
     protected boolean highlighted;
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
     protected AirspaceAttributes attributes;
     protected AirspaceAttributes highlightAttributes;
     protected AirspaceAttributes activeAttributes = new BasicAirspaceAttributes(); // re-determined each frame
@@ -951,6 +954,36 @@ public abstract class AbstractAirspace extends WWObjectImpl
         //noinspection UnnecessaryLocalVariable
         Position newRef = position;
         this.doMoveTo(globe, oldRef, newRef);
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = true;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, this.isTerrainConforming()[0]
+                ? WorldWind.RELATIVE_TO_GROUND : WorldWind.ABSOLUTE);
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     protected void doMoveTo(Globe globe, Position oldRef, Position newRef)

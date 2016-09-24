@@ -7,9 +7,10 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.*;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.geom.Cylinder;
-import gov.nasa.worldwind.globes.*;
+import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.util.*;
@@ -29,7 +30,7 @@ import java.util.List;
  *             represent itself.
  */
 public class Polyline extends AVListImpl implements Renderable, OrderedRenderable, Movable, Restorable,
-    MeasurableLength, ExtentHolder, PreRenderable, Highlightable
+    MeasurableLength, ExtentHolder, PreRenderable, Highlightable, Draggable
 {
     public final static int GREAT_CIRCLE = WorldWind.GREAT_CIRCLE;
     public final static int LINEAR = WorldWind.LINEAR;
@@ -56,6 +57,8 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     protected int stippleFactor = 0;
     protected int numSubsegments = 10;
     protected boolean highlighted = false;
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
     protected Color highlightColor = new Color(1f, 1f, 1f, 0.5f);
     protected Object delegateOwner;
     protected LengthMeasurer measurer = new LengthMeasurer();
@@ -1221,6 +1224,36 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
 
             this.positions.set(i, new Position(newLocation, newElev));
         }
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, this.isFollowTerrain()
+                ? WorldWind.RELATIVE_TO_GROUND : WorldWind.ABSOLUTE);
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     /**

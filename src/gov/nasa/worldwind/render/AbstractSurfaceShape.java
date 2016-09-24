@@ -8,9 +8,10 @@ package gov.nasa.worldwind.render;
 import com.jogamp.common.nio.Buffers;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.globes.*;
+import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.ogc.kml.KMLConstants;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.combine.*;
@@ -41,7 +42,7 @@ import java.util.List;
  * @version $Id: AbstractSurfaceShape.java 3240 2015-06-22 23:38:49Z tgaskins $
  */
 public abstract class AbstractSurfaceShape extends AbstractSurfaceObject implements SurfaceShape, Movable, Movable2,
-    Combinable
+    Combinable, Draggable
 {
     /** The default interior color. */
     protected static final Material DEFAULT_INTERIOR_MATERIAL = Material.PINK;
@@ -69,6 +70,8 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
 
     // Public interface properties.
     protected boolean highlighted;
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
     protected ShapeAttributes normalAttrs;
     protected ShapeAttributes highlightAttrs;
     protected ShapeAttributes activeAttrs = this.createActiveAttributes(); // re-determined each frame
@@ -547,6 +550,35 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
             return;
 
         this.doMoveTo(globe, oldReferencePosition, position);
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, WorldWind.CLAMP_TO_GROUND);
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     /** {@inheritDoc} */

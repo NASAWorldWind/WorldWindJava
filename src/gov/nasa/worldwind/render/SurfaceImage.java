@@ -6,6 +6,7 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.*;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.ogc.kml.KMLConstants;
@@ -32,7 +33,7 @@ import java.util.List;
  * @version $Id: SurfaceImage.java 3419 2015-08-28 00:09:50Z dcollins $
  */
 public class SurfaceImage extends WWObjectImpl
-    implements SurfaceTile, OrderedRenderable, PreRenderable, Movable, Disposable, Exportable
+    implements SurfaceTile, OrderedRenderable, PreRenderable, Movable, Disposable, Exportable, Draggable
 {
     // TODO: Handle date-line spanning sectors
 
@@ -51,6 +52,8 @@ public class SurfaceImage extends WWObjectImpl
     protected WWTexture previousSourceTexture;
     protected WWTexture previousGeneratedTexture;
     protected boolean generatedTextureExpired;
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
 
     /**
      * A list that contains only a reference to this instance. Used as an argument to the surface tile renderer to
@@ -463,6 +466,35 @@ public class SurfaceImage extends WWObjectImpl
     protected void setReferencePosition(Position referencePosition)
     {
         this.referencePosition = referencePosition;
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, WorldWind.CLAMP_TO_GROUND);
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     public boolean equals(Object o)

@@ -97,6 +97,13 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String DISPLAY_ICON = "gov.nasa.worldwind.avkey.DisplayIcon";
     final String DISPLAY_NAME = "gov.nasa.worldwind.avkey.DisplayName";
     final String DOCUMENT = "gov.nasa.worldwind.avkey.Document";
+    /**
+     * Indicates the state of dragging. Provided by the {@link gov.nasa.worldwind.drag.DragContext} object to objects
+     * implementing {@link gov.nasa.worldwind.drag.Draggable}.
+     */
+    final String DRAG_BEGIN = "gov.nasa.worldwind.avkey.DragBegin";
+    final String DRAG_CHANGE = "gov.nasa.worldwind.avkey.DragChange";
+    final String DRAG_ENDED = "gov.nasa.worldwind.avkey.DragEnded";
 
     final String DTED_LEVEL = "gov.nasa.worldwind.avkey.DTED.Level";
 

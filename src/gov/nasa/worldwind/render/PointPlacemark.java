@@ -8,6 +8,7 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe2D;
 import gov.nasa.worldwind.layers.Layer;
@@ -47,7 +48,7 @@ import static gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil.kmlBoolean;
  * @version $Id: PointPlacemark.java 3028 2015-04-17 00:10:19Z tgaskins $
  */
 public class PointPlacemark extends WWObjectImpl
-    implements Renderable, Locatable, Movable, Highlightable, Exportable
+    implements Renderable, Locatable, Movable, Highlightable, Exportable, Draggable
 {
     /**
      * An interface to enable application selection of placemark level of detail.
@@ -64,7 +65,7 @@ public class PointPlacemark extends WWObjectImpl
          * @param placemark   the placemark about to be rendered.
          * @param eyeDistance the distance in meters from the view's eye point to the placemark's geographic position.
          */
-        public void selectLOD(DrawContext dc, PointPlacemark placemark, double eyeDistance);
+        void selectLOD(DrawContext dc, PointPlacemark placemark, double eyeDistance);
     }
 
     /** The scale to use when highlighting if no highlight attributes are specified. */
@@ -188,6 +189,8 @@ public class PointPlacemark extends WWObjectImpl
     protected WWTexture activeTexture; // determined each frame
 
     protected boolean highlighted;
+    protected boolean dragEnabled;
+    protected DraggableSupport draggableSupport = null;
     protected boolean visible = true;
     protected int altitudeMode = WorldWind.CLAMP_TO_GROUND;
     protected boolean lineEnabled;
@@ -1725,6 +1728,35 @@ public class PointPlacemark extends WWObjectImpl
         }
 
         this.setPosition(position);
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, this.getAltitudeMode());
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     /**

@@ -9,6 +9,7 @@ package gov.nasa.worldwind.render;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.cache.ShapeDataCache;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.layers.Layer;
@@ -36,7 +37,7 @@ import java.io.*;
  */
 public abstract class AbstractShape extends WWObjectImpl
     implements Highlightable, OrderedRenderable, Movable, Movable2, ExtentHolder, GeographicExtent, Exportable,
-    Restorable, PreRenderable, Attributable
+    Restorable, PreRenderable, Attributable, Draggable
 {
     /** The default interior color. */
     protected static final Material DEFAULT_INTERIOR_MATERIAL = Material.LIGHT_GRAY;
@@ -187,6 +188,7 @@ public abstract class AbstractShape extends WWObjectImpl
     protected ShapeAttributes activeAttributes = new BasicShapeAttributes(); // re-determined each frame
 
     protected boolean highlighted;
+    protected boolean dragEnabled = true;
     protected boolean visible = true;
     protected int altitudeMode = DEFAULT_ALTITUDE_MODE;
     protected boolean enableBatchRendering = true;
@@ -208,6 +210,9 @@ public abstract class AbstractShape extends WWObjectImpl
 
     /** Holds globe-dependent computed data. One entry per globe encountered during {@link #render(DrawContext)}. */
     protected ShapeDataCache shapeDataCache = new ShapeDataCache(60000);
+
+    // Additional drag context
+    protected DraggableSupport draggableSupport = null;
 
     /**
      * Identifies the active globe-dependent data for the current invocation of {@link #render(DrawContext)}. The active
@@ -1610,6 +1615,35 @@ public abstract class AbstractShape extends WWObjectImpl
     public void moveTo(Globe globe, Position position)
     {
         this.moveTo(position); // TODO: Update all implementers of this method to use the Movable2 interface
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, this.getAltitudeMode());
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     public String isExportFormatSupported(String mimeType)

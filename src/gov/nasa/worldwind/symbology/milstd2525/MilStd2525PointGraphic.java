@@ -7,6 +7,7 @@
 package gov.nasa.worldwind.symbology.milstd2525;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.symbology.*;
@@ -24,7 +25,7 @@ import java.util.List;
  * @author pabercrombie
  * @version $Id: MilStd2525PointGraphic.java 560 2012-04-26 16:28:24Z pabercrombie $
  */
-public class MilStd2525PointGraphic extends AVListImpl implements MilStd2525TacticalGraphic, TacticalPoint
+public class MilStd2525PointGraphic extends AVListImpl implements MilStd2525TacticalGraphic, TacticalPoint, Draggable
 {
     // Implementation note: This class wraps an instance of TacticalGraphicSymbol. TacticalGraphicSymbol implements the
     // logic for rendering point graphics using the TacticalSymbol base classes. This class adapts the TacticalGraphic
@@ -35,6 +36,10 @@ public class MilStd2525PointGraphic extends AVListImpl implements MilStd2525Tact
 
     /** Indicates whether or not the graphic is highlighted. */
     protected boolean highlighted;
+
+    /** Indicates whether the object is draggable and provides additional information for dragging about this object. */
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
 
     /**
      * Attributes to apply when the graphic is not highlighted. These attributes override defaults determined by the
@@ -408,6 +413,35 @@ public class MilStd2525PointGraphic extends AVListImpl implements MilStd2525Tact
     public void moveTo(Position position)
     {
         this.symbol.setPosition(position);
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, this.getAltitudeMode());
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragScreenSizeConstant(dragContext);
     }
 
     /////////////////////////////

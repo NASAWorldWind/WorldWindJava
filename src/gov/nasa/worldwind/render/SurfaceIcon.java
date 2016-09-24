@@ -6,7 +6,8 @@
 package gov.nasa.worldwind.render;
 
 import com.jogamp.opengl.util.texture.TextureCoords;
-import gov.nasa.worldwind.Movable;
+import gov.nasa.worldwind.*;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.util.*;
@@ -22,7 +23,7 @@ import java.util.List;
  * @author Patrick Murris
  * @version $Id: SurfaceIcon.java 1772 2013-12-18 02:43:27Z tgaskins $
  */
-public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
+public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, Draggable
 {
     private Object imageSource;
     private boolean useMipMaps = true;
@@ -38,6 +39,8 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
     protected WWTexture texture;
     protected int imageWidth = 32;
     protected int imageHeight = 32;
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
 
     public SurfaceIcon(Object imageSource)
     {
@@ -658,6 +661,35 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
         }
 
         this.setLocation(position);
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, WorldWind.CLAMP_TO_GROUND);
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     //**************************************************************//

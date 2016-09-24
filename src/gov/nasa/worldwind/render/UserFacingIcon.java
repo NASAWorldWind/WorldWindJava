@@ -5,8 +5,9 @@
  */
 package gov.nasa.worldwind.render;
 
-import gov.nasa.worldwind.Movable;
+import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVListImpl;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.util.*;
 
@@ -17,7 +18,7 @@ import java.util.Map;
  * @author tag
  * @version $Id: UserFacingIcon.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class UserFacingIcon extends AVListImpl implements WWIcon, Movable
+public class UserFacingIcon extends AVListImpl implements WWIcon, Movable, Draggable
 {
     //    private final String iconPath;
     private Position iconPosition; // may be null because placement may be relative
@@ -35,6 +36,8 @@ public class UserFacingIcon extends AVListImpl implements WWIcon, Movable
 
     protected BasicWWTexture imageTexture;
     protected BasicWWTexture backgroundTexture;
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
 
     public UserFacingIcon()
     {
@@ -262,6 +265,35 @@ public class UserFacingIcon extends AVListImpl implements WWIcon, Movable
     public Position getReferencePosition()
     {
         return this.iconPosition;
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, WorldWind.ABSOLUTE);
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragScreenSizeConstant(dragContext);
     }
 
     public String toString()

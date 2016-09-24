@@ -8,6 +8,7 @@ package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
@@ -33,10 +34,12 @@ public class ShapeEditingExtension extends ApplicationTemplate
     /**
      * Defines a custom Renderable that we'll use to illustrate editing extension.
      */
-    public static class Arrow implements Renderable, Movable2, Highlightable, Attributable
+    public static class Arrow implements Renderable, Movable2, Highlightable, Attributable, Draggable
     {
         protected Path shaft;
         protected Path head;
+        protected boolean dragEnabled = true;
+        protected DraggableSupport draggableSupport = null;
 
         public Arrow(LatLon location0, LatLon location1, double altitude)
         {
@@ -178,6 +181,35 @@ public class ShapeEditingExtension extends ApplicationTemplate
         {
             this.shaft.moveTo(globe, position);
             this.head.setPositions(new ArrayList<Position>(0));
+        }
+
+        @Override
+        public boolean isDragEnabled()
+        {
+            return this.dragEnabled;
+        }
+
+        @Override
+        public void setDragEnabled(boolean enabled)
+        {
+            this.dragEnabled = enabled;
+        }
+
+        @Override
+        public void drag(DragContext dragContext)
+        {
+            if (!this.dragEnabled)
+                return;
+
+            if (this.draggableSupport == null)
+                this.draggableSupport = new DraggableSupport(this, this.getAltitudeMode());
+
+            this.doDrag(dragContext);
+        }
+
+        protected void doDrag(DragContext dragContext)
+        {
+            this.draggableSupport.dragGlobeSizeConstant(dragContext);
         }
     }
 

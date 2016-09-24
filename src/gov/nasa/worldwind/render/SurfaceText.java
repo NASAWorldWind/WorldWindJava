@@ -6,8 +6,9 @@
 
 package gov.nasa.worldwind.render;
 
-import gov.nasa.worldwind.Movable;
+import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.util.*;
@@ -26,7 +27,7 @@ import java.util.Arrays;
  * @version $Id: SurfaceText.java 3092 2015-05-14 22:21:32Z tgaskins $
  */
 // TODO: add support for heading
-public class SurfaceText extends AbstractSurfaceObject implements GeographicText, Movable
+public class SurfaceText extends AbstractSurfaceObject implements GeographicText, Movable, Draggable
 {
     /** Default text size. */
     public final static double DEFAULT_TEXT_SIZE_IN_METERS = 1000;
@@ -43,6 +44,9 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     protected Position location;
     /** The height of the text in meters. */
     protected double textSizeInMeters = DEFAULT_TEXT_SIZE_IN_METERS;
+    /** Dragging Support */
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
 
     /** Font to use to draw the text. Defaults to {@link #DEFAULT_FONT}. */
     protected Font font = DEFAULT_FONT;
@@ -313,6 +317,35 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     public void moveTo(Position position)
     {
         this.setPosition(position);
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, WorldWind.CLAMP_TO_GROUND);
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     /** {@inheritDoc} */

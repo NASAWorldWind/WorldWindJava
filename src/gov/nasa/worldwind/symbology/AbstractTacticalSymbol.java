@@ -10,6 +10,7 @@ import com.jogamp.opengl.util.texture.*;
 import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.*;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.pick.*;
@@ -27,7 +28,7 @@ import java.util.List;
  * @author dcollins
  * @version $Id: AbstractTacticalSymbol.java 2366 2014-10-02 23:16:31Z tgaskins $
  */
-public abstract class AbstractTacticalSymbol extends WWObjectImpl implements TacticalSymbol, Movable
+public abstract class AbstractTacticalSymbol extends WWObjectImpl implements TacticalSymbol, Movable, Draggable
 {
     protected static class IconSource
     {
@@ -636,6 +637,11 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
      */
     protected PickSupport pickSupport = new PickSupport();
     /**
+     * Dragging support properties.
+     */
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
+    /**
      * Per-frame layer indicating this symbol's layer when its ordered renderable was created. Assigned each frame in
      * {@link #makeOrderedRenderable(gov.nasa.worldwind.render.DrawContext)}. Used to define the picked object's layer
      * during pick resolution. Initially <code>null</code>.
@@ -945,6 +951,35 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
         }
 
         this.setPosition(position);
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, this.getAltitudeMode());
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragScreenSizeConstant(dragContext);
     }
 
     /**

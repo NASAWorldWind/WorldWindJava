@@ -6,6 +6,7 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.*;
+import gov.nasa.worldwind.drag.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.util.*;
 
@@ -20,9 +21,11 @@ import java.awt.*;
  * @see AbstractAnnotation
  * @see AnnotationAttributes
  */
-public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Movable
+public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Movable, Draggable
 {
     protected Position position;
+    protected boolean dragEnabled = true;
+    protected DraggableSupport draggableSupport = null;
     protected double heightInMeter = 0;
 
     protected Integer altitudeMode;
@@ -221,6 +224,35 @@ public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Mo
         }
 
         this.position = position;
+    }
+
+    @Override
+    public boolean isDragEnabled()
+    {
+        return this.dragEnabled;
+    }
+
+    @Override
+    public void setDragEnabled(boolean enabled)
+    {
+        this.dragEnabled = enabled;
+    }
+
+    @Override
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
+            return;
+
+        if (this.draggableSupport == null)
+            this.draggableSupport = new DraggableSupport(this, this.getAltitudeMode());
+
+        this.doDrag(dragContext);
+    }
+
+    protected void doDrag(DragContext dragContext)
+    {
+        this.draggableSupport.dragScreenSizeConstant(dragContext);
     }
 
     public Position getReferencePosition()
