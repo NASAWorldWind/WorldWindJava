@@ -189,7 +189,7 @@ public class PointPlacemark extends WWObjectImpl
     protected WWTexture activeTexture; // determined each frame
 
     protected boolean highlighted;
-    protected boolean dragEnabled;
+    protected boolean dragEnabled = true;
     protected DraggableSupport draggableSupport = null;
     protected boolean visible = true;
     protected int altitudeMode = WorldWind.CLAMP_TO_GROUND;
