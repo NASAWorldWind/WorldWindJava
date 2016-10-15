@@ -6,10 +6,20 @@
 
 package gov.nasa.worldwind.util;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import gov.nasa.worldwind.Configuration;
+import gov.nasa.worldwind.util.WWUtil;
 import junit.framework.TestCase;
+
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.util.*;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.StreamHandler;
 
 /**
  * Unit tests for {@link WWUtil}.
@@ -50,4 +60,43 @@ public class WWUtilTest
         time = WWUtil.parseTimeString("invalid time");
         TestCase.assertNull(time);
     }
+    
+    @Test
+    public void testReplacePropertyReferences()
+    {
+    	//Test that we can resolve nested property references 
+    	//and properties defined at the system level
+    	Configuration.setValue("a", "I am a");
+        System.setProperty("b", "${a}");
+    	Configuration.setValue("c", "${a}, ${b}");
+        String expanded = WWUtil.replacePropertyReferences("Prefix_${c}_Suffix");
+        TestCase.assertEquals("Prefix_I am a, I am a_Suffix", expanded);
+    }    
+    
+    @Test
+    public void testReplacePropertyReferencesLogging()
+    {
+    	
+        //Test that we get a log message when the property doesn't exist
+        Logger logger = Logging.logger();
+        
+        SimpleFormatter formatter = new SimpleFormatter();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Handler handler = new StreamHandler(out, formatter);
+        logger.addHandler(handler);
+        try
+        {
+        	WWUtil.replacePropertyReferences("${property.does.not.exist}");
+        	handler.flush();
+            String logMsg = out.toString();
+     
+            assertNotNull(logMsg);
+            assertTrue(logMsg.contains("Failed to find property 'property.does.not.exist' for '${property.does.not.exist}'"));
+        }
+        finally
+        {
+        	logger.removeHandler(handler);
+        }
+    }
+    
 }

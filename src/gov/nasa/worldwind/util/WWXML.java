@@ -816,7 +816,8 @@ public class WWXML
 
         try
         {
-            return xpath.evaluate(path, context);
+            String val = xpath.evaluate(path, context);
+			return WWUtil.replacePropertyReferences(val);
         }
         catch (XPathExpressionException e)
         {

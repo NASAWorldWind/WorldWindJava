@@ -6,6 +6,7 @@
 
 package gov.nasa.worldwind.util;
 
+import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.geom.coords.UTMCoord;
@@ -14,6 +15,7 @@ import java.awt.*;
 import java.lang.reflect.*;
 import java.nio.*;
 import java.text.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -22,6 +24,9 @@ import java.util.regex.Pattern;
  */
 public class WWUtil
 {
+    static final String JAVA_CONFIG_VARIABLE = "\\$\\{([-a-zA-Z0-9._]+)\\}";
+    
+    static final Pattern propPattern = Pattern.compile(JAVA_CONFIG_VARIABLE);
     /**
      * Converts a specified string to an integer value. Returns null if the string cannot be converted.
      *
@@ -1270,4 +1275,45 @@ public class WWUtil
             normals.put(i3 + 2, (float) n3.z);
         }
     }
+	
+	 /**
+     * Replace all instances of ${....} with the corresponding
+     * property defined in the {@link #org.nasa.worldwind.Configuration()}
+     * 
+     * @param in string containing ${} to be replaced
+     * 
+     * @return result of in after ${} replacement
+     */
+	public final static String replacePropertyReferences(String in)
+	{
+	    if(in == null || in.indexOf("${") == -1) return in;
+	    String result = in;
+	    
+	    Matcher matcher = propPattern.matcher(result);
+	    StringBuffer buf = new StringBuffer();
+	    while (matcher.find())
+	    {
+	        String replaceStr = matcher.group(1);
+	        
+	        //Since the Configuration.getStringValue also uses this routine
+	        //this will resolve any nested properties references
+	        String prop = Configuration.getStringValue(replaceStr);   
+	        
+	        //if it isn't in our Configuration, check if it is a system property
+	        if (prop == null )
+	        	//Make sure we expand any properties references in the property
+	            prop = replacePropertyReferences(System.getProperty(replaceStr));
+	        if( prop == null )
+	        {
+	        	Logging.logger().warning(String.format("Failed to find property '%s' for '%s'\n", replaceStr, in));	        	
+	        }
+	        else
+	        {
+				matcher.appendReplacement(buf, prop);
+	        } 	        	    
+	    }
+	    matcher.appendTail(buf);
+	    result = buf.toString();
+	    return result;
+	}
 }
