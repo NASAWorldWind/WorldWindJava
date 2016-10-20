@@ -28,6 +28,7 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.text.*;
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * A collection of static methods use for opening, reading and otherwise working with XML files.
@@ -38,7 +39,9 @@ import java.util.*;
 public class WWXML
 {
     public static final String XLINK_URI = "http://www.w3.org/1999/xlink";
-
+    private static final String PROP_OUTPUTKEY = WWXML.class.getName() + ".outputkey";
+    
+    
     /**
      * Create a DOM builder.
      *
@@ -89,11 +92,48 @@ public class WWXML
      */
     public static Transformer createTransformer()
     {
+        return createTransformer(null);
+    }
+    
+    /**
+     * Create a XML transformer.
+     * @parameter outputKeys a map of {@link javax.xml.transform.OutputKeys} settings
+     * @return a {@link javax.xml.transform.Transformer}
+     *
+     * @throws WWRuntimeException if an error occurs.
+     */
+    public static Transformer createTransformer(Map<String,String> outputKeys)
+    {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
         try
         {
-            return transformerFactory.newTransformer();
+            Transformer transformer = transformerFactory.newTransformer();
+            
+            //Check for any globally assigned ouputkeys for the transformer
+            Integer i=1;
+            String outputKey = PROP_OUTPUTKEY + "." + i;
+            String value;
+            while((value = Configuration.getStringValue(outputKey)) != null)
+            {
+                String[] parts = value.split(",");
+                transformer.setOutputProperty(parts[0], parts[1]);
+                i++;
+                outputKey = PROP_OUTPUTKEY + "." + i;
+            }
+            
+            if(outputKeys != null)
+            {
+                //Now set any provided outputkeys
+                Iterator<Entry<String, String>> it = outputKeys.entrySet().iterator();
+                while (it.hasNext())
+                {
+                    Map.Entry<String, String> pair = (Map.Entry<String, String>)it.next();
+                    transformer.setOutputProperty(pair.getKey().toString(), pair.getValue());
+                }
+            }
+
+            return transformer;
         }
         catch (TransformerConfigurationException e)
         {

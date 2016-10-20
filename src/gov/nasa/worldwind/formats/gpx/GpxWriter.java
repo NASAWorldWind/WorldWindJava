@@ -6,6 +6,7 @@
 package gov.nasa.worldwind.formats.gpx;
 
 import gov.nasa.worldwind.util.Logging;
+import gov.nasa.worldwind.util.WWXML;
 import gov.nasa.worldwind.tracks.Track;
 import gov.nasa.worldwind.tracks.TrackSegment;
 import gov.nasa.worldwind.tracks.TrackPoint;
@@ -153,8 +154,7 @@ public class GpxWriter
 
     private void doFlush() throws javax.xml.transform.TransformerException
     {
-        javax.xml.transform.TransformerFactory factory = javax.xml.transform.TransformerFactory.newInstance();
-        javax.xml.transform.Transformer transformer = factory.newTransformer();
+        javax.xml.transform.Transformer transformer = WWXML.createTransformer();
         javax.xml.transform.Source source = new javax.xml.transform.dom.DOMSource(this.doc);
         transformer.transform(source, this.result);
     }
