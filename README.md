@@ -15,13 +15,6 @@ wide range of geometric objects.
 - [World Wind Forum](http://forum.worldwindcentral.com) provides help from the World Wind community
 - [IntelliJ IDEA](http://www.jetbrains.com/idea/) is used for World Wind Java development
 
-# Development Builds
-
-World Wind Java's current development builds are generated daily from the current GitHub source.
-
-- [World Wind Java daily builds](http://builds.worldwind.arc.nasa.gov/download-release-daily.asp) - SDK archive for daily builds
-- [API Docs daily builds](http://builds.worldwind.arc.nasa.gov/worldwind-releases/daily/docs/api/index.html) - Developer documentation for daily builds
-
 # Upcoming Release 2.1.0
 
 World Wind Java v2.1.0 is an upcoming release that will add first-class 2D map support, OGC Web Coverage Service (WCS)
