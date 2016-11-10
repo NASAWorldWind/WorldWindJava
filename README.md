@@ -63,6 +63,10 @@ The upcoming features of v2.1.0 are available now through the World Wind Java da
   See the RadarVolumeExample.
 - Added ContourBuilder, a utility class for computing contours in arbitrary 2D scalar fields. See the ContourBuilding
   example.
+- Added Draggable interface and shifted drag execution from the BasicDragger to the new interface. Added 
+  DraggableSupport which provides utility methods correcting dragging issues observed with the legacy dragging 
+  implementation. Implemented the Draggable interface on all objects implementing Movable and Movable2 and utilized the 
+  utility methods of DraggableSupport to correct the cursor drifting from the drag object behavior.
 - Improved shape dragging, especially in regions near the poles.
 - Improved the display of surface shapes viewed at oblique angles by using mip-maps to reducing aliasing artifacts.
 - Improved performance when parsing large local raster server configuration files.
