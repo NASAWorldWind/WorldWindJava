@@ -97,6 +97,7 @@ The upcoming features of v2.1.0 are available now through the World Wind Java da
   with very large dimensions are now displayed correctly. The following airspace shapes are affected: CappedCylinder,
   PartialCappedCylinder, Orbit, PolyArc, TrackAirspace, Route, Cake.
 - Fixed an issue where MeasureTool throws an exception when the user drags a control point off the globe.
+- Fixed Github #25, Conversion from DMS to Decimal Degrees fails between 1 Degree and -1 Degree.
 
 # Release 2.0.0, April 30, 2014
 
