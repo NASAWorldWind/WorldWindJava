@@ -130,7 +130,7 @@ public class Angle implements Comparable<Angle>
     }
 
     /**
-     * Obtain an angle from a given number of degrees, minutes and seconds.
+     * Obtain an angle from a given number of positive degrees, minutes and seconds.
      *
      * @param degrees integer number of degrees, positive.
      * @param minutes integer number of minutes, positive only between 0 and 60.
@@ -139,10 +139,16 @@ public class Angle implements Comparable<Angle>
      * @return a new angle whose size in degrees is given by <code>degrees</code>, <code>minutes</code> and
      *         <code>seconds</code>.
      *
-     * @throws IllegalArgumentException if minutes or seconds are outside the 0-60 range.
+     * @throws IllegalArgumentException if minutes or seconds are outside the 0-60 range or the degrees is negative.
      */
     public static Angle fromDMS(int degrees, int minutes, int seconds)
     {
+        if (degrees < 0)
+        {
+            String message = Logging.getMessage("generic.ArgumentOutOfRange", degrees);
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
         if (minutes < 0 || minutes >= 60)
         {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", minutes);
@@ -156,11 +162,27 @@ public class Angle implements Comparable<Angle>
             throw new IllegalArgumentException(message);
         }
 
-        return Angle.fromDegrees(Math.signum(degrees) * (Math.abs(degrees) + minutes / 60d + seconds / 3600d));
+        return Angle.fromDegrees(degrees + minutes / 60d + seconds / 3600d);
     }
 
+    /**
+     * Obtain an angle from a given number of positive degrees and decimal minutes.
+     *
+     * @param degrees integer number of degrees, positive.
+     * @param minutes double representing the decimal representation of minutes and seconds.
+     *
+     * @return a new angle whose size in degrees is given by <code>degrees</code> and decimal <code>minutes</code>.
+     *
+     * @throws IllegalArgumentException if minutes or seconds are outside the 0-60 range or the degrees is negative.
+     */
     public static Angle fromDMdS(int degrees, double minutes)
     {
+        if (degrees < 0)
+        {
+            String message = Logging.getMessage("generic.ArgumentOutOfRange", degrees);
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
         if (minutes < 0 || minutes >= 60)
         {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", minutes);
@@ -168,7 +190,7 @@ public class Angle implements Comparable<Angle>
             throw new IllegalArgumentException(message);
         }
 
-        return Angle.fromDegrees(Math.signum(degrees) * (Math.abs(degrees) + minutes / 60d));
+        return Angle.fromDegrees(degrees + minutes / 60d);
     }
 
     /**
@@ -180,6 +202,7 @@ public class Angle implements Comparable<Angle>
      * 45 12 30 S
      * 45 12 30 N
      * </p>
+     * For a string containing both a sign and compass direction, the compass direction will take precedence.
      *
      * @param dmsString the degrees, minute and second character string.
      *
@@ -215,14 +238,21 @@ public class Angle implements Comparable<Angle>
         // Check for sign prefix and suffix
         int sign = 1;
         char suffix = dmsString.toUpperCase().charAt(dmsString.length() - 1);
+        char prefix = dmsString.charAt(0);
         if (!Character.isDigit(suffix))
         {
             sign = (suffix == 'S' || suffix == 'W') ? -1 : 1;
             dmsString = dmsString.substring(0, dmsString.length() - 1);
             dmsString = dmsString.trim();
+
+            // check and trim the prefix if it is erroneously included
+            if (!Character.isDigit(prefix))
+            {
+                dmsString = dmsString.substring(1, dmsString.length());
+                dmsString = dmsString.trim();
+            }
         }
-        char prefix = dmsString.charAt(0);
-        if (!Character.isDigit(prefix))
+        else if (!Character.isDigit(prefix))
         {
             sign *= (prefix == '-') ? -1 : 1;
             dmsString = dmsString.substring(1, dmsString.length());
