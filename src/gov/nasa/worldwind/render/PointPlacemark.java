@@ -1756,7 +1756,7 @@ public class PointPlacemark extends WWObjectImpl
 
     protected void doDrag(DragContext dragContext)
     {
-        this.draggableSupport.dragGlobeSizeConstant(dragContext);
+        this.draggableSupport.dragScreenSizeConstant(dragContext);
     }
 
     /**

@@ -286,7 +286,7 @@ public class UserFacingIcon extends AVListImpl implements WWIcon, Movable, Dragg
             return;
 
         if (this.draggableSupport == null)
-            this.draggableSupport = new DraggableSupport(this, WorldWind.ABSOLUTE);
+            this.draggableSupport = new DraggableSupport(this, WorldWind.RELATIVE_TO_GROUND);
 
         this.doDrag(dragContext);
     }

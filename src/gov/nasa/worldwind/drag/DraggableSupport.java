@@ -497,6 +497,14 @@ public class DraggableSupport
                 intersections = sceneController.getTerrain().intersect(ray);
                 break;
             case WorldWind.RELATIVE_TO_GROUND:
+
+                // If an object is RELATIVE_TO_GROUND but has an altitude close to 0.0, use the CLAMP_TO_GROUND method
+                if (altitude < 1.0)
+                {
+                    intersections = sceneController.getTerrain().intersect(ray);
+                    break;
+                }
+
                 // When an object maintains a constant screen size independent of globe orientation or eye location, the
                 // dragger attempts to determine the position by testing different points of the ray for a matching
                 // altitude above elevation. The method is only used in objects maintain a constant screen size as the
