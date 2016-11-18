@@ -25,8 +25,8 @@ if [[ $REMOTE_URL != *"@"* ]]; then
 fi
 
 # Add a "daily/YYYYMMDD" tag to the HEAD. Using a "/" in the name allows GUI tools to collect all "daily" tags in a folder.
-#RELEASE_DATE=$(date '+%Y%m%d')
-RELEASE_DATE=$(date '+%Y%m%d-%H%M%Z') # add time for testing
+# RELEASE_DATE=$(date '+%Y%m%d-%H%M%Z') # add time for testing
+RELEASE_DATE=$(date '+%Y%m%d')
 DAILY_TAG="daily/${RELEASE_DATE}"
 
 # Create a lightweight tag (vs an annotated tag) and push it to the remote
