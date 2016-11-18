@@ -81,7 +81,7 @@
          'gov.nasa.worldwind.formats' -->
     <target name="javadocs" depends="clean.javadocs"
             description="Builds the World Wind API documentation for all core and extension packages into the 'doc' folder.">
-        <javadoc destdir="${worldwind.doc.dir}"
+        <javadoc destdir="${worldwind.doc.dir}/javadoc"
                  overview="${worldwind.src.dir}/overview.html"
                  encoding="UTF-8"
                  windowtitle="NASA World Wind" doctitle="NASA World Wind API" header="NASA World Wind"
