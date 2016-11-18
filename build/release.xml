@@ -28,6 +28,7 @@
                 <include name="src/**"/>
                 <include name="test/**"/>
                 <include name="testData/**"/>
+                <include name="travis/**"/>
                 <include name="webstart/**"/>
                 <include name="**/*.iml"/>
                 <include name="*.bash"/>
@@ -71,7 +72,7 @@
         <!-- Copy the World Wind API documentation to the 'api' folder under the docs release folder. -->
         <mkdir dir="${worldwind.doc.release.dir}/api"/>
         <copy todir="${worldwind.doc.release.dir}/api">
-            <fileset dir="${basedir}/doc">
+            <fileset dir="${worldwind.doc.dir}/javadoc">
                 <include name="**"/>
                 <type type="file"/>
             </fileset>
@@ -85,6 +86,11 @@
         <zip destfile="${worldwind.doc.release.zipfile}">
             <fileset dir="${worldwind.doc.release.dir}"/>
         </zip>
+    </target>
+
+    <!-- Bundles the World Wind SDK and the World Wind API documentation into ZIP archives -->
+    <target name="worldwind.bundle" depends="worldwind.release.zipfile, worldwind.doc.release.zipfile"
+            description="Generates the World Wind release zipfiles.">
     </target>
 
     <!-- Makes the World Wind SDK release and World Wind API documentation publicly available by copying them to a
