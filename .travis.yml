@@ -1,0 +1,30 @@
+# This script directs the Travis CI continuous integration build service for the WorldWindJava SDK.
+# For more information see https://docs.travis-ci.com/user/customizing-the-build/
+language: java
+
+# sudo required is used to install the jq JSON filter used to parse the GitHub API results
+sudo: required
+
+jdk:
+- oraclejdk8
+#- oraclejdk7
+#- openjdk6
+
+before_script: |
+  # Prepare the runtime scripting environment
+
+  # Ensure script(s) can be executed (req'd if the scripts were authored in Windows)
+  chmod +x ./travis/*.sh
+
+  # Install the jq shell filter so we can extract data from GitHub API JSON results
+  # See apt configuration: http://docs.travis-ci.com/user/ci-environment/#apt-configuration
+  sudo apt-get install -qq jq
+  jq --version
+
+script: |
+  # Build the project
+  ./travis/run_build.sh
+
+after_success: |
+  # Update GitHub
+  ./travis/update_github.sh
