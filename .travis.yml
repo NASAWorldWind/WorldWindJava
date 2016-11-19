@@ -23,8 +23,21 @@ before_script: |
 
 script: |
   # Build the project
-  ./travis/run_build.sh
+  if [[ "$TRAVIS_EVENT_TYPE" == "cron" ]]; then
+      echo Creating the daily tag
+      ./travis/add_daily_tag.sh
+  else
+      echo Building the SDK with ant
+      ant worldwind.bundle
+      # TODO: Run unit tests
+  fi
 
 after_success: |
-  # Update GitHub
-  ./travis/update_github.sh
+  # Update GitHub on "tagged" builds
+  if [[ -n $TRAVIS_TAG ]]; then
+      echo Updating GitHub Releases
+      ./travis/update_release.sh
+      echo Updating GitHub Pages
+      ./travis/update_javadoc.sh
+  fi
+
