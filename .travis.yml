@@ -1,43 +1,39 @@
-# This script directs the Travis CI continuous integration build service for the WorldWindJava SDK.
+# Directs the Travis CI build service for World Wind Java
 # For more information see https://docs.travis-ci.com/user/customizing-the-build/
-language: java
 
-# sudo required is used to install the jq JSON filter used to parse the GitHub API results
+# Required to install the jq JSON filter used to parse GitHub API results
 sudo: required
 
+# Set up to run the Java build script per the Travis CI documentatio
+language: java
+
 jdk:
-- oraclejdk8
-#- oraclejdk7
-#- openjdk6
+  # Configure the build to use Oracle JDK 8
+  - oraclejdk8
 
-before_script: |
-  # Prepare the runtime scripting environment
-
-  # Ensure script(s) can be executed (req'd if the scripts were authored in Windows)
-  chmod +x ./travis/*.sh
-
+before_script:
   # Install the jq shell filter so we can extract data from GitHub API JSON results
-  # See apt configuration: http://docs.travis-ci.com/user/ci-environment/#apt-configuration
-  sudo apt-get install -qq jq
-  jq --version
+  # See apt configuration: https://docs.travis-ci.com/user/ci-environment/#apt-configuration
+  - sudo apt-get install -qq jq
+  - jq --version
+  # Ensure scripts can be executed (required if scripts are authored in Windows)
+  - chmod +x ./travis/*.sh
 
-script: |
+script:
   # Build the project
-  if [[ "$TRAVIS_EVENT_TYPE" == "cron" ]]; then
-      echo Creating the daily tag
-      ./travis/add_daily_tag.sh
-  else
-      echo Building the SDK with ant
-      ant worldwind.bundle
-      # TODO: Run unit tests
-  fi
+  - ant worldwind.bundle
 
-after_success: |
-  # Update GitHub on "tagged" builds
-  if [[ -n $TRAVIS_TAG ]]; then
-      echo Updating GitHub Releases
-      ./travis/update_release.sh
-      echo Updating GitHub Pages
-      ./travis/update_javadoc.sh
-  fi
+after_success:
+  # Push the daily tag when this build is a cron job
+  - ./travis/add_daily_tag.sh
+  # Push javadoc to GitHub pages and upload build artifacts to GitHub releases, depending on what initiated the build
+  - ./travis/update_javadoc.sh
+  - ./travis/update_release.sh
 
+notifications:
+  # Notify the World Wind services mailing list on every build
+  email:
+    recipients:
+      secure: OM6MdC79yU5Q7DCaYeABrRf2feKRvJ8UsYzs9YtmMdiwR2a2Aw6yPUunp8EtGD2/SzI/kJibeL6SMrbgI9LZRDnSM6PtpxzC023ogw02WfYegCUc10j5cN6GLzdV81ZTu8FxKvfyQMAEqsgCibHPRyBTk98NbwKHzsvxZm+wjK1hNEP76J05dBn5MjOMdTPtXsy0zS/iyPq76Y8BN/+jsPn5jUY3rTeOvmt5aCW6rXyjBeoJvsyjhuxacTnGUif334LE5yzVSKv4Nmy8UQRhKTDn/BuFikaMtEi4xKpgoQyc7A6wNG0QlxsYY9yRk6dl952q4PHz3xoXJ8LApb8ymbMxXHceOdipecwAWTmlfZPv6EMOrjITPpygtVZjz23QZm07/HMEiE/4NpIE4/ie0kiIPH59qEpKfNQ72iyWS5Zg4FD+l8ofqpGUWLlBaLzGEl6XgXH6oiFm//+wfSI9OWCZKDEYK6P24X0Ncv1Gi2zY2wVZsajqesXiWRCBEEFmjVQ1iNLX7AYsZQMd3ah8++2o3/Ti5eDagPsAVWpR8ULHFNk2+R6H7OQ6acHYVWnbzYuvIkzXYMNVvQ6PZRUvbJNdfwBw15V+s1D0PvPs1Nbc/Jq7RgWMEMUnqWNxFRXEhhbjmV/i2keSA1QPBxADSUAIkZNNkzCD+3KL/rRFDug=
+    on_success: always
+    on_failure: always
