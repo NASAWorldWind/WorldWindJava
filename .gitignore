@@ -1,2 +1,7 @@
+/classes/
+/doc/
+/testReports/
 .DS_Store
 *.class
+worldwind.jar
+worldwindx.jar

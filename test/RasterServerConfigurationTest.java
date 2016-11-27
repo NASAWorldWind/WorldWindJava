@@ -8,6 +8,8 @@ import gov.nasa.worldwind.data.RasterServerConfiguration;
 import gov.nasa.worldwind.geom.Sector;
 import junit.framework.*;
 import junit.textui.TestRunner;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import javax.xml.stream.XMLStreamException;
 import java.util.*;
@@ -16,6 +18,7 @@ import java.util.*;
  * @author tag
  * @version $Id: RasterServerConfigurationTest.java 2813 2015-02-18 23:35:24Z tgaskins $
  */
+@RunWith(Enclosed.class)
 public class RasterServerConfigurationTest
 {
     public static class Tests extends TestCase

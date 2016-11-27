@@ -10,6 +10,7 @@ import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.symbology.IconRetriever;
 import org.junit.Assert;
+import org.junit.Ignore;
 
 import java.awt.image.*;
 
@@ -17,6 +18,7 @@ import java.awt.image.*;
  * @author pabercrombie
  * @version $Id: PointGraphicRetrievalTest.java 563 2012-04-26 18:16:22Z pabercrombie $
  */
+@Ignore // Test takes very long to execute.
 public class PointGraphicRetrievalTest
 {
     // This path should correspond to the location of the appropriate symbology source icons on your system

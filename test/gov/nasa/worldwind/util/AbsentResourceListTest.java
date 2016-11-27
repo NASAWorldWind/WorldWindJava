@@ -8,6 +8,8 @@ package gov.nasa.worldwind.util;
 
 import junit.framework.*;
 import junit.textui.TestRunner;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * Tests operation of AbsentResourceList.
@@ -15,6 +17,7 @@ import junit.textui.TestRunner;
  * @author tag
  * @version $Id: AbsentResourceListTest.java 1171 2013-02-11 21:45:02Z dcollins $
  */
+@RunWith(Enclosed.class)
 public class AbsentResourceListTest
 {
     public static class Tests extends TestCase

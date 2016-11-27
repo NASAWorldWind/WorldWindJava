@@ -12,6 +12,8 @@ import gov.nasa.worldwind.util.*;
 import junit.framework.*;
 import junit.textui.TestRunner;
 import org.junit.*;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.net.*;
@@ -21,6 +23,7 @@ import java.util.Arrays;
  * @author dcollins
  * @version $Id: ShapefileTest.java 2343 2014-09-24 00:02:52Z dcollins $
  */
+@RunWith(Enclosed.class)
 public class ShapefileTest
 {
     public static void main(String[] args)

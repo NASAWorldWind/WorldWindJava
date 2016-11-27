@@ -8,11 +8,14 @@ package gov.nasa.worldwind.geom;
 import junit.framework.*;
 import junit.textui.TestRunner;
 import org.junit.*;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * @author tag
  * @version $Id: PlaneTest.java 1171 2013-02-11 21:45:02Z dcollins $
  */
+@RunWith(Enclosed.class)
 public class PlaneTest
 {
     public static class Tests extends TestCase

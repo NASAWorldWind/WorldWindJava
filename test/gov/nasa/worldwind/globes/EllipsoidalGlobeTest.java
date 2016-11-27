@@ -10,11 +10,14 @@ import junit.framework.*;
 import junit.textui.TestRunner;
 import org.junit.*;
 import org.junit.Assert;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * @author tag
  * @version $Id: EllipsoidalGlobeTest.java 1171 2013-02-11 21:45:02Z dcollins $
  */
+@RunWith(Enclosed.class)
 public class EllipsoidalGlobeTest
 {
     private static final double TOLERANCE = 0.1d;

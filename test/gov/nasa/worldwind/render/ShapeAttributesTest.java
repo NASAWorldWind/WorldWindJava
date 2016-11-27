@@ -9,6 +9,8 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.util.RestorableSupport;
 import junit.framework.*;
 import junit.textui.TestRunner;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import java.awt.*;
 
@@ -16,6 +18,7 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: ShapeAttributesTest.java 1171 2013-02-11 21:45:02Z dcollins $
  */
+@RunWith(Enclosed.class)
 public class ShapeAttributesTest
 {
     public static void main(String[] args)
