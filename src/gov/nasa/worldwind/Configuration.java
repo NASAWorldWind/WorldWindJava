@@ -256,6 +256,11 @@ public class Configuration // Singleton
     public static synchronized String getStringValue(String key)
     {
         Object o = getInstance().properties.getProperty(key);
+		
+		if( o != null && o instanceof String )
+        {
+            o = WWUtil.replacePropertyReferences((String)o);            
+        }
         return o != null ? o.toString() : null;
     }
 
