@@ -10,6 +10,7 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.Logging;
+import gov.nasa.worldwind.util.WWXML;
 
 import javax.xml.transform.*;
 import javax.xml.transform.stream.*;
@@ -156,10 +157,11 @@ public class ExportKML
             String xmlString = stringWriter.toString();
 
             // Set up a transformer to pretty-print the XML
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-
+            Map<String,String> outputKeys = new HashMap<String,String>();
+            outputKeys.put(OutputKeys.INDENT, "yes");
+            outputKeys.put("{http://xml.apache.org/xslt}indent-amount", "4");
+            Transformer transformer = WWXML.createTransformer(outputKeys);
+            
             // Write the pretty-printed document to stdout
             transformer.transform(new StreamSource(new StringReader(xmlString)), new StreamResult(System.out));
         }

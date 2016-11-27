@@ -5,6 +5,7 @@
  */
 package gov.nasa.worldwind.util;
 
+import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.OffsetsList;
@@ -44,7 +45,8 @@ public class RestorableSupport
 {
     protected static final String DEFAULT_DOCUMENT_ELEMENT_TAG_NAME = "restorableState";
     protected static final String DEFAULT_STATE_OBJECT_TAG_NAME = "stateObject";
-
+    private static final String PROP_OUTPUTKEY = RestorableSupport.class.getName() + ".outputkey";
+    
     protected org.w3c.dom.Document doc;
     protected javax.xml.xpath.XPath xpath;
     protected String stateObjectTagName;
@@ -203,14 +205,25 @@ public class RestorableSupport
      */
     public String getStateAsXml()
     {
-        javax.xml.transform.TransformerFactory transformerFactory =
-            javax.xml.transform.TransformerFactory.newInstance();
+        //Check for any restorablestate ouputkeys for the transformer
+        Map<String, String> outputKeys = new HashMap<String,String>();
+        Integer i=1;
+        String outputKey = PROP_OUTPUTKEY + "." + i;
+        String value;
+        while((value = Configuration.getStringValue(outputKey)) != null)
+        {
+            String[] parts = value.split(",");
+            outputKeys.put(parts[0], parts[1]);
+            i++;
+            outputKey = PROP_OUTPUTKEY + "." + i;
+        }       
+        
         try
         {
             // The StringWriter will receive the document xml.
             java.io.StringWriter stringWriter = new java.io.StringWriter();
             // Attempt to write the Document to the StringWriter.
-            javax.xml.transform.Transformer transformer = transformerFactory.newTransformer();
+            javax.xml.transform.Transformer transformer = WWXML.createTransformer(outputKeys);
             transformer.transform(
                 new javax.xml.transform.dom.DOMSource(this.doc),
                 new javax.xml.transform.stream.StreamResult(stringWriter));

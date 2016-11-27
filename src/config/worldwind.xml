@@ -100,4 +100,12 @@
                    jar:file:milstd2525-symbols.zip!  (local zip archive)  -->
     <Property name="gov.nasa.worldwind.avkey.MilStd2525IconRetrieverPath"
               value="http://worldwind.arc.nasa.gov/milstd2525c/rev1/"/>
+    
+    <!-- WWXML Transformer output features can be specified by listing valid javax.xml.transform.OutputKeys -->
+    <!-- Uncomment the following to have all XML documents created through WWXML pretty printed -->
+    <!--<Property name="gov.nasa.worldwind.util.WWXML.outputkey.1" value="indent,yes"/>
+    <Property name="gov.nasa.worldwind.util.WWXML.outputkey.2" value="{http://xml.apache.org/xslt}indent-amount,4"/>-->
+    
+    <!-- Uncomment the following to allow restorable XML strings to be embedded in other XML documednts -->
+    <!--<Property name="gov.nasa.worldwind.util.RestorableSupport.outputkey.1" value="omit-xml-declaration,yes"/>-->
 </WorldWindConfiguration>
