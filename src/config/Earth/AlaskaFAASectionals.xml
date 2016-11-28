@@ -9,8 +9,8 @@
 <Layer version="1" layerType="TiledImageLayer">
     <DisplayName>FAA Sectionals</DisplayName>
     <Service serviceName="OGC:WMS" version="1.3">
-        <GetCapabilitiesURL>http://worldwind20.arc.nasa.gov/faachart</GetCapabilitiesURL>
-        <GetMapURL>http://worldwind20.arc.nasa.gov/faachart</GetMapURL>
+        <GetCapabilitiesURL>https://worldwind20.arc.nasa.gov/faachart</GetCapabilitiesURL>
+        <GetMapURL>https://worldwind20.arc.nasa.gov/faachart</GetMapURL>
         <LayerNames>FAAchart</LayerNames>
     </Service>
     <RetrievePropertiesFromService>true</RetrievePropertiesFromService>

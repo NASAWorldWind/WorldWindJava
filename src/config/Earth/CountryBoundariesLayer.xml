@@ -9,8 +9,8 @@
 <Layer version="1" layerType="TiledImageLayer">
     <DisplayName>Political Boundaries</DisplayName>
     <Service serviceName="OGC:WMS" version="1.3">
-        <GetCapabilitiesURL>http://worldwind22.arc.nasa.gov/geoserver/wms</GetCapabilitiesURL>
-        <GetMapURL>http://worldwind22.arc.nasa.gov/geoserver/wms</GetMapURL>
+        <GetCapabilitiesURL>https://worldwind22.arc.nasa.gov/geoserver/wms</GetCapabilitiesURL>
+        <GetMapURL>https://worldwind22.arc.nasa.gov/geoserver/wms</GetMapURL>
         <LayerNames>topp:cia</LayerNames>
         <StyleNames>countryboundaries</StyleNames>
     </Service>

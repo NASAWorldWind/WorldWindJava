@@ -9,8 +9,8 @@
 <Layer version="1" layerType="TiledImageLayer">
     <DisplayName>i-cubed Landsat</DisplayName>
     <Service serviceName="OGC:WMS" version="1.3">
-        <GetCapabilitiesURL>http://worldwind25.arc.nasa.gov/wms</GetCapabilitiesURL>
-        <GetMapURL>http://worldwind25.arc.nasa.gov/wms</GetMapURL>
+        <GetCapabilitiesURL>https://worldwind25.arc.nasa.gov/wms</GetCapabilitiesURL>
+        <GetMapURL>https://worldwind25.arc.nasa.gov/wms</GetMapURL>
         <LayerNames>BlueMarble-200405,esat</LayerNames>
     </Service>
     <RetrievePropertiesFromService>true</RetrievePropertiesFromService>

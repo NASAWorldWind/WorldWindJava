@@ -11,8 +11,8 @@
     <ElevationModel version="1">
         <DisplayName>USA 10m, World 30m, Ocean 900m</DisplayName>
         <Service serviceName="OGC:WMS" version="1.3">
-            <GetCapabilitiesURL>http://data.worldwind.arc.nasa.gov/elev</GetCapabilitiesURL>
-            <GetMapURL>http://data.worldwind.arc.nasa.gov/elev</GetMapURL>
+            <GetCapabilitiesURL>https://data.worldwind.arc.nasa.gov/elev</GetCapabilitiesURL>
+            <GetMapURL>https://data.worldwind.arc.nasa.gov/elev</GetMapURL>
             <LayerNames>mergedAsterElevations</LayerNames>
         </Service>
         <RetrievePropertiesFromService>true</RetrievePropertiesFromService>

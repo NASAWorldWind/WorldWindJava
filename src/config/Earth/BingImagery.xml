@@ -10,8 +10,8 @@
 <Layer version="1" layerType="TiledImageLayer">
     <DisplayName>Bing Imagery</DisplayName>
     <Service serviceName="OGC:WMS" version="1.1.1">
-        <GetCapabilitiesURL>http://worldwind27.arc.nasa.gov/wms/virtualearth</GetCapabilitiesURL>
-        <GetMapURL>http://worldwind27.arc.nasa.gov/wms/virtualearth</GetMapURL>
+        <GetCapabilitiesURL>https://worldwind27.arc.nasa.gov/wms/virtualearth</GetCapabilitiesURL>
+        <GetMapURL>https://worldwind27.arc.nasa.gov/wms/virtualearth</GetMapURL>
         <LayerNames>ve</LayerNames>
     </Service>
     <RetrievePropertiesFromService>true</RetrievePropertiesFromService>

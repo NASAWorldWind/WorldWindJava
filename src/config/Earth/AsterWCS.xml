@@ -10,8 +10,8 @@
     <ElevationModel version="1">
         <DisplayName>Aster V2</DisplayName>
         <Service serviceName="OGC:WCS" version="1.0.0">
-            <GetCapabilitiesURL> http://worldwind26.arc.nasa.gov/wms2</GetCapabilitiesURL>
-            <GetCoverageURL>http://worldwind26.arc.nasa.gov/wms2</GetCoverageURL>
+            <GetCapabilitiesURL>https://worldwind26.arc.nasa.gov/wms2</GetCapabilitiesURL>
+            <GetCoverageURL>https://worldwind26.arc.nasa.gov/wms2</GetCoverageURL>
             <CoverageIdentifiers>aster_v2</CoverageIdentifiers>
         </Service>
         <RetrievePropertiesFromService>false</RetrievePropertiesFromService>

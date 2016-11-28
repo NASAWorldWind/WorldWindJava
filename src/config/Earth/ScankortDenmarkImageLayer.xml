@@ -9,8 +9,8 @@
 <Layer version="1" layerType="TiledImageLayer">
     <DisplayName>Scankort Denmark</DisplayName>
     <Service serviceName="OGC:WMS" version="1.3">
-        <GetCapabilitiesURL>http://data.worldwind.arc.nasa.gov/wms</GetCapabilitiesURL>
-        <GetMapURL>http://data.worldwind.arc.nasa.gov/wms</GetMapURL>
+        <GetCapabilitiesURL>https://data.worldwind.arc.nasa.gov/wms</GetCapabilitiesURL>
+        <GetMapURL>https://data.worldwind.arc.nasa.gov/wms</GetMapURL>
         <LayerNames>Scankort</LayerNames>
     </Service>
     <!-- day month year hours:minutes:seconds timezone -->

@@ -9,8 +9,8 @@
 <ElevationModel version="1">
     <DisplayName>Scankort Denmark DSM</DisplayName>
     <Service serviceName="OGC:WMS" version="1.3">
-        <GetCapabilitiesURL>http://data.worldwind.arc.nasa.gov/elev</GetCapabilitiesURL>
-        <GetMapURL>http://data.worldwind.arc.nasa.gov/elev</GetMapURL>
+        <GetCapabilitiesURL>https://data.worldwind.arc.nasa.gov/elev</GetCapabilitiesURL>
+        <GetMapURL>https://data.worldwind.arc.nasa.gov/elev</GetMapURL>
         <LayerNames>ScankortElevationsDenmarkDSM</LayerNames>
     </Service>
     <!-- day month year hours:minutes:seconds timezone -->
