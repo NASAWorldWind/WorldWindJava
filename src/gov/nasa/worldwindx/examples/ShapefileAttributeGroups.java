@@ -44,7 +44,7 @@ public class ShapefileAttributeGroups extends ApplicationTemplate
         {
             // Create the mapping from region key to group name and color.
             // Continent codes are documented at http://unstats.un.org/unsd/methods/m49/m49regin.htm
-            // Continent names and colors are based on http://en.wikipedia.org/wiki/Continent
+            // Continent names and colors are based on https://en.wikipedia.org/wiki/Continent
 
             this.groups.put(2, new AttributeGroup("Africa", new Color(255, 198, 0)));
             this.groups.put(150, new AttributeGroup("Europe", new Color(255, 9, 84)));
