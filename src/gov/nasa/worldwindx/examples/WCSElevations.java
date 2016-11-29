@@ -21,7 +21,7 @@ public class WCSElevations extends ApplicationTemplate
 {
     protected static final String[] servers = new String[]
         {
-            "http://worldwind26.arc.nasa.gov/wms2",
+            "https://worldwind26.arc.nasa.gov/elev",
         };
 
     public static class AppFrame extends ApplicationTemplate.AppFrame

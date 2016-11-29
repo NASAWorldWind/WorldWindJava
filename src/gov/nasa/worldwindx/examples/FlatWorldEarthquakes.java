@@ -37,7 +37,7 @@ public class FlatWorldEarthquakes extends ApplicationTemplate
     // See the USGS GeoJSON feed documentation for information on this earthquake data feed:
     // https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
     protected static final String USGS_EARTHQUAKE_FEED_URL
-        = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson";
+        = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson";
     protected static final String USGS_EARTHQUAKE_MAGNITUDE = "mag";
     protected static final String USGS_EARTHQUAKE_PLACE = "place";
     protected static final String USGS_EARTHQUAKE_TIME = "time";

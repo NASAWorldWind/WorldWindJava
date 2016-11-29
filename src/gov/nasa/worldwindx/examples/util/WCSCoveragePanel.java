@@ -319,7 +319,7 @@ public class WCSCoveragePanel extends JPanel
         try
         {
             final JFrame controlFrame = new JFrame();
-            controlFrame.getContentPane().add(new WCSCoveragePanel(null, "http://worldwind26.arc.nasa.gov/wms2?",
+            controlFrame.getContentPane().add(new WCSCoveragePanel(null, "https://worldwind26.arc.nasa.gov/elev?",
                 new Dimension(400, 600)));
             controlFrame.pack();
             controlFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

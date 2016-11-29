@@ -75,7 +75,7 @@ public class SAR2 extends JFrame
 
     // Help
     protected static final String ONLINE_HELP_URL
-        = "http://worldwind.arc.nasa.gov/java/apps/SARApp/help/v6/SARHelp.html";
+        = "https://worldwind.arc.nasa.gov/java/apps/SARApp/help/v6/SARHelp.html";
 
     // Preferences
     protected static AVList userPreferences = new AVListImpl();
