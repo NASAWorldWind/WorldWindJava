@@ -10,8 +10,8 @@
     <ElevationModel version="1">
         <DisplayName>USA 10m, World 30m, Ocean 900m</DisplayName>
         <Service serviceName="OGC:WMS" version="1.3">
-            <GetCapabilitiesURL> http://worldwind26.arc.nasa.gov/wms</GetCapabilitiesURL>
-            <GetMapURL>http://worldwind26.arc.nasa.gov/wms</GetMapURL>
+            <GetCapabilitiesURL>https://worldwind26.arc.nasa.gov/elev</GetCapabilitiesURL>
+            <GetMapURL>https://worldwind26.arc.nasa.gov/elev</GetMapURL>
             <LayerNames>NASA_SRTM30_900m_Tiled,aster_v2,USGS-NED</LayerNames>
         </Service>
         <RetrievePropertiesFromService>true</RetrievePropertiesFromService>
