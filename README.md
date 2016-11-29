@@ -40,6 +40,23 @@ builds have the newest, bleeding-edge World Wind Java features. Intended for dev
 - [Releases](https://github.com/NASAWorldWind/WorldWindJava/releases) hosts the daily builds
 - [API Documentation](https://nasaworldwind.github.io/assets/java/daily/javadoc) for the current daily build
 
+## JOGL Native Binaries
+
+JOGL performs runtime extraction of native binaries. Some deployment situations may not allow this because it extracts 
+the binaries to the application user’s temp directory. Runtime extraction can be avoided by by modifying World Wind 
+Java's JOGL distribution to load native binaries directly from the library path instead of dynamically using the native 
+binary JAR files as follows:
+                                                                                                     
+1. Extract the GlueGen and JOGL native binary JAR files for the desired platform.
+   These JAR files follow the naming pattern gluegen-rt-natives-PLATFORM.jar and jogl-all-natives-PLATFORM.jar
+2. Place the extracted native binaries either in the program's working directory or in a location specified as the
+   library path. The following JOGL user's guide page outlines supported library path variables:
+   https://jogamp.org/jogl/doc/userguide/index.html#traditionallibraryloading
+3. Remove the GlueGen and JOGL native binary JAR files from your application's workspace.
+   JOGL attempts to use the native binary JAR files before loading from the library path, so these files must not be
+   deployed with the application.
+4. When running, specify the JVM argument -Djogamp.gluegen.UseTempJarCache=false
+
 ## License
 
     NASA WORLD WIND
