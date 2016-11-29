@@ -20,7 +20,7 @@ public class WMSLayerManager
 {
     protected static final String[] servers = new String[]
         {
-            "http://neowms.sci.gsfc.nasa.gov/wms/wms",
+            "https://neowms.sci.gsfc.nasa.gov/wms/wms",
             "https://sedac.ciesin.columbia.edu/geoserver/wcs"
         };
 

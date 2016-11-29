@@ -32,7 +32,7 @@ public class EuroGeossApp
     protected static final String EUROGEOSS_SERVICE_TITLE = "EuroGEOSS Catalog";
     protected static final String EUROGEOSS_SERVICE_URL = "http://23.21.170.207/geodab-dswg/services/cswisogeo";
     protected static final String NEO_SERVICE_TITLE = "NASA Earth Observations (NEO) WMS";
-    protected static final String NEO_SERVICE_URL = "http://neowms.sci.gsfc.nasa.gov/wms/wms";
+    protected static final String NEO_SERVICE_URL = "https://neowms.sci.gsfc.nasa.gov/wms/wms";
 
     public static class AppPanel extends JPanel
     {
