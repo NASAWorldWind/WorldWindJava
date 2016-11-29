@@ -67,7 +67,7 @@ public class NASAWFSPlaceNameLayer extends PlaceNameLayer {
     }
 
     private static PlaceNameServiceSet makePlaceNameServiceSet() {
-        final String service = "http://worldwind22.arc.nasa.gov/geoserver/wfs";
+        final String service = "https://worldwind22.arc.nasa.gov/geoserver/wfs";
         final String fileCachePath = "Earth/PlaceNames/WFSPlaceNamesVersion1.0";
         PlaceNameServiceSet placeNameServiceSet = new PlaceNameServiceSet();
         placeNameServiceSet.setExpiryTime(new GregorianCalendar(2008, 1, 11).getTimeInMillis());
