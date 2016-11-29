@@ -373,6 +373,8 @@ public class WorldWindowGLJPanel extends GLJPanel implements WorldWindow, Proper
     public synchronized void addPropertyChangeListener(PropertyChangeListener listener)
     {
         super.addPropertyChangeListener(listener);
+        if (wwd != null) // defensive condition for NPE that happens when (for example) setting a swing look/feel
+            this.wwd.addPropertyChangeListener(listener);
     }
 
     @Override
