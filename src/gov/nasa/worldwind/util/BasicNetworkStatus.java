@@ -369,7 +369,7 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
         URLConnection connection = null;
         try
         {
-            URL url = new URL("http://" + hostName);
+            URL url = new URL("https://" + hostName);
             Proxy proxy = WWIO.configureProxy();
             if (proxy != null)
                 connection = url.openConnection(proxy);

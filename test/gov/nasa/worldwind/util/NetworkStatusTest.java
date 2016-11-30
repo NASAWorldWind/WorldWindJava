@@ -64,14 +64,14 @@ public class NetworkStatusTest
         {
             String hostName = "nasa.gov";
 
-            boolean tf = this.netStat.isHostUnavailable(new URL("http://" + hostName + "/path?abc=123"));
+            boolean tf = this.netStat.isHostUnavailable(new URL("https://" + hostName + "/path?abc=123"));
             assertFalse("Host unavailable test ", tf);
         }
 
         public void testHostLimitReached() throws MalformedURLException
         {
             String hostName = "nasa.gov";
-            URL url = new URL("http://" + hostName + "/path?abc=123");
+            URL url = new URL("https://" + hostName + "/path?abc=123");
 
             this.makeHostUnavailable(url);
             boolean tf = this.netStat.isHostUnavailable(url);
@@ -81,7 +81,7 @@ public class NetworkStatusTest
         public void testHostLimitNotReached() throws MalformedURLException
         {
             String hostName = "nasa.gov";
-            URL url = new URL("http://" + hostName + "/path?abc=123");
+            URL url = new URL("https://" + hostName + "/path?abc=123");
 
             for (int i = 0; i < this.netStat.getAttemptLimit() - 1; i++)
             {
@@ -95,7 +95,7 @@ public class NetworkStatusTest
         public void testHostReavailable() throws MalformedURLException
         {
             String hostName = "nasa.gov";
-            URL url = new URL("http://" + hostName + "/path?abc=123");
+            URL url = new URL("https://" + hostName + "/path?abc=123");
 
             this.makeHostUnavailable(url);
             this.netStat.logAvailableHost(url);
@@ -106,7 +106,7 @@ public class NetworkStatusTest
         public void testHostTryAgain() throws MalformedURLException, InterruptedException
         {
             String hostName = "nasa.gov";
-            URL url = new URL("http://" + hostName + "/path?abc=123");
+            URL url = new URL("https://" + hostName + "/path?abc=123");
 
             this.netStat.setTryAgainInterval(100);
             this.makeHostUnavailable(url);
@@ -121,7 +121,7 @@ public class NetworkStatusTest
         public void testNetworkAvailableAfterSuccessLogged() throws MalformedURLException
         {
             String hostName = "nasa.gov";
-            URL url = new URL("http://" + hostName + "/path?abc=123");
+            URL url = new URL("https://" + hostName + "/path?abc=123");
 
             this.makeHostUnavailable(url);
             this.netStat.logAvailableHost(url);
