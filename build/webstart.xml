@@ -37,9 +37,9 @@
             </fileset>
         </copy>
         <!-- Create the WebView native library JAR files in the Web Start directory. The Permissions attribute is
-             ignored for locally launched applications, but is required for signed Web Start Applications and Applets
-             starting in Java 7 update 45. This property must match the setting specified in the JNLP file or Applet
-             used to launch the application. See
+             ignored for locally launched applications, but is required for signed Web Start Applications starting in
+             Java 7 update 45. This property must match the setting specified in the JNLP file used to launch the
+             application. See
              http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/manifest.html#permissions-->
         <jar jarfile="${webstart.dir}/${webview.macosx.jarfile}">
             <manifest>
@@ -92,8 +92,8 @@
         <copy file="${basedir}/${gdal.jarfile}" todir="${webstart.dir}"/>
         <!-- Create the World Wind GDAL data JAR file and the World Wind GDAL native library JAR files in the Web Start
              directory. The Permissions attribute is ignored for locally launched applications, but is required for
-             signed Web Start Applications and Applets starting in Java 7 update 45. This property must match the
-             setting specified in the JNLP file or Applet used to launch the application. See
+             signed Web Start Applications starting in Java 7 update 45. This property must match the setting specified
+             in the JNLP file to launch the application. See
              http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/manifest.html#permissions -->
         <jar jarfile="${webstart.dir}/${gdal.data.jarfile}">
             <manifest>

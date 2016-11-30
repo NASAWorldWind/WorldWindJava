@@ -21,7 +21,6 @@ public class AppFrameImpl extends AbstractFeature implements AppFrame
 {
     // only one of these will be non-null
     protected JFrame frame;
-    protected JApplet applet;
 
     public AppFrameImpl(Registry registry)
     {
@@ -31,12 +30,7 @@ public class AppFrameImpl extends AbstractFeature implements AppFrame
     public void initialize(final Controller controller)
     {
         super.initialize(controller);
-
-        this.applet = (JApplet) this.controller.getRegisteredObject(Constants.APPLET_PANEL);
-        if (this.applet != null)
-            this.initializeApplet(this.applet);
-        else
-            this.initializeApp();
+        this.initializeApp();
     }
 
     protected void initializeApp()
@@ -73,7 +67,7 @@ public class AppFrameImpl extends AbstractFeature implements AppFrame
             frame.setLocation(x, y);
             frame.setResizable(true);
 
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             frame.setVisible(true);
         }
         catch (Exception e)
@@ -84,16 +78,8 @@ public class AppFrameImpl extends AbstractFeature implements AppFrame
         }
     }
 
-    protected void initializeApplet(JApplet applet)
-    {
-        applet.getContentPane().add(controller.getAppPanel().getJPanel(), BorderLayout.CENTER);
-        applet.add(controller.getToolBar().getJToolBar(), BorderLayout.PAGE_START);
-//        applet.add(controller.getStatusPanel().getJPanel(), BorderLayout.PAGE_END);
-//        applet.setJMenuBar(controller.getMenuBar().getJMenuBar());
-    }
-
     public Frame getFrame()
     {
-        return this.frame != null ? this.frame : Util.findParentFrame(this.applet);
+        return this.frame;
     }
 }

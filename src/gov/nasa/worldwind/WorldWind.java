@@ -97,8 +97,7 @@ public final class WorldWind
      * Reinitialize World Wind to its initial ready state. Shut down and restart all World Wind services and clear all
      * World Wind memory caches. Cache memory will be released at the next JVM garbage collection.
      * <p/>
-     * Call this method to reduce World Wind's current resource usage to its initial, empty state. This is typically
-     * required by applets when the user leaves the applet page.
+     * Call this method to reduce World Wind's current resource usage to its initial, empty state.
      * <p/>
      * The state of any open {@link WorldWindow} objects is indeterminate subsequent to invocation of this method. The
      * core WorldWindow objects attempt to shut themselves down cleanly during the call, but their resulting window

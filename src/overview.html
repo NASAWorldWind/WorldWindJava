@@ -4,12 +4,9 @@
 
 <p>
     World Wind is a collection of components that interactively display 3D geographic information within Java
-    applications or applets. Applications and applets use World Wind by placing one or more {@link
-    gov.nasa.worldwind.WorldWindow} components in their user interface. The World Wind components are extensible. The
-    API is defined primarily by interfaces, so components can be selectively replaced by alternative components.</p>
-
-<p>
-    To use World Wind as an applet, see the package {@link gov.nasa.worldwindx.examples.applet}. </p>
+    applications. Applications use World Wind by placing one or more {@link gov.nasa.worldwind.WorldWindow} components
+    in their user interface. The World Wind components are extensible. The API is defined primarily by interfaces, so
+    components can be selectively replaced by alternative components.</p>
 
 <p>
     <code>WorldWindow</code> is an interface. Toolkit-specific implementations of the interface are provided for
@@ -17,7 +14,7 @@
                              gov.nasa.worldwind.awt.WorldWindowGLCanvas}.</p>
 
 <p>
-    In addition to <code>WorldWindow</code>, there are five major World Wind interfaces. They are:
+    In addition to <code>WorldWindow</code>, there are five major World Wind interfaces. They are:</p>
 <ul>
     <li>{@link gov.nasa.worldwind.globes.Globe} &mdash; represents a planet's shape and terrain.</li>
     <li>{@link gov.nasa.worldwind.layers.Layer} &mdash; applies imagery or information to a <code>Globe</code>.</li>
@@ -28,7 +25,6 @@
 
     <li>{@link gov.nasa.worldwind.View} &mdash; interactively controls the user's view of the model.</li>
 </ul>
-</p>
 
 <p>
     In typical usage, applications associate a <code>Globe</code> and several <code>Layer</code>s with a <code>
