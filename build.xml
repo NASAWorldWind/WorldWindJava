@@ -170,7 +170,6 @@
                  packaging unnecessary resources in the Jar file, and (b) this ensures that anything added to config or
                  images is included without requiring changes to this build target. -->
             <fileset dir="${worldwind.src.dir}">
-                <include name="gov/nasa/worldwindx/applications/eurogeoss/images/**"/>
                 <include name="gov/nasa/worldwindx/applications/sar/*.html"/>
                 <include name="gov/nasa/worldwindx/applications/sar/config/**"/>
                 <include name="gov/nasa/worldwindx/applications/sar/data/**"/>
