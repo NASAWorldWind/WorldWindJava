@@ -6,7 +6,7 @@
   -->
 
 <!-- $Id: build.xml 1941 2014-04-16 02:11:51Z dcollins $ -->
-<project name="worldwind" default="worldwind.jarfile" basedir=".">
+<project name="worldwind" default="build" basedir=".">
     <description>
         Build script for the World Wind Java SDK. Compiles the World Wind source, creates World Wind API documentation,
         and builds World Wind JAR files. The default target 'worldwind.jarfile' builds the World Wind core JAR file. Use
@@ -28,8 +28,9 @@
 
     <!-- Main build target for the World Wind Java SDK. Compiles the World Wind source, creates the World Wind API
          documentation, and builds the World Wind JAR files. -->
-    <target name="build" depends="compile,
-                                  javadocs,
+    <target name="build" depends="clean.build,
+                                  compile,
+                                  javadoc,
                                   worldwind.jarfile,
                                   worldwind.extensions.jarfile"
             description="Main build target for the World Wind Java SDK. Compiles the World Wind source, creates the World Wind API documentation, and builds the World Wind JAR files."/>
@@ -79,7 +80,7 @@
          World Wind core classes under the packages 'gov.nasa.worldwind' and World Wind extension classes under the
          package 'gov.nasa.worldwindx'. Excludes World Wind format classes under the package
          'gov.nasa.worldwind.formats' -->
-    <target name="javadocs" depends="clean.javadocs"
+    <target name="javadoc" depends="clean.javadoc"
             description="Builds the World Wind API documentation for all core and extension packages into the 'doc' folder.">
         <javadoc destdir="${worldwind.doc.dir}/javadoc"
                  overview="${worldwind.src.dir}/overview.html"
@@ -101,6 +102,12 @@
             <link href="http://download.oracle.com/javase/6/docs/api/"/>
             <link href="http://jogamp.org/deployment/v2.1.5/javadoc/jogl/javadoc/"/>
         </javadoc>
+        <zip destfile="${worldwind.doc.dir}/${worldwind.doc.zipfile}">
+            <fileset dir="${worldwind.doc.dir}/javadoc">
+                <include name="**"/>
+                <type type="file"/>
+            </fileset>
+        </zip>
     </target>
 
     <!-- Builds the World Wind SDK core Jar file 'worldwind.jar'. Includes all World Wind core class files, property
@@ -184,10 +191,10 @@
     </target>
 
     <!-- Individual clean targets corresponding to each build target above. -->
-    <target name="clean.classes">
+    <target name="clean.compile">
         <delete dir="${worldwind.classes.dir}"/>
     </target>
-    <target name="clean.javadocs">
+    <target name="clean.javadoc">
         <delete dir="${worldwind.doc.dir}"/>
     </target>
     <target name="clean.worldwind.jarfile">
@@ -196,18 +203,18 @@
     <target name="clean.worldwind.extensions.jarfile">
         <delete file="${basedir}/${worldwind.extensions.jarfile}"/>
     </target>
-    <target name="clean.build" depends="clean.classes,
-                                        clean.javadocs,
+    <target name="clean.build" depends="clean.compile,
+                                        clean.javadoc,
                                         clean.worldwind.jarfile,
                                         clean.worldwind.extensions.jarfile"/>
     <!-- Main clean target for the World Wind Java SDK. Removes all files and directories created by all World Wind
          build targets. -->
-    <target name="clean.all" depends="clean.build,
-                                      clean.test.all,
-                                      clean.worldwind.release,
-                                      clean.resources.all,
-                                      clean.build.util.all,
-                                      clean.webstart.site"
+    <target name="clean" depends="clean.build,
+                                  clean.test.all,
+                                  clean.worldwind.release,
+                                  clean.resources.all,
+                                  clean.build.util.all,
+                                  clean.webstart.site"
             description="Main clean target for the World Wind Java SDK. Removes all files and directories created by all World Wind build targets."/>
 
 </project>

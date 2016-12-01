@@ -67,7 +67,7 @@
 
     <!-- Creates the World Wind API documentation release in the folder 'worldwind-docs'. Includes the World Wind
          Javadoc-style documentation under the folder 'worldwind-docs/api'. -->
-    <target name="worldwind.doc.release" depends="clean.javadocs, javadocs"
+    <target name="worldwind.doc.release" depends="clean.javadoc, javadoc"
             description="Creates the World Wind API documentation release in the folder 'worldwind-docs'.">
         <!-- Copy the World Wind API documentation to the 'api' folder under the docs release folder. -->
         <mkdir dir="${worldwind.doc.release.dir}/api"/>
