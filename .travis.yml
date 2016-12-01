@@ -21,7 +21,7 @@ before_script:
 
 script:
   # Build the project
-  - ant worldwind.bundle
+  - ant build
 
 after_success:
   # Push the daily tag when this build is a cron job
