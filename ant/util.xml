@@ -75,7 +75,7 @@
             </svgdirs>
          </rasterize-svgdirs>
 
-         Note: This task depends on the Apache Batik Rasterizer JAR file at build/lib/batik/batik-rasterizer.jar.
+         Note: This task depends on the Apache Batik Rasterizer JAR file at ant/lib/batik/batik-rasterizer.jar.
          -->
     <macrodef name="rasterize-svgdirs">
         <attribute name="maxwidth"/>
@@ -87,7 +87,7 @@
         <sequential>
             <apply executable="java" dest="@{destdir}" force="@{force}" failonerror="true">
                 <arg value="-jar"/>
-                <arg value="${basedir}/build/lib/batik/batik-rasterizer.jar"/>
+                <arg value="${basedir}/ant/lib/batik/batik-rasterizer.jar"/>
                 <arg value="-bg"/>
                 <arg value="@{background}"/>
                 <arg value="-m"/>
@@ -120,7 +120,7 @@
             </svgfiles>
          </rasterize-svgdirs>
 
-         Note: This task depends on the Apache Batik Rasterizer JAR file at build/lib/batik/batik-rasterizer.jar.
+         Note: This task depends on the Apache Batik Rasterizer JAR file at ant/lib/batik/batik-rasterizer.jar.
          -->
     <macrodef name="rasterize-svgfiles">
         <attribute name="maxwidth"/>
@@ -131,7 +131,7 @@
         <sequential>
             <apply executable="java" dest="@{destdir}" force="@{force}" failonerror="true">
                 <arg value="-jar"/>
-                <arg value="${basedir}/build/lib/batik/batik-rasterizer.jar"/>
+                <arg value="${basedir}/ant/lib/batik/batik-rasterizer.jar"/>
                 <arg value="-m"/>
                 <arg value="image/png"/>
                 <arg value="-maxw"/>
@@ -160,7 +160,7 @@
             </imagefiles>
          </trimimages>
 
-         This task depends on the World World build utility JAR file at build/lib/worldwind-buildutil.jar.
+         This task depends on the World World build utility JAR file at ant/lib/worldwind-buildutil.jar.
          -->
     <macrodef name="trimimages">
         <attribute name="force" default="false"/>
@@ -168,7 +168,7 @@
         <sequential>
             <apply executable="java" force="@{force}" failonerror="true" parallel="true" maxparallel="100">
                 <arg value="-cp"/>
-                <arg value="${basedir}/build/lib/worldwind-buildutil.jar"/>
+                <arg value="${basedir}/ant/lib/worldwind-buildutil.jar"/>
                 <arg value="gov.nasa.worldwindx.buildutil.TrimImage"/>
                 <imagefiles/>
             </apply>
@@ -176,8 +176,8 @@
 
     </macrodef>
 
-    <!-- Compiles all World Wind build utility sources under the 'build/util/src' folder into Java class files under the
-         'build/util/classes' folder. We configure the javac task parameters 'source' and 'target' in order to
+    <!-- Compiles all World Wind build utility sources under the 'ant/util/src' folder into Java class files under the
+         'ant/util/classes' folder. We configure the javac task parameters 'source' and 'target' in order to
          explicitly control the Java compiler version used to build World Wind classes. Without these parameters, the
          javac task would use the most recent compiler available on the current machine, and the Java compiler version
          used to build WorldWind classes would be unpredictable. For this reason, the Apache ANT manual strongly
@@ -185,7 +185,7 @@
          http://ant.apache.org/manual/CoreTasks/javac.html
 
          The Java compiler version used by the javac task is defined by the build parameter 'worldwind.jdk.version'.
-         By default, this parameter is defined in the file 'build/build.properties'. -->
+         By default, this parameter is defined in the file 'ant/ant.properties'. -->
     <target name="util.compile">
         <mkdir dir="${util.classes.dir}"/>
         <javac srcdir="${util.src.dir}"
@@ -205,7 +205,7 @@
          class files. Excludes files added by Subversion, and files added by the operating system. The resultant Jar
          file is dependent only on the Java Runtime. -->
     <target name="util.jarfile" depends="util.compile">
-        <jar jarfile="${basedir}/build/util/${util.jarfile}">
+        <jar jarfile="${basedir}/ant/util/${util.jarfile}">
             <!-- Include the World Wind build package gov.nasa.worldwindx.buildutil. -->
             <fileset dir="${util.classes.dir}">
                 <include name="gov/nasa/worldwindx/buildutil/**/*.class"/>
@@ -346,7 +346,7 @@
         <delete dir="${util.classes.dir}"/>
     </target>
     <target name="clean.util.jarfile">
-        <delete file="${basedir}/build/util/${util.jarfile}"/>
+        <delete file="${basedir}/ant/util/${util.jarfile}"/>
     </target>
     <!-- Main clean target for resource build targets. Removes all files and directories created by all resource build
          targets. -->

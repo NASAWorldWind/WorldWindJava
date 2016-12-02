@@ -16,7 +16,7 @@
          'target' parameters. See the following link for more detail: http://ant.apache.org/manual/CoreTasks/javac.html
 
          The Java compiler version used by the javac task is defined by the build parameter 'worldwind.jdk.version'.
-         By default, this parameter is defined in the file 'build/build.properties'. -->
+         By default, this parameter is defined in the file 'ant/ant.properties'. -->
     <target name="compile.tests" depends="compile">
         <mkdir dir="${worldwind.test.classes.dir}"/>
         <javac srcdir="${worldwind.test.src.dir}"
@@ -32,7 +32,7 @@
                 <pathelement location="jogl-all.jar"/>
                 <pathelement location="gluegen-rt.jar"/>
                 <pathelement location="gdal.jar"/>
-                <pathelement location="build/lib/junit-4.5.jar"/>
+                <pathelement location="ant/lib/junit-4.5.jar"/>
                 <pathelement location="${java.home}/lib/plugin.jar"/>
             </classpath>
             <compilerarg value="-Xlint:unchecked"/>
@@ -55,7 +55,7 @@
                 <pathelement location="jogl-all.jar"/>
                 <pathelement location="gluegen-rt.jar"/>
                 <pathelement location="gdal.jar"/>
-                <pathelement location="build/lib/junit-4.5.jar"/>
+                <pathelement location="ant/lib/junit-4.5.jar"/>
                 <pathelement location="${java.home}/lib/plugin.jar"/>
             </classpath>
             <formatter type="xml"/>
