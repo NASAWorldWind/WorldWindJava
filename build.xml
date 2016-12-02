@@ -13,16 +13,16 @@
         the target 'build' creates all the necessary World Wind JAR files and World Wind API documentation.
     </description>
 
-    <!-- Import the World Wind build properties. All properties expected by ANT are defined in build.properties. -->
-    <property file="build/build.properties"/>
+    <!-- Import the World Wind build properties. All properties expected by ANT are defined in ant.properties. -->
+    <property file="ant/ant.properties"/>
     <!-- Import the World Wind MIL-STD-2525 targets. -->
-    <import file="build/milstd2525.xml"/>
+    <import file="ant/milstd2525.xml"/>
     <!-- Import the World Wind test targets. -->
-    <import file="build/test.xml"/>
+    <import file="ant/test.xml"/>
     <!-- Import the World Wind general utility targets. -->
-    <import file="build/util.xml"/>
+    <import file="ant/util.xml"/>
     <!-- Import the World Wind Web Start site targets. -->
-    <import file="build/webstart.xml"/>
+    <import file="ant/webstart.xml"/>
 
     <!-- Main build target for the World Wind Java SDK. Compiles the World Wind source, creates the World Wind API
          documentation, and builds the World Wind JAR files. -->
@@ -40,7 +40,7 @@
          used to build World Wind classes. Without these parameters, the javac task would use the most recent compiler
          available on the current machine, and the Java compiler version used to build WorldWind classes would be
          unpredictable. The Java compiler version used by the javac task is defined by the build parameter
-         'worldwind.jdk.version'. By default, this parameter is defined in the file 'build/build.properties'. See the
+         'worldwind.jdk.version'. By default, this parameter is defined in the file 'ant/ant.properties'. See the
          following link for more detail:
          http://ant.apache.org/manual/CoreTasks/javac.html
 
