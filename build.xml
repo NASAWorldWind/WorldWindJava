@@ -15,12 +15,10 @@
 
     <!-- Import the World Wind build properties. All properties expected by ANT are defined in build.properties. -->
     <property file="build/build.properties"/>
+    <!-- Import the World Wind MIL-STD-2525 targets. -->
+    <import file="build/milstd2525.xml"/>
     <!-- Import the World Wind test targets. -->
     <import file="build/test.xml"/>
-    <!-- Import the World Wind release targets. -->
-    <import file="build/release.xml"/>
-    <!-- Import the World Wind resource targets. -->
-    <import file="build/resources.xml"/>
     <!-- Import the World Wind general utility targets. -->
     <import file="build/util.xml"/>
     <!-- Import the World Wind Web Start site targets. -->
@@ -210,10 +208,9 @@
     <!-- Main clean target for the World Wind Java SDK. Removes all files and directories created by all World Wind
          build targets. -->
     <target name="clean" depends="clean.build,
+                                  clean.milstd2525.all,
                                   clean.test.all,
-                                  clean.worldwind.release,
-                                  clean.resources.all,
-                                  clean.build.util.all,
+                                  clean.util.all,
                                   clean.webstart.site"
             description="Main clean target for the World Wind Java SDK. Removes all files and directories created by all World Wind build targets."/>
 

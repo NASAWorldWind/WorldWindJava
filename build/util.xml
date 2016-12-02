@@ -186,10 +186,10 @@
 
          The Java compiler version used by the javac task is defined by the build parameter 'worldwind.jdk.version'.
          By default, this parameter is defined in the file 'build/build.properties'. -->
-    <target name="build.util.compile">
-        <mkdir dir="${build.util.classes.dir}"/>
-        <javac srcdir="${build.util.src.dir}"
-               destdir="${build.util.classes.dir}"
+    <target name="util.compile">
+        <mkdir dir="${util.classes.dir}"/>
+        <javac srcdir="${util.src.dir}"
+               destdir="${util.classes.dir}"
                source="${worldwind.jdk.version}"
                target="${worldwind.jdk.version}"
                encoding="UTF-8"
@@ -204,10 +204,10 @@
     <!-- Builds the World Wind build utility Jar file 'worldwind-buildutil.jar'. Includes all World Wind build utility
          class files. Excludes files added by Subversion, and files added by the operating system. The resultant Jar
          file is dependent only on the Java Runtime. -->
-    <target name="build.util.jarfile" depends="build.util.compile">
-        <jar jarfile="${basedir}/build/util/${build.util.jarfile}">
+    <target name="util.jarfile" depends="util.compile">
+        <jar jarfile="${basedir}/build/util/${util.jarfile}">
             <!-- Include the World Wind build package gov.nasa.worldwindx.buildutil. -->
-            <fileset dir="${build.util.classes.dir}">
+            <fileset dir="${util.classes.dir}">
                 <include name="gov/nasa/worldwindx/buildutil/**/*.class"/>
                 <type type="file"/>
             </fileset>
@@ -342,14 +342,14 @@
     </target>
 
     <!-- Individual clean targets corresponding to each build target above. -->
-    <target name="clean.build.util.classes">
-        <delete dir="${build.util.classes.dir}"/>
+    <target name="clean.util.classes">
+        <delete dir="${util.classes.dir}"/>
     </target>
-    <target name="clean.build.util.jarfile">
-        <delete file="${basedir}/build/util/${build.util.jarfile}"/>
+    <target name="clean.util.jarfile">
+        <delete file="${basedir}/build/util/${util.jarfile}"/>
     </target>
     <!-- Main clean target for resource build targets. Removes all files and directories created by all resource build
          targets. -->
-    <target name="clean.build.util.all" depends="clean.build.util.classes, clean.build.util.jarfile"/>
+    <target name="clean.util.all" depends="clean.util.classes, clean.util.jarfile"/>
 
 </project>
