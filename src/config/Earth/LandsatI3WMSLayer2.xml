@@ -43,7 +43,7 @@
     <UseTransparentTextures>true</UseTransparentTextures>
     <!--<ScreenCredit creditType="ScreenImage">-->
     <!--<FileName>images/32x32-icon-nasa.png</FileName>-->
-    <!--<Link>http://worldwind.arc.nasa.gov/java</Link>-->
+    <!--<Link>https://worldwind.arc.nasa.gov</Link>-->
     <!--</ScreenCredit>-->
     <RetrievalTimeouts>
         <ReadTimeout>
