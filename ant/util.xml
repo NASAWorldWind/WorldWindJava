@@ -185,7 +185,7 @@
          http://ant.apache.org/manual/CoreTasks/javac.html
 
          The Java compiler version used by the javac task is defined by the build parameter 'worldwind.jdk.version'.
-         By default, this parameter is defined in the file 'ant/ant.properties'. -->
+         By default, this parameter is defined in the file 'build.properties'. -->
     <target name="util.compile">
         <mkdir dir="${util.classes.dir}"/>
         <javac srcdir="${util.src.dir}"
