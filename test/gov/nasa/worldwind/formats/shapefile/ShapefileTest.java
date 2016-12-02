@@ -35,7 +35,7 @@ public class ShapefileTest
         public static final String STATE_BOUNDS_PATH = "testData/shapefiles/state_bounds.shp";
         public static final String WORLD_BORDERS_PATH = "testData/shapefiles/TM_WORLD_BORDERS-0.3.shp";
         public static final String SPRINGFIELD_URBAN_GROWTH_URL
-            = "http://worldwind.arc.nasa.gov/java/apps/springfield/SPR_UGB.shp";
+            = "https://worldwind.arc.nasa.gov/java/apps/springfield/SPR_UGB.shp";
 
         @Before
         public void setUp()
