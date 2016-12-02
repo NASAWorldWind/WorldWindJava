@@ -20,7 +20,7 @@ import gov.nasa.worldwind.render.SurfaceImage;
 public class RemoteSurfaceImage extends ApplicationTemplate
 {
     // The remote image to display.
-    protected static final String IMAGE_URL = "http://eoimages.gsfc.nasa.gov/ve//1438/earth_lights_lrg.jpg";
+    protected static final String IMAGE_URL = "https://eoimages.gsfc.nasa.gov/ve//1438/earth_lights_lrg.jpg";
 
     public static class AppFrame extends ApplicationTemplate.AppFrame
     {
