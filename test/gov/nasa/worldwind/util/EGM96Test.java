@@ -8,30 +8,30 @@ package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.geom.Angle;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.io.IOException;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-/**
- * Created by zach on 7/6/16.
- */
+@RunWith(JUnit4.class)
 public class EGM96Test
 {
-
     /**
      * The acceptable difference two double values may have and still satisfy an {@code assertEquals} method.
      */
-    public static final double DELTA = 1e-6;
+    private static final double DELTA = 1e-6;
 
     /**
      * The EGM96 data path.
      */
-    public static final String OFFSETS_FILE_PATH = "config/EGM96.dat";
+    private static final String OFFSETS_FILE_PATH = "config/EGM96.dat";
 
     /**
      * Tests the determination of the EGM offset value using a latitude value that should match a grid point.
      */
+    @SuppressWarnings({"unused", "UnusedAssignment"})
     @Test
     public void testGetOffset_VerticalInterpolationTopGridPoint() throws IOException
     {
@@ -85,6 +85,7 @@ public class EGM96Test
      * Tests the determination of the EGM offset value using a latitude value between grid points. This method will use
      * the bilinear interpolation method to calculate the offset value.
      */
+    @SuppressWarnings({"unused", "UnusedAssignment"})
     @Test
     public void testGetOffset_VerticalInterpolationPoint() throws IOException
     {
@@ -146,6 +147,7 @@ public class EGM96Test
     /**
      * Tests the determination of the EGM offset value using a longitude value that should match a grid point.
      */
+    @SuppressWarnings({"unused", "UnusedAssignment"})
     @Test
     public void testGetOffset_HorizontalInterpolationLeftGridPoint() throws IOException
     {
@@ -200,6 +202,7 @@ public class EGM96Test
      * Tests the determination of the EGM offset value using a longitude value between grid points. This method will use
      * the bilinear interpolation method to calculate the offset value.
      */
+    @SuppressWarnings({"unused", "UnusedAssignment"})
     @Test
     public void testGetOffset_HorizontalInterpolationPoint() throws IOException
     {

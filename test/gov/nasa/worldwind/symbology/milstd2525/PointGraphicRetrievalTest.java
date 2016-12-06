@@ -9,14 +9,15 @@ package gov.nasa.worldwind.symbology.milstd2525;
 import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.symbology.IconRetriever;
-import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.awt.image.*;
 
-/**
- * @author pabercrombie
- * @version $Id: PointGraphicRetrievalTest.java 563 2012-04-26 18:16:22Z pabercrombie $
- */
+import static org.junit.Assert.*;
+
+@RunWith(JUnit4.class)
 public class PointGraphicRetrievalTest
 {
     // This path should correspond to the location of the appropriate symbology source icons on your system
@@ -24,19 +25,19 @@ public class PointGraphicRetrievalTest
         AVKey.MIL_STD_2525_ICON_RETRIEVER_PATH, MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
 
     /** Valid status characters for MIL-STD-2525C tactical graphics (see Table B-I, pg. 305). */
-    protected static final char[] ALL_STATUS = {'A', 'S', 'P', 'K'};
+    private static final char[] ALL_STATUS = {'A', 'S', 'P', 'K'};
 
     //////////////////////////////////////////////////////////
     // Test retrieval of a MilStd2525 point graphic from both a remote
     // server and the local file system.
     //////////////////////////////////////////////////////////
 
-    @org.junit.Test
+    @Test
     public void testServerRetrieval()
     {
         IconRetriever symGen = new MilStd2525PointGraphicRetriever(ICON_RETRIEVER_PATH);
         BufferedImage img = symGen.createIcon("GFFPPCB-------X", null);
-        Assert.assertNotNull(img);
+        assertNotNull(img);
     }
 
     //////////////////////////////////////////////////////////
@@ -44,45 +45,48 @@ public class PointGraphicRetrievalTest
     // MilStd2525 SymCodes should be exactly 15 characters.
     //////////////////////////////////////////////////////////
 
-    @org.junit.Test
+    @Test
     public void testParseCodeTooShort()
     {
         try
         {
             IconRetriever symGen = new MilStd2525PointGraphicRetriever(ICON_RETRIEVER_PATH);
             symGen.createIcon("SUAPC", null);
-            Assert.fail("Should raise an IllegalArgumentException");
+            fail("Should raise an IllegalArgumentException");
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
     }
 
-    @org.junit.Test
+    @Test
     public void testParseCodeTooLong()
     {
         try
         {
             IconRetriever symGen = new MilStd2525PointGraphicRetriever(ICON_RETRIEVER_PATH);
             symGen.createIcon("SUAPCTEST", null);
-            Assert.fail("Should raise an IllegalArgumentException");
+            fail("Should raise an IllegalArgumentException");
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
     }
 
-    @org.junit.Test
+    @Test
     public void testParseNullCode()
     {
         try
         {
             IconRetriever symGen = new MilStd2525PointGraphicRetriever(ICON_RETRIEVER_PATH);
             symGen.createIcon(null, null);
-            Assert.fail("Should raise an IllegalArgumentException");
+            fail("Should raise an IllegalArgumentException");
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
     }
 
@@ -92,64 +96,68 @@ public class PointGraphicRetrievalTest
     // TODO: is this correct?
     //////////////////////////////////////////////////////////
 
-    @org.junit.Test
+    @Test
     public void testInvalidCodingScheme()
     {
         try
         {
             IconRetriever symGen = new MilStd2525PointGraphicRetriever(ICON_RETRIEVER_PATH);
             symGen.createIcon(".FFPPCB-------X", null);
-            Assert.fail("Should raise an IllegalArgumentException");
+            fail("Should raise an IllegalArgumentException");
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
     }
 
-    @org.junit.Test
+    @Test
     public void testInvalidStandardIdentity()
     {
         try
         {
             IconRetriever symGen = new MilStd2525PointGraphicRetriever(ICON_RETRIEVER_PATH);
             symGen.createIcon("G.FPPCB-------X", null);
-            Assert.fail("Should raise an IllegalArgumentException");
+            fail("Should raise an IllegalArgumentException");
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
     }
 
-    @org.junit.Test
+    @Test
     public void testInvalidStatus()
     {
         try
         {
             IconRetriever symGen = new MilStd2525PointGraphicRetriever(ICON_RETRIEVER_PATH);
             symGen.createIcon("GFF.PCB-------X", null);
-            Assert.fail("Should raise an IllegalArgumentException");
+            fail("Should raise an IllegalArgumentException");
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
     }
 
-    @org.junit.Test
+    @Test
     public void testInvalidFunctionID()
     {
         try
         {
             IconRetriever symGen = new MilStd2525PointGraphicRetriever(ICON_RETRIEVER_PATH);
             symGen.createIcon("GFFP...-------X", null);
-            Assert.fail("Should raise an IllegalArgumentException");
+            fail("Should raise an IllegalArgumentException");
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
     }
 
     /** Test for the presence and retrieval of a every tactical point graphic */
-    @org.junit.Test
+    @Test
     public void testTacticalGraphicRetrieval()
     {
         IconRetriever symGen = new MilStd2525PointGraphicRetriever(ICON_RETRIEVER_PATH);
@@ -164,7 +172,7 @@ public class PointGraphicRetrievalTest
                 sidc.setCharAt(3, status);
 
                 BufferedImage img = symGen.createIcon(sidc.toString(), null);
-                Assert.assertNotNull("Icon " + s.toLowerCase() + "-----.png not found.", img);
+                assertNotNull("Icon " + s.toLowerCase() + "-----.png not found.", img);
             }
         }
     }
@@ -172,7 +180,7 @@ public class PointGraphicRetrievalTest
     /*
      * Test for the presence and retrieval of a every possible Meteorological point graphic
      */
-    @org.junit.Test
+    @Test
     public void testMeteorologicalSymbolRetrieval()
     {
         IconRetriever symGen = new MilStd2525PointGraphicRetriever(ICON_RETRIEVER_PATH);
@@ -182,12 +190,7 @@ public class PointGraphicRetrievalTest
         for (String s : MilStd2525PointGraphic.getMetocGraphics())
         {
             img = symGen.createIcon(s, params);
-            Assert.assertNotNull("Icon " + s.toLowerCase() + ".png not found.", img);
+            assertNotNull("Icon " + s.toLowerCase() + ".png not found.", img);
         }
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(PointGraphicRetrievalTest.class));
     }
 }

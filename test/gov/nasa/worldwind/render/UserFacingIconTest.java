@@ -6,19 +6,22 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Position;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.awt.*;
 
-/**
- * @author dcollins
- * @version $Id: UserFacingIconTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
-public class UserFacingIconTest extends junit.framework.TestCase
-{
-    /*************************************************************************************************************/
-    /** Persistence Tests **/
-    /** ******************************************************************************************************** */
+import static org.junit.Assert.*;
 
+@RunWith(JUnit4.class)
+public class UserFacingIconTest
+{
+    //////////////////////////////////////////////////////////
+    // Persistence Tests
+    //////////////////////////////////////////////////////////
+
+    @Test
     public void testRestore_NewInstance()
     {
         UserFacingIcon icon = new UserFacingIcon("", null);
@@ -31,9 +34,10 @@ public class UserFacingIconTest extends junit.framework.TestCase
         UserFacingIcon expected = new UserFacingIcon("", null);
         assignExampleValues(expected);
 
-        assertEquals(expected, icon);
+        assertIconEquals(expected, icon);
     }
 
+    @Test
     public void testRestore_SameInstance()
     {
         UserFacingIcon icon = new UserFacingIcon("", null);
@@ -46,9 +50,10 @@ public class UserFacingIconTest extends junit.framework.TestCase
         UserFacingIcon expected = new UserFacingIcon("", null);
         assignExampleValues(expected);
 
-        assertEquals(expected, icon);
+        assertIconEquals(expected, icon);
     }
 
+    @Test
     public void testRestore_EmptyStateDocument()
     {
         UserFacingIcon icon = new UserFacingIcon("", null);
@@ -63,9 +68,10 @@ public class UserFacingIconTest extends junit.framework.TestCase
         UserFacingIcon expected = new UserFacingIcon("", null);
         assignExampleValues(expected);
 
-        assertEquals(expected, icon);
+        assertIconEquals(expected, icon);
     }
 
+    @Test
     public void testRestore_InvalidStateDocument()
     {
         try
@@ -78,9 +84,11 @@ public class UserFacingIconTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testRestore_PartialStateDocument()
     {
         UserFacingIcon icon = new UserFacingIcon("", null);
@@ -100,12 +108,12 @@ public class UserFacingIconTest extends junit.framework.TestCase
         expected.setHighlighted(true);
         expected.setHighlightScale(3.141592);
 
-        assertEquals(expected, icon);
+        assertIconEquals(expected, icon);
     }
 
-    /*************************************************************************************************************/
-    /** Helper Methods **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Helper Methods
+    //////////////////////////////////////////////////////////
 
     @SuppressWarnings({"JavaDoc"})
     private static void assignExampleValues(WWIcon icon)
@@ -138,22 +146,18 @@ public class UserFacingIconTest extends junit.framework.TestCase
         icon.setAlwaysOnTop(false);
     }
 
-    private static void assertEquals(WWIcon expected, WWIcon actual)
+    private static void assertIconEquals(WWIcon expected, WWIcon actual)
     {
         assertNotNull("Expected is null", expected);
         assertNotNull("Actual is null", actual);
         assertEquals("imageSource", expected.getImageSource(), actual.getImageSource());
         if (expected.getPosition() != null && actual.getPosition() != null)
         {
-            assertEquals("position.latitude",
-                expected.getPosition().getLatitude(),
-                actual.getPosition().getLatitude());
-            assertEquals("position.longitude",
-                expected.getPosition().getLongitude(),
+            assertEquals("position.latitude", expected.getPosition().getLatitude(), actual.getPosition().getLatitude());
+            assertEquals("position.longitude", expected.getPosition().getLongitude(),
                 actual.getPosition().getLongitude());
-            assertEquals("position.elevation",
-                expected.getPosition().getElevation(),
-                actual.getPosition().getElevation());
+            assertEquals("position.elevation", expected.getPosition().getElevation(),
+                actual.getPosition().getElevation(), 0.0);
         }
         else
         {
@@ -163,16 +167,11 @@ public class UserFacingIconTest extends junit.framework.TestCase
         assertEquals("highlighted", expected.isHighlighted(), actual.isHighlighted());
         assertEquals("size", expected.getSize(), actual.getSize());
         assertEquals("visible", expected.isVisible(), actual.isVisible());
-        assertEquals("highlightScale", expected.getHighlightScale(), actual.getHighlightScale());
+        assertEquals("highlightScale", expected.getHighlightScale(), actual.getHighlightScale(), 0.0);
         assertEquals("toolTipText", expected.getToolTipText(), actual.getToolTipText());
         assertEquals("toolTipFont", expected.getToolTipFont(), actual.getToolTipFont());
         assertEquals("showToolTip", expected.isShowToolTip(), actual.isShowToolTip());
         assertEquals("toolTipTextColor", expected.getToolTipTextColor(), actual.getToolTipTextColor());
         assertEquals("alwaysOnTop", expected.isAlwaysOnTop(), actual.isAlwaysOnTop());
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(UserFacingIconTest.class));
     }
 }

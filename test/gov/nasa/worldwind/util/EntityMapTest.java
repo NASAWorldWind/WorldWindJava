@@ -6,15 +6,13 @@
 
 package gov.nasa.worldwind.util;
 
-import junit.framework.TestCase;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-/**
- * Unit tests for the {@link EntityMap} class.
- *
- * @author pabercrombie
- * @version $Id: EntityMapTest.java 669 2012-06-27 00:26:59Z pabercrombie $
- */
+import static org.junit.Assert.assertEquals;
+
+@RunWith(JUnit4.class)
 public class EntityMapTest
 {
     /** Test basic entity replacement. */
@@ -24,7 +22,7 @@ public class EntityMapTest
         String expected = "text < > & more text";
         String actual = EntityMap.replaceAll("text &lt; &gt; &amp; more text");
 
-        TestCase.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     /** Test replacement of each entity in EntityMap. */
@@ -36,7 +34,7 @@ public class EntityMapTest
             String expected = EntityMap.entityReplacements[i];
             String actual = EntityMap.replaceAll(EntityMap.entityKeys[i]);
 
-            TestCase.assertEquals("Failed entity replacement: " + EntityMap.entityKeys[i], expected, actual);
+            assertEquals("Failed entity replacement: " + EntityMap.entityKeys[i], expected, actual);
         }
     }
 
@@ -47,11 +45,6 @@ public class EntityMapTest
         String expected = "text &thisIsNotAnEntity; more text";
         String actual = EntityMap.replaceAll(expected);
 
-        TestCase.assertEquals(expected, actual);
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(EntityMapTest.class));
+        assertEquals(expected, actual);
     }
 }

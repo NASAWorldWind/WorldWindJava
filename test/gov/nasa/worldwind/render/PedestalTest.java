@@ -6,19 +6,22 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Position;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.awt.*;
 
-/**
- * @author dcollins
- * @version $Id: PedestalTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
-public class PedestalTest extends junit.framework.TestCase
-{
-    /*************************************************************************************************************/
-    /** Persistence Tests **/
-    /** ******************************************************************************************************** */
+import static org.junit.Assert.*;
 
+@RunWith(JUnit4.class)
+public class PedestalTest
+{
+    //////////////////////////////////////////////////////////
+    // Persistence Tests
+    //////////////////////////////////////////////////////////
+
+    @Test
     public void testRestore_NewInstance()
     {
         Pedestal pedestal = new Pedestal("", null);
@@ -31,9 +34,10 @@ public class PedestalTest extends junit.framework.TestCase
         Pedestal expected = new Pedestal("", null);
         assignExampleValues(expected);
 
-        assertEquals(expected, pedestal);
+        assertPedestalEquals(expected, pedestal);
     }
 
+    @Test
     public void testRestore_SameInstance()
     {
         Pedestal pedestal = new Pedestal("", null);
@@ -46,9 +50,10 @@ public class PedestalTest extends junit.framework.TestCase
         Pedestal expected = new Pedestal("", null);
         assignExampleValues(expected);
 
-        assertEquals(expected, pedestal);
+        assertPedestalEquals(expected, pedestal);
     }
 
+    @Test
     public void testRestore_EmptyStateDocument()
     {
         Pedestal pedestal = new Pedestal("", null);
@@ -63,9 +68,10 @@ public class PedestalTest extends junit.framework.TestCase
         Pedestal expected = new Pedestal("", null);
         assignExampleValues(expected);
 
-        assertEquals(expected, pedestal);
+        assertPedestalEquals(expected, pedestal);
     }
 
+    @Test
     public void testRestore_InvalidStateDocument()
     {
         try
@@ -78,9 +84,11 @@ public class PedestalTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testRestore_PartialStateDocument()
     {
         Pedestal pedestal = new Pedestal("", null);
@@ -104,14 +112,13 @@ public class PedestalTest extends junit.framework.TestCase
         expected.setSpacingPixels(3.5);
         expected.setScale(5.5);
 
-        assertEquals(expected, pedestal);
+        assertPedestalEquals(expected, pedestal);
     }
 
-    /*************************************************************************************************************/
-    /** Helper Methods **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Helper Methods
+    //////////////////////////////////////////////////////////
 
-    @SuppressWarnings({"JavaDoc"})
     private static void assignExampleValues(Pedestal pedestal)
     {
         // WWIcon properties
@@ -150,7 +157,7 @@ public class PedestalTest extends junit.framework.TestCase
         pedestal.setScale(0.0);
     }
 
-    private static void assertEquals(Pedestal expected, Pedestal actual)
+    private static void assertPedestalEquals(Pedestal expected, Pedestal actual)
     {
         // WWIcon equality
         assertNotNull("Expected is null", expected);
@@ -158,15 +165,11 @@ public class PedestalTest extends junit.framework.TestCase
         assertEquals("imageSource", expected.getImageSource(), actual.getImageSource());
         if (expected.getPosition() != null && actual.getPosition() != null)
         {
-            assertEquals("position.latitude",
-                expected.getPosition().getLatitude(),
-                actual.getPosition().getLatitude());
-            assertEquals("position.longitude",
-                expected.getPosition().getLongitude(),
+            assertEquals("position.latitude", expected.getPosition().getLatitude(), actual.getPosition().getLatitude());
+            assertEquals("position.longitude", expected.getPosition().getLongitude(),
                 actual.getPosition().getLongitude());
-            assertEquals("position.elevation",
-                expected.getPosition().getElevation(),
-                actual.getPosition().getElevation());
+            assertEquals("position.elevation", expected.getPosition().getElevation(),
+                actual.getPosition().getElevation(), 0.0);
         }
         else
         {
@@ -176,19 +179,14 @@ public class PedestalTest extends junit.framework.TestCase
         assertEquals("highlighted", expected.isHighlighted(), actual.isHighlighted());
         assertEquals("size", expected.getSize(), actual.getSize());
         assertEquals("visible", expected.isVisible(), actual.isVisible());
-        assertEquals("highlightScale", expected.getHighlightScale(), actual.getHighlightScale());
+        assertEquals("highlightScale", expected.getHighlightScale(), actual.getHighlightScale(), 0.0);
         assertEquals("toolTipText", expected.getToolTipText(), actual.getToolTipText());
         assertEquals("toolTipFont", expected.getToolTipFont(), actual.getToolTipFont());
         assertEquals("showToolTip", expected.isShowToolTip(), actual.isShowToolTip());
         assertEquals("toolTipTextColor", expected.getToolTipTextColor(), actual.getToolTipTextColor());
         assertEquals("alwaysOnTop", expected.isAlwaysOnTop(), actual.isAlwaysOnTop());
         // Pedestal equality
-        assertEquals("spacingPixels", expected.getSpacingPixels(), actual.getSpacingPixels());
-        assertEquals("scale", expected.getScale(), actual.getScale());
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(PedestalTest.class));
+        assertEquals("spacingPixels", expected.getSpacingPixels(), actual.getSpacingPixels(), 0.0);
+        assertEquals("scale", expected.getScale(), actual.getScale(), 0.0);
     }
 }

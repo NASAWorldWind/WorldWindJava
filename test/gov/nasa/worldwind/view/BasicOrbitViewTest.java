@@ -7,17 +7,20 @@ package gov.nasa.worldwind.view;
 
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.view.orbit.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-/**
- * @author dcollins
- * @version $Id: BasicOrbitViewTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
-public class BasicOrbitViewTest extends junit.framework.TestCase
+import static org.junit.Assert.*;
+
+@RunWith(JUnit4.class)
+public class BasicOrbitViewTest
 {
-    /*************************************************************************************************************/
-    /** Persistence Tests **/
-    /** ****************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Persistence Tests
+    //////////////////////////////////////////////////////////
 
+    @Test
     public void testRestore_NewInstance()
     {
         BasicOrbitView orbitView = new BasicOrbitView();
@@ -29,9 +32,10 @@ public class BasicOrbitViewTest extends junit.framework.TestCase
 
         BasicOrbitView expected = new BasicOrbitView();
         assignExampleValues(expected);
-        assertEquals(expected, orbitView);
+        assertOrbitViewEquals(expected, orbitView);
     }
 
+    @Test
     public void testRestore_SameInstance()
     {
         BasicOrbitView orbitView = new BasicOrbitView();
@@ -43,9 +47,10 @@ public class BasicOrbitViewTest extends junit.framework.TestCase
 
         BasicOrbitView expected = new BasicOrbitView();
         assignExampleValues(expected);
-        assertEquals(expected, orbitView);
+        assertOrbitViewEquals(expected, orbitView);
     }
 
+    @Test
     public void testRestore_EmptyStateDocument()
     {
         BasicOrbitView orbitView = new BasicOrbitView();
@@ -59,9 +64,10 @@ public class BasicOrbitViewTest extends junit.framework.TestCase
         // No attributes should have changed.
         BasicOrbitView expected = new BasicOrbitView();
         assignExampleValues(expected);
-        assertEquals(expected, orbitView);
+        assertOrbitViewEquals(expected, orbitView);
     }
 
+    @Test
     public void testRestore_InvalidStateDocument()
     {
         try
@@ -73,9 +79,11 @@ public class BasicOrbitViewTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testRestore_PartialStateDocument()
     {
         BasicOrbitView orbitView = new BasicOrbitView();
@@ -94,9 +102,10 @@ public class BasicOrbitViewTest extends junit.framework.TestCase
         assignNullValues(expected);
         expected.setFieldOfView(Angle.fromDegrees(10.5));
         expected.setZoom(1000.5);
-        assertEquals(expected, orbitView);
+        assertOrbitViewEquals(expected, orbitView);
     }
 
+    @Test
     public void testLegacyStateDocument()
     {
         BasicOrbitView orbitView = new BasicOrbitView();
@@ -134,9 +143,10 @@ public class BasicOrbitViewTest extends junit.framework.TestCase
         limits.setZoomLimits(1000, 2000);
         expected.setOrbitViewLimits(limits);
 
-        assertEquals(expected, orbitView);
+        assertOrbitViewEquals(expected, orbitView);
     }
 
+    @Test
     public void testRestore_OldVersionStateDocument()
     {
         BasicOrbitView orbitView = new BasicOrbitView();
@@ -162,14 +172,13 @@ public class BasicOrbitViewTest extends junit.framework.TestCase
         expected.setZoom(1000.5);
         expected.setFieldOfView(Angle.fromDegrees(10.5));
 
-        assertEquals(expected, orbitView);
+        assertOrbitViewEquals(expected, orbitView);
     }
 
-    /*************************************************************************************************************/
-    /** Helper Methods **/
-    /** ****************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Helper Methods
+    //////////////////////////////////////////////////////////
 
-    @SuppressWarnings({"JavaDoc"})
     private static void assignExampleValues(OrbitView orbitView)
     {
         OrbitViewLimits limits = new BasicOrbitViewLimits();
@@ -202,7 +211,7 @@ public class BasicOrbitViewTest extends junit.framework.TestCase
         orbitView.setOrbitViewLimits(new BasicOrbitViewLimits());
     }
 
-    private static void assertEquals(OrbitView expected, OrbitView actual)
+    private static void assertOrbitViewEquals(OrbitView expected, OrbitView actual)
     {
         assertNotNull("Expected is null", expected);
         assertNotNull("Actual is null", actual);
@@ -210,17 +219,17 @@ public class BasicOrbitViewTest extends junit.framework.TestCase
         assertEquals("center", expected.getCenterPosition(), actual.getCenterPosition());
         assertEquals("heading", expected.getHeading(), actual.getHeading());
         assertEquals("pitch", expected.getPitch(), actual.getPitch());
-        assertEquals("zoom", expected.getZoom(), actual.getZoom());
+        assertEquals("zoom", expected.getZoom(), actual.getZoom(), 0.0);
         assertEquals("fieldOfView", expected.getFieldOfView(), actual.getFieldOfView());
 
         assertEquals("detectCollisions", expected.isDetectCollisions(), actual.isDetectCollisions());
-        assertEquals("nearClipDistance", expected.getNearClipDistance(), actual.getNearClipDistance());
-        assertEquals("farClipDistance", expected.getFarClipDistance(), actual.getFarClipDistance());
+        assertEquals("nearClipDistance", expected.getNearClipDistance(), actual.getNearClipDistance(), 0.0);
+        assertEquals("farClipDistance", expected.getFarClipDistance(), actual.getFarClipDistance(), 0.0);
 
-        assertEquals(expected.getOrbitViewLimits(), actual.getOrbitViewLimits());
+        assertOrbitViewLimitsEquals(expected.getOrbitViewLimits(), actual.getOrbitViewLimits());
     }
 
-    private static void assertEquals(OrbitViewLimits expected, OrbitViewLimits actual)
+    private static void assertOrbitViewLimitsEquals(OrbitViewLimits expected, OrbitViewLimits actual)
     {
         assertNotNull("Expected is null", expected);
         assertNotNull("Actual is null", actual);
@@ -230,15 +239,10 @@ public class BasicOrbitViewTest extends junit.framework.TestCase
         for (int i = 0; i < 2; i++)
         {
             assertEquals("centerElevationLimits[" + i + "]", expected.getCenterElevationLimits()[i],
-                actual.getCenterElevationLimits()[i]);
+                actual.getCenterElevationLimits()[i], 0.0);
             assertEquals("headingLimits[" + i + "]", expected.getHeadingLimits()[i], actual.getHeadingLimits()[i]);
             assertEquals("pitchLimits[" + i + "]", expected.getPitchLimits()[i], actual.getPitchLimits()[i]);
-            assertEquals("zoomLimits[" + i + "]", expected.getZoomLimits()[i], actual.getZoomLimits()[i]);
+            assertEquals("zoomLimits[" + i + "]", expected.getZoomLimits()[i], actual.getZoomLimits()[i], 0.0);
         }
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(BasicOrbitViewTest.class));
     }
 }

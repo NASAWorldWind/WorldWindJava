@@ -6,20 +6,24 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Position;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.awt.*;
 import java.util.*;
 
-/**
- * @author dcollins
- * @version $Id: PolylineTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
-public class PolylineTest extends junit.framework.TestCase
-{
-    /*************************************************************************************************************/
-    /** Persistence Tests **/
-    /** ******************************************************************************************************** */
+import static org.junit.Assert.*;
 
+@SuppressWarnings("deprecation")
+@RunWith(JUnit4.class)
+public class PolylineTest
+{
+    //////////////////////////////////////////////////////////
+    // Persistence Tests
+    //////////////////////////////////////////////////////////
+
+    @Test
     public void testSaveAndRestoreOnNewObject_Polyline()
     {
         Polyline polyline = new Polyline();
@@ -32,9 +36,10 @@ public class PolylineTest extends junit.framework.TestCase
         Polyline expected = new Polyline();
         assignExampleValues(expected);
 
-        assertEquals(expected, polyline);
+        assertPolylineEquals(expected, polyline);
     }
 
+    @Test
     public void testSaveAndRestoreOnSameObject_Polyline()
     {
         Polyline polyline = new Polyline();
@@ -47,9 +52,10 @@ public class PolylineTest extends junit.framework.TestCase
         Polyline expected = new Polyline();
         assignExampleValues(expected);
 
-        assertEquals(expected, polyline);
+        assertPolylineEquals(expected, polyline);
     }
 
+    @Test
     public void testEmptyStateDocument_Polyline()
     {
         Polyline polyline = new Polyline();
@@ -64,9 +70,10 @@ public class PolylineTest extends junit.framework.TestCase
         Polyline expected = new Polyline();
         assignExampleValues(expected);
 
-        assertEquals(expected, polyline);
+        assertPolylineEquals(expected, polyline);
     }
 
+    @Test
     public void testInvalidStateDocument_Polyline()
     {
         try
@@ -79,9 +86,11 @@ public class PolylineTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testPartialStateDocument_Polyline()
     {
         Polyline polyline = new Polyline();
@@ -101,12 +110,12 @@ public class PolylineTest extends junit.framework.TestCase
         expected.setFilled(true);
         expected.setOffset(1000.5);
 
-        assertEquals(expected, polyline);
+        assertPolylineEquals(expected, polyline);
     }
 
-    /*************************************************************************************************************/
-    /** Helper Methods **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Helper Methods
+    //////////////////////////////////////////////////////////
 
     @SuppressWarnings({"JavaDoc"})
     private static void assignExampleValues(Polyline polyline)
@@ -148,7 +157,7 @@ public class PolylineTest extends junit.framework.TestCase
         polyline.setPositions(new ArrayList<Position>());
     }
 
-    private static void assertEquals(Polyline expected, Polyline actual)
+    private static void assertPolylineEquals(Polyline expected, Polyline actual)
     {
         assertNotNull("Expected is null", expected);
         assertNotNull("Actual is null", actual);
@@ -161,9 +170,9 @@ public class PolylineTest extends junit.framework.TestCase
         assertEquals("highlighted", expected.isFilled(), actual.isFilled());
         assertEquals("pathType", expected.getPathType(), actual.getPathType());
         assertEquals("followTerrain", expected.isFollowTerrain(), actual.isFollowTerrain());
-        assertEquals("offset", expected.getOffset(), actual.getOffset());
-        assertEquals("terrainConformance", expected.getTerrainConformance(), actual.getTerrainConformance());
-        assertEquals("lineWidth", expected.getLineWidth(), actual.getLineWidth());
+        assertEquals("offset", expected.getOffset(), actual.getOffset(), 0.0);
+        assertEquals("terrainConformance", expected.getTerrainConformance(), actual.getTerrainConformance(), 0.0);
+        assertEquals("lineWidth", expected.getLineWidth(), actual.getLineWidth(), 0.0);
         assertEquals("stipplePattern", expected.getStipplePattern(), actual.getStipplePattern());
         assertEquals("stippleFactor", expected.getStippleFactor(), actual.getStippleFactor());
         assertEquals("numSubsegments", expected.getNumSubsegments(), actual.getNumSubsegments());
@@ -175,14 +184,9 @@ public class PolylineTest extends junit.framework.TestCase
             Position expectedPos = expectedPositions.next(), actualPos = actualPositions.next();
             assertEquals("positions.i.latitude", expectedPos.getLatitude(), actualPos.getLatitude());
             assertEquals("positions.i.longitude", expectedPos.getLongitude(), actualPos.getLongitude());
-            assertEquals("positions.i.elevation", expectedPos.getElevation(), actualPos.getElevation());
+            assertEquals("positions.i.elevation", expectedPos.getElevation(), actualPos.getElevation(), 0.0);
         }
         // If either iterator has more elements, then their lengths are different.
         assertFalse("positions.length", expectedPositions.hasNext() || actualPositions.hasNext());
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(PolylineTest.class));
     }
 }

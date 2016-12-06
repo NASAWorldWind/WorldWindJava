@@ -7,17 +7,19 @@
 package gov.nasa.worldwind.ogc.collada;
 
 import gov.nasa.worldwind.util.WWIO;
-import junit.framework.TestCase;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 
-/**
- * @author pabercrombie
- * @version $Id: ColladaAccessorTest.java 650 2012-06-20 22:20:59Z pabercrombie $
- */
-public class ColladaAccessorTest extends TestCase
+import static org.junit.Assert.*;
+
+@RunWith(JUnit4.class)
+public class ColladaAccessorTest
 {
+    @Test
     public void testFloatAccessor() throws IllegalAccessException, IOException, XMLStreamException
     {
         final String doc =
@@ -41,6 +43,7 @@ public class ColladaAccessorTest extends TestCase
         this.parseAndCompare(doc, expected);
     }
 
+    @Test
     public void testOffset() throws IllegalAccessException, IOException, XMLStreamException
     {
         final String doc =
@@ -64,6 +67,7 @@ public class ColladaAccessorTest extends TestCase
         this.parseAndCompare(doc, expected);
     }
 
+    @Test
     public void testUnnamedParam() throws IllegalAccessException, IOException, XMLStreamException
     {
         final String doc =
@@ -87,6 +91,7 @@ public class ColladaAccessorTest extends TestCase
         this.parseAndCompare(doc, expected);
     }
 
+    @Test
     public void testStride() throws IllegalAccessException, IOException, XMLStreamException
     {
         final String doc =
@@ -108,6 +113,7 @@ public class ColladaAccessorTest extends TestCase
         this.parseAndCompare(doc, expected);
     }
 
+    @Test
     public void testTooFewElements() throws IllegalAccessException, IOException, XMLStreamException
     {
         final String doc =
@@ -126,12 +132,12 @@ public class ColladaAccessorTest extends TestCase
                 + "</source>"
                 + "</COLLADA>";
 
-        float[] expected = new float[] {4.0f, 5.0f, 6.0f, 7.0f, 8.0f};
+        float[] expected = new float[] {1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 0.0f};
 
         this.parseAndCompare(doc, expected);
     }
 
-    protected void parseAndCompare(String doc, float[] expected) throws XMLStreamException, IOException
+    private void parseAndCompare(String doc, float[] expected) throws XMLStreamException, IOException
     {
         ColladaRoot root = ColladaRoot.createAndParse(WWIO.getInputStreamFromString(doc));
         ColladaAccessor accessor = (ColladaAccessor) root.resolveReference("#accessor");
@@ -141,19 +147,18 @@ public class ColladaAccessorTest extends TestCase
         assertArrayEquals(expected, actual);
     }
 
-    protected boolean assertArrayEquals(float[] expected, float[] actual)
+    private static void assertArrayEquals(float[] expected, float[] actual)
     {
         if (expected == null)
-            return actual == null;
+        {
+            assertNull(actual);
+        }
 
-        if (expected.length != actual.length)
-            return false;
+        assertEquals(expected.length, actual.length);
 
         for (int i = 0; i < expected.length; i++)
         {
-            if (expected[i] != actual[i])
-                return false;
+            assertEquals(expected[i], actual[i], 0.0);
         }
-        return true;
     }
 }

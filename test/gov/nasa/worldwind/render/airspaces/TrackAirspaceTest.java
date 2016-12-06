@@ -6,24 +6,18 @@
 package gov.nasa.worldwind.render.airspaces;
 
 import gov.nasa.worldwind.geom.*;
-import junit.framework.*;
-import junit.textui.TestRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.List;
 
-/**
- * @author dcollins
- * @version $Id: TrackAirspaceTest.java 2565 2014-12-12 23:57:06Z dcollins $
- */
-public class TrackAirspaceTest extends TestCase
-{
-    public static void main(String[] args)
-    {
-        TestSuite testSuite = new TestSuite();
-        testSuite.addTestSuite(TrackAirspaceTest.class);
-        new TestRunner().doRun(testSuite);
-    }
+import static org.junit.Assert.assertEquals;
 
+@RunWith(JUnit4.class)
+public class TrackAirspaceTest
+{
+    @Test
     public void testRestoreState()
     {
         TrackAirspace expected = new TrackAirspace();
@@ -53,29 +47,7 @@ public class TrackAirspaceTest extends TestCase
         assertTrackAirspaceEquals(expected, actual);
     }
 
-    public static void assertAbstractAirspaceEquals(AbstractAirspace expected, AbstractAirspace actual)
-    {
-        assertEquals(expected.isVisible(), actual.isVisible());
-        assertEquals(expected.getAttributes(), actual.getAttributes());
-        assertEquals(expected.getHighlightAttributes(), actual.getHighlightAttributes());
-        assertEquals(expected.isHighlighted(), actual.isHighlighted());
-        assertEquals(expected.getAltitudes()[0], actual.getAltitudes()[0]);
-        assertEquals(expected.getAltitudes()[1], actual.getAltitudes()[1]);
-        assertEquals(expected.isTerrainConforming()[0], actual.isTerrainConforming()[0]);
-        assertEquals(expected.isTerrainConforming()[1], actual.isTerrainConforming()[1]);
-        assertEquals(expected.getAltitudeDatum()[0], actual.getAltitudeDatum()[0]);
-        assertEquals(expected.getAltitudeDatum()[1], actual.getAltitudeDatum()[1]);
-        assertEquals(expected.getGroundReference(), actual.getGroundReference());
-        assertEquals(expected.isEnableBatchRendering(), actual.isEnableBatchRendering());
-        assertEquals(expected.isEnableBatchPicking(), actual.isEnableBatchPicking());
-        assertEquals(expected.isEnableDepthOffset(), actual.isEnableDepthOffset());
-        assertEquals(expected.getOutlinePickWidth(), actual.getOutlinePickWidth());
-        assertEquals(expected.isAlwaysOnTop(), actual.isAlwaysOnTop());
-        assertEquals(expected.isDrawSurfaceShape(), actual.isDrawSurfaceShape());
-        assertEquals(expected.isEnableLevelOfDetail(), actual.isEnableLevelOfDetail());
-    }
-
-    public static void assertTrackAirspaceEquals(TrackAirspace expected, TrackAirspace actual)
+    private static void assertTrackAirspaceEquals(TrackAirspace expected, TrackAirspace actual)
     {
         assertAbstractAirspaceEquals(expected, actual);
         assertEquals(expected.isEnableInnerCaps(), actual.isEnableInnerCaps());
@@ -92,11 +64,33 @@ public class TrackAirspaceTest extends TestCase
         }
     }
 
-    public static void assertLegEquals(Box expected, Box actual)
+    private static void assertAbstractAirspaceEquals(AbstractAirspace expected, AbstractAirspace actual)
+    {
+        assertEquals(expected.isVisible(), actual.isVisible());
+        assertEquals(expected.getAttributes(), actual.getAttributes());
+        assertEquals(expected.getHighlightAttributes(), actual.getHighlightAttributes());
+        assertEquals(expected.isHighlighted(), actual.isHighlighted());
+        assertEquals(expected.getAltitudes()[0], actual.getAltitudes()[0], 0.0);
+        assertEquals(expected.getAltitudes()[1], actual.getAltitudes()[1], 0.0);
+        assertEquals(expected.isTerrainConforming()[0], actual.isTerrainConforming()[0]);
+        assertEquals(expected.isTerrainConforming()[1], actual.isTerrainConforming()[1]);
+        assertEquals(expected.getAltitudeDatum()[0], actual.getAltitudeDatum()[0]);
+        assertEquals(expected.getAltitudeDatum()[1], actual.getAltitudeDatum()[1]);
+        assertEquals(expected.getGroundReference(), actual.getGroundReference());
+        assertEquals(expected.isEnableBatchRendering(), actual.isEnableBatchRendering());
+        assertEquals(expected.isEnableBatchPicking(), actual.isEnableBatchPicking());
+        assertEquals(expected.isEnableDepthOffset(), actual.isEnableDepthOffset());
+        assertEquals(expected.getOutlinePickWidth(), actual.getOutlinePickWidth());
+        assertEquals(expected.isAlwaysOnTop(), actual.isAlwaysOnTop());
+        assertEquals(expected.isDrawSurfaceShape(), actual.isDrawSurfaceShape());
+        assertEquals(expected.isEnableLevelOfDetail(), actual.isEnableLevelOfDetail());
+    }
+
+    private static void assertLegEquals(Box expected, Box actual)
     {
         assertEquals(expected.getLocations()[0], actual.getLocations()[0]);
         assertEquals(expected.getLocations()[1], actual.getLocations()[1]);
-        assertEquals(expected.getWidths()[0], actual.getWidths()[0]);
-        assertEquals(expected.getWidths()[1], actual.getWidths()[1]);
+        assertEquals(expected.getWidths()[0], actual.getWidths()[0], 0.0);
+        assertEquals(expected.getWidths()[1], actual.getWidths()[1], 0.0);
     }
 }

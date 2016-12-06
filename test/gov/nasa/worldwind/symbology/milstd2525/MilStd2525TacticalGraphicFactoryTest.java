@@ -7,30 +7,31 @@
 package gov.nasa.worldwind.symbology.milstd2525;
 
 import gov.nasa.worldwind.symbology.milstd2525.graphics.*;
-import junit.framework.TestCase;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import static org.junit.Assert.*;
 
 /**
  * Unit test for {@link MilStd2525GraphicFactory}. Tests that the factory supports all of the graphics that should be
  * supported. Update this list when new graphics are implemented.
- *
- * @author pabercrombie
- * @version $Id: MilStd2525TacticalGraphicFactoryTest.java 690 2012-07-11 22:12:13Z pabercrombie $
  */
+@RunWith(JUnit4.class)
 public class MilStd2525TacticalGraphicFactoryTest
 {
     @Test
     public void testGraphicSupported() throws IllegalAccessException
     {
         MilStd2525GraphicFactory factory = new MilStd2525GraphicFactory();
-        TestCase.assertTrue(factory.isSupported("GFGPGLP----AUSX"));
+        assertTrue(factory.isSupported("GFGPGLP----AUSX"));
     }
 
     @Test
     public void testGraphicNotSupported() throws IllegalAccessException
     {
         MilStd2525GraphicFactory factory = new MilStd2525GraphicFactory();
-        TestCase.assertFalse(factory.isSupported("GFGPXXX----AUSX")); // Non-existent function ID.
+        assertFalse(factory.isSupported("GFGPXXX----AUSX")); // Non-existent function ID.
     }
 
     @Test
@@ -52,7 +53,7 @@ public class MilStd2525TacticalGraphicFactoryTest
                         sidc.setCharAt(3, status);
                         sidc.setCharAt(11, echelon);
 
-                        TestCase.assertTrue("Missing graphic: " + sidc.toString(),
+                        assertTrue("Missing graphic: " + sidc.toString(),
                             factory.isSupported(sidc.toString()));
                     }
                 }
@@ -76,7 +77,7 @@ public class MilStd2525TacticalGraphicFactoryTest
                     sidc.setCharAt(1, stdId);
                     sidc.setCharAt(3, status);
 
-                    TestCase.assertTrue("Missing graphic: " + sidc.toString(), factory.isSupported(sidc.toString()));
+                    assertTrue("Missing graphic: " + sidc.toString(), factory.isSupported(sidc.toString()));
                 }
             }
         }
@@ -89,7 +90,7 @@ public class MilStd2525TacticalGraphicFactoryTest
 
         for (String id : ALL_SUPPORTED_METOC)
         {
-            TestCase.assertTrue("Missing graphic: " + id, factory.isSupported(id));
+            assertTrue("Missing graphic: " + id, factory.isSupported(id));
         }
     }
 
@@ -97,7 +98,7 @@ public class MilStd2525TacticalGraphicFactoryTest
      * All graphics from Appendix B that have been implemented. Update this list when new graphics are implemented. This
      * list should match the list of supported graphics at http://goworldwind.org/developers-guide/symbology/tactical-graphic-status/
      */
-    protected static final String[] ALL_SUPPORTED_TACGRP = {
+    private static final String[] ALL_SUPPORTED_TACGRP = {
         TacGrpSidc.TSK_DSTY,
         TacGrpSidc.TSK_ITDT,
         TacGrpSidc.TSK_NEUT,
@@ -437,7 +438,7 @@ public class MilStd2525TacticalGraphicFactoryTest
     };
 
     /** All graphics from Appendix C that have been implemented. */
-    protected static final String[] ALL_SUPPORTED_METOC = {
+    private static final String[] ALL_SUPPORTED_METOC = {
         MetocSidc.AMPHC_PRS_LOWCTR,
         MetocSidc.AMPHC_PRS_LOWCTR_CYC,
         MetocSidc.AMPHC_PRS_LOWCTR_TROPLW,
@@ -614,7 +615,7 @@ public class MilStd2525TacticalGraphicFactoryTest
     };
 
     /** All graphics from Appendix G that have been implemented. */
-    protected static final String[] ALL_SUPPORTED_EMS = {
+    private static final String[] ALL_SUPPORTED_EMS = {
         EmsSidc.NATEVT_GEO_AFTSHK,
         EmsSidc.NATEVT_GEO_AVL,
         EmsSidc.NATEVT_GEO_EQKEPI,

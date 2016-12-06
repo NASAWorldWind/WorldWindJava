@@ -11,6 +11,14 @@ jdk:
   # Configure the build to use Oracle JDK 8
   - oraclejdk8
 
+before_install:
+  # Install Apache ANT v1.9.7 in order to get the most ANT junit features required by the World Wind build script. As of
+  # December 2016 the Travis CI environment provided ANT v1.8.x.
+  - cd $HOME
+  - curl -O https://www.apache.org/dist/ant/binaries/apache-ant-1.9.7-bin.tar.gz
+  - tar -xf apache-ant-1.9.7-bin.tar.gz
+  - export PATH=$HOME/apache-ant-1.9.7/bin:$PATH
+
 before_script:
   # Install the jq shell filter so we can extract data from GitHub API JSON results
   # See apt configuration: https://docs.travis-ci.com/user/ci-environment/#apt-configuration

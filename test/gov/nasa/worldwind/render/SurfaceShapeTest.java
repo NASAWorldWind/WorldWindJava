@@ -8,14 +8,17 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.*;
 
-/**
- * @author tag
- * @version $Id: SurfaceShapeTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
-public class SurfaceShapeTest extends junit.framework.TestCase
+import static org.junit.Assert.*;
+
+@SuppressWarnings("deprecation")
+@RunWith(JUnit4.class)
+public class SurfaceShapeTest
 {
     private static final ArrayList<LatLon> emptyLocations = new ArrayList<LatLon>();
     private static final List<LatLon> sampleLocations = Arrays.asList(
@@ -27,6 +30,7 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         LatLon.fromDegrees(14, 19),
         LatLon.fromDegrees(12, 13));
 
+    @Test
     public void testSaveAndRestoreOnNewObject()
     {
         AbstractSurfaceShape shape = new SurfacePolygon(emptyLocations);
@@ -39,9 +43,10 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         AbstractSurfaceShape expected = new SurfacePolygon(emptyLocations);
         assignExampleValues(expected);
 
-        assertEquals(expected, shape);
+        assertSurfaceShapeEquals(expected, shape);
     }
 
+    @Test
     public void testSaveAndRestoreOnSameObject()
     {
         AbstractSurfaceShape shape = new SurfacePolygon(emptyLocations);
@@ -54,9 +59,10 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         AbstractSurfaceShape expected = new SurfacePolygon(emptyLocations);
         assignExampleValues(expected);
 
-        assertEquals(expected, shape);
+        assertSurfaceShapeEquals(expected, shape);
     }
 
+    @Test
     public void testEmptyStateDocument()
     {
         AbstractSurfaceShape shape = new SurfacePolygon(emptyLocations);
@@ -71,9 +77,10 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         AbstractSurfaceShape expected = new SurfacePolygon(emptyLocations);
         assignExampleValues(expected);
 
-        assertEquals(expected, shape);
+        assertSurfaceShapeEquals(expected, shape);
     }
 
+    @Test
     public void testInvalidStateDocument()
     {
         try
@@ -86,9 +93,11 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testPartialStateDocument()
     {
         AbstractSurfaceShape shape = new SurfacePolygon(sampleLocations);
@@ -108,9 +117,10 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         expected.getAttributes().setDrawOutline(true);
         expected.setTexelsPerEdgeInterval(10);
 
-        assertEquals(expected, shape);
+        assertSurfaceShapeEquals(expected, shape);
     }
 
+    @Test
     public void testLegacyStateDocument()
     {
         AbstractSurfaceShape shape = new SurfacePolygon(sampleLocations);
@@ -133,13 +143,14 @@ public class SurfaceShapeTest extends junit.framework.TestCase
 
         SurfacePolygon expected = new SurfacePolygon();
         assignNullValues(expected);
-        expected.setOuterBoundary(Arrays.asList(LatLon.fromDegrees(24, 32)));
+        expected.setOuterBoundary(Collections.singletonList(LatLon.fromDegrees(24, 32)));
         expected.getAttributes().setDrawOutline(true);
         expected.setTexelsPerEdgeInterval(10);
 
-        assertEquals(expected, shape);
+        assertSurfaceShapeEquals(expected, shape);
     }
 
+    @Test
     public void testSaveAndRestoreOnPolyline()
     {
         SurfacePolyline shape = new SurfacePolyline(sampleLocations);
@@ -148,9 +159,10 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         SurfacePolyline shape2 = new SurfacePolyline(emptyLocations);
         shape2.restoreState(stateInXml);
 
-        assertEquals(shape, shape2);
+        assertSurfaceShapeEquals(shape, shape2);
     }
 
+    @Test
     public void testSaveAndRestoreOnPolygon()
     {
         SurfacePolygon shape = new SurfacePolygon(sampleLocations);
@@ -160,9 +172,10 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         SurfacePolygon shape2 = new SurfacePolygon(emptyLocations);
         shape2.restoreState(stateInXml);
 
-        assertEquals(shape, shape2);
+        assertSurfaceShapeEquals(shape, shape2);
     }
 
+    @Test
     public void testSaveAndRestoreOnEllipse()
     {
         SurfaceEllipse shape = new SurfaceEllipse(LatLon.fromDegrees(24, 32), 6d, 5d, Angle.POS90);
@@ -171,9 +184,10 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         SurfaceEllipse shape2 = new SurfaceEllipse(LatLon.fromDegrees(45, 52), 7d, 4d, Angle.NEG90);
         shape2.restoreState(stateInXml);
 
-        assertEquals(shape, shape2);
+        assertSurfaceShapeEquals(shape, shape2);
     }
 
+    @Test
     public void testSaveAndRestoreOnQuad()
     {
         SurfaceQuad shape = new SurfaceQuad(LatLon.fromDegrees(24, 32), 6d, 5d, Angle.POS90);
@@ -182,9 +196,10 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         SurfaceQuad shape2 = new SurfaceQuad(LatLon.fromDegrees(45, 52), 7d, 4d, Angle.NEG90);
         shape2.restoreState(stateInXml);
 
-        assertEquals(shape, shape2);
+        assertSurfaceShapeEquals(shape, shape2);
     }
 
+    @Test
     public void testSaveAndRestoreOnSquare()
     {
         SurfaceSquare shape = new SurfaceSquare(LatLon.fromDegrees(24, 32), 6d);
@@ -193,9 +208,10 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         SurfaceSquare shape2 = new SurfaceSquare(LatLon.fromDegrees(45, 52), 7d);
         shape2.restoreState(stateInXml);
 
-        assertEquals(shape, shape2);
+        assertSurfaceShapeEquals(shape, shape2);
     }
 
+    @Test
     public void testSaveAndRestoreOnSector()
     {
         SurfaceSector shape = new SurfaceSector(Sector.fromDegrees(23, 36, 51, 87));
@@ -204,12 +220,12 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         SurfaceSector shape2 = new SurfaceSector(Sector.fromDegrees(18, 29, 67, 79));
         shape2.restoreState(stateInXml);
 
-        assertEquals(shape, shape2);
+        assertSurfaceShapeEquals(shape, shape2);
     }
 
-    /*************************************************************************************************************/
-    /** Helper Methods **/
-    /** ************************************************************************************************ */
+    //////////////////////////////////////////////////////////
+    // Helper Methods
+    //////////////////////////////////////////////////////////
 
     @SuppressWarnings({"JavaDoc"})
     private static void assignExampleValues(AbstractSurfaceShape shape)
@@ -292,7 +308,7 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         }
     }
 
-    private static void assertEquals(AbstractSurfaceShape expected, AbstractSurfaceShape actual)
+    private static void assertSurfaceShapeEquals(AbstractSurfaceShape expected, AbstractSurfaceShape actual)
     {
         assertNotNull("Expected is null", expected);
         assertNotNull("Actual is null", actual);
@@ -304,13 +320,14 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         assertEquals("isVisible", expected.isVisible(), actual.isVisible());
         assertEquals("attributes", expected.getAttributes(), actual.getAttributes());
         assertEquals("pathType", expected.getPathType(), actual.getPathType());
-        assertEquals("texelsPerEdgeInterval", expected.getTexelsPerEdgeInterval(), actual.getTexelsPerEdgeInterval());
+        assertEquals("texelsPerEdgeInterval", expected.getTexelsPerEdgeInterval(), actual.getTexelsPerEdgeInterval(),
+            0.0);
         assertEquals("minEdgeIntervals", expectedEdgeIntervals[0], actualEdgeIntervals[0]);
         assertEquals("maxEdgeIntervals", expectedEdgeIntervals[1], actualEdgeIntervals[1]);
 
         if (expected instanceof SurfacePolyline)
         {
-            assertEquals("locations", ((SurfacePolyline) expected).getLocations(),
+            assertIterableEquals("locations", ((SurfacePolyline) expected).getLocations(),
                 ((SurfacePolyline) actual).getLocations());
         }
         else if (expected instanceof SurfacePolygon)
@@ -325,21 +342,21 @@ public class SurfaceShapeTest extends junit.framework.TestCase
         {
             assertEquals("center", ((SurfaceEllipse) expected).getCenter(), ((SurfaceEllipse) actual).getCenter());
             assertEquals("majorRadius", ((SurfaceEllipse) expected).getMajorRadius(),
-                ((SurfaceEllipse) actual).getMajorRadius());
+                ((SurfaceEllipse) actual).getMajorRadius(), 0.0);
             assertEquals("minorRadius", ((SurfaceEllipse) expected).getMinorRadius(),
-                ((SurfaceEllipse) actual).getMinorRadius());
+                ((SurfaceEllipse) actual).getMinorRadius(), 0.0);
             assertEquals("heading", ((SurfaceEllipse) expected).getHeading(), ((SurfaceEllipse) actual).getHeading());
         }
         else if (expected instanceof SurfaceQuad)
         {
             assertEquals("center", ((SurfaceQuad) expected).getCenter(), ((SurfaceQuad) actual).getCenter());
-            assertEquals("width", ((SurfaceQuad) expected).getWidth(), ((SurfaceQuad) actual).getWidth());
-            assertEquals("height", ((SurfaceQuad) expected).getHeight(), ((SurfaceQuad) actual).getHeight());
+            assertEquals("width", ((SurfaceQuad) expected).getWidth(), ((SurfaceQuad) actual).getWidth(), 0.0);
+            assertEquals("height", ((SurfaceQuad) expected).getHeight(), ((SurfaceQuad) actual).getHeight(), 0.0);
             assertEquals("heading", ((SurfaceQuad) expected).getHeading(), ((SurfaceQuad) actual).getHeading());
         }
     }
 
-    protected static void assertEquals(String name, Iterable<? extends LatLon> expected,
+    private static void assertIterableEquals(String message, Iterable<? extends LatLon> expected,
         Iterable<? extends LatLon> actual)
     {
         Iterator<? extends LatLon> a = expected.iterator();
@@ -347,17 +364,12 @@ public class SurfaceShapeTest extends junit.framework.TestCase
 
         while (a.hasNext() && b.hasNext())
         {
-            assertEquals(name, a.next(), b.next());
+            assertEquals(message, a.next(), b.next());
         }
 
         if (a.hasNext() || b.hasNext())
         {
             fail();
         }
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(PolylineTest.class));
     }
 }
