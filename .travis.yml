@@ -4,7 +4,7 @@
 # Required to install the jq JSON filter used to parse GitHub API results
 sudo: required
 
-# Set up to run the Java build script per the Travis CI documentatio
+# Set up to run the Java build script per the Travis CI documentation
 language: java
 
 jdk:

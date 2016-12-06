@@ -21,7 +21,7 @@
     <!-- Main build targets. Provides generic targets that compile the Java sources, bundle JAR libraries, assemble API
          documentation, test the Java sources, and clean up the build output. -->
 
-    <target name="build" depends="assemble, check"
+    <target name="build" depends="assemble, test"
             description="Default build target. Assembles and tests this project."/>
 
     <target name="clean" description="Deletes the build directory.">
@@ -31,7 +31,7 @@
     <target name="assemble" depends="assembleDebug, assembleRelease, assembleJavadoc"
             description="Assembles JAR libraries for all build types and assembles the project documentation."/>
 
-    <target name="check" depends="unitTest"
+    <target name="test" depends="unitTest"
             description="Runs all project tests."/>
 
     <!-- Targets for compiling Java sources and bundling JAR libraries for the the debug build type. -->
@@ -115,8 +115,8 @@
     </target>
 
     <target name="runUnitTest">
-        <delete dir="${worldwind.test.reports.dir}"/>
-        <mkdir dir="${worldwind.test.reports.dir}"/>
+        <delete dir="${worldwind.test.results.dir}"/>
+        <mkdir dir="${worldwind.test.results.dir}"/>
         <junit printsummary="true"
                fork="true"
                forkmode="once"
@@ -131,13 +131,19 @@
                 <pathelement location="${basedir}/ant/lib/junit-4.5.jar"/>
             </classpath>
             <formatter type="xml"/>
-            <batchtest skipnontests="true"
-                       todir="${worldwind.test.reports.dir}">
+            <batchtest todir="${worldwind.test.results.dir}"
+                       skipnontests="true">
                 <fileset dir="${worldwind.classes.dir}/test">
-                    <include name="**/*Test*.class"/>
+                    <include name="**/*.class"/>
                 </fileset>
             </batchtest>
         </junit>
+        <junitreport todir="${worldwind.test.results.dir}">
+            <fileset dir="${worldwind.test.results.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report todir="${worldwind.test.results.dir}" format="noframes"/>
+        </junitreport>
     </target>
 
     <!-- Macros for compiling Java sources.
