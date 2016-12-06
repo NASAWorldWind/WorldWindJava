@@ -24,8 +24,7 @@ public class IconRetrievalTest
     // TODO: test unframed icons
 
     // This path should correspond to the location of the appropriate symbology source icons on your system
-    private final static String ICON_RETRIEVER_PATH = Configuration.getStringValue(
-        AVKey.MIL_STD_2525_ICON_RETRIEVER_PATH, MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
+    private final static String ICON_RETRIEVER_PATH = "jar:file:testData/milstd2525-symbols.zip!";
 
     //////////////////////////////////////////////////////////
     // Test retrieval of a MilStd2525 icon from both a remote
@@ -35,7 +34,7 @@ public class IconRetrievalTest
     @Test
     public void testServerRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
         AVListImpl params = new AVListImpl();
         BufferedImage img = symGen.createIcon("SUAPC----------", params);
         assertNotNull(img);
