@@ -27,7 +27,7 @@ import java.nio.ByteBuffer;
  */
 public class BrowserBalloonTest extends ApplicationTemplate
 {
-    public static final String DEFAULT_FILE = "test/gov/nasa/worldwind/render/BrowserBalloonTest.html";
+    public static final String DEFAULT_FILE = "testFunctional/gov/nasa/worldwind/render/BrowserBalloonTest.html";
 
     public static class AppFrame extends ApplicationTemplate.AppFrame
     {
