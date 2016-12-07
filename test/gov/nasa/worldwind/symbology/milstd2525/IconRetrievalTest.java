@@ -6,7 +6,6 @@
 
 package gov.nasa.worldwind.symbology.milstd2525;
 
-import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.symbology.IconRetriever;
 import org.junit.Test;
@@ -24,7 +23,7 @@ public class IconRetrievalTest
     // TODO: test unframed icons
 
     // This path should correspond to the location of the appropriate symbology source icons on your system
-    private final static String ICON_RETRIEVER_PATH = "jar:file:testData/milstd2525-symbols.zip!";
+    private final static String LOCAL_SYMBOLS_ZIP = "jar:file:testData/milstd2525-symbols.zip!";
 
     //////////////////////////////////////////////////////////
     // Test retrieval of a MilStd2525 icon from both a remote
@@ -50,7 +49,7 @@ public class IconRetrievalTest
     {
         try
         {
-            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
             symGen.createIcon("SUAPC", null);
             fail("Should raise an IllegalArgumentException");
         }
@@ -65,7 +64,7 @@ public class IconRetrievalTest
     {
         try
         {
-            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
             symGen.createIcon("SUAPCTEST", null);
             fail("Should raise an IllegalArgumentException");
         }
@@ -80,7 +79,7 @@ public class IconRetrievalTest
     {
         try
         {
-            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
             symGen.createIcon(null, null);
             fail("Should raise an IllegalArgumentException");
         }
@@ -101,7 +100,7 @@ public class IconRetrievalTest
     {
         try
         {
-            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
             symGen.createIcon(".UAPC----------", null);
             fail("Should raise an IllegalArgumentException");
         }
@@ -116,7 +115,7 @@ public class IconRetrievalTest
     {
         try
         {
-            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
             symGen.createIcon("S.APC----------", null);
             fail("Should raise an IllegalArgumentException");
         }
@@ -131,7 +130,7 @@ public class IconRetrievalTest
     {
         try
         {
-            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
             symGen.createIcon("SU.PC----------", null);
             fail("Should raise an IllegalArgumentException");
         }
@@ -146,7 +145,7 @@ public class IconRetrievalTest
     {
         try
         {
-            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
             symGen.createIcon("SUA.C----------", null);
             fail("Should raise an IllegalArgumentException");
         }
@@ -161,7 +160,7 @@ public class IconRetrievalTest
     {
         try
         {
-            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
             symGen.createIcon("SUAPZ----------", null);
             fail("Should raise an IllegalArgumentException");
         }
@@ -174,7 +173,7 @@ public class IconRetrievalTest
 //        @Test
 //        public void testInvalidModifierCode()
 //        {
-//            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+//            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
 //            symGen.createIcon("SUAP------ZZ---", null);
 //            assertNull(img);
 //        }
@@ -182,7 +181,7 @@ public class IconRetrievalTest
 //        @Test
 //        public void testInvalidCountryCode()
 //        {
-//            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+//            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
 //            symGen.createIcon("SUAPC-------ZZ-", null);
 //            assertNull(img);
 //        }
@@ -192,7 +191,7 @@ public class IconRetrievalTest
     {
         try
         {
-            IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+            IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
             symGen.createIcon("SUAPC---------.", null);
             fail("Should raise an IllegalArgumentException");
         }
@@ -210,7 +209,7 @@ public class IconRetrievalTest
     @Test
     public void testWarfighting_UnknownFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -233,7 +232,7 @@ public class IconRetrievalTest
     @Test
     public void testWarfighting_SpaceFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -256,7 +255,7 @@ public class IconRetrievalTest
     @Test
     public void testWarfighting_AirFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -279,7 +278,7 @@ public class IconRetrievalTest
     @Test
     public void testWarfighting_GroundFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -306,7 +305,7 @@ public class IconRetrievalTest
     @Test
     public void testWarfighting_SeaSurfaceFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -329,7 +328,7 @@ public class IconRetrievalTest
     @Test
     public void testWarfighting_SubsurfaceFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -352,7 +351,7 @@ public class IconRetrievalTest
     @Test
     public void testWarfighting_SpecialOpsFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -381,7 +380,7 @@ public class IconRetrievalTest
     @Test
     public void testSigInt_SpaceFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -404,7 +403,7 @@ public class IconRetrievalTest
     @Test
     public void testSigInt_AirFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -427,7 +426,7 @@ public class IconRetrievalTest
     @Test
     public void testSigInt_GroundFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -450,7 +449,7 @@ public class IconRetrievalTest
     @Test
     public void testSigInt_SeaSurfaceFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -473,7 +472,7 @@ public class IconRetrievalTest
     @Test
     public void testSigInt_SubsurfaceFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -502,7 +501,7 @@ public class IconRetrievalTest
     @Test
     public void testStabilityOps_ViolentActivitiesFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -525,7 +524,7 @@ public class IconRetrievalTest
     @Test
     public void testStabilityOps_LocationsFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -548,7 +547,7 @@ public class IconRetrievalTest
     @Test
     public void testStabilityOps_OperationsFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -571,7 +570,7 @@ public class IconRetrievalTest
     @Test
     public void testStabilityOps_ItemsFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -594,7 +593,7 @@ public class IconRetrievalTest
     @Test
     public void testStabilityOps_IndividualFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -617,7 +616,7 @@ public class IconRetrievalTest
     @Test
     public void testStabilityOps_NonmilitaryFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -640,7 +639,7 @@ public class IconRetrievalTest
     @Test
     public void testStabilityOps_RapeFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -669,7 +668,7 @@ public class IconRetrievalTest
     @Test
     public void testEmergencyManagement_IncidentFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -692,7 +691,7 @@ public class IconRetrievalTest
 //        @Test
 //        public void testEmergencyManagement_NaturalEventFunctionIDRetrieval()
 //        {
-//            MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+//            MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
 //            AVList params = new AVListImpl();
 //            BufferedImage img;
 //
@@ -715,7 +714,7 @@ public class IconRetrievalTest
     @Test
     public void testEmergencyManagement_OperationFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
@@ -738,7 +737,7 @@ public class IconRetrievalTest
     @Test
     public void testEmergencyManagement_InfrastructureFunctionIDRetrieval()
     {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(ICON_RETRIEVER_PATH);
+        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(LOCAL_SYMBOLS_ZIP);
         AVList params = new AVListImpl();
         BufferedImage img;
 
