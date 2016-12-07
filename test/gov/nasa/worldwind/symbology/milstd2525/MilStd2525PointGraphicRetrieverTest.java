@@ -17,26 +17,13 @@ import java.awt.image.*;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class PointGraphicRetrievalTest
+public class MilStd2525PointGraphicRetrieverTest
 {
     // This path should correspond to the location of the appropriate symbology source icons on your system
     private final static String LOCAL_SYMBOLS_ZIP = "jar:file:testData/milstd2525-symbols.zip!";
 
     /** Valid status characters for MIL-STD-2525C tactical graphics (see Table B-I, pg. 305). */
     private static final char[] ALL_STATUS = {'A', 'S', 'P', 'K'};
-
-    //////////////////////////////////////////////////////////
-    // Test retrieval of a MilStd2525 point graphic from both a remote
-    // server and the local file system.
-    //////////////////////////////////////////////////////////
-
-    @Test
-    public void testServerRetrieval()
-    {
-        IconRetriever symGen = new MilStd2525PointGraphicRetriever(MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
-        BufferedImage img = symGen.createIcon("GFFPPCB-------X", null);
-        assertNotNull(img);
-    }
 
     //////////////////////////////////////////////////////////
     // Test parsing of the Symbol Code.

@@ -17,27 +17,13 @@ import java.awt.image.*;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class IconRetrievalTest
+public class MilStd2525IconRetrieverTest
 {
     // TODO: test all possible values for Standard Identity and Status
     // TODO: test unframed icons
 
     // This path should correspond to the location of the appropriate symbology source icons on your system
     private final static String LOCAL_SYMBOLS_ZIP = "jar:file:testData/milstd2525-symbols.zip!";
-
-    //////////////////////////////////////////////////////////
-    // Test retrieval of a MilStd2525 icon from both a remote
-    // server and the local file system.
-    //////////////////////////////////////////////////////////
-
-    @Test
-    public void testServerRetrieval()
-    {
-        MilStd2525IconRetriever symGen = new MilStd2525IconRetriever(MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
-        AVListImpl params = new AVListImpl();
-        BufferedImage img = symGen.createIcon("SUAPC----------", params);
-        assertNotNull(img);
-    }
 
     //////////////////////////////////////////////////////////
     // Test parsing of the Symbol Code.
@@ -757,31 +743,18 @@ public class IconRetrievalTest
         }
     }
 
-//    public static void main(String[] args)
-//    {
-//        TestSuite testSuite = new TestSuite();
-//        testSuite.addTestSuite(RetrievalTests.class);
-//        testSuite.addTestSuite(ParsingTests.class);
-//        testSuite.addTestSuite(CodeTests.class);
-//        //testSuite.addTestSuite(WarfightingFunctionIDTests.class);
-//        //testSuite.addTestSuite(SignalsIntelligenceFunctionIDTests.class);
-//        //testSuite.addTestSuite(StabilityOperationsFunctionIDTests.class);
-//        testSuite.addTestSuite(EmergencyManagementFunctionIDTests.class);
-//        new TestRunner().doRun(testSuite);
-//    }
-
     //////////////////////
     // Warfighting
 
-    private final static String[] WarfightingUnknownFunctionIDs = {"------"};
+    private static final String[] WarfightingUnknownFunctionIDs = {"------"};
 
-    private final static String[] WarfightingSpaceFunctionIDs = {"------",
+    private static final String[] WarfightingSpaceFunctionIDs = {"------",
         "S-----",
         "V-----",
         "T-----",
         "L-----"};
 
-    private final static String[] WarfightingAirFunctionIDs = {"------",
+    private static final String[] WarfightingAirFunctionIDs = {"------",
         "C-----",
         "M-----",
         "MF----",
@@ -865,7 +838,7 @@ public class IconRetrievalTest
         "CH----",
         "CL----"};
 
-    private final static String[] WarfightingGroundFunctionIDs = {"------",
+    private static final String[] WarfightingGroundFunctionIDs = {"------",
         "U-----",
         "UC----",
         "UCD---",
@@ -1469,7 +1442,7 @@ public class IconRetrievalTest
         "IX----",
         "IXH---"};
 
-    private final static String[] WarfightingSeaSurfaceFunctionIDs = {"------",
+    private static final String[] WarfightingSeaSurfaceFunctionIDs = {"------",
         "C-----",
         "CL----",
         "CLCV--",
@@ -1543,7 +1516,7 @@ public class IconRetrievalTest
         "XP----",
         "O-----"};
 
-    private final static String[] WarfightingSubsurfaceFunctionIDs = {"------",
+    private static final String[] WarfightingSubsurfaceFunctionIDs = {"------",
         "S-----",
         "SF----",
         "SB----",
@@ -1624,7 +1597,7 @@ public class IconRetrievalTest
         "V-----",
         "X-----"};
 
-    private final static String[] WarfightingSOFFunctionIDs = {"------",
+    private static final String[] WarfightingSOFFunctionIDs = {"------",
         "A-----",
         "AF----",
         "AFA---",
@@ -1658,7 +1631,7 @@ public class IconRetrievalTest
     //////////////////////
     //  Signals Intelligence
 
-    private static String[] SignalsIntelligenceSpaceFunctionIDs = {//"------",
+    private static final String[] SignalsIntelligenceSpaceFunctionIDs = {//"------",
         //"S-----",
         //"SC----",     // icons not used
         "SCD---",
@@ -1671,7 +1644,7 @@ public class IconRetrievalTest
         "SRS---",
         "SRU---"};
 
-    private static String[] SignalsIntelligenceAirFunctionIDs = {//"------",
+    private static final String[] SignalsIntelligenceAirFunctionIDs = {//"------",
         //"S-----",
         //"SC----",     // icons not used
         "SCC---",
@@ -1697,7 +1670,7 @@ public class IconRetrievalTest
         "SRTT--",
         "SRU---"};
 
-    private static String[] SignalsIntelligenceGroundFunctionIDs = {//"------",
+    private static final String[] SignalsIntelligenceGroundFunctionIDs = {//"------",
         //"S-----",
         //"SC----",     // icons not used
         "SCC---",
@@ -1728,7 +1701,7 @@ public class IconRetrievalTest
         "SRTT--",
         "SRU---"};
 
-    private static String[] SignalsIntelligenceSeaSurfaceFunctionIDs = {//"------",
+    private static final String[] SignalsIntelligenceSeaSurfaceFunctionIDs = {//"------",
         //"S-----",
         //"SC----",     // icons not used
         "SCC---",
@@ -1757,7 +1730,7 @@ public class IconRetrievalTest
         "SRTT--",
         "SRU---"};
 
-    private static String[] SignalsIntelligenceSubsurfaceFunctionIDs = {//"------",
+    private static final String[] SignalsIntelligenceSubsurfaceFunctionIDs = {//"------",
         //"S-----",
         //"SC----",     // icons not used
         "SCO---",
@@ -1775,7 +1748,7 @@ public class IconRetrievalTest
     ///////////////////////////////
     //  Stability Operations
 
-    private static String[] StabilityOperationsViolentActivitiesFunctionIDs = {//"------",
+    private static final String[] StabilityOperationsViolentActivitiesFunctionIDs = {//"------",
         "A-----",
         "M-----",
         "MA----",
@@ -1789,13 +1762,13 @@ public class IconRetrievalTest
         "E-----",
         "EI----"};
 
-    private static String[] StabilityOperationsLocationsFunctionIDs = {//"------",
+    private static final String[] StabilityOperationsLocationsFunctionIDs = {//"------",
         "B-----",
         "G-----",
         "W-----",
         "M-----"};
 
-    private static String[] StabilityOperationsOperationsFunctionIDs = {//"------",
+    private static final String[] StabilityOperationsOperationsFunctionIDs = {//"------",
         "P-----",
         //"R-----",     // icon not used
         "RW----",
@@ -1823,7 +1796,7 @@ public class IconRetrievalTest
         "CB----",
         "CC----"};
 
-    private static String[] StabilityOperationsItemsFunctionIDs = {//"------",
+    private static final String[] StabilityOperationsItemsFunctionIDs = {//"------",
         "R-----",
         "S-----",
         "G-----",
@@ -1832,12 +1805,12 @@ public class IconRetrievalTest
         "D-----",
         "F-----"};
 
-    private static String[] StabilityOperationsIndividualFunctionIDs = {"------",
+    private static final String[] StabilityOperationsIndividualFunctionIDs = {"------",
         "A-----",
         "B-----",
         "C-----"};
 
-    private static String[] StabilityOperationsNonmilitaryFunctionIDs = {"------",
+    private static final String[] StabilityOperationsNonmilitaryFunctionIDs = {"------",
         "A-----",
         "B-----",
         "C-----",
@@ -1845,13 +1818,13 @@ public class IconRetrievalTest
         "E-----",
         "F-----"};
 
-    private static String[] StabilityOperationsRapeFunctionIDs = {"------",
+    private static final String[] StabilityOperationsRapeFunctionIDs = {"------",
         "A-----"};
 
     /////////////////////////////
     //  Emergency Management
 
-    private static String[] EmergencyManagementIncidentsFunctionIDs = {//"------",
+    private static final String[] EmergencyManagementIncidentsFunctionIDs = {//"------",
         "A-----",
         "AC----",
         "B-----",
@@ -1893,7 +1866,7 @@ public class IconRetrievalTest
         "H-----",
         "HA----"};
 
-//    private static String[] EmergencyManagementNaturalEventsFunctionIDs = {//"------",
+//    private static final String[] EmergencyManagementNaturalEventsFunctionIDs = {//"------",
 //        //"A-----",     // icon not used
 //        "AA----",
 //        "AB----",
@@ -1913,7 +1886,7 @@ public class IconRetrievalTest
 //        "CD----",
 //        "CE----"};
 
-    private static String[] EmergencyManagementOperationsFunctionIDs = {//"-----------",
+    private static final String[] EmergencyManagementOperationsFunctionIDs = {//"-----------",
         "A-----H----",
         "AA---------",
         "AB---------",
