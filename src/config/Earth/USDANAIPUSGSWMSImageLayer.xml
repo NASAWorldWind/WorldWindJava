@@ -9,8 +9,8 @@
 <Layer version="1" layerType="TiledImageLayer">
     <DisplayName>USDA NAIP USGS</DisplayName>
     <Service serviceName="OGC:WMS" version="1.3">
-        <GetCapabilitiesURL>https://raster.nationalmap.gov/arcgis/services/Orthoimagery/USGS_EROS_Ortho_NAIP/ImageServer/WMSServer?</GetCapabilitiesURL>
-        <GetMapURL>https://raster.nationalmap.gov/arcgis/services/Orthoimagery/USGS_EROS_Ortho_NAIP/ImageServer/WMSServer?</GetMapURL>
+        <GetCapabilitiesURL>https://raster.nationalmap.gov/arcgis/services/Orthoimagery/USGS_EROS_Ortho_NAIP_SCALE/ImageServer/WMSServer?</GetCapabilitiesURL>
+        <GetMapURL>https://raster.nationalmap.gov/arcgis/services/Orthoimagery/USGS_EROS_Ortho_NAIP_SCALE/ImageServer/WMSServer?</GetMapURL>
         <LayerNames>0</LayerNames>
     </Service>
     <!-- day month year hours:minutes:seconds timezone -->
