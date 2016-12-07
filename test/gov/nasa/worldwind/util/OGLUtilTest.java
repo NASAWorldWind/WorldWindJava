@@ -8,11 +8,11 @@ package gov.nasa.worldwind.util;
 
 import com.jogamp.opengl.util.texture.TextureData;
 import gov.nasa.worldwind.Configuration;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import javax.media.opengl.GL;
+import javax.media.opengl.*;
 import java.io.*;
 import java.net.URL;
 
@@ -25,12 +25,26 @@ public class OGLUtilTest
     private static final String DDS_FILE = "./src/images/BMNG_world.topo.bathy.200405.3.2048x1024.dds";
     private static final String JPG_FILE = "./src/images/BMNG_world.topo.bathy.200405.3.2048x1024.jpg";
 
+    private GLProfile glProfile;
+
+    @Before
+    public void setUp()
+    {
+        this.glProfile = Configuration.getMaxCompatibleGLProfile();
+    }
+
+    @After
+    public void tearDown()
+    {
+        this.glProfile = null;
+    }
+
     @Test
     public void testPngFile() throws IOException
     {
         File f = new File(PNG_FILE);
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), f, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, f, false);
 
         assertEquals(td.getWidth(), 512);
         assertEquals(td.getHeight(), 256);
@@ -42,7 +56,7 @@ public class OGLUtilTest
         File f = new File(PNG_FILE);
         InputStream s = new FileInputStream(f);
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), s, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, s, false);
 
         assertEquals(td.getWidth(), 512);
         assertEquals(td.getHeight(), 256);
@@ -53,7 +67,7 @@ public class OGLUtilTest
     {
         URL url = new File(PNG_FILE).toURI().toURL();
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), url, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, url, false);
 
         assertEquals(td.getWidth(), 512);
         assertEquals(td.getHeight(), 256);
@@ -64,7 +78,7 @@ public class OGLUtilTest
     {
         File f = new File(DDS_FILE);
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), f, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, f, false);
 
         assertEquals(td.getWidth(), 2048);
         assertEquals(td.getHeight(), 1024);
@@ -76,7 +90,7 @@ public class OGLUtilTest
         File f = new File(DDS_FILE);
         InputStream s = new FileInputStream(f);
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), s, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, s, false);
 
         assertEquals(td.getWidth(), 2048);
         assertEquals(td.getHeight(), 1024);
@@ -87,7 +101,7 @@ public class OGLUtilTest
     {
         URL url = new File(DDS_FILE).toURI().toURL();
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), url, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, url, false);
 
         assertEquals(td.getWidth(), 2048);
         assertEquals(td.getHeight(), 1024);
@@ -98,7 +112,7 @@ public class OGLUtilTest
     {
         File f = new File(JPG_FILE);
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), f, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, f, false);
 
         assertEquals(td.getWidth(), 2048);
         assertEquals(td.getHeight(), 1024);
@@ -110,7 +124,7 @@ public class OGLUtilTest
         File f = new File(JPG_FILE);
         InputStream s = new FileInputStream(f);
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), s, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, s, false);
 
         assertEquals(td.getWidth(), 2048);
         assertEquals(td.getHeight(), 1024);
@@ -121,7 +135,7 @@ public class OGLUtilTest
     {
         URL url = new File(JPG_FILE).toURI().toURL();
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), url, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, url, false);
 
         assertEquals(td.getWidth(), 2048);
         assertEquals(td.getHeight(), 1024);
@@ -133,7 +147,7 @@ public class OGLUtilTest
     {
         URL url = new File("./testData/32x32-icon-nasa-indexed-color.png").toURI().toURL();
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), url, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, url, false);
         assertEquals(td.getPixelFormat(), GL.GL_RGBA);
     }
 
@@ -143,7 +157,7 @@ public class OGLUtilTest
     {
         URL url = new File("./testData/32x32-icon-nasa-interlaced.png").toURI().toURL();
 
-        TextureData td = OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), url, false);
+        TextureData td = OGLUtil.newTextureData(this.glProfile, url, false);
 
         assertEquals(td.getWidth(), 32);
         assertEquals(td.getHeight(), 32);
