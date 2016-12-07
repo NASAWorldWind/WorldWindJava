@@ -121,7 +121,7 @@ fi
 # =================
 
 # Define the file names that are to be deployed
-JAR_FILES=( build/worldwind.jar build/worldwind-debug.jar build/worldwindx.jar build/worldwindx-debug.jar )
+JAR_FILES=( build/worldwind-debug.jar build/worldwindx-debug.jar build/worldwind-release.jar build/worldwindx-release.jar )
 ZIP_FILES=( build/doc/worldwind-javadoc.zip )
 ALL_FILES=( "${JAR_FILES[@]}" "${ZIP_FILES[@]}" )
 
