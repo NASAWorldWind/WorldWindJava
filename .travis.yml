@@ -25,6 +25,10 @@ before_script:
   - jq --version
   # Ensure scripts can be executed (required if scripts are authored in Windows)
   - chmod +x ./travis/*.sh
+  # Use xvfb to run tests that require a GUI
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
 
 script:
   # Build the project
