@@ -157,12 +157,13 @@ public class Polygon extends AbstractAirspace
     @Override
     protected List<Vec4> computeMinimalGeometry(Globe globe, double verticalExaggeration)
     {
-        if (this.getLocations() == null)
+        List<LatLon> locations = this.getLocations();
+        if (locations == null || locations.isEmpty())
             return null;
 
-        ArrayList<LatLon> locations = new ArrayList<LatLon>(this.getLocations());
+        ArrayList<LatLon> copyOfLocations = new ArrayList<LatLon>(locations);
         ArrayList<LatLon> tessellatedLocations = new ArrayList<LatLon>();
-        this.makeTessellatedLocations(globe, MINIMAL_GEOMETRY_SUBDIVISIONS, locations, tessellatedLocations);
+        this.makeTessellatedLocations(globe, MINIMAL_GEOMETRY_SUBDIVISIONS, copyOfLocations, tessellatedLocations);
 
         ArrayList<Vec4> points = new ArrayList<Vec4>();
         this.makeExtremePoints(globe, verticalExaggeration, tessellatedLocations, points);

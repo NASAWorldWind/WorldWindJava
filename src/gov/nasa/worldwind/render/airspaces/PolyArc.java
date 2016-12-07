@@ -181,12 +181,13 @@ public class PolyArc extends Polygon
     @Override
     protected List<Vec4> computeMinimalGeometry(Globe globe, double verticalExaggeration)
     {
-        if (this.getLocationList() == null)
+        List<LatLon> locations = this.getLocationList();
+        if (locations == null || locations.isEmpty())
             return null;
 
         ArrayList<LatLon> arcLocations = new ArrayList<LatLon>();
         ArrayList<Boolean> arcFlags = new ArrayList<Boolean>();
-        this.makePolyArcLocations(globe, this.getLocationList(), 8, arcLocations, arcFlags);
+        this.makePolyArcLocations(globe, locations, 8, arcLocations, arcFlags);
 
         ArrayList<LatLon> tessellatedLocations = new ArrayList<LatLon>();
         this.makeTessellatedLocations(globe, MINIMAL_GEOMETRY_SUBDIVISIONS, arcLocations, tessellatedLocations);
