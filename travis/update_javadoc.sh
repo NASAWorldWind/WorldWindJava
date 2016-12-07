@@ -50,7 +50,7 @@ git rm -rfq --ignore-unmatch ./assets/java/${FOLDER}/javadoc
 
 # Copy new javadocs to the repository
 mkdir -p ./assets/java/${FOLDER}/javadoc
-cp -Rf ${TRAVIS_BUILD_DIR}/doc/javadoc/* ./assets/java/${FOLDER}/javadoc
+cp -Rf ${TRAVIS_BUILD_DIR}/build/doc/javadoc/* ./assets/java/${FOLDER}/javadoc
 
 # Commit and push the changes (quietly)
 git add -f .

@@ -6,17 +6,20 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.avlist.AVKey;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-/**
- * @author dcollins
- * @version $Id: AnnotationAttributesTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
-public class AnnotationAttributesTest extends junit.framework.TestCase
+import static org.junit.Assert.*;
+
+@RunWith(JUnit4.class)
+public class AnnotationAttributesTest
 {
-    /*************************************************************************************************************/
-    /** Persistence Tests **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Persistence Tests
+    //////////////////////////////////////////////////////////
 
+    @Test
     public void testRestore_NewInstance()
     {
         AnnotationAttributes attrib = new AnnotationAttributes();
@@ -29,9 +32,10 @@ public class AnnotationAttributesTest extends junit.framework.TestCase
         AnnotationAttributes expected = new AnnotationAttributes();
         assignExampleValues(expected);
 
-        assertEquals(expected, attrib);
+        assertAnnotationAttributesEquals(expected, attrib);
     }
 
+    @Test
     public void testRestore_SameInstance()
     {
         AnnotationAttributes attrib = new AnnotationAttributes();
@@ -44,9 +48,10 @@ public class AnnotationAttributesTest extends junit.framework.TestCase
         AnnotationAttributes expected = new AnnotationAttributes();
         assignExampleValues(expected);
 
-        assertEquals(expected, attrib);
+        assertAnnotationAttributesEquals(expected, attrib);
     }
 
+    @Test
     public void testRestore_EmptyStateDocument()
     {
         AnnotationAttributes attrib = new AnnotationAttributes();
@@ -61,9 +66,10 @@ public class AnnotationAttributesTest extends junit.framework.TestCase
         AnnotationAttributes expected = new AnnotationAttributes();
         assignExampleValues(expected);
 
-        assertEquals(expected, attrib);
+        assertAnnotationAttributesEquals(expected, attrib);
     }
 
+    @Test
     public void testRestore_InvalidStateDocument()
     {
         try
@@ -76,9 +82,11 @@ public class AnnotationAttributesTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testRestore_PartialStateDocument()
     {
         AnnotationAttributes attrib = new AnnotationAttributes();
@@ -98,9 +106,10 @@ public class AnnotationAttributesTest extends junit.framework.TestCase
         expected.setScale(10.5);
         expected.setCornerRadius(11);
 
-        assertEquals(expected, attrib);
+        assertAnnotationAttributesEquals(expected, attrib);
     }
 
+    @Test
     public void testRestore_LegacyStateDocument()
     {
         AnnotationAttributes attrib = new AnnotationAttributes();
@@ -120,9 +129,10 @@ public class AnnotationAttributesTest extends junit.framework.TestCase
         expected.setImageRepeat(AVKey.REPEAT_XY); // render.Annotation.RepeatXY corresponds to AVKey.REPEAT_XY
         expected.setAdjustWidthToText(AVKey.SIZE_FIT_TEXT);
 
-        assertEquals(expected, attrib);
+        assertAnnotationAttributesEquals(expected, attrib);
     }
 
+    @Test
     public void testRestore_PartialSave()
     {
         AnnotationAttributes attrib = new AnnotationAttributes();
@@ -136,9 +146,10 @@ public class AnnotationAttributesTest extends junit.framework.TestCase
         AnnotationAttributes expected = new AnnotationAttributes();
         assignPartialExampleValues(expected);
 
-        assertEquals(expected, attrib);
+        assertAnnotationAttributesEquals(expected, attrib);
     }
 
+    @Test
     public void testRestore_CustomDefaults()
     {
         AnnotationAttributes defaults = new AnnotationAttributes();
@@ -156,12 +167,12 @@ public class AnnotationAttributesTest extends junit.framework.TestCase
         expected.setDefaults(expectedDefaults);
 
         // "expected" and "attrib" will return values from their defaults.
-        assertEquals(expected, attrib);
+        assertAnnotationAttributesEquals(expected, attrib);
     }
 
-    /*************************************************************************************************************/
-    /** Helper Methods **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Helper Methods
+    //////////////////////////////////////////////////////////
 
     @SuppressWarnings({"JavaDoc"})
     private static void assignExampleValues(AnnotationAttributes attrib)
@@ -243,23 +254,23 @@ public class AnnotationAttributesTest extends junit.framework.TestCase
         attrib.setLeader(AVKey.SHAPE_NONE);
     }
 
-    private static void assertEquals(AnnotationAttributes expected, AnnotationAttributes actual)
+    private static void assertAnnotationAttributesEquals(AnnotationAttributes expected, AnnotationAttributes actual)
     {
         assertNotNull("Expected is null", expected);
         assertNotNull("Acutal is null", actual);
         assertEquals("frameShape", expected.getFrameShape(), actual.getFrameShape());
         assertEquals("highlighted", expected.isHighlighted(), actual.isHighlighted());
-        assertEquals("highlightScale", expected.getHighlightScale(), actual.getHighlightScale());
+        assertEquals("highlightScale", expected.getHighlightScale(), actual.getHighlightScale(), 0.0);
         assertEquals("size", expected.getSize(), actual.getSize());
-        assertEquals("scale", expected.getScale(), actual.getScale());
-        assertEquals("opacity", expected.getOpacity(), actual.getOpacity());
+        assertEquals("scale", expected.getScale(), actual.getScale(), 0.0);
+        assertEquals("opacity", expected.getOpacity(), actual.getOpacity(), 0.0);
         assertEquals("leader", expected.getLeader(), actual.getLeader());
         assertEquals("leaderGapWidth", expected.getLeaderGapWidth(), actual.getLeaderGapWidth());
         assertEquals("cornerRadius", expected.getCornerRadius(), actual.getCornerRadius());
         assertEquals("adjustWidthToText", expected.getAdjustWidthToText(), actual.getAdjustWidthToText());
         assertEquals("drawOffset", expected.getDrawOffset(), actual.getDrawOffset());
         assertEquals("insets", expected.getInsets(), actual.getInsets());
-        assertEquals("borderWidth", expected.getBorderWidth(), actual.getBorderWidth());
+        assertEquals("borderWidth", expected.getBorderWidth(), actual.getBorderWidth(), 0.0);
         assertEquals("borderStippleFactor", expected.getBorderStippleFactor(), actual.getBorderStippleFactor());
         assertEquals("borderStipplePattern", expected.getBorderStipplePattern(), actual.getBorderStipplePattern());
         assertEquals("antiAliasHint", expected.getAntiAliasHint(), actual.getAntiAliasHint());
@@ -270,18 +281,13 @@ public class AnnotationAttributesTest extends junit.framework.TestCase
         assertEquals("backgroundColor", expected.getBackgroundColor(), actual.getBackgroundColor());
         assertEquals("borderColor", expected.getBorderColor(), actual.getBorderColor());
         assertEquals("imageSource", expected.getImageSource(), actual.getImageSource());
-        assertEquals("imageScale", expected.getImageScale(), actual.getImageScale());
+        assertEquals("imageScale", expected.getImageScale(), actual.getImageScale(), 0.0);
         assertEquals("imageOffset", expected.getImageOffset(), actual.getImageOffset());
-        assertEquals("imageOpacity", expected.getImageOpacity(), actual.getImageOpacity());
+        assertEquals("imageOpacity", expected.getImageOpacity(), actual.getImageOpacity(), 0.0);
         assertEquals("imageRepeat", expected.getImageRepeat(), actual.getImageRepeat());
-        assertEquals("distanceMinScale", expected.getDistanceMinScale(), actual.getDistanceMinScale());
-        assertEquals("distanceMaxScale", expected.getDistanceMaxScale(), actual.getDistanceMaxScale());
-        assertEquals("distanceMinOpacity", expected.getDistanceMinOpacity(), actual.getDistanceMinOpacity());
+        assertEquals("distanceMinScale", expected.getDistanceMinScale(), actual.getDistanceMinScale(), 0.0);
+        assertEquals("distanceMaxScale", expected.getDistanceMaxScale(), actual.getDistanceMaxScale(), 0.0);
+        assertEquals("distanceMinOpacity", expected.getDistanceMinOpacity(), actual.getDistanceMinOpacity(), 0.0);
         assertEquals("effect", expected.getEffect(), actual.getEffect());
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(AnnotationAttributesTest.class));
     }
 }

@@ -8,16 +8,18 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.util.RestorableSupport;
-import junit.framework.TestCase;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.awt.*;
 
-/**
- * @author pabercrombie
- * @version $Id: SizeTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
-public class SizeTest extends TestCase
+import static org.junit.Assert.*;
+
+@RunWith(JUnit4.class)
+public class SizeTest
 {
+    @Test
     public void testSize()
     {
         // Test with native width and fractional height
@@ -31,6 +33,7 @@ public class SizeTest extends TestCase
         assertTrue("Dimension should be 100 x 50", dim.equals(new Dimension(100, 50)));
     }
 
+    @Test
     public void testZeroSizeContainer()
     {
         Size size = new Size(Size.EXPLICIT_DIMENSION, 0.5, AVKey.FRACTION,
@@ -42,6 +45,7 @@ public class SizeTest extends TestCase
         assertTrue("Dimension should be zero", dim.equals(new Dimension(0, 0)));
     }
 
+    @Test
     public void testZeroSizeRect()
     {
         // Test with fractional dimensions
@@ -66,6 +70,7 @@ public class SizeTest extends TestCase
         assertTrue("Dimension should be 0 x 0", dim.equals(new Dimension(0, 0)));
     }
 
+    @Test
     public void testRestorableStateExplicit()
     {
         // Test with fractional dimensions
@@ -81,6 +86,7 @@ public class SizeTest extends TestCase
         assertEquals(expected, actual);
     }
 
+    @Test
     public void testRestorableStateNative()
     {
         // Test with fractional dimensions
@@ -95,6 +101,7 @@ public class SizeTest extends TestCase
         assertEquals(expected, actual);
     }
 
+    @Test
     public void testRestorableStateAspectRatio()
     {
         // Test with fractional dimensions
@@ -109,6 +116,7 @@ public class SizeTest extends TestCase
         assertEquals(expected, actual);
     }
 
+    @Test
     public void testRestorableStateLegacy()
     {
         // Test with fractional dimensions

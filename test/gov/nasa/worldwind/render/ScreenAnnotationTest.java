@@ -7,17 +7,20 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-/**
- * @author dcollins
- * @version $Id: ScreenAnnotationTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
-public class ScreenAnnotationTest extends junit.framework.TestCase
+import static org.junit.Assert.*;
+
+@RunWith(JUnit4.class)
+public class ScreenAnnotationTest
 {
-    /*************************************************************************************************************/
-    /** Persistence Tests **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Persistence Tests
+    //////////////////////////////////////////////////////////
 
+    @Test
     public void testRestore_NewInstance()
     {
         ScreenAnnotation annotation = new ScreenAnnotation("", new java.awt.Point(0, 0));
@@ -30,9 +33,10 @@ public class ScreenAnnotationTest extends junit.framework.TestCase
         ScreenAnnotation expected = new ScreenAnnotation("", new java.awt.Point(0, 0));
         assignExampleValues(expected);
 
-        assertEquals(expected, annotation);
+        assertScreenAnnotationEquals(expected, annotation);
     }
 
+    @Test
     public void testRestore_SameInstance()
     {
         ScreenAnnotation annotation = new ScreenAnnotation("", new java.awt.Point(0, 0));
@@ -45,9 +49,10 @@ public class ScreenAnnotationTest extends junit.framework.TestCase
         ScreenAnnotation expected = new ScreenAnnotation("", new java.awt.Point(0, 0));
         assignExampleValues(expected);
 
-        assertEquals(expected, annotation);
+        assertScreenAnnotationEquals(expected, annotation);
     }
 
+    @Test
     public void testRestore_EmptyStateDocument()
     {
         ScreenAnnotation annotation = new ScreenAnnotation("", new java.awt.Point(0, 0));
@@ -62,9 +67,10 @@ public class ScreenAnnotationTest extends junit.framework.TestCase
         ScreenAnnotation expected = new ScreenAnnotation("", new java.awt.Point(0, 0));
         assignExampleValues(expected);
 
-        assertEquals(expected, annotation);
+        assertScreenAnnotationEquals(expected, annotation);
     }
 
+    @Test
     public void testRestore_InvalidStateDocument()
     {
         try
@@ -77,9 +83,11 @@ public class ScreenAnnotationTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testRestore_PartialStateDocument()
     {
         ScreenAnnotation annotation = new ScreenAnnotation("", new java.awt.Point(0, 0));
@@ -97,9 +105,10 @@ public class ScreenAnnotationTest extends junit.framework.TestCase
         assignExampleValues(expected);
         expected.setText("Hello, World!");
 
-        assertEquals(expected, annotation);
+        assertScreenAnnotationEquals(expected, annotation);
     }
 
+    @Test
     public void testRestore_AnnotationSharing()
     {
         ScreenAnnotation annotation1 = new ScreenAnnotation("", new java.awt.Point(0, 0));
@@ -116,9 +125,10 @@ public class ScreenAnnotationTest extends junit.framework.TestCase
         assertSame("Attributes are shared", annotation1.getAttributes(), annotation2.getAttributes());
         AnnotationAttributes expected = new AnnotationAttributes();
         assignExampleValues(expected);
-        assertEquals(expected, annotation2.getAttributes());
+        assertAnnotationAttributesEquals(expected, annotation2.getAttributes());
     }
 
+    @Test
     public void test_SaveScreenAnnotation_RestoreGlobeAnnotation()
     {
         ScreenAnnotation screenAnnotation = new ScreenAnnotation("", new java.awt.Point(0, 0));
@@ -130,12 +140,12 @@ public class ScreenAnnotationTest extends junit.framework.TestCase
         globeAnnotation.restoreState(stateInXml);
 
         //noinspection RedundantCast
-        assertEquals((Annotation) screenAnnotation, (Annotation) globeAnnotation);
+        assertAnnotationEquals(screenAnnotation, globeAnnotation);
     }
 
-    /*************************************************************************************************************/
-    /** Helper Methods **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Helper Methods
+    //////////////////////////////////////////////////////////
 
     @SuppressWarnings({"JavaDoc"})
     private static void assignExampleValues(ScreenAnnotation annotation)
@@ -151,23 +161,6 @@ public class ScreenAnnotationTest extends junit.framework.TestCase
         annotation.setText("");
         annotation.setScreenPoint(new java.awt.Point(0, 0));
         assignNullValues(annotation.getAttributes());
-    }
-
-    private static void assertEquals(Annotation expected, Annotation actual)
-    {
-        assertNotNull("Expected is null", expected);
-        assertNotNull("Acutal is null", actual);
-        assertEquals("text", expected.getText(), actual.getText());
-        assertEquals(expected.getAttributes(), actual.getAttributes());
-    }
-
-    private static void assertEquals(ScreenAnnotation expected, ScreenAnnotation actual)
-    {
-        assertNotNull("Expected is null", expected);
-        assertNotNull("Acutal is null", actual);
-        assertEquals("text", expected.getText(), actual.getText());
-        assertEquals("screenPoint", expected.getScreenPoint(), actual.getScreenPoint());
-        assertEquals(expected.getAttributes(), actual.getAttributes());
     }
 
     @SuppressWarnings({"JavaDoc"})
@@ -237,22 +230,39 @@ public class ScreenAnnotationTest extends junit.framework.TestCase
         attrib.setEffect(null);
     }
 
-    private static void assertEquals(AnnotationAttributes expected, AnnotationAttributes actual)
+    private static void assertAnnotationEquals(Annotation expected, Annotation actual)
+    {
+        assertNotNull("Expected is null", expected);
+        assertNotNull("Acutal is null", actual);
+        assertEquals("text", expected.getText(), actual.getText());
+        assertAnnotationAttributesEquals(expected.getAttributes(), actual.getAttributes());
+    }
+
+    private static void assertScreenAnnotationEquals(ScreenAnnotation expected, ScreenAnnotation actual)
+    {
+        assertNotNull("Expected is null", expected);
+        assertNotNull("Acutal is null", actual);
+        assertEquals("text", expected.getText(), actual.getText());
+        assertEquals("screenPoint", expected.getScreenPoint(), actual.getScreenPoint());
+        assertAnnotationAttributesEquals(expected.getAttributes(), actual.getAttributes());
+    }
+
+    private static void assertAnnotationAttributesEquals(AnnotationAttributes expected, AnnotationAttributes actual)
     {
         assertNotNull("Expected is null", expected);
         assertNotNull("Acutal is null", actual);
         assertEquals("frameShape", expected.getFrameShape(), actual.getFrameShape());
         assertEquals("highlighted", expected.isHighlighted(), actual.isHighlighted());
-        assertEquals("highlightScale", expected.getHighlightScale(), actual.getHighlightScale());
+        assertEquals("highlightScale", expected.getHighlightScale(), actual.getHighlightScale(), 0.0);
         assertEquals("size", expected.getSize(), actual.getSize());
-        assertEquals("scale", expected.getScale(), actual.getScale());
-        assertEquals("opacity", expected.getOpacity(), actual.getOpacity());
+        assertEquals("scale", expected.getScale(), actual.getScale(), 0.0);
+        assertEquals("opacity", expected.getOpacity(), actual.getOpacity(), 0.0);
         assertEquals("leader", expected.getLeader(), actual.getLeader());
         assertEquals("cornerRadius", expected.getCornerRadius(), actual.getCornerRadius());
         assertEquals("adjustWidthToText", expected.getAdjustWidthToText(), actual.getAdjustWidthToText());
         assertEquals("drawOffset", expected.getDrawOffset(), actual.getDrawOffset());
         assertEquals("insets", expected.getInsets(), actual.getInsets());
-        assertEquals("borderWidth", expected.getBorderWidth(), actual.getBorderWidth());
+        assertEquals("borderWidth", expected.getBorderWidth(), actual.getBorderWidth(), 0.0);
         assertEquals("borderStippleFactor", expected.getBorderStippleFactor(), actual.getBorderStippleFactor());
         assertEquals("borderStipplePattern", expected.getBorderStipplePattern(), actual.getBorderStipplePattern());
         assertEquals("antiAliasHint", expected.getAntiAliasHint(), actual.getAntiAliasHint());
@@ -263,18 +273,13 @@ public class ScreenAnnotationTest extends junit.framework.TestCase
         assertEquals("backgroundColor", expected.getBackgroundColor(), actual.getBackgroundColor());
         assertEquals("borderColor", expected.getBorderColor(), actual.getBorderColor());
         assertEquals("imageSource", expected.getImageSource(), actual.getImageSource());
-        assertEquals("imageScale", expected.getImageScale(), actual.getImageScale());
+        assertEquals("imageScale", expected.getImageScale(), actual.getImageScale(), 0.0);
         assertEquals("imageOffset", expected.getImageOffset(), actual.getImageOffset());
-        assertEquals("imageOpacity", expected.getImageOpacity(), actual.getImageOpacity());
+        assertEquals("imageOpacity", expected.getImageOpacity(), actual.getImageOpacity(), 0.0);
         assertEquals("imageRepeat", expected.getImageRepeat(), actual.getImageRepeat());
-        assertEquals("distanceMinScale", expected.getDistanceMinScale(), actual.getDistanceMinScale());
-        assertEquals("distanceMaxScale", expected.getDistanceMaxScale(), actual.getDistanceMaxScale());
-        assertEquals("distanceMinOpacity", expected.getDistanceMinOpacity(), actual.getDistanceMinOpacity());
+        assertEquals("distanceMinScale", expected.getDistanceMinScale(), actual.getDistanceMinScale(), 0.0);
+        assertEquals("distanceMaxScale", expected.getDistanceMaxScale(), actual.getDistanceMaxScale(), 0.0);
+        assertEquals("distanceMinOpacity", expected.getDistanceMinOpacity(), actual.getDistanceMinOpacity(), 0.0);
         assertEquals("effect", expected.getEffect(), actual.getEffect());
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(ScreenAnnotationTest.class));
     }
 }

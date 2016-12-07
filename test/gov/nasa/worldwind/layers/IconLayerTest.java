@@ -9,19 +9,22 @@ import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.view.orbit.BasicOrbitView;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.*;
 
-/**
- * @author dcollins
- * @version $Id: IconLayerTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
-public class IconLayerTest extends junit.framework.TestCase
-{
-    /*************************************************************************************************************/
-    /** Basic Operation Tests **/
-    /** ******************************************************************************************************** */
+import static org.junit.Assert.*;
 
+@RunWith(JUnit4.class)
+public class IconLayerTest
+{
+    //////////////////////////////////////////////////////////
+    // Basic Operation Tests
+    //////////////////////////////////////////////////////////
+
+    @Test
     public void testConstructor()
     {
         IconLayer layer;
@@ -31,6 +34,7 @@ public class IconLayerTest extends junit.framework.TestCase
         assertNotNull("", layer);
     }
 
+    @Test
     public void testAddIcon()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -45,6 +49,7 @@ public class IconLayerTest extends junit.framework.TestCase
         assertEquals("", icons, layer.getIcons());
     }
 
+    @Test
     public void testAddIcons()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -56,6 +61,7 @@ public class IconLayerTest extends junit.framework.TestCase
         assertEquals("", icons, layer.getIcons());
     }
 
+    @Test
     public void testRemoveIcon()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -74,6 +80,7 @@ public class IconLayerTest extends junit.framework.TestCase
         assertFalse("", layer.getIcons().iterator().hasNext());
     }
 
+    @Test
     public void testRemoveAllIcons()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -86,6 +93,7 @@ public class IconLayerTest extends junit.framework.TestCase
         assertFalse("", layer.getIcons().iterator().hasNext());
     }
 
+    @Test
     public void testSetIcons()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -97,10 +105,11 @@ public class IconLayerTest extends junit.framework.TestCase
         assertSame("", icons, layer.getIcons());
     }
 
-    /*************************************************************************************************************/
-    /** Edge Case Tests **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Edge Case Tests
+    //////////////////////////////////////////////////////////
 
+    @Test
     public void testSetIconsClearsIcons()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -116,6 +125,7 @@ public class IconLayerTest extends junit.framework.TestCase
         assertFalse("", layer.getIcons().iterator().hasNext());
     }
 
+    @Test
     public void testSetIconsThenAddIcons()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -131,6 +141,7 @@ public class IconLayerTest extends junit.framework.TestCase
         assertEquals("", icons, layer.getIcons());
     }
 
+    @Test
     public void testMaliciousGetIcons()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -167,20 +178,14 @@ public class IconLayerTest extends junit.framework.TestCase
         assertEquals("", icons, layerIcons);
     }
 
+    @Test
     public void testMaliciousSetIcons()
     {
         // Create an Iterable with null elements.
         java.util.List<WWIcon> list = new java.util.ArrayList<WWIcon>();
         list.add(null);
 
-        IconLayer layer = new IconLayer()
-        {
-            // Override to avoid View initialization issues.
-            public boolean isLayerActive(DrawContext dc)
-            {
-                return true;
-            }
-        };
+        IconLayer layer = new IconLayer();
         layer.setIcons(list);
 
         DrawContext dc = new DrawContextImpl();
@@ -198,10 +203,11 @@ public class IconLayerTest extends junit.framework.TestCase
         }
     }
 
-    /*************************************************************************************************************/
-    /** Exceptional Condition Tests **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Exceptional Condition Tests
+    //////////////////////////////////////////////////////////
 
+    @Test
     public void testAddIconFail()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -217,9 +223,11 @@ public class IconLayerTest extends junit.framework.TestCase
         }
         catch (IllegalStateException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testAddIconsFail()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -235,9 +243,11 @@ public class IconLayerTest extends junit.framework.TestCase
         }
         catch (IllegalStateException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testRemoveIconFail()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -253,9 +263,11 @@ public class IconLayerTest extends junit.framework.TestCase
         }
         catch (IllegalStateException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testRemoveAllIconsFail()
     {
         Iterable<WWIcon> icons = createExampleIterable();
@@ -271,12 +283,13 @@ public class IconLayerTest extends junit.framework.TestCase
         }
         catch (IllegalStateException e)
         {
+            e.printStackTrace();
         }
     }
 
-    /*************************************************************************************************************/
-    /** Helper Methods **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Helper Methods
+    //////////////////////////////////////////////////////////
 
     @SuppressWarnings({"JavaDoc"})
     private static void assertEquals(String message, Iterable<WWIcon> expected, Iterable<WWIcon> actual)
@@ -314,10 +327,5 @@ public class IconLayerTest extends junit.framework.TestCase
             new UserFacingIcon("", Position.ZERO),
             new UserFacingIcon("", Position.ZERO),
             new UserFacingIcon("", Position.ZERO)});
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(IconLayerTest.class));
     }
 }

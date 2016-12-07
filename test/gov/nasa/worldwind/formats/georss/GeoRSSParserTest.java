@@ -7,17 +7,21 @@ package gov.nasa.worldwind.formats.georss;
 
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-/**
- * @author dcollins
- * @version $Id: GeoRSSParserTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
-public class GeoRSSParserTest extends junit.framework.TestCase
+import static org.junit.Assert.*;
+
+@SuppressWarnings("deprecation")
+@RunWith(JUnit4.class)
+public class GeoRSSParserTest
 {
-    /*************************************************************************************************************/
-    /** GeoRSS-Simple Parsing Tests **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // GeoRSS-Simple Parsing Tests
+    //////////////////////////////////////////////////////////
 
+    @Test
     public void testSimple_Point()
     {
         String xmlString = createExampleGeoRSS(
@@ -28,6 +32,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void testSimple_PointWithElevation()
     {
         String xmlString = createExampleGeoRSS(
@@ -39,6 +44,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void testSimple_Line()
     {
         String xmlString = createExampleGeoRSS(
@@ -61,6 +67,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2));
     }
 
+    @Test
     public void testSimple_LineWithElevation()
     {
         String xmlString = createExampleGeoRSS(
@@ -84,6 +91,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", Position.fromDegrees(43.84, -109.86, 313.0), positions.get(2));
     }
 
+    @Test
     public void testSimple_Polygon()
     {
         String xmlString = createExampleGeoRSS(
@@ -107,6 +115,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", LatLon.fromDegrees(45.256, -110.45), positions.get(3));
     }
 
+    @Test
     public void testSimple_PolygonWithElevation()
     {
         String xmlString = createExampleGeoRSS(
@@ -131,6 +140,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", Position.fromDegrees(45.256, -110.45, 313.0), positions.get(3));
     }
 
+    @Test
     public void testSimple_Box()
     {
         String xmlString = createExampleGeoRSS(
@@ -154,6 +164,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", LatLon.fromDegrees(43.039, -71.032), positions.get(3));
     }
 
+    @Test
     public void testSimple_BoxWithElevation()
     {
         String xmlString = createExampleGeoRSS(
@@ -174,13 +185,14 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", 2, positions.length);
         assertEquals("", LatLon.fromDegrees(42.943, -71.032), positions[0]);
         assertEquals("", LatLon.fromDegrees(43.039, -69.856), positions[1]);
-        assertEquals("", 313.0, shape.getElevation());
+        assertEquals("", 313.0, shape.getElevation(), 0.0);
     }
 
-    /*************************************************************************************************************/
-    /** GeoRSS-GML Parsing Tests **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // GeoRSS-GML Parsing Tests
+    //////////////////////////////////////////////////////////
 
+    @Test
     public void testGML_Point()
     {
         String xmlString = createExampleGeoRSS(
@@ -195,6 +207,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void testGML_Line()
     {
         String xmlString = createExampleGeoRSS(
@@ -223,6 +236,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2));
     }
 
+    @Test
     public void testGML_Polygon()
     {
         String xmlString = createExampleGeoRSS(
@@ -256,6 +270,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", LatLon.fromDegrees(45.256, -110.45), positions.get(3));
     }
 
+    @Test
     public void testGML_Box()
     {
         String xmlString = createExampleGeoRSS(
@@ -284,10 +299,11 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", LatLon.fromDegrees(43.039, -71.032), positions.get(3));
     }
 
-    /*************************************************************************************************************/
-    /** Exceptional Condition Tests **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Exceptional Condition Tests
+    //////////////////////////////////////////////////////////
 
+    @Test
     public void testSimple_PointNotEnoughPairs()
     {
         String xmlString = createExampleGeoRSS(
@@ -297,6 +313,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void testSimple_LineNotEnoughPairs()
     {
         String xmlString = createExampleGeoRSS(
@@ -306,6 +323,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void testSimple_PolygonNotEnoughPairs()
     {
         String xmlString = createExampleGeoRSS(
@@ -315,6 +333,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void testSimple_BoxNotEnoughPairs()
     {
         String xmlString = createExampleGeoRSS(
@@ -324,6 +343,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void testGML_PointNotEnoughPairs()
     {
         String xmlString = createExampleGeoRSS(
@@ -337,6 +357,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void testGML_LineNotEnoughPairs()
     {
         String xmlString = createExampleGeoRSS(
@@ -352,6 +373,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void testGML_PolygonNotEnoughPairs()
     {
         String xmlString = createExampleGeoRSS(
@@ -371,6 +393,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void testGML_BoxMissingElement()
     {
         String xmlString = createExampleGeoRSS(
@@ -386,6 +409,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void test_NoShapes()
     {
         String xmlString = createExampleGeoRSS("");
@@ -394,6 +418,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertNull("", shapes);
     }
 
+    @Test
     public void test_MultipleShapes()
     {
         String xmlString = createExampleGeoRSS(
@@ -437,6 +462,7 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2));
     }
 
+    @Test
     public void test_CommaDelimitedCoordinates()
     {
         String xmlString = createExampleGeoRSS(
@@ -459,11 +485,10 @@ public class GeoRSSParserTest extends junit.framework.TestCase
         assertEquals("", Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2));
     }
 
-    /*************************************************************************************************************/
-    /** Helper Methods **/
-    /** ******************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Helper Methods
+    //////////////////////////////////////////////////////////
 
-    @SuppressWarnings({"JavaDoc"})
     private static String createExampleGeoRSS(String georssXml)
     {
         String xmlString =
@@ -490,24 +515,5 @@ public class GeoRSSParserTest extends junit.framework.TestCase
                 "  </entry>" +
                 "</feed>";
         return java.text.MessageFormat.format(xmlString, georssXml);
-    }
-
-    private static void assertEquals(String message, Position expected, Position actual)
-    {
-        if (expected == null)
-        {
-            assertNull(message, actual);
-        }
-        else
-        {
-            assertEquals(message, expected.getLatitude(), actual.getLatitude());
-            assertEquals(message, expected.getLongitude(), actual.getLongitude());
-            assertEquals(message, expected.getElevation(), actual.getElevation());
-        }
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(GeoRSSParserTest.class));
     }
 }

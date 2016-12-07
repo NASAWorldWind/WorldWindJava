@@ -1,0 +1,139 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- $Id: BrowserBalloonTest.html 1171 2013-02-11 21:45:02Z dcollins $ -->
+<html>
+<head>
+    <title>BrowserBalloon Manual Tests</title>
+</head>
+<body>
+
+<h1>BrowserBalloon Manual Tests</h1>
+
+<p>Describes the steps to execute a manual validation test of the World Wind BrowserBalloon implementation.</p>
+<p>Run gov.nasa.worldwind.render.BrowserBalloonTest. Use the File menu to open local files or URLs in the BrowserBalloon.
+</p>
+
+<h2>Rendering issues</h2>
+
+<h3>Test file: <a href="testData/PikePlacemarket.html">testData/PikePlacemarket.html</a></h3>
+
+<b>Test steps</b> <br/>
+<ol>
+    <li> Resize the balloon to be smaller than the content. Confirm that horizontal and vertical scroll bars appear.
+    </li>
+    <li> Resize the balloon to be larger than the content. Confirm that the scroll bars disappear. There should not be
+         inactive scroll bars visible if the content does not need scroll bars; the scroll bars should completely
+         disappear.
+    </li>
+</ol>
+
+<h2>Navigation</h2>
+
+<h3>Test site: <a href="http://en.wikipedia.org/wiki/Main_Page">http://en.wikipedia.org/wiki/Main_Page</a></h3>
+
+<b>Test steps</b> <br/>
+<ol>
+    <li> Click on the link for "Contents"</li>
+    <li> Click through a couple more links, such as "Current events", and then "Random article".</li>
+    <li> Use the back and forward balloon controls to navigate through the history. Confirm that the balloon navigates
+         back and forward.
+    </li>
+    <li> Click the close control. Confirm that the balloon closes.</li>
+</ol>
+
+<b>Issues</b>
+
+The back control is not able to navigate back to the first page.
+
+<h2>Input handling</h2>
+
+<h3>Test site:<a href="http://maps.google.com">http://maps.google.com</a></h3>
+
+<b>Test steps</b> <br/>
+<ol>
+    <li> Use the mouse to drag the map in the right pane. Confirm that the map moves with the mouse.</li>
+    <li> Double click on the map. Confirm that the map zooms in.</li>
+    <li> Move the mouse scroll wheel. Confirm that the map zooms in and out with the scroll wheel.</li>
+    <li> Move the mouse over the little map at the top of the zoom level control. The man should "pop out" when the
+         mouse hovers over him.
+    </li>
+    <li> Drag the little man onto the map. Confirm that the map enters street view.</li>
+    <li> Click and drag in street view. Confirm that the view moves with the mouse.</li>
+    <li> Click and drag to select some text. Copy the text using the Ctrl-C or Cmd-C keyboard shortcut. Paste the text
+         into a text editor. Confirm that text can be selected, copied, and pasted.
+    </li>
+</ol>
+
+<h3>Test site: <a href="http://google.com">http://google.com</a></h3>
+
+<p><b>Test steps</b> <br/>
+<ol>
+    <li> Click on the search input box. Confirm that a text caret displays in the box.</li>
+    <li> Enter a search string and click "search". Confirm that the balloon navigates to a search results page.</li>
+</ol>
+
+<h3>Test site: <a href="http://youtube.com">http://youtube.com</a></h3>
+
+<p><b>Test steps</b> <br/>
+<ol>
+    <li> Resize the window until horizontal scroll bars appear. Confirm that horizontal scroll bar appears.</li>
+    <li> Drag the vertical scroll bar knob. The page should scroll as the knob drags.</li>
+    <li> Click the scroll up and down arrows. Click the arrow and hold down. Confirm that the page continues scrolling
+         as long as the mouse is pressed.
+    </li>
+    <li> Click the scroll page up and page down areas. Confirm that the page scrolls by a page.</li>
+    <li> Repeat tests with horizontal scroll bar.</li>
+    <li> Move the mouse scroll wheel. Confirm that the page scrolls as the wheel moves.</li>
+</ol>
+
+<h2>Flash content</h2>
+
+<h3>Test site: <a href="http://www.youtube.com/watch?v=oY59wZdCDo0">http://www.youtube.com/watch?v=oY59wZdCDo0</a></h3>
+
+<p><b>Test steps</b> <br/>
+<ol>
+    <li>Confirm that the flash video plays.</li>
+    <li>Click on the pause control. Confirm that the video stops.</li>
+    <li>Click on the start control. Confirm that the video restarts.</li>
+    <li>Drag the playback to control to jump to a different part of the video. Confirm that the playback position
+        changes.
+    </li>
+</ol>
+
+<b>Issues</b><br/> On Windows, mouse hover events do not work in Flash content. For example, hovering over the YouTube
+volume control should cause the volume slider to appear, but it does not. In some Flash content, a double click is
+required to before the control responds.
+
+<h2>Language issues</h2>
+
+<h3>Test site: http://www.cuhk.edu.hk/chinese/</h3>
+
+Copy and paste this link into "Open URL...".
+
+<p><b>Test steps</b><br/>
+<ol>
+    <li> Confirm that the site renders correctly. Open the site in an <a href="http://www.cuhk.edu.hk/chinese/"
+                                                                         target="_blank">separate browser</a> and
+         confirm that the correct Chinese characters are displayed in the balloon.
+    </li>
+</ol>
+
+<h2>WebResourceResolver</h2>
+
+Run the KMLViewer example to test this feature.
+
+<p><b>Test steps</b><br/>
+<ol>
+    <li> Open the file testData/KML/RelativeBalloonReferences.kmz</li>
+    <li> Confirm that the images of "A", "B", and "C" appear on the right side of the page.</li>
+</ol>
+
+</body>
+</html>

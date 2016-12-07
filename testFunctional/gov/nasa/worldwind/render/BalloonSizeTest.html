@@ -1,0 +1,122 @@
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- $Id: BalloonSizeTest.html 1171 2013-02-11 21:45:02Z dcollins $ -->
+<html>
+<head>
+    <title>BrowserBalloon Size Manual Tests</title>
+</head>
+<body>
+
+<h1>BrowserBalloon Auto-size Manual Tests</h1>
+
+<p>Describes the steps to execute a manual validation test of the BrowserBalloon size-to-fit-content feature.</p>
+<p>Open the test files in gov.nasa.worldwind.examples.kml.KMLViewer. Click on the placemarks to open the description
+   balloons.
+</p>
+
+<h2>Basic sizing</h2>
+
+<h3>Test class: gov.nasa.worldwind.render.BrowserBalloonSizeTest</h3>
+
+<b>Test steps</b> <br/>
+<ol>
+    <li> Run gov.nasa.worldwind.render.BrowserBalloonSizeTest</li>
+    <li> The test class creates several balloons with different size configurations.</li>
+    <li> Confirm that each balloon is sized correctly.</li>
+    <ol>
+        <li> Should be 200 pixels square.</li>
+        <li> Text should wrap to the default balloon width, and the height should fit the content.</li>
+        <li> Should be 200 pixels tall, and the width should fit the content.</li>
+        <li> Should be 100 pixels wide, and the height should fit the content.</li>
+    </ol>
+</ol>
+Note that on Windows the native web browser reserves space for a vertical scroll bar even if the scroll bar is not
+required, so the balloons will include a little extra space on the right side.
+
+<h2>Simple text description</h2>
+
+<h3>Test file: testData/KML/BalloonSize.kml</h3>
+
+<b>Test steps</b> <br/>
+<ol>
+    <li> Click the placemark "Simple balloon".</li>
+    <li> Confirm that the balloon is sized to show all the text without extra space. There should not be any scroll bars
+         in the balloon.</li>
+</ol>
+
+<h2>Description with Doctype</h2>
+
+<h3>Test file: testData/KML/BalloonSize.kml</h3>
+
+<b>Test steps</b> <br/>
+<ol>
+    <li> Click the placemark "Simple balloon with Doctype".</li>
+    <li> Confirm that the balloon is sized to show all the text without extra space. There should not be any scroll bars
+         in the balloon.</li>
+</ol>
+
+<h2>Text with a long URL</h2>
+
+<h3>Test file: testData/KML/BalloonSize.kml</h3>
+
+<b>Test steps</b> <br/>
+<ol>
+    <li> Click on the placemark "Description with long URL"</li>
+    <li> Confirm that the is balloon sized to a accommodate the full width of the URL on the first line.</li>
+    <li> Confirm that the balloon does not contain excess empty space below the text.</li>
+</ol>
+
+<h2>Wide balloon</h2>
+
+<h3>Test file: testData/KML/BalloonSize.kml</h3>
+
+<p><b>Test steps</b> <br/>
+<ol>
+    <li>Click the placemark "Wide balloon".</li>
+    <li>Confirm that the balloon shows a horizontal scroll bar, but does not show a vertical scroll bar.</li>
+</ol>
+
+<h2>Rich content balloon</h2>
+
+<h3>Test file: <a href="http://wwdev.tomgaskins.net/KMLTestFiles/Biodiversity_Hotspots_nw.kmz">http://wwdev.tomgaskins.net/KMLTestFiles/Biodiversity_Hotspots_nw.kmz</a></h3>
+
+<b>Test steps</b> <br/>
+<ol>
+    <li> Click on any of the biodiversity placemarks to open a balloon.</li>
+    <li> Confirm that the balloon is sized to accommodate the full width of the content without a horizontal scroll
+         bar. Depending on the size of the table and the size of the window, a vertical scroll bar may be required.</li>
+</ol>
+
+<h2>Data table</h2>
+
+<h3>Test site: <a href="http://wwdev.tomgaskins.net/KMLTestFiles/wind.kmz">http://wwdev.tomgaskins.net/KMLTestFiles/wind.kmz</a></h3>
+
+<p><b>Test steps</b> <br/>
+<ol>
+    <li> Click on any of the wind indicator placemarks to open the balloon.</li>
+    <li> Confirm that the balloon is sized to display the full width of the data table without a horizontal scroll bar.
+         Depending on the size of the table and the size of the window, a vertical scroll bar may be required.</li>
+</ol>
+
+<h2>Navigation</h2>
+
+<h3>Test file: testData/BalloonLinks.kml</h3>
+
+<p><b>Test steps</b> <br/>
+<ol>
+    <li> Click on the "Start" placemark to open the balloon.</li>
+    <li> Click on the link "Remote HTML doc". The browser will navigate to the NASA WorldWind site.</li>
+    <li> Confirm that the balloon does <em>not</em> change size when the page navigates.</li>
+    <li> Click "Back"</li>
+    <li> Confirm that the balloon does <em>not</em> change size when it navigates back to original content.</li>
+</ol>
+
+</body>
+</html>

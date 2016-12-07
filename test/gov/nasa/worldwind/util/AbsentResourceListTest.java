@@ -6,147 +6,142 @@
 
 package gov.nasa.worldwind.util;
 
-import junit.framework.*;
-import junit.textui.TestRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-/**
- * Tests operation of AbsentResourceList.
- *
- * @author tag
- * @version $Id: AbsentResourceListTest.java 1171 2013-02-11 21:45:02Z dcollins $
- */
+import static org.junit.Assert.assertTrue;
+
+@RunWith(JUnit4.class)
 public class AbsentResourceListTest
 {
-    public static class Tests extends TestCase
+    /** Tests addition of resources to the list. */
+    @Test
+    public void testResourceAddition()
     {
-        protected void addResources(AbsentResourceList list, int numResources)
+        int numResources = 100;
+        AbsentResourceList list = new AbsentResourceList(numResources, 2);
+
+        addResources(list, numResources);
+        assertResourcesAbsent(list, numResources);
+    }
+
+    /** Tests whether resources are considered not absent after initial check interval expires. */
+    @Test
+    public void testCheckInitialInterval()
+    {
+        int numResources = 100;
+        int checkInterval = 250;
+        AbsentResourceList list = new AbsentResourceList(numResources, 2, checkInterval, 60000);
+
+        try
         {
-            this.markResourcesAbsent(list, numResources);
+            addResources(list, numResources);
+            assertResourcesAbsent(list, numResources);
+            Thread.sleep((long) (1.01 * checkInterval));
+            assertResourcesNotAbsent(list, numResources);
         }
-
-        protected void markResourcesAbsent(AbsentResourceList list, int numResources)
+        catch (InterruptedException e)
         {
-            for (int i = 0; i < numResources; i++)
-            {
-                list.markResourceAbsent(i);
-            }
-        }
-
-        protected void testResourcesAbsent(AbsentResourceList list, int numResources)
-        {
-            for (int i = 0; i < numResources; i++)
-            {
-                assertTrue("Resource " + i + " not considered absent ", list.isResourceAbsent(i));
-            }
-        }
-
-        protected void testResourcesNotAbsent(AbsentResourceList list, int numResources)
-        {
-            for (int i = 0; i < numResources; i++)
-            {
-                assertTrue("Resource " + i + " considered absent ", !list.isResourceAbsent(i));
-            }
-        }
-
-        /** Tests addition of resources to the list. */
-        public void testResourceAddition()
-        {
-            int numResources = 100;
-            AbsentResourceList list = new AbsentResourceList(numResources, 2);
-
-            this.addResources(list, numResources);
-            this.testResourcesAbsent(list, numResources);
-        }
-
-        /** Tests whether resources are considered not absent after initial check interval expires. */
-        public void testCheckInitialInterval()
-        {
-            int numResources = 100;
-            int checkInterval = 250;
-            AbsentResourceList list = new AbsentResourceList(numResources, 2, checkInterval, 60000);
-
-            try
-            {
-                this.addResources(list, numResources);
-                this.testResourcesAbsent(list, numResources);
-                Thread.sleep((long) (1.01 * checkInterval));
-                this.testResourcesNotAbsent(list, numResources);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-        /** Tests whether resources are considered absent after maximum number of tries. */
-        public void testMaxTries()
-        {
-            int numResources = 100;
-            int maxTries = 2;
-            int checkInterval = 250;
-            AbsentResourceList list = new AbsentResourceList(numResources, maxTries, checkInterval, 60000);
-
-            // Mark resources absent max-tries times and ensure they're considered absent.
-            for (int i = 0; i < maxTries; i++)
-            {
-                this.markResourcesAbsent(list, numResources);
-            }
-            this.testResourcesAbsent(list, numResources);
-
-            // Increase max-tries and ensure the resources are now not absent. Must wait for check interval to expire.
-            list.setMaxTries(maxTries + 1);
-            try
-            {
-                Thread.sleep((long) (1.01 * checkInterval));
-                this.testResourcesNotAbsent(list, numResources);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-
-            // Mark them absent again and ensure that they're now considered absent.
-            this.markResourcesAbsent(list, numResources);
-            this.testResourcesAbsent(list, numResources);
-        }
-
-        /** Tests whether resources are considered not absent after try-again interval expires. */
-        public void testCheckTryAgainInterval()
-        {
-            int numResources = 100;
-            int maxTries = 2;
-            int tryAgainInterval = 500;
-            AbsentResourceList list = new AbsentResourceList(numResources, maxTries, 250, tryAgainInterval);
-
-            for (int i = 0; i < maxTries; i++)
-            {
-                this.markResourcesAbsent(list, numResources);
-            }
-
-            try
-            {
-                Thread.sleep((long) (1.01 * tryAgainInterval));
-                this.testResourcesNotAbsent(list, numResources);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-        /** Tests whether a specified list size is adhered to. */
-        public void testListSize()
-        {
-            int maxListSize = 100;
-            AbsentResourceList list = new AbsentResourceList(maxListSize, 2, 250, 60000);
-
-            this.markResourcesAbsent(list, maxListSize + 1); // should eject first resource, 0, from list
-            assertTrue("Oldest resource not considered absent ", !list.isResourceAbsent(0));
+            e.printStackTrace();
         }
     }
 
-    public static void main(String[] args)
+    /** Tests whether resources are considered absent after maximum number of tries. */
+    @Test
+    public void testMaxTries()
     {
-        new TestRunner().doRun(new TestSuite(Tests.class));
+        int numResources = 100;
+        int maxTries = 2;
+        int checkInterval = 250;
+        AbsentResourceList list = new AbsentResourceList(numResources, maxTries, checkInterval, 60000);
+
+        // Mark resources absent max-tries times and ensure they're considered absent.
+        for (int i = 0; i < maxTries; i++)
+        {
+            markResourcesAbsent(list, numResources);
+        }
+        assertResourcesAbsent(list, numResources);
+
+        // Increase max-tries and ensure the resources are now not absent. Must wait for check interval to expire.
+        list.setMaxTries(maxTries + 1);
+        try
+        {
+            Thread.sleep((long) (1.01 * checkInterval));
+            assertResourcesNotAbsent(list, numResources);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
+        // Mark them absent again and ensure that they're now considered absent.
+        markResourcesAbsent(list, numResources);
+        assertResourcesAbsent(list, numResources);
+    }
+
+    /** Tests whether resources are considered not absent after try-again interval expires. */
+    @Test
+    public void testCheckTryAgainInterval()
+    {
+        int numResources = 100;
+        int maxTries = 2;
+        int tryAgainInterval = 500;
+        AbsentResourceList list = new AbsentResourceList(numResources, maxTries, 250, tryAgainInterval);
+
+        for (int i = 0; i < maxTries; i++)
+        {
+            markResourcesAbsent(list, numResources);
+        }
+
+        try
+        {
+            Thread.sleep((long) (1.01 * tryAgainInterval));
+            assertResourcesNotAbsent(list, numResources);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /** Tests whether a specified list size is adhered to. */
+    @Test
+    public void testListSize()
+    {
+        int maxListSize = 100;
+        AbsentResourceList list = new AbsentResourceList(maxListSize, 2, 250, 60000);
+
+        markResourcesAbsent(list, maxListSize + 1); // should eject first resource, 0, from list
+        assertTrue("Oldest resource not considered absent ", !list.isResourceAbsent(0));
+    }
+
+    private static void addResources(AbsentResourceList list, int numResources)
+    {
+        markResourcesAbsent(list, numResources);
+    }
+
+    private static void markResourcesAbsent(AbsentResourceList list, int numResources)
+    {
+        for (int i = 0; i < numResources; i++)
+        {
+            list.markResourceAbsent(i);
+        }
+    }
+
+    private static void assertResourcesAbsent(AbsentResourceList list, int numResources)
+    {
+        for (int i = 0; i < numResources; i++)
+        {
+            assertTrue("Resource " + i + " not considered absent ", list.isResourceAbsent(i));
+        }
+    }
+
+    private static void assertResourcesNotAbsent(AbsentResourceList list, int numResources)
+    {
+        for (int i = 0; i < numResources; i++)
+        {
+            assertTrue("Resource " + i + " considered absent ", !list.isResourceAbsent(i));
+        }
     }
 }

@@ -8,19 +8,22 @@ package gov.nasa.worldwind.layers;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.view.orbit.BasicOrbitView;
+import org.junit.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.*;
 
-/**
- * @author dcollins
- * @version $Id: RenderableLayerTest.java 3435 2015-10-13 10:32:43Z dcollins $
- */
-public class RenderableLayerTest extends junit.framework.TestCase
-{
-    /*************************************************************************************************************/
-    /** Basic Operation Tests **/
-    /** ****************************************************************************************************** */
+import static org.junit.Assert.*;
 
+@RunWith(JUnit4.class)
+public class RenderableLayerTest
+{
+    //////////////////////////////////////////////////////////
+    // Basic Operation Tests
+    //////////////////////////////////////////////////////////
+
+    @Test
     public void testConstructor()
     {
         RenderableLayer layer;
@@ -30,6 +33,7 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertNotNull("", layer);
     }
 
+    @Test
     public void testAddRenderable()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -44,6 +48,7 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertEquals("", renderables, layer.getRenderables());
     }
 
+    @Test
     public void testAddRenderables()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -55,6 +60,7 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertEquals("", renderables, layer.getRenderables());
     }
 
+    @Test
     public void testInsertRenderable()
     {
         Iterable<Renderable> source = createExampleIterable();
@@ -71,6 +77,7 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertEquals("", renderables, layer.getRenderables());
     }
 
+    @Test
     public void testInsertRenderableAtBeginning()
     {
         Collection<Renderable> source = createExampleIterable();
@@ -80,13 +87,14 @@ public class RenderableLayerTest extends junit.framework.TestCase
         renderables.addAll(source);
         layer.addRenderables(source);
 
-        Polyline inserted = new Polyline();
+        Path inserted = new Path();
         renderables.add(0, inserted);
         layer.addRenderable(0, inserted);
 
         assertEquals("", renderables, layer.getRenderables());
     }
 
+    @Test
     public void testInsertRenderableAfterFirst()
     {
         Collection<Renderable> source = createExampleIterable();
@@ -96,13 +104,14 @@ public class RenderableLayerTest extends junit.framework.TestCase
         renderables.addAll(source);
         layer.addRenderables(source);
 
-        Polyline inserted = new Polyline();
+        Path inserted = new Path();
         renderables.add(1, inserted);
         layer.addRenderable(1, inserted);
 
         assertEquals("", renderables, layer.getRenderables());
     }
 
+    @Test
     public void testInsertRenderableAtEnd()
     {
         Collection<Renderable> source = createExampleIterable();
@@ -112,13 +121,14 @@ public class RenderableLayerTest extends junit.framework.TestCase
         renderables.addAll(source);
         layer.addRenderables(source);
 
-        Polyline inserted = new Polyline();
+        Path inserted = new Path();
         renderables.add(renderables.size(), inserted);
         layer.addRenderable(layer.getNumRenderables(), inserted);
 
         assertEquals("", renderables, layer.getRenderables());
     }
 
+    @Test
     public void testRemoveRenderable()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -137,6 +147,7 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertFalse("", layer.getRenderables().iterator().hasNext());
     }
 
+    @Test
     public void testRemoveAllRenderables()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -149,6 +160,7 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertFalse("", layer.getRenderables().iterator().hasNext());
     }
 
+    @Test
     public void testSetRenderables()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -160,10 +172,11 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertSame("", renderables, layer.getRenderables());
     }
 
-    /*************************************************************************************************************/
-    /** Edge Case Tests **/
-    /** ****************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Edge Case Tests
+    //////////////////////////////////////////////////////////
 
+    @Test
     public void testSetRenderablesClearsRenderables()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -179,6 +192,7 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertFalse("", layer.getRenderables().iterator().hasNext());
     }
 
+    @Test
     public void testSetRenderablesThenAddRenderables()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -194,6 +208,7 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertEquals("", renderables, layer.getRenderables());
     }
 
+    @Test
     public void testMaliciousGetRenderables()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -230,20 +245,14 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertEquals("", renderables, layer.getRenderables());
     }
 
+    @Test
     public void testMaliciousSetRenderables()
     {
         // Create an Iterable with null elements.
         java.util.List<Renderable> list = new java.util.ArrayList<Renderable>();
         list.add(null);
 
-        RenderableLayer layer = new RenderableLayer()
-        {
-            // Override to avoid View initialization issues.
-            public boolean isLayerActive(DrawContext dc)
-            {
-                return true;
-            }
-        };
+        RenderableLayer layer = new RenderableLayer();
         layer.setRenderables(list);
 
         DrawContext dc = new DrawContextImpl();
@@ -261,6 +270,7 @@ public class RenderableLayerTest extends junit.framework.TestCase
         }
     }
 
+    @Test
     public void testDisposeDoesNotClearRenderables()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -274,10 +284,11 @@ public class RenderableLayerTest extends junit.framework.TestCase
         assertEquals("", emptyRenderables, layer.getRenderables());
     }
 
-    /*************************************************************************************************************/
-    /** Exceptional Condition Tests **/
-    /** ****************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Exceptional Condition Tests
+    //////////////////////////////////////////////////////////
 
+    @Test
     public void testAddRenderableFail()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -288,14 +299,16 @@ public class RenderableLayerTest extends junit.framework.TestCase
         try
         {
             // Expecting an IllegalStateException here.
-            layer.addRenderable(new Polyline());
-            fail("");
+            layer.addRenderable(new Path());
+            fail("Should raise an IllegalStateException");
         }
         catch (IllegalStateException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testAddRenderablesFail()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -307,13 +320,15 @@ public class RenderableLayerTest extends junit.framework.TestCase
         {
             // Expecting an IllegalStateException here.
             layer.addRenderables(renderables);
-            fail("");
+            fail("Should raise an IllegalStateException");
         }
         catch (IllegalStateException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testInsertRenderableFail()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -324,14 +339,16 @@ public class RenderableLayerTest extends junit.framework.TestCase
         try
         {
             // Expecting an IllegalStateException here.
-            layer.addRenderable(0, new Polyline());
-            fail("");
+            layer.addRenderable(0, new Path());
+            fail("Should raise an IllegalStateException");
         }
         catch (IllegalStateException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testRemoveRenderableFail()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -342,14 +359,16 @@ public class RenderableLayerTest extends junit.framework.TestCase
         try
         {
             // Expecting an IllegalStateException here.
-            layer.removeRenderable(new Polyline());
-            fail("");
+            layer.removeRenderable(new Path());
+            fail("Should raise an IllegalStateException");
         }
         catch (IllegalStateException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testRemoveAllRenderablesFail()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -361,13 +380,15 @@ public class RenderableLayerTest extends junit.framework.TestCase
         {
             // Expecting an IllegalStateException here.
             layer.removeAllRenderables();
-            fail("");
+            fail("Should raise an IllegalStateException");
         }
         catch (IllegalStateException e)
         {
+            e.printStackTrace();
         }
     }
 
+    @Test
     public void testDisposeFail()
     {
         Iterable<Renderable> renderables = createExampleIterable();
@@ -379,18 +400,18 @@ public class RenderableLayerTest extends junit.framework.TestCase
         {
             // Expecting an IllegalStateException here.
             layer.dispose();
-            fail("");
+            fail("Should raise an IllegalStateException");
         }
         catch (IllegalStateException e)
         {
+            e.printStackTrace();
         }
     }
 
-    /*************************************************************************************************************/
-    /** Helper Methods **/
-    /** ****************************************************************************************************** */
+    //////////////////////////////////////////////////////////
+    // Helper Methods
+    //////////////////////////////////////////////////////////
 
-    @SuppressWarnings({"JavaDoc"})
     private static void assertEquals(String message, Iterable<Renderable> expected, Iterable<Renderable> actual)
     {
         if (expected == null)
@@ -403,7 +424,7 @@ public class RenderableLayerTest extends junit.framework.TestCase
             // Compare the elements in each iterator, as long as they both have elements.
             while (expectedIter.hasNext() && actualIter.hasNext())
             {
-                assertEquals(message, expectedIter.next(), actualIter.next());
+                Assert.assertEquals(message, expectedIter.next(), actualIter.next());
             }
             // If either iterator has more elements, then their lengths are different.
             assertFalse(message, expectedIter.hasNext() || actualIter.hasNext());
@@ -414,13 +435,8 @@ public class RenderableLayerTest extends junit.framework.TestCase
     {
         //noinspection RedundantArrayCreation
         return java.util.Arrays.asList(new Renderable[] {
-            new Polyline(),
-            new Polyline(),
-            new Polyline()});
-    }
-
-    public static void main(String[] args)
-    {
-        new junit.textui.TestRunner().doRun(new junit.framework.TestSuite(RenderableLayerTest.class));
+            new Path(),
+            new Path(),
+            new Path()});
     }
 }

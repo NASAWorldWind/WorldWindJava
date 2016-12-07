@@ -121,8 +121,8 @@ fi
 # =================
 
 # Define the file names that are to be deployed
-JAR_FILES=( worldwind.jar worldwindx.jar )
-ZIP_FILES=( worldwind-javadoc.zip )
+JAR_FILES=( build/worldwind-debug.jar build/worldwindx-debug.jar build/worldwind-release.jar build/worldwindx-release.jar )
+ZIP_FILES=( build/doc/worldwind-javadoc.zip )
 ALL_FILES=( "${JAR_FILES[@]}" "${ZIP_FILES[@]}" )
 
 # Emit a log message for the updated release

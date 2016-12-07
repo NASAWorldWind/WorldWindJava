@@ -75,7 +75,7 @@
     <!-- Packages the World Wind MIL-STD-2525 Symbol Icons ZIP archive into the file 'milstd2525-symbols.zip'. -->
     <target name="milstd2525.bundle" depends="milstd2525.assemble"
             description="Packages the World Wind MIL-STD-2525 Symbol Icons ZIP archive into the file 'milstd2525-symbols.zip'.">
-        <zip destfile="${milstd2525.img.zipfile}">
+        <zip destfile="${worldwind.build.dir}/milstd2525-symbols.zip">
             <fileset dir="${milstd2525.img.dir}"/>
         </zip>
     </target>

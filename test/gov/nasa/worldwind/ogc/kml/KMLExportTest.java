@@ -7,35 +7,34 @@ package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
-import gov.nasa.worldwindx.examples.kml.KMLDocumentBuilder;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.Logging;
-import org.junit.*;
+import gov.nasa.worldwindx.examples.kml.KMLDocumentBuilder;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import javax.xml.XMLConstants;
-import javax.xml.stream.*;
-import javax.xml.transform.*;
-import javax.xml.transform.stream.*;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.*;
 import java.io.*;
 import java.util.*;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Test export of KML by writing shapes to KML and validating the resulting document against the KML schema.
- *
- * @author pabercrombie
- * @version $Id: KMLExportTest.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 @RunWith(Parameterized.class)
 public class KMLExportTest
 {
-    protected static ShapeAttributes normalShapeAttributes;
-    protected static ShapeAttributes highlightShapeAttributes;
+    private static ShapeAttributes normalShapeAttributes;
+    private static ShapeAttributes highlightShapeAttributes;
 
-    protected List<Exportable> objectsToExport;
+    private List<Exportable> objectsToExport;
 
     public KMLExportTest(List<Exportable> objectsToExport)
     {
@@ -47,7 +46,6 @@ public class KMLExportTest
      *
      * @return Collection of object[]. Each object[] holds parameters for one invocation of the test.
      */
-    @SuppressWarnings("unchecked")
     @Parameterized.Parameters
     public static Collection<Object[]> data()
     {
@@ -59,19 +57,18 @@ public class KMLExportTest
         highlightShapeAttributes.setInteriorMaterial(Material.RED);
         highlightShapeAttributes.setOutlineMaterial(Material.BLACK);
 
-        // Export a single instance of each type of shape to its own document to test the shape exporters in isolation.
         return Arrays.asList(new Object[][] {
-            {Arrays.asList(makePointPlacemark())},
-            {Arrays.asList(makePath())},
-            {Arrays.asList(makePolygon())},
-            {Arrays.asList(makeExtrudedPolygon())},
-            {Arrays.asList(makeSurfacePolygon())},
-            {Arrays.asList(makeScreenImage())},
-            {Arrays.asList(makeSurfaceSector())},
-            {Arrays.asList(makeSurfacePolyline())},
-            {Arrays.asList(makeSurfaceImage())},
-            {Arrays.asList(makeSurfaceImageWithLatLonQuad())},
-
+            // Export a single instance of each type of shape to its own document to test the shape exporters in isolation.
+            {Collections.singletonList(makePointPlacemark())},
+            {Collections.singletonList(makePath())},
+            {Collections.singletonList(makePolygon())},
+            {Collections.singletonList(makeExtrudedPolygon())},
+            {Collections.singletonList(makeSurfacePolygon())},
+            {Collections.singletonList(makeScreenImage())},
+            {Collections.singletonList(makeSurfaceSector())},
+            {Collections.singletonList(makeSurfacePolyline())},
+            {Collections.singletonList(makeSurfaceImage())},
+            {Collections.singletonList(makeSurfaceImageWithLatLonQuad())},
             // Finally, test exporting all of the shapes to the same document.
             {Arrays.asList(makePointPlacemark(),
                 makePath(),
@@ -101,7 +98,7 @@ public class KMLExportTest
         String xmlString = stringWriter.toString();
         boolean docValid = validateDocument(xmlString);
 
-        Assert.assertTrue("Exported document failed to validate", docValid);
+        assertTrue("Exported document failed to validate", docValid);
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -111,7 +108,7 @@ public class KMLExportTest
         pyramid.export(KMLConstants.KML_MIME_TYPE, new StringWriter());
     }
 
-    public boolean validateDocument(String doc)
+    private boolean validateDocument(String doc)
     {
         try
         {
@@ -141,7 +138,7 @@ public class KMLExportTest
     // Methods to build test shapes
     //////////////////////////////////////////////////////////
 
-    protected static PointPlacemark makePointPlacemark()
+    private static PointPlacemark makePointPlacemark()
     {
         PointPlacemark placemark = new PointPlacemark(Position.fromDegrees(37.824713, -122.370028, 0.0));
 
@@ -155,7 +152,7 @@ public class KMLExportTest
         return placemark;
     }
 
-    protected static Path makePath()
+    private static Path makePath()
     {
         Path path = new Path();
 
@@ -176,7 +173,7 @@ public class KMLExportTest
         return path;
     }
 
-    protected static Polygon makePolygon()
+    private static Polygon makePolygon()
     {
         Polygon poly = new Polygon();
 
@@ -228,7 +225,7 @@ public class KMLExportTest
         return poly;
     }
 
-    protected static ExtrudedPolygon makeExtrudedPolygon()
+    private static ExtrudedPolygon makeExtrudedPolygon()
     {
         List<LatLon> outerBoundary = Arrays.asList(
             LatLon.fromDegrees(37.82149354446911, -122.3733560304957),
@@ -283,7 +280,7 @@ public class KMLExportTest
         return poly;
     }
 
-    protected static SurfacePolygon makeSurfacePolygon()
+    private static SurfacePolygon makeSurfacePolygon()
     {
         List<LatLon> positions = Arrays.asList(
             LatLon.fromDegrees(37.8117, -122.3688),
@@ -303,7 +300,7 @@ public class KMLExportTest
         return poly;
     }
 
-    protected static ScreenImage makeScreenImage()
+    private static ScreenImage makeScreenImage()
     {
         ScreenImage sc = new ScreenImage();
 
@@ -320,7 +317,7 @@ public class KMLExportTest
         return sc;
     }
 
-    protected static SurfaceImage makeSurfaceImage()
+    private static SurfaceImage makeSurfaceImage()
     {
         String url = "http://code.google.com/apis/kml/documentation/Images/rectangle.gif";
         Sector sector = Sector.fromDegrees(60.0, 80.0, -60.0, 60.0);
@@ -328,7 +325,7 @@ public class KMLExportTest
         return new SurfaceImage(url, sector);
     }
 
-    protected static SurfaceImage makeSurfaceImageWithLatLonQuad()
+    private static SurfaceImage makeSurfaceImageWithLatLonQuad()
     {
         String url = "http://code.google.com/apis/kml/documentation/Images/rectangle.gif";
 
@@ -341,7 +338,7 @@ public class KMLExportTest
         return new SurfaceImage(url, corners);
     }
 
-    protected static SurfaceSector makeSurfaceSector()
+    private static SurfaceSector makeSurfaceSector()
     {
         SurfaceSector sector = new SurfaceSector(Sector.fromDegrees(60, 80, -90, -70));
         sector.setAttributes(normalShapeAttributes);
@@ -352,7 +349,7 @@ public class KMLExportTest
         return sector;
     }
 
-    protected static SurfacePolyline makeSurfacePolyline()
+    private static SurfacePolyline makeSurfacePolyline()
     {
         SurfacePolyline polyline = new SurfacePolyline();
 
