@@ -17,10 +17,11 @@ public class AbsentResourceListTest
 {
     /** Tests addition of resources to the list. */
     @Test
-    public void testResourceAddition()
+    public void testResourceAddition() throws InterruptedException
     {
         int numResources = 100;
-        AbsentResourceList list = new AbsentResourceList(numResources, 2);
+        int checkInterval = 250;
+        AbsentResourceList list = new AbsentResourceList(numResources, 2, checkInterval, 60000);
 
         addResources(list, numResources);
         assertResourcesAbsent(list, numResources);
