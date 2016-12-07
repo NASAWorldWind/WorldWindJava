@@ -26,13 +26,20 @@
 
     <target name="clean" description="Deletes the build directory.">
         <delete dir="${worldwind.build.dir}"/>
+        <delete file="${basedir}/worldwind.jar"/>
+        <delete file="${basedir}/worldwindx.jar"/>
     </target>
 
     <target name="assemble" depends="assembleDebug, assembleRelease, assembleJavadoc"
-            description="Assembles JAR libraries for all build types and assembles the project documentation."/>
+            description="Assembles JAR libraries for all build types and assembles the project documentation.">
+        <copy file="${worldwind.jar.dir}/worldwind-release.jar" tofile="${basedir}/worldwind.jar"/>
+        <copy file="${worldwind.jar.dir}/worldwindx-release.jar" tofile="${basedir}/worldwindx.jar"/>
+    </target>
 
     <target name="test" depends="unitTest"
-            description="Runs all project tests."/>
+            description="Runs all project tests. Exits with status code 1 if any test fails.">
+        <fail if="unitTest.failure" message="Unit tests FAILED" status="1"/>
+    </target>
 
     <!-- Targets for compiling Java sources and bundling JAR libraries for the the debug build type. -->
 
@@ -41,7 +48,7 @@
 
     <target name="compileDebugSources">
         <mkdir dir="${worldwind.classes.dir}/debug"/>
-        <compileJava srcdir="${worldwind.src.dir}" destdir="${worldwind.classes.dir}/debug" debug="true">
+        <compileJava srcdir="${worldwind.src.dir}" destdir="${worldwind.classes.dir}/debug" type="debug">
             <pathelements>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
@@ -51,8 +58,8 @@
     </target>
 
     <target name="bundleDebug">
-        <worldwind-jar srcdir="${worldwind.classes.dir}/debug" destfile="${worldwind.build.dir}/worldwind-debug.jar"/>
-        <worldwindx-jar srcdir="${worldwind.classes.dir}/debug" destfile="${worldwind.build.dir}/worldwindx-debug.jar"/>
+        <mkdir dir="${worldwind.jar.dir}"/>
+        <bundleJarFiles srcdir="${worldwind.classes.dir}/debug" destdir="${worldwind.jar.dir}" type="debug"/>
     </target>
 
     <!-- Targets for compiling Java sources and bundling JAR libraries for the the release build type. -->
@@ -62,7 +69,7 @@
 
     <target name="compileReleaseSources">
         <mkdir dir="${worldwind.classes.dir}/release"/>
-        <compileJava srcdir="${worldwind.src.dir}" destdir="${worldwind.classes.dir}/release" debug="false">
+        <compileJava srcdir="${worldwind.src.dir}" destdir="${worldwind.classes.dir}/release" type="release">
             <pathelements>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
@@ -72,8 +79,8 @@
     </target>
 
     <target name="bundleRelease">
-        <worldwind-jar srcdir="${worldwind.classes.dir}/release" destfile="${worldwind.build.dir}/worldwind.jar"/>
-        <worldwindx-jar srcdir="${worldwind.classes.dir}/release" destfile="${worldwind.build.dir}/worldwindx.jar"/>
+        <mkdir dir="${worldwind.jar.dir}"/>
+        <bundleJarFiles srcdir="${worldwind.classes.dir}/release" destdir="${worldwind.jar.dir}" type="release"/>
     </target>
 
     <!-- Targets for compiling and bundling the project documentation.  -->
@@ -82,11 +89,31 @@
             description="Assembles the project documentation."/>
 
     <target name="compileJavadocSources">
-        <delete dir="${worldwind.doc.dir}/javadoc"/>
-        <compileJavadoc srcdir="${worldwind.src.dir}" destdir="${worldwind.doc.dir}/javadoc"/>
+        <mkdir dir="${worldwind.doc.dir}/javadoc"/>
+        <javadoc destdir="${worldwind.doc.dir}/javadoc"
+                 overview="${worldwind.src.dir}/overview.html"
+                 encoding="UTF-8"
+                 windowtitle="NASA World Wind" doctitle="NASA World Wind" header="NASA World Wind"
+                 splitindex="true" protected="true" nodeprecated="true" version="false" author="false" use="true"
+                 maxmemory="1024m">
+            <packageset dir="${worldwind.src.dir}" defaultexcludes="yes">
+                <include name="gov/nasa/worldwind/**"/>
+                <include name="gov/nasa/worldwindx/**"/>
+                <exclude name="gov/nasa/worldwind/formats/**"/>
+            </packageset>
+            <classpath>
+                <pathelement location="jogl-all.jar"/>
+                <pathelement location="gluegen-rt.jar"/>
+                <pathelement location="gdal.jar"/>
+                <pathelement location="plugin.jar"/>
+            </classpath>
+            <link href="http://download.oracle.com/javase/8/docs/api/"/>
+            <link href="https://jogamp.org/deployment/v2.1.5/javadoc/jogl/javadoc/"/>
+        </javadoc>
     </target>
 
     <target name="bundleJavadoc">
+        <mkdir dir="${worldwind.doc.dir}"/>
         <zip destfile="${worldwind.doc.dir}/worldwind-javadoc.zip">
             <fileset dir="${worldwind.doc.dir}/javadoc">
                 <include name="**"/>
@@ -102,10 +129,10 @@
 
     <target name="compileUnitTestSources">
         <mkdir dir="${worldwind.classes.dir}/test"/>
-        <compileJava srcdir="${worldwind.test.dir}" destdir="${worldwind.classes.dir}/test" debug="true">
+        <compileJava srcdir="${worldwind.test.dir}" destdir="${worldwind.classes.dir}/test" type="debug">
             <pathelements>
-                <pathelement location="${worldwind.build.dir}/worldwind-debug.jar"/>
-                <pathelement location="${worldwind.build.dir}/worldwindx-debug.jar"/>
+                <pathelement location="${worldwind.jar.dir}/worldwind-debug.jar"/>
+                <pathelement location="${worldwind.jar.dir}/worldwindx-debug.jar"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
                 <pathelement location="${basedir}/gdal.jar"/>
@@ -117,26 +144,27 @@
     <target name="runUnitTest">
         <delete dir="${worldwind.test.results.dir}"/>
         <mkdir dir="${worldwind.test.results.dir}"/>
-        <junit printsummary="true"
-               fork="true"
+        <junit failureproperty="unitTest.failure"
+               fork="on"
                forkmode="once"
-               maxmemory="512m">
+               maxmemory="1024m">
             <classpath>
                 <pathelement location="${worldwind.classes.dir}/test"/>
-                <pathelement location="${worldwind.build.dir}/worldwind-debug.jar"/>
-                <pathelement location="${worldwind.build.dir}/worldwindx-debug.jar"/>
+                <pathelement location="${worldwind.jar.dir}/worldwind-debug.jar"/>
+                <pathelement location="${worldwind.jar.dir}/worldwindx-debug.jar"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
                 <pathelement location="${basedir}/gdal.jar"/>
                 <pathelement location="${basedir}/ant/lib/junit-4.5.jar"/>
             </classpath>
-            <formatter type="xml"/>
             <batchtest todir="${worldwind.test.results.dir}"
                        skipnontests="true">
                 <fileset dir="${worldwind.classes.dir}/test">
-                    <include name="**/*.class"/>
+                    <include name="**/*"/>
                 </fileset>
             </batchtest>
+            <formatter type="brief" usefile="no"/>
+            <formatter type="xml" usefile="yes"/>
         </junit>
         <junitreport todir="${worldwind.test.results.dir}">
             <fileset dir="${worldwind.test.results.dir}">
@@ -159,14 +187,17 @@
     <macrodef name="compileJava">
         <attribute name="srcdir"/>
         <attribute name="destdir"/>
-        <attribute name="debug"/>
+        <attribute name="type"/>
         <element name="pathelements"/>
         <sequential>
+            <condition property="compileJava.debug" value="true" else="false">
+                <equals arg1="@{type}" arg2="debug"/>
+            </condition>
             <javac srcdir="@{srcdir}"
                    destdir="@{destdir}"
                    source="${worldwind.jdk.version}"
                    target="${worldwind.jdk.version}"
-                   debug="$@{debug}"
+                   debug="${compileJava.debug}"
                    encoding="UTF-8"
                    fork="true"
                    includeantruntime="false"
@@ -176,33 +207,6 @@
                 </classpath>
                 <compilerarg value="-Xlint:unchecked"/>
             </javac>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="compileJavadoc">
-        <attribute name="srcdir"/>
-        <attribute name="destdir"/>
-        <sequential>
-            <javadoc destdir="@{destdir}"
-                     overview="@{srcdir}/overview.html"
-                     encoding="UTF-8"
-                     windowtitle="NASA World Wind" doctitle="NASA World Wind" header="NASA World Wind"
-                     splitindex="true" protected="true" nodeprecated="true" version="false" author="false" use="true"
-                     maxmemory="512m">
-                <packageset dir="@{srcdir}" defaultexcludes="yes">
-                    <include name="gov/nasa/worldwind/**"/>
-                    <include name="gov/nasa/worldwindx/**"/>
-                    <exclude name="gov/nasa/worldwind/formats/**"/>
-                </packageset>
-                <classpath>
-                    <pathelement location="jogl-all.jar"/>
-                    <pathelement location="gluegen-rt.jar"/>
-                    <pathelement location="gdal.jar"/>
-                    <pathelement location="plugin.jar"/>
-                </classpath>
-                <link href="http://download.oracle.com/javase/8/docs/api/"/>
-                <link href="https://jogamp.org/deployment/v2.1.5/javadoc/jogl/javadoc/"/>
-            </javadoc>
         </sequential>
     </macrodef>
 
@@ -224,11 +228,15 @@
          See http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/manifest.html#permissions
          -->
 
-    <macrodef name="worldwind-jar">
+    <macrodef name="bundleJarFiles">
         <attribute name="srcdir"/>
-        <attribute name="destfile"/>
+        <attribute name="destdir"/>
+        <attribute name="type"/>
         <sequential>
-            <jar jarfile="@{destfile}">
+            <condition property="bundleJarFiles.debug" value="true" else="false">
+                <equals arg1="@{type}" arg2="debug"/>
+            </condition>
+            <jar jarfile="@{destdir}/worldwind-@{type}.jar">
                 <manifest>
                     <attribute name="Permissions" value="all-permissions"/>
                     <attribute name="Class-Path" value="jogl-all.jar gluegen-rt.jar gdal.jar"/>
@@ -236,24 +244,21 @@
                 <fileset dir="@{srcdir}">
                     <include name="gov/nasa/worldwind/**/*.class"/>
                     <include name="com/zebraimaging/**/*.class"/>
-                    <include name="org/codehaus/jackson/**/*.class" unless="worldwind.exclude.jackson"/>
+                    <include name="org/codehaus/jackson/**/*.class" unless="${worldwind.exclude.jackson}"/>
                     <type type="file"/>
                 </fileset>
                 <fileset dir="${worldwind.src.dir}">
+                    <include name="gov/nasa/worldwind/**/*.java" if="${bundleJarFiles.debug}"/>
                     <include name="gov/nasa/worldwind/util/**/*.properties"/>
+                    <include name="com/zebraimaging/**/*.java" if="${bundleJarFiles.debug}"/>
+                    <include name="org/codehaus/jackson/**/*.java" if="${bundleJarFiles.debug}"
+                             unless="${worldwind.exclude.jackson}"/>
                     <include name="config/**"/>
                     <include name="images/**"/>
                     <type type="file"/>
                 </fileset>
             </jar>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="worldwindx-jar">
-        <attribute name="srcdir"/>
-        <attribute name="destfile"/>
-        <sequential>
-            <jar jarfile="@{destfile}">
+            <jar jarfile="@{destdir}/worldwindx-@{type}.jar">
                 <manifest>
                     <attribute name="Class-Path" value="worldwind.jar"/>
                     <attribute name="Main-Class" value="gov.nasa.worldwindx.examples.ApplicationTemplate"/>
@@ -264,6 +269,7 @@
                     <type type="file"/>
                 </fileset>
                 <fileset dir="${worldwind.src.dir}">
+                    <include name="gov/nasa/worldwindx/**/*.java" if="${bundleJarFiles.debug}"/>
                     <include name="gov/nasa/worldwindx/applications/sar/*.html"/>
                     <include name="gov/nasa/worldwindx/applications/sar/config/**"/>
                     <include name="gov/nasa/worldwindx/applications/sar/data/**"/>
