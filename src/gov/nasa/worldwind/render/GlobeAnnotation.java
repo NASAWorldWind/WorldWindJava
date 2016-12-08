@@ -245,7 +245,24 @@ public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Mo
             return;
 
         if (this.draggableSupport == null)
-            this.draggableSupport = new DraggableSupport(this, this.getAltitudeMode());
+        {
+            // The following addresses the special case described in {@link GlobeAnnotation#getAltitudeMode}
+            if (this.getAltitudeMode() == null)
+            {
+                if (this.position.getElevation() > dragContext.getGlobe().getMaxElevation())
+                {
+                    this.draggableSupport = new DraggableSupport(this, WorldWind.ABSOLUTE);
+                }
+                else
+                {
+                    this.draggableSupport = new DraggableSupport(this, WorldWind.RELATIVE_TO_GROUND);
+                }
+            }
+            else
+            {
+                this.draggableSupport = new DraggableSupport(this, this.getAltitudeMode());
+            }
+        }
 
         this.doDrag(dragContext);
     }
