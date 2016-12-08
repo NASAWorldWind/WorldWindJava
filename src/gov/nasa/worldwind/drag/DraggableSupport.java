@@ -380,29 +380,25 @@ public class DraggableSupport
         DragContext dragContext)
     {
         Vec4 dragObjectPoint;
-        if (this.altitudeMode == WorldWind.ABSOLUTE)
+
+        if (dragContext.getGlobe() instanceof FlatGlobe)
         {
-            if (dragContext.getGlobe() instanceof FlatGlobe)
-            {
-                dragObjectPoint = dragContext.getGlobe().computePointFromPosition(
-                    new Position(dragObjectReferencePosition, 0.0));
-            }
-            else
-                dragObjectPoint = dragContext.getGlobe().computePointFromPosition(dragObjectReferencePosition);
+            dragObjectPoint = dragContext.getGlobe().computePointFromPosition(
+                new Position(dragObjectReferencePosition, 0.0));
         }
         else
         {
-            if (dragContext.getGlobe() instanceof FlatGlobe)
+            if (this.altitudeMode == WorldWind.ABSOLUTE)
             {
-                dragObjectPoint = dragContext.getSceneController().getTerrain().getSurfacePoint(
-                    new Position(dragObjectReferencePosition, 0.0));
+                dragObjectPoint = dragContext.getGlobe().computePointFromPosition(dragObjectReferencePosition);
             }
             else
             {
-                dragObjectPoint = dragContext.getSceneController().getTerrain().getSurfacePoint(
-                    dragObjectReferencePosition);
+                dragObjectPoint = dragContext.getSceneController().getTerrain()
+                    .getSurfacePoint(dragObjectReferencePosition);
             }
         }
+
         if (dragObjectPoint == null)
             return null;
 
