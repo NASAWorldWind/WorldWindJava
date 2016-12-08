@@ -135,7 +135,7 @@
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
                 <pathelement location="${basedir}/gdal.jar"/>
-                <pathelement location="${basedir}/ant/lib/junit-4.5.jar"/>
+                <pathelement location="${basedir}/junit-4.5.jar"/>
             </pathelements>
         </compileJava>
     </target>
@@ -154,7 +154,7 @@
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
                 <pathelement location="${basedir}/gdal.jar"/>
-                <pathelement location="${basedir}/ant/lib/junit-4.5.jar"/>
+                <pathelement location="${basedir}/junit-4.5.jar"/>
             </classpath>
             <batchtest todir="${worldwind.test.results.dir}"
                        skipnontests="true">
