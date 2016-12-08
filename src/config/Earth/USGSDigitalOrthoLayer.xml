@@ -6,7 +6,7 @@
   -->
 
 <!--$Id: USGSDigitalOrthoLayer.xml 1171 2013-02-11 21:45:02Z dcollins $-->
-<!--DEPRECATED: Use src\config\Earth\USGSEROSOrthoLayer.xml-->
+<!--DEPRECATED - this service has been decommissioned by the USGS and is no longer hosted at NASA -->
 <Layer version="1" layerType="TiledImageLayer">
     <DisplayName>USGS Digital Ortho</DisplayName>
     <Service serviceName="WWTileService">

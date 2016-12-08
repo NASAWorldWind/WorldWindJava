@@ -22,10 +22,8 @@
     <Layer href="config/Earth/BMNGWMSLayer2.xml" actuate="onLoad"/>
     <Layer href="config/Earth/LandsatI3WMSLayer2.xml" actuate="onLoad"/>
     <Layer href="config/Earth/USDANAIPWMSImageLayer.xml" actuate="onRequest"/>
-    <Layer href="config/Earth/USDANAIPUSGSWMSImageLayer.xml" actuate="onRequest"/>
     <Layer href="config/Earth/MSVirtualEarthAerialLayer.xml" actuate="onRequest"/>
     <Layer href="config/Earth/BingImagery.xml" actuate="onRequest"/>
-    <Layer href="config/Earth/USGSEROSOrthoLayer.xml" actuate="onRequest"/>
     <Layer href="config/Earth/USGSTopoLowResLayer.xml" actuate="onRequest"/>
     <Layer href="config/Earth/USGSTopoMedResLayer.xml" actuate="onRequest"/>
     <Layer href="config/Earth/USGSTopoHighResLayer.xml" actuate="onRequest"/>
