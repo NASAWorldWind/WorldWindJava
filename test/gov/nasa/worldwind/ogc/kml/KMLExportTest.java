@@ -118,7 +118,7 @@ public class KMLExportTest
 
             // Load the KML GX schema, which extends the OGC KML schema. This allows us to validate documents that use
             // the gx extensions.
-            Source schemaFile = new StreamSource(new File("schemas/kml22gx.xsd"));
+            Source schemaFile = new StreamSource(new File("testData/schemas/kml22gx.xsd"));
             Schema schema = factory.newSchema(schemaFile);
 
             Validator validator = schema.newValidator();

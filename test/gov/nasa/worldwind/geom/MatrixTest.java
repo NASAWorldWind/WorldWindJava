@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 public class MatrixTest
 {
     private static final double EQUALITY_TOLERANCE = 1.0e-9;
+    private static final double NEAR_SINGULAR_EQUALITY_TOLERANCE = 1.0e-6;
 
     //**************************************************************//
     //********************  Test Matrix Inversion  *****************//
@@ -113,7 +114,7 @@ public class MatrixTest
         assertNotNull("Matrix inverse is null", mInv);
 
         Matrix identity = m.multiply(mInv);
-        assertTrue("Matrix inverse is incorrect", equals(identity, Matrix.IDENTITY, EQUALITY_TOLERANCE));
+        assertTrue("Matrix inverse is incorrect", equals(identity, Matrix.IDENTITY, NEAR_SINGULAR_EQUALITY_TOLERANCE));
     }
 
     //**************************************************************//
@@ -122,13 +123,21 @@ public class MatrixTest
 
     private static boolean equals(Matrix a, Matrix b, double tolerance)
     {
-        return Math.abs(a.m11 - b.m11) < tolerance && Math.abs(a.m12 - b.m12) < tolerance
-            && Math.abs(a.m13 - b.m13) < tolerance && Math.abs(a.m14 - b.m14) < tolerance
-            && Math.abs(a.m21 - b.m21) < tolerance && Math.abs(a.m22 - b.m22) < tolerance
-            && Math.abs(a.m23 - b.m23) < tolerance && Math.abs(a.m24 - b.m24) < tolerance
-            && Math.abs(a.m31 - b.m31) < tolerance && Math.abs(a.m32 - b.m32) < tolerance
-            && Math.abs(a.m33 - b.m33) < tolerance && Math.abs(a.m34 - b.m34) < tolerance
-            && Math.abs(a.m41 - b.m41) < tolerance && Math.abs(a.m42 - b.m42) < tolerance
-            && Math.abs(a.m43 - b.m43) < tolerance && Math.abs(a.m44 - b.m44) < tolerance;
+        return Math.abs(a.m11 - b.m11) < tolerance
+            && Math.abs(a.m12 - b.m12) < tolerance
+            && Math.abs(a.m13 - b.m13) < tolerance
+            && Math.abs(a.m14 - b.m14) < tolerance
+            && Math.abs(a.m21 - b.m21) < tolerance
+            && Math.abs(a.m22 - b.m22) < tolerance
+            && Math.abs(a.m23 - b.m23) < tolerance
+            && Math.abs(a.m24 - b.m24) < tolerance
+            && Math.abs(a.m31 - b.m31) < tolerance
+            && Math.abs(a.m32 - b.m32) < tolerance
+            && Math.abs(a.m33 - b.m33) < tolerance
+            && Math.abs(a.m34 - b.m34) < tolerance
+            && Math.abs(a.m41 - b.m41) < tolerance
+            && Math.abs(a.m42 - b.m42) < tolerance
+            && Math.abs(a.m43 - b.m43) < tolerance
+            && Math.abs(a.m44 - b.m44) < tolerance;
     }
 }

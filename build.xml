@@ -105,7 +105,6 @@
                 <pathelement location="jogl-all.jar"/>
                 <pathelement location="gluegen-rt.jar"/>
                 <pathelement location="gdal.jar"/>
-                <pathelement location="plugin.jar"/>
             </classpath>
             <link href="http://download.oracle.com/javase/8/docs/api/"/>
             <link href="https://jogamp.org/deployment/v2.1.5/javadoc/jogl/javadoc/"/>
