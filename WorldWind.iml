@@ -10,11 +10,10 @@
       <sourceFolder url="file://$MODULE_DIR$/testFunctional" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
-    <orderEntry type="library" name="jsobjectplugin" level="project" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jogl" level="project" />
     <orderEntry type="library" name="gdal" level="project" />
-    <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" scope="TEST" name="junit4" level="project" />
   </component>
 </module>
