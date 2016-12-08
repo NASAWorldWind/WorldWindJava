@@ -47,6 +47,7 @@ public class NetworkStatusTest
         assertEquals("Set try again interval test ", tai, interval);
     }
 
+    @Ignore
     @Test
     public void testNetworkAvailable()
     {
@@ -54,6 +55,7 @@ public class NetworkStatusTest
         assertFalse("Network unavailable test ", tf);
     }
 
+    @Ignore
     @Test
     public void testWorldWindAvailable()
     {

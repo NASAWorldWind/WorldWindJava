@@ -400,18 +400,4 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
 
         return false;
     }
-//
-//    public static void main(String[] args)
-//    {
-//        try
-//        {
-//            NetworkStatus ns = new BasicNetworkStatus();
-//            boolean tf = ns.isWorlWindServerUnavailable();
-//            tf = ns.isNetworkUnavailable();
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
 }
