@@ -27,7 +27,7 @@ import java.util.logging.Level;
 public class YahooGazetteer implements Gazetteer
 {
     protected static final String GEOCODE_SERVICE =
-        "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.placefinder%20where%20text%3D";
+        "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D";
 
     public List<PointOfInterest> findPlaces(String lookupString) throws NoItemException, ServiceException
     {
@@ -79,35 +79,44 @@ public class YahooGazetteer implements Gazetteer
             XPath xpath = xpFactory.newXPath();
 
             org.w3c.dom.NodeList resultNodes =
-                (org.w3c.dom.NodeList) xpath.evaluate("/query/results/Result", doc, XPathConstants.NODESET);
+                (org.w3c.dom.NodeList) xpath.evaluate("/query/results/place", doc, XPathConstants.NODESET);
 
             ArrayList<PointOfInterest> positions = new ArrayList<PointOfInterest>(resultNodes.getLength());
 
             for (int i = 0; i < resultNodes.getLength(); i++)
             {
                 org.w3c.dom.Node location = resultNodes.item(i);
-                String lat = xpath.evaluate("latitude", location);
-                String lon = xpath.evaluate("longitude", location);
+                String lat = xpath.evaluate("centroid/latitude", location);
+                String lon = xpath.evaluate("centroid/longitude", location);
                 StringBuilder displayName = new StringBuilder();
 
-                String house = xpath.evaluate("house", location);
-                String street = xpath.evaluate("street", location);
+                String placeType = xpath.evaluate("placeTypeName", location);
+                String name = xpath.evaluate("name", location);
+                String locality = xpath.evaluate("locality1", location);
+                String admin = xpath.evaluate("admin1", location);
 
-                if (house != null && !house.equals(""))
+                if (placeType != null && !placeType.equals(""))
                 {
-                    displayName.append(house);
-                    displayName.append(" ");
+                    displayName.append(placeType);
+                    displayName.append(": ");
                 }
-
-                if (street != null && !street.equals(""))
+                if (name != null && !name.equals(""))
                 {
-                    displayName.append(street);
+                    displayName.append(name);
+                    displayName.append(". ");
+                }
+                if (locality != null && !locality.equals(""))
+                {
+                    displayName.append(locality);
                     displayName.append(", ");
                 }
+                if (admin != null && !admin.equals(""))
+                {
+                    displayName.append(admin);
+                    displayName.append(", ");
+                }
+                displayName.append(xpath.evaluate("country", location));
 
-                displayName.append(xpath.evaluate("city", location));
-                displayName.append(", ");
-                displayName.append(xpath.evaluate("state", location));
 
                 if (lat != null && lon != null)
                 {

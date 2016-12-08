@@ -114,14 +114,16 @@ public class GazetteerPanel extends JPanel
         JPanel fieldPanel = new JPanel(new BorderLayout());
         fieldPanel.add(field, BorderLayout.CENTER);
         fieldPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
+        fieldPanel.setPreferredSize(new Dimension(100, 30));
 
         // Put everything together
         this.add(label, BorderLayout.WEST);
         this.add(fieldPanel, BorderLayout.CENTER);
 
-        resultsPanel = new JPanel(new GridLayout(1, 2));
+        resultsPanel = new JPanel(new FlowLayout());
         resultsPanel.add(new JLabel("Results: "));
         resultsBox = new JComboBox();
+        resultsBox.setPreferredSize(new Dimension(300, 30));
         resultsBox.addActionListener(new ActionListener()
         {
             public void actionPerformed(final ActionEvent actionEvent)
