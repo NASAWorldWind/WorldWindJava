@@ -6,7 +6,7 @@
   -->
 
 <!-- $Id: worldwind.jnlp 958 2012-12-05 22:57:10Z dcollins $ -->
-<jnlp codebase="http://worldwind.arc.nasa.gov/java/2.0.0/webstart/"
+<jnlp codebase="https://worldwind.arc.nasa.gov/java/2.1.0/webstart/"
       href="worldwind.jnlp" version="2.0.0">
 
     <!--
@@ -15,7 +15,7 @@
     <information>
         <title>NASA World Wind Java</title>
         <vendor>NASA</vendor>
-        <homepage href="http://worldwind.arc.nasa.gov"/>
+        <homepage href="https://worldwind.arc.nasa.gov"/>
         <description>NASA World Wind Java</description>
         <description kind="short">NASA World Wind Java Planetary Visualization SDK, version 2.0.0</description>
         <offline-allowed/>

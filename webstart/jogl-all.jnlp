@@ -6,7 +6,7 @@
   -->
 
 <!-- $Id: jogl-all.jnlp 1934 2014-04-15 19:24:07Z dcollins $ -->
-<jnlp codebase="http://worldwind.arc.nasa.gov/java/2.0.0/webstart/"
+<jnlp codebase="https://worldwind.arc.nasa.gov/java/2.1.0/webstart/"
       href="jogl-all.jnlp" version="v2.1.5">
 
     <!--
