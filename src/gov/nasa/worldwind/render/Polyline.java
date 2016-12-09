@@ -141,7 +141,14 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
         this.color = color;
 
         if (this.surfaceShape != null)
-            this.surfaceShape.getAttributes().setOutlineMaterial(new Material(this.color));
+        {
+            ShapeAttributes attrs = this.surfaceShape.getAttributes();
+            attrs.setOutlineMaterial(new Material(this.color));
+            attrs.setOutlineOpacity(this.color.getAlpha() / 255.0);
+            attrs.setInteriorMaterial(attrs.getOutlineMaterial());
+            attrs.setInteriorOpacity(attrs.getOutlineOpacity());
+        }
+
     }
 
     public int getAntiAliasHint()
@@ -629,7 +636,9 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
     {
         ShapeAttributes attrs = new BasicShapeAttributes();
         attrs.setOutlineMaterial(new Material(this.color));
+        attrs.setOutlineOpacity(this.color.getAlpha() / 255.0);
         attrs.setInteriorMaterial(attrs.getOutlineMaterial());
+        attrs.setInteriorOpacity(attrs.getOutlineOpacity());
         attrs.setOutlineWidth(this.getLineWidth());
         attrs.setOutlineStipplePattern(this.stipplePattern);
         attrs.setOutlineStippleFactor(this.stippleFactor);
