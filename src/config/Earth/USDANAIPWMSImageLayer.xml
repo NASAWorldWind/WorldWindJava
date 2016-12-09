@@ -6,6 +6,7 @@
   -->
 
 <!--$Id: USDANAIPWMSImageLayer.xml 1171 2013-02-11 21:45:02Z dcollins $-->
+<!--DEPRECATED. The preferred NAIP layer is USGS NAIP Plus (USGSNAIPPlusLayer.xml) -->
 <Layer version="1" layerType="TiledImageLayer">
     <DisplayName>USDA NAIP</DisplayName>
     <Service serviceName="OGC:WMS" version="1.3">
