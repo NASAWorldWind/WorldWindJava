@@ -106,7 +106,7 @@ public class DragContext
      */
     public void setPreviousPoint(Point previousPoint)
     {
-        if (point == null)
+        if (previousPoint == null)
         {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(msg);
@@ -136,7 +136,7 @@ public class DragContext
      */
     public void setInitialPoint(Point initialPoint)
     {
-        if (point == null)
+        if (initialPoint == null)
         {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(msg);
@@ -260,8 +260,8 @@ public class DragContext
             throw new IllegalArgumentException(msg);
         }
 
-        if (!(dragState.equals(AVKey.DRAG_BEGIN) || dragState.equals(AVKey.DRAG_CHANGE)
-            || dragState.equals(AVKey.DRAG_ENDED)))
+        if (!dragState.equals(AVKey.DRAG_BEGIN) && !dragState.equals(AVKey.DRAG_CHANGE)
+            && !dragState.equals(AVKey.DRAG_ENDED))
         {
             String msg = Logging.getMessage("generic.UnknownDragState", dragState);
             Logging.logger().severe(msg);
