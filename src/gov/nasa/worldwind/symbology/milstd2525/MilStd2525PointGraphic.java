@@ -441,7 +441,7 @@ public class MilStd2525PointGraphic extends AVListImpl implements MilStd2525Tact
 
     protected void doDrag(DragContext dragContext)
     {
-        this.draggableSupport.dragGlobeSizeConstant(dragContext);
+        this.draggableSupport.dragScreenSizeConstant(dragContext);
     }
 
     /////////////////////////////
