@@ -1,0 +1,120 @@
+<!--
+  ~ Copyright (C) 2016 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<project name="worldwind.macros" basedir=".">
+
+    <!-- Macros for compiling Java sources.
+
+         The javac attributes 'source' and 'target' are configured by the property worldwind.jdk.version in order to
+         explicitly define the Java compiler version. Without these attributes javac uses the latest compiler available
+         on the current machine, resulting in unpredictable class versions.
+
+         The javac compiler argument '-Xlint:unchecked' is specified in order to give more detail for unchecked
+         conversion warnings. This argument is specified in the World Wind Java IntelliJ IDEA project. Its use here
+         keeps ANT compiled classes in sync with the IntelliJ IDEA compiled classes. -->
+
+    <macrodef name="compileJava">
+        <attribute name="srcdir"/>
+        <attribute name="classdir"/>
+        <attribute name="type"/>
+        <attribute name="jdk"/>
+        <element name="pathelements"/>
+        <sequential>
+            <condition property="compileJava.debug" value="true" else="false">
+                <equals arg1="@{type}" arg2="debug"/>
+            </condition>
+            <javac srcdir="@{srcdir}"
+                   destdir="@{classdir}"
+                   source="@{jdk}"
+                   target="@{jdk}"
+                   debug="${compileJava.debug}"
+                   encoding="UTF-8"
+                   fork="true"
+                   includeantruntime="false"
+                   memoryMaximumSize="512m">
+                <classpath>
+                    <pathelements/>
+                </classpath>
+                <compilerarg value="-Xlint:unchecked"/>
+            </javac>
+        </sequential>
+    </macrodef>
+
+    <!-- Macros for bundling library JAR files.
+
+         The World Wind core JAR file includes all class files, property files, configuration files, and image files
+         under the package gov.nasa.worldwind, all class files under the package com.zebraimaging, and optionally all
+         class files under the package org.codehaus.jackson (depending on the worldwind.exclude.jackson property).
+         The zebraimaging package includes an alternative input handler for the Zebra Imaging display controller. The
+         jackson package includes the Jackson JSON parsing library which is used by gov.nasa.worldwind.formats.geojson.
+         Requires jogl-all.jar, gluegen-rt.jar, gdal.jar on the class path.
+
+         The World Wind extensions JAR file includes all class files, configuration files, image files, and data
+         resource files under the package gov.nasa.worldwindx. Requires the World Wind core JAR file on the class path.
+
+         All JAR files have the Permissions attribute set to "all-permissions". This attribute is ignored for locally
+         launched applications, but is required for signed Web Start Applications. This property must match the setting
+         specified in the JNLP file used to launch the application.
+         See http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/manifest.html#permissions -->
+
+    <macrodef name="bundleJarFiles">
+        <attribute name="srcdir"/>
+        <attribute name="classdir"/>
+        <attribute name="destdir"/>
+        <attribute name="type"/>
+        <sequential>
+            <condition property="bundleJarFiles.debug" value="true" else="false">
+                <equals arg1="@{type}" arg2="debug"/>
+            </condition>
+            <jar jarfile="@{destdir}/worldwind-@{type}.jar">
+                <manifest>
+                    <attribute name="Permissions" value="all-permissions"/>
+                    <attribute name="Class-Path" value="jogl-all.jar gluegen-rt.jar gdal.jar"/>
+                </manifest>
+                <fileset dir="@{classdir}">
+                    <include name="gov/nasa/worldwind/**/*.class"/>
+                    <include name="com/zebraimaging/**/*.class"/>
+                    <include name="org/codehaus/jackson/**/*.class" unless="${worldwind.exclude.jackson}"/>
+                    <type type="file"/>
+                </fileset>
+                <fileset dir="@{srcdir}">
+                    <include name="gov/nasa/worldwind/**/*.java" if="${bundleJarFiles.debug}"/>
+                    <include name="gov/nasa/worldwind/util/**/*.properties"/>
+                    <include name="com/zebraimaging/**/*.java" if="${bundleJarFiles.debug}"/>
+                    <include name="org/codehaus/jackson/**/*.java" if="${bundleJarFiles.debug}"
+                             unless="${worldwind.exclude.jackson}"/>
+                    <include name="config/**"/>
+                    <include name="images/**"/>
+                    <type type="file"/>
+                </fileset>
+            </jar>
+            <jar jarfile="@{destdir}/worldwindx-@{type}.jar">
+                <manifest>
+                    <attribute name="Class-Path" value="worldwind.jar"/>
+                    <attribute name="Main-Class" value="gov.nasa.worldwindx.examples.ApplicationTemplate"/>
+                    <attribute name="Permissions" value="all-permissions"/>
+                </manifest>
+                <fileset dir="@{classdir}">
+                    <include name="gov/nasa/worldwindx/**/*.class"/>
+                    <type type="file"/>
+                </fileset>
+                <fileset dir="@{srcdir}">
+                    <include name="gov/nasa/worldwindx/**/*.java" if="${bundleJarFiles.debug}"/>
+                    <include name="gov/nasa/worldwindx/applications/sar/*.html"/>
+                    <include name="gov/nasa/worldwindx/applications/sar/config/**"/>
+                    <include name="gov/nasa/worldwindx/applications/sar/data/**"/>
+                    <include name="gov/nasa/worldwindx/applications/sar/images/**"/>
+                    <include name="gov/nasa/worldwindx/applications/worldwindow/config/**"/>
+                    <include name="gov/nasa/worldwindx/applications/worldwindow/images/**"/>
+                    <include name="gov/nasa/worldwindx/examples/data/**"/>
+                    <include name="gov/nasa/worldwindx/examples/images/**"/>
+                    <type type="file"/>
+                </fileset>
+            </jar>
+        </sequential>
+    </macrodef>
+
+</project>

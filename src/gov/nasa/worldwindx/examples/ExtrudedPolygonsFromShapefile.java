@@ -6,27 +6,16 @@
 
 package gov.nasa.worldwindx.examples;
 
-import gov.nasa.worldwind.WorldWindow;
-import gov.nasa.worldwind.event.*;
-import gov.nasa.worldwind.formats.shapefile.*;
-import gov.nasa.worldwind.geom.LatLon;
-import gov.nasa.worldwind.layers.RenderableLayer;
-import gov.nasa.worldwind.render.ExtrudedPolygon;
-import gov.nasa.worldwind.util.VecBuffer;
+import gov.nasa.worldwind.Configuration;
+import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.formats.shapefile.ShapefileLayerFactory;
+import gov.nasa.worldwind.layers.Layer;
+import gov.nasa.worldwind.util.*;
 
 import javax.swing.*;
-import javax.swing.filechooser.*;
-import java.awt.event.*;
-import java.io.File;
-import java.util.Map;
 
 /**
- * Shows how to make extruded shapes from shapefiles.
- *
- * Use the File menu to open a shapefile containing pre-defined extruded shapes.
- *
- * @author tag
- * @version $Id: ExtrudedPolygonsFromShapefile.java 2109 2014-06-30 16:52:38Z tgaskins $
+ * Shows how to make extruded shapes from an ESRI Shapefile containing per-shape height attributes.
  */
 public class ExtrudedPolygonsFromShapefile extends ApplicationTemplate
 {
@@ -34,144 +23,47 @@ public class ExtrudedPolygonsFromShapefile extends ApplicationTemplate
     {
         public AppFrame()
         {
-            super(true, true, false);
+            // Construct a factory that loads Shapefiles on a background thread.
+            ShapefileLayerFactory factory = new ShapefileLayerFactory();
 
-            this.makeMenu();
-        }
-
-        public class WorkerThread extends Thread
-        {
-            private File file;
-            private WorldWindow wwd;
-
-            public WorkerThread(File file, WorldWindow wwd)
-            {
-                this.file = file;
-                this.wwd = wwd;
-            }
-
-            public void run()
-            {
-                Shapefile sf = new Shapefile(this.file);
-
-                final RenderableLayer layer = new RenderableLayer();
-
-                try
+            // Load a Shapefile in the San Francisco bay area containing per-shape height attributes.
+            factory.createFromShapefileSource("testData/shapefiles/BayArea.shp",
+                new ShapefileLayerFactory.CompletionCallback()
                 {
-                    while (sf.hasNext())
+                    @Override
+                    public void completion(Object result)
                     {
-                        ShapefileRecord r = sf.nextRecord();
-                        if (r == null)
-                            continue;
+                        final Layer layer = (Layer) result; // the result is the layer the factory created
+                        layer.setName(WWIO.getFilename(layer.getName()));
 
-                        //printShapefileInfo(r);
-
-                        if (r.getNumberOfPoints() < 4)
-                            continue;
-
-                        layer.addRenderable(this.makeShape(r));
+                        // Add the layer to the World Window's layer list on the Event Dispatch Thread.
+                        SwingUtilities.invokeLater(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                getWwd().getModel().getLayers().add(layer);
+                                getWwd().redraw();
+                            }
+                        });
                     }
-                }
-                finally
-                {
-                    sf.close();
-                }
 
-                this.wwd.addSelectListener(new SelectListener()
-                {
-                    public void selected(SelectEvent event)
+                    @Override
+                    public void exception(Exception e)
                     {
-                        if (event.getTopObject() instanceof ExtrudedPolygon)
-                            System.out.println("EXTRUDED POLYGON SELECTED");
+                        Logging.logger().log(java.util.logging.Level.SEVERE, e.getMessage(), e);
                     }
                 });
-            }
-
-            protected String[] heightKeys = new String[] {"height", "Height", "HEIGHT"};
-
-            protected ExtrudedPolygon makeShape(ShapefileRecord record)
-            {
-                Double height = null;
-
-                for (String key : heightKeys)
-                {
-                    Object o = record.getAttributes().getValue(key);
-                    if (o != null)
-                    {
-                        height = Double.parseDouble(o.toString());
-                    }
-                }
-
-                ExtrudedPolygon pgon = new ExtrudedPolygon();
-                VecBuffer vb = record.getPointBuffer(0);
-                pgon.setOuterBoundary(vb.getLocations(), height);
-
-                return pgon;
-            }
-        }
-
-        protected void makeMenu()
-        {
-            final JFileChooser fileChooser = new JFileChooser();
-            fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("ESRI Shapefiles", "shp"));
-
-            JMenuBar menuBar = new JMenuBar();
-            this.setJMenuBar(menuBar);
-            JMenu fileMenu = new JMenu("File");
-            menuBar.add(fileMenu);
-            JMenuItem openMenuItem = new JMenuItem(new AbstractAction("Open File...")
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
-                    try
-                    {
-                        int status = fileChooser.showOpenDialog(AppFrame.this);
-                        if (status == JFileChooser.APPROVE_OPTION)
-                        {
-                            Thread t = new WorkerThread(fileChooser.getSelectedFile(), getWwd());
-                            t.start();
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            fileMenu.add(openMenuItem);
         }
     }
 
     public static void main(String[] args)
     {
+        Configuration.setValue(AVKey.INITIAL_LATITUDE, 37.419833280894515);
+        Configuration.setValue(AVKey.INITIAL_LONGITUDE, -122.08426559929343);
+        Configuration.setValue(AVKey.INITIAL_ALTITUDE, 1000.0);
+        Configuration.setValue(AVKey.INITIAL_PITCH, 60.0);
+
         ApplicationTemplate.start("Extruded Polygons from Shapefile", AppFrame.class);
-    }
-
-    public static void printShapefileInfo(ShapefileRecord r)
-    {
-        System.out.printf("%d, %s: %d parts, %d points", r.getRecordNumber(), r.getShapeType(),
-            r.getNumberOfParts(), r.getNumberOfPoints());
-        for (Map.Entry<String, Object> a : r.getAttributes().getEntries())
-        {
-            if (a.getKey() != null)
-                System.out.printf(", %s", a.getKey());
-            if (a.getValue() != null)
-                System.out.printf(", %s", a.getValue());
-        }
-        System.out.println();
-
-        System.out.print("\tAttributes: ");
-        for (Map.Entry<String, Object> entry : r.getAttributes().getEntries())
-        {
-            System.out.printf("%s = %s, ", entry.getKey(), entry.getValue());
-        }
-        System.out.println();
-
-        VecBuffer vb = r.getPointBuffer(0);
-        for (LatLon ll : vb.getLocations())
-        {
-            System.out.printf("\t%f, %f\n", ll.getLatitude().degrees, ll.getLongitude().degrees);
-        }
     }
 }

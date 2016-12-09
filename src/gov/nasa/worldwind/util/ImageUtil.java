@@ -707,7 +707,7 @@ public class ImageUtil
      *                        original image.
      *
      * @return array of mipmap levels, starting at level 0 and stopping at maxLevel. This array will have length
-     *         maxLevel + 1.
+     * maxLevel + 1.
      *
      * @throws IllegalArgumentException if <code>image</code> is null, or if <code>maxLevel</code> is less than zero.
      * @see #getMaxMipmapLevel(int, int)
@@ -881,6 +881,59 @@ public class ImageUtil
         }
 
         return potImage;
+    }
+
+    /**
+     * Returns a copy of the specified image with any fully-transparent borders removed. The resultant image is cropped
+     * to fit its contents.
+     *
+     * @param image the BufferedImage to trim.
+     *
+     * @return copy of <code>image</code> with its transparent borders trimmed
+     *
+     * @throws IllegalArgumentException if <code>image</code> is null.
+     */
+    public static BufferedImage trimImage(BufferedImage image)
+    {
+        if (image == null)
+        {
+            String message = Logging.getMessage("nullValue.ImageIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        int width = image.getWidth();
+        int height = image.getHeight();
+        int[] rowPixels = new int[width];
+
+        int x1 = Integer.MAX_VALUE;
+        int y1 = Integer.MAX_VALUE;
+        int x2 = 0;
+        int y2 = 0;
+
+        for (int y = 0; y < height; y++)
+        {
+            image.getRGB(0, y, width, 1, rowPixels, 0, width);
+
+            for (int x = 0; x < width; x++)
+            {
+                int a = ((rowPixels[x] >> 24) & 0xff);
+                if (a <= 0)
+                    continue;
+
+                if (x1 > x)
+                    x1 = x;
+                if (x2 < x)
+                    x2 = x;
+                if (y1 > y)
+                    y1 = y;
+                if (y2 < y)
+                    y2 = y;
+            }
+        }
+
+        return (x1 < x2 && y1 < y2) ? image.getSubimage(x1, y1, x2 - x1 + 1, y2 - y1 + 1)
+            : new BufferedImage(BufferedImage.TYPE_INT_ARGB, 0, 0);
     }
 
     /**
@@ -1407,7 +1460,7 @@ public class ImageUtil
      *                    image -- the horizontal component varies fastest.
      *
      * @return a new image containing the original image but reprojected to align to the bounding sector. Pixels in the
-     *         new image that have no correspondence with the source image are transparent.
+     * new image that have no correspondence with the source image are transparent.
      *
      * @throws InterruptedException if any thread has interrupted the current thread while alignImage is running. The
      *                              <i>interrupted status</i> of the current thread is cleared when this exception is
@@ -1433,7 +1486,7 @@ public class ImageUtil
      * @param dimension   the the aligned image's dimensions. If null, this computes the aligned image's dimension.
      *
      * @return a new image containing the original image but reprojected to align to the sector. Pixels in the new image
-     *         that have no correspondence with the source image are transparent.
+     * that have no correspondence with the source image are transparent.
      *
      * @throws InterruptedException if any thread has interrupted the current thread while alignImage is running. The
      *                              <i>interrupted status</i> of the current thread is cleared when this exception is
@@ -1972,6 +2025,7 @@ public class ImageUtil
      * a GRAY color image raster with pixel data type of unsigned short.
      *
      * @param raster non-imagery data raster (elevations) instance of data raster derived from BufferWrapperRaster
+     *
      * @return BufferedImage visual representation of the non-imagery data raster
      */
     public static BufferedImage visualize(BufferWrapperRaster raster)
@@ -1984,8 +2038,9 @@ public class ImageUtil
         }
 
         // we are building UINT DataBuffer, cannot use negative values as -32768 or -9999, so we will use 0
-        double missingDataSignal = AVListImpl.getDoubleValue( raster, AVKey.MISSING_DATA_SIGNAL, (double)Short.MIN_VALUE);
-        int missingDataReplacement = 0 ;
+        double missingDataSignal = AVListImpl.getDoubleValue(raster, AVKey.MISSING_DATA_SIGNAL,
+            (double) Short.MIN_VALUE);
+        int missingDataReplacement = 0;
 
         Double minElevation = (Double) raster.getValue(AVKey.ELEVATION_MIN);
         Double maxElevation = (Double) raster.getValue(AVKey.ELEVATION_MAX);

@@ -46,9 +46,9 @@
           dependencies ot the class path at runtime.
     -->
     <resources>
-        <java version="1.6+" max-heap-size="512m"/>
+        <java version="1.7+" max-heap-size="1024m"/>
         <jar href="YOUR APPLICATION JAR FILE NAME, e.g., MyApp.jar" main="true"/>
-        <extension name="worldwind" href="http://worldwind.arc.nasa.gov/java/2.0.0/webstart/worldwind.jnlp"/>
+        <extension name="worldwind" href="https://worldwind.arc.nasa.gov/java/2.1.0/webstart/worldwind.jnlp"/>
     </resources>
 
     <!--

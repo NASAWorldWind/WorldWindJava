@@ -201,6 +201,11 @@ public class StarsLayer extends RenderableLayer
         if (this.starsBuffer == null)
             return;
 
+        // Exit if the viewport is not visible, in which case rendering results in exceptions.
+        View view = dc.getView();
+        if (view.getViewport().getWidth() == 0 || view.getViewport().getHeight() == 0)
+            return;
+
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         OGLStackHandler ogsh = new OGLStackHandler();
         double[] matrixArray = new double[16];
@@ -210,7 +215,6 @@ public class StarsLayer extends RenderableLayer
             gl.glDisable(GL.GL_DEPTH_TEST);
 
             // Override the default projection matrix in order to extend the far clip plane to include the stars.
-            View view = dc.getView();
             Matrix projection = Matrix.fromPerspective(view.getFieldOfView(), view.getViewport().width,
                 view.getViewport().height, 1, this.radius + 1);
             ogsh.pushProjectionIdentity(gl);
