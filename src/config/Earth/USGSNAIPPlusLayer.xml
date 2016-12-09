@@ -19,7 +19,7 @@
         </GetCapabilitiesURL>
     </Service>
     <FormatSuffix>.dds</FormatSuffix>
-    <NumLevels count="17" numEmpty="0"/>
+    <NumLevels count="16" numEmpty="0"/>
     <Sector>
         <SouthWest>
             <LatLon latitude="-85.050963" longitude="-179.998075" units="degrees"/>

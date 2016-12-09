@@ -24,7 +24,7 @@
     <!--<Layer href="config/Earth/USDANAIPWMSImageLayer.xml" actuate="onRequest"/>-->
     <Layer href="config/Earth/USGSNAIPPlusLayer.xml" actuate="onRequest"/>
     <!--<Layer href="config/Earth/MSVirtualEarthAerialLayer.xml" actuate="onRequest"/>-->
-    <Layer href="config/Earth/BingImagery.xml" actuate="onLoad"/>
+    <Layer href="config/Earth/BingImagery.xml" actuate="onRequest"/>
     <Layer href="config/Earth/USGSTNMTopoLayer.xml" actuate="onRequest"/>
     <Layer href="config/Earth/USGSTNMTopoLargeLayer.xml" actuate="onRequest"/>
     <Layer href="config/Earth/USGSTopoLowResLayer.xml" actuate="onRequest"/>
