@@ -306,7 +306,7 @@
         </jar>
     </target>
 
-    <target name="signWebStartSources" depends="keystoreSetup" if="keystore.enabled">
+    <target name="signWebStartSources" depends="keystoreAvailable" if="keystore.isAvailable">
         <property file="${basedir}/keystore.properties"/>
         <copy todir="${webstart.jar.dir}">
             <fileset dir="${webstart.unsigned.dir}">
@@ -324,21 +324,24 @@
         </signjar>
     </target>
 
-    <target name="keystoreSetup">
-        <condition property="keystore.enabled" value="true" else="false">
-            <available file="${basedir}/keystore.properties"/>
-        </condition>
-    </target>
+    <target name="bundleWebStart" depends="bundleWebStartSigned, bundleWebStartUnsigned"/>
 
-    <target name="bundleWebStart">
+    <target name="bundleWebStartSigned" if="keystore.isAvailable">
         <zip destfile="${webstart.out.dir}/worldwind-webstart.zip">
             <fileset dir="${webstart.jar.dir}"/>
             <fileset dir="${webstart.jnlp.dir}"/>
         </zip>
+    </target>
+
+    <target name="bundleWebStartUnsigned">
         <zip destfile="${webstart.out.dir}/worldwind-webstart-unsigned.zip">
             <fileset dir="${webstart.unsigned.dir}"/>
             <fileset dir="${webstart.jnlp.dir}"/>
         </zip>
+    </target>
+
+    <target name="keystoreAvailable">
+        <available property="keystore.isAvailable" file="${basedir}/keystore.properties"/>
     </target>
 
     <!-- Tasks for assembling the MIL-STD-2525 symbology package. Rasterizes MIL-STD-2525 SVG image files into PNG image
