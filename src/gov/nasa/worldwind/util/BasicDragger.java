@@ -60,9 +60,6 @@ public class BasicDragger implements SelectListener
     /**
      * Ignores the useTerrain argument as it has been deprecated and utilizes the single parameter constructor.
      *
-     * @param wwd
-     * @param useTerrain
-     *
      * @deprecated the useTerrain property has been deprecated in favor of the {@link Draggable} interface which allows
      * the object to define the drag behavior.
      */
@@ -118,8 +115,7 @@ public class BasicDragger implements SelectListener
             this.dragContext = null;
             this.dragging = false;
         }
-
-        if (event.getEventAction().equals(SelectEvent.DRAG))
+        else if (event.getEventAction().equals(SelectEvent.DRAG))
         {
 
             if (this.dragContext == null)
