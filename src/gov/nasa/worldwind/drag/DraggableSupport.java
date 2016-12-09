@@ -68,20 +68,18 @@ public class DraggableSupport
      */
     protected final Object dragObject;
     /**
-     * The altitude mode of the object to be dragged. The values {@link WorldWind#ABSOLUTE},
-     * {@link WorldWind#CLAMP_TO_GROUND}, and {@link WorldWind#RELATIVE_TO_GROUND} are acceptable values.
+     * The altitude mode of the object to be dragged.
      */
     protected int altitudeMode;
 
     /**
-     * Provides persistence of initial values of a drag operation to increase dragging precision and provide for better
-     * of globe dragging behavior.
+     * Provides persistence of initial values of a drag operation to increase dragging precision and provide better
+     * dragging behavior.
      *
      * @param dragObject   the object to be dragged.
-     * @param altitudeMode the altitude mode as defined by {@link WorldWind#ABSOLUTE}, {@link WorldWind#CLAMP_TO_GROUND}
-     *                     or {@link WorldWind#RELATIVE_TO_GROUND}.
+     * @param altitudeMode the altitude mode.
      *
-     * @throws IllegalArgumentException if the object is null or the altitude mode not valid.
+     * @throws IllegalArgumentException if the object is null.
      */
     public DraggableSupport(Object dragObject, int altitudeMode)
     {
@@ -92,11 +90,11 @@ public class DraggableSupport
             throw new IllegalArgumentException(msg);
         }
 
-        if (altitudeMode < 0 || altitudeMode > WorldWind.RELATIVE_TO_GROUND)
+        if (altitudeMode != WorldWind.ABSOLUTE && altitudeMode != WorldWind.CLAMP_TO_GROUND &&
+            altitudeMode != WorldWind.RELATIVE_TO_GROUND && altitudeMode != WorldWind.CONSTANT)
         {
             String msg = Logging.getMessage("generic.InvalidAltitudeMode", altitudeMode);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            Logging.logger().warning(msg);
         }
 
         this.dragObject = dragObject;
@@ -312,27 +310,23 @@ public class DraggableSupport
     }
 
     /**
-     * Sets the altitude mode to be used during dragging calculations. Must be either: {@link WorldWind#ABSOLUTE},
-     * {@link WorldWind#CLAMP_TO_GROUND}, or {@link WorldWind#RELATIVE_TO_GROUND}.
+     * Sets the altitude mode to be used during dragging calculations.
      *
      * @param altitudeMode the altitude mode to use for dragging calculations.
-     *
-     * @throws IllegalArgumentException if the altitude mode is not one of the modes specified above.
      */
     public void setAltitudeMode(int altitudeMode)
     {
-        if (altitudeMode < WorldWind.ABSOLUTE || altitudeMode > WorldWind.RELATIVE_TO_GROUND)
+        if (altitudeMode != WorldWind.ABSOLUTE && altitudeMode != WorldWind.CLAMP_TO_GROUND &&
+            altitudeMode != WorldWind.RELATIVE_TO_GROUND && altitudeMode != WorldWind.CONSTANT)
         {
             String msg = Logging.getMessage("generic.InvalidAltitudeMode", altitudeMode);
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
+            Logging.logger().warning(msg);
         }
         this.altitudeMode = altitudeMode;
     }
 
     /**
-     * Determines the cartesian coordinate of a screen point given the altitude mode and altitude on an ellipsoidal
-     * globe.
+     * Determines the cartesian coordinate of a screen point given the altitude mode.
      *
      * @param dragContext         the current {@link DragContext} of the dragging event.
      * @param screenPoint         the {@link Point} of the screen to determine the position.
@@ -381,18 +375,22 @@ public class DraggableSupport
     {
         Vec4 dragObjectPoint;
 
-        if (dragContext.getGlobe() instanceof FlatGlobe)
+        if (dragContext.getGlobe() instanceof Globe2D)
         {
             dragObjectPoint = dragContext.getGlobe().computePointFromPosition(
                 new Position(dragObjectReferencePosition, 0.0));
         }
         else
         {
-            if (this.altitudeMode == WorldWind.ABSOLUTE)
+            // If the altitude mode is ABSOLUTE, or not recognized as a standard WorldWind altitude mode, use the
+            // ABSOLUTE method as the default
+            if (this.altitudeMode == WorldWind.ABSOLUTE ||
+                (this.altitudeMode != WorldWind.RELATIVE_TO_GROUND && this.altitudeMode != WorldWind.CLAMP_TO_GROUND
+                    && this.altitudeMode != WorldWind.CONSTANT))
             {
                 dragObjectPoint = dragContext.getGlobe().computePointFromPosition(dragObjectReferencePosition);
             }
-            else
+            else // Should be any one of the remaining WorldWind altitude modes: CLAMP, RELATIVE, CONSTANT
             {
                 dragObjectPoint = dragContext.getSceneController().getTerrain()
                     .getSurfacePoint(dragObjectReferencePosition);
@@ -461,7 +459,7 @@ public class DraggableSupport
 
     /**
      * Computes the intersection of the provided {@link Line} with the {@link Globe} while accounting for the altitude
-     * mode. If a {@link FlatGlobe} is specified, then
+     * mode. If a {@link Globe2D} is specified, then the intersection is calculated using the globe objects method.
      *
      * @param ray             the {@link Line} to calculate the intersection of the {@link Globe}.
      * @param altitude        the altitude mode for the intersection calculation.
@@ -482,57 +480,55 @@ public class DraggableSupport
     {
         Intersection[] intersections;
 
-        if (globe instanceof FlatGlobe)
+        if (globe instanceof Globe2D)
         {
-            // Utilize the globe intersection method for a FlatGlobe as it best describes the appearance and the
-            // terrain intersection method returns null when crossing the dateline on a FlatGlobe
+            // Utilize the globe intersection method for a Globe2D as it best describes the appearance and the
+            // terrain intersection method returns null when crossing the dateline on a Globe2D
             intersections = globe.intersect(ray, 0.0);
+        }
+        else if (this.altitudeMode == WorldWind.ABSOLUTE)
+        {
+            // Accounts for the object being visually placed on the surface in a Globe2D Globe
+            intersections = globe.intersect(ray, altitude);
+        }
+        else if (this.altitudeMode == WorldWind.CLAMP_TO_GROUND || this.altitudeMode == WorldWind.CONSTANT)
+        {
+            intersections = sceneController.getTerrain().intersect(ray);
+        }
+        else if (this.altitudeMode == WorldWind.RELATIVE_TO_GROUND)
+        {
+            // If an object is RELATIVE_TO_GROUND but has an altitude close to 0.0, use CLAMP_TO_GROUND method
+            if (altitude < 1.0)
+            {
+                intersections = sceneController.getTerrain().intersect(ray);
+            }
+            else
+            {
+                // When an object maintains a constant screen size independent of globe orientation or eye location,
+                // the dragger attempts to determine the position by testing different points of the ray for a
+                // matching altitude above elevation. The method is only used in objects maintain a constant screen
+                // size as the effects are less pronounced in globe constant features.
+                if (useSearchMethod)
+                {
+                    Vec4 intersectionPoint = this.computeRelativePoint(ray, globe, sceneController, altitude);
+                    // In the event the computeRelativePoint fails with the numeric approach it falls back to a
+                    // ellipsoidal intersection. Need to check if the result of that calculation was also null,
+                    // indicating the screen point doesn't intersect with the globe.
+                    if (intersectionPoint != null)
+                        intersections = new Intersection[] {new Intersection(intersectionPoint, false)};
+                    else
+                        intersections = null;
+                }
+                else
+                {
+                    intersections = globe.intersect(ray, altitude);
+                }
+            }
         }
         else
         {
-            switch (this.altitudeMode)
-            {
-                case WorldWind.ABSOLUTE:
-                    // Accounts for the object being visually placed on the surface in a FlatGlobe
-                    intersections = globe.intersect(ray, altitude);
-                    break;
-                case WorldWind.CLAMP_TO_GROUND:
-                    intersections = sceneController.getTerrain().intersect(ray);
-                    break;
-                case WorldWind.RELATIVE_TO_GROUND:
-                    // If an object is RELATIVE_TO_GROUND but has an altitude close to 0.0, use CLAMP_TO_GROUND method
-                    if (altitude < 1.0)
-                    {
-                        intersections = sceneController.getTerrain().intersect(ray);
-                        break;
-                    }
-
-                    // When an object maintains a constant screen size independent of globe orientation or eye location,
-                    // the dragger attempts to determine the position by testing different points of the ray for a
-                    // matching altitude above elevation. The method is only used in objects maintain a constant screen
-                    // size as the effects are less pronounced in globe constant features.
-                    if (useSearchMethod)
-                    {
-                        Vec4 intersectionPoint = this.computeRelativePoint(ray, globe, sceneController, altitude);
-                        // In the event the computeRelativePoint fails with the numeric approach it falls back to a
-                        // ellipsoidal intersection. Need to check if the result of that calculation was also null,
-                        // indicating the screen point doesn't intersect with the globe.
-                        if (intersectionPoint != null)
-                            intersections = new Intersection[] {new Intersection(intersectionPoint, false)};
-                        else
-                            intersections = null;
-                    }
-                    else
-                    {
-                        intersections = globe.intersect(ray, altitude);
-                    }
-                    break;
-                default:
-                    String msg = Logging.getMessage("generic.InvalidAltitudeMode", this.altitudeMode);
-                    Logging.logger().severe(msg);
-                    throw new IllegalArgumentException(msg);
-            }
-
+            // If the altitude mode isn't recognized, the ABSOLUTE determination method is used as a fallback/default
+            intersections = globe.intersect(ray, altitude);
         }
 
         if ((intersections != null) && (intersections.length > 0))
