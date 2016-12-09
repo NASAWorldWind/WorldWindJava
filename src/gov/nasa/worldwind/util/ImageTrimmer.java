@@ -23,7 +23,10 @@ public class ImageTrimmer
         {
             try
             {
+                System.out.print("Trimming " + path + " ... ");
                 trimImageInPlace(new File(path));
+                System.out.print("success");
+                System.out.println();
             }
             catch (Exception e)
             {
