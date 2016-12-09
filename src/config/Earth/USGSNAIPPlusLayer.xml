@@ -43,4 +43,9 @@
         <ReadTimeout>
             <Time units="milliseconds" value="20000"/>
         </ReadTimeout>
-    </RetrievalTimeouts></Layer>
+    </RetrievalTimeouts>
+    <ScreenCredit creditType="ScreenImage">
+        <FileName>images/usda_logo-32x32.png</FileName>
+        <Link>https://www.fsa.usda.gov/FSA</Link>
+    </ScreenCredit>
+</Layer>
