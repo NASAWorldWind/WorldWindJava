@@ -490,11 +490,13 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
                     lon = Angle.POS180;
 
                 Sector tileSector = new Sector(lastLat, lat, lastLon, lon);
+                boolean skipTile = dc.is2DGlobe() && this.skipTile(dc, tileSector);
 
-                if (dc.is2DGlobe() && this.skipTile(dc, tileSector))
-                    continue;
+                if (!skipTile)
+                {
+                    tops.add(this.createTile(dc, tileSector, 0));
+                }
 
-                tops.add(this.createTile(dc, tileSector, 0));
                 lastLon = lon;
             }
             lastLat = lat;
