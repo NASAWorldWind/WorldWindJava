@@ -40,6 +40,29 @@ builds have the newest, bleeding-edge World Wind Java features. Intended for dev
 - [Releases](https://github.com/NASAWorldWind/WorldWindJava/releases) hosts the daily builds
 - [API Documentation](https://worldwind.arc.nasa.gov/assets/java/daily/javadoc) for the current daily build
 
+## Run a Demo 
+   
+###### From a Web Browser
+   
+- [World Wind Demo App](https://worldwind.arc.nasa.gov/java/demos/ApplicationTemplate.jnlp) shows World Wind's basic capabilities
+- [Java Demos](http://goworldwind.org/demos) has a complete list of example apps
+   
+###### From a Development Environment
+
+- Download and extract the [Latest Release](https://github.com/NASAWorldWind/WorldWindJava/releases/latest)
+- Launch the system terminal / command prompt
+```bash
+cd [World Wind release]
+run-demo gov.nasa.worldwindx.examples.ApplicationTemplate
+```
+
+###### Troubleshooting
+   
+World Wind requires a modern graphics card with a current driver. Most display problems are caused by out-of-date 
+graphics drivers. On Windows, visit your graphics card manufacturer's web site for the latest driver: NVIDIA, ATI or 
+Intel. The drivers are typically under a link named Downloads or Support. If you're using a laptop, the latest drivers 
+are found at the laptop manufacturer's web site.
+
 ## JOGL Native Binaries
 
 JOGL performs runtime extraction of native binaries. Some deployment situations may not allow this because it extracts 
