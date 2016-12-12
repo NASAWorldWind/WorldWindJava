@@ -6,10 +6,12 @@
 
 package gov.nasa.worldwindx.examples;
 
-import com.jogamp.opengl.util.Animator;
+import com.jogamp.opengl.util.*;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.event.*;
-import gov.nasa.worldwind.geom.Position;
+import gov.nasa.worldwind.geom.*;
+
+import javax.media.opengl.GLAnimatorControl;
 
 /**
  * Shows how to use a JOGL Animator to animate in World Wind
@@ -21,14 +23,13 @@ public class AnimatedGlobe extends ApplicationTemplate
 {
     public static class AppFrame extends ApplicationTemplate.AppFrame implements RenderingListener
     {
-        Animator animator;
-        double rotationRate = 100; // degrees per second
-        long lastTime;
-        Position eyePosition = Position.fromDegrees(0, 0, 20000000);
+        protected GLAnimatorControl animator;
+        protected double rotationDegreesPerSecond = 40;
+        protected long lastTime;
+        protected Position eyePosition = Position.fromDegrees(0, 0, 20000000);
 
         public AppFrame()
         {
-
             // Reduce the frequency at which terrain is regenerated.
             getWwd().getModel().getGlobe().getTessellator().setUpdateFrequency(5000);
 
@@ -38,8 +39,7 @@ public class AnimatedGlobe extends ApplicationTemplate
 
             // Use a JOGL Animator to spin the globe
             lastTime = System.currentTimeMillis();
-            animator = new Animator();
-            animator.add((WorldWindowGLCanvas) getWwd());
+            animator = new FPSAnimator((WorldWindowGLCanvas) getWwd(), 60 /*frames per second*/);
             animator.start();
         }
 
@@ -53,18 +53,17 @@ public class AnimatedGlobe extends ApplicationTemplate
                     return;
 
                 long now = System.currentTimeMillis();
-                double d = rotationRate * (now - lastTime) * 1.0e-3;
+                double elapsedSeconds = (now - lastTime) * 1.0e-3;;
+                double rotationDegrees = rotationDegreesPerSecond * elapsedSeconds;
                 lastTime = now;
 
-                double longitude = eyePosition.getLongitude().degrees;
-                longitude += d;
-                if (longitude > 180)
-                    longitude = -180 + (180 - longitude);
+                double lat = eyePosition.getLatitude().degrees;
+                double lon = Angle.normalizedDegreesLongitude(eyePosition.getLongitude().degrees + rotationDegrees);
+                double alt = eyePosition.getAltitude();
 
-                eyePosition = Position.fromDegrees(eyePosition.getLatitude().degrees, longitude,
-                    eyePosition.getAltitude());
-                Position groundPos = new Position(eyePosition.getLatitude(), eyePosition.getLongitude(), 0);
-                getWwd().getView().setOrientation(eyePosition, groundPos);
+                eyePosition = Position.fromDegrees(lat, lon, alt);
+                getWwd().getView().stopAnimations();
+                getWwd().getView().setEyePosition(eyePosition);
             }
         }
     }
