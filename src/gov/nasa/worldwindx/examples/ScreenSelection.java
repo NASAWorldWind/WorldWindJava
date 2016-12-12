@@ -7,7 +7,7 @@ package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.event.*;
-import gov.nasa.worldwind.geom.LatLon;
+import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwindx.applications.worldwindow.util.Util;
@@ -63,15 +63,15 @@ public class ScreenSelection extends ApplicationTemplate
             highlightAttrs.setInteriorMaterial(Material.RED);
             highlightAttrs.setOutlineMaterial(Material.WHITE);
 
-            for (int lon = -180; lon < 180; lon += 10)
+            for (int lon = -180; lon <= 170; lon += 10)
             {
-                for (int lat = -90; lat < 90; lat += 10)
+                for (int lat = -60; lat <= 60; lat += 10)
                 {
                     ExtrudedPolygon poly = new ExtrudedPolygon(Arrays.asList(
-                        LatLon.fromDegrees(lat - 1, lon - 1),
-                        LatLon.fromDegrees(lat - 1, lon + 1),
-                        LatLon.fromDegrees(lat + 1, lon + 1),
-                        LatLon.fromDegrees(lat + 1, lon - 1)),
+                        LatLon.fromDegrees(lat - 1, Angle.normalizedDegreesLongitude(lon - 1)),
+                        LatLon.fromDegrees(lat - 1, Angle.normalizedDegreesLongitude(lon + 1)),
+                        LatLon.fromDegrees(lat + 1, Angle.normalizedDegreesLongitude(lon + 1)),
+                        LatLon.fromDegrees(lat + 1, Angle.normalizedDegreesLongitude(lon - 1))),
                         100000d);
                     poly.setHighlightAttributes(highlightAttrs);
                     poly.setSideHighlightAttributes(highlightAttrs);
