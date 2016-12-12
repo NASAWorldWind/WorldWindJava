@@ -41,9 +41,9 @@ script:
 after_success:
   # Push the daily tag when this build is a cron job
   - ./travis/add_daily_tag.sh
-  # Push javadoc to GitHub pages and upload build artifacts to GitHub releases, depending on what initiated the build
-  - ./travis/update_javadoc.sh
+  # Push build artifacts to GitHub releases, push documentation and Web Start distribution to GitHub pages
   - ./travis/update_release.sh
+  - ./travis/update_website.sh
 
 notifications:
   # Notify the World Wind services mailing list on every build
