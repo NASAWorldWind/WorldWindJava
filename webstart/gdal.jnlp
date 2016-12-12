@@ -5,9 +5,7 @@
   ~ All Rights Reserved.
   -->
 
-<!-- $Id: gdal.jnlp 958 2012-12-05 22:57:10Z dcollins $ -->
-<jnlp codebase="https://worldwind.arc.nasa.gov/java/2.1.0/webstart/"
-      href="gdal.jnlp" version="2.0.0">
+<jnlp version="v2.1.0">
 
     <!--
         Provides a description of the World Wind GDAL library.
@@ -17,7 +15,7 @@
         <vendor>NASA</vendor>
         <homepage href="https://worldwind.arc.nasa.gov"/>
         <description>NASA World Wind Java GDAL</description>
-        <description kind="short">NASA World Wind Java GDAL Bindings, version 2.0.0</description>
+        <description kind="short">NASA World Wind Java GDAL Bindings, v2.1.0</description>
         <offline-allowed/>
     </information>
 

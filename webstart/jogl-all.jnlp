@@ -5,9 +5,7 @@
   ~ All Rights Reserved.
   -->
 
-<!-- $Id: jogl-all.jnlp 1934 2014-04-15 19:24:07Z dcollins $ -->
-<jnlp codebase="https://worldwind.arc.nasa.gov/java/2.1.0/webstart/"
-      href="jogl-all.jnlp" version="v2.1.5">
+<jnlp version="v2.1.5">
 
     <!--
         Provides a description of the JOGL library.

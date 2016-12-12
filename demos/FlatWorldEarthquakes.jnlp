@@ -5,9 +5,7 @@
   ~ All Rights Reserved.
   -->
 
-<!-- $Id: FlatWorldEarthquakes.jnlp 1291 2013-04-23 16:16:30Z dcollins $ -->
-<jnlp codebase="https://worldwind.arc.nasa.gov/java/2.1.0/demos/"
-      href="FlatWorldEarthquakes.jnlp">
+<jnlp>
 
     <!--
         Provides a description of this World Wind demo application.
@@ -29,14 +27,14 @@
 
     <!--
         Specifies the resources required by the this World Wind demo application:
-        * Java Runtime Environment version 1.6 or newer, with a maximum heap size of at least 512 MB. The World Wind SDK
-          requires at least 512 MB of heap space. This heap size must be specified in the application's Web Start file.
+        * Java Runtime Environment version 1.6 or newer, with a maximum heap size of at least 1024 MB. The World Wind SDK
+          requires at least 1024 MB of heap space. This heap size must be specified in the application's Web Start file.
         * World Wind extensions Java Web Start component. This downloads and adds the World Wind SDK extensions JAR file
           and its dependencies ot the class path at runtime.
     -->
     <resources>
         <java version="1.7+" max-heap-size="1024m"/>
-        <extension name="worldwindx" href="https://worldwind.arc.nasa.gov/java/2.1.0/webstart/worldwindx.jnlp"/>
+        <extension name="worldwindx" href="../webstart/worldwindx.jnlp"/>
     </resources>
 
     <!--
