@@ -45,9 +45,9 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     Combinable, Draggable
 {
     /** The default interior color. */
-    protected static final Material DEFAULT_INTERIOR_MATERIAL = Material.PINK;
+    protected static final Material DEFAULT_INTERIOR_MATERIAL = Material.LIGHT_GRAY;
     /** The default outline color. */
-    protected static final Material DEFAULT_OUTLINE_MATERIAL = Material.RED;
+    protected static final Material DEFAULT_OUTLINE_MATERIAL = Material.DARK_GRAY;
     /** The default highlight color. */
     protected static final Material DEFAULT_HIGHLIGHT_MATERIAL = Material.WHITE;
     /** The default path type. */
