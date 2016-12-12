@@ -605,30 +605,34 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
     @SuppressWarnings({"UnusedParameters"})
     protected void selectionEnded(MouseEvent mouseEvent)
     {
-        this.selectionRect.clearSelection();
-        this.getWwd().getSceneController().setPickRectangle(null);
-        this.getWwd().removeSelectListener(this); // Stop listening for changes the pick rectangle selection.
-        this.getWwd().redraw();
+        Rectangle rectangle = this.selectionRect.getSelection();
+        if (rectangle.width > 0 && rectangle.height > 0)
+        {
+            this.selectionRect.clearSelection();
+            this.getWwd().getSceneController().setPickRectangle(null);
+            this.getWwd().removeSelectListener(this); // Stop listening for changes the pick rectangle selection.
+            this.getWwd().redraw();
 
-        // Send a message indicating that the user has completed their selection. We don't clear the list of selected
-        // objects in order to preserve the list of selected objects for the caller.
-        this.sendMessage(new Message(SELECTION_ENDED, this));
-        
-        PickedObjectList list = new PickedObjectList();
-        for (Object selected : this.getSelectedObjects())
-        {
-            PickedObject pickedObject = new PickedObject(0, selected);
-            pickedObject.setOnTop();
-            list.add(pickedObject);
+            // Send a message indicating that the user has completed their selection. We don't clear the list of selected
+            // objects in order to preserve the list of selected objects for the caller.
+            this.sendMessage(new Message(SELECTION_ENDED, this));
+
+            PickedObjectList list = new PickedObjectList();
+            for (Object selected : this.getSelectedObjects())
+            {
+                PickedObject pickedObject = new PickedObject(0, selected);
+                pickedObject.setOnTop();
+                list.add(pickedObject);
+            }
+
+            String eventAction = SelectEvent.LEFT_CLICK;
+            if (mouseEvent.getButton() == MouseEvent.BUTTON2)
+            {
+                eventAction = SelectEvent.RIGHT_CLICK;
+            }
+
+            this.sendSelectEvent(new SelectEvent(this.getWwd(), eventAction, mouseEvent, list));
         }
-        
-        String eventAction = SelectEvent.LEFT_CLICK;
-        if (mouseEvent.getButton() == MouseEvent.BUTTON2)
-        {
-            eventAction = SelectEvent.RIGHT_CLICK;
-        }
-        
-        this.sendSelectEvent(new SelectEvent(this.getWwd(), eventAction, mouseEvent, list));
     }
 
     protected void selectionChanged(MouseEvent mouseEvent)
