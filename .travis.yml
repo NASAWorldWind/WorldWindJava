@@ -12,6 +12,9 @@ jdk:
   - oraclejdk8
 
 before_install:
+  # Decrypt and un-archive the files wwstore and keystore.properties which are used to sign the Web Start distribution
+  - openssl aes-256-cbc -K $encrypted_1799be77f389_key -iv $encrypted_1799be77f389_iv in keystore.tar.enc -out keystore.tar -d
+  - tar -xf keystore.tar
   # Install Apache ANT v1.9.7 in order to get the most ANT junit features required by the World Wind build script. As of
   # December 2016 the Travis CI environment provided ANT v1.8.x.
   - curl -o ${HOME}/apache-ant-1.9.7-bin.tar.gz https://www.apache.org/dist/ant/binaries/apache-ant-1.9.7-bin.tar.gz

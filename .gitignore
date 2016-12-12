@@ -10,6 +10,8 @@ testClasses
 
 keystore.properties
 
+keystore.tar
+
 worldwind.jar
 
 worldwindx.jar
