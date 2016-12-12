@@ -1,7 +1,7 @@
 #!/bin/bash
 # ======================================================================================================================
-# Updates the GitHub Pages website with the updated javadoc from the build. Clones the GitHub Pages to the local
-# filesystem, deletes the javadoc for the current build, copies the new javadoc, then commits and pushes the changes.
+# Updates the GitHub Pages website with updated build assets. Clones the GitHub Pages to the local filesystem, deletes
+# the assets for the current build, copies the new assets, then commits and pushes the changes.
 #
 # Uses Git to update tags in the repo. Git commands using authentication are redirected to /dev/null to prevent leaking
 # the access token into the log.
@@ -27,14 +27,16 @@ fi
 # expect.
 if [[ "${TRAVIS_TAG}" == "daily"* ]]; then # daily build associated with a tag in the format daily/YYYYMMDD
     FOLDER="daily"
+elif [[ -n $TRAVIS_TAG ]]; then # manually created tag; draft release
+    FOLDER="${TRAVIS_TAG}"
 elif [[ "${TRAVIS_BRANCH}" == "master" ]]; then # latest stable build from the master branch
     FOLDER="latest"
 else # all other build types; exit quietly without error
     exit 0
 fi
 
-# Emit a log message for the javadoc update
-echo "Updating JavaDoc at ${GH_PAGES_REPO}/assets/java/${FOLDER}/javadoc"
+# Emit a log message for the update
+echo "Updating assets to ${GH_PAGES_REPO}/assets/java/${FOLDER}"
 
 # Configure the user to be associated with commits to the GitHub pages
 git config --global user.email "travis@travis-ci.org"
@@ -45,14 +47,23 @@ GH_PAGES_DIR=${HOME}/gh_pages
 git clone --quiet --branch=master https://${GITHUB_API_KEY}@${GH_PAGES_REPO} $GH_PAGES_DIR > /dev/null
 cd $GH_PAGES_DIR
 
-# Remove existing javadocs from the repository
-git rm -rfq --ignore-unmatch ./assets/java/${FOLDER}/javadoc
+# Remove existing build assets from the repository, if any
+git rm -rfq --ignore-unmatch ./assets/java/${FOLDER}
 
 # Copy new javadocs to the repository
 mkdir -p ./assets/java/${FOLDER}/javadoc
 cp -Rf ${TRAVIS_BUILD_DIR}/build/doc/javadoc/* ./assets/java/${FOLDER}/javadoc
 
+# Copy new Web Start binaries to the repository
+mkdir -p ./assets/java/${FOLDER}/webstart
+cp -Rf ${TRAVIS_BUILD_DIR}/build/webstart/jar/* ./assets/java/${FOLDER}/webstart
+cp -Rf ${TRAVIS_BUILD_DIR}/build/webstart/jnlp/* ./assets/java/${FOLDER}/webstart
+
+# Copy new Web Start demos to the repository
+mkdir -p ./assets/java/${FOLDER}/demos
+cp -Rf ${TRAVIS_BUILD_DIR}/demos/* ./assets/java/${FOLDER}/demos
+
 # Commit and push the changes (quietly)
 git add -f .
-git commit -m "Updated javadoc from successful travis build $TRAVIS_BUILD_NUMBER in $TRAVIS_BRANCH"
+git commit -m "Updated assets from successful travis build $TRAVIS_BUILD_NUMBER in $TRAVIS_BRANCH"
 git push -fq origin master > /dev/null

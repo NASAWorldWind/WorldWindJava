@@ -28,11 +28,8 @@
         <delete file="${basedir}/worldwindx.jar"/>
     </target>
 
-    <target name="assemble" depends="assembleDebug, assembleRelease, assembleJavadoc"
-            description="Assembles JAR libraries for all build types and assembles the project documentation.">
-        <copy file="${worldwind.jar.dir}/worldwind-release.jar" tofile="${basedir}/worldwind.jar"/>
-        <copy file="${worldwind.jar.dir}/worldwindx-release.jar" tofile="${basedir}/worldwindx.jar"/>
-    </target>
+    <target name="assemble" depends="assembleDebug, assembleRelease, assembleJavadoc, assembleWebStart, assembleSdkArchive"
+            description="Assembles JAR libraries for all build types and assembles the project documentation."/>
 
     <!-- Targets for compiling Java sources and bundling JAR libraries. -->
 
@@ -76,6 +73,8 @@
         <mkdir dir="${worldwind.jar.dir}"/>
         <bundleJarFiles srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/release"
                         destdir="${worldwind.jar.dir}" type="release"/>
+        <copy file="${worldwind.jar.dir}/worldwind-release.jar" tofile="${basedir}/worldwind.jar"/>
+        <copy file="${worldwind.jar.dir}/worldwindx-release.jar" tofile="${basedir}/worldwindx.jar"/>
     </target>
 
     <!-- Targets for compiling and bundling the project documentation.  -->
@@ -114,63 +113,6 @@
                 <type type="file"/>
             </fileset>
         </zip>
-    </target>
-
-    <!-- Targets for testing the project sources. -->
-
-    <target name="test" depends="unitTest"
-            description="Runs all project tests. Exits with status code 1 if any test fails.">
-        <fail if="unitTest.failure" message="Unit tests FAILED" status="1"/>
-    </target>
-
-    <target name="unitTest" depends="assembleDebug, compileUnitTestSources, runUnitTest"/>
-
-    <target name="compileUnitTestSources">
-        <mkdir dir="${worldwind.classes.dir}/test"/>
-        <compileJava srcdir="${worldwind.test.dir}" classdir="${worldwind.classes.dir}/test" type="debug"
-                     jdk="${worldwind.jdk}">
-            <pathelements>
-                <pathelement location="${worldwind.jar.dir}/worldwind-debug.jar"/>
-                <pathelement location="${worldwind.jar.dir}/worldwindx-debug.jar"/>
-                <pathelement location="${basedir}/jogl-all.jar"/>
-                <pathelement location="${basedir}/gluegen-rt.jar"/>
-                <pathelement location="${basedir}/gdal.jar"/>
-                <pathelement location="${basedir}/junit-4.5.jar"/>
-            </pathelements>
-        </compileJava>
-    </target>
-
-    <target name="runUnitTest">
-        <delete dir="${worldwind.test.results.dir}"/>
-        <mkdir dir="${worldwind.test.results.dir}"/>
-        <junit failureproperty="unitTest.failure"
-               fork="on"
-               forkmode="once"
-               maxmemory="1024m">
-            <classpath>
-                <pathelement location="${worldwind.classes.dir}/test"/>
-                <pathelement location="${worldwind.jar.dir}/worldwind-debug.jar"/>
-                <pathelement location="${worldwind.jar.dir}/worldwindx-debug.jar"/>
-                <pathelement location="${basedir}/jogl-all.jar"/>
-                <pathelement location="${basedir}/gluegen-rt.jar"/>
-                <pathelement location="${basedir}/gdal.jar"/>
-                <pathelement location="${basedir}/junit-4.5.jar"/>
-            </classpath>
-            <batchtest todir="${worldwind.test.results.dir}"
-                       skipnontests="true">
-                <fileset dir="${worldwind.classes.dir}/test">
-                    <include name="**/*"/>
-                </fileset>
-            </batchtest>
-            <formatter type="brief" usefile="no"/>
-            <formatter type="xml" usefile="yes"/>
-        </junit>
-        <junitreport todir="${worldwind.test.results.dir}">
-            <fileset dir="${worldwind.test.results.dir}">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report todir="${worldwind.test.results.dir}" format="noframes"/>
-        </junitreport>
     </target>
 
     <!-- Tasks for assembling the project Web Start package. -->
@@ -342,6 +284,80 @@
 
     <target name="keystoreAvailable">
         <available property="keystore.isAvailable" file="${basedir}/keystore.properties"/>
+    </target>
+
+    <!-- Targets for assembling the project SDK archive. -->
+
+    <target name="assembleSdkArchive">
+        <zip destfile="${worldwind.build.dir}/worldwind.zip">
+            <fileset dir="${basedir}">
+                <include name="**/*"/>
+                <exclude name="build/**"/>
+                <exclude name="classes/**"/>
+                <exclude name="testClasses/**"/>
+                <exclude name="keystore.properties"/>
+                <exclude name="keystore.tar"/>
+                <exclude name="wwstore"/>
+                <type type="file"/>
+            </fileset>
+        </zip>
+    </target>
+
+    <!-- Targets for testing the project sources. -->
+
+    <target name="test" depends="unitTest"
+            description="Runs all project tests. Exits with status code 1 if any test fails.">
+        <fail if="unitTest.failure" message="Unit tests FAILED" status="1"/>
+    </target>
+
+    <target name="unitTest" depends="assembleDebug, compileUnitTestSources, runUnitTest"/>
+
+    <target name="compileUnitTestSources">
+        <mkdir dir="${worldwind.classes.dir}/test"/>
+        <compileJava srcdir="${worldwind.test.dir}" classdir="${worldwind.classes.dir}/test" type="debug"
+                     jdk="${worldwind.jdk}">
+            <pathelements>
+                <pathelement location="${worldwind.jar.dir}/worldwind-debug.jar"/>
+                <pathelement location="${worldwind.jar.dir}/worldwindx-debug.jar"/>
+                <pathelement location="${basedir}/jogl-all.jar"/>
+                <pathelement location="${basedir}/gluegen-rt.jar"/>
+                <pathelement location="${basedir}/gdal.jar"/>
+                <pathelement location="${basedir}/junit-4.5.jar"/>
+            </pathelements>
+        </compileJava>
+    </target>
+
+    <target name="runUnitTest">
+        <delete dir="${worldwind.test.results.dir}"/>
+        <mkdir dir="${worldwind.test.results.dir}"/>
+        <junit failureproperty="unitTest.failure"
+               fork="on"
+               forkmode="once"
+               maxmemory="1024m">
+            <classpath>
+                <pathelement location="${worldwind.classes.dir}/test"/>
+                <pathelement location="${worldwind.jar.dir}/worldwind-debug.jar"/>
+                <pathelement location="${worldwind.jar.dir}/worldwindx-debug.jar"/>
+                <pathelement location="${basedir}/jogl-all.jar"/>
+                <pathelement location="${basedir}/gluegen-rt.jar"/>
+                <pathelement location="${basedir}/gdal.jar"/>
+                <pathelement location="${basedir}/junit-4.5.jar"/>
+            </classpath>
+            <batchtest todir="${worldwind.test.results.dir}"
+                       skipnontests="true">
+                <fileset dir="${worldwind.classes.dir}/test">
+                    <include name="**/*"/>
+                </fileset>
+            </batchtest>
+            <formatter type="brief" usefile="no"/>
+            <formatter type="xml" usefile="yes"/>
+        </junit>
+        <junitreport todir="${worldwind.test.results.dir}">
+            <fileset dir="${worldwind.test.results.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report todir="${worldwind.test.results.dir}" format="noframes"/>
+        </junitreport>
     </target>
 
     <!-- Tasks for assembling the MIL-STD-2525 symbology package. Rasterizes MIL-STD-2525 SVG image files into PNG image

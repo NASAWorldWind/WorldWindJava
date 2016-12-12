@@ -43,10 +43,12 @@ fi
 # with the tag, thus the TRAVIS_BRANCH var reflects the tag name, not "master" or "develop" like you might expect.
 if [[ "${TRAVIS_TAG}" == "daily"* ]]; then # daily build associated with a tag in the format daily/YYYYMMDD
     RELEASE_NAME="Daily Build"
+    RELEASE_SUFFIX="daily"
     DRAFT="false"
     PRERELEASE="true"
 elif [[ -n $TRAVIS_TAG ]]; then # manually created tag; prepare a draft release
     RELEASE_NAME=$TRAVIS_TAG
+    RELEASE_SUFFIX=$TRAVIS_TAG
     DRAFT="true"
     PRERELEASE="false"
 else # build is not associated with a tag; exit quietly without error
@@ -120,10 +122,13 @@ fi
 # Release Artifacts
 # =================
 
+# Copy and rename build assets that are to be deployed.
+cp -f ${TRAVIS_BUILD_DIR}/builds/worldwind.zip ${TRAVIS_BUILD_DIR}/worldwind-${RELEASE_SUFFIX}.zip
+cp -f ${TRAVIS_BUILD_DIR}/builds/doc/worldwind-javadoc.zip ${TRAVIS_BUILD_DIR}/worldwind-javadoc-${RELEASE_SUFFIX}.zip
+cp -f ${TRAVIS_BUILD_DIR}/builds/webstart/worldwind-webstart.zip ${TRAVIS_BUILD_DIR}/worldwind-webstart-${RELEASE_SUFFIX}.zip
+
 # Define the file names that are to be deployed
-JAR_FILES=( build/worldwind-debug.jar build/worldwindx-debug.jar build/worldwind-release.jar build/worldwindx-release.jar )
-ZIP_FILES=( build/doc/worldwind-javadoc.zip )
-ALL_FILES=( "${JAR_FILES[@]}" "${ZIP_FILES[@]}" )
+ALL_FILES=( worldwind-${RELEASE_SUFFIX}.zip worldwind-javadoc-${RELEASE_SUFFIX}.zip worldwind-webstart-${RELEASE_SUFFIX}.zip )
 
 # Emit a log message for the updated release
 echo "Uploading release assets for ${RELEASE_NAME}"
@@ -144,19 +149,7 @@ do
     fi
 done
 
-# Upload the release artifacts
-for FILENAME in ${JAR_FILES[*]}
-do
-    echo "Posting ${FILENAME}"
-    curl --silent  \
-    --header "Authorization: token ${GITHUB_API_KEY}" \
-    --header "Content-Type: application/java-archive" \
-    --header "Accept: application/json" \
-    --data-binary @${TRAVIS_BUILD_DIR}/${FILENAME} \
-    --request POST ${UPLOADS_URL}/${RELEASE_ID}/assets?name=${FILENAME} > /dev/null
-done
-
-for FILENAME in ${ZIP_FILES[*]}
+for FILENAME in ${ALL_FILES[*]}
 do
     echo "Posting ${FILENAME}"
     curl --silent  \
