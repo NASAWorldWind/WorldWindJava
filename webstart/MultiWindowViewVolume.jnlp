@@ -34,7 +34,7 @@
     -->
     <resources>
         <java version="1.7+" max-heap-size="1024m"/>
-        <extension name="worldwindx" href="../webstart/worldwindx.jnlp"/>
+        <extension name="worldwindx" href="worldwindx.jnlp"/>
     </resources>
 
     <!--

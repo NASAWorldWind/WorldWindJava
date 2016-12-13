@@ -50,18 +50,14 @@ cd $GH_PAGES_DIR
 # Remove existing build assets from the repository, if any
 git rm -rfq --ignore-unmatch ./assets/java/${FOLDER}
 
-# Copy new javadocs to the repository
+# Copy new Javadocs to the repository
 mkdir -p ./assets/java/${FOLDER}/javadoc
 cp -Rf ${TRAVIS_BUILD_DIR}/build/doc/javadoc/* ./assets/java/${FOLDER}/javadoc
 
-# Copy new Web Start binaries to the repository
+# Copy new Web Start files to the repository
 mkdir -p ./assets/java/${FOLDER}/webstart
 cp -Rf ${TRAVIS_BUILD_DIR}/build/webstart/jar/* ./assets/java/${FOLDER}/webstart
 cp -Rf ${TRAVIS_BUILD_DIR}/build/webstart/jnlp/* ./assets/java/${FOLDER}/webstart
-
-# Copy new Web Start demos to the repository
-mkdir -p ./assets/java/${FOLDER}/demos
-cp -Rf ${TRAVIS_BUILD_DIR}/demos/* ./assets/java/${FOLDER}/demos
 
 # Commit and push the changes (quietly)
 git add -f .

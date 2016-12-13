@@ -11,7 +11,7 @@
         Provides a description of this World Wind demo application.
     -->
     <information>
-        <title>World Wind Line Builder</title>
+        <title>World Wind Video on Terrain</title>
         <vendor>NASA</vendor>
         <homepage href="https://worldwind.arc.nasa.gov"/>
         <offline-allowed/>
@@ -34,13 +34,13 @@
     -->
     <resources>
         <java version="1.7+" max-heap-size="1024m"/>
-        <extension name="worldwindx" href="../webstart/worldwindx.jnlp"/>
+        <extension name="worldwindx" href="worldwindx.jnlp"/>
     </resources>
 
     <!--
         Indicates that this Java Web Start file describes an application. The main-class element indicates the class
         who's main method is executed when this Web Start file launches.
     -->
-    <application-desc main-class="gov.nasa.worldwindx.examples.LineBuilder"/>
+    <application-desc main-class="gov.nasa.worldwindx.examples.VideoOnTerrain"/>
 
 </jnlp>

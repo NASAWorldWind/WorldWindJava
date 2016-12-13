@@ -11,7 +11,7 @@
         Provides a description of this World Wind demo application.
     -->
     <information>
-        <title>World Wind Surface Shapes</title>
+        <title>World Wind Analytic Surface</title>
         <vendor>NASA</vendor>
         <homepage href="https://worldwind.arc.nasa.gov"/>
         <offline-allowed/>
@@ -31,16 +31,19 @@
           requires at least 1024 MB of heap space. This heap size must be specified in the application's Web Start file.
         * World Wind extensions Java Web Start component. This downloads and adds the World Wind SDK extensions JAR file
           and its dependencies ot the class path at runtime.
+        * World Wind GDAL Java Web Start component. Adding this component enables World Wind's GDAL data import
+          capability.
     -->
     <resources>
         <java version="1.7+" max-heap-size="1024m"/>
-        <extension name="worldwindx" href="../webstart/worldwindx.jnlp"/>
+        <extension name="worldwindx" href="worldwindx.jnlp"/>
+        <extension name="gdal" href="gdal.jnlp"/>
     </resources>
 
     <!--
         Indicates that this Java Web Start file describes an application. The main-class element indicates the class
         who's main method is executed when this Web Start file launches.
     -->
-    <application-desc main-class="gov.nasa.worldwindx.examples.SurfaceShapes"/>
+    <application-desc main-class="gov.nasa.worldwindx.examples.analytics.AnalyticSurfaceDemo"/>
 
 </jnlp>

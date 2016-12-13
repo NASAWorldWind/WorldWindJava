@@ -118,7 +118,7 @@
     <!-- Tasks for assembling the project Web Start package. -->
 
     <target name="assembleWebStart"
-            depends="compileWebStartConfiguration, bundleWebStartLibraries, signWebStartSources, bundleWebStart"
+            depends="assembleRelease, compileWebStartConfiguration, bundleWebStartLibraries, signWebStartSources, bundleWebStart"
             description="Assembles the Java Web Start deployment package."/>
 
     <target name="compileWebStartConfiguration">
@@ -132,7 +132,7 @@
         </copy>
     </target>
 
-    <target name="bundleWebStartLibraries" depends="assembleRelease">
+    <target name="bundleWebStartLibraries">
         <mkdir dir="${webstart.unsigned.dir}"/>
         <!-- World Wind library JAR files. -->
         <copy file="${worldwind.jar.dir}/worldwind-release.jar" tofile="${webstart.unsigned.dir}/worldwind.jar"/>
@@ -288,7 +288,7 @@
 
     <!-- Targets for assembling the project SDK archive. -->
 
-    <target name="assembleSdkArchive">
+    <target name="assembleSdkArchive" depends="assembleRelease">
         <zip destfile="${worldwind.build.dir}/worldwind.zip">
             <fileset dir="${basedir}">
                 <include name="**/*"/>
@@ -365,10 +365,10 @@
          the SVG image's aspect ratio. PNG files are written to the destination directory according to their relative
          path in the source directory. -->
 
-    <target name="assembleMilStd2525" depends="compileMilStd2525, bundleMilStd2525"
+    <target name="assembleMilStd2525" depends="assembleRelease, compileMilStd2525, bundleMilStd2525"
             description="Assembles the MIL-STD-2525 symbology package."/>
 
-    <target name="compileMilStd2525" depends="assembleRelease">
+    <target name="compileMilStd2525">
         <mkdir dir="${milstd2525.png.dir}"/>
         <!-- Rasterize the MIL-STD-2525 SVG sources. Exclude empty directories in order to suppress erroneous error
              messages from the Apache Batik Rasterizer. -->
