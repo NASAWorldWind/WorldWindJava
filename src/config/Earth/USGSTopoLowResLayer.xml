@@ -7,7 +7,7 @@
 
 <!--$Id: USGSTopoLowResLayer.xml 1171 2013-02-11 21:45:02Z dcollins $-->
 <Layer version="1" layerType="TiledImageLayer">
-    <DisplayName>USGS Topographic Maps 1:250K</DisplayName>
+    <DisplayName>USGS Topo Scanned Maps 1:250K</DisplayName>
     <LastUpdate>25 06 2011 05:00:00 GMT</LastUpdate>
     <ActiveAltitudes max="50e6"/>
     <MapScale>250e3</MapScale>

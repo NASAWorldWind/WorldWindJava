@@ -7,8 +7,8 @@
   -->
 
 <Layer layerType="TiledImageLayer" version="1">
-    <DisplayName>USGS TNM Topo Large</DisplayName>
-    <DataCacheName>Earth\USGS TNM Topo Large</DataCacheName>
+    <DisplayName>USGS Topo Base Map Large Scale</DisplayName>
+    <DataCacheName>Earth\USGS Topo Base Map Large Scale</DataCacheName>
     <Service serviceName="OGC:WMS" version="1.3.0">
         <!--3: Elevation (Relief)-->
         <!--7: Area: Stream, Canal, Ocean and Miscellaneous Feature-->

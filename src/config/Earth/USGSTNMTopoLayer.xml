@@ -7,9 +7,9 @@
   -->
 
 <Layer layerType="TiledImageLayer" version="1">
-    <DisplayName>USGS TNM Topo</DisplayName>
+    <DisplayName>USGS Topo Base Map</DisplayName>
     <DatasetName>0</DatasetName>
-    <DataCacheName>Earth\USGS TNM Topo</DataCacheName>
+    <DataCacheName>Earth\USGS Topo Base Map</DataCacheName>
     <Service serviceName="OGC:WMS" version="1.3.0">
         <LayerNames>0</LayerNames>
         <StyleNames>default</StyleNames>
