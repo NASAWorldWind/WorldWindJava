@@ -47,13 +47,22 @@ builds have the newest, bleeding-edge World Wind Java features. Intended for dev
 - [World Wind Demo App](https://worldwind.arc.nasa.gov/java/latest/demos/ApplicationTemplate.jnlp) shows World Wind's basic capabilities
 - [Java Demos](http://goworldwind.org/demos) has a complete list of example apps
    
-###### From a Development Environment
+###### From a Windows Development Environment
 
 - Download and extract the [Latest Release](https://github.com/NASAWorldWind/WorldWindJava/releases/latest)
-- Launch the system terminal / command prompt
+- Open the Command Prompt
 ```bash
 cd [World Wind release]
-run-demo gov.nasa.worldwindx.examples.ApplicationTemplate
+run-demo.bat gov.nasa.worldwindx.examples.ApplicationTemplate
+```
+
+###### From a Linux or macOS Development Environment
+
+- Download and extract the [Latest Release](https://github.com/NASAWorldWind/WorldWindJava/releases/latest)
+- Open the Terminal app
+```bash
+cd [World Wind release]
+sh run-demo.bash gov.nasa.worldwindx.examples.ApplicationTemplate
 ```
 
 ###### Troubleshooting

@@ -11,4 +11,4 @@
 #
 
 echo Running $1
-java -Xmx1024m -Dsun.java2d.noddraw=true -classpath ./src:./classes:./worldwind.jar:./worldwindx.jar:./jogl-all.jar:./gluegen-rt.jar:./gdal.jar $*
+java -Xmx1024m -classpath ./worldwind.jar:./worldwindx.jar:./gdal.jar:./jogl-all.jar:./gluegen-rt.jar $*
