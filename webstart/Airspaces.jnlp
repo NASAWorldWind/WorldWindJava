@@ -5,7 +5,7 @@
   ~ All Rights Reserved.
   -->
 
-<jnlp spec="1.0+" codebase="">
+<jnlp spec="1.0+" codebase="" href="Airspaces.jnlp">
 
     <!--
         Provides a description of this World Wind demo application.

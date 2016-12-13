@@ -5,7 +5,7 @@
   ~ All Rights Reserved.
   -->
 
-<jnlp spec="1.0+" codebase="">
+<jnlp spec="1.0+" codebase="" href="SARApp.jnlp">
 
     <!--
         Provides a description of the World Wind Search and Rescue prototype application.

@@ -5,7 +5,7 @@
   ~ All Rights Reserved.
   -->
 
-<jnlp  spec="1.0+" codebase="" version="v2.1.5">
+<jnlp  spec="1.0+" codebase="" href="gluegen-rt.jnlp">
 
     <!--
         Provides a description of the GlueGen library.
