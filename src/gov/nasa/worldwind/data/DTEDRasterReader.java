@@ -46,7 +46,7 @@ public class DTEDRasterReader extends AbstractDataRasterReader
         // Assume that a proper suffix reliably identifies a DTED file. Otherwise the file will have to be loaded
         // to determine that, and there are often tens of thousands of DTED files, which causes raster server start-up
         // times to be excessive.
-        if (this.canReadSuffix(source))
+        if (this.canReadSuffix(source) && null != params)
         {
             if (null != params)
             {
