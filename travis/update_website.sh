@@ -59,6 +59,9 @@ mkdir -p ./assets/java/${FOLDER}/webstart
 cp -Rf ${TRAVIS_BUILD_DIR}/build/webstart/jar/* ./assets/java/${FOLDER}/webstart
 cp -Rf ${TRAVIS_BUILD_DIR}/build/webstart/jnlp/* ./assets/java/${FOLDER}/webstart
 
+# Replace the empty codebase attribute with the fully qualified Web Start path.
+sed -i -- "s codebase=\"\" codebase=\"https://worldwind.arc.nasa.gov/java/${FOLDER}/webstart/\" g" ./assets/java/${FOLDER}/webstart/*.jnlp
+
 # Commit and push the changes (quietly)
 git add -f .
 git commit -m "Updated assets from successful travis build $TRAVIS_BUILD_NUMBER in $TRAVIS_BRANCH"
