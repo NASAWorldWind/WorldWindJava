@@ -9,7 +9,7 @@ package gov.nasa.worldwind.util;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.terrain.*;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
@@ -18,6 +18,7 @@ import java.util.concurrent.*;
 
 import static org.junit.Assert.*;
 
+@Ignore
 @RunWith(JUnit4.class)
 public class HighResolutionTerrainTest
 {
