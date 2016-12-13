@@ -5,7 +5,7 @@
   ~ All Rights Reserved.
   -->
 
-<jnlp>
+<jnlp spec="1.0+" codebase="">
 
     <!--
         Provides a description of the World Wind Search and Rescue prototype application.

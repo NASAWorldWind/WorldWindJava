@@ -5,7 +5,7 @@
   ~ All Rights Reserved.
   -->
 
-<jnlp version="v2.1.0">
+<jnlp spec="1.0+" codebase="">
 
     <!--
         Provides a description of the World Wind SDK extensions library.
@@ -14,9 +14,6 @@
         <title>NASA World Wind Java Extensions</title>
         <vendor>NASA</vendor>
         <homepage href="https://worldwind.arc.nasa.gov"/>
-        <description>NASA World Wind Java Extensions</description>
-        <description kind="short">NASA World Wind Java Planetary Visualization SDK Extensions, v2.1.0
-        </description>
         <offline-allowed/>
     </information>
 

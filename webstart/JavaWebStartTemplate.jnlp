@@ -9,7 +9,7 @@
   ~ Example configuration file for a Java Web Start application that uses the World Wind Java SDK. Replace everything in
   ~ all caps below with your own information.
   -->
-<jnlp>
+<jnlp spec="1.0+" codebase="">
 
     <!--
         Provides a description of this application.
