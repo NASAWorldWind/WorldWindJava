@@ -104,6 +104,7 @@ public class KMLReferenceTest
         assertNotNull("Cannot resolve reference to file KMZ archive", o);
     }
 
+    @Ignore
     @Test
     public void testReferenceToRemoteKML()
     {
@@ -113,6 +114,7 @@ public class KMLReferenceTest
         assertTrue("Cannot resolve reference to remote KML file", o instanceof KMLRoot);
     }
 
+    @Ignore
     @Test
     public void testReferenceToRemoteKMZ()
     {
@@ -127,6 +129,7 @@ public class KMLReferenceTest
         assertTrue("Cannot resolve reference to remote KMZ file", o instanceof KMLRoot);
     }
 
+    @Ignore
     @Test
     public void testReferenceToRemoteElement()
     {
