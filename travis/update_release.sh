@@ -123,9 +123,9 @@ fi
 # =================
 
 # Copy and rename build assets that are to be deployed.
-cp -f ${TRAVIS_BUILD_DIR}/builds/worldwind.zip ${TRAVIS_BUILD_DIR}/worldwind-${RELEASE_SUFFIX}.zip
-cp -f ${TRAVIS_BUILD_DIR}/builds/doc/worldwind-javadoc.zip ${TRAVIS_BUILD_DIR}/worldwind-javadoc-${RELEASE_SUFFIX}.zip
-cp -f ${TRAVIS_BUILD_DIR}/builds/webstart/worldwind-webstart.zip ${TRAVIS_BUILD_DIR}/worldwind-webstart-${RELEASE_SUFFIX}.zip
+cp -f ${TRAVIS_BUILD_DIR}/build/worldwind.zip ${TRAVIS_BUILD_DIR}/worldwind-${RELEASE_SUFFIX}.zip
+cp -f ${TRAVIS_BUILD_DIR}/build/doc/worldwind-javadoc.zip ${TRAVIS_BUILD_DIR}/worldwind-javadoc-${RELEASE_SUFFIX}.zip
+cp -f ${TRAVIS_BUILD_DIR}/build/webstart/worldwind-webstart.zip ${TRAVIS_BUILD_DIR}/worldwind-webstart-${RELEASE_SUFFIX}.zip
 
 # Define the file names that are to be deployed
 ALL_FILES=( worldwind-${RELEASE_SUFFIX}.zip worldwind-javadoc-${RELEASE_SUFFIX}.zip worldwind-webstart-${RELEASE_SUFFIX}.zip )
