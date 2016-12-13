@@ -53,7 +53,7 @@ builds have the newest, bleeding-edge World Wind Java features. Intended for dev
 - Open the Command Prompt
 ```bash
 cd [World Wind release]
-run-demo.bat gov.nasa.worldwindx.examples.ApplicationTemplate
+run-demo.bat
 ```
 
 ###### From a Linux or macOS Development Environment
@@ -62,7 +62,7 @@ run-demo.bat gov.nasa.worldwindx.examples.ApplicationTemplate
 - Open the Terminal app
 ```bash
 cd [World Wind release]
-sh run-demo.bash gov.nasa.worldwindx.examples.ApplicationTemplate
+sh run-demo.bash
 ```
 
 ###### Troubleshooting
