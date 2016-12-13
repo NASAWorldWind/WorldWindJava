@@ -44,7 +44,7 @@ builds have the newest, bleeding-edge World Wind Java features. Intended for dev
    
 ###### From a Web Browser
    
-- [World Wind Demo App](https://worldwind.arc.nasa.gov/java/latest/demos/ApplicationTemplate.jnlp) shows World Wind's basic capabilities
+- [World Wind Demo App](https://worldwind.arc.nasa.gov/java/latest/webstart/ApplicationTemplate.jnlp) shows World Wind's basic capabilities
 - [Java Demos](http://goworldwind.org/demos) has a complete list of example apps
    
 ###### From a Windows Development Environment
