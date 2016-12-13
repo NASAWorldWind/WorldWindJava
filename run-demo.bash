@@ -19,5 +19,5 @@ fi
 #
 # Run a WorldWind Demo
 #
-echo Running $WWDEMO
-java -Xmx1024m -classpath "./worldwind.jar;./worldwindx.jar;./gdal.jar;./jogl-all.jar;./gluegen-rt.jar" $WWDEMO
+echo Running ${WWDEMO}
+java -Xmx1024m -classpath ./worldwind.jar:./worldwindx.jar:./gdal.jar:./jogl-all.jar:./gluegen-rt.jar ${WWDEMO}
