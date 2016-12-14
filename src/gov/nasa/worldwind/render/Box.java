@@ -13,7 +13,7 @@ import gov.nasa.worldwind.render.airspaces.Geometry;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.stream.*;
 import java.io.IOException;
 import java.nio.*;

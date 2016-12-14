@@ -16,7 +16,7 @@ import gov.nasa.worldwind.util.*;
 import org.w3c.dom.*;
 
 import javax.imageio.ImageIO;
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.xpath.XPath;
 import java.awt.image.*;
 import java.io.*;

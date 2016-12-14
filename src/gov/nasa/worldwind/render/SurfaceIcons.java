@@ -9,7 +9,7 @@ import com.jogamp.opengl.util.texture.TextureCoords;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.util.SurfaceTileDrawContext;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.geom.*;
 import java.util.*;
 

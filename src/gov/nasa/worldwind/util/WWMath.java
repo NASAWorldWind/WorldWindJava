@@ -1257,9 +1257,9 @@ public class WWMath
     /**
      * Computes an index buffer in the system native byte order that tessellates the interior of a vertex grid as a
      * triangle strip. The returned buffer may be used as the source <code>buffer</code> in a call to {@link
-     * javax.media.opengl.GL2#glDrawElements(int, int, int, java.nio.Buffer)}, where <code>mode</code> is {@link
-     * javax.media.opengl.GL#GL_TRIANGLE_STRIP}, <code>count</code> is the number of elements remaining in the buffer,
-     * and <code>type</code> is {@link javax.media.opengl.GL#GL_UNSIGNED_INT}.
+     * com.jogamp.opengl.GL2#glDrawElements(int, int, int, java.nio.Buffer)}, where <code>mode</code> is {@link
+     * com.jogamp.opengl.GL#GL_TRIANGLE_STRIP}, <code>count</code> is the number of elements remaining in the buffer,
+     * and <code>type</code> is {@link com.jogamp.opengl.GL#GL_UNSIGNED_INT}.
      * <p/>
      * For details the drawing OpenGL primitives, see <a href="http://www.glprogramming.com/red/chapter02.html#name14">http://www.glprogramming.com/red/chapter02.html#name14</a>.
      *
@@ -1313,9 +1313,9 @@ public class WWMath
     /**
      * Computes an index buffer in the system native byte order that tessellates the outline of a vertex grid as a line
      * strip. The returned buffer may be used as the source <code>buffer</code> in a call to {@link
-     * javax.media.opengl.GL2#glDrawElements(int, int, int, java.nio.Buffer)}, where <code>mode</code> is {@link
-     * javax.media.opengl.GL#GL_LINE_STRIP}, <code>count</code> is the number of elements remaining in the buffer, and
-     * <code>type</code> is {@link javax.media.opengl.GL#GL_UNSIGNED_INT}.
+     * com.jogamp.opengl.GL2#glDrawElements(int, int, int, java.nio.Buffer)}, where <code>mode</code> is {@link
+     * com.jogamp.opengl.GL#GL_LINE_STRIP}, <code>count</code> is the number of elements remaining in the buffer, and
+     * <code>type</code> is {@link com.jogamp.opengl.GL#GL_UNSIGNED_INT}.
      * <p/>
      * For details the drawing OpenGL primitives, see <a href="http://www.glprogramming.com/red/chapter02.html#name14">http://www.glprogramming.com/red/chapter02.html#name14</a>.
      *

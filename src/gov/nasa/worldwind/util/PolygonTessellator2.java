@@ -6,7 +6,7 @@
 
 package gov.nasa.worldwind.util;
 
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.glu.*;
 import java.nio.*;
 
 /**

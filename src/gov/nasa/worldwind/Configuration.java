@@ -11,7 +11,7 @@ import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.util.*;
 import org.w3c.dom.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.xpath.*;
 import java.io.*;
 import java.util.*;
@@ -659,7 +659,7 @@ public class Configuration // Singleton
     }
 
     /**
-     * Returns a {@link javax.media.opengl.GLCapabilities} identifying graphics features required by World Wind. The
+     * Returns a {@link com.jogamp.opengl.GLCapabilities} identifying graphics features required by World Wind. The
      * capabilities instance returned requests the maximum OpenGL profile supporting GL fixed function operations, a
      * frame buffer with 8 bits each of red, green, blue and alpha, a 24-bit depth buffer, double buffering, and if the
      * Java property "gov.nasa.worldwind.stereo.mode" is set to "device", device supported stereo.

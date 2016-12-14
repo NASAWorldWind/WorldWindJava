@@ -9,7 +9,7 @@ import gov.nasa.worldwind.geom.Sector;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.glu.*;
 import java.util.*;
 
 /**

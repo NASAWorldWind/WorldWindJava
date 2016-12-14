@@ -19,7 +19,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.stream.*;
 import java.awt.*;
 import java.io.*;

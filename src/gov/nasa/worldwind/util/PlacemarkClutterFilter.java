@@ -11,7 +11,7 @@ import gov.nasa.worldwind.geom.Vec4;
 import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.*;

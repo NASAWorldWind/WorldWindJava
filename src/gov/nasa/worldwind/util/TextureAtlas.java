@@ -12,7 +12,7 @@ import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.render.DrawContext;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.awt.*;
 import java.awt.image.*;
 import java.util.*;

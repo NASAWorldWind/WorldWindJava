@@ -14,8 +14,8 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.pick.PickedObjectList;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.awt.GLCanvas;
 import java.awt.*;
 import java.beans.*;
 import java.util.*;
@@ -88,8 +88,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      *
      * @param shareWith a <code>WorldWindow</code> with which to share graphics resources.
      *
-     * @see GLCanvas#GLCanvas(javax.media.opengl.GLCapabilitiesImmutable, javax.media.opengl.GLCapabilitiesChooser,
-     *      javax.media.opengl.GLContext, java.awt.GraphicsDevice)
+     * @see GLCanvas#GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
+     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)
      */
     public WorldWindowGLCanvas(WorldWindow shareWith)
     {
@@ -128,8 +128,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      * @param device    the <code>GraphicsDevice</code> on which to create the window. May be null, in which case the
      *                  default screen device of the local {@link GraphicsEnvironment} is used.
      *
-     * @see GLCanvas#GLCanvas(javax.media.opengl.GLCapabilitiesImmutable, javax.media.opengl.GLCapabilitiesChooser,
-     *      javax.media.opengl.GLContext, java.awt.GraphicsDevice)
+     * @see GLCanvas#GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
+     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)
      */
     public WorldWindowGLCanvas(WorldWindow shareWith, java.awt.GraphicsDevice device)
     {
@@ -172,8 +172,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      * @param chooser      a chooser object that customizes the specified capabilities. May be null, in which case a
      *                     default chooser is used.
      *
-     * @see GLCanvas#GLCanvas(javax.media.opengl.GLCapabilitiesImmutable, javax.media.opengl.GLCapabilitiesChooser,
-     *      javax.media.opengl.GLContext, java.awt.GraphicsDevice)
+     * @see GLCanvas#GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
+     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)
      */
     public WorldWindowGLCanvas(WorldWindow shareWith, java.awt.GraphicsDevice device,
         GLCapabilities capabilities, GLCapabilitiesChooser chooser)
