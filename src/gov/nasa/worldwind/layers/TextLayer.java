@@ -5,7 +5,7 @@
  */
 package gov.nasa.worldwind.layers;
 
-import gov.nasa.worldwind.render.BasicGeographicTextRenderer;
+import gov.nasa.worldwind.render.DeclutteringTextRenderer;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.render.GeographicText;
 import gov.nasa.worldwind.render.GeographicTextRenderer;
@@ -27,7 +27,7 @@ public class TextLayer extends AbstractLayer
 
     public TextLayer()
     {
-        this.textRenderer = new BasicGeographicTextRenderer();
+        this.textRenderer = new DeclutteringTextRenderer();
         this.geographicTexts = new ConcurrentLinkedQueue<GeographicText>();
     }
     
