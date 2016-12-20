@@ -40,7 +40,7 @@ public class VPFLayer extends AbstractLayer
     protected ArrayList<Renderable> renderableObjects = new ArrayList<Renderable>();
 
     // Renderers
-    protected GeographicTextRenderer textRenderer = new GeographicTextRenderer();
+    protected BasicGeographicTextRenderer textRenderer = new BasicGeographicTextRenderer();
     protected VPFSymbolSupport symbolSupport = new VPFSymbolSupport(GeoSymConstants.GEOSYM, "image/png");
 
     // Threaded requests

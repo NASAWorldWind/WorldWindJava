@@ -6,6 +6,7 @@
 
 package gov.nasa.worldwind.render;
 
+import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe2D;
 import gov.nasa.worldwind.terrain.SectorGeometryList;
@@ -20,18 +21,20 @@ import java.io.IOException;
 import java.util.Iterator;
 
 /**
- * A simplified version of {@link GeographicTextRenderer} that participates in globe text decluttering. See {@link
- * ClutterFilter} for more information on decluttering.
+ * A simplified version of {@link BasicGeographicTextRenderer} that participates in globe text decluttering.
+ * See {@link ClutterFilter} for more information on decluttering.
  *
  * @author tag
  * @version $Id: DeclutteringTextRenderer.java 2392 2014-10-20 20:02:44Z tgaskins $
  */
-public class DeclutteringTextRenderer
+public class DeclutteringTextRenderer implements GeographicTextRenderer
 {
     protected static final Font DEFAULT_FONT = Font.decode("Arial-PLAIN-12");
     protected static final Color DEFAULT_COLOR = Color.white;
 
     protected final GLU glu = new GLUgl2();
+    
+    private String effect = AVKey.TEXT_EFFECT_SHADOW;
 
     // Flag indicating a JOGL text rendering problem. Set to avoid continual exception logging.
     protected boolean hasJOGLv111Bug = false;
@@ -39,6 +42,35 @@ public class DeclutteringTextRenderer
     public Font getDefaultFont()
     {
         return DEFAULT_FONT;
+    }
+    
+    /**
+     * Get the effect used to decorate the text. Can be one of {@link AVKey#TEXT_EFFECT_SHADOW} (default), {@link
+     * AVKey#TEXT_EFFECT_OUTLINE} or {@link AVKey#TEXT_EFFECT_NONE}.
+     *
+     * @return the effect used for text rendering.
+     */
+    public String getEffect()
+    {
+        return this.effect;
+    }
+
+    /**
+     * Set the effect used to decorate the text. Can be one of {@link AVKey#TEXT_EFFECT_SHADOW} (default), {@link
+     * AVKey#TEXT_EFFECT_OUTLINE} or {@link AVKey#TEXT_EFFECT_NONE}.
+     *
+     * @param effect the effect to use for text rendering.
+     */
+    public void setEffect(String effect)
+    {
+        if (effect == null)
+        {
+            String msg = Logging.getMessage("nullValue.StringIsNull");
+            Logging.logger().fine(msg);
+            throw new IllegalArgumentException(msg);
+        }
+
+        this.effect = effect;
     }
 
     /**
@@ -245,17 +277,31 @@ public class DeclutteringTextRenderer
                 if (color == null)
                     color = DEFAULT_COLOR;
                 color = this.applyOpacity(color, opacity);
+                
+                Offset offset = geographicText.getOffset();
+                float xOffset = offset.getX().floatValue();
+                float yOffset = offset.getY().floatValue();
 
                 Color background = geographicText.getBackgroundColor();
                 if (background != null)
                 {
                     background = this.applyOpacity(background, opacity);
                     textRenderer.setColor(background);
-                    textRenderer.draw3D(charSequence, drawPoint.x + 1, drawPoint.y - 1, 0, 1);
+                    if (this.effect.equals(AVKey.TEXT_EFFECT_SHADOW))
+                    {
+                        textRenderer.draw3D(charSequence, drawPoint.x + xOffset + 1, drawPoint.y + yOffset - 1, 0, 1);
+                    }
+                    else if (this.effect.equals(AVKey.TEXT_EFFECT_OUTLINE))
+                    {
+                        textRenderer.draw3D(charSequence, drawPoint.x + xOffset + 1, drawPoint.y + yOffset - 1, 0, 1);
+                        textRenderer.draw3D(charSequence, drawPoint.x + xOffset + 1, drawPoint.y + yOffset + 1, 0, 1);
+                        textRenderer.draw3D(charSequence, drawPoint.x + xOffset - 1, drawPoint.y + yOffset - 1, 0, 1);
+                        textRenderer.draw3D(charSequence, drawPoint.x + xOffset - 1, drawPoint.y + yOffset + 1, 0, 1);
+                    }
                 }
 
                 textRenderer.setColor(color);
-                textRenderer.draw3D(charSequence, drawPoint.x, drawPoint.y, 0, 1);
+                textRenderer.draw3D(charSequence, drawPoint.x + xOffset, drawPoint.y + yOffset, 0, 1);
                 textRenderer.flush();
 
                 if (scale != 1d)
@@ -356,8 +402,9 @@ public class DeclutteringTextRenderer
 
             Rectangle2D textBound = textRenderer.getBounds(charSequence);
             double x = screenPoint.x - textBound.getWidth() / 2d;
+            Offset offset = geographicText.getOffset();
             Rectangle2D bounds = new Rectangle2D.Float();
-            bounds.setRect(x, screenPoint.y, textBound.getWidth(), textBound.getHeight());
+            bounds.setRect(x + offset.x, screenPoint.y + offset.y, textBound.getWidth(), textBound.getHeight());
 
             return bounds;
         }

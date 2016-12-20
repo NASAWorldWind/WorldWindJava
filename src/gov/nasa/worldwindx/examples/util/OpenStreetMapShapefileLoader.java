@@ -239,7 +239,7 @@ public class OpenStreetMapShapefileLoader
     protected static class TextAndShapesLayer extends RenderableLayer
     {
         protected ArrayList<GeographicText> labels = new ArrayList<GeographicText>();
-        protected GeographicTextRenderer textRenderer = new GeographicTextRenderer();
+        protected BasicGeographicTextRenderer textRenderer = new BasicGeographicTextRenderer();
 
         public TextAndShapesLayer()
         {
