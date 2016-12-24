@@ -10,7 +10,7 @@ import gov.nasa.worldwind.symbology.TacticalGraphic;
 
 /**
  * Interface to describe tactical graphics defined by <a href="http://www.assistdocs.com/search/document_details.cfm?ident_number=114934">MIL-STD-2525</a>.
- * See the TacticalGraphic <a title="Tactical Graphic Usage Guide" href="http://goworldwind.org/developers-guide/symbology/tactical-graphics/"
+ * See the TacticalGraphic <a title="Tactical Graphic Usage Guide" href="https://goworldwind.org/developers-guide/symbology/tactical-graphics/"
  * target="_blank">Usage Guide</a> for instructions on using TacticalGraphic in an application.
  * <p/>
  * The following table lists the modifiers supported by 2525 graphics. Note that not all graphics support all modifiers.

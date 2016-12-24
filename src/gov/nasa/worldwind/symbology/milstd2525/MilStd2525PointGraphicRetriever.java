@@ -17,7 +17,7 @@ import java.util.MissingResourceException;
 
 /**
  * Retriever to fetch icons for MIL-STD-2525C point graphics. The retriever can fetch images from either local or remote
- * locations. See <a href="http://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use">Offline
+ * locations. See <a href="https://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use">Offline
  * Use</a> for information on how to set the icon retrieval location.
  * <p/>
  * The retriever base URL must identify a location on a local or remote file system (including zip and jar files) that

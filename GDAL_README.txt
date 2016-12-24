@@ -46,4 +46,4 @@ Deploying with Java Web Start
 ------------------------------------------------------------
 
 Instructions for using the World Wind GDAL libraries with a Java Web Start application are available at
-http://goworldwind.org/getting-started/
+https://goworldwind.org/getting-started/

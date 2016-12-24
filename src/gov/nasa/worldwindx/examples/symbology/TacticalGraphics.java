@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * Demonstrates how to create and display World Wind tactical graphics. See the <a title="Symbology Usage Guide"
- * href="http://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology Usage Guide</a> for more
+ * href="https://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology Usage Guide</a> for more
  * information on symbology support in World Wind.
  * <p/>
  * See the {@link TacticalSymbols} for a detailed example of using World Wind tactical symbols in an application.

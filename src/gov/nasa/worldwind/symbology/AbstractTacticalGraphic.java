@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * Base class for tactical graphics. See the TacticalGraphic <a title="Tactical Graphic Usage Guide"
- * href="http://goworldwind.org/developers-guide/symbology/tactical-graphics/" target="_blank">Usage Guide</a> for
+ * href="https://goworldwind.org/developers-guide/symbology/tactical-graphics/" target="_blank">Usage Guide</a> for
  * instructions on using TacticalGraphic in an application. This base class provides functionality for creating and
  * rendering a graphic that is made up of one or more shapes, and text labels.
  * <p/>

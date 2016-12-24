@@ -13,7 +13,7 @@ import java.awt.image.*;
 /**
  * Retrieves icons for symbols in a symbol set from a local disk or the network. Typically, an icon retriever will be
  * implemented for a specific symbol set. For example, the {@link gov.nasa.worldwind.symbology.milstd2525.MilStd2525IconRetriever}
- * retrieves icons for symbols in the MIL-STD-2525 symbology set. See the <a href="http://goworldwind.org/developers-guide/symbology/iconretriever/"
+ * retrieves icons for symbols in the MIL-STD-2525 symbology set. See the <a href="https://goworldwind.org/developers-guide/symbology/iconretriever/"
  * target="_blank">Icon Retriever Usage Guide</a> for more information.
  *
  * @author ccrick

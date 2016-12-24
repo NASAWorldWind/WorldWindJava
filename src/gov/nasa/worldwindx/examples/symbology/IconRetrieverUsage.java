@@ -18,7 +18,7 @@ import java.awt.image.*;
 /**
  * Example of using {@link IconRetriever} to retrieve the icon for a MIL-STD-2525C symbol. This example retrieves
  * several symbology icons as BufferedImages and displays them in a JFrame. See the <a
- * href="http://goworldwind.org/developers-guide/symbology/iconretriever/" target="_blank">Icon Retriever Usage
+ * href="https://goworldwind.org/developers-guide/symbology/iconretriever/" target="_blank">Icon Retriever Usage
  * Guide</a> for more information on using IconRetriever.
  *
  * @author pabercrombie

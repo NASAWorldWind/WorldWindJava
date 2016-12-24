@@ -16,7 +16,7 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * TacticalGraphic provides a common interface for displaying a graphic from a symbology set. A graphic can be an icon
  * that is drawn a geographic position, a vector graphic that is positioned using one or more control points, or a line
  * or polygon that is styled according to the symbol set's specification. See the TacticalGraphic <a title="Tactical
- * Graphic Usage Guide" href="http://goworldwind.org/developers-guide/symbology/tactical-graphics/"
+ * Graphic Usage Guide" href="https://goworldwind.org/developers-guide/symbology/tactical-graphics/"
  * target="_blank">Usage Guide</a> for instructions on using TacticalGraphic in an application.
  * <p/>
  * See the {@link gov.nasa.worldwindx.examples.symbology.Symbology} and {@link gov.nasa.worldwindx.examples.symbology.TacticalGraphics}

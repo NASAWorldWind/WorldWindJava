@@ -14,7 +14,7 @@ import gov.nasa.worldwind.util.UnitsFormat;
 /**
  * TacticalSymbol provides a common interface for displaying tactical point symbols from symbology sets. A tactical
  * symbol displays graphic and textual information about an object at a single geographic position at a particular point
- * in time. See the <a title="Tactical Symbol Usage Guide" href="http://goworldwind.org/developers-guide/symbology/tactical-symbols/"
+ * in time. See the <a title="Tactical Symbol Usage Guide" href="https://goworldwind.org/developers-guide/symbology/tactical-symbols/"
  * target="_blank">Tactical Symbol Usage Guide</a> for instructions on using TacticalSymbol in an application.
  * <p/>
  * <h2>Construction</h2> Implementations of this interface provide support for symbols belonging to a specific symbology

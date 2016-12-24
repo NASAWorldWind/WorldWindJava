@@ -17,7 +17,7 @@ import java.util.*;
 
 /**
  * Retriever to retrieve icons for symbols in the MIL-STD-2525 symbol set. The retriever can retrieve icons from either
- * a local or remote symbol store. See the <a href="http://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use">Symbology
+ * a local or remote symbol store. See the <a href="https://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use">Symbology
  * Usage Guide</a> for details on how to configure a local symbol repository. For more information on how to use this
  * class see the IconRetriever Usage Guide and the {@link gov.nasa.worldwindx.examples.symbology.IconRetrieverUsage}
  * example.

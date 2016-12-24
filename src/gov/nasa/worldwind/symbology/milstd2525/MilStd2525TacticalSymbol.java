@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Implementation of {@link gov.nasa.worldwind.symbology.TacticalSymbol} that provides support for tactical symbols from
  * the <a href="http://www.assistdocs.com/search/document_details.cfm?ident_number=114934">MIL-STD-2525</a> symbology
- * set. See the <a title="Tactical Symbol Usage Guide" href="http://goworldwind.org/developers-guide/symbology/tactical-symbols/"
+ * set. See the <a title="Tactical Symbol Usage Guide" href="https://goworldwind.org/developers-guide/symbology/tactical-symbols/"
  * target="_blank">Tactical Symbol Usage Guide</a> for instructions on using TacticalSymbol in an application.
  *
  * @author dcollins

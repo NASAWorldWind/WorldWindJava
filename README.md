@@ -12,15 +12,15 @@ geometric objects. More information at [worldwind.arc.nasa.gov](https://worldwin
 
 ## Get Started
 
-Develop a world-class World Wind application for personal computers. Setup instructions, developers guides,
-API documentation and more are available at [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov). This GitHub
-repository contains the library source, examples and tutorials.
+Develop a world-class World Wind application for personal computers. Setup instructions, developers guides, API 
+documentation and more are available at [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov). This GitHub repository 
+contains the library source, examples and tutorials.
 
 - [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov) has all things World Wind in one place
 - [World Wind Forum](http://forum.worldwindcentral.com) provides help from the World Wind community
 - [GitHub Issues](https://github.com/NASAWorldWind/WorldWindJava/issues) provides requirements and issue tracking
 - [Travis CI](https://travis-ci.org/NASAWorldWind/WorldWindJava) provides continuous integration and build automation
-- [IntelliJ IDEA](https://www.jetbrains.com/idea/) is used by the NASA World Wind development team
+- [IntelliJ IDEA](https://www.jetbrains.com/idea) is used by the NASA World Wind development team
 
 ## Releases and Roadmap
 
@@ -45,7 +45,7 @@ builds have the newest, bleeding-edge World Wind Java features. Intended for dev
 ###### From a Web Browser
    
 - [World Wind Demo App](https://worldwind.arc.nasa.gov/java/latest/webstart/ApplicationTemplate.jnlp) shows World Wind's basic capabilities
-- [Java Demos](http://goworldwind.org/demos) has a complete list of example apps
+- [Java Demos](https://goworldwind.org/demos) has a complete list of example apps
    
 ###### From a Windows Development Environment
 
