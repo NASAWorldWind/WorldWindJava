@@ -804,7 +804,7 @@ public class LatLonTest
     @Test
     public void testEllipsoidalDistance_Antipodal()
     {
-        // See http://forum.worldwindcentral.com/showthread.php?45479-Potential-bug-in-ellipsoidalDistance
+        // See https://forum.worldwindcentral.com/showthread.php?45479-Potential-bug-in-ellipsoidalDistance
         LatLon begin = LatLon.fromDegrees(-12.720360910785889, 57.91244852568739);
         LatLon end = LatLon.fromDegrees(12.186856600402097, -121.90490684689753);
         double distance = LatLon.ellipsoidalDistance(begin, end, globe.getEquatorialRadius(),
