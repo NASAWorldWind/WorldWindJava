@@ -6,9 +6,11 @@
 
 package gov.nasa.worldwind.geom;
 
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -17,6 +19,18 @@ public class MatrixTest
 {
     private static final double EQUALITY_TOLERANCE = 1.0e-9;
     private static final double NEAR_SINGULAR_EQUALITY_TOLERANCE = 1.0e-6;
+    private static final long RANDOM_SEED = 6124946250748012048L;
+
+    private Random random;
+
+    @Before
+    public void setUp() throws Exception
+    {
+        // Use a random initialized with a constant seed to ensure that subsequent test executes get the same
+        // pseudorandom values. Using Math.random may results in tests failing unpredictably, and prevents debugging
+        // since the random seed is not known.
+        random = new Random(RANDOM_SEED);
+    }
 
     //**************************************************************//
     //********************  Test Matrix Inversion  *****************//
@@ -40,10 +54,10 @@ public class MatrixTest
     public void testInverseOfRandom()
     {
         Matrix m = new Matrix(
-            Math.random(), Math.random(), Math.random(), Math.random(),
-            Math.random(), Math.random(), Math.random(), Math.random(),
-            Math.random(), Math.random(), Math.random(), Math.random(),
-            Math.random(), Math.random(), Math.random(), Math.random());
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble(),
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble(),
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble(),
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble());
 
         Matrix mInv = m.getInverse();
         assertNotNull("Matrix inverse is null", mInv);
@@ -56,9 +70,12 @@ public class MatrixTest
     public void testInverseOfSingular()
     {
         // Create a singular matrix, where the fourth row is a linear combination of first three.
-        double m11 = Math.random(), m12 = Math.random(), m13 = Math.random(), m14 = Math.random();
-        double m21 = Math.random(), m22 = Math.random(), m23 = Math.random(), m24 = Math.random();
-        double m31 = Math.random(), m32 = Math.random(), m33 = Math.random(), m34 = Math.random();
+        double m11 = random.nextDouble(), m12 = random.nextDouble(), m13 = random.nextDouble(), m14
+            = random.nextDouble();
+        double m21 = random.nextDouble(), m22 = random.nextDouble(), m23 = random.nextDouble(), m24
+            = random.nextDouble();
+        double m31 = random.nextDouble(), m32 = random.nextDouble(), m33 = random.nextDouble(), m34
+            = random.nextDouble();
         double f1 = 1.4, f2 = -4.02, f3 = 0.3;
         double m41 = f1 * m11 + f2 * m21 + f3 * m31;
         double m42 = f1 * m12 + f2 * m22 + f3 * m32;
@@ -79,10 +96,10 @@ public class MatrixTest
     public void testInverseOfZeroRow()
     {
         Matrix m = new Matrix(
-            Math.random(), Math.random(), Math.random(), Math.random(),
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble(),
             0, 0, 0, 0,
-            Math.random(), Math.random(), Math.random(), Math.random(),
-            Math.random(), Math.random(), Math.random(), Math.random());
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble(),
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble());
 
         Matrix mInv = m.getInverse();
         assertNull("Singular matrix should not have an inverse", mInv);
@@ -92,9 +109,12 @@ public class MatrixTest
     public void testInverseOfNearSingular()
     {
         // Create a singular matrix, where the fourth row is a linear combination of first three.
-        double m11 = Math.random(), m12 = Math.random(), m13 = Math.random(), m14 = Math.random();
-        double m21 = Math.random(), m22 = Math.random(), m23 = Math.random(), m24 = Math.random();
-        double m31 = Math.random(), m32 = Math.random(), m33 = Math.random(), m34 = Math.random();
+        double m11 = random.nextDouble(), m12 = random.nextDouble(), m13 = random.nextDouble(), m14
+            = random.nextDouble();
+        double m21 = random.nextDouble(), m22 = random.nextDouble(), m23 = random.nextDouble(), m24
+            = random.nextDouble();
+        double m31 = random.nextDouble(), m32 = random.nextDouble(), m33 = random.nextDouble(), m34
+            = random.nextDouble();
         double f1 = 1.4, f2 = -4.02, f3 = 0.3;
         double m41 = f1 * m11 + f2 * m21 + f3 * m31;
         double m42 = f1 * m12 + f2 * m22 + f3 * m32;
