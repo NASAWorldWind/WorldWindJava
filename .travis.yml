@@ -18,7 +18,7 @@ before_install:
   - tar -xf keystore.tar
   # Install Apache ANT v1.9.7 in order to get the most ANT junit features required by the World Wind build script. As of
   # December 2016 the Travis CI environment provided ANT v1.8.x.
-  - curl -o ${HOME}/apache-ant-1.9.7-bin.tar.gz https://www.apache.org/dist/ant/binaries/apache-ant-1.9.7-bin.tar.gz
+  - curl -o ${HOME}/apache-ant-1.9.7-bin.tar.gz https://mirrors.ocf.berkeley.edu/apache/ant/binaries/apache-ant-1.9.8-bin.tar.gz
   - tar -xf ${HOME}/apache-ant-1.9.7-bin.tar.gz -C ${HOME}
   - export PATH=${HOME}/apache-ant-1.9.7/bin:${PATH}
 
