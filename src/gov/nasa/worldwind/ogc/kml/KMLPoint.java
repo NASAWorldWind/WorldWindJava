@@ -62,6 +62,11 @@ public class KMLPoint extends KMLAbstractGeometry
     {
         return this.coordinates;
     }
+    
+    public void setCoordinates(Position coordinates)
+    {
+		this.coordinates = coordinates;
+    }
 
     protected void setCoordinates(Position.PositionList coordsList)
     {
