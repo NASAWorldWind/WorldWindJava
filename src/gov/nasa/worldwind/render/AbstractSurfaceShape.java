@@ -603,12 +603,6 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     protected abstract void doMoveTo(Position oldReferencePosition, Position newReferencePosition);
     protected abstract void doMoveTo(Globe globe, Position oldReferencePosition, Position newReferencePosition);
 
-    protected void onShapeChanged()
-    {
-        this.updateModifiedTime();
-        this.clearCaches();
-    }
-
     /**
      * {@inheritDoc}
      * <p/>

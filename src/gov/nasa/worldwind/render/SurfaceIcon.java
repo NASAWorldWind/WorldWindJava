@@ -81,7 +81,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         }
 
         this.location = location;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -112,7 +112,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     public void setLocationOffset(Vec4 locationOffset)
     {
         this.locationOffset = locationOffset; // can be null
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -145,7 +145,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
 
         this.imageSource = imageSource;
         this.texture = null;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -172,7 +172,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     {
         this.useMipMaps = useMipMaps;
         this.texture = null;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -202,7 +202,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
             throw new IllegalArgumentException(message);
         }
         this.scale = scale;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -224,7 +224,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     public void setHeading(Angle heading)
     {
         this.heading = heading;  // can be null
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -281,7 +281,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     public void setMinSize(double sizeInMeter)
     {
         this.minSize = sizeInMeter;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -312,7 +312,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     public void setMaxSize(double sizeInMeter)
     {
         this.maxSize = sizeInMeter;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -344,7 +344,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
             throw new IllegalArgumentException(message);
         }
         this.color = color;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     protected boolean isMaintainAppearance()
@@ -434,18 +434,6 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
             // Restore gl state
             this.endDraw(dc);
         }
-    }
-
-    protected void onPropertyChanged()
-    {
-        this.updateModifiedTime();
-        this.clearCaches();
-    }
-
-    @Override
-    protected void clearCaches()
-    {
-        super.clearCaches();
     }
 
     protected List<Sector> computeSectors(DrawContext dc)

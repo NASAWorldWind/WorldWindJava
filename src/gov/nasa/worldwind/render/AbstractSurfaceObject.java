@@ -299,6 +299,13 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
         this.extentCache.clear();
     }
 
+    /* Updates this SurfaceObject's modified time and clears its internal caches. */
+    protected void onShapeChanged()
+    {
+        this.updateModifiedTime();
+        this.clearCaches();
+    }
+
     //**************************************************************//
     //********************  Extent  ********************************//
     //**************************************************************//

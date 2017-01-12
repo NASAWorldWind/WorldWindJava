@@ -37,7 +37,7 @@ public class SurfaceIcons extends SurfaceIcon
     public void setLocations(Iterable<? extends LatLon> newLocations)
     {
         this.locations = newLocations;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     protected List<Sector> computeSectors(DrawContext dc)
