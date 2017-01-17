@@ -41,7 +41,7 @@
 
     <target name="compileDebugSources">
         <mkdir dir="${worldwind.classes.dir}/debug"/>
-        <compileJava srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/debug" type="debug"
+        <compileJava srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/debug" debug="true"
                      jdk="${worldwind.jdk}">
             <pathelements>
                 <pathelement location="${basedir}/jogl-all.jar"/>
@@ -53,7 +53,7 @@
 
     <target name="compileReleaseSources">
         <mkdir dir="${worldwind.classes.dir}/release"/>
-        <compileJava srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/release" type="release"
+        <compileJava srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/release" debug="false"
                      jdk="${worldwind.jdk}">
             <pathelements>
                 <pathelement location="${basedir}/jogl-all.jar"/>
@@ -64,17 +64,17 @@
     </target>
 
     <target name="bundleDebug">
-        <mkdir dir="${worldwind.jar.dir}"/>
+        <mkdir dir="${worldwind.jar.dir}/debug"/>
         <bundleJarFiles srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/debug"
-                        destdir="${worldwind.jar.dir}" type="debug"/>
+                        destdir="${worldwind.jar.dir}/debug" debug="true"/>
     </target>
 
     <target name="bundleRelease">
-        <mkdir dir="${worldwind.jar.dir}"/>
+        <mkdir dir="${worldwind.jar.dir}/release"/>
         <bundleJarFiles srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/release"
-                        destdir="${worldwind.jar.dir}" type="release"/>
-        <copy file="${worldwind.jar.dir}/worldwind-release.jar" tofile="${basedir}/worldwind.jar"/>
-        <copy file="${worldwind.jar.dir}/worldwindx-release.jar" tofile="${basedir}/worldwindx.jar"/>
+                        destdir="${worldwind.jar.dir}/release" debug="false"/>
+        <copy file="${worldwind.jar.dir}/release/worldwind.jar" tofile="${basedir}/worldwind.jar"/>
+        <copy file="${worldwind.jar.dir}/release/worldwindx.jar" tofile="${basedir}/worldwindx.jar"/>
     </target>
 
     <!-- Targets for compiling and bundling the project documentation.  -->
@@ -135,8 +135,8 @@
     <target name="bundleWebStartLibraries">
         <mkdir dir="${webstart.unsigned.dir}"/>
         <!-- World Wind library JAR files. -->
-        <copy file="${worldwind.jar.dir}/worldwind-release.jar" tofile="${webstart.unsigned.dir}/worldwind.jar"/>
-        <copy file="${worldwind.jar.dir}/worldwindx-release.jar" tofile="${webstart.unsigned.dir}/worldwindx.jar"/>
+        <copy file="${worldwind.jar.dir}/release/worldwind.jar" tofile="${webstart.unsigned.dir}/worldwind.jar"/>
+        <copy file="${worldwind.jar.dir}/release/worldwindx.jar" tofile="${webstart.unsigned.dir}/worldwindx.jar"/>
         <!-- JOGL and GlueGen library JAR files. -->
         <copy todir="${webstart.unsigned.dir}">
             <fileset dir="${basedir}">
@@ -314,11 +314,10 @@
 
     <target name="compileUnitTestSources">
         <mkdir dir="${worldwind.classes.dir}/test"/>
-        <compileJava srcdir="${worldwind.test.dir}" classdir="${worldwind.classes.dir}/test" type="debug"
+        <compileJava srcdir="${worldwind.test.dir}" classdir="${worldwind.classes.dir}/test" debug="true"
                      jdk="${worldwind.jdk}">
             <pathelements>
-                <pathelement location="${worldwind.jar.dir}/worldwind-debug.jar"/>
-                <pathelement location="${worldwind.jar.dir}/worldwindx-debug.jar"/>
+                <pathelement location="${worldwind.classes.dir}/debug"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
                 <pathelement location="${basedir}/gdal.jar"/>
@@ -335,9 +334,9 @@
                forkmode="once"
                maxmemory="1024m">
             <classpath>
+                <pathelement location="${worldwind.src.dir}"/>
                 <pathelement location="${worldwind.classes.dir}/test"/>
-                <pathelement location="${worldwind.jar.dir}/worldwind-debug.jar"/>
-                <pathelement location="${worldwind.jar.dir}/worldwindx-debug.jar"/>
+                <pathelement location="${worldwind.classes.dir}/debug"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
                 <pathelement location="${basedir}/gdal.jar"/>

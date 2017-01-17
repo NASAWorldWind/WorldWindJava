@@ -19,18 +19,15 @@
     <macrodef name="compileJava">
         <attribute name="srcdir"/>
         <attribute name="classdir"/>
-        <attribute name="type"/>
+        <attribute name="debug"/>
         <attribute name="jdk"/>
         <element name="pathelements"/>
         <sequential>
-            <condition property="compileJava.debug" value="true" else="false">
-                <equals arg1="@{type}" arg2="debug"/>
-            </condition>
             <javac srcdir="@{srcdir}"
                    destdir="@{classdir}"
                    source="@{jdk}"
                    target="@{jdk}"
-                   debug="${compileJava.debug}"
+                   debug="@{debug}"
                    encoding="UTF-8"
                    fork="true"
                    includeantruntime="false"
@@ -64,12 +61,9 @@
         <attribute name="srcdir"/>
         <attribute name="classdir"/>
         <attribute name="destdir"/>
-        <attribute name="type"/>
+        <attribute name="debug"/>
         <sequential>
-            <condition property="bundleJarFiles.debug" value="true" else="false">
-                <equals arg1="@{type}" arg2="debug"/>
-            </condition>
-            <jar jarfile="@{destdir}/worldwind-@{type}.jar">
+            <jar jarfile="@{destdir}/worldwind.jar">
                 <manifest>
                     <attribute name="Permissions" value="all-permissions"/>
                     <attribute name="Class-Path" value="jogl-all.jar gluegen-rt.jar gdal.jar"/>
@@ -81,17 +75,17 @@
                     <type type="file"/>
                 </fileset>
                 <fileset dir="@{srcdir}">
-                    <include name="gov/nasa/worldwind/**/*.java" if="${bundleJarFiles.debug}"/>
+                    <include name="gov/nasa/worldwind/**/*.java" if="@{debug}"/>
                     <include name="gov/nasa/worldwind/util/**/*.properties"/>
-                    <include name="com/zebraimaging/**/*.java" if="${bundleJarFiles.debug}"/>
-                    <include name="org/codehaus/jackson/**/*.java" if="${bundleJarFiles.debug}"
+                    <include name="com/zebraimaging/**/*.java" if="@{debug}"/>
+                    <include name="org/codehaus/jackson/**/*.java" if="@{debug}"
                              unless="${worldwind.exclude.jackson}"/>
                     <include name="config/**"/>
                     <include name="images/**"/>
                     <type type="file"/>
                 </fileset>
             </jar>
-            <jar jarfile="@{destdir}/worldwindx-@{type}.jar">
+            <jar jarfile="@{destdir}/worldwindx.jar">
                 <manifest>
                     <attribute name="Class-Path" value="worldwind.jar"/>
                     <attribute name="Main-Class" value="gov.nasa.worldwindx.examples.ApplicationTemplate"/>
@@ -102,7 +96,7 @@
                     <type type="file"/>
                 </fileset>
                 <fileset dir="@{srcdir}">
-                    <include name="gov/nasa/worldwindx/**/*.java" if="${bundleJarFiles.debug}"/>
+                    <include name="gov/nasa/worldwindx/**/*.java" if="@{debug}"/>
                     <include name="gov/nasa/worldwindx/applications/sar/*.html"/>
                     <include name="gov/nasa/worldwindx/applications/sar/config/**"/>
                     <include name="gov/nasa/worldwindx/applications/sar/data/**"/>
