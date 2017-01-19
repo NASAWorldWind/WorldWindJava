@@ -29,6 +29,8 @@ import java.util.List;
  */
 public class DirectedPath extends Path
 {
+    /** Default arrow offset (value between 0 and 1). */
+    public static final double DEFAULT_ARROW_OFFSET = 0.5;
     /** Default arrow length, in meters. */
     public static final double DEFAULT_ARROW_LENGTH = 300;
     /** Default arrow angle. */
@@ -36,6 +38,8 @@ public class DirectedPath extends Path
     /** Default maximum screen size of the arrowheads, in pixels. */
     public static final double DEFAULT_MAX_SCREEN_SIZE = 20.0;
 
+    /** The offset that determines where the arrow is positioned. */
+    protected double arrowOffset = DEFAULT_ARROW_OFFSET;
     /** The length, in meters, of the arrowhead, from tip to base. */
     protected double arrowLength = DEFAULT_ARROW_LENGTH;
     /** The angle of the arrowhead tip. */
@@ -92,6 +96,33 @@ public class DirectedPath extends Path
     public DirectedPath(Position posA, Position posB)
     {
         super(posA, posB);
+    }
+    
+    /**
+     * Indicates the offset (as a ratio) of the arrowhead from base (0.0) to tip (1.0).
+     *
+     * @return The offset of the direction arrowheads.
+     */
+    public double getArrowOffset()
+    {
+        return this.arrowOffset;
+    }
+
+    /**
+     * Specifies the offset of the direction arrowheads, from base (0.0) to tip (1.0).
+     *
+     * @param arrowOffset offset of the direction arrowheads. The offset must be a value between 0.0 and 1.0.
+     */
+    public void setArrowOffset(double arrowOffset)
+    {
+        if (arrowOffset < 0 || arrowOffset > 1.0)
+        {
+            String message = Logging.getMessage("generic.ArgumentOutOfRange", arrowOffset);
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        this.arrowOffset = arrowOffset;
     }
 
     /**
@@ -284,7 +315,7 @@ public class DirectedPath extends Path
             Vec4 polePtB = this.computePoint(dc, terrain, tessellatedPositions.get(poleB));
 
             this.computeArrowheadGeometry(dc, poleA, poleB, polePtA, polePtB, buffer, pathData);
-
+            
             poleA = poleB;
             polePtA = polePtB;
         }
@@ -327,7 +358,7 @@ public class DirectedPath extends Path
         double poleDistance = polePtA.distanceTo3(polePtB);
 
         // Find the segment that is midway between the two poles.
-        int midIndex = (poleA + poleB) / 2;
+        int midIndex = (int)Math.floor(this.arrowOffset * (poleA + poleB));
         List<Position> tessellatedPositions = pathData.getTessellatedPositions();
         Position posA = tessellatedPositions.get(midIndex);
         Position posB = tessellatedPositions.get(midIndex + 1);
