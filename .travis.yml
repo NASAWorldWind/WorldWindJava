@@ -8,45 +8,40 @@ sudo: required
 # Set up to run the Java build script per the Travis CI documentation
 language: java
 
+# Configure the build to use Oracle JDK 8
 jdk:
-  # Configure the build to use Oracle JDK 8
   - oraclejdk8
 
-before_install:
-  # Decrypt and un-archive the files wwstore and keystore.properties which are used to sign the Web Start distribution
-  - openssl aes-256-cbc -K $encrypted_1799be77f389_key -iv $encrypted_1799be77f389_iv -in keystore.tar.enc -out keystore.tar -d
-  - tar -xf keystore.tar
-  # Install Apache ANT v1.9.7 in order to get the most ANT junit features required by the World Wind build script. As of
-  # December 2016 the Travis CI environment provided ANT v1.8.x.
-  - curl -o ${HOME}/apache-ant-1.9.7-bin.tar.gz https://mirrors.ocf.berkeley.edu/apache/ant/binaries/apache-ant-1.9.8-bin.tar.gz
-  - tar -xf ${HOME}/apache-ant-1.9.7-bin.tar.gz -C ${HOME}
-  - export PATH=${HOME}/apache-ant-1.9.7/bin:${PATH}
-
 before_script:
-  # Install the jq shell filter so we can extract data from GitHub API JSON results
-  # See apt configuration: https://docs.travis-ci.com/user/ci-environment/#apt-configuration
-  - sudo apt-get install -qq jq
-  - jq --version
-  # Ensure scripts can be executed (required if scripts are authored in Windows)
-  - chmod +x ./travis/*.sh
+  # Decrypt the keystore used to sign the Web Start distribution
+  - 'if [[ -n "${$encrypted_1799be77f389_key}" ]]; then openssl aes-256-cbc -K "${$encrypted_1799be77f389_key}" -iv "${$encrypted_1799be77f389_iv}" -in keystore.tar.enc -out keystore.tar -d && tar -xf keystore.tar; fi'
   # Use xvfb to run tests that require a GUI
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
 
+# Build the project
 script:
-  # Build the project
   - ant build
 
-after_success:
-  # Push the daily tag when this build is a cron job
-  - ./travis/add_daily_tag.sh
-  # Push build artifacts to GitHub releases, push documentation and Web Start distribution to GitHub pages
-  - ./travis/update_release.sh
-  - ./travis/update_website.sh
+# Deploy build artifacts. Travis does not invoke this step for pull request builds
+deploy:
+# Create CHANGELOG.md in the current directory
+  - provider: script
+    script: 'source ./travis/changelog.sh && changelog "${TRAVIS_TAG}" "https://api.github.com/repos/${TRAVIS_REPO_SLUG}" >> CHANGELOG.md'
+    skip_cleanup: true
+    on:
+      tags: true
+  # Create a GitHub release and publish CHANGELOG.md to the release assets
+  - provider: releases
+    api_key: $GITHUB_API_KEY
+    file: CHANGELOG.md
+    skip_cleanup: true
+    on:
+      tags: true
 
+# Notify the World Wind services mailing list on every build
 notifications:
-  # Notify the World Wind services mailing list on every build
   email:
     recipients:
       secure: OM6MdC79yU5Q7DCaYeABrRf2feKRvJ8UsYzs9YtmMdiwR2a2Aw6yPUunp8EtGD2/SzI/kJibeL6SMrbgI9LZRDnSM6PtpxzC023ogw02WfYegCUc10j5cN6GLzdV81ZTu8FxKvfyQMAEqsgCibHPRyBTk98NbwKHzsvxZm+wjK1hNEP76J05dBn5MjOMdTPtXsy0zS/iyPq76Y8BN/+jsPn5jUY3rTeOvmt5aCW6rXyjBeoJvsyjhuxacTnGUif334LE5yzVSKv4Nmy8UQRhKTDn/BuFikaMtEi4xKpgoQyc7A6wNG0QlxsYY9yRk6dl952q4PHz3xoXJ8LApb8ymbMxXHceOdipecwAWTmlfZPv6EMOrjITPpygtVZjz23QZm07/HMEiE/4NpIE4/ie0kiIPH59qEpKfNQ72iyWS5Zg4FD+l8ofqpGUWLlBaLzGEl6XgXH6oiFm//+wfSI9OWCZKDEYK6P24X0Ncv1Gi2zY2wVZsajqesXiWRCBEEFmjVQ1iNLX7AYsZQMd3ah8++2o3/Ti5eDagPsAVWpR8ULHFNk2+R6H7OQ6acHYVWnbzYuvIkzXYMNVvQ6PZRUvbJNdfwBw15V+s1D0PvPs1Nbc/Jq7RgWMEMUnqWNxFRXEhhbjmV/i2keSA1QPBxADSUAIkZNNkzCD+3KL/rRFDug=
