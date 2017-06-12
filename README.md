@@ -4,41 +4,19 @@
 
 [![Build Status](https://travis-ci.org/NASAWorldWind/WorldWindJava.svg?branch=develop)](https://travis-ci.org/NASAWorldWind/WorldWindJava)
 
-3D virtual globe API for desktop Java, developed by NASA. Provides a geographic context, complete with terrain, for 
-visualizing geographic or geo-located information in 3D and 2D. World Wind Java provides high-resolution terrain and 
-imagery, retrieved from remote servers automatically as needed. Developers can provide custom terrain and imagery. 
-Contains a rich set of features for displaying and interacting with geographic data and representing a wide range of 
-geometric objects. More information at [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov).       
+3D virtual globe API for desktop Java, developed by NASA. Provides a geographic context with high-resolution terrain, for visualizing geographic or geo-located information in 3D and 2D. Developers can customize the globe's terrain and imagery. Provides a collection of shapes for displaying and interacting with geographic data and representing a range of geometric objects.
 
-## Get Started
-
-Develop a world-class World Wind application for personal computers. Setup instructions, developers guides, API 
-documentation and more are available at [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov). This GitHub repository 
-contains the library source, examples and tutorials.
-
-- [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov) has all things World Wind in one place
+- [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov) has setup instructions, developers guides, API documentation and more
 - [World Wind Forum](https://forum.worldwindcentral.com) provides help from the World Wind community
-- [GitHub Issues](https://github.com/NASAWorldWind/WorldWindJava/issues) provides requirements and issue tracking
-- [Travis CI](https://travis-ci.org/NASAWorldWind/WorldWindJava) provides continuous integration and build automation
 - [IntelliJ IDEA](https://www.jetbrains.com/idea) is used by the NASA World Wind development team
 
 ## Releases and Roadmap
 
-Official World Wind Java releases from the [master](https://github.com/NASAWorldWind/WorldWindJava/tree/master) branch. 
-Releases have the latest stable features, enhancements and bug fixes ready for production use.
+Official World Wind Java releases have the latest stable features, enhancements and bug fixes ready for production use.
 
-- [Latest Release](https://github.com/NASAWorldWind/WorldWindJava/releases/latest) has the current release changelogs, binary assets, and associated GitHub tag
-- [Releases](https://github.com/NASAWorldWind/WorldWindJava/releases/) lists all official releases
-- [Milestones](https://github.com/NASAWorldWind/WorldWindJava/milestones) documents upcoming releases and the development roadmap
-- [API Documentation](https://worldwind.arc.nasa.gov/assets/java/latest/javadoc) for the latest release
-
-## Daily Builds
-
-World Wind Java builds from the [develop](https://github.com/NASAWorldWind/WorldWindJava/tree/develop) branch. Daily 
-builds have the newest, bleeding-edge World Wind Java features. Intended for developers and early adopters.
-
-- [Releases](https://github.com/NASAWorldWind/WorldWindJava/releases) hosts the daily builds
-- [API Documentation](https://worldwind.arc.nasa.gov/assets/java/daily/javadoc) for the current daily build
+- [GitHub Releases](https://github.com/NASAWorldWind/WorldWindJava/releases/) documents official releases
+- [GitHub Milestones](https://github.com/NASAWorldWind/WorldWindJava/milestones) documents upcoming releases and the development roadmap
+- [Travis CI](https://travis-ci.org/NASAWorldWind/WorldWindJava) provides continuous integration and build automation
 
 ## Run a Demo 
    
