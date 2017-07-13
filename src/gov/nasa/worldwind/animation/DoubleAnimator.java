@@ -28,7 +28,7 @@ public class DoubleAnimator extends BasicAnimator
        {
            this.interpolator = new ScheduledInterpolator(10000);
        }
-       
+
        if (propertyAccessor == null)
        {
            String message = Logging.getMessage("nullValue.ViewPropertyAccessorIsNull");
@@ -90,5 +90,5 @@ public class DoubleAnimator extends BasicAnimator
            this.end);
     }
 
-    
+
 }

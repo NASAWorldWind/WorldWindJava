@@ -84,7 +84,7 @@ public class AnimationController extends
 
     /**
      * Returns <code>true</code> if the controller has any active <code>Animations</code>
-     * 
+     *
      * @return true if there are any active animations in this <code>CompountAnimation</code>
      */
     public boolean hasActiveAnimation()

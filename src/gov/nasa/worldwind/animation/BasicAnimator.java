@@ -27,7 +27,7 @@ public class BasicAnimator implements Animator
 
     /**
      * Constructs a <code>BasicAnimator</code>.  Sets the <code>Animator</code>'s <code>Interpolator</code> to
-     * <code>null</code>. 
+     * <code>null</code>.
      */
     public BasicAnimator()
     {

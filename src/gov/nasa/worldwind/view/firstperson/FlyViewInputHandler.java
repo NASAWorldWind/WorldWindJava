@@ -76,7 +76,7 @@ public class FlyViewInputHandler extends BasicViewInputHandler
             }
             return true;
         }
-    }    
+    }
 
     AnimationController uiAnimControl = new AnimationController();
     AnimationController gotoAnimControl = new AnimationController();
@@ -182,7 +182,7 @@ public class FlyViewInputHandler extends BasicViewInputHandler
         RollActionListener rollActionListener = new RollActionListener();
         this.getAttributes().setActionListener(
             ViewInputAttributes.DEVICE_KEYBOARD, ViewInputAttributes.VIEW_ROLL_KEYS, rollActionListener);
-        
+
         // Arrow Keys horizontal translate
         this.getAttributes().setValues(ViewInputAttributes.DEVICE_KEYBOARD,
             ViewInputAttributes.VIEW_HORIZONTAL_TRANS_KEYS,

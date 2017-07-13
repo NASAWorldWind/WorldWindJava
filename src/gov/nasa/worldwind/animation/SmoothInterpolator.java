@@ -42,5 +42,5 @@ public class SmoothInterpolator extends ScheduledInterpolator
     // ============== Helper Functions ======================= //
 
     // Map amount range [startAmount, stopAmount] to [0, 1] when amount is inside range.
-    
+
 }
