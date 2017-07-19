@@ -284,62 +284,17 @@ public class AWTInputHandler extends WWObjectImpl
 
     public void keyTyped(KeyEvent keyEvent)
     {
-        if (this.wwd == null)
-        {
-            return;
-        }
-
-        if (keyEvent == null)
-        {
-            return;
-        }
-
-        this.callKeyTypedListeners(keyEvent);
-
-        if (!keyEvent.isConsumed())
-        {
-            this.wwd.getView().getViewInputHandler().keyTyped(keyEvent);
-        }
+        keyMethod(keyEvent, 1);
     }
 
     public void keyPressed(KeyEvent keyEvent)
     {
-        if (this.wwd == null)
-        {
-            return;
-        }
-
-        if (keyEvent == null)
-        {
-            return;
-        }
-
-
-
-        if (!keyEvent.isConsumed())
-        {
-            this.wwd.getView().getViewInputHandler().keyPressed(keyEvent);
-        }
+        keyMethod(keyEvent, 2);
     }
 
     public void keyReleased(KeyEvent keyEvent)
     {
-        if (this.wwd == null)
-        {
-            return;
-        }
-
-        if (keyEvent == null)
-        {
-            return;
-        }
-
-
-
-        if (!keyEvent.isConsumed())
-        {
-            this.wwd.getView().getViewInputHandler().keyReleased(keyEvent);
-        }
+         keyMethod(keyEvent, 3);
     }
 
     public void mouseClicked(final MouseEvent mouseEvent)
