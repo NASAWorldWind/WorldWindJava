@@ -260,19 +260,25 @@ public class AWTInputHandler extends WWObjectImpl
         {
             case 1:
                 this.callKeyTypedListeners(keyEvent);
+                if (!keyEvent.isConsumed())
+                {
+                    this.wwd.getView().getViewInputHandler().keyTyped(keyEvent);
+                }
                 break;
             case 2:
                 this.callKeyPressedListeners(keyEvent);
+                if (!keyEvent.isConsumed())
+                {
+                    this.wwd.getView().getViewInputHandler().keyPressed(keyEvent);
+                }
                 break;
             case 3:
                 this.callKeyReleasedListeners(keyEvent);
+                if (!keyEvent.isConsumed())
+                {
+                    this.wwd.getView().getViewInputHandler().keyReleased(keyEvent);
+                }
                 break;
-        }
-
-
-        if (!keyEvent.isConsumed())
-        {
-            this.wwd.getView().getViewInputHandler().keyTyped(keyEvent);
         }
     }
 
