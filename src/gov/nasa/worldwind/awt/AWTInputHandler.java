@@ -244,6 +244,26 @@ public class AWTInputHandler extends WWObjectImpl
     }
     */
 
+    private void keyMethod(KeyEvent keyEvent)
+    {
+        if (this.wwd == null)
+        {
+            return;
+        }
+
+        if (keyEvent == null)
+        {
+            return;
+        }
+
+        this.callKeyTypedListeners(keyEvent);
+
+        if (!keyEvent.isConsumed())
+        {
+            this.wwd.getView().getViewInputHandler().keyTyped(keyEvent);
+        }
+    }
+
     public void keyTyped(KeyEvent keyEvent)
     {
         if (this.wwd == null)
