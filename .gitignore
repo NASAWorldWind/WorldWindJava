@@ -1,6 +1,10 @@
 .DS_Store
 
-.idea/dictionaries
+.idea/shelf
+
+.idea/tasks.xml
+
+.idea/workspace.xml
 
 build
 
