@@ -1,10 +1,6 @@
 # Directs the Travis CI build service for World Wind Java
 # For more information see https://docs.travis-ci.com/user/customizing-the-build/
 
-# Required to install the jq JSON filter used to parse GitHub API results
-dist: trusty
-sudo: required
-
 # Set up to run the Java build script per the Travis CI documentation
 language: java
 
@@ -20,7 +16,7 @@ before_script:
 
 # Build the project
 script:
-  - ant build -lib .
+  - ant build
 
 # Deploy build artifacts. Travis does not invoke this step for pull request builds
 deploy:
