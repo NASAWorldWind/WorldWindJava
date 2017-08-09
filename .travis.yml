@@ -37,11 +37,3 @@ deploy:
     skip_cleanup: true
     on:
       tags: true
-
-# Notify the World Wind services mailing list on every build
-notifications:
-  email:
-    recipients:
-      secure: EF6MNNCjtBYNiRxCHOZexEo0IXDmwZduzleIRLrLjo0KG2RT+wzSmPBnhit8PwdkiKZt7B7BAHTKuZXxXE0qK83/aIM5lQNXiNzHwpQ602clJoZGERYD3C/bY++j/rAh7IKcbfBU9JvQBPioz+DbcjBhIeCW1ZoY0yYpM5J2kgJ9J9bAO2Ko1r/W4Do9l3PBZjjenF+OVqwOyHnS2WKuG+roJ6AOIM7mo+VC/SlMCl1z7HV9ksz7fnZfQ/yH3J5xk+oG/kYemyVEEWo1wyutrHqTq1fF+eNjjisfoM546t6sl1lLFWVqlQ25jMhlJZ8q2cKXip0+XACxrrO5h5L3sgP5HKhpgzUxENNXzfd8HTTfDVv6Eoi8vAY2k7UaOxtAwq/IWq8BzwLL/Iq64nr13rQ7qIabEhtfNb/wQo293iN026FriX33dOjDUBG0VuSdC66fUK6Q4h4aNf6yP867TzKXWdp6MLvr1Pz+2SyPUBiNFCx8S34ZbK8uuUXOQWd/5p72+uC+0j0zLmZTXVBq+U1QiTlKzSfh1tTjI4PvAb8MMVY27WS4I7VE4inFCZ6SHk5tlVYwyppF5d8ylQqPi2C8a1bY6+9HC3kU45mmoFC3AydyiAqq5kLUbVWvnRLrYwml1kCLLTIjPG/3DjrjKkEbHJtENY4DY7GW1MSufn4=
-    on_success: always
-    on_failure: always
