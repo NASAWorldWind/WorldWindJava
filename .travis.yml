@@ -20,7 +20,7 @@ before_script:
 
 # Build the project
 script:
-  - ant build
+  - ant build -lib .
 
 # Deploy build artifacts. Travis does not invoke this step for pull request builds
 deploy:
