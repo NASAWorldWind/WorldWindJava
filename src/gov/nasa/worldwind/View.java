@@ -262,7 +262,7 @@ public interface View extends WWObject, Restorable
      * reflects the values of this view, as do any computed values of the view, such as the modelview matrix, projection
      * matrix and viewing frustum.
      *
-     * @param dc the current World Wind DrawContext on which <code>View</code> will apply its state.
+     * @param dc the current WorldWind DrawContext on which <code>View</code> will apply its state.
      *
      * @throws IllegalArgumentException If <code>dc</code> is null, or if the <code>Globe</code> or <code>GL</code>
      *                                  instances in <code>dc</code> are null.
@@ -303,7 +303,7 @@ public interface View extends WWObject, Restorable
      * popReferenceCenter} after rendering is complete. Note that calls to {@link #getModelviewMatrix} will not return
      * reference-center model-view matrix, but the original matrix.
      *
-     * @param dc              the current World Wind drawing context on which new model-view state will be applied.
+     * @param dc              the current WorldWind drawing context on which new model-view state will be applied.
      * @param referenceCenter the location to become the new world origin.
      *
      * @return a new model-view matrix with origin is at <code>referenceCenter</code>, or null if this method failed.
@@ -316,7 +316,7 @@ public interface View extends WWObject, Restorable
     /**
      * Removes the model-view matrix on top of the matrix stack, and restores the original matrix.
      *
-     * @param dc the current World Wind drawing context on which the original matrix will be restored.
+     * @param dc the current WorldWind drawing context on which the original matrix will be restored.
      *
      * @throws IllegalArgumentException if <code>dc</code> is null, or if the <code>Globe</code> or <code>GL</code>
      *                                  instances in <code>dc</code> are null.

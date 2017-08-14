@@ -13,7 +13,7 @@ import gov.nasa.worldwindx.applications.worldwindow.util.Util;
 
 /**
  * Controls highlighting of shapes implementing {@link Highlightable} in response to pick events. Monitors a specified
- * World Window for an indicated {@link gov.nasa.worldwind.event.SelectEvent} type and turns highlighting on and off in
+ * WorldWindow for an indicated {@link gov.nasa.worldwind.event.SelectEvent} type and turns highlighting on and off in
  * response.
  *
  * @author tag
@@ -26,9 +26,9 @@ public class HighlightController implements SelectListener
     protected Highlightable lastHighlightObject;
 
     /**
-     * Creates a controller for a specified World Window.
+     * Creates a controller for a specified WorldWindow.
      *
-     * @param wwd                the World Window to monitor.
+     * @param wwd                the WorldWindow to monitor.
      * @param highlightEventType the type of {@link SelectEvent} to highlight in response to. The default is {@link
      *                           SelectEvent#ROLLOVER}.
      */

@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 /**
  * The GeoSymAttributeConverter application converts GeoSym line attributes, area attributes, and area patterns into a
- * form usable by World Wind VPF shapes. Outputs to "gsac-out" a comma-separated-value (CSV) file containing line and
+ * form usable by WorldWind VPF shapes. Outputs to "gsac-out" a comma-separated-value (CSV) file containing line and
  * area attributes for VPF line and area shapes, and PNG images containing area patterns for VPF area shapes.
  * <p/>
  * GeoSymAttributeConverter is used to build the VPF symbol JAR file <code>vpf-symbols.jar</code>. For instructions on
  * how to build <code>vpf-symbols.jar</code>, see the file <code>VPF_README.txt</code>, which is distributed in each
- * World Wind release.
+ * WorldWind release.
  * <p/>
  * <code> Usage: java -cp worldwind.jar gov.nasa.worldwind.formats.vpf.GeoSymAttributeConverter [full path to
  * "GeoSymEd2Final/GRAPHICS/CTEXT"] </code>
@@ -425,7 +425,7 @@ public class GeoSymAttributeConverter
         System.out.println("GeoSymAttributeConverter");
         System.out.println();
         System.out.println("Converts GeoSym line attributes, area attributes, and area patterns into a form usable by");
-        System.out.println("World Wind VPF shapes. Outputs to \"" + OUT_DIR + "\" a comma-separated-value file");
+        System.out.println("WorldWind VPF shapes. Outputs to \"" + OUT_DIR + "\" a comma-separated-value file");
         System.out.println("containing line and area attributes for VPF line and area shapes, and PNG files");
         System.out.println("containing area patterns for VPF area shapes.");
         System.out.println();

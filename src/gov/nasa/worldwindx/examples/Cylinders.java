@@ -19,7 +19,7 @@ import java.awt.*;
 import java.util.Hashtable;
 
 /**
- * Illustrates how to use the World Wind <code>{@link Cylinder}</code> rigid shape to display an arbitrarily sized and
+ * Illustrates how to use the WorldWind <code>{@link Cylinder}</code> rigid shape to display an arbitrarily sized and
  * oriented cylinder at a geographic position on the Globe.
  *
  * @author ccrick
@@ -206,7 +206,7 @@ public class Cylinders extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Cylinders", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Cylinders", AppFrame.class);
     }
 }
 

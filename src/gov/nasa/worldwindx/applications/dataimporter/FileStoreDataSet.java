@@ -18,7 +18,7 @@ import java.awt.*;
 import java.io.*;
 
 /**
- * Represents one data set within a World Wind filestore.
+ * Represents one data set within a WorldWind filestore.
  *
  * @author tag
  * @version $Id: FileStoreDataSet.java 1180 2013-02-15 18:40:47Z tgaskins $
@@ -150,9 +150,9 @@ public class FileStoreDataSet extends AVListImpl
             return;
 
         // This data configuration came from an existing file from disk, therefore we cannot guarantee that the
-        // current version of World Wind's data installer produced it. This data configuration file may have been
-        // created by a previous version of World Wind, or by another program. Set fallback values for any missing
-        // parameters that World Wind needs to construct a Layer or ElevationModel from this data configuration.
+        // current version of WorldWind's data installer produced it. This data configuration file may have been
+        // created by a previous version of WorldWind, or by another program. Set fallback values for any missing
+        // parameters that WorldWind needs to construct a Layer or ElevationModel from this data configuration.
         setFallbackParams(doc, this.configFilePath, this);
 
         Element domElement = doc.getDocumentElement();

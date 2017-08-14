@@ -20,7 +20,7 @@ import java.nio.ByteBuffer;
 import java.util.*;
 
 /**
- * Downloads imagery not currently available in the World Wind file cache or a specified file store. The class derives
+ * Downloads imagery not currently available in the WorldWind file cache or a specified file store. The class derives
  * from {@link Thread} and is meant to operate in its own thread.
  * <p/>
  * The sector and resolution associated with the downloader are specified during construction and are final.
@@ -38,7 +38,7 @@ public class BasicTiledImageLayerBulkDownloader extends BulkRetrievalThread
     protected ArrayList<TextureTile> missingTiles;
 
     /**
-     * Constructs a downloader to retrieve imagery not currently available in the World Wind file cache.
+     * Constructs a downloader to retrieve imagery not currently available in the WorldWind file cache.
      * <p/>
      * The thread returned is not started during construction, the caller must start the thread.
      *

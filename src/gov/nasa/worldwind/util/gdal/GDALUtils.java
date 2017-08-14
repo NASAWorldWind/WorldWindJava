@@ -1283,7 +1283,7 @@ public class GDALUtils
      *                                  <p/>
      *                                  AVKey.DATA_TYPE required ( valid values: AVKey.INT16, and AVKey.FLOAT32 )
      *                                  <p/>
-     *                                  AVKey.VERSION optional, if missing a default will be used "NASA World Wind"
+     *                                  AVKey.VERSION optional, if missing a default will be used "NASA WorldWind"
      *                                  <p/>
      *                                  AVKey.DISPLAY_NAME, (String) optional, specifies a name of the document/image
      *                                  <p/>

@@ -17,19 +17,19 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * This example shows how to create two World Windows, each in its own JFrame. The World Windows share a globe and some
+ * This example shows how to create two WorldWindows, each in its own JFrame. The WorldWindows share a globe and some
  * layers.
  * <p/>
- * Applications using multiple World Wind windows simultaneously should instruct World Wind to share OpenGL and other
- * resources among those windows. Most World Wind classes are designed to be shared across {@link WorldWindow} objects
+ * Applications using multiple WorldWind windows simultaneously should instruct WorldWind to share OpenGL and other
+ * resources among those windows. Most WorldWind classes are designed to be shared across {@link WorldWindow} objects
  * and are shared automatically. But OpenGL resources are not automatically shared. To share them, a reference to a
  * previously created WorldWindow must be specified as a constructor argument for subsequently created WorldWindows.
  * <p/>
- * Most World Wind {@link gov.nasa.worldwind.globes.Globe} and {@link gov.nasa.worldwind.layers.Layer} objects can be
- * shared among World Windows. Those that cannot be shared have an operational dependency on the World Window they're
+ * Most WorldWind {@link gov.nasa.worldwind.globes.Globe} and {@link gov.nasa.worldwind.layers.Layer} objects can be
+ * shared among WorldWindows. Those that cannot be shared have an operational dependency on the WorldWindow they're
  * associated with. An example is the {@link gov.nasa.worldwind.layers.ViewControlsLayer} layer for on-screen
- * navigation. Because this layer responds to input events within a specific World Window, it is not sharable. Refer to
- * the World Wind Overview page for a list of layers that cannot be shared.
+ * navigation. Because this layer responds to input events within a specific WorldWindow, it is not sharable. Refer to
+ * the WorldWind Overview page for a list of layers that cannot be shared.
  * // TODO: include the reference to overview.html.
  *
  * @author tag
@@ -37,15 +37,15 @@ import java.awt.*;
  */
 public class MultiFrame
 {
-    // A panel to hold a World Window and status bar.
+    // A panel to hold a WorldWindow and status bar.
     private static class WWPanel extends JPanel
     {
         private WorldWindowGLCanvas wwd;
 
         public WWPanel(WorldWindowGLCanvas shareWith, int width, int height, Model model)
         {
-            // To share resources among World Windows, pass the first World Window to the constructor of the other
-            // World Windows.
+            // To share resources among WorldWindows, pass the first WorldWindow to the constructor of the other
+            // WorldWindows.
             this.wwd = shareWith != null ? new WorldWindowGLCanvas(shareWith) : new WorldWindowGLCanvas();
             this.wwd.setSize(new java.awt.Dimension(width, height));
             this.wwd.setModel(model);
@@ -59,7 +59,7 @@ public class MultiFrame
         }
     }
 
-    // A JFrame to hold one World Window panel. Multiple of these are created in main below.
+    // A JFrame to hold one WorldWindow panel. Multiple of these are created in main below.
     private static class CanvasFrame extends javax.swing.JFrame
     {
         private WWPanel wwp;
@@ -95,7 +95,7 @@ public class MultiFrame
             // Create a Model for each window, starting with the Globe they share.
             Globe earth = new Earth();
 
-            // Create layers that both World Windows can share.
+            // Create layers that both WorldWindows can share.
             Layer[] layers = new Layer[]
                 {
                     new StarsLayer(),
@@ -127,7 +127,7 @@ public class MultiFrame
             frameB.wwp.wwd.setModel(modelForWindowB);
             frameB.setVisible(true);
 
-            // Add view control layers, which the World Windows cannnot share.
+            // Add view control layers, which the WorldWindows cannnot share.
             ViewControlsLayer viewControlsA = new ViewControlsLayer();
             frameA.wwp.wwd.getModel().getLayers().add(viewControlsA);
             frameA.wwp.wwd.addSelectListener(new ViewControlsSelectListener(frameA.wwp.wwd, viewControlsA));

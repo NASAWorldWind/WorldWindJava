@@ -6,7 +6,7 @@
   -->
 
 <!--$Id: worldwind.xml 2348 2014-09-25 23:35:46Z dcollins $-->
-<!--Default World Wind configuration values-->
+<!--Default WorldWind configuration values-->
 <!--Any of these can be overridden by specifying an application configuration document-->
 <!--An alternate document to this one can also be specified-->
 <!--See the javadoc for the Configuration class for details-->
@@ -65,7 +65,7 @@
     <Property name="gov.nasa.worldwind.avkey.DataFileStoreConfigurationFileName" value="config/DataFileStore.xml"/>
     <Property name="gov.nasa.worldwind.avkey.WorldMapImagePath" value="images/earth-map-512x256.dds"/>
     <Property name="gov.nasa.worldwind.StarsLayer.StarsFileName" value="config/Hipparcos_Stars_Mag6x5044.dat"/>
-    <!--The following are tuning parameters for various World Wind internals-->
+    <!--The following are tuning parameters for various WorldWind internals-->
     <Property name="gov.nasa.worldwind.avkey.RetrievalPoolSize" value="4"/>
     <Property name="gov.nasa.worldwind.avkey.RetrievalQueueSize" value="200"/>
     <Property name="gov.nasa.worldwind.avkey.RetrievalStaleRequestLimit" value="9000"/>

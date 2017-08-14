@@ -22,7 +22,7 @@ public class PersistSessionState extends ApplicationTemplate
     public static class AppFrame extends ApplicationTemplate.AppFrame
     {
         /**
-         * Create a SessionState utility to load and save World Wind's layer and view state to the default location.
+         * Create a SessionState utility to load and save WorldWind's layer and view state to the default location.
          * Initialized to a new SessionState with its session key set to this application's class name.
          */
         protected SessionState sessionState = new SessionState(PersistSessionState.class.getName());
@@ -103,6 +103,6 @@ public class PersistSessionState extends ApplicationTemplate
             System.setProperty("apple.eawt.quitStrategy", "CLOSE_ALL_WINDOWS");
         }
 
-        start("World Wind Persist Session State", AppFrame.class);
+        start("WorldWind Persist Session State", AppFrame.class);
     }
 }

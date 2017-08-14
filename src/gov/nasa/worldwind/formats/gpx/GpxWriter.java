@@ -81,7 +81,7 @@ public class GpxWriter
 
             org.w3c.dom.Element gpx = doc.createElement("gpx");
             gpx.setAttribute("version", "1.1");
-            gpx.setAttribute("creator", "NASA World Wind");
+            gpx.setAttribute("creator", "NASA WorldWind");
             doc.appendChild(gpx);
         }
     }

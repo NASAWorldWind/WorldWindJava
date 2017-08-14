@@ -37,7 +37,7 @@ public class WCSElevationModel extends BasicElevationModel
     /**
      * Create a new elevation model from a serialized restorable state string.
      *
-     * @param restorableStateInXml XML string in World Wind restorable state format.
+     * @param restorableStateInXml XML string in WorldWind restorable state format.
      *
      * @see #getRestorableState()
      */

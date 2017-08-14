@@ -17,7 +17,7 @@ import java.awt.*;
 import java.io.InputStream;
 
 /**
- * Illustrates how to use World Wind browser balloons to display HTML, JavaScript, and Flash content to the user in the
+ * Illustrates how to use WorldWind browser balloons to display HTML, JavaScript, and Flash content to the user in the
  * form of a screen-aligned balloon. There are two browser balloon types: <code>{@link ScreenBrowserBalloon}</code>
  * which displays a balloon at a point on the screen, and <code>{@link GlobeBrowserBalloon}</code> which displays a
  * balloon attached to a position on the Globe.
@@ -49,7 +49,7 @@ public class WebBrowserBalloons extends ApplicationTemplate
             // Add a controller to handle link and navigation events in BrowserBalloons.
             this.balloonController = new BalloonController(this.getWwd());
 
-            // Size the World Window to provide enough screen space for the BrowserBalloon, and center the World Window
+            // Size the WorldWindow to provide enough screen space for the BrowserBalloon, and center the WorldWindow
             // on the screen.
             Dimension size = new Dimension(1200, 800);
             this.setPreferredSize(size);
@@ -115,6 +115,6 @@ public class WebBrowserBalloons extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 9500000);
         Configuration.setValue(AVKey.INITIAL_PITCH, 45);
 
-        start("World Wind Web Browser Balloons", AppFrame.class);
+        start("WorldWind Web Browser Balloons", AppFrame.class);
     }
 }

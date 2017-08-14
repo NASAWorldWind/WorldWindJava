@@ -91,7 +91,7 @@ public class DataInstallerApp
             southPanel.add(dataInstallerPanel, BorderLayout.CENTER);
             this.getContentPane().add(southPanel, BorderLayout.SOUTH);
 
-            // Create and install the view controls layer and register a controller for it with the World Window.
+            // Create and install the view controls layer and register a controller for it with the WorldWindow.
             ViewControlsLayer viewControlsLayer = new ViewControlsLayer();
             ApplicationTemplate.insertBeforeCompass(getWwd(), viewControlsLayer);
             this.getWwd().addSelectListener(new ViewControlsSelectListener(this.getWwd(), viewControlsLayer));
@@ -125,7 +125,7 @@ public class DataInstallerApp
         if (Configuration.isMacOS())
         {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "World Wind Application");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Application");
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
         }
         else if (Configuration.isWindowsOS())

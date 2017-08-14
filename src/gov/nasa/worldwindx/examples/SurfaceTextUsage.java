@@ -41,6 +41,6 @@ public class SurfaceTextUsage extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -120.1670);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 50000);
 
-        ApplicationTemplate.start("World Wind Surface Text", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Surface Text", AppFrame.class);
     }
 }

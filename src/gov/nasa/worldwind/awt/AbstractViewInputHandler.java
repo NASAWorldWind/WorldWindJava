@@ -657,7 +657,7 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
 
     public void apply()
     {
-        // Process per-frame input only when the World Window is the focus owner.
+        // Process per-frame input only when the WorldWindow is the focus owner.
         if (!this.isWorldWindowFocusOwner())
         {
             return;

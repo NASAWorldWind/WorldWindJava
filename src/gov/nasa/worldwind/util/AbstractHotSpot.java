@@ -42,7 +42,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the HotSpot is selected in the World Window. The default implementation does nothing. Override this
+     * Called when the HotSpot is selected in the WorldWindow. The default implementation does nothing. Override this
      * method to handle select events.
      *
      * @param event The event to handle.
@@ -82,7 +82,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse is clicked on the HotSpot in the World Window. The default implementation does nothing.
+     * Called when the mouse is clicked on the HotSpot in the WorldWindow. The default implementation does nothing.
      * Override this method to handle mouse click events.
      *
      * @param event The event to handle.
@@ -92,7 +92,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse is pressed over the HotSpot in the World Window. The default implementation does nothing.
+     * Called when the mouse is pressed over the HotSpot in the WorldWindow. The default implementation does nothing.
      * Override this method to handle mouse pressed events.
      *
      * @param event The event to handle.
@@ -102,7 +102,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse is released over the HotSpot in the World Window. The default implementation does nothing.
+     * Called when the mouse is released over the HotSpot in the WorldWindow. The default implementation does nothing.
      * Override this method to handle mouse released events.
      *
      * @param event The event to handle.
@@ -112,7 +112,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse enters the World Window and the HotSpot is active. The default implementation does nothing.
+     * Called when the mouse enters the WorldWindow and the HotSpot is active. The default implementation does nothing.
      * Override this method to handle mouse enter events.
      *
      * @param event The event to handle.
@@ -122,7 +122,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse exits the World Window and the HotSpot is active. The default implementation does nothing.
+     * Called when the mouse exits the WorldWindow and the HotSpot is active. The default implementation does nothing.
      * Override this method to handle mouse exit events.
      *
      * @param event The event to handle.
@@ -132,7 +132,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse is dragged in the World Window and the HotSpot is active. The default implementation does
+     * Called when the mouse is dragged in the WorldWindow and the HotSpot is active. The default implementation does
      * nothing. Override this method to handle mouse dragged events.
      *
      * @param event The event to handle.
@@ -142,7 +142,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the cursor moves over the HotSpot in the World Window. The default implementation does nothing.
+     * Called when the cursor moves over the HotSpot in the WorldWindow. The default implementation does nothing.
      * Override this method to handle mouse move events.
      *
      * @param event The event to handle.
@@ -152,7 +152,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse wheel is moved in the World Window and HotSpot is active. The default implementation does
+     * Called when the mouse wheel is moved in the WorldWindow and HotSpot is active. The default implementation does
      * nothing. Override this method to handle mouse wheel events.
      *
      * @param event The event to handle.

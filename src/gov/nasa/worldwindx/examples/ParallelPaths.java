@@ -104,6 +104,6 @@ public class ParallelPaths extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -122.78);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 8000);
 
-        ApplicationTemplate.start("World Wind Multi Path", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Multi Path", AppFrame.class);
     }
 }

@@ -110,6 +110,6 @@ public class ExtrudedPolygonsEverywhere extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Very Many Extruded Polygons", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Very Many Extruded Polygons", AppFrame.class);
     }
 }

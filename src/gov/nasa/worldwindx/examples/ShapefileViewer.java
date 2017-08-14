@@ -20,8 +20,8 @@ import java.awt.event.*;
 import java.io.File;
 
 /**
- * Illustrates how to import ESRI Shapefiles into World Wind. This uses a <code>{@link ShapefileLayerFactory}</code> to
- * parse a Shapefile's contents and convert the shapefile into an equivalent World Wind shape. This provides examples of
+ * Illustrates how to import ESRI Shapefiles into WorldWind. This uses a <code>{@link ShapefileLayerFactory}</code> to
+ * parse a Shapefile's contents and convert the shapefile into an equivalent WorldWind shape. This provides examples of
  * importing a Shapefile on the local hard drive and importing a Shapefile at a remote URL.
  *
  * @author Patrick Murris
@@ -148,6 +148,6 @@ public class ShapefileViewer extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        start("World Wind Shapefile Viewer", AppFrame.class);
+        start("WorldWind Shapefile Viewer", AppFrame.class);
     }
 }

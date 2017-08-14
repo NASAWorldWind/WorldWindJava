@@ -207,7 +207,7 @@ public class Wedges extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Wedges", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Wedges", AppFrame.class);
     }
 }
 

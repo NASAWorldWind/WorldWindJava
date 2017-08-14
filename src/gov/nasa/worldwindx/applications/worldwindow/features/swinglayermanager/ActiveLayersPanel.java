@@ -192,7 +192,7 @@ public class ActiveLayersPanel extends AbstractFeaturePanel implements ActiveLay
         layerList.replaceAll(newList);
     }
 
-    // Handles reordering of the World Wind layer list via this panel.
+    // Handles reordering of the WorldWind layer list via this panel.
     protected class ReorderListener extends MouseAdapter
     {
         protected JList list;

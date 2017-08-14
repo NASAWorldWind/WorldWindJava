@@ -59,9 +59,9 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * RenderableLayer graphicLayer = new RenderableLayer();
  * graphicLayer.addRenderable(graphic);
  *
- * // Add the layer to the world window's model and request that the layer redraw itself. The world window draws the
+ * // Add the layer to the WorldWindow's model and request that the layer redraw itself. The WorldWindow draws the
  * // graphic on the globe at the specified position. Interactions between the graphic and the cursor are returned in
- * // the world window's picked object list, and reported to the world window's select listeners.
+ * // the WorldWindow's picked object list, and reported to the WorldWindow's select listeners.
  * WorldWindow wwd = ... // A reference to your application's WorldWind instance.
  * wwd.getModel().getLayers().add(graphicLayer);
  * wwd.redraw();

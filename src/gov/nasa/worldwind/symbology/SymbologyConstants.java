@@ -9,7 +9,7 @@ package gov.nasa.worldwind.symbology;
 import java.util.*;
 
 /**
- * Defines constants used by the World Wind symbology classes, including symbolic constants and modifier keys for
+ * Defines constants used by the WorldWind symbology classes, including symbolic constants and modifier keys for
  * MIL-STD-2525 tactical symbols and tactical graphics.
  *
  * @author dcollins

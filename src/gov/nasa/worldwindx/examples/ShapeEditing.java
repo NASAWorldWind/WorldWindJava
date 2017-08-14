@@ -290,6 +290,6 @@ public class ShapeEditing extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Shape Editing", ShapeEditing.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Shape Editing", ShapeEditing.AppFrame.class);
     }
 }

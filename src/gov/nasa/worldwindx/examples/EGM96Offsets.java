@@ -36,6 +36,6 @@ public class EGM96Offsets extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind EGM96 Offsets", AppFrame.class);
+        ApplicationTemplate.start("WorldWind EGM96 Offsets", AppFrame.class);
     }
 }

@@ -94,6 +94,6 @@ public class ExtrudedPolygons extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Extruded Polygons", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Extruded Polygons", AppFrame.class);
     }
 }

@@ -85,6 +85,6 @@ public class PlacemarkLabelEditing extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Placemark Label Editing", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Placemark Label Editing", AppFrame.class);
     }
 }

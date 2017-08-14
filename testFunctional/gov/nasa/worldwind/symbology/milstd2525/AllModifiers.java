@@ -34,7 +34,7 @@ public class AllModifiers extends ApplicationTemplate
 
             this.addSymbols();
 
-            // Size the World Window to provide enough screen space for the symbols and center the World Window on the
+            // Size the WorldWindow to provide enough screen space for the symbols and center the WorldWindow on the
             // screen.
             Dimension size = new Dimension(1800, 1000);
             this.setPreferredSize(size);
@@ -104,7 +104,7 @@ public class AllModifiers extends ApplicationTemplate
                 lon = startLon;
             }
 
-            // Add the symbol layer to the World Wind model.
+            // Add the symbol layer to the WorldWind model.
             this.getWwd().getModel().getLayers().add(layer);
         }
 
@@ -126,7 +126,7 @@ public class AllModifiers extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -119.85);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 77000);
 
-        start("World Wind All MIL-STD-2525 Tactical Symbols", AppFrame.class);
+        start("WorldWind All MIL-STD-2525 Tactical Symbols", AppFrame.class);
     }
 
     protected static java.util.List<String> standardIdentities = Arrays.asList(

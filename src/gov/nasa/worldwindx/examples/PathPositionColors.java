@@ -137,6 +137,6 @@ public class PathPositionColors extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -122.3137);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 3000);
 
-        ApplicationTemplate.start("World Wind Path Position Colors", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Path Position Colors", AppFrame.class);
     }
 }

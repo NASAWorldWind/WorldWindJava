@@ -60,7 +60,7 @@ public class LineBuilder extends AVListImpl
      * Construct a new line builder using the specified polyline and layer and drawing events from the specified world
      * window. Either or both the polyline and the layer may be null, in which case the necessary object is created.
      *
-     * @param wwd       the world window to draw events from.
+     * @param wwd       the WorldWindow to draw events from.
      * @param lineLayer the layer holding the polyline. May be null, in which case a new layer is created.
      * @param polyline  the polyline object to build. May be null, in which case a new polyline is created.
      */
@@ -391,6 +391,6 @@ public class LineBuilder extends AVListImpl
     public static void main(String[] args)
     {
         //noinspection deprecation
-        ApplicationTemplate.start("World Wind Line Builder", LineBuilder.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Line Builder", LineBuilder.AppFrame.class);
     }
 }

@@ -61,7 +61,7 @@ public class KMLSurfacePolygonImpl extends SurfacePolygon implements KMLRenderab
 
         KMLPolygon polygon = (KMLPolygon) geom;
 
-        // KMLPolygon's use linear interpolation between corners by definition. Configure the World Wind SurfacePolygon
+        // KMLPolygon's use linear interpolation between corners by definition. Configure the WorldWind SurfacePolygon
         // to use the appropriate path type for linear interpolation in geographic coordinates.
         this.setPathType(AVKey.LINEAR);
 

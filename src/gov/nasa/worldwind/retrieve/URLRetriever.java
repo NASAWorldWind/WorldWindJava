@@ -27,7 +27,7 @@ import java.util.zip.*;
 public abstract class URLRetriever extends WWObjectImpl implements Retriever
 {
     /**
-     * Applications never need to use this constant. It provides compatibility with very old World Wind tile servers
+     * Applications never need to use this constant. It provides compatibility with very old WorldWind tile servers
      * that deliver zipped content without identifying the content type as other than application/zip. In these cases,
      * the object requesting the content must know the content type to expect, and also requires that the zip file be
      * opened and only its first entry returned.

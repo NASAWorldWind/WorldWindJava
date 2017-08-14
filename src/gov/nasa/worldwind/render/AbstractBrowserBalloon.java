@@ -1648,7 +1648,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
             if (linkParams.getValue(AVKey.BOUNDS) == null || linkParams.getValue(AVKey.RECTANGLES) == null)
                 continue;
 
-            // Translate the bounds from WebView coordinates to World Window screen coordinates.
+            // Translate the bounds from WebView coordinates to WorldWindow screen coordinates.
             Rectangle bounds = new Rectangle((Rectangle) linkParams.getValue(AVKey.BOUNDS));
             bounds.translate(obb.webViewRect.x, obb.webViewRect.y);
 

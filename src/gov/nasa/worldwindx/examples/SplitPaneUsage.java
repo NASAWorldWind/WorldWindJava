@@ -17,7 +17,7 @@ import javax.swing.border.*;
 import java.awt.*;
 
 /**
- * Illustrates how to use World Wind within a Swing JSplitPane. Doing so is mostly straightforward, but in order to work
+ * Illustrates how to use WorldWind within a Swing JSplitPane. Doing so is mostly straightforward, but in order to work
  * around a Swing bug the WorldWindow must be placed within a JPanel and that JPanel's minimum preferred size must be
  * set to zero (both width and height). See the code that does this in the first few lines of the AppPanel constructor
  * below.
@@ -125,7 +125,7 @@ public class SplitPaneUsage
 
     public static void main(String[] args)
     {
-        start("World Wind Split Pane Usage");
+        start("WorldWind Split Pane Usage");
     }
 
     public static void start(String appName)

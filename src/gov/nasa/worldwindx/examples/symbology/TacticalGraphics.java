@@ -24,11 +24,11 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Demonstrates how to create and display World Wind tactical graphics. See the <a title="Symbology Usage Guide"
+ * Demonstrates how to create and display WorldWind tactical graphics. See the <a title="Symbology Usage Guide"
  * href="https://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology Usage Guide</a> for more
- * information on symbology support in World Wind.
+ * information on symbology support in WorldWind.
  * <p/>
- * See the {@link TacticalSymbols} for a detailed example of using World Wind tactical symbols in an application.
+ * See the {@link TacticalSymbols} for a detailed example of using WorldWind tactical symbols in an application.
  *
  * @author pabercrombie
  * @version $Id: TacticalGraphics.java 2109 2014-06-30 16:52:38Z tgaskins $
@@ -84,7 +84,7 @@ public class TacticalGraphics extends ApplicationTemplate
 
             this.addGraphicControls();
 
-            // Size the World Window to provide enough screen space for the graphics, and center the World Window
+            // Size the WorldWindow to provide enough screen space for the graphics, and center the WorldWindow
             // on the screen.
             Dimension size = new Dimension(1800, 1000);
             this.setPreferredSize(size);
@@ -945,7 +945,7 @@ public class TacticalGraphics extends ApplicationTemplate
                     sharedPointAttrs.setInteriorOpacity(opacity);
                     sharedPointAttrs.setOutlineOpacity(opacity);
 
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             box.add(javax.swing.Box.createVerticalStrut(10));
@@ -966,7 +966,7 @@ public class TacticalGraphics extends ApplicationTemplate
                     this.setShowModifiers(lineLayer, tf);
                     this.setShowModifiers(areaLayer, tf);
 
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
 
                 protected void setShowModifiers(RenderableLayer layer, boolean show)
@@ -994,7 +994,7 @@ public class TacticalGraphics extends ApplicationTemplate
                     this.setShowModifiers(lineLayer, tf);
                     this.setShowModifiers(areaLayer, tf);
 
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
 
                 protected void setShowModifiers(RenderableLayer layer, boolean show)
@@ -1022,7 +1022,7 @@ public class TacticalGraphics extends ApplicationTemplate
                     this.setShowHostile(lineLayer, tf);
                     this.setShowHostile(areaLayer, tf);
 
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
 
                 protected void setShowHostile(RenderableLayer layer, boolean show)
@@ -1048,6 +1048,6 @@ public class TacticalGraphics extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -117.44);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 155000);
 
-        ApplicationTemplate.start("World Wind Tactical Graphics", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Tactical Graphics", AppFrame.class);
     }
 }

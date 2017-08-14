@@ -158,6 +158,6 @@ public class RigidShapes extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Rigid Shapes", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Rigid Shapes", AppFrame.class);
     }
 }

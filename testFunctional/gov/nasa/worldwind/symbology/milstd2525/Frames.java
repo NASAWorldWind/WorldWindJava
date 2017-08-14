@@ -31,7 +31,7 @@ public class Frames extends ApplicationTemplate
 
             this.addFrameTypeSymbols();
 
-            // Size the World Window to provide enough screen space for the symbols and center the World Window on the
+            // Size the WorldWindow to provide enough screen space for the symbols and center the WorldWindow on the
             // screen.
             Dimension size = new Dimension(1800, 1000);
             this.setPreferredSize(size);
@@ -44,14 +44,14 @@ public class Frames extends ApplicationTemplate
             RenderableLayer layer = new RenderableLayer();
             layer.setName("Standard Frame Types");
             this.addFrameTypeSymbols(SymbologyConstants.STATUS_PRESENT, layer);
-            // Add the symbol layer to the World Wind model.
+            // Add the symbol layer to the WorldWind model.
             this.getWwd().getModel().getLayers().add(layer);
 
             layer = new RenderableLayer();
             layer.setName("Standard Frame Types (Anticipated)");
             layer.setEnabled(false);
             this.addFrameTypeSymbols(SymbologyConstants.STATUS_ANTICIPATED, layer);
-            // Add the symbol layer to the World Wind model.
+            // Add the symbol layer to the WorldWind model.
             this.getWwd().getModel().getLayers().add(layer);
         }
 
@@ -245,6 +245,6 @@ public class Frames extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -120);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 100000);
 
-        ApplicationTemplate.start("World Wind MIL-STD-2525 Tactical Symbol Frame Types", AppFrame.class);
+        ApplicationTemplate.start("WorldWind MIL-STD-2525 Tactical Symbol Frame Types", AppFrame.class);
     }
 }

@@ -196,7 +196,7 @@ public class DataInstaller extends AVListImpl
                 Thread.yield();
             }
 
-            // Convert the file to a form usable by World Wind components,
+            // Convert the file to a form usable by WorldWind components,
             // according to the specified DataStoreProducer.
             // This throws an exception if production fails for any reason.
             producer.startProduction();

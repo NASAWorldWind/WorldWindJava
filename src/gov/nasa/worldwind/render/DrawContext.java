@@ -52,7 +52,7 @@ public interface DrawContext extends WWObject, Disposable
 
     /**
      * Retrieves the current <code>javax.media.opengl.GL</code>. A <code>GL</code> or <code>GLU</code> is required for
-     * all graphical rendering in World Wind.
+     * all graphical rendering in WorldWind.
      *
      * @return the current <code>GL</code> if available, null otherwise
      *
@@ -62,7 +62,7 @@ public interface DrawContext extends WWObject, Disposable
 
     /**
      * Retrieves the current <code>javax.media.opengl.glu.GLU</code>. A <code>GLU</code> or <code>GL</code> is required
-     * for all graphical rendering in World Wind.
+     * for all graphical rendering in WorldWind.
      *
      * @return the current <code>GLU</code> if available, null otherwise
      *

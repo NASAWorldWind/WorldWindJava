@@ -882,7 +882,7 @@ void InitLoggerJNI(JNIEnv *env)
         return;
 
     // Initialize the logging class and methodID pointers. We do this here rather than after obtaining an environment in
-    // the *ObtainEnv functions because the World Wind Java classes cannot be found from the AppKit thread. By finding
+    // the *ObtainEnv functions because the WorldWind Java classes cannot be found from the AppKit thread. By finding
     // them here and retaining a reference to them, we make them accessible by calls to *ObtainEnv from the AppKit
     // thread. Note that this stores the class and method references in static variables, and therefore assumes that
     // there is one class definition for gov.nasa.worldwind.util.Logging in the JNI environment.

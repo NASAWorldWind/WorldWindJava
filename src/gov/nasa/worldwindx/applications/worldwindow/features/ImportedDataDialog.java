@@ -120,7 +120,7 @@ public class ImportedDataDialog extends AbstractFeatureDialog implements Network
 
                     try
                     {
-                        // Import the file into a form usable by World Wind components.
+                        // Import the file into a form usable by WorldWind components.
                         dataConfig = importDataFromFile(ImportedDataDialog.this.dialog, file, fileStore);
                     }
                     catch (Exception e)
@@ -226,9 +226,9 @@ public class ImportedDataDialog extends AbstractFeatureDialog implements Network
                 continue;
 
             // This data configuration came from an existing file from disk, therefore we cannot guarantee that the
-            // current version of World Wind's data importers produced it. This data configuration file may have been
-            // created by a previous version of World Wind, or by another program. Set fallback values for any missing
-            // parameters that World Wind needs to construct a Layer or ElevationModel from this data configuration.
+            // current version of WorldWind's data importers produced it. This data configuration file may have been
+            // created by a previous version of WorldWind, or by another program. Set fallback values for any missing
+            // parameters that WorldWind needs to construct a Layer or ElevationModel from this data configuration.
             AVList params = new AVListImpl();
             setFallbackParams(doc, filename, params);
 
@@ -378,7 +378,7 @@ public class ImportedDataDialog extends AbstractFeatureDialog implements Network
 
         try
         {
-            // Convert the file to a form usable by World Wind components, according to the specified DataStoreProducer.
+            // Convert the file to a form usable by WorldWind components, according to the specified DataStoreProducer.
             // This throws an exception if production fails for any reason.
             producer.startProduction();
         }

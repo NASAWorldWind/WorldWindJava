@@ -6,7 +6,7 @@
 
 <!-- $Id: Design and Coding Guidelines.html 1171 2013-02-11 21:45:02Z dcollins $ -->
 <body>
-<h1>World Wind Multi-Platform Design and Coding Guidelines</h1>
+<h1>WorldWind Multi-Platform Design and Coding Guidelines</h1>
 
 <h2>General</h2>
 <ul>
@@ -15,9 +15,9 @@
         and all products must run on all those systems.
     </li>
     <li>
-        Read the World Wind API's Overview section for a description of World Wind architecture, design and usage. Read
-        the overview pages of each World Wind package for descriptions of those. These descriptions contain critical
-        information that is not repeated elsewhere. To avoid making mistakes, everyone working on World Wind must read
+        Read the WorldWind API's Overview section for a description of WorldWind architecture, design and usage. Read
+        the overview pages of each WorldWind package for descriptions of those. These descriptions contain critical
+        information that is not repeated elsewhere. To avoid making mistakes, everyone working on WorldWind must read
         them before using or modifying the code.
     </li>
     <li>
@@ -76,11 +76,11 @@
         and when it fails.
     </li>
     <li>
-        World Wind never crashes. Always catch exceptions at least at the highest entry point from the runtime, e.g., UI
+        WorldWind never crashes. Always catch exceptions at least at the highest entry point from the runtime, e.g., UI
         listeners, thread run() methods.
     </li>
     <li>
-        Within a rendering pass World Wind does not touch the disk or the network. Always fork off a thread to do that.
+        Within a rendering pass WorldWind does not touch the disk or the network. Always fork off a thread to do that.
         Use the TaskManager and Retriever systems to start threads during rendering. These are set up to govern thread
         usage to avoid swamping the local machine and the server.
     </li>
@@ -124,7 +124,7 @@
         appropriate exception.
     </li>
     <li>
-        The audience for exceptions is not primarily the user of the client program, but the application or World Wind
+        The audience for exceptions is not primarily the user of the client program, but the application or WorldWind
         developer. Throw exceptions that would let them know immediately that they're using faulty logic or data.
     </li>
 </ul>
@@ -170,8 +170,8 @@
 
 <h2>Offline Mode</h2>
 
-<p>World Wind's use of the network can be disabled by calling {@link gov.nasa.WorldWind.setOfflineMode}. Prior to
-   attempting retrieval of a network resource -- anything addressed by a URL -- World Wind checks the offline-mode
+<p>WorldWind's use of the network can be disabled by calling {@link gov.nasa.WorldWind.setOfflineMode}. Prior to
+   attempting retrieval of a network resource -- anything addressed by a URL -- WorldWind checks the offline-mode
    setting and does not attempt retrieval if the value is true. To honor this contract, all code must check network
    status prior to attempting retrieval of a resource on the network.</p>
 

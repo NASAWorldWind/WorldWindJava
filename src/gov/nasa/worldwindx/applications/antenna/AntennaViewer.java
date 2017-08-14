@@ -99,6 +99,6 @@ public class AntennaViewer extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, ANTENNA_POSITION.getLongitude().degrees);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 30e3);
 
-        ApplicationTemplate.start("World Wind Antenna Gain Visualization", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Antenna Gain Visualization", AppFrame.class);
     }
 }

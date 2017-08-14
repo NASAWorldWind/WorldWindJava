@@ -57,7 +57,7 @@ import java.util.*;
  * Boundaries are required to be closed, their first location must be equal to their last location. Boundaries that are
  * not closed are explicitly closed by this shape when they are specified.
  * <p/>
- * Extruded polygons are safe to share among World Windows. They should not be shared among layers in the same World
+ * Extruded polygons are safe to share among WorldWindows. They should not be shared among layers in the same World
  * Window.
  * <p/>
  * In order to support simultaneous use of this shape with multiple globes (windows), this shape maintains a cache of

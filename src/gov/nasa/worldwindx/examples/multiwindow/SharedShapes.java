@@ -26,20 +26,20 @@ import java.awt.event.*;
 import java.util.Arrays;
 
 /**
- * This example shows how to share World Wind shapes between two {@link WorldWindow} instances. In this example the two
- * World Wind windows share imagery layers and the layers representing each type of shape. Though this example uses a
+ * This example shows how to share WorldWind shapes between two {@link WorldWindow} instances. In this example the two
+ * WorldWind windows share imagery layers and the layers representing each type of shape. Though this example uses a
  * different globe for each window, it is possible for the two windows to share the same {@link Globe} as is done in the
  * {@link MultiFrame} example.
  * <p/>
- * Applications using multiple World Wind windows simultaneously should instruct World Wind to share OpenGL and other
- * resources among those windows. Most World Wind classes are designed to be shared across WorldWindow objects and are
+ * Applications using multiple WorldWind windows simultaneously should instruct WorldWind to share OpenGL and other
+ * resources among those windows. Most WorldWind classes are designed to be shared across WorldWindow objects and are
  * shared automatically. But OpenGL resources are not automatically shared. To share them, a reference to a previously
  * created WorldWindow must be specified as a constructor argument for subsequently created WorldWindows.
  * <p/>
- * Most World Wind Globe and {@link gov.nasa.worldwind.layers.Layer} objects can be shared among World Windows. Those
- * that cannot be shared have an operational dependency on the World Window they're associated with. An example is the
+ * Most WorldWind Globe and {@link gov.nasa.worldwind.layers.Layer} objects can be shared among WorldWindows. Those
+ * that cannot be shared have an operational dependency on the WorldWindow they're associated with. An example is the
  * {@link gov.nasa.worldwind.layers.ViewControlsLayer} layer for on-screen navigation. Because this layer responds to
- * input events within a specific World Window, it is not sharable. Refer to the World Wind Overview page for a list of
+ * input events within a specific WorldWindow, it is not sharable. Refer to the WorldWind Overview page for a list of
  * layers that cannot be shared.
  *
  * @author dcollins
@@ -233,39 +233,39 @@ public class SharedShapes
                 makeAirspaceLayer()
             };
 
-        // Create the shared World Wind layers.
+        // Create the shared WorldWind layers.
         Layer[] layers = new Layer[basicLayers.length + shapeLayers.length];
         System.arraycopy(basicLayers, 0, layers, 0, basicLayers.length);
         System.arraycopy(shapeLayers, 0, layers, basicLayers.length, shapeLayers.length);
 
-        // Create separate models for each World Window.
+        // Create separate models for each WorldWindow.
         Model modelForWindowA = new BasicModel(new Earth(), new LayerList(layers));
         Model modelForWindowB = new BasicModel(new EarthFlat(), new LayerList(layers));
 
-        // Create the first World Window.
+        // Create the first WorldWindow.
         WWPanel panelA = new WWPanel(null, modelForWindowA, new Dimension(900, 900));
 
         // Create a layer panel that displays the layer list shared by both WorldWindows.
         SharedLayerPanel layerPanel = new SharedLayerPanel("Shared Shapes", new Dimension(200, 0),
             Arrays.asList(shapeLayers));
 
-        // Create a box that arranges the layer panel and the World Wind windows horizontally, and assigns each the
+        // Create a box that arranges the layer panel and the WorldWind windows horizontally, and assigns each the
         // appropriate amount of space for its preferred size.
         javax.swing.Box box = javax.swing.Box.createHorizontalBox();
         box.add(layerPanel);
         box.add(javax.swing.Box.createHorizontalStrut(5));
         box.add(panelA);
 
-        // Create an application frame to display the two World Wind windows and the shared layer panel.
-        JFrame appFrame = new JFrame("World Wind Shared Shapes");
+        // Create an application frame to display the two WorldWind windows and the shared layer panel.
+        JFrame appFrame = new JFrame("WorldWind Shared Shapes");
         appFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         appFrame.getContentPane().add(box, BorderLayout.CENTER);
 
-        // Make the first World Window visible. This is essential in order to share OpenGL resources with the second
-        // World Window created below.
+        // Make the first WorldWindow visible. This is essential in order to share OpenGL resources with the second
+        // WorldWindow created below.
         appFrame.setVisible(true);
 
-        // Make the second World Window and tell it to share OpenGL resources with the first World Window.
+        // Make the second WorldWindow and tell it to share OpenGL resources with the first WorldWindow.
         WWPanel panelB = new WWPanel(panelA.getWwd(), modelForWindowB, new Dimension(900, 900));
         box.add(javax.swing.Box.createHorizontalStrut(5));
         box.add(panelB);

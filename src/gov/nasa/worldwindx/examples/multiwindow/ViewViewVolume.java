@@ -18,16 +18,16 @@ import java.awt.*;
  * This class illustrates how to display a globe, and in a separate window display another globe with a visualization of
  * the view volume in the main globe window.
  * <p/>
- * Applications using multiple World Wind windows simultaneously should instruct World Wind to share OpenGL and other
- * resources among those windows. Most World Wind classes are designed to be shared across {@link WorldWindow} objects
+ * Applications using multiple WorldWind windows simultaneously should instruct WorldWind to share OpenGL and other
+ * resources among those windows. Most WorldWind classes are designed to be shared across {@link WorldWindow} objects
  * and will be shared automatically. But OpenGL resources are not automatically shared. To share them, a reference to a
  * previously created WorldWindow must be specified as a constructor argument for subsequently created WorldWindows.
  * <p/>
- * Most World Wind {@link gov.nasa.worldwind.globes.Globe} and {@link gov.nasa.worldwind.layers.Layer} objects can be
+ * Most WorldWind {@link gov.nasa.worldwind.globes.Globe} and {@link gov.nasa.worldwind.layers.Layer} objects can be
  * shared among WorldWindows. Those that cannot be shared have an operational dependency on the WorldWindow they're
  * associated with. An example is the {@link gov.nasa.worldwind.layers.ViewControlsLayer} layer for on-screen
  * navigation. Because this layer responds to input events within a specific WorldWindow, it is not sharable. Refer to
- * the World Wind Overview page for a list of layers that cannot be shared.
+ * the WorldWind Overview page for a list of layers that cannot be shared.
  *
  * @author tag
  * @version $Id: ViewViewVolume.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -39,7 +39,7 @@ public class ViewViewVolume extends JFrame
         if (gov.nasa.worldwind.Configuration.isMacOS())
         {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "World Wind Multi-Window Analysis");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Multi-Window Analysis");
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
         }
     }
@@ -87,7 +87,7 @@ public class ViewViewVolume extends JFrame
         {
             public void run()
             {
-                // Make a World Window to observe
+                // Make a WorldWindow to observe
                 ViewViewVolume vvv = new ViewViewVolume();
                 vvv.setVisible(true);
 

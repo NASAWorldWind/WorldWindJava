@@ -7,8 +7,8 @@
 
 <project name="worldwind" default="build" basedir=".">
     <description>
-        Build script for World Wind Java. Assembles and tests the World Wind source code, creates World Wind API
-        documentation, and bundles World Wind library JAR files.
+        Build script for WorldWind Java. Assembles and tests the WorldWind source code, creates WorldWind API
+        documentation, and bundles WorldWind library JAR files.
     </description>
 
     <!-- Import the ANT build properties and project ANT macros. -->
@@ -87,7 +87,7 @@
         <javadoc destdir="${worldwind.doc.dir}/javadoc"
                  overview="${worldwind.src.dir}/overview.html"
                  encoding="UTF-8"
-                 windowtitle="NASA World Wind" doctitle="NASA World Wind" header="NASA World Wind"
+                 windowtitle="NASA WorldWind" doctitle="NASA WorldWind" header="NASA WorldWind"
                  splitindex="true" protected="true" nodeprecated="true" version="false" author="false" use="true"
                  maxmemory="1024m">
             <packageset dir="${worldwind.src.dir}" defaultexcludes="yes">
@@ -134,7 +134,7 @@
 
     <target name="bundleWebStartLibraries">
         <mkdir dir="${webstart.unsigned.dir}"/>
-        <!-- World Wind library JAR files. -->
+        <!-- WorldWind library JAR files. -->
         <copy file="${worldwind.jar.dir}/release/worldwind.jar" tofile="${webstart.unsigned.dir}/worldwind.jar"/>
         <copy file="${worldwind.jar.dir}/release/worldwindx.jar" tofile="${webstart.unsigned.dir}/worldwindx.jar"/>
         <!-- JOGL and GlueGen library JAR files. -->
@@ -428,7 +428,7 @@
 
     <!-- Helper tasks for bundling and unbundling the JOGL and GLueGen JAR files. Each Jar file is extracted to a folder
          matching the filename without its suffix. These targets are used to modify JOGL and GlueGen Jar file manifests
-         in order to deploy these files from the World Wind Java Web Start site. -->
+         in order to deploy these files from the WorldWind Java Web Start site. -->
 
     <target name="help.unpackJogl">
         <property name="jogl.jarfiles.dir" location="jogl-jarfiles"/>
@@ -528,7 +528,7 @@
     </target>
 
     <!-- Helper tasks for compiling and linking the WebView native library for the current platform. Output libraries
-         are placed in the World Wind project root folder and overwrite any existing files of the same name.
+         are placed in the WorldWind project root folder and overwrite any existing files of the same name.
 
          On Mac OS X this compiles the Objective-C sources under the folder 'lib-external/webview/macosx' into
          'libwebview.jnilib', and requires that the XCode and Java development toolkits for Mac are installed.

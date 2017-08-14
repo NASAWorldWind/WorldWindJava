@@ -1,4 +1,4 @@
-# Directs the Travis CI build service for World Wind Java
+# Directs the Travis CI build service for WorldWind Java
 # For more information see https://docs.travis-ci.com/user/customizing-the-build/
 
 # Set up to run the Java build script per the Travis CI documentation

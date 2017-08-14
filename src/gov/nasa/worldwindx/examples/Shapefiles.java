@@ -13,8 +13,8 @@ import gov.nasa.worldwindx.examples.util.RandomShapeAttributes;
 import javax.swing.*;
 
 /**
- * Illustrates how to import ESRI Shapefiles into World Wind. This uses a <code>{@link ShapefileLayerFactory}</code> to
- * parse a Shapefile's contents and convert the shapefile into an equivalent World Wind shape.
+ * Illustrates how to import ESRI Shapefiles into WorldWind. This uses a <code>{@link ShapefileLayerFactory}</code> to
+ * parse a Shapefile's contents and convert the shapefile into an equivalent WorldWind shape.
  *
  * @version $Id: Shapefiles.java 3212 2015-06-18 02:45:56Z tgaskins $
  */
@@ -48,7 +48,7 @@ public class Shapefiles extends ApplicationTemplate
                         final Layer layer = (Layer) result; // the result is the layer the factory created
                         layer.setName(WWIO.getFilename(layer.getName()));
 
-                        // Add the layer to the World Window's layer list on the Event Dispatch Thread.
+                        // Add the layer to the WorldWindow's layer list on the Event Dispatch Thread.
                         SwingUtilities.invokeLater(new Runnable()
                         {
                             @Override
@@ -70,6 +70,6 @@ public class Shapefiles extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        start("World Wind Shapefiles", AppFrame.class);
+        start("WorldWind Shapefiles", AppFrame.class);
     }
 }

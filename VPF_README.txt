@@ -12,7 +12,7 @@ to build it.
 
 1) PURPOSE OF VPF-SYMBOLS.JAR
 
-The JAR file vpf-symbols.jar found in the World Wind Java SDK contains style definitions and PNG icons for Vector
+The JAR file vpf-symbols.jar found in the WorldWind Java SDK contains style definitions and PNG icons for Vector
 Product Format (VPF) shapes. vpf-symbols.jar is 1.8 MB in size, and is therefore distributed separately to avoid
 increasing the size of worldwind.jar for the sake of supporting VPF, an uncommonly used feature.
 
@@ -25,17 +25,17 @@ GeoSym: http://www.gwg.nga.mil/pfg_documents.php
 2) USING VPF-SYMBOLS.JAR
 
 The JAR file vpf-symbols.jar must be distributed and included in the runtime class-path by applications using the World
-Wind class gov.nasa.worldwind.formats.vpf.VPFLayer. When added to an application's class-path, World Wind VPF shapes
+Wind class gov.nasa.worldwind.formats.vpf.VPFLayer. When added to an application's class-path, WorldWind VPF shapes
 automatically find and locate style and icon resources contained within this JAR file.
 
-If vpf-symbols.jar is not in the Java class-path, VPFLayer outputs the following message in the World Wind log:
+If vpf-symbols.jar is not in the Java class-path, VPFLayer outputs the following message in the WorldWind log:
 "WARNING: GeoSym style support is disabled". In this case, VPF shapes are displayed as gray outlines, and icons are
 displayed as a gray question mark.
 
 
 3) BUILDING VPF-SYMBOLS.JAR
 
-To build or reconstruct the VPF symbols JAR file for the World Wind Java SDK, follow these six steps:
+To build or reconstruct the VPF symbols JAR file for the WorldWind Java SDK, follow these six steps:
 
 - Download and extract the GeoSym Second Edition package.
 Download the GeoSym archive from the National Geospatial-Intelligence Agency (NGA) at the following page, then extract
@@ -60,7 +60,7 @@ on ImageIO.
 - Copy all GeoSym style tables.
 Copy all files under the directory GeoSymEd2Final/SYMASGN/ASCII to the directory geosym/symasgn/ascii.
 
-- Convert GeoSym line and area styles to World Wind shape attributes.
+- Convert GeoSym line and area styles to WorldWind shape attributes.
 Run the Java application gov.nasa.worldwind.formats.vpf.GeoSymAttributeConverter from the shell, passing the full path
 to GeoSymEd2Final/GRAPHICS/TEXT as the application's only parameter. Copy the output PNG files under
 gsac-out/geosym/graphics/bin to the following directory created earlier: geosym/graphics/bin. Copy the output CSV files 

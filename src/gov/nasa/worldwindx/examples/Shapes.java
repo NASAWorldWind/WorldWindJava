@@ -704,7 +704,7 @@ public class Shapes
         }
     }
 
-    private static final String APP_NAME = "World Wind Shapes";
+    private static final String APP_NAME = "WorldWind Shapes";
 
     static
     {

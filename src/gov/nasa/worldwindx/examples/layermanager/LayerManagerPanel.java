@@ -109,7 +109,7 @@ public class LayerManagerPanel extends JPanel
         this.layerPanels.clear();
         this.layerNamesPanel.removeAll();
 
-        // Fill the layers panel with the titles of all layers in the world window's current model.
+        // Fill the layers panel with the titles of all layers in the WorldWindow's current model.
         for (Layer layer : wwd.getModel().getLayers())
         {
             if (layer.getValue(AVKey.IGNORE) != null)
@@ -146,7 +146,7 @@ public class LayerManagerPanel extends JPanel
      * Loops through this layer panel's layer/checkbox list and updates the checkbox font to indicate whether the
      * corresponding layer was just rendered. This method is called by a rendering listener -- see comment below.
      *
-     * @param wwd the world window.
+     * @param wwd the WorldWindow.
      */
     protected void updateLayerActivity(WorldWindow wwd)
     {

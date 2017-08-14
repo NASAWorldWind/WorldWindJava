@@ -48,9 +48,9 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * RenderableLayer symbolLayer = new RenderableLayer();
  * symbolLayer.addRenderable(symbol);
  *
- * // Add the layer to the world window's model and request that the window redraw itself. The world window draws the
+ * // Add the layer to the WorldWindow's model and request that the window redraw itself. The WorldWindow draws the
  * // symbol on the globe at the specified position. Interactions between the symbol and the cursor are returned in the
- * // world window's picked object list, and reported to the world window's select listeners.
+ * // WorldWindow's picked object list, and reported to the WorldWindow's select listeners.
  * WorldWindow wwd = ... // A reference to your application's WorldWindow instance.
  * wwd.getModel().getLayers().add(symbolLayer);
  * wwd.redraw();

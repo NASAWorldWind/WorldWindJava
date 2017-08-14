@@ -32,7 +32,7 @@ public class ColladaViewer extends ApplicationTemplate
         {
             super(true, true, false); // Don't include the layer panel; we're using the on-screen layer tree.
 
-            // Size the World Window to take up the space typically used by the layer panel.
+            // Size the WorldWindow to take up the space typically used by the layer panel.
             Dimension size = new Dimension(1400, 800);
             this.setPreferredSize(size);
             this.pack();
@@ -47,7 +47,7 @@ public class ColladaViewer extends ApplicationTemplate
          */
         protected void addColladaLayer(ColladaRoot colladaRoot)
         {
-            // Create a ColladaController to adapt the ColladaRoot to the World Wind renderable interface.
+            // Create a ColladaController to adapt the ColladaRoot to the WorldWind renderable interface.
             ColladaController colladaController = new ColladaController(colladaRoot);
 
             // Adds a new layer containing the ColladaRoot to the end of the WorldWindow's layer list.
@@ -121,7 +121,7 @@ public class ColladaViewer extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 4000);
         Configuration.setValue(AVKey.INITIAL_PITCH, 50);
 
-        final AppFrame af = (AppFrame) start("World Wind COLLADA Viewer", AppFrame.class);
+        final AppFrame af = (AppFrame) start("WorldWind COLLADA Viewer", AppFrame.class);
 
         new WorkerThread(new File("testData/collada/collada.dae"),
             Position.fromDegrees(40.009993372683, -105.272774533734, 300), af).start();

@@ -265,6 +265,6 @@ public class InstallDTED extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind DTED Installation", InstallDTED.AppFrame.class);
+        ApplicationTemplate.start("WorldWind DTED Installation", InstallDTED.AppFrame.class);
     }
 }

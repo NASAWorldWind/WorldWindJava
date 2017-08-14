@@ -70,7 +70,7 @@ public class AllPointGraphics extends ApplicationTemplate
 
             this.addGraphicControls();
 
-            // Size the World Window to provide enough screen space for the graphics, and center the World Window
+            // Size the WorldWindow to provide enough screen space for the graphics, and center the WorldWindow
             // on the screen.
             Dimension size = new Dimension(1800, 1000);
             this.setPreferredSize(size);
@@ -235,7 +235,7 @@ public class AllPointGraphics extends ApplicationTemplate
                     double scale = (double) slider.getValue() / 100d;
                     sharedAttrs.setScale(scale);
                     sharedHighlightAttrs.setScale(scale);
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             label.setAlignmentX(JComponent.LEFT_ALIGNMENT);
@@ -255,7 +255,7 @@ public class AllPointGraphics extends ApplicationTemplate
                     JSlider slider = (JSlider) changeEvent.getSource();
                     double opacity = (double) slider.getValue() / 100d;
                     sharedAttrs.setInteriorOpacity(opacity);
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             box.add(javax.swing.Box.createVerticalStrut(10));
@@ -282,7 +282,7 @@ public class AllPointGraphics extends ApplicationTemplate
                         if (r instanceof TacticalGraphic)
                             ((TacticalGraphic) r).setShowTextModifiers(tf);
                     }
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             cb.setAlignmentX(JComponent.LEFT_ALIGNMENT);
@@ -307,7 +307,7 @@ public class AllPointGraphics extends ApplicationTemplate
                         if (r instanceof TacticalGraphic)
                             ((TacticalGraphic) r).setShowGraphicModifiers(tf);
                     }
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             cb.setAlignmentX(JComponent.LEFT_ALIGNMENT);
@@ -332,7 +332,7 @@ public class AllPointGraphics extends ApplicationTemplate
                         if (r instanceof TacticalGraphic)
                             ((TacticalGraphic) r).setShowHostileIndicator(tf);
                     }
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             cb.setAlignmentX(JComponent.LEFT_ALIGNMENT);
@@ -352,7 +352,7 @@ public class AllPointGraphics extends ApplicationTemplate
                         if (r instanceof TacticalGraphic)
                             ((TacticalGraphic) r).setShowLocation(tf);
                     }
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             cb.setAlignmentX(JComponent.LEFT_ALIGNMENT);
@@ -373,7 +373,7 @@ public class AllPointGraphics extends ApplicationTemplate
                         if (r instanceof MilStd2525TacticalGraphic)
                             ((MilStd2525TacticalGraphic) r).setStatus(status);
                     }
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             cb.setAlignmentX(JComponent.LEFT_ALIGNMENT);
@@ -390,6 +390,6 @@ public class AllPointGraphics extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -118.4961);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 20000);
 
-        ApplicationTemplate.start("World Wind MIL-STD2525 Tactical Point Graphics", AppFrame.class);
+        ApplicationTemplate.start("WorldWind MIL-STD2525 Tactical Point Graphics", AppFrame.class);
     }
 }

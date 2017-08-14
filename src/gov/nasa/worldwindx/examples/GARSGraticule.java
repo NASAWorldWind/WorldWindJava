@@ -43,6 +43,6 @@ public class GARSGraticule extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind GARS Graticule", AppFrame.class);
+        ApplicationTemplate.start("WorldWind GARS Graticule", AppFrame.class);
     }
 }

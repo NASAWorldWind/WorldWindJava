@@ -41,7 +41,7 @@ public class BrowserBalloonSizeTest extends ApplicationTemplate
             // Add a controller to display balloons when placemarks are clicked.
             this.balloonController = new BalloonController(this.getWwd());
 
-            // Size the World Window to take up the space typically used by the layer panel.
+            // Size the WorldWindow to take up the space typically used by the layer panel.
             Dimension size = new Dimension(1000, 800);
             this.setPreferredSize(size);
             this.pack();

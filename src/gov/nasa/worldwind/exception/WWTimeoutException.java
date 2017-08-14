@@ -7,7 +7,7 @@
 package gov.nasa.worldwind.exception;
 
 /**
- * Thrown when a World Wind operation times out.
+ * Thrown when a WorldWind operation times out.
  *
  * @author tag
  * @version $Id: WWTimeoutException.java 1171 2013-02-11 21:45:02Z dcollins $

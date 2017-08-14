@@ -189,7 +189,7 @@ public class WCSCoveragePanel extends JPanel
 
         public void actionPerformed(ActionEvent actionEvent)
         {
-            // If the coverage is selected, add it to the world window's current model, else remove it from the model.
+            // If the coverage is selected, add it to the WorldWindow's current model, else remove it from the model.
             if (((JCheckBox) actionEvent.getSource()).isSelected())
             {
                 if (this.component == null)
@@ -203,7 +203,7 @@ public class WCSCoveragePanel extends JPanel
                     updateComponent(this.component, false);
             }
 
-            // Tell the world window to update.
+            // Tell the WorldWindow to update.
             wwd.redraw();
         }
     }
@@ -244,7 +244,7 @@ public class WCSCoveragePanel extends JPanel
     {
         AVList configParams = coverageInfo.params.copy(); // Copy to insulate changes from the caller.
 
-        // Some wcs servers are slow, so increase the timeouts and limits used by world wind's retrievers.
+        // Some wcs servers are slow, so increase the timeouts and limits used by WorldWind's retrievers.
         configParams.setValue(AVKey.URL_CONNECT_TIMEOUT, 30000);
         configParams.setValue(AVKey.URL_READ_TIMEOUT, 30000);
         configParams.setValue(AVKey.RETRIEVAL_QUEUE_STALE_REQUEST_LIMIT, 60000);

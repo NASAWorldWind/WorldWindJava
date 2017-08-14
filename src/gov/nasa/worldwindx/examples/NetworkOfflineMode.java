@@ -14,7 +14,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Shows how to detach World Wind from the network and reattach it.
+ * Shows how to detach WorldWind from the network and reattach it.
  *
  * @author tag
  * @version $Id: NetworkOfflineMode.java 2109 2014-06-30 16:52:38Z tgaskins $

@@ -16,7 +16,7 @@ public class Version
     private static final String MINOR_VALUE = "1";
     private static final String DOT_VALUE = "0";
     private static final String versionNumber = "v" + MAJOR_VALUE + "." + MINOR_VALUE + "." + DOT_VALUE;
-    private static final String versionName = "NASA World Wind Java";
+    private static final String versionName = "NASA WorldWind Java";
 
     public static String getVersion()
     {

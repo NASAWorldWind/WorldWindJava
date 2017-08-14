@@ -127,7 +127,7 @@ public class MeasureToolUsage extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Measure Tool", MeasureToolUsage.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Measure Tool", MeasureToolUsage.AppFrame.class);
     }
 
 }

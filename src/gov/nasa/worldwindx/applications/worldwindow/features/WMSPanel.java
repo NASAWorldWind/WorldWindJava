@@ -220,7 +220,7 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
             WMSLayerInfo wmsInfo = layerNode.getWmsLayerInfo();
             AVList configParams = wmsInfo.getParams().copy(); // Copy to insulate changes from the caller.
 
-            // Some wms servers are slow, so increase the timeouts and limits used by world wind's retrievers.
+            // Some wms servers are slow, so increase the timeouts and limits used by WorldWind's retrievers.
             configParams.setValue(AVKey.URL_CONNECT_TIMEOUT, 30000);
             configParams.setValue(AVKey.URL_READ_TIMEOUT, 30000);
             configParams.setValue(AVKey.RETRIEVAL_QUEUE_STALE_REQUEST_LIMIT, 60000);

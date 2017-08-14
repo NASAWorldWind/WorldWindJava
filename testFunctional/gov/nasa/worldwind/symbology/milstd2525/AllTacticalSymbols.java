@@ -35,7 +35,7 @@ public class AllTacticalSymbols extends ApplicationTemplate
             this.addSymbols();
             this.addSymbolControls();
 
-            // Size the World Window to provide enough screen space for the symbols and center the World Window on the
+            // Size the WorldWindow to provide enough screen space for the symbols and center the WorldWindow on the
             // screen.
             Dimension size = new Dimension(1800, 1000);
             this.setPreferredSize(size);
@@ -80,7 +80,7 @@ public class AllTacticalSymbols extends ApplicationTemplate
                 lon = startLon;
             }
 
-            // Add the symbol layer to the World Wind model.
+            // Add the symbol layer to the WorldWind model.
             this.getWwd().getModel().getLayers().add(layer);
         }
 
@@ -121,7 +121,7 @@ public class AllTacticalSymbols extends ApplicationTemplate
                         {
                             if (r instanceof TacticalSymbol)
                                 ((MilStd2525TacticalSymbol) r).setShowFrame(tf);
-                            getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                            getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                         }
                     }
                 }
@@ -147,7 +147,7 @@ public class AllTacticalSymbols extends ApplicationTemplate
                         {
                             if (r instanceof TacticalSymbol)
                                 ((MilStd2525TacticalSymbol) r).setShowFill(tf);
-                            getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                            getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                         }
                     }
                 }
@@ -173,7 +173,7 @@ public class AllTacticalSymbols extends ApplicationTemplate
                         {
                             if (r instanceof TacticalSymbol)
                                 ((MilStd2525TacticalSymbol) r).setShowIcon(tf);
-                            getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                            getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                         }
                     }
                 }
@@ -200,7 +200,7 @@ public class AllTacticalSymbols extends ApplicationTemplate
                         {
                             if (r instanceof TacticalSymbol)
                                 ((MilStd2525TacticalSymbol) r).setStatus(status);
-                            getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                            getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                         }
                     }
                 }
@@ -219,7 +219,7 @@ public class AllTacticalSymbols extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -119.85);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 77000);
 
-        start("World Wind All MIL-STD-2525 Tactical Symbols", AppFrame.class);
+        start("WorldWind All MIL-STD-2525 Tactical Symbols", AppFrame.class);
     }
 
     protected static List<String> standardIdentities = Arrays.asList(

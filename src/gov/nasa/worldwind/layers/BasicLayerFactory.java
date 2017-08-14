@@ -38,7 +38,7 @@ public class BasicLayerFactory extends BasicFactory
      * For tiled image layers, this maps the <code>serviceName</code> attribute of the <code>Layer/Service</code>
      * element of the XML configuration file to the appropriate base tiled image layer type. Service types recognized
      * are: <ul> <li>"WMS" for layers that draw their data from a WMS web service.</li> <li>"WWTileService" for layers
-     * that draw their data from a World Wind tile service.</li> <li>"Offline" for layers that draw their data only from
+     * that draw their data from a WorldWind tile service.</li> <li>"Offline" for layers that draw their data only from
      * the local cache.</li> </ul>
      *
      * @param configSource the configuration source. See above for supported types.

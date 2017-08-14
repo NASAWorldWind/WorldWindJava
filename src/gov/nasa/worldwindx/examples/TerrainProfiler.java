@@ -257,6 +257,6 @@ public class TerrainProfiler extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Terrain Profiler", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Terrain Profiler", AppFrame.class);
     }
 }

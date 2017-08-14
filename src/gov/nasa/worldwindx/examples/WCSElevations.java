@@ -69,7 +69,7 @@ public class WCSElevations extends ApplicationTemplate
             this.tabbedPane.setSelectedIndex(this.tabbedPane.getTabCount() > 0 ? 1 : 0);
             this.previousTabIndex = this.tabbedPane.getSelectedIndex();
 
-            // Add the tabbed pane to a frame separate from the world window.
+            // Add the tabbed pane to a frame separate from the WorldWindow.
             JFrame controlFrame = new JFrame();
             controlFrame.getContentPane().add(tabbedPane);
             controlFrame.pack();
@@ -101,6 +101,6 @@ public class WCSElevations extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind WCS Layers", AppFrame.class);
+        ApplicationTemplate.start("WorldWind WCS Layers", AppFrame.class);
     }
 }

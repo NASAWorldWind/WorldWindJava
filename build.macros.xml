@@ -13,7 +13,7 @@
          on the current machine, resulting in unpredictable class versions.
 
          The javac compiler argument '-Xlint:unchecked' is specified in order to give more detail for unchecked
-         conversion warnings. This argument is specified in the World Wind Java IntelliJ IDEA project. Its use here
+         conversion warnings. This argument is specified in the WorldWind Java IntelliJ IDEA project. Its use here
          keeps ANT compiled classes in sync with the IntelliJ IDEA compiled classes. -->
 
     <macrodef name="compileJava">
@@ -42,15 +42,15 @@
 
     <!-- Macros for bundling library JAR files.
 
-         The World Wind core JAR file includes all class files, property files, configuration files, and image files
+         The WorldWind core JAR file includes all class files, property files, configuration files, and image files
          under the package gov.nasa.worldwind, all class files under the package com.zebraimaging, and optionally all
          class files under the package org.codehaus.jackson (depending on the worldwind.exclude.jackson property).
          The zebraimaging package includes an alternative input handler for the Zebra Imaging display controller. The
          jackson package includes the Jackson JSON parsing library which is used by gov.nasa.worldwind.formats.geojson.
          Requires jogl-all.jar, gluegen-rt.jar, gdal.jar on the class path.
 
-         The World Wind extensions JAR file includes all class files, configuration files, image files, and data
-         resource files under the package gov.nasa.worldwindx. Requires the World Wind core JAR file on the class path.
+         The WorldWind extensions JAR file includes all class files, configuration files, image files, and data
+         resource files under the package gov.nasa.worldwindx. Requires the WorldWind core JAR file on the class path.
 
          All JAR files have the Permissions attribute set to "all-permissions". This attribute is ignored for locally
          launched applications, but is required for signed Web Start Applications. This property must match the setting

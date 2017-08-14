@@ -55,7 +55,7 @@ public class LayersMenu extends JMenu
         // First remove all the existing menu items.
         this.removeAll();
 
-        // Fill the layers panel with the titles of all layers in the world window's current model.
+        // Fill the layers panel with the titles of all layers in the WorldWindow's current model.
         for (Layer layer : wwd.getModel().getLayers())
         {
             if (layer.getValue(AVKey.IGNORE) != null)

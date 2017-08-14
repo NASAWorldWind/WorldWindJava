@@ -86,7 +86,7 @@ public class KMLViewer extends ApplicationTemplate
             // KML feature balloons when feature's are selected in the on-screen layer tree.
             this.kmlAppController.setBalloonController(balloonController);
 
-            // Size the World Window to take up the space typically used by the layer panel.
+            // Size the WorldWindow to take up the space typically used by the layer panel.
             Dimension size = new Dimension(1400, 800);
             this.setPreferredSize(size);
             this.pack();
@@ -117,7 +117,7 @@ public class KMLViewer extends ApplicationTemplate
          */
         protected void addKMLLayer(KMLRoot kmlRoot)
         {
-            // Create a KMLController to adapt the KMLRoot to the World Wind renderable interface.
+            // Create a KMLController to adapt the KMLRoot to the WorldWind renderable interface.
             KMLController kmlController = new KMLController(kmlRoot);
 
             // Adds a new layer containing the KMLRoot to the end of the WorldWindow's layer list. This
@@ -312,6 +312,6 @@ public class KMLViewer extends ApplicationTemplate
     public static void main(String[] args)
     {
         //noinspection UnusedDeclaration
-        final AppFrame af = (AppFrame) start("World Wind KML Viewer", AppFrame.class);
+        final AppFrame af = (AppFrame) start("WorldWind KML Viewer", AppFrame.class);
     }
 }

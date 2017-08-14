@@ -111,6 +111,6 @@ public class AddAnimator extends ApplicationTemplate
     {
         // Call the static start method like this from the main method of your derived class.
         // Substitute your application's name for the first argument.
-        ApplicationTemplate.start("World Wind View Animator", AppFrame.class);
+        ApplicationTemplate.start("WorldWind View Animator", AppFrame.class);
     }
 }

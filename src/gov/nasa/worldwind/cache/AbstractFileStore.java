@@ -612,7 +612,7 @@ public abstract class AbstractFileStore extends WWObjectImpl implements FileStor
     }
 
     /**
-     * @param url the "file:" URL of the file to remove from the file store. Only files in the writable World Wind disk
+     * @param url the "file:" URL of the file to remove from the file store. Only files in the writable WorldWind disk
      *            cache or temp file directory are removed by this method.
      *
      * @throws IllegalArgumentException if <code>url</code> is null

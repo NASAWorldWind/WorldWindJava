@@ -32,7 +32,7 @@ public class TabbedPaneUsage
         if (Configuration.isMacOS())
         {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "World Wind Tabbed Pane Application");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Tabbed Pane Application");
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
         }
     }
@@ -123,7 +123,7 @@ public class TabbedPaneUsage
         {
             JFrame mainFrame = new JFrame();
 
-            mainFrame.setTitle("World Wind Tabbed Pane");
+            mainFrame.setTitle("WorldWind Tabbed Pane");
             mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             final JTabbedPane tabbedPane = new JTabbedPane();

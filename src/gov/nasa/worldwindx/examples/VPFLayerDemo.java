@@ -17,13 +17,13 @@ import java.awt.event.*;
 import java.io.File;
 
 /**
- * Illustrates how to import data from a Vector Product Format (VPF) database into World Wind. This uses <code>{@link
+ * Illustrates how to import data from a Vector Product Format (VPF) database into WorldWind. This uses <code>{@link
  * VPFLayer}</code> to display an imported VPF database, and uses <code>{@link VPFCoveragePanel}</code> to enable the
  * user to choose which shapes from the VPF database to display.
  * <p/>
  * To display VPF shapes with the appropriate color, style, and icon, applications must include the JAR file
  * <code>vpf-symbols.jar</code> in the Java class-path. If this JAR file is not in the Java class-path, VPFLayer outputs
- * the following message in the World Wind log: <code>WARNING: GeoSym style support is disabled</code>. In this case,
+ * the following message in the WorldWind log: <code>WARNING: GeoSym style support is disabled</code>. In this case,
  * VPF shapes are displayed as gray outlines, and icons are displayed as a gray question mark.
  *
  * @author dcollins
@@ -120,6 +120,6 @@ public class VPFLayerDemo extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        start("World Wind VPF Shapes", AppFrame.class);
+        start("WorldWind VPF Shapes", AppFrame.class);
     }
 }

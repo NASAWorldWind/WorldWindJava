@@ -138,6 +138,6 @@ public class Polygons extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Polygons", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Polygons", AppFrame.class);
     }
 }

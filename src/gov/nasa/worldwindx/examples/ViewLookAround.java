@@ -199,6 +199,6 @@ public class ViewLookAround extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind View Look Around", AppFrame.class);
+        ApplicationTemplate.start("WorldWind View Look Around", AppFrame.class);
     }
 }

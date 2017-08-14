@@ -577,7 +577,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         if (absentResourceList.isResourceAbsent(link))
             return null;
 
-        // Store remote files in the World Wind cache by default. This provides backward compatibility with applications
+        // Store remote files in the WorldWind cache by default. This provides backward compatibility with applications
         // depending on resolveReference's behavior prior to the addition of the cacheRemoteFile parameter.
         Object o = this.resolveReference(link, true);
 
@@ -609,7 +609,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      * method may not return the same temporary location.
      *
      * @param link            the document address in the form address#identifier.
-     * @param cacheRemoteFile <code>true</code> to store remote documents in the World Wind cache, or <code>false</code>
+     * @param cacheRemoteFile <code>true</code> to store remote documents in the WorldWind cache, or <code>false</code>
      *                        to store remote documents in a temporary location. Has no effect if the address is a local
      *                        document.
      *
@@ -762,7 +762,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
             throw new IllegalArgumentException(message);
         }
 
-        // Store remote files in the World Wind cache by default. This provides backward compatibility with applications
+        // Store remote files in the WorldWind cache by default. This provides backward compatibility with applications
         // depending on resolveRemoteReference's behavior prior to the addition of the cacheRemoteFile parameter.
         return this.resolveRemoteReference(linkBase, linkRef, true);
     }
@@ -778,14 +778,14 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      * for the KML file identified by {@code linkBase}. Otherwise the return value is a {@link URL} to the file in the
      * file cache or a temporary location, depending on the value of <code>cacheRemoteFile</code>.
      * <p/>
-     * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the World Wind
+     * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the WorldWind
      * cache or in a temporary location. This parameter has no effect if the file exists locally. The temporary location
      * for a retrieved file does not persist between runtime sessions, and subsequent invocations of this method may not
      * return the same temporary location.
      *
      * @param linkBase        the address of the document containing the requested element.
      * @param linkRef         the element's identifier.
-     * @param cacheRemoteFile <code>true</code> to store remote files in the World Wind cache, or <code>false</code> to
+     * @param cacheRemoteFile <code>true</code> to store remote files in the WorldWind cache, or <code>false</code> to
      *                        store remote files in a temporary location. Has no effect if the address is a local file.
      *
      * @return URL to the requested file, parsed KMLRoot, or KML feature. Returns null if the document is not yet
@@ -867,13 +867,13 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      * The return value is a parsed KMLRoot representing the linked document. The return value is null if the linked
      * file is not a KML file, or is not yet available in the FileStore.
      * <p/>
-     * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the World Wind
+     * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the WorldWind
      * cache or in a temporary location. This parameter has no effect if the file exists locally. The temporary location
      * for a retrieved file does not persist between runtime sessions, and subsequent invocations of this method may not
      * return the same temporary location.
      *
      * @param link            the address to resolve
-     * @param cacheRemoteFile <code>true</code> to store remote files in the World Wind cache, or <code>false</code> to
+     * @param cacheRemoteFile <code>true</code> to store remote files in the WorldWind cache, or <code>false</code> to
      *                        store remote files in a temporary location. Has no effect if the address is a local file.
      * @param updateTime      the time at which the link was last updated. If a cached file exists for the specified
      *                        resource, the file must have been retrieved after the link update time. Otherwise, the

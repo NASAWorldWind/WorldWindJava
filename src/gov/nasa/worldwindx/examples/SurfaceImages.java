@@ -83,6 +83,6 @@ public class SurfaceImages extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Surface Images", SurfaceImages.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Surface Images", SurfaceImages.AppFrame.class);
     }
 }

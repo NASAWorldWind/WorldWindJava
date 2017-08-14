@@ -23,7 +23,7 @@ import java.util.zip.*;
 
 /**
  * Demonstrates how to create {@link ExtrudedPolygon}s with cap and side textures. The polygon geometry is retrieved
- * from a World Wind data site, as is the image applied to the extruded polygon's sides.
+ * from a WorldWind data site, as is the image applied to the extruded polygon's sides.
  *
  * @author tag
  * @version $Id: ExtrudedShapes.java 2109 2014-06-30 16:52:38Z tgaskins $
@@ -47,7 +47,7 @@ public class ExtrudedShapes extends ApplicationTemplate
                 layer.setName("Extruded Shapes");
                 layer.setPickEnabled(true);
 
-                // Retrieve the geometry from the World Wind demo site.
+                // Retrieve the geometry from the WorldWind demo site.
                 List<Airspace> airspaces = new ArrayList<Airspace>();
                 loadAirspacesFromPath(DEMO_AIRSPACES_PATH, airspaces);
 
@@ -174,6 +174,6 @@ public class ExtrudedShapes extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Extruded Polygons on Ground", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Extruded Polygons on Ground", AppFrame.class);
     }
 }

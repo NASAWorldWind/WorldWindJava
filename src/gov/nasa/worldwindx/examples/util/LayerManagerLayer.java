@@ -88,7 +88,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
         this.annotation.getAttributes().setBorderWidth(1);
         this.addRenderable(this.annotation);
 
-        // Listen to world window for select event
+        // Listen to WorldWindow for select event
         this.wwd.addSelectListener(this);
     }
 
@@ -584,7 +584,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
                 {
                     boolean wasDraggingLayer = this.draggingLayer;
                     this.drag(event);
-                    // Update list if dragging a layer, otherwise just redraw the world window
+                    // Update list if dragging a layer, otherwise just redraw the WorldWindow
                     if (this.draggingLayer || wasDraggingLayer)
                         update = true;
                     else

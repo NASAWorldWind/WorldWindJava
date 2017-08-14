@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.logging.Level;
 
 /**
- * This class manages the initial World Wind configuration. It reads World Wind configuration files and registers their
+ * This class manages the initial WorldWind configuration. It reads WorldWind configuration files and registers their
  * contents. Configurations files contain the names of classes to create at run-time, the initial model definition,
  * including the globe, elevation model and layers, and various control quantities such as cache sizes and data
  * retrieval timeouts.
@@ -28,21 +28,21 @@ import java.util.logging.Level;
  * <p/>
  * When the Configuration class is first instantiated it reads the XML document <code>config/worldwind.xml</code> and
  * registers all the information there. The information can subsequently be retrieved via the class' various
- * <code>getValue</code> methods. Many World Wind start-up objects query this information to determine the classes to
- * create. For example, the first World Wind object created by an application is typically a {@link
- * gov.nasa.worldwind.awt.WorldWindowGLCanvas}. During construction that class causes World Wind's internal classes to
+ * <code>getValue</code> methods. Many WorldWind start-up objects query this information to determine the classes to
+ * create. For example, the first WorldWind object created by an application is typically a {@link
+ * gov.nasa.worldwind.awt.WorldWindowGLCanvas}. During construction that class causes WorldWind's internal classes to
  * be constructed, using the names of those classes drawn from the Configuration singleton, this class.
  * <p/>
- * The default World Wind configuration document is <code>config/worldwind.xml</code>. This can be changed by setting
+ * The default WorldWind configuration document is <code>config/worldwind.xml</code>. This can be changed by setting
  * the Java property <code>gov.nasa.worldwind.config.file</code> to a different file name or a valid URL prior to
- * creating any World Wind object or invoking any static methods of World Wind classes, including the Configuration
+ * creating any WorldWind object or invoking any static methods of WorldWind classes, including the Configuration
  * class. When an application specifies a different configuration location it typically does so in its main method prior
- * to using World Wind. If a file is specified its location must be on the classpath. (The contents of application and
- * World Wind jar files are typically on the classpath, in which case the configuration file may be in the jar file.)
+ * to using WorldWind. If a file is specified its location must be on the classpath. (The contents of application and
+ * WorldWind jar files are typically on the classpath, in which case the configuration file may be in the jar file.)
  * <p/>
  * Additionally, an application may set another Java property, <code>gov.nasa.worldwind.app.config.document</code>, to a
  * file name or URL whose contents contain configuration values to override those of the primary configuration document.
- * World Wind overrides only those values in this application document, it leaves all others to the value specified in
+ * WorldWind overrides only those values in this application document, it leaves all others to the value specified in
  * the primary document. Applications usually specify an override document in order to specify the initial layers in the
  * model.
  * <p/>
@@ -54,7 +54,7 @@ import java.util.logging.Level;
  * <em>Note:</em> Prior to September of 2009, configuration properties were read from the file
  * <code>config/worldwind.properties</code>. An alternate file could be specified via the
  * <code>gov.nasa.worldwind.config.file</code> Java property. These mechanisms remain available but are deprecated.
- * World Wind no longer contains a <code>worldwind.properties</code> file. If <code>worldwind.properties</code> or its
+ * WorldWind no longer contains a <code>worldwind.properties</code> file. If <code>worldwind.properties</code> or its
  * replacement as specified through the Java property exists at run-time and can be found via the classpath,
  * configuration values specified by that mechanism are given precedence over values specified by the new mechanism.
  *
@@ -644,7 +644,7 @@ public class Configuration // Singleton
     }
 
     /**
-     * Returns the highest OpenGL profile available on the current graphics device that is compatible with World Wind.
+     * Returns the highest OpenGL profile available on the current graphics device that is compatible with WorldWind.
      * The returned profile favors hardware acceleration over software acceleration. With JOGL version 2.0, this returns
      * the highest available profile from the following list:
      * <p/>
@@ -659,7 +659,7 @@ public class Configuration // Singleton
     }
 
     /**
-     * Returns a {@link javax.media.opengl.GLCapabilities} identifying graphics features required by World Wind. The
+     * Returns a {@link javax.media.opengl.GLCapabilities} identifying graphics features required by WorldWind. The
      * capabilities instance returned requests the maximum OpenGL profile supporting GL fixed function operations, a
      * frame buffer with 8 bits each of red, green, blue and alpha, a 24-bit depth buffer, double buffering, and if the
      * Java property "gov.nasa.worldwind.stereo.mode" is set to "device", device supported stereo.

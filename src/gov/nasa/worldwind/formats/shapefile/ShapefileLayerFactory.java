@@ -25,9 +25,9 @@ import java.util.Map;
  * <p/>
  * <h1>Shapefile Geometry Conversion</h1>
  * <p/>
- * Shapefile geometries are mapped to World Wind objects as follows:
+ * Shapefile geometries are mapped to WorldWind objects as follows:
  * <p/>
- * <table> <tr><th>Shapefile Geometry</th><th>World Wind Object</th></tr> <tr><td>Point</td><td>{@link
+ * <table> <tr><th>Shapefile Geometry</th><th>WorldWind Object</th></tr> <tr><td>Point</td><td>{@link
  * gov.nasa.worldwind.render.PointPlacemark}</td></tr> <tr><td>MultiPoint</td><td>List of {@link
  * gov.nasa.worldwind.render.PointPlacemark}</td></tr> <tr><td>Polyline</td><td>{@link
  * gov.nasa.worldwind.formats.shapefile.ShapefilePolylines}</td></tr> <tr><td>Polygon</td><td>{@link

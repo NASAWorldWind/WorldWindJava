@@ -23,7 +23,7 @@ import gov.nasa.worldwind.util.Logging;
  * </pre>
  * <p/>
  * To specify a different factory, set the {@link gov.nasa.worldwind.avlist.AVKey#DATA_RASTER_READER_FACTORY_CLASS_NAME}
- * value in {@link gov.nasa.worldwind.Configuration}, either directly or via the World Wind configuration file. To add
+ * value in {@link gov.nasa.worldwind.Configuration}, either directly or via the WorldWind configuration file. To add
  * readers to the default set, create a subclass of this class, override {@link #findReaderFor(Object,
  * gov.nasa.worldwind.avlist.AVList)}, and specify the new class to the configuration.
  *

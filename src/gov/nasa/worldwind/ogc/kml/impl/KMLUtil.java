@@ -113,7 +113,7 @@ public class KMLUtil
      * Translate a WorldWind units constant ({@link AVKey#PIXELS}, {@link AVKey#INSET_PIXELS}, or {@link AVKey#FRACTION}
      * to the corresponding KML unit string ("pixels", "insetPixels", or "fraction").
      *
-     * @param units World Wind units to translate.
+     * @param units WorldWind units to translate.
      *
      * @return KML units, or null if the argument is not a valid WW unit.
      */

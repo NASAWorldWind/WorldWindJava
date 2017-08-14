@@ -133,6 +133,6 @@ public class DetailHints extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Detail Hints", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Detail Hints", AppFrame.class);
     }
 }

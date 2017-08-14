@@ -8,27 +8,27 @@
 <jnlp spec="1.0+" codebase="" href="worldwindx.jnlp">
 
     <!--
-        Provides a description of the World Wind SDK extensions library.
+        Provides a description of the WorldWind SDK extensions library.
     -->
     <information>
-        <title>NASA World Wind Java Extensions</title>
+        <title>NASA WorldWind Java Extensions</title>
         <vendor>NASA</vendor>
         <homepage href="https://worldwind.arc.nasa.gov"/>
         <offline-allowed/>
     </information>
 
     <!--
-        Requests a trusted application environment. The World Wind SDK extensions library requires access to the network
-        and the local filesystem. All World Wind JAR files are signed with a digital signature associated with NASA.
+        Requests a trusted application environment. The WorldWind SDK extensions library requires access to the network
+        and the local filesystem. All WorldWind JAR files are signed with a digital signature associated with NASA.
     -->
     <security>
         <all-permissions/>
     </security>
 
     <!--
-        Specifies the resources required by the World Wind SDK extensions library:
-        * World Wind extensions JAR file.
-        * World Wind core Java Web Start component.
+        Specifies the resources required by the WorldWind SDK extensions library:
+        * WorldWind extensions JAR file.
+        * WorldWind core Java Web Start component.
     -->
     <resources>
         <jar href="worldwindx.jar"/>

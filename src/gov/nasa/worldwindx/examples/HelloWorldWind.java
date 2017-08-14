@@ -9,7 +9,7 @@ import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 
 /**
- * This is the most basic World Wind program.
+ * This is the most basic WorldWind program.
  *
  * @version $Id: HelloWorldWind.java 1971 2014-04-29 21:31:28Z dcollins $
  */
@@ -37,7 +37,7 @@ public class HelloWorldWind
     {
         if (Configuration.isMacOS())
         {
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Hello World Wind");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Hello WorldWind");
         }
 
         java.awt.EventQueue.invokeLater(new Runnable()

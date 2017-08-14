@@ -10,7 +10,7 @@ import gov.nasa.worldwind.avlist.AVList;
 import gov.nasa.worldwind.event.MessageListener;
 
 /**
- * An interface provided by the major World Wind components to provide attribute-value list management and
+ * An interface provided by the major WorldWind components to provide attribute-value list management and
  * property change management. Classifies implementers as property-change listeners, allowing them to receive
  * property-change events.
  *

@@ -124,7 +124,7 @@ public class ApplicationTemplate
                 this.getContentPane().add(this.statsPanel, BorderLayout.EAST);
             }
 
-            // Create and install the view controls layer and register a controller for it with the World Window.
+            // Create and install the view controls layer and register a controller for it with the WorldWindow.
             ViewControlsLayer viewControlsLayer = new ViewControlsLayer();
             insertBeforeCompass(getWwd(), viewControlsLayer);
             this.getWwd().addSelectListener(new ViewControlsSelectListener(this.getWwd(), viewControlsLayer));
@@ -287,7 +287,7 @@ public class ApplicationTemplate
         if (Configuration.isMacOS())
         {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "World Wind Application");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Application");
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
             System.setProperty("apple.awt.brushMetalLook", "true");
         }
@@ -330,6 +330,6 @@ public class ApplicationTemplate
     {
         // Call the static start method like this from the main method of your derived class.
         // Substitute your application's name for the first argument.
-        ApplicationTemplate.start("World Wind Application", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Application", AppFrame.class);
     }
 }

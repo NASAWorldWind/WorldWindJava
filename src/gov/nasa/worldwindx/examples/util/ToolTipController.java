@@ -34,7 +34,7 @@ public class ToolTipController implements SelectListener, Disposable
     /**
      * Create a controller for a specified {@link WorldWindow} that displays tool tips on hover and/or rollover.
      *
-     * @param wwd         the World Window to monitor.
+     * @param wwd         the WorldWindow to monitor.
      * @param rolloverKey the key to use when looking up tool tip text from the shape's AVList when a rollover event
      *                    occurs. May be null, in which case a tool tip is not displayed for rollover events.
      * @param hoverKey    the key to use when looking up tool tip text from the shape's AVList when a hover event
@@ -52,7 +52,7 @@ public class ToolTipController implements SelectListener, Disposable
     /**
      * Create a controller for a specified {@link WorldWindow} that displays "DISPLAY_NAME" on rollover.
      *
-     * @param wwd         the World Window to monitor.
+     * @param wwd         the WorldWindow to monitor.
      */
     public ToolTipController(WorldWindow wwd)
     {

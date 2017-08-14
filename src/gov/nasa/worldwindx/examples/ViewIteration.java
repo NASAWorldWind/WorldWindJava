@@ -221,7 +221,7 @@ public class ViewIteration extends ApplicationTemplate
         try
         {
             AppFrame frame = new AppFrame();
-            frame.setTitle("World Wind View Paths");
+            frame.setTitle("WorldWind View Paths");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
         }

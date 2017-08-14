@@ -103,6 +103,6 @@ public class GPSTracks extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Tracks", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Tracks", AppFrame.class);
     }
 }

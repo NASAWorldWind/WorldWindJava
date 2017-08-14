@@ -22,7 +22,7 @@ import java.io.*;
 import java.net.URL;
 
 /**
- * Draws an image parallel to the screen at a specified screen location relative to the World Window. If no image is
+ * Draws an image parallel to the screen at a specified screen location relative to the WorldWindow. If no image is
  * specified, a filled rectangle is drawn in its place.
  *
  * @author tag
@@ -119,7 +119,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
 
     /**
      * Convenience method to specify the location of the image on the screen. The specified <code>screenLocation</code>
-     * is relative to the upper-left corner of the World Window, and the image is centered on this location.
+     * is relative to the upper-left corner of the WorldWindow, and the image is centered on this location.
      *
      * @param screenLocation the screen location on which to center the image. May be null, in which case the image is
      *                       not displayed.

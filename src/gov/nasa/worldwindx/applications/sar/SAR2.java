@@ -741,7 +741,7 @@ public class SAR2 extends JFrame
     private void initComponents()
     {
         //======== this ========
-        setTitle("World Wind Search and Rescue");
+        setTitle("WorldWind Search and Rescue");
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter()
         {
@@ -1145,7 +1145,7 @@ public class SAR2 extends JFrame
                 });
                 helpMenu.add(sarHelp);
 
-                //---- "About [World Wind Search and Rescue Prototype]" ----
+                //---- "About [WorldWind Search and Rescue Prototype]" ----
                 if (!Configuration.isMacOS())
                 {
                     JMenuItem about = new JMenuItem();

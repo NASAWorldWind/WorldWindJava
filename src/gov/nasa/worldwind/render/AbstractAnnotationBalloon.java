@@ -188,7 +188,7 @@ public abstract class AbstractAnnotationBalloon extends AbstractBalloon
             // Apply the computed balloon size and offset to the internal annotation's attributes. Adjust the screen
             // offset so that an offset of (0, 0) pixels maps to the annotation's lower left corner, and an offset of
             // (1, 1) fractions maps to the annotation's upper right corner. We do this to present a consistent meaning
-            // for offset throughout the World Wind SDK. By default, annotation's offset is relative to it's bottom
+            // for offset throughout the WorldWind SDK. By default, annotation's offset is relative to it's bottom
             // center. We apply an additional offset of width/2 to compensate for this.
             annotationAttrs.setSize(screenSize);
             annotationAttrs.setDrawOffset(

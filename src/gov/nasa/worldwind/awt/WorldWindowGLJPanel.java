@@ -20,7 +20,7 @@ import java.beans.*;
 import java.util.*;
 
 /**
- * <code>WorldWindowGLCanvas</code> is a lightweight Swing component for displaying World Wind {@link Model}s (globe and
+ * <code>WorldWindowGLCanvas</code> is a lightweight Swing component for displaying WorldWind {@link Model}s (globe and
  * layers). It's a self-contained component intended to serve as an application's <code>WorldWindow</code>. Construction
  * options exist to specify a specific graphics device and to share graphics resources with another graphics device.
  * <p/>
@@ -34,14 +34,14 @@ import java.util.*;
  * This class is capable of supporting stereo devices. To cause a stereo device to be selected and used, specify the
  * Java VM property "gov.nasa.worldwind.stereo.mode=device" prior to creating an instance of this class. A stereo
  * capable {@link SceneController} such as {@link gov.nasa.worldwind.StereoSceneController} must also be specified in
- * the World Wind {@link Configuration}. The default configuration specifies a stereo-capable controller. To prevent
+ * the WorldWind {@link Configuration}. The default configuration specifies a stereo-capable controller. To prevent
  * stereo from being used by subsequently opened {@code WorldWindowGLCanvas}es, set the property to a an empty string,
- * "". If a stereo device cannot be selected and used, this falls back to a non-stereo device that supports World Wind's
+ * "". If a stereo device cannot be selected and used, this falls back to a non-stereo device that supports WorldWind's
  * minimum requirements.
  * <p/>
  * Under certain conditions, JOGL replaces the <code>GLContext</code> associated with instances of this class. This then
  * necessitates that all resources such as textures that have been stored on the graphic devices must be regenerated for
- * the new context. World Wind does this automatically by clearing the associated {@link GpuResourceCache}. Objects
+ * the new context. WorldWind does this automatically by clearing the associated {@link GpuResourceCache}. Objects
  * subsequently rendered automatically re-create those resources. If an application creates its own graphics resources,
  * including textures, vertex buffer objects and display lists, it must store them in the <code>GpuResourceCache</code>
  * associated with the current {@link gov.nasa.worldwind.render.DrawContext} so that they are automatically cleared, and

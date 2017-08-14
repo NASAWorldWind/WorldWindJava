@@ -12,7 +12,7 @@ import gov.nasa.worldwind.render.SurfaceImage;
 /**
  * This example demonstrates how to retrieve a remote image and display it as a {@link
  * gov.nasa.worldwind.render.SurfaceImage}. <code>SurfaceImage</code> downloads the image in a separate thread via the
- * World Wind retrieval service. Once the image is retrieved, <code>SurfaceImage</code> renders it on the globe.
+ * WorldWind retrieval service. Once the image is retrieved, <code>SurfaceImage</code> renders it on the globe.
  *
  * @author dcollins
  * @version $Id: RemoteSurfaceImage.java 2109 2014-06-30 16:52:38Z tgaskins $
@@ -40,6 +40,6 @@ public class RemoteSurfaceImage extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Remote Surface Image", RemoteSurfaceImage.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Remote Surface Image", RemoteSurfaceImage.AppFrame.class);
     }
 }

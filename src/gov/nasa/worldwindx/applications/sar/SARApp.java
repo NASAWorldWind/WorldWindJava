@@ -13,7 +13,7 @@ import gov.nasa.worldwind.Configuration;
  */
 public class SARApp
 {
-    public static final String APP_NAME = "World Wind Search and Rescue Prototype";
+    public static final String APP_NAME = "WorldWind Search and Rescue Prototype";
     public static final String APP_VERSION = "(Version 6.2 released 7/15/2010)";
     public static final String APP_NAME_AND_VERSION = APP_NAME + " " + APP_VERSION;
 

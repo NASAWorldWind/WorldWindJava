@@ -341,6 +341,6 @@ public class PickFrustum extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Picking Frustum", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Picking Frustum", AppFrame.class);
     }
 }

@@ -687,7 +687,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
 
     /**
      * Start a new {@link BulkRetrievalThread} that downloads all elevations for a given sector and resolution to the
-     * current World Wind file cache, without downloading imagery already in the cache.
+     * current WorldWind file cache, without downloading imagery already in the cache.
      * <p/>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link BasicElevationModelBulkDownloader}.
@@ -722,7 +722,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
      *
      * @param sector     the sector to download data for.
      * @param resolution the target resolution, provided in radians of latitude per texel.
-     * @param fileStore  the file store in which to place the downloaded elevations. If null the current World Wind file
+     * @param fileStore  the file store in which to place the downloaded elevations. If null the current WorldWind file
      *                   cache is used.
      * @param listener   an optional retrieval listener. May be null.
      *
@@ -749,7 +749,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     }
 
     /**
-     * Get the estimated size in bytes of the elevations not in the World Wind file cache for the given sector and
+     * Get the estimated size in bytes of the elevations not in the WorldWind file cache for the given sector and
      * resolution.
      * <p/>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
@@ -776,7 +776,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
      *
      * @param sector     the sector to estimate.
      * @param resolution the target resolution, provided in radians of latitude per texel.
-     * @param fileStore  the file store to examine. If null the current World Wind file cache is used.
+     * @param fileStore  the file store to examine. If null the current WorldWind file cache is used.
      *
      * @return the estimated size in bytes of the missing elevations.
      *
@@ -1620,7 +1620,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     protected synchronized MemoryCache getExtremesLookupCache()
     {
         // Note that the extremes lookup cache does not belong to the WorldWind memory cache set, therefore it will not
-        // be automatically cleared and disposed when World Wind is shutdown. However, since the extremes lookup cache
+        // be automatically cleared and disposed when WorldWind is shutdown. However, since the extremes lookup cache
         // is a local reference to this elevation model, it will be reclaimed by the JVM garbage collector when this
         // elevation model is reclaimed by the GC.
 
@@ -2021,7 +2021,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         //
         // Note that we use the URL's String representation as the cache key. We cannot use the URL itself, because
         // the cache invokes the methods Object.hashCode() and Object.equals() on the cache key. URL's implementations
-        // of hashCode() and equals() perform blocking IO calls. World Wind does not perform blocking calls during
+        // of hashCode() and equals() perform blocking IO calls. WorldWind does not perform blocking calls during
         // rendering, and this method is likely to be called from the rendering thread.
         WMSCapabilities caps;
         if (this.isNetworkRetrievalEnabled())

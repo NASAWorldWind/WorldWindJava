@@ -169,6 +169,6 @@ public class VideoOnTerrain extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 37.8432);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -105.0527);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 7000);
-        ApplicationTemplate.start("World Wind Video on Terrain", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Video on Terrain", AppFrame.class);
     }
 }

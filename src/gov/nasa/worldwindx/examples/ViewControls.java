@@ -182,6 +182,6 @@ public class ViewControls extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind View Controls", AppFrame.class);
+        ApplicationTemplate.start("WorldWind View Controls", AppFrame.class);
     }
 }

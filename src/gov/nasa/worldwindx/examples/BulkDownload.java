@@ -11,7 +11,7 @@ import gov.nasa.worldwind.util.WWUtil;
 import java.awt.*;
 
 /**
- * Illustrates how to use World Wind to retrieve data from layers and elevation models in bulk from a remote source.
+ * Illustrates how to use WorldWind to retrieve data from layers and elevation models in bulk from a remote source.
  * This class uses a <code>{@link gov.nasa.worldwindx.examples.util.SectorSelector}</code> to specify the geographic area
  * to retrieve, then retrieves data for the specified area using the <code>{@link gov.nasa.worldwind.retrieve.BulkRetrievable}</code>
  * interface on layers and elevation models that support it.
@@ -28,7 +28,7 @@ public class BulkDownload extends ApplicationTemplate
             // Add the bulk download control panel.
             this.getControlPanel().add(new BulkDownloadPanel(this.getWwd()), BorderLayout.SOUTH);
 
-            // Size the application window to provide enough screen space for the World Window and the bulk download
+            // Size the application window to provide enough screen space for the WorldWindow and the bulk download
             // panel, then center the application window on the screen.
             Dimension size = new Dimension(1200, 800);
             this.setPreferredSize(size);
@@ -39,6 +39,6 @@ public class BulkDownload extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Bulk Download", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Bulk Download", AppFrame.class);
     }
 }

@@ -109,6 +109,6 @@ public class LineBackground extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Line Backgrounds", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Line Backgrounds", AppFrame.class);
     }
 }

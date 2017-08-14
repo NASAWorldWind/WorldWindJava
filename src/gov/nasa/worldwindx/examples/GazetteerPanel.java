@@ -43,7 +43,7 @@ public class GazetteerPanel extends JPanel
     /**
      * Create a new panel.
      *
-     * @param wwd                World window to animate when a search is performed.
+     * @param wwd                WorldWindow to animate when a search is performed.
      * @param gazetteerClassName Name of the gazetteer class to instantiate. If this parameter is {@code null} a {@link
      *                           YahooGazetteer} is instantiated.
      *

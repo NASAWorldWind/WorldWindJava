@@ -13,7 +13,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.render.Box;
 
 /**
- * Illustrates how to use the World Wind <code>{@link Box}</code> rigid shape to display an arbitrarily sized and
+ * Illustrates how to use the WorldWind <code>{@link Box}</code> rigid shape to display an arbitrarily sized and
  * oriented box at a geographic position on the Globe.
  *
  * @author ccrick
@@ -133,6 +133,6 @@ public class Boxes extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Boxes", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Boxes", AppFrame.class);
     }
 }

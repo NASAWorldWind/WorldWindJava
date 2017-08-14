@@ -143,10 +143,10 @@ public class DeclutterTacticalSymbols extends ApplicationTemplate
             machineGunSymbol.setLODSelector(lodSelector); // specify the LOD selector
             this.symbolLayer.addRenderable(machineGunSymbol);
 
-            // Add the symbol layer to the World Wind model.
+            // Add the symbol layer to the WorldWind model.
             this.getWwd().getModel().getLayers().add(symbolLayer);
 
-            // Size the World Window to provide enough screen space for the symbols and center the World Window on the
+            // Size the WorldWindow to provide enough screen space for the symbols and center the WorldWindow on the
             // screen.
             Dimension size = new Dimension(1800, 1000);
             this.setPreferredSize(size);
@@ -164,6 +164,6 @@ public class DeclutterTacticalSymbols extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_PITCH, 82);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 20000);
 
-        start("World Wind Tactical Symbol Decluttering", AppFrame.class);
+        start("WorldWind Tactical Symbol Decluttering", AppFrame.class);
     }
 }

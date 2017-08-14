@@ -13,10 +13,10 @@ import gov.nasa.worldwind.util.Logging;
 import javax.media.opengl.GLAutoDrawable;
 
 /**
- * Illustrates how to specify the OpenGL features World Wind uses by configuring a <code>{@link
+ * Illustrates how to specify the OpenGL features WorldWind uses by configuring a <code>{@link
  * GLRuntimeCapabilities}</code>. By defining a custom <code>{@link gov.nasa.worldwind.WorldWindowGLDrawable}</code> and
  * setting properties on the GLRuntimeCapabilities attached to its SceneController, applications can specify which
- * OpenGL features World Wind uses during rendering.
+ * OpenGL features WorldWind uses during rendering.
  *
  * @author dcollins
  * @version $Id: ConfiguringGLRuntimeCapabilities.java 3432 2015-10-01 19:40:30Z dcollins $
@@ -26,7 +26,7 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
     static
     {
         // Modify the configuration to specify our custom WorldWindowGLDrawable. Normally, an application would specify
-        // this in a configuration file. For example, via the standard World Wind XML configuration file:
+        // this in a configuration file. For example, via the standard WorldWind XML configuration file:
         //
         //    <WorldWindConfiguration version="1">
         //        ...
@@ -34,7 +34,7 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
         //        ...
         //    </WorldWindConfiguration>
         //
-        // Or via the legacy World Wind properties file:
+        // Or via the legacy WorldWind properties file:
         //
         //    ...
         //    gov.nasa.worldwind.avkey.WorldWindowClassName=MyGLAutoDrawableClassName
@@ -47,7 +47,7 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
     /**
      * Subclass of {@link gov.nasa.worldwind.WorldWindowGLAutoDrawable} which overrides the method {@link
      * gov.nasa.worldwind.WorldWindowGLAutoDrawable#init(javax.media.opengl.GLAutoDrawable)} to configure the OpenGL
-     * features used by the World Wind SDK.
+     * features used by the WorldWind SDK.
      */
     public static class MyGLAutoDrawable extends WorldWindowGLAutoDrawable
     {
@@ -57,7 +57,7 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
         }
 
         /**
-         * Overridden to configure the OpenGL features used by the World Wind SDK. See {@link
+         * Overridden to configure the OpenGL features used by the WorldWind SDK. See {@link
          * javax.media.opengl.GLEventListener#init(GLAutoDrawable)}.
          *
          * @param glAutoDrawable the drawable
@@ -65,12 +65,12 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
         public void init(GLAutoDrawable glAutoDrawable)
         {
             // Invoked when the GL context changes. The host machine capabilities may have changed, so re-configure the
-            // OpenGL features used by the World Wind SDK.
+            // OpenGL features used by the WorldWind SDK.
             super.init(glAutoDrawable);
             this.configureGLRuntimeCaps();
         }
 
-        /** Configures the OpenGL runtime features used by the World Wind SDK. */
+        /** Configures the OpenGL runtime features used by the WorldWind SDK. */
         protected void configureGLRuntimeCaps()
         {
             // Get a reference to the OpenGL Runtime Capabilities associated with this WorldWindow's SceneController.
@@ -90,14 +90,14 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
                 return;
             }
 
-            // Configure which OpenGL features may be used by the World Wind SDK. Configuration values for features
+            // Configure which OpenGL features may be used by the WorldWind SDK. Configuration values for features
             // which are not available on the host machine are ignored. This example shows configuration of the OpenGL
             // framebuffer objects feature.
             glrc.setFramebufferObjectEnabled(this.isEnableFramebufferObjects());
         }
 
         /**
-         * Returns true if the World Wind SDK should enable use of OpenGL framebuffer objects (if available), and false
+         * Returns true if the WorldWind SDK should enable use of OpenGL framebuffer objects (if available), and false
          * otherwise.
          *
          * @return true ot enable use of GL framebuffer objects; false otherwise.
@@ -105,7 +105,7 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
         protected boolean isEnableFramebufferObjects()
         {
             // Applications inject their logic for determining whether or not to enable use of OpenGL framebuffer
-            // objects in the World Wind SDK. If OpenGL framebuffer objects are not available on the host machine,
+            // objects in the WorldWind SDK. If OpenGL framebuffer objects are not available on the host machine,
             // this setting is ignored.
             return false;
         }
@@ -113,6 +113,6 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        start("World Wind Configuring GL Runtime Capabilities", AppFrame.class);
+        start("WorldWind Configuring GL Runtime Capabilities", AppFrame.class);
     }
 }

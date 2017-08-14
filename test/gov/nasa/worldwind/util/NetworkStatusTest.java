@@ -60,7 +60,7 @@ public class NetworkStatusTest
     public void testWorldWindAvailable()
     {
         boolean tf = this.netStat.isWorldWindServerUnavailable();
-        assertFalse("World Wind server unavailable test ", tf);
+        assertFalse("WorldWind server unavailable test ", tf);
     }
 
     @Test

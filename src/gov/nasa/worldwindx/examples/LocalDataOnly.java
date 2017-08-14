@@ -31,7 +31,7 @@ public class LocalDataOnly extends ApplicationTemplate
     {
         ApplicationTemplate.start("Local Data Only", AppFrame.class);
 
-        // Force World Wind not to use the network
+        // Force WorldWind not to use the network
         WorldWind.getNetworkStatus().setOfflineMode(true);
     }
 }

@@ -8,28 +8,28 @@
 <jnlp  spec="1.0+" codebase="" href="gdal.jnlp">
 
     <!--
-        Provides a description of the World Wind GDAL library.
+        Provides a description of the WorldWind GDAL library.
     -->
     <information>
-        <title>NASA World Wind Java GDAL</title>
+        <title>NASA WorldWind Java GDAL</title>
         <vendor>NASA</vendor>
         <homepage href="https://worldwind.arc.nasa.gov"/>
         <offline-allowed/>
     </information>
 
     <!--
-        Requests a trusted application environment. The World Wind GDAL library requires access to the local filesystem.
-        All World Wind JAR files are signed with a digital signature associated with NASA.
+        Requests a trusted application environment. The WorldWind GDAL library requires access to the local filesystem.
+        All WorldWind JAR files are signed with a digital signature associated with NASA.
     -->
     <security>
         <all-permissions/>
     </security>
 
     <!--
-        Specifies the resources required by the World Wind GDAL library:
-        * World Wind GDAL JAR file.
-        * World Wind GDAL data JAR file.
-        * World Wind GDAL native libraries.
+        Specifies the resources required by the WorldWind GDAL library:
+        * WorldWind GDAL JAR file.
+        * WorldWind GDAL data JAR file.
+        * WorldWind GDAL native libraries.
     -->
     <resources>
         <jar href="gdal.jar"/>

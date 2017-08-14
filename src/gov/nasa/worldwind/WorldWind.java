@@ -94,16 +94,16 @@ public final class WorldWind
     }
 
     /**
-     * Reinitialize World Wind to its initial ready state. Shut down and restart all World Wind services and clear all
-     * World Wind memory caches. Cache memory will be released at the next JVM garbage collection.
+     * Reinitialize WorldWind to its initial ready state. Shut down and restart all WorldWind services and clear all
+     * WorldWind memory caches. Cache memory will be released at the next JVM garbage collection.
      * <p/>
-     * Call this method to reduce World Wind's current resource usage to its initial, empty state.
+     * Call this method to reduce WorldWind's current resource usage to its initial, empty state.
      * <p/>
      * The state of any open {@link WorldWindow} objects is indeterminate subsequent to invocation of this method. The
      * core WorldWindow objects attempt to shut themselves down cleanly during the call, but their resulting window
      * state is undefined.
      * <p/>
-     * World Wind can continue to be used after calling this method.
+     * WorldWind can continue to be used after calling this method.
      */
     public static synchronized void shutDown()
     {
@@ -169,9 +169,9 @@ public final class WorldWind
     }
 
     /**
-     * Indicates whether World Wind will attempt to connect to the network to retrieve data or for other reasons.
+     * Indicates whether WorldWind will attempt to connect to the network to retrieve data or for other reasons.
      *
-     * @return <code>true</code> if World Wind is in off-line mode, <code>false</code> if not.
+     * @return <code>true</code> if WorldWind is in off-line mode, <code>false</code> if not.
      *
      * @see NetworkStatus
      */
@@ -181,10 +181,10 @@ public final class WorldWind
     }
 
     /**
-     * Indicate whether World Wind should attempt to connect to the network to retrieve data or for other reasons. The
+     * Indicate whether WorldWind should attempt to connect to the network to retrieve data or for other reasons. The
      * default value for this attribute is <code>false</code>, indicating that the network should be used.
      *
-     * @param offlineMode <code>true</code> if World Wind should use the network, <code>false</code> otherwise
+     * @param offlineMode <code>true</code> if WorldWind should use the network, <code>false</code> otherwise
      *
      * @see NetworkStatus
      */

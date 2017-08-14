@@ -82,14 +82,14 @@ public class DataImportUtil
     }
 
     /**
-     * Returns true if the specified input source is non-null and represents a reference to a World Wind .NET LayerSet
+     * Returns true if the specified input source is non-null and represents a reference to a WorldWind .NET LayerSet
      * XML document, and false otherwise. The input source may be one of the following: <ul> <li>{@link String}</li>
      * <li>{@link java.io.File}</li> <li>{@link java.net.URL}</li> <li>{@link java.net.URI}</li> <li>{@link
      * java.io.InputStream}</li> </ul>
      *
-     * @param source the input source reference to test as a World Wind .NET LayerSet document.
+     * @param source the input source reference to test as a WorldWind .NET LayerSet document.
      *
-     * @return true if the input source is a World Wind .NET LayerSet document, and false otherwise.
+     * @return true if the input source is a WorldWind .NET LayerSet document, and false otherwise.
      *
      * @throws IllegalArgumentException if the input source is null.
      */

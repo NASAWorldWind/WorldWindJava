@@ -150,7 +150,7 @@ public class CrosshairLayer extends AbstractLayer
 
     /**
      * Sets the behavior the layer uses to size the crosshair icon when the viewport size changes, typically when the
-     * World Wind window is resized. If the value is AVKey.RESIZE_KEEP_FIXED_SIZE, the icon size is kept to the size
+     * WorldWind window is resized. If the value is AVKey.RESIZE_KEEP_FIXED_SIZE, the icon size is kept to the size
      * specified in its image file scaled by the layer's current icon scale. If the value is AVKey.RESIZE_STRETCH, the
      * icon is resized to have a constant size relative to the current viewport size. If the viewport shrinks the icon
      * size decreases; if it expands then the icon file enlarges. The relative size is determined by the current

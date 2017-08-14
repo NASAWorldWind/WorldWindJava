@@ -71,6 +71,6 @@ public class DeepPicking extends Airspaces
 
     public static void main(String[] args)
     {
-        start("World Wind Deep Picking", AppFrame.class);
+        start("WorldWind Deep Picking", AppFrame.class);
     }
 }
