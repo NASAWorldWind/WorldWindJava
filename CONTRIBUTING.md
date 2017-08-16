@@ -1,4 +1,4 @@
-# Contributing to Web WorldWind
+# Contributing to WorldWind Java
 
 #### Table of Contents
 
@@ -186,7 +186,7 @@ Second (or later if there is one) edition.
         
 ### Reporting Bugs
 
-This section guides you through submitting a bug report to Web WorldWind. Following these guidelines helps both the
+This section guides you through submitting a bug report to WorldWind Java. Following these guidelines helps both the
 WorldWind team and community understand your report, reproduce the behavior, and find related reports.
 
 #### Before Submitting a Bug Report
@@ -227,7 +227,7 @@ conditions it normally happens.
 
 ### Suggesting New Features
 
-This section guides you through submitting and enhancement for Web WorldWind, including completely new features and minor
+This section guides you through submitting and enhancement for WorldWind Java, including completely new features and minor
 improvements to existing functionalities. Following these guidelines helps the WorldWind team and community understand
 your suggestion and find related suggestions.
 
@@ -256,7 +256,7 @@ in the appropriate repository and provide the following information:
 
 ## Resources
 
-For Web WorldWind tutorials and examples, please check out our website: https://worldwind.arc.nasa.gov/.
+For WorldWind Java tutorials and examples, please check out our website: https://worldwind.arc.nasa.gov/.
 
 For community support and FAQs, check out the WorldWind Forum: https://forum.worldwindcentral.com/.
 
