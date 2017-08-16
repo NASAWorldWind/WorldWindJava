@@ -191,10 +191,8 @@ WorldWind team and community understand your report, reproduce the behavior, and
 
 #### Before Submitting a Bug Report
 
-* Check the [**"Common Problems"**](https://worldwind.arc.nasa.gov/web/tutorials/common-problems/) page on the WorldWind
-website. This page describes common issues that users or developers frequently encounter and gives solutions to those issues.
-* Check the [**WorldWind Forum**](https://forum.worldwindcentral.com/forum/web-world-wind/web-world-wind-help).
-* Check this repository's [**issues**](https://github.com/NASAWorldWind/WebWorldWind/issues) to see if the problem has
+* Check the [**WorldWind Forum**](https://forum.worldwindcentral.com/forum/world-wind-java-forums).
+* Check this repository's [**issues**](https://github.com/NASAWorldWind/WorldWindJava/issues) to see if the problem has
 already been reported. If it has and the issue is **still open**, add a comment to the existing issue instead of opening
 a new one.
 
@@ -231,7 +229,7 @@ This section guides you through submitting and enhancement for WorldWind Java, i
 improvements to existing functionalities. Following these guidelines helps the WorldWind team and community understand
 your suggestion and find related suggestions.
 
-Before creating new feature suggestions, check this repository's [issues](https://github.com/NASAWorldWind/WebWorldWind/issues)
+Before creating new feature suggestions, check this repository's [issues](https://github.com/NASAWorldWind/WorldWindJava/issues)
 as you may find out that you don't need to create one. When you are creating an enhancement suggestion, please provide as many details as possible. Fill in the [template](ISSUE_TEMPLATE.md), including the steps that you imagine you would take if the feature you're requesting existed.
 
 #### Submitting a Good New Feature Suggestion
