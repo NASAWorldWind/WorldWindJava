@@ -215,7 +215,7 @@ public class SegmentPlaneController implements MouseListener, MouseMotionListene
         {
             if (this.active)
             {
-                // Don't update the segment plane here because the World Window current cursor position will not have
+                // Don't update the segment plane here because the WorldWindow current cursor position will not have
                 // been updated to reflect the current mouse position. Wait to update in the position listener, but
                 // consume the event so the View doesn't respond to it.
                 e.consume();

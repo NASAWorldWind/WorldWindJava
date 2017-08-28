@@ -8,33 +8,33 @@
 <jnlp spec="1.0+" codebase="" href="worldwind.jnlp">
 
     <!--
-        Provides a description of the World Wind SDK core library.
+        Provides a description of the WorldWind SDK core library.
     -->
     <information>
-        <title>NASA World Wind Java</title>
+        <title>NASA WorldWind Java</title>
         <vendor>NASA</vendor>
         <homepage href="https://worldwind.arc.nasa.gov"/>
         <offline-allowed/>
     </information>
 
     <!--
-        Requests a trusted application environment. The World Wind SDK core library requires access to the network and
-        the local filesystem. All World Wind JAR files are signed with a digital signature associated with NASA.
+        Requests a trusted application environment. The WorldWind SDK core library requires access to the network and
+        the local filesystem. All WorldWind JAR files are signed with a digital signature associated with NASA.
     -->
     <security>
         <all-permissions/>
     </security>
 
     <!--
-        Specifies the resources required by the World Wind SDK core library:
-        * World Wind core JAR file.
-        * World Wind GDAL JAR file. World Wind must include the GDAL JAR file on its class path, even when the GDAL
+        Specifies the resources required by the WorldWind SDK core library:
+        * WorldWind core JAR file.
+        * WorldWind GDAL JAR file. WorldWind must include the GDAL JAR file on its class path, even when the GDAL
           native libraries are not used. We include the GDAL JAR file at the GDAL webstart site to avoid a version
           conflict should the application choose to include the GDAL Web Start component.
-        * JOGL version 2.0 Web Start component. World Wind depends on the JOGL library to communicate with the platform
+        * JOGL version 2.0 Web Start component. WorldWind depends on the JOGL library to communicate with the platform
           native OpenGL libraries.
         * WebView native library JAR archives for Mac OS X, Windows 32-bit and Windows 64-bit. The WebView native
-          libraries are required by implementations of the World Wind BrowserBalloon class.
+          libraries are required by implementations of the WorldWind BrowserBalloon class.
         * Disable the use of DirectDraw by Java2D on Windows. This is necessary for correct operation of JOGL on Windows
           and is accomplished by setting the sun.java2d.noddraw property to true. See the JOGL Userguide for details:
           http://jogamp.org/jogl/doc/userguide/

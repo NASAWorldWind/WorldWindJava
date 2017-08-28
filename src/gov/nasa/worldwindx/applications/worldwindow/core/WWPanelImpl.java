@@ -29,7 +29,7 @@ public class WWPanelImpl extends AbstractFeature implements WWPanel
 
     public WWPanelImpl(Registry registry)
     {
-        super("World Wind Panel", Constants.WW_PANEL, registry);
+        super("WorldWind Panel", Constants.WW_PANEL, registry);
 
         this.panel = new JPanel(new BorderLayout());
         this.wwd = new WorldWindowGLCanvas();

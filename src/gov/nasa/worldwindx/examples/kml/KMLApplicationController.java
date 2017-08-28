@@ -18,7 +18,7 @@ import java.awt.*;
 import java.beans.*;
 
 /**
- * A controller that maps KML events to changes in a World Wind application. This controller animates the view to a KML
+ * A controller that maps KML events to changes in a WorldWind application. This controller animates the view to a KML
  * feature when the feature is clicked in the feature tree, and animates the view to KML network links when they are
  * refreshed.
  * <p/>

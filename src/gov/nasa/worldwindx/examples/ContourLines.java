@@ -18,7 +18,7 @@ import java.awt.*;
 import java.util.*;
 
 /**
- * Illustrates how to display contour lines in World Wind on the surface terrain at a specified elevation. This uses the
+ * Illustrates how to display contour lines in WorldWind on the surface terrain at a specified elevation. This uses the
  * class <code>{@link ContourLine}</code> to compute and display the contour lines.
  *
  * @author Patrick Murris
@@ -37,7 +37,7 @@ public class ContourLines extends ApplicationTemplate
             layer.setName("Contour Lines");
             layer.setPickEnabled(false);
 
-            // Add the contour line layer to the World Window and update the layer panel.
+            // Add the contour line layer to the WorldWindow and update the layer panel.
             insertBeforePlacenames(getWwd(), layer);
 
             // Add a global moving contour line to the layer.
@@ -113,6 +113,6 @@ public class ContourLines extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 30000);
         Configuration.setValue(AVKey.INITIAL_PITCH, 45);
 
-        ApplicationTemplate.start("World Wind Contour Lines", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Contour Lines", AppFrame.class);
     }
 }

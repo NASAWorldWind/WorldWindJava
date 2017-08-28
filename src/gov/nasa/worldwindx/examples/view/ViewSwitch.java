@@ -307,6 +307,6 @@ public class ViewSwitch extends ApplicationTemplate
     {
         // Call the static start method like this from the main method of your derived class.
         // Substitute your application's name for the first argument.
-        ApplicationTemplate.start("World Wind Switch Views", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Switch Views", AppFrame.class);
     }
 }

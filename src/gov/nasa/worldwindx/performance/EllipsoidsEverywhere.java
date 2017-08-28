@@ -277,6 +277,6 @@ public class EllipsoidsEverywhere extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Very Many Shapes", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Very Many Shapes", AppFrame.class);
     }
 }

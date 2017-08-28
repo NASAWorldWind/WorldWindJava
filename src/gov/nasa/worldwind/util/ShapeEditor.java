@@ -297,7 +297,7 @@ public class ShapeEditor implements SelectListener, PropertyChangeListener
      * @param wwd           the {@link gov.nasa.worldwind.WorldWindow} associated with the specified shape.
      * @param originalShape the shape to edit.
      *
-     * @throws java.lang.IllegalArgumentException if either the specified world window or shape is null.
+     * @throws java.lang.IllegalArgumentException if either the specified WorldWindow or shape is null.
      */
     public ShapeEditor(WorldWindow wwd, Renderable originalShape)
     {
@@ -418,9 +418,9 @@ public class ShapeEditor implements SelectListener, PropertyChangeListener
     }
 
     /**
-     * Indicates the World Window associated with this editor.
+     * Indicates the WorldWindow associated with this editor.
      *
-     * @return the World Window associated with this editor.
+     * @return the WorldWindow associated with this editor.
      */
     public WorldWindow getWwd()
     {

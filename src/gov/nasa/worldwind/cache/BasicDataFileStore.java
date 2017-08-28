@@ -53,13 +53,13 @@ public class BasicDataFileStore extends AbstractFileStore
      * content type returned by the server. Subsequent calls to <code>requestFile</code> use the content types in this
      * list to find the content type matching the cached file.
      * <p/>
-     * This is initialized to the following list of default content types typically used in World Wind applications:
+     * This is initialized to the following list of default content types typically used in WorldWind applications:
      * <p/>
      * <ul> <li>application/vnd.google-earth.kml+xml</li> <li>application/vnd.google-earth.kmz</li>
      * <li>model/collada+xml</li> <li>image/dds</li> <li>image/gif</li> <li>image/jpeg</li> <li>image/jpg</li>
      * <li>image/png</li> </ul>
      * <p/>
-     * This list may be overridden by specifying a comma-delimited list of content types in the World Wind configuration
+     * This list may be overridden by specifying a comma-delimited list of content types in the WorldWind configuration
      * parameter <code>gov.nasa.worldwind.avkey.CacheContentTypes</code>.
      */
     protected List<String> cacheContentTypes = new ArrayList<String>(DEFAULT_CACHE_CONTENT_TYPES);
@@ -249,7 +249,7 @@ public class BasicDataFileStore extends AbstractFileStore
             throw new IllegalStateException(message);
         }
 
-        // Store remote files in the World Wind cache by default. This provides backward compatibility with applications
+        // Store remote files in the WorldWind cache by default. This provides backward compatibility with applications
         // depending on requestFile's behavior prior to the addition of the cacheRemoteFile parameter.
         return this.requestFile(address, true);
     }
@@ -307,13 +307,13 @@ public class BasicDataFileStore extends AbstractFileStore
     /**
      * Returns a file from the cache, the local file system or the classpath if the file exists. The specified address
      * may be a jar URL. See {@link java.net.JarURLConnection} for a description of jar URLs. If
-     * <code>searchLocalCache</code> is <code>true</code> this looks for the file in the World Wind cache, otherwise
+     * <code>searchLocalCache</code> is <code>true</code> this looks for the file in the WorldWind cache, otherwise
      * this only looks for the file in the local file system and the classpath.
      *
      * @param address          the name used to identify the cached file.
      * @param retrievalUrl     the URL to obtain the file if it is not in the cache. Used only to determine a location
      *                         to search in the local cache. May be null.
-     * @param searchLocalCache <code>true</code> to look for the file in the World Wind cache, otherwise
+     * @param searchLocalCache <code>true</code> to look for the file in the WorldWind cache, otherwise
      *                         <code>false</code>.
      *
      * @return the requested file if it exists, otherwise null.
@@ -361,7 +361,7 @@ public class BasicDataFileStore extends AbstractFileStore
                 }
         }
 
-        // If the address is a file, look for the file in the classpath and World Wind disk cache. We perform this step
+        // If the address is a file, look for the file in the classpath and WorldWind disk cache. We perform this step
         // regardless of the searchLocalCache parameter, because this looks for the file in the classpath.
         // We need to ensure that the address is not a network address (HTTP, etc.) because the getResource call in
         // findFile will attempt to retrieve from that URL on the thread that called this method, which might be the EDT
@@ -369,7 +369,7 @@ public class BasicDataFileStore extends AbstractFileStore
         if (cacheFileUrl == null && (addressProtocol == null || addressProtocol.equals("file")))
             cacheFileUrl = WorldWind.getDataFileStore().findFile(address, true);
 
-        // Look for the file in the World Wind disk cache by creating a cache path from the file's address. We ignore this
+        // Look for the file in the WorldWind disk cache by creating a cache path from the file's address. We ignore this
         // step if searchLocalCache is false.
         if (cacheFileUrl == null && retrievalUrl != null && searchLocalCache)
         {

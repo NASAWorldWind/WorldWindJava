@@ -146,6 +146,6 @@ public class GetBestElevations extends ApplicationTemplate
     public static void main(String[] args)
     {
         // Adjust configuration values before instantiation
-        ApplicationTemplate.start("World Wind Get Best Elevations", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Get Best Elevations", AppFrame.class);
     }
 }

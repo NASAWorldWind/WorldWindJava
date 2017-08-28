@@ -14,7 +14,7 @@ import gov.nasa.worldwind.geom.*;
 import javax.media.opengl.GLAnimatorControl;
 
 /**
- * Shows how to use a JOGL Animator to animate in World Wind
+ * Shows how to use a JOGL Animator to animate in WorldWind
  *
  * @author tag
  * @version $Id: AnimatedGlobe.java 1893 2014-04-04 04:31:59Z tgaskins $
@@ -70,6 +70,6 @@ public class AnimatedGlobe extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Animated Globe", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Animated Globe", AppFrame.class);
     }
 }

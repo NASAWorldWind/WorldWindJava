@@ -31,7 +31,7 @@ public class Controller
 {
     static
     {
-        // The following is required to use Swing menus with the heavyweight canvas used by World Wind.
+        // The following is required to use Swing menus with the heavyweight canvas used by WorldWind.
         ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
         JPopupMenu.setDefaultLightWeightPopupEnabled(false);
     }

@@ -73,7 +73,7 @@ public class BasicView extends WWObjectImpl implements View
     protected static final double MINIMUM_NEAR_DISTANCE = 1;
     protected static final double MINIMUM_FAR_DISTANCE = 1000;
     /**
-     * The views's default worst-case depth resolution, in meters. May be specified in the World Wind configuration file
+     * The views's default worst-case depth resolution, in meters. May be specified in the WorldWind configuration file
      * as the <code>gov.nasa.worldwind.avkey.DepthResolution</code> property. The default if not specified in the
      * configuration is 3.0 meters.
      */
@@ -664,7 +664,7 @@ public class BasicView extends WWObjectImpl implements View
         }
 
         // Prevent the near clip plane from becoming unnecessarily small. A very small clip plane is not useful for
-        // rendering the World Wind scene, and significantly reduces the depth precision in the majority of the scene.
+        // rendering the WorldWind scene, and significantly reduces the depth precision in the majority of the scene.
         if (nearDistance < MINIMUM_NEAR_DISTANCE)
             nearDistance = MINIMUM_NEAR_DISTANCE;
 
@@ -898,7 +898,7 @@ public class BasicView extends WWObjectImpl implements View
     /**
      * Removes the model-view matrix on top of the matrix stack, and restores the original matrix.
      *
-     * @param dc the current World Wind drawing context on which the original matrix will be restored.
+     * @param dc the current WorldWind drawing context on which the original matrix will be restored.
      *
      * @throws IllegalArgumentException if <code>dc</code> is null, or if the <code>Globe</code> or <code>GL</code>
      *                                  instances in <code>dc</code> are null.

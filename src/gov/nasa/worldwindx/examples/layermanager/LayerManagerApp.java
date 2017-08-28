@@ -92,7 +92,7 @@ public class LayerManagerApp
         if (Configuration.isMacOS())
         {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "World Wind Application");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Application");
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
         }
         else if (Configuration.isWindowsOS())

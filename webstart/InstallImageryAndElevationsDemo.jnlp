@@ -8,31 +8,31 @@
 <jnlp spec="1.0+" codebase="" href="InstallImageryAndElevationsDemo.jnlp">
 
     <!--
-        Provides a description of this World Wind demo application.
+        Provides a description of this WorldWind demo application.
     -->
     <information>
-        <title>World Wind Imagery and Elevation Installation</title>
+        <title>WorldWind Imagery and Elevation Installation</title>
         <vendor>NASA</vendor>
         <homepage href="https://worldwind.arc.nasa.gov"/>
         <offline-allowed/>
     </information>
 
     <!--
-        Requests a trusted application environment. The World Wind SDK core library requires access to the network and
-        the local filesystem. All World Wind JAR files are signed with a digital signature associated with NASA.
+        Requests a trusted application environment. The WorldWind SDK core library requires access to the network and
+        the local filesystem. All WorldWind JAR files are signed with a digital signature associated with NASA.
     -->
     <security>
         <all-permissions/>
     </security>
 
     <!--
-        Specifies the resources required by the this World Wind demo application:
-        * Java Runtime Environment version 1.6 or newer, with a maximum heap size of at least 1024 MB. The World Wind
+        Specifies the resources required by the this WorldWind demo application:
+        * Java Runtime Environment version 1.6 or newer, with a maximum heap size of at least 1024 MB. The WorldWind
           SDK requires at least 1024 MB of heap space, and we specify 1024 in order to enable import of large imagery
           and elevation files. This heap size must be specified in the application's Web Start file.
-        * World Wind extensions Java Web Start component. This downloads and adds the World Wind SDK extensions JAR file
+        * WorldWind extensions Java Web Start component. This downloads and adds the WorldWind SDK extensions JAR file
           and its dependencies ot the class path at runtime.
-        * World Wind GDAL Java Web Start component. Adding this component enables World Wind's GDAL data import
+        * WorldWind GDAL Java Web Start component. Adding this component enables WorldWind's GDAL data import
           capability.
     -->
     <resources>

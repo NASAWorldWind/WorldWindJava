@@ -55,7 +55,7 @@ static jmethodID WebResourceResolver_resolve = NULL;
     if (WebResourceResolver_class == NULL)
     {
         // Initialize the WebResourceResolver class and methodID pointers when the first WebResourceResolver is created.
-        // We do this here rather than after obtaining an environment in resolve because the World Wind Java classes
+        // We do this here rather than after obtaining an environment in resolve because the WorldWind Java classes
         // cannot be found from the AppKit thread. By finding them here and retaining a reference to them, we make them
         // accessible by calls to resolve from the AppKit thread. Note that this stores the class and method references
         // in static variables, and therefore assumes that there is one class definition for

@@ -157,7 +157,7 @@ public class GeotiffWriter
 
     AVKey.DATA_TYPE required for elevations only; valid values: AVKey.INT16, and AVKey.FLOAT32
 
-    AVKey.VERSION optional, if missing a default will be used "NASA World Wind"
+    AVKey.VERSION optional, if missing a default will be used "NASA WorldWind"
 
     AVKey.DISPLAY_NAME, (String) optional, specifies a name of the document/image
 

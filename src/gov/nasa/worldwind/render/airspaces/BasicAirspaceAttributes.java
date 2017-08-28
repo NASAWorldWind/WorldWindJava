@@ -15,7 +15,7 @@ import javax.media.opengl.*;
  * Basic implementation of the {@link gov.nasa.worldwind.render.airspaces.AirspaceAttributes} interface.
  * AirspaceAttributes was originally designed as a special purpose attribute bundle for {@link Airspace} shapes, but is
  * now redundant subclass of {@link gov.nasa.worldwind.render.BasicShapeAttributes}. BasicAirspaceAttributes is still
- * supported to ensure backward compatibility with earlier versions of World Wind. Usage of methods unique to
+ * supported to ensure backward compatibility with earlier versions of WorldWind. Usage of methods unique to
  * AirspaceAttributes should be replaced with the equivalent methods in ShapeAttributes.
  *
  * @author tag

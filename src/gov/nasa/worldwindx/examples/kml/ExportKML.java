@@ -17,7 +17,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Shows how to generate KML from World Wind elements. This example creates several objects, and writes their KML
+ * Shows how to generate KML from WorldWind elements. This example creates several objects, and writes their KML
  * representation to stdout.
  *
  * @author pabercrombie

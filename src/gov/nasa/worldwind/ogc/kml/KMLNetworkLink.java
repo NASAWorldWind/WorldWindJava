@@ -443,7 +443,7 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
 
     /**
      * Indicates whether the network resource references by this <code>KMLNetworkLink</code> should be retrieved to the
-     * World Wind cache or to a temporary location. This returns <code>true</code> if all of the following conditions
+     * WorldWind cache or to a temporary location. This returns <code>true</code> if all of the following conditions
      * are met, and <code>false</code> otherwise:
      * <p/>
      * <ul> <li>This network link has either a <code>Link</code> or a <code>Url</code> element.</li> <li>The Link or Url

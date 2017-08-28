@@ -14,7 +14,7 @@ import java.util.*;
 
 /**
  * Basic implementation of the {@link gov.nasa.worldwind.render.BalloonAttributes} interface. Extends
- * <code>BasicShapeAttributes</code> to include attributes for World Wind {@link gov.nasa.worldwind.render.Balloon}
+ * <code>BasicShapeAttributes</code> to include attributes for WorldWind {@link gov.nasa.worldwind.render.Balloon}
  * shapes.
  *
  * @author pabercrombie

@@ -11,8 +11,8 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.Logging;
 
 /**
- * Executes the mapping from COLLADA to World Wind. Traverses a parsed COLLADA document and creates the appropriate
- * World Wind object to represent the COLLADA model.
+ * Executes the mapping from COLLADA to WorldWind. Traverses a parsed COLLADA document and creates the appropriate
+ * WorldWind object to represent the COLLADA model.
  *
  * @author pabercrombie
  * @version $Id: ColladaController.java 661 2012-06-26 18:02:23Z pabercrombie $

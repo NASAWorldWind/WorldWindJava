@@ -558,6 +558,6 @@ public class MarkersOrder extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LATITUDE, TRACK_LATITUDE);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, TRACK_LONGITUDE);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 40e3);
-        ApplicationTemplate.start("World Wind Markers Order", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Markers Order", AppFrame.class);
     }
 }

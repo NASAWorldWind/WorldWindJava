@@ -25,7 +25,7 @@ import java.util.List;
  * as not unreachable after a specifiable interval of time. If the host is once more logged as unavailable, its entry
  * returns to the unavailable state. This cycle continues indefinitely.
  * <p/>
- * Methods are provided to determine whether the public network can be reached and whether the NASA World Wind servers
+ * Methods are provided to determine whether the public network can be reached and whether the NASA WorldWind servers
  * cab be reached. The addresses used to detect public network access can be explicitly specified.
  *
  * @author tag
@@ -80,7 +80,7 @@ public interface NetworkStatus extends AVList
     boolean isNetworkUnavailable(long checkInterval);
 
     /**
-     * Indicates whether the NASA World Wind servers can be reached.
+     * Indicates whether the NASA WorldWind servers can be reached.
      *
      * @return false if the servers can be reached, otherwise true.
      */
@@ -102,17 +102,17 @@ public interface NetworkStatus extends AVList
     long getTryAgainInterval();
 
     /**
-     * Indicates whether World Wind will attempt to connect to the network to retrieve data or for other reasons.
+     * Indicates whether WorldWind will attempt to connect to the network to retrieve data or for other reasons.
      *
-     * @return <code>true</code> if World Wind is in off-line mode, <code>false</code> if not.
+     * @return <code>true</code> if WorldWind is in off-line mode, <code>false</code> if not.
      */
     boolean isOfflineMode();
 
     /**
-     * Indicates whether World Wind should attempt to connect to the network to retrieve data or for other reasons. The
+     * Indicates whether WorldWind should attempt to connect to the network to retrieve data or for other reasons. The
      * default value for this attribute is <code>false</code>, indicating that the network should be used.
      *
-     * @param offlineMode <code>true</code> if World Wind should use the network, <code>false</code> otherwise
+     * @param offlineMode <code>true</code> if WorldWind should use the network, <code>false</code> otherwise
      */
     void setOfflineMode(boolean offlineMode);
 

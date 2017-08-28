@@ -649,7 +649,7 @@ public class StyleLocationTests extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        final AppFrame af = (AppFrame) ApplicationTemplate.start("World Wind KML Style Location Tests", AppFrame.class);
+        final AppFrame af = (AppFrame) ApplicationTemplate.start("WorldWind KML Style Location Tests", AppFrame.class);
 
         SwingUtilities.invokeLater(new Runnable()
         {

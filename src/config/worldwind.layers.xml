@@ -6,7 +6,7 @@
   -->
 
 <!--$Id: worldwind.layers.xml 2256 2014-08-22 17:46:18Z tgaskins $-->
-<!--This document specifies the initial layers to load in World Wind-->
+<!--This document specifies the initial layers to load in WorldWind-->
 <!--This list can be overridden by specifying an alternate list in worldwind.xml, or by specifying an-->
 <!--alternate configuration document-->
 <!--See the javadoc for the Configuration class for details-->

@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Builds a list of {@link gov.nasa.worldwind.render.SurfaceTile} instances who's content is defined by a specified set
  * of {@link gov.nasa.worldwind.render.SurfaceRenderable} instances. It's typically not necessary to use
- * SurfaceObjectTileBuilder directly. World Wind's default scene controller automatically batches instances of
+ * SurfaceObjectTileBuilder directly. WorldWind's default scene controller automatically batches instances of
  * SurfaceRenderable in a single SurfaceObjectTileBuilder. Applications that need to draw basic surface shapes should
  * use or extend {@link gov.nasa.worldwind.render.SurfaceShape} instead of using SurfaceObjectTileBuilder directly.
  * <p/>
@@ -30,7 +30,7 @@ import java.util.List;
  * renderables. This assembles a set of surface tiles that meet the resolution requirements for the specified draw
  * context, then draws the surface renderables into those offscreen surface tiles by calling render on each instance.
  * This process may temporarily use the framebuffer to perform offscreen rendering, and therefore should be called
- * during the preRender method of a World Wind layer. See the {@link gov.nasa.worldwind.render.PreRenderable} interface
+ * during the preRender method of a WorldWind layer. See the {@link gov.nasa.worldwind.render.PreRenderable} interface
  * for details. Once built, the surface tiles can be rendered by a {@link gov.nasa.worldwind.render.SurfaceTileRenderer}.
  * <p/>
  * By default, SurfaceObjectTileBuilder creates texture tiles with a width and height of 512 pixels, and with internal
@@ -371,7 +371,7 @@ public class SurfaceObjectTileBuilder
      * Assembles the surface tiles and draws any surface renderables in the iterable into those offscreen tiles. The
      * surface tiles are assembled to meet the necessary resolution of to the draw context's {@link
      * gov.nasa.worldwind.View}. This may temporarily use the framebuffer to perform offscreen rendering, and therefore
-     * should be called during the preRender method of a World Wind {@link gov.nasa.worldwind.layers.Layer}.
+     * should be called during the preRender method of a WorldWind {@link gov.nasa.worldwind.layers.Layer}.
      * <p/>
      * This does nothing if the specified iterable is null, is empty or contains no surface renderables.
      *

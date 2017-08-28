@@ -20,7 +20,7 @@ import java.awt.event.*;
 import java.io.InputStream;
 
 /**
- * Illustrates how to use a World Wind <code>{@link Annotation}</code> with an <code>{@link
+ * Illustrates how to use a WorldWind <code>{@link Annotation}</code> with an <code>{@link
  * AnnotationLayoutManager}</code> to display an Annotation with a simple embedded user interface. The custom Annotation
  * layouts illustrated here can be found in the following example classes: <ul> <li><code>{@link
  * AudioPlayerAnnotation}</code></li> <li><code>{@link SlideShowAnnotation}</code></li> </ul>
@@ -655,6 +655,6 @@ public class AnnotationControls extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Annotation Controls", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Annotation Controls", AppFrame.class);
     }
 }

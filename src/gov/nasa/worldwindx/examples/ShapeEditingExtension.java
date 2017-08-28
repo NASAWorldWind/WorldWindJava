@@ -375,7 +375,7 @@ public class ShapeEditingExtension extends ApplicationTemplate
             // Receive selection event to determine when to place the shape in editing mode.
             this.getWwd().addSelectListener(this);
 
-            // Create the custom shape, add it to a layer and add the layer to the World Window's layer list.
+            // Create the custom shape, add it to a layer and add the layer to the WorldWindow's layer list.
             RenderableLayer layer = new RenderableLayer();
 
             ShapeAttributes attrs = new BasicShapeAttributes();
@@ -465,6 +465,6 @@ public class ShapeEditingExtension extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Shape Editing Extension", ShapeEditingExtension.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Shape Editing Extension", ShapeEditingExtension.AppFrame.class);
     }
 }

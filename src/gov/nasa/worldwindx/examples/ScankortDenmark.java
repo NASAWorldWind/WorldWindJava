@@ -14,7 +14,7 @@ import gov.nasa.worldwind.terrain.*;
 
 /**
  * This example demonstrates high resolution imagery (0.2 meters per pixel) and elevation data (1.6 meters per pixel)
- * served by the World Wind WMS, and visualized by the World Wind Java client.
+ * served by the WorldWind WMS, and visualized by the WorldWind Java client.
  * <p/>
  * The data is from Denmark.  Details for loading the imagery can be found in: config/Earth/ScankortDenmarkImageLayer.xml
  * while information for loading the elevation data is in: config/Earth/ScankortDenmarkDSMElevationModel.xml.

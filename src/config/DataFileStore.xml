@@ -6,13 +6,13 @@
   -->
 
 <!--
-  ~ World Wind data-file store configuration
+  ~ WorldWind data-file store configuration
   ~
   ~ $Id: DataFileStore.xml 1171 2013-02-11 21:45:02Z dcollins $
   -->
 <dataFileStore>
     <readLocations>
-        <!-- The read locations are searched, in the given order, when World Wind needs a data or image file. -->
+        <!-- The read locations are searched, in the given order, when WorldWind needs a data or image file. -->
         <!-- The write location selected from the writeLocations list is searched before these locations. -->
         <location property="gov.nasa.worldwind.platform.alluser.store" wwDir="WorldWindData"/>
         <location property="gov.nasa.worldwind.platform.user.store"    wwDir="WorldWindData"/>

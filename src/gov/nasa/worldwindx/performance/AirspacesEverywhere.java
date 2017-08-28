@@ -89,6 +89,6 @@ public class AirspacesEverywhere extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Very Many Airspaces", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Very Many Airspaces", AppFrame.class);
     }
 }

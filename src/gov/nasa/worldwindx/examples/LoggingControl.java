@@ -8,14 +8,14 @@ package gov.nasa.worldwindx.examples;
 import java.util.logging.*;
 
 /**
- * Illustrate control and redirection of World Wind logging.
+ * Illustrate control and redirection of WorldWind logging.
  *
  * @author tag
  * @version $Id: LoggingControl.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 public class LoggingControl extends ApplicationTemplate
 {
-    // Use the standard World Wind application template
+    // Use the standard WorldWind application template
     private static class AppFrame extends ApplicationTemplate.AppFrame
     {
         public AppFrame()
@@ -26,10 +26,10 @@ public class LoggingControl extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        // Get the World Wind logger by name.
+        // Get the WorldWind logger by name.
         Logger logger = Logger.getLogger("gov.nasa.worldwind");
 
-        // Turn off logging to parent handlers of the World Wind handler.
+        // Turn off logging to parent handlers of the WorldWind handler.
         logger.setUseParentHandlers(false);
 
         // Create a console handler (defined below) that we use to write log messages.
@@ -43,7 +43,7 @@ public class LoggingControl extends ApplicationTemplate
         logger.addHandler(handler);
 
         // Start the application.
-        ApplicationTemplate.start("World Wind Logging Control", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Logging Control", AppFrame.class);
     }
 
     private static class MyHandler extends ConsoleHandler

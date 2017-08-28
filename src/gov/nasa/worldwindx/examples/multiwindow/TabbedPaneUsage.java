@@ -18,17 +18,17 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * This class illustrates how to use multiple World Wind windows with a {@link JTabbedPane}.
+ * This class illustrates how to use multiple WorldWind windows with a {@link JTabbedPane}.
  * <p/>
- * Applications using multiple World Wind windows simultaneously should instruct World Wind to share OpenGL and other
- * resources among those windows. Most World Wind classes are designed to be shared across {@link WorldWindow} objects
+ * Applications using multiple WorldWind windows simultaneously should instruct WorldWind to share OpenGL and other
+ * resources among those windows. Most WorldWind classes are designed to be shared across {@link WorldWindow} objects
  * and will be shared automatically. But OpenGL resources are not automatically shared. To share them, a reference to a
  * previously created WorldWindow must be specified as a constructor argument for subsequently created WorldWindows.
  * <p/>
- * Most World Wind {@link gov.nasa.worldwind.globes.Globe} and {@link gov.nasa.worldwind.layers.Layer} objects can be shared among WorldWindows. Those that cannot be shared
+ * Most WorldWind {@link gov.nasa.worldwind.globes.Globe} and {@link gov.nasa.worldwind.layers.Layer} objects can be shared among WorldWindows. Those that cannot be shared
  * have an operational dependency on the WorldWindow they're associated with. An example is the {@link
  * gov.nasa.worldwind.layers.ViewControlsLayer} layer for on-screen navigation. Because this layer responds to input events within a specific
- * WorldWindow, it is not sharable. Refer to the World Wind Overview page for a list of layers that cannot be shared.
+ * WorldWindow, it is not sharable. Refer to the WorldWind Overview page for a list of layers that cannot be shared.
  * // TODO: include the reference to overview.html.
  *
  * @version $Id: TabbedPaneUsage.java 1853 2014-02-28 19:28:23Z tgaskins $
@@ -41,8 +41,8 @@ public class TabbedPaneUsage extends JFrame
 
         public WWPanel(WorldWindowGLCanvas shareWith, int width, int height)
         {
-            // To share resources among World Windows, pass the first World Window to the constructor of the other
-            // World Windows.
+            // To share resources among WorldWindows, pass the first WorldWindow to the constructor of the other
+            // WorldWindows.
             this.wwd = shareWith != null ? new WorldWindowGLCanvas(shareWith) : new WorldWindowGLCanvas();
             this.wwd.setSize(new java.awt.Dimension(width, height));
 
@@ -64,14 +64,14 @@ public class TabbedPaneUsage extends JFrame
             JTabbedPane tabbedPanel = new JTabbedPane();
             this.add(tabbedPanel, BorderLayout.CENTER);
 
-            // Create the first World Window and add it to the tabbed panel.
+            // Create the first WorldWindow and add it to the tabbed panel.
             WWPanel wwpA = new WWPanel(null, 600, 600);
-            tabbedPanel.add(wwpA, "World Window A");
+            tabbedPanel.add(wwpA, "WorldWindow A");
 
             // Create the Model, starting with the Globe.
             Globe earth = new Earth();
 
-            // Create layers that both World Windows can share.
+            // Create layers that both WorldWindows can share.
             Layer[] layers = new Layer[]
                 {
                     new StarsLayer(),
@@ -90,7 +90,7 @@ public class TabbedPaneUsage extends JFrame
             modelForWindowB.setGlobe(new Earth());
             modelForWindowB.setLayers(new LayerList(layers));
 
-            // Add view control layers, which the World Windows cannot share.
+            // Add view control layers, which the WorldWindows cannot share.
             ViewControlsLayer viewControlsA = new ViewControlsLayer();
             wwpA.wwd.getModel().getLayers().add(viewControlsA);
             wwpA.wwd.addSelectListener(new ViewControlsSelectListener(wwpA.wwd, viewControlsA));
@@ -100,18 +100,18 @@ public class TabbedPaneUsage extends JFrame
             // Add the tabbed panel to the frame.
             this.add(tabbedPanel, BorderLayout.CENTER);
 
-            // Position and display the frame. It's essential to do this before creating the second World Window. This
+            // Position and display the frame. It's essential to do this before creating the second WorldWindow. This
             // first one must be visible in order for the second one to share its OpenGL resources.
-            this.setTitle("World Wind Multi-Window Tabbed Pane");
+            this.setTitle("WorldWind Multi-Window Tabbed Pane");
             this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
             this.pack();
             WWUtil.alignComponent(null, this, AVKey.CENTER); // Center the application on the screen.
             this.setResizable(true);
             this.setVisible(true);
 
-            // Now that the first World Window is visible, create the second one.
+            // Now that the first WorldWindow is visible, create the second one.
             WWPanel wwpB = new WWPanel(wwpA.wwd, wwpA.getWidth(), wwpA.getHeight());
-            tabbedPanel.add(wwpB, "World Window B");
+            tabbedPanel.add(wwpB, "WorldWindow B");
             wwpB.wwd.setModel(modelForWindowB);
             wwpB.wwd.getModel().getLayers().add(viewControlsB);
             wwpB.wwd.addSelectListener(new ViewControlsSelectListener(wwpB.wwd, viewControlsB));

@@ -138,6 +138,6 @@ public class ContourBuilderExample extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        start("World Wind Contour Building", AppFrame.class);
+        start("WorldWind Contour Building", AppFrame.class);
     }
 }

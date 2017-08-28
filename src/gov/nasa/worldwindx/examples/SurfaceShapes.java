@@ -6,7 +6,7 @@
 package gov.nasa.worldwindx.examples;
 
 /**
- * Illustrates how to configure and display World Wind <code>{@link gov.nasa.worldwind.render.SurfaceShape}s</code>.
+ * Illustrates how to configure and display WorldWind <code>{@link gov.nasa.worldwind.render.SurfaceShape}s</code>.
  * Surface shapes are used to visualize flat standard shapes types that follow the terrain. This illustrates how to use
  * all 7 standard surface shape types:
  * <p/>
@@ -23,6 +23,6 @@ public class SurfaceShapes extends DraggingShapes
 {
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Surface Shapes", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Surface Shapes", AppFrame.class);
     }
 }

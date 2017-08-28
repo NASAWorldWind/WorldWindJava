@@ -135,6 +135,6 @@ public class Pyramids extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Pyramids", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Pyramids", AppFrame.class);
     }
 }

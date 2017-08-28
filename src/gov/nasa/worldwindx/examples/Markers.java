@@ -133,6 +133,6 @@ public class Markers extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Markers", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Markers", AppFrame.class);
     }
 }

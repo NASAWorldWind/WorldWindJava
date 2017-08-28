@@ -14,7 +14,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Shows how to shut down a {@link WorldWindow} and how to shut down all of World Wind.
+ * Shows how to shut down a {@link WorldWindow} and how to shut down all of WorldWind.
  *
  * @author tag
  * @version $Id: Shutdown.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -109,7 +109,7 @@ public class Shutdown
         {
             public ShutdownWorldWindAction()
             {
-                super("Shutdown World Wind");
+                super("Shutdown WorldWind");
             }
 
             public void actionPerformed(ActionEvent e)
@@ -125,7 +125,7 @@ public class Shutdown
     {
         if (Configuration.isMacOS())
         {
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Shutdown World Wind");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Shutdown WorldWind");
         }
 
         java.awt.EventQueue.invokeLater(new Runnable()

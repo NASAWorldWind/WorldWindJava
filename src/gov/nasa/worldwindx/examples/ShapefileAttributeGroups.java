@@ -166,6 +166,6 @@ public class ShapefileAttributeGroups extends ApplicationTemplate
     {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 30);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, 30);
-        start("World Wind Shapefile Attribute Groups", AppFrame.class);
+        start("WorldWind Shapefile Attribute Groups", AppFrame.class);
     }
 }

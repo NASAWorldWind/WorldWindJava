@@ -94,6 +94,6 @@ public class DimGlobeSurface extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Surface Dimming", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Surface Dimming", AppFrame.class);
     }
 }

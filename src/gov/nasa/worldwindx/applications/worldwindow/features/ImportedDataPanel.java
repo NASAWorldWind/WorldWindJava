@@ -24,10 +24,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Displays UI components for a set of caller specified imported data, and manages creation of World Wind components
+ * Displays UI components for a set of caller specified imported data, and manages creation of WorldWind components
  * from that data. Callers fill the panel with imported data by invoking {@link #addImportedData(org.w3c.dom.Element,
  * gov.nasa.worldwind.avlist.AVList)}. This adds the UI components for a specified data set (a "Go To" button, and a
- * label description), creates a World Wind component from the DataConfiguration, and adds the component to the World
+ * label description), creates a WorldWind component from the DataConfiguration, and adds the component to the World
  * Window passed to the panel during construction.
  *
  * @author dcollins
@@ -64,10 +64,10 @@ public class ImportedDataPanel extends ShadedPanel
     }
 
     /**
-     * Adds the UI components for the specified imported data to this panel, and adds the World Wind component created
+     * Adds the UI components for the specified imported data to this panel, and adds the WorldWind component created
      * from the data to the WorldWindow passed to this panel during construction.
      *
-     * @param domElement the document which describes a World Wind data configuration.
+     * @param domElement the document which describes a WorldWind data configuration.
      * @param params     the parameter list which overrides or extends information contained in the document.
      *
      * @throws IllegalArgumentException if the Element is null.

@@ -6,23 +6,23 @@
 
 # $Id: README_DEVELOPER.txt 1934 2014-04-15 19:24:07Z dcollins $
 
-This document provides notes and instructions for World Wind Java development team members in one place.
+This document provides notes and instructions for WorldWind Java development team members in one place.
 
 
 JOGL Library Overview
 ------------------------------------------------------------
 
-The JOGL library provides World Wind Java with (1) a Java binding to the OpenGL API, and (2) OpenGL contexts compatible
+The JOGL library provides WorldWind Java with (1) a Java binding to the OpenGL API, and (2) OpenGL contexts compatible
 with Java's AWT and Swing windowing toolkits:
 http://jogamp.org/jogl/www/
 
-World Wind Java uses JOGL v2.1.5, released on 11 March 2014 and downloaded from:
+WorldWind Java uses JOGL v2.1.5, released on 11 March 2014 and downloaded from:
 http://jogamp.org/deployment/v2.1.5/archive/jogamp-all-platforms.7z
 
-The JOGL library compiled JAR files and README files are checked into the World Wind Java source, distributed with all
-World Wind Java builds and included in the World Wind Java Web Start deployment. This is necessary in order ensure
-correct operation of World Wind Java, as changes in JOGL are occasionally unstable or incompatible with previous
-versions. Additionally, World Wind Java's copy of the JOGL JAR files are modified to enable Web Start deployment outside
+The JOGL library compiled JAR files and README files are checked into the WorldWind Java source, distributed with all
+WorldWind Java builds and included in the WorldWind Java Web Start deployment. This is necessary in order ensure
+correct operation of WorldWind Java, as changes in JOGL are occasionally unstable or incompatible with previous
+versions. Additionally, WorldWind Java's copy of the JOGL JAR files are modified to enable Web Start deployment outside
 of the jogamp.org domain.
 
 
@@ -33,7 +33,7 @@ Updating the JOGL Library
 packages are organized by version at the following URL:
 http://jogamp.org/deployment/
 
-2) Extract the archive, then copy the following 15 files to the World Wind Java project root:
+2) Extract the archive, then copy the following 15 files to the WorldWind Java project root:
 gluegen-rt-natives-linux-amd64.jar
 gluegen-rt-natives-linux-i586.jar
 gluegen-rt-natives-macosx-universal.jar
@@ -51,7 +51,7 @@ jogl.LICENSE.txt
 jogl.README.txt
 
 3) Remove the Codebase manifest attribute from all JOGL JAR files. This step enables the JOGL JAR files to be
-deployed via the World Wind Java Web Start site:
+deployed via the WorldWind Java Web Start site:
 - Run the ANT task jogl.jarfiles.unpack. This task extracts the contents of all 12 GlueGen and JOGL JAR files into
 individual folders under jogl-jarfiles.
 - For each JAR file folder under jogl-jarfiles open the file META-INF/MANIFEST.MF, delete the line

@@ -12,7 +12,7 @@ import gov.nasa.worldwind.geom.*;
 import java.awt.*;
 
 /**
- * Provides a general interface for icons rendered by World Wind. Icons have a source image and optionally a background
+ * Provides a general interface for icons rendered by WorldWind. Icons have a source image and optionally a background
  * image. They may also have an associated tool tip. An icon has a geographic position. The indication of that position
  * is determined by implementations. The simplest implementation is to center the icon at the position, but association
  * by leader lines and other mechanisms are appropriate.

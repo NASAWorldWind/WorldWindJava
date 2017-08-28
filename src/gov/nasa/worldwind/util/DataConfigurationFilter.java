@@ -11,7 +11,7 @@ import org.w3c.dom.*;
 /**
  * An implementation of {@link FileStoreFilter} which accepts XML configuration documents. Accepted document types are:
  * <ul> <li>Layer configuration documents</li> <li>ElevationModel configuration documents</li> <li>Installed data
- * configuration documents</li> <li>World Wind .NET LevelSet documents</li> </ul>
+ * configuration documents</li> <li>WorldWind .NET LevelSet documents</li> </ul>
  *
  * @author dcollins
  * @version $Id: DataConfigurationFilter.java 1171 2013-02-11 21:45:02Z dcollins $

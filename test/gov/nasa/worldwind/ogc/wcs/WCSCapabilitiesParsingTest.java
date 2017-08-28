@@ -49,13 +49,13 @@ public class WCSCapabilitiesParsingTest
 
         String description = service.getDescription();
         assertNotNull("Service description is null", description);
-        assertTrue("Incorrect description", description.startsWith("World Wind MapServer Elevation test"));
+        assertTrue("Incorrect description", description.startsWith("WorldWind MapServer Elevation test"));
 
         assertNotNull("Service name is null", service.getName());
         assertEquals("Incorrect service name", "MapServer WCS", service.getName());
 
         assertNotNull("Service label is null", service.getLabel());
-        assertEquals("Incorrect service label", "World Wind MapServer Elevation", service.getLabel());
+        assertEquals("Incorrect service label", "WorldWind MapServer Elevation", service.getLabel());
 
         List<String> keywords = service.getKeywords();
         assertTrue("Keywords is null", keywords != null);

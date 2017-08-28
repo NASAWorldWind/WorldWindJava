@@ -9,7 +9,7 @@ import gov.nasa.worldwind.globes.ElevationModel;
 import gov.nasa.worldwind.terrain.BathymetryFilterElevationModel;
 
 /**
- * Illustrates how to suppress the World Wind <code>{@link gov.nasa.worldwind.globes.Globe}'s</code> bathymetry
+ * Illustrates how to suppress the WorldWind <code>{@link gov.nasa.worldwind.globes.Globe}'s</code> bathymetry
  * (elevations below mean sea level) by using a <code>{@link BathymetryFilterElevationModel}</code>.
  *
  * @author tag
@@ -37,6 +37,6 @@ public class BathymetryRemoval extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Bathymetry Removal", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Bathymetry Removal", AppFrame.class);
     }
 }

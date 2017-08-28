@@ -15,7 +15,7 @@ import static gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc.*;
 /**
  * Object to provide default offsets for MIL-STD-2525C tactical point graphics. The offset is used to align a point on
  * the graphic with the graphic's geographic position. This class automatically populates the map with values
- * appropriate for the point graphic images supplied by World Wind.
+ * appropriate for the point graphic images supplied by WorldWind.
  *
  * @author pabercrombie
  * @version $Id: DefaultOffsets.java 542 2012-04-24 19:08:12Z pabercrombie $

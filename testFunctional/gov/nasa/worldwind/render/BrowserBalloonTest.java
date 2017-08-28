@@ -47,7 +47,7 @@ public class BrowserBalloonTest extends ApplicationTemplate
             // tree.
             this.balloonController = new BalloonController(this.getWwd());
 
-            // Size the World Window to take up the space typically used by the layer panel.
+            // Size the WorldWindow to take up the space typically used by the layer panel.
             Dimension size = new Dimension(1000, 600);
             this.setPreferredSize(size);
             this.pack();

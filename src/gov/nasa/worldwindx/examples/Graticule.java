@@ -30,6 +30,6 @@ public class Graticule extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Lat-Lon Graticule", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Lat-Lon Graticule", AppFrame.class);
     }
 }

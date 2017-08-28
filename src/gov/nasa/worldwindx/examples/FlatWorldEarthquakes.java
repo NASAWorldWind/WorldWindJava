@@ -609,6 +609,6 @@ public class FlatWorldEarthquakes extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, 0);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 50e6);
         Configuration.setValue(AVKey.GLOBE_CLASS_NAME, EarthFlat.class.getName());
-        ApplicationTemplate.start("World Wind USGS Earthquakes M 2.5+ - 7 days", AppFrame.class);
+        ApplicationTemplate.start("WorldWind USGS Earthquakes M 2.5+ - 7 days", AppFrame.class);
     }
 }

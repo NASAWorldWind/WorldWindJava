@@ -372,7 +372,7 @@ public class AWTInputHandler extends WWObjectImpl
         }
 
         // Determine if the mouse point has changed since the last mouse move event. This can happen if user switches to
-        // another window, moves the mouse, and then switches back to the World Wind window.
+        // another window, moves the mouse, and then switches back to the WorldWind window.
         boolean mousePointChanged = !mouseEvent.getPoint().equals(this.mousePoint);
 
         this.mousePoint = mouseEvent.getPoint();

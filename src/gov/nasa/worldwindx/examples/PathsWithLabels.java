@@ -111,7 +111,7 @@ public class PathsWithLabels extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -122.95);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 70000);
 
-        start("World Wind Paths with Labels", AppFrame.class);
+        start("WorldWind Paths with Labels", AppFrame.class);
     }
 
     // Boundary data for San Juan and Snohomish Counties take from

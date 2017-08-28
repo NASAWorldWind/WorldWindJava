@@ -9,9 +9,9 @@ package gov.nasa.worldwindx.examples;
 import gov.nasa.worldwind.Configuration;
 
 /**
- * Illustrates how to specify a configuration file that specifies alternate locations for the World Wind local cache.
+ * Illustrates how to specify a configuration file that specifies alternate locations for the WorldWind local cache.
  * This example works in conjunction with the companion file CacheLocationConfiguration.xml, which specifies a
- * non-default location for the writable World Wind cache. That file also includes the standard read locations of the
+ * non-default location for the writable WorldWind cache. That file also includes the standard read locations of the
  * cache so that any previously cached data will be found and used.
  *
  * @author tag
@@ -21,11 +21,11 @@ public class CacheLocationConfiguration extends ApplicationTemplate
 {
     public static void main(String[] args)
     {
-        // Prior to starting World Wind, specify the cache configuration file to Configuration.
+        // Prior to starting WorldWind, specify the cache configuration file to Configuration.
         Configuration.setValue(
             "gov.nasa.worldwind.avkey.DataFileStoreConfigurationFileName",
             "gov/nasa/worldwindx/examples/data/CacheLocationConfiguration.xml");
 
-        ApplicationTemplate.start("World Wind Cache Configuration", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Cache Configuration", AppFrame.class);
     }
 }

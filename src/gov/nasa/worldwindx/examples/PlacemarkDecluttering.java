@@ -242,6 +242,6 @@ public class PlacemarkDecluttering extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Placemark Decluttering", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Placemark Decluttering", AppFrame.class);
     }
 }

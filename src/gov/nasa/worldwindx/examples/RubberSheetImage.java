@@ -522,6 +522,6 @@ public class RubberSheetImage extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Rubber Sheet Image", RubberSheetImage.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Rubber Sheet Image", RubberSheetImage.AppFrame.class);
     }
 }

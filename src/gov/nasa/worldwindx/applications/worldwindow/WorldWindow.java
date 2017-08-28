@@ -29,7 +29,7 @@ public class WorldWindow
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
             String s = Configuration.getStringValue(Constants.APPLICATION_DISPLAY_NAME);
             if (s == null)
-                s = "World Window";
+                s = "WorldWindow";
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", s);
         }
         else if (Configuration.isWindowsOS())

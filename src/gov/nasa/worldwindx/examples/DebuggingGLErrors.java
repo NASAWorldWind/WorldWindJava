@@ -24,7 +24,7 @@ public class DebuggingGLErrors extends ApplicationTemplate
     static
     {
         // Modify the configuration to specify our custom WorldWindowGLDrawable. Normally, an application would specify
-        // this in a configuration file. For example, via the standard World Wind XML configuration file:
+        // this in a configuration file. For example, via the standard WorldWind XML configuration file:
         //
         //    <WorldWindConfiguration version="1">
         //        ...
@@ -32,7 +32,7 @@ public class DebuggingGLErrors extends ApplicationTemplate
         //        ...
         //    </WorldWindConfiguration>
         //
-        // Or via the legacy World Wind properties file:
+        // Or via the legacy WorldWind properties file:
         //
         //    ...
         //    gov.nasa.worldwind.avkey.WorldWindowClassName=MyGLAutoDrawableClassName
@@ -55,7 +55,7 @@ public class DebuggingGLErrors extends ApplicationTemplate
         }
 
         /**
-         * Overridden to configure the OpenGL features used by the World Wind SDK. See {@link
+         * Overridden to configure the OpenGL features used by the WorldWind SDK. See {@link
          * javax.media.opengl.GLEventListener#init(javax.media.opengl.GLAutoDrawable)}.
          *
          * @param glAutoDrawable the drawable
@@ -63,7 +63,7 @@ public class DebuggingGLErrors extends ApplicationTemplate
         public void init(GLAutoDrawable glAutoDrawable)
         {
             // Invoked when the GL context changes. The host machine capabilities may have changed, so re-configure the
-            // OpenGL features used by the World Wind SDK.
+            // OpenGL features used by the WorldWind SDK.
             super.init(glAutoDrawable);
 
             // Install the OpenGL error debugger. Under normal operation OpenGL errors are silently flagged. This
@@ -76,6 +76,6 @@ public class DebuggingGLErrors extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        start("World Wind Debugging GL Errors", AppFrame.class);
+        start("WorldWind Debugging GL Errors", AppFrame.class);
     }
 }

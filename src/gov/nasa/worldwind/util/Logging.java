@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.*;
 
 /**
- * This class of static methods provides the interface to logging for World Wind components. Logging is performed via
+ * This class of static methods provides the interface to logging for WorldWind components. Logging is performed via
  * {@link java.util.logging}. The default logger name is <code>gov.nasa.worldwind</code>. The logger name is
  * configurable via {@link gov.nasa.worldwind.Configuration}.
  *
@@ -33,7 +33,7 @@ public class Logging
     } // Prevent instantiation
 
     /**
-     * Returns the World Wind logger.
+     * Returns the WorldWind logger.
      *
      * @return The logger.
      */
@@ -54,7 +54,7 @@ public class Logging
 
     /**
      * Returns a specific logger. Does not access {@link gov.nasa.worldwind.Configuration} to determine the configured
-     * World Wind logger.
+     * WorldWind logger.
      * <p/>
      * This is needed by {@link gov.nasa.worldwind.Configuration} to avoid calls back into itself when its singleton
      * instance is not yet instantiated.
@@ -69,7 +69,7 @@ public class Logging
     }
 
     /**
-     * Retrieves a message from the World Wind message resource bundle.
+     * Retrieves a message from the WorldWind message resource bundle.
      *
      * @param property the property identifying which message to retrieve.
      *
@@ -90,7 +90,7 @@ public class Logging
     }
 
     /**
-     * Retrieves a message from the World Wind message resource bundle formatted with a single argument. The argument is
+     * Retrieves a message from the WorldWind message resource bundle formatted with a single argument. The argument is
      * inserted into the message via {@link java.text.MessageFormat}.
      *
      * @param property the property identifying which message to retrieve.
@@ -106,7 +106,7 @@ public class Logging
     }
 
     /**
-     * Retrieves a message from the World Wind message resource bundle formatted with specified arguments. The arguments
+     * Retrieves a message from the WorldWind message resource bundle formatted with specified arguments. The arguments
      * are inserted into the message via {@link java.text.MessageFormat}.
      *
      * @param property the property identifying which message to retrieve.

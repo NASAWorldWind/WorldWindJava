@@ -24,7 +24,7 @@ import java.text.*;
 import java.util.ArrayList;
 
 /**
- * Illustrates how to configure and display a 3D geographic grid of scalar data using the World Wind <code>{@link
+ * Illustrates how to configure and display a 3D geographic grid of scalar data using the WorldWind <code>{@link
  * AnalyticSurface}</code>. Analytic surface defines a grid over a geographic <code>{@link Sector}</code> at a specified
  * altitude, and enables the caller to specify the color and height at each grid point.
  * <p/>
@@ -355,6 +355,6 @@ public class AnalyticSurfaceDemo extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Analytic Surface", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Analytic Surface", AppFrame.class);
     }
 }

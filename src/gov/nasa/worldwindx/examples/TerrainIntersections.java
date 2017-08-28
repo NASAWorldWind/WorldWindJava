@@ -209,7 +209,7 @@ public class TerrainIntersections extends ApplicationTemplate
                 return;
             this.lastTime = System.currentTimeMillis();
 
-            // On the EDT, update the progress bar and if calculations are complete, update the World Window.
+            // On the EDT, update the progress bar and if calculations are complete, update the WorldWindow.
             SwingUtilities.invokeLater(new Runnable()
             {
                 public void run()
@@ -228,7 +228,7 @@ public class TerrainIntersections extends ApplicationTemplate
             });
         }
 
-        /** Updates the World Wind model with the new intersection locations and sight lines. */
+        /** Updates the WorldWind model with the new intersection locations and sight lines. */
         protected void showResults()
         {
             this.showIntersections(firstIntersectionPositions);
@@ -540,6 +540,6 @@ public class TerrainIntersections extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -119.7761d);
 
         // Adjust configuration values before instantiation
-        ApplicationTemplate.start("World Wind Terrain Intersections", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Terrain Intersections", AppFrame.class);
     }
 }

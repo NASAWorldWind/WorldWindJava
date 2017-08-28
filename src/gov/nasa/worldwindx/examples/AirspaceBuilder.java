@@ -32,7 +32,7 @@ import java.util.*;
 import java.util.zip.*;
 
 /**
- * Illustrates runtime construction of 3D extruded polygons and spheres using World Wind <code>{@link Airspace}</code>
+ * Illustrates runtime construction of 3D extruded polygons and spheres using WorldWind <code>{@link Airspace}</code>
  * shapes. This uses a <code>{@link PolygonEditor}</code> and a <code>{@link SphereAirspaceEditor}</code> to enable
  * runtime editing of <code>{@link Polygon}</code> airspace and <code>{@link SphereAirspace}</code> shapes.
  * <p/>
@@ -58,7 +58,7 @@ import java.util.zip.*;
  * <h1>Demo Shapes</h1>
  * <p/>
  * Select <code>File -> Load Demo Shapes</code> to display a set of polygon airspace shapes built with this editor. The
- * data for these shapes is located in the World Wind project under src/gov/nasa/worldwindx/examples/data/AirspaceBuilder-DemoShapes.zip.
+ * data for these shapes is located in the WorldWind project under src/gov/nasa/worldwindx/examples/data/AirspaceBuilder-DemoShapes.zip.
  *
  * @author dcollins
  * @version $Id: AirspaceBuilder.java 2231 2014-08-15 19:03:12Z dcollins $
@@ -1611,6 +1611,6 @@ public class AirspaceBuilder extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Airspace Builder", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Airspace Builder", AppFrame.class);
     }
 }

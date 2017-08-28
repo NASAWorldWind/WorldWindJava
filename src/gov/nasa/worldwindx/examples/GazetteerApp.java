@@ -30,6 +30,6 @@ public class GazetteerApp extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Gazetteer Example", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Gazetteer Example", AppFrame.class);
     }
 }

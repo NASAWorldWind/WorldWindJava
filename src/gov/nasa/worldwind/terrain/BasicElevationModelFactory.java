@@ -40,7 +40,7 @@ public class BasicElevationModelFactory extends BasicFactory
      * For non-compound models, this method maps the <code>serviceName</code> attribute of the
      * <code>ElevationModel/Service</code> element of the XML configuration document to the appropriate elevation-model
      * type. Service types recognized are:" <ul> <li>"WMS" for elevation models that draw their data from a WMS web
-     * service.</li> <li>"WWTileService" for elevation models that draw their data from a World Wind tile service.</li>
+     * service.</li> <li>"WWTileService" for elevation models that draw their data from a WorldWind tile service.</li>
      * <li>"Offline" for elevation models that draw their data only from the local cache.</li> </ul>
      *
      * @param configSource the configuration source. See above for supported types.

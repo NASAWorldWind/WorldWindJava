@@ -256,6 +256,6 @@ public class ContextMenusOnShapes extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Context Menus on Shapes", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Context Menus on Shapes", AppFrame.class);
     }
 }

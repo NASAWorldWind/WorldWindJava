@@ -263,7 +263,7 @@ public class WorldWindDiagnostics
         if (Configuration.isMacOS())
         {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "World Wind Diagnostic Program");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Diagnostic Program");
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
         }
     }

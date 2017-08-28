@@ -83,6 +83,6 @@ public class ExtrudedPolygonWithBaseDepth extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Extruded Polygon with Base Depth", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Extruded Polygon with Base Depth", AppFrame.class);
     }
 }

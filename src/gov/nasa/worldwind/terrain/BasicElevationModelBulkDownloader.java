@@ -20,7 +20,7 @@ import java.nio.ByteBuffer;
 import java.util.*;
 
 /**
- * Downloads elevation data not currently available in the World Wind file cache or a specified {@link FileStore}. The
+ * Downloads elevation data not currently available in the WorldWind file cache or a specified {@link FileStore}. The
  * class derives from {@link Thread} and is meant to operate in its own thread.
  * <p/>
  * The sector and resolution associated with the downloader are specified during construction and are final.
@@ -39,7 +39,7 @@ public class BasicElevationModelBulkDownloader extends BulkRetrievalThread
     protected ArrayList<Tile> missingTiles;
 
     /**
-     * Constructs a downloader to retrieve elevations not currently available in the World Wind file cache.
+     * Constructs a downloader to retrieve elevations not currently available in the WorldWind file cache.
      * <p/>
      * The thread returned is not started during construction, the caller must start the thread.
      *

@@ -154,6 +154,6 @@ public class AbstractShapeIntersection extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_HEADING, 27);
         Configuration.setValue(AVKey.INITIAL_PITCH, 30);
 
-        ApplicationTemplate.start("World Wind Extruded Abstract Shape Intersection", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Extruded Abstract Shape Intersection", AppFrame.class);
     }
 }

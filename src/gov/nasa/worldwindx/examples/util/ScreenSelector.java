@@ -373,7 +373,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         if (!this.getLayer().isEnabled())
             this.getLayer().setEnabled(true);
 
-        // Listen for mouse input on the World Window.
+        // Listen for mouse input on the WorldWindow.
         this.getWwd().getInputHandler().addMouseListener(this);
         this.getWwd().getInputHandler().addMouseMotionListener(this);
     }
@@ -390,7 +390,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         // Remove the layer that displays this ScreenSelector's selection rectangle.
         this.getWwd().getModel().getLayers().remove(this.getLayer());
 
-        // Stop listening for mouse input on the world window.
+        // Stop listening for mouse input on the WorldWindow.
         this.getWwd().getInputHandler().removeMouseListener(this);
         this.getWwd().getInputHandler().removeMouseMotionListener(this);
     }
@@ -526,9 +526,9 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
 
     protected void selectionChanged(MouseEvent mouseEvent)
     {
-        // Limit the end point to the World Window's viewport rectangle. This ensures that a user drag event to define
+        // Limit the end point to the WorldWindow's viewport rectangle. This ensures that a user drag event to define
         // the selection does not exceed the viewport and the viewing frustum. This is only necessary during mouse drag
-        // events because those events are reported when the cursor is outside the World Window's viewport.
+        // events because those events are reported when the cursor is outside the WorldWindow's viewport.
         Point p = this.limitPointToWorldWindow(mouseEvent.getPoint());
 
         // Specify the selection's end point and set the scene controller's pick rectangle to the selected rectangle.
@@ -541,15 +541,15 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
     }
 
     /**
-     * Limits the specified point's x and y coordinates to the World Window's viewport, and returns a new point with the
-     * limited coordinates. For example, if the World Window's viewport rectangle is x=0, y=0, width=100, height=100 and
+     * Limits the specified point's x and y coordinates to the WorldWindow's viewport, and returns a new point with the
+     * limited coordinates. For example, if the WorldWindow's viewport rectangle is x=0, y=0, width=100, height=100 and
      * the point's coordinates are x=50, y=200 this returns a new point with coordinates x=50, y=100. If the specified
-     * point is already inside the World Window's viewport, this returns a new point with the same x and y coordinates
+     * point is already inside the WorldWindow's viewport, this returns a new point with the same x and y coordinates
      * as the specified point.
      *
      * @param point the point to limit.
      *
-     * @return a new Point representing the specified point limited to the World Window's viewport rectangle.
+     * @return a new Point representing the specified point limited to the WorldWindow's viewport rectangle.
      */
     protected Point limitPointToWorldWindow(Point point)
     {

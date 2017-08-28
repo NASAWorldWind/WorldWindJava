@@ -28,7 +28,7 @@ import java.util.*;
 /**
  * /** A 3D polygon. The polygon may be complex with multiple internal but not intersecting contours.
  * <p/>
- * Polygons are safe to share among World Windows. They should not be shared among layers in the same World Window.
+ * Polygons are safe to share among WorldWindows. They should not be shared among layers in the same WorldWindow.
  * <p/>
  * In order to support simultaneous use of this shape with multiple globes (windows), this shape maintains a cache of
  * data computed relative to each globe. During rendering, the data for the currently active globe, as indicated in the

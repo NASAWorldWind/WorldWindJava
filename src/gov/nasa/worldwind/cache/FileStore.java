@@ -200,7 +200,7 @@ public interface FileStore extends WWObject
      * Requests a file. If the file exists locally, including as a resource on the classpath, this returns a
      * <code>{@link URL}</code> to the file. Otherwise if the specified address is a URL to a remote location, this
      * initiates a request for the file and returns <code>null</code>. When the request succeeds the file is stored in
-     * the local World Wind cache and subsequent invocations of this method return a URL to the retrieved file.
+     * the local WorldWind cache and subsequent invocations of this method return a URL to the retrieved file.
      *
      * @param address the file address: either a local file, a URL, or a path relative to the root of the file store.
      *
@@ -215,20 +215,20 @@ public interface FileStore extends WWObject
      * Requests a file and specifies whether to store retrieved files in the cache or in a temporary location. If the
      * file exists locally, including as a resource on the classpath, this returns a <code>{@link URL}</code> to the
      * file. Otherwise if the specified address is a URL to a remote location, this initiates a request for the file and
-     * returns <code>null</code>. When the request succeeds the file is stored either in the local World Wind cache or
+     * returns <code>null</code>. When the request succeeds the file is stored either in the local WorldWind cache or
      * in a temporary location and subsequent invocations of this method return a URL to the retrieved file.
      * <p/>
-     * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the World Wind
+     * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the WorldWind
      * cache or in a temporary location. This parameter has no effect if the file exists locally. The temporary location
      * for a retrieved file does not persist between runtime sessions, and subsequent invocations of this method may not
      * return the same temporary location.
      * <p/>
      * If a remote file is requested multiple times with different values for <code>cacheRemoteFile</code>, it is
-     * undefined whether the retrieved file is stored in the World Wind cache or in a temporary location.
+     * undefined whether the retrieved file is stored in the WorldWind cache or in a temporary location.
      *
      * @param address         the file address: either a local file, a URL, or a path relative to the root of the file
      *                        store.
-     * @param cacheRemoteFile <code>true</code> to store remote files in the World Wind cache, or <code>false</code> to
+     * @param cacheRemoteFile <code>true</code> to store remote files in the WorldWind cache, or <code>false</code> to
      *                        store remote files in a temporary location. Has no effect if the address is a local file.
      *
      * @return the file's URL if it exists locally or is a remote file that has been retrieved, otherwise

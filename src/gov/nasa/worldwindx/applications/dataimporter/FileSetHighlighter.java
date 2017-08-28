@@ -169,7 +169,7 @@ public class FileSetHighlighter implements ListSelectionListener, SelectListener
     @Override
     public void selected(SelectEvent event)
     {
-        // Called when the sector is selected in the World Window. Ensures that the selected data set's entry in the
+        // Called when the sector is selected in the WorldWindow. Ensures that the selected data set's entry in the
         // data set table is visible.
 
         if (!event.getEventAction().equals(SelectEvent.LEFT_CLICK))

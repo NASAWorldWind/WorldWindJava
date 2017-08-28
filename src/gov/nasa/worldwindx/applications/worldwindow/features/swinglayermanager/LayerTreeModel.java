@@ -151,7 +151,7 @@ public class LayerTreeModel extends DefaultTreeModel
      * aren't already in the tree, and removes layers from the tree if they are labeled internal. It does not remove
      * other layers in the model but missing from the specified layer list. Use {@link #removeNode(Object)} for that.
      *
-     * @param layerList the layerlist to synchronize with, typically the active layer list of the World Window.
+     * @param layerList the layerlist to synchronize with, typically the active layer list of the WorldWindow.
      */
     public void refresh(LayerList layerList)
     {

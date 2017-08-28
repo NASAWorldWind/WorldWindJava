@@ -131,6 +131,6 @@ public class TreeFiltering extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Filtering by Region", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Filtering by Region", AppFrame.class);
     }
 }

@@ -35,7 +35,7 @@ import javax.media.opengl.*;
 public class StereoOptionSceneController extends BasicSceneController implements StereoSceneController
 {
     /**
-     * The default focus angle. May be specified in the World Wind configuration file as the
+     * The default focus angle. May be specified in the WorldWind configuration file as the
      * <code>gov.nasa.worldwind.StereoFocusAngle</code> property. The default if not specified in the configuration is
      * 1.6 degrees.
      */

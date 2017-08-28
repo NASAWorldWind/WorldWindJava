@@ -31,6 +31,6 @@ public class OnScreenLayerManager extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind On-Screen Layer Manager", AppFrame.class);
+        ApplicationTemplate.start("WorldWind On-Screen Layer Manager", AppFrame.class);
     }
 }

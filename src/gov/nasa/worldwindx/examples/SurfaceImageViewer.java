@@ -175,6 +175,6 @@ public class SurfaceImageViewer extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Surface Images", SurfaceImageViewer.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Surface Images", SurfaceImageViewer.AppFrame.class);
     }
 }

@@ -53,6 +53,6 @@ public class MGRSGraticule extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind UTM/MGRS Graticule", AppFrame.class);
+        ApplicationTemplate.start("WorldWind UTM/MGRS Graticule", AppFrame.class);
     }
 }

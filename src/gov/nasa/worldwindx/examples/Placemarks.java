@@ -232,7 +232,7 @@ public class Placemarks extends ApplicationTemplate
         params.setValue(AVKey.COLOR, Color.WHITE);
         final BufferedImage highlightImage = iconRetriever.createIcon("SFAPMFQM--GIUSA", params);
 
-        // Add the placemark to World Wind on the event dispatch thread.
+        // Add the placemark to WorldWind on the event dispatch thread.
         SwingUtilities.invokeLater(new Runnable()
         {
             @Override
@@ -274,6 +274,6 @@ public class Placemarks extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Placemarks", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Placemarks", AppFrame.class);
     }
 }

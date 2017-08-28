@@ -113,6 +113,6 @@ public class GeoRSS extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind GeoRSS", AppFrame.class);
+        ApplicationTemplate.start("WorldWind GeoRSS", AppFrame.class);
     }
 }

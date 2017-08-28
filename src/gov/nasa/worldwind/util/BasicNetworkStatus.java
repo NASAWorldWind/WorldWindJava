@@ -79,7 +79,7 @@ public class BasicNetworkStatus extends AVListImpl implements NetworkStatus
     /**
      * Determines and stores the network sites to test for public network connectivity. The sites are drawn from the
      * JVM's gov.nasa.worldwind.avkey.NetworkStatusTestSites property ({@link AVKey#NETWORK_STATUS_TEST_SITES}). If that
-     * property is not defined, the sites are drawn from the same property in the World Wind or application
+     * property is not defined, the sites are drawn from the same property in the WorldWind or application
      * configuration file. If the sites are not specified there, the set of sites specified in {@link
      * #DEFAULT_NETWORK_TEST_SITES} are used. To indicate an empty list in the JVM property or configuration file
      * property, specify an empty site list, "".

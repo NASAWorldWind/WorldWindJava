@@ -91,6 +91,6 @@ public class IconPicking extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 27e6);
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 0);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, 88);
-        ApplicationTemplate.start("World Wind Icon Picking", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Icon Picking", AppFrame.class);
     }
 }

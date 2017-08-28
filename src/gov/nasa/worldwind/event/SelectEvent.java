@@ -19,13 +19,13 @@ import java.util.List;
  * Select event listeners are registered by calling {@link gov.nasa.worldwind.WorldWindow#addSelectListener(SelectListener)}.
  * <p/>
  * A <code>ROLLOVER</code> SelectEvent is generated every frame when the cursor is over a visible object either because
- * the user moved it there or because the World Window was repainted and a visible object was found to be under the
+ * the user moved it there or because the WorldWindow was repainted and a visible object was found to be under the
  * cursor. A <code>ROLLOVER</code> SelectEvent is also generated when there are no longer any objects under the cursor.
  * Select events generated for objects under the cursor have a non-null pickPoint, and contain the top-most visible
  * object of all objects at the cursor position.
  * <p/>
  * A <code>BOX_ROLLOVER</code> SelectEvent is generated every frame when the selection box intersects a visible object
- * either because the user moved or expanded it or because the World Window was repainted and a visible object was found
+ * either because the user moved or expanded it or because the WorldWindow was repainted and a visible object was found
  * to intersect the box. A <code>BOX_ROLLOVER</code> SelectEvent is also generated when there are no longer any objects
  * intersecting the selection box. Select events generated for objects intersecting the selection box have a non-null
  * pickRectangle, and contain all top-most visible objects of all objects intersecting the selection box.

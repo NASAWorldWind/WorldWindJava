@@ -15,7 +15,7 @@ import java.awt.event.*;
 import java.io.File;
 
 /**
- * Test loading a COLLADA model and moving the model along a path. World Wind does not support animations defined in
+ * Test loading a COLLADA model and moving the model along a path. WorldWind does not support animations defined in
  * COLLADA files, but models may be animated by application logic.
  *
  * @author pabercrombie
@@ -62,7 +62,7 @@ public class ColladaMovingModel extends ColladaViewer
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 4000);
         Configuration.setValue(AVKey.INITIAL_PITCH, 50);
 
-        final AppFrame af = (AppFrame) start("World Wind COLLADA Viewer", AppFrame.class);
+        final AppFrame af = (AppFrame) start("WorldWind COLLADA Viewer", AppFrame.class);
 
         new WorkerThread(new File("testData/collada/duck_triangulate.dae"),
             Position.fromDegrees(40.00779229910037, -105.27494931422459, 100), af).start();

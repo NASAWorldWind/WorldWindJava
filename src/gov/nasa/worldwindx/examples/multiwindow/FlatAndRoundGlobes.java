@@ -27,15 +27,15 @@ import java.util.ArrayList;
 /**
  * This class illustrates how to display round and flat globes side by side.
  * <p/>
- * Applications using multiple World Wind windows simultaneously should instruct World Wind to share OpenGL and other
- * resources among those windows. Most World Wind classes are designed to be shared across {@link WorldWindow} objects
+ * Applications using multiple WorldWind windows simultaneously should instruct WorldWind to share OpenGL and other
+ * resources among those windows. Most WorldWind classes are designed to be shared across {@link WorldWindow} objects
  * and will be shared automatically. But OpenGL resources are not automatically shared. To share them, a reference to a
  * previously created WorldWindow must be specified as a constructor argument for subsequently created WorldWindows.
  * <p/>
- * Most World Wind {@link Globe} and {@link Layer} objects can be shared among WorldWindows. Those that cannot be shared
+ * Most WorldWind {@link Globe} and {@link Layer} objects can be shared among WorldWindows. Those that cannot be shared
  * have an operational dependency on the WorldWindow they're associated with. An example is the {@link
  * ViewControlsLayer} layer for on-screen navigation. Because this layer responds to input events within a specific
- * WorldWindow, it is not sharable. Refer to the World Wind Overview page for a list of layers that cannot be shared.
+ * WorldWindow, it is not sharable. Refer to the WorldWind Overview page for a list of layers that cannot be shared.
  *
  * @author tag
  * @version $Id: FlatAndRoundGlobes.java 2219 2014-08-11 21:39:44Z dcollins $
@@ -332,7 +332,7 @@ public class FlatAndRoundGlobes
 
     public static void main(String[] args)
     {
-        String appName = "World Wind MultiGlobe";
+        String appName = "WorldWind MultiGlobe";
 
         if (Configuration.isMacOS())
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", appName);

@@ -151,7 +151,7 @@ public class StatusPanelImpl extends AbstractFeature implements StatusPanel, Sel
 
     protected Object lastSelectedObject;
 
-    // Monitors World Wind select events and if the object selected has a status-bar message attached to it, displays
+    // Monitors WorldWind select events and if the object selected has a status-bar message attached to it, displays
     // that message in the status bar. If there is no status-bark message attached to the selected object but there is
     // an external link attached, displays the external-link string.
     public void selected(SelectEvent event)

@@ -95,6 +95,6 @@ public class VeryManyPaths extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Paths", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Paths", AppFrame.class);
     }
 }

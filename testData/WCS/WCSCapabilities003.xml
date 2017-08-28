@@ -7,9 +7,9 @@
 
 <WCS_Capabilities version="1.0.0" updateSequence="2013-06-28T16:26:00Z" xmlns="http://www.opengis.net/wcs" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs http://schemas.opengis.net/wcs/1.0.0/wcsCapabilities.xsd">
 <Service>
-  <metadataLink metadataType="TC211" xlink:type="simple" xlink:href="http://worldwind26.arc.nasa.gov"/>  <description>World Wind MapServer Elevation test</description>
+  <metadataLink metadataType="TC211" xlink:type="simple" xlink:href="http://worldwind26.arc.nasa.gov"/>  <description>WorldWind MapServer Elevation test</description>
   <name>MapServer WCS</name>
-  <label>World Wind MapServer Elevation</label>
+  <label>WorldWind MapServer Elevation</label>
   <keywords>
     <keyword>wcs</keyword>
     <keyword>test</keyword>

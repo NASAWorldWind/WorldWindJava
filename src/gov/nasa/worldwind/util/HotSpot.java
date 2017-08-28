@@ -34,7 +34,7 @@ public interface HotSpot extends SelectListener, KeyListener, MouseListener, Mou
     boolean isActive();
 
     /**
-     * Called when the HotSpot is selected in the World Window.
+     * Called when the HotSpot is selected in the WorldWindow.
      *
      * @param event The event to handle.
      */
@@ -62,56 +62,56 @@ public interface HotSpot extends SelectListener, KeyListener, MouseListener, Mou
     void keyReleased(KeyEvent event);
 
     /**
-     * Called when the mouse is clicked on the HotSpot in the World Window.
+     * Called when the mouse is clicked on the HotSpot in the WorldWindow.
      *
      * @param event The event to handle.
      */
     void mouseClicked(MouseEvent event);
 
     /**
-     * Called when the mouse is pressed over the HotSpot in the World Window.
+     * Called when the mouse is pressed over the HotSpot in the WorldWindow.
      *
      * @param event The event to handle.
      */
     void mousePressed(MouseEvent event);
 
     /**
-     * Called when the mouse is released over the HotSpot in the World Window.
+     * Called when the mouse is released over the HotSpot in the WorldWindow.
      *
      * @param event The event to handle.
      */
     void mouseReleased(MouseEvent event);
 
     /**
-     * Called when the mouse enters the World Window and the HotSpot is active.
+     * Called when the mouse enters the WorldWindow and the HotSpot is active.
      *
      * @param event The event to handle.
      */
     void mouseEntered(MouseEvent event);
 
     /**
-     * Called when the mouse exits the World Window and the HotSpot is active.
+     * Called when the mouse exits the WorldWindow and the HotSpot is active.
      *
      * @param event The event to handle.
      */
     void mouseExited(MouseEvent event);
 
     /**
-     * Called when the mouse is dragged in the World Window and the HotSpot is active.
+     * Called when the mouse is dragged in the WorldWindow and the HotSpot is active.
      *
      * @param event The event to handle.
      */
     void mouseDragged(MouseEvent event);
 
     /**
-     * Called when the cursor moves over the HotSpot in the World Window.
+     * Called when the cursor moves over the HotSpot in the WorldWindow.
      *
      * @param event The event to handle.
      */
     void mouseMoved(MouseEvent event);
 
     /**
-     * Called when the mouse wheel is moved in the World Window and HotSpot is active.
+     * Called when the mouse wheel is moved in the WorldWindow and HotSpot is active.
      *
      * @param event The event to handle.
      */

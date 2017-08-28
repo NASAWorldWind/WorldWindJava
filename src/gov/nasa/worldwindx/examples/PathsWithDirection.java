@@ -70,6 +70,6 @@ public class PathsWithDirection extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -122.77);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 22000);
 
-        ApplicationTemplate.start("World Wind Paths With Direction", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Paths With Direction", AppFrame.class);
     }
 }

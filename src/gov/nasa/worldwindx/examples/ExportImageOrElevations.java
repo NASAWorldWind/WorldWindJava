@@ -529,6 +529,6 @@ public class ExportImageOrElevations extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 37.7794d);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -122.4192d);
 
-        ApplicationTemplate.start("World Wind Exporting Surface Imagery and Elevations", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Exporting Surface Imagery and Elevations", AppFrame.class);
     }
 }

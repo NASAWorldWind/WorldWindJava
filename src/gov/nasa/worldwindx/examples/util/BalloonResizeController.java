@@ -132,7 +132,7 @@ public class BalloonResizeController extends AbstractResizeHotSpot
     }
 
     /**
-    * Update the World Window's cursor to the current resize cursor.
+    * Update the WorldWindow's cursor to the current resize cursor.
     */
     protected void updateCursor()
     {

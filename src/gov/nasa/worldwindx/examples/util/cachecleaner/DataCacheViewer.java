@@ -208,7 +208,7 @@ public class DataCacheViewer
     {
         if (Configuration.isMacOS())
         {
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "World Wind Cache Cleaner");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Cache Cleaner");
         }
     }
 

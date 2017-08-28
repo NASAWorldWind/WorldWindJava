@@ -20,7 +20,7 @@ import java.awt.image.*;
 import java.io.File;
 
 /**
- * Illustrates how to import imagery into World Wind. This imports a GeoTIFF image file and displays it as a
+ * Illustrates how to import imagery into WorldWind. This imports a GeoTIFF image file and displays it as a
  * <code>{@link SurfaceImage}</code>.
  *
  * @author tag
@@ -142,6 +142,6 @@ public class ImportImagery extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Imagery Import", ImportImagery.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Imagery Import", ImportImagery.AppFrame.class);
     }
 }

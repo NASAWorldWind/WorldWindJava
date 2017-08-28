@@ -1229,7 +1229,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
 
     /**
      * Start a new {@link BulkRetrievalThread} that downloads all placenames for a given sector and resolution to the
-     * current World Wind file cache.
+     * current WorldWind file cache.
      * <p/>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link PlaceNameLayerBulkDownloader}.
@@ -1267,7 +1267,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
      *
      * @param sector     the sector to download data for.
      * @param resolution the target resolution, provided in radians of latitude per texel.
-     * @param fileStore  the file store in which to place the downloaded elevations. If null the current World Wind file
+     * @param fileStore  the file store in which to place the downloaded elevations. If null the current WorldWind file
      *                   cache is used.
      * @param listener   an optional retrieval listener. May be null.
      *
@@ -1287,7 +1287,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
     }
 
     /**
-     * Get the estimated size in bytes of the placenames not in the World Wind file cache for the given sector and
+     * Get the estimated size in bytes of the placenames not in the WorldWind file cache for the given sector and
      * resolution.
      * <p/>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
@@ -1314,7 +1314,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
      *
      * @param sector     the sector to estimate.
      * @param resolution the target resolution, provided in radians of latitude per texel.
-     * @param fileStore  the file store to examine. If null the current World Wind file cache is used.
+     * @param fileStore  the file store to examine. If null the current WorldWind file cache is used.
      *
      * @return the estimated size in byte of the missing placenames.
      *

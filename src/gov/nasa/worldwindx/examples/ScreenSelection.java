@@ -198,7 +198,7 @@ public class ScreenSelection extends ApplicationTemplate
                 }
             }
 
-            // We've potentially changed the highlight state of one or more objects. Request that the world window
+            // We've potentially changed the highlight state of one or more objects. Request that the WorldWindow
             // redraw itself in order to refresh these object's display. This is necessary because changes in the
             // objects in the pick rectangle do not necessarily correspond to mouse movements. For example, the pick
             // rectangle may be cleared when the user releases the mouse button at the end of a drag. In this case,
@@ -209,6 +209,6 @@ public class ScreenSelection extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        start("World Wind Screen Selection", AppFrame.class);
+        start("WorldWind Screen Selection", AppFrame.class);
     }
 }

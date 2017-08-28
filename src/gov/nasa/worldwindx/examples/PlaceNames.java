@@ -35,6 +35,6 @@ public class PlaceNames extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Place Names", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Place Names", AppFrame.class);
     }
 }

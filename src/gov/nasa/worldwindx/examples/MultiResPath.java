@@ -102,6 +102,6 @@ public class MultiResPath extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind UAVPath Test", AppFrame.class);
+        ApplicationTemplate.start("WorldWind UAVPath Test", AppFrame.class);
     }
 }

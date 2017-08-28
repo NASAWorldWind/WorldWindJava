@@ -31,6 +31,6 @@ public class Stereo extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_HEADING, 342);
         Configuration.setValue(AVKey.INITIAL_PITCH, 80);
 
-        ApplicationTemplate.start("World Wind Anaglyph Stereo", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Anaglyph Stereo", AppFrame.class);
     }
 }

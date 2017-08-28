@@ -25,7 +25,7 @@
 
     <!--
         Requests a trusted application environment. The GlueGen library requires access to the local filesystem. The
-        GlueGen JAR files hosted as part of the World Wind Java SDK are signed with a digital signature associated with
+        GlueGen JAR files hosted as part of the WorldWind Java SDK are signed with a digital signature associated with
         NASA.
     -->
     <security>

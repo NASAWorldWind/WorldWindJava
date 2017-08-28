@@ -16,7 +16,7 @@ import java.awt.*;
 import java.io.File;
 
 /**
- * Illustrates how to import elevation data into World Wind. This imports a GeoTIFF file containing elevation data and
+ * Illustrates how to import elevation data into WorldWind. This imports a GeoTIFF file containing elevation data and
  * creates an <code>{@link gov.nasa.worldwind.globes.ElevationModel}</code> for it.
  *
  * @author tag
@@ -91,6 +91,6 @@ public class ImportElevations extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Elevation Import", ImportElevations.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Elevation Import", ImportElevations.AppFrame.class);
     }
 }

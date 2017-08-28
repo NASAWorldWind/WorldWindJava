@@ -36,6 +36,6 @@ public class ElevationsAllZero
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Zero Elevations", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Zero Elevations", AppFrame.class);
     }
 }

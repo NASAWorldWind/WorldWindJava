@@ -286,8 +286,8 @@ public class KMLLink extends KMLAbstractObject
      * [cameraAlt]</code> - view's eye position.</li> <li><code>[horizFov], [vertFov]</code> - view's horizontal and
      * vertical field of view.</li> <li><code>[horizPixels], [vertPixels]</code> - width and height of the
      * viewport.</li> <li><code>[terrainEnabled]</code> - always <code>true</code></li> <li><code>[clientVersion]</code>
-     * - World Wind client version.</li> <li><code>[clientName]</code> - World Wind client name.</li>
-     * <li><code>[kmlVersion]</code> - KML version supported by World Wind.</li> <li><code>[language]</code> - current
+     * - WorldWind client version.</li> <li><code>[clientName]</code> - WorldWind client name.</li>
+     * <li><code>[kmlVersion]</code> - KML version supported by WorldWind.</li> <li><code>[language]</code> - current
      * locale's language.</li> </ul> If the <code>viewFormat</code> is unspecified, and the <code>viewRefreshMode</code>
      * is one of <code>onRequest</code>, <code>onStop</code> or <code>onRegion</code>, this automatically appends the
      * following information to the query string: <code>BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]</code>. The

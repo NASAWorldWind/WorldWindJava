@@ -19,7 +19,7 @@ import javax.media.opengl.*;
  * whenever possible. Different GL feature sets result in different approaches to rendering to texture, therefore the
  * caller cannot depend on the mechanism by which OGLRenderToTextureSupport will write pixel values to the destination
  * texture. For this reason, OGLRenderToTextureSupport must be used when the contents of the windowing system buffer
- * (likely the back framebuffer) can be freely modified by OGLRenderToTextureSupport. The World Wind pre-render stage is
+ * (likely the back framebuffer) can be freely modified by OGLRenderToTextureSupport. The WorldWind pre-render stage is
  * a good example of when it is appropriate to use OGLRenderToTextureSupport. Fore more information on the pre-render
  * stage, see {@link gov.nasa.worldwind.render.PreRenderable} and {@link gov.nasa.worldwind.layers.Layer#preRender(gov.nasa.worldwind.render.DrawContext)}.
  * <b>Note:</b> In order to achieve consistent results across all platforms, it is essential to clear the texture's

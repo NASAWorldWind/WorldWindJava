@@ -65,6 +65,6 @@ public class PointPlacemarksEverywhere extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Very Many Point Placemarks", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Very Many Point Placemarks", AppFrame.class);
     }
 }

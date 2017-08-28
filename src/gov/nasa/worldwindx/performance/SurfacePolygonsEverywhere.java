@@ -92,6 +92,6 @@ public class SurfacePolygonsEverywhere extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Very Many Surface Polygons", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Very Many Surface Polygons", AppFrame.class);
     }
 }

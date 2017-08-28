@@ -16,7 +16,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Controller to forward selection, keyboard, and mouse events on the World Window to the active {@link
+ * Controller to forward selection, keyboard, and mouse events on the WorldWindow to the active {@link
  * gov.nasa.worldwind.util.HotSpot}. The active HotSpot is updated on {@link gov.nasa.worldwind.event.SelectEvent#ROLLOVER}
  * select events, but not during a drag operation. This ensures that the active HotSpot remains active while it's being
  * dragged, regardless of what's under the cursor.
@@ -39,10 +39,10 @@ public class HotSpotController implements SelectListener, MouseMotionListener
     protected boolean customCursor;
 
     /**
-     * Creates a new HotSpotController for a specified World Window, and assigns the controller as a {@link
-     * gov.nasa.worldwind.event.SelectListener} on the World Window.
+     * Creates a new HotSpotController for a specified WorldWindow, and assigns the controller as a {@link
+     * gov.nasa.worldwind.event.SelectListener} on the WorldWindow.
      *
-     * @param wwd The World Window to monitor selection events for.
+     * @param wwd The WorldWindow to monitor selection events for.
      */
     public HotSpotController(WorldWindow wwd)
     {
@@ -65,7 +65,7 @@ public class HotSpotController implements SelectListener, MouseMotionListener
      * This forwards the select event to {@link #doSelected(gov.nasa.worldwind.event.SelectEvent)}, and catches and logs
      * any exceptions thrown by {@code doSelected}.
      *
-     * @param event A select event on the World Window we're monitoring.
+     * @param event A select event on the WorldWindow we're monitoring.
      */
     public void selected(SelectEvent event)
     {
@@ -90,7 +90,7 @@ public class HotSpotController implements SelectListener, MouseMotionListener
      * gov.nasa.worldwind.event.SelectEvent#ROLLOVER} while not dragging - Updates the active HotSpot, then forwards the
      * event to the active HotSpot.</li> <li>Other event types - forwards the event to the active HotSpot</li> </ul>
      *
-     * @param event A select event on the World Window we're monitoring.
+     * @param event A select event on the WorldWindow we're monitoring.
      */
     protected void doSelected(SelectEvent event)
     {
@@ -117,7 +117,7 @@ public class HotSpotController implements SelectListener, MouseMotionListener
             // press events when we're not dragging. This ensures that the active HotSpot remains active while it's
             // being dragged, regardless of what's under the cursor. It's necessary to do this on left press to handle
             // cases in which the mouse starts dragging without a hover event, which can happen if the user starts
-            // dragging while the World Wind window is in the background.
+            // dragging while the WorldWind window is in the background.
             PickedObject po = event.getTopPickedObject();
             this.updateActiveHotSpot(po);
         }
@@ -199,10 +199,10 @@ public class HotSpotController implements SelectListener, MouseMotionListener
     /**
      * Sets the active {@link gov.nasa.worldwind.util.HotSpot} to the specified HotSpot. The HotSpot may be {@code
      * null}, indicating that there is no active HotSpot. This registers the new HotSpot as key listener, mouse
-     * listener, mouse motion listener, and mouse wheel listener on the World Window's {@link
+     * listener, mouse motion listener, and mouse wheel listener on the WorldWindow's {@link
      * gov.nasa.worldwind.event.InputHandler}. This removes the previously active HotSpot as a listener on the World
      * Window's InputHandler. This does nothing if the active HotSpot and the specified HotSpot are the same object.
-     * </p> Additionally, this updates the World Window's {@link java.awt.Cursor} to the value returned by {@code
+     * </p> Additionally, this updates the WorldWindow's {@link java.awt.Cursor} to the value returned by {@code
      * hotSpot.getCursor()}, or {@code null} if the specified hotSpot is {@code null}.
      *
      * @param hotSpot The HotSpot that becomes the active HotSpot. {@code null} to indicate that there is no active
@@ -210,8 +210,8 @@ public class HotSpotController implements SelectListener, MouseMotionListener
      */
     protected void setActiveHotSpot(HotSpot hotSpot)
     {
-        // Update the World Window's cursor to the cursor associated with the active HotSpot. We
-        // specify null if there's no active HotSpot, which tells the World Window to use the default
+        // Update the WorldWindow's cursor to the cursor associated with the active HotSpot. We
+        // specify null if there's no active HotSpot, which tells the WorldWindow to use the default
         // cursor, or inherit its cursor from the parent Component.
         if (this.wwd instanceof Component)
         {

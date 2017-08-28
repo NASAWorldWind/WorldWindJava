@@ -35,6 +35,6 @@ public class GlobeAnnotationExample extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Globe Annotation", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Globe Annotation", AppFrame.class);
     }
 }

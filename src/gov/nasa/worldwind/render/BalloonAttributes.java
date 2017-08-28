@@ -9,7 +9,7 @@ package gov.nasa.worldwind.render;
 import java.awt.*;
 
 /**
- * Holds attributes for World Wind {@link gov.nasa.worldwind.render.Balloon} shapes. Changes made to the attributes are
+ * Holds attributes for WorldWind {@link gov.nasa.worldwind.render.Balloon} shapes. Changes made to the attributes are
  * applied to the balloon when the <code>WorldWindow</code> renders the next frame. Instances of
  * <code>BalloonAttributes</code> may be shared by many balloons, thereby reducing the memory normally required to store
  * attributes for each balloon.

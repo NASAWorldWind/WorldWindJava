@@ -17,7 +17,7 @@ import java.awt.*;
 import java.io.InputStream;
 
 /**
- * Illustrates how to use a World Wind <code>{@link Balloon}</code> to display on-screen information to the user in the
+ * Illustrates how to use a WorldWind <code>{@link Balloon}</code> to display on-screen information to the user in the
  * form of a screen-aligned text balloon. There are two abstract balloon types: <code>{@link ScreenBalloon}</code> which
  * displays a balloon at a point on the screen, and <code>{@link GlobeBalloon}</code> which displays a balloon attached
  * to a position on the Globe. For each abstract balloon type, there are two concrete types: AnnotationBalloon which
@@ -73,7 +73,7 @@ public class Balloons extends ApplicationTemplate
             this.makeAnnotationBalloon();
             this.makeBrowserBalloon();
 
-            // Size the World Window to provide enough screen space for the BrowserBalloon, and center the World Window
+            // Size the WorldWindow to provide enough screen space for the BrowserBalloon, and center the WorldWindow
             // on the screen.
             Dimension size = new Dimension(1200, 800);
             this.setPreferredSize(size);
@@ -156,6 +156,6 @@ public class Balloons extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 9500000);
         Configuration.setValue(AVKey.INITIAL_PITCH, 45);
 
-        ApplicationTemplate.start("World Wind Balloons", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Balloons", AppFrame.class);
     }
 }

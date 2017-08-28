@@ -23,7 +23,7 @@ import java.net.*;
 import java.util.concurrent.*;
 
 /**
- * A collection of static methods useful for opening, reading, and otherwise working with World Wind data configuration
+ * A collection of static methods useful for opening, reading, and otherwise working with WorldWind data configuration
  * documents.
  *
  * @author dcollins
@@ -37,7 +37,7 @@ public class DataConfigurationUtils
     /**
      * Returns true if the specified {@link org.w3c.dom.Element} is a data configuration document. This recognizes the
      * following data configuration documents: <ul> <li>Layer Configuration Documents</li> <li>Elevation Model
-     * Configuration Documents</li> <li>Installed DataDescriptor Documents</li> <li>World Wind .NET LayerSet
+     * Configuration Documents</li> <li>Installed DataDescriptor Documents</li> <li>WorldWind .NET LayerSet
      * Documents</li> </ul>
      *
      * @param domElement the document in question.
@@ -83,7 +83,7 @@ public class DataConfigurationUtils
      * Returns the specified data configuration document transformed to a standard Layer or ElevationModel configuration
      * document. This returns the original document if the document is already in a standard form, or if the document is
      * not one of the recognized types. Installed DataDescriptor documents are transformed to standard Layer or
-     * ElevationModel configuration documents, depending on the document contents. World Wind .NET LayerSet documents
+     * ElevationModel configuration documents, depending on the document contents. WorldWind .NET LayerSet documents
      * are transformed to standard Layer configuration documents. This returns null if the document's root element is
      * null.
      *
@@ -128,7 +128,7 @@ public class DataConfigurationUtils
      * follows: <table> <tr><th>Document Type</th><th>Path to Display Name</th></tr> <tr><td>Layer
      * Configuration</td><td>./DisplayName</td></tr> <tr><td>Elevation Model Configuration</td><td>./DisplayName</td></tr>
      * <tr><td>Installed DataDescriptor</td><td>./property[@name="dataSet"]/property[@name="gov.nasa.worldwind.avkey.DatasetNameKey"]</td></tr>
-     * <tr><td>World Wind .NET LayerSet</td><td>./QuadTileSet/Name</td></tr> <tr><td>Other</td><td>null</td></tr>
+     * <tr><td>WorldWind .NET LayerSet</td><td>./QuadTileSet/Name</td></tr> <tr><td>Other</td><td>null</td></tr>
      * </table>
      *
      * @param domElement the data configuration document who's display name is returned.
@@ -172,7 +172,7 @@ public class DataConfigurationUtils
      * recognized types. This maps data configuration documents to a type string as follows: <table> <tr><th>Document
      * Type</th><th>Type String</th></tr> <tr><td>Layer Configuration</td><td>"Layer"</td></tr> <tr><td>Elevation Model
      * Configuration</td><td>"Elevation Model"</td></tr> <tr><td>Installed DataDescriptor</td><td>"Layer" or
-     * "ElevationModel"</td></tr> <tr><td>World Wind .NET LayerSet</td><td>"Layer"</td></tr>
+     * "ElevationModel"</td></tr> <tr><td>WorldWind .NET LayerSet</td><td>"Layer"</td></tr>
      * <tr><td>Other</td><td>null</td></tr> </table>
      *
      * @param domElement the data configuration document to determine a type for.
@@ -1810,7 +1810,7 @@ public class DataConfigurationUtils
 
         // Data descriptor files are written with the property "gov.nasa.worldwind.avkey.MissingDataValue". But it
         // means the value that denotes a missing data point, and not the value that replaces missing values.
-        // Translate that key here to MissingDataSignal, so it is properly understood by the World Wind API
+        // Translate that key here to MissingDataSignal, so it is properly understood by the WorldWind API
         // (esp. BasicElevationModel).
         Double d = WWXML.getDouble(context, "property[@name=\"gov.nasa.worldwind.avkey.MissingDataValue\"]", xpath);
         if (d != null)
@@ -1880,11 +1880,11 @@ public class DataConfigurationUtils
     }
 
     //**************************************************************//
-    //********************  World Wind .NET LayerSet Configuration  //
+    //********************  WorldWind .NET LayerSet Configuration  //
     //**************************************************************//
 
     /**
-     * Returns true if a specified document is a World Wind .NET LayerSet configuration document, and false otherwise.
+     * Returns true if a specified document is a WorldWind .NET LayerSet configuration document, and false otherwise.
      *
      * @param domElement the document in question.
      *
@@ -1908,7 +1908,7 @@ public class DataConfigurationUtils
     }
 
     /**
-     * Returns true if a specified XML event is the root of a World Wind .NET LayerSet configuration document, and false
+     * Returns true if a specified XML event is the root of a WorldWind .NET LayerSet configuration document, and false
      * otherwise.
      *
      * @param event the XML event in question.
@@ -1936,7 +1936,7 @@ public class DataConfigurationUtils
     }
 
     /**
-     * Parses World Wind .NET LayerSet configuration parameters from the specified document. This writes output as
+     * Parses WorldWind .NET LayerSet configuration parameters from the specified document. This writes output as
      * key-value pairs to params. If a parameter from the LayerSet document already exists in params, that parameter is
      * ignored. Supported key and parameter names are: <table> <tr><th>Parameter</th><th>Element
      * Path</th><th>Type</th></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DISPLAY_NAME}</td><td>QuadTileSet/Name<td></td><td>String</td></tr>
@@ -2114,7 +2114,7 @@ public class DataConfigurationUtils
     }
 
     /**
-     * Transforms a World Wind .NET LayerSet configuration document to a standard layer configuration document.
+     * Transforms a WorldWind .NET LayerSet configuration document to a standard layer configuration document.
      *
      * @param domElement LayerSet document to transform.
      *

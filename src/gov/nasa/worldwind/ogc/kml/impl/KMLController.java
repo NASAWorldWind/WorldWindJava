@@ -12,7 +12,7 @@ import gov.nasa.worldwind.ogc.kml.KMLRoot;
 import gov.nasa.worldwind.render.*;
 
 /**
- * Executes the mapping from KML to World Wind. Traverses a parsed KML document and creates the appropriate World Wind
+ * Executes the mapping from KML to WorldWind. Traverses a parsed KML document and creates the appropriate WorldWind
  * object to represent the KML.
  *
  * @author tag

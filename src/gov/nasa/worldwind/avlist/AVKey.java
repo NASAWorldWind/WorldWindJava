@@ -85,7 +85,7 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String DATA_TYPE = "gov.nasa.worldwind.avkey.DataType";
     final String DELETE_CACHE_ON_EXIT = "gov.nasa.worldwind.avkey.DeleteCacheOnExit";
     /**
-     * Indicates the World Wind scene's worst-case depth resolution, in meters. This is typically interpreted by the
+     * Indicates the WorldWind scene's worst-case depth resolution, in meters. This is typically interpreted by the
      * View as the desired resolution at the scene's maximum drawing distance. In this case, the resolution closer to
      * the viewer's eye point is significantly better then the worst-case resolution. Decreasing this value enables the
      * viewer to get closer to 3D shapes positioned above the terrain at the coast of potential rendering artifacts

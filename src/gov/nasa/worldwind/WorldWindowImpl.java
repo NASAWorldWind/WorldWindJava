@@ -42,7 +42,7 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     /**
-     * Causes resources used by the World Window to be freed. The World Window cannot be used once this method is
+     * Causes resources used by the WorldWindow to be freed. The WorldWindow cannot be used once this method is
      * called. An OpenGL context for the window must be current.
      */
     public void shutdown()

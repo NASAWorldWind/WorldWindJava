@@ -20,7 +20,7 @@ import java.awt.*;
 
 /**
  * Example of a custom {@link Renderable} that draws a cube at a geographic position. This class shows the simplest
- * possible example of a custom Renderable, while still following World Wind best practices. See
+ * possible example of a custom Renderable, while still following WorldWind best practices. See
  * https://goworldwind.org/developers-guide/how-to-build-a-custom-renderable/ for a complete description of this
  * example.
  *
@@ -307,6 +307,6 @@ public class Cube extends ApplicationTemplate implements Renderable
         Configuration.setValue(AVKey.INITIAL_PITCH, 45);
         Configuration.setValue(AVKey.INITIAL_HEADING, 45);
 
-        ApplicationTemplate.start("World Wind Custom Renderable Tutorial", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Custom Renderable Tutorial", AppFrame.class);
     }
 }

@@ -96,7 +96,7 @@ public class IconRetrieverUsage
     {
         if (Configuration.isMacOS())
         {
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "World Wind Icon Retriever");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Icon Retriever");
         }
 
         SwingUtilities.invokeLater(new Runnable()
@@ -106,7 +106,7 @@ public class IconRetrieverUsage
                 // Create an AppFrame and immediately make it visible. As per Swing convention, this
                 // is done within an invokeLater call so that it executes on an AWT thread.
                 JFrame appFrame = new AppFrame();
-                appFrame.setTitle("World Wind Icon Retriever");
+                appFrame.setTitle("WorldWind Icon Retriever");
                 appFrame.setVisible(true);
                 appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }

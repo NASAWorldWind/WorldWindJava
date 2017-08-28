@@ -50,7 +50,7 @@ public class LayerTreeUsage extends ApplicationTemplate
             // Add a controller to handle input events on the layer tree.
             this.controller = new HotSpotController(this.getWwd());
 
-            // Size the World Window to take up the space typically used by the layer panel. This illustrates the
+            // Size the WorldWindow to take up the space typically used by the layer panel. This illustrates the
             // screen space gained by using the on-screen layer tree.
             Dimension size = new Dimension(1000, 600);
             this.setPreferredSize(size);
@@ -61,6 +61,6 @@ public class LayerTreeUsage extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Layer Tree", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Layer Tree", AppFrame.class);
     }
 }

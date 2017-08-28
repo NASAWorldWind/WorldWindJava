@@ -9,7 +9,7 @@ import gov.nasa.worldwind.Exportable;
 import gov.nasa.worldwind.util.RestorableSupport;
 
 /**
- * Holds common attributes for World Wind shapes such as {@link gov.nasa.worldwind.render.Path}, {@link
+ * Holds common attributes for WorldWind shapes such as {@link gov.nasa.worldwind.render.Path}, {@link
  * gov.nasa.worldwind.render.Polygon}, and {@link gov.nasa.worldwind.render.SurfaceShape}. Changes made to the
  * attributes are applied to the shape when the <code>WorldWindow</code> renders the next frame. Instances of
  * <code>ShapeAttributes</code> may be shared by many shapes, thereby reducing the memory normally required to store

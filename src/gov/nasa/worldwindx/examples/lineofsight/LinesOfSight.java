@@ -344,7 +344,7 @@ public class LinesOfSight extends ApplicationTemplate
 
             final int progress = (int) (100d * numPositionsProcessed / (double) totalNum);
 
-            // On the EDT, update the progress bar and if calculations are complete, update the World Window.
+            // On the EDT, update the progress bar and if calculations are complete, update the WorldWindow.
             SwingUtilities.invokeLater(new Runnable()
             {
                 public void run()
@@ -365,7 +365,7 @@ public class LinesOfSight extends ApplicationTemplate
             });
         }
 
-        /** Updates the World Wind model with the new intersection locations and sight lines. */
+        /** Updates the WorldWind model with the new intersection locations and sight lines. */
         protected void showResults()
         {
             this.intersectionsLayer.removeAllRenderables();
@@ -612,6 +612,6 @@ public class LinesOfSight extends ApplicationTemplate
     public static void main(String[] args)
     {
         // Adjust configuration values before instantiation
-        ApplicationTemplate.start("World Wind Terrain Intersections", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Terrain Intersections", AppFrame.class);
     }
 }

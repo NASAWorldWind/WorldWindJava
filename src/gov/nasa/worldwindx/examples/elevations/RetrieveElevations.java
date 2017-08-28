@@ -123,7 +123,7 @@ public class RetrieveElevations extends ApplicationTemplate
     public static class ElevationsDemoController implements ActionListener
     {
         protected RetrieveElevations.AppFrame frame;
-        // World Wind stuff.
+        // WorldWind stuff.
         protected WorldWindow wwd;
 
         public ElevationsDemoController(WorldWindow wwd)
@@ -227,6 +227,6 @@ public class RetrieveElevations extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        start("World Wind Get Elevations Demo", AppFrame.class);
+        start("WorldWind Get Elevations Demo", AppFrame.class);
     }
 }

@@ -18,7 +18,7 @@ import java.awt.*;
 import java.util.Hashtable;
 
 /**
- * Illustrates how to use the World Wind <code>{@link Cone}</code> rigid shape to display an arbitrarily sized and
+ * Illustrates how to use the WorldWind <code>{@link Cone}</code> rigid shape to display an arbitrarily sized and
  * oriented cone at a geographic position on the Globe.
  *
  * @author ccrick
@@ -205,7 +205,7 @@ public class Cones extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Cones", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Cones", AppFrame.class);
     }
 }
 
