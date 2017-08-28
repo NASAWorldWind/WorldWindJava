@@ -69,7 +69,7 @@ binary JAR files as follows:
 
 ## License
 
-    NASA WorldWind
+    NASA WORLDWIND
 
     Copyright (C) 2001 United States Government
     as represented by the Administrator of the
