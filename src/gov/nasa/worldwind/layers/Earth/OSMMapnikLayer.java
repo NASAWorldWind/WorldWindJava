@@ -17,9 +17,12 @@ import java.net.*;
  */
 public class OSMMapnikLayer extends BasicMercatorTiledImageLayer
 {
+    static final double DEFAULT_OPACITY = 0.5d;
+
     public OSMMapnikLayer()
     {
         super(makeLevels());
+        setOpacity(DEFAULT_OPACITY);
     }
 
     private static LevelSet makeLevels()
