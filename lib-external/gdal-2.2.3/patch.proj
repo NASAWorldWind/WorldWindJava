@@ -1,0 +1,21 @@
+*** nmake.opt.orig	2016-08-29 14:47:58.000000000 -0400
+--- nmake.opt	2017-12-08 13:16:56.926544100 -0500
+***************
+*** 33,40 ****
+  !ENDIF
+  
+  # Uncomment the first for linking exes against DLL or second for static
+! EXE_PROJ =	proj_i.lib
+! #EXE_PROJ =	proj.lib
+  
+  # Set the version number for the DLL.  Normally we leave this blank since
+  # we want software that is dynamically loading the DLL to have no problem
+--- 33,40 ----
+  !ENDIF
+  
+  # Uncomment the first for linking exes against DLL or second for static
+! #EXE_PROJ =	proj_i.lib
+! EXE_PROJ =	proj.lib
+  
+  # Set the version number for the DLL.  Normally we leave this blank since
+  # we want software that is dynamically loading the DLL to have no problem

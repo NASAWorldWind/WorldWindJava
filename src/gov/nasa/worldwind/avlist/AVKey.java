@@ -85,7 +85,7 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String DATA_TYPE = "gov.nasa.worldwind.avkey.DataType";
     final String DELETE_CACHE_ON_EXIT = "gov.nasa.worldwind.avkey.DeleteCacheOnExit";
     /**
-     * Indicates the WorldWind scene's worst-case depth resolution, in meters. This is typically interpreted by the
+     * Indicates the World Wind scene's worst-case depth resolution, in meters. This is typically interpreted by the
      * View as the desired resolution at the scene's maximum drawing distance. In this case, the resolution closer to
      * the viewer's eye point is significantly better then the worst-case resolution. Decreasing this value enables the
      * viewer to get closer to 3D shapes positioned above the terrain at the coast of potential rendering artifacts
@@ -151,6 +151,7 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String GDAL_MASK_DATASET = "gov.nasa.worldwind.avkey.GDAL.MaskDataset";
     final String GDAL_TIMEOUT = "gov.nasa.worldwind.avkey.GDAL.TimeOut";
     final String GDAL_PATH = "gov.nasa.worldwind.avkey.GDAL.Path";
+    final String GDAL_LIBS = "gov.nasa.worldwind.avkey.GDAL.Libs";
 
     final String GET_CAPABILITIES_URL = "gov.nasa.worldwind.avkey.GetCapabilitiesURL";
     final String GET_COVERAGE_URL = "gov.nasa.worldwind.avkey.GetCoverageURL";
