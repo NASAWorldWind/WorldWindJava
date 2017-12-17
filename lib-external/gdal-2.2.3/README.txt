@@ -95,7 +95,8 @@
 
           cd java
           /c/Program\ Files/7-Zip/7z a -r ../gdal-javadoc.zip *
-
+          cd ..
+          zip -r gdaljni-source.zip org
 
         **** Linux ****
 
@@ -119,7 +120,7 @@
         cd ../..
         tar xzf archive/proj-4.9.3.tar.gz
         cd proj-4.9.3
-        ./configure --disable-share
+        ./configure
         make
 
         #-- openjpeg build
@@ -128,7 +129,7 @@
         cd openjpeg-2.3.0
         mkdir build
         cd build
-        cmake -G "Unix Makefiles" -DBUILD_SHARED_LIBS:bool=off -DCMAKE_INSTALL_PREFIX=../openjpeg -DBUILD_THIRDPARTY=YES -DCMAKE_BUILD_TYPE:string="Release" ..
+        cmake -G "Unix Makefiles" -DBUILD_SHARED_LIBS:bool=off -DCMAKE_C_FLAGS="-fPIC -O3" -DCMAKE_INSTALL_PREFIX=../openjpeg -DBUILD_THIRDPARTY=YES -DCMAKE_BUILD_TYPE:string="Release" ..
         cmake --build . --config Release
         cmake --build . --target install --config Release
 
