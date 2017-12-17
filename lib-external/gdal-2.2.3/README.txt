@@ -16,7 +16,7 @@
  
         Prerequisites:
             - Microsoft Visual Studio 2013
-            - swig 1.3.40 (versions 2 and 3 do not work
+            - swig 3.0.12
             - cmake
             - msys2
             - Java JDK
@@ -27,17 +27,17 @@
 
         unzip -q archive/cfit3420.zip -d cfitsio
         cd cfitsio
-        patch -b --binary < ../patch.cfitsio
+        patch -b < ../patch.cfitsio
         cd ..
         tar xzf archive/proj-4.9.3.tar.gz
         cd proj-4.9.3
-        patch -b --binary < ../patch.proj
+        patch -b < ../patch.proj
         cd ..
         tar xzf archive/openjpeg-2.3.0.tar.gz
         unzip -q archive/MrSID/MrSID_DSDK-9.5.4.4703-win64-vc12.zip
         tar xJf archive/gdal-2.2.3.tar.xz
         cd gdal-2.2.3
-        patch -b --binary -p0 < ../patch.gdal
+        patch -b -p0 < ../patch.gdal
         cd ..
 
         #- In a MSVS command window
@@ -51,8 +51,8 @@
         set JAR=%JAVA_HOME%\bin\jar
         set JAVA_INCLUDE="-I%JAVA_HOME%\include -I%JAVA_HOME%\include\win32"
         set ANT_HOME=C:\apache-ant-1.10.1
-        set SWIG="C:\Program Files\swigwin-1.3.40\swig.exe"
-        set PATH=%PATH%;C:\Program Files\CMake\bin;C:\Program Files\swigwin-1.3.40;C:\Program Files\Java\jdk1.8.0_152\bin
+        set SWIG="C:\Program Files\swigwin-3.0.12\swig.exe"
+        set PATH=%PATH%;C:\Program Files\CMake\bin;C:\Program Files\swigwin-3.0.12;C:\Program Files\Java\jdk1.8.0_152\bin
         
         #-- cfitsio build
 
@@ -78,7 +78,6 @@
 
         #-- gdal build (see
           https://trac.osgeo.org/gdal/wiki/GdalOgrInJavaBuildInstructions)
-          Note that one must use swig 1.3.40
                
           nmake /f makefile.vc
 

@@ -79,7 +79,7 @@
   !IFDEF INCLUDE_OGR_FRMTS
   OGR_PROGRAMS =	gdal_contour.exe gdaltindex.exe gdal_rasterize.exe \
 *** swig/java/makefile.vc.orig	2017-11-20 05:45:41.000000000 -0500
---- swig/java/makefile.vc	2017-12-11 09:10:20.367158200 -0500
+--- swig/java/makefile.vc	2017-12-17 12:21:46.788174300 -0500
 ***************
 *** 5,11 ****
   !IFDEF DLLBUILD
@@ -141,3 +141,20 @@
   
   gdal_dir:
   	cd gdal
+***************
+*** 75,81 ****
+  #	cd ..
+  
+  clean:
+! 	if exist org\nul rmdir /s /q org
+  	if exist build rmdir /s /q build
+  	cd gdal
+  	$(MAKE) /f makefile.vc clean
+--- 75,81 ----
+  #	cd ..
+  
+  clean:
+! 	if exist org rmdir /s /q org
+  	if exist build rmdir /s /q build
+  	cd gdal
+  	$(MAKE) /f makefile.vc clean
