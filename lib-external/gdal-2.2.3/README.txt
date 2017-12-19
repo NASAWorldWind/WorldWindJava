@@ -44,13 +44,6 @@
         
         Execute: 
         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-        set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_152
-        set JAVADOC=%JAVA_HOME%\bin\javadoc
-        set JAVAC=%JAVA_HOME%\bin\javac
-        set JAVA=%JAVA_HOME%\bin\java
-        set JAR=%JAVA_HOME%\bin\jar
-        set JAVA_INCLUDE="-I%JAVA_HOME%\include -I%JAVA_HOME%\include\win32"
-        set ANT_HOME=C:\apache-ant-1.10.1
         set SWIG="C:\Program Files\swigwin-3.0.12\swig.exe"
         set PATH=%PATH%;C:\Program Files\CMake\bin;C:\Program Files\swigwin-3.0.12;C:\Program Files\Java\jdk1.8.0_152\bin
         
