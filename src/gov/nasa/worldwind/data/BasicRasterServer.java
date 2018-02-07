@@ -140,6 +140,8 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
             String message = Logging.getMessage("generic.DataSetLimitedAvailability", this.getDataSetName() );
             Logging.logger().severe(message);
         }
+        
+        config.dispose();
     }
 
     protected String getDataSetName()
