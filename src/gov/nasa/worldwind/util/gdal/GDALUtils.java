@@ -47,8 +47,6 @@ public class GDALUtils
     protected static final String GDAL_DATA_PATH = "GDAL_DATA";
 
     protected static final AtomicBoolean gdalIsAvailable = new AtomicBoolean(false);
-
-    private static final String default_gdalLibs = "tbb lti_dsdk_9.5 lti_lidar_dsdk_1.1 gdalconstjni gnmjni ogrjni osrjni gdaljni";
     
     static
     {
@@ -57,6 +55,20 @@ public class GDALUtils
 
     protected static boolean gdalPreLoadNativeLibrary(boolean allowLogErrors)
     {
+    	String default_gdalLibs;
+    	
+    	String platform = System.getProperty("os.name").toLowerCase();
+    	if (platform.startsWith("windows")) {
+    		default_gdalLibs = "tbb lti_dsdk_9.5 lti_lidar_dsdk_1.1 gdalconstjni gnmjni ogrjni osrjni gdaljni";
+    	} else if (platform.equals("linux")) {
+    		// All the GDAL shared libraries in gov.nasa.worldwind/lib should be put
+    		// in a location described by LD_LIBRARY_PATH.  Test with "ldd -r libgdal.so"
+    		default_gdalLibs = "gdal gdalconstjni gnmjni ogrjni osrjni gdaljni";    		
+    	} else {
+    		System.err.println("gdalPreLoadNativeLibrary: unknown platform " + platform);
+    		return false;
+    	}
+    	
     	String[] gdalLibs = Configuration.getStringValue(AVKey.GDAL_LIBS, default_gdalLibs).split("\\s+");
     	if ((gdalLibs.length == 0) || ((gdalLibs.length == 1) && gdalLibs[0].isEmpty())) {
     		System.err.println("Empty list of GDAL libs; not loading GDAL"); 
@@ -168,7 +180,7 @@ public class GDALUtils
             FileTree fileTree = new FileTree(new File(cwd));
             fileTree.setMode(FileTree.FILES_AND_DIRECTORIES);
 
-            GDALLibraryFinder filter = new GDALLibraryFinder(/*gdalalljni*/);
+            GDALLibraryFinder filter = new GDALLibraryFinder(/*gdaljni*/);
             fileTree.asList(filter);
             return filter.getFolders();
         }
@@ -1187,7 +1199,7 @@ public class GDALUtils
      *                                  <p/>
      *                                  AVKey.DATA_TYPE required ( valid values: AVKey.INT16, and AVKey.FLOAT32 )
      *                                  <p/>
-     *                                  AVKey.VERSION optional, if missing a default will be used "NASA WorldWind"
+     *                                  AVKey.VERSION optional, if missing a default will be used "NASA World Wind"
      *                                  <p/>
      *                                  AVKey.DISPLAY_NAME, (String) optional, specifies a name of the document/image
      *                                  <p/>
