@@ -1,0 +1,205 @@
+* eeef15c 2018-10-29 | Added weather map demo with update weather data (HEAD) [Sergey Sandalov]
+* 7a329a4 2016-12-13 | Implemented a naming convention for USGS topographic map layers: - USGS Topo Base Map - USGS Topo Base Map Large Scale - USGS Topo Scanned Maps 1:250K - USGS Topo Scanned Maps 1:100K - USGS Topo Scanned Maps 1:24K (tag: v2.1.0, origin/master) [Bruce Schubert]
+* 4496e5d 2016-12-13 | Suppressed KML unit tests that depend on remote resources [pdavidc]
+* ab8f8ea 2016-12-13 | Simplified the command line demo instructions in README.md [pdavidc]
+* 8b555df 2016-12-13 | Repaired the Java classpath argument in run-demo.bash [pdavidc]
+* 43abc5f 2016-12-13 | Updated run-demo scripts to launch the ApplicationTemplate example if a class name is not provided. [Bruce Schubert]
+* 53641d1 2016-12-13 | Restored href attribute in Web Start jnlp files [pdavidc]
+* df6ca44 2016-12-12 | Corrected demo link in README.md [pdavidc]
+* 39e72fd 2016-12-12 | Suppressed unit tests for HighResolutionTerrain until a test data cache is established [pdavidc]
+* 7f7b9ff 2016-12-12 | Added JNLP codebase replacement for issue #74 [pdavidc]
+* a439f84 2016-12-12 | Adjusted Web Start configuration files for automated deployment [pdavidc]
+* 488239d 2016-12-12 | Updated run demo instructions in README.md [pdavidc]
+* 7127b44 2016-12-12 | Consolidated Web Start configuration files [pdavidc]
+* 677d635 2016-12-12 | Repaired ANT build path in Travis CI script [pdavidc]
+* ba167d5 2016-12-12 | Corrected Travis CI script [pdavidc]
+* d7920de 2016-12-12 | Trying the Travis CI Trusty build environment [pdavidc]
+* 30c5600 2016-12-12 | Corrected openssl command syntax in Travis CI configuration [pdavidc]
+* 4bff1f9 2016-12-12 | Automated Web Start publication and SDK archive publication, for #73 and #74 [pdavidc]
+* 2ab2f84 2016-12-12 | Migrated Java Web Start configuration files to use relative paths [pdavidc]
+* 2bd81e8 2016-12-12 | Added encrypted keystore archive for Travis CI signing automation [pdavidc]
+* f8f722e 2016-12-12 | Corrected the demo app link in README.md [pdavidc]
+* 86f54ef 2016-12-12 | Updated the Version string to eliminate redundant version numbers [pdavidc]
+* 0e5307c 2016-12-12 | Added demo instructions to README.md [pdavidc]
+* ba68c7a 2016-12-12 | Repaired the terrain tessellator's handling of 2D projections with longitude limits. Closes #72. [pdavidc]
+* 52afdee 2016-12-12 | Removed unnecessary WMS version override in WMS layer constructor. Applies pull request #13 to the develop branch. [pdavidc]
+* 9bebe0b 2016-12-11 | Repaired the AnimatedGlobe example. Closes #42. [pdavidc]
+* 93f61c5 2016-12-11 | Updated the ScreenSelection example to normalize out-of-range longitudes for issue #59 [pdavidc]
+* b762c00 2016-12-11 | Increased the run-demo script's max VM memory to 1024 MB [pdavidc]
+* 2da7ad5 2016-12-11 | Made surface shape's default colors consistent with other shapes. Closes #71. [pdavidc]
+* 6aa0835 2016-12-09 | Fix the color, fill, and opacity representation when using a 2D globe (issue #64) [Zach Glueckert]
+*   d071bbd 2016-12-09 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [Bruce Schubert]
+[32m|[m[33m\[m  
+[32m|[m * 008cb44 2016-12-09 | Repaired ANT build for unsigned Web Start distribution [pdavidc]
+[32m|[m *   5cd30e8 2016-12-09 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [pdavidc]
+[32m|[m [34m|[m[35m\[m  
+[32m|[m [34m|[m * f2061d2 2016-12-08 | Correct parameter reference and clean up logic branches [Zach Glueckert]
+[32m|[m * [35m|[m 8a6e397 2016-12-09 | Simplified the ANT build [pdavidc]
+[32m|[m * [35m|[m   6b1aa66 2016-12-08 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [pdavidc]
+[32m|[m [36m|[m[35m\[m [35m\[m  
+[32m|[m [36m|[m [35m|[m[35m/[m  
+[32m|[m [36m|[m * 1fb9608 2016-12-08 | Add support for CONSTANT altitude mode and class cleanup (issue #45) [Zach Glueckert]
+[32m|[m * [1;31m|[m   f03a20f 2016-12-08 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [pdavidc]
+[32m|[m [1;32m|[m[1;31m\[m [1;31m\[m  
+[32m|[m [1;32m|[m [1;31m|[m[1;31m/[m  
+[32m|[m * [1;31m|[m   dd67fd7 2016-12-08 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [pdavidc]
+[32m|[m [1;34m|[m[1;35m\[m [1;31m\[m  
+[32m|[m * [1;35m|[m [1;31m|[m 18bb2f7 2016-12-08 | Simplified the WebBrowserBalloon example's HTML content for issue #59 [pdavidc]
+[32m|[m * [1;35m|[m [1;31m|[m   8cc97ae 2016-12-08 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [pdavidc]
+[32m|[m [1;36m|[m[31m\[m [1;35m\[m [1;31m\[m  
+[32m|[m * [31m|[m [1;35m|[m [1;31m|[m 3e8bd46 2016-12-08 | Corrected StarLayer's handling of empty viewports [pdavidc]
+[32m|[m * [31m|[m [1;35m|[m [1;31m|[m 69bbaf7 2016-12-08 | Adjusted TiledImageLayer's handling of frame-timestamp and restorable state [pdavidc]
+[32m|[m * [31m|[m [1;35m|[m [1;31m|[m 0e8be7f 2016-12-08 | Updated the defunct example ExtrudedPolygonsFromShapefile [pdavidc]
+[32m|[m * [31m|[m [1;35m|[m [1;31m|[m bef4157 2016-12-08 | Updated the defunct example ExtrudedPolygonsFromShapefile [pdavidc]
+[32m|[m * [31m|[m [1;35m|[m [1;31m|[m 0f223bd 2016-12-08 | Removed the obsolete and defunct DynamicLayerPanelDisplay example [pdavidc]
+[32m|[m * [31m|[m [1;35m|[m [1;31m|[m 4afa8e7 2016-12-08 | Updated the Web Start apps and Web Start components for HTTPS and v2.1.0 [pdavidc]
+[32m|[m * [31m|[m [1;35m|[m [1;31m|[m   03fd41c 2016-12-08 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [pdavidc]
+[32m|[m [32m|[m[33m\[m [31m\[m [1;35m\[m [1;31m\[m  
+[32m|[m * [33m\[m [31m\[m [1;35m\[m [1;31m\[m   9a4f677 2016-12-08 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [pdavidc]
+[32m|[m [34m|[m[35m\[m [33m\[m [31m\[m [1;35m\[m [1;31m\[m  
+[32m|[m * [35m|[m [33m|[m [31m|[m [1;35m|[m [1;31m|[m 1f0bfed 2016-12-08 | Moved the build utility sources into the World Wind sources [pdavidc]
+[32m|[m * [35m|[m [33m|[m [31m|[m [1;35m|[m [1;31m|[m e4d286a 2016-12-08 | Move libraries from ant/lib to more appropriate locations [pdavidc]
+[32m|[m * [35m|[m [33m|[m [31m|[m [1;35m|[m [1;31m|[m 698a04a 2016-12-08 | Rearranged the contents of 'resources' to clarify its purpose [pdavidc]
+* [35m|[m [35m|[m [33m|[m [31m|[m [1;35m|[m [1;31m|[m 43070a6 2016-12-09 | Adjusted the USGS NAIP Plus number of levels to 0.5m per pixel imagery. - The POC for this service intimated that, "the newest imagery is .5m per pixel. The older is 1m per pixel. Everything is moving to the .5m resolution in the coming years." [Bruce Schubert]
+[1;31m|[m [35m|[m[1;31m_[m[35m|[m[1;31m_[m[33m|[m[1;31m_[m[31m|[m[1;31m_[m[1;35m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[35m|[m [35m|[m [33m|[m [31m|[m [1;35m|[m   
+* [35m|[m [35m|[m [33m|[m [31m|[m [1;35m|[m dc14e4e 2016-12-08 | Added USDA attribution to the USGS NAIP Plus layer. [Bruce Schubert]
+* [35m|[m [35m|[m [33m|[m [31m|[m [1;35m|[m ac2cb1d 2016-12-08 | Deprecated the internally hosted USDA NAIP layer. - Replaced by USGS NAIP Plus. [Bruce Schubert]
+* [35m|[m [35m|[m [33m|[m [31m|[m [1;35m|[m 231e0ac 2016-12-08 | Modified the default layer list to exclude the USDA NAIP and MS Virtual Earth Aerial layers: - Eliminated duplication/confusion in the layer list; - USGS NAIP Plus has supplanted USDA NAIP; - Bing replaces MS Virtual Earth Aerial. [Bruce Schubert]
+[1;35m|[m [35m|[m[1;35m_[m[35m|[m[1;35m_[m[33m|[m[1;35m_[m[31m|[m[1;35m/[m  
+[1;35m|[m[1;35m/[m[35m|[m [35m|[m [33m|[m [31m|[m   
+* [35m|[m [35m|[m [33m|[m [31m|[m 11588a0 2016-12-08 | Modified the default layer list to include new USGS National Map layers: - USGS NAIP Plus; - USGS Dynamic Topos. [Bruce Schubert]
+* [35m|[m [35m|[m [33m|[m [31m|[m   8cd11ab 2016-12-08 | Merge remote-tracking branch 'origin/develop' into develop [Bruce Schubert]
+[36m|[m[31m\[m [35m\[m [35m\[m [33m\[m [31m\[m  
+[36m|[m [31m|[m [35m|[m[31m_[m[35m|[m[31m_[m[33m|[m[31m/[m  
+[36m|[m [31m|[m[31m/[m[35m|[m [35m|[m [33m|[m   
+[36m|[m * [35m|[m [35m|[m [33m|[m 665af51 2016-12-08 | Change drag method to screen size constant [Zach Glueckert]
+[36m|[m [33m|[m [35m|[m[33m_[m[35m|[m[33m/[m  
+[36m|[m [33m|[m[33m/[m[35m|[m [35m|[m   
+* [33m|[m [35m|[m [35m|[m aebde1c 2016-12-08 | New USGS NAIP Plus product from The National Map. - Replacement for USGS EROS Ortho; - Replacement for USGS EROS NAIP Ortho; - Number of levels set to 17 to accomodate up to 1 foot resolution. [Bruce Schubert]
+* [33m|[m [35m|[m [35m|[m 3059ebf 2016-12-08 | New USGS Dynamic Topo products from The National Map. - USGS TNM Topo: scale > 18K; - USGS TNM Topo Large: scale < 18K. [Bruce Schubert]
+[33m|[m[33m/[m [35m/[m [35m/[m  
+* [35m|[m [35m|[m c7afa20 2016-12-08 | This USGS EROS Ortho map layer was decommissioned by the USGS 12/2/2016. [Bruce Schubert]
+* [35m|[m [35m|[m 170373a 2016-12-08 | Decommissioned map services have been marked as deprecated and removed from the default layer list. [Bruce Schubert]
+[35m|[m [35m|[m[35m/[m  
+[35m|[m[35m/[m[35m|[m   
+* [35m|[m 666bade 2016-12-08 | Fix screen offset reference position when using a flat globe [Zach Glueckert]
+* [35m|[m   dd9078f 2016-12-07 | Merge remote-tracking branch 'origin/develop' into develop [Zach Glueckert]
+[1;32m|[m[35m\[m [35m\[m  
+[1;32m|[m [35m|[m[35m/[m  
+[1;32m|[m * b939636 2016-12-07 | Adjusted unit tests KMLExportTest and NetworkStatusTest to run while offline - closes #38 [pdavidc]
+[1;32m|[m * c0f0373 2016-12-07 | Removed the unused plugin.jar dependency (unused since Applet support removed) [pdavidc]
+* [1;33m|[m 8c127c1 2016-12-07 | Fix dragging across the antimeridian when using a FlatGlobe (issue #44) [Zach Glueckert]
+[1;33m|[m[1;33m/[m  
+* 999cd83 2016-12-07 | Fixes the NPE during dragging when the altitude mode has not been initialized. Closes #33. [Zach Glueckert]
+* fdf9491 2016-12-07 | Fixed YahooGazetteer to use new public geo.places API. - Changed GazetteerPanel to accomodate new result set. [Bruce Schubert]
+* 953cbbf 2016-12-07 | Repaired unit test for AbsentResourceList dependent on CPU timing, for #38 [pdavidc]
+* 6160d3a 2016-12-07 | Removed non-functioning layers from the SAR application [pdavidc]
+* 210e2bc 2016-12-07 | Updated Polygon airspace to correctly handle an empty location list [pdavidc]
+* 28fab9a 2016-12-07 | Adjusted the AntennaViewer's initial view altitude [pdavidc]
+* 417075b 2016-12-07 | Removed unit tests for Shapefile and MilStd2525 that require on a network connection [pdavidc]
+*   8249582 2016-12-07 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [pdavidc]
+[1;34m|[m[1;35m\[m  
+[1;34m|[m *   a1a93f9 2016-12-07 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [Bruce Schubert]
+[1;34m|[m [1;36m|[m[31m\[m  
+[1;34m|[m * [31m|[m 978bf3e 2016-12-07 | Updated the USGS NAIP layer from The National Map. - The previous layer is no longer available [Bruce Schubert]
+[1;34m|[m * [31m|[m 6312ff2 2016-12-06 | Adjusted the number of levels on topographic maps to reasonable values. - should lighten the load on the server when zoomed in; - bulk download tool will not download unnecessary levels. [Bruce Schubert]
+[1;34m|[m * [31m|[m 18f7e78 2016-12-06 | Deprecated the obsolete USGS Digital Ortho and USGS Urban Area layers in favor of USGS EROS Ortho layer. - Deprecated XML config files remain so that clients with existing caches can still operate - USGS EROS Ortho layer is hosted at The National Map: raster.nationalmap.gov [Bruce Schubert]
+[1;34m|[m * [31m|[m   aa585e6 2016-12-05 | Merge remote-tracking branch 'origin/develop' into develop [Bruce Schubert]
+[1;34m|[m [32m|[m[33m\[m [31m\[m  
+[1;34m|[m * [33m|[m [31m|[m 9ceb9f4 2016-12-02 | Changed RemoteSurfaceImage.java resource URL to use https [Bruce Schubert]
+* [33m|[m [33m|[m [31m|[m 91a3e6a 2016-12-07 | Removed unit tests for Shapefile and MilStd2525 that require on a network connection [pdavidc]
+[31m|[m [33m|[m[31m_[m[33m|[m[31m/[m  
+[31m|[m[31m/[m[33m|[m [33m|[m   
+* [33m|[m [33m|[m e896675 2016-12-06 | Configured Travis CI with xvfb to run tests that require a GUI [pdavidc]
+* [33m|[m [33m|[m a284053 2016-12-06 | Consolidated the GLProfile used by the unit tests in OGLUtilTest, for #38 [pdavidc]
+* [33m|[m [33m|[m 3a85481 2016-12-06 | Adjusted the Travis CI scripts to account for ANT build changes [pdavidc]
+* [33m|[m [33m|[m 5f7f212 2016-12-06 | Project ANT build adjustments - Configured build to log unit test failures for #39 - Configured build to exit with status 1 on unit test failure for #39 - Corrected build construction of debug classes and JAR files [pdavidc]
+* [33m|[m [33m|[m b0865cb 2016-12-06 | Modified the MIL-STD-2525 symbol retrieval tests to use local resources for #38 [pdavidc]
+* [33m|[m [33m|[m 6d07697 2016-12-06 | Update static file resource path to match functionalTest directory structure. [Zach Glueckert]
+* [33m|[m [33m|[m 5d508cd 2016-12-06 | Updated the project code style setting for Markdown margin width [pdavidc]
+* [33m|[m [33m|[m 3113371 2016-12-06 | Adjusted the Travis CI scripts to accommodate changes in the ANT build, per #39 [pdavidc]
+* [33m|[m [33m|[m 59b008d 2016-12-06 | Removed unnecessary final modifiers from MIL-STD-2525 interface constants [pdavidc]
+* [33m|[m [33m|[m 3b309e1 2016-12-06 | Reduced the duration of MIL-STD-2525 unit tests to support automation, per #38 [pdavidc]
+* [33m|[m [33m|[m 2cf8efd 2016-12-06 | Corrected a typo in the milstd2525 ANT script [pdavidc]
+* [33m|[m [33m|[m 72b3d7e 2016-12-06 | Adjusted the Travis CI build to use Apache ANT v1.9.7 to support #39 [pdavidc]
+* [33m|[m [33m|[m 64ddcb7 2016-12-05 | Improved ANT build unit test execution - Automatic suppression of non-test classes, preventing erroneous JUnit test runner failures - Unit test summary report web page - Travis CI support for ANT v1.9.7 [pdavidc]
+* [33m|[m [33m|[m 7e745b1 2016-12-05 | Refactored the test sources to support automation - Organized unit tests and functional tests into separate directories: test and testFunctional - Re-designed the unit test classes for compatibillity with JUnit execution from ANT - Repaired failing unit tests [pdavidc]
+[33m|[m [33m|[m[33m/[m  
+[33m|[m[33m/[m[33m|[m   
+* [33m|[m b49ef12 2016-12-05 | Updated permissions for the GDAL native binaries to include the executable bit [pdavidc]
+* [33m|[m 4c13522 2016-12-02 | Refactored the ANT build to include debug and release modes and unit testing [pdavidc]
+* [33m|[m 2e8f51c 2016-12-02 | Moved the ANT properties file to the project root [pdavidc]
+* [33m|[m eeb5878 2016-12-02 | Renamed the ANT "build" folder as "ant" to clarify its purpose and disambiguate it from build output [pdavidc]
+* [33m|[m 2e775f1 2016-12-02 | Renamed the ANT "build" folder as "ant" to clarify its purpose and disambiguate it from build output [pdavidc]
+* [33m|[m 4a37a49 2016-12-02 | Cleaned up unused ANT build tasks [pdavidc]
+[33m|[m[33m/[m  
+*   2ca4b45 2016-12-02 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [Bruce Schubert]
+[34m|[m[35m\[m  
+[34m|[m * 2b85647 2016-12-01 | Updated links to the World Wind organization website [pdavidc]
+* [35m|[m df98f22 2016-12-02 | New USGS EROS Ortho layer to replace USGS Digital Ortho and USGS Urban Area layers. [Bruce Schubert]
+* [35m|[m 07d0f13 2016-12-02 | Changed ShapefileTest.java to use "https" for shapefile resource [Bruce Schubert]
+[35m|[m[35m/[m  
+* aae1014 2016-12-01 | Added the execute permission to the WebView native libraries [pdavidc]
+* 11afb75 2016-12-01 | Updated the Travis CI script to use the default build task [pdavidc]
+* 8dc7e81 2016-12-01 | Updated the Ant build to produce a Javadoc archive by default; Updated the Ant Java version [pdavidc]
+* ba4556f 2016-12-01 | Updated the Ant build to produce a Javadoc archive by default [pdavidc]
+* abbd852 2016-12-01 | Removed the EuroGeoss application - the EuroGeoss CSW endpoint is defunct. [pdavidc]
+* dc1a743 2016-11-30 | Updated the Version class for v2.1.0 [pdavidc]
+* b50b3d1 2016-11-30 | Removed Java Applet documentation and supporting classes [pdavidc]
+* 14d3db6 2016-11-30 | Changed USDA NAIP USGS raster.nationalmap.gov service to use https. [Bruce Schubert]
+* 00555f9 2016-11-30 | Changed BasicNetworkStatus to use both https and http respectively  when testing for isHostReachable [Bruce Schubert]
+* e9c3120 2016-11-30 | Changed BasicNetworkStatus to use "https" protocol when testing for isHostAvailable [Bruce Schubert]
+* 02560f4 2016-11-30 | Changed USDA NAIP USGS raster.nationalmap.gov service to Orthoimagery/USGS_EROS_Ortho_NAIP/ImageServer. - was Combined/USGS_EDC_Ortho_NAIP/MapServer. [Bruce Schubert]
+* a550897 2016-11-29 | Changed MILSTD2525 icon retriever path to https protocol [Bruce Schubert]
+* fd886ba 2016-11-29 | Changed worldwind26 endpoint from elev to wsc [Bruce Schubert]
+* f3eed29 2016-11-29 | Change worldwind26 wcs endpoints to /wcs instead of /elev. Change neowms.sci.gsfc.nasa.gov to https. [Zach Glueckert]
+*   1695bf2 2016-11-29 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [Zach Glueckert]
+[36m|[m[1;31m\[m  
+[36m|[m *   f5b8fb3 2016-11-29 | Merge branch 'develop' of https://github.com/NASAWorldWind/WorldWindJava into develop [Bruce Schubert]
+[36m|[m [1;32m|[m[1;33m\[m  
+[36m|[m * [1;33m|[m 7e2d7e5 2016-11-29 | Changed Place Names' worldwind22/.../ geoserver/wfs service protocol to https [Bruce Schubert]
+[36m|[m * [1;33m|[m e0b2333 2016-11-29 | Changed worldwind26 wms and wms2 references to elev. [Bruce Schubert]
+* [1;33m|[m [1;33m|[m 9f8ef97 2016-11-29 | Change url protocol to https for the links presented in the browser balloon. [Zach Glueckert]
+* [1;33m|[m [1;33m|[m e0693ac 2016-11-29 | Change url protocol to https for hard coded urls supporting https, particularly NASA Ames servers the team manages. [Zach Glueckert]
+[1;33m|[m [1;33m|[m[1;33m/[m  
+[1;33m|[m[1;33m/[m[1;33m|[m   
+* [1;33m|[m e03c5ff 2016-11-28 | Change url protocol to https for links in comments. [Zach Glueckert]
+* [1;33m|[m 47c2833 2016-11-28 | Change url protocol to https for example configuration file. [Zach Glueckert]
+* [1;33m|[m 8141ab0 2016-11-28 | Re-incorporated the README section on JOGL native binary extraction [pdavidc]
+[1;33m|[m[1;33m/[m  
+* 057c22f 2016-11-28 | Changed project's JDK from 1.7 to 1.8 [Bruce Schubert]
+* 5d71e9c 2016-11-28 | Changed protocol from http to https in map configuration xml. [Bruce Schubert]
+* 78b918b 2016-11-26 | Updated the Travis CI scripts to match World Wind repository conventions [pdavidc]
+* 4e7dd99 2016-11-26 | Updated README.md and LICENSE.txt to match World Wind repository conventions [pdavidc]
+* 8444b1d 2016-11-18 | Refactored .travis.yml and removed intermediate scripts to simplify maintenance. - Re: issue #27 [Bruce Schubert]
+* bd6008c 2016-11-18 | Updated the ant build used by the Travis CI continuous integration service. - Changed the path to the generated javadoc from doc to doc/javadoc - Changed the name of the javadoc zipfile to worldwind-javadoc.zip - Re: issue #27 [Bruce Schubert]
+* 7db8fb5 2016-11-18 | Updated the ant build "release" tasks - Added the worldwind.bundle task to create the zip files - Added the travis scripts to the zip file - Changed the javadoc destination path to from doc to doc/javadoc - Re: issue #27 [Bruce Schubert]
+* e644e08 2016-11-18 | Updated add_daily_tag.sh: Removed the timestamp used in testing from the daily tag. - Re: issue #27 [Bruce Schubert]
+* 0cac5e2 2016-11-18 | Added the scripts used by the Travis CI continuous integration service. - Re: issue #27 [Bruce Schubert]
+* e3e8831 2016-11-16 | Update altitude mode and method for dragging. Modify RELATIVE_TO_GROUND method. -Review and update all classes implementing Draggable to check the altitude mode and drag method are correctly specified. -Add conditional for objects with a RELATIVE_TO_GROUND altitude mode and zero altitude to use the CLAMP_TO_GROUND method when dragging. [Zach Glueckert]
+* fb56130 2016-11-15 | Update release notes to include issue #25 resolution. [Zach Glueckert]
+* b120d68 2016-11-15 | Enforce positive bounds when converting degrees, minutes, and seconds to an Angle using the fromDMS and fromDMdS functions. Prioritize compass directions when a sign and compass direction is provided to the fromDMS(String dmsString) function. Add unit tests verifying changes. Addresses Issue #25 which zeroed inputs when the degree value was zero. [Zach Glueckert]
+* bab3529 2016-11-10 | Update release notes to include note about new Draggable interface. [Zach Glueckert]
+* 6584066 2016-09-26 | Fix uninitialized dragEnabled default to true. [Zach Glueckert]
+* f67dee9 2016-09-23 | Add Draggable interface and shift drag execution from the BasicDragger to the new interface. Add DraggableSupport which provides utility methods that correct dragging issues observed with the legacy dragging behavior. Implemented Draggable on all objects implementing Movable and Movable2 and utilized the utility methods of DraggableSupport to correct the cursor drifting from the drag object behavior. [Zach Glueckert]
+* 2d1e121 2016-08-17 | Added a missing null check for the provided AVList object of the doCanRead method. [Zach Glueckert]
+* 51c7259 2016-07-26 | Renamed the NASA Open Source Agreement to LICENSE.txt. [Zach Glueckert]
+* 3e5a701 2016-07-14 | Corrected overloaded removePropertyChangeListener method to utilize the overloaded super class method. [Zach Glueckert]
+* aa577b0 2016-07-13 | Updated README.md to provide a landing page on the GitHub.com project page [pdavidc]
+* 49d2b42 2016-07-13 | Corrected floating point error in rhumb line end point and distance calculation. Ported solution from WWA and updated a few unit tests. [Zach Glueckert]
+* b452ca3 2016-07-13 | Removed unnecessary threading from the Shapefiles example [pdavidc]
+* 4eab629 2016-07-12 | Improvements for managing PropertyChangeListeners associated with the WorldWindow. Maintains fix for null pointer exception found when setting some Java Look and Feels and using the WorldWindowGLJPanel. [Zach Glueckert]
+* 08e9201 2016-07-08 | Corrects the interpolation point calculated for latitude within the EGM96 data grid points. The point is now calculated from the minimum latitude in agreement with the bilinear interpolation method used. [Zach Glueckert]
+* 7c57ba5 2016-07-07 | This small fix solves a NPE in cases in which a look&feel has been set. (#10) [Andrea Antonello]
+* 2f33a93 2016-04-15 | Added World Wind build options [pdavidc]
+* 6aed895 2016-04-11 | Updated release notes in README.txt [pdavidc]
+* 23580f7 2016-01-07 | Repaired exceptions during shape editing when the World Window's vertical exaggeration changes. [pdavidc]
+* a3a5611 2015-12-22 | Modified RadarVolume to suppress rendering when the vertex buffer is empty. [pdavidc]
+* 8b5b40e 2015-11-06 | Repaired SurfacePolygon display of application images when the polygon contains either the North pole or the South pole. [pdavidc]
+* 86e7c64 2015-11-06 | Modified the World Wind Java IDEA project version control configuration to use Git instead of Subversion. [pdavidc]
+* b43a0cd 2015-10-28 | Added reference to goworldwind.org to README file. [Tom Gaskins]
+* 3033afd 2015-10-28 | Corrected SurfacePolygon copy constructor. [Tom Gaskins]
+* c484f0a 2015-10-26 | Added class suffix to .gitignore. [Tom Gaskins]
+* 9fb7d8a 2015-10-26 | Added README.md. Added class files to .gitignore. [Tom Gaskins]
+* a94bed8 2015-10-26 | Initial commit (tag: v2.0.0, tag: v1.5.1, tag: v1.5.0, tag: v1.4.0, tag: v1.3.0, tag: v1.2.0) [Tom Gaskins]
