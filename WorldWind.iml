@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module relativePaths="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/testClasses" />
     <exclude-output />
@@ -15,5 +15,9 @@
     <orderEntry type="library" name="jogl" level="project" />
     <orderEntry type="library" name="gdal" level="project" />
     <orderEntry type="library" scope="TEST" name="junit4" level="project" />
+    <orderEntry type="library" name="org.apache.httpcomponents:httpclient:4.5.6" level="project" />
+    <orderEntry type="library" name="org.json:json:20180813" level="project" />
+    <orderEntry type="library" name="com.google.code.gson:gson:2.8.5" level="project" />
+    <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:2.8.5" level="project" />
   </component>
 </module>

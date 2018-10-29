@@ -299,6 +299,7 @@ public class AnalyticSurfaceDemo extends ApplicationTemplate
             // Determine the sector covered by the elevations. This information is in the GeoTIFF file or auxiliary
             // files associated with the elevations file.
             Sector sector = (Sector) rasters[0].getValue(AVKey.SECTOR);
+
             if (sector == null)
             {
                 String msg = Logging.getMessage("DataRaster.MissingMetadata", AVKey.SECTOR);
