@@ -11,7 +11,7 @@ and/or concerns, please feel free to email at:
 worldwind-info@lists.nasa.gov
 ```
 
-[![Build Status](https://travis-ci.org/NASAWorldWind/WorldWindJava.svg?branch=develop)](https://travis-ci.org/NASAWorldWind/WorldWindJava)
+[![Build Status](https://travis-ci.com/NASAWorldWind/WorldWindJava.svg?branch=develop)](https://travis-ci.com/NASAWorldWind/WorldWindJava)
 
 3D virtual globe API for desktop Java, developed by NASA. Provides a geographic context with high-resolution terrain, for visualizing geographic or geo-located information in 3D and 2D. Developers can customize the globe's terrain and imagery. Provides a collection of shapes for displaying and interacting with geographic data and representing a range of geometric objects.
 
@@ -25,7 +25,7 @@ Official WorldWind Java releases have the latest stable features, enhancements a
 
 - [GitHub Releases](https://github.com/NASAWorldWind/WorldWindJava/releases/) documents official releases
 - [GitHub Milestones](https://github.com/NASAWorldWind/WorldWindJava/milestones) documents upcoming releases and the development roadmap
-- [Travis CI](https://travis-ci.org/NASAWorldWind/WorldWindJava) provides continuous integration and build automation
+- [Travis CI](https://travis-ci.com/NASAWorldWind/WorldWindJava) provides continuous integration and build automation
 
 ## Run a Demo 
    
