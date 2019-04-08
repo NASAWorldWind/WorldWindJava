@@ -13,7 +13,7 @@ import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.view.BasicView;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 
 /**
  * @author dcollins

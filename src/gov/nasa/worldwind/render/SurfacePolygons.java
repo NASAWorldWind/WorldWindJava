@@ -11,8 +11,8 @@ import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.*;
 import java.util.*;
 import java.util.logging.Level;
 

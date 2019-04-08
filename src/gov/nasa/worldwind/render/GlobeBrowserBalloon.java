@@ -11,7 +11,7 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.pick.PickedObject;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.awt.*;
 
 /**

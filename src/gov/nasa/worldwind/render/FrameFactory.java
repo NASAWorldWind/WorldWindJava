@@ -10,7 +10,7 @@ import com.jogamp.common.nio.Buffers;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.nio.DoubleBuffer;
 

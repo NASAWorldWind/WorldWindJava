@@ -5,7 +5,7 @@
  */
 package gov.nasa.worldwind.util;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * @author tag

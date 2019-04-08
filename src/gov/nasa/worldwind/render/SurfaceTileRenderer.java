@@ -11,7 +11,7 @@ import gov.nasa.worldwind.Disposable;
 import gov.nasa.worldwind.terrain.SectorGeometry;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -33,7 +33,7 @@ public abstract class SurfaceTileRenderer implements Disposable
      * Free internal resources held by this surface tile renderer. A GL context must be current when this method is
      * called.
      *
-     * @throws javax.media.opengl.GLException - If an OpenGL context is not current when this method is called.
+     * @throws com.jogamp.opengl.GLException - If an OpenGL context is not current when this method is called.
      */
     public void dispose()
     {

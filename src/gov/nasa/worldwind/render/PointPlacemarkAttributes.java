@@ -12,7 +12,7 @@ import gov.nasa.worldwind.ogc.kml.KMLConstants;
 import gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import javax.xml.stream.*;
 import java.awt.*;
 import java.awt.image.*;
