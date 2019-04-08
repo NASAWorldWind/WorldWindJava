@@ -15,7 +15,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.OGLUtil;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 
 /**

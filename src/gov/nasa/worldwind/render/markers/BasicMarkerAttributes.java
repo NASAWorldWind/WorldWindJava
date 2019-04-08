@@ -9,7 +9,7 @@ package gov.nasa.worldwind.render.markers;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 
 /**
  * @author tag

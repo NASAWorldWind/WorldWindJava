@@ -11,7 +11,7 @@ import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 import java.util.*;
 
 public class SurfaceBox extends AbstractSurfaceShape

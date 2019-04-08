@@ -199,7 +199,7 @@ public class PlaneModel implements Renderable {
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glPushMatrix();
 
-        gl.glDisable(javax.media.opengl.GL.GL_TEXTURE_2D);
+        gl.glDisable(com.jogamp.opengl.GL.GL_TEXTURE_2D);
         gl.glColor3d(this.color.getRed() / 255d, this.color.getGreen() / 255d, this.color.getBlue() / 255d);
 
         // Placement and orientation

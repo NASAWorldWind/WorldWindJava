@@ -10,7 +10,7 @@ import com.jogamp.opengl.util.texture.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.util.logging.Level;
 

@@ -8,7 +8,7 @@ package gov.nasa.worldwind.util;
 import com.jogamp.opengl.util.texture.Texture;
 import gov.nasa.worldwind.render.DrawContext;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 
 /**
  * OGLRenderToTextureSupport encapsulates the pattern of rendering GL commands to a destination texture. Currently only
