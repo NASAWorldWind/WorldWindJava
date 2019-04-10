@@ -136,6 +136,26 @@ public class MatrixTest
         Matrix identity = m.multiply(mInv);
         assertTrue("Matrix inverse is incorrect", equals(identity, Matrix.IDENTITY, NEAR_SINGULAR_EQUALITY_TOLERANCE));
     }
+    
+    @Test
+    public void testDeterminantEqualToDeterminantOfTranspose()
+    {
+        // Create sample matrix.
+        Matrix matrix = new Matrix(
+            1, 0, 0, 1,
+            1, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1);
+        
+        // Calculate the determinant.
+        double determinant = matrix.getDeterminant();
+        
+        // Transpose the matrix.
+        Matrix transpose = matrix.getTranspose();
+        
+        // The determinant and the determinant of the transpose should be equal.
+        assertEquals(determinant, transpose.getDeterminant(), EQUALITY_TOLERANCE);
+    }
 
     //**************************************************************//
     //********************  Helper Methods  ************************//
