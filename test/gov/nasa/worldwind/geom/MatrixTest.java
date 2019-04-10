@@ -140,12 +140,12 @@ public class MatrixTest
     @Test
     public void testDeterminantEqualToDeterminantOfTranspose()
     {
-        // Create sample matrix.
+        // Create random matrix.
         Matrix matrix = new Matrix(
-            1, 0, 0, 1,
-            1, 1, 0, 0,
-            0, 0, 1, 0,
-            0, 0, 0, 1);
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble(),
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble(),
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble(),
+            random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble());
         
         // Calculate the determinant.
         double determinant = matrix.getDeterminant();
