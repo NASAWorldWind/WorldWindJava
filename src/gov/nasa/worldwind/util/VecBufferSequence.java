@@ -7,7 +7,7 @@ package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.render.DrawContext;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * VecBufferSequence provides storage and retrieval of a sequence of logical VecBuffers in a single VecBuffer that

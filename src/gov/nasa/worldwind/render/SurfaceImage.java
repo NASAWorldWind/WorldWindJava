@@ -14,7 +14,7 @@ import gov.nasa.worldwind.ogc.kml.gx.GXConstants;
 import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.stream.*;
 import java.awt.*;
 import java.awt.image.*;

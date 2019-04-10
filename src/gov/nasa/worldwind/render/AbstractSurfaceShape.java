@@ -17,8 +17,8 @@ import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.combine.*;
 import gov.nasa.worldwind.util.measure.AreaMeasurer;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.*;
 import javax.xml.stream.XMLStreamException;
 import java.awt.*;
 import java.io.IOException;

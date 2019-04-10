@@ -14,7 +14,7 @@ import gov.nasa.worldwind.retrieve.RetrievalService;
 import gov.nasa.worldwind.util.*;
 
 import javax.imageio.spi.IIORegistry;
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.beans.PropertyChangeListener;
 import java.util.logging.Level;
 

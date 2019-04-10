@@ -10,7 +10,7 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.render.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;

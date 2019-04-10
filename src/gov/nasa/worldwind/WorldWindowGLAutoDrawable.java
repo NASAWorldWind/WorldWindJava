@@ -16,8 +16,8 @@ import gov.nasa.worldwind.render.ScreenCreditController;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.dashboard.DashboardController;
 
-import javax.media.opengl.*;
-import javax.media.opengl.awt.AWTGLAutoDrawable;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.awt.AWTGLAutoDrawable;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

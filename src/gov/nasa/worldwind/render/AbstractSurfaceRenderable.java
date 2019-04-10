@@ -10,7 +10,7 @@ import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 import java.awt.*;
 import java.util.*;
 import java.util.List;

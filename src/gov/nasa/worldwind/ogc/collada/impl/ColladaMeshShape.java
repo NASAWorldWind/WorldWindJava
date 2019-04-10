@@ -17,7 +17,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.nio.FloatBuffer;
 import java.util.*;
@@ -1192,6 +1192,9 @@ public class ColladaMeshShape extends AbstractGeneralShape
      */
     protected String getTextureSource(ColladaAbstractGeometry geometry)
     {
+        if (this.bindMaterial == null)
+            return null;
+        
         ColladaTechniqueCommon techniqueCommon = this.bindMaterial.getTechniqueCommon();
         if (techniqueCommon == null)
             return null;
@@ -1297,7 +1300,10 @@ public class ColladaMeshShape extends AbstractGeneralShape
      *         available.
      */
     protected ColladaEffect getEffect(ColladaAbstractGeometry geometry)
-    {
+    {   
+        if (this.bindMaterial == null)
+            return null;
+            
         ColladaTechniqueCommon techniqueCommon = this.bindMaterial.getTechniqueCommon();
         if (techniqueCommon == null)
             return null;

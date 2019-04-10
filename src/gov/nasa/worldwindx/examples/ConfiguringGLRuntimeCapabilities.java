@@ -10,7 +10,7 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.render.GLRuntimeCapabilities;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLAutoDrawable;
 
 /**
  * Illustrates how to specify the OpenGL features WorldWind uses by configuring a <code>{@link
@@ -46,8 +46,8 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
 
     /**
      * Subclass of {@link gov.nasa.worldwind.WorldWindowGLAutoDrawable} which overrides the method {@link
-     * gov.nasa.worldwind.WorldWindowGLAutoDrawable#init(javax.media.opengl.GLAutoDrawable)} to configure the OpenGL
-     * features used by the WorldWind SDK.
+     * gov.nasa.worldwind.WorldWindowGLAutoDrawable#init(com.jogamp.opengl.GLAutoDrawable)} to configure the OpenGL
+     * features used by the World Wind SDK.
      */
     public static class MyGLAutoDrawable extends WorldWindowGLAutoDrawable
     {
@@ -57,8 +57,8 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
         }
 
         /**
-         * Overridden to configure the OpenGL features used by the WorldWind SDK. See {@link
-         * javax.media.opengl.GLEventListener#init(GLAutoDrawable)}.
+         * Overridden to configure the OpenGL features used by the World Wind SDK. See {@link
+         * com.jogamp.opengl.GLEventListener#init(GLAutoDrawable)}.
          *
          * @param glAutoDrawable the drawable
          */

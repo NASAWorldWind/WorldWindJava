@@ -1,42 +1,51 @@
 <img src="https://worldwind.arc.nasa.gov/img/nasa-logo.svg" height="100"/>
 
-# WorldWind Java
+# WorldWind Java - Community Edition (WWJ-CE)
 
-```
-WorldWind team would like to inform you that starting May 3, 2019, NASA WorldWind project will be
-suspended. All the WorldWind servers providing elevation and imagery will be unavailable. While you
-can still download the SDKs from GitHub, there will be no technical support. If you have questions
-and/or concerns, please feel free to email at:
+[![Build Status](https://travis-ci.com/WorldWindEarth/WorldWindJava.svg?branch=develop)](https://travis-ci.com/WorldWindEarth/WorldWindJava)
 
-worldwind-info@lists.nasa.gov
-```
+WWJ-CE is community supported fork of the ubiquitous [WorldWind Java SDK](https://github.com/NASAWorldWind/WorldWindJava)
+from NASA. 
 
-[![Build Status](https://travis-ci.com/NASAWorldWind/WorldWindJava.svg?branch=develop)](https://travis-ci.com/NASAWorldWind/WorldWindJava)
+WorldWind Java is a 3D virtual globe API for desktop Java, developed by NASA. It provides a geographic 
+context with high-resolution terrain, for visualizing geographic or geo-located information in 3D and 2D. 
+Developers can customize the globe's terrain and imagery. The SDK provides a collection of shapes for 
+displaying and interacting with geographic data and representing a range of geometric objects.
 
-3D virtual globe API for desktop Java, developed by NASA. Provides a geographic context with high-resolution terrain, for visualizing geographic or geo-located information in 3D and 2D. Developers can customize the globe's terrain and imagery. Provides a collection of shapes for displaying and interacting with geographic data and representing a range of geometric objects.
-
-- [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov) has setup instructions, developers guides, API documentation and more
+- [worldwind.arc.nasa.gov/java](https://worldwind.arc.nasa.gov/java) has setup instructions, developers guides, API documentation and more
 - [WorldWind Forum](https://forum.worldwindcentral.com) provides help from the WorldWind community
 - [IntelliJ IDEA](https://www.jetbrains.com/idea) is used by the NASA WorldWind development team
+
+## Notice from NASA
+On March 8, 2019, NASA announced a suspension of the WorldWind project.  
+
+> WorldWind team would like to inform you that starting May 3, 2019, NASA WorldWind project will be
+> suspended. All the WorldWind servers providing elevation and imagery will be unavailable. While you
+> can still download the SDKs from GitHub, there will be no technical support. If you have questions
+> and/or concerns, please feel free to email at:
+> 
+> worldwind-info@lists.nasa.gov
+
+WWJ-CE seeks to mitigate the effects of the suspension and continue the development of WorldWind Java.
 
 ## Releases and Roadmap
 
 Official WorldWind Java releases have the latest stable features, enhancements and bug fixes ready for production use.
 
-- [GitHub Releases](https://github.com/NASAWorldWind/WorldWindJava/releases/) documents official releases
-- [GitHub Milestones](https://github.com/NASAWorldWind/WorldWindJava/milestones) documents upcoming releases and the development roadmap
-- [Travis CI](https://travis-ci.com/NASAWorldWind/WorldWindJava) provides continuous integration and build automation
+- [GitHub Releases](https://github.com/WorldWindEarth/WorldWindJava/releases/) documents official releases
+- [GitHub Milestones](https://github.com/WorldWindEarth/WorldWindJava/milestones) documents upcoming releases and the development roadmap
+- [Travis CI](https://travis-ci.com/WorldWindEarth/WorldWindJava) provides continuous integration and build automation
 
 ## Run a Demo 
    
 ###### From a Web Browser
    
 - [WorldWind Demo App](https://worldwind.arc.nasa.gov/java/latest/webstart/ApplicationTemplate.jnlp) shows WorldWind's basic capabilities
-- [Java Demos](https://goworldwind.org/demos) has a complete list of example apps
+- [Java Demos](https://worldwind.arc.nasa.gov/java/demos/) has a complete list of example apps
    
 ###### From a Windows Development Environment
 
-- Download and extract the [Latest Release](https://github.com/NASAWorldWind/WorldWindJava/releases/latest)
+- Download and extract the [Latest Release](https://github.com/WorldWindEarth/WorldWindJava/releases/latest)
 - Open the Command Prompt
 ```bash
 cd [WorldWind release]
@@ -45,7 +54,7 @@ run-demo.bat
 
 ###### From a Linux or macOS Development Environment
 
-- Download and extract the [Latest Release](https://github.com/NASAWorldWind/WorldWindJava/releases/latest)
+- Download and extract the [Latest Release](https://github.com/WorldWindEarth/WorldWindJava/releases/latest)
 - Open the Terminal app
 ```bash
 cd [WorldWind release]

@@ -11,7 +11,7 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.nio.FloatBuffer;
 import java.util.*;
 

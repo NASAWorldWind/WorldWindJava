@@ -5,7 +5,7 @@
  */
 package gov.nasa.worldwind.render;
 
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.glu.*;
 import java.nio.IntBuffer;
 
 /**

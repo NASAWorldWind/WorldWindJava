@@ -2061,7 +2061,7 @@ public class Matrix
                 + this.m24 * (this.m31 * this.m42 - this.m41 * this.m32));
         // Columns 1, 2, 3.
         result -= this.m14 *
-            (this.m21 * (this.m32 * this.m43 - this.m42 - this.m33)
+            (this.m21 * (this.m32 * this.m43 - this.m42 * this.m33)
                 - this.m22 * (this.m31 * this.m43 - this.m41 * this.m33)
                 + this.m23 * (this.m31 * this.m42 - this.m41 * this.m32));
         return result;
