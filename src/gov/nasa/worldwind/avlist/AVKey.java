@@ -417,7 +417,7 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String SIZE_FIT_TEXT = "gov.nasa.worldwind.avkey.SizeFitText";
     final String SIZE_FIXED = "gov.nasa.worldwind.avkey.SizeFixed";
     final String SPATIAL_REFERENCE_WKT = "gov.nasa.worldwind.avkey.SpatialReference.WKT";
-    final String SOUTH = "gov.nasa.worldwdind.avkey.South";
+    final String SOUTH = "gov.nasa.worldwind.avkey.South";
     final String START = "gov.nasa.worldwind.avkey.Start";
     final String STEREO_FOCUS_ANGLE = "gov.nasa.worldwind.StereoFocusAngle";
     final String STEREO_INTEROCULAR_DISTANCE = "gov.nasa.worldwind.StereoFInterocularDistance";
