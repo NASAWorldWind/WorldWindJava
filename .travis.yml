@@ -24,25 +24,25 @@ before_script:
 script:
   - ant build
 
-# Deployment has been disabled in preparation for the WorldWind project suspension on April 5, 2019
-#deploy:
-#  # Publish API documentation to GitHub Pages
-#  - provider: pages
-#    github_token: $GITHUB_API_KEY
-#    local_dir: build/doc/javadoc
-#    skip_cleanup: true
-#    on:
-#      branch: develop
-#  # Create CHANGELOG.md in the current directory
-#  - provider: script
-#    script: ./travis/changelog.sh >> CHANGELOG.md
-#    skip_cleanup: true
-#    on:
-#      tags: true
-#  # Create a GitHub release and publish CHANGELOG.md to the release assets
-#  - provider: releases
-#    api_key: $GITHUB_API_KEY
-#    file: CHANGELOG.md
-#    skip_cleanup: true
-#    on:
-#      tags: true
+# Deploy develop branch javadocs to gh_pages, and create and deploy CHANGELOG.md on tags
+deploy:
+  # Publish API documentation to GitHub Pages
+  - provider: pages
+    github_token: $GITHUB_API_KEY
+    local_dir: build/doc/javadoc
+    skip_cleanup: true
+    on:
+      branch: develop
+  # Create CHANGELOG.md in the current directory
+  - provider: script
+    script: ./travis/changelog.sh >> CHANGELOG.md
+    skip_cleanup: true
+    on:
+      tags: true
+  # Create a GitHub release and publish CHANGELOG.md to the release assets
+  - provider: releases
+    api_key: $GITHUB_API_KEY
+    file: CHANGELOG.md
+    skip_cleanup: true
+    on:
+      tags: true
