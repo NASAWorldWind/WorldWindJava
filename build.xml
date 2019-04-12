@@ -330,6 +330,7 @@
         <delete dir="${worldwind.test.results.dir}"/>
         <mkdir dir="${worldwind.test.results.dir}"/>
         <junit failureproperty="unitTest.failure"
+               dir="${basedir}"
                fork="on"
                forkmode="once"
                maxmemory="1024m">
@@ -545,5 +546,12 @@
             <arg value="all"/>
         </exec>
     </target>
-
+    
+    <target name="runLayerManager" depends="build" description="Runs the LayerManager example app.">
+        <java fork="true" 
+              classname="gov.nasa.worldwindx.examples.layermanager.LayerManagerApp" 
+              classpath="gdal.jar;gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar;worldwind.jar;worldwindx.jar"
+        />
+    </target>
+    
 </project>
