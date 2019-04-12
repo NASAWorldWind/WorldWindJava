@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir=".." name="WorldWindJava CE-IDE">
+    <!-- TODO: edit the following target according to your needs -->
+    <!-- (more info: http://www.netbeans.org/kb/articles/freeform-config.html#runsingle) -->
+    <target name="run-selected-file-in-src">
+        <fail unless="run.class">Must set property 'run.class'</fail>
+        <!--<ant antfile="build.xml" inheritall="false" target="build"/>-->
+        <java classname="${run.class}" failonerror="true" fork="true">
+            <classpath>
+                <pathelement path="worldwind.jar;gdal.jar;gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar"/>
+                <pathelement location="build/classes/debug"/>
+            </classpath>
+        </java>
+    </target>
+</project>
