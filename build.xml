@@ -87,7 +87,7 @@
         <javadoc destdir="${worldwind.doc.dir}/javadoc"
                  overview="${worldwind.src.dir}/overview.html"
                  encoding="UTF-8"
-                 windowtitle="NASA WorldWind" doctitle="NASA WorldWind" header="NASA WorldWind"
+                 windowtitle="WorldWindJava API" doctitle="NASA WorldWind Java-Community Edition" header="NASA WorldWind-CE"
                  splitindex="true" protected="true" nodeprecated="true" version="false" author="false" use="true"
                  maxmemory="1024m">
             <packageset dir="${worldwind.src.dir}" defaultexcludes="yes">

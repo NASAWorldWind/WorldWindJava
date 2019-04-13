@@ -25,9 +25,9 @@ public class LocalRasterServerLayer extends BasicTiledImageLayer
 {
     /**
      * Constructs a layer from a list of parameters describing the layer.
-     * <p/>
+     * <p>
      * Parameter values for DATASET_NAME and DATA_CACHE_NAME are required.
-     * <p/>
+     * <p>
      * TODO: Enumerate the other required and optional parameters.
      *
      * @param params the parameters describing the dataset.
@@ -44,9 +44,9 @@ public class LocalRasterServerLayer extends BasicTiledImageLayer
 
     /**
      * Constructs a layer from an XML document description.
-     * <p/>
+     * <p>
      * Either the specified XML document or parameter list must contain values for DATASET_NAME and DATA_CACHE_NAME.
-     * <p/>
+     * <p>
      * TODO: Enumerate the other required and optional parameters.
      *
      * @param dom    the XML document describing the dataset.
@@ -66,9 +66,9 @@ public class LocalRasterServerLayer extends BasicTiledImageLayer
 
     /**
      * Constructs a layer from an XML document {@link Element}.
-     * <p/>
+     * <p>
      * Either the specified XML element or parameter list must contain values for DATASET_NAME and DATA_CACHE_NAME.
-     * <p/>
+     * <p>
      * TODO: Enumerate the other required and optional parameters.
      *
      * @param domElement the XML document describing the dataset.

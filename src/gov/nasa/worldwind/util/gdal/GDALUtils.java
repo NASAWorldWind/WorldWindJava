@@ -1244,75 +1244,74 @@ public class GDALUtils
      * @throws IllegalArgumentException when the passed dataset is null pr emtpy, or any of the dimension is 0
      * @throws gov.nasa.worldwind.exception.WWRuntimeException
      *                                  if GDAL is not available, or a dataset contains no bands
-     *                                  <p/>
+     *                                  <p>
      *                                  The extractRasterParameters() sets next key/value pairs:
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.WIDTH - the maximum width of the image
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.HEIGHT - the maximum height of the image
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.COORDINATE_SYSTEM - one of the next values: AVKey.COORDINATE_SYSTEM_SCREEN
      *                                  AVKey.COORDINATE_SYSTEM_GEOGRAPHIC AVKey.COORDINATE_SYSTEM_PROJECTED
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.SECTOR - in case of Geographic CS, contains a regular Geographic Sector
      *                                  defined by lat/lon coordinates of corners in case of Projected CS, contains a
      *                                  bounding box of the area
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.COORDINATE_SYSTEM_NAME
-     *                                  <p/>
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.PIXEL_WIDTH (Double) pixel size, UTM images usually specify 1 (1 meter);
      *                                  if missing and Geographic Coordinate System is specified will be calculated as
      *                                  LongitudeDelta/WIDTH
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.PIXEL_HEIGHT (Double) pixel size, UTM images usually specify 1 (1 meter);
      *                                  if missing and Geographic Coordinate System is specified will be calculated as
      *                                  LatitudeDelta/HEIGHT
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.ORIGIN (LatLon) specifies coordinate of the image's origin (one of the
      *                                  corners, or center) If missing, upper left corner will be set as origin
-     *                                  <p/>
-     *                                  AVKey.DATE_TIME (0 terminated String, length == 20) if missing, current date &
+     *                                  <p>
+     *                                  AVKey.DATE_TIME (0 terminated String, length == 20) if missing, current date and
      *                                  time will be used
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.PIXEL_FORMAT required (valid values: AVKey.ELEVATION | AVKey.IMAGE }
      *                                  specifies weather it is a digital elevation model or image
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.IMAGE_COLOR_FORMAT required if AVKey.PIXEL_FORMAT is AVKey.IMAGE (valid
      *                                  values: AVKey.COLOR and AVKey.MONOCHROME)
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.DATA_TYPE required ( valid values: AVKey.INT16, and AVKey.FLOAT32 )
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.VERSION optional, if missing a default will be used "NASA WorldWind"
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.DISPLAY_NAME, (String) optional, specifies a name of the document/image
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.DESCRIPTION (String) optional, for any kind of descriptions
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.MISSING_DATA_SIGNAL optional, set the AVKey.MISSING_DATA_SIGNAL ONLY if
      *                                  you know for sure that the specified value actually represents void (NODATA)
      *                                  areas. Elevation data usually has "-32767" (like DTED), or "-32768" like SRTM,
      *                                  but some has "0" (mostly images) and "-9999" like NED. Note! Setting "-9999" is
      *                                  very ambiguos because -9999 for elevation is valid value;
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.MISSING_DATA_REPLACEMENT (String type forced by spec) Most images have
      *                                  "NODATA" as "0", elevations have as "-9999", or "-32768" (sometimes "-32767")
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.COORDINATE_SYSTEM required, valid values AVKey.COORDINATE_SYSTEM_GEOGRAPHIC
      *                                  or AVKey.COORDINATE_SYSTEM_PROJECTED
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.COORDINATE_SYSTEM_NAME Optional, A name of the Coordinates System as a
      *                                  String
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.PROJECTION_EPSG_CODE Required; Integer; EPSG code or Projection Code If CS
      *                                  is Geodetic and EPSG code is not specified, a default WGS84 (4326) will be used
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.PROJECTION_DATUM  Optional, AVKey.PROJECTION_DESC   Optional,
      *                                  AVKey.PROJECTION_NAME   Optional, AVKey.PROJECTION_UNITS  Optional,
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.ELEVATION_UNIT Required, if AVKey.PIXEL_FORMAT = AVKey.ELEVATION, value:
      *                                  AVKey.UNIT_FOOT or AVKey.UNIT_METER (default, if not specified)
-     *                                  <p/>
+     *                                  <p>
      *                                  AVKey.RASTER_PIXEL, optional, values: AVKey.RASTER_PIXEL_IS_AREA or
      *                                  AVKey.RASTER_PIXEL_IS_POINT if not specified, default for images is
      *                                  RASTER_PIXEL_IS_AREA, and AVKey.RASTER_PIXEL_IS_POINT for elevations

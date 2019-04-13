@@ -16,12 +16,12 @@ import java.util.*;
  * two-dimensional scalar data, whereas the ContourLine shape operates only on elevation values associated with a World
  * Wind globe. Note that ContourBuilder can be used to compute contour line coordinates within a rectangular array of
  * elevation values.
- * <p/>
+ * <p>
  * ContourBuilder operates on a caller specified rectangular array. The array is specified as a one dimensional array of
  * floating point numbers, and is understood to be organized in row-major order, with the first index indicating the
  * value at the rectangle's upper-left corner. The domain of array values is any value that fits in a 64-bit floating
  * point number.
- * <p/>
+ * <p>
  * Contour lines may be computed at any threshold value (i.e. isovalue) by calling {@link #buildContourLines(double)} or
  * {@link #buildContourLines(double, gov.nasa.worldwind.geom.Sector, double)}. The latter method maps contour line
  * coordinates to geographic positions by associating the rectangular array with a geographic sector. It is valid to
@@ -237,8 +237,7 @@ public class ContourBuilder
      * list of two-element arrays, with the X coordinate at index 0 and the Y coordinate at index 1. The domain of
      * contour line coordinates is the XY Cartesian space defined by the rectangular array's width and height. X
      * coordinates range from 0 to width-1, and Y coordinates range from 0 to height-1.
-     * <p/>
-     * <p/>
+     * <p>
      * This returns an empty list if there are no contour lines associated with the value. This occurs when the value is
      * less than the rectangular array's minimum value, or when the value is greater than the rectangular array's
      * maximum value.
@@ -265,13 +264,13 @@ public class ContourBuilder
      * coordinates to geographic positions by associating the rectangular array with a geographic sector. The array's
      * upper left corner is mapped to the sector's Northwest corner, and the array's lower right corner is mapped to the
      * sector's Southeast corner.
-     * <p/>
+     * <p>
      * The domain of contour line coordinates is the geographic space defined by the specified sector. Prior to the
      * mapping into geographic coordinates, contour line X coordinates range from 0 to width-1, and Y coordinates range
      * from 0 to height-1. After the mapping into geographic coordinates, contour line X coordinates range from
      * sector.getMinLongitude() to sector.getMaxLongitude(), and Y coordinates range from sector.getMaxLatitude() to
      * sector.getMinLatitude().
-     * <p/>
+     * <p>
      * This returns an empty list if there are no contour lines associated with the value. This occurs when the value is
      * less than the rectangular array's minimum value, or when the value is greater than the rectangular array's
      * maximum value.

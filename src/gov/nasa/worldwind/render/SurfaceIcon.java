@@ -86,7 +86,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
 
     /**
      * Get the icon displacement in pixels relative to the reference location.  Can be <code>null</code>.
-     * <p/>
+     * <p>
      * When <code>null</code> the icon will be drawn with it's image center on top of it's reference location - see
      * {@link #setLocation(LatLon)}. Otherwise the icon will be shifted of a distance equivalent to the number of pixels
      * specified as <code>x</code> and <code>y</code> offset values. Positive values will move the icon to the right for
@@ -101,7 +101,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
 
     /**
      * Set the icon displacement in pixels relative to the reference location. Can be <code>null</code>.
-     * <p/>
+     * <p>
      * When <code>null</code> the icon will be drawn with it's image center on top of it's refence location - see {@link
      * #setLocation(LatLon)}. Otherwise the icon will be shifted of a distance equivalent to the number of pixels
      * specified as <code>x</code> and <code>y</code> offset values. Positive values will move the icon to the right for
@@ -256,7 +256,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     /**
      * Get the minimum size in meter the icon image is allowed to be reduced to once applied to the terrain surface.
      * This limit applies to the source image largest dimension.
-     * <p/>
+     * <p>
      * The icon will try to maintain it's apparent size depending on it's distance from the eye and will extend over a
      * rectangular area which largest dimension is bounded by the values provided with {@link #setMinSize(double)} and
      * {@link #setMaxSize(double)}.
@@ -271,7 +271,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     /**
      * Set the minimum size in meter the icon image is allowed to be reduced to once applied to the terrain surface.
      * This limit applies to the source image largest dimension.
-     * <p/>
+     * <p>
      * The icon will try to maintain it's apparent size depending on it's distance from the eye and will extend over a
      * rectangular area which largest dimension is bounded by the values provided with <code>setMinSize(double)</code>
      * and {@link #setMaxSize(double)}.
@@ -287,7 +287,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     /**
      * Get the maximum size in meter the icon image is allowed to be enlarged to once applied to the terrain surface.
      * This limit applies to the source image largest dimension.
-     * <p/>
+     * <p>
      * The icon will try to maintain it's apparent size depending on it's distance from the eye and will extend over a
      * rectangular area which largest dimension is bounded by the values provided with {@link #setMinSize(double)} and
      * {@link #setMaxSize(double)}.
@@ -302,7 +302,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     /**
      * Get the maximum size in meter the icon image is allowed to be enlarged to once applied to the terrain surface.
      * This limit applies to the source image largest dimension.
-     * <p/>
+     * <p>
      * The icon will try to maintain it's apparent size depending on it's distance from the eye and will extend over a
      * rectangular area which largest dimension is bounded by the values provided with {@link #setMinSize(double)} and
      * <code>setMaxSize(double)</code>.
@@ -327,7 +327,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
 
     /**
      * Set the {@link Color} the source image will be combined with - default to white.
-     * <p/>
+     * <p>
      * A non white color will mostly affect the white portions from the original image. This is mostly useful to alter
      * the appearance of 'colorless' icons - which mainly contain black, white and shades of gray.
      *
@@ -356,7 +356,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to return a unique state key if the icon is configured to always redraw. SurfaceIcon does not use a
      * cached representation if it's heading is configured to follow the view, or if it's configured to maintain a
      * constant screen size.

@@ -17,16 +17,16 @@ import java.util.*;
 
 /**
  * Base class for XML event parsers. Handles parsing control and creation of new parser instances.
- * <p/>
+ * <p>
  * A parser holds the information parsed from the event stream. That information can be queried via the parser's
  * accessors. A parser typically does not maintain a reference to the event stream it parsed or the parser context used
  * during parsing.
- * <p/>
+ * <p>
  * Parsers are created when events of the associated type are encountered in the input stream. An {@link
  * #allocate(XMLEventParserContext, javax.xml.stream.events.XMLEvent)} method in the parser typically creates a default
  * parser prior to consulting the {@link XMLEventParserContext}, which returns a new parser whose type is determined by
  * consulting a table of event types. The default parser is returned if the table contains no entry for the event type.
- * <p/>
+ * <p>
  * A parser can be associated with a specific namespace. The namespace is used to qualify the parser's association with
  * event types.
  *

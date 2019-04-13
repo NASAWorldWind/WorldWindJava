@@ -17,25 +17,25 @@ import java.util.List;
  * caused the signal. See the <em>Field Summary</em> for a description of the possible operations. When a SelectEvent
  * occurs, all select event listeners registered with the associated {@link gov.nasa.worldwind.WorldWindow} are called.
  * Select event listeners are registered by calling {@link gov.nasa.worldwind.WorldWindow#addSelectListener(SelectListener)}.
- * <p/>
+ * <p>
  * A <code>ROLLOVER</code> SelectEvent is generated every frame when the cursor is over a visible object either because
  * the user moved it there or because the WorldWindow was repainted and a visible object was found to be under the
  * cursor. A <code>ROLLOVER</code> SelectEvent is also generated when there are no longer any objects under the cursor.
  * Select events generated for objects under the cursor have a non-null pickPoint, and contain the top-most visible
  * object of all objects at the cursor position.
- * <p/>
+ * <p>
  * A <code>BOX_ROLLOVER</code> SelectEvent is generated every frame when the selection box intersects a visible object
  * either because the user moved or expanded it or because the WorldWindow was repainted and a visible object was found
  * to intersect the box. A <code>BOX_ROLLOVER</code> SelectEvent is also generated when there are no longer any objects
  * intersecting the selection box. Select events generated for objects intersecting the selection box have a non-null
  * pickRectangle, and contain all top-most visible objects of all objects intersecting the selection box.
- * <p/>
+ * <p>
  * If a select listener performs some action in response to a select event, it should call the event's {@link
  * #consume()} method in order to indicate to subsequently called listeners that the event has been responded to and no
  * further action should be taken. Left press select events should not be consumed unless it is necessary to do so.
  * Consuming left press events prevents the WorldWindow from gaining focus, thereby preventing it from receiving key
  * events.
- * <p/>
+ * <p>
  * If no object is under the cursor but the cursor is over terrain, the select event will identify the terrain as the
  * picked object and will include the corresponding geographic position. See {@link
  * gov.nasa.worldwind.pick.PickedObject#isTerrain()}.

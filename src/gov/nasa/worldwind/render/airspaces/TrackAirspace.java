@@ -185,7 +185,7 @@ public class TrackAirspace extends AbstractAirspace
     /**
      * Specifies the threshold that defines whether the angle between two adjacent legs is small. This threshold is used
      * to determine the best method for adjusting the vertices of adjacent legs.
-     * <p/>
+     * <p>
      * When the angle between adjacent legs is small, the standard method of joining the leg's vertices forms a very
      * large peak pointing away from the leg's common point. In this case <code>TrackAirspace</code> uses a method that
      * avoids this peak and produces a seamless transition between the adjacent legs.
@@ -473,7 +473,7 @@ public class TrackAirspace extends AbstractAirspace
      * the second. <code>leg1</code> must precede <code>leg2</code>, and they must share a common location at the end of
      * <code>leg1</code> and the beginning of <code>leg2</code>. Without joining the adjacent edges, the geometry of the
      * two adjacent boxes contains a gap on one side and an intersection on the other.
-     * <p/>
+     * <p>
      * This has no effect if the legs cannot be joined for any reason.
      *
      * @param leg1  the first leg.

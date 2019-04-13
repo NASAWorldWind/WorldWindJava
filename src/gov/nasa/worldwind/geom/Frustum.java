@@ -9,7 +9,7 @@ import gov.nasa.worldwind.util.Logging;
 
 /**
  * Represents a view frustum composed of six planes: left, right, bottom, top, near far.
- * <p/>
+ * <p>
  * Frustum instances are immutable.
  *
  * @author Tom Gaskins
@@ -40,7 +40,7 @@ public class Frustum
 
     /**
      * Create a frustum from six {@link gov.nasa.worldwind.geom.Plane}s defining the frustum boundaries.
-     * <p/>
+     * <p>
      * None of the arguments may be null.
      *
      * @param near   the near plane

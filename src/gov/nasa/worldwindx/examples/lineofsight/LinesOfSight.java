@@ -31,12 +31,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Computes and displays line-of-sight intersections for terrain and renderables. Uses a {@link Terrain} object in order
  * to determine accurate intersections relative to the highest-resolution elevation data associated with a specified
  * globe.
- * <p/>
+ * <p>
  * This class uses a {@link gov.nasa.worldwindx.examples.lineofsight.TerrainLineIntersector} and a {@link
  * gov.nasa.worldwindx.examples.lineofsight.ShapeLineIntersector} to compute the intersections.
- * <p/>
- * <em>Usage:</em> <br/> Shift-click: Calculate lines of sight for a position. <br/> Ctrl-click: Cancel the running
- * computation. <br/> Alt-click: Re-run the most recent line of sight calculation.
+ * <p>
+ * <em>Usage:</em> <br>
+ * Shift-click: Calculate lines of sight for a position. <br>
+ * Ctrl-click: Cancel the running computation. <br>
+ * Alt-click: Re-run the most recent line of sight calculation.
  *
  * @author tag
  * @version $Id: LinesOfSight.java 2109 2014-06-30 16:52:38Z tgaskins $

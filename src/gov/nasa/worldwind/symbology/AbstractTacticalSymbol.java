@@ -1866,6 +1866,7 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
      * prevent the text from overlapping if the symbol is scaled to a very small size.
      *
      * @param dc Current draw context.
+     * @param modifiers The text modifiers.
      *
      * @return Minimum dimension for the label layout rectangle.
      */

@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Illustrates how to display an icon with an alarm state using a WorldWind <code>{@link WWIcon}</code>. This applies a
  * background image to an icon indicating a warning or an urgent condition, then varies the background image's scale
  * factor over time to make it flash or pulse.
- * <p/>
+ * <p>
  * This applies the background image by calling <code>{@link WWIcon#setBackgroundImage(Object)}</code>, and varies its
  * scale factor by calling <code>{@link WWIcon#setBackgroundScale(double)}</code>.
  *

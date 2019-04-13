@@ -19,13 +19,13 @@ import java.util.concurrent.atomic.*;
 
 /**
  * Represents the KML <i>NetworkLink</i> element and provides access to its contents.
- * <p/>
+ * <p>
  * During rendering, <code>KMLNetworkLink</code> retrieves and loads its network resource whenever necessary. Upon a
  * successful retrieval, <code>KMLNetworkLink</code> sends an <code>AVKey.RETRIEVAL_STATE_SUCCESSFUL</code> property
  * change event to this link's property change listeners. Once retrieved and loaded, <code>KMLNetworkLink</code> stores
  * its network resource by calling <code>setNetworkResource</code>, draws its network resource during preRendering and
  * rendering, and forwards property change events from the network resource to its property change listeners.
- * <p/>
+ * <p>
  * During retrieval, <code>KMLNetworkLink</code> attempts to use either the <code>Link</code> or the <code>Url</code>.
  * The <code>Link</code> is the preferred method for encoding a KML NetworkLink's address since KML version 2.1,
  * therefore we give it priority over <code>Url</code>.
@@ -217,7 +217,7 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
 
     /**
      * Specifies the network resource referenced by this <code>KMLNetworkLink</code>, or <code>null</code> if this link
-     * has no resource. If the specified <code>kmlRoot</code> is not <code>null</code, this link draws the
+     * has no resource. If the specified <code>kmlRoot</code> is not <code>null</code>, this link draws the
      * <code>kmlRoot</code> during preRendering and rendering, and forwards property change events from the
      * <code>kmlRoot</code> to this link's property change listeners.
      *
@@ -372,7 +372,7 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * resource is retrieved and loaded, this calls <code>{@link #setNetworkResource(KMLRoot)}</code> to specify this
      * link's new network resource, and sends an <code>{@link gov.nasa.worldwind.avlist.AVKey#RETRIEVAL_STATE_SUCCESSFUL}</code>
      * property change event to this link's property change listeners.
-     * <p/>
+     * <p>
      * This does nothing if this <code>KMLNetworkLink</code> has no <code>KMLLink</code>.
      *
      * @param address the address of the resource to retrieve
@@ -445,10 +445,11 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * Indicates whether the network resource references by this <code>KMLNetworkLink</code> should be retrieved to the
      * WorldWind cache or to a temporary location. This returns <code>true</code> if all of the following conditions
      * are met, and <code>false</code> otherwise:
-     * <p/>
-     * <ul> <li>This network link has either a <code>Link</code> or a <code>Url</code> element.</li> <li>The Link or Url
-     * element's <code>refreshMode</code> is not <code>onInterval</code> or <code>onExpire</code>.</li> <li>The Link or
-     * Url element's <code>viewRefreshMode</code> is not <code>onStop</code>.</li> </ul>
+     * <ul> 
+     * <li>This network link has either a <code>Link</code> or a <code>Url</code> element.</li> 
+     * <li>The Link or Url element's <code>refreshMode</code> is not <code>onInterval</code> or <code>onExpire</code>.</li> 
+     * <li>The Link or Url element's <code>viewRefreshMode</code> is not <code>onStop</code>.</li> 
+     * </ul>
      *
      * @return <code>true</code> if this link's network resource can should be stored in a cache, or <code>false</code>
      *         if it should be stored in a temporary location.

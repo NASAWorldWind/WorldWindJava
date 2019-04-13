@@ -21,7 +21,7 @@ public interface RasterServer
      * Composes a Raster and returns as ByteBuffer in the requested format (image or elevation)
      *
      * @param params Required parameters in params:
-     *               <p/>
+     *               <p>
      *               AVKey.WIDTH - the height of the requested raster AVKey.HEIGHT - the height of the requested raster
      *               AVKey.SECTOR - a regular Geographic Sector defined by lat/lon coordinates of corners
      *

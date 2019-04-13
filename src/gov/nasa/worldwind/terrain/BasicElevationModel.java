@@ -688,10 +688,10 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     /**
      * Start a new {@link BulkRetrievalThread} that downloads all elevations for a given sector and resolution to the
      * current WorldWind file cache, without downloading imagery already in the cache.
-     * <p/>
+     * <p>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link BasicElevationModelBulkDownloader}.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -713,10 +713,10 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     /**
      * Start a new {@link BulkRetrievalThread} that downloads all elevations for a given sector and resolution to a
      * specified file store, without downloading imagery already in the file store.
-     * <p/>
+     * <p>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link BasicElevationModelBulkDownloader}.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -751,7 +751,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     /**
      * Get the estimated size in bytes of the elevations not in the WorldWind file cache for the given sector and
      * resolution.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -770,7 +770,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     /**
      * Get the estimated size in bytes of the elevations not in a specified file store for the given sector and
      * resolution.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -2149,20 +2149,24 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
 
     /**
      * Appends BasicElevationModel configuration parameters as elements to the specified context. This appends elements
-     * for the following parameters: <table> <th><td>Parameter</td><td>Element Path</td><td>Type</td></th>
-     * <tr><td>{@link AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String array</td></tr>
-     * <tr><td>{@link AVKey#DATA_TYPE}</td><td>DataType/@type</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#BYTE_ORDER}</td><td>ByteOrder</td><td>DataType/@byteOrder</td></tr> <tr><td>{@link
-     * AVKey#ELEVATION_EXTREMES_FILE}</td><td>ExtremeElevations/FileName</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#ELEVATION_MAX}</td><td>ExtremeElevations/@max</td><td>Double</td></tr> <tr><td>{@link
-     * AVKey#ELEVATION_MIN}</td><td>ExtremeElevations/@min</td><td>Double</td></tr> </table> This also writes common
-     * elevation model and LevelSet configuration parameters by invoking {@link gov.nasa.worldwind.terrain.AbstractElevationModel#createElevationModelConfigElements(gov.nasa.worldwind.avlist.AVList,
+     * for the following parameters:
+     * <table><caption>Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
+     * <tr><td>{@link AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String
+     * array</td></tr>
+     * <tr><td>{@link AVKey#DATA_TYPE}</td><td>DataType/@type</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#BYTE_ORDER}</td><td>ByteOrder</td><td>DataType/@byteOrder</td></tr>
+     * <tr><td>{@link AVKey#ELEVATION_EXTREMES_FILE}</td><td>ExtremeElevations/FileName</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#ELEVATION_MAX}</td><td>ExtremeElevations/@max</td><td>Double</td></tr>
+     * <tr><td>{@link AVKey#ELEVATION_MIN}</td><td>ExtremeElevations/@min</td><td>Double</td></tr>
+     * </table>
+     * This also writes common elevation model and LevelSet configuration parameters by invoking {@link gov.nasa.worldwind.terrain.AbstractElevationModel#createElevationModelConfigElements(gov.nasa.worldwind.avlist.AVList,
      * org.w3c.dom.Element)} and {@link DataConfigurationUtils#createLevelSetConfigElements(gov.nasa.worldwind.avlist.AVList,
      * org.w3c.dom.Element)}.
      *
-     * @param params  the key-value pairs which define the BasicElevationModel configuration parameters.
+     * @param params the key-value pairs which define the BasicElevationModel configuration parameters.
      * @param context the XML document root on which to append BasicElevationModel configuration elements.
      *
      * @return a reference to context.
@@ -2268,22 +2272,26 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     /**
      * Parses BasicElevationModel parameters from a specified DOM document. This writes output as key-value pairs to
      * params. If a parameter from the XML document already exists in params, that parameter is ignored. Supported key
-     * and parameter names are: <table> <th><td>Parameter</td><td>Element Path</td><td>Type</td></th> <tr><td>{@link
-     * AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String array</td></tr>
-     * <tr><td>{@link AVKey#DATA_TYPE}</td><td>DataType/@type</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#BYTE_ORDER}</td><td>DataType/@byteOrder</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#ELEVATION_EXTREMES_FILE}</td><td>ExtremeElevations/FileName</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#ELEVATION_MAX}</td><td>ExtremeElevations/@max</td><td>Double</td></tr> <tr><td>{@link
-     * AVKey#ELEVATION_MIN}</td><td>ExtremeElevations/@min</td><td>Double</td></tr> </table> This also parses common
-     * elevation model and LevelSet configuration parameters by invoking {@link gov.nasa.worldwind.terrain.AbstractElevationModel#getElevationModelConfigParams(org.w3c.dom.Element,
+     * and parameter names are:
+     * <table><caption>Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
+     * <tr><td>{@link AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String
+     * array</td></tr>
+     * <tr><td>{@link AVKey#DATA_TYPE}</td><td>DataType/@type</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#BYTE_ORDER}</td><td>DataType/@byteOrder</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#ELEVATION_EXTREMES_FILE}</td><td>ExtremeElevations/FileName</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#ELEVATION_MAX}</td><td>ExtremeElevations/@max</td><td>Double</td></tr>
+     * <tr><td>{@link AVKey#ELEVATION_MIN}</td><td>ExtremeElevations/@min</td><td>Double</td></tr>
+     * </table>
+     * This also parses common elevation model and LevelSet configuration parameters by invoking {@link gov.nasa.worldwind.terrain.AbstractElevationModel#getElevationModelConfigParams(org.w3c.dom.Element,
      * gov.nasa.worldwind.avlist.AVList)} and {@link gov.nasa.worldwind.util.DataConfigurationUtils#getLevelSetConfigParams(org.w3c.dom.Element,
      * gov.nasa.worldwind.avlist.AVList)}.
      *
      * @param domElement the XML document root to parse for BasicElevationModel configuration parameters.
-     * @param params     the output key-value pairs which recieve the BasicElevationModel configuration parameters. A
-     *                   null reference is permitted.
+     * @param params the output key-value pairs which recieve the BasicElevationModel configuration parameters. A null
+     * reference is permitted.
      *
      * @return a reference to params, or a new AVList if params is null.
      *

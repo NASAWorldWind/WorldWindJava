@@ -15,10 +15,10 @@ import java.awt.*;
 /**
  * This layer displays onscreen view controls. Controls are available for pan, zoom, heading, pitch, tilt, field-of-view
  * and vertical exaggeration. Each of the controls can be enabled or disabled independently.
- * <p/>
+ * <p>
  * An instance of this class depends on an instance of {@link ViewControlsSelectListener} to control it. The select
  * listener must be registered as such via {@link gov.nasa.worldwind.WorldWindow#addSelectListener(gov.nasa.worldwind.event.SelectListener)}.
- * <p/>
+ * <p>
  * <code>ViewControlsLayer</code> instances are not sharable among <code>WorldWindow</code>s.
  *
  * @author Patrick Murris

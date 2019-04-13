@@ -33,10 +33,10 @@ public abstract class BulkRetrievalThread extends Thread
     /**
      * Construct a thread that attempts to download to a specified {@link FileStore} a retrievable's data for a given
      * {@link Sector} and resolution.
-     * <p/>
+     * <p>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link gov.nasa.worldwind.terrain.BasicElevationModelBulkDownloader}.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *

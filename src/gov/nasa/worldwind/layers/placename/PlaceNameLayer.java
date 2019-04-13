@@ -1230,10 +1230,10 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
     /**
      * Start a new {@link BulkRetrievalThread} that downloads all placenames for a given sector and resolution to the
      * current WorldWind file cache.
-     * <p/>
+     * <p>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link PlaceNameLayerBulkDownloader}.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -1258,10 +1258,10 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
     /**
      * Start a new {@link BulkRetrievalThread} that downloads all placenames for a given sector and resolution to a
      * specified file store.
-     * <p/>
+     * <p>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link PlaceNameLayerBulkDownloader}.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -1289,7 +1289,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
     /**
      * Get the estimated size in bytes of the placenames not in the WorldWind file cache for the given sector and
      * resolution.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -1308,7 +1308,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
     /**
      * Get the estimated size in bytes of the placenames not in a specified file store for the given sector and
      * resolution.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *

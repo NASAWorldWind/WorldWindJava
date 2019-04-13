@@ -351,7 +351,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to include the globe's state key in the returned state key.
      *
      * @see gov.nasa.worldwind.globes.Globe#getStateKey(DrawContext)

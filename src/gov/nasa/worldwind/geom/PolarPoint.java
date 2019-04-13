@@ -9,7 +9,7 @@ import gov.nasa.worldwind.util.Logging;
 
 /**
  * Represents a point in space defined by a latitude, longitude and distance from the origin.
- * <p/>
+ * <p>
  * Instances of <code>PolarPoint</code> are immutable.
  *
  * @author Tom Gaskins

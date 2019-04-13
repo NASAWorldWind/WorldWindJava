@@ -36,7 +36,7 @@ public class BasicElevationModelFactory extends BasicFactory
      * <li>a {@link java.net.URL}</li> <li>a {@link java.io.File}</li> <li>a {@link java.io.InputStream}</li> <li> an
      * {@link org.w3c.dom.Element}</li> <li>a {@link String} holding a file name, a name of a resource on the classpath,
      * or a string representation of a URL</li> </ul>
-     * <p/>
+     * <p>
      * For non-compound models, this method maps the <code>serviceName</code> attribute of the
      * <code>ElevationModel/Service</code> element of the XML configuration document to the appropriate elevation-model
      * type. Service types recognized are:" <ul> <li>"WMS" for elevation models that draw their data from a WMS web
@@ -115,7 +115,7 @@ public class BasicElevationModelFactory extends BasicFactory
      * @return the requested elevation model, or null if the specified element does not describe an elevation model.
      *
      * @throws Exception if a problem occurs during creation.
-     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList).
+     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
     @Override
     protected ElevationModel doCreateFromElement(Element domElement, AVList params) throws Exception
@@ -145,7 +145,7 @@ public class BasicElevationModelFactory extends BasicFactory
 
     /**
      * Creates a compound elevation model and populates it with a specified list of elevation models.
-     * <p/>
+     * <p>
      * Any exceptions occurring during creation of the elevation models are logged and not re-thrown. The elevation
      * models associated with the exceptions are not included in the returned compound model.
      *
@@ -155,7 +155,7 @@ public class BasicElevationModelFactory extends BasicFactory
      * @return a compound elevation model populated with the specified elevation models. The compound model will contain
      *         no elevation models if none were specified or exceptions occurred for all that were specified.
      *
-     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList).
+     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
     protected CompoundElevationModel createCompoundModel(Element[] elements, AVList params)
     {

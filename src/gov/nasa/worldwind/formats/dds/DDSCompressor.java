@@ -13,7 +13,7 @@ import java.awt.image.*;
  * DDSCompressor converts in-memory images into a DDS file encoded with one of the DXT block compression algorithms. If
  * the caller wants to encode using a certain type of DXT compression, DDSCompressor provides the appropriate methods to
  * do that. Otherwise, DDSCompressor chooses the DXT compression scheme that best suits the source image.
- * <p/>
+ * <p>
  * Each compression method accepts a reference to a {@link gov.nasa.worldwind.formats.dds.DXTCompressionAttributes}.
  * This compressor performs the appropriate actions according to the attributes, such as building mip maps and
  * converting the source image to a premultiplied alpha format.

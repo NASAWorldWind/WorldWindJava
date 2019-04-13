@@ -3651,8 +3651,12 @@ public class WWXML
 
     /**
      * Returns the byte order constant for a specified string. This performs a mapping between text and an AVKey
-     * constant: <table> <th><td>Text</td><td>Constant</td></th> <tr><td>LittleEndian</td><td>{@link
-     * AVKey#LITTLE_ENDIAN}</td></tr> <tr><td>BigEndian</td><td>{@link AVKey#BIG_ENDIAN}</td></tr> </table>
+     * constant: 
+     * <table><caption>Key/Values</caption>
+     * <tr><th>Text</th><th>Constant</th></tr> 
+     * <tr><td>LittleEndian</td><td>{@link AVKey#LITTLE_ENDIAN}</td></tr> 
+     * <tr><td>BigEndian</td><td>{@link AVKey#BIG_ENDIAN}</td></tr> 
+     * </table>
      *
      * @param s the string to parse as a byte order.
      *
@@ -3684,8 +3688,12 @@ public class WWXML
 
     /**
      * Returns the string text for a specified byte order constant. This performs a mapping between text and an AVKey
-     * constant: <table> <th><td>Text</td><td>Constant</td></th> <tr><td>LittleEndian</td><td>{@link
-     * AVKey#LITTLE_ENDIAN}</td></tr> <tr><td>BigEndian</td><td>{@link AVKey#BIG_ENDIAN}</td></tr> </table>
+     * constant: 
+     * <table><caption>Key/Values</caption>
+     * <tr><th>Text</th><th>Constant</th></tr> 
+     * <tr><td>LittleEndian</td><td>{@link AVKey#LITTLE_ENDIAN}</td></tr> 
+     * <tr><td>BigEndian</td><td>{@link AVKey#BIG_ENDIAN}</td></tr> 
+     * </table>
      *
      * @param byteOrder the byte order constant to encode as a string.
      *
@@ -3716,9 +3724,14 @@ public class WWXML
 
     /**
      * Returns the data type constant for a specified string. This performs a mapping between text and an AVKey
-     * constant: <table> <th><td>Text</td><td>Constant</td></th> <tr><td>Float32</td><td>{@link AVKey#FLOAT32}</td></tr>
-     * <tr><td>Int32</td><td>{@link AVKey#INT32}</td></tr> <tr><td>Int16</td><td>{@link AVKey#INT16}</td></tr>
-     * <tr><td>Int8</td><td>{@link AVKey#INT8}</td></tr> </table>
+     * constant: 
+     * <table><caption>Key/Values</caption>
+     * <tr><th>Text</th><th>Constant</th></tr> 
+     * <tr><td>Float32</td><td>{@link AVKey#FLOAT32}</td></tr>
+     * <tr><td>Int32</td><td>{@link AVKey#INT32}</td></tr> 
+     * <tr><td>Int16</td><td>{@link AVKey#INT16}</td></tr>
+     * <tr><td>Int8</td><td>{@link AVKey#INT8}</td></tr> 
+     * </table>
      *
      * @param s the string to parse as a data type.
      *
@@ -3753,7 +3766,10 @@ public class WWXML
 
     /**
      * Returns the string text for a specified data type constant. This performs a mapping between text and an AVKey
-     * constant: <table> <th><td>Text</td><td>Constant</td></th> <tr><td>Float32</td><td>{@link AVKey#FLOAT32}</td></tr>
+     * constant: 
+     * <table><caption>Key/Values</caption>
+     * <tr><th>Text</th><th>Constant</th></tr> 
+     * <tr><td>Float32</td><td>{@link AVKey#FLOAT32}</td></tr>
      * <tr><td>Int32</td><td>{@link AVKey#INT32}</td></tr> <tr><td>Int16</td><td>{@link AVKey#INT16}</td></tr>
      * <tr><td>Int8</td><td>{@link AVKey#INT8}</td></tr> </table>
      *

@@ -14,7 +14,7 @@ import java.util.zip.*;
 
 /**
  * Implements the {@link KMLDoc} interface for KMZ files located within a computer's file system.
- * <p/>
+ * <p>
  * Note: This class does not yet resolve references to files in other KMZ archives. For example, it does not resolve
  * references like this: <i>../other.kmz/file.png</i>.
  *
@@ -87,7 +87,7 @@ public class KMZFile implements KMLDoc
     /**
      * Returns an {@link InputStream} to a specified file within the KMZ file. The file's path is resolved relative to
      * the internal root of the KMZ file.
-     * <p/>
+     * <p>
      * Note: This class does not yet resolve references to files in other KMZ archives. For example, it does not resolve
      * references like this: <i>../other.kmz/file.png</i>.
      *
@@ -128,7 +128,7 @@ public class KMZFile implements KMLDoc
     /**
      * Returns an absolute path to a specified file within the KMZ file. The file's path is resolved relative to the
      * internal root of the KMZ file.
-     * <p/>
+     * <p>
      * Note: This class does not yet resolve references to files in other KMZ archives. For example, it does not resolve
      * references like this: <i>../other.kmz/file.png</i>. // TODO
      *

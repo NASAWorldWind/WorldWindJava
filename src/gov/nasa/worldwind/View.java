@@ -18,19 +18,21 @@ import gov.nasa.worldwind.view.ViewPropertyLimits;
  * follows the OpenGL convention of a right-handed coordinate system with the origin at the eye point and looking down
  * the negative Z axis. <code>View</code> also provides a transformation from eye coordinates to screen coordinates,
  * following the OpenGL convention of an origin in the lower left hand screen corner.
- * <p/>
+ * <p>
  * Most of the accessor and computation methods on <code>View</code> will use viewing state computed in the last call to
  * {@link #apply(gov.nasa.worldwind.render.DrawContext) apply}.
- * <p/>
- * The following methods return state values <i>updated in the most recent call to apply</i>. <code> <ul>
- * <li>getEyePosition</li> <li>getEyePoint</li> <li>getUpVector</li> <li>getForwardVector</li>
- * <li>getModelviewMatrix</li> <li>getViewport</li> <li>getFrustum</li> <li>getFrustumInModelCoordinates</li>
- * <li>getProjectionMatrix</li> </code> </ul>
- * <p/>
+ * <p>
+ * The following methods return state values <i>updated in the most recent call to apply</i>.<ul>
+ * <li><code>getEyePosition</code></li> <li><code>getEyePoint</code></li> 
+ * <li><code>getUpVector</code></li> <li><code>getForwardVector</code></li> 
+ * <li><code>getModelviewMatrix</code></li> <li><code>getViewport</code></li> 
+ * <li><code>getFrustum</code></li> <li><code>getFrustumInModelCoordinates</code></li> 
+ * <li><code>getProjectionMatrix</code></li> </ul> 
+ * <p>
  * The following methods return computed values using state that was updated in the most recent call to
- * <code>apply</code>. <code> <ul> <li>project</li> <li>unproject</li> <li>computeRayFromScreenPoint</li>
+ * <code>apply</code>. <ul> 
+ * <li>project</li> <li>unproject</li> <li>computeRayFromScreenPoint</li>
  * <li>computePositionFromScreenPoint</li> <li>computePixelSizeAtDistance</li> <li>computeHorizonDistance</li> </ul>
- * </code>
  *
  * @author Paul Collins
  * @version $Id: View.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -47,7 +49,7 @@ public interface View extends WWObject, Restorable
     /**
      * Returns the current geographic coordinates of this view's eye position, as computed for the most recent model
      * traversal.
-     * <p/>
+     * <p>
      * Note: The value returned is not necessarily the value specified to {@link #setEyePosition(gov.nasa.worldwind.geom.Position)}
      * but is the eye position corresponding to this view's most recently applied state.
      *
@@ -68,7 +70,7 @@ public interface View extends WWObject, Restorable
     /**
      * Returns the current geographic coordinates of this view's eye position, as determined from this view's current
      * parameters.
-     * <p/>
+     * <p>
      * Note: The value returned is not necessarily the value specified to {@link #setEyePosition(gov.nasa.worldwind.geom.Position)}
      * but is the eye position corresponding to this view's current parameters.
      *

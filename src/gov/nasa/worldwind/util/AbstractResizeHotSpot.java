@@ -17,9 +17,9 @@ import java.awt.event.*;
  * the resize controls. The HotSpot is defined by a direction, for example, {@link AVKey#NORTH} indicates that the
  * HotSpot resizes the frame vertically from the north edge (the user clicks the top edge of the frame and drags
  * vertically).
- * <p/>
+ * <p>
  * An instance of this class should be added to the picked object when the edge or corner of the frame is picked.
- * <p/>
+ * <p>
  * Subclasses must the implement {#getSize}, {#setSize}, {#getScreenPoint}, and {#setScreenPoint} to manipulate the
  * frame that they want to resize.
  *

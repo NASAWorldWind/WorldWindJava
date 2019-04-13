@@ -14,11 +14,10 @@ import java.awt.*;
  * Holds attributes for a {@link TacticalGraphic}. Changes made to the attributes are applied to the graphic when the
  * <code>WorldWindow</code> renders the next frame. Instances of <code>TacticalGraphicAttributes</code> may be shared by
  * many graphics, thereby reducing the memory normally required to store attributes for each graphic.
- * <p/>
+ * <p>
  * TacticalGraphicAttributes is used to override default attributes determined by a graphic's symbol set. Any non-null
  * attributes will override the corresponding default attributes. Here's an example of overriding only the outline
  * material of a graphic without affecting other styling specified by the symbol set:
- * <p/>
  * <pre>
  * TacticalGraphic graphic = ...
  * TacticalGraphicAttributes attrs = new BasicTacticalGraphicAttributes();
@@ -54,7 +53,7 @@ public interface TacticalGraphicAttributes
     /**
      * Indicates the graphic scale as a ratio of the graphics's original size. See {@link #setScale(Double)} for a
      * description of how scale is used.
-     * <p/>
+     * <p>
      * Scale directly affects the size of point graphics. Line and area graphics do not change size based on the scale,
      * but if a line or area graphic includes a tactical symbol as part of a composite shape, the scale may be applied
      * to the symbol.
@@ -68,7 +67,7 @@ public interface TacticalGraphicAttributes
      * number greater than 0.0: values less than 1.0 make the graphic smaller, while values greater than 1.0 make the
      * symbol larger. The scale applies to both the graphic and the graphic modifiers. The specified scale must be
      * either <code>null</code> or greater than or equal to 0.0.
-     * <p/>
+     * <p>
      * Scale directly affects the size of point graphics. Line and area graphics do not change size based on the scale,
      * but if a line or area graphic includes a tactical symbol as part of a composite shape, the scale may be applied
      * to the symbol.

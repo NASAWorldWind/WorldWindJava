@@ -290,7 +290,7 @@ public class SurfaceQuad extends AbstractSurfaceShape implements Exportable
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to include the globe's state key in the returned state key.
      *
      * @see gov.nasa.worldwind.globes.Globe#getStateKey(DrawContext)

@@ -33,7 +33,7 @@ public class WCS100Capabilities extends AbstractXMLEventParser
      * @param uri The URI of the server.
      *
      * @return The WCS capabilities document for the specified server.
-     *
+     * @throws java.lang.Exception if an error occurs
      * @throws IllegalArgumentException if the specified URI is invalid.
      * @throws gov.nasa.worldwind.exception.WWRuntimeException
      *                                  if an error occurs retrieving the document.

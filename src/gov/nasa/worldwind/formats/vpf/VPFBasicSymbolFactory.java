@@ -183,7 +183,7 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     /**
      * From MIL-DTL-89045A, section 3.5.3.1.1: A point feature may be symbolized as either a point symbol or as a text
      * label or both.
-     * <p/>
+     * <p>
      * From MIL-HDBK-857A, section 6.5.3.1: For point features (e.g., buoys, beacons, lights) that are composed of
      * several symbol components, displaying the components according to the row ids in the *sym.txt file will result in
      * the properly constructed composite symbol.
@@ -241,12 +241,12 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     /**
      * From MIL-DTL-89045A, section 3.5.3.1.1: An area feature may be symbolized by any combination of point, line, or
      * area symbol as well as with a text label.
-     * <p/>
+     * <p>
      * From MIL-HDBK-857A, section 6.4.1.4: It is also possible for there to exist multiple symbology components for
      * area features.  The most common situation is the need for the addition of the low accuracy symbol (see
      * 6.4.1.3.4).  This situation is implemented in the same way as for points, with an additional row in the *sym.txt
      * table to control the placement of the low accuracy symbol.
-     * <p/>
+     * <p>
      * It is also possible for the symbolization of an area feature to require multiple rows to specify the components
      * of the full area symbol.  This situation will exist for those area features requiring both a solid fill and a
      * pattern fill.  In this case, the two area symbols will be specified using two rows in the *sym.txt file with the
@@ -254,11 +254,11 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
      * also requires a boundary and/or a centered point symbol, those symbols will be specified in the second row for
      * the area feature (along with the area pattern).  Section 6.5 explains the ramifications of this approach in more
      * detail.
-     * <p/>
+     * <p>
      * For these reasons, as well as for the placement of text labels (see section 6.4.1.5), it is crucial that
      * application software access all rows from the sym.txt file for a given product/delineation/feature code in order
      * to ensure full symbolization for any feature.
-     * <p/>
+     * <p>
      * From MIL-HDBK-857A, section 6.5.3.2: There are some area features (e.g., Maritime Areas) that require both a
      * solid fill and one or more pattern fills.  Since the areasym column can only contain a single CGM reference,
      * there is a separate row in the *sym.txt file for each of the area symbols, as well as for the line symbol and/or

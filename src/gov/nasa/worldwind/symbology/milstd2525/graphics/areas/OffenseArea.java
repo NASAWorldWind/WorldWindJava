@@ -12,7 +12,6 @@ import java.util.*;
 
 /**
  * Implementation of offense area graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Assault Position (2.X.2.5.3.1)</li> <li>Attack Position (2.X.2.5.3.2)</li> <li>Objective (2.X.2.5.3.5)</li>
  * <li>Penetration Box (2.X.2.5.3.6)</li> </ul>
  *

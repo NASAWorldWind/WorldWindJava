@@ -385,12 +385,16 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
 
     /**
      * Appends layer configuration parameters as elements to the specified context. This appends elements for the
-     * following parameters: <table> <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
-     * AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#OPACITY}</td><td>Opacity</td><td>Double</td></tr> <tr><td>{@link AVKey#MAX_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@max</td><td>Double</td></tr>
-     * <tr><td>{@link AVKey#MIN_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@min</td><td>Double</td></tr> <tr><td>{@link
-     * AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr> <tr><td>{@link
-     * AVKey#MAP_SCALE}</td><td>MapScale</td><td>Double</td></tr> <tr><td>{@link AVKey#SCREEN_CREDIT}</td><td>ScreenCredit</td><td>ScreenCredit</td></tr>
+     * following parameters: 
+     * <table><caption>Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
+     * <tr><td>{@link AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#OPACITY}</td><td>Opacity</td><td>Double</td></tr>
+     * <tr><td>{@link AVKey#MAX_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@max</td><td>Double</td></tr>
+     * <tr><td>{@link AVKey#MIN_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@min</td><td>Double</td></tr>
+     * <tr><td>{@link AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr>
+     * <tr><td>{@link AVKey#MAP_SCALE}</td><td>MapScale</td><td>Double</td></tr>
+     * <tr><td>{@link AVKey#SCREEN_CREDIT}</td><td>ScreenCredit</td><td>ScreenCredit</td></tr>
      * </table>
      *
      * @param params  the key-value pairs which define the layer configuration parameters.
@@ -441,13 +445,17 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
     /**
      * Parses layer configuration parameters from the specified DOM document. This writes output as key-value pairs to
      * params. If a parameter from the XML document already exists in params, that parameter is ignored. Supported key
-     * and parameter names are: <table> <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
-     * AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#OPACITY}</td><td>Opacity</td><td>Double</td></tr> <tr><td>{@link AVKey#MAX_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@max</td><td>Double</td></tr>
-     * <tr><td>{@link AVKey#MIN_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@min</td><td>Double</td></tr> <tr><td>{@link
-     * AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr> <tr><td>{@link
-     * AVKey#MAP_SCALE}</td><td>MapScale</td><td>Double</td></tr> <tr><td>{@link AVKey#SCREEN_CREDIT}</td><td>ScreenCredit</td><td>{@link
-     * ScreenCredit}</td></tr> </table>
+     * and parameter names are: 
+     * <table><caption>Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> 
+     * <tr><td>{@link AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td> </tr> 
+     * <tr><td>{@link AVKey#OPACITY}</td><td>Opacity</td><td>Double</td></tr> 
+     * <tr><td>{@link AVKey#MAX_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@max</td><td>Double</td></tr>
+     * <tr><td>{@link AVKey#MIN_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@min</td><td>Double</td></tr> 
+     * <tr><td>{@link AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr> 
+     * <tr><td>{@link AVKey#MAP_SCALE}</td><td>MapScale</td><td>Double</td></tr> 
+     * <tr><td>{@link AVKey#SCREEN_CREDIT}</td><td>ScreenCredit</td><td>{@link ScreenCredit}</td></tr> 
+     * </table>
      *
      * @param domElement the XML document root to parse for layer configuration elements.
      * @param params     the output key-value pairs which recieve the layer configuration parameters. A null reference

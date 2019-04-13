@@ -17,7 +17,6 @@ import java.util.*;
 
 /**
  * Implementation of the irregular Fire Support area graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Area Target (2.X.4.3.1)</li> <li>Bomb (2.X.4.3.1.5)</li> <li>Airspace Coordination Area (ACA), Irregular
  * (2.X.4.3.2.2.1)</li> <li>Free Fire Area (FFA), Irregular (2.X.4.3.2.3.1)</li> <li>Restrictive Fire Area (RFA),
  * Irregular (2.X.4.3.2.5.1)</li> <li>Terminally Guided Munitions Footprint</li> <li>Sensor Zone, Irregular</li>

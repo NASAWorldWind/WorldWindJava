@@ -174,12 +174,12 @@ public class TacticalGraphicUtil
     /**
      * Compute a point along a Bezier curve defined by a list of control points. The first and last points should mark
      * the start and end of the curve.
-     * <p/>
+     * <p>
      * This function implements the Bezier curve equation from "Mathematics for 3D Game Programming and Computer
      * Graphics, Second Edition" by Eric Lengyel (equation 15.16, pg. 458).
-     * <p/>
+     * <p>
      * A typical usage looks like this:
-     * <pre>
+     * <pre>{@code
      * Vec4[] controlPoints = ... // Determine control points appropriate for your curve
      *
      * List<Position> curvePositions = new ArrayList<Position>();
@@ -194,7 +194,7 @@ public class TacticalGraphicUtil
      *     Position pos = globe.computePositionFromPoint(p);
      *     curvePositions.add(pos);
      * }
-     * </pre>
+     * }</pre>
      *
      * @param controlPoints Control points for the curve.
      * @param t             Interpolation parameter in the range [0..1].

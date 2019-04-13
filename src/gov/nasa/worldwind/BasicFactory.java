@@ -94,7 +94,7 @@ public class BasicFactory implements Factory
      * <li>{@link gov.nasa.worldwind.ogc.wcs.wcs100.WCS100Capabilities}</li>
      * <li>{@link String} holding a file name, a name of a resource on the classpath, or a string representation of a
      * URL</li></ul>
-     * <p/>
+     * <p>
      *
      * @param configSource the configuration source. See above for supported types.
      * @param params       key-value parameters to override or supplement the information provided in the specified

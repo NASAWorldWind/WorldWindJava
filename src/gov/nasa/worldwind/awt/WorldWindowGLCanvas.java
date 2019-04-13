@@ -24,14 +24,14 @@ import java.util.*;
  * <code>WorldWindowGLCanvas</code> is a heavyweight AWT component for displaying WorldWind {@link Model}s (globe and
  * layers). It's a self-contained component intended to serve as an application's <code>WorldWindow</code>. Construction
  * options exist to specify a specific graphics device and to share graphics resources with another graphics device.
- * <p/>
+ * <p>
  * Heavyweight AWT components such as instances of this class can be used in conjunction with lightweight Swing
  * components. A discussion of doing so is in the <em>Heavyweight and Lightweight Issues</em> section of the <a
  * href="http://download.java.net/media/jogl/doc/userguide/">"JOGL User's Guide"</a>. All that's typically necessary is
  * to invoke the following methods of the indicated Swing classes: {@link javax.swing.ToolTipManager#setLightWeightPopupEnabled(boolean)},
  * {@link javax.swing.JPopupMenu#setLightWeightPopupEnabled(boolean)} and {@link javax.swing.JPopupMenu#setLightWeightPopupEnabled(boolean)}.
  * These methods should be invoked within a <code>static</code> block within an application's main class.
- * <p/>
+ * <p>
  * This class is capable of supporting stereo devices. To cause a stereo device to be selected and used, specify the
  * Java VM property "gov.nasa.worldwind.stereo.mode=device" prior to creating an instance of this class. A stereo
  * capable {@link SceneController} such as {@link gov.nasa.worldwind.StereoSceneController} must also be specified in
@@ -39,7 +39,7 @@ import java.util.*;
  * stereo from being used by subsequently opened {@code WorldWindowGLCanvas}es, set the property to a an empty string,
  * "". If a stereo device cannot be selected and used, this falls back to a non-stereo device that supports WorldWind's
  * minimum requirements.
- * <p/>
+ * <p>
  * Under certain conditions, JOGL replaces the <code>GLContext</code> associated with instances of this class. This then
  * necessitates that all resources such as textures that have been stored on the graphic devices must be regenerated for
  * the new context. WorldWind does this automatically by clearing the associated {@link GpuResourceCache}. Objects
@@ -88,8 +88,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      *
      * @param shareWith a <code>WorldWindow</code> with which to share graphics resources.
      *
-     * @see GLCanvas#GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
-     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)
+     * @see "GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
+     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)"
      */
     public WorldWindowGLCanvas(WorldWindow shareWith)
     {
@@ -128,8 +128,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      * @param device    the <code>GraphicsDevice</code> on which to create the window. May be null, in which case the
      *                  default screen device of the local {@link GraphicsEnvironment} is used.
      *
-     * @see GLCanvas#GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
-     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)
+     * @see "GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
+     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)"
      */
     public WorldWindowGLCanvas(WorldWindow shareWith, java.awt.GraphicsDevice device)
     {
@@ -172,8 +172,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      * @param chooser      a chooser object that customizes the specified capabilities. May be null, in which case a
      *                     default chooser is used.
      *
-     * @see GLCanvas#GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
-     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)
+     * @see "GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
+     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)"
      */
     public WorldWindowGLCanvas(WorldWindow shareWith, java.awt.GraphicsDevice device,
         GLCapabilities capabilities, GLCapabilitiesChooser chooser)

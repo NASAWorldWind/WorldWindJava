@@ -17,7 +17,6 @@ import java.util.*;
 
 /**
  * Implementation of aviation route control point graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Air Control Point (2.X.2.2.1.1)</li> <li>Communications Checkpoint (2.X.2.2.1.2)</li> </ul>
  *
  * @author pabercrombie

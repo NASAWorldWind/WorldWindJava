@@ -292,10 +292,10 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
 
     /**
      * Compute a point along a Hermite curve defined by two control point and tangent vectors at those points.
-     * <p/>
+     * <p>
      * This function implements the Hermite curve equation from "Mathematics for 3D Game Programming and Computer
      * Graphics, Second Edition" by Eric Lengyel (equation 15.15, pg. 457).
-     * <p/>
+     * <p>
      * H(t) = (1 - 3t<sup>2</sup> + 2t<sup>3</sup>)P<sub>1</sub> + t<sup>2</sup>(3 - 2t)P<sub>2</sub> + t(t -
      * 1)<sup>2</sup>T<sub>1</sub> + t<sup>2</sup>(t - 1)T<sub>2</sub>
      *

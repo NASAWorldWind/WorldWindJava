@@ -219,6 +219,10 @@ public class Box extends AbstractAirspace
     /**
      * Specifies the azimuth angles for this box's four corners, relative to geographic north. Specifying a null
      * argument indicates that the default angle should be used.
+     * @param beginLeftAzimuth the beginning left angle.
+     * @param beginRightAzimuth the beginning right angle.
+     * @param endLeftAzimuth the ending left angle.
+     * @param endRightAzimuth the ending right angle.
      */
     public void setCornerAzimuths(Angle beginLeftAzimuth, Angle beginRightAzimuth, Angle endLeftAzimuth,
         Angle endRightAzimuth)

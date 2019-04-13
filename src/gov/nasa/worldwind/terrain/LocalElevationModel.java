@@ -19,7 +19,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Implements an elevation model for a local file or collection of files containing elevation data.
- * <p/>
+ * <p>
  * Note: Unless the amount of data associated with the local elevation models is small, it's best to construct and add
  * elevations to a local elevation model on a thread other than the event dispatch thread in order to avoid freezing the
  * user interface.

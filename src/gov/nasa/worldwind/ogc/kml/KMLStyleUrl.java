@@ -27,7 +27,7 @@ public class KMLStyleUrl extends KMLAbstractObject
 
     /**
      * Resolves a <i>styleUrl</i> to a style selector, which is either a style or style map.
-     * <p/>
+     * <p>
      * If the url refers to a remote resource and the resource has not been retrieved and cached locally, this method
      * returns null and initiates a retrieval.
      *

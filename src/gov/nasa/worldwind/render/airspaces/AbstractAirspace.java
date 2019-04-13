@@ -647,6 +647,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
      * Determines which attributes -- normal, highlight or default -- to use each frame. Places the result in this
      * shape's current active attributes.
      *
+     * @param dc the draw context.
      * @see #getActiveAttributes()
      */
     protected void determineActiveAttributes(DrawContext dc)

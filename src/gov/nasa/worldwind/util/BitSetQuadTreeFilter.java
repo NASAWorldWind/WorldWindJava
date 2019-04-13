@@ -15,7 +15,7 @@ import java.util.*;
  * tree's cells. For each submitted item, this class' {@link #doOperation} method is called for each leaf or
  * intermediate cell that intersects the item. That method typically stores the item's association with the intersecting
  * cell, either to populate a quadtree membership list or to mark it as a visible item.
- * <p/>
+ * <p>
  * The filter uses a bit-set to identify cells that intersect submitted items. This minimal memory eliminates the need
  * to retain cell information other than identity. Only cell identities are retained by this abstract class. Subclasses
  * provide the means to retain item information associated with intersecting cells.
@@ -258,7 +258,7 @@ public abstract class BitSetQuadTreeFilter
      * A quadtree filter that determines the bit positions of cells associated with items and intersecting a specified
      * region. Typically used to traverse the bit-set index of a populated quadtree to determine potentially visible
      * items.
-     * <p/>
+     * <p>
      * This class requires a previously populated filter and determines which of its cells intersect a specified
      * sector.
      */

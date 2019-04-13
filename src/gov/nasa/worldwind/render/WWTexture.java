@@ -10,7 +10,7 @@ import com.jogamp.opengl.util.texture.TextureCoords;
 
 /**
  * Represents a texture derived from an image source such as an image file or a {@link java.awt.image.BufferedImage}.
- * <p/>
+ * <p>
  * The interface contains a method, {@link #isTextureInitializationFailed()} to determine whether the instance failed to
  * convert an image source to a texture. If such a failure occurs, the method returns true and no further attempts are
  * made to create the texture.
@@ -29,10 +29,10 @@ public interface WWTexture
 
     /**
      * Makes this texture the current texture for rendering.
-     * <p/>
+     * <p>
      * If the implementing instance's internal texture has not been created from its image source, the implementing
      * class determines when the texture is retrieved and available.
-     * <p/>
+     * <p>
      * If a texture cannot be created from its image source it cannot be bound. This method returns an indication of
      * whether the texture was bound or was not bound due to a failure during creation.
      *

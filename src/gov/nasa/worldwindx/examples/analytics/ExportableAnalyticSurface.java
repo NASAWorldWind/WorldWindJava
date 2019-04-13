@@ -122,7 +122,7 @@ public class ExportableAnalyticSurface extends AnalyticSurface implements Export
      * the exportImageWidth and exportImageHeight fields may be set to indicate the size of the exported ground overlay
      * image. These values are both 1024 by default. The surface's opacity attributes are ignored, but any opacity
      * values specified in the surface's color values are captured in the ground overlay image.
-     * <p/>
+     * <p>
      * If color values have not been specified for the surface then the interior if the output image is blank. The image
      * outline is exported only if the surface's drawOutline file is true.
      *

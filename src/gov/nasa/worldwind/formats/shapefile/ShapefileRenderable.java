@@ -24,7 +24,7 @@ public abstract class ShapefileRenderable extends WWObjectImpl
      * AttributeDelegate provides an entry point for configuring a ShapefileRenderable.Record's shape attributes and
      * key-value attributes during ShapefileRenderable construction. In particular, the dBASE attributes associated with
      * a ShapefileRecord are available only during these entry points.
-     * <p/>
+     * <p>
      * AttributeDelegate entry points may be called on a non-EDT thread. Implementations of AttributeDelegate may modify
      * the ShapefileRenderable.Record passed to these methods, but should not modify the ShapefileRenderable without
      * synchronizing access with the thread used to create the ShapefileRenderable.
@@ -35,7 +35,7 @@ public abstract class ShapefileRenderable extends WWObjectImpl
          * Entry point for configuring a ShapefileRenderable.Record's shape attributes and key-value attributes during
          * ShapefileRenderable construction. The ShapefileRecord's dBASE attributes are available only during the
          * execution of this method.
-         * <p/>
+         * <p>
          * This method may be called on a non-EDT thread. Implementations may modify the renderableRecord, but should
          * not modify the ShapefileRenderable without synchronizing access with the thread used to create the
          * ShapefileRenderable.

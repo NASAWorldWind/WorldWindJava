@@ -85,6 +85,10 @@ public class ClippingTessellator
      * Computes a 4-bit code indicating the vertex's location in the 9 cell grid defined by the clip coordinates and the
      * eight adjacent spaces defined by extending the min/max boundaries to infinity. 0 indicates that the vertex is
      * inside the clip coordinates.
+     * 
+     * @param degreesLatitude the latitude in degrees.
+     * @param degreesLongitude the longitude in degrees.
+     * @return The clip code. 0 indicates that the vertex is inside the clip coordinates.
      */
     protected int clipCode(double degreesLatitude, double degreesLongitude)
     {

@@ -159,9 +159,9 @@ public class BasicMemoryCache implements MemoryCache
 
     /**
      * Sets the new low water level in cache units, which controls how aggresively the cache discards items.
-     * <p/>
+     * <p>
      * When the cache fills, it removes items until it reaches the low water level.
-     * <p/>
+     * <p>
      * Setting a high loWater level will increase cache misses, but decrease average add time, but setting a low loWater
      * will do the opposite.
      *
@@ -189,7 +189,7 @@ public class BasicMemoryCache implements MemoryCache
     /**
      * Returns true if the cache contains the item referenced by key. No guarantee is made as to whether or not the item
      * will remain in the cache for any period of time.
-     * <p/>
+     * <p>
      * This function does not cause the object referenced by the key to be marked as accessed. <code>getObject()</code>
      * should be used for that purpose.
      *

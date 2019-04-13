@@ -33,7 +33,7 @@ public abstract class KMLAbstractStyleSelector extends KMLAbstractObject
      * Obtains the selector's effective style for a specified style type (<i>IconStyle</i>, <i>ListStyle</i>, etc.) and
      * state (<i>normal</i> or <i>highlight</i>). The returned style is the result of merging values from the specified
      * style selectors and style URL, with precedence given to style selectors.
-     * <p/>
+     * <p>
      * Remote <i>styleUrls</i> that have not yet been resolved are not included in the result. In this case the returned
      * sub-style is marked with a field named {@link gov.nasa.worldwind.avlist.AVKey#UNRESOLVED}. The same is true when
      * a StyleMap refers to a Style other than one internal to the KML document.
@@ -88,7 +88,7 @@ public abstract class KMLAbstractStyleSelector extends KMLAbstractObject
      * Obtains the selector's effective style for a specified style type (<i>IconStyle</i>, <i>ListStyle</i>, etc.) and
      * state (<i>normal</i> or <i>highlight</i>). The returned style is the result of merging values from the specified
      * style selector and style URL, with precedence given to style selector.
-     * <p/>
+     * <p>
      * Remote <i>styleUrls</i> that have not yet been resolved are not included in the result. In this case the returned
      * sub-style is marked with the value {@link gov.nasa.worldwind.avlist.AVKey#UNRESOLVED}.
      *

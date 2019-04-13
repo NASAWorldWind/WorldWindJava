@@ -25,9 +25,12 @@ public class BasicNamespaceContext implements NamespaceContext
     private Map<String, Set<String>> prefixesByURI = new HashMap<String, Set<String>>();
 
     /**
-     * Sole constructor for BasicNamespaceContext. This configures the following namespaces: <table>
-     * <tr><th>Prefix</th><th>URI</th></tr> <tr><td>xml</td><td>http://www.w3.org/XML/1998/namespace</td></tr>
-     * <tr><td>xmlns</td><td>http://www.w3.org/2000/xmlns/</td></tr> <tr><td>xlink</td><td>http://www.w3.org/1999/xlink</td></tr>
+     * Sole constructor for BasicNamespaceContext. This configures the following namespaces: 
+     * <table><caption>Namespaces</caption>
+     * <tr><th>Prefix</th><th>URI</th></tr> 
+     * <tr><td>xml</td><td>http://www.w3.org/XML/1998/namespace</td></tr>
+     * <tr><td>xmlns</td><td>http://www.w3.org/2000/xmlns/</td></tr> 
+     * <tr><td>xlink</td><td>http://www.w3.org/1999/xlink</td></tr>
      * </table>
      */
     public BasicNamespaceContext()

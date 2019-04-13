@@ -13,7 +13,7 @@ package gov.nasa.worldwind.formats.dds;
  * first color is less than the second color, then one additional color is defined for a total of three colors, and the
  * fourth color is interpreted as transparent black. Finally, the block contains 4x4 2 bit indices into the array of
  * four colors (one of which may be transparent black).
- * <p/>
+ * <p>
  * From http://msdn.microsoft.com/en-us/library/bb204843(VS.85).aspx:
  * If 64-bit blocks - that is, format DXT1 - are used for the texture, it is possible to mix the opaque and 1-bit alpha
  * formats on a per-block basis within the same texture. In other words, the comparison of the unsigned integer

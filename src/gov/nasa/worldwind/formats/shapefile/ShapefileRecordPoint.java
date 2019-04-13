@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
 
 /**
  * Represents a Shapefile record with a point shape type. Point shapes represent a single x,y coordinate pair.
- * <p/>
+ * <p>
  * Point shapes may have an optional z-coordinate or m-coordinate that accompanies the x,y coordinate pair. If a Point
  * has a z-coordinate, then <code>{@link #getZ()}</code> returns a non-<code>null</code> value. If a Point has an
  * m-coordinate, then <code>{@link #getM()}</code> returns a non-<code>null</code> value.

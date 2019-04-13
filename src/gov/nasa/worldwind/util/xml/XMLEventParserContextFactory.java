@@ -157,7 +157,7 @@ public class XMLEventParserContextFactory
      * Constructs and returns a parser context for a specified mime type and namespace. The list of registered parser
      * contexts is searched from first to last. A parser context is constructed from the first entry matching the
      * specified mime type and namespace. Null is returned if no match is found.
-     * <p/>
+     * <p>
      * Note that the empty namespace, {@link XMLConstants#NULL_NS_URI} does not match any other namespace. In order for
      * a parser context with the empty namespace to be returned, one with the empty namespace must be registered.
      *

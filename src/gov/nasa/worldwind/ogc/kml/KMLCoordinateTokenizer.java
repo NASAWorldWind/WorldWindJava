@@ -17,17 +17,17 @@ import java.util.*;
  * <pre>
  * -18.3,23.5,0 -19.3,23.4,1 -20.0,23.5,2
  * </pre>
- * <p/>
+ * <p>
  * However, some KML files do not follow the spec and embed white space within the coordinate tuples. This tokenizer
  * attempts to be lenient with whitespace handling. If a tuple ends with a comma, the tokenizer considers the next token
  * in the input stream to be part of the same coordinate, not the start of a new coordinate.
- * <p/>
+ * <p>
  * For example:
  * <pre>
  * -18.3,23.56,9     34.9, 56.0, 2     56.9, 19     90.0,23.9,44
  * </pre>
  * Will be tokenized to four coordinates: (23.56, -18.3, 9), (56.0, 34.9, 2), (56.9, 19, 0), and (90, 23.9, 44).
- * <p/>
+ * <p>
  * The tokenizer also handles coordinate strings with no embedded white space. For example:
  * <pre>
  * -18.3,23.56,9,34.9,56.0,2

@@ -257,7 +257,7 @@ public interface ShapeAttributes extends Exportable
      * used. For example, if <code>factor</code> is 3, each bit is repeated 3 times before using the next bit. The
      * specified <code>factor</code> must be either zero or an integer greater than zero. The <code>factor</code> may be
      * limited by an implementation-defined maximum during rendering. The maximum stipple factor is typically 256.
-     * <p/>
+     * <p>
      * To disable outline stippling, either specify a stipple factor of 0, or specify a stipple pattern of all 1 bits:
      * <code>0xFFFF</code>.
      *
@@ -285,7 +285,7 @@ public interface ShapeAttributes extends Exportable
      * the bit pattern repeats after reaching n*16 pixels, where n is the stipple factor. Each bit is repeated n-times
      * according to the outline stipple factor. For example, if the outline stipple factor is 3, each bit is repeated 3
      * times before using the next bit.
-     * <p/>
+     * <p>
      * To disable outline stippling, either specify a stipple factor of 0, or specify a stipple pattern of all 1 bits:
      * <code>0xFFFF</code>.
      *

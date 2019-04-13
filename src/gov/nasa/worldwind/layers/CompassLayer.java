@@ -139,7 +139,7 @@ public class CompassLayer extends AbstractLayer
      * its image file. Values greater than 1 magify the image, values less than one minify it. If the layer's resize
      * behavior is other than AVKey.RESIZE_KEEP_FIXED_SIZE, the icon's displayed sized is further affected by the value
      * specified by {@link #setCompassToViewportScale(double)} and the current viewport size.
-     * <p/>
+     * <p>
      * The default icon scale is 0.5.
      *
      * @param iconScale the icon scale factor

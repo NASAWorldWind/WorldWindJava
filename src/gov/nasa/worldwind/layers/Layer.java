@@ -46,7 +46,7 @@ public interface Layer extends WWObject, Disposable, Restorable
 
     /**
      * Returns the layer's opacity, the degree to which it is blended with underlying layers.
-     * <p/>
+     * <p>
      * Many layers apply special usage of opacity, and some ignore it in favor of the opacity settings of their internal
      * renderables. See the description of this method in specific layers to determine usage there.
      *
@@ -56,7 +56,7 @@ public interface Layer extends WWObject, Disposable, Restorable
 
     /**
      * Sets the layer's opacity, the degree to which it is blended with underlying layers.
-     * <p/>
+     * <p>
      * Many layers apply special usage of opacity, and some ignore it in favor of the opacity settings of their internal
      * renderables. See the description of this method in specific layers to determine usage there.
      *
@@ -67,7 +67,7 @@ public interface Layer extends WWObject, Disposable, Restorable
 
     /**
      * Indicates whether the layer performs selection during picking.
-     * <p/>
+     * <p>
      * Most layers enable picking by default. However, this becomes inconvenient for {@link
      * gov.nasa.worldwind.render.SurfaceImage} and {@link gov.nasa.worldwind.layers.SurfaceImageLayer}} when the image
      * covers a large area because the view input handlers detect the surface image rather than the terrain as the top
@@ -224,7 +224,7 @@ public interface Layer extends WWObject, Disposable, Restorable
     /**
      * Indicates the altitude above which this layer likely has low value or is not expected to be active. This value is
      * independent of the maximum active altitude, {@link #setMaxActiveAltitude(double)} and does not reflect it.
-     * <p/>
+     * <p>
      * The returned altitude is valid when the field of view indicated by {@link gov.nasa.worldwind.View#getFieldOfView()}
      * is set to its default value. Changing the field of view to any value other than the default may change this
      * layer's maximum effective altitude, but the returned altitude will not reflect that change.
@@ -239,7 +239,7 @@ public interface Layer extends WWObject, Disposable, Restorable
     /**
      * Indicates the altitude below which this layer likely has low value or is not expected to be active. This value is
      * independent of the minimum active altitude, {@link #setMinActiveAltitude(double)} and does not reflect it.
-     * <p/>
+     * <p>
      * The returned altitude is valid when the field of view indicated by {@link gov.nasa.worldwind.View#getFieldOfView()}
      * is set to its default value. Changing the field of view to any value other than the default may change this
      * layer's minimum effective altitude, but the returned altitude will not reflect that change.

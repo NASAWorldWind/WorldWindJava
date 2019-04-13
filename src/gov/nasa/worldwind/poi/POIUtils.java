@@ -28,7 +28,7 @@ public class POIUtils
      *
      * @param urlString the URL to use to invoke the service.
      * @return the service results.
-     * @throws NoItemException  if <code>HTTP_BAD_REQUEST<code> is returned from the service.
+     * @throws NoItemException  if <code>HTTP_BAD_REQUEST</code> is returned from the service.
      * @throws ServiceException if there is a problem invoking the service or retrieving its results.
      */
     public static String callService(String urlString) throws NoItemException, ServiceException
