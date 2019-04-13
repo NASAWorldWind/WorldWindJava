@@ -217,7 +217,7 @@ public class KMLModelPlacemarkImpl extends WWObjectImpl implements KMLRenderable
      * resources will be resolved relative to the .dae file within the archive. Normally references in a KMZ are
      * resolved relative to the root of the archive, but Model references are an exception. See
      * https://developers.google.com/kml/documentation/kmzarchives and https://developers.google.com/kml/documentation/kmlreference#model
-     * <p/>
+     * <p>
      * {@inheritDoc}.
      */
     public String resolveFilePath(String path) throws IOException
@@ -300,10 +300,12 @@ public class KMLModelPlacemarkImpl extends WWObjectImpl implements KMLRenderable
      * calls <code>{@link #setColladaRoot(ColladaRoot)}</code> to specify this link's new network resource, and sends an
      * <code>{@link gov.nasa.worldwind.avlist.AVKey#RETRIEVAL_STATE_SUCCESSFUL}</code> property change event to this
      * link's property change listeners.
-     * <p/>
+     * <p>
      * This does nothing if this <code>KMLNetworkLink</code> has no <code>KMLLink</code>.
      *
      * @param address the address of the resource to retrieve
+     * @throws java.io.IOException if an error occurs
+     * @throws javax.xml.stream.XMLStreamException if an error occurs
      */
     protected void retrieveModel(String address) throws IOException, XMLStreamException
     {

@@ -844,7 +844,7 @@ public class AnnotationAttributes implements Restorable
     }
 
     /**
-     * Specifies whether one or more fields of <i>this</> remain unresolved because they must be retrieved from an
+     * Specifies whether one or more fields of <i>this</i> remain unresolved because they must be retrieved from an
      * external source.
      *
      * @param unresolved true if there are unresolved fields, false if no fields remain unresolved.

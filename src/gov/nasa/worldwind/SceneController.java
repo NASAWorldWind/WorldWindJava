@@ -109,7 +109,7 @@ public interface SceneController extends WWObject, Disposable
      * Specifies the current pick point in AWT screen coordinates, or <code>null</code> to indicate that there is no
      * pick point. Each frame, this scene controller determines which objects are drawn at the pick point and places
      * them in a PickedObjectList. This list can be accessed by calling {@link #getPickedObjectList()}.
-     * <p/>
+     * <p>
      * If the pick point is <code>null</code>, this scene controller ignores the pick point and the list of objects
      * returned by getPickedObjectList is empty.
      *
@@ -130,7 +130,7 @@ public interface SceneController extends WWObject, Disposable
      * Specifies the current pick rectangle in AWT screen coordinates, or <code>null</code> to indicate that there is no
      * pick rectangle. Each frame, this scene controller determines which objects intersect the pick rectangle and
      * places them in a PickedObjectList. This list can be accessed by calling {@link #getObjectsInPickRectangle()}.
-     * <p/>
+     * <p>
      * If the pick rectangle is <code>null</code>, this scene controller ignores the pick rectangle and the list of
      * objects returned by getObjectsInPickRectangle is empty.
      *

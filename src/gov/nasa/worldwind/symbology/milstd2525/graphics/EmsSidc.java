@@ -10,7 +10,7 @@ package gov.nasa.worldwind.symbology.milstd2525.graphics;
  * SIDC constants for graphics in the "Emergency Management" scheme (MIL-STD-2525C Appendix G). The constants in this
  * interface are "masked" SIDCs. All fields except Scheme, Category, and Function ID are filled with hyphens. (The other
  * fields do not identity a type of graphic, they modify the graphic.)
- * <p/>
+ * <p>
  * Note: this interface only defines constants for tactical graphics in Appendix G.
  *
  * @author pabercrombie

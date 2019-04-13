@@ -21,8 +21,8 @@ import java.nio.*;
 /**
  * A general ellipsoid volume defined by a center position and the three ellipsoid axis radii. If A is the radius in the
  * north-south direction, and b is the radius in the east-west direction, and c is the radius in the vertical direction
- * (increasing altitude), then A == B == C defines a sphere, A == B > C defines a vertically flattened spheroid
- * (disk-shaped), A == B < C defines a vertically stretched spheroid.
+ * (increasing altitude), then {@code A == B == C } defines a sphere, {@code A == B > C } defines a vertically flattened spheroid
+ * (disk-shaped), {@code A == B < C } defines a vertically stretched spheroid.
  *
  * @author tag
  * @version $Id: Ellipsoid.java 1171 2013-02-11 21:45:02Z dcollins $

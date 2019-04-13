@@ -15,13 +15,25 @@ import java.util.*;
 /**
  * GLUTessellatorSupport is a utility class for configuring and using a {@link com.jogamp.opengl.glu.GLUtessellator} to
  * tessellate complex polygons into triangles.
- * <p/>
- * The standard pattern for using GLUTessellatorSupport to prepare a GLUtessellator is as follows: <code>
- * GLUTessellatorSupport glts = new GLUTessellatorSupport();<br/> GLUtessellatorCallback cb = ...; // Reference to an
- * implementation of GLUtessellatorCallback.<br/> Vec4 normal = new Vec4(0, 0, 1); // The polygon's normal. This example
- * shows an appropriate normal for tessellating x-y coordinates.<br/> <br/><br/> glts.beginTessellation(cb, new Vec4(0,
- * 0, 1));<br/> try<br/> {<br/> GLUtessellator tess = glts.getGLUtessellator();<br/> }<br/> finally<br/> {<br/>
- * glts.endTessellation();<br/> }<br/> </code>
+ * <p>
+ * The standard pattern for using GLUTessellatorSupport to prepare a GLUtessellator is as follows: 
+ * <pre>
+ * <code>
+ * GLUTessellatorSupport glts = new GLUTessellatorSupport();
+ * GLUtessellatorCallback cb = ...; 
+ * // Reference to an implementation of GLUtessellatorCallback.
+ * Vec4 normal = new Vec4(0, 0, 1); 
+ * 
+ * // The polygon's normal. This example shows an appropriate normal for tessellating x-y coordinates.
+ * 
+ * glts.beginTessellation(cb, new Vec4(0, * 0, 1));
+ * try {
+ *      GLUtessellator tess = glts.getGLUtessellator();
+ * } finally {
+ *      glts.endTessellation();
+ * } 
+ * </code>
+ * </pre>
  *
  * @author dcollins
  * @version $Id: GLUTessellatorSupport.java 3427 2015-09-30 23:24:13Z dcollins $
@@ -384,7 +396,7 @@ public class GLUTessellatorSupport
     /**
      * Recursively forwards boundary tessellation results from one GLU tessellator to another. The GLU tessellator this
      * callback forwards to may be configured in any way the caller chooses.
-     * <p/>
+     * <p>
      * RecursiveCallback must be used as the GLUtessellatorCallback for the begin, end, vertex, and combine callbacks
      * for a GLU tessellator configured to generate line loops. A GLU tessellator can be configured generate line loops
      * by calling gluTessProperty(GLU_TESS_BOUNDARY_ONLY, GL_TRUE). Additionally, the caller specified vertex data

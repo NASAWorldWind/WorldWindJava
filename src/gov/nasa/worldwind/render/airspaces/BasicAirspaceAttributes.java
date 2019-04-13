@@ -26,8 +26,8 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     /**
      * Creates a new BasicAirspaceAttributes with the default attributes. The default attributes differ from
      * BasicShapeAttributes, and are as follows:
-     * <p/>
-     * <table> <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
+     * <table><caption>Attributes</caption>
+     * <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
      * <tr><td>drawInterior</td><td><code>true</code></td></tr> <tr><td>drawOutline</td><td><code>false</code></td></tr>
      * <tr><td>enableAntialiasing</td><td><code>false</code></td></tr> <tr><td>enableLighting</td><td><code>true</code></td></tr>
      * <tr><td>interiorMaterial</td><td>{@link gov.nasa.worldwind.render.Material#WHITE}</td></tr>
@@ -50,15 +50,19 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     /**
      * Creates a new BasicAirspaceAttributes with the specified interior material and interior opacity. All other
      * attributes are set to the default values, which differ from BasicShapeAttributes, and are as follows:
-     * <p/>
-     * <table> <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
+     * <table><caption>Attributes</caption>
+     * <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
      * <tr><td>drawInterior</td><td><code>true</code></td></tr> <tr><td>drawOutline</td><td><code>false</code></td></tr>
-     * <tr><td>enableAntialiasing</td><td><code>false</code></td></tr> <tr><td>enableLighting</td><td><code>true</code></td></tr>
+     * <tr><td>enableAntialiasing</td><td><code>false</code></td></tr>
+     * <tr><td>enableLighting</td><td><code>true</code></td></tr>
      * <tr><td>interiorMaterial</td><td>material</td></tr> <tr><td>outlineMaterial</td><td>{@link
      * gov.nasa.worldwind.render.Material#BLACK}</td></tr> <tr><td>interiorOpacity</td><td>opacity</td></tr>
      * <tr><td>outlineOpacity</td><td>1.0</td></tr> <tr><td>outlineWidth</td><td>1.0</td></tr>
      * <tr><td>outlineStippleFactor</td><td>0</td></tr> <tr><td>outlineStipplePattern</td><td>0xF0F0</td></tr>
      * <tr><td>imageSource</td><td><code>null</code></td></tr> <tr><td>imageScale</td><td>1.0</td></tr> </table>
+     *
+     * @param material the specified material
+     * @param opacity the interior opacity
      */
     public BasicAirspaceAttributes(Material material, double opacity)
     {

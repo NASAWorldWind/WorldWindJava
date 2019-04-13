@@ -15,8 +15,9 @@ import java.awt.*;
 
 /**
  * Renders an atmosphere around the globe and a sky dome at low altitude.
- * <p/>
- * Note : based on a spherical globe.<br /> Issue : Ellipsoidal globe doesnt match the spherical atmosphere everywhere.
+ * <p>
+ * Note : based on a spherical globe.<br> 
+ * Issue : Ellipsoidal globe doesnt match the spherical atmosphere everywhere.
  *
  * @author Patrick Murris
  * @version $Id: SkyGradientLayer.java 2146 2014-07-11 17:37:04Z tgaskins $

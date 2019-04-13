@@ -196,7 +196,7 @@ public class AirspaceLayer extends AbstractLayer
      * layer will maintain a reference to <code>airspaceIterable</code> strictly for picking and rendering. This layer
      * will not modify the Iterable reference. However, this will clear the internal collection of Airspaces, and will
      * prevent any modification to its contents via <code>addAirspace, addAirspaces, or removeAirspaces</code>.
-     * <p/>
+     * <p>
      * If the specified <code>airspaceIterable</code> is null, this layer will revert to maintaining its internal
      * collection.
      *

@@ -251,12 +251,15 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
 
     /**
      * Appends elevation model configuration parameters as elements to the specified context. This appends elements for
-     * the following parameters: <table> <th><td>Parameter</td><td>Element Path</td><td>Type</td></th> <tr><td>{@link
-     * AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr> <tr><td>{@link
-     * AVKey#MISSING_DATA_SIGNAL}</td><td>MissingData/@signal</td><td>Double</td></tr> <tr><td>{@link
-     * AVKey#MISSING_DATA_REPLACEMENT}</td><td>MissingData/@replacement</td><td>Double</td></tr> <tr><td>{@link
-     * AVKey#DETAIL_HINT}</td><td>DataDetailHint</td><td>Double</td></tr> </table>
+     * the following parameters: 
+     * <table><caption>Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
+     * <tr><td>{@link AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> 
+     * <tr><td>{@link AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr> 
+     * <tr><td>{@link AVKey#MISSING_DATA_SIGNAL}</td><td>MissingData/@signal</td><td>Double</td></tr> 
+     * <tr><td>{@link AVKey#MISSING_DATA_REPLACEMENT}</td><td>MissingData/@replacement</td><td>Double</td></tr> 
+     * <tr><td>{@link AVKey#DETAIL_HINT}</td><td>DataDetailHint</td><td>Double</td></tr> 
+     * </table>
      *
      * @param params  the key-value pairs which define the elevation model configuration parameters.
      * @param context the XML document root on which to append elevation model configuration elements.
@@ -308,9 +311,11 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
     /**
      * Parses elevation model configuration parameters from the specified DOM document. This writes output as key-value
      * pairs to params. If a parameter from the XML document already exists in params, that parameter is ignored.
-     * Supported parameters are: <table> <th><td>Parameter</td><td>Element Path</td><td>Type</td></th> <tr><td>{@link
-     * gov.nasa.worldwind.avlist.AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> <tr><td>{@link
-     * gov.nasa.worldwind.avlist.AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr>
+     * Supported parameters are: 
+     * <table><caption>Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
+     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> 
+     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#MISSING_DATA_SIGNAL}</td><td>MissingData/@signal</td><td>Double</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#MISSING_DATA_REPLACEMENT}</td><td>MissingData/@replacement</td><td>Double</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DETAIL_HINT}</td><td>DataDetailHint</td><td>Double</td></tr>

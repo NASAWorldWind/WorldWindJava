@@ -12,7 +12,6 @@ import java.util.*;
 
 /**
  * Implementation of General Command/Special area graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Area of Operations (2.X.2.6.2.1)</li> <li>Named Area of Interest (2.X.2.6.2.4)</li> <li>Targeted Area of
  * Interest (2.X.2.6.2.5)</li> </ul>
  *

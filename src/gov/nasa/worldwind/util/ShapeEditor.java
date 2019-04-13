@@ -28,14 +28,14 @@ import java.util.List;
 /**
  * Provides a user interface for editing a shape and performs editing. Depending on the shape type, the shape is shown
  * with control points for vertex locations and size. All shapes are shown with a handle that provides rotation.
- * <p/>
+ * <p>
  * Left-drag on the shape's body moves the whole shape. Left-drag on a control point performs the action associated with
  * that control point. The editor provides vertex insertion and removal for airspace Polygon, Curtain, Route and Track
  * shapes, and SurfacePolygon and SurfacePolyline. Shift-left-click when the cursor is over the shape inserts a control
  * point at the cursor's position. Alt-left-click when the cursor is over a control point removes that control point.
  * Control points are added to the ends of airspace Polygon, Curtain, Route and Track, and SurfacePolyline by
  * shift-left-click on the first or last control point of the shape.
- * <p/>
+ * <p>
  * This editor supports airspaces other than Cake and all surface shapes except SurfaceMultiPolygon and SurfaceImage.
  *
  * @author tag

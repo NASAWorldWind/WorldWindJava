@@ -8,17 +8,17 @@ package gov.nasa.worldwind.util;
 
 /**
  * Traverses an implicit tree and makes decisions at tree nodes visited in depth-first order.
- * <p/>
+ * <p>
  * Users provide an object at construction that implements the {@link gov.nasa.worldwind.util.DecisionTree.Controller}
  * interface. This controller provides methods to determine node inclusion, to terminate traversal, and to create
  * descendant nodes. It is carried to each node during traversal.
- * <p/>
+ * <p>
  * Users also provide a user-defined context object to carry state and other information to each node. The context can
  * hold information to assist in decisions or to retains objects or information gathered during traversal.
- * <p/>
+ * <p>
  * At the start of traversal a user-defined object is specified as the object defining the decision. It's the object
  * against which decisions are made at each node.
- * <p/>
+ * <p>
  * See the source code of {@link gov.nasa.worldwind.util.SectorVisibilityTree} for example usage.
  *
  * @author tag

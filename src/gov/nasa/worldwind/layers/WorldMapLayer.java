@@ -21,11 +21,11 @@ import java.util.ArrayList;
 
 /**
  * Displays a world map overlay with a current-position crosshair in a screen corner.
- * <p/>
+ * <p>
  * A {@link gov.nasa.worldwindx.examples.ClickAndGoSelectListener} can be used in conjunction with this layer to move
  * the view to a selected location when that location is clicked within the layer's map. Specify
  * <code>WorldMapLayer.class</code> when constructing the <code>ClickAndGoSelectListener</code>.
- * <p/>
+ * <p>
  * Note: This layer may not be shared among multiple {@link WorldWindow}s.
  *
  * @author Patrick Murris

@@ -18,10 +18,16 @@ import java.util.*;
 
 /**
  * Implementation of general area graphics. This class implements the following graphics:
- * <p/>
- * <ul> <li>General Area (2.X.2.1.3.1)</li> <li>Assembly Area (2.X.2.1.3.2)</li> <li>Engagement Area (2.X.2.1.3.3)</li>
- * <li>Drop Zone (2.X.2.1.3.5)</li> <li>Extraction Zone (2.X.2.1.3.6)</li> </li><li>Landing Zone (2.X.2.1.3.7)</li>
- * <li>Pickup Zone (2.X.2.1.3.8)</li> <li>Forward Arming and Refueling Area (FARP) (2.X.5.3.3)</li></ul>
+ * <ul>
+ * <li>General Area (2.X.2.1.3.1)</li>
+ * <li>Assembly Area (2.X.2.1.3.2)</li>
+ * <li>Engagement Area (2.X.2.1.3.3)</li>
+ * <li>Drop Zone (2.X.2.1.3.5)</li>
+ * <li>Extraction Zone (2.X.2.1.3.6)</li>
+ * <li>Landing Zone (2.X.2.1.3.7)</li>
+ * <li>Pickup Zone (2.X.2.1.3.8)</li>
+ * <li>Forward Arming and Refueling Area (FARP) (2.X.5.3.3)</li>
+ * </ul>
  *
  * @author pabercrombie
  * @version $Id: BasicArea.java 1171 2013-02-11 21:45:02Z dcollins $

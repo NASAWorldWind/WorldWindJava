@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Renders statusbar information as a layer.
- * <p/>
+ * <p>
  * Used ScalebarLayer and StatusBar as template
  */
 //TODO

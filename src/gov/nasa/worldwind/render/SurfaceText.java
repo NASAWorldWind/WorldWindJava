@@ -134,7 +134,7 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * The offset determines how the text is placed relative to this position. The default offset centers the text on
      * the position both horizontally and vertically.
      *
@@ -252,7 +252,7 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      * Specifies a location relative to the label position at which to align the label. The label text begins at the
      * point indicated by the offset. An offset of (0, 0) aligns the left baseline of the text with the position. An
      * offset of (-0.5, -0.5) fraction aligns the center of the text with the position.
-     * <p/>
+     * <p>
      * A pixel based offset is interpreted based on the geographic size of the text. For example, if the text rendered
      * "normally" in two dimensions would be 20 pixels tall, and the geographic text is 100 meters tall, then each pixel
      * of text corresponds to 5 meters. So an offset of 2 pixels would correspond to a geographic offset of 10 meters.

@@ -520,7 +520,7 @@ public class ImageUtil
      * @param aspectRatio  the aspect ratio, width/height, of the assembled image. If the aspect ratio is greater than
      *                     or equal to one, the assembled image uses the full width of the canvas; the height used is
      *                     proportional to the inverse of the aspect ratio. If the aspect ratio is less than one, the
-     *                     full height of the canvas is used; the width used is proportional to the aspect ratio. <p/>
+     *                     full height of the canvas is used; the width used is proportional to the aspect ratio. <p>
      *                     The aspect ratio is typically used to maintain consistent width and height units while
      *                     assembling multiple images into a canvas of a different aspect ratio than the canvas sector,
      *                     such as drawing a non-square region into a 1024x1024 canvas. An aspect ratio of 1 causes the
@@ -832,7 +832,7 @@ public class ImageUtil
      * Returns a copy of the specified image such that the new dimensions are powers of two. The new image dimensions
      * will be equal to or greater than the original image. The flag <code>scaleToFit</code> determines whether the
      * original image should be drawn into the new image with no special scaling, or whether the original image should
-     * be scaled to fit exactly in the new image. <p/> If the original image dimensions are already powers of two, this
+     * be scaled to fit exactly in the new image. <p> If the original image dimensions are already powers of two, this
      * method will simply return the original image.
      *
      * @param image      the BufferedImage to convert to a power of two image.

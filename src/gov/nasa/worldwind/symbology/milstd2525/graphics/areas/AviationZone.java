@@ -15,7 +15,6 @@ import java.util.*;
 
 /**
  * Implementation of aviation area graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Restricted Operations Zone (2.X.2.2.3.1)</li> <li>Short Range Air Defense Engagement Zone (2.X.2.2.3.2)</li>
  * <li>High Density Airspace Control Zone (2.X.2.2.3.3)</li> <li>Missile Engagement Zone (2.X.2.2.3.4)</li> <li>Low
  * Altitude Missile Engagement Zone (2.X.2.2.3.4.1)</li> <li>High Altitude Missile Engagement Zone (2.X.2.2.3.4.2)</li>

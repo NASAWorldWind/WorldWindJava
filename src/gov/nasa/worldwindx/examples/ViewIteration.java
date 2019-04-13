@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 /**
  * Example of how to animate the view from one position to another.
- * <p/>
+ * <p>
  * Use the buttons on the left side of the frame to animate the view: <ul> <li> Zero: Move the view to look at 0 degrees
  * latitude, 0 degrees longitude.</li> <li> Heading: Animate the view from 0 degrees heading to 90 degrees heading.</li>
  * <li> Follow: Animate the view to along a path of geographic positions.</li> <li> Forward: Animate the view to look at

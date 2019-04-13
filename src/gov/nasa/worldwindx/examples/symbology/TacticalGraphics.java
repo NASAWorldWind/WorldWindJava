@@ -24,10 +24,10 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Demonstrates how to create and display WorldWind tactical graphics. See the <a title="Symbology Usage Guide"
- * href="https://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology Usage Guide</a> for more
+ * Demonstrates how to create and display WorldWind tactical graphics. See the
+ * <a href="https://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology Usage Guide</a> for more
  * information on symbology support in WorldWind.
- * <p/>
+ * <p>
  * See the {@link TacticalSymbols} for a detailed example of using WorldWind tactical symbols in an application.
  *
  * @author pabercrombie

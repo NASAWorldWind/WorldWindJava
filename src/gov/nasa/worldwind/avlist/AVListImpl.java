@@ -16,7 +16,7 @@ import java.util.logging.Level;
  * An implementation class for the {@link AVList} interface. Classes implementing <code>AVList</code> can subclass or
  * aggregate this class to provide default <code>AVList</code> functionality. This class maintains a hash table of
  * attribute-value pairs.
- * <p/>
+ * <p>
  * This class implements a notification mechanism for attribute-value changes. The mechanism provides a means for
  * objects to observe attribute changes or queries for certain keys without explicitly monitoring all keys. See {@link
  * java.beans.PropertyChangeSupport}.

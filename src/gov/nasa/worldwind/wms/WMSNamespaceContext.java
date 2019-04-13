@@ -24,8 +24,12 @@ public class WMSNamespaceContext extends BasicNamespaceContext
     /**
      * Sole constructor for WMSNamespaceContext. In addition to the namespaces configured by the superclass constructor
      * {@link gov.nasa.worldwind.util.BasicNamespaceContext#BasicNamespaceContext()}, this configures the following
-     * namespaces: <table> <tr><th>Prefix</th><th>URI</th></tr> <tr><td>wms</td><td>http://www.opengis.net/wms</td></tr>
-     * <tr><td><code>DEFAULT_NS_PREFIX ("")</code></td><td>http://www.opengis.net/wms</td></tr> </table>
+     * namespaces: 
+     * <table><caption>Namespaces</caption>
+     * <tr><th>Prefix</th><th>URI</th></tr> 
+     * <tr><td>wms</td><td>http://www.opengis.net/wms</td></tr>
+     * <tr><td><code>DEFAULT_NS_PREFIX ("")</code></td><td>http://www.opengis.net/wms</td></tr>
+     * </table>
      */
     public WMSNamespaceContext()
     {

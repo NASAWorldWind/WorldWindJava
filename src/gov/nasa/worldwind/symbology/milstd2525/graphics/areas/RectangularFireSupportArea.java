@@ -17,7 +17,6 @@ import java.util.*;
 
 /**
  * Implementation of rectangular Fire Support graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Free Fire Area (FFA), Rectangular (2.X.4.3.2.3.2)</li> <li>Restrictive Fire Area (RFA), Rectangular
  * (2.X.4.3.2.5.2)</li> <li>Airspace Coordination Area (ACA), Rectangular (2.X.4.3.2.2.2)</li> <li>Sensor Zone,
  * Rectangular</li> <li>Dead Space Area, Rectangular</li> <li>Zone of Responsibility, Rectangular</li> <li>Target

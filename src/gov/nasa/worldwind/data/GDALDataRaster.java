@@ -274,22 +274,23 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
 
     /**
      * Extracts metadata and sets next key/value pairs:
-     * <p/>
-     * <p/>
-     * <p/>
+     * <p>
      * AVKey.WIDTH - the maximum width of the image
-     * <p/>
+     * <p>
      * AVKey.HEIGHT - the maximum height of the image
-     * <p/>
-     * AVKey.COORDINATE_SYSTEM - one of the next values: AVKey.COORDINATE_SYSTEM_SCREEN
-     * AVKey.COORDINATE_SYSTEM_GEOGRAPHIC AVKey.COORDINATE_SYSTEM_PROJECTED
-     * <p/>
+     * <p>
+     * AVKey.COORDINATE_SYSTEM - one of the next values:
+     * <ul>
+     * <li>AVKey.COORDINATE_SYSTEM_SCREEN
+     * <li>AVKey.COORDINATE_SYSTEM_GEOGRAPHIC
+     * <li>AVKey.COORDINATE_SYSTEM_PROJECTED
+     * </ul>
      * AVKey.SECTOR - in case of Geographic CS, contains a regular Geographic Sector defined by lat/lon coordinates of
      * corners in case of Projected CS, contains a bounding box of the area
      *
-     * @param ds               GDAL's Dataset
+     * @param ds GDAL's Dataset
      * @param quickReadingMode if quick reading mode is enabled GDAL will not spend much time on heavy calculations,
-     *                         like for example calculating Min/Max for entire elevation raster
+     * like for example calculating Min/Max for entire elevation raster
      */
     protected void init(Dataset ds, boolean quickReadingMode)
     {
@@ -1011,23 +1012,21 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
      * Builds a writable data raster for the requested region of interest (ROI)
      *
      * @param params Required parameters are:
-     *               <p/>
-     *               <p/> AVKey.HEIGHT as Integer, specifies a height of the desired ROI
-     *               <p/>
-     *               <p/> AVKey.WIDTH as Integer, specifies a width of the desired ROI
-     *               <p/>
-     *               <p/> AVKey.SECTOR as Sector, specifies an extent of the desired ROI
-     *               <p/>
-     *               <p/>
-     *               <p/>
-     *               Optional parameters are:
-     *               <p/>
-     *               <p/> AVKey.BAND_ORDER as array of integers, examples: for RGBA image: new int[] { 0, 1, 2, 3 }, or
-     *               for  ARGB image: new int[] { 3, 0, 1, 2 } , or if you want only RGB bands of the RGBA image: new
-     *               int[] {0, 1, 2 }, or only Intensity (4th) band of the specific aerial image: new int[] { 3 }
+     * <p>
+     * AVKey.HEIGHT as Integer, specifies a height of the desired ROI
+     * <p>
+     * AVKey.WIDTH as Integer, specifies a width of the desired ROI
+     * <p>
+     * AVKey.SECTOR as Sector, specifies an extent of the desired ROI
+     * <p>
+     * Optional parameters are:
+     * <p>
+     * AVKey.BAND_ORDER as array of integers, examples: for RGBA image: new int[] { 0, 1, 2, 3 }, or for ARGB image: new
+     * int[] { 3, 0, 1, 2 } , or if you want only RGB bands of the RGBA image: new int[] {0, 1, 2 }, or only Intensity
+     * (4th) band of the specific aerial image: new int[] { 3 }
      *
      * @return A writable data raster: BufferedImageRaster (if the source dataset is imagery) or ByteBufferRaster (if
-     *         the source dataset is elevations)
+     * the source dataset is elevations)
      */
     @Override
     public DataRaster getSubRaster(AVList params)

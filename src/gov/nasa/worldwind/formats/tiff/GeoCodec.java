@@ -171,12 +171,12 @@ class GeoCodec
     /**
      * Returns the geocoordinates for a given pixel, as determined by the modeling coordinate tranformation embodied in
      * the GeoCodec.
-     * <p/>
+     * <p>
      * TODO: Also throws UnsupportedOperationException if this is anything other than a "simple" georeferenced mapping,
      * meaning that there's a single tie-point known about the point 0,0, we know the inter-pixel spacing, and there's
      * no rotation of the image required.  Geo referencing may also be specified via a general 4x4 matrix, or by a list
      * if tie-points, implying a rubbersheeting transformation. These two cases remain to be implemented.
-     * <p/>
+     * <p>
      *
      * @param row pixel-row index
      * @param col pixel-column index
@@ -202,7 +202,7 @@ class GeoCodec
 
     /**
      * Gets the values of the given GeoKey as an array of ints.
-     * <p/>
+     * <p>
      * While this method handles the general case of multiple ints associated with a key, typically there will be only a
      * single value.
      *

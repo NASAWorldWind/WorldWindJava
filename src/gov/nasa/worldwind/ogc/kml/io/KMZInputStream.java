@@ -110,7 +110,7 @@ public class KMZInputStream implements KMLDoc
     /**
      * Returns an {@link InputStream} to a specified file within the KMZ stream. The file's path is resolved relative to
      * the internal root of the KMZ file represented by the stream.
-     * <p/>
+     * <p>
      * Note: Since relative references to files outside the stream have no meaning, this class does not resolve relative
      * references to files in other KMZ archives. For example, it does not resolve references like this:
      * <i>../other.kmz/file.png</i>.
@@ -157,7 +157,7 @@ public class KMZInputStream implements KMLDoc
     /**
      * Returns an absolute path to a specified file within the KMZ stream. The file's path is resolved relative to the
      * internal root of the KMZ file represented by the stream.
-     * <p/>
+     * <p>
      * Note: Since relative references to files outside the stream have no meaning, this class does not resolve relative
      * references to files in other KMZ archives. For example, it does not resolve references like this:
      * <i>../other.kmz/file.png</i>.
@@ -205,7 +205,7 @@ public class KMZInputStream implements KMLDoc
     /**
      * Copies a file from the input stream to the temporary area created to represent the KMZ contents. If that area
      * does not yet exists, it is created.
-     * <p/>
+     * <p>
      * Note: This method should be called only by another synchronized method of this instance.
      *
      * @throws IOException if an error occurs during the copy.

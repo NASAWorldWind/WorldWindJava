@@ -14,7 +14,7 @@ import java.awt.*;
  * Provides a screen annotation positioned relatively to the window rather than absolutely. The annotation's position is
  * specified as fractional locations along the window's X and Y axes. When the window is resized the annotation is
  * repositioned according to its relative coordinates.
- * <p/>
+ * <p>
  * The annotation can be forced to remain fully visible even if its relative position would place a portion of it
  * outside the window. X and Y margins can be specified to ensure distance between the annotation's edges and the window
  * edges.

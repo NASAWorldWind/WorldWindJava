@@ -325,6 +325,10 @@ public class PolygonTessellator2
      * Computes a 4-bit code indicating the vertex's location in the 9 cell grid defined by the clip bounds and the
      * eight adjacent spaces defined by extending the min/max boundaries to infinity. 0 indicates that the vertex is
      * inside the clip bounds.
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param z z coordinate
+     * @return the clip code.
      */
     protected int clipCode(double x, double y, double z)
     {

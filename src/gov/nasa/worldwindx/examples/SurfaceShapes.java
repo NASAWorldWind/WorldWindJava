@@ -9,7 +9,6 @@ package gov.nasa.worldwindx.examples;
  * Illustrates how to configure and display WorldWind <code>{@link gov.nasa.worldwind.render.SurfaceShape}s</code>.
  * Surface shapes are used to visualize flat standard shapes types that follow the terrain. This illustrates how to use
  * all 7 standard surface shape types:
- * <p/>
  * <ul> <li><code>{@link gov.nasa.worldwind.render.SurfacePolygon}</code></li> <li><code>{@link
  * gov.nasa.worldwind.render.SurfaceEllipse}</code></li> <li><code>{@link gov.nasa.worldwind.render.SurfaceCircle}</code></li>
  * <li><code>{@link gov.nasa.worldwind.render.SurfaceQuad}</code></li> <li><code>{@link

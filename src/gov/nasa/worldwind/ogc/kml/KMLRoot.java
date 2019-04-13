@@ -132,7 +132,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      * a {@link InputStream}, or a {@link String} identifying either a file path or a URL. For all types other than
      * <code>InputStream</code> an attempt is made to determine whether the source is KML or KMZ; KML is assumed if the
      * test is not definitive. Null is returned if the source type is not recognized.
-     * <p/>
+     * <p>
      * Note: Because there are so many incorrectly formed KML files in distribution, it's often not possible to parse
      * with a namespace aware parser. This method first tries to use a namespace aware parser, but if a severe problem
      * occurs during parsing, it will try again using a namespace unaware parser. Namespace unaware parsing typically
@@ -490,7 +490,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     /**
      * Specifies the object to receive notifications of important occurrences during parsing, such as exceptions and the
      * occurrence of unrecognized element types.
-     * <p/>
+     * <p>
      * The default notification listener writes a message to the log, and otherwise does nothing.
      *
      * @param listener the listener to receive notifications. Specify null to indicate no listener.
@@ -547,13 +547,13 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     /**
      * Resolves a reference to a remote or local element of the form address#identifier, where "address" identifies a
      * local or remote document, including the current document, and and "identifier" is the id of the desired element.
-     * <p/>
+     * <p>
      * If the address part identifies the current document, the document is searched for the specified identifier.
      * Otherwise the document is retrieved, opened and searched for the identifier. If the address refers to a remote
      * document and the document has not previously been retrieved and cached locally, retrieval is initiated and this
      * method returns <code>null</code>. Once the document is successfully retrieved, subsequent calls to this method
      * return the identified element, if it exists.
-     * <p/>
+     * <p>
      * If the link does not contain an identifier part, this initiates a retrieval for document referenced by the
      * address part and returns <code>null</code>. Once the document is retrieved this opens the the document as a
      * <code>KMLRoot</code>. Subsequent calls to this method return the opened document, if it exists.
@@ -592,17 +592,17 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     /**
      * Resolves a reference to a remote or local element of the form address#identifier, where "address" identifies a
      * local or remote document, including the current document, and and "identifier" is the id of the desired element.
-     * <p/>
+     * <p>
      * If the address part identifies the current document, the document is searched for the specified identifier.
      * Otherwise the document is retrieved, opened and searched for the identifier. If the address refers to a remote
      * document and the document has not previously been retrieved and cached locally, retrieval is initiated and this
      * method returns <code>null</code>. Once the document is successfully retrieved, subsequent calls to this method
      * return the identified element, if it exists.
-     * <p/>
+     * <p>
      * If the link does not contain an identifier part, this initiates a retrieval for document referenced by the
      * address part and returns <code>null</code>. Once the document is retrieved this opens the the document as a
      * <code>KMLRoot</code>. Subsequent calls to this method return the opened document, if it exists.
-     * <p/>
+     * <p>
      * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote document in the World
      * Wind cache or in a temporary location. This parameter has no effect if the document exists locally. The temporary
      * location for a retrieved document does not persist between runtime sessions, and subsequent invocations of this
@@ -678,11 +678,11 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     /**
      * Resolves a reference to a local element identified by address and identifier, where {@code linkBase} identifies a
      * document, including the current document, and {@code linkRef} is the id of the desired element.
-     * <p/>
+     * <p>
      * If {@code linkBase} refers to a local KML or KMZ file and {@code linkRef} is non-null, the return value is the
      * element identified by {@code linkRef}. If {@code linkRef} is null, the return value is a parsed {@link KMLRoot}
      * for the KML file identified by {@code linkBase}.
-     * <p/>
+     * <p>
      * If {@code linkBase} refers a local file that is not a KML or KMZ file then {@code linkBase} is returned. If
      * {@code linkBase} cannot be resolved to a local file then null is returned.
      *
@@ -738,7 +738,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      * Resolves a reference to a remote element identified by address and identifier, where {@code linkBase} identifies
      * a remote document, and {@code linkRef} is the id of the desired element. This method retrieves resources
      * asynchronously using the {@link gov.nasa.worldwind.cache.FileStore}.
-     * <p/>
+     * <p>
      * The return value is null if the file is not yet available in the FileStore. If {@code linkBase} refers to a KML
      * or KMZ file and {@code linkRef} is non-null, the return value is the element identified by {@code linkRef}. If
      * {@code linkBase} refers to a KML or KMZ and {@code linkRef} is null, the return value is a parsed {@link KMLRoot}
@@ -771,13 +771,13 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      * Resolves a reference to a remote element identified by address and identifier, where {@code linkBase} identifies
      * a remote document, and {@code linkRef} is the id of the desired element. This method retrieves resources
      * asynchronously using the {@link gov.nasa.worldwind.cache.FileStore}.
-     * <p/>
+     * <p>
      * The return value is null if the file is not yet available in the FileStore. If {@code linkBase} refers to a KML
      * or KMZ file and {@code linkRef} is non-null, the return value is the element identified by {@code linkRef}. If
      * {@code linkBase} refers to a KML or KMZ and {@code linkRef} is null, the return value is a parsed {@link KMLRoot}
      * for the KML file identified by {@code linkBase}. Otherwise the return value is a {@link URL} to the file in the
      * file cache or a temporary location, depending on the value of <code>cacheRemoteFile</code>.
-     * <p/>
+     * <p>
      * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the WorldWind
      * cache or in a temporary location. This parameter has no effect if the file exists locally. The temporary location
      * for a retrieved file does not persist between runtime sessions, and subsequent invocations of this method may not
@@ -863,10 +863,10 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     /**
      * Resolves a NetworkLink to a local or remote KML document. This method retrieves remote resources asynchronously
      * using the {@link gov.nasa.worldwind.cache.FileStore}.
-     * <p/>
+     * <p>
      * The return value is a parsed KMLRoot representing the linked document. The return value is null if the linked
      * file is not a KML file, or is not yet available in the FileStore.
-     * <p/>
+     * <p>
      * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the WorldWind
      * cache or in a temporary location. This parameter has no effect if the file exists locally. The temporary location
      * for a retrieved file does not persist between runtime sessions, and subsequent invocations of this method may not
@@ -1207,7 +1207,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      * detail to appear at higher resolution at greater distances than normal, but at an increased performance cost.
      * Values less than 0 decrease the default resolution at any given distance. The default value is 0. Values
      * typically range between -0.5 and 0.5.
-     * <p/>
+     * <p>
      * The top level KML root's detail hint is inherited by all KML elements beneath that root, including any descendant
      * KML roots loaded by network links. If this KML root has been loaded by a network link, its detail hint is
      * ignored.
@@ -1245,7 +1245,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to forward the message to the root feature.
      *
      * @param msg The message that was received.

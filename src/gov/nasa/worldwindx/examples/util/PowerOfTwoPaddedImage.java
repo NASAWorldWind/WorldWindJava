@@ -18,7 +18,7 @@ import java.io.InputStream;
  * image are completely transparent. This is a useful property when converting images to OpenGL textures.
  * Non-power-of-two textures are handled inconsistently by graphics hardware. Not all hardware supports them, and many
  * that do lack full support for the the texturing functionality avialable for power-of-two textures.
- * <p/>
+ * <p>
  * PowerOfTwoPaddedImage provides accessors to the converted power-of-two image, the power-of-two image's width and
  * height, and the original image's width and height.
  *

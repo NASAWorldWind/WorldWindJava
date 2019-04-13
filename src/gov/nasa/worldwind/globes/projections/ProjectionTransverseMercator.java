@@ -16,7 +16,7 @@ import gov.nasa.worldwind.util.*;
  * may be specified and defaults to the Prime Meridian (0 longitude). By default, the projection computes values for 30
  * degrees either side of the central meridian. This may be changed via the {@link
  * #setWidth(gov.nasa.worldwind.geom.Angle)} method, but the projection may fail for large widths.
- * <p/>
+ * <p>
  * The projection limits are modified to reflect the central meridian and the width, however the projection limits are
  * clamped to a minimum of -180 degrees and a maximum of +180 degrees. It's therefore not possible to display a band
  * whose central meridian is plus or minus 180.

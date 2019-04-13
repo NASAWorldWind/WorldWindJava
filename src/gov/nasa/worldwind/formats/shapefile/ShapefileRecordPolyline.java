@@ -17,7 +17,7 @@ import java.util.Locale;
  * Represents a Shapefile record with a polyline shape type. Polyline shapes represent an connected sequence of two or
  * more x,y coordinate pairs. Polyline shapes may contain multiple parts, where each part is an independent connected
  * sequence of two or more points.
- * <p/>
+ * <p>
  * Polylines may have optional z-coordinates or m-coordinates that accompany each coordinate pair. If a Polyline has
  * z-coordinates, then <code>{@link #getZValues()}</code> returns a non-<code>null</code> array of values.  If a
  * Polyline has m-coordinates, then <code>{@link #getMValues()}</code> returns a non-<code>null</code> array of values.

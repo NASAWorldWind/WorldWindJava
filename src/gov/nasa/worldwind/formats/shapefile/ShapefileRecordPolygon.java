@@ -20,7 +20,7 @@ import java.util.*;
  * more x,y coordinate pairs that form a closed loop. Polygon shapes may contain multiple rings, where each ring is a
  * closed loop of four or more points. Rings defining a filled part of a polygon have a clockwise winding order, while
  * rings defining holes in the polygon have a counter-clockwise winding order.
- * <p/>
+ * <p>
  * Polygons may have optional z-coordinates or m-coordinates that accompany each coordinate pair. If a Polygon has
  * z-coordinates, then <code>{@link #getZValues()}</code> returns a non-<code>null</code> array of values.  If a Polygon
  * has m-coordinates, then <code>{@link #getMValues()}</code> returns a non-<code>null</code> array of values.

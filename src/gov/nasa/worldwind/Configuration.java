@@ -22,35 +22,35 @@ import java.util.logging.Level;
  * contents. Configurations files contain the names of classes to create at run-time, the initial model definition,
  * including the globe, elevation model and layers, and various control quantities such as cache sizes and data
  * retrieval timeouts.
- * <p/>
+ * <p>
  * The Configuration class is a singleton, but its instance is not exposed publicly. It is addressed only via static
  * methods of the class. It is constructed upon first use of any of its static methods.
- * <p/>
+ * <p>
  * When the Configuration class is first instantiated it reads the XML document <code>config/worldwind.xml</code> and
  * registers all the information there. The information can subsequently be retrieved via the class' various
  * <code>getValue</code> methods. Many WorldWind start-up objects query this information to determine the classes to
  * create. For example, the first WorldWind object created by an application is typically a {@link
  * gov.nasa.worldwind.awt.WorldWindowGLCanvas}. During construction that class causes WorldWind's internal classes to
  * be constructed, using the names of those classes drawn from the Configuration singleton, this class.
- * <p/>
+ * <p>
  * The default WorldWind configuration document is <code>config/worldwind.xml</code>. This can be changed by setting
  * the Java property <code>gov.nasa.worldwind.config.file</code> to a different file name or a valid URL prior to
  * creating any WorldWind object or invoking any static methods of WorldWind classes, including the Configuration
  * class. When an application specifies a different configuration location it typically does so in its main method prior
  * to using WorldWind. If a file is specified its location must be on the classpath. (The contents of application and
  * WorldWind jar files are typically on the classpath, in which case the configuration file may be in the jar file.)
- * <p/>
+ * <p>
  * Additionally, an application may set another Java property, <code>gov.nasa.worldwind.app.config.document</code>, to a
  * file name or URL whose contents contain configuration values to override those of the primary configuration document.
  * WorldWind overrides only those values in this application document, it leaves all others to the value specified in
  * the primary document. Applications usually specify an override document in order to specify the initial layers in the
  * model.
- * <p/>
+ * <p>
  * See <code>config/worldwind.xml</code> for documentation on setting configuration values.
- * <p/>
+ * <p>
  * Configuration values can also be set programatically via {@link Configuration#setValue(String, Object)}, but they are
  * not retroactive so affect only Configuration queries made subsequent to setting the value.
- * <p/>
+ * <p>
  * <em>Note:</em> Prior to September of 2009, configuration properties were read from the file
  * <code>config/worldwind.properties</code>. An alternate file could be specified via the
  * <code>gov.nasa.worldwind.config.file</code> Java property. These mechanisms remain available but are deprecated.
@@ -381,7 +381,7 @@ public class Configuration // Singleton
 
     /**
      * Return as a Boolean the value associated with a specified key.
-     * <p/>
+     * <p>
      * Valid values for true are '1' or anything that starts with 't' or 'T'. ie. 'true', 'True', 't' Valid values for
      * false are '0' or anything that starts with 'f' or 'F'. ie. 'false', 'False', 'f'
      *
@@ -399,7 +399,7 @@ public class Configuration // Singleton
 
     /**
      * Return as a Boolean the value associated with a specified key.
-     * <p/>
+     * <p>
      * Valid values for true are '1' or anything that starts with 't' or 'T'. ie. 'true', 'True', 't' Valid values for
      * false are '0' or anything that starts with 'f' or 'F'. ie. 'false', 'False', 'f'
      *
@@ -502,10 +502,12 @@ public class Configuration // Singleton
      * Returns the path to the current user's application data directory. The path returned depends on the operating
      * system on which the Java Virtual Machine is running. The following table provides the path for all supported
      * operating systems:
-     * <p/>
-     * <table> <tr><th>Operating System</th><th>Path</th></tr> <tr><td>Mac OS X</td><td>~/Library/Application
-     * Support</td></tr> <tr><td>Windows</td><td>~\\Application Data</td></tr> <tr><td>Linux, Unix,
-     * Solaris</td><td>~/</td></tr> </table>
+     * <table><caption>Returned Paths</caption>
+     * <tr><th>Operating System</th><th>Path</th></tr> 
+     * <tr><td>Mac OS X</td><td>~/Library/Application Support</td></tr> 
+     * <tr><td>Windows</td><td>~\\Application Data</td></tr> 
+     * <tr><td>Linux, Unix, Solaris</td><td>~/</td></tr> 
+     * </table>
      *
      * @return the absolute path to the current user's application data directory.
      */
@@ -647,9 +649,11 @@ public class Configuration // Singleton
      * Returns the highest OpenGL profile available on the current graphics device that is compatible with WorldWind.
      * The returned profile favors hardware acceleration over software acceleration. With JOGL version 2.0, this returns
      * the highest available profile from the following list:
-     * <p/>
-     * <ul> <li>OpenGL compatibility profile 4.x</li> <li>OpenGL compatibility profile 3.x</li> <li>OpenGL profile 1.x
-     * up to 3.0</li> </ul>
+     * <ul> 
+     * <li>OpenGL compatibility profile 4.x</li> 
+     * <li>OpenGL compatibility profile 3.x</li> 
+     * <li>OpenGL profile 1.x up to 3.0</li> 
+     * </ul>
      *
      * @return the highest compatible OpenGL profile.
      */

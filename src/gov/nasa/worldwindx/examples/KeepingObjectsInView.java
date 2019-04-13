@@ -29,7 +29,7 @@ import java.util.*;
  * KeepingObjectsInView demonstrates keeping a set of scene elements visible by using the utility class {@link
  * gov.nasa.worldwindx.examples.util.ExtentVisibilitySupport}. To run this demonstration, execute this class' main
  * method, then follow the on-screen instructions.
- * <p/>
+ * <p>
  * The key functionality demonstrated by KeepingObjectsVisible is found in the internal classes {@link
  * KeepingObjectsInView.ViewController} and {@link gov.nasa.worldwindx.examples.KeepingObjectsInView.ViewAnimator}.
  *

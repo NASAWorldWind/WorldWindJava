@@ -25,7 +25,7 @@ import java.util.List;
  * @author tag
  * @version $Id: Polyline.java 2188 2014-07-30 15:01:16Z tgaskins $
  * @deprecated Use {@link Path} instead.
- *             <p/>
+ *             <p>
  *             When drawn on a 2D globe, this shape uses either a {@link SurfacePolyline} or {@link SurfacePolygon} to
  *             represent itself.
  */
@@ -753,7 +753,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
      * If the scene controller is rendering ordered renderables, this method draws this placemark's image as an ordered
      * renderable. Otherwise the method determines whether this instance should be added to the ordered renderable
      * list.
-     * <p/>
+     * <p>
      * The Cartesian and screen points of the placemark are computed during the first call per frame and re-used in
      * subsequent calls of that frame.
      *

@@ -710,7 +710,6 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     /**
      * Export the screen image. The {@code output} object will receive the exported data. The type of this object
      * depends on the export format. The formats and object types supported by this class are:
-     * <p/>
      * <pre>
      * Format                                         Supported output object types
      * ================================================================================
@@ -764,7 +763,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     /**
      * Export the screen image to KML as a {@code <ScreenOverlay>} element. The {@code output} object will receive the
      * data. This object must be one of: java.io.Writer java.io.OutputStream javax.xml.stream.XMLStreamWriter.
-     * <p/>
+     * <p>
      * The image path can only be exported if the image source is a path or URL. If the image source is a BufferedImage,
      * for example, the image will not be exported and no icon reference will be written into the ScreenOverlay tag.
      *

@@ -13,7 +13,7 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.*;
 
 /**
- * Represents a sphere in three dimensional space. <p/> Instances of <code>Sphere</code> are immutable. </p>
+ * Represents a sphere in three dimensional space. <p> Instances of <code>Sphere</code> are immutable. </p>
  *
  * @author Tom Gaskins
  * @version $Id: Sphere.java 1171 2013-02-11 21:45:02Z dcollins $

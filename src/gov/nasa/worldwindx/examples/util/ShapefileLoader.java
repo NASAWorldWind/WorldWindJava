@@ -15,17 +15,25 @@ import gov.nasa.worldwind.util.*;
 
 /**
  * Converts Shapefile geometry into WorldWind renderable objects. Shapefile geometries are mapped to WorldWind objects
- * as follows: <table> <tr><th>Shapefile Geometry</th><th>WorldWind Object</th></tr> <tr><td>Point</td><td>{@link
- * gov.nasa.worldwind.render.WWIcon}</td></tr> <tr><td>MultiPoint</td><td>List of {@link
- * gov.nasa.worldwind.render.WWIcon}</td></tr> <tr><td>Polyline</td><td>{@link gov.nasa.worldwind.render.SurfacePolylines}</td></tr>
- * <tr><td>Polygon</td><td>{@link gov.nasa.worldwind.render.SurfacePolygons}</td></tr> </table>
- * <p/>
+ * as follows:
+ * <table><caption>Shapefile Geometries</caption>
+ * <tr><th>Shapefile Geometry</th><th>WorldWind Object</th></tr>
+ * <tr><td>Point</td><td>{@link gov.nasa.worldwind.render.WWIcon}</td></tr>
+ * <tr><td>MultiPoint</td><td>List of {@link gov.nasa.worldwind.render.WWIcon}</td></tr>
+ * <tr><td>Polyline</td><td>{@link gov.nasa.worldwind.render.SurfacePolylines}</td></tr>
+ * <tr><td>Polygon</td><td>{@link gov.nasa.worldwind.render.SurfacePolygons}</td></tr>
+ * </table>
+ * <p>
  * Shapefiles do not contain a standard definition for color and other visual attributes. Though some Shapefiles contain
  * color information in each record's key-value attributes, ShapefileLoader does not attempt to interpret that
  * information. Instead, the WorldWind renderable objects created by ShapefileLoader are assigned a random color.
  * Callers can replace or extend this behavior by defining a subclass of ShapefileLoader and overriding the following
- * methods: <ul> <li>{@link #nextPointAttributes()}</li> <li>{@link #nextPolylineAttributes()}</li> <li>{@link
- * #nextPolygonAttributes()}</li></ul>.
+ * methods:
+ * <ul>
+ * <li>{@link #nextPointAttributes()}</li>
+ * <li>{@link #nextPolylineAttributes()}</li>
+ * <li>{@link #nextPolygonAttributes()}</li>
+ * </ul>.
  *
  * @author dcollins
  * @version $Id: ShapefileLoader.java 2326 2014-09-17 22:35:45Z dcollins $

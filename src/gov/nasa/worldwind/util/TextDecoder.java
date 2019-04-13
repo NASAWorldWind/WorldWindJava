@@ -32,7 +32,7 @@ public interface TextDecoder
     /**
      * Get the time at which the decoded text last changed. The text can change because new source text is set, or
      * because an external resource required for decoding has been resolved.
-     * <p/>
+     * <p>
      * <em>The update time does not change until {@link #getDecodedText()} is called.</em> An application should call
      * {@link #getDecodedText()}, and then call this method to compare the timestamp with some previous timestamp to
      * determine if the decoded text has changed since {@link #getDecodedText()} was last called.
