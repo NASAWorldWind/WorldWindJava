@@ -44,6 +44,7 @@
         <compileJava srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/debug" debug="true"
                      jdk="${worldwind.jdk}">
             <pathelements>
+                <pathelement location="${basedir}/jackson-core-asl.jar"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
                 <pathelement location="${basedir}/gdal.jar"/>
@@ -56,6 +57,7 @@
         <compileJava srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/release" debug="false"
                      jdk="${worldwind.jdk}">
             <pathelements>
+                <pathelement location="${basedir}/jackson-core-asl.jar"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
                 <pathelement location="${basedir}/gdal.jar"/>
@@ -96,6 +98,7 @@
                 <exclude name="gov/nasa/worldwind/formats/**"/>
             </packageset>
             <classpath>
+                <pathelement location="jackson-core-asl.jar"/>
                 <pathelement location="jogl-all.jar"/>
                 <pathelement location="gluegen-rt.jar"/>
                 <pathelement location="gdal.jar"/>
@@ -137,6 +140,8 @@
         <!-- WorldWind library JAR files. -->
         <copy file="${worldwind.jar.dir}/release/worldwind.jar" tofile="${webstart.unsigned.dir}/worldwind.jar"/>
         <copy file="${worldwind.jar.dir}/release/worldwindx.jar" tofile="${webstart.unsigned.dir}/worldwindx.jar"/>
+        <!-- Jackson JAR file. -->
+        <copy file="${basedir}/jackson-core-asl.jar" todir="${webstart.unsigned.dir}"/>
         <!-- JOGL and GlueGen library JAR files. -->
         <copy todir="${webstart.unsigned.dir}">
             <fileset dir="${basedir}">
@@ -318,6 +323,7 @@
                      jdk="${worldwind.jdk}">
             <pathelements>
                 <pathelement location="${worldwind.classes.dir}/debug"/>
+                <pathelement location="${basedir}/jackson-core-asl.jar"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
                 <pathelement location="${basedir}/gdal.jar"/>
@@ -338,6 +344,7 @@
                 <pathelement location="${worldwind.src.dir}"/>
                 <pathelement location="${worldwind.classes.dir}/test"/>
                 <pathelement location="${worldwind.classes.dir}/debug"/>
+                <pathelement location="${basedir}/jackson-core-asl.jar"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
                 <pathelement location="${basedir}/gdal.jar"/>
@@ -550,7 +557,7 @@
     <target name="runLayerManager" depends="build" description="Runs the LayerManager example app.">
         <java fork="true" 
               classname="gov.nasa.worldwindx.examples.layermanager.LayerManagerApp" 
-              classpath="gdal.jar;gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar;worldwind.jar;worldwindx.jar"
+              classpath="gdal.jar;gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jackson-core-asl.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar;worldwind.jar;worldwindx.jar"
         />
     </target>
     

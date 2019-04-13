@@ -114,14 +114,14 @@ auxiliary.show.customizer.message=<message>
         <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/2">
             <compilation-unit>
                 <package-root>src</package-root>
-                <classpath mode="compile">gdal.jar;gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar</classpath>
+                <classpath mode="compile">gdal.jar:gluegen-rt-natives-linux-amd64.jar:gluegen-rt-natives-linux-i586.jar:gluegen-rt-natives-macosx-universal.jar:gluegen-rt-natives-windows-amd64.jar:gluegen-rt-natives-windows-i586.jar:gluegen-rt.jar:jackson-core-asl.jar:jogl-all-natives-linux-amd64.jar:jogl-all-natives-linux-i586.jar:jogl-all-natives-macosx-universal.jar:jogl-all-natives-windows-amd64.jar:jogl-all-natives-windows-i586.jar:jogl-all.jar:junit-4.5.jar:vpf-symbols.jar</classpath>
                 <built-to>build/classes/debug</built-to>
                 <source-level>1.5</source-level>
             </compilation-unit>
             <compilation-unit>
                 <package-root>test</package-root>
                 <unit-tests/>
-                <classpath mode="compile">gdal.jar;gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar;worldwind.jar;worldwindx.jar</classpath>
+                <classpath mode="compile">gdal.jar:gluegen-rt-natives-linux-amd64.jar:gluegen-rt-natives-linux-i586.jar:gluegen-rt-natives-macosx-universal.jar:gluegen-rt-natives-windows-amd64.jar:gluegen-rt-natives-windows-i586.jar:gluegen-rt.jar:jackson-core-asl.jar:jogl-all-natives-linux-amd64.jar:jogl-all-natives-linux-i586.jar:jogl-all-natives-macosx-universal.jar:jogl-all-natives-windows-amd64.jar:jogl-all-natives-windows-i586.jar:jogl-all.jar:junit-4.5.jar:vpf-symbols.jar:worldwind.jar:worldwindx.jar</classpath>
                 <built-to>build/classes/test</built-to>
                 <javadoc-built-to>build/doc</javadoc-built-to>
                 <source-level>1.5</source-level>
@@ -129,7 +129,7 @@ auxiliary.show.customizer.message=<message>
             <compilation-unit>
                 <package-root>testFunctional</package-root>
                 <unit-tests/>
-                <classpath mode="compile">gdal.jar;gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar;worldwind.jar;worldwindx.jar</classpath>
+                <classpath mode="compile">gdal.jar:gluegen-rt-natives-linux-amd64.jar:gluegen-rt-natives-linux-i586.jar:gluegen-rt-natives-macosx-universal.jar:gluegen-rt-natives-windows-amd64.jar:gluegen-rt-natives-windows-i586.jar:gluegen-rt.jar:jackson-core-asl.jar:jogl-all-natives-linux-amd64.jar:jogl-all-natives-linux-i586.jar:jogl-all-natives-macosx-universal.jar:jogl-all-natives-windows-amd64.jar:jogl-all-natives-windows-i586.jar:jogl-all.jar:junit-4.5.jar:vpf-symbols.jar:worldwind.jar:worldwindx.jar</classpath>
                 <built-to>build/classes/test</built-to>
                 <source-level>1.5</source-level>
             </compilation-unit>
