@@ -4,8 +4,9 @@
 # Set up to run the Java build script per the Travis CI documentation
 language: java
 
-# Configure the build to use Oracle JDK 8
+# Configure the build to use Oracle JDK 8 and OpenJDK8
 jdk:
+  - openjdk8
   - oraclejdk8
 
 # Install the Ant JUnit package, which is missing from the Travis CI environment. See the Travis documentation: https://docs.travis-ci.com/user/installing-dependencies/#Adding-APT-Packages
