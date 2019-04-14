@@ -8,6 +8,8 @@ language: java
 jdk:
   - openjdk8
   - oraclejdk8
+  - oraclejdk9
+  - oraclejdk11
 
 # Install the Ant JUnit package, which is missing from the Travis CI environment. See the Travis documentation: https://docs.travis-ci.com/user/installing-dependencies/#Adding-APT-Packages
 addons:
