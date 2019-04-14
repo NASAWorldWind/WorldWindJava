@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module relativePaths="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/testClasses" />
     <exclude-output />
@@ -9,11 +9,13 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/testFunctional" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/nbproject" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jogl" level="project" />
     <orderEntry type="library" name="gdal" level="project" />
+    <orderEntry type="library" name="jackson" level="project" />
     <orderEntry type="library" scope="TEST" name="junit4" level="project" />
   </component>
 </module>
