@@ -4,9 +4,20 @@
 # Set up to run the Java build script per the Travis CI documentation
 language: java
 
-# Configure the build to use Oracle JDK 8
+# Configure the build to using the minimum and the latest stable Oracle JDKs and Open JDKs
+# Consider adding openjdk-ea and/or oraclejdk-ea to test early access JDKs
 jdk:
+  - openjdk8
+  - openjdk11
   - oraclejdk8
+  - oraclejdk11
+  - openjdk-ea
+  
+# Don't fail the build on the early access JDK, or wait for it to finish before marking it done.
+matrix:
+  fast_finish: true
+  allow_failures:
+    - jdk: openjdk-ea  
 
 # Install the Ant JUnit package, which is missing from the Travis CI environment. See the Travis documentation: https://docs.travis-ci.com/user/installing-dependencies/#Adding-APT-Packages
 addons:
@@ -33,12 +44,14 @@ deploy:
     skip_cleanup: true
     on:
       branch: develop
+      jdk: oraclejdk8
   # Create CHANGELOG.md in the current directory
   - provider: script
     script: ./travis/changelog.sh >> CHANGELOG.md
     skip_cleanup: true
     on:
       tags: true
+      jdk: oraclejdk8
   # Create a GitHub release and publish CHANGELOG.md to the release assets
   - provider: releases
     api_key: $GITHUB_API_KEY
@@ -46,3 +59,4 @@ deploy:
     skip_cleanup: true
     on:
       tags: true
+      jdk: oraclejdk8
