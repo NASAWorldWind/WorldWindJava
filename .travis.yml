@@ -15,7 +15,7 @@ jdk:
   
 # Don't fail the build on the early access JDK, or wait for it to finish before marking it done.
 matrix:
-  fast_finish: tree
+  fast_finish: true
   allow_failures:
     - jdk: openjdk-ea  
 
