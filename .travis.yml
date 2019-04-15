@@ -11,6 +11,12 @@ jdk:
   - openjdk11
   - oraclejdk8
   - oraclejdk11
+  - openjdk-ea
+  
+#   
+matrix:
+  allow_failures:
+    - jdk: openjdk-ea  
 
 # Install the Ant JUnit package, which is missing from the Travis CI environment. See the Travis documentation: https://docs.travis-ci.com/user/installing-dependencies/#Adding-APT-Packages
 addons:
