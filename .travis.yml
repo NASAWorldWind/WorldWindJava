@@ -13,8 +13,9 @@ jdk:
   - oraclejdk11
   - openjdk-ea
   
-#   
+# Don't fail the build on the early access JDK, or wait for it to finish before marking it done.
 matrix:
+  fast_finish: tree
   allow_failures:
     - jdk: openjdk-ea  
 
@@ -43,12 +44,14 @@ deploy:
     skip_cleanup: true
     on:
       branch: develop
+      jdk: oraclejdk8
   # Create CHANGELOG.md in the current directory
   - provider: script
     script: ./travis/changelog.sh >> CHANGELOG.md
     skip_cleanup: true
     on:
       tags: true
+      jdk: oraclejdk8
   # Create a GitHub release and publish CHANGELOG.md to the release assets
   - provider: releases
     api_key: $GITHUB_API_KEY
@@ -56,3 +59,4 @@ deploy:
     skip_cleanup: true
     on:
       tags: true
+      jdk: oraclejdk8
