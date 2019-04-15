@@ -28,6 +28,19 @@ On March 8, 2019, NASA announced a suspension of the WorldWind project.
 
 WWJ-CE seeks to mitigate the effects of the suspension and continue the development of WorldWind Java.
 
+## Contributing to the Community Edition
+Contributions to WWJ-CE are welcomed in the form of issues and pull requests.
+
+### Before Submitting an Issue
+Please fulfill the following requirements before submitting an issue to this repository:
+
+- Check the [Common Problems](https://github.com/WorldWindEarth/WorldWindJava/wiki/Common-Problems) in the [Tutorials](https://github.com/WorldWindEarth/WorldWindJava/wiki/Tutorials) wiki
+- Check that your issue isn't already filed in the [open issues and pull requests](https://github.com/WorldWindEarth/WorldWindJava/issues?q=is%3Aopen)
+- Check the [WorldWind Java Forums](https://forum.worldwindcentral.com/forum/world-wind-java-forums) for common solutions
+
+### Before Submitting a Pull Request
+Please read [Contributing to WorldWind Java](https://github.com/WorldWindEarth/WorldWindJava/blob/develop/CONTRIBUTING.md) and adhere to the WorldWind Java [Design and Coding Guidelines](https://github.com/WorldWindEarth/WorldWindJava/blob/develop/CONTRIBUTING.md#design-and-coding-guidelines).
+
 ## Releases and Roadmap
 
 Official WorldWind Java releases have the latest stable features, enhancements and bug fixes ready for production use.
