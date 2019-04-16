@@ -12,8 +12,9 @@ context with high-resolution terrain, for visualizing geographic or geo-located 
 Developers can customize the globe's terrain and imagery. The SDK provides a collection of shapes for 
 displaying and interacting with geographic data and representing a range of geometric objects.
 
-- [worldwind.arc.nasa.gov/java](https://worldwind.arc.nasa.gov/java) has setup instructions, developers guides, API documentation and more
-- [WorldWind Forum](https://forum.worldwindcentral.com) provides help from the WorldWind community
+- [WorldWindJava Wiki](https://github.com/WorldWindEarth/WorldWindJava/wiki) has setup instructions, developers guides and more
+- [API Documentation](https://worldwind.earth/WorldWindJava/) provides an extensive collection of useful JavaDocs for the WWJ-CE SDK
+- [WorldWind Forum](https://forum.worldwindcentral.com/forum/world-wind-java-forums) provides help from the WorldWind community
 - [IntelliJ IDEA](https://www.jetbrains.com/idea) is used by the NASA WorldWind development team
 
 ## Notice from NASA
