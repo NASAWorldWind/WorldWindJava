@@ -57,7 +57,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 {
     /** The drawable to which {@link WorldWindow} methods are delegated. */
     protected final WorldWindowGLDrawable wwd; // WorldWindow interface delegates to wwd
-
+    
     /** Constructs a new <code>WorldWindowGLCanvas</code> on the default graphics device. */
     public WorldWindowGLCanvas()
     {
@@ -65,6 +65,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
+            float[] surfaceScale = {1.0f, 1.0f};
+            setSurfaceScale(surfaceScale);
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             this.wwd.addPropertyChangeListener(this);
@@ -100,6 +102,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
+            float[] surfaceScale = {1.0f, 1.0f};
+            setSurfaceScale(surfaceScale);
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             this.wwd.addPropertyChangeListener(this);
@@ -140,6 +144,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
+            float[] surfaceScale = {1.0f, 1.0f};
+            setSurfaceScale(surfaceScale);
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             this.wwd.addPropertyChangeListener(this);
@@ -185,6 +191,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
+            float[] surfaceScale = {1.0f, 1.0f};
+            setSurfaceScale(surfaceScale);
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             if (shareWith != null)
