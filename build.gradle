@@ -6,6 +6,12 @@ version = '2.2.0'
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
+ext {
+    joglVersion = '2.3.2'
+    jacksonVersion = '1.9.13'
+    junitVersion = '4.5'
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -13,15 +19,14 @@ repositories {
 }
 
 dependencies {
-    def joglVersion = '2.3.2'
-    implementation "org.jogamp.jogl:jogl-all-main:$joglVersion"
-    implementation "org.jogamp.gluegen:gluegen-rt-main:$joglVersion"
+    implementation "org.jogamp.jogl:jogl-all-main:${project.joglVersion}"
+    implementation "org.jogamp.gluegen:gluegen-rt-main:${project.joglVersion}"
 
-    implementation files('gdal.jar')
+    compile files('gdal.jar')
 
-    implementation 'org.codehaus.jackson:jackson-core-asl:1.9.13'
+    implementation "org.codehaus.jackson:jackson-core-asl:${project.jacksonVersion}"
 
-    testImplementation 'junit:junit:4.5'
+    testImplementation "junit:junit:${project.junitVersion}"
 }
 
 sourceSets {
@@ -35,6 +40,10 @@ sourceSets {
             srcDirs = ['test']
         }
     }
+}
+
+compileJava {
+    options.debug = project.hasProperty("debugBuild") ? "${project.debugBuild}".toBoolean() : false
 }
 
 // Compile worldwind jar.
@@ -59,6 +68,8 @@ jar.doLast {
 
 // Compile worldwindx jar.
 task extensionsJar(type: Jar) {
+    group = 'build'
+    description = 'Assembles a jar archive containing the extension classes.'
     archiveBaseName = 'worldwindx'
     version = null
     from sourceSets.main.output
