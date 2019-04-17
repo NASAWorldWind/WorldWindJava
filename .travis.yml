@@ -25,6 +25,11 @@ addons:
     packages:
       - ant-optional
 
+# Custom install script to force using ant instead of gradle if travis detects a build.gradle file.
+install: 
+  # Using clean as dummy target; could install dependencies here if needed.
+  - ant clean
+  
 # Use xvfb to run tests that require a GUI and give it some time to start
 before_script:
   - "export DISPLAY=:99.0"
