@@ -65,8 +65,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
-            float[] surfaceScale = {1.0f, 1.0f};
-            setSurfaceScale(surfaceScale);
+            initializeSurfaceScale();
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             this.wwd.addPropertyChangeListener(this);
@@ -102,8 +101,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
-            float[] surfaceScale = {1.0f, 1.0f};
-            setSurfaceScale(surfaceScale);
+            initializeSurfaceScale();
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             this.wwd.addPropertyChangeListener(this);
@@ -144,8 +142,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
-            float[] surfaceScale = {1.0f, 1.0f};
-            setSurfaceScale(surfaceScale);
+            initializeSurfaceScale();
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             this.wwd.addPropertyChangeListener(this);
@@ -191,8 +188,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
-            float[] surfaceScale = {1.0f, 1.0f};
-            setSurfaceScale(surfaceScale);
+            initializeSurfaceScale();
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             if (shareWith != null)
@@ -210,6 +206,12 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             Logging.logger().severe(message);
             throw new WWRuntimeException(message, e);
         }
+    }
+    
+    private void initializeSurfaceScale()
+    {
+        float[] surfaceScale = {1.0f, 1.0f};
+        setSurfaceScale(surfaceScale);
     }
 
     public void propertyChange(PropertyChangeEvent evt)
