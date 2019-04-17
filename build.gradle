@@ -1,0 +1,119 @@
+apply plugin: 'java'
+
+group = 'gov.nasa'
+version = '2.2.0'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+ext {
+    joglVersion = '2.3.2'
+    jacksonVersion = '1.9.13'
+    junitVersion = '4.5'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation "org.jogamp.jogl:jogl-all-main:${project.joglVersion}"
+    implementation "org.jogamp.gluegen:gluegen-rt-main:${project.joglVersion}"
+
+    compile files('gdal.jar')
+
+    implementation "org.codehaus.jackson:jackson-core-asl:${project.jacksonVersion}"
+
+    testImplementation "junit:junit:${project.junitVersion}"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['test']
+        }
+    }
+}
+
+compileJava {
+    options.debug = project.hasProperty("debugBuild") ? "${project.debugBuild}".toBoolean() : false
+}
+
+// Compile worldwind jar.
+jar {
+    dependsOn classes
+    version = null
+    from sourceSets.main.output
+    exclude 'gov/nasa/worldwindx/**'
+    from(sourceSets.main.allSource) {
+        include 'gov/nasa/worldwind/util/**/*.properties'
+        include 'config/**'
+        include 'images/**'
+    }
+}
+// Copy worldwind jar to project-directory.
+jar.doLast {
+    copy {
+        from "$buildDir/libs/${jar.archiveName}"
+        into "${project.projectDir}"
+    }
+}
+
+// Compile worldwindx jar.
+task extensionsJar(type: Jar) {
+    group = 'build'
+    description = 'Assembles a jar archive containing the extension classes.'
+    archiveBaseName = 'worldwindx'
+    version = null
+    from sourceSets.main.output
+    include 'gov/nasa/worldwindx/**/*.class'
+    from(sourceSets.main.allSource) {
+        include 'gov/nasa/worldwindx/applications/sar/*.html'
+        include 'gov/nasa/worldwindx/applications/sar/config/**'
+        include 'gov/nasa/worldwindx/applications/sar/data/**'
+        include 'gov/nasa/worldwindx/applications/sar/images/**'
+        include 'gov/nasa/worldwindx/applications/worldwindow/config/**'
+        include 'gov/nasa/worldwindx/applications/worldwindow/images/**'
+        include 'gov/nasa/worldwindx/examples/data/**'
+        include 'gov/nasa/worldwindx/examples/images/**'
+    }
+}
+// Copy worldwindx jar to project-directory.
+extensionsJar.doLast {
+    copy {
+        from "$buildDir/libs/${extensionsJar.archiveName}"
+        into "${project.projectDir}"
+    }
+}
+
+artifacts {
+    archives extensionsJar
+}
+
+test {
+    dependsOn jar
+    classpath += project.files("$buildDir/libs/${jar.archiveName}", configurations.runtime)
+}
+
+javadoc {
+    options {
+        overview = "${project.projectDir}/src/overview.html"
+        windowTitle = 'WorldWindJava API'
+        title = 'NASA WorldWind Java-Community Edition'
+        header = 'NASA WorldWind-CE'
+        splitIndex = true
+        noDeprecated = true
+        version = false
+        author = false
+        use = true
+    }
+    exclude 'com/**'
+    exclude 'gov/nasa/worldwind/formats/**'
+}
