@@ -8,6 +8,7 @@ package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.render.SurfaceText;
@@ -29,6 +30,7 @@ public class SurfaceTextUsage extends ApplicationTemplate
             RenderableLayer layer = new RenderableLayer();
 
             SurfaceText surfaceText = new SurfaceText("Desolation Wilderness", Position.fromDegrees(38.9345, -120.1670, 0));
+            surfaceText.setHeading(Angle.fromDegrees(30));
             layer.addRenderable(surfaceText);
 
             this.getWwd().getModel().getLayers().add(layer);

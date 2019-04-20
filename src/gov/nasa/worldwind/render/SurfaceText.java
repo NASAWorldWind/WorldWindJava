@@ -42,6 +42,8 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     protected CharSequence text;
     /** Location at which to draw the text. */
     protected Position location;
+    /** The angle of text rotation from the true north (clockwise). */
+    protected Angle heading = Angle.ZERO;
     /** The height of the text in meters. */
     protected double textSizeInMeters = DEFAULT_TEXT_SIZE_IN_METERS;
     /** Dragging Support */
@@ -150,6 +152,30 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
         }
 
         this.location = position;
+        this.onShapeChanged();
+    }
+
+    /** {@inheritDoc} */
+    public Angle getHeading()
+    {
+        return this.heading;
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * The angle of text rotation from the true north (clockwise)
+     */
+    public void setHeading(Angle heading)
+    {
+        if (heading == null)
+        {
+            String message = Logging.getMessage("nullValue.HeadingIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        this.heading = heading;
         this.onShapeChanged();
     }
 
@@ -461,6 +487,9 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
 
         // Apply the scaling factor to draw the text at the correct geographic size
         gl.glScaled(this.scale, this.scale, 1d);
+
+        // Apply rotation angle
+        gl.glRotated(-this.heading.degrees, 0, 0, 1);
     }
 
     /**
