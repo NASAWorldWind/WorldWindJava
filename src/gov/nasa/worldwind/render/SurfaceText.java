@@ -42,6 +42,8 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     protected CharSequence text;
     /** Location at which to draw the text. */
     protected Position location;
+    /** The angle of text rotation from the true north (clockwise). */
+    protected Angle heading = Angle.ZERO;
     /** The height of the text in meters. */
     protected double textSizeInMeters = DEFAULT_TEXT_SIZE_IN_METERS;
     /** Dragging Support */
@@ -150,6 +152,30 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
         }
 
         this.location = position;
+        this.onShapeChanged();
+    }
+
+    /** {@inheritDoc} */
+    public Angle getHeading()
+    {
+        return this.heading;
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * The angle of text rotation from the true north (clockwise)
+     */
+    public void setHeading(Angle heading)
+    {
+        if (heading == null)
+        {
+            String message = Logging.getMessage("nullValue.HeadingIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        this.heading = heading;
         this.onShapeChanged();
     }
 
@@ -394,13 +420,6 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     protected void drawText(DrawContext dc)
     {
         TextRenderer tr = this.getTextRenderer(dc);
-
-        Point2D point = this.getOffset().computeOffset(this.textBounds.getWidth(), this.textBounds.getHeight(), null,
-            null);
-
-        int x = (int) point.getX();
-        int y = (int) point.getY();
-
         try
         {
             tr.begin3DRendering();
@@ -409,9 +428,9 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
             CharSequence text = this.getText();
 
             tr.setColor(bgColor);
-            tr.draw(text, x + 1, y - 1);
+            tr.draw(text, 1, -1);
             tr.setColor(this.getColor());
-            tr.draw(text, x, y);
+            tr.draw(text, 0, 0);
         }
         finally
         {
@@ -461,6 +480,24 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
 
         // Apply the scaling factor to draw the text at the correct geographic size
         gl.glScaled(this.scale, this.scale, 1d);
+        
+        double widthInPixels = this.textBounds.getWidth();
+        double heightInPixels = this.textBounds.getHeight();
+        
+        Point2D textDimensions = getRotatedTextDimensions();
+        double rotatedPixelHeight = textDimensions.getY();
+        double rotatedPixelWidth = textDimensions.getX();
+        
+        Point2D textOffset = getOffset().computeOffset(rotatedPixelWidth, rotatedPixelHeight, null, null);
+        
+        // Move to offset position.
+        gl.glTranslated(rotatedPixelWidth / 2.0 + textOffset.getX(), rotatedPixelHeight / 2.0 + textOffset.getY(), 0);
+
+        // Apply rotation angle from text center.
+        gl.glRotated(-this.heading.degrees, 0, 0, 1);
+
+        // Move to text center.
+        gl.glTranslated(-widthInPixels / 2.0, -heightInPixels / 2.0, 0);
     }
 
     /**
@@ -523,6 +560,54 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
         else
             return new Color(1, 1, 1, 0.7f);
     }
+    
+    private Point2D getRotatedTextDimensions()
+    {
+        double widthInPixels = this.textBounds.getWidth();
+        double heightInPixels = this.textBounds.getHeight();
+        
+        Angle rotation = Angle.normalizedLongitude(this.heading);
+        double ct = Math.cos(rotation.radians);
+        double st = Math.sin(rotation.radians);
+
+        double hct = heightInPixels * ct;
+        double wct = widthInPixels * ct;
+        double hst = heightInPixels * st;
+        double wst = widthInPixels * st;
+        
+        if (rotation.degrees > 0)
+        {
+            if (rotation.degrees < 90)
+            {
+                // 0 < theta < 90
+                heightInPixels = hct + wst;
+                widthInPixels = wct + hst;
+            }
+            else
+            {
+                // 90 <= theta <= 180
+                heightInPixels = wst - hct;
+                widthInPixels = hst - wct;
+            }
+        }
+        else
+        {
+            if (rotation.degrees > -90 )
+            {
+                // -90 < theta <= 0
+                heightInPixels = hct - wst;
+                widthInPixels = wct - hst;
+            }
+            else
+            {
+                // -180 <= theta <= -90
+                heightInPixels = -(hct + wst);
+                widthInPixels = -(wct + hst);
+            }
+        }
+        
+        return new Point2D.Double(widthInPixels, heightInPixels);
+    }
 
     /**
      * Compute the sector covered by this surface text.
@@ -536,30 +621,32 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
         // Compute text extent depending on distance from eye
         Globe globe = dc.getGlobe();
 
-        double widthInPixels = this.textBounds.getWidth();
-        double heightInPixels = this.textBounds.getHeight();
-
-        double heightInMeters = this.textSizeInMeters;
+        Point2D textDimensions = getRotatedTextDimensions();
+        double heightInPixels = textDimensions.getY();
+        double widthInPixels = textDimensions.getX();
+        
+        double heightFactor = heightInPixels / this.textBounds.getHeight();
+        double heightInMeters = heightFactor * this.textSizeInMeters;
         double widthInMeters = heightInMeters * (widthInPixels / heightInPixels);
-
+        
         double radius = globe.getRadius();
         double heightInRadians = heightInMeters / radius;
         double widthInRadians = widthInMeters / radius;
 
-        // Compute the offset from the reference position. Convert pixels to meters based on the geographic size
-        // of the text.
-        Point2D point = this.getOffset().computeOffset(widthInPixels, heightInPixels, null, null);
+        // Compute the offset from the reference position.
+        // Convert pixels to meters based on the geographic size of the text.
+        Point2D textOffset = getOffset().computeOffset(widthInPixels, heightInPixels, null, null);
 
         double metersPerPixel = heightInMeters / heightInPixels;
 
-        double dxRadians = (point.getX() * metersPerPixel) / radius;
-        double dyRadians = (point.getY() * metersPerPixel) / radius;
-
+        double dxRadians = (textOffset.getX() * metersPerPixel) / radius;
+        double dyRadians = (textOffset.getY() * metersPerPixel) / radius;
+        
         double minLat = this.location.latitude.addRadians(dyRadians).degrees;
         double maxLat = this.location.latitude.addRadians(dyRadians + heightInRadians).degrees;
         double minLon = this.location.longitude.addRadians(dxRadians).degrees;
         double maxLon = this.location.longitude.addRadians(dxRadians + widthInRadians).degrees;
-
+        
         this.drawLocation = LatLon.fromDegrees(minLat, minLon);
 
         if (maxLon > 180) {
