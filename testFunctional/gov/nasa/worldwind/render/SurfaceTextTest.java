@@ -77,6 +77,6 @@ public class SurfaceTextTest extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, center.longitude.degrees);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, center.elevation);
 
-        ApplicationTemplate.start("WorldWind Surface Text", AppFrame.class);
+        ApplicationTemplate.start("Surface Text Test", AppFrame.class);
     }
 }
