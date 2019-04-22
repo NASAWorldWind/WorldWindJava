@@ -493,10 +493,10 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
         // Move to offset position.
         gl.glTranslated(rotatedPixelWidth / 2.0 + textOffset.getX(), rotatedPixelHeight / 2.0 + textOffset.getY(), 0);
 
-        // Apply rotation angle on from center.
+        // Apply rotation angle from text center.
         gl.glRotated(-this.heading.degrees, 0, 0, 1);
 
-        // Move to center.
+        // Move to text center.
         gl.glTranslated(-widthInPixels / 2.0, -heightInPixels / 2.0, 0);
     }
 
