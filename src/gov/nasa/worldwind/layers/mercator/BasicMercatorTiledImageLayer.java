@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class BasicMercatorTiledImageLayer extends BasicTiledImageLayer
 {
-    private static LevelSet makeLevels(String name, int numLevels, int tileSize, String formatSuffix, MercatorTileUrlBuilder buider)
+    private static LevelSet makeLevels(String datasetName, String dataCacheName, int numLevels, int tileSize, String formatSuffix, MercatorTileUrlBuilder buider)
     {
         double delta = Angle.POS360.degrees / (1 << buider.getFirstLevelOffset());
         AVList params = new AVListImpl();
@@ -31,15 +31,15 @@ public class BasicMercatorTiledImageLayer extends BasicTiledImageLayer
         params.setValue(AVKey.FORMAT_SUFFIX, formatSuffix);
         params.setValue(AVKey.TILE_WIDTH, tileSize);
         params.setValue(AVKey.TILE_HEIGHT, tileSize);
-        params.setValue(AVKey.DATASET_NAME, "*");
-        params.setValue(AVKey.DATA_CACHE_NAME, "Earth/Mercator/" + name);
+        params.setValue(AVKey.DATASET_NAME, datasetName);
+        params.setValue(AVKey.DATA_CACHE_NAME, dataCacheName);
         params.setValue(AVKey.TILE_URL_BUILDER, buider);
         return new LevelSet(params);
     }
 
-    public BasicMercatorTiledImageLayer(String name, int numLevels, int tileSize, boolean overlay, String formatSuffix, MercatorTileUrlBuilder builder)
+    public BasicMercatorTiledImageLayer(String datasetName, String dataCacheName, int numLevels, int tileSize, boolean overlay, String formatSuffix, MercatorTileUrlBuilder builder)
     {
-        this(makeLevels(name, numLevels, tileSize, formatSuffix, builder));
+        this(makeLevels(datasetName, dataCacheName, numLevels, tileSize, formatSuffix, builder));
         setUseTransparentTextures(overlay);
     }
 
