@@ -218,7 +218,7 @@ public class Tile implements Comparable<Tile>, Cacheable
         return path.contains(".") ? path.substring(0, path.lastIndexOf(".")) : path;
     }
 
-    public final Sector getSector()
+    public Sector getSector()
     {
         return sector;
     }
