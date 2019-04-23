@@ -21,10 +21,9 @@ import java.util.ArrayList;
  */
 public class BasicMercatorTiledImageLayer extends BasicTiledImageLayer
 {
-
-    private static LevelSet makeLevels(String name, int numLevels, int tileSize, String formatSuffix, MercatorTileUrlBuilder buider) {
+    private static LevelSet makeLevels(String name, int numLevels, int tileSize, String formatSuffix, MercatorTileUrlBuilder buider)
+    {
         double delta = Angle.POS360.degrees / (1 << buider.getFirstLevelOffset());
-
         AVList params = new AVListImpl();
         params.setValue(AVKey.SECTOR, new MercatorSector(-1.0, 1.0, Angle.NEG180, Angle.POS180));
         params.setValue(AVKey.LEVEL_ZERO_TILE_DELTA, new LatLon(Angle.fromDegrees(delta / 2), Angle.fromDegrees(delta)));
@@ -35,21 +34,23 @@ public class BasicMercatorTiledImageLayer extends BasicTiledImageLayer
         params.setValue(AVKey.DATASET_NAME, "*");
         params.setValue(AVKey.DATA_CACHE_NAME, "Earth/Mercator/" + name);
         params.setValue(AVKey.TILE_URL_BUILDER, buider);
-
         return new LevelSet(params);
     }
 
-    public BasicMercatorTiledImageLayer(String name, int numLevels, int tileSize, boolean overlay, String formatSuffix, MercatorTileUrlBuilder builder) {
+    public BasicMercatorTiledImageLayer(String name, int numLevels, int tileSize, boolean overlay, String formatSuffix, MercatorTileUrlBuilder builder)
+    {
         this(makeLevels(name, numLevels, tileSize, formatSuffix, builder));
         setUseTransparentTextures(overlay);
     }
 
-    public BasicMercatorTiledImageLayer(LevelSet levelSet) {
+    public BasicMercatorTiledImageLayer(LevelSet levelSet)
+    {
         super(levelSet);
     }
 
     @Override
-    protected void createTopLevelTiles() {
+    protected void createTopLevelTiles()
+    {
         MercatorSector sector = (MercatorSector) this.levels.getSector();
 
         Level level = levels.getFirstLevel();
@@ -72,10 +73,12 @@ public class BasicMercatorTiledImageLayer extends BasicTiledImageLayer
 
         double deltaLat = dLat.degrees / 90;
         double d1 = sector.getMinLatPercent() + deltaLat * firstRow;
-        for (int row = firstRow; row <= lastRow; row++) {
+        for (int row = firstRow; row <= lastRow; row++)
+        {
             double d2 = d1 + deltaLat;
             Angle t1 = Tile.computeColumnLongitude(firstCol, dLon, lonOrigin);
-            for (int col = firstCol; col <= lastCol; col++) {
+            for (int col = firstCol; col <= lastCol; col++)
+            {
                 Angle t2;
                 t2 = t1.add(dLon);
                 this.topLevels.add(new MercatorTextureTile(new MercatorSector(d1, d2, t1, t2), level, row, col));
@@ -86,63 +89,81 @@ public class BasicMercatorTiledImageLayer extends BasicTiledImageLayer
     }
 
     @Override
-    protected boolean needToSplit(DrawContext dc, Sector sector, Level level) {
+    protected boolean needToSplit(DrawContext dc, Sector sector, Level level)
+    {
         double texelSize = level.getTexelSize() * dc.getGlobe().getRadius();
         double pixelSize = dc.getView().computePixelSizeAtDistance(sector.distanceTo(dc, dc.getView().getEyePoint()));
         return texelSize > pixelSize * this.getDetailFactor();
     }
 
     @Override
-    protected DownloadPostProcessor createDownloadPostProcessor(TextureTile tile) {
+    protected DownloadPostProcessor createDownloadPostProcessor(TextureTile tile)
+    {
         return new MercatorDownloadPostProcessor((MercatorTextureTile) tile, this);
     }
 
-    private static class MercatorDownloadPostProcessor extends DownloadPostProcessor {
+    private static class MercatorDownloadPostProcessor extends DownloadPostProcessor
+    {
 
-        MercatorDownloadPostProcessor(MercatorTextureTile tile, BasicMercatorTiledImageLayer layer) {
+        MercatorDownloadPostProcessor(MercatorTextureTile tile, BasicMercatorTiledImageLayer layer) 
+        {
             super(tile, layer);
         }
 
         @Override
-        protected BufferedImage transformPixels() {
+        protected BufferedImage transformPixels()
+        {
             // Make parent transformations
             BufferedImage image = super.transformPixels();
 
             // Read image from buffer
-            if(image == null) {
-                try {
+            if (image == null)
+            {
+                try
+                {
                     image = ImageIO.read(new ByteArrayInputStream(this.getRetriever().getBuffer().array()));
-                } catch (IOException ignored) {
+                }
+                catch (IOException ignored)
+                {
                     return null;
                 }
             }
 
             // Transform mercator tile to equirectangular projection
-            if(image != null) {
+            if (image != null)
+            {
                 int type = image.getType();
-                if (type == BufferedImage.TYPE_CUSTOM) type = BufferedImage.TYPE_INT_RGB;
-                else if (type == BufferedImage.TYPE_BYTE_INDEXED) type = BufferedImage.TYPE_INT_ARGB;
+                if (type == BufferedImage.TYPE_CUSTOM)
+                {
+                    type = BufferedImage.TYPE_INT_RGB;
+                }
+                else if (type == BufferedImage.TYPE_BYTE_INDEXED)
+                {
+                    type = BufferedImage.TYPE_INT_ARGB;
+                }
 
                 BufferedImage trans = new BufferedImage(image.getWidth(), image.getHeight(), type);
                 double miny = ((MercatorSector) tile.getSector()).getMinLatPercent();
                 double maxy = ((MercatorSector) tile.getSector()).getMaxLatPercent();
-                for (int y = 0; y < image.getHeight(); y++) {
+                for (int y = 0; y < image.getHeight(); y++)
+                {
                     double sy = 1.0 - y / (double) (image.getHeight() - 1);
                     Angle lat = Angle.fromRadians(sy * tile.getSector().getDeltaLatRadians() + tile.getSector().getMinLatitude().radians);
                     double dy = 1.0 - (MercatorSector.gudermannianInverse(lat) - miny) / (maxy - miny);
                     dy = Math.max(0.0, Math.min(1.0, dy));
                     int iy = (int) (dy * (image.getHeight() - 1));
-                    for (int x = 0; x < image.getWidth(); x++) {
+                    for (int x = 0; x < image.getWidth(); x++)
+                    {
                         trans.setRGB(x, y, image.getRGB(x, iy));
                     }
                 }
 
                 return trans;
-            } else {
+            }
+            else
+            {
                 return null;
             }
         }
-
     }
-
 }

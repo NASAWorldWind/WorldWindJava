@@ -15,7 +15,6 @@ import java.net.*;
  */
 public abstract class MercatorTileUrlBuilder implements TileUrlBuilder
 {
-
     private int firstLevelOffset;
 
     public MercatorTileUrlBuilder setFirstLevelOffset(int firstLevelOffset) {
@@ -34,5 +33,4 @@ public abstract class MercatorTileUrlBuilder implements TileUrlBuilder
     }
 
     protected abstract URL getMercatorURL(int x, int y, int z) throws MalformedURLException;
-
 }
