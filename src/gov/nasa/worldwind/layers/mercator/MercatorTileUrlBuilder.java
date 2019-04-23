@@ -15,7 +15,14 @@ import java.net.*;
  */
 public abstract class MercatorTileUrlBuilder implements TileUrlBuilder
 {
+    private static final int DEFAULT_FIRST_LEVEL_OFFSET = 3;
+    
     private int firstLevelOffset;
+    
+    protected MercatorTileUrlBuilder()
+    {
+        this.firstLevelOffset = DEFAULT_FIRST_LEVEL_OFFSET;
+    }
 
     public MercatorTileUrlBuilder setFirstLevelOffset(int firstLevelOffset) {
         this.firstLevelOffset = firstLevelOffset;
