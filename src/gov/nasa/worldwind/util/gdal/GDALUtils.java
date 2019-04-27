@@ -31,6 +31,24 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 
 /**
+ * Worldwind users should install a binary edition of GDAL, including the Java interface (gdal.jar,
+ * gdalalljni.lib/libgdalalljni.so).<p>
+ *
+ * - The classpath used to build/execute Worldwind must include the location of the gdal.jar file.<br>
+ * - On Windows, the 'java.libary.path' property must be set to the location of the JNI shared library.<br>
+ * - In addition, if the DLLs are not in the same directory as the launched application, the PATH 
+ * environment variable should be set to include the location of the shared libraries.  Note that if
+ * 'java.library.path' is not explicitly set, the JVM's default includes PATH plus the current directory.<br>
+ * - On Linux, the LD_LIBRARY_PATH environment variable should be set to include the location of the 
+ * JNI shared library.  The JVM will include the paths in LD_LIBRARY_PATH in the 'java.library.path' 
+ * property.<p>
+ *
+ * - Unless the GDAL_DATA environment variable is set, the GDAL data directory will be searched for, 
+ * using the property "user.dir", and then in some standard locations.<p>
+ *
+ * - Unless the GDAL_DRIVER_PATH environment variable is set, the GDAL plugins direoctory will be 
+ * searched for, using the property "user.dir", and then in some standard locations.<p>
+ * 
  * @author Lado Garakanidze
  * @version $Id: GDALUtils.java 3031 2015-04-17 14:53:23Z tgaskins $
  */
@@ -43,203 +61,80 @@ public class GDALUtils
 
     protected static final String JAVA_LIBRARY_PATH = "java.library.path";
     protected static final String GDAL_DRIVER_PATH = "GDAL_DRIVER_PATH";
-    protected static final String OGR_DRIVER_PATH = "OGR_DRIVER_PATH";
     protected static final String GDAL_DATA_PATH = "GDAL_DATA";
 
     protected static final AtomicBoolean gdalIsAvailable = new AtomicBoolean(false);
 
-    // This is an OLD default libname request by WW build of GDAL
-    protected static final String gdalalljni = Configuration.isMacOS()
-        ? "gdalalljni" : (is32bitArchitecture() ? "gdalalljni32" : "gdalalljni64");
+    static {
+		try {
+			boolean runningAsJavaWebStart = (null != System.getProperty("javawebstart.version", null));
 
-    protected static final CopyOnWriteArraySet<String> loadedLibraries = new CopyOnWriteArraySet<String>();
-    protected static final CopyOnWriteArraySet<String> failedLibraries = new CopyOnWriteArraySet<String>();
+			if (!runningAsJavaWebStart) {
+				String[] searchDirs;
+				if (Configuration.isWindowsOS())
+					searchDirs = new String[] { getCurrentDirectory(), "C:\\Program Files\\GDAL" };
+				else
+					searchDirs = new String[] { getCurrentDirectory(), "/usr/share/gdal", "/usr/lib", "/usr/lib/gdal" };
+				
+				// If the environment variables are set, no need to set configuration options.
+				String dataFolder = System.getenv("GDAL_DATA");
+				if (dataFolder == null) {
+					for (String dir:searchDirs) {
+						dataFolder = findGdalDataFolder(dir);
+						if (null != dataFolder) {
+							String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder);
+							Logging.logger().info(msg);
+							gdal.SetConfigOption(GDAL_DATA_PATH, dataFolder);
+							break;
+						}
+					}
+					if (dataFolder == null)
+						Logging.logger().log(Level.WARNING, "gdal.SharedDataFolderNotFound");
+				}
 
-    static
-    {
-        // Allow the app or user to prevent library loader replacement.
-        if (System.getProperty("gov.nasa.worldwind.prevent.gdal.loader.replacement") == null)
-            replaceLibraryLoader(); // This must be the first line of initialization
-        initialize();
-    }
+				// Try for GDAL_DRIVER_PATH
+				String drvpath = System.getenv(GDAL_DRIVER_PATH);
+				if (drvpath == null) {
+					for (String dir:searchDirs) {
+						drvpath = findGdalPlugins(dir);
+						if (drvpath != null) {
+							String msg = Logging.getMessage("gdal.PluginFolderFound", drvpath);
+							Logging.logger().info(msg);
+							gdal.SetConfigOption(GDAL_DRIVER_PATH, drvpath);
+							break;
+						}
+					}
+					if (drvpath == null)
+						Logging.logger().log(Level.WARNING, "gdal.PluginFolderNotFound");
+				}
+			}
 
-    private static class GDALLibraryLoader implements gdal.LibraryLoader
-    {
-        public void load(String libName) throws UnsatisfiedLinkError
-        {
-            if (WWUtil.isEmpty(libName))
-            {
-                String message = Logging.getMessage("nullValue.LibraryIsNull");
-                Logging.logger().severe(message);
-                throw new java.lang.UnsatisfiedLinkError(message);
-            }
+			gdal.AllRegister();
+			ogr.RegisterAll();
 
-            // check if the library is already loaded
-            if (loadedLibraries.contains(libName))
-                return;
+			/**
+			 *  "VERSION_NUM": Returns GDAL_VERSION_NUM formatted as a string.  ie. "1170"
+			 *  "RELEASE_DATE": Returns GDAL_RELEASE_DATE formatted as a string. "20020416"
+			 *  "RELEASE_NAME": Returns the GDAL_RELEASE_NAME. ie. "1.1.7"
+			 *   "--version": Returns full version , ie. "GDAL 1.1.7, released 2002/04/16"
+			 */
+			String msg = Logging.getMessage("generic.LibraryLoadedOK", "GDAL v" + gdal.VersionInfo("RELEASE_NAME"));
+			Logging.logger().info(msg);
+			listAllRegisteredDrivers();
 
-            String message;
-
-            // check if the library is already know (from previous attempts) to fail to load
-            if ( !failedLibraries.contains(libName) )
-            {
-                try
-                {
-                    NativeLibraryLoader.loadLibrary(libName);
-                    loadedLibraries.add(libName);
-                    Logging.logger().info( Logging.getMessage("generic.LibraryLoadedOK", libName ));
-
-                    return; // GOOD! Leaving now
-                }
-                catch (Throwable t)
-                {
-                    String reason = WWUtil.extractExceptionReason(t);
-                    message = Logging.getMessage("generic.LibraryNotLoaded", libName, reason);
-                    Logging.logger().finest(message);
-
-                    failedLibraries.add(libName);
-                }
-            }
+			gdalIsAvailable.set(true);
+		} catch (Throwable t) {
+			String reason = Logging.getMessage("generic.LibraryNotFound", "GDAL" );
+			String msg = Logging.getMessage("generic.LibraryNotLoaded", "GDAL", reason );
+			Logging.logger().warning(msg);
+			Logging.logger().log(Level.WARNING, t.getMessage(), t);
+			Logging.logger().info(JAVA_LIBRARY_PATH + "=" + System.getProperty(JAVA_LIBRARY_PATH));
+			Logging.logger().info("user.dir" + "=" + getCurrentDirectory());
+			if (Configuration.isWindowsOS())
+                Logging.logger().info("PATH"+ "=" + System.getenv("PATH"));
             else
-            {
-                String reason = Logging.getMessage("generic.LibraryNotFound", libName );
-                message = Logging.getMessage("generic.LibraryNotLoaded", libName, reason);
-            }
-
-            throw new UnsatisfiedLinkError(message);
-        }
-    }
-
-    protected static void replaceLibraryLoader()
-    {
-        try
-        {
-            ClassLoader cl = Thread.currentThread().getContextClassLoader();
-            Class gdalClass = cl.loadClass("org.gdal.gdal.gdal");
-
-            boolean isKnownBuild = false;
-            Method[] methods = gdalClass.getDeclaredMethods();
-            for (Method m : methods)
-            {
-                if ("setLibraryLoader".equals(m.getName()))
-                {
-                    gdal.setLibraryLoader(new GDALLibraryLoader());
-//                    Logging.logger().finest(Logging.getMessage("gdal.LibraryLoaderReplacedOK"));
-                    isKnownBuild = true;
-                    break;
-                }
-            }
-
-            if (!isKnownBuild)
-            {
-                String message = Logging.getMessage("gdal.UnknownBuild", gdal.VersionInfo());
-                Logging.logger().finest(message);
-            }
-        }
-        catch (ClassNotFoundException cnf)
-        {
-            Logging.logger().finest(cnf.getMessage());
-        }
-        catch (Throwable t)
-        {
-            Logging.logger().finest(t.getMessage());
-        }
-    }
-
-    protected static boolean is32bitArchitecture()
-    {
-        String arch = System.getProperty("sun.arch.data.model");
-        if( !WWUtil.isEmpty(arch) )
-            return ("32".equals(arch));
-
-        // GNU JAVA does not return "sun.arch.data.model"
-        return "x86".equals(System.getProperty("os.arch"));
-    }
-
-    protected static boolean gdalPreLoadNativeLibrary(boolean allowLogErrors)
-    {
-        try
-        {
-            NativeLibraryLoader.loadLibrary(gdalalljni);
-            loadedLibraries.add(gdalalljni);
-            Logging.logger().info( Logging.getMessage("generic.LibraryLoadedOK", gdalalljni ));
-
-            return true;
-        }
-        catch (Throwable t)
-        {
-            if( allowLogErrors )
-                Logging.logger().finest(WWUtil.extractExceptionReason(t));
-        }
-
-        return false;
-    }
-
-    protected static void initialize()
-    {
-        try
-        {
-            boolean runningAsJavaWebStart = (null != System.getProperty("javawebstart.version", null));
-
-			// attempt to load library from default locations
-			// (current path OR by specifying java.library.path from the command line)
-            boolean gdalNativeLibraryLoaded = gdalPreLoadNativeLibrary(false);
-
-            if (!gdalNativeLibraryLoaded && !runningAsJavaWebStart)
-            {
-            	// if we are here, library is not in any default place, so we will search in sub-folders
-                String[] folders = findGdalFolders();
-                String newJavaLibraryPath = buildPathString(folders, true);
-                if (newJavaLibraryPath != null)
-                {
-                    alterJavaLibraryPath(newJavaLibraryPath);
-//                    gdalNativeLibraryLoaded = gdalLoadNativeLibrary(true);
-                }
-            }
-
-            if ( /* gdalNativeLibraryLoaded && */ gdalJNI.isAvailable() && gdalconstJNI.isAvailable())
-            {
-                if (!runningAsJavaWebStart)
-                {
-                    // No need, because we are build one dynamic library that contains ALL  drivers
-                    // and dependant libraries
-                    // gdal.SetConfigOption(GDAL_DRIVER_PATH, pathToLibs);
-                    // gdal.SetConfigOption(OGR_DRIVER_PATH, pathToLibs);
-                    String dataFolder = findGdalDataFolder();
-                    if (null != dataFolder)
-                    {
-                        String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder);
-                        Logging.logger().finest(msg);
-                        gdal.SetConfigOption(GDAL_DATA_PATH, dataFolder);
-                    }
-                }
-
-                gdal.AllRegister();
-                ogr.RegisterAll();
-
-                /**
-                 *  "VERSION_NUM": Returns GDAL_VERSION_NUM formatted as a string.  ie. "1170"
-                 *  "RELEASE_DATE": Returns GDAL_RELEASE_DATE formatted as a string. "20020416"
-                 *  "RELEASE_NAME": Returns the GDAL_RELEASE_NAME. ie. "1.1.7"
-                 *   "--version": Returns full version , ie. "GDAL 1.1.7, released 2002/04/16"
-                 */
-                String msg = Logging.getMessage("generic.LibraryLoadedOK", "GDAL v" + gdal.VersionInfo("RELEASE_NAME"));
-                Logging.logger().info(msg);
-                listAllRegisteredDrivers();
-
-                gdalIsAvailable.set(true);
-            }
-            else
-            {
-                String reason = Logging.getMessage("generic.LibraryNotFound", "GDAL" );
-                String msg = Logging.getMessage("generic.LibraryNotLoaded", "GDAL", reason );
-                Logging.logger().warning(msg);
-            }
-        }
-        catch (Throwable t)
-        {
-            Logging.logger().log(Level.FINEST, t.getMessage(), t);
-        }
+                Logging.logger().info("LD_LIBRARY_PATH"+ "=" + System.getenv("LD_LIBRARY_PATH"));
+		}
     }
 
     protected static String getCurrentDirectory()
@@ -254,34 +149,30 @@ public class GDALUtils
         }
         return cwd;
     }
-
-    protected static String[] findGdalFolders()
-    {
-        try
-        {
-            String cwd = getCurrentDirectory();
-
-            FileTree fileTree = new FileTree(new File(cwd));
-            fileTree.setMode(FileTree.FILES_AND_DIRECTORIES);
-
-            GDALLibraryFinder filter = new GDALLibraryFinder(/*gdalalljni*/);
-            fileTree.asList(filter);
-            return filter.getFolders();
-        }
-        catch (Throwable t)
-        {
-            Logging.logger().severe(t.getMessage());
-        }
-        return null;
+    
+    // This method only checks the files at the top level; it doesn't do a recursive
+    // search like findGdalDataFolder.  Searching "/usr/lib" takes far too long if a 
+    // recursive search is performed.
+    protected static String findGdalPlugins(String dir) {
+    	FileFilter filter = new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return pathname.isDirectory() && pathname.getName().equalsIgnoreCase("gdalplugins");
+			}
+    	};
+    	File[] filenames = (new File(dir)).listFiles(filter);
+    	
+    	if (filenames.length > 0)
+    		return filenames[0].getAbsolutePath();
+    	else
+    		return null;
     }
 
-    protected static String findGdalDataFolder()
+    protected static String findGdalDataFolder(String dir)
     {
         try
         {
-            String cwd = getCurrentDirectory();
-
-            FileTree fileTree = new FileTree(new File(cwd));
+            FileTree fileTree = new FileTree(new File(dir));
             fileTree.setMode(FileTree.FILES_AND_DIRECTORIES);
 
             GDALDataFinder filter = new GDALDataFinder();
@@ -292,7 +183,7 @@ public class GDALUtils
             {
                 if (folders.length > 1)
                 {
-                    String msg = Logging.getMessage("gdal.MultipleDataFoldersFound", buildPathString(folders, false));
+                    String msg = Logging.getMessage("gdal.MultipleDataFoldersFound", buildPathString(folders));
                     Logging.logger().warning(msg);
                 }
                 return folders[0];
@@ -302,19 +193,13 @@ public class GDALUtils
         {
             Logging.logger().severe(t.getMessage());
         }
-
-        String message = Logging.getMessage("gdal.SharedDataFolderNotFound");
-        Logging.logger().severe(message);
-        // throw new WWRuntimeException( message );
         return null;
     }
 
-    protected static String buildPathString(String[] folders, boolean addDefaultValues)
+    protected static String buildPathString(String[] folders)
     {
-        String del = System.getProperty("path.separator");
+        String del = File.pathSeparator;
         StringBuffer path = new StringBuffer();
-
-        path.append("lib-external/gdal").append(del);
 
         if (null != folders && folders.length > 0)
         {
@@ -322,12 +207,6 @@ public class GDALUtils
             {
                 path.append(folder).append(del);
             }
-        }
-        if (addDefaultValues)
-        {
-            path.append(".").append(del); // append current directory
-            path.append(System.getProperty("user.dir")).append(del);
-            path.append(System.getProperty(JAVA_LIBRARY_PATH));
         }
 
         return path.toString();
@@ -1271,7 +1150,7 @@ public class GDALUtils
      *                                  AVKey.ORIGIN (LatLon) specifies coordinate of the image's origin (one of the
      *                                  corners, or center) If missing, upper left corner will be set as origin
      *                                  <p>
-     *                                  AVKey.DATE_TIME (0 terminated String, length == 20) if missing, current date and
+     *                                  AVKey.DATE_TIME (0 terminated String, length == 20) if missing, current date {@literal &}
      *                                  time will be used
      *                                  <p>
      *                                  AVKey.PIXEL_FORMAT required (valid values: AVKey.ELEVATION | AVKey.IMAGE }
@@ -1282,7 +1161,7 @@ public class GDALUtils
      *                                  <p>
      *                                  AVKey.DATA_TYPE required ( valid values: AVKey.INT16, and AVKey.FLOAT32 )
      *                                  <p>
-     *                                  AVKey.VERSION optional, if missing a default will be used "NASA WorldWind"
+     *                                  AVKey.VERSION optional, if missing a default will be used "NASA World Wind"
      *                                  <p>
      *                                  AVKey.DISPLAY_NAME, (String) optional, specifies a name of the document/image
      *                                  <p>
@@ -1939,49 +1818,4 @@ public class GDALUtils
         ElevationsUtil.rectify( raster );
         return raster;
     }
-
-    protected static void alterJavaLibraryPath(String newJavaLibraryPath)
-        throws IllegalAccessException, NoSuchFieldException
-    {
-        System.setProperty(JAVA_LIBRARY_PATH, newJavaLibraryPath);
-
-        newClassLoader = ClassLoader.class;
-        fieldSysPaths = newClassLoader.getDeclaredField("sys_paths");
-        if (null != fieldSysPaths)
-        {
-            fieldSysPaths_accessible = fieldSysPaths.isAccessible();
-            if (!fieldSysPaths_accessible)
-            {
-                fieldSysPaths.setAccessible(true);
-            }
-
-            originalClassLoader = fieldSysPaths.get(newClassLoader);
-
-            // Reset it to null so that whenever "System.loadLibrary" is called,
-            // it will be reconstructed with the changed value.
-            fieldSysPaths.set(newClassLoader, null);
-        }
-    }
-
-    protected static void restoreJavaLibraryPath()
-    {
-        try
-        {
-            //Revert back the changes.
-            if (null != originalClassLoader && null != fieldSysPaths)
-            {
-                fieldSysPaths.set(newClassLoader, originalClassLoader);
-                fieldSysPaths.setAccessible(fieldSysPaths_accessible);
-            }
-        }
-        catch (Exception e)
-        {
-            Logging.logger().log(Level.SEVERE, e.getMessage(), e);
-        }
-    }
-
-    private static Class newClassLoader = null;
-    private static Object originalClassLoader = null;
-    private static Field fieldSysPaths = null;
-    private static boolean fieldSysPaths_accessible = false;
 }
