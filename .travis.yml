@@ -21,7 +21,8 @@ matrix:
 
 # Install gradle wrapper based on version defined in wrapper.gradle
 before_install:
-  gradle -b wrapper.gradle wrapper
+  # Use Java 8 to install the wrapper as this command will fail in Java 11.
+  - JAVA_HOME=`jdk_switcher home openjdk8` gradle -b wrapper.gradle wrapper
 
 # Clean up project before running build script.
 install: 
