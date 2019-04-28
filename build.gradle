@@ -1,6 +1,6 @@
 apply plugin: 'java'
 
-group = 'gov.nasa'
+group = 'earth.worldwind'
 version = '2.2.0'
 
 sourceCompatibility = '1.8'
@@ -33,6 +33,11 @@ sourceSets {
     main {
         java {
             srcDirs = ['src']
+            include '**/*.java'
+        }
+        resources {
+            srcDirs = ['src']
+            exclude '**/*.java'
         }
     }
     test {
@@ -43,7 +48,7 @@ sourceSets {
 }
 
 compileJava {
-    options.debug = project.hasProperty("debugBuild") ? "${project.debugBuild}".toBoolean() : false
+    options.debug = !project.hasProperty("releaseBuild")
 }
 
 // Compile worldwind jar.
@@ -52,11 +57,6 @@ jar {
     version = null
     from sourceSets.main.output
     exclude 'gov/nasa/worldwindx/**'
-    from(sourceSets.main.allSource) {
-        include 'gov/nasa/worldwind/util/**/*.properties'
-        include 'config/**'
-        include 'images/**'
-    }
 }
 // Copy worldwind jar to project-directory.
 jar.doLast {
@@ -70,19 +70,13 @@ jar.doLast {
 task extensionsJar(type: Jar) {
     group = 'build'
     description = 'Assembles a jar archive containing the extension classes.'
-    archiveBaseName = 'worldwindx'
+    baseName = 'worldwindx'
     version = null
-    from sourceSets.main.output
-    include 'gov/nasa/worldwindx/**/*.class'
-    from(sourceSets.main.allSource) {
-        include 'gov/nasa/worldwindx/applications/sar/*.html'
-        include 'gov/nasa/worldwindx/applications/sar/config/**'
-        include 'gov/nasa/worldwindx/applications/sar/data/**'
-        include 'gov/nasa/worldwindx/applications/sar/images/**'
-        include 'gov/nasa/worldwindx/applications/worldwindow/config/**'
-        include 'gov/nasa/worldwindx/applications/worldwindow/images/**'
-        include 'gov/nasa/worldwindx/examples/data/**'
-        include 'gov/nasa/worldwindx/examples/images/**'
+    from (sourceSets.main.output) {
+        exclude 'com/**'
+        exclude 'config/**'
+        exclude 'images/**'
+        exclude 'gov/nasa/worldwind/**'
     }
 }
 // Copy worldwindx jar to project-directory.
