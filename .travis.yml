@@ -17,18 +17,16 @@ jdk:
 matrix:
   fast_finish: true
   allow_failures:
-    - jdk: openjdk-ea  
+    - jdk: openjdk-ea
 
-# Install the Ant JUnit package, which is missing from the Travis CI environment. See the Travis documentation: https://docs.travis-ci.com/user/installing-dependencies/#Adding-APT-Packages
-addons:
-  apt:
-    packages:
-      - ant-optional
+# Install gradle wrapper based on version defined in wrapper.gradle
+before_install:
+  gradle -b wrapper.gradle wrapper
 
-# Custom install script to force using ant instead of gradle if travis detects a build.gradle file.
+# Clean up project before running build script.
 install: 
   # Using clean as dummy target; could install dependencies here if needed.
-  - ant clean
+  - ./gradlew clean
   
 # Use xvfb to run tests that require a GUI and give it some time to start
 before_script:
@@ -38,14 +36,14 @@ before_script:
 
 # Build the project
 script:
-  - ant build
+  - ./gradlew build javadoc
 
 # Deploy develop branch javadocs to gh_pages, and create and deploy CHANGELOG.md on tags
 deploy:
   # Publish API documentation to GitHub Pages
   - provider: pages
     github_token: $GITHUB_API_KEY
-    local_dir: build/doc/javadoc
+    local_dir: build/docs/javadoc
     skip_cleanup: true
     on:
       branch: develop
