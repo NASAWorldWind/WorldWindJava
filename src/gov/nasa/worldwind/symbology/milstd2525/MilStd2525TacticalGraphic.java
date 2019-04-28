@@ -15,7 +15,7 @@ import gov.nasa.worldwind.symbology.TacticalGraphic;
  * target="_blank">Usage Guide</a> for instructions on using TacticalGraphic in an application.
  * <p>
  * The following table lists the modifiers supported by 2525 graphics. Note that not all graphics support all modifiers.
- * <table width="100%"><caption>Modifiers</caption> <tr><th>Field</th><th>Modifier key</th><th>Data
+ * <table style="width:100%;"><caption>Modifiers</caption> <tr><th>Field</th><th>Modifier key</th><th>Data
  * type</th><th>Description</th></tr>
  * <tr><td>A</td><td>SymbologyConstants.SYMBOL</td><td>String</td><td>SIDC for a MIL-STD-2525 Tactical Symbol</td></tr>
  * <tr><td>B</td><td>SymbologyConstants.ECHELON</td><td>String</td><td>Echelon</td></tr>

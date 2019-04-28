@@ -21,7 +21,7 @@ import java.util.*;
  * <a href="https://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use">Symbology Usage Guide</a>
  * for details on how to configure a local symbol repository. For more information on how to use this class see the
  * IconRetriever Usage Guide and the {@link gov.nasa.worldwindx.examples.symbology.IconRetrieverUsage} example.
- * <h2><a name="parameters">Retrieval parameters</a></h2>
+ * <h2 id="parameters">Retrieval parameters</h2>
  * <p>
  * Table IX (pg. 35) of MIL-STD-2525C defines a hierarchy for simplifying tactical symbols. This hierarchy is
  * implemented using retrieval parameters SHOW_FILL, SHOW_FRAME, and SHOW_ICON. By default, all three elements are
