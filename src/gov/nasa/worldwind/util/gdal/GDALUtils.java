@@ -140,12 +140,13 @@ public class GDALUtils
 
             gdalIsAvailable.set(true);
         }
-        catch (Throwable t)
+        catch (Throwable throwable)
         {
             String reason = Logging.getMessage("generic.LibraryNotFound", "GDAL");
             String msg = Logging.getMessage("generic.LibraryNotLoaded", "GDAL", reason);
             Logging.logger().warning(msg);
-            Logging.logger().log(Level.WARNING, t.getMessage(), t);
+            String throwableMessage = (throwable.getMessage() != null) ? throwable.getMessage() : "";
+            Logging.logger().log(Level.WARNING, throwableMessage, throwable);
             Logging.logger().info(JAVA_LIBRARY_PATH + "=" + System.getProperty(JAVA_LIBRARY_PATH));
             Logging.logger().info("user.dir" + "=" + getCurrentDirectory());
             if (Configuration.isWindowsOS())
