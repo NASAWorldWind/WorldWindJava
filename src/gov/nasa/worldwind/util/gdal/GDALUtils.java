@@ -21,10 +21,8 @@ import org.gdal.osr.*;
 
 import java.awt.*;
 import java.awt.color.*;
-import java.util.concurrent.CopyOnWriteArraySet;
 import java.awt.image.*;
 import java.io.*;
-import java.lang.reflect.*;
 import java.nio.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
