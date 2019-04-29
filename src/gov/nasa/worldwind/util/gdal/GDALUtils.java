@@ -188,7 +188,7 @@ public class GDALUtils
         };
     	File[] filenames = (new File(dir)).listFiles(filter);
     	
-    	if (filenames.length > 0)
+    	if (filenames != null && filenames.length > 0)
         {
             return filenames[0].getAbsolutePath();
         }
