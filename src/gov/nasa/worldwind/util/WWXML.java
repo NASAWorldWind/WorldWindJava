@@ -56,16 +56,7 @@ public class WWXML
 
         if (Configuration.getJavaVersion() >= 1.6)
         {
-            try
-            {
-                docBuilderFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",
-                    false);
-            }
-            catch (ParserConfigurationException e)
-            {   // Note it and continue on. Some Java5 parsers don't support the feature.
-                String message = Logging.getMessage("XML.NonvalidatingNotSupported");
-                Logging.logger().finest(message);
-            }
+        	docBuilderFactory.setNamespaceAware(true);
         }
 
         try
