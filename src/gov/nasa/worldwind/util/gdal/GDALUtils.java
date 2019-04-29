@@ -65,83 +65,105 @@ public class GDALUtils
 
     protected static final AtomicBoolean gdalIsAvailable = new AtomicBoolean(false);
 
-    static {
-		try {
-			boolean runningAsJavaWebStart = (null != System.getProperty("javawebstart.version", null));
+    static
+    {
+        try
+        {
+            boolean runningAsJavaWebStart = (System.getProperty("javawebstart.version", null) != null);
 
-			if (!runningAsJavaWebStart) {
-				String[] searchDirs;
-				if (Configuration.isWindowsOS())
-					searchDirs = new String[] { getCurrentDirectory(), "C:\\Program Files\\GDAL" };
-				else
-					searchDirs = new String[] { getCurrentDirectory(), "/usr/share/gdal", "/usr/lib", "/usr/lib/gdal" };
+            if (!runningAsJavaWebStart)
+            {
+                String[] searchDirs;
+                if (Configuration.isWindowsOS())
+                {
+                    searchDirs = new String[] { getCurrentDirectory(), "C:\\Program Files\\GDAL" };
+                }
+                else
+                {
+                    searchDirs = new String[] { getCurrentDirectory(), "/usr/share/gdal", "/usr/lib", "/usr/lib/gdal" };
+                }
 				
-				// If the environment variables are set, no need to set configuration options.
-				String dataFolder = System.getenv("GDAL_DATA");
-				if (dataFolder == null) {
-					for (String dir:searchDirs) {
-						dataFolder = findGdalDataFolder(dir);
-						if (null != dataFolder) {
-							String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder);
-							Logging.logger().info(msg);
-							gdal.SetConfigOption(GDAL_DATA_PATH, dataFolder);
-							break;
-						}
-					}
-					if (dataFolder == null)
-						Logging.logger().log(Level.WARNING, "gdal.SharedDataFolderNotFound");
-				}
+                // If the environment variables are set, no need to set configuration options.
+                String dataFolder = System.getenv("GDAL_DATA");
+                if (dataFolder == null)
+                {
+                    for (String dir : searchDirs)
+                    {
+                        dataFolder = findGdalDataFolder(dir);
+                        if (dataFolder != null)
+                        {
+                            String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder);
+                            Logging.logger().info(msg);
+                            gdal.SetConfigOption(GDAL_DATA_PATH, dataFolder);
+                            break;
+                        }
+                    }
+                    if (dataFolder == null)
+                    {
+                        Logging.logger().log(Level.WARNING, "gdal.SharedDataFolderNotFound");
+                    }
+                }
 
-				// Try for GDAL_DRIVER_PATH
-				String drvpath = System.getenv(GDAL_DRIVER_PATH);
-				if (drvpath == null) {
-					for (String dir:searchDirs) {
-						drvpath = findGdalPlugins(dir);
-						if (drvpath != null) {
-							String msg = Logging.getMessage("gdal.PluginFolderFound", drvpath);
-							Logging.logger().info(msg);
-							gdal.SetConfigOption(GDAL_DRIVER_PATH, drvpath);
-							break;
-						}
-					}
-					if (drvpath == null)
-						Logging.logger().log(Level.WARNING, "gdal.PluginFolderNotFound");
-				}
-			}
+                // Try for GDAL_DRIVER_PATH
+                String drvpath = System.getenv(GDAL_DRIVER_PATH);
+                if (drvpath == null) {
+                    for (String dir : searchDirs)
+                    {
+                        drvpath = findGdalPlugins(dir);
+                        if (drvpath != null)
+                        {
+                            String msg = Logging.getMessage("gdal.PluginFolderFound", drvpath);
+                            Logging.logger().info(msg);
+                            gdal.SetConfigOption(GDAL_DRIVER_PATH, drvpath);
+                            break;
+                        }
+                    }
+                    if (drvpath == null)
+                    {
+                        Logging.logger().log(Level.WARNING, "gdal.PluginFolderNotFound");
+                    }
+                }
+            }
 
-			gdal.AllRegister();
-			ogr.RegisterAll();
+            gdal.AllRegister();
+            ogr.RegisterAll();
 
-			/**
-			 *  "VERSION_NUM": Returns GDAL_VERSION_NUM formatted as a string.  ie. "1170"
-			 *  "RELEASE_DATE": Returns GDAL_RELEASE_DATE formatted as a string. "20020416"
-			 *  "RELEASE_NAME": Returns the GDAL_RELEASE_NAME. ie. "1.1.7"
-			 *   "--version": Returns full version , ie. "GDAL 1.1.7, released 2002/04/16"
-			 */
-			String msg = Logging.getMessage("generic.LibraryLoadedOK", "GDAL v" + gdal.VersionInfo("RELEASE_NAME"));
-			Logging.logger().info(msg);
-			listAllRegisteredDrivers();
+            /**
+             *  "VERSION_NUM": Returns GDAL_VERSION_NUM formatted as a string.  ie. "1170"
+             *  "RELEASE_DATE": Returns GDAL_RELEASE_DATE formatted as a string. "20020416"
+             *  "RELEASE_NAME": Returns the GDAL_RELEASE_NAME. ie. "1.1.7"
+             *   "--version": Returns full version , ie. "GDAL 1.1.7, released 2002/04/16"
+             */
+            String msg = Logging.getMessage("generic.LibraryLoadedOK", "GDAL v" + gdal.VersionInfo("RELEASE_NAME"));
+            Logging.logger().info(msg);
+            listAllRegisteredDrivers();
 
-			gdalIsAvailable.set(true);
-		} catch (Throwable t) {
-			String reason = Logging.getMessage("generic.LibraryNotFound", "GDAL" );
-			String msg = Logging.getMessage("generic.LibraryNotLoaded", "GDAL", reason );
-			Logging.logger().warning(msg);
-			Logging.logger().log(Level.WARNING, t.getMessage(), t);
-			Logging.logger().info(JAVA_LIBRARY_PATH + "=" + System.getProperty(JAVA_LIBRARY_PATH));
-			Logging.logger().info("user.dir" + "=" + getCurrentDirectory());
-			if (Configuration.isWindowsOS())
-                Logging.logger().info("PATH"+ "=" + System.getenv("PATH"));
+            gdalIsAvailable.set(true);
+        }
+        catch (Throwable t)
+        {
+            String reason = Logging.getMessage("generic.LibraryNotFound", "GDAL");
+            String msg = Logging.getMessage("generic.LibraryNotLoaded", "GDAL", reason);
+            Logging.logger().warning(msg);
+            Logging.logger().log(Level.WARNING, t.getMessage(), t);
+            Logging.logger().info(JAVA_LIBRARY_PATH + "=" + System.getProperty(JAVA_LIBRARY_PATH));
+            Logging.logger().info("user.dir" + "=" + getCurrentDirectory());
+            if (Configuration.isWindowsOS())
+            {
+                Logging.logger().info("PATH" + "=" + System.getenv("PATH"));
+            }
             else
-                Logging.logger().info("LD_LIBRARY_PATH"+ "=" + System.getenv("LD_LIBRARY_PATH"));
-		}
+            {
+                Logging.logger().info("LD_LIBRARY_PATH" + "=" + System.getenv("LD_LIBRARY_PATH"));
+            }
+        }
     }
 
     protected static String getCurrentDirectory()
     {
         String cwd = System.getProperty("user.dir");
 
-        if (null == cwd || cwd.length() == 0)
+        if (cwd == null || cwd.length() == 0)
         {
             String message = Logging.getMessage("generic.UsersHomeDirectoryNotKnown");
             Logging.logger().severe(message);
@@ -153,19 +175,26 @@ public class GDALUtils
     // This method only checks the files at the top level; it doesn't do a recursive
     // search like findGdalDataFolder.  Searching "/usr/lib" takes far too long if a 
     // recursive search is performed.
-    protected static String findGdalPlugins(String dir) {
-    	FileFilter filter = new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				return pathname.isDirectory() && pathname.getName().equalsIgnoreCase("gdalplugins");
-			}
-    	};
+    protected static String findGdalPlugins(String dir)
+    {
+        FileFilter filter = new FileFilter() {
+            
+            @Override
+            public boolean accept(File pathname)
+            {
+                return pathname.isDirectory() && pathname.getName().equalsIgnoreCase("gdalplugins");
+            }
+        };
     	File[] filenames = (new File(dir)).listFiles(filter);
     	
     	if (filenames.length > 0)
-    		return filenames[0].getAbsolutePath();
-    	else
-    		return null;
+        {
+            return filenames[0].getAbsolutePath();
+        }
+        else
+        {
+            return null;
+        }
     }
 
     protected static String findGdalDataFolder(String dir)
@@ -179,7 +208,7 @@ public class GDALUtils
             fileTree.asList(filter);
             String[] folders = filter.getFolders();
 
-            if (null != folders && folders.length > 0)
+            if (folders != null && folders.length > 0)
             {
                 if (folders.length > 1)
                 {
@@ -218,8 +247,7 @@ public class GDALUtils
         for (int i = 0; i < gdal.GetDriverCount(); i++)
         {
             Driver drv = gdal.GetDriver(i);
-            String msg = Logging.getMessage("gdal.DriverDetails", drv.getShortName(), drv.getLongName(),
-                drv.GetDescription());
+            String msg = Logging.getMessage("gdal.DriverDetails", drv.getShortName(), drv.getLongName(), drv.GetDescription());
             sb.append(msg).append("\n");
         }
         Logging.logger().finest(sb.toString());
