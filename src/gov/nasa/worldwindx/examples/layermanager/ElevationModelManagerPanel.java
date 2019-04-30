@@ -127,7 +127,8 @@ public class ElevationModelManagerPanel extends JPanel
 
         if (!(wwd.getModel().getGlobe().getElevationModel() instanceof CompoundElevationModel))
         {
-            return this.modelPanels.get(0).getElevationModel() == wwd.getModel().getGlobe().getElevationModel();
+           if (this.modelPanels.size() == 0) return false;
+           return this.modelPanels.get(0).getElevationModel() == wwd.getModel().getGlobe().getElevationModel();
         }
 
         CompoundElevationModel cem = (CompoundElevationModel) wwd.getModel().getGlobe().getElevationModel();

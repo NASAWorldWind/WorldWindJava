@@ -766,8 +766,9 @@ public class DataConfigurationUtils
                 WMSLayerCapabilities layerCaps = caps.getLayerByName(name);
                 if (layerCaps == null)
                 {
-                    Logging.logger().warning(Logging.getMessage("WMS.LayerNameMissing", name));
-                    continue;
+                    String msg = Logging.getMessage("WMS.LayerNameMissing", name);
+                    Logging.logger().warning(msg);
+                    throw new WWRuntimeException(msg);
                 }
 
                 if (layerCaps.hasCoordinateSystem("EPSG:4326"))
@@ -912,6 +913,13 @@ public class DataConfigurationUtils
         if (coverage == null)
         {
             String message = Logging.getMessage("nullValue.WCSDescribeCoverage");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        if (coverage.getCoverageOfferings().size() == 0)
+        {
+        	String message = Logging.getMessage("AbsentResourceList.WCSDescribeCoverage");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -1148,6 +1156,8 @@ public class DataConfigurationUtils
 
             String layerName = lNames[i];
             WMSLayerCapabilities layer = caps.getLayerByName(layerName);
+            if (layer == null) continue;		// layer not found
+
             String layerTitle = layer.getTitle();
             sb.append(layerTitle != null ? layerTitle : layerName);
 
