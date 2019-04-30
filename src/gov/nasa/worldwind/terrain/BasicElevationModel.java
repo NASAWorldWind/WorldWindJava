@@ -385,6 +385,8 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         Angle minLongitude = ElevationTile.computeColumnLongitude(key.getColumn(), dLon, lonOrigin);
 
         Sector tileSector = new Sector(minLatitude, minLatitude.add(dLat), minLongitude, minLongitude.add(dLon));
+        // Clip tile sector by the layer's coverage extent
+        tileSector = levels.getSector().intersection(tileSector);
 
         return new ElevationTile(tileSector, level, key.getRow(), key.getColumn());
     }
