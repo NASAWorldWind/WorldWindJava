@@ -143,6 +143,16 @@ public class RasterServerConfiguration extends AbstractXMLEventParser
 
         this.initialize();
     }
+    
+    public void dispose() {
+    	try {
+			eventReader.close();
+		} catch (XMLStreamException e) {
+			e.printStackTrace();
+		}
+    	WWXML.closeEventReader(eventReader, "RasterServerConfiguration");
+    	freeResources();
+    }
 
     protected void initialize()
     {
