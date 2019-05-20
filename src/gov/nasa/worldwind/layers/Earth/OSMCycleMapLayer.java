@@ -5,9 +5,7 @@
  */
 package gov.nasa.worldwind.layers.Earth;
 
-import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.layers.mercator.*;
-import gov.nasa.worldwind.util.*;
 
 import java.net.*;
 
@@ -33,25 +31,15 @@ public class OSMCycleMapLayer extends BasicMercatorTiledImageLayer
         }
     }
     
-    private URLBuilder getURLBuilder()
-    {
-        LevelSet levelSet = getLevels();
-        Level firstLevel = levelSet.getFirstLevel();
-        AVList params = firstLevel.getParams();
-        Object value = params.getValue(AVKey.TILE_URL_BUILDER);
-        URLBuilder urlBuilder = (URLBuilder)value;
-        return urlBuilder;
-    }
-    
     public void setAPIKey(String apiKey)
     {
-        URLBuilder urlBuilder = getURLBuilder();
+        URLBuilder urlBuilder = (URLBuilder)getURLBuilder();
         urlBuilder.apiKey = apiKey;
     }
     
     public String getAPIKey()
     {
-        URLBuilder urlBuilder = getURLBuilder();
+        URLBuilder urlBuilder = (URLBuilder)getURLBuilder();
         return urlBuilder.apiKey;
     }
 

@@ -87,6 +87,16 @@ public class BasicMercatorTiledImageLayer extends BasicTiledImageLayer
             d1 = d2;
         }
     }
+    
+    protected MercatorTileUrlBuilder getURLBuilder()
+    {
+        LevelSet levelSet = getLevels();
+        Level firstLevel = levelSet.getFirstLevel();
+        AVList params = firstLevel.getParams();
+        Object value = params.getValue(AVKey.TILE_URL_BUILDER);
+        MercatorTileUrlBuilder urlBuilder = (MercatorTileUrlBuilder)value;
+        return urlBuilder;
+    }
 
     @Override
     protected boolean needToSplit(DrawContext dc, Sector sector, Level level)
