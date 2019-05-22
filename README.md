@@ -3,9 +3,10 @@
 # WorldWind Java
 
 ```
-Currently WorldWind is undergoing system evaluation. We will not be able to accept any software update requests. WorldWind users 
-can continue to access the NASA servers and SDKs, available on Github. More information will be provided in the near future. If 
-you have questions and/or concerns, please feel free to email at:
+Currently WorldWind is undergoing system evaluation. We will not be able to accept any software 
+update requests. WorldWind users can continue to access the NASA servers and SDKs, available on 
+Github. More information will be provided in the near future. If you have questions and/or 
+concerns, please feel free to email at:
 
 worldwind-info@lists.nasa.gov
 ```
