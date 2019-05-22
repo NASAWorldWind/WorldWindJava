@@ -10,13 +10,13 @@ import gov.nasa.worldwind.layers.mercator.*;
 import java.net.*;
 
 /**
- * @version $Id: OSMMapnikLayer.java 1171 2013-02-11 21:45:02Z dcollins $
+ * @author Sufaev
  */
-public class OSMMapnikLayer extends BasicMercatorTiledImageLayer
+public class OpenTopoMapLayer extends BasicMercatorTiledImageLayer
 {
-    public OSMMapnikLayer()
+    public OpenTopoMapLayer()
     {
-        super("h", "Earth/OSM-Mercator/OpenStreetMap Mapnik", 19, 256, false, ".png", new URLBuilder());
+        super("otm", "Earth/OpenTopoMap", 17, 256, false, ".png", new URLBuilder());
     }
 
     private static class URLBuilder extends MercatorTileUrlBuilder
@@ -24,13 +24,13 @@ public class OSMMapnikLayer extends BasicMercatorTiledImageLayer
         @Override
         protected URL getMercatorURL(int x, int y, int z) throws MalformedURLException
         {
-            return new URL("https://a.tile.openstreetmap.org/" + z + "/" + x + "/" + y + ".png");
+            return new URL("https://a.tile.opentopomap.org/" + z + "/" + x + "/"  + y + ".png");
         }
     }
 
     @Override
     public String toString()
     {
-        return "OpenStreetMap";
+        return "OpenTopoMap";
     }
 }

@@ -5,7 +5,6 @@
  */
 package gov.nasa.worldwind.layers.mercator;
 
-import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.layers.TextureTile;
 import gov.nasa.worldwind.util.*;
@@ -15,17 +14,21 @@ import gov.nasa.worldwind.util.*;
  */
 public class MercatorTextureTile extends TextureTile
 {
-	private MercatorSector mercatorSector;
 
 	public MercatorTextureTile(MercatorSector mercatorSector, Level level,
 			int row, int col)
 	{
 		super(mercatorSector, level, row, col);
-		this.mercatorSector = mercatorSector;
 	}
 
 	@Override
-	public MercatorTextureTile[] createSubTiles(Level nextLevel)
+	public MercatorSector getSector()
+	{
+		return (MercatorSector) super.getSector();
+	}
+
+	@Override
+	public TextureTile[] createSubTiles(Level nextLevel)
 	{
 		if (nextLevel == null)
 		{
@@ -33,8 +36,8 @@ public class MercatorTextureTile extends TextureTile
 			Logging.logger().severe(msg);
 			throw new IllegalArgumentException(msg);
 		}
-		double d0 = this.getMercatorSector().getMinLatPercent();
-		double d2 = this.getMercatorSector().getMaxLatPercent();
+		double d0 = this.getSector().getMinLatPercent();
+		double d2 = this.getSector().getMaxLatPercent();
 		double d1 = d0 + (d2 - d0) / 2.0;
 
 		Angle t0 = this.getSector().getMinLongitude();
@@ -43,58 +46,27 @@ public class MercatorTextureTile extends TextureTile
 
 		String nextLevelCacheName = nextLevel.getCacheName();
 		int nextLevelNum = nextLevel.getLevelNumber();
-		int row = this.getRow();
-		int col = this.getColumn();
 
-		MercatorTextureTile[] subTiles = new MercatorTextureTile[4];
+		int northRow = 2 * this.getRow();
+		int southRow = northRow + 1;
+		int westCol = 2 * this.getColumn();
+		int eastCol = westCol + 1;
 
-		TileKey key = new TileKey(nextLevelNum, 2 * row, 2 * col,
-				nextLevelCacheName);
-		MercatorTextureTile subTile = this.getTileFromMemoryCache(key);
-		if (subTile != null)
-			subTiles[0] = subTile;
-		else
-			subTiles[0] = new MercatorTextureTile(new MercatorSector(d0, d1,
-					t0, t1), nextLevel, 2 * row, 2 * col);
+		TextureTile[] subTiles = new TextureTile[4];
 
-		key = new TileKey(nextLevelNum, 2 * row, 2 * col + 1,
-				nextLevelCacheName);
-		subTile = this.getTileFromMemoryCache(key);
-		if (subTile != null)
-			subTiles[1] = subTile;
-		else
-			subTiles[1] = new MercatorTextureTile(new MercatorSector(d0, d1,
-					t1, t2), nextLevel, 2 * row, 2 * col + 1);
+		TextureTile subTile = this.getTileFromMemoryCache(new TileKey(nextLevelNum, northRow, westCol, nextLevelCacheName));
+		subTiles[0] = subTile != null ? subTile : new MercatorTextureTile(new MercatorSector(d0, d1, t0, t1), nextLevel, northRow, westCol);
 
-		key = new TileKey(nextLevelNum, 2 * row + 1, 2 * col,
-				nextLevelCacheName);
-		subTile = this.getTileFromMemoryCache(key);
-		if (subTile != null)
-			subTiles[2] = subTile;
-		else
-			subTiles[2] = new MercatorTextureTile(new MercatorSector(d1, d2,
-					t0, t1), nextLevel, 2 * row + 1, 2 * col);
+		subTile = this.getTileFromMemoryCache(new TileKey(nextLevelNum, northRow, eastCol, nextLevelCacheName));
+		subTiles[1] = subTile != null ? subTile : new MercatorTextureTile(new MercatorSector(d0, d1, t1, t2), nextLevel, northRow, eastCol);
 
-		key = new TileKey(nextLevelNum, 2 * row + 1, 2 * col + 1,
-				nextLevelCacheName);
-		subTile = this.getTileFromMemoryCache(key);
-		if (subTile != null)
-			subTiles[3] = subTile;
-		else
-			subTiles[3] = new MercatorTextureTile(new MercatorSector(d1, d2,
-					t1, t2), nextLevel, 2 * row + 1, 2 * col + 1);
+		subTile = this.getTileFromMemoryCache(new TileKey(nextLevelNum, southRow, westCol, nextLevelCacheName));
+		subTiles[2] = subTile != null ? subTile : new MercatorTextureTile(new MercatorSector(d1, d2, t0, t1), nextLevel, southRow, westCol);
+
+		subTile = this.getTileFromMemoryCache(new TileKey(nextLevelNum, southRow, eastCol, nextLevelCacheName));
+		subTiles[3] = subTile != null ? subTile : new MercatorTextureTile(new MercatorSector(d1, d2, t1, t2), nextLevel, southRow, eastCol);
 
 		return subTiles;
 	}
 
-	protected MercatorTextureTile getTileFromMemoryCache(TileKey tileKey)
-	{
-		return (MercatorTextureTile) WorldWind.getMemoryCache(
-				MercatorTextureTile.class.getName()).getObject(tileKey);
-	}
-
-	public MercatorSector getMercatorSector()
-	{
-		return mercatorSector;
-	}
 }

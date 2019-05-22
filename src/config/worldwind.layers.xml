@@ -30,8 +30,10 @@
     <Layer href="config/Earth/USGSTopoLowResLayer.xml" actuate="onRequest"/>
     <Layer href="config/Earth/USGSTopoMedResLayer.xml" actuate="onRequest"/>
     <Layer href="config/Earth/USGSTopoHighResLayer.xml" actuate="onRequest"/>
+    <!--<Layer className="gov.nasa.worldwind.layers.Earth.OpenTopoMapLayer" actuate="onRequest"/>-->
     <!--<Layer className="gov.nasa.worldwind.layers.Earth.OSMMapnikLayer" actuate="onRequest"/>-->
     <!--<Layer className="gov.nasa.worldwind.layers.Earth.OSMCycleMapLayer" actuate="onRequest"/>-->
+    <!--<Layer className="gov.nasa.worldwind.layers.Earth.WikimapiaLayer" actuate="onRequest"/>-->
     <Layer className="gov.nasa.worldwind.layers.Earth.CountryBoundariesLayer" actuate="onRequest"/>
     <Layer href="config/Earth/OpenStreetMap.xml" actuate="onRequest"/>
     <!--<Layer href="config/Earth/WorldBordersShapefile.xml" actuate="onRequest"/>-->
