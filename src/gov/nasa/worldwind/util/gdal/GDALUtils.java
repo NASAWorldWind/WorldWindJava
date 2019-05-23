@@ -48,128 +48,32 @@ public class GDALUtils
 
     protected static final AtomicBoolean gdalIsAvailable = new AtomicBoolean(false);
 
-    // This is an OLD default libname request by WW build of GDAL
-    protected static final String gdalalljni = Configuration.isMacOS()
-        ? "gdalalljni" : (is32bitArchitecture() ? "gdalalljni32" : "gdalalljni64");
-
-    protected static final CopyOnWriteArraySet<String> loadedLibraries = new CopyOnWriteArraySet<String>();
-    protected static final CopyOnWriteArraySet<String> failedLibraries = new CopyOnWriteArraySet<String>();
-
+    private static final String default_gdalLibs = "tbb lti_dsdk_9.5 lti_lidar_dsdk_1.1 gdalconstjni gnmjni ogrjni osrjni gdaljni";
+    
     static
     {
-        // Allow the app or user to prevent library loader replacement.
-        if (System.getProperty("gov.nasa.worldwind.prevent.gdal.loader.replacement") == null)
-            replaceLibraryLoader(); // This must be the first line of initialization
         initialize();
-    }
-
-    private static class GDALLibraryLoader implements gdal.LibraryLoader
-    {
-        public void load(String libName) throws UnsatisfiedLinkError
-        {
-            if (WWUtil.isEmpty(libName))
-            {
-                String message = Logging.getMessage("nullValue.LibraryIsNull");
-                Logging.logger().severe(message);
-                throw new java.lang.UnsatisfiedLinkError(message);
-            }
-
-            // check if the library is already loaded
-            if (loadedLibraries.contains(libName))
-                return;
-
-            String message;
-
-            // check if the library is already know (from previous attempts) to fail to load
-            if ( !failedLibraries.contains(libName) )
-            {
-                try
-                {
-                    NativeLibraryLoader.loadLibrary(libName);
-                    loadedLibraries.add(libName);
-                    Logging.logger().info( Logging.getMessage("generic.LibraryLoadedOK", libName ));
-
-                    return; // GOOD! Leaving now
-                }
-                catch (Throwable t)
-                {
-                    String reason = WWUtil.extractExceptionReason(t);
-                    message = Logging.getMessage("generic.LibraryNotLoaded", libName, reason);
-                    Logging.logger().finest(message);
-
-                    failedLibraries.add(libName);
-                }
-            }
-            else
-            {
-                String reason = Logging.getMessage("generic.LibraryNotFound", libName );
-                message = Logging.getMessage("generic.LibraryNotLoaded", libName, reason);
-            }
-
-            throw new UnsatisfiedLinkError(message);
-        }
-    }
-
-    protected static void replaceLibraryLoader()
-    {
-        try
-        {
-            ClassLoader cl = Thread.currentThread().getContextClassLoader();
-            Class gdalClass = cl.loadClass("org.gdal.gdal.gdal");
-
-            boolean isKnownBuild = false;
-            Method[] methods = gdalClass.getDeclaredMethods();
-            for (Method m : methods)
-            {
-                if ("setLibraryLoader".equals(m.getName()))
-                {
-                    gdal.setLibraryLoader(new GDALLibraryLoader());
-//                    Logging.logger().finest(Logging.getMessage("gdal.LibraryLoaderReplacedOK"));
-                    isKnownBuild = true;
-                    break;
-                }
-            }
-
-            if (!isKnownBuild)
-            {
-                String message = Logging.getMessage("gdal.UnknownBuild", gdal.VersionInfo());
-                Logging.logger().finest(message);
-            }
-        }
-        catch (ClassNotFoundException cnf)
-        {
-            Logging.logger().finest(cnf.getMessage());
-        }
-        catch (Throwable t)
-        {
-            Logging.logger().finest(t.getMessage());
-        }
-    }
-
-    protected static boolean is32bitArchitecture()
-    {
-        String arch = System.getProperty("sun.arch.data.model");
-        if( !WWUtil.isEmpty(arch) )
-            return ("32".equals(arch));
-
-        // GNU JAVA does not return "sun.arch.data.model"
-        return "x86".equals(System.getProperty("os.arch"));
     }
 
     protected static boolean gdalPreLoadNativeLibrary(boolean allowLogErrors)
     {
-        try
-        {
-            NativeLibraryLoader.loadLibrary(gdalalljni);
-            loadedLibraries.add(gdalalljni);
-            Logging.logger().info( Logging.getMessage("generic.LibraryLoadedOK", gdalalljni ));
-
+    	String[] gdalLibs = Configuration.getStringValue(AVKey.GDAL_LIBS, default_gdalLibs).split("\\s+");
+    	if ((gdalLibs.length == 0) || ((gdalLibs.length == 1) && gdalLibs[0].isEmpty())) {
+    		System.err.println("Empty list of GDAL libs; not loading GDAL"); 
+    		return false;
+    	}
+        
+    	try {
+        	for (String lib : gdalLibs) {
+        		NativeLibraryLoader.loadLibrary(lib);
+        		Logging.logger().info( Logging.getMessage("generic.LibraryLoadedOK", lib ));
+        	}
             return true;
         }
         catch (Throwable t)
         {
             if( allowLogErrors )
-                Logging.logger().finest(WWUtil.extractExceptionReason(t));
+                Logging.logger().severe(WWUtil.extractExceptionReason(t));
         }
 
         return false;
@@ -193,16 +97,16 @@ public class GDALUtils
                 if (newJavaLibraryPath != null)
                 {
                     alterJavaLibraryPath(newJavaLibraryPath);
-//                    gdalNativeLibraryLoaded = gdalLoadNativeLibrary(true);
+                    gdalNativeLibraryLoaded = gdalPreLoadNativeLibrary(true);
                 }
             }
 
-            if ( /* gdalNativeLibraryLoaded && */ gdalJNI.isAvailable() && gdalconstJNI.isAvailable())
+            if ( gdalNativeLibraryLoaded )
             {
                 if (!runningAsJavaWebStart)
                 {
                     // No need, because we are build one dynamic library that contains ALL  drivers
-                    // and dependant libraries
+                    // and dependent libraries
                     // gdal.SetConfigOption(GDAL_DRIVER_PATH, pathToLibs);
                     // gdal.SetConfigOption(OGR_DRIVER_PATH, pathToLibs);
                     String dataFolder = findGdalDataFolder();

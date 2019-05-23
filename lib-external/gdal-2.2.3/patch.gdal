@@ -1,0 +1,160 @@
+*** nmake.opt	2017-11-20 05:45:32.000000000 -0500
+--- nmake.opt	2017-12-10 10:00:02.670041200 -0500
+***************
+*** 226,232 ****
+  
+  # Uncomment the following to link OGR utilities against main GDAL DLL
+  # instead of statically linking against OGR libraries.
+! DLLBUILD=1
+  
+  # Enable all OGR formats, or only raster formats?  Comment out to disable
+  # vector formats. 
+--- 226,232 ----
+  
+  # Uncomment the following to link OGR utilities against main GDAL DLL
+  # instead of statically linking against OGR libraries.
+! #DLLBUILD=1
+  
+  # Enable all OGR formats, or only raster formats?  Comment out to disable
+  # vector formats. 
+***************
+*** 449,456 ****
+  #MRSID_JP2 =    YES
+  
+  !IF DEFINED(MRSID_DIR) || DEFINED(MRSID_RASTER_DIR) || DEFINED(MRSID_LIDAR_DIR)
+! !IF EXIST(frmts\mrsid\nmake.opt)
+! !INCLUDE frmts\mrsid\nmake.opt
+  !ENDIF
+  !ENDIF
+  
+--- 449,456 ----
+  #MRSID_JP2 =    YES
+  
+  !IF DEFINED(MRSID_DIR) || DEFINED(MRSID_RASTER_DIR) || DEFINED(MRSID_LIDAR_DIR)
+! !IF EXIST($(GDAL_ROOT)\frmts\mrsid\nmake.opt)
+! !INCLUDE $(GDAL_ROOT)\frmts\mrsid\nmake.opt
+  !ENDIF
+  !ENDIF
+  
+*** nmake.local	2017-12-10 10:11:50.394884900 -0500
+--- nmake.local	2017-12-10 09:59:58.364433700 -0500
+***************
+*** 0 ****
+--- 1,18 ----
++ #assume msvc VS2013.
++ MSVC_VER=1800
++ PYDIR=C:\Python27
++ JAVA_HOME="C:\Program Files\Java\jdk1.8.0_152"
++ ANT_HOME=C:\apache-ant-1.10.1
++ WIN64=YES
++ MRSID_RASTER_DIR=$(GDAL_ROOT)\..\MrSID_DSDK-9.5.4.4703-win64-vc12\Raster_DSDK
++ MRSID_LIDAR_DIR=$(GDAL_ROOT)\..\MrSID_DSDK-9.5.4.4703-win64-vc12\Lidar_DSDK
++ MRSID_JP2=YES
++ #MRSID_SHOW_CONFIG = YES
++ MRSID_PLUGIN = NO
++ FITS_PLUGIN = NO
++ FITS_INC_DIR=$(GDAL_ROOT)\..\cfitsio
++ FITS_LIB=$(GDAL_ROOT)\..\cfitsio\build\Release\cfitsio.lib
++ PROJ_FLAGS=-DPROJ_STATIC
++ PROJ_INCLUDE=-I$(GDAL_ROOT)\..\proj-4.9.3\src
++ PROJ_LIBRARY=$(GDAL_ROOT)\..\proj-4.9.3\src\proj.lib
++ OPENJPEG_VERSION = 20300
+*** apps/makefile.vc	2017-11-20 05:45:32.000000000 -0500
+--- apps/makefile.vc	2017-12-10 10:00:21.702074700 -0500
+***************
+*** 7,13 ****
+  
+  !INCLUDE ..\nmake.opt
+  
+! LIBS	=	$(GDALLIB)
+  
+  !IFDEF INCLUDE_OGR_FRMTS
+  OGR_PROGRAMS =	gdal_contour.exe gdaltindex.exe gdal_rasterize.exe \
+--- 7,13 ----
+  
+  !INCLUDE ..\nmake.opt
+  
+! LIBS	=	$(GDALLIB) $(EXTERNAL_LIBS)
+  
+  !IFDEF INCLUDE_OGR_FRMTS
+  OGR_PROGRAMS =	gdal_contour.exe gdaltindex.exe gdal_rasterize.exe \
+*** swig/java/makefile.vc.orig	2017-11-20 05:45:41.000000000 -0500
+--- swig/java/makefile.vc	2017-12-17 12:21:46.788174300 -0500
+***************
+*** 5,11 ****
+  !IFDEF DLLBUILD
+  GDALLIB	=    $(GDAL_ROOT)\gdal_i.lib
+  !ELSE
+! GDALLIB	=    $(GDAL_ROOT)\gdal.lib
+  !ENDIF
+  
+  JAVA_RUN = $(JAVA) -Djava.library.path=. -cp gdal.jar;build\apps
+--- 5,11 ----
+  !IFDEF DLLBUILD
+  GDALLIB	=    $(GDAL_ROOT)\gdal_i.lib
+  !ELSE
+! GDALLIB	=    $(GDAL_ROOT)\gdal.lib $(EXTERNAL_LIBS)
+  !ENDIF
+  
+  JAVA_RUN = $(JAVA) -Djava.library.path=. -cp gdal.jar;build\apps
+***************
+*** 14,20 ****
+  #gnm_wrap.obj
+  
+  # gnm_dir
+! all:  ogr_dir gdal_dir const_dir osr_dir
+  	set JAVA_HOME="$(JAVA_HOME)"
+  	$(ANT_HOME)\bin\ant
+  
+--- 14,20 ----
+  #gnm_wrap.obj
+  
+  # gnm_dir
+! all:  ogr_dir gdal_dir const_dir osr_dir gnm_dir
+  	set JAVA_HOME="$(JAVA_HOME)"
+  	$(ANT_HOME)\bin\ant
+  
+***************
+*** 26,37 ****
+  	link ogr_wrap.obj $(GDALLIB) /out:ogrjni.dll /DLL
+  	if exist ogrjni.dll.manifest mt -manifest ogrjni.dll.manifest -outputresource:ogrjni.dll;2
+  
+! #gnm_dir:
+! #	cd gnm
+! #	$(MAKE) /f makefile.vc
+! #	cd ..
+! #	link gnm_wrap.obj $(GDALLIB) /out:gnmjni.dll /DLL
+! #	if exist gnmjni.dll.manifest mt -manifest gnmjni.dll.manifest -outputresource:gnmjni.dll;2
+  
+  gdal_dir:
+  	cd gdal
+--- 26,37 ----
+  	link ogr_wrap.obj $(GDALLIB) /out:ogrjni.dll /DLL
+  	if exist ogrjni.dll.manifest mt -manifest ogrjni.dll.manifest -outputresource:ogrjni.dll;2
+  
+! gnm_dir:
+! 	cd gnm
+! 	$(MAKE) /f makefile.vc
+! 	cd ..
+! 	link gnm_wrap.obj $(GDALLIB) /out:gnmjni.dll /DLL
+! 	if exist gnmjni.dll.manifest mt -manifest gnmjni.dll.manifest -outputresource:gnmjni.dll;2
+  
+  gdal_dir:
+  	cd gdal
+***************
+*** 75,81 ****
+  #	cd ..
+  
+  clean:
+! 	if exist org\nul rmdir /s /q org
+  	if exist build rmdir /s /q build
+  	cd gdal
+  	$(MAKE) /f makefile.vc clean
+--- 75,81 ----
+  #	cd ..
+  
+  clean:
+! 	if exist org rmdir /s /q org
+  	if exist build rmdir /s /q build
+  	cd gdal
+  	$(MAKE) /f makefile.vc clean

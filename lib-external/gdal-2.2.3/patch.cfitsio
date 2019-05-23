@@ -1,0 +1,209 @@
+*** cfileio.c	2017-09-20 15:40:40.000000000 -0400
+--- works/cfitsio/cfileio.c	2017-11-21 14:25:25.324695500 -0500
+***************
+*** 4682,4688 ****
+          FFUNLOCK;
+          return(status);
+      }
+!       /* === End of net drivers section === */  
+  #endif
+  
+  /* ==================== SHARED MEMORY DRIVER SECTION ======================= */
+--- 4682,4772 ----
+          FFUNLOCK;
+          return(status);
+      }
+! 	/* 25--------------------https  driver-----------------------*/
+! 	status = fits_register_driver("https://",
+! 		NULL,
+! 		mem_shutdown,
+! 		mem_setoptions,
+! 		mem_getoptions, 
+! 		mem_getversion,
+! 		https_checkfile,
+! 		https_open,
+! 		NULL,            /* create function not required */
+! 		mem_truncate,
+! 		mem_close_free,
+! 		NULL,            /* remove function not required */
+! 		mem_size,
+! 		NULL,            /* flush function not required */
+! 		mem_seek,
+! 		mem_read,
+! 		mem_write);
+! 
+! 	if (status)
+! 	{
+! 		ffpmsg("failed to register the https:// driver (init_cfitsio)");
+! 		FFUNLOCK;
+! 		return(status);
+! 	}
+! 
+! 	/* 26--------------------https file driver-----------------------*/
+! 
+! 	status = fits_register_driver("httpsfile://",
+! 		NULL,
+! 		file_shutdown,
+! 		file_setoptions,
+! 		file_getoptions, 
+! 		file_getversion,
+! 		NULL,            /* checkfile not needed */
+! 		https_file_open,
+! 		file_create,
+! #ifdef HAVE_FTRUNCATE
+! 		file_truncate,
+! #else
+! 		NULL,   /* no file truncate function */
+! #endif
+! 		file_close,
+! 		file_remove,
+! 		file_size,
+! 		file_flush,
+! 		file_seek,
+! 		file_read,
+! 		file_write);
+! 
+! 	if (status)
+! 	{
+! 		ffpmsg("failed to register the httpsfile:// driver (init_cfitsio)");
+! 		FFUNLOCK;
+! 		return(status);
+! 	}
+! 
+! 	/* 27--------------------https memory driver-----------------------*/
+! 	/*  same as https:// driver, except memory file can be opened READWRITE */
+! 	status = fits_register_driver("httpsmem://",
+! 		NULL,
+! 		mem_shutdown,
+! 		mem_setoptions,
+! 		mem_getoptions,
+! 		mem_getversion,
+! 		https_checkfile,
+! 		https_file_open,  /* this will simply call https_open */
+! 		NULL,            /* create function not required */
+! 		mem_truncate,
+! 		mem_close_free,
+! 		NULL,            /* remove function not required */
+! 		mem_size,
+! 		NULL,            /* flush function not required */
+! 		mem_seek,
+! 		mem_read,
+! 		mem_write);
+! 
+! 	if (status)
+! 	{
+! 		ffpmsg("failed to register the httpsmem:// driver (init_cfitsio)");
+! 		FFUNLOCK;
+! 		return(status);
+! 	}
+! 
+! 	/* === End of net drivers section === */
+  #endif
+  
+  /* ==================== SHARED MEMORY DRIVER SECTION ======================= */
+***************
+*** 4778,4867 ****
+          return(status);
+      }
+  
+-     /* 25--------------------https  driver-----------------------*/
+-     status = fits_register_driver("https://",
+-             NULL,
+-             mem_shutdown,
+-             mem_setoptions,
+-             mem_getoptions, 
+-             mem_getversion,
+-             https_checkfile,
+-             https_open,
+-             NULL,            /* create function not required */
+-             mem_truncate,
+-             mem_close_free,
+-             NULL,            /* remove function not required */
+-             mem_size,
+-             NULL,            /* flush function not required */
+-             mem_seek,
+-             mem_read,
+-             mem_write);
+- 
+-     if (status)
+-     {
+-         ffpmsg("failed to register the https:// driver (init_cfitsio)");
+-         FFUNLOCK;
+-         return(status);
+-     }
+- 
+-     /* 26--------------------https file driver-----------------------*/
+- 
+-     status = fits_register_driver("httpsfile://",
+-             NULL,
+-             file_shutdown,
+-             file_setoptions,
+-             file_getoptions, 
+-             file_getversion,
+-             NULL,            /* checkfile not needed */ 
+-             https_file_open,
+-             file_create,
+- #ifdef HAVE_FTRUNCATE
+-             file_truncate,
+- #else
+-             NULL,   /* no file truncate function */
+- #endif
+-             file_close,
+-             file_remove,
+-             file_size,
+-             file_flush,
+-             file_seek,
+-             file_read,
+-             file_write);
+- 
+-     if (status)
+-     {
+-         ffpmsg("failed to register the httpsfile:// driver (init_cfitsio)");
+-         FFUNLOCK;
+-         return(status);
+-     }
+- 
+-     /* 27--------------------https memory driver-----------------------*/
+-     /*  same as https:// driver, except memory file can be opened READWRITE */
+-     status = fits_register_driver("httpsmem://",
+-             NULL,
+-             mem_shutdown,
+-             mem_setoptions,
+-             mem_getoptions, 
+-             mem_getversion,
+-             https_checkfile,
+-             https_file_open,  /* this will simply call https_open */
+-             NULL,            /* create function not required */
+-             mem_truncate,
+-             mem_close_free,
+-             NULL,            /* remove function not required */
+-             mem_size,
+-             NULL,            /* flush function not required */
+-             mem_seek,
+-             mem_read,
+-             mem_write);
+- 
+-     if (status)
+-     {
+-         ffpmsg("failed to register the httpsmem:// driver (init_cfitsio)");
+-         FFUNLOCK;
+-         return(status);
+-     }
+- 
+  
+      /* reset flag.  Any other threads will now not need to call this routine */
+      need_to_initialize = 0;
+--- 4862,4867 ----
+***************
+*** 7449,7456 ****
+--- 7449,7458 ----
+  /*-------------------------------------------------------------------*/
+  void ffvhtps(int flag)
+  {
++ #ifdef HAVE_NET_SERVICES
+     /* Turn libcurl's verbose output on (1) or off (0). 
+        This is NOT THREAD-SAFE */
+     https_set_verbose(flag);
++ #endif
+  }
+  
