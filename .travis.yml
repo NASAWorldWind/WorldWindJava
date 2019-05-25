@@ -9,6 +9,7 @@ language: java
 jdk:
   - openjdk8
   - openjdk11
+  - openjdk12
   - oraclejdk8
   - oraclejdk11
   - openjdk-ea
