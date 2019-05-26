@@ -6,12 +6,14 @@
 
 # $Id: GDAL_README.txt 1171 2013-02-11 21:45:02Z dcollins $
 
-This document provides guidance on deploying applications that use the WorldWind GDAL libraries.
+This document provides guidance on deploying applications that use the
+WorldWind GDAL libraries.
 
 Building
-------------------------------------------------------------
-Change the 'gdal.win.properties' or 'gdal.unix.properties' files to reflect
-the location of the GDAL library files on your system.
+ ------------------------------------------------------------
+If building with 'ant', using the 'build.xml' file, change the
+'gdal.win.properties' or 'gdal.unix.properties' files to
+reflect the location of the GDAL library files on your system.
 
 Deploying applications
 ------------------------------------------------------------
