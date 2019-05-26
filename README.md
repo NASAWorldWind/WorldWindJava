@@ -101,7 +101,7 @@ binary JAR files as follows:
 
 ## GDAL
 
-GDAL is a translator library for raster and vector geospatial data formats provided by the Open Source Geospatial Foundation.  GDAL libraries and native binaries are not provided by WorldWindEarth/WorldWind Java, but are needed to build.  The Gradle build will pull the necessary libraries from Maven.  Please see the GDAL_README.txt for details on where to obtain the native binaries and other details.
+GDAL is a translator library for raster and vector geospatial data formats provided by the Open Source Geospatial Foundation.  GDAL libraries and native binaries are not provided by WorldWindEarth/WorldWind Java, but are needed to build.  The Gradle build will pull the necessary libraries from Maven.  Please see the file GDAL_README.txt for details on where to obtain the native binaries and other details.
 
 ## License
 
