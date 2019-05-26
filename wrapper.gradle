@@ -1,0 +1,15 @@
+import org.gradle.util.VersionNumber;
+
+VersionNumber gradle_current = VersionNumber.parse(gradle.gradleVersion);
+VersionNumber gradle_4_8 = VersionNumber.parse('4.8');
+
+boolean allowTaskOverride = gradle_current < gradle_4_8;
+if (allowTaskOverride) {
+    task wrapper(type: Wrapper) {
+        gradleVersion = '5.4'
+    }
+} else {
+    wrapper {
+        gradleVersion = '5.4'
+    }
+}

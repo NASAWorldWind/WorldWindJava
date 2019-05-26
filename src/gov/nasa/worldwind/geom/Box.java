@@ -32,21 +32,21 @@ public class Box implements Extent, Renderable
      * <table> <caption>Codes</caption>
      * <tr>
      * <td><strong>Bit</strong></td>
-     * <td align="center">5</td>
-     * <td align="center" >4</td>
-     * <td align="center" >3</td>
-     * <td align="center" >2</td>
-     * <td align="center" >1</td>
-     * <td align="center" >0</td>
+     * <td style="text-align:center;">5</td>
+     * <td style="text-align:center;">4</td>
+     * <td style="text-align:center;">3</td>
+     * <td style="text-align:center;">2</td>
+     * <td style="text-align:center;">1</td>
+     * <td style="text-align:center;">0</td>
      * </tr>
-     * <tr align="center">
-     * <td align="left"><strong>Code</strong></td>
-     * <td align="center" >left</td>
-     * <td align="center" >right</td>
-     * <td align="center" >back</td>
-     * <td align="center" >front</td>
-     * <td align="center" >bottom</td>
-     * <td align="center" >top</td>
+     * <tr style="text-align:center;">
+     * <td style="text-align:left;"><strong>Code</strong></td>
+     * <td style="text-align:center;">left</td>
+     * <td style="text-align:center;">right</td>
+     * <td style="text-align:center;">back</td>
+     * <td style="text-align:center;">front</td>
+     * <td style="text-align:center;">bottom</td>
+     * <td style="text-align:center;">top</td>
      * </tr>
      * </table>
      * <p>
@@ -56,27 +56,27 @@ public class Box implements Extent, Renderable
      * whether one, two or three planes face the <code>View</code>), where each element in the array is an index for one
      * of the <code>Box's</code> eight vertices as follows:
      * <table> <caption>Vertices</caption>
-     * <tr align="center">
-     * <td align="left"><strong>Index</strong></td>
-     * <td align="center" >0</td>
-     * <td align="center" >1</td>
-     * <td align="center" >2</td>
-     * <td align="center" >3</td>
-     * <td align="center" >4</td>
-     * <td align="center" >5</td>
-     * <td align="center" >6</td>
-     * <td align="center" >7</td>
+     * <tr style="text-align:center;">
+     * <td style="text-align:left;"><strong>Index</strong></td>
+     * <td style="text-align:center;">0</td>
+     * <td style="text-align:center;">1</td>
+     * <td style="text-align:center;">2</td>
+     * <td style="text-align:center;">3</td>
+     * <td style="text-align:center;">4</td>
+     * <td style="text-align:center;">5</td>
+     * <td style="text-align:center;">6</td>
+     * <td style="text-align:center;">7</td>
      * </tr>
-     * <tr align="center">
-     * <td align="left"><strong>Vertex</strong></td>
-     * <td align="center" >bottom-lower-left</td>
-     * <td align="center" >bottom-lower-right</td>
-     * <td align="center" >bottom-upper-right</td>
-     * <td align="center" >bottom-upper-left</td>
-     * <td align="center" >top-lower-left</td>
-     * <td align="center" >top-lower-right</td>
-     * <td align="center" >top-upper-right</td>
-     * <td align="center" >top-upper-left</td>
+     * <tr style="text-align:center;">
+     * <td style="text-align:left;"><strong>Vertex</strong></td>
+     * <td style="text-align:center;">bottom-lower-left</td>
+     * <td style="text-align:center;">bottom-lower-right</td>
+     * <td style="text-align:center;">bottom-upper-right</td>
+     * <td style="text-align:center;">bottom-upper-left</td>
+     * <td style="text-align:center;">top-lower-left</td>
+     * <td style="text-align:center;">top-lower-right</td>
+     * <td style="text-align:center;">top-upper-right</td>
+     * <td style="text-align:center;">top-upper-left</td>
      * </tr>
      * </table>
      * <p>
