@@ -976,11 +976,6 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
                 band.SetColorInterpretation(colorInt);
             }
 
-            if (colorInt == gdalconst.GCI_AlphaBand)
-            {
-                band.Fill((double) GDALUtils.ALPHA_MASK);
-            }
-
             if (null != missingDataSignal && colorInt == gdalconst.GCI_GrayIndex)
             {
                 band.Fill(missingDataSignal);

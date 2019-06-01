@@ -8,6 +8,7 @@ targetCompatibility = '1.8'
 
 ext {
     joglVersion = '2.3.2'
+    gdalVersion = '2.4.0'
     jacksonVersion = '1.9.13'
     junitVersion = '4.5'
 }
@@ -22,7 +23,7 @@ dependencies {
     implementation "org.jogamp.jogl:jogl-all-main:${project.joglVersion}"
     implementation "org.jogamp.gluegen:gluegen-rt-main:${project.joglVersion}"
 
-    compile files('gdal.jar')
+    compile "org.gdal:gdal:${project.gdalVersion}"
 
     implementation "org.codehaus.jackson:jackson-core-asl:${project.jacksonVersion}"
 

@@ -150,7 +150,6 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String GDAL_DEBUG = "gov.nasa.worldwind.avkey.GDAL.Debug";
     final String GDAL_MASK_DATASET = "gov.nasa.worldwind.avkey.GDAL.MaskDataset";
     final String GDAL_TIMEOUT = "gov.nasa.worldwind.avkey.GDAL.TimeOut";
-    final String GDAL_PATH = "gov.nasa.worldwind.avkey.GDAL.Path";
 
     final String GET_CAPABILITIES_URL = "gov.nasa.worldwind.avkey.GetCapabilitiesURL";
     final String GET_COVERAGE_URL = "gov.nasa.worldwind.avkey.GetCoverageURL";

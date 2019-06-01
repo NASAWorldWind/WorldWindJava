@@ -14,8 +14,15 @@
     <!-- Import the ANT build properties and project ANT macros. -->
 
     <property file="build.properties"/>
+    <condition property="gdal.properties" value="gdal.win.properties">
+        <os family="windows"/>
+    </condition>
+     <condition property="gdal.properties" value="gdal.unix.properties">
+        <os family="unix"/>
+    </condition>
+    <property file="${gdal.properties}"/>
     <import file="build.macros.xml"/>
-
+    
     <!-- Main build targets. Provides generic targets that compile the Java sources, bundle JAR libraries, assemble API
          documentation, test the Java sources, and clean up the build output. -->
 
@@ -47,7 +54,7 @@
                 <pathelement location="${basedir}/jackson-core-asl.jar"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
-                <pathelement location="${basedir}/gdal.jar"/>
+                <pathelement location="${gdal.jar.dir}/gdal.jar"/>
             </pathelements>
         </compileJava>
     </target>
@@ -60,7 +67,7 @@
                 <pathelement location="${basedir}/jackson-core-asl.jar"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
-                <pathelement location="${basedir}/gdal.jar"/>
+                <pathelement location="${gdal.jar.dir}/gdal.jar"/>
             </pathelements>
         </compileJava>
     </target>
@@ -101,7 +108,7 @@
                 <pathelement location="jackson-core-asl.jar"/>
                 <pathelement location="jogl-all.jar"/>
                 <pathelement location="gluegen-rt.jar"/>
-                <pathelement location="gdal.jar"/>
+                <pathelement location="${gdal.jar.dir}/gdal.jar"/>
             </classpath>
             <link href="http://download.oracle.com/javase/8/docs/api/"/>
             <link href="https://jogamp.org/deployment/v2.1.5/javadoc/jogl/javadoc/"/>
@@ -171,12 +178,12 @@
             </fileset>
         </jar>
         <!-- GDAL library JAR files. -->
-        <copy file="${basedir}/gdal.jar" todir="${webstart.unsigned.dir}"/>
+        <copy file="${gdal.jar.dir}/gdal.jar" todir="${webstart.unsigned.dir}"/>
         <jar jarfile="${webstart.unsigned.dir}/gdaldata.jar">
             <manifest>
                 <attribute name="Permissions" value="all-permissions"/>
             </manifest>
-            <fileset dir="${basedir}/lib-external/gdal/data">
+            <fileset dir="${gdal.data.dir}">
                 <include name="**"/>
                 <type type="file"/>
             </fileset>
@@ -186,68 +193,30 @@
             <manifest>
                 <attribute name="Permissions" value="all-permissions"/>
             </manifest>
-            <fileset dir="${basedir}/lib-external/gdal">
-                <include name="GDAL_License.txt"/>
-                <include name="LizardTech_DSDK_License.txt"/>
-                <include name="LizardTech_3rd_Party.txt"/>
-                <include name="LizardTech_Redistributable.txt"/>
-                <include name="libgdalalljni.jnilib"/>
+            <fileset dir="${gdal.jni.dir}">
+                <include name="lib*jni.jnilib"/>
                 <type type="file"/>
             </fileset>
         </jar>
-        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-windows-i586.jar">
+        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-window.jar">
             <manifest>
                 <attribute name="Permissions" value="all-permissions"/>
             </manifest>
-            <fileset dir="${basedir}/lib-external/gdal">
-                <include name="GDAL_License.txt"/>
-                <include name="LizardTech_DSDK_License.txt"/>
-                <include name="LizardTech_3rd_Party.txt"/>
-                <include name="LizardTech_Redistributable.txt"/>
-                <include name="gdalminjni32.dll"/>
-                <include name="gdalalljni32.dll"/>
-                <include name="gdalalljni32.dll.manifest"/>
+            <fileset dir="${gdal.jni.dir}">
+                <include name="*jni.dll"/>
                 <type type="file"/>
             </fileset>
         </jar>
-        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-windows-amd64.jar">
+        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-linux.jar">
             <manifest>
                 <attribute name="Permissions" value="all-permissions"/>
             </manifest>
-            <fileset dir="${basedir}/lib-external/gdal">
+            <fileset dir="${gdal.jni.dir}">
                 <include name="GDAL_License.txt"/>
                 <include name="LizardTech_DSDK_License.txt"/>
                 <include name="LizardTech_3rd_Party.txt"/>
                 <include name="LizardTech_Redistributable.txt"/>
-                <include name="gdalminjni64.dll"/>
-                <include name="gdalalljni64.dll"/>
-                <include name="gdalalljni64.dll.manifest"/>
-                <type type="file"/>
-            </fileset>
-        </jar>
-        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-linux-i586.jar">
-            <manifest>
-                <attribute name="Permissions" value="all-permissions"/>
-            </manifest>
-            <fileset dir="${basedir}/lib-external/gdal">
-                <include name="GDAL_License.txt"/>
-                <include name="LizardTech_DSDK_License.txt"/>
-                <include name="LizardTech_3rd_Party.txt"/>
-                <include name="LizardTech_Redistributable.txt"/>
-                <include name="libgdalalljni32.so"/>
-                <type type="file"/>
-            </fileset>
-        </jar>
-        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-linux-amd64.jar">
-            <manifest>
-                <attribute name="Permissions" value="all-permissions"/>
-            </manifest>
-            <fileset dir="${basedir}/lib-external/gdal">
-                <include name="GDAL_License.txt"/>
-                <include name="LizardTech_DSDK_License.txt"/>
-                <include name="LizardTech_3rd_Party.txt"/>
-                <include name="LizardTech_Redistributable.txt"/>
-                <include name="libgdalalljni64.so"/>
+                <include name="lib*jni.so*"/>
                 <type type="file"/>
             </fileset>
         </jar>
@@ -326,7 +295,7 @@
                 <pathelement location="${basedir}/jackson-core-asl.jar"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
-                <pathelement location="${basedir}/gdal.jar"/>
+                <pathelement location="${gdal.jar.dir}/gdal.jar"/>
                 <pathelement location="${basedir}/junit-4.5.jar"/>
             </pathelements>
         </compileJava>
@@ -347,7 +316,7 @@
                 <pathelement location="${basedir}/jackson-core-asl.jar"/>
                 <pathelement location="${basedir}/jogl-all.jar"/>
                 <pathelement location="${basedir}/gluegen-rt.jar"/>
-                <pathelement location="${basedir}/gdal.jar"/>
+                <pathelement location="${gdal.jar.dir}/gdal.jar"/>
                 <pathelement location="${basedir}/junit-4.5.jar"/>
             </classpath>
             <batchtest todir="${worldwind.test.results.dir}"
@@ -497,25 +466,6 @@
              manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-amd64/META-INF/MANIFEST.MF"/>
     </target>
 
-    <!-- Helper tasks for bundling and unbundling the GDAL JAR file. These targets are used to modify the contents of
-         the GDAL JAR file, which are currently not under source control. -->
-
-    <target name="help.unpackGdal">
-        <property name="gdal.jarfile.dir" location="gdal-jar"/>
-        <mkdir dir="${gdal.jarfile.dir}"/>
-        <unzip src="gdal.jar" dest="${gdal.jarfile.dir}"/>
-    </target>
-
-    <target name="help.packGdal">
-        <property name="gdal.jarfile.dir" location="gdal-jar"/>
-        <delete file="gdal.jar"/>
-        <jar destfile="gdal.jar" basedir="${gdal.jarfile.dir}">
-            <manifest>
-                <attribute name="Permissions" value="all-permissions"/>
-            </manifest>
-        </jar>
-    </target>
-
     <!-- Helper tasks for bundling and unbundling the VPF symbols JAR file. These targets are used to modify the
          contents of the VPF symbols JAR file, which are currently not under source control. -->
 
@@ -555,10 +505,15 @@
     </target>
     
     <target name="runLayerManager" depends="build" description="Runs the LayerManager example app.">
-        <java fork="true" 
-              classname="gov.nasa.worldwindx.examples.layermanager.LayerManagerApp" 
-              classpath="gdal.jar;gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jackson-core-asl.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar;worldwind.jar;worldwindx.jar"
-        />
+     <echoproperties/>
+       <java fork="true" 
+            classname="gov.nasa.worldwindx.examples.layermanager.LayerManagerApp" 
+            classpath="${gdal.jar.dir}/gdal.jar;gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jackson-core-asl.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar;worldwind.jar;worldwindx.jar"
+            >
+            <env key="GDAL_DATA" path="${gdal.data.dir}"/>
+            <env key="GDAL_DRIVER_PATH" path="${gdal.plugins.dir}"/>
+            <sysproperty key="java.util.logging.config.file" value="${basedir}/logging.properties"/>
+       </java>
     </target>
     
 </project>
