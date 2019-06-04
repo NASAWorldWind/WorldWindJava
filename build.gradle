@@ -1,7 +1,19 @@
+buildscript {
+    dependencies {
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:latest.release'
+    }
+}
+
+plugins {
+    id 'com.jfrog.bintray' version '1.8.1'
+}
+
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
 
 group = 'earth.worldwind'
-version = '2.2.0'
+version = '2.2.0' + (project.hasProperty('snapshot') ? '-SNAPSHOT' : '')
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -30,6 +42,134 @@ dependencies {
     testImplementation "junit:junit:${project.junitVersion}"
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    group = 'build'
+    description = 'Assembles a jar archive containing the sources.'
+    classifier = 'sources'
+    from (sourceSets.main.allSource) {
+        include '**/*.java'
+        exclude 'config/**'
+        exclude 'images/**'
+        exclude 'gov/nasa/worldwindx/**'
+    }
+}
+
+task extensionsJar(type: Jar) {
+    group = 'build'
+    description = 'Assembles a jar archive containing the extension classes.'
+    baseName = 'worldwindx'
+    from (sourceSets.main.output) {
+        exclude 'com/**'
+        exclude 'config/**'
+        exclude 'images/**'
+        exclude 'gov/nasa/worldwind/**'
+    }
+}
+extensionsJar.doLast {
+    copy {
+        from "$buildDir/libs/${extensionsJar.archiveName}"
+        into "${project.projectDir}"
+        rename "${extensionsJar.archiveName}", "${extensionsJar.baseName}.${extensionsJar.extension}"
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    group = 'build'
+    description = 'Assembles a jar archive containing the javadocs.'
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+def pomConfig = {
+    licenses {
+        license {
+            name 'NASA Open Source Agreement v1.3'
+            url 'https://ti.arc.nasa.gov/opensource/nosa/'
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id 'emxsys'
+            name 'Bruce Schubert'
+            email 'bruce@emxsys.com'
+        }
+    }
+    scm {
+       url "https://github.com/WorldWindEarth/WorldWindJava"
+    }
+}
+
+publishing {
+    publications {
+        bintray(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description',
+                    'A community supported fork of the NASA WorldWind Java SDK (WWJ)' +
+                    'is for building cross-platform 3D geospatial desktop applications in Java.'
+                )
+                root.appendNode('name', project.name)
+                root.appendNode('url', 'https://github.com/WorldWindEarth/WorldWindJava')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_API_KEY')
+    publications = ['bintray']
+    pkg {
+        repo = System.getenv('BINTRAY_REPOSITORY')
+        name = System.getenv('BINTRAY_PACKAGE')
+        userOrg = System.getenv('BINTRAY_ORGANIZATION')
+        desc = 'A community supported fork of the NASA WorldWind Java SDK (WWJ) ' +
+            'is for building cross-platform 3D geospatial desktop applications in Java.'
+        websiteUrl = 'https://worldwind.earth'
+        issueTrackerUrl = 'https://github.com/WorldWindEarth/WorldWindJava/issues'
+        vcsUrl = 'https://github.com/WorldWindEarth/WorldWindJava'
+        licenses = ['NASA-1.3']
+        labels = ['nasa', 'worldwind', 'worldwindjava', 'gis', 'geospatial',
+            'globe', '3d', 'jogl', 'maps', 'imagery', 'terrain',
+            'visualization', 'wms', 'wmts', 'shapes', 'shapefile', 'kml',
+            'opengl', 'sdk-java', 'community-edition'
+        ]
+        githubRepo = 'WorldWindEarth/WorldWindJava'
+        version {
+            name = project.version
+            desc = 'WorldWind v' + project.version
+            vcsTag = System.getenv('TRAVIS_TAG')
+            released = new Date()
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'https://oss.jfrog.org/artifactory'
+    publish {
+        repository {
+            repoKey = 'oss-snapshot-local'
+            username = System.getenv('BINTRAY_USER')
+            password = System.getenv('BINTRAY_API_KEY')
+        }
+        defaults {
+            publications('bintray')
+            publishArtifacts = true
+        }
+    }
+    if (project.hasProperty('build.number')) {
+        clientConfig.info.setBuildNumber(project.getProperty('build.number'))
+    }
+}
+
 sourceSets {
     main {
         java {
@@ -49,52 +189,25 @@ sourceSets {
 }
 
 compileJava {
-    options.debug = !project.hasProperty("releaseBuild")
-}
-
-// Compile worldwind jar.
-jar {
-    dependsOn classes
-    version = null
-    from sourceSets.main.output
-    exclude 'gov/nasa/worldwindx/**'
-}
-// Copy worldwind jar to project-directory.
-jar.doLast {
-    copy {
-        from "$buildDir/libs/${jar.archiveName}"
-        into "${project.projectDir}"
-    }
-}
-
-// Compile worldwindx jar.
-task extensionsJar(type: Jar) {
-    group = 'build'
-    description = 'Assembles a jar archive containing the extension classes.'
-    baseName = 'worldwindx'
-    version = null
-    from (sourceSets.main.output) {
-        exclude 'com/**'
-        exclude 'config/**'
-        exclude 'images/**'
-        exclude 'gov/nasa/worldwind/**'
-    }
-}
-// Copy worldwindx jar to project-directory.
-extensionsJar.doLast {
-    copy {
-        from "$buildDir/libs/${extensionsJar.archiveName}"
-        into "${project.projectDir}"
-    }
-}
-
-artifacts {
-    archives extensionsJar
+    options.debug = !project.hasProperty('release')
 }
 
 test {
     dependsOn jar
     classpath += project.files("$buildDir/libs/${jar.archiveName}", configurations.runtime)
+}
+
+jar {
+    dependsOn classes
+    from sourceSets.main.output
+    exclude 'gov/nasa/worldwindx/**'
+}
+jar.doLast {
+    copy {
+        from "$buildDir/libs/${jar.archiveName}"
+        into "${project.projectDir}"
+        rename "${jar.archiveName}", "${jar.baseName}.${jar.extension}"
+    }
 }
 
 javadoc {
@@ -111,4 +224,10 @@ javadoc {
     }
     exclude 'com/**'
     exclude 'gov/nasa/worldwind/formats/**'
+}
+
+artifacts {
+    archives sourcesJar
+    archives extensionsJar
+    archives javadocJar
 }
