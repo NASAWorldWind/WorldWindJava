@@ -220,11 +220,6 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
             throw new IllegalArgumentException(message);
         }
 
-        if (this.is2DGlobe(view.getGlobe()))
-        {
-            return Angle.ZERO; // keep the view looking straight down on 2D globes
-        }
-
         return Angle.clamp(angle, this.minPitch, this.maxPitch);
     }
 
