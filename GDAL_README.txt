@@ -36,7 +36,7 @@ Deploying applications
 
     - Unless the GDAL_DATA environment variable is set, the GDAL
       data directory will be searched for, using the property
-      "user.dir", and then in some standard locations.
+      "user.dir", and then in some standard locations (see GDALUtils.java)
 
     - Unless the GDAL_DRIVER_PATH environment variable is set, the
       GDAL plugins direoctory will be searched for, using the property
@@ -45,22 +45,47 @@ Deploying applications
 
     Binary distributions are available for both Windows and
     Linux.  See
-    https://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries.
+
+        https://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries.
 
     For Ubuntu, the package "libgdal-java" contains the 'gdal.jar'
     and JNI shared library.
 
     GDAL versions earlier that 2.3.2 split the JNI library into
     five separate files.  They all need to be in paths listed in
-    'java.library.path' or 'LD_LIBRARY_PATH'.
+    'java.library.path' or 'LD_LIBRARY_PATH'.  GDAL versions later
+    than 2.3.2 have all the JNI interfaces in a single shared library
+    (gdalalljni.lib/libgdalalljni.so).
 
     The GISInternals binary package for Windows uses this
     directory structure:
 
-    C:\Program Files\GDAL                   shared libraries, including JNI shared library
+    C:\Program Files\GDAL                   utilities, shared libraries, 
+                                            including JNI shared library
     C:\Program Files\GDAL\java\gdal.jar     GDAL Java interface
     C:\Program Files\GDAL\gdal-data         GDAL data directory
     C:\Program Files\GDAL\gdalplugins       GDAL plugin directory
+
+    Note that GISInternals has multiple versions of the ERDAS ECW
+    software.  Choose one according to your needs.
+
+    If you want to include the native libraries as part of your
+    deployment, copy
+    
+        C:\Program Files\GDAL*.dll
+        C:\Program Files\GDAL\gdal-data
+        C:\Program Files\GDAL\gdalplugins
+        C:\Program Files\GDAL\java\gdal.jar
+                
+    to the directory from which your application is launched.  Include
+    the 'gdal.jar' file in your application's classpath.
+
+    Alternatively, one can leave all the native libraries from
+    GISInternals in their installation location, and
+
+        set PATH to include C:\Program Files\GDAL
+        add -Djava.library.path="C:\Program Files\GDAL" JVM option
+        add -classpath="C:\Program Files\GDAL\java\gdal.jar" JVM option
 
 
     The Ubuntu Linux distribution uses these locations:
@@ -85,16 +110,10 @@ Deploying applications
               https://trac.osgeo.org/gdal/wiki/ECW
               https://trac.osgeo.org/gdal/wiki/MrSID
     
-
     MrSID SDK
     https://www.extensis.com/support/developers
 
     ERDAS ECW SDK
     https://www.hexagongeospatial.com/products/power-portfolio/compression-products/erdas-ecw-jp2-sdk
                 
-
-Deploying with Java Web Start
-------------------------------------------------------------
-
-Instructions for using the WorldWind GDAL libraries with a Java Web Start application are available at
-https://goworldwind.org/getting-started/
+    
