@@ -5,7 +5,8 @@
  */
 package gov.nasa.worldwind.view;
 
-import gov.nasa.worldwind.View;
+import gov.nasa.worldwind.*;
+import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.util.*;
@@ -220,6 +221,11 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
             throw new IllegalArgumentException(message);
         }
 
+        if (this.is2DGlobe(view.getGlobe()) && !this.allow2DPitch())
+        {
+            return Angle.ZERO; // keep the view looking straight down on 2D globes
+        }
+
         return Angle.clamp(angle, this.minPitch, this.maxPitch);
     }
 
@@ -247,6 +253,11 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     protected boolean is2DGlobe(Globe globe)
     {
         return globe instanceof Globe2D;
+    }
+    
+    protected boolean allow2DPitch()
+    {
+        return Configuration.getBooleanValue(AVKey.ALLOW_2D_PITCH, Boolean.FALSE);
     }
 
     protected boolean isNonContinous2DGlobe(Globe globe)
