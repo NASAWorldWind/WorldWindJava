@@ -88,6 +88,7 @@
     <Property name="gov.nasa.worldwind.avkey.RectangularTessellatorMaxLevel" value="30"/>
     <Property name="gov.nasa.worldwind.StereoFocusAngle" value="1.6"/>
     <Property name="gov.nasa.worldwind.avkey.ForceRedrawOnMousePressed" value="f"/>
+    <Property name="gov.nasa.worldwind.avkey.Allow2DPitch" value="f"/>
     <!-- Here's one way to specify proxy settings -->
     <!--<Property name="gov.nasa.worldwind.avkey.UrlProxyHost" value="100.215.10.20"/>-->
     <!--<Property name="gov.nasa.worldwind.avkey.UrlProxyPort" value="8080"/>-->
