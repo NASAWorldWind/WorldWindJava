@@ -82,7 +82,7 @@ public class GDALUtils
                 }
 				
                 // If the environment variables are set, no need to set configuration options.
-                String dataFolder = System.getenv("GDAL_DATA");
+                String dataFolder = System.getenv(GDAL_DATA_PATH);
                 if (dataFolder == null)
                 {
                     for (String dir : searchDirs)
@@ -90,7 +90,7 @@ public class GDALUtils
                         dataFolder = findGdalDataFolder(dir);
                         if (dataFolder != null)
                         {
-                            String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder);
+                            String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder, Logging.getMessage("gdal.FolderDiscovered"));
                             Logging.logger().info(msg);
                             gdal.SetConfigOption(GDAL_DATA_PATH, dataFolder);
                             break;
@@ -100,6 +100,9 @@ public class GDALUtils
                     {
                         Logging.logger().log(Level.WARNING, "gdal.SharedDataFolderNotFound");
                     }
+                } else {
+                    String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder, Logging.getMessage("gdal.FolderFromEnv", GDAL_DATA_PATH));
+                    Logging.logger().info(msg);                   
                 }
 
                 // Try for GDAL_DRIVER_PATH
@@ -110,7 +113,7 @@ public class GDALUtils
                         drvpath = findGdalPlugins(dir);
                         if (drvpath != null)
                         {
-                            String msg = Logging.getMessage("gdal.PluginFolderFound", drvpath);
+                            String msg = Logging.getMessage("gdal.PluginFolderFound", drvpath, Logging.getMessage("gdal.FolderDiscovered"));
                             Logging.logger().info(msg);
                             gdal.SetConfigOption(GDAL_DRIVER_PATH, drvpath);
                             break;
@@ -120,6 +123,9 @@ public class GDALUtils
                     {
                         Logging.logger().log(Level.WARNING, "gdal.PluginFolderNotFound");
                     }
+                } else {
+                    String msg = Logging.getMessage("gdal.PluginFolderFound", drvpath, Logging.getMessage("gdal.FolderFromEnv", GDAL_DRIVER_PATH));
+                    Logging.logger().info(msg);                   
                 }
             }
 
