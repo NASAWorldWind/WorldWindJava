@@ -133,8 +133,10 @@ public class Logging
 
         try
         {
-            // TODO: This is no longer working with more than one arg in the message string, e.g., {1}
-            return args == null ? message : MessageFormat.format(message, args);
+            if (args == null) return message;
+            
+            MessageFormat mf = new MessageFormat(message);
+            return mf.format(args);
         }
         catch (IllegalArgumentException e)
         {
