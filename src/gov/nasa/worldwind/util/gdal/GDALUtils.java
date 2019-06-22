@@ -138,8 +138,23 @@ public class GDALUtils
              *  "RELEASE_NAME": Returns the GDAL_RELEASE_NAME. ie. "1.1.7"
              *   "--version": Returns full version , ie. "GDAL 1.1.7, released 2002/04/16"
              */
-            String msg = Logging.getMessage("generic.LibraryLoadedOK", "GDAL v" + gdal.VersionInfo("RELEASE_NAME"));
+            String msg = Logging.getMessage("generic.LibraryLoadedOK", gdal.VersionInfo("--version"));
             Logging.logger().info(msg);
+            
+            // For GDAL 3.x, the PROJ6 library is used, which requires the location of the 'proj.db' file.
+            // Future GDAL releases will allow programatic setting of the location of the 'proj.db' file.
+            // For GDAL 3.0.0, the user must set the PROJ_LIB envirnment variable for the location.  
+            // For now, just give a warning.
+            // References:
+            //      https://github.com/OSGeo/gdal/issues/1191
+            //      https://github.com/OSGeo/gdal/pull/1658/
+            //
+            String versionNum = gdal.VersionInfo("VERSION_NUM");
+            if (Integer.parseInt(versionNum.substring(0,1)) >= 3) {
+                if (System.getenv("PROJ_LIB") == null) {
+                    System.err.println("*** ERROR - GDAL requires PROJ_LIB env var to locate 'proj.db'");
+                }
+            }
             listAllRegisteredDrivers();
 
             gdalIsAvailable.set(true);

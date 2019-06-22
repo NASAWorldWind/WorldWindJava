@@ -33,6 +33,11 @@ Deploying applications
       set to include the location of the JNI shared library.  The
       JVM will include the paths in LD_LIBRARY_PATH in the
       'java.library.path' property.
+    - Starting with GDAL 3.0.0, the PROJ.6 projection library is used.  It 
+      requires the PROJ_LIB environment variable to be defined with location of 
+      the "proj.db" file.  A commit was made to GDAL on Jun 18, 2019 that will 
+      allow the location to be set programmatically. 
+      See https://github.com/OSGeo/gdal/pull/1658/
 
     - Unless the GDAL_DATA environment variable is set, the GDAL
       data directory will be searched for, using the property
@@ -116,4 +121,6 @@ Deploying applications
     ERDAS ECW SDK
     https://www.hexagongeospatial.com/products/power-portfolio/compression-products/erdas-ecw-jp2-sdk
                 
-    
+    When using the Gradle build script, note that the version number
+    defined by 'gdalVersion' must match the binary libraries that are
+    installed.
