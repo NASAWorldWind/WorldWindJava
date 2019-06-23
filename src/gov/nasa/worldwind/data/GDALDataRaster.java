@@ -504,7 +504,7 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
      * The purpose of this method is to create the best suited dataset for the requested area. The dataset may contain
      * overviews, so instead of retrieving raster from the highest resolution source, we will compose a temporary
      * dataset from an overview, and/or we may clip only the requested area. This will accelerate reprojection (if
-     * needed), because the reporjection will be done on much smaller dataset.
+     * needed), because the reprojection will be done on much smaller dataset.
      *
      * @param reqWidth  width of the requested area
      * @param reqHeight height of the requested area
@@ -974,6 +974,14 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
             {
                 colorInt = bandColorInt[i];
                 band.SetColorInterpretation(colorInt);
+                
+                // When there's no alpha band in the source, set the destination dataset alpha band
+                // to no transparency, so that when it's used in ReprojectImage, the resulting 
+                // image is opaque.
+                if (colorInt == gdalconst.GCI_AlphaBand)
+                {
+                	band.Fill((double) GDALUtils.ALPHA_MASK);
+                }
             }
 
             if (null != missingDataSignal && colorInt == gdalconst.GCI_GrayIndex)
