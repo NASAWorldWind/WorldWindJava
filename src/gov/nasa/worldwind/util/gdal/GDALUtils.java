@@ -82,7 +82,7 @@ public class GDALUtils
                 }
 				
                 // If the environment variables are set, no need to set configuration options.
-                String dataFolder = System.getenv("GDAL_DATA");
+                String dataFolder = System.getenv(GDAL_DATA_PATH);
                 if (dataFolder == null)
                 {
                     for (String dir : searchDirs)
@@ -90,7 +90,7 @@ public class GDALUtils
                         dataFolder = findGdalDataFolder(dir);
                         if (dataFolder != null)
                         {
-                            String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder);
+                            String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder, Logging.getMessage("gdal.FolderDiscovered"));
                             Logging.logger().info(msg);
                             gdal.SetConfigOption(GDAL_DATA_PATH, dataFolder);
                             break;
@@ -100,6 +100,9 @@ public class GDALUtils
                     {
                         Logging.logger().log(Level.WARNING, "gdal.SharedDataFolderNotFound");
                     }
+                } else {
+                    String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder, Logging.getMessage("gdal.FolderFromEnv", GDAL_DATA_PATH));
+                    Logging.logger().info(msg);                   
                 }
 
                 // Try for GDAL_DRIVER_PATH
@@ -110,7 +113,7 @@ public class GDALUtils
                         drvpath = findGdalPlugins(dir);
                         if (drvpath != null)
                         {
-                            String msg = Logging.getMessage("gdal.PluginFolderFound", drvpath);
+                            String msg = Logging.getMessage("gdal.PluginFolderFound", drvpath, Logging.getMessage("gdal.FolderDiscovered"));
                             Logging.logger().info(msg);
                             gdal.SetConfigOption(GDAL_DRIVER_PATH, drvpath);
                             break;
@@ -120,6 +123,9 @@ public class GDALUtils
                     {
                         Logging.logger().log(Level.WARNING, "gdal.PluginFolderNotFound");
                     }
+                } else {
+                    String msg = Logging.getMessage("gdal.PluginFolderFound", drvpath, Logging.getMessage("gdal.FolderFromEnv", GDAL_DRIVER_PATH));
+                    Logging.logger().info(msg);                   
                 }
             }
 
@@ -132,8 +138,23 @@ public class GDALUtils
              *  "RELEASE_NAME": Returns the GDAL_RELEASE_NAME. ie. "1.1.7"
              *   "--version": Returns full version , ie. "GDAL 1.1.7, released 2002/04/16"
              */
-            String msg = Logging.getMessage("generic.LibraryLoadedOK", "GDAL v" + gdal.VersionInfo("RELEASE_NAME"));
+            String msg = Logging.getMessage("generic.LibraryLoadedOK", gdal.VersionInfo("--version"));
             Logging.logger().info(msg);
+            
+            // For GDAL 3.x, the PROJ6 library is used, which requires the location of the 'proj.db' file.
+            // Future GDAL releases will allow programatic setting of the location of the 'proj.db' file.
+            // For GDAL 3.0.0, the user must set the PROJ_LIB envirnment variable for the location.  
+            // For now, just give a warning.
+            // References:
+            //      https://github.com/OSGeo/gdal/issues/1191
+            //      https://github.com/OSGeo/gdal/pull/1658/
+            //
+            String versionNum = gdal.VersionInfo("VERSION_NUM");
+            if (Integer.parseInt(versionNum.substring(0,1)) >= 3) {
+                if (System.getenv("PROJ_LIB") == null) {
+                    System.err.println("*** ERROR - GDAL requires PROJ_LIB env var to locate 'proj.db'");
+                }
+            }
             listAllRegisteredDrivers();
 
             gdalIsAvailable.set(true);
