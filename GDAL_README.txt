@@ -11,9 +11,22 @@ WorldWind GDAL libraries.
 
 Building
  ------------------------------------------------------------
-If building with 'ant', using the 'build.xml' file, change the
-'gdal.win.properties' or 'gdal.unix.properties' files to
-reflect the location of the GDAL library files on your system.
+    If building with 'ant', using the 'build.xml' file, change the
+    'gdal.win.properties' or 'gdal.unix.properties' files to
+    reflect the location of the GDAL library files on your system.
+
+    When using the Gradle build script, note that the version number
+    defined by 'gdalVersion' must match the binary libraries that are
+    installed.  The Gradle build script pulls the 'gdal.jar' from
+    Maven or JCenter.  If you want to use 'gdal.jar' from the local
+    disk, change the Gradle script to specify
+
+          dependencies {
+              ...
+              compile files('gdal.jar')
+              ...
+          }
+    
 
 Deploying applications
 ------------------------------------------------------------
@@ -120,7 +133,3 @@ Deploying applications
 
     ERDAS ECW SDK
     https://www.hexagongeospatial.com/products/power-portfolio/compression-products/erdas-ecw-jp2-sdk
-                
-    When using the Gradle build script, note that the version number
-    defined by 'gdalVersion' must match the binary libraries that are
-    installed.
