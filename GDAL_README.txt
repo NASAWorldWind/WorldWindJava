@@ -119,7 +119,7 @@ Deploying applications
     https://trac.osgeo.org/osgeolive/ticket/2068).  The workaround
     is to 
 
-       setenv LD_LIBRARY_PATH=/usr/lib/jni:/usr/lib/grass74/lib
+       export LD_LIBRARY_PATH=/usr/lib/jni:/usr/lib/grass74/lib
 
     Pre-built binaries for the MrSID and ERDAS ECW formats are not
     available on Ubuntu.  Instructions for building the plugins is
