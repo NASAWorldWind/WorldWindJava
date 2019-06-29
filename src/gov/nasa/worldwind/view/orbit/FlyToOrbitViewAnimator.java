@@ -119,19 +119,17 @@ public class FlyToOrbitViewAnimator extends CompoundAnimator
             boolean overrideEndElevation = false;
             
             Globe globe = this.orbitView.getGlobe();
-            if (globe != null)
+            
+            if (this.altitudeMode == WorldWind.CLAMP_TO_GROUND)
             {
-                if (this.altitudeMode == WorldWind.CLAMP_TO_GROUND)
-                {
-                    overrideEndElevation = true;
-                    endElevation = globe.getElevation(getEnd().getLatitude(), getEnd().getLongitude());
-                }
-                else if (this.altitudeMode == WorldWind.RELATIVE_TO_GROUND)
-                {
-                    overrideEndElevation = true;
-                    endElevation = globe.getElevation(getEnd().getLatitude(), getEnd().getLongitude())
-                        + getEnd().getAltitude();
-                }
+                overrideEndElevation = true;
+                endElevation = globe.getElevation(getEnd().getLatitude(), getEnd().getLongitude());
+            }
+            else if (this.altitudeMode == WorldWind.RELATIVE_TO_GROUND)
+            {
+                overrideEndElevation = true;
+                endElevation = globe.getElevation(getEnd().getLatitude(), getEnd().getLongitude())
+                    + getEnd().getAltitude();
             }
 
             if (overrideEndElevation)
