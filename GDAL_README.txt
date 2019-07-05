@@ -27,6 +27,13 @@ Building
               ...
           }
     
+    If using Eclipse, in the project properties, select 'Java Build Path', 
+    and in the 'Libraries' tab, remove any existing 'gdal.jar' entry,
+    and use 'Add External Jar' to point to your installed GDAL jar
+    location.  Under that new entry, edit the 'Native Library Location' 
+    to point to the location of the native libraries.  This will add
+    the argument '-Djava.library.path=<native library location>' to
+    the JVM args when applications are run.  
 
 Deploying applications
 ------------------------------------------------------------
