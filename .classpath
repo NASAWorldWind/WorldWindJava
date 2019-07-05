@@ -19,31 +19,6 @@
 	<classpathentry kind="lib" path="jogl-all-natives-windows-i586.jar"/>
 	<classpathentry kind="lib" path="jogl-all.jar"/>
 	<classpathentry kind="lib" path="junit-4.5.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/batik-rasterizer.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-anim.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-awt-util.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-bridge.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-codec.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-css.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-dom.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-ext.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-extension.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-gui-util.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-gvt.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-parser.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-script.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-svg-dom.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-svggen.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-swing.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-transcoder.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-util.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/batik-xml.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/js.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/pdf-transcoder.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/xalan-2.6.0.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/xerces_2_5_0.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/xml-apis-ext.jar"/>
-	<classpathentry kind="lib" path="lib-external/batik/lib/xml-apis.jar"/>
 	<classpathentry kind="lib" path="vpf-symbols.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
