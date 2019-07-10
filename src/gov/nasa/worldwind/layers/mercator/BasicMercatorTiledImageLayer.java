@@ -97,15 +97,7 @@ public class BasicMercatorTiledImageLayer extends BasicTiledImageLayer
         MercatorTileUrlBuilder urlBuilder = (MercatorTileUrlBuilder)value;
         return urlBuilder;
     }
-
-    @Override
-    protected boolean needToSplit(DrawContext dc, Sector sector, Level level)
-    {
-        double texelSize = level.getTexelSize() * dc.getGlobe().getRadius();
-        double pixelSize = dc.getView().computePixelSizeAtDistance(sector.distanceTo(dc, dc.getView().getEyePoint()));
-        return texelSize > pixelSize * this.getDetailFactor();
-    }
-
+    
     @Override
     protected DownloadPostProcessor createDownloadPostProcessor(TextureTile tile)
     {
@@ -143,13 +135,19 @@ public class BasicMercatorTiledImageLayer extends BasicTiledImageLayer
             if (image != null)
             {
                 int type = image.getType();
-                if (type == BufferedImage.TYPE_CUSTOM)
-                {
-                    type = BufferedImage.TYPE_INT_RGB;
-                }
-                else if (type == BufferedImage.TYPE_BYTE_INDEXED)
-                {
-                    type = BufferedImage.TYPE_INT_ARGB;
+                switch (type) {
+                    case BufferedImage.TYPE_CUSTOM:
+                        type = BufferedImage.TYPE_INT_RGB;
+                        break;
+                    case BufferedImage.TYPE_BYTE_INDEXED:
+                        type = BufferedImage.TYPE_INT_ARGB;
+                        break;
+                    case BufferedImage.TYPE_BYTE_BINARY:
+                        type = BufferedImage.TYPE_INT_RGB;
+                        break;
+                    default:
+                        // leave value returned from image.getType()
+                        break;
                 }
 
                 BufferedImage trans = new BufferedImage(image.getWidth(), image.getHeight(), type);

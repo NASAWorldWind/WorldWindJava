@@ -42,4 +42,7 @@
     <Layer className="gov.nasa.worldwind.layers.WorldMapLayer"/>
     <Layer className="gov.nasa.worldwind.layers.ScalebarLayer"/>
     <Layer className="gov.nasa.worldwind.layers.CompassLayer"/>
+    <Layer className="gov.nasa.worldwind.layers.Earth.MapboxLayer" actuate="onRequest">
+        <Property name="AccessToken" value="access token here"/>
+    </Layer>
 </LayerList>
