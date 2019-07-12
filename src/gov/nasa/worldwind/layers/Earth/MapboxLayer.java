@@ -10,7 +10,7 @@ public class MapboxLayer extends BasicMercatorTiledImageLayer {
     public MapboxLayer()
     {
         super("mb", "Earth/Mapbox", 19, 256, false, ".png", new URLBuilder());
-        MapboxLayer.this.setDetailHint(-1.8);
+        MapboxLayer.this.setDetailHint(0.3);
     }
 
     private static class URLBuilder extends MercatorTileUrlBuilder
