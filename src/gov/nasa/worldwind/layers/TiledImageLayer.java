@@ -483,7 +483,7 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         return this.detailHintOrigin + this.getDetailHint();
     }
-
+    
     protected boolean needToSplit(DrawContext dc, Sector sector, Level level)
     {
         // Compute the height in meters of a texel from the specified level. Take care to convert from the radians to
