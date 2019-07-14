@@ -267,4 +267,56 @@ public class AngleTest
 
         assertEquals("conflicting string format, positive sign and direction", expectedValue, actualValue, 0.0);
     }
+    
+    @Test
+    public void testNormalizedDegreesLatitude_AngleBelow90()
+    {
+        double angle = 67.0;
+        double normalizedAngle = Angle.normalizedDegreesLatitude(angle); // Expected angle should be 67-degrees.
+        assertEquals("test with angle less than 90 degrees", angle, normalizedAngle, 0.0);
+    }
+    
+    @Test
+    public void testNormalizedDegreesLatitude_AngleAbove90()
+    {
+        double angle = 95.0;
+        double normalizedAngle = Angle.normalizedDegreesLatitude(angle);
+        double expectedValue = 180.0 - angle; // Expected angle should be 85-degrees.
+        assertEquals("test with angle above 90 degrees", expectedValue, normalizedAngle, 0.0);
+    }
+    
+    @Test
+    public void testNormalizedDegreesLatitude_AngleAbove180()
+    {
+        double angle = 184.0;
+        double normalizedAngle = Angle.normalizedDegreesLatitude(angle);
+        double expectedValue = -1.0 * (angle % 180.0); // Expected angle should be -4-degrees.
+        assertEquals("test with angle above 180 degrees", expectedValue, normalizedAngle, 0.0);
+    }
+    
+    @Test
+    public void testNormalizedDegreesLatitude_AngleAboveNeg90()
+    {
+        double angle = -73.0;
+        double normalizedAngle = Angle.normalizedDegreesLatitude(angle); // Expected angle should be -73-degrees.
+        assertEquals("test with angle above -90 degrees", angle, normalizedAngle, 0.0);
+    }
+    
+    @Test
+    public void testNormalizedDegreesLatitude_AngleBelowNeg90()
+    {
+        double angle = -130.0;
+        double normalizedAngle = Angle.normalizedDegreesLatitude(angle);
+        double expectedValue = -180.0 - angle; // Expeccted angle should be -50-degrees.
+        assertEquals("test with angle below -90 degrees", expectedValue, normalizedAngle, 0.0);
+    }
+    
+    @Test
+    public void testNormalizedDegreesLatitude_AngleBelowNeg180()
+    {
+        double angle = -190.0;
+        double normalizedAngle = Angle.normalizedDegreesLatitude(angle);
+        double expectedValue = -1.0 * (angle % 180.0); // Expected angle should be 10-degrees.
+        assertEquals("test with angle below -180-degrees", expectedValue, normalizedAngle, 0.0);
+    }
 }

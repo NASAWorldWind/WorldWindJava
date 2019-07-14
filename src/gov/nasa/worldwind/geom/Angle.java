@@ -677,11 +677,14 @@ public class Angle implements Comparable<Angle>
         double a = degrees % 360;
         return a > 180 ? a - 360 : a < -180 ? 360 + a : a;
     }
-
+    
     public static double normalizedDegreesLatitude(double degrees)
     {
         double lat = degrees % 180;
-        return lat > 90 ? 180 - lat : lat < -90 ? -180 - lat : lat;
+        double normalizedLat = lat > 90 ? 180 - lat : lat < -90 ? -180 - lat : lat;
+        // Determine whether the latitude is in the northern or southern hemisphere.
+        int numEquatorCrosses = (int) (degrees / 180);
+        return (numEquatorCrosses % 2 == 0) ? normalizedLat : -normalizedLat;
     }
 
     public static double normalizedDegreesLongitude(double degrees)
