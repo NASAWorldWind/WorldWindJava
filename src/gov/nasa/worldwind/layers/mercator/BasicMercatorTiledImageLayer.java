@@ -135,21 +135,11 @@ public class BasicMercatorTiledImageLayer extends BasicTiledImageLayer
             if (image != null)
             {
                 int type = image.getType();
-                switch (type) {
-                    case BufferedImage.TYPE_CUSTOM:
-                        type = BufferedImage.TYPE_INT_RGB;
-                        break;
-                    case BufferedImage.TYPE_BYTE_INDEXED:
-                        type = BufferedImage.TYPE_INT_ARGB;
-                        break;
-                    case BufferedImage.TYPE_BYTE_BINARY:
-                        type = BufferedImage.TYPE_INT_RGB;
-                        break;
-                    default:
-                        // leave value returned from image.getType()
-                        break;
+                if (type != BufferedImage.TYPE_INT_RGB)
+                {
+                    type = BufferedImage.TYPE_INT_ARGB;
                 }
-
+                
                 BufferedImage trans = new BufferedImage(image.getWidth(), image.getHeight(), type);
                 double miny = ((MercatorSector) tile.getSector()).getMinLatPercent();
                 double maxy = ((MercatorSector) tile.getSector()).getMaxLatPercent();
