@@ -318,3 +318,11 @@ task milStd2525Zip(type: Zip, dependsOn: processMilStd2525SVGs) {
     archiveName 'milstd2525-symbols.zip'
     destinationDir milStd2525OutDir
 }
+
+task runLayerManager(type: JavaExec, dependsOn: classes) {
+    group = 'run'
+    description = 'Runs the LayerManager example app.'
+    classpath sourceSets.main.runtimeClasspath
+    main = 'gov.nasa.worldwindx.examples.layermanager.LayerManagerApp'
+    systemProperty 'java.util.logging.config.file', "$project.projectDir/logging.properties"
+}
