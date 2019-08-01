@@ -36,14 +36,14 @@ repositories {
 }
 
 dependencies {
-    compile "org.jogamp.jogl:jogl-all-main:${project.joglVersion}"
-    compile "org.jogamp.gluegen:gluegen-rt-main:${project.joglVersion}"
+    compile "org.jogamp.jogl:jogl-all-main:$project.joglVersion"
+    compile "org.jogamp.gluegen:gluegen-rt-main:$project.joglVersion"
 
-    implementation "org.gdal:gdal:${project.gdalVersion}"
+    implementation "org.gdal:gdal:$project.gdalVersion"
 
-    compile "org.codehaus.jackson:jackson-core-asl:${project.jacksonVersion}"
+    compile "org.codehaus.jackson:jackson-core-asl:$project.jacksonVersion"
 
-    testImplementation "junit:junit:${project.junitVersion}"
+    testImplementation "junit:junit:$project.junitVersion"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -68,12 +68,12 @@ task extensionsJar(type: Jar) {
         exclude 'images/**'
         exclude 'gov/nasa/worldwind/**'
     }
-}
-extensionsJar.doLast {
-    copy {
-        from "$buildDir/libs/${extensionsJar.archiveName}"
-        into "${project.projectDir}"
-        rename "${extensionsJar.archiveName}", "${extensionsJar.baseName}.${extensionsJar.extension}"
+    doLast {
+        copy {
+            from "$buildDir/libs/$extensionsJar.archiveName"
+            into project.projectDir
+            rename "$extensionsJar.archiveName", "$extensionsJar.baseName.$extensionsJar.extension"
+        }
     }
 }
 
@@ -89,7 +89,7 @@ def pomConfig = {
         license {
             name 'NASA Open Source Agreement v1.3'
             url 'https://ti.arc.nasa.gov/opensource/nosa/'
-            distribution "repo"
+            distribution 'repo'
         }
     }
     developers {
@@ -100,7 +100,7 @@ def pomConfig = {
         }
     }
     scm {
-       url "https://github.com/WorldWindEarth/WorldWindJava"
+       url 'https://github.com/WorldWindEarth/WorldWindJava'
     }
 }
 
@@ -149,7 +149,7 @@ bintray {
         githubRepo = 'WorldWindEarth/WorldWindJava'
         version {
             name = project.version
-            desc = 'WorldWind v' + project.version
+            desc = "WorldWind v$project.version"
             vcsTag = System.getenv('TRAVIS_TAG')
             released = new Date()
         }
@@ -198,25 +198,25 @@ compileJava {
 
 test {
     dependsOn jar
-    classpath += project.files("$buildDir/libs/${jar.archiveName}", configurations.runtime)
+    classpath += project.files("$buildDir/libs/$jar.archiveName", configurations.runtime)
 }
 
 jar {
     dependsOn classes
     from sourceSets.main.output
     exclude 'gov/nasa/worldwindx/**'
-}
-jar.doLast {
-    copy {
-        from "$buildDir/libs/${jar.archiveName}"
-        into "${project.projectDir}"
-        rename "${jar.archiveName}", "${jar.baseName}.${jar.extension}"
+    doLast {
+        copy {
+            from "$buildDir/libs/$jar.archiveName"
+            into project.projectDir
+            rename "$jar.archiveName", "$jar.baseName.$jar.extension"
+        }
     }
 }
 
 javadoc {
     options {
-        overview = "${project.projectDir}/src/overview.html"
+        overview = "$project.projectDir/src/overview.html"
         windowTitle = 'WorldWindJava API'
         title = 'NASA WorldWind Java-Community Edition'
         header = 'NASA WorldWind-CE'
