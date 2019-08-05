@@ -505,15 +505,11 @@
     </target>
     
     <target name="runLayerManager" depends="build" description="Runs the LayerManager example app.">
-     <echoproperties/>
-       <java fork="true" 
-            classname="gov.nasa.worldwindx.examples.layermanager.LayerManagerApp" 
-            classpath="${gdal.jar.dir}/gdal.jar;gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jackson-core-asl.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar;worldwind.jar;worldwindx.jar"
-            >
-            <env key="GDAL_DATA" path="${gdal.data.dir}"/>
-            <env key="GDAL_DRIVER_PATH" path="${gdal.plugins.dir}"/>
+        <echoproperties/>
+        <java fork="true"
+              classname="gov.nasa.worldwindx.examples.layermanager.LayerManagerApp" 
+              classpath="gluegen-rt-natives-linux-amd64.jar;gluegen-rt-natives-linux-i586.jar;gluegen-rt-natives-macosx-universal.jar;gluegen-rt-natives-windows-amd64.jar;gluegen-rt-natives-windows-i586.jar;gluegen-rt.jar;jackson-core-asl.jar;jogl-all-natives-linux-amd64.jar;jogl-all-natives-linux-i586.jar;jogl-all-natives-macosx-universal.jar;jogl-all-natives-windows-amd64.jar;jogl-all-natives-windows-i586.jar;jogl-all.jar;junit-4.5.jar;vpf-symbols.jar;worldwind.jar;worldwindx.jar">
             <sysproperty key="java.util.logging.config.file" value="${basedir}/logging.properties"/>
-       </java>
+        </java>
     </target>
-    
 </project>

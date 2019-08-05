@@ -10,7 +10,6 @@ jdk:
   - openjdk8
   - openjdk11
   - openjdk12
-  - oraclejdk8
   - oraclejdk11
   - openjdk-ea
 
@@ -38,12 +37,13 @@ before_install:
 install: 
   # Using clean as dummy target; could install dependencies here if needed.
   - ./gradlew clean
-  
-# Use xvfb to run tests that require a GUI and give it some time to start
+
+# Use xvfb to run tests that require a GUI.
+services:
+  - xvfb
+
 before_script:
   - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3
 
 # Build the project
 script:
