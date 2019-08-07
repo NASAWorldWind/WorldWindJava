@@ -172,11 +172,14 @@ public class WWXML
             throw new IllegalArgumentException(message);
         }
 
-        try (InputStream inputStream = WWIO.openFileOrResourceStream(filePath, c)) {
-        	return inputStream != null ? openDocumentStream(inputStream) : null;
-        } catch (IOException e) {
-        	e.printStackTrace();
-        	return null;
+        try (InputStream inputStream = WWIO.openFileOrResourceStream(filePath, c))
+        {
+            return inputStream != null ? openDocumentStream(inputStream) : null;
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -278,7 +281,8 @@ public class WWXML
             throw new IllegalArgumentException(message);
         }
 
-        try (java.io.FileOutputStream outputStream = new java.io.FileOutputStream(filePath)) {
+        try (java.io.FileOutputStream outputStream = new java.io.FileOutputStream(filePath))
+        {
             saveDocumentToStream(doc, outputStream);
         }
         catch (IOException e)
@@ -358,7 +362,7 @@ public class WWXML
 
         try
         {
-        	XMLEventReader reader = inputFactory.createXMLEventReader(inputStream);
+            XMLEventReader reader = inputFactory.createXMLEventReader(inputStream);
             inputSources.put(reader, inputStream);
             return reader;
         }
@@ -532,19 +536,25 @@ public class WWXML
     public static void closeEventReader(XMLEventReader eventReader, String name)
     {
         if (eventReader == null)
+        {
             return;
+        }
 
         try
         {
             eventReader.close();
             InputStream is = inputSources.get(eventReader);
-            if (is != null) {
-            	try {
-					is.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-            	inputSources.remove(eventReader);
+            if (is != null)
+            {
+                try
+                {
+                    is.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+                inputSources.remove(eventReader);
             }
         }
         catch (XMLStreamException e)

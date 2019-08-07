@@ -919,7 +919,7 @@ public class DataConfigurationUtils
 
         if (coverage.getCoverageOfferings().size() == 0)
         {
-        	String message = Logging.getMessage("AbsentResourceList.WCSDescribeCoverage");
+            String message = Logging.getMessage("AbsentResourceList.WCSDescribeCoverage");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -1156,7 +1156,10 @@ public class DataConfigurationUtils
 
             String layerName = lNames[i];
             WMSLayerCapabilities layer = caps.getLayerByName(layerName);
-            if (layer == null) continue;		// layer not found
+            if (layer == null)
+            {
+                continue; // layer not found
+            }
 
             String layerTitle = layer.getTitle();
             sb.append(layerTitle != null ? layerTitle : layerName);

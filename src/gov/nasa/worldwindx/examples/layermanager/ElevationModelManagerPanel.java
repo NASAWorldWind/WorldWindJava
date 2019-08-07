@@ -55,7 +55,9 @@ public class ElevationModelManagerPanel extends JPanel
             public void propertyChange(PropertyChangeEvent propertyChangeEvent)
             {
                 if (propertyChangeEvent.getPropertyName().equals(AVKey.ELEVATION_MODEL))
+                {
                     if (!SwingUtilities.isEventDispatchThread())
+                    {
                         SwingUtilities.invokeLater(new Runnable()
                         {
                             public void run()
@@ -69,8 +71,12 @@ public class ElevationModelManagerPanel extends JPanel
                                 });
                             }
                         });
+                    }
                     else
+                    {
                         update(wwd);
+                    }
+                }
             }
         });
     }
@@ -89,7 +95,9 @@ public class ElevationModelManagerPanel extends JPanel
         // Populate this manager with an entry for each elevation model in the WorldWindow.
 
         if (this.isUpToDate(wwd))
+        {
             return;
+        }
 
         // First remove all the existing entries.
         this.modelPanels.clear();
@@ -111,7 +119,9 @@ public class ElevationModelManagerPanel extends JPanel
             for (ElevationModel elevationModel : cem.getElevationModels())
             {
                 if (elevationModel.getValue(AVKey.IGNORE) != null)
+                {
                     continue;
+                }
 
                 ElevationModelPanel elevationModelPanel = new ElevationModelPanel(wwd, this, elevationModel);
                 this.modelPanels.add(elevationModelPanel);
@@ -127,19 +137,26 @@ public class ElevationModelManagerPanel extends JPanel
 
         if (!(wwd.getModel().getGlobe().getElevationModel() instanceof CompoundElevationModel))
         {
-           if (this.modelPanels.size() == 0) return false;
+           if (this.modelPanels.size() == 0)
+           {
+               return false;
+           }
            return this.modelPanels.get(0).getElevationModel() == wwd.getModel().getGlobe().getElevationModel();
         }
 
         CompoundElevationModel cem = (CompoundElevationModel) wwd.getModel().getGlobe().getElevationModel();
 
         if (this.modelPanels.size() != cem.getElevationModels().size())
+        {
             return false;
+        }
 
         for (int i = 0; i < cem.getElevationModels().size(); i++)
         {
             if (cem.getElevationModels().get(i) != this.modelPanels.get(i).getElevationModel())
+            {
                 return false;
+            }
         }
 
         return true;
