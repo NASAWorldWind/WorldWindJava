@@ -252,7 +252,7 @@ public class SurfaceImageLayer extends RenderableLayer
             throw new IllegalArgumentException(message);
         }
 
-        if (this.imageTable.contains(name))
+        if (this.imageTable.containsKey(name))
             this.removeImage(name);
 
         final ArrayList<SurfaceImage> surfaceImages = new ArrayList<SurfaceImage>();
@@ -359,7 +359,7 @@ public class SurfaceImageLayer extends RenderableLayer
             throw new IllegalArgumentException(message);
         }
 
-        if (this.imageTable.contains(name))
+        if (this.imageTable.containsKey(name))
             this.removeImage(name);
 
         final ArrayList<SurfaceImage> surfaceImages = new ArrayList<SurfaceImage>();
