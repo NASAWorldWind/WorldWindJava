@@ -1,8 +1,7 @@
 package gov.nasa.worldwind.geom.coords;
 
-import org.junit.Test;
-
 import gov.nasa.worldwind.geom.LatLon;
+import org.junit.Test;
 
 public class UTM_MGRS_test {
 
