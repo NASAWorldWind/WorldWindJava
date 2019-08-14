@@ -256,10 +256,14 @@ class MGRSCoordConverter
         latitude = 0;
         longitude = 0;
         MGRSComponents mgrs = breakMGRSString(MGRSString);
-        if (mgrs == null) return last_error;
+        if (mgrs == null)
+        {
+            return last_error;
+        }
         
         long error_code = MGRS_NO_ERROR;
-        if (mgrs.zone != 0) {
+        if (mgrs.zone != 0)
+        {
             UTMCoord UTM = convertMGRSToUTM(MGRSString);
             if (UTM != null)
             {
@@ -1015,7 +1019,7 @@ class MGRSCoordConverter
     /**
      * The function Convert_MGRS_To_UPS converts an MGRS coordinate string to UPS (hemisphere, easting, and northing)
      * coordinates, according to the current ellipsoid parameters. If any errors occur, the error code(s) are returned
-     * by the function, otherwide UPS_NO_ERROR is returned.
+     * by the function, otherwise UPS_NO_ERROR is returned.
      *
      * @param MGRS the MGRS coordinate string.
      *
