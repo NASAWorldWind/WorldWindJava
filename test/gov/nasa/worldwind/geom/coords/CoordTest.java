@@ -3,7 +3,7 @@ package gov.nasa.worldwind.geom.coords;
 import gov.nasa.worldwind.geom.LatLon;
 import org.junit.Test;
 
-public class UTM_MGRS_test {
+public class CoordTest {
 
 	private LatLon[] input0 = { 
 			LatLon.fromDegrees(-74.37916, 155.02235),
