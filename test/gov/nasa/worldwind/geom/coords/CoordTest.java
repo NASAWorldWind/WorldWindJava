@@ -29,11 +29,11 @@ public class CoordTest
             && isClose(a.longitude.radians, b.longitude.radians, limit);
     }
     
-    private static final LatLon[] TEST_POSITIONS = 
+    private static final LatLon[] TEST_POSITIONS =
     {
         LatLon.fromDegrees(-74.37916, 155.02235),
         LatLon.fromDegrees(0, 0),
-        LatLon.fromDegrees(0.1300, -0.2324),
+        LatLon.fromDegrees(0.13, -0.2324),
         LatLon.fromDegrees(-45.6456, 23.3545),
         LatLon.fromDegrees(-12.7650, -33.8765),
         LatLon.fromDegrees(23.4578, -135.4545),
@@ -60,7 +60,7 @@ public class CoordTest
             MGRSCoord fromLatLon = MGRSCoord.fromLatLon(input.latitude, input.longitude);
             MGRSCoord fromString = MGRSCoord.fromString(fromLatLon.toString(), null);
             LatLon position = LatLon.fromRadians(fromString.getLatitude().radians, fromString.getLongitude().radians);
-            assertTrue(isClose(input, position, 000020));
+            assertTrue(isClose(input, position, 0.0002));
         }
     }
     
@@ -78,15 +78,15 @@ public class CoordTest
             MGRSCoord fromLatLon = MGRSCoord.fromLatLon(input.latitude, input.longitude);
             MGRSCoord fromString = MGRSCoord.fromString(fromLatLon.toString(), null);
             LatLon position = LatLon.fromRadians(fromString.getLatitude().radians, fromString.getLongitude().radians);
-            assertTrue(isClose(input, position, 000020));
+            assertTrue(isClose(input, position, 0.0002));
         }
     }
     
     private static final LatLon[] NO_INVERSE_POSITIONS =
     {
-        LatLon.fromDegrees(90.0000, 177.0000),
-        LatLon.fromDegrees(-90.0000, -177.0000),
-        LatLon.fromDegrees(90.0000, 3.0000)
+        LatLon.fromDegrees(90.0, 177.0),
+        LatLon.fromDegrees(-90.0, -177.0),
+        LatLon.fromDegrees(90.0, 3.0)
     };
     
     private static final String[] NO_INVERSE_TO_MGRS =
