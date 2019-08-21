@@ -2,14 +2,13 @@
 
 # WorldWind Java
 
-```
-Currently WorldWind is undergoing system evaluation. We will not be able to accept any software 
-update requests. WorldWind users can continue to access the NASA servers and SDKs, available on 
-Github. More information will be provided in the near future. If you have questions and/or 
-concerns, please feel free to email at:
+## NASA Renews Commitment to WorldWind
+WorldWind has received renewed commitment from NASA for continued development and support.  NASA will continue to release updates to the WorldWind SDKs, and will continue to make the WorldWind Servers accessible for all Users.  We plan to make an announcement soon regarding a path forward for improved support of the WorldWind User & Developer communities. 
+
+If you have questions and/or concerns, please feel free to email at:
 
 worldwind-info@lists.nasa.gov
-```
+
 
 [![Build Status](https://travis-ci.com/NASAWorldWind/WorldWindJava.svg?branch=develop)](https://travis-ci.com/NASAWorldWind/WorldWindJava)
 
@@ -27,13 +26,13 @@ Official WorldWind Java releases have the latest stable features, enhancements a
 - [GitHub Milestones](https://github.com/NASAWorldWind/WorldWindJava/milestones) documents upcoming releases and the development roadmap
 - [Travis CI](https://travis-ci.com/NASAWorldWind/WorldWindJava) provides continuous integration and build automation
 
-## Run a Demo 
-   
+## Run a Demo
+
 ###### From a Web Browser
-   
+
 - [WorldWind Demo App](https://worldwind.arc.nasa.gov/java/latest/webstart/ApplicationTemplate.jnlp) shows WorldWind's basic capabilities
 - [Java Demos](https://goworldwind.org/demos) has a complete list of example apps
-   
+
 ###### From a Windows Development Environment
 
 - Download and extract the [Latest Release](https://github.com/NASAWorldWind/WorldWindJava/releases/latest)
@@ -53,19 +52,19 @@ sh run-demo.bash
 ```
 
 ###### Troubleshooting
-   
-WorldWind requires a modern graphics card with a current driver. Most display problems are caused by out-of-date 
-graphics drivers. On Windows, visit your graphics card manufacturer's web site for the latest driver: NVIDIA, ATI or 
-Intel. The drivers are typically under a link named Downloads or Support. If you're using a laptop, the latest drivers 
+
+WorldWind requires a modern graphics card with a current driver. Most display problems are caused by out-of-date
+graphics drivers. On Windows, visit your graphics card manufacturer's web site for the latest driver: NVIDIA, ATI or
+Intel. The drivers are typically under a link named Downloads or Support. If you're using a laptop, the latest drivers
 are found at the laptop manufacturer's web site.
 
 ## JOGL Native Binaries
 
-JOGL performs runtime extraction of native binaries. Some deployment situations may not allow this because it extracts 
-the binaries to the application user’s temp directory. Runtime extraction can be avoided by by modifying WorldWind 
-Java's JOGL distribution to load native binaries directly from the library path instead of dynamically using the native 
+JOGL performs runtime extraction of native binaries. Some deployment situations may not allow this because it extracts
+the binaries to the application user’s temp directory. Runtime extraction can be avoided by by modifying WorldWind
+Java's JOGL distribution to load native binaries directly from the library path instead of dynamically using the native
 binary JAR files as follows:
-                                                                                                     
+
 1. Extract the GlueGen and JOGL native binary JAR files for the desired platform.
    These JAR files follow the naming pattern gluegen-rt-natives-PLATFORM.jar and jogl-all-natives-PLATFORM.jar
 2. Place the extracted native binaries either in the program's working directory or in a location specified as the
@@ -94,7 +93,7 @@ binary JAR files as follows:
     Government Agency, is an intended third-party beneficiary of all subsequent
     distributions or redistributions of the subject software. Anyone who uses, reproduces,
     distributes, modifies or redistributes the subject software, as defined herein, or any
-    part thereof, is, by that action, accepting in full the responsibilities and obligations 
+    part thereof, is, by that action, accepting in full the responsibilities and obligations
     contained in this agreement.
 
     Government Agency: National Aeronautics and Space Administration (NASA)
