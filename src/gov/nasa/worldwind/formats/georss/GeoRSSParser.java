@@ -319,7 +319,7 @@ public class GeoRSSParser
             return null;
         }
 
-        ArrayList<LatLon> positions = new ArrayList<LatLon>();
+        ArrayList<LatLon> positions = new ArrayList<>();
         for (int i = 0; i < values.size(); i += 2)
         {
             positions.add(LatLon.fromDegrees(values.get(i), values.get(i + 1)));

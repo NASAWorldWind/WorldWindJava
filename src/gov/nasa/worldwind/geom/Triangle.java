@@ -7,7 +7,7 @@ package gov.nasa.worldwind.geom;
 
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.nio.*;
 import java.util.*;
 

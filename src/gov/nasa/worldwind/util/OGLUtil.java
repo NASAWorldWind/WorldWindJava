@@ -7,11 +7,11 @@ package gov.nasa.worldwind.util;
 
 import com.jogamp.opengl.util.texture.*;
 import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
-import com.jogamp.opengl.util.texture.spi.DDSImage;
+import com.jogamp.opengl.util.texture.ImageType;
 import gov.nasa.worldwind.geom.Vec4;
 
 import javax.imageio.ImageIO;
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.image.*;
 import java.io.*;
 import java.net.URL;
@@ -267,7 +267,7 @@ public class OGLUtil
      * @param internalFormat the OpenGL texture internal format.
      *
      * @return a pixel format corresponding to the texture internal format, or 0 if the internal format is not
-     *         recognized.
+     * recognized.
      */
     public static int computeTexturePixelFormat(int internalFormat)
     {
@@ -390,7 +390,7 @@ public class OGLUtil
      * @param includeMipmaps true to include the texture's mip map data in the estimated size; false otherwise.
      *
      * @return a pixel format corresponding to the texture internal format, or 0 if the internal format is not
-     *         recognized.
+     * recognized.
      *
      * @throws IllegalArgumentException if either the width or height is less than or equal to zero.
      */
@@ -554,7 +554,8 @@ public class OGLUtil
             stream = new BufferedInputStream(stream);
         }
 
-        boolean ddsFormat = DDSImage.isDDSImage(stream);
+        String fileSuffix = ImageType.Util.getFileSuffix(stream);
+        boolean ddsFormat = fileSuffix != null && fileSuffix.equalsIgnoreCase(ImageType.T_DDS);
 
         // If the image is not in DDS format, attempt to load it using ImageIO. This works around an issue with the
         // JOGL PNG reader (WWJ-369). However, ImageIO does not support DDS, so in this case just send the image to

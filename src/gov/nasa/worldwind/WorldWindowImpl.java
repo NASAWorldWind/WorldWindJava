@@ -6,6 +6,7 @@
 
 package gov.nasa.worldwind;
 
+import com.jogamp.nativewindow.ScalableSurface;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.cache.*;
 import gov.nasa.worldwind.event.*;
@@ -317,5 +318,29 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     {
         long cacheSize = Configuration.getLongValue(AVKey.TEXTURE_CACHE_SIZE, FALLBACK_TEXTURE_CACHE_SIZE);
         return new BasicGpuResourceCache((long) (0.8 * cacheSize), cacheSize);
+    }
+
+    /**
+     * Configures JOGL's surface pixel scaling on the specified <code>ScalableSurface</code> to ensure backward
+     * compatibility with WorldWind applications developed prior to JOGL pixel scaling's introduction. This method is
+     * used by <code>GLCanvas</code> and <code>GLJPanel</code> to effectively disable JOGL's surface pixel scaling by
+     * requesting a 1:1 scale.
+     * <p>
+     * Since v2.2.0, JOGL defaults to using high-dpi pixel scales where possible. This causes WorldWind screen elements
+     * such as placemarks, the compass, the world map, the view controls, and the scale bar (plus many more) to appear
+     * smaller than they are intended to on screen. The high-dpi default also has the effect of degrading WorldWind
+     * rendering performance.
+     */
+    public static void configureIdentityPixelScale(ScalableSurface surface)
+    {
+        if (surface == null)
+        {
+            String message = Logging.getMessage("nullValue.SurfaceIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        float[] identityScale = new float[] {ScalableSurface.IDENTITY_PIXELSCALE, ScalableSurface.IDENTITY_PIXELSCALE};
+        surface.setSurfaceScale(identityScale);
     }
 }

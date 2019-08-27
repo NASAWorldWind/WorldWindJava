@@ -81,13 +81,13 @@ public class GDALUtils
             String message;
 
             // check if the library is already know (from previous attempts) to fail to load
-            if ( !failedLibraries.contains(libName) )
+            if (!failedLibraries.contains(libName))
             {
                 try
                 {
                     NativeLibraryLoader.loadLibrary(libName);
                     loadedLibraries.add(libName);
-                    Logging.logger().info( Logging.getMessage("generic.LibraryLoadedOK", libName ));
+                    Logging.logger().info(Logging.getMessage("generic.LibraryLoadedOK", libName));
 
                     return; // GOOD! Leaving now
                 }
@@ -102,7 +102,7 @@ public class GDALUtils
             }
             else
             {
-                String reason = Logging.getMessage("generic.LibraryNotFound", libName );
+                String reason = Logging.getMessage("generic.LibraryNotFound", libName);
                 message = Logging.getMessage("generic.LibraryNotLoaded", libName, reason);
             }
 
@@ -149,7 +149,7 @@ public class GDALUtils
     protected static boolean is32bitArchitecture()
     {
         String arch = System.getProperty("sun.arch.data.model");
-        if( !WWUtil.isEmpty(arch) )
+        if (!WWUtil.isEmpty(arch))
             return ("32".equals(arch));
 
         // GNU JAVA does not return "sun.arch.data.model"
@@ -162,13 +162,13 @@ public class GDALUtils
         {
             NativeLibraryLoader.loadLibrary(gdalalljni);
             loadedLibraries.add(gdalalljni);
-            Logging.logger().info( Logging.getMessage("generic.LibraryLoadedOK", gdalalljni ));
+            Logging.logger().info(Logging.getMessage("generic.LibraryLoadedOK", gdalalljni));
 
             return true;
         }
         catch (Throwable t)
         {
-            if( allowLogErrors )
+            if (allowLogErrors)
                 Logging.logger().finest(WWUtil.extractExceptionReason(t));
         }
 
@@ -181,19 +181,27 @@ public class GDALUtils
         {
             boolean runningAsJavaWebStart = (null != System.getProperty("javawebstart.version", null));
 
-			// attempt to load library from default locations
-			// (current path OR by specifying java.library.path from the command line)
+            // attempt to load library from default locations
+            // (current path OR by specifying java.library.path from the command line)
             boolean gdalNativeLibraryLoaded = gdalPreLoadNativeLibrary(false);
 
             if (!gdalNativeLibraryLoaded && !runningAsJavaWebStart)
             {
-            	// if we are here, library is not in any default place, so we will search in sub-folders
+                // if we are here, library is not in any default place, so we will search in sub-folders
                 String[] folders = findGdalFolders();
                 String newJavaLibraryPath = buildPathString(folders, true);
                 if (newJavaLibraryPath != null)
                 {
-                    alterJavaLibraryPath(newJavaLibraryPath);
+                    try
+                    {
+                        alterJavaLibraryPath(newJavaLibraryPath);
 //                    gdalNativeLibraryLoaded = gdalLoadNativeLibrary(true);
+                    }
+                    catch (Exception e)
+                    {
+                        String message = Logging.getMessage("gdal.UnableToAlterLibraryPath");
+                        Logging.logger().log(Level.WARNING, message, e);
+                    }
                 }
             }
 
@@ -231,8 +239,8 @@ public class GDALUtils
             }
             else
             {
-                String reason = Logging.getMessage("generic.LibraryNotFound", "GDAL" );
-                String msg = Logging.getMessage("generic.LibraryNotLoaded", "GDAL", reason );
+                String reason = Logging.getMessage("generic.LibraryNotFound", "GDAL");
+                String msg = Logging.getMessage("generic.LibraryNotLoaded", "GDAL", reason);
                 Logging.logger().warning(msg);
             }
         }
@@ -560,9 +568,9 @@ public class GDALUtils
         int height = ds.getRasterYSize();
         int bandCount = ds.getRasterCount();
 
-        if( bandCount < 1 )
+        if (bandCount < 1)
         {
-            String message = Logging.getMessage("generic.UnexpectedBandCount", bandCount );
+            String message = Logging.getMessage("generic.UnexpectedBandCount", bandCount);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -813,7 +821,7 @@ public class GDALUtils
             }
 
             cm = new ComponentColorModel(cs, nBits, hasAlpha, false, transparency, bufferType);
-            
+
             // Work around for
             // Bug ID: JDK-5051418 Grayscale TYPE_CUSTOM BufferedImages are rendered lighter than TYPE_BYTE_GRAY
             BufferedImage tmpImg = new BufferedImage(cm, raster, false, null);
@@ -1241,81 +1249,99 @@ public class GDALUtils
      *
      * @return AVList with retrieved metadata
      *
-     * @throws IllegalArgumentException when the passed dataset is null pr emtpy, or any of the dimension is 0
-     * @throws gov.nasa.worldwind.exception.WWRuntimeException
-     *                                  if GDAL is not available, or a dataset contains no bands
-     *                                  <p/>
-     *                                  The extractRasterParameters() sets next key/value pairs:
-     *                                  <p/>
-     *                                  AVKey.WIDTH - the maximum width of the image
-     *                                  <p/>
-     *                                  AVKey.HEIGHT - the maximum height of the image
-     *                                  <p/>
-     *                                  AVKey.COORDINATE_SYSTEM - one of the next values: AVKey.COORDINATE_SYSTEM_SCREEN
-     *                                  AVKey.COORDINATE_SYSTEM_GEOGRAPHIC AVKey.COORDINATE_SYSTEM_PROJECTED
-     *                                  <p/>
-     *                                  AVKey.SECTOR - in case of Geographic CS, contains a regular Geographic Sector
-     *                                  defined by lat/lon coordinates of corners in case of Projected CS, contains a
-     *                                  bounding box of the area
-     *                                  <p/>
-     *                                  AVKey.COORDINATE_SYSTEM_NAME
-     *                                  <p/>
-     *                                  <p/>
-     *                                  AVKey.PIXEL_WIDTH (Double) pixel size, UTM images usually specify 1 (1 meter);
-     *                                  if missing and Geographic Coordinate System is specified will be calculated as
-     *                                  LongitudeDelta/WIDTH
-     *                                  <p/>
-     *                                  AVKey.PIXEL_HEIGHT (Double) pixel size, UTM images usually specify 1 (1 meter);
-     *                                  if missing and Geographic Coordinate System is specified will be calculated as
-     *                                  LatitudeDelta/HEIGHT
-     *                                  <p/>
-     *                                  AVKey.ORIGIN (LatLon) specifies coordinate of the image's origin (one of the
-     *                                  corners, or center) If missing, upper left corner will be set as origin
-     *                                  <p/>
-     *                                  AVKey.DATE_TIME (0 terminated String, length == 20) if missing, current date &
-     *                                  time will be used
-     *                                  <p/>
-     *                                  AVKey.PIXEL_FORMAT required (valid values: AVKey.ELEVATION | AVKey.IMAGE }
-     *                                  specifies weather it is a digital elevation model or image
-     *                                  <p/>
-     *                                  AVKey.IMAGE_COLOR_FORMAT required if AVKey.PIXEL_FORMAT is AVKey.IMAGE (valid
-     *                                  values: AVKey.COLOR and AVKey.MONOCHROME)
-     *                                  <p/>
-     *                                  AVKey.DATA_TYPE required ( valid values: AVKey.INT16, and AVKey.FLOAT32 )
-     *                                  <p/>
-     *                                  AVKey.VERSION optional, if missing a default will be used "NASA WorldWind"
-     *                                  <p/>
-     *                                  AVKey.DISPLAY_NAME, (String) optional, specifies a name of the document/image
-     *                                  <p/>
-     *                                  AVKey.DESCRIPTION (String) optional, for any kind of descriptions
-     *                                  <p/>
-     *                                  AVKey.MISSING_DATA_SIGNAL optional, set the AVKey.MISSING_DATA_SIGNAL ONLY if
-     *                                  you know for sure that the specified value actually represents void (NODATA)
-     *                                  areas. Elevation data usually has "-32767" (like DTED), or "-32768" like SRTM,
-     *                                  but some has "0" (mostly images) and "-9999" like NED. Note! Setting "-9999" is
-     *                                  very ambiguos because -9999 for elevation is valid value;
-     *                                  <p/>
-     *                                  AVKey.MISSING_DATA_REPLACEMENT (String type forced by spec) Most images have
-     *                                  "NODATA" as "0", elevations have as "-9999", or "-32768" (sometimes "-32767")
-     *                                  <p/>
-     *                                  AVKey.COORDINATE_SYSTEM required, valid values AVKey.COORDINATE_SYSTEM_GEOGRAPHIC
-     *                                  or AVKey.COORDINATE_SYSTEM_PROJECTED
-     *                                  <p/>
-     *                                  AVKey.COORDINATE_SYSTEM_NAME Optional, A name of the Coordinates System as a
-     *                                  String
-     *                                  <p/>
-     *                                  AVKey.PROJECTION_EPSG_CODE Required; Integer; EPSG code or Projection Code If CS
-     *                                  is Geodetic and EPSG code is not specified, a default WGS84 (4326) will be used
-     *                                  <p/>
-     *                                  AVKey.PROJECTION_DATUM  Optional, AVKey.PROJECTION_DESC   Optional,
-     *                                  AVKey.PROJECTION_NAME   Optional, AVKey.PROJECTION_UNITS  Optional,
-     *                                  <p/>
-     *                                  AVKey.ELEVATION_UNIT Required, if AVKey.PIXEL_FORMAT = AVKey.ELEVATION, value:
-     *                                  AVKey.UNIT_FOOT or AVKey.UNIT_METER (default, if not specified)
-     *                                  <p/>
-     *                                  AVKey.RASTER_PIXEL, optional, values: AVKey.RASTER_PIXEL_IS_AREA or
-     *                                  AVKey.RASTER_PIXEL_IS_POINT if not specified, default for images is
-     *                                  RASTER_PIXEL_IS_AREA, and AVKey.RASTER_PIXEL_IS_POINT for elevations
+     * @throws IllegalArgumentException                        when the passed dataset is null pr emtpy, or any of the
+     *                                                         dimension is 0
+     * @throws gov.nasa.worldwind.exception.WWRuntimeException if GDAL is not available, or a dataset contains no bands
+     *                                                         <p/>
+     *                                                         The extractRasterParameters() sets next key/value pairs:
+     *                                                         <p/>
+     *                                                         AVKey.WIDTH - the maximum width of the image
+     *                                                         <p/>
+     *                                                         AVKey.HEIGHT - the maximum height of the image
+     *                                                         <p/>
+     *                                                         AVKey.COORDINATE_SYSTEM - one of the next values:
+     *                                                         AVKey.COORDINATE_SYSTEM_SCREEN AVKey.COORDINATE_SYSTEM_GEOGRAPHIC
+     *                                                         AVKey.COORDINATE_SYSTEM_PROJECTED
+     *                                                         <p/>
+     *                                                         AVKey.SECTOR - in case of Geographic CS, contains a
+     *                                                         regular Geographic Sector defined by lat/lon coordinates
+     *                                                         of corners in case of Projected CS, contains a bounding
+     *                                                         box of the area
+     *                                                         <p/>
+     *                                                         AVKey.COORDINATE_SYSTEM_NAME
+     *                                                         <p/>
+     *                                                         <p/>
+     *                                                         AVKey.PIXEL_WIDTH (Double) pixel size, UTM images usually
+     *                                                         specify 1 (1 meter); if missing and Geographic Coordinate
+     *                                                         System is specified will be calculated as
+     *                                                         LongitudeDelta/WIDTH
+     *                                                         <p/>
+     *                                                         AVKey.PIXEL_HEIGHT (Double) pixel size, UTM images
+     *                                                         usually specify 1 (1 meter); if missing and Geographic
+     *                                                         Coordinate System is specified will be calculated as
+     *                                                         LatitudeDelta/HEIGHT
+     *                                                         <p/>
+     *                                                         AVKey.ORIGIN (LatLon) specifies coordinate of the image's
+     *                                                         origin (one of the corners, or center) If missing, upper
+     *                                                         left corner will be set as origin
+     *                                                         <p/>
+     *                                                         AVKey.DATE_TIME (0 terminated String, length == 20) if
+     *                                                         missing, current date & time will be used
+     *                                                         <p/>
+     *                                                         AVKey.PIXEL_FORMAT required (valid values:
+     *                                                         AVKey.ELEVATION | AVKey.IMAGE } specifies weather it is a
+     *                                                         digital elevation model or image
+     *                                                         <p/>
+     *                                                         AVKey.IMAGE_COLOR_FORMAT required if AVKey.PIXEL_FORMAT
+     *                                                         is AVKey.IMAGE (valid values: AVKey.COLOR and
+     *                                                         AVKey.MONOCHROME)
+     *                                                         <p/>
+     *                                                         AVKey.DATA_TYPE required ( valid values: AVKey.INT16, and
+     *                                                         AVKey.FLOAT32 )
+     *                                                         <p/>
+     *                                                         AVKey.VERSION optional, if missing a default will be used
+     *                                                         "NASA WorldWind"
+     *                                                         <p/>
+     *                                                         AVKey.DISPLAY_NAME, (String) optional, specifies a name
+     *                                                         of the document/image
+     *                                                         <p/>
+     *                                                         AVKey.DESCRIPTION (String) optional, for any kind of
+     *                                                         descriptions
+     *                                                         <p/>
+     *                                                         AVKey.MISSING_DATA_SIGNAL optional, set the
+     *                                                         AVKey.MISSING_DATA_SIGNAL ONLY if you know for sure that
+     *                                                         the specified value actually represents void (NODATA)
+     *                                                         areas. Elevation data usually has "-32767" (like DTED),
+     *                                                         or "-32768" like SRTM, but some has "0" (mostly images)
+     *                                                         and "-9999" like NED. Note! Setting "-9999" is very
+     *                                                         ambiguos because -9999 for elevation is valid value;
+     *                                                         <p/>
+     *                                                         AVKey.MISSING_DATA_REPLACEMENT (String type forced by
+     *                                                         spec) Most images have "NODATA" as "0", elevations have
+     *                                                         as "-9999", or "-32768" (sometimes "-32767")
+     *                                                         <p/>
+     *                                                         AVKey.COORDINATE_SYSTEM required, valid values
+     *                                                         AVKey.COORDINATE_SYSTEM_GEOGRAPHIC or AVKey.COORDINATE_SYSTEM_PROJECTED
+     *                                                         <p/>
+     *                                                         AVKey.COORDINATE_SYSTEM_NAME Optional, A name of the
+     *                                                         Coordinates System as a String
+     *                                                         <p/>
+     *                                                         AVKey.PROJECTION_EPSG_CODE Required; Integer; EPSG code
+     *                                                         or Projection Code If CS is Geodetic and EPSG code is not
+     *                                                         specified, a default WGS84 (4326) will be used
+     *                                                         <p/>
+     *                                                         AVKey.PROJECTION_DATUM  Optional, AVKey.PROJECTION_DESC
+     *                                                         Optional, AVKey.PROJECTION_NAME   Optional,
+     *                                                         AVKey.PROJECTION_UNITS  Optional,
+     *                                                         <p/>
+     *                                                         AVKey.ELEVATION_UNIT Required, if AVKey.PIXEL_FORMAT =
+     *                                                         AVKey.ELEVATION, value: AVKey.UNIT_FOOT or
+     *                                                         AVKey.UNIT_METER (default, if not specified)
+     *                                                         <p/>
+     *                                                         AVKey.RASTER_PIXEL, optional, values: AVKey.RASTER_PIXEL_IS_AREA
+     *                                                         or AVKey.RASTER_PIXEL_IS_POINT if not specified, default
+     *                                                         for images is RASTER_PIXEL_IS_AREA, and
+     *                                                         AVKey.RASTER_PIXEL_IS_POINT for elevations
      */
     public static AVList extractRasterParameters(Dataset ds, AVList params, boolean quickReadingMode)
         throws IllegalArgumentException, WWRuntimeException
@@ -1394,9 +1420,12 @@ public class GDALUtils
             else if (dataType == gdalconst.GDT_Byte)
             {
                 int colorInt = band.GetColorInterpretation();
-                if (colorInt == gdalconst.GCI_GrayIndex && bandCount < 3) {
+                if (colorInt == gdalconst.GCI_GrayIndex && bandCount < 3)
+                {
                     params.setValue(AVKey.IMAGE_COLOR_FORMAT, AVKey.GRAYSCALE);
-                } else {
+                }
+                else
+                {
                     // if has only one band => one byte index of the palette, 216 marks voids
                     params.setValue(AVKey.IMAGE_COLOR_FORMAT, AVKey.COLOR);
                 }
@@ -1424,21 +1453,31 @@ public class GDALUtils
                 throw new WWRuntimeException(msg);
             }
 
-            if( "GTiff".equalsIgnoreCase(ds.GetDriver().getShortName())
+            if ("GTiff".equalsIgnoreCase(ds.GetDriver().getShortName()))
+            {
+                Double[] noDataVal = new Double[1];
+                band.GetNoDataValue(noDataVal);
+                if (noDataVal[0] != null)
+                {
+                    params.setValue(AVKey.MISSING_DATA_SIGNAL, noDataVal[0]);
+                }
+            }
+
+            if ("GTiff".equalsIgnoreCase(ds.GetDriver().getShortName())
                 && params.hasKey(AVKey.FILE)
                 && AVKey.ELEVATION.equals(params.getValue(AVKey.PIXEL_FORMAT))
-                && !params.hasKey(AVKey.ELEVATION_UNIT) )
+                && !params.hasKey(AVKey.ELEVATION_UNIT))
             {
                 GeotiffReader reader = null;
                 try
                 {
-                    File src = (File)params.getValue(AVKey.FILE);
+                    File src = (File) params.getValue(AVKey.FILE);
                     AVList tiffParams = new AVListImpl();
                     reader = new GeotiffReader(src);
                     reader.copyMetadataTo(tiffParams);
 
-                    WWUtil.copyValues( tiffParams, params, new String[] { AVKey.ELEVATION_UNIT,
-                        AVKey.ELEVATION_MIN, AVKey.ELEVATION_MAX, AVKey.MISSING_DATA_SIGNAL }, false );
+                    WWUtil.copyValues(tiffParams, params, new String[] {AVKey.ELEVATION_UNIT,
+                        AVKey.ELEVATION_MIN, AVKey.ELEVATION_MAX, AVKey.MISSING_DATA_SIGNAL}, false);
                 }
                 catch (Throwable t)
                 {
@@ -1446,30 +1485,30 @@ public class GDALUtils
                 }
                 finally
                 {
-                    if( null != reader )
+                    if (null != reader)
                         reader.dispose();
                 }
             }
 
-            extractMinMaxSampleValues(ds, band, params );
+            extractMinMaxSampleValues(ds, band, params);
 
-            if(      AVKey.ELEVATION.equals(params.getValue(AVKey.PIXEL_FORMAT))
-                  && (     !params.hasKey(AVKey.ELEVATION_MIN)
-                        || !params.hasKey(AVKey.ELEVATION_MAX)
-                        || !params.hasKey(AVKey.MISSING_DATA_SIGNAL)
-                     )
-                  // skip this heavy calculation if the file is opened in Quick Reading Node (when checking canRead())
-                  && !quickReadingMode
-              )
+            if (AVKey.ELEVATION.equals(params.getValue(AVKey.PIXEL_FORMAT))
+                && (!params.hasKey(AVKey.ELEVATION_MIN)
+                || !params.hasKey(AVKey.ELEVATION_MAX)
+                || !params.hasKey(AVKey.MISSING_DATA_SIGNAL)
+            )
+                // skip this heavy calculation if the file is opened in Quick Reading Node (when checking canRead())
+                && !quickReadingMode
+            )
             {
                 double[] minmax = new double[2];
                 band.ComputeRasterMinMax(minmax);
 
-                if ( ElevationsUtil.isKnownMissingSignal(minmax[0]))
+                if (ElevationsUtil.isKnownMissingSignal(minmax[0]))
                 {
                     params.setValue(AVKey.MISSING_DATA_SIGNAL, minmax[0]);
 
-                    if( setNoDataValue( band, minmax[0]) )
+                    if (setNoDataValue(band, minmax[0]))
                     {
                         band.ComputeRasterMinMax(minmax);
 
@@ -1676,14 +1715,14 @@ public class GDALUtils
 
     protected static Double convertStringToDouble(String s)
     {
-        return ( s == null ) ? null : WWUtil.convertStringToDouble(s);
+        return (s == null) ? null : WWUtil.convertStringToDouble(s);
     }
 
     protected static void extractMinMaxSampleValues(Dataset ds, Band band, AVList params)
     {
-        if( null != ds && null != params && AVKey.ELEVATION.equals(params.getValue(AVKey.PIXEL_FORMAT)))
+        if (null != ds && null != params && AVKey.ELEVATION.equals(params.getValue(AVKey.PIXEL_FORMAT)))
         {
-            band = (null != band ) ? band : ds.GetRasterBand(1);
+            band = (null != band) ? band : ds.GetRasterBand(1);
 
             Double[] dbls = new Double[16];
 
@@ -1693,47 +1732,47 @@ public class GDALUtils
             // TODO garakl This feature is not working for GeoTiff files
 //            String type = band.GetUnitType();
 
-            if( minValue == null || maxValue == null )
+            if (minValue == null || maxValue == null)
             {
                 band.GetMinimum(dbls);
-                minValue = (null != dbls[0] ) ? dbls[0] : minValue;
+                minValue = (null != dbls[0]) ? dbls[0] : minValue;
 
                 band.GetMaximum(dbls);
-                maxValue = (null != dbls[0] ) ? dbls[0] : maxValue;
+                maxValue = (null != dbls[0]) ? dbls[0] : maxValue;
             }
 
             band.GetNoDataValue(dbls);
             Double missingSignal = (null != dbls[0])
                 ? dbls[0] : convertStringToDouble(ds.GetMetadataItem("TIFFTAG_GDAL_NODATA"));
 
-            if( ElevationsUtil.isKnownMissingSignal(minValue) )
+            if (ElevationsUtil.isKnownMissingSignal(minValue))
             {
-                if( missingSignal == null )
+                if (missingSignal == null)
                     missingSignal = minValue;
 
                 minValue = null;
             }
 
-            if( null != minValue )
+            if (null != minValue)
                 params.setValue(AVKey.ELEVATION_MIN, minValue);
 
-            if( null != maxValue )
+            if (null != maxValue)
                 params.setValue(AVKey.ELEVATION_MAX, maxValue);
 
-            if( null != missingSignal )
-                params.setValue(AVKey.MISSING_DATA_SIGNAL, missingSignal );
+            if (null != missingSignal)
+                params.setValue(AVKey.MISSING_DATA_SIGNAL, missingSignal);
         }
     }
 
     protected static boolean setNoDataValue(Band band, Double nodata)
     {
-        if( null != band && null != nodata )
+        if (null != band && null != nodata)
         {
             try
             {
                 gdal.PushErrorHandler("CPLQuietErrorHandler");
 
-                return gdalconst.CE_None == band.SetNoDataValue( nodata );
+                return gdalconst.CE_None == band.SetNoDataValue(nodata);
             }
             finally
             {
@@ -1936,8 +1975,8 @@ public class GDALUtils
             throw new WWRuntimeException(GDALUtils.getErrorMessage());
         }
 
-        ByteBufferRaster   raster = new ByteBufferRaster(width, height, sector, data, params);
-        ElevationsUtil.rectify( raster );
+        ByteBufferRaster raster = new ByteBufferRaster(width, height, sector, data, params);
+        ElevationsUtil.rectify(raster);
         return raster;
     }
 

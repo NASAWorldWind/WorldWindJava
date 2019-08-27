@@ -16,7 +16,7 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.measure.LengthMeasurer;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -29,6 +29,7 @@ import java.util.List;
  *             When drawn on a 2D globe, this shape uses either a {@link SurfacePolyline} or {@link SurfacePolygon} to
  *             represent itself.
  */
+@Deprecated
 public class Polyline extends AVListImpl implements Renderable, OrderedRenderable, Movable, Restorable,
     MeasurableLength, ExtentHolder, PreRenderable, Highlightable, Draggable
 {

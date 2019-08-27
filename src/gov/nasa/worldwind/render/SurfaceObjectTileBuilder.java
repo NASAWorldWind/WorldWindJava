@@ -14,7 +14,7 @@ import gov.nasa.worldwind.layers.TextureTile;
 import gov.nasa.worldwind.pick.PickedObject;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -1352,8 +1352,8 @@ public class SurfaceObjectTileBuilder
         }
 
         /**
-         * Returns the tile's size in bytes. Overridden to append the size of the {@link #cacheName} and the {@link
-         * #lastUpdateStateKey} to the superclass' computed size.
+         * Returns the tile's size in bytes. Overridden to append the size of the {@link #lastUpdateStateKey} to the
+         * superclass' computed size.
          *
          * @return The tile's size in bytes.
          */

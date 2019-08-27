@@ -10,7 +10,7 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.render.DrawContext;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 
 /**
  * TODO: This file needs to be updated to implement "correct" stereo, as described at:

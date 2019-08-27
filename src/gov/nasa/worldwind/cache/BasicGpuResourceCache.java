@@ -9,7 +9,7 @@ package gov.nasa.worldwind.cache;
 import com.jogamp.opengl.util.texture.Texture;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.util.logging.Level;
 
 /**

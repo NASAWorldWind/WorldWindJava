@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ Copyright (C) 2016 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<project name="worldwind" default="build" basedir=".">
+    <description>
+        Build script for WorldWind Java. Assembles and tests the WorldWind source code, creates WorldWind API
+        documentation, and bundles WorldWind library JAR files.
+    </description>
+
+    <!-- Import the ANT build properties and project ANT macros. -->
+
+    <property file="build.properties"/>
+    <import file="build.macros.xml"/>
+
+    <!-- Main build targets. Provides generic targets that compile the Java sources, bundle JAR libraries, assemble API
+         documentation, test the Java sources, and clean up the build output. -->
+
+    <target name="build" depends="assemble, test"
+            description="Default build target. Assembles and tests this project."/>
+
+    <target name="clean" description="Deletes the build directory.">
+        <delete dir="${worldwind.build.dir}"/>
+        <delete file="${basedir}/worldwind.jar"/>
+        <delete file="${basedir}/worldwindx.jar"/>
+    </target>
+
+    <target name="assemble" depends="assembleDebug, assembleRelease, assembleJavadoc, assembleWebStart, assembleSdkArchive"
+            description="Assembles JAR libraries for all build types and assembles the project documentation."/>
+
+    <!-- Targets for compiling Java sources and bundling JAR libraries. -->
+
+    <target name="assembleDebug" depends="compileDebugSources, bundleDebug"
+            description="Assembles JAR libraries for the debug build type."/>
+
+    <target name="assembleRelease" depends="compileReleaseSources, bundleRelease"
+            description="Assembles JAR libraries for the release build type."/>
+
+    <target name="compileDebugSources">
+        <mkdir dir="${worldwind.classes.dir}/debug"/>
+        <compileJava srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/debug" debug="true"
+                     jdk="${worldwind.jdk}">
+            <pathelements>
+                <pathelement location="${basedir}/jogl-all.jar"/>
+                <pathelement location="${basedir}/gluegen-rt.jar"/>
+                <pathelement location="${basedir}/gdal.jar"/>
+            </pathelements>
+        </compileJava>
+    </target>
+
+    <target name="compileReleaseSources">
+        <mkdir dir="${worldwind.classes.dir}/release"/>
+        <compileJava srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/release" debug="false"
+                     jdk="${worldwind.jdk}">
+            <pathelements>
+                <pathelement location="${basedir}/jogl-all.jar"/>
+                <pathelement location="${basedir}/gluegen-rt.jar"/>
+                <pathelement location="${basedir}/gdal.jar"/>
+            </pathelements>
+        </compileJava>
+    </target>
+
+    <target name="bundleDebug">
+        <mkdir dir="${worldwind.jar.dir}/debug"/>
+        <bundleJarFiles srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/debug"
+                        destdir="${worldwind.jar.dir}/debug" debug="true"/>
+    </target>
+
+    <target name="bundleRelease">
+        <mkdir dir="${worldwind.jar.dir}/release"/>
+        <bundleJarFiles srcdir="${worldwind.src.dir}" classdir="${worldwind.classes.dir}/release"
+                        destdir="${worldwind.jar.dir}/release" debug="false"/>
+        <copy file="${worldwind.jar.dir}/release/worldwind.jar" tofile="${basedir}/worldwind.jar"/>
+        <copy file="${worldwind.jar.dir}/release/worldwindx.jar" tofile="${basedir}/worldwindx.jar"/>
+    </target>
+
+    <!-- Targets for compiling and bundling the project documentation.  -->
+
+    <target name="assembleJavadoc" depends="compileJavadocSources, bundleJavadoc"
+            description="Assembles the project documentation."/>
+
+    <target name="compileJavadocSources">
+        <mkdir dir="${worldwind.doc.dir}/javadoc"/>
+        <javadoc destdir="${worldwind.doc.dir}/javadoc"
+                 overview="${worldwind.src.dir}/overview.html"
+                 encoding="UTF-8"
+                 windowtitle="NASA WorldWind" doctitle="NASA WorldWind" header="NASA WorldWind"
+                 splitindex="true" protected="true" nodeprecated="true" version="false" author="false" use="true"
+                 maxmemory="1024m">
+            <packageset dir="${worldwind.src.dir}" defaultexcludes="yes">
+                <include name="gov/nasa/worldwind/**"/>
+                <include name="gov/nasa/worldwindx/**"/>
+                <exclude name="gov/nasa/worldwind/formats/**"/>
+            </packageset>
+            <classpath>
+                <pathelement location="jogl-all.jar"/>
+                <pathelement location="gluegen-rt.jar"/>
+                <pathelement location="gdal.jar"/>
+            </classpath>
+            <link href="http://download.oracle.com/javase/8/docs/api/"/>
+            <link href="https://jogamp.org/deployment/v2.1.5/javadoc/jogl/javadoc/"/>
+        </javadoc>
+    </target>
+
+    <target name="bundleJavadoc">
+        <mkdir dir="${worldwind.doc.dir}"/>
+        <zip destfile="${worldwind.doc.dir}/worldwind-javadoc.zip">
+            <fileset dir="${worldwind.doc.dir}/javadoc">
+                <include name="**"/>
+                <type type="file"/>
+            </fileset>
+        </zip>
+    </target>
+
+    <!-- Tasks for assembling the project Web Start package. -->
+
+    <target name="assembleWebStart"
+            depends="assembleRelease, compileWebStartConfiguration, bundleWebStartLibraries, signWebStartSources, bundleWebStart"
+            description="Assembles the Java Web Start deployment package."/>
+
+    <target name="compileWebStartConfiguration">
+        <mkdir dir="${webstart.jnlp.dir}"/>
+        <copy todir="${webstart.jnlp.dir}">
+            <fileset dir="${webstart.src.dir}">
+                <include name="*.jnlp"/>
+                <exclude name="JavaWebStartTemplate.jnlp"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="bundleWebStartLibraries">
+        <mkdir dir="${webstart.unsigned.dir}"/>
+        <!-- WorldWind library JAR files. -->
+        <copy file="${worldwind.jar.dir}/release/worldwind.jar" tofile="${webstart.unsigned.dir}/worldwind.jar"/>
+        <copy file="${worldwind.jar.dir}/release/worldwindx.jar" tofile="${webstart.unsigned.dir}/worldwindx.jar"/>
+        <!-- JOGL and GlueGen library JAR files. -->
+        <copy todir="${webstart.unsigned.dir}">
+            <fileset dir="${basedir}">
+                <include name="jogl-all*.jar"/>
+                <include name="gluegen-rt*.jar"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+        <!-- WebView native library JAR files. -->
+        <jar jarfile="${webstart.unsigned.dir}/webview-natives-macosx.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}">
+                <include name="libwebview.jnilib"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.unsigned.dir}/webview-natives-windows.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}">
+                <include name="WebView32.dll"/>
+                <include name="WebView64.dll"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <!-- GDAL library JAR files. -->
+        <copy file="${basedir}/gdal.jar" todir="${webstart.unsigned.dir}"/>
+        <jar jarfile="${webstart.unsigned.dir}/gdaldata.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal/data">
+                <include name="**"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <!-- GDAL native library JAR files. -->
+        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-macosx-universal.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="libgdalalljni.jnilib"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-windows-i586.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="gdalminjni32.dll"/>
+                <include name="gdalalljni32.dll"/>
+                <include name="gdalalljni32.dll.manifest"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-windows-amd64.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="gdalminjni64.dll"/>
+                <include name="gdalalljni64.dll"/>
+                <include name="gdalalljni64.dll.manifest"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-linux-i586.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="libgdalalljni32.so"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${webstart.unsigned.dir}/gdal-natives-linux-amd64.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="libgdalalljni64.so"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+    </target>
+
+    <target name="signWebStartSources" depends="keystoreAvailable" if="keystore.isAvailable">
+        <property file="${basedir}/keystore.properties"/>
+        <copy todir="${webstart.jar.dir}">
+            <fileset dir="${webstart.unsigned.dir}">
+                <include name="*.jar"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+        <signjar alias="${keyAlias}" keystore="${storeFile}" storepass="${storePassword}" tsaurl="${tsaurl}">
+            <path>
+                <fileset dir="${webstart.jar.dir}">
+                    <include name="*.jar"/>
+                    <type type="file"/>
+                </fileset>
+            </path>
+        </signjar>
+    </target>
+
+    <target name="bundleWebStart" depends="bundleWebStartSigned, bundleWebStartUnsigned"/>
+
+    <target name="bundleWebStartSigned" if="keystore.isAvailable">
+        <zip destfile="${webstart.out.dir}/worldwind-webstart.zip">
+            <fileset dir="${webstart.jar.dir}"/>
+            <fileset dir="${webstart.jnlp.dir}"/>
+        </zip>
+    </target>
+
+    <target name="bundleWebStartUnsigned">
+        <zip destfile="${webstart.out.dir}/worldwind-webstart-unsigned.zip">
+            <fileset dir="${webstart.unsigned.dir}"/>
+            <fileset dir="${webstart.jnlp.dir}"/>
+        </zip>
+    </target>
+
+    <target name="keystoreAvailable">
+        <available property="keystore.isAvailable" file="${basedir}/keystore.properties"/>
+    </target>
+
+    <!-- Targets for assembling the project SDK archive. -->
+
+    <target name="assembleSdkArchive" depends="assembleRelease">
+        <zip destfile="${worldwind.build.dir}/worldwind.zip">
+            <fileset dir="${basedir}">
+                <include name="**/*"/>
+                <exclude name="build/**"/>
+                <exclude name="classes/**"/>
+                <exclude name="testClasses/**"/>
+                <exclude name="keystore.properties"/>
+                <exclude name="keystore.tar"/>
+                <exclude name="wwstore"/>
+                <type type="file"/>
+            </fileset>
+        </zip>
+    </target>
+
+    <!-- Targets for testing the project sources. -->
+
+    <target name="test" depends="unitTest"
+            description="Runs all project tests. Exits with status code 1 if any test fails.">
+        <fail if="unitTest.failure" message="Unit tests FAILED" status="1"/>
+    </target>
+
+    <target name="unitTest" depends="assembleDebug, compileUnitTestSources, runUnitTest"/>
+
+    <target name="compileUnitTestSources">
+        <mkdir dir="${worldwind.classes.dir}/test"/>
+        <compileJava srcdir="${worldwind.test.dir}" classdir="${worldwind.classes.dir}/test" debug="true"
+                     jdk="${worldwind.jdk}">
+            <pathelements>
+                <pathelement location="${worldwind.classes.dir}/debug"/>
+                <pathelement location="${basedir}/jogl-all.jar"/>
+                <pathelement location="${basedir}/gluegen-rt.jar"/>
+                <pathelement location="${basedir}/gdal.jar"/>
+                <pathelement location="${basedir}/junit-4.5.jar"/>
+            </pathelements>
+        </compileJava>
+    </target>
+
+    <target name="runUnitTest">
+        <delete dir="${worldwind.test.results.dir}"/>
+        <mkdir dir="${worldwind.test.results.dir}"/>
+        <junit failureproperty="unitTest.failure"
+               fork="on"
+               forkmode="once"
+               maxmemory="1024m">
+            <classpath>
+                <pathelement location="${worldwind.src.dir}"/>
+                <pathelement location="${worldwind.classes.dir}/test"/>
+                <pathelement location="${worldwind.classes.dir}/debug"/>
+                <pathelement location="${basedir}/jogl-all.jar"/>
+                <pathelement location="${basedir}/gluegen-rt.jar"/>
+                <pathelement location="${basedir}/gdal.jar"/>
+                <pathelement location="${basedir}/junit-4.5.jar"/>
+            </classpath>
+            <batchtest todir="${worldwind.test.results.dir}"
+                       skipnontests="true">
+                <fileset dir="${worldwind.classes.dir}/test">
+                    <include name="**/*"/>
+                </fileset>
+            </batchtest>
+            <formatter type="brief" usefile="no"/>
+            <formatter type="xml" usefile="yes"/>
+        </junit>
+        <junitreport todir="${worldwind.test.results.dir}">
+            <fileset dir="${worldwind.test.results.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report todir="${worldwind.test.results.dir}" format="noframes"/>
+        </junitreport>
+    </target>
+
+    <!-- Tasks for assembling the MIL-STD-2525 symbology package. Rasterizes MIL-STD-2525 SVG image files into PNG image
+         files. The maxwidth and height parameters control the PNG image dimensions, where the width varies depending on
+         the SVG image's aspect ratio. PNG files are written to the destination directory according to their relative
+         path in the source directory. -->
+
+    <target name="assembleMilStd2525" depends="assembleRelease, compileMilStd2525, bundleMilStd2525"
+            description="Assembles the MIL-STD-2525 symbology package."/>
+
+    <target name="compileMilStd2525">
+        <mkdir dir="${milstd2525.png.dir}"/>
+        <!-- Rasterize the MIL-STD-2525 SVG sources. Exclude empty directories in order to suppress erroneous error
+             messages from the Apache Batik Rasterizer. -->
+        <apply executable="java" dest="${milstd2525.png.dir}" failonerror="true">
+            <arg value="-jar"/>
+            <arg value="${basedir}/lib-external/batik/batik-rasterizer.jar"/>
+            <arg value="-m"/>
+            <arg value="image/png"/>
+            <arg value="-maxw"/>
+            <arg value="${milstd2525.png.width}"/>
+            <arg value="-h"/>
+            <arg value="${milstd2525.png.height}"/>
+            <arg value="-d"/>
+            <targetfile/>
+            <dirset dir="${milstd2525.src.dir}">
+                <exclude name="fills"/>
+                <exclude name="frames"/>
+                <exclude name="icons"/>
+            </dirset>
+            <mapper type="identity"/>
+        </apply>
+        <!-- The Forward Edge of Battle (FEBA, 2.X.2.4.2.1) image has a custom height of 16 pixels. -->
+        <apply executable="java" dest="${milstd2525.png.dir}" force="true" failonerror="true">
+            <arg value="-jar"/>
+            <arg value="${basedir}/lib-external/batik/batik-rasterizer.jar"/>
+            <arg value="-m"/>
+            <arg value="image/png"/>
+            <arg value="-maxw"/>
+            <arg value="${milstd2525.png.width}"/>
+            <arg value="-h"/>
+            <arg value="16"/>
+            <arg value="-d"/>
+            <targetfile/>
+            <fileset dir="${milstd2525.src.dir}">
+                <include name="**/g-g?dlf--------.svg"/>
+                <type type="file"/>
+            </fileset>
+            <mapper type="glob" from="*.svg" to="*.png"/>
+        </apply>
+        <!-- Trim the MIL-STD-2525 modifier images to remove transparent borders. -->
+        <apply executable="java" failonerror="true" parallel="true" maxparallel="100">
+            <arg value="-cp"/>
+            <arg value="${worldwind.classes.dir}/release"/>
+            <arg value="gov.nasa.worldwind.util.ImageTrimmer"/>
+            <fileset dir="${milstd2525.png.dir}">
+                <include name="modifiers/**/*"/>
+                <type type="file"/>
+            </fileset>
+        </apply>
+    </target>
+
+    <target name="bundleMilStd2525">
+        <mkdir dir="${milstd2525.out.dir}"/>
+        <zip destfile="${milstd2525.out.dir}/milstd2525-symbols.zip">
+            <fileset dir="${milstd2525.png.dir}"/>
+        </zip>
+    </target>
+
+    <!-- Helper tasks for bundling and unbundling the JOGL and GLueGen JAR files. Each Jar file is extracted to a folder
+         matching the filename without its suffix. These targets are used to modify JOGL and GlueGen Jar file manifests
+         in order to deploy these files from the WorldWind Java Web Start site. -->
+
+    <target name="help.unpackJogl">
+        <property name="jogl.jarfiles.dir" location="jogl-jarfiles"/>
+        <mkdir dir="${jogl.jarfiles.dir}"/>
+        <unzip src="jogl-all.jar" dest="${jogl.jarfiles.dir}/jogl-all"/>
+        <unzip src="jogl-all-natives-macosx-universal.jar"
+               dest="${jogl.jarfiles.dir}/jogl-all-natives-macosx-universal"/>
+        <unzip src="jogl-all-natives-windows-i586.jar" dest="${jogl.jarfiles.dir}/jogl-all-natives-windows-i586"/>
+        <unzip src="jogl-all-natives-windows-amd64.jar" dest="${jogl.jarfiles.dir}/jogl-all-natives-windows-amd64"/>
+        <unzip src="jogl-all-natives-linux-i586.jar" dest="${jogl.jarfiles.dir}/jogl-all-natives-linux-i586"/>
+        <unzip src="jogl-all-natives-linux-amd64.jar" dest="${jogl.jarfiles.dir}/jogl-all-natives-linux-amd64"/>
+        <unzip src="gluegen-rt.jar" dest="${jogl.jarfiles.dir}/gluegen-rt"/>
+        <unzip src="gluegen-rt-natives-macosx-universal.jar"
+               dest="${jogl.jarfiles.dir}/gluegen-rt-natives-macosx-universal"/>
+        <unzip src="gluegen-rt-natives-windows-i586.jar" dest="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-i586"/>
+        <unzip src="gluegen-rt-natives-windows-amd64.jar" dest="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-amd64"/>
+        <unzip src="gluegen-rt-natives-linux-i586.jar" dest="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-i586"/>
+        <unzip src="gluegen-rt-natives-linux-amd64.jar" dest="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-amd64"/>
+    </target>
+
+    <target name="help.packJogl">
+        <property name="jogl.jarfiles.dir" location="jogl-jarfiles"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all.jar" basedir="${jogl.jarfiles.dir}/jogl-all" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all.jar" basedir="${jogl.jarfiles.dir}/jogl-all" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all-natives-macosx-universal.jar"
+             basedir="${jogl.jarfiles.dir}/jogl-all-natives-macosx-universal" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all-natives-macosx-universal/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all-natives-windows-i586.jar"
+             basedir="${jogl.jarfiles.dir}/jogl-all-natives-windows-i586" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all-natives-windows-i586/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all-natives-windows-amd64.jar"
+             basedir="${jogl.jarfiles.dir}/jogl-all-natives-windows-amd64" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all-natives-windows-amd64/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all-natives-linux-i586.jar"
+             basedir="${jogl.jarfiles.dir}/jogl-all-natives-linux-i586" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all-natives-linux-i586/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/jogl-all-natives-linux-amd64.jar"
+             basedir="${jogl.jarfiles.dir}/jogl-all-natives-linux-amd64" filesonly="true"
+             manifest="${jogl.jarfiles.dir}/jogl-all-natives-linux-amd64/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt.jar" basedir="${jogl.jarfiles.dir}/gluegen-rt"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt-natives-macosx-universal.jar"
+             basedir="${jogl.jarfiles.dir}/gluegen-rt-natives-macosx-universal"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-macosx-universal/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-i586.jar"
+             basedir="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-i586"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-i586/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-amd64.jar"
+             basedir="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-amd64"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-windows-amd64/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-i586.jar"
+             basedir="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-i586"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-i586/META-INF/MANIFEST.MF"/>
+        <jar destfile="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-amd64.jar"
+             basedir="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-amd64"
+             manifest="${jogl.jarfiles.dir}/gluegen-rt-natives-linux-amd64/META-INF/MANIFEST.MF"/>
+    </target>
+
+    <!-- Helper tasks for bundling and unbundling the GDAL JAR file. These targets are used to modify the contents of
+         the GDAL JAR file, which are currently not under source control. -->
+
+    <target name="help.unpackGdal">
+        <property name="gdal.jarfile.dir" location="gdal-jar"/>
+        <mkdir dir="${gdal.jarfile.dir}"/>
+        <unzip src="gdal.jar" dest="${gdal.jarfile.dir}"/>
+    </target>
+
+    <target name="help.packGdal">
+        <property name="gdal.jarfile.dir" location="gdal-jar"/>
+        <delete file="gdal.jar"/>
+        <jar destfile="gdal.jar" basedir="${gdal.jarfile.dir}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Helper tasks for bundling and unbundling the VPF symbols JAR file. These targets are used to modify the
+         contents of the VPF symbols JAR file, which are currently not under source control. -->
+
+    <target name="help.unpackVpf">
+        <property name="vpf.jarfile.dir" location="vpf-symbols-jar"/>
+        <mkdir dir="${vpf.jarfile.dir}"/>
+        <unzip src="vpf-symbols.jar" dest="${vpf.jarfile.dir}"/>
+    </target>
+
+    <target name="help.packVpf">
+        <property name="vpf.jarfile.dir" location="vpf-symbols-jar"/>
+        <delete file="vpf-symbols.jar"/>
+        <jar destfile="vpf-symbols.jar" basedir="${vpf.jarfile.dir}">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Helper tasks for compiling and linking the WebView native library for the current platform. Output libraries
+         are placed in the WorldWind project root folder and overwrite any existing files of the same name.
+
+         On Mac OS X this compiles the Objective-C sources under the folder 'lib-external/webview/macosx' into
+         'libwebview.jnilib', and requires that the XCode and Java development toolkits for Mac are installed.
+
+         On Windows this compiles the C and C++ sources under 'lib-external/webview/windows' into 'WebView32.dll' and
+         'WebView64.dll', and requires that the Microsoft Visual C++ build tools are avialable on the path. -->
+
+    <target name="help.assembleWebviewLibrary">
+        <exec os="Mac OS X" dir="${basedir}/lib-external/webview/macosx" executable="/bin/sh" failonerror="true">
+            <arg value="build.sh"/>
+        </exec>
+        <exec osfamily="Windows" dir="${basedir}/lib-external/webview/windows" executable="nmake" failonerror="true">
+            <arg value="clean"/>
+            <arg value="all"/>
+        </exec>
+    </target>
+
+</project>

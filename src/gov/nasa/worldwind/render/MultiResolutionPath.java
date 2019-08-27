@@ -27,6 +27,7 @@ import java.util.Iterator;
  * @version $Id: MultiResolutionPath.java 2185 2014-07-29 20:15:04Z tgaskins $
  * @deprecated
  */
+@Deprecated
 public class MultiResolutionPath extends Path
 {
     /**

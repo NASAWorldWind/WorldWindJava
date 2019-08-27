@@ -7,7 +7,7 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;

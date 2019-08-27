@@ -14,8 +14,8 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.pick.PickedObjectList;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.awt.GLCanvas;
 import java.awt.*;
 import java.beans.*;
 import java.util.*;
@@ -72,6 +72,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
+            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -88,15 +89,14 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      *
      * @param shareWith a <code>WorldWindow</code> with which to share graphics resources.
      *
-     * @see GLCanvas#GLCanvas(javax.media.opengl.GLCapabilitiesImmutable, javax.media.opengl.GLCapabilitiesChooser,
-     *      javax.media.opengl.GLContext, java.awt.GraphicsDevice)
+     * @see GLCanvas#GLCanvas(GLCapabilitiesImmutable, GLCapabilitiesChooser, GraphicsDevice)
      */
     public WorldWindowGLCanvas(WorldWindow shareWith)
     {
         super(Configuration.getRequiredGLCapabilities(), new BasicGLCapabilitiesChooser(), null);
 
         if (shareWith != null)
-            this.setSharedContext(shareWith.getContext());
+            this.setSharedAutoDrawable((WorldWindowGLCanvas) shareWith);
 
         try
         {
@@ -110,6 +110,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
+            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -128,8 +129,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      * @param device    the <code>GraphicsDevice</code> on which to create the window. May be null, in which case the
      *                  default screen device of the local {@link GraphicsEnvironment} is used.
      *
-     * @see GLCanvas#GLCanvas(javax.media.opengl.GLCapabilitiesImmutable, javax.media.opengl.GLCapabilitiesChooser,
-     *      javax.media.opengl.GLContext, java.awt.GraphicsDevice)
+     * @see GLCanvas#GLCanvas(GLCapabilitiesImmutable, GLCapabilitiesChooser, GraphicsDevice)
      */
     public WorldWindowGLCanvas(WorldWindow shareWith, java.awt.GraphicsDevice device)
     {
@@ -150,6 +150,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
+            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -172,8 +173,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      * @param chooser      a chooser object that customizes the specified capabilities. May be null, in which case a
      *                     default chooser is used.
      *
-     * @see GLCanvas#GLCanvas(javax.media.opengl.GLCapabilitiesImmutable, javax.media.opengl.GLCapabilitiesChooser,
-     *      javax.media.opengl.GLContext, java.awt.GraphicsDevice)
+     * @see GLCanvas#GLCanvas(GLCapabilitiesImmutable, GLCapabilitiesChooser, GraphicsDevice)
      */
     public WorldWindowGLCanvas(WorldWindow shareWith, java.awt.GraphicsDevice device,
         GLCapabilities capabilities, GLCapabilitiesChooser chooser)
@@ -194,6 +194,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
+            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
