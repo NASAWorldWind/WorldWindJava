@@ -16,3 +16,5 @@ worldwind.jar
 
 worldwindx.jar
 /dist/
+/nbproject/private/
+
