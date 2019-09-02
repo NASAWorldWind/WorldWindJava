@@ -100,7 +100,11 @@ public class WCSCoveragePanel extends JPanel
         {
             e.printStackTrace();
             Container c = WCSCoveragePanel.this.getParent();
-            c.remove(WCSCoveragePanel.this);
+            if (c != null)
+            {
+                c.remove(WCSCoveragePanel.this);
+            }
+            
             JOptionPane.showMessageDialog((Component) wwd, "Unable to connect to server " + serverURI.toString(),
                 "Server Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -108,7 +112,9 @@ public class WCSCoveragePanel extends JPanel
 
         final java.util.List<WCS100CoverageOfferingBrief> coverages = caps.getContentMetadata().getCoverageOfferings();
         if (coverages == null)
+        {
             return;
+        }
 
         try
         {
@@ -193,14 +199,22 @@ public class WCSCoveragePanel extends JPanel
             if (((JCheckBox) actionEvent.getSource()).isSelected())
             {
                 if (this.component == null)
+                {
                     this.component = createComponent(coverageInfo.caps, coverageInfo);
+                    if (this.component == null)
+                    {
+                        return;
+                    }
+                }
 
                 updateComponent(this.component, true);
             }
             else
             {
                 if (this.component != null)
+                {
                     updateComponent(this.component, false);
+                }
             }
 
             // Tell the WorldWindow to update.
@@ -224,13 +238,28 @@ public class WCSCoveragePanel extends JPanel
     protected void updateComponent(Object component, boolean enable)
     {
         ElevationModel model = (ElevationModel) component;
-        CompoundElevationModel compoundModel =
-            (CompoundElevationModel) this.wwd.getModel().getGlobe().getElevationModel();
+        CompoundElevationModel compoundModel;
+
+        // Guarantee that we have a compound elevation model, so additional elevation models can be added.
+        ElevationModel em = this.wwd.getModel().getGlobe().getElevationModel();
+
+        if (!(em instanceof CompoundElevationModel))
+        {
+            compoundModel = new CompoundElevationModel();
+            compoundModel.addElevationModel(em);
+            this.wwd.getModel().getGlobe().setElevationModel(compoundModel);
+        }
+        else
+        {
+            compoundModel = (CompoundElevationModel) em;
+        }
 
         if (enable)
         {
             if (!compoundModel.getElevationModels().contains(model))
+            {
                 compoundModel.addElevationModel(model);
+            }
         }
         else
         {
