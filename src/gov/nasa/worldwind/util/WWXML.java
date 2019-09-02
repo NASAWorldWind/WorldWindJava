@@ -178,7 +178,8 @@ public class WWXML
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            String message = Logging.getMessage("generic.ExceptionClosingStream", filePath);
+            Logging.logger().severe(message);
             return null;
         }
     }
@@ -552,7 +553,9 @@ public class WWXML
                 }
                 catch (IOException e)
                 {
-                    e.printStackTrace();
+                    String message = Logging.getMessage("generic.ExceptionClosingStream",
+                        name != null ? name : "Unknown");
+                    Logging.logger().severe(message);
                 }
                 inputSources.remove(eventReader);
             }
