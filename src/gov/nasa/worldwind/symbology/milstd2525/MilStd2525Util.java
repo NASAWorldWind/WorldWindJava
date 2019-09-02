@@ -10,7 +10,7 @@ import gov.nasa.worldwind.View;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.symbology.SymbologyConstants;
+import gov.nasa.worldwind.symbology.*;
 import gov.nasa.worldwind.util.Logging;
 
 import java.awt.geom.*;
@@ -64,6 +64,8 @@ public class MilStd2525Util
     protected static final Offset DIAMOND_OFFSET = Offset.fromFraction(0.046875, 0.046875);
     protected static final Size DIAMOND_SIZE = Size.fromFraction(0.90625, 0.90625);
     protected static final Offset DIAMOND_C2_HQ_OFFSET = Offset.fromFraction(0.0, -0.05172);
+
+    protected static final Vec4 SCREEN_NORMAL = new Vec4(0.0, 0.0, 1.0, 1.0);
 
     public static class SymbolInfo
     {
@@ -312,10 +314,11 @@ public class MilStd2525Util
      * @param heading     Direction of movement, as a bearing clockwise from North.
      * @param length      Length of the indicator line, in pixels.
      *
+     * @param directionOnly A value indicating whether is direction only, or speed leader line.
      * @return List of screen points that describe the speed leader line.
      */
     public static List<? extends Point2D> computeCenterHeadingIndicatorPoints(DrawContext dc, Vec4 symbolPoint,
-        Angle heading, double length)
+        Angle heading, double length, Boolean directionOnly)
     {
         if (dc == null)
         {
@@ -338,9 +341,17 @@ public class MilStd2525Util
         Vec4 pt1 = view.project(symbolPoint);
         Vec4 pt2 = view.project(symbolPoint.add3(dir));
 
-        return Arrays.asList(
-            new Point2D.Double(0, 0),
-            new Point2D.Double(pt2.x - pt1.x, pt2.y - pt1.y));
+        Vec4 base = new Vec4(0, 0);
+        Vec4 tip = new Vec4(pt2.x - pt1.x, pt2.y - pt1.y);
+
+        ArrayList<Point2D> points = new ArrayList<Point2D>();
+        points.add(new Point2D.Double(base.x, base.y));
+        points.add(new Point2D.Double(tip.x, tip.y));
+
+        if (directionOnly)
+            computeArrowHeadPoints(base, tip, points);
+
+        return points;
     }
 
     /**
@@ -352,11 +363,11 @@ public class MilStd2525Util
      * @param heading     Direction of movement, as a bearing clockwise from North.
      * @param length      Length of the indicator line, in pixels.
      * @param frameHeight Height of the symbol's bounding rectangle, in pixels.
-     *
+     * @param directionOnly A value indicating whether is direction only, or speed leader line.
      * @return List of screen points that describe the speed leader line.
      */
     public static List<? extends Point2D> computeGroundHeadingIndicatorPoints(DrawContext dc, Vec4 symbolPoint,
-        Angle heading, double length, double frameHeight)
+        Angle heading, double length, double frameHeight, Boolean directionOnly)
     {
         if (dc == null)
         {
@@ -379,10 +390,18 @@ public class MilStd2525Util
         Vec4 pt1 = view.project(symbolPoint);
         Vec4 pt2 = view.project(symbolPoint.add3(dir));
 
-        return Arrays.asList(
-            new Point2D.Double(0, 0),
-            new Point2D.Double(0, -frameHeight / 2d),
-            new Point2D.Double(pt2.x - pt1.x, -frameHeight / 2d + (pt2.y - pt1.y)));
+        Vec4 tip = new Vec4(pt2.x - pt1.x, -frameHeight / 2d + (pt2.y - pt1.y));
+        Vec4 base = new Vec4(0, -frameHeight / 2d);
+
+        List<Point2D> points = new ArrayList<Point2D>();
+        points.add(new Point2D.Double(0, 0));
+        points.add(new Point2D.Double(base.x, base.y));
+        points.add(new Point2D.Double(tip.x, tip.y));
+
+        if (directionOnly)
+            computeArrowHeadPoints(base, tip, points);
+
+        return points;
     }
 
     /**
@@ -410,6 +429,38 @@ public class MilStd2525Util
         Vec4 dir = new Vec4(heading.sin(), heading.cos());
 
         return dir.transformBy3(surfaceOrientation).normalize3().multiply3(length * pixelSize);
+    }
+
+    /**
+     * Computes the arrow head points for a direction of movement indicator.
+     *
+     * @param base The base point of the direction of movement vector.
+     * @param tip The end point of the direction of movement vector.
+     * @param points The list of points to add the arrow line points.
+     */
+    private static void computeArrowHeadPoints(Vec4 base, Vec4 tip, List<Point2D> points){
+
+        // Vector that is parallel to the direction between the tip to the base of the arrow
+        Vec4 parallel = base.subtract3(tip);
+
+        // Compute perpendicular component
+        Vec4 perpendicular = SCREEN_NORMAL.cross3(parallel);
+
+        double finalArrowLength = 14;
+        double arrowHalfWidth = finalArrowLength * Angle.fromDegrees(30.0).tanHalfAngle();
+
+        perpendicular = perpendicular.normalize3().multiply3(arrowHalfWidth);
+        parallel = parallel.normalize3().multiply3(finalArrowLength);
+
+        // Compute geometry of direction arrow
+        Vec4 vertex1 = tip.add3(parallel).add3(perpendicular);
+        Vec4 vertex2 = tip.add3(parallel).subtract3(perpendicular);
+
+        // Add the extra points to the list of points to draw the arrow head at the end of
+        // the direction of movement indicator.
+        points.add(new Point2D.Double(vertex1.x, vertex1.y));
+        points.add(new Point2D.Double(vertex2.x, vertex2.y));
+        points.add(new Point2D.Double(tip.x, tip.y));
     }
 
     /**

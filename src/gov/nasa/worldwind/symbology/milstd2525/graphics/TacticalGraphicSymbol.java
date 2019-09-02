@@ -347,7 +347,7 @@ public class TacticalGraphicSymbol extends AbstractTacticalSymbol
             double length = this.iconRect.getHeight();
 
             java.util.List<? extends Point2D> points = MilStd2525Util.computeGroundHeadingIndicatorPoints(dc,
-                osym.placePoint, (Angle) o, length, this.iconRect.getHeight());
+                osym.placePoint, (Angle) o, length, this.iconRect.getHeight(), true);
             this.addLine(dc, BELOW_BOTTOM_CENTER_OFFSET, points, LAYOUT_RELATIVE, points.size() - 1, osym);
         }
     }

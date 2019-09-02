@@ -529,20 +529,24 @@ public class MilStd2525TacticalSymbol extends AbstractTacticalSymbol
             // The length of the direction of movement line is equal to the height of the symbol frame. See
             // MIL-STD-2525C section 5.3.4.1.c, page 33.
             double length = this.iconRect.getHeight();
+            Boolean directionOnly = true;
             Object d = this.getModifier(SymbologyConstants.SPEED_LEADER_SCALE);
             if (d != null && d instanceof Number)
+            {
+                directionOnly = false;
                 length *= ((Number) d).doubleValue();
+            }
 
             if (this.useGroundHeadingIndicator)
             {
                 List<? extends Point2D> points = MilStd2525Util.computeGroundHeadingIndicatorPoints(dc, osym.placePoint,
-                    (Angle) o, length, this.iconRect.getHeight());
+                    (Angle) o, length, this.iconRect.getHeight(), directionOnly);
                 this.addLine(dc, Offset.BOTTOM_CENTER, points, LAYOUT_RELATIVE, points.size() - 1, osym);
             }
             else
             {
                 List<? extends Point2D> points = MilStd2525Util.computeCenterHeadingIndicatorPoints(dc,
-                    osym.placePoint, (Angle) o, length);
+                    osym.placePoint, (Angle) o, length, directionOnly);
                 this.addLine(dc, Offset.CENTER, points, null, 0, osym);
             }
         }
