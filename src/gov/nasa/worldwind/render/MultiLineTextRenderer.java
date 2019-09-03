@@ -33,31 +33,31 @@ import java.util.regex.*;
  * TextRenderer tr = new TextRenderer(Font.decode("Arial-PLAIN-10"));
  * MultiLineTextRenderer mltr = new MultiLineTextRenderer(tr);
  * </pre>
- * <p/> <p>Drawing regular text:</p>
+ * <p> <p>Drawing regular text:</p>
  * <pre>
  * String text = "Line one.\nLine two.\nLine three...";
  * int x = 10;             // Upper left corner of text rectangle.
  * int y = 200;            // Origin at bottom left of screen.
  * int lineHeight = 14;    // Line height in pixels.
  * Color color = Color.RED;
- * <p/>
+ * <p>
  * mltr.setTextColor(color);
  * mltr.getTextRenderer().begin3DRendering();
  * mltr.draw(text, x, y, lineHeight);
  * mltr.getTextRenderer().end3DRendering();
  * </pre>
- * <p/> <p>Wrapping text to fit inside a width and optionally a height</p> <p> The MLTR wrap method will insert new line
+ * <p> <p>Wrapping text to fit inside a width and optionally a height</p> <p> The MLTR wrap method will insert new line
  * characters inside the text so that it fits a given width in pixels. </p> <p> If a height dimension above zero is
  * specified too, the text will be truncated if needed, and a continuation string will be appended to the last line. The
  * continuation string can be set with mltr.setContinuationString(); </p>
  * <pre>
  * // Fit inside 300 pixels, no height constraint
  * String wrappedText = mltr.wrap(text, new Dimension(300, 0));
- * <p/>
+ * <p>
  * // Fit inside 300x400 pixels, text may be truncated
  * String wrappedText = mltr.wrap(text, new Dimension(300, 400));
  * </pre>
- * <p/> <p>Measuring text</p>
+ * <p> <p>Measuring text</p>
  * <pre>
  * Rectangle2D textBounds = mltr.getBounds(text);
  * </pre>
@@ -67,7 +67,7 @@ import java.util.regex.*;
  * after a getBounds: draw(text, x, y); ... </p> <p/> <p><b>HTML support</b></p> <p> Supported tags are: <ul>
  * <li>&lt;p&gt;&lt;/p&gt;, &lt;br&gt; &lt;br /&gt;</li> <li>&lt;b&gt;&lt;/b&gt;</li> <li>&lt;i&gt;&lt;/i&gt;</li>
  * <li>&lt;a href="..."&gt;&lt;/a&gt;</li> <li>&lt;font color="#ffffff"&gt;&lt;/font&gt;</li> </ul> </p> ... <p/> <p/>
- * <p/> <p> See {@link AbstractAnnotation}.drawAnnotation() for more usage details. </p>
+ * <p> <p> See {@link AbstractAnnotation}.drawAnnotation() for more usage details. </p>
  *
  * @author Patrick Murris
  * @version $Id: MultiLineTextRenderer.java 2053 2014-06-10 20:16:57Z tgaskins $
@@ -299,10 +299,10 @@ public class MultiLineTextRenderer
 
     /**
      * Returns the bounding rectangle for a multi-line string.
-     * <p/>
+     * <p>
      * Note that the X component of the rectangle is the number of lines found in the text and the Y component of the
      * rectangle is the max line height encountered.
-     * <p/>
+     * <p>
      * Note too that this method will automatically set the current line height to the max height found.
      *
      * @param text the multi-line text to evaluate.
@@ -339,7 +339,7 @@ public class MultiLineTextRenderer
     /**
      * Draw a multi-line text string with bounding rectangle top starting at the y position. Depending on the current
      * textAlign, the x position is either the rectangle left side, middle or right side.
-     * <p/>
+     * <p>
      * Uses the current line height.
      *
      * @param text the multi-line text to draw.
@@ -354,7 +354,7 @@ public class MultiLineTextRenderer
     /**
      * Draw a multi-line text string with bounding rectangle top starting at the y position. Depending on the current
      * textAlign, the x position is either the rectangle left side, middle or right side.
-     * <p/>
+     * <p>
      * Uses the current line height and the given effect.
      *
      * @param text   the multi-line text to draw.
@@ -371,7 +371,7 @@ public class MultiLineTextRenderer
     /**
      * Draw a multi-line text string with bounding rectangle top starting at the y position. Depending on the current
      * textAlign, the x position is either the rectangle left side, middle or right side.
-     * <p/>
+     * <p>
      * Uses the given line height and effect.
      *
      * @param text           the multi-line text to draw.
@@ -412,7 +412,7 @@ public class MultiLineTextRenderer
     /**
      * Draw a multi-line text string with bounding rectangle top starting at the y position. Depending on the current
      * textAlign, the x position is either the rectangle left side, middle or right side.
-     * <p/>
+     * <p>
      * Uses the given line height.
      *
      * @param text           the multi-line text to draw.
@@ -534,10 +534,10 @@ public class MultiLineTextRenderer
     /**
      * Add 'new line' characters inside a string so that it's bounding rectangle tries not to exceed the given dimension
      * width.
-     * <p/>
+     * <p>
      * If the dimension height is more than zero, the text will be truncated accordingly and the continuation string
      * will be appended to the last line.
-     * <p/>
+     * <p>
      * Note that words will not be split and at least one word will be used per line so the longest word defines the
      * final width of the bounding rectangle. Each line is trimmed of leading and trailing spaces.
      *
@@ -859,10 +859,10 @@ public class MultiLineTextRenderer
     /**
      * Add 'new line' characters inside an html text string so that it's bounding rectangle tries not to exceed the
      * given dimension width.
-     * <p/>
+     * <p>
      * If the dimension height is more than zero, the text will be truncated accordingly and the continuation string
      * will be appended to the last line.
-     * <p/>
+     * <p>
      * Note that words will not be split and at least one word will be used per line so the longest word defines the
      * final width of the bounding rectangle. Each line is trimmed of leading and trailing spaces.
      *

@@ -96,13 +96,13 @@ public final class WorldWind
     /**
      * Reinitialize WorldWind to its initial ready state. Shut down and restart all WorldWind services and clear all
      * WorldWind memory caches. Cache memory will be released at the next JVM garbage collection.
-     * <p/>
+     * <p>
      * Call this method to reduce WorldWind's current resource usage to its initial, empty state.
-     * <p/>
+     * <p>
      * The state of any open {@link WorldWindow} objects is indeterminate subsequent to invocation of this method. The
      * core WorldWindow objects attempt to shut themselves down cleanly during the call, but their resulting window
      * state is undefined.
-     * <p/>
+     * <p>
      * WorldWind can continue to be used after calling this method.
      */
     public static synchronized void shutDown()

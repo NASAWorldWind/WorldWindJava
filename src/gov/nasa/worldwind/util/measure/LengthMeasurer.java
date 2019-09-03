@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Polyline.GREAT_CIRCLE.</p> <p/> <p>If the measurer is set to follow terrain, the computed length will account for
  * terrain deformations as if someone was walking along that path. Otherwise the length is the sum of the cartesian
  * distance between the positions.</p>
- * <p/>
+ * <p>
  * <p>When following terrain the measurer will sample terrain elevations at regular intervals along the path. The
  * minimum number of samples used for the whole length can be set with setLengthTerrainSamplingSteps(). However, the
  * minimum sampling interval is 30 meters.

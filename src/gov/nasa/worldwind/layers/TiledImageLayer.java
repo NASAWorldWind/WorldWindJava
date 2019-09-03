@@ -168,7 +168,7 @@ public abstract class TiledImageLayer extends AbstractLayer
      * Values greater than 0 cause imagery to appear at higher resolution at greater altitudes than normal, but at an
      * increased performance cost. Values less than 0 decrease the default resolution at any given altitude. The default
      * value is 0. Values typically range between -0.5 and 0.5.
-     * <p/>
+     * <p>
      * Note: The resolution-to-height relationship is defined by a scale factor that specifies the approximate size of
      * discernible lengths in the image relative to eye distance. The scale is specified as a power of 10. A value of 3,
      * for example, specifies that 1 meter on the surface should be distinguishable from an altitude of 10^3 meters

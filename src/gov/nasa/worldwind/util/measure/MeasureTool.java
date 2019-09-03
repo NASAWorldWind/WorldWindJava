@@ -24,7 +24,7 @@ import java.util.List;
  * #SHAPE_PATH}, {@link #SHAPE_POLYGON}, {@link #SHAPE_CIRCLE}, {@link #SHAPE_ELLIPSE}, {@link #SHAPE_SQUARE} or {@link
  * #SHAPE_QUAD}. <p/> <p>In order to allow user interaction with the measuring shape, a controller must be set by
  * calling {@link #setController(MeasureToolController)} with a new instance of a <code>MeasureToolController</code>.</p>
- * <p/> <p>The interaction sequence for drawing a shape and measuring is as follows: <ul> <li>Set the measure
+ * <p> <p>The interaction sequence for drawing a shape and measuring is as follows: <ul> <li>Set the measure
  * shape.</li> <li>Arm the <code>MeasureTool</code> object by calling its {@link #setArmed(boolean)} method with an
  * argument of true.</li> <li>Click on the terrain to add points.</li> <li>Disarm the <code>MeasureTool</code> object by
  * calling its {@link #setArmed(boolean)} method with an argument of false. </li> <li>Read the measured length or area
@@ -37,7 +37,7 @@ import java.util.List;
  * while pressing the alt/option key.</p> <p/> <p>Arming and disarming the <code>MeasureTool</code> does not change the
  * contents or attributes of the measure tool's layer. Note that the measure tool will NOT disarm itself after the
  * second point of a line or a regular shape has been entered - the MeasureToolController has that responsibility.</p>
- * <p/> <p><b>Setting the measure shape from the application</b></p> <p/> <p>The application can set the measure shape
+ * <p> <p><b>Setting the measure shape from the application</b></p> <p/> <p>The application can set the measure shape
  * to an arbitrary list of positions using {@link #setPositions(java.util.ArrayList)}. If the provided list contains two
  * positions, the measure shape will be set to {@link #SHAPE_LINE}. If more then two positions are provided, the measure
  * shape will be set to {@link #SHAPE_PATH} if the last position differs from the first (open path), or {@link

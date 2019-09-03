@@ -378,7 +378,7 @@ public class WWUtil
      * Generates a random {@link Color} by scaling each of the red, green and blue components of a specified color with
      * independent random numbers. The alpha component is not scaled and is copied to the new color. The returned color
      * can be any value between white (0x000000aa) and black (0xffffffaa).
-     * <p/>
+     * <p>
      * Unless there's a reason to use a specific input color, the best color to use is white.
      *
      * @param color the color to generate a random color from. If null, the color white (0x000000aa) is used.
@@ -402,7 +402,7 @@ public class WWUtil
      * Generates a random {@link Color} by scaling each of the red, green and blue components of a specified color with
      * independent random numbers. The alpha component is not scaled and is copied to the new color. The returned color
      * can be any value between white (0x000000aa) and a specified darkest color.
-     * <p/>
+     * <p>
      * Unless there's a reason to use a specific input color, the best color to use is white.
      *
      * @param color        the color to generate a random color from. If null, the color white (0x000000aa) is used.

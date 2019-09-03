@@ -138,7 +138,7 @@ public class DataImportUtil
      * default location for importing data. This attempts to use the first FileStore location marked as an "install"
      * location. If no install location exists, this falls back to the FileStore's default write location, the same
      * location where downloaded data is cached.
-     * <p/>
+     * <p>
      * The returned {@link java.io.File} represents an abstract path, and therefore may not exist. In this case, the
      * caller must create the missing directories composing the abstract path.
      *

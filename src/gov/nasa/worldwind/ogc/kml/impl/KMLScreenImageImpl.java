@@ -188,7 +188,7 @@ public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable
     /**
      * Get the size mode for a size parameter. The KML size tag takes a numeric size attribute, but certain values of
      * this attribute change the interpretation of the tag.
-     * <p/>
+     * <p>
      * <ul> <li> A value of -1 indicates to use the native dimension</li>. <li> A value of 0 indicates to maintain the
      * aspect ratio</li>. <li> A value of n sets the value of the dimension</li>. </ul>
      *

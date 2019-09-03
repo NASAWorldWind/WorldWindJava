@@ -51,7 +51,7 @@ public class OpenStreetMapShapefileLoader
      * source type may be one of the following: <ul> <li>{@link java.io.InputStream}</li> <li>{@link java.net.URL}</li>
      * <li>absolute {@link java.net.URI}</li> <li>{@link java.io.File}</li> <li>{@link String} containing a valid URL
      * description or a file or resource name available on the classpath.</li> </ul>
-     * <p/>
+     * <p>
      * The returned Layer renders each Shapefile record as a surface circle with an associated screen label. The label
      * text is taken from the Shapefile record attribute key "name". This determines each surface circle's appearance
      * from the Shapefile record attribute key "type" as follows: <table> <tr><th>Type</th><th>Color</th></tr>
@@ -91,7 +91,7 @@ public class OpenStreetMapShapefileLoader
 
     /**
      * Creates a {@link gov.nasa.worldwind.layers.Layer} from an OpenStreetMap Shapefile of placemarks.
-     * <p/>
+     * <p>
      * The returned Layer renders each Shapefile record as a surface circle with an associated screen label. The label
      * text is taken from the Shapefile record attribute key "name". This determines each surface circle's appearance
      * from the Shapefile record attribute key "type" as follows: <table> <tr><th>Type</th><th>Color</th></tr>

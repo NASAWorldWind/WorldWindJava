@@ -418,7 +418,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
 
     /**
      * Determines whether the layer list can be moved or dragged with the mouse cursor.
-     * <p/>
+     * <p>
      * If enabled, dragging the frame will result in a change to it's location offset - {@link
      * #setLocationOffset(Vec4)}. If the list is also set to snap to corners - {@link #setSnapToCorners(boolean)}, the
      * frame position may change so as to be attached to the nearest corner - see {@link #setPosition(String)}.
@@ -432,7 +432,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
 
     /**
      * Sets whether the layer list can be moved or dragged with the mouse cursor.
-     * <p/>
+     * <p>
      * If enabled, dragging the frame will result in a change to it's location offset - {@link
      * #setLocationOffset(Vec4)}. If the list is also set to snap to corners - {@link #setSnapToCorners(boolean)}, the
      * frame position may change so as to be attached to the nearest corner - see {@link #setPosition(String)}.
@@ -468,7 +468,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
 
     /**
      * Determines whether the layer list snaps to the viewport sides and corners while being dragged.
-     * <p/>
+     * <p>
      * Dragging the layer list frame will result in a change to it's location offset - {@link #setLocationOffset(Vec4)}.
      * If the list is also set to snap to corners - {@link #setSnapToCorners(boolean)}, the frame position may change so
      * as to be attached to the nearest corner - see {@link #setPosition(String)}.
@@ -482,7 +482,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
 
     /**
      * Sets whether the layer list snaps to the viewport sides and corners while being dragged.
-     * <p/>
+     * <p>
      * Dragging the layer list frame will result in a change to it's location offset - {@link #setLocationOffset(Vec4)}.
      * If the list is also set to snap to corners the frame position may change so as to be attached to the nearest
      * corner - see {@link #setPosition(String)}.

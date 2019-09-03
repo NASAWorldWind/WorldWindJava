@@ -324,9 +324,9 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     /**
      * Specifies this shape's altitude mode, one of {@link WorldWind#ABSOLUTE}, {@link WorldWind#RELATIVE_TO_GROUND} or
      * {@link WorldWind#CLAMP_TO_GROUND}.
-     * <p/>
+     * <p>
      * Note: If the altitude mode is unrecognized, {@link WorldWind#ABSOLUTE} is used.
-     * <p/>
+     * <p>
      * Note: Subclasses may recognize additional altitude modes or may not recognize the ones described above.
      *
      * @param altitudeMode the altitude mode. The default value is {@link WorldWind#ABSOLUTE}.
@@ -534,7 +534,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     /**
      * Resolves a reference to a local element identified by address and identifier, where {@code linkBase} identifies a
      * document, including the current document, and {@code linkRef} is the id of the desired element.
-     * <p/>
+     * <p>
      * If {@code linkBase} refers to a local COLLADA file and {@code linkRef} is non-null, the return value is the
      * element identified by {@code linkRef}. If {@code linkRef} is null, the return value is a parsed {@link
      * ColladaRoot} for the COLLADA file identified by {@code linkBase}. Otherwise, {@code linkBase} is returned.
@@ -591,7 +591,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
      * Resolves a reference to a remote element identified by address and identifier, where {@code linkBase} identifies
      * a remote document, and {@code linkRef} is the id of the desired element. This method retrieves resources
      * asynchronously using the {@link gov.nasa.worldwind.cache.FileStore}.
-     * <p/>
+     * <p>
      * The return value is null if the file is not yet available in the FileStore. If {@code linkBase} refers to a
      * COLLADA file and {@code linkRef} is non-null, the return value is the element identified by {@code linkRef}. If
      * {@code linkBase} refers to a COLLADA file and {@code linkRef} is null, the return value is a parsed {@link

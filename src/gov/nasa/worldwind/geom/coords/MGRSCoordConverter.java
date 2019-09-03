@@ -861,7 +861,7 @@ class MGRSCoordConverter
      * The function Get_Grid_Values sets the letter range used for the 2nd letter in the MGRS coordinate string, based
      * on the set number of the utm zone. It also sets the false northing using a value of A for the second letter of
      * the grid square, based on the grid pattern and set number of the utm zone.
-     * <p/>
+     * <p>
      * Key values that are set in this function include:  ltr2_low_value, ltr2_high_value, and false_northing.
      *
      * @param zone Zone number

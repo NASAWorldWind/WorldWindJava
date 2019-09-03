@@ -19,7 +19,7 @@ import java.util.List;
  * <code>stateObject</code> elements. Each <code>stateObject</code> element is identified by its <code>name</code>
  * attribute. The value of a <code>stateObject</code> can either be simple text content, or nested
  * <code>stateObject</code> elements.
- * <p/>
+ * <p>
  * For example, this document stores four states: the string "Hello World!", the largest value an unsigned byte can
  * hold, the value of PI to six digits, and a boolean "true". <code>
  * <pre>

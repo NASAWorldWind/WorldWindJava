@@ -12,7 +12,7 @@ package gov.nasa.worldwind.util.combine;
  * as {@link gov.nasa.worldwind.util.combine.ShapeCombiner}. When combine is called, the Combinable draws its contours
  * using the GLU tessellator attached to the provided CombineContext. When the CombineContext is in bounding sector
  * mode, the Combinable adds its geographic bounding sector to the CombineContext's bounding sector list.
- * <p/>
+ * <p>
  * <h2>Drawing Contours</h2> Shapes are combined into a complex set of contours by drawing their individual contours
  * using the GLU tessellator attached to a CombineContext. A controller that implements the boolean operation configures
  * the CombineContext then calls combine on each shape. It is the responsibility of the controller to configure the GLU
@@ -21,12 +21,12 @@ package gov.nasa.worldwind.util.combine;
  * winding order of each contour defines whether the contour is an exterior region or an interior region.
  * Counterclockwise contours define the outer boundaries, and clockwise contours define holes or inner boundaries.
  * Contours may be nested, but a nested contour must be oriented oppositely from the contour that contains it.
- * <p/>
+ * <p>
  * <h2>Bounding Sector Mode</h2> CombineContext may be configured in bounding sector mode by returning true from
  * isBoundingSectorMode(). When combine is called in this mode, a shape adds its geographic bounding sector to the
  * context by calling addBoundingSector(Sector). CombineContext assumes that each shape either contributes one bounding
  * sector or does not contribute anything.
- * <p/>
+ * <p>
  * <h2>Example Implementation</h2>
  * <pre>
  * public class CombinableSector implements Combinable

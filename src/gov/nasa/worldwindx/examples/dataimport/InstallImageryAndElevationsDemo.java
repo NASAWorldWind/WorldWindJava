@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * visualized in WorldWind either as a <code>{@link gov.nasa.worldwind.layers.TiledImageLayer}</code> or an
  * <code>{@link gov.nasa.worldwind.globes.ElevationModel}</code>. The application also illustrates how to visualize data
  * that has been installed during a previous session.
- * <p/>
+ * <p>
  * For the simplest possible examples of installing imagery and elevation data, see the examples <code>{@link
  * InstallImagery}</code> and <code>{@link InstallElevations}</code>.
  *
@@ -557,7 +557,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
 
     /**
      * Suggests a name for a dataset based on pathnames of the passed files.
-     * <p/>
+     * <p>
      * Attempts to extract all common words that files' path can share, removes all non-alpha-numeric chars
      *
      * @param files Array of raster files

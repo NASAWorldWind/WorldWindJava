@@ -490,7 +490,7 @@ public class Vec4
      * Returns a representation of this vector as an <code>x y z</code> point suitable for use where four-dimensional
      * homogeneous coordinates are required. The returned vector has <code>x y z</code> coordinates are equal to this
      * vector's <code>x y z</code> coordinates, and has <code>w</code> coordinate equal to 1.0.
-     * <p/>
+     * <p>
      * A three-dimensional point in homogeneous coordinates is necessary when transforming that point by a 4x4
      * transformation matrix, or when calculating the dot product of the point and the equation of a plane. The returned
      * vector is affected by the translation component of a 4x4 transformation matrix.
@@ -512,7 +512,7 @@ public class Vec4
      * Returns a representation of this vector as an <code>x y z</code> direction suitable for use where
      * four-dimensional homogeneous coordinates are required. The returned vector has <code>x y z</code> coordinates are
      * equal to this vector's <code>x y z</code> coordinates, and has <code>w</code> coordinate equal to 0.0.
-     * <p/>
+     * <p>
      * A three-dimensional direction in homogeneous coordinates is necessary when transforming that direction by a 4x4
      * transformation matrix. The returned vector is not affected by the translation component of a 4x4 transformation
      * matrix, and therefore remains invariant under translation.
@@ -1153,7 +1153,7 @@ public class Vec4
     /**
      * Returns the arithmetic mean of the x, y, z coordinates of the specified points buffer. This returns null if the
      * buffer is empty.
-     * <p/>
+     * <p>
      * The buffer must contain XYZ coordinate tuples which are either tightly packed or offset by the specified stride.
      * The stride specifies the number of buffer elements between the first coordinate of consecutive tuples. For
      * example, a stride of 3 specifies that each tuple is tightly packed as XYZXYZXYZ, whereas a stride of 5 specifies

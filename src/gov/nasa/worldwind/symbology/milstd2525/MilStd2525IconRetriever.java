@@ -21,17 +21,17 @@ import java.util.*;
  * Usage Guide</a> for details on how to configure a local symbol repository. For more information on how to use this
  * class see the IconRetriever Usage Guide and the {@link gov.nasa.worldwindx.examples.symbology.IconRetrieverUsage}
  * example.
- * <p/>
+ * <p>
  * <h2><a name="parameters">Retrieval parameters</a></h2>
- * <p/>
+ * <p>
  * Table IX (pg. 35) of MIL-STD-2525C defines a hierarchy for simplifying tactical symbols. This hierarchy is
  * implemented using retrieval parameters SHOW_FILL, SHOW_FRAME, and SHOW_ICON. By default, all three elements are
  * displayed, and they can be turned off by setting the appropriate parameter. If frame and icon are turned off the
  * retriever will return an image that contains a circle, either black or filled with the icon fill color (depending on
  * the state of SHOW_FILL).
- * <p/>
+ * <p>
  * {@link #createIcon(String, gov.nasa.worldwind.avlist.AVList) createIcon} accepts the following parameters:
- * <p/>
+ * <p>
  * <table> <tr><th>Key</th><th>Type</th><td>Description</th></tr> <tr><td>SymbologyConstants.SHOW_ICON</td><td>Boolean</td><td>Determines
  * if the symbol will be created with an icon.</td></tr> <tr><td>SymbologyConstants.SHOW_FRAME</td><td>Boolean</td><td>Determines
  * if the symbol will be created with a frame.</td></tr> <tr><td>SymbologyConstants.SHOW_FILL</td><td>Boolean</td><td>Determines

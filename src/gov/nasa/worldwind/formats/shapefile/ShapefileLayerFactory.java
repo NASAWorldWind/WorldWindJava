@@ -22,22 +22,22 @@ import java.util.Map;
 /**
  * A factory that creates {@link gov.nasa.worldwind.layers.Layer} instances from a shapefile layer configuration source
  * or a shapefile source.
- * <p/>
+ * <p>
  * <h1>Shapefile Geometry Conversion</h1>
- * <p/>
+ * <p>
  * Shapefile geometries are mapped to WorldWind objects as follows:
- * <p/>
+ * <p>
  * <table> <tr><th>Shapefile Geometry</th><th>WorldWind Object</th></tr> <tr><td>Point</td><td>{@link
  * gov.nasa.worldwind.render.PointPlacemark}</td></tr> <tr><td>MultiPoint</td><td>List of {@link
  * gov.nasa.worldwind.render.PointPlacemark}</td></tr> <tr><td>Polyline</td><td>{@link
  * gov.nasa.worldwind.formats.shapefile.ShapefilePolylines}</td></tr> <tr><td>Polygon</td><td>{@link
  * gov.nasa.worldwind.formats.shapefile.ShapefilePolygons}</td></tr> </table>
- * <p/>
+ * <p>
  * In addition, if the DBase attributes file associated with the shapefile has an attribute named "height" or "hgt", the
  * shapes in the shapefile are mapped to {@link gov.nasa.worldwind.formats.shapefile.ShapefileExtrudedPolygons}.
- * <p/>
+ * <p>
  * <h1>Shapefile Attributes</h1>
- * <p/>
+ * <p>
  * Shapefiles may have associated with them a DBase attributes file. This class provides a mechanism for mapping
  * attribute names in the DBase file to keys assigned to the created shapes. The mapping is specified as key/value
  * pairs, the key is the attribute name in the shapefile's DBase attributes file, the value is the key name to attach to
@@ -45,11 +45,11 @@ import java.util.Map;
  * fields in the DBase attributes may be mapped to a {@link gov.nasa.worldwind.avlist.AVKey#DISPLAY_NAME} key in the
  * av-list of the created shapes corresponding to each record. The mapping's key/value pairs are specified using {@link
  * #setDBaseMappings(gov.nasa.worldwind.avlist.AVList)}.
- * <p/>
+ * <p>
  * The rendering attributes applied to the created shapes may be specified to this class, either via the attribute
  * accessors of this class or a configuration file passed to {@link #createFromConfigSource(Object,
  * gov.nasa.worldwind.avlist.AVList)}.
- * <p/>
+ * <p>
  * The key-value attributes and the rendering attributes of certain created shapes may be specified programmatically
  * using a ShapefileRenderable.AttributeDelegate. The delegate is called for each shapefile record encountered during
  * parsing, after this factory applies its DBase attribute mapping and its default rendering attributes. Currently,
@@ -209,7 +209,7 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
     /**
      * Specifies an attribute delegate to call for each shapefile record encountered during parsing. The delegate is
      * called after this factory applies its DBase attribute mapping and its default rendering attributes.
-     * <p/>
+     * <p>
      * Currently, attribute delegates are called when parsing shapefiles containing polylines, polygons or extruded
      * polygons. shapefiles containing points or multi-points ignore the attribute delegate.
      *
@@ -249,10 +249,10 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
      * the following: <ul> <li>a {@link java.net.URL}</li> <li>a {@link java.io.File}</li> <li>a {@link
      * java.io.InputStream}</li> <li>{@link Element}</li> <li>a {@link String} holding a file name, a name of a resource
      * on the classpath, or a string representation of a URL</li> </ul>
-     * <p/>
+     * <p>
      * The XML configuration file indicated by the source must contain the shapefile location, and may contain elements
      * specifying shapefile attribute mappings, shape attributes to assign to created shapes, and layer properties.
-     * <p/>
+     * <p>
      * This returns with the new layer immediately, but executes shapefile parsing and shapefile geometry conversion on
      * a separate thread. Shapefile geometry is added to the returned layer as it becomes available. In order to receive
      * notifications when execution completes or if an exception occurs, use {@link #createFromConfigSource(Object,
@@ -287,14 +287,14 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
      * the following: <ul> <li>a {@link java.net.URL}</li> <li>a {@link java.io.File}</li> <li>a {@link
      * java.io.InputStream}</li> <li>{@link Element}</li> <li>a {@link String} holding a file name, a name of a resource
      * on the classpath, or a string representation of a URL</li> </ul>
-     * <p/>
+     * <p>
      * The XML configuration file indicated by the source must contain the shapefile location, and may contain elements
      * specifying shapefile attribute mappings, shape attributes to assign to created shapes, and layer properties.
-     * <p/>
+     * <p>
      * This returns with the new layer immediately, but executes shapefile parsing and shapefile geometry conversion on
      * a separate thread. Shapefile geometry is added to the returned layer as it becomes available. Once parsing
      * completes, this calls the callback's completion method with the completed layer as the sole argument.
-     * <p/>
+     * <p>
      * If an exception occurs during execution, this catches the exception and forwards it to the callback's exception
      * method. When an exception causes layer parsing or geometry conversion to fail, this calls the callback's
      * completion method before the separate thread terminates.
@@ -349,13 +349,13 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
      * following: <ul> <li>a {@link java.net.URL}</li> <li>a {@link java.io.File}</li> <li>a {@link
      * java.io.InputStream}</li> <li>{@link Shapefile}</li> <li>a {@link String} holding a file name, a name of a
      * resource on the classpath, or a string representation of a URL</li> </ul>
-     * <p/>
+     * <p>
      * This returns with the new layer immediately, but executes shapefile parsing and shapefile geometry conversion on
      * a separate thread. Shapefile geometry is added to the returned layer as it becomes available. In order to receive
      * notifications when execution completes or if an exception occurs, use {@link #createFromConfigSource(Object,
      * gov.nasa.worldwind.avlist.AVList, gov.nasa.worldwind.formats.shapefile.ShapefileLayerFactory.CompletionCallback)}
      * and specify a completion callback.
-     * <p/>
+     * <p>
      * If the source is a Shapefile instance, it is the responsibility of the caller to close the shapefile after this
      * factory completes execution.
      *
@@ -384,15 +384,15 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
      * following: <ul> <li>a {@link java.net.URL}</li> <li>a {@link java.io.File}</li> <li>a {@link
      * java.io.InputStream}</li> <li>{@link Shapefile}</li> <li>a {@link String} holding a file name, a name of a
      * resource on the classpath, or a string representation of a URL</li> </ul>
-     * <p/>
+     * <p>
      * This returns with the new layer immediately, but executes shapefile parsing and shapefile geometry conversion on
      * a separate thread. Shapefile geometry is added to the returned layer as it becomes available. Once parsing
      * completes, this calls the callback's completion method with the completed layer as the sole argument.
-     * <p/>
+     * <p>
      * If an exception occurs during execution, this catches the exception and forwards it to the callback's exception
      * method. When an exception causes layer parsing or geometry conversion to fail, this calls the callback's
      * completion method before the separate thread terminates.
-     * <p/>
+     * <p>
      * If the source is a Shapefile instance, it is the responsibility of the caller to close the shapefile after this
      * factory completes execution.
      *

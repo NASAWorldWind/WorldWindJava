@@ -19,7 +19,7 @@ import gov.nasa.worldwind.util.*;
  * gov.nasa.worldwind.render.WWIcon}</td></tr> <tr><td>MultiPoint</td><td>List of {@link
  * gov.nasa.worldwind.render.WWIcon}</td></tr> <tr><td>Polyline</td><td>{@link gov.nasa.worldwind.render.SurfacePolylines}</td></tr>
  * <tr><td>Polygon</td><td>{@link gov.nasa.worldwind.render.SurfacePolygons}</td></tr> </table>
- * <p/>
+ * <p>
  * Shapefiles do not contain a standard definition for color and other visual attributes. Though some Shapefiles contain
  * color information in each record's key-value attributes, ShapefileLoader does not attempt to interpret that
  * information. Instead, the WorldWind renderable objects created by ShapefileLoader are assigned a random color.

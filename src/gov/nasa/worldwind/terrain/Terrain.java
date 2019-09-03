@@ -32,7 +32,7 @@ public interface Terrain
 
     /**
      * Computes the Cartesian, model-coordinate point of a position on the terrain.
-     * <p/>
+     * <p>
      * This operation fails with a {@link gov.nasa.worldwind.exception.WWTimeoutException} if a timeout has been
      * specified and it is exceeded during the operation.
      *
@@ -51,7 +51,7 @@ public interface Terrain
 
     /**
      * Computes the Cartesian, model-coordinate point of a location on the terrain.
-     * <p/>
+     * <p>
      * This operation fails with a {@link gov.nasa.worldwind.exception.WWTimeoutException} if a timeout has been
      * specified and it is exceeded during the operation.
      *
@@ -74,7 +74,7 @@ public interface Terrain
      * Computes the intersections of a line with the terrain. The line is specified by two positions whose altitude
      * field indicates the height above the terrain (not the altitude relative to sea level). All intersection points
      * are returned.
-     * <p/>
+     * <p>
      * This operation fails with a {@link gov.nasa.worldwind.exception.WWTimeoutException} if a timeout has been
      * specified and it is exceeded during the operation.
      *
@@ -95,7 +95,7 @@ public interface Terrain
     /**
      * Computes the intersections of a line with the terrain. The line is specified by two positions whose altitude
      * field is interpreted according to the specified altitude mode. All intersection points are returned.
-     * <p/>
+     * <p>
      * This operation fails with a {@link gov.nasa.worldwind.exception.WWTimeoutException} if a timeout has been
      * specified and it is exceeded during the operation.
      *
@@ -116,7 +116,7 @@ public interface Terrain
 
     /**
      * Computes the elevation at a specified location.
-     * <p/>
+     * <p>
      * This operation fails with a {@link gov.nasa.worldwind.exception.WWTimeoutException} if a timeout has been
      * specified and it is exceeded during the operation.
      *

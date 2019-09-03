@@ -25,7 +25,7 @@ import java.util.List;
  * gov.nasa.worldwind.symbology.TacticalGraphic} to display symbols from the MIL-STD-2525 symbology set. See the <a
  * title="Symbology Usage Guide" href="https://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology
  * Usage Guide</a> for more information on symbology support in WorldWind.
- * <p/>
+ * <p>
  * For more detailed examples of how to use TacticalSymbol and TacticalGraphic in an application, see the {@link
  * TacticalSymbols} example and the {@link TacticalGraphics} example.
  *

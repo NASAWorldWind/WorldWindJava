@@ -14,7 +14,7 @@ import gov.nasa.worldwind.util.EntityMap;
 /**
  * A <code>TreeNode</code> that represents a KML feature defined by a <code>{@link
  * gov.nasa.worldwind.ogc.kml.KMLAbstractFeature}</code>.
- * <p/>
+ * <p>
  * The node's selection state is synchronized with its KML feature's visibility state. <code>{@link
  * #isSelected()}</code> returns whether the node's feature is visible. Calling <code>{@link
  * #setSelected(boolean)}</code> specifies both the the node's selection state, and whether its feature should be
@@ -125,9 +125,9 @@ public class KMLFeatureTreeNode extends BasicTreeNode
     /**
      * Expands paths in the specified <code>tree</code> corresponding to open KML container elements. This assumes that
      * the <code>tree</code>'s model contains this node.
-     * <p/>
+     * <p>
      * This node's path is expanded if the feature's <code>open</code> property is <code>true</code>.
-     * <p/>
+     * <p>
      * This calls <code>expandOpenContainers</code> on all children which are instances of
      * <code>KMLFeatureTreeNode</code>.
      *

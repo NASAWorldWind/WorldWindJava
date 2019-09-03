@@ -19,7 +19,7 @@ import java.nio.channels.ClosedByInterruptException;
 /**
  * Abstract base class for retrieval post-processors. Verifies the retrieval operation and dispatches the content to the
  * a subclasses content handlers.
- * <p/>
+ * <p>
  * Subclasses are expected to override the methods necessary to handle their particular post-processing operations.
  *
  * @author Tom Gaskins
@@ -201,7 +201,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
 
     /**
      * Saves the retrieved and possibly transformed data. The data may have been transformed during content handling.
-     * <p/>
+     * <p>
      * The default implementation of this method simply calls {@link #saveBuffer(java.nio.ByteBuffer)} with an argument
      * of null.
      *
@@ -517,7 +517,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
     /**
      * Handles image content. The default implementation simply saves the retrieved data via {@link #saveBuffer()},
      * first converting it to DDS if the suffix of the output file is .dds.
-     * <p/>
+     * <p>
      * The default implementation of this method returns immediately if the output file cannot be determined or it
      * exists and {@link #overwriteExistingFile()} returns false.
      *

@@ -274,16 +274,16 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
 
     /**
      * Extracts metadata and sets next key/value pairs:
-     * <p/>
-     * <p/>
-     * <p/>
+     * <p>
+     * <p>
+     * <p>
      * AVKey.WIDTH - the maximum width of the image
-     * <p/>
+     * <p>
      * AVKey.HEIGHT - the maximum height of the image
-     * <p/>
+     * <p>
      * AVKey.COORDINATE_SYSTEM - one of the next values: AVKey.COORDINATE_SYSTEM_SCREEN
      * AVKey.COORDINATE_SYSTEM_GEOGRAPHIC AVKey.COORDINATE_SYSTEM_PROJECTED
-     * <p/>
+     * <p>
      * AVKey.SECTOR - in case of Geographic CS, contains a regular Geographic Sector defined by lat/lon coordinates of
      * corners in case of Projected CS, contains a bounding box of the area
      *

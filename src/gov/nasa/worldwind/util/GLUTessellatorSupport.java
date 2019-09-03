@@ -15,7 +15,7 @@ import java.util.*;
 /**
  * GLUTessellatorSupport is a utility class for configuring and using a {@link com.jogamp.opengl.glu.GLUtessellator} to
  * tessellate complex polygons into triangles.
- * <p/>
+ * <p>
  * The standard pattern for using GLUTessellatorSupport to prepare a GLUtessellator is as follows: <code>
  * GLUTessellatorSupport glts = new GLUTessellatorSupport();<br/> GLUtessellatorCallback cb = ...; // Reference to an
  * implementation of GLUtessellatorCallback.<br/> Vec4 normal = new Vec4(0, 0, 1); // The polygon's normal. This example
@@ -384,7 +384,7 @@ public class GLUTessellatorSupport
     /**
      * Recursively forwards boundary tessellation results from one GLU tessellator to another. The GLU tessellator this
      * callback forwards to may be configured in any way the caller chooses.
-     * <p/>
+     * <p>
      * RecursiveCallback must be used as the GLUtessellatorCallback for the begin, end, vertex, and combine callbacks
      * for a GLU tessellator configured to generate line loops. A GLU tessellator can be configured generate line loops
      * by calling gluTessProperty(GLU_TESS_BOUNDARY_ONLY, GL_TRUE). Additionally, the caller specified vertex data

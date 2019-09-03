@@ -902,12 +902,12 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
      * points to the intersection of the prime meridian and the equator, in the equatorial plane. The X axis completes a
      * right-handed coordinate system, and is 90 degrees east of the Z axis and also in the equatorial plane. Sea level
      * is at z = zero.
-     * <p/>
+     * <p>
      * This method provides an interface for efficient generation of a grid of cartesian points within a sector. The
      * grid is constructed by dividing the sector into <code>numLon x numLat</code> evenly separated points in
      * geographic coordinates. The first and last points in latitude and longitude are placed at the sector's minimum
      * and maximum boundary, and the remaining points are spaced evenly between those boundary points.
-     * <p/>
+     * <p>
      * For each grid point within the sector, an elevation value is specified via an array of elevations. The
      * calculation at each position incorporates the associated elevation.
      *

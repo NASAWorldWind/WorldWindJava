@@ -579,10 +579,10 @@ public class Angle implements Comparable<Angle>
 
     /**
      * Limits a specified angle to be within a specified minimum and maximum.
-     * <p/>
+     * <p>
      * The returned angle is undefined if min > max. Otherwise, this method's return value is equivalent to the
      * following:
-     * <p/>
+     * <p>
      * <ul> <li>min - If value < min</li> <li>max - If value > max</li> <li>value - If min <= value <= max</li> </ul>
      *
      * @param value The angle to clamp.

@@ -29,20 +29,20 @@ public class Box implements Extent, Renderable
      * <code>Box's</code> 2D convex hull in screen coordinates. The index to this table is a 6-bit code, where each bit
      * denotes whether one of the <code>Box's</code> six planes faces the <code>View</code>. This code is organized as
      * follows:
-     * <p/>
+     * <p>
      * <table> <tr><td><strong>Bit</strong></td><td align="center" width="50">5</td><td align="center"
      * width="50">4</td><td align="center" width="50">3</td><td align="center" width="50">2</td align="center"
      * width="50"><td align="center" width="50">1</td><td align="center" width="50">0</td></tr> <tr align="center"><td
      * align="left"><strong>Code</strong></td><td align="center" width="50">left</td><td align="center"
      * width="50">right</td><td align="center" width="50">back</td><td align="center" width="50">front</td><td
      * align="center" width="50">bottom</td><td align="center" width="50">top</td></tr> </table>
-     * <p/>
+     * <p>
      * Since at most three of a <code>Box's</code> planes can be visible at one time, there are a total of 26 unique
      * vertex combinations that define a <code>Box's</code> 2D convex hull in the viewport. Index codes that represent a
      * valid combination of planes facing the <code>View</code> result in an array of 4 or 6 integers (depending on
      * whether one, two or three planes face the <code>View</code>), where each element in the array is an index for one
      * of the <code>Box's</code> eight vertices as follows:
-     * <p/>
+     * <p>
      * <table> <tr align="center"><td align="left"><strong>Index</strong></td><td align="center" width="125">0</td><td
      * align="center" width="125">1</td><td align="center" width="125">2</td><td align="center" width="125">3</td><td
      * align="center" width="125">4</td><td align="center" width="125">5</td><td align="center" width="125">6</td><td
@@ -51,7 +51,7 @@ public class Box implements Extent, Renderable
      * align="center" width="125">bottom-upper-right</td><td align="center" width="125">bottom-upper-left</td><td
      * align="center" width="125">top-lower-left</td><td align="center" width="125">top-lower-right</td><td
      * align="center" width="125">top-upper-right</td><td align="center" width="125">top-upper-left</td></tr> </table>
-     * <p/>
+     * <p>
      * The vertices are organized so that they appear in counter-clockwise order on the screen. Index codes that
      * represent an invalid combination of planes facing the <code>View</code> map to <code>null</code>.
      */
@@ -139,10 +139,10 @@ public class Box implements Extent, Renderable
      * faces are specified by two scalar locations along each axis, each location indicating a face. The non-unit length
      * of an axis is the distance between its respective two locations. The longest side is specified first, followed by
      * the second longest side and then the shortest side.
-     * <p/>
+     * <p>
      * The axes are normally principal axes computed from a collection of points in order to form an oriented bounding
      * volume. See {@link WWMath#computePrincipalAxes(Iterable)}.
-     * <p/>
+     * <p>
      * Note: No check is made to ensure the order of the face locations.
      *
      * @param axes the unit-length axes.
@@ -513,7 +513,7 @@ public class Box implements Extent, Renderable
     /**
      * Computes a <code>Box</code> that bounds a specified buffer of points. Principal axes are computed for the points
      * and used to form a <code>Box</code>.
-     * <p/>
+     * <p>
      * The buffer must contain XYZ coordinate tuples which are either tightly packed or offset by the specified stride.
      * The stride specifies the number of buffer elements between the first coordinate of consecutive tuples. For
      * example, a stride of 3 specifies that each tuple is tightly packed as XYZXYZXYZ, whereas a stride of 5 specifies
@@ -890,7 +890,7 @@ public class Box implements Extent, Renderable
      * <code>view</code>. The returned integer is a 6-bit code, where each bit denotes whether one of this
      * <code>Box's</code> six planes faces the <code>View</code>. See the documentation for <code>{@link
      * #ProjectionHullTable}</code> for details.
-     * <p/>
+     * <p>
      * If the <code>view</code> is inside this <code>Box</code>, this returns 0 indicating that none of this
      * <code>Box's</code> planes face the <code>view</code>.
      *

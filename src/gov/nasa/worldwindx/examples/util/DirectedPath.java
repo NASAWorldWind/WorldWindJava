@@ -51,7 +51,7 @@ public class DirectedPath extends Path
 
     /**
      * Creates a path with specified positions.
-     * <p/>
+     * <p>
      * Note: If fewer than two positions is specified, no path is drawn.
      *
      * @param positions the path positions. This reference is retained by this shape; the positions are not copied. If
@@ -67,7 +67,7 @@ public class DirectedPath extends Path
 
     /**
      * Creates a path with positions specified via a generic list.
-     * <p/>
+     * <p>
      * Note: If fewer than two positions is specified, the path is not drawn.
      *
      * @param positions the path positions. This reference is retained by this shape; the positions are not copied. If
@@ -205,7 +205,7 @@ public class DirectedPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to also compute the geometry of the direction arrows.
      */
     @Override
@@ -217,7 +217,7 @@ public class DirectedPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to return a {@link gov.nasa.worldwindx.examples.util.DirectedSurfacePolyline}.
      */
     @Override
@@ -231,7 +231,7 @@ public class DirectedPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to update the arrow properties of {@link gov.nasa.worldwindx.examples.util.DirectedSurfacePolyline}.
      */
     @Override
@@ -428,7 +428,7 @@ public class DirectedPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to also draw direction arrows.
      *
      * @param dc Current draw context.
@@ -444,7 +444,7 @@ public class DirectedPath extends Path
     /**
      * Draws this DirectedPath's direction arrows. Called from {@link #doDrawOutline(gov.nasa.worldwind.render.DrawContext)}
      * before drawing the Path's actual outline.
-     * <p/>
+     * <p>
      * If this Path is entirely located on the terrain, this applies an offset to the arrow's depth values to to ensure
      * they shows over the terrain. This does not apply a depth offset in any other case to avoid incorrectly drawing
      * the arrows over objects they should be behind, including the terrain. In addition to applying a depth offset,

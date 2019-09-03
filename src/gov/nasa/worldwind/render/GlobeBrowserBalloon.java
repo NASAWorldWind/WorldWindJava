@@ -109,7 +109,7 @@ public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements Globe
     /**
      * Computes and stores this balloon's model and screen coordinates. This assigns balloon coordinate properties as
      * follows:
-     * <p/>
+     * <p>
      * <ul> <li><code>placePoint</code> - this balloon's model-coordinate point, according to its altitude mode.</li>
      * <li><code>screenPlacePoint</code> - screen-space projection of the <code>placePoint</code>.</li>
      * <li><code>screenOffset</code> - the balloon frame's screen-coordinate offset from this balloon's
@@ -212,7 +212,7 @@ public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements Globe
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to return <code>false</code> if the balloon's position is either behind the <code>View's</code> near
      * clipping plane or in front of the <code>View's</code> far clipping plane. Otherwise this delegates to the super
      * class' behavior.
@@ -239,7 +239,7 @@ public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements Globe
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to use this balloon's position as the picked object's position.
      */
     @Override

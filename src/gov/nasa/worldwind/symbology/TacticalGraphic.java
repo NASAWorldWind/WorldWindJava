@@ -18,25 +18,25 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * or polygon that is styled according to the symbol set's specification. See the TacticalGraphic <a title="Tactical
  * Graphic Usage Guide" href="https://goworldwind.org/developers-guide/symbology/tactical-graphics/"
  * target="_blank">Usage Guide</a> for instructions on using TacticalGraphic in an application.
- * <p/>
+ * <p>
  * See the {@link gov.nasa.worldwindx.examples.symbology.Symbology} and {@link gov.nasa.worldwindx.examples.symbology.TacticalGraphics}
  * example applications for examples of how to use tactical graphics.
- * <p/>
+ * <p>
  * <h1>Construction</h1>
- * <p/>
+ * <p>
  * TacticalGraphics are typically created by an instance of {@link TacticalGraphicFactory}. Each graphic within a symbol
  * set is identified by a string identifier. The format of this identifier depends on the symbol set. For example, a
  * MIL-STD-2525 Symbol Identification Code (SIDC) is a string of 15 characters.
- * <p/>
+ * <p>
  * You will need to instantiate the appropriate factory for the symbol set that you intend to use.  For example, {@link
  * gov.nasa.worldwind.symbology.milstd2525.MilStd2525GraphicFactory} creates graphics for the MIL-STD-2525 symbology
  * set.
- * <p/>
+ * <p>
  * The TacticalGraphic interface provides access to settings common to all tactical graphics. TacticalGraphic extends
  * the {@link Renderable} interface, so you can add a TacticalGraphic directly to a {@link
  * gov.nasa.worldwind.layers.RenderableLayer}. Here's an example of creating a graphic from the MIL-STD-2525 symbol
  * set:
- * <p/>
+ * <p>
  * <pre>
  * // Create a graphic factory for MIL-STD-2525
  * TacticalGraphicFactory factory = new MilStd2525GraphicFactory();
@@ -66,21 +66,21 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * wwd.getModel().getLayers().add(graphicLayer);
  * wwd.redraw();
  * </pre>
- * <p/>
+ * <p>
  * The symbol identifier ({@code GHGPGLP----AUSX}) tells the factory what type of graphic to create,  and how the
  * graphic should be styled. In the example above we added a text modifier of "Alpha" to identify our shape. These
  * parameters can be specified using a parameter list when the TacticalGraphic is created, as shown above. They can also
  * be set after creation using setters in the TacticalGraphic interface.
- * <p/>
+ * <p>
  * <h1>Modifiers</h1>
- * <p/>
+ * <p>
  * Many graphics support text or graphic modifiers. Each modifier is identified by a String key. The set of possible
  * modifiers is determined by the symbol set. Modifiers can be specified in the parameter list when a graphic is
  * created, or using {@link #setModifier(String, Object) setModifier} after the graphic has been created.
- * <p/>
+ * <p>
  * For example, a MIL-STD-2525 General Area graphic can have a text modifier that identifies the area. Here's an example
  * of how to specify the modifier when the graphic is created:
- * <p/>
+ * <p>
  * <pre>
  * AVList modifiers = new AVListImpl();
  * modifiers.setValue(SymbologyConstants.UNIQUE_DESIGNATION, "Boston"); // Text that identifies the area enclosed by
@@ -89,34 +89,34 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * List<Position> positions = ...; // List of positions that define the boundary of the area.
  * TacticalGraphic graphic = milstd2525Factory.createGraphic("GHGPGAG----AUSX", positions, modifiers);
  * </pre>
- * <p/>
+ * <p>
  * The modifier can also be set (or changed) after the graphic is created:
- * <p/>
+ * <p>
  * <pre>
  * // Create the graphic
  * TacticalGraphic graphic = milstd2525Factory.createGraphic("GHGPGAG----AUSX", positions, null);
  * graphic.setModifier(SymbologyConstants.UNIQUE_DESIGNATION, "Boston");
  * </pre>
- * <p/>
+ * <p>
  * <h1>Position</h1>
- * <p/>
+ * <p>
  * Each tactical graphic is positioned by one or more control points. How many points are required depends on the type
  * of graphic.  A point graphic will only require one point. A more complex shape may require three or four, and a line
  * or area may allow any number.
- * <p/>
+ * <p>
  * Here is an example of how to create a point graphic in the MIL-STD-2525 symbol set:
- * <p/>
+ * <p>
  * <pre>
  * Position position = Position.fromDegrees(34.9362, -118.2559, 0);
  * TacticalGraphic graphic = milstd2525Factory.createPoint("GFGPAPD----AUSX", position, null);
  * </pre>
- * <p/>
+ * <p>
  * More complicated graphics will require more control points. MIL-STD-2525 defines a template for each type of tactical
  * graphic. Each template identifies how many control points are required for the graphic, and how the points are
  * interpreted. The TacticalGraphic requires a list of Position objects, which identify the control points in the same
  * order as in the specification. For example, in order to create a graphic that requires three control points we need
  * to create a list of positions that specifies the three points in order:
- * <p/>
+ * <p>
  * <pre>
  * List<Position> positions = Arrays.asList(
  *     Position.fromDegrees(34.5073, -117.8380, 0), // PT. 1
@@ -125,15 +125,15 @@ import gov.nasa.worldwind.util.UnitsFormat;
  *
  * TacticalGraphic graphic = milstd2525Factory.createGraphic("GFGPSLA----AUSX", positions, null);
  * </pre>
- * <p/>
+ * <p>
  * <h1>Sub-interfaces of TacticalGraphic</h1>
- * <p/>
+ * <p>
  * TacticalGraphic describes any tactical graphic in the most general terms: a list of positions and modifiers. However,
  * this general interface is not convenient for all graphics. For example, when creating a circle graphic it is more
  * convenient to access the radius of the circle directly than to set a modifier that affects the radius. Sub-interfaces
  * of tactical graphic provide more convenient methods for manipulating common types of graphics. Instances of these
  * sub-interfaces can be created directly using a TacticalGraphicFactory. The sub-interfaces are:
- * <p/>
+ * <p>
  * <ul> <li>{@link TacticalPoint}- Graphics positioned by a single point.</li> <li>{@link TacticalCircle} - Graphics
  * positioned by a center point and radius.</li> <li>{@link TacticalQuad} - Rectangles with a length and width.</li>
  * <li>{@link TacticalRoute} - A series of point graphics connected by lines and treated as a single graphic.</li>
@@ -336,7 +336,7 @@ public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVL
      * Specifies an offset used to position this graphic's main label relative to the label's geographic position. The
      * geographic position is determined by the type of graphic. For example, the label for an area graphic is typically
      * placed at the center of the area polygon. Note that not all graphics have labels.
-     * <p/>
+     * <p>
      * The offset can specify an absolute pixel value, or a an offset relative to the size of the label. For example, an
      * offset of (-0.5, -0.5) in fraction units will center the label on its geographic position both horizontally and
      * vertically.

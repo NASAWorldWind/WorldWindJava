@@ -332,7 +332,7 @@ public class PointPlacemarkAttributes implements Exportable
      * interpreted as relative to the screen and the placemark icon maintains the heading relative to the screen's
      * vertical edges. If {@link gov.nasa.worldwind.avlist.AVKey#RELATIVE_TO_GLOBE}, the heading is interpreted relative
      * to the globe and the placemark icon maintains the heading relative to the globe's north direction.
-     * <p/>
+     * <p>
      * The default heading reference is null, which {@link PointPlacemark} interprets as {@link
      * gov.nasa.worldwind.avlist.AVKey#RELATIVE_TO_SCREEN}.
      *
@@ -432,7 +432,7 @@ public class PointPlacemarkAttributes implements Exportable
      * image. An offset of (1, 1) in fraction units causes the text to start at the upper right corner of the image. The
      * text would also start there if the offset is in units of pixels and the X and Y values are the image width and
      * height, respectively.
-     * <p/>
+     * <p>
      * If no offset is specified, the label is placed at the right edge of the image with the top of the text at about
      * the same level as the top of the image. (An offset of (X = 1.0, Y = 0.6, both in fraction units.)
      *
@@ -584,7 +584,7 @@ public class PointPlacemarkAttributes implements Exportable
     /**
      * Export the Placemark. The {@code output} object will receive the exported data. The type of this object depends
      * on the export format. The formats and object types supported by this class are:
-     * <p/>
+     * <p>
      * <pre>
      * Format                                         Supported output object types
      * ================================================================================

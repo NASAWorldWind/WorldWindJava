@@ -56,7 +56,7 @@ public class BasicShapeAttributes implements ShapeAttributes
     /**
      * Creates a new <code>BasicShapeAttributes</code> with the default attributes. The default attributes are as
      * follows:
-     * <p/>
+     * <p>
      * <table> <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
      * <tr><td>drawInterior</td><td><code>true</code></td></tr> <tr><td>drawOutline</td><td><code>true</code></td></tr>
      * <tr><td>enableAntialiasing</td><td><code>true</code></td></tr> <tr><td>enableLighting</td><td><code>false</code></td></tr>

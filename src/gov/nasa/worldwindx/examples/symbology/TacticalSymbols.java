@@ -26,7 +26,7 @@ import java.awt.event.*;
  * Demonstrates how to create and display WorldWind tactical symbols. See the <a title="Symbology Usage Guide"
  * href="https://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology Usage Guide</a> for more
  * information on symbology support in WorldWind.
- * <p/>
+ * <p>
  * See the {@link TacticalGraphics} for a detailed example of using WorldWind tactical graphics in an application.
  *
  * @author dcollins

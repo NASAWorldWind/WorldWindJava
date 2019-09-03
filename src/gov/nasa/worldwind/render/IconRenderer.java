@@ -24,7 +24,7 @@ import java.util.logging.Level;
  * IconRenderer processes collections of {@link gov.nasa.worldwind.render.WWIcon} instances for picking and rendering.
  * IconRenderer applies batch processing techniques to improve the runtime performance of picking and rendering large
  * collections of icons.
- * <p/>
+ * <p>
  * During the draw pass, IconRenderer records feedback information for each WWIcon which has the property key {@link
  * gov.nasa.worldwind.avlist.AVKey#FEEDBACK_ENABLED} set to <code>true</code>. IconRenderer does not record any feedback
  * information during the pick pass. When feedback is enabled, IconRenderer puts properties which describe how each

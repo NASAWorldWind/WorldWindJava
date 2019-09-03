@@ -46,7 +46,7 @@ public class ViewControlsSelectListener implements SelectListener
 
     /**
      * Construct a controller for specified <code>WorldWindow</code> and <code>ViewControlsLayer<c/code>.
-     * <p/>
+     * <p>
      * <code>ViewControlLayer</code>s are not sharable among <code>WorldWindow</code>s. A separate layer and controller
      * must be established for each window that's to have view controls.
      *

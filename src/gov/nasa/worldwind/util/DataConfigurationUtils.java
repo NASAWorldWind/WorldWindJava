@@ -270,7 +270,7 @@ public class DataConfigurationUtils
      * Convenience method for computing a data configuration file's cache name in a FileStore, given the file's cache
      * path. This writes the computed cache name to the specified parameter list under the key {@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}. If the parameter already exists, it's left unchanged.
-     * <p/>
+     * <p>
      * A data configuration file's cache name is its parent directory in the cache. The cache name therefore points to
      * the directory containing both the configuration file and any cached data associated with it. Determining the
      * cache name at run time - instead of hard wiring it in the data configuration file - enables cache data to be

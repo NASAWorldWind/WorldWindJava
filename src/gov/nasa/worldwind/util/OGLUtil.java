@@ -261,7 +261,7 @@ public class OGLUtil
      * <tr><td>GL2.GL_SRGB</td><td>GL2.GL_RGB</td></tr> <tr><td>GL2.GL_SRGB8</td><td>GL2.GL_RGB</td></tr>
      * <tr><td>GL2.GL_SRGB_ALPHA</td><td>GL2.GL_RGBA</td></tr> <tr><td>GL2.GL_SRGB8_ALPHA8</td><td>GL2.GL_RGBA</td></tr>
      * </code>
-     * <p/>
+     * <p>
      * This returns 0 if the internal format is not one of the recognized types.
      *
      * @param internalFormat the OpenGL texture internal format.
@@ -378,7 +378,7 @@ public class OGLUtil
      * <tr><td>GL2.GL_SLUMINANCE8_ALPHA8</td><td>16<td></tr> <tr><td>GL2.GL_SRGB</td><td>24</td></tr>
      * <tr><td>GL2.GL_SRGB8</td><td>24</td></tr> <tr><td>GL2.GL_SRGB_ALPHA</td><td>32</td></tr>
      * <tr><td>GL2.GL_SRGB8_ALPHA8</td><td>32</td></tr> </code>
-     * <p/>
+     * <p>
      * The returned estimate assumes that the driver provides does not convert the formats to another supported, such
      * converting as <code>GL2.GL_ALPHA4</code> to <code>GL2.GL_ALPHA8</code>. This returns 0 if the internal format is
      * not one of the recognized types. This does not attempt to estimate a memory size for compressed internal

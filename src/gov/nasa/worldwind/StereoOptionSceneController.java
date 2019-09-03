@@ -15,18 +15,17 @@ import com.jogamp.opengl.*;
 /**
  * TODO: This file needs to be updated to implement "correct" stereo, as described at:
  * http://www.orthostereo.com/geometryopengl.html
- * <p/>
- * <p/>
+ * <p>
  * This scene controller draws in stereo, either red-blue anaglyph or device supported if the display device provides
  * stereo directly. It can also draw without applying stereo. To select stereo, prior to calling this class' constructor
  * set the Java VM property <code>gov.nasa.worldwind.stereo.mode</code> to "device" for device supported stereo (if
  * provided by the device) or "redblue" for red-blue anaglyph stereo. If the property is not set or is any other value,
  * this class does not draw in stereo.
- * <p/>
+ * <p>
  * The {@link WorldWindow} instance must support stereo in order to use device-supported stereo. A stereo
  * <code>WorldWindow</code> is selected by specifying the Java VM property described above prior to creating it. See
  * {@link gov.nasa.worldwind.awt.WorldWindowGLCanvas} for further details.
- * <p/>
+ * <p>
  * Note: The logic and much of the code here was contributed by Xander Enzmann of Mitre Corporation.
  *
  * @author tag
@@ -114,7 +113,7 @@ public class StereoOptionSceneController extends BasicSceneController implements
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * If the display device is providing stereo -- {@link #isHardwareStereo()} is <code>true</code> -- this method
      * returns true even if the stereo mode is {@link AVKey#STEREO_MODE_NONE}. In this case, individual stereo images
      * are drawn for left and right eyes in order to prevent a blurred scene.
@@ -158,7 +157,7 @@ public class StereoOptionSceneController extends BasicSceneController implements
 
     /**
      * Implement no stereo ("Mono") while using a stereo device.
-     * <p/>
+     * <p>
      * Note that this method draws the image twice, once to each of the left and right eye buffers, even when stereo is
      * not in effect. This is to prevent the stereo device from drawing blurred scenes.
      *

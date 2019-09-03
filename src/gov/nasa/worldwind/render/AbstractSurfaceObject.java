@@ -27,7 +27,7 @@ import java.util.List;
  * building the composite representation the SceneController invokes {@link #render(DrawContext)} in ordered rendering
  * mode. To avoid overloading the purpose of the render method, AbstractSurfaceObject does not add itself to the
  * DrawContext's ordered surface renderable queue during rendering.
- * <p/>
+ * <p>
  * Subclasses that do not wish to participate in this composite representation can override this behavior as follows:
  * <ol> <li>Override {@link #makeOrderedPreRenderable(DrawContext)}; do not add this object to the draw context's
  * ordered renderable queue. Perform any preRender processing necessary for the subclass to pick and render itself.</li>
@@ -443,7 +443,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
      * DrawContext's ordered surface renderable list. Additionally, this prepares the SurfaceObject's pickable
      * representation if the SurfaceObject's containing layer is enabled for picking and the SurfaceObject intersects
      * one of the DrawContext's picking frustums.
-     * <p/>
+     * <p>
      * During ordered preRendering, the {@link gov.nasa.worldwind.SceneController} builds a composite representation of
      * this SurfaceObject and any other SurfaceObject on the DrawContext's ordered surface renderable list. The
      * SceneController causes each SurfaceObject's to draw itself into the composite representation by calling its
@@ -479,7 +479,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
      * DrawContext's ordered surface renderable list. We ignore this call during rendering mode to suppress calls to
      * {@link #render(DrawContext)} during ordered rendering mode. The SceneController already invokes render during
      * ordered picking mode to build a composite representation of the SurfaceObjects.
-     * <p/>
+     * <p>
      * During ordered picking, the {@link gov.nasa.worldwind.SceneController} invokes the SurfaceObject's {@link
      * #pick(DrawContext, java.awt.Point)} method.
      *
@@ -714,7 +714,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
     /**
      * Causes this SurfaceObject to render its bounding sectors to the specified region in geographic coordinates. The
      * specified viewport denotes the geographic region and its corresponding screen viewport.
-     * <p/>
+     * <p>
      * The bounding sectors are rendered as a 1 pixel wide green outline.
      *
      * @param dc  the current DrawContext.

@@ -688,10 +688,10 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     /**
      * Start a new {@link BulkRetrievalThread} that downloads all elevations for a given sector and resolution to the
      * current WorldWind file cache, without downloading imagery already in the cache.
-     * <p/>
+     * <p>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link BasicElevationModelBulkDownloader}.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -713,10 +713,10 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     /**
      * Start a new {@link BulkRetrievalThread} that downloads all elevations for a given sector and resolution to a
      * specified file store, without downloading imagery already in the file store.
-     * <p/>
+     * <p>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link BasicElevationModelBulkDownloader}.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -751,7 +751,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     /**
      * Get the estimated size in bytes of the elevations not in the WorldWind file cache for the given sector and
      * resolution.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -770,7 +770,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     /**
      * Get the estimated size in bytes of the elevations not in a specified file store for the given sector and
      * resolution.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *

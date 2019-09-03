@@ -12,7 +12,7 @@ import gov.nasa.worldwind.symbology.TacticalGraphic;
  * Interface to describe tactical graphics defined by <a href="http://www.assistdocs.com/search/document_details.cfm?ident_number=114934">MIL-STD-2525</a>.
  * See the TacticalGraphic <a title="Tactical Graphic Usage Guide" href="https://goworldwind.org/developers-guide/symbology/tactical-graphics/"
  * target="_blank">Usage Guide</a> for instructions on using TacticalGraphic in an application.
- * <p/>
+ * <p>
  * The following table lists the modifiers supported by 2525 graphics. Note that not all graphics support all modifiers.
  * <table width="100%"> <tr><th>Field</th><th>Modifier key</th><th>Data type</th><th>Description</th></tr>
  * <tr><td>A</td><td>SymbologyConstants.SYMBOL</td><td>String</td><td>SIDC for a MIL-STD-2525 Tactical Symbol</td></tr>
@@ -26,7 +26,7 @@ import gov.nasa.worldwind.symbology.TacticalGraphic;
  * <tr><td>X</td><td>SymbologyConstants.ALTITUDE_DEPTH</td><td>Double</td><td>Altitude/depth</td></tr>
  * <tr><td>AM</td><td>SymbologyConstants.DISTANCE</td><td>Double</td><td>Radius, length or width of rectangle.</td></tr>
  * <tr><td>AN</td><td>SymbologyConstants.AZIMUTH</td><td>Angle</td><td>Azimuth</td></tr> </table>
- * <p/>
+ * <p>
  * Here's an example of setting modifiers during construction of a graphic:
  * <pre>
  * AVList modifiers = new AVListImpl();
@@ -40,7 +40,7 @@ import gov.nasa.worldwind.symbology.TacticalGraphic;
  * // Create the graphic with the modifier list
  * TacticalGraphic graphic = factory.createGraphic("GHMPNEB----AUSX", positions, modifiers);
  * </pre>
- * <p/>
+ * <p>
  * Some graphics support multiple instances of a modifier. For example, 2525 uses the field code W for a date/time
  * modifier. Some graphics support multiple timestamps, in which case the fields are labeled W, W1, W2, etc. An
  * application can pass an {@link Iterable} to <code>setModifier</code> if multiple values are required to specify the
@@ -70,17 +70,17 @@ public interface MilStd2525TacticalGraphic extends TacticalGraphic
      * Specifies this graphic's Status/Operational Condition field. A graphic's Status defines whether the represented
      * object exists at the time the symbol was generated, or is anticipated to exist in the future. Additionally, a
      * graphic's Status can define its operational condition. The recognized values depend on the graphic's scheme:
-     * <p/>
+     * <p>
      * <strong>Tactical graphics</strong>
-     * <p/>
+     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Meteorological and Oceanographic</strong>
-     * <p/>
+     * <p>
      * <ul> <li>Not supported</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Emergency Management</strong>
-     * <p/>
+     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      *
      * @param value the new value for the Status/Operational Condition field.

@@ -22,7 +22,7 @@ import com.jogamp.opengl.GL2;
  * derived from {@link BasicView} {@link BasicView} models the view in terms of a geographic position, and a pitch,
  * heading, and roll. It provides a mapping from that geocentric view model to a 3D graphics modelview matrix. BasicView
  * also manages the projection matrix via a {@link Frustum}.
- * <p/>
+ * <p>
  * The view model is based on
  *
  * @author jym

@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * Illustrates how to configure and display a 3D geographic grid of scalar data using the WorldWind <code>{@link
  * AnalyticSurface}</code>. Analytic surface defines a grid over a geographic <code>{@link Sector}</code> at a specified
  * altitude, and enables the caller to specify the color and height at each grid point.
- * <p/>
+ * <p>
  * This illustrates three key AnalyticSurface configurations: <ul> <li>Displaying a static data set where each grid
  * point uses color and height to indicate the data's magnitude.</li> <li>Displaying data that varies by color over time
  * on the terrain surface.</li> <li>Displaying data that varies by color and height over time at a specified

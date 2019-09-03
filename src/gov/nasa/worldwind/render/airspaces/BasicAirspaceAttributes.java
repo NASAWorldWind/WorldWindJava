@@ -26,7 +26,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     /**
      * Creates a new BasicAirspaceAttributes with the default attributes. The default attributes differ from
      * BasicShapeAttributes, and are as follows:
-     * <p/>
+     * <p>
      * <table> <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
      * <tr><td>drawInterior</td><td><code>true</code></td></tr> <tr><td>drawOutline</td><td><code>false</code></td></tr>
      * <tr><td>enableAntialiasing</td><td><code>false</code></td></tr> <tr><td>enableLighting</td><td><code>true</code></td></tr>
@@ -50,7 +50,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     /**
      * Creates a new BasicAirspaceAttributes with the specified interior material and interior opacity. All other
      * attributes are set to the default values, which differ from BasicShapeAttributes, and are as follows:
-     * <p/>
+     * <p>
      * <table> <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
      * <tr><td>drawInterior</td><td><code>true</code></td></tr> <tr><td>drawOutline</td><td><code>false</code></td></tr>
      * <tr><td>enableAntialiasing</td><td><code>false</code></td></tr> <tr><td>enableLighting</td><td><code>true</code></td></tr>

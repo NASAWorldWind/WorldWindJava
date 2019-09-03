@@ -22,7 +22,7 @@ import java.awt.event.*;
  * related labels), references to the current WorldWindow and mouse location, flags indicating whether the editor is
  * currently armed and whether annotations should be shown, as well as fields indicating the current action being
  * performed, the current editMode, and the current altitudeMode.
- * <p/>
+ * <p>
  * In addition, the class contains several helper functions related to displaying annotations, which all editors should
  * be able to do.
  *

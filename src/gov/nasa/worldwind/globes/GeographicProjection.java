@@ -11,7 +11,7 @@ import gov.nasa.worldwind.geom.*;
 /**
  * Defines an interface to project geographic coordinates to Cartesian coordinates. Used by {@link Globe2D}
  * implementations to transform geographic coordinates to meters and back.
- * <p/>
+ * <p>
  * Each implementation of this interface defines its own constructors, which may accept arguments that completely define
  * the projection.
  *
@@ -55,7 +55,7 @@ public interface GeographicProjection
 
     /**
      * Converts a geographic position to meters in Cartesian coordinates.
-     * <p/>
+     * <p>
      * Note: The input arguments are not checked for <code>null</code> prior to being used. The caller, typically a
      * {@link Globe2D} implementation, is expected do perform that check prior to calling this method.
      *
@@ -75,12 +75,12 @@ public interface GeographicProjection
 
     /**
      * Converts a grid of geographic positions to a grid of points in Cartesian coordinates.
-     * <p/>
+     * <p>
      * This method provides an interface for efficient generation of a grid of cartesian points within a sector. The
      * grid is constructed by dividing the sector into <code>numLon x numLat</code> evenly separated points in
      * geographic coordinates. The first and last points in latitude and longitude are placed at the sector's minimum
      * and maximum boundary, and the remaining points are spaced evenly between those boundary points.
-     * <p/>
+     * <p>
      * For each grid point within the sector, an elevation value is specified via an array of elevations. The
      * calculation at each position incorporates the associated elevation.
      *
@@ -104,7 +104,7 @@ public interface GeographicProjection
 
     /**
      * Converts a Cartesian point in meters to a geographic position.
-     * <p/>
+     * <p>
      * Note: The input arguments are not checked for <code>null</code> prior to being used. The caller, typically a
      * {@link Globe2D} implementation, is expected do perform that check prior to calling this method.
      *

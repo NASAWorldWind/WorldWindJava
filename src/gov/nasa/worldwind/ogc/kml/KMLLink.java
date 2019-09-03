@@ -273,7 +273,7 @@ public class KMLLink extends KMLAbstractObject
      * the the <code>href</code> contains a query string, the <code>viewFormat</code> and <code>httpQuery</code> are
      * appended to that string. If necessary, this inserts the <code>&</code> character between the <code>href</code>'s
      * query string, the <code>viewFormat</code>, and the <code>httpQuery</code>.
-     * <p/>
+     * <p>
      * This substitutes the following parameters in <code>viewFormat</code> and <code>httpQuery</code>: <ul>
      * <li><code>[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]</code> - visible bounds of the globe, or 0 if the globe
      * is not visible. The visible bounds are scaled from their centroid by this link's

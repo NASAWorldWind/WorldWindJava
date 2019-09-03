@@ -377,14 +377,14 @@ public class WWIO
     /**
      * Maps the specified File's bytes directly into memory as a {@link java.nio.MappedByteBuffer} according to the
      * specified mode.
-     * <p/>
+     * <p>
      * If the mode is {@link java.nio.channels.FileChannel.MapMode#READ_ONLY}, the file is mapped in read-only mode, and
      * any attempt to modify the contents of the returned MappedByteBuffer causes a {@link ReadOnlyBufferException}.
-     * <p/>
+     * <p>
      * If the mode is {@link java.nio.channels.FileChannel.MapMode#READ_WRITE}, the file is mapped in read-write mode.
      * Changing the contents of the returned MappedByteBuffer to be eventually propagated to the file. The specified
      * file must be avialable for both reading and writing.
-     * <p/>
+     * <p>
      * If the mode is {@link java.nio.channels.FileChannel.MapMode#PRIVATE}, the file is mapped in copy-on-write mode.
      * Changing the contents of the returned MappedByteBuffer causes private copies of portions of the buffer to be
      * created. The specified file must be avialable for both reading and writing.
@@ -1258,7 +1258,7 @@ public class WWIO
 
     /**
      * Indicates whether a {@link File} contains content of a specified mime type.
-     * <p/>
+     * <p>
      * Only the filename suffix is consulted to determine the file's content type.
      *
      * @param file      the file to test.
@@ -2044,7 +2044,7 @@ public class WWIO
     /**
      * Open a reader on an input source. The source may be one of the following: <ul> <li>{@link Reader}</li> <li>{@link
      * InputStream}</li> <li>{@link File}</li> <li>{@link URL}</li> <li>{@link String}</li> </ul>
-     * <p/>
+     * <p>
      * Readers are used to read character streams.
      *
      * @param src the input source of one of the above types.

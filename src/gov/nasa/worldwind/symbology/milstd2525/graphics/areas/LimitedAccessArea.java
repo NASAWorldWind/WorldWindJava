@@ -136,7 +136,7 @@ public class LimitedAccessArea extends AbstractMilStd2525TacticalGraphic
      * the terrain at the latitude and longitude of its position.</li> <li>WorldWind.RELATIVE_TO_GROUND -- this graphic
      * is placed above the terrain at the latitude and longitude of its position and the distance specified by its
      * elevation.</li> <li>WorldWind.ABSOLUTE -- this graphic is placed at its specified position.</li> </ul>
-     * <p/>
+     * <p>
      * This symbol assumes the altitude mode WorldWind.ABSOLUTE if the specified mode is not recognized.
      *
      * @param altitudeMode this graphic new altitude mode.

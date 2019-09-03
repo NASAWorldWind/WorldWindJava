@@ -22,7 +22,7 @@ import java.util.*;
  * a {@code LookAt} or {@code Camera} view, or to animate to a default view a KML feature that does not define a view.
  * Subclasses of this base class implement animator logic for particular types of {@link View}, for example {@link
  * OrbitView}.
- * <p/>
+ * <p>
  * An application that provides a custom View implementation can extend this base class to provide a KML controller for
  * the custom view.
  *

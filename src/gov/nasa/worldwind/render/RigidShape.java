@@ -1369,7 +1369,7 @@ public abstract class RigidShape extends AbstractShape
 
     /**
      * Get or create OpenGL resource IDs for the current data cache entry.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param index the index of the LOD whose VboID's will be retrieved.
@@ -1393,7 +1393,7 @@ public abstract class RigidShape extends AbstractShape
 
     /**
      * Removes from the GPU resource cache the entry for the current data cache entry's VBOs.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.

@@ -14,7 +14,7 @@ import java.nio.DoubleBuffer;
 
 /**
  * This interface provides access to individual terrain tiles, which are contained in a {@link SectorGeometryList}.
- * <p/>
+ * <p>
  * Note: Three methods of this class assume that the {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
  * method of the containing sector geometry list has been called prior to calling them. They are {@link
  * #pick(gov.nasa.worldwind.render.DrawContext, java.awt.Point)}, {@link #pick(gov.nasa.worldwind.render.DrawContext,
@@ -41,7 +41,7 @@ public interface SectorGeometry extends Renderable
     /**
      * Performs a pick on the geometry. The result, if any, is added to the draw context's picked-object list. See
      * {@link gov.nasa.worldwind.render.DrawContext#getPickedObjects()}.
-     * <p/>
+     * <p>
      * Note: This method assumes that {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
      * was called prior to this method.
      *
@@ -85,7 +85,7 @@ public interface SectorGeometry extends Renderable
     /**
      * Displays the geometry. The number of texture units to use may be specified, but at most only the number of
      * available units are used.
-     * <p/>
+     * <p>
      * Note: This method assumes that {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
      * was called prior to this method.
      *
@@ -128,7 +128,7 @@ public interface SectorGeometry extends Renderable
 
     /**
      * Performs a pick on the geometry.
-     * <p/>
+     * <p>
      * Note: This method assumes that {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
      * was called prior to this method.
      *
@@ -184,7 +184,7 @@ public interface SectorGeometry extends Renderable
     /**
      * Displays the geometry. The number of texture units to use may be specified, but at most only the number of
      * available units are used.
-     * <p/>
+     * <p>
      * Note: This method allows but does not require that {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
      * was called prior to this method. See the description of the <code>beginRenderingCalled</code> argument.
      *
@@ -202,7 +202,7 @@ public interface SectorGeometry extends Renderable
 
     /**
      * Displays the geometry.
-     * <p/>
+     * <p>
      * Note: This method allows but does not require that {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
      * was called prior to this method. See the description of the <code>beginRenderingCalled</code> argument.
      *

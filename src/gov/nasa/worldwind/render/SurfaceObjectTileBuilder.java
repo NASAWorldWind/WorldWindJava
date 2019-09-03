@@ -25,22 +25,22 @@ import java.util.List;
  * SurfaceObjectTileBuilder directly. WorldWind's default scene controller automatically batches instances of
  * SurfaceRenderable in a single SurfaceObjectTileBuilder. Applications that need to draw basic surface shapes should
  * use or extend {@link gov.nasa.worldwind.render.SurfaceShape} instead of using SurfaceObjectTileBuilder directly.
- * <p/>
+ * <p>
  * Surface tiles are built by calling {@link #buildTiles(DrawContext, Iterable)} with an iterable of surface
  * renderables. This assembles a set of surface tiles that meet the resolution requirements for the specified draw
  * context, then draws the surface renderables into those offscreen surface tiles by calling render on each instance.
  * This process may temporarily use the framebuffer to perform offscreen rendering, and therefore should be called
  * during the preRender method of a WorldWind layer. See the {@link gov.nasa.worldwind.render.PreRenderable} interface
  * for details. Once built, the surface tiles can be rendered by a {@link gov.nasa.worldwind.render.SurfaceTileRenderer}.
- * <p/>
+ * <p>
  * By default, SurfaceObjectTileBuilder creates texture tiles with a width and height of 512 pixels, and with internal
  * format <code>GL_RGBA</code>. These parameters are configurable by calling {@link
  * #setTileDimension(java.awt.Dimension)} or {@link #setTileTextureFormat(int)}.
- * <p/>
+ * <p>
  * The most common usage pattern for SurfaceObjectTileBuilder is to build the surface tiles from a set of surface
  * renderables during the preRender phase, then draw those surface tiles during the render phase. For example, a
  * renderable can use SurfaceObjectTileBuilder to draw a set of surface renderables as follows:
- * <p/>
+ * <p>
  * <code>
  * <pre>
  * class MyRenderable implements Renderable, PreRenderable
@@ -216,7 +216,7 @@ public class SurfaceObjectTileBuilder
      * <li>GL_RGB5_A1</li> <li>GL_RGBA8</li> <li>GL_RGB10_A2</li> <li>GL_RGBA12</li> <li>GL_RGBA16</li>
      * <li>GL_SLUMINANCE</li> <li>GL_SLUMINANCE8</li> <li>GL_SLUMINANCE_ALPHA</li> <li>GL_SLUMINANCE8_ALPHA8</li>
      * <li>GL_SRGB</li> <li>GL_SRGB8</li> <li>GL_SRGB_ALPHA</li> <li>GL_SRGB8_ALPHA8</li> </ul> </code>
-     * <p/>
+     * <p>
      * If the texture format is any of <code>GL_RGB, GL_RGB8, GL_RGBA, or GL_RGBA8</code>, the tile builder attempts to
      * use OpenGL framebuffer objects to render shapes to the texture tiles. Otherwise, this renders shapes to the
      * framebuffer and copies the framebuffer contents to the texture tiles.
@@ -372,7 +372,7 @@ public class SurfaceObjectTileBuilder
      * surface tiles are assembled to meet the necessary resolution of to the draw context's {@link
      * gov.nasa.worldwind.View}. This may temporarily use the framebuffer to perform offscreen rendering, and therefore
      * should be called during the preRender method of a WorldWind {@link gov.nasa.worldwind.layers.Layer}.
-     * <p/>
+     * <p>
      * This does nothing if the specified iterable is null, is empty or contains no surface renderables.
      *
      * @param dc       the draw context to build tiles for.
@@ -505,7 +505,7 @@ public class SurfaceObjectTileBuilder
     /**
      * Updates each {@link SurfaceObjectTileBuilder.SurfaceObjectTile} in the {@link #currentInfo}. This is typically
      * called after {@link #assembleTiles(DrawContext)} to update the assembled tiles.
-     * <p/>
+     * <p>
      * This method does nothing if <code>currentTiles</code> is empty.
      *
      * @param dc the draw context the tiles relate to.
@@ -619,10 +619,10 @@ public class SurfaceObjectTileBuilder
 
     /**
      * Returns a new surface tile texture for use on the specified draw context with the specified width and height.
-     * <p/>
+     * <p>
      * The returned texture's internal format is specified by <code>tilePixelFormat</code>. If
      * <code>tilePixelFormat</code> is zero, this returns a texture with internal format <code>GL_RGBA8</code>.
-     * <p/>
+     * <p>
      * The returned texture's parameters are configured as follows: <table> <tr><th>Parameter
      * Name</th><th>Value</th></tr> <tr><td><code>GL.GL_TEXTURE_MIN_FILTER</code></td><td><code>GL_LINEAR_MIPMAP_LINEAR</code>
      * if <code>useLinearFilter</code> and <code>useMipmaps</code> are both true, <code>GL_LINEAR</code> if
@@ -742,15 +742,15 @@ public class SurfaceObjectTileBuilder
      * <code>SurfaceObjectTileBuilder</code> share common LevelSets to determine which tiles are visible, but create
      * unique tile instances and uses a unique tile cache name. Since all instances use the same tile structure to
      * determine visible tiles, this saves memory while ensuring that each instance stores its own tiles in the cache.
-     * <p/>
+     * <p>
      * The returned LevelSet's cache name and dataset name are dummy values, and should not be used. Use this tile
      * builder's cache name for the specified <code>tileDimension</code> instead.
-     * <p/>
+     * <p>
      * In practice, there are at most 10 dimensions we use: 512, 256, 128, 64, 32, 16, 8, 4, 2, 1. Therefore keeping the
      * <code>LevelSet</code>s in a map requires little memory overhead, and ensures each <code>LevelSet</code> is
      * retained once constructed. Retaining references to the <code>LevelSet</code>s means we're able to re-use the
      * texture resources associated with each <code>LevelSet</code> in the <code>DrawContext</code>'s texture cache.
-     * <p/>
+     * <p>
      * Subsequent calls are guaranteed to return the same <code>LevelSet</code> for the same
      * <code>tileDimension</code>.
      *
@@ -826,7 +826,7 @@ public class SurfaceObjectTileBuilder
      * frustum during rendering mode, and against the DrawContext's pick frustums during picking mode. If a tile does
      * not meet the tile builder's resolution criteria, it's split into four sub-tiles and the process recursively
      * repeated on the sub-tiles. Visible leaf tiles are added to the {@link #currentInfo}.
-     * <p/>
+     * <p>
      * During assembly each surface renderable in {@link #currentSurfaceObjects} is sorted into the tiles they
      * intersect. The top level tiles are used as an index to quickly determine which tiles each renderable intersects.
      * Surface renderables are sorted into sub-tiles by simple intersection tests, and are added to each tile's surface
@@ -923,7 +923,7 @@ public class SurfaceObjectTileBuilder
      * Potentially adds the specified tile or its descendants to the tile builder's {@link #currentInfo}. The tile and
      * its descendants are discarded if the tile is not visible or does not intersect any surface renderables in the
      * parent's surface renderable list. See {@link SurfaceObjectTileBuilder.SurfaceObjectTile#getObjectList()}.
-     * <p/>
+     * <p>
      * If the tile meet the tile builder's resolution criteria it's added to the tile builder's
      * <code>currentTiles</code> list. Otherwise, it's split into four sub-tiles and each tile is recursively processed.
      * See {@link #meetsRenderCriteria(DrawContext, gov.nasa.worldwind.util.LevelSet, gov.nasa.worldwind.util.Tile)}.
@@ -1149,7 +1149,7 @@ public class SurfaceObjectTileBuilder
      * Creates a key to address the tile information associated with the specified draw context. Each key is unique to
      * this instance, the tile dimensions that fit in the draw context's viewport, and the globe offset when a 2D globe
      * is in use. Using a unique set of tile information ensures that
-     * <p/>
+     * <p>
      * In practices, there are at most 10 dimensions we'll use (512, 256, 128, 64, 32, 16, 8, 4, 2, 1) and 3 globe
      * offsets (-1, 0, 1). Therefore there are at most 30 sets of tile information for each instance of
      * SurfaceObjectTileBuilder.
@@ -1457,7 +1457,7 @@ public class SurfaceObjectTileBuilder
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Overridden to return a new SurfaceObjectTile. The returned tile is created with the same cache name as this
          * tile.
          */
@@ -1469,7 +1469,7 @@ public class SurfaceObjectTileBuilder
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Overridden to return a TileKey with the same cache name as this tile.
          */
         @Override

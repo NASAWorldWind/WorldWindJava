@@ -20,7 +20,7 @@ import java.awt.event.*;
  * gov.nasa.worldwind.util.HotSpot}. The active HotSpot is updated on {@link gov.nasa.worldwind.event.SelectEvent#ROLLOVER}
  * select events, but not during a drag operation. This ensures that the active HotSpot remains active while it's being
  * dragged, regardless of what's under the cursor.
- * <p/>
+ * <p>
  * The active HotSpot is updated during non-drag rollover select events as follows: <ul> <li>The select event's top
  * picked object, if the top picked object implements {@link gov.nasa.worldwind.util.HotSpot}.</li> <li>The value for
  * {@code SelectEvent.getTopPickedObject().getValue(AVKey.HOT_SPOT)},if the value for key {@link
@@ -61,7 +61,7 @@ public class HotSpotController implements SelectListener, MouseMotionListener
     /**
      * Updates the active {@link gov.nasa.worldwind.util.HotSpot} if necessary, and forwards the select event to the
      * active HotSpot. This does nothing if the select event is {@code null}.
-     * <p/>
+     * <p>
      * This forwards the select event to {@link #doSelected(gov.nasa.worldwind.event.SelectEvent)}, and catches and logs
      * any exceptions thrown by {@code doSelected}.
      *

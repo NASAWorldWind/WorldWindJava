@@ -52,7 +52,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     /**
      * Creates a new <code>BasicBalloonAttributes</code> with the default attributes. The default attributes are as
      * follows:
-     * <p/>
+     * <p>
      * <table> <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
      * <tr><td>drawInterior</td><td><code>true</code></td></tr> <tr><td>drawOutline</td><td><code>true</code></td></tr>
      * <tr><td>enableAntialiasing</td><td><code>true</code></td></tr> <tr><td>enableLighting</td><td><code>false</code></td></tr>
@@ -114,7 +114,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overrides the superclass' behavior to return a new <code>BasicBalloonAttributes</code>.
      */
     public ShapeAttributes copy()
@@ -124,7 +124,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Extends the superclass' behavior to copy <code>BalloonAttributes</code> if the specified <code>attributes</code>
      * is an instance of <code>BalloonAttributes</code>.
      */

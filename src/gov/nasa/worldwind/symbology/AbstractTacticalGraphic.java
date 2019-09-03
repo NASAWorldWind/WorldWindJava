@@ -22,7 +22,7 @@ import java.util.List;
  * href="https://goworldwind.org/developers-guide/symbology/tactical-graphics/" target="_blank">Usage Guide</a> for
  * instructions on using TacticalGraphic in an application. This base class provides functionality for creating and
  * rendering a graphic that is made up of one or more shapes, and text labels.
- * <p/>
+ * <p>
  * Implementations must implement at least {@link #doRenderGraphic(gov.nasa.worldwind.render.DrawContext)
  * doRenderGraphic} and {@link #applyDelegateOwner(Object)}.
  *

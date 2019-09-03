@@ -67,11 +67,11 @@ public class MilStd2525TacticalSymbol extends AbstractTacticalSymbol
      * position. This constructor does not accept any supplemental modifiers, so the symbol contains only the attributes
      * specified by its symbol identifier. This constructor does not accept any icon retrieval path, so the created
      * symbol retrieves its icons from the default location.
-     * <p/>
+     * <p>
      * The symbolId specifies the tactical symbol's appearance. The symbolId must be a 15-character alphanumeric symbol
      * identification code (SIDC). The symbol's shape, fill color, outline color, and icon are all defined by the symbol
      * identifier. Use the '-' character to specify null entries in the symbol identifier.
-     * <p/>
+     * <p>
      * The position specifies the latitude, longitude, and altitude where the symbol is drawn on the globe. The
      * position's altitude component is interpreted according to the altitudeMode.
      *
@@ -92,14 +92,14 @@ public class MilStd2525TacticalSymbol extends AbstractTacticalSymbol
      * Constructs a tactical symbol for the MIL-STD-2525 symbology set with the specified symbol identifier, position,
      * and list of modifiers. This constructor does not accept any icon retrieval path, so the created symbol retrieves
      * its icons from the default location.
-     * <p/>
+     * <p>
      * The symbolId specifies the tactical symbol's appearance. The symbolId must be a 15-character alphanumeric symbol
      * identification code (SIDC). The symbol's shape, fill color, outline color, and icon are all defined by the symbol
      * identifier. Use the '-' character to specify null entries in the symbol identifier.
-     * <p/>
+     * <p>
      * The position specifies the latitude, longitude, and altitude where the symbol is drawn on the globe. The
      * position's altitude component is interpreted according to this symbol's altitudeMode.
-     * <p/>
+     * <p>
      * The modifiers specify supplemental graphic and text attributes as key-value pairs. See the
      * MilStd2525TacticalSymbol class documentation for the list of recognized modifiers. In the case where both the
      * symbol identifier and the modifiers list specify the same attribute, the modifiers list has priority.
@@ -171,18 +171,18 @@ public class MilStd2525TacticalSymbol extends AbstractTacticalSymbol
      * object exists at the time the symbol was generated, or is anticipated to exist in the future. Additionally, a
      * symbol's Status can define its operational condition. The recognized values depend on the specific MIL-STD-2525
      * symbology scheme the symbol belongs to:
-     * <p/>
+     * <p>
      * <strong>Warfighting, Signals Intelligence, Stability Operations</strong>
-     * <p/>
+     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> <li>STATUS_PRESENT_FULLY_CAPABLE</li>
      * <li>STATUS_PRESENT_DAMAGED</li> <li>STATUS_PRESENT_DESTROYED</li> <li>STATUS_PRESENT_FULL_TO_CAPACITY</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Tactical Graphics</strong>
-     * <p/>
+     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Emergency Management</strong>
-     * <p/>
+     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      *
      * @param value the new value for the Status/Operational Condition field.
@@ -224,9 +224,9 @@ public class MilStd2525TacticalSymbol extends AbstractTacticalSymbol
     /**
      * Specifies whether to draw this symbol's frame. The showFrame property provides control over this tactical
      * symbol's display option hierarchy as defined by MIL-STD-2525C, section 5.4.5 and table III.
-     * <p/>
+     * <p>
      * When <code>true</code>, this symbol's frame is drawn. This state corresponds to MIL-STD-2525C, table III, row 1.
-     * <p/>
+     * <p>
      * When <code>false</code>, this symbol's frame is not drawn. Instead, only the symbol's internal icon is drawn.
      * This state corresponds to MIL-STD-2525C, table III, row 4.
      *
@@ -252,9 +252,9 @@ public class MilStd2525TacticalSymbol extends AbstractTacticalSymbol
     /**
      * Specifies whether to draw this symbol's fill. The showFill property provides control over this tactical symbol's
      * display option hierarchy as defined by MIL-STD-2525C, section 5.4.5 and table III.
-     * <p/>
+     * <p>
      * When <code>true</code>, this symbol's fill is drawn. This state corresponds to MIL-STD-2525C, table III, row 1.
-     * <p/>
+     * <p>
      * When <code>false</code>, this symbol's fill is not drawn. Instead, only the symbol's frame and internal icon are
      * drawn. This state corresponds to MIL-STD-2525C, table III, row 2.
      *
@@ -280,9 +280,9 @@ public class MilStd2525TacticalSymbol extends AbstractTacticalSymbol
     /**
      * Specifies whether to draw this symbol's internal icon. The showIcon property provides control over this tactical
      * symbol's display option hierarchy as defined by MIL-STD-2525C, section 5.4.5 and table III.
-     * <p/>
+     * <p>
      * When <code>true</code>, this symbol's icon is drawn. This state corresponds to MIL-STD-2525C, table III, row 1.
-     * <p/>
+     * <p>
      * When <code>false</code>, this symbol's icon is not drawn. Instead, only the symbol's frame and fill are drawn.
      * This state corresponds to MIL-STD-2525C, table III, row 5.
      *

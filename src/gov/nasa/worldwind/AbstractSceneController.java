@@ -1073,7 +1073,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
      * gov.nasa.worldwind.render.SurfaceObject#render(gov.nasa.worldwind.render.DrawContext)} in ordered rendering mode.
      * This does nothing if the ordered surface renderable queue is empty, or if it does not contain any
      * SurfaceObjects.
-     * <p/>
+     * <p>
      * This method is called during the preRender phase, and is therefore free to modify the framebuffer contents to
      * create the composite representation.
      *

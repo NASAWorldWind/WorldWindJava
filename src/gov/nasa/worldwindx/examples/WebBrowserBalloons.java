@@ -21,7 +21,7 @@ import java.io.InputStream;
  * form of a screen-aligned balloon. There are two browser balloon types: <code>{@link ScreenBrowserBalloon}</code>
  * which displays a balloon at a point on the screen, and <code>{@link GlobeBrowserBalloon}</code> which displays a
  * balloon attached to a position on the Globe.
- * <p/>
+ * <p>
  * <strong>Browser Balloon Content</strong> <br/> A balloon's HTML content is specified by calling <code>{@link
  * Balloon#setText(String)}</code> with a string containing either plain text or HTML + JavaScript. The balloon's visual
  * attributes are specified by calling <code>{@link Balloon#setAttributes(gov.nasa.worldwind.render.BalloonAttributes)}</code>

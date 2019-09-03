@@ -14,11 +14,11 @@ import java.io.*;
 
 /**
  * Computes EGM96 geoid offsets.
- * <p/>
+ * <p>
  * A file with the offset grid must be passed to the constructor. This file must have 721 rows of 1440 2-byte integer
  * values. Each row corresponding to a latitude, with the first row corresponding to +90 degrees (90 North). The integer
  * values must be in centimeters.
- * <p/>
+ * <p>
  * Once constructed, the instance can be passed to {@link gov.nasa.worldwind.globes.EllipsoidalGlobe#applyEGMA96Offsets(String)}
  * to apply the offets to elevations produced by the globe.
  *

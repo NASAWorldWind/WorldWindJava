@@ -109,11 +109,11 @@ public class KMLLayerTreeNode extends LayerTreeNode
 
     /**
      * Adds a new <code>KMLFeatureTreeNode</code> to this node for each KML feature in the <code>KMLRoot</code>.
-     * <p/>
+     * <p>
      * If the <code>KMLRoot</code>'s top level feature is a <code>Document</code> or <code>Folder</code>, this method
      * ignores this container and adds its children directly to this node. Creating a node for the container adds an
      * extra level to the tree node that doesn't provide any meaningful grouping.
-     * <p/>
+     * <p>
      * This does nothing if the <code>KMLRoot</code>'s top level feature is <code>null</code>.
      */
     protected void addChildFeatures()
@@ -183,10 +183,10 @@ public class KMLLayerTreeNode extends LayerTreeNode
     /**
      * Expands paths in the specified <code>tree</code> corresponding to open KML container elements. This assumes that
      * the <code>tree</code>'s model contains this node.
-     * <p/>
+     * <p>
      * This node's path is expanded if it's top level KML feature is an open KML container, an open KML network link, or
      * is any other kind of KML feature.
-     * <p/>
+     * <p>
      * This calls <code>expandOpenContainers</code> on all children which are instances of
      * <code>KMLFeatureTreeNode</code>.
      *

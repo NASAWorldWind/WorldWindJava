@@ -232,7 +232,7 @@ public class IconLayer extends AbstractLayer
      * maintain a reference to <code>iconIterable</code> strictly for picking and rendering. This layer will not modify
      * the Iterable reference. However, this will clear the internal collection of Icons, and will prevent any
      * modification to its contents via <code>addIcon, addIcons, or removeIcons</code>.
-     * <p/>
+     * <p>
      * If the specified <code>iconIterable</code> is null, this layer will revert to maintaining its internal
      * collection.
      *
