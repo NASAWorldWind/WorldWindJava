@@ -40,16 +40,15 @@ import java.util.List;
  * The most common usage pattern for SurfaceObjectTileBuilder is to build the surface tiles from a set of surface
  * renderables during the preRender phase, then draw those surface tiles during the render phase. For example, a
  * renderable can use SurfaceObjectTileBuilder to draw a set of surface renderables as follows:
- * <p>
- * <code>
  * <pre>
+ * <code>
  * class MyRenderable implements Renderable, PreRenderable
  * {
  *     protected SurfaceObjectTileBuilder tileBuilder = new SurfaceObjectTileBuilder();
  *
  *     public void preRender(DrawContext dc)
  *     {
- *         List<?> surfaceRenderables = Arrays.asList(
+ *         List&lt;?&gt; surfaceRenderables = Arrays.asList(
  *             new SurfaceCircle(LatLon.fromDegrees(0, 100), 10000),
  *             new SurfaceSquare(LatLon.fromDegrees(0, 101), 10000));
  *         this.tileBuilder.buildSurfaceTiles(dc, surfaceRenderables);
@@ -60,8 +59,8 @@ import java.util.List;
  *         dc.getGeographicSurfaceTileRenderer().renderTiles(dc, this.tileBuilder.getTiles(dc));
  *     }
  * }
- * </pre>
  * </code>
+ * </pre>
  *
  * @author dcollins
  * @version $Id: SurfaceObjectTileBuilder.java 3108 2015-05-26 19:07:06Z dcollins $
@@ -202,7 +201,7 @@ public class SurfaceObjectTileBuilder
 
     /**
      * Specifies the surface tile's OpenGL texture format. A value of 0 indicates that the default format should be
-     * used. Otherwise, the texture format may be one of the following: <code> <ul> <li>GL_ALPHA</li> <li>GL_ALPHA4</li>
+     * used. Otherwise, the texture format may be one of the following: <ul> <li>GL_ALPHA</li> <li>GL_ALPHA4</li>
      * <li>GL_ALPHA8</li> <li>GL_ALPHA12</li> <li>GL_ALPHA16</li> <li>GL_COMPRESSED_ALPHA</li>
      * <li>GL_COMPRESSED_LUMINANCE</li> <li>GL_COMPRESSED_LUMINANCE_ALPHA</li> <li>GL_COMPRESSED_INTENSITY</li>
      * <li>GL_COMPRESSED_RGB</li> <li>GL_COMPRESSED_RGBA</li> <li>GL_DEPTH_COMPONENT</li> <li>GL_DEPTH_COMPONENT16</li>
@@ -215,7 +214,7 @@ public class SurfaceObjectTileBuilder
      * <li>GL_RGB10</li> <li>GL_RGB12</li> <li>GL_RGB16</li> <li>GL_RGBA</li> <li>GL_RGBA2</li> <li>GL_RGBA4</li>
      * <li>GL_RGB5_A1</li> <li>GL_RGBA8</li> <li>GL_RGB10_A2</li> <li>GL_RGBA12</li> <li>GL_RGBA16</li>
      * <li>GL_SLUMINANCE</li> <li>GL_SLUMINANCE8</li> <li>GL_SLUMINANCE_ALPHA</li> <li>GL_SLUMINANCE8_ALPHA8</li>
-     * <li>GL_SRGB</li> <li>GL_SRGB8</li> <li>GL_SRGB_ALPHA</li> <li>GL_SRGB8_ALPHA8</li> </ul> </code>
+     * <li>GL_SRGB</li> <li>GL_SRGB8</li> <li>GL_SRGB_ALPHA</li> <li>GL_SRGB8_ALPHA8</li> </ul> 
      * <p>
      * If the texture format is any of <code>GL_RGB, GL_RGB8, GL_RGBA, or GL_RGBA8</code>, the tile builder attempts to
      * use OpenGL framebuffer objects to render shapes to the texture tiles. Otherwise, this renders shapes to the
@@ -623,14 +622,14 @@ public class SurfaceObjectTileBuilder
      * The returned texture's internal format is specified by <code>tilePixelFormat</code>. If
      * <code>tilePixelFormat</code> is zero, this returns a texture with internal format <code>GL_RGBA8</code>.
      * <p>
-     * The returned texture's parameters are configured as follows: <table> <tr><th>Parameter
+     * The returned texture's parameters are configured as follows: <table> <caption style="font-weight: bold;">Parameters</caption><tr><th>Parameter
      * Name</th><th>Value</th></tr> <tr><td><code>GL.GL_TEXTURE_MIN_FILTER</code></td><td><code>GL_LINEAR_MIPMAP_LINEAR</code>
      * if <code>useLinearFilter</code> and <code>useMipmaps</code> are both true, <code>GL_LINEAR</code> if
      * <code>useLinearFilter</code> is true and <code>useMipmaps</code> is false, and <code>GL_NEAREST</code> if
      * <code>useLinearFilter</code> is false.</td></tr> <tr><td><code>GL.GL_TEXTURE_MAG_FILTER</code></td><td><code>GL_LINEAR</code>
      * if <code>useLinearFilter</code> is true, <code>GL_NEAREST</code> if <code>useLinearFilter</code> is
      * false.</td></tr> <tr><td><code>GL.GL_TEXTURE_WRAP_S</code></td><td><code>GL_CLAMP_TO_EDGE</code></td></tr>
-     * <tr><td><code>GL.GL_TEXTURE_WRAP_T</code></td><td><code>GL_CLAMP_TO_EDGE</code></td></tr>
+     * <tr><td><code>GL.GL_TEXTURE_WRAP_T</code></td><td><code>GL_CLAMP_TO_EDGE</code></td></tr></table>
      *
      * @param dc     the draw context to create a texture for.
      * @param width  the texture's width, in pixels.

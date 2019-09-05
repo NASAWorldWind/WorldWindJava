@@ -397,7 +397,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
      * Determines whether the layer list frame is minimized. When minimized, the layer list only contains itself as the
      * only item, and thus shrinks toward it's corner position.
      *
-     * @return <ode>true</code> if the layer list frame is minimized.
+     * @return <code>true</code> if the layer list frame is minimized.
      */
     public boolean isMinimized()
     {
@@ -408,7 +408,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
      * Set the layer list frame to be minimized. When minimized, the layer list only contains itself as the only item,
      * and thus shrinks toward it's corner position.
      *
-     * @param minimized <ode>true</code> if the layer list frame sould be minimized.
+     * @param minimized <code>true</code> if the layer list frame sould be minimized.
      */
     public void setMinimized(boolean minimized)
     {
@@ -772,7 +772,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
     /**
      * Change the annotation appearance according to the given highlighted state.
      *
-     * @param highlighted <ode>true</code> if the annotation should appear highlighted.
+     * @param highlighted <code>true</code> if the annotation should appear highlighted.
      */
     protected void highlight(boolean highlighted)
     {

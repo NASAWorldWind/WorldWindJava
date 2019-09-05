@@ -22,7 +22,7 @@ import java.io.InputStream;
  * which displays a balloon at a point on the screen, and <code>{@link GlobeBrowserBalloon}</code> which displays a
  * balloon attached to a position on the Globe.
  * <p>
- * <strong>Browser Balloon Content</strong> <br/> A balloon's HTML content is specified by calling <code>{@link
+ * <strong>Browser Balloon Content</strong> <br> A balloon's HTML content is specified by calling <code>{@link
  * Balloon#setText(String)}</code> with a string containing either plain text or HTML + JavaScript. The balloon's visual
  * attributes are specified by calling <code>{@link Balloon#setAttributes(gov.nasa.worldwind.render.BalloonAttributes)}</code>
  * with an instance of <code>{@link BalloonAttributes}</code>.

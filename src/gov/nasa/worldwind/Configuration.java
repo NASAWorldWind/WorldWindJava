@@ -502,8 +502,8 @@ public class Configuration // Singleton
      * Returns the path to the current user's application data directory. The path returned depends on the operating
      * system on which the Java Virtual Machine is running. The following table provides the path for all supported
      * operating systems:
-     * <p>
-     * <table> <tr><th>Operating System</th><th>Path</th></tr> <tr><td>Mac OS X</td><td>~/Library/Application
+     * <table><caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Operating System</th><th>Path</th></tr> <tr><td>Mac OS X</td><td>~/Library/Application
      * Support</td></tr> <tr><td>Windows</td><td>~\\Application Data</td></tr> <tr><td>Linux, Unix,
      * Solaris</td><td>~/</td></tr> </table>
      *
@@ -647,7 +647,6 @@ public class Configuration // Singleton
      * Returns the highest OpenGL profile available on the current graphics device that is compatible with WorldWind.
      * The returned profile favors hardware acceleration over software acceleration. With JOGL version 2.0, this returns
      * the highest available profile from the following list:
-     * <p>
      * <ul> <li>OpenGL compatibility profile 4.x</li> <li>OpenGL compatibility profile 3.x</li> <li>OpenGL profile 1.x
      * up to 3.0</li> </ul>
      *

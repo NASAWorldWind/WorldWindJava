@@ -644,7 +644,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
      *
      * @return instance of the DataStoreProducer
      *
-     * @throws IllegalArgumentException, if types of rasters do not match, or array of raster files is null or empty
+     * @throws IllegalArgumentException if types of rasters do not match, or array of raster files is null or empty
      */
     protected static DataStoreProducer createDataStoreProducerFromFiles(File[] files) throws IllegalArgumentException
     {

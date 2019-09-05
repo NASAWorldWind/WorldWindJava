@@ -521,7 +521,7 @@ public class WWIO
      * @param url      the URL to read.
      * @param encoding the encoding do use. If <code>null</code> is specified then UTF-8 is used.
      *
-     * @return the string representation of the bytes at the <code<URL</code> decoded according to the specified
+     * @return the string representation of the bytes at the <code>URL</code> decoded according to the specified
      *         encoding.
      *
      * @throws IllegalArgumentException if the <code>url</code> is null.
@@ -1470,7 +1470,8 @@ public class WWIO
 
     /**
      * Returns the data type constant corresponding to the specified mime type string. Supported mime types are as
-     * mapped to data types as follows: <table> <tr><th>Mime Type</th><th>Data Type</th></tr>
+     * mapped to data types as follows: <table> <caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Mime Type</th><th>Data Type</th></tr>
      * <tr><td>application/bil32</td><td>{@link gov.nasa.worldwind.avlist.AVKey#FLOAT32}</td></tr>
      * <tr><td>application/bil16</td><td>{@link gov.nasa.worldwind.avlist.AVKey#INT16}</td></tr>
      * <tr><td>application/bil</td><td>{@link gov.nasa.worldwind.avlist.AVKey#INT16}</td></tr>
@@ -2507,7 +2508,7 @@ public class WWIO
      * Determines whether a jar URL is a reference to a local jar file or an entry in a local jar file. See {@link
      * java.net.JarURLConnection} for a description of jar URLs.
      *
-     * @param jarUrl the jar URL, in the form jar:<url>!{entry}. (Omit <, >, { and } in the actual URL}
+     * @param jarUrl the jar URL, in the form jar:[url]!{entry}. (Omit [, ], { and } in the actual URL
      *
      * @return true if the URL refers to a local resource, otherwise false.
      */

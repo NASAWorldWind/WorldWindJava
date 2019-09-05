@@ -22,9 +22,9 @@ import java.util.List;
 
 /**
  * Demonstrates the simplest possible usage of WorldWind {@link TacticalSymbol} and {@link
- * gov.nasa.worldwind.symbology.TacticalGraphic} to display symbols from the MIL-STD-2525 symbology set. See the <a
- * title="Symbology Usage Guide" href="https://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology
- * Usage Guide</a> for more information on symbology support in WorldWind.
+ * gov.nasa.worldwind.symbology.TacticalGraphic} to display symbols from the MIL-STD-2525 symbology set. See the
+ * <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
+ * for more information on symbology support in WorldWind.
  * <p>
  * For more detailed examples of how to use TacticalSymbol and TacticalGraphic in an application, see the {@link
  * TacticalSymbols} example and the {@link TacticalGraphics} example.

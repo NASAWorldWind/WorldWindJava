@@ -231,7 +231,8 @@ public class OGLUtil
 
     /**
      * Returns an OpenGL pixel format corresponding to the specified texture internal format. This maps internal format
-     * to pixel format as follows: <code> <table> <tr><th>Internal Format</th><th>Pixel Format</th></tr>
+     * to pixel format as follows:<table><caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Internal Format</th><th>Pixel Format</th></tr>
      * <tr><td>GL2.GL_ALPHA</td><td>GL2.GL_ALPHA</td></tr> <tr><td>GL2.GL_ALPHA4</td><td>GL2.GL_ALPHA</td></tr>
      * <tr><td>GL2.GL_ALPHA8</td><td>GL2.GL_ALPHA</td></tr> <tr><td>GL2.GL_ALPHA12</td><td>GL2.GL_ALPHA</td></tr>
      * <tr><td>GL2.GL_ALPHA16</td><td>GL2.GL_ALPHA</td></tr> <tr><td>GL2.GL_COMPRESSED_ALPHA</td><td>GL2.GL_ALPHA</td></tr>
@@ -259,8 +260,8 @@ public class OGLUtil
      * <tr><td>GL2.GL_SLUMINANCE</td><td>GL2.GL_LUMINANCE</td></tr> <tr><td>GL2.GL_SLUMINANCE8</td><td>GL2.GL_LUMINANCE</td></tr>
      * <tr><td>GL2.GL_SLUMINANCE_ALPHA</td><td>GL2.GL_LUMINANCE_ALPHA</td></tr> <tr><td>GL2.GL_SLUMINANCE8_ALPHA8</td><td>GL2.GL_LUMINANCE_ALPHA<td></tr>
      * <tr><td>GL2.GL_SRGB</td><td>GL2.GL_RGB</td></tr> <tr><td>GL2.GL_SRGB8</td><td>GL2.GL_RGB</td></tr>
-     * <tr><td>GL2.GL_SRGB_ALPHA</td><td>GL2.GL_RGBA</td></tr> <tr><td>GL2.GL_SRGB8_ALPHA8</td><td>GL2.GL_RGBA</td></tr>
-     * </code>
+     * <tr><td>GL2.GL_SRGB_ALPHA</td><td>GL2.GL_RGBA</td></tr> <tr><td>GL2.GL_SRGB8_ALPHA8</td><td>GL2.GL_RGBA</td></tr></table>
+     * 
      * <p>
      * This returns 0 if the internal format is not one of the recognized types.
      *
@@ -348,7 +349,8 @@ public class OGLUtil
 
     /**
      * Returns an OpenGL pixel format corresponding to the specified texture internal format. This maps internal format
-     * to pixel format as follows: <code> <table> <tr><th>Internal Format</th><th>Estimated Bits Per Pixel</th></tr>
+     * to pixel format as follows: <table> <caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Internal Format</th><th>Estimated Bits Per Pixel</th></tr>
      * <tr><td>GL2.GL_ALPHA</td><td>8</td></tr> <tr><td>GL2.GL_ALPHA4</td><td>4</td></tr>
      * <tr><td>GL2.GL_ALPHA8</td><td>8</td></tr> <tr><td>GL2.GL_ALPHA12</td><td>12</td></tr>
      * <tr><td>GL2.GL_ALPHA16</td><td>16</td></tr> <tr><td>GL2.GL_COMPRESSED_ALPHA</td><td>0</td></tr>
@@ -377,7 +379,7 @@ public class OGLUtil
      * <tr><td>GL2.GL_SLUMINANCE8</td><td>8</td></tr> <tr><td>GL2.GL_SLUMINANCE_ALPHA</td><td>16</td></tr>
      * <tr><td>GL2.GL_SLUMINANCE8_ALPHA8</td><td>16<td></tr> <tr><td>GL2.GL_SRGB</td><td>24</td></tr>
      * <tr><td>GL2.GL_SRGB8</td><td>24</td></tr> <tr><td>GL2.GL_SRGB_ALPHA</td><td>32</td></tr>
-     * <tr><td>GL2.GL_SRGB8_ALPHA8</td><td>32</td></tr> </code>
+     * <tr><td>GL2.GL_SRGB8_ALPHA8</td><td>32</td></tr> </table>
      * <p>
      * The returned estimate assumes that the driver provides does not convert the formats to another supported, such
      * converting as <code>GL2.GL_ALPHA4</code> to <code>GL2.GL_ALPHA8</code>. This returns 0 if the internal format is

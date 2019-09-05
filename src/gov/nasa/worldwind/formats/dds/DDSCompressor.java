@@ -363,7 +363,7 @@ public class DDSCompressor
 
     /**
      * Returns the default compression attributes. The default DXT compression attributes are defined as follows:
-     * <table> <tr><th>Attribute</th><th>Value</th></tr> <tr><td>Build Mipmaps</td><td>true</td></tr>
+     * <table> <caption style="font-weight: bold;">Default Attributes</caption><tr><th>Attribute</th><th>Value</th></tr> <tr><td>Build Mipmaps</td><td>true</td></tr>
      * <tr><td>Premultiply Alpha</td><td>true</td></tr> <tr><td>DXT Format</td><td>Let DDSCompressor choose optimal
      * format.</td></tr> <tr><td>Enable DXT1 Alpha</td><td>false</td></tr> <tr><td>DXT1 Alpha
      * Threshold</td><td>128</td></tr> <tr><td>Compression Algorithm</td><td>Euclidean Distance</td></tr> </table>

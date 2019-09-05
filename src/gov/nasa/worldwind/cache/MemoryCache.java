@@ -57,7 +57,7 @@ public interface MemoryCache
     void removeCacheListener(CacheListener listener);
 
     /**
-     * Discovers whether or not this cache contains the object referenced by <code> key. Currently no interface exists
+     * Discovers whether or not this cache contains the object referenced by <code> key </code>. Currently no interface exists
      * to discover if an object resides in the cache by referencing itself.
      *
      * @param key the key which the object is referenced by.

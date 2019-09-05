@@ -19,7 +19,7 @@ import org.codehaus.jackson.util.InternCache;
  * maps/sets, that hash codes are uniformly distributed. Also, collisions
  * are slightly more expensive than with HashMap or HashSet, since hash codes
  * are not used in resolving collisions; that is, equals() comparison is
- * done with all symbols in same bucket index.<br />
+ * done with all symbols in same bucket index.<br>
  * Finally, rehashing is also more expensive, as hash codes are not
  * stored; rehashing requires all entries' hash codes to be recalculated.
  * Reason for not storing hash codes is reduced memory usage, hoping
@@ -160,9 +160,10 @@ public final class CharsToNameCanonicalizer
      */
 
     /**
-     * Method called to create root canonicalizer for a {@link org.codehaus.jackson.JsonFactory}
-     * instance. Root instance is never used directly; its main use is for
-     * storing and sharing underlying symbol arrays as needed.
+     * Method called to create root canonicalizer for a {@link org.codehaus.jackson.JsonFactory} instance.Root instance
+     * is never used directly; its main use is for storing and sharing underlying symbol arrays as needed.
+     *
+     * @return Undocumented.
      */
     public static CharsToNameCanonicalizer createRoot()
     {
@@ -220,16 +221,15 @@ public final class CharsToNameCanonicalizer
     }
 
     /**
-     * "Factory" method; will create a new child instance of this symbol
-     * table. It will be a copy-on-write instance, ie. it will only use
-     * read-only copy of parent's data, but when changes are needed, a
-     * copy will be created.
-     *<p>
-     * Note: while this method is synchronized, it is generally not
-     * safe to both use makeChild/mergeChild, AND to use instance
-     * actively. Instead, a separate 'root' instance should be used
-     * on which only makeChild/mergeChild are called, but instance itself
-     * is not used as a symbol table.
+     * "Factory" method; will create a new child instance of this symbol table.It will be a copy-on-write instance,
+     * ie.it will only use read-only copy of parent's data, but when changes are needed, a copy will be created.<p>
+     * Note: while this method is synchronized, it is generally not safe to both use makeChild/mergeChild, AND to use
+     * instance actively. Instead, a separate 'root' instance should be used on which only makeChild/mergeChild are
+     * called, but instance itself is not used as a symbol table.
+     *
+     * @param canonicalize Undocumented.
+     * @param intern Undocumented.
+     * @return Undocumented.
      */
     public synchronized CharsToNameCanonicalizer makeChild(boolean canonicalize, boolean intern)
     {
@@ -383,13 +383,14 @@ public final class CharsToNameCanonicalizer
     }
 
     /**
-     * Implementation of a hashing method for variable length
-     * Strings. Most of the time intention is that this calculation
-     * is done by caller during parsing, not here; however, sometimes
-     * it needs to be done for parsed "String" too.
+     * Implementation of a hashing method for variable length Strings.Most of the time intention is that this
+     * calculation is done by caller during parsing, not here; however, sometimes it needs to be done for parsed
+     * "String" too.
      *
-     * @param len Length of String; has to be at least 1 (caller guarantees
-     *   this pre-condition)
+     * @param buffer Undocumented.
+     * @param start Undocumented.
+     * @param len Length of String; has to be at least 1 (caller guarantees this pre-condition)
+     * @return Undocumented.
      */
     public static int calcHash(char[] buffer, int start, int len) {
         int hash = (int) buffer[0];

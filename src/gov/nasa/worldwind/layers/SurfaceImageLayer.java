@@ -45,7 +45,7 @@ public class SurfaceImageLayer extends RenderableLayer
     }
 
     /**
-     * Add an image to the collection, reprojecting it to geographic (latitude & longitude) coordinates if necessary.
+     * Add an image to the collection, reprojecting it to geographic (latitude and longitude) coordinates if necessary.
      * The image's location is determined from metadata files co-located with the image file. The number, names and
      * contents of these files are governed by the type of the specified image. Location metadata must be available.
      * <p>
@@ -183,7 +183,7 @@ public class SurfaceImageLayer extends RenderableLayer
 
     /**
      * Add an image to the collection and specify its coverage. The image is assumed to be in geographic projection
-     * (latitude & longitude).
+     * (latitude and longitude).
      *
      * @param imagePath the path to the image file.
      * @param sector    the geographic location of the image.
@@ -219,7 +219,7 @@ public class SurfaceImageLayer extends RenderableLayer
 
     /**
      * Add a {@link BufferedImage} to the collection at an explicitly specified location. The image is assumed to be in
-     * geographic projection (latitude & longitude).
+     * geographic projection (latitude and longitude).
      *
      * @param name   a unique name to associate with the image so that it can be subsequently referred to without having
      *               to keep a reference to the image itself. Use this name in calls to {@link #removeImage(String)}.
@@ -286,7 +286,7 @@ public class SurfaceImageLayer extends RenderableLayer
 
     /**
      * Add an image to the collection at an explicitly specified location. The image is assumed to be in geographic
-     * projection (latitude & longitude).
+     * projection (latitude and longitude).
      *
      * @param imagePath the path to the image file.
      * @param corners   the geographic location of the image's corners, specified in order of lower-left, lower-right,
@@ -323,7 +323,7 @@ public class SurfaceImageLayer extends RenderableLayer
 
     /**
      * Add a {@link BufferedImage} to the collection at an explicitly specified location. The image is assumed to be in
-     * geographic projection (latitude & longitude).
+     * geographic projection (latitude and longitude).
      *
      * @param name    a unique name to associate with the image so that it can be subsequently referred to without
      *                having to keep a reference to the image itself. Use this name in calls to {@link

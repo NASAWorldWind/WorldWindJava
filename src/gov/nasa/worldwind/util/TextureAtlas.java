@@ -21,7 +21,7 @@ import java.util.Queue;
 /**
  * Represents a texture composed of multiple independent images. The independent images are referred to as
  * <i>elements</i>, and are packed into non-overlapping sub-rectangles within the texture atlas. The following NVIDIA
- * document describes this technique: <a title="Improve Batching Using Texture Atlases" target="blank_"
+ * document describes this technique: <a target="blank_"
  * href="ftp://download.nvidia.com/developer/NVTextureSuite/Atlas_Tools/Texture_Atlas_Whitepaper.pdf">Improve Batching
  * Using Texture Atlases</a>
  *

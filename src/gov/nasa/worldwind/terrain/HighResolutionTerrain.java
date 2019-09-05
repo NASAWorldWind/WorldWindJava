@@ -447,7 +447,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
      *                  positions[3], etc.
      * @param callback  An object to call in order to return the computed intersections.
      *
-     * @throws InterruptedException
+     * @throws InterruptedException if the operation is interrupted.
      */
     public void intersect(List<Position> positions, final IntersectionCallback callback) throws InterruptedException
     {

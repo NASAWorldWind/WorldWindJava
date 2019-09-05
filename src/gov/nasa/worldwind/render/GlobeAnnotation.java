@@ -140,7 +140,7 @@ public class GlobeAnnotation extends AbstractAnnotation implements Locatable, Mo
      * Get the annotation's altitude mode. The altitude mode may be null, indicating that the legacy altitude mode
      * described below will be used.
      * <p>
-     * <b>Legacy altitude mode</b><br/>If the annotation Position elevation is lower then the highest elevation on the
+     * <b>Legacy altitude mode</b><br>If the annotation Position elevation is lower then the highest elevation on the
      * globe, the annotation will be drawn above the ground using its elevation as an offset, scaled by the current
      * vertical exaggeration. Otherwise, the original elevation will be used. This functionality is supported for
      * backward compatibility. New code that uses Globe Annotation should specify an altitude mode.

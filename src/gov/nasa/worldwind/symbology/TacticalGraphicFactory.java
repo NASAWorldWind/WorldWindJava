@@ -14,7 +14,6 @@ import gov.nasa.worldwind.geom.Position;
  * specific symbol set. Each graphic within that set is identified by a string identifier.
  * <p>
  * The factory exposes creation several methods:
- * <p>
  * <ul><li>{@link #createGraphic(String, Iterable, gov.nasa.worldwind.avlist.AVList) createGraphic} - Creates a graphic
  * from a list of positions and modifiers. This method is the most general, and can create any type of graphic. The
  * other creation methods are provided for convenience.</li> <li>{@link #createPoint(String,

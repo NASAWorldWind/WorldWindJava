@@ -273,7 +273,7 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchRendering(boolean).
+     * @see #setEnableBatchRendering(boolean)
      */
     boolean isEnableBatchRendering();
 
@@ -291,7 +291,7 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchPicking(boolean).
+     * @see #setEnableBatchPicking(boolean)
      */
     boolean isEnableBatchPicking();
 

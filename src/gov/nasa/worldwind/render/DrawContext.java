@@ -30,7 +30,7 @@ import java.util.Queue;
 public interface DrawContext extends WWObject, Disposable
 {
     /**
-     * Assigns this <code>DrawContext</code> a new </code>com.jogamp.opengl.GLContext</code>. May throw a
+     * Assigns this <code>DrawContext</code> a new <code>com.jogamp.opengl.GLContext</code>. May throw a
      * <code>NullPointerException</code> if <code>glContext</code> is null.
      *
      * @param glContext the new <code>com.jogamp.opengl.GLContext</code>
@@ -41,10 +41,10 @@ public interface DrawContext extends WWObject, Disposable
     void setGLContext(GLContext glContext);
 
     /**
-     * Retrieves this <code>DrawContext</code>s </code>com.jogamp.opengl.GLContext</code>. If this method returns null,
+     * Retrieves this <code>DrawContext</code>s <code>com.jogamp.opengl.GLContext</code>. If this method returns null,
      * then there are potentially no active <code>GLContext</code>s and rendering should be aborted.
      *
-     * @return this <code>DrawContext</code>s </code>com.jogamp.opengl.GLContext</code>.
+     * @return this <code>DrawContext</code>s <code>com.jogamp.opengl.GLContext</code>.
      *
      * @since 1.5
      */

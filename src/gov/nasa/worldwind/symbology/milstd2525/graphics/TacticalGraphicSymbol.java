@@ -143,15 +143,12 @@ public class TacticalGraphicSymbol extends AbstractTacticalSymbol
      * graphic's Status can define its operational condition. The recognized values depend on the graphic's scheme:
      * <p>
      * <strong>Tactical graphics</strong>
-     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
      * <p>
      * <strong>Meteorological and Oceanographic</strong>
-     * <p>
      * <ul> <li>Not supported</li> </ul>
      * <p>
      * <strong>Emergency Management</strong>
-     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      *
      * @param value the new value for the Status/Operational Condition field.

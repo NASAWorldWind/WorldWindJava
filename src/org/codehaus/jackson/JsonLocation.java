@@ -57,12 +57,11 @@ public class JsonLocation
     }
 
     /**
-     * Reference to the original resource being read, if one available.
-     * For example, when a parser has been constructed by passing
-     * a {@link java.io.File} instance, this method would return
-     * that File. Will return null if no such reference is available,
-     * for example when {@link java.io.InputStream} was used to
-     * construct the parser instance.
+     * Reference to the original resource being read, if one available.For example, when a parser has been constructed
+     * by passing a {@link java.io.File} instance, this method would return that File. Will return null if no such
+     * reference is available, for example when {@link java.io.InputStream} was used to construct the parser instance.
+     *
+     * @return Undocumented.
      */
     public Object getSourceRef() { return _sourceRef; }
 

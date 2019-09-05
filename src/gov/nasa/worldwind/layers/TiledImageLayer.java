@@ -827,7 +827,8 @@ public abstract class TiledImageLayer extends AbstractLayer
 
     /**
      * Appends TiledImageLayer configuration parameters as elements to the specified context. This appends elements for
-     * the following parameters: <table> <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
+     * the following parameters: <table> <caption style="font-weight: bold;">Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
      * AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr> <tr><td>{@link
      * AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr> <tr><td>{@link
      * AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String array</td></tr>
@@ -937,7 +938,8 @@ public abstract class TiledImageLayer extends AbstractLayer
     /**
      * Parses TiledImageLayer configuration parameters from the specified DOM document. This writes output as key-value
      * pairs to params. If a parameter from the XML document already exists in params, that parameter is ignored.
-     * Supported key and parameter names are: <table> <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
+     * Supported key and parameter names are: <table> <caption style="font-weight: bold;">Supported Names</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
      * <tr><td>{@link AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr> <tr><td>{@link
      * AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr> <tr><td>{@link
      * AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String array</td></tr>
@@ -1022,7 +1024,8 @@ public abstract class TiledImageLayer extends AbstractLayer
     /**
      * Parses TiledImageLayer configuration parameters from previous versions of configuration documents. This writes
      * output as key-value pairs to params. If a parameter from the XML document already exists in params, that
-     * parameter is ignored. Supported key and parameter names are: <table> <tr><th>Parameter</th><th>Element
+     * parameter is ignored. Supported key and parameter names are: <table> <caption style="font-weight: bold;">Supported Names</caption>
+     * <tr><th>Parameter</th><th>Element
      * Path</th><th>Type</th></tr> <tr><td>{@link AVKey#TEXTURE_FORMAT}</td><td>CompressTextures</td><td>"image/dds" if
      * CompressTextures is "true"; null otherwise</td></tr> </table>
      *
@@ -1242,9 +1245,9 @@ public abstract class TiledImageLayer extends AbstractLayer
     }
 
     /**
-     * Create an image for the portion of this layer lying within a specified sector. The image is created at a
-     * specified aspect ratio within a canvas of a specified size. This returns the specified image if this layer has no
-     * content in the specified sector.
+     * Create an image for the portion of this layer lying within a specified sector.The image is created at a
+ specified aspect ratio within a canvas of a specified size. This returns the specified image if this layer has no
+ content in the specified sector.
      *
      * @param sector       the sector of interest.
      * @param canvasWidth  the width of the canvas.
@@ -1270,6 +1273,7 @@ public abstract class TiledImageLayer extends AbstractLayer
      * non-null, that buffered image is returned.
      *
      * @throws IllegalArgumentException if <code>sector</code> is null.
+     * @throws java.lang.Exception Other errors.
      * @see ImageUtil#mergeImage(gov.nasa.worldwind.geom.Sector, gov.nasa.worldwind.geom.Sector, double,
      * java.awt.image.BufferedImage, java.awt.image.BufferedImage)  ;
      */

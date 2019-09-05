@@ -106,6 +106,7 @@ public class Cube extends ApplicationTemplate implements Renderable
      * Determines whether the cube intersects the view frustum.
      *
      * @param dc the current draw context.
+     * @param orderedCube The cube to check.
      *
      * @return true if this cube intersects the frustum, otherwise false.
      */
@@ -121,6 +122,7 @@ public class Cube extends ApplicationTemplate implements Renderable
      * Compute per-frame attributes, and add the ordered renderable to the ordered renderable list.
      *
      * @param dc Current draw context.
+     * @return The resulting cube.
      */
     protected OrderedCube makeOrderedRenderable(DrawContext dc)
     {
@@ -165,10 +167,11 @@ public class Cube extends ApplicationTemplate implements Renderable
     }
 
     /**
-     * Set up drawing state, and draw the cube. This method is called when the cube is rendered in ordered rendering
+     * Set up drawing state, and draw the cube.This method is called when the cube is rendered in ordered rendering
      * mode.
      *
      * @param dc Current draw context.
+     * @param pickCandidates The pick candidates list.
      */
     protected void drawOrderedRenderable(DrawContext dc, PickSupport pickCandidates)
     {

@@ -20,10 +20,9 @@ import java.util.*;
  * Represents the KML <i>Region</i> element and provides access to its contents. Regions define an area of interest
  * described by a geographic bounding box and an optional minimum and maximum altitude.
  * <p>
- * <strong>Bounding Box</strong> </br> A Region's bounding box controls when the Region is active by defining a volume
+ * <strong>Bounding Box</strong> <br> A Region's bounding box controls when the Region is active by defining a volume
  * that must intersect the viewing frustum. The bounding box is computed according to the <code>altitudeMode</code>
  * attribute of a Region's geographic <code>LatLonAltBox</code> as follows:
- * <p>
  * <ul> <li><strong>clampToGround (default)</strong>: The bounding box encloses the terrain surface in the sector
  * defined by the north, south, east, and west limits of this Region's <code>LatLonAltBox</code>.</li>
  * <li><strong>relativeToGround</strong>: The bounding box encloses the volume in the sector defined by the north,
@@ -33,10 +32,9 @@ import java.util.*;
  * <code>LatLonAltBox</code>, and who's upper and lower altitude are specified by its minAltitude and maxAltitude,
  * relative to mean sea level.</li> </ul>
  * <p>
- * <strong>Level of Detail</strong> <br/> A Region's level of detail determines when it is active by defining an upper
+ * <strong>Level of Detail</strong> <br> A Region's level of detail determines when it is active by defining an upper
  * and lower boundary on the Region's screen area or the Region's distance to the view. The level of detail is computed
  * according to the <code>altitudeMode</code> attribute of a Region's geographic <code>LatLonAltBox</code> as follows:
- * <p>
  * <ul> <li><strong>clampToGround (default)</strong>: The level of detail is determined by computing the distance from
  * the eye point and Region sector, scaling the distance by the <code>KMLTraversalContext's</code> detail hint, then
  * comparing that scaled distance to the Region's min and max pixel sizes in meters (the Region sector's area divided by
@@ -56,7 +54,7 @@ import java.util.*;
  * levels of a Collada model have Regions with LOD range 100-200 and 200-300. Region avoids activating both features in
  * the event that both their level of detail criteria are met by giving priority to the second range: 200-300.
  * <p>
- * <strong>KML Feature Hierarchies</strong> <br/> When a Region is attached to a KML feature, the feature and its
+ * <strong>KML Feature Hierarchies</strong> <br> When a Region is attached to a KML feature, the feature and its
  * descendants are displayed only when the Region is active. A Region is active when its bounding box is in view and its
  * level of detail criteria are met. Region provides the <code>isActive</code> method for determining if a Region is
  * active for a specified <code>DrawContext</code>.
@@ -67,7 +65,7 @@ import java.util.*;
  * visibility of an entire KML feature tree cannot be determined based on a container's Region. Instead, visibility must
  * be determined at each leaf feature.
  * <p>
- * <strong>Limitations</strong> <br/> The Region bounding box must lie between -90 to 90 degrees latitude, and -180 to
+ * <strong>Limitations</strong> <br> The Region bounding box must lie between -90 to 90 degrees latitude, and -180 to
  * 180 degrees longitude. Regions that span the date line are currently not supported.
  *
  * @author tag
@@ -102,7 +100,7 @@ public class KMLRegion extends KMLAbstractObject
      * <code>maxExpiryTime</code>, after which it must be regenerated. The time is randomized to amortize the cost of
      * regenerating data for multiple Regions over multiple frames.
      * <p>
-     * <strong>isActive</strong> <br/> RegionData's <code>isActive</code> property indicates whether the Region
+     * <strong>isActive</strong> <br> RegionData's <code>isActive</code> property indicates whether the Region
      * associated with a RegionData entry is active. This is used to share the result of computing <code>isActive</code>
      * among multiple calls during the same frame. For example, the preRender and render passes need not each compute
      * <code>isActive</code>, and can therefore share the same computation by ensuring that this property is set at most
@@ -110,17 +108,17 @@ public class KMLRegion extends KMLAbstractObject
      * <code>DrawContext's</code> current frame number against the RegionData's <code>activeFrameNumber</code>. This
      * property is accessed by calling <code>isActive</code> and <code>setActive</code>.
      * <p>
-     * <strong>extent</strong> <br/> RegionData's <code>extent</code> property is an <code>Extent</code> used to
+     * <strong>extent</strong> <br> RegionData's <code>extent</code> property is an <code>Extent</code> used to
      * determine if a Region's bounding box is in view. This property is accessed by calling <code>getExtent</code> and
      * <code>setExtent</code>. May be <code>null</code>.
      * <p>
-     * <strong>sector</strong> <br/> RegionData's <code>sector</code> property is a <code>Sector</code> used to
+     * <strong>sector</strong> <br> RegionData's <code>sector</code> property is a <code>Sector</code> used to
      * determine if Regions with an <code>altitudeMode</code> of <code>clampToGround</code> are in view. Accessed by
      * calling <code>getSector</code> and <code>setSector</code>. When a Region's <code>altitudeMode</code> is
      * <code>clampToGround</code>, the Region's sector can be used to determine visibility because the Region is defined
      * to be on the <code>Globe's</code> surface.
      * <p>
-     * <strong>points</strong> <br/> RegionData's <code>points</code> property indicates a list of model-coordinate
+     * <strong>points</strong> <br> RegionData's <code>points</code> property indicates a list of model-coordinate
      * points representing the corners and interior of the Region. These points are used to determine the distance
      * between the Region and the <code>View's</code> eye point. If the Region has altitude mode of
      * <code>clampToGround</code>, this list must contain five points: the model-coordinate points of the Region's four

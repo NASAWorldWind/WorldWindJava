@@ -27,14 +27,14 @@ import com.jogamp.opengl.*;
  * #clear(gov.nasa.worldwind.render.DrawContext, java.awt.Color)} immediately after any call to {@link
  * #beginRendering(gov.nasa.worldwind.render.DrawContext, int, int, int, int)}.
  * <p>
- * The common usage pattern for OGLRenderToTextureSupport is as follows: <br/><code> DrawContext dc = ...; // Typically
- * passed in as an argument to the containing method.<br/> Texture texture = TextureIO.newTexture(new
- * TextureData(...);<br/> <br/> // Setup the drawing rectangle to match the texture dimensions, and originate from the
- * texture's lower left corner.<br/> OGLRenderToTextureSupport rttSupport = new OGLRenderToTextureSupport();<br/>
- * rttSupport.beginRendering(dc, 0, 0, texture.getWidth(), texture.getHeight());<br/> try<br/> {<br/> // Bind the
- * texture as the destination for color pixel writes.<br/> rttSupport.setColorTarget(dc, texture);<br/> // Clear the
- * texture contents with transparent black.<br/> rttSupport.clear(dc, new Color(0, 0, 0, 0));<br/> // Invoke desired GL
- * rendering commands.<br/> }<br/> finally<br/> {<br/> rttSupport.endRendering(dc);<br/> }<br/> </code>
+ * The common usage pattern for OGLRenderToTextureSupport is as follows: <br><code> DrawContext dc = ...; // Typically
+ * passed in as an argument to the containing method.<br> Texture texture = TextureIO.newTexture(new
+ * TextureData(...);<br> <br> // Setup the drawing rectangle to match the texture dimensions, and originate from the
+ * texture's lower left corner.<br> OGLRenderToTextureSupport rttSupport = new OGLRenderToTextureSupport();<br>
+ * rttSupport.beginRendering(dc, 0, 0, texture.getWidth(), texture.getHeight());<br> try<br> {<br> // Bind the
+ * texture as the destination for color pixel writes.<br> rttSupport.setColorTarget(dc, texture);<br> // Clear the
+ * texture contents with transparent black.<br> rttSupport.clear(dc, new Color(0, 0, 0, 0));<br> // Invoke desired GL
+ * rendering commands.<br> }<br> finally<br> {<br> rttSupport.endRendering(dc);<br> }<br> </code>
  *
  * @author dcollins
  * @version $Id: OGLRenderToTextureSupport.java 1676 2013-10-21 18:32:30Z dcollins $

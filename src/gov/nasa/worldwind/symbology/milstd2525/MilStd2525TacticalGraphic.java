@@ -10,11 +10,11 @@ import gov.nasa.worldwind.symbology.TacticalGraphic;
 
 /**
  * Interface to describe tactical graphics defined by <a href="http://www.assistdocs.com/search/document_details.cfm?ident_number=114934">MIL-STD-2525</a>.
- * See the TacticalGraphic <a title="Tactical Graphic Usage Guide" href="https://goworldwind.org/developers-guide/symbology/tactical-graphics/"
- * target="_blank">Usage Guide</a> for instructions on using TacticalGraphic in an application.
+ * See the TacticalGraphic <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
+ * for instructions on using TacticalGraphic in an application.
  * <p>
  * The following table lists the modifiers supported by 2525 graphics. Note that not all graphics support all modifiers.
- * <table width="100%"> <tr><th>Field</th><th>Modifier key</th><th>Data type</th><th>Description</th></tr>
+ * <table> <caption style="font-weight: bold;">2525 Graphics Modifiers</caption><tr><th>Field</th><th>Modifier key</th><th>Data type</th><th>Description</th></tr>
  * <tr><td>A</td><td>SymbologyConstants.SYMBOL</td><td>String</td><td>SIDC for a MIL-STD-2525 Tactical Symbol</td></tr>
  * <tr><td>B</td><td>SymbologyConstants.ECHELON</td><td>String</td><td>Echelon</td></tr>
  * <tr><td>C</td><td>SymbologyConstants.QUANTITY</td><td>String</td><td>Quantity</td></tr>
@@ -72,15 +72,12 @@ public interface MilStd2525TacticalGraphic extends TacticalGraphic
      * graphic's Status can define its operational condition. The recognized values depend on the graphic's scheme:
      * <p>
      * <strong>Tactical graphics</strong>
-     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
      * <p>
      * <strong>Meteorological and Oceanographic</strong>
-     * <p>
      * <ul> <li>Not supported</li> </ul>
      * <p>
      * <strong>Emergency Management</strong>
-     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      *
      * @param value the new value for the Status/Operational Condition field.

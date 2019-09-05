@@ -17,11 +17,11 @@ import java.util.*;
  * tessellate complex polygons into triangles.
  * <p>
  * The standard pattern for using GLUTessellatorSupport to prepare a GLUtessellator is as follows: <code>
- * GLUTessellatorSupport glts = new GLUTessellatorSupport();<br/> GLUtessellatorCallback cb = ...; // Reference to an
- * implementation of GLUtessellatorCallback.<br/> Vec4 normal = new Vec4(0, 0, 1); // The polygon's normal. This example
- * shows an appropriate normal for tessellating x-y coordinates.<br/> <br/><br/> glts.beginTessellation(cb, new Vec4(0,
- * 0, 1));<br/> try<br/> {<br/> GLUtessellator tess = glts.getGLUtessellator();<br/> }<br/> finally<br/> {<br/>
- * glts.endTessellation();<br/> }<br/> </code>
+ * GLUTessellatorSupport glts = new GLUTessellatorSupport();<br> GLUtessellatorCallback cb = ...; // Reference to an
+ * implementation of GLUtessellatorCallback.<br> Vec4 normal = new Vec4(0, 0, 1); // The polygon's normal. This example
+ * shows an appropriate normal for tessellating x-y coordinates.<br> <br><br> glts.beginTessellation(cb, new Vec4(0,
+ * 0, 1));<br> try<br> {<br> GLUtessellator tess = glts.getGLUtessellator();<br> }<br> finally<br> {<br>
+ * glts.endTessellation();<br> }<br> </code>
  *
  * @author dcollins
  * @version $Id: GLUTessellatorSupport.java 3427 2015-09-30 23:24:13Z dcollins $

@@ -321,15 +321,19 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     /**
-     * Configures JOGL's surface pixel scaling on the specified <code>ScalableSurface</code> to ensure backward
-     * compatibility with WorldWind applications developed prior to JOGL pixel scaling's introduction. This method is
-     * used by <code>GLCanvas</code> and <code>GLJPanel</code> to effectively disable JOGL's surface pixel scaling by
-     * requesting a 1:1 scale.
-     * <p>
-     * Since v2.2.0, JOGL defaults to using high-dpi pixel scales where possible. This causes WorldWind screen elements
-     * such as placemarks, the compass, the world map, the view controls, and the scale bar (plus many more) to appear
-     * smaller than they are intended to on screen. The high-dpi default also has the effect of degrading WorldWind
-     * rendering performance.
+     * Configures JOGL's surface pixel scaling on the specified
+     * <code>ScalableSurface</code> to ensure backward compatibility with
+     * WorldWind applications developed prior to JOGL pixel scaling's
+     * introduction.This method is used by <code>GLCanvas</code> and
+     * <code>GLJPanel</code> to effectively disable JOGL's surface pixel scaling
+     * by requesting a 1:1 scale.<p>
+     * Since v2.2.0, JOGL defaults to using high-dpi pixel scales where
+     * possible. This causes WorldWind screen elements such as placemarks, the
+     * compass, the world map, the view controls, and the scale bar (plus many
+     * more) to appear smaller than they are intended to on screen. The high-dpi
+     * default also has the effect of degrading WorldWind rendering performance.
+     *
+     * @param surface The surface to configure.
      */
     public static void configureIdentityPixelScale(ScalableSurface surface)
     {

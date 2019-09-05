@@ -232,7 +232,7 @@ public final class WorldWind
      * @return the new component
      *
      * @throws IllegalStateException    if no name could be found which corresponds to <code>classNameKey</code>
-     * @throws IllegalArgumentException if <code>classNameKey<code> is null
+     * @throws IllegalArgumentException if <code>classNameKey</code> is null
      * @throws WWRuntimeException       if the component could not be created
      */
     public static Object createConfigurationComponent(String classNameKey)

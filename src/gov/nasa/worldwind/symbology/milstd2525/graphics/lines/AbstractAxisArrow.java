@@ -160,7 +160,6 @@ public abstract class AbstractAxisArrow extends AbstractMilStd2525TacticalGraphi
      * default. However, some applications may prefer to specify the width of the route rather than the width of the
      * arrowhead. In the diagram below, the default behavior is for the final control point to specify point A. When
      * {@code finalPointWidthOfRoute} is true the final control point specifies point B instead.
-     * <p>
      * <pre>
      *                 A
      *                 |\

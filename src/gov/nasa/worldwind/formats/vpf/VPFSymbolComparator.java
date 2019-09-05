@@ -79,10 +79,10 @@ public class VPFSymbolComparator implements Comparator<VPFSymbol>
     }
 
     /**
-     * @param a
-     * @param b
+     * @param a Symbol to compare.
+     * @param b Symbol to compare.
      *
-     * @return
+     * @return The relationship between a and b.
      */
     public int compare(VPFSymbol a, VPFSymbol b)
     {

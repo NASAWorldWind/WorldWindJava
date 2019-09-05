@@ -22,15 +22,15 @@ import gov.nasa.worldwind.view.ViewPropertyLimits;
  * Most of the accessor and computation methods on <code>View</code> will use viewing state computed in the last call to
  * {@link #apply(gov.nasa.worldwind.render.DrawContext) apply}.
  * <p>
- * The following methods return state values <i>updated in the most recent call to apply</i>. <code> <ul>
+ * The following methods return state values <i>updated in the most recent call to apply</i>. <ul>
  * <li>getEyePosition</li> <li>getEyePoint</li> <li>getUpVector</li> <li>getForwardVector</li>
  * <li>getModelviewMatrix</li> <li>getViewport</li> <li>getFrustum</li> <li>getFrustumInModelCoordinates</li>
- * <li>getProjectionMatrix</li> </code> </ul>
+ * <li>getProjectionMatrix</li> </ul> 
  * <p>
  * The following methods return computed values using state that was updated in the most recent call to
- * <code>apply</code>. <code> <ul> <li>project</li> <li>unproject</li> <li>computeRayFromScreenPoint</li>
+ * <code>apply</code>.  <ul> <li>project</li> <li>unproject</li> <li>computeRayFromScreenPoint</li>
  * <li>computePositionFromScreenPoint</li> <li>computePixelSizeAtDistance</li> <li>computeHorizonDistance</li> </ul>
- * </code>
+ * 
  *
  * @author Paul Collins
  * @version $Id: View.java 1171 2013-02-11 21:45:02Z dcollins $

@@ -294,14 +294,13 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
     /**
      * Indicates whether this <code>KMLAbstractFeature</code> is active and should be rendered on the specified
      * <code>DrawContext</code>. This returns <code>true</code> if the following conditions are all <code>true</code>:
-     * <p>
      * <ul> <li>This feature's <code>visibility</code> is unspecified (<code>null</code>) or is set to
      * <code>true</code>.</li> <li>This feature as no Region and does not inherit a Region from an ancestor, or its
      * Region is active for the specified <code>DrawContext</code>.</li> </ul>
      * <p>
      * If this feature has no Region, this inherits the Region of its nearest ancestor by using the Region on the top of
      * the KML traversal context's region stack (if any). If there is no ancestor Region this feature is assumed to be
-     * the <code>DrawContext's</cod> view and is rendered according to its <code>visibility</code> flag. A Region is
+     * the <code>DrawContext's</code> view and is rendered according to its <code>visibility</code> flag. A Region is
      * considered active if it is visible, and the <code>DrawContext</code> meets the Region's level of detail
      * criteria.
      *

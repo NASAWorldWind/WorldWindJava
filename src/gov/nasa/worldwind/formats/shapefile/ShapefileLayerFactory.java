@@ -22,12 +22,10 @@ import java.util.Map;
 /**
  * A factory that creates {@link gov.nasa.worldwind.layers.Layer} instances from a shapefile layer configuration source
  * or a shapefile source.
- * <p>
  * <h1>Shapefile Geometry Conversion</h1>
  * <p>
- * Shapefile geometries are mapped to WorldWind objects as follows:
- * <p>
- * <table> <tr><th>Shapefile Geometry</th><th>WorldWind Object</th></tr> <tr><td>Point</td><td>{@link
+ * Shapefile geometries are mapped to WorldWind objects as shown in the following table.
+ * <table> <caption>WorldWind Shapefile Mapping</caption><tr><th>Shapefile Geometry</th><th>WorldWind Object</th></tr> <tr><td>Point</td><td>{@link
  * gov.nasa.worldwind.render.PointPlacemark}</td></tr> <tr><td>MultiPoint</td><td>List of {@link
  * gov.nasa.worldwind.render.PointPlacemark}</td></tr> <tr><td>Polyline</td><td>{@link
  * gov.nasa.worldwind.formats.shapefile.ShapefilePolylines}</td></tr> <tr><td>Polygon</td><td>{@link
@@ -35,7 +33,6 @@ import java.util.Map;
  * <p>
  * In addition, if the DBase attributes file associated with the shapefile has an attribute named "height" or "hgt", the
  * shapes in the shapefile are mapped to {@link gov.nasa.worldwind.formats.shapefile.ShapefileExtrudedPolygons}.
- * <p>
  * <h1>Shapefile Attributes</h1>
  * <p>
  * Shapefiles may have associated with them a DBase attributes file. This class provides a mechanism for mapping

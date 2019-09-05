@@ -20,9 +20,9 @@ import java.util.List;
 
 /**
  * Implementation of {@link gov.nasa.worldwind.symbology.TacticalSymbol} that provides support for tactical symbols from
- * the <a href="http://www.assistdocs.com/search/document_details.cfm?ident_number=114934">MIL-STD-2525</a> symbology
- * set. See the <a title="Tactical Symbol Usage Guide" href="https://goworldwind.org/developers-guide/symbology/tactical-symbols/"
- * target="_blank">Tactical Symbol Usage Guide</a> for instructions on using TacticalSymbol in an application.
+ * the <a href="https://en.wikipedia.org/wiki/NATO_Joint_Military_Symbology#MIL-STD-2525A">MIL-STD-2525</a> symbology
+ * set. See the <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
+ * for instructions on using TacticalSymbol in an application.
  *
  * @author dcollins
  * @version $Id: MilStd2525TacticalSymbol.java 2196 2014-08-06 19:42:15Z tgaskins $
@@ -173,16 +173,13 @@ public class MilStd2525TacticalSymbol extends AbstractTacticalSymbol
      * symbology scheme the symbol belongs to:
      * <p>
      * <strong>Warfighting, Signals Intelligence, Stability Operations</strong>
-     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> <li>STATUS_PRESENT_FULLY_CAPABLE</li>
      * <li>STATUS_PRESENT_DAMAGED</li> <li>STATUS_PRESENT_DESTROYED</li> <li>STATUS_PRESENT_FULL_TO_CAPACITY</li> </ul>
      * <p>
      * <strong>Tactical Graphics</strong>
-     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
      * <p>
      * <strong>Emergency Management</strong>
-     * <p>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      *
      * @param value the new value for the Status/Operational Condition field.

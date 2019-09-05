@@ -264,6 +264,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
      *
      * @param angle      angle to clamp to the allowed range.
      * @param viewLimits defines the heading limits.
+     * @return The clamped angle.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitHeading(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Angle)} instead.
@@ -303,6 +304,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
      *
      * @param angle      angle to clamp to the allowed range.
      * @param viewLimits defines the pitch limits.
+     * @return The clamped angle.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitPitch(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Angle)} instead.
@@ -341,6 +343,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
      *
      * @param angle      angle to clamp to the allowed range.
      * @param viewLimits defines the roll limits.
+     * @return The clamped angle.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitRoll(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Angle)} instead.
@@ -379,6 +382,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
      *
      * @param elevation  elevation to clamp to the allowed range.
      * @param viewLimits defines the eye elevation limits.
+     * @return The clamped angle.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitEyePosition(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Position)} instead.
@@ -411,6 +415,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
      * @param latitude   latitude angle to clamp to the allowed range.
      * @param longitude  longitude angle to clamp to the allowed range.
      * @param viewLimits defines the eye location limits.
+     * @return The clamped angle.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitEyePosition(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Position)} instead.

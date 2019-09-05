@@ -953,7 +953,8 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
      * location, configuration filename, and configuration file contents are derived from the specified parameter list.
      * This throws an exception if the configuration file cannot be installed for any reason.
      * <p>
-     * The parameter list must contain <strong>at least</strong> the following keys: <table> <tr><th>Key</th></tr>
+     * The parameter list must contain <strong>at least</strong> the following keys: <table> 
+     * <caption style="font-weight: bold;">Required Keys</caption><tr><th>Key</th></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FILE_STORE_LOCATION}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td></td></tr> </table>
@@ -1028,7 +1029,8 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
     /**
      * Returns the location of the configuration file which describes the tiled data produced by this
      * TiledRasterProducer. The install location is derived from the specified parameter list. This returns null if the
-     * parameter list is null, or if it does not contain any of the following keys: <table> <tr><th>Key</th></tr>
+     * parameter list is null, or if it does not contain any of the following keys: <table> 
+     * <caption style="font-weight: bold;">Required Keys</caption><tr><th>Key</th></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FILE_STORE_LOCATION}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td></td></tr> </table>

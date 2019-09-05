@@ -107,7 +107,7 @@ public class UnitsFormat extends AVListImpl
      * Constructs an instance that display length and area in specified units, and angles in decimal degrees.
      *
      * @param lengthUnits the desired length units. Available length units are <code>METERS, KILOMETERS, MILES,
-     *                    NAUTICAL_MILES, YARDS</code> and <code>FEET</code.
+     *                    NAUTICAL_MILES, YARDS</code> and <code>FEET</code>.
      * @param areaUnits   the desired area units. Available area units are <code>SQUARE_METERS, SQUARE_KILOMETERS,
      *                    HECTARE, ACRE, SQUARE_YARD</code> and <code>SQUARE_FEET</code>.
      *
@@ -122,7 +122,7 @@ public class UnitsFormat extends AVListImpl
      * Constructs an instance that display length and area in specified units, and angles in a specified format.
      *
      * @param lengthUnits the desired length units. Available length units are <code>METERS, KILOMETERS, MILES,
-     *                    NAUTICAL_MILES, YARDS</code> and <code>FEET</code.
+     *                    NAUTICAL_MILES, YARDS</code> and <code>FEET</code>.
      * @param areaUnits   the desired area units. Available area units are <code>SQUARE_METERS, SQUARE_KILOMETERS,
      *                    HECTARE, ACRE, SQUARE_YARD</code> and <code>SQUARE_FEET</code>.
      * @param showDMS     true if the desired angle format is degrees-minutes-seconds, false if the format is decimal

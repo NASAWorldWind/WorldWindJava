@@ -24,8 +24,8 @@ import java.util.*;
 /**
  * A general rigid volume defined by a center position and the three axis radii. If A is the radius in the north-south
  * direction, and b is the radius in the east-west direction, and c is the radius in the vertical direction (increasing
- * altitude), then A == B == C defines a unit shape, A == B > C defines a vertically flattened shape (disk-shaped), A ==
- * B < C defines a vertically stretched shape.
+ * altitude), then A == B == C defines a unit shape, A == B &gt; C defines a vertically flattened shape (disk-shaped), A ==
+ * B &lt; C defines a vertically stretched shape.
  *
  * @author ccrick
  * @version $Id: RigidShape.java 2990 2015-04-07 19:06:15Z tgaskins $

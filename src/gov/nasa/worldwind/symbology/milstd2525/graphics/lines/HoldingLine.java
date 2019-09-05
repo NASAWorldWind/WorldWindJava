@@ -20,7 +20,6 @@ import java.util.*;
 
 /**
  * This class implements the following graphics:
- * <p>
  * <ul> <li>Holding Line (2.X.2.6.1.2)</li> <li>Bridgehead (2.X.2.6.1.4)</li> </ul>
  * <p>
  * Note: These graphics require three control points. The first two points define the end points of the graphic, and the

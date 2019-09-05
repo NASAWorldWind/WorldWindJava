@@ -604,7 +604,7 @@ public class TacticalGraphicLabel
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchPicking(boolean).
+     * @see #setEnableBatchPicking(boolean)
      */
     public boolean isEnableBatchPicking()
     {
@@ -630,7 +630,7 @@ public class TacticalGraphicLabel
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchRendering(boolean).
+     * @see #setEnableBatchRendering(boolean)
      */
     public boolean isEnableBatchRendering()
     {

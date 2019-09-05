@@ -54,7 +54,8 @@ public class OpenStreetMapShapefileLoader
      * <p>
      * The returned Layer renders each Shapefile record as a surface circle with an associated screen label. The label
      * text is taken from the Shapefile record attribute key "name". This determines each surface circle's appearance
-     * from the Shapefile record attribute key "type" as follows: <table> <tr><th>Type</th><th>Color</th></tr>
+     * from the Shapefile record attribute key "type" as follows: <table> <caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Type</th><th>Color</th></tr>
      * <tr><td>hamlet</td><td>Black</td></tr> <tr><td>village</td><td>Green</td></tr>
      * <tr><td>town</td><td>Cyan</td></tr> <tr><td>city</td><td>Yellow</td></tr> </table>
      *
@@ -94,7 +95,7 @@ public class OpenStreetMapShapefileLoader
      * <p>
      * The returned Layer renders each Shapefile record as a surface circle with an associated screen label. The label
      * text is taken from the Shapefile record attribute key "name". This determines each surface circle's appearance
-     * from the Shapefile record attribute key "type" as follows: <table> <tr><th>Type</th><th>Color</th></tr>
+     * from the Shapefile record attribute key "type" as follows: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Type</th><th>Color</th></tr>
      * <tr><td>hamlet</td><td>Black</td></tr> <tr><td>village</td><td>Green</td></tr>
      * <tr><td>town</td><td>Cyan</td></tr> <tr><td>city</td><td>Yellow</td></tr> </table>
      *

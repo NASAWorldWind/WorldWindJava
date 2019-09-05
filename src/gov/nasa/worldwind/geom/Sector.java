@@ -22,7 +22,7 @@ import java.util.*;
  * 90 degrees latitude and +/- 180 degrees longitude. The minimums and maximums are relative to these ranges, e.g., -80
  * is less than 20. Behavior of the class is undefined for angles outside these ranges. Normalization is not performed
  * on the angles by this class, nor is it verified by the class' methods. See {@link Angle} for a description of
- * specifying angles. <p/> <code>Sector</code> instances are immutable. </p>
+ * specifying angles. <p> <code>Sector</code> instances are immutable. </p>
  *
  * @author Tom Gaskins
  * @version $Id: Sector.java 2397 2014-10-28 17:13:04Z dcollins $
@@ -1048,7 +1048,7 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
      * normalized to +/- 90 degrees latitude and +/- 180 degrees longitude. The result of the operation is undefined if
      * they are not.
      *
-     * @param latLon the position to test, with angles normalized to +/- &#960 latitude and +/- 2&#960 longitude.
+     * @param latLon the position to test, with angles normalized to +/- &#960; latitude and +/- 2&#960; longitude.
      *
      * @return <code>true</code> if the position is within the sector, <code>false</code> otherwise.
      *
@@ -1071,8 +1071,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
      * are assumed to be normalized to +/- 90 degrees latitude and +/- 180 degrees longitude. The result of the
      * operation is undefined if they are not.
      *
-     * @param radiansLatitude  the latitude in radians of the position to test, normalized +/- &#960.
-     * @param radiansLongitude the longitude in radians of the position to test, normalized +/- 2&#960.
+     * @param radiansLatitude  the latitude in radians of the position to test, normalized +/- &#960;.
+     * @param radiansLongitude the longitude in radians of the position to test, normalized +/- 2&#960;.
      *
      * @return <code>true</code> if the position is within the sector, <code>false</code> otherwise.
      */

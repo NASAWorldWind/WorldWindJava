@@ -227,6 +227,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
      *
      * @param geometries   COLLADA elements that defines geometry for this shape. Must contain at least one element.
      * @param bindMaterial Material applied to the mesh. May be null.
+     * @return The resulting shape.
      */
     public static ColladaMeshShape createTriangleMesh(List<ColladaTriangles> geometries,
         ColladaBindMaterial bindMaterial)
@@ -245,6 +246,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
      *
      * @param geometries   COLLADA elements that defines geometry for this shape. Must contain at least one element.
      * @param bindMaterial Material applied to the mesh. May be null.
+     * @return The resulting shape.
      */
     public static ColladaMeshShape createLineMesh(List<ColladaLines> geometries,
         ColladaBindMaterial bindMaterial)
@@ -1043,6 +1045,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
     /**
      * Indicates the texture applied to this shape.
      *
+     * @param geometry The geometry to set the texture from.
      * @return The texture that must be applied to the shape, or null if there is no texture, or the texture is not
      *         available.
      */

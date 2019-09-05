@@ -13,7 +13,7 @@ import java.io.File;
 import java.util.*;
 
 /**
- * DIGEST Part 2, Annex C.2.2.2.5 and C.2.3.6: <br/>A database is a collection of related libraries and additional
+ * DIGEST Part 2, Annex C.2.2.2.5 and C.2.3.6: <br>A database is a collection of related libraries and additional
  * tables. The library attribute table acts as a table of contents for the database.  Database information is contained
  * in a database header table.  Database level data quality information can be maintained in the data quality table.
  *

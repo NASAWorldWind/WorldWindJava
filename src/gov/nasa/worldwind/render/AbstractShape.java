@@ -489,7 +489,7 @@ public abstract class AbstractShape extends WWObjectImpl
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchRendering(boolean).
+     * @see #setEnableBatchRendering(boolean)
      */
     public boolean isEnableBatchRendering()
     {
@@ -513,7 +513,7 @@ public abstract class AbstractShape extends WWObjectImpl
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchPicking(boolean).
+     * @see #setEnableBatchPicking(boolean)
      */
     public boolean isEnableBatchPicking()
     {

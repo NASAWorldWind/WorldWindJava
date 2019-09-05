@@ -18,7 +18,6 @@ import java.awt.*;
  * TacticalGraphicAttributes is used to override default attributes determined by a graphic's symbol set. Any non-null
  * attributes will override the corresponding default attributes. Here's an example of overriding only the outline
  * material of a graphic without affecting other styling specified by the symbol set:
- * <p>
  * <pre>
  * TacticalGraphic graphic = ...
  * TacticalGraphicAttributes attrs = new BasicTacticalGraphicAttributes();

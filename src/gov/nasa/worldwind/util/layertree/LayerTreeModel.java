@@ -24,7 +24,6 @@ import gov.nasa.worldwind.util.tree.*;
  * layers in a <code>LayerList</code> from appearing in the tree. For example, the layer that renders the tree itself
  * usually should not appear in the tree. If it did then the user could turn off the tree layer and have no way of
  * getting it back. A layer can be marked as hidden by setting <code>AVKey.HIDDEN</code> to <code>true</code>:
- * <p>
  * <pre>hiddenLayer.setValue(AVKey.HIDDEN, true); // Prevent layer from being displayed in the layer tree</pre>
  *
  * @author dcollins

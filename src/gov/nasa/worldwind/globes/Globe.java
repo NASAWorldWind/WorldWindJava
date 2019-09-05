@@ -17,7 +17,6 @@ import java.util.List;
  * elevations for geographic positions on the surface of the globe. Globe provides methods for converting geographic
  * positions (latitude, longitude, and elevation) to cartesian coordinates, and for converting cartesian to geographic.
  * The origin and orientation of the cartesian coordinate system are determined by implementations of this interface.
- * <p>
  * <h1>Computations in Cartesian Coordinates</h1>
  * <p>
  * Globe provides methods for performing computations in the coordinate system represented by a globe's surface in
@@ -25,19 +24,16 @@ import java.util.List;
  * coordinates. For an ellipsoidal globe, these methods are equivalent to the ellipsoidal coordinate computations below.
  * For an instance of {@link Globe2D}, these methods work in the cartesian coordinates specified by the globe's 2D
  * projection.
- * <p>
  * <ul> <li>{@link #computePointFromPosition(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double)}</li>
  * <li>{@link #computePositionFromPoint(gov.nasa.worldwind.geom.Vec4)}</li> <li>{@link
  * #computeSurfaceNormalAtLocation(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle)}</li> <li>{@link
  * #computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double)}</li>
  * </ul>
- * <p>
  * <h1>Computations in Ellipsoidal Coordinates</h1>
  * <p>
  * Globe provides methods for performing computation on the ellipsoid represented by a globe's equatorial radius and its
  * polar radius. These methods perform work with respect to the ellipsoid in 3D cartesian coordinates. Calling any of
  * these methods on an instance of Globe2D will return the same result as a 3D globe with equivalent radii.
- * <p>
  * <ul> <li>{@link #computeEllipsoidalPointFromPosition(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle,
  * double)}</li> <li>{@link #computePositionFromEllipsoidalPoint(gov.nasa.worldwind.geom.Vec4)}</li> <li>{@link
  * #computeEllipsoidalNormalAtLocation(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle)}</li> <li>{@link
@@ -296,12 +292,20 @@ public interface Globe extends WWObject, Extent
      */
     Vec4 computeNorthPointingTangentAtLocation(Angle latitude, Angle longitude);
 
-    /** @see #computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double). */
-    @SuppressWarnings({"JavaDoc"})
+    /**
+     * @see #computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double)
+     * @param latitude See computeSurfaceOrientationAtPosition.
+     * @param longitude See computeSurfaceOrientationAtPosition.
+     * @param metersElevation See computeSurfaceOrientationAtPosition.
+     * @return See computeSurfaceOrientationAtPosition.
+     */
     Matrix computeModelCoordinateOriginTransform(Angle latitude, Angle longitude, double metersElevation);
 
-    /** @see #computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Position) */
-    @SuppressWarnings({"JavaDoc"})
+    /**
+     * @see #computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Position) 
+     * @param position See computeSurfaceOrientationAtPosition.
+     * @return See computeSurfaceOrientationAtPosition.
+     */
     Matrix computeModelCoordinateOriginTransform(Position position);
 
     /**

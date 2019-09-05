@@ -238,7 +238,6 @@ public class ContourBuilder
      * contour line coordinates is the XY Cartesian space defined by the rectangular array's width and height. X
      * coordinates range from 0 to width-1, and Y coordinates range from 0 to height-1.
      * <p>
-     * <p>
      * This returns an empty list if there are no contour lines associated with the value. This occurs when the value is
      * less than the rectangular array's minimum value, or when the value is greater than the rectangular array's
      * maximum value.

@@ -14,9 +14,8 @@ import gov.nasa.worldwind.util.UnitsFormat;
 /**
  * TacticalSymbol provides a common interface for displaying tactical point symbols from symbology sets. A tactical
  * symbol displays graphic and textual information about an object at a single geographic position at a particular point
- * in time. See the <a title="Tactical Symbol Usage Guide" href="https://goworldwind.org/developers-guide/symbology/tactical-symbols/"
- * target="_blank">Tactical Symbol Usage Guide</a> for instructions on using TacticalSymbol in an application.
- * <p>
+ * in time. See the <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
+ * for instructions on using TacticalSymbol in an application.
  * <h2>Construction</h2> Implementations of this interface provide support for symbols belonging to a specific symbology
  * set. For example, class {@link gov.nasa.worldwind.symbology.milstd2525.MilStd2525TacticalSymbol} provides support for
  * tactical symbols from the MIL-STD-2525 symbology specification.
@@ -37,7 +36,6 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * or by calling its render method from within a custom layer or renderable object. The simplest way to display a
  * tactical symbol is to add it to a {@link gov.nasa.worldwind.layers.RenderableLayer}. Here's an example of creating
  * and displaying a tactical symbol for a MIL-STD-2525 friendly ground unit using a RenderableLayer:
- * <p>
  * <pre>
  * // Create a tactical symbol for a MIL-STD-2525 friendly ground unit. Since the SIDC specifies a ground symbol, the
  * // tactical symbol's altitude mode is automatically configured as WorldWind.CLAMP_TO_GROUND.
@@ -55,7 +53,6 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * wwd.getModel().getLayers().add(symbolLayer);
  * wwd.redraw();
  * </pre>
- * <p>
  * <h2>Position</h2> A symbol's geographic position defines where the symbol displays its graphic. Either the graphic's
  * geometric center is displayed at the position, or a specific location within the graphic (such as the bottom of a
  * leader line) is displayed at the position. This behavior depends on the symbol implementation, the string identifier,
@@ -72,13 +69,11 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * For example, specifying the MIL-STD-2525 SIDC "SFGPU---------G" specifies a friendly ground unit symbol, and causes a
  * tactical symbol to configure the altitude mode as WorldWind.CLAMP_TO_GROUND. The automatically configured mode can be
  * overridden by calling setAltitudeMode.
- * <p>
  * <h2>Modifiers</h2> Symbols modifiers are optional attributes that augment or change a symbol's graphic. Modifiers can
  * be specified at construction by passing a list of key-value pairs, or after construction by calling {@link
  * #setModifier(String, Object)} with the modifier key and value. Which modifier keys are recognized by a tactical
  * symbol and how they affect the symbol's graphic is implementation dependent. Here's an example of setting the the
  * heading (direction of movement) modifier at construction for a MIL-STD-2525 friendly ground unit:
- * <p>
  * <pre>
  * // Create a tactical symbol for a MIL-STD-2525 friendly ground unit, specifying the optional Direction of Movement
  * // modifier by passing in a list of key-value pairs.
@@ -89,7 +84,6 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * </pre>
  * <p>
  * Here's an example of setting the same modifier after construction:
- * <p>
  * <pre>
  * // Create a tactical symbol for a MIL-STD-2525 friendly ground unit.
  * TacticalSymbol symbol = new MilStd2525TacticalSymbol("SFGPU---------G", Position.fromDegrees(40, -120, 0));
@@ -102,7 +96,6 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * example, given a MIL-STD-2525 symbol representing units, installation, or equipment, SIDC positions 11-12 specify the
  * echelon and task force modifiers (See MIL-STD-2525C, Appendix A). Here's an example of setting the echelon and task
  * force modifiers at construction for a MIL-STD-2525 friendly ground unit:
- * <p>
  * <pre>
  * // Create a tactical symbol for a MIL-STD-2525 friendly ground unit. Specify the echelon modifier and task force
  * // modifiers by setting the SIDC characters 11-12 to "EA". This indicates that the ground unit is a Task Force with

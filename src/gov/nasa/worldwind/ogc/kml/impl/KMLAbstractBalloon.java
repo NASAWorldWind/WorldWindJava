@@ -28,9 +28,8 @@ import java.util.regex.*;
  * contained Balloon.
  * <p>
  * To use KML Balloon, first create a Balloon of the desired type, and then create the KML Balloon. For example:
- * <p>
- * <code>
  * <pre>
+ * <code>
  *   KMLPlacemark myPlacemark = ...;
  *   Position placemarkPosition = ...;
  *
@@ -39,8 +38,8 @@ import java.util.regex.*;
  *
  *   // Create a KML Balloon to apply the placemark's KML BalloonStyle to the browser balloon.
  *   KMLGlobeBalloonImpl kmlBalloon = new KMLGlobeBalloonImpl(globeBalloon, myPlacemark);
- * </pre>
  * </code>
+ * </pre>
  *
  * @author pabercrombie
  * @version $Id: KMLAbstractBalloon.java 1555 2013-08-20 13:33:12Z pabercrombie $

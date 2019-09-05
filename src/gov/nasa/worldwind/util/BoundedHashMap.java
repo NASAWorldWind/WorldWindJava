@@ -7,7 +7,7 @@ package gov.nasa.worldwind.util;
 
 /**
  * BoundedHashMap is a map with a fixed capacity. When the map's size exceeds its capacity, it automatically removes
- * elements until its size is equal to its capacity. <p/> BoundedHashMap can operate in two ordering modes: insertion
+ * elements until its size is equal to its capacity. <p> BoundedHashMap can operate in two ordering modes: insertion
  * order and access order. The mode specified which entries are automatically removed when the map is over capacity. In
  * insertion order mode the map removes the eldest entry (the first entry added). In access order mode, the map
  * automatically removes the least recently used entry.

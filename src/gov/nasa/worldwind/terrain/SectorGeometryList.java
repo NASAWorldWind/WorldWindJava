@@ -382,7 +382,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
      *
      * @param line the <code>Line</code> for which an intersection is to be found.
      *
-     * @return the <Vec4> point closest to the ray origin where an intersection has been found or null if no
+     * @return the &lt;Vec4&gt; point closest to the ray origin where an intersection has been found or null if no
      *         intersection was found.
      */
     public Intersection[] intersect(Line line)

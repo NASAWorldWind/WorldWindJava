@@ -54,7 +54,6 @@ public class BasicDataFileStore extends AbstractFileStore
      * list to find the content type matching the cached file.
      * <p>
      * This is initialized to the following list of default content types typically used in WorldWind applications:
-     * <p>
      * <ul> <li>application/vnd.google-earth.kml+xml</li> <li>application/vnd.google-earth.kmz</li>
      * <li>model/collada+xml</li> <li>image/dds</li> <li>image/gif</li> <li>image/jpeg</li> <li>image/jpg</li>
      * <li>image/png</li> </ul>
@@ -775,7 +774,6 @@ public class BasicDataFileStore extends AbstractFileStore
      * <p>
      * This removes the key, the value, and any trailing parameter delimiter of all private parameters in the specified
      * query string. Recognized private query parameters are as follows:
-     * <p>
      * <ul> <li>CONNECTID</li> </ul>
      *
      * @param queryString the query string to examine.

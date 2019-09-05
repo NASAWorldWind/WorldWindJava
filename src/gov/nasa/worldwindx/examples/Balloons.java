@@ -24,18 +24,18 @@ import java.io.InputStream;
  * provides support for simple text content with an optional image, and BrowserBalloon which provides support for
  * complex HTML, JavaScript, and Flash content.
  * <p>
- * <strong>Balloon Content</strong> <br/> A Balloon's content is specified by calling <code>{@link
+ * <strong>Balloon Content</strong> <br> A Balloon's content is specified by calling <code>{@link
  * Balloon#setText(String)}</code>, and its visual attributes are specified by calling <code>{@link
  * Balloon#setAttributes(gov.nasa.worldwind.render.BalloonAttributes)}</code> with an instance of <code>{@link
  * BalloonAttributes}</code>.
  * <p>
- * <strong>ScreenBalloon</strong> <br/> ScreenBalloons display a screen-aligned balloon at a point on the screen. There
+ * <strong>ScreenBalloon</strong> <br> ScreenBalloons display a screen-aligned balloon at a point on the screen. There
  * are two concrete ScreenBalloon types: <ul> <li><code>{@link ScreenAnnotationBalloon}</code> - a screen-attached
  * balloon with support for multi-line text, a background image, simple HTML text markup, and simple text styling
  * attributes.</li> <li><code>{@link ScreenBrowserBalloon}</code> - a screen-attached balloon with support for HTML,
  * JavaScript, and Flash content.</li> </ul>
  * <p>
- * <strong>GlobeBalloon</strong> <br/> GlobeBalloons display a screen-aligned balloon attached to a position on the
+ * <strong>GlobeBalloon</strong> <br> GlobeBalloons display a screen-aligned balloon attached to a position on the
  * Globe. <ul> <li><code>{@link GlobeAnnotationBalloon}</code> - a Globe-attached balloon with support for multi-line
  * text, a background image, simple HTML text markup, and simple text styling attributes.</li> <li><code>{@link
  * GlobeBrowserBalloon}</code> - a Globe-attached balloon with support for HTML, JavaScript, and Flash content.</li>

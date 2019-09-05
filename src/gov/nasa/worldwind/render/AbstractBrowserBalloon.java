@@ -352,8 +352,8 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
     /**
      * Returns a list containing the browser balloon's three default browser controls, configured as follows:
-     * <p>
-     * <table> <tr><th>Control</th><th>Action</th><th>Offset</th><th>Size</th><th>Image Source</th></tr>
+     * <table> <caption style="font-weight: bold;">Controls</caption>
+     * <tr><th>Control</th><th>Action</th><th>Offset</th><th>Size</th><th>Image Source</th></tr>
      * <tr><td>Close</td><td><code>AVKey.CLOSE</code></td><td>(30, 25) pixels inset from the balloon's upper right
      * corner</td><td>Image source's native size in pixels (16x16)</td><td>images/browser-close-16x16.gif</td></tr>
      * <tr><td>Back</td><td><code>AVKey.BACK</code></td><td>(15, 25) pixels inset from the balloon's upper left
@@ -438,6 +438,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Computes and stores the balloon's model-coordinate and screen-coordinate points.
      *
      * @param dc the current draw context.
+     * @param obb The balloon.
      */
     protected abstract void computeBalloonPoints(DrawContext dc, OrderedBrowserBalloon obb);
 
@@ -447,6 +448,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Disposes the balloon's internal <code>{@link gov.nasa.worldwind.util.webview.WebView}</code>. This does nothing
      * if the balloon is already disposed.
      */
+    @Override
     public void dispose()
     {
         this.disposeWebView();
@@ -665,7 +667,6 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     /**
      * Specifies a the object to use when resolving relative resource paths in this browser balloon's HTML content. The
      * <code>resourceResolver</code> may be one of the following:
-     * <p>
      * <ul> <li>a <code>{@link gov.nasa.worldwind.util.webview.WebResourceResolver}</code></li> <li>a <code>{@link
      * java.net.URL}</code></li> <li>a <code>{@link String}</code> containing a valid URL description</li> </ul>
      * <p>
@@ -891,13 +892,14 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     }
 
     /**
-     * Update the balloon's active attributes and points, if that hasn't already been done this frame. This updates the
+     * Update the balloon's active attributes and points, if that hasn't already been done this frame.This updates the
      * balloon's rendering state as follows: <ul> <li>Computes the balloon's active attributes by calling
      * <code>determineActiveAttributes</code> and stores the result in <code>activeAttributes</code>.</li> <li>Computes
      * the balloon's model-coordinate and screen-coordinate points by calling <code>computeBalloonPoints</code>.</li>
      * </ul>
      *
      * @param dc the current draw context.
+     * @param obb The balloon to update.
      */
     protected void updateRenderStateIfNeeded(DrawContext dc, OrderedBrowserBalloon obb)
     {
@@ -977,6 +979,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Indicates whether this balloon's screen-coordinate geometry must be recomputed as a result of a balloon attribute
      * changing.
      *
+     * @param obb The balloon to check.
      * @return <code>true</code> if this balloon's geometry must be recomputed, otherwise <code>false</code>.
      */
     protected boolean mustRegenerateGeometry(OrderedBrowserBalloon obb)
@@ -997,6 +1000,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     /**
      * Updates the balloon's screen-coordinate geometry in <code>frameInfo</code> according to the current screen
      * bounds, screen offset, and active attributes.
+     * @param obb The balloon to update.
      */
     protected void computeGeometry(OrderedBrowserBalloon obb)
     {
@@ -1023,6 +1027,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     /**
      * Creates the balloon's frame vertex buffer according to the active attributes.
      *
+     * @param obb The balloon.
      * @return a buffer containing the frame's x and y locations.
      */
     protected FloatBuffer createFrameVertices(OrderedBrowserBalloon obb)
@@ -1115,6 +1120,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Determines whether the balloon intersects the view frustum.
      *
      * @param dc the current draw context.
+     * @param obb The balloon to check.
      *
      * @return <code>true</code> If the balloon intersects the frustum, otherwise <code>false</code>.
      */
@@ -1306,7 +1312,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
     /**
      * Draws this browser balloon's interior geometry in screen-coordinates, with the <code>WebView's</code> texture
-     * representation applied as an OpenGL decal. OpenGL's texture decal mode uses the texture color where the texture's
+     * representation applied as an OpenGL decal.OpenGL's texture decal mode uses the texture color where the texture's
      * alpha is 1, and uses the balloon's background color where it's 0. The texture's internal format must be RGBA to
      * work correctly, and this assumes that the WebView's texture format is RGBA.
      * <p>
@@ -1318,6 +1324,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * and does not apply the <code>WebView's</code> texture.
      *
      * @param dc the current draw context.
+     * @param obb The balloon to draw.
      */
     protected void drawFrameInterior(DrawContext dc, OrderedBrowserBalloon obb)
     {
@@ -1686,9 +1693,10 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     }
 
     /**
-     * Draw pickable regions for the resize controls. A pickable region is drawn along the frame outline.
+     * Draw pickable regions for the resize controls.A pickable region is drawn along the frame outline.
      *
      * @param dc Draw context.
+     * @param obb The balloon.
      */
     protected void drawResizeControl(DrawContext dc, OrderedBrowserBalloon obb)
     {

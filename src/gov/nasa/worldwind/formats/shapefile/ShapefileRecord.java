@@ -281,7 +281,7 @@ public abstract class ShapefileRecord
      * is not <code>{@link Shapefile#SHAPE_NULL}</code>. Records of type <code>SHAPE_NULL</code> are always valid, and
      * may appear in any Shapefile.
      * <p>
-     * For details, see the ESRI Shapefile specification at <a href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf"/>,
+     * For details, see the ESRI Shapefile specification at <a href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf"></a>,
      * pages 4 and 5.
      *
      * @param shapefile the shapefile.

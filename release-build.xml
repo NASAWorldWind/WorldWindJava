@@ -90,6 +90,10 @@
                  windowtitle="NASA WorldWind" doctitle="NASA WorldWind" header="NASA WorldWind"
                  splitindex="true" protected="true" nodeprecated="true" version="false" author="false" use="true"
                  maxmemory="1024m">
+            <arg value="-Xmaxerrs" />
+            <arg value="10000" />
+            <arg value="-Xmaxwarns" />
+            <arg value="10000" />
             <packageset dir="${worldwind.src.dir}" defaultexcludes="yes">
                 <include name="gov/nasa/worldwind/**"/>
                 <include name="gov/nasa/worldwindx/**"/>

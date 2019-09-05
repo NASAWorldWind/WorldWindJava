@@ -25,7 +25,7 @@ import java.util.List;
  * @author tag
  * @version $Id: Polyline.java 2188 2014-07-30 15:01:16Z tgaskins $
  * @deprecated Use {@link Path} instead.
- *             <p/>
+ *             <p>
  *             When drawn on a 2D globe, this shape uses either a {@link SurfacePolyline} or {@link SurfacePolygon} to
  *             represent itself.
  */

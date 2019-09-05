@@ -187,7 +187,7 @@ public abstract class CompoundVecBuffer
      *
      * @return a new CompoundVecBuffer representing a subset of this CompoundVecBuffer.
      *
-     * @throws IllegalArgumentException if beginIndex is out of range, if endIndex is out of range, or if beginIndex >
+     * @throws IllegalArgumentException if beginIndex is out of range, if endIndex is out of range, or if beginIndex &gt;
      *                                  endIndex.
      */
     public CompoundVecBuffer slice(int beginIndex, int endIndex)

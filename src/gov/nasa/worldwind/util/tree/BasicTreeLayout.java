@@ -1747,7 +1747,6 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
      * Toggles the selection state of the specified <code>node</code>. In order to provide an intuitive tree selection
      * model to the application, this changes the selection state of the <code>node</code>'s ancestors and descendants
      * as follows:
-     * <p>
      * <ul> <li>The branch beneath the node it also set to the node's new selection state. Toggling an interior node's
      * selection state causes that entire branch to toggle.</li> <li>The node's ancestors are set to match the node's
      * new selection state. If the new state is <code>false</code>, this stops at the first ancestor with another branch

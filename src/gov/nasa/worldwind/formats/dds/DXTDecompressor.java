@@ -18,7 +18,7 @@ public interface DXTDecompressor
     /**
      * Decompress DXT1, DXT3 and DXT3A encoded rasters
      *
-     * @param buffer
+     * @param buffer The buffer to decompress.
      * @param width  must be a positive and power of two (4, 8, 16, 32, 64, 128, 512, etc )
      * @param height must be a positive and power of two (4, 8, 16, 32, 64, 128, 512, etc )
      * @return java.awt.image.BufferedImage instance

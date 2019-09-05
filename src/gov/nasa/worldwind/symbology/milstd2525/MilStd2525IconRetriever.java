@@ -21,8 +21,7 @@ import java.util.*;
  * Usage Guide</a> for details on how to configure a local symbol repository. For more information on how to use this
  * class see the IconRetriever Usage Guide and the {@link gov.nasa.worldwindx.examples.symbology.IconRetrieverUsage}
  * example.
- * <p>
- * <h2><a name="parameters">Retrieval parameters</a></h2>
+ * <h2>Retrieval parameters</h2>
  * <p>
  * Table IX (pg. 35) of MIL-STD-2525C defines a hierarchy for simplifying tactical symbols. This hierarchy is
  * implemented using retrieval parameters SHOW_FILL, SHOW_FRAME, and SHOW_ICON. By default, all three elements are
@@ -31,8 +30,7 @@ import java.util.*;
  * the state of SHOW_FILL).
  * <p>
  * {@link #createIcon(String, gov.nasa.worldwind.avlist.AVList) createIcon} accepts the following parameters:
- * <p>
- * <table> <tr><th>Key</th><th>Type</th><td>Description</th></tr> <tr><td>SymbologyConstants.SHOW_ICON</td><td>Boolean</td><td>Determines
+ * <table><caption style="font-weight: bold;">createIcon Parameters</caption> <tr><th>Key</th><th>Type</th><td><th>Description</th></tr> <tr><td>SymbologyConstants.SHOW_ICON</td><td>Boolean</td><td>Determines
  * if the symbol will be created with an icon.</td></tr> <tr><td>SymbologyConstants.SHOW_FRAME</td><td>Boolean</td><td>Determines
  * if the symbol will be created with a frame.</td></tr> <tr><td>SymbologyConstants.SHOW_FILL</td><td>Boolean</td><td>Determines
  * if the symbol will be created with a fill color.</td></tr><tr><td valign="top">AVKey.COLOR</td><td

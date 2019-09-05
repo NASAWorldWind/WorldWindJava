@@ -43,13 +43,14 @@ public class JsonParserSequence extends JsonParserDelegate
     }
 
     /**
-     * Method that will construct a parser (possibly a sequence) that
-     * contains all given sub-parsers.
-     * All parsers given are checked to see if they are sequences: and
-     * if so, they will be "flattened", that is, contained parsers are
-     * directly added in a new sequence instead of adding sequences
-     * within sequences. This is done to minimize delegation depth,
-     * ideally only having just a single level of delegation.
+     * Method that will construct a parser (possibly a sequence) that contains all given sub-parsers.All parsers given
+     * are checked to see if they are sequences: and if so, they will be "flattened", that is, contained parsers are
+     * directly added in a new sequence instead of adding sequences within sequences.This is done to minimize delegation
+     * depth, ideally only having just a single level of delegation.
+     *
+     * @param first Undocumented.
+     * @param second Undocumented.
+     * @return Undocumented.
      */
     public static JsonParserSequence createFlattened(JsonParser first, JsonParser second)
     {
@@ -120,6 +121,7 @@ public class JsonParserSequence extends JsonParserDelegate
      * Method that is most useful for debugging or testing;
      * returns actual number of underlying parsers sequence
      * was constructed with (nor just ones remaining active)
+     * @return Undocumented.
      */
     public int containedParsersCount() {
         return _parsers.length;

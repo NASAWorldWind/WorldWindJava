@@ -275,8 +275,6 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
     /**
      * Extracts metadata and sets next key/value pairs:
      * <p>
-     * <p>
-     * <p>
      * AVKey.WIDTH - the maximum width of the image
      * <p>
      * AVKey.HEIGHT - the maximum height of the image
@@ -1011,18 +1009,12 @@ public class GDALDataRaster extends AbstractDataRaster implements Cacheable
      * Builds a writable data raster for the requested region of interest (ROI)
      *
      * @param params Required parameters are:
-     *               <p/>
-     *               <p/> AVKey.HEIGHT as Integer, specifies a height of the desired ROI
-     *               <p/>
-     *               <p/> AVKey.WIDTH as Integer, specifies a width of the desired ROI
-     *               <p/>
-     *               <p/> AVKey.SECTOR as Sector, specifies an extent of the desired ROI
-     *               <p/>
-     *               <p/>
-     *               <p/>
+     *               <p> AVKey.HEIGHT as Integer, specifies a height of the desired ROI
+     *               <p> AVKey.WIDTH as Integer, specifies a width of the desired ROI
+     *               <p> AVKey.SECTOR as Sector, specifies an extent of the desired ROI
+     *               <p>
      *               Optional parameters are:
-     *               <p/>
-     *               <p/> AVKey.BAND_ORDER as array of integers, examples: for RGBA image: new int[] { 0, 1, 2, 3 }, or
+     *               <p> AVKey.BAND_ORDER as array of integers, examples: for RGBA image: new int[] { 0, 1, 2, 3 }, or
      *               for  ARGB image: new int[] { 3, 0, 1, 2 } , or if you want only RGB bands of the RGBA image: new
      *               int[] {0, 1, 2 }, or only Intensity (4th) band of the specific aerial image: new int[] { 3 }
      *

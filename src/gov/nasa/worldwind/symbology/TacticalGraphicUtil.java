@@ -180,20 +180,22 @@ public class TacticalGraphicUtil
      * <p>
      * A typical usage looks like this:
      * <pre>
+     * <code>
      * Vec4[] controlPoints = ... // Determine control points appropriate for your curve
      *
-     * List<Position> curvePositions = new ArrayList<Position>();
+     * List&lt;Position&gt; curvePositions = new ArrayList&lt;Position&gt;();
      * int[] coefficients = new int[controlPoints.length];
      *
      * int intervals = 32;
      * double delta = 1.0 / intervals;
-     * for (int i = 0; i < intervals; i++)
+     * for (int i = 0; i &lt; intervals; i++)
      * {
      *     double t = i * delta;
      *     Vec4 pt = TacticalGraphicUtil.bezierCurve(controlPoints, t, coefficients);
      *     Position pos = globe.computePositionFromPoint(p);
      *     curvePositions.add(pos);
      * }
+     * </code>
      * </pre>
      *
      * @param controlPoints Control points for the curve.

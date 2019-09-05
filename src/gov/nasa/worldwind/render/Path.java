@@ -1136,9 +1136,10 @@ public class Path extends AbstractShape
 
     /**
      * Indicates whether this Path's defining positions and the positions in between are located on the underlying
-     * terrain. This returns <code>true</code> if this Path's altitude mode is <code>WorldWind.CLAMP_TO_GROUND</code>
-     * and the follow-terrain property is <code>true</code>. Otherwise this returns <code>false</code>.
+     * terrain.This returns <code>true</code> if this Path's altitude mode is <code>WorldWind.CLAMP_TO_GROUND</code> and
+     * the follow-terrain property is <code>true</code>. Otherwise this returns <code>false</code>.
      *
+     * @param dc The current draw context.
      * @return <code>true</code> if this Path's positions and the positions in between are located on the underlying
      * terrain, and <code>false</code> otherwise.
      */

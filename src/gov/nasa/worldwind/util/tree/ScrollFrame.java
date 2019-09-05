@@ -957,6 +957,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * <p>
      * The returned texture's internal format is RGBA8.
      *
+     * @param dc The draw context.
      * @param width  the texture's width, in pixels.
      * @param height the texture's height, in pixels.
      *

@@ -250,7 +250,7 @@ public class BasicLayerFactory extends BasicFactory
      *
      * @throws WWUnrecognizedException if the layer type or service type given in the describing element is
      *                                 unrecognized.
-     * @see #createTiledImageLayer(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList).
+     * @see #createTiledImageLayer(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
     protected Layer createFromLayerDocument(Element domElement, AVList params)
     {

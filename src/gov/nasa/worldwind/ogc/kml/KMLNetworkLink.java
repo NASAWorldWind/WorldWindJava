@@ -217,7 +217,7 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
 
     /**
      * Specifies the network resource referenced by this <code>KMLNetworkLink</code>, or <code>null</code> if this link
-     * has no resource. If the specified <code>kmlRoot</code> is not <code>null</code, this link draws the
+     * has no resource. If the specified <code>kmlRoot</code> is not <code>null</code>, this link draws the
      * <code>kmlRoot</code> during preRendering and rendering, and forwards property change events from the
      * <code>kmlRoot</code> to this link's property change listeners.
      *
@@ -445,7 +445,6 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * Indicates whether the network resource references by this <code>KMLNetworkLink</code> should be retrieved to the
      * WorldWind cache or to a temporary location. This returns <code>true</code> if all of the following conditions
      * are met, and <code>false</code> otherwise:
-     * <p>
      * <ul> <li>This network link has either a <code>Link</code> or a <code>Url</code> element.</li> <li>The Link or Url
      * element's <code>refreshMode</code> is not <code>onInterval</code> or <code>onExpire</code>.</li> <li>The Link or
      * Url element's <code>viewRefreshMode</code> is not <code>onStop</code>.</li> </ul>

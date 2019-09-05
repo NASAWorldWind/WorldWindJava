@@ -404,7 +404,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
     }
 
     /**
-     * Creates this instance's {@link Texture} if the image source is a <code>BufferedImage<code>.
+     * Creates this instance's {@link Texture} if the image source is a <code>BufferedImage</code>.
      *
      * @param dc the current draw context.
      *

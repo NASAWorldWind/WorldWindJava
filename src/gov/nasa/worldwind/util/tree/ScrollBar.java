@@ -20,7 +20,6 @@ import java.awt.event.*;
  * A scrollbar component. The scrollable range is defined by four values: min, max, value, and extent. {@code value} is
  * the current position of the scroll bar. {@code extent} represents the visible region. The four values must always
  * satisfy this relationship:
- * <p>
  * <pre>
  *   min &lt;= value &lt;= value + extent &lt;= max
  * </pre>

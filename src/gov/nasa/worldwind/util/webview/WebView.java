@@ -46,7 +46,6 @@ public interface WebView extends AVList, Disposable
     /**
      * Specifies this <code>WebView's</code> HTML content as a string. The specified <code>htmlString</code> may be one
      * of the following:
-     * <p>
      * <ul> <li>HTML document</li> <li>HTML fragment</li> <li>Simple text</li> <li><code>null</code></li> </ul>
      * <p>
      * The WebView displays nothing if <code>htmlString</code> is <code>null</code> or empty. If the
@@ -64,7 +63,6 @@ public interface WebView extends AVList, Disposable
     /**
      * Specifies this <code>WebView's</code> HTML content as a string. The specified <code>htmlString</code> may be one
      * of the following:
-     * <p>
      * <ul> <li>HTML document</li> <li>HTML fragment</li> <li>Simple text</li> <li><code>null</code></li> </ul>
      * <p>
      * The WebView displays nothing if <code>htmlString</code> is <code>null</code> or empty. The <code>baseURL</code>
@@ -86,7 +84,6 @@ public interface WebView extends AVList, Disposable
     /**
      * Specifies this <code>WebView's</code> HTML content as a string. The specified <code>htmlString</code> may be one
      * of the following:
-     * <p>
      * <ul> <li>HTML document</li> <li>HTML fragment</li> <li>Simple text</li> <li><code>null</code></li> </ul>
      * <p>
      * The WebView displays nothing if <code>htmlString</code> is <code>null</code> or empty. The
@@ -178,7 +175,6 @@ public interface WebView extends AVList, Disposable
      * returned iterable has no elements if this <code>WebView</code> has no links, or if none of the links are
      * currently in the <code>WebView's</code> visible area. Each <code>AVList</code> describes the parameters for one
      * link as follows:
-     * <p>
      * <ul> <li><code>AVKey.URL</code> - a <code>String</code> containing the link's destination.</li>
      * <li><code>AVKey.MIME_TYPE</code> - a <code>String</code> mime type describing the content type of the link's
      * destination.</li> <li><code>AVKey.TARGET</code> - the link's target frame, one of the following: <code>_blank,

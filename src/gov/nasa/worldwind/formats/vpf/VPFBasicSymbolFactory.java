@@ -42,10 +42,11 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     }
 
     /**
-     * @param featureClass
+     * @param featureClass The feature class.
      *
-     * @return
+     * @return the symbols.
      */
+    @Override
     public Collection<? extends VPFSymbol> createPointSymbols(VPFFeatureClass featureClass)
     {
         if (featureClass == null)
@@ -65,9 +66,9 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     }
 
     /**
-     * @param featureClass
+     * @param featureClass The feature class.
      *
-     * @return
+     * @return The symbols.
      */
     public Collection<? extends VPFSymbol> createLineSymbols(VPFFeatureClass featureClass)
     {
@@ -88,9 +89,9 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     }
 
     /**
-     * @param featureClass
+     * @param featureClass The feature class.
      *
-     * @return
+     * @return The symbols.
      */
     public Collection<? extends VPFSymbol> createAreaSymbols(VPFFeatureClass featureClass)
     {
@@ -111,9 +112,9 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     }
 
     /**
-     * @param featureClass
+     * @param featureClass The feature class.
      *
-     * @return
+     * @return The symbols.
      */
     public Collection<? extends VPFSymbol> createTextSymbols(VPFFeatureClass featureClass)
     {
@@ -134,9 +135,9 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     }
 
     /**
-     * @param featureClass
+     * @param featureClass The feature class.
      *
-     * @return
+     * @return The symbols.
      */
     public Collection<? extends VPFSymbol> createComplexSymbols(VPFFeatureClass featureClass)
     {
@@ -187,6 +188,8 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
      * From MIL-HDBK-857A, section 6.5.3.1: For point features (e.g., buoys, beacons, lights) that are composed of
      * several symbol components, displaying the components according to the row ids in the *sym.txt file will result in
      * the properly constructed composite symbol.
+     * @param featureMap The feature map.
+     * @param outCollection The symbols.
      */
     protected void doCreatePointSymbols(FeatureMap featureMap, Collection<VPFSymbol> outCollection)
     {
@@ -214,6 +217,8 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
     /**
      * From MIL-DTL-89045A, section 3.5.3.1.1: A linear feature will be symbolized exclusively by a line symbol that may
      * or may not be labeled.
+     * @param featureMap The feature map.
+     * @param outCollection The symbols.
      */
     protected void doCreateLineSymbols(FeatureMap featureMap, Collection<VPFSymbol> outCollection)
     {
@@ -265,6 +270,8 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
      * point symbol that apply to the specific area feature.  These multiple rows will have sequential row ids in the
      * *sym.txt file according to the order in which the symbols are to be displayed on the screen:  solid fill, pattern
      * fill (may be more than one), linear boundary, centered point symbol (may be more than one).
+     * @param featureMap The feature map.
+     * @param outCollection The symbols.
      */
     protected void doCreateAreaSymbols(FeatureMap featureMap, Collection<VPFSymbol> outCollection)
     {
@@ -301,8 +308,11 @@ public class VPFBasicSymbolFactory implements VPFSymbolFactory
 
     /**
      * From MIL-DTL-89045A, section 3.5.3.1.1: VPF products can contain a fourth type of feature known as a text
-     * feature.  GeoSym does not include rules to display text features.  The application software should refer to the
+     * feature.GeoSym does not include rules to display text features.The application software should refer to the
      * MIL-STD-2407 for information on how to display VPF text features.
+     *
+     * @param featureMap The feature map.
+     * @param outCollection The symbols.
      */
     protected void doCreateTextSymbols(FeatureMap featureMap, Collection<VPFSymbol> outCollection)
     {

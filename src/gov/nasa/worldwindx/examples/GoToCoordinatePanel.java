@@ -22,15 +22,17 @@ import java.util.regex.*;
  * decimal degrees.
  * <p>
  * Supported format are:
+ * </p>
  * <ul>
  * <li>MGRS strings with or without separating spaces.</li>
  * <li>Decimal degrees with sign prefix or N, S, E, W suffix.</li>
  * <li>Degrees, minutes and seconds with sign prefix or N, S, E, W suffix.</li>
  * </ul>
  * The separator between lat/lon pairs can be ',', ', ' or any number of spaces.
- * </p>
  * <p>
- * Examples:<pre>
+ * Examples:
+ * </p>
+ * <pre>
  * 11sku528111
  * 11S KU 528 111
  *
@@ -40,7 +42,6 @@ import java.util.regex.*;
  *
  * 45 30 N 50 30 W
  * </pre>
- * </p>
  *
  * @author Patrick Murris
  * @version $Id: GoToCoordinatePanel.java 1171 2013-02-11 21:45:02Z dcollins $

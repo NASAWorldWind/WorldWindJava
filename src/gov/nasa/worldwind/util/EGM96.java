@@ -35,6 +35,7 @@ public class EGM96
      *
      * @param offsetsFilePath a path pointing to a file with the geoid offsets. See the class description above for a
      *                        description of the file.
+     * @throws java.io.IOException if there's a problem reading the file.
      */
     public EGM96(String offsetsFilePath) throws IOException
     {

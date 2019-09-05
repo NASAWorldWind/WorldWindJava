@@ -125,7 +125,7 @@ public class WWMath
      * @param min the floor.
      * @param max the ceiling
      *
-     * @return the nearest value such that min <= v <= max.
+     * @return the nearest value such that min &lt;= v &lt;= max.
      */
     public static double clamp(double v, double min, double max)
     {
@@ -139,7 +139,7 @@ public class WWMath
      * @param min the floor.
      * @param max the ceiling
      *
-     * @return the nearest value such that min <= v <= max.
+     * @return the nearest value such that min &lt;= v &lt;= max.
      */
     public static int clamp(int v, int min, int max)
     {
@@ -151,9 +151,9 @@ public class WWMath
      * after the specified min and max. Returns a linear interpolation of min and max when the value is between the
      * two.
      * <p>
-     * The returned number is undefined if min > max. Otherwise, the returned number is equivalent to the following:
-     * <ul> <li>0.0 - If value < min</li> <li>1.0 - If value > max</li> <li>Linear interpolation of min and max - If min
-     * <= value <= max</li> </ul>
+     * The returned number is undefined if min &gt; max. Otherwise, the returned number is equivalent to the following:
+     * <ul> <li>0.0 - If value &lt; min</li> <li>1.0 - If value &gt; max</li> <li>Linear interpolation of min and max - If min
+     * &lt;= value &lt;= max</li> </ul>
      *
      * @param value the value to compare to the minimum and maximum.
      * @param min   the minimum value.
@@ -191,10 +191,9 @@ public class WWMath
      * minimum or maximum. This causes the returned number to ease-in and ease-out as the value travels between the
      * minimum and maximum.
      * <p>
-     * The returned number is undefined if min > max. Otherwise, the returned number is equivalent to the following:
-     * <p>
-     * <ul> <li>0.0 - If value < min</li> <li>1.0 - If value > max</li> <li>Smooth interpolation of min and max - If min
-     * <= value <= max</li> </ul>
+     * The returned number is undefined if min &gt; max. Otherwise, the returned number is equivalent to the following:
+     * <ul> <li>0.0 - If value &lt; min</li> <li>1.0 - If value &gt; max</li> <li>Smooth interpolation of min and max - If min
+     * &lt;= value &lt;= max</li> </ul>
      *
      * @param value the value to compare to the minimum and maximum.
      * @param min   the minimum value.

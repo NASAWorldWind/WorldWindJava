@@ -15,9 +15,8 @@ import java.util.*;
 /**
  * Iterator that computes the positions required to draw a triangle wave along a line specified by control positions.
  * The generated wave looks like this:
- * <p>
  * <pre>
- *           /\             /\         <--- Amplitude
+ *           /\             /\         &lt;--- Amplitude
  *          /  \           /  \
  * ________/    \_________/    \_____
  * ^            ^

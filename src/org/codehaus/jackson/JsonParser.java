@@ -185,6 +185,7 @@ public abstract class JsonParser
         /**
          * Method that calculates bit set (flags) of all features that
          * are enabled by default.
+         * @return Undocumented.
          */
         public static int collectDefaults()
         {
@@ -250,19 +251,19 @@ public abstract class JsonParser
     protected JsonParser() { }
 
     /**
-     * Accessor for {@link ObjectCodec} associated with this
-     * parser, if any. Codec is used by {@link #readValueAs(Class)}
+     * Accessor for {@link ObjectCodec} associated with this parser, if any.Codec is used by {@link #readValueAs(Class)}
      * method (and its variants).
      *
+     * @return Undocumented.
      * @since 1.3
      */
     public abstract ObjectCodec getCodec();
 
     /**
-     * Setter that allows defining {@link ObjectCodec} associated with this
-     * parser, if any. Codec is used by {@link #readValueAs(Class)}
-     * method (and its variants).
+     * Setter that allows defining {@link ObjectCodec} associated with this parser, if any.Codec is used by
+     * {@link #readValueAs(Class)} method (and its variants).
      *
+     * @param c Undocumented.
      * @since 1.3
      */
     public abstract void setCodec(ObjectCodec c);
@@ -288,6 +289,7 @@ public abstract class JsonParser
      * {@link java.io.File} or {@link java.net.URL} and creates
      * stream or reader it does own them.
      */
+    @Override
     public abstract void close() throws IOException;
 
     /*
@@ -300,6 +302,8 @@ public abstract class JsonParser
      * Method for enabling specified parser feature
      * (check {@link Feature} for list of features)
      *
+     * @param f Undocumented.
+     * @return Undocumented. 
      * @since 1.2
      */
     public JsonParser enable(Feature f)
@@ -312,6 +316,8 @@ public abstract class JsonParser
      * Method for disabling specified  feature
      * (check {@link Feature} for list of features)
      *
+     * @param f Undocumented.
+     * @return Undocumented. 
      * @since 1.2
      */
     public JsonParser disable(Feature f)
@@ -324,6 +330,9 @@ public abstract class JsonParser
      * Method for enabling or disabling specified feature
      * (check {@link Feature} for list of features)
      *
+     * @param f Undocumented.
+     * @param state Undocumented.
+     * @return Undocumented. 
      * @since 1.2
      */
     public JsonParser configure(Feature f, boolean state)
@@ -340,25 +349,37 @@ public abstract class JsonParser
      * Method for checking whether specified {@link Feature}
      * is enabled.
      *
+     * @param f Undocumented.
+     * @return Undocumented. 
      * @since 1.2
      */
     public boolean isEnabled(Feature f) {
         return (_features & f.getMask()) != 0;
     }
 
-    /** @deprecated Use {@link #configure} instead
+    /**
+     * @deprecated Use {@link #configure} instead
+     * @param f Undocumented.
+     * @param state Undocumented.
      */
     public void setFeature(Feature f, boolean state) { configure(f, state); }
 
-    /** @deprecated Use {@link #enable(Feature)} instead
+    /**
+     * @deprecated Use {@link #enable(Feature)} instead
+     * @param f Undocumented.
      */
     public void enableFeature(Feature f) { enable(f); }
 
-    /** @deprecated Use {@link #disable(Feature)} instead
+    /**
+     * @param f Undocumented.
+     * @deprecated Use {@link #disable(Feature)} instead
      */
     public void disableFeature(Feature f) { disable(f); }
 
-    /** @deprecated Use {@link #isEnabled(Feature)} instead
+    /**
+     * @param f Undocumented.
+     * @return Undocumented. 
+     * @deprecated Use {@link #isEnabled(Feature)} instead
      */
     public final boolean isFeatureEnabled(Feature f) { return isEnabled(f); }
 
@@ -370,33 +391,27 @@ public abstract class JsonParser
      */
 
     /**
-     * Main iteration method, which will advance stream enough
-     * to determine type of the next token, if any. If none
-     * remaining (stream has no content other than possible
-     * white space before ending), null will be returned.
+     * Main iteration method, which will advance stream enough to determine type of the next token, if any.If none
+     * remaining (stream has no content other than possible white space before ending), null will be returned.
      *
-     * @return Next token from the stream, if any found, or null
-     *   to indicate end-of-input
+     * @return Next token from the stream, if any found, or null to indicate end-of-input
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract JsonToken nextToken()
         throws IOException, JsonParseException;
 
     /**
-     * Iteration method that will advance stream enough
-     * to determine type of the next token that is a value type
-     * (including Json Array and Object start/end markers).
-     * Or put another way, nextToken() will be called once,
-     * and if {@link JsonToken#FIELD_NAME} is returned, another
-     * time to get the value for the field.
-     * Method is most useful for iterating over value entries
-     * of Json objects; field name will still be available
-     * by calling {@link #getCurrentName} when parser points to
-     * the value.
+     * Iteration method that will advance stream enough to determine type of the next token that is a value type
+     * (including Json Array and Object start/end markers).Or put another way, nextToken() will be called once, and if
+     * {@link JsonToken#FIELD_NAME} is returned, another time to get the value for the field.Method is most useful for
+     * iterating over value entries of Json objects; field name will still be available by calling
+     * {@link #getCurrentName} when parser points to the value.
      *
-     * @return Next non-field-name token from the stream, if any found,
-     *   or null to indicate end-of-input (or, for non-blocking
-     *   parsers, {@link JsonToken#NOT_AVAILABLE} if no tokens were
-     *   available yet)
+     * @return Next non-field-name token from the stream, if any found, or null to indicate end-of-input (or, for
+     * non-blocking parsers, {@link JsonToken#NOT_AVAILABLE} if no tokens were available yet)
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      *
      * @since 0.9.7
      */
@@ -415,29 +430,25 @@ public abstract class JsonParser
     }
 
     /**
-     * Method that will skip all child tokens of an array or
-     * object token that the parser currently points to,
-     * iff stream points to 
-     * {@link JsonToken#START_OBJECT} or {@link JsonToken#START_ARRAY}.
-     * If not, it will do nothing.
-     * After skipping, stream will point to <b>matching</b>
-     * {@link JsonToken#END_OBJECT} or {@link JsonToken#END_ARRAY}
-     * (possibly skipping nested pairs of START/END OBJECT/ARRAY tokens
-     * as well as value tokens).
-     * The idea is that after calling this method, application
-     * will call {@link #nextToken} to point to the next
-     * available token, if any.
+     * Method that will skip all child tokens of an array or object token that the parser currently points to, iff
+     * stream points to {@link JsonToken#START_OBJECT} or {@link JsonToken#START_ARRAY}.If not, it will do nothing.After
+     * skipping, stream will point to <b>matching</b> {@link JsonToken#END_OBJECT} or {@link JsonToken#END_ARRAY}
+     * (possibly skipping nested pairs of START/END OBJECT/ARRAY tokens as well as value tokens).The idea is that after
+     * calling this method, application will call {@link #nextToken} to point to the next available token, if any.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract JsonParser skipChildren()
         throws IOException, JsonParseException;
 
     /**
-     * Method that can be called to determine whether this parser
-     * is closed or not. If it is closed, no new tokens can be
-     * retrieved by calling {@link #nextToken} (and the underlying
-     * stream may be closed). Closing may be due to an explicit
-     * call to {@link #close} or because parser has encountered
-     * end of input.
+     * Method that can be called to determine whether this parser is closed or not.If it is closed, no new tokens can be
+     * retrieved by calling {@link #nextToken} (and the underlying stream may be closed). Closing may be due to an
+     * explicit call to {@link #close} or because parser has encountered end of input.
+     *
+     * @return Undocumented.
      */
     public abstract boolean isClosed();
 
@@ -503,19 +514,21 @@ public abstract class JsonParser
      * be the same as what {@link #getText} returns;
      * for field values it will be preceding field name;
      * and for others (array values, root-level values) null.
+     * @return Undocumented. 
+     * @throws java.io.IOException Undocumented. 
+     * @throws org.codehaus.jackson.JsonParseException Undocumented. 
      */
     public abstract String getCurrentName()
         throws IOException, JsonParseException;
 
     /**
-     * Method that can be used to access current parsing context reader
-     * is in. There are 3 different types: root, array and object contexts,
-     * with slightly different available information. Contexts are
-     * hierarchically nested, and can be used for example for figuring
-     * out part of the input document that correspond to specific
-     * array or object (for highlighting purposes, or error reporting).
-     * Contexts can also be used for simple xpath-like matching of
-     * input, if so desired.
+     * Method that can be used to access current parsing context reader is in.There are 3 different types: root, array
+     * and object contexts, with slightly different available information. Contexts are hierarchically nested, and can
+     * be used for example for figuring out part of the input document that correspond to specific array or object (for
+     * highlighting purposes, or error reporting). Contexts can also be used for simple xpath-like matching of input, if
+     * so desired.
+     *
+     * @return Undocumented.
      */
     public abstract JsonStreamContext getParsingContext();
 
@@ -523,21 +536,22 @@ public abstract class JsonParser
      * Method that return the <b>starting</b> location of the current
      * token; that is, position of the first character from input
      * that starts the current token.
+     * @return Undocumented. 
      */
     public abstract JsonLocation getTokenLocation();
 
     /**
      * Method that returns location of the last processed character;
      * usually for error reporting purposes.
+     * @return Undocumented. 
      */
     public abstract JsonLocation getCurrentLocation();
 
     /**
-     * Method that can be called to get the last token that was
-     * cleared using {@link #clearCurrentToken}. This is not necessarily
-     * the latest token read.
-     * Will return null if no tokens have been cleared,
-     * or if parser has been closed.
+     * Method that can be called to get the last token that was cleared using {@link #clearCurrentToken}.This is not
+     * necessarily the latest token read. Will return null if no tokens have been cleared, or if parser has been closed.
+     *
+     * @return Undocumented.
      */
     public JsonToken getLastClearedToken() {
         return _lastClearedToken;
@@ -552,36 +566,34 @@ public abstract class JsonParser
     /**
      * Method for accessing textual representation of the current token;
      * if no current token (before first call to {@link #nextToken}, or
-     * after encountering end-of-input), returns null.
-     * Method can be called for any token type.
+     * after encountering end-of-input), returns null.Method can be called for any token type.
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract String getText()
         throws IOException, JsonParseException;
 
     /**
-     * Method similar to {@link #getText}, but that will return
-     * underlying (unmodifiable) character array that contains
-     * textual value, instead of constructing a String object
-     * to contain this information.
-     * Note, however, that:
-     *<ul>
-     * <li>Textual contents are not guaranteed to start at
-     *   index 0 (rather, call {@link #getTextOffset}) to
-     *   know the actual offset
-     *  </li>
-     * <li>Length of textual contents may be less than the
-     *  length of returned buffer: call {@link #getTextLength}
-     *  for actual length of returned content.
-     *  </li>
+     * Method similar to {@link #getText}, but that will return underlying (unmodifiable) character array that contains
+     * textual value, instead of constructing a String object to contain this information.Note, however, that:
+     * <ul>
+     * <li>Textual contents are not guaranteed to start at index 0 (rather, call {@link #getTextOffset}) to know the
+     * actual offset
+     * </li>
+     * <li>Length of textual contents may be less than the length of returned buffer: call {@link #getTextLength} for
+     * actual length of returned content.</li>
      * </ul>
-     *<p>
-     * Note that caller <b>MUST NOT</b> modify the returned
-     * character array in any way -- doing so may corrupt
-     * current parser state and render parser instance useless.
-     *<p>
-     * The only reason to call this method (over {@link #getText})
-     * is to avoid construction of a String object (which
+     * <p>
+     * Note that caller <b>MUST NOT</b> modify the returned character array in any way -- doing so may corrupt current
+     * parser state and render parser instance useless.
+     * <p>
+     * The only reason to call this method (over {@link #getText}) is to avoid construction of a String object (which
      * will make a copy of contents).
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract char[] getTextCharacters()
         throws IOException, JsonParseException;
@@ -593,6 +605,8 @@ public abstract class JsonParser
      * @return Number of characters within buffer returned
      *   by {@link #getTextCharacters} that are part of
      *   textual content of the current token.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract int getTextLength()
         throws IOException, JsonParseException;
@@ -604,6 +618,8 @@ public abstract class JsonParser
      * @return Offset of the first character within buffer returned
      *   by {@link #getTextCharacters} that is part of
      *   textual content of the current token.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract int getTextOffset()
         throws IOException, JsonParseException;
@@ -615,10 +631,12 @@ public abstract class JsonParser
      */
 
     /**
-     * Generic number value accessor method that will work for
-     * all kinds of numeric values. It will return the optimal
-     * (simplest/smallest possibl) wrapper object that can
-     * express the numeric value just parsed.
+     * Generic number value accessor method that will work for all kinds of numeric values.It will return the optimal
+     * (simplest/smallest possibl) wrapper object that can express the numeric value just parsed.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract Number getNumberValue()
         throws IOException, JsonParseException;
@@ -628,22 +646,24 @@ public abstract class JsonParser
      * {@link JsonToken#VALUE_NUMBER_INT} or
      * {@link JsonToken#VALUE_NUMBER_FLOAT}, returns
      * one of {@link NumberType} constants; otherwise returns null.
+     * @return Undocumented. 
+     * @throws java.io.IOException Undocumented. 
+     * @throws org.codehaus.jackson.JsonParseException Undocumented. 
      */
     public abstract NumberType getNumberType()
         throws IOException, JsonParseException;
 
     /**
-     * Numeric accessor that can be called when the current
-     * token is of type {@link JsonToken#VALUE_NUMBER_INT} and
-     * it can be expressed as a value of Java byte primitive type.
-     * It can also be called for {@link JsonToken#VALUE_NUMBER_FLOAT};
-     * if so, it is equivalent to calling {@link #getDoubleValue}
-     * and then casting; except for possible overflow/underflow
-     * exception.
-     *<p>
-     * Note: if the resulting integer value falls outside range of
-     * Java byte, a {@link JsonParseException}
-     * will be thrown to indicate numeric overflow/underflow.
+     * Numeric accessor that can be called when the current token is of type {@link JsonToken#VALUE_NUMBER_INT} and it
+     * can be expressed as a value of Java byte primitive type.It can also be called for
+     * {@link JsonToken#VALUE_NUMBER_FLOAT}; if so, it is equivalent to calling {@link #getDoubleValue} and then
+     * casting; except for possible overflow/underflow exception.<p>
+     * Note: if the resulting integer value falls outside range of Java byte, a {@link JsonParseException} will be
+     * thrown to indicate numeric overflow/underflow.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public byte getByteValue()
         throws IOException, JsonParseException
@@ -657,17 +677,16 @@ public abstract class JsonParser
     }
 
     /**
-     * Numeric accessor that can be called when the current
-     * token is of type {@link JsonToken#VALUE_NUMBER_INT} and
-     * it can be expressed as a value of Java short primitive type.
-     * It can also be called for {@link JsonToken#VALUE_NUMBER_FLOAT};
-     * if so, it is equivalent to calling {@link #getDoubleValue}
-     * and then casting; except for possible overflow/underflow
-     * exception.
-     *<p>
-     * Note: if the resulting integer value falls outside range of
-     * Java short, a {@link JsonParseException}
-     * will be thrown to indicate numeric overflow/underflow.
+     * Numeric accessor that can be called when the current token is of type {@link JsonToken#VALUE_NUMBER_INT} and it
+     * can be expressed as a value of Java short primitive type.It can also be called for
+     * {@link JsonToken#VALUE_NUMBER_FLOAT}; if so, it is equivalent to calling {@link #getDoubleValue} and then
+     * casting; except for possible overflow/underflow exception.<p>
+     * Note: if the resulting integer value falls outside range of Java short, a {@link JsonParseException} will be
+     * thrown to indicate numeric overflow/underflow.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public short getShortValue()
         throws IOException, JsonParseException
@@ -680,100 +699,99 @@ public abstract class JsonParser
     }
 
     /**
-     * Numeric accessor that can be called when the current
-     * token is of type {@link JsonToken#VALUE_NUMBER_INT} and
-     * it can be expressed as a value of Java int primitive type.
-     * It can also be called for {@link JsonToken#VALUE_NUMBER_FLOAT};
-     * if so, it is equivalent to calling {@link #getDoubleValue}
-     * and then casting; except for possible overflow/underflow
-     * exception.
-     *<p>
-     * Note: if the resulting integer value falls outside range of
-     * Java int, a {@link JsonParseException}
-     * may be thrown to indicate numeric overflow/underflow.
+     * Numeric accessor that can be called when the current token is of type {@link JsonToken#VALUE_NUMBER_INT} and it
+     * can be expressed as a value of Java int primitive type.It can also be called for
+     * {@link JsonToken#VALUE_NUMBER_FLOAT}; if so, it is equivalent to calling {@link #getDoubleValue} and then
+     * casting; except for possible overflow/underflow exception.<p>
+     * Note: if the resulting integer value falls outside range of Java int, a {@link JsonParseException} may be thrown
+     * to indicate numeric overflow/underflow.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract int getIntValue()
         throws IOException, JsonParseException;
 
     /**
-     * Numeric accessor that can be called when the current
-     * token is of type {@link JsonToken#VALUE_NUMBER_INT} and
-     * it can be expressed as a Java long primitive type.
-     * It can also be called for {@link JsonToken#VALUE_NUMBER_FLOAT};
-     * if so, it is equivalent to calling {@link #getDoubleValue}
-     * and then casting to int; except for possible overflow/underflow
-     * exception.
-     *<p>
-     * Note: if the token is an integer, but its value falls
-     * outside of range of Java long, a {@link JsonParseException}
+     * Numeric accessor that can be called when the current token is of type {@link JsonToken#VALUE_NUMBER_INT} and it
+     * can be expressed as a Java long primitive type.It can also be called for {@link JsonToken#VALUE_NUMBER_FLOAT}; if
+     * so, it is equivalent to calling {@link #getDoubleValue} and then casting to int; except for possible
+     * overflow/underflow exception.<p>
+     * Note: if the token is an integer, but its value falls outside of range of Java long, a {@link JsonParseException}
      * may be thrown to indicate numeric overflow/underflow.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract long getLongValue()
         throws IOException, JsonParseException;
 
     /**
-     * Numeric accessor that can be called when the current
-     * token is of type {@link JsonToken#VALUE_NUMBER_INT} and
-     * it can not be used as a Java long primitive type due to its
-     * magnitude.
-     * It can also be called for {@link JsonToken#VALUE_NUMBER_FLOAT};
-     * if so, it is equivalent to calling {@link #getDecimalValue}
-     * and then constructing a {@link BigInteger} from that value.
+     * Numeric accessor that can be called when the current token is of type {@link JsonToken#VALUE_NUMBER_INT} and it
+     * can not be used as a Java long primitive type due to its magnitude.It can also be called for
+     * {@link JsonToken#VALUE_NUMBER_FLOAT}; if so, it is equivalent to calling {@link #getDecimalValue} and then
+     * constructing a {@link BigInteger} from that value.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract BigInteger getBigIntegerValue()
         throws IOException, JsonParseException;
 
     /**
-     * Numeric accessor that can be called when the current
-     * token is of type {@link JsonToken#VALUE_NUMBER_FLOAT} and
-     * it can be expressed as a Java float primitive type.
-     * It can also be called for {@link JsonToken#VALUE_NUMBER_INT};
-     * if so, it is equivalent to calling {@link #getLongValue}
-     * and then casting; except for possible overflow/underflow
-     * exception.
-     *<p>
-     * Note: if the value falls
-     * outside of range of Java float, a {@link JsonParseException}
-     * will be thrown to indicate numeric overflow/underflow.
+     * Numeric accessor that can be called when the current token is of type {@link JsonToken#VALUE_NUMBER_FLOAT} and it
+     * can be expressed as a Java float primitive type.It can also be called for {@link JsonToken#VALUE_NUMBER_INT}; if
+     * so, it is equivalent to calling {@link #getLongValue} and then casting; except for possible overflow/underflow
+     * exception.<p>
+     * Note: if the value falls outside of range of Java float, a {@link JsonParseException} will be thrown to indicate
+     * numeric overflow/underflow.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract float getFloatValue()
         throws IOException, JsonParseException;
 
     /**
-     * Numeric accessor that can be called when the current
-     * token is of type {@link JsonToken#VALUE_NUMBER_FLOAT} and
-     * it can be expressed as a Java double primitive type.
-     * It can also be called for {@link JsonToken#VALUE_NUMBER_INT};
-     * if so, it is equivalent to calling {@link #getLongValue}
-     * and then casting; except for possible overflow/underflow
-     * exception.
-     *<p>
-     * Note: if the value falls
-     * outside of range of Java double, a {@link JsonParseException}
-     * will be thrown to indicate numeric overflow/underflow.
+     * Numeric accessor that can be called when the current token is of type {@link JsonToken#VALUE_NUMBER_FLOAT} and it
+     * can be expressed as a Java double primitive type.It can also be called for {@link JsonToken#VALUE_NUMBER_INT}; if
+     * so, it is equivalent to calling {@link #getLongValue} and then casting; except for possible overflow/underflow
+     * exception.<p>
+     * Note: if the value falls outside of range of Java double, a {@link JsonParseException} will be thrown to indicate
+     * numeric overflow/underflow.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract double getDoubleValue()
         throws IOException, JsonParseException;
 
     /**
-     * Numeric accessor that can be called when the current
-     * token is of type {@link JsonToken#VALUE_NUMBER_FLOAT} or
-     * {@link JsonToken#VALUE_NUMBER_INT}. No under/overflow exceptions
-     * are ever thrown.
+     * Numeric accessor that can be called when the current token is of type {@link JsonToken#VALUE_NUMBER_FLOAT} or
+     * {@link JsonToken#VALUE_NUMBER_INT}.No under/overflow exceptions are ever thrown.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract BigDecimal getDecimalValue()
         throws IOException, JsonParseException;
 
     /**
-     * Convenience accessor that can be called when the current
-     * token is {@link JsonToken#VALUE_TRUE} or
+     * Convenience accessor that can be called when the current token is {@link JsonToken#VALUE_TRUE} or
      * {@link JsonToken#VALUE_FALSE}.
-     *<p>
-     * Note: if the token is not of above-mentioned boolean types,
- an integer, but its value falls
-     * outside of range of Java long, a {@link JsonParseException}
-     * may be thrown to indicate numeric overflow/underflow.
+     * <p>
+     * Note: if the token is not of above-mentioned boolean types, an integer, but its value falls outside of range of
+     * Java long, a {@link JsonParseException} may be thrown to indicate numeric overflow/underflow.
      *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      * @since 1.3
      */
     public boolean getBooleanValue()
@@ -785,14 +803,14 @@ public abstract class JsonParser
     }
 
     /**
-     * Accessor that can be called if (and only if) the current token
-     * is {@link JsonToken#VALUE_EMBEDDED_OBJECT}. For other token types,
-     * null is returned.
-     *<p>
-     * Note: only some specialized parser implementations support
-     * embedding of objects (usually ones that are facades on top
-     * of non-streaming sources, such as object trees).
+     * Accessor that can be called if (and only if) the current token is {@link JsonToken#VALUE_EMBEDDED_OBJECT}.For
+     * other token types, null is returned.<p>
+     * Note: only some specialized parser implementations support embedding of objects (usually ones that are facades on
+     * top of non-streaming sources, such as object trees).
      *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      * @since 1.3
      */
     public Object getEmbeddedObject()
@@ -809,26 +827,20 @@ public abstract class JsonParser
      */
 
     /**
-     * Method that can be used to read (and consume -- results
-     * may not be accessible using other methods after the call)
-     * base64-encoded binary data
-     * included in the current textual json value.
-     * It works similar to getting String value via {@link #getText}
-     * and decoding result (except for decoding part),
-     * but should be significantly more performant.
-     *<p>
-     * Note that non-decoded textual contents of the current token
-     * are not guaranteed to be accessible after this method
-     * is called. Current implementation, for example, clears up
-     * textual content during decoding.
-     * Decoded binary content, however, will be retained until
-     * parser is advanced to the next event.
+     * Method that can be used to read (and consume -- results may not be accessible using other methods after the call)
+     * base64-encoded binary data included in the current textual json value.It works similar to getting String value
+     * via {@link #getText} and decoding result (except for decoding part), but should be significantly more
+     * performant.<p>
+     * Note that non-decoded textual contents of the current token are not guaranteed to be accessible after this method
+     * is called. Current implementation, for example, clears up textual content during decoding. Decoded binary
+     * content, however, will be retained until parser is advanced to the next event.
      *
-     * @param b64variant Expected variant of base64 encoded
-     *   content (see {@link Base64Variants} for definitions
-     *   of "standard" variants).
+     * @param b64variant Expected variant of base64 encoded content (see {@link Base64Variants} for definitions of
+     * "standard" variants).
      *
      * @return Decoded binary data
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public abstract byte[] getBinaryValue(Base64Variant b64variant) throws IOException, JsonParseException;
 
@@ -836,6 +848,9 @@ public abstract class JsonParser
      * Convenience alternative to {@link #getBinaryValue(Base64Variant)}
      * that defaults to using
      * {@link Base64Variants#getDefaultVariant} as the default encoding.
+     * @return Undocumented. 
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public byte[] getBinaryValue() throws IOException, JsonParseException
     {
@@ -849,25 +864,25 @@ public abstract class JsonParser
      */
 
     /**
-     * Method to deserialize Json content into a non-container
-     * type (it can be an array type, however): typically a bean, array
-     * or a wrapper type (like {@link java.lang.Boolean}).
-     * <b>Note</b>: method can only be called if the parser has
-     * an object codec assigned; this is true for parsers constructed
-     * by {@link org.codehaus.jackson.map.MappingJsonFactory} but
-     * not for {@link JsonFactory} (unless its <code>setCodec</code>
-     * method has been explicitly called).
-     *<p>
-     * This method may advance the event stream, for structured types
-     * the current token will be the closing end marker (END_ARRAY,
-     * END_OBJECT) of the bound structure. For non-structured Json types
-     * (and for {@link JsonToken#VALUE_EMBEDDED_OBJECT})
-     * stream is not advanced.
-     *<p>
-     * Note: this method should NOT be used if the result type is a
-     * container ({@link java.util.Collection} or {@link java.util.Map}.
-     * The reason is that due to type erasure, key and value types
-     * can not be introspected when using this method.
+     * Method to deserialize Json content into a non-container type (it can be an array type, however): typically a
+     * bean, array or a wrapper type (like {@link java.lang.Boolean}).<b>Note</b>: method can only be called if the
+     * parser has an object codec assigned; this is true for parsers constructed by
+     * org.codehaus.jackson.map.MappingJsonFactory but not for {@link JsonFactory} (unless its
+     * <code>setCodec</code> method has been explicitly called)
+     * .<p>
+     * This method may advance the event stream, for structured types the current token will be the closing end marker
+     * (END_ARRAY, END_OBJECT) of the bound structure. For non-structured Json types (and for
+     * {@link JsonToken#VALUE_EMBEDDED_OBJECT}) stream is not advanced.
+     * <p>
+     * Note: this method should NOT be used if the result type is a container ({@link java.util.Collection} or
+     * {@link java.util.Map}. The reason is that due to type erasure, key and value types can not be introspected when
+     * using this method.
+     *
+     * @param <T> Undocumented.
+     * @param valueType Undocumented.
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonProcessingException Undocumented.
      */
     public <T> T readValueAs(Class<T> valueType)
         throws IOException, JsonProcessingException
@@ -880,22 +895,21 @@ public abstract class JsonParser
     }
 
     /**
-     * Method to deserialize Json content into a Java type, reference
-     * to which is passed as argument. Type is passed using so-called
-     * "super type token"
-     * and specifically needs to be used if the root type is a 
-     * parameterized (generic) container type.
-     * <b>Note</b>: method can only be called if the parser has
-     * an object codec assigned; this is true for parsers constructed
-     * by {@link org.codehaus.jackson.map.MappingJsonFactory} but
-     * not for {@link JsonFactory} (unless its <code>setCodec</code>
-     * method has been explicitly called).
-     *<p>
-     * This method may advance the event stream, for structured types
-     * the current token will be the closing end marker (END_ARRAY,
-     * END_OBJECT) of the bound structure. For non-structured Json types
-     * (and for {@link JsonToken#VALUE_EMBEDDED_OBJECT})
-     * stream is not advanced.
+     * Method to deserialize Json content into a Java type, reference to which is passed as argument.Type is passed
+     * using so-called "super type token" and specifically needs to be used if the root type is a parameterized
+     * (generic) container type.<b>Note</b>: method can only be called if the parser has an object codec assigned; this
+     * is true for parsers constructed by org.codehaus.jackson.map.MappingJsonFactory but not for
+     * {@link JsonFactory} (unless its <code>setCodec</code> method has been explicitly called).
+     * <p>
+     * This method may advance the event stream, for structured types the current token will be the closing end marker
+     * (END_ARRAY, END_OBJECT) of the bound structure. For non-structured Json types (and for
+     * {@link JsonToken#VALUE_EMBEDDED_OBJECT}) stream is not advanced.
+     *
+     * @param <T> Undocumented.
+     * @param valueTypeRef Undocumented.
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonProcessingException Undocumented.
      */
     @SuppressWarnings("unchecked")
     public <T> T readValueAs(TypeReference<?> valueTypeRef)
@@ -912,11 +926,13 @@ public abstract class JsonParser
     }
 
     /**
-     * Method to deserialize Json content into equivalent "tree model",
-     * represented by root {@link JsonNode} of resulting model.
-     * For Json Arrays it will an array node (with child nodes),
-     * for objects object node (with child nodes), and for other types
-     * matching leaf node type
+     * Method to deserialize Json content into equivalent "tree model", represented by root {@link JsonNode} of
+     * resulting model.For Json Arrays it will an array node (with child nodes), for objects object node (with child
+     * nodes), and for other types matching leaf node type
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonProcessingException Undocumented.
      */
     public JsonNode readValueAsTree()
         throws IOException, JsonProcessingException
@@ -937,6 +953,8 @@ public abstract class JsonParser
     /**
      * Helper method for constructing {@link JsonParseException}s
      * based on current state of the parser
+     * @param msg Undocumented.
+     * @return Undocumented. 
      */
     protected JsonParseException _constructError(String msg)
     {

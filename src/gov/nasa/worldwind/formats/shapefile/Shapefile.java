@@ -28,8 +28,7 @@ import java.util.logging.Level;
  * documentation at <a href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf</a>.
  * <p>
  * The Shapefile provides a streaming interface for parsing a Shapefile's contents. The streaming interface enables
- * applications to read Shapefiles that do not fit in memory. A typical usage pattern is as follows: <code>
- * <pre>
+ * applications to read Shapefiles that do not fit in memory. A typical usage pattern is as follows:<pre><code>
  * Object source = "MyShapefile.shp";
  * Shapefile sf = new Shapefile(source);
  * try
@@ -44,17 +43,15 @@ import java.util.logging.Level;
  * {
  *     WWIO.closeStream(sf, source);
  * }
- * </pre>
- * </code>
+ * </code></pre>
  * <p>
  * The source Shapefile may be accompanied by an optional index file, attribute file, and projection file. Shapefile
- * constructors that accept a generic source such as {@link #Shapefile(Object) expect accompanying files to be in the
+ * constructors that accept a generic source such as {@link #Shapefile(Object)} expect accompanying files to be in the
  * same logical folder as the Shapefile, have the same filename as the Shapefile, and have suffixes ".shx", ".dbf", and
  * ".prj" respectively. If any of these files do not exist, or cannot be read for any reason, the Shapefile opens
  * without that information. Alternatively, the Shapefile can be constructed by providing a direct {@link
  * java.io.InputStream} to any of the accompanying sources by using the InputStream based constructors, such as {@link
  * #Shapefile(java.io.InputStream, java.io.InputStream, java.io.InputStream, java.io.InputStream)}.
- * <p>
  * <h3>Coordinate System</h3>
  * <p>
  * The Shapefile's coordinate system affects how the Shapefile's point coordinates are interpreted as follows: <ul>
@@ -63,7 +60,7 @@ import java.util.logging.Level;
  * exception during construction if the Shapefile's header contains an invalid coordinate, or in {@link
  * #readNextRecord()} if any of the Shapefile's records contain an invalid coordinate.</li> <li>Universal Transverse
  * Mercator (UTM) - UTM coordinates are converted to geographic coordinates during parsing.</li> <li>Unsupported - the
- * Shapefile throws a {@link gov.nasa.worldwind.exception.WWRuntimeException} during construction.
+ * Shapefile throws a {@link gov.nasa.worldwind.exception.WWRuntimeException} during construction.</ul>
  * <p>
  * The Shapefile's coordinate system can be specified in either an accompanying projection file, or by specifying the
  * coordinate system parameters in an {@link gov.nasa.worldwind.avlist.AVList} during Shapefile's construction. The
@@ -81,8 +78,9 @@ import java.util.logging.Level;
  * <p>
  * Subclasses can override how the Shapefile reads and interprets its coordinate system. Override {@link
  * #readCoordinateSystem()} and {@link #validateCoordinateSystem(gov.nasa.worldwind.avlist.AVList)} to change how the
- * Shapefile parses an accompanying projection file and validates the coordinate system parameters. Override {@link
- * #readBoundingRectangle(java.nio.ByteBuffer)} and {@link #readPoints(java.nio.ByteBuffer)} to change how the
+ * Shapefile parses an accompanying projection file and validates the coordinate system parameters. Override 
+ * {@link #readBoundingRectangle(java.nio.ByteBuffer)} 
+ * and {@link #readPoints(gov.nasa.worldwind.formats.shapefile.ShapefileRecord,java.nio.ByteBuffer)} to change how the
  * Shapefile's point coordinates are interpreted according to its coordinate system.
  *
  * @author Patrick Murris

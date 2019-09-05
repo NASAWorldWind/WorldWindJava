@@ -320,7 +320,7 @@ public class PointPlacemarkAttributes implements Exportable
      *
      * @return the heading reference.
      *
-     * @see #setHeadingReference(String).
+     * @see #setHeadingReference(String)
      */
     public String getHeadingReference()
     {
@@ -385,7 +385,7 @@ public class PointPlacemarkAttributes implements Exportable
     }
 
     /**
-     * Indicates whether one or more members of <i>this</> remain unresolved because they must be retrieved from an
+     * Indicates whether one or more members of <i>this</i> remain unresolved because they must be retrieved from an
      * external source.
      *
      * @return true if there are unresolved fields, false if no fields remain unresolved.
@@ -396,7 +396,7 @@ public class PointPlacemarkAttributes implements Exportable
     }
 
     /**
-     * Specifies whether one or more fields of <i>this</> remain unresolved because they must be retrieved from an
+     * Specifies whether one or more fields of <i>this</i> remain unresolved because they must be retrieved from an
      * external source.
      *
      * @param unresolved true if there are unresolved fields, false if no fields remain unresolved.
@@ -584,7 +584,6 @@ public class PointPlacemarkAttributes implements Exportable
     /**
      * Export the Placemark. The {@code output} object will receive the exported data. The type of this object depends
      * on the export format. The formats and object types supported by this class are:
-     * <p>
      * <pre>
      * Format                                         Supported output object types
      * ================================================================================
@@ -637,7 +636,7 @@ public class PointPlacemarkAttributes implements Exportable
 
     /**
      * Export the placemark attributes to KML as a {@code <Style>} element. The {@code output} object will receive the
-     * data. This object must be one of: java.io.Writer<br/> java.io.OutputStream<br/> javax.xml.stream.XMLStreamWriter
+     * data. This object must be one of: java.io.Writer<br> java.io.OutputStream<br> javax.xml.stream.XMLStreamWriter
      *
      * @param output Object to receive the generated KML.
      *

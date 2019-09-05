@@ -228,14 +228,14 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     }
 
     /**
-     * Creates and parses a Collada root for an untyped source. The source must be either a {@link File} or a {@link
-     * String} identifying either a file path or a {@link URL}. Null is returned if the source type is not recognized.
+     * Creates and parses a Collada root for an untyped source.The source must be either a {@link File} or a {@link String} identifying either a file path or a {@link URL}. Null is returned if the source type is not recognized.
      *
      * @param docSource either a {@link File} or a {@link String} identifying a file path or {@link URL}.
      *
      * @return a new {@link ColladaRoot} for the specified source, or null if the source type is not supported.
      *
      * @throws IllegalArgumentException if the source is null.
+     * @throws javax.xml.stream.XMLStreamException if the XML stream is not readable.
      * @throws IOException              if an error occurs while reading the source.
      */
     public static ColladaRoot createAndParse(Object docSource) throws IOException, XMLStreamException

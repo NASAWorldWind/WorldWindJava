@@ -192,7 +192,7 @@ public interface SectorGeometry extends Renderable
      * @param numTextureUnits      the number of texture units to attempt to use.
      * @param beginRenderingCalled indicates whether this sector geometry's <code>beginRendering</code> method has been
      *                             called prior to calling this method. True indicated it was called, false indicates
-     *                             that it was not. Calling <beginRendering> eliminates redundant rendering set-up and
+     *                             that it was not. Calling &lt;beginRendering&gt; eliminates redundant rendering set-up and
      *                             is used when this sector geometry is rendered several times in succession.
      *
      * @throws IllegalArgumentException if the draw context is null or the number of texture units is less than one.
@@ -209,7 +209,7 @@ public interface SectorGeometry extends Renderable
      * @param dc                   the current draw context.
      * @param beginRenderingCalled indicates whether this sector geometry's <code>beginRendering</code> method has been
      *                             called prior to calling this method. True indicated it was called, false indicates
-     *                             that it was not. Calling <beginRendering> eliminates redundant rendering set-up and
+     *                             that it was not. Calling &lt;beginRendering&gt; eliminates redundant rendering set-up and
      *                             is used when this sector geometry is rendered several times in succession.
      *
      * @throws IllegalArgumentException if the draw context is null or the number of texture units is less than one.

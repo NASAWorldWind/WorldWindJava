@@ -115,7 +115,7 @@ public class BasicElevationModelFactory extends BasicFactory
      * @return the requested elevation model, or null if the specified element does not describe an elevation model.
      *
      * @throws Exception if a problem occurs during creation.
-     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList).
+     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
     @Override
     protected ElevationModel doCreateFromElement(Element domElement, AVList params) throws Exception
@@ -155,7 +155,7 @@ public class BasicElevationModelFactory extends BasicFactory
      * @return a compound elevation model populated with the specified elevation models. The compound model will contain
      *         no elevation models if none were specified or exceptions occurred for all that were specified.
      *
-     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList).
+     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
     protected CompoundElevationModel createCompoundModel(Element[] elements, AVList params)
     {

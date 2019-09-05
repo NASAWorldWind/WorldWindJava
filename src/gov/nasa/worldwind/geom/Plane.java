@@ -69,7 +69,7 @@ public final class Plane
 
     /**
      * Returns the plane that passes through the specified three points. The plane's normal is the cross product of the
-     * two vectors from <code>pb</code> to </code>pa</code> and <code>pc</code> to </code>pa</code>, respectively. The
+     * two vectors from <code>pb</code> to <code>pa</code> and <code>pc</code> to <code>pa</code>, respectively. The
      * returned plane is undefined if any of the specified points are colinear.
      *
      * @param pa the first point.

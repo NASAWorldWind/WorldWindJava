@@ -20,10 +20,10 @@ public class TileKey implements Comparable<TileKey>
     private final int hash;
 
     /**
-     * @param level
-     * @param row
-     * @param col
-     * @param cacheName
+     * @param level Tile level.
+     * @param row Tile row.
+     * @param col Tile col.
+     * @param cacheName Cache name.
      * @throws IllegalArgumentException if <code>level</code>, <code>row</code> or <code>column</code> is negative or if
      *                                  <code>cacheName</code> is null or empty
      */
@@ -61,9 +61,10 @@ public class TileKey implements Comparable<TileKey>
     }
 
     /**
-     * @param latitude
-     * @param longitude
-     * @param levelNumber
+     * @param latitude Tile latitude.
+     * @param longitude Tile longitude.
+     * @param levelSet The level set.
+     * @param levelNumber Tile level number.
      * @throws IllegalArgumentException if any parameter is null
      */
     public TileKey(Angle latitude, Angle longitude, LevelSet levelSet, int levelNumber)
@@ -89,7 +90,7 @@ public class TileKey implements Comparable<TileKey>
     }
 
     /**
-     * @param tile
+     * @param tile The source tile.
      * @throws IllegalArgumentException if <code>tile</code> is null
      */
     public TileKey(Tile tile)

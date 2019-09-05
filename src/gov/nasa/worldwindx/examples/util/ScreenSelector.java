@@ -23,7 +23,6 @@ import java.util.List;
  * and tracks the list of objects intersecting the screen rectangle. The screen rectangle is displayed on a layer
  * created by ScreenSelector, and is used as the WorldWindow's pick rectangle to perform object selection. Objects
  * intersecting the screen rectangle can be accessed by calling {@link #getSelectedObjects()}.
- * <p>
  * <h3>Using ScreenSelector</h3>
  * <p>
  * To use ScreenSelector in an application, create a new instance of ScreenSelector and specify the application's
@@ -43,7 +42,6 @@ import java.util.List;
  * <p>
  * Note that enabling or disabling the ScreenSelector does not change its list of selected objects. The list of selected
  * objects only changes in response to user input when the ScreenSelector is enabled.
- * <p>
  * <h3>User Input</h3>
  * <p>
  * When ScreenSelector is enabled, pressing the first mouse button causes ScreenSelector to set its selection to a
@@ -61,7 +59,6 @@ import java.util.List;
  * ScreenSelector translates its raw mouse events to the methods selectionStarted, selectionEnded, and selectionChanged.
  * To customize how ScreenSelector responds to these semantic events without changing the user input model, create a
  * subclass of ScreenSelector and override any of these methods.
- * <p>
  * <h3>Screen Rectangle Appearance</h3>
  * <p>
  * To customize the appearance of the rectangle displayed by ScreenRectangle, call {@link

@@ -536,7 +536,6 @@ public class SurfaceImage extends WWObjectImpl
     /**
      * Export the Surface Image. The {@code output} object will receive the exported data. The type of this object
      * depends on the export format. The formats and object types supported by this class are:
-     * <p>
      * <pre>
      * Format                                         Supported output object types
      * ================================================================================

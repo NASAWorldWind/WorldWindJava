@@ -777,7 +777,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
      * Represents a surface object's current state. StateKey uniquely identifies a surface object's current state as
      * follows: <ul> <li>The StateKey class distinguishes the key from other object types.</li> <li>The object's unique
      * ID distinguishes one surface object instances from another.</li> <li>The object's modified time distinguishes an
-     * object's internal state from any of its previous states.</li> Using the unique ID to distinguish between objects
+     * object's internal state from any of its previous states.</li> </ul> Using the unique ID to distinguish between objects
      * ensures that the StateKey does not store dangling references to the surface object itself. Should the StateKey
      * live longer than the surface object that created it, the StateKey does not prevent the object from being garbage
      * collected.

@@ -16,7 +16,6 @@ import java.net.URL;
 
 /**
  * Base class for icon retrievers. This class provides methods for loading and manipulating icons.
- * <p>
  * <h2>Icon retrieval</h2>
  * <p>
  * Each symbol in a symbology set must have a unique identifier. The IconRetriever's job is to create a BufferedImage to
@@ -32,7 +31,6 @@ import java.net.URL;
  * <p>
  * A simple icon retriever might use a symbol repository that is a simple directory of PNG files, where each file name
  * matches a symbol identifier. Such an icon retriever could be implemented like this:
- * <p>
  * <pre>
  * class SimpleIconRetriever extends AbstractIconRetriever
  * {
@@ -43,7 +41,6 @@ import java.net.URL;
  *     }
  * }
  * </pre>
- * <p>
  * <h2>Composite icons</h2>
  * <p>
  * Complicated symbols may be made up of several different graphical elements. {@link
@@ -61,7 +58,6 @@ import java.net.URL;
  * // Return the composite image.
  * return fullImage;
  * </pre>
- * <p>
  * <h2>Changing the color of an icon</h2>
  * <p>
  * {@link #multiply(java.awt.image.BufferedImage, java.awt.Color) multiply} can change the color of an image by

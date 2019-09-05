@@ -202,7 +202,7 @@ public class HotSpotController implements SelectListener, MouseMotionListener
      * listener, mouse motion listener, and mouse wheel listener on the WorldWindow's {@link
      * gov.nasa.worldwind.event.InputHandler}. This removes the previously active HotSpot as a listener on the World
      * Window's InputHandler. This does nothing if the active HotSpot and the specified HotSpot are the same object.
-     * </p> Additionally, this updates the WorldWindow's {@link java.awt.Cursor} to the value returned by {@code
+     * <p> Additionally, this updates the WorldWindow's {@link java.awt.Cursor} to the value returned by {@code
      * hotSpot.getCursor()}, or {@code null} if the specified hotSpot is {@code null}.
      *
      * @param hotSpot The HotSpot that becomes the active HotSpot. {@code null} to indicate that there is no active

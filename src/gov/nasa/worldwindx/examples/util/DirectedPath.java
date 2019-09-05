@@ -311,6 +311,8 @@ public class DirectedPath extends Path
      * Compute the geometry of a direction arrow between two points.
      *
      * @param dc       current draw context
+     * @param poleA The first pole.
+     * @param poleB The second pole.
      * @param polePtA  the first pole position. This is one of the application defined path positions.
      * @param polePtB  second pole position
      * @param buffer   buffer in which to place computed points

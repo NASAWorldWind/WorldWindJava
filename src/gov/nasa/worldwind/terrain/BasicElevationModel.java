@@ -2149,7 +2149,8 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
 
     /**
      * Appends BasicElevationModel configuration parameters as elements to the specified context. This appends elements
-     * for the following parameters: <table> <th><td>Parameter</td><td>Element Path</td><td>Type</td></th>
+     * for the following parameters: <table> <caption style="font-weight: bold;">Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
      * <tr><td>{@link AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr> <tr><td>{@link
      * AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr> <tr><td>{@link
      * AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String array</td></tr>
@@ -2268,7 +2269,9 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     /**
      * Parses BasicElevationModel parameters from a specified DOM document. This writes output as key-value pairs to
      * params. If a parameter from the XML document already exists in params, that parameter is ignored. Supported key
-     * and parameter names are: <table> <th><td>Parameter</td><td>Element Path</td><td>Type</td></th> <tr><td>{@link
+     * and parameter names are: <table> <caption style="font-weight: bold;">Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
+     * <tr><td>{@link
      * AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr> <tr><td>{@link
      * AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr> <tr><td>{@link
      * AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String array</td></tr>

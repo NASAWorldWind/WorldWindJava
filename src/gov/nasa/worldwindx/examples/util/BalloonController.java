@@ -33,21 +33,17 @@ import java.util.Timer;
  * Controller to display a {@link Balloon} and handle balloon events. The controller does the following: <ul>
  * <li>Display a balloon when an object is selected</li> <li>Handle URL selection events in balloons</li> <li>Resize
  * BrowserBalloons</li> <li>Handle close, back, and forward events in BrowserBalloon</li> </ul>
- * <p>
  * <h2>Displaying a balloon for a selected object</h2>
  * <p>
  * When a object is clicked, the controller looks for a Balloon attached to the object. The controller includes special
  * logic for handling balloons attached to KML features.
- * <p>
  * <h3>KML Features</h3>
  * <p>
  * The KMLAbstractFeature is attached to the top PickedObject under AVKey.CONTEXT. The controller looks for the balloon
  * in the KMLAbstractFeature under key AVKey.BALLOON.
- * <p>
  * <h3>Other objects</h3>
  * <p>
  * If the top object is an instance of AVList, the controller looks for a Balloon under AVKey.BALLOON.
- * <p>
  * <h2>URL events</h2>
  * <p>
  * The controller looks for a value under AVKey.URL attached to either the top PickedObject. If the URL refers to a KML
@@ -61,7 +57,6 @@ import java.util.Timer;
  * example, a BrowserBalloon will navigate in place when a link is clicked, but it will not if the balloon controller
  * consumes the left press and left click select events. This allows the balloon controller to override the default
  * action for certain URLs.
- * <p>
  * <h2>BrowserBalloon control events</h2>
  * <p>
  * {@link gov.nasa.worldwind.render.AbstractBrowserBalloon} identifies its controls by attaching a value to the

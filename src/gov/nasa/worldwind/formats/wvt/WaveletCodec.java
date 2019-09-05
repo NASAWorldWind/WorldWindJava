@@ -79,9 +79,9 @@ public class WaveletCodec
      *    Andrew Glassner
      *    1995, pp. 296
      *
-     * @param resolution
+     * @param resolution The desired resolution.
      * @return reconstructed image.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if resolution is not valid.
      */
     public BufferedImage reconstruct(int resolution) throws IllegalArgumentException {
 
@@ -321,9 +321,9 @@ public class WaveletCodec
      * a power of 2. If the incoming image has at least 3 bands, the first three are assumed to be RGB channels.
      * If only one-band, it is assumed to be grayscale. The SampleModel component-type must be BYTE.
      *
-     * @param image
-     * @return
-     * @throws IllegalArgumentException
+     * @param image The source image.
+     * @return The wavelet encoding.
+     * @throws IllegalArgumentException if the image is invalid.
      */
     public static WaveletCodec encode(BufferedImage image) throws IllegalArgumentException {
 

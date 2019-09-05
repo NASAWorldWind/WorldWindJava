@@ -1611,7 +1611,7 @@ public class Matrix
      * The returned covariance matrix represents the correlation between each pair of x-, y-, and z-coordinates as
      * they're distributed about the point Iterable's arithmetic mean. Its layout is as follows:
      * <p>
-     * <code> C(x, x)  C(x, y)  C(x, z) <br/> C(x, y)  C(y, y)  C(y, z) <br/> C(x, z)  C(y, z)  C(z, z) </code>
+     * <code> C(x, x)  C(x, y)  C(x, z) <br> C(x, y)  C(y, y)  C(y, z) <br> C(x, z)  C(y, z)  C(z, z) </code>
      * <p>
      * C(i, j) is the covariance of coordinates i and j, where i or j are a coordinate's dispersion about its mean
      * value. If any entry is zero, then there's no correlation between the two coordinates defining that entry. If the
@@ -1676,7 +1676,7 @@ public class Matrix
      * The returned covariance matrix represents the correlation between each pair of x-, y-, and z-coordinates as
      * they're distributed about the points arithmetic mean. Its layout is as follows:
      * <p>
-     * <code> C(x, x)  C(x, y)  C(x, z) <br/> C(x, y)  C(y, y)  C(y, z) <br/> C(x, z)  C(y, z)  C(z, z) </code>
+     * <code> C(x, x)  C(x, y)  C(x, z) <br> C(x, y)  C(y, y)  C(y, z) <br> C(x, z)  C(y, z)  C(z, z) </code>
      * <p>
      * C(i, j) is the covariance of coordinates i and j, where i or j are a coordinate's dispersion about its mean
      * value. If any entry is zero, then there's no correlation between the two coordinates defining that entry. If the
