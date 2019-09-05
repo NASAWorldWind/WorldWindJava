@@ -1,0 +1,106 @@
+/*
+ * Copyright (C) 2012 United States Government as represented by the Administrator of the
+ * National Aeronautics and Space Administration.
+ * All Rights Reserved.
+ */
+
+/**
+ * <p>
+ * This package contains examples that show how to import imagery and elevation data and how to use it to create layers,
+ * renderables and elevation models. Since this type of data is typically in the form of a raster, WorldWind calls it
+ * <em>raster data</em>. WorldWind can import many formats of raster data, including but not limited to JPEG, JPEG-2000,
+ * PNG, and DTED, and GeoTIFF for both imagery and elevations. Data can be imported from a local or network disk, or in
+ * many cases directly from a network URL. This overview describes the import process and identifies example programs
+ * showing exactly how import is done.</p>
+ *
+<p>
+ * Note that WorldWind can also draw data incrementally from web services such as WMS and WFS, but this overview covers
+ * only importing bulk data from files or streams.</p>
+ *
+<p>
+ * When importing data, WorldWind reprojects it to the WGS-84 datum and latitude, longitude coordinates, which is
+ * WorldWind's internal coordinate reference system (also known as EPSG:4326).</p>
+ *
+<p>
+ * In addition to some internal importer classes, WorldWind uses {@link javax.imageio.ImageIO} and the open-source GDAL
+ * library to read and potentially reproject data on import. This enables WorldWind to import a very wide range of image
+ * formats and projection types. It also makes it possible to import very large data sets composed of many files.</p>
+ *
+<p>
+ * Here is a list of the most commonly used formats supported, see {@link gov.nasa.worldwind.data} for the full
+ * list:</p>
+ * <ul>
+ * <li>GeoTIFF (for both imagery and elevations)</li>
+ * <li>PNG</li>
+ * <li>JPEG</li>
+ * <li>JPEG-2000</li>
+ * <li>GIF</li>
+ * <li>DTED</li>
+ * <li>RPF</li>
+ * <li>NITF</li>
+ * <li>MrSID</li>
+ * <li>BIL</li>
+ * </ul>
+ *
+<h2>Importing vs. Installing</h2>
+ *
+<p>
+ * Raster data can be <em>imported</em> for just the current session or <em>installed</em> for permanent availability.
+ * </p>
+ *
+<h3>Installing Imagery and Elevation Data</h3>
+ *
+<p>
+ * Installing data adds it to a permanent location on the local computer. It's installed in a way that facilitates rapid
+ * access by WorldWind. Unlike the WorldWind cache, installed data is never automatically deleted. Applications may
+ * specify the installation location, but by default the location is:
+ * <ul>
+ * <li>Mac OS X: <em>/Library/Caches/WorldWindInstalled</em></li>
+ * <li>Windows: <em>/Users/All Users/Application Data/WorldWindInstalled or /Program Data/WorldWindInstalled</em></li>
+ * <li>Linux, Solaris: <em>/var/cache/WorldWindInstalled</em></li>
+ * </ul>
+ *
+<p>
+ * These locations are peers to the WorldWind cache directory.</p>
+ *
+<p>
+ * Installed imagery is typically displayed as a {@link gov.nasa.worldwind.layers.TiledImageLayer}. Elevation data is
+ * typically used to create an {@link gov.nasa.worldwind.globes.ElevationModel}. As these classes run, they
+ * automatically create sub-regions and reduced resolution versions of the data in order to optimize performance. This
+ * information is saved permanently in the installed-data location. Depending on the size and complexity of the data,
+ * WorldWind may also create one or two levels of reduced resolution data during installation.</p>
+ *
+<p>
+ * When installing data, the source data can be copied to the installed-data directory or left in its original location.
+ * If the data is not copied, it's of course necessary that it be available and accessible in the original location when
+ * subsequently needed. The data location is captured in a configuration file stored in the installed-data directory for
+ * the particular data set. The examples {@link
+ * gov.nasa.worldwindx.examples.dataimport.InstallImagery} and {@link
+ * gov.nasa.worldwindx.examples.dataimport.InstallElevations} shows how to use this file to create a layer and an
+ * elevation model, respectively.</p>
+ *
+<h3>Data Installation Examples</h3>
+ *
+<p>
+ * The example {@link gov.nasa.worldwindx.examples.dataimport.InstallImagery} shows how to install imagery and use it to
+ * create a {@link gov.nasa.worldwind.layers.TiledImageLayer}. The example {@link
+ * gov.nasa.worldwindx.examples.dataimport.InstallElevations} shows how to install elevations and use them to create an
+ * elevation model. Both classes are heavily commented to describe their operation.</p>
+ *
+<h3>Importing Imagery and Elevation Data for One-time Use</h3>
+ *
+<p>
+ * It's often the case that data is needed only during a current session. In this case the data should be imported but
+ * not installed. The {@link gov.nasa.worldwindx.examples.dataimport.ImportImagery} and {@link
+ * gov.nasa.worldwindx.examples.dataimport.ImportElevations} examples show how to import data and use it to create a
+ * {@link gov.nasa.worldwind.render.SurfaceImage} for imagery and an {@link gov.nasa.worldwind.globes.ElevationModel}
+ * for elevations.</p>
+ *
+<h2>Deploying Data Import Capability</h2>
+ *
+<p>
+ * See the package description of {@link gov.nasa.worldwind.data} for data import deployment instructions, including
+ * deployment with Java Web Start.</p>
+ *
+ */
+package gov.nasa.worldwindx.examples.dataimport;

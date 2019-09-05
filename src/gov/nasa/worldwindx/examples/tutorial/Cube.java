@@ -21,7 +21,7 @@ import java.awt.*;
 /**
  * Example of a custom {@link Renderable} that draws a cube at a geographic position. This class shows the simplest
  * possible example of a custom Renderable, while still following WorldWind best practices. See
- * https://goworldwind.org/developers-guide/how-to-build-a-custom-renderable/ for a complete description of this
+ * https://worldwind.arc.nasa.gov/java/tutorials/build-a-custom-renderable/ for a complete description of this
  * example.
  *
  * @author pabercrombie
