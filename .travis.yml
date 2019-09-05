@@ -13,7 +13,10 @@ addons:
   apt:
     packages:
       - ant-optional
-
+      
+services:
+  - xvfb
+  
 # Use xvfb to run tests that require a GUI and give it some time to start
 # before_script:
 #  - "export DISPLAY=:99.0"
