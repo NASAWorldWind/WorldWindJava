@@ -4,9 +4,9 @@
 # Set up to run the Java build script per the Travis CI documentation
 language: java
 
-# Configure the build to use Oracle JDK 8
+# Configure the build to use Oracle JDK 9
 jdk:
-  - oraclejdk8
+  - oraclejdk9
 
 # Install the Ant JUnit package, which is missing from the Travis CI environment. See the Travis documentation: https://docs.travis-ci.com/user/installing-dependencies/#Adding-APT-Packages
 addons:
@@ -15,14 +15,14 @@ addons:
       - ant-optional
 
 # Use xvfb to run tests that require a GUI and give it some time to start
-before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3
+# before_script:
+  # - "export DISPLAY=:99.0"
+  # - "sh -e /etc/init.d/xvfb start"
+  # - sleep 3
 
 # Build the project
 script:
-  - ant build
+  - ant assemble
 
 # Deployment has been disabled in preparation for the WorldWind project suspension on April 5, 2019
 #deploy:
