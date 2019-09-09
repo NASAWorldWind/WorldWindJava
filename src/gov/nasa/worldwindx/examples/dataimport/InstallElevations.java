@@ -23,7 +23,7 @@ import java.io.File;
 
 /**
  * Illustrates how to install elevation data into a WorldWind <code>{@link gov.nasa.worldwind.cache.FileStore}</code>.
- * <p/>
+ * <p>
  * Elevation data is installed into a FileStore by executing the following steps: <ol> <li>Choose the FileStore location
  * to place the installed elevations. This example uses the FileStore's install location. </li> <li>Compute a unique
  * cache name for the elevations. In this example, the cache name is "Examples/ElevationsName", where "ElevationsName"

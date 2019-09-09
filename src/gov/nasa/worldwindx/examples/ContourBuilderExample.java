@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Shows how to use the {@link gov.nasa.worldwind.util.ContourBuilder} class to compute contour lines in an arbitrary
  * rectangular array of numeric values.
- * <p/>
+ * <p>
  * This example creates a 60x60 rectangular array of floating point values in the range from 0.0 to 1.0, inclusive. The
  * array is displayed on the globe as an AnalyticSurface by mapping each array value to a color, where an array value of
  * 0.0 maps to hue 0, an array value of 1.0 maps to hue 360, and values in between are interpolated between those two

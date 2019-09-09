@@ -12,7 +12,7 @@ import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.util.WWIO;
 
 import javax.imageio.ImageIO;
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

@@ -296,7 +296,9 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String PIXEL_FORMAT = "gov.nasa.worldwind.avkey.PixelFormat";
     final String PIXEL_HEIGHT = "gov.nasa.worldwind.avkey.PixelHeight";
     final String PIXEL_WIDTH = "gov.nasa.worldwind.avkey.PixelWidth";
+    
     /** @deprecated Use <code>{@link #DATA_TYPE} instead.</code>. */
+    @Deprecated
     final String PIXEL_TYPE = AVKey.DATA_TYPE;
 
     final String PLACENAME_LAYER_CACHE_SIZE = "gov.nasa.worldwind.avkey.PlacenameLayerCacheSize";

@@ -619,7 +619,7 @@ public class AbstractGraticuleLayer extends AbstractLayer
     /**
      * Determines whether the grid should be updated. It returns true if: <ul> <li>the eye has moved more than 1% of its
      * altitude above ground <li>the view FOV, heading or pitch have changed more than 1 degree <li>vertical
-     * exaggeration has changed </ul
+     * exaggeration has changed </ul>
      *
      * @param dc the current <code>DrawContext</code>.
      *

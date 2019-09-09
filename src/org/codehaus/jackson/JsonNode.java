@@ -19,9 +19,6 @@ import java.util.*;
  * information is generally available when building or modifying
  * trees, but less often when reading a tree (newly built from
  * parsed Json content).
- *<p>
- * Actual concrete sub-classes can be found from package
- * {@link org.codehaus.jackson.node}.
  */
 public abstract class JsonNode
     implements Iterable<JsonNode>
@@ -40,14 +37,12 @@ public abstract class JsonNode
     // // First high-level division between values, containers and "missing"
 
     /**
-     * Method that returns true for all value nodes: ones that 
-     * are not containers, and that do not represent "missing" nodes
-     * in the path. Such value nodes represent String, Number, Boolean
-     * and null values from JSON.
-     *<p>
+     * Method that returns true for all value nodes: ones that are not containers, and that do not represent "missing"
+     * nodes in the path.Such value nodes represent String, Number, Boolean and null values from JSON.<p>
      * Note: one and only one of methods {@link #isValueNode},
-     * {@link #isContainerNode} and {@link #isMissingNode} ever
-     * returns true for any given node.
+     * {@link #isContainerNode} and {@link #isMissingNode} ever returns true for any given node.
+     *
+     * @return Undocumented.
      */
     public boolean isValueNode() { return false; }
 
@@ -57,6 +52,7 @@ public abstract class JsonNode
      * Note: one and only one of methods {@link #isValueNode},
      * {@link #isContainerNode} and {@link #isMissingNode} ever
      * returns true for any given node.
+     * @return  Undocumented.
      */
     public boolean isContainerNode() { return false; }
 
@@ -68,6 +64,7 @@ public abstract class JsonNode
      * Note: one and only one of methods {@link #isValueNode},
      * {@link #isContainerNode} and {@link #isMissingNode} ever
      * returns true for any given node.
+     * @return  Undocumented.
      */
     public boolean isMissingNode() { return false; }
 
@@ -88,7 +85,7 @@ public abstract class JsonNode
      * Method that can be used to check if the node is a wrapper
      * for a POJO ("Plain Old Java Object" aka "bean".
      * Returns true only for
-     * instances of {@link org.codehaus.jackson.node.POJONode}.
+     * instances of org.codehaus.jackson.node.POJONode.
      *
      * @return True if this node wraps a POJO
      */
@@ -134,12 +131,14 @@ public abstract class JsonNode
     /**
      * Method that can be used to check if this node was created from
      * Json boolean value (literals "true" and "false").
+     * @return  Undocumented.
      */
     public boolean isBoolean() { return false; }
 
     /**
      * Method that can be used to check if this node was created from
      * Json liternal null value.
+     * @return  Undocumented.
      */
     public boolean isNull() { return false; }
 
@@ -154,12 +153,11 @@ public abstract class JsonNode
     public boolean isBinary() { return false; }
 
     /**
-     * Method that can be used for efficient type detection
-     * when using stream abstraction for traversing nodes.
-     * Will return the first {@link JsonToken} that equivalent
-     * stream event would produce (for most nodes there is just
-     * one token but for structured/container types multiple)
+     * Method that can be used for efficient type detection when using stream abstraction for traversing nodes.Will
+     * return the first {@link JsonToken} that equivalent stream event would produce (for most nodes there is just one
+     * token but for structured/container types multiple)
      *
+     * @return Undocumented.
      * @since 1.3
      */
     public abstract JsonToken asToken();
@@ -168,6 +166,7 @@ public abstract class JsonNode
      * If this node is a numeric type (as per {@link #isNumber}),
      * returns native type that node uses to store the numeric
      * value.
+     * @return Undocumented.
      */
     public abstract JsonParser.NumberType getNumberType();
 
@@ -193,11 +192,11 @@ public abstract class JsonNode
      * Method to use for accessing binary content of binary nodes (nodes
      * for which {@link #isBinary} returns true); or for Text Nodes
      * (ones for which {@link #getTextValue} returns non-null value),
-     * to read decoded base64 data.
-     * For other types of nodes, returns null.
+     * to read decoded base64 data.For other types of nodes, returns null.
      *
      * @return Binary data this node contains, iff it is a binary
      *   node; null otherwise
+     * @throws java.io.IOException Undocumented.
      */
     public byte[] getBinaryValue() throws IOException
     {
@@ -224,8 +223,7 @@ public abstract class JsonNode
 
     /**
      * Method for accessing value of the specified element of
-     * an array node. For other nodes, null is always returned.
-     *<p>
+     * an array node.For other nodes, null is always returned.<p>
      * For array nodes, index specifies
      * exact location within array and allows for efficient iteration
      * over child elements (underlying storage is guaranteed to
@@ -234,6 +232,7 @@ public abstract class JsonNode
      * <code>node.size()</code>, null is returned; no exception is
      * thrown for any index.
      *
+     * @param index Undocumented.
      * @return Node that represent value of the specified element,
      *   if this node is an array and has specified element.
      *   Null otherwise.
@@ -241,20 +240,20 @@ public abstract class JsonNode
     public JsonNode get(int index) { return null; }
 
     /**
-     * Method for accessing value of the specified field of
-     * an object node. If this node is not an object (or it
-     * does not have a value for specified field name), or
-     * if there is no field with such name, null is returned.
+     * Method for accessing value of the specified field of an object node.If this node is not an object (or it does not
+     * have a value for specified field name), or if there is no field with such name, null is returned.
      *
-     * @return Node that represent value of the specified field,
-     *   if this node is an object and has value for the specified
-     *   field. Null otherwise.
+     * @param fieldName Undocumented.
+     * @return Node that represent value of the specified field, if this node is an object and has value for the
+     * specified field. Null otherwise.
      */
     public JsonNode get(String fieldName) { return null; }
 
     /**
      * Alias for {@link #get(String)}.
      *
+     * @param fieldName Undocumented.
+     * @return  Undocumented.
      * @deprecated Use {@link #get(String)} instead.
      */
     @Deprecated
@@ -263,6 +262,8 @@ public abstract class JsonNode
     /**
      * Alias for {@link #get(int)}.
      *
+     * @param index Undocumented.
+     * @return  Undocumented.
      * @deprecated Use {@link #get(int)} instead.
      */
     @Deprecated
@@ -276,6 +277,7 @@ public abstract class JsonNode
      *<p>
      * Note: to serialize nodes of any type, you should call
      * {@link #toString} instead.
+     * @return Undocumented. 
      */
     public abstract String getValueAsText();
 
@@ -300,19 +302,21 @@ public abstract class JsonNode
      * convenience "for-each" loop can be used for looping over elements
      * of Json Array constructs.
      */
+    @Override
     public final Iterator<JsonNode> iterator() { return getElements(); }
 
     /**
-     * Method for accessing all value nodes of this Node, iff
-     * this node is a Json Array or Object node. In case of Object node,
-     * field names (keys) are not included, only values.
-     * For other types of nodes, returns empty iterator.
+     * Method for accessing all value nodes of this Node, iff this node is a Json Array or Object node.In case of Object
+     * node, field names (keys) are not included, only values. For other types of nodes, returns empty iterator.
+     *
+     * @return Undocumented.
      */
     public Iterator<JsonNode> getElements() { return NO_NODES.iterator(); }
 
     /**
      * Method for accessing names of all fields for this Node, iff
      * this node is a Json Object node.
+     * @return  Undocumented.
      */
     public Iterator<String> getFieldNames() { return NO_STRINGS.iterator(); }
 
@@ -323,37 +327,41 @@ public abstract class JsonNode
      */
 
     /**
-     * This method is similar to {@link #get(String)}, except
-     * that instead of returning null if no such value exists (due
-     * to this node not being an object, or object not having value
-     * for the specified field),
-     * a "missing node" (node that returns true for
-     * {@link #isMissingNode}) will be returned. This allows for
-     * convenient and safe chained access via path calls.
+     * This method is similar to {@link #get(String)}, except that instead of returning null if no such value exists
+     * (due to this node not being an object, or object not having value for the specified field), a "missing node"
+     * (node that returns true for {@link #isMissingNode}) will be returned.This allows for convenient and safe chained
+     * access via path calls.
+     *
+     * @param fieldName Undocumented.
+     * @return Undocumented.
      */
     public abstract JsonNode path(String fieldName);
 
     /**
      * Alias of {@link #path(String)}.
      *
+     * @param fieldName Undocumented.
+     * @return  Undocumented.
      * @deprecated Use {@link #path(String)} instead
      */
     @Deprecated
     public final JsonNode getPath(String fieldName) { return path(fieldName); }
 
     /**
-     * This method is similar to {@link #get(int)}, except
-     * that instead of returning null if no such element exists (due
-     * to index being out of range, or this node not being an array),
-     * a "missing node" (node that returns true for
-     * {@link #isMissingNode}) will be returned. This allows for
-     * convenient and safe chained access via path calls.
+     * This method is similar to {@link #get(int)}, except that instead of returning null if no such element exists (due
+     * to index being out of range, or this node not being an array), a "missing node" (node that returns true for
+     * {@link #isMissingNode}) will be returned.This allows for convenient and safe chained access via path calls.
+     *
+     * @param index Undocumented.
+     * @return Undocumented.
      */
     public abstract JsonNode path(int index);
 
     /**
      * Alias of {@link #path(int)}.
      *
+     * @param index Undocumented.
+     * @return  Undocumented.
      * @deprecated Use {@link #path(int)} instead
      */
     @Deprecated
@@ -369,8 +377,11 @@ public abstract class JsonNode
      * Method that can be called to serialize this node and
      * all of its descendants using specified JSON generator.
      *
+     * @param jg Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      * @deprecated Use methods that are part of {@link JsonGenerator}
-     *   or {@link org.codehaus.jackson.map.ObjectMapper}
+     *   or org.codehaus.jackson.map.ObjectMapper
      *   instead.
      */
     public abstract void writeTo(JsonGenerator jg)
@@ -384,12 +395,11 @@ public abstract class JsonNode
 
 
     /**
-     * Method for constructing a {@link JsonParser} instance for
-     * iterating over contents of the tree that this
-     * node is root of.
-     * Functionally equivalent to first serializing tree
-     * using {@link #writeTo} and then re-parsing but much
+     * Method for constructing a {@link JsonParser} instance for iterating over contents of the tree that this node is
+     * root of.Functionally equivalent to first serializing tree using {@link #writeTo} and then re-parsing but much
      * more efficient.
+     *
+     * @return Undocumented.
      */
     public abstract JsonParser traverse();
 
@@ -411,6 +421,7 @@ public abstract class JsonNode
      *<p>
      * Note: marked as abstract to ensure all implementation
      * classes define it properly.
+     * @param o Undocumented.
      */
     @Override
     public abstract boolean equals(Object o);

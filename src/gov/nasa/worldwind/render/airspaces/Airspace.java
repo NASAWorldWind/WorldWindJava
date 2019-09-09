@@ -207,17 +207,17 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
     /**
      * Sets the altitude datum, which indicates whether airspace altitudes are relative to mean sea level, ground level
      * or a single ground reference location.
-     * <p/>
+     * <p>
      * A value of {@link AVKey#ABOVE_MEAN_SEA_LEVEL}, the default for both lower and upper datums, indicates a datum of
      * mean sea level. The respective lower or upper surface of the airspace is drawn at the constant altitude specified
      * by {@link #setAltitude(double)}.
-     * <p/>
+     * <p>
      * A datum of {@link AVKey#ABOVE_GROUND_LEVEL} indicates that each position of the respective airspace surface is
      * offset vertically from the altitude specified to {@link #setAltitude(double)} by an amount equal to the terrain
      * elevation at that position. For example, if the specified lower altitude is zero, the lower surface lies on and
      * conforms to the terrain. If non-zero, the surface undulates in tandem with the terrain but relative to the
      * specified altitude.
-     * <p/>
+     * <p>
      * A datum of {@link AVKey#ABOVE_GROUND_REFERENCE} combines both of the above datums. It indicates that the
      * respective surface is drawn at the altitude specified to {@link #setAltitude(double)} but offset vertically by an
      * amount equal to the elevation at a single reference location on the ground. This is useful for displaying
@@ -273,7 +273,7 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchRendering(boolean).
+     * @see #setEnableBatchRendering(boolean)
      */
     boolean isEnableBatchRendering();
 
@@ -291,7 +291,7 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchPicking(boolean).
+     * @see #setEnableBatchPicking(boolean)
      */
     boolean isEnableBatchPicking();
 
@@ -300,7 +300,7 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      * together if they are contained in the same layer. This increases performance but allows only the top-most of the
      * polygons to be reported in a {@link gov.nasa.worldwind.event.SelectEvent} even if several of the polygons are at
      * the pick position.
-     * <p/>
+     * <p>
      * Batch rendering ({@link #setEnableBatchRendering(boolean)}) must be enabled in order for batch picking to occur.
      *
      * @param enableBatchPicking true to enable batch rendering, otherwise false.
@@ -334,7 +334,7 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
     /**
      * Specifies the outline line width to use during picking. A larger width than normal typically makes the outline
      * easier to pick.
-     * <p/>
+     * <p>
      * Note that the size of the pick aperture also affects the precision necessary to pick.
      *
      * @param outlinePickWidth the outline pick width. The default is 10.

@@ -8,7 +8,7 @@ package gov.nasa.worldwind.cache;
 /**
  * SessionCache is a general receiving area for data represented as key-value pairs. Entries in a SessionCache may
  * persist for the length of a Virtual Machine's run time, but may be evicted at any time.
- * <p/>
+ * <p>
  * Eviction of SessionCache entries is accomplished by controlling the maximum number of entries in the cache. This
  * maximum value is set by calling {@link #setCapacity(int)}. A SessionCache may be implemented with any eviction policy
  * (including a policy of no eviction). Most implementations evict the eldest entry added to the cache.

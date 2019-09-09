@@ -26,10 +26,9 @@ import java.util.logging.Level;
 /**
  * Parses an ESRI Shapefile (.shp) and provides access to its contents. For details on the Shapefile format see the ESRI
  * documentation at <a href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf</a>.
- * <p/>
+ * <p>
  * The Shapefile provides a streaming interface for parsing a Shapefile's contents. The streaming interface enables
- * applications to read Shapefiles that do not fit in memory. A typical usage pattern is as follows: <code>
- * <pre>
+ * applications to read Shapefiles that do not fit in memory. A typical usage pattern is as follows:<pre><code>
  * Object source = "MyShapefile.shp";
  * Shapefile sf = new Shapefile(source);
  * try
@@ -44,27 +43,25 @@ import java.util.logging.Level;
  * {
  *     WWIO.closeStream(sf, source);
  * }
- * </pre>
- * </code>
- * <p/>
+ * </code></pre>
+ * <p>
  * The source Shapefile may be accompanied by an optional index file, attribute file, and projection file. Shapefile
- * constructors that accept a generic source such as {@link #Shapefile(Object) expect accompanying files to be in the
+ * constructors that accept a generic source such as {@link #Shapefile(Object)} expect accompanying files to be in the
  * same logical folder as the Shapefile, have the same filename as the Shapefile, and have suffixes ".shx", ".dbf", and
  * ".prj" respectively. If any of these files do not exist, or cannot be read for any reason, the Shapefile opens
  * without that information. Alternatively, the Shapefile can be constructed by providing a direct {@link
  * java.io.InputStream} to any of the accompanying sources by using the InputStream based constructors, such as {@link
  * #Shapefile(java.io.InputStream, java.io.InputStream, java.io.InputStream, java.io.InputStream)}.
- * <p/>
  * <h3>Coordinate System</h3>
- * <p/>
+ * <p>
  * The Shapefile's coordinate system affects how the Shapefile's point coordinates are interpreted as follows: <ul>
  * <li>Unspecified - coordinates are not changed.</li> <li>Geographic - coordinates are validated during parsing.
  * Coordinates outside the standard range of +90/-90 latitude and +180/-180 longitude cause the Shapefile to throw an
  * exception during construction if the Shapefile's header contains an invalid coordinate, or in {@link
  * #readNextRecord()} if any of the Shapefile's records contain an invalid coordinate.</li> <li>Universal Transverse
  * Mercator (UTM) - UTM coordinates are converted to geographic coordinates during parsing.</li> <li>Unsupported - the
- * Shapefile throws a {@link gov.nasa.worldwind.exception.WWRuntimeException} during construction.
- * <p/>
+ * Shapefile throws a {@link gov.nasa.worldwind.exception.WWRuntimeException} during construction.</ul>
+ * <p>
  * The Shapefile's coordinate system can be specified in either an accompanying projection file, or by specifying the
  * coordinate system parameters in an {@link gov.nasa.worldwind.avlist.AVList} during Shapefile's construction. The
  * Shapefile gives priority to the AVList if an accompanying projection file is available and AVList projection
@@ -78,11 +75,12 @@ import java.util.logging.Level;
  * an integer in the range 1-60.</li> <li>{@link gov.nasa.worldwind.avlist.AVKey#PROJECTION_HEMISPHERE} - the UTM
  * hemisphere (if coordinate system is UTM); either {@link gov.nasa.worldwind.avlist.AVKey#NORTH} or {@link
  * gov.nasa.worldwind.avlist.AVKey#SOUTH}.</li> </ul>
- * <p/>
+ * <p>
  * Subclasses can override how the Shapefile reads and interprets its coordinate system. Override {@link
  * #readCoordinateSystem()} and {@link #validateCoordinateSystem(gov.nasa.worldwind.avlist.AVList)} to change how the
- * Shapefile parses an accompanying projection file and validates the coordinate system parameters. Override {@link
- * #readBoundingRectangle(java.nio.ByteBuffer)} and {@link #readPoints(java.nio.ByteBuffer)} to change how the
+ * Shapefile parses an accompanying projection file and validates the coordinate system parameters. Override 
+ * {@link #readBoundingRectangle(java.nio.ByteBuffer)} 
+ * and {@link #readPoints(gov.nasa.worldwind.formats.shapefile.ShapefileRecord,java.nio.ByteBuffer)} to change how the
  * Shapefile's point coordinates are interpreted according to its coordinate system.
  *
  * @author Patrick Murris
@@ -184,12 +182,12 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
      * java.io.InputStream}</li> <li>{@link java.net.URL}</li> <li>absolute {@link java.net.URI}</li><li>{@link
      * File}</li> <li>{@link String} containing a valid URL description or a file or resource name available on the
      * classpath.</li> </ul>
-     * <p/>
+     * <p>
      * The source Shapefile may be accompanied by an optional index file, attribute file, and projection file. To be
      * recognized by this Shapefile, accompanying files must be in the same logical folder as the Shapefile, have the
      * same filename as the Shapefile, and have suffixes ".shx", ".dbf", and ".prj" respectively. If any of these files
      * do not exist, or cannot be read for any reason, the Shapefile opens without that information.
-     * <p/>
+     * <p>
      * This throws an exception if the shapefile's coordinate system is unsupported.
      *
      * @param source the source of the shapefile.
@@ -240,12 +238,12 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
      * Opens an Shapefile from a general source. The source type may be one of the following: <ul> <li>{@link
      * java.io.InputStream}</li> <li>{@link java.net.URL}</li> <li>{@link File}</li> <li>{@link String} containing a
      * valid URL description or a file or resource name available on the classpath.</li> </ul>
-     * <p/>
+     * <p>
      * The source Shapefile may be accompanied by an optional index file, attribute file, and projection file. To be
      * recognized by this Shapefile, accompanying files must be in the same logical folder as the Shapefile, have the
      * same filename as the Shapefile, and have suffixes ".shx", ".dbf", and ".prj" respectively. If any of these files
      * do not exist, or cannot be read for any reason, the Shapefile opens without that information.
-     * <p/>
+     * <p>
      * This throws an exception if the shapefile's coordinate system is unsupported, or if the shapefile's coordinate
      * system is unsupported.
      *
@@ -261,11 +259,11 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
     /**
      * Opens a Shapefile from an InputStream, and InputStreams to its optional resources.
-     * <p/>
+     * <p>
      * The source Shapefile may be accompanied optional streams to an index resource stream, an attribute resource
      * stream, and a projection resource stream. If any of these streams are null or cannot be read for any reason, the
      * Shapefile opens without that information.
-     * <p/>
+     * <p>
      * This throws an exception if the shapefile's coordinate system is unsupported.
      *
      * @param shpStream the shapefile geometry file stream.
@@ -303,11 +301,11 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
     /**
      * Opens a Shapefile from an InputStream, and InputStreams to its optional resources.
-     * <p/>
+     * <p>
      * The source Shapefile may be accompanied optional streams to an index resource stream, an attribute resource
      * stream, and a projection resource stream. If any of these streams are null or cannot be read for any reason, the
      * Shapefile opens without that information.
-     * <p/>
+     * <p>
      * This throws an exception if the shapefile's coordinate system is unsupported.
      *
      * @param shpStream the shapefile geometry file stream.
@@ -326,11 +324,11 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
     /**
      * Opens a Shapefile from an InputStream, and InputStreams to its optional resources.
-     * <p/>
+     * <p>
      * The source Shapefile may be accompanied optional streams to an index resource stream, and an attribute resource
      * stream. If any of these streams are null or cannot be read for any reason, the Shapefile opens without that
      * information.
-     * <p/>
+     * <p>
      * This throws an exception if the shapefile's coordinate system is unsupported.
      *
      * @param shpStream the shapefile geometry file stream.
@@ -349,7 +347,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
     /**
      * Opens a Shapefile from an InputStream, and InputStreams to its optional resources.
-     * <p/>
+     * <p>
      * The source Shapefile may be accompanied optional streams to an index resource stream, and an attribute resource
      * stream. If any of these streams are null or cannot be read for any reason, the Shapefile opens without that
      * information.
@@ -480,7 +478,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
      * <li>{@link gov.nasa.worldwind.formats.shapefile.ShapefileRecordPolyline} if type is {@link #SHAPE_POLYLINE},
      * {@link #SHAPE_POLYLINE_M} or {@link #SHAPE_POLYLINE_Z}.</li> <li>{@link gov.nasa.worldwind.formats.shapefile.ShapefileRecordPolygon}
      * if type is {@link #SHAPE_POLYGON}, {@link #SHAPE_POLYGON_M} or {@link #SHAPE_POLYGON_Z}.</li> </ul>
-     * <p/>
+     * <p>
      * This throws an exception if the JVM cannot allocate enough memory to hold the buffer used to store the record's
      * point coordinates.
      *
@@ -535,7 +533,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
      * Closes the Shapefile, freeing any resources allocated during reading except the buffer containing the Shapefile's
      * points. This closes any {@link java.io.InputStream} passed to the Shapefile during construction. Subsequent calls
      * to {@link #nextRecord()} cause an IllegalStateException.
-     * <p/>
+     * <p>
      * After closing, the Shapefile's header information and point coordinates are still available. The following
      * methods are safe to call: <ul> <li>{@link #getVersion()}</li> <li>{@link #getLength()}</li> <li>{@link
      * #getShapeType()}</li> <li>{@link #getBoundingRectangle()}</li> <li>{@link #getNumberOfRecords()}</li> <li>{@link
@@ -954,7 +952,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
     /**
      * Reads a {@link Header} instance from the given {@link java.nio.ByteBuffer};
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the header and will be set to the end of the
      * header after this method has completed.
      *
@@ -1268,7 +1266,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     /**
      * Reads a {@link ShapefileRecord} instance from the given {@link java.nio.ByteBuffer}, or null if the buffer
      * contains a null record.
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the record and will be set to the start of the
      * next record after this method has completed.
      *
@@ -1296,11 +1294,11 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
      * Returns a new <code>{@link gov.nasa.worldwind.formats.shapefile.ShapefileRecord}</code> from the specified
      * buffer. The buffer's current position is assumed to be set at the start of the record and will be set to the
      * start of the next record after this method has completed.
-     * <p/>
+     * <p>
      * This returns an instance of of ShapefileRecord appropriate for the record's shape type. For example, if the
      * record's shape type is <code>SHAPE_POINT</code>, this returns a <code>ShapefileRecordPoint</code>, and if the
      * record's shape type is <code>SHAPE_NULL</code>, this returns <code>ShapefileRecordNull</code>.
-     * <p/>
+     * <p>
      * This returns <code>null</code> if the record's shape type is not one of the following types:
      * <code>SHAPE_POINT</code>, <code>SHAPE_POINT_M</code>, <code>SHAPE_POINT_Z</code>, <code>SHAPE_MULTI_POINT</code>,
      * <code>SHAPE_MULTI_POINT_M</code>, <code>SHAPE_MULTI_POINT_Z</code>, <code>SHAPE_NULL</code>,
@@ -1343,7 +1341,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
     /**
      * Returns a new "null" {@link gov.nasa.worldwind.formats.shapefile.ShapefileRecord} from the specified buffer.
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the record and will be set to the start of the
      * next record after this method has completed.
      *
@@ -1358,7 +1356,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
     /**
      * Returns a new point {@link gov.nasa.worldwind.formats.shapefile.ShapefileRecord} from the specified buffer.
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the record and will be set to the start of the
      * next record after this method has completed.
      *
@@ -1374,7 +1372,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
     /**
      * Returns a new multi-point {@link gov.nasa.worldwind.formats.shapefile.ShapefileRecord} from the specified
      * buffer.
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the record and will be set to the start of the
      * next record after this method has completed.
      *
@@ -1389,7 +1387,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
     /**
      * Returns a new polyline {@link gov.nasa.worldwind.formats.shapefile.ShapefileRecord} from the specified buffer.
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the record and will be set to the start of the
      * next record after this method has completed.
      *
@@ -1404,7 +1402,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
     /**
      * Returns a new polygon {@link gov.nasa.worldwind.formats.shapefile.ShapefileRecord} from the specified buffer.
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the record and will be set to the start of the
      * next record after this method has completed.
      *
@@ -1630,7 +1628,7 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
      * This returns null if the buffer is null or if the buffer has no remaining elements. The returned coordinates are
      * interpreted according to the Shapefile's coordinate system. This throws a {@link
      * gov.nasa.worldwind.exception.WWRuntimeException} if the coordinate system is unsupported.
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the point data and will be set to the end of the
      * point data after this method has completed.
      *

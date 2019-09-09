@@ -26,11 +26,10 @@ import java.util.regex.*;
  * implementing the Balloon interface, this class provides a thin wrapper around another Balloon implementation and adds
  * the logic for styling the Balloon according to the KML style. All Balloon methods on this class pass through to the
  * contained Balloon.
- * <p/>
+ * <p>
  * To use KML Balloon, first create a Balloon of the desired type, and then create the KML Balloon. For example:
- * <p/>
- * <code>
  * <pre>
+ * <code>
  *   KMLPlacemark myPlacemark = ...;
  *   Position placemarkPosition = ...;
  *
@@ -39,8 +38,8 @@ import java.util.regex.*;
  *
  *   // Create a KML Balloon to apply the placemark's KML BalloonStyle to the browser balloon.
  *   KMLGlobeBalloonImpl kmlBalloon = new KMLGlobeBalloonImpl(globeBalloon, myPlacemark);
- * </pre>
  * </code>
+ * </pre>
  *
  * @author pabercrombie
  * @version $Id: KMLAbstractBalloon.java 1555 2013-08-20 13:33:12Z pabercrombie $
@@ -339,7 +338,7 @@ public abstract class KMLAbstractBalloon implements Balloon, WebResourceResolver
     /**
      * Add hyperlink tags to URLs in the balloon text. The text may include some simple HTML markup. This method
      * attempts to identify URLs in the text while not altering URLs that are already linked.
-     * <p/>
+     * <p>
      * This method is conservative about what is identified as a URL, in order to avoid adding links to text that the
      * user did not intend to be linked. Only HTTP and HTTPS URLs are recognised, as well as text that begins with www.
      * (in which case a http:// prefix will be prepended). Some punctuation characters that are valid URL characters
@@ -486,12 +485,12 @@ public abstract class KMLAbstractBalloon implements Balloon, WebResourceResolver
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * This implementation resolves relative resource paths by calling <code>{@link
      * gov.nasa.worldwind.ogc.kml.io.KMLDoc#getSupportFilePath(String)}</code> on the parent
      * <code>KMLAbstractFeature's</code> <code>KMLDoc</code>. This is necessary to correctly resolve relative references
      * in a KMZ archive.
-     * <p/>
+     * <p>
      * This returns <code>null</code> if the specified <code>address</code> is <code>null</code>.
      */
     public URL resolve(String address)

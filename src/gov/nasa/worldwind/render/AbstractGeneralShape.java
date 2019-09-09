@@ -20,18 +20,18 @@ import java.util.Map;
  * models imported from COLLADA and other 3D file formats. The model's geometry is defined in its own coordinate system;
  * properties of this shape place and orient the model geographically. Specific model types subclass this class to
  * provide their implementation and any additional properties.
- * <p/>
+ * <p>
  * This class also accepts a resource map to independently link resources named in the model definition (the defining
  * model file) to actual resources. Each map entry's key is a resource name as expressed in the model definition. Each
  * map entry's value is the reference to the actual resource. The reference is interpreted by rules specific to the
  * model format, but typically may be a relative or absolute file reference or a URL to a local or remote resource. If
  * the map or an entry referred to by the model definition is not defined, resource references are typically considered
  * relative to the location of the model definition's location.
- * <p/>
+ * <p>
  * In the case of a COLLADA file referenced from a KML file, relative references are considered relative to the location
  * of the KML file. If the file is KMZ, relative references are considered references to resources within the KMZ
  * archive.
- * <p/>
+ * <p>
  * This class applies {@link ShapeAttributes} to the shape, but the effect of some of those attributes, such as {@link
  * ShapeAttributes#isDrawOutline()} is dependent on the specific implementation of this <code>AbstractGeneralShape</code>. See
  * the class description of those shapes to determine how shape attributes are applied.
@@ -253,7 +253,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
 
     /**
      * Computes the minimum distance between this shape and the eye point.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc        the current draw context.

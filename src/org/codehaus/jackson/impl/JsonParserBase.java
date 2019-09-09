@@ -521,10 +521,10 @@ public abstract class JsonParserBase
         throws IOException;
 
     /**
-     * Method called to release internal buffers owned by the base
-     * reader. This may be called along with {@link #_closeInput} (for
-     * example, when explicitly closing this reader instance), or
-     * separately (if need be).
+     * Method called to release internal buffers owned by the base reader.This may be called along with
+     * {@link #_closeInput} (for example, when explicitly closing this reader instance), or separately (if need be).
+     *
+     * @throws java.io.IOException Undocumented.
      */
     protected void _releaseBuffers() throws IOException
     {
@@ -537,9 +537,10 @@ public abstract class JsonParserBase
     }
 
     /**
-     * Method called when an EOF is encountered between tokens.
-     * If so, it may be a legitimate EOF, but only iff there
-     * is no open non-root context.
+     * Method called when an EOF is encountered between tokens.If so, it may be a legitimate EOF, but only iff there is
+     * no open non-root context.
+     *
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     protected void _handleEOF()
         throws JsonParseException
@@ -586,9 +587,12 @@ public abstract class JsonParserBase
     }
 
     /**
-     * Method called to report a problem with unquoted control character.
-     * Note: starting with version 1.4, it is possible to suppress
-     * exception by enabling {@link Feature.ALLOW_UNQUOTED_CONTROL_CHARS}.
+     * Method called to report a problem with unquoted control character.Note: starting with version 1.4, it is possible
+     * to suppress exception by enabling Feature.ALLOW_UNQUOTED_CONTROL_CHARS.
+     *
+     * @param i Undocumented.
+     * @param ctxtDesc Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     protected void _throwUnquotedSpace(int i, String ctxtDesc)
         throws JsonParseException

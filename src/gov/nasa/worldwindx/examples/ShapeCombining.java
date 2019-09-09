@@ -17,7 +17,7 @@ import gov.nasa.worldwind.util.combine.ShapeCombiner;
  * Shows how to use the {@link gov.nasa.worldwind.util.combine.Combinable} interface and the {@link
  * gov.nasa.worldwind.util.combine.ShapeCombiner} class to combine WorldWind surface shapes into a complex set of
  * contours by using boolean operations.
- * <p/>
+ * <p>
  * This example creates two static SurfaceCircle instances that partially overlap and displays them in a layer named
  * "Original". A ShapeCombiner is used to combine the two surface circles into a potentially complex set of contours
  * using boolean operations. Three examples of such operations are given: union, intersection and difference. The result

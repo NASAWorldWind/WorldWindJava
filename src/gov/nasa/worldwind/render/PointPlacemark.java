@@ -17,7 +17,7 @@ import gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil;
 import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.stream.*;
 import java.awt.*;
 import java.awt.geom.*;
@@ -30,17 +30,17 @@ import static gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil.kmlBoolean;
 /**
  * Represents a point placemark consisting of an image, an optional line linking the image to a corresponding point on
  * the terrain, and an optional label. The image and the label are displayed in the plane of the screen.
- * <p/>
+ * <p>
  * Point placemarks have separate attributes for normal rendering and highlighted rendering. If highlighting is
  * requested but no highlight attributes are specified, the normal attributes are used. If the normal attributes are not
  * specified, default attributes are used. See {@link #getDefaultAttributes()}.
- * <p/>
+ * <p>
  * This class implements and extends the functionality of a KML <i>Point</i>.
- * <p/>
+ * <p>
  * Point placemarks can participate in global text decluttering by setting their decluttering-enabled flag to {@code
  * true}. See {@link #setEnableDecluttering(boolean)}. The default for this flag is {@code false}. When participating in
  * decluttering, only the point placemark's label is considered when determining interference with other text.
- * <p/>
+ * <p>
  * When the label of a point placemark is picked, the associated {@link gov.nasa.worldwind.pick.PickedObject} contains
  * the key {@link AVKey#LABEL}
  *
@@ -460,7 +460,7 @@ public class PointPlacemark extends WWObjectImpl
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchRendering(boolean).
+     * @see #setEnableBatchRendering(boolean)
      */
     public boolean isEnableBatchRendering()
     {
@@ -483,7 +483,7 @@ public class PointPlacemark extends WWObjectImpl
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchPicking(boolean).
+     * @see #setEnableBatchPicking(boolean)
      */
     public boolean isEnableBatchPicking()
     {
@@ -525,7 +525,7 @@ public class PointPlacemark extends WWObjectImpl
      * contained in the same layer. This increases performance but allows only the top-most of the placemarks to be
      * reported in a {@link gov.nasa.worldwind.event.SelectEvent} even if several of the placemarks are at the pick
      * position.
-     * <p/>
+     * <p>
      * Batch rendering ({@link #setEnableBatchRendering(boolean)}) must be enabled in order for batch picking to occur.
      *
      * @param enableBatchPicking true to enable batch rendering, otherwise false.
@@ -707,7 +707,7 @@ public class PointPlacemark extends WWObjectImpl
      * If the scene controller is rendering ordered renderables, this method draws this placemark's image as an ordered
      * renderable. Otherwise the method determines whether this instance should be added to the ordered renderable
      * list.
-     * <p/>
+     * <p>
      * The Cartesian and screen points of the placemark are computed during the first call per frame and re-used in
      * subsequent calls of that frame.
      *
@@ -769,6 +769,7 @@ public class PointPlacemark extends WWObjectImpl
      * Determines whether the placemark image intersects the view frustum.
      *
      * @param dc the current draw context.
+     * @param opm The placemark to check.
      *
      * @return true if the image intersects the frustum, otherwise false.
      */
@@ -865,6 +866,7 @@ public class PointPlacemark extends WWObjectImpl
      * Draws the path as an ordered renderable.
      *
      * @param dc the current draw context.
+     * @param opm The object to draw.
      */
     protected void drawOrderedRenderable(DrawContext dc, OrderedPlacemark opm)
     {
@@ -927,13 +929,14 @@ public class PointPlacemark extends WWObjectImpl
     }
 
     /**
-     * Draw this placemark as an ordered renderable. If in picking mode, add it to the picked object list of specified
-     * {@link PickSupport}. The <code>PickSupport</code> may not be the one associated with this instance. During batch
+     * Draw this placemark as an ordered renderable.If in picking mode, add it to the picked object list of specified
+    {@link PickSupport}. The <code>PickSupport</code> may not be the one associated with this instance. During batch
      * picking the <code>PickSupport</code> of the instance initiating the batch picking is used so that all shapes
      * rendered in batch are added to the same pick list.
      *
      * @param dc             the current draw context.
      * @param pickCandidates a pick support holding the picked object list to add this shape to.
+     * @param opm The placemark to draw.
      */
     protected void doDrawOrderedRenderable(DrawContext dc, PickSupport pickCandidates, OrderedPlacemark opm)
     {
@@ -1130,6 +1133,8 @@ public class PointPlacemark extends WWObjectImpl
      * Draws the placemark's label if a label is specified.
      *
      * @param dc the current draw context.
+     * @param pickCandidates The list of pick candidates.
+     * @param opm The placemark to label.
      */
     protected void drawLabel(DrawContext dc, PickSupport pickCandidates, OrderedPlacemark opm)
     {
@@ -1215,6 +1220,7 @@ public class PointPlacemark extends WWObjectImpl
      *
      * @param dc             the current draw context.
      * @param pickCandidates the pick support object to use when adding this as a pick candidate.
+     * @param opm The placemark to draw the line for.
      */
     protected void drawLine(DrawContext dc, PickSupport pickCandidates, OrderedPlacemark opm)
     {
@@ -1249,6 +1255,7 @@ public class PointPlacemark extends WWObjectImpl
      *
      * @param dc             the current draw context.
      * @param pickCandidates the pick support object to use when adding this as a pick candidate.
+     * @param opm The placemark to draw the point for.
      */
     protected void drawPoint(DrawContext dc, PickSupport pickCandidates, OrderedPlacemark opm)
     {
@@ -1305,6 +1312,7 @@ public class PointPlacemark extends WWObjectImpl
      * Determines whether the placemark's optional line should be drawn and whether it intersects the view frustum.
      *
      * @param dc the current draw context.
+     * @param opm The placemark to check.
      *
      * @return true if the line should be drawn and it intersects the view frustum, otherwise false.
      */
@@ -1560,10 +1568,11 @@ public class PointPlacemark extends WWObjectImpl
 
     /**
      * Computes and stores the placemark's Cartesian location, the Cartesian location of the corresponding point on the
-     * terrain (if the altitude mode requires it), and the screen-space projection of the placemark's point. Applies the
+     * terrain (if the altitude mode requires it), and the screen-space projection of the placemark's point.Applies the
      * placemark's altitude mode when computing the points.
      *
      * @param dc the current draw context.
+     * @param opm The placemark to compute the location of.
      */
     protected void computePlacemarkPoints(DrawContext dc, OrderedPlacemark opm)
     {
@@ -1614,7 +1623,6 @@ public class PointPlacemark extends WWObjectImpl
      * @param dc  the current draw context.
      * @param opm the ordered placemark.
      *
-     * @return the bounding rectangle.
      */
     protected void computeImageBounds(DrawContext dc, OrderedPlacemark opm)
     {
@@ -1762,7 +1770,6 @@ public class PointPlacemark extends WWObjectImpl
     /**
      * Export the Placemark. The {@code output} object will receive the exported data. The type of this object depends
      * on the export format. The formats and object types supported by this class are:
-     * <p/>
      * <pre>
      * Format                                         Supported output object types
      * ================================================================================

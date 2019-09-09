@@ -9,7 +9,7 @@ package gov.nasa.worldwind.cache;
 import com.jogamp.opengl.util.texture.Texture;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.util.logging.Level;
 
 /**
@@ -17,7 +17,7 @@ import java.util.logging.Level;
  * maintains a map of resources that fit within a specifiable memory capacity. If adding a resource would exceed this
  * cache's capacity, existing but least recently used resources are removed from the cache to make room. The cache is
  * reduced to the "low water" size in this case (see {@link #setLowWater(long)}.
- * <p/>
+ * <p>
  * When a resource is removed from the cache, and if it is a recognized OpenGL resource -- a texture, a list of vertex
  * buffer IDs, a list of display list IDs, etc. -- and there is a current Open GL context, the appropriate glDelete
  * function is called to de-register the resource with the GPU. If there is no current OpenGL context the resource is
@@ -196,9 +196,9 @@ public class BasicGpuResourceCache implements GpuResourceCache
 
     /**
      * Sets the new low water level in bytes, which controls how aggresively the cache discards items.
-     * <p/>
+     * <p>
      * When the cache fills, it removes items until it reaches the low water level.
-     * <p/>
+     * <p>
      * Setting a high loWater level will increase cache misses, but decrease average add time, but setting a low loWater
      * will do the opposite.
      *

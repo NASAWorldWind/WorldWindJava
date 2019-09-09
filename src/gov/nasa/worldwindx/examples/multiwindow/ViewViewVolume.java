@@ -17,12 +17,12 @@ import java.awt.*;
 /**
  * This class illustrates how to display a globe, and in a separate window display another globe with a visualization of
  * the view volume in the main globe window.
- * <p/>
+ * <p>
  * Applications using multiple WorldWind windows simultaneously should instruct WorldWind to share OpenGL and other
  * resources among those windows. Most WorldWind classes are designed to be shared across {@link WorldWindow} objects
  * and will be shared automatically. But OpenGL resources are not automatically shared. To share them, a reference to a
  * previously created WorldWindow must be specified as a constructor argument for subsequently created WorldWindows.
- * <p/>
+ * <p>
  * Most WorldWind {@link gov.nasa.worldwind.globes.Globe} and {@link gov.nasa.worldwind.layers.Layer} objects can be
  * shared among WorldWindows. Those that cannot be shared have an operational dependency on the WorldWindow they're
  * associated with. An example is the {@link gov.nasa.worldwind.layers.ViewControlsLayer} layer for on-screen

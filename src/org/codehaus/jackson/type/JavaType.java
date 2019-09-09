@@ -5,9 +5,6 @@ import java.lang.reflect.Modifier;
 /**
  * Base class for type token classes used both to contain information
  * and as keys for deserializers.
- *<p>
- * Instances can (only) be constructed by
- * {@link org.codehaus.jackson.map.type.TypeFactory}.
  */
 public abstract class JavaType
 {
@@ -59,12 +56,12 @@ public abstract class JavaType
     }
 
     /**
-     * Method that can be called to do a "narrowing" conversions; that is,
-     * to return a type with a raw class that is assignable to the raw
-     * class of this type. If this is not possible, an
-     * {@link IllegalArgumentException} is thrown.
-     * If class is same as the current raw class, instance itself is
-     * returned.
+     * Method that can be called to do a "narrowing" conversions; that is, to return a type with a raw class that is
+     * assignable to the raw class of this type.If this is not possible, an {@link IllegalArgumentException} is
+     * thrown.If class is same as the current raw class, instance itself is returned.
+     *
+     * @param subclass Undocumented.
+     * @return Undocumented.
      */
     public final JavaType narrowBy(Class<?> subclass)
     {
@@ -89,6 +86,8 @@ public abstract class JavaType
      * internal framework in cases where compatibility checks
      * are to be skipped.
      *
+     * @param subclass Undocumented.
+     * @return  Undocumented.
      * @since 1.5
      */
     public final JavaType forcedNarrowBy(Class<?> subclass)
@@ -107,13 +106,12 @@ public abstract class JavaType
     }
 
     /**
-     * Method that can be called to do a "widening" conversions; that is,
-     * to return a type with a raw class that could be assigned from this
-     * type.
-     * If such conversion is not possible, an
-     * {@link IllegalArgumentException} is thrown.
-     * If class is same as the current raw class, instance itself is
-     * returned.
+     * Method that can be called to do a "widening" conversions; that is, to return a type with a raw class that could
+     * be assigned from this type.If such conversion is not possible, an {@link IllegalArgumentException} is thrown.If
+     * class is same as the current raw class, instance itself is returned.
+     *
+     * @param superclass Undocumented.
+     * @return Undocumented.
      */
     public final JavaType widenBy(Class<?> superclass)
     {
@@ -132,6 +130,8 @@ public abstract class JavaType
      *<p>
      * Default implementation is just to call {@link #_narrow}, since
      * underlying type construction is usually identical
+     * @param superclass Undocumented.
+     * @return  Undocumented.
      */
     protected JavaType _widen(Class<?> superclass) {
         return _narrow(superclass);
@@ -143,6 +143,7 @@ public abstract class JavaType
      * Method for assigning handler to associate with this type; or
      * if null passed, to remove such assignment
      * 
+     * @param h Undocumented.
      * @since 1.3
      */
     public void setValueHandler(Object h) {
@@ -158,6 +159,7 @@ public abstract class JavaType
      * Method for assigning type handler to associate with this type; or
      * if null passed, to remove such assignment
      * 
+     * @param h Undocumented.
      * @since 1.5
      */
     public void setTypeHandler(Object h) {
@@ -178,9 +180,11 @@ public abstract class JavaType
     public final Class<?> getRawClass() { return _class; }
 
     /**
-     * Method that can be used to check whether this type has
-     * specified Class as its type erasure. Put another way, returns
-     * true if instantiation of this Type is given (type-erased) Class.
+     * Method that can be used to check whether this type has specified Class as its type erasure.Put another way,
+     * returns true if instantiation of this Type is given (type-erased) Class.
+     *
+     * @param clz Undocumented.
+     * @return Undocumented.
      */
     public final boolean hasRawClass(Class<?> clz) {
         return _class == clz;
@@ -197,6 +201,7 @@ public abstract class JavaType
     }
 
     /**
+     * @return  Undocumented.
      * @since 1.3
      */
     public boolean isConcrete() {
@@ -230,6 +235,7 @@ public abstract class JavaType
     /**
      * Method for accessing key type for this type, assuming type
      * has such a concept (only Map types do)
+     * @return  Undocumented.
      */
     public JavaType getKeyType() { return null; }
 
@@ -237,14 +243,15 @@ public abstract class JavaType
      * Method for accessing content type of this type, if type has
      * such a thing: simple types do not, structured types do
      * (like arrays, Collections and Maps)
+     * @return Undocumented. 
      */
     public JavaType getContentType() { return null; }
 
     /**
-     * Method for checking how many contained types this type
-     * has. Contained types are usually generic types, so that
+     * Method for checking how many contained types this type has.Contained types are usually generic types, so that
      * generic Maps have 2 contained types.
-     * 
+     *
+     * @return Undocumented.
      * @since 1.5
      */
     public int containedTypeCount() { return 0; }
@@ -280,6 +287,8 @@ public abstract class JavaType
     /**
      * Method for accessing value handler associated with this type, if any
      * 
+     * @param <T> Undocumented.
+     * @return  Undocumented.
      * @since 1.3
      */
     @SuppressWarnings("unchecked")
@@ -288,19 +297,19 @@ public abstract class JavaType
     /**
      * Method for accessing type handler associated with this type, if any
      * 
+     * @param <T> Undocumented.
+     * @return  Undocumented.
      * @since 1.5
      */
     @SuppressWarnings("unchecked")
     public <T> T getTypeHandler() { return (T) _typeHandler; }
     
     /**
-     * Method that can be used to serialize type into form from which
-     * it can be fully deserialized from at a later point (using
-     * <code>TypeFactory</code> from mapper package).
-     * For simple types this is same as calling
-     * {@link Class#getName}, but for structured types it may additionally
-     * contain type information about contents.
-     * 
+     * Method that can be used to serialize type into form from which it can be fully deserialized from at a later point
+     * (using <code>TypeFactory</code> from mapper package).For simple types this is same as calling
+     * {@link Class#getName}, but for structured types it may additionally contain type information about contents.
+     *
+     * @return Undocumented.
      * @since 1.5
      */
     public abstract String toCanonical();
@@ -324,8 +333,10 @@ public abstract class JavaType
     /**************************************************************
      */
 
+    @Override
     public abstract String toString();
 
+    @Override
     public abstract boolean equals(Object o);
 
     @Override

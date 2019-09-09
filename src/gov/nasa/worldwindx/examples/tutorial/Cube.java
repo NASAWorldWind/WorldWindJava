@@ -15,13 +15,13 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.OGLUtil;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 
 /**
  * Example of a custom {@link Renderable} that draws a cube at a geographic position. This class shows the simplest
  * possible example of a custom Renderable, while still following WorldWind best practices. See
- * https://goworldwind.org/developers-guide/how-to-build-a-custom-renderable/ for a complete description of this
+ * https://worldwind.arc.nasa.gov/java/tutorials/build-a-custom-renderable/ for a complete description of this
  * example.
  *
  * @author pabercrombie
@@ -106,6 +106,7 @@ public class Cube extends ApplicationTemplate implements Renderable
      * Determines whether the cube intersects the view frustum.
      *
      * @param dc the current draw context.
+     * @param orderedCube The cube to check.
      *
      * @return true if this cube intersects the frustum, otherwise false.
      */
@@ -121,6 +122,7 @@ public class Cube extends ApplicationTemplate implements Renderable
      * Compute per-frame attributes, and add the ordered renderable to the ordered renderable list.
      *
      * @param dc Current draw context.
+     * @return The resulting cube.
      */
     protected OrderedCube makeOrderedRenderable(DrawContext dc)
     {
@@ -165,10 +167,11 @@ public class Cube extends ApplicationTemplate implements Renderable
     }
 
     /**
-     * Set up drawing state, and draw the cube. This method is called when the cube is rendered in ordered rendering
+     * Set up drawing state, and draw the cube.This method is called when the cube is rendered in ordered rendering
      * mode.
      *
      * @param dc Current draw context.
+     * @param pickCandidates The pick candidates list.
      */
     protected void drawOrderedRenderable(DrawContext dc, PickSupport pickCandidates)
     {

@@ -14,13 +14,12 @@ import gov.nasa.worldwind.render.Polyline;
 import java.util.ArrayList;
 
 /**
- * Utility class to measure length along a path on a globe. <p/> <p>The measurer must be provided a list of at least two
- * positions to be able to compute a distance.</p> <p/> <p>Segments which are longer then the current maxSegmentLength
+ * Utility class to measure length along a path on a globe.  <p>The measurer must be provided a list of at least two
+ * positions to be able to compute a distance.</p>  <p>Segments which are longer then the current maxSegmentLength
  * will be subdivided along lines following the current pathType - Polyline.LINEAR, Polyline.RHUMB_LINE or
- * Polyline.GREAT_CIRCLE.</p> <p/> <p>If the measurer is set to follow terrain, the computed length will account for
+ * Polyline.GREAT_CIRCLE.</p>  <p>If the measurer is set to follow terrain, the computed length will account for
  * terrain deformations as if someone was walking along that path. Otherwise the length is the sum of the cartesian
  * distance between the positions.</p>
- * <p/>
  * <p>When following terrain the measurer will sample terrain elevations at regular intervals along the path. The
  * minimum number of samples used for the whole length can be set with setLengthTerrainSamplingSteps(). However, the
  * minimum sampling interval is 30 meters.
@@ -226,7 +225,7 @@ public class LengthMeasurer implements MeasurableLength
     }
 
     /**
-     * Get the path length in meter. <p/> <p>If the measurer is set to follow terrain, the computed length will account
+     * Get the path length in meter.  <p>If the measurer is set to follow terrain, the computed length will account
      * for terrain deformations as if someone was walking along that path. Otherwise the length is the sum of the
      * cartesian distance between each positions.</p>
      *
@@ -302,7 +301,7 @@ public class LengthMeasurer implements MeasurableLength
 //    }
 
     /**
-     * Subdivide a list of positions so that no segment is longer then the provided maxLength. <p/> <p>If needed, new
+     * Subdivide a list of positions so that no segment is longer then the provided maxLength.  <p>If needed, new
      * intermediate positions will be created along lines that follow the given pathType - one of Polyline.LINEAR,
      * Polyline.RHUMB_LINE or Polyline.GREAT_CIRCLE. All position elevations will be either at the terrain surface if
      * followTerrain is true, or interpolated according to the original elevations.</p>
@@ -324,7 +323,7 @@ public class LengthMeasurer implements MeasurableLength
 
     /**
      * Subdivide a list of positions so that no segment is longer then the provided maxLength. Only the positions
-     * between start and start + count - 1 will be processed. <p/> <p>If needed, new intermediate positions will be
+     * between start and start + count - 1 will be processed.  <p>If needed, new intermediate positions will be
      * created along lines that follow the given pathType - one of Polyline.LINEAR, Polyline.RHUMB_LINE or
      * Polyline.GREAT_CIRCLE. All position elevations will be either at the terrain surface if followTerrain is true, or
      * interpolated according to the original elevations.</p>

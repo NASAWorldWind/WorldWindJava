@@ -41,11 +41,11 @@ public class ElementParser
     /**
      * Starts an element. No parameters may be null.
      *
-     * @param uri
-     * @param lname
-     * @param qname
-     * @param attributes
-     * @throws org.xml.sax.SAXException
+     * @param uri The element URI.
+     * @param lname The element lname.
+     * @param qname The element qname.
+     * @param attributes The element attributes.
+     * @throws org.xml.sax.SAXException if a parsing exception occurs.
      * @throws IllegalArgumentException if any argument is null
      */
     public void startElement(String uri, String lname, String qname, org.xml.sax.Attributes attributes)
@@ -85,10 +85,10 @@ public class ElementParser
     /**
      * Finishes an element. No parameters may be null.
      *
-     * @param uri
-     * @param lname
-     * @param qname
-     * @throws org.xml.sax.SAXException
+     * @param uri The element URI.
+     * @param lname The element lname.
+     * @param qname The element qname.
+     * @throws org.xml.sax.SAXException if 
      * @throws IllegalArgumentException if any argument is null
      */
     public void endElement(String uri, String lname, String qname) throws org.xml.sax.SAXException
@@ -133,9 +133,9 @@ public class ElementParser
     }
 
     /**
-     * @param data
-     * @param start
-     * @param length
+     * @param data The data to set current characters to.
+     * @param start The start index for the characters.
+     * @param length The length of the characters.
      * @throws IllegalArgumentException if <code>data</code> has length less than 1
      */
     public void characters(char[] data, int start, int length)

@@ -12,13 +12,11 @@ import java.io.IOException;
  * Exportable marks an object that can be exported in different data formats. Implementing classes may support one or
  * more export formats. Formats are identified by MIME type. Call {@link #isExportFormatSupported(String)} to determine
  * if an object supports export in a certain format.
- * <p/>
+ * <p>
  * Example of use:
- * <p/>
  * <pre>
  * // Export a PointPlacemark in KML format
  * PointPlacemark placemark;
- * <p/>
  * StringWriter kml = new StringWriter();
  * placemark.export(KMLConstants.KML_MIME_TYPE, kml);
  * </pre>

@@ -20,7 +20,7 @@ import java.util.*;
 
 /**
  * Represents the KML <i>Feature</i> element and provides access to its contents.
- * <p/>
+ * <p>
  * <code>KMLAbstractFeature</code> implements the <code>KMLRenderable</code> interface, but does not actually render
  * anything. Subclasses should override the methods <code>{@link #doPreRender(gov.nasa.worldwind.ogc.kml.impl.KMLTraversalContext,
  * gov.nasa.worldwind.render.DrawContext)}</code> and <code>{@link #doRender(gov.nasa.worldwind.ogc.kml.impl.KMLTraversalContext,
@@ -224,7 +224,7 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
 
     /**
      * Set the balloon associated with this feature.
-     * <p/>
+     * <p>
      * Note: Balloon is not a field in the KML Feature element. It's a direct field of this class and enables the client
      * to associate a balloon with the feature.
      *
@@ -294,14 +294,13 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
     /**
      * Indicates whether this <code>KMLAbstractFeature</code> is active and should be rendered on the specified
      * <code>DrawContext</code>. This returns <code>true</code> if the following conditions are all <code>true</code>:
-     * <p/>
      * <ul> <li>This feature's <code>visibility</code> is unspecified (<code>null</code>) or is set to
      * <code>true</code>.</li> <li>This feature as no Region and does not inherit a Region from an ancestor, or its
      * Region is active for the specified <code>DrawContext</code>.</li> </ul>
-     * <p/>
+     * <p>
      * If this feature has no Region, this inherits the Region of its nearest ancestor by using the Region on the top of
      * the KML traversal context's region stack (if any). If there is no ancestor Region this feature is assumed to be
-     * the <code>DrawContext's</cod> view and is rendered according to its <code>visibility</code> flag. A Region is
+     * the <code>DrawContext's</code> view and is rendered according to its <code>visibility</code> flag. A Region is
      * considered active if it is visible, and the <code>DrawContext</code> meets the Region's level of detail
      * criteria.
      *
@@ -364,7 +363,7 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
      * Obtains the effective values for a specified sub-style (<i>IconStyle</i>, <i>ListStyle</i>, etc.) and state
      * (<i>normal</i> or <i>highlight</i>). The returned style is the result of merging values from this feature
      * instance's style selectors and its styleUrl, if any, with precedence given to style selectors.
-     * <p/>
+     * <p>
      * A remote <i>styleUrl</i> that has not yet been resolved is not included in the result. In this case the returned
      * sub-style is marked with the value {@link gov.nasa.worldwind.avlist.AVKey#UNRESOLVED}. The same is true when a
      * StyleMap style selector contains a reference to an external Style and that reference has not been resolved.

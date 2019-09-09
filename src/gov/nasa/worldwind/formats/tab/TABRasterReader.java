@@ -11,7 +11,7 @@ import gov.nasa.worldwind.util.*;
 /**
  * Reader for the MapInfo TAB file format.
  * Documentation on the MapInfo TAB format can be found here:
- * http://community.mapinfo.com/forums/thread.jspa?messageID=23770&
+ * https://en.wikipedia.org/wiki/MapInfo_TAB_format
  *
  * @author dcollins
  * @version $Id: TABRasterReader.java 1171 2013-02-11 21:45:02Z dcollins $

@@ -8,27 +8,25 @@ package gov.nasa.worldwind.formats.rpf;
 import gov.nasa.worldwind.util.Logging;
 
 /**
- * <code>
- * <pre>
+ * <pre><code>
  * [ MIL-STD-2411, section 4.5.4.4]
  * a. All RPF [frame file] names shall be logically coded as follows:
  * [file name]
  *     {1}
- *     <reference designator>, ascii: 8
- *     <period>, ascii: 1
- *     <data series and zone>, ascii: 3
+ *     'reference designator', ascii: 8
+ *     'period', ascii: 1
+ *     'data series and zone', ascii: 3
  *
  * d. [file name]s shall contain the following logical elements, listed in alphabetical order:
- *     (1) <data series and zone> := a 3-byte ASCII character field...
+ *     (1) 'data series and zone' := a 3-byte ASCII character field...
  *     encoded as specified in MIL-STD-2411-1, section 5.1.5
  *
- *     (2) <period> := a 1-byte ASCII character field := "."
+ *     (2) 'period' := a 1-byte ASCII character field := "."
  *
- *     (3) <reference designator> := an 8-byte ASCII character field...
- *     Each byte of <reference designator> shall have one of the following possible values:
+ *     (3) 'reference designator' := an 8-byte ASCII character field...
+ *     Each byte of 'reference designator' shall have one of the following possible values:
  *     any digit from 0 through 9; or any capital letter, A through Z, excluding I and O
- * </pre>
- * </code>
+ * </code></pre>
  *
  * @author dcollins
  * @version $Id: RPFFrameFilename.java 1171 2013-02-11 21:45:02Z dcollins $

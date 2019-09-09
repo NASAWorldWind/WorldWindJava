@@ -16,23 +16,21 @@ import java.net.URL;
 
 /**
  * Base class for icon retrievers. This class provides methods for loading and manipulating icons.
- * <p/>
  * <h2>Icon retrieval</h2>
- * <p/>
+ * <p>
  * Each symbol in a symbology set must have a unique identifier. The IconRetriever's job is to create a BufferedImage to
  * represent a symbol given the symbol identifier. Usually this means retrieving an image from the file system or the
  * network, and optionally manipulating the symbol (for example, changing the color to represent a hostile or friendly
  * entity).
- * <p/>
+ * <p>
  * Each instance of AbstractIconRetriever is configured with a retrieval path which specifies the location of a symbol
  * repository on the file system or the network. {@link #readImage(String) readImage} retrieves images relative to this
  * base path. The retrieval path may be a file URL to a directory on the local file system (for example,
  * file:///symbols/mil-std-2525). A URL to a network resource (http://myserver.com/milstd2525/), or a URL to a JAR or
  * ZIP file (jar:file:milstd2525-symbols.zip!).
- * <p/>
+ * <p>
  * A simple icon retriever might use a symbol repository that is a simple directory of PNG files, where each file name
  * matches a symbol identifier. Such an icon retriever could be implemented like this:
- * <p/>
  * <pre>
  * class SimpleIconRetriever extends AbstractIconRetriever
  * {
@@ -43,9 +41,8 @@ import java.net.URL;
  *     }
  * }
  * </pre>
- * <p/>
  * <h2>Composite icons</h2>
- * <p/>
+ * <p>
  * Complicated symbols may be made up of several different graphical elements. {@link
  * #drawImage(java.awt.image.BufferedImage, java.awt.image.BufferedImage) drawImage} helps build a complex symbol from
  * simple pieces. For example, if a symbol is composed of a frame and an icon, the icon retriever could load the frame
@@ -61,9 +58,8 @@ import java.net.URL;
  * // Return the composite image.
  * return fullImage;
  * </pre>
- * <p/>
  * <h2>Changing the color of an icon</h2>
- * <p/>
+ * <p>
  * {@link #multiply(java.awt.image.BufferedImage, java.awt.Color) multiply} can change the color of an image by
  * multiplying each pixel in the image by a color. The multiplication color will replace any white pixels and black
  * pixels will be unaffected. For example, a symbol set in which hostile symbols are drawn in red and friendly symbols

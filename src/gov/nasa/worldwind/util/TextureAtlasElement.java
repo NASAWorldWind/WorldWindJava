@@ -19,7 +19,7 @@ import java.net.URL;
 
 /**
  * Represents a texture defined by a sub-image within a {@link TextureAtlas}.
- * <p/>
+ * <p>
  * TextureAtlasElement performs lazy retrieval and loading of its image source into its texture atlas. This loads the
  * image source and adds it to the atlas only when the {@link #load(gov.nasa.worldwind.render.DrawContext)} method is
  * called. If the image source is a {@link BufferedImage} it is added to the atlas immediately when <code>load</code> is
@@ -158,7 +158,7 @@ public class TextureAtlasElement implements Disposable
     /**
      * Returns the OpenGL texture coordinates associated this texture atlas element. Always call <code>load</code>
      * before calling this method to ensure that the element is loaded into its texture atlas.
-     * <p/>
+     * <p>
      * The returned texture coordinates can change any time an element is added or removed from this element's texture
      * atlas, and therefore should not be cached unless the caller has explicit knowledge of when this element's texture
      * atlas has changed.

@@ -23,7 +23,7 @@ import java.util.List;
  * Implementation of TacticalSymbol to render point graphics defined by MIL-STD-2525C Appendix B (Tactical Graphics).
  * This class implements the logic for rendering tactical point graphics, but actually implements the TacticalSymbol
  * interface.
- * <p/>
+ * <p>
  * This class is not meant to be used directly by applications. Instead, apps should use {@link MilStd2525PointGraphic},
  * which implements the {@link TacticalGraphic} interface. (MilStd2525PointGraphic uses TacticalGraphicSymbol internally
  * to render the point graphic.)
@@ -141,17 +141,14 @@ public class TacticalGraphicSymbol extends AbstractTacticalSymbol
      * Specifies this graphic's Status/Operational Condition field. A graphic's Status defines whether the represented
      * object exists at the time the symbol was generated, or is anticipated to exist in the future. Additionally, a
      * graphic's Status can define its operational condition. The recognized values depend on the graphic's scheme:
-     * <p/>
+     * <p>
      * <strong>Tactical graphics</strong>
-     * <p/>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Meteorological and Oceanographic</strong>
-     * <p/>
      * <ul> <li>Not supported</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Emergency Management</strong>
-     * <p/>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      *
      * @param value the new value for the Status/Operational Condition field.

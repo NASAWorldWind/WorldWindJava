@@ -33,6 +33,7 @@ public class WMSCapabilities extends OGCCapabilities
      * @param uri The URI of the server.
      *
      * @return The WMS capabilities document for the specified server.
+     * @throws java.lang.Exception if a general error occurs. 
      *
      * @throws IllegalArgumentException if the specified URI is invalid.
      * @throws gov.nasa.worldwind.exception.WWRuntimeException

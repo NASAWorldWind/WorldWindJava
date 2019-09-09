@@ -97,7 +97,7 @@ public interface Extent
      * infinite plane defined by the <code>view's</code> viewport. This area is not limited to the size of the
      * <code>view's</code> viewport, and portions of this <code>Extent</code> are not clipped by the <code>view's</code>
      * frustum.
-     * <p/>
+     * <p>
      * This returns <code>Double.POSITIVE_INFINITY</code> if the <code>view's</code> eye point is inside this
      * <code>Extent</code>, or if any portion of this <code>Extent</code> is behind the eye point. In either case, this
      * <code>Extent</code> has no finite projection on the <code>view</code>.

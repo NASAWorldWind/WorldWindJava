@@ -13,7 +13,7 @@ import gov.nasa.worldwind.globes.Globe;
  * Common interface for surface conforming shapes such as {@link gov.nasa.worldwind.render.SurfacePolygon}, {@link
  * gov.nasa.worldwind.render.SurfacePolyline}, {@link gov.nasa.worldwind.render.SurfaceEllipse}, {@link
  * gov.nasa.worldwind.render.SurfaceQuad}, and {@link gov.nasa.worldwind.render.SurfaceSector}.
- * <p/>
+ * <p>
  * SurfaceShape extends the {@link gov.nasa.worldwind.render.SurfaceObject} interface, and inherits SurfaceObject's
  * batch rendering capabilities.
  *

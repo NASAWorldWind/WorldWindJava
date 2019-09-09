@@ -12,12 +12,12 @@ import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.view.*;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 
 /**
  * This is a basic view that implements a yaw-pitch-roll model that can be applied to first-person style view
  * applications (such as flight simulation).
- * <p/>
+ * <p>
  * Note that the pitch angle is defined as normal to the ground plane, not parallel as in most body axis
  * representations.  This is to be consistent with the definition of pitch within WorldWind. Applications will need to
  * correct for pitch values by adding 90 degrees when commanding pitch (i.e. to get a horizontal view, enter 90 degrees

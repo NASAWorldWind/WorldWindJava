@@ -9,11 +9,11 @@ import gov.nasa.worldwind.View;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.*;
 
 /**
- * Represents a sphere in three dimensional space. <p/> Instances of <code>Sphere</code> are immutable. </p>
+ * Represents a sphere in three dimensional space. <p> Instances of <code>Sphere</code> are immutable. </p>
  *
  * @author Tom Gaskins
  * @version $Id: Sphere.java 1171 2013-02-11 21:45:02Z dcollins $

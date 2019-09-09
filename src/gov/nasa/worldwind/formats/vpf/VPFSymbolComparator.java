@@ -14,9 +14,9 @@ import java.util.Comparator;
  * the correct sequence, the GeoSym application software must allow for the definition of a display order for the
  * features being displayed.  GeoSym uses four "nested" methods to define the order in which symbols should be
  * displayed.
- * <p/>
+ * <p>
  * 1. Display priority 2. Feature delineation 3. Order of rows in *sym.txt 4. Symbol type
- * <p/>
+ * <p>
  * 6.5.1  Display Priority.  The first criterion to use to determine the order to display features is the display
  * priority.  Each row in the *sym.txt file defines a display priority number to that specific feature/attribute. The
  * display priority is a value between 0 and 9, where 9 identifies the highest priority.  A feature/attribute with a
@@ -25,31 +25,31 @@ import java.util.Comparator;
  * corresponding S57 object class/attribute.  The S52 lookup tables were then utilized to obtain the display priority
  * values assigned to each object class.  For all other products, the display priority values were based on cartographic
  * experience with the corresponding hardcopy map/chart.
- * <p/>
+ * <p>
  * 6.5.2  Feature Delineation.  Once the features to be displayed have been sorted based on display priority, they must
  * then be sorted by their delineation (area, line, point).  If the display priority is equal among features, then the
  * "painter's algorithm" should be used to display the area features first, followed by the linear features and then the
  * point features.
- * <p/>
+ * <p>
  * 6.5.3  Order of Rows in *sym.txt.  The third criterion that affects the display order is the order of the rows in the
  * fullsym.txt file.  The order will be represented in the id column of each row.  Row ids will always be serial but may
  * not necessarily be consecutive.  Stated another way, the row ID for row N will always be less than the row ID for row
  * N+1.  Symbology being displayed based on this criterion should be displayed based on the least row id to the greatest
  * row id.
- * <p/>
+ * <p>
  * 6.5.3.1  Point Features with Components.  For point features (e.g., buoys, beacons, lights) that are composed of
  * several symbol components, displaying the components according to the row ids in the *sym.txt file will result in the
  * properly constructed composite symbol.  Each symbol component is based on the value of a specific attribute and the
  * components will vary in display priority so should already have been sorted according to that value before examining
  * the row ids in the *sym.txt file.
- * <p/>
+ * <p>
  * 6.5.3.2  Area Features with Multiple Fills.  There are some area features (e.g., Maritime Areas) that require both a
  * solid fill and one or more pattern fills.  Since the areasym column can only contain a single CGM reference, there is
  * a separate row in the *sym.txt file for each of the area symbols, as well as for the line symbol and/or point symbol
  * that apply to the specific area feature.  These multiple rows will have sequential row ids in the *sym.txt file
  * according to the order in which the symbols are to be displayed on the screen:  solid fill, pattern fill (may be more
  * than one), linear boundary, centered point symbol (may be more than one).
- * <p/>
+ * <p>
  * 6.5.3.3  Features with Text Labels  As a general rule, the display priority specified for a feature's text label(s)
  * is the highest value possible, regardless of the display priority assigned to the base feature.  In DNC, all text
  * labels will have a display priority of 8 (per IHO S52).  In all other products, text labels have a display priority
@@ -59,7 +59,7 @@ import java.util.Comparator;
  * for that feature.  Since the row(s) defining the text label(s) will always follow the row(s) defining the CGM symbols
  * for a feature, displaying the symbols and text labels according to their row ids (lowest to highest) in *sym.txt will
  * still result in the correct final symbology for a feature being displayed.
- * <p/>
+ * <p>
  * 6.5.4  Symbol Type.  The final criterion for determining the order for symbol display applies only to area features.
  * Area features can be symbolized by any combination of centered point symbol, linear boundary, solid fill and/or
  * pattern fill.  Except for the special case where an area feature's symbology requires both a solid and pattern
@@ -79,10 +79,10 @@ public class VPFSymbolComparator implements Comparator<VPFSymbol>
     }
 
     /**
-     * @param a
-     * @param b
+     * @param a Symbol to compare.
+     * @param b Symbol to compare.
      *
-     * @return
+     * @return The relationship between a and b.
      */
     public int compare(VPFSymbol a, VPFSymbol b)
     {

@@ -195,13 +195,13 @@ public class Angle implements Comparable<Angle>
 
     /**
      * Obtain an angle from a degrees, minute and seconds character string.
-     * <p>eg:<pre>
+     * <p>eg:</p><pre>
      * 123 34 42
      * -123* 34' 42" (where * stands for the degree symbol)
      * +45* 12' 30" (where * stands for the degree symbol)
      * 45 12 30 S
      * 45 12 30 N
-     * </p>
+     * </pre>
      * For a string containing both a sign and compass direction, the compass direction will take precedence.
      *
      * @param dmsString the degrees, minute and second character string.
@@ -579,11 +579,10 @@ public class Angle implements Comparable<Angle>
 
     /**
      * Limits a specified angle to be within a specified minimum and maximum.
-     * <p/>
-     * The returned angle is undefined if min > max. Otherwise, this method's return value is equivalent to the
+     * <p>
+     * The returned angle is undefined if min &gt; max. Otherwise, this method's return value is equivalent to the
      * following:
-     * <p/>
-     * <ul> <li>min - If value < min</li> <li>max - If value > max</li> <li>value - If min <= value <= max</li> </ul>
+     * <ul> <li>min - If value &lt; min</li> <li>max - If value &gt; max</li> <li>value - If min &lt;= value &gt;= max</li> </ul>
      *
      * @param value The angle to clamp.
      * @param min   The minimum angle to clamp to.

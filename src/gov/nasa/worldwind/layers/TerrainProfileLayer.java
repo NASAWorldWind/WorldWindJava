@@ -14,7 +14,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.geom.*;
 import java.beans.PropertyChangeEvent;
@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Displays a terrain profile graph in a screen corner. <p/> <p> Usage: do setEventSource(wwd) to have the graph
+ * Displays a terrain profile graph in a screen corner. <p> Usage: do setEventSource(wwd) to have the graph
  * activated and updated with position changes. See public properties for options: keepProportions, follow, unit, start
  * and end latlon... </p>
  *

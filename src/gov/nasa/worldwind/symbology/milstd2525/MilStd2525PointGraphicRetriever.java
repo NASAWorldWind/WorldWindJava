@@ -17,15 +17,15 @@ import java.util.MissingResourceException;
 
 /**
  * Retriever to fetch icons for MIL-STD-2525C point graphics. The retriever can fetch images from either local or remote
- * locations. See <a href="https://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use">Offline
+ * locations. See <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-symbols/#offline-use">Offline
  * Use</a> for information on how to set the icon retrieval location.
- * <p/>
+ * <p>
  * The retriever base URL must identify a location on a local or remote file system (including zip and jar files) that
  * holds the icon files in an expected directory structure. Each icon URL is constructed from three parts:
  * [base]/icons/[scheme]/[sidc].png. Parts of the SIDC that do not identify a type of graphic (such as echelon, status,
  * standard identity, order of battle, etc.) are replaced with hyphens. For example, the Underwater Datum graphic
  * (2.X.2.1.1.1.1.1) will be retrieved from this URL: [base]/icons/tacgrp/g-g-gpuud------.png
- * <p/>
+ * <p>
  * An application should only use this class directly if it needs to access point graphics independent of the {@link
  * TacticalGraphic} system (for example, to populate a UI independent of the globe).
  *

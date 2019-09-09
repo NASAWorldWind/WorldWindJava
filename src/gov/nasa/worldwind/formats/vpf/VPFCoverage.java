@@ -13,7 +13,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * DIGEST Part 2, Annex C.2.2.2.3:<br/>A coverage is composed of features whose primitives maintain topological
+ * DIGEST Part 2, Annex C.2.2.2.3:<br>A coverage is composed of features whose primitives maintain topological
  * relationships according to a level of topology (level 0, 1, 2, or 3) defined for the coverage.  All of the file
  * structures that make up a coverage are stored in a directory or subdirectories of that directory.
  *

@@ -7,21 +7,21 @@ package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.geom.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.*;
 import java.nio.IntBuffer;
 import java.util.*;
 
 /**
- * GLUTessellatorSupport is a utility class for configuring and using a {@link javax.media.opengl.glu.GLUtessellator} to
+ * GLUTessellatorSupport is a utility class for configuring and using a {@link com.jogamp.opengl.glu.GLUtessellator} to
  * tessellate complex polygons into triangles.
- * <p/>
+ * <p>
  * The standard pattern for using GLUTessellatorSupport to prepare a GLUtessellator is as follows: <code>
- * GLUTessellatorSupport glts = new GLUTessellatorSupport();<br/> GLUtessellatorCallback cb = ...; // Reference to an
- * implementation of GLUtessellatorCallback.<br/> Vec4 normal = new Vec4(0, 0, 1); // The polygon's normal. This example
- * shows an appropriate normal for tessellating x-y coordinates.<br/> <br/><br/> glts.beginTessellation(cb, new Vec4(0,
- * 0, 1));<br/> try<br/> {<br/> GLUtessellator tess = glts.getGLUtessellator();<br/> }<br/> finally<br/> {<br/>
- * glts.endTessellation();<br/> }<br/> </code>
+ * GLUTessellatorSupport glts = new GLUTessellatorSupport();<br> GLUtessellatorCallback cb = ...; // Reference to an
+ * implementation of GLUtessellatorCallback.<br> Vec4 normal = new Vec4(0, 0, 1); // The polygon's normal. This example
+ * shows an appropriate normal for tessellating x-y coordinates.<br> <br><br> glts.beginTessellation(cb, new Vec4(0,
+ * 0, 1));<br> try<br> {<br> GLUtessellator tess = glts.getGLUtessellator();<br> }<br> finally<br> {<br>
+ * glts.endTessellation();<br> }<br> </code>
  *
  * @author dcollins
  * @version $Id: GLUTessellatorSupport.java 3427 2015-09-30 23:24:13Z dcollins $
@@ -36,8 +36,8 @@ public class GLUTessellatorSupport
     }
 
     /**
-     * Returns this GLUTessellatorSupport's internal {@link javax.media.opengl.glu.GLUtessellator} instance. This
-     * returns a valid GLUtessellator instance if called between {@link #beginTessellation(javax.media.opengl.glu.GLUtessellatorCallback,
+     * Returns this GLUTessellatorSupport's internal {@link com.jogamp.opengl.glu.GLUtessellator} instance. This
+     * returns a valid GLUtessellator instance if called between {@link #beginTessellation(com.jogamp.opengl.glu.GLUtessellatorCallback,
      * gov.nasa.worldwind.geom.Vec4)} and {@link #endTessellation()}. This returns null if called from outside a
      * beginTessellation/endTessellation block.
      *
@@ -51,9 +51,9 @@ public class GLUTessellatorSupport
 
     /**
      * Prepares this GLUTessellatorSupport's internal GLU tessellator for use. This initializes the internal
-     * GLUtessellator to a new instance by invoking {@link javax.media.opengl.glu.GLU#gluNewTess()}, and configures the
-     * tessellator with the specified callback and normal with calls to {@link javax.media.opengl.glu.GLU#gluTessCallback(javax.media.opengl.glu.GLUtessellator,
-     * int, javax.media.opengl.glu.GLUtessellatorCallback)} and {@link javax.media.opengl.glu.GLU#gluTessNormal(javax.media.opengl.glu.GLUtessellator,
+     * GLUtessellator to a new instance by invoking {@link com.jogamp.opengl.glu.GLU#gluNewTess()}, and configures the
+     * tessellator with the specified callback and normal with calls to {@link com.jogamp.opengl.glu.GLU#gluTessCallback(com.jogamp.opengl.glu.GLUtessellator,
+     * int, com.jogamp.opengl.glu.GLUtessellatorCallback)} and {@link com.jogamp.opengl.glu.GLU#gluTessNormal(com.jogamp.opengl.glu.GLUtessellator,
      * double, double, double)}, respectively.
      *
      * @param callback the callback to configure the GLU tessellator with.
@@ -99,7 +99,7 @@ public class GLUTessellatorSupport
     }
 
     /**
-     * Creates a new {@link javax.media.opengl.glu.GLUtessellatorCallback} that draws tessellated polygons as OpenGL
+     * Creates a new {@link com.jogamp.opengl.glu.GLUtessellatorCallback} that draws tessellated polygons as OpenGL
      * primitives by calling glBegin, glEnd, and glVertex.
      *
      * @param gl the GL context to draw into.
@@ -384,7 +384,7 @@ public class GLUTessellatorSupport
     /**
      * Recursively forwards boundary tessellation results from one GLU tessellator to another. The GLU tessellator this
      * callback forwards to may be configured in any way the caller chooses.
-     * <p/>
+     * <p>
      * RecursiveCallback must be used as the GLUtessellatorCallback for the begin, end, vertex, and combine callbacks
      * for a GLU tessellator configured to generate line loops. A GLU tessellator can be configured generate line loops
      * by calling gluTessProperty(GLU_TESS_BOUNDARY_ONLY, GL_TRUE). Additionally, the caller specified vertex data

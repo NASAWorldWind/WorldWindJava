@@ -14,8 +14,8 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.GLU;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -28,7 +28,7 @@ import java.util.List;
  * A frame that can scroll its contents. The frame can be interactively resized by dragging the border, and be moved by
  * dragging the frame or title bar. The frame can be minimized. The frame displays scroll bars if the size of the
  * content exceeds the size of the frame, and optionally displays a title bar with a text string and an icon.
- * <p/>
+ * <p>
  * The frame renders its contents into a texture, and then draws the texture when the frame is rendered. This provides
  * good performance for content that is expensive to draw, and changes infrequently. If the frame is sized so large that
  * the visible portion of the contents cannot be rendered into a single texture, then the contents will be drawn
@@ -954,9 +954,10 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
     /**
      * Returns a new tile texture with the specified width and height.
-     * <p/>
+     * <p>
      * The returned texture's internal format is RGBA8.
      *
+     * @param dc The draw context.
      * @param width  the texture's width, in pixels.
      * @param height the texture's height, in pixels.
      *

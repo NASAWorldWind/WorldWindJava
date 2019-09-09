@@ -96,7 +96,7 @@ public class MilStd2525TacticalGraphicFactoryTest
 
     /**
      * All graphics from Appendix B that have been implemented. Update this list when new graphics are implemented. This
-     * list should match the list of supported graphics at https://goworldwind.org/developers-guide/symbology/tactical-graphic-status/
+     * list should match the list of supported graphics at https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphic-status/
      */
     private static final String[] ALL_SUPPORTED_TACGRP = {
         TacGrpSidc.TSK_DSTY,

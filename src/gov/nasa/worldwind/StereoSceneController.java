@@ -10,7 +10,7 @@ import gov.nasa.worldwind.geom.Angle;
 
 /**
  * An interface for scene controllers that provide stereo.
- * <p/>
+ * <p>
  * Note: The {@link WorldWindow} instance must support stereo display in order to use device-supported stereo. See
  * {@link gov.nasa.worldwind.awt.WorldWindowGLCanvas} to learn how to select a stereo device.
  *
@@ -24,10 +24,10 @@ public interface StereoSceneController extends SceneController
      * gov.nasa.worldwind.avlist.AVKey#STEREO_MODE_DEVICE} to request device supported stereo, {@link
      * gov.nasa.worldwind.avlist.AVKey#STEREO_MODE_RED_BLUE} to request red-blue anaglyph stereo implemented in
      * software, or {@link gov.nasa.worldwind.avlist.AVKey#STEREO_MODE_NONE} (the default) to request no stereo effect.
-     * <p/>
+     * <p>
      * If <code>STEREO_MODE_DEVICE</code> is requested but the display device does not support stereo, stereo is not
      * applied.
-     * <p/>
+     * <p>
      * See the implementing class to determine how it detects the initial stereo mode.
      *
      * @param mode the technique used to provide the stereo effect. If null, the mode is set to {@link

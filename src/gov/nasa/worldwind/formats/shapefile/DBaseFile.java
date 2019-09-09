@@ -310,7 +310,7 @@ public class DBaseFile extends AVListImpl
 
     /**
      * Reads a {@link Header} instance from the given {@link java.nio.ByteBuffer};
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the header and will be set to the end of the
      * header after this method has completed.
      *
@@ -385,7 +385,7 @@ public class DBaseFile extends AVListImpl
 
     /**
      * Reads a sequence of {@link DBaseField} descriptions from the given {@link java.nio.ByteBuffer};
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the sequence and will be set to the end of the
      * sequence after this method has completed.
      *
@@ -440,7 +440,7 @@ public class DBaseFile extends AVListImpl
 
     /**
      * Reads a {@link DBaseRecord} instance from the given {@link java.nio.ByteBuffer};
-     * <p/>
+     * <p>
      * The buffer current position is assumed to be set at the start of the record and will be set to the start of the
      * next record after this method has completed.
      *

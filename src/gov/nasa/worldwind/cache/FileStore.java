@@ -100,7 +100,7 @@ public interface FileStore extends WWObject
 
     /**
      * Creates a new, empty file in the file store.
-     * <p/>
+     * <p>
      * If the file store has no write location, the file is not created and null is returned.
      *
      * @param fileName the name of the file to create.
@@ -217,12 +217,12 @@ public interface FileStore extends WWObject
      * file. Otherwise if the specified address is a URL to a remote location, this initiates a request for the file and
      * returns <code>null</code>. When the request succeeds the file is stored either in the local WorldWind cache or
      * in a temporary location and subsequent invocations of this method return a URL to the retrieved file.
-     * <p/>
+     * <p>
      * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the WorldWind
      * cache or in a temporary location. This parameter has no effect if the file exists locally. The temporary location
      * for a retrieved file does not persist between runtime sessions, and subsequent invocations of this method may not
      * return the same temporary location.
-     * <p/>
+     * <p>
      * If a remote file is requested multiple times with different values for <code>cacheRemoteFile</code>, it is
      * undefined whether the retrieved file is stored in the WorldWind cache or in a temporary location.
      *

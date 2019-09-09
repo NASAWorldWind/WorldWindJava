@@ -24,7 +24,7 @@ public interface SurfaceRenderable extends Renderable
     /**
      * Returns a list of sectors indicating the geographic region that bounds this renderable for the specified draw
      * context.
-     * <p/>
+     * <p>
      * The returned list typically contains one sector that bounds this renderable in geographic coordinates. When this
      * renderable spans the anti-meridian - the +/- 180 degree meridian - the returned list contains two sectors, one on
      * either side of the anti-meridian.
@@ -37,7 +37,7 @@ public interface SurfaceRenderable extends Renderable
 
     /**
      * Returns an object that uniquely identifies this renderable's state for the specified draw context.
-     * <p/>
+     * <p>
      * Callers can perform an equality test on two state keys using {@link Object#equals(Object)} in order to determine
      * whether or not a renderable has changed. The returned object is guaranteed to be globally unique with respect to
      * other SurfaceRenderable state keys; an equality test with a state key from another renderable always returns

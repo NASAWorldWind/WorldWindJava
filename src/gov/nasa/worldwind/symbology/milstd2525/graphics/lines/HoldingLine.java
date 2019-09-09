@@ -20,9 +20,8 @@ import java.util.*;
 
 /**
  * This class implements the following graphics:
- * <p/>
  * <ul> <li>Holding Line (2.X.2.6.1.2)</li> <li>Bridgehead (2.X.2.6.1.4)</li> </ul>
- * <p/>
+ * <p>
  * Note: These graphics require three control points. The first two points define the end points of the graphic, and the
  * third point defines the top of an arc that connects the endpoints. The specification for Holding Line and Bridgehead
  * (MIL-STD-2525C pgs 538 and 540) states that "Additional points can be defined to extend the line". However, the

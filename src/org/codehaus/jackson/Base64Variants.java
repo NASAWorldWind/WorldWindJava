@@ -27,7 +27,7 @@ public final class Base64Variants
      * This variant is what most people would think of "the standard"
      * Base64 encoding.
      *<p>
-     * See <a href="">wikipedia Base64 entry</a> for details.
+     * See wikipedia Base64 entry for details.
      *<p>
      * Note that although this can be thought of as the standard variant,
      * it is <b>not</b> the default for Jackson: no-linefeeds alternative
@@ -80,9 +80,9 @@ public final class Base64Variants
 
     /**
      * Method used to get the default variant ("MIME_NO_LINEFEEDS") for cases
-     * where caller does not explicitly specify the variant.
-     * We will prefer no-linefeed version because linefeeds in JSON values
-     * must be escaped, making linefeed-containing variants sub-optimal.
+     * where caller does not explicitly specify the variant.We will prefer no-linefeed version because linefeeds in JSON values
+ must be escaped, making linefeed-containing variants sub-optimal.
+     * @return Undocumented.
      */
     public static Base64Variant getDefaultVariant() {
         return MIME_NO_LINEFEEDS;

@@ -12,7 +12,7 @@ import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.render.DrawContext;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
@@ -21,7 +21,7 @@ import java.util.Queue;
 /**
  * Represents a texture composed of multiple independent images. The independent images are referred to as
  * <i>elements</i>, and are packed into non-overlapping sub-rectangles within the texture atlas. The following NVIDIA
- * document describes this technique: <a title="Improve Batching Using Texture Atlases" target="blank_"
+ * document describes this technique: <a target="blank_"
  * href="ftp://download.nvidia.com/developer/NVTextureSuite/Atlas_Tools/Texture_Atlas_Whitepaper.pdf">Improve Batching
  * Using Texture Atlases</a>
  *
@@ -38,7 +38,7 @@ public class TextureAtlas
     {
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Calls {@link TextureAtlas#createBackingImage(int, int)} with the specified width and height.
          */
         public Object allocateBackingStore(int w, int h)
@@ -48,7 +48,7 @@ public class TextureAtlas
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Calls {@link TextureAtlas#disposeBackingImage()}.
          */
         public void deleteBackingStore(Object backingStore)
@@ -58,7 +58,7 @@ public class TextureAtlas
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Returns <code>true</code>. The texture atlas can always attempt to expand or compact.
          */
         public boolean canCompact()
@@ -68,7 +68,7 @@ public class TextureAtlas
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Returns <code>false</code>, indicating that the rectangle packer should just expand. When configured to do
          * so, texture atlas evicts old elements in <code>additionFailed</code> if this texture atlas is full and the
          * addition would otherwise fail.
@@ -80,7 +80,7 @@ public class TextureAtlas
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * If this texture atlas is configured to evicts old elements, this attempts to remove the oldest one then
          * exits, allowing the caller to attempt the addition again. This throws a WWRuntimeException if this texture
          * atlas is not configured to evict old elements, or if there are no more elements to evict.
@@ -97,7 +97,7 @@ public class TextureAtlas
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Calls {@link TextureAtlas#beginMoveEntries(java.awt.image.BufferedImage, java.awt.image.BufferedImage)},
          * casting the specified backing stores to BufferedImages.
          */
@@ -108,7 +108,7 @@ public class TextureAtlas
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Calls {@link TextureAtlas#moveEntry(java.awt.image.BufferedImage, com.jogamp.opengl.util.packrect.Rect,
          * java.awt.image.BufferedImage, com.jogamp.opengl.util.packrect.Rect)}, casting the specified backing stores to
          * BufferedImages.
@@ -120,7 +120,7 @@ public class TextureAtlas
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Calls {@link TextureAtlas#endMoveEntries(java.awt.image.BufferedImage, java.awt.image.BufferedImage)},
          * casting the specified backing stores to BufferedImages.
          */
@@ -496,7 +496,7 @@ public class TextureAtlas
      * than or equal to this texture atlas' maximum dimensions. If this texture atlas is not configured to evict old
      * entries, this throws an exception if the image does not fit in the current atlas layout and the atlas cannot be
      * expanded.
-     * <p/>
+     * <p>
      * This adds a one pixel border around the specified image in this texture atlas' backing image by copying the
      * image's outer pixels into a border surrounding the original image. This border avoids sampling pixels from
      * neighboring atlas elements when an OpenGL box filter is applied to this image. This means that the atlas actually
@@ -702,7 +702,7 @@ public class TextureAtlas
     /**
      * Returns the OpenGL texture coordinates associated with an element in this texture atlas. This returns
      * <code>null</code> if this texture atlas does not contain the element.
-     * <p/>
+     * <p>
      * The returned texture coordinates can change any time an element is added or removed from this texture atlas, and
      * therefore should not be cached unless the caller has explicit knowledge of when this texture atlas has changed.
      *

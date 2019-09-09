@@ -16,7 +16,7 @@ import java.awt.*;
  * LabeledPath draws a {@link gov.nasa.worldwind.render.Annotation} on a specified path. The path itself is not drawn.
  * Instead, the annotation is drawn at the location that maximizes the annotation's visible area in the viewport. The
  * annotation is not drawn if the location list is {@code null}, or if no location in the list is visible.
- * <p/>
+ * <p>
  * The caller must specify the screen annotation used to draw the path's label by calling {@link
  * #setAnnotation(gov.nasa.worldwind.render.ScreenAnnotation)}. The path sets the specified annotation's screen point to
  * control the label's location, but otherwise does not modify the annotation.
@@ -128,7 +128,7 @@ public class LabeledPath implements Renderable
     /**
      * Specifies the labeled path's altitude mode, one of {@link gov.nasa.worldwind.WorldWind#ABSOLUTE}, {@link
      * gov.nasa.worldwind.WorldWind#RELATIVE_TO_GROUND} or {@link gov.nasa.worldwind.WorldWind#CLAMP_TO_GROUND}.
-     * <p/>
+     * <p>
      * Note: If the altitude mode is unrecognized, {@link gov.nasa.worldwind.WorldWind#ABSOLUTE} is used.
      *
      * @param altitudeMode the altitude mode. The default value is {@link gov.nasa.worldwind.WorldWind#ABSOLUTE}.

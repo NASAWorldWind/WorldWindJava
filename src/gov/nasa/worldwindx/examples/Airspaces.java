@@ -20,7 +20,7 @@ import java.util.Arrays;
  * extruded 3D volumes defined by geographic coordinates and upper- and lower- altitude boundaries. The interior of
  * airspace shapes always conforms to the curvature of the globe, and optionally also conform to the underlying
  * terrain.
- * <p/>
+ * <p>
  * This shows how to use all 11 types of standard airspace shapes: <ul> <li><code>{@link Orbit}</code> - a rectangle
  * with rounded end caps.</li> <li><code>{@link Curtain}</code> - a vertically extruded wall.</li> <li><code>{@link
  * Polygon}</code> - a vertically extruded polygon.</li> <li><code>{@link PolyArc}</code> - a vertically extruded

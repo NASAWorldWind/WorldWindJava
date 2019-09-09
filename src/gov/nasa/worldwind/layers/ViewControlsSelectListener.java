@@ -45,8 +45,8 @@ public class ViewControlsSelectListener implements SelectListener
     protected double veStep = 0.1;
 
     /**
-     * Construct a controller for specified <code>WorldWindow</code> and <code>ViewControlsLayer<c/code>.
-     * <p/>
+     * Construct a controller for specified <code>WorldWindow</code> and <code>ViewControlsLayer</code>.
+     * <p>
      * <code>ViewControlLayer</code>s are not sharable among <code>WorldWindow</code>s. A separate layer and controller
      * must be established for each window that's to have view controls.
      *
@@ -88,7 +88,7 @@ public class ViewControlsSelectListener implements SelectListener
      *
      * @param delay the repeat timer delay in milliseconds.
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if delay is less than or equal to zero.
      */
     public void setRepeatTimerDelay(int delay)
     {
@@ -180,7 +180,7 @@ public class ViewControlsSelectListener implements SelectListener
      *
      * @param value the pitch increment value in decimal degrees.
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if value is &lt; zero.
      */
     public void setPitchIncrement(double value)
     {
@@ -209,7 +209,7 @@ public class ViewControlsSelectListener implements SelectListener
      *
      * @param value the field of view increment factor.
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if value &lt; 1;
      */
     public void setFovIncrement(double value)
     {
@@ -238,7 +238,7 @@ public class ViewControlsSelectListener implements SelectListener
      *
      * @param value the vertical exaggeration increment.
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if value &lt; 0.
      */
     public void setVeIncrement(double value)
     {

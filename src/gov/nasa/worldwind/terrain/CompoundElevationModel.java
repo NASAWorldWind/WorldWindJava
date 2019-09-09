@@ -463,7 +463,7 @@ public class CompoundElevationModel extends AbstractElevationModel
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * NOTE: This method returns only unmapped elevations if the compound model contains more than one elevation model.
      * This enables the compound model's lower resolution elevation models to specify missing data values for the higher
      * resolution elevation models.
@@ -494,7 +494,7 @@ public class CompoundElevationModel extends AbstractElevationModel
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * NOTE: This method returns only unmapped elevations if the compound model contains more than one elevation model.
      * This enables the compound model's lower resolution elevation models to specify missing data values for the higher
      * resolution elevation models.

@@ -49,7 +49,7 @@ public class CachedDataRaster extends AVListImpl implements DataRaster
      * @param source the location of the local file, expressed as either a String path, a File, or a file URL.
      * @param params metadata as AVList, it is expected to next parameters: AVKey.WIDTH, AVKey.HEIGHT, AVKey.SECTOR,
      *               AVKey.PIXEL_FORMAT.
-     *               <p/>
+     *               <p>
      *               If any of these keys is missing, there will be an attempt made to retrieve missign metadata from
      *               the source using the reader.
      * @param reader A reference to a DataRasterReader instance

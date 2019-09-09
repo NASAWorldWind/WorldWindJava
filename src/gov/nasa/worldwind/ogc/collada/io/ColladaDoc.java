@@ -18,7 +18,7 @@ public interface ColladaDoc
 {
     /**
      * Returns an {@link java.io.InputStream} to the associated COLLADA document.
-     * <p/>
+     * <p>
      * Implementations of this interface do not close the stream; the user of the class must close the stream.
      *
      * @return an input stream positioned to the head of the COLLADA document.

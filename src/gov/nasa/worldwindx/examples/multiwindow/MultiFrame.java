@@ -19,12 +19,12 @@ import java.awt.*;
 /**
  * This example shows how to create two WorldWindows, each in its own JFrame. The WorldWindows share a globe and some
  * layers.
- * <p/>
+ * <p>
  * Applications using multiple WorldWind windows simultaneously should instruct WorldWind to share OpenGL and other
  * resources among those windows. Most WorldWind classes are designed to be shared across {@link WorldWindow} objects
  * and are shared automatically. But OpenGL resources are not automatically shared. To share them, a reference to a
  * previously created WorldWindow must be specified as a constructor argument for subsequently created WorldWindows.
- * <p/>
+ * <p>
  * Most WorldWind {@link gov.nasa.worldwind.globes.Globe} and {@link gov.nasa.worldwind.layers.Layer} objects can be
  * shared among WorldWindows. Those that cannot be shared have an operational dependency on the WorldWindow they're
  * associated with. An example is the {@link gov.nasa.worldwind.layers.ViewControlsLayer} layer for on-screen

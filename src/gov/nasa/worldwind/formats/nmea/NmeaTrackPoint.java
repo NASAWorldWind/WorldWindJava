@@ -22,7 +22,7 @@ public class NmeaTrackPoint implements TrackPoint
     private String time;
 
     /**
-     * @param words
+     * @param words The track point words to parse.
      * @throws IllegalArgumentException if <code>words</code> is null or has length less than 1
      */
     public NmeaTrackPoint(String[] words)
@@ -125,7 +125,7 @@ public class NmeaTrackPoint implements TrackPoint
     }
 
     /**
-     * @param latitude
+     * @param latitude The new latitude.
      * @throws IllegalArgumentException if <code>latitude</code> is less than -90 or greater than 90
      */
     public void setLatitude(double latitude)
@@ -146,7 +146,7 @@ public class NmeaTrackPoint implements TrackPoint
     }
 
     /**
-     * @param longitude
+     * @param longitude The new longitude.
      * @throws IllegalArgumentException if <code>longitude</code> is less than -180 or greater than 180
      */
     public void setLongitude(double longitude)

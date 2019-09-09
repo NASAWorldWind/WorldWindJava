@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
 /**
  * Represents a Shapefile record with a multi point shape type.  Multi-point shapes represent a set of x,y coordinate
  * pairs.
- * <p/>
+ * <p>
  * Multi-points may have optional z-coordinates or m-coordinates that accompany each x,y coordinate pair. If a
  * Multi-point has z-coordinates, then <code>{@link #getZValues()}</code> returns a non-<code>null</code> array of
  * values.  If a Multi-point has m-coordinates, then <code>{@link #getMValues()}</code> returns a non-<code>null</code>

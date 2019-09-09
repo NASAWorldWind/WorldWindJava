@@ -60,6 +60,8 @@ public class BasicDragger implements SelectListener
     /**
      * Ignores the useTerrain argument as it has been deprecated and utilizes the single parameter constructor.
      *
+     * @param wwd The world window.
+     * @param useTerrain Unused.
      * @deprecated the useTerrain property has been deprecated in favor of the {@link Draggable} interface which allows
      * the object to define the drag behavior.
      */
@@ -89,7 +91,7 @@ public class BasicDragger implements SelectListener
     }
 
     /**
-     * @param useTerrain
+     * @param useTerrain Unused.
      *
      * @deprecated definition of dragging behavior now defined by the object in the {@link Draggable} interface.
      */

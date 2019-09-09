@@ -8,13 +8,13 @@ package gov.nasa.worldwind.util;
 import com.jogamp.opengl.util.texture.Texture;
 import gov.nasa.worldwind.render.DrawContext;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 
 /**
  * OGLRenderToTextureSupport encapsulates the pattern of rendering GL commands to a destination texture. Currently only
  * the color pixel values are written to the destination texture, but other values (depth, stencil) should be possible
  * with modification or extension.
- * <p/>
+ * <p>
  * OGLRenderToTextureSupport is compatible with GL version 1.1 or greater, but it attempts to use more recent features
  * whenever possible. Different GL feature sets result in different approaches to rendering to texture, therefore the
  * caller cannot depend on the mechanism by which OGLRenderToTextureSupport will write pixel values to the destination
@@ -26,15 +26,15 @@ import javax.media.opengl.*;
  * contents before rendering anything into the texture. Do this by invoking {@link
  * #clear(gov.nasa.worldwind.render.DrawContext, java.awt.Color)} immediately after any call to {@link
  * #beginRendering(gov.nasa.worldwind.render.DrawContext, int, int, int, int)}.
- * <p/>
- * The common usage pattern for OGLRenderToTextureSupport is as follows: <br/><code> DrawContext dc = ...; // Typically
- * passed in as an argument to the containing method.<br/> Texture texture = TextureIO.newTexture(new
- * TextureData(...);<br/> <br/> // Setup the drawing rectangle to match the texture dimensions, and originate from the
- * texture's lower left corner.<br/> OGLRenderToTextureSupport rttSupport = new OGLRenderToTextureSupport();<br/>
- * rttSupport.beginRendering(dc, 0, 0, texture.getWidth(), texture.getHeight());<br/> try<br/> {<br/> // Bind the
- * texture as the destination for color pixel writes.<br/> rttSupport.setColorTarget(dc, texture);<br/> // Clear the
- * texture contents with transparent black.<br/> rttSupport.clear(dc, new Color(0, 0, 0, 0));<br/> // Invoke desired GL
- * rendering commands.<br/> }<br/> finally<br/> {<br/> rttSupport.endRendering(dc);<br/> }<br/> </code>
+ * <p>
+ * The common usage pattern for OGLRenderToTextureSupport is as follows: <br><code> DrawContext dc = ...; // Typically
+ * passed in as an argument to the containing method.<br> Texture texture = TextureIO.newTexture(new
+ * TextureData(...);<br> <br> // Setup the drawing rectangle to match the texture dimensions, and originate from the
+ * texture's lower left corner.<br> OGLRenderToTextureSupport rttSupport = new OGLRenderToTextureSupport();<br>
+ * rttSupport.beginRendering(dc, 0, 0, texture.getWidth(), texture.getHeight());<br> try<br> {<br> // Bind the
+ * texture as the destination for color pixel writes.<br> rttSupport.setColorTarget(dc, texture);<br> // Clear the
+ * texture contents with transparent black.<br> rttSupport.clear(dc, new Color(0, 0, 0, 0));<br> // Invoke desired GL
+ * rendering commands.<br> }<br> finally<br> {<br> rttSupport.endRendering(dc);<br> }<br> </code>
  *
  * @author dcollins
  * @version $Id: OGLRenderToTextureSupport.java 1676 2013-10-21 18:32:30Z dcollins $
@@ -92,7 +92,7 @@ public class OGLRenderToTextureSupport
      * current color target texture is the same reference as the specified texture, this does nothing. Otherwise this
      * flushes any buffered pixel values to the current color target, and assigns the specified texture as the new color
      * target.
-     * <p/>
+     * <p>
      * If {@link #isEnableFramebufferObject()} is false, the supported texture formats for the color target are limited
      * only by the OpenGL implementation's supported formats. If {@link #isEnableFramebufferObject()} is true and the
      * DrawContext supports OpenGL framebuffer objects, the supported texture formats for the color target are as

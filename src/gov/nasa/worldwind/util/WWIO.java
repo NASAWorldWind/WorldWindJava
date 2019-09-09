@@ -377,14 +377,14 @@ public class WWIO
     /**
      * Maps the specified File's bytes directly into memory as a {@link java.nio.MappedByteBuffer} according to the
      * specified mode.
-     * <p/>
+     * <p>
      * If the mode is {@link java.nio.channels.FileChannel.MapMode#READ_ONLY}, the file is mapped in read-only mode, and
      * any attempt to modify the contents of the returned MappedByteBuffer causes a {@link ReadOnlyBufferException}.
-     * <p/>
+     * <p>
      * If the mode is {@link java.nio.channels.FileChannel.MapMode#READ_WRITE}, the file is mapped in read-write mode.
      * Changing the contents of the returned MappedByteBuffer to be eventually propagated to the file. The specified
      * file must be avialable for both reading and writing.
-     * <p/>
+     * <p>
      * If the mode is {@link java.nio.channels.FileChannel.MapMode#PRIVATE}, the file is mapped in copy-on-write mode.
      * Changing the contents of the returned MappedByteBuffer causes private copies of portions of the buffer to be
      * created. The specified file must be avialable for both reading and writing.
@@ -521,7 +521,7 @@ public class WWIO
      * @param url      the URL to read.
      * @param encoding the encoding do use. If <code>null</code> is specified then UTF-8 is used.
      *
-     * @return the string representation of the bytes at the <code<URL</code> decoded according to the specified
+     * @return the string representation of the bytes at the <code>URL</code> decoded according to the specified
      *         encoding.
      *
      * @throws IllegalArgumentException if the <code>url</code> is null.
@@ -1258,7 +1258,7 @@ public class WWIO
 
     /**
      * Indicates whether a {@link File} contains content of a specified mime type.
-     * <p/>
+     * <p>
      * Only the filename suffix is consulted to determine the file's content type.
      *
      * @param file      the file to test.
@@ -1470,7 +1470,8 @@ public class WWIO
 
     /**
      * Returns the data type constant corresponding to the specified mime type string. Supported mime types are as
-     * mapped to data types as follows: <table> <tr><th>Mime Type</th><th>Data Type</th></tr>
+     * mapped to data types as follows: <table> <caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Mime Type</th><th>Data Type</th></tr>
      * <tr><td>application/bil32</td><td>{@link gov.nasa.worldwind.avlist.AVKey#FLOAT32}</td></tr>
      * <tr><td>application/bil16</td><td>{@link gov.nasa.worldwind.avlist.AVKey#INT16}</td></tr>
      * <tr><td>application/bil</td><td>{@link gov.nasa.worldwind.avlist.AVKey#INT16}</td></tr>
@@ -2044,7 +2045,7 @@ public class WWIO
     /**
      * Open a reader on an input source. The source may be one of the following: <ul> <li>{@link Reader}</li> <li>{@link
      * InputStream}</li> <li>{@link File}</li> <li>{@link URL}</li> <li>{@link String}</li> </ul>
-     * <p/>
+     * <p>
      * Readers are used to read character streams.
      *
      * @param src the input source of one of the above types.
@@ -2507,7 +2508,7 @@ public class WWIO
      * Determines whether a jar URL is a reference to a local jar file or an entry in a local jar file. See {@link
      * java.net.JarURLConnection} for a description of jar URLs.
      *
-     * @param jarUrl the jar URL, in the form jar:<url>!{entry}. (Omit <, >, { and } in the actual URL}
+     * @param jarUrl the jar URL, in the form jar:[url]!{entry}. (Omit [, ], { and } in the actual URL
      *
      * @return true if the URL refers to a local resource, otherwise false.
      */

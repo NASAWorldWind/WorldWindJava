@@ -17,7 +17,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.*;
@@ -1862,10 +1862,11 @@ public abstract class AbstractTacticalSymbol extends WWObjectImpl implements Tac
     }
 
     /**
-     * Compute the dimension of the minimum layout rectangle for the text modifiers. A minimum dimension is enforced to
+     * Compute the dimension of the minimum layout rectangle for the text modifiers.A minimum dimension is enforced to 
      * prevent the text from overlapping if the symbol is scaled to a very small size.
      *
      * @param dc Current draw context.
+     * @param modifiers Modifiers to apply to the text.
      *
      * @return Minimum dimension for the label layout rectangle.
      */

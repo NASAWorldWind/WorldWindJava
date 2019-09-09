@@ -8,7 +8,7 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.awt.*;
 
 /**
@@ -78,13 +78,12 @@ public class ScreenBrowserBalloon extends AbstractBrowserBalloon implements Scre
 
     /**
      * Computes and stores this balloon's screen coordinates. This assigns balloon coordinate properties as follows:
-     * <p/>
      * <ul> <li><code>screenOffset</code> - the balloon frame's screen-coordinate offset from this balloon's screen
      * location.</li> <li><code>screenRect</code> - the balloon frame's screen-coordinate rectangle.</li>
      * <li><code>screenExtent</code> - this balloon's screen-coordinate bounding rectangle.</li>
      * <li><code>screenPickExtent</code> - this balloon's screen-coordinate bounding rectangle, including area covered
      * by the balloon's pickable outline.</li> <li><code>webViewRect</code> - the WebView's screen-coordinate content
-     * frame.</li> <li><code>eyeDistance</code> - always 0.</li>
+     * frame.</li> <li><code>eyeDistance</code> - always 0.</li></ul>
      *
      * @param dc the current draw context.
      */

@@ -548,7 +548,7 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
      * Indicates the expiration time specified by either the Expires header or the max-age directive of the
      * Cache-Control header. If both are present, then Cache-Control is given priority (See section 14.9.3 of the HTTP
      * Specification: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
-     * <p/>
+     * <p>
      * If both the Expires and Date headers are present then the expiration time is calculated as current time +
      * (expires - date). This helps guard against clock skew between the client and server.
      *

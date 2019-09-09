@@ -80,7 +80,6 @@ public class ForwardLineOfOwnTroops extends PhaseLine
      * Indicates the wavelength of the semicircle wave that forms the graphic's boundary. This is the length from the
      * start of one "tooth" to the start of the next. If not wave length is specified a default wave length will be
      * computed.
-     * <p/>
      * <pre>
      * /\/\/\/\/\
      * ^ ^

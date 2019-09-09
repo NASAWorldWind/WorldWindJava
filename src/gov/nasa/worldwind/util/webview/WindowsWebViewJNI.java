@@ -16,23 +16,20 @@ import java.beans.PropertyChangeListener;
 /**
  * JNI bindings for the Windows WebView library. This library provides functions for creating and destroying native
  * WebViews, sending user input to a WebView, and adding listeners to a WebView.
- * <p/>
  * <h3>Message loops</h3>
- * <p/>
+ * <p>
  * WebViews created by this library must be managed by a message loop in native code. This class provides methods for
  * creating and running a native message loop using a Java thread. Each WebView must be associated with one message
  * loop. Each message loop can handle any number of WebViews.
- * <p/>
+ * <p>
  * To create a WebView message loop: <ol> <li> Create a new Java thread to run the message loop.</li> <li> Call {@link
  * #newMessageLoop()} from the message loop thread.</li> <li> Call {@link #runMessageLoop(long)} from the message loop
  * thread. This enters a blocking loop in native code. It will not return until {@link #releaseMessageLoop(long)} is
  * called by another thread.</li> </ol>
- * <p/>
+ * <p>
  * Here is an example of creating and running  a message loop:
- * <p/>
  * <pre>
  * long webViewMessageLoop = 0;
- * <p/>
  * // Create a new thread to run the WebView message loop.
  * webViewUI = new Thread("WebView UI")
  * {
@@ -41,20 +38,17 @@ import java.beans.PropertyChangeListener;
  *          // Create a message loop in native code. This call must return
  *          // before any messages are sent to the WebView.
  *          webViewMessageLoop = WindowsWebViewJNI.newMessageLoop();
- * <p/>
  *          // Notify the outer thread that the message loop is ready.
  *          synchronized (webViewUILock)
  *          {
  *              webViewUILock.notify();
  *          }
- * <p/>
  *          // Process messages in native code until the message loop
  *          // is terminated.
  *          WindowsWebViewJNI.runMessageLoop(webViewMessageloop);
  *      }
  *  };
  *  webViewUI.start();
- * <p/>
  *  // Wait for the newly started thread to create the message loop. We cannot
  *  // safely use the WebView until the message loop has been initialized.
  *  while (webViewMessageLoop == 0)

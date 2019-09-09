@@ -13,7 +13,7 @@ import gov.nasa.worldwind.render.airspaces.Geometry;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.stream.*;
 import java.io.IOException;
 import java.nio.*;
@@ -21,8 +21,8 @@ import java.nio.*;
 /**
  * A general ellipsoid volume defined by a center position and the three ellipsoid axis radii. If A is the radius in the
  * north-south direction, and b is the radius in the east-west direction, and c is the radius in the vertical direction
- * (increasing altitude), then A == B == C defines a sphere, A == B > C defines a vertically flattened spheroid
- * (disk-shaped), A == B < C defines a vertically stretched spheroid.
+ * (increasing altitude), then A == B == C defines a sphere, A == B &gt; C defines a vertically flattened spheroid
+ * (disk-shaped), A == B &lt; C defines a vertically stretched spheroid.
  *
  * @author tag
  * @version $Id: Ellipsoid.java 1171 2013-02-11 21:45:02Z dcollins $

@@ -10,7 +10,7 @@ import gov.nasa.worldwind.util.Logging;
 /**
  * Compressor for DXT2/DXT3 alpha and color blocks. This class is not thread safe. Unsynchronized access will result in
  * unpredictable behavior. Access to methods of this class must be synchronized by the caller.
- * <p/>
+ * <p>
  * Documentation on the DXT2/DXT3 format is available at http://msdn.microsoft.com/en-us/library/bb694531.aspx under
  * the name "BC2".
  *
@@ -36,7 +36,7 @@ public class BlockDXT3Compressor
      * Compress the 4x4 color block into a DXT2/DXT3 block using 16 4 bit alpha values, and four colors. This method
      * compresses the color block exactly as a DXT1 compressor, except that it guarantees that the DXT1 block will use
      * four colors.
-     * <p/>
+     * <p>
      * Access to this method must be synchronized by the caller. This method is frequently invoked by the DXT
      * compressor, so in order to reduce garbage each instance of this class has unsynchronized properties that are
      * reused during each call.

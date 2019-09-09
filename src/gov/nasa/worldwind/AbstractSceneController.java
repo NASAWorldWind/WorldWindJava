@@ -15,7 +15,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.terrain.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -1073,7 +1073,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
      * gov.nasa.worldwind.render.SurfaceObject#render(gov.nasa.worldwind.render.DrawContext)} in ordered rendering mode.
      * This does nothing if the ordered surface renderable queue is empty, or if it does not contain any
      * SurfaceObjects.
-     * <p/>
+     * <p>
      * This method is called during the preRender phase, and is therefore free to modify the framebuffer contents to
      * create the composite representation.
      *

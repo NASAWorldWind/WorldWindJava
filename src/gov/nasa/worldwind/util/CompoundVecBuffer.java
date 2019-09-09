@@ -15,10 +15,10 @@ import java.util.*;
  * gov.nasa.worldwind.util.VecBuffer} objects. Each VecBuffer is retrieved via an index. The range of valid indices in a
  * CompoundVecBuffer is [0, size() - 1], inclusive. Implementations of CompoundVecBuffer define how each VecBuffer is
  * stored and retrieved according to its index.
- * <p/>
+ * <p>
  * To retrieve a single VecBuffer given an index, invoke {@link #subBuffer(int)}. To retrieve a VecBuffer's size, in
  * number of logical tuples, invoke {@link #subBufferSize(int)}.
- * <p/>
+ * <p>
  * To create a new view of this CompoundVecBuffer from one or many VecBuffers, invoke one of the <code>slice</code>
  * methods: <ul> <li>{@link #slice(int, int)} creates a view of this CompoundVecbufer given a contiguous sequence of
  * VecBuffer indices.</li> <li>{@link #slice(int[], int, int)} creates a view of this CompoundVecBuffer given an array
@@ -187,7 +187,7 @@ public abstract class CompoundVecBuffer
      *
      * @return a new CompoundVecBuffer representing a subset of this CompoundVecBuffer.
      *
-     * @throws IllegalArgumentException if beginIndex is out of range, if endIndex is out of range, or if beginIndex >
+     * @throws IllegalArgumentException if beginIndex is out of range, if endIndex is out of range, or if beginIndex &gt;
      *                                  endIndex.
      */
     public CompoundVecBuffer slice(int beginIndex, int endIndex)

@@ -12,7 +12,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.nio.*;
 import java.util.*;
 
@@ -217,8 +217,13 @@ public class Box extends AbstractAirspace
     }
 
     /**
-     * Specifies the azimuth angles for this box's four corners, relative to geographic north. Specifying a null
+     * Specifies the azimuth angles for this box's four corners, relative to geographic north. Specifying a null 
      * argument indicates that the default angle should be used.
+     * 
+     * @param beginLeftAzimuth Beginning left corner azimuth.
+     * @param beginRightAzimuth Beginning right corner azimuth.
+     * @param endLeftAzimuth Ending left corner azimuth.
+     * @param endRightAzimuth Ending right corner azimuth.
      */
     public void setCornerAzimuths(Angle beginLeftAzimuth, Angle beginRightAzimuth, Angle endLeftAzimuth,
         Angle endRightAzimuth)

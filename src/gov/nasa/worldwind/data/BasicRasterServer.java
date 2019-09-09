@@ -163,7 +163,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
     }
 
     /**
-     * Extracts all <Property/> key and values from the given DOM element
+     * Extracts all Property key and values from the given DOM element
      *
      * @param config Parsed configuration document.
      */
@@ -372,7 +372,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
      *
      * @param reqParams This is a required parameter, must not be null or empty; Must contain AVKey.WIDTH, AVKey.HEIGHT,
      *                  and AVKey.SECTOR values.
-     *                  <p/>
+     *                  <p>
      *                  Optional keys are: AVKey.PIXEL_FORMAT (AVKey.ELEVATION | AVKey.IMAGE) AVKey.DATA_TYPE
      *                  AVKey.BYTE_ORDER (AVKey.BIG_ENDIAN | AVKey.LITTLE_ENDIAN )
      *
@@ -501,7 +501,7 @@ public class BasicRasterServer extends WWObjectImpl implements RasterServer
      * @param params This is a required parameter, must not be null or empty; Must contain AVKey.WIDTH, AVKey.HEIGHT,
      *               AVKey.SECTOR, and AVKey.IMAGE_FORMAT (mime type) values. Supported mime types are: "image/png",
      *               "image/jpeg", "image/dds".
-     *               <p/>
+     *               <p>
      *               Optional keys are: AVKey.PIXEL_FORMAT (AVKey.ELEVATION | AVKey.IMAGE) AVKey.DATA_TYPE
      *               AVKey.BYTE_ORDER (AVKey.BIG_ENDIAN | AVKey.LITTLE_ENDIAN )
      *

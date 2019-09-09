@@ -21,7 +21,7 @@ import gov.nasa.worldwind.util.Logging;
  *  {@link gov.nasa.worldwind.data.ImageIORasterReader}
 
  * </pre>
- * <p/>
+ * <p>
  * To specify a different factory, set the {@link gov.nasa.worldwind.avlist.AVKey#DATA_RASTER_READER_FACTORY_CLASS_NAME}
  * value in {@link gov.nasa.worldwind.Configuration}, either directly or via the WorldWind configuration file. To add
  * readers to the default set, create a subclass of this class, override {@link #findReaderFor(Object,

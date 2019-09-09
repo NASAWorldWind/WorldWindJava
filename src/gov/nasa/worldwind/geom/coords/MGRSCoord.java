@@ -109,10 +109,10 @@ public class MGRSCoord
      * <p>
      * The string will be converted to uppercase and stripped of all spaces before being evaluated.
      * </p>
-     * <p>Valid examples:<br />
-     * 32TLP5626635418<br />
-     * 32 T LP 56266 35418<br />
-     * 11S KU 528 111<br />
+     * <p>Valid examples:<br>
+     * 32TLP5626635418<br>
+     * 32 T LP 56266 35418<br>
+     * 11S KU 528 111<br>
      * </p>
      * @param MGRSString the MGRS coordinate text string.
      * @param globe the <code>Globe</code> - can be null (will use WGS84).

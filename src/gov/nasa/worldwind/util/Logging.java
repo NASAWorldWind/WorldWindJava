@@ -55,7 +55,7 @@ public class Logging
     /**
      * Returns a specific logger. Does not access {@link gov.nasa.worldwind.Configuration} to determine the configured
      * WorldWind logger.
-     * <p/>
+     * <p>
      * This is needed by {@link gov.nasa.worldwind.Configuration} to avoid calls back into itself when its singleton
      * instance is not yet instantiated.
      *

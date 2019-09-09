@@ -562,7 +562,7 @@ public class GeoSymSupport
      * determine at least one "true" condition for a particular instance of a feature in the VPF dataset, there are
      * default CGMs provided in GeoSym for displaying that feature.  The following table identifies which symbol should
      * be used to symbolize an "unknown" point, line, or area feature.
-     * <p/>
+     * <p>
      * Note that the default symbols should only be placed under two conditions: 1.  There is no row in the *sym.txt
      * file for the feature (fcode) 2.  After evaluating all rows in the *sym.txt file for that fcode, there is no row
      * that results in an evaluation of "true".

@@ -17,7 +17,7 @@ import java.util.*;
 /**
  * Provides a mechanism to manage globe-specific representations of shapes. Typically used to manage per-globe state
  * when the application associates the same shape with multiple {@link gov.nasa.worldwind.WorldWindow}s.
- * <p/>
+ * <p>
  * This cache limits the amount of time an entry remains in the cache unused. The maximum unused time may be specified.
  * Entries unused within the specified duration are removed from the cache each time {@link
  * #getEntry(gov.nasa.worldwind.globes.Globe)} is called.
@@ -272,7 +272,7 @@ public class ShapeDataCache implements Iterable<ShapeDataCache.ShapeDataCacheEnt
 
     /**
      * Retrieves a specified entry from the cache.
-     * <p/>
+     * <p>
      * Note: Each time this method is called the cache is cleared of dead entries, as defined by their last-used time
      * relative to this cache's maximum unused time.
      *

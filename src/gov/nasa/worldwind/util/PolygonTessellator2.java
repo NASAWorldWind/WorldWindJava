@@ -6,7 +6,7 @@
 
 package gov.nasa.worldwind.util;
 
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.glu.*;
 import java.nio.*;
 
 /**
@@ -323,8 +323,13 @@ public class PolygonTessellator2
 
     /**
      * Computes a 4-bit code indicating the vertex's location in the 9 cell grid defined by the clip bounds and the
-     * eight adjacent spaces defined by extending the min/max boundaries to infinity. 0 indicates that the vertex is
+     * eight adjacent spaces defined by extending the min/max boundaries to infinity.0 indicates that the vertex is
      * inside the clip bounds.
+     *
+     * @param x The x coordinate for computation.
+     * @param y The x coordinate for computation.
+     * @param z The x coordinate for computation.
+     * @return The vertex code.
      */
     protected int clipCode(double x, double y, double z)
     {

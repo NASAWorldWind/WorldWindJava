@@ -56,6 +56,9 @@ public final class NumberOutput
      */
 
     /**
+     * @param value Undocumented.
+     * @param buffer Undocumented.
+     * @param offset Undocumented.
      * @return Offset within buffer after outputting int
      */
     public static int outputInt(int value, char[] buffer, int offset)
@@ -120,6 +123,9 @@ public final class NumberOutput
     }
 
     /**
+     * @param value Undocumented.
+     * @param buffer Undocumented.
+     * @param offset Undocumented.
      * @return Offset within buffer after outputting int
      */
     public static int outputLong(long value, char[] buffer, int offset)

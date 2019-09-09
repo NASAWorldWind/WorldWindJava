@@ -20,7 +20,6 @@ import java.util.*;
 
 /**
  * Implementation of Fire Support line graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Fire Support Coordination Line (2.X.4.2.2.1)</li> <li>Coordinated Fire Line (2.X.4.2.2.2)</li>
  * <li>Restrictive Fire Line (2.X.4.2.2.4)</li> </ul>
  *

@@ -8,7 +8,7 @@ package gov.nasa.worldwind.formats.dds;
 /**
  * <code>BlockDXT3</code> is a data structure representing the compressed alpha and color values in a single DXT2/DXT3
  * block. The DXT3 block contains a 64 bit alpha block, and a 64 bit color block, stored here as the properties
- * <code>alphaBlock</code> and </code>colorBlock</code>. The 64 bit alpha block contains 4x4 alpha values quantized
+ * <code>alphaBlock</code> and <code>colorBlock</code>. The 64 bit alpha block contains 4x4 alpha values quantized
  * into 4 bits. The 64 bit color block is formatted exactly like the DXT1 color block, except that the color block
  * always represents four colors, regardless of the color ordering in the DXT1 block.
  *

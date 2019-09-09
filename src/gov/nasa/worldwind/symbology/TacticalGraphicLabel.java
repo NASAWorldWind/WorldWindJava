@@ -14,7 +14,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -300,7 +300,7 @@ public class TacticalGraphicLabel
      * horizontal with the text alignment position, and centers the label vertically. For example, if the text alignment
      * is <code>AVKey.LEFT</code>., then the left edge of the text will be aligned with the geographic position, and the
      * label will be centered vertically.
-     * <p/>
+     * <p>
      * When the text is rotated a horizontal offset moves the text along the orientation line, and a vertical offset
      * moves the text perpendicular to the orientation line.
      *
@@ -604,7 +604,7 @@ public class TacticalGraphicLabel
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchPicking(boolean).
+     * @see #setEnableBatchPicking(boolean)
      */
     public boolean isEnableBatchPicking()
     {
@@ -615,7 +615,7 @@ public class TacticalGraphicLabel
      * Specifies whether adjacent Labels in the ordered renderable list may be pick-tested together if they are
      * contained in the same layer. This increases performance but allows only the top-most of the label to be reported
      * in a {@link gov.nasa.worldwind.event.SelectEvent} even if several of the labels are at the pick position.
-     * <p/>
+     * <p>
      * Batch rendering ({@link #setEnableBatchRendering(boolean)}) must be enabled in order for batch picking to occur.
      *
      * @param enableBatchPicking true to enable batch rendering, otherwise false.
@@ -630,7 +630,7 @@ public class TacticalGraphicLabel
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchRendering(boolean).
+     * @see #setEnableBatchRendering(boolean)
      */
     public boolean isEnableBatchRendering()
     {

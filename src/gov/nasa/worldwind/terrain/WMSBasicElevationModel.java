@@ -266,8 +266,9 @@ public class WMSBasicElevationModel extends BasicElevationModel
 
     /**
      * Parses WMSBasicElevationModel configuration parameters from a specified WMS Capabilities source. This writes
-     * output as key-value pairs to params. Supported key and parameter names are: <table>
-     * <th><td>Parameter</td><td>Value</td><td>Type</td></th> <tr><td>{@link AVKey#ELEVATION_MAX}</td><td>WMS layer's
+     * output as key-value pairs to params. Supported key and parameter names are: <table><caption style="font-weight: bold;">Parameters</caption>
+     * <tr><th>Parameter</th><th>Value</th><th>Type</th></tr>
+     * <tr><td>{@link AVKey#ELEVATION_MAX}</td><td>WMS layer's
      * maximum extreme elevation</td><td>Double</td></tr> <tr><td>{@link AVKey#ELEVATION_MIN}</td><td>WMS layer's
      * minimum extreme elevation</td><td>Double</td></tr> <tr><td>{@link AVKey#DATA_TYPE}</td><td>Translate WMS layer's
      * image format to a matching data type</td><td>String</td></tr> </table> This also parses common WMS layer

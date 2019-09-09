@@ -14,7 +14,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.webview.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -34,9 +34,9 @@ import java.util.List;
  * java.net.URL}</code>, or a <code>String</code> containing a valid URL description. If a browser balloon's resource
  * resolver is <code>null</code> or is an unrecognized type, the browser interprets relative <code>URLs</code> as
  * unresolved references.
- * <p/>
+ * <p>
  * <b>Browser Controls</b>
- * <p/>
+ * <p>
  * Browser balloons display three default browser controls that enable users to navigate the browser's history back and
  * forward, and to close the balloon. When the user selects one of these controls, a <code>SelectEvent</code> is
  * generated with the <code>PickedObject's</code> <code>AVKey.ACTION</code> value set to one of
@@ -44,17 +44,17 @@ import java.util.List;
  * disabled by calling <code>setDrawBrowserControls</code> (they are enabled by default), and may be customized by
  * adding or removing controls from the browser balloon. See <code>getBrowserControls</code>,
  * <code>addBrowserControl</code>, and <code>removeBrowserControl</code>.
- * <p/>
+ * <p>
  * <b>Resize Control</b>
- * <p/>
+ * <p>
  * Browser balloons provide a default resize control that is activated by dragging the balloon's border. When the user
  * drags the border, a <code>SelectEvent</code> is generated with the PickedObject's <code>AVKey.ACTION</code> value set
  * to <code>AVKey.RESIZE</code>. The <code>PickedObject's</code> <code>AVKey.BOUNDS</code> value holds the Balloon's
  * screen bounds in AWT coordinates (origin at the upper left corner) as a <code>java.awt.Rectangle</code>.  The resize
  * control may be enabled or disabled by calling <code>setDrawResizeControl</code> (it is enabled by default).
- * <p/>
+ * <p>
  * <b>Balloon Size</b>
- * <p/>
+ * <p>
  * The browser balloon's screen width and height are specified as a <code>{@link gov.nasa.worldwind.render.Size}</code>
  * object in its <code>BalloonAttributes</code>. This size may configured in one of the following three modes: <ul>
  * <li>Explicit size in pixels.</li> <li>Fraction of the <code>WorldWindow</code> size.</li> <li>Fit to the balloon's
@@ -63,23 +63,23 @@ import java.util.List;
  * <code>Size</code> object in its <code>BalloonAttributes</code>. If the maximum size is <code>null</code>, the
  * balloon's width and height are unlimited. The space provided for the balloon's HTML content equal to the balloon's
  * screen width and height minus the balloon's insets, also specified in its <code>BalloonAttributes</code>
- * <p/>
+ * <p>
  * The balloon's width or height (or both) may be configured to fit to the balloon's HTML content by configuring its
  * <code>BalloonAttributes</code> with a <code>Size</code> who's width or height mode is
  * <code>Size.NATIVE_DIMENSION</code> or <code>Size.MAINTAIN_ASPECT_RATIO</code>. When configured in this mode, the
  * browser balloon's size always fits the HTML content specified at construction or by calling <code>setText</code>. If
  * a user action causes the balloon to navigate to another page, the balloon continues to fit to its current HTML
  * content.
- * <p/>
+ * <p>
  * The balloon frame's corner radius and leader width specified in its <code>BalloonAttributes</code> are limited by the
  * balloon's size. The corner radius is first limited by the balloon's width and height, then the leader width is
  * limited by the balloon's width and height minus space taken by rounded corners. For example, if the corner radius is
  * 100 and the width and height are 50 and 100, the actual corner radius used is 25 - half of the rectangle's smallest
  * dimension. Similarly, if the leader is attached to the rectangle's bottom, its width is limited by the rectangle's
  * width minus any space used by the balloon's rounded corners.
- * <p/>
+ * <p>
  * <b>Hiding the balloon</b>
- * <p/>
+ * <p>
  * The balloon can be made visible or invisible by calling {@link #setVisible(boolean) setVisible}. The balloon's {@code
  * visibilityAction} determines what happens to the native web browser when the balloon is invisible. The balloon can
  * either release its native web browser, preventing the native browser from consuming system resources while the
@@ -352,8 +352,8 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
     /**
      * Returns a list containing the browser balloon's three default browser controls, configured as follows:
-     * <p/>
-     * <table> <tr><th>Control</th><th>Action</th><th>Offset</th><th>Size</th><th>Image Source</th></tr>
+     * <table> <caption style="font-weight: bold;">Controls</caption>
+     * <tr><th>Control</th><th>Action</th><th>Offset</th><th>Size</th><th>Image Source</th></tr>
      * <tr><td>Close</td><td><code>AVKey.CLOSE</code></td><td>(30, 25) pixels inset from the balloon's upper right
      * corner</td><td>Image source's native size in pixels (16x16)</td><td>images/browser-close-16x16.gif</td></tr>
      * <tr><td>Back</td><td><code>AVKey.BACK</code></td><td>(15, 25) pixels inset from the balloon's upper left
@@ -438,6 +438,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Computes and stores the balloon's model-coordinate and screen-coordinate points.
      *
      * @param dc the current draw context.
+     * @param obb The balloon.
      */
     protected abstract void computeBalloonPoints(DrawContext dc, OrderedBrowserBalloon obb);
 
@@ -447,6 +448,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Disposes the balloon's internal <code>{@link gov.nasa.worldwind.util.webview.WebView}</code>. This does nothing
      * if the balloon is already disposed.
      */
+    @Override
     public void dispose()
     {
         this.disposeWebView();
@@ -484,7 +486,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * When this balloon is set to invisible, the {@code visibilityAction} determines what happens to the native web
      * browser that backs the balloon. By default, the browser resources are released when the balloon is not visible.
      *
@@ -520,7 +522,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Specifies the outline line width (in pixels) to use during picking. The specified <code>width</code> must be zero
      * or a positive integer. Specifying a pick width of zero effectively disables the picking of the balloon's outline
      * and its resize control. A larger width than normal typically makes the outline easier to pick.
-     * <p/>
+     * <p>
      * When the the balloon's resize control is enabled, the outline becomes the resize control and is drawn in the
      * specified <code>width</code>. Therefore this value also controls the balloon's resize control width. If the
      * resize control is disabled by calling <code>{@link #setDrawResizeControl(boolean)}</code> with a value of
@@ -665,10 +667,9 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     /**
      * Specifies a the object to use when resolving relative resource paths in this browser balloon's HTML content. The
      * <code>resourceResolver</code> may be one of the following:
-     * <p/>
      * <ul> <li>a <code>{@link gov.nasa.worldwind.util.webview.WebResourceResolver}</code></li> <li>a <code>{@link
      * java.net.URL}</code></li> <li>a <code>{@link String}</code> containing a valid URL description</li> </ul>
-     * <p/>
+     * <p>
      * If the <code>resourceResolver</code> is <code>null</code> or is not one of the recognized types, this browser
      * balloon interprets relative resource paths as unresolved references.
      *
@@ -742,7 +743,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to suppress <code>AVKey.REPAINT</code> property change events sent by the balloon's internal
      * <code>{@link gov.nasa.worldwind.util.webview.WebView}</code> when <code>isVisible</code> returns
      * <code>false</code>.
@@ -824,7 +825,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * balloon. This queues an ordered renderable if the balloon intersects the current viewing frustum, and if the
      * balloon's internal rendering state can be computed. This updates the balloon's rendering state by calling
      * <code>updateRenderStateIfNeeded</code>, and updates its geometry by calling <code>computeGeometry</code>.
-     * <p/>
+     * <p>
      * BrowserBalloon separates render state updates from geometry updates for two reasons: <ul> <li>Geometry may be
      * updated based on different conditions.</li> <li>Rendering state potentially needs to be updated in
      * getBounds.</li> </ul>
@@ -891,13 +892,14 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     }
 
     /**
-     * Update the balloon's active attributes and points, if that hasn't already been done this frame. This updates the
+     * Update the balloon's active attributes and points, if that hasn't already been done this frame.This updates the
      * balloon's rendering state as follows: <ul> <li>Computes the balloon's active attributes by calling
      * <code>determineActiveAttributes</code> and stores the result in <code>activeAttributes</code>.</li> <li>Computes
      * the balloon's model-coordinate and screen-coordinate points by calling <code>computeBalloonPoints</code>.</li>
      * </ul>
      *
      * @param dc the current draw context.
+     * @param obb The balloon to update.
      */
     protected void updateRenderStateIfNeeded(DrawContext dc, OrderedBrowserBalloon obb)
     {
@@ -977,6 +979,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Indicates whether this balloon's screen-coordinate geometry must be recomputed as a result of a balloon attribute
      * changing.
      *
+     * @param obb The balloon to check.
      * @return <code>true</code> if this balloon's geometry must be recomputed, otherwise <code>false</code>.
      */
     protected boolean mustRegenerateGeometry(OrderedBrowserBalloon obb)
@@ -997,6 +1000,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     /**
      * Updates the balloon's screen-coordinate geometry in <code>frameInfo</code> according to the current screen
      * bounds, screen offset, and active attributes.
+     * @param obb The balloon to update.
      */
     protected void computeGeometry(OrderedBrowserBalloon obb)
     {
@@ -1023,6 +1027,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     /**
      * Creates the balloon's frame vertex buffer according to the active attributes.
      *
+     * @param obb The balloon.
      * @return a buffer containing the frame's x and y locations.
      */
     protected FloatBuffer createFrameVertices(OrderedBrowserBalloon obb)
@@ -1115,6 +1120,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Determines whether the balloon intersects the view frustum.
      *
      * @param dc the current draw context.
+     * @param obb The balloon to check.
      *
      * @return <code>true</code> If the balloon intersects the frustum, otherwise <code>false</code>.
      */
@@ -1306,18 +1312,19 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
     /**
      * Draws this browser balloon's interior geometry in screen-coordinates, with the <code>WebView's</code> texture
-     * representation applied as an OpenGL decal. OpenGL's texture decal mode uses the texture color where the texture's
+     * representation applied as an OpenGL decal.OpenGL's texture decal mode uses the texture color where the texture's
      * alpha is 1, and uses the balloon's background color where it's 0. The texture's internal format must be RGBA to
      * work correctly, and this assumes that the WebView's texture format is RGBA.
-     * <p/>
+     * <p>
      * If the <code>WebView's</code> texture cannot be created or cannot be applied for any reason, this displays the
      * balloon's interior geometry in the balloon's background color without applying the <code>WebView's</code>
      * texture.
-     * <p/>
+     * <p>
      * If the specified draw context is in picking mode, this draws the balloon's interior geometry in the current color
      * and does not apply the <code>WebView's</code> texture.
      *
      * @param dc the current draw context.
+     * @param obb The balloon to draw.
      */
     protected void drawFrameInterior(DrawContext dc, OrderedBrowserBalloon obb)
     {
@@ -1686,9 +1693,10 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     }
 
     /**
-     * Draw pickable regions for the resize controls. A pickable region is drawn along the frame outline.
+     * Draw pickable regions for the resize controls.A pickable region is drawn along the frame outline.
      *
      * @param dc Draw context.
+     * @param obb The balloon.
      */
     protected void drawResizeControl(DrawContext dc, OrderedBrowserBalloon obb)
     {
@@ -1994,7 +2002,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Forwards the mouse moved event to the balloon's internal <code>{@link gov.nasa.worldwind.util.webview.WebView}</code>.
      * This does not consume the event, because the <code>{@link gov.nasa.worldwind.event.InputHandler}</code>
      * implements the policy for consuming or forwarding mouse moved events to other objects.
-     * <p/>
+     * <p>
      * Unlike mouse clicked, mouse pressed, and mouse dragged events, mouse move events cannot be forwarded to the
      * WebView via SelectEvents in <code>selected</code>, because mouse movement events are not selection events.
      *
@@ -2012,7 +2020,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Forwards the mouse wheel event to the balloon's internal <code>{@link gov.nasa.worldwind.util.webview.WebView}</code>
      * and consumes the event. This consumes the event so the <code>{@link gov.nasa.worldwind.View}</code> doesn't
      * respond to it.
-     * <p/>
+     * <p>
      * Unlike mouse clicked, mouse pressed, and mouse dragged events, mouse wheel events cannot be forwarded to the
      * WebView via SelectEvents in <code>selected</code>, because mouse wheel events are not selection events.
      *
@@ -2129,7 +2137,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
     /**
      * Sends the specified <code>KeyEvent</code> to the balloon's internal <code>WebView</code>.
-     * <p/>
+     * <p>
      * This does nothing if the balloon's internal <code>WebView</code> is uninitialized.
      *
      * @param event the event to send.
@@ -2143,7 +2151,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     /**
      * Sends the specified <code>MouseEvent</code> to the balloon's internal <code>WebView</code>. The event's point is
      * converted from AWT coordinates to the WebView's local coordinate system.
-     * <p/>
+     * <p>
      * This does nothing if the balloon's internal <code>WebView</code> is uninitialized.
      *
      * @param event the event to send.

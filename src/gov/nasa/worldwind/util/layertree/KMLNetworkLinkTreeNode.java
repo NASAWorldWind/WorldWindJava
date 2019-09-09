@@ -14,7 +14,7 @@ import java.beans.*;
 /**
  * A <code>KMLFeatureTreeNode</code> that represents a KML network link defined by a <code>{@link
  * gov.nasa.worldwind.ogc.kml.KMLNetworkLink}</code>.
- * <p/>
+ * <p>
  * <code>KMLNetworkLinkTreeNode</code>  automatically repopulates its hierarchy when its <code>KMLNetworkLink</code> is
  * refreshed, and notifies its listeners when this happens.
  *
@@ -49,7 +49,7 @@ public class KMLNetworkLinkTreeNode extends KMLContainerTreeNode
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Additionally, this node's hierarchy is populated from the KML features in its <code>KMLNetworkLink</code>, and
      * this registers a <code>RETRIEVAL_STATE_SUCCESSFUL</code> property change listener on the
      * <code>KMLNetworkLink</code>.
@@ -96,7 +96,7 @@ public class KMLNetworkLinkTreeNode extends KMLContainerTreeNode
      * Called when this node's <code>KMLNetworkLink</code> refreshes. Clears this node's hierarchy by removing its
      * children, then adds a new <code>KMLFeatureTreeNode</code> to this node for each KML feature in the
      * <code>KMLNetworkLink</code>.
-     * <p/>
+     * <p>
      * If the <code>KMLNetworkLink</code>'s top level feature is a <code>KMLDocument</code>, this method ignores the
      * document and adds its children directly to this node. Creating a node for the document adds an extra level to the
      * tree node that doesn't provide any meaningful grouping.

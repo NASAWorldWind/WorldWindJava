@@ -169,7 +169,7 @@ public class KMLExportUtil
      *
      * @param hexString String to manipulate.
      *
-     * @return The portion of {@code hexString} after the 0X. For example: "0X00FF00" => "00FF00". If the string does
+     * @return The portion of {@code hexString} after the 0X. For example: "0X00FF00" =&gt; "00FF00". If the string does
      *         not begin with 0X, {@code hexString} is returned. The comparison is not case sensitive.
      */
     public static String stripHexPrefix(String hexString)

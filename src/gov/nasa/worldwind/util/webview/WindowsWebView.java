@@ -23,8 +23,7 @@ import java.util.logging.Level;
 /**
  * {@link WebView} implementation for Windows. This implementation uses the Window's native web browser control and the
  * MSHTML library to render a web page and create an OpenGL texture from the web browser window.
- * <p/>
- * <a name="limits"><h2>Limits on the number of WebViews that can be created</h2></a> WindowsWebView creates a hidden
+ * <h2>Limits on the number of WebViews that can be created</h2> WindowsWebView creates a hidden
  * native window. Creating the native window can fail if the process runs out of Windows user object handles. Other GUI
  * elements in an application also consume these handles, so it is difficult to put a firm limit on how many WebViews
  * can be created. An application that creates only WebViews and no other windows can create about 1500 WebViews before
@@ -347,7 +346,7 @@ public class WindowsWebView extends AbstractWebView
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to apply the active state to the native WebView.
      */
     @Override

@@ -19,11 +19,10 @@ import java.util.*;
 /**
  * Represents the KML <i>Region</i> element and provides access to its contents. Regions define an area of interest
  * described by a geographic bounding box and an optional minimum and maximum altitude.
- * <p/>
- * <strong>Bounding Box</strong> </br> A Region's bounding box controls when the Region is active by defining a volume
+ * <p>
+ * <strong>Bounding Box</strong> <br> A Region's bounding box controls when the Region is active by defining a volume
  * that must intersect the viewing frustum. The bounding box is computed according to the <code>altitudeMode</code>
  * attribute of a Region's geographic <code>LatLonAltBox</code> as follows:
- * <p/>
  * <ul> <li><strong>clampToGround (default)</strong>: The bounding box encloses the terrain surface in the sector
  * defined by the north, south, east, and west limits of this Region's <code>LatLonAltBox</code>.</li>
  * <li><strong>relativeToGround</strong>: The bounding box encloses the volume in the sector defined by the north,
@@ -32,11 +31,10 @@ import java.util.*;
  * bounding box encloses the volume in the sector defined by the north, south, east, and west limits of the Region's
  * <code>LatLonAltBox</code>, and who's upper and lower altitude are specified by its minAltitude and maxAltitude,
  * relative to mean sea level.</li> </ul>
- * <p/>
- * <strong>Level of Detail</strong> <br/> A Region's level of detail determines when it is active by defining an upper
+ * <p>
+ * <strong>Level of Detail</strong> <br> A Region's level of detail determines when it is active by defining an upper
  * and lower boundary on the Region's screen area or the Region's distance to the view. The level of detail is computed
  * according to the <code>altitudeMode</code> attribute of a Region's geographic <code>LatLonAltBox</code> as follows:
- * <p/>
  * <ul> <li><strong>clampToGround (default)</strong>: The level of detail is determined by computing the distance from
  * the eye point and Region sector, scaling the distance by the <code>KMLTraversalContext's</code> detail hint, then
  * comparing that scaled distance to the Region's min and max pixel sizes in meters (the Region sector's area divided by
@@ -50,24 +48,24 @@ import java.util.*;
  * level of detail is determined by computing the number of pixels the Region occupies on screen, and comparing that
  * pixel count to the Region's <code>minLodPixels</code> and <code>maxLodPixels</code>. The Region is active when the
  * pixel count is greater or equal to <code>minLodPixels</code> and less than <code>maxLodPixels</code>.</li> </ul>
- * <p/>
+ * <p>
  * In order to prevent Regions with adjacent level of detail ranges from activating at the same time, Region gives
  * priority to higher level of detail ranges. For example, suppose that two KML features representing different detail
  * levels of a Collada model have Regions with LOD range 100-200 and 200-300. Region avoids activating both features in
  * the event that both their level of detail criteria are met by giving priority to the second range: 200-300.
- * <p/>
- * <strong>KML Feature Hierarchies</strong> <br/> When a Region is attached to a KML feature, the feature and its
+ * <p>
+ * <strong>KML Feature Hierarchies</strong> <br> When a Region is attached to a KML feature, the feature and its
  * descendants are displayed only when the Region is active. A Region is active when its bounding box is in view and its
  * level of detail criteria are met. Region provides the <code>isActive</code> method for determining if a Region is
  * active for a specified <code>DrawContext</code>.
- * <p/>
+ * <p>
  * Regions do not apply directly to KML containers, because a descendant feature can override the container's Region
  * with its own Region. If a feature does not specify a Region it inherits the Region of its nearest ancestor. Since a
  * child feature's Region may be larger or have a less restrictive level of detail range than its ancestor's Region, the
  * visibility of an entire KML feature tree cannot be determined based on a container's Region. Instead, visibility must
  * be determined at each leaf feature.
- * <p/>
- * <strong>Limitations</strong> <br/> The Region bounding box must lie between -90 to 90 degrees latitude, and -180 to
+ * <p>
+ * <strong>Limitations</strong> <br> The Region bounding box must lie between -90 to 90 degrees latitude, and -180 to
  * 180 degrees longitude. Regions that span the date line are currently not supported.
  *
  * @author tag
@@ -94,33 +92,33 @@ public class KMLRegion extends KMLAbstractObject
     /**
      * <code>RegionData</code> holds a Region's computed data used during a single call to <code>Region.isActive</code>,
      * and is unique to a particular <code>Globe</code>.
-     * <p/>
+     * <p>
      * RegionData entries are places in a Region's <code>regionDataCache</code>, and are retrieved during each call to
      * <code>isActive</code> using the current <code>Globe</code> as the cache key. RegionData's elements depend on the
      * <code>Globe's</code> <code>ElevationModel</code>, and therefore cannot be permanently cached. Each RegionData
      * entry is valid for a random amount of time between its <code>minExpiryTime</code> and its
      * <code>maxExpiryTime</code>, after which it must be regenerated. The time is randomized to amortize the cost of
      * regenerating data for multiple Regions over multiple frames.
-     * <p/>
-     * <strong>isActive</strong> <br/> RegionData's <code>isActive</code> property indicates whether the Region
+     * <p>
+     * <strong>isActive</strong> <br> RegionData's <code>isActive</code> property indicates whether the Region
      * associated with a RegionData entry is active. This is used to share the result of computing <code>isActive</code>
      * among multiple calls during the same frame. For example, the preRender and render passes need not each compute
      * <code>isActive</code>, and can therefore share the same computation by ensuring that this property is set at most
      * once per frame. Callers determine when to recompute <code>isActive</code> by comparing the
      * <code>DrawContext's</code> current frame number against the RegionData's <code>activeFrameNumber</code>. This
      * property is accessed by calling <code>isActive</code> and <code>setActive</code>.
-     * <p/>
-     * <strong>extent</strong> <br/> RegionData's <code>extent</code> property is an <code>Extent</code> used to
+     * <p>
+     * <strong>extent</strong> <br> RegionData's <code>extent</code> property is an <code>Extent</code> used to
      * determine if a Region's bounding box is in view. This property is accessed by calling <code>getExtent</code> and
      * <code>setExtent</code>. May be <code>null</code>.
-     * <p/>
-     * <strong>sector</strong> <br/> RegionData's <code>sector</code> property is a <code>Sector</code> used to
+     * <p>
+     * <strong>sector</strong> <br> RegionData's <code>sector</code> property is a <code>Sector</code> used to
      * determine if Regions with an <code>altitudeMode</code> of <code>clampToGround</code> are in view. Accessed by
      * calling <code>getSector</code> and <code>setSector</code>. When a Region's <code>altitudeMode</code> is
      * <code>clampToGround</code>, the Region's sector can be used to determine visibility because the Region is defined
      * to be on the <code>Globe's</code> surface.
-     * <p/>
-     * <strong>points</strong> <br/> RegionData's <code>points</code> property indicates a list of model-coordinate
+     * <p>
+     * <strong>points</strong> <br> RegionData's <code>points</code> property indicates a list of model-coordinate
      * points representing the corners and interior of the Region. These points are used to determine the distance
      * between the Region and the <code>View's</code> eye point. If the Region has altitude mode of
      * <code>clampToGround</code>, this list must contain five points: the model-coordinate points of the Region's four
@@ -289,7 +287,7 @@ public class KMLRegion extends KMLAbstractObject
          * Specifies the model-coordinate points representing the corners and interior of this entry's Region. These
          * points are used to determine the distance between this entry's Region and the <code>View's</code> eye point.
          * Specify <code>null</code> to indicate that this entry' Region has no geographic bounding box.
-         * <p/>
+         * <p>
          * If this entry's Region has altitude mode <code>clampToGround</code>, this list must contain five points: the
          * model-coordinate points of the Region's four corners and center point on the surface terrain.
          *
@@ -370,7 +368,7 @@ public class KMLRegion extends KMLAbstractObject
      * Indicates whether this Region is active on the specified <code>DrawContext</code>. A Region is active if its
      * bounding box intersects the viewing frustum, and its level of detail criteria are met for the specified traversal
      * context and draw context.
-     * <p/>
+     * <p>
      * This always returns <code>true</code> if this Region has no bounding box, or if its bounding box is in the
      * viewing frustum and this Region has no lod criteria.
      *
@@ -476,7 +474,7 @@ public class KMLRegion extends KMLAbstractObject
     /**
      * Indicates whether this Region's data must be recomputed, either as a result of a change in the
      * <code>Globe's</code> state or the expiration of the geometry regeneration interval.
-     * <p/>
+     * <p>
      * A <code>{@link gov.nasa.worldwind.ogc.kml.KMLRegion.RegionData}</code> must be current when this method is
      * called.
      *
@@ -703,7 +701,7 @@ public class KMLRegion extends KMLAbstractObject
     /**
      * Indicates whether this Region intersects the viewing frustum for the specified <code>DrawContext</code>. A
      * <code>{@link gov.nasa.worldwind.ogc.kml.KMLRegion.RegionData}</code> must be current when this method is called.
-     * <p/>
+     * <p>
      * This returns <code>true</code> if this Region has no bounding box, or if its bounding box cannot be computed for
      * any reason.
      *
@@ -727,7 +725,7 @@ public class KMLRegion extends KMLAbstractObject
     /**
      * Indicates whether the specified <code>DrawContext</code> meets this Region's level of detail criteria. A
      * <code>{@link gov.nasa.worldwind.ogc.kml.KMLRegion.RegionData}</code> must be current when this method is called.
-     * <p/>
+     * <p>
      * This returns <code>true</code> if this Region has no level of criteria, or if its level of detail cannot be
      * compared against the bounding box for any reason.
      *

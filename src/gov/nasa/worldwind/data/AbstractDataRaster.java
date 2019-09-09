@@ -213,12 +213,12 @@ public abstract class AbstractDataRaster extends AVListImpl implements DataRaste
      * Reads the specified region of interest (ROI) with given extent, width, and height, and type
      *
      * @param params Required parameters are:
-     *               <p/>
+     *               <p>
      *               AVKey.HEIGHT as Integer, specifies a height of the desired ROI AVKey.WIDTH as Integer, specifies a
      *               width of the desired ROI AVKey.SECTOR as Sector, specifies an extent of the desired ROI
-     *               <p/>
+     *               <p>
      *               Optional parameters are:
-     *               <p/>
+     *               <p>
      *               AVKey.BAND_ORDER as array of integers, examples: for RGBA image: new int[] { 0, 1, 2, 3 }, or for
      *               ARGB image: new int[] { 3, 0, 1, 2 } or if you want only RGB bands of the RGBA image: new int[] {
      *               0, 1, 2 } or only Intensity (4th) band of the specific aerial image: new int[] { 3 }

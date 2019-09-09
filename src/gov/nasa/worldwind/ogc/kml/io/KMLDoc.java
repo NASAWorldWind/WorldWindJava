@@ -20,7 +20,7 @@ public interface KMLDoc
     /**
      * Returns an {@link InputStream} to the associated KML document within either a KML file or stream or a KMZ file or
      * stream.
-     * <p/>
+     * <p>
      * Implementations of this interface do not close the stream; the user of the class must close the stream.
      *
      * @return an input stream positioned to the head of the KML document.

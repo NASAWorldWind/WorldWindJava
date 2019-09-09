@@ -18,18 +18,18 @@ import java.io.*;
 
 /**
  * Open and view arbitrary surface images and elevations that have an accompanying world file.
- * <p/>
+ * <p>
  * After clicking the open button and selecting the desired image or elevations file, the program status will change to
  * Loading while WorldWind installs the selected data.  Wait until the status changes to Ready. The data will have
  * finished installing and will be ready for viewing.
- * <p/>
+ * <p>
  * Image and elevation files that you wish to load must be accompanied by a world file, or they will fail to load. The
  * world file can be identified as the file with a file extension consisting of three letters.  The first two of these
  * will be the first and last letters of the image or elevation file type, e.g. tf for a tiff file, or jg for a jpeg
  * file.  The last letter will be a double.
- * <p/>
+ * <p>
  * For example, a world file accompanying a jpeg file would have the extension .jgw :
- * <p/>
+ * <p>
  * image.jpg           // image file
  * image.jgw           // accompanying world file
  *

@@ -654,7 +654,7 @@ public interface MetocSidc
     final String OCA_GPHY_MNEWBD_IMTBUR_10_20 = "WO-DGMIBC---A--";
     /** Impact burial,  20-75%. */
     final String OCA_GPHY_MNEWBD_IMTBUR_20_75 = "WO-DGMIBD---A--";
-    /** Impact burial, >75%. */
+    /** Impact burial, &gt;75%. */
     final String OCA_GPHY_MNEWBD_IMTBUR_75 = "WO-DGMIBE---A--";
     /** Miw bottom category, a. */
     final String OCA_GPHY_MNEWBD_MIWBC_A = "WO-DGMBCA---A--";

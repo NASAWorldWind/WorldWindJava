@@ -12,7 +12,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwindx.applications.worldwindow.util.Util;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -23,9 +23,8 @@ import java.util.List;
  * and tracks the list of objects intersecting the screen rectangle. The screen rectangle is displayed on a layer
  * created by ScreenSelector, and is used as the WorldWindow's pick rectangle to perform object selection. Objects
  * intersecting the screen rectangle can be accessed by calling {@link #getSelectedObjects()}.
- * <p/>
  * <h3>Using ScreenSelector</h3>
- * <p/>
+ * <p>
  * To use ScreenSelector in an application, create a new instance of ScreenSelector and specify the application's
  * WorldWindow as the sole parameter. When the user wants to define a screen selection, call {@link #enable} and the
  * ScreenSelector then translates mouse events to changes in the selection rectangle. The selection rectangle is
@@ -33,19 +32,18 @@ import java.util.List;
  * ScreenSelector consumes mouse events it responds in order to suppress navigation events while the user is performing
  * a selection. When the user selection is complete, call {@link #disable} and the ScreenSelector stops responding to
  * mouse events.
- * <p/>
+ * <p>
  * While the ScreenSelector is enabled it keeps track of the objects intersecting the selection rectangle, which can be
  * accessed by calling getSelectedObjects. When the list of selected objects changes, SceneSelector sends
  * SELECTION_STARTED, SELECTION_CHANGED, and SELECTION_ENDED messages to its message listeners. These three messages
  * correspond to the user starting a selection, changing what's in the selection, and completing the selection. To
  * receive a notification when the list of selected objects changes, register a MessageListener with the SceneSelector
  * by calling {@link #addMessageListener(gov.nasa.worldwind.event.MessageListener)}.
- * <p/>
+ * <p>
  * Note that enabling or disabling the ScreenSelector does not change its list of selected objects. The list of selected
  * objects only changes in response to user input when the ScreenSelector is enabled.
- * <p/>
  * <h3>User Input</h3>
- * <p/>
+ * <p>
  * When ScreenSelector is enabled, pressing the first mouse button causes ScreenSelector to set its selection to a
  * rectangle at the cursor with zero width and height, then clear the list of selected objects. Subsequently dragging
  * the mouse causes ScreenSelector to update its selection rectangle to include the starting point and the current
@@ -53,22 +51,21 @@ import java.util.List;
  * causes ScreenSelector to stop displaying the selection rectangle, but does not change the list of selected objects.
  * Keeping the list of selected object available after the selection is complete enables applications to access the
  * user's final selection by calling getSelectedObjects.
- * <p/>
+ * <p>
  * To customize ScreenSelector's response to mouse events, create a subclass of ScreenSelector and override the methods
  * mousePressed, mouseReleased, and mouseDragged. To customize ScreenSelector's response to screen rectangle select
  * events, override the method selected.
- * <p/>
+ * <p>
  * ScreenSelector translates its raw mouse events to the methods selectionStarted, selectionEnded, and selectionChanged.
  * To customize how ScreenSelector responds to these semantic events without changing the user input model, create a
  * subclass of ScreenSelector and override any of these methods.
- * <p/>
  * <h3>Screen Rectangle Appearance</h3>
- * <p/>
+ * <p>
  * To customize the appearance of the rectangle displayed by ScreenRectangle, call {@link
  * #setInteriorColor(java.awt.Color)} and {@link #setBorderColor(java.awt.Color)} to specify the rectangle's interior
  * and border colors, respectively. Setting either value to <code>null</code> causes ScreenRectangle to use the default
  * values: 25% opaque white interior, 100% opaque white border.
- * <p/>
+ * <p>
  * To further customize the displayed rectangle, create a subclass of ScreenSelector, override the method
  * createSelectionRectangle, and return a subclass of the internal class ScreenSelector.SelectionRectangle.
  *

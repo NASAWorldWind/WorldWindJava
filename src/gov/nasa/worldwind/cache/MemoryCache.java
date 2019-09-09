@@ -57,7 +57,7 @@ public interface MemoryCache
     void removeCacheListener(CacheListener listener);
 
     /**
-     * Discovers whether or not this cache contains the object referenced by <code> key. Currently no interface exists
+     * Discovers whether or not this cache contains the object referenced by <code> key </code>. Currently no interface exists
      * to discover if an object resides in the cache by referencing itself.
      *
      * @param key the key which the object is referenced by.
@@ -70,10 +70,10 @@ public interface MemoryCache
      * Attempts to add the object <code>clientObject</code>, with size <code>objectSize</code> and referred to by
      * <code>key</code> to the cache. <code>objectSize</code> is the size in cache units, but is not checked for
      * accuracy. Returns whether or not the add was successful.
-     * <p/>
+     * <p>
      * Note that the size passed in may be used, rather than the real size of the object. In some implementations, the
      * accuracy of the space used calls will depend on the collection of these sizes, rather than actual size.
-     * <p/>
+     * <p>
      * This method should be declared <code>synchronized</code> when it is implemented.
      *
      * @param key          an object used to reference the cached item.
@@ -87,7 +87,7 @@ public interface MemoryCache
     /**
      * Attempts to add the <code>Cacheable</code> object referenced by the key. No explicit size value is required as
      * this method queries the Cacheable to discover the size.
-     * <p/>
+     * <p>
      * This method should be declared <code>synchronized</code> when it is implemented.
      *
      * @param key          an object used to reference the cached item.
@@ -120,7 +120,7 @@ public interface MemoryCache
     /**
      * Empties the cache. After calling <code>clear()</code> on a <code>MemoryCache</code>, calls relating to used
      * capacity and number of items should return zero and the free capacity should be the maximum capacity.
-     * <p/>
+     * <p>
      * This method should be declared <code>synchronized</code> when it is implemented and should notify all
      * <code>CacheListener</code>s of entries removed.
      */

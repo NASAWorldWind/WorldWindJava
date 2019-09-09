@@ -45,7 +45,7 @@ public class WWEvent extends EventObject
 
     /**
      * Returns whether or not the event has been consumed.
-     * <p/>
+     * <p>
      * Note: if the event cannot be consumed, this still returns {@code true} if {@link #consume()} has been called,
      * though this has no effect.
      *

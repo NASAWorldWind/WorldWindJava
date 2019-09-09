@@ -15,9 +15,8 @@ import java.util.*;
 /**
  * Iterator that computes the positions required to draw a triangle wave along a line specified by control positions.
  * The generated wave looks like this:
- * <p/>
  * <pre>
- *           /\             /\         <--- Amplitude
+ *           /\             /\         &lt;--- Amplitude
  *          /  \           /  \
  * ________/    \_________/    \_____
  * ^            ^
@@ -185,12 +184,12 @@ public class TriangleWavePositionIterator implements Iterator
 
     /**
      * Compute the next position along the line, and transition the state machine to the next state (if appropriate).
-     * <p/>
+     * <p>
      * If the current state is STATE_LINE, this method returns either the next control point (if it is less than
      * waveLength meters from the current position, or a position waveLength meters along the control line. The state
      * machine will transition to STATE_WAVE_START only if the returned position is a full wavelength from the current
      * position.
-     * <p/>
+     * <p>
      * If the current state is STATE_WAVE_START, this method returns a position waveLength meters from the current
      * position along the control line, and transitions to state STATE_WAVE_PEAK.
      *

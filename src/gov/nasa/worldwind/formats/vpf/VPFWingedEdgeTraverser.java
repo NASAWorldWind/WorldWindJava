@@ -32,12 +32,14 @@ public class VPFWingedEdgeTraverser
     }
 
     /**
-     * Implementation of the Wiged-Edge Algorithm for ring primitives, described in DIGEST Part 2, Annex C2.4.3. Given a
+     * Implementation of the Wiged-Edge Algorithm for ring primitives, described in DIGEST Part 2, Annex C2.4.3.Given a
      * row from the ring primitive table, navigate the ring and edge primitive tables to construct the edge information
      * associated with the specified ring.
      *
+     * @param faceId The face.
+     * @param startEdgeId The start edge.
      * @param edgeInfoArray the edge primitive data.
-     * @param listener      the ring edge listener, may be null.
+     * @param listener the ring edge listener, may be null.
      *
      * @return the number of edges composing the specified ring.
      */

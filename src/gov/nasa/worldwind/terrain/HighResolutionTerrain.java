@@ -329,7 +329,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
 
     /**
      * Intersect a line with the terrain.
-     * <p/>
+     * <p>
      * Note: This method produces a result only if the line is below the globe's horizon, i.e., it intersects the
      * globe's ellipsoid. If the line is above the horizon, null is returned even if there is terrain in the path of the
      * line.
@@ -447,7 +447,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
      *                  positions[3], etc.
      * @param callback  An object to call in order to return the computed intersections.
      *
-     * @throws InterruptedException
+     * @throws InterruptedException if the operation is interrupted.
      */
     public void intersect(List<Position> positions, final IntersectionCallback callback) throws InterruptedException
     {
@@ -486,7 +486,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     /**
      * Cause the tiles used by subsequent intersection calculations to be cached so that they are available immediately
      * to those subsequent calculations.
-     * <p/>
+     * <p>
      * Pre-caching is unnecessary and is useful only when it can occur before the intersection calculations are needed.
      * It will incur extra overhead otherwise. The normal intersection calculations cause the same caching.
      *
@@ -535,7 +535,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
     /**
      * Cause the tiles used by subsequent intersection calculations to be cached so that they are available immediately
      * to those subsequent calculations.
-     * <p/>
+     * <p>
      * Pre-caching is unnecessary and is useful only when it can occur before the intersection calculations are needed.
      * It will incur extra overhead otherwise. The normal intersection calculations cause the same caching.
      *
@@ -1130,7 +1130,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
 
     /**
      * Computes the Cartesian, model-coordinate point of a location within a terrain tile.
-     * <p/>
+     * <p>
      * This operation fails with a {@link gov.nasa.worldwind.exception.WWTimeoutException} if a timeout has been
      * specified and it is exceeded during the operation.
      *
@@ -1175,7 +1175,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
 
     /**
      * Computes the Cartesian, model-coordinate point of a location within a terrain tile.
-     * <p/>
+     * <p>
      * This operation fails with a {@link gov.nasa.worldwind.exception.WWTimeoutException} if a timeout has been
      * specified and it is exceeded during the operation.
      *

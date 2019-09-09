@@ -22,44 +22,44 @@ import java.util.List;
  * A utility class to interactively draw shapes and measure distance and area across the terrain. When armed, the class
  * monitors mouse events to allow the definition of a measure shape that can be one of {@link #SHAPE_LINE}, {@link
  * #SHAPE_PATH}, {@link #SHAPE_POLYGON}, {@link #SHAPE_CIRCLE}, {@link #SHAPE_ELLIPSE}, {@link #SHAPE_SQUARE} or {@link
- * #SHAPE_QUAD}. <p/> <p>In order to allow user interaction with the measuring shape, a controller must be set by
+ * #SHAPE_QUAD}.  <p>In order to allow user interaction with the measuring shape, a controller must be set by
  * calling {@link #setController(MeasureToolController)} with a new instance of a <code>MeasureToolController</code>.</p>
- * <p/> <p>The interaction sequence for drawing a shape and measuring is as follows: <ul> <li>Set the measure
+ *  <p>The interaction sequence for drawing a shape and measuring is as follows: </p>  <ul> <li>Set the measure
  * shape.</li> <li>Arm the <code>MeasureTool</code> object by calling its {@link #setArmed(boolean)} method with an
  * argument of true.</li> <li>Click on the terrain to add points.</li> <li>Disarm the <code>MeasureTool</code> object by
  * calling its {@link #setArmed(boolean)} method with an argument of false. </li> <li>Read the measured length or area
  * by calling the <code>MeasureTool</code> {@link #getLength()} or {@link #getArea()} method. Note that the length and
- * area can be queried at any time during or after the process.</li> </ul> </p> <p>While entering points or after the
+ * area can be queried at any time during or after the process.</li> </ul><p>While entering points or after the
  * measure tool has been disarmed, dragging the control points allow to change the initial points positions and alter
- * the measure shape.</p> <p/> <p> While the <code>MeasureTool</code> is armed, pressing and immediately releasing mouse
+ * the measure shape.</p>  <p> While the <code>MeasureTool</code> is armed, pressing and immediately releasing mouse
  * button one while also pressing the control key (Ctl) removes the last point entered. Once the
  * <code>MeasureTool</code> is disarmed, a measure shape of type SHAPE_POLYGON can be moved by dragging a control point
- * while pressing the alt/option key.</p> <p/> <p>Arming and disarming the <code>MeasureTool</code> does not change the
+ * while pressing the alt/option key.</p>  <p>Arming and disarming the <code>MeasureTool</code> does not change the
  * contents or attributes of the measure tool's layer. Note that the measure tool will NOT disarm itself after the
  * second point of a line or a regular shape has been entered - the MeasureToolController has that responsibility.</p>
- * <p/> <p><b>Setting the measure shape from the application</b></p> <p/> <p>The application can set the measure shape
+ *  <p><b>Setting the measure shape from the application</b></p>  <p>The application can set the measure shape
  * to an arbitrary list of positions using {@link #setPositions(java.util.ArrayList)}. If the provided list contains two
  * positions, the measure shape will be set to {@link #SHAPE_LINE}. If more then two positions are provided, the measure
  * shape will be set to {@link #SHAPE_PATH} if the last position differs from the first (open path), or {@link
- * #SHAPE_POLYGON} if the path is closed.</p> <p/> <p>The application can also set the measure shape to a predefined
+ * #SHAPE_POLYGON} if the path is closed.</p>  <p>The application can also set the measure shape to a predefined
  * regular shape by calling {@link #setMeasureShapeType(String, Position, double, double, Angle)}, providing a shape
  * type (one of {@link #SHAPE_CIRCLE}, {@link #SHAPE_ELLIPSE}, {@link #SHAPE_SQUARE} or {@link #SHAPE_QUAD}), a center
- * position, a width, a height (in meters) and a heading angle.</p> <p/> <p>Finally, the application can use an existing
+ * position, a width, a height (in meters) and a heading angle.</p>  <p>Finally, the application can use an existing
  * <code>Polyline</code> or <code>SurfaceShape</code> by using {@link #setMeasureShape(Polyline)} or {@link
  * #setMeasureShape(SurfaceShape)}. The surface shape can be one of <code>SurfacePolyline</code>,
  * <code>SurfacePolygon</code>, <code>SurfaceQuad</code>, <code>SurfaceSquare</code>, <code>SurfaceEllipse</code> or
- * <code>SurfaceCircle</code>. <p/> <p><b>Measuring</b></p> <p/> <p>The application can read the measured length or area
+ * <code>SurfaceCircle</code>.  <p><b>Measuring</b></p> <p>The application can read the measured length or area
  * by calling the <code>MeasureTool</code> {@link #getLength()} or {@link #getArea()} method. These methods will return
- * -1 when no value is available.</p> <p/> <p>Regular shapes are defined by a center position, a width a height and a
+ * -1 when no value is available.</p>  <p>Regular shapes are defined by a center position, a width a height and a
  * heading angle. Those attributes can be accessed by calling the {@link #getCenterPosition()}, {@link #getWidth()},
- * {@link #getHeight()} and {@link #getOrientation()} methods.</p> <p/> <p>The measurements are displayed in units
+ * {@link #getHeight()} and {@link #getOrientation()} methods.</p>  <p>The measurements are displayed in units
  * specified in the measure tool's {@link UnitsFormat} object. Access to the units format is via the method {@link
- * #getUnitsFormat()}. <p/> <p><b>Events</b></p> <p/> <p>The <code>MeasureTool</code> will send events on several
+ * #getUnitsFormat()}.  <p><b>Events</b></p> <p>The <code>MeasureTool</code> will send events on several
  * occasions: when the position list has changed - {@link #EVENT_POSITION_ADD}, {@link #EVENT_POSITION_REMOVE} or {@link
  * #EVENT_POSITION_REPLACE}, when metrics has changed {@link #EVENT_METRIC_CHANGED} or when the tool is armed or
- * disarmed {@link #EVENT_ARMED}.</p> <p/> <p>Events will also be fired at the start and end of a rubber band operation
- * during shape creation: {@link #EVENT_RUBBERBAND_START} and {@link #EVENT_RUBBERBAND_STOP}.</p> <p/> <p>See {@link
- * gov.nasa.worldwindx.examples.MeasureToolPanel} for some events usage.</p> <p/> <p>Several instances of this class can
+ * disarmed {@link #EVENT_ARMED}.</p>  <p>Events will also be fired at the start and end of a rubber band operation
+ * during shape creation: {@link #EVENT_RUBBERBAND_START} and {@link #EVENT_RUBBERBAND_STOP}.</p>  <p>See {@link
+ * gov.nasa.worldwindx.examples.MeasureToolPanel} for some events usage.</p>  <p>Several instances of this class can
  * be used simultaneously. However, each instance should be disposed of after usage by calling the {@link #dispose()}
  * method.</p>
  *

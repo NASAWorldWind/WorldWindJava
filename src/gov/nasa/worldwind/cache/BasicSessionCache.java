@@ -11,11 +11,11 @@ import gov.nasa.worldwind.util.*;
  * BasicSessionCache is a general receiving area for data represented as key-value pairs. Entries in a BasicSessionCache
  * may persist for the length of a Virtual Machine's run time, but may be evicted if the cache size increases beyond its
  * capacity.
- * <p/>
+ * <p>
  * Eviction of BasicSessionCache entries is accomplished by controlling the maximum number of entries in the cache. This
  * maximum value is set by calling {@link #setCapacity(int)}. The eldest entry in the cache (the first entry added) is
  * always evicted before any others.
- * <p/>
+ * <p>
  * BasicSessionClass is a thread safe class. Access to the cache data structures is synchronized at the method level.
  * Care must be taken by subclasses to ensure that method level synchronization is maintained.
  *

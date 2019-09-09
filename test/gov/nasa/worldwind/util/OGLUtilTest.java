@@ -12,7 +12,7 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.io.*;
 import java.net.URL;
 

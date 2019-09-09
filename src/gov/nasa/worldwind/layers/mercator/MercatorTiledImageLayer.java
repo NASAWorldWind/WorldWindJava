@@ -15,7 +15,7 @@ import gov.nasa.worldwind.retrieve.*;
 import gov.nasa.worldwind.util.*;
 
 import javax.imageio.ImageIO;
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.*;

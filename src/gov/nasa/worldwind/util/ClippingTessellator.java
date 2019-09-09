@@ -7,7 +7,7 @@ package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.geom.Sector;
 
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.glu.*;
 
 // TODO: Consider replacing the clipping capability in PolygonTessellator2 with use of this independent component.
 // TODO: Consider clipping contour coordinates to the sector bounds, rather than just reducing complexity.
@@ -83,8 +83,12 @@ public class ClippingTessellator
 
     /**
      * Computes a 4-bit code indicating the vertex's location in the 9 cell grid defined by the clip coordinates and the
-     * eight adjacent spaces defined by extending the min/max boundaries to infinity. 0 indicates that the vertex is
+     * eight adjacent spaces defined by extending the min/max boundaries to infinity.0 indicates that the vertex is
      * inside the clip coordinates.
+     *
+     * @param degreesLatitude The latitude for computation.
+     * @param degreesLongitude The longitude for computation.
+     * @return The vertex location code.
      */
     protected int clipCode(double degreesLatitude, double degreesLongitude)
     {

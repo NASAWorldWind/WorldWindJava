@@ -56,9 +56,9 @@ import com.jogamp.opengl.util.packrect.*;
 import com.jogamp.opengl.util.texture.TextureCoords;
 import jogamp.opengl.Debug;
 
-import javax.media.opengl.*;
-import javax.media.opengl.awt.GLCanvas;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.awt.GLCanvas;
+import com.jogamp.opengl.glu.GLU;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.*;
@@ -80,15 +80,15 @@ import java.util.List;
 
     Using the {@link TextRenderer TextRenderer} is simple. Add a
     "<code>TextRenderer renderer;</code>" field to your {@link
-    javax.media.opengl.GLEventListener GLEventListener}. In your {@link
-    javax.media.opengl.GLEventListener#init init} method, add:
+    com.jogamp.opengl.GLEventListener GLEventListener}. In your {@link
+    com.jogamp.opengl.GLEventListener#init init} method, add:
 
     <PRE>
     renderer = new TextRenderer(new Font("SansSerif", Font.BOLD, 36));
     </PRE>
 
-    <P> In the {@link javax.media.opengl.GLEventListener#display display} method of your
-    {@link javax.media.opengl.GLEventListener GLEventListener}, add:
+    <P> In the {@link com.jogamp.opengl.GLEventListener#display display} method of your
+    {@link com.jogamp.opengl.GLEventListener GLEventListener}, add:
     <PRE>
     renderer.beginRendering(drawable.getWidth(), drawable.getHeight());
     // optionally set the color
@@ -314,28 +314,32 @@ public class TextRenderer {
         mGlyphProducer = new GlyphProducer(font.getNumGlyphs());
     }
 
-    /** Returns the bounding rectangle of the given String, assuming it
-        was rendered at the origin. See {@link #getBounds(CharSequence)
-        getBounds(CharSequence)}. */
+    /**
+     * Returns the bounding rectangle of the given String, assuming it was rendered at the origin.See
+     * {@link #getBounds(CharSequence) getBounds(CharSequence)}.
+     *
+     * @param str The string.
+     * @return The bounding rectangle for str.
+     */
     public Rectangle2D getBounds(String str) {
         return getBounds((CharSequence) str);
     }
 
-    /** Returns the bounding rectangle of the given CharSequence,
-        assuming it was rendered at the origin. The coordinate system of
-        the returned rectangle is Java 2D's, with increasing Y
-        coordinates in the downward direction. The relative coordinate
-        (0, 0) in the returned rectangle corresponds to the baseline of
-        the leftmost character of the rendered string, in similar
-        fashion to the results returned by, for example, {@link
-        java.awt.font.GlyphVector#getVisualBounds}. Most applications
-        will use only the width and height of the returned Rectangle for
-        the purposes of centering or justifying the String. It is not
-        specified which Java 2D bounds ({@link
-        java.awt.font.GlyphVector#getVisualBounds getVisualBounds},
-        {@link java.awt.font.GlyphVector#getPixelBounds getPixelBounds},
-        etc.) the returned bounds correspond to, although every effort
-        is made to ensure an accurate bound. */
+    /**
+     * Returns the bounding rectangle of the given CharSequence, assuming it was rendered at the origin.The coordinate
+     * system of the returned rectangle is Java 2D's, with increasing Y coordinates in the downward direction.The
+     * relative coordinate (0, 0) in the returned rectangle corresponds to the baseline of the leftmost character of the
+     * rendered string, in similar fashion to the results returned by, for example,
+     * {@link java.awt.font.GlyphVector#getVisualBounds}. Most applications will use only the width and height of the
+     * returned Rectangle for the purposes of centering or justifying the String. It is not specified which Java 2D
+     * bounds ({@link
+     * java.awt.font.GlyphVector#getVisualBounds getVisualBounds},
+     * {@link java.awt.font.GlyphVector#getPixelBounds getPixelBounds}, etc.) the returned bounds correspond to,
+     * although every effort is made to ensure an accurate bound.
+     *
+     * @param str The string.
+     * @return The bounds of the string.
+     */
     public Rectangle2D getBounds(CharSequence str) {
         // FIXME: this should be more optimized and use the glyph cache
         Rect r = stringLocations.get(str);
@@ -354,16 +358,22 @@ public class TextRenderer {
                                                   getFontRenderContext()));
     }
 
-    /** Returns the Font this renderer is using. */
+    /**
+     * Returns the Font this renderer is using.
+     *
+     * @return The Font.
+     */
     public Font getFont() {
         return font;
     }
 
-    /** Returns a FontRenderContext which can be used for external
-        text-related size computations. This object should be considered
-        transient and may become invalidated between {@link
-        #beginRendering beginRendering} / {@link #endRendering
-        endRendering} pairs. */
+    /**
+     * * Returns a FontRenderContext which can be used for external text-related size computations.This object should be
+     * considered transient and may become invalidated between
+     * {@link #beginRendering beginRendering} / {@link #endRendering endRendering} pairs.
+     *
+     * @return A FontRenderContext.
+     */
     public FontRenderContext getFontRenderContext() {
         if (cachedFontRenderContext == null) {
             cachedFontRenderContext = getGraphics2D().getFontRenderContext();
@@ -386,7 +396,7 @@ public class TextRenderer {
 
         @param width the width of the current on-screen OpenGL drawable
         @param height the height of the current on-screen OpenGL drawable
-        @throws javax.media.opengl.GLException If an OpenGL context is not current when this method is called
+        @throws com.jogamp.opengl.GLException If an OpenGL context is not current when this method is called
     */
     public void beginRendering(int width, int height) throws GLException {
         beginRendering(width, height, true);
@@ -497,9 +507,14 @@ public class TextRenderer {
         draw3D(str, x, y, 0, 1);
     }
 
-    /** Draws the supplied String at the desired location using the
-        renderer's current color. See {@link #draw(CharSequence, int,
-        int) draw(CharSequence, int, int)}. */
+    /**
+     * * Draws the supplied String at the desired location using the renderer's current color.See
+     * {@link #draw(CharSequence, int, int) draw(CharSequence, int, int)}.
+     *
+     * @param str The string to draw.
+     * @param x The desired x location.
+     * @param y The desired y location.
+     */
     public void draw(String str, int x, int y) throws GLException {
         draw3D(str, x, y, 0, 1);
     }
@@ -521,15 +536,26 @@ public class TextRenderer {
         internal_draw3D(str, x, y, z, scaleFactor);
     }
 
-    /** Draws the supplied String at the desired 3D location using the
-        renderer's current color. See {@link #draw3D(CharSequence,
-        float, float, float, float) draw3D(CharSequence, float, float,
-        float, float)}. */
+    /**
+     * * Draws the supplied String at the desired 3D location using the renderer's current color.See {@link #draw3D(CharSequence, float, float, float, float) draw3D(CharSequence, float, float,
+     * float, float)}.
+     *
+     * @param str The string to draw.
+     * @param x The x location.
+     * @param y The y location.
+     * @param z The z location.
+     * @param scaleFactor The scale factor.
+     */
     public void draw3D(String str, float x, float y, float z, float scaleFactor) {
         internal_draw3D(str, x, y, z, scaleFactor);
     }
 
-    /** Returns the pixel width of the given character. */
+    /**
+     * Returns the pixel width of the given character.
+     *
+     * @param inChar The character to measure.
+     * @return The pixel width.
+     */
     public float getCharWidth(char inChar) {
         return mGlyphProducer.getGlyphPixelWidth(inChar);
     }
@@ -944,52 +970,76 @@ public class TextRenderer {
         using the color white, which is modulated by the set color
         during the rendering process. */
     public static interface RenderDelegate {
-        /** Indicates whether the backing store of this TextRenderer
-            should be intensity-only (the default) or full-color. */
+        /**
+         * Indicates whether the backing store of this TextRenderer should be intensity-only (the default) or
+         * full-color.
+         *
+         * @return whether or not intensity only is on.
+         */
         public boolean intensityOnly();
 
-        /** Computes the bounds of the given String relative to the
-            origin. */
+        /**
+         * Computes the bounds of the given String relative to the origin.
+         *
+         * @param str The string to process.
+         * @param font The font to use.
+         * @param frc The render context to use.
+         * @return The bounds given the parameters.
+         */
         public Rectangle2D getBounds(String str, Font font,
                                      FontRenderContext frc);
 
-        /** Computes the bounds of the given character sequence relative
-            to the origin. */
+        /**
+         * Computes the bounds of the given character sequence relative to the origin.
+         *
+         * @param str The string to process.
+         * @param font The font to use.
+         * @param frc The render context to use.
+         * @return The bounds given the parameters.
+         */
         public Rectangle2D getBounds(CharSequence str, Font font,
                                      FontRenderContext frc);
 
-        /** Computes the bounds of the given GlyphVector, already
-            assumed to have been created for a particular Font,
-            relative to the origin. */
+        /**
+         * Computes the bounds of the given GlyphVector, already assumed to have been created for a particular Font,
+         * relative to the origin.
+         *
+         * @param gv The string to process.
+         * @param frc The render context to use.
+         * @return The bounds given the parameters.
+         */
         public Rectangle2D getBounds(GlyphVector gv, FontRenderContext frc);
 
-        /** Render the passed character sequence at the designated
-            location using the supplied Graphics2D instance. The
-            surrounding region will already have been cleared to the RGB
-            color (0, 0, 0) with zero alpha. The initial drawing context
-            of the passed Graphics2D will be set to use
-            AlphaComposite.Src, the color white, the Font specified in the
-            TextRenderer's constructor, and the rendering hints specified
-            in the TextRenderer constructor.  Changes made by the end user
-            may be visible in successive calls to this method, but are not
-            guaranteed to be preserved.  Implementors of this method
-            should reset the Graphics2D's state to that desired each time
-            this method is called, in particular those states which are
-            not the defaults. */
+        /**
+         * * Render the passed character sequence at the designated location using the supplied Graphics2D instance.The
+         * surrounding region will already have been cleared to the RGB color (0, 0, 0) with zero alpha.The initial
+         * drawing context of the passed Graphics2D will be set to use AlphaComposite.Src, the color white, the Font
+         * specified in the TextRenderer's constructor, and the rendering hints specified in the TextRenderer
+         * constructor.Changes made by the end user may be visible in successive calls to this method, but are not
+         * guaranteed to be preserved.Implementors of this method should reset the Graphics2D's state to that desired
+         * each time this method is called, in particular those states which are not the defaults.
+         *
+         * @param graphics The canvas to draw on.
+         * @param str The string to draw.
+         * @param x The x location.
+         * @param y The y location.
+         */
         public void draw(Graphics2D graphics, String str, int x, int y);
 
-        /** Render the passed GlyphVector at the designated location using
-            the supplied Graphics2D instance. The surrounding region will
-            already have been cleared to the RGB color (0, 0, 0) with zero
-            alpha. The initial drawing context of the passed Graphics2D
-            will be set to use AlphaComposite.Src, the color white, the
-            Font specified in the TextRenderer's constructor, and the
-            rendering hints specified in the TextRenderer constructor.
-            Changes made by the end user may be visible in successive
-            calls to this method, but are not guaranteed to be preserved.
-            Implementors of this method should reset the Graphics2D's
-            state to that desired each time this method is called, in
-            particular those states which are not the defaults. */
+        /**
+         * * Render the passed GlyphVector at the designated location using the supplied Graphics2D instance.The
+         * surrounding region will already have been cleared to the RGB color (0, 0, 0) with zero alpha.The initial
+         * drawing context of the passed Graphics2D will be set to use AlphaComposite.Src, the color white, the Font
+         * specified in the TextRenderer's constructor, and the rendering hints specified in the TextRenderer
+         * constructor.Changes made by the end user may be visible in successive calls to this method, but are not
+         * guaranteed to be preserved.Implementors of this method should reset the Graphics2D's state to that desired
+         * each time this method is called, in particular those states which are not the defaults.
+         *
+         * @param graphics The canvas to draw on.
+         * @param str The string to draw.
+         * @param x The x location.
+         * @param y The y location.
+         */
         public void drawGlyphVector(Graphics2D graphics, GlyphVector str,
                                     int x, int y);
     }
@@ -1747,19 +1797,19 @@ public class TextRenderer {
         private CharacterCache() {
         }
 
-        static final Character cache[] = new Character[127 + 1];
+        static final Character CACHE[] = new Character[127 + 1];
 
         static {
-            for (int i = 0; i < cache.length; i++) {
-                cache[i] = new Character((char) i);
+            for (int i = 0; i < CACHE.length; i++) {
+                CACHE[i] = (char) i;
             }
         }
 
         public static Character valueOf(char c) {
             if (c <= 127) { // must cache
-                return CharacterCache.cache[c];
+                return CharacterCache.CACHE[c];
             }
-            return new Character(c);
+            return c;
         }
     }
 
@@ -1951,7 +2001,6 @@ public class TextRenderer {
 
         @Override
         public void dispose(GLAutoDrawable drawable) {
-            glu.destroy();
             glu=null;
             frame=null;
         }
@@ -1972,11 +2021,11 @@ public class TextRenderer {
     }
 
     /**
-     * Sets whether vertex arrays are being used internally for
-     * rendering, or whether text is rendered using the OpenGL
-     * immediate mode commands. This is provided as a concession for
-     * certain graphics cards which have poor vertex array
+     * Sets whether vertex arrays are being used internally for rendering, or whether text is rendered using the OpenGL
+     * immediate mode commands.This is provided as a concession for certain graphics cards which have poor vertex array
      * performance. Defaults to true.
+     *
+     * @param useVertexArrays The desired value.
      */
     public void setUseVertexArrays(boolean useVertexArrays) {
         this.useVertexArrays = useVertexArrays;
@@ -1985,17 +2034,19 @@ public class TextRenderer {
     /**
      * Indicates whether vertex arrays are being used internally for
      * rendering, or whether text is rendered using the OpenGL
-     * immediate mode commands. Defaults to true.
+     * immediate mode commands.Defaults to true.
+     * @return whether userVertexArrays is on or off.
      */
     public final boolean getUseVertexArrays() {
         return useVertexArrays;
     }
 
     /**
-     * Sets whether smoothing (i.e., GL_LINEAR filtering) is enabled
-     * in the backing TextureRenderer of this TextRenderer. A few
-     * graphics cards do not behave well when this is enabled,
-     * resulting in fuzzy text. Defaults to true.
+     * Sets whether smoothing (i.e., GL_LINEAR filtering) is enabled in the backing TextureRenderer of this
+     * TextRenderer.A few graphics cards do not behave well when this is enabled, resulting in fuzzy text. Defaults to
+     * true.
+     *
+     * @param smoothing The new smoothing setting.
      */
     public void setSmoothing(boolean smoothing) {
         this.smoothing = smoothing;
@@ -2003,16 +2054,16 @@ public class TextRenderer {
     }
 
     /**
-     * Indicates whether smoothing is enabled in the backing
-     * TextureRenderer of this TextRenderer. A few graphics cards do
-     * not behave well when this is enabled, resulting in fuzzy text.
-     * Defaults to true.
+     * Indicates whether smoothing is enabled in the backing TextureRenderer of this TextRenderer.A few graphics cards
+     * do not behave well when this is enabled, resulting in fuzzy text. Defaults to true.
+     *
+     * @return The current smoothing setting.
      */
     public boolean getSmoothing() {
         return smoothing;
     }
 
-    private final boolean is15Available(GL gl) {
+    private boolean is15Available(GL gl) {
         if (!checkFor_isExtensionAvailable_GL_VERSION_1_5) {
             isExtensionAvailable_GL_VERSION_1_5 = gl.isExtensionAvailable(GLExtensions.VERSION_1_5);
             checkFor_isExtensionAvailable_GL_VERSION_1_5 = true;

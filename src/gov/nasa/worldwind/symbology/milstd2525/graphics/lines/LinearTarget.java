@@ -20,7 +20,6 @@ import java.util.*;
 
 /**
  * Implementation of Linear Target graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Linear Target (2.X.4.2.1)</li> <li>Linear Smoke Target (2.X.4.2.1.1)</li> <li>Final Protective Fire (FPF)
  * (2.X.4.2.1.2)</li> </ul>
  *

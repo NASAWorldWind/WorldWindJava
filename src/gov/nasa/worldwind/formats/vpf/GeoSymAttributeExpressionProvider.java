@@ -99,7 +99,7 @@ public class GeoSymAttributeExpressionProvider
 
     /**
      * See MIL-HDBK-857A, section 6.4.
-     * <p/>
+     * <p>
      * Parses the specified queue of logical expression components according to the precendence rules specified in
      * MIL-HDBK-857A, returning a reference to a a live Expression which may be evaluated against any set of attribute
      * values.

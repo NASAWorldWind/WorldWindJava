@@ -9,7 +9,7 @@ package gov.nasa.worldwind.render.airspaces;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 
 /**
  * Basic implementation of the {@link gov.nasa.worldwind.render.airspaces.AirspaceAttributes} interface.
@@ -26,8 +26,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     /**
      * Creates a new BasicAirspaceAttributes with the default attributes. The default attributes differ from
      * BasicShapeAttributes, and are as follows:
-     * <p/>
-     * <table> <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
+     * <table> <caption style="font-weight: bold;">Default Attributes</caption><tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
      * <tr><td>drawInterior</td><td><code>true</code></td></tr> <tr><td>drawOutline</td><td><code>false</code></td></tr>
      * <tr><td>enableAntialiasing</td><td><code>false</code></td></tr> <tr><td>enableLighting</td><td><code>true</code></td></tr>
      * <tr><td>interiorMaterial</td><td>{@link gov.nasa.worldwind.render.Material#WHITE}</td></tr>
@@ -50,8 +49,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     /**
      * Creates a new BasicAirspaceAttributes with the specified interior material and interior opacity. All other
      * attributes are set to the default values, which differ from BasicShapeAttributes, and are as follows:
-     * <p/>
-     * <table> <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
+     * <table> <caption style="font-weight: bold;">Default Attributes</caption><tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
      * <tr><td>drawInterior</td><td><code>true</code></td></tr> <tr><td>drawOutline</td><td><code>false</code></td></tr>
      * <tr><td>enableAntialiasing</td><td><code>false</code></td></tr> <tr><td>enableLighting</td><td><code>true</code></td></tr>
      * <tr><td>interiorMaterial</td><td>material</td></tr> <tr><td>outlineMaterial</td><td>{@link
@@ -59,6 +57,9 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
      * <tr><td>outlineOpacity</td><td>1.0</td></tr> <tr><td>outlineWidth</td><td>1.0</td></tr>
      * <tr><td>outlineStippleFactor</td><td>0</td></tr> <tr><td>outlineStipplePattern</td><td>0xF0F0</td></tr>
      * <tr><td>imageSource</td><td><code>null</code></td></tr> <tr><td>imageScale</td><td>1.0</td></tr> </table>
+     * 
+     * @param material Material to apply.
+     * @param opacity the opacity to set.
      */
     public BasicAirspaceAttributes(Material material, double opacity)
     {
@@ -180,7 +181,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     /**
      * {@inheritDoc}
      *
-     * @deprecated Use {@link Material#apply(javax.media.opengl.GL2, int)} or make OpenGL state changes directly.
+     * @deprecated Use {@link Material#apply(com.jogamp.opengl.GL2, int)} or make OpenGL state changes directly.
      */
     public void applyInterior(DrawContext dc, boolean enableMaterial)
     {
@@ -197,7 +198,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     /**
      * {@inheritDoc}
      *
-     * @deprecated Use {@link Material#apply(javax.media.opengl.GL2, int)} or make OpenGL state changes directly.
+     * @deprecated Use {@link Material#apply(com.jogamp.opengl.GL2, int)} or make OpenGL state changes directly.
      */
     public void applyOutline(DrawContext dc, boolean enableMaterial)
     {

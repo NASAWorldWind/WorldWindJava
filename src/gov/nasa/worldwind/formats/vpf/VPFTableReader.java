@@ -387,7 +387,7 @@ public class VPFTableReader
 
     /**
      * Returns the name of the Variable-length Index File associated with a specified table name. Note that this does
-     * not determine whether or not the index exists, it simply returns the abstract file name of the index. <br/> See
+     * not determine whether or not the index exists, it simply returns the abstract file name of the index. <br> See
      * MIL-STD-2407, section 5.3.1.2 DIGEST Part 2, Annex C.2.3.1.2
      *
      * @param tableName the table name to return an index name for.

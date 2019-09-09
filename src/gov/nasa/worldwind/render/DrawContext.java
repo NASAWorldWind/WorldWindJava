@@ -15,8 +15,8 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.terrain.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.GLU;
 import java.awt.*;
 import java.nio.FloatBuffer;
 import java.util.*;
@@ -30,10 +30,10 @@ import java.util.Queue;
 public interface DrawContext extends WWObject, Disposable
 {
     /**
-     * Assigns this <code>DrawContext</code> a new </code>javax.media.opengl.GLContext</code>. May throw a
+     * Assigns this <code>DrawContext</code> a new <code>com.jogamp.opengl.GLContext</code>. May throw a
      * <code>NullPointerException</code> if <code>glContext</code> is null.
      *
-     * @param glContext the new <code>javax.media.opengl.GLContext</code>
+     * @param glContext the new <code>com.jogamp.opengl.GLContext</code>
      *
      * @throws NullPointerException if glContext is null
      * @since 1.5
@@ -41,17 +41,17 @@ public interface DrawContext extends WWObject, Disposable
     void setGLContext(GLContext glContext);
 
     /**
-     * Retrieves this <code>DrawContext</code>s </code>javax.media.opengl.GLContext</code>. If this method returns null,
+     * Retrieves this <code>DrawContext</code>s <code>com.jogamp.opengl.GLContext</code>. If this method returns null,
      * then there are potentially no active <code>GLContext</code>s and rendering should be aborted.
      *
-     * @return this <code>DrawContext</code>s </code>javax.media.opengl.GLContext</code>.
+     * @return this <code>DrawContext</code>s <code>com.jogamp.opengl.GLContext</code>.
      *
      * @since 1.5
      */
     GLContext getGLContext();
 
     /**
-     * Retrieves the current <code>javax.media.opengl.GL</code>. A <code>GL</code> or <code>GLU</code> is required for
+     * Retrieves the current <code>com.jogamp.opengl.GL</code>. A <code>GL</code> or <code>GLU</code> is required for
      * all graphical rendering in WorldWind.
      *
      * @return the current <code>GL</code> if available, null otherwise
@@ -61,7 +61,7 @@ public interface DrawContext extends WWObject, Disposable
     GL getGL();
 
     /**
-     * Retrieves the current <code>javax.media.opengl.glu.GLU</code>. A <code>GLU</code> or <code>GL</code> is required
+     * Retrieves the current <code>com.jogamp.opengl.glu.GLU</code>. A <code>GLU</code> or <code>GL</code> is required
      * for all graphical rendering in WorldWind.
      *
      * @return the current <code>GLU</code> if available, null otherwise
@@ -71,7 +71,7 @@ public interface DrawContext extends WWObject, Disposable
     GLU getGLU();
 
     /**
-     * Retrieves the current <code>javax.media.opengl.GLDrawable</code>. A <code>GLDrawable</code> can be used to create
+     * Retrieves the current <code>com.jogamp.opengl.GLDrawable</code>. A <code>GLDrawable</code> can be used to create
      * a <code>GLContext</code>, which can then be used for rendering.
      *
      * @return the current <code>GLDrawable</code>, null if none available
@@ -85,7 +85,7 @@ public interface DrawContext extends WWObject, Disposable
      * width is potentially different from the GL viewport width. If this DrawContext is associated with a
      * <code>GLJPanel</code>, the returned width is the power-of-two ceiling of the viewport, and is therefore almost
      * always larger than the GL viewport width.
-     * <p/>
+     * <p>
      * The GL viewport dimensions can be accessed by calling <code>getView().getViewport()</code> on this
      * <code>DrawContext</code>.
      *
@@ -98,7 +98,7 @@ public interface DrawContext extends WWObject, Disposable
      * height is potentially different from the GL viewport height. If this DrawContext is associated with a
      * <code>GLJPanel</code>, the returned height is the power-of-two ceiling of the viewport, and is therefore almost
      * always larger than the GL viewport height.
-     * <p/>
+     * <p>
      * The GL viewport dimensions can be accessed by calling <code>getView().getViewport()</code> on this
      * <code>DrawContext</code>.
      *
@@ -126,7 +126,7 @@ public interface DrawContext extends WWObject, Disposable
      * Initializes this <code>DrawContext</code>. This method should be called at the beginning of each frame to prepare
      * the <code>DrawContext</code> for the coming render pass.
      *
-     * @param glContext the <code>javax.media.opengl.GLContext</code> to use for this render pass
+     * @param glContext the <code>com.jogamp.opengl.GLContext</code> to use for this render pass
      *
      * @since 1.5
      */
@@ -303,7 +303,7 @@ public interface DrawContext extends WWObject, Disposable
      * components represent an address to the beginning of a sequential range of pick color codes. This method is
      * similar to calling the no-argument {@link #getUniquePickColor} <code>count</code> times, but guarantees a
      * contiguous range of color codes and is more efficient when <code>count</code> is large.
-     * <p/>
+     * <p>
      * The number of pick colors is limited to a finite address space. This method returns null when there are fewer
      * than <code>count</code> remaining unique colors in the pick color address space, or when <code>count</code> is
      * less than 1.
@@ -327,7 +327,7 @@ public interface DrawContext extends WWObject, Disposable
      * green, and blue components are each stored as an 8-bit unsigned integer, and packed into bits 0-23 of the
      * returned integer as follows: bits 16-23 are red, bits 8-15 are green, and bits 0-7 are blue. This format is
      * consistent with the RGB integers used to create the pick colors in getUniquePickColor.
-     * <p/>
+     * <p>
      * This returns 0 if the point contains the clear color, or is outside this draw context's drawable area.
      *
      * @param point the point to return a color for, in AWT screen coordinates.
@@ -343,11 +343,11 @@ public interface DrawContext extends WWObject, Disposable
      * pick color codes. The red, green, and blue components are each stored as an 8-bit unsigned integer, and packed
      * into bits 0-23 of the returned integers as follows: bits 16-23 are red, bits 8-15 are green, and bits 0-7 are
      * blue. This format is consistent with the RGB integers used to create the pick colors in getUniquePickColor.
-     * <p/>
+     * <p>
      * The returned array contains one entry for each unique color. Points in the rectangle that contain the clear color
      * or are outside this draw context's drawable area are ignored. This returns <code>null</code> if the specified
      * rectangle is empty, or contains only the clear color.
-     * <p/>
+     * <p>
      * The minAndMaxColorCodes parameter limits the unique colors that this method returns to the specified range. The
      * minimum color must be stored in array index 0, and the maximum color must be stored in array index 1. These
      * values can be used to specify a small range of colors relative to the framebuffer contents, effectively culling
@@ -494,7 +494,7 @@ public interface DrawContext extends WWObject, Disposable
      * layers add each unique picked object to a PickedObjectList on this draw context by calling {@link
      * #addPickedObject(gov.nasa.worldwind.pick.PickedObject)}. This list can be accessed by calling {@link
      * #getPickedObjects()}.
-     * <p/>
+     * <p>
      * If the pick point is <code>null</code>, the pick point is ignored during each pick traversal, and the list of
      * objects returned by getPickedObjects is empty.
      *
@@ -517,7 +517,7 @@ public interface DrawContext extends WWObject, Disposable
      * so, layers add each unique picked object to a PickedObjectList on this draw context by calling {@link
      * #addObjectInPickRectangle(gov.nasa.worldwind.pick.PickedObject)}. This is list can be accessed by calling {@link
      * #getObjectsInPickRectangle()}.
-     * <p/>
+     * <p>
      * If the pick rectangle is <code>null</code>, the pick rectangle is ignored during each pick traversal, and the
      * list of objects returned by getObjectsInPickRectangle is empty.
      *
@@ -681,7 +681,7 @@ public interface DrawContext extends WWObject, Disposable
      * Returns the visible sectors at one of several specified resolutions within a specified search sector. Several
      * sectors resolutions may be specified along with a time limit. The best resolution that can be determined within
      * the time limit is returned.
-     * <p/>
+     * <p>
      * Adherence to the time limit is not precise. The limit is checked only between full searches at each resolution.
      * The search may take more than the specified time, but will terminate if no time is left before starting a
      * higher-resolution search.
@@ -767,14 +767,14 @@ public interface DrawContext extends WWObject, Disposable
     /**
      * Creates a frustum around the current pick point and adds it to the current list of pick frustums. The frustum's
      * dimension is specified by calling {@link #setPickPointFrustumDimension(java.awt.Dimension)}.
-     * <p/>
+     * <p>
      * This does nothing if the current pick point is <code>null</code>.
      */
     void addPickPointFrustum();
 
     /**
      * Creates a frustum containing the current pick rectangle and adds it to the current list of pick frustums.
-     * <p/>
+     * <p>
      * This does nothing if the current pick rectangle is <code>null</code>.
      */
     void addPickRectangleFrustum();
@@ -815,10 +815,10 @@ public interface DrawContext extends WWObject, Disposable
      * Modifies the current projection matrix to slightly offset subsequently drawn objects toward or away from the eye
      * point. This gives those objects visual priority over objects at the same or nearly the same position. After the
      * objects are drawn, call {@link #popProjectionOffest()} to cancel the effect for subsequently drawn objects.
-     * <p/>
+     * <p>
      * <em>Note:</em> This capability is meant to be applied only within a single Renderable. It is not intended as a
      * means to offset a whole Renderable or collection of Renderables.
-     * <p/>
+     * <p>
      * See "Mathematics for Game Programming and 3D Computer Graphics, 2 ed." by  Eric Lengyel, Section 9.1, "Depth
      * Value Offset" for a description of this technique.
      *

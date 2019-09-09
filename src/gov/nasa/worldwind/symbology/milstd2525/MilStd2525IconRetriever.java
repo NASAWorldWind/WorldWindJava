@@ -17,22 +17,20 @@ import java.util.*;
 
 /**
  * Retriever to retrieve icons for symbols in the MIL-STD-2525 symbol set. The retriever can retrieve icons from either
- * a local or remote symbol store. See the <a href="https://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use">Symbology
+ * a local or remote symbol store. See the <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-symbols/#offline-use">Symbology
  * Usage Guide</a> for details on how to configure a local symbol repository. For more information on how to use this
  * class see the IconRetriever Usage Guide and the {@link gov.nasa.worldwindx.examples.symbology.IconRetrieverUsage}
  * example.
- * <p/>
- * <h2><a name="parameters">Retrieval parameters</a></h2>
- * <p/>
+ * <h2>Retrieval parameters</h2>
+ * <p>
  * Table IX (pg. 35) of MIL-STD-2525C defines a hierarchy for simplifying tactical symbols. This hierarchy is
  * implemented using retrieval parameters SHOW_FILL, SHOW_FRAME, and SHOW_ICON. By default, all three elements are
  * displayed, and they can be turned off by setting the appropriate parameter. If frame and icon are turned off the
  * retriever will return an image that contains a circle, either black or filled with the icon fill color (depending on
  * the state of SHOW_FILL).
- * <p/>
+ * <p>
  * {@link #createIcon(String, gov.nasa.worldwind.avlist.AVList) createIcon} accepts the following parameters:
- * <p/>
- * <table> <tr><th>Key</th><th>Type</th><td>Description</th></tr> <tr><td>SymbologyConstants.SHOW_ICON</td><td>Boolean</td><td>Determines
+ * <table><caption style="font-weight: bold;">createIcon Parameters</caption> <tr><th>Key</th><th>Type</th><td><th>Description</th></tr> <tr><td>SymbologyConstants.SHOW_ICON</td><td>Boolean</td><td>Determines
  * if the symbol will be created with an icon.</td></tr> <tr><td>SymbologyConstants.SHOW_FRAME</td><td>Boolean</td><td>Determines
  * if the symbol will be created with a frame.</td></tr> <tr><td>SymbologyConstants.SHOW_FILL</td><td>Boolean</td><td>Determines
  * if the symbol will be created with a fill color.</td></tr><tr><td valign="top">AVKey.COLOR</td><td
