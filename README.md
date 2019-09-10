@@ -1,4 +1,4 @@
-<img src="https://worldwind.arc.nasa.gov/img/nasa-logo.svg" height="100"/>
+<img src="https://worldwind.arc.nasa.gov/img/nasa-logo.svg" height="100" />
 
 # WorldWind Java
 
