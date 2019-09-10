@@ -13,7 +13,7 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.nio.*;
 import java.util.*;
@@ -32,19 +32,17 @@ import java.util.List;
  * values, where width and height are the AnalyticSurface's grid dimensions. If the caller does not specify any
  * GridPointAttributes, or the caller specified iterable contains too few values, the unassigned grid points are given
  * default attributes: the default scalar value is 0, and the default color is {@link java.awt.Color#BLACK}.
- * <p/>
  * <h2>Surface Altitude</h2>
- * <p/>
+ * <p>
  * AnalyticSurface's altitude can vary at each grid point. The altitude of each grid point depends on four properties:
  * the altitude mode, the surface altitude, the vertical scale, and the scalar value from GridPointAttributes. The
  * following table outlines how the altitude at each grid point is computed for each altitude mode:
- * <p/>
- * <table border="1"> <tr><th>Altitude Mode</th><th>Grid Point Altitude</th></tr> <tr><td>WorldWind.ABSOLUTE
+ * <table border="1"> <caption style="font-weight: bold;">Altitude Computation</caption><tr><th>Altitude Mode</th><th>Grid Point Altitude</th></tr> <tr><td>WorldWind.ABSOLUTE
  * (default)</td><td>surface altitude + (vertical scale * scalar value from GridPointAttributes)</td></tr>
  * <tr><td>WorldWind.RELATIVE_TO_GROUND</td><td>terrain height at grid point + surface altitude + (vertical scale *
  * scalar value from GridPointAttributes)</td></tr> <tr><td>WorldWind.CLAMP_TO_GROUND</td><td>terrain height at grid
  * point</td></tr> </table>
- * <p/>
+ * <p>
  * Note that when the altitude mode is WorldWind.CLAMP_TO_GROUND the surface altitude, vertical scale, and the scalar
  * value from GridPointAttributes are ignored. In this altitude mode only the Sector, dimensions, and color from
  * GridPointAttributes are used.
@@ -500,7 +498,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     /**
      * {@inheritDoc}
      *
-     * @param dc
+     * @param dc The current display context.
      */
     public void preRender(DrawContext dc)
     {

@@ -19,10 +19,11 @@ import java.util.List;
  * <code>stateObject</code> elements. Each <code>stateObject</code> element is identified by its <code>name</code>
  * attribute. The value of a <code>stateObject</code> can either be simple text content, or nested
  * <code>stateObject</code> elements.
- * <p/>
+ * <p>
  * For example, this document stores four states: the string "Hello World!", the largest value an unsigned byte can
- * hold, the value of PI to six digits, and a boolean "true". <code>
+ * hold, the value of PI to six digits, and a boolean "true". 
  * <pre>
+ * <code>
  * {@literal <?xml version="1.0" encoding="UTF-8"?>}
  * {@literal <restorableState>}
  *   {@literal <stateObject name="helloWorldString">Hello World!</stateObject>}
@@ -30,8 +31,9 @@ import java.util.List;
  *   {@literal <stateObject name="pi">3.141592</stateObject>}
  *   {@literal <stateObject name="booleanTrue">true</stateObject>}
  * {@literal </restorableState>}
+ * </code> 
  * </pre>
- * </code> Callers can create a new RestorableSupport with no state content, or create a RestorableSupport from an
+ * Callers can create a new RestorableSupport with no state content, or create a RestorableSupport from an
  * existing XML document string. Callers can then add state by name and value, and query state by name.
  * RestorableSupport provides convenience methods for addding and querying state values as Strings, Integers, Doubles,
  * and Booleans.
@@ -1278,11 +1280,11 @@ public class RestorableSupport
     }
 
     /**
-     * Returns the value of the StateObject as a HashMap of <Integer, OffsetsList> pairs.
+     * Returns the value of the StateObject as a HashMap of &lt;Integer, OffsetsList&gt; pairs.
      *
      * @param stateObject the StateObject that is converted to a HashMap of OffsetsLists.
      *
-     * @return the value of the StateObject as a HashMap of <Integer, OffsetsList> pairs.
+     * @return the value of the StateObject as a HashMap of &lt;Integer, OffsetsList&gt; pairs.
      *
      * @throws IllegalArgumentException If <code>stateObject</code> is null, or does not belong to this
      *                                  RestorableSupport.
@@ -1457,12 +1459,12 @@ public class RestorableSupport
     }
 
     /**
-     * Returns the value of the StateObject as a HashMap of <Integer, Object> pairs, representing the shape's
+     * Returns the value of the StateObject as a HashMap of &lt;Integer, Object&gt; pairs, representing the shape's
      * imageSources.
      *
      * @param stateObject the StateObject that is converted to a HashMap of imageSources.
      *
-     * @return the value of the StateObject as a HashMap of <Integer, Object> pairs.
+     * @return the value of the StateObject as a HashMap of &lt;Integer, Object&gt; pairs.
      *
      * @throws IllegalArgumentException If <code>stateObject</code> is null, or does not belong to this
      *                                  RestorableSupport.

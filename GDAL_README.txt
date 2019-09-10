@@ -41,9 +41,12 @@ GDAL bundle in the sub-folders. Therefore we recommend one of two options:
 1) Place the GDAL libraries in the folder "lib-external/gdal".
 2) Place the GDAL libraries in the application's root folder.
 
+When running WWJ with GDAL on Java 9+, WWJ can no longer automatically locate GDAL bundles during startup. Applications
+must either place the GDAL libraries in the root folder, or specify a VM argument to the GDAL bundle
+(e.g. -Djava.library.path=lib-external/gdal)
 
 Deploying with Java Web Start
 ------------------------------------------------------------
 
 Instructions for using the WorldWind GDAL libraries with a Java Web Start application are available at
-https://goworldwind.org/getting-started/
+https://worldwind.arc.nasa.gov/java/get-started/

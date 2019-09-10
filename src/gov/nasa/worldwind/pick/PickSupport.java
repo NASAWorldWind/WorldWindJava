@@ -10,7 +10,7 @@ import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.Range;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.util.*;
 
@@ -106,7 +106,7 @@ public class PickSupport
      * Adds picked object registered with this PickSupport that are drawn at the specified pick point or intersect the
      * draw context's pick rectangle to the draw context's list of picked objects. This clears any registered picked
      * objects upon returning.
-     * <p/>
+     * <p>
      * If this pick point is <code>null</code>, this ignores the pick point and does not attempt to determine which
      * picked objects are drawn there. If the draw context's pick rectangle is <code>null</code>, this ignores the pick
      * rectangle and does not attempt to determine which picked objects intersect it. This does nothing if no picked
@@ -208,7 +208,7 @@ public class PickSupport
      * green, and blue components are each stored as an 8-bit unsigned integer, and packed into bits 0-23 of the
      * returned integer as follows: bits 16-23 are red, bits 8-15 are green, and bits 0-7 are blue. This format is
      * consistent with the RGB integers used to create the pick colors.
-     * <p/>
+     * <p>
      * This returns 0 if the point is <code>null</code>, if the point contains the clear color, or if the point is
      * outside the draw context's drawable area.
      *

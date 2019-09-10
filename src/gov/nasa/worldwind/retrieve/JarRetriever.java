@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
 import java.util.logging.Level;
 
 /**
- * Retrieves resources identified by a jar url, which has the form jar:<url>!/{entry}, as in:
+ * Retrieves resources identified by a jar url, which has the form jar:&lt;url&gt;!/{entry}, as in:
  * jar:http://www.foo.com/bar/baz.jar!/COM/foo/Quux.class. See {@link java.net.JarURLConnection} for a full description
  * of jar URLs.
  *

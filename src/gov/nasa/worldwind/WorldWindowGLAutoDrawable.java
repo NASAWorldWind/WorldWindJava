@@ -16,8 +16,8 @@ import gov.nasa.worldwind.render.ScreenCreditController;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.dashboard.DashboardController;
 
-import javax.media.opengl.*;
-import javax.media.opengl.awt.AWTGLAutoDrawable;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.awt.AWTGLAutoDrawable;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -255,14 +255,13 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
 
     /**
      * See {@link GLEventListener#init(GLAutoDrawable)}.
-     * <p/>
+     * <p>
      * GLEventListener's dispose method indicates that the GL context has been released, and provides the listener an
      * opportunity to clean up any resources. Dispose does not imply that the component's lifecycle has ended or that
      * the application is closing. There are three cases in which dispose may be called:
-     * <p/>
      * <ul> <li>The WorldWindow is removed from its parent component.</li> <li>The WorldWindow's parent frame is
      * closed.</li> <li>The application calls either GLCanvas.dispose or GLJPanel.dispose.</li> </ul>
-     * <p/>
+     * <p>
      * This implementation is left empty. In the case when a WorldWindow or a WorldWind application has reached its end
      * of life, its resources should be released by calling {@link gov.nasa.worldwind.WorldWindow#shutdown()} or {@link
      * gov.nasa.worldwind.WorldWind#shutDown()}, respectively. In the case when a WorldWindow is removed from its parent
@@ -530,7 +529,7 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Forward the message event to the Model for distribution to the layers.
      *
      * @param msg Message event.

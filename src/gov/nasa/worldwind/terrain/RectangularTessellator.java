@@ -16,7 +16,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.nio.*;
 import java.util.*;
@@ -1190,7 +1190,7 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator
 
     /**
      * Render each triangle of a tile in a unique color. Used during picking to identify triangles at the pick points.
-     * <p/>
+     * <p>
      * Note: This method modifies the GL_VERTEX_ARRAY and GL_COLOR_ARRAY state and does not restore it. Callers should
      * ensure that GL_CLIENT_VERTEX_ARRAY_BIT has been pushed, and eventually pop it when done using this method.
      *

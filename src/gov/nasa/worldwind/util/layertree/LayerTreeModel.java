@@ -15,16 +15,15 @@ import gov.nasa.worldwind.util.tree.*;
  * <code>LayerTreeModel</code> initializes itself with a default root node. By default, this root node is of type
  * <code>BasicTreeNode</code> and its text is "Layers". Nodes added under the tree model's root should always be of type
  * <code>{@link LayerTreeNode}</code>. a <code>LayerTreeNode</code> may be of any type.
- * <p/>
+ * <p>
  * <code>LayerTreeModel</code> provides operations for performing the following common tasks on a layer tree: <ul>
  * <li>Adding a layer node.</li> <li>Removing all layer nodes.</li> <li>Refreshing the layer nodes from a <code>{@link
  * gov.nasa.worldwind.layers.LayerList}</code>.</li> </ul>
- * <p/>
+ * <p>
  * By default, the tree model does not include layers marked as hidden. This allows an application to prevent certain
  * layers in a <code>LayerList</code> from appearing in the tree. For example, the layer that renders the tree itself
  * usually should not appear in the tree. If it did then the user could turn off the tree layer and have no way of
  * getting it back. A layer can be marked as hidden by setting <code>AVKey.HIDDEN</code> to <code>true</code>:
- * <p/>
  * <pre>hiddenLayer.setValue(AVKey.HIDDEN, true); // Prevent layer from being displayed in the layer tree</pre>
  *
  * @author dcollins

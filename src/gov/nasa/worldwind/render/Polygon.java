@@ -18,8 +18,8 @@ import gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.GLU;
 import javax.xml.stream.*;
 import java.io.*;
 import java.nio.*;
@@ -27,13 +27,13 @@ import java.util.*;
 
 /**
  * /** A 3D polygon. The polygon may be complex with multiple internal but not intersecting contours.
- * <p/>
+ * <p>
  * Polygons are safe to share among WorldWindows. They should not be shared among layers in the same WorldWindow.
- * <p/>
+ * <p>
  * In order to support simultaneous use of this shape with multiple globes (windows), this shape maintains a cache of
  * data computed relative to each globe. During rendering, the data for the currently active globe, as indicated in the
  * draw context, is made current. Subsequently called methods rely on the existence of this current data cache entry.
- * <p/>
+ * <p>
  * When drawn on a 2D globe, this shape uses a {@link SurfacePolygon} to represent itself. The following features are
  * not provided in this case: rotation and texture.
  *
@@ -871,7 +871,7 @@ public class Polygon extends AbstractShape
 
     /**
      * Compute enough geometry to determine this polygon's extent, reference point and eye distance.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc        the current draw context.
@@ -901,7 +901,7 @@ public class Polygon extends AbstractShape
 
     /**
      * Computes the minimum distance between this polygon and the eye point.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc        the draw context.
@@ -1003,7 +1003,7 @@ public class Polygon extends AbstractShape
 
     /**
      * Compute the cap geometry.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc        the current draw context.
@@ -1152,7 +1152,7 @@ public class Polygon extends AbstractShape
 
     /**
      * Tessellates the polygon.
-     * <p/>
+     * <p>
      * This method catches {@link OutOfMemoryError} exceptions and if the draw context is not null passes the exception
      * to the rendering exception listener (see {@link WorldWindow#addRenderingExceptionListener(gov.nasa.worldwind.event.RenderingExceptionListener)}).
      *
@@ -1417,7 +1417,7 @@ public class Polygon extends AbstractShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Note that this method overwrites the boundary locations lists, and therefore no longer refer to the originally
      * specified boundary lists.
      *
@@ -1460,7 +1460,7 @@ public class Polygon extends AbstractShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Note that this method overwrites the boundary locations lists, and therefore no longer refer to the originally
      * specified boundary lists.
      *

@@ -1607,12 +1607,12 @@ public class Matrix
     /**
      * Computes a symmetric covariance Matrix from the x, y, z coordinates of the specified points Iterable. This
      * returns null if the points Iterable is empty, or if all of the points are null.
-     * <p/>
+     * <p>
      * The returned covariance matrix represents the correlation between each pair of x-, y-, and z-coordinates as
      * they're distributed about the point Iterable's arithmetic mean. Its layout is as follows:
-     * <p/>
-     * <code> C(x, x)  C(x, y)  C(x, z) <br/> C(x, y)  C(y, y)  C(y, z) <br/> C(x, z)  C(y, z)  C(z, z) </code>
-     * <p/>
+     * <p>
+     * <code> C(x, x)  C(x, y)  C(x, z) <br> C(x, y)  C(y, y)  C(y, z) <br> C(x, z)  C(y, z)  C(z, z) </code>
+     * <p>
      * C(i, j) is the covariance of coordinates i and j, where i or j are a coordinate's dispersion about its mean
      * value. If any entry is zero, then there's no correlation between the two coordinates defining that entry. If the
      * returned matrix is diagonal, then all three coordinates are uncorrelated, and the specified point Iterable is
@@ -1672,17 +1672,17 @@ public class Matrix
     /**
      * Computes a symmetric covariance Matrix from the x, y, z coordinates of the specified buffer of points. This
      * returns null if the buffer is empty.
-     * <p/>
+     * <p>
      * The returned covariance matrix represents the correlation between each pair of x-, y-, and z-coordinates as
      * they're distributed about the points arithmetic mean. Its layout is as follows:
-     * <p/>
-     * <code> C(x, x)  C(x, y)  C(x, z) <br/> C(x, y)  C(y, y)  C(y, z) <br/> C(x, z)  C(y, z)  C(z, z) </code>
-     * <p/>
+     * <p>
+     * <code> C(x, x)  C(x, y)  C(x, z) <br> C(x, y)  C(y, y)  C(y, z) <br> C(x, z)  C(y, z)  C(z, z) </code>
+     * <p>
      * C(i, j) is the covariance of coordinates i and j, where i or j are a coordinate's dispersion about its mean
      * value. If any entry is zero, then there's no correlation between the two coordinates defining that entry. If the
      * returned matrix is diagonal, then all three coordinates are uncorrelated, and the specified points are
      * distributed evenly about their mean point.
-     * <p/>
+     * <p>
      * The buffer must contain XYZ coordinate tuples which are either tightly packed or offset by the specified stride.
      * The stride specifies the number of buffer elements between the first coordinate of consecutive tuples. For
      * example, a stride of 3 specifies that each tuple is tightly packed as XYZXYZXYZ, whereas a stride of 5 specifies
@@ -2422,10 +2422,10 @@ public class Matrix
 
     /**
      * Extracts this viewing matrix's eye point.
-     * <p/>
+     * <p>
      * This method assumes that this matrix represents a viewing matrix. If this does not represent a viewing matrix the
      * results are undefined.
-     * <p/>
+     * <p>
      * In model coordinates, a viewing matrix's eye point is the point the viewer is looking from and maps to the center
      * of the screen.
      *
@@ -2445,10 +2445,10 @@ public class Matrix
 
     /**
      * Extracts this viewing matrix's forward vector.
-     * <p/>
+     * <p>
      * This method assumes that this matrix represents a viewing matrix. If this does not represent a viewing matrix the
      * results are undefined.
-     * <p/>
+     * <p>
      * In model coordinates, a viewing matrix's forward vector is the direction the viewer is looking and maps to a
      * vector going into the screen.
      *
@@ -2463,10 +2463,10 @@ public class Matrix
 
     /**
      * Extracts this viewing matrix's parameters given a viewing origin and a globe.
-     * <p/>
+     * <p>
      * This method assumes that this matrix represents a viewing matrix. If this does not represent a viewing matrix the
      * results are undefined.
-     * <p/>
+     * <p>
      * This returns a parameterization of this viewing matrix based on the specified origin and globe. The origin
      * indicates the model coordinate point that the view's orientation is relative to, while the globe provides the
      * necessary model coordinate context for the origin and the orientation. The origin should be either the view's eye

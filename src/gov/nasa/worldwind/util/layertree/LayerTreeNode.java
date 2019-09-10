@@ -13,7 +13,7 @@ import gov.nasa.worldwind.util.tree.BasicTreeNode;
 
 /**
  * A <code>TreeNode</code> that represents a <code>{@link gov.nasa.worldwind.layers.Layer}</code>.
- * <p/>
+ * <p>
  * The node's selection state is synchronized with its <code>Layer</code>'s enabled state. <code>{@link
  * #isSelected()}</code> returns whether the node's <code>Layer</code> is enabled. Calling <code>{@link
  * #setSelected(boolean)}</code> specifies both the the node's selection state, and whether its <code>Layer</code>

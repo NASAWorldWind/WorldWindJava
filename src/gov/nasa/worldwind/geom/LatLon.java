@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * Represents a point on the two-dimensional surface of a globe. Latitude is the degrees North and ranges between [-90,
  * 90], while longitude refers to degrees East, and ranges between (-180, 180].
- * <p/>
+ * <p>
  * Instances of <code>LatLon</code> are immutable.
  *
  * @author Tom Gaskins
@@ -1782,16 +1782,16 @@ public class LatLon
 
     /**
      * Computes the distance between two points on an ellipsoid iteratively.
-     * <p/>
+     * <p>
      * NOTE: This method was copied from the UniData NetCDF Java library. http://www.unidata.ucar.edu/software/netcdf-java/
-     * <p/>
+     * <p>
      * Algorithm from U.S. National Geodetic Survey, FORTRAN program "inverse," subroutine "INVER1," by L. PFEIFER and
      * JOHN G. GERGEN. See http://www.ngs.noaa.gov/TOOLS/Inv_Fwd/Inv_Fwd.html
-     * <p/>
+     * <p>
      * Original documentation: SOLUTION OF THE GEODETIC INVERSE PROBLEM AFTER T.VINCENTY MODIFIED RAINSFORD'S METHOD
      * WITH HELMERT'S ELLIPTICAL TERMS EFFECTIVE IN ANY AZIMUTH AND AT ANY DISTANCE SHORT OF ANTIPODAL
      * STANDPOINT/FOREPOINT MUST NOT BE THE GEOGRAPHIC POLE
-     * <p/>
+     * <p>
      * Requires close to 1.4 E-5 seconds wall clock time per call on a 550 MHz Pentium with Linux 7.2.
      * <p>
      * The algorithm used is iterative and will iterate only 10 times if it does not converge.

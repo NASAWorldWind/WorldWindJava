@@ -9,7 +9,7 @@ package gov.nasa.worldwind.util;
  * A collection of 32-bit integer primitives that contains no duplicate elements. IntSet provides the minimal operations
  * for working with on a set of integers: add, remove, contains, and clear. Additionally, IntSet provides methods for
  * determining the number of integers in the set, and for retrieving the integers as an array.
- * <p/>
+ * <p>
  * IntSet
  *
  * @author dcollins

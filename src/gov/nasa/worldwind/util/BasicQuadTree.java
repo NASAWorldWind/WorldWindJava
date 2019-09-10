@@ -14,10 +14,10 @@ import java.util.*;
 /**
  * Implements a quadtree backed by a bit-set index. A bit-set provides a minimal-memory index. Each bit identifies one
  * cell in the quadtree.
- * <p/>
+ * <p>
  * This class provides methods to add and remove items from the quadtree, and to determine the items intersecting
  * specified regions.
- * <p/>
+ * <p>
  * Items can be added with an associated name, and can be retrieved and removed by name.
  *
  * @author tag
@@ -34,7 +34,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
 
     /**
      * Constructs a quadtree of a specified level and spanning a specified region.
-     * <p/>
+     * <p>
      * The number of levels in the quadtree must be specified to the constructor. The more levels there are the more
      * discriminating searches will be, but at the cost of some performance because more cells are searched. For the
      * Earth, a level count of 8 provides leaf cells about 75 km along their meridian edges (edges of constant Earth, a
@@ -66,7 +66,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
 
     /**
      * Constructs a quadtree of a specified level and spanning a specified region.
-     * <p/>
+     * <p>
      * The number of levels in the quadtree must be specified to the constructor. The more levels there are the more
      * discriminating searches will be, but at the cost of some performance because more cells are searched. For the
      * Earth, a level count of 8 provides leaf cells about 75 km along their meridian edges (edges of constant Earth, a
@@ -216,7 +216,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
 
     /**
      * Removes an item from the tree.
-     * <p/>
+     * <p>
      * <em>Note:</em> For large collections, this can be an expensive operation.
      *
      * @param item the item to remove. If null, no item is removed.
@@ -249,7 +249,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
 
     /**
      * Removes an item from the tree by name.
-     * <p/>
+     * <p>
      * <em>Note:</em> For large collections, this can be an expensive operation.
      *
      * @param name the name of the item to remove. If null, no item is removed.
@@ -296,7 +296,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
     /**
      * Returns an iterator over the items in the tree. There is no specific iteration order and the iterator may return
      * duplicate entries.
-     * <p/>
+     * <p>
      * <em>Note</em> The {@link java.util.Iterator#remove()} operation is not supported.
      *
      * @return an iterator over the items in the tree.

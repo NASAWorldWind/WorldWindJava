@@ -15,12 +15,12 @@ import java.awt.*;
  * Defines the relationship of an image, label or other screen-space item relative to another screen-space item. An
  * offset contains an X coordinate, a Y coordinate, and for each of these a separate "units" string indicating the
  * coordinate units.
- * <p/>
+ * <p>
  * Recognized "units" values are {@link AVKey#PIXELS}, which indicates pixel units relative to the lower left corner of
  * the screen-space item, {@link AVKey#FRACTION}, which indicates that the units are fractions of the screen-space
  * item's width and height, relative to its lower left corner, and {@link AVKey#INSET_PIXELS}, which indicates units of
  * pixels but with origin at the screen-space item's upper right.
- * <p/>
+ * <p>
  * This class implements the functionality of a KML <i>Offset</i>.
  *
  * @author tag

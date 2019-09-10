@@ -13,7 +13,7 @@ import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.cache.FileStore;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.image.*;
 import java.beans.*;
 import java.net.URL;
@@ -21,11 +21,11 @@ import java.net.URL;
 /**
  * Represents a texture derived from a lazily loaded image source such as an image file or a {@link
  * java.awt.image.BufferedImage}.
- * <p/>
+ * <p>
  * The interface contains a method, {@link #isTextureInitializationFailed()} to determine whether the instance failed to
  * convert an image source to a texture. If such a failure occurs, the method returns true and no further attempts are
  * made to create the texture.
- * <p/>
+ * <p>
  * This class performs lazy retrieval and loading of an image source, attempting to retrieve and load the image source
  * only when the {@link #bind(DrawContext)} or {@link #applyInternalTransform(DrawContext)} methods are called. If the
  * image source is a {@link BufferedImage} the associated {@link Texture} object is created and available immediately
@@ -165,7 +165,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * This method behaves identically to {@link #getWidth()}. The <code>DrawContext</code> argument is not used.
      *
      * @param dc this parameter is not used by this class.
@@ -179,7 +179,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * This method behaves identically to {@link #getHeight()}. The <code>DrawContext</code> argument is not used.
      *
      * @param dc this parameter is not used by this class.
@@ -271,7 +271,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
     /**
      * Returns this texture's texture data if it has been retrieved but a <code>Texture</code> has not yet been created
      * for it.
-     * <p/>
+     * <p>
      * If this object's texture data field is non-null, a new texture is created from the texture data when the tile is
      * next bound or otherwise initialized. This object's texture data field is then set to null.
      *
@@ -286,7 +286,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
     /**
      * Specifies texture data for the tile. If texture data is non-null, a new texture is created from the texture data
      * when the tile is next bound.
-     * <p/>
+     * <p>
      * When a texture is created from the texture data, the texture data field is set to null to indicate that the data
      * has been converted to a texture and its resources may be released.
      *
@@ -404,7 +404,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
     }
 
     /**
-     * Creates this instance's {@link Texture} if the image source is a <code>BufferedImage<code>.
+     * Creates this instance's {@link Texture} if the image source is a <code>BufferedImage</code>.
      *
      * @param dc the current draw context.
      *

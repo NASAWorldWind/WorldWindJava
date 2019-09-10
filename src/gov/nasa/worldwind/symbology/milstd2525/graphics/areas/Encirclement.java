@@ -103,7 +103,6 @@ public class Encirclement extends BasicArea
     /**
      * Indicates the wavelength of the triangle wave that forms the graphic's boundary. This is the length from the
      * start of one "tooth" to the start of the next.
-     * <p/>
      * <pre>
      * __/\__/\__
      *  ^   ^

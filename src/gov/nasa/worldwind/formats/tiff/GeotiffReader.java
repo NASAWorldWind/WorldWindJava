@@ -556,7 +556,7 @@ public class GeotiffReader implements Disposable
 
     /**
      * Returns true if georeferencing information was found in this file.
-     * <p/>
+     * <p>
      * Note: see getGeoKeys() for determining if projection information is contained in the file.
      *
      * @throws java.io.IOException if data type is not supported or unknown

@@ -34,7 +34,7 @@ public class BasicLayerFactory extends BasicFactory
      * <li>a {@link java.net.URL}</li> <li>a {@link java.io.File}</li> <li>a {@link java.io.InputStream}</li> <li>{@link
      * Element}</li> <li>a {@link String} holding a file name, a name of a resource on the classpath, or a string
      * representation of a URL</li> </ul>
-     * <p/>
+     * <p>
      * For tiled image layers, this maps the <code>serviceName</code> attribute of the <code>Layer/Service</code>
      * element of the XML configuration file to the appropriate base tiled image layer type. Service types recognized
      * are: <ul> <li>"WMS" for layers that draw their data from a WMS web service.</li> <li>"WWTileService" for layers
@@ -134,7 +134,7 @@ public class BasicLayerFactory extends BasicFactory
     /**
      * Create a collection of layer lists and their included layers described by an array of XML layer-list description
      * elements.
-     * <p/>
+     * <p>
      * Any exceptions occurring during creation of the layer lists or their included layers are logged and not
      * re-thrown. The layers associated with the exceptions are not included in the returned layer list.
      *
@@ -211,7 +211,7 @@ public class BasicLayerFactory extends BasicFactory
 
     /**
      * Create a list of layers described by an array of XML layer description elements.
-     * <p/>
+     * <p>
      * Any exceptions occurring during creation of the layers are logged and not re-thrown. The layers associated with
      * the exceptions are not included in the returned layer list.
      *
@@ -250,7 +250,7 @@ public class BasicLayerFactory extends BasicFactory
      *
      * @throws WWUnrecognizedException if the layer type or service type given in the describing element is
      *                                 unrecognized.
-     * @see #createTiledImageLayer(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList).
+     * @see #createTiledImageLayer(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
     protected Layer createFromLayerDocument(Element domElement, AVList params)
     {

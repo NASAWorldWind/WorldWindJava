@@ -14,7 +14,7 @@ import gov.nasa.worldwind.retrieve.RetrievalService;
 import gov.nasa.worldwind.util.*;
 
 import javax.imageio.spi.IIORegistry;
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.beans.PropertyChangeListener;
 import java.util.logging.Level;
 
@@ -96,13 +96,13 @@ public final class WorldWind
     /**
      * Reinitialize WorldWind to its initial ready state. Shut down and restart all WorldWind services and clear all
      * WorldWind memory caches. Cache memory will be released at the next JVM garbage collection.
-     * <p/>
+     * <p>
      * Call this method to reduce WorldWind's current resource usage to its initial, empty state.
-     * <p/>
+     * <p>
      * The state of any open {@link WorldWindow} objects is indeterminate subsequent to invocation of this method. The
      * core WorldWindow objects attempt to shut themselves down cleanly during the call, but their resulting window
      * state is undefined.
-     * <p/>
+     * <p>
      * WorldWind can continue to be used after calling this method.
      */
     public static synchronized void shutDown()
@@ -232,7 +232,7 @@ public final class WorldWind
      * @return the new component
      *
      * @throws IllegalStateException    if no name could be found which corresponds to <code>classNameKey</code>
-     * @throws IllegalArgumentException if <code>classNameKey<code> is null
+     * @throws IllegalArgumentException if <code>classNameKey</code> is null
      * @throws WWRuntimeException       if the component could not be created
      */
     public static Object createConfigurationComponent(String classNameKey)

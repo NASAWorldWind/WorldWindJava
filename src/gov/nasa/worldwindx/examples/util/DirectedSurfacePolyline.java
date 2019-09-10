@@ -11,7 +11,7 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.nio.FloatBuffer;
 import java.util.*;
 
@@ -73,7 +73,7 @@ public class DirectedSurfacePolyline extends SurfacePolyline
 
     /**
      * Constructs a new directed surface polyline with the default attributes and the specified iterable of locations.
-     * <p/>
+     * <p>
      * Note: If fewer than two locations is specified, no polyline is drawn.
      *
      * @param iterable the polyline locations.
@@ -89,7 +89,7 @@ public class DirectedSurfacePolyline extends SurfacePolyline
      * Constructs a new directed surface polyline with the specified normal (as opposed to highlight) attributes and the
      * specified iterable of locations. Modifying the attribute reference after calling this constructor causes this
      * shape's appearance to change accordingly.
-     * <p/>
+     * <p>
      * Note: If fewer than two locations is specified, no polyline is drawn.
      *
      * @param normalAttrs the normal attributes. May be null, in which case default attributes are used.
@@ -209,7 +209,7 @@ public class DirectedSurfacePolyline extends SurfacePolyline
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to also draw direction arrows.
      *
      * @param dc  the current draw context.

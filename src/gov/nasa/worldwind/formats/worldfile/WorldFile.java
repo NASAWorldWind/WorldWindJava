@@ -897,7 +897,7 @@ public class WorldFile
 
     /**
      * Checks if the source is accompanied by any world file
-     * <p/>
+     * <p>
      * The source type may be one of the following: <ul><li>{@link java.net.URL}</li> <li>{@link java.net.URI}</li>
      * <li>{@link java.io.File}</li> <li>{@link String} containing a valid URL description, a valid URI description, or
      * a valid path to a local file.</li> </ul>
@@ -931,7 +931,7 @@ public class WorldFile
 
     /**
      * Reads and decodes world file for the source
-     * <p/>
+     * <p>
      * The source type may be one of the following: <ul><li>{@link java.net.URL}</li> <li>{@link java.net.URI}</li>
      * <li>{@link java.io.File}</li> <li>{@link String} containing a valid URL description, a valid URI description, or
      * a valid path to a local file.</li> </ul>

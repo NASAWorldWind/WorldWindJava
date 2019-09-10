@@ -21,7 +21,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * The <code>BasicRasterServerCache</code> is an implementation of the memory cache that is specific to store maximum
  * possible cacheable items, until the heap size allows. Once the memory limit is hit, it will drop ALL cached items.
  * Also, BasicRasterServerCache creates a pruner thread that removes all cached items which were not used for 20 seconds
- * or more. The least recent use timeout is configurable via the <code>setLeastRecentUseTimeout()<code> method. In
+ * or more. The least recent use timeout is configurable via the <code>setLeastRecentUseTimeout()</code> method. In
  * addition, the <code>BasicRasterServerCache</code> allocates 100MB memory and keeps only a phantom reference to the
  * allocated 100M memory. Once any part of the application needs more memory the phantom referenced memory will be
  * immediately released and the phantom reference will be added to the internal reference queue, which is monitored by

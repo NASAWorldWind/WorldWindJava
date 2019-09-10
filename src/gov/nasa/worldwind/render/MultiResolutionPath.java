@@ -20,19 +20,20 @@ import java.util.Iterator;
  * the application. The default algorithm skips up to four positions, depending on the eye distance from the positions.
  * Also, if the segment between any two positions is too small to be distinguished, it is not drawn. See {@link
  * #makePositions(DrawContext, gov.nasa.worldwind.render.Path.PathData)}.
- * <p/>
+ * <p>
  * NOTE: This shape does not draw correctly on a 2D globe when its positions span the dateline.
  *
  * @author tag
  * @version $Id: MultiResolutionPath.java 2185 2014-07-29 20:15:04Z tgaskins $
  * @deprecated
  */
+@Deprecated
 public class MultiResolutionPath extends Path
 {
     /**
      * This interface provides the means for the application to specify the algorithm used to determine the number of
      * specified positions skipped during path tessellation.
-     * <p/>
+     * <p>
      * This class overrides the method {@link Path#makePositions(DrawContext, PathData)}.
      */
     public interface SkipCountComputer
@@ -106,7 +107,7 @@ public class MultiResolutionPath extends Path
      * Creates a path with specified positions. When the path is rendered, only path positions that are visually
      * distinct for the current viewing state are considered. The path adjusts the positions it uses as the view state
      * changes, using more of the specified positions as the eye point comes closer to the shape.
-     * <p/>
+     * <p>
      * Note: If fewer than two positions are specified, no path is drawn.
      *
      * @param positions the path positions. This reference is retained by this shape; the positions are not copied. If
@@ -125,7 +126,7 @@ public class MultiResolutionPath extends Path
      * positions that are visually distinct for the current viewing state are considered. The path adjusts the positions
      * it uses as the view state changes, using more of the specified positions as the eye point comes closer to the
      * shape.
-     * <p/>
+     * <p>
      * Note: If fewer than two positions are specified, no path is drawn.
      *
      * @param positions the path positions. This reference is retained by this shape; the positions are not copied. If
@@ -172,7 +173,7 @@ public class MultiResolutionPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to return a new instance of MultiResolutionPathData.
      */
     @Override
@@ -183,7 +184,7 @@ public class MultiResolutionPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to initialize and build the PathData's positionOrdinals buffer.
      */
     @Override
@@ -205,7 +206,7 @@ public class MultiResolutionPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to skip positions from this Path's original positions list. Positions are skipped first according to
      * this Path's skipCountComputer. The skipCountComputer determines how many positions this path skips between
      * tessellated positions. Any positions remaining after this step are skipped if the segment they are part of is
@@ -254,7 +255,7 @@ public class MultiResolutionPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to create a mapping between the current tessellated position and the specified ordinal, if the ordinal
      * is not null.
      */
@@ -273,7 +274,7 @@ public class MultiResolutionPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to use the MultiResolutionPathData's positionOrdinals buffer to map the specified position index to
      * its corresponding ordinal number.
      */

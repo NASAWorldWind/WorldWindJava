@@ -15,7 +15,7 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.terrain.SectorGeometryList;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -24,13 +24,13 @@ import java.util.logging.Level;
  * IconRenderer processes collections of {@link gov.nasa.worldwind.render.WWIcon} instances for picking and rendering.
  * IconRenderer applies batch processing techniques to improve the runtime performance of picking and rendering large
  * collections of icons.
- * <p/>
+ * <p>
  * During the draw pass, IconRenderer records feedback information for each WWIcon which has the property key {@link
  * gov.nasa.worldwind.avlist.AVKey#FEEDBACK_ENABLED} set to <code>true</code>. IconRenderer does not record any feedback
  * information during the pick pass. When feedback is enabled, IconRenderer puts properties which describe how each
  * WWIcon has been processed in key-value pairs attached to the WWIcon. Any of these properties may be null, indicating
  * that processing of the WWIcon was terminated before this information became available. The feedback properties for
- * WWIcon are as follows: <table> <tr><th>Key</th><th>Description</th></tr> <tr><td>{@link
+ * WWIcon are as follows: <table> <caption>WWIcon Feedback Properties</caption><tr><th>Key</th><th>Description</th></tr> <tr><td>{@link
  * gov.nasa.worldwind.avlist.AVKey#FEEDBACK_REFERENCE_POINT}</td><td>The icon's reference point in model
  * coordinates.</td></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FEEDBACK_SCREEN_BOUNDS}</td><td>The icon's
  * bounding rectangle in screen coordinates.</td></tr> </table>

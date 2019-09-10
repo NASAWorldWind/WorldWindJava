@@ -39,11 +39,11 @@ import java.util.*;
  * desired shape from a dropdown menu, create an instance of it with the click of a button, and specify an "edit mode"
  * for modifying the shape: move, scale, rotate, skew, or texture.  Numerous shapes may be created and placed on the
  * globe together, but only one may be selected and edited at any given time.
- * <p/>
+ * <p>
  * Keyboard shortcuts allow the user to toggle easily between the various edit modes.  The shortcuts are as follows:
- * <p/>
+ * <p>
  * Ctrl-Z:  move Ctrl-X:  scale Ctrl-C:  rotate Ctrl-V:  skew Ctrl-B:  texture
- * <p/>
+ * <p>
  * Edited shapes are Restorable and may be saved to or loaded from a file using options in the File menu.
  *
  * @author ccrick

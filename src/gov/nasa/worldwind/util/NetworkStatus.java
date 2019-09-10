@@ -15,16 +15,16 @@ import java.util.List;
  * implementing object's tracking list. When a host has been logged a specified number of times, it is marked as
  * unreachable. Users can query instances of classes implementing this interface to determine whether a host has been
  * marked as unreachable.
- * <p/>
+ * <p>
  * Users are expected to invoke the {@link #logUnavailableHost(java.net.URL)} method when an attempt to contact a host
  * fails. Each invocation increments the failure count by one. When the count exceeds the attempt limit, the host is
  * marked as unreachable. When attempts to contact the host <em>are</em> successful, users should invoke {@link
  * #logAvailableHost(java.net.URL)} method to clear its status.
- * <p/>
+ * <p>
  * A host may become reachable at a time subsequent to its being logged. To detect this, the implementation marks a host
  * as not unreachable after a specifiable interval of time. If the host is once more logged as unavailable, its entry
  * returns to the unavailable state. This cycle continues indefinitely.
- * <p/>
+ * <p>
  * Methods are provided to determine whether the public network can be reached and whether the NASA WorldWind servers
  * cab be reached. The addresses used to detect public network access can be explicitly specified.
  *

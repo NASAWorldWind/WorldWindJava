@@ -14,7 +14,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.geom.*;
 import java.beans.*;
@@ -1747,13 +1747,12 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
      * Toggles the selection state of the specified <code>node</code>. In order to provide an intuitive tree selection
      * model to the application, this changes the selection state of the <code>node</code>'s ancestors and descendants
      * as follows:
-     * <p/>
      * <ul> <li>The branch beneath the node it also set to the node's new selection state. Toggling an interior node's
      * selection state causes that entire branch to toggle.</li> <li>The node's ancestors are set to match the node's
      * new selection state. If the new state is <code>false</code>, this stops at the first ancestor with another branch
      * that has a selected node. When an interior or leaf node is toggled, the path to that node is also toggled, except
      * when doing so would clear a selected path to another interior or leaf node.</li> </ul>
-     * <p/>
+     * <p>
      *
      * @param node the <code>TreeNode</code> who's selection state should be toggled.
      */

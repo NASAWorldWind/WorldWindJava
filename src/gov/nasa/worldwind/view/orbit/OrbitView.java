@@ -54,7 +54,7 @@ public interface OrbitView extends View
      * Sets the center position of the OrbitView. The center position is used as the point about which the
      * heading and pitch rotate.  It is defined by the intersection of a ray from the eye position through the
      * center of the viewport with the surface of the globe.
-     * @param center
+     * @param center The desired center position.
      */
     void setCenterPosition(Position center);
 
@@ -68,7 +68,7 @@ public interface OrbitView extends View
     /**
      * Set the zoom value for the OrbitVeiw. The zoom value is the distance between the eye
      * position and the center position.
-     * @param zoom
+     * @param zoom The desired zoom value.
      */
     void setZoom(double zoom);
 
@@ -85,7 +85,7 @@ public interface OrbitView extends View
      * Set the limits for this OrbitView.  OrbitView has state values that augment the state values of a {@link View}.
      * Specifically, zoom and center position.  {@link OrbitViewLimits} enables the limiting of those values in addition
      * the the derived {@link gov.nasa.worldwind.view.BasicViewPropertyLimits} state.
-     * @param limits
+     * @param limits The desired limits.
      */
     void setOrbitViewLimits(OrbitViewLimits limits);
 

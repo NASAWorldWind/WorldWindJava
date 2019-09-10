@@ -16,7 +16,7 @@ import java.util.Random;
  * to a common spatial resolution is typically maintained in a {@link Level}. A collection of levels of progressive
  * resolutions are maintained in a {@link LevelSet}. The <code>Tile</code> class represents a single tile of a
  * subdivided image or elevation raster.
- * <p/>
+ * <p>
  * Individual tiles are identified by the level, row and column of the tile within its containing level set.
  *
  * @author tag

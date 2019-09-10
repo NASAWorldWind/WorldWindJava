@@ -22,7 +22,7 @@ import java.io.File;
 
 /**
  * Illustrates how to install imagery into a WorldWind <code>{@link FileStore}</code>.
- * <p/>
+ * <p>
  * Image data is installed into a FileStore by executing the following steps: <ol> <li>Choose the FileStore location to
  * place the installed imagery. This example uses the default install location.</li> <li>Compute a unique cache name for
  * the imagery. In this example the cache name is "Examples/ImageName", where "ImageName" is the image's display name,

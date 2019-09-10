@@ -53,9 +53,9 @@ public class NmeaReader implements Track, TrackSegment
     }
 
     /**
-     * @param path
+     * @param path The file spec to read.
      * @throws IllegalArgumentException if <code>path</code> is null
-     * @throws java.io.IOException
+     * @throws java.io.IOException if a read error occurs.
      */
     public void readFile(String path) throws java.io.IOException
     {
@@ -86,10 +86,10 @@ public class NmeaReader implements Track, TrackSegment
     }
 
     /**
-     * @param stream
-     * @param name
+     * @param stream The stream to read from.
+     * @param name The name of the stream.
      * @throws IllegalArgumentException if <code>stream</code> is null
-     * @throws java.io.IOException
+     * @throws java.io.IOException if a read error occurs.
      */
     public void readStream(java.io.InputStream stream, String name) throws java.io.IOException
     {

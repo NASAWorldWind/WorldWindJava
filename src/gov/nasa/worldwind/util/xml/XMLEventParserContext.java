@@ -74,7 +74,7 @@ public interface XMLEventParserContext extends AVList
 
     /**
      * Determines whether an event is the corresponding end element for a specified start event.
-     * <p/>
+     * <p>
      * Note: Only the event's element name and type are compared. The method returns true if the start and end events
      * are the corresponding event types for an element of the same name.
      *
@@ -256,7 +256,7 @@ public interface XMLEventParserContext extends AVList
      * Specify the object to receive notifications, which are sent when exceptions occur during parsing and when
      * unrecognized element types are encountered. See {@link gov.nasa.worldwind.util.xml.XMLParserNotification} for
      * more information.
-     * <p/>
+     * <p>
      * The parser context may have only one notification listener. That listener may be changed at any time.
      *
      * @param listener the object to receive notification events.

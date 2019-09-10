@@ -17,7 +17,7 @@ import gov.nasa.worldwind.util.Logging;
  * is Mercator. New projections may be added by extending this class and overriding {@link
  * #geodeticToCartesian(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double) geodeticToCartesian}
  * {@link #cartesianToGeodetic(gov.nasa.worldwind.geom.Vec4) cartesianToGeodetic}.
- * <p/>
+ * <p>
  * This globe uses a Cartesian coordinate system in the world plane is located at the origin and has UNIT-Z as normal.
  * The Y axis points to the north pole. The Z axis points up. The X axis completes a right-handed coordinate system, and
  * points east. Latitude and longitude zero are at the origin on y and x respectively. Sea level is at z = zero.

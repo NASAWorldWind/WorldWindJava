@@ -199,7 +199,7 @@ public class DDSHeader
     /**
      * Creates (reads) a DDSHeader from a ByteBuffer.
      *
-     * @param buffer
+     * @param buffer The buffer to read from
      * @return DDSHeader
      * @throws IllegalArgumentException if the ByteBuffer is null
      * @throws IOException              if the buffer length or content is invalid

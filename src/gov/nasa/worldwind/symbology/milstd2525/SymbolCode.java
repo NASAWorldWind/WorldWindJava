@@ -15,21 +15,19 @@ import gov.nasa.worldwind.util.Logging;
  * SymbolCode provides a utility for parsing and representing the individual fields of a MIL-STD-2525 symbol
  * identification code (SIDC). A SymbolCode can either be created by parsing a 15-character symbol code string or by
  * creating an empty SymbolCode and manually specifying its fields.
- * <p/>
+ * <p>
  * To parse a symbol code string, construct a new SymbolCode passing in the identifier string as the sole argument.
  * SymbolCode validates and parses the string, and populates its fields according to the contents of the string. If any
  * field in the code is unrecognized SymbolCode throws an exception and indicates the problematic fields in the
  * exception's message. After parsing, each field can be accessed by calling the appropriate accessor methods (for
  * example: getScheme/setScheme). SymbolCodes supports the following fields:
- * <p/>
  * <ul> <li>Coding Scheme</li> <li>Standard Identity</li> <li>Battle Dimension</li> <li>Category</li> <li>Function
  * ID</li> <li>Symbol Modifier</li> <li>Echelon</li> <li>Status</li> <li>Country Code</li> <li>Order of Battle</li>
  * </ul>
- * <p/>
+ * <p>
  * Which fields are populated after parsing a symbol code depends on the MIL-STD-2525 symbology set the symbol code
  * belongs to:
- * <p/>
- * <table border="1"> <tr><th>Symbology Set</th><th>Coding Scheme</th><th>Standard Identity</th><th>Battle
+ * <table border="1"> <caption style="font-weight: bold;">Populated Fields</caption><tr><th>Symbology Set</th><th>Coding Scheme</th><th>Standard Identity</th><th>Battle
  * Dimension</th><th>Category</th><th>Status</th><th>Function ID</th><th>Symbol Modifier</th><th>Echelon</th><th>Country
  * Code</th><th>Order of Battle</th></tr> <tr><td>Warfighting</td><td>YES</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td></tr>
  * <tr><td>Tactical Graphics</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td><td>YES</td></tr>
@@ -58,7 +56,7 @@ public class SymbolCode extends AVListImpl
      * This throws an exception if any field in the symbol code is unrecognized, and indicates the problematic fields in
      * the exception's message. After construction, each field can be accessed by calling the appropriate accessor
      * methods (for example: getScheme/setScheme)
-     * <p/>
+     * <p>
      * See SymbolCode's class-level documentation for an overview of the supported MIL-STD-2525 symbol code fields.
      *
      * @param symCode the symbol identification code to parse.
@@ -107,7 +105,6 @@ public class SymbolCode extends AVListImpl
     /**
      * Specifies this symbol code's Coding Scheme field.  A symbol code's Coding Scheme defines the specific
      * MIL-STD-2525 symbology set that it belongs to. The value must be <code>null</code> or one of the following:
-     * <p/>
      * <ul> <li>SCHEME_WARFIGHTING</li> <li>SCHEME_TACTICAL_GRAPHICS</li> <li>SCHEME_METOC</li>
      * <li>SCHEME_INTELLIGENCE</li> <li>SCHEME_STABILITY_OPERATIONS</li> <li>SCHEME_EMERGENCY_MANAGEMENT</li> </ul>
      *
@@ -133,7 +130,6 @@ public class SymbolCode extends AVListImpl
     /**
      * Specifies this symbol code's Standard Identity field. A symbol code's Standard Identity defines the threat posed
      * by the object being represented. The value must be <code>null</code> or one of the following:
-     * <p/>
      * <ul> <li>STANDARD_IDENTITY_PENDING</li> <li>STANDARD_IDENTITY_UNKNOWN</li> <li>STANDARD_IDENTITY_ASSUMED_FRIEND</li>
      * <li>STANDARD_IDENTITY_FRIEND</li> <li>STANDARD_IDENTITY_NEUTRAL</li> <li>STANDARD_IDENTITY_SUSPECT</li>
      * <li>STANDARD_IDENTITY_HOSTILE</li> <li>STANDARD_IDENTITY_EXERCISE_PENDING</li>
@@ -163,7 +159,6 @@ public class SymbolCode extends AVListImpl
     /**
      * Specifies this symbol code's Battle Dimension field. A symbol code's Battle Dimension defines the primary mission
      * area for the object being represented. The value must be <code>null</code> or one of the following:
-     * <p/>
      * <ul> <li>BATTLE_DIMENSION_SPACE</li> <li>BATTLE_DIMENSION_AIR</li> <li>BATTLE_DIMENSION_GROUND</li>
      * <li>BATTLE_DIMENSION_SEA_SURFACE</li> <li>BATTLE_DIMENSION_SEA_SUBSURFACE</li> <li>BATTLE_DIMENSION_SOF</li>
      * <li>BATTLE_DIMENSION_OTHER</li> </ul>
@@ -190,21 +185,18 @@ public class SymbolCode extends AVListImpl
     /**
      * Specifies this symbol code's Category field. The meaning of a symbol code's Category and the recognized values
      * depend on the specific MIL-STD-2525 symbology scheme the symbol code belongs to:
-     * <p/>
+     * <p>
      * <strong>Tactical Graphics</strong>
-     * <p/>
      * <ul> <li>CATEGORY_TASKS</li> <li>CATEGORY_COMMAND_CONTROL_GENERAL_MANEUVER</li>
      * <li>CATEGORY_MOBILITY_SURVIVABILITY</li> <li>CATEGORY_FIRE_SUPPORT</li> <li>CATEGORY_COMBAT_SERVICE_SUPPORT</li>
      * <li>CATEGORY_OTHER</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Stability Operations</strong>
-     * <p/>
      * <ul> <li>CATEGORY_VIOLENT_ACTIVITIES</li> <li>CATEGORY_LOCATIONS</li> <li>CATEGORY_OPERATIONS</li>
      * <li>CATEGORY_ITEMS</li> <li>CATEGORY_INDIVIDUAL</li> <li>CATEGORY_NONMILITARY_GROUP_ORGANIZATION</li>
      * <li>CATEGORY_RAPE</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Emergency Management</strong>
-     * <p/>
      * <ul> <li>CATEGORY_INCIDENT</li> <li>CATEGORY_NATURAL_EVENTS</li> <li>CATEGORY_OPERATIONS</li>
      * <li>CATEGORY_INFRASTRUCTURE</li> </ul>
      *
@@ -232,18 +224,15 @@ public class SymbolCode extends AVListImpl
      * represented object exists at the time the symbol was generated, or is anticipated to exist in the future.
      * Additionally, a symbol code's Status can define its operational condition. The recognized values depend on the
      * specific MIL-STD-2525 symbology scheme the symbol code belongs to:
-     * <p/>
+     * <p>
      * <strong>Warfighting, Signals Intelligence, Stability Operations</strong>
-     * <p/>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> <li>STATUS_PRESENT_FULLY_CAPABLE</li>
      * <li>STATUS_PRESENT_DAMAGED</li> <li>STATUS_PRESENT_DESTROYED</li> <li>STATUS_PRESENT_FULL_TO_CAPACITY</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Tactical Graphics</strong>
-     * <p/>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Emergency Management</strong>
-     * <p/>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      *
      * @param value the new value for the Status/Operational Condition field. May be <code>null</code>.
@@ -268,7 +257,6 @@ public class SymbolCode extends AVListImpl
     /**
      * Specifies this symbol code's Function ID field. The Function IDs are unique to each symbology schemes that uses
      * them, and are defined in each appendix of the MIL-STD-2525C specification:
-     * <p/>
      * <ul> <li>Warfighting - section A.5.2.1.e (page 51) and table A-I (page 51)</li> <li>Tactical Graphics - section
      * B.5.2.1.e (page 304) and table B-I (page 305)</li> <li>Meteorological and Oceanographic - section C.5.2.1.d (page
      * 763) and table C-I (page 763)</li> <li>Signals Intelligence - section D.5.2.1.e (page 964) and table D-I (page
@@ -300,7 +288,6 @@ public class SymbolCode extends AVListImpl
      * installation, equipment mobility, and auxiliary equipment. The recognized values depend on the specific
      * MIL-STD-2525 symbology scheme the symbol code belongs to, and are defined in each appendix of the MIL-STD-2525C
      * specification:
-     * <p/>
      * <ul> <li>Warfighting - section A.5.2.1.f (page 51) and table A-II (pages 52-54)</li> <li>Stability Operations -
      * section E.5.2.1.f (page 991) and table E-II (pages 992-994)</li> <li>Emergency Management - section G.5.5 (page
      * 1029) and table EG-II (page 1032)</li> </ul>
@@ -327,12 +314,11 @@ public class SymbolCode extends AVListImpl
     /**
      * Specifies this symbol code's Echelon field. A symbol code's Echelon defines the command level of a unit
      * represented by the symbol. The value must be <code>null</code> or one of the following:
-     * <p/>
      * <ul> <li>ECHELON_TEAM_CREW</li> <li>ECHELON_SQUAD</li> <li>ECHELON_SECTION</li>
      * <li>ECHELON_PLATOON_DETACHMENT</li> <li>ECHELON_COMPANY_BATTERY_TROOP</li> <li>ECHELON_BATTALION_SQUADRON</li>
      * <li>ECHELON_REGIMENT_GROUP</li> <li>ECHELON_BRIGADE</li> <li>ECHELON_DIVISION</li> <li>ECHELON_CORPS</li>
      * <li>ECHELON_ARMY</li> <li>ECHELON_ARMY_GROUP_FRONT</li> <li>ECHELON_REGION</li> <li>ECHELON_COMMAND</li> </ul>
-     * <p/>
+     * <p>
      *
      * @param value the new value for the Echelon field. May be <code>null</code>.
      */
@@ -381,15 +367,13 @@ public class SymbolCode extends AVListImpl
      * Specifies this symbol code's Order of Battle field. A symbol code's Order of Battle provides additional
      * information about the symbol in the operational environment. The recognized values depend on the specific
      * MIL-STD-2525 symbology scheme the symbol code belongs to:
-     * <p/>
+     * <p>
      * <strong>Warfighting, Signals Intelligence, Stability Operations, Emergency Management</strong>
-     * <p/>
      * <ul> <li>ORDER_OF_BATTLE_AIR</li> <li>ORDER_OF_BATTLE_ELECTRONIC</li> <li>ORDER_OF_BATTLE_CIVILIAN</li>
      * <li>ORDER_OF_BATTLE_GROUND</li> <li>ORDER_OF_BATTLE_MARITIME</li> <li>ORDER_OF_BATTLE_STRATEGIC_FORCE_RELATED</li>
      * </ul>
-     * <p/>
+     * <p>
      * <strong>Tactical Graphics</strong>
-     * <p/>
      * <ul> <li>ORDER_OF_BATTLE_CONTROL_MARKINGS</li> </ul>
      *
      * @param value the new value for the Order of Battle field. May be <code>null</code>.
@@ -451,7 +435,7 @@ public class SymbolCode extends AVListImpl
      * that are unspecified or null are replaced with the MIL-STD-2525 unused position character "-". Field values are
      * either padded or trimmed to fit their portion of the symbol code, adding unused characters to pad or ignoring
      * extra characters to trim.
-     * <p/>
+     * <p>
      * This returns <code>null</code> if this SymbolCode's Coding Scheme is <code>null</code> or unrecognized.
      *
      * @return the MIL-STD-2525 15-character symbol identification code (SIDC) corresponding to this SymbolCode, or
@@ -491,8 +475,8 @@ public class SymbolCode extends AVListImpl
      * schemes: echelon, headquarters, task force, feint/dummy, installation, equipment mobility, and auxiliary
      * equipment. This adds modifier keys only for those modifiers present in the SymbolModifier field. Any modifiers
      * not in the SymbolModifier field are ignored. The following key-value pairs are used to indicate each modifier:
-     * <p/>
-     * <table border="1"> <tr><th>Modifier</th><th>Key</th><th>Value</th></tr> <tr><td>Echelon</td><td>SymbologyConstants.ECHELON</td><td>See
+     * <table border="1"> <caption style="font-weight: bold;">Key Value Pairs</caption> 
+     * <tr><th>Modifier</th><th>Key</th><th>Value</th></tr> <tr><td>Echelon</td><td>SymbologyConstants.ECHELON</td><td>See
      * {@link SymbologyConstants#ECHELON}</td></tr> <tr><td>Headquarters</td><td>SymbologyConstants.HEADQUARTERS</td><td>Boolean.TRUE
      * or <code>null</code></td></tr> <tr><td>Task Force</td><td>SymbologyConstants.TASK_FORCE</td><td>Boolean.TRUE or
      * <code>null</code></td></tr> <tr><td>Feint/Dummy</td><td>SymbologyConstants.FEINT_DUMMY</td><td>Boolean.TRUE or
@@ -500,7 +484,7 @@ public class SymbolCode extends AVListImpl
      * SymbologyConstants#INSTALLATION}</td></tr> <tr><td>Equipment Mobility</td><td>SymbologyConstants.MOBILITY</td><td>See
      * {@link SymbologyConstants#MOBILITY}</td></tr> <tr><td>Auxiliary Equipment</td><td>SymbologyConstants.AUXILIARY_EQUIPMENT</td><td>See
      * {@link SymbologyConstants#AUXILIARY_EQUIPMENT}</td></tr> </table>
-     * <p/>
+     * <p>
      * Note that the installation modifier code indicates that an installation is either a normal installation or a
      * feint/dummy installation. In the latter case, this also sets the modifier key SymbologyConstants.FEINT_DUMMY to
      * Boolean.TRUE. This provides a consistent way to identify feint/dummy modifier status for both units/equipment and
@@ -716,7 +700,7 @@ public class SymbolCode extends AVListImpl
      * fields: Coding Scheme, Standard Identity, Battle Dimension, Status, Function ID, Symbol Modifier, Country Code,
      * Order of Battle. All fields except Function ID, Symbol Modifier, Country Code and Order of Battle must be
      * non-<code>null</code>.
-     * <p/>
+     * <p>
      * The Warfighting coding scheme is defined in MIL-STD-2525C table A-I (page 51).
      *
      * @param symCode the symbol code to parse. Must be non-<code>null</code> and have length of 15 or greater. Any
@@ -795,7 +779,7 @@ public class SymbolCode extends AVListImpl
      * following fields: Coding Scheme, Standard Identity, Category, Status, Function ID, Echelon, Country Code, Order
      * of Battle. All fields except Function ID, Echelon, Country Code and Order of Battle must be
      * non-<code>null</code>.
-     * <p/>
+     * <p>
      * The Tactical Graphics coding scheme is defined in MIL-STD-2525C table B-I (page 305).
      *
      * @param symCode the symbol code to parse. Must be non-<code>null</code> and have length of 15 or greater. Any
@@ -920,7 +904,7 @@ public class SymbolCode extends AVListImpl
      * Parses symbol codes encoded for the Signals Intelligence coding scheme. Signals Intelligence symbol codes contain
      * the following fields: Scheme, Standard Identity, Battle Dimension, Status, Function ID, Country Code, Order of
      * Battle. All fields except Function ID, Country Code and Order of Battle must be non-<code>null</code>.
-     * <p/>
+     * <p>
      * The Signals Intelligence coding scheme is defined in MIL-STD-2525C table D-I (page 964).
      *
      * @param symCode the symbol code to parse. Must be non-<code>null</code> and have length of 15 or greater. Any
@@ -992,7 +976,7 @@ public class SymbolCode extends AVListImpl
      * the following fields: Scheme, Standard Identity, Category, Status, Function ID, Symbol Modifier, Country Code,
      * Order of Battle. All fields except Function ID, Symbol Modifier, Country Code and Order of Battle must be
      * non-<code>null</code>.
-     * <p/>
+     * <p>
      * The Stability Operations coding scheme is defined in MIL-STD-2525C table E-I (page 991).
      *
      * @param symCode the symbol code to parse. Must be non-<code>null</code> and have length of 15 or greater. Any
@@ -1066,7 +1050,7 @@ public class SymbolCode extends AVListImpl
      * the following fields: Scheme, Standard Identity, Category, Status, Function ID, Symbol Modifier, Country Code,
      * Order of Battle. All fields except Function ID, Symbol Modifier, Country Code and Order of Battle must be
      * non-<code>null</code>.
-     * <p/>
+     * <p>
      * The Emergency Management coding scheme is defined in MIL-STD-2525C table G-I (page 1032).
      *
      * @param symCode the symbol code to parse. Must be non-<code>null</code> and have length of 15 or greater. Any
@@ -1165,7 +1149,7 @@ public class SymbolCode extends AVListImpl
      * unspecified or null are replaced with the MIL-STD-2525 unused position character "-". Field values are either
      * padded or trimmed to fit their portion of the symbol code, adding unused characters to pad or ignoring extra
      * characters to trim.
-     * <p/>
+     * <p>
      * This returns <code>null</code> if this SymbolCode's Coding Scheme is <code>null</code> or unrecognized.
      *
      * @return the MIL-STD-2525 15-character symbol identification code (SIDC) corresponding to this SymbolCode, or
@@ -1219,7 +1203,7 @@ public class SymbolCode extends AVListImpl
      * Composes a 15-character symbol identification code (SIDC) for the Warfighting coding scheme. Warfighting symbol
      * codes contain the following fields: Coding Scheme, Standard Identity, Battle Dimension, Status, Function ID,
      * Symbol Modifier, Country Code, Order of Battle.
-     * <p/>
+     * <p>
      * The Warfighting coding scheme is defined in MIL-STD-2525C table A-I (page 51).
      *
      * @return the MIL-STD-2525 15-character symbol identification code (SIDC) corresponding to this SymbolCode,
@@ -1245,7 +1229,7 @@ public class SymbolCode extends AVListImpl
      * Composes a 15-character symbol identification code (SIDC) for the Tactical Graphics coding scheme. Tactical
      * Graphics symbol codes contain the following fields: Coding Scheme, Standard Identity, Category, Status, Function
      * ID, Echelon, Country Code, Order of Battle.
-     * <p/>
+     * <p>
      * The Tactical Graphics coding scheme is defined in MIL-STD-2525C table B-I (page 305).
      *
      * @return the MIL-STD-2525 15-character symbol identification code (SIDC) corresponding to this SymbolCode,
@@ -1272,7 +1256,7 @@ public class SymbolCode extends AVListImpl
      * Composes a 15-character symbol identification code (SIDC) for the Meteorological and Oceanographic coding scheme.
      * METOC symbol codes contain the following fields: Coding Scheme, Category, Static/Dynamic, Function ID, Graphic
      * Type.
-     * <p/>
+     * <p>
      * The Meteorological and Oceanographic coding scheme is defined in MIL-STD-2525C table C-I (page 763).
      *
      * @return the MIL-STD-2525 15-character symbol identification code (SIDC) corresponding to this SymbolCode,
@@ -1297,7 +1281,7 @@ public class SymbolCode extends AVListImpl
      * Composes a 15-character symbol identification code (SIDC) for the Signals Intelligence coding scheme. Signals
      * Intelligence symbol codes contain the following fields: Scheme, Standard Identity, Battle Dimension, Status,
      * Function ID, Country Code, Order of Battle.
-     * <p/>
+     * <p>
      * The Signals Intelligence coding scheme is defined in MIL-STD-2525C table D-I (page 964).
      *
      * @return the MIL-STD-2525 15-character symbol identification code (SIDC) corresponding to this SymbolCode,
@@ -1323,7 +1307,7 @@ public class SymbolCode extends AVListImpl
      * Composes a 15-character symbol identification code (SIDC) for the Stability Operations coding scheme. Stability
      * Operations symbol codes contain the following fields: Scheme, Standard Identity, Category, Status, Function ID,
      * Symbol Modifier, Country Code, Order of Battle.
-     * <p/>
+     * <p>
      * The Stability Operations coding scheme is defined in MIL-STD-2525C table E-I (page 991).
      *
      * @return the MIL-STD-2525 15-character symbol identification code (SIDC) corresponding to this SymbolCode,
@@ -1349,7 +1333,7 @@ public class SymbolCode extends AVListImpl
      * Composes a 15-character symbol identification code (SIDC) for the Emergency Management coding scheme. Emergency
      * Management symbol codes contain the following fields: Standard Identity, Category, Status, Function ID, Symbol
      * Modifier, Country Code, Order of Battle.
-     * <p/>
+     * <p>
      * The Emergency Management coding scheme is defined in MIL-STD-2525C table G-I (page 1032).
      *
      * @return the MIL-STD-2525 15-character symbol identification code (SIDC) corresponding to this SymbolCode,

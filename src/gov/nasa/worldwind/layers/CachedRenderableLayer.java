@@ -12,13 +12,13 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.util.Collection;
 
 /**
  * Holds a collection of Renderables and manages local caching of them. Provides searching for Renderables by sector,
  * location or name.
- * <p/>
+ * <p>
  * NOTE: This class is experimental and not fully implemented. You should not use it now.
  *
  * @author tag

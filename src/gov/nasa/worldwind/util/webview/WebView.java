@@ -18,22 +18,22 @@ import java.net.URL;
  * interacting with the rendered content. This functionality is divided into four main tasks: <ul> <li>Loading web
  * content into a WebView's frame.</li> <li>Sending input events to the WebView's frame.</li> <li>Receiving information
  * about links in the WebView's frame.</li> <li>Receiving a rendered representation of the WebView's frame.</li> </ul>
- * <p/>
+ * <p>
  * A WebView is configured by specifying its text content and the size of the WebView's frame. The text may be an HTML
  * document, an HTML fragment, simple text, <code>null</code>, or another text format supported by the implementation.
  * The size of the WebView's frame is specified in pixels, and may not exceed an implementation-defined maximum. Most
  * implementations define the maximum value to be 4096 - the maximum texture size on most platforms.
- * <p/>
+ * <p>
  * The user can interact with the WebView using the mouse and keyboard. The application must send input events to the
  * WebView's frame because WebView is not associated with any windowing system. Input events are received and processed
  * in an implementation-defined manner. Applications can suppress WebView navigation by drawing the link rectangles
  * during the picking phase, and consuming link clicked <code>SelectEvents</code> before they are sent to the WebView.
- * <p/>
+ * <p>
  * The WebView provides a representation of itself as an OpenGL texture. On machines that support non-power-of-two sized
  * textures, this texture has dimensions equal to the WebView's frame size. Otherwise, the texture's dimensions are the
  * smallest power-of-two that captures the WebView's frame size. The WebView's texture representation is standard
  * two-dimensional OpenGL texture that may be mapped onto any OpenGL primitive using texture coordinates.
- * <p/>
+ * <p>
  * When the WebView's texture representation changes as a result of an internal event it fires a property change event
  * with the key {@link gov.nasa.worldwind.avlist.AVKey#REPAINT}. This can happen from web content loading, user
  * interaction, or from a programmatic change such as JavaScript.
@@ -46,13 +46,12 @@ public interface WebView extends AVList, Disposable
     /**
      * Specifies this <code>WebView's</code> HTML content as a string. The specified <code>htmlString</code> may be one
      * of the following:
-     * <p/>
      * <ul> <li>HTML document</li> <li>HTML fragment</li> <li>Simple text</li> <li><code>null</code></li> </ul>
-     * <p/>
+     * <p>
      * The WebView displays nothing if <code>htmlString</code> is <code>null</code> or empty. If the
      * <code>htmlString</code> contains relative paths, they are not resolved and are interpreted as unresolved
      * references.
-     * <p/>
+     * <p>
      * If the application sends input events to the WebView, the user may navigate away from the specified HTML content
      * by interacting with links or buttons in the content.
      *
@@ -64,13 +63,12 @@ public interface WebView extends AVList, Disposable
     /**
      * Specifies this <code>WebView's</code> HTML content as a string. The specified <code>htmlString</code> may be one
      * of the following:
-     * <p/>
      * <ul> <li>HTML document</li> <li>HTML fragment</li> <li>Simple text</li> <li><code>null</code></li> </ul>
-     * <p/>
+     * <p>
      * The WebView displays nothing if <code>htmlString</code> is <code>null</code> or empty. The <code>baseURL</code>
      * is used to resolve relative paths in the specified <code>htmlString</code>. If the <code>baseURL</code> is
      * <code>null</code>, relative paths are not resolved and are interpreted as unresolved references.
-     * <p/>
+     * <p>
      * If the application sends input events to the WebView, the user may navigate away from the specified HTML content
      * by interacting with links or buttons in the content. Once the user navigates away from the content specified
      * here, the <code>htmlString</code> and <code>baseURL</code> are no longer used.
@@ -86,14 +84,13 @@ public interface WebView extends AVList, Disposable
     /**
      * Specifies this <code>WebView's</code> HTML content as a string. The specified <code>htmlString</code> may be one
      * of the following:
-     * <p/>
      * <ul> <li>HTML document</li> <li>HTML fragment</li> <li>Simple text</li> <li><code>null</code></li> </ul>
-     * <p/>
+     * <p>
      * The WebView displays nothing if <code>htmlString</code> is <code>null</code> or empty. The
      * <code>WebResourceResolver</code> is used to resolve relative paths in the specified <code>htmlString</code>. If
      * the <code>WebResourceResolver</code> is <code>null</code>, relative paths are not resolved and are interpreted as
      * unresolved references.
-     * <p/>
+     * <p>
      * If the application sends input events to the WebView, the user may navigate away from the specified HTML content
      * by interacting with links or buttons in the content. Once the user navigates away from the content specified
      * here, the <code>htmlString</code> and <code>resourceResolver</code> are no longer used.
@@ -132,7 +129,7 @@ public interface WebView extends AVList, Disposable
      * determined. This WebView attempts to determine its current content's size each time an HTML frame is loaded and
      * its layout is performed. If the content is plain text or has no HTML frames, this WebView determines its content
      * size after the text is loaded.
-     * <p/>
+     * <p>
      * The returned size changes as this WebView navigates to new content or navigates within its history, and always
      * reflects the size of the current content. The returned size is limited by this WebView's minimum content size.
      * See {@link #getMinContentSize()} for more information on how the minimum content size is used.
@@ -146,7 +143,7 @@ public interface WebView extends AVList, Disposable
 
     /**
      * Returns the minimum size in pixels of this WebView's content area.
-     * <p/>
+     * <p>
      * HTML content can expand to fit its frame, so it is impossible to determine the size of content without laying out
      * the content in a frame of some size. The minimum content size determines the size of the frame used to compute
      * the content layout and size. If the content is simple text, the text will wrap to the minimum content width.
@@ -178,7 +175,6 @@ public interface WebView extends AVList, Disposable
      * returned iterable has no elements if this <code>WebView</code> has no links, or if none of the links are
      * currently in the <code>WebView's</code> visible area. Each <code>AVList</code> describes the parameters for one
      * link as follows:
-     * <p/>
      * <ul> <li><code>AVKey.URL</code> - a <code>String</code> containing the link's destination.</li>
      * <li><code>AVKey.MIME_TYPE</code> - a <code>String</code> mime type describing the content type of the link's
      * destination.</li> <li><code>AVKey.TARGET</code> - the link's target frame, one of the following: <code>_blank,
@@ -186,7 +182,7 @@ public interface WebView extends AVList, Disposable
      * documentation</a> on frame target names.</li> <li><code>AVKey.BOUNDS</code> - a <code>java.awt.Rectangle</code>
      * representing the link's bounding rectangle.</li> <li><code>AVKey.RECTANGLES</code> - an array of one or more
      * <code>java.awt.Rectangle</code> instances representing the link's separate pickable rectangles.</li> </ul>
-     * <p/>
+     * <p>
      * The link rectangles are in the <code>WebView</code>'s local coordinate system, and are clipped to the
      * <code>WebView's</code> visible area. The <code>WebView</code>'s coordinate system has its origin in the lower
      * left corner with the X-axis pointing right and the Y-axis pointing up. Multi-line links are represented as one
@@ -201,7 +197,7 @@ public interface WebView extends AVList, Disposable
      * Returns a layed out and rendered representation of the WebView's content as a {@link
      * gov.nasa.worldwind.render.WWTexture}. The texture's image source is the WebView, and its dimensions are large
      * enough to capture the WebView's frame size (see {@link #setFrameSize(java.awt.Dimension)}.
-     * <p/>
+     * <p>
      * On machines that support non-power-of-two sized textures, the texture's dimensions are always equal to the
      * WebView's frame size. Otherwise, the texture's dimensions are the smallest power-of-two that captures the
      * WebView's frame size.
@@ -233,12 +229,12 @@ public interface WebView extends AVList, Disposable
      * Sends the specified input event to the WebView. Which events the WebView's responds to and how it responds is
      * implementation-defined. Typical implementations respond to {@link java.awt.event.KeyEvent}, {@link
      * java.awt.event.MouseEvent}, and {@link java.awt.event.MouseWheelEvent}.
-     * <p/>
+     * <p>
      * The screen coordinates for a <code>MouseEvent</code> must be transformed into the WebView's local coordinate
      * system, which has its origin in the lower left corner with the X-axis pointing right and the Y-axis pointing up.
-     * <p/>
+     * <p>
      * This does nothing if the specified event is <code>null</code>.
-     * <p/>
+     * <p>
      * Users of the WebView must call {@link #setActive} before sending input events to the WebView. The WebView can be
      * activated and deactivated any number of times. For example, a controller might call <code>setActive(true)</code>
      * when the mouse enters the WebView texture, and call <code>setActive(false)</code> when the mouse exits the

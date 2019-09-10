@@ -10,8 +10,8 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.terrain.Terrain;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.glu.*;
 import java.nio.*;
 import java.util.*;
 
@@ -7445,10 +7445,10 @@ public class GeometryBuilder
      * Creates a vertex buffer for a two-dimensional ellipse centered at the specified location and with the specified
      * radii. The ellipse's center is placed at <code>(x, y)</code>, it has a width of <code>2 * majorRadius</code>, and
      * a height of <code>2 * minorRadius</code>.
-     * <p/>
+     * <p>
      * If the specified <code>slices</code> is greater than 1 this returns a buffer with vertices evenly spaced along
      * the circumference of the ellipse. Otherwise this returns a buffer with one vertex.
-     * <p/>
+     * <p>
      * The returned buffer contains pairs of xy coordinates representing the location of each vertex in the ellipse in a
      * counter-clockwise winding order relative to the z axis. The buffer may be rendered in OpenGL as either a triangle
      * fan or a line loop.
@@ -7520,10 +7520,10 @@ public class GeometryBuilder
      * Creates a vertex buffer for a two-dimensional ellipse centered at the specified location and with the specified
      * radii. The ellipse's center is placed at <code>(x, y)</code>, it has a width of <code>2 * majorRadius</code>, and
      * a height of <code>2 * minorRadius</code>.
-     * <p/>
+     * <p>
      * If the specified <code>slices</code> is greater than 1 this returns a buffer with vertices evenly spaced along
      * the circumference of the ellipse. Otherwise this returns a buffer with one vertex.
-     * <p/>
+     * <p>
      * If the specified <code>leaderWidth</code> is greater than zero and the location <code>(leaderX, leaderY)</code>
      * is outside of the rectangle that encloses the ellipse, the ellipse has a triangle attached to one side with with
      * its top pointing at <code>(leaderX, leaderY)</code>. Otherwise this returns an ellipse with no leader and is
@@ -7684,7 +7684,7 @@ public class GeometryBuilder
      * Creates a vertex buffer for a two-dimensional rectangle at the specified location, and with the specified size.
      * The rectangle's lower left corner is placed at <code>(x, y)</code>, and its upper right corner is placed at
      * <code>(x + width, y + height)</code>.
-     * <p/>
+     * <p>
      * The returned buffer contains pairs of xy coordinates representing the location of each vertex in the rectangle in
      * a counter-clockwise winding order relative to the z axis. The buffer may be rendered in OpenGL as either a
      * triangle fan or a line loop.
@@ -7737,7 +7737,7 @@ public class GeometryBuilder
      * Creates a vertex buffer for a two-dimensional rectangle at the specified location, with the specified size, and
      * with optionally rounded corners. The rectangle's lower left corner is placed at the <code>(x, y)</code>, and its
      * upper right corner is placed at <code>(x + width, y + height)</code>.
-     * <p/>
+     * <p>
      * If the specified <code>cornerRadius</code> and <code>cornerSlices</code> are greater than 0, the rectangle's
      * corners have a rounded appearance. The radius specifies the size of a rounded corner, and the slices specifies
      * the number of segments that make a rounded corner. If either <code>cornerRadius</code> or
@@ -7745,7 +7745,7 @@ public class GeometryBuilder
      * <code>{@link #makeRectangle(float, float, float, float)}</code>. The <code>cornerRadius</code> is limited by the
      * rectangle's width and height. For example, if the corner radius is 100 and the width and height are 50 and 100,
      * the actual corner radius used is 25 - half of the rectangle's smallest dimension.
-     * <p/>
+     * <p>
      * The returned buffer contains pairs of xy coordinates representing the location of each vertex in the rectangle in
      * a counter-clockwise winding order relative to the z axis. The buffer may be rendered in OpenGL as either a
      * triangle fan or a line loop.
@@ -7842,7 +7842,7 @@ public class GeometryBuilder
      * Creates a vertex buffer for a two-dimensional rectangle at the specified location, with the specified size, and
      * with an optional leader pointing to the specified leader location. The rectangle's lower left corner is placed at
      * <code>(x, y)</code>, and its upper right corner is placed at <code>(x + width, y + height)</code>.
-     * <p/>
+     * <p>
      * If the specified <code>leaderWidth</code> is greater than zero and the location <code>(leaderX, leaderY)</code>
      * is outside of the rectangle, the rectangle has a triangle attached to one side with with its top pointing at
      * <code>(leaderX, leaderY)</code>. Otherwise this returns a rectangle with no leader and is equivalent to calling
@@ -7850,7 +7850,7 @@ public class GeometryBuilder
      * the top, bottom, left, or right side, depending on the leader's location relative to the rectangle. The leader
      * width is limited in size by the side it is attached to. For example, if the leader is attached to the rectangle's
      * bottom, its width is limited by the rectangle's width.
-     * <p/>
+     * <p>
      * The returned buffer contains pairs of xy coordinates representing the location of each vertex in the rectangle in
      * a counter-clockwise winding order relative to the z axis. The buffer may be rendered in OpenGL as either a
      * triangle fan or a line loop.
@@ -8053,7 +8053,7 @@ public class GeometryBuilder
      * Creates a vertex buffer for a two-dimensional rectangle at the specified location, with the specified size, and
      * with optionally rounded corners. The rectangle's lower left corner is placed at the <code>(x, y)</code>, and its
      * upper right corner is placed at <code>(x + width, y + height)</code>.
-     * <p/>
+     * <p>
      * If the specified <code>cornerRadius</code> and <code>cornerSlices</code> are greater than 0, the rectangle's
      * corners have a rounded appearance. The radius specifies the size of a rounded corner, and the slices specifies
      * the number of segments that make a rounded corner. If either <code>cornerRadius</code> or
@@ -8062,7 +8062,7 @@ public class GeometryBuilder
      * <code>cornerRadius</code> is limited by the rectangle's width and height. For example, if the corner radius is
      * 100 and the width and height are 50 and 100, the actual corner radius used is 25 - half of the rectangle's
      * smallest dimension.
-     * <p/>
+     * <p>
      * If the specified <code>leaderWidth</code> is greater than zero and the location <code>(leaderX, leaderY)</code>
      * is outside of the rectangle, the rectangle has a triangle attached to one side with with its top pointing at
      * <code>(leaderX, leaderY)</code>. Otherwise this returns a rectangle with no leader and is equivalent to calling
@@ -8070,7 +8070,7 @@ public class GeometryBuilder
      * of either the top, bottom, left, or right side, depending on the leader's location relative to the rectangle. The
      * leader width is limited in size by the side it is attached to. For example, if the leader is attached to the
      * rectangle's bottom, its width is limited by the rectangle's width minus any area used by the rounded corners.
-     * <p/>
+     * <p>
      * The returned buffer contains pairs of xy coordinates representing the location of each vertex in the rectangle in
      * a counter-clockwise winding order relative to the z axis. The buffer may be rendered in OpenGL as either a
      * triangle fan or a line loop.

@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Retrieve the highest-resolution elevations available for the current elevation model, drawing them from the server if
  * necessary. Shift-click on the globe to retrieve the elevation of a location.
- * <p/>
+ * <p>
  * Note: The {@link gov.nasa.worldwind.terrain.HighResolutionTerrain} class may be more appropriate to your needs than
  * this example.
  *
@@ -37,7 +37,7 @@ public class GetBestElevations extends ApplicationTemplate
          * available for the dataset and the area bounding the locations. Since the necessary elevation data might not
          * be in memory at the time of the call, this method iterates until the necessary elevation data is in memory
          * and can be used to determine the locations' elevations.
-         * <p/>
+         * <p>
          * The locations must have a bounding sector, so more than one location is required. If the bounding region is
          * large, a huge amount of data must be retrieved from the server. Be aware that you are overriding the system's
          * resolution selection mechanism by requesting the highest resolution data, which could easily be gigabytes.

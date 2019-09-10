@@ -184,6 +184,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
      *
      * @param position   position to clamp to the allowed range.
      * @param viewLimits defines the center location and elevation limits.
+     * @return The clamped position.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitCenterPosition(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Position)} instead.
@@ -215,6 +216,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
      * @param latitude   latitude angle to clamp to the allowed range.
      * @param longitude  longitude angle to clamp to the allowed range.
      * @param viewLimits defines the center location limits.
+     * @return The clamped location.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitCenterPosition(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Position)} instead.
@@ -264,6 +266,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
      *
      * @param value      elevation to clamp to the allowed range.
      * @param viewLimits defines the center elevation limits.
+     * @return The clamped elevation.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitCenterPosition(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Position)} instead.
@@ -297,6 +300,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
      *
      * @param value      distance to clamp to the allowed range.
      * @param viewLimits defines the zoom distance limits.
+     * @return The clamped zoom.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitZoom(gov.nasa.worldwind.View, double)} instead.

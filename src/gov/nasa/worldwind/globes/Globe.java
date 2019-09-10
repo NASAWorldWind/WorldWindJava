@@ -17,27 +17,23 @@ import java.util.List;
  * elevations for geographic positions on the surface of the globe. Globe provides methods for converting geographic
  * positions (latitude, longitude, and elevation) to cartesian coordinates, and for converting cartesian to geographic.
  * The origin and orientation of the cartesian coordinate system are determined by implementations of this interface.
- * <p/>
  * <h1>Computations in Cartesian Coordinates</h1>
- * <p/>
+ * <p>
  * Globe provides methods for performing computations in the coordinate system represented by a globe's surface in
  * cartesian coordinates. These methods perform work with respect to the globe's actual shape in 3D cartesian
  * coordinates. For an ellipsoidal globe, these methods are equivalent to the ellipsoidal coordinate computations below.
  * For an instance of {@link Globe2D}, these methods work in the cartesian coordinates specified by the globe's 2D
  * projection.
- * <p/>
  * <ul> <li>{@link #computePointFromPosition(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double)}</li>
  * <li>{@link #computePositionFromPoint(gov.nasa.worldwind.geom.Vec4)}</li> <li>{@link
  * #computeSurfaceNormalAtLocation(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle)}</li> <li>{@link
  * #computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double)}</li>
  * </ul>
- * <p/>
  * <h1>Computations in Ellipsoidal Coordinates</h1>
- * <p/>
+ * <p>
  * Globe provides methods for performing computation on the ellipsoid represented by a globe's equatorial radius and its
  * polar radius. These methods perform work with respect to the ellipsoid in 3D cartesian coordinates. Calling any of
  * these methods on an instance of Globe2D will return the same result as a 3D globe with equivalent radii.
- * <p/>
  * <ul> <li>{@link #computeEllipsoidalPointFromPosition(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle,
  * double)}</li> <li>{@link #computePositionFromEllipsoidalPoint(gov.nasa.worldwind.geom.Vec4)}</li> <li>{@link
  * #computeEllipsoidalNormalAtLocation(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle)}</li> <li>{@link
@@ -91,7 +87,7 @@ public interface Globe extends WWObject, Extent
      * Indicates the elevation at a specified location. If the elevation at the specified location is the elevation
      * model's missing data signal, or if the location specified is outside the elevation model's coverage area, the
      * elevation model's missing data replacement value is returned.
-     * <p/>
+     * <p>
      * The elevation returned from this method is the best available in memory. If no elevation is in memory, the
      * elevation model's minimum extreme elevation at the location is returned. Local disk caches are not consulted.
      *
@@ -242,12 +238,12 @@ public interface Globe extends WWObject, Extent
 
     /**
      * Computes a grid of cartesian points corresponding to a grid of geographic positions.
-     * <p/>
+     * <p>
      * This method provides an interface for efficient generation of a grid of cartesian points within a sector. The
      * grid is constructed by dividing the sector into <code>numLon x numLat</code> evenly separated points in
      * geographic coordinates. The first and last points in latitude and longitude are placed at the sector's minimum
      * and maximum boundary, and the remaining points are spaced evenly between those boundary points.
-     * <p/>
+     * <p>
      * For each grid point within the sector, an elevation value is specified via an array of elevations. The
      * calculation at each position incorporates the associated elevation.
      *
@@ -296,12 +292,20 @@ public interface Globe extends WWObject, Extent
      */
     Vec4 computeNorthPointingTangentAtLocation(Angle latitude, Angle longitude);
 
-    /** @see #computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double). */
-    @SuppressWarnings({"JavaDoc"})
+    /**
+     * @see #computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double)
+     * @param latitude See computeSurfaceOrientationAtPosition.
+     * @param longitude See computeSurfaceOrientationAtPosition.
+     * @param metersElevation See computeSurfaceOrientationAtPosition.
+     * @return See computeSurfaceOrientationAtPosition.
+     */
     Matrix computeModelCoordinateOriginTransform(Angle latitude, Angle longitude, double metersElevation);
 
-    /** @see #computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Position) */
-    @SuppressWarnings({"JavaDoc"})
+    /**
+     * @see #computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Position) 
+     * @param position See computeSurfaceOrientationAtPosition.
+     * @return See computeSurfaceOrientationAtPosition.
+     */
     Matrix computeModelCoordinateOriginTransform(Position position);
 
     /**
@@ -336,7 +340,7 @@ public interface Globe extends WWObject, Extent
 
     /**
      * Computes a ellipsoidal point from a latitude, longitude, and elevation.
-     * <p/>
+     * <p>
      * The returned point is a function of this globe's equatorial radius and its polar radius, and always represents a
      * point on the ellipsoid in 3D cartesian coordinates that corresponds to the specified position. Calling this
      * method on an instance of Globe2D will return a point on the ellipsoid defined by the 2D globe's radii.
@@ -354,7 +358,7 @@ public interface Globe extends WWObject, Extent
 
     /**
      * Computes a ellipsoidal point from a latitude and longitude.
-     * <p/>
+     * <p>
      * The returned point is a function of this globe's equatorial radius and its polar radius, and always represents a
      * point on the ellipsoid in 3D cartesian coordinates that corresponds to the specified location. Calling this
      * method on an instance of Globe2D will return a point on the ellipsoid defined by the 2D globe's radii.
@@ -369,7 +373,7 @@ public interface Globe extends WWObject, Extent
 
     /**
      * Computes a ellipsoidal point from a latitude, longitude, and elevation.
-     * <p/>
+     * <p>
      * The returned point is a function of this globe's equatorial radius and its polar radius, and always represents a
      * point on the ellipsoid in 3D cartesian coordinates that corresponds to the specified position. Calling this
      * method on an instance of Globe2D will return a point on the ellipsoid defined by the 2D globe's radii.
@@ -385,7 +389,7 @@ public interface Globe extends WWObject, Extent
 
     /**
      * Computes the geographic position of a point in ellipsoidal coordinates.
-     * <p/>
+     * <p>
      * The returned position is a function of this globe's equatorial radius and its polar radius, and always represents
      * a position corresponding to the point on the ellipsoid in 3D cartesian coordinates. Calling this method on an
      * instance of Globe2D will return a position corresponding to the ellipsoid defined by the 2D globe's radii.
@@ -400,7 +404,7 @@ public interface Globe extends WWObject, Extent
     /**
      * Computes a vector perpendicular to the surface of the ellipsoid specified by this globe, in cartesian
      * coordinates.
-     * <p/>
+     * <p>
      * The returned vector is a function of this globe's equatorial radius and its polar radius, and always represents a
      * vector normal to the corresponding ellipsoid in 3D cartesian coordinates. Calling this method on an instance of
      * Globe2D will return a vector normal to the ellipsoid defined by the 2D globe's radii.
@@ -421,7 +425,7 @@ public interface Globe extends WWObject, Extent
      * East. The Y axis is mapped to the vector tangent to the ellipsoid and pointing to the North Pole. The Z axis is
      * mapped to the ellipsoidal normal at (latitude, longitude, metersElevation). The origin is mapped to the
      * ellipsoidal position of (latitude, longitude, metersElevation).
-     * <p/>
+     * <p>
      * The returned matrix is a function of this globe's equatorial radius and its polar radius, and always represents a
      * transform matrix appropriate for the corresponding ellipsoid in 3D cartesian coordinates. Calling this method on
      * an instance of Globe2D will return a transform matrix for the ellipsoid defined by the 2D globe's radii.

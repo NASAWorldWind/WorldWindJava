@@ -12,7 +12,7 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -39,7 +39,7 @@ public class RenderableLayer extends AbstractLayer
      * Adds the specified <code>renderable</code> to the end of this layer's internal collection. If this layer's
      * internal collection has been overridden with a call to {@link #setRenderables(Iterable)}, this will throw an
      * exception.
-     * <p/>
+     * <p>
      * If the <code>renderable</code> implements {@link gov.nasa.worldwind.avlist.AVList}, the layer forwards its
      * property change events to the layer's property change listeners. Any property change listeners the layer attaches
      * to the <code>renderable</code> are removed in {@link #removeRenderable(gov.nasa.worldwind.render.Renderable)},
@@ -78,7 +78,7 @@ public class RenderableLayer extends AbstractLayer
      * Inserts the specified <code>renderable</code> at the specified <code>index</code> in this layer's internal
      * collection. If this layer's internal collection has been overridden with a call to {@link
      * #setRenderables(Iterable)}, this will throw an exception.
-     * <p/>
+     * <p>
      * If the <code>renderable</code> implements {@link gov.nasa.worldwind.avlist.AVList}, the layer forwards its
      * property change events to the layer's property change listeners. Any property change listeners the layer attaches
      * to the <code>renderable</code> are removed in {@link #removeRenderable(gov.nasa.worldwind.render.Renderable)},
@@ -133,7 +133,7 @@ public class RenderableLayer extends AbstractLayer
      * Adds the contents of the specified <code>renderables</code> to this layer's internal collection. If this layer's
      * internal collection has been overriden with a call to {@link #setRenderables(Iterable)}, this will throw an
      * exception.
-     * <p/>
+     * <p>
      * If any of the <code>renderables</code> implement {@link gov.nasa.worldwind.avlist.AVList}, the layer forwards
      * their property change events to the layer's property change listeners. Any property change listeners the layer
      * attaches to the <code>renderable</code> are removed in {@link #removeRenderable(gov.nasa.worldwind.render.Renderable)},
@@ -177,7 +177,7 @@ public class RenderableLayer extends AbstractLayer
      * Removes the specified <code>renderable</code> from this layer's internal collection, if it exists. If this
      * layer's internal collection has been overridden with a call to {@link #setRenderables(Iterable)}, this will throw
      * an exception.
-     * <p/>
+     * <p>
      * If the <code>renderable</code> implements {@link gov.nasa.worldwind.avlist.AVList}, this stops forwarding the its
      * property change events to the layer's property change listeners. Any property change listeners the layer attached
      * to the <code>renderable</code> in {@link #addRenderable(gov.nasa.worldwind.render.Renderable)} or {@link
@@ -215,7 +215,7 @@ public class RenderableLayer extends AbstractLayer
     /**
      * Clears the contents of this layer's internal Renderable collection. If this layer's internal collection has been
      * overriden with a call to {@link #setRenderables(Iterable)}, this will throw an exception.
-     * <p/>
+     * <p>
      * If any of the <code>renderables</code> implement {@link gov.nasa.worldwind.avlist.AVList}, this stops forwarding
      * their property change events to the layer's property change listeners. Any property change listeners the layer
      * attached to the <code>renderables</code> in {@link #addRenderable(gov.nasa.worldwind.render.Renderable)} or
@@ -311,14 +311,14 @@ public class RenderableLayer extends AbstractLayer
      * will not modify the reference, or dispose of its contents. This will also clear and dispose of the internal
      * collection of Renderables, and will prevent any modification to its contents via <code>addRenderable,
      * addRenderables, removeRenderables, or dispose</code>.
-     * <p/>
+     * <p>
      * Unlike {@link #addRenderable(gov.nasa.worldwind.render.Renderable)} or {@link #addRenderables(Iterable)}, this
      * does not forward any of the renderable's property change events to the layer's property change listeners. Since
      * the layer is not in control of the iIterable's contents, attaching property change listeners to the renderables
      * could cause the them to hold dangling references to the layer. If any of the renderables in the Iterable rely on
      * forwarding property change events for proper operation - such as {@link gov.nasa.worldwind.render.AbstractBrowserBalloon}
      * - use {@link #addRenderables(Iterable)} instead.
-     * <p/>
+     * <p>
      * If the specified <code>renderableIterable</code> is null, this layer reverts to maintaining its internal
      * collection.
      *
@@ -360,7 +360,7 @@ public class RenderableLayer extends AbstractLayer
     /**
      * Disposes the contents of this layer's internal Renderable collection, but does not remove any elements from that
      * collection.
-     * <p/>
+     * <p>
      * If any of layer's internal Renderables implement {@link gov.nasa.worldwind.avlist.AVList}, this stops forwarding
      * their property change events to the layer's property change listeners. Any property change listeners the layer
      * attached to the <code>renderables</code> in {@link #addRenderable(gov.nasa.worldwind.render.Renderable)} or
@@ -524,7 +524,7 @@ public class RenderableLayer extends AbstractLayer
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * This implementation forwards the message to each Renderable that implements {@link MessageListener}.
      *
      * @param message The message that was received.

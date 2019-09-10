@@ -12,7 +12,6 @@ import java.util.*;
 
 /**
  * Implementation of combat support area graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Detainee Holding Area (2.X.5.3.1)</li> <li>Enemy Prisoner of War Holding Area (2.X.5.3.2)</li> <li>Forward
  * Arming and Refueling Area (2.X.5.3.3)</li> <li>Refugee Holding Area (2.X.5.3.4)</li> <li>Support Areas Brigade (BSA)
  * (2.X.5.3.5.1)</li> <li>Support Areas Division (DSA) (2.X.5.3.5.2)</li> <li>Support Areas Regimental (RSA)

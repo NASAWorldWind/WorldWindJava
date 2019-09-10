@@ -10,7 +10,7 @@ package gov.nasa.worldwind.formats.dds;
  * The DXT2/DXT3 alpha block contains alpha values for 4x4 pixels, each quantized to fit into 4 bits. The alpha values
  * are tightly packed into 64 bits in the DXT file as follows, where the value aN represents the Nth alpha value in
  * hexadecimal notation:
- * <p/>
+ * <p>
  * | 63-56 | 55-48 | 47-40 | 39-32 | 31-24 | 23-16 | 15-8  | 7-0    |
  * | aFaE  | aDaC  | aBaA  | a9a8  | a7a6  | a5a4  | a3a2  | a1a0   |
  *

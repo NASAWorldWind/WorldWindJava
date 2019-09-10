@@ -17,8 +17,8 @@ import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.combine.*;
 import gov.nasa.worldwind.util.measure.AreaMeasurer;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.*;
 import javax.xml.stream.XMLStreamException;
 import java.awt.*;
 import java.io.IOException;
@@ -30,11 +30,11 @@ import java.util.List;
  * Common superclass for surface conforming shapes such as {@link gov.nasa.worldwind.render.SurfacePolygon}, {@link
  * gov.nasa.worldwind.render.SurfacePolyline}, {@link gov.nasa.worldwind.render.SurfaceEllipse}, {@link
  * gov.nasa.worldwind.render.SurfaceQuad}, and {@link gov.nasa.worldwind.render.SurfaceSector}.
- * <p/>
+ * <p>
  * SurfaceShapes have separate attributes for normal display and highlighted display. If no attributes are specified,
  * default attributes are used. See {@link #DEFAULT_INTERIOR_MATERIAL}, {@link #DEFAULT_OUTLINE_MATERIAL}, and {@link
  * #DEFAULT_HIGHLIGHT_MATERIAL}.
- * <p/>
+ * <p>
  * AbstractSurfaceShape extends from {@link gov.nasa.worldwind.render.AbstractSurfaceObject}, and therefore inherits
  * AbstractSurfaceObject's batch rendering capabilities.
  *
@@ -228,7 +228,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * The returned state key is constructed the SurfaceShape's unique ID, last modified time, and its active
      * attributes. The returned state key has no dependency on the {@link gov.nasa.worldwind.globes.Globe}. Subclasses
      * that depend on the Globe should return a state key that include the globe's state key.
@@ -605,7 +605,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to clear this SurfaceShape's internal sector and geometry caches.
      */
     @Override
@@ -1660,7 +1660,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
      * Represents a surface shapes's current state. SurfaceShapeStateKey extends {@link
      * gov.nasa.worldwind.render.AbstractSurfaceObject.SurfaceObjectStateKey} by adding the shape's current {@link
      * gov.nasa.worldwind.render.ShapeAttributes} and the globe's state key.
-     * <p/>
+     * <p>
      * SurfaceShapeStateKey uniquely identifies a surface shapes's current state exactly as SurfaceObjectStateKey does,
      * but also distinguishes the shape's active ShapeAttributes from any previous attributes, and distinguishes between
      * different globes via the globe state key.
@@ -1787,7 +1787,6 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     /**
      * Export the Polygon. The {@code output} object will receive the exported data. The type of this object depends on
      * the export format. The formats and object types supported by this class are:
-     * <p/>
      * <pre>
      * Format                                         Supported output object types
      * ================================================================================

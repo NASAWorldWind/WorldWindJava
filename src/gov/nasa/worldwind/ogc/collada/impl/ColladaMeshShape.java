@@ -17,7 +17,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.nio.FloatBuffer;
 import java.util.*;
@@ -29,7 +29,7 @@ import java.util.List;
  * instances are created by {@link #createTriangleMesh(java.util.List, gov.nasa.worldwind.ogc.collada.ColladaBindMaterial)
  * createTriangleMesh} and {@link #createLineMesh(java.util.List, gov.nasa.worldwind.ogc.collada.ColladaBindMaterial)
  * createLineMesh}.
- * <p/>
+ * <p>
  * This shape supports only COLLADA line and triangle geometries.
  *
  * @author pabercrombie
@@ -227,6 +227,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
      *
      * @param geometries   COLLADA elements that defines geometry for this shape. Must contain at least one element.
      * @param bindMaterial Material applied to the mesh. May be null.
+     * @return The resulting shape.
      */
     public static ColladaMeshShape createTriangleMesh(List<ColladaTriangles> geometries,
         ColladaBindMaterial bindMaterial)
@@ -245,6 +246,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
      *
      * @param geometries   COLLADA elements that defines geometry for this shape. Must contain at least one element.
      * @param bindMaterial Material applied to the mesh. May be null.
+     * @return The resulting shape.
      */
     public static ColladaMeshShape createLineMesh(List<ColladaLines> geometries,
         ColladaBindMaterial bindMaterial)
@@ -283,7 +285,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * COLLADA shapes do not support intersection tests because the shape may be rendered multiple times with different
      * transform matrices. It's not possible to determine intersection without the transform matrix applied when the
      * shape is rendered.
@@ -721,7 +723,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
 
     /**
      * Compute enough geometry to determine this shape's extent, reference point and eye distance.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc        the current draw context.
@@ -967,7 +969,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
 
     /**
      * Computes the minimum distance between this shape and the eye point.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -1043,6 +1045,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
     /**
      * Indicates the texture applied to this shape.
      *
+     * @param geometry The geometry to set the texture from.
      * @return The texture that must be applied to the shape, or null if there is no texture, or the texture is not
      *         available.
      */

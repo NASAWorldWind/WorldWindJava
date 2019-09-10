@@ -15,7 +15,7 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.nio.FloatBuffer;
 import java.util.*;
@@ -434,7 +434,7 @@ public class PointGrid extends WWObjectImpl implements OrderedRenderable, Highli
      * If the scene controller is rendering ordered renderables, this method draws this placemark's image as an ordered
      * renderable. Otherwise the method determines whether this instance should be added to the ordered renderable
      * list.
-     * <p/>
+     * <p>
      * The Cartesian and screen points of the placemark are computed during the first call per frame and re-used in
      * subsequent calls of that frame.
      *

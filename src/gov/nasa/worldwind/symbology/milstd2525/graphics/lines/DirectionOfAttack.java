@@ -20,7 +20,6 @@ import java.util.*;
 
 /**
  * Direction of Attack graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Direction of Main Attack graphic (2.X.2.5.2.2.2.1)</li> <li>Direction of Supporting Attack graphic
  * (2.X.2.5.2.2.2.2)</li> </ul>
  *

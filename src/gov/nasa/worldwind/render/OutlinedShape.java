@@ -66,7 +66,7 @@ public interface OutlinedShape
 
     /**
      * Returns the depth-offset factor.
-     * <p/>
+     * <p>
      * The amount of depth offset when depth offset is enabled is computed by the formula <i>factor</i> * DZ + r *
      * <i>units</i>, where DZ is a measurement of the change in depth relative to the screen area of the shape, and r is
      * the smallest value guaranteed to produce a resolvable offset. <i>units</i> is the value return by {@link
@@ -81,7 +81,7 @@ public interface OutlinedShape
 
     /**
      * Returns the depth-offset units.
-     * <p/>
+     * <p>
      * The amount of depth offset when depth offset is enabled is computed by the formula <i>factor</i> * DZ + r *
      * <i>units</i>, where DZ is a measurement of the change in depth relative to the screen area of the shape, and r is
      * the smallest value guaranteed to produce a resolvable offset. <i>factor</i> is the value return by {@link

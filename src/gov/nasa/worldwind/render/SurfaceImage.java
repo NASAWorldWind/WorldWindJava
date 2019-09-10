@@ -14,7 +14,7 @@ import gov.nasa.worldwind.ogc.kml.gx.GXConstants;
 import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.stream.*;
 import java.awt.*;
 import java.awt.image.*;
@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * Renders a single image contained in a local file, a remote file, or a <code>BufferedImage</code>.
- * <p/>
+ * <p>
  * Note: The view input handlers detect the surface image rather than the terrain as the top picked object in {@link
  * gov.nasa.worldwind.event.SelectEvent}s and will not respond to the user's attempts at navigation when the cursor is
  * over the image. If this is not the desired behavior, disable picking for the layer containing the surface image.
@@ -536,7 +536,6 @@ public class SurfaceImage extends WWObjectImpl
     /**
      * Export the Surface Image. The {@code output} object will receive the exported data. The type of this object
      * depends on the export format. The formats and object types supported by this class are:
-     * <p/>
      * <pre>
      * Format                                         Supported output object types
      * ================================================================================

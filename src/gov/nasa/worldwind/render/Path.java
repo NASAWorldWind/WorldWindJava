@@ -20,7 +20,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.stream.*;
 import java.awt.*;
 import java.io.IOException;
@@ -36,22 +36,22 @@ import static gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil.kmlBoolean;
  * Displays a line or curve between positions. The path is drawn between input positions to achieve a specified path
  * type, e.g., {@link AVKey#GREAT_CIRCLE}. It can also conform to the underlying terrain. A curtain may be formed by
  * extruding the path to the ground.
- * <p/>
+ * <p>
  * Altitudes within the path's positions are interpreted according to the path's altitude mode. If the altitude mode is
  * {@link WorldWind#ABSOLUTE}, the altitudes are considered as height above the ellipsoid. If the altitude mode is
  * {@link WorldWind#RELATIVE_TO_GROUND}, the altitudes are added to the elevation of the terrain at the position. If the
  * altitude mode is {@link WorldWind#CLAMP_TO_GROUND} the altitudes are ignored.
- * <p/>
+ * <p>
  * Between the specified positions the path is drawn along a curve specified by the path's path type, either {@link
  * AVKey#GREAT_CIRCLE}, {@link AVKey#RHUMB_LINE} or {@link AVKey#LINEAR}. (See {@link #setPathType(String)}.)
- * <p/>
+ * <p>
  * Paths have separate attributes for normal display and highlighted display. If no attributes are specified, default
  * attributes are used. See {@link #DEFAULT_INTERIOR_MATERIAL}, {@link #DEFAULT_OUTLINE_MATERIAL}, and {@link
  * #DEFAULT_HIGHLIGHT_MATERIAL}.
- * <p/>
+ * <p>
  * When the path type is <code>LINEAR</code> the path conforms to terrain only if the follow-terrain property is true.
  * Otherwise the path control points will be connected by straight line segments.
- * <p/>
+ * <p>
  * The terrain conformance of <code>GREAT_CIRCLE</code> or <code>RHUMB_LINE</code> paths is determined by the path's
  * follow-terrain and terrain-conformance properties. When the follow-terrain property is true, terrain conformance
  * adapts as the view moves relative to the path; the terrain-conformance property governs the precision of conformance,
@@ -59,21 +59,21 @@ import static gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil.kmlBoolean;
  * #setTerrainConformance(double)}. If the follow-terrain property is false, the view position is not considered and the
  * number of intermediate positions between specified positions is the constant value specified by the num-subsegments
  * property (see {@link #setNumSubsegments(int)}). The latter case may produce higher performance than the former.
- * <p/>
+ * <p>
  * The path positions may be shown by calling {@link #setShowPositions(boolean)} with an argument of <code>true</code>.
  * This causes dots to be drawn at each originally specified path position. Dots are not drawn at tessellated path
  * positions. The size of the dots may be specified via {@link #setShowPositionsScale(double)}. The dots are drawn only
  * when the Path is within a threshold distance from the eye point. The threshold may be specified by calling {@link
  * #setShowPositionsThreshold(double)}. The dots are drawn in the path's outline material colors by default.
- * <p/>
+ * <p>
  * The path's line and the path's position dots may be drawn in unique RGBA colors by configuring the path with a {@link
  * PositionColors} (see {@link #setPositionColors(gov.nasa.worldwind.render.Path.PositionColors)}).
- * <p/>
+ * <p>
  * Path picking includes information about which position dots are picked, in addition to the path itself. A position
  * dot under the cursor is returned as an Integer object in the PickedObject's AVList under they key AVKey.ORDINAL.
  * Position dots intersecting the pick rectangle are returned as a List of Integer objects in the PickedObject's AVList
  * under the key AVKey.ORDINAL_LIST.
- * <p/>
+ * <p>
  * When drawn on a 2D globe, this shape uses a {@link SurfacePolyline} to represent itself. The following features are
  * not provided in this case: display of path positions, extrusion, outline pick width, and identification of path
  * position picked.
@@ -112,11 +112,11 @@ public class Path extends AbstractShape
          * a color cannot be determined for the specified position and ordinal. The specified <code>position</code> is
          * guaranteed to be one of the same Position references passed to a path at construction or in a call to {@link
          * Path#setPositions(Iterable)}.
-         * <p/>
+         * <p>
          * The specified <code>ordinal</code> denotes the position's ordinal number as it appears in the position list
          * passed to the path. Ordinal numbers start with 0 and increase by 1 for every originally specified position.
          * For example, the first three path positions have ordinal values 0, 1, 2.
-         * <p/>
+         * <p>
          * The returned color's RGB components must <em>not</em> be premultiplied by its Alpha component.
          *
          * @param position the path position the color corresponds to.
@@ -412,7 +412,7 @@ public class Path extends AbstractShape
      * Subclass of PickSupport that adds the capability to resolve a Path's picked position point. Path position points
      * are registered with PathPickSupport by calling {@link #addPickablePositions(int, int, Path)} with the minimum and
      * maximum color codes that the Path's position points are drawn in.
-     * <p/>
+     * <p>
      * The resolution of the picked position point is integrated with the resolution of the picked Path. Either an
      * entire Path or one of its position points may be picked. In either case, resolvePick and getTopObject return a
      * PickedObject that specifies the picked Path. If a position point is picked, the PickedObject's AVList contains
@@ -438,7 +438,7 @@ public class Path extends AbstractShape
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Overridden to clear the list of pickable positions.
          */
         @Override
@@ -493,7 +493,7 @@ public class Path extends AbstractShape
          * Path or one of its position points. In either case, this returns a PickedObject that specifies the picked
          * Path. If a position point is picked, the PickedObject's AVList contains the picked position's geographic
          * position in the key AVKey.POSITION and its ordinal number in the key AVKey.ORDINAL.
-         * <p/>
+         * <p>
          * This returns null if the pickPoint is null, or if there is no Path or Path position point at the specified
          * pick point.
          *
@@ -698,7 +698,7 @@ public class Path extends AbstractShape
 
     /**
      * Creates a path with specified positions.
-     * <p/>
+     * <p>
      * Note: If fewer than two positions is specified, no path is drawn.
      *
      * @param positions the path positions. This reference is retained by this shape; the positions are not copied. If
@@ -714,7 +714,7 @@ public class Path extends AbstractShape
 
     /**
      * Creates a path with positions specified via a generic list.
-     * <p/>
+     * <p>
      * Note: If fewer than two positions is specified, the path is not drawn.
      *
      * @param positions the path positions. This reference is retained by this shape; the positions are not copied. If
@@ -760,7 +760,7 @@ public class Path extends AbstractShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to assign this Path's pickSupport property to a new PathPickSupport instance.
      */
     @Override
@@ -793,7 +793,7 @@ public class Path extends AbstractShape
 
     /**
      * Specifies this path's positions, which replace this path's current positions, if any.
-     * <p/>
+     * <p>
      * Note: If fewer than two positions is specified, this path is not drawn.
      *
      * @param positions this path's positions.
@@ -839,11 +839,11 @@ public class Path extends AbstractShape
      * <code>showPositions</code> is true, and override the ShapeAttributes' outline color and outline opacity for both
      * normal display and highlighted display. The specified <code>positionColors</code> do not affect this path's
      * filled interior or vertical drop lines displayed when this path is extruded.
-     * <p/>
+     * <p>
      * If this path is configured to tessellate itself by creating additional positions between the originally specified
      * positions, an interpolated color is assigned to each tessellated position by computing a weighted linear
      * combination of the colors at the originally specified positions.
-     * <p/>
+     * <p>
      * Specify <code>null</code> to disable position colors and draw this path's line and optional position dots
      * according to its ShapeAttributes. This path's position colors reference is <code>null</code> by default.
      *
@@ -913,7 +913,7 @@ public class Path extends AbstractShape
     /**
      * Indicates the number of segments used between specified positions to achieve this path's path type. Higher values
      * cause the path to conform more closely to the path type but decrease performance.
-     * <p/>
+     * <p>
      * Note: The sub-segments number is ignored when the path follows terrain or when the path type is {@link
      * AVKey#LINEAR}.
      *
@@ -929,7 +929,7 @@ public class Path extends AbstractShape
     /**
      * Specifies the number of segments used between specified positions to achieve this path's path type. Higher values
      * cause the path to conform more closely to the path type but decrease performance.
-     * <p/>
+     * <p>
      * Note: The sub-segments number is ignored when the path follows terrain or when the path type is {@link
      * AVKey#LINEAR}.
      *
@@ -1136,9 +1136,10 @@ public class Path extends AbstractShape
 
     /**
      * Indicates whether this Path's defining positions and the positions in between are located on the underlying
-     * terrain. This returns <code>true</code> if this Path's altitude mode is <code>WorldWind.CLAMP_TO_GROUND</code>
-     * and the follow-terrain property is <code>true</code>. Otherwise this returns <code>false</code>.
+     * terrain.This returns <code>true</code> if this Path's altitude mode is <code>WorldWind.CLAMP_TO_GROUND</code> and
+     * the follow-terrain property is <code>true</code>. Otherwise this returns <code>false</code>.
      *
+     * @param dc The current draw context.
      * @return <code>true</code> if this Path's positions and the positions in between are located on the underlying
      * terrain, and <code>false</code> otherwise.
      */
@@ -1216,7 +1217,7 @@ public class Path extends AbstractShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to add this Path's pickable positions to the pick candidates.
      */
     @Override
@@ -1235,7 +1236,7 @@ public class Path extends AbstractShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to place this Path behind other ordered renderables when this Path is entirely located on the
      * underlying terrain. In this case this Path must be drawn first to ensure that other ordered renderables are
      * correctly drawn on top of it and are not affected by this Path's depth offset. If two paths are both located on
@@ -1262,7 +1263,7 @@ public class Path extends AbstractShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * If this Path is entirely located on the terrain, this applies an offset to the Path's depth values to to ensure
      * it shows over the terrain. This does not apply a depth offset in any other case to avoid incorrectly drawing the
      * path over objects it should be behind, including the terrain. In addition to applying a depth offset, this
@@ -1481,7 +1482,7 @@ public class Path extends AbstractShape
 
     /**
      * Draws points at this path's specified positions.
-     * <p/>
+     * <p>
      * Note: when the draw context is in picking mode, this binds the current GL_ARRAY_BUFFER to 0 after using the
      * currently bound GL_ARRAY_BUFFER to specify the vertex pointer. This does not restore GL_ARRAY_BUFFER to the its
      * previous state. If the caller intends to use that buffer after this method returns, the caller must bind the
@@ -2322,7 +2323,7 @@ public class Path extends AbstractShape
 
     /**
      * Computes the minimum distance between this Path and the eye point.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc       the draw context.

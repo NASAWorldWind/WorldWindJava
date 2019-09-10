@@ -11,12 +11,12 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 
 /**
  * An {@link Annotation} represent a text label and its rendering attributes. Annotations must be attached either to a
- * globe <code>Position</code> ({@link GlobeAnnotation}) or a viewport <code>Point</code> (ScreenAnnotation). <p/>
+ * globe <code>Position</code> ({@link GlobeAnnotation}) or a viewport <code>Point</code> (ScreenAnnotation). 
  * <pre>
  * GlobeAnnotation ga = new  GlobeAnnotation("Lat-Lon zero", Position.fromDegrees(0, 0, 0)));
  * ScreenAnnotation sa = new ScreenAnnotation("Message...", new Point(10,10));
@@ -31,42 +31,41 @@ import java.awt.*;
  * ga.getAttributes().setFont(Font.decode("Arial-BOLD-24");
  * ...
  * </pre>
- * <p/> Annotations are usually handled by an {@link gov.nasa.worldwind.layers.AnnotationLayer}. Although they also
+ * <p> Annotations are usually handled by an {@link gov.nasa.worldwind.layers.AnnotationLayer}. Although they also
  * implement the {@link Renderable} interface and thus can be handled by a {@link gov.nasa.worldwind.layers.RenderableLayer}
- * too. <p/>
+ * too. 
  * <pre>
  * AnnotationLayer layer = new AnnotationLayer();
  * layer.addAnnotation(new GlobeAnnotation("Text...", Position.fromDegrees(0, 0, 0)));
  * </pre>
- * <p/> Each Annotation starts its life with a fresh attribute set that can be altered to produce the desired effect.
+ * <p> Each Annotation starts its life with a fresh attribute set that can be altered to produce the desired effect.
  * However, <code>AnnotationAttributes</code> can be set and shared between annotations allowing to control the
- * rendering attributes of many annotations from a single <code>AnnotationAttributes</code> object. <p/>
+ * rendering attributes of many annotations from a single <code>AnnotationAttributes</code> object. 
  * <pre>
  * AnnotationAttributes attr = new AnnotationAttributes();
  * attr.setTextColor(Color.WHITE);
  * attr.setFont(Font.decode("Arial-BOLD-24");
  * ga.setAttributes(attr);
  * </pre>
- * <p/> In the above example changing the text color of the attributes set will affect all annotations referring it.
+ * <p> In the above example changing the text color of the attributes set will affect all annotations referring it.
  * However, changing the text color of one of those annotations will also affect all others since it will in fact change
  * the common attributes set. <p> To use an attributes object only as default values for a series of annotations use:
  * </p>
  * <pre>
  * ga.getAttributes().setDefaults(attr);
  * </pre>
- * <p/> which can also be done in the Annotation constructor: <p/>
+ * <p> which can also be done in the Annotation constructor: 
  * <pre>
  * GlobeAnnotation ga = new GlobeAnnotation(text, position, attr);
  * </pre>
- * <p/> Finer control over attributes inheritance can be achieved using default or fallback attributes set. <p> Most
+ * <p> Finer control over attributes inheritance can be achieved using default or fallback attributes set. <p> Most
  * attributes can be set to a 'use default' value which is minus one for numeric values and <code>null</code> for
  * attributes referring objects (colors, dimensions, insets..). In such a case the value of an attribute will be that of
  * the default attribute set. New annotations have all their attributes set to use default values. </p>
- * <p/>
+ * <p>
  * Each <code>AnnotationAttributes</code> object points to a default static attributes set which is the fallback source
  * for attributes with  <code>null</code> or <code>-1</code> values. This default attributes set can be set to any
  * attributes object other than the static one.
- * <p/>
  * <pre>
  * AnnotationAttributes geoFeature = new AnnotationAttributes();
  * geoFeature.setFrameShape(AVKey.SHAPE_ELLIPSE);
@@ -83,12 +82,12 @@ import java.awt.*;
  * layer.addAnnotation(new GlobeAnnotation("Spirit Lake", Position.fromDegrees(46.26, -122.15), waterBody);
  * layer.addAnnotation(new GlobeAnnotation("Mt St-Helens", Position.fromDegrees(46.20, -122.19), mountain);
  * </pre>
- * <p/>
+ * <p>
  * In the above example all geographic features have an ellipse shape, water bodies and mountains use that attributes
  * set has defaults and have their own text colors. They are in turn used as defaults by the two annotations. Mount
  * Saint Helens attributes could be changed without affecting other mountains. However, changes on the geoFeatures
  * attributes would affect all mountains and lakes.
- * <p/>
+ * <p>
  * Background images are specified by setting the Annotation attribute {@link gov.nasa.worldwind.render.AnnotationAttributes#setImageSource(Object)}.
  * The source can be either a path to a valid image file, or a {@link java.awt.image.BufferedImage}. By default,
  * background images are aligned with the annotation as follows: the image's upper left corner is aligned with the
@@ -102,19 +101,19 @@ import java.awt.*;
  * background image's magnification or minification factor relative to the annotation. For example, a scale of
  * <code>0.5</code> indicates the image should be 1/2 its original size relative to the annotation, while a scale of
  * <code>2.0</code> indicates the image should be 2x its original size.
- * <p/>
+ * <p>
  * <strong>Warning:</strong> For compatibility across the myriad of graphics hardware, background images must have
  * power-of-two dimensions. Non-power-of-two images are handled inconsistently by graphics hardware. Not all hardware
  * supports them, and many that do lack full support for the features available when using power-of-two images. Proper
  * conversion from a non-power-of-two image to a power-of-two image depends on the image's intended use. However, the
  * following two step solution works for most applications: <ol> <li>Create a transparent power-of-two image larger than
  * the original image. The utility method {@link gov.nasa.worldwind.util.WWMath#powerOfTwoCeiling(int)} is useful for
- * computing power-of-two dimensions: <code> <br/><br/> int newWidth = WWMath.powerOfTwoCeiling(originalWidth);<br/> int
- * newHeight = WWMath.powerOfTwoCeiling(originalHeight); <br/><br/> </code> </li> <li>Copy the original image contents
+ * computing power-of-two dimensions: <code> <br><br> int newWidth = WWMath.powerOfTwoCeiling(originalWidth);<br> int
+ * newHeight = WWMath.powerOfTwoCeiling(originalHeight); <br><br> </code> </li> <li>Copy the original image contents
  * into the empty power-of-two image. Any pixels not covered by the original image are left completely transparent:
- * <code> <br/><br/> BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);<br/>
- * Graphics2D g2d = newImage.createGraphics();<br/> try<br/> {<br/> &nbsp;&nbsp;g2d.drawImage(originalImage, 0, 0,
- * null);<br/> }<br/> finally<br/> {<br/> &nbsp;&nbsp;g2d.dispose();<br/> }<br/><br/> </code></li> </ol> When used as an
+ * <code> <br><br> BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);<br>
+ * Graphics2D g2d = newImage.createGraphics();<br> try<br> {<br> &nbsp;&nbsp;g2d.drawImage(originalImage, 0, 0,
+ * null);<br> }<br> finally<br> {<br> &nbsp;&nbsp;g2d.dispose();<br> }<br><br> </code></li> </ol> When used as an
  * Annotation background image, the new power-of-two image appears identical to its original non-power-of-two
  * counterpart, except that the new image is now compatible with most graphics hardware.
  *
@@ -493,7 +492,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     /**
      * Get the annotation bounding {@link java.awt.Rectangle} using OGL coordinates - bottom-left corner x and y
      * relative to the {@link WorldWindow} bottom-left corner, and the annotation callout width and height.
-     * <p/>
+     * <p>
      * The annotation offset from it's reference point is factored in such that the callout leader shape and reference
      * point are included in the bounding rectangle.
      *

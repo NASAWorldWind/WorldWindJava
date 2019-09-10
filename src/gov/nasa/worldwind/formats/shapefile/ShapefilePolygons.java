@@ -16,8 +16,8 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.combine.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.*;
 import java.awt.*;
 import java.beans.*;
 import java.nio.*;
@@ -465,7 +465,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
      * Values greater than 0 cause shape detail to appear at higher resolution at greater altitudes than normal, but at
      * an increased performance cost. Values less than 0 decrease the default resolution at any given altitude. The
      * default value is 0. Values typically range between -0.5 and 0.5.
-     * <p/>
+     * <p>
      * Note: The resolution-to-height relationship is defined by a scale factor that specifies the approximate size of
      * discernible lengths in the shape relative to eye distance. The scale is specified as a power of 10. A value of 3,
      * for example, specifies that a length of 1 meter on the shape should be distinguishable from an altitude of 10^3
@@ -502,7 +502,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
     /**
      * Specifies the outline line width to use during picking. A larger width than normal typically makes the outline
      * easier to pick.
-     * <p/>
+     * <p>
      * Note that the size of the pick aperture also affects the precision necessary to pick.
      *
      * @param outlinePickWidth the outline pick width. The default is 10.

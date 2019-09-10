@@ -15,7 +15,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwindx.examples.util.PowerOfTwoPaddedImage;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.swing.*;
 import javax.swing.Box;
 import javax.swing.border.*;

@@ -190,7 +190,7 @@ public class BufferWrapperRaster extends AbstractDataRaster implements Cacheable
      * This returns a new sub-raster initialized with the specified properties. Called from <code>doGetSubRaster</code>
      * to create the sub-raster instance before populating its contents. This does not place any restrictions on the
      * specified <code>width</code>, <code>height</code>, <code>sector</code> or <code>params</code>.
-     * <p/>
+     * <p>
      * This returns a <code>{@link gov.nasa.worldwind.util.BufferWrapper.ByteBufferWrapper}</code>, a subclass of
      * BufferWrapperRaster backed by a ByteBuffer.
      *

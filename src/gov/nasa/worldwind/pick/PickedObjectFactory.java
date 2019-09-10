@@ -7,7 +7,7 @@ package gov.nasa.worldwind.pick;
 
 /**
  * PickedObjectFactory provides an interface for lazily creating PickedObject instances.
- * <p/>
+ * <p>
  * This interface is used by PickSupport to associate a collection of picked objects with a range of pick colors.
  * PickSupport uses this factory to delay PickedObject construction until a matching pick color is identified. This
  * eliminates the overhead of creating and managing a large collection of PickedObject instances when only a few may

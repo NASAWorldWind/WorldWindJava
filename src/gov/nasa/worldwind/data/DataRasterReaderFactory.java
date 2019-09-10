@@ -18,7 +18,7 @@ public interface DataRasterReaderFactory
      * Search the list of available data raster readers for one that will read a specified data source. The
      * determination is based on both the data type and the data source reference; some readers may be able to open data
      * of the corresponding type but not as, for example, an InputStream or a URL.
-     * <p/>
+     * <p>
      * The list of readers searched is determined by the DataRasterReaderFactory associated with the current {@link
      * gov.nasa.worldwind.Configuration}, as specified by the {@link gov.nasa.worldwind.avlist.AVKey#DATA_RASTER_READER_FACTORY_CLASS_NAME}.
      * If no factory is specified in the configuration, {@link gov.nasa.worldwind.data.BasicDataRasterReaderFactory} is

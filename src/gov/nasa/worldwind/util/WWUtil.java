@@ -378,7 +378,7 @@ public class WWUtil
      * Generates a random {@link Color} by scaling each of the red, green and blue components of a specified color with
      * independent random numbers. The alpha component is not scaled and is copied to the new color. The returned color
      * can be any value between white (0x000000aa) and black (0xffffffaa).
-     * <p/>
+     * <p>
      * Unless there's a reason to use a specific input color, the best color to use is white.
      *
      * @param color the color to generate a random color from. If null, the color white (0x000000aa) is used.
@@ -402,7 +402,7 @@ public class WWUtil
      * Generates a random {@link Color} by scaling each of the red, green and blue components of a specified color with
      * independent random numbers. The alpha component is not scaled and is copied to the new color. The returned color
      * can be any value between white (0x000000aa) and a specified darkest color.
-     * <p/>
+     * <p>
      * Unless there's a reason to use a specific input color, the best color to use is white.
      *
      * @param color        the color to generate a random color from. If null, the color white (0x000000aa) is used.
@@ -528,7 +528,7 @@ public class WWUtil
      * @param color1 the first color.
      * @param color2 the second color.
      *
-     * @return this returns the linear interpolation of <code>color1</code> and <code>color2</code> if <amount> is
+     * @return this returns the linear interpolation of <code>color1</code> and <code>color2</code> if &lt;amount&gt; is
      *         between 0 and 1, a color equivalent to color1 if <code>amount</code> is 0 or less, or a color equivalent
      *         to <code>color2</code> if <code>amount</code> is 1 or more.
      *
@@ -1050,7 +1050,7 @@ public class WWUtil
     }
 
     /**
-     * Strips leading period from a string (Example: input -> ".ext", output -> "ext")
+     * Strips leading period from a string (Example: input -&gt; ".ext", output -&gt; "ext")
      *
      * @param s String to test, must not be null
      *

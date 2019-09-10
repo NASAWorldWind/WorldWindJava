@@ -135,15 +135,18 @@ public class KeyEventState implements KeyListener, MouseListener
         this.mouseModifiersEx = 0;
     }
 
+    @Override
     public void keyTyped(KeyEvent e)
     {
     }
 
+    @Override
     public void keyPressed(KeyEvent e)
     {
         this.onKeyEvent(e, KeyEvent.KEY_PRESSED);
     }
 
+    @Override
     public void keyReleased(KeyEvent e)
     {
         this.removeKeyState(e);
@@ -160,10 +163,12 @@ public class KeyEventState implements KeyListener, MouseListener
         this.setModifiersEx(e.getModifiersEx());
     }
 
+    @Override
     public void mouseClicked(java.awt.event.MouseEvent mouseEvent)
     {
     }
 
+    @Override
     public void mousePressed(java.awt.event.MouseEvent e)
     {
         long timestamp = this.getTimeStamp(e, MouseEvent.MOUSE_PRESSED, this.keyStateMap.get(e.getModifiersEx()));

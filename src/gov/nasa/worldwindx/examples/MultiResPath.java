@@ -17,7 +17,7 @@ import java.util.*;
 /**
  * Illustrates use of the {@link MultiResolutionPath} shape, which adapts its complexity as the path's distance frome
  * the eye point changes.
- * <p/>
+ * <p>
  * Also illustrates the use of the "show positions" feature of {@link Path}.
  *
  * @author tag

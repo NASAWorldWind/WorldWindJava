@@ -10,7 +10,7 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.pick.*;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 
 /**
  * Represent a text label and its rendering attributes.
@@ -111,7 +111,7 @@ public interface Annotation extends Renderable, Disposable, Restorable
     /**
      * Get the annotation bounding {@link java.awt.Rectangle} using OGL coordinates - bottom-left corner x and y
      * relative to the {@link WorldWindow} bottom-left corner, and the annotation callout width and height.
-     * <p/>
+     * <p>
      * The annotation offset from it's reference point is factored in such that the callout leader shape and reference
      * point are included in the bounding rectangle.
      *

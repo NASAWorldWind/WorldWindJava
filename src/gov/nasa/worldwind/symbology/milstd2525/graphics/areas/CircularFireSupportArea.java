@@ -17,7 +17,6 @@ import java.util.*;
 
 /**
  * Implementation of circular Fire Support graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Circular Target (2.X.4.3.1.2)</li> <li>Fire Support Area, Circular (2.X.4.3.2.1.3)</li> <li>Free Fire Area
  * (FFA), Circular (2.X.4.3.2.3.3)</li> <li>Restrictive Fire Area (RFA), Circular (2.X.4.3.2.5.3)</li> <li>Airspace
  * Coordination Area (ACA), Circular (2.X.4.3.2.2.3)</li> <li>Sensor Zone, Circular</li> <li>Dead Space Area,

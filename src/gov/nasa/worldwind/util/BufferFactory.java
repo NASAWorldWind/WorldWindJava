@@ -10,7 +10,7 @@ package gov.nasa.worldwind.util;
  * gov.nasa.worldwind.util.BufferWrapper}, without having to know the underlying data type. Once created, a
  * BufferWrapper abstracts reading and writing buffer data from the underlying data type. When BufferWrapper is combined
  * with BufferFactory, a component may create and work with buffer data in a type agnostic manner.
- * <p/>
+ * <p>
  * BufferFactory is itself abstract and defines the factory interface. It defines several implementations as static
  * inner classes, which serve the most common data types: {@link gov.nasa.worldwind.util.BufferFactory.ByteBufferFactory},
  * {@link gov.nasa.worldwind.util.BufferFactory.ShortBufferFactory}, {@link gov.nasa.worldwind.util.BufferFactory.IntBufferFactory},

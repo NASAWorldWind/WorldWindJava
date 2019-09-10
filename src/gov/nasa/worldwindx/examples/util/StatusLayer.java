@@ -15,7 +15,7 @@ import gov.nasa.worldwind.layers.AbstractLayer;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Renders statusbar information as a layer.
- * <p/>
+ * <p>
  * Used ScalebarLayer and StatusBar as template
  */
 //TODO

@@ -10,10 +10,14 @@ import java.util.*;
 public class PerformanceStatistic implements Comparable<PerformanceStatistic>
 {
     public static final String ALL = "gov.nasa.worldwind.perfstat.All";
+    
     /** @deprecated Airspace geometry count is no longer logged during airspace rendering. */
+    @Deprecated
     public static final String AIRSPACE_GEOMETRY_COUNT = "gov.nasa.worldwind.perfstat.AirspaceGeometryCount";
     /** @deprecated Airspace vertex count is no longer logged during airspace rendering. */
+    @Deprecated
     public static final String AIRSPACE_VERTEX_COUNT = "gov.nasa.worldwind.perfstat.AirspaceVertexCount";
+    
     public static final String FRAME_RATE = "gov.nasa.worldwind.perfstat.FrameRate";
     public static final String FRAME_TIME = "gov.nasa.worldwind.perfstat.FrameTime";
     public static final String IMAGE_TILE_COUNT = "gov.nasa.worldwind.perfstat.ImageTileCount";
@@ -56,6 +60,7 @@ public class PerformanceStatistic implements Comparable<PerformanceStatistic>
         return value;
     }
 
+    @Override
     public int compareTo(PerformanceStatistic that)
     {
         //noinspection StringEquality
@@ -68,6 +73,7 @@ public class PerformanceStatistic implements Comparable<PerformanceStatistic>
         return this.displayString == null ? -1 : 1;
     }
 
+    @Override
     public boolean equals(Object o)
     {
         if (this == o)
@@ -88,6 +94,7 @@ public class PerformanceStatistic implements Comparable<PerformanceStatistic>
         return true;
     }
 
+    @Override
     public int hashCode()
     {
         int result;
@@ -97,6 +104,7 @@ public class PerformanceStatistic implements Comparable<PerformanceStatistic>
         return result;
     }
 
+    @Override
     public String toString()
     {
         return this.displayString + " " + this.value.toString();

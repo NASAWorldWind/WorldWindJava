@@ -12,7 +12,7 @@ import java.io.*;
 
 /**
  * Implements the {@link KMLDoc} interface for KML files located within a computer's file system.
- * <p/>
+ * <p>
  * Note: This class does not resolve references to files in KMZ archives. For example, it does not resolve references
  * like this: <i>../other.kmz/file.png</i>.
  *

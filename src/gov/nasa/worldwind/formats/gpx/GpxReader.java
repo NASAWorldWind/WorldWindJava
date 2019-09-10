@@ -29,10 +29,10 @@ public class GpxReader // TODO: I18N, proper exception handling, remove stack-tr
     }
 
     /**
-     * @param path
+     * @param path The file spec to read from.
      * @throws IllegalArgumentException if <code>path</code> is null
      * @throws java.io.IOException      if no file exists at the location specified by <code>path</code>
-     * @throws org.xml.sax.SAXException
+     * @throws org.xml.sax.SAXException if a parsing error occurs.
      */
     public void readFile(String path) throws java.io.IOException, org.xml.sax.SAXException
     {
@@ -56,10 +56,10 @@ public class GpxReader // TODO: I18N, proper exception handling, remove stack-tr
     }
 
     /**
-     * @param stream
+     * @param stream The stream to read from.
      * @throws IllegalArgumentException if <code>stream</code> is null
-     * @throws java.io.IOException
-     * @throws org.xml.sax.SAXException
+     * @throws java.io.IOException if a problem is encountered reading the stream.
+     * @throws org.xml.sax.SAXException if a parsing error occurs.
      */
     public void readStream(java.io.InputStream stream) throws java.io.IOException, org.xml.sax.SAXException
     {

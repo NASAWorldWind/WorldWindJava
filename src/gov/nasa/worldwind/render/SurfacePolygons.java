@@ -11,15 +11,15 @@ import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.*;
 import java.util.*;
 import java.util.logging.Level;
 
 /**
  * Renders fast multiple polygons with or without holes in one pass. It relies on a {@link
  * gov.nasa.worldwind.util.CompoundVecBuffer}.
- * <p/>
+ * <p>
  * Whether a polygon ring is filled or is a hole in another polygon depends on the vertices winding order and the
  * winding rule used - see setWindingRule(String).
  *
@@ -47,10 +47,10 @@ public class SurfacePolygons extends SurfacePolylines // TODO: Review
 
     /**
      * Get a copy of the polygon ring groups array - can be null.
-     * <p/>
+     * <p>
      * When not null the polygon ring groups array identifies the starting sub buffer index for each polygon. In that
      * case rings from a same group will be tesselated together as part of the same polygon.
-     * <p/>
+     * <p>
      * When <code>null</code> polygon rings that follow the current winding rule are tessellated separatly as different
      * polygons. Rings that are reverse winded are considered holes to be applied to the last straight winded ring
      * polygon.
@@ -64,10 +64,10 @@ public class SurfacePolygons extends SurfacePolylines // TODO: Review
 
     /**
      * Set the polygon ring groups array - can be null.
-     * <p/>
+     * <p>
      * When not null the polygon ring groups array identifies the starting sub buffer index for each polygon. In that
      * case rings from a same group will be tesselated together as part of the same polygon.
-     * <p/>
+     * <p>
      * When <code>null</code> polygon rings that follow the current winding rule are tessellated separatly as different
      * polygons. Rings that are reverse winded are considered holes to be applied to the last straight winded ring
      * polygon.
@@ -83,7 +83,7 @@ public class SurfacePolygons extends SurfacePolylines // TODO: Review
     /**
      * Get the winding rule used when tessellating polygons. Can be one of {@link AVKey#CLOCKWISE} (default) or {@link
      * AVKey#COUNTER_CLOCKWISE}.
-     * <p/>
+     * <p>
      * When set to {@link AVKey#CLOCKWISE} polygons which run clockwise will be filled and those which run counter
      * clockwise will produce 'holes'. The interpretation is reversed when the winding rule is set to {@link
      * AVKey#COUNTER_CLOCKWISE}.
@@ -98,7 +98,7 @@ public class SurfacePolygons extends SurfacePolylines // TODO: Review
     /**
      * Set the winding rule used when tessellating polygons. Can be one of {@link AVKey#CLOCKWISE} (default) or {@link
      * AVKey#COUNTER_CLOCKWISE}.
-     * <p/>
+     * <p>
      * When set to {@link AVKey#CLOCKWISE} polygons which run clockwise will be filled and those which run counter
      * clockwise will produce 'holes'. The interpretation is reversed when the winding rule is set to {@link
      * AVKey#COUNTER_CLOCKWISE}.

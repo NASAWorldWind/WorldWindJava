@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * Downloads elevation data not currently available in the WorldWind file cache or a specified {@link FileStore}. The
  * class derives from {@link Thread} and is meant to operate in its own thread.
- * <p/>
+ * <p>
  * The sector and resolution associated with the downloader are specified during construction and are final.
  *
  * @author tag
@@ -40,7 +40,7 @@ public class BasicElevationModelBulkDownloader extends BulkRetrievalThread
 
     /**
      * Constructs a downloader to retrieve elevations not currently available in the WorldWind file cache.
-     * <p/>
+     * <p>
      * The thread returned is not started during construction, the caller must start the thread.
      *
      * @param elevationModel the elevation model for which to download elevations.
@@ -63,7 +63,7 @@ public class BasicElevationModelBulkDownloader extends BulkRetrievalThread
 
     /**
      * Constructs a downloader to retrieve elevations not currently available in a specified file store.
-     * <p/>
+     * <p>
      * The thread returned is not started during construction, the caller must start the thread.
      *
      * @param elevationModel the elevation model for which to download elevations.

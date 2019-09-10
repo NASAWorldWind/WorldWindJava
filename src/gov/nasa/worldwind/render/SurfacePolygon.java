@@ -15,8 +15,8 @@ import gov.nasa.worldwind.ogc.kml.KMLConstants;
 import gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.*;
 import javax.xml.stream.*;
 import java.io.*;
 import java.nio.*;
@@ -100,7 +100,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
 
     /**
      * Constructs a new surface polygon with the default attributes and the specified iterable of locations.
-     * <p/>
+     * <p>
      * Note: If fewer than three locations is specified, no polygon is drawn.
      *
      * @param iterable the polygon locations.
@@ -123,7 +123,7 @@ public class SurfacePolygon extends AbstractSurfaceShape implements Exportable
      * Constructs a new surface polygon with the specified normal (as opposed to highlight) attributes and the specified
      * iterable of locations. Modifying the attribute reference after calling this constructor causes this shape's
      * appearance to change accordingly.
-     * <p/>
+     * <p>
      * Note: If fewer than three locations is specified, no polygon is drawn.
      *
      * @param normalAttrs the normal attributes. May be null, in which case default attributes are used.

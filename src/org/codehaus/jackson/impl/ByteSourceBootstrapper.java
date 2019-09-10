@@ -97,9 +97,12 @@ public final class ByteSourceBootstrapper
     }
 
     /**
-     * Method that should be called after constructing an instace.
-     * It will figure out encoding that content uses, to allow
-     * for instantiating a proper scanner object.
+     * Method that should be called after constructing an instace.It will figure out encoding that content uses, to
+     * allow for instantiating a proper scanner object.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public JsonEncoding detectEncoding()
         throws IOException, JsonParseException

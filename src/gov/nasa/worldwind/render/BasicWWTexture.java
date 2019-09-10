@@ -10,7 +10,7 @@ import com.jogamp.opengl.util.texture.*;
 import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.image.*;
 import java.io.InputStream;
 import java.net.URL;
@@ -18,11 +18,11 @@ import java.net.URL;
 /**
  * Basic implementation of a texture derived from an image source such as an image file or a {@link
  * java.awt.image.BufferedImage}.
- * <p/>
+ * <p>
  * The interface contains a method, {@link #isTextureInitializationFailed()} to determine whether the instance failed to
  * convert an image source to a texture. If such a failure occurs, the method returns true and no further attempts are
  * made to create the texture.
- * <p/>
+ * <p>
  * This class retrieves its image source immediately during a call to {@link #bind(DrawContext)} or {@link
  * #applyInternalTransform(DrawContext)}.
  *
@@ -43,7 +43,7 @@ public class BasicWWTexture implements WWTexture
 
     /**
      * Constructs a texture object from an image source.
-     * <p/>
+     * <p>
      * The texture's image source is opened, if a file, only when the texture is displayed. If the texture is not
      * displayed the image source is not read.
      *
@@ -59,7 +59,7 @@ public class BasicWWTexture implements WWTexture
 
     /**
      * Constructs a texture object.
-     * <p/>
+     * <p>
      * The texture's image source is opened, if a file, only when the texture is displayed. If the texture is not
      * displayed the image source is not read.
      *

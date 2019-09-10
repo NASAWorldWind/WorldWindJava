@@ -82,7 +82,7 @@ public interface WWIcon extends AVList, Restorable
     /**
      * Sets the desired screen size of the icon. When rendered, the icon is scaled to this size if it's specified. If a
      * screen size is not specified, the icon is displayed at the size of its source image.
-     * <p/>
+     * <p>
      * This size is not related to the icon's image source size. Whatever the source size is, it's scaled to display at
      * the specified screen size, if any.
      *

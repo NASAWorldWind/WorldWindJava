@@ -109,7 +109,7 @@ public class KMLViewer extends ApplicationTemplate
          * Adds the specified <code>kmlRoot</code> to this app frame's <code>WorldWindow</code> as a new
          * <code>Layer</code>, and adds a new <code>KMLLayerTreeNode</code> for the <code>kmlRoot</code> to this app
          * frame's on-screen layer tree.
-         * <p/>
+         * <p>
          * This expects the <code>kmlRoot</code>'s <code>AVKey.DISPLAY_NAME</code> field to contain a display name
          * suitable for use as a layer name.
          *
@@ -187,7 +187,7 @@ public class KMLViewer extends ApplicationTemplate
          * then adds the new <code>KMLRoot</code> to this worker thread's <code>AppFrame</code>. The
          * <code>KMLRoot</code>'s <code>AVKey.DISPLAY_NAME</code> field contains a display name created from either the
          * KML source or the KML root feature name.
-         * <p/>
+         * <p>
          * If loading the KML source fails, this prints the exception and its stack trace to the standard error stream,
          * but otherwise does nothing.
          */

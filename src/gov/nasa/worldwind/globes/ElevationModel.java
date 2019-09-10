@@ -11,16 +11,16 @@ import gov.nasa.worldwind.geom.*;
 import java.util.List;
 
 /**
- * <p/>
+ * <p>
  * Provides the elevations to a {@link Globe} or other object holding elevations.
- * <p/>
+ * <p>
  * An <code>ElevationModel</code> often approximates elevations at multiple levels of spatial resolution. For any given
  * viewing position, the model determines an appropriate target resolution. That target resolution may not be
  * immediately achievable, however, because the corresponding elevation data might not be locally available and must be
  * retrieved from a remote location. When this is the case, the <code>Elevations</code> object returned for a sector
  * holds the resolution achievable with the data currently available. That resolution may not be the same as the target
  * resolution. The achieved resolution is made available in the interface.
- * <p/>
+ * <p>
  *
  * @author Tom Gaskins
  * @version $Id: ElevationModel.java 3420 2015-09-10 23:25:43Z tgaskins $
@@ -84,7 +84,7 @@ public interface ElevationModel extends WWObject, Restorable, Disposable
     /**
      * Specifies the value used to identify missing data in an elevation model. Locations with this elevation value are
      * assigned the missing-data replacement value, specified by {@link #setMissingDataReplacement(double)}.
-     * <p/>
+     * <p>
      * The missing-data value is often specified by the metadata of the data set, in which case the elevation model
      * automatically defines that value to be the missing-data signal. When the missing-data signal is not specified in
      * the metadata, the application may specify it via this method.
@@ -194,7 +194,7 @@ public interface ElevationModel extends WWObject, Restorable, Disposable
      * Returns the elevation at a specified location. If the elevation at the specified location is the elevation
      * model's missing data signal, or if the location specified is outside the elevation model's coverage area, the
      * elevation model's missing data replacement value is returned.
-     * <p/>
+     * <p>
      * The elevation returned from this method is the best available in memory. If no elevation is in memory, the
      * elevation model's minimum extreme elevation at the location is returned. Local disk caches are not consulted.
      *

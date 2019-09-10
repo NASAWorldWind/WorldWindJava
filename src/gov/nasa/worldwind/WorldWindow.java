@@ -13,7 +13,7 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.pick.PickedObjectList;
 import gov.nasa.worldwind.util.PerformanceStatistic;
 
-import javax.media.opengl.GLContext;
+import com.jogamp.opengl.GLContext;
 import java.util.*;
 
 /**
@@ -185,7 +185,7 @@ public interface WorldWindow extends AVList
 
     /**
      * Returns the GPU Resource used by this WorldWindow. This method is for internal use only.
-     * <p/>
+     * <p>
      * Note: Applications do not need to interact with the GPU resource cache. It is self managed. Modifying it in any
      * way will cause significant problems such as excessive memory usage or application crashes. The only reason to use
      * the GPU resource cache is to request management of GPU resources within implementations of shapes or layers. And

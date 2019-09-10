@@ -57,7 +57,7 @@ public class Dummy extends AbstractMilStd2525TacticalGraphic
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * The dummy graphic requires exactly three control points. Any positions beyond the first three will be ignored.
      *
      * @throws IllegalArgumentException if less than three control points are provided.

@@ -10,8 +10,8 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.glu.*;
 import java.util.*;
 
 /**
@@ -23,7 +23,7 @@ import java.util.*;
  * The globe is used by shapes that define geometry relative to a globe. The resolution is used to filter shape detail
  * and compute geometry for resolution independent shapes. Shape geometry outside of the region of interest may be
  * ignored, clipped, or simplified at the discretion of the shape.
- * <p/>
+ * <p>
  * CombineContext initializes its GLU tessellator according to the conventions for Combinable shapes. See the {@link
  * gov.nasa.worldwind.util.combine.Combinable} interface documentation for information on drawing Combinable contours.
  * The complex set of contours computed as a result of drawing shapes into the tessellator are collected in the

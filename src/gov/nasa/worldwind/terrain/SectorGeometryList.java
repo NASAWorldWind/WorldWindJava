@@ -10,7 +10,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -103,7 +103,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
 
     /**
      * Detects the locations of the sector geometries in this list that intersect a specified screen point.
-     * <p/>
+     * <p>
      * Note: Prior to calling this method, {@link #beginRendering(gov.nasa.worldwind.render.DrawContext)} must be
      * called.
      *
@@ -163,7 +163,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
     /**
      * Detects the locations of the sector geometries in this list that intersect any of the points in a specified list
      * of screen points.
-     * <p/>
+     * <p>
      * Note: Prior to calling this method, {@link #beginRendering(gov.nasa.worldwind.render.DrawContext)} must be
      * called.
      *
@@ -382,7 +382,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
      *
      * @param line the <code>Line</code> for which an intersection is to be found.
      *
-     * @return the <Vec4> point closest to the ray origin where an intersection has been found or null if no
+     * @return the &lt;Vec4&gt; point closest to the ray origin where an intersection has been found or null if no
      *         intersection was found.
      */
     public Intersection[] intersect(Line line)
@@ -436,10 +436,10 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
 
     /**
      * Determines if and where the geometry intersects the ellipsoid at a given elevation.
-     * <p/>
+     * <p>
      * The returned array of <code>Intersection</code> describes a list of individual segments - two
      * <code>Intersection</code> for each, corresponding to each geometry triangle that intersects the given elevation.
-     * <p/>
+     * <p>
      * Note that the provided bounding <code>Sector</code> only serves as a 'hint' to avoid processing unnecessary
      * geometry tiles. The returned intersection list may contain segments outside that sector.
      *

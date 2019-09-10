@@ -23,10 +23,10 @@ public interface DataRasterReader extends AVList
      * The source may be one of the following:
      * <ul>
      *     <li>{@link java.io.File}</li>
-     *     <li>{@link String}</li> </ul>
+     *     <li>{@link String}</li>
      *     <li>{@link java.io.InputStream}</li>
      *     <li>{@link java.net.URL}</li>
-     * <ul/>
+     * </ul>
      *
      * @param source the source to examine.
      * @param params parameters required by certain reader implementations. May be null for most readers.
@@ -41,10 +41,10 @@ public interface DataRasterReader extends AVList
      * The source may be one of the following:
      * <ul>
      *     <li>{@link java.io.File}</li>
-     *     <li>{@link String}</li> </ul>
+     *     <li>{@link String}</li>
      *     <li>{@link java.io.InputStream}</li>
      *     <li>{@link java.net.URL}</li>
-     * <ul/>
+     * </ul>
      *
      * @param source the source to read.
      * @param params parameters required by certain reader implementations. May be null for most readers. If non-null,
@@ -61,10 +61,10 @@ public interface DataRasterReader extends AVList
      * The source may be one of the following:
      * <ul>
      *     <li>{@link java.io.File}</li>
-     *     <li>{@link String}</li> </ul>
+     *     <li>{@link String}</li>
      *     <li>{@link java.io.InputStream}</li>
      *     <li>{@link java.net.URL}</li>
-     * <ul/>
+     * </ul>
      *
      * TODO: Why would the caller specify parameters to this method?
      *
@@ -84,10 +84,10 @@ public interface DataRasterReader extends AVList
      * The source may be one of the following:
      * <ul>
      *     <li>{@link java.io.File}</li>
-     *     <li>{@link String}</li> </ul>
+     *     <li>{@link String}</li>
      *     <li>{@link java.io.InputStream}</li>
      *     <li>{@link java.net.URL}</li>
-     * <ul/>
+     * </ul>
      *
      * @param source the source to examine.
      * @param params parameters required by certain reader implementations. May be null for most readers.
@@ -103,10 +103,10 @@ public interface DataRasterReader extends AVList
      * The source may be one of the following:
      * <ul>
      *     <li>{@link java.io.File}</li>
-     *     <li>{@link String}</li> </ul>
+     *     <li>{@link String}</li> 
      *     <li>{@link java.io.InputStream}</li>
      *     <li>{@link java.net.URL}</li>
-     * <ul/>
+     * </ul>
      *
      * @param source the source to examine.
      * @param params parameters required by certain reader implementations. May be null for most readers.

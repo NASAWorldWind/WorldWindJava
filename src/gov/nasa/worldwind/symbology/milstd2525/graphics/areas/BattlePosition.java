@@ -17,10 +17,9 @@ import java.util.*;
 
 /**
  * Implementation of Battle Position graphics. This class implements the following graphics:
- * <p/>
  * <ul> <li>Battle Position (2.X.2.4.3.1)</li> <li>Battle Position, Prepared But Not Occupied (2.X.2.4.3.1.1)</li>
  * </ul>
- * <p/>
+ * <p>
  * The Echelon label (field B) will be placed between the first and second control points.
  *
  * @author pabercrombie

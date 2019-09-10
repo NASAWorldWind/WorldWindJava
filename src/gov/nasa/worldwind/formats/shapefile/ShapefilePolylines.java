@@ -15,7 +15,7 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.nio.*;
 import java.util.*;
@@ -241,7 +241,7 @@ public class ShapefilePolylines extends ShapefileRenderable implements OrderedRe
     /**
      * Specifies the outline line width to use during picking. A larger width than normal typically makes the outline
      * easier to pick.
-     * <p/>
+     * <p>
      * Note that the size of the pick aperture also affects the precision necessary to pick.
      *
      * @param outlinePickWidth the outline pick width. The default is 10.

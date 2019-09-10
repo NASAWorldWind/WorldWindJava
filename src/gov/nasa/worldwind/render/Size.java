@@ -15,15 +15,15 @@ import java.awt.*;
  * Defines the dimensions of an image, label or other screen-space item relative to a container (for example, the
  * viewport). A size contains a width, a height, a width size mode, a height size mode, and for each of these a "units"
  * string indicating the coordinate units.
- * <p/>
+ * <p>
  * The possible size modes are: <ul> <li> {@link #NATIVE_DIMENSION} - Maintain the native dimensions.</li> <li> {@link
  * #MAINTAIN_ASPECT_RATIO} - Maintain the aspect ratio of the image when one dimension is specified and the other is
  * not.</li> <li> {@link #EXPLICIT_DIMENSION} - Use an explicit dimension. This dimension may be either an absolute
- * pixel value, or a fraction of the container.</li>
- * <p/>
+ * pixel value, or a fraction of the container.</li></ul>
+ * <p>
  * Recognized units are {@link AVKey#PIXELS}, which indicates pixel units relative to the lower left corner of the
  * image, or {@link AVKey#FRACTION}, which indicates the units are fractions of the image width and height.
- * <p/>
+ * <p>
  * Examples:
  * <pre>
  * Width mode      Height mode      Width (Units)      Height (Units)        Result
@@ -35,6 +35,7 @@ import java.awt.*;
  *                                                                           scale height to maintain aspect ratio
  * Explicit        Native           1.0 (fraction)     N/A                   Stretch the image to fill the width of the
  *                                                                           container, but do not scale the height.
+ * </pre>
  *
  * This class implements the functionality of a KML <i>size</i>.
  *

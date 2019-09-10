@@ -21,12 +21,12 @@ import java.awt.event.*;
 
 /**
  * This class illustrates how to use multiple WorldWind windows with a {@link CardLayout} layer manager.
- * <p/>
+ * <p>
  * Applications using multiple WorldWind windows simultaneously should instruct WorldWind to share OpenGL and other
  * resources among those windows. Most WorldWind classes are designed to be shared across {@link WorldWindow} objects
  * and will be shared automatically. But OpenGL resources are not automatically shared. To share them, a reference to a
  * previously created WorldWindow must be specified as a constructor argument for subsequently created WorldWindows.
- * <p/>
+ * <p>
  * Most WorldWind {@link Globe} and {@link Layer} objects can be shared among WorldWindows. Those that cannot be shared
  * have an operational dependency on the WorldWindow they're associated with. An example is the {@link
  * ViewControlsLayer} layer for on-screen navigation. Because this layer responds to input events within a specific

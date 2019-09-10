@@ -53,7 +53,7 @@ public class Interpolator2D
      * when a value at a first coordinate of 355 is requested, interpolation should likely be performed between 350 and
      * 0. If the wrap flag is true, interpolation is performed. If it is false, null is returned from {@link
      * #getValue(double, double)}.
-     * <p/>
+     * <p>
      * The default wrap S flag is <code>false</code>.
      *
      * @param wrapS the first coordinate's wrap flag.
@@ -83,7 +83,7 @@ public class Interpolator2D
      * Specifies whether this interpolator interpolates between maximum and minimum second coordinates if a second
      * coordinate outside the current range of second coordinates is specified. See {@link #setWrapS(boolean)} for a
      * description of wrapping and the use of wrap flags.
-     * <p/>
+     * <p>
      * The default T wrap flag is <code>false</code>.
      *
      * @param wrapT the second coordinate's wrap flag.

@@ -7,11 +7,11 @@ package gov.nasa.worldwind.util;
 
 import com.jogamp.opengl.util.texture.*;
 import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
-import com.jogamp.opengl.util.texture.spi.DDSImage;
+import com.jogamp.opengl.util.texture.ImageType;
 import gov.nasa.worldwind.geom.Vec4;
 
 import javax.imageio.ImageIO;
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.image.*;
 import java.io.*;
 import java.net.URL;
@@ -231,7 +231,8 @@ public class OGLUtil
 
     /**
      * Returns an OpenGL pixel format corresponding to the specified texture internal format. This maps internal format
-     * to pixel format as follows: <code> <table> <tr><th>Internal Format</th><th>Pixel Format</th></tr>
+     * to pixel format as follows:<table><caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Internal Format</th><th>Pixel Format</th></tr>
      * <tr><td>GL2.GL_ALPHA</td><td>GL2.GL_ALPHA</td></tr> <tr><td>GL2.GL_ALPHA4</td><td>GL2.GL_ALPHA</td></tr>
      * <tr><td>GL2.GL_ALPHA8</td><td>GL2.GL_ALPHA</td></tr> <tr><td>GL2.GL_ALPHA12</td><td>GL2.GL_ALPHA</td></tr>
      * <tr><td>GL2.GL_ALPHA16</td><td>GL2.GL_ALPHA</td></tr> <tr><td>GL2.GL_COMPRESSED_ALPHA</td><td>GL2.GL_ALPHA</td></tr>
@@ -259,15 +260,15 @@ public class OGLUtil
      * <tr><td>GL2.GL_SLUMINANCE</td><td>GL2.GL_LUMINANCE</td></tr> <tr><td>GL2.GL_SLUMINANCE8</td><td>GL2.GL_LUMINANCE</td></tr>
      * <tr><td>GL2.GL_SLUMINANCE_ALPHA</td><td>GL2.GL_LUMINANCE_ALPHA</td></tr> <tr><td>GL2.GL_SLUMINANCE8_ALPHA8</td><td>GL2.GL_LUMINANCE_ALPHA<td></tr>
      * <tr><td>GL2.GL_SRGB</td><td>GL2.GL_RGB</td></tr> <tr><td>GL2.GL_SRGB8</td><td>GL2.GL_RGB</td></tr>
-     * <tr><td>GL2.GL_SRGB_ALPHA</td><td>GL2.GL_RGBA</td></tr> <tr><td>GL2.GL_SRGB8_ALPHA8</td><td>GL2.GL_RGBA</td></tr>
-     * </code>
-     * <p/>
+     * <tr><td>GL2.GL_SRGB_ALPHA</td><td>GL2.GL_RGBA</td></tr> <tr><td>GL2.GL_SRGB8_ALPHA8</td><td>GL2.GL_RGBA</td></tr></table>
+     * 
+     * <p>
      * This returns 0 if the internal format is not one of the recognized types.
      *
      * @param internalFormat the OpenGL texture internal format.
      *
      * @return a pixel format corresponding to the texture internal format, or 0 if the internal format is not
-     *         recognized.
+     * recognized.
      */
     public static int computeTexturePixelFormat(int internalFormat)
     {
@@ -348,7 +349,8 @@ public class OGLUtil
 
     /**
      * Returns an OpenGL pixel format corresponding to the specified texture internal format. This maps internal format
-     * to pixel format as follows: <code> <table> <tr><th>Internal Format</th><th>Estimated Bits Per Pixel</th></tr>
+     * to pixel format as follows: <table> <caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Internal Format</th><th>Estimated Bits Per Pixel</th></tr>
      * <tr><td>GL2.GL_ALPHA</td><td>8</td></tr> <tr><td>GL2.GL_ALPHA4</td><td>4</td></tr>
      * <tr><td>GL2.GL_ALPHA8</td><td>8</td></tr> <tr><td>GL2.GL_ALPHA12</td><td>12</td></tr>
      * <tr><td>GL2.GL_ALPHA16</td><td>16</td></tr> <tr><td>GL2.GL_COMPRESSED_ALPHA</td><td>0</td></tr>
@@ -377,8 +379,8 @@ public class OGLUtil
      * <tr><td>GL2.GL_SLUMINANCE8</td><td>8</td></tr> <tr><td>GL2.GL_SLUMINANCE_ALPHA</td><td>16</td></tr>
      * <tr><td>GL2.GL_SLUMINANCE8_ALPHA8</td><td>16<td></tr> <tr><td>GL2.GL_SRGB</td><td>24</td></tr>
      * <tr><td>GL2.GL_SRGB8</td><td>24</td></tr> <tr><td>GL2.GL_SRGB_ALPHA</td><td>32</td></tr>
-     * <tr><td>GL2.GL_SRGB8_ALPHA8</td><td>32</td></tr> </code>
-     * <p/>
+     * <tr><td>GL2.GL_SRGB8_ALPHA8</td><td>32</td></tr> </table>
+     * <p>
      * The returned estimate assumes that the driver provides does not convert the formats to another supported, such
      * converting as <code>GL2.GL_ALPHA4</code> to <code>GL2.GL_ALPHA8</code>. This returns 0 if the internal format is
      * not one of the recognized types. This does not attempt to estimate a memory size for compressed internal
@@ -390,7 +392,7 @@ public class OGLUtil
      * @param includeMipmaps true to include the texture's mip map data in the estimated size; false otherwise.
      *
      * @return a pixel format corresponding to the texture internal format, or 0 if the internal format is not
-     *         recognized.
+     * recognized.
      *
      * @throws IllegalArgumentException if either the width or height is less than or equal to zero.
      */
@@ -554,7 +556,8 @@ public class OGLUtil
             stream = new BufferedInputStream(stream);
         }
 
-        boolean ddsFormat = DDSImage.isDDSImage(stream);
+        String fileSuffix = ImageType.Util.getFileSuffix(stream);
+        boolean ddsFormat = fileSuffix != null && fileSuffix.equalsIgnoreCase(ImageType.T_DDS);
 
         // If the image is not in DDS format, attempt to load it using ImageIO. This works around an issue with the
         // JOGL PNG reader (WWJ-369). However, ImageIO does not support DDS, so in this case just send the image to

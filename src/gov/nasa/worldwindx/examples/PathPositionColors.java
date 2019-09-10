@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Illustrates usage of the per-position color feature of {@link Path}. Path's per-position colors may be assigned in
  * any manner the application chooses. This example illustrates only one way of assigning color to each path position.
- * <p/>
+ * <p>
  * Also illustrates the use of the "show positions" feature of {@link Path}.
  *
  * @author dcollins

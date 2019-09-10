@@ -94,7 +94,6 @@ public class FortifiedArea extends BasicArea
     /**
      * Indicates the wavelength of the square wave that forms the graphic's boundary. This is the length from the start
      * of one square "tooth" to the start of the next.
-     * <p/>
      * <pre>
      *    __    __
      * __|  |__|  |__

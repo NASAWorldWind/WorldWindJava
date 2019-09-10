@@ -62,11 +62,11 @@ public class GpxTrackPoint extends gov.nasa.worldwind.formats.gpx.ElementParser 
     }
 
     /**
-     * @param uri
-     * @param lname
-     * @param qname
+     * @param uri The element URI.
+     * @param lname The element lname.
+     * @param qname The element qname.
      * @throws IllegalArgumentException if <code>lname</code> is null
-     * @throws org.xml.sax.SAXException
+     * @throws org.xml.sax.SAXException if a parsing error occurs.
      */
     @Override
     public void doEndElement(String uri, String lname, String qname) throws org.xml.sax.SAXException
@@ -95,7 +95,7 @@ public class GpxTrackPoint extends gov.nasa.worldwind.formats.gpx.ElementParser 
     }
 
     /**
-     * @param latitude
+     * @param latitude The new latitude.
      * @throws IllegalArgumentException if <code>latitude</code> is less than -90 or greater than 90
      */
     public void setLatitude(double latitude)
@@ -116,7 +116,7 @@ public class GpxTrackPoint extends gov.nasa.worldwind.formats.gpx.ElementParser 
     }
 
     /**
-     * @param longitude
+     * @param longitude The new longitude.
      * @throws IllegalArgumentException if <code>longitude</code> is less than -180 or greater than 180
      */
     public void setLongitude(double longitude)
@@ -166,7 +166,7 @@ public class GpxTrackPoint extends gov.nasa.worldwind.formats.gpx.ElementParser 
     }
 
     /**
-     * @param time
+     * @param time The new time.
      * @throws IllegalArgumentException if <code>time</code> is null
      */
     public void setTime(String time)

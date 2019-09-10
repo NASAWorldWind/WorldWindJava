@@ -11,11 +11,15 @@ public final class NumberInput
     final static String MAX_LONG_STR = String.valueOf(Long.MAX_VALUE);
     
     /**
-     * Fast method for parsing integers that are known to fit into
-     * regular 32-bit signed int type. This means that length is
-     * between 1 and 9 digits (inclusive)
-     *<p>
+     * Fast method for parsing integers that are known to fit into regular 32-bit signed int type.This means that length
+     * is between 1 and 9 digits (inclusive)
+     * <p>
      * Note: public to let unit tests call it
+     *
+     * @param digitChars Undocumented.
+     * @param offset Undocumented.
+     * @param len Undocumented.
+     * @return Undocumented.
      */
     public final static int parseInt(char[] digitChars, int offset, int len)
     {
@@ -58,13 +62,14 @@ public final class NumberInput
     }
 
     /**
-     * Helper method for determining if given String representation of
-     * an integral number would fit in 64-bit Java long or not.
-     * Note that input String must NOT contain leading minus sign (even
-     * if 'negative' is set to true).
+     * Helper method for determining if given String representation of an integral number would fit in 64-bit Java long
+     * or not.Note that input String must NOT contain leading minus sign (even if 'negative' is set to true).
      *
-     * @param negative Whether original number had a minus sign (which is
-     *    NOT passed to this method) or not
+     * @param digitChars Undocumented.
+     * @param offset Undocumented.
+     * @param len Undocumented.
+     * @param negative Whether original number had a minus sign (which is NOT passed to this method) or not
+     * @return Undocumented.
      */
     public final static boolean inLongRange(char[] digitChars, int offset, int len,
             boolean negative)
@@ -86,8 +91,10 @@ public final class NumberInput
      * Similar to {@link #inLongRange(char[],int,int,boolean)}, but
      * with String argument
      *
+     * @param numberStr Undocumented.
      * @param negative Whether original number had a minus sign (which is
      *    NOT passed to this method) or not
+     * @return  Undocumented.
      *
      * @since 1.5.0
      */

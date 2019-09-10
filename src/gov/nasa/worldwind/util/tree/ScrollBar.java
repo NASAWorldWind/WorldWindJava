@@ -12,7 +12,7 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -20,7 +20,6 @@ import java.awt.event.*;
  * A scrollbar component. The scrollable range is defined by four values: min, max, value, and extent. {@code value} is
  * the current position of the scroll bar. {@code extent} represents the visible region. The four values must always
  * satisfy this relationship:
- * <p/>
  * <pre>
  *   min &lt;= value &lt;= value + extent &lt;= max
  * </pre>
@@ -1046,7 +1045,7 @@ public class ScrollBar implements Renderable
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Overridden to stop autoscroll operations when the scrollbar becomes inactive.
          *
          * @param active {@code true} if the scrollbar is being activated, {@code false} if the scrollbar is being

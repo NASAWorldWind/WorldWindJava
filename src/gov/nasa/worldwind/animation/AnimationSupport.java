@@ -80,7 +80,7 @@ public class AnimationSupport
      * Calculate the angular ratio between two angles
      * @param x The numerator
      * @param y The denominator
-     * @return The angular ratio of <code>x/y></code>
+     * @return The angular ratio of <code>x/y</code>
      */
     public static double angularRatio(Angle x, Angle y)
     {

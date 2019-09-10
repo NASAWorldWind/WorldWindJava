@@ -30,12 +30,12 @@ import java.util.Arrays;
  * WorldWind windows share imagery layers and the layers representing each type of shape. Though this example uses a
  * different globe for each window, it is possible for the two windows to share the same {@link Globe} as is done in the
  * {@link MultiFrame} example.
- * <p/>
+ * <p>
  * Applications using multiple WorldWind windows simultaneously should instruct WorldWind to share OpenGL and other
  * resources among those windows. Most WorldWind classes are designed to be shared across WorldWindow objects and are
  * shared automatically. But OpenGL resources are not automatically shared. To share them, a reference to a previously
  * created WorldWindow must be specified as a constructor argument for subsequently created WorldWindows.
- * <p/>
+ * <p>
  * Most WorldWind Globe and {@link gov.nasa.worldwind.layers.Layer} objects can be shared among WorldWindows. Those
  * that cannot be shared have an operational dependency on the WorldWindow they're associated with. An example is the
  * {@link gov.nasa.worldwind.layers.ViewControlsLayer} layer for on-screen navigation. Because this layer responds to

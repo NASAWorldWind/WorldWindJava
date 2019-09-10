@@ -13,7 +13,7 @@ import java.awt.image.*;
  * DDSCompressor converts in-memory images into a DDS file encoded with one of the DXT block compression algorithms. If
  * the caller wants to encode using a certain type of DXT compression, DDSCompressor provides the appropriate methods to
  * do that. Otherwise, DDSCompressor chooses the DXT compression scheme that best suits the source image.
- * <p/>
+ * <p>
  * Each compression method accepts a reference to a {@link gov.nasa.worldwind.formats.dds.DXTCompressionAttributes}.
  * This compressor performs the appropriate actions according to the attributes, such as building mip maps and
  * converting the source image to a premultiplied alpha format.
@@ -363,7 +363,7 @@ public class DDSCompressor
 
     /**
      * Returns the default compression attributes. The default DXT compression attributes are defined as follows:
-     * <table> <tr><th>Attribute</th><th>Value</th></tr> <tr><td>Build Mipmaps</td><td>true</td></tr>
+     * <table> <caption style="font-weight: bold;">Default Attributes</caption><tr><th>Attribute</th><th>Value</th></tr> <tr><td>Build Mipmaps</td><td>true</td></tr>
      * <tr><td>Premultiply Alpha</td><td>true</td></tr> <tr><td>DXT Format</td><td>Let DDSCompressor choose optimal
      * format.</td></tr> <tr><td>Enable DXT1 Alpha</td><td>false</td></tr> <tr><td>DXT1 Alpha
      * Threshold</td><td>128</td></tr> <tr><td>Compression Algorithm</td><td>Euclidean Distance</td></tr> </table>

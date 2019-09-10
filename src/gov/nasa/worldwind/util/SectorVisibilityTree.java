@@ -106,7 +106,7 @@ public class SectorVisibilityTree
      *
      * @param dc         the current draw context
      * @param sectorSize the granularity of sector visibility, in degrees. All visible sectors of this size are found.
-     *                   The value must be in the range, 1 second <= sectorSize <= 180 degrees.
+     *                   The value must be in the range, 1 second &lt;= sectorSize &lt;= 180 degrees.
      *
      * @return the list of visible sectors. The list will be empty if no sectors are visible.
      *
@@ -145,7 +145,7 @@ public class SectorVisibilityTree
      *
      * @param dc           the current draw context
      * @param sectorSize   the granularity of sector visibility, in degrees. All visible sectors of this size are found.
-     *                     The value must be in the range, 1 second <= sectorSize <= 180 degrees.
+     *                     The value must be in the range, 1 second &lt;= sectorSize &lt;= 180 degrees.
      * @param searchSector the overall sector for which to determine visibility. May be null, in which case the current
      *                     visible sector of the draw context is used.
      *
@@ -193,7 +193,7 @@ public class SectorVisibilityTree
      *
      * @param dc            the current draw context
      * @param sectorSize    the granularity of sector visibility, in degrees. All visible sectors of this size are The
-     *                      value must be in the range, 1 second <= sectorSize <= 180 degrees. found.
+     *                      value must be in the range, 1 second &lt;= sectorSize &lt;= 180 degrees. found.
      * @param searchSectors the sectors for which to determine visibility.
      *
      * @return the list of visible sectors. The list will be empty if no sectors are visible.

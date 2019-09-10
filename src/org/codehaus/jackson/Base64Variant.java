@@ -141,6 +141,9 @@ public final class Base64Variant
      * "Copy constructor" that can be used when the base alphabet is identical
      * to one used by another variant except for the maximum line length
      * (and obviously, name).
+     * @param base Undocumented.
+     * @param name Undocumented.
+     * @param maxLineLength Undocumented.
      */
     public Base64Variant(Base64Variant base, String name, int maxLineLength)
     {
@@ -151,6 +154,11 @@ public final class Base64Variant
      * "Copy constructor" that can be used when the base alphabet is identical
      * to one used by another variant, but other details (padding, maximum
      * line length) differ
+     * @param base Undocumented.
+     * @param name Undocumented.
+     * @param usesPadding Undocumented.
+     * @param paddingChar Undocumented.
+     * @param maxLineLength Undocumented.
      */
     public Base64Variant(Base64Variant base, String name, boolean usesPadding, char paddingChar, int maxLineLength)
     {
@@ -190,6 +198,7 @@ public final class Base64Variant
      */
 
     /**
+     * @param c Undocumented.
      * @return 6-bit decoded value, if valid character; 
      */
     public int decodeBase64Char(char c)
@@ -226,6 +235,10 @@ public final class Base64Variant
     /**
      * Method that encodes given right-aligned (LSB) 24-bit value
      * into 4 base64 characters, stored in given result buffer.
+     * @param b24 Undocumented.
+     * @param buffer Undocumented.
+     * @param ptr Undocumented.
+     * @return  Undocumented.
      */
     public int encodeBase64Chunk(int b24, char[] buffer, int ptr)
     {
@@ -246,11 +259,15 @@ public final class Base64Variant
 
     /**
      * Method that outputs partial chunk (which only encodes one
-     * or two bytes of data). Data given is still aligned same as if
-     * it as full data; that is, missing data is at the "right end"
-     * (LSB) of int.
+     * or two bytes of data).Data given is still aligned same as if
+ it as full data; that is, missing data is at the "right end"
+ (LSB) of int.
      *
+     * @param bits Undocumented.
      * @param outputBytes Number of encoded bytes included (either 1 or 2)
+     * @param buffer Undocumented.
+     * @param outPtr Undocumented.
+     * @return  Undocumented.
      */
     public int encodeBase64Partial(int bits, int outputBytes, char[] buffer, int outPtr)
     {
@@ -292,6 +309,10 @@ public final class Base64Variant
     /**
      * Method that encodes given right-aligned (LSB) 24-bit value
      * into 4 base64 bytes (ascii), stored in given result buffer.
+     * @param b24 Undocumented.
+     * @param buffer Undocumented.
+     * @param ptr Undocumented.
+     * @return  Undocumented.
      */
     public int encodeBase64Chunk(int b24, byte[] buffer, int ptr)
     {
@@ -303,12 +324,14 @@ public final class Base64Variant
     }
 
     /**
-     * Method that outputs partial chunk (which only encodes one
-     * or two bytes of data). Data given is still aligned same as if
-     * it as full data; that is, missing data is at the "right end"
-     * (LSB) of int.
+     * Method that outputs partial chunk (which only encodes one or two bytes of data).Data given is still aligned same
+     * as if it as full data; that is, missing data is at the "right end" (LSB) of int.
      *
+     * @param bits Undocumented.
      * @param outputBytes Number of encoded bytes included (either 1 or 2)
+     * @param buffer Undocumented.
+     * @param outPtr Undocumented.
+     * @return Undocumented.
      */
     public int encodeBase64Partial(int bits, int outputBytes, byte[] buffer, int outPtr)
     {

@@ -698,20 +698,20 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
     /**
      * Extracts a maximum level limit from the AVList if the AVList contains AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL.
      * This method requires <code>maxNumOfLevels</code> - the actual maximum numbers of levels.
-     * <p/>
+     * <p>
      * The AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL could specify multiple things:
-     * <p/>
+     * <p>
      * If the value of the AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL is "Auto" (as String), the calculated limit of
      * levels will be 70% of the actual maximum numbers of levels <code>maxNumOfLevels</code>.
-     * <p/>
+     * <p>
      * If the type of the value of the AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL is Integer, it should contain an
      * integer number between 0 (for level 0 only) and the actual maximum numbers of levels
      * <code>maxNumOfLevels</code>.
-     * <p/>
+     * <p>
      * It is also possible to specify the limit as percents, in this case the type of the
      * AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL value must be "String", have a numeric value as text and the "%"
      * percent sign in the end. Examples: "100%", "25%", "50%", etc.
-     * <p/>
+     * <p>
      * Value of AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL could be a numeric string (for example, "3"), or Integer.
      * The value will be correctly extracted and compared with the <code>maxNumOfLevels</code>. Valid values must be
      * smaller or equal to <code>maxNumOfLevels</code>.
@@ -952,8 +952,9 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
      * Installs the configuration file which describes the tiled data produced by this TiledRasterProducer. The install
      * location, configuration filename, and configuration file contents are derived from the specified parameter list.
      * This throws an exception if the configuration file cannot be installed for any reason.
-     * <p/>
-     * The parameter list must contain <strong>at least</strong> the following keys: <table> <tr><th>Key</th></tr>
+     * <p>
+     * The parameter list must contain <strong>at least</strong> the following keys: <table> 
+     * <caption style="font-weight: bold;">Required Keys</caption><tr><th>Key</th></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FILE_STORE_LOCATION}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td></td></tr> </table>
@@ -1028,7 +1029,8 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
     /**
      * Returns the location of the configuration file which describes the tiled data produced by this
      * TiledRasterProducer. The install location is derived from the specified parameter list. This returns null if the
-     * parameter list is null, or if it does not contain any of the following keys: <table> <tr><th>Key</th></tr>
+     * parameter list is null, or if it does not contain any of the following keys: <table> 
+     * <caption style="font-weight: bold;">Required Keys</caption><tr><th>Key</th></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FILE_STORE_LOCATION}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td></td></tr> </table>

@@ -434,11 +434,12 @@ public abstract class JsonGeneratorBase
     }
 
     /**
-     * Helper method to try to call appropriate write method for given
-     * untyped Object. At this point, no structural conversions should be done,
-     * only simple basic types are to be coerced as necessary.
+     * Helper method to try to call appropriate write method for given untyped Object.At this point, no structural
+     * conversions should be done, only simple basic types are to be coerced as necessary.
      *
      * @param value Non-null value to write
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     protected void _writeSimpleObject(Object value) 
         throws IOException, JsonGenerationException

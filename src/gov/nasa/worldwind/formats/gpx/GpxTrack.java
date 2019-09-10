@@ -58,12 +58,12 @@ public class GpxTrack extends gov.nasa.worldwind.formats.gpx.ElementParser imple
     }
 
     /**
-     * @param uri
-     * @param lname
-     * @param qname
-     * @param attributes
+     * @param uri The element URI.
+     * @param lname the element lname.
+     * @param qname the element qname.
+     * @param attributes the element attributes.
      * @throws IllegalArgumentException if <code>lname</code> is null
-     * @throws org.xml.sax.SAXException
+     * @throws org.xml.sax.SAXException if a parsing error has occurred.
      */
     @Override
     public void doStartElement(String uri, String lname, String qname, org.xml.sax.Attributes attributes)
@@ -103,11 +103,11 @@ public class GpxTrack extends gov.nasa.worldwind.formats.gpx.ElementParser imple
     }
 
     /**
-     * @param uri
-     * @param lname
-     * @param qname
+     * @param uri The element URI.
+     * @param lname the element lname.
+     * @param qname the element qname.
      * @throws IllegalArgumentException if <code>lname</code> is null
-     * @throws org.xml.sax.SAXException
+     * @throws org.xml.sax.SAXException if a parsing error occurs.
      */
     @Override
     public void doEndElement(String uri, String lname, String qname) throws org.xml.sax.SAXException
