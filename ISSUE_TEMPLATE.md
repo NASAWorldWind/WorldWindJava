@@ -5,9 +5,9 @@ maintainer's discretion.
 
 Please fulfill the following requirements before submitting an issue to this repository.
 
-- Check the "Common Problems" page on the WorldWind website: https://worldwind.arc.nasa.gov/web/tutorials/common-problems/
-- Check that your issue isn't already filed: https://github.com/NASAWorldWind/WebWorldWind/issues
-- Check the WorldWind forum for common solutions: https://forum.worldwindcentral.com/forum/web-world-wind/web-world-wind-help
+- Check the "Common Problems" page on the WorldWind website: https://worldwind.arc.nasa.gov/java/tutorials/common-problems
+- Check that your issue isn't already filed: https://github.com/NASAWorldWind/WorldWindJava/issues
+- Check the WorldWind forum for common solutions: https://forum.worldwindcentral.com/forum/world-wind-java-forums
 
 ### Description
 
