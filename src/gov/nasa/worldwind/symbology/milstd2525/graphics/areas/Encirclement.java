@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.geom.*;
@@ -20,12 +19,16 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: Encirclement.java 545 2012-04-24 22:29:21Z pabercrombie $
  */
-public class Encirclement extends BasicArea
-{
-    /** Default number of wave lengths for a simple shape. This number is used to compute a default wave length. */
+public class Encirclement extends BasicArea {
+
+    /**
+     * Default number of wave lengths for a simple shape. This number is used to compute a default wave length.
+     */
     public static final int DEFAULT_NUM_WAVES = 10;
 
-    /** Original positions specified by the application. */
+    /**
+     * Original positions specified by the application.
+     */
     protected Iterable<? extends Position> positions;
     /**
      * Positions computed from the original positions. This list includes the positions necessary to draw the triangle
@@ -33,9 +36,13 @@ public class Encirclement extends BasicArea
      */
     protected List<Position> computedPositions;
 
-    /** Indicates the wavelength of the triangle wave that forms the graphic's border. */
+    /**
+     * Indicates the wavelength of the triangle wave that forms the graphic's border.
+     */
     protected double waveLength;
-    /** The polygon with triangle wave. */
+    /**
+     * The polygon with triangle wave.
+     */
     protected SurfacePolygon wavePolygon = new SurfacePolygon();
 
     /**
@@ -43,8 +50,7 @@ public class Encirclement extends BasicArea
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(TacGrpSidc.C2GM_SPL_ARA_ENCMT);
     }
 
@@ -53,33 +59,34 @@ public class Encirclement extends BasicArea
      *
      * @param sidc MIL-STD-2525C identifier code.
      */
-    public Encirclement(String sidc)
-    {
+    public Encirclement(String sidc) {
         super(sidc);
         this.wavePolygon = this.createPolygon();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setPositions(Iterable<? extends Position> positions)
-    {
+    public void setPositions(Iterable<? extends Position> positions) {
         this.positions = positions;
         this.computedPositions = null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Iterable<? extends Position> getPositions()
-    {
+    public Iterable<? extends Position> getPositions() {
         return this.positions;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void moveTo(Position position)
-    {
-        if (position == null)
-        {
+    public void moveTo(Position position) {
+        if (position == null) {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -89,8 +96,9 @@ public class Encirclement extends BasicArea
 
         // The reference position is null if this shape has no positions. In this case moving the shape to a new
         // reference position is meaningless. Therefore we fail softly by exiting and doing nothing.
-        if (oldPosition == null)
+        if (oldPosition == null) {
             return;
+        }
 
         this.positions = Position.computeShiftedPositions(oldPosition, position, this.getPositions());
 
@@ -111,8 +119,7 @@ public class Encirclement extends BasicArea
      *
      * @return The wave length, in meters.
      */
-    public double getWaveLength()
-    {
+    public double getWaveLength() {
         return this.waveLength;
     }
 
@@ -122,16 +129,15 @@ public class Encirclement extends BasicArea
      *
      * @param waveLength The wavelength, in meters.
      */
-    public void setWaveLength(double waveLength)
-    {
+    public void setWaveLength(double waveLength) {
         this.waveLength = waveLength;
     }
 
-    /** {@inheritDoc} */
-    public void preRender(DrawContext dc)
-    {
-        if (!this.isVisible())
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public void preRender(DrawContext dc) {
+        if (!this.isVisible()) {
             return;
         }
 
@@ -140,18 +146,17 @@ public class Encirclement extends BasicArea
     }
 
     @Override
-    protected void doRenderGraphic(DrawContext dc)
-    {
+    protected void doRenderGraphic(DrawContext dc) {
         super.doRenderGraphic(dc);
         this.wavePolygon.render(dc);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void computeGeometry(DrawContext dc)
-    {
-        if (this.computedPositions == null && this.positions != null)
-        {
+    protected void computeGeometry(DrawContext dc) {
+        if (this.computedPositions == null && this.positions != null) {
             this.generateIntermediatePositions(dc, this.positions);
             this.polygon.setLocations(this.positions);
             this.wavePolygon.setLocations(this.computedPositions);
@@ -162,25 +167,22 @@ public class Encirclement extends BasicArea
     /**
      * Generate the positions required to draw the polygon with a triangle wave boundary.
      *
-     * @param dc        Current draw context.
+     * @param dc Current draw context.
      * @param positions Positions that define the polygon boundary.
      */
-    protected void generateIntermediatePositions(DrawContext dc, Iterable<? extends Position> positions)
-    {
+    protected void generateIntermediatePositions(DrawContext dc, Iterable<? extends Position> positions) {
         Globe globe = dc.getGlobe();
         List<Position> wavePositions = new ArrayList<Position>();
 
         double waveLength = this.getWaveLength();
-        if (waveLength == 0)
-        {
+        if (waveLength == 0) {
             waveLength = this.computeDefaultWavelength(dc.getGlobe());
         }
         double amplitude = waveLength / 2.0;
 
         TriangleWavePositionIterator iterator = new TriangleWavePositionIterator(positions, waveLength, amplitude,
-            globe);
-        while (iterator.hasNext())
-        {
+                globe);
+        while (iterator.hasNext()) {
             wavePositions.add(iterator.next());
         }
 
@@ -200,8 +202,7 @@ public class Encirclement extends BasicArea
     // TODO: this algorithm assumes that more control points means that the shape is more complicated, so the teeth
     // TODO: need to be smaller. But this isn't always the case; adding points to increase the resolution of a circle
     // TODO: shouldn't make the teeth smaller.
-    protected double computeDefaultWavelength(Globe globe)
-    {
+    protected double computeDefaultWavelength(Globe globe) {
         double perimeter = 0;
         int count = 0;
 
@@ -209,15 +210,11 @@ public class Encirclement extends BasicArea
         Position first = null;
         Position prev = null;
 
-        for (Position pos : this.positions)
-        {
-            if (prev != null)
-            {
+        for (Position pos : this.positions) {
+            if (prev != null) {
                 Angle dist = LatLon.greatCircleDistance(pos, prev);
                 perimeter += dist.radians;
-            }
-            else
-            {
+            } else {
                 first = pos;
             }
 
@@ -226,8 +223,7 @@ public class Encirclement extends BasicArea
         }
 
         // If the polygon is not closed account for the missing segment.
-        if (prev != null && !prev.equals(first))
-        {
+        if (prev != null && !prev.equals(first)) {
             Angle dist = LatLon.greatCircleDistance(first, prev);
             perimeter += dist.radians;
         }

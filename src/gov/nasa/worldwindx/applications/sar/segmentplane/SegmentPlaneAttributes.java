@@ -18,10 +18,10 @@ import java.util.*;
  * @author dcollins
  * @version $Id: SegmentPlaneAttributes.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SegmentPlaneAttributes
-{
-    public static class GeometryAttributes
-    {
+public class SegmentPlaneAttributes {
+
+    public static class GeometryAttributes {
+
         private boolean visible;
         private boolean pickEnabled;
         private Material material;
@@ -30,16 +30,13 @@ public class SegmentPlaneAttributes
         private double pickSize;
         private Vec4 offset;
 
-        public GeometryAttributes(Material material, double opacity)
-        {
-            if (material == null)
-            {
+        public GeometryAttributes(Material material, double opacity) {
+            if (material == null) {
                 String message = Logging.getMessage("nullValue.MaterialIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
             }
-            if (opacity < 0.0 || opacity > 1.0)
-            {
+            if (opacity < 0.0 || opacity > 1.0) {
                 String message = Logging.getMessage("generic.ArgumentOutOfRange", "opacity < 0 or opacity > 1");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -54,18 +51,15 @@ public class SegmentPlaneAttributes
             this.offset = Vec4.ZERO;
         }
 
-        public GeometryAttributes()
-        {
+        public GeometryAttributes() {
             this(Material.WHITE, 1.0);
         }
 
-        public GeometryAttributes copy()
-        {
+        public GeometryAttributes copy() {
             return this.copyTo(new GeometryAttributes());
         }
 
-        public GeometryAttributes copyTo(GeometryAttributes copy)
-        {
+        public GeometryAttributes copyTo(GeometryAttributes copy) {
             copy.setVisible(this.isVisible());
             copy.setEnablePicking(this.isEnablePicking());
             copy.setMaterial(this.getMaterial());
@@ -77,35 +71,28 @@ public class SegmentPlaneAttributes
             return copy;
         }
 
-        public boolean isVisible()
-        {
+        public boolean isVisible() {
             return visible;
         }
 
-        public void setVisible(boolean visible)
-        {
+        public void setVisible(boolean visible) {
             this.visible = visible;
         }
 
-        public boolean isEnablePicking()
-        {
+        public boolean isEnablePicking() {
             return this.pickEnabled;
         }
 
-        public void setEnablePicking(boolean enable)
-        {
+        public void setEnablePicking(boolean enable) {
             this.pickEnabled = enable;
         }
 
-        public Material getMaterial()
-        {
+        public Material getMaterial() {
             return this.material;
         }
 
-        public void setMaterial(Material material)
-        {
-            if (material == null)
-            {
+        public void setMaterial(Material material) {
+            if (material == null) {
                 String message = Logging.getMessage("nullValue.MaterialIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -114,15 +101,12 @@ public class SegmentPlaneAttributes
             this.material = material;
         }
 
-        public double getOpacity()
-        {
+        public double getOpacity() {
             return this.opacity;
         }
 
-        public void setOpacity(double opacity)
-        {
-            if (opacity < 0.0 || opacity > 1.0)
-            {
+        public void setOpacity(double opacity) {
+            if (opacity < 0.0 || opacity > 1.0) {
                 String message = Logging.getMessage("generic.ArgumentOutOfRange", "opacity < 0 or opacity > 1");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -131,15 +115,12 @@ public class SegmentPlaneAttributes
             this.opacity = opacity;
         }
 
-        public double getSize()
-        {
+        public double getSize() {
             return this.size;
         }
 
-        public void setSize(double size)
-        {
-            if (size < 0.0)
-            {
+        public void setSize(double size) {
+            if (size < 0.0) {
                 String message = Logging.getMessage("generic.ArgumentOutOfRange", "size < 0");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -148,15 +129,12 @@ public class SegmentPlaneAttributes
             this.size = size;
         }
 
-        public double getPicksize()
-        {
+        public double getPicksize() {
             return this.pickSize;
         }
 
-        public void setPickSize(double size)
-        {
-            if (size < 0.0)
-            {
+        public void setPickSize(double size) {
+            if (size < 0.0) {
                 String message = Logging.getMessage("generic.ArgumentOutOfRange", "size < 0");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -165,15 +143,12 @@ public class SegmentPlaneAttributes
             this.pickSize = size;
         }
 
-        public Vec4 getOffset()
-        {
+        public Vec4 getOffset() {
             return this.offset;
         }
 
-        public void setOffset(Vec4 vec4)
-        {
-            if (vec4 == null)
-            {
+        public void setOffset(Vec4 vec4) {
+            if (vec4 == null) {
                 String message = Logging.getMessage("nullValue.Vec4IsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -183,8 +158,8 @@ public class SegmentPlaneAttributes
         }
     }
 
-    public static class LabelAttributes
-    {
+    public static class LabelAttributes {
+
         private boolean visible;
         private java.awt.Color color;
         private java.awt.Font font;
@@ -194,28 +169,23 @@ public class SegmentPlaneAttributes
         private double maxActiveDistance;
         private Vec4 offset;
 
-        public LabelAttributes(Color color, Font font, String horizontalAlignment, String verticalAlignment)
-        {
-            if (color == null)
-            {
+        public LabelAttributes(Color color, Font font, String horizontalAlignment, String verticalAlignment) {
+            if (color == null) {
                 String message = Logging.getMessage("nullValue.ColorIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
             }
-            if (font == null)
-            {
+            if (font == null) {
                 String message = Logging.getMessage("nullValue.FontIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
             }
-            if (horizontalAlignment == null)
-            {
+            if (horizontalAlignment == null) {
                 String message = Logging.getMessage("nullValue.HorizontalAlignmentIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
             }
-            if (verticalAlignment == null)
-            {
+            if (verticalAlignment == null) {
                 String message = Logging.getMessage("nullValue.VerticalAlignmentIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -231,18 +201,15 @@ public class SegmentPlaneAttributes
             this.offset = Vec4.ZERO;
         }
 
-        public LabelAttributes()
-        {
+        public LabelAttributes() {
             this(Color.WHITE, Font.decode("Arial-12"), AVKey.LEFT, AVKey.BOTTOM);
         }
 
-        public LabelAttributes copy()
-        {
+        public LabelAttributes copy() {
             return this.copyTo(new LabelAttributes());
         }
 
-        protected LabelAttributes copyTo(LabelAttributes copy)
-        {
+        protected LabelAttributes copyTo(LabelAttributes copy) {
             copy.setVisible(this.isVisible());
             copy.setColor(this.getColor());
             copy.setFont(this.getFont());
@@ -255,25 +222,20 @@ public class SegmentPlaneAttributes
             return copy;
         }
 
-        public boolean isVisible()
-        {
+        public boolean isVisible() {
             return this.visible;
         }
 
-        public void setVisible(boolean visible)
-        {
+        public void setVisible(boolean visible) {
             this.visible = visible;
         }
 
-        public Color getColor()
-        {
+        public Color getColor() {
             return this.color;
         }
 
-        public void setColor(Color color)
-        {
-            if (color == null)
-            {
+        public void setColor(Color color) {
+            if (color == null) {
                 String message = Logging.getMessage("nullValue.ColorIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -282,15 +244,12 @@ public class SegmentPlaneAttributes
             this.color = color;
         }
 
-        public Font getFont()
-        {
+        public Font getFont() {
             return this.font;
         }
 
-        public void setFont(Font font)
-        {
-            if (font == null)
-            {
+        public void setFont(Font font) {
+            if (font == null) {
                 String message = Logging.getMessage("nullValue.FontIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -299,15 +258,12 @@ public class SegmentPlaneAttributes
             this.font = font;
         }
 
-        public String getHorizontalAlignment()
-        {
+        public String getHorizontalAlignment() {
             return this.horizontalAlignment;
         }
 
-        public void setHorizontalAlignment(String horizontalAlignment)
-        {
-            if (horizontalAlignment == null)
-            {
+        public void setHorizontalAlignment(String horizontalAlignment) {
+            if (horizontalAlignment == null) {
                 String message = Logging.getMessage("nullValue.HorizontalAlignmentIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -316,15 +272,12 @@ public class SegmentPlaneAttributes
             this.horizontalAlignment = horizontalAlignment;
         }
 
-        public String getVerticalAlignment()
-        {
+        public String getVerticalAlignment() {
             return this.verticalAlignment;
         }
 
-        public void setVerticalAlignment(String verticalAlignment)
-        {
-            if (verticalAlignment == null)
-            {
+        public void setVerticalAlignment(String verticalAlignment) {
+            if (verticalAlignment == null) {
                 String message = Logging.getMessage("nullValue.VerticalAlignmentIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -333,35 +286,28 @@ public class SegmentPlaneAttributes
             this.verticalAlignment = verticalAlignment;
         }
 
-        public double getMinActiveDistance()
-        {
+        public double getMinActiveDistance() {
             return this.minActiveDistance;
         }
 
-        public void setMinActiveDistance(double distance)
-        {
+        public void setMinActiveDistance(double distance) {
             this.minActiveDistance = distance;
         }
 
-        public double getMaxActiveDistance()
-        {
+        public double getMaxActiveDistance() {
             return this.maxActiveDistance;
         }
 
-        public void setMaxActiveDistance(double distance)
-        {
+        public void setMaxActiveDistance(double distance) {
             this.maxActiveDistance = distance;
         }
 
-        public Vec4 getOffset()
-        {
+        public Vec4 getOffset() {
             return this.offset;
         }
 
-        public void setOffset(Vec4 vec4)
-        {
-            if (vec4 == null)
-            {
+        public void setOffset(Vec4 vec4) {
+            if (vec4 == null) {
                 String message = Logging.getMessage("nullValue.Vec4IsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -370,16 +316,13 @@ public class SegmentPlaneAttributes
             this.offset = vec4;
         }
 
-        public String getText(SegmentPlane segmentPlane, Position position, AVList values)
-        {
-            if (segmentPlane == null)
-            {
+        public String getText(SegmentPlane segmentPlane, Position position, AVList values) {
+            if (segmentPlane == null) {
                 String message = Logging.getMessage("nullValue.SegmentPlaneIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
             }
-            if (position == null)
-            {
+            if (position == null) {
                 String message = Logging.getMessage("nullValue.PositionIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -399,26 +342,22 @@ public class SegmentPlaneAttributes
     private Map<Object, GeometryAttributes> geometryAttributes;
     private Map<Object, LabelAttributes> labelAttributes;
 
-    public SegmentPlaneAttributes()
-    {
+    public SegmentPlaneAttributes() {
         this.geometryAttributes = new HashMap<Object, GeometryAttributes>();
         this.labelAttributes = new HashMap<Object, LabelAttributes>();
     }
 
-    public SegmentPlaneAttributes copy()
-    {
+    public SegmentPlaneAttributes copy() {
         SegmentPlaneAttributes copy = new SegmentPlaneAttributes();
 
         Map<Object, GeometryAttributes> geometryAttributesMap = new HashMap<Object, GeometryAttributes>();
-        for (Map.Entry<Object, GeometryAttributes> entry : this.geometryAttributes.entrySet())
-        {
+        for (Map.Entry<Object, GeometryAttributes> entry : this.geometryAttributes.entrySet()) {
             geometryAttributesMap.put(entry.getKey(), entry.getValue().copy());
         }
         copy.setAllGeometryAttributes(geometryAttributesMap);
 
         Map<Object, LabelAttributes> labelAttributesMap = new HashMap<Object, LabelAttributes>();
-        for (Map.Entry<Object, LabelAttributes> entry : this.labelAttributes.entrySet())
-        {
+        for (Map.Entry<Object, LabelAttributes> entry : this.labelAttributes.entrySet()) {
             labelAttributesMap.put(entry.getKey(), entry.getValue().copy());
         }
         copy.setAllLabelAttributes(labelAttributesMap);
@@ -426,15 +365,12 @@ public class SegmentPlaneAttributes
         return copy;
     }
 
-    public Map<Object, GeometryAttributes> getAllGeometryAttributes()
-    {
+    public Map<Object, GeometryAttributes> getAllGeometryAttributes() {
         return Collections.unmodifiableMap(this.geometryAttributes);
     }
 
-    public void setAllGeometryAttributes(Map<Object, ? extends GeometryAttributes> map)
-    {
-        if (map == null)
-        {
+    public void setAllGeometryAttributes(Map<Object, ? extends GeometryAttributes> map) {
+        if (map == null) {
             String message = Logging.getMessage("nullValue.MapIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -444,15 +380,12 @@ public class SegmentPlaneAttributes
         this.geometryAttributes.putAll(map);
     }
 
-    public Map<Object, LabelAttributes> getAllLabelAttributes()
-    {
+    public Map<Object, LabelAttributes> getAllLabelAttributes() {
         return Collections.unmodifiableMap(this.labelAttributes);
     }
 
-    public void setAllLabelAttributes(Map<Object, ? extends LabelAttributes> map)
-    {
-        if (map == null)
-        {
+    public void setAllLabelAttributes(Map<Object, ? extends LabelAttributes> map) {
+        if (map == null) {
             String message = Logging.getMessage("nullValue.MapIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -462,10 +395,8 @@ public class SegmentPlaneAttributes
         this.labelAttributes.putAll(map);
     }
 
-    public GeometryAttributes getGeometryAttributes(Object key)
-    {
-        if (key == null)
-        {
+    public GeometryAttributes getGeometryAttributes(Object key) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -474,16 +405,13 @@ public class SegmentPlaneAttributes
         return this.geometryAttributes.get(key);
     }
 
-    public void setGeometryAttributes(Object key, GeometryAttributes attributes)
-    {
-        if (key == null)
-        {
+    public void setGeometryAttributes(Object key, GeometryAttributes attributes) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (attributes == null)
-        {
+        if (attributes == null) {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -492,10 +420,8 @@ public class SegmentPlaneAttributes
         this.geometryAttributes.put(key, attributes);
     }
 
-    public LabelAttributes getLabelAttributes(Object key)
-    {
-        if (key == null)
-        {
+    public LabelAttributes getLabelAttributes(Object key) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -504,16 +430,13 @@ public class SegmentPlaneAttributes
         return this.labelAttributes.get(key);
     }
 
-    public void setLabelAttributes(Object key, LabelAttributes attributes)
-    {
-        if (key == null)
-        {
+    public void setLabelAttributes(Object key, LabelAttributes attributes) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (attributes == null)
-        {
+        if (attributes == null) {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -522,49 +445,40 @@ public class SegmentPlaneAttributes
         this.labelAttributes.put(key, attributes);
     }
 
-    public static void applyGeometryAttributes(DrawContext dc, GeometryAttributes attributes, boolean enableMaterial)
-    {
-        if (dc == null)
-        {
+    public static void applyGeometryAttributes(DrawContext dc, GeometryAttributes attributes, boolean enableMaterial) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (dc.getGL() == null)
-        {
+        if (dc.getGL() == null) {
             String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
-        if (attributes == null)
-        {
+        if (attributes == null) {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!dc.isPickingMode())
-        {
+        if (!dc.isPickingMode()) {
             applyMaterial(dc, attributes.getMaterial(), attributes.getOpacity(), enableMaterial);
         }
     }
 
-    public static void applyGeometryAttributesAsLine(DrawContext dc, GeometryAttributes attributes)
-    {
-        if (dc == null)
-        {
+    public static void applyGeometryAttributesAsLine(DrawContext dc, GeometryAttributes attributes) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (dc.getGL() == null)
-        {
+        if (dc.getGL() == null) {
             String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
-        if (attributes == null)
-        {
+        if (attributes == null) {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -573,16 +487,12 @@ public class SegmentPlaneAttributes
         applyLineWidth(dc, attributes.getSize(), attributes.getPicksize());
     }
 
-    protected static void applyMaterial(DrawContext dc, Material material, double opacity, boolean enableMaterial)
-    {
+    protected static void applyMaterial(DrawContext dc, Material material, double opacity, boolean enableMaterial) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        if (enableMaterial)
-        {
+        if (enableMaterial) {
             material.apply(gl, GL2.GL_FRONT_AND_BACK, (float) opacity);
-        }
-        else
-        {
+        } else {
             float[] compArray = new float[4];
             material.getDiffuse().getRGBComponents(compArray);
             compArray[3] = (float) opacity;
@@ -590,16 +500,12 @@ public class SegmentPlaneAttributes
         }
     }
 
-    protected static void applyLineWidth(DrawContext dc, double lineWidth, double pickLineWidth)
-    {
+    protected static void applyLineWidth(DrawContext dc, double lineWidth, double pickLineWidth) {
         GL gl = dc.getGL();
 
-        if (dc.isPickingMode())
-        {
+        if (dc.isPickingMode()) {
             gl.glLineWidth((float) pickLineWidth);
-        }
-        else
-        {
+        } else {
             gl.glLineWidth((float) lineWidth);
         }
     }

@@ -13,36 +13,28 @@ import org.w3c.dom.Document;
  * @author Patrick Murris
  * @version $Id: MSVirtualEarthLayer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class MSVirtualEarthLayer extends BasicTiledImageLayer
-{
+public class MSVirtualEarthLayer extends BasicTiledImageLayer {
+
     public static final String LAYER_AERIAL = "gov.nasa.worldwind.layers.Earth.MSVirtualEarthLayer.Aerial";
     public static final String LAYER_ROADS = "gov.nasa.worldwind.layers.Earth.MSVirtualEarthLayer.Roads";
     public static final String LAYER_HYBRID = "gov.nasa.worldwind.layers.Earth.MSVirtualEarthLayer.Hybrid";
 
-    public MSVirtualEarthLayer(String layerName)
-    {
+    public MSVirtualEarthLayer(String layerName) {
         super(getConfigurationDocument(layerName), null);
     }
 
-    public MSVirtualEarthLayer()
-    {
-       this(LAYER_AERIAL);
+    public MSVirtualEarthLayer() {
+        this(LAYER_AERIAL);
     }
 
-    protected static Document getConfigurationDocument(String layerName)
-    {
+    protected static Document getConfigurationDocument(String layerName) {
         String filePath;
 
-        if (layerName != null && layerName.equals(LAYER_HYBRID))
-        {
+        if (layerName != null && layerName.equals(LAYER_HYBRID)) {
             filePath = "config/Earth/MSVirtualEarthHybridLayer.xml";
-        }
-        else if (layerName != null && layerName.equals(LAYER_ROADS))
-        {
+        } else if (layerName != null && layerName.equals(LAYER_ROADS)) {
             filePath = "config/Earth/MSVirtualEarthRoadsLayer.xml";
-        }
-        else
-        {
+        } else {
             // Default to MS Virtual Earth Aerial.
             filePath = "config/Earth/MSVirtualEarthAerialLayer.xml";
         }

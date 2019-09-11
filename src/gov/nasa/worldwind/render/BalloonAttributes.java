@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render;
 
 import java.awt.*;
@@ -18,8 +17,8 @@ import java.awt.*;
  * @version $Id: BalloonAttributes.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see Balloon
  */
-public interface BalloonAttributes extends ShapeAttributes
-{
+public interface BalloonAttributes extends ShapeAttributes {
+
     /**
      * Indicates the width and height of the balloon's shape in the viewport. If the balloon's shape is
      * <code>AVKey.SHAPE_RECTANGLE</code>, then the returned <code>Size</code> indicates the rectangle's width and
@@ -56,7 +55,7 @@ public interface BalloonAttributes extends ShapeAttributes
      * size.
      *
      * @return the maximum width and height of the balloon's shape in the viewport, or <code>null</code> if the balloon
-     *         has no maximum size.
+     * has no maximum size.
      */
     Size getMaximumSize();
 
@@ -67,7 +66,7 @@ public interface BalloonAttributes extends ShapeAttributes
      * x- and y-radii. Specifying a <code>null</code> size causes the balloon to have no maximum size.
      *
      * @param size the desired maximum width and height of the balloon's shape in the viewport, or <code>null</code> if
-     *             the balloon should have no maximum size.
+     * the balloon should have no maximum size.
      */
     void setMaximumSize(Size size);
 
@@ -159,7 +158,7 @@ public interface BalloonAttributes extends ShapeAttributes
      * radius attribute is ignored.
      *
      * @param shape the frame shape to use, either <code>AVKey.SHAPE_NONE</code> <code>AVKey.SHAPE_RECTANGLE</code> or
-     *              <code>AVKey.SHAPE_ELLIPSE</code>.
+     * <code>AVKey.SHAPE_ELLIPSE</code>.
      *
      * @throws IllegalArgumentException if <code>shape</code> is <code>null</code>.
      * @see #getBalloonShape()
@@ -353,7 +352,7 @@ public interface BalloonAttributes extends ShapeAttributes
      * the X and Y axes, respectively. The texture is repeated after its offset and scale are applied.
      *
      * @param repeat the texture's repeat mode to use, one of <code>AVKey.REPEAT_NONE</code>,
-     *               <code>AVKey.REPEAT_X</code>, <code>AVKey.REPEAT_Y</code>, or <code>AVKey.REPEAT_XY</code>.
+     * <code>AVKey.REPEAT_X</code>, <code>AVKey.REPEAT_Y</code>, or <code>AVKey.REPEAT_XY</code>.
      *
      * @throws IllegalArgumentException if <code>repeat</code> is <code>null</code>.
      * @see #getImageRepeat()

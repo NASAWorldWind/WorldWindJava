@@ -16,7 +16,8 @@ import java.util.List;
  * This class signals that an object or terrain is under the cursor and identifies that object and the operation that
  * caused the signal. See the <em>Field Summary</em> for a description of the possible operations. When a SelectEvent
  * occurs, all select event listeners registered with the associated {@link gov.nasa.worldwind.WorldWindow} are called.
- * Select event listeners are registered by calling {@link gov.nasa.worldwind.WorldWindow#addSelectListener(SelectListener)}.
+ * Select event listeners are registered by calling
+ * {@link gov.nasa.worldwind.WorldWindow#addSelectListener(SelectListener)}.
  * <p>
  * A <code>ROLLOVER</code> SelectEvent is generated every frame when the cursor is over a visible object either because
  * the user moved it there or because the WorldWindow was repainted and a visible object was found to be under the
@@ -44,17 +45,27 @@ import java.util.List;
  * @version $Id: SelectEvent.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 @SuppressWarnings({"StringEquality"})
-public class SelectEvent extends WWEvent
-{
-    /** The user clicked the left mouse button while the cursor was over picked object. */
+public class SelectEvent extends WWEvent {
+
+    /**
+     * The user clicked the left mouse button while the cursor was over picked object.
+     */
     public static final String LEFT_CLICK = "gov.nasa.worldwind.SelectEvent.LeftClick";
-    /** The user double-clicked the left mouse button while the cursor was over picked object. */
+    /**
+     * The user double-clicked the left mouse button while the cursor was over picked object.
+     */
     public static final String LEFT_DOUBLE_CLICK = "gov.nasa.worldwind.SelectEvent.LeftDoubleClick";
-    /** The user clicked the right mouse button while the cursor was over picked object. */
+    /**
+     * The user clicked the right mouse button while the cursor was over picked object.
+     */
     public static final String RIGHT_CLICK = "gov.nasa.worldwind.SelectEvent.RightClick";
-    /** The user pressed the left mouse button while the cursor was over picked object. */
+    /**
+     * The user pressed the left mouse button while the cursor was over picked object.
+     */
     public static final String LEFT_PRESS = "gov.nasa.worldwind.SelectEvent.LeftPress";
-    /** The user pressed the right mouse button while the cursor was over picked object. */
+    /**
+     * The user pressed the right mouse button while the cursor was over picked object.
+     */
     public static final String RIGHT_PRESS = "gov.nasa.worldwind.SelectEvent.RightPress";
     /**
      * The cursor has moved over the picked object and become stationary, or has moved off the object of the most recent
@@ -66,9 +77,13 @@ public class SelectEvent extends WWEvent
      * the picked object will be null.
      */
     public static final String ROLLOVER = "gov.nasa.worldwind.SelectEvent.Rollover";
-    /** The user is attempting to drag the picked object. */
+    /**
+     * The user is attempting to drag the picked object.
+     */
     public static final String DRAG = "gov.nasa.worldwind.SelectEvent.Drag";
-    /** The user has stopped dragging the picked object. */
+    /**
+     * The user has stopped dragging the picked object.
+     */
     public static final String DRAG_END = "gov.nasa.worldwind.SelectEvent.DragEnd";
     /**
      * The user has selected one or more of objects using a selection box. A box rollover event is generated every frame
@@ -85,8 +100,7 @@ public class SelectEvent extends WWEvent
     private final MouseEvent mouseEvent;
     private final PickedObjectList pickedObjects;
 
-    public SelectEvent(Object source, String eventAction, MouseEvent mouseEvent, PickedObjectList pickedObjects)
-    {
+    public SelectEvent(Object source, String eventAction, MouseEvent mouseEvent, PickedObjectList pickedObjects) {
         super(source);
         this.eventAction = eventAction;
         this.pickPoint = mouseEvent != null ? mouseEvent.getPoint() : null;
@@ -95,8 +109,7 @@ public class SelectEvent extends WWEvent
         this.pickedObjects = pickedObjects;
     }
 
-    public SelectEvent(Object source, String eventAction, Point pickPoint, PickedObjectList pickedObjects)
-    {
+    public SelectEvent(Object source, String eventAction, Point pickPoint, PickedObjectList pickedObjects) {
         super(source);
         this.eventAction = eventAction;
         this.pickPoint = pickPoint;
@@ -105,8 +118,7 @@ public class SelectEvent extends WWEvent
         this.pickedObjects = pickedObjects;
     }
 
-    public SelectEvent(Object source, String eventAction, Rectangle pickRectangle, PickedObjectList pickedObjects)
-    {
+    public SelectEvent(Object source, String eventAction, Rectangle pickRectangle, PickedObjectList pickedObjects) {
         super(source);
         this.eventAction = eventAction;
         this.pickPoint = null;
@@ -116,51 +128,43 @@ public class SelectEvent extends WWEvent
     }
 
     @Override
-    public void consume()
-    {
+    public void consume() {
         super.consume();
 
-        if (this.getMouseEvent() != null)
+        if (this.getMouseEvent() != null) {
             this.getMouseEvent().consume();
+        }
     }
 
-    public String getEventAction()
-    {
+    public String getEventAction() {
         return this.eventAction != null ? this.eventAction : "gov.nasa.worldwind.SelectEvent.UnknownEventAction";
     }
 
-    public Point getPickPoint()
-    {
+    public Point getPickPoint() {
         return this.pickPoint;
     }
 
-    public Rectangle getPickRectangle()
-    {
+    public Rectangle getPickRectangle() {
         return this.pickRect;
     }
 
-    public MouseEvent getMouseEvent()
-    {
+    public MouseEvent getMouseEvent() {
         return this.mouseEvent;
     }
 
-    public boolean hasObjects()
-    {
+    public boolean hasObjects() {
         return this.pickedObjects != null && this.pickedObjects.size() > 0;
     }
 
-    public PickedObjectList getObjects()
-    {
+    public PickedObjectList getObjects() {
         return this.pickedObjects;
     }
 
-    public PickedObject getTopPickedObject()
-    {
+    public PickedObject getTopPickedObject() {
         return this.hasObjects() ? this.pickedObjects.getTopPickedObject() : null;
     }
 
-    public Object getTopObject()
-    {
+    public Object getTopObject() {
         PickedObject tpo = this.getTopPickedObject();
         return tpo != null ? tpo.getObject() : null;
     }
@@ -172,8 +176,7 @@ public class SelectEvent extends WWEvent
      *
      * @return a new list of the picked objects marked as on top, or <code>null</code> if nothing is marked as on top.
      */
-    public List<PickedObject> getAllTopPickedObjects()
-    {
+    public List<PickedObject> getAllTopPickedObjects() {
         return this.hasObjects() ? this.pickedObjects.getAllTopPickedObjects() : null;
     }
 
@@ -183,70 +186,59 @@ public class SelectEvent extends WWEvent
      * any picked objects marked as on top.
      *
      * @return a new list of the objects associated with a picked object marked as on top, or <code>null</code> if
-     *         nothing is marked as on top.
+     * nothing is marked as on top.
      */
-    public List<?> getAllTopObjects()
-    {
+    public List<?> getAllTopObjects() {
         return this.hasObjects() ? this.pickedObjects.getAllTopObjects() : null;
     }
 
-    public boolean isRollover()
-    {
+    public boolean isRollover() {
         return this.getEventAction() == ROLLOVER;
     }
 
-    public boolean isHover()
-    {
+    public boolean isHover() {
         return this.getEventAction() == HOVER;
     }
 
-    public boolean isDragEnd()
-    {
+    public boolean isDragEnd() {
         return this.getEventAction() == DRAG_END;
     }
 
-    public boolean isDrag()
-    {
+    public boolean isDrag() {
         return this.getEventAction() == DRAG;
     }
 
-    public boolean isRightPress()
-    {
+    public boolean isRightPress() {
         return this.getEventAction() == RIGHT_PRESS;
     }
 
-    public boolean isRightClick()
-    {
+    public boolean isRightClick() {
         return this.getEventAction() == RIGHT_CLICK;
     }
 
-    public boolean isLeftDoubleClick()
-    {
+    public boolean isLeftDoubleClick() {
         return this.getEventAction() == LEFT_DOUBLE_CLICK;
     }
 
-    public boolean isLeftClick()
-    {
+    public boolean isLeftClick() {
         return this.getEventAction() == LEFT_CLICK;
     }
 
-    public boolean isLeftPress()
-    {
+    public boolean isLeftPress() {
         return this.getEventAction() == LEFT_PRESS;
     }
 
-    public boolean isBoxSelect()
-    {
+    public boolean isBoxSelect() {
         return this.getEventAction() == BOX_ROLLOVER;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder sb = new StringBuilder(this.getClass().getName() + " "
-            + (this.eventAction != null ? this.eventAction : Logging.getMessage("generic.Unknown")));
-        if (this.pickedObjects != null && this.pickedObjects.getTopObject() != null)
+                + (this.eventAction != null ? this.eventAction : Logging.getMessage("generic.Unknown")));
+        if (this.pickedObjects != null && this.pickedObjects.getTopObject() != null) {
             sb.append(", ").append(this.pickedObjects.getTopObject().getClass().getName());
+        }
 
         return sb.toString();
     }

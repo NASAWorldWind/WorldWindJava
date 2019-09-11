@@ -16,52 +16,46 @@ import java.net.URISyntaxException;
  * @author tag
  * @version $Id: WMSLayerManager.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class WMSLayerManager
-{
-    protected static final String[] servers = new String[]
-        {
-            "https://neowms.sci.gsfc.nasa.gov/wms/wms",
-            "https://sedac.ciesin.columbia.edu/geoserver/wcs"
-        };
+public class WMSLayerManager {
 
-    protected static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+    protected static final String[] servers = new String[]{
+        "https://neowms.sci.gsfc.nasa.gov/wms/wms",
+        "https://sedac.ciesin.columbia.edu/geoserver/wcs"
+    };
+
+    protected static class AppFrame extends ApplicationTemplate.AppFrame {
+
         protected final Dimension wmsPanelSize = new Dimension(400, 600);
         protected JTabbedPane tabbedPane;
         protected int previousTabIndex;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             this.tabbedPane = new JTabbedPane();
 
             this.tabbedPane.add(new JPanel());
             this.tabbedPane.setTitleAt(0, "+");
-            this.tabbedPane.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent changeEvent)
-                {
-                    if (tabbedPane.getSelectedIndex() != 0)
-                    {
+            this.tabbedPane.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent changeEvent) {
+                    if (tabbedPane.getSelectedIndex() != 0) {
                         previousTabIndex = tabbedPane.getSelectedIndex();
                         return;
                     }
 
                     String server = JOptionPane.showInputDialog("Enter wms server URL");
-                    if (server == null || server.length() < 1)
-                    {
+                    if (server == null || server.length() < 1) {
                         tabbedPane.setSelectedIndex(previousTabIndex);
                         return;
                     }
 
                     // Respond by adding a new WMSLayerPanel to the tabbed pane.
-                    if (addTab(tabbedPane.getTabCount(), server.trim()) != null)
+                    if (addTab(tabbedPane.getTabCount(), server.trim()) != null) {
                         tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
+                    }
                 }
             });
 
             // Create a tab for each server and add it to the tabbed panel.
-            for (int i = 0; i < servers.length; i++)
-            {
+            for (int i = 0; i < servers.length; i++) {
                 this.addTab(i + 1, servers[i]); // i+1 to place all server tabs to the right of the Add Server tab
             }
 
@@ -77,30 +71,25 @@ public class WMSLayerManager
             controlFrame.setVisible(true);
         }
 
-        protected WMSLayersPanel addTab(int position, String server)
-        {
+        protected WMSLayersPanel addTab(int position, String server) {
             // Add a server to the tabbed dialog.
-            try
-            {
+            try {
                 WMSLayersPanel layersPanel = new WMSLayersPanel(AppFrame.this.getWwd(), server, wmsPanelSize);
                 this.tabbedPane.add(layersPanel, BorderLayout.CENTER);
                 String title = layersPanel.getServerDisplayString();
                 this.tabbedPane.setTitleAt(position, title != null && title.length() > 0 ? title : server);
 
                 return layersPanel;
-            }
-            catch (URISyntaxException e)
-            {
+            } catch (URISyntaxException e) {
                 JOptionPane.showMessageDialog(null, "Server URL is invalid", "Invalid Server URL",
-                    JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.ERROR_MESSAGE);
                 tabbedPane.setSelectedIndex(previousTabIndex);
                 return null;
             }
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind WMS Layers", AppFrame.class);
     }
 }

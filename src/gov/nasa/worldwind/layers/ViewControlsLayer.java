@@ -17,7 +17,8 @@ import java.awt.*;
  * and vertical exaggeration. Each of the controls can be enabled or disabled independently.
  * <p>
  * An instance of this class depends on an instance of {@link ViewControlsSelectListener} to control it. The select
- * listener must be registered as such via {@link gov.nasa.worldwind.WorldWindow#addSelectListener(gov.nasa.worldwind.event.SelectListener)}.
+ * listener must be registered as such via
+ * {@link gov.nasa.worldwind.WorldWindow#addSelectListener(gov.nasa.worldwind.event.SelectListener)}.
  * <p>
  * <code>ViewControlsLayer</code> instances are not sharable among <code>WorldWindow</code>s.
  *
@@ -25,8 +26,8 @@ import java.awt.*;
  * @version $Id: ViewControlsLayer.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see ViewControlsSelectListener
  */
-public class ViewControlsLayer extends RenderableLayer
-{
+public class ViewControlsLayer extends RenderableLayer {
+
     // The default images
     protected final static String IMAGE_PAN = "images/view-pan-64x64.png";
     protected final static String IMAGE_LOOK = "images/view-look-64x64.png";
@@ -75,8 +76,7 @@ public class ViewControlsLayer extends RenderableLayer
     protected boolean showFovControls = false;
     protected boolean showVeControls = true;
 
-    public int getBorderWidth()
-    {
+    public int getBorderWidth() {
         return this.borderWidth;
     }
 
@@ -86,8 +86,7 @@ public class ViewControlsLayer extends RenderableLayer
      * @param borderWidth the number of pixels to offset the view controls from the borders indicated by {@link
      *                    #setPosition(String)}.
      */
-    public void setBorderWidth(int borderWidth)
-    {
+    public void setBorderWidth(int borderWidth) {
         this.borderWidth = borderWidth;
         clearControls();
     }
@@ -97,8 +96,7 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @return the controls display scale.
      */
-    public double getScale()
-    {
+    public double getScale() {
         return this.scale;
     }
 
@@ -107,30 +105,25 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @param scale the controls display scale.
      */
-    public void setScale(double scale)
-    {
+    public void setScale(double scale) {
         this.scale = scale;
         clearControls();
     }
 
-    protected int getButtonSize()
-    {
+    protected int getButtonSize() {
         return buttonSize;
     }
 
-    protected void setButtonSize(int buttonSize)
-    {
+    protected void setButtonSize(int buttonSize) {
         this.buttonSize = buttonSize;
         clearControls();
     }
 
-    protected int getPanSize()
-    {
+    protected int getPanSize() {
         return panSize;
     }
 
-    protected void setPanSize(int panSize)
-    {
+    protected void setPanSize(int panSize) {
         this.panSize = panSize;
         clearControls();
     }
@@ -140,8 +133,7 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @return the current view controls position.
      */
-    public String getPosition()
-    {
+    public String getPosition() {
         return this.position;
     }
 
@@ -152,10 +144,8 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @param position the desired view controls position, in screen coordinates.
      */
-    public void setPosition(String position)
-    {
-        if (position == null)
-        {
+    public void setPosition(String position) {
+        if (position == null) {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -169,8 +159,7 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @return the current layout.
      */
-    public String getLayout()
-    {
+    public String getLayout() {
         return this.layout;
     }
 
@@ -179,16 +168,13 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @param layout the desired layout.
      */
-    public void setLayout(String layout)
-    {
-        if (layout == null)
-        {
+    public void setLayout(String layout) {
+        if (layout == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (!this.layout.equals(layout))
-        {
+        if (!this.layout.equals(layout)) {
             this.layout = layout;
             clearControls();
         }
@@ -201,8 +187,7 @@ public class ViewControlsLayer extends RenderableLayer
      * @param opacity the current opacity value, which is ignored by this layer.
      */
     @Override
-    public void setOpacity(double opacity)
-    {
+    public void setOpacity(double opacity) {
         super.setOpacity(opacity);
     }
 
@@ -213,8 +198,7 @@ public class ViewControlsLayer extends RenderableLayer
      * @return The layer opacity, a value between 0 and 1.
      */
     @Override
-    public double getOpacity()
-    {
+    public double getOpacity() {
         return super.getOpacity();
     }
 
@@ -223,8 +207,7 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @return the current location center. May be null.
      */
-    public Vec4 getLocationCenter()
-    {
+    public Vec4 getLocationCenter() {
         return locationCenter;
     }
 
@@ -241,8 +224,7 @@ public class ViewControlsLayer extends RenderableLayer
      * @see #setPosition(String)
      * @see #setLocationOffset(gov.nasa.worldwind.geom.Vec4)
      */
-    public void setLocationCenter(Vec4 locationCenter)
-    {
+    public void setLocationCenter(Vec4 locationCenter) {
         this.locationCenter = locationCenter;
         clearControls();
     }
@@ -252,8 +234,7 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @return the location offset. Will be null if no offset has been specified.
      */
-    public Vec4 getLocationOffset()
-    {
+    public Vec4 getLocationOffset() {
         return locationOffset;
     }
 
@@ -261,113 +242,91 @@ public class ViewControlsLayer extends RenderableLayer
      * Specifies a placement offset from the layer position on the screen.
      *
      * @param locationOffset the number of pixels to shift the layer image from its specified screen position. A
-     *                       positive X value shifts the image to the right. A positive Y value shifts the image up. If
-     *                       null, no offset is applied. The default offset is null.
+     * positive X value shifts the image to the right. A positive Y value shifts the image up. If null, no offset is
+     * applied. The default offset is null.
      *
      * @see #setLocationCenter(gov.nasa.worldwind.geom.Vec4)
      * @see #setPosition(String)
      */
-    public void setLocationOffset(Vec4 locationOffset)
-    {
+    public void setLocationOffset(Vec4 locationOffset) {
         this.locationOffset = locationOffset;
         clearControls();
     }
 
-    public boolean isShowPanControls()
-    {
+    public boolean isShowPanControls() {
         return this.showPanControls;
     }
 
-    public void setShowPanControls(boolean state)
-    {
-        if (this.showPanControls != state)
-        {
+    public void setShowPanControls(boolean state) {
+        if (this.showPanControls != state) {
             this.showPanControls = state;
             clearControls();
         }
     }
 
-    public boolean isShowLookControls()
-    {
+    public boolean isShowLookControls() {
         return this.showLookControls;
     }
 
-    public void setShowLookControls(boolean state)
-    {
-        if (this.showLookControls != state)
-        {
+    public void setShowLookControls(boolean state) {
+        if (this.showLookControls != state) {
             this.showLookControls = state;
             clearControls();
         }
     }
 
-    public boolean isShowHeadingControls()
-    {
+    public boolean isShowHeadingControls() {
         return this.showHeadingControls;
     }
 
-    public void setShowHeadingControls(boolean state)
-    {
-        if (this.showHeadingControls != state)
-        {
+    public void setShowHeadingControls(boolean state) {
+        if (this.showHeadingControls != state) {
             this.showHeadingControls = state;
             clearControls();
         }
     }
 
-    public boolean isShowZoomControls()
-    {
+    public boolean isShowZoomControls() {
         return this.showZoomControls;
     }
 
-    public void setShowZoomControls(boolean state)
-    {
-        if (this.showZoomControls != state)
-        {
+    public void setShowZoomControls(boolean state) {
+        if (this.showZoomControls != state) {
             this.showZoomControls = state;
             clearControls();
         }
     }
 
-    public boolean isShowPitchControls()
-    {
+    public boolean isShowPitchControls() {
         return this.showPitchControls;
     }
 
-    public void setShowPitchControls(boolean state)
-    {
-        if (this.showPitchControls != state)
-        {
+    public void setShowPitchControls(boolean state) {
+        if (this.showPitchControls != state) {
             this.showPitchControls = state;
             clearControls();
         }
     }
 
-    public boolean isShowFovControls()
-    {
+    public boolean isShowFovControls() {
         return this.showFovControls;
     }
 
-    public void setShowFovControls(boolean state)
-    {
-        if (this.showFovControls != state)
-        {
+    public void setShowFovControls(boolean state) {
+        if (this.showFovControls != state) {
             this.showFovControls = state;
             clearControls();
         }
     }
 
-    public void setShowVeControls(boolean state)
-    {
-        if (this.showVeControls != state)
-        {
+    public void setShowVeControls(boolean state) {
+        if (this.showVeControls != state) {
             this.showVeControls = state;
             clearControls();
         }
     }
 
-    public boolean isShowVeControls()
-    {
+    public boolean isShowVeControls() {
         return this.showVeControls;
     }
 
@@ -379,38 +338,40 @@ public class ViewControlsLayer extends RenderableLayer
      * @return the control type. Can be one of {@link AVKey#VIEW_PAN}, {@link AVKey#VIEW_LOOK}, {@link
      *         AVKey#VIEW_HEADING_LEFT}, {@link AVKey#VIEW_HEADING_RIGHT}, {@link AVKey#VIEW_ZOOM_IN}, {@link
      *         AVKey#VIEW_ZOOM_OUT}, {@link AVKey#VIEW_PITCH_UP}, {@link AVKey#VIEW_PITCH_DOWN}, {@link
-     *         AVKey#VIEW_FOV_NARROW} or {@link AVKey#VIEW_FOV_WIDE}. <p> Returns null if the object is not a view
-     *         control associated with this layer. </p>
+     *         AVKey#VIEW_FOV_NARROW} or {@link AVKey#VIEW_FOV_WIDE}.
+     * <p>
+     * Returns null if the object is not a view control associated with this layer. </p>
      */
-    public String getControlType(Object control)
-    {
-        if (control == null || !(control instanceof ScreenAnnotation))
+    public String getControlType(Object control) {
+        if (control == null || !(control instanceof ScreenAnnotation)) {
             return null;
+        }
 
-        if (showPanControls && controlPan.equals(control))
+        if (showPanControls && controlPan.equals(control)) {
             return AVKey.VIEW_PAN;
-        else if (showLookControls && controlLook.equals(control))
+        } else if (showLookControls && controlLook.equals(control)) {
             return AVKey.VIEW_LOOK;
-        else if (showHeadingControls && controlHeadingLeft.equals(control))
+        } else if (showHeadingControls && controlHeadingLeft.equals(control)) {
             return AVKey.VIEW_HEADING_LEFT;
-        else if (showHeadingControls && controlHeadingRight.equals(control))
+        } else if (showHeadingControls && controlHeadingRight.equals(control)) {
             return AVKey.VIEW_HEADING_RIGHT;
-        else if (showZoomControls && controlZoomIn.equals(control))
+        } else if (showZoomControls && controlZoomIn.equals(control)) {
             return AVKey.VIEW_ZOOM_IN;
-        else if (showZoomControls && controlZoomOut.equals(control))
+        } else if (showZoomControls && controlZoomOut.equals(control)) {
             return AVKey.VIEW_ZOOM_OUT;
-        else if (showPitchControls && controlPitchUp.equals(control))
+        } else if (showPitchControls && controlPitchUp.equals(control)) {
             return AVKey.VIEW_PITCH_UP;
-        else if (showPitchControls && controlPitchDown.equals(control))
+        } else if (showPitchControls && controlPitchDown.equals(control)) {
             return AVKey.VIEW_PITCH_DOWN;
-        else if (showFovControls && controlFovNarrow.equals(control))
+        } else if (showFovControls && controlFovNarrow.equals(control)) {
             return AVKey.VIEW_FOV_NARROW;
-        else if (showFovControls && controlFovWide.equals(control))
+        } else if (showFovControls && controlFovWide.equals(control)) {
             return AVKey.VIEW_FOV_WIDE;
-        else if (showVeControls && controlVeUp.equals(control))
+        } else if (showVeControls && controlVeUp.equals(control)) {
             return AVKey.VERTICAL_EXAGGERATION_UP;
-        else if (showVeControls && controlVeDown.equals(control))
+        } else if (showVeControls && controlVeDown.equals(control)) {
             return AVKey.VERTICAL_EXAGGERATION_DOWN;
+        }
 
         return null;
     }
@@ -420,8 +381,7 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @return the currently highlighted control, or null if no control is highlighted.
      */
-    public Object getHighlightedObject()
-    {
+    public Object getHighlightedObject() {
         return this.currentControl;
     }
 
@@ -430,48 +390,45 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @param control the control to highlight.
      */
-    public void highlight(Object control)
-    {
+    public void highlight(Object control) {
         // Manage highlighting of controls.
-        if (this.currentControl == control)
+        if (this.currentControl == control) {
             return; // same thing selected
-
+        }
         // Turn off highlight if on.
-        if (this.currentControl != null)
-        {
+        if (this.currentControl != null) {
             this.currentControl.getAttributes().setImageOpacity(-1); // use default opacity
             this.currentControl = null;
         }
 
         // Turn on highlight if object selected.
-        if (control != null && control instanceof ScreenAnnotation)
-        {
+        if (control != null && control instanceof ScreenAnnotation) {
             this.currentControl = (ScreenAnnotation) control;
             this.currentControl.getAttributes().setImageOpacity(1);
         }
     }
 
     @Override
-    public void doRender(DrawContext dc)
-    {
-        if (!this.initialized)
+    public void doRender(DrawContext dc) {
+        if (!this.initialized) {
             initialize(dc);
+        }
 
-        if (!this.referenceViewport.equals(dc.getView().getViewport()))
+        if (!this.referenceViewport.equals(dc.getView().getViewport())) {
             updatePositions(dc);
+        }
 
         super.doRender(dc);
     }
 
-    protected boolean isInitialized()
-    {
+    protected boolean isInitialized() {
         return initialized;
     }
 
-    protected void initialize(DrawContext dc)
-    {
-        if (this.initialized)
+    protected void initialize(DrawContext dc) {
+        if (this.initialized) {
             return;
+        }
 
         // Setup user interface - common default attributes
         AnnotationAttributes ca = new AnnotationAttributes();
@@ -486,8 +443,7 @@ public class ViewControlsLayer extends RenderableLayer
 
         final String NOTEXT = "";
         final Point ORIGIN = new Point(0, 0);
-        if (this.showPanControls)
-        {
+        if (this.showPanControls) {
             // Pan
             controlPan = new ScreenAnnotation(NOTEXT, ORIGIN, ca);
             controlPan.setValue(AVKey.VIEW_OPERATION, AVKey.VIEW_PAN);
@@ -495,8 +451,7 @@ public class ViewControlsLayer extends RenderableLayer
             controlPan.getAttributes().setSize(new Dimension(panSize, panSize));
             this.addRenderable(controlPan);
         }
-        if (this.showLookControls)
-        {
+        if (this.showLookControls) {
             // Look
             controlLook = new ScreenAnnotation(NOTEXT, ORIGIN, ca);
             controlLook.setValue(AVKey.VIEW_OPERATION, AVKey.VIEW_LOOK);
@@ -504,8 +459,7 @@ public class ViewControlsLayer extends RenderableLayer
             controlLook.getAttributes().setSize(new Dimension(panSize, panSize));
             this.addRenderable(controlLook);
         }
-        if (this.showZoomControls)
-        {
+        if (this.showZoomControls) {
             // Zoom
             controlZoomIn = new ScreenAnnotation(NOTEXT, ORIGIN, ca);
             controlZoomIn.setValue(AVKey.VIEW_OPERATION, AVKey.VIEW_ZOOM_IN);
@@ -516,8 +470,7 @@ public class ViewControlsLayer extends RenderableLayer
             controlZoomOut.getAttributes().setImageSource(getImageSource(AVKey.VIEW_ZOOM_OUT));
             this.addRenderable(controlZoomOut);
         }
-        if (this.showHeadingControls)
-        {
+        if (this.showHeadingControls) {
             // Heading
             controlHeadingLeft = new ScreenAnnotation(NOTEXT, ORIGIN, ca);
             controlHeadingLeft.setValue(AVKey.VIEW_OPERATION, AVKey.VIEW_HEADING_LEFT);
@@ -528,8 +481,7 @@ public class ViewControlsLayer extends RenderableLayer
             controlHeadingRight.getAttributes().setImageSource(getImageSource(AVKey.VIEW_HEADING_RIGHT));
             this.addRenderable(controlHeadingRight);
         }
-        if (this.showPitchControls)
-        {
+        if (this.showPitchControls) {
             // Pitch
             controlPitchUp = new ScreenAnnotation(NOTEXT, ORIGIN, ca);
             controlPitchUp.setValue(AVKey.VIEW_OPERATION, AVKey.VIEW_PITCH_UP);
@@ -540,8 +492,7 @@ public class ViewControlsLayer extends RenderableLayer
             controlPitchDown.getAttributes().setImageSource(getImageSource(AVKey.VIEW_PITCH_DOWN));
             this.addRenderable(controlPitchDown);
         }
-        if (this.showFovControls)
-        {
+        if (this.showFovControls) {
             // Field of view FOV
             controlFovNarrow = new ScreenAnnotation(NOTEXT, ORIGIN, ca);
             controlFovNarrow.setValue(AVKey.VIEW_OPERATION, AVKey.VIEW_FOV_NARROW);
@@ -552,8 +503,7 @@ public class ViewControlsLayer extends RenderableLayer
             controlFovWide.getAttributes().setImageSource(getImageSource(AVKey.VIEW_FOV_WIDE));
             this.addRenderable(controlFovWide);
         }
-        if (this.showVeControls)
-        {
+        if (this.showVeControls) {
             // Vertical Exaggeration
             controlVeUp = new ScreenAnnotation(NOTEXT, ORIGIN, ca);
             controlVeUp.setValue(AVKey.VIEW_OPERATION, AVKey.VERTICAL_EXAGGERATION_UP);
@@ -581,57 +531,55 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @return the image source associated with the given control type.
      */
-    protected Object getImageSource(String control)
-    {
-        if (control.equals(AVKey.VIEW_PAN))
+    protected Object getImageSource(String control) {
+        if (control.equals(AVKey.VIEW_PAN)) {
             return IMAGE_PAN;
-        else if (control.equals(AVKey.VIEW_LOOK))
+        } else if (control.equals(AVKey.VIEW_LOOK)) {
             return IMAGE_LOOK;
-        else if (control.equals(AVKey.VIEW_HEADING_LEFT))
+        } else if (control.equals(AVKey.VIEW_HEADING_LEFT)) {
             return IMAGE_HEADING_LEFT;
-        else if (control.equals(AVKey.VIEW_HEADING_RIGHT))
+        } else if (control.equals(AVKey.VIEW_HEADING_RIGHT)) {
             return IMAGE_HEADING_RIGHT;
-        else if (control.equals(AVKey.VIEW_ZOOM_IN))
+        } else if (control.equals(AVKey.VIEW_ZOOM_IN)) {
             return IMAGE_ZOOM_IN;
-        else if (control.equals(AVKey.VIEW_ZOOM_OUT))
+        } else if (control.equals(AVKey.VIEW_ZOOM_OUT)) {
             return IMAGE_ZOOM_OUT;
-        else if (control.equals(AVKey.VIEW_PITCH_UP))
+        } else if (control.equals(AVKey.VIEW_PITCH_UP)) {
             return IMAGE_PITCH_UP;
-        else if (control.equals(AVKey.VIEW_PITCH_DOWN))
+        } else if (control.equals(AVKey.VIEW_PITCH_DOWN)) {
             return IMAGE_PITCH_DOWN;
-        else if (control.equals(AVKey.VIEW_FOV_WIDE))
+        } else if (control.equals(AVKey.VIEW_FOV_WIDE)) {
             return IMAGE_FOV_WIDE;
-        else if (control.equals(AVKey.VIEW_FOV_NARROW))
+        } else if (control.equals(AVKey.VIEW_FOV_NARROW)) {
             return IMAGE_FOV_NARROW;
-        else if (control.equals(AVKey.VERTICAL_EXAGGERATION_UP))
+        } else if (control.equals(AVKey.VERTICAL_EXAGGERATION_UP)) {
             return IMAGE_VE_UP;
-        else if (control.equals(AVKey.VERTICAL_EXAGGERATION_DOWN))
+        } else if (control.equals(AVKey.VERTICAL_EXAGGERATION_DOWN)) {
             return IMAGE_VE_DOWN;
+        }
 
         return null;
     }
 
     // Set controls positions according to layout and viewport dimension
-    protected void updatePositions(DrawContext dc)
-    {
+    protected void updatePositions(DrawContext dc) {
         boolean horizontalLayout = this.layout.equals(AVKey.HORIZONTAL);
 
         // horizontal layout: pan button + look button beside 2 rows of 4 buttons
-        int width = (showPanControls ? panSize : 0) +
-            (showLookControls ? panSize : 0) +
-            (showZoomControls ? buttonSize : 0) +
-            (showHeadingControls ? buttonSize : 0) +
-            (showPitchControls ? buttonSize : 0) +
-            (showFovControls ? buttonSize : 0) +
-            (showVeControls ? buttonSize : 0);
+        int width = (showPanControls ? panSize : 0)
+                + (showLookControls ? panSize : 0)
+                + (showZoomControls ? buttonSize : 0)
+                + (showHeadingControls ? buttonSize : 0)
+                + (showPitchControls ? buttonSize : 0)
+                + (showFovControls ? buttonSize : 0)
+                + (showVeControls ? buttonSize : 0);
         int height = Math.max(panSize, buttonSize * 2);
         width = (int) (width * scale);
         height = (int) (height * scale);
         int xOffset = 0;
         int yOffset = (int) (buttonSize * scale);
 
-        if (!horizontalLayout)
-        {
+        if (!horizontalLayout) {
             // vertical layout: pan button above look button above 4 rows of 2 buttons
             int temp = height;
             //noinspection SuspiciousNameCombination
@@ -651,66 +599,73 @@ public class ViewControlsLayer extends RenderableLayer
         int x = locationSW.x;
         int y = horizontalLayout ? locationSW.y : locationSW.y + height;
 
-        if (this.showPanControls)
-        {
-            if (!horizontalLayout)
+        if (this.showPanControls) {
+            if (!horizontalLayout) {
                 y -= (int) (panSize * scale);
+            }
             controlPan.setScreenPoint(new Point(x + halfPanSize, y));
-            if (horizontalLayout)
+            if (horizontalLayout) {
                 x += (int) (panSize * scale);
+            }
         }
-        if (this.showLookControls)
-        {
-            if (!horizontalLayout)
+        if (this.showLookControls) {
+            if (!horizontalLayout) {
                 y -= (int) (panSize * scale);
+            }
             controlLook.setScreenPoint(new Point(x + halfPanSize, y));
-            if (horizontalLayout)
+            if (horizontalLayout) {
                 x += (int) (panSize * scale);
+            }
         }
-        if (this.showZoomControls)
-        {
-            if (!horizontalLayout)
+        if (this.showZoomControls) {
+            if (!horizontalLayout) {
                 y -= (int) (buttonSize * scale);
+            }
             controlZoomIn.setScreenPoint(new Point(x + halfButtonSize + xOffset, y + yOffset));
             controlZoomOut.setScreenPoint(new Point(x + halfButtonSize, y));
-            if (horizontalLayout)
+            if (horizontalLayout) {
                 x += (int) (buttonSize * scale);
+            }
         }
-        if (this.showHeadingControls)
-        {
-            if (!horizontalLayout)
+        if (this.showHeadingControls) {
+            if (!horizontalLayout) {
                 y -= (int) (buttonSize * scale);
+            }
             controlHeadingLeft.setScreenPoint(new Point(x + halfButtonSize + xOffset, y + yOffset));
             controlHeadingRight.setScreenPoint(new Point(x + halfButtonSize, y));
-            if (horizontalLayout)
+            if (horizontalLayout) {
                 x += (int) (buttonSize * scale);
+            }
         }
-        if (this.showPitchControls)
-        {
-            if (!horizontalLayout)
+        if (this.showPitchControls) {
+            if (!horizontalLayout) {
                 y -= (int) (buttonSize * scale);
+            }
             controlPitchUp.setScreenPoint(new Point(x + halfButtonSize + xOffset, y + yOffset));
             controlPitchDown.setScreenPoint(new Point(x + halfButtonSize, y));
-            if (horizontalLayout)
+            if (horizontalLayout) {
                 x += (int) (buttonSize * scale);
+            }
         }
-        if (this.showFovControls)
-        {
-            if (!horizontalLayout)
+        if (this.showFovControls) {
+            if (!horizontalLayout) {
                 y -= (int) (buttonSize * scale);
+            }
             controlFovNarrow.setScreenPoint(new Point(x + halfButtonSize + xOffset, y + yOffset));
             controlFovWide.setScreenPoint(new Point(x + halfButtonSize, y));
-            if (horizontalLayout)
+            if (horizontalLayout) {
                 x += (int) (buttonSize * scale);
+            }
         }
-        if (this.showVeControls)
-        {
-            if (!horizontalLayout)
+        if (this.showVeControls) {
+            if (!horizontalLayout) {
                 y -= (int) (buttonSize * scale);
+            }
             controlVeUp.setScreenPoint(new Point(x + halfButtonSize + xOffset, y + yOffset));
             controlVeDown.setScreenPoint(new Point(x + halfButtonSize, y));
-            if (horizontalLayout)
+            if (horizontalLayout) {
                 x += (int) (buttonSize * scale);
+            }
         }
 
         this.referenceViewport = dc.getView().getViewport();
@@ -725,44 +680,32 @@ public class ViewControlsLayer extends RenderableLayer
      *
      * @return the screen location of the bottom left corner - south west corner.
      */
-    protected Point computeLocation(Rectangle viewport, Rectangle controls)
-    {
+    protected Point computeLocation(Rectangle viewport, Rectangle controls) {
         double x;
         double y;
 
-        if (this.locationCenter != null)
-        {
+        if (this.locationCenter != null) {
             x = this.locationCenter.x - controls.width / 2;
             y = this.locationCenter.y - controls.height / 2;
-        }
-        else if (this.position.equals(AVKey.NORTHEAST))
-        {
+        } else if (this.position.equals(AVKey.NORTHEAST)) {
             x = viewport.getWidth() - controls.width - this.borderWidth;
             y = viewport.getHeight() - controls.height - this.borderWidth;
-        }
-        else if (this.position.equals(AVKey.SOUTHEAST))
-        {
+        } else if (this.position.equals(AVKey.SOUTHEAST)) {
             x = viewport.getWidth() - controls.width - this.borderWidth;
             y = 0d + this.borderWidth;
-        }
-        else if (this.position.equals(AVKey.NORTHWEST))
-        {
+        } else if (this.position.equals(AVKey.NORTHWEST)) {
             x = 0d + this.borderWidth;
             y = viewport.getHeight() - controls.height - this.borderWidth;
-        }
-        else if (this.position.equals(AVKey.SOUTHWEST))
-        {
+        } else if (this.position.equals(AVKey.SOUTHWEST)) {
             x = 0d + this.borderWidth;
             y = 0d + this.borderWidth;
-        }
-        else // use North East as default
+        } else // use North East as default
         {
             x = viewport.getWidth() - controls.width - this.borderWidth;
             y = viewport.getHeight() - controls.height - this.borderWidth;
         }
 
-        if (this.locationOffset != null)
-        {
+        if (this.locationOffset != null) {
             x += this.locationOffset.x;
             y += this.locationOffset.y;
         }
@@ -770,8 +713,7 @@ public class ViewControlsLayer extends RenderableLayer
         return new Point((int) x, (int) y);
     }
 
-    protected void clearControls()
-    {
+    protected void clearControls() {
         this.removeAllRenderables();
 
         this.controlPan = null;
@@ -791,8 +733,7 @@ public class ViewControlsLayer extends RenderableLayer
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return Logging.getMessage("layers.ViewControlsLayer.Name");
     }
 }

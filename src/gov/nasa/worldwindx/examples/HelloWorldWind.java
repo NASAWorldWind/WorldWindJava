@@ -13,16 +13,14 @@ import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
  *
  * @version $Id: HelloWorldWind.java 1971 2014-04-29 21:31:28Z dcollins $
  */
-public class HelloWorldWind
-{
+public class HelloWorldWind {
     // An inner class is used rather than directly subclassing JFrame in the main class so
     // that the main can configure system properties prior to invoking Swing. This is
     // necessary for instance on OS X (Macs) so that the application name can be specified.
 
-    private static class AppFrame extends javax.swing.JFrame
-    {
-        public AppFrame()
-        {
+    private static class AppFrame extends javax.swing.JFrame {
+
+        public AppFrame() {
             WorldWindowGLCanvas wwd = new WorldWindowGLCanvas();
             wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -33,17 +31,13 @@ public class HelloWorldWind
         }
     }
 
-    public static void main(String[] args)
-    {
-        if (Configuration.isMacOS())
-        {
+    public static void main(String[] args) {
+        if (Configuration.isMacOS()) {
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Hello WorldWind");
         }
 
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 // Create an AppFrame and immediately make it visible. As per Swing convention, this
                 // is done within an invokeLater call so that it executes on an AWT thread.
                 new AppFrame().setVisible(true);

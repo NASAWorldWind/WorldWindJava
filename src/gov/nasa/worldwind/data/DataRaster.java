@@ -12,15 +12,14 @@ import gov.nasa.worldwind.geom.Sector;
 // TODO: Document the conditions determining when the sub-raster methods would fail and its response when the input
 // sector is not fully within the raster's sector. Also do so appropriately in the implementing classes.
 // What's the response from getSubRegion if a necessary projection can't be performed?
-
 /**
  * Represents a raster of imagery or elevations.
  *
  * @author dcollins
  * @version $Id: DataRaster.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface DataRaster extends AVList, Disposable
-{
+public interface DataRaster extends AVList, Disposable {
+
     /**
      * Returns the raster's width in raster units.
      *
@@ -55,13 +54,13 @@ public interface DataRaster extends AVList, Disposable
      * even if this raster does not.
      *
      * @param params a list of parameters that specify the width, height and sector of the region to return. Specify
-     *               these values using {@link gov.nasa.worldwind.avlist.AVKey#WIDTH}, {@link
+     * these values using {@link gov.nasa.worldwind.avlist.AVKey#WIDTH}, {@link
      *               gov.nasa.worldwind.avlist.AVKey#HEIGHT} and {@link gov.nasa.worldwind.avlist.AVKey#SECTOR}.
      *
      * @return the requested raster, or null if the raster could not be created.
      *
      * @throws IllegalArgumentException if the specified parameter list is missing the width, height or sector keys or
-     *                                  any of those values are invalid.
+     * any of those values are invalid.
      */
     DataRaster getSubRaster(AVList params);
 
@@ -69,11 +68,11 @@ public interface DataRaster extends AVList, Disposable
      * Returns a portion of this raster as another raster. The returned raster conforms to EPSG:4326 even if this raster
      * does not.
      *
-     * @param width  the width to make the returned sub-raster.
+     * @param width the width to make the returned sub-raster.
      * @param height the height to make the returned sub-raster.
      * @param sector the sector to copy.
      * @param params a list of parameters that specify the width, height and sector of the region to return. Specify
-     *               these values using {@link gov.nasa.worldwind.avlist.AVKey#WIDTH}, {@link
+     * these values using {@link gov.nasa.worldwind.avlist.AVKey#WIDTH}, {@link
      *               gov.nasa.worldwind.avlist.AVKey#HEIGHT} and {@link gov.nasa.worldwind.avlist.AVKey#SECTOR}.
      *
      * @return the requested raster, or null if the raster could not be created.

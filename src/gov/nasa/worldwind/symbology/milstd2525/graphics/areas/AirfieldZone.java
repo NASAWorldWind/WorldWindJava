@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.WorldWind;
@@ -19,9 +18,11 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: AirfieldZone.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class AirfieldZone extends BasicArea
-{
-    /** Paths used to draw the airfield graphic. */
+public class AirfieldZone extends BasicArea {
+
+    /**
+     * Paths used to draw the airfield graphic.
+     */
     protected List<Path> airfieldPaths;
 
     /**
@@ -29,32 +30,31 @@ public class AirfieldZone extends BasicArea
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(TacGrpSidc.C2GM_GNL_ARS_AIRFZ);
     }
 
-    public AirfieldZone(String sidc)
-    {
+    public AirfieldZone(String sidc) {
         super(sidc);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setPositions(Iterable<? extends Position> positions)
-    {
+    public void setPositions(Iterable<? extends Position> positions) {
         super.setPositions(positions);
         this.airfieldPaths = null; // Need to regenerate
     }
 
-    /** {@inheritDoc} Overridden to draw airfield graphic. */
+    /**
+     * {@inheritDoc} Overridden to draw airfield graphic.
+     */
     @Override
-    protected void doRenderGraphic(DrawContext dc)
-    {
+    protected void doRenderGraphic(DrawContext dc) {
         super.doRenderGraphic(dc);
 
-        for (Path path : this.airfieldPaths)
-        {
+        for (Path path : this.airfieldPaths) {
             path.render(dc);
         }
     }
@@ -65,8 +65,7 @@ public class AirfieldZone extends BasicArea
      * @return null, Airfield Zone does not support text modifiers.
      */
     @Override
-    protected String createLabelText()
-    {
+    protected String createLabelText() {
         // Text modifier not supported
         return "";
     }
@@ -77,10 +76,8 @@ public class AirfieldZone extends BasicArea
      * @param dc Current draw context.
      */
     @Override
-    protected void makeShapes(DrawContext dc)
-    {
-        if (this.airfieldPaths == null)
-        {
+    protected void makeShapes(DrawContext dc) {
+        if (this.airfieldPaths == null) {
             this.airfieldPaths = this.createAirfieldPaths(dc);
         }
     }
@@ -92,13 +89,11 @@ public class AirfieldZone extends BasicArea
      *
      * @return List of Paths that make up the airfield graphic.
      */
-    protected List<Path> createAirfieldPaths(DrawContext dc)
-    {
+    protected List<Path> createAirfieldPaths(DrawContext dc) {
         List<Path> paths = new ArrayList<Path>();
 
         List<Sector> sectors = this.polygon.getSectors(dc);
-        if (sectors == null)
-        {
+        if (sectors == null) {
             return Collections.emptyList();
         }
 
@@ -130,8 +125,7 @@ public class AirfieldZone extends BasicArea
      *
      * @param path Path to configure.
      */
-    protected void configurePath(Path path)
-    {
+    protected void configurePath(Path path) {
         path.setDelegateOwner(this);
         path.setFollowTerrain(true);
         path.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);

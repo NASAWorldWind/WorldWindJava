@@ -14,23 +14,18 @@ import org.w3c.dom.Document;
  * @author garakl
  * @version $Id: USDANAIPWMSImageLayer.java 2257 2014-08-22 18:02:19Z tgaskins $
  */
+public class USDANAIPWMSImageLayer extends WMSTiledImageLayer {
 
-public class USDANAIPWMSImageLayer extends WMSTiledImageLayer
-{
-    public USDANAIPWMSImageLayer()
-    {
+    public USDANAIPWMSImageLayer() {
         super(getConfigurationDocument(), null);
     }
 
-    protected static Document getConfigurationDocument()
-    {
+    protected static Document getConfigurationDocument() {
         return WWXML.openDocumentFile("config/Earth/USDANAIPWMSImageLayer.xml", null);
     }
 
-    public String toString()
-    {
+    public String toString() {
         Object o = this.getStringValue(AVKey.DISPLAY_NAME);
         return o != null ? (String) o : "USDA FSA Imagery";
     }
 }
-

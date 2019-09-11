@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 /**
  * <p>
  * Provides classes for COLLADA file and stream I/O and relative-path resolution.</p>

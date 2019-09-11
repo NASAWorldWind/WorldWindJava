@@ -15,15 +15,13 @@ import java.awt.*;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class UserFacingIconTest
-{
+public class UserFacingIconTest {
     //////////////////////////////////////////////////////////
     // Persistence Tests
     //////////////////////////////////////////////////////////
 
     @Test
-    public void testRestore_NewInstance()
-    {
+    public void testRestore_NewInstance() {
         UserFacingIcon icon = new UserFacingIcon("", null);
         assignExampleValues(icon);
 
@@ -38,8 +36,7 @@ public class UserFacingIconTest
     }
 
     @Test
-    public void testRestore_SameInstance()
-    {
+    public void testRestore_SameInstance() {
         UserFacingIcon icon = new UserFacingIcon("", null);
         assignExampleValues(icon);
 
@@ -54,14 +51,13 @@ public class UserFacingIconTest
     }
 
     @Test
-    public void testRestore_EmptyStateDocument()
-    {
+    public void testRestore_EmptyStateDocument() {
         UserFacingIcon icon = new UserFacingIcon("", null);
         assignExampleValues(icon);
 
-        String emptyStateInXml =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<emptyDocumentRoot/>";
+        String emptyStateInXml
+                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<emptyDocumentRoot/>";
         icon.restoreState(emptyStateInXml);
 
         // No attributes should have changed.
@@ -72,35 +68,30 @@ public class UserFacingIconTest
     }
 
     @Test
-    public void testRestore_InvalidStateDocument()
-    {
-        try
-        {
+    public void testRestore_InvalidStateDocument() {
+        try {
             String badStateInXml = "!!invalid xml string!!";
             UserFacingIcon icon = new UserFacingIcon("", null);
             icon.restoreState(badStateInXml);
 
             fail("Expected an IllegalArgumentException");
-        }
-        catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testRestore_PartialStateDocument()
-    {
+    public void testRestore_PartialStateDocument() {
         UserFacingIcon icon = new UserFacingIcon("", null);
         assignNullValues(icon);
 
-        String partialStateInXml =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<restorableState>" +
-                "<stateObject name=\"highlighted\">true</stateObject>" +
-                "<stateObject name=\"highlightScale\">3.141592</stateObject>" +
-                "<unknownElement name=\"unknownName\">unknownValue</unknownElement>" +
-                "</restorableState>";
+        String partialStateInXml
+                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<restorableState>"
+                + "<stateObject name=\"highlighted\">true</stateObject>"
+                + "<stateObject name=\"highlightScale\">3.141592</stateObject>"
+                + "<unknownElement name=\"unknownName\">unknownValue</unknownElement>"
+                + "</restorableState>";
         icon.restoreState(partialStateInXml);
 
         UserFacingIcon expected = new UserFacingIcon("", null);
@@ -114,10 +105,8 @@ public class UserFacingIconTest
     //////////////////////////////////////////////////////////
     // Helper Methods
     //////////////////////////////////////////////////////////
-
     @SuppressWarnings({"JavaDoc"})
-    private static void assignExampleValues(WWIcon icon)
-    {
+    private static void assignExampleValues(WWIcon icon) {
         icon.setImageSource("path/to/image.ext");
         icon.setPosition(Position.fromDegrees(45.5, 55.5, 100.5));
         icon.setHighlighted(true);
@@ -131,8 +120,7 @@ public class UserFacingIconTest
         icon.setAlwaysOnTop(false);
     }
 
-    private static void assignNullValues(WWIcon icon)
-    {
+    private static void assignNullValues(WWIcon icon) {
         icon.setImageSource("");
         icon.setPosition(null);
         icon.setHighlighted(false);
@@ -146,21 +134,17 @@ public class UserFacingIconTest
         icon.setAlwaysOnTop(false);
     }
 
-    private static void assertIconEquals(WWIcon expected, WWIcon actual)
-    {
+    private static void assertIconEquals(WWIcon expected, WWIcon actual) {
         assertNotNull("Expected is null", expected);
         assertNotNull("Actual is null", actual);
         assertEquals("imageSource", expected.getImageSource(), actual.getImageSource());
-        if (expected.getPosition() != null && actual.getPosition() != null)
-        {
+        if (expected.getPosition() != null && actual.getPosition() != null) {
             assertEquals("position.latitude", expected.getPosition().getLatitude(), actual.getPosition().getLatitude());
             assertEquals("position.longitude", expected.getPosition().getLongitude(),
-                actual.getPosition().getLongitude());
+                    actual.getPosition().getLongitude());
             assertEquals("position.elevation", expected.getPosition().getElevation(),
-                actual.getPosition().getElevation(), 0.0);
-        }
-        else
-        {
+                    actual.getPosition().getElevation(), 0.0);
+        } else {
             assertNull("Expected position is not null", expected.getPosition());
             assertNull("Actual position is not null", actual.getPosition());
         }

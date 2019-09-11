@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.xml.xal;
 
 import gov.nasa.worldwind.util.xml.*;
@@ -16,15 +15,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author tag
  * @version $Id: XALParserContext.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class XALParserContext extends BasicXMLEventParserContext
-{
-    protected static final String[] StringFields = new String[]
-        {
-            "Address"
-        };
+public class XALParserContext extends BasicXMLEventParserContext {
 
-    public static Map<QName, XMLEventParser> getDefaultParsers()
-    {
+    protected static final String[] StringFields = new String[]{
+        "Address"
+    };
+
+    public static Map<QName, XMLEventParser> getDefaultParsers() {
         ConcurrentHashMap<QName, XMLEventParser> parsers = new ConcurrentHashMap<QName, XMLEventParser>();
 
         String xns = XALConstants.XAL_NAMESPACE;
@@ -41,8 +38,7 @@ public class XALParserContext extends BasicXMLEventParserContext
         parsers.put(new QName(xns, "Thoroughfare"), new XALThoroughfare(xns));
 
         StringXMLEventParser stringParser = new StringXMLEventParser();
-        for (String s : StringFields)
-        {
+        for (String s : StringFields) {
             parsers.put(new QName(xns, s), stringParser);
         }
 

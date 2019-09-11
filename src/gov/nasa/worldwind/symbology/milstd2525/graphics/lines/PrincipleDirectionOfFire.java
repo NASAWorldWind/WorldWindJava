@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.WorldWind;
@@ -24,37 +23,63 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: PrincipleDirectionOfFire.java 560 2012-04-26 16:28:24Z pabercrombie $
  */
-public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic implements PreRenderable
-{
-    /** Default length of the arrowhead, as a fraction of the total line length. */
+public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic implements PreRenderable {
+
+    /**
+     * Default length of the arrowhead, as a fraction of the total line length.
+     */
     public final static double DEFAULT_ARROWHEAD_LENGTH = 0.1;
-    /** Default angle of the arrowhead. */
+    /**
+     * Default angle of the arrowhead.
+     */
     public final static Angle DEFAULT_ARROWHEAD_ANGLE = Angle.fromDegrees(60.0);
-    /** Default width of the arrowhead outline. */
+    /**
+     * Default width of the arrowhead outline.
+     */
     public final static double DEFAULT_ARROWHEAD_OUTLINE_WIDTH = 0.3;
 
-    /** Length of the arrowhead from base to tip, as a fraction of the total line length. */
+    /**
+     * Length of the arrowhead from base to tip, as a fraction of the total line length.
+     */
     protected Angle arrowAngle = DEFAULT_ARROWHEAD_ANGLE;
-    /** Angle of the arrowhead. */
+    /**
+     * Angle of the arrowhead.
+     */
     protected double arrowLength = DEFAULT_ARROWHEAD_LENGTH;
-    /** Width of the arrowhead outline, as a fraction of the arrowhead length. */
+    /**
+     * Width of the arrowhead outline, as a fraction of the arrowhead length.
+     */
     protected double outlineWidth = DEFAULT_ARROWHEAD_OUTLINE_WIDTH;
 
-    /** First control point. */
+    /**
+     * First control point.
+     */
     protected Position position1;
-    /** Second control point. */
+    /**
+     * Second control point.
+     */
     protected Position position2;
-    /** Third control point. */
+    /**
+     * Third control point.
+     */
     protected Position position3;
 
-    /** Path used to render the line. */
+    /**
+     * Path used to render the line.
+     */
     protected Path[] paths;
-    /** Symbol drawn at the center of the range fan. */
+    /**
+     * Symbol drawn at the center of the range fan.
+     */
     protected TacticalSymbol symbol;
-    /** Attributes applied to the symbol. */
+    /**
+     * Attributes applied to the symbol.
+     */
     protected TacticalSymbolAttributes symbolAttributes;
 
-    /** Polygon used to render the "thick" line on the left leg of the graphic. */
+    /**
+     * Polygon used to render the "thick" line on the left leg of the graphic.
+     */
     protected SurfacePolygon thickLine;
 
     /**
@@ -62,8 +87,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(TacGrpSidc.C2GM_DEF_LNE_PDF);
     }
 
@@ -72,8 +96,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public PrincipleDirectionOfFire(String sidc)
-    {
+    public PrincipleDirectionOfFire(String sidc) {
         super(sidc);
     }
 
@@ -82,8 +105,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      *
      * @return Angle of the arrowhead in the graphic.
      */
-    public Angle getArrowAngle()
-    {
+    public Angle getArrowAngle() {
         return this.arrowAngle;
     }
 
@@ -92,17 +114,14 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      *
      * @param arrowAngle The angle of the arrowhead. Must be greater than zero degrees and less than 90 degrees.
      */
-    public void setArrowAngle(Angle arrowAngle)
-    {
-        if (arrowAngle == null)
-        {
+    public void setArrowAngle(Angle arrowAngle) {
+        if (arrowAngle == null) {
             String msg = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (arrowAngle.degrees <= 0 || arrowAngle.degrees >= 90)
-        {
+        if (arrowAngle.degrees <= 0 || arrowAngle.degrees >= 90) {
             String msg = Logging.getMessage("generic.AngleOutOfRange");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -116,8 +135,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      *
      * @return The length of the arrowhead as a fraction of the total line length.
      */
-    public double getArrowLength()
-    {
+    public double getArrowLength() {
         return this.arrowLength;
     }
 
@@ -125,12 +143,10 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      * Specifies the length of the arrowhead.
      *
      * @param arrowLength Length of the arrowhead as a fraction of the total line length. If the arrowhead length is
-     *                    0.25, then the arrowhead length will be one quarter of the total line length.
+     * 0.25, then the arrowhead length will be one quarter of the total line length.
      */
-    public void setArrowLength(double arrowLength)
-    {
-        if (arrowLength < 0)
-        {
+    public void setArrowLength(double arrowLength) {
+        if (arrowLength < 0) {
             String msg = Logging.getMessage("generic.ArgumentOutOfRange");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -144,8 +160,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      *
      * @return The symbol drawn at the center of the range fan. May be null.
      */
-    public String getSymbol()
-    {
+    public String getSymbol() {
         return this.symbol != null ? this.symbol.getIdentifier() : null;
     }
 
@@ -155,19 +170,16 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      * center position.
      *
      * @param sidc Identifier for a MIL-STD-2525C symbol to draw at the center of the range fan. May be null to indicate
-     *             that no symbol is drawn.
+     * that no symbol is drawn.
      */
-    public void setSymbol(String sidc)
-    {
-        if (sidc != null)
-        {
-            if (this.symbolAttributes == null)
+    public void setSymbol(String sidc) {
+        if (sidc != null) {
+            if (this.symbolAttributes == null) {
                 this.symbolAttributes = new BasicTacticalSymbolAttributes();
+            }
 
             this.symbol = this.createSymbol(sidc, this.position1, this.symbolAttributes);
-        }
-        else
-        {
+        } else {
             // Null value indicates no symbol.
             this.symbol = null;
             this.symbolAttributes = null;
@@ -180,24 +192,19 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      *
      * @param positions Control points that orient the graphic. Must provide at least three points.
      */
-    public void setPositions(Iterable<? extends Position> positions)
-    {
-        if (positions == null)
-        {
+    public void setPositions(Iterable<? extends Position> positions) {
+        if (positions == null) {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        try
-        {
+        try {
             Iterator<? extends Position> iterator = positions.iterator();
             this.position1 = iterator.next();
             this.position2 = iterator.next();
             this.position3 = iterator.next();
-        }
-        catch (NoSuchElementException e)
-        {
+        } catch (NoSuchElementException e) {
             String message = Logging.getMessage("generic.InsufficientPositions");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -206,120 +213,120 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
         this.paths = null; // Need to recompute path for the new control points
         this.thickLine = null;
 
-        if (this.symbol != null)
-        {
+        if (this.symbol != null) {
             this.symbol.setPosition(this.position1);
         }
     }
 
-    /** {@inheritDoc} */
-    public Iterable<? extends Position> getPositions()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Iterable<? extends Position> getPositions() {
         return Arrays.asList(this.position1, this.position2, this.position3);
     }
 
-    /** {@inheritDoc} */
-    public Position getReferencePosition()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Position getReferencePosition() {
         return this.position1;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
-    public void setModifier(String modifier, Object value)
-    {
-        if (SymbologyConstants.SYMBOL_INDICATOR.equals(modifier) && value instanceof String)
-        {
+    public void setModifier(String modifier, Object value) {
+        if (SymbologyConstants.SYMBOL_INDICATOR.equals(modifier) && value instanceof String) {
             this.setSymbol((String) value);
-        }
-        else
-        {
+        } else {
             super.setModifier(modifier, value);
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Object getModifier(String modifier)
-    {
-        if (SymbologyConstants.SYMBOL_INDICATOR.equals(modifier))
-        {
+    public Object getModifier(String modifier) {
+        if (SymbologyConstants.SYMBOL_INDICATOR.equals(modifier)) {
             return this.getSymbol();
-        }
-        else
-        {
+        } else {
             return super.getModifier(modifier);
         }
     }
 
-    /** {@inheritDoc} */
-    public void preRender(DrawContext dc)
-    {
-        if (!this.isVisible())
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public void preRender(DrawContext dc) {
+        if (!this.isVisible()) {
             return;
         }
 
-        if (this.paths == null)
-        {
+        if (this.paths == null) {
             this.createShapes(dc);
         }
 
         this.determinePerFrameAttributes(dc);
 
-        if (this.thickLine != null)
+        if (this.thickLine != null) {
             this.thickLine.preRender(dc);
+        }
     }
 
-    /** {@inheritDoc} */
-    protected void doRenderGraphic(DrawContext dc)
-    {
-        for (Path path : this.paths)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    protected void doRenderGraphic(DrawContext dc) {
+        for (Path path : this.paths) {
             path.render(dc);
         }
 
-        if (this.thickLine != null)
-        {
+        if (this.thickLine != null) {
             this.thickLine.render(dc);
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void doRenderGraphicModifiers(DrawContext dc)
-    {
+    protected void doRenderGraphicModifiers(DrawContext dc) {
         super.doRenderGraphicModifiers(dc);
 
-        if (this.symbol != null)
-        {
+        if (this.symbol != null) {
             this.symbol.render(dc);
         }
     }
 
-    /** {@inheritDoc} */
-    protected void applyDelegateOwner(Object owner)
-    {
-        if (this.paths == null)
+    /**
+     * {@inheritDoc}
+     */
+    protected void applyDelegateOwner(Object owner) {
+        if (this.paths == null) {
             return;
+        }
 
-        for (Path path : this.paths)
-        {
+        for (Path path : this.paths) {
             path.setDelegateOwner(owner);
         }
 
-        if (this.symbol != null)
+        if (this.symbol != null) {
             this.symbol.setDelegateOwner(owner);
+        }
 
-        if (this.thickLine != null)
+        if (this.thickLine != null) {
             this.thickLine.setDelegateOwner(owner);
+        }
     }
 
-    /** Create labels for the start and end of the path. */
+    /**
+     * Create labels for the start and end of the path.
+     */
     @Override
-    protected void createLabels()
-    {
+    protected void createLabels() {
         this.addLabel("(PDF)");
     }
 
@@ -328,8 +335,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      *
      * @param dc Current draw context.
      */
-    protected void createShapes(DrawContext dc)
-    {
+    protected void createShapes(DrawContext dc) {
         this.paths = new Path[4];
 
         int i = 0;
@@ -351,10 +357,11 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
         Angle azimuth = LatLon.greatCircleAzimuth(this.position1, this.position2);
 
         Angle azimuth2 = LatLon.greatCircleAzimuth(this.position1, this.position3);
-        if (azimuth.compareTo(azimuth2) > 0)
+        if (azimuth.compareTo(azimuth2) > 0) {
             azimuth = azimuth.add(Angle.NEG90);
-        else
+        } else {
             azimuth = azimuth.add(Angle.POS90);
+        }
 
         Angle distance = LatLon.greatCircleDistance(this.position1, this.position2);
         LatLon loc3 = LatLon.greatCircleEndPosition(loc1, azimuth, distance.multiply(0.01));
@@ -366,14 +373,13 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
     /**
      * Determine the positions that make up the arrowhead.
      *
-     * @param dc            Current draw context.
+     * @param dc Current draw context.
      * @param startPosition Position of the arrow's base.
-     * @param endPosition   Position of the arrow head tip.
+     * @param endPosition Position of the arrow head tip.
      *
      * @return Positions that define the arrowhead.
      */
-    protected List<Position> computeArrowheadPositions(DrawContext dc, Position startPosition, Position endPosition)
-    {
+    protected List<Position> computeArrowheadPositions(DrawContext dc, Position startPosition, Position endPosition) {
         Globe globe = dc.getGlobe();
 
         // Arrowhead looks like this:
@@ -384,7 +390,6 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
         //        C/
         //         | |
         //      Length
-
         Vec4 p1 = globe.computePointFromPosition(startPosition);
         Vec4 pB = globe.computePointFromPosition(endPosition);
 
@@ -413,10 +418,11 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
         return TacticalGraphicUtil.asPositionList(globe, pA, pB, pC);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void applyDefaultAttributes(ShapeAttributes attributes)
-    {
+    protected void applyDefaultAttributes(ShapeAttributes attributes) {
         super.applyDefaultAttributes(attributes);
 
         // Enable the polygon interior for the "thick line" polygon. All other parts of the graphic are drawn with Path,
@@ -424,12 +430,14 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
         attributes.setDrawInterior(true);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void determineLabelPositions(DrawContext dc)
-    {
-        if (WWUtil.isEmpty(this.labels))
+    protected void determineLabelPositions(DrawContext dc) {
+        if (WWUtil.isEmpty(this.labels)) {
             return;
+        }
 
         Angle azimuth = LatLon.greatCircleAzimuth(this.position1, this.position2);
         Angle distance = LatLon.greatCircleDistance(this.position1, this.position2);
@@ -439,15 +447,15 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
         this.labels.get(0).setPosition(new Position(ll, 0));
     }
 
-    /** {@inheritDoc} Overridden to update symbol attributes. */
+    /**
+     * {@inheritDoc} Overridden to update symbol attributes.
+     */
     @Override
-    protected void determineActiveAttributes()
-    {
+    protected void determineActiveAttributes() {
         super.determineActiveAttributes();
 
         // Apply active attributes to the symbol.
-        if (this.symbolAttributes != null)
-        {
+        if (this.symbolAttributes != null) {
             ShapeAttributes activeAttributes = this.getActiveShapeAttributes();
             this.symbolAttributes.setOpacity(activeAttributes.getInteriorOpacity());
             this.symbolAttributes.setScale(this.activeOverrides.getScale());
@@ -461,8 +469,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
      *
      * @return New path configured with defaults appropriate for this type of graphic.
      */
-    protected Path createPath(List<Position> positions)
-    {
+    protected Path createPath(List<Position> positions) {
         Path path = new Path(positions);
         path.setFollowTerrain(true);
         path.setPathType(AVKey.GREAT_CIRCLE);
@@ -472,8 +479,7 @@ public class PrincipleDirectionOfFire extends AbstractMilStd2525TacticalGraphic 
         return path;
     }
 
-    protected SurfacePolygon createPolygon(List<? extends LatLon> positions)
-    {
+    protected SurfacePolygon createPolygon(List<? extends LatLon> positions) {
         SurfacePolygon polygon = new SurfacePolygon(positions);
         polygon.setAttributes(this.getActiveShapeAttributes());
         return polygon;

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.tree;
 
 import gov.nasa.worldwind.WWObject;
@@ -18,8 +17,8 @@ import gov.nasa.worldwind.render.OrderedRenderable;
  * @see TreeModel
  * @see TreeLayout
  */
-public interface Tree extends WWObject, OrderedRenderable
-{
+public interface Tree extends WWObject, OrderedRenderable {
+
     /**
      * Set the tree layout. The layout determines how the tree will be rendered.
      *
@@ -91,7 +90,7 @@ public interface Tree extends WWObject, OrderedRenderable
      * Expand a collapsed path, or collapse an expanded path. Has no effect on leaf nodes.
      *
      * @param path Path to operate on. If the node defined by {@code path} is expanded, it will be collapsed. If it is
-     *             collapsed it will be expanded.
+     * collapsed it will be expanded.
      */
     public void togglePath(TreePath path);
 

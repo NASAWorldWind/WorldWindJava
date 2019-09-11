@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWind;
@@ -19,12 +18,11 @@ import gov.nasa.worldwind.render.*;
  * @author ccrick
  * @version $Id: Pyramids.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class Pyramids extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class Pyramids extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             RenderableLayer layer = new RenderableLayer();
@@ -49,7 +47,6 @@ public class Pyramids extends ApplicationTemplate
             attrs2.setDrawOutline(false);
 
             // ********* sample  Pyramids  *******************
-
             // Pyramid with equal axes, ABSOLUTE altitude mode
             Pyramid pyramid3 = new Pyramid(Position.fromDegrees(40, -120, 80000), 50000, 50000, 50000);
             pyramid3.setAltitudeMode(WorldWind.ABSOLUTE);
@@ -93,7 +90,7 @@ public class Pyramids extends ApplicationTemplate
 
             // Scaled Pyramid with a pre-set orientation
             Pyramid pyramid2 = new Pyramid(Position.fromDegrees(0, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             pyramid2.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             pyramid2.setAttributes(attrs2);
             pyramid2.setVisible(true);
@@ -102,7 +99,7 @@ public class Pyramids extends ApplicationTemplate
 
             // Scaled Pyramid with a pre-set orientation
             Pyramid pyramid6 = new Pyramid(Position.fromDegrees(30, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             pyramid6.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             pyramid6.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
             pyramid6.setAttributes(attrs2);
@@ -112,7 +109,7 @@ public class Pyramids extends ApplicationTemplate
 
             // Scaled Pyramid with a pre-set orientation
             Pyramid pyramid7 = new Pyramid(Position.fromDegrees(60, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             pyramid7.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             pyramid7.setAttributes(attrs2);
             pyramid7.setVisible(true);
@@ -121,7 +118,7 @@ public class Pyramids extends ApplicationTemplate
 
             // Scaled, oriented pyramid in 3rd "quadrant" (-X, -Y, -Z)
             Pyramid pyramid8 = new Pyramid(Position.fromDegrees(-45, -180, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             pyramid8.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             pyramid8.setAttributes(attrs2);
             pyramid8.setVisible(true);
@@ -133,8 +130,7 @@ public class Pyramids extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Pyramids", AppFrame.class);
     }
 }

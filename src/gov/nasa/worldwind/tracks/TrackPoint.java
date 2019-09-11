@@ -11,8 +11,8 @@ import gov.nasa.worldwind.geom.Position;
  * @author tag
  * @version $Id: TrackPoint.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface TrackPoint
-{
+public interface TrackPoint {
+
     double getLatitude();
 
     void setLatitude(double latitude);

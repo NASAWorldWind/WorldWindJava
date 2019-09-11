@@ -25,30 +25,26 @@ import java.io.InputStream;
  * @author dcollins
  * @version $Id: PowerOfTwoPaddedImage.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class PowerOfTwoPaddedImage
-{
+public class PowerOfTwoPaddedImage {
+
     protected BufferedImage image;
     protected int width;
     protected int height;
 
-    protected PowerOfTwoPaddedImage(BufferedImage image, int width, int height)
-    {
-        if (image == null)
-        {
+    protected PowerOfTwoPaddedImage(BufferedImage image, int width, int height) {
+        if (image == null) {
             String message = Logging.getMessage("nullValue.ImageIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (width <= 0)
-        {
+        if (width <= 0) {
             String message = Logging.getMessage("Geom.WidthInvalid", width);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (height <= 0)
-        {
+        if (height <= 0) {
             String message = Logging.getMessage("Geom.HeightInvalid", height);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -75,10 +71,8 @@ public class PowerOfTwoPaddedImage
      *
      * @throws IllegalArgumentException if the image is null.
      */
-    public static PowerOfTwoPaddedImage fromBufferedImage(BufferedImage image)
-    {
-        if (image == null)
-        {
+    public static PowerOfTwoPaddedImage fromBufferedImage(BufferedImage image) {
+        if (image == null) {
             String message = Logging.getMessage("nullValue.ImageIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -90,19 +84,15 @@ public class PowerOfTwoPaddedImage
         // of two dimensions, or if it does not have alpha channel, it won't display correctly as an Annotation
         // background image.
         if (!WWMath.isPowerOfTwo(image.getWidth()) || !WWMath.isPowerOfTwo(image.getHeight())
-            || image.getTransparency() == Transparency.OPAQUE)
-        {
+                || image.getTransparency() == Transparency.OPAQUE) {
             int potWidth = WWMath.powerOfTwoCeiling(image.getWidth());
             int potHeight = WWMath.powerOfTwoCeiling(image.getHeight());
 
             potImage = ImageUtil.createCompatibleImage(potWidth, potHeight, BufferedImage.TRANSLUCENT);
             Graphics2D g2d = potImage.createGraphics();
-            try
-            {
+            try {
                 g2d.drawImage(image, 0, 0, null);
-            }
-            finally
-            {
+            } finally {
                 g2d.dispose();
             }
         }
@@ -120,34 +110,28 @@ public class PowerOfTwoPaddedImage
      * @param path a local file path, or a valid resource on the classpath.
      *
      * @return a new PowerOfTwoPaddedImage representing a power-of-two copy of the image located at the specified
-     *         <code>path</code>, or null if the image file reference by <code>path</code> cannot be read.
+     * <code>path</code>, or null if the image file reference by <code>path</code> cannot be read.
      *
      * @throws IllegalArgumentException if the path is null.
      */
-    public static PowerOfTwoPaddedImage fromPath(String path)
-    {
-        if (path == null)
-        {
+    public static PowerOfTwoPaddedImage fromPath(String path) {
+        if (path == null) {
             String message = Logging.getMessage("nullValue.PathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         Object streamOrException = WWIO.getFileOrResourceAsStream(path, null);
-        if (streamOrException == null || streamOrException instanceof Exception)
-        {
+        if (streamOrException == null || streamOrException instanceof Exception) {
             Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionAttemptingToReadImageFile",
-                streamOrException != null ? streamOrException : path);
+                    streamOrException != null ? streamOrException : path);
             return null;
         }
 
-        try
-        {
+        try {
             BufferedImage image = ImageIO.read((InputStream) streamOrException);
             return fromBufferedImage(image);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = Logging.getMessage("generic.ExceptionAttemptingToReadImageFile", path);
             Logging.logger().severe(message);
             return null;
@@ -159,8 +143,7 @@ public class PowerOfTwoPaddedImage
      *
      * @return the original image's width, in pixels.
      */
-    public int getOriginalWidth()
-    {
+    public int getOriginalWidth() {
         return this.width;
     }
 
@@ -169,8 +152,7 @@ public class PowerOfTwoPaddedImage
      *
      * @return the original image's height, in pixels.
      */
-    public int getOriginalHeight()
-    {
+    public int getOriginalHeight() {
         return this.height;
     }
 
@@ -180,8 +162,7 @@ public class PowerOfTwoPaddedImage
      *
      * @return a copy of the original image as a BufferedImage.
      */
-    public BufferedImage getPowerOfTwoImage()
-    {
+    public BufferedImage getPowerOfTwoImage() {
         return this.image;
     }
 
@@ -190,8 +171,7 @@ public class PowerOfTwoPaddedImage
      *
      * @return the power-of-two image's width, in pixels.
      */
-    public int getPowerOfTwoWidth()
-    {
+    public int getPowerOfTwoWidth() {
         return this.image.getWidth();
     }
 
@@ -200,8 +180,7 @@ public class PowerOfTwoPaddedImage
      *
      * @return the power-of-two image's height, in pixels.
      */
-    public int getPowerOfTwoHeight()
-    {
+    public int getPowerOfTwoHeight() {
         return this.image.getHeight();
     }
 }

@@ -14,24 +14,21 @@ import java.net.*;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class NetworkStatusTest
-{
+public class NetworkStatusTest {
+
     private BasicNetworkStatus netStat;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         this.netStat = new BasicNetworkStatus();
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testSetAttemptLimit()
-    {
+    public void testSetAttemptLimit() {
         int limit = 5;
         this.netStat.setAttemptLimit(limit);
         int ai = this.netStat.getAttemptLimit();
@@ -39,8 +36,7 @@ public class NetworkStatusTest
     }
 
     @Test
-    public void testSetTryAgainInterval()
-    {
+    public void testSetTryAgainInterval() {
         long interval = 200;
         this.netStat.setTryAgainInterval(interval);
         long tai = this.netStat.getTryAgainInterval();
@@ -49,23 +45,20 @@ public class NetworkStatusTest
 
     @Ignore
     @Test
-    public void testNetworkAvailable()
-    {
+    public void testNetworkAvailable() {
         boolean tf = this.netStat.isNetworkUnavailable();
         assertFalse("Network unavailable test ", tf);
     }
 
     @Ignore
     @Test
-    public void testWorldWindAvailable()
-    {
+    public void testWorldWindAvailable() {
         boolean tf = this.netStat.isWorldWindServerUnavailable();
         assertFalse("WorldWind server unavailable test ", tf);
     }
 
     @Test
-    public void testHostAvailable() throws MalformedURLException
-    {
+    public void testHostAvailable() throws MalformedURLException {
         String hostName = "nasa.gov";
 
         boolean tf = this.netStat.isHostUnavailable(new URL("https://" + hostName + "/path?abc=123"));
@@ -73,8 +66,7 @@ public class NetworkStatusTest
     }
 
     @Test
-    public void testHostLimitReached() throws MalformedURLException
-    {
+    public void testHostLimitReached() throws MalformedURLException {
         String hostName = "nasa.gov";
         URL url = new URL("https://" + hostName + "/path?abc=123");
 
@@ -84,13 +76,11 @@ public class NetworkStatusTest
     }
 
     @Test
-    public void testHostLimitNotReached() throws MalformedURLException
-    {
+    public void testHostLimitNotReached() throws MalformedURLException {
         String hostName = "nasa.gov";
         URL url = new URL("https://" + hostName + "/path?abc=123");
 
-        for (int i = 0; i < this.netStat.getAttemptLimit() - 1; i++)
-        {
+        for (int i = 0; i < this.netStat.getAttemptLimit() - 1; i++) {
             this.netStat.logUnavailableHost(url);
         }
 
@@ -99,8 +89,7 @@ public class NetworkStatusTest
     }
 
     @Test
-    public void testHostReavailable() throws MalformedURLException
-    {
+    public void testHostReavailable() throws MalformedURLException {
         String hostName = "nasa.gov";
         URL url = new URL("https://" + hostName + "/path?abc=123");
 
@@ -111,8 +100,7 @@ public class NetworkStatusTest
     }
 
     @Test
-    public void testHostTryAgain() throws MalformedURLException, InterruptedException
-    {
+    public void testHostTryAgain() throws MalformedURLException, InterruptedException {
         String hostName = "nasa.gov";
         URL url = new URL("https://" + hostName + "/path?abc=123");
 
@@ -127,8 +115,7 @@ public class NetworkStatusTest
     }
 
     @Test
-    public void testNetworkAvailableAfterSuccessLogged() throws MalformedURLException
-    {
+    public void testNetworkAvailableAfterSuccessLogged() throws MalformedURLException {
         String hostName = "nasa.gov";
         URL url = new URL("https://" + hostName + "/path?abc=123");
 
@@ -138,10 +125,8 @@ public class NetworkStatusTest
         assertFalse("Network available after success test ", tf);
     }
 
-    private void makeHostUnavailable(URL url)
-    {
-        for (int i = 0; i <= this.netStat.getAttemptLimit(); i++)
-        {
+    private void makeHostUnavailable(URL url) {
+        for (int i = 0; i <= this.netStat.getAttemptLimit(); i++) {
             this.netStat.logUnavailableHost(url);
         }
     }

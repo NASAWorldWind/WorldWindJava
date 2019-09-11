@@ -14,8 +14,8 @@ import java.awt.*;
  * @author tag
  * @version $Id: Material.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Material
-{
+public class Material {
+
     private final Color ambient;
     private final Color diffuse;
     private final Color specular;
@@ -36,10 +36,8 @@ public class Material
     public static final Material CYAN = new Material(Color.CYAN);
     public static final Material BLUE = new Material(Color.BLUE);
 
-    public Material(Color specular, Color diffuse, Color ambient, Color emission, float shininess)
-    {
-        if (specular == null || diffuse == null || ambient == null || emission == null)
-        {
+    public Material(Color specular, Color diffuse, Color ambient, Color emission, float shininess) {
+        if (specular == null || diffuse == null || ambient == null || emission == null) {
             String msg = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -52,10 +50,8 @@ public class Material
         this.shininess = shininess;
     }
 
-    public Material(Color color, float shininess)
-    {
-        if (color == null)
-        {
+    public Material(Color color, float shininess) {
+        if (color == null) {
             String msg = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -68,10 +64,8 @@ public class Material
         this.shininess = shininess;
     }
 
-    public Material(Color color)
-    {
-        if (color == null)
-        {
+    public Material(Color color) {
+        if (color == null) {
             String msg = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -84,35 +78,28 @@ public class Material
         this.shininess = 80.0f;
     }
 
-    public final Color getAmbient()
-    {
+    public final Color getAmbient() {
         return this.ambient;
     }
 
-    public final Color getDiffuse()
-    {
+    public final Color getDiffuse() {
         return this.diffuse;
     }
 
-    public final Color getSpecular()
-    {
+    public final Color getSpecular() {
         return this.specular;
     }
 
-    public final Color getEmission()
-    {
+    public final Color getEmission() {
         return this.emission;
     }
 
-    public final double getShininess()
-    {
+    public final double getShininess() {
         return this.shininess;
     }
 
-    public void apply(GL2 gl, int face)
-    {
-        if (gl == null)
-        {
+    public void apply(GL2 gl, int face) {
+        if (gl == null) {
             String msg = Logging.getMessage("nullValue.GLIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -125,10 +112,8 @@ public class Material
         gl.glMaterialf(face, GL2.GL_SHININESS, (float) this.shininess);
     }
 
-    public void apply(GL2 gl, int face, float alpha)
-    {
-        if (gl == null)
-        {
+    public void apply(GL2 gl, int face, float alpha) {
+        if (gl == null) {
             String msg = Logging.getMessage("nullValue.GLIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -143,16 +128,13 @@ public class Material
         gl.glMaterialf(face, GL2.GL_SHININESS, (float) this.shininess);
     }
 
-    protected void glMaterial(GL2 gl, int face, int name, Color color)
-    {
-        if (gl == null)
-        {
+    protected void glMaterial(GL2 gl, int face, int name, Color color) {
+        if (gl == null) {
             String msg = Logging.getMessage("nullValue.GLIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (color == null)
-        {
+        if (color == null) {
             String msg = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -163,16 +145,13 @@ public class Material
         gl.glMaterialfv(face, name, compArray, 0);
     }
 
-    protected void glMaterial(GL2 gl, int face, int name, Color color, float alpha)
-    {
-        if (gl == null)
-        {
+    protected void glMaterial(GL2 gl, int face, int name, Color color, float alpha) {
+        if (gl == null) {
             String msg = Logging.getMessage("nullValue.GLIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (color == null)
-        {
+        if (color == null) {
             String msg = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -193,7 +172,6 @@ public class Material
     //    compArray[2] = compArray[2] * compArray[3];
     //    gl.glMaterialfv(face, name, compArray, 0);
     //}
-
     //protected void glMaterialfvPremult(GL2 gl, int face, int name, Color color, float alpha)
     //{
     //    float[] compArray = new float[4];
@@ -204,11 +182,8 @@ public class Material
     //    compArray[3] = alpha;
     //    gl.glMaterialfv(face, name, compArray, 0);
     //}
-
-    protected Color makeDarker(Color color)
-    {
-        if (color == null)
-        {
+    protected Color makeDarker(Color color) {
+        if (color == null) {
             String msg = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -221,89 +196,101 @@ public class Material
         int a = color.getAlpha();
 
         return new Color(
-            Math.max(0, (int) (r * factor)),
-            Math.max(0, (int) (g * factor)),
-            Math.max(0, (int) (b * factor)),
-            a);
+                Math.max(0, (int) (r * factor)),
+                Math.max(0, (int) (g * factor)),
+                Math.max(0, (int) (b * factor)),
+                a);
     }
 
-    public void getRestorableState(RestorableSupport rs, RestorableSupport.StateObject so)
-    {
+    public void getRestorableState(RestorableSupport rs, RestorableSupport.StateObject so) {
         String encodedColor = RestorableSupport.encodeColor(this.ambient);
-        if (encodedColor != null)
+        if (encodedColor != null) {
             rs.addStateValueAsString(so, "ambient", encodedColor);
+        }
 
         encodedColor = RestorableSupport.encodeColor(this.diffuse);
-        if (encodedColor != null)
+        if (encodedColor != null) {
             rs.addStateValueAsString(so, "diffuse", encodedColor);
+        }
 
         encodedColor = RestorableSupport.encodeColor(this.specular);
-        if (encodedColor != null)
+        if (encodedColor != null) {
             rs.addStateValueAsString(so, "specular", encodedColor);
+        }
 
         encodedColor = RestorableSupport.encodeColor(this.emission);
-        if (encodedColor != null)
+        if (encodedColor != null) {
             rs.addStateValueAsString(so, "emission", encodedColor);
+        }
 
         rs.addStateValueAsDouble(so, "shininess", this.shininess);
     }
 
-    public Material restoreState(RestorableSupport rs, RestorableSupport.StateObject so)
-    {
+    public Material restoreState(RestorableSupport rs, RestorableSupport.StateObject so) {
         double shininess = this.getShininess();
         Double d = rs.getStateValueAsDouble(so, "shininess");
-        if (d != null)
+        if (d != null) {
             shininess = d;
+        }
 
         String as = rs.getStateValueAsString(so, "ambient");
         Color ambient = RestorableSupport.decodeColor(as);
-        if (ambient == null)
+        if (ambient == null) {
             ambient = this.getAmbient();
+        }
 
         String ds = rs.getStateValueAsString(so, "diffuse");
         Color diffuse = RestorableSupport.decodeColor(ds);
-        if (diffuse == null)
+        if (diffuse == null) {
             diffuse = this.getDiffuse();
+        }
 
         String ss = rs.getStateValueAsString(so, "specular");
         Color specular = RestorableSupport.decodeColor(ss);
-        if (specular == null)
+        if (specular == null) {
             specular = this.getSpecular();
+        }
 
         String es = rs.getStateValueAsString(so, "emission");
         Color emission = RestorableSupport.decodeColor(es);
-        if (emission == null)
+        if (emission == null) {
             emission = this.getEmission();
+        }
 
         return new Material(specular, diffuse, ambient, emission, (float) shininess);
     }
 
-    public boolean equals(Object o)
-    {
-        if (this == o)
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        if (o == null || this.getClass() != o.getClass())
+        }
+        if (o == null || this.getClass() != o.getClass()) {
             return false;
+        }
 
         Material that = (Material) o;
 
-        if (Double.compare(this.shininess, that.shininess) != 0)
+        if (Double.compare(this.shininess, that.shininess) != 0) {
             return false;
-        if (this.ambient != null ? !this.ambient.equals(that.ambient) : that.ambient != null)
+        }
+        if (this.ambient != null ? !this.ambient.equals(that.ambient) : that.ambient != null) {
             return false;
-        if (this.diffuse != null ? !this.diffuse.equals(that.diffuse) : that.diffuse != null)
+        }
+        if (this.diffuse != null ? !this.diffuse.equals(that.diffuse) : that.diffuse != null) {
             return false;
-        if (this.specular != null ? !this.specular.equals(that.specular) : that.specular != null)
+        }
+        if (this.specular != null ? !this.specular.equals(that.specular) : that.specular != null) {
             return false;
+        }
         //noinspection RedundantIfStatement
-        if (this.emission != null ? !this.emission.equals(that.emission) : that.emission != null)
+        if (this.emission != null ? !this.emission.equals(that.emission) : that.emission != null) {
             return false;
+        }
 
         return true;
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         int result;
         long temp = (this.shininess != +0.0d) ? Double.doubleToLongBits(this.shininess) : 0L;
         result = (int) (temp ^ (temp >>> 32));

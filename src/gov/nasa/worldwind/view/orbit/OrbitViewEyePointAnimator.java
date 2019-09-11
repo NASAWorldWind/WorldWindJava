@@ -15,8 +15,8 @@ import gov.nasa.worldwind.util.Logging;
  * @author dcollins
  * @version $Id: OrbitViewEyePointAnimator.java 2204 2014-08-07 23:35:03Z dcollins $
  */
-public class OrbitViewEyePointAnimator implements Animator
-{
+public class OrbitViewEyePointAnimator implements Animator {
+
     protected static final double STOP_DISTANCE = 0.1;
 
     protected Globe globe;
@@ -25,24 +25,20 @@ public class OrbitViewEyePointAnimator implements Animator
     protected double smoothing;
     protected boolean hasNext;
 
-    public OrbitViewEyePointAnimator(Globe globe, BasicOrbitView view, Vec4 eyePoint, double smoothing)
-    {
-        if (globe == null)
-        {
+    public OrbitViewEyePointAnimator(Globe globe, BasicOrbitView view, Vec4 eyePoint, double smoothing) {
+        if (globe == null) {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (view == null)
-        {
+        if (view == null) {
             String msg = Logging.getMessage("nullValue.ViewIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (eyePoint == null)
-        {
+        if (eyePoint == null) {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -55,71 +51,58 @@ public class OrbitViewEyePointAnimator implements Animator
         this.hasNext = true;
     }
 
-    public void setEyePoint(Vec4 eyePoint)
-    {
+    public void setEyePoint(Vec4 eyePoint) {
         this.eyePoint = eyePoint;
     }
 
     @Override
-    public void start()
-    {
+    public void start() {
         this.hasNext = true;
     }
 
     @Override
-    public void stop()
-    {
+    public void stop() {
         this.hasNext = false;
     }
 
     @Override
-    public boolean hasNext()
-    {
+    public boolean hasNext() {
         return this.hasNext;
     }
 
     @Override
-    public void set(double interpolant)
-    {
+    public void set(double interpolant) {
         // Intentionally left blank.
     }
 
     @Override
-    public void next()
-    {
+    public void next() {
         Matrix modelview = this.view.getModelviewMatrix();
         Vec4 point = modelview.extractEyePoint();
 
-        if (point.distanceTo3(this.eyePoint) > STOP_DISTANCE)
-        {
+        if (point.distanceTo3(this.eyePoint) > STOP_DISTANCE) {
             point = Vec4.mix3(1 - this.smoothing, point, this.eyePoint);
             setEyePoint(this.globe, this.view, point);
-        }
-        else
-        {
+        } else {
             setEyePoint(this.globe, this.view, this.eyePoint);
             this.stop();
         }
     }
 
-    public static void setEyePoint(Globe globe, BasicOrbitView view, Vec4 newEyePoint)
-    {
-        if (globe == null)
-        {
+    public static void setEyePoint(Globe globe, BasicOrbitView view, Vec4 newEyePoint) {
+        if (globe == null) {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (view == null)
-        {
+        if (view == null) {
             String msg = Logging.getMessage("nullValue.ViewIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (newEyePoint == null)
-        {
+        if (newEyePoint == null) {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);

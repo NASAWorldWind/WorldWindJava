@@ -16,11 +16,12 @@ import org.w3c.dom.*;
  * @author dcollins
  * @version $Id: DataConfigurationFilter.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFilter
-{
-    /** Creates a DataConfigurationFilter, but otherwise does nothing. */
-    public DataConfigurationFilter()
-    {
+public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFilter {
+
+    /**
+     * Creates a DataConfigurationFilter, but otherwise does nothing.
+     */
+    public DataConfigurationFilter() {
     }
 
     /**
@@ -33,26 +34,22 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
      *
      * @throws IllegalArgumentException if the file is null.
      */
-    public boolean accept(java.io.File file)
-    {
-        if (file == null)
-        {
+    public boolean accept(java.io.File file) {
+        if (file == null) {
             String msg = Logging.getMessage("nullValue.FileIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         // First check the file path, optionally returning false if the path cannot be accepted for any reason.
-        if (!this.acceptFilePath(file.getPath()))
+        if (!this.acceptFilePath(file.getPath())) {
             return false;
+        }
 
         Document doc = null;
-        try
-        {
+        try {
             doc = WWXML.openDocumentFile(file.getPath(), this.getClass());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Not interested in logging the exception. We just want to return false, indicating that the File cannot
             // be opened as an XML document.
         }
@@ -70,22 +67,17 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
      *
      * @throws IllegalArgumentException if the url is null.
      */
-    public boolean accept(java.net.URL url)
-    {
-        if (url == null)
-        {
+    public boolean accept(java.net.URL url) {
+        if (url == null) {
             String msg = Logging.getMessage("nullValue.URLIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         Document doc = null;
-        try
-        {
+        try {
             doc = WWXML.openDocumentURL(url);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Not interested in logging the exception. We just want to return false, indicating that the URL cannot
             // be opened as an XML document.
         }
@@ -103,22 +95,17 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
      *
      * @throws IllegalArgumentException if the input stream is null.
      */
-    public boolean accept(java.io.InputStream inputStream)
-    {
-        if (inputStream == null)
-        {
+    public boolean accept(java.io.InputStream inputStream) {
+        if (inputStream == null) {
             String msg = Logging.getMessage("nullValue.InputStreamIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         Document doc = null;
-        try
-        {
+        try {
             doc = WWXML.openDocumentStream(inputStream);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Not interested in logging the exception. We just want to return false, indicating that the InputStream
             // cannot be opened as an XML document.
         }
@@ -131,23 +118,20 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
      * #accept(org.w3c.dom.Document)} returns true.
      *
      * @param fileStore the file store containing the named file path.
-     * @param fileName  the named file path in question.
+     * @param fileName the named file path in question.
      *
      * @return true if the file name should be accepted; false otherwise.
      *
      * @throws IllegalArgumentException if either the file store or the file name are null.
      */
-    public boolean accept(FileStore fileStore, String fileName)
-    {
-        if (fileStore == null)
-        {
+    public boolean accept(FileStore fileStore, String fileName) {
+        if (fileStore == null) {
             String msg = Logging.getMessage("nullValue.FileStoreIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (fileName == null)
-        {
+        if (fileName == null) {
             String message = Logging.getMessage("nullValue.FilePathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -156,14 +140,16 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
         // Attempt to locate the named path in the FileStore, optionally checking the class path. If a file with that
         // name cannot be located, then return false.
         java.net.URL url = fileStore.findFile(fileName, true);
-        if (url == null)
+        if (url == null) {
             return false;
+        }
 
         // Attempt to convert the URL to a local file path. If that succeeds, then continue treating the URL as if
         // it were a File.
         java.io.File file = WWIO.convertURLToFile(url);
-        if (file != null)
+        if (file != null) {
             return this.accept(file);
+        }
 
         return this.accept(url);
     }
@@ -177,17 +163,14 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
      *
      * @throws IllegalArgumentException if the document is null.
      */
-    public boolean accept(Document doc)
-    {
-        if (doc == null)
-        {
+    public boolean accept(Document doc) {
+        if (doc == null) {
             String message = Logging.getMessage("nullValue.DocumentIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (doc.getDocumentElement() == null)
-        {
+        if (doc.getDocumentElement() == null) {
             String message = Logging.getMessage("nullValue.DocumentElementIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -205,10 +188,8 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
      *
      * @throws IllegalArgumentException if the document is null.
      */
-    public boolean accept(Element domElement)
-    {
-        if (domElement == null)
-        {
+    public boolean accept(Element domElement) {
+        if (domElement == null) {
             String message = Logging.getMessage("nullValue.DocumentIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -217,10 +198,8 @@ public class DataConfigurationFilter implements java.io.FileFilter, FileStoreFil
         return DataConfigurationUtils.isDataConfig(domElement);
     }
 
-    protected boolean acceptFilePath(String filePath)
-    {
-        if (filePath == null)
-        {
+    protected boolean acceptFilePath(String filePath) {
+        if (filePath == null) {
             String message = Logging.getMessage("nullValue.FilePathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics;
 
 /**
@@ -16,36 +15,66 @@ package gov.nasa.worldwind.symbology.milstd2525.graphics;
  * @author pabercrombie
  * @version $Id$
  */
-public interface EmsSidc
-{
-    /** Aftershock. */
+public interface EmsSidc {
+
+    /**
+     * Aftershock.
+     */
     final String NATEVT_GEO_AFTSHK = "E-N-AA---------";
-    /** Avalanche. */
+    /**
+     * Avalanche.
+     */
     final String NATEVT_GEO_AVL = "E-N-AB---------";
-    /** Earthquake epicenter. */
+    /**
+     * Earthquake epicenter.
+     */
     final String NATEVT_GEO_EQKEPI = "E-N-AC---------";
-    /** Landslide. */
+    /**
+     * Landslide.
+     */
     final String NATEVT_GEO_LNDSLD = "E-N-AD---------";
-    /** Subsidence. */
+    /**
+     * Subsidence.
+     */
     final String NATEVT_GEO_SBSDNC = "E-N-AE---------";
-    /** Volcanic threat. */
+    /**
+     * Volcanic threat.
+     */
     final String NATEVT_GEO_VLCTHT = "E-N-AG---------";
-    /** Drought. */
+    /**
+     * Drought.
+     */
     final String NATEVT_HYDMET_DRGHT = "E-N-BB---------";
-    /** Flood. */
+    /**
+     * Flood.
+     */
     final String NATEVT_HYDMET_FLD = "E-N-BC---------";
-    /** Inversion. */
+    /**
+     * Inversion.
+     */
     final String NATEVT_HYDMET_INV = "E-N-BF---------";
-    /** Tsunami. */
+    /**
+     * Tsunami.
+     */
     final String NATEVT_HYDMET_TSNMI = "E-N-BM---------";
-    /** Bird infestation. */
+    /**
+     * Bird infestation.
+     */
     final String NATEVT_INFST_BIRD = "E-N-CA---------";
-    /** Insect infestation. */
+    /**
+     * Insect infestation.
+     */
     final String NATEVT_INFST_INSCT = "E-N-CB---------";
-    /** Microbial infestation. */
+    /**
+     * Microbial infestation.
+     */
     final String NATEVT_INFST_MICROB = "E-N-CC---------";
-    /** Reptile infestation. */
+    /**
+     * Reptile infestation.
+     */
     final String NATEVT_INFST_REPT = "E-N-CD---------";
-    /** Rodent infestation. */
+    /**
+     * Rodent infestation.
+     */
     final String NATEVT_INFST_RDNT = "E-N-CE---------";
 }

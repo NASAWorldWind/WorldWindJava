@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc;
 
 import gov.nasa.worldwind.util.xml.*;
@@ -18,8 +17,8 @@ import javax.xml.stream.events.XMLEvent;
  * @author tag
  * @version $Id: OGCAddress.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class OGCAddress extends AbstractXMLEventParser
-{
+public class OGCAddress extends AbstractXMLEventParser {
+
     protected QName ADDRESS_TYPE;
     protected QName ADDRESS;
     protected QName CITY;
@@ -34,15 +33,13 @@ public class OGCAddress extends AbstractXMLEventParser
     protected String postCode;
     protected String country;
 
-    public OGCAddress(String namespaceURI)
-    {
+    public OGCAddress(String namespaceURI) {
         super(namespaceURI);
 
         this.initialize();
     }
 
-    protected void initialize()
-    {
+    protected void initialize() {
         ADDRESS_TYPE = new QName(this.getNamespaceURI(), "AddressType");
         ADDRESS = new QName(this.getNamespaceURI(), "Address");
         CITY = new QName(this.getNamespaceURI(), "City");
@@ -53,97 +50,72 @@ public class OGCAddress extends AbstractXMLEventParser
 
     @Override
     protected void doParseEventContent(XMLEventParserContext ctx, XMLEvent event, Object... args)
-        throws XMLStreamException
-    {
-        if (ctx.isStartElement(event, ADDRESS_TYPE))
-        {
+            throws XMLStreamException {
+        if (ctx.isStartElement(event, ADDRESS_TYPE)) {
             this.setAddressType(ctx.getStringParser().parseString(ctx, event));
-        }
-        else if (ctx.isStartElement(event, ADDRESS))
-        {
+        } else if (ctx.isStartElement(event, ADDRESS)) {
             this.setAddress(ctx.getStringParser().parseString(ctx, event));
-        }
-        else if (ctx.isStartElement(event, CITY))
-        {
+        } else if (ctx.isStartElement(event, CITY)) {
             this.setCity(ctx.getStringParser().parseString(ctx, event));
-        }
-        else if (ctx.isStartElement(event, STATE_OR_PROVINCE))
-        {
+        } else if (ctx.isStartElement(event, STATE_OR_PROVINCE)) {
             this.setStateOrProvince(ctx.getStringParser().parseString(ctx, event));
-        }
-        else if (ctx.isStartElement(event, POST_CODE))
-        {
+        } else if (ctx.isStartElement(event, POST_CODE)) {
             this.setPostCode(ctx.getStringParser().parseString(ctx, event));
-        }
-        else if (ctx.isStartElement(event, COUNTRY))
-        {
+        } else if (ctx.isStartElement(event, COUNTRY)) {
             this.setCountry(ctx.getStringParser().parseString(ctx, event));
         }
     }
 
-    public String getAddressType()
-    {
+    public String getAddressType() {
         return addressType;
     }
 
-    protected void setAddressType(String addressType)
-    {
+    protected void setAddressType(String addressType) {
         this.addressType = addressType;
     }
 
-    public String getAddress()
-    {
+    public String getAddress() {
         return address;
     }
 
-    protected void setAddress(String address)
-    {
+    protected void setAddress(String address) {
         this.address = address;
     }
 
-    public String getCity()
-    {
+    public String getCity() {
         return city;
     }
 
-    protected void setCity(String city)
-    {
+    protected void setCity(String city) {
         this.city = city;
     }
 
-    public String getStateOrProvince()
-    {
+    public String getStateOrProvince() {
         return stateOrProvince;
     }
 
-    protected void setStateOrProvince(String stateOrProvince)
-    {
+    protected void setStateOrProvince(String stateOrProvince) {
         this.stateOrProvince = stateOrProvince;
     }
 
-    public String getPostCode()
-    {
+    public String getPostCode() {
         return postCode;
     }
 
-    protected void setPostCode(String postCode)
-    {
+    protected void setPostCode(String postCode) {
         this.postCode = postCode;
     }
 
-    public String getCountry()
-    {
+    public String getCountry() {
         return country;
     }
 
-    protected void setCountry(String country)
-    {
+    protected void setCountry(String country) {
         this.country = country;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
 
         sb.append("AddressType: ").append(this.addressType != null ? this.addressType : "none").append(" ");

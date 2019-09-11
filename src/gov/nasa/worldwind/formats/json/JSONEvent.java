@@ -9,8 +9,8 @@ package gov.nasa.worldwind.formats.json;
  * @author dcollins
  * @version $Id: JSONEvent.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface JSONEvent
-{
+public interface JSONEvent {
+
     boolean isStartObject();
 
     boolean isEndObject();

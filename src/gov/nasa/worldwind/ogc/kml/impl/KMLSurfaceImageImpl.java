@@ -19,15 +19,19 @@ import java.util.List;
  * @author pabercrombie
  * @version $Id: KMLSurfaceImageImpl.java 1551 2013-08-17 18:00:09Z pabercrombie $
  */
-public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
-{
+public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable {
+
     protected KMLGroundOverlay parent;
 
     protected boolean attributesResolved;
 
-    /** Indicates that the source texture has been resolved and loaded. */
+    /**
+     * Indicates that the source texture has been resolved and loaded.
+     */
     protected boolean textureResolved;
-    /** Indicates the time at which the image source was specified. */
+    /**
+     * Indicates the time at which the image source was specified.
+     */
     protected long iconRetrievalTime;
 
     /**
@@ -39,25 +43,22 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
     /**
      * Create an screen image.
      *
-     * @param tc      the current {@link KMLTraversalContext}.
+     * @param tc the current {@link KMLTraversalContext}.
      * @param overlay the <i>Overlay</i> element containing.
      *
-     * @throws NullPointerException     if the traversal context is null.
+     * @throws NullPointerException if the traversal context is null.
      * @throws IllegalArgumentException if the parent overlay or the traversal context is null.
      */
-    public KMLSurfaceImageImpl(KMLTraversalContext tc, KMLGroundOverlay overlay)
-    {
+    public KMLSurfaceImageImpl(KMLTraversalContext tc, KMLGroundOverlay overlay) {
         this.parent = overlay;
 
-        if (tc == null)
-        {
+        if (tc == null) {
             String msg = Logging.getMessage("nullValue.TraversalContextIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (overlay == null)
-        {
+        if (overlay == null) {
             String msg = Logging.getMessage("nullValue.ParentIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -65,32 +66,26 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
 
         // Positions are specified either as a kml:LatLonBox or a gx:LatLonQuad
         KMLLatLonBox box = overlay.getLatLonBox();
-        if (box != null)
-        {
+        if (box != null) {
             Sector sector = KMLUtil.createSectorFromLatLonBox(box);
             this.initializeGeometry(sector);
 
             // Check to see if a rotation is provided. The rotation will be applied when the image is rendered, because
             // how the rotation is performed depends on the globe.
             Double rotation = box.getRotation();
-            if (rotation != null)
-            {
+            if (rotation != null) {
                 this.mustApplyRotation = true;
             }
-        }
-        else
-        {
+        } else {
             GXLatLongQuad latLonQuad = overlay.getLatLonQuad();
-            if (latLonQuad != null && latLonQuad.getCoordinates() != null)
-            {
+            if (latLonQuad != null && latLonQuad.getCoordinates() != null) {
                 this.initializeGeometry(latLonQuad.getCoordinates().list);
             }
         }
 
         // Apply opacity to the surface image
         String colorStr = overlay.getColor();
-        if (!WWUtil.isEmpty(colorStr))
-        {
+        if (!WWUtil.isEmpty(colorStr)) {
             Color color = WWUtil.decodeColorABGR(colorStr);
             int alpha = color.getAlpha();
 
@@ -100,8 +95,7 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
         this.setPickEnabled(false);
     }
 
-    public void preRender(KMLTraversalContext tc, DrawContext dc)
-    {
+    public void preRender(KMLTraversalContext tc, DrawContext dc) {
         if (this.mustResolveHref()) // resolve the href to either a local file or a remote URL
         {
             String path = this.resolveHref();
@@ -118,9 +112,8 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
         // Set the Icon's expiration time the first time that the image is rendered after the texture has been retrieved.
         // The expiration time comes from the HTTP headers, so we can't do this until the resource is available.
         boolean mustSetExpiration = !this.textureResolved && this.sourceTexture != null
-            && this.sourceTexture.isTextureCurrent(dc);
-        if (mustSetExpiration)
-        {
+                && this.sourceTexture.isTextureCurrent(dc);
+        if (mustSetExpiration) {
             String path = this.resolveHref();
 
             // Query the KMLRoot for the expiration time.
@@ -132,8 +125,7 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
         }
 
         // Apply rotation the first time the overlay is rendered
-        if (this.mustApplyRotation)
-        {
+        if (this.mustApplyRotation) {
             this.applyRotation(dc);
             this.mustApplyRotation = false;
         }
@@ -147,12 +139,12 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
      *
      * @return True if the image source must be resolved.
      */
-    protected boolean mustResolveHref()
-    {
+    protected boolean mustResolveHref() {
         KMLIcon icon = this.parent.getIcon();
         //noinspection SimplifiableIfStatement
-        if (icon == null || icon.getHref() == null)
+        if (icon == null || icon.getHref() == null) {
             return false;
+        }
 
         // Resolve the reference if the image hasn't been retrieved, or if the link has expired.
         return this.getImageSource() == null || icon.getUpdateTime() > this.iconRetrievalTime;
@@ -163,26 +155,23 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
      *
      * @return The resolved path to the image source.
      */
-    protected String resolveHref()
-    {
+    protected String resolveHref() {
         // The icon reference may be to a support file within a KMZ file, so check for that. If it's not, then just
         // let the normal SurfaceImage code resolve the reference.
         String href = this.parent.getIcon().getHref();
         String localAddress = null;
-        try
-        {
+        try {
             localAddress = this.parent.getRoot().getSupportFilePath(href);
-        }
-        catch (IOException ignored)
-        {
+        } catch (IOException ignored) {
         }
 
         return localAddress != null ? localAddress : href;
     }
 
-    /** {@inheritDoc} */
-    public void render(KMLTraversalContext tc, DrawContext dc)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void render(KMLTraversalContext tc, DrawContext dc) {
         // We've already resolved the SurfaceImage's attributes during the preRender pass. During the render pass we
         // simply draw the SurfaceImage.
         super.render(dc);
@@ -193,16 +182,13 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
      *
      * @param dc Current draw context.
      */
-    protected void applyRotation(DrawContext dc)
-    {
+    protected void applyRotation(DrawContext dc) {
         KMLLatLonBox box = this.parent.getLatLonBox();
-        if (box != null)
-        {
+        if (box != null) {
             Double rotation = box.getRotation();
-            if (rotation != null)
-            {
+            if (rotation != null) {
                 List<LatLon> corners = KMLUtil.rotateSector(dc.getGlobe(), this.getSector(),
-                    Angle.fromDegrees(rotation));
+                        Angle.fromDegrees(rotation));
                 this.setCorners(corners);
             }
         }

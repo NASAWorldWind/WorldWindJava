@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.ows;
 
 import gov.nasa.worldwind.util.xml.*;
@@ -16,40 +15,33 @@ import java.util.*;
  * @author tag
  * @version $Id: OWSConstraint.java 2061 2014-06-19 19:59:40Z tgaskins $
  */
-public class OWSConstraint extends AbstractXMLEventParser
-{
+public class OWSConstraint extends AbstractXMLEventParser {
+
     protected List<OWSAllowedValues> allowedValues = new ArrayList<OWSAllowedValues>(1);
 
-    public OWSConstraint(String namespaceURI)
-    {
+    public OWSConstraint(String namespaceURI) {
         super(namespaceURI);
     }
 
-    public String getName()
-    {
+    public String getName() {
         return (String) this.getField("name");
     }
 
-    public List<OWSAllowedValues> getAllowedValues()
-    {
+    public List<OWSAllowedValues> getAllowedValues() {
         return this.allowedValues;
     }
 
     protected void doParseEventContent(XMLEventParserContext ctx, XMLEvent event, Object... args)
-        throws XMLStreamException
-    {
-        if (ctx.isStartElement(event, "AllowedValues"))
-        {
+            throws XMLStreamException {
+        if (ctx.isStartElement(event, "AllowedValues")) {
             XMLEventParser parser = this.allocate(ctx, event);
-            if (parser != null)
-            {
+            if (parser != null) {
                 Object o = parser.parse(ctx, event, args);
-                if (o != null && o instanceof OWSAllowedValues)
+                if (o != null && o instanceof OWSAllowedValues) {
                     this.allowedValues.add((OWSAllowedValues) o);
+                }
             }
-        }
-        else
-        {
+        } else {
             super.doParseEventContent(ctx, event, args);
         }
     }

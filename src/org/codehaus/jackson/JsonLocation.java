@@ -4,18 +4,17 @@ import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * Object that encapsulates Location information used for reporting
- * parsing (or potentially generation) errors, as well as current location
- * within input streams.
+ * Object that encapsulates Location information used for reporting parsing (or potentially generation) errors, as well
+ * as current location within input streams.
  */
 public class JsonLocation
-    implements java.io.Serializable // as per [JACKSON-168]
+        implements java.io.Serializable // as per [JACKSON-168]
 {
+
     private static final long serialVersionUID = 1L;
 
     /**
-     * Shared immutable "N/A location" that can be returned to indicate
-     * that no location information is available
+     * Shared immutable "N/A location" that can be returned to indicate that no location information is available
      *
      * @since 1.3
      */
@@ -32,8 +31,7 @@ public class JsonLocation
      */
     final Object _sourceRef;
 
-    public JsonLocation(Object srcRef, long totalChars, int lineNr, int colNr)
-    {
+    public JsonLocation(Object srcRef, long totalChars, int lineNr, int colNr) {
         /* Unfortunately, none of legal encodings are straight single-byte
          * encodings. Could determine offset for UTF-16/UTF-32, but the
          * most important one is UTF-8...
@@ -44,11 +42,10 @@ public class JsonLocation
 
     @JsonCreator
     public JsonLocation(@JsonProperty("sourceRef") Object sourceRef,
-                        @JsonProperty("byteOffset") long totalBytes,
-                        @JsonProperty("charOffset") long totalChars,
-                        @JsonProperty("lineNr") int lineNr,
-                        @JsonProperty("columnNr") int columnNr)
-    {
+            @JsonProperty("byteOffset") long totalBytes,
+            @JsonProperty("charOffset") long totalChars,
+            @JsonProperty("lineNr") int lineNr,
+            @JsonProperty("columnNr") int columnNr) {
         _sourceRef = sourceRef;
         _totalBytes = totalBytes;
         _totalChars = totalChars;
@@ -63,36 +60,40 @@ public class JsonLocation
      *
      * @return Undocumented.
      */
-    public Object getSourceRef() { return _sourceRef; }
+    public Object getSourceRef() {
+        return _sourceRef;
+    }
 
     /**
      * @return Line number of the location (1-based)
      */
-    public int getLineNr() { return _lineNr; }
+    public int getLineNr() {
+        return _lineNr;
+    }
 
     /**
      * @return Column number of the location (1-based)
      */
-    public int getColumnNr() { return _columnNr; }
+    public int getColumnNr() {
+        return _columnNr;
+    }
 
     /**
-     * @return Character offset within underlying stream, reader or writer,
-     *   if available; -1 if not.
+     * @return Character offset within underlying stream, reader or writer, if available; -1 if not.
      */
-    public long getCharOffset() { return _totalChars; }
+    public long getCharOffset() {
+        return _totalChars;
+    }
 
     /**
-     * @return Byte offset within underlying stream, reader or writer,
-     *   if available; -1 if not.
+     * @return Byte offset within underlying stream, reader or writer, if available; -1 if not.
      */
-    public long getByteOffset()
-    {
+    public long getByteOffset() {
         return _totalBytes;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder sb = new StringBuilder(80);
         sb.append("[Source: ");
         if (_sourceRef == null) {
@@ -109,8 +110,7 @@ public class JsonLocation
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = (_sourceRef == null) ? 1 : _sourceRef.hashCode();
         hash ^= _lineNr;
         hash += _columnNr;
@@ -120,21 +120,29 @@ public class JsonLocation
     }
 
     @Override
-    public boolean equals(Object other)
-    {
-        if (other == this) return true;
-        if (other == null) return false;
-        if (!(other instanceof JsonLocation)) return false;
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof JsonLocation)) {
+            return false;
+        }
         JsonLocation otherLoc = (JsonLocation) other;
 
         if (_sourceRef == null) {
-            if (otherLoc._sourceRef != null) return false;
-        } else if (!_sourceRef.equals(otherLoc._sourceRef)) return false;
+            if (otherLoc._sourceRef != null) {
+                return false;
+            }
+        } else if (!_sourceRef.equals(otherLoc._sourceRef)) {
+            return false;
+        }
 
         return (_lineNr == otherLoc._lineNr)
-            && (_columnNr == otherLoc._columnNr)
-            && (_totalChars == otherLoc._totalChars)
-            && (getByteOffset() == otherLoc.getByteOffset())
-            ;
+                && (_columnNr == otherLoc._columnNr)
+                && (_totalChars == otherLoc._totalChars)
+                && (getByteOffset() == otherLoc.getByteOffset());
     }
 }

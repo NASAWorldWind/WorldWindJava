@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml.impl;
 
 import gov.nasa.worldwind.event.MessageListener;
@@ -15,8 +14,8 @@ import gov.nasa.worldwind.render.DrawContext;
  * @author tag
  * @version $Id: KMLRenderable.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface KMLRenderable extends MessageListener
-{
+public interface KMLRenderable extends MessageListener {
+
     /**
      * Pre-render this element.
      *

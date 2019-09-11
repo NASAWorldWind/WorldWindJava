@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.util;
 
 import gov.nasa.worldwind.*;
@@ -25,20 +24,18 @@ import java.util.*;
  * @author tag
  * @version $Id$
  */
-public class WCSCoveragePanel extends JPanel
-{
-    protected static class CoverageInfo
-    {
+public class WCSCoveragePanel extends JPanel {
+
+    protected static class CoverageInfo {
+
         protected WCS100Capabilities caps;
         protected AVListImpl params = new AVListImpl();
 
-        protected String getTitle()
-        {
+        protected String getTitle() {
             return params.getStringValue(AVKey.DISPLAY_NAME);
         }
 
-        protected String getName()
-        {
+        protected String getName() {
             return params.getStringValue(AVKey.COVERAGE_IDENTIFIERS);
         }
     }
@@ -47,18 +44,15 @@ public class WCSCoveragePanel extends JPanel
     protected URI serverURI;
     protected Dimension size;
     protected Thread loadingThread;
-    protected final TreeSet<CoverageInfo> coverageInfos = new TreeSet<CoverageInfo>(new Comparator<CoverageInfo>()
-    {
-        public int compare(CoverageInfo infoA, CoverageInfo infoB)
-        {
+    protected final TreeSet<CoverageInfo> coverageInfos = new TreeSet<CoverageInfo>(new Comparator<CoverageInfo>() {
+        public int compare(CoverageInfo infoA, CoverageInfo infoB) {
             String nameA = infoA.getTitle();
             String nameB = infoB.getTitle();
             return nameA.compareTo(nameB);
         }
     });
 
-    public WCSCoveragePanel(WorldWindow wwd, String server, Dimension size) throws URISyntaxException
-    {
+    public WCSCoveragePanel(WorldWindow wwd, String server, Dimension size) throws URISyntaxException {
         super(new BorderLayout());
 
         // See if the server name is a valid URI. Throw an exception if not.
@@ -71,10 +65,8 @@ public class WCSCoveragePanel extends JPanel
         this.makeProgressPanel();
 
         // Thread off a retrieval of the server's capabilities document and update of this panel.
-        this.loadingThread = new Thread(new Runnable()
-        {
-            public void run()
-            {
+        this.loadingThread = new Thread(new Runnable() {
+            public void run() {
                 load();
             }
         });
@@ -82,68 +74,56 @@ public class WCSCoveragePanel extends JPanel
         this.loadingThread.start();
     }
 
-    public String getServerDisplayString()
-    {
+    public String getServerDisplayString() {
         return this.serverURI.getHost();
     }
 
-    protected void load()
-    {
+    protected void load() {
         WCS100Capabilities caps;
 
-        try
-        {
+        try {
             caps = WCS100Capabilities.retrieve(this.serverURI);
             caps.parse();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             Container c = WCSCoveragePanel.this.getParent();
             c.remove(WCSCoveragePanel.this);
             JOptionPane.showMessageDialog((Component) wwd, "Unable to connect to server " + serverURI.toString(),
-                "Server Error", JOptionPane.ERROR_MESSAGE);
+                    "Server Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         final java.util.List<WCS100CoverageOfferingBrief> coverages = caps.getContentMetadata().getCoverageOfferings();
-        if (coverages == null)
+        if (coverages == null) {
             return;
+        }
 
-        try
-        {
-            for (WCS100CoverageOfferingBrief coverage : coverages)
-            {
+        try {
+            for (WCS100CoverageOfferingBrief coverage : coverages) {
                 CoverageInfo coverageInfo = this.createCoverageInfo(caps, coverage);
                 WCSCoveragePanel.this.coverageInfos.add(coverageInfo);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return;
         }
 
         // Fill the panel with the coverage titles.
-        EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 WCSCoveragePanel.this.removeAll();
                 makeCoverageInfosPanel(coverageInfos);
             }
         });
     }
 
-    protected void makeCoverageInfosPanel(Collection<CoverageInfo> coverageInfos)
-    {
+    protected void makeCoverageInfosPanel(Collection<CoverageInfo> coverageInfos) {
         // Create the panel holding the coverage names.
         JPanel layersPanel = new JPanel(new GridLayout(0, 1, 0, 4));
         layersPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         // Add the server's coverages to the panel.
-        for (CoverageInfo coverageInfo : coverageInfos)
-        {
+        for (CoverageInfo coverageInfo : coverageInfos) {
             addCoverageInfoPanel(layersPanel, WCSCoveragePanel.this.wwd, coverageInfo);
         }
 
@@ -155,15 +135,14 @@ public class WCSCoveragePanel extends JPanel
         // Add the scroll bar and name panel to a titled panel that will resize with the main window.
         JPanel westPanel = new JPanel(new GridLayout(0, 1, 0, 10));
         westPanel.setBorder(
-            new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("Coverages")));
+                new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("Coverages")));
         westPanel.add(scrollPane);
         this.add(westPanel, BorderLayout.CENTER);
 
         this.revalidate();
     }
 
-    protected void addCoverageInfoPanel(JPanel coveragesPanel, WorldWindow wwd, CoverageInfo coverageInfo)
-    {
+    protected void addCoverageInfoPanel(JPanel coveragesPanel, WorldWindow wwd, CoverageInfo coverageInfo) {
         // Give a coverage a button and label and add it to the names panel.
 
         CoverageInfoAction action = new CoverageInfoAction(coverageInfo, wwd);
@@ -172,14 +151,13 @@ public class WCSCoveragePanel extends JPanel
         coveragesPanel.add(jcb);
     }
 
-    protected class CoverageInfoAction extends AbstractAction
-    {
+    protected class CoverageInfoAction extends AbstractAction {
+
         protected WorldWindow wwd;
         protected CoverageInfo coverageInfo;
         protected Object component;
 
-        public CoverageInfoAction(CoverageInfo info, WorldWindow wwd)
-        {
+        public CoverageInfoAction(CoverageInfo info, WorldWindow wwd) {
             super(info.getTitle());
 
             // Capture info we'll need later to control the coverage.
@@ -187,20 +165,18 @@ public class WCSCoveragePanel extends JPanel
             this.coverageInfo = info;
         }
 
-        public void actionPerformed(ActionEvent actionEvent)
-        {
+        public void actionPerformed(ActionEvent actionEvent) {
             // If the coverage is selected, add it to the WorldWindow's current model, else remove it from the model.
-            if (((JCheckBox) actionEvent.getSource()).isSelected())
-            {
-                if (this.component == null)
+            if (((JCheckBox) actionEvent.getSource()).isSelected()) {
+                if (this.component == null) {
                     this.component = createComponent(coverageInfo.caps, coverageInfo);
+                }
 
                 updateComponent(this.component, true);
-            }
-            else
-            {
-                if (this.component != null)
+            } else {
+                if (this.component != null) {
                     updateComponent(this.component, false);
+                }
             }
 
             // Tell the WorldWindow to update.
@@ -208,8 +184,7 @@ public class WCSCoveragePanel extends JPanel
         }
     }
 
-    protected CoverageInfo createCoverageInfo(WCS100Capabilities caps, WCS100CoverageOfferingBrief coverage)
-    {
+    protected CoverageInfo createCoverageInfo(WCS100Capabilities caps, WCS100CoverageOfferingBrief coverage) {
         // Create the layer info specified by the coverage capabilities.
 
         CoverageInfo info = new CoverageInfo();
@@ -221,27 +196,23 @@ public class WCSCoveragePanel extends JPanel
         return info;
     }
 
-    protected void updateComponent(Object component, boolean enable)
-    {
+    protected void updateComponent(Object component, boolean enable) {
         ElevationModel model = (ElevationModel) component;
-        CompoundElevationModel compoundModel =
-            (CompoundElevationModel) this.wwd.getModel().getGlobe().getElevationModel();
+        CompoundElevationModel compoundModel
+                = (CompoundElevationModel) this.wwd.getModel().getGlobe().getElevationModel();
 
-        if (enable)
-        {
-            if (!compoundModel.getElevationModels().contains(model))
+        if (enable) {
+            if (!compoundModel.getElevationModels().contains(model)) {
                 compoundModel.addElevationModel(model);
-        }
-        else
-        {
+            }
+        } else {
             compoundModel.removeElevationModel(model);
         }
 
         wwd.firePropertyChange(new PropertyChangeEvent(wwd, AVKey.ELEVATION_MODEL, null, compoundModel));
     }
 
-    protected static Object createComponent(WCS100Capabilities caps, CoverageInfo coverageInfo)
-    {
+    protected static Object createComponent(WCS100Capabilities caps, CoverageInfo coverageInfo) {
         AVList configParams = coverageInfo.params.copy(); // Copy to insulate changes from the caller.
 
         // Some wcs servers are slow, so increase the timeouts and limits used by WorldWind's retrievers.
@@ -249,40 +220,31 @@ public class WCSCoveragePanel extends JPanel
         configParams.setValue(AVKey.URL_READ_TIMEOUT, 30000);
         configParams.setValue(AVKey.RETRIEVAL_QUEUE_STALE_REQUEST_LIMIT, 60000);
 
-        try
-        {
+        try {
             String describeCoverageUrlString = caps.getCapability().getGetOperationAddress("DescribeCoverage");
             URI uri = new URI(describeCoverageUrlString);
             WCS100DescribeCoverage coverageDescription = WCS100DescribeCoverage.retrieve(uri, coverageInfo.getName());
             coverageDescription.parse();
             configParams.setValue(AVKey.DOCUMENT, coverageDescription);
-        }
-        catch (URISyntaxException e)
-        {
+        } catch (URISyntaxException e) {
             e.printStackTrace();
             return null;
-        }
-        catch (XMLStreamException e)
-        {
+        } catch (XMLStreamException e) {
             e.printStackTrace();
             return null;
         }
 
-        try
-        {
+        try {
             Factory factory = (Factory) WorldWind.createConfigurationComponent(AVKey.ELEVATION_MODEL_FACTORY);
             return factory.createFromConfigSource(caps, configParams);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Ignore the exception, and just return null.
         }
 
         return null;
     }
 
-    protected void makeProgressPanel()
-    {
+    protected void makeProgressPanel() {
         // Create the panel holding the progress bar during loading.
 
         JPanel outerPanel = new JPanel(new BorderLayout());
@@ -297,12 +259,11 @@ public class WCSCoveragePanel extends JPanel
 
         JButton cancelButton = new JButton("Cancel");
         innerPanel.add(cancelButton, BorderLayout.EAST);
-        cancelButton.addActionListener(new AbstractAction()
-        {
-            public void actionPerformed(ActionEvent actionEvent)
-            {
-                if (loadingThread.isAlive())
+        cancelButton.addActionListener(new AbstractAction() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (loadingThread.isAlive()) {
                     loadingThread.interrupt();
+                }
 
                 Container c = WCSCoveragePanel.this.getParent();
                 c.remove(WCSCoveragePanel.this);
@@ -314,26 +275,20 @@ public class WCSCoveragePanel extends JPanel
         this.revalidate();
     }
 
-    public static void main(String[] args)
-    {
-        try
-        {
+    public static void main(String[] args) {
+        try {
             final JFrame controlFrame = new JFrame();
             controlFrame.getContentPane().add(new WCSCoveragePanel(null, "https://worldwind26.arc.nasa.gov/wcs?",
-                new Dimension(400, 600)));
+                    new Dimension(400, 600)));
             controlFrame.pack();
             controlFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             controlFrame.setVisible(true);
-            java.awt.EventQueue.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
                     controlFrame.setVisible(true);
                 }
             });
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

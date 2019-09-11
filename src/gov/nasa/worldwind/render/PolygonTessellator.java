@@ -12,37 +12,32 @@ import java.nio.IntBuffer;
  * @author dcollins
  * @version $Id: PolygonTessellator.java 2067 2014-06-20 20:59:29Z dcollins $
  */
-public class PolygonTessellator
-{
-    protected static class TessCallbackAdapter extends GLUtessellatorCallbackAdapter
-    {
+public class PolygonTessellator {
+
+    protected static class TessCallbackAdapter extends GLUtessellatorCallbackAdapter {
+
         @Override
-        public void beginData(int type, Object userData)
-        {
+        public void beginData(int type, Object userData) {
             ((PolygonTessellator) userData).tessBegin(type);
         }
 
         @Override
-        public void edgeFlagData(boolean boundaryEdge, Object userData)
-        {
+        public void edgeFlagData(boolean boundaryEdge, Object userData) {
             ((PolygonTessellator) userData).tessEdgeFlag(boundaryEdge);
         }
 
         @Override
-        public void vertexData(Object vertexData, Object userData)
-        {
+        public void vertexData(Object vertexData, Object userData) {
             ((PolygonTessellator) userData).tessVertex(vertexData);
         }
 
         @Override
-        public void endData(Object userData)
-        {
+        public void endData(Object userData) {
             ((PolygonTessellator) userData).tessEnd();
         }
 
         @Override
-        public void combineData(double[] coords, Object[] vertexData, float[] weight, Object[] outData, Object userData)
-        {
+        public void combineData(double[] coords, Object[] vertexData, float[] weight, Object[] outData, Object userData) {
             ((PolygonTessellator) userData).tessCombine(coords, vertexData, weight, outData);
         }
     }
@@ -54,8 +49,7 @@ public class PolygonTessellator
     protected boolean isBoundaryEdge;
     protected double[] vertexCoord = new double[3];
 
-    public PolygonTessellator()
-    {
+    public PolygonTessellator() {
         this.tess = GLU.gluNewTess();
         TessCallbackAdapter callback = new TessCallbackAdapter();
         GLU.gluTessCallback(this.tess, GLU.GLU_TESS_BEGIN_DATA, callback);
@@ -68,63 +62,59 @@ public class PolygonTessellator
         this.boundaryIndices = IntBuffer.allocate(10);
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
-    public void setEnabled(boolean enabled)
-    {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
-    public IntBuffer getInteriorIndices()
-    {
+    public IntBuffer getInteriorIndices() {
         return this.interiorIndices;
     }
 
-    public IntBuffer getBoundaryIndices()
-    {
+    public IntBuffer getBoundaryIndices() {
         return this.boundaryIndices;
     }
 
-    public void reset()
-    {
-        if (!this.enabled)
+    public void reset() {
+        if (!this.enabled) {
             return;
+        }
 
         this.interiorIndices.clear();
         this.boundaryIndices.clear();
     }
 
-    public void setPolygonNormal(double x, double y, double z)
-    {
-        if (!this.enabled)
+    public void setPolygonNormal(double x, double y, double z) {
+        if (!this.enabled) {
             return;
+        }
 
         GLU.gluTessNormal(this.tess, x, y, z);
     }
 
-    public void beginPolygon()
-    {
-        if (!this.enabled)
+    public void beginPolygon() {
+        if (!this.enabled) {
             return;
+        }
 
         GLU.gluTessBeginPolygon(this.tess, this); // Use this as the polygon user data to enable callbacks to this instance.
     }
 
-    public void beginContour()
-    {
-        if (!this.enabled)
+    public void beginContour() {
+        if (!this.enabled) {
             return;
+        }
 
         GLU.gluTessBeginContour(this.tess);
     }
 
-    public void addVertex(double x, double y, double z, int index)
-    {
-        if (!this.enabled)
+    public void addVertex(double x, double y, double z, int index) {
+        if (!this.enabled) {
             return;
+        }
 
         this.vertexCoord[0] = x;
         this.vertexCoord[1] = y;
@@ -133,34 +123,31 @@ public class PolygonTessellator
         GLU.gluTessVertex(this.tess, this.vertexCoord, 0, index); // Associate the vertex with its index in the vertex array.
     }
 
-    public void endContour()
-    {
-        if (!this.enabled)
+    public void endContour() {
+        if (!this.enabled) {
             return;
+        }
 
         GLU.gluTessEndContour(this.tess);
     }
 
-    public void endPolygon()
-    {
-        if (!this.enabled)
+    public void endPolygon() {
+        if (!this.enabled) {
             return;
+        }
 
         GLU.gluTessEndPolygon(this.tess);
     }
 
-    protected void tessBegin(int type)
-    {
+    protected void tessBegin(int type) {
         // Intentionally left blank.
     }
 
-    protected void tessEdgeFlag(boolean boundaryEdge)
-    {
+    protected void tessEdgeFlag(boolean boundaryEdge) {
         this.isBoundaryEdge = boundaryEdge;
     }
 
-    protected void tessVertex(Object vertexData)
-    {
+    protected void tessVertex(Object vertexData) {
         // Accumulate interior indices appropriate for use as GL_interiorIndices primitives. Based on the GLU tessellator
         // documentation we can assume that the tessellator is providing interiorIndices because it's configured with the
         // edgeFlag callback.
@@ -169,17 +156,14 @@ public class PolygonTessellator
 
         // Accumulate outline indices appropriate for use as GL_boundaryIndices. The tessBoundaryEdge flag indicates whether or
         // not the triangle edge starting with the current vertex is a boundary edge.
-        if ((this.boundaryIndices.position() % 2) == 1)
-        {
+        if ((this.boundaryIndices.position() % 2) == 1) {
             this.boundaryIndices = this.addIndex(this.boundaryIndices, index);
         }
-        if (this.isBoundaryEdge)
-        {
+        if (this.isBoundaryEdge) {
             this.boundaryIndices = this.addIndex(this.boundaryIndices, index);
 
             int interiorCount = this.interiorIndices.position();
-            if (interiorCount > 0 && (interiorCount % 3) == 0)
-            {
+            if (interiorCount > 0 && (interiorCount % 3) == 0) {
                 int firstTriIndex = this.interiorIndices.get(interiorCount - 3);
                 this.boundaryIndices = this.addIndex(this.boundaryIndices, firstTriIndex);
             }
@@ -187,27 +171,21 @@ public class PolygonTessellator
 
     }
 
-    protected void tessEnd()
-    {
+    protected void tessEnd() {
         // Intentionally left blank.
     }
 
-    protected void tessCombine(double[] coords, Object[] vertexData, float[] weight, Object[] outData)
-    {
+    protected void tessCombine(double[] coords, Object[] vertexData, float[] weight, Object[] outData) {
         // TODO: Implement the combine callback to handle complex polygons.
     }
 
-    protected IntBuffer addIndex(IntBuffer buffer, int index)
-    {
-        if (!buffer.hasRemaining())
-        {
+    protected IntBuffer addIndex(IntBuffer buffer, int index) {
+        if (!buffer.hasRemaining()) {
             int newCapacity = buffer.capacity() + buffer.capacity() / 2; // increase capacity by 50%
             IntBuffer newBuffer = IntBuffer.allocate(newCapacity);
             newBuffer.put((IntBuffer) buffer.flip());
             return newBuffer.put(index);
-        }
-        else
-        {
+        } else {
             return buffer.put(index);
         }
     }

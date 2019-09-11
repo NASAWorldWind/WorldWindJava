@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.lineofsight;
 
 import gov.nasa.worldwind.geom.*;
@@ -21,17 +20,15 @@ import java.util.*;
  * @author tag
  * @version $Id: ShapeLineIntersector.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ShapeLineIntersector extends LineIntersector
-{
+public class ShapeLineIntersector extends LineIntersector {
+
     protected Iterable<Renderable> renderables;
 
-    public ShapeLineIntersector(Terrain terrain, int numThreads)
-    {
+    public ShapeLineIntersector(Terrain terrain, int numThreads) {
         super(terrain, numThreads);
     }
 
-    public Iterable<Renderable> getRenderables()
-    {
+    public Iterable<Renderable> getRenderables() {
         return renderables;
     }
 
@@ -40,8 +37,7 @@ public class ShapeLineIntersector extends LineIntersector
      *
      * @param renderables the renderables to intersect.
      */
-    public void setRenderables(Iterable<Renderable> renderables)
-    {
+    public void setRenderables(Iterable<Renderable> renderables) {
         this.renderables = renderables;
     }
 
@@ -50,15 +46,14 @@ public class ShapeLineIntersector extends LineIntersector
      *
      * @return true if this intersector has renderables, otherwise false.
      */
-    public boolean hasRenderables()
-    {
+    public boolean hasRenderables() {
         return this.renderables != null && this.renderables.iterator().hasNext();
     }
 
-    protected void doPerformIntersection(Position position) throws InterruptedException
-    {
-        if (this.renderables == null)
+    protected void doPerformIntersection(Position position) throws InterruptedException {
+        if (this.renderables == null) {
             return;
+        }
 
         Vec4 point = this.terrain.getSurfacePoint(position);
         Line line = new Line(this.referencePoint, point.subtract3(this.referencePoint));
@@ -66,38 +61,34 @@ public class ShapeLineIntersector extends LineIntersector
 
         List<Intersection> losList = new ArrayList<Intersection>();
 
-        for (Renderable renderable : this.renderables)
-        {
-            try
-            {
+        for (Renderable renderable : this.renderables) {
+            try {
                 List<Intersection> renderableIntersections = performRenderableIntersection(line, renderable);
-                if (renderableIntersections != null)
-                {
+                if (renderableIntersections != null) {
                     // Filter out intersections beyond the position.
-                    for (Intersection los : renderableIntersections)
-                    {
-                        if (los.getIntersectionPoint().distanceTo3(this.referencePoint) <= length)
+                    for (Intersection los : renderableIntersections) {
+                        if (los.getIntersectionPoint().distanceTo3(this.referencePoint) <= length) {
                             losList.add(los);
+                        }
                     }
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        if (!losList.isEmpty())
+        if (!losList.isEmpty()) {
             this.allIntersections.put(position, losList);
+        }
     }
 
     protected List<Intersection> performRenderableIntersection(Line line, Renderable renderable)
-        throws InterruptedException
-    {
+            throws InterruptedException {
         List<Intersection> intersections = null;
 
-        if (renderable instanceof ExtrudedPolygon)
+        if (renderable instanceof ExtrudedPolygon) {
             intersections = ((ExtrudedPolygon) renderable).intersect(line, this.terrain);
+        }
 
         return intersections;
     }

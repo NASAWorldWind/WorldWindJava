@@ -31,8 +31,8 @@ import com.jogamp.opengl.*;
  * @author dcollins
  * @version $Id: GLRuntimeCapabilities.java 1933 2014-04-14 22:54:19Z dcollins $
  */
-public class GLRuntimeCapabilities
-{
+public class GLRuntimeCapabilities {
+
     protected static final String GL_EXT_FRAMEBUFFER_OBJECT_STRING = "GL_EXT_framebuffer_object";
     protected static final String GL_EXT_TEXTURE_FILTER_ANISOTROPIC_STRING = "GL_EXT_texture_filter_anisotropic";
 
@@ -59,8 +59,7 @@ public class GLRuntimeCapabilities
      * "gov.nasa.worldwind.avkey.VBOUsage". If that key is not specified in the configuration then vertex-buffer usage
      * defaults to <code>true</code>.
      */
-    public GLRuntimeCapabilities()
-    {
+    public GLRuntimeCapabilities() {
         this.isAnisotropicTextureFilterEnabled = true;
         this.isFramebufferObjectEnabled = true;
         this.isVertexBufferObjectEnabled = Configuration.getBooleanValue(AVKey.VBO_USAGE, true);
@@ -77,10 +76,8 @@ public class GLRuntimeCapabilities
      *
      * @throws IllegalArgumentException if the glContext is null.
      */
-    public void initialize(GLContext glContext)
-    {
-        if (glContext == null)
-        {
+    public void initialize(GLContext glContext) {
+        if (glContext == null) {
             String message = Logging.getMessage("nullValue.GLContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -88,15 +85,14 @@ public class GLRuntimeCapabilities
 
         GL gl = glContext.getGL();
 
-        if (this.glVersion < 1.0)
-        {
+        if (this.glVersion < 1.0) {
             String s = gl.glGetString(GL.GL_VERSION);
-            if (s != null)
-            {
+            if (s != null) {
                 s = s.substring(0, 3);
                 Double d = WWUtil.convertStringToDouble(s);
-                if (d != null)
+                if (d != null) {
                     this.glVersion = d;
+                }
             }
         }
 
@@ -108,8 +104,7 @@ public class GLRuntimeCapabilities
         String glVendor = gl.glGetString(GL.GL_VENDOR);
         String glRenderer = gl.glGetString(GL.GL_RENDERER);
         if (glVendor != null && glVendor.toLowerCase().contains("vmware")
-            && glRenderer != null && glRenderer.toLowerCase().contains("svga3d"))
-        {
+                && glRenderer != null && glRenderer.toLowerCase().contains("svga3d")) {
             this.isVMwareSVGA3D = true;
         }
 
@@ -118,8 +113,7 @@ public class GLRuntimeCapabilities
         // Vertex Buffer Objects are supported in version 1.5 or greater only.
         this.isVertexBufferObjectAvailable = this.glVersion >= 1.5;
 
-        if (this.depthBits == 0)
-        {
+        if (this.depthBits == 0) {
             int[] params = new int[1];
             gl.glGetIntegerv(GL.GL_DEPTH_BITS, params, 0);
             this.depthBits = params[0];
@@ -127,12 +121,10 @@ public class GLRuntimeCapabilities
 
         // Texture max anisotropy defaults to -1. A value less than 2.0 indicates that this graphics context does not
         // support texture anisotropy.
-        if (this.maxTextureAnisotropy < 0)
-        {
+        if (this.maxTextureAnisotropy < 0) {
             // Documentation on the anisotropic texture filter is available at
             // http://www.opengl.org/registry/specs/EXT/texture_filter_anisotropic.txt
-            if (this.isAnisotropicTextureFilterAvailable)
-            {
+            if (this.isAnisotropicTextureFilterAvailable) {
                 // The maxAnisotropy value can be any real value. A value less than 2.0 indicates that the graphics
                 // context does not support texture anisotropy.
                 float[] params = new float[1];
@@ -141,15 +133,13 @@ public class GLRuntimeCapabilities
             }
         }
 
-        if (this.numTextureUnits == 0)
-        {
+        if (this.numTextureUnits == 0) {
             int[] params = new int[1];
             gl.glGetIntegerv(GL2.GL_MAX_TEXTURE_UNITS, params, 0);
             this.numTextureUnits = params[0];
         }
 
-        if (this.maxTextureSize == 0)
-        {
+        if (this.maxTextureSize == 0) {
             int[] params = new int[1];
             gl.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, params, 0);
             this.maxTextureSize = params[0];
@@ -162,8 +152,7 @@ public class GLRuntimeCapabilities
      *
      * @return GL version as a number.
      */
-    public double getGLVersion()
-    {
+    public double getGLVersion() {
         return this.glVersion;
     }
 
@@ -173,55 +162,53 @@ public class GLRuntimeCapabilities
      *
      * @param version the GL version as a number.
      */
-    public void setGLVersion(double version)
-    {
+    public void setGLVersion(double version) {
         this.glVersion = version;
     }
 
     /**
-     * Returns true if the OpenGL implementation is provided by the VMware SVGA 3D driver. Otherwise this returns
-     * false.
+     * Returns true if the OpenGL implementation is provided by the VMware SVGA 3D driver. Otherwise this returns false.
      * <p>
      * This flag is used to work around bugs and unusual behavior in the VMware SVGA 3D driver. For details on VMware
-     * graphics drivers, see <a href="http://www.vmware.com/files/pdf/techpaper/vmware-horizon-view-graphics-acceleration-deployment.pdf">http://www.vmware.com/files/pdf/techpaper/vmware-horizon-view-graphics-acceleration-deployment.pdf</a>.
+     * graphics drivers, see
+     * <a href="http://www.vmware.com/files/pdf/techpaper/vmware-horizon-view-graphics-acceleration-deployment.pdf">http://www.vmware.com/files/pdf/techpaper/vmware-horizon-view-graphics-acceleration-deployment.pdf</a>.
      *
      * @return true if the OpenGL implementation is VMware SVGA 3D, and false otherwise.
      */
-    public boolean isVMwareSVGA3D()
-    {
+    public boolean isVMwareSVGA3D() {
         return this.isVMwareSVGA3D;
     }
 
     /**
      * Returns true if anisotropic texture filtering is available in the current GL runtime, and is enabled. Otherwise
-     * this returns false. For details on GL anisotropic texture filtering, see <a href="http://www.opengl.org/registry/specs/EXT/texture_filter_anisotropic.txt">http://www.opengl.org/registry/specs/EXT/texture_filter_anisotropic.txt</a>.
+     * this returns false. For details on GL anisotropic texture filtering, see
+     * <a href="http://www.opengl.org/registry/specs/EXT/texture_filter_anisotropic.txt">http://www.opengl.org/registry/specs/EXT/texture_filter_anisotropic.txt</a>.
      *
      * @return true if anisotropic texture filtering is available and enabled, and false otherwise.
      */
-    public boolean isUseAnisotropicTextureFilter()
-    {
+    public boolean isUseAnisotropicTextureFilter() {
         return this.isAnisotropicTextureFilterAvailable && this.isAnisotropicTextureFilterEnabled;
     }
 
     /**
      * Returns true if framebuffer objects are available in the current GL runtime, and are enabled. Otherwise this
-     * returns false. For details on GL framebuffer objects, see <a href="http://www.opengl.org/registry/specs/EXT/framebuffer_object.txt">http://www.opengl.org/registry/specs/EXT/framebuffer_object.txt</a>.
+     * returns false. For details on GL framebuffer objects, see
+     * <a href="http://www.opengl.org/registry/specs/EXT/framebuffer_object.txt">http://www.opengl.org/registry/specs/EXT/framebuffer_object.txt</a>.
      *
      * @return true if framebuffer objects are available and enabled, and false otherwise.
      */
-    public boolean isUseFramebufferObject()
-    {
+    public boolean isUseFramebufferObject() {
         return this.isFramebufferObjectAvailable && this.isFramebufferObjectEnabled;
     }
 
     /**
      * Returns true if vertex buffer objects are available in the current GL runtime, and are enabled. Otherwise this
-     * returns false. For details on GL vertex buffer objects, see <a href="http://www.opengl.org/registry/specs/ARB/vertex_buffer_object.txt">http://www.opengl.org/registry/specs/ARB/vertex_buffer_object.txt</a>.
+     * returns false. For details on GL vertex buffer objects, see
+     * <a href="http://www.opengl.org/registry/specs/ARB/vertex_buffer_object.txt">http://www.opengl.org/registry/specs/ARB/vertex_buffer_object.txt</a>.
      *
      * @return true if vertex buffer objects are available and enabled, and false otherwise.
      */
-    public boolean isUseVertexBufferObject()
-    {
+    public boolean isUseVertexBufferObject() {
         return this.isVertexBufferObjectAvailable && this.isVertexBufferObjectEnabled;
     }
 
@@ -230,8 +217,7 @@ public class GLRuntimeCapabilities
      *
      * @return true if anisotropic texture filtering is available, and false otherwise.
      */
-    public boolean isAnisotropicTextureFilterAvailable()
-    {
+    public boolean isAnisotropicTextureFilterAvailable() {
         return this.isAnisotropicTextureFilterAvailable;
     }
 
@@ -240,8 +226,7 @@ public class GLRuntimeCapabilities
      *
      * @param available true to flag anisotropic texture filtering as available, and false otherwise.
      */
-    public void setAnisotropicTextureFilterAvailable(boolean available)
-    {
+    public void setAnisotropicTextureFilterAvailable(boolean available) {
         this.isAnisotropicTextureFilterAvailable = available;
     }
 
@@ -251,8 +236,7 @@ public class GLRuntimeCapabilities
      *
      * @return true if anisotropic texture filtering is enabled, and false otherwise.
      */
-    public boolean isAnisotropicTextureFilterEnabled()
-    {
+    public boolean isAnisotropicTextureFilterEnabled() {
         return this.isAnisotropicTextureFilterEnabled;
     }
 
@@ -261,8 +245,7 @@ public class GLRuntimeCapabilities
      *
      * @param enable true to enable anisotropic texture filtering, false to disable it.
      */
-    public void setAnisotropicTextureFilterEnabled(boolean enable)
-    {
+    public void setAnisotropicTextureFilterEnabled(boolean enable) {
         this.isAnisotropicTextureFilterEnabled = enable;
     }
 
@@ -271,8 +254,7 @@ public class GLRuntimeCapabilities
      *
      * @return true if framebuffer objects are available, and false otherwise.
      */
-    public boolean isFramebufferObjectAvailable()
-    {
+    public boolean isFramebufferObjectAvailable() {
         return this.isFramebufferObjectAvailable;
     }
 
@@ -281,8 +263,7 @@ public class GLRuntimeCapabilities
      *
      * @param available true to flag framebuffer objects as available, and false otherwise.
      */
-    public void setFramebufferObjectAvailable(boolean available)
-    {
+    public void setFramebufferObjectAvailable(boolean available) {
         this.isFramebufferObjectAvailable = available;
     }
 
@@ -292,8 +273,7 @@ public class GLRuntimeCapabilities
      *
      * @return true if framebuffer objects are enabled, and false otherwise.
      */
-    public boolean isFramebufferObjectEnabled()
-    {
+    public boolean isFramebufferObjectEnabled() {
         return this.isFramebufferObjectEnabled;
     }
 
@@ -302,8 +282,7 @@ public class GLRuntimeCapabilities
      *
      * @param enable true to enable framebuffer objects, false to disable them.
      */
-    public void setFramebufferObjectEnabled(boolean enable)
-    {
+    public void setFramebufferObjectEnabled(boolean enable) {
         this.isFramebufferObjectEnabled = enable;
     }
 
@@ -312,8 +291,7 @@ public class GLRuntimeCapabilities
      *
      * @return true if vertex buffer objects are available, and false otherwise.
      */
-    public boolean isVertexBufferObjectAvailable()
-    {
+    public boolean isVertexBufferObjectAvailable() {
         return this.isVertexBufferObjectAvailable;
     }
 
@@ -322,8 +300,7 @@ public class GLRuntimeCapabilities
      *
      * @param available true to flag vertex buffer objects as available, and false otherwise.
      */
-    public void setVertexBufferObjectAvailable(boolean available)
-    {
+    public void setVertexBufferObjectAvailable(boolean available) {
         this.isVertexBufferObjectAvailable = available;
     }
 
@@ -333,8 +310,7 @@ public class GLRuntimeCapabilities
      *
      * @return true if anisotropic vertex buffer objects are, and false otherwise.
      */
-    public boolean isVertexBufferObjectEnabled()
-    {
+    public boolean isVertexBufferObjectEnabled() {
         return this.isVertexBufferObjectEnabled;
     }
 
@@ -343,8 +319,7 @@ public class GLRuntimeCapabilities
      *
      * @param enable true to enable vertex buffer objects, false to disable them.
      */
-    public void setVertexBufferObjectEnabled(boolean enable)
-    {
+    public void setVertexBufferObjectEnabled(boolean enable) {
         this.isVertexBufferObjectEnabled = enable;
     }
 
@@ -356,8 +331,7 @@ public class GLRuntimeCapabilities
      *
      * @return the number of bitplanes in the current GL depth buffer.
      */
-    public int getDepthBits()
-    {
+    public int getDepthBits() {
         return this.depthBits;
     }
 
@@ -368,10 +342,8 @@ public class GLRuntimeCapabilities
      *
      * @throws IllegalArgumentException if depthBits is less than one.
      */
-    public void setDepthBits(int depthBits)
-    {
-        if (maxTextureSize < 1)
-        {
+    public void setDepthBits(int depthBits) {
+        if (maxTextureSize < 1) {
             String message = Logging.getMessage("generic.DepthBitsLessThanOne");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -387,20 +359,18 @@ public class GLRuntimeCapabilities
      *
      * @return the maximum degree of texture anisotropy supported.
      */
-    public double getMaxTextureAnisotropy()
-    {
+    public double getMaxTextureAnisotropy() {
         return this.maxTextureAnisotropy;
     }
 
     /**
-     * Sets the maximum degree of texture anisotropy supported by the current GL runtime.  This value defines the
-     * maximum ratio of the an anisotropic texture filter. So 2.0 would define a maximum ratio of 2:1. A valueless than
-     * 2 denotes that the anisotropic texture filter is not supported by the current GL runtime.
+     * Sets the maximum degree of texture anisotropy supported by the current GL runtime. This value defines the maximum
+     * ratio of the an anisotropic texture filter. So 2.0 would define a maximum ratio of 2:1. A valueless than 2
+     * denotes that the anisotropic texture filter is not supported by the current GL runtime.
      *
      * @param maxAnisotropy the maximum degree of texture anisotropy supported.
      */
-    public void setMaxTextureAnisotropy(double maxAnisotropy)
-    {
+    public void setMaxTextureAnisotropy(double maxAnisotropy) {
         this.maxTextureAnisotropy = maxAnisotropy;
     }
 
@@ -411,8 +381,7 @@ public class GLRuntimeCapabilities
      *
      * @return the maximum texture size supported, in texels.
      */
-    public int getMaxTextureSize()
-    {
+    public int getMaxTextureSize() {
         return this.maxTextureSize;
     }
 
@@ -425,10 +394,8 @@ public class GLRuntimeCapabilities
      *
      * @throws IllegalArgumentException if the size is less than one.
      */
-    public void setMaxTextureSize(int maxTextureSize)
-    {
-        if (maxTextureSize < 1)
-        {
+    public void setMaxTextureSize(int maxTextureSize) {
+        if (maxTextureSize < 1) {
             String message = Logging.getMessage("generic.MaxTextureSizeLessThanOne");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -442,8 +409,7 @@ public class GLRuntimeCapabilities
      *
      * @return the number of texture units supported.
      */
-    public int getNumTextureUnits()
-    {
+    public int getNumTextureUnits() {
         return this.numTextureUnits;
     }
 
@@ -454,10 +420,8 @@ public class GLRuntimeCapabilities
      *
      * @throws IllegalArgumentException if the number of texture units is less than one.
      */
-    public void setNumTextureUnits(int numTextureUnits)
-    {
-        if (numTextureUnits < 1)
-        {
+    public void setNumTextureUnits(int numTextureUnits) {
+        if (numTextureUnits < 1) {
             String message = Logging.getMessage("generic.NumTextureUnitsLessThanOne");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);

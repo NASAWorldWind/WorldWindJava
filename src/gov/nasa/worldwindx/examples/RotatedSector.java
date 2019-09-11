@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.geom.*;
@@ -23,18 +22,16 @@ import java.awt.event.*;
  * @author tag
  * @version $Id: RotatedSector.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class RotatedSector extends ApplicationTemplate
-{
+public class RotatedSector extends ApplicationTemplate {
+
     private static final Sector sector = Sector.fromDegrees(45, 47, -123, -122);
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
-            try
-            {
+            try {
                 // Create the Quad from a Sector
                 Globe globe = this.getWwd().getModel().getGlobe();
                 double radius = globe.getRadiusAt(sector.getCentroid());
@@ -51,29 +48,23 @@ public class RotatedSector extends ApplicationTemplate
                 insertBeforeCompass(this.getWwd(), layer);
 
                 // Rotate the quad continuously
-                Timer timer = new Timer(50, new ActionListener()
-                {
-                    public void actionPerformed(ActionEvent actionEvent)
-                    {
+                Timer timer = new Timer(50, new ActionListener() {
+                    public void actionPerformed(ActionEvent actionEvent) {
                         // Increment the current heading if the layer is visible
-                        if (layer.isEnabled())
-                        {
+                        if (layer.isEnabled()) {
                             quad.setHeading(Angle.fromDegrees((quad.getHeading().getDegrees() + 1) % 360));
                             getWwd().redraw();
                         }
                     }
                 });
                 timer.start();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("Rotated Sector", AppFrame.class);
     }
 }

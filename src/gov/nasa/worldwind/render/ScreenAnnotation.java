@@ -21,19 +21,18 @@ import java.awt.*;
  * @see AbstractAnnotation
  * @see AnnotationAttributes
  */
-public class ScreenAnnotation extends AbstractAnnotation
-{
+public class ScreenAnnotation extends AbstractAnnotation {
+
     protected Point screenPoint;
     protected Position position;
 
     /**
      * Creates a <code>ScreenAnnotation</code> with the given text, at the given viewport position.
      *
-     * @param text     the annotation text.
+     * @param text the annotation text.
      * @param position the annotation viewport position.
      */
-    public ScreenAnnotation(String text, Point position)
-    {
+    public ScreenAnnotation(String text, Point position) {
         this.init(text, position, null, null);
     }
 
@@ -41,12 +40,11 @@ public class ScreenAnnotation extends AbstractAnnotation
      * Creates a <code>ScreenAnnotation</code> with the given text, at the given viewport position. Specifiy the
      * <code>Font</code> to be used.
      *
-     * @param text     the annotation text.
+     * @param text the annotation text.
      * @param position the annotation viewport position.
-     * @param font     the <code>Font</code> to use.
+     * @param font the <code>Font</code> to use.
      */
-    public ScreenAnnotation(String text, Point position, Font font)
-    {
+    public ScreenAnnotation(String text, Point position, Font font) {
         this.init(text, position, font, null);
     }
 
@@ -54,13 +52,12 @@ public class ScreenAnnotation extends AbstractAnnotation
      * Creates a <code>ScreenAnnotation</code> with the given text, at the given viewport position. Specifiy the
      * <code>Font</code> and text <code>Color</code> to be used.
      *
-     * @param text      the annotation text.
-     * @param position  the annotation viewport position.
-     * @param font      the <code>Font</code> to use.
+     * @param text the annotation text.
+     * @param position the annotation viewport position.
+     * @param font the <code>Font</code> to use.
      * @param textColor the text <code>Color</code>.
      */
-    public ScreenAnnotation(String text, Point position, Font font, Color textColor)
-    {
+    public ScreenAnnotation(String text, Point position, Font font, Color textColor) {
         this.init(text, position, font, textColor);
     }
 
@@ -68,28 +65,24 @@ public class ScreenAnnotation extends AbstractAnnotation
      * Creates a <code>ScreenAnnotation</code> with the given text, at the given viewport position. Specify the default
      * {@link AnnotationAttributes} set.
      *
-     * @param text     the annotation text.
+     * @param text the annotation text.
      * @param position the annotation viewport position.
      * @param defaults the default {@link AnnotationAttributes} set.
      */
-    public ScreenAnnotation(String text, Point position, AnnotationAttributes defaults)
-    {
-        if (text == null)
-        {
+    public ScreenAnnotation(String text, Point position, AnnotationAttributes defaults) {
+        if (text == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (position == null)
-        {
+        if (position == null) {
             String message = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (defaults == null)
-        {
+        if (defaults == null) {
             String message = Logging.getMessage("nullValue.AnnotationAttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -102,17 +95,14 @@ public class ScreenAnnotation extends AbstractAnnotation
         this.getAttributes().setDrawOffset(new Point(0, 0));
     }
 
-    private void init(String text, Point position, Font font, Color textColor)
-    {
-        if (text == null)
-        {
+    private void init(String text, Point position, Font font, Color textColor) {
+        if (text == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (position == null)
-        {
+        if (position == null) {
             String message = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -131,8 +121,7 @@ public class ScreenAnnotation extends AbstractAnnotation
      *
      * @return the <code>Point</code> where the annotation is drawn in the viewport.
      */
-    public Point getScreenPoint()
-    {
+    public Point getScreenPoint() {
         return this.screenPoint;
     }
 
@@ -144,19 +133,16 @@ public class ScreenAnnotation extends AbstractAnnotation
      * @return the <code>Point</code> where the annotation is drawn in the viewport.
      */
     @SuppressWarnings({"UnusedDeclaration"})
-    protected Point getScreenPoint(DrawContext dc)
-    {
+    protected Point getScreenPoint(DrawContext dc) {
         return this.position != null ? this.computeAnnotationPosition(dc, this.position) : this.screenPoint;
     }
 
-    protected Point computeAnnotationPosition(DrawContext dc, Position pos)
-    {
+    protected Point computeAnnotationPosition(DrawContext dc, Position pos) {
         Vec4 surfacePoint = dc.getTerrain().getSurfacePoint(pos);
-        if (surfacePoint == null)
-        {
+        if (surfacePoint == null) {
             Globe globe = dc.getGlobe();
             surfacePoint = globe.computePointFromPosition(pos.getLatitude(), pos.getLongitude(),
-                globe.getElevation(pos.getLatitude(), pos.getLongitude()));
+                    globe.getElevation(pos.getLatitude(), pos.getLongitude()));
         }
 
         Vec4 pt = dc.getView().project(surfacePoint);
@@ -169,10 +155,8 @@ public class ScreenAnnotation extends AbstractAnnotation
      *
      * @param position the <code>Point</code> where the annotation will be drawn in the viewport.
      */
-    public void setScreenPoint(Point position)
-    {
-        if (position == null)
-        {
+    public void setScreenPoint(Point position) {
+        if (position == null) {
             String message = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -185,8 +169,7 @@ public class ScreenAnnotation extends AbstractAnnotation
      *
      * @return The position previously set.
      */
-    public Position getPosition()
-    {
+    public Position getPosition() {
         return position;
     }
 
@@ -195,20 +178,18 @@ public class ScreenAnnotation extends AbstractAnnotation
      * overrides this object's screen point and computes it anew each time this annotation is drawn.
      *
      * @param position This annotation's geographic position. May be null, in which case this annotation's screen point
-     *                 is used directly.
+     * is used directly.
      *
      * @see #setScreenPoint(java.awt.Point)
      */
-    public void setPosition(Position position)
-    {
+    public void setPosition(Position position) {
         this.position = position;
     }
 //**************************************************************//
     //********************  Rendering  *****************************//
     //**************************************************************//
 
-    protected Rectangle computeBounds(DrawContext dc)
-    {
+    protected Rectangle computeBounds(DrawContext dc) {
         java.awt.Dimension size = this.getPreferredSize(dc);
         double finalScale = this.computeScale(dc);
         java.awt.Point offset = this.getAttributes().getDrawOffset();
@@ -228,26 +209,24 @@ public class ScreenAnnotation extends AbstractAnnotation
         return this.computeBoundingRectangle(frameRect, sp.x, sp.y);
     }
 
-    protected Point computeSize(DrawContext dc)
-    {
+    protected Point computeSize(DrawContext dc) {
         double finalScale = this.computeScale(dc);
         java.awt.Dimension size = this.getPreferredSize(dc);
 
         return new Point((int) (size.width * finalScale), (int) (size.height * finalScale));
     }
 
-    protected double[] computeOffset(DrawContext dc)
-    {
+    protected double[] computeOffset(DrawContext dc) {
         double finalScale = this.computeScale(dc);
         Point offset = this.getAttributes().getDrawOffset();
 
-        return new double[] {offset.x * finalScale, offset.y * finalScale};
+        return new double[]{offset.x * finalScale, offset.y * finalScale};
     }
 
-    protected void doRenderNow(DrawContext dc)
-    {
-        if (dc.isPickingMode() && this.getPickSupport() == null)
+    protected void doRenderNow(DrawContext dc) {
+        if (dc.isPickingMode() && this.getPickSupport() == null) {
             return;
+        }
 
         GL gl = dc.getGL();
         gl.glDepthFunc(GL.GL_ALWAYS);
@@ -261,26 +240,20 @@ public class ScreenAnnotation extends AbstractAnnotation
     //**************************************************************//
     //********************  Restorable State  **********************//
     //**************************************************************//
-
     /**
      * Returns an XML state document String describing the public attributes of this ScreenAnnotation.
      *
      * @return XML state document string describing this ScreenAnnotation.
      */
-    public String getRestorableState()
-    {
+    public String getRestorableState() {
         RestorableSupport restorableSupport = null;
 
         // Try to parse the superclass' xml state document, if it defined one.
         String superStateInXml = super.getRestorableState();
-        if (superStateInXml != null)
-        {
-            try
-            {
+        if (superStateInXml != null) {
+            try {
                 restorableSupport = RestorableSupport.parse(superStateInXml);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 // Parsing the document specified by the superclass failed.
                 String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", superStateInXml);
                 Logging.logger().severe(message);
@@ -288,17 +261,17 @@ public class ScreenAnnotation extends AbstractAnnotation
         }
 
         // Create our own state document from scratch.
-        if (restorableSupport == null)
+        if (restorableSupport == null) {
             restorableSupport = RestorableSupport.newRestorableSupport();
+        }
         // Creating a new RestorableSupport failed. RestorableSupport logged the problem, so just return null.
-        if (restorableSupport == null)
+        if (restorableSupport == null) {
             return null;
+        }
 
-        if (this.screenPoint != null)
-        {
+        if (this.screenPoint != null) {
             RestorableSupport.StateObject screenPointStateObj = restorableSupport.addStateObject("screenPoint");
-            if (screenPointStateObj != null)
-            {
+            if (screenPointStateObj != null) {
                 restorableSupport.addStateValueAsDouble(screenPointStateObj, "x", this.screenPoint.getX());
                 restorableSupport.addStateValueAsDouble(screenPointStateObj, "y", this.screenPoint.getY());
             }
@@ -316,34 +289,26 @@ public class ScreenAnnotation extends AbstractAnnotation
      * @param stateInXml an XML document String describing a ScreenAnnotation.
      *
      * @throws IllegalArgumentException If <code>stateInXml</code> is null, or if <code>stateInXml</code> is not a well
-     *                                  formed XML document String.
+     * formed XML document String.
      */
-    public void restoreState(String stateInXml)
-    {
-        if (stateInXml == null)
-        {
+    public void restoreState(String stateInXml) {
+        if (stateInXml == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         // Allow the superclass to restore it's state.
-        try
-        {
+        try {
             super.restoreState(stateInXml);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Superclass will log the exception.
         }
 
         RestorableSupport restorableSupport;
-        try
-        {
+        try {
             restorableSupport = RestorableSupport.parse(stateInXml);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Parsing the document specified by stateInXml failed.
             String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
             Logging.logger().severe(message);
@@ -353,12 +318,12 @@ public class ScreenAnnotation extends AbstractAnnotation
         // Restore the screenPoint property only if all parts are available.
         // We will not restore a partial screenPoint (for example, just the x value).
         RestorableSupport.StateObject screenPointStateObj = restorableSupport.getStateObject("screenPoint");
-        if (screenPointStateObj != null)
-        {
+        if (screenPointStateObj != null) {
             Double xState = restorableSupport.getStateValueAsDouble(screenPointStateObj, "x");
             Double yState = restorableSupport.getStateValueAsDouble(screenPointStateObj, "y");
-            if (xState != null && yState != null)
+            if (xState != null && yState != null) {
                 setScreenPoint(new Point(xState.intValue(), yState.intValue()));
+            }
         }
     }
 }

@@ -11,21 +11,18 @@ import gov.nasa.worldwind.avlist.AVList;
  * @author dcollins
  * @version $Id: GeoJSONLineString.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeoJSONLineString extends GeoJSONGeometry
-{
-    public GeoJSONLineString(AVList fields)
-    {
+public class GeoJSONLineString extends GeoJSONGeometry {
+
+    public GeoJSONLineString(AVList fields) {
         super(fields);
     }
 
     @Override
-    public boolean isLineString()
-    {
+    public boolean isLineString() {
         return true;
     }
 
-    public GeoJSONPositionArray getCoordinates()
-    {
+    public GeoJSONPositionArray getCoordinates() {
         return (GeoJSONPositionArray) this.getValue(GeoJSONConstants.FIELD_COORDINATES);
     }
 }

@@ -9,8 +9,8 @@ package gov.nasa.worldwind.formats.vpf;
  * @author dcollins
  * @version $Id: NIMAConstants.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface NIMAConstants
-{
+public interface NIMAConstants {
+
     // Reserved Directory Names
     // MIL-PRF-0089049, section 3.16
     final String REFERENCE_LIBRARY = "rference";

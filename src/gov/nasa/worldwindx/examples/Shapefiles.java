@@ -18,58 +18,49 @@ import javax.swing.*;
  *
  * @version $Id: Shapefiles.java 3212 2015-06-18 02:45:56Z tgaskins $
  */
-public class Shapefiles extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class Shapefiles extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             ShapefileLayerFactory factory = new ShapefileLayerFactory();
 
             // Specify an attribute delegate to assign random attributes to each shapefile record.
             final RandomShapeAttributes randomAttrs = new RandomShapeAttributes();
-            factory.setAttributeDelegate(new ShapefileRenderable.AttributeDelegate()
-            {
+            factory.setAttributeDelegate(new ShapefileRenderable.AttributeDelegate() {
                 @Override
                 public void assignAttributes(ShapefileRecord shapefileRecord,
-                    ShapefileRenderable.Record renderableRecord)
-                {
+                        ShapefileRenderable.Record renderableRecord) {
                     renderableRecord.setAttributes(randomAttrs.nextAttributes().asShapeAttributes());
                 }
             });
 
             // Load the shapefile. Define the completion callback.
             factory.createFromShapefileSource("testData/shapefiles/TM_WORLD_BORDERS-0.3.shp",
-                new ShapefileLayerFactory.CompletionCallback()
-                {
-                    @Override
-                    public void completion(Object result)
-                    {
-                        final Layer layer = (Layer) result; // the result is the layer the factory created
-                        layer.setName(WWIO.getFilename(layer.getName()));
+                    new ShapefileLayerFactory.CompletionCallback() {
+                @Override
+                public void completion(Object result) {
+                    final Layer layer = (Layer) result; // the result is the layer the factory created
+                    layer.setName(WWIO.getFilename(layer.getName()));
 
-                        // Add the layer to the WorldWindow's layer list on the Event Dispatch Thread.
-                        SwingUtilities.invokeLater(new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                AppFrame.this.getWwd().getModel().getLayers().add(layer);
-                            }
-                        });
-                    }
+                    // Add the layer to the WorldWindow's layer list on the Event Dispatch Thread.
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            AppFrame.this.getWwd().getModel().getLayers().add(layer);
+                        }
+                    });
+                }
 
-                    @Override
-                    public void exception(Exception e)
-                    {
-                        Logging.logger().log(java.util.logging.Level.SEVERE, e.getMessage(), e);
-                    }
-                });
+                @Override
+                public void exception(Exception e) {
+                    Logging.logger().log(java.util.logging.Level.SEVERE, e.getMessage(), e);
+                }
+            });
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         start("WorldWind Shapefiles", AppFrame.class);
     }
 }

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -12,9 +11,11 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLModel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLModel extends KMLAbstractGeometry
-{
-    /** Flag to indicate that the link has been fetched from the hash map. */
+public class KMLModel extends KMLAbstractGeometry {
+
+    /**
+     * Flag to indicate that the link has been fetched from the hash map.
+     */
     protected boolean linkFetched = false;
     protected KMLLink link;
 
@@ -23,43 +24,35 @@ public class KMLModel extends KMLAbstractGeometry
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLModel(String namespaceURI)
-    {
+    public KMLModel(String namespaceURI) {
         super(namespaceURI);
     }
 
-    public String getAltitudeMode()
-    {
+    public String getAltitudeMode() {
         return (String) this.getField("altitudeMode");
     }
 
-    public KMLLocation getLocation()
-    {
+    public KMLLocation getLocation() {
         return (KMLLocation) this.getField("Location");
     }
 
-    public KMLOrientation getOrientation()
-    {
+    public KMLOrientation getOrientation() {
         return (KMLOrientation) this.getField("Orientation");
     }
 
-    public KMLScale getScale()
-    {
+    public KMLScale getScale() {
         return (KMLScale) this.getField("Scale");
     }
 
-    public KMLLink getLink()
-    {
-        if (!this.linkFetched)
-        {
+    public KMLLink getLink() {
+        if (!this.linkFetched) {
             this.link = (KMLLink) this.getField("Link");
             this.linkFetched = true;
         }
         return this.link;
     }
 
-    public KMLResourceMap getResourceMap()
-    {
+    public KMLResourceMap getResourceMap() {
         return (KMLResourceMap) this.getField("ResourceMap");
     }
 }

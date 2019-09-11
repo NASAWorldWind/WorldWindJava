@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render;
 
 import com.jogamp.common.nio.Buffers;
@@ -70,73 +69,95 @@ import java.util.*;
  * @author tag
  * @version $Id: ExtrudedPolygon.java 2111 2014-06-30 18:09:45Z tgaskins $
  */
-public class ExtrudedPolygon extends AbstractShape
-{
-    /** The default interior color for sides. */
+public class ExtrudedPolygon extends AbstractShape {
+
+    /**
+     * The default interior color for sides.
+     */
     protected static final Material DEFAULT_SIDES_INTERIOR_MATERIAL = Material.LIGHT_GRAY;
-    /** The default altitude mode. */
+    /**
+     * The default altitude mode.
+     */
     protected static final int DEFAULT_ALTITUDE_MODE = WorldWind.CONSTANT;
 
-    /** The attributes used if attributes are not specified. */
+    /**
+     * The attributes used if attributes are not specified.
+     */
     protected static final ShapeAttributes defaultSideAttributes;
 
     protected double baseDepth;
 
-    static
-    {
+    static {
         defaultSideAttributes = new BasicShapeAttributes();
         defaultSideAttributes.setInteriorMaterial(DEFAULT_SIDES_INTERIOR_MATERIAL);
     }
 
-    /** The <code>ShapeData</code> class holds globe-specific data for this shape. */
-    protected static class ShapeData extends AbstractShapeData implements Iterable<ExtrudedBoundaryInfo>
-    {
-        /** The boundary locations of the associated shape. Copied from that shape during construction. */
+    /**
+     * The <code>ShapeData</code> class holds globe-specific data for this shape.
+     */
+    protected static class ShapeData extends AbstractShapeData implements Iterable<ExtrudedBoundaryInfo> {
+
+        /**
+         * The boundary locations of the associated shape. Copied from that shape during construction.
+         */
         protected List<ExtrudedBoundaryInfo> boundaries = new ArrayList<ExtrudedBoundaryInfo>();
-        /** A buffer holding the Cartesian cap vertices of all the shape's boundaries. */
+        /**
+         * A buffer holding the Cartesian cap vertices of all the shape's boundaries.
+         */
         protected FloatBuffer capVertexBuffer;
-        /** A buffer holding the cap normals of all the shape's boundaries. */
+        /**
+         * A buffer holding the cap normals of all the shape's boundaries.
+         */
         protected FloatBuffer capNormalBuffer;
-        /** A buffer holding the Cartesian vertices of all the shape's side vertices. */
+        /**
+         * A buffer holding the Cartesian vertices of all the shape's side vertices.
+         */
         protected FloatBuffer sideVertexBuffer;
-        /** A buffer holding the side normals of all the shape's boundaries. */
+        /**
+         * A buffer holding the side normals of all the shape's boundaries.
+         */
         protected FloatBuffer sideNormalBuffer;
-        /** A buffer holding the texture coordinates of all the shape's faces. Non-null only when texture is applied. */
+        /**
+         * A buffer holding the texture coordinates of all the shape's faces. Non-null only when texture is applied.
+         */
         protected FloatBuffer sideTextureCoordsBuffer;
 
         // Tessellation fields
-        /** This shape's tessellation. */
+        /**
+         * This shape's tessellation.
+         */
         protected GLUTessellatorSupport.CollectIndexListsCallback cb;
         /**
          * The indices identifying the cap vertices in a shape data's vertex buffer. Determined when this shape is
          * tessellated, which occurs only once unless the shape's boundaries are re-specified.
          */
         protected IntBuffer capFillIndices;
-        /** Slices of <code>capFillIndices</code>, one per boundary. */
+        /**
+         * Slices of <code>capFillIndices</code>, one per boundary.
+         */
         protected List<IntBuffer> capFillIndexBuffers;
-        /** Indicates whether a tessellation error occurred. No more attempts to tessellate will be made if set to true. */
+        /**
+         * Indicates whether a tessellation error occurred. No more attempts to tessellate will be made if set to true.
+         */
         protected boolean tessellationError = false;
 
         /**
          * Constructs an instance using the boundaries of a specified extruded polygon.
          *
-         * @param dc    the current draw context.
+         * @param dc the current draw context.
          * @param shape this shape.
          */
-        public ShapeData(DrawContext dc, ExtrudedPolygon shape)
-        {
+        public ShapeData(DrawContext dc, ExtrudedPolygon shape) {
             super(dc, shape.minExpiryTime, shape.maxExpiryTime);
 
-            if (shape.boundaries.size() < 1)
-            {
+            if (shape.boundaries.size() < 1) {
                 // add a placeholder for the outer boundary
                 this.boundaries.add(new ExtrudedBoundaryInfo(new ArrayList<LatLon>()));
                 return;
             }
 
             // Copy the shape's boundaries.
-            for (List<? extends LatLon> boundary : shape.boundaries)
-            {
+            for (List<? extends LatLon> boundary : shape.boundaries) {
                 this.boundaries.add(new ExtrudedBoundaryInfo(boundary));
             }
 
@@ -144,15 +165,13 @@ public class ExtrudedPolygon extends AbstractShape
             this.copySideTextureReferences(shape);
         }
 
-        protected void copySideTextureReferences(ExtrudedPolygon shape)
-        {
-            if (shape.sideTextures != null)
-            {
-                for (int i = 0; i < this.boundaries.size() && i < shape.sideTextures.size(); i++)
-                {
+        protected void copySideTextureReferences(ExtrudedPolygon shape) {
+            if (shape.sideTextures != null) {
+                for (int i = 0; i < this.boundaries.size() && i < shape.sideTextures.size(); i++) {
                     ExtrudedBoundaryInfo ebi = this.boundaries.get(i);
-                    if (ebi != null)
+                    if (ebi != null) {
                         this.boundaries.get(i).sideTextures = shape.sideTextures.get(i);
+                    }
                 }
             }
         }
@@ -162,8 +181,7 @@ public class ExtrudedPolygon extends AbstractShape
          *
          * @return this shape data's outer boundary information.
          */
-        protected ExtrudedBoundaryInfo getOuterBoundaryInfo()
-        {
+        protected ExtrudedBoundaryInfo getOuterBoundaryInfo() {
             return this.boundaries.get(0);
         }
 
@@ -172,15 +190,13 @@ public class ExtrudedPolygon extends AbstractShape
          *
          * @return an iterator over this shape data's boundary info.
          */
-        public Iterator<ExtrudedBoundaryInfo> iterator()
-        {
+        public Iterator<ExtrudedBoundaryInfo> iterator() {
             return this.boundaries.iterator();
         }
     }
 
     @Override
-    protected AbstractShapeData createCacheEntry(DrawContext dc)
-    {
+    protected AbstractShapeData createCacheEntry(DrawContext dc) {
         return new ShapeData(dc, this);
     }
 
@@ -189,8 +205,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return the currently active shape data.
      */
-    protected ShapeData getCurrent()
-    {
+    protected ShapeData getCurrent() {
         return (ShapeData) this.getCurrentData();
     }
 
@@ -198,36 +213,62 @@ public class ExtrudedPolygon extends AbstractShape
      * Holds globe-specific information for each contour of the polygon. This class is meant only to be used as a way to
      * group per-boundary information in globe-specific <code>ShapeData</code>.
      */
-    protected static class ExtrudedBoundaryInfo
-    {
-        /** The boundary vertices. This is merely a reference to the paren't shape's boundaries. */
+    protected static class ExtrudedBoundaryInfo {
+
+        /**
+         * The boundary vertices. This is merely a reference to the paren't shape's boundaries.
+         */
         protected List<? extends LatLon> locations;
-        /** The number of faces in the boundary. (The number of positions - 1.) */
+        /**
+         * The number of faces in the boundary. (The number of positions - 1.)
+         */
         protected int faceCount;
 
-        /** The vertices defining the boundary's cap. */
+        /**
+         * The vertices defining the boundary's cap.
+         */
         protected Vec4[] capVertices;
-        /** The vertices defining the boundary's base. These are always on the terrain. */
+        /**
+         * The vertices defining the boundary's base. These are always on the terrain.
+         */
         protected Vec4[] baseVertices;
 
-        /** Indices identifying the cap vertices in the vertex buffer. */
+        /**
+         * Indices identifying the cap vertices in the vertex buffer.
+         */
         protected IntBuffer capFillIndices;
-        /** Indices identifying the cap edges in the vertex buffer. */
+        /**
+         * Indices identifying the cap edges in the vertex buffer.
+         */
         protected IntBuffer capEdgeIndices;
-        /** A buffer holding the vertices defining the boundary's cap. */
+        /**
+         * A buffer holding the vertices defining the boundary's cap.
+         */
         protected FloatBuffer capVertexBuffer;
-        /** A buffer holding the boundary cap's vertex normals. Non-null only when lighting is applied. */
+        /**
+         * A buffer holding the boundary cap's vertex normals. Non-null only when lighting is applied.
+         */
         protected FloatBuffer capNormalBuffer;
 
-        /** The indices identifying the boundary's side faces in the side-vertex buffer. */
+        /**
+         * The indices identifying the boundary's side faces in the side-vertex buffer.
+         */
         protected IntBuffer sideIndices;
-        /** The indices identifying the boundary's edge indices in the side-vertex buffer. */
+        /**
+         * The indices identifying the boundary's edge indices in the side-vertex buffer.
+         */
         protected IntBuffer sideEdgeIndices;
-        /** A buffer holding the side vertices. These are passed to OpenGL. */
+        /**
+         * A buffer holding the side vertices. These are passed to OpenGL.
+         */
         protected FloatBuffer sideVertexBuffer;
-        /** A buffer holding per-vertex normals. Non-null only when lighting is applied. */
+        /**
+         * A buffer holding per-vertex normals. Non-null only when lighting is applied.
+         */
         protected FloatBuffer sideNormalBuffer;
-        /** The textures to apply to this boundary, one per face. */
+        /**
+         * The textures to apply to this boundary, one per face.
+         */
         protected List<WWTexture> sideTextures;
         /**
          * The texture coordinates to use when applying side textures, a coordinate pair for each of 4 corners. These
@@ -241,8 +282,7 @@ public class ExtrudedPolygon extends AbstractShape
          *
          * @param locations the boundary locations. Only this reference is kept; the boundaries are not copied.
          */
-        public ExtrudedBoundaryInfo(List<? extends LatLon> locations)
-        {
+        public ExtrudedBoundaryInfo(List<? extends LatLon> locations) {
             this.locations = locations;
             this.faceCount = locations.size() - 1;
         }
@@ -254,7 +294,9 @@ public class ExtrudedPolygon extends AbstractShape
     protected static HashMap<Integer, IntBuffer> sideFillIndexBuffers = new HashMap<Integer, IntBuffer>();
     protected static HashMap<Integer, IntBuffer> sideEdgeIndexBuffers = new HashMap<Integer, IntBuffer>();
 
-    /** Indicates the number of vertices that must be present in order for VBOs to be used to render this shape. */
+    /**
+     * Indicates the number of vertices that must be present in order for VBOs to be used to render this shape.
+     */
     protected static final int VBO_THRESHOLD = Configuration.getIntegerValue(AVKey.VBO_THRESHOLD, 30);
 
     /**
@@ -262,42 +304,71 @@ public class ExtrudedPolygon extends AbstractShape
      * for the outer boundary, but its list is empty if an outer boundary has not been specified.
      */
     protected List<List<? extends LatLon>> boundaries;
-    /** The total number of locations in all boundaries. */
+    /**
+     * The total number of locations in all boundaries.
+     */
     protected int totalNumLocations;
-    /** The total number of faces in all this shape's boundaries. */
+    /**
+     * The total number of faces in all this shape's boundaries.
+     */
     protected int totalFaceCount;
 
-    /** This shape's height. Default is 1. */
+    /**
+     * This shape's height. Default is 1.
+     */
     protected double height = 1;
 
-    /** The attributes to use when drawing this shape's sides. */
+    /**
+     * The attributes to use when drawing this shape's sides.
+     */
     protected ShapeAttributes sideAttributes;
-    /** The attributes to use when drawing this shape's sides in highlight mode. */
+    /**
+     * The attributes to use when drawing this shape's sides in highlight mode.
+     */
     protected ShapeAttributes sideHighlightAttributes;
-    /** The currently active side attributes, derived from the specified attributes. Current only during rendering. */
+    /**
+     * The currently active side attributes, derived from the specified attributes. Current only during rendering.
+     */
     protected ShapeAttributes activeSideAttributes = new BasicShapeAttributes();
-    /** This shape's side textures. */
+    /**
+     * This shape's side textures.
+     */
     protected List<List<WWTexture>> sideTextures;
-    /** This shape's cap texture. */
+    /**
+     * This shape's cap texture.
+     */
     protected WWTexture capTexture;
-    /** This shape's cap texture coordinates. */
+    /**
+     * This shape's cap texture coordinates.
+     */
     protected FloatBuffer capTextureCoords;
-    /** Indicates whether the cap should be drawn. */
+    /**
+     * Indicates whether the cap should be drawn.
+     */
     protected boolean enableCap = true;
-    /** Indicates whether the sides should be drawn. */
+    /**
+     * Indicates whether the sides should be drawn.
+     */
     protected boolean enableSides = true;
 
     // Intersection fields
-    /** The terrain used in the most recent intersection calculations. */
+    /**
+     * The terrain used in the most recent intersection calculations.
+     */
     protected Terrain previousIntersectionTerrain;
-    /** The globe state key for the globe used in the most recent intersection calculation. */
+    /**
+     * The globe state key for the globe used in the most recent intersection calculation.
+     */
     protected Object previousIntersectionGlobeStateKey;
-    /** The shape data used for the previous intersection calculation. */
+    /**
+     * The shape data used for the previous intersection calculation.
+     */
     protected ShapeData previousIntersectionShapeData;
 
-    /** Constructs an extruded polygon with an empty outer boundary and a default height of 1 meter. */
-    public ExtrudedPolygon()
-    {
+    /**
+     * Constructs an extruded polygon with an empty outer boundary and a default height of 1 meter.
+     */
+    public ExtrudedPolygon() {
         this.boundaries = new ArrayList<List<? extends LatLon>>();
         this.boundaries.add(new ArrayList<LatLon>()); // placeholder for outer boundary
     }
@@ -306,10 +377,9 @@ public class ExtrudedPolygon extends AbstractShape
      * Constructs an extruded polygon of a specified height and an empty outer boundary.
      *
      * @param height the shape height, in meters. May be null, in which case a height of 1 is used. The height is used
-     *               only when the altitude mode is {@link WorldWind#CONSTANT}, which is the default for this shape.
+     * only when the altitude mode is {@link WorldWind#CONSTANT}, which is the default for this shape.
      */
-    public ExtrudedPolygon(Double height)
-    {
+    public ExtrudedPolygon(Double height) {
         this(); // to initialize the instance
 
         this.setHeight(height);
@@ -319,25 +389,22 @@ public class ExtrudedPolygon extends AbstractShape
      * Constructs an extruded polygon for a specified list of outer boundary locations and a height.
      *
      * @param corners the list of locations defining this extruded polygon's outer boundary.
-     * @param height  the shape height, in meters. May be null, in which case a height of 1 is used. The height is used
-     *                only when the altitude mode is {@link WorldWind#CONSTANT}, which is the default for this shape.
+     * @param height the shape height, in meters. May be null, in which case a height of 1 is used. The height is used
+     * only when the altitude mode is {@link WorldWind#CONSTANT}, which is the default for this shape.
      *
      * @throws IllegalArgumentException if the location list is null or the height is specified but less than or equal
-     *                                  to zero.
+     * to zero.
      */
-    public ExtrudedPolygon(Iterable<? extends LatLon> corners, Double height)
-    {
+    public ExtrudedPolygon(Iterable<? extends LatLon> corners, Double height) {
         this(); // to initialize the instance
 
-        if (corners == null)
-        {
+        if (corners == null) {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (height != null && height <= 0)
-        {
+        if (height != null && height <= 0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "height <= 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -349,22 +416,19 @@ public class ExtrudedPolygon extends AbstractShape
     /**
      * Constructs an extruded polygon from an outer boundary, a height, and images for its outer faces.
      *
-     * @param corners      the list of locations defining this polygon's outer boundary.
-     * @param height       the shape height, in meters. May be null, in which case a height of 1 is used. The height is
-     *                     used only when the altitude mode is {@link WorldWind#CONSTANT}, which is the default for this
-     *                     shape.
+     * @param corners the list of locations defining this polygon's outer boundary.
+     * @param height the shape height, in meters. May be null, in which case a height of 1 is used. The height is used
+     * only when the altitude mode is {@link WorldWind#CONSTANT}, which is the default for this shape.
      * @param imageSources images to apply to the polygon's outer faces. One image for each face must be included. May
-     *                     also be null.
+     * also be null.
      *
      * @throws IllegalArgumentException if the location list is null or the height is specified but less than or equal
-     *                                  to zero.
+     * to zero.
      */
-    public ExtrudedPolygon(Iterable<? extends LatLon> corners, double height, Iterable<?> imageSources)
-    {
+    public ExtrudedPolygon(Iterable<? extends LatLon> corners, double height, Iterable<?> imageSources) {
         this(corners, height);
 
-        if (imageSources != null)
-        {
+        if (imageSources != null) {
             this.sideTextures = new ArrayList<List<WWTexture>>();
             this.sideTextures.add(this.fillImageList(imageSources));
         }
@@ -374,13 +438,12 @@ public class ExtrudedPolygon extends AbstractShape
      * Constructs an extruded polygon from an outer boundary.
      *
      * @param corners the list of outer boundary positions -- latitude longitude and altitude. The altitude mode
-     *                determines whether the positions are considered relative to mean sea level (they are "absolute")
-     *                or the ground elevation at the associated latitude and longitude.
+     * determines whether the positions are considered relative to mean sea level (they are "absolute") or the ground
+     * elevation at the associated latitude and longitude.
      *
      * @throws IllegalArgumentException if the position list is null.
      */
-    public ExtrudedPolygon(Iterable<? extends Position> corners)
-    {
+    public ExtrudedPolygon(Iterable<? extends Position> corners) {
         this(corners, 1d); // the height field is ignored when positions are specified, so any value will do
     }
 
@@ -388,55 +451,51 @@ public class ExtrudedPolygon extends AbstractShape
      * Constructs an extruded polygon from an outer boundary specified with position heights.
      *
      * @param corners the list of positions -- latitude longitude and altitude -- defining the polygon's outer boundary.
-     *                The altitude mode determines whether the positions are considered relative to mean sea level (they
-     *                are "absolute") or the ground elevation at the associated latitude and longitude.
+     * The altitude mode determines whether the positions are considered relative to mean sea level (they are
+     * "absolute") or the ground elevation at the associated latitude and longitude.
      *
      * @throws IllegalArgumentException if the position list is null.
      */
-    public ExtrudedPolygon(Position.PositionList corners)
-    {
+    public ExtrudedPolygon(Position.PositionList corners) {
         this(corners.list, 1d); // the height field is ignored when positions are specified, so any value will do
     }
 
     /**
      * Constructs an extruded polygon from an outer boundary and apply specified textures to its outer faces.
      *
-     * @param corners      the list of positions -- latitude longitude and altitude -- defining the polygon. The
-     *                     altitude mode determines whether the positions are considered relative to mean sea level
-     *                     (they are "absolute") or the ground elevation at the associated latitude and longitude.
+     * @param corners the list of positions -- latitude longitude and altitude -- defining the polygon. The altitude
+     * mode determines whether the positions are considered relative to mean sea level (they are "absolute") or the
+     * ground elevation at the associated latitude and longitude.
      * @param imageSources textures to apply to the polygon's outer faces. One texture for each face must be included.
-     *                     May also be null.
+     * May also be null.
      *
      * @throws IllegalArgumentException if the position list is null.
      */
-    public ExtrudedPolygon(Iterable<? extends Position> corners, Iterable<?> imageSources)
-    {
+    public ExtrudedPolygon(Iterable<? extends Position> corners, Iterable<?> imageSources) {
         this(corners);
 
-        if (imageSources != null)
-        {
+        if (imageSources != null) {
             this.sideTextures = new ArrayList<List<WWTexture>>();
             this.sideTextures.add(this.fillImageList(imageSources));
         }
     }
 
-    protected void initialize()
-    {
+    protected void initialize() {
         // Overridden to specify a default altitude mode unique to extruded polygons.
         this.altitudeMode = DEFAULT_ALTITUDE_MODE;
     }
 
-    protected void reset()
-    {
+    protected void reset() {
         // Assumes that the boundary lists have already been established.
 
-        for (List<? extends LatLon> locations : this.boundaries)
-        {
-            if (locations == null || locations.size() < 3)
+        for (List<? extends LatLon> locations : this.boundaries) {
+            if (locations == null || locations.size() < 3) {
                 continue;
+            }
 
-            if (!WWMath.computeWindingOrderOfLocations(locations).equals(AVKey.COUNTER_CLOCKWISE))
+            if (!WWMath.computeWindingOrderOfLocations(locations).equals(AVKey.COUNTER_CLOCKWISE)) {
                 Collections.reverse(locations);
+            }
         }
 
         this.totalNumLocations = this.countLocations();
@@ -454,12 +513,10 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return the number of locations in the polygon boundaries.
      */
-    protected int countLocations()
-    {
+    protected int countLocations() {
         int count = 0;
 
-        for (List<? extends LatLon> locations : this.boundaries)
-        {
+        for (List<? extends LatLon> locations : this.boundaries) {
             count += locations.size();
         }
 
@@ -473,8 +530,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return this polygon's positions.
      */
-    public Iterable<? extends LatLon> getOuterBoundary()
-    {
+    public Iterable<? extends LatLon> getOuterBoundary() {
         return this.outerBoundary();
     }
 
@@ -483,8 +539,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return this polygon's outer boundary.
      */
-    protected List<? extends LatLon> outerBoundary()
-    {
+    protected List<? extends LatLon> outerBoundary() {
         return this.boundaries.get(0);
     }
 
@@ -493,8 +548,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return true if the outer boundary is valid, otherwise false.s
      */
-    protected boolean isOuterBoundaryValid()
-    {
+    protected boolean isOuterBoundaryValid() {
         return this.boundaries.size() > 0 && this.boundaries.get(0).size() > 2;
     }
 
@@ -506,8 +560,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @throws IllegalArgumentException if the location list is null or contains fewer than three locations.
      */
-    public void setOuterBoundary(Iterable<? extends LatLon> corners)
-    {
+    public void setOuterBoundary(Iterable<? extends LatLon> corners) {
         this.setOuterBoundary(corners, this.getHeight());
     }
 
@@ -515,33 +568,33 @@ public class ExtrudedPolygon extends AbstractShape
      * Specifies the latitudes, longitudes and outer-boundary images for the outer boundary of this polygon. To specify
      * altitudes, pass {@link Position}s rather than {@link LatLon}s.
      *
-     * @param corners      the polygon locations.
+     * @param corners the polygon locations.
      * @param imageSources images to apply to the outer faces. One image must be specified for each face. May be null.
      *
      * @throws IllegalArgumentException if the location list is null.
      */
-    public void setOuterBoundary(Iterable<? extends LatLon> corners, Iterable<?> imageSources)
-    {
+    public void setOuterBoundary(Iterable<? extends LatLon> corners, Iterable<?> imageSources) {
         this.setOuterBoundary(corners);
 
-        if (imageSources == null && this.sideTextures == null)
+        if (imageSources == null && this.sideTextures == null) {
             return;
+        }
 
         // Must install or replace the side textures
-
-        if (this.sideTextures == null)
+        if (this.sideTextures == null) {
             this.sideTextures = new ArrayList<List<WWTexture>>();
+        }
 
         // Add or replace the first element, the outer boundary's element, in the list of side textures.
         List<WWTexture> textures = this.fillImageList(imageSources);
         this.sideTextures.set(0, textures);
 
         // Update the shape cache
-        for (ShapeDataCache.ShapeDataCacheEntry entry : this.shapeDataCache)
-        {
+        for (ShapeDataCache.ShapeDataCacheEntry entry : this.shapeDataCache) {
             ShapeData sd = (ShapeData) entry;
-            if (sd.boundaries != null)
+            if (sd.boundaries != null) {
                 sd.copySideTextureReferences(this);
+            }
         }
     }
 
@@ -551,14 +604,12 @@ public class ExtrudedPolygon extends AbstractShape
      * {@link LatLon}s, but those altitudes are used only when the shape's altitude mode is {@link WorldWind#ABSOLUTE}.
      *
      * @param corners the outer boundary locations.
-     * @param height  the shape height, in meters.
+     * @param height the shape height, in meters.
      *
      * @throws IllegalArgumentException if the location list is null or contains fewer than three locations.
      */
-    public void setOuterBoundary(Iterable<? extends LatLon> corners, Double height)
-    {
-        if (corners == null)
-        {
+    public void setOuterBoundary(Iterable<? extends LatLon> corners, Double height) {
+        if (corners == null) {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -566,31 +617,31 @@ public class ExtrudedPolygon extends AbstractShape
 
         this.getBoundaries().set(0, this.fillBoundary(corners));
 
-        if (height != null)
+        if (height != null) {
             this.height = height;
+        }
 
         this.reset();
     }
 
-    protected List<? extends LatLon> fillBoundary(Iterable<? extends LatLon> corners)
-    {
+    protected List<? extends LatLon> fillBoundary(Iterable<? extends LatLon> corners) {
         ArrayList<LatLon> list = new ArrayList<LatLon>();
-        for (LatLon corner : corners)
-        {
-            if (corner != null)
+        for (LatLon corner : corners) {
+            if (corner != null) {
                 list.add(corner);
+            }
         }
 
-        if (list.size() < 3)
-        {
+        if (list.size() < 3) {
             String message = Logging.getMessage("generic.InsufficientPositions");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         // Close the list if not already closed.
-        if (list.size() > 0 && !list.get(0).equals(list.get(list.size() - 1)))
+        if (list.size() > 0 && !list.get(0).equals(list.get(list.size() - 1))) {
             list.add(list.get(0));
+        }
 
         list.trimToSize();
 
@@ -604,10 +655,8 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @throws IllegalArgumentException if the location list is null or contains fewer than three locations.
      */
-    public void addInnerBoundary(Iterable<? extends LatLon> corners)
-    {
-        if (corners == null)
-        {
+    public void addInnerBoundary(Iterable<? extends LatLon> corners) {
+        if (corners == null) {
             String message = Logging.getMessage("nullValue.LocationInListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -622,16 +671,14 @@ public class ExtrudedPolygon extends AbstractShape
      * Add an inner boundary to this polygon and specify images to apply to each of the boundary's faces. Specify {@link
      * LatLon}s to use the polygon's single height, or {@link Position}s, to include individual altitudes.
      *
-     * @param corners      the boundary's locations.
+     * @param corners the boundary's locations.
      * @param imageSources images to apply to the boundary's faces. One image must be specified for each face. May be
-     *                     null.
+     * null.
      *
      * @throws IllegalArgumentException if the location list is null.
      */
-    public void addInnerBoundary(Iterable<? extends LatLon> corners, Iterable<?> imageSources)
-    {
-        if (corners == null)
-        {
+    public void addInnerBoundary(Iterable<? extends LatLon> corners, Iterable<?> imageSources) {
+        if (corners == null) {
             String message = Logging.getMessage("nullValue.LocationInListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -639,10 +686,8 @@ public class ExtrudedPolygon extends AbstractShape
 
         this.getBoundaries().add(this.fillBoundary(corners));
 
-        if (imageSources != null)
-        {
-            if (this.sideTextures == null)
-            {
+        if (imageSources != null) {
+            if (this.sideTextures == null) {
                 this.sideTextures = new ArrayList<List<WWTexture>>();
                 this.sideTextures.add(new ArrayList<WWTexture>()); // placeholder for outer boundary
             }
@@ -658,8 +703,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return this shape's boundaries.
      */
-    protected List<List<? extends LatLon>> getBoundaries()
-    {
+    protected List<List<? extends LatLon>> getBoundaries() {
         return this.boundaries;
     }
 
@@ -670,19 +714,19 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return the list of texture objects, or null if the <code>imageSources</code> argument is null.
      */
-    protected List<WWTexture> fillImageList(Iterable<?> imageSources)
-    {
-        if (imageSources == null)
+    protected List<WWTexture> fillImageList(Iterable<?> imageSources) {
+        if (imageSources == null) {
             return null;
+        }
 
         ArrayList<WWTexture> textures = new ArrayList<WWTexture>();
 
-        for (Object source : imageSources)
-        {
-            if (source != null)
+        for (Object source : imageSources) {
+            if (source != null) {
                 textures.add(this.makeTexture(source));
-            else
+            } else {
                 textures.add(null);
+            }
         }
 
         textures.trimToSize();
@@ -695,42 +739,36 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return the texture image source, or null if no source has been specified.
      */
-    public Object getCapImageSource()
-    {
+    public Object getCapImageSource() {
         return this.capTexture != null ? this.capTexture.getImageSource() : null;
     }
 
     /**
      * Specifies the image to apply to this extruded polygon's cap.
      *
-     * @param imageSource   the image source. May be a {@link String} identifying a file path or URL, a {@link File}, or
-     *                      a {@link java.net.URL}.
-     * @param texCoords     the (s, t) texture coordinates aligning the image to the polygon. There must be one texture
-     *                      coordinate pair, (s, t), for each location in the polygon's outer boundary.
+     * @param imageSource the image source. May be a {@link String} identifying a file path or URL, a {@link File}, or a
+     * {@link java.net.URL}.
+     * @param texCoords the (s, t) texture coordinates aligning the image to the polygon. There must be one texture
+     * coordinate pair, (s, t), for each location in the polygon's outer boundary.
      * @param texCoordCount the number of texture coordinates, (s, v) pairs, specified.
      *
      * @throws IllegalArgumentException if the image source is not null and either the texture coordinates are null or
-     *                                  inconsistent with the specified texture-coordinate count, or there are fewer
-     *                                  than three texture coordinate pairs.
+     * inconsistent with the specified texture-coordinate count, or there are fewer than three texture coordinate pairs.
      */
-    public void setCapImageSource(Object imageSource, float[] texCoords, int texCoordCount)
-    {
-        if (imageSource == null)
-        {
+    public void setCapImageSource(Object imageSource, float[] texCoords, int texCoordCount) {
+        if (imageSource == null) {
             this.capTexture = null;
             this.capTextureCoords = null;
             return;
         }
 
-        if (texCoords == null)
-        {
+        if (texCoords == null) {
             String message = Logging.getMessage("generic.ListIsEmpty");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (texCoordCount < 3 || texCoords.length < 2 * texCoordCount)
-        {
+        if (texCoordCount < 3 || texCoords.length < 2 * texCoordCount) {
             String message = Logging.getMessage("generic.InsufficientPositions");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -742,13 +780,11 @@ public class ExtrudedPolygon extends AbstractShape
         boolean closeIt = texCoords[0] != texCoords[texCoordCount - 2] || texCoords[1] != texCoords[texCoordCount - 1];
 
         this.capTextureCoords = Buffers.newDirectFloatBuffer(2 * (texCoordCount + (closeIt ? 1 : 0)));
-        for (int i = 0; i < 2 * texCoordCount; i++)
-        {
+        for (int i = 0; i < 2 * texCoordCount; i++) {
             this.capTextureCoords.put(texCoords[i]);
         }
 
-        if (closeIt)
-        {
+        if (closeIt) {
             this.capTextureCoords.put(this.capTextureCoords.get(0));
             this.capTextureCoords.put(this.capTextureCoords.get(1));
         }
@@ -759,10 +795,10 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return the texture coordinates, or null if no cap texture coordinates have been specified.
      */
-    public float[] getTextureCoords()
-    {
-        if (this.capTextureCoords == null)
+    public float[] getTextureCoords() {
+        if (this.capTextureCoords == null) {
             return null;
+        }
 
         float[] retCoords = new float[this.capTextureCoords.limit()];
         this.capTextureCoords.get(retCoords, 0, retCoords.length);
@@ -775,8 +811,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return The texture, or null if there is no texture or the texture is not yet available.
      */
-    protected WWTexture getCapTexture()
-    {
+    protected WWTexture getCapTexture() {
         return this.capTexture;
     }
 
@@ -785,8 +820,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return the height originally specified, in meters.
      */
-    public double getHeight()
-    {
+    public double getHeight() {
         return height;
     }
 
@@ -797,13 +831,12 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @throws IllegalArgumentException if the height is less than or equal to zero.
      */
-    public void setHeight(double height)
-    {
-        if (this.height == height)
+    public void setHeight(double height) {
+        if (this.height == height) {
             return;
+        }
 
-        if (height <= 0)
-        {
+        if (height <= 0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "height <= 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -818,8 +851,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return true to draw the cap, otherwise false.
      */
-    public boolean isEnableCap()
-    {
+    public boolean isEnableCap() {
         return enableCap;
     }
 
@@ -828,8 +860,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @param enableCap true to draw the cap, otherwise false.
      */
-    public void setEnableCap(boolean enableCap)
-    {
+    public void setEnableCap(boolean enableCap) {
         this.enableCap = enableCap;
     }
 
@@ -838,8 +869,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return true to draw the sides, otherwise false.
      */
-    public boolean isEnableSides()
-    {
+    public boolean isEnableSides() {
         return enableSides;
     }
 
@@ -848,8 +878,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @param enableSides true to draw the sides, otherwise false.
      */
-    public void setEnableSides(boolean enableSides)
-    {
+    public void setEnableSides(boolean enableSides) {
         this.enableSides = enableSides;
     }
 
@@ -858,8 +887,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return this polygon's side attributes.
      */
-    public ShapeAttributes getSideAttributes()
-    {
+    public ShapeAttributes getSideAttributes() {
         return this.sideAttributes;
     }
 
@@ -870,10 +898,8 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @throws IllegalArgumentException if <code>attributes</code> is null.
      */
-    public void setSideAttributes(ShapeAttributes attributes)
-    {
-        if (attributes == null)
-        {
+    public void setSideAttributes(ShapeAttributes attributes) {
+        if (attributes == null) {
             String message = "nullValue.AttributesIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -887,8 +913,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return this polygon's cap attributes.
      */
-    public ShapeAttributes getCapAttributes()
-    {
+    public ShapeAttributes getCapAttributes() {
         return this.getAttributes();
     }
 
@@ -899,8 +924,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @throws IllegalArgumentException if <code>attributes</code> is null.
      */
-    public void setCapAttributes(ShapeAttributes attributes)
-    {
+    public void setCapAttributes(ShapeAttributes attributes) {
         this.setAttributes(attributes);
     }
 
@@ -909,8 +933,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return this polygon's side highlight attributes.
      */
-    public ShapeAttributes getSideHighlightAttributes()
-    {
+    public ShapeAttributes getSideHighlightAttributes() {
         return sideHighlightAttributes;
     }
 
@@ -921,10 +944,8 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @throws IllegalArgumentException if <code>attributes</code> is null.
      */
-    public void setSideHighlightAttributes(ShapeAttributes attributes)
-    {
-        if (attributes == null)
-        {
+    public void setSideHighlightAttributes(ShapeAttributes attributes) {
+        if (attributes == null) {
             String message = "nullValue.AttributesIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -938,8 +959,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return this polygon's cap highlight attributes.
      */
-    public ShapeAttributes getCapHighlightAttributes()
-    {
+    public ShapeAttributes getCapHighlightAttributes() {
         return this.getHighlightAttributes();
     }
 
@@ -950,8 +970,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @throws IllegalArgumentException if <code>attributes</code> is null.
      */
-    public void setCapHighlightAttributes(ShapeAttributes attributes)
-    {
+    public void setCapHighlightAttributes(ShapeAttributes attributes) {
         this.setHighlightAttributes(attributes);
     }
 
@@ -961,8 +980,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return the currently active attributes for this polygon's side faces.
      */
-    protected ShapeAttributes getActiveSideAttributes()
-    {
+    protected ShapeAttributes getActiveSideAttributes() {
         return this.activeSideAttributes;
     }
 
@@ -972,15 +990,14 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return the currently active attributes for this polygon's cap.
      */
-    protected ShapeAttributes getActiveCapAttributes()
-    {
+    protected ShapeAttributes getActiveCapAttributes() {
         return this.getActiveAttributes();
     }
 
-    public Sector getSector()
-    {
-        if (this.sector == null && this.outerBoundary().size() > 2)
+    public Sector getSector() {
+        if (this.sector == null && this.outerBoundary().size() > 2) {
             this.sector = Sector.boundingSector(this.getOuterBoundary());
+        }
 
         return this.sector;
     }
@@ -992,8 +1009,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @see #getReferencePosition()
      */
-    public LatLon getReferenceLocation()
-    {
+    public LatLon getReferenceLocation() {
         return this.getReferencePosition();
     }
 
@@ -1002,14 +1018,12 @@ public class ExtrudedPolygon extends AbstractShape
      * to the default, which is the first location in the extruded polygon's outer boundary.
      *
      * @param referenceLocation the reference location. May be null, in which case the first location of the outer
-     *                          boundary is the reference location.
+     * boundary is the reference location.
      *
      * @see #setReferencePosition(gov.nasa.worldwind.geom.Position)
      */
-    public void setReferenceLocation(LatLon referenceLocation)
-    {
-        if (referenceLocation == null)
-        {
+    public void setReferenceLocation(LatLon referenceLocation) {
+        if (referenceLocation == null) {
             String message = Logging.getMessage("nullValue.LocationIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -1023,17 +1037,17 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return the reference position, or null if no reference position has been specified.
      */
-    public Position getReferencePosition()
-    {
-        if (this.referencePosition != null)
+    public Position getReferencePosition() {
+        if (this.referencePosition != null) {
             return this.referencePosition;
+        }
 
-        if (this.boundaries.size() > 0 && this.outerBoundary().size() > 0)
-        {
-            if (this.outerBoundary().get(0) instanceof Position)
+        if (this.boundaries.size() > 0 && this.outerBoundary().size() > 0) {
+            if (this.outerBoundary().get(0) instanceof Position) {
                 this.referencePosition = (Position) this.outerBoundary().get(0);
-            else
+            } else {
                 this.referencePosition = new Position(this.outerBoundary().get(0), 0);
+            }
         }
 
         return this.referencePosition;
@@ -1046,8 +1060,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @see #setBaseDepth(double)
      */
-    public double getBaseDepth()
-    {
+    public double getBaseDepth() {
         return baseDepth;
     }
 
@@ -1058,11 +1071,9 @@ public class ExtrudedPolygon extends AbstractShape
      * position on the terrain.
      *
      * @param baseDepth the depth in meters to position the base vertices below the terrain. Specify positive values to
-     *                  position the base vertices below the terrain. (Negative values position the base vertices above
-     *                  the terrain.)
+     * position the base vertices below the terrain. (Negative values position the base vertices above the terrain.)
      */
-    public void setBaseDepth(double baseDepth)
-    {
+    public void setBaseDepth(double baseDepth) {
         this.baseDepth = baseDepth;
     }
 
@@ -1070,41 +1081,35 @@ public class ExtrudedPolygon extends AbstractShape
      * Returns this extruded polygon's side images.
      *
      * @return a collection of lists each identifying the image sources for the associated outer or inner polygon
-     *         boundary.
+     * boundary.
      */
-    public List<List<Object>> getImageSources()
-    {
-        if (this.sideTextures == null)
+    public List<List<Object>> getImageSources() {
+        if (this.sideTextures == null) {
             return null;
+        }
 
         boolean hasTextures = false;
-        for (List<WWTexture> textures : this.sideTextures)
-        {
-            if (textures != null && textures.size() > 0)
-            {
+        for (List<WWTexture> textures : this.sideTextures) {
+            if (textures != null && textures.size() > 0) {
                 hasTextures = true;
                 break;
             }
         }
 
-        if (!hasTextures)
+        if (!hasTextures) {
             return null;
+        }
 
         List<List<Object>> imageSources = new ArrayList<List<Object>>(this.getBoundaries().size());
 
-        for (List<WWTexture> textures : this.sideTextures)
-        {
-            if (textures == null)
-            {
+        for (List<WWTexture> textures : this.sideTextures) {
+            if (textures == null) {
                 imageSources.add(null);
-            }
-            else
-            {
+            } else {
                 ArrayList<Object> images = new ArrayList<Object>(textures.size());
                 imageSources.add(images);
 
-                for (WWTexture image : textures)
-                {
+                for (WWTexture image : textures) {
                     images.add(image.getImageSource());
                 }
             }
@@ -1118,37 +1123,35 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return true if side textures have been specified, otherwise false.
      */
-    public boolean hasSideTextures()
-    {
-        if (this.sideTextures == null)
+    public boolean hasSideTextures() {
+        if (this.sideTextures == null) {
             return false;
+        }
 
-        for (List<WWTexture> textures : this.sideTextures)
-        {
-            if (textures != null && textures.size() > 0)
+        for (List<WWTexture> textures : this.sideTextures) {
+            if (textures != null && textures.size() > 0) {
                 return true;
+            }
         }
 
         return false;
     }
 
     @Override
-    protected boolean mustApplyTexture(DrawContext dc)
-    {
-        if (this.getCapTexture() != null && this.capTextureCoords != null)
+    protected boolean mustApplyTexture(DrawContext dc) {
+        if (this.getCapTexture() != null && this.capTextureCoords != null) {
             return true;
+        }
 
         return this.mustApplySideTextures();
     }
 
     @Override
-    protected boolean isTerrainDependent()
-    {
+    protected boolean isTerrainDependent() {
         return true; // this shape is terrain dependent regardless of the altitude mode
     }
 
-    protected boolean mustApplySideTextures()
-    {
+    protected boolean mustApplySideTextures() {
         return this.hasSideTextures();
     }
 
@@ -1157,8 +1160,7 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return true if an interior must be drawn, otherwise false.
      */
-    protected boolean mustDrawInterior()
-    {
+    protected boolean mustDrawInterior() {
         return super.mustDrawInterior() || this.getActiveSideAttributes().isDrawInterior();
     }
 
@@ -1167,51 +1169,51 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return true if the outline should be drawn, otherwise false.
      */
-    protected boolean mustDrawOutline()
-    {
+    protected boolean mustDrawOutline() {
         return super.mustDrawOutline() || this.getActiveSideAttributes().isDrawOutline();
     }
 
-    protected boolean mustRegenerateGeometry(DrawContext dc)
-    {
+    protected boolean mustRegenerateGeometry(DrawContext dc) {
         ShapeData shapeData = this.getCurrent();
 
-        if (shapeData.capVertexBuffer == null || shapeData.sideVertexBuffer == null)
+        if (shapeData.capVertexBuffer == null || shapeData.sideVertexBuffer == null) {
             return true;
+        }
 
-        if (dc.getVerticalExaggeration() != shapeData.getVerticalExaggeration())
+        if (dc.getVerticalExaggeration() != shapeData.getVerticalExaggeration()) {
             return true;
+        }
 
         if ((this.mustApplyLighting(dc, this.getActiveCapAttributes()) && shapeData.capNormalBuffer == null)
-            || (this.mustApplyLighting(dc, this.getActiveSideAttributes()) && shapeData.sideNormalBuffer == null))
+                || (this.mustApplyLighting(dc, this.getActiveSideAttributes()) && shapeData.sideNormalBuffer == null)) {
             return true;
+        }
 
         return super.mustRegenerateGeometry(dc);
     }
 
-    public Extent getExtent(Globe globe, double verticalExaggeration)
-    {
+    public Extent getExtent(Globe globe, double verticalExaggeration) {
         // See if we've cached an extent associated with the globe.
         Extent extent = super.getExtent(globe, verticalExaggeration);
-        if (extent != null)
+        if (extent != null) {
             return extent;
+        }
 
         return super.computeExtentFromPositions(globe, verticalExaggeration, this.getOuterBoundary());
     }
 
     /**
-     * Computes this shapes extent. If a reference point is specified, the extent is translated to that reference
-     * point.
+     * Computes this shapes extent. If a reference point is specified, the extent is translated to that reference point.
      *
      * @param outerBoundary the shape's outer boundary.
-     * @param refPoint      a reference point to which the extent is translated. May be null.
+     * @param refPoint a reference point to which the extent is translated. May be null.
      *
      * @return the computed extent, or null if the extent cannot be computed.
      */
-    protected Extent computeExtent(ExtrudedBoundaryInfo outerBoundary, Vec4 refPoint)
-    {
-        if (outerBoundary == null || outerBoundary.capVertices == null || outerBoundary.baseVertices == null)
+    protected Extent computeExtent(ExtrudedBoundaryInfo outerBoundary, Vec4 refPoint) {
+        if (outerBoundary == null || outerBoundary.capVertices == null || outerBoundary.baseVertices == null) {
             return null;
+        }
 
         Vec4[] topVertices = outerBoundary.capVertices;
         Vec4[] botVertices = outerBoundary.baseVertices;
@@ -1227,98 +1229,91 @@ public class ExtrudedPolygon extends AbstractShape
         return boundingBox != null ? boundingBox.translate(refPoint) : null;
     }
 
-    protected void determineActiveAttributes()
-    {
+    protected void determineActiveAttributes() {
         super.determineActiveAttributes(); // determine active cap attributes in super class
 
-        if (this.isHighlighted())
-        {
-            if (this.getSideHighlightAttributes() != null)
+        if (this.isHighlighted()) {
+            if (this.getSideHighlightAttributes() != null) {
                 this.activeSideAttributes.copy(this.getSideHighlightAttributes());
-            else
-            {
+            } else {
                 // If no highlight attributes have been specified we need to use the normal attributes but adjust them
                 // to cause highlighting.
-                if (this.getSideAttributes() != null)
+                if (this.getSideAttributes() != null) {
                     this.activeSideAttributes.copy(this.getSideAttributes());
-                else
+                } else {
                     this.activeSideAttributes.copy(defaultSideAttributes);
+                }
 
                 this.activeSideAttributes.setOutlineMaterial(DEFAULT_HIGHLIGHT_MATERIAL);
                 this.activeSideAttributes.setInteriorMaterial(DEFAULT_HIGHLIGHT_MATERIAL);
             }
-        }
-        else
-        {
-            if (this.getSideAttributes() != null)
+        } else {
+            if (this.getSideAttributes() != null) {
                 this.activeSideAttributes.copy(this.getSideAttributes());
-            else
+            } else {
                 this.activeSideAttributes.copy(defaultSideAttributes);
+            }
         }
     }
 
     @Override
-    protected SurfaceShape createSurfaceShape()
-    {
+    protected SurfaceShape createSurfaceShape() {
         SurfacePolygon polygon = new SurfacePolygon();
         this.setSurfacePolygonBoundaries(polygon);
 
         return polygon;
     }
 
-    protected void setSurfacePolygonBoundaries(SurfaceShape shape)
-    {
+    protected void setSurfacePolygonBoundaries(SurfaceShape shape) {
         SurfacePolygon polygon = (SurfacePolygon) shape;
 
         polygon.setLocations(this.getOuterBoundary());
 
         List<List<? extends LatLon>> bounds = this.getBoundaries();
-        for (int i = 1; i < bounds.size(); i++)
-        {
+        for (int i = 1; i < bounds.size(); i++) {
             polygon.addInnerBoundary(bounds.get(i));
         }
     }
 
-    public void render(DrawContext dc)
-    {
-        if (!this.isOuterBoundaryValid())
+    public void render(DrawContext dc) {
+        if (!this.isOuterBoundaryValid()) {
             return;
+        }
 
         super.render(dc);
     }
 
     @Override
-    protected boolean isOrderedRenderableValid(DrawContext dc)
-    {
+    protected boolean isOrderedRenderableValid(DrawContext dc) {
         return this.getCurrent().capVertexBuffer != null || this.getCurrent().sideVertexBuffer != null;
     }
 
     @Override
-    protected boolean doMakeOrderedRenderable(DrawContext dc)
-    {
-        if (dc.getSurfaceGeometry() == null || !this.isOuterBoundaryValid())
+    protected boolean doMakeOrderedRenderable(DrawContext dc) {
+        if (dc.getSurfaceGeometry() == null || !this.isOuterBoundaryValid()) {
             return false;
+        }
 
         this.createMinimalGeometry(dc, this.getCurrent());
 
         // If the shape is less that a pixel in size, don't render it.
-        if (this.getExtent() == null || dc.isSmall(this.getExtent(), 1))
+        if (this.getExtent() == null || dc.isSmall(this.getExtent(), 1)) {
             return false;
+        }
 
-        if (!this.intersectsFrustum(dc))
+        if (!this.intersectsFrustum(dc)) {
             return false;
+        }
 
         this.createFullGeometry(dc, dc.getTerrain(), this.getCurrent(), true);
 
         return true;
     }
 
-    protected OGLStackHandler beginDrawing(DrawContext dc, int attrMask)
-    {
+    protected OGLStackHandler beginDrawing(DrawContext dc, int attrMask) {
         OGLStackHandler ogsh = super.beginDrawing(dc, attrMask);
 
-        if (!dc.isPickingMode())
-        {
+        if (!dc.isPickingMode()) {
             // Push an identity texture matrix. This prevents drawSides() from leaking GL texture matrix state. The
             // texture matrix stack is popped from OGLStackHandler.pop() within {@link #endRendering}.
             GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -1329,23 +1324,25 @@ public class ExtrudedPolygon extends AbstractShape
     }
 
     @Override
-    public void drawOutline(DrawContext dc)
-    {
-        if (this.isEnableSides() && getActiveSideAttributes().isDrawOutline())
+    public void drawOutline(DrawContext dc) {
+        if (this.isEnableSides() && getActiveSideAttributes().isDrawOutline()) {
             this.drawSideOutline(dc, this.getCurrent());
+        }
 
-        if (this.isEnableCap() && getActiveCapAttributes().isDrawOutline())
+        if (this.isEnableCap() && getActiveCapAttributes().isDrawOutline()) {
             this.drawCapOutline(dc, this.getCurrent());
+        }
     }
 
     @Override
-    public void drawInterior(DrawContext dc)
-    {
-        if (this.isEnableSides() && getActiveSideAttributes().isDrawInterior())
+    public void drawInterior(DrawContext dc) {
+        if (this.isEnableSides() && getActiveSideAttributes().isDrawInterior()) {
             this.drawSideInteriors(dc, this.getCurrent());
+        }
 
-        if (this.isEnableCap() && getActiveCapAttributes().isDrawInterior())
+        if (this.isEnableCap() && getActiveCapAttributes().isDrawInterior()) {
             this.drawCapInterior(dc, this.getCurrent());
+        }
     }
 
     /**
@@ -1354,8 +1351,7 @@ public class ExtrudedPolygon extends AbstractShape
      * @param dc not used.
      */
     @Override
-    protected void doDrawOutline(DrawContext dc)
-    {
+    protected void doDrawOutline(DrawContext dc) {
         return; // this class overrides super.drawOutline so doesn't use this "do" method
     }
 
@@ -1365,19 +1361,18 @@ public class ExtrudedPolygon extends AbstractShape
      * This base implementation draws the outline of the basic polygon. Subclasses should override it to draw their
      * outline or an alternate outline of the basic polygon.
      *
-     * @param dc        the draw context.
+     * @param dc the draw context.
      * @param shapeData the current shape data.
      */
-    public void drawCapOutline(DrawContext dc, ShapeData shapeData)
-    {
+    public void drawCapOutline(DrawContext dc, ShapeData shapeData) {
         this.prepareToDrawOutline(dc, this.getActiveCapAttributes(), defaultAttributes);
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        for (ExtrudedBoundaryInfo boundary : shapeData)
-        {
-            if (!dc.isPickingMode() && this.mustApplyLighting(dc, this.getActiveCapAttributes()))
+        for (ExtrudedBoundaryInfo boundary : shapeData) {
+            if (!dc.isPickingMode() && this.mustApplyLighting(dc, this.getActiveCapAttributes())) {
                 gl.glNormalPointer(GL.GL_FLOAT, 0, boundary.capNormalBuffer.rewind());
+            }
 
             IntBuffer indices = boundary.capEdgeIndices;
             gl.glVertexPointer(3, GL.GL_FLOAT, 0, boundary.capVertexBuffer.rewind());
@@ -1392,26 +1387,24 @@ public class ExtrudedPolygon extends AbstractShape
     /**
      * Draws this extruded polygon's side outline.
      *
-     * @param dc        the draw context.
+     * @param dc the draw context.
      * @param shapeData the current shape data.
      */
-    protected void drawSideOutline(DrawContext dc, ShapeData shapeData)
-    {
+    protected void drawSideOutline(DrawContext dc, ShapeData shapeData) {
         this.prepareToDrawOutline(dc, this.getActiveSideAttributes(), defaultSideAttributes);
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        for (ExtrudedBoundaryInfo boundary : shapeData)
-        {
-            if (!dc.isPickingMode() && this.mustApplyLighting(dc, this.getActiveSideAttributes()))
+        for (ExtrudedBoundaryInfo boundary : shapeData) {
+            if (!dc.isPickingMode() && this.mustApplyLighting(dc, this.getActiveSideAttributes())) {
                 gl.glNormalPointer(GL.GL_FLOAT, 0, boundary.sideNormalBuffer.rewind());
+            }
 
             IntBuffer indices = boundary.sideEdgeIndices;
             indices.rewind();
 
             // Don't draw the top outline if the cap will draw it.
-            if (this.isEnableCap() && this.getActiveCapAttributes().isDrawOutline())
-            {
+            if (this.isEnableCap() && this.getActiveCapAttributes().isDrawOutline()) {
                 indices = indices.slice();
                 indices.position(2 * boundary.faceCount);
             }
@@ -1427,46 +1420,41 @@ public class ExtrudedPolygon extends AbstractShape
      * @param dc not used.
      */
     @Override
-    protected void doDrawInterior(DrawContext dc)
-    {
+    protected void doDrawInterior(DrawContext dc) {
         return;
     }
 
     /**
      * Draws the filled interior of this shape's cap.
      *
-     * @param dc        the draw context.
+     * @param dc the draw context.
      * @param shapeData this shape's current globe-specific data.
      */
-    public void drawCapInterior(DrawContext dc, ShapeData shapeData)
-    {
+    public void drawCapInterior(DrawContext dc, ShapeData shapeData) {
         super.prepareToDrawInterior(dc, this.getActiveCapAttributes(), defaultAttributes);
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        if (!dc.isPickingMode() && this.mustApplyLighting(dc, this.getActiveCapAttributes()))
+        if (!dc.isPickingMode() && this.mustApplyLighting(dc, this.getActiveCapAttributes())) {
             gl.glNormalPointer(GL.GL_FLOAT, 0, shapeData.capNormalBuffer.rewind());
+        }
 
         WWTexture texture = this.getCapTexture();
-        if (!dc.isPickingMode() && texture != null && this.capTextureCoords != null)
-        {
+        if (!dc.isPickingMode() && texture != null && this.capTextureCoords != null) {
             texture.bind(dc);
             texture.applyInternalTransform(dc);
 
             gl.glTexCoordPointer(2, GL.GL_FLOAT, 0, this.capTextureCoords.rewind());
             dc.getGL().glEnable(GL.GL_TEXTURE_2D);
             gl.glEnableClientState(GL2.GL_TEXTURE_COORD_ARRAY);
-        }
-        else
-        {
+        } else {
             dc.getGL().glDisable(GL.GL_TEXTURE_2D);
             gl.glDisableClientState(GL2.GL_TEXTURE_COORD_ARRAY);
         }
 
         gl.glVertexPointer(3, GL.GL_FLOAT, 0, shapeData.capVertexBuffer.rewind());
 
-        for (int i = 0; i < shapeData.cb.getPrimTypes().size(); i++)
-        {
+        for (int i = 0; i < shapeData.cb.getPrimTypes().size(); i++) {
             IntBuffer ib = shapeData.capFillIndexBuffers.get(i);
             gl.glDrawElements(shapeData.cb.getPrimTypes().get(i), ib.limit(), GL.GL_UNSIGNED_INT, ib.rewind());
         }
@@ -1475,28 +1463,24 @@ public class ExtrudedPolygon extends AbstractShape
     /**
      * Draws this shape's sides.
      *
-     * @param dc        the draw context.
+     * @param dc the draw context.
      * @param shapeData this shape's current globe-specific data.
      */
-    protected void drawSideInteriors(DrawContext dc, ShapeData shapeData)
-    {
+    protected void drawSideInteriors(DrawContext dc, ShapeData shapeData) {
         super.prepareToDrawInterior(dc, this.getActiveSideAttributes(), defaultSideAttributes);
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        for (ExtrudedBoundaryInfo boundary : shapeData)
-        {
-            if (!dc.isPickingMode() && this.mustApplyLighting(dc, this.getActiveSideAttributes()))
+        for (ExtrudedBoundaryInfo boundary : shapeData) {
+            if (!dc.isPickingMode() && this.mustApplyLighting(dc, this.getActiveSideAttributes())) {
                 gl.glNormalPointer(GL.GL_FLOAT, 0, boundary.sideNormalBuffer.rewind());
+            }
 
-            if (!dc.isPickingMode() && boundary.sideTextureCoords != null)
-            {
+            if (!dc.isPickingMode() && boundary.sideTextureCoords != null) {
                 gl.glEnable(GL.GL_TEXTURE_2D);
                 gl.glEnableClientState(GL2.GL_TEXTURE_COORD_ARRAY);
                 gl.glTexCoordPointer(2, GL.GL_FLOAT, 0, boundary.sideTextureCoords.rewind());
-            }
-            else
-            {
+            } else {
                 gl.glDisable(GL.GL_TEXTURE_2D);
                 gl.glDisableClientState(GL2.GL_TEXTURE_COORD_ARRAY);
             }
@@ -1504,12 +1488,11 @@ public class ExtrudedPolygon extends AbstractShape
             gl.glVertexPointer(3, GL.GL_FLOAT, 0, boundary.sideVertexBuffer.rewind());
 
             boundary.sideIndices.rewind();
-            for (int j = 0; j < boundary.faceCount; j++)
-            {
-                if (!dc.isPickingMode() && boundary.sideTextureCoords != null)
-                {
-                    if (!boundary.sideTextures.get(j).bind(dc))
+            for (int j = 0; j < boundary.faceCount; j++) {
+                if (!dc.isPickingMode() && boundary.sideTextureCoords != null) {
+                    if (!boundary.sideTextures.get(j).bind(dc)) {
                         continue;
+                    }
 
                     boundary.sideTextures.get(j).applyInternalTransform(dc);
                 }
@@ -1524,19 +1507,20 @@ public class ExtrudedPolygon extends AbstractShape
     /**
      * Computes the information necessary to determine this extruded polygon's extent.
      *
-     * @param dc        the current draw context.
+     * @param dc the current draw context.
      * @param shapeData this shape's current globe-specific data.
      */
-    protected void createMinimalGeometry(DrawContext dc, ShapeData shapeData)
-    {
+    protected void createMinimalGeometry(DrawContext dc, ShapeData shapeData) {
         this.computeReferencePoint(dc.getTerrain(), shapeData);
-        if (shapeData.getReferencePoint() == null)
+        if (shapeData.getReferencePoint() == null) {
             return;
+        }
 
         this.computeBoundaryVertices(dc.getTerrain(), shapeData.getOuterBoundaryInfo(), shapeData.getReferencePoint());
 
-        if (this.getExtent() == null || this.getAltitudeMode() != WorldWind.ABSOLUTE)
+        if (this.getExtent() == null || this.getAltitudeMode() != WorldWind.ABSOLUTE) {
             shapeData.setExtent(this.computeExtent(shapeData.getOuterBoundaryInfo(), shapeData.getReferencePoint()));
+        }
 
         shapeData.setEyeDistance(this.computeEyeDistance(dc, shapeData));
         shapeData.setGlobeStateKey(dc.getGlobe().getGlobeStateKey(dc));
@@ -1546,21 +1530,20 @@ public class ExtrudedPolygon extends AbstractShape
     /**
      * Computes the minimum distance between this shape and the eye point.
      *
-     * @param dc        the draw context.
+     * @param dc the draw context.
      * @param shapeData this shape's current globe-specific data.
      *
      * @return the minimum distance from the shape to the eye point.
      */
-    protected double computeEyeDistance(DrawContext dc, ShapeData shapeData)
-    {
+    protected double computeEyeDistance(DrawContext dc, ShapeData shapeData) {
         double minDistance = Double.MAX_VALUE;
         Vec4 eyePoint = dc.getView().getEyePoint();
 
-        for (Vec4 point : shapeData.getOuterBoundaryInfo().capVertices)
-        {
+        for (Vec4 point : shapeData.getOuterBoundaryInfo().capVertices) {
             double d = point.add3(shapeData.getReferencePoint()).distanceTo3(eyePoint);
-            if (d < minDistance)
+            if (d < minDistance) {
                 minDistance = d;
+            }
         }
 
         return minDistance;
@@ -1569,15 +1552,15 @@ public class ExtrudedPolygon extends AbstractShape
     /**
      * Computes and sets this shape's reference point, the Cartesian position corresponding to its geographic location.
      *
-     * @param terrain   the terrain to use when computing the reference point. The reference point is always on the
-     *                  terrain.
+     * @param terrain the terrain to use when computing the reference point. The reference point is always on the
+     * terrain.
      * @param shapeData the current shape data.
      */
-    protected void computeReferencePoint(Terrain terrain, ShapeData shapeData)
-    {
+    protected void computeReferencePoint(Terrain terrain, ShapeData shapeData) {
         LatLon refPos = this.getReferencePosition();
-        if (refPos == null)
+        if (refPos == null) {
             return;
+        }
 
         shapeData.setReferencePoint(terrain.getSurfacePoint(refPos.getLatitude(), refPos.getLongitude(), 0));
     }
@@ -1585,77 +1568,77 @@ public class ExtrudedPolygon extends AbstractShape
     /**
      * Computes a boundary set's full geometry.
      *
-     * @param dc                the current draw context.
-     * @param terrain           the terrain to use when computing the geometry.
-     * @param shapeData         the boundary set to compute the geometry for.
+     * @param dc the current draw context.
+     * @param terrain the terrain to use when computing the geometry.
+     * @param shapeData the boundary set to compute the geometry for.
      * @param skipOuterBoundary true if outer boundaries vertices do not need to be calculated, otherwise false.
      */
     protected void createFullGeometry(DrawContext dc, Terrain terrain, ShapeData shapeData,
-        boolean skipOuterBoundary)
-    {
-        for (ExtrudedBoundaryInfo boundary : shapeData)
-        {
+            boolean skipOuterBoundary) {
+        for (ExtrudedBoundaryInfo boundary : shapeData) {
             boundary.capEdgeIndices = this.getCapEdgeIndices(boundary.locations.size());
             boundary.sideIndices = this.getSideIndices(boundary.locations.size());
             boundary.sideEdgeIndices = this.getSideEdgeIndices(boundary.locations.size());
         }
 
-        if (this.isEnableSides() || this.isEnableCap())
+        if (this.isEnableSides() || this.isEnableCap()) {
             this.createVertices(terrain, shapeData, skipOuterBoundary);
-
-        if (this.isEnableSides())
-        {
-            this.createSideGeometry(shapeData);
-
-            if (this.mustApplyLighting(dc, this.getActiveSideAttributes()))
-                this.createSideNormals(shapeData);
-
-            if (!dc.isPickingMode() && this.mustApplySideTextures())
-                this.createSideTextureCoords(shapeData);
         }
 
-        if (this.isEnableCap())
-        {
+        if (this.isEnableSides()) {
+            this.createSideGeometry(shapeData);
+
+            if (this.mustApplyLighting(dc, this.getActiveSideAttributes())) {
+                this.createSideNormals(shapeData);
+            }
+
+            if (!dc.isPickingMode() && this.mustApplySideTextures()) {
+                this.createSideTextureCoords(shapeData);
+            }
+        }
+
+        if (this.isEnableCap()) {
             this.createCapGeometry(dc, shapeData);
 
-            if (this.mustApplyLighting(dc, this.getActiveCapAttributes()))
+            if (this.mustApplyLighting(dc, this.getActiveCapAttributes())) {
                 this.createCapNormals(shapeData);
+            }
         }
     }
 
     /**
      * Creates this shape's Cartesian vertices.
      *
-     * @param terrain           the terrain to use when computing the vertices.
-     * @param shapeData         the current shape data.
+     * @param terrain the terrain to use when computing the vertices.
+     * @param shapeData the current shape data.
      * @param skipOuterBoundary if true, do not compute the outer boundary's vertices because they have already been
-     *                          computed.
+     * computed.
      */
-    protected void createVertices(Terrain terrain, ShapeData shapeData, boolean skipOuterBoundary)
-    {
-        for (ExtrudedBoundaryInfo boundary : shapeData)
-        {
-            if (boundary != shapeData.getOuterBoundaryInfo() || !skipOuterBoundary)
+    protected void createVertices(Terrain terrain, ShapeData shapeData, boolean skipOuterBoundary) {
+        for (ExtrudedBoundaryInfo boundary : shapeData) {
+            if (boundary != shapeData.getOuterBoundaryInfo() || !skipOuterBoundary) {
                 this.computeBoundaryVertices(terrain, boundary, shapeData.getReferencePoint());
+            }
         }
     }
 
     /**
      * Compute and set the Cartesian vertices for one specified boundary of this shape.
      *
-     * @param terrain  the terrain to use when computing the vertices.
+     * @param terrain the terrain to use when computing the vertices.
      * @param boundary the boundary for which to compute the vertices.
      * @param refPoint the reference point specifying the coordinate origin of the vertices.
      */
-    protected void computeBoundaryVertices(Terrain terrain, ExtrudedBoundaryInfo boundary, Vec4 refPoint)
-    {
+    protected void computeBoundaryVertices(Terrain terrain, ExtrudedBoundaryInfo boundary, Vec4 refPoint) {
         Vec4[] topVertices = boundary.capVertices;
-        if (topVertices == null || topVertices.length < boundary.locations.size())
+        if (topVertices == null || topVertices.length < boundary.locations.size()) {
             topVertices = new Vec4[boundary.locations.size()];
+        }
 
         Vec4[] bottomVertices = boundary.baseVertices;
-        if (bottomVertices == null || bottomVertices.length < boundary.locations.size())
+        if (bottomVertices == null || bottomVertices.length < boundary.locations.size()) {
             bottomVertices = new Vec4[boundary.locations.size()];
+        }
 
         // These variables are used to compute the independent length of each cap vertex for CONSTANT altitude mode.
         Vec4 N = null;
@@ -1664,8 +1647,7 @@ public class ExtrudedPolygon extends AbstractShape
         double vaLength = 0;
 
         boundary.faceCount = boundary.locations.size() - 1;
-        for (int i = 0; i < boundary.faceCount; i++)
-        {
+        for (int i = 0; i < boundary.faceCount; i++) {
             // The order for both top and bottom is CCW as one looks down from space onto the base polygon. For a
             // 4-sided polygon (defined by 5 lat/lon locations) the vertex order is 0-1-2-3-4.
 
@@ -1674,29 +1656,24 @@ public class ExtrudedPolygon extends AbstractShape
             // Compute the bottom point, which is on the terrain.
             Vec4 vert = terrain.getSurfacePoint(location.getLatitude(), location.getLongitude(), 0);
 
-            if (this.getBaseDepth() == 0)
-            {
+            if (this.getBaseDepth() == 0) {
                 // Place the base vertex on the terrain.
                 bottomVertices[i] = vert.subtract3(refPoint);
-            }
-            else
-            {
+            } else {
                 // Place the base vertex below the terrain (if base depth is positive).
                 double length = vert.getLength3();
                 bottomVertices[i] = vert.multiply3((length - this.getBaseDepth()) / length).subtract3(refPoint);
             }
 
             // Compute the top/cap point.
-            if (this.getAltitudeMode() == WorldWind.CONSTANT || !(location instanceof Position))
-            {
+            if (this.getAltitudeMode() == WorldWind.CONSTANT || !(location instanceof Position)) {
                 // The shape's base is on the terrain, and all the cap vertices are at a common altitude
                 // relative to the reference position. This means that the distance between the cap and base vertices
                 // at the boundary locations varies. Further, the vector between the base vertex and cap vertex at each
                 // boundary location is parallel to that at the reference position. The calculation below first
                 // determines that reference-position vector, then applies scaled versions of it to determine the cap
                 // vertex at all the other boundary positions.
-                if (vaa == null)
-                {
+                if (vaa == null) {
                     Position refPos = this.getReferencePosition();
                     N = terrain.getGlobe().computeSurfaceNormalAtLocation(refPos.getLatitude(), refPos.getLongitude());
                     vaa = N.multiply3(this.getHeight());
@@ -1706,16 +1683,13 @@ public class ExtrudedPolygon extends AbstractShape
 
                 double delta = vert.dot3(N) - vaLength;
                 vert = vert.add3(vaa.multiply3(1d - delta / vaaLength));
-            }
-            else if (this.getAltitudeMode() == WorldWind.RELATIVE_TO_GROUND)
-            {
+            } else if (this.getAltitudeMode() == WorldWind.RELATIVE_TO_GROUND) {
                 vert = terrain.getSurfacePoint(location.getLatitude(), location.getLongitude(),
-                    ((Position) location).getAltitude());
-            }
-            else // WorldWind.ABSOLUTE
+                        ((Position) location).getAltitude());
+            } else // WorldWind.ABSOLUTE
             {
                 vert = terrain.getGlobe().computePointFromPosition(location.getLatitude(), location.getLongitude(),
-                    ((Position) location).getAltitude() * terrain.getVerticalExaggeration());
+                        ((Position) location).getAltitude() * terrain.getVerticalExaggeration());
             }
 
             topVertices[i] = vert.subtract3(refPoint);
@@ -1733,42 +1707,40 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @param shapeData the current shape data.
      */
-    protected void createSideGeometry(ShapeData shapeData)
-    {
+    protected void createSideGeometry(ShapeData shapeData) {
         // The side vertex buffer requires 4 vertices of x,y,z for each polygon face.
         int vertexCoordCount = this.totalFaceCount * 4 * 3; // 4 vertices of x,y,z per face
 
-        if (shapeData.sideVertexBuffer != null && shapeData.sideVertexBuffer.capacity() >= vertexCoordCount)
+        if (shapeData.sideVertexBuffer != null && shapeData.sideVertexBuffer.capacity() >= vertexCoordCount) {
             shapeData.sideVertexBuffer.clear();
-        else
+        } else {
             shapeData.sideVertexBuffer = Buffers.newDirectFloatBuffer(vertexCoordCount);
+        }
 
         // Create individual buffer slices for each boundary.
-        for (ExtrudedBoundaryInfo boundary : shapeData)
-        {
+        for (ExtrudedBoundaryInfo boundary : shapeData) {
             boundary.sideVertexBuffer = this.fillSideVertexBuffer(boundary.capVertices, boundary.baseVertices,
-                shapeData.sideVertexBuffer.slice());
+                    shapeData.sideVertexBuffer.slice());
             shapeData.sideVertexBuffer.position(
-                shapeData.sideVertexBuffer.position() + boundary.sideVertexBuffer.limit());
+                    shapeData.sideVertexBuffer.position() + boundary.sideVertexBuffer.limit());
         }
     }
 
-    protected void createSideNormals(ShapeData shapeData)
-    {
+    protected void createSideNormals(ShapeData shapeData) {
         int vertexCoordCount = this.totalFaceCount * 4 * 3; // 4 vertices of x,y,z per face
 
-        if (shapeData.sideNormalBuffer != null && shapeData.sideNormalBuffer.capacity() >= vertexCoordCount)
+        if (shapeData.sideNormalBuffer != null && shapeData.sideNormalBuffer.capacity() >= vertexCoordCount) {
             shapeData.sideNormalBuffer.clear();
-        else
+        } else {
             shapeData.sideNormalBuffer = Buffers.newDirectFloatBuffer(vertexCoordCount);
+        }
 
         // Create individual buffer slices for each boundary.
-        for (ExtrudedBoundaryInfo boundary : shapeData)
-        {
+        for (ExtrudedBoundaryInfo boundary : shapeData) {
             boundary.sideNormalBuffer = this.fillSideNormalBuffer(boundary.capVertices, boundary.baseVertices,
-                shapeData.sideNormalBuffer.slice());
+                    shapeData.sideNormalBuffer.slice());
             shapeData.sideNormalBuffer.position(
-                shapeData.sideNormalBuffer.position() + boundary.sideNormalBuffer.limit());
+                    shapeData.sideNormalBuffer.position() + boundary.sideNormalBuffer.limit());
         }
     }
 
@@ -1777,24 +1749,22 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @param shapeData the current shape data.
      */
-    protected void createSideTextureCoords(ShapeData shapeData)
-    {
+    protected void createSideTextureCoords(ShapeData shapeData) {
         // Create individual buffer slices for each boundary.
-        for (ExtrudedBoundaryInfo boundary : shapeData)
-        {
+        for (ExtrudedBoundaryInfo boundary : shapeData) {
             boolean applyTextureToThisBoundary = this.hasSideTextures()
-                && boundary.sideTextures != null && boundary.sideTextures.size() == boundary.faceCount;
+                    && boundary.sideTextures != null && boundary.sideTextures.size() == boundary.faceCount;
 
-            if (applyTextureToThisBoundary)
-            {
+            if (applyTextureToThisBoundary) {
                 int texCoordSize = boundary.faceCount * 4 * 2; // n sides of 4 verts w/s,t
-                if (boundary.sideTextureCoords != null && boundary.sideTextureCoords.capacity() >= texCoordSize)
+                if (boundary.sideTextureCoords != null && boundary.sideTextureCoords.capacity() >= texCoordSize) {
                     boundary.sideTextureCoords.clear();
-                else
+                } else {
                     boundary.sideTextureCoords = Buffers.newDirectFloatBuffer(texCoordSize);
+                }
 
                 this.fillSideTexCoordBuffer(boundary.capVertices, boundary.baseVertices,
-                    boundary.sideTextureCoords);
+                        boundary.sideTextureCoords);
             }
         }
     }
@@ -1802,47 +1772,47 @@ public class ExtrudedPolygon extends AbstractShape
     /**
      * Compute the cap geometry.
      *
-     * @param dc        the current draw context.
+     * @param dc the current draw context.
      * @param shapeData boundary vertices are calculated during {@link #createMinimalGeometry(DrawContext,
      *                  gov.nasa.worldwind.render.ExtrudedPolygon.ShapeData)}).
      */
-    protected void createCapGeometry(DrawContext dc, ShapeData shapeData)
-    {
+    protected void createCapGeometry(DrawContext dc, ShapeData shapeData) {
         if (shapeData.capVertexBuffer != null
-            && shapeData.capVertexBuffer.capacity() >= this.totalNumLocations * 3)
+                && shapeData.capVertexBuffer.capacity() >= this.totalNumLocations * 3) {
             shapeData.capVertexBuffer.clear();
-        else
+        } else {
             shapeData.capVertexBuffer = Buffers.newDirectFloatBuffer(this.totalNumLocations * 3);
+        }
 
         // Fill the vertex buffer. Simultaneously create individual buffer slices for each boundary. These are used to
         // draw the outline.
-        for (ExtrudedBoundaryInfo boundary : shapeData)
-        {
+        for (ExtrudedBoundaryInfo boundary : shapeData) {
             boundary.capVertexBuffer = WWBufferUtil.copyArrayToBuffer(boundary.capVertices,
-                shapeData.capVertexBuffer.slice());
+                    shapeData.capVertexBuffer.slice());
             shapeData.capVertexBuffer.position(
-                shapeData.capVertexBuffer.position() + boundary.capVertexBuffer.limit());
+                    shapeData.capVertexBuffer.position() + boundary.capVertexBuffer.limit());
         }
 
         if (shapeData.cb == null) // need to tessellate only once
+        {
             this.createTessllationGeometry(dc, shapeData);
+        }
 
         this.generateCapInteriorIndices(shapeData);
     }
 
-    protected void createCapNormals(ShapeData shapeData)
-    {
+    protected void createCapNormals(ShapeData shapeData) {
         if (shapeData.capNormalBuffer != null
-            && shapeData.capNormalBuffer.capacity() >= this.totalNumLocations * 3)
+                && shapeData.capNormalBuffer.capacity() >= this.totalNumLocations * 3) {
             shapeData.capNormalBuffer.clear();
-        else
+        } else {
             shapeData.capNormalBuffer = Buffers.newDirectFloatBuffer(shapeData.capVertexBuffer.capacity());
+        }
 
-        for (ExtrudedBoundaryInfo boundary : shapeData)
-        {
+        for (ExtrudedBoundaryInfo boundary : shapeData) {
             boundary.capNormalBuffer = this.computeCapNormals(boundary, shapeData.capNormalBuffer.slice());
             shapeData.capNormalBuffer.position(
-                shapeData.capNormalBuffer.position() + boundary.capNormalBuffer.limit());
+                    shapeData.capNormalBuffer.position() + boundary.capNormalBuffer.limit());
         }
     }
 
@@ -1850,29 +1820,27 @@ public class ExtrudedPolygon extends AbstractShape
      * Compute normal vectors for an extruded polygon's cap vertices.
      *
      * @param boundary the boundary to compute normals for.
-     * @param nBuf     the buffer in which to place the computed normals. Must have enough remaining space to hold the
-     *                 normals.
+     * @param nBuf the buffer in which to place the computed normals. Must have enough remaining space to hold the
+     * normals.
      *
      * @return the buffer specified as input, with its limit incremented by the number of vertices copied, and its
-     *         position set to 0.
+     * position set to 0.
      */
-    protected FloatBuffer computeCapNormals(ExtrudedBoundaryInfo boundary, FloatBuffer nBuf)
-    {
+    protected FloatBuffer computeCapNormals(ExtrudedBoundaryInfo boundary, FloatBuffer nBuf) {
         int nVerts = boundary.locations.size();
         Vec4[] verts = boundary.capVertices;
         double avgX, avgY, avgZ;
 
         // Compute normal for first point of boundary.
-        Vec4 va = verts[1].subtract3(verts[0]);
+        Vec4 va  = verts[1].subtract3(verts[0]);
         Vec4 vb = verts[nVerts - 2].subtract3(verts[0]); // nverts - 2 because last and first are same
         avgX = (va.y * vb.z) - (va.z * vb.y);
         avgY = (va.z * vb.x) - (va.x * vb.z);
         avgZ = (va.x * vb.y) - (va.y * vb.x);
 
         // Compute normals for interior boundary points.
-        for (int i = 1; i < nVerts - 1; i++)
-        {
-            va = verts[i + 1].subtract3(verts[i]);
+        for (int i = 1; i < nVerts - 1; i++) {
+            va  = verts[i + 1].subtract3(verts[i]);
             vb = verts[i - 1].subtract3(verts[i]);
             avgX += (va.y * vb.z) - (va.z * vb.y);
             avgY += (va.z * vb.x) - (va.x * vb.z);
@@ -1884,8 +1852,7 @@ public class ExtrudedPolygon extends AbstractShape
         avgZ /= nVerts - 1;
         double length = Math.sqrt(avgX * avgX + avgY * avgY + avgZ * avgZ);
 
-        for (int i = 0; i < nVerts; i++)
-        {
+        for (int i = 0; i < nVerts; i++) {
             nBuf.put((float) (avgX / length)).put((float) (avgY / length)).put((float) (avgZ / length));
         }
 
@@ -1894,8 +1861,7 @@ public class ExtrudedPolygon extends AbstractShape
         return nBuf;
     }
 
-    protected FloatBuffer fillSideVertexBuffer(Vec4[] topVerts, Vec4[] bottomVerts, FloatBuffer vBuf)
-    {
+    protected FloatBuffer fillSideVertexBuffer(Vec4[] topVerts, Vec4[] bottomVerts, FloatBuffer vBuf) {
         // Forms the polygon's faces from its vertices, simultaneously copying the Cartesian coordinates from a Vec4
         // array to a FloatBuffer.
 
@@ -1906,8 +1872,7 @@ public class ExtrudedPolygon extends AbstractShape
         // Fill the vertex buffer with coordinates for each independent face -- 4 vertices per face. Vertices need to be
         // independent in order to have different texture coordinates and normals per face.
         // For an n-sided polygon the vertex order is b0-b1-t1-t0, b1-b2-t2-t1, ... Note the counter-clockwise ordering.
-        for (int i = 0; i < faceCount; i++)
-        {
+        for (int i = 0; i < faceCount; i++) {
             int v = i;
             vBuf.put((float) bottomVerts[v].x).put((float) bottomVerts[v].y).put((float) bottomVerts[v].z);
             v = i + 1;
@@ -1923,17 +1888,15 @@ public class ExtrudedPolygon extends AbstractShape
         return vBuf;
     }
 
-    protected FloatBuffer fillSideNormalBuffer(Vec4[] topVerts, Vec4[] bottomVerts, FloatBuffer nBuf)
-    {
+    protected FloatBuffer fillSideNormalBuffer(Vec4[] topVerts, Vec4[] bottomVerts, FloatBuffer nBuf) {
         // This method parallels fillVertexBuffer. The normals are stored in exactly the same order.
 
         int faceCount = topVerts.length - 1;
         int size = faceCount * 4 * 3; // n sides of 4 verts of x,y,z
         nBuf.limit(size);
 
-        for (int i = 0; i < faceCount; i++)
-        {
-            Vec4 va = topVerts[i + 1].subtract3(bottomVerts[i]);
+        for (int i = 0; i < faceCount; i++) {
+            Vec4 va  = topVerts[i + 1].subtract3(bottomVerts[i]);
             Vec4 vb = topVerts[i].subtract3(bottomVerts[i + 1]);
             Vec4 normal = va.cross3(vb).normalize3();
 
@@ -1951,18 +1914,16 @@ public class ExtrudedPolygon extends AbstractShape
     /**
      * Computes the texture coordinates for a boundary of this shape.
      *
-     * @param topVerts    the boundary's top Cartesian coordinates.
+     * @param topVerts the boundary's top Cartesian coordinates.
      * @param bottomVerts the boundary's bottom Cartesian coordinates.
-     * @param tBuf        the buffer in which to place the computed texture coordinates.
+     * @param tBuf the buffer in which to place the computed texture coordinates.
      */
-    protected void fillSideTexCoordBuffer(Vec4[] topVerts, Vec4[] bottomVerts, FloatBuffer tBuf)
-    {
+    protected void fillSideTexCoordBuffer(Vec4[] topVerts, Vec4[] bottomVerts, FloatBuffer tBuf) {
         int faceCount = topVerts.length - 1;
         double lengths[] = new double[faceCount + 1];
 
         // Find the top-to-bottom lengths of the corners in order to determine their relative lengths.
-        for (int i = 0; i < faceCount; i++)
-        {
+        for (int i = 0; i < faceCount; i++) {
             lengths[i] = bottomVerts[i].distanceTo3(topVerts[i]);
         }
         lengths[faceCount] = lengths[0]; // duplicate the first length to ease iteration below
@@ -1970,16 +1931,12 @@ public class ExtrudedPolygon extends AbstractShape
         // Fill the vertex buffer with texture coordinates for each independent face in the same order as the vertices
         // in the vertex buffer.
         int b = 0;
-        for (int i = 0; i < faceCount; i++)
-        {
+        for (int i = 0; i < faceCount; i++) {
             // Set the base texture coord to 0 for the longer side and a proportional value for the shorter side.
-            if (lengths[i] > lengths[i + 1])
-            {
+            if (lengths[i] > lengths[i + 1]) {
                 tBuf.put(b++, 0).put(b++, 0);
                 tBuf.put(b++, 1).put(b++, (float) (1d - lengths[i + 1] / lengths[i]));
-            }
-            else
-            {
+            } else {
                 tBuf.put(b++, 0).put(b++, (float) (1d - lengths[i] / lengths[i + 1]));
                 tBuf.put(b++, 1).put(b++, 0);
             }
@@ -1995,16 +1952,15 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return a buffer of indices that can be passed to OpenGL to draw all the shape's edges.
      */
-    protected IntBuffer getCapEdgeIndices(int n)
-    {
+    protected IntBuffer getCapEdgeIndices(int n) {
         IntBuffer ib = capEdgeIndexBuffers.get(n);
-        if (ib != null)
+        if (ib != null) {
             return ib;
+        }
 
         // The edges are two-point lines connecting vertex pairs.
         ib = Buffers.newDirectIntBuffer(2 * (n - 1) * 3);
-        for (int i = 0; i < n - 1; i++)
-        {
+        for (int i = 0; i < n - 1; i++) {
             ib.put(i).put(i + 1);
         }
 
@@ -2020,18 +1976,17 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return a buffer of indices that can be passed to OpenGL to draw all face of the shape.
      */
-    protected IntBuffer getSideIndices(int n)
-    {
+    protected IntBuffer getSideIndices(int n) {
         IntBuffer ib = sideFillIndexBuffers.get(n);
-        if (ib != null)
+        if (ib != null) {
             return ib;
+        }
 
         // Compute them if not already computed. Each side is two triangles defined by one triangle strip. All edges
         // can't be combined into one tri-strip because each side may have its own texture and therefore different
         // texture coordinates.
         ib = Buffers.newDirectIntBuffer(n * 4);
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             ib.put(4 * i + 3).put(4 * i).put(4 * i + 2).put(4 * i + 1);
         }
 
@@ -2047,33 +2002,29 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @return a buffer of indices that can be passed to OpenGL to draw all the boundary's edges.
      */
-    protected IntBuffer getSideEdgeIndices(int n)
-    {
+    protected IntBuffer getSideEdgeIndices(int n) {
         IntBuffer ib = sideEdgeIndexBuffers.get(n);
-        if (ib != null)
+        if (ib != null) {
             return ib;
+        }
 
         int nn = n - 1; // the boundary is closed so don't add an edge for the redundant position.
 
         // The edges are two-point lines connecting vertex pairs.
-
         ib = Buffers.newDirectIntBuffer((2 * nn) * 3); // 2n each for top, bottom and corners
 
         // Top. Keep this first so that the top edge can be turned off independently.
-        for (int i = 0; i < nn; i++)
-        {
+        for (int i = 0; i < nn; i++) {
             ib.put(4 * i + 2).put(4 * i + 3);
         }
 
         // Bottom
-        for (int i = 0; i < nn; i++)
-        {
+        for (int i = 0; i < nn; i++) {
             ib.put(4 * i).put(4 * i + 1);
         }
 
         // Corners
-        for (int i = 0; i < nn; i++)
-        {
+        for (int i = 0; i < nn; i++) {
             ib.put(4 * i).put(4 * i + 3);
         }
 
@@ -2083,8 +2034,7 @@ public class ExtrudedPolygon extends AbstractShape
     }
 
     @Override
-    protected void fillVBO(DrawContext dc)
-    {
+    protected void fillVBO(DrawContext dc) {
         // VBOs are not used by this shape type
     }
 
@@ -2093,21 +2043,18 @@ public class ExtrudedPolygon extends AbstractShape
      * context is not null passes the exception to the rendering exception listener (see {@link
      * WorldWindow#addRenderingExceptionListener(gov.nasa.worldwind.event.RenderingExceptionListener)}).
      *
-     * @param dc        the draw context.
+     * @param dc the draw context.
      * @param shapeData the boundary set to tessellate
      */
-    protected void createTessllationGeometry(DrawContext dc, ShapeData shapeData)
-    {
+    protected void createTessllationGeometry(DrawContext dc, ShapeData shapeData) {
         // Wrap polygon tessellation in a try/catch block. We do this to catch and handle OutOfMemoryErrors caused during
         // tessellation of the polygon vertices.
-        try
-        {
+        try {
             Vec4 normal = this.computePolygonNormal(shapeData);
 
             // There's a fallback for non-computable normal in computePolygonNormal, but test here in case the fallback
             // doesn't work either.
-            if (normal == null)
-            {
+            if (normal == null) {
                 String message = Logging.getMessage("Geom.ShapeNormalVectorNotComputable", this);
                 Logging.logger().log(java.util.logging.Level.SEVERE, message);
                 shapeData.tessellationError = true;
@@ -2115,35 +2062,31 @@ public class ExtrudedPolygon extends AbstractShape
             }
 
             this.tessellatePolygon(shapeData, normal.normalize3());
-        }
-        catch (OutOfMemoryError e)
-        {
+        } catch (OutOfMemoryError e) {
             String message = Logging.getMessage("generic.ExceptionWhileTessellating", this);
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
 
             shapeData.tessellationError = true;
 
-            if (dc != null)
-            {
+            if (dc != null) {
                 //noinspection ThrowableInstanceNeverThrown
                 dc.addRenderingException(new WWRuntimeException(message, e));
             }
         }
     }
 
-    protected Vec4 computePolygonNormal(ShapeData shapeData)
-    {
+    protected Vec4 computePolygonNormal(ShapeData shapeData) {
         Vec4 normal = WWMath.computeBufferNormal(shapeData.capVertexBuffer, 0);
 
         // The normal vector is null if this is a degenerate polygon representing a line or a single point. We fall
         // back to using the globe's surface normal at the reference point. This allows the tessellator to process
         // the degenerate polygon without generating an exception.
-        if (normal == null)
-        {
+        if (normal == null) {
             Globe globe = shapeData.getGlobeStateKey().getGlobe();
-            if (globe != null)
+            if (globe != null) {
                 normal = globe.computeSurfaceNormalAtLocation(
-                    this.getReferencePosition().getLatitude(), this.getReferencePosition().getLongitude());
+                        this.getReferencePosition().getLatitude(), this.getReferencePosition().getLongitude());
+            }
         }
 
         return normal;
@@ -2153,28 +2096,24 @@ public class ExtrudedPolygon extends AbstractShape
      * Tessellates the polygon from its vertices.
      *
      * @param shapeData the polygon boundaries.
-     * @param normal    a unit normal vector for the plane containing the polygon vertices. Even though the the vertices
-     *                  might not be coplanar, only one representative normal is used for tessellation.
+     * @param normal a unit normal vector for the plane containing the polygon vertices. Even though the the vertices
+     * might not be coplanar, only one representative normal is used for tessellation.
      */
-    protected void tessellatePolygon(ShapeData shapeData, Vec4 normal)
-    {
+    protected void tessellatePolygon(ShapeData shapeData, Vec4 normal) {
         GLUTessellatorSupport glts = new GLUTessellatorSupport();
         shapeData.cb = new GLUTessellatorSupport.CollectIndexListsCallback();
 
         glts.beginTessellation(shapeData.cb, normal);
-        try
-        {
+        try {
             double[] coords = new double[3];
 
             GLU.gluTessBeginPolygon(glts.getGLUtessellator(), null);
 
             int k = 0;
-            for (ExtrudedBoundaryInfo boundary : shapeData)
-            {
+            for (ExtrudedBoundaryInfo boundary : shapeData) {
                 GLU.gluTessBeginContour(glts.getGLUtessellator());
                 FloatBuffer vBuf = boundary.capVertexBuffer;
-                for (int i = 0; i < boundary.locations.size(); i++)
-                {
+                for (int i = 0; i < boundary.locations.size(); i++) {
                     coords[0] = vBuf.get(i * 3);
                     coords[1] = vBuf.get(i * 3 + 1);
                     coords[2] = vBuf.get(i * 3 + 2);
@@ -2185,9 +2124,7 @@ public class ExtrudedPolygon extends AbstractShape
             }
 
             GLU.gluTessEndPolygon(glts.getGLUtessellator());
-        }
-        finally
-        {
+        } finally {
             // Free any heap memory used for tessellation immediately. If tessellation has consumed all available
             // heap memory, we must free memory used by tessellation immediately or subsequent operations such as
             // message logging will fail.
@@ -2200,25 +2137,24 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @param shapeData the current shape data.
      */
-    protected void generateCapInteriorIndices(ShapeData shapeData)
-    {
+    protected void generateCapInteriorIndices(ShapeData shapeData) {
         GLUTessellatorSupport.CollectIndexListsCallback cb = shapeData.cb;
 
-        if (shapeData.capFillIndices == null || shapeData.capFillIndices.capacity() < cb.getNumIndices())
+        if (shapeData.capFillIndices == null || shapeData.capFillIndices.capacity() < cb.getNumIndices()) {
             shapeData.capFillIndices = Buffers.newDirectIntBuffer(cb.getNumIndices());
-        else
+        } else {
             shapeData.capFillIndices.clear();
+        }
 
-        if (shapeData.capFillIndexBuffers == null || shapeData.capFillIndexBuffers.size() < cb.getPrimTypes().size())
+        if (shapeData.capFillIndexBuffers == null || shapeData.capFillIndexBuffers.size() < cb.getPrimTypes().size()) {
             shapeData.capFillIndexBuffers = new ArrayList<IntBuffer>(cb.getPrimTypes().size());
-        else
+        } else {
             shapeData.capFillIndexBuffers.clear();
+        }
 
-        for (List<Integer> prim : cb.getPrims())
-        {
+        for (List<Integer> prim : cb.getPrims()) {
             IntBuffer ib = shapeData.capFillIndices.slice();
-            for (Integer i : prim)
-            {
+            for (Integer i : prim) {
                 ib.put(i);
             }
             ib.flip();
@@ -2227,17 +2163,18 @@ public class ExtrudedPolygon extends AbstractShape
         }
     }
 
-    protected boolean isSameAsPreviousTerrain(Terrain terrain)
-    {
-        if (terrain == null || terrain != this.previousIntersectionTerrain)
+    protected boolean isSameAsPreviousTerrain(Terrain terrain) {
+        if (terrain == null || terrain != this.previousIntersectionTerrain) {
             return false;
+        }
 
         //noinspection SimplifiableIfStatement
-        if (terrain.getVerticalExaggeration() != this.previousIntersectionTerrain.getVerticalExaggeration())
+        if (terrain.getVerticalExaggeration() != this.previousIntersectionTerrain.getVerticalExaggeration()) {
             return false;
+        }
 
-        return this.previousIntersectionGlobeStateKey != null &&
-            terrain.getGlobe().getGlobeStateKey().equals(this.previousIntersectionGlobeStateKey);
+        return this.previousIntersectionGlobeStateKey != null
+                && terrain.getGlobe().getGlobeStateKey().equals(this.previousIntersectionGlobeStateKey);
     }
 
     /**
@@ -2246,65 +2183,69 @@ public class ExtrudedPolygon extends AbstractShape
      * rather than the terrain used during rendering, which may be at lower level of detail than required for accurate
      * intersection determination.
      *
-     * @param line    the line to intersect.
+     * @param line the line to intersect.
      * @param terrain the {@link Terrain} to use when computing the extruded polygon's geometry.
      *
      * @return a list of intersections identifying where the line intersects the extruded polygon, or null if the line
-     *         does not intersect the extruded polygon.
+     * does not intersect the extruded polygon.
      *
      * @throws InterruptedException if the operation is interrupted.
      * @see Terrain
      */
-    public List<Intersection> intersect(Line line, Terrain terrain) throws InterruptedException
-    {
-        if (!this.isEnableSides() && !this.isEnableCap())
+    public List<Intersection> intersect(Line line, Terrain terrain) throws InterruptedException {
+        if (!this.isEnableSides() && !this.isEnableCap()) {
             return null;
+        }
 
         Position refPos = this.getReferencePosition();
-        if (refPos == null)
+        if (refPos == null) {
             return null;
+        }
 
-        if (!this.isOuterBoundaryValid())
+        if (!this.isOuterBoundaryValid()) {
             return null;
+        }
 
         // Reuse the previously computed high-res boundary set if the terrain is the same.
         ShapeData highResShapeData = this.isSameAsPreviousTerrain(terrain) ? this.previousIntersectionShapeData
-            : null;
+                : null;
 
-        if (highResShapeData == null)
-        {
+        if (highResShapeData == null) {
             highResShapeData = this.createIntersectionGeometry(terrain);
-            if (highResShapeData == null)
+            if (highResShapeData == null) {
                 return null;
+            }
 
             this.previousIntersectionShapeData = highResShapeData;
             this.previousIntersectionTerrain = terrain;
             this.previousIntersectionGlobeStateKey = terrain.getGlobe().getGlobeStateKey();
         }
 
-        if (highResShapeData.getExtent() != null && highResShapeData.getExtent().intersect(line) == null)
+        if (highResShapeData.getExtent() != null && highResShapeData.getExtent().intersect(line) == null) {
             return null;
-
-        final Line localLine = new Line(line.getOrigin().subtract3(highResShapeData.getReferencePoint()),
-            line.getDirection());
-        List<Intersection> intersections = new ArrayList<Intersection>();
-
-        for (ExtrudedBoundaryInfo boundary : highResShapeData)
-        {
-            List<Intersection> boundaryIntersections = this.intersectBoundarySides(localLine, boundary);
-
-            if (boundaryIntersections != null && boundaryIntersections.size() > 0)
-                intersections.addAll(boundaryIntersections);
         }
 
-        if (this.isEnableCap())
+        final Line localLine = new Line(line.getOrigin().subtract3(highResShapeData.getReferencePoint()),
+                line.getDirection());
+        List<Intersection> intersections = new ArrayList<Intersection>();
+
+        for (ExtrudedBoundaryInfo boundary : highResShapeData) {
+            List<Intersection> boundaryIntersections = this.intersectBoundarySides(localLine, boundary);
+
+            if (boundaryIntersections != null && boundaryIntersections.size() > 0) {
+                intersections.addAll(boundaryIntersections);
+            }
+        }
+
+        if (this.isEnableCap()) {
             this.intersectCap(localLine, highResShapeData, intersections);
+        }
 
-        if (intersections.size() == 0)
+        if (intersections.size() == 0) {
             return null;
+        }
 
-        for (Intersection intersection : intersections)
-        {
+        for (Intersection intersection : intersections) {
             Vec4 pt = intersection.getIntersectionPoint().add3(highResShapeData.getReferencePoint());
             intersection.setIntersectionPoint(pt);
 
@@ -2320,23 +2261,25 @@ public class ExtrudedPolygon extends AbstractShape
         return intersections;
     }
 
-    protected ShapeData createIntersectionGeometry(Terrain terrain)
-    {
+    protected ShapeData createIntersectionGeometry(Terrain terrain) {
         ShapeData shapeData = new ShapeData(null, this);
         shapeData.setGlobeStateKey(terrain.getGlobe().getGlobeStateKey());
 
         this.computeReferencePoint(terrain, shapeData);
-        if (shapeData.getReferencePoint() == null)
+        if (shapeData.getReferencePoint() == null) {
             return null;
+        }
 
         // Compute the boundary vertices first.
         this.createVertices(terrain, shapeData, false);
 
-        if (this.isEnableSides())
+        if (this.isEnableSides()) {
             this.createSideGeometry(shapeData);
+        }
 
-        if (this.isEnableCap())
+        if (this.isEnableCap()) {
             this.createCapGeometry(null, shapeData);
+        }
 
         shapeData.setExtent(this.computeExtent(shapeData.getOuterBoundaryInfo(), shapeData.getReferencePoint()));
 
@@ -2346,7 +2289,7 @@ public class ExtrudedPolygon extends AbstractShape
     /**
      * Intersects a line with the sides of an individual boundary.
      *
-     * @param line     the line to intersect.
+     * @param line the line to intersect.
      * @param boundary the boundary to intersect.
      *
      * @return the computed intersections, or null if there are no intersections.
@@ -2354,47 +2297,47 @@ public class ExtrudedPolygon extends AbstractShape
      * @throws InterruptedException if the operation is interrupted.
      */
     protected List<Intersection> intersectBoundarySides(Line line, ExtrudedBoundaryInfo boundary)
-        throws InterruptedException
-    {
+            throws InterruptedException {
         List<Intersection> intersections = new ArrayList<Intersection>();
         Vec4[] topVertices = boundary.capVertices;
         Vec4[] bottomVertices = boundary.baseVertices;
 
-        for (int i = 0; i < boundary.baseVertices.length - 1; i++)
-        {
-            Vec4 va = bottomVertices[i];
+        for (int i = 0; i < boundary.baseVertices.length - 1; i++) {
+            Vec4 va  = bottomVertices[i];
             Vec4 vb = topVertices[i + 1];
             Vec4 vc = topVertices[i];
 
             Intersection intersection = Triangle.intersect(line, va, vb, vc);
-            if (intersection != null)
+            if (intersection != null) {
                 intersections.add(intersection);
+            }
 
             vc = bottomVertices[i + 1];
 
             intersection = Triangle.intersect(line, va, vb, vc);
-            if (intersection != null)
+            if (intersection != null) {
                 intersections.add(intersection);
+            }
         }
 
         return intersections.size() > 0 ? intersections : null;
     }
 
     protected void intersectCap(Line line, ShapeData shapeData, List<Intersection> intersections)
-        throws InterruptedException
-    {
-        if (shapeData.cb.getPrimTypes() == null)
+            throws InterruptedException {
+        if (shapeData.cb.getPrimTypes() == null) {
             return;
+        }
 
-        for (int i = 0; i < shapeData.cb.getPrimTypes().size(); i++)
-        {
+        for (int i = 0; i < shapeData.cb.getPrimTypes().size(); i++) {
             IntBuffer ib = shapeData.capFillIndexBuffers.get(i);
             ib.rewind();
             List<Intersection> ti = Triangle.intersectTriangleTypes(line, shapeData.capVertexBuffer, ib,
-                shapeData.cb.getPrimTypes().get(i));
+                    shapeData.cb.getPrimTypes().get(i));
 
-            if (ti != null && ti.size() > 0)
+            if (ti != null && ti.size() > 0) {
                 intersections.addAll(ti);
+            }
         }
     }
 
@@ -2406,38 +2349,39 @@ public class ExtrudedPolygon extends AbstractShape
      *
      * @param position the new position of the shape's reference position.
      */
-    public void moveTo(Position position)
-    {
-        if (position == null)
-        {
+    public void moveTo(Position position) {
+        if (position == null) {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (!this.isOuterBoundaryValid())
+        if (!this.isOuterBoundaryValid()) {
             return;
+        }
 
         Position oldPosition = this.getReferencePosition();
-        if (oldPosition == null)
+        if (oldPosition == null) {
             return;
+        }
 
         List<List<? extends LatLon>> newLocations = new ArrayList<List<? extends LatLon>>(this.boundaries.size());
 
-        for (List<? extends LatLon> boundary : this.boundaries)
-        {
-            if (boundary == null || boundary.size() == 0)
+        for (List<? extends LatLon> boundary : this.boundaries) {
+            if (boundary == null || boundary.size() == 0) {
                 continue;
+            }
 
             List<LatLon> newList = LatLon.computeShiftedLocations(oldPosition, position, boundary);
-            if (newList == null)
+            if (newList == null) {
                 continue;
+            }
 
             // Must convert the new locations to positions if the old ones were positions.
-            for (int i = 0; i < boundary.size(); i++)
-            {
-                if (boundary.get(i) instanceof Position)
+            for (int i = 0; i < boundary.size(); i++) {
+                if (boundary.get(i) instanceof Position) {
                     newList.set(i, new Position(newList.get(i), ((Position) boundary.get(i)).getAltitude()));
+                }
             }
 
             newLocations.add(newList);
@@ -2448,8 +2392,7 @@ public class ExtrudedPolygon extends AbstractShape
         this.reset();
     }
 
-    protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
-    {
+    protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
         // Write geometry
         xmlWriter.writeStartElement("Polygon");
 
@@ -2467,34 +2410,33 @@ public class ExtrudedPolygon extends AbstractShape
         xmlWriter.writeEndElement(); // Polygon
     }
 
-    protected void writeKMLBoundaries(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
-    {
+    protected void writeKMLBoundaries(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
         // Outer boundary
         Iterable<? extends LatLon> outerBoundary = this.getOuterBoundary();
-        if (outerBoundary != null)
-        {
+        if (outerBoundary != null) {
             xmlWriter.writeStartElement("outerBoundaryIs");
-            if (outerBoundary.iterator().hasNext() && outerBoundary.iterator().next() instanceof Position)
+            if (outerBoundary.iterator().hasNext() && outerBoundary.iterator().next() instanceof Position) {
                 this.exportBoundaryAsLinearRing(xmlWriter, outerBoundary);
-            else
+            } else {
                 KMLExportUtil.exportBoundaryAsLinearRing(xmlWriter, outerBoundary, getHeight());
+            }
             xmlWriter.writeEndElement(); // outerBoundaryIs
         }
 
         // Inner boundaries
         Iterator<List<? extends LatLon>> boundaryIterator = this.boundaries.iterator();
-        if (boundaryIterator.hasNext())
+        if (boundaryIterator.hasNext()) {
             boundaryIterator.next(); // Skip outer boundary, we already dealt with it above
-
-        while (boundaryIterator.hasNext())
-        {
+        }
+        while (boundaryIterator.hasNext()) {
             List<? extends LatLon> boundary = boundaryIterator.next();
 
             xmlWriter.writeStartElement("innerBoundaryIs");
-            if (boundary.iterator().hasNext() && boundary.iterator().next() instanceof Position)
+            if (boundary.iterator().hasNext() && boundary.iterator().next() instanceof Position) {
                 this.exportBoundaryAsLinearRing(xmlWriter, outerBoundary);
-            else
+            } else {
                 KMLExportUtil.exportBoundaryAsLinearRing(xmlWriter, boundary, getHeight());
+            }
             xmlWriter.writeEndElement(); // innerBoundaryIs
         }
     }
@@ -2504,29 +2446,24 @@ public class ExtrudedPolygon extends AbstractShape
      * type originally specified.
      *
      * @param xmlWriter the XML writer.
-     * @param boundary  the boundary to write.
+     * @param boundary the boundary to write.
      *
      * @throws XMLStreamException if an error occurs during writing.
      */
     protected void exportBoundaryAsLinearRing(XMLStreamWriter xmlWriter, Iterable<? extends LatLon> boundary)
-        throws XMLStreamException
-    {
+            throws XMLStreamException {
         xmlWriter.writeStartElement("LinearRing");
         xmlWriter.writeStartElement("coordinates");
-        for (LatLon location : boundary)
-        {
-            if (location instanceof Position)
-            {
+        for (LatLon location : boundary) {
+            if (location instanceof Position) {
                 xmlWriter.writeCharacters(String.format(Locale.US, "%f,%f,%f ",
-                    location.getLongitude().getDegrees(),
-                    location.getLatitude().getDegrees(),
-                    ((Position) location).getAltitude()));
-            }
-            else
-            {
+                        location.getLongitude().getDegrees(),
+                        location.getLatitude().getDegrees(),
+                        ((Position) location).getAltitude()));
+            } else {
                 xmlWriter.writeCharacters(String.format(Locale.US, "%f,%f ",
-                    location.getLongitude().getDegrees(),
-                    location.getLatitude().getDegrees()));
+                        location.getLongitude().getDegrees(),
+                        location.getLatitude().getDegrees()));
             }
         }
         xmlWriter.writeEndElement(); // coordinates

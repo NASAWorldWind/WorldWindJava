@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind;
 
 import gov.nasa.worldwind.geom.Position;
@@ -16,8 +15,8 @@ import gov.nasa.worldwind.geom.Position;
  * @author tag
  * @version $Id: Movable.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Movable
-{
+public interface Movable {
+
     /**
      * A position associated with the object that indicates its aggregate geographic position. The chosen position
      * varies among implementers of this interface. For objects defined by a list of positions, the reference position

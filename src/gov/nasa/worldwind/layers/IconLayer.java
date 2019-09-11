@@ -15,16 +15,16 @@ import java.util.*;
 
 /**
  * The <code>IconLayer</code> class manages a collection of {@link gov.nasa.worldwind.render.WWIcon} objects for
- * rendering and picking. <code>IconLayer</code> delegates to its internal {@link gov.nasa.worldwind.render.IconRenderer}
- * for rendering and picking operations.
+ * rendering and picking. <code>IconLayer</code> delegates to its internal
+ * {@link gov.nasa.worldwind.render.IconRenderer} for rendering and picking operations.
  *
  * @author tag
  * @version $Id: IconLayer.java 2140 2014-07-10 18:56:05Z tgaskins $
  * @see gov.nasa.worldwind.render.WWIcon
  * @see gov.nasa.worldwind.render.IconRenderer
  */
-public class IconLayer extends AbstractLayer
-{
+public class IconLayer extends AbstractLayer {
+
     protected final BasicQuadTree<WWIcon> icons = new BasicQuadTree<WWIcon>(8, Sector.FULL_SPHERE, null, false);
     protected Iterable<WWIcon> iconsOverride;
     protected IconRenderer iconRenderer = new IconRenderer();
@@ -35,9 +35,10 @@ public class IconLayer extends AbstractLayer
     protected HashMap<GlobeStateKey, Set<WWIcon>> lastActiveIconsLists = new HashMap<GlobeStateKey, Set<WWIcon>>(1);
     protected long frameId;
 
-    /** Creates a new <code>IconLayer</code> with an empty collection of Icons. */
-    public IconLayer()
-    {
+    /**
+     * Creates a new <code>IconLayer</code> with an empty collection of Icons.
+     */
+    public IconLayer() {
     }
 
     /**
@@ -47,18 +48,15 @@ public class IconLayer extends AbstractLayer
      * @param icon Icon to add.
      *
      * @throws IllegalArgumentException If <code>icon</code> is null.
-     * @throws IllegalStateException    If a custom Iterable has been specified by a call to <code>setIcons</code>.
+     * @throws IllegalStateException If a custom Iterable has been specified by a call to <code>setIcons</code>.
      */
-    public void addIcon(WWIcon icon)
-    {
-        if (icon == null)
-        {
+    public void addIcon(WWIcon icon) {
+        if (icon == null) {
             String msg = Logging.getMessage("nullValue.Icon");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (this.iconsOverride != null)
-        {
+        if (this.iconsOverride != null) {
             String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
             Logging.logger().severe(msg);
             throw new IllegalStateException(msg);
@@ -74,28 +72,25 @@ public class IconLayer extends AbstractLayer
      * @param icons Icons to add.
      *
      * @throws IllegalArgumentException If <code>icons</code> is null.
-     * @throws IllegalStateException    If a custom Iterable has been specified by a call to <code>setIcons</code>.
+     * @throws IllegalStateException If a custom Iterable has been specified by a call to <code>setIcons</code>.
      */
-    public void addIcons(Iterable<WWIcon> icons)
-    {
-        if (icons == null)
-        {
+    public void addIcons(Iterable<WWIcon> icons) {
+        if (icons == null) {
             String msg = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (this.iconsOverride != null)
-        {
+        if (this.iconsOverride != null) {
             String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
             Logging.logger().severe(msg);
             throw new IllegalStateException(msg);
         }
 
-        for (WWIcon icon : icons)
-        {
+        for (WWIcon icon : icons) {
             // Internal list of icons does not accept null values.
-            if (icon != null)
+            if (icon != null) {
                 this.icons.add(icon, icon.getPosition().asDegreesArray());
+            }
         }
     }
 
@@ -106,18 +101,15 @@ public class IconLayer extends AbstractLayer
      * @param icon Icon to remove.
      *
      * @throws IllegalArgumentException If <code>icon</code> is null.
-     * @throws IllegalStateException    If a custom Iterable has been specified by a call to <code>setIcons</code>.
+     * @throws IllegalStateException If a custom Iterable has been specified by a call to <code>setIcons</code>.
      */
-    public void removeIcon(WWIcon icon)
-    {
-        if (icon == null)
-        {
+    public void removeIcon(WWIcon icon) {
+        if (icon == null) {
             String msg = Logging.getMessage("nullValue.Icon");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (this.iconsOverride != null)
-        {
+        if (this.iconsOverride != null) {
             String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
             Logging.logger().severe(msg);
             throw new IllegalStateException(msg);
@@ -132,10 +124,8 @@ public class IconLayer extends AbstractLayer
      *
      * @throws IllegalStateException If a custom Iterable has been specified by a call to <code>setIcons</code>.
      */
-    public void removeAllIcons()
-    {
-        if (this.iconsOverride != null)
-        {
+    public void removeAllIcons() {
+        if (this.iconsOverride != null) {
             String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
             Logging.logger().severe(msg);
             throw new IllegalStateException(msg);
@@ -144,10 +134,10 @@ public class IconLayer extends AbstractLayer
         this.clearIcons();
     }
 
-    protected void clearIcons()
-    {
-        if (this.icons != null)
+    protected void clearIcons() {
+        if (this.icons != null) {
             this.icons.clear();
+        }
     }
 
     /**
@@ -158,13 +148,14 @@ public class IconLayer extends AbstractLayer
      *
      * @return Iterable of currently active Icons.
      */
-    public Iterable<WWIcon> getIcons()
-    {
-        if (this.iconsOverride != null)
+    public Iterable<WWIcon> getIcons() {
+        if (this.iconsOverride != null) {
             return this.iconsOverride;
+        }
 
-        if (this.icons != null)
+        if (this.icons != null) {
             return this.icons;
+        }
 
         return Collections.emptyList();
     }
@@ -175,8 +166,7 @@ public class IconLayer extends AbstractLayer
      *
      * @return regionCulling true if region culling is performed, otherwise false.
      */
-    public boolean isRegionCulling()
-    {
+    public boolean isRegionCulling() {
         return this.regionCulling;
     }
 
@@ -187,8 +177,7 @@ public class IconLayer extends AbstractLayer
      *
      * @param regionCulling true if region culling is performed, otherwise false.
      */
-    public void setRegionCulling(boolean regionCulling)
-    {
+    public void setRegionCulling(boolean regionCulling) {
         this.regionCulling = regionCulling;
     }
 
@@ -202,23 +191,26 @@ public class IconLayer extends AbstractLayer
      *
      * @return Iterable of currently active Icons.
      */
-    protected Iterable<WWIcon> getActiveIcons(DrawContext dc)
-    {
-        if (this.iconsOverride != null)
+    protected Iterable<WWIcon> getActiveIcons(DrawContext dc) {
+        if (this.iconsOverride != null) {
             return this.iconsOverride;
+        }
 
         // Use the active icons computed in the pick pass.
         Set<WWIcon> lastActiveIcons = this.lastActiveIconsLists.get(dc.getGlobe().getGlobeStateKey());
         this.lastActiveIconsLists.remove(dc.getGlobe().getGlobeStateKey()); // remove it on re-use
-        if (lastActiveIcons != null && this.frameId == dc.getFrameTimeStamp())
+        if (lastActiveIcons != null && this.frameId == dc.getFrameTimeStamp()) {
             return lastActiveIcons;
+        }
 
-        if (!this.isRegionCulling())
+        if (!this.isRegionCulling()) {
             return this.icons;
+        }
 
         SectorGeometryList sgList = dc.getSurfaceGeometry();
-        if (sgList == null || sgList.size() == 0)
+        if (sgList == null || sgList.size() == 0) {
             return Collections.emptyList();
+        }
 
         lastActiveIcons = this.icons.getItemsInRegions(sgList, new HashSet<WWIcon>());
         this.lastActiveIconsLists.put(dc.getGlobe().getGlobeStateKey(), lastActiveIcons);
@@ -237,10 +229,9 @@ public class IconLayer extends AbstractLayer
      * collection.
      *
      * @param iconIterable Iterable to use instead of this layer's internal collection, or null to use this layer's
-     *                     internal collection.
+     * internal collection.
      */
-    public void setIcons(Iterable<WWIcon> iconIterable)
-    {
+    public void setIcons(Iterable<WWIcon> iconIterable) {
         this.iconsOverride = iconIterable;
         // Clear the internal collection of Icons.
         clearIcons();
@@ -251,8 +242,7 @@ public class IconLayer extends AbstractLayer
      *
      * @return <code>Pedestal</code> used by this layers internal <code>IconRenderer</code>.
      */
-    public Pedestal getPedestal()
-    {
+    public Pedestal getPedestal() {
         return pedestal;
     }
 
@@ -261,8 +251,7 @@ public class IconLayer extends AbstractLayer
      *
      * @param pedestal <code>Pedestal</code> to be used by this layers internal <code>IconRenderer</code>.
      */
-    public void setPedestal(Pedestal pedestal)
-    {
+    public void setPedestal(Pedestal pedestal) {
         this.pedestal = pedestal;
     }
 
@@ -273,8 +262,7 @@ public class IconLayer extends AbstractLayer
      *
      * @see #setHorizonClippingEnabled(boolean)
      */
-    public boolean isHorizonClippingEnabled()
-    {
+    public boolean isHorizonClippingEnabled() {
         return this.iconRenderer.isHorizonClippingEnabled();
     }
 
@@ -283,12 +271,11 @@ public class IconLayer extends AbstractLayer
      * view volume inclusion. The default is <code>false</code>, horizon clipping is not performed.
      *
      * @param horizonClippingEnabled <code>true</code> if horizon clipping should be performed, otherwise
-     *                               <code>false</code>.
+     * <code>false</code>.
      *
      * @see #setViewClippingEnabled(boolean)
      */
-    public void setHorizonClippingEnabled(boolean horizonClippingEnabled)
-    {
+    public void setHorizonClippingEnabled(boolean horizonClippingEnabled) {
         this.iconRenderer.setHorizonClippingEnabled(horizonClippingEnabled);
     }
 
@@ -299,8 +286,7 @@ public class IconLayer extends AbstractLayer
      *
      * @see #setViewClippingEnabled(boolean)
      */
-    public boolean isViewClippingEnabled()
-    {
+    public boolean isViewClippingEnabled() {
         return this.iconRenderer.isViewClippingEnabled();
     }
 
@@ -314,8 +300,7 @@ public class IconLayer extends AbstractLayer
      *
      * @see #setHorizonClippingEnabled(boolean)
      */
-    public void setViewClippingEnabled(boolean viewClippingEnabled)
-    {
+    public void setViewClippingEnabled(boolean viewClippingEnabled) {
         this.iconRenderer.setViewClippingEnabled(viewClippingEnabled);
     }
 
@@ -326,8 +311,7 @@ public class IconLayer extends AbstractLayer
      *
      * @see #setViewClippingEnabled(boolean)
      */
-    public boolean isPickFrustumClippingEnabled()
-    {
+    public boolean isPickFrustumClippingEnabled() {
         return this.iconRenderer.isPickFrustumClippingEnabled();
     }
 
@@ -337,10 +321,9 @@ public class IconLayer extends AbstractLayer
      * clipping not be performed. The default is <code>false</code>, picking volume clipping is not performed.
      *
      * @param pickFrustumClippingEnabled <code>true</code> if picking clipping should be performed, otherwise
-     *                                   <code>false</code>.
+     * <code>false</code>.
      */
-    public void setPickFrustumClippingEnabled(boolean pickFrustumClippingEnabled)
-    {
+    public void setPickFrustumClippingEnabled(boolean pickFrustumClippingEnabled) {
         this.iconRenderer.setPickFrustumClippingEnabled(pickFrustumClippingEnabled);
     }
 
@@ -349,10 +332,9 @@ public class IconLayer extends AbstractLayer
      * level.
      *
      * @return <code>true</code> if icon elevations are treated as absolute, <code>false</code> if they're treated as
-     *         offsets from the terrain.
+     * offsets from the terrain.
      */
-    public boolean isAlwaysUseAbsoluteElevation()
-    {
+    public boolean isAlwaysUseAbsoluteElevation() {
         return this.iconRenderer.isAlwaysUseAbsoluteElevation();
     }
 
@@ -362,10 +344,9 @@ public class IconLayer extends AbstractLayer
      * absolute elevation above sea level.
      *
      * @param alwaysUseAbsoluteElevation <code>true</code> to treat icon elevations as absolute, <code>false</code> to
-     *                                   treat them as offsets from the terrain.
+     * treat them as offsets from the terrain.
      */
-    public void setAlwaysUseAbsoluteElevation(boolean alwaysUseAbsoluteElevation)
-    {
+    public void setAlwaysUseAbsoluteElevation(boolean alwaysUseAbsoluteElevation) {
         this.iconRenderer.setAlwaysUseAbsoluteElevation(alwaysUseAbsoluteElevation);
     }
 
@@ -375,8 +356,7 @@ public class IconLayer extends AbstractLayer
      * @param opacity the current opacity value, which is ignored by this layer.
      */
     @Override
-    public void setOpacity(double opacity)
-    {
+    public void setOpacity(double opacity) {
         super.setOpacity(opacity);
     }
 
@@ -387,8 +367,7 @@ public class IconLayer extends AbstractLayer
      * @return The layer opacity, a value between 0 and 1.
      */
     @Override
-    public double getOpacity()
-    {
+    public double getOpacity() {
         return super.getOpacity();
     }
 
@@ -401,8 +380,7 @@ public class IconLayer extends AbstractLayer
      *
      * @see #setAllowBatchPicking(boolean)
      */
-    public boolean isAllowBatchPicking()
-    {
+    public boolean isAllowBatchPicking() {
         return this.iconRenderer.isAllowBatchPicking();
     }
 
@@ -413,28 +391,24 @@ public class IconLayer extends AbstractLayer
      *
      * @param allowBatchPicking true if batch picking is allowed, otherwise false.
      */
-    public void setAllowBatchPicking(boolean allowBatchPicking)
-    {
+    public void setAllowBatchPicking(boolean allowBatchPicking) {
         this.iconRenderer.setAllowBatchPicking(allowBatchPicking);
     }
 
     @Override
-    protected void doPick(DrawContext dc, java.awt.Point pickPoint)
-    {
+    protected void doPick(DrawContext dc, java.awt.Point pickPoint) {
         this.iconRenderer.setPedestal(this.pedestal);
         this.iconRenderer.pick(dc, getActiveIcons(dc), pickPoint, this);
     }
 
     @Override
-    protected void doRender(DrawContext dc)
-    {
+    protected void doRender(DrawContext dc) {
         this.iconRenderer.setPedestal(this.pedestal);
         this.iconRenderer.render(dc, getActiveIcons(dc));
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return Logging.getMessage("layers.IconLayer.Name");
     }
 }

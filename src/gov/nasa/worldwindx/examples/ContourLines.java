@@ -24,14 +24,13 @@ import java.util.*;
  * @author Patrick Murris
  * @version $Id: ContourLines.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class ContourLines extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+public class ContourLines extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         protected ContourLine contourLine;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             // Create a layer to display the contour lines.
             RenderableLayer layer = new RenderableLayer();
             layer.setName("Contour Lines");
@@ -52,19 +51,18 @@ public class ContourLines extends ApplicationTemplate
             positions.add(LatLon.fromDegrees(44.30, 6.95));
             positions.add(LatLon.fromDegrees(44.16, 6.82));
 
-            for (int elevation = 0; elevation <= 3000; elevation += 250)
-            {
+            for (int elevation = 0; elevation <= 3000; elevation += 250) {
                 ContourLinePolygon cl = new ContourLinePolygon(elevation, positions);
                 cl.setColor(new Color(0.2f, 0.2f, 0.8f));
 
-                if (elevation % 1000 == 0)
-                {
+                if (elevation % 1000 == 0) {
                     cl.setLineWidth(2);
                     cl.setColor(new Color(0.0f, 0.1f, 0.6f));
                 }
 
-                if (elevation % 500 == 0)
+                if (elevation % 500 == 0) {
                     cl.setLineWidth(2);
+                }
 
                 layer.addRenderable(cl);
             }
@@ -73,22 +71,19 @@ public class ContourLines extends ApplicationTemplate
             this.getControlPanel().add(this.makeContourLineControlPanel(), BorderLayout.SOUTH);
         }
 
-        protected JPanel makeContourLineControlPanel()
-        {
+        protected JPanel makeContourLineControlPanel() {
             JPanel controlPanel = new JPanel();
             controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
             controlPanel.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9),
-                new TitledBorder("Contour Line Elevation")));
+                    new TitledBorder("Contour Line Elevation")));
 
             final JSlider slider = new JSlider(0, 3000, (int) this.contourLine.getElevation());
             slider.setMajorTickSpacing(1000);
             slider.setMinorTickSpacing(250);
             slider.setPaintTicks(true);
             slider.setPaintLabels(true);
-            slider.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent event)
-                {
+            slider.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent event) {
                     contourLine.setElevation(slider.getValue());
                     getWwd().redraw();
                 }
@@ -106,8 +101,7 @@ public class ContourLines extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 44.23);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, 6.92);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 30000);

@@ -21,7 +21,8 @@ import com.jogamp.opengl.*;
  * texture. For this reason, OGLRenderToTextureSupport must be used when the contents of the windowing system buffer
  * (likely the back framebuffer) can be freely modified by OGLRenderToTextureSupport. The WorldWind pre-render stage is
  * a good example of when it is appropriate to use OGLRenderToTextureSupport. Fore more information on the pre-render
- * stage, see {@link gov.nasa.worldwind.render.PreRenderable} and {@link gov.nasa.worldwind.layers.Layer#preRender(gov.nasa.worldwind.render.DrawContext)}.
+ * stage, see {@link gov.nasa.worldwind.render.PreRenderable} and
+ * {@link gov.nasa.worldwind.layers.Layer#preRender(gov.nasa.worldwind.render.DrawContext)}.
  * <b>Note:</b> In order to achieve consistent results across all platforms, it is essential to clear the texture's
  * contents before rendering anything into the texture. Do this by invoking {@link
  * #clear(gov.nasa.worldwind.render.DrawContext, java.awt.Color)} immediately after any call to {@link
@@ -31,25 +32,26 @@ import com.jogamp.opengl.*;
  * passed in as an argument to the containing method.<br> Texture texture = TextureIO.newTexture(new
  * TextureData(...);<br> <br> // Setup the drawing rectangle to match the texture dimensions, and originate from the
  * texture's lower left corner.<br> OGLRenderToTextureSupport rttSupport = new OGLRenderToTextureSupport();<br>
- * rttSupport.beginRendering(dc, 0, 0, texture.getWidth(), texture.getHeight());<br> try<br> {<br> // Bind the
- * texture as the destination for color pixel writes.<br> rttSupport.setColorTarget(dc, texture);<br> // Clear the
- * texture contents with transparent black.<br> rttSupport.clear(dc, new Color(0, 0, 0, 0));<br> // Invoke desired GL
- * rendering commands.<br> }<br> finally<br> {<br> rttSupport.endRendering(dc);<br> }<br> </code>
+ * rttSupport.beginRendering(dc, 0, 0, texture.getWidth(), texture.getHeight());<br> try<br> {<br> // Bind the texture
+ * as the destination for color pixel writes.<br> rttSupport.setColorTarget(dc, texture);<br> // Clear the texture
+ * contents with transparent black.<br> rttSupport.clear(dc, new Color(0, 0, 0, 0));<br> // Invoke desired GL rendering
+ * commands.<br> }<br> finally<br> {<br> rttSupport.endRendering(dc);<br> }<br> </code>
  *
  * @author dcollins
  * @version $Id: OGLRenderToTextureSupport.java 1676 2013-10-21 18:32:30Z dcollins $
  */
-public class OGLRenderToTextureSupport
-{
+public class OGLRenderToTextureSupport {
+
     protected boolean isFramebufferObjectEnabled;
     protected Texture colorTarget;
     protected java.awt.Rectangle drawRegion;
     protected OGLStackHandler stackHandler;
     protected int framebufferObject;
 
-    /** Constructs a new OGLRenderToTextureSupport, but otherwise does nothing. */
-    public OGLRenderToTextureSupport()
-    {
+    /**
+     * Constructs a new OGLRenderToTextureSupport, but otherwise does nothing.
+     */
+    public OGLRenderToTextureSupport() {
         this.isFramebufferObjectEnabled = true;
         this.stackHandler = new OGLStackHandler();
     }
@@ -60,8 +62,7 @@ public class OGLRenderToTextureSupport
      *
      * @return true if framebuffer objects are enabled, and false otherwise.
      */
-    public boolean isEnableFramebufferObject()
-    {
+    public boolean isEnableFramebufferObject() {
         return this.isFramebufferObjectEnabled;
     }
 
@@ -70,8 +71,7 @@ public class OGLRenderToTextureSupport
      *
      * @param enable true to enable framebuffer objects, false to disable them.
      */
-    public void setEnableFramebufferObject(boolean enable)
-    {
+    public void setEnableFramebufferObject(boolean enable) {
         this.isFramebufferObjectEnabled = enable;
     }
 
@@ -81,8 +81,7 @@ public class OGLRenderToTextureSupport
      *
      * @return the Texture currently set as the color buffer target, or null if none exists.
      */
-    public Texture getColorTarget()
-    {
+    public Texture getColorTarget() {
         return this.colorTarget;
     }
 
@@ -99,28 +98,26 @@ public class OGLRenderToTextureSupport
      * follows: <ul> <li>RGB</li> <li>RGBA</li> <li>FLOAT_R_NV (on NVidia hardware)</li> <li>FLOAT_RG_NV (on NVidia
      * hardware)</li> <li>FLOAT_RGB_NV (on NVidia hardware)</li> <li>FLOAT_RGBA_NV (on NVidia hardware)</li> </ul>
      *
-     * @param dc      the current DrawContext.
+     * @param dc the current DrawContext.
      * @param texture the Texture to use as the destination for GL commands affecting the color buffer. A null value is
-     *                permitted.
+     * permitted.
      *
      * @throws IllegalArgumentException if the DrawContext is null.
      */
-    public void setColorTarget(DrawContext dc, Texture texture)
-    {
-        if (dc == null)
-        {
+    public void setColorTarget(DrawContext dc, Texture texture) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.colorTarget == texture)
+        if (this.colorTarget == texture) {
             return;
+        }
 
         // If we have a texture target, then write the current GL color buffer state to the current texture target
         // before binding a new target.
-        if (this.colorTarget != null)
-        {
+        if (this.colorTarget != null) {
             this.flushColor(dc);
         }
 
@@ -128,8 +125,7 @@ public class OGLRenderToTextureSupport
         // attachment, and GL rendering commands then affect the target texture. Otherwise, GL rendering commands affect
         // the windowing system's write buffer (likely the onscreen back buffer), and are explicitly copied to the
         // texture in flush() or endRendering().
-        if (this.useFramebufferObject(dc))
-        {
+        if (this.useFramebufferObject(dc)) {
             this.bindFramebufferColorAttachment(dc, texture);
         }
 
@@ -140,29 +136,27 @@ public class OGLRenderToTextureSupport
      * Clears the current texture target's pixels with the specified RGBA clear color. If the current color texture
      * target is null, this does nothing.
      *
-     * @param dc    the current DrawContext.
+     * @param dc the current DrawContext.
      * @param color the RGBA clear color to write to the current color texture target.
      *
      * @throws IllegalArgumentException if either the DrawContext or the color is null.
      */
-    public void clear(DrawContext dc, java.awt.Color color)
-    {
-        if (dc == null)
-        {
+    public void clear(DrawContext dc, java.awt.Color color) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (color == null)
-        {
+        if (color == null) {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.colorTarget == null)
+        if (this.colorTarget == null) {
             return;
+        }
 
         float[] compArray = new float[4];
         color.getRGBComponents(compArray);
@@ -183,10 +177,8 @@ public class OGLRenderToTextureSupport
      *
      * @throws IllegalArgumentException if the DrawContext is null.
      */
-    public void flush(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public void flush(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -204,18 +196,16 @@ public class OGLRenderToTextureSupport
      * affected by GL commands. Once rendering is complete, this should always be followed with a call to {@link
      * #endRendering(gov.nasa.worldwind.render.DrawContext)}.
      *
-     * @param dc     the current DrawContext.
-     * @param x      the x-coordinate of the draw region's lower left corner.
-     * @param y      the y-coordinate of the draw region's lower left corner.
-     * @param width  the draw region width.
+     * @param dc the current DrawContext.
+     * @param x the x-coordinate of the draw region's lower left corner.
+     * @param y the y-coordinate of the draw region's lower left corner.
+     * @param width the draw region width.
      * @param height the draw region height.
      *
      * @throws IllegalArgumentException if the DrawContext is null.
      */
-    public void beginRendering(DrawContext dc, int x, int y, int width, int height)
-    {
-        if (dc == null)
-        {
+    public void beginRendering(DrawContext dc, int x, int y, int width, int height) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -228,10 +218,10 @@ public class OGLRenderToTextureSupport
         // Note: there is no attribute bit for framebuffer objects. The default framebuffer object state (object ID 0
         // is bound as the current fbo) is restored in endRendering().
         this.stackHandler.pushAttrib(gl,
-            GL2.GL_COLOR_BUFFER_BIT  // For clear color.
+                GL2.GL_COLOR_BUFFER_BIT // For clear color.
                 | GL2.GL_DEPTH_BUFFER_BIT // For depth test and depth mask.
-                | GL2.GL_SCISSOR_BIT      // For scissor test and scissor box.
-                | GL2.GL_TRANSFORM_BIT    // For matrix mode.
+                | GL2.GL_SCISSOR_BIT // For scissor test and scissor box.
+                | GL2.GL_TRANSFORM_BIT // For matrix mode.
                 | GL2.GL_VIEWPORT_BIT);   // For viewport state.
 
         this.stackHandler.pushTextureIdentity(gl);
@@ -252,8 +242,7 @@ public class OGLRenderToTextureSupport
         gl.glScissor(x, y, width, height);
         gl.glViewport(x, y, width, height);
 
-        if (this.useFramebufferObject(dc))
-        {
+        if (this.useFramebufferObject(dc)) {
             this.beginFramebufferObjectRendering(dc);
         }
     }
@@ -267,10 +256,8 @@ public class OGLRenderToTextureSupport
      *
      * @throws IllegalArgumentException if the DrawContext is null.
      */
-    public void endRendering(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public void endRendering(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -280,10 +267,8 @@ public class OGLRenderToTextureSupport
 
         this.flush(dc);
 
-        if (this.useFramebufferObject(dc))
-        {
-            if (this.colorTarget != null)
-            {
+        if (this.useFramebufferObject(dc)) {
+            if (this.colorTarget != null) {
                 this.bindFramebufferColorAttachment(dc, null);
             }
 
@@ -295,54 +280,50 @@ public class OGLRenderToTextureSupport
         this.colorTarget = null;
     }
 
-    protected void flushColor(DrawContext dc)
-    {
+    protected void flushColor(DrawContext dc) {
         // If framebuffer objects are enabled, then texture contents are already affected by the any GL rendering
         // commands.
-        if (this.useFramebufferObject(dc))
-        {
-            if (this.colorTarget != null)
-            {
+        if (this.useFramebufferObject(dc)) {
+            if (this.colorTarget != null) {
                 // If the color target is attempting to use automatic mipmap generation, then we must manually update
                 // its mipmap chain. Automatic mipmap generation is invoked when the GL client explicitly modifies the
                 // texture contents by calling one of glTexImage or glTexSubImage. However when we render directly to
                 // the texture using framebuffer objects, automatic mipmap generation is not invoked, and the texture's
                 // mipmap chain contents are undefined until we explicitly update them.
-                if (this.colorTarget.isUsingAutoMipmapGeneration())
+                if (this.colorTarget.isUsingAutoMipmapGeneration()) {
                     this.updateMipmaps(dc, this.colorTarget);
+                }
             }
-        }
-        // If framebuffer objects are not enabled, then we've been rendering into the read buffer associated with the
+        } // If framebuffer objects are not enabled, then we've been rendering into the read buffer associated with the
         // windowing system (likely the onscreen back buffer). Explicitly copy the read buffer contents to the texture.
-        else
-        {
-            if (this.colorTarget != null)
-            {
+        else {
+            if (this.colorTarget != null) {
                 this.copyScreenPixelsToTexture(dc, this.drawRegion.x, this.drawRegion.y,
-                    this.drawRegion.width, this.drawRegion.height, this.colorTarget);
+                        this.drawRegion.width, this.drawRegion.height, this.colorTarget);
             }
         }
     }
 
-    protected void copyScreenPixelsToTexture(DrawContext dc, int x, int y, int width, int height, Texture texture)
-    {
+    protected void copyScreenPixelsToTexture(DrawContext dc, int x, int y, int width, int height, Texture texture) {
         int w = width;
         int h = height;
 
         // If the lower left corner of the region to copy is outside of the texture bounds, then exit and do nothing.
-        if (x >= texture.getWidth() || y >= texture.getHeight())
+        if (x >= texture.getWidth() || y >= texture.getHeight()) {
             return;
+        }
 
         // Limit the dimensions of the region to copy so they fit into the texture's dimensions.
-        if (w > texture.getWidth())
+        if (w > texture.getWidth()) {
             w = texture.getWidth();
-        if (h > texture.getHeight())
+        }
+        if (h > texture.getHeight()) {
             h = texture.getHeight();
+        }
 
         GL gl = dc.getGL();
 
-        try
-        {
+        try {
             // We want to copy the contents of the current GL read buffer to the specified texture target. However we do
             // not want to change any of the texture creation parameters (e.g. dimensions, internal format, border).
             // Therefore we use glCopyTexSubImage2D() to copy a region of the read buffer to a region of the texture.
@@ -354,40 +335,32 @@ public class OGLRenderToTextureSupport
             texture.enable(gl);
             texture.bind(gl);
             gl.glCopyTexSubImage2D(
-                texture.getTarget(), // target
-                0,                   // level
-                x, y,                // xoffset, yoffset
-                x, y, w, h);         // x, y, width, height
-        }
-        finally
-        {
+                    texture.getTarget(), // target
+                    0, // level
+                    x, y, // xoffset, yoffset
+                    x, y, w, h);         // x, y, width, height
+        } finally {
             texture.disable(gl);
         }
     }
 
-    protected void updateMipmaps(DrawContext dc, Texture texture)
-    {
+    protected void updateMipmaps(DrawContext dc, Texture texture) {
         GL gl = dc.getGL();
 
-        try
-        {
+        try {
             texture.enable(gl);
             texture.bind(gl);
             gl.glGenerateMipmap(texture.getTarget());
-        }
-        finally
-        {
+        } finally {
             texture.disable(gl);
         }
     }
 
-    protected boolean useFramebufferObject(DrawContext dc)
-    {
+    protected boolean useFramebufferObject(DrawContext dc) {
         return this.isEnableFramebufferObject() && dc.getGLRuntimeCapabilities().isUseFramebufferObject();
     }
 
-    protected void beginFramebufferObjectRendering(DrawContext dc)
-    {
+    protected void beginFramebufferObjectRendering(DrawContext dc) {
         // Binding a framebuffer object causes all GL operations to operate on the attached textures and renderbuffers
         // (if any).
 
@@ -398,18 +371,16 @@ public class OGLRenderToTextureSupport
         gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, framebuffers[0]);
 
         this.framebufferObject = framebuffers[0];
-        if (this.framebufferObject == 0)
-        {
+        if (this.framebufferObject == 0) {
             throw new IllegalStateException("Frame Buffer Object not created.");
         }
     }
 
-    protected void endFramebufferObjectRendering(DrawContext dc)
-    {
+    protected void endFramebufferObjectRendering(DrawContext dc) {
         // Binding framebuffer object 0 (the default) causes GL operations to operate on the window system attached
         // framebuffer.
 
-        int[] framebuffers = new int[] {this.framebufferObject};
+        int[] framebuffers = new int[]{this.framebufferObject};
 
         GL gl = dc.getGL();
         gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, 0);
@@ -418,46 +389,38 @@ public class OGLRenderToTextureSupport
         this.framebufferObject = 0;
     }
 
-    protected void bindFramebufferColorAttachment(DrawContext dc, Texture texture)
-    {
+    protected void bindFramebufferColorAttachment(DrawContext dc, Texture texture) {
         GL gl = dc.getGL();
 
         // Attach the texture as color attachment 0 to the framebuffer.
-        if (texture != null)
-        {
+        if (texture != null) {
             gl.glFramebufferTexture2D(GL.GL_FRAMEBUFFER, GL.GL_COLOR_ATTACHMENT0, GL.GL_TEXTURE_2D,
-                texture.getTextureObject(gl), 0);
+                    texture.getTextureObject(gl), 0);
             this.checkFramebufferStatus(dc);
-        }
-        // If the texture is null, detach color attachment 0 from the framebuffer.
-        else
-        {
+        } // If the texture is null, detach color attachment 0 from the framebuffer.
+        else {
             gl.glFramebufferTexture2D(GL.GL_FRAMEBUFFER, GL.GL_COLOR_ATTACHMENT0, GL.GL_TEXTURE_2D, 0, 0);
         }
     }
 
-    protected void checkFramebufferStatus(DrawContext dc)
-    {
+    protected void checkFramebufferStatus(DrawContext dc) {
         int status = dc.getGL().glCheckFramebufferStatus(GL.GL_FRAMEBUFFER);
 
-        switch (status)
-        {
+        switch (status) {
             // Framebuffer is configured correctly and supported on this hardware.
             case GL.GL_FRAMEBUFFER_COMPLETE:
                 break;
             // Framebuffer is configured correctly, but not supported on this hardware.
             case GL.GL_FRAMEBUFFER_UNSUPPORTED:
                 throw new IllegalStateException(getFramebufferStatusString(status));
-                // Framebuffer is configured incorrectly. This should never happen, but we check anyway.
+            // Framebuffer is configured incorrectly. This should never happen, but we check anyway.
             default:
                 throw new IllegalStateException(getFramebufferStatusString(status));
         }
     }
 
-    protected static String getFramebufferStatusString(int status)
-    {
-        switch (status)
-        {
+    protected static String getFramebufferStatusString(int status) {
+        switch (status) {
             case GL.GL_FRAMEBUFFER_COMPLETE:
                 return Logging.getMessage("OGL.FramebufferComplete");
             case GL.GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:

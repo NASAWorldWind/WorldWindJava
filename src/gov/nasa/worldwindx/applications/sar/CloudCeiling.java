@@ -18,12 +18,12 @@ import java.util.*;
 
 /**
  * Display one or two contour lines depicting lower and upper cloud ceiling around a list of positions.
- * 
+ *
  * @author Patrick Murris
  * @version $Id: CloudCeiling.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class CloudCeiling implements Restorable
-{
+public class CloudCeiling implements Restorable {
+
     public static String DELTA_MODE_PLUS = "Sar.CloudCeiling.DeltaModePlus";
     public static String DELTA_MODE_MINUS = "Sar.CloudCeiling.DeltaModeMinus";
     public static String DELTA_MODE_BOTH = "Sar.CloudCeiling.DeltaModeBoth";
@@ -52,8 +52,7 @@ public class CloudCeiling implements Restorable
     private double radius = 10e3;
     private SurfacePolygon shape;
 
-    public CloudCeiling(WorldWindow wwd)
-    {
+    public CloudCeiling(WorldWindow wwd) {
         this.wwd = wwd;
         this.lines[0] = new ContourLinePolygon();
         this.lines[1] = new ContourLinePolygon();
@@ -74,109 +73,92 @@ public class CloudCeiling implements Restorable
         this.wwd.getModel().getLayers().add(this.layer);
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
-    public void setEnabled(boolean enabled)
-    {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
         this.lines[0].setEnabled(enabled);
         this.screenLines[0].setEnabled(enabled);
         this.planes[0].setVisible(enabled);
-        if (this.elevationDelta > 0)
-        {
+        if (this.elevationDelta > 0) {
             this.lines[1].setEnabled(enabled);
             this.screenLines[1].setEnabled(enabled);
             this.planes[1].setVisible(enabled);
         }
     }
 
-    public Color getColor()
-    {
+    public Color getColor() {
         return this.color;
     }
 
-    public void setColor(Color color)
-    {
+    public void setColor(Color color) {
         this.color = color;
         this.lines[0].setColor(color.darker());
         this.lines[1].setColor(color.brighter());
         this.screenLines[0].setColor(color.darker());
         this.screenLines[1].setColor(color.brighter());
         this.planes[0].setImageSource(PatternFactory.createPattern(this.pattern,
-            computeAlphaColor(color.darker(), this.planeOpacity)));
+                computeAlphaColor(color.darker(), this.planeOpacity)));
         this.planes[1].setImageSource(PatternFactory.createPattern(this.pattern,
-            computeAlphaColor(color.brighter(), this.planeOpacity)));
+                computeAlphaColor(color.brighter(), this.planeOpacity)));
     }
 
-    public double getPlaneOpacity()
-    {
+    public double getPlaneOpacity() {
         return this.planeOpacity;
     }
 
-    public void setPlaneOpacity(double opacity)
-    {
-        if (this.planeOpacity == opacity)
+    public void setPlaneOpacity(double opacity) {
+        if (this.planeOpacity == opacity) {
             return;
+        }
 
         this.planeOpacity = opacity;
         this.setColor(this.getColor()); // re apply color
     }
 
-    public String getPattern()
-    {
+    public String getPattern() {
         return this.pattern;
     }
 
-    public void setPattern(String pattern)
-    {
-        if (this.pattern.equals(pattern))
-                return;
+    public void setPattern(String pattern) {
+        if (this.pattern.equals(pattern)) {
+            return;
+        }
 
         this.pattern = pattern;
         this.setColor(this.getColor()); // re apply color
     }
 
-    public double getPatternSize()
-    {
+    public double getPatternSize() {
         return this.patternSize;
     }
 
-    public void setPatternSize(double sizeInMeter)
-    {
+    public void setPatternSize(double sizeInMeter) {
         this.patternSize = sizeInMeter;
         this.planes[0].setImageSize(sizeInMeter);
         this.planes[1].setImageSize(sizeInMeter);
     }
 
-    public String getElevationUnit()
-    {
+    public String getElevationUnit() {
         return this.elevationUnit;
     }
 
-    public void setElevationUnit(String unit)
-    {
-        if (!this.elevationUnit.equals(unit))
-        {
-            if (SAR2.UNIT_IMPERIAL.equals(unit))
-            {
+    public void setElevationUnit(String unit) {
+        if (!this.elevationUnit.equals(unit)) {
+            if (SAR2.UNIT_IMPERIAL.equals(unit)) {
                 this.elevationBase = SAR2.metersToFeet(this.elevationBase);
                 this.elevationDelta = SAR2.metersToFeet(this.elevationDelta);
-            }
-            else
-            {
+            } else {
                 this.elevationBase = SAR2.feetToMeters(this.elevationBase);
                 this.elevationDelta = SAR2.feetToMeters(this.elevationDelta);
             }
@@ -184,78 +166,69 @@ public class CloudCeiling implements Restorable
         }
     }
 
-    public double getElevationBase()
-    {
+    public double getElevationBase() {
         return this.elevationBase;
     }
 
-    public void setElevationBase(double elevation)
-    {
-        if (this.elevationBase == elevation)
+    public void setElevationBase(double elevation) {
+        if (this.elevationBase == elevation) {
             return;
+        }
 
         this.elevationBase = elevation;
         this.updateElevations();
     }
 
-    public double getElevationDelta()
-    {
+    public double getElevationDelta() {
         return this.elevationDelta;
     }
 
-    public void setElevationDelta(double elevation)
-    {
-        if (this.elevationDelta == elevation)
+    public void setElevationDelta(double elevation) {
+        if (this.elevationDelta == elevation) {
             return;
+        }
 
         this.elevationDelta = elevation;
         this.updateElevations();
     }
 
-    public String getDeltaMode()
-    {
+    public String getDeltaMode() {
         return this.deltaMode;
     }
 
-    public void setDeltaMode(String mode)
-    {
-        if (this.deltaMode.equals(mode))
+    public void setDeltaMode(String mode) {
+        if (this.deltaMode.equals(mode)) {
             return;
+        }
 
         this.deltaMode = mode;
         this.updateElevations();
     }
-    
-    public void relocateLayerOnTop()
-    {
+
+    public void relocateLayerOnTop() {
         this.wwd.getModel().getLayers().remove(this.layer);
         this.wwd.getModel().getLayers().add(this.layer);
     }
 
-    private void updateElevations()
-    {
+    private void updateElevations() {
         // Contour lines elevation is in meter, so convert if we are using feet
         double unitConvertion = SAR2.UNIT_IMPERIAL.equals(this.elevationUnit) ? SAR2.feetToMeters(1) : 1;
-        if (this.deltaMode.equals(DELTA_MODE_PLUS))
-        {
+        if (this.deltaMode.equals(DELTA_MODE_PLUS)) {
             lines[0].setElevation(this.elevationBase * unitConvertion);
             lines[1].setElevation((this.elevationBase + this.elevationDelta) * unitConvertion);
-        }
-        else if (this.deltaMode.equals(DELTA_MODE_MINUS))
-        {
+        } else if (this.deltaMode.equals(DELTA_MODE_MINUS)) {
             lines[0].setElevation((this.elevationBase - this.elevationDelta) * unitConvertion);
             lines[1].setElevation(this.elevationBase * unitConvertion);
-        }
-        else if (this.deltaMode.equals(DELTA_MODE_BOTH))
-        {
+        } else if (this.deltaMode.equals(DELTA_MODE_BOTH)) {
             lines[0].setElevation((this.elevationBase - this.elevationDelta) * unitConvertion);
             lines[1].setElevation((this.elevationBase + this.elevationDelta) * unitConvertion);
         }
 
-        if (this.elevationDelta > 0)
+        if (this.elevationDelta > 0) {
             lines[1].setEnabled(this.isEnabled());
-        else
+        } else {
             lines[1].setEnabled(false);
+        }
 
         // Synchonize screen lines and planes
         screenLines[0].setElevation(lines[0].getElevation());
@@ -266,48 +239,47 @@ public class CloudCeiling implements Restorable
         planes[1].setVisible(lines[1].isEnabled());
     }
 
-    public double getRadius()
-    {
+    public double getRadius() {
         return this.radius;
     }
 
-    public void setRadius(double radius)
-    {
-        if (this.radius == radius)
+    public void setRadius(double radius) {
+        if (this.radius == radius) {
             return;
+        }
 
         this.radius = radius;
         this.updateExtent();
     }
 
-    public ArrayList<? extends LatLon> getPositions()
-    {
+    public ArrayList<? extends LatLon> getPositions() {
         return this.centerPositions;
     }
 
-    public void setPositions(ArrayList<? extends LatLon> newPositions)
-    {
+    public void setPositions(ArrayList<? extends LatLon> newPositions) {
         boolean changed = false;
-        if (this.centerPositions != null && this.centerPositions.size() == newPositions.size())
-        {
-            for (int i = 0; i < newPositions.size(); i++)
-                if (!this.centerPositions.get(i).equals(newPositions.get(i)))
+        if (this.centerPositions != null && this.centerPositions.size() == newPositions.size()) {
+            for (int i = 0; i < newPositions.size(); i++) {
+                if (!this.centerPositions.get(i).equals(newPositions.get(i))) {
                     changed = true;
-        }
-        else
+                }
+            }
+        } else {
             changed = true;
+        }
 
-        if (!changed)
+        if (!changed) {
             return;
+        }
 
         this.centerPositions = newPositions;
         this.updateExtent();
     }
 
-    private void updateExtent()
-    {
-        if (this.centerPositions == null || this.radius <= 0)
+    private void updateExtent() {
+        if (this.centerPositions == null || this.radius <= 0) {
             return;
+        }
 
         // Compute cloud ceiling perimeter extent positions
         this.computeExtentPositions();
@@ -320,14 +292,11 @@ public class CloudCeiling implements Restorable
         updateExtentShape();
     }
 
-    private void updateExtentShape()
-    {
-        if (this.shape != null)
-        {
+    private void updateExtentShape() {
+        if (this.shape != null) {
             this.layer.removeRenderable(this.shape);
         }
-        if (this.enabled && this.showExtent && this.extentPositions != null && this.extentPositions.size() > 0)
-        {
+        if (this.enabled && this.showExtent && this.extentPositions != null && this.extentPositions.size() > 0) {
             this.shape = new SurfacePolygon(this.extentPositions);
             ShapeAttributes attr = new BasicShapeAttributes();
             attr.setDrawOutline(false);
@@ -341,52 +310,51 @@ public class CloudCeiling implements Restorable
     /**
      * Compute the positions of a perimeter line surrounding the track center positions at radius distance.
      */
-    private void computeExtentPositions()
-    {
+    private void computeExtentPositions() {
         Globe globe = this.wwd.getModel().getGlobe();
         this.extentPositions = new ArrayList<LatLon>();
         Angle heading = Angle.ZERO;
         int cpn = 0; // Current position number
         // Start cap
-        if (this.centerPositions.size() > 1)
+        if (this.centerPositions.size() > 1) {
             heading = LatLon.greatCircleAzimuth(this.centerPositions.get(cpn), this.centerPositions.get(cpn + 1));
+        }
         this.extentPositions.addAll(computeArcPositions(globe, this.centerPositions.get(cpn),
-            heading.addDegrees(90), heading.addDegrees(270), this.radius));
+                heading.addDegrees(90), heading.addDegrees(270), this.radius));
         // Follow path one way
-        while (cpn < this.centerPositions.size() - 1)
-        {
+        while (cpn < this.centerPositions.size() - 1) {
             Angle previousHeading = heading;
             heading = LatLon.greatCircleAzimuth(this.centerPositions.get(cpn), this.centerPositions.get(cpn + 1));
             Angle nextHeading = heading;
-            if (cpn < this.centerPositions.size() - 2)
+            if (cpn < this.centerPositions.size() - 2) {
                 nextHeading = LatLon.greatCircleAzimuth(this.centerPositions.get(cpn + 1), this.centerPositions.get(cpn + 2));
+            }
             this.extentPositions.addAll(computeLinePositions(globe, this.centerPositions.get(cpn),
-                this.centerPositions.get(cpn + 1), previousHeading, heading, nextHeading, radius));
+                    this.centerPositions.get(cpn + 1), previousHeading, heading, nextHeading, radius));
             cpn++;
         }
         // End cap - turn around
         heading = normalizedHeading(heading.addDegrees(180));
         cpn = this.centerPositions.size() - 1;
         this.extentPositions.addAll(computeArcPositions(globe, this.centerPositions.get(cpn),
-            heading.addDegrees(90), heading.addDegrees(270), this.radius));
+                heading.addDegrees(90), heading.addDegrees(270), this.radius));
         // Follow path the other way
-        while (cpn > 0)
-        {
+        while (cpn > 0) {
             Angle previousHeading = heading;
             heading = LatLon.greatCircleAzimuth(this.centerPositions.get(cpn), this.centerPositions.get(cpn - 1));
             Angle nextHeading = heading;
-            if (cpn > 1)
+            if (cpn > 1) {
                 nextHeading = LatLon.greatCircleAzimuth(this.centerPositions.get(cpn - 1), this.centerPositions.get(cpn - 2));
+            }
             this.extentPositions.addAll(computeLinePositions(globe, this.centerPositions.get(cpn),
-                this.centerPositions.get(cpn - 1), previousHeading, heading, nextHeading, radius));
+                    this.centerPositions.get(cpn - 1), previousHeading, heading, nextHeading, radius));
             cpn--;
         }
         // Close polygon
         this.extentPositions.add(this.extentPositions.get(0));
     }
 
-    private static ArrayList<LatLon> computeArcPositions(Globe globe, LatLon center, Angle start, Angle end, double radius)
-    {
+    private static ArrayList<LatLon> computeArcPositions(Globe globe, LatLon center, Angle start, Angle end, double radius) {
         start = normalizedHeading(start);
         end = normalizedHeading(end);
         end = end.degrees > start.degrees ? end : end.addDegrees(360);
@@ -399,8 +367,7 @@ public class CloudCeiling implements Restorable
     }
 
     private static ArrayList<LatLon> computeLinePositions(Globe globe, LatLon p1, LatLon p2, Angle previousHeading,
-        Angle heading, Angle nextHeading, double radius)
-    {
+            Angle heading, Angle nextHeading, double radius) {
         ArrayList<LatLon> positions = new ArrayList<LatLon>();
         Angle radiusAngle = Angle.fromRadians(radius / globe.getRadiusAt(p1));
         // Skip first pos
@@ -410,108 +377,99 @@ public class CloudCeiling implements Restorable
 //            positions.add(LatLon.greatCircleEndPosition(p1,
 //                computeMidHeading(previousHeading, heading).subtractDegrees(90), radiusAngle));
 
-        if (isClockwiseHeadingChange(heading, nextHeading))
-        {
+        if (isClockwiseHeadingChange(heading, nextHeading)) {
             positions.add(LatLon.greatCircleEndPosition(p2, heading.subtractDegrees(90), radiusAngle));
-            if (!heading.equals(nextHeading))
+            if (!heading.equals(nextHeading)) {
                 positions.addAll(computeArcPositions(globe, p2, heading.subtractDegrees(90),
-                    nextHeading.subtractDegrees(90), radius));
-        }
-        else
+                        nextHeading.subtractDegrees(90), radius));
+            }
+        } else {
             positions.add(LatLon.greatCircleEndPosition(p2,
-                computeMidHeading(heading, nextHeading).subtractDegrees(90), radiusAngle));
+                    computeMidHeading(heading, nextHeading).subtractDegrees(90), radiusAngle));
+        }
 
         return positions;
     }
 
-    private static boolean isClockwiseHeadingChange(Angle from, Angle to)
-    {
+    private static boolean isClockwiseHeadingChange(Angle from, Angle to) {
         double a1 = normalizedHeading(from).degrees;
         double a2 = normalizedHeading(to).degrees;
         return (a2 > a1 && a2 - a1 < 180);
     }
 
-    private static Angle computeMidHeading(Angle a1, Angle a2)
-    {
+    private static Angle computeMidHeading(Angle a1, Angle a2) {
         a1 = normalizedHeading(a1);
         a2 = normalizedHeading(a2);
-        if (a1.degrees < a2.degrees && a2.degrees - a1.degrees > 180)
+        if (a1.degrees < a2.degrees && a2.degrees - a1.degrees > 180) {
             a1 = a1.addDegrees(360);
-        else if (a2.degrees < a1.degrees && a1.degrees - a2.degrees > 180)
+        } else if (a2.degrees < a1.degrees && a1.degrees - a2.degrees > 180) {
             a2 = a2.addDegrees(360);
+        }
         return Angle.midAngle(a1, a2);
     }
 
-    private static Angle normalizedHeading(Angle heading)
-    {
+    private static Angle normalizedHeading(Angle heading) {
         double a = heading.degrees % 360;
-        while (a < 0)
+        while (a < 0) {
             a += 360;
+        }
         return Angle.fromDegrees(a);
     }
 
-    private static Color computePremultipliedAlphaColor(Color color, double opacity)
-    {
+    private static Color computePremultipliedAlphaColor(Color color, double opacity) {
         float[] compArray = new float[4];
         color.getRGBComponents(compArray);
-        compArray[3] = (float)WWMath.clamp(opacity, 0, 1);
+        compArray[3] = (float) WWMath.clamp(opacity, 0, 1);
         return new Color(
-            compArray[0] * compArray[3],
-            compArray[1] * compArray[3],
-            compArray[2] * compArray[3],
-            compArray[3]);
+                compArray[0] * compArray[3],
+                compArray[1] * compArray[3],
+                compArray[2] * compArray[3],
+                compArray[3]);
     }
 
-    private static Color computeAlphaColor(Color color, double opacity)
-    {
+    private static Color computeAlphaColor(Color color, double opacity) {
         float[] compArray = new float[4];
         color.getRGBComponents(compArray);
-        compArray[3] = (float)WWMath.clamp(opacity, 0, 1);
+        compArray[3] = (float) WWMath.clamp(opacity, 0, 1);
         return new Color(
-            compArray[0],
-            compArray[1],
-            compArray[2],
-            compArray[3]);
+                compArray[0],
+                compArray[1],
+                compArray[2],
+                compArray[3]);
     }
 
     // *** Restorable interface ***
-
-    public String getRestorableState()
-    {
+    public String getRestorableState() {
         RestorableSupport restorableSupport = RestorableSupport.newRestorableSupport();
         // Creating a new RestorableSupport failed. RestorableSupport logged the problem, so just return null.
-        if (restorableSupport == null)
+        if (restorableSupport == null) {
             return null;
-
-        restorableSupport.addStateValueAsString("name", this.name);
-        
-        if (this.color != null)
-        {
-            String encodedColor = RestorableSupport.encodeColor(this.color);
-            if (encodedColor != null)
-                restorableSupport.addStateValueAsString("color", encodedColor);
         }
 
-        if (this.centerPositions != null)
-        {
+        restorableSupport.addStateValueAsString("name", this.name);
+
+        if (this.color != null) {
+            String encodedColor = RestorableSupport.encodeColor(this.color);
+            if (encodedColor != null) {
+                restorableSupport.addStateValueAsString("color", encodedColor);
+            }
+        }
+
+        if (this.centerPositions != null) {
             // Create the base "positions" state object.
             RestorableSupport.StateObject positionsStateObj = restorableSupport.addStateObject("positions");
-            if (positionsStateObj != null)
-            {
-                for (LatLon p : this.centerPositions)
-                {
+            if (positionsStateObj != null) {
+                for (LatLon p : this.centerPositions) {
                     // Save each position only if all parts (latitude, longitude) can be saved.
-                    if (p != null && p.getLatitude() != null && p.getLongitude() != null)
-                    {
+                    if (p != null && p.getLatitude() != null && p.getLongitude() != null) {
                         // Create a nested "position" element underneath the base "positions".
-                        RestorableSupport.StateObject pStateObj =
-                            restorableSupport.addStateObject(positionsStateObj, "position");
-                        if (pStateObj != null)
-                        {
+                        RestorableSupport.StateObject pStateObj
+                                = restorableSupport.addStateObject(positionsStateObj, "position");
+                        if (pStateObj != null) {
                             restorableSupport.addStateValueAsDouble(pStateObj, "latitudeDegrees",
-                                p.getLatitude().degrees);
+                                    p.getLatitude().degrees);
                             restorableSupport.addStateValueAsDouble(pStateObj, "longitudeDegrees",
-                                p.getLongitude().degrees);
+                                    p.getLongitude().degrees);
                         }
                     }
                 }
@@ -532,22 +490,17 @@ public class CloudCeiling implements Restorable
         return restorableSupport.getStateAsXml();
     }
 
-    public void restoreState(String stateInXml)
-    {
-        if (stateInXml == null)
-        {
+    public void restoreState(String stateInXml) {
+        if (stateInXml == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         RestorableSupport restorableSupport;
-        try
-        {
+        try {
             restorableSupport = RestorableSupport.parse(stateInXml);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Parsing the document specified by stateInXml failed.
             String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
             Logging.logger().severe(message);
@@ -556,23 +509,20 @@ public class CloudCeiling implements Restorable
 
         // Get the base "positions" state object.
         RestorableSupport.StateObject positionsStateObj = restorableSupport.getStateObject("positions");
-        if (positionsStateObj != null)
-        {
+        if (positionsStateObj != null) {
             ArrayList<LatLon> newPositions = new ArrayList<LatLon>();
             // Get the nested "position" states beneath the base "positions".
-            RestorableSupport.StateObject[] positionStateArray =
-                restorableSupport.getAllStateObjects(positionsStateObj, "position");
-            if (positionStateArray != null && positionStateArray.length != 0)
-            {
-                for (RestorableSupport.StateObject pStateObj : positionStateArray)
-                {
-                    if (pStateObj != null)
-                    {
+            RestorableSupport.StateObject[] positionStateArray
+                    = restorableSupport.getAllStateObjects(positionsStateObj, "position");
+            if (positionStateArray != null && positionStateArray.length != 0) {
+                for (RestorableSupport.StateObject pStateObj : positionStateArray) {
+                    if (pStateObj != null) {
                         // Restore each position only if all parts are available.
                         Double latitudeState = restorableSupport.getStateValueAsDouble(pStateObj, "latitudeDegrees");
                         Double longitudeState = restorableSupport.getStateValueAsDouble(pStateObj, "longitudeDegrees");
-                        if (latitudeState != null && longitudeState != null)
+                        if (latitudeState != null && longitudeState != null) {
                             newPositions.add(LatLon.fromDegrees(latitudeState, longitudeState));
+                        }
                     }
                 }
             }
@@ -583,57 +533,67 @@ public class CloudCeiling implements Restorable
         }
 
         String nameState = restorableSupport.getStateValueAsString("name");
-        if (nameState != null)
+        if (nameState != null) {
             this.name = nameState;
+        }
 
         String elevationUnitState = restorableSupport.getStateValueAsString("elevationUnit");
-        if (elevationUnitState != null)
+        if (elevationUnitState != null) {
             this.elevationUnit = elevationUnitState;
+        }
 
         String deltaModeState = restorableSupport.getStateValueAsString("deltaMode");
-        if (deltaModeState != null)
+        if (deltaModeState != null) {
             this.deltaMode = deltaModeState;
+        }
 
         Double elevationDeltaState = restorableSupport.getStateValueAsDouble("elevationDelta");
-        if (elevationDeltaState != null)
+        if (elevationDeltaState != null) {
             this.elevationDelta = elevationDeltaState;
+        }
 
         Double elevationBaseState = restorableSupport.getStateValueAsDouble("elevationBase");
-        if (elevationBaseState != null)
+        if (elevationBaseState != null) {
             this.elevationBase = elevationBaseState;
+        }
 
         Double radiusState = restorableSupport.getStateValueAsDouble("radius");
-        if (radiusState != null)
+        if (radiusState != null) {
             this.radius = radiusState;
+        }
 
         Boolean enabledState = restorableSupport.getStateValueAsBoolean("enabled");
-        if (enabledState != null)
+        if (enabledState != null) {
             setEnabled(enabledState);
+        }
 
         Double patternSizeState = restorableSupport.getStateValueAsDouble("patternSize");
-        if (patternSizeState != null)
+        if (patternSizeState != null) {
             this.setPatternSize(patternSizeState);
+        }
 
         Double planeOpacityState = restorableSupport.getStateValueAsDouble("planeOpacity");
-        if (patternSizeState != null)
+        if (patternSizeState != null) {
             this.planeOpacity = planeOpacityState;
+        }
 
         String patternState = restorableSupport.getStateValueAsString("pattern");
-        if (patternState != null)
+        if (patternState != null) {
             this.pattern = patternState;
+        }
 
         String colorState = restorableSupport.getStateValueAsString("color");
-        if (colorState != null)
-        {
+        if (colorState != null) {
             Color color = RestorableSupport.decodeColor(colorState);
-            if (color != null)
+            if (color != null) {
                 setColor(color); // this applies the pattern and plane opacity too
+            }
         }
 
         Boolean showExtentState = restorableSupport.getStateValueAsBoolean("showExtent");
-        if (showExtentState != null)
+        if (showExtentState != null) {
             this.showExtent = showExtentState;
-
+        }
 
         this.updateElevations();
         this.updateExtent();

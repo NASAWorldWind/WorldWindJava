@@ -15,8 +15,8 @@ import gov.nasa.worldwind.util.RestorableSupport;
  * @author jym
  * @version $Id: ViewPropertyLimits.java 2253 2014-08-22 16:33:46Z dcollins $
  */
-public interface ViewPropertyLimits
-{
+public interface ViewPropertyLimits {
+
     /**
      * Sets the Sector which will limit a view's eye latitude and longitude.
      *
@@ -99,7 +99,9 @@ public interface ViewPropertyLimits
      */
     void setRollLimits(Angle minAngle, Angle maxAngle);
 
-    /** Resets all property limits to their default values. */
+    /**
+     * Resets all property limits to their default values.
+     */
     void reset();
 
     /**
@@ -107,7 +109,7 @@ public interface ViewPropertyLimits
      * object. This method does not modify the specified view's properties, but may use the view as a context for
      * determining how to apply the limits.
      *
-     * @param view     the view associated with the center position and the property limits.
+     * @param view the view associated with the center position and the property limits.
      * @param position position to clamp to the allowed range.
      *
      * @return The clamped position.
@@ -120,7 +122,7 @@ public interface ViewPropertyLimits
      * Returns an angle clamped to the heading limits specified by this limit object. This method does not modify the
      * specified view's properties, but may use the view as a context for determining how to apply the limits.
      *
-     * @param view  the view associated with the heading angle and the property limits.
+     * @param view the view associated with the heading angle and the property limits.
      * @param angle angle to clamp to the allowed range.
      *
      * @return The clamped angle.
@@ -133,7 +135,7 @@ public interface ViewPropertyLimits
      * Returns an angle clamped to the pitch limits specified by this limit object. This method does not modify the
      * specified view's properties, but may use the view as a context for determining how to apply the limits.
      *
-     * @param view  the view associated with the pitch angle and the property limits.
+     * @param view the view associated with the pitch angle and the property limits.
      * @param angle angle to clamp to the allowed range.
      *
      * @return The clamped angle.
@@ -146,7 +148,7 @@ public interface ViewPropertyLimits
      * Returns an angle clamped to the roll limits specified by this limit object. This method does not modify the
      * specified view's properties, but may use the view as a context for determining how to apply the limits.
      *
-     * @param view  the view associated with the roll angle and the property limits.
+     * @param view the view associated with the roll angle and the property limits.
      * @param angle angle to clamp to the allowed range.
      *
      * @return The clamped angle.

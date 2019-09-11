@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind;
 
 import gov.nasa.worldwind.globes.Globe;
@@ -17,8 +16,8 @@ import gov.nasa.worldwind.layers.LayerList;
  * @author Tom Gaskins
  * @version $Id: Model.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Model extends WWObject
-{
+public interface Model extends WWObject {
+
     /**
      * Returns the bounding sphere in Cartesian world coordinates of the model.
      *
@@ -43,8 +42,7 @@ public interface Model extends WWObject
     /**
      * Specifies the model's globe.
      *
-     * @param globe the model's new globe. May be null, in which case the current globe will be detached from the
-     *              model.
+     * @param globe the model's new globe. May be null, in which case the current globe will be detached from the model.
      */
     void setGlobe(Globe globe);
 
@@ -52,7 +50,7 @@ public interface Model extends WWObject
      * Specifies the model's layers.
      *
      * @param layers the model's new layers. May be null, in which case the current layers will be detached from the
-     *               model.
+     * model.
      */
     void setLayers(LayerList layers);
 

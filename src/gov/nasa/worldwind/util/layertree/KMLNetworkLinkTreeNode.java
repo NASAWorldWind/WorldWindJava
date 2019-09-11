@@ -15,14 +15,14 @@ import java.beans.*;
  * A <code>KMLFeatureTreeNode</code> that represents a KML network link defined by a <code>{@link
  * gov.nasa.worldwind.ogc.kml.KMLNetworkLink}</code>.
  * <p>
- * <code>KMLNetworkLinkTreeNode</code>  automatically repopulates its hierarchy when its <code>KMLNetworkLink</code> is
+ * <code>KMLNetworkLinkTreeNode</code> automatically repopulates its hierarchy when its <code>KMLNetworkLink</code> is
  * refreshed, and notifies its listeners when this happens.
  *
  * @author dcollins
  * @version $Id: KMLNetworkLinkTreeNode.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLNetworkLinkTreeNode extends KMLContainerTreeNode
-{
+public class KMLNetworkLinkTreeNode extends KMLContainerTreeNode {
+
     /**
      * Creates a new <code>KMLNetworkLinkTreeNode</code> from the specified <code>networkLink</code>. The node's name is
      * set to the network link's name, and the node's hierarchy is populated from the network link's KML features.
@@ -31,8 +31,7 @@ public class KMLNetworkLinkTreeNode extends KMLContainerTreeNode
      *
      * @throws IllegalArgumentException if the <code>networkLink</code> is <code>null</code>.
      */
-    public KMLNetworkLinkTreeNode(KMLNetworkLink networkLink)
-    {
+    public KMLNetworkLinkTreeNode(KMLNetworkLink networkLink) {
         super(networkLink);
     }
 
@@ -42,8 +41,7 @@ public class KMLNetworkLinkTreeNode extends KMLContainerTreeNode
      * @return this node's KML network link.
      */
     @Override
-    public KMLNetworkLink getFeature()
-    {
+    public KMLNetworkLink getFeature() {
         return (KMLNetworkLink) super.getFeature();
     }
 
@@ -55,35 +53,26 @@ public class KMLNetworkLinkTreeNode extends KMLContainerTreeNode
      * <code>KMLNetworkLink</code>.
      */
     @Override
-    protected void initialize()
-    {
+    protected void initialize() {
         super.initialize();
 
         // Add a property change listener to the KMLRoot. Upon receiving an RETRIEVAL_STATE_SUCCESSFUL event,
         // repopulate this node's hierarchy with the KML features in its KMLNetworkLink and fire a
         // RETRIEVAL_STATE_SUCCESSFUL to this nodes listeners.
-        this.getFeature().getRoot().addPropertyChangeListener(new PropertyChangeListener()
-        {
-            public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-            {
+        this.getFeature().getRoot().addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
                 if (AVKey.RETRIEVAL_STATE_SUCCESSFUL.equals(propertyChangeEvent.getPropertyName())
-                    && KMLNetworkLinkTreeNode.this.getFeature() == propertyChangeEvent.getNewValue())
-                {
+                        && KMLNetworkLinkTreeNode.this.getFeature() == propertyChangeEvent.getNewValue()) {
                     // Ensure that the node list is manipulated on the EDT
-                    if (SwingUtilities.isEventDispatchThread())
-                    {
+                    if (SwingUtilities.isEventDispatchThread()) {
                         refresh();
                         KMLNetworkLinkTreeNode.this.firePropertyChange(AVKey.RETRIEVAL_STATE_SUCCESSFUL, null, this);
-                    }
-                    else
-                    {
-                        SwingUtilities.invokeLater(new Runnable()
-                        {
-                            public void run()
-                            {
+                    } else {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            public void run() {
                                 refresh();
                                 KMLNetworkLinkTreeNode.this.firePropertyChange(AVKey.RETRIEVAL_STATE_SUCCESSFUL, null,
-                                    this);
+                                        this);
                             }
                         });
                     }
@@ -102,32 +91,28 @@ public class KMLNetworkLinkTreeNode extends KMLContainerTreeNode
      * tree node that doesn't provide any meaningful grouping.
      */
     @Override
-    protected void refresh()
-    {
+    protected void refresh() {
         // Call super to add features contained by the NetworkLink.
         super.refresh();
 
         // Now add the network resource.
         KMLRoot kmlRoot = this.getFeature().getNetworkResource();
-        if (kmlRoot == null || kmlRoot.getFeature() == null)
+        if (kmlRoot == null || kmlRoot.getFeature() == null) {
             return;
+        }
 
         // A KML document has only one top-level feature. Except for very simple files, this top level is typically a
         // Document. In this case we skip the top level document, and attach tree nodes for the features beneath that
         // document. Attaching the document as a tree node would add an extra level to the tree that doesn't provide any
         // meaningful grouping.
-
-        if (kmlRoot.getFeature() instanceof KMLDocument)
-        {
+        if (kmlRoot.getFeature() instanceof KMLDocument) {
             KMLDocument doc = (KMLDocument) kmlRoot.getFeature();
-            for (KMLAbstractFeature child : doc.getFeatures())
-            {
-                if (child != null)
+            for (KMLAbstractFeature child : doc.getFeatures()) {
+                if (child != null) {
                     this.addFeatureNode(child);
+                }
             }
-        }
-        else
-        {
+        } else {
             this.addFeatureNode(kmlRoot.getFeature());
         }
     }

@@ -18,15 +18,13 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class IconLayerTest
-{
+public class IconLayerTest {
     //////////////////////////////////////////////////////////
     // Basic Operation Tests
     //////////////////////////////////////////////////////////
 
     @Test
-    public void testConstructor()
-    {
+    public void testConstructor() {
         IconLayer layer;
 
         // Test the parameterless constructor.
@@ -35,13 +33,11 @@ public class IconLayerTest
     }
 
     @Test
-    public void testAddIcon()
-    {
+    public void testAddIcon() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
-        for (WWIcon item : icons)
-        {
+        for (WWIcon item : icons) {
             layer.addIcon(item);
         }
 
@@ -50,8 +46,7 @@ public class IconLayerTest
     }
 
     @Test
-    public void testAddIcons()
-    {
+    public void testAddIcons() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
@@ -62,17 +57,14 @@ public class IconLayerTest
     }
 
     @Test
-    public void testRemoveIcon()
-    {
+    public void testRemoveIcon() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
-        for (WWIcon item : icons)
-        {
+        for (WWIcon item : icons) {
             layer.addIcon(item);
         }
-        for (WWIcon item : icons)
-        {
+        for (WWIcon item : icons) {
             layer.removeIcon(item);
         }
 
@@ -81,8 +73,7 @@ public class IconLayerTest
     }
 
     @Test
-    public void testRemoveAllIcons()
-    {
+    public void testRemoveAllIcons() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
@@ -94,8 +85,7 @@ public class IconLayerTest
     }
 
     @Test
-    public void testSetIcons()
-    {
+    public void testSetIcons() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
@@ -108,10 +98,8 @@ public class IconLayerTest
     //////////////////////////////////////////////////////////
     // Edge Case Tests
     //////////////////////////////////////////////////////////
-
     @Test
-    public void testSetIconsClearsIcons()
-    {
+    public void testSetIconsClearsIcons() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
@@ -126,8 +114,7 @@ public class IconLayerTest
     }
 
     @Test
-    public void testSetIconsThenAddIcons()
-    {
+    public void testSetIconsThenAddIcons() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
@@ -142,8 +129,7 @@ public class IconLayerTest
     }
 
     @Test
-    public void testMaliciousGetIcons()
-    {
+    public void testMaliciousGetIcons() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
@@ -152,25 +138,18 @@ public class IconLayerTest
         Iterable<WWIcon> layerIcons = layer.getIcons();
 
         // Test that the returned list cannot be modified.
-        try
-        {
-            if (layerIcons instanceof java.util.Collection)
-            {
+        try {
+            if (layerIcons instanceof java.util.Collection) {
                 java.util.Collection<WWIcon> collection = (java.util.Collection<WWIcon>) layerIcons;
                 collection.clear();
-            }
-            else
-            {
+            } else {
                 java.util.Iterator<WWIcon> iter = layerIcons.iterator();
-                while (iter.hasNext())
-                {
+                while (iter.hasNext()) {
                     iter.next();
                     iter.remove();
                 }
             }
-        }
-        catch (UnsupportedOperationException e)
-        {
+        } catch (UnsupportedOperationException e) {
             e.printStackTrace();
         }
 
@@ -179,8 +158,7 @@ public class IconLayerTest
     }
 
     @Test
-    public void testMaliciousSetIcons()
-    {
+    public void testMaliciousSetIcons() {
         // Create an Iterable with null elements.
         java.util.List<WWIcon> list = new java.util.ArrayList<WWIcon>();
         list.add(null);
@@ -192,13 +170,10 @@ public class IconLayerTest
         dc.setModel(new BasicModel());
         dc.setView(new BasicOrbitView());
 
-        try
-        {
+        try {
             // Test that the layer does not fail when the Iterable is used.
             layer.render(dc);
-        }
-        catch (NullPointerException e)
-        {
+        } catch (NullPointerException e) {
             fail("Layer does not check for null elements in Iterable");
         }
     }
@@ -206,83 +181,66 @@ public class IconLayerTest
     //////////////////////////////////////////////////////////
     // Exceptional Condition Tests
     //////////////////////////////////////////////////////////
-
     @Test
-    public void testAddIconFail()
-    {
+    public void testAddIconFail() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
         layer.setIcons(icons);
 
-        try
-        {
+        try {
             // Expecting an IllegalStateException here.
             layer.addIcon(new UserFacingIcon("", Position.ZERO));
             fail("");
-        }
-        catch (IllegalStateException e)
-        {
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testAddIconsFail()
-    {
+    public void testAddIconsFail() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
         layer.setIcons(icons);
 
-        try
-        {
+        try {
             // Expecting an IllegalStateException here.
             layer.addIcons(icons);
             fail("");
-        }
-        catch (IllegalStateException e)
-        {
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testRemoveIconFail()
-    {
+    public void testRemoveIconFail() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
         layer.setIcons(icons);
 
-        try
-        {
+        try {
             // Expecting an IllegalStateException here.
             layer.removeIcon(new UserFacingIcon("", Position.ZERO));
             fail("");
-        }
-        catch (IllegalStateException e)
-        {
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testRemoveAllIconsFail()
-    {
+    public void testRemoveAllIconsFail() {
         Iterable<WWIcon> icons = createExampleIterable();
 
         IconLayer layer = new IconLayer();
         layer.setIcons(icons);
 
-        try
-        {
+        try {
             // Expecting an IllegalStateException here.
             layer.removeAllIcons();
             fail("");
-        }
-        catch (IllegalStateException e)
-        {
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
     }
@@ -290,27 +248,20 @@ public class IconLayerTest
     //////////////////////////////////////////////////////////
     // Helper Methods
     //////////////////////////////////////////////////////////
-
     @SuppressWarnings({"JavaDoc"})
-    private static void assertEquals(String message, Iterable<WWIcon> expected, Iterable<WWIcon> actual)
-    {
-        if (expected == null)
-        {
+    private static void assertEquals(String message, Iterable<WWIcon> expected, Iterable<WWIcon> actual) {
+        if (expected == null) {
             assertNull(message, actual);
-        }
-        else
-        {
+        } else {
             // Since actual may contain duplicates, make a Set that eliminates duplicates.
             Set<WWIcon> actualSet = new HashSet<WWIcon>();
-            for (WWIcon wwIcon : actual)
-            {
+            for (WWIcon wwIcon : actual) {
                 actualSet.add(wwIcon);
             }
 
             // Test that all the expected are in the actual. Order does not matter.
             int count = 0;
-            for (WWIcon wwIcon : expected)
-            {
+            for (WWIcon wwIcon : expected) {
                 ++count;
                 assertTrue(actualSet.contains(wwIcon));
             }
@@ -320,10 +271,9 @@ public class IconLayerTest
         }
     }
 
-    private static Iterable<WWIcon> createExampleIterable()
-    {
+    private static Iterable<WWIcon> createExampleIterable() {
         //noinspection RedundantArrayCreation
-        return java.util.Arrays.asList(new WWIcon[] {
+        return java.util.Arrays.asList(new WWIcon[]{
             new UserFacingIcon("", Position.ZERO),
             new UserFacingIcon("", Position.ZERO),
             new UserFacingIcon("", Position.ZERO)});

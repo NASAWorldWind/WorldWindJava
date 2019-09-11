@@ -13,27 +13,24 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author Eric Dalgliesh
  * @version $Id: BasicMemoryCache.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BasicMemoryCache implements MemoryCache
-{
-    protected static class CacheEntry implements Comparable<CacheEntry>
-    {
+public class BasicMemoryCache implements MemoryCache {
+
+    protected static class CacheEntry implements Comparable<CacheEntry> {
+
         Object key;
         Object clientObject;
         protected long lastUsed;
         protected long clientObjectSize;
 
-        CacheEntry(Object key, Object clientObject, long clientObjectSize)
-        {
+        CacheEntry(Object key, Object clientObject, long clientObjectSize) {
             this.key = key;
             this.clientObject = clientObject;
             this.lastUsed = System.nanoTime();
             this.clientObjectSize = clientObjectSize;
         }
 
-        public int compareTo(CacheEntry that)
-        {
-            if (that == null)
-            {
+        public int compareTo(CacheEntry that) {
+            if (that == null) {
                 String msg = Logging.getMessage("nullValue.CacheEntryIsNull");
                 Logging.logger().severe(msg);
                 throw new IllegalArgumentException(msg);
@@ -42,8 +39,7 @@ public class BasicMemoryCache implements MemoryCache
             return this.lastUsed < that.lastUsed ? -1 : this.lastUsed == that.lastUsed ? 0 : 1;
         }
 
-        public String toString()
-        {
+        public String toString() {
             return key.toString() + " " + clientObject.toString() + " " + lastUsed + " " + clientObjectSize;
         }
     }
@@ -60,11 +56,10 @@ public class BasicMemoryCache implements MemoryCache
     /**
      * Constructs a new cache using <code>capacity</code> for maximum size, and <code>loWater</code> for the low water.
      *
-     * @param loWater  the low water level.
+     * @param loWater the low water level.
      * @param capacity the maximum capacity.
      */
-    public BasicMemoryCache(long loWater, long capacity)
-    {
+    public BasicMemoryCache(long loWater, long capacity) {
         this.entries = new java.util.concurrent.ConcurrentHashMap<Object, CacheEntry>();
         this.listeners = new java.util.concurrent.CopyOnWriteArrayList<MemoryCache.CacheListener>();
         this.capacity.set(capacity);
@@ -72,51 +67,51 @@ public class BasicMemoryCache implements MemoryCache
         this.currentUsedCapacity.set((long) 0);
     }
 
-    /** @return the number of objects currently stored in this cache. */
-    public int getNumObjects()
-    {
+    /**
+     * @return the number of objects currently stored in this cache.
+     */
+    public int getNumObjects() {
         return this.entries.size();
     }
 
-    /** @return the capacity of the cache. */
-    public long getCapacity()
-    {
+    /**
+     * @return the capacity of the cache.
+     */
+    public long getCapacity() {
         return this.capacity.get();
     }
 
-    /** @return the number of cache units that the cache currently holds. */
-    public long getUsedCapacity()
-    {
+    /**
+     * @return the number of cache units that the cache currently holds.
+     */
+    public long getUsedCapacity() {
         return this.currentUsedCapacity.get();
     }
 
-    /** @return the amount of free space left in the cache (in cache units). */
-    public long getFreeCapacity()
-    {
+    /**
+     * @return the amount of free space left in the cache (in cache units).
+     */
+    public long getFreeCapacity() {
         return Math.max(this.capacity.get() - this.currentUsedCapacity.get(), 0);
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name != null ? name : "";
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
     /**
-     * Adds a  cache listener, MemoryCache listeners are used to notify classes when an item is removed from the cache.
+     * Adds a cache listener, MemoryCache listeners are used to notify classes when an item is removed from the cache.
      *
      * @param listener The new <code>CacheListener</code>.
      *
      * @throws IllegalArgumentException is <code>listener</code> is null.
      */
-    public void addCacheListener(MemoryCache.CacheListener listener)
-    {
-        if (listener == null)
-        {
+    public void addCacheListener(MemoryCache.CacheListener listener) {
+        if (listener == null) {
             String message = Logging.getMessage("BasicMemoryCache.nullListenerAdded");
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -131,10 +126,8 @@ public class BasicMemoryCache implements MemoryCache
      *
      * @throws IllegalArgumentException if <code>listener</code> is null.
      */
-    public void removeCacheListener(MemoryCache.CacheListener listener)
-    {
-        if (listener == null)
-        {
+    public void removeCacheListener(MemoryCache.CacheListener listener) {
+        if (listener == null) {
             String message = Logging.getMessage("BasicMemoryCache.nullListenerRemoved");
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -151,8 +144,7 @@ public class BasicMemoryCache implements MemoryCache
      *
      * @param newCapacity the new capacity of the cache.
      */
-    public void setCapacity(long newCapacity)
-    {
+    public void setCapacity(long newCapacity) {
 //        this.makeSpace(this.capacity - newCapacity);
         this.capacity.set(newCapacity);
     }
@@ -167,10 +159,8 @@ public class BasicMemoryCache implements MemoryCache
      *
      * @param loWater the new low water level.
      */
-    public void setLowWater(long loWater)
-    {
-        if (loWater < this.capacity.get() && loWater >= 0)
-        {
+    public void setLowWater(long loWater) {
+        if (loWater < this.capacity.get() && loWater >= 0) {
             this.lowWater = loWater;
         }
     }
@@ -181,8 +171,7 @@ public class BasicMemoryCache implements MemoryCache
      *
      * @return the low water level.
      */
-    public long getLowWater()
-    {
+    public long getLowWater() {
         return this.lowWater;
     }
 
@@ -199,17 +188,14 @@ public class BasicMemoryCache implements MemoryCache
      *
      * @throws IllegalArgumentException if <code>key</code> is null.
      */
-    public boolean contains(Object key)
-    {
-        if (key == null)
-        {
+    public boolean contains(Object key) {
+        if (key == null) {
             String msg = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        synchronized (this.lock)
-        {
+        synchronized (this.lock) {
             return this.entries.containsKey(key);
         }
     }
@@ -218,22 +204,19 @@ public class BasicMemoryCache implements MemoryCache
      * Adds an object to the cache. The add fails if the object or key is null, or if the size is zero, negative or
      * greater than the maximmum capacity.
      *
-     * @param key              The unique reference key that identifies this object.
-     * @param clientObject     The actual object to be cached.
+     * @param key The unique reference key that identifies this object.
+     * @param clientObject The actual object to be cached.
      * @param clientObjectSize The size of the object in cache units.
      *
      * @return returns true if clientObject was added, false otherwise.
      */
-    public boolean add(Object key, Object clientObject, long clientObjectSize)
-    {
+    public boolean add(Object key, Object clientObject, long clientObjectSize) {
         long cap = this.capacity.get();
 
-        if (key == null || clientObject == null || clientObjectSize <= 0 || clientObjectSize > cap)
-        {
+        if (key == null || clientObject == null || clientObjectSize <= 0 || clientObjectSize > cap) {
             String message = Logging.getMessage("BasicMemoryCache.CacheItemNotAdded");
 
-            if (clientObjectSize > cap)
-            {
+            if (clientObjectSize > cap) {
                 message += " - " + Logging.getMessage("BasicMemoryCache.ItemTooLargeForCache");
             }
 
@@ -247,16 +230,14 @@ public class BasicMemoryCache implements MemoryCache
 
         BasicMemoryCache.CacheEntry entry = new BasicMemoryCache.CacheEntry(key, clientObject, clientObjectSize);
 
-        synchronized (this.lock)
-        {
+        synchronized (this.lock) {
             CacheEntry existing = this.entries.get(key);
             if (existing != null) // replacing
             {
                 this.removeEntry(existing);
             }
 
-            if (this.currentUsedCapacity.get() + clientObjectSize > cap)
-            {
+            if (this.currentUsedCapacity.get() + clientObjectSize > cap) {
                 this.makeSpace(clientObjectSize);
             }
 
@@ -267,8 +248,7 @@ public class BasicMemoryCache implements MemoryCache
         return true;
     }
 
-    public boolean add(Object key, Cacheable clientObject)
-    {
+    public boolean add(Object key, Cacheable clientObject) {
         return this.add(key, clientObject, clientObject.getSizeInBytes());
     }
 
@@ -280,20 +260,18 @@ public class BasicMemoryCache implements MemoryCache
      *
      * @throws IllegalArgumentException if <code>key</code> is null.
      */
-    public void remove(Object key)
-    {
-        if (key == null)
-        {
+    public void remove(Object key) {
+        if (key == null) {
             Logging.logger().finer("nullValue.KeyIsNull");
 
             return;
         }
 
-        synchronized (this.lock)
-        {
+        synchronized (this.lock) {
             CacheEntry entry = this.entries.get(key);
-            if (entry != null)
+            if (entry != null) {
                 this.removeEntry(entry);
+            }
         }
     }
 
@@ -307,22 +285,20 @@ public class BasicMemoryCache implements MemoryCache
      *
      * @throws IllegalArgumentException if <code>key</code> is null.
      */
-    public Object getObject(Object key)
-    {
-        if (key == null)
-        {
+    public Object getObject(Object key) {
+        if (key == null) {
             Logging.logger().finer("nullValue.KeyIsNull");
 
             return null;
         }
 
         CacheEntry entry; // don't need to lock because call is atomic
-        synchronized (this.lock)
-        {
+        synchronized (this.lock) {
             entry = this.entries.get(key);
 
-            if (entry == null)
+            if (entry == null) {
                 return null;
+            }
 
             entry.lastUsed = System.nanoTime(); // nanoTime overflows once every 292 years
             // which will result in a slowing of the cache
@@ -332,13 +308,12 @@ public class BasicMemoryCache implements MemoryCache
         return entry.clientObject;
     }
 
-    /** Empties the cache. */
-    public void clear()
-    {
-        synchronized (this.lock)
-        {
-            for (CacheEntry entry : this.entries.values())
-            {
+    /**
+     * Empties the cache.
+     */
+    public void clear() {
+        synchronized (this.lock) {
+            for (CacheEntry entry : this.entries.values()) {
                 this.removeEntry(entry);
             }
         }
@@ -358,14 +333,10 @@ public class BasicMemoryCache implements MemoryCache
         {
             this.currentUsedCapacity.addAndGet(-entry.clientObjectSize);
 
-            for (MemoryCache.CacheListener listener : this.listeners)
-            {
-                try
-                {
+            for (MemoryCache.CacheListener listener : this.listeners) {
+                try {
                     listener.entryRemoved(entry.key, entry.clientObject);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     listener.removalException(e, entry.key, entry.clientObject);
                 }
             }
@@ -380,17 +351,16 @@ public class BasicMemoryCache implements MemoryCache
      */
     private void makeSpace(long spaceRequired) // MUST BE CALLED WITHIN SYNCHRONIZED
     {
-        if (spaceRequired > this.capacity.get() || spaceRequired < 0)
+        if (spaceRequired > this.capacity.get() || spaceRequired < 0) {
             return;
+        }
 
         CacheEntry[] timeOrderedEntries = new CacheEntry[this.entries.size()];
         java.util.Arrays.sort(this.entries.values().toArray(timeOrderedEntries)); // TODO
 
         int i = 0;
-        while (this.getFreeCapacity() < spaceRequired || this.getUsedCapacity() > this.lowWater)
-        {
-            if (i < timeOrderedEntries.length)
-            {
+        while (this.getFreeCapacity() < spaceRequired || this.getUsedCapacity() > this.lowWater) {
+            if (i < timeOrderedEntries.length) {
                 this.removeEntry(timeOrderedEntries[i++]);
             }
         }
@@ -403,24 +373,19 @@ public class BasicMemoryCache implements MemoryCache
      * @return a <code>String</code> representation of this object.
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "MemoryCache " + this.name + " max size = " + this.getCapacity() + " current size = "
-            + this.currentUsedCapacity.get() + " number of items: " + this.getNumObjects();
+                + this.currentUsedCapacity.get() + " number of items: " + this.getNumObjects();
     }
 
     @Override
-    protected void finalize() throws Throwable
-    {
-        try
-        {
+    protected void finalize() throws Throwable {
+        try {
             // clear doesn't throw any checked exceptions
             // but this is in case of an unchecked exception
             // basically, we don't want to exit without calling super.finalize
             this.clear();
-        }
-        finally
-        {
+        } finally {
             super.finalize();
         }
     }

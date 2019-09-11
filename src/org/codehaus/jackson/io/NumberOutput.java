@@ -1,7 +1,7 @@
 package org.codehaus.jackson.io;
 
-public final class NumberOutput
-{
+public final class NumberOutput {
+
     private final static char NULL_CHAR = (char) 0;
 
     private static int MILLION = 1000000;
@@ -16,6 +16,7 @@ public final class NumberOutput
 
     final static char[] LEADING_TRIPLETS = new char[4000];
     final static char[] FULL_TRIPLETS = new char[4000];
+
     static {
         /* Let's fill it with NULLs for ignorable leading digits,
          * and digit chars for others
@@ -31,22 +32,22 @@ public final class NumberOutput
                     // Last is never to be empty
                     char f3 = (char) ('0' + i3);
                     LEADING_TRIPLETS[ix] = l1;
-                    LEADING_TRIPLETS[ix+1] = l2;
-                    LEADING_TRIPLETS[ix+2] = f3;
+                    LEADING_TRIPLETS[ix + 1] = l2;
+                    LEADING_TRIPLETS[ix + 2] = f3;
                     FULL_TRIPLETS[ix] = f1;
-                    FULL_TRIPLETS[ix+1] = f2;
-                    FULL_TRIPLETS[ix+2] = f3;
+                    FULL_TRIPLETS[ix + 1] = f2;
+                    FULL_TRIPLETS[ix + 2] = f3;
                     ix += 4;
                 }
             }
         }
     }
 
-    final static String[] sSmallIntStrs = new String[] {
-        "0","1","2","3","4","5","6","7","8","9","10"
+    final static String[] sSmallIntStrs = new String[]{
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
     };
-    final static String[] sSmallIntStrs2 = new String[] {
-        "-1","-2","-3","-4","-5","-6","-7","-8","-9","-10"
+    final static String[] sSmallIntStrs2 = new String[]{
+        "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9", "-10"
     };
 
     /*
@@ -54,15 +55,13 @@ public final class NumberOutput
     // Efficient serialization methods using raw buffers
     ////////////////////////////////////////////////////
      */
-
     /**
      * @param value Undocumented.
      * @param buffer Undocumented.
      * @param offset Undocumented.
      * @return Offset within buffer after outputting int
      */
-    public static int outputInt(int value, char[] buffer, int offset)
-    {
+    public static int outputInt(int value, char[] buffer, int offset) {
         if (value < 0) {
             if (value == Integer.MIN_VALUE) {
                 /* Special case: no matching positive value within range;
@@ -110,7 +109,7 @@ public final class NumberOutput
         value = newValue;
         newValue /= 1000;
         int thousands = (value - (newValue * 1000));
-        
+
         // value now has millions, which have 1, 2 or 3 digits
         if (hasBillions) {
             offset = outputFullTriplet(newValue, buffer, offset);
@@ -128,8 +127,7 @@ public final class NumberOutput
      * @param offset Undocumented.
      * @return Offset within buffer after outputting int
      */
-    public static int outputLong(long value, char[] buffer, int offset)
-    {
+    public static int outputLong(long value, char[] buffer, int offset) {
         // First: does it actually fit in an int?
         if (value < 0L) {
             /* MIN_INT is actually printed as long, just because its
@@ -188,12 +186,10 @@ public final class NumberOutput
     ////////////////////////////////////////////////////
      */
 
-    /* !!! 05-Aug-2008, tatus: Any ways to further optimize
+ /* !!! 05-Aug-2008, tatus: Any ways to further optimize
      *   these? (or need: only called by diagnostics methods?)
      */
-
-    public static String toString(int value)
-    {
+    public static String toString(int value) {
         // Lookup table for small values
         if (value < sSmallIntStrs.length) {
             if (value >= 0) {
@@ -207,17 +203,15 @@ public final class NumberOutput
         return Integer.toString(value);
     }
 
-    public static String toString(long value)
-    {
-        if (value <= Integer.MAX_VALUE &&
-            value >= Integer.MIN_VALUE) {
+    public static String toString(long value) {
+        if (value <= Integer.MAX_VALUE
+                && value >= Integer.MIN_VALUE) {
             return toString((int) value);
         }
         return Long.toString(value);
     }
 
-    public static String toString(double value)
-    {
+    public static String toString(double value) {
         return Double.toString(value);
     }
 
@@ -226,9 +220,7 @@ public final class NumberOutput
     // Internal methods
     ////////////////////////////////////////
      */
-
-    private static int outputLeadingTriplet(int triplet, char[] buffer, int offset)
-    {
+    private static int outputLeadingTriplet(int triplet, char[] buffer, int offset) {
         int digitOffset = (triplet << 2);
         char c = LEADING_TRIPLETS[digitOffset++];
         if (c != NULL_CHAR) {
@@ -243,8 +235,7 @@ public final class NumberOutput
         return offset;
     }
 
-    private static int outputFullTriplet(int triplet, char[] buffer, int offset)
-    {
+    private static int outputFullTriplet(int triplet, char[] buffer, int offset) {
         int digitOffset = (triplet << 2);
         buffer[offset++] = FULL_TRIPLETS[digitOffset++];
         buffer[offset++] = FULL_TRIPLETS[digitOffset++];
@@ -253,12 +244,10 @@ public final class NumberOutput
     }
 
     /**
-     *<p>
-     * Pre-conditions: posValue is positive, and larger than
-     * Integer.MAX_VALUE (about 2 billions).
+     * <p>
+     * Pre-conditions: posValue is positive, and larger than Integer.MAX_VALUE (about 2 billions).
      */
-    private static int calcLongStrLength(long posValue)
-    {
+    private static int calcLongStrLength(long posValue) {
         int len = 10;
         long comp = TEN_BILLION_L;
 

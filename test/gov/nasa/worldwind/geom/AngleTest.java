@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.geom;
 
 import org.junit.Test;
@@ -13,55 +12,42 @@ import org.junit.runners.JUnit4;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class AngleTest
-{
+public class AngleTest {
+
     private static final double DELTA = 1e-9;
 
     @Test
-    public void testFromDMS_lessThanZeroDegrees()
-    {
-        try
-        {
+    public void testFromDMS_lessThanZeroDegrees() {
+        try {
             Angle.fromDMS(-60, 14, 23);
             fail("Should raise an IllegalArgumentException");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             assertTrue("Should raise an IllegalArgumentException", e instanceof IllegalArgumentException);
         }
     }
 
     @Test
-    public void testFromDMS_lessThanZeroMinutes()
-    {
-        try
-        {
+    public void testFromDMS_lessThanZeroMinutes() {
+        try {
             Angle.fromDMS(42, -14, 23);
             fail("Should raise an IllegalArgumentException");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             assertTrue("Should raise an IllegalArgumentException", e instanceof IllegalArgumentException);
         }
     }
 
     @Test
-    public void testFromDMS_lessThanZeroSeconds()
-    {
-        try
-        {
+    public void testFromDMS_lessThanZeroSeconds() {
+        try {
             Angle.fromDMS(42, 32, -15);
             fail("Should raise an IllegalArgumentException");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             assertTrue("Should raise an IllegalArgumentException", e instanceof IllegalArgumentException);
         }
     }
 
     @Test
-    public void testFromDMS_ZeroDegree()
-    {
+    public void testFromDMS_ZeroDegree() {
         int degrees = 0;
         int minutes = 30;
         int seconds = 45;
@@ -73,8 +59,7 @@ public class AngleTest
     }
 
     @Test
-    public void testFromDMS_AboveZeroDegrees()
-    {
+    public void testFromDMS_AboveZeroDegrees() {
         int degrees = 15;
         int minutes = 30;
         int seconds = 45;
@@ -86,36 +71,27 @@ public class AngleTest
     }
 
     @Test
-    public void testFromDMdS_lessThanZeroDegrees()
-    {
-        try
-        {
+    public void testFromDMdS_lessThanZeroDegrees() {
+        try {
             Angle.fromDMdS(-60, 23.4);
             fail("Should raise an IllegalArgumentException");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             assertTrue("Should raise an IllegalArgumentException", e instanceof IllegalArgumentException);
         }
     }
 
     @Test
-    public void testFromDMdS_lessThanZeroMinutes()
-    {
-        try
-        {
+    public void testFromDMdS_lessThanZeroMinutes() {
+        try {
             Angle.fromDMdS(42, -12.486);
             fail("Should raise an IllegalArgumentException");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             assertTrue("Should raise an IllegalArgumentException", e instanceof IllegalArgumentException);
         }
     }
 
     @Test
-    public void testFromDMdS_ZeroDegree()
-    {
+    public void testFromDMdS_ZeroDegree() {
         int degrees = 0;
         int minutes = 30;
         int seconds = 45;
@@ -127,8 +103,7 @@ public class AngleTest
     }
 
     @Test
-    public void testFromDMdS_AboveZeroDegrees()
-    {
+    public void testFromDMdS_AboveZeroDegrees() {
         int degrees = 16;
         int minutes = 30;
         int seconds = 45;
@@ -140,8 +115,7 @@ public class AngleTest
     }
 
     @Test
-    public void testFromDMString_PositiveCoordinate()
-    {
+    public void testFromDMString_PositiveCoordinate() {
         int degrees = 16;
         int minutes = 58;
         int seconds = 27;
@@ -154,8 +128,7 @@ public class AngleTest
     }
 
     @Test
-    public void testFromDMString_PositiveSign()
-    {
+    public void testFromDMString_PositiveSign() {
         int degrees = 16;
         int minutes = 58;
         int seconds = 27;
@@ -168,8 +141,7 @@ public class AngleTest
     }
 
     @Test
-    public void testFromDMString_PositiveDirection()
-    {
+    public void testFromDMString_PositiveDirection() {
         int degrees = 16;
         int minutes = 58;
         int seconds = 27;
@@ -182,8 +154,7 @@ public class AngleTest
     }
 
     @Test
-    public void testFromDMString_NegativeSign()
-    {
+    public void testFromDMString_NegativeSign() {
         int degrees = 16;
         int minutes = 58;
         int seconds = 27;
@@ -196,8 +167,7 @@ public class AngleTest
     }
 
     @Test
-    public void testFromDMString_NegativeDirection()
-    {
+    public void testFromDMString_NegativeDirection() {
         int degrees = 16;
         int minutes = 58;
         int seconds = 27;
@@ -210,8 +180,7 @@ public class AngleTest
     }
 
     @Test
-    public void testFromDMSString_ConflictingPrefixSuffixCaseOne()
-    {
+    public void testFromDMSString_ConflictingPrefixSuffixCaseOne() {
         int degrees = 16;
         int minutes = 58;
         int seconds = 27;
@@ -221,12 +190,11 @@ public class AngleTest
         double actualValue = Angle.fromDMS(angleString).degrees;
 
         assertEquals("conflicting string format, positive sign and negative direction", expectedValue, actualValue,
-            0.0);
+                0.0);
     }
 
     @Test
-    public void testFromDMSString_ConflictingPrefixSuffixCaseTwo()
-    {
+    public void testFromDMSString_ConflictingPrefixSuffixCaseTwo() {
         int degrees = 16;
         int minutes = 58;
         int seconds = 27;
@@ -236,12 +204,11 @@ public class AngleTest
         double actualValue = Angle.fromDMS(angleString).degrees;
 
         assertEquals("conflicting string format, negative sign and positive direction", expectedValue, actualValue,
-            0.0);
+                0.0);
     }
 
     @Test
-    public void testFromDMSString_ConflictingPrefixSuffixCaseThree()
-    {
+    public void testFromDMSString_ConflictingPrefixSuffixCaseThree() {
         int degrees = 16;
         int minutes = 58;
         int seconds = 27;
@@ -251,12 +218,11 @@ public class AngleTest
         double actualValue = Angle.fromDMS(angleString).degrees;
 
         assertEquals("conflicting string format, negative sign and negative direction", expectedValue, actualValue,
-            0.0);
+                0.0);
     }
 
     @Test
-    public void testFromDMSString_ConflictingPrefixSuffixCaseFour()
-    {
+    public void testFromDMSString_ConflictingPrefixSuffixCaseFour() {
         int degrees = 16;
         int minutes = 58;
         int seconds = 27;

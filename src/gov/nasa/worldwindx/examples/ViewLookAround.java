@@ -25,14 +25,13 @@ import java.beans.*;
  * @author Patrick Murris
  * @version $Id: ViewLookAround.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class ViewLookAround extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+public class ViewLookAround extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         private ViewControlPanel vcp;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             super(true, true, false);
 
             // Add view control panel to the layer panel
@@ -43,8 +42,8 @@ public class ViewLookAround extends ApplicationTemplate
             getWwd().getView().setEyePosition(pos);
         }
 
-        private class ViewControlPanel extends JPanel
-        {
+        private class ViewControlPanel extends JPanel {
+
             private WorldWindow wwd;
             private JSlider pitchSlider;
             private JSlider headingSlider;
@@ -53,14 +52,11 @@ public class ViewLookAround extends ApplicationTemplate
 
             private boolean suspendEvents = false;
 
-            public ViewControlPanel(WorldWindow wwd)
-            {
+            public ViewControlPanel(WorldWindow wwd) {
                 this.wwd = wwd;
                 // Add view property listener
-                this.wwd.getView().addPropertyChangeListener(new PropertyChangeListener()
-                {
-                    public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-                    {
+                this.wwd.getView().addPropertyChangeListener(new PropertyChangeListener() {
+                    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
                         update();
                     }
                 });
@@ -75,10 +71,8 @@ public class ViewLookAround extends ApplicationTemplate
                 pitchPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
                 pitchPanel.add(new JLabel("Pitch:"));
                 pitchSlider = new JSlider(0, 180, 90);
-                pitchSlider.addChangeListener(new ChangeListener()
-                {
-                    public void stateChanged(ChangeEvent changeEvent)
-                    {
+                pitchSlider.addChangeListener(new ChangeListener() {
+                    public void stateChanged(ChangeEvent changeEvent) {
                         updateView();
                     }
                 });
@@ -89,10 +83,8 @@ public class ViewLookAround extends ApplicationTemplate
                 headingPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
                 headingPanel.add(new JLabel("Heading:"));
                 headingSlider = new JSlider(-180, 180, 0);
-                headingSlider.addChangeListener(new ChangeListener()
-                {
-                    public void stateChanged(ChangeEvent changeEvent)
-                    {
+                headingSlider.addChangeListener(new ChangeListener() {
+                    public void stateChanged(ChangeEvent changeEvent) {
                         updateView();
                     }
                 });
@@ -103,10 +95,8 @@ public class ViewLookAround extends ApplicationTemplate
                 rollPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
                 rollPanel.add(new JLabel("Roll:"));
                 rollSlider = new JSlider(-180, 180, 0);
-                rollSlider.addChangeListener(new ChangeListener()
-                {
-                    public void stateChanged(ChangeEvent changeEvent)
-                    {
+                rollSlider.addChangeListener(new ChangeListener() {
+                    public void stateChanged(ChangeEvent changeEvent) {
                         updateView();
                     }
                 });
@@ -117,10 +107,8 @@ public class ViewLookAround extends ApplicationTemplate
                 fovPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
                 fovPanel.add(new JLabel("Field of view:"));
                 fovSlider = new JSlider(10, 120, 45);
-                fovSlider.addChangeListener(new ChangeListener()
-                {
-                    public void stateChanged(ChangeEvent changeEvent)
-                    {
+                fovSlider.addChangeListener(new ChangeListener() {
+                    public void stateChanged(ChangeEvent changeEvent) {
                         updateView();
                     }
                 });
@@ -133,11 +121,9 @@ public class ViewLookAround extends ApplicationTemplate
                 this.add(fovPanel);
 
                 JButton resetBut = new JButton("Reset");
-                resetBut.addActionListener(new ActionListener()
-                {
+                resetBut.addActionListener(new ActionListener() {
 
-                    public void actionPerformed(ActionEvent e)
-                    {
+                    public void actionPerformed(ActionEvent e) {
                         pitchSlider.setValue(90);
                         rollSlider.setValue(0);
                         headingSlider.setValue(0);
@@ -148,15 +134,13 @@ public class ViewLookAround extends ApplicationTemplate
                 this.add(resetBut);
 
                 this.setBorder(
-                    new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("View")));
+                        new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("View")));
                 this.setToolTipText("View controls");
             }
 
             // Update view settings from control panel in a 'first person' perspective
-            private void updateView()
-            {
-                if (!suspendEvents)
-                {
+            private void updateView() {
+                if (!suspendEvents) {
                     BasicFlyView view = (BasicFlyView) this.wwd.getView();
 
                     // Stop iterators first
@@ -183,8 +167,7 @@ public class ViewLookAround extends ApplicationTemplate
             }
 
             // Update control panel from view
-            public void update()
-            {
+            public void update() {
                 this.suspendEvents = true;
                 {
                     OrbitView view = (OrbitView) wwd.getView();
@@ -197,8 +180,7 @@ public class ViewLookAround extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind View Look Around", AppFrame.class);
     }
 }

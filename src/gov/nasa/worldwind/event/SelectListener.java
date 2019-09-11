@@ -11,7 +11,7 @@ import java.util.EventListener;
  * @author tag
  * @version $Id: SelectListener.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface SelectListener extends EventListener
-{
+public interface SelectListener extends EventListener {
+
     public void selected(SelectEvent event);
 }

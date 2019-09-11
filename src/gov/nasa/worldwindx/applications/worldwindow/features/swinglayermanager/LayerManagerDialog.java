@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager;
 
 import gov.nasa.worldwindx.applications.worldwindow.core.*;
@@ -17,22 +16,20 @@ import java.awt.*;
  * @author tag
  * @version $Id: LayerManagerDialog.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class LayerManagerDialog extends AbstractFeature
-{
+public class LayerManagerDialog extends AbstractFeature {
+
     private static final String ICON_PATH
-        = "gov/nasa/worldwindx/applications/worldwindow/images/layer-manager-64x64.png";
+            = "gov/nasa/worldwindx/applications/worldwindow/images/layer-manager-64x64.png";
 
     protected JDialog dialog;
     protected boolean positionInitialized = false;
 
-    public LayerManagerDialog(Registry registry)
-    {
+    public LayerManagerDialog(Registry registry) {
         super("Layer Manager", Constants.FEATURE_LAYER_MANAGER_DIALOG, ICON_PATH, registry);
         setEnabled(true);
     }
 
-    public void initialize(final Controller controller)
-    {
+    public void initialize(final Controller controller) {
         super.initialize(controller);
 
         this.dialog = new JDialog(this.controller.getFrame());
@@ -43,10 +40,11 @@ public class LayerManagerDialog extends AbstractFeature
         this.dialog.setTitle("Layer Manager");
 
         ControlsPanel controlsPanel = (ControlsPanel) controller.getRegisteredObject(Constants.CONTROLS_PANEL);
-        if (controlsPanel != null)
+        if (controlsPanel != null) {
             this.dialog.getContentPane().add(controlsPanel.getJPanel(), BorderLayout.CENTER);
-        else
+        } else {
             Util.getLogger().severe("Control panel is not registered.");
+        }
 
         this.dialog.pack();
 
@@ -54,23 +52,19 @@ public class LayerManagerDialog extends AbstractFeature
     }
 
     @Override
-    public boolean isTwoState()
-    {
+    public boolean isTwoState() {
         return true;
     }
 
-    public boolean isOn()
-    {
+    public boolean isOn() {
         return this.dialog.isVisible();
     }
 
     @Override
-    public void turnOn(boolean tf)
-    {
-        if (tf && !this.positionInitialized)
-        {
+    public void turnOn(boolean tf) {
+        if (tf && !this.positionInitialized) {
             Util.positionDialogInContainer(this.dialog, this.controller.getAppPanel().getJPanel(),
-                SwingConstants.WEST, SwingConstants.NORTH);
+                    SwingConstants.WEST, SwingConstants.NORTH);
             this.positionInitialized = true;
 
             // Make the default layer group visible the first time the dialog is raised.
@@ -80,8 +74,7 @@ public class LayerManagerDialog extends AbstractFeature
         this.setVisible(tf);
     }
 
-    protected void setVisible(boolean tf)
-    {
+    protected void setVisible(boolean tf) {
         this.dialog.setVisible(tf);
     }
 }

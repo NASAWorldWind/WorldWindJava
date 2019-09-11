@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.multiwindow;
 
 import gov.nasa.worldwind.*;
@@ -32,12 +31,10 @@ import java.awt.*;
  * @author tag
  * @version $Id: ViewViewVolume.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ViewViewVolume extends JFrame
-{
-    static
-    {
-        if (gov.nasa.worldwind.Configuration.isMacOS())
-        {
+public class ViewViewVolume extends JFrame {
+
+    static {
+        if (gov.nasa.worldwind.Configuration.isMacOS()) {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Multi-Window Analysis");
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
@@ -46,8 +43,7 @@ public class ViewViewVolume extends JFrame
 
     protected WWPanel wwp;
 
-    public ViewViewVolume()
-    {
+    public ViewViewVolume() {
         this.getContentPane().setLayout(new BorderLayout(5, 5));
 
         this.wwp = new WWPanel(new Dimension(650, 500));
@@ -61,12 +57,11 @@ public class ViewViewVolume extends JFrame
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
     }
 
-    protected static class WWPanel extends JPanel
-    {
+    protected static class WWPanel extends JPanel {
+
         WorldWindowGLCanvas wwd;
 
-        public WWPanel(Dimension size)
-        {
+        public WWPanel(Dimension size) {
             this.wwd = new WorldWindowGLCanvas();
             this.wwd.setSize(size);
 
@@ -81,12 +76,9 @@ public class ViewViewVolume extends JFrame
         }
     }
 
-    public static void main(String[] args)
-    {
-        SwingUtilities.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
                 // Make a WorldWindow to observe
                 ViewViewVolume vvv = new ViewViewVolume();
                 vvv.setVisible(true);

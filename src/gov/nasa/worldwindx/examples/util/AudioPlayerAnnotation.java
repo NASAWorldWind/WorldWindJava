@@ -13,8 +13,8 @@ import gov.nasa.worldwind.render.*;
  * @author dcollins
  * @version $Id: AudioPlayerAnnotation.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class AudioPlayerAnnotation extends DialogAnnotation
-{
+public class AudioPlayerAnnotation extends DialogAnnotation {
+
     protected static final String PLAY_IMAGE_PATH = "gov/nasa/worldwindx/examples/images/16x16-button-play.png";
     protected static final String PAUSE_IMAGE_PATH = "gov/nasa/worldwindx/examples/images/16x16-button-pause.png";
     protected static final String BACK_IMAGE_PATH = "gov/nasa/worldwindx/examples/images/16x16-button-start.png";
@@ -33,21 +33,18 @@ public class AudioPlayerAnnotation extends DialogAnnotation
     protected Annotation lengthLabel;
     protected ProgressAnnotation progress;
 
-    public AudioPlayerAnnotation(Position position)
-    {
+    public AudioPlayerAnnotation(Position position) {
         super(position);
 
         this.setClipPosition(0);
         this.setClipLength(0);
     }
 
-    public long getClipPosition()
-    {
+    public long getClipPosition() {
         return this.position;
     }
 
-    public void setClipPosition(long position)
-    {
+    public void setClipPosition(long position) {
         this.position = position;
 
         String text = this.formatTimeString(position);
@@ -56,13 +53,11 @@ public class AudioPlayerAnnotation extends DialogAnnotation
         this.getClipProgressBar().setValue(position);
     }
 
-    public long getClipLength()
-    {
+    public long getClipLength() {
         return this.length;
     }
 
-    public void setClipLength(long length)
-    {
+    public void setClipLength(long length) {
         this.length = length;
 
         String text = this.formatTimeString(length);
@@ -72,46 +67,36 @@ public class AudioPlayerAnnotation extends DialogAnnotation
         this.getClipProgressBar().setMax(length);
     }
 
-    public Annotation getTitleLabel()
-    {
+    public Annotation getTitleLabel() {
         return this.titleLabel;
     }
 
-    public ButtonAnnotation getPlayButton()
-    {
+    public ButtonAnnotation getPlayButton() {
         return this.playButton;
     }
 
-    public ButtonAnnotation getBackButton()
-    {
+    public ButtonAnnotation getBackButton() {
         return this.backButton;
     }
 
-    public Annotation getClipPositionLabel()
-    {
+    public Annotation getClipPositionLabel() {
         return this.positionLabel;
     }
 
-    public Annotation getClipLengthLabel()
-    {
+    public Annotation getClipLengthLabel() {
         return this.lengthLabel;
     }
 
-    public ProgressAnnotation getClipProgressBar()
-    {
+    public ProgressAnnotation getClipProgressBar() {
         return this.progress;
     }
 
-    @SuppressWarnings( {"StringEquality"})
-    public void setPlayButtonState(String state)
-    {
-        if (state == AVKey.PLAY)
-        {
+    @SuppressWarnings({"StringEquality"})
+    public void setPlayButtonState(String state) {
+        if (state == AVKey.PLAY) {
             this.playButton.setImageSource(PLAY_IMAGE_PATH);
             this.playButton.setToolTipText(PLAY_TOOLTIP_TEXT);
-        }
-        else if (state == AVKey.PAUSE)
-        {
+        } else if (state == AVKey.PAUSE) {
             this.playButton.setImageSource(PAUSE_IMAGE_PATH);
             this.playButton.setToolTipText(PAUSE_TOOLTIP_TEXT);
         }
@@ -120,9 +105,7 @@ public class AudioPlayerAnnotation extends DialogAnnotation
     //**************************************************************//
     //********************  Annotation Components  *****************//
     //**************************************************************//
-
-    protected void initComponents()
-    {
+    protected void initComponents() {
         super.initComponents();
 
         this.titleLabel = new ScreenAnnotation("", new java.awt.Point());
@@ -147,8 +130,7 @@ public class AudioPlayerAnnotation extends DialogAnnotation
         this.backButton.setToolTipText(BACK_TOOLTIP_TEXT);
     }
 
-    protected void layoutComponents()
-    {
+    protected void layoutComponents() {
         super.layoutComponents();
 
         Annotation controlsContainer = new ScreenAnnotation("", new java.awt.Point());
@@ -163,7 +145,7 @@ public class AudioPlayerAnnotation extends DialogAnnotation
 
             java.awt.Insets insets = this.positionLabel.getAttributes().getInsets();
             this.positionLabel.getAttributes().setInsets(
-                new java.awt.Insets(insets.top, insets.left + 4, insets.bottom, insets.right));
+                    new java.awt.Insets(insets.top, insets.left + 4, insets.bottom, insets.right));
         }
 
         Annotation contentContainer = new ScreenAnnotation("", new java.awt.Point());
@@ -177,8 +159,7 @@ public class AudioPlayerAnnotation extends DialogAnnotation
         this.addChild(contentContainer);
     }
 
-    protected void setupTitle(Annotation annotation)
-    {
+    protected void setupTitle(Annotation annotation) {
         this.setupLabel(annotation);
 
         AnnotationAttributes attribs = annotation.getAttributes();
@@ -187,8 +168,7 @@ public class AudioPlayerAnnotation extends DialogAnnotation
         attribs.setTextAlign(AVKey.CENTER);
     }
 
-    protected void setupTimeLabel(Annotation annotation)
-    {
+    protected void setupTimeLabel(Annotation annotation) {
         this.setupLabel(annotation);
 
         AnnotationAttributes attribs = annotation.getAttributes();
@@ -196,8 +176,7 @@ public class AudioPlayerAnnotation extends DialogAnnotation
         attribs.setSize(new java.awt.Dimension(80, 0));
     }
 
-    protected void setupProgressBar(ProgressAnnotation annotation)
-    {
+    protected void setupProgressBar(ProgressAnnotation annotation) {
         AnnotationAttributes defaultAttribs = new AnnotationAttributes();
         this.setupDefaultAttributes(defaultAttribs);
         defaultAttribs.setSize(new java.awt.Dimension(160, 10));
@@ -207,14 +186,11 @@ public class AudioPlayerAnnotation extends DialogAnnotation
     //**************************************************************//
     //********************  Utilities  *****************************//
     //**************************************************************//
-
-    protected String formatTimeString(long millis)
-    {
+    protected String formatTimeString(long millis) {
         return this.formatAsMinutesSeconds(millis);
     }
 
-    protected String formatAsMinutesSeconds(long millis)
-    {
+    protected String formatAsMinutesSeconds(long millis) {
         long minutes = (millis / 1000) / 60;
         long seconds = (millis / 1000);
         long remainderSeconds = seconds - minutes * 60;

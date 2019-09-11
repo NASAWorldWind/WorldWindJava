@@ -11,70 +11,58 @@ import java.io.IOException;
  * @author dcollins
  * @version $Id: NumericValueJSONEvent.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class NumericValueJSONEvent implements JSONEvent
-{
+public class NumericValueJSONEvent implements JSONEvent {
+
     protected final String fieldName;
     protected final double numericValue;
 
-    public NumericValueJSONEvent(String fieldName, double value) throws IOException
-    {
+    public NumericValueJSONEvent(String fieldName, double value) throws IOException {
         this.fieldName = fieldName;
         this.numericValue = value;
     }
 
-    public boolean isStartObject()
-    {
+    public boolean isStartObject() {
         return false;
     }
 
-    public boolean isEndObject()
-    {
+    public boolean isEndObject() {
         return false;
     }
 
-    public boolean isStartArray()
-    {
+    public boolean isStartArray() {
         return false;
     }
 
-    public boolean isEndArray()
-    {
+    public boolean isEndArray() {
         return false;
     }
 
-    public boolean isFieldName()
-    {
+    public boolean isFieldName() {
         return false;
     }
 
-    public boolean isScalarValue()
-    {
+    public boolean isScalarValue() {
         return true;
     }
 
-    public boolean isNumericValue()
-    {
+    public boolean isNumericValue() {
         return true;
     }
 
-    public String getFieldName()
-    {
+    public String getFieldName() {
         return this.fieldName;
     }
 
-    public Object asScalarValue()
-    {
+    public Object asScalarValue() {
         return this.numericValue;
     }
 
-    public double asNumericValue()
-    {
+    public double asNumericValue() {
         return this.numericValue;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return String.valueOf(this.numericValue);
     }
 }

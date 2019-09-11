@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render;
 
 import com.jogamp.opengl.util.texture.*;
@@ -35,20 +34,32 @@ import java.net.URL;
  * @author tag
  * @version $Id: LazilyLoadedTexture.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class LazilyLoadedTexture extends AVListImpl implements WWTexture
-{
-    /** The original image source specified at construction. */
+public class LazilyLoadedTexture extends AVListImpl implements WWTexture {
+
+    /**
+     * The original image source specified at construction.
+     */
     protected Object imageSource;
-    /** The mip-map flag specified at construction. */
+    /**
+     * The mip-map flag specified at construction.
+     */
     protected boolean useMipMaps;
-    /** The current anisotropy flag. */
+    /**
+     * The current anisotropy flag.
+     */
     protected boolean useAnisotropy = true;
 
-    /** The texture width, if the width is known. Otherwise it's -1. */
+    /**
+     * The texture width, if the width is known. Otherwise it's -1.
+     */
     protected Integer width;
-    /** The texture height, if the height is known. Otherwise it's -1. */
+    /**
+     * The texture height, if the height is known. Otherwise it's -1.
+     */
     protected Integer height;
-    /** The texture's texture coordinates, as determined by JOGL when the texture is created. */
+    /**
+     * The texture's texture coordinates, as determined by JOGL when the texture is created.
+     */
     protected TextureCoords texCoords;
     /**
      * The texture data created as the image source is read. It's removed - set to null - once the textures is fully
@@ -57,13 +68,21 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      * image source is <code>BufferedImage</code>.
      */
     protected volatile TextureData textureData; // if non-null, then must be converted to a Texture
-    /** Indicates that texture initialization failed. This texture should not be used if true. */
+    /**
+     * Indicates that texture initialization failed. This texture should not be used if true.
+     */
     protected boolean textureInitializationFailed = false;
-    /** Indicates whether the image read from the image source has mip-map data. */
+    /**
+     * Indicates whether the image read from the image source has mip-map data.
+     */
     protected boolean hasMipmapData = false;
-    /** Identifies the {@link gov.nasa.worldwind.cache.FileStore} of the supporting file cache for this model. */
+    /**
+     * Identifies the {@link gov.nasa.worldwind.cache.FileStore} of the supporting file cache for this model.
+     */
     protected FileStore fileStore = WorldWind.getDataFileStore();
-    /** Provides a semaphore to synchronize access to the texture file if duplicate request tasks are active. */
+    /**
+     * Provides a semaphore to synchronize access to the texture file if duplicate request tasks are active.
+     */
     protected final Object fileLock = new Object();
 
     /**
@@ -80,8 +99,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @throws IllegalArgumentException if the <code>imageSource</code> is null.
      */
-    public LazilyLoadedTexture(Object imageSource)
-    {
+    public LazilyLoadedTexture(Object imageSource) {
         this(imageSource, true);
     }
 
@@ -90,12 +108,11 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @param imageSource the source of the image, either a file path {@link String} or a {@link
      *                    java.awt.image.BufferedImage}.
-     * @param useMipMaps  Indicates whether to generate and use mip-maps for the image.
+     * @param useMipMaps Indicates whether to generate and use mip-maps for the image.
      *
      * @throws IllegalArgumentException if the <code>imageSource</code> is null.
      */
-    public LazilyLoadedTexture(Object imageSource, boolean useMipMaps)
-    {
+    public LazilyLoadedTexture(Object imageSource, boolean useMipMaps) {
         initialize(imageSource, useMipMaps, null);
     }
 
@@ -103,15 +120,13 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      * Initializes this object's fields during construction.
      *
      * @param imageSource the image source.
-     * @param useMipMaps  the mip-map flag.
-     * @param listener    the change listener.
+     * @param useMipMaps the mip-map flag.
+     * @param listener the change listener.
      *
      * @throws IllegalArgumentException if the image source is null.
      */
-    protected void initialize(Object imageSource, boolean useMipMaps, PropertyChangeListener listener)
-    {
-        if (imageSource == null)
-        {
+    protected void initialize(Object imageSource, boolean useMipMaps, PropertyChangeListener listener) {
+        if (imageSource == null) {
             String message = Logging.getMessage("nullValue.ImageSource");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -120,12 +135,12 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
         this.imageSource = imageSource;
         this.useMipMaps = useMipMaps;
 
-        if (listener != null)
+        if (listener != null) {
             this.addPropertyChangeListener(listener);
+        }
     }
 
-    public Object getImageSource()
-    {
+    public Object getImageSource() {
         return this.imageSource;
     }
 
@@ -134,8 +149,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return true if the image source is a <code>BufferedImage</code>, otherwise false.
      */
-    protected boolean isBufferedImageSource()
-    {
+    protected boolean isBufferedImageSource() {
         return this.getImageSource() instanceof BufferedImage;
     }
 
@@ -146,8 +160,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return the texture's width if the texture has been retrieved, otherwise -1.
      */
-    public int getWidth()
-    {
+    public int getWidth() {
         return this.width != null ? this.width : -1;
     }
 
@@ -158,8 +171,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return the texture's height if the texture has been retrieved, otherwise -1.
      */
-    public int getHeight()
-    {
+    public int getHeight() {
         return this.height != null ? this.height : -1;
     }
 
@@ -172,8 +184,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return the texture's width if the texture has been retrieved, otherwise -1.
      */
-    public int getWidth(DrawContext dc)
-    {
+    public int getWidth(DrawContext dc) {
         return this.getWidth();
     }
 
@@ -186,8 +197,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return the texture's height if the texture has been retrieved, otherwise -1.
      */
-    public int getHeight(DrawContext dc)
-    {
+    public int getHeight(DrawContext dc) {
         return this.getHeight();
     }
 
@@ -195,20 +205,17 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      * Indicates whether the texture should use mip-maps. If they are not available in the source image they are
      * created.
      *
-     * @return true if mip-maps are used, false if  not.
+     * @return true if mip-maps are used, false if not.
      */
-    public boolean isUseMipMaps()
-    {
+    public boolean isUseMipMaps() {
         return this.useMipMaps;
     }
 
-    public TextureCoords getTexCoords()
-    {
+    public TextureCoords getTexCoords() {
         return this.texCoords;
     }
 
-    public boolean isTextureCurrent(DrawContext dc)
-    {
+    public boolean isTextureCurrent(DrawContext dc) {
         return this.getTexture(dc) != null;
     }
 
@@ -217,8 +224,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return useAnisotropy true if anisotropy is to be applied, otherwise false.
      */
-    public boolean isUseAnisotropy()
-    {
+    public boolean isUseAnisotropy() {
         return this.useAnisotropy;
     }
 
@@ -227,8 +233,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @param useAnisotropy true if anisotropy is to be applied, otherwise false.
      */
-    public void setUseAnisotropy(boolean useAnisotropy)
-    {
+    public void setUseAnisotropy(boolean useAnisotropy) {
         this.useAnisotropy = useAnisotropy;
     }
 
@@ -237,10 +242,9 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      * texture should not be used.
      *
      * @return true if texture retrieval or creation failed, otherwise true, even if the image source has not yet been
-     *         retrieved.
+     * retrieved.
      */
-    public boolean isTextureInitializationFailed()
-    {
+    public boolean isTextureInitializationFailed() {
         return this.textureInitializationFailed;
     }
 
@@ -251,15 +255,14 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return this instance's texture, or null if the texture does not currently exist.
      */
-    protected Texture getTexture(DrawContext dc)
-    {
-        if (this.getImageSource() == null)
+    protected Texture getTexture(DrawContext dc) {
+        if (this.getImageSource() == null) {
             return null;
+        }
 
         Texture texture = dc.getTextureCache().getTexture(this.getImageSource());
 
-        if (this.width == null && texture != null)
-        {
+        if (this.width == null && texture != null) {
             this.width = texture.getWidth();
             this.height = texture.getHeight();
             this.texCoords = texture.getImageTexCoords();
@@ -276,10 +279,9 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      * next bound or otherwise initialized. This object's texture data field is then set to null.
      *
      * @return the texture data, which may be null indicating that the image source has not been read or that a texture
-     *         has been created.
+     * has been created.
      */
-    protected TextureData getTextureData()
-    {
+    protected TextureData getTextureData() {
         return this.textureData;
     }
 
@@ -292,11 +294,11 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @param textureData the texture data, which may be null.
      */
-    protected void setTextureData(TextureData textureData)
-    {
+    protected void setTextureData(TextureData textureData) {
         this.textureData = textureData;
-        if (textureData != null && textureData.getMipmapData() != null)
+        if (textureData != null && textureData.getMipmapData() != null) {
             this.hasMipmapData = true;
+        }
     }
 
     /**
@@ -307,51 +309,47 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return true if the texture was bound, otherwise false.
      */
-    public boolean bind(DrawContext dc)
-    {
-        if (this.isTextureInitializationFailed())
+    public boolean bind(DrawContext dc) {
+        if (this.isTextureInitializationFailed()) {
             return false;
+        }
 
-        if (dc == null)
-        {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
 
         Texture texture = this.getTexture(dc);
-        if (texture == null)
+        if (texture == null) {
             texture = this.requestTexture(dc);
+        }
 
-        if (texture != null)
-        {
+        if (texture != null) {
             texture.bind(dc.getGL());
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
-    public void applyInternalTransform(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public void applyInternalTransform(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
 
         Texture texture = this.getTexture(dc);
-        if (texture == null)
+        if (texture == null) {
             texture = this.requestTexture(dc);
+        }
 
-        if (texture == null)
+        if (texture == null) {
             return;
+        }
 
-        if (texture.getMustFlipVertically())
-        {
+        if (texture.getMustFlipVertically()) {
             GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
             gl.glMatrixMode(GL2.GL_TEXTURE);
             gl.glLoadIdentity();
@@ -368,20 +366,23 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return the new texture, or null if the texture is not yet available.
      */
-    protected Texture requestTexture(DrawContext dc)
-    {
-        if (this.isBufferedImageSource())
+    protected Texture requestTexture(DrawContext dc) {
+        if (this.isBufferedImageSource()) {
             return this.makeBufferedImageTexture(dc);
+        }
 
-        if (this.getTextureData() != null && this.getTexture(dc) == null)
+        if (this.getTextureData() != null && this.getTexture(dc) == null) {
             return this.makeTextureFromTextureData(dc);
+        }
 
-        if (WorldWind.getTaskService().isFull())
+        if (WorldWind.getTaskService().isFull()) {
             return null;
+        }
 
         Runnable task = this.createRequestTask();
-        if (WorldWind.getTaskService().contains(task))
+        if (WorldWind.getTaskService().contains(task)) {
             return null;
+        }
 
         // Use either the current layer or the layer list as the listener to notify when the request completes. The
         // latter is used when the image source is requested during ordered rendering and the current layer is null.
@@ -398,8 +399,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return a new request task that retrieves and loads this texture's image source.
      */
-    protected Runnable createRequestTask()
-    {
+    protected Runnable createRequestTask() {
         return new RequestTask(this);
     }
 
@@ -412,28 +412,24 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @throws IllegalStateException if the image source is null or not a <code>BufferedImage</code>.
      */
-    protected Texture makeBufferedImageTexture(DrawContext dc)
-    {
-        if (this.getImageSource() == null || !(this.getImageSource() instanceof BufferedImage))
-        {
+    protected Texture makeBufferedImageTexture(DrawContext dc) {
+        if (this.getImageSource() == null || !(this.getImageSource() instanceof BufferedImage)) {
             String message = Logging.getMessage("generic.NotABufferedImage");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
 
-        try
-        {
+        try {
             TextureData td = AWTTextureIO.newTextureData(Configuration.getMaxCompatibleGLProfile(),
-                (BufferedImage) this.getImageSource(), this.isUseMipMaps());
-            if (td == null)
+                    (BufferedImage) this.getImageSource(), this.isUseMipMaps());
+            if (td == null) {
                 return null;
+            }
 
             this.setTextureData(td);
 
             return this.makeTextureFromTextureData(dc);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String msg = Logging.getMessage("generic.IOExceptionDuringTextureInitialization");
             Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             this.textureInitializationFailed = true;
@@ -447,12 +443,10 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      * @param dc the current draw context.
      *
      * @return the newly created texture, or null if this instance has no current <code>TextureData</code> or if texture
-     *         creation failed.
+     * creation failed.
      */
-    protected Texture makeTextureFromTextureData(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    protected Texture makeTextureFromTextureData(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -465,11 +459,9 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
             throw new IllegalStateException(msg);
         }
 
-        try
-        {
+        try {
             Texture texture = TextureIO.newTexture(this.getTextureData());
-            if (texture == null)
-            {
+            if (texture == null) {
                 this.textureInitializationFailed = true;
                 return null;
             }
@@ -485,9 +477,7 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
             this.setTextureData(null);
 
             return texture;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String name = this.isBufferedImageSource() ? "BufferedImage" : this.getImageSource().toString();
             String msg = Logging.getMessage("generic.ExceptionAttemptingToCreateTexture", name);
             Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
@@ -498,46 +488,45 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
     /**
      * Sets a specified texture's OpenGL <code>Texture</code> parameters.
      *
-     * @param dc      the current draw context.
+     * @param dc the current draw context.
      * @param texture the texture whose parameters to set.
      */
-    protected void setTextureParameters(DrawContext dc, Texture texture)
-    {
+    protected void setTextureParameters(DrawContext dc, Texture texture) {
         // Enable the appropriate mip-mapping texture filters if the caller has specified that mip-mapping should be
         // enabled, and the texture itself supports mip-mapping.
         boolean useMipMapFilter = this.useMipMaps && (this.getTextureData().getMipmapData() != null
-            || texture.isUsingAutoMipmapGeneration());
+                || texture.isUsingAutoMipmapGeneration());
 
         GL gl = dc.getGL();
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER,
-            useMipMapFilter ? GL.GL_LINEAR_MIPMAP_LINEAR : GL.GL_LINEAR);
+                useMipMapFilter ? GL.GL_LINEAR_MIPMAP_LINEAR : GL.GL_LINEAR);
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR);
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_CLAMP_TO_EDGE);
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_CLAMP_TO_EDGE);
 
-        if (this.isUseAnisotropy() && useMipMapFilter)
-        {
+        if (this.isUseAnisotropy() && useMipMapFilter) {
             double maxAnisotropy = dc.getGLRuntimeCapabilities().getMaxTextureAnisotropy();
-            if (dc.getGLRuntimeCapabilities().isUseAnisotropicTextureFilter() && maxAnisotropy >= 2.0)
-            {
+            if (dc.getGLRuntimeCapabilities().isUseAnisotropicTextureFilter() && maxAnisotropy >= 2.0) {
                 gl.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAX_ANISOTROPY_EXT, (float) maxAnisotropy);
             }
         }
     }
 
-    protected void notifyTextureLoaded()
-    {
-        if (this.listener != null)
-        {
+    protected void notifyTextureLoaded() {
+        if (this.listener != null) {
             this.listener.propertyChange(new PropertyChangeEvent(this, AVKey.TEXTURE, null, this));
             this.listener = null; // forget the listener to avoid dangling references
         }
     }
 
-    /** Attempts to find this texture's image file locally, and if that fails attempts to find it remotely. */
-    protected static class RequestTask implements Runnable
-    {
-        /** The BasicWWTexture associated with this request. */
+    /**
+     * Attempts to find this texture's image file locally, and if that fails attempts to find it remotely.
+     */
+    protected static class RequestTask implements Runnable {
+
+        /**
+         * The BasicWWTexture associated with this request.
+         */
         protected final LazilyLoadedTexture wwTexture;
 
         /**
@@ -545,10 +534,8 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
          *
          * @param wwTexture the texture object for which to construct the request task.
          */
-        protected RequestTask(LazilyLoadedTexture wwTexture)
-        {
-            if (wwTexture == null)
-            {
+        protected RequestTask(LazilyLoadedTexture wwTexture) {
+            if (wwTexture == null) {
                 String message = Logging.getMessage("nullValue.TextureIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -557,41 +544,37 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
             this.wwTexture = wwTexture;
         }
 
-        public void run()
-        {
-            if (Thread.currentThread().isInterrupted())
+        public void run() {
+            if (Thread.currentThread().isInterrupted()) {
                 return; // the task was cancelled because it's a duplicate or for some other reason
-
+            }
             URL fileUrl = this.wwTexture.fileStore.requestFile(this.wwTexture.getImageSource().toString());
 
-            if (fileUrl != null)
-            {
-                if (this.wwTexture.loadTextureData(fileUrl))
-                {
+            if (fileUrl != null) {
+                if (this.wwTexture.loadTextureData(fileUrl)) {
                     this.wwTexture.notifyTextureLoaded();
                 }
             }
         }
 
-        public boolean equals(Object o)
-        {
-            if (this == o)
+        public boolean equals(Object o) {
+            if (this == o) {
                 return true;
-            if (o == null || getClass() != o.getClass())
+            }
+            if (o == null || getClass() != o.getClass()) {
                 return false;
+            }
 
             final RequestTask that = (RequestTask) o;
 
             return !(this.wwTexture != null ? !this.wwTexture.equals(that.wwTexture) : that.wwTexture != null);
         }
 
-        public int hashCode()
-        {
+        public int hashCode() {
             return (this.wwTexture != null ? this.wwTexture.hashCode() : 0);
         }
 
-        public String toString()
-        {
+        public String toString() {
             return this.wwTexture.getImageSource().toString();
         }
     }
@@ -604,16 +587,15 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return true if the image was successfully loaded, otherwise false.
      */
-    protected boolean loadTextureData(URL fileUrl)
-    {
+    protected boolean loadTextureData(URL fileUrl) {
         TextureData td;
 
-        synchronized (this.fileLock)
-        {
+        synchronized (this.fileLock) {
             td = readImage(fileUrl);
 
-            if (td != null)
+            if (td != null) {
                 this.setTextureData(td);
+            }
         }
 
         return this.getTextureData() != null;
@@ -626,16 +608,12 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
      *
      * @return a <code>TextureData</code> instance for the image.
      */
-    protected TextureData readImage(URL fileUrl)
-    {
-        try
-        {
+    protected TextureData readImage(URL fileUrl) {
+        try {
             return OGLUtil.newTextureData(Configuration.getMaxCompatibleGLProfile(), fileUrl, this.isUseMipMaps());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String msg = Logging.getMessage("layers.TextureLayer.ExceptionAttemptingToReadTextureFile",
-                this.getImageSource());
+                    this.getImageSource());
             Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             this.textureInitializationFailed = true;
             return null;
@@ -643,25 +621,26 @@ public class LazilyLoadedTexture extends AVListImpl implements WWTexture
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
+        }
 
         LazilyLoadedTexture that = (LazilyLoadedTexture) o;
 
         //noinspection RedundantIfStatement
-        if (imageSource != null ? !imageSource.equals(that.imageSource) : that.imageSource != null)
+        if (imageSource != null ? !imageSource.equals(that.imageSource) : that.imageSource != null) {
             return false;
+        }
 
         return true;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return imageSource != null ? imageSource.hashCode() : 0;
     }
 }

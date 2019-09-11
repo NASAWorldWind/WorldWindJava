@@ -13,8 +13,8 @@ import java.net.URL;
  * @author Tom Gaskins
  * @version $Id: FileStore.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface FileStore extends WWObject
-{
+public interface FileStore extends WWObject {
+
     /**
      * Returns the locations that the file store will look for files.
      *
@@ -32,10 +32,10 @@ public interface FileStore extends WWObject
     /**
      * Adds a location to search when files are requested from the file store.
      *
-     * @param newPath   the location to add. If the location already exists in the list of read locations its entry is
-     *                  removed and a new entry is added to the end of the search list.
+     * @param newPath the location to add. If the location already exists in the list of read locations its entry is
+     * removed and a new entry is added to the end of the search list.
      * @param isInstall indicates whether the location is an "installed data" location and therefore not subject to
-     *                  automatic removal of its contents.
+     * automatic removal of its contents.
      *
      * @throws IllegalArgumentException if the specified path is null or empty.
      */
@@ -45,10 +45,10 @@ public interface FileStore extends WWObject
      * Adds a location to search when files are requested from the file store and specifies its location in the search
      * order.
      *
-     * @param index     the location in the search list at which to add the new location.
-     * @param newPath   the location to add.
+     * @param index the location in the search list at which to add the new location.
+     * @param newPath the location to add.
      * @param isInstall indicates whether the location is an installed-data location and therefore not subject to
-     *                  automatic removal of its contents.
+     * automatic removal of its contents.
      *
      * @throws IllegalArgumentException if the specified path is null or empty or the specified index is less than 0.
      */
@@ -81,16 +81,16 @@ public interface FileStore extends WWObject
      * @param fileName the file in question.
      *
      * @return true if the file store contains the file, false if the file store does not contain the file or the
-     *         specified path is null.
+     * specified path is null.
      */
     boolean containsFile(String fileName);
 
     /**
      * Searches the file store for a specified file and returns a reference to it if it is.
      *
-     * @param fileName       the file to search for, identified by a path relative to the root of the file store.
+     * @param fileName the file to search for, identified by a path relative to the root of the file store.
      * @param checkClassPath if true, the current classpath is first searched for the file, otherwise the classpath is
-     *                       not searched.
+     * not searched.
      *
      * @return a URL addressing the file if it is found.
      *
@@ -136,7 +136,7 @@ public interface FileStore extends WWObject
      * store. Returned names are relative pointers to a file in the store; they are not necessarily a file system path.
      *
      * @param pathName relative path in the file store to search, or null to search the entire file store.
-     * @param filter   a file filter.
+     * @param filter a file filter.
      *
      * @return an array of file store names. Returns null if the path does not exist in the file store.
      *
@@ -152,7 +152,7 @@ public interface FileStore extends WWObject
      * store; they are not necessarily a file system path.
      *
      * @param pathName relative path in the file store to search, or null to search the entire file store.
-     * @param filter   a file filter.
+     * @param filter a file filter.
      *
      * @return an array of file store names. Returns null if the path does not exist in the file store.
      *
@@ -169,7 +169,7 @@ public interface FileStore extends WWObject
      * store; they are not necessarily a file system path.
      *
      * @param pathName relative path in the file store to search, or null to search the entire file store.
-     * @param filter   a file filter.
+     * @param filter a file filter.
      *
      * @return an array of file store names. Returns null if the path does not exist in the file store.
      *
@@ -192,7 +192,7 @@ public interface FileStore extends WWObject
      * @param address the file's address. If null, zero is returned.
      *
      * @return The expiration time of the file, in milliseconds since the Epoch (January 1, 1970, 00:00:00 GMT). Zero
-     *         indicates that there is no expiration time.
+     * indicates that there is no expiration time.
      */
     long getExpirationTime(String address);
 
@@ -205,7 +205,7 @@ public interface FileStore extends WWObject
      * @param address the file address: either a local file, a URL, or a path relative to the root of the file store.
      *
      * @return the file's URL if it exists locally or is a remote file that has been retrieved, otherwise
-     *         <code>null</code>.
+     * <code>null</code>.
      *
      * @throws IllegalArgumentException if the <code>address</code> is <code>null</code>.
      */
@@ -215,8 +215,8 @@ public interface FileStore extends WWObject
      * Requests a file and specifies whether to store retrieved files in the cache or in a temporary location. If the
      * file exists locally, including as a resource on the classpath, this returns a <code>{@link URL}</code> to the
      * file. Otherwise if the specified address is a URL to a remote location, this initiates a request for the file and
-     * returns <code>null</code>. When the request succeeds the file is stored either in the local WorldWind cache or
-     * in a temporary location and subsequent invocations of this method return a URL to the retrieved file.
+     * returns <code>null</code>. When the request succeeds the file is stored either in the local WorldWind cache or in
+     * a temporary location and subsequent invocations of this method return a URL to the retrieved file.
      * <p>
      * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the WorldWind
      * cache or in a temporary location. This parameter has no effect if the file exists locally. The temporary location
@@ -226,13 +226,12 @@ public interface FileStore extends WWObject
      * If a remote file is requested multiple times with different values for <code>cacheRemoteFile</code>, it is
      * undefined whether the retrieved file is stored in the WorldWind cache or in a temporary location.
      *
-     * @param address         the file address: either a local file, a URL, or a path relative to the root of the file
-     *                        store.
+     * @param address the file address: either a local file, a URL, or a path relative to the root of the file store.
      * @param cacheRemoteFile <code>true</code> to store remote files in the WorldWind cache, or <code>false</code> to
-     *                        store remote files in a temporary location. Has no effect if the address is a local file.
+     * store remote files in a temporary location. Has no effect if the address is a local file.
      *
      * @return the file's URL if it exists locally or is a remote file that has been retrieved, otherwise
-     *         <code>null</code>.
+     * <code>null</code>.
      *
      * @throws IllegalArgumentException if the <code>address</code> is <code>null</code>.
      */

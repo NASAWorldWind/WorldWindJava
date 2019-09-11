@@ -13,36 +13,32 @@ import org.junit.runners.JUnit4;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnit4.class)
-public class EllipsoidalGlobeTest
-{
+public class EllipsoidalGlobeTest {
+
     private static final double THRESHOLD = 1.0e-1;
     private static final double REQUIRED_PRECISION = 1.0e-8;
 
     private Globe globe;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         this.globe = new Earth();
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
         this.globe = null;
     }
 
     @Test
-    public void testEquatorialRadius()
-    {
+    public void testEquatorialRadius() {
         double radius = this.globe.getEquatorialRadius();
 
         assertEquals("Equatorial radius", radius, 6378137d, 0.0);
     }
 
     @Test
-    public void testGeodeticToCartesian()
-    {
+    public void testGeodeticToCartesian() {
         Position orig = new Position(LatLon.fromDegrees(30.42515, -97.547562), 200.5d);
 
         Vec4 vec = globe.computePointFromPosition(orig);
@@ -55,13 +51,12 @@ public class EllipsoidalGlobeTest
         Position p = globe.computePositionFromPoint(vec);
         assertEquals("Latitude comparision", orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD);
         assertEquals("Longitude comparision", orig.getLongitude().degrees, p.getLongitude().degrees,
-            THRESHOLD);
+                THRESHOLD);
         assertEquals("Height comparision", orig.getElevation(), p.getElevation(), THRESHOLD);
     }
 
     @Test
-    public void testGeodeticToCartesian2()
-    {
+    public void testGeodeticToCartesian2() {
         Position orig = new Position(LatLon.fromDegrees(88.582737, 60.245658), 200.5d);
 
         Vec4 vec = globe.computePointFromPosition(orig);
@@ -74,13 +69,12 @@ public class EllipsoidalGlobeTest
         Position p = globe.computePositionFromPoint(vec);
         assertEquals("Latitude comparision", orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD);
         assertEquals("Longitude comparision", orig.getLongitude().degrees, p.getLongitude().degrees,
-            THRESHOLD);
+                THRESHOLD);
         assertEquals("Height comparision", orig.getElevation(), p.getElevation(), THRESHOLD);
     }
 
     @Test
-    public void testGeodeticToCartesian3()
-    {
+    public void testGeodeticToCartesian3() {
         Position orig = new Position(LatLon.fromDegrees(-33.903959, 18.505155), 200.5d);
 
         Vec4 vec = globe.computePointFromPosition(orig);
@@ -93,13 +87,12 @@ public class EllipsoidalGlobeTest
         Position p = globe.computePositionFromPoint(vec);
         assertEquals("Latitude comparision", orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD);
         assertEquals("Longitude comparision", orig.getLongitude().degrees, p.getLongitude().degrees,
-            THRESHOLD);
+                THRESHOLD);
         assertEquals("Height comparision", orig.getElevation(), p.getElevation(), THRESHOLD);
     }
 
     @Test
-    public void testGeodeticToCartesian4()
-    {
+    public void testGeodeticToCartesian4() {
         Position orig = new Position(LatLon.fromDegrees(88.582737, 60.245658), 200.5d);
 
         Vec4 vec = globe.computePointFromPosition(orig);
@@ -112,24 +105,20 @@ public class EllipsoidalGlobeTest
         Position p = globe.computePositionFromPoint(vec);
         assertEquals("Latitude comparision", orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD);
         assertEquals("Longitude comparision", orig.getLongitude().degrees, p.getLongitude().degrees,
-            THRESHOLD);
+                THRESHOLD);
         assertEquals("Height comparision", orig.getElevation(), p.getElevation(), THRESHOLD);
     }
 
     @Test
-    public void testEllipsoidEquatorialPlane()
-    {
+    public void testEllipsoidEquatorialPlane() {
         // Test to make sure that coordinate transforms near the equatorial plane work correctly.
         Earth earth = new Earth();
         double a = earth.getEquatorialRadius();
 
         // Check a rough grid across the plane
-        for (double x = -2 * a; x <= 2 * a; x += a / 17)
-        {
-            for (double z = -2 * a; z <= 2 * a; z += a / 17)
-            {
-                if (Math.abs(x) < REQUIRED_PRECISION && Math.abs(z) < REQUIRED_PRECISION)
-                {
+        for (double x = -2 * a; x <= 2 * a; x += a / 17) {
+            for (double z = -2 * a; z <= 2 * a; z += a / 17) {
+                if (Math.abs(x) < REQUIRED_PRECISION && Math.abs(z) < REQUIRED_PRECISION) {
                     // can't test center this way
                     continue;
                 }
@@ -154,18 +143,14 @@ public class EllipsoidalGlobeTest
         }
 
         // Similarly in reverse
-        for (double lon = -Math.PI; lon < Math.PI; lon += Math.PI * 0.1)
-        {
-            for (double r = 0; r <= 2 * a; r += a / 17)
-            {
-                if (0 == r)
-                {
+        for (double lon = -Math.PI; lon < Math.PI; lon += Math.PI * 0.1) {
+            for (double r = 0; r <= 2 * a; r += a / 17) {
+                if (0 == r) {
                     // can't test center this way
                     continue;
                 }
-                if (Math.abs(lon - 3.4557519189487724) < 0.000000001 &&
-                    Math.abs(r - 375184.5294117647) < 0.000000001)
-                {
+                if (Math.abs(lon - 3.4557519189487724) < 0.000000001
+                        && Math.abs(r - 375184.5294117647) < 0.000000001) {
                     continue;
                 }
 
@@ -187,8 +172,7 @@ public class EllipsoidalGlobeTest
     }
 
     @Test
-    public void testEllipsoidAxis()
-    {
+    public void testEllipsoidAxis() {
         // Test to make sure that coordinate transforms near the equatorial plane work correctly.
         Earth earth = new Earth();
         double a = earth.getEquatorialRadius();
@@ -197,8 +181,7 @@ public class EllipsoidalGlobeTest
         // This routine is more error-prone than all the others; it looks like
         // we just need to deal with that.  It's still pretty good.
         // Check along the axis, cartesian->geodetic
-        for (double y = -2 * a; y <= 2 * a; y += a / 17)
-        {
+        for (double y = -2 * a; y <= 2 * a; y += a / 17) {
             Vec4 v = new Vec4(0, y, 0);
             String msg = "At y=" + y;
 
@@ -219,8 +202,7 @@ public class EllipsoidalGlobeTest
     }
 
     @Test
-    public void testEllipsoidCenter()
-    {
+    public void testEllipsoidCenter() {
         Earth earth = new Earth();
         Vec4 v = new Vec4(0, 0, 0);
         Position p = earth.computePositionFromPoint(v);
@@ -245,8 +227,7 @@ public class EllipsoidalGlobeTest
     }
 
     @Test
-    public void testGeneralRoundTripCartesianConversion()
-    {
+    public void testGeneralRoundTripCartesianConversion() {
         // Tests cartesian->geodetic->cartesian conversion in a rough grid all
         // around the globe.
         //
@@ -262,12 +243,9 @@ public class EllipsoidalGlobeTest
         double a = earth.getEquatorialRadius();
 
         // different grid size than above, just to get more points tested.
-        for (double x = -2 * a; x <= 2 * a; x += a / 19)
-        {
-            for (double y = -2 * a; y <= 2 * a; y += a / 19)
-            {
-                for (double z = -2 * a; z <= 2 * a; z += a / 19)
-                {
+        for (double x = -2 * a; x <= 2 * a; x += a / 19) {
+            for (double y = -2 * a; y <= 2 * a; y += a / 19) {
+                for (double z = -2 * a; z <= 2 * a; z += a / 19) {
                     Position p = earth.computePositionFromPoint(new Vec4(x, y, z));
                     String msg = "At [x, y, z]=[" + x + ", " + y + ", " + z + "]";
                     // Check continuity
@@ -284,8 +262,7 @@ public class EllipsoidalGlobeTest
     }
 
     @Test
-    public void testRoundTripCartesianConversionAtEvolute()
-    {
+    public void testRoundTripCartesianConversionAtEvolute() {
         // The evolute is the area in the center of the ellipsoid where we get the most problems.  Normalizing the ellipse (2d) to a unit circle in p and q (q is minor axis), the formula for it is:
         //
         // Tests cartesian->geodetic->cartesian conversion in a rough grid all
@@ -300,8 +277,7 @@ public class EllipsoidalGlobeTest
         // Checking one slice (by fiat at z=0) should be sufficient - everything
         // should be symetrical around the axis, and if it isn't, other tests
         // should show that.
-        for (double p = 0; p < e4; p += e4 / 100)
-        {
+        for (double p = 0; p < e4; p += e4 / 100) {
             double q = Math.cbrt(e43 - Math.cbrt(p));
             double x = Math.sqrt(p * a2);
             double y = Math.sqrt(q * a2 / (1 - e2));

@@ -21,8 +21,8 @@ import java.util.ArrayList;
  * @author dcollins
  * @version $Id: AbstractAirspaceEditor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class AbstractAirspaceEditor extends AbstractLayer implements AirspaceEditor
-{
+public abstract class AbstractAirspaceEditor extends AbstractLayer implements AirspaceEditor {
+
     private boolean armed;
     private boolean useRubberBand;
     private boolean keepControlPointsAboveTerrain;
@@ -35,10 +35,8 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
     protected static final int LOWER_ALTITUDE = AirspaceEditorUtil.LOWER_ALTITUDE;
     protected static final int UPPER_ALTITUDE = AirspaceEditorUtil.UPPER_ALTITUDE;
 
-    public AbstractAirspaceEditor(AirspaceControlPointRenderer renderer)
-    {
-        if (renderer == null)
-        {
+    public AbstractAirspaceEditor(AirspaceControlPointRenderer renderer) {
+        if (renderer == null) {
             String message = Logging.getMessage("nullValue.RendererIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -50,50 +48,40 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
         this.controlPointRenderer = renderer;
     }
 
-    public AbstractAirspaceEditor()
-    {
+    public AbstractAirspaceEditor() {
         this(new BasicAirspaceControlPointRenderer());
     }
 
-    public boolean isArmed()
-    {
+    public boolean isArmed() {
         return this.armed;
     }
 
-    public void setArmed(boolean armed)
-    {
+    public void setArmed(boolean armed) {
         this.armed = armed;
     }
 
-    public boolean isUseRubberBand()
-    {
+    public boolean isUseRubberBand() {
         return this.useRubberBand;
     }
 
-    public void setUseRubberBand(boolean state)
-    {
+    public void setUseRubberBand(boolean state) {
         this.useRubberBand = state;
     }
 
-    public boolean isKeepControlPointsAboveTerrain()
-    {
+    public boolean isKeepControlPointsAboveTerrain() {
         return this.keepControlPointsAboveTerrain;
     }
 
-    public void setKeepControlPointsAboveTerrain(boolean state)
-    {
+    public void setKeepControlPointsAboveTerrain(boolean state) {
         this.keepControlPointsAboveTerrain = state;
     }
 
-    public AirspaceControlPointRenderer getControlPointRenderer()
-    {
+    public AirspaceControlPointRenderer getControlPointRenderer() {
         return this.controlPointRenderer;
     }
 
-    public void setControlPointRenderer(AirspaceControlPointRenderer renderer)
-    {
-        if (renderer == null)
-        {
+    public void setControlPointRenderer(AirspaceControlPointRenderer renderer) {
+        if (renderer == null) {
             String message = Logging.getMessage("nullValue.RendererIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -102,70 +90,59 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
         this.controlPointRenderer = renderer;
     }
 
-    public AirspaceEditListener[] getEditListeners()
-    {
+    public AirspaceEditListener[] getEditListeners() {
         return this.eventListeners.getListeners(AirspaceEditListener.class);
     }
 
-    public void addEditListener(AirspaceEditListener listener)
-    {
+    public void addEditListener(AirspaceEditListener listener) {
         this.eventListeners.add(AirspaceEditListener.class, listener);
     }
 
-    public void removeEditListener(AirspaceEditListener listener)
-    {
+    public void removeEditListener(AirspaceEditListener listener) {
         this.eventListeners.remove(AirspaceEditListener.class, listener);
     }
 
     //**************************************************************//
     //********************  Control Point Rendering  ***************//
     //**************************************************************//
-
-    protected void doRender(DrawContext dc)
-    {
-        if (!this.isArmed())
+    protected void doRender(DrawContext dc) {
+        if (!this.isArmed()) {
             return;
+        }
 
         this.draw(dc, null);
     }
 
-    protected void doPick(DrawContext dc, Point point)
-    {
-        if (!this.isArmed())
+    protected void doPick(DrawContext dc, Point point) {
+        if (!this.isArmed()) {
             return;
+        }
 
         this.draw(dc, point);
     }
 
-    protected void draw(DrawContext dc, Point pickPoint)
-    {
+    protected void draw(DrawContext dc, Point pickPoint) {
         this.getCurrentControlPoints().clear();
         this.assembleControlPoints(dc);
 
-        if (dc.isPickingMode())
-        {
+        if (dc.isPickingMode()) {
             this.getControlPointRenderer().pick(dc, this.getCurrentControlPoints(), pickPoint, this);
-        }
-        else
-        {
+        } else {
             this.getControlPointRenderer().render(dc, this.getCurrentControlPoints());
         }
     }
 
-    protected java.util.List<AirspaceControlPoint> getCurrentControlPoints()
-    {
+    protected java.util.List<AirspaceControlPoint> getCurrentControlPoints() {
         return this.currentControlPoints;
     }
 
-    protected void setCurrentControlPoints(java.util.List<? extends AirspaceControlPoint> controlPointList)
-    {
+    protected void setCurrentControlPoints(java.util.List<? extends AirspaceControlPoint> controlPointList) {
         this.currentControlPoints.clear();
         this.currentControlPoints.addAll(controlPointList);
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void addControlPoint(DrawContext dc, AirspaceControlPoint controlPoint)
-    {
+    protected void addControlPoint(DrawContext dc, AirspaceControlPoint controlPoint) {
         this.currentControlPoints.add(controlPoint);
     }
 
@@ -174,13 +151,10 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
     //**************************************************************//
     //********************  Control Point Events  ******************//
     //**************************************************************//
-
     public void moveAirspaceLaterally(WorldWindow wwd, Airspace airspace,
-        Point mousePoint, Point previousMousePoint)
-    {
+            Point mousePoint, Point previousMousePoint) {
         // Include this test to ensure any derived implementation performs it.
-        if (this.getAirspace() == null || this.getAirspace() != airspace)
-        {
+        if (this.getAirspace() == null || this.getAirspace() != airspace) {
             return;
         }
 
@@ -188,11 +162,9 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
     }
 
     public void moveAirspaceVertically(WorldWindow wwd, Airspace airspace,
-        Point mousePoint, Point previousMousePoint)
-    {
+            Point mousePoint, Point previousMousePoint) {
         // Include this test to ensure any derived implementation performs it.
-        if (this.getAirspace() == null || this.getAirspace() != airspace)
-        {
+        if (this.getAirspace() == null || this.getAirspace() != airspace) {
             return;
         }
 
@@ -200,37 +172,30 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
     }
 
     public AirspaceControlPoint addControlPoint(WorldWindow wwd, Airspace airspace,
-        Point mousePoint)
-    {
+            Point mousePoint) {
         // Include this test to ensure any derived implementation performs it.
-        if (this.getAirspace() == null || this.getAirspace() != airspace)
-        {
+        if (this.getAirspace() == null || this.getAirspace() != airspace) {
             return null;
         }
 
-        if (wwd == null || mousePoint == null)
-        {
+        if (wwd == null || mousePoint == null) {
             return null;
         }
 
         return this.doAddControlPoint(wwd, airspace, mousePoint);
     }
 
-    public void removeControlPoint(WorldWindow wwd, AirspaceControlPoint controlPoint)
-    {
+    public void removeControlPoint(WorldWindow wwd, AirspaceControlPoint controlPoint) {
         // Include this test to ensure any derived implementation performs it.
-        if (this.getAirspace() == null)
-        {
+        if (this.getAirspace() == null) {
             return;
         }
 
-        if (wwd == null || controlPoint == null)
-        {
+        if (wwd == null || controlPoint == null) {
             return;
         }
 
-        if (this != controlPoint.getEditor() || this.getAirspace() != controlPoint.getAirspace())
-        {
+        if (this != controlPoint.getEditor() || this.getAirspace() != controlPoint.getAirspace()) {
             return;
         }
 
@@ -238,16 +203,13 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
     }
 
     public void moveControlPoint(WorldWindow wwd, AirspaceControlPoint controlPoint,
-        Point mousePoint, Point previousMousePoint)
-    {
+            Point mousePoint, Point previousMousePoint) {
         // Include this test to ensure any derived implementation performs it.
-        if (this.getAirspace() == null)
-        {
+        if (this.getAirspace() == null) {
             return;
         }
 
-        if (this != controlPoint.getEditor() || this.getAirspace() != controlPoint.getAirspace())
-        {
+        if (this != controlPoint.getEditor() || this.getAirspace() != controlPoint.getAirspace()) {
             return;
         }
 
@@ -255,102 +217,86 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
     }
 
     public void resizeAtControlPoint(WorldWindow wwd, AirspaceControlPoint controlPoint,
-        Point mousePoint, Point previousMousePoint)
-    {
+            Point mousePoint, Point previousMousePoint) {
         // Include this test to ensure any derived implementation performs it.
-        if (this.getAirspace() == null)
-        {
+        if (this.getAirspace() == null) {
             return;
         }
 
-        if (this != controlPoint.getEditor() || this.getAirspace() != controlPoint.getAirspace())
-        {
+        if (this != controlPoint.getEditor() || this.getAirspace() != controlPoint.getAirspace()) {
             return;
         }
 
         this.doResizeAtControlPoint(wwd, controlPoint, mousePoint, previousMousePoint);
     }
 
-    protected void fireAirspaceMoved(AirspaceEditEvent e)
-    {
+    protected void fireAirspaceMoved(AirspaceEditEvent e) {
         // Iterate over the listener list in reverse order. This has the effect of notifying the listeners in the
         // order they were added.
         AirspaceEditListener[] listeners = this.eventListeners.getListeners(AirspaceEditListener.class);
-        for (int i = listeners.length - 1; i >= 0; i--)
-        {
+        for (int i = listeners.length - 1; i >= 0; i--) {
             listeners[i].airspaceMoved(e);
         }
     }
 
-    protected void fireAirspaceResized(AirspaceEditEvent e)
-    {
+    protected void fireAirspaceResized(AirspaceEditEvent e) {
         // Iterate over the listener list in reverse order. This has the effect of notifying the listeners in the
         // order they were added.
         AirspaceEditListener[] listeners = this.eventListeners.getListeners(AirspaceEditListener.class);
-        for (int i = listeners.length - 1; i >= 0; i--)
-        {
+        for (int i = listeners.length - 1; i >= 0; i--) {
             listeners[i].airspaceResized(e);
         }
     }
 
-    protected void fireControlPointAdded(AirspaceEditEvent e)
-    {
+    protected void fireControlPointAdded(AirspaceEditEvent e) {
         // Iterate over the listener list in reverse order. This has the effect of notifying the listeners in the
         // order they were added.
         AirspaceEditListener[] listeners = this.eventListeners.getListeners(AirspaceEditListener.class);
-        for (int i = listeners.length - 1; i >= 0; i--)
-        {
+        for (int i = listeners.length - 1; i >= 0; i--) {
             listeners[i].controlPointAdded(e);
         }
     }
 
-    protected void fireControlPointRemoved(AirspaceEditEvent e)
-    {
+    protected void fireControlPointRemoved(AirspaceEditEvent e) {
         // Iterate over the listener list in reverse order. This has the effect of notifying the listeners in the
         // order they were added.
         AirspaceEditListener[] listeners = this.eventListeners.getListeners(AirspaceEditListener.class);
-        for (int i = listeners.length - 1; i >= 0; i--)
-        {
+        for (int i = listeners.length - 1; i >= 0; i--) {
             listeners[i].controlPointRemoved(e);
         }
     }
 
-    protected void fireControlPointChanged(AirspaceEditEvent e)
-    {
+    protected void fireControlPointChanged(AirspaceEditEvent e) {
         // Iterate over the listener list in reverse order. This has the effect of notifying the listeners in the
         // order they were added.
         AirspaceEditListener[] listeners = this.eventListeners.getListeners(AirspaceEditListener.class);
-        for (int i = listeners.length - 1; i >= 0; i--)
-        {
+        for (int i = listeners.length - 1; i >= 0; i--) {
             listeners[i].controlPointChanged(e);
         }
     }
 
     protected abstract AirspaceControlPoint doAddControlPoint(WorldWindow wwd, Airspace airspace,
-        Point mousePoint);
+            Point mousePoint);
 
     protected abstract void doRemoveControlPoint(WorldWindow wwd, AirspaceControlPoint controlPoint);
 
     protected abstract void doMoveControlPoint(WorldWindow wwd, AirspaceControlPoint controlPoint,
-        Point mousePoint, Point previousMousePoint);
+            Point mousePoint, Point previousMousePoint);
 
     protected abstract void doResizeAtControlPoint(WorldWindow wwd, AirspaceControlPoint controlPoint,
-        Point mousePoint, Point previousMousePoint);
+            Point mousePoint, Point previousMousePoint);
 
     //**************************************************************//
     //********************  Default Event Handling  ****************//
     //**************************************************************//
-
     protected void doMoveAirspaceLaterally(WorldWindow wwd, Airspace airspace,
-        Point mousePoint, Point previousMousePoint)
-    {
+            Point mousePoint, Point previousMousePoint) {
         // Intersect a ray throuh each mouse point, with a geoid passing through the reference elevation. Since
         // most airspace control points follow a fixed altitude, this will track close to the intended mouse position.
         // If either ray fails to intersect the geoid, then ignore this event. Use the difference between the two
         // intersected positions to move the control point's location.
 
-        if (!(airspace instanceof Movable))
-        {
+        if (!(airspace instanceof Movable)) {
             return;
         }
 
@@ -359,16 +305,19 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
         Globe globe = wwd.getModel().getGlobe();
 
         Position refPos = movable.getReferencePosition();
-        if (refPos == null)
+        if (refPos == null) {
             return;
+        }
 
         // Convert the reference position into a cartesian point. This assumes that the reference elevation is defined
         // by the airspace's lower altitude.
         Vec4 refPoint = null;
-        if (airspace.isTerrainConforming()[LOWER_ALTITUDE])
+        if (airspace.isTerrainConforming()[LOWER_ALTITUDE]) {
             refPoint = wwd.getSceneController().getTerrain().getSurfacePoint(refPos);
-        if (refPoint == null)
+        }
+        if (refPoint == null) {
             refPoint = globe.computePointFromPosition(refPos);
+        }
 
         // Convert back to a position.
         refPos = globe.computePositionFromPoint(refPoint);
@@ -379,8 +328,7 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
         Vec4 vec = AirspaceEditorUtil.intersectGlobeAt(wwd, refPos.getElevation(), ray);
         Vec4 previousVec = AirspaceEditorUtil.intersectGlobeAt(wwd, refPos.getElevation(), previousRay);
 
-        if (vec == null || previousVec == null)
-        {
+        if (vec == null || previousVec == null) {
             return;
         }
 
@@ -394,8 +342,7 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
     }
 
     protected void doMoveAirspaceVertically(WorldWindow wwd, Airspace airspace,
-        Point mousePoint, Point previousMousePoint)
-    {
+            Point mousePoint, Point previousMousePoint) {
         // Find the closest points between the rays through each screen point, and the ray from the control point
         // and in the direction of the globe's surface normal. Compute the elevation difference between these two
         // points, and use that as the change in airspace altitude.
@@ -403,20 +350,20 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
         // If the state keepControlPointsAboveTerrain is set, we prevent the control point from passing any lower than
         // the terrain elevation beneath it.
 
-        if (!(airspace instanceof Movable))
-        {
+        if (!(airspace instanceof Movable)) {
             return;
         }
 
         Movable movable = (Movable) airspace;
         Position referencePos = movable.getReferencePosition();
-        if (referencePos == null)
+        if (referencePos == null) {
             return;
+        }
 
         Vec4 referencePoint = wwd.getModel().getGlobe().computePointFromPosition(referencePos);
 
         Vec4 surfaceNormal = wwd.getModel().getGlobe().computeSurfaceNormalAtLocation(referencePos.getLatitude(),
-            referencePos.getLongitude());
+                referencePos.getLongitude());
         Line verticalRay = new Line(referencePoint, surfaceNormal);
         Line screenRay = wwd.getView().computeRayFromScreenPoint(previousMousePoint.getX(), previousMousePoint.getY());
         Line previousScreenRay = wwd.getView().computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
@@ -431,19 +378,15 @@ public abstract class AbstractAirspaceEditor extends AbstractLayer implements Ai
         double[] altitudes = this.getAirspace().getAltitudes();
         boolean[] terrainConformance = this.getAirspace().isTerrainConforming();
 
-        if (this.isKeepControlPointsAboveTerrain())
-        {
-            if (terrainConformance[LOWER_ALTITUDE])
-            {
-                if (altitudes[LOWER_ALTITUDE] + elevationChange < 0.0)
+        if (this.isKeepControlPointsAboveTerrain()) {
+            if (terrainConformance[LOWER_ALTITUDE]) {
+                if (altitudes[LOWER_ALTITUDE] + elevationChange < 0.0) {
                     elevationChange = 0.0 - altitudes[LOWER_ALTITUDE];
-            }
-            else
-            {
+                }
+            } else {
                 double height = AirspaceEditorUtil.computeLowestHeightAboveSurface(
-                    wwd, this.getCurrentControlPoints(), LOWER_ALTITUDE);
-                if (elevationChange <= -height)
-                {
+                        wwd, this.getCurrentControlPoints(), LOWER_ALTITUDE);
+                if (elevationChange <= -height) {
                     elevationChange = -height;
                 }
             }

@@ -24,32 +24,29 @@ import java.util.*;
  * @author tag
  * @version $Id: SARTrack.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SARTrack extends WWObjectImpl implements Iterable<Position>
-{
+public class SARTrack extends WWObjectImpl implements Iterable<Position> {
+
     public static final int FORMAT_GPX = 1;
     public static final int FORMAT_CSV = 2;
     public static final int FORMAT_NMEA = 3;
 
-    private static class FormatInfo
-    {
+    private static class FormatInfo {
+
         private TrackReader reader;
         private int format;
 
-        private FormatInfo(TrackReader reader, int format)
-        {
+        private FormatInfo(TrackReader reader, int format) {
             this.reader = reader;
             this.format = format;
         }
     }
 
     private static int nextColor = 0;
-    private static Color[] colors = new Color[]
-        {
-            Color.RED, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN, Color.ORANGE, Color.PINK, Color.YELLOW
-        };
+    private static Color[] colors = new Color[]{
+        Color.RED, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN, Color.ORANGE, Color.PINK, Color.YELLOW
+    };
 
-    private static Color nextColor()
-    {
+    private static Color nextColor() {
         return colors[nextColor++ % colors.length];
     }
 
@@ -65,10 +62,8 @@ public class SARTrack extends WWObjectImpl implements Iterable<Position>
     private ArrayList<SARPosition> positions;
     private PropertyChangeSupport propChangeSupport = new PropertyChangeSupport(this);
 
-    public static SARTrack fromFile(String filePath) throws IOException
-    {
-        if (filePath == null)
-        {
+    public static SARTrack fromFile(String filePath) throws IOException {
+        if (filePath == null) {
             String message = Logging.getMessage("nullValue.FilePathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -76,8 +71,7 @@ public class SARTrack extends WWObjectImpl implements Iterable<Position>
 
         File file = new File(filePath);
 
-        if (!file.exists())
-        {
+        if (!file.exists()) {
             String message = Logging.getMessage("generic.FileNotFound", filePath);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -85,23 +79,20 @@ public class SARTrack extends WWObjectImpl implements Iterable<Position>
 
         SARTrack track = null;
 
-        FormatInfo[] formatInfoArray = new FormatInfo[]
-            {
-                new FormatInfo(new CSVTrackReader(), FORMAT_CSV),
-                new FormatInfo(new GPXTrackReader(), FORMAT_GPX),
-                new FormatInfo(new NMEATrackReader(), FORMAT_NMEA),
-            };
+        FormatInfo[] formatInfoArray = new FormatInfo[]{
+            new FormatInfo(new CSVTrackReader(), FORMAT_CSV),
+            new FormatInfo(new GPXTrackReader(), FORMAT_GPX),
+            new FormatInfo(new NMEATrackReader(), FORMAT_NMEA),};
 
         int formatIndex;
-        for (formatIndex = 0; formatIndex < formatInfoArray.length; formatIndex++)
-        {
+        for (formatIndex = 0; formatIndex < formatInfoArray.length; formatIndex++) {
             track = readTrack(filePath, formatInfoArray[formatIndex]);
-            if (track != null)
+            if (track != null) {
                 break;
+            }
         }
 
-        if (track != null)
-        {
+        if (track != null) {
             track.setFile(file);
             track.setFormat(formatIndex);
             track.setName(file.getName());
@@ -110,221 +101,197 @@ public class SARTrack extends WWObjectImpl implements Iterable<Position>
         return track;
     }
 
-    private static SARTrack readTrack(String filePath, FormatInfo format)
-    {
-        if (!format.reader.canRead(filePath))
+    private static SARTrack readTrack(String filePath, FormatInfo format) {
+        if (!format.reader.canRead(filePath)) {
             return null;
+        }
 
         Track[] tracks = null;
-        try
-        {
+        try {
             tracks = format.reader.read(filePath);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = Logging.getMessage("generic.ExceptionAttemptingToReadFile", filePath);
             Logging.logger().severe(message);
         }
 
-        if (tracks == null)
+        if (tracks == null) {
             return null;
+        }
 
         TrackPointIterator tpi = new TrackPointIteratorImpl(Arrays.asList(tracks));
         return makeTrackFromTrackPointIterator(tpi);
     }
 
-    public static void toFile(SARTrack track, String filePath, int format) throws IOException
-    {
-        if (track == null)
+    public static void toFile(SARTrack track, String filePath, int format) throws IOException {
+        if (track == null) {
             throw new IllegalArgumentException("track is null");
-        if (filePath == null)
+        }
+        if (filePath == null) {
             throw new IllegalArgumentException("filePath is null");
+        }
 
-        if (format == FORMAT_GPX)
+        if (format == FORMAT_GPX) {
             writeGPX(track, filePath);
-        else if (format == FORMAT_CSV)
+        } else if (format == FORMAT_CSV) {
             writeCSV(track, filePath);
-        else if (format == FORMAT_NMEA)
+        } else if (format == FORMAT_NMEA) {
             writeNMEA(track, filePath);
+        }
         // If no format is specified, then do nothing.
     }
 
-    private SARTrack()
-    {
+    private SARTrack() {
     }
 
-    public SARTrack(String name)
-    {
+    public SARTrack(String name) {
         this.name = name;
         this.positions = new ArrayList<SARPosition>();
     }
 
-    public File getFile()
-    {
+    public File getFile() {
         return this.file;
     }
 
-    public void setFile(File file)
-    {
+    public void setFile(File file) {
         this.file = file;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
         this.firePropertyChange(TrackController.TRACK_NAME, null, this);
     }
 
-    public int getFormat()
-    {
+    public int getFormat() {
         return format;
     }
 
-    public void setFormat(int format)
-    {
+    public void setFormat(int format) {
         this.format = format;
     }
 
-    public long getLastSaveTime()
-    {
+    public long getLastSaveTime() {
         return this.lastSaveTime;
     }
 
-    public long getLastModifiedTime()
-    {
+    public long getLastModifiedTime() {
         return this.lastModifiedTime;
     }
 
-    public boolean isDirty()
-    {
+    public boolean isDirty() {
         return this.lastModifiedTime == 0L || this.lastSaveTime == 0L || (this.lastModifiedTime > this.lastSaveTime);
     }
 
-    public void markDirty()
-    {
+    public void markDirty() {
         this.lastModifiedTime = System.currentTimeMillis();
         this.firePropertyChange(TrackController.TRACK_DIRTY_BIT, null, this);
     }
 
-    public void clearDirtyBit()
-    {
+    public void clearDirtyBit() {
         long time = System.currentTimeMillis();
         this.lastSaveTime = time;
         this.lastModifiedTime = time;
         this.firePropertyChange(TrackController.TRACK_DIRTY_BIT, null, this);
     }
 
-    public Color getColor()
-    {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(Color color)
-    {
+    public void setColor(Color color) {
         this.color = color;
     }
 
-    public int size()
-    {
+    public int size() {
         return this.positions.size();
     }
 
-    public ArrayList<SARPosition> getPositions()
-    {
+    public ArrayList<SARPosition> getPositions() {
         return this.positions;
     }
 
-    public SARPosition get(int index)
-    {
+    public SARPosition get(int index) {
         return this.positions.size() > index ? this.positions.get(index) : null;
     }
 
-    public void set(int index, SARPosition position)
-    {
-        if (position == null)
+    public void set(int index, SARPosition position) {
+        if (position == null) {
             return;
+        }
 
-        if (index >= this.positions.size())
+        if (index >= this.positions.size()) {
             this.positions.add(position);
-        else
+        } else {
             this.positions.set(index, position);
+        }
 
         this.markDirty();
         this.firePropertyChange(TrackController.TRACK_MODIFY, null, index);
     }
 
-    public void add(int index, SARPosition position)
-    {
-        if (position == null)
+    public void add(int index, SARPosition position) {
+        if (position == null) {
             return;
+        }
 
-        if (index >= this.positions.size())
+        if (index >= this.positions.size()) {
             this.positions.add(position);
-        else
+        } else {
             this.positions.add(index, position);
+        }
 
         this.markDirty();
         this.firePropertyChange(TrackController.TRACK_MODIFY, null, this);
     }
 
-    public double getOffset()
-    {
+    public double getOffset() {
         return offset;
     }
 
-    public void setOffset(double offset)
-    {
+    public void setOffset(double offset) {
         double oldOffset = this.offset;
         this.offset = offset;
 
         this.firePropertyChange(TrackController.TRACK_OFFSET, oldOffset, this.offset);
     }
 
-    public Iterator<Position> iterator()
-    {
-        return new Iterator<Position>()
-        {
+    public Iterator<Position> iterator() {
+        return new Iterator<Position>() {
             private Iterator<SARPosition> iter = SARTrack.this.positions.iterator();
 
-            public boolean hasNext()
-            {
+            public boolean hasNext() {
                 return this.iter.hasNext();
             }
 
-            public Position next()
-            {
+            public Position next() {
                 return this.iter.next();
             }
 
-            public void remove()
-            {
+            public void remove() {
                 throw new UnsupportedOperationException("Remove operation not supported for SARTrack iterator");
             }
         };
     }
 
-    public void removePosition(int index)
-    {
-        if (index < 0 || index >= this.positions.size())
+    public void removePosition(int index) {
+        if (index < 0 || index >= this.positions.size()) {
             return;
+        }
 
         this.positions.remove(index);
         this.markDirty();
         this.firePropertyChange(TrackController.TRACK_MODIFY, null, this);
     }
 
-    public void removePositions(int[] positionNumbers)
-    {
+    public void removePositions(int[] positionNumbers) {
         Arrays.sort(positionNumbers);
-        for (int i = positionNumbers.length - 1; i >= 0; i--)
-        {
-            if (positionNumbers[i] < 0 || positionNumbers[i] >= this.positions.size())
+        for (int i = positionNumbers.length - 1; i >= 0; i--) {
+            if (positionNumbers[i] < 0 || positionNumbers[i] >= this.positions.size()) {
                 continue;
+            }
 
             this.positions.remove(positionNumbers[i]);
         }
@@ -333,79 +300,69 @@ public class SARTrack extends WWObjectImpl implements Iterable<Position>
         this.firePropertyChange(TrackController.TRACK_MODIFY, null, this);
     }
 
-    public void appendPosition(SARPosition position)
-    {
-        if (position == null)
+    public void appendPosition(SARPosition position) {
+        if (position == null) {
             return;
+        }
 
         this.positions.add(position);
         this.markDirty();
         this.firePropertyChange(TrackController.TRACK_MODIFY, null, this);
     }
 
-    public void insertPosition(int index, SARPosition position)
-    {
-        if (position == null || index < 0)
+    public void insertPosition(int index, SARPosition position) {
+        if (position == null || index < 0) {
             return;
+        }
 
         this.positions.add(index, position);
         this.markDirty();
         this.firePropertyChange(TrackController.TRACK_MODIFY, null, this);
     }
 
-    public void setPosition(int index, SARPosition position)
-    {
-        if (position == null || index < 0)
+    public void setPosition(int index, SARPosition position) {
+        if (position == null || index < 0) {
             return;
+        }
 
         this.positions.set(index, position);
         this.markDirty();
         this.firePropertyChange(TrackController.TRACK_MODIFY, null, index);
     }
 
-    private static void writeNMEA(SARTrack track, String filePath) throws IOException
-    {
+    private static void writeNMEA(SARTrack track, String filePath) throws IOException {
         NmeaWriter writer = new NmeaWriter(filePath);
         Track trk = makeTrackFromSARTrack(track);
         writer.writeTrack(trk);
         writer.close();
     }
 
-    private static void writeGPX(SARTrack track, String filePath) throws IOException
-    {
-        try
-        {
+    private static void writeGPX(SARTrack track, String filePath) throws IOException {
+        try {
             GpxWriter writer = new GpxWriter(filePath);
             Track trk = makeTrackFromSARTrack(track);
             writer.writeTrack(trk);
             writer.close();
-        }
-        catch (ParserConfigurationException e)
-        {
+        } catch (ParserConfigurationException e) {
             throw new IllegalArgumentException(e);
-        }
-        catch (javax.xml.transform.TransformerException e)
-        {
+        } catch (javax.xml.transform.TransformerException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
-    private static void writeCSV(SARTrack track, String filePath) throws IOException
-    {
+    private static void writeCSV(SARTrack track, String filePath) throws IOException {
         CSVWriter writer = new CSVWriter(filePath);
         Track trk = makeTrackFromSARTrack(track);
         writer.writeTrack(trk);
         writer.close();
     }
 
-    private static SARTrack makeTrackFromTrackPointIterator(TrackPointIterator tpi)
-    {
+    private static SARTrack makeTrackFromTrackPointIterator(TrackPointIterator tpi) {
         ArrayList<SARPosition> positions = new ArrayList<SARPosition>();
-        while (tpi.hasNext())
-        {
+        while (tpi.hasNext()) {
             TrackPoint tp = tpi.next();
             SARPosition sp = new SARPosition(
-                Angle.fromDegrees(tp.getLatitude()), Angle.fromDegrees(tp.getLongitude()), tp.getElevation());
+                    Angle.fromDegrees(tp.getLatitude()), Angle.fromDegrees(tp.getLongitude()), tp.getElevation());
             positions.add(sp);
         }
 
@@ -415,126 +372,103 @@ public class SARTrack extends WWObjectImpl implements Iterable<Position>
         return st;
     }
 
-    private static Track makeTrackFromSARTrack(SARTrack sarTrack)
-    {
+    private static Track makeTrackFromSARTrack(SARTrack sarTrack) {
         return new TrackWrapper(sarTrack);
     }
 
-    private static class TrackWrapper implements Track, TrackSegment
-    {
+    private static class TrackWrapper implements Track, TrackSegment {
+
         private final SARTrack sarTrack;
         private final ArrayList<TrackSegment> segments = new ArrayList<TrackSegment>();
 
-        public TrackWrapper(SARTrack sarTrack)
-        {
+        public TrackWrapper(SARTrack sarTrack) {
             this.sarTrack = sarTrack;
             this.segments.add(this);
         }
 
-        public java.util.List<TrackSegment> getSegments()
-        {
+        public java.util.List<TrackSegment> getSegments() {
             return this.segments;
         }
 
-        public String getName()
-        {
+        public String getName() {
             return this.sarTrack.getName();
         }
 
-        public int getNumPoints()
-        {
+        public int getNumPoints() {
             return this.sarTrack.size();
         }
 
-        public java.util.List<TrackPoint> getPoints()
-        {
+        public java.util.List<TrackPoint> getPoints() {
             ArrayList<TrackPoint> trkPoints = new ArrayList<TrackPoint>();
-            for (SARPosition sarPos : this.sarTrack.positions)
-            {
+            for (SARPosition sarPos : this.sarTrack.positions) {
                 trkPoints.add(sarPos != null ? new TrackPointWrapper(sarPos) : null);
             }
             return trkPoints;
         }
     }
 
-    private static class TrackPointWrapper implements TrackPoint
-    {
+    private static class TrackPointWrapper implements TrackPoint {
+
         private final SARPosition sarPosition;
 
-        public TrackPointWrapper(SARPosition sarPosition)
-        {
+        public TrackPointWrapper(SARPosition sarPosition) {
             this.sarPosition = sarPosition;
         }
 
-        public double getLatitude()
-        {
+        public double getLatitude() {
             return this.sarPosition.getLatitude().degrees;
         }
 
-        public void setLatitude(double latitude)
-        {
+        public void setLatitude(double latitude) {
         }
 
-        public double getLongitude()
-        {
+        public double getLongitude() {
             return this.sarPosition.getLongitude().degrees;
         }
 
-        public void setLongitude(double longitude)
-        {
+        public void setLongitude(double longitude) {
         }
 
-        public double getElevation()
-        {
+        public double getElevation() {
             return this.sarPosition.getElevation();
         }
 
-        public void setElevation(double elevation)
-        {
+        public void setElevation(double elevation) {
         }
 
-        public String getTime()
-        {
+        public String getTime() {
             return null;
         }
 
-        public void setTime(String time)
-        {
+        public void setTime(String time) {
         }
 
-        public Position getPosition()
-        {
+        public Position getPosition() {
             return this.sarPosition;
         }
 
-        public void setPosition(Position position)
-        {
+        public void setPosition(Position position) {
         }
     }
 
-    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener)
-    {
+    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         this.propChangeSupport.addPropertyChangeListener(propertyName, listener);
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener)
-    {
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
         this.propChangeSupport.addPropertyChangeListener(listener);
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener listener)
-    {
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
         this.propChangeSupport.removePropertyChangeListener(listener);
     }
 
-    public void firePropertyChange(String propertyName, Object oldValue, Object newValue)
-    {
+    public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
         this.propChangeSupport.firePropertyChange(propertyName, oldValue, newValue);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.name;
     }
 }

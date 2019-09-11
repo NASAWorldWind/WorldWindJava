@@ -17,8 +17,8 @@ import java.util.*;
  * @author dcollins
  * @version $Id: AirspaceEditorController.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class AirspaceEditorController implements KeyListener, MouseListener, MouseMotionListener
-{
+public class AirspaceEditorController implements KeyListener, MouseListener, MouseMotionListener {
+
     private boolean active;
     private String activeAction;
     private AirspaceEditor editor; // Can be null
@@ -44,66 +44,54 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
     // 3. move control point
     // 4. resize
     // 5. move airspace
-
     // TODO: allow the editor to define the action/behavior associated with a control point, so the correct cursor
     // will be displayed (or some future UI affordance). Currently the controller assumes that a control point implies
     // a move action. This really only affects the cursor display, since the editor ultimately decides what to do when
     // a control point is moved.
-
-    public AirspaceEditorController(WorldWindow wwd)
-    {
+    public AirspaceEditorController(WorldWindow wwd) {
         this.active = false;
         this.setWorldWindow(wwd);
         this.setupActionCursorMap();
     }
 
-    public AirspaceEditorController()
-    {
+    public AirspaceEditorController() {
         this(null);
     }
 
-    public boolean isActive()
-    {
+    public boolean isActive() {
         return this.active;
     }
 
-    protected void setActive(boolean active)
-    {
+    protected void setActive(boolean active) {
         this.active = active;
     }
 
-    public String getActiveAction()
-    {
+    public String getActiveAction() {
         return activeAction;
     }
 
-    protected void setActiveAction(String action)
-    {
+    protected void setActiveAction(String action) {
         this.activeAction = action;
     }
 
-    public AirspaceEditor getEditor()
-    {
+    public AirspaceEditor getEditor() {
         return this.editor;
     }
 
-    public void setEditor(AirspaceEditor editor)
-    {
+    public void setEditor(AirspaceEditor editor) {
         this.editor = editor;
     }
 
-    public WorldWindow getWorldWindow()
-    {
+    public WorldWindow getWorldWindow() {
         return this.wwd;
     }
 
-    public void setWorldWindow(WorldWindow wwd)
-    {
-        if (this.wwd == wwd)
+    public void setWorldWindow(WorldWindow wwd) {
+        if (this.wwd == wwd) {
             return;
+        }
 
-        if (this.wwd != null)
-        {
+        if (this.wwd != null) {
             this.wwd.getInputHandler().removeKeyListener(this);
             this.wwd.getInputHandler().removeMouseListener(this);
             this.wwd.getInputHandler().removeMouseMotionListener(this);
@@ -111,73 +99,69 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
 
         this.wwd = wwd;
 
-        if (this.wwd != null)
-        {
+        if (this.wwd != null) {
             this.wwd.getInputHandler().addKeyListener(this);
             this.wwd.getInputHandler().addMouseListener(this);
             this.wwd.getInputHandler().addMouseMotionListener(this);
         }
     }
 
-    protected Point getMousePoint()
-    {
+    protected Point getMousePoint() {
         return this.mousePoint;
     }
 
-    protected void setMousePoint(Point point)
-    {
+    protected void setMousePoint(Point point) {
         this.mousePoint = point;
     }
 
-    protected AirspaceControlPoint getActiveControlPoint()
-    {
+    protected AirspaceControlPoint getActiveControlPoint() {
         return this.activeControlPoint;
     }
 
-    protected void setActiveControlPoint(AirspaceControlPoint controlPoint)
-    {
+    protected void setActiveControlPoint(AirspaceControlPoint controlPoint) {
         this.activeControlPoint = controlPoint;
     }
 
-    protected Airspace getActiveAirspace()
-    {
+    protected Airspace getActiveAirspace() {
         return activeAirspace;
     }
 
-    protected void setActiveAirspace(Airspace airspace)
-    {
+    protected void setActiveAirspace(Airspace airspace) {
         this.activeAirspace = airspace;
     }
 
-    protected Airspace getTopOwnedAirspaceAtCurrentPosition()
-    {
+    protected Airspace getTopOwnedAirspaceAtCurrentPosition() {
         // Without an editor, we cannot know if the airspace belongs to us.
-        if (this.getEditor() == null)
+        if (this.getEditor() == null) {
             return null;
+        }
 
         Object obj = this.getTopPickedObject();
         // Airspace is compared by reference, because we're only concerned about the exact reference
         // an editor refers to, rather than an equivalent object.
-        if (this.getEditor().getAirspace() != obj)
+        if (this.getEditor().getAirspace() != obj) {
             return null;
+        }
 
         return (Airspace) obj;
     }
 
-    protected AirspaceControlPoint getTopOwnedControlPointAtCurrentPosition()
-    {
+    protected AirspaceControlPoint getTopOwnedControlPointAtCurrentPosition() {
         // Without an editor, we cannot know if the airspace belongs to us.
-        if (this.getEditor() == null)
+        if (this.getEditor() == null) {
             return null;
+        }
 
         Object obj = this.getTopPickedObject();
-        if (!(obj instanceof AirspaceControlPoint))
+        if (!(obj instanceof AirspaceControlPoint)) {
             return null;
+        }
 
         // AirspaceEditor is compared by reference, because we're only concerned about the exact reference
         // a control point refers to, rather than an equivalent object.
-        if (this.getEditor() != (((AirspaceControlPoint) obj).getEditor()))
+        if (this.getEditor() != (((AirspaceControlPoint) obj).getEditor())) {
             return null;
+        }
 
         return (AirspaceControlPoint) obj;
     }
@@ -211,64 +195,53 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
     //
     //    return controlPoint;
     //}
-    
-    protected Object getTopPickedObject()
-    {
-        if (this.getWorldWindow() == null)
+    protected Object getTopPickedObject() {
+        if (this.getWorldWindow() == null) {
             return null;
+        }
 
         PickedObjectList pickedObjects = this.getWorldWindow().getObjectsAtCurrentPosition();
         if (pickedObjects == null || pickedObjects.getTopPickedObject() == null
-            || pickedObjects.getTopPickedObject().isTerrain())
-        {
+                || pickedObjects.getTopPickedObject().isTerrain()) {
             return null;
         }
 
         return pickedObjects.getTopPickedObject().getObject();
     }
 
-    protected Map<String, Cursor> getActionCursorMap()
-    {
+    protected Map<String, Cursor> getActionCursorMap() {
         return this.actionCursorMap;
     }
 
     //**************************************************************//
     //********************  Key Events  ****************************//
     //**************************************************************//
-
-    public void keyTyped(KeyEvent e)
-    {
+    public void keyTyped(KeyEvent e) {
     }
 
-    public void keyPressed(KeyEvent e)
-    {
-        if (e == null)
-        {
+    public void keyPressed(KeyEvent e) {
+        if (e == null) {
             return;
         }
 
         this.updateCursor(e);
 
         // Include this test to ensure any derived implementation performs it.
-        if (this.getEditor() == null || !this.getEditor().isArmed())
-        {
+        if (this.getEditor() == null || !this.getEditor().isArmed()) {
             //noinspection UnnecessaryReturnStatement
             return;
         }
     }
 
-    public void keyReleased(KeyEvent e)
-    {
-        if (e == null)
-        {
+    public void keyReleased(KeyEvent e) {
+        if (e == null) {
             return;
         }
 
         this.updateCursor(e);
-        
+
         // Include this test to ensure any derived implementation performs it.
-        if (this.getEditor() == null || !this.getEditor().isArmed())
-        {
+        if (this.getEditor() == null || !this.getEditor().isArmed()) {
             //noinspection UnnecessaryReturnStatement
             return;
         }
@@ -277,30 +250,23 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
     //**************************************************************//
     //********************  Mouse Events  **************************//
     //**************************************************************//
-
-    public void mouseClicked(MouseEvent e)
-    {
-        if (e == null)
-        {
+    public void mouseClicked(MouseEvent e) {
+        if (e == null) {
             return;
         }
 
         this.updateCursor(e);
 
         // Include this test to ensure any derived implementation performs it.
-        if (this.getEditor() == null || !this.getEditor().isArmed())
-        {
+        if (this.getEditor() == null || !this.getEditor().isArmed()) {
             return;
         }
 
         AirspaceControlPoint topControlPoint = this.getTopOwnedControlPointAtCurrentPosition();
 
-        if (e.getButton() == MouseEvent.BUTTON1)
-        {
-            if (e.isControlDown())
-            {
-                if (topControlPoint != null)
-                {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            if (e.isControlDown()) {
+                if (topControlPoint != null) {
                     this.handleControlPointRemoved(topControlPoint, e);
                 }
                 e.consume();
@@ -314,10 +280,8 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         }
     }
 
-    public void mousePressed(MouseEvent e)
-    {
-        if (e == null)
-        {
+    public void mousePressed(MouseEvent e) {
+        if (e == null) {
             return;
         }
 
@@ -325,49 +289,37 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         this.updateCursor(e);
 
         // Include this test to ensure any derived implementation performs it.
-        if (this.getEditor() == null || !this.getEditor().isArmed())
-        {
+        if (this.getEditor() == null || !this.getEditor().isArmed()) {
             return;
         }
 
-        Airspace topAirspace = this.getTopOwnedAirspaceAtCurrentPosition();        
+        Airspace topAirspace = this.getTopOwnedAirspaceAtCurrentPosition();
         AirspaceControlPoint topControlPoint = this.getTopOwnedControlPointAtCurrentPosition();
 
-        if (e.getButton() == MouseEvent.BUTTON1)
-        {
-            if (e.isControlDown())
-            {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            if (e.isControlDown()) {
                 // Actual logic is handled in mouseClicked, but we consume the event here to keep the any other
                 // system from receiving it.
                 this.setActive(true);
                 this.setActiveAction(REMOVE_CONTROL_POINT);
                 e.consume();
-            }
-            else if (e.isAltDown())
-            {
+            } else if (e.isAltDown()) {
                 this.setActive(true);
                 this.setActiveAction(ADD_CONTROL_POINT);
-                if (topControlPoint == null)
-                {
+                if (topControlPoint == null) {
                     AirspaceControlPoint p = this.handleControlPointAdded(this.getEditor().getAirspace(), e);
-                    if (p != null)
-                    {
+                    if (p != null) {
                         this.setActiveControlPoint(p);
                     }
-                }                
+                }
                 e.consume();
-            }
-            else
-            {
-                if (topControlPoint != null)
-                {
+            } else {
+                if (topControlPoint != null) {
                     this.setActive(true);
                     this.setActiveAction(null); // Don't know what action we'll perform until mouseDragged().
                     this.setActiveControlPoint(topControlPoint);
                     e.consume();
-                }
-                else if (topAirspace != null)
-                {
+                } else if (topAirspace != null) {
                     this.setActive(true);
                     this.setActiveAction(null); // Don't know what action we'll perform until mouseDragged().
                     this.setActiveAirspace(topAirspace);
@@ -377,10 +329,8 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         }
     }
 
-    public void mouseReleased(MouseEvent e)
-    {
-        if (e == null)
-        {
+    public void mouseReleased(MouseEvent e) {
+        if (e == null) {
             return;
         }
 
@@ -388,15 +338,12 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         this.updateCursor(e);
 
         // Include this test to ensure any derived implementation performs it.
-        if (this.getEditor() == null || !this.getEditor().isArmed())
-        {
+        if (this.getEditor() == null || !this.getEditor().isArmed()) {
             return;
         }
 
-        if (e.getButton() == MouseEvent.BUTTON1)
-        {
-            if (this.isActive())
-            {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            if (this.isActive()) {
                 this.setActive(false);
                 this.setActiveAction(null);
                 this.setActiveAirspace(null);
@@ -406,59 +353,48 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         }
     }
 
-    public void mouseEntered(MouseEvent e)
-    {
-        if (e == null)
-        {
+    public void mouseEntered(MouseEvent e) {
+        if (e == null) {
             return;
         }
 
         // Include this test to ensure any derived implementation performs it.
-        if (this.getEditor() == null || !this.getEditor().isArmed())
-        {
+        if (this.getEditor() == null || !this.getEditor().isArmed()) {
             //noinspection UnnecessaryReturnStatement
             return;
         }
     }
 
-    public void mouseExited(MouseEvent e)
-    {
-        if (e == null)
-        {
+    public void mouseExited(MouseEvent e) {
+        if (e == null) {
             return;
         }
 
         // Include this test to ensure any derived implementation performs it.
-        if (this.getEditor() == null || !this.getEditor().isArmed())
-        {
+        if (this.getEditor() == null || !this.getEditor().isArmed()) {
             //noinspection UnnecessaryReturnStatement
             return;
         }
     }
 
-    protected AirspaceControlPoint handleControlPointAdded(Airspace airspace, MouseEvent mouseEvent)
-    {
+    protected AirspaceControlPoint handleControlPointAdded(Airspace airspace, MouseEvent mouseEvent) {
         AirspaceControlPoint controlPoint = this.getEditor().addControlPoint(this.getWorldWindow(), airspace,
-            mouseEvent.getPoint());
+                mouseEvent.getPoint());
         this.getWorldWindow().redraw();
 
         return controlPoint;
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleControlPointRemoved(AirspaceControlPoint controlPoint, MouseEvent mouseEvent)
-    {
+    protected void handleControlPointRemoved(AirspaceControlPoint controlPoint, MouseEvent mouseEvent) {
         this.getEditor().removeControlPoint(this.getWorldWindow(), controlPoint);
     }
 
     //**************************************************************//
     //********************  Mouse Motion Events  *******************//
     //**************************************************************//
-
-    public void mouseDragged(MouseEvent e)
-    {
-        if (e == null)
-        {
+    public void mouseDragged(MouseEvent e) {
+        if (e == null) {
             return;
         }
 
@@ -467,21 +403,15 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         this.updateCursor(e);
 
         // Include this test to ensure any derived implementation performs it.
-        if (this.getEditor() == null || !this.getEditor().isArmed())
-        {
+        if (this.getEditor() == null || !this.getEditor().isArmed()) {
             return;
         }
-        
-        if ((e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0)
-        {
-            if (this.isActive())
-            {
-                if (this.getActiveControlPoint() != null)
-                {
+
+        if ((e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0) {
+            if (this.isActive()) {
+                if (this.getActiveControlPoint() != null) {
                     this.handleControlPointDragged(this.getActiveControlPoint(), e, lastMousePoint);
-                }
-                else if (this.getActiveAirspace() != null)
-                {
+                } else if (this.getActiveAirspace() != null) {
                     this.handleAirspaceDragged(this.getActiveAirspace(), e, lastMousePoint);
                 }
                 e.consume();
@@ -489,10 +419,8 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         }
     }
 
-    public void mouseMoved(MouseEvent e)
-    {
-        if (e == null)
-        {
+    public void mouseMoved(MouseEvent e) {
+        if (e == null) {
             return;
         }
 
@@ -500,36 +428,27 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         this.updateCursor(e);
 
         // Include this test to ensure any derived implementation performs it.
-        if (this.getEditor() == null || !this.getEditor().isArmed())
-        {
+        if (this.getEditor() == null || !this.getEditor().isArmed()) {
             //noinspection UnnecessaryReturnStatement
             return;
         }
     }
 
-    protected void handleControlPointDragged(AirspaceControlPoint controlPoint, MouseEvent e, Point lastMousePoint)
-    {
-        if (e.isShiftDown())
-        {
+    protected void handleControlPointDragged(AirspaceControlPoint controlPoint, MouseEvent e, Point lastMousePoint) {
+        if (e.isShiftDown()) {
             this.setActiveAction(RESIZE_AIRSPACE);
             this.getEditor().resizeAtControlPoint(this.getWorldWindow(), controlPoint, e.getPoint(), lastMousePoint);
-        }
-        else
-        {
+        } else {
             this.setActiveAction(MOVE_CONTROL_POINT);
             this.getEditor().moveControlPoint(this.getWorldWindow(), controlPoint, e.getPoint(), lastMousePoint);
         }
     }
 
-    protected void handleAirspaceDragged(Airspace airspace, MouseEvent e, Point lastMousePoint)
-    {
-        if (e.isShiftDown())
-        {
+    protected void handleAirspaceDragged(Airspace airspace, MouseEvent e, Point lastMousePoint) {
+        if (e.isShiftDown()) {
             this.setActiveAction(MOVE_AIRSPACE_VERTICALLY);
             this.getEditor().moveAirspaceVertically(this.getWorldWindow(), airspace, e.getPoint(), lastMousePoint);
-        }
-        else
-        {
+        } else {
             this.setActiveAction(MOVE_AIRSPACE_LATERALLY);
             this.getEditor().moveAirspaceLaterally(this.getWorldWindow(), airspace, e.getPoint(), lastMousePoint);
         }
@@ -538,9 +457,7 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
     //**************************************************************//
     //********************  Action/Cursor Pairing  *****************//
     //**************************************************************//
-
-    protected void setupActionCursorMap()
-    {
+    protected void setupActionCursorMap() {
         // TODO: find more suitable cursors for the remove control point action, and the move vertically action.
         this.getActionCursorMap().put(MOVE_AIRSPACE_LATERALLY, Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
         this.getActionCursorMap().put(MOVE_AIRSPACE_VERTICALLY, Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
@@ -550,11 +467,9 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         this.getActionCursorMap().put(MOVE_CONTROL_POINT, Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
-    protected void updateCursor(InputEvent e)
-    {
+    protected void updateCursor(InputEvent e) {
         // Include this test to ensure any derived implementation performs it.
-        if (e == null || e.getComponent() == null)
-        {
+        if (e == null || e.getComponent() == null) {
             return;
         }
 
@@ -563,20 +478,17 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         e.getComponent().repaint();
     }
 
-    protected Cursor getCursorFor(InputEvent e)
-    {
+    protected Cursor getCursorFor(InputEvent e) {
         // If we're actively engaged in some action, then return the cursor associated with that action. Otherwise
         // return the cursor representing the action that would be invoked (if the user pressed the mouse) given the
         // current modifiers and pick list.
 
-        if (e == null)
-        {
+        if (e == null) {
             return null;
         }
 
         // Include this test to ensure any derived implementation performs it.
-        if (this.getEditor() == null || !this.getEditor().isArmed())
-        {
+        if (this.getEditor() == null || !this.getEditor().isArmed()) {
             return null;
         }
 
@@ -584,44 +496,28 @@ public class AirspaceEditorController implements KeyListener, MouseListener, Mou
         return this.getActionCursorMap().get(action);
     }
 
-    protected String getPotentialActionFor(InputEvent e)
-    {
+    protected String getPotentialActionFor(InputEvent e) {
         Airspace topAirspace = this.getTopOwnedAirspaceAtCurrentPosition();
         AirspaceControlPoint topControlPoint = this.getTopOwnedControlPointAtCurrentPosition();
 
-        if (e.isAltDown())
-        {
-            if (topControlPoint == null)
-            {
+        if (e.isAltDown()) {
+            if (topControlPoint == null) {
                 return ADD_CONTROL_POINT;
             }
-        }
-        else if (e.isControlDown())
-        {
-            if (topControlPoint != null)
-            {
+        } else if (e.isControlDown()) {
+            if (topControlPoint != null) {
                 return REMOVE_CONTROL_POINT;
             }
-        }
-        else if (e.isShiftDown())
-        {
-            if (topControlPoint != null)
-            {
+        } else if (e.isShiftDown()) {
+            if (topControlPoint != null) {
                 return RESIZE_AIRSPACE;
-            }
-            else if (topAirspace != null)
-            {
+            } else if (topAirspace != null) {
                 return MOVE_AIRSPACE_VERTICALLY;
             }
-        }
-        else
-        {
-            if (topControlPoint != null)
-            {
+        } else {
+            if (topControlPoint != null) {
                 return MOVE_CONTROL_POINT;
-            }
-            else if (topAirspace != null)
-            {
+            } else if (topAirspace != null) {
                 return MOVE_AIRSPACE_LATERALLY;
             }
         }

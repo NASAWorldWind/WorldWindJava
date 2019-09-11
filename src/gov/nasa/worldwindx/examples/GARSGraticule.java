@@ -10,19 +10,17 @@ import gov.nasa.worldwind.layers.GARSGraticuleLayer;
 import java.awt.*;
 
 /**
- * Displays the globe with a GARS graticule. The graticule is its own layer and can be turned on and off independent
- * of other layers. As the view zooms in, the graticule adjusts to display a finer grid. The example provides controls
- * to customize the color and opacity of the grid.
+ * Displays the globe with a GARS graticule. The graticule is its own layer and can be turned on and off independent of
+ * other layers. As the view zooms in, the graticule adjusts to display a finer grid. The example provides controls to
+ * customize the color and opacity of the grid.
  *
  * @version $Id: GARSGraticule.java 2385 2014-10-14 21:56:07Z tgaskins $
  */
-public class GARSGraticule extends ApplicationTemplate
-{
+public class GARSGraticule extends ApplicationTemplate {
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             GARSGraticuleLayer layer = new GARSGraticuleLayer();
@@ -40,9 +38,7 @@ public class GARSGraticule extends ApplicationTemplate
         }
     }
 
-
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind GARS Graticule", AppFrame.class);
     }
 }

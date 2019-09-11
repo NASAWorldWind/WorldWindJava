@@ -13,103 +13,92 @@ import java.util.*;
  * @author dcollins
  * @version $Id: GeoSymTable.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeoSymTable
-{
+public class GeoSymTable {
+
     private GeoSymTableHeader header;
     private AVList[] records;
     private Map<Integer, Integer> indexOnId;
 
-    public GeoSymTable(GeoSymTableHeader header)
-    {
+    public GeoSymTable(GeoSymTableHeader header) {
         this.header = header;
         this.indexOnId = new HashMap<Integer, Integer>();
     }
 
-    public GeoSymTableHeader getHeader()
-    {
+    public GeoSymTableHeader getHeader() {
         return header;
     }
 
-    public AVList[] getRecords()
-    {
+    public AVList[] getRecords() {
         return this.records;
     }
 
-    public void setRecords(AVList[] records)
-    {
+    public void setRecords(AVList[] records) {
         this.records = records;
         this.buildRecordIndices();
     }
 
-    public AVList getRecord(int id)
-    {
+    public AVList getRecord(int id) {
         Integer index = this.indexOnId.get(id);
         return (index != null && index >= 0 && index < this.records.length) ? this.records[index] : null;
     }
 
     public static void selectMatchingRows(String columnName, Object value, boolean acceptNullValue,
-        List<AVList> outRows)
-    {
+            List<AVList> outRows) {
         Iterator<AVList> iter = outRows.iterator();
-        if (!iter.hasNext())
+        if (!iter.hasNext()) {
             return;
+        }
 
         AVList record;
-        while (iter.hasNext())
-        {
+        while (iter.hasNext()) {
             record = iter.next();
-            if (record == null)
+            if (record == null) {
                 continue;
+            }
 
             Object o = record.getValue(columnName);
-            if ((o == null && !acceptNullValue) || (o != null && !o.equals(value)))
-            {
+            if ((o == null && !acceptNullValue) || (o != null && !o.equals(value))) {
                 iter.remove();
             }
         }
     }
 
     public static void selectMatchingStringRows(String columnName, String value, boolean acceptNullValue,
-        List<AVList> outRows)
-    {
+            List<AVList> outRows) {
         Iterator<AVList> iter = outRows.iterator();
-        if (!iter.hasNext())
+        if (!iter.hasNext()) {
             return;
+        }
 
         AVList record;
-        while (iter.hasNext())
-        {
+        while (iter.hasNext()) {
             record = iter.next();
-            if (record == null)
+            if (record == null) {
                 continue;
+            }
 
             Object o = record.getValue(columnName);
-            if (o == null || o instanceof String)
-            {
+            if (o == null || o instanceof String) {
                 String s = (String) o;
-                if (s == null || s.length() == 0)
-                {
-                    if (!acceptNullValue)
+                if (s == null || s.length() == 0) {
+                    if (!acceptNullValue) {
                         iter.remove();
-                }
-                else
-                {
-                    if (!s.equalsIgnoreCase(value))
+                    }
+                } else {
+                    if (!s.equalsIgnoreCase(value)) {
                         iter.remove();
+                    }
                 }
             }
         }
     }
 
-    protected void buildRecordIndices()
-    {
+    protected void buildRecordIndices() {
         // Build index on record ids.
         this.indexOnId.clear();
-        for (int i = 0; i < this.records.length; i++)
-        {
+        for (int i = 0; i < this.records.length; i++) {
             Integer id = AVListImpl.getIntegerValue(this.records[i], "id");
-            if (id != null)
-            {
+            if (id != null) {
                 this.indexOnId.put(id, i);
             }
         }

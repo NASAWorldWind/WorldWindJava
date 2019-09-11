@@ -1,7 +1,7 @@
 package org.codehaus.jackson.io;
 
-public final class NumberInput
-{
+public final class NumberInput {
+
     /**
      * Constants needed for parsing longs from basic int parsing methods
      */
@@ -9,7 +9,7 @@ public final class NumberInput
 
     final static String MIN_LONG_STR_NO_SIGN = String.valueOf(Long.MIN_VALUE).substring(1);
     final static String MAX_LONG_STR = String.valueOf(Long.MAX_VALUE);
-    
+
     /**
      * Fast method for parsing integers that are known to fit into regular 32-bit signed int type.This means that length
      * is between 1 and 9 digits (inclusive)
@@ -21,8 +21,7 @@ public final class NumberInput
      * @param len Undocumented.
      * @return Undocumented.
      */
-    public final static int parseInt(char[] digitChars, int offset, int len)
-    {
+    public final static int parseInt(char[] digitChars, int offset, int len) {
         int num = digitChars[offset] - '0';
         len += offset;
         // This looks ugly, but appears the fastest way:
@@ -53,12 +52,11 @@ public final class NumberInput
         return num;
     }
 
-    public final static long parseLong(char[] digitChars, int offset, int len)
-    {
+    public final static long parseLong(char[] digitChars, int offset, int len) {
         // Note: caller must ensure length is [10, 18]
-        int len1 = len-9;
+        int len1 = len - 9;
         long val = parseInt(digitChars, offset, len1) * L_BILLION;
-        return val + (long) parseInt(digitChars, offset+len1, 9);
+        return val + (long) parseInt(digitChars, offset + len1, 9);
     }
 
     /**
@@ -72,15 +70,18 @@ public final class NumberInput
      * @return Undocumented.
      */
     public final static boolean inLongRange(char[] digitChars, int offset, int len,
-            boolean negative)
-    {
+            boolean negative) {
         String cmpStr = negative ? MIN_LONG_STR_NO_SIGN : MAX_LONG_STR;
         int cmpLen = cmpStr.length();
-        if (len < cmpLen) return true;
-        if (len > cmpLen) return false;
+        if (len < cmpLen) {
+            return true;
+        }
+        if (len > cmpLen) {
+            return false;
+        }
 
         for (int i = 0; i < cmpLen; ++i) {
-            if (digitChars[offset+i] > cmpStr.charAt(i)) {
+            if (digitChars[offset + i] > cmpStr.charAt(i)) {
                 return false;
             }
         }
@@ -88,23 +89,24 @@ public final class NumberInput
     }
 
     /**
-     * Similar to {@link #inLongRange(char[],int,int,boolean)}, but
-     * with String argument
+     * Similar to {@link #inLongRange(char[],int,int,boolean)}, but with String argument
      *
      * @param numberStr Undocumented.
-     * @param negative Whether original number had a minus sign (which is
-     *    NOT passed to this method) or not
-     * @return  Undocumented.
+     * @param negative Whether original number had a minus sign (which is NOT passed to this method) or not
+     * @return Undocumented.
      *
      * @since 1.5.0
      */
-    public final static boolean inLongRange(String numberStr, boolean negative)
-    {
+    public final static boolean inLongRange(String numberStr, boolean negative) {
         String cmpStr = negative ? MIN_LONG_STR_NO_SIGN : MAX_LONG_STR;
         int cmpLen = cmpStr.length();
         int actualLen = numberStr.length();
-        if (actualLen < cmpLen) return true;
-        if (actualLen > cmpLen) return false;
+        if (actualLen < cmpLen) {
+            return true;
+        }
+        if (actualLen > cmpLen) {
+            return false;
+        }
 
         // could perhaps just use String.compareTo()?
         for (int i = 0; i < cmpLen; ++i) {

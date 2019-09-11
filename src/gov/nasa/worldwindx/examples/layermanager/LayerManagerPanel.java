@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.layermanager;
 
 import gov.nasa.worldwind.WorldWindow;
@@ -25,15 +24,14 @@ import java.util.List;
  * @author tag
  * @version $Id: LayerManagerPanel.java 2147 2014-07-11 23:29:45Z tgaskins $
  */
-public class LayerManagerPanel extends JPanel
-{
+public class LayerManagerPanel extends JPanel {
+
     protected JPanel layerNamesPanel;
     protected List<LayerPanel> layerPanels = new ArrayList<LayerPanel>();
     protected Font plainFont;
     protected Font boldFont;
 
-    public LayerManagerPanel(final WorldWindow wwd)
-    {
+    public LayerManagerPanel(final WorldWindow wwd) {
         super(new BorderLayout(10, 10));
 
         this.layerNamesPanel = new JPanel(new GridLayout(0, 1, 0, 5));
@@ -52,7 +50,7 @@ public class LayerManagerPanel extends JPanel
         // Add the scroll pane to a titled panel that will resize with the main window.
         JPanel titlePanel = new JPanel(new GridLayout(0, 1, 0, 10));
         titlePanel.setBorder(
-            new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("Layers")));
+                new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("Layers")));
         titlePanel.setToolTipText("Layers to Show");
         titlePanel.add(scrollPane);
         titlePanel.setPreferredSize(new Dimension(200, 500));
@@ -64,56 +62,50 @@ public class LayerManagerPanel extends JPanel
         this.boldFont = this.getFont().deriveFont(Font.BOLD);
 
         // Register a rendering listener that updates the was-rendered state of each image layer.
-        wwd.addRenderingListener(new RenderingListener()
-        {
+        wwd.addRenderingListener(new RenderingListener() {
             @Override
-            public void stageChanged(RenderingEvent event)
-            {
+            public void stageChanged(RenderingEvent event) {
                 updateLayerActivity(wwd);
             }
         });
 
         // Add a property change listener that causes this layer panel to be updated whenever the layer list changes.
-        wwd.getModel().getLayers().addPropertyChangeListener(new PropertyChangeListener()
-        {
+        wwd.getModel().getLayers().addPropertyChangeListener(new PropertyChangeListener() {
             @Override
-            public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-            {
-                if (propertyChangeEvent.getPropertyName().equals(AVKey.LAYERS))
-                    SwingUtilities.invokeLater(new Runnable()
-                    {
-                        public void run()
-                        {
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+                if (propertyChangeEvent.getPropertyName().equals(AVKey.LAYERS)) {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
                             update(wwd);
                         }
                     });
+                }
             }
         });
     }
 
-    public void update(WorldWindow wwd)
-    {
+    public void update(WorldWindow wwd) {
         // Repopulate this layer manager.
 
         this.fill(wwd);
     }
 
-    protected void fill(WorldWindow wwd)
-    {
+    protected void fill(WorldWindow wwd) {
         // Populate this layer manager with an entry for each layer in the WorldWindow's layer list.
 
-        if (this.isUpToDate(wwd))
+        if (this.isUpToDate(wwd)) {
             return;
+        }
 
         // First remove all the existing entries.
         this.layerPanels.clear();
         this.layerNamesPanel.removeAll();
 
         // Fill the layers panel with the titles of all layers in the WorldWindow's current model.
-        for (Layer layer : wwd.getModel().getLayers())
-        {
-            if (layer.getValue(AVKey.IGNORE) != null)
+        for (Layer layer : wwd.getModel().getLayers()) {
+            if (layer.getValue(AVKey.IGNORE) != null) {
                 continue;
+            }
 
             LayerPanel layerPanel = new LayerPanel(wwd, layer);
             this.layerNamesPanel.add(layerPanel);
@@ -123,20 +115,20 @@ public class LayerManagerPanel extends JPanel
         this.updateLayerActivity(wwd);
     }
 
-    protected boolean isUpToDate(WorldWindow wwd)
-    {
+    protected boolean isUpToDate(WorldWindow wwd) {
         // Determines whether this layer manager's layer list is consistent with the specified WorldWindow's. Knowing
         // this prevents redundant updates.
 
         LayerList layerList = wwd.getModel().getLayers();
 
-        if (this.layerPanels.size() != layerList.size())
+        if (this.layerPanels.size() != layerList.size()) {
             return false;
+        }
 
-        for (int i = 0; i < layerList.size(); i++)
-        {
-            if (layerList.get(i) != this.layerPanels.get(i).getLayer())
+        for (int i = 0; i < layerList.size(); i++) {
+            if (layerList.get(i) != this.layerPanels.get(i).getLayer()) {
                 return false;
+            }
         }
 
         return true;
@@ -148,10 +140,8 @@ public class LayerManagerPanel extends JPanel
      *
      * @param wwd the WorldWindow.
      */
-    protected void updateLayerActivity(WorldWindow wwd)
-    {
-        for (LayerPanel layerPanel : this.layerPanels)
-        {
+    protected void updateLayerActivity(WorldWindow wwd) {
+        for (LayerPanel layerPanel : this.layerPanels) {
             // The frame timestamp from the layer indicates the last frame in which it rendered something. If that
             // timestamp matches the current timestamp of the scene controller, then the layer rendered something
             // during the most recent frame. Note that this frame timestamp protocol is only in place by default
@@ -162,23 +152,16 @@ public class LayerManagerPanel extends JPanel
             Long frameTimeStamp = (Long) wwd.getSceneController().getValue(AVKey.FRAME_TIMESTAMP);
 
             if (layerTimeStamp != null && frameTimeStamp != null
-                && layerTimeStamp.longValue() == frameTimeStamp.longValue())
-            {
+                    && layerTimeStamp.longValue() == frameTimeStamp.longValue()) {
                 // Set the font to bold if the layer was just rendered.
                 layerPanel.setLayerNameFont(this.boldFont);
-            }
-            else if (layerPanel.getLayer() instanceof TiledImageLayer)
-            {
+            } else if (layerPanel.getLayer() instanceof TiledImageLayer) {
                 // Set the font to plain if the layer was not just rendered.
                 layerPanel.setLayerNameFont(this.plainFont);
-            }
-            else if (layerPanel.getLayer().isEnabled())
-            {
+            } else if (layerPanel.getLayer().isEnabled()) {
                 // Set enabled layer types other than TiledImageLayer to bold.
                 layerPanel.setLayerNameFont(this.boldFont);
-            }
-            else if (!layerPanel.getLayer().isEnabled())
-            {
+            } else if (!layerPanel.getLayer().isEnabled()) {
                 // Set disabled layer types other than TiledImageLayer to plain.
                 layerPanel.setLayerNameFont(this.plainFont);
             }

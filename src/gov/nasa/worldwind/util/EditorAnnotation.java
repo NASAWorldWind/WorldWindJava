@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -15,8 +14,8 @@ import java.awt.*;
  * @author tag
  * @version $Id: EditorAnnotation.java 2306 2014-09-15 17:32:55Z tgaskins $
  */
-public class EditorAnnotation extends ScreenAnnotation
-{
+public class EditorAnnotation extends ScreenAnnotation {
+
     private Point tooltipOffset = new Point(5, 5);
 
     /**
@@ -24,15 +23,13 @@ public class EditorAnnotation extends ScreenAnnotation
      *
      * @param text the text to display in the tool tip.
      */
-    public EditorAnnotation(String text)
-    {
+    public EditorAnnotation(String text) {
         super(text, new Point(0, 0)); // (0,0) is a dummy; the actual point is determined when rendering
 
         this.initializeAttributes();
     }
 
-    protected void initializeAttributes()
-    {
+    protected void initializeAttributes() {
         this.attributes.setAdjustWidthToText(AVKey.SIZE_FIT_TEXT);
         this.attributes.setFrameShape(AVKey.SHAPE_RECTANGLE);
         this.attributes.setTextColor(Color.BLACK);
@@ -44,21 +41,18 @@ public class EditorAnnotation extends ScreenAnnotation
         this.attributes.setInsets(new Insets(5, 5, 5, 5));
     }
 
-    protected int getOffsetX()
-    {
+    protected int getOffsetX() {
         return this.tooltipOffset != null ? this.tooltipOffset.x : 0;
     }
 
-    protected int getOffsetY()
-    {
+    protected int getOffsetY() {
         return this.tooltipOffset != null ? this.tooltipOffset.y : 0;
     }
 
     @Override
-    protected void doRenderNow(DrawContext dc)
-    {
+    protected void doRenderNow(DrawContext dc) {
         this.getAttributes().setDrawOffset(
-            new Point(this.getBounds(dc).width / 2 + this.getOffsetX(), this.getOffsetY()));
+                new Point(this.getBounds(dc).width / 2 + this.getOffsetX(), this.getOffsetY()));
         this.setScreenPoint(this.getScreenPoint());
 
         super.doRenderNow(dc);

@@ -22,9 +22,9 @@ import java.beans.PropertyChangeEvent;
  * @version $Id: AWTInputHandler.java 2258 2014-08-22 22:08:33Z dcollins $
  */
 public class AWTInputHandler extends WWObjectImpl
-    implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener, FocusListener, InputHandler,
-    Disposable
-{
+        implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener, FocusListener, InputHandler,
+        Disposable {
+
     protected WorldWindow wwd = null;
     protected EventListenerList eventListeners = new EventListenerList();
     protected java.awt.Point mousePoint = new java.awt.Point();
@@ -33,15 +33,12 @@ public class AWTInputHandler extends WWObjectImpl
     protected boolean isHovering = false;
     protected boolean isDragging = false;
     protected boolean forceRedrawOnMousePressed = Configuration.getBooleanValue(AVKey.REDRAW_ON_MOUSE_PRESSED, false);
-    protected javax.swing.Timer hoverTimer = new javax.swing.Timer(600, new ActionListener()
-    {
-        public void actionPerformed(ActionEvent actionEvent)
-        {
-            if (AWTInputHandler.this.pickMatches(AWTInputHandler.this.hoverObjects))
-            {
+    protected javax.swing.Timer hoverTimer = new javax.swing.Timer(600, new ActionListener() {
+        public void actionPerformed(ActionEvent actionEvent) {
+            if (AWTInputHandler.this.pickMatches(AWTInputHandler.this.hoverObjects)) {
                 AWTInputHandler.this.isHovering = true;
                 AWTInputHandler.this.callSelectListeners(new SelectEvent(AWTInputHandler.this.wwd,
-                    SelectEvent.HOVER, mousePoint, AWTInputHandler.this.hoverObjects));
+                        SelectEvent.HOVER, mousePoint, AWTInputHandler.this.hoverObjects));
                 AWTInputHandler.this.hoverTimer.stop();
             }
         }
@@ -49,44 +46,40 @@ public class AWTInputHandler extends WWObjectImpl
     // Delegate handler for View.
     protected SelectListener selectListener;
 
-    public AWTInputHandler()
-    {
+    public AWTInputHandler() {
     }
 
-    public void dispose()
-    {
+    public void dispose() {
         this.hoverTimer.stop();
         this.hoverTimer = null;
 
         this.setEventSource(null);
 
-        if (this.hoverObjects != null)
+        if (this.hoverObjects != null) {
             this.hoverObjects.clear();
+        }
         this.hoverObjects = null;
 
-        if (this.objectsAtButtonPress != null)
+        if (this.objectsAtButtonPress != null) {
             this.objectsAtButtonPress.clear();
+        }
         this.objectsAtButtonPress = null;
     }
 
-    public void setEventSource(WorldWindow newWorldWindow)
-    {
-        if (newWorldWindow != null && !(newWorldWindow instanceof Component))
-        {
+    public void setEventSource(WorldWindow newWorldWindow) {
+        if (newWorldWindow != null && !(newWorldWindow instanceof Component)) {
             String message = Logging.getMessage("Awt.AWTInputHandler.EventSourceNotAComponent");
             Logging.logger().finer(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (newWorldWindow == this.wwd)
-        {
+        if (newWorldWindow == this.wwd) {
             return;
         }
 
         this.eventListeners = new EventListenerList(); // make orphans of listener references
 
-        if (this.wwd != null)
-        {
+        if (this.wwd != null) {
             Component c = (Component) this.wwd;
             c.removeKeyListener(this);
             c.removeMouseMotionListener(this);
@@ -94,16 +87,17 @@ public class AWTInputHandler extends WWObjectImpl
             c.removeMouseWheelListener(this);
             c.removeFocusListener(this);
 
-            if (this.selectListener != null)
+            if (this.selectListener != null) {
                 this.wwd.removeSelectListener(this.selectListener);
+            }
 
-            if (this.wwd.getSceneController() != null)
+            if (this.wwd.getSceneController() != null) {
                 this.wwd.getSceneController().removePropertyChangeListener(AVKey.VIEW, this);
+            }
         }
 
         this.wwd = newWorldWindow;
-        if (this.wwd == null)
-        {
+        if (this.wwd == null) {
             return;
         }
 
@@ -115,209 +109,171 @@ public class AWTInputHandler extends WWObjectImpl
         c.addMouseWheelListener(this);
         c.addFocusListener(this);
 
-        this.selectListener = new SelectListener()
-        {
-            public void selected(SelectEvent event)
-            {
-                if (event.getEventAction().equals(SelectEvent.ROLLOVER))
-                {
+        this.selectListener = new SelectListener() {
+            public void selected(SelectEvent event) {
+                if (event.getEventAction().equals(SelectEvent.ROLLOVER)) {
                     doHover(true);
                 }
             }
         };
         this.wwd.addSelectListener(this.selectListener);
 
-        if (this.wwd.getSceneController() != null)
+        if (this.wwd.getSceneController() != null) {
             this.wwd.getSceneController().addPropertyChangeListener(AVKey.VIEW, this);
+        }
     }
 
-    public void removeHoverSelectListener()
-    {
+    public void removeHoverSelectListener() {
         hoverTimer.stop();
         hoverTimer = null;
         this.wwd.removeSelectListener(selectListener);
     }
 
-    public WorldWindow getEventSource()
-    {
+    public WorldWindow getEventSource() {
         return this.wwd;
     }
 
-    public void setHoverDelay(int delay)
-    {
+    public void setHoverDelay(int delay) {
         this.hoverTimer.setDelay(delay);
     }
 
-    public int getHoverDelay()
-    {
+    public int getHoverDelay() {
         return this.hoverTimer.getDelay();
     }
 
-    public boolean isSmoothViewChanges()
-    {
+    public boolean isSmoothViewChanges() {
         return this.wwd.getView().getViewInputHandler().isEnableSmoothing();
     }
 
-    public void setSmoothViewChanges(boolean smoothViewChanges)
-    {
+    public void setSmoothViewChanges(boolean smoothViewChanges) {
         this.wwd.getView().getViewInputHandler().setEnableSmoothing(smoothViewChanges);
     }
 
-    public boolean isLockViewHeading()
-    {
+    public boolean isLockViewHeading() {
         return this.wwd.getView().getViewInputHandler().isLockHeading();
     }
 
-    public void setLockViewHeading(boolean lockHeading)
-    {
+    public void setLockViewHeading(boolean lockHeading) {
         this.wwd.getView().getViewInputHandler().setLockHeading(lockHeading);
     }
 
-    public boolean isStopViewOnFocusLost()
-    {
+    public boolean isStopViewOnFocusLost() {
         return this.wwd.getView().getViewInputHandler().isStopOnFocusLost();
     }
 
-    public void setStopViewOnFocusLost(boolean stopView)
-    {
+    public void setStopViewOnFocusLost(boolean stopView) {
         this.wwd.getView().getViewInputHandler().setStopOnFocusLost(stopView);
     }
 
-    protected WorldWindow getWorldWindow()
-    {
+    protected WorldWindow getWorldWindow() {
         return wwd;
     }
 
-    protected Point getMousePoint()
-    {
+    protected Point getMousePoint() {
         return mousePoint;
     }
 
-    protected void setMousePoint(Point mousePoint)
-    {
+    protected void setMousePoint(Point mousePoint) {
         this.mousePoint = mousePoint;
     }
 
-    protected boolean isHovering()
-    {
+    protected boolean isHovering() {
         return isHovering;
     }
 
-    protected void setHovering(boolean hovering)
-    {
+    protected void setHovering(boolean hovering) {
         isHovering = hovering;
     }
 
-    protected PickedObjectList getHoverObjects()
-    {
+    protected PickedObjectList getHoverObjects() {
         return hoverObjects;
     }
 
-    protected void setHoverObjects(PickedObjectList hoverObjects)
-    {
+    protected void setHoverObjects(PickedObjectList hoverObjects) {
         this.hoverObjects = hoverObjects;
     }
 
-    protected PickedObjectList getObjectsAtButtonPress()
-    {
+    protected PickedObjectList getObjectsAtButtonPress() {
         return objectsAtButtonPress;
     }
 
-    protected void setObjectsAtButtonPress(PickedObjectList objectsAtButtonPress)
-    {
+    protected void setObjectsAtButtonPress(PickedObjectList objectsAtButtonPress) {
         this.objectsAtButtonPress = objectsAtButtonPress;
     }
 
-    public boolean isForceRedrawOnMousePressed()
-    {
+    public boolean isForceRedrawOnMousePressed() {
         return forceRedrawOnMousePressed;
     }
 
-    public void setForceRedrawOnMousePressed(boolean forceRedrawOnMousePressed)
-    {
+    public void setForceRedrawOnMousePressed(boolean forceRedrawOnMousePressed) {
         this.forceRedrawOnMousePressed = forceRedrawOnMousePressed;
     }
-/*
+
+    /*
     public ViewInputHandler getViewInputHandler()
     {
         return viewInputHandler;
     }
-    */
+     */
 
-    public void keyTyped(KeyEvent keyEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void keyTyped(KeyEvent keyEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (keyEvent == null)
-        {
+        if (keyEvent == null) {
             return;
         }
 
         this.callKeyTypedListeners(keyEvent);
 
-        if (!keyEvent.isConsumed())
-        {
+        if (!keyEvent.isConsumed()) {
             this.wwd.getView().getViewInputHandler().keyTyped(keyEvent);
         }
     }
 
-    public void keyPressed(KeyEvent keyEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void keyPressed(KeyEvent keyEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (keyEvent == null)
-        {
+        if (keyEvent == null) {
             return;
         }
 
         this.callKeyPressedListeners(keyEvent);
 
-        if (!keyEvent.isConsumed())
-        {
+        if (!keyEvent.isConsumed()) {
             this.wwd.getView().getViewInputHandler().keyPressed(keyEvent);
         }
     }
 
-    public void keyReleased(KeyEvent keyEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void keyReleased(KeyEvent keyEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (keyEvent == null)
-        {
+        if (keyEvent == null) {
             return;
         }
 
         this.callKeyReleasedListeners(keyEvent);
 
-        if (!keyEvent.isConsumed())
-        {
+        if (!keyEvent.isConsumed()) {
             this.wwd.getView().getViewInputHandler().keyReleased(keyEvent);
         }
     }
 
-    public void mouseClicked(final MouseEvent mouseEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void mouseClicked(final MouseEvent mouseEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (this.wwd.getView() == null)
-        {
+        if (this.wwd.getView() == null) {
             return;
         }
 
-        if (mouseEvent == null)
-        {
+        if (mouseEvent == null) {
             return;
         }
 
@@ -326,48 +282,35 @@ public class AWTInputHandler extends WWObjectImpl
         this.callMouseClickedListeners(mouseEvent);
 
         if (pickedObjects != null && pickedObjects.getTopPickedObject() != null
-            && !pickedObjects.getTopPickedObject().isTerrain())
-        {
+                && !pickedObjects.getTopPickedObject().isTerrain()) {
             // Something is under the cursor, so it's deemed "selected".
-            if (MouseEvent.BUTTON1 == mouseEvent.getButton())
-            {
-                if (mouseEvent.getClickCount() <= 1)
-                {
+            if (MouseEvent.BUTTON1 == mouseEvent.getButton()) {
+                if (mouseEvent.getClickCount() <= 1) {
                     this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.LEFT_CLICK,
-                        mouseEvent, pickedObjects));
-                }
-                else
-                {
+                            mouseEvent, pickedObjects));
+                } else {
                     this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.LEFT_DOUBLE_CLICK,
-                        mouseEvent, pickedObjects));
+                            mouseEvent, pickedObjects));
                 }
-            }
-            else if (MouseEvent.BUTTON3 == mouseEvent.getButton())
-            {
+            } else if (MouseEvent.BUTTON3 == mouseEvent.getButton()) {
                 this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.RIGHT_CLICK,
-                    mouseEvent, pickedObjects));
+                        mouseEvent, pickedObjects));
             }
 
             this.wwd.getView().firePropertyChange(AVKey.VIEW, null, this.wwd.getView());
-        }
-        else
-        {
-            if (!mouseEvent.isConsumed())
-            {
+        } else {
+            if (!mouseEvent.isConsumed()) {
                 this.wwd.getView().getViewInputHandler().mouseClicked(mouseEvent);
             }
         }
     }
 
-    public void mousePressed(MouseEvent mouseEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void mousePressed(MouseEvent mouseEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (mouseEvent == null)
-        {
+        if (mouseEvent == null) {
             return;
         }
 
@@ -381,37 +324,34 @@ public class AWTInputHandler extends WWObjectImpl
 
         // If the mouse point has changed then we need to set a new pick point, and redraw the scene because the current
         // picked object list may not reflect the current mouse position.
-        if (mousePointChanged && this.wwd.getSceneController() != null)
+        if (mousePointChanged && this.wwd.getSceneController() != null) {
             this.wwd.getSceneController().setPickPoint(this.mousePoint);
+        }
 
-        if (this.isForceRedrawOnMousePressed() || mousePointChanged)
+        if (this.isForceRedrawOnMousePressed() || mousePointChanged) {
             this.wwd.redrawNow();
+        }
 
         this.objectsAtButtonPress = this.wwd.getObjectsAtCurrentPosition();
 
         this.callMousePressedListeners(mouseEvent);
 
         if (this.objectsAtButtonPress != null && objectsAtButtonPress.getTopPickedObject() != null
-            && !this.objectsAtButtonPress.getTopPickedObject().isTerrain())
-        {
+                && !this.objectsAtButtonPress.getTopPickedObject().isTerrain()) {
             // Something is under the cursor, so it's deemed "selected".
-            if (MouseEvent.BUTTON1 == mouseEvent.getButton())
-            {
+            if (MouseEvent.BUTTON1 == mouseEvent.getButton()) {
                 this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.LEFT_PRESS,
-                    mouseEvent, this.objectsAtButtonPress));
-            }
-            else if (MouseEvent.BUTTON3 == mouseEvent.getButton())
-            {
+                        mouseEvent, this.objectsAtButtonPress));
+            } else if (MouseEvent.BUTTON3 == mouseEvent.getButton()) {
                 this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.RIGHT_PRESS,
-                    mouseEvent, this.objectsAtButtonPress));
+                        mouseEvent, this.objectsAtButtonPress));
             }
 
             // Initiate a repaint.
             this.wwd.getView().firePropertyChange(AVKey.VIEW, null, this.wwd.getView());
         }
 
-        if (!mouseEvent.isConsumed())
-        {
+        if (!mouseEvent.isConsumed()) {
             this.wwd.getView().getViewInputHandler().mousePressed(mouseEvent);
         }
 
@@ -420,43 +360,35 @@ public class AWTInputHandler extends WWObjectImpl
         // mouse on the GLJPanel, causing GLJPanel to take the focus in the same manner as GLCanvas. Note that focus is
         // passed only when the user clicks the primary mouse button. See
         // http://issues.worldwind.arc.nasa.gov/jira/browse/WWJ-272.
-        if (MouseEvent.BUTTON1 == mouseEvent.getButton() && this.wwd instanceof GLJPanel)
-        {
+        if (MouseEvent.BUTTON1 == mouseEvent.getButton() && this.wwd instanceof GLJPanel) {
             ((GLJPanel) this.wwd).requestFocusInWindow();
         }
     }
 
-    public void mouseReleased(MouseEvent mouseEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void mouseReleased(MouseEvent mouseEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (mouseEvent == null)
-        {
+        if (mouseEvent == null) {
             return;
         }
 
         this.mousePoint = mouseEvent.getPoint();
         this.callMouseReleasedListeners(mouseEvent);
-        if (!mouseEvent.isConsumed())
-        {
+        if (!mouseEvent.isConsumed()) {
             this.wwd.getView().getViewInputHandler().mouseReleased(mouseEvent);
         }
         this.doHover(true);
         this.cancelDrag();
     }
 
-    public void mouseEntered(MouseEvent mouseEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void mouseEntered(MouseEvent mouseEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (mouseEvent == null)
-        {
+        if (mouseEvent == null) {
             return;
         }
 
@@ -466,15 +398,12 @@ public class AWTInputHandler extends WWObjectImpl
         this.cancelDrag();
     }
 
-    public void mouseExited(MouseEvent mouseEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void mouseExited(MouseEvent mouseEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (mouseEvent == null)
-        {
+        if (mouseEvent == null) {
             return;
         }
 
@@ -482,8 +411,7 @@ public class AWTInputHandler extends WWObjectImpl
         this.wwd.getView().getViewInputHandler().mouseExited(mouseEvent);
 
         // Enqueue a redraw to update the current position and selection.
-        if (this.wwd.getSceneController() != null)
-        {
+        if (this.wwd.getSceneController() != null) {
             this.wwd.getSceneController().setPickPoint(null);
             this.wwd.redraw();
         }
@@ -492,13 +420,12 @@ public class AWTInputHandler extends WWObjectImpl
         this.cancelDrag();
     }
 
-    public void mouseDragged(MouseEvent mouseEvent)
-    {
-        if (this.wwd == null)
+    public void mouseDragged(MouseEvent mouseEvent) {
+        if (this.wwd == null) {
             return;
+        }
 
-        if (mouseEvent == null)
-        {
+        if (mouseEvent == null) {
             return;
         }
 
@@ -506,150 +433,127 @@ public class AWTInputHandler extends WWObjectImpl
         this.mousePoint = mouseEvent.getPoint();
         this.callMouseDraggedListeners(mouseEvent);
 
-        if ((MouseEvent.BUTTON1_DOWN_MASK & mouseEvent.getModifiersEx()) != 0)
-        {
+        if ((MouseEvent.BUTTON1_DOWN_MASK & mouseEvent.getModifiersEx()) != 0) {
             PickedObjectList pickedObjects = this.objectsAtButtonPress;
             if (this.isDragging
-                || (pickedObjects != null && pickedObjects.getTopPickedObject() != null
-                && !pickedObjects.getTopPickedObject().isTerrain()))
-            {
+                    || (pickedObjects != null && pickedObjects.getTopPickedObject() != null
+                    && !pickedObjects.getTopPickedObject().isTerrain())) {
                 this.isDragging = true;
                 DragSelectEvent selectEvent = new DragSelectEvent(this.wwd, SelectEvent.DRAG, mouseEvent, pickedObjects,
-                    prevMousePoint);
+                        prevMousePoint);
                 this.callSelectListeners(selectEvent);
 
                 // If no listener consumed the event, then cancel the drag.
-                if (!selectEvent.isConsumed())
+                if (!selectEvent.isConsumed()) {
                     this.cancelDrag();
+                }
             }
         }
 
-        if (!this.isDragging)
-        {
-            if (!mouseEvent.isConsumed())
-            {
+        if (!this.isDragging) {
+            if (!mouseEvent.isConsumed()) {
                 this.wwd.getView().getViewInputHandler().mouseDragged(mouseEvent);
             }
         }
 
         // Redraw to update the current position and selection.
-        if (this.wwd.getSceneController() != null)
-        {
+        if (this.wwd.getSceneController() != null) {
             this.wwd.getSceneController().setPickPoint(mouseEvent.getPoint());
             this.wwd.redraw();
         }
     }
 
-    public void mouseMoved(MouseEvent mouseEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void mouseMoved(MouseEvent mouseEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (mouseEvent == null)
-        {
+        if (mouseEvent == null) {
             return;
         }
 
         this.mousePoint = mouseEvent.getPoint();
         this.callMouseMovedListeners(mouseEvent);
 
-        if (!mouseEvent.isConsumed())
-        {
+        if (!mouseEvent.isConsumed()) {
             this.wwd.getView().getViewInputHandler().mouseMoved(mouseEvent);
         }
 
         // Redraw to update the current position and selection.
-        if (this.wwd.getSceneController() != null)
-        {
+        if (this.wwd.getSceneController() != null) {
             this.wwd.getSceneController().setPickPoint(mouseEvent.getPoint());
             this.wwd.redraw();
         }
     }
 
-    public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (mouseWheelEvent == null)
-        {
+        if (mouseWheelEvent == null) {
             return;
         }
 
         this.callMouseWheelMovedListeners(mouseWheelEvent);
 
-        if (!mouseWheelEvent.isConsumed())
+        if (!mouseWheelEvent.isConsumed()) {
             this.wwd.getView().getViewInputHandler().mouseWheelMoved(mouseWheelEvent);
+        }
     }
 
-    public void focusGained(FocusEvent focusEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void focusGained(FocusEvent focusEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (focusEvent == null)
-        {
+        if (focusEvent == null) {
             return;
         }
 
         this.wwd.getView().getViewInputHandler().focusGained(focusEvent);
     }
 
-    public void focusLost(FocusEvent focusEvent)
-    {
-        if (this.wwd == null)
-        {
+    public void focusLost(FocusEvent focusEvent) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (focusEvent == null)
-        {
+        if (focusEvent == null) {
             return;
         }
 
         this.wwd.getView().getViewInputHandler().focusLost(focusEvent);
     }
 
-    protected boolean isPickListEmpty(PickedObjectList pickList)
-    {
+    protected boolean isPickListEmpty(PickedObjectList pickList) {
         return pickList == null || pickList.size() < 1;
     }
 
-    protected void doHover(boolean reset)
-    {
+    protected void doHover(boolean reset) {
         PickedObjectList pickedObjects = this.wwd.getObjectsAtCurrentPosition();
-        if (!(this.isPickListEmpty(this.hoverObjects) || this.isPickListEmpty(pickedObjects)))
-        {
+        if (!(this.isPickListEmpty(this.hoverObjects) || this.isPickListEmpty(pickedObjects))) {
             PickedObject hover = this.hoverObjects.getTopPickedObject();
             PickedObject last = pickedObjects.getTopPickedObject();
 
-            Object oh = hover == null ? null : hover.getObject() != null ? hover.getObject() :
-                hover.getParentLayer() != null ? hover.getParentLayer() : null;
-            Object ol = last == null ? null : last.getObject() != null ? last.getObject() :
-                last.getParentLayer() != null ? last.getParentLayer() : null;
-            if (oh != null && ol != null && oh.equals(ol))
-            {
+            Object oh = hover == null ? null : hover.getObject() != null ? hover.getObject()
+                    : hover.getParentLayer() != null ? hover.getParentLayer() : null;
+            Object ol = last == null ? null : last.getObject() != null ? last.getObject()
+                    : last.getParentLayer() != null ? last.getParentLayer() : null;
+            if (oh != null && ol != null && oh.equals(ol)) {
                 return; // object picked is the hover object. don't do anything but wait for the timer to expire.
             }
         }
 
         this.cancelHover();
 
-        if (!reset)
-        {
+        if (!reset) {
             return;
         }
 
         if ((pickedObjects != null)
-            && (pickedObjects.getTopObject() != null)
-            && pickedObjects.getTopPickedObject().isTerrain())
-        {
+                && (pickedObjects.getTopObject() != null)
+                && pickedObjects.getTopPickedObject().isTerrain()) {
             return;
         }
 
@@ -657,10 +561,8 @@ public class AWTInputHandler extends WWObjectImpl
         this.hoverTimer.restart();
     }
 
-    protected void cancelHover()
-    {
-        if (this.isHovering)
-        {
+    protected void cancelHover() {
+        if (this.isHovering) {
             this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.HOVER, this.mousePoint, null));
         }
 
@@ -669,207 +571,162 @@ public class AWTInputHandler extends WWObjectImpl
         this.hoverTimer.stop();
     }
 
-    protected boolean pickMatches(PickedObjectList pickedObjects)
-    {
-        if (this.isPickListEmpty(this.wwd.getObjectsAtCurrentPosition()) || this.isPickListEmpty(pickedObjects))
-        {
+    protected boolean pickMatches(PickedObjectList pickedObjects) {
+        if (this.isPickListEmpty(this.wwd.getObjectsAtCurrentPosition()) || this.isPickListEmpty(pickedObjects)) {
             return false;
         }
 
         PickedObject lastTop = this.wwd.getObjectsAtCurrentPosition().getTopPickedObject();
 
-        if (null != lastTop && lastTop.isTerrain())
-        {
+        if (null != lastTop && lastTop.isTerrain()) {
             return false;
         }
 
         PickedObject newTop = pickedObjects.getTopPickedObject();
         //noinspection SimplifiableIfStatement
-        if (lastTop == null || newTop == null || lastTop.getObject() == null || newTop.getObject() == null)
-        {
+        if (lastTop == null || newTop == null || lastTop.getObject() == null || newTop.getObject() == null) {
             return false;
         }
 
         return lastTop.getObject().equals(newTop.getObject());
     }
 
-    protected void cancelDrag()
-    {
-        if (this.isDragging)
-        {
+    protected void cancelDrag() {
+        if (this.isDragging) {
             this.callSelectListeners(new DragSelectEvent(this.wwd, SelectEvent.DRAG_END, null,
-                this.objectsAtButtonPress, this.mousePoint));
+                    this.objectsAtButtonPress, this.mousePoint));
         }
 
         this.isDragging = false;
     }
 
-    public void addSelectListener(SelectListener listener)
-    {
+    public void addSelectListener(SelectListener listener) {
         this.eventListeners.add(SelectListener.class, listener);
     }
 
-    public void removeSelectListener(SelectListener listener)
-    {
+    public void removeSelectListener(SelectListener listener) {
         this.eventListeners.remove(SelectListener.class, listener);
     }
 
-    protected void callSelectListeners(SelectEvent event)
-    {
-        for (SelectListener listener : this.eventListeners.getListeners(SelectListener.class))
-        {
+    protected void callSelectListeners(SelectEvent event) {
+        for (SelectListener listener : this.eventListeners.getListeners(SelectListener.class)) {
             listener.selected(event);
         }
     }
 
-    public void addKeyListener(KeyListener listener)
-    {
+    public void addKeyListener(KeyListener listener) {
         this.eventListeners.add(KeyListener.class, listener);
     }
 
-    public void removeKeyListener(KeyListener listener)
-    {
+    public void removeKeyListener(KeyListener listener) {
         this.eventListeners.remove(KeyListener.class, listener);
     }
 
-    public void addMouseListener(MouseListener listener)
-    {
+    public void addMouseListener(MouseListener listener) {
         this.eventListeners.add(MouseListener.class, listener);
     }
 
-    public void removeMouseListener(MouseListener listener)
-    {
+    public void removeMouseListener(MouseListener listener) {
         this.eventListeners.remove(MouseListener.class, listener);
     }
 
-    public void addMouseMotionListener(MouseMotionListener listener)
-    {
+    public void addMouseMotionListener(MouseMotionListener listener) {
         this.eventListeners.add(MouseMotionListener.class, listener);
     }
 
-    public void removeMouseMotionListener(MouseMotionListener listener)
-    {
+    public void removeMouseMotionListener(MouseMotionListener listener) {
         this.eventListeners.remove(MouseMotionListener.class, listener);
     }
 
-    public void addMouseWheelListener(MouseWheelListener listener)
-    {
+    public void addMouseWheelListener(MouseWheelListener listener) {
         this.eventListeners.add(MouseWheelListener.class, listener);
     }
 
-    public void removeMouseWheelListener(MouseWheelListener listener)
-    {
+    public void removeMouseWheelListener(MouseWheelListener listener) {
         this.eventListeners.remove(MouseWheelListener.class, listener);
     }
 
-    protected void callKeyPressedListeners(KeyEvent event)
-    {
-        for (KeyListener listener : this.eventListeners.getListeners(KeyListener.class))
-        {
+    protected void callKeyPressedListeners(KeyEvent event) {
+        for (KeyListener listener : this.eventListeners.getListeners(KeyListener.class)) {
             listener.keyPressed(event);
         }
     }
 
-    protected void callKeyReleasedListeners(KeyEvent event)
-    {
-        for (KeyListener listener : this.eventListeners.getListeners(KeyListener.class))
-        {
+    protected void callKeyReleasedListeners(KeyEvent event) {
+        for (KeyListener listener : this.eventListeners.getListeners(KeyListener.class)) {
             listener.keyReleased(event);
         }
     }
 
-    protected void callKeyTypedListeners(KeyEvent event)
-    {
-        for (KeyListener listener : this.eventListeners.getListeners(KeyListener.class))
-        {
+    protected void callKeyTypedListeners(KeyEvent event) {
+        for (KeyListener listener : this.eventListeners.getListeners(KeyListener.class)) {
             listener.keyTyped(event);
         }
     }
 
-    protected void callMousePressedListeners(MouseEvent event)
-    {
-        for (MouseListener listener : this.eventListeners.getListeners(MouseListener.class))
-        {
+    protected void callMousePressedListeners(MouseEvent event) {
+        for (MouseListener listener : this.eventListeners.getListeners(MouseListener.class)) {
             listener.mousePressed(event);
         }
     }
 
-    protected void callMouseReleasedListeners(MouseEvent event)
-    {
-        for (MouseListener listener : this.eventListeners.getListeners(MouseListener.class))
-        {
+    protected void callMouseReleasedListeners(MouseEvent event) {
+        for (MouseListener listener : this.eventListeners.getListeners(MouseListener.class)) {
             listener.mouseReleased(event);
         }
     }
 
-    protected void callMouseClickedListeners(MouseEvent event)
-    {
-        for (MouseListener listener : this.eventListeners.getListeners(MouseListener.class))
-        {
+    protected void callMouseClickedListeners(MouseEvent event) {
+        for (MouseListener listener : this.eventListeners.getListeners(MouseListener.class)) {
             listener.mouseClicked(event);
         }
     }
 
-    protected void callMouseDraggedListeners(MouseEvent event)
-    {
-        for (MouseMotionListener listener : this.eventListeners.getListeners(MouseMotionListener.class))
-        {
+    protected void callMouseDraggedListeners(MouseEvent event) {
+        for (MouseMotionListener listener : this.eventListeners.getListeners(MouseMotionListener.class)) {
             listener.mouseDragged(event);
         }
     }
 
-    protected void callMouseMovedListeners(MouseEvent event)
-    {
-        for (MouseMotionListener listener : this.eventListeners.getListeners(MouseMotionListener.class))
-        {
+    protected void callMouseMovedListeners(MouseEvent event) {
+        for (MouseMotionListener listener : this.eventListeners.getListeners(MouseMotionListener.class)) {
             listener.mouseMoved(event);
         }
     }
 
-    protected void callMouseWheelMovedListeners(MouseWheelEvent event)
-    {
-        for (MouseWheelListener listener : this.eventListeners.getListeners(MouseWheelListener.class))
-        {
+    protected void callMouseWheelMovedListeners(MouseWheelEvent event) {
+        for (MouseWheelListener listener : this.eventListeners.getListeners(MouseWheelListener.class)) {
             listener.mouseWheelMoved(event);
         }
     }
 
-    protected void callMouseEnteredListeners(MouseEvent event)
-    {
-        for (MouseListener listener : this.eventListeners.getListeners(MouseListener.class))
-        {
+    protected void callMouseEnteredListeners(MouseEvent event) {
+        for (MouseListener listener : this.eventListeners.getListeners(MouseListener.class)) {
             listener.mouseEntered(event);
         }
     }
 
-    protected void callMouseExitedListeners(MouseEvent event)
-    {
-        for (MouseListener listener : this.eventListeners.getListeners(MouseListener.class))
-        {
+    protected void callMouseExitedListeners(MouseEvent event) {
+        for (MouseListener listener : this.eventListeners.getListeners(MouseListener.class)) {
             listener.mouseExited(event);
         }
     }
 
-    public void propertyChange(PropertyChangeEvent event)
-    {
-        if (this.wwd == null)
-        {
+    public void propertyChange(PropertyChangeEvent event) {
+        if (this.wwd == null) {
             return;
         }
 
-        if (this.wwd.getView() == null)
-        {
+        if (this.wwd.getView() == null) {
             return;
         }
 
-        if (event == null)
-        {
+        if (event == null) {
             return;
         }
 
-        if (event.getPropertyName().equals(AVKey.VIEW) &&
-            (event.getSource() == this.getWorldWindow().getSceneController()))
-        {
+        if (event.getPropertyName().equals(AVKey.VIEW)
+                && (event.getSource() == this.getWorldWindow().getSceneController())) {
             this.wwd.getView().getViewInputHandler().setWorldWindow(this.wwd);
         }
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
-  ~ National Aeronautics and Space Administration.
-  ~ All Rights Reserved.
-  -->
+~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+~ National Aeronautics and Space Administration.
+~ All Rights Reserved.
+-->
 
 <!--$Id: worldwind.xml 2348 2014-09-25 23:35:46Z dcollins $-->
 <!--Default WorldWind configuration values-->
@@ -94,10 +94,10 @@
     <!--<Property name="gov.nasa.worldwind.avkey.UrlProxyType" value="Proxy.Type.Http"/>-->
 
     <!-- Location of icons for MIL-STD-2525C symbol set. This can be a URL to a web server, to a local zip or jar archive.
-         See https://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use for more information on how
-         to configure a local symbol repository.
-         Examples: http://myserver.com/milstd2525/   (web server)
-                   jar:file:milstd2525-symbols.zip!  (local zip archive)  -->
+See https://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use for more information on how
+to configure a local symbol repository.
+Examples: http://myserver.com/milstd2525/   (web server)
+    jar:file:milstd2525-symbols.zip!  (local zip archive)  -->
     <Property name="gov.nasa.worldwind.avkey.MilStd2525IconRetrieverPath"
               value="https://worldwind.arc.nasa.gov/milstd2525c/rev1/"/>
 </WorldWindConfiguration>

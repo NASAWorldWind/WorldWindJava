@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.shapebuilder;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -17,12 +16,10 @@ import java.awt.*;
  * @author ccrick
  * @version $Id: PyramidEditor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class PyramidEditor extends RigidShapeEditor
-{
+public class PyramidEditor extends RigidShapeEditor {
 
     @Override
-    protected void assembleScaleControlPoints(DrawContext dc)
-    {
+    protected void assembleScaleControlPoints(DrawContext dc) {
         RigidShape shape = this.getShape();
 
         Matrix matrix = shape.computeRenderMatrix(dc);
@@ -31,17 +28,13 @@ public class PyramidEditor extends RigidShapeEditor
 
         double radius = ShapeUtils.getViewportScaleFactor(wwd) / 12;
 
-        if (controlPoints.size() > 0)
-        {
-            for (RigidShape controlPoint : controlPoints)
-            {
+        if (controlPoints.size() > 0) {
+            for (RigidShape controlPoint : controlPoints) {
                 controlPoint.setEastWestRadius(radius);
                 controlPoint.setNorthSouthRadius(radius);
                 controlPoint.setVerticalRadius(radius);
             }
-        }
-        else
-        {
+        } else {
             // create vertices at the extrema of the unit shape, and transform them by the
             // render matrix to get their final positions for use as control points
 
@@ -175,13 +168,12 @@ public class PyramidEditor extends RigidShapeEditor
             rod.setAltitudeMode(this.getAltitudeMode());
             rod.setAttributes(this.scaleRodAttributes);
             this.controlPointRods.add(rod);
-            */
+             */
         }
     }
 
     @Override
-    protected void assembleTextureControlPoints(DrawContext dc)
-    {
+    protected void assembleTextureControlPoints(DrawContext dc) {
         RigidShape shape = this.getShape();
 
         Matrix matrix = shape.computeRenderMatrix(dc);
@@ -194,35 +186,31 @@ public class PyramidEditor extends RigidShapeEditor
         Vec4 LLeft = new Vec4(0, 0, 0);
         Vec4 LRight = new Vec4(0, 0, 0);
 
-        if (selectedFace == 0)                  // right
+        if (selectedFace == 0) // right
         {
             ULeft = new Vec4(1, -1 + shape.getOffsets(0, 0)[0], 1 + shape.getOffsets(0, 0)[1]);
             URight = new Vec4(1, 1 + shape.getOffsets(0, 1)[0], 1 + shape.getOffsets(0, 1)[1]);
             LLeft = new Vec4(1, -1 + shape.getOffsets(0, 2)[0], -1 + shape.getOffsets(0, 2)[1]);
             LRight = new Vec4(1, 1 + shape.getOffsets(0, 3)[0], -1 + shape.getOffsets(0, 3)[1]);
-        }
-        else if (selectedFace == 1)            // bottom
+        } else if (selectedFace == 1) // bottom
         {
             ULeft = new Vec4(-1 + shape.getOffsets(1, 0)[0], -1, 1 + shape.getOffsets(1, 0)[1]);
             URight = new Vec4(1 + shape.getOffsets(1, 1)[0], -1, 1 + shape.getOffsets(1, 1)[1]);
             LLeft = new Vec4(-1 + shape.getOffsets(1, 2)[0], -1, -1 + shape.getOffsets(1, 2)[1]);
             LRight = new Vec4(1 + shape.getOffsets(1, 3)[0], -1, -1 + shape.getOffsets(1, 3)[1]);
-        }
-        else if (selectedFace == 2)            // left
+        } else if (selectedFace == 2) // left
         {
             ULeft = new Vec4(-1, 1 - shape.getOffsets(2, 0)[0], 1 + shape.getOffsets(2, 0)[1]);
             URight = new Vec4(-1, -1 - shape.getOffsets(2, 1)[0], 1 + shape.getOffsets(2, 1)[1]);
             LLeft = new Vec4(-1, 1 - shape.getOffsets(2, 2)[0], -1 + shape.getOffsets(2, 2)[1]);
             LRight = new Vec4(-1, -1 - shape.getOffsets(2, 3)[0], -1 + shape.getOffsets(2, 3)[1]);
-        }
-        else if (selectedFace == 3)            // top
+        } else if (selectedFace == 3) // top
         {
             ULeft = new Vec4(1 - shape.getOffsets(3, 0)[0], 1, 1 + shape.getOffsets(3, 0)[1]);
             URight = new Vec4(-1 - shape.getOffsets(3, 1)[0], 1, 1 + shape.getOffsets(3, 1)[1]);
             LLeft = new Vec4(1 - shape.getOffsets(3, 2)[0], 1, -1 + shape.getOffsets(3, 2)[1]);
             LRight = new Vec4(-1 - shape.getOffsets(3, 3)[0], 1, -1 + shape.getOffsets(3, 3)[1]);
-        }
-        else if (selectedFace == 4)            // back
+        } else if (selectedFace == 4) // back
         {
             ULeft = new Vec4(1 - shape.getOffsets(4, 0)[0], 1 + shape.getOffsets(4, 0)[1], -1);
             URight = new Vec4(-1 - shape.getOffsets(4, 1)[0], 1 + shape.getOffsets(4, 1)[1], -1);
@@ -236,17 +224,13 @@ public class PyramidEditor extends RigidShapeEditor
         Vec4 right = URight.add3(LRight).divide3(2);
         Vec4 center = left.add3(right).divide3(2);
 
-        if (controlPoints.size() > 0)
-        {
-            for (RigidShape controlPoint : controlPoints)
-            {
+        if (controlPoints.size() > 0) {
+            for (RigidShape controlPoint : controlPoints) {
                 controlPoint.setEastWestRadius(radius);
                 controlPoint.setNorthSouthRadius(radius);
                 controlPoint.setVerticalRadius(radius);
             }
-        }
-        else
-        {
+        } else {
             // create vertices at the extrema of the current shape piece, and transform them by the
             // render matrix to get their final positions for use as control points
             Vec4 vert = matrix.transformBy3(matrix, ULeft.getX(), ULeft.getY(), ULeft.getZ()).add3(refPt);
@@ -349,28 +333,26 @@ public class PyramidEditor extends RigidShapeEditor
     }
 
     @Override
-    protected void scaleShapeNorth(Point previousMousePoint, Point mousePoint)
-    {
+    protected void scaleShapeNorth(Point previousMousePoint, Point mousePoint) {
         scaleShapeNorthSouth(previousMousePoint, mousePoint, SCALE_NORTH_ACTION);
     }
 
     @Override
-    protected void scaleShapeSouth(Point previousMousePoint, Point mousePoint)
-    {
+    protected void scaleShapeSouth(Point previousMousePoint, Point mousePoint) {
         scaleShapeNorthSouth(previousMousePoint, mousePoint, SCALE_SOUTH_ACTION);
     }
 
-    protected void scaleShapeNorthSouth(Point previousMousePoint, Point mousePoint, String scaleDirection)
-    {
+    protected void scaleShapeNorthSouth(Point previousMousePoint, Point mousePoint, String scaleDirection) {
         Position referencePos = this.shape.getReferencePosition();
-        if (referencePos == null)
+        if (referencePos == null) {
             return;
+        }
 
         Vec4 referencePoint = this.wwd.getModel().getGlobe().computePointFromPosition(referencePos);
 
         Line screenRay = this.wwd.getView().computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Line previousScreenRay = this.wwd.getView().computeRayFromScreenPoint(previousMousePoint.getX(),
-            previousMousePoint.getY());
+                previousMousePoint.getY());
 
         Vec4 nearestPointOnLine = screenRay.nearestPointTo(referencePoint);
         Vec4 previousNearestPointOnLine = previousScreenRay.nearestPointTo(referencePoint);
@@ -379,8 +361,9 @@ public class PyramidEditor extends RigidShapeEditor
         Vec4 controlPoint = this.wwd.getModel().getGlobe().computePointFromPosition(controlPosition);
 
         Vec4 scaleVector = controlPoint.subtract3(referencePoint).normalize3();
-        if (scaleDirection.equals(SCALE_SOUTH_ACTION))
+        if (scaleDirection.equals(SCALE_SOUTH_ACTION)) {
             scaleVector = scaleVector.getNegative3();
+        }
 
         double distance = nearestPointOnLine.distanceTo3(referencePoint);
         double previousDistance = previousNearestPointOnLine.distanceTo3(referencePoint);
@@ -389,8 +372,7 @@ public class PyramidEditor extends RigidShapeEditor
         RigidShape shape = this.getShape();
         double radius = shape.getNorthSouthRadius();
 
-        if (radius + radiusChange > 0)
-        {
+        if (radius + radiusChange > 0) {
             this.shape.setNorthSouthRadius(radius + radiusChange / 2);
             Vec4 newCenterPt = referencePoint.add3(scaleVector.multiply3(radiusChange / 2));
             Position newCenterPos = this.wwd.getModel().getGlobe().computePositionFromPoint(newCenterPt);
@@ -399,28 +381,26 @@ public class PyramidEditor extends RigidShapeEditor
     }
 
     @Override
-    protected void scaleShapeEast(Point previousMousePoint, Point mousePoint)
-    {
+    protected void scaleShapeEast(Point previousMousePoint, Point mousePoint) {
         scaleShapeEastWest(previousMousePoint, mousePoint, SCALE_EAST_ACTION);
     }
 
     @Override
-    protected void scaleShapeWest(Point previousMousePoint, Point mousePoint)
-    {
+    protected void scaleShapeWest(Point previousMousePoint, Point mousePoint) {
         scaleShapeEastWest(previousMousePoint, mousePoint, SCALE_WEST_ACTION);
     }
 
-    protected void scaleShapeEastWest(Point previousMousePoint, Point mousePoint, String scaleDirection)
-    {
+    protected void scaleShapeEastWest(Point previousMousePoint, Point mousePoint, String scaleDirection) {
         Position referencePos = this.shape.getReferencePosition();
-        if (referencePos == null)
+        if (referencePos == null) {
             return;
+        }
 
         Vec4 referencePoint = this.wwd.getModel().getGlobe().computePointFromPosition(referencePos);
 
         Line screenRay = this.wwd.getView().computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Line previousScreenRay = this.wwd.getView().computeRayFromScreenPoint(previousMousePoint.getX(),
-            previousMousePoint.getY());
+                previousMousePoint.getY());
 
         Vec4 nearestPointOnLine = screenRay.nearestPointTo(referencePoint);
         Vec4 previousNearestPointOnLine = previousScreenRay.nearestPointTo(referencePoint);
@@ -429,8 +409,9 @@ public class PyramidEditor extends RigidShapeEditor
         Vec4 controlPoint = this.wwd.getModel().getGlobe().computePointFromPosition(controlPosition);
 
         Vec4 scaleVector = controlPoint.subtract3(referencePoint).normalize3();
-        if (scaleDirection.equals(SCALE_WEST_ACTION))
+        if (scaleDirection.equals(SCALE_WEST_ACTION)) {
             scaleVector = scaleVector.getNegative3();
+        }
 
         double distance = nearestPointOnLine.distanceTo3(referencePoint);
         double previousDistance = previousNearestPointOnLine.distanceTo3(referencePoint);
@@ -439,8 +420,7 @@ public class PyramidEditor extends RigidShapeEditor
         RigidShape shape = this.getShape();
         double radius = shape.getEastWestRadius();
 
-        if (radius + radiusChange > 0)
-        {
+        if (radius + radiusChange > 0) {
             this.shape.setEastWestRadius(radius + radiusChange / 2);
             Vec4 newCenterPt = referencePoint.add3(scaleVector.multiply3(radiusChange / 2));
             Position newCenterPos = this.wwd.getModel().getGlobe().computePositionFromPoint(newCenterPt);
@@ -449,28 +429,26 @@ public class PyramidEditor extends RigidShapeEditor
     }
 
     @Override
-    protected void scaleShapeUp(Point previousMousePoint, Point mousePoint)
-    {
+    protected void scaleShapeUp(Point previousMousePoint, Point mousePoint) {
         scaleShapeVertical(previousMousePoint, mousePoint, SCALE_UP_ACTION);
     }
 
     @Override
-    protected void scaleShapeDown(Point previousMousePoint, Point mousePoint)
-    {
+    protected void scaleShapeDown(Point previousMousePoint, Point mousePoint) {
         scaleShapeVertical(previousMousePoint, mousePoint, SCALE_DOWN_ACTION);
     }
 
-    protected void scaleShapeVertical(Point previousMousePoint, Point mousePoint, String scaleDirection)
-    {
+    protected void scaleShapeVertical(Point previousMousePoint, Point mousePoint, String scaleDirection) {
         Position referencePos = this.shape.getReferencePosition();
-        if (referencePos == null)
+        if (referencePos == null) {
             return;
+        }
 
         Vec4 referencePoint = this.wwd.getModel().getGlobe().computePointFromPosition(referencePos);
 
         Line screenRay = this.wwd.getView().computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Line previousScreenRay = this.wwd.getView().computeRayFromScreenPoint(previousMousePoint.getX(),
-            previousMousePoint.getY());
+                previousMousePoint.getY());
 
         Vec4 nearestPointOnLine = screenRay.nearestPointTo(referencePoint);
         Vec4 previousNearestPointOnLine = previousScreenRay.nearestPointTo(referencePoint);
@@ -479,8 +457,9 @@ public class PyramidEditor extends RigidShapeEditor
         Vec4 controlPoint = this.wwd.getModel().getGlobe().computePointFromPosition(controlPosition);
 
         Vec4 scaleVector = controlPoint.subtract3(referencePoint).normalize3();
-        if (scaleDirection.equals(SCALE_DOWN_ACTION))
+        if (scaleDirection.equals(SCALE_DOWN_ACTION)) {
             scaleVector = scaleVector.getNegative3();
+        }
 
         double distance = nearestPointOnLine.distanceTo3(referencePoint);
         double previousDistance = previousNearestPointOnLine.distanceTo3(referencePoint);
@@ -489,8 +468,7 @@ public class PyramidEditor extends RigidShapeEditor
         RigidShape shape = this.getShape();
         double radius = shape.getVerticalRadius();
 
-        if (radius + radiusChange > 0)
-        {
+        if (radius + radiusChange > 0) {
             this.shape.setVerticalRadius(radius + radiusChange / 2);
             Vec4 newCenterPt = referencePoint.add3(scaleVector.multiply3(radiusChange / 2));
             Position newCenterPos = this.wwd.getModel().getGlobe().computePositionFromPoint(newCenterPt);
@@ -562,20 +540,19 @@ public class PyramidEditor extends RigidShapeEditor
             this.shape.setCenterPosition(newCenterPos);
         }
     }
-    */
-
+     */
     @Override
-    protected void scaleShapeRadius(Point previousMousePoint, Point mousePoint)
-    {
+    protected void scaleShapeRadius(Point previousMousePoint, Point mousePoint) {
         Position referencePos = this.shape.getReferencePosition();
-        if (referencePos == null)
+        if (referencePos == null) {
             return;
+        }
 
         Vec4 referencePoint = this.wwd.getModel().getGlobe().computePointFromPosition(referencePos);
 
         Line screenRay = this.wwd.getView().computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Line previousScreenRay = this.wwd.getView().computeRayFromScreenPoint(previousMousePoint.getX(),
-            previousMousePoint.getY());
+                previousMousePoint.getY());
 
         Vec4 nearestPointOnLine = screenRay.nearestPointTo(referencePoint);
         Vec4 previousNearestPointOnLine = previousScreenRay.nearestPointTo(referencePoint);
@@ -595,8 +572,7 @@ public class PyramidEditor extends RigidShapeEditor
 
         double scalingRatio = (radiusChange + average) / average;
 
-        if (scalingRatio > 0)
-        {
+        if (scalingRatio > 0) {
             this.shape.setEastWestRadius(eastWestRadius * scalingRatio);
             this.shape.setNorthSouthRadius(northSouthRadius * scalingRatio);
             //scaleVector = scaleVector.multiply3(this.shape.getVerticalRadius() - verticalRadius);
@@ -607,17 +583,17 @@ public class PyramidEditor extends RigidShapeEditor
     }
 
     @Override
-    protected void scaleShape(Point previousMousePoint, Point mousePoint)
-    {
+    protected void scaleShape(Point previousMousePoint, Point mousePoint) {
         Position referencePos = this.shape.getReferencePosition();
-        if (referencePos == null)
+        if (referencePos == null) {
             return;
+        }
 
         Vec4 referencePoint = this.wwd.getModel().getGlobe().computePointFromPosition(referencePos);
 
         Line screenRay = this.wwd.getView().computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Line previousScreenRay = this.wwd.getView().computeRayFromScreenPoint(previousMousePoint.getX(),
-            previousMousePoint.getY());
+                previousMousePoint.getY());
 
         Vec4 nearestPointOnLine = screenRay.nearestPointTo(referencePoint);
         Vec4 previousNearestPointOnLine = previousScreenRay.nearestPointTo(referencePoint);
@@ -638,8 +614,7 @@ public class PyramidEditor extends RigidShapeEditor
 
         double scalingRatio = (radiusChange + average) / average;
 
-        if (scalingRatio > 0)
-        {
+        if (scalingRatio > 0) {
             this.shape.setEastWestRadius(eastWestRadius * scalingRatio);
             this.shape.setNorthSouthRadius(northSouthRadius * scalingRatio);
             this.shape.setVerticalRadius(verticalRadius * scalingRatio);
@@ -651,18 +626,18 @@ public class PyramidEditor extends RigidShapeEditor
     }
 
     @Override
-    protected void skewShapeEastWest(Point previousMousePoint, Point mousePoint)
-    {
+    protected void skewShapeEastWest(Point previousMousePoint, Point mousePoint) {
         RigidShape shape = this.getShape();
         double skew = shape.getSkewEastWest().getDegrees();
         double scale = ShapeUtils.getViewportScaleFactor(wwd);
 
         Matrix renderMatrix = this.shape.computeRenderMatrix(this.wwd.getModel().getGlobe(),
-            this.wwd.getSceneController().getVerticalExaggeration());
+                this.wwd.getSceneController().getVerticalExaggeration());
 
         Position referencePos = this.shape.getReferencePosition();
-        if (referencePos == null)
+        if (referencePos == null) {
             return;
+        }
 
         Vec4 referencePoint = this.wwd.getModel().getGlobe().computePointFromPosition(referencePos);
 
@@ -691,7 +666,7 @@ public class PyramidEditor extends RigidShapeEditor
 
         Line screenRay = this.wwd.getView().computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Line previousScreenRay = this.wwd.getView().computeRayFromScreenPoint(previousMousePoint.getX(),
-            previousMousePoint.getY());
+                previousMousePoint.getY());
 
         Vec4 nearestPointOnLine = screenRay.nearestPointTo(p1);
         Vec4 previousNearestPointOnLine = previousScreenRay.nearestPointTo(p1);
@@ -704,19 +679,20 @@ public class PyramidEditor extends RigidShapeEditor
 
         // determine if mouse click is on same side of splitPlane as the referencePoint
         int west = splitPlane.onSameSide(referencePoint, nearestPointOnLine);
-        if (west != 0)
+        if (west != 0) {
             skewChange *= -1;
+        }
 
-        if (skew + skewChange >= 0 && skew + skewChange < 180)
+        if (skew + skewChange >= 0 && skew + skewChange < 180) {
             this.shape.setSkewEastWest(Angle.fromDegrees(skew + skewChange));
+        }
 
         // finally, reposition the shape's centerPoint to allow the base to stay fixed:
-
         // compute change in position of a point on the base using old and new render matrices
         Vec4 bottomPoint = renderMatrix.transformBy3(renderMatrix, 0, 0, -1);
 
         Matrix newRenderMatrix = this.shape.computeRenderMatrix(this.wwd.getModel().getGlobe(),
-            this.wwd.getSceneController().getVerticalExaggeration());
+                this.wwd.getSceneController().getVerticalExaggeration());
         Vec4 newBottomPoint = newRenderMatrix.transformBy3(newRenderMatrix, 0, 0, -1);
 
         // compute the points change in location and subtract from the previous referencePoint
@@ -728,18 +704,18 @@ public class PyramidEditor extends RigidShapeEditor
     }
 
     @Override
-    protected void skewShapeNorthSouth(Point previousMousePoint, Point mousePoint)
-    {
+    protected void skewShapeNorthSouth(Point previousMousePoint, Point mousePoint) {
         RigidShape shape = this.getShape();
         double skew = shape.getSkewNorthSouth().getDegrees();
         double scale = ShapeUtils.getViewportScaleFactor(wwd);
 
         Matrix renderMatrix = this.shape.computeRenderMatrix(this.wwd.getModel().getGlobe(),
-            this.wwd.getSceneController().getVerticalExaggeration());
+                this.wwd.getSceneController().getVerticalExaggeration());
 
         Position referencePos = this.shape.getReferencePosition();
-        if (referencePos == null)
+        if (referencePos == null) {
             return;
+        }
 
         Vec4 referencePoint = this.wwd.getModel().getGlobe().computePointFromPosition(referencePos);
 
@@ -768,7 +744,7 @@ public class PyramidEditor extends RigidShapeEditor
 
         Line screenRay = this.wwd.getView().computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Line previousScreenRay = this.wwd.getView().computeRayFromScreenPoint(previousMousePoint.getX(),
-            previousMousePoint.getY());
+                previousMousePoint.getY());
 
         Vec4 nearestPointOnLine = screenRay.nearestPointTo(p1);
         Vec4 previousNearestPointOnLine = previousScreenRay.nearestPointTo(p1);
@@ -781,19 +757,20 @@ public class PyramidEditor extends RigidShapeEditor
 
         // determine if mouse click is on same side of splitPlane as the referencePoint
         int south = splitPlane.onSameSide(referencePoint, nearestPointOnLine);
-        if (south != 0)
+        if (south != 0) {
             skewChange *= -1;
+        }
 
-        if (skew + skewChange >= 0 && skew + skewChange < 180)
+        if (skew + skewChange >= 0 && skew + skewChange < 180) {
             this.shape.setSkewNorthSouth(Angle.fromDegrees(skew + skewChange));
+        }
 
         // finally, reposition the shape's centerPoint to allow the base to stay fixed:
-
         // compute change in position of a point on the base using old and new render matrices
         Vec4 bottomPoint = renderMatrix.transformBy3(renderMatrix, 0, 0, -1);
 
         Matrix newRenderMatrix = this.shape.computeRenderMatrix(this.wwd.getModel().getGlobe(),
-            this.wwd.getSceneController().getVerticalExaggeration());
+                this.wwd.getSceneController().getVerticalExaggeration());
         Vec4 newBottomPoint = newRenderMatrix.transformBy3(newRenderMatrix, 0, 0, -1);
 
         // compute the points change in location and subtract from the previous referencePoint
@@ -805,44 +782,39 @@ public class PyramidEditor extends RigidShapeEditor
     }
 
     @Override
-    protected void moveTextureCorner(Point previousMousePoint, Point mousePoint, Integer corner)
-    {
+    protected void moveTextureCorner(Point previousMousePoint, Point mousePoint, Integer corner) {
         Vec4 rightRay = new Vec4(0, 0, 0);
         Vec4 upRay = new Vec4(0, 0, 0);
 
-        if (this.selectedFace == 0)         // Right
+        if (this.selectedFace == 0) // Right
         {
             rightRay = new Vec4(0, 1, 0);
             upRay = new Vec4(0, 0, 1);
-        }
-        else if (this.selectedFace == 1)    // Bottom
+        } else if (this.selectedFace == 1) // Bottom
         {
             rightRay = new Vec4(1, 0, 0);
             upRay = new Vec4(0, 0, 1);
-        }
-        else if (this.selectedFace == 2)    // Left
+        } else if (this.selectedFace == 2) // Left
         {
             rightRay = new Vec4(0, -1, 0);
             upRay = new Vec4(0, 0, 1);
-        }
-        else if (this.selectedFace == 3)    // Top
+        } else if (this.selectedFace == 3) // Top
         {
             rightRay = new Vec4(-1, 0, 0);
             upRay = new Vec4(0, 0, 1);
-        }
-        else if (this.selectedFace == 4)    // Back
+        } else if (this.selectedFace == 4) // Back
         {
             rightRay = new Vec4(-1, 0, 0);
             upRay = new Vec4(0, 1, 0);
         }
 
         Matrix inverseRenderMatrix = this.shape.computeRenderMatrixInverse(this.wwd.getModel().getGlobe(),
-            this.wwd.getSceneController().getVerticalExaggeration());
+                this.wwd.getSceneController().getVerticalExaggeration());
 
         // create rays from mouse position (current and previous)
         Line screenRay = this.wwd.getView().computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Line previousScreenRay = this.wwd.getView().computeRayFromScreenPoint(previousMousePoint.getX(),
-            previousMousePoint.getY());
+                previousMousePoint.getY());
 
         // get location of control point 0
         Position controlPosition = this.controlPoints.get(0).getCenterPosition();
@@ -866,7 +838,7 @@ public class PyramidEditor extends RigidShapeEditor
         // get change of position vector
         Vec4 changeVector = pointOnPlane.subtract3(previousPointOnPlane);
         Vec4 localChange = inverseRenderMatrix.transformBy3(inverseRenderMatrix, changeVector.getX(),
-            changeVector.getY(), changeVector.getZ());
+                changeVector.getY(), changeVector.getZ());
 
         // update offset for this uv corner of this piece
         float[] newOffset = {0.0f, 0.0f};
@@ -877,8 +849,7 @@ public class PyramidEditor extends RigidShapeEditor
 
         shape.setOffset(selectedFace, corner, newOffset[0], newOffset[1]);
         // set opposite control point as well
-        switch (corner)
-        {
+        switch (corner) {
             case 0:
                 corner = 3;
                 break;
@@ -901,43 +872,37 @@ public class PyramidEditor extends RigidShapeEditor
     }
 
     @Override
-    protected void scaleTexture(Point previousMousePoint, Point mousePoint, Direction side)
-    {
+    protected void scaleTexture(Point previousMousePoint, Point mousePoint, Direction side) {
 
         Vec4 rightRay = new Vec4(0, 0, 0);
         Vec4 upRay = new Vec4(0, 0, 0);
         int corner1 = 0;
         int corner2 = 0;
 
-        if (this.selectedFace == 0)         // Right
+        if (this.selectedFace == 0) // Right
         {
             rightRay = new Vec4(0, 1, 0);
             upRay = new Vec4(0, 0, 1);
-        }
-        else if (this.selectedFace == 1)    // Bottom
+        } else if (this.selectedFace == 1) // Bottom
         {
             rightRay = new Vec4(1, 0, 0);
             upRay = new Vec4(0, 0, 1);
-        }
-        else if (this.selectedFace == 2)    // Left
+        } else if (this.selectedFace == 2) // Left
         {
             rightRay = new Vec4(0, -1, 0);
             upRay = new Vec4(0, 0, 1);
-        }
-        else if (this.selectedFace == 3)    // Top
+        } else if (this.selectedFace == 3) // Top
         {
             rightRay = new Vec4(-1, 0, 0);
             upRay = new Vec4(0, 0, 1);
-        }
-        else if (this.selectedFace == 4)    // Back
+        } else if (this.selectedFace == 4) // Back
         {
             rightRay = new Vec4(-1, 0, 0);
             upRay = new Vec4(0, 1, 0);
         }
 
         // set the UV corners which will be scaled
-        switch (side)
-        {
+        switch (side) {
             case RIGHT:
                 corner1 = 1;
                 corner2 = 3;
@@ -956,12 +921,12 @@ public class PyramidEditor extends RigidShapeEditor
         }
 
         Matrix inverseRenderMatrix = this.shape.computeRenderMatrixInverse(this.wwd.getModel().getGlobe(),
-            this.wwd.getSceneController().getVerticalExaggeration());
+                this.wwd.getSceneController().getVerticalExaggeration());
 
         // create rays from mouse position (current and previous)
         Line screenRay = this.wwd.getView().computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Line previousScreenRay = this.wwd.getView().computeRayFromScreenPoint(previousMousePoint.getX(),
-            previousMousePoint.getY());
+                previousMousePoint.getY());
 
         // get location of control point 0
         Position controlPosition = this.controlPoints.get(0).getCenterPosition();
@@ -985,7 +950,7 @@ public class PyramidEditor extends RigidShapeEditor
         // get change of position vector
         Vec4 changeVector = pointOnPlane.subtract3(previousPointOnPlane);
         Vec4 localChange = inverseRenderMatrix.transformBy3(inverseRenderMatrix, changeVector.getX(),
-            changeVector.getY(), changeVector.getZ());
+                changeVector.getY(), changeVector.getZ());
 
         // update offsets for the uv corners adjacent to this control point
         float[] newOffset = {0.0f, 0.0f};
@@ -994,25 +959,19 @@ public class PyramidEditor extends RigidShapeEditor
         double upOffset = upRay.dot3(localChange);
 
         float[] prevOffset = shape.getOffsets(selectedFace, corner1);
-        if (side == Direction.RIGHT || side == Direction.LEFT)
-        {
+        if (side == Direction.RIGHT || side == Direction.LEFT) {
             newOffset[0] = (float) (prevOffset[0] + rightOffset);
             shape.setOffset(selectedFace, corner1, newOffset[0], prevOffset[1]);
-        }
-        else
-        {
+        } else {
             newOffset[1] = (float) (prevOffset[1] + upOffset);
             shape.setOffset(selectedFace, corner1, prevOffset[0], newOffset[1]);
         }
 
         prevOffset = shape.getOffsets(selectedFace, corner2);
-        if (side == Direction.RIGHT || side == Direction.LEFT)
-        {
+        if (side == Direction.RIGHT || side == Direction.LEFT) {
             newOffset[0] = (float) (prevOffset[0] + rightOffset);
             shape.setOffset(selectedFace, corner2, newOffset[0], prevOffset[1]);
-        }
-        else
-        {
+        } else {
             newOffset[1] = (float) (prevOffset[1] + upOffset);
             shape.setOffset(selectedFace, corner2, prevOffset[0], newOffset[1]);
         }

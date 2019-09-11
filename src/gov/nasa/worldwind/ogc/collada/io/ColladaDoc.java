@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.collada.io;
 
 import java.io.*;
@@ -14,8 +13,8 @@ import java.io.*;
  * @author pabercrombie
  * @version $Id: ColladaDoc.java 660 2012-06-26 16:13:11Z pabercrombie $
  */
-public interface ColladaDoc
-{
+public interface ColladaDoc {
+
     /**
      * Returns an {@link java.io.InputStream} to the associated COLLADA document.
      * <p>
@@ -35,7 +34,7 @@ public interface ColladaDoc
      * @return an absolute path or URL to the file, or null if the file does not exist.
      *
      * @throws IllegalArgumentException if the specified path is null.
-     * @throws java.io.IOException      if an error occurs while attempting to read the support file.
+     * @throws java.io.IOException if an error occurs while attempting to read the support file.
      */
     String getSupportFilePath(String path) throws IOException;
 }

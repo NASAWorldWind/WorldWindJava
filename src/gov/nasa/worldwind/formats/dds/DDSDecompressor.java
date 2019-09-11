@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.formats.dds;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -29,16 +28,15 @@ import java.util.ArrayList;
  * @author Lado Garakanidze
  * @version $Id: DDSDecompressor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
+public class DDSDecompressor {
 
-public class DDSDecompressor
-{
-    public DDSDecompressor()
-    {
+    public DDSDecompressor() {
 
     }
 
     /**
-     * Reconstructs image raster from a DDS source. The source type may be one of the following: <ul><li>{@link java.net.URL}</li> <li>{@link
+     * Reconstructs image raster from a DDS source. The source type may be one of the following:
+     * <ul><li>{@link java.net.URL}</li> <li>{@link
      * java.net.URI}</li> <li>{@link java.io.File}</li> <li>{@link String} containing a valid URL description, a valid
      * URI description, or a valid path to a local file.</li> </ul>
      *
@@ -47,37 +45,31 @@ public class DDSDecompressor
      * @return MipMappedBufferedImageRaster if the DDS source contains mipmaps, otherwise returns a BufferedImageRaster
      * @throws Exception when source or params is null
      */
-    public DataRaster decompress(Object source, AVList params) throws Exception
-    {
+    public DataRaster decompress(Object source, AVList params) throws Exception {
         return this.doDecompress(source, params);
     }
 
-    protected DataRaster doDecompress(Object source, AVList params) throws Exception
-    {
-        if (null == params || !params.hasKey(AVKey.SECTOR))
-        {
+    protected DataRaster doDecompress(Object source, AVList params) throws Exception {
+        if (null == params || !params.hasKey(AVKey.SECTOR)) {
             String message = Logging.getMessage("generic.MissingRequiredParameter", AVKey.SECTOR);
             Logging.logger().severe(message);
             throw new WWRuntimeException(message);
         }
 
         File file = WWIO.getFileForLocalAddress(source);
-        if (null == file)
-        {
+        if (null == file) {
             String message = Logging.getMessage("generic.UnrecognizedSourceType", source.getClass().getName());
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!file.exists())
-        {
+        if (!file.exists()) {
             String message = Logging.getMessage("generic.FileNotFound", file.getAbsolutePath());
             Logging.logger().severe(message);
             throw new FileNotFoundException(message);
         }
 
-        if (!file.canRead())
-        {
+        if (!file.canRead()) {
             String message = Logging.getMessage("generic.FileNoReadPermission", file.getAbsolutePath());
             Logging.logger().severe(message);
             throw new IOException(message);
@@ -87,8 +79,7 @@ public class DDSDecompressor
         FileChannel channel = null;
         DataRaster raster = null;
 
-        try
-        {
+        try {
             raf = new RandomAccessFile(file, "r");
             channel = raf.getChannel();
 
@@ -100,8 +91,7 @@ public class DDSDecompressor
             int width = header.getWidth();
             int height = header.getHeight();
 
-            if (!WWMath.isPowerOfTwo(width) || !WWMath.isPowerOfTwo(height))
-            {
+            if (!WWMath.isPowerOfTwo(width) || !WWMath.isPowerOfTwo(height)) {
                 String message = Logging.getMessage("generic.InvalidImageSize", width, height);
                 Logging.logger().severe(message);
                 throw new WWRuntimeException(message);
@@ -111,8 +101,7 @@ public class DDSDecompressor
 //            int ddsFlags = header.getFlags();
 
             DDSPixelFormat pixelFormat = header.getPixelFormat();
-            if (null == pixelFormat)
-            {
+            if (null == pixelFormat) {
                 String reason = Logging.getMessage("generic.MissingRequiredParameter", "DDSD_PIXELFORMAT");
                 String message = Logging.getMessage("generic.InvalidImageFormat", reason);
                 Logging.logger().severe(message);
@@ -122,17 +111,13 @@ public class DDSDecompressor
             DXTDecompressor decompressor = null;
 
             int dxtFormat = pixelFormat.getFourCC();
-            if (dxtFormat == DDSConstants.D3DFMT_DXT3)
-            {
+            if (dxtFormat == DDSConstants.D3DFMT_DXT3) {
                 decompressor = new DXT3Decompressor();
-            }
-            else if (dxtFormat == DDSConstants.D3DFMT_DXT1)
-            {
+            } else if (dxtFormat == DDSConstants.D3DFMT_DXT1) {
                 decompressor = new DXT1Decompressor();
             }
 
-            if (null == decompressor)
-            {
+            if (null == decompressor) {
                 String message = Logging.getMessage("generic.UnsupportedCodec", dxtFormat);
                 Logging.logger().severe(message);
                 throw new WWRuntimeException(message);
@@ -141,29 +126,24 @@ public class DDSDecompressor
             Sector sector = (Sector) params.getValue(AVKey.SECTOR);
             params.setValue(AVKey.PIXEL_FORMAT, AVKey.IMAGE);
 
-            if (mipMapCount == 0)
-            {
+            if (mipMapCount == 0) {
                 // read max resolution raster
                 buffer.position(DDSConstants.DDS_DATA_OFFSET);
                 BufferedImage image = decompressor.decompress(buffer, header.getWidth(), header.getHeight());
                 raster = new BufferedImageRaster(sector, image, params);
-            }
-            else if (mipMapCount > 0)
-            {
+            } else if (mipMapCount > 0) {
                 ArrayList<BufferedImage> list = new ArrayList<BufferedImage>();
 
                 int mmLength = header.getLinearSize();
                 int mmOffset = DDSConstants.DDS_DATA_OFFSET;
 
-                for (int i = 0; i < mipMapCount; i++)
-                {
+                for (int i = 0; i < mipMapCount; i++) {
                     int zoomOut = (int) Math.pow(2d, (double) i);
 
                     int mmWidth = header.getWidth() / zoomOut;
                     int mmHeight = header.getHeight() / zoomOut;
 
-                    if (mmWidth < 4 || mmHeight < 4)
-                    {
+                    if (mmWidth < 4 || mmHeight < 4) {
                         break;
                     }
 
@@ -182,26 +162,21 @@ public class DDSDecompressor
             }
 
             return raster;
-        }
-        finally
-        {
+        } finally {
             String name = (null != file) ? file.getAbsolutePath() : ((null != source) ? source.toString() : "unknown");
             WWIO.closeStream(channel, name);
             WWIO.closeStream(raf, name);
         }
     }
 
-    protected java.nio.MappedByteBuffer mapFile(FileChannel channel, long offset, long length) throws Exception
-    {
-        if (null == channel || !channel.isOpen())
-        {
+    protected java.nio.MappedByteBuffer mapFile(FileChannel channel, long offset, long length) throws Exception {
+        if (null == channel || !channel.isOpen()) {
             String message = Logging.getMessage("nullValue.ChannelIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (channel.size() < (offset + length))
-        {
+        if (channel.size() < (offset + length)) {
             String reason = channel.size() + " < " + (offset + length);
             String message = Logging.getMessage("generic.LengthIsInvalid", reason);
             Logging.logger().severe(message);

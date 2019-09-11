@@ -11,8 +11,8 @@ package gov.nasa.worldwind.formats.dds;
  * @author dcollins
  * @version $Id: Color32.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Color32 extends Color24
-{
+public class Color32 extends Color24 {
+
     /**
      * The alpha component.
      */
@@ -21,22 +21,18 @@ public class Color32 extends Color24
     /**
      * Creates a 32 bit 8888 ARGB color with all values set to 0.
      */
-    public Color32()
-    {
+    public Color32() {
         super();
         this.a = 0;
     }
 
-    public Color32(int a, int r, int g, int b)
-    {
+    public Color32(int a, int r, int g, int b) {
         super(r, g, b);
         this.a = a;
     }
 
-    public static Color32 multiplyAlpha(Color32 color)
-    {
-        if (null == color)
-        {
+    public static Color32 multiplyAlpha(Color32 color) {
+        if (null == color) {
             return null;
         }
 

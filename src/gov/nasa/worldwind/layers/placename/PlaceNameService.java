@@ -15,8 +15,8 @@ import java.awt.*;
  * @author Paul Collins
  * @version $Id: PlaceNameService.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class PlaceNameService
-{
+public class PlaceNameService {
+
     // Data retrieval and caching attributes.
     private final String service;
     private final String dataset;
@@ -36,26 +36,25 @@ public class PlaceNameService
     private static final int MAX_ABSENT_TILE_TRIES = 2;
     private static final int MIN_ABSENT_TILE_CHECK_INTERVAL = 10000;
     private final AbsentResourceList absentTiles = new AbsentResourceList(MAX_ABSENT_TILE_TRIES,
-        MIN_ABSENT_TILE_CHECK_INTERVAL);
+            MIN_ABSENT_TILE_CHECK_INTERVAL);
     private boolean addVersionTag = false;
     private Sector maskingSector = null;
 
     /**
      * PlaceNameService Constructor
      *
-     * @param service       server hostong placename data
-     * @param dataset       name of the dataset
+     * @param service server hostong placename data
+     * @param dataset name of the dataset
      * @param fileCachePath location of cache
-     * @param sector        sets the masking sector for this service.
-     * @param tileDelta     tile size
-     * @param font          font for rendering name
-     * @param versionTag    dictates if the wfs version tag is added to requests
+     * @param sector sets the masking sector for this service.
+     * @param tileDelta tile size
+     * @param font font for rendering name
+     * @param versionTag dictates if the wfs version tag is added to requests
      *
      * @throws IllegalArgumentException if any parameter is null
      */
     public PlaceNameService(String service, String dataset, String fileCachePath, Sector sector, LatLon tileDelta,
-        java.awt.Font font, boolean versionTag)
-    {
+            java.awt.Font font, boolean versionTag) {
         // Data retrieval and caching attributes.
         this.service = service;
         this.dataset = dataset;
@@ -72,8 +71,7 @@ public class PlaceNameService
         this.addVersionTag = versionTag;
 
         String message = this.validate();
-        if (message != null)
-        {
+        if (message != null) {
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -82,17 +80,15 @@ public class PlaceNameService
     }
 
     /**
-     * @param row    row
+     * @param row row
      * @param column column
      *
      * @return path of the tile in the cache
      *
      * @throws IllegalArgumentException if either <code>row</code> or <code>column</code> is less than zero
      */
-    public String createFileCachePathFromTile(int row, int column)
-    {
-        if (row < 0 || column < 0)
-        {
+    public String createFileCachePathFromTile(int row, int column) {
+        if (row < 0 || column < 0) {
             String message = Logging.getMessage("PlaceNameService.RowOrColumnOutOfRange", row, column);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -108,17 +104,15 @@ public class PlaceNameService
         return path.replaceAll("[:*?<>|]", "");
     }
 
-    private int numColumnsInLevel()
-    {
+    private int numColumnsInLevel() {
         int firstCol = Tile.computeColumn(this.tileDelta.getLongitude(), TILING_SECTOR.getMinLongitude(), Angle.NEG180);
         int lastCol = Tile.computeColumn(this.tileDelta.getLongitude(),
-            TILING_SECTOR.getMaxLongitude().subtract(this.tileDelta.getLongitude()), Angle.NEG180);
+                TILING_SECTOR.getMaxLongitude().subtract(this.tileDelta.getLongitude()), Angle.NEG180);
 
         return lastCol - firstCol + 1;
     }
 
-    public long getTileNumber(int row, int column)
-    {
+    public long getTileNumber(int row, int column) {
         return row * this.numColumns + column;
     }
 
@@ -128,26 +122,26 @@ public class PlaceNameService
      * @return wfs request url
      *
      * @throws java.net.MalformedURLException thrown if error creating the url
-     * @throws IllegalArgumentException       if {@link gov.nasa.worldwind.geom.Sector} is null
+     * @throws IllegalArgumentException if {@link gov.nasa.worldwind.geom.Sector} is null
      */
-    public java.net.URL createServiceURLFromSector(Sector sector) throws java.net.MalformedURLException
-    {
-        if (sector == null)
-        {
+    public java.net.URL createServiceURLFromSector(Sector sector) throws java.net.MalformedURLException {
+        if (sector == null) {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         StringBuilder sb = new StringBuilder(this.service);
-        if (sb.charAt(sb.length() - 1) != '?')
+        if (sb.charAt(sb.length() - 1) != '?') {
             sb.append('?');
+        }
 
-        if (addVersionTag)
+        if (addVersionTag) {
             sb.append("version=1.0.0&TypeName=").append(
-                dataset);   //version=1.0.0  is needed when querying a new wfs server
-        else
+                    dataset);   //version=1.0.0  is needed when querying a new wfs server
+        } else {
             sb.append("TypeName=").append(dataset);
+        }
 
         sb.append("&Request=GetFeature");
         sb.append("&Service=WFS");
@@ -160,10 +154,9 @@ public class PlaceNameService
         return new java.net.URL(sb.toString());
     }
 
-    public synchronized final PlaceNameService deepCopy()
-    {
+    public synchronized final PlaceNameService deepCopy() {
         PlaceNameService copy = new PlaceNameService(this.service, this.dataset, this.fileCachePath, maskingSector,
-            this.tileDelta, this.font, this.addVersionTag);
+                this.tileDelta, this.font, this.addVersionTag);
         copy.enabled = this.enabled;
         copy.color = this.color;
         copy.minDisplayDistance = this.minDisplayDistance;
@@ -172,55 +165,64 @@ public class PlaceNameService
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        if (o == null || this.getClass() != o.getClass())
+        }
+        if (o == null || this.getClass() != o.getClass()) {
             return false;
+        }
 
         final PlaceNameService other = (PlaceNameService) o;
 
-        if (this.service != null ? !this.service.equals(other.service) : other.service != null)
+        if (this.service != null ? !this.service.equals(other.service) : other.service != null) {
             return false;
-        if (this.dataset != null ? !this.dataset.equals(other.dataset) : other.dataset != null)
+        }
+        if (this.dataset != null ? !this.dataset.equals(other.dataset) : other.dataset != null) {
             return false;
-        if (this.fileCachePath != null ? !this.fileCachePath.equals(other.fileCachePath) : other.fileCachePath != null)
+        }
+        if (this.fileCachePath != null ? !this.fileCachePath.equals(other.fileCachePath) : other.fileCachePath != null) {
             return false;
-        if (this.maskingSector != null ? !this.maskingSector.equals(other.maskingSector) : other.maskingSector != null)
+        }
+        if (this.maskingSector != null ? !this.maskingSector.equals(other.maskingSector) : other.maskingSector != null) {
             return false;
-        if (this.tileDelta != null ? !this.tileDelta.equals(other.tileDelta) : other.tileDelta != null)
+        }
+        if (this.tileDelta != null ? !this.tileDelta.equals(other.tileDelta) : other.tileDelta != null) {
             return false;
-        if (this.font != null ? !this.font.equals(other.font) : other.font != null)
+        }
+        if (this.font != null ? !this.font.equals(other.font) : other.font != null) {
             return false;
-        if (this.color != null ? !this.color.equals(other.color) : other.color != null)
+        }
+        if (this.color != null ? !this.color.equals(other.color) : other.color != null) {
             return false;
+        }
         if (this.backgroundColor != null ? !this.backgroundColor.equals(other.backgroundColor)
-            : other.backgroundColor != null)
+                : other.backgroundColor != null) {
             return false;
-        if (this.minDisplayDistance != other.minDisplayDistance)
+        }
+        if (this.minDisplayDistance != other.minDisplayDistance) {
             return false;
+        }
         //noinspection RedundantIfStatement
-        if (this.maxDisplayDistance != other.maxDisplayDistance)
+        if (this.maxDisplayDistance != other.maxDisplayDistance) {
             return false;
+        }
 
         return true;
     }
 
-    public synchronized final java.awt.Color getColor()
-    {
+    public synchronized final java.awt.Color getColor() {
         return this.color;
     }
 
-    public synchronized final Color getBackgroundColor()
-    {
-        if (this.backgroundColor == null)
+    public synchronized final Color getBackgroundColor() {
+        if (this.backgroundColor == null) {
             this.backgroundColor = suggestBackgroundColor(this.color);
+        }
         return this.backgroundColor;
     }
 
-    private Color suggestBackgroundColor(Color foreground)
-    {
+    private Color suggestBackgroundColor(Color foreground) {
         float[] compArray = new float[4];
         Color.RGBtoHSB(foreground.getRed(), foreground.getGreen(), foreground.getBlue(), compArray);
         int colorValue = compArray[2] < 0.5f ? 255 : 0;
@@ -228,8 +230,7 @@ public class PlaceNameService
         return new Color(colorValue, colorValue, colorValue, alphaValue);
     }
 
-    public final String getDataset()
-    {
+    public final String getDataset() {
         return this.dataset;
     }
 
@@ -240,10 +241,8 @@ public class PlaceNameService
      *
      * @throws IllegalArgumentException if {@link gov.nasa.worldwind.render.DrawContext} is null
      */
-    public final Extent getExtent(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public final Extent getExtent(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -252,54 +251,44 @@ public class PlaceNameService
         return Sector.computeBoundingBox(dc.getGlobe(), dc.getVerticalExaggeration(), this.maskingSector);
     }
 
-    public final String getFileCachePath()
-    {
+    public final String getFileCachePath() {
         return this.fileCachePath;
     }
 
-    public final java.awt.Font getFont()
-    {
+    public final java.awt.Font getFont() {
         return this.font;
     }
 
-    public synchronized final double getMaxDisplayDistance()
-    {
+    public synchronized final double getMaxDisplayDistance() {
         return this.maxDisplayDistance;
     }
 
-    public synchronized final double getMinDisplayDistance()
-    {
+    public synchronized final double getMinDisplayDistance() {
         return this.minDisplayDistance;
     }
 
-    public final LatLon getTileDelta()
-    {
+    public final LatLon getTileDelta() {
         return tileDelta;
     }
 
-    public final Sector getMaskingSector()
-    {
+    public final Sector getMaskingSector() {
         return this.maskingSector;
     }
 
-    public final String getService()
-    {
+    public final String getService() {
         return this.service;
     }
 
-    public boolean isAddVersionTag()
-    {
+    public boolean isAddVersionTag() {
         return addVersionTag;
     }
 
-    public void setAddVersionTag(boolean addVersionTag)
-    {
+    public void setAddVersionTag(boolean addVersionTag) {
         this.addVersionTag = addVersionTag;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result;
         result = (service != null ? service.hashCode() : 0);
         result = 29 * result + (this.dataset != null ? this.dataset.hashCode() : 0);
@@ -313,8 +302,7 @@ public class PlaceNameService
         return result;
     }
 
-    public synchronized final boolean isEnabled()
-    {
+    public synchronized final boolean isEnabled() {
         return this.enabled;
     }
 
@@ -323,10 +311,8 @@ public class PlaceNameService
      *
      * @throws IllegalArgumentException if {@link java.awt.Color} is null
      */
-    public synchronized final void setColor(java.awt.Color color)
-    {
-        if (color == null)
-        {
+    public synchronized final void setColor(java.awt.Color color) {
+        if (color == null) {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -335,13 +321,11 @@ public class PlaceNameService
         this.color = color;
     }
 
-    public synchronized final void setBackgroundColor(java.awt.Color backgroundColor)
-    {
+    public synchronized final void setBackgroundColor(java.awt.Color backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
 
-    public synchronized final void setEnabled(boolean enabled)
-    {
+    public synchronized final void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -349,14 +333,12 @@ public class PlaceNameService
      * @param maxDisplayDistance maximum distance to display labels for this service
      *
      * @throws IllegalArgumentException if <code>maxDisplayDistance</code> is less than the current minimum display
-     *                                  distance
+     * distance
      */
-    public synchronized final void setMaxDisplayDistance(double maxDisplayDistance)
-    {
-        if (maxDisplayDistance < this.minDisplayDistance)
-        {
+    public synchronized final void setMaxDisplayDistance(double maxDisplayDistance) {
+        if (maxDisplayDistance < this.minDisplayDistance) {
             String message = Logging.getMessage("PlaceNameService.MaxDisplayDistanceLessThanMinDisplayDistance",
-                maxDisplayDistance, this.minDisplayDistance);
+                    maxDisplayDistance, this.minDisplayDistance);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -368,14 +350,12 @@ public class PlaceNameService
      * @param minDisplayDistance minimum distance to display labels for this service
      *
      * @throws IllegalArgumentException if <code>minDisplayDistance</code> is less than the current maximum display
-     *                                  distance
+     * distance
      */
-    public synchronized final void setMinDisplayDistance(double minDisplayDistance)
-    {
-        if (minDisplayDistance > this.maxDisplayDistance)
-        {
+    public synchronized final void setMinDisplayDistance(double minDisplayDistance) {
+        if (minDisplayDistance > this.maxDisplayDistance) {
             String message = Logging.getMessage("PlaceNameService.MinDisplayDistanceGrtrThanMaxDisplayDistance",
-                minDisplayDistance, this.maxDisplayDistance);
+                    minDisplayDistance, this.maxDisplayDistance);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -383,18 +363,15 @@ public class PlaceNameService
         this.minDisplayDistance = minDisplayDistance;
     }
 
-    public synchronized final void markResourceAbsent(long tileNumber)
-    {
+    public synchronized final void markResourceAbsent(long tileNumber) {
         this.absentTiles.markResourceAbsent(tileNumber);
     }
 
-    public synchronized final boolean isResourceAbsent(long resourceNumber)
-    {
+    public synchronized final boolean isResourceAbsent(long resourceNumber) {
         return this.absentTiles.isResourceAbsent(resourceNumber);
     }
 
-    public synchronized final void unmarkResourceAbsent(long tileNumber)
-    {
+    public synchronized final void unmarkResourceAbsent(long tileNumber) {
         this.absentTiles.unmarkResourceAbsent(tileNumber);
     }
 
@@ -403,36 +380,28 @@ public class PlaceNameService
      *
      * @return null if valid, otherwise a string message containing a description of why it is invalid.
      */
-    public final String validate()
-    {
+    public final String validate() {
         String msg = "";
-        if (this.service == null)
-        {
+        if (this.service == null) {
             msg += Logging.getMessage("nullValue.ServiceIsNull") + ", ";
         }
-        if (this.dataset == null)
-        {
+        if (this.dataset == null) {
             msg += Logging.getMessage("nullValue.DataSetIsNull") + ", ";
         }
-        if (this.fileCachePath == null)
-        {
+        if (this.fileCachePath == null) {
             msg += Logging.getMessage("nullValue.FileStorePathIsNull") + ", ";
         }
-        if (this.maskingSector == null)
-        {
+        if (this.maskingSector == null) {
             msg += Logging.getMessage("nullValue.SectorIsNull") + ", ";
         }
-        if (this.tileDelta == null)
-        {
+        if (this.tileDelta == null) {
             msg += Logging.getMessage("nullValue.TileDeltaIsNull") + ", ";
         }
-        if (this.font == null)
-        {
+        if (this.font == null) {
             msg += Logging.getMessage("nullValue.FontIsNull") + ", ";
         }
 
-        if (msg.length() == 0)
-        {
+        if (msg.length() == 0) {
             return null;
         }
 

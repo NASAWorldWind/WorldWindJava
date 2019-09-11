@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.tree;
 
 import com.jogamp.opengl.util.texture.*;
@@ -37,33 +36,57 @@ import java.util.List;
  * @author pabercrombie
  * @version $Id: ScrollFrame.java 2053 2014-06-10 20:16:57Z tgaskins $
  */
-public class ScrollFrame extends DragControl implements PreRenderable, Renderable
-{
-    /** Default dimension of tiles in the backing texture. */
+public class ScrollFrame extends DragControl implements PreRenderable, Renderable {
+
+    /**
+     * Default dimension of tiles in the backing texture.
+     */
     protected static final int DEFAULT_TEXTURE_TILE_DIMENSION = 512;
 
-    /** Default height of the frame title bar. */
+    /**
+     * Default height of the frame title bar.
+     */
     protected static final int DEFAULT_TITLE_BAR_HEIGHT = 25;
-    /** Default size of the minimize button. */
+    /**
+     * Default size of the minimize button.
+     */
     protected static final int DEFAULT_BUTTON_SIZE = 18;
-    /** Default width of the scroll bars. */
+    /**
+     * Default width of the scroll bars.
+     */
     protected static final int DEFAULT_SCROLL_BAR_SIZE = 15;
-    /** Default width of the frame border. */
+    /**
+     * Default width of the frame border.
+     */
     protected static final int DEFAULT_FRAME_BORDER_WIDTH = 3;
-    /** Default width of the pickable frame border. */
+    /**
+     * Default width of the pickable frame border.
+     */
     protected static final int DEFAULT_FRAME_BORDER_PICK_WIDTH = 10;
-    /** Default width of lines used to draw the frame. */
+    /**
+     * Default width of lines used to draw the frame.
+     */
     protected static final int DEFAULT_LINE_WIDTH = 1;
-    /** Default delay (in milliseconds) between frame when the frame is animating. */
+    /**
+     * Default delay (in milliseconds) between frame when the frame is animating.
+     */
     protected static final int DEFAULT_ANIMATION_DELAY = 5;
-    /** Default size of the maximized frame. */
+    /**
+     * Default size of the maximized frame.
+     */
     protected static final Size DEFAULT_MAXIMIZED_SIZE = Size.fromPixels(265, 300);
 
-    /** Attributes to use when the frame is not highlighted. */
+    /**
+     * Attributes to use when the frame is not highlighted.
+     */
     protected FrameAttributes normalAttributes;
-    /** Attributes to use when the frame is highlighted. */
+    /**
+     * Attributes to use when the frame is highlighted.
+     */
     protected FrameAttributes highlightAttributes;
-    /** Active attributes, either normal or highlight. */
+    /**
+     * Active attributes, either normal or highlight.
+     */
     protected FrameAttributes activeAttributes = new BasicFrameAttributes(); // re-determined each frame
 
     /**
@@ -72,76 +95,134 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      */
     protected String frameTitle;
 
-    /** The contents of the frame. */
+    /**
+     * The contents of the frame.
+     */
     protected Scrollable contents;
 
-    /** Indicates the location of the upper left corner of the frame. */
+    /**
+     * Indicates the location of the upper left corner of the frame.
+     */
     protected Offset screenLocation;
 
-    /** Indicates whether or not to draw a title bar in the frame. Default is true. */
+    /**
+     * Indicates whether or not to draw a title bar in the frame. Default is true.
+     */
     protected boolean drawTitleBar = true;
-    /** Indicates whether or not the user can resize the frame by dragging the edge. Default is true. */
+    /**
+     * Indicates whether or not the user can resize the frame by dragging the edge. Default is true.
+     */
     protected boolean enableResize = true;
-    /** Indicates whether or not the user can move the frame by dragging with the mouse. Default is true. */
+    /**
+     * Indicates whether or not the user can move the frame by dragging with the mouse. Default is true.
+     */
     protected boolean enableMove = true;
 
-    /** The height, in pixels, of the frame title bar. */
+    /**
+     * The height, in pixels, of the frame title bar.
+     */
     protected int titleBarHeight = DEFAULT_TITLE_BAR_HEIGHT;
-    /** The size, in pixels, of the frame's minimize button. */
+    /**
+     * The size, in pixels, of the frame's minimize button.
+     */
     protected int buttonSize = DEFAULT_BUTTON_SIZE;
-    /** The width of the frame scroll bar. */
+    /**
+     * The width of the frame scroll bar.
+     */
     protected int scrollBarSize = DEFAULT_SCROLL_BAR_SIZE;
-    /** The width of the frame border. */
+    /**
+     * The width of the frame border.
+     */
     protected int frameBorder = DEFAULT_FRAME_BORDER_WIDTH;
-    /** The width of lines used to draw the frame. */
+    /**
+     * The width of lines used to draw the frame.
+     */
     protected int frameLineWidth = DEFAULT_LINE_WIDTH;
 
-    /** Support for setting up and restoring OpenGL state during rendering. */
+    /**
+     * Support for setting up and restoring OpenGL state during rendering.
+     */
     protected OGLStackHandler BEogsh = new OGLStackHandler();
-    /** Support for setting up and restoring picking state, and resolving the picked object. */
+    /**
+     * Support for setting up and restoring picking state, and resolving the picked object.
+     */
     protected PickSupport pickSupport = new PickSupport();
 
-    /** Scroll bar to control vertical scrolling. */
+    /**
+     * Scroll bar to control vertical scrolling.
+     */
     protected ScrollBar verticalScrollBar;
-    /** Scroll bar to control horizontal scrolling. */
+    /**
+     * Scroll bar to control horizontal scrolling.
+     */
     protected ScrollBar horizontalScrollBar;
 
-    /** Indicates whether or not the frame is minimized. */
+    /**
+     * Indicates whether or not the frame is minimized.
+     */
     protected boolean minimized = false;
 
-    /** The size of the maximized frame. */
+    /**
+     * The size of the maximized frame.
+     */
     protected Size maximizedSize = DEFAULT_MAXIMIZED_SIZE;
-    /** The size of the minimized frame. */
+    /**
+     * The size of the minimized frame.
+     */
     protected Size minimizedSize;
-    /** The size of the active frame, minimized or maximized. */
+    /**
+     * The size of the active frame, minimized or maximized.
+     */
     protected Size activeSize;
-    /** The maximum size of the frame. This is a constraint applied to the frame's size. */
+    /**
+     * The maximum size of the frame. This is a constraint applied to the frame's size.
+     */
     protected Size maxSize;
 
-    /** Image source for the icon drawn in the upper left corner of the frame. */
+    /**
+     * Image source for the icon drawn in the upper left corner of the frame.
+     */
     protected Object iconImageSource;
-    /** Texture for the icon displayed in the frame title bar. Loaded from {@link #iconImageSource}. */
+    /**
+     * Texture for the icon displayed in the frame title bar. Loaded from {@link #iconImageSource}.
+     */
     protected BasicWWTexture texture;
 
-    /** An animation to play when the frame is minimized or maximized. */
+    /**
+     * An animation to play when the frame is minimized or maximized.
+     */
     protected Animation minimizeAnimation;
-    /** The active animation that is currently playing. */
+    /**
+     * The active animation that is currently playing.
+     */
     protected Animation animation;
-    /** Delay in milliseconds between frames of an animation. */
+    /**
+     * Delay in milliseconds between frames of an animation.
+     */
     protected int animationDelay = DEFAULT_ANIMATION_DELAY;
 
     // UI controls
-    /** HotSpot to handle user input on the minimize button. */
+    /**
+     * HotSpot to handle user input on the minimize button.
+     */
     protected HotSpot minimizeButton;
-    /** Control to handle resizing the frame. */
+    /**
+     * Control to handle resizing the frame.
+     */
     protected FrameResizeControl frameResizeControl;
-    /** Width of the pickable frame border. */
+    /**
+     * Width of the pickable frame border.
+     */
     protected int borderPickWidth = DEFAULT_FRAME_BORDER_PICK_WIDTH;
 
-    /** The frame geometry vertices passed to OpenGL. */
+    /**
+     * The frame geometry vertices passed to OpenGL.
+     */
     protected DoubleBuffer vertexBuffer;
 
-    /** Support class used to render to an offscreen texture. */
+    /**
+     * Support class used to render to an offscreen texture.
+     */
     protected OGLRenderToTextureSupport rttSupport = new OGLRenderToTextureSupport();
     protected List<ContentTile> tiles = new ArrayList<ContentTile>();
     /**
@@ -151,7 +232,9 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      */
     protected boolean renderToTexture;
 
-    /** Cache key used to locate the rendering texture in the DrawContext's texture cache. */
+    /**
+     * Cache key used to locate the rendering texture in the DrawContext's texture cache.
+     */
     protected final Object textureCacheKey = new Object();
 
     /**
@@ -159,9 +242,13 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * the content.
      */
     protected Map<ContentTile, TextureTile> textureTileMap = new HashMap<ContentTile, TextureTile>();
-    /** List to manage sub-tiles of the rendering texture. */
+    /**
+     * List to manage sub-tiles of the rendering texture.
+     */
     protected List<TextureTile> textureTiles = new ArrayList<TextureTile>();
-    /** Dimension of the texture used to render the scrollable content. Must be a power of two. */
+    /**
+     * Dimension of the texture used to render the scrollable content. Must be a power of two.
+     */
     protected int textureDimension;
     /**
      * Dimension of a sub-tile in the rendering texture. Also the dimension of logical tiles in the scrollable content
@@ -176,56 +263,82 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * title will be truncated. This title must be regenerated if the frame size or the title font change.
      */
     protected String shortTitle;
-    /** Width of the frame title area. */
+    /**
+     * Width of the frame title area.
+     */
     protected int frameTitleWidth;
-    /** Font used to generate {@link #shortTitle}. */
+    /**
+     * Font used to generate {@link #shortTitle}.
+     */
     protected Font shortFrameTitleFont;
-    /** Text bounds of the {@link #shortTitle}. */
+    /**
+     * Text bounds of the {@link #shortTitle}.
+     */
     protected Rectangle2D shortTitleBounds;
 
     // Computed each frame
     protected long frameNumber = -1;
-    /** Indicates that the frame must be regenerated because the size or attributes have changed. */
+    /**
+     * Indicates that the frame must be regenerated because the size or attributes have changed.
+     */
     protected boolean mustRecomputeFrameGeometry = true;
     /**
      * Indicates the location of the upper left corner of the frame, in AWT coordinates (origin at the upper left corner
      * of the screen.
      */
     protected Point2D awtScreenPoint;
-    /** Bounds of the full frame. */
+    /**
+     * Bounds of the full frame.
+     */
     protected Rectangle frameBounds;
-    /** Bounds of the frame inside the frame border. */
+    /**
+     * Bounds of the frame inside the frame border.
+     */
     protected Rectangle innerBounds;
-    /** Bounds of the content part of the frame. */
+    /**
+     * Bounds of the content part of the frame.
+     */
     protected Rectangle contentBounds;
     protected Rectangle scrollContentBounds;
-    /** Bounds of the pickable area. */
+    /**
+     * Bounds of the pickable area.
+     */
     protected Rectangle pickBounds;
     /**
      * Total size of the frame content. This size may exceed the size of the frame, in which case scroll bars will be
      * displayed.
      */
     protected Dimension contentSize;
-    /** Size of the frame. */
+    /**
+     * Size of the frame.
+     */
     protected Dimension frameSize;
-    /** Indicates whether or not the frame is highlighted. */
+    /**
+     * Indicates whether or not the frame is highlighted.
+     */
     protected boolean highlighted;
-    /** Indicates whether or not the vertical scroll bar must be drawn. */
+    /**
+     * Indicates whether or not the vertical scroll bar must be drawn.
+     */
     protected boolean showVerticalScrollbar;
-    /** Indicates whether or not the horizontal scroll bar must be drawn. */
+    /**
+     * Indicates whether or not the horizontal scroll bar must be drawn.
+     */
     protected boolean showHorizontalScrollbar;
 
-    /** The attributes used if attributes are not specified. */
+    /**
+     * The attributes used if attributes are not specified.
+     */
     protected static final FrameAttributes defaultAttributes;
 
-    static
-    {
+    static {
         defaultAttributes = new BasicFrameAttributes();
     }
 
-    /** Create a new scroll frame. */
-    public ScrollFrame()
-    {
+    /**
+     * Create a new scroll frame.
+     */
+    public ScrollFrame() {
         super(null);
         this.initializeUIControls();
     }
@@ -234,12 +347,11 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * Create a scroll frame with a position.
      *
      * @param x x coordinate of the upper left corner of the frame, in AWT screen coordinates (origin upper left corner
-     *          of the screen).
+     * of the screen).
      * @param y y coordinate of the upper left corner of the frame, in AWT screen coordinates (origin upper left corner
-     *          of the screen).
+     * of the screen).
      */
-    public ScrollFrame(int x, int y)
-    {
+    public ScrollFrame(int x, int y) {
         this(new Offset((double) x, (double) y, AVKey.PIXELS, AVKey.INSET_PIXELS));
     }
 
@@ -248,8 +360,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param screenLocation initial location of the upper left corner of the frame.
      */
-    public ScrollFrame(Offset screenLocation)
-    {
+    public ScrollFrame(Offset screenLocation) {
         super(null);
         this.setScreenLocation(screenLocation);
         this.initializeUIControls();
@@ -260,8 +371,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return the contents of the frame.
      */
-    public Scrollable getContents()
-    {
+    public Scrollable getContents() {
         return contents;
     }
 
@@ -270,8 +380,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param contents new frame contents.
      */
-    public void setContents(Scrollable contents)
-    {
+    public void setContents(Scrollable contents) {
         this.contents = contents;
     }
 
@@ -281,8 +390,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return {@code true} if the frame is minimized.
      */
-    public boolean isMinimized()
-    {
+    public boolean isMinimized() {
         return this.minimized;
     }
 
@@ -292,13 +400,10 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param minimized {@code true} if the frame must be minimized. {@code false} if the frame must not be minimized.
      */
-    public void setMinimized(boolean minimized)
-    {
-        if (minimized != this.isMinimized())
-        {
+    public void setMinimized(boolean minimized) {
+        if (minimized != this.isMinimized()) {
             this.minimized = minimized;
-            if (this.minimizeAnimation != null)
-            {
+            if (this.minimizeAnimation != null) {
                 this.animation = this.minimizeAnimation;
                 this.animation.reset();
             }
@@ -310,8 +415,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return {@code true} if the frame is highlighted, otherwise {@code false}.
      */
-    public boolean isHighlighted()
-    {
+    public boolean isHighlighted() {
         return this.highlighted;
     }
 
@@ -320,10 +424,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param highlighted {@code true} if the frame is now highlighted.
      */
-    public void setHighlighted(boolean highlighted)
-    {
-        if (this.highlighted != highlighted)
-        {
+    public void setHighlighted(boolean highlighted) {
+        if (this.highlighted != highlighted) {
             this.highlighted = highlighted;
 
             this.contents.setHighlighted(highlighted);
@@ -337,8 +439,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @see #setFrameTitle(String)
      */
-    public String getFrameTitle()
-    {
+    public String getFrameTitle() {
         return this.frameTitle;
     }
 
@@ -349,8 +450,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @see #getFrameTitle()
      */
-    public void setFrameTitle(String frameTitle)
-    {
+    public void setFrameTitle(String frameTitle) {
         this.frameTitle = frameTitle;
 
         // Invalidate the computed title for display. It will be regenerated the next time the frame is rendered.
@@ -364,8 +464,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @see #getMinimizedSize()
      */
-    public Size getSize()
-    {
+    public Size getSize() {
         return this.maximizedSize;
     }
 
@@ -376,10 +475,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @see #setMinimizedSize(gov.nasa.worldwind.render.Size)
      */
-    public void setSize(Size size)
-    {
-        if (size == null)
-        {
+    public void setSize(Size size) {
+        if (size == null) {
             String message = Logging.getMessage("nullValue.SizeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -388,18 +485,18 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         this.maximizedSize = size;
         this.mustRecomputeFrameGeometry = true;
 
-        if (!this.isAnimating())
+        if (!this.isAnimating()) {
             this.forceTileUpdate();
+        }
     }
 
     /**
      * Indicates the size of the minimized tree frame. This size is used when the tree is minimized or animating.
      *
      * @return the size of the minimized frame. {@code null} indicates that there is no minimized size, in which case
-     *         the normal maximized frame size is used in the minimized state.
+     * the normal maximized frame size is used in the minimized state.
      */
-    public Size getMinimizedSize()
-    {
+    public Size getMinimizedSize() {
         return this.minimizedSize;
     }
 
@@ -409,15 +506,15 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * the frame's normal maximized size.
      *
      * @param size the size of the minimized frame. Set {@code null} to use the same size in maximized and minimized
-     *             states.
+     * states.
      */
-    public void setMinimizedSize(Size size)
-    {
+    public void setMinimizedSize(Size size) {
         this.minimizedSize = size;
         this.mustRecomputeFrameGeometry = true;
 
-        if (!this.isAnimating())
+        if (!this.isAnimating()) {
             this.forceTileUpdate();
+        }
     }
 
     /**
@@ -426,8 +523,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return the maximum size of the frame. {@code null} indicates no maximum.
      */
-    public Size getMaxSize()
-    {
+    public Size getMaxSize() {
         return this.maxSize;
     }
 
@@ -437,13 +533,13 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param size the maximum size of the minimized frame. Set {@code null} for no maximum.
      */
-    public void setMaxSize(Size size)
-    {
+    public void setMaxSize(Size size) {
         this.maxSize = size;
         this.mustRecomputeFrameGeometry = true;
 
-        if (!this.isAnimating())
+        if (!this.isAnimating()) {
             this.forceTileUpdate();
+        }
     }
 
     /**
@@ -451,10 +547,9 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * window resize, or an animation.
      *
      * @return The size of the frame on screen, in pixels. This method will return null until the frame has been
-     *         rendered at least once.
+     * rendered at least once.
      */
-    public Dimension getCurrentSize()
-    {
+    public Dimension getCurrentSize() {
         return this.frameSize;
     }
 
@@ -465,8 +560,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @see #isDrawTitleBar()
      */
-    public int getTitleBarHeight()
-    {
+    public int getTitleBarHeight() {
         return this.titleBarHeight;
     }
 
@@ -475,10 +569,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param titleBarHeight new height, in pixels.
      */
-    public void setTitleBarHeight(int titleBarHeight)
-    {
-        if (titleBarHeight < 0)
-        {
+    public void setTitleBarHeight(int titleBarHeight) {
+        if (titleBarHeight < 0) {
             String message = Logging.getMessage("generic.InvalidHeight", titleBarHeight);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -492,8 +584,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return True if the frame will draw a title bar.
      */
-    public boolean isDrawTitleBar()
-    {
+    public boolean isDrawTitleBar() {
         return this.drawTitleBar;
     }
 
@@ -504,8 +595,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @see #setTitleBarHeight(int)
      */
-    public void setDrawTitleBar(boolean drawTitleBar)
-    {
+    public void setDrawTitleBar(boolean drawTitleBar) {
         this.drawTitleBar = drawTitleBar;
     }
 
@@ -514,8 +604,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return {@code true} if the user can resize the frame by dragging.
      */
-    public boolean isEnableResizeControl()
-    {
+    public boolean isEnableResizeControl() {
         return this.enableResize;
     }
 
@@ -524,8 +613,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param enable {@code true} to allow the user to resize the frame by dragging the border.
      */
-    public void setEnableResizeControl(boolean enable)
-    {
+    public void setEnableResizeControl(boolean enable) {
         this.enableResize = enable;
     }
 
@@ -534,8 +622,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return {@code true} if the user can allowed to move the frame by dragging the title bar.
      */
-    public boolean isEnableMove()
-    {
+    public boolean isEnableMove() {
         return this.enableMove;
     }
 
@@ -544,8 +631,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param enable {@code true} if the user is allowed to move the frame by dragging.
      */
-    public void setEnableMove(boolean enable)
-    {
+    public void setEnableMove(boolean enable) {
         this.enableMove = enable;
     }
 
@@ -556,8 +642,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @see #setMinimizeAnimation(Animation)
      */
-    public Animation getMinimizeAnimation()
-    {
+    public Animation getMinimizeAnimation() {
         return minimizeAnimation;
     }
 
@@ -568,8 +653,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @see #getMinimizeAnimation()
      */
-    public void setMinimizeAnimation(Animation minimizeAnimation)
-    {
+    public void setMinimizeAnimation(Animation minimizeAnimation) {
         this.minimizeAnimation = minimizeAnimation;
     }
 
@@ -580,8 +664,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @see #setIconImageSource(Object)
      */
-    public Object getIconImageSource()
-    {
+    public Object getIconImageSource() {
         return this.iconImageSource;
     }
 
@@ -590,8 +673,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param imageSource New image source. May be a String, URL, or BufferedImage.
      */
-    public void setIconImageSource(Object imageSource)
-    {
+    public void setIconImageSource(Object imageSource) {
         this.iconImageSource = imageSource;
     }
 
@@ -602,12 +684,11 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return The bounds of the tree frame on screen, in screen coordinates (origin at upper left).
      */
-    public Rectangle getBounds(DrawContext dc)
-    {
+    public Rectangle getBounds(DrawContext dc) {
         this.updateBounds(dc);
 
         return new Rectangle((int) this.awtScreenPoint.getX(), (int) this.awtScreenPoint.getY(), this.frameSize.width,
-            this.frameSize.height);
+                this.frameSize.height);
     }
 
     /**
@@ -616,8 +697,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return Screen location, measured in pixels from the upper left corner of the screen.
      */
-    public Offset getScreenLocation()
-    {
+    public Offset getScreenLocation() {
         return this.screenLocation;
     }
 
@@ -627,8 +707,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param screenLocation New screen location.
      */
-    public void setScreenLocation(Offset screenLocation)
-    {
+    public void setScreenLocation(Offset screenLocation) {
         this.screenLocation = screenLocation;
     }
 
@@ -636,10 +715,9 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * Get the location of the upper left corner of the frame, measured from the upper left corner of the screen.
      *
      * @return The location of the upper left corner of the frame. This method will return null until the has been
-     *         rendered.
+     * rendered.
      */
-    protected Point2D getScreenPoint()
-    {
+    protected Point2D getScreenPoint() {
         return this.awtScreenPoint;
     }
 
@@ -648,8 +726,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return normal frame attributes.
      */
-    public FrameAttributes getAttributes()
-    {
+    public FrameAttributes getAttributes() {
         return this.normalAttributes;
     }
 
@@ -658,10 +735,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param attributes new attributes bundle for normal state.
      */
-    public void setAttributes(FrameAttributes attributes)
-    {
-        if (attributes == null)
-        {
+    public void setAttributes(FrameAttributes attributes) {
+        if (attributes == null) {
             String msg = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -675,8 +750,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return highlight frame attributes.
      */
-    public FrameAttributes getHighlightAttributes()
-    {
+    public FrameAttributes getHighlightAttributes() {
         return this.highlightAttributes;
     }
 
@@ -685,10 +759,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param attributes new attributes bundle for highlight state.
      */
-    public void setHighlightAttributes(FrameAttributes attributes)
-    {
-        if (attributes == null)
-        {
+    public void setHighlightAttributes(FrameAttributes attributes) {
+        if (attributes == null) {
             String msg = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -700,21 +772,17 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     //**************************************************************//
     //********************  Tile Updating  *************************//
     //**************************************************************//
-
     /**
      * Build the list of ContentTile that represents the logical tiles in the frame contents.
      *
-     * @param rows    Number of rows of tiles in the contents.
+     * @param rows Number of rows of tiles in the contents.
      * @param columns Number of columns of tiles.
      */
-    protected void assembleTiles(int rows, int columns)
-    {
+    protected void assembleTiles(int rows, int columns) {
         this.tiles.clear();
 
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < columns; j++)
-            {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
                 ContentTile newTile = new ContentTile(i, j);
                 this.tiles.add(newTile);
             }
@@ -728,25 +796,27 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return {@code true} if any of the tiles need to be updated.
      */
-    protected boolean mustUpdateTiles(DrawContext dc)
-    {
+    protected boolean mustUpdateTiles(DrawContext dc) {
         // Tiles are not visible if the frame is minimized, so no reason to update
-        if (this.isMinimized())
+        if (this.isMinimized()) {
             return false;
+        }
 
         // Make sure that our texture is available. If the texture has been evicted it will need to be regenerated.
-        if (dc.getTextureCache().getTexture(this.textureCacheKey) == null)
+        if (dc.getTextureCache().getTexture(this.textureCacheKey) == null) {
             return true;
+        }
 
-        if (tiles.isEmpty())
+        if (tiles.isEmpty()) {
             return true;
+        }
 
         long contentUpdateTime = this.contents.getUpdateTime();
 
-        for (ContentTile tile : this.tiles)
-        {
-            if (this.mustUpdateTile(tile, contentUpdateTime))
+        for (ContentTile tile : this.tiles) {
+            if (this.mustUpdateTile(tile, contentUpdateTime)) {
                 return true;
+            }
         }
         return false;
     }
@@ -754,23 +824,23 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     /**
      * Determine if a tile in the content layout needs to be updated.
      *
-     * @param tile              Tile to test.
+     * @param tile Tile to test.
      * @param contentUpdateTime Time at which the content was last updated.
      *
      * @return {@code true} if the tile needs to be updated. Always returns {@code false} if the tile is not visible in
-     *         the current frame bounds.
+     * the current frame bounds.
      */
-    protected boolean mustUpdateTile(ContentTile tile, long contentUpdateTime)
-    {
+    protected boolean mustUpdateTile(ContentTile tile, long contentUpdateTime) {
         Rectangle tileBounds = this.getContentTileBounds(tile.row, tile.column);
-        if (this.contentBounds.intersects(tileBounds))
-        {
-            if (tile.updateTime != contentUpdateTime)
+        if (this.contentBounds.intersects(tileBounds)) {
+            if (tile.updateTime != contentUpdateTime) {
                 return true;
+            }
 
             TextureTile textureTile = this.getTextureTile(tile);
-            if (textureTile == null)
+            if (textureTile == null) {
                 return true;
+            }
         }
 
         return false;
@@ -781,8 +851,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Current draw context.
      */
-    protected void updateTiles(DrawContext dc)
-    {
+    protected void updateTiles(DrawContext dc) {
         // The OpenGL framebuffer object extension used by RenderToTextureSupport works only for texture formats
         // GL_RGB and GL_RGBA.
         this.rttSupport.setEnableFramebufferObject(true);
@@ -797,14 +866,12 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         this.renderToTexture = (dim <= maxTexture);
 
         // If the frame is too big to render into a texture don't bother building tiles
-        if (!this.renderToTexture)
-        {
+        if (!this.renderToTexture) {
             return;
         }
 
         // If we don't have a texture, or if we need a different size of texture, allocate a new one
-        if (texture == null || this.textureDimension != dim)
-        {
+        if (texture == null || this.textureDimension != dim) {
             texture = this.createTileTexture(dc, dim, dim);
             dc.getTextureCache().put(this.textureCacheKey, texture);
             this.textureDimension = dim;
@@ -814,10 +881,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
             // Create entries for the sub-tiles in the texture. Each sub-tile will be used to render a piece of the
             // frame contents.
             this.textureTiles.clear();
-            for (int i = 0; i < numTiles; i++)
-            {
-                for (int j = 0; j < numTiles; j++)
-                {
+            for (int i = 0; i < numTiles; i++) {
+                for (int j = 0; j < numTiles; j++) {
                     this.textureTiles.add(new TextureTile(i, j));
                 }
             }
@@ -834,21 +899,17 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
         int rows = (int) Math.ceil((double) this.contentSize.height / this.textureTileDimension);
         int columns = (int) Math.ceil((double) this.contentSize.width / this.textureTileDimension);
-        if (tiles.size() != rows * columns)
-        {
+        if (tiles.size() != rows * columns) {
             this.assembleTiles(rows, columns);
         }
 
         long contentUpdateTime = this.contents.getUpdateTime();
 
         // Update each tile that needs updating
-        for (ContentTile tile : this.tiles)
-        {
-            if (this.mustUpdateTile(tile, contentUpdateTime))
-            {
+        for (ContentTile tile : this.tiles) {
+            if (this.mustUpdateTile(tile, contentUpdateTime)) {
                 TextureTile textureTile = this.getTextureTile(tile);
-                if (textureTile == null)
-                {
+                if (textureTile == null) {
                     textureTile = this.allocateTextureTile(tile);
                 }
 
@@ -858,15 +919,12 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
                 Rectangle tileBounds = new Rectangle(x, y, this.textureTileDimension, this.textureTileDimension);
 
                 this.rttSupport.beginRendering(dc, tileBounds.x, tileBounds.y, tileBounds.width, tileBounds.height);
-                try
-                {
+                try {
                     this.updateTile(dc, tile, tileBounds);
 
                     tile.updateTime = contentUpdateTime;
                     textureTile.lastUsed = dc.getFrameTimeStamp();
-                }
-                finally
-                {
+                } finally {
                     this.rttSupport.endRendering(dc);
                 }
             }
@@ -880,11 +938,9 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return TextureTile allocated for the given ContentTile, or {@code null} if no TextureTile has been allocated.
      */
-    protected TextureTile getTextureTile(ContentTile tile)
-    {
+    protected TextureTile getTextureTile(ContentTile tile) {
         TextureTile textureTile = this.textureTileMap.get(tile);
-        if (textureTile != null && textureTile.currentTile.equals(tile))
-        {
+        if (textureTile != null && textureTile.currentTile.equals(tile)) {
             return textureTile;
         }
 
@@ -899,8 +955,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return TextureTile allocated for the ScrollableTile.
      */
-    protected TextureTile allocateTextureTile(ContentTile tile)
-    {
+    protected TextureTile allocateTextureTile(ContentTile tile) {
         // Sort the list of texture tiles so that we can find the one that is the least recently used.
         TextureTile[] timeOrderedEntries = new TextureTile[this.textureTiles.size()];
         Arrays.sort(this.textureTiles.toArray(timeOrderedEntries));
@@ -917,37 +972,33 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     /**
      * Draws the current list of ScrollableTiles into the texture tiles. The tiles are updated when necessary.
      *
-     * @param dc         the draw context the tile relates to.
-     * @param tile       the tile to update. A new texture tile will be allocated for the tile, if the tile does not
-     *                   have a texture.
+     * @param dc the draw context the tile relates to.
+     * @param tile the tile to update. A new texture tile will be allocated for the tile, if the tile does not have a
+     * texture.
      * @param tileBounds bounds of the tile being updated, within the larger texture.
      */
-    protected void updateTile(DrawContext dc, ContentTile tile, Rectangle tileBounds)
-    {
+    protected void updateTile(DrawContext dc, ContentTile tile, Rectangle tileBounds) {
         int x = tileBounds.x - tile.column * this.textureTileDimension;
         int y = tileBounds.y - this.contentSize.height + this.textureTileDimension * (tile.row + 1);
         Rectangle scrollBounds = new Rectangle(x, y, this.contentBounds.width, this.textureTileDimension);
 
-        try
-        {
+        try {
             Texture texture = dc.getTextureCache().getTexture(this.textureCacheKey);
 
             this.rttSupport.setColorTarget(dc, texture);
             this.rttSupport.clear(dc, new Color(0, 0, 0, 0)); // Set all texture pixels to transparent black.
 
             this.contents.renderScrollable(dc, scrollBounds.getLocation(), scrollBounds.getSize(), tileBounds);
-        }
-        finally
-        {
+        } finally {
             this.rttSupport.setColorTarget(dc, null);
         }
     }
 
-    /** Force all tiles to update on the next frame. */
-    protected void forceTileUpdate()
-    {
-        for (ContentTile tile : tiles)
-        {
+    /**
+     * Force all tiles to update on the next frame.
+     */
+    protected void forceTileUpdate() {
+        for (ContentTile tile : tiles) {
             tile.updateTime = -1;
         }
     }
@@ -958,25 +1009,24 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * The returned texture's internal format is RGBA8.
      *
      * @param dc The draw context.
-     * @param width  the texture's width, in pixels.
+     * @param width the texture's width, in pixels.
      * @param height the texture's height, in pixels.
      *
      * @return a new texture with the specified width and height.
      */
-    protected Texture createTileTexture(DrawContext dc, int width, int height)
-    {
+    protected Texture createTileTexture(DrawContext dc, int width, int height) {
         GL gl = dc.getGL();
 
         TextureData td = new TextureData(
-            gl.getGLProfile(),    // GL profile
-            GL.GL_RGBA8,          // internal format
-            width, height,        // dimension
-            0,                    // border
-            GL.GL_RGBA,           // pixel format
-            GL.GL_UNSIGNED_BYTE,  // pixel type
-            false,                // mipmap
-            false, false,         // dataIsCompressed, mustFlipVertically
-            null, null)           // buffer, flusher
+                gl.getGLProfile(), // GL profile
+                GL.GL_RGBA8, // internal format
+                width, height, // dimension
+                0, // border
+                GL.GL_RGBA, // pixel format
+                GL.GL_UNSIGNED_BYTE, // pixel type
+                false, // mipmap
+                false, false, // dataIsCompressed, mustFlipVertically
+                null, null) // buffer, flusher
         {
             /**
              * Overridden to return a non-zero size. TextureData does not compute an estimated memory size if the buffer
@@ -984,12 +1034,12 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
              * texture with the common pixel formats.
              */
             @Override
-            public int getEstimatedMemorySize()
-            {
+            public int getEstimatedMemorySize() {
                 int sizeInBytes = OGLUtil.estimateTextureMemorySize(this.getInternalFormat(), this.getWidth(),
-                    this.getHeight(), this.getMipmap());
-                if (sizeInBytes > 0)
+                        this.getHeight(), this.getMipmap());
+                if (sizeInBytes > 0) {
                     return sizeInBytes;
+                }
 
                 return super.getEstimatedMemorySize();
             }
@@ -1004,14 +1054,13 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     /**
      * Compute the dimension of a texture large enough to represent the amount of the contents visible in the frame.
      *
-     * @param frameSize   Size of the frame content area.
+     * @param frameSize Size of the frame content area.
      * @param contentSize Size of the frame content.
      *
      * @return Dimension of a texture large enough to render the full frame content area. This method always returns a
-     *         power of two dimension.
+     * power of two dimension.
      */
-    protected int computeTileTextureDimension(Dimension frameSize, Dimension contentSize)
-    {
+    protected int computeTileTextureDimension(Dimension frameSize, Dimension contentSize) {
         int width = Math.min(frameSize.width, contentSize.width);
         int height = Math.min(frameSize.height, contentSize.height);
 
@@ -1020,12 +1069,14 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         return WWMath.powerOfTwoCeiling((int) Math.sqrt(area) + this.textureTileDimension);
     }
 
-    /** {@inheritDoc} */
-    public void preRender(DrawContext dc)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void preRender(DrawContext dc) {
         Offset screenLocation = this.getScreenLocation();
-        if (screenLocation == null)
+        if (screenLocation == null) {
             return;
+        }
 
         this.stepAnimation(dc);
 
@@ -1033,82 +1084,72 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
         // Highlight the frame if the pick point is within the frame's pickable bounds.
         Point pickPoint = dc.getPickPoint();
-        if (pickPoint != null)
-        {
+        if (pickPoint != null) {
             int glY = dc.getView().getViewport().height - pickPoint.y;
             this.setHighlighted(this.pickBounds.contains(new Point(pickPoint.x, glY)));
         }
 
         this.determineActiveAttributes();
 
-        if (this.intersectsFrustum(dc) && this.mustUpdateTiles(dc))
-        {
-            try
-            {
+        if (this.intersectsFrustum(dc) && this.mustUpdateTiles(dc)) {
+            try {
                 this.beginDrawing(dc);
                 this.updateTiles(dc);
-            }
-            finally
-            {
+            } finally {
                 this.endDrawing(dc);
             }
         }
     }
 
-    /** {@inheritDoc} */
-    public void render(DrawContext dc)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void render(DrawContext dc) {
         Offset screenLocation = this.getScreenLocation();
-        if (screenLocation == null || this.frameBounds == null)
+        if (screenLocation == null || this.frameBounds == null) {
             return;
+        }
 
-        if (this.mustRecomputeFrameGeometry)
-        {
+        if (this.mustRecomputeFrameGeometry) {
             this.computeFrameGeometry();
             this.mustRecomputeFrameGeometry = false;
         }
 
-        if (this.intersectsFrustum(dc))
-        {
-            try
-            {
+        if (this.intersectsFrustum(dc)) {
+            try {
                 this.beginDrawing(dc);
 
                 // While the tree is animated toward a minimized state, draw it as if it were maximized,
                 // with the contents and scroll bars
-                if (this.isDrawMinimized())
+                if (this.isDrawMinimized()) {
                     this.drawMinimized(dc);
-                else
+                } else {
                     this.drawMaximized(dc);
-            }
-            finally
-            {
+                }
+            } finally {
                 this.endDrawing(dc);
             }
         }
     }
 
-    /** Initialize controls to resizing the frame, minimizing the frame, etc. */
-    protected void initializeUIControls()
-    {
+    /**
+     * Initialize controls to resizing the frame, minimizing the frame, etc.
+     */
+    protected void initializeUIControls() {
         this.minimizeAnimation = new WindowShadeAnimation(this);
         this.frameResizeControl = new FrameResizeControl(this);
 
-        this.minimizeButton = new TreeHotSpot(this)
-        {
+        this.minimizeButton = new TreeHotSpot(this) {
             @Override
-            public void selected(SelectEvent event)
-            {
-                if (event == null || this.isConsumed(event))
+            public void selected(SelectEvent event) {
+                if (event == null || this.isConsumed(event)) {
                     return;
+                }
 
-                if (event.isLeftClick())
-                {
+                if (event.isLeftClick()) {
                     ScrollFrame.this.setMinimized(!ScrollFrame.this.isMinimized());
                     event.consume();
-                }
-                else
-                {
+                } else {
                     super.selected(event);
                 }
             }
@@ -1125,12 +1166,12 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return {@code true} If the frame intersects the frustum, otherwise {@code false}.
      */
-    protected boolean intersectsFrustum(DrawContext dc)
-    {
-        if (dc.isPickingMode())
+    protected boolean intersectsFrustum(DrawContext dc) {
+        if (dc.isPickingMode()) {
             return dc.getPickFrustums().intersectsAny(this.pickBounds);
-        else
+        } else {
             return dc.getView().getViewport().intersects(this.frameBounds);
+        }
     }
 
     /**
@@ -1139,29 +1180,27 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Current draw context.
      */
-    protected void stepAnimation(DrawContext dc)
-    {
-        if (this.isAnimating())
-        {
+    protected void stepAnimation(DrawContext dc) {
+        if (this.isAnimating()) {
             this.animation.step();
 
-            if (this.animation.hasNext())
+            if (this.animation.hasNext()) {
                 dc.setRedrawRequested(this.animationDelay);
-            else
+            } else {
                 this.animation = null;
+            }
         }
     }
 
     /**
      * Get the bounds of a tile in the frame content.
      *
-     * @param row    Row of the tile to get the bounds of.
+     * @param row Row of the tile to get the bounds of.
      * @param column Column of the tile to get the bounds of.
      *
      * @return Bounds of the desired tile, relative to the lower left corner of {#link contentBounds}.
      */
-    protected Rectangle getContentTileBounds(int row, int column)
-    {
+    protected Rectangle getContentTileBounds(int row, int column) {
         int xScroll = this.horizontalScrollBar.getValue();
         int yScroll = this.verticalScrollBar.getValue();
 
@@ -1178,10 +1217,10 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Current draw context.
      */
-    public void updateBounds(DrawContext dc)
-    {
-        if (dc.getFrameTimeStamp() == this.frameNumber)
+    public void updateBounds(DrawContext dc) {
+        if (dc.getFrameTimeStamp() == this.frameNumber) {
             return;
+        }
 
         this.determineSize();
 
@@ -1193,34 +1232,31 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         Size size = this.getActiveSize();
 
         // If the frame size is relative to the content size, compute the content size and then set the frame size.
-        if (this.isRelativeSize(size))
-        {
+        if (this.isRelativeSize(size)) {
             // Pass null for the frame bounds because the frame size depends on the content size.
             contentSize = this.contents.getSize(dc, null);
             Dimension frameSizeForContentSize = this.computeFrameRectForContentRect(contentSize);
 
             this.frameSize = size.compute(frameSizeForContentSize.width, frameSizeForContentSize.height,
-                viewport.width, viewport.height);
-        }
-        else
-        {
+                    viewport.width, viewport.height);
+        } else {
             // Otherwise just compute the frame size. The content size will be computed after the frame size has been
             // determined.
             this.frameSize = size.compute(0, 0, viewport.width, viewport.height);
         }
 
         // Apply the maximum size constraint
-        if (this.getMaxSize() != null)
-        {
+        if (this.getMaxSize() != null) {
             Dimension max = this.getMaxSize().compute(this.frameSize.width, this.frameSize.height, viewport.width,
-                viewport.height);
+                    viewport.height);
             this.frameSize.width = Math.min(this.frameSize.width, max.width);
             this.frameSize.height = Math.min(this.frameSize.height, max.height);
         }
 
         // If the frame size has changed, the frame geometry must be regenerated
-        if (!this.frameSize.equals(previousFrameSize))
+        if (!this.frameSize.equals(previousFrameSize)) {
             this.mustRecomputeFrameGeometry = true;
+        }
 
         // Compute point in OpenGL coordinates
         Point2D upperLeft = this.screenLocation.computeOffset(viewport.width, viewport.height, 1.0, 1.0);
@@ -1228,24 +1264,23 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         this.awtScreenPoint = new Point((int) upperLeft.getX(), (int) (viewport.height - upperLeft.getY()));
 
         this.frameBounds = new Rectangle((int) upperLeft.getX(), (int) upperLeft.getY() - this.frameSize.height,
-            this.frameSize.width, this.frameSize.height);
+                this.frameSize.width, this.frameSize.height);
 
         // Compute the pickable screen extent as the frame extent, plus the width of the frame's pickable outline.
         // This extent is used during picking to ensure that the frame's outline is pickable when it exceeds the
         // frame's screen extent.
         this.pickBounds = new Rectangle(
-            this.frameBounds.x - this.borderPickWidth / 2,
-            this.frameBounds.y - this.borderPickWidth / 2,
-            this.frameBounds.width + this.borderPickWidth,
-            this.frameBounds.height + this.borderPickWidth);
+                this.frameBounds.x - this.borderPickWidth / 2,
+                this.frameBounds.y - this.borderPickWidth / 2,
+                this.frameBounds.width + this.borderPickWidth,
+                this.frameBounds.height + this.borderPickWidth);
 
         this.innerBounds = new Rectangle((int) upperLeft.getX() + this.frameBorder,
-            (int) upperLeft.getY() - frameSize.height + this.frameBorder, frameSize.width - this.frameBorder * 2,
-            frameSize.height - this.frameBorder * 2);
+                (int) upperLeft.getY() - frameSize.height + this.frameBorder, frameSize.width - this.frameBorder * 2,
+                frameSize.height - this.frameBorder * 2);
 
         // If the content size has yet not been computed, compute it now.
-        if (contentSize == null)
-        {
+        if (contentSize == null) {
             // Compute the bounds as if both scroll bars are visible. This saves us from having to compute the size
             // multiple times if scroll bars are required. If scroll bars are not required it may leave a little bit of
             // extra padding on the edges of the frame.
@@ -1254,7 +1289,6 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
         // Computing the bounds of the content area of the frame requires computing the bounds with no scroll bars,
         // and determining if scroll bars are required given the size of the scrollable content.
-
         // Try laying out the frame without scroll bars
         this.contentBounds = this.computeBounds(false, false);
 
@@ -1262,8 +1296,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         boolean showVerticalScrollbar = this.mustShowVerticalScrollbar(contentSize);
 
         // If we need a vertical scroll bar, recompute the bounds because the scrollbar consumes horizontal space
-        if (showVerticalScrollbar)
-        {
+        if (showVerticalScrollbar) {
             this.contentBounds = this.computeBounds(true, false);
         }
 
@@ -1272,8 +1305,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
         // If we need a horizontal scroll bar, recompute the bounds because the horizontal scroll bar consumes vertical
         // space and a vertical scroll bar may now be required
-        if (showHorizontalScrollbar && !showVerticalScrollbar)
-        {
+        if (showHorizontalScrollbar && !showVerticalScrollbar) {
             this.contentBounds = this.computeBounds(showVerticalScrollbar, showHorizontalScrollbar);
 
             // Determine if we now need a vertical scroll bar
@@ -1286,10 +1318,12 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         // If the scroll bars were visible and are now hidden, reset the scroll position to zero. Otherwise, the
         // scroll bar will already be scrolled to a certain position when it reappears, which is probably not what
         // the user expects.
-        if (this.showVerticalScrollbar && !showVerticalScrollbar)
+        if (this.showVerticalScrollbar && !showVerticalScrollbar) {
             this.verticalScrollBar.setValue(0);
-        if (this.showHorizontalScrollbar && !showHorizontalScrollbar)
+        }
+        if (this.showHorizontalScrollbar && !showHorizontalScrollbar) {
             this.horizontalScrollBar.setValue(0);
+        }
 
         this.showVerticalScrollbar = showVerticalScrollbar;
         this.showHorizontalScrollbar = showHorizontalScrollbar;
@@ -1320,11 +1354,10 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return Frame size required to display the content without scrollbars.
      */
-    protected Dimension computeFrameRectForContentRect(Dimension contentSize)
-    {
+    protected Dimension computeFrameRectForContentRect(Dimension contentSize) {
         int frameWidth = contentSize.width + this.frameBorder * 2 + 4 * this.frameLineWidth + this.scrollBarSize;
         int frameHeight = contentSize.height + this.frameBorder * 2 + this.getTitleBarHeight()
-            + 2 * this.frameLineWidth;
+                + 2 * this.frameLineWidth;
 
         return new Dimension(frameWidth, frameHeight);
     }
@@ -1339,15 +1372,14 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      */
     // TODO try to eliminate this dependence on size modes. This would break if an app subclassed Size and implemented
     // TODO different modes.
-    protected boolean isRelativeSize(Size size)
-    {
+    protected boolean isRelativeSize(Size size) {
         String heightMode = size.getHeightMode();
         String widthMode = size.getWidthMode();
 
         return Size.NATIVE_DIMENSION.equals(heightMode)
-            || Size.MAINTAIN_ASPECT_RATIO.equals(heightMode)
-            || Size.NATIVE_DIMENSION.equals(widthMode)
-            || Size.MAINTAIN_ASPECT_RATIO.equals(widthMode);
+                || Size.MAINTAIN_ASPECT_RATIO.equals(heightMode)
+                || Size.NATIVE_DIMENSION.equals(widthMode)
+                || Size.MAINTAIN_ASPECT_RATIO.equals(widthMode);
     }
 
     /**
@@ -1357,16 +1389,12 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return {@code true} if the vertical scrollbar should be displayed, otherwise {@code false}.
      */
-    protected boolean mustShowVerticalScrollbar(Dimension contentSize)
-    {
+    protected boolean mustShowVerticalScrollbar(Dimension contentSize) {
         // If the frame is not minimized or in the middle of an animation, compare the content size to the visible
         // bounds.
-        if ((!this.isMinimized() && !this.isAnimating()))
-        {
+        if ((!this.isMinimized() && !this.isAnimating())) {
             return contentSize.height > this.contentBounds.height;
-        }
-        else
-        {
+        } else {
             // Otherwise, return the previous scrollbar setting, do not recompute it. While the frame is animating, we want
             // the scrollbar decision to be based on its maximized size. If the frame would have scrollbars when maximized will
             // have scrollbars while it animates, but a frame that would not have scrollbars when maximized will not have
@@ -1382,12 +1410,11 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return {@code true} if the horizontal scrollbar should be displayed, otherwise {@code false}.
      */
-    protected boolean mustShowHorizontalScrollbar(Dimension contentSize)
-    {
+    protected boolean mustShowHorizontalScrollbar(Dimension contentSize) {
         // Show a scroll bar if the content is large enough to require a scroll bar, and there is enough space to
         // draw the scroll bar.
         return contentSize.width > this.contentBounds.width
-            && this.innerBounds.height > this.titleBarHeight + this.scrollBarSize;
+                && this.innerBounds.height > this.titleBarHeight + this.scrollBarSize;
     }
 
     /**
@@ -1395,23 +1422,21 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return {@code true} if an animation is in progress, otherwise {@code false}.
      */
-    protected boolean isAnimating()
-    {
+    protected boolean isAnimating() {
         return this.animation != null;
     }
 
     /**
      * Compute the content bounds, taking into account the frame size and the presence of scroll bars.
      *
-     * @param showVerticalScrollBar   True if the frame will have a vertical scroll bar. A vertical scroll bar will make
-     *                                the content frame narrower.
+     * @param showVerticalScrollBar True if the frame will have a vertical scroll bar. A vertical scroll bar will make
+     * the content frame narrower.
      * @param showHorizontalScrollBar True if the frame will have a horizontal scroll bar. A horizontal scroll bar will
-     *                                make the content frame shorter.
+     * make the content frame shorter.
      *
      * @return The bounds of the content frame.
      */
-    protected Rectangle computeBounds(boolean showVerticalScrollBar, boolean showHorizontalScrollBar)
-    {
+    protected Rectangle computeBounds(boolean showVerticalScrollBar, boolean showHorizontalScrollBar) {
         int hScrollBarSize = (showHorizontalScrollBar ? this.scrollBarSize : 0);
         int vScrollBarSize = (showVerticalScrollBar ? this.scrollBarSize : 0);
 
@@ -1420,21 +1445,23 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         int inset = 2 * this.frameLineWidth;
 
         return new Rectangle(this.innerBounds.x + inset,
-            this.innerBounds.y + hScrollBarSize + inset,
-            this.innerBounds.width - vScrollBarSize - inset * 2,
-            this.innerBounds.height - titleBarHeight - hScrollBarSize - inset);
+                this.innerBounds.y + hScrollBarSize + inset,
+                this.innerBounds.width - vScrollBarSize - inset * 2,
+                this.innerBounds.height - titleBarHeight - hScrollBarSize - inset);
     }
 
-    /** Updates the frame's screen-coordinate geometry in {@link #vertexBuffer} according to the current screen bounds. */
-    protected void computeFrameGeometry()
-    {
-        if (this.frameBounds == null)
+    /**
+     * Updates the frame's screen-coordinate geometry in {@link #vertexBuffer} according to the current screen bounds.
+     */
+    protected void computeFrameGeometry() {
+        if (this.frameBounds == null) {
             return;
+        }
 
         FrameAttributes attributes = this.getActiveAttributes();
 
         this.vertexBuffer = FrameFactory.createShapeBuffer(AVKey.SHAPE_RECTANGLE, this.frameBounds.width,
-            this.frameBounds.height, attributes.getCornerRadius(), this.vertexBuffer);
+                this.frameBounds.height, attributes.getCornerRadius(), this.vertexBuffer);
     }
 
     /**
@@ -1443,12 +1470,11 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return The frame's minimum size.
      */
-    protected Dimension getMinimumSize()
-    {
+    protected Dimension getMinimumSize() {
         // Reserve enough space to draw the border, both scroll bars, and the title bar
         int minWidth = this.frameBorder * 2 + this.scrollBarSize * 3; // left scroll arrow + right + vertical scroll bar
         int minHeight = this.frameBorder * 2 + this.scrollBarSize * 3
-            + this.titleBarHeight; // Up arrow + down arrow + horizontal scroll bar
+                + this.titleBarHeight; // Up arrow + down arrow + horizontal scroll bar
         return new Dimension(minWidth, minHeight);
     }
 
@@ -1457,8 +1483,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return {@code true} if the frame should draw minimized, otherwise {@code false}.
      */
-    protected boolean isDrawMinimized()
-    {
+    protected boolean isDrawMinimized() {
         // Draw minimized when the frame is minimized, but not while animating toward the minimized state
         return this.isMinimized() && !this.isAnimating();
     }
@@ -1468,19 +1493,15 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Current draw context.
      */
-    protected void drawMaximized(DrawContext dc)
-    {
+    protected void drawMaximized(DrawContext dc) {
         this.drawFrame(dc);
 
         // Draw the contents using the cached texture, if we've rendered to a texture. Otherwise, just draw the
         // contents directly. Always draw the contents directly in picking mode because unique pick colors can't be
         // cached in a texture.
-        if (this.renderToTexture && !dc.isPickingMode())
-        {
+        if (this.renderToTexture && !dc.isPickingMode()) {
             this.drawContentTiles(dc);
-        }
-        else
-        {
+        } else {
             this.drawContentDirect(dc);
         }
     }
@@ -1490,20 +1511,16 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Current draw context.
      */
-    protected void drawContentDirect(DrawContext dc)
-    {
+    protected void drawContentDirect(DrawContext dc) {
         GL gl = dc.getGL();
-        try
-        {
+        try {
             gl.glEnable(GL.GL_SCISSOR_TEST);
             gl.glScissor(this.contentBounds.x, this.contentBounds.y - 1, this.contentBounds.width + 1,
-                this.contentBounds.height);
+                    this.contentBounds.height);
 
             this.contents.renderScrollable(dc, this.scrollContentBounds.getLocation(),
-                this.scrollContentBounds.getSize(), this.contentBounds);
-        }
-        finally
-        {
+                    this.scrollContentBounds.getSize(), this.contentBounds);
+        } finally {
             gl.glDisable(GL.GL_SCISSOR_TEST);
         }
     }
@@ -1513,12 +1530,10 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Current draw context.
      */
-    protected void drawContentTiles(DrawContext dc)
-    {
+    protected void drawContentTiles(DrawContext dc) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        try
-        {
+        try {
             gl.glPolygonMode(GL2.GL_FRONT, GL2.GL_FILL);
             gl.glEnable(GL.GL_TEXTURE_2D);
 
@@ -1526,16 +1541,15 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
             OGLUtil.applyBlending(gl, true);
 
             Texture texture = dc.getTextureCache().getTexture(this.textureCacheKey);
-            if (texture == null)
+            if (texture == null) {
                 return;
+            }
 
             texture.bind(gl);
 
-            for (ContentTile tile : tiles)
-            {
+            for (ContentTile tile : tiles) {
                 TextureTile textureTile = this.getTextureTile(tile);
-                if (textureTile == null)
-                {
+                if (textureTile == null) {
                     continue;
                 }
 
@@ -1546,35 +1560,29 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
                 Rectangle clippedTileBounds = tileScreenBounds.intersection(this.contentBounds);
 
                 // If the tile is not visible in the content area, don't bother drawing it.
-                if (clippedTileBounds.isEmpty())
-                {
+                if (clippedTileBounds.isEmpty()) {
                     continue;
                 }
 
                 Rectangle subTileBounds = new Rectangle(tileX + clippedTileBounds.x - tileScreenBounds.x,
-                    tileY + clippedTileBounds.y - tileScreenBounds.y, clippedTileBounds.width,
-                    clippedTileBounds.height);
+                        tileY + clippedTileBounds.y - tileScreenBounds.y, clippedTileBounds.width,
+                        clippedTileBounds.height);
 
                 gl.glPushMatrix();
-                try
-                {
+                try {
                     gl.glTranslated(clippedTileBounds.x, clippedTileBounds.y, 0.0f);
 
                     gl.glColor4f(1, 1, 1, (float) this.getActiveAttributes().getForegroundOpacity());
 
                     TextureCoords texCoords = texture.getSubImageTexCoords((int) subTileBounds.getMinX(),
-                        (int) subTileBounds.getMinY(), (int) subTileBounds.getMaxX(), (int) subTileBounds.getMaxY());
+                            (int) subTileBounds.getMinY(), (int) subTileBounds.getMaxX(), (int) subTileBounds.getMaxY());
                     gl.glScaled(subTileBounds.width, subTileBounds.height, 1d);
                     dc.drawUnitQuad(texCoords);
-                }
-                finally
-                {
+                } finally {
                     gl.glPopMatrix();
                 }
             }
-        }
-        finally
-        {
+        } finally {
             gl.glDisable(GL.GL_TEXTURE_2D);
             gl.glBindTexture(GL.GL_TEXTURE_2D, 0);
         }
@@ -1585,8 +1593,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Current draw context.
      */
-    protected void drawMinimized(DrawContext dc)
-    {
+    protected void drawMinimized(DrawContext dc) {
         this.drawFrame(dc);
     }
 
@@ -1595,13 +1602,11 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Current draw context.
      */
-    protected void drawFrame(DrawContext dc)
-    {
+    protected void drawFrame(DrawContext dc) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         OGLStackHandler oglStack = new OGLStackHandler();
-        try
-        {
+        try {
             oglStack.pushModelviewIdentity(gl);
 
             FrameAttributes attributes = this.getActiveAttributes();
@@ -1611,20 +1616,16 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
             boolean drawHorizontalScrollbar = this.showHorizontalScrollbar;
             boolean drawVerticalScrollbar = this.showVerticalScrollbar;
 
-            if (!dc.isPickingMode())
-            {
+            if (!dc.isPickingMode()) {
                 Color[] color = attributes.getBackgroundColor();
 
-                try
-                {
+                try {
                     gl.glEnable(GL.GL_LINE_SMOOTH);
 
                     OGLUtil.applyColor(gl, color[0], 1.0, false);
                     gl.glLineWidth(this.frameLineWidth);
                     FrameFactory.drawBuffer(dc, GL.GL_LINE_STRIP, this.vertexBuffer);
-                }
-                finally
-                {
+                } finally {
                     gl.glDisable(GL.GL_LINE_SMOOTH);
                 }
 
@@ -1632,18 +1633,15 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
                 gl.glTranslated(this.innerBounds.x, this.innerBounds.y, 0.0); // Translate back inner frame
 
                 TreeUtil.drawRectWithGradient(gl, new Rectangle(0, 0, this.innerBounds.width, this.innerBounds.height),
-                    color[0], color[1], attributes.getBackgroundOpacity(), AVKey.VERTICAL);
-            }
-            else
-            {
+                        color[0], color[1], attributes.getBackgroundOpacity(), AVKey.VERTICAL);
+            } else {
                 int frameHeight = this.frameBounds.height;
                 int frameWidth = this.frameBounds.width;
 
                 // Draw draggable frame
                 TreeUtil.drawPickableRect(dc, this.pickSupport, this, new Rectangle(0, 0, frameWidth, frameHeight));
 
-                if (this.isEnableResizeControl() && !this.isDrawMinimized())
-                {
+                if (this.isEnableResizeControl() && !this.isDrawMinimized()) {
                     Color color = dc.getUniquePickColor();
                     int colorCode = color.getRGB();
                     this.pickSupport.addPickableObject(colorCode, this.frameResizeControl);
@@ -1659,26 +1657,24 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
                 // If both scroll bars are visible, draw the empty square in the lower right hand corner as a part of
                 // the resize control, pickable area.
-                if (drawVerticalScrollbar && drawHorizontalScrollbar && !this.isDrawMinimized())
-                {
+                if (drawVerticalScrollbar && drawHorizontalScrollbar && !this.isDrawMinimized()) {
                     gl.glRecti(this.innerBounds.width - this.scrollBarSize, 0,
-                        this.innerBounds.width, this.scrollBarSize);
+                            this.innerBounds.width, this.scrollBarSize);
                 }
             }
 
-            if (!this.isDrawMinimized())
+            if (!this.isDrawMinimized()) {
                 this.drawScrollBars(dc);
+            }
 
             // Draw title bar
-            if (this.isDrawTitleBar())
-            {
+            if (this.isDrawTitleBar()) {
                 gl.glTranslated(0, this.innerBounds.height - this.titleBarHeight, 0);
                 this.drawTitleBar(dc);
             }
 
             // Draw a thin border outlining the filled rectangle that is the frame background.
-            if (!dc.isPickingMode())
-            {
+            if (!dc.isPickingMode()) {
                 gl.glLoadIdentity();
 
                 int minX = (int) this.innerBounds.getMinX();
@@ -1691,26 +1687,23 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
                 // Do not draw the outline on the edges with scroll bars because the scrollbar draws its own border. On
                 // some devices the scroll bar border draws next to the frame border, resulting in a double width border.
                 gl.glBegin(GL2.GL_LINE_STRIP);
-                try
-                {
-                    if (!drawVerticalScrollbar)
+                try {
+                    if (!drawVerticalScrollbar) {
                         gl.glVertex2f(maxX, minY + 0.5f);
+                    }
 
                     gl.glVertex2f(maxX, maxY);
                     gl.glVertex2f(minX + 0.5f, maxY);
                     gl.glVertex2f(minX + 0.5f, minY + 0.5f);
 
-                    if (!drawHorizontalScrollbar)
+                    if (!drawHorizontalScrollbar) {
                         gl.glVertex2f(maxX, minY + 0.5f);
-                }
-                finally
-                {
+                    }
+                } finally {
                     gl.glEnd();
                 }
             }
-        }
-        finally
-        {
+        } finally {
             oglStack.pop(gl);
         }
     }
@@ -1720,15 +1713,14 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Current draw context.
      */
-    protected void drawScrollBars(DrawContext dc)
-    {
+    protected void drawScrollBars(DrawContext dc) {
         // Draw a vertical scroll bar if the tree extends beyond the visible bounds
-        if (this.showVerticalScrollbar)
-        {
+        if (this.showVerticalScrollbar) {
             int x1 = this.innerBounds.width - this.scrollBarSize;
             int y1 = 1;
-            if (this.showHorizontalScrollbar)
+            if (this.showHorizontalScrollbar) {
                 y1 += this.scrollBarSize;
+            }
 
             Rectangle scrollBarBounds = new Rectangle(x1, y1, this.scrollBarSize, this.contentBounds.height + 1);
 
@@ -1737,13 +1729,13 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         }
 
         // Draw a horizontal scroll bar if the tree extends beyond the visible bounds
-        if (this.showHorizontalScrollbar)
-        {
+        if (this.showHorizontalScrollbar) {
             int x1 = 1;
             int y1 = 1;
             int width = this.innerBounds.width - 1;
-            if (this.showVerticalScrollbar)
+            if (this.showVerticalScrollbar) {
                 width -= this.scrollBarSize;
+            }
 
             Rectangle scrollBarBounds = new Rectangle(x1, y1, width, this.scrollBarSize);
 
@@ -1757,32 +1749,26 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Draw context
      */
-    protected void drawTitleBar(DrawContext dc)
-    {
+    protected void drawTitleBar(DrawContext dc) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         FrameAttributes attributes = this.getActiveAttributes();
 
-        if (!dc.isPickingMode())
-        {
+        if (!dc.isPickingMode()) {
             // Draw title bar as a rectangle with gradient
             Color[] color = attributes.getTitleBarColor();
             TreeUtil.drawRectWithGradient(gl, new Rectangle(0, 0, this.innerBounds.width, this.getTitleBarHeight()),
-                color[0], color[1], attributes.getBackgroundOpacity(), AVKey.VERTICAL);
+                    color[0], color[1], attributes.getBackgroundOpacity(), AVKey.VERTICAL);
 
             OGLUtil.applyColor(gl, attributes.getForegroundColor(), 1.0, false);
 
-            if (!this.isDrawMinimized())
-            {
+            if (!this.isDrawMinimized()) {
                 // Draw a line to separate the title bar from the frame
                 gl.glBegin(GL2.GL_LINES);
-                try
-                {
+                try {
                     gl.glVertex2f(0, 0);
                     gl.glVertex2f(this.innerBounds.width, 0);
-                }
-                finally
-                {
+                } finally {
                     gl.glEnd();
                 }
             }
@@ -1800,14 +1786,12 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * Draw an icon in the upper left corner of the title bar. This method takes a point relative to lower left corner
      * of the title bar. This point is modified to indicate how much horizontal space is consumed by the icon.
      *
-     * @param dc        Draw context
+     * @param dc Draw context
      * @param drawPoint Point at which to draw the icon. This point is relative to the lower left corner of the title
-     *                  bar. This point will be modified to indicate how much horizontal space was consumed by drawing
-     *                  the icon. After drawing the icon, the x value with point to the first available space to the
-     *                  right of the icon.
+     * bar. This point will be modified to indicate how much horizontal space was consumed by drawing the icon. After
+     * drawing the icon, the x value with point to the first available space to the right of the icon.
      */
-    protected void drawIcon(DrawContext dc, Point drawPoint)
-    {
+    protected void drawIcon(DrawContext dc, Point drawPoint) {
         // This method is never called during picked, so picking mode is not handled here
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -1817,17 +1801,14 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
         // Draw icon in upper left corner
         BasicWWTexture texture = this.getTexture();
-        if (texture == null)
-        {
+        if (texture == null) {
             drawPoint.x += iconSpace;
             return;
         }
 
         OGLStackHandler oglStack = new OGLStackHandler();
-        try
-        {
-            if (texture.bind(dc))
-            {
+        try {
+            if (texture.bind(dc)) {
                 gl.glEnable(GL.GL_TEXTURE_2D);
 
                 Dimension iconSize = attributes.getIconSize();
@@ -1844,9 +1825,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
                 drawPoint.x += iconSize.getWidth() + iconSpace * 2;
             }
-        }
-        finally
-        {
+        } finally {
             gl.glDisable(GL.GL_TEXTURE_2D);
             gl.glBindTexture(GL.GL_TEXTURE_2D, 0);
             oglStack.pop(gl);
@@ -1856,43 +1835,40 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     /**
      * Draw text in the frame title.
      *
-     * @param dc        Draw context
+     * @param dc Draw context
      * @param drawPoint Point at which to draw text. This point is relative to the lower left corner of the title bar.
      */
-    protected void drawTitleText(DrawContext dc, Point drawPoint)
-    {
+    protected void drawTitleText(DrawContext dc, Point drawPoint) {
         // This method is never called during picked, so picking mode is not handled here
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         FrameAttributes attributes = this.getActiveAttributes();
 
         String frameTitle = this.getFrameTitle();
-        if (frameTitle == null)
+        if (frameTitle == null) {
             return;
+        }
 
         TextRenderer textRenderer = OGLTextRenderer.getOrCreateTextRenderer(dc.getTextRendererCache(),
-            attributes.getFont());
+                attributes.getFont());
 
         // Determine if the shortened frame title needs to be regenerated. If so, generate it now.
         int titleAreaWidth = this.innerBounds.width - this.buttonSize - drawPoint.x - attributes.getIconSpace();
-        if (this.mustGenerateShortTitle(attributes.getFont(), titleAreaWidth))
-        {
+        if (this.mustGenerateShortTitle(attributes.getFont(), titleAreaWidth)) {
             this.generateShortTitle(dc, frameTitle, titleAreaWidth, "...");
         }
 
-        if (this.shortTitle == null)
+        if (this.shortTitle == null) {
             return;
+        }
 
-        try
-        {
+        try {
             textRenderer.begin3DRendering();
             OGLUtil.applyColor(gl, attributes.getTextColor(), 1.0, false);
 
             double vertAdjust = (this.titleBarHeight - Math.abs(this.shortTitleBounds.getY())) / 2;
             textRenderer.draw(this.shortTitle, drawPoint.x, (int) (drawPoint.y + vertAdjust) + 1);
-        }
-        finally
-        {
+        } finally {
             textRenderer.end3DRendering();
         }
     }
@@ -1900,16 +1876,15 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     /**
      * Determine if a the shortened frame title needs to be regenerated.
      *
-     * @param titleFont      Title font.
+     * @param titleFont Title font.
      * @param titleAreaWidth Width in pixels of the frame title area.
      *
      * @return {@code true} if the shortened title needs to be regenerated, otherwise {@code false}.
      */
-    protected boolean mustGenerateShortTitle(Font titleFont, int titleAreaWidth)
-    {
+    protected boolean mustGenerateShortTitle(Font titleFont, int titleAreaWidth) {
         return this.shortTitle == null
-            || !titleFont.equals(this.shortFrameTitleFont)
-            || titleAreaWidth != this.frameTitleWidth;
+                || !titleFont.equals(this.shortFrameTitleFont)
+                || titleAreaWidth != this.frameTitleWidth;
     }
 
     /**
@@ -1917,15 +1892,13 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * enough to accommodate the full title, then the short title will be the same as the full title. The method sets
      * the fields {@link #shortTitle}, {@link #shortFrameTitleFont}, {@link #frameTitleWidth}.
      *
-     * @param dc         Current draw context.
+     * @param dc Current draw context.
      * @param frameTitle Full frame title.
-     * @param width      Width in pixels of the frame title area.
-     * @param cutOff     String to append to title to indicate that text has been cut off due to a small frame. For
-     *                   example, if the cut off string is "...", the string "Frame Title" might be shortened to "Frame
-     *                   T...".
+     * @param width Width in pixels of the frame title area.
+     * @param cutOff String to append to title to indicate that text has been cut off due to a small frame. For example,
+     * if the cut off string is "...", the string "Frame Title" might be shortened to "Frame T...".
      */
-    protected void generateShortTitle(DrawContext dc, String frameTitle, int width, String cutOff)
-    {
+    protected void generateShortTitle(DrawContext dc, String frameTitle, int width, String cutOff) {
         Font font = this.getActiveAttributes().getFont();
 
         // Keep track of the font and width used to generate the title so that we can invalidate the generated
@@ -1933,8 +1906,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         this.shortFrameTitleFont = font;
         this.frameTitleWidth = width;
 
-        if (frameTitle == null)
-        {
+        if (frameTitle == null) {
             this.shortTitle = null;
             return;
         }
@@ -1943,8 +1915,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
         // Check to see if the frame is wide enough to display the entire title
         Rectangle2D size = textRenderer.getBounds(frameTitle);
-        if (size.getWidth() < width)
-        {
+        if (size.getWidth() < width) {
             this.shortTitle = frameTitle; // No truncation required
             this.shortTitleBounds = size;
             return;
@@ -1952,8 +1923,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
         // Check to see if the frame is too small to display even the continuation
         Rectangle2D ellipseSize = textRenderer.getBounds(cutOff);
-        if (width < ellipseSize.getWidth())
-        {
+        if (width < ellipseSize.getWidth()) {
             this.shortTitle = null; // Frame too small
             this.shortTitleBounds = null;
             return;
@@ -1961,12 +1931,10 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
         // Starting at the end of the string, remove characters until the string fits
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < frameTitle.length(); i++)
-        {
+        for (int i = 0; i < frameTitle.length(); i++) {
             sb.append(frameTitle.charAt(i));
             Rectangle2D bounds = textRenderer.getBounds(sb);
-            if (bounds.getWidth() + ellipseSize.getWidth() > width)
-            {
+            if (bounds.getWidth() + ellipseSize.getWidth() > width) {
                 sb.deleteCharAt(sb.length() - 1);
                 sb.append("...");
                 break;
@@ -1975,13 +1943,10 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
         // Make sure that the computed string contains at least one character of the original title. If not, don't
         // show any text.
-        if (sb.length() > cutOff.length())
-        {
+        if (sb.length() > cutOff.length()) {
             this.shortTitle = sb.toString();
             this.shortTitleBounds = textRenderer.getBounds(sb);
-        }
-        else
-        {
+        } else {
             this.shortTitle = null;
             this.shortTitleBounds = null;
         }
@@ -1992,21 +1957,18 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param dc Current draw context.
      */
-    protected void drawMinimizeButton(DrawContext dc)
-    {
+    protected void drawMinimizeButton(DrawContext dc) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         OGLStackHandler oglStack = new OGLStackHandler();
-        try
-        {
+        try {
             oglStack.pushModelviewIdentity(gl);
 
             int x = (int) this.innerBounds.getMaxX() - this.getActiveAttributes().getIconSpace() - this.buttonSize;
             int y = (int) this.innerBounds.getMaxY() - (this.titleBarHeight - this.buttonSize) / 2 - this.buttonSize;
             gl.glTranslated(x, y, 0.0);
 
-            if (!dc.isPickingMode())
-            {
+            if (!dc.isPickingMode()) {
                 Color color = this.getActiveAttributes().getMinimizeButtonColor();
 
                 FrameAttributes attributes = this.getActiveAttributes();
@@ -2016,40 +1978,31 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
                 OGLUtil.applyColor(gl, attributes.getForegroundColor(), false);
 
                 gl.glBegin(GL2.GL_LINE_LOOP);
-                try
-                {
+                try {
                     gl.glVertex2f(0f, 0f);
                     gl.glVertex2f(0.5f, buttonSize + 0.5f);
                     gl.glVertex2f(buttonSize, buttonSize + 0.5f);
                     gl.glVertex2f(buttonSize, 0);
-                }
-                finally
-                {
+                } finally {
                     gl.glEnd();
                 }
 
                 gl.glBegin(GL2.GL_LINES);
-                try
-                {
+                try {
                     // Draw a horizontal line. If the frame is maximized, this will be a minus sign. If the tree is
                     // minimized, this will be part of a plus sign.
                     gl.glVertex2f(buttonSize / 4f, buttonSize / 2f);
                     gl.glVertex2f(buttonSize - buttonSize / 4f, buttonSize / 2f);
 
                     // Draw a vertical line to complete the plus sign if the frame is minimized.
-                    if (this.isMinimized())
-                    {
+                    if (this.isMinimized()) {
                         gl.glVertex2f(buttonSize / 2f, buttonSize / 4f);
                         gl.glVertex2f(buttonSize / 2f, buttonSize - buttonSize / 4f);
                     }
-                }
-                finally
-                {
+                } finally {
                     gl.glEnd();
                 }
-            }
-            else
-            {
+            } else {
                 Color color = dc.getUniquePickColor();
                 int colorCode = color.getRGB();
 
@@ -2059,26 +2012,23 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
                 gl.glScaled(buttonSize, buttonSize, 1d);
                 dc.drawUnitQuad();
             }
-        }
-        finally
-        {
+        } finally {
             oglStack.pop(gl);
         }
     }
 
-    protected void beginDrawing(DrawContext dc)
-    {
+    protected void beginDrawing(DrawContext dc) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         GLU glu = dc.getGLU();
 
         this.BEogsh.pushAttrib(gl, GL2.GL_DEPTH_BUFFER_BIT
-            | GL2.GL_COLOR_BUFFER_BIT
-            | GL2.GL_ENABLE_BIT
-            | GL2.GL_CURRENT_BIT
-            | GL2.GL_POLYGON_BIT     // For polygon mode
-            | GL2.GL_LINE_BIT        // For line width
-            | GL2.GL_TRANSFORM_BIT
-            | GL2.GL_SCISSOR_BIT);
+                | GL2.GL_COLOR_BUFFER_BIT
+                | GL2.GL_ENABLE_BIT
+                | GL2.GL_CURRENT_BIT
+                | GL2.GL_POLYGON_BIT // For polygon mode
+                | GL2.GL_LINE_BIT // For line width
+                | GL2.GL_TRANSFORM_BIT
+                | GL2.GL_SCISSOR_BIT);
 
         gl.glEnable(GL.GL_BLEND);
         gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
@@ -2093,17 +2043,14 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         glu.gluOrtho2D(0d, viewport.width, 0d, viewport.height);
         this.BEogsh.pushModelviewIdentity(gl);
 
-        if (dc.isPickingMode())
-        {
+        if (dc.isPickingMode()) {
             this.pickSupport.clearPickList();
             this.pickSupport.beginPicking(dc);
         }
     }
 
-    protected void endDrawing(DrawContext dc)
-    {
-        if (dc.isPickingMode())
-        {
+    protected void endDrawing(DrawContext dc) {
+        if (dc.isPickingMode()) {
             this.pickSupport.endPicking(dc);
             this.pickSupport.resolvePick(dc, dc.getPickPoint(), dc.getCurrentLayer());
         }
@@ -2117,42 +2064,38 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return attributes that are active for this frame.
      */
-    protected FrameAttributes getActiveAttributes()
-    {
+    protected FrameAttributes getActiveAttributes() {
         return this.activeAttributes;
     }
 
-    /** Determines which attributes -- normal, highlight or default -- to use each frame. */
-    protected void determineActiveAttributes()
-    {
-        if (this.isHighlighted())
-        {
-            if (this.getHighlightAttributes() != null)
+    /**
+     * Determines which attributes -- normal, highlight or default -- to use each frame.
+     */
+    protected void determineActiveAttributes() {
+        if (this.isHighlighted()) {
+            if (this.getHighlightAttributes() != null) {
                 this.activeAttributes.copy(this.getHighlightAttributes());
-            else
-            {
+            } else {
                 // If no highlight attributes have been specified we will use the normal attributes.
-                if (this.getAttributes() != null)
+                if (this.getAttributes() != null) {
                     this.activeAttributes.copy(this.getAttributes());
-                else
+                } else {
                     this.activeAttributes.copy(defaultAttributes);
+                }
             }
-        }
-        else if (this.getAttributes() != null)
-        {
+        } else if (this.getAttributes() != null) {
             this.activeAttributes.copy(this.getAttributes());
-        }
-        else
-        {
+        } else {
             this.activeAttributes.copy(defaultAttributes);
         }
 
         this.determineScrollbarAttributes();
     }
 
-    /** Update the attributes of the scroll bars to match the frame's highlight state. */
-    protected void determineScrollbarAttributes()
-    {
+    /**
+     * Update the attributes of the scroll bars to match the frame's highlight state.
+     */
+    protected void determineScrollbarAttributes() {
         this.verticalScrollBar.setLineColor(this.activeAttributes.getForegroundColor());
         this.verticalScrollBar.setOpacity(this.activeAttributes.getBackgroundOpacity());
         this.horizontalScrollBar.setLineColor(this.activeAttributes.getForegroundColor());
@@ -2168,21 +2111,18 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return the frame size for the duration of this frame.
      */
-    protected Size getActiveSize()
-    {
+    protected Size getActiveSize() {
         return this.activeSize;
     }
 
-    /** Determine the frame size to use for the current frame. */
-    protected void determineSize()
-    {
+    /**
+     * Determine the frame size to use for the current frame.
+     */
+    protected void determineSize() {
         // Use the minimized size if the frame is minimized or animating to or from the minimized state.
-        if ((this.isMinimized() || this.isAnimating()) && this.minimizedSize != null)
-        {
+        if ((this.isMinimized() || this.isAnimating()) && this.minimizedSize != null) {
             this.activeSize = this.minimizedSize;
-        }
-        else
-        {
+        } else {
             this.activeSize = this.maximizedSize;
         }
     }
@@ -2193,12 +2133,12 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return The icon texture, or no image source has been set, or if the icon has not been loaded yet.
      */
-    protected BasicWWTexture getTexture()
-    {
-        if (this.texture != null)
+    protected BasicWWTexture getTexture() {
+        if (this.texture != null) {
             return this.texture;
-        else
+        } else {
             return this.initializeTexture();
+        }
     }
 
     /**
@@ -2207,19 +2147,14 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return The texture, or null if the texture is not yet available.
      */
-    protected BasicWWTexture initializeTexture()
-    {
+    protected BasicWWTexture initializeTexture() {
         Object imageSource = this.getIconImageSource();
-        if (imageSource instanceof String || imageSource instanceof URL)
-        {
+        if (imageSource instanceof String || imageSource instanceof URL) {
             URL imageURL = WorldWind.getDataFileStore().requestFile(imageSource.toString());
-            if (imageURL != null)
-            {
+            if (imageURL != null) {
                 this.texture = new BasicWWTexture(imageURL, true);
             }
-        }
-        else if (imageSource != null)
-        {
+        } else if (imageSource != null) {
             this.texture = new BasicWWTexture(imageSource, true);
             return this.texture;
         }
@@ -2234,28 +2169,24 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return The horizontal or vertical scroll bar.
      */
-    public ScrollBar getScrollBar(String direction)
-    {
-        if (AVKey.VERTICAL.equals(direction))
+    public ScrollBar getScrollBar(String direction) {
+        if (AVKey.VERTICAL.equals(direction)) {
             return this.verticalScrollBar;
-        else
+        } else {
             return this.horizontalScrollBar;
+        }
     }
 
     @Override
-    protected void beginDrag(Point point)
-    {
-        if (this.isEnableMove())
-        {
+    protected void beginDrag(Point point) {
+        if (this.isEnableMove()) {
             Point2D location = this.awtScreenPoint;
             this.dragRefPoint = new Point((int) location.getX() - point.x, (int) location.getY() - point.y);
         }
     }
 
-    public void drag(Point point)
-    {
-        if (this.isEnableMove())
-        {
+    public void drag(Point point) {
+        if (this.isEnableMove()) {
             double x = point.x + this.dragRefPoint.x;
             double y = point.y + this.dragRefPoint.y;
             this.setScreenLocation(new Offset(x, y, AVKey.PIXELS, AVKey.INSET_PIXELS));
@@ -2263,22 +2194,20 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     }
 
     @Override
-    public void selected(SelectEvent event)
-    {
-        if (event == null || this.isConsumed(event))
+    public void selected(SelectEvent event) {
+        if (event == null || this.isConsumed(event)) {
             return;
+        }
 
         super.selected(event);
 
         // Minimize the frame if the title bar was double clicked.
         Rectangle titleBarBounds = new Rectangle((int) this.awtScreenPoint.getX() + this.frameBorder,
-            (int) this.awtScreenPoint.getY() + this.frameBorder * 2, this.innerBounds.width, this.titleBarHeight);
+                (int) this.awtScreenPoint.getY() + this.frameBorder * 2, this.innerBounds.width, this.titleBarHeight);
 
-        if (event.isLeftDoubleClick())
-        {
+        if (event.isLeftDoubleClick()) {
             Point pickPoint = event.getPickPoint();
-            if (pickPoint != null && titleBarBounds.contains(event.getPickPoint()))
-            {
+            if (pickPoint != null && titleBarBounds.contains(event.getPickPoint())) {
                 this.setMinimized(!this.isMinimized());
                 event.consume();
             }
@@ -2286,19 +2215,16 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     }
 
     @Override
-    public void mouseWheelMoved(MouseWheelEvent e)
-    {
-        if (e == null || e.isConsumed())
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if (e == null || e.isConsumed()) {
             return;
+        }
 
         // Java on Mac OS X implements support for horizontal scrolling by sending a Shift+ScrollWheel event. This is
         // not the case for Java for other platforms, so we handle the scrolling logic for Mac OS X
-        if (Configuration.isMacOS())
-        {
+        if (Configuration.isMacOS()) {
             this.doScrollMacOS(e);
-        }
-        else
-        {
+        } else {
             this.doScroll(e);
         }
 
@@ -2313,17 +2239,13 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param e Mouse event that triggered the scroll.
      */
-    protected void doScroll(MouseWheelEvent e)
-    {
+    protected void doScroll(MouseWheelEvent e) {
         // Determine whether to scroll horizontally or vertically by giving priority to the vertical scroll bar. Scroll
         // vertically if only both scroll bars are active or only the vertical scroll bar is active. Scroll horizontally
         // if only the horizontal scroll bar is active.
-        if (this.showVerticalScrollbar)
-        {
+        if (this.showVerticalScrollbar) {
             this.verticalScrollBar.scroll(e.getUnitsToScroll() * this.getMouseWheelScrollUnit(AVKey.VERTICAL));
-        }
-        else if (this.showHorizontalScrollbar)
-        {
+        } else if (this.showHorizontalScrollbar) {
             this.horizontalScrollBar.scroll(e.getUnitsToScroll() * this.getMouseWheelScrollUnit(AVKey.HORIZONTAL));
         }
     }
@@ -2334,21 +2256,17 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param e Mouse event that triggered the scroll.
      */
-    protected void doScrollMacOS(MouseWheelEvent e)
-    {
+    protected void doScrollMacOS(MouseWheelEvent e) {
         // On Mac OS X, Java always scrolls horizontally when the Shift key is down. This policy is used to support the
         // Magic Mouse and Magic Trackpad devices. When the user scroll horizontally on either of these devices, Java
         // automatically sends a Shift+ScrollWheel event, regardless of whether the Shift key is actually down. See
         // Radar #4631846 in
         // http://developer.apple.com/library/mac/#releasenotes/Java/JavaLeopardRN/ResolvedIssues/ResolvedIssues.html.
-        if (e.isShiftDown())
-        {
+        if (e.isShiftDown()) {
             this.horizontalScrollBar.scroll(e.getUnitsToScroll() * this.getMouseWheelScrollUnit(AVKey.HORIZONTAL));
-        }
-        // If the Shift key is not down, Java Mac OS X implements the standard scrolling policy used by Java on other 
+        } // If the Shift key is not down, Java Mac OS X implements the standard scrolling policy used by Java on other 
         // operating systems.
-        else
-        {
+        else {
             this.doScroll(e);
         }
     }
@@ -2360,8 +2278,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @return The scroll unit that will be applied when the mouse wheel is moved.
      */
-    protected int getMouseWheelScrollUnit(String direction)
-    {
+    protected int getMouseWheelScrollUnit(String direction) {
         return (int) (this.getScrollBar(direction).getBlockIncrement() * 0.25);
     }
 
@@ -2369,49 +2286,56 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      * A tile in the frame content. This class represents one tile in the frame contents, and the time at which that
      * tile was last drawn to texture tile.
      */
-    class ContentTile
-    {
-        /** Row in the frame content. */
+    class ContentTile {
+
+        /**
+         * Row in the frame content.
+         */
         int row;
-        /** Column in the frame content. */
+        /**
+         * Column in the frame content.
+         */
         int column;
-        /** Time at which this content tile was last drawn to a texture tile. */
+        /**
+         * Time at which this content tile was last drawn to a texture tile.
+         */
         long updateTime;
 
         /**
          * Create new content tile.
          *
-         * @param row    Row of this tile in the frame content.
+         * @param row Row of this tile in the frame content.
          * @param column Column of this tile in the frame content.
          */
-        ContentTile(int row, int column)
-        {
+        ContentTile(int row, int column) {
             this.row = row;
             this.column = column;
         }
 
         @Override
-        public boolean equals(Object o)
-        {
-            if (this == o)
+        public boolean equals(Object o) {
+            if (this == o) {
                 return true;
-            if (o == null || this.getClass() != o.getClass())
+            }
+            if (o == null || this.getClass() != o.getClass()) {
                 return false;
+            }
 
             ContentTile that = (ContentTile) o;
 
-            if (this.row != that.row)
+            if (this.row != that.row) {
                 return false;
+            }
             //noinspection RedundantIfStatement
-            if (this.column != that.column)
+            if (this.column != that.column) {
                 return false;
+            }
 
             return true;
         }
 
         @Override
-        public int hashCode()
-        {
+        public int hashCode() {
             int result;
 
             result = this.row;
@@ -2421,26 +2345,35 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         }
     }
 
-    /** A region of the backing texture used to render one tile of the scrollable content. */
-    class TextureTile implements Comparable<TextureTile>
-    {
-        /** Row of this tile in the frame's backing texture. */
+    /**
+     * A region of the backing texture used to render one tile of the scrollable content.
+     */
+    class TextureTile implements Comparable<TextureTile> {
+
+        /**
+         * Row of this tile in the frame's backing texture.
+         */
         int row;
-        /** Column of this tile in the frame's backing texture. */
+        /**
+         * Column of this tile in the frame's backing texture.
+         */
         int column;
-        /** The content tile currently rendered in this texture tile. */
+        /**
+         * The content tile currently rendered in this texture tile.
+         */
         ContentTile currentTile;
-        /** The last time that this tile was accessed. Used to implement an LRU tile replacement scheme. */
+        /**
+         * The last time that this tile was accessed. Used to implement an LRU tile replacement scheme.
+         */
         long lastUsed;
 
         /**
          * Create a new texture tile.
          *
-         * @param row    Row of the tile in the frame's backing texture.
+         * @param row Row of the tile in the frame's backing texture.
          * @param column Column of the tile in the frame's backing texture.
          */
-        TextureTile(int row, int column)
-        {
+        TextureTile(int row, int column) {
             this.row = row;
             this.column = column;
         }
@@ -2451,12 +2384,10 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
          * @param that Tile to compare with.
          *
          * @return -1 if this tile was accessed less recently than that tile, 0 if the access times are the same, or 1
-         *         if this tile was accessed more recently.
+         * if this tile was accessed more recently.
          */
-        public int compareTo(TextureTile that)
-        {
-            if (that == null)
-            {
+        public int compareTo(TextureTile that) {
+            if (that == null) {
                 String msg = Logging.getMessage("nullValue.CacheEntryIsNull");
                 Logging.logger().severe(msg);
                 throw new IllegalArgumentException(msg);

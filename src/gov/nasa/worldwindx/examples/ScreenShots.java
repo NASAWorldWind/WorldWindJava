@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
@@ -13,16 +12,15 @@ import gov.nasa.worldwindx.examples.util.ScreenShotAction;
 import javax.swing.*;
 
 /**
- * This example demonstrates how to take screenshots with WWJ using the {@link gov.nasa.worldwindx.examples.util.ScreenShotAction}
- * class.
+ * This example demonstrates how to take screenshots with WWJ using the
+ * {@link gov.nasa.worldwindx.examples.util.ScreenShotAction} class.
  *
  * @author tag
  * @version $Id: ScreenShots.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ScreenShots extends JFrame
-{
-    static
-    {
+public class ScreenShots extends JFrame {
+
+    static {
         // Ensure that menus and tooltips interact successfully with the WWJ window.
         ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
         JPopupMenu.setDefaultLightWeightPopupEnabled(false);
@@ -30,8 +28,7 @@ public class ScreenShots extends JFrame
 
     private WorldWindow wwd;
 
-    public ScreenShots()
-    {
+    public ScreenShots() {
         WorldWindowGLCanvas wwd = new WorldWindowGLCanvas();
         this.wwd = wwd;
         wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
@@ -39,8 +36,7 @@ public class ScreenShots extends JFrame
         wwd.setModel(new BasicModel());
     }
 
-    private JMenuBar createMenuBar()
-    {
+    private JMenuBar createMenuBar() {
         JMenu menu = new JMenu("File");
 
         JMenuItem snapItem = new JMenuItem("Save Snapshot...");
@@ -53,13 +49,10 @@ public class ScreenShots extends JFrame
         return menuBar;
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Swing components should always be instantiated on the event dispatch thread.
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 ScreenShots frame = new ScreenShots();
 
                 frame.setJMenuBar(frame.createMenuBar()); // Create menu and associate with frame

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind;
 
 import java.io.IOException;
@@ -24,8 +23,8 @@ import java.io.IOException;
  * @author pabercrombie
  * @version $Id: Exportable.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Exportable
-{
+public interface Exportable {
+
     /**
      * Returned by {@link #isExportFormatSupported(String)} if the object does support export to the given format.
      */
@@ -58,16 +57,15 @@ public interface Exportable
      * Exports the object to a format.
      *
      * @param mimeType Desired export format. Call {@link #isExportFormatSupported(String)} to make sure that the object
-     *                 supports the format before trying to export, or be prepared to handle {@code
+     * supports the format before trying to export, or be prepared to handle {@code
      *                 UnsupportedOperationException}.
-     * @param output   Object that will receive the exported data. The type of this object depends on the export format.
-     *                 All formats should support {@code java.io.OutputStream}. Text based format (for example, XML
-     *                 formats) should also support {@code java.io.Writer}. Certain formats may also support other
-     *                 object types.
+     * @param output Object that will receive the exported data. The type of this object depends on the export format.
+     * All formats should support {@code java.io.OutputStream}. Text based format (for example, XML formats) should also
+     * support {@code java.io.Writer}. Certain formats may also support other object types.
      *
-     * @throws IOException                   if an exception occurs while exporting the data.
+     * @throws IOException if an exception occurs while exporting the data.
      * @throws UnsupportedOperationException if the format is not supported by this object, or if the {@code output}
-     *                                       argument is not of a supported type.
+     * argument is not of a supported type.
      * @see #isExportFormatSupported(String)
      */
     void export(String mimeType, Object output) throws IOException, UnsupportedOperationException;

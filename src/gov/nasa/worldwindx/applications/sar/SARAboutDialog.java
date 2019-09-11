@@ -11,10 +11,9 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: SARAboutDialog.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SARAboutDialog extends AboutDialog
-{
-    public SARAboutDialog()
-    {
+public class SARAboutDialog extends AboutDialog {
+
+    public SARAboutDialog() {
         setContent("SARAbout.html");
         setContentType("text/html");
         setPreferredSize(new Dimension(400, 230));

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
 <!--
-  ~ Copyright (C) 2016 United States Government as represented by the Administrator of the
-  ~ National Aeronautics and Space Administration.
-  ~ All Rights Reserved.
-  -->
+~ Copyright (C) 2016 United States Government as represented by the Administrator of the
+~ National Aeronautics and Space Administration.
+~ All Rights Reserved.
+-->
 
 <Layer layerType="TiledImageLayer" version="1">
     <DisplayName>USGS Topo Base Map Large Scale</DisplayName>

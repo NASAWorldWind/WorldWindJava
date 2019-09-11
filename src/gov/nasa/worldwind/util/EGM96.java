@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.avlist.*;
@@ -19,14 +18,15 @@ import java.io.*;
  * values. Each row corresponding to a latitude, with the first row corresponding to +90 degrees (90 North). The integer
  * values must be in centimeters.
  * <p>
- * Once constructed, the instance can be passed to {@link gov.nasa.worldwind.globes.EllipsoidalGlobe#applyEGMA96Offsets(String)}
- * to apply the offets to elevations produced by the globe.
+ * Once constructed, the instance can be passed to
+ * {@link gov.nasa.worldwind.globes.EllipsoidalGlobe#applyEGMA96Offsets(String)} to apply the offets to elevations
+ * produced by the globe.
  *
  * @author tag
  * @version $Id: EGM96.java 770 2012-09-13 02:48:23Z tgaskins $
  */
-public class EGM96
-{
+public class EGM96 {
+
     protected String offsetsFilePath;
     protected BufferWrapper deltas;
 
@@ -34,13 +34,11 @@ public class EGM96
      * Construct an instance.
      *
      * @param offsetsFilePath a path pointing to a file with the geoid offsets. See the class description above for a
-     *                        description of the file.
+     * description of the file.
      * @throws java.io.IOException if there's a problem reading the file.
      */
-    public EGM96(String offsetsFilePath) throws IOException
-    {
-        if (offsetsFilePath == null)
-        {
+    public EGM96(String offsetsFilePath) throws IOException {
+        if (offsetsFilePath == null) {
             String msg = Logging.getMessage("nullValue.PathIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -51,31 +49,24 @@ public class EGM96
         this.loadOffsetFile();
     }
 
-    protected void loadOffsetFile() throws IOException
-    {
+    protected void loadOffsetFile() throws IOException {
         InputStream is = WWIO.openFileOrResourceStream(this.offsetsFilePath, EGM96.class);
-        if (is == null)
-        {
+        if (is == null) {
             String msg = Logging.getMessage("generic.CannotOpenFile", this.offsetsFilePath);
             Logging.logger().severe(msg);
             throw new WWRuntimeException(msg);
         }
 
-        try
-        {
+        try {
             AVList bufferParams = new AVListImpl();
             bufferParams.setValue(AVKey.DATA_TYPE, AVKey.INT16);
             bufferParams.setValue(AVKey.BYTE_ORDER, AVKey.BIG_ENDIAN);
             this.deltas = BufferWrapper.wrap(WWIO.readStreamToBuffer(is, true), bufferParams);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             String msg = Logging.getMessage("generic.ExceptionAttemptingToReadFile", this.offsetsFilePath);
             Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             throw e;
-        }
-        finally
-        {
+        } finally {
             WWIO.closeStream(is, this.offsetsFilePath);
         }
     }
@@ -92,15 +83,12 @@ public class EGM96
     //    of the Prime Meridian (359.75 E). On file, the geoid heights are in units
     //    of centimeters. While retrieving the Integer*2 values on file, divide by
     //    100 and this will produce a geoid height in meters.
-
     protected static Angle INTERVAL = Angle.fromDegrees(15d / 60d); // 15' angle delta
     protected static int NUM_ROWS = 721;
     protected static int NUM_COLS = 1440;
 
-    public double getOffset(Angle latitude, Angle longitude)
-    {
-        if (latitude == null || longitude == null)
-        {
+    public double getOffset(Angle latitude, Angle longitude) {
+        if (latitude == null || longitude == null) {
             String msg = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -108,15 +96,17 @@ public class EGM96
 
         // Return 0 for all offsets if the file failed to load. A log message of the failure will have been generated
         // by the load method.
-        if (this.deltas == null)
+        if (this.deltas == null) {
             return 0;
+        }
 
         double lat = latitude.degrees;
         double lon = longitude.degrees >= 0 ? longitude.degrees : longitude.degrees + 360;
 
         int topRow = (int) ((90 - lat) / INTERVAL.degrees);
-        if (lat <= -90)
+        if (lat <= -90) {
             topRow = NUM_ROWS - 2;
+        }
         int bottomRow = topRow + 1;
 
         // Note that the number of columns does not repeat the column at 0 longitude, so we must force the right
@@ -124,8 +114,7 @@ public class EGM96
         // last column of the grid.
         int leftCol = (int) (lon / INTERVAL.degrees);
         int rightCol = leftCol + 1;
-        if (lon >= 360 - INTERVAL.degrees)
-        {
+        if (lon >= 360 - INTERVAL.degrees) {
             leftCol = NUM_COLS - 1;
             rightCol = 0;
         }
@@ -151,12 +140,12 @@ public class EGM96
         return offset / 100d; // convert centimeters to meters
     }
 
-    protected double gePostOffset(int row, int col)
-    {
+    protected double gePostOffset(int row, int col) {
         int k = row * NUM_COLS + col;
 
-        if (k >= this.deltas.length())
+        if (k >= this.deltas.length()) {
             System.out.println(k);
+        }
 
         return this.deltas.getInt(k);
     }

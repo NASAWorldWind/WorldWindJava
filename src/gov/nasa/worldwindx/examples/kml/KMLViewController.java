@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.kml;
 
 import gov.nasa.worldwind.*;
@@ -29,32 +28,37 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: KMLViewController.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class KMLViewController
-{
-    /** Default altitude from which to view a KML feature. */
+public abstract class KMLViewController {
+
+    /**
+     * Default altitude from which to view a KML feature.
+     */
     public static final double DEFAULT_VIEW_ALTITUDE = 10000;
 
-    /** Default altitude from which to view a KML feature. */
+    /**
+     * Default altitude from which to view a KML feature.
+     */
     protected double viewAltitude = DEFAULT_VIEW_ALTITUDE;
 
-    /** WorldWindow that holds the view to animate. */
+    /**
+     * WorldWindow that holds the view to animate.
+     */
     protected WorldWindow wwd;
 
     /**
      * Convenience method to create a new view controller appropriate for the <code>WorldWindow</code>'s current
-     * <code>View</code>. Accepted view types are as follows: <ul> <li>{@link gov.nasa.worldwind.view.orbit.OrbitView}</li>
+     * <code>View</code>. Accepted view types are as follows: <ul>
+     * <li>{@link gov.nasa.worldwind.view.orbit.OrbitView}</li>
      * <li>{@link gov.nasa.worldwind.view.firstperson.BasicFlyView}</li> </ul>. If the <code>View</code> is not one of
      * the recognized types, this returns <code>null</code> and logs a warning.
      *
      * @param wwd the <code>WorldWindow</code> to create a view controller for.
      *
      * @return A new view controller, or <code>null</code> if the <code>WorldWindow</code>'s <code>View</code> type is
-     *         not one of the recognized types.
+     * not one of the recognized types.
      */
-    public static KMLViewController create(WorldWindow wwd)
-    {
-        if (wwd == null)
-        {
+    public static KMLViewController create(WorldWindow wwd) {
+        if (wwd == null) {
             String message = Logging.getMessage("nullValue.WorldWindow");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -62,12 +66,11 @@ public abstract class KMLViewController
 
         View view = wwd.getView();
 
-        if (view instanceof OrbitView)
+        if (view instanceof OrbitView) {
             return new KMLOrbitViewController(wwd);
-        else if (view instanceof BasicFlyView)
+        } else if (view instanceof BasicFlyView) {
             return new KMLFlyViewController(wwd);
-        else
-        {
+        } else {
             Logging.logger().warning(Logging.getMessage("generic.UnrecognizedView", view));
             return null; // Unknown view
         }
@@ -78,8 +81,7 @@ public abstract class KMLViewController
      *
      * @param wwd WorldWindow that holds the view to animate.
      */
-    protected KMLViewController(WorldWindow wwd)
-    {
+    protected KMLViewController(WorldWindow wwd) {
         this.wwd = wwd;
     }
 
@@ -90,10 +92,8 @@ public abstract class KMLViewController
      *
      * @param feature Feature to look at.
      */
-    public void goTo(KMLAbstractFeature feature)
-    {
-        if (feature == null)
-        {
+    public void goTo(KMLAbstractFeature feature) {
+        if (feature == null) {
             String message = Logging.getMessage("nullValue.FeatureIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -101,12 +101,13 @@ public abstract class KMLViewController
 
         // First look for a KML view in the feature
         KMLAbstractView kmlView = feature.getView();
-        if (kmlView instanceof KMLLookAt)
+        if (kmlView instanceof KMLLookAt) {
             this.goTo((KMLLookAt) kmlView);
-        else if (kmlView instanceof KMLCamera)
+        } else if (kmlView instanceof KMLCamera) {
             this.goTo((KMLCamera) kmlView);
-        else
+        } else {
             this.goToDefaultView(feature);
+        }
     }
 
     /**
@@ -120,21 +121,20 @@ public abstract class KMLViewController
      *
      * @throws IllegalArgumentException if <code>view</code> is <code>null</code>.
      */
-    public void goTo(KMLAbstractView view)
-    {
-        if (view == null)
-        {
+    public void goTo(KMLAbstractView view) {
+        if (view == null) {
             String message = Logging.getMessage("nullValue.ViewIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
 
-        if (view instanceof KMLLookAt)
+        if (view instanceof KMLLookAt) {
             this.goTo((KMLLookAt) view);
-        else if (view instanceof KMLCamera)
+        } else if (view instanceof KMLCamera) {
             this.goTo((KMLCamera) view);
-        else
+        } else {
             Logging.logger().warning(Logging.getMessage("generic.UnrecognizedView", view));
+        }
     }
 
     /**
@@ -157,14 +157,10 @@ public abstract class KMLViewController
      *
      * @param feature Feature to look at.
      */
-    public void goToDefaultView(KMLAbstractFeature feature)
-    {
-        if (feature instanceof KMLPlacemark)
-        {
+    public void goToDefaultView(KMLAbstractFeature feature) {
+        if (feature instanceof KMLPlacemark) {
             this.goToDefaultPlacemarkView((KMLPlacemark) feature);
-        }
-        else if (feature instanceof KMLGroundOverlay)
-        {
+        } else if (feature instanceof KMLGroundOverlay) {
             this.goToDefaultGroundOverlayView((KMLGroundOverlay) feature);
         }
     }
@@ -174,8 +170,7 @@ public abstract class KMLViewController
      *
      * @param placemark Placemark to look at
      */
-    protected void goToDefaultPlacemarkView(KMLPlacemark placemark)
-    {
+    protected void goToDefaultPlacemarkView(KMLPlacemark placemark) {
         View view = this.wwd.getView();
         List<Position> positions = new ArrayList<Position>();
 
@@ -187,12 +182,11 @@ public abstract class KMLViewController
     }
 
     /**
-     * Go to a default view of  GroundOverlay.
+     * Go to a default view of GroundOverlay.
      *
      * @param overlay Overlay to look at
      */
-    protected void goToDefaultGroundOverlayView(KMLGroundOverlay overlay)
-    {
+    protected void goToDefaultGroundOverlayView(KMLGroundOverlay overlay) {
         // Positions are specified either as a kml:LatLonBox or a gx:LatLonQuad
         List<? extends Position> corners = overlay.getPositions().list;
 
@@ -208,8 +202,7 @@ public abstract class KMLViewController
      *
      * @param positions List of positions to bring into view
      */
-    protected void goToDefaultView(List<? extends Position> positions)
-    {
+    protected void goToDefaultView(List<? extends Position> positions) {
         View view = this.wwd.getView();
 
         // If there is only one point, move the view over that point, maintaining the current elevation.
@@ -217,8 +210,7 @@ public abstract class KMLViewController
         {
             Position pos = positions.get(0);
             view.goTo(pos, pos.getAltitude() + this.getViewAltitude());
-        }
-        else if (positions.size() > 1)// Many points
+        } else if (positions.size() > 1)// Many points
         {
             // Compute the sector that bounds all of the points in the list. Move the view so that this entire
             // sector is visible.
@@ -234,8 +226,7 @@ public abstract class KMLViewController
             double maxElevation = Math.max(minAndMaxElevations[1], maxAltitude);
 
             Extent extent = Sector.computeBoundingCylinder(globe, ve, sector, minElevation, maxElevation);
-            if (extent == null)
-            {
+            if (extent == null) {
                 String message = Logging.getMessage("nullValue.SectorIsNull");
                 Logging.logger().warning(message);
                 return;
@@ -255,16 +246,15 @@ public abstract class KMLViewController
      * @param positions List of positions to search for max altitude.
      *
      * @return The maximum elevation in the list of positions. Returns {@code Double.MIN_VALUE} if {@code positions} is
-     *         empty.
+     * empty.
      */
-    protected double findMaxAltitude(List<? extends Position> positions)
-    {
+    protected double findMaxAltitude(List<? extends Position> positions) {
         double maxAltitude = -Double.MAX_VALUE;
-        for (Position p : positions)
-        {
+        for (Position p : positions) {
             double altitude = p.getAltitude();
-            if (altitude > maxAltitude)
+            if (altitude > maxAltitude) {
                 maxAltitude = altitude;
+            }
         }
 
         return maxAltitude;
@@ -276,8 +266,7 @@ public abstract class KMLViewController
      *
      * @return Default altitude from which to view a placemark.
      */
-    public double getViewAltitude()
-    {
+    public double getViewAltitude() {
         return this.viewAltitude;
     }
 
@@ -287,8 +276,7 @@ public abstract class KMLViewController
      *
      * @param viewAltitude Default altitude from which to view a placemark.
      */
-    public void setViewAltitude(double viewAltitude)
-    {
+    public void setViewAltitude(double viewAltitude) {
         this.viewAltitude = viewAltitude;
     }
 }

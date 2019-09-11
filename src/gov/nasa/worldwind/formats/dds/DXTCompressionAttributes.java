@@ -9,8 +9,8 @@ package gov.nasa.worldwind.formats.dds;
  * @author dcollins
  * @version $Id: DXTCompressionAttributes.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class DXTCompressionAttributes
-{
+public class DXTCompressionAttributes {
+
     public static final String COLOR_BLOCK_COMPRESSION_BBOX = "ColorBlockCompressionBBox";
     public static final String COLOR_BLOCK_COMPRESSION_EUCLIDEAN_DISTANCE = "ColorBlockCompressionEuclideanDistance";
     public static final String COLOR_BLOCK_COMPRESSION_LUMINANCE_DISTANCE = "ColorBlockCompressionLuminanceDistance";
@@ -24,8 +24,7 @@ public class DXTCompressionAttributes
 
     protected static final int DEFAULT_DXT1_TRANSPARENCY_THRESHOLD = 128;
 
-    public DXTCompressionAttributes()
-    {
+    public DXTCompressionAttributes() {
         this.buildMipmaps = true;
         this.premultiplyAlpha = true;
         this.dxtFormat = 0;
@@ -34,63 +33,51 @@ public class DXTCompressionAttributes
         this.colorBlockCompressionType = COLOR_BLOCK_COMPRESSION_EUCLIDEAN_DISTANCE;
     }
 
-    public boolean isBuildMipmaps()
-    {
+    public boolean isBuildMipmaps() {
         return this.buildMipmaps;
     }
 
-    public void setBuildMipmaps(boolean buildMipmaps)
-    {
+    public void setBuildMipmaps(boolean buildMipmaps) {
         this.buildMipmaps = buildMipmaps;
     }
 
-    public boolean isPremultiplyAlpha()
-    {
+    public boolean isPremultiplyAlpha() {
         return this.premultiplyAlpha;
     }
 
-    public void setPremultiplyAlpha(boolean premultiplyAlpha)
-    {
+    public void setPremultiplyAlpha(boolean premultiplyAlpha) {
         this.premultiplyAlpha = premultiplyAlpha;
     }
 
-    public int getDXTFormat()
-    {
+    public int getDXTFormat() {
         return this.dxtFormat;
     }
 
-    public void setDXTFormat(int format)
-    {
+    public void setDXTFormat(int format) {
         this.dxtFormat = format;
     }
 
-    public boolean isEnableDXT1Alpha()
-    {
+    public boolean isEnableDXT1Alpha() {
         return this.enableDXT1Alpha;
     }
 
-    public void setEnableDXT1Alpha(boolean enable)
-    {
+    public void setEnableDXT1Alpha(boolean enable) {
         this.enableDXT1Alpha = enable;
     }
 
-    public int getDXT1AlphaThreshold()
-    {
+    public int getDXT1AlphaThreshold() {
         return this.dxt1AlphaThreshold;
     }
 
-    public void setDXT1AlphaThreshold(int threshold)
-    {
+    public void setDXT1AlphaThreshold(int threshold) {
         this.dxt1AlphaThreshold = threshold;
     }
 
-    public String getColorBlockCompressionType()
-    {
+    public String getColorBlockCompressionType() {
         return this.colorBlockCompressionType;
     }
 
-    public void setColorBlockCompressionType(String compressionType)
-    {
+    public void setColorBlockCompressionType(String compressionType) {
         this.colorBlockCompressionType = compressionType;
     }
 }

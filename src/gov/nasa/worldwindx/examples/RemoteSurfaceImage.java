@@ -17,15 +17,14 @@ import gov.nasa.worldwind.render.SurfaceImage;
  * @author dcollins
  * @version $Id: RemoteSurfaceImage.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class RemoteSurfaceImage extends ApplicationTemplate
-{
+public class RemoteSurfaceImage extends ApplicationTemplate {
+
     // The remote image to display.
     protected static final String IMAGE_URL = "https://eoimages.gsfc.nasa.gov/ve//1438/earth_lights_lrg.jpg";
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             SurfaceImage image = new SurfaceImage(IMAGE_URL, Sector.FULL_SPHERE);
 
             RenderableLayer layer = new RenderableLayer();
@@ -38,8 +37,7 @@ public class RemoteSurfaceImage extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Remote Surface Image", RemoteSurfaceImage.AppFrame.class);
     }
 }

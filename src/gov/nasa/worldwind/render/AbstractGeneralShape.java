@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.WorldWind;
@@ -33,28 +32,28 @@ import java.util.Map;
  * archive.
  * <p>
  * This class applies {@link ShapeAttributes} to the shape, but the effect of some of those attributes, such as {@link
- * ShapeAttributes#isDrawOutline()} is dependent on the specific implementation of this <code>AbstractGeneralShape</code>. See
- * the class description of those shapes to determine how shape attributes are applied.
+ * ShapeAttributes#isDrawOutline()} is dependent on the specific implementation of this
+ * <code>AbstractGeneralShape</code>. See the class description of those shapes to determine how shape attributes are
+ * applied.
  *
  * @author tag
  * @version $Id: AbstractGeneralShape.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class AbstractGeneralShape extends AbstractShape
-{
+public abstract class AbstractGeneralShape extends AbstractShape {
+
     /**
      * This class holds globe-specific data for this shape. It's managed via the shape-data cache in {@link
      * gov.nasa.worldwind.render.AbstractShape.AbstractShapeData}.
      */
-    protected static class ShapeData extends AbstractShapeData
-    {
+    protected static class ShapeData extends AbstractShapeData {
+
         /**
          * Construct a cache entry for this shape.
          *
-         * @param dc    the current draw context.
+         * @param dc the current draw context.
          * @param shape this shape.
          */
-        public ShapeData(DrawContext dc, AbstractGeneralShape shape)
-        {
+        public ShapeData(DrawContext dc, AbstractGeneralShape shape) {
             super(dc, shape.minExpiryTime, shape.maxExpiryTime);
         }
     }
@@ -64,14 +63,17 @@ public abstract class AbstractGeneralShape extends AbstractShape
      *
      * @return the current data cache entry.
      */
-    protected ShapeData getCurrent()
-    {
+    protected ShapeData getCurrent() {
         return (ShapeData) this.getCurrentData();
     }
 
-    /** This shape's geographic location. The altitude is relative to this shapes altitude mode. */
+    /**
+     * This shape's geographic location. The altitude is relative to this shapes altitude mode.
+     */
     protected Position modelPosition;
-    /** This shape's heading, positive values are clockwise from north. Null is an allowed value. */
+    /**
+     * This shape's heading, positive values are clockwise from north. Null is an allowed value.
+     */
     protected Angle heading;
     /**
      * This shape's pitch (often called tilt), its rotation about the model's X axis. Positive values are clockwise.
@@ -83,23 +85,25 @@ public abstract class AbstractGeneralShape extends AbstractShape
      * Value.
      */
     protected Angle roll;
-    /** A scale to apply to the model. Null is an allowed value. */
+    /**
+     * A scale to apply to the model. Null is an allowed value.
+     */
     protected Vec4 modelScale;
-    /** A map indicating the actual location of resources named in the model. Null is an allowed value. */
+    /**
+     * A map indicating the actual location of resources named in the model. Null is an allowed value.
+     */
     protected Map<String, Object> resourceMap;
 
     /**
      * Constructs a shape at 0 latitude, longitude and altitude. Because the shape's default altitude mode is
      * <code>ABSOLUTE</code>, the default altitude is relative to mean sea level.
      */
-    public AbstractGeneralShape()
-    {
+    public AbstractGeneralShape() {
         this.modelPosition = Position.ZERO;
     }
 
     @Override
-    protected void initialize()
-    {
+    protected void initialize() {
         // Overridden to specify a default altitude mode unique to AbstractGeneralShape.
         this.altitudeMode = WorldWind.CLAMP_TO_GROUND;
     }
@@ -109,8 +113,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
      *
      * @return this shape's resource map, or null if this shape has no resource map.
      */
-    public Map<String, Object> getResourceMap()
-    {
+    public Map<String, Object> getResourceMap() {
         return resourceMap;
     }
 
@@ -119,8 +122,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
      *
      * @param resourceMap the resource map for this shape. May be null, in which case no resource map is used.
      */
-    public void setResourceMap(Map<String, Object> resourceMap)
-    {
+    public void setResourceMap(Map<String, Object> resourceMap) {
         this.resourceMap = resourceMap;
     }
 
@@ -129,8 +131,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
      *
      * @return this shape's geographic position. The position's altitude is relative to this shape's altitude mode.
      */
-    public Position getModelPosition()
-    {
+    public Position getModelPosition() {
         return modelPosition;
     }
 
@@ -141,8 +142,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
      *
      * @throws IllegalArgumentException if the position is null.
      */
-    public void setModelPosition(Position modelPosition)
-    {
+    public void setModelPosition(Position modelPosition) {
         this.modelPosition = modelPosition;
     }
 
@@ -151,8 +151,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
      *
      * @return this shape's scale, or null if no scale has been specified.
      */
-    public Vec4 getModelScale()
-    {
+    public Vec4 getModelScale() {
         return modelScale;
     }
 
@@ -162,8 +161,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
      *
      * @param modelScale this shape's scale. May be null, in which case no scaling is applied.
      */
-    public void setModelScale(Vec4 modelScale)
-    {
+    public void setModelScale(Vec4 modelScale) {
         this.modelScale = modelScale;
     }
 
@@ -172,8 +170,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
      *
      * @return this shape's heading, or null if no heading has been specified.
      */
-    public Angle getHeading()
-    {
+    public Angle getHeading() {
         return heading;
     }
 
@@ -182,8 +179,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
      *
      * @param heading this shape's heading. May be null.
      */
-    public void setHeading(Angle heading)
-    {
+    public void setHeading(Angle heading) {
         this.heading = heading;
     }
 
@@ -192,10 +188,9 @@ public abstract class AbstractGeneralShape extends AbstractShape
      * axis.
      *
      * @return this shape's pitch, or null if no pitch has been specified. Positive values are clockwise as observed
-     *         looking along the model's X axis toward the model's origin.
+     * looking along the model's X axis toward the model's origin.
      */
-    public Angle getPitch()
-    {
+    public Angle getPitch() {
         return pitch;
     }
 
@@ -204,10 +199,9 @@ public abstract class AbstractGeneralShape extends AbstractShape
      * axis.
      *
      * @param pitch this shape's pitch. Positive values are clockwise as observed looking along the model's X axis
-     *              toward the model's origin. May be null.
+     * toward the model's origin. May be null.
      */
-    public void setPitch(Angle pitch)
-    {
+    public void setPitch(Angle pitch) {
         this.pitch = pitch;
     }
 
@@ -215,10 +209,9 @@ public abstract class AbstractGeneralShape extends AbstractShape
      * Indicates this shape's roll, the angle to rotate this shape's model about its Y axis.
      *
      * @return this shape's roll, or null if no roll has been specified. Positive values are clockwise as observed
-     *         looking along the model's Y axis toward the origin.
+     * looking along the model's Y axis toward the origin.
      */
-    public Angle getRoll()
-    {
+    public Angle getRoll() {
         return roll;
     }
 
@@ -226,27 +219,26 @@ public abstract class AbstractGeneralShape extends AbstractShape
      * Specifies this shape's roll, the angle to rotate this shape's model about its Y axis.
      *
      * @param roll this shape's roll. May be null. Positive values are clockwise as observed looking along the model's Y
-     *             axis toward the origin.
+     * axis toward the origin.
      */
-    public void setRoll(Angle roll)
-    {
+    public void setRoll(Angle roll) {
         this.roll = roll;
     }
 
-    public Position getReferencePosition()
-    {
+    public Position getReferencePosition() {
         return this.getModelPosition();
     }
 
-    protected Vec4 computeReferencePoint(Terrain terrain)
-    {
+    protected Vec4 computeReferencePoint(Terrain terrain) {
         Position refPos = this.getReferencePosition();
-        if (refPos == null)
+        if (refPos == null) {
             return null;
+        }
 
         Vec4 refPt = terrain.getSurfacePoint(refPos.getLatitude(), refPos.getLongitude(), 0);
-        if (refPt == null)
+        if (refPt == null) {
             return null;
+        }
 
         return refPt;
     }
@@ -256,43 +248,43 @@ public abstract class AbstractGeneralShape extends AbstractShape
      * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
-     * @param dc        the current draw context.
+     * @param dc the current draw context.
      * @param shapeData the current shape data for this shape.
      *
      * @return the minimum distance from the shape to the eye point.
      */
-    protected double computeEyeDistance(DrawContext dc, ShapeData shapeData)
-    {
+    protected double computeEyeDistance(DrawContext dc, ShapeData shapeData) {
         Vec4 eyePoint = dc.getView().getEyePoint();
 
         // TODO: compute distance using extent.getEffectiveRadius(Plane)
         Extent extent = shapeData.getExtent();
-        if (extent != null)
+        if (extent != null) {
             return extent.getCenter().distanceTo3(eyePoint) + extent.getRadius();
+        }
 
         Vec4 refPt = shapeData.getReferencePoint();
-        if (refPt != null)
+        if (refPt != null) {
             return refPt.distanceTo3(eyePoint);
+        }
 
         return 0;
     }
 
-    public void moveTo(Position position)
-    {
+    public void moveTo(Position position) {
         this.setModelPosition(position);
     }
 
     @Override
-    protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
-    {
+    protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
         String message = Logging.getMessage("unsupportedOperation.doExportAsKML");
         Logging.logger().severe(message);
         throw new UnsupportedOperationException(message);
     }
 
-    /** {@inheritDoc} Not currently supported. */
-    public Sector getSector()
-    {
+    /**
+     * {@inheritDoc} Not currently supported.
+     */
+    public Sector getSector() {
         return null;
     }
 }

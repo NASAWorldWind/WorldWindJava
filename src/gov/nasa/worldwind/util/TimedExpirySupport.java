@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.render.DrawContext;
@@ -16,17 +15,18 @@ import java.util.Random;
  *
  * @version $Id: TimedExpirySupport.java 2065 2014-06-20 16:58:48Z dcollins $
  */
-public class TimedExpirySupport
-{
+public class TimedExpirySupport {
+
     protected boolean expired = true;
     protected long expiryTime = -1L;
     protected long minExpiryTime;
     protected long maxExpiryTime;
     protected static Random rand = new Random();
 
-    /** Constructs an instance with minimum expiry interval of 1 second and a max of 2 seconds. */
-    public TimedExpirySupport()
-    {
+    /**
+     * Constructs an instance with minimum expiry interval of 1 second and a max of 2 seconds.
+     */
+    public TimedExpirySupport() {
         this.minExpiryTime = 2000;
         this.maxExpiryTime = 3000;
     }
@@ -38,8 +38,7 @@ public class TimedExpirySupport
      * @param minExpiryTime the minimum interval allowed to pass before expiration, in milliseconds.
      * @param maxExpiryTime the maximum interval allowed to pass before expiration, in milliseconds.
      */
-    public TimedExpirySupport(long minExpiryTime, long maxExpiryTime)
-    {
+    public TimedExpirySupport(long minExpiryTime, long maxExpiryTime) {
         this.minExpiryTime = Math.max(minExpiryTime, 0);
         this.maxExpiryTime = Math.max(maxExpiryTime, 0);
     }
@@ -49,8 +48,7 @@ public class TimedExpirySupport
      *
      * @param expired true to indicate expired, false to indicate not expired.
      */
-    public void setExpired(boolean expired)
-    {
+    public void setExpired(boolean expired) {
         this.expired = expired;
     }
 
@@ -59,8 +57,7 @@ public class TimedExpirySupport
      *
      * @return the current expiration time, in milliseconds.
      */
-    public long getExpiryTime()
-    {
+    public long getExpiryTime() {
         return this.expiryTime;
     }
 
@@ -70,8 +67,7 @@ public class TimedExpirySupport
      *
      * @param expiryTime the new expiration time, in milliseconds.
      */
-    public void setExpiryTime(long expiryTime)
-    {
+    public void setExpiryTime(long expiryTime) {
         this.expiryTime = expiryTime;
     }
 
@@ -82,8 +78,7 @@ public class TimedExpirySupport
      * @param minExpiryTime the minimum interval allowed to pass before expiration, in milliseconds.
      * @param maxExpiryTime the maximum interval allowed to pass before expiration, in milliseconds.
      */
-    public void setExpiryTime(long minExpiryTime, long maxExpiryTime)
-    {
+    public void setExpiryTime(long minExpiryTime, long maxExpiryTime) {
         this.minExpiryTime = Math.max(minExpiryTime, 0);
         this.maxExpiryTime = Math.max(maxExpiryTime, 0);
     }
@@ -93,8 +88,7 @@ public class TimedExpirySupport
      *
      * @return this timer's minimum expiry interval, in milliseconds.
      */
-    public long getMinExpiryTime()
-    {
+    public long getMinExpiryTime() {
         return this.minExpiryTime;
     }
 
@@ -103,8 +97,7 @@ public class TimedExpirySupport
      *
      * @return this timer's maximum expiry interval, in milliseconds.
      */
-    public long getMaxExpiryTime()
-    {
+    public long getMaxExpiryTime() {
         return this.maxExpiryTime;
     }
 
@@ -117,14 +110,15 @@ public class TimedExpirySupport
      *
      * @throws IllegalArgumentException if the draw context is null.
      */
-    public boolean isExpired(DrawContext dc)
-    {
-        if (this.expired)
+    public boolean isExpired(DrawContext dc) {
+        if (this.expired) {
             return true;
+        }
 
         long now = dc != null ? dc.getFrameTimeStamp() : System.currentTimeMillis();
-        if (now >= this.expiryTime)
+        if (now >= this.expiryTime) {
             return true;
+        }
 
         return false;
     }
@@ -133,12 +127,11 @@ public class TimedExpirySupport
      * Indicates whether this timer has expired.
      *
      * @param now the time to relate this timer's expiration time to. The timer is considered expired if this timer's
-     *            expiry time is less than this value.
+     * expiry time is less than this value.
      *
      * @return true if this timer has expired relative to system time, otherwise false.
      */
-    public boolean isExpired(long now)
-    {
+    public boolean isExpired(long now) {
         return this.expired || this.expiryTime < now;
     }
 
@@ -149,17 +142,13 @@ public class TimedExpirySupport
      *
      * @throws IllegalArgumentException if the draw context is null.
      */
-    public void restart(DrawContext dc)
-    {
-        if (this.maxExpiryTime == 0 || this.maxExpiryTime < this.minExpiryTime)
-        {
+    public void restart(DrawContext dc) {
+        if (this.maxExpiryTime == 0 || this.maxExpiryTime < this.minExpiryTime) {
             this.expired = true;
-        }
-        else
-        {
+        } else {
             long now = dc != null ? dc.getFrameTimeStamp() : System.currentTimeMillis();
             this.expiryTime = now + this.minExpiryTime
-                + rand.nextInt((int) (this.maxExpiryTime - this.minExpiryTime));
+                    + rand.nextInt((int) (this.maxExpiryTime - this.minExpiryTime));
             this.expired = false;
         }
     }

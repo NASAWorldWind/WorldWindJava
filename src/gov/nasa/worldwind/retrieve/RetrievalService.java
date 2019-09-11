@@ -11,8 +11,8 @@ import gov.nasa.worldwind.WWObject;
  * @author Tom Gaskins
  * @version $Id: RetrievalService.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface RetrievalService extends WWObject
-{
+public interface RetrievalService extends WWObject {
+
     RetrievalFuture runRetriever(Retriever retriever);
 
     RetrievalFuture runRetriever(Retriever retriever, double priority);
@@ -31,8 +31,8 @@ public interface RetrievalService extends WWObject
 
     void shutdown(boolean immediately);
 
-    public interface SSLExceptionListener
-    {
+    public interface SSLExceptionListener {
+
         void onException(Throwable e, String path);
     }
 

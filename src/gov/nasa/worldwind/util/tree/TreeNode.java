@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.tree;
 
 import gov.nasa.worldwind.WWObject;
@@ -16,15 +15,21 @@ import gov.nasa.worldwind.render.WWTexture;
  * @version $Id: TreeNode.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see TreeModel
  */
-public interface TreeNode extends WWObject
-{
-    /** All nodes in a subtree are selected. */
+public interface TreeNode extends WWObject {
+
+    /**
+     * All nodes in a subtree are selected.
+     */
     final static String SELECTED = "util.tree.Selected";
 
-    /** No nodes in a subtree are selected. */
+    /**
+     * No nodes in a subtree are selected.
+     */
     final static String NOT_SELECTED = "util.tree.NotSelected";
 
-    /** Some nodes in a subtree are selected, and some are not. */
+    /**
+     * Some nodes in a subtree are selected, and some are not.
+     */
     final static String PARTIALLY_SELECTED = "util.tree.PartiallySelected";
 
     /**
@@ -159,7 +164,7 @@ public interface TreeNode extends WWObject
      * @param child New child.
      *
      * @throws IndexOutOfBoundsException if {@code index} is less than zero or greater than the number of children
-     *                                   already in the list.
+     * already in the list.
      */
     void addChild(int index, TreeNode child) throws IndexOutOfBoundsException;
 
@@ -170,7 +175,9 @@ public interface TreeNode extends WWObject
      */
     void removeChild(TreeNode child);
 
-    /** Remove all of the child nodes from this node. */
+    /**
+     * Remove all of the child nodes from this node.
+     */
     void removeAllChildren();
 
     /**

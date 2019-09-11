@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.terrain;
 
 import gov.nasa.worldwind.geom.*;
@@ -21,8 +20,8 @@ import java.util.List;
  * @author tag
  * @version $Id: BathymetryFilterElevationModel.java 2014 2014-05-20 19:46:55Z tgaskins $
  */
-public class BathymetryFilterElevationModel extends AbstractElevationModel
-{
+public class BathymetryFilterElevationModel extends AbstractElevationModel {
+
     protected ElevationModel sourceModel;
     protected double threshold = 0d;
 
@@ -31,15 +30,14 @@ public class BathymetryFilterElevationModel extends AbstractElevationModel
      *
      * @param source the elevation model to filter.
      */
-    public BathymetryFilterElevationModel(ElevationModel source)
-    {
+    public BathymetryFilterElevationModel(ElevationModel source) {
         this.sourceModel = source;
     }
 
-    public void dispose()
-    {
-        if (this.sourceModel != null)
+    public void dispose() {
+        if (this.sourceModel != null) {
             this.sourceModel.dispose();
+        }
     }
 
     /**
@@ -47,8 +45,7 @@ public class BathymetryFilterElevationModel extends AbstractElevationModel
      *
      * @return the source elevation model.
      */
-    public ElevationModel getSourceModel()
-    {
+    public ElevationModel getSourceModel() {
         return this.sourceModel;
     }
 
@@ -57,8 +54,7 @@ public class BathymetryFilterElevationModel extends AbstractElevationModel
      *
      * @return the threshold.
      */
-    public double getThreshold()
-    {
+    public double getThreshold() {
         return this.threshold;
     }
 
@@ -66,88 +62,79 @@ public class BathymetryFilterElevationModel extends AbstractElevationModel
      * Sets the value of the threshold. The default threshold is 0.
      *
      * @param threshold the desired threshold. Elevations less than this value are set to this value prior to being
-     *                  return by any method returning one or more elevations.
+     * return by any method returning one or more elevations.
      */
-    public void setThreshold(double threshold)
-    {
+    public void setThreshold(double threshold) {
         this.threshold = threshold;
     }
 
-    public double getMaxElevation()
-    {
+    public double getMaxElevation() {
         return this.clampElevation(this.sourceModel.getMaxElevation());
     }
 
-    public double getMinElevation()
-    {
+    public double getMinElevation() {
         return this.clampElevation(this.sourceModel.getMinElevation());
     }
 
-    public double[] getExtremeElevations(Angle latitude, Angle longitude)
-    {
+    public double[] getExtremeElevations(Angle latitude, Angle longitude) {
         double[] elevs = this.sourceModel.getExtremeElevations(latitude, longitude);
-        if (elevs == null)
+        if (elevs == null) {
             return elevs;
+        }
 
-        return new double[] {this.clampElevation(elevs[0]), this.clampElevation(elevs[1])};
+        return new double[]{this.clampElevation(elevs[0]), this.clampElevation(elevs[1])};
     }
 
-    public double[] getExtremeElevations(Sector sector)
-    {
+    public double[] getExtremeElevations(Sector sector) {
         double[] elevs = this.sourceModel.getExtremeElevations(sector);
-        if (elevs == null)
+        if (elevs == null) {
             return elevs;
+        }
 
-        return new double[] {this.clampElevation(elevs[0]), this.clampElevation(elevs[1])};
+        return new double[]{this.clampElevation(elevs[0]), this.clampElevation(elevs[1])};
     }
 
-    public double getElevations(Sector sector, List<? extends LatLon> latlons, double targetResolution, double[] buffer)
-    {
+    public double getElevations(Sector sector, List<? extends LatLon> latlons, double targetResolution, double[] buffer) {
         double resolution = this.sourceModel.getElevations(sector, latlons, targetResolution, buffer);
 
-        for (int i = 0; i < latlons.size(); i++)
-        {
+        for (int i = 0; i < latlons.size(); i++) {
             LatLon ll = latlons.get(i);
-            if (this.sourceModel.contains(ll.getLatitude(), ll.getLongitude()) && buffer[i] < this.threshold)
+            if (this.sourceModel.contains(ll.getLatitude(), ll.getLongitude()) && buffer[i] < this.threshold) {
                 buffer[i] = this.threshold;
+            }
         }
 
         return resolution;
     }
 
     public double getUnmappedElevations(Sector sector, List<? extends LatLon> latlons, double targetResolution,
-        double[] buffer)
-    {
+            double[] buffer) {
         double resolution = this.sourceModel.getElevations(sector, latlons, targetResolution, buffer);
 
-        for (int i = 0; i < latlons.size(); i++)
-        {
+        for (int i = 0; i < latlons.size(); i++) {
             LatLon ll = latlons.get(i);
             if (this.sourceModel.contains(ll.getLatitude(), ll.getLongitude())
-                && buffer[i] != this.sourceModel.getMissingDataSignal() && buffer[i] < this.threshold)
+                    && buffer[i] != this.sourceModel.getMissingDataSignal() && buffer[i] < this.threshold) {
                 buffer[i] = this.threshold;
+            }
         }
 
         return resolution;
     }
 
-    public int intersects(Sector sector)
-    {
+    public int intersects(Sector sector) {
         return this.sourceModel.intersects(sector);
     }
 
-    public boolean contains(Angle latitude, Angle longitude)
-    {
+    public boolean contains(Angle latitude, Angle longitude) {
         return this.sourceModel.contains(latitude, longitude);
     }
 
-    public double getBestResolution(Sector sector)
-    {
+    public double getBestResolution(Sector sector) {
         return this.sourceModel.getBestResolution(sector);
     }
 
-    public double getUnmappedElevation(Angle latitude, Angle longitude)
-    {
+    public double getUnmappedElevation(Angle latitude, Angle longitude) {
         double elev = this.sourceModel.getUnmappedElevation(latitude, longitude);
 
         return elev != this.sourceModel.getMissingDataSignal() && elev < this.threshold ? this.threshold : elev;
@@ -159,36 +146,31 @@ public class BathymetryFilterElevationModel extends AbstractElevationModel
      * @param elevation the elevation to check and map.
      *
      * @return the input elevation if it is greater than or equal to the threshold elevation, otherwise the threshold
-     *         elevation.
+     * elevation.
      */
-    protected double clampElevation(double elevation)
-    {
+    protected double clampElevation(double elevation) {
         return elevation < this.threshold ? this.threshold : elevation;
     }
 
     @Override
-    public double getLocalDataAvailability(Sector sector, Double targetResolution)
-    {
+    public double getLocalDataAvailability(Sector sector, Double targetResolution) {
         return this.sourceModel.getLocalDataAvailability(sector, targetResolution);
     }
 
     @Override
-    public Object getValue(String key)
-    {
+    public Object getValue(String key) {
         Object o = super.getValue(key);
 
         return o != null ? o : this.sourceModel != null ? this.sourceModel.getValue(key) : null;
     }
 
     @Override
-    public void setExtremesCachingEnabled(boolean enabled)
-    {
+    public void setExtremesCachingEnabled(boolean enabled) {
         this.sourceModel.setExtremesCachingEnabled(enabled);
     }
 
     @Override
-    public boolean isExtremesCachingEnabled()
-    {
+    public boolean isExtremesCachingEnabled() {
         return this.sourceModel.isExtremesCachingEnabled();
     }
 }

@@ -32,8 +32,8 @@ import java.io.FileWriter;
  * @version $Id: MGRSAttributesPanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 @SuppressWarnings("unchecked")
-public class MGRSAttributesPanel extends JPanel
-{
+public class MGRSAttributesPanel extends JPanel {
+
     // Logical components.
     private final MGRSGraticuleLayer layer;
     // UI components.
@@ -48,7 +48,7 @@ public class MGRSAttributesPanel extends JPanel
     private boolean ignoreLayerEvents = false;
     private boolean ignoreUIEvents = false;
 
-    private String[] ALL_GRATICULE_TYPES = new String[] {
+    private String[] ALL_GRATICULE_TYPES = new String[]{
         UTMBaseGraticuleLayer.GRATICULE_UTM,
         MGRSGraticuleLayer.GRATICULE_UTM_GRID,
         MGRSGraticuleLayer.GRATICULE_100000M,
@@ -58,7 +58,7 @@ public class MGRSAttributesPanel extends JPanel
         MGRSGraticuleLayer.GRATICULE_10M,
         MGRSGraticuleLayer.GRATICULE_1M
     };
-    private String[] MGRS_GRATICULE_TYPES = new String[] {
+    private String[] MGRS_GRATICULE_TYPES = new String[]{
         MGRSGraticuleLayer.GRATICULE_UTM_GRID,
         MGRSGraticuleLayer.GRATICULE_100000M,
         MGRSGraticuleLayer.GRATICULE_10000M,
@@ -68,10 +68,8 @@ public class MGRSAttributesPanel extends JPanel
         MGRSGraticuleLayer.GRATICULE_1M
     };
 
-    public MGRSAttributesPanel(MGRSGraticuleLayer mgrsGraticuleLayer)
-    {
-        if (mgrsGraticuleLayer == null)
-        {
+    public MGRSAttributesPanel(MGRSGraticuleLayer mgrsGraticuleLayer) {
+        if (mgrsGraticuleLayer == null) {
             String message = Logging.getMessage("nullValue.LayerIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -86,8 +84,7 @@ public class MGRSAttributesPanel extends JPanel
         init();
     }
 
-    private void init()
-    {
+    private void init() {
         // Initialize UI components.
         makeComponents();
         // Initialize UI layout.
@@ -100,36 +97,27 @@ public class MGRSAttributesPanel extends JPanel
         this.cardLayout.show(this.cardPanel, selectedType);
     }
 
-    public final MGRSGraticuleLayer getLayer()
-    {
+    public final MGRSGraticuleLayer getLayer() {
         return this.layer;
     }
 
-    public static JDialog showDialog(Component component, String title, MGRSGraticuleLayer mgrsGraticuleLayer)
-    {
-        if (mgrsGraticuleLayer == null)
-        {
+    public static JDialog showDialog(Component component, String title, MGRSGraticuleLayer mgrsGraticuleLayer) {
+        if (mgrsGraticuleLayer == null) {
             String message = Logging.getMessage("nullValue.LayerIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         JDialog dialog;
-        if (component != null && component instanceof Dialog)
-        {
+        if (component != null && component instanceof Dialog) {
             dialog = new JDialog((Dialog) component);
-        }
-        else if (component != null && component instanceof Frame)
-        {
+        } else if (component != null && component instanceof Frame) {
             dialog = new JDialog((Frame) component);
-        }
-        else
-        {
+        } else {
             dialog = new JDialog();
         }
 
-        if (title != null)
-        {
+        if (title != null) {
             dialog.setTitle(title);
         }
 
@@ -141,16 +129,13 @@ public class MGRSAttributesPanel extends JPanel
         return dialog;
     }
 
-    public String getSelectedGraticule()
-    {
+    public String getSelectedGraticule() {
         Object selectedValue = this.itemList.getSelectedValue();
         return selectedValue != null ? selectedValue.toString() : null;
     }
 
-    public void setSelectedGraticule(String graticuleType)
-    {
-        if (graticuleType == null)
-        {
+    public void setSelectedGraticule(String graticuleType) {
+        if (graticuleType == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -160,130 +145,109 @@ public class MGRSAttributesPanel extends JPanel
         this.cardLayout.show(this.cardPanel, graticuleType);
     }
 
-    private void onListSelectionChanged(ListSelectionEvent event)
-    {
-        if (event != null)
-        {
+    private void onListSelectionChanged(ListSelectionEvent event) {
+        if (event != null) {
             Object selectedValue = this.itemList.getSelectedValue();
             this.cardLayout.show(this.cardPanel, selectedValue.toString());
         }
     }
 
-    private void onMaxResolutionChanged(ActionEvent event)
-    {
-        if (event != null)
-        {
-            if (!this.ignoreUIEvents)
-            {
+    private void onMaxResolutionChanged(ActionEvent event) {
+        if (event != null) {
+            if (!this.ignoreUIEvents) {
                 updateLayer();
             }
         }
     }
 
-    private void onSaveStatePressed(ActionEvent event)
-    {
-        if (event == null)
+    private void onSaveStatePressed(ActionEvent event) {
+        if (event == null) {
             return;
+        }
 
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int resultVal = fc.showSaveDialog(this);
-        if (resultVal != JFileChooser.APPROVE_OPTION)
+        if (resultVal != JFileChooser.APPROVE_OPTION) {
             return;
+        }
 
         File file = fc.getSelectedFile();
-        if (file == null)
+        if (file == null) {
             return;
+        }
 
-        try
-        {
+        try {
             String stateInXml = this.layer.getRestorableState();
             saveString(stateInXml, file);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void onLoadStatePressed(ActionEvent event)
-    {
-        if (event == null)
+    private void onLoadStatePressed(ActionEvent event) {
+        if (event == null) {
             return;
+        }
 
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int resultVal = fc.showOpenDialog(this);
-        if (resultVal != JFileChooser.APPROVE_OPTION)
+        if (resultVal != JFileChooser.APPROVE_OPTION) {
             return;
+        }
 
         File file = fc.getSelectedFile();
-        if (file == null)
+        if (file == null) {
             return;
+        }
 
-        try
-        {
+        try {
             String stateInXml = loadString(file);
             this.layer.restoreState(stateInXml);
             this.layer.firePropertyChange(AVKey.LAYER, null, this.layer);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void onPanelStateChanged(PropertyChangeEvent event, String graticuleType)
-    {
-        if (event != null && graticuleType != null)
-        {
-            if (!this.ignoreUIEvents)
-            {
+    private void onPanelStateChanged(PropertyChangeEvent event, String graticuleType) {
+        if (event != null && graticuleType != null) {
+            if (!this.ignoreUIEvents) {
                 if (//event.getPropertyName().equals(GraticuleAttributesPanel.LINE_ENABLED_PROPERTY)
-                    event.getPropertyName().equals(GraticuleAttributesPanel.LINE_COLOR_PROPERTY)
-                    || event.getPropertyName().equals(GraticuleAttributesPanel.LINE_WIDTH_PROPERTY)
-                    || event.getPropertyName().equals(GraticuleAttributesPanel.LINE_STYLE_PROPERTY)
-                    || event.getPropertyName().equals(GraticuleAttributesPanel.LABEL_ENABLED_PROPERTY)
-                    || event.getPropertyName().equals(GraticuleAttributesPanel.LABEL_COLOR_PROPERTY)
-                    || event.getPropertyName().equals(GraticuleAttributesPanel.LABEL_FONT_PROPERTY))
-                {
+                        event.getPropertyName().equals(GraticuleAttributesPanel.LINE_COLOR_PROPERTY)
+                        || event.getPropertyName().equals(GraticuleAttributesPanel.LINE_WIDTH_PROPERTY)
+                        || event.getPropertyName().equals(GraticuleAttributesPanel.LINE_STYLE_PROPERTY)
+                        || event.getPropertyName().equals(GraticuleAttributesPanel.LABEL_ENABLED_PROPERTY)
+                        || event.getPropertyName().equals(GraticuleAttributesPanel.LABEL_COLOR_PROPERTY)
+                        || event.getPropertyName().equals(GraticuleAttributesPanel.LABEL_FONT_PROPERTY)) {
                     updateLayer();
                 }
             }
         }
     }
 
-    private void updateLayer()
-    {
+    private void updateLayer() {
         this.ignoreLayerEvents = true;
-        try
-        {
-            if (this.layer != null)
-            {
+        try {
+            if (this.layer != null) {
                 this.layer.setMaximumGraticuleResolution(this.maxResolutionComboBox.getSelectedItem().toString());
 
-                for (Map.Entry<String, Component> entry : this.graticuleAttribPanelMap.entrySet())
-                {
-                    if (entry.getKey() != null && entry.getValue() != null)
-                    {
-                        if (entry.getValue() instanceof GraticuleAttributesPanel)
-                        {
+                for (Map.Entry<String, Component> entry : this.graticuleAttribPanelMap.entrySet()) {
+                    if (entry.getKey() != null && entry.getValue() != null) {
+                        if (entry.getValue() instanceof GraticuleAttributesPanel) {
                             updateLayerState((GraticuleAttributesPanel) entry.getValue(), entry.getKey());
                         }
                     }
                 }
             }
-        }
-        finally
-        {
+        } finally {
             this.ignoreLayerEvents = false;
         }
     }
 
-    private void updateLayerState(GraticuleAttributesPanel attributesPanel, String graticuleType)
-    {
-        if (this.layer != null && attributesPanel != null && graticuleType != null)
-        {
+    private void updateLayerState(GraticuleAttributesPanel attributesPanel, String graticuleType) {
+        if (this.layer != null && attributesPanel != null && graticuleType != null) {
             //this.layer.setDrawGraticule(attributesPanel.isLineEnableSelected(), graticuleType);
             this.layer.setGraticuleLineColor(attributesPanel.getSelectedLineColor(), graticuleType);
             this.layer.setGraticuleLineWidth(attributesPanel.getSelectedLineWidth(), graticuleType);
@@ -295,48 +259,35 @@ public class MGRSAttributesPanel extends JPanel
         }
     }
 
-    private void onLayerPropertyChanged(PropertyChangeEvent event)
-    {
-        if (event != null)
-        {
-            if (!this.ignoreLayerEvents)
-            {
+    private void onLayerPropertyChanged(PropertyChangeEvent event) {
+        if (event != null) {
+            if (!this.ignoreLayerEvents) {
                 updateComponents();
             }
         }
     }
 
-    private void updateComponents()
-    {
+    private void updateComponents() {
         this.ignoreUIEvents = true;
-        try
-        {
-            if (this.layer != null)
-            {
+        try {
+            if (this.layer != null) {
                 this.maxResolutionComboBox.setSelectedItem(layer.getMaximumGraticuleResolution());
             }
 
-            for (Map.Entry<String, Component> entry : this.graticuleAttribPanelMap.entrySet())
-            {
-                if (entry.getKey() != null && entry.getValue() != null)
-                {
-                    if (entry.getValue() instanceof GraticuleAttributesPanel)
-                    {
+            for (Map.Entry<String, Component> entry : this.graticuleAttribPanelMap.entrySet()) {
+                if (entry.getKey() != null && entry.getValue() != null) {
+                    if (entry.getValue() instanceof GraticuleAttributesPanel) {
                         updatePanelState((GraticuleAttributesPanel) entry.getValue(), entry.getKey());
                     }
                 }
             }
-        }
-        finally
-        {
+        } finally {
             this.ignoreUIEvents = false;
         }
     }
 
-    private void updatePanelState(GraticuleAttributesPanel panel, String graticuleType)
-    {
-        if (this.layer != null && panel != null && graticuleType != null)
-        {
+    private void updatePanelState(GraticuleAttributesPanel panel, String graticuleType) {
+        if (this.layer != null && panel != null && graticuleType != null) {
             panel.setSelectedLineColor(this.layer.getGraticuleLineColor(graticuleType));
             panel.setSelectedLineWidth(this.layer.getGraticuleLineWidth(graticuleType));
             panel.setSelectedLineStyle(this.layer.getGraticuleLineStyle(graticuleType));
@@ -346,31 +297,24 @@ public class MGRSAttributesPanel extends JPanel
         }
     }
 
-    private static String loadString(File file) throws IOException
-    {
+    private static String loadString(File file) throws IOException {
         String s = null;
         FileReader reader = null;
-        try
-        {
+        try {
             reader = new FileReader(file);
             StringBuilder sb = new StringBuilder();
             int numRead;
             char[] buffer = new char[2048];
-            while ((numRead = reader.read(buffer, 0, buffer.length)) != -1)
-            {
+            while ((numRead = reader.read(buffer, 0, buffer.length)) != -1) {
                 sb.append(buffer, 0, numRead);
             }
             s = sb.toString();
-        }
-        finally
-        {
-            try
-            {
-                if (reader != null)
+        } finally {
+            try {
+                if (reader != null) {
                     reader.close();
-            }
-            catch (Exception e)
-            {
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -378,33 +322,25 @@ public class MGRSAttributesPanel extends JPanel
         return s;
     }
 
-    private static void saveString(String s, File file) throws IOException
-    {
+    private static void saveString(String s, File file) throws IOException {
         FileWriter writer = null;
-        try
-        {
-            if (s != null && file != null)
-            {
+        try {
+            if (s != null && file != null) {
                 writer = new FileWriter(file);
                 writer.write(s);
             }
-        }
-        finally
-        {
-            try
-            {
-                if (writer != null)
+        } finally {
+            try {
+                if (writer != null) {
                     writer.close();
-            }
-            catch (Exception e)
-            {
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void makeComponents()
-    {
+    private void makeComponents() {
         this.itemList = new JList(ALL_GRATICULE_TYPES);
         this.itemList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         ListCellRenderer originalRenderer = this.itemList.getCellRenderer();
@@ -439,17 +375,14 @@ public class MGRSAttributesPanel extends JPanel
         this.cardLayout = new CardLayout();
         this.cardPanel = new JPanel();
         this.cardPanel.setLayout(this.cardLayout);
-        for (String type : ALL_GRATICULE_TYPES)
-        {
+        for (String type : ALL_GRATICULE_TYPES) {
             Component panel = makeGraticulePanel(type);
             this.graticuleAttribPanelMap.put(type, panel);
         }
     }
 
-    private Component makeGraticulePanel(final String graticuleType)
-    {
-        if (graticuleType == null)
-        {
+    private Component makeGraticulePanel(final String graticuleType) {
+        if (graticuleType == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -465,8 +398,7 @@ public class MGRSAttributesPanel extends JPanel
         return panel;
     }
 
-    private void layoutComponents()
-    {
+    private void layoutComponents() {
         setLayout(new BorderLayout());
 
         //---------- Graticule Item List ----------//
@@ -498,10 +430,8 @@ public class MGRSAttributesPanel extends JPanel
         //---------- Graticule Card Panel ----------//
         {
             this.cardPanel.setBorder(new EmptyBorder(30, 5, 20, 20));
-            for (Map.Entry<String, Component> entry : this.graticuleAttribPanelMap.entrySet())
-            {
-                if (entry.getKey() != null && entry.getValue() != null)
-                {
+            for (Map.Entry<String, Component> entry : this.graticuleAttribPanelMap.entrySet()) {
+                if (entry.getKey() != null && entry.getValue() != null) {
                     this.cardPanel.add(entry.getValue(), entry.getKey());
                 }
             }
@@ -509,42 +439,37 @@ public class MGRSAttributesPanel extends JPanel
         }
     }
 
-    private static String getGraticuleLabel(String graticuleType)
-    {
+    private static String getGraticuleLabel(String graticuleType) {
         String labelText = null;
-        if (UTMBaseGraticuleLayer.GRATICULE_UTM.equals(graticuleType))
+        if (UTMBaseGraticuleLayer.GRATICULE_UTM.equals(graticuleType)) {
             labelText = "Global UTM";
-        else if (MGRSGraticuleLayer.GRATICULE_UTM_GRID.equals(graticuleType))
+        } else if (MGRSGraticuleLayer.GRATICULE_UTM_GRID.equals(graticuleType)) {
             labelText = "UTM Grid";
-        else if (MGRSGraticuleLayer.GRATICULE_100000M.equals(graticuleType))
+        } else if (MGRSGraticuleLayer.GRATICULE_100000M.equals(graticuleType)) {
             labelText = "100km";
-        else if (MGRSGraticuleLayer.GRATICULE_10000M.equals(graticuleType))
+        } else if (MGRSGraticuleLayer.GRATICULE_10000M.equals(graticuleType)) {
             labelText = "10km";
-        else if (MGRSGraticuleLayer.GRATICULE_1000M.equals(graticuleType))
+        } else if (MGRSGraticuleLayer.GRATICULE_1000M.equals(graticuleType)) {
             labelText = "1km";
-        else if (MGRSGraticuleLayer.GRATICULE_100M.equals(graticuleType))
+        } else if (MGRSGraticuleLayer.GRATICULE_100M.equals(graticuleType)) {
             labelText = "100m";
-        else if (MGRSGraticuleLayer.GRATICULE_10M.equals(graticuleType))
+        } else if (MGRSGraticuleLayer.GRATICULE_10M.equals(graticuleType)) {
             labelText = "10m";
-        else if (MGRSGraticuleLayer.GRATICULE_1M.equals(graticuleType))
+        } else if (MGRSGraticuleLayer.GRATICULE_1M.equals(graticuleType)) {
             labelText = "1m";
+        }
         return labelText;
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    private Icon getIcon(String path)
-    {
+    private Icon getIcon(String path) {
         Icon icon = null;
-        try
-        {
+        try {
             URL url = getClass().getResource(path);
-            if (url != null)
-            {
+            if (url != null) {
                 icon = new ImageIcon(url);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = "Exception while loading icon";
             Logging.logger().log(java.util.logging.Level.WARNING, message, e);
         }
@@ -552,34 +477,28 @@ public class MGRSAttributesPanel extends JPanel
     }
 
     @SuppressWarnings("unchecked")
-    private static class GraticuleTypeListRenderer implements ListCellRenderer
-    {
+    private static class GraticuleTypeListRenderer implements ListCellRenderer {
+
         private ListCellRenderer delegate;
         private Icon icon;
 
-        public GraticuleTypeListRenderer(ListCellRenderer delegate, Icon icon)
-        {
+        public GraticuleTypeListRenderer(ListCellRenderer delegate, Icon icon) {
             this.delegate = delegate;
             this.icon = icon;
         }
 
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
-        {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = this.delegate.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if (c != null && c instanceof JLabel)
-            {
+            if (c != null && c instanceof JLabel) {
                 JLabel label = (JLabel) c;
                 Font font = label.getFont();
-                if (font != null)
-                {
+                if (font != null) {
                     label.setFont(font.deriveFont(Font.BOLD));
                 }
-                if (this.icon != null)
-                {
+                if (this.icon != null) {
                     label.setIcon(this.icon);
                 }
-                if (value != null && value instanceof String)
-                {
+                if (value != null && value instanceof String) {
                     String graticuleType = (String) value;
                     String labelText = getGraticuleLabel(graticuleType);
                     label.setText(labelText);

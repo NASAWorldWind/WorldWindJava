@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.event.Message;
@@ -22,8 +21,8 @@ import java.util.*;
  * @author tag
  * @version $Id: KMLAbstractContainer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLAbstractContainer extends KMLAbstractFeature
-{
+public class KMLAbstractContainer extends KMLAbstractFeature {
+
     protected ArrayList<KMLAbstractFeature> features = new ArrayList<KMLAbstractFeature>();
 
     /**
@@ -31,36 +30,34 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    protected KMLAbstractContainer(String namespaceURI)
-    {
+    protected KMLAbstractContainer(String namespaceURI) {
         super(namespaceURI);
     }
 
     @Override
     protected void doAddEventContent(Object o, XMLEventParserContext ctx, XMLEvent event, Object... args)
-        throws XMLStreamException
-    {
-        if (o instanceof KMLAbstractFeature)
+            throws XMLStreamException {
+        if (o instanceof KMLAbstractFeature) {
             this.addFeature((KMLAbstractFeature) o);
-        else
+        } else {
             super.doAddEventContent(o, ctx, event, args);
+        }
     }
 
-    public List<KMLAbstractFeature> getFeatures()
-    {
+    public List<KMLAbstractFeature> getFeatures() {
         return this.features;
     }
 
-    public void addFeature(KMLAbstractFeature feature)
-    {
-        if (feature != null)
+    public void addFeature(KMLAbstractFeature feature) {
+        if (feature != null) {
             this.features.add(feature);
+        }
     }
 
-    public void removeFeature(KMLAbstractFeature feature)
-    {
-        if (feature != null)
+    public void removeFeature(KMLAbstractFeature feature) {
+        if (feature != null) {
             this.getFeatures().remove(feature);
+        }
     }
 
     /**
@@ -80,8 +77,7 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      * @return <code>true</code> if this container should be rendered, otherwise <code>false</code>.
      */
     @Override
-    protected boolean isFeatureActive(KMLTraversalContext tc, DrawContext dc)
-    {
+    protected boolean isFeatureActive(KMLTraversalContext tc, DrawContext dc) {
         return this.getVisibility() == null || this.getVisibility();
     }
 
@@ -96,15 +92,11 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      * @param dc the current draw context.
      */
     @Override
-    protected void doPreRender(KMLTraversalContext tc, DrawContext dc)
-    {
+    protected void doPreRender(KMLTraversalContext tc, DrawContext dc) {
         this.beginRendering(tc, dc);
-        try
-        {
+        try {
             this.preRenderFeatures(tc, dc);
-        }
-        finally
-        {
+        } finally {
             this.endRendering(tc, dc);
         }
     }
@@ -120,16 +112,12 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      * @param dc the current draw context.
      */
     @Override
-    protected void doRender(KMLTraversalContext tc, DrawContext dc)
-    {
+    protected void doRender(KMLTraversalContext tc, DrawContext dc) {
         this.beginRendering(tc, dc);
-        try
-        {
+        try {
             this.renderBalloon(tc, dc);
             this.renderFeatures(tc, dc);
-        }
-        finally
-        {
+        } finally {
             this.endRendering(tc, dc);
         }
     }
@@ -143,10 +131,10 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      * @param dc the current draw context.
      */
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void beginRendering(KMLTraversalContext tc, DrawContext dc)
-    {
-        if (this.getRegion() != null)
+    protected void beginRendering(KMLTraversalContext tc, DrawContext dc) {
+        if (this.getRegion() != null) {
             tc.pushRegion(this.getRegion());
+        }
     }
 
     /**
@@ -158,10 +146,10 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      * @param dc the current draw context.
      */
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void endRendering(KMLTraversalContext tc, DrawContext dc)
-    {
-        if (this.getRegion() != null)
+    protected void endRendering(KMLTraversalContext tc, DrawContext dc) {
+        if (this.getRegion() != null) {
             tc.popRegion();
+        }
     }
 
     /**
@@ -171,25 +159,23 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      * @param tc the current KML traversal context.
      * @param dc the current draw context.
      */
-    protected void preRenderFeatures(KMLTraversalContext tc, DrawContext dc)
-    {
+    protected void preRenderFeatures(KMLTraversalContext tc, DrawContext dc) {
         List<KMLAbstractFeature> containers = new ArrayList<KMLAbstractFeature>();
 
         // PreRender non-container child features first, and containers second. This ensures that features closer to the
         // root are rendered before features deeper in the tree. In the case of an image pyramid of GroundOverlays,
         // this causes the deeper nested overlays (which are typically more detailed) to render on top of the more
         // general overlay that is higher in the tree.
-        for (KMLAbstractFeature feature : this.getFeatures())
-        {
-            if (feature instanceof KMLAbstractContainer)
+        for (KMLAbstractFeature feature : this.getFeatures()) {
+            if (feature instanceof KMLAbstractContainer) {
                 containers.add(feature);
-            else
+            } else {
                 feature.preRender(tc, dc);
+            }
         }
 
         // Now preRender the containers
-        for (KMLAbstractFeature feature : containers)
-        {
+        for (KMLAbstractFeature feature : containers) {
             feature.preRender(tc, dc);
         }
     }
@@ -201,34 +187,30 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      * @param tc the current KML traversal context.
      * @param dc the current draw context.
      */
-    protected void renderFeatures(KMLTraversalContext tc, DrawContext dc)
-    {
+    protected void renderFeatures(KMLTraversalContext tc, DrawContext dc) {
         List<KMLAbstractFeature> containers = new ArrayList<KMLAbstractFeature>();
 
         // Render non-container child features first, and containers second. This ensures that features closer to the
         // root are rendered before features deeper in the tree. In the case of an image pyramid of GroundOverlays,
         // this causes the deeper nested overlays (which are typically more detailed) to render on top of the more
         // general overlay that is higher in the tree.
-        for (KMLAbstractFeature feature : this.getFeatures())
-        {
-            if (feature instanceof KMLAbstractContainer)
+        for (KMLAbstractFeature feature : this.getFeatures()) {
+            if (feature instanceof KMLAbstractContainer) {
                 containers.add(feature);
-            else
+            } else {
                 feature.render(tc, dc);
+            }
         }
 
         // Now render the containers
-        for (KMLAbstractFeature feature : containers)
-        {
+        for (KMLAbstractFeature feature : containers) {
             feature.render(tc, dc);
         }
     }
 
     @Override
-    public void applyChange(KMLAbstractObject sourceValues)
-    {
-        if (!(sourceValues instanceof KMLAbstractContainer))
-        {
+    public void applyChange(KMLAbstractObject sourceValues) {
+        if (!(sourceValues instanceof KMLAbstractContainer)) {
             String message = Logging.getMessage("KML.InvalidElementType", sourceValues.getClass().getName());
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -238,8 +220,9 @@ public class KMLAbstractContainer extends KMLAbstractFeature
 
         KMLAbstractContainer sourceContainer = (KMLAbstractContainer) sourceValues;
 
-        if (sourceContainer.getFeatures() != null && sourceContainer.getFeatures().size() > 0)
+        if (sourceContainer.getFeatures() != null && sourceContainer.getFeatures().size() > 0) {
             this.mergeFeatures(sourceContainer);
+        }
     }
 
     /**
@@ -248,22 +231,19 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      *
      * @param sourceContainer the incoming container of features.
      */
-    protected void mergeFeatures(KMLAbstractContainer sourceContainer)
-    {
+    protected void mergeFeatures(KMLAbstractContainer sourceContainer) {
         // Make a copy of the existing list so we can modify it as we traverse.
         List<KMLAbstractFeature> featuresListCopy = new ArrayList<KMLAbstractFeature>(this.getFeatures().size());
         Collections.copy(featuresListCopy, this.getFeatures());
 
-        for (KMLAbstractFeature sourceFeature : sourceContainer.getFeatures())
-        {
+        for (KMLAbstractFeature sourceFeature : sourceContainer.getFeatures()) {
             String id = sourceFeature.getId();
-            if (!WWUtil.isEmpty(id))
-            {
-                for (KMLAbstractFeature existingFeature : featuresListCopy)
-                {
+            if (!WWUtil.isEmpty(id)) {
+                for (KMLAbstractFeature existingFeature : featuresListCopy) {
                     String currentId = existingFeature.getId();
-                    if (!WWUtil.isEmpty(currentId) && currentId.equals(id))
+                    if (!WWUtil.isEmpty(currentId) && currentId.equals(id)) {
                         this.getFeatures().remove(existingFeature);
+                    }
                 }
             }
 
@@ -272,10 +252,8 @@ public class KMLAbstractContainer extends KMLAbstractFeature
     }
 
     @Override
-    public void onMessage(Message msg)
-    {
-        for (KMLAbstractFeature feature : this.getFeatures())
-        {
+    public void onMessage(Message msg) {
+        for (KMLAbstractFeature feature : this.getFeatures()) {
             feature.onMessage(msg);
         }
 

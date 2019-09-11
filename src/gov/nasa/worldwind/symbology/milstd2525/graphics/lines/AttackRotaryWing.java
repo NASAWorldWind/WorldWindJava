@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.geom.*;
@@ -18,13 +17,19 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: AttackRotaryWing.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class AttackRotaryWing extends Aviation
-{
-    /** Index of the left vertical path in the {@code paths} array. */
+public class AttackRotaryWing extends Aviation {
+
+    /**
+     * Index of the left vertical path in the {@code paths} array.
+     */
     protected final static int LEFT_VERTICAL = 1;
-    /** Index of the right vertical path in the {@code paths} array. */
+    /**
+     * Index of the right vertical path in the {@code paths} array.
+     */
     protected final static int RIGHT_VERTICAL = 2;
-    /** Index of the rotor symbol path in the {@code paths} array. */
+    /**
+     * Index of the rotor symbol path in the {@code paths} array.
+     */
     protected final static int ROTOR_SYMBOL = 3;
 
     /**
@@ -32,8 +37,7 @@ public class AttackRotaryWing extends Aviation
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(TacGrpSidc.C2GM_OFF_LNE_AXSADV_ATK);
     }
 
@@ -42,15 +46,13 @@ public class AttackRotaryWing extends Aviation
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public AttackRotaryWing(String sidc)
-    {
+    public AttackRotaryWing(String sidc) {
         super(sidc, 4);
     }
 
     @Override
     protected void createLinePositions(List<Position> leftPositions, List<Position> rightPositions, double halfWidth,
-        Globe globe)
-    {
+            Globe globe) {
         super.createLinePositions(leftPositions, rightPositions, halfWidth, globe);
 
         // Rotary Wing is based on the Aviation graphic, but adds a symbol for the rotor (an upward pointing arrow),
@@ -65,7 +67,6 @@ public class AttackRotaryWing extends Aviation
         // ____B/    \ D /
         //            | /
         //            |/
-
         Iterator<? extends Position> iterator = this.positions.iterator();
         final Position pos1 = iterator.next();
         final Position pos2 = iterator.next();
@@ -124,7 +125,6 @@ public class AttackRotaryWing extends Aviation
         //     |
         // E ----- F
         //     G
-
         // Compute the width of the symbol base from the width of the entire graphic
         final double halfBaseWidth = halfWidth / 4;
 

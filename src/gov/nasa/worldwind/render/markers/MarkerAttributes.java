@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render.markers;
 
 import gov.nasa.worldwind.render.Material;
@@ -13,8 +12,8 @@ import gov.nasa.worldwind.render.DrawContext;
  * @author tag
  * @version $Id: MarkerAttributes.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface MarkerAttributes
-{
+public interface MarkerAttributes {
+
     Material getMaterial();
 
     void setMaterial(Material material);

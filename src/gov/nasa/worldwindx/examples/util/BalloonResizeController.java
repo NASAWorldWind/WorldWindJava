@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.util;
 
 import gov.nasa.worldwind.WorldWindow;
@@ -24,8 +23,8 @@ import java.awt.event.*;
  *
  * @see BalloonController
  */
-public class BalloonResizeController extends AbstractResizeHotSpot
-{
+public class BalloonResizeController extends AbstractResizeHotSpot {
+
     protected WorldWindow wwd;
     protected Rectangle bounds;
     protected Balloon balloon;
@@ -35,20 +34,17 @@ public class BalloonResizeController extends AbstractResizeHotSpot
     /**
      * Create a resize controller.
      *
-     * @param wwd     WorldWindow to interact with.
+     * @param wwd WorldWindow to interact with.
      * @param balloon Balloon to resize.
      */
-    public BalloonResizeController(WorldWindow wwd, Balloon balloon)
-    {
-        if (wwd == null)
-        {
+    public BalloonResizeController(WorldWindow wwd, Balloon balloon) {
+        if (wwd == null) {
             String message = Logging.getMessage("nullValue.WorldWindow");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (balloon == null)
-        {
+        if (balloon == null) {
             String message = Logging.getMessage("nullValue.BalloonIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -65,24 +61,21 @@ public class BalloonResizeController extends AbstractResizeHotSpot
      * Remove this controller as an event listener. The controller will not receive input events after this method is
      * called.
      */
-    public void detach()
-    {
+    public void detach() {
         this.wwd.removeSelectListener(this);
         this.wwd.getInputHandler().removeMouseMotionListener(this);
     }
 
     @Override
-    public void mouseMoved(MouseEvent e)
-    {
-        if (e == null || e.isConsumed())
+    public void mouseMoved(MouseEvent e) {
+        if (e == null || e.isConsumed()) {
             return;
-        
+        }
+
         PickedObjectList pickedObjects = wwd.getObjectsAtCurrentPosition();
-        if (pickedObjects != null)
-        {
+        if (pickedObjects != null) {
             Rectangle rect = this.getBounds(pickedObjects.getTopPickedObject());
-            if (rect != null)
-            {
+            if (rect != null) {
                 this.setBounds(rect);
             }
         }
@@ -96,19 +89,20 @@ public class BalloonResizeController extends AbstractResizeHotSpot
      *
      * @return True if the controller is currently resizing the balloon.
      */
-    public boolean isResizing()
-    {
+    public boolean isResizing() {
         return this.isDragging();
     }
 
-    /** {@inheritDoc} */
-    protected Dimension getSize()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    protected Dimension getSize() {
         Rectangle bounds = this.getBounds();
-        if (bounds != null)
+        if (bounds != null) {
             return bounds.getSize();
-        else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -116,8 +110,7 @@ public class BalloonResizeController extends AbstractResizeHotSpot
      *
      * @return Balloon bounds in AWT coordinates, or {@code null} if no bounds have been set.
      */
-    public Rectangle getBounds()
-    {
+    public Rectangle getBounds() {
         return this.bounds;
     }
 
@@ -126,32 +119,29 @@ public class BalloonResizeController extends AbstractResizeHotSpot
      *
      * @param bounds Balloon bounds, in AWT coordinates.
      */
-    public void setBounds(Rectangle bounds)
-    {
+    public void setBounds(Rectangle bounds) {
         this.bounds = bounds;
     }
 
     /**
-    * Update the WorldWindow's cursor to the current resize cursor.
-    */
-    protected void updateCursor()
-    {
-        if (this.wwd instanceof Component)
-        {
+     * Update the WorldWindow's cursor to the current resize cursor.
+     */
+    protected void updateCursor() {
+        if (this.wwd instanceof Component) {
             ((Component) this.wwd).setCursor(this.getCursor());
         }
     }
 
-    /** {@inheritDoc} */
-    protected void setSize(Dimension newSize)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    protected void setSize(Dimension newSize) {
         Size size = Size.fromPixels(newSize.width, newSize.height);
 
         BalloonAttributes attributes = this.balloon.getAttributes();
 
         // If the balloon is using default attributes, create a new set of attributes that we can customize
-        if (attributes == null)
-        {
+        if (attributes == null) {
             attributes = new BasicBalloonAttributes();
             this.balloon.setAttributes(attributes);
         }
@@ -163,8 +153,7 @@ public class BalloonResizeController extends AbstractResizeHotSpot
 
         // If the balloon also has highlight attributes, change the highlight size as well.
         BalloonAttributes highlightAttributes = this.balloon.getHighlightAttributes();
-        if (highlightAttributes != null)
-        {
+        if (highlightAttributes != null) {
             highlightAttributes.setSize(size);
             highlightAttributes.setMaximumSize(null);
         }
@@ -173,46 +162,47 @@ public class BalloonResizeController extends AbstractResizeHotSpot
     /**
      * Get the balloon bounds from a SelectEvent.
      *
-     * @param pickedObject Top picked object. The bounds are expected to be attached to the to PickedObject
-     *        under AVKey.BOUNDS.
+     * @param pickedObject Top picked object. The bounds are expected to be attached to the to PickedObject under
+     * AVKey.BOUNDS.
      *
      * @return Bounds or {@code null} if no bounds are found in the top PickedObject.
      */
-    protected Rectangle getBounds(PickedObject pickedObject)
-    {
-        if (pickedObject != null)
-        {
+    protected Rectangle getBounds(PickedObject pickedObject) {
+        if (pickedObject != null) {
             Object bounds = pickedObject.getValue(AVKey.BOUNDS);
-            if (bounds instanceof Rectangle)
-            {
+            if (bounds instanceof Rectangle) {
                 return (Rectangle) bounds;
             }
         }
         return null;
     }
 
-    /** {@inheritDoc} */
-    protected Point getScreenPoint()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    protected Point getScreenPoint() {
         Rectangle bounds = this.getBounds();
-        if (bounds != null)
+        if (bounds != null) {
             return bounds.getLocation();
-        else
+        } else {
             return null;
+        }
     }
 
-    /** {@inheritDoc} */
-    protected void setScreenPoint(Point newPoint)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    protected void setScreenPoint(Point newPoint) {
         // Do not set the screen point. The balloon is attached to a particular screen point, and we do not want to
         // change it. When the balloon is resized, the attachment point should remain constant, and the balloon should
         // move.
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected Dimension getMinimumSize()
-    {
+    protected Dimension getMinimumSize() {
         return DEFAULT_MIN_SIZE;
     }
 }

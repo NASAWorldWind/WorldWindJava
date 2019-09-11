@@ -14,8 +14,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: GraticuleRenderingParams.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GraticuleRenderingParams extends AVListImpl
-{
+public class GraticuleRenderingParams extends AVListImpl {
+
     public static final String KEY_DRAW_LINES = "DrawGraticule";
     public static final String KEY_LINE_COLOR = "GraticuleLineColor";
     public static final String KEY_LINE_WIDTH = "GraticuleLineWidth";
@@ -28,31 +28,25 @@ public class GraticuleRenderingParams extends AVListImpl
     public static final String VALUE_LINE_STYLE_DASHED = "LineStyleDashed";
     public static final String VALUE_LINE_STYLE_DOTTED = "LineStyleDotted";
 
-    public GraticuleRenderingParams()
-    {
+    public GraticuleRenderingParams() {
     }
 
-    public boolean isDrawLines()
-    {
+    public boolean isDrawLines() {
         Object value = getValue(KEY_DRAW_LINES);
         return value instanceof Boolean ? (Boolean) value : false;
     }
 
-    public void setDrawLines(boolean drawLines)
-    {
+    public void setDrawLines(boolean drawLines) {
         setValue(KEY_DRAW_LINES, drawLines);
     }
 
-    public Color getLineColor()
-    {
+    public Color getLineColor() {
         Object value = getValue(KEY_LINE_COLOR);
         return value instanceof Color ? (Color) value : null;
     }
 
-    public void setLineColor(Color color)
-    {
-        if (color == null)
-        {
+    public void setLineColor(Color color) {
+        if (color == null) {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -61,28 +55,23 @@ public class GraticuleRenderingParams extends AVListImpl
         setValue(KEY_LINE_COLOR, color);
     }
 
-    public double getLineWidth()
-    {
+    public double getLineWidth() {
 
         Object value = getValue(KEY_LINE_WIDTH);
         return value instanceof Double ? (Double) value : 0;
     }
 
-    public void setLineWidth(double lineWidth)
-    {
+    public void setLineWidth(double lineWidth) {
         setValue(KEY_LINE_WIDTH, lineWidth);
     }
 
-    public String getLineStyle()
-    {
+    public String getLineStyle() {
         Object value = getValue(KEY_LINE_STYLE);
         return value instanceof String ? (String) value : null;
     }
 
-    public void setLineStyle(String lineStyle)
-    {
-        if (lineStyle == null)
-        {
+    public void setLineStyle(String lineStyle) {
+        if (lineStyle == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -91,27 +80,22 @@ public class GraticuleRenderingParams extends AVListImpl
         setValue(KEY_LINE_STYLE, lineStyle);
     }
 
-    public boolean isDrawLabels()
-    {
+    public boolean isDrawLabels() {
         Object value = getValue(KEY_DRAW_LABELS);
         return value instanceof Boolean ? (Boolean) value : false;
     }
 
-    public void setDrawLabels(boolean drawLabels)
-    {
+    public void setDrawLabels(boolean drawLabels) {
         setValue(KEY_DRAW_LABELS, drawLabels);
     }
 
-    public Color getLabelColor()
-    {
+    public Color getLabelColor() {
         Object value = getValue(KEY_LABEL_COLOR);
         return value instanceof Color ? (Color) value : null;
     }
 
-    public void setLabelColor(Color color)
-    {
-        if (color == null)
-        {
+    public void setLabelColor(Color color) {
+        if (color == null) {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -120,16 +104,13 @@ public class GraticuleRenderingParams extends AVListImpl
         setValue(KEY_LABEL_COLOR, color);
     }
 
-    public Font getLabelFont()
-    {
+    public Font getLabelFont() {
         Object value = getValue(KEY_LABEL_FONT);
         return value instanceof Font ? (Font) value : null;
     }
 
-    public void setLabelFont(Font font)
-    {
-        if (font == null)
-        {
+    public void setLabelFont(Font font) {
+        if (font == null) {
             String message = Logging.getMessage("nullValue.FontIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);

@@ -17,9 +17,11 @@ import java.util.EventObject;
  * @author dcollins
  * @version $Id: WWEvent.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class WWEvent extends EventObject
-{
-    /** Denotes whether or not the event has been consumed. Initially {@code false}. */
+public class WWEvent extends EventObject {
+
+    /**
+     * Denotes whether or not the event has been consumed. Initially {@code false}.
+     */
     protected boolean consumed;
 
     /**
@@ -29,8 +31,7 @@ public class WWEvent extends EventObject
      *
      * @throws IllegalArgumentException if the source is {@code null}.
      */
-    public WWEvent(Object source)
-    {
+    public WWEvent(Object source) {
         super(source);
     }
 
@@ -38,8 +39,7 @@ public class WWEvent extends EventObject
      * Consumes the event so it will not be processed in the default manner by the source which originated it. This does
      * nothing if the event cannot be consumed.
      */
-    public void consume()
-    {
+    public void consume() {
         this.consumed = true;
     }
 
@@ -51,8 +51,7 @@ public class WWEvent extends EventObject
      *
      * @return {@code true} if the event has been consumed, and {@code false} otherwise.
      */
-    public boolean isConsumed()
-    {
+    public boolean isConsumed() {
         return this.consumed;
     }
 }

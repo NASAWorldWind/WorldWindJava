@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.wcs;
 
 import gov.nasa.worldwind.ogc.ows.OWSWGS84BoundingBox;
@@ -18,8 +17,7 @@ import java.util.*;
  * @author tag
  * @version $Id: WCSCoverageSummary.java 2061 2014-06-19 19:59:40Z tgaskins $
  */
-public class WCSCoverageSummary extends AbstractXMLEventParser
-{
+public class WCSCoverageSummary extends AbstractXMLEventParser {
     // TODO: metadata
 
     protected List<String> abstracts = new ArrayList<String>(1);
@@ -29,121 +27,99 @@ public class WCSCoverageSummary extends AbstractXMLEventParser
     protected List<String> supportedFormats = new ArrayList<String>(1);
     protected List<String> titles = new ArrayList<String>(1);
 
-    public WCSCoverageSummary(String namespaceURI)
-    {
+    public WCSCoverageSummary(String namespaceURI) {
         super(namespaceURI);
     }
 
-    public List<String> getAbstracts()
-    {
+    public List<String> getAbstracts() {
         return this.abstracts;
     }
 
-    public String getAbstract()
-    {
+    public String getAbstract() {
         Iterator<String> iter = this.abstracts.iterator();
 
         return iter.hasNext() ? iter.next() : null;
     }
 
-    public List<OWSWGS84BoundingBox> getBoundingBoxes()
-    {
+    public List<OWSWGS84BoundingBox> getBoundingBoxes() {
         return this.boundingBoxes;
     }
 
-    public OWSWGS84BoundingBox getBoundingBox()
-    {
+    public OWSWGS84BoundingBox getBoundingBox() {
         Iterator<OWSWGS84BoundingBox> iter = this.boundingBoxes.iterator();
 
         return iter.hasNext() ? iter.next() : null;
     }
 
-    public List<WCSCoverageSummary> getCoverageSummaries()
-    {
+    public List<WCSCoverageSummary> getCoverageSummaries() {
         return this.coverageSummaries;
     }
 
-    public String getIdentifier()
-    {
+    public String getIdentifier() {
         return (String) this.getField("Identifier");
     }
 
-    public List<String> getKeywords()
-    {
+    public List<String> getKeywords() {
         return ((StringListXMLEventParser) this.getField("Keywords")).getStrings();
     }
 
-    public List<String> getSupportedCRSs()
-    {
+    public List<String> getSupportedCRSs() {
         return this.supportedCRSs;
     }
 
-    public List<String> getSupportedFormats()
-    {
+    public List<String> getSupportedFormats() {
         return this.supportedFormats;
     }
 
-    public List<String> getTitles()
-    {
+    public List<String> getTitles() {
         return this.titles;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         Iterator<String> iter = this.titles.iterator();
 
         return iter.hasNext() ? iter.next() : null;
     }
 
     protected void doParseEventContent(XMLEventParserContext ctx, XMLEvent event, Object... args)
-        throws XMLStreamException
-    {
-        if (ctx.isStartElement(event, "Abstract"))
-        {
+            throws XMLStreamException {
+        if (ctx.isStartElement(event, "Abstract")) {
             String s = ctx.getStringParser().parseString(ctx, event);
-            if (!WWUtil.isEmpty(s))
+            if (!WWUtil.isEmpty(s)) {
                 this.abstracts.add(s);
-        }
-        else if (ctx.isStartElement(event, "WGS84BoundingBox"))
-        {
+            }
+        } else if (ctx.isStartElement(event, "WGS84BoundingBox")) {
             XMLEventParser parser = this.allocate(ctx, event);
-            if (parser != null)
-            {
+            if (parser != null) {
                 Object o = parser.parse(ctx, event, args);
-                if (o != null && o instanceof OWSWGS84BoundingBox)
+                if (o != null && o instanceof OWSWGS84BoundingBox) {
                     this.boundingBoxes.add((OWSWGS84BoundingBox) o);
+                }
             }
-        }
-        else if (ctx.isStartElement(event, "CoverageSummary"))
-        {
+        } else if (ctx.isStartElement(event, "CoverageSummary")) {
             XMLEventParser parser = this.allocate(ctx, event);
-            if (parser != null)
-            {
+            if (parser != null) {
                 Object o = parser.parse(ctx, event, args);
-                if (o != null && o instanceof WCSCoverageSummary)
+                if (o != null && o instanceof WCSCoverageSummary) {
                     this.coverageSummaries.add((WCSCoverageSummary) o);
+                }
             }
-        }
-        else if (ctx.isStartElement(event, "SupportedCRS"))
-        {
+        } else if (ctx.isStartElement(event, "SupportedCRS")) {
             String s = ctx.getStringParser().parseString(ctx, event);
-            if (!WWUtil.isEmpty(s))
+            if (!WWUtil.isEmpty(s)) {
                 this.supportedCRSs.add(s);
-        }
-        else if (ctx.isStartElement(event, "SupportedFormat"))
-        {
+            }
+        } else if (ctx.isStartElement(event, "SupportedFormat")) {
             String s = ctx.getStringParser().parseString(ctx, event);
-            if (!WWUtil.isEmpty(s))
+            if (!WWUtil.isEmpty(s)) {
                 this.supportedFormats.add(s);
-        }
-        else if (ctx.isStartElement(event, "Title"))
-        {
+            }
+        } else if (ctx.isStartElement(event, "Title")) {
             String s = ctx.getStringParser().parseString(ctx, event);
-            if (!WWUtil.isEmpty(s))
+            if (!WWUtil.isEmpty(s)) {
                 this.titles.add(s);
-        }
-        else
-        {
+            }
+        } else {
             super.doParseEventContent(ctx, event, args);
         }
     }

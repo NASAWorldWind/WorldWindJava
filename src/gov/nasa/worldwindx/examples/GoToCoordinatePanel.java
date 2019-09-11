@@ -46,22 +46,19 @@ import java.util.regex.*;
  * @author Patrick Murris
  * @version $Id: GoToCoordinatePanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
+public class GoToCoordinatePanel extends JPanel {
 
-public class GoToCoordinatePanel extends JPanel
-{
     private WorldWindow wwd;
     private JTextField coordInput;
     private JLabel resultLabel;
 
-    public GoToCoordinatePanel(WorldWindow wwd)
-    {
+    public GoToCoordinatePanel(WorldWindow wwd) {
         super(new GridLayout(0, 1, 0, 0));
         this.wwd = wwd;
         this.makePanel();
     }
 
-    private JPanel makePanel()
-    {
+    private JPanel makePanel() {
         JPanel controlPanel = this;
 
         // Coord input
@@ -69,11 +66,9 @@ public class GoToCoordinatePanel extends JPanel
         coordPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
         this.coordInput = new JTextField(10);
         this.coordInput.setToolTipText("Type coordinates and press Enter");
-        this.coordInput.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                LatLon latLon =  computeLatLonFromString(coordInput.getText(), wwd.getModel().getGlobe());
+        this.coordInput.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                LatLon latLon = computeLatLonFromString(coordInput.getText(), wwd.getModel().getGlobe());
                 updateResult(latLon);
             }
         });
@@ -89,14 +84,11 @@ public class GoToCoordinatePanel extends JPanel
         JPanel gotoPanel = new JPanel(new GridLayout(0, 1, 0, 0));
         gotoPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
         JButton gotoButton = new JButton("Go to location");
-        gotoButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                LatLon latLon =  computeLatLonFromString(coordInput.getText(), wwd.getModel().getGlobe());
+        gotoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                LatLon latLon = computeLatLonFromString(coordInput.getText(), wwd.getModel().getGlobe());
                 updateResult(latLon);
-                if (latLon != null)
-                {
+                if (latLon != null) {
                     View view = wwd.getView();
                     double distance = view.getCenterPoint().distanceTo3(view.getEyePoint());
                     view.goTo(new Position(latLon, 0), distance);
@@ -114,16 +106,14 @@ public class GoToCoordinatePanel extends JPanel
         return controlPanel;
     }
 
-    private void updateResult(LatLon latLon)
-    {
-        if (latLon != null)
-        {
+    private void updateResult(LatLon latLon) {
+        if (latLon != null) {
             coordInput.setText(coordInput.getText().toUpperCase());
             resultLabel.setText(String.format("Lat %7.4f\u00B0 Lon %7.4f\u00B0",
-                    latLon.getLatitude().degrees,  latLon.getLongitude().degrees));
-        }
-        else
+                    latLon.getLatitude().degrees, latLon.getLongitude().degrees));
+        } else {
             resultLabel.setText("Invalid coordinates");
+        }
 
     }
 
@@ -134,10 +124,8 @@ public class GoToCoordinatePanel extends JPanel
      * @param globe the current <code>Globe</code>.
      * @return the corresponding <code>LatLon</code> or <code>null</code>.
      */
-    private static LatLon computeLatLonFromString(String coordString, Globe globe)
-    {
-        if (coordString == null)
-        {
+    private static LatLon computeLatLonFromString(String coordString, Globe globe) {
+        if (coordString == null) {
             String msg = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -153,43 +141,35 @@ public class GoToCoordinatePanel extends JPanel
 
         // Try MGRS - allow spaces
         regex = "\\d{1,2}[A-Za-z]\\s*[A-Za-z]{2}\\s*\\d{1,5}\\s*\\d{1,5}";
-        if (coordString.matches(regex))
-        {
-            try
-            {
+        if (coordString.matches(regex)) {
+            try {
                 MGRSCoord MGRS = MGRSCoord.fromString(coordString, globe);
                 // NOTE: the MGRSCoord does not always report errors with invalide strings,
                 // but will have lat and lon set to zero
-                if (MGRS.getLatitude().degrees != 0 || MGRS.getLatitude().degrees != 0)
-                {
+                if (MGRS.getLatitude().degrees != 0 || MGRS.getLatitude().degrees != 0) {
                     lat = MGRS.getLatitude();
                     lon = MGRS.getLongitude();
-                }
-                else
+                } else {
                     return null;
-            }
-            catch (IllegalArgumentException e)
-            {
+                }
+            } catch (IllegalArgumentException e) {
                 return null;
             }
         }
 
         // Try to extract a pair of signed decimal values separated by a space, ',' or ', '
         // Allow E, W, S, N sufixes
-        if (lat == null || lon == null)
-        {
+        if (lat == null || lon == null) {
             regex = "([-|\\+]?\\d+?(\\.\\d+?)??\\s*[N|n|S|s]??)";
             regex += separators;
             regex += "([-|\\+]?\\d+?(\\.\\d+?)??\\s*[E|e|W|w]??)";
-            pattern =  Pattern.compile(regex);
+            pattern = Pattern.compile(regex);
             matcher = pattern.matcher(coordString);
-            if (matcher.matches())
-            {
+            if (matcher.matches()) {
                 String sLat = matcher.group(1).trim();  // Latitude
                 int signLat = 1;
                 char suffix = sLat.toUpperCase().charAt(sLat.length() - 1);
-                if (!Character.isDigit(suffix))
-                {
+                if (!Character.isDigit(suffix)) {
                     signLat = suffix == 'N' ? 1 : -1;
                     sLat = sLat.substring(0, sLat.length() - 1);
                     sLat = sLat.trim();
@@ -198,8 +178,7 @@ public class GoToCoordinatePanel extends JPanel
                 String sLon = matcher.group(4).trim();  // Longitude
                 int signLon = 1;
                 suffix = sLon.toUpperCase().charAt(sLon.length() - 1);
-                if (!Character.isDigit(suffix))
-                {
+                if (!Character.isDigit(suffix)) {
                     signLon = suffix == 'E' ? 1 : -1;
                     sLon = sLon.substring(0, sLon.length() - 1);
                     sLon = sLon.trim();
@@ -214,37 +193,36 @@ public class GoToCoordinatePanel extends JPanel
         // Allow S, N, W, E suffixes and signs.
         // eg: -123� 34' 42" +45� 12' 30"
         // eg: 123� 34' 42"S 45� 12' 30"W
-        if (lat == null || lon == null)
-        {
+        if (lat == null || lon == null) {
             regex = "([-|\\+]?\\d{1,3}[d|D|\u00B0|\\s](\\s*\\d{1,2}['|\u2019|\\s])?(\\s*\\d{1,2}[\"|\u201d])?\\s*[N|n|S|s]?)";
             regex += separators;
             regex += "([-|\\+]?\\d{1,3}[d|D|\u00B0|\\s](\\s*\\d{1,2}['|\u2019|\\s])?(\\s*\\d{1,2}[\"|\u201d])?\\s*[E|e|W|w]?)";
-            pattern =  Pattern.compile(regex);
+            pattern = Pattern.compile(regex);
             matcher = pattern.matcher(coordString);
-            if (matcher.matches())
-            {
+            if (matcher.matches()) {
                 lat = parseDMSString(matcher.group(1));
                 lon = parseDMSString(matcher.group(5));
             }
         }
 
-        if (lat == null || lon == null)
+        if (lat == null || lon == null) {
             return null;
+        }
 
-        if(lat.degrees >= -90 && lat.degrees <= 90 && lon.degrees >= -180 && lon.degrees <= 180)
+        if (lat.degrees >= -90 && lat.degrees <= 90 && lon.degrees >= -180 && lon.degrees <= 180) {
             return new LatLon(lat, lon);
+        }
 
         return null;
     }
 
     /**
      * Parse a Degrees, Minute, Second coordinate string.
-     * 
+     *
      * @param dmsString the string to parse.
      * @return the corresponding <code>Angle</code> or null.
      */
-    private static Angle parseDMSString(String dmsString)
-    {
+    private static Angle parseDMSString(String dmsString) {
         // Replace degree, min and sec signs with space
         dmsString = dmsString.replaceAll("[D|d|\u00B0|'|\u2019|\"|\u201d]", " ");
         // Replace multiple spaces with single ones
@@ -254,15 +232,13 @@ public class GoToCoordinatePanel extends JPanel
         // Check for sign prefix and suffix
         int sign = 1;
         char suffix = dmsString.toUpperCase().charAt(dmsString.length() - 1);
-        if (!Character.isDigit(suffix))
-        {
+        if (!Character.isDigit(suffix)) {
             sign = (suffix == 'N' || suffix == 'E') ? 1 : -1;
             dmsString = dmsString.substring(0, dmsString.length() - 1);
             dmsString = dmsString.trim();
         }
         char prefix = dmsString.charAt(0);
-        if (!Character.isDigit(prefix))
-        {
+        if (!Character.isDigit(prefix)) {
             sign *= (prefix == '-') ? -1 : 1;
             dmsString = dmsString.substring(1, dmsString.length());
         }
@@ -273,9 +249,10 @@ public class GoToCoordinatePanel extends JPanel
         double m = DMS.length > 1 ? Integer.parseInt(DMS[1]) : 0;
         double s = DMS.length > 2 ? Integer.parseInt(DMS[2]) : 0;
 
-        if (m >= 0 && m <= 60 && s >= 0 && s <= 60)
+        if (m >= 0 && m <= 60 && s >= 0 && s <= 60) {
             return Angle.fromDegrees(d * sign + m / 60 * sign + s / 3600 * sign);
-        
+        }
+
         return null;
     }
 }

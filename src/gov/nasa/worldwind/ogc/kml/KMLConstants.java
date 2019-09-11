@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.ogc.collada.ColladaConstants;
@@ -14,16 +13,20 @@ import gov.nasa.worldwind.ogc.collada.ColladaConstants;
  * @author tag
  * @version $Id: KMLConstants.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface KMLConstants
-{
-    /** The KML 2.2 namespace URI. */
+public interface KMLConstants {
+
+    /**
+     * The KML 2.2 namespace URI.
+     */
     final String KML_2dot0_NAMESPACE = "http://earth.google.com/kml/2.0";
     final String KML_2dot1_NAMESPACE = "http://earth.google.com/kml/2.1";
     final String KML_2dot2_NAMESPACE = "http://www.opengis.net/kml/2.2";
     final String KML_GOOGLE_2dot2_NAMESPACE = "http://earth.google.com/kml/2.2";
     final String KML_NAMESPACE = KML_2dot2_NAMESPACE;
 
-    /** List of the versioned KML namespaces. */
+    /**
+     * List of the versioned KML namespaces.
+     */
     final String[] KML_NAMESPACES = {
         KML_2dot2_NAMESPACE,
         KML_GOOGLE_2dot2_NAMESPACE,
@@ -31,16 +34,24 @@ public interface KMLConstants
         KML_2dot0_NAMESPACE
     };
 
-    /** The mime type for KML documents. */
+    /**
+     * The mime type for KML documents.
+     */
     final String KML_MIME_TYPE = "application/vnd.google-earth.kml+xml";
-    /** The mime type for KMZ documents. */
+    /**
+     * The mime type for KMZ documents.
+     */
     final String KMZ_MIME_TYPE = "application/vnd.google-earth.kmz";
 
-    /** @deprecated Use {@link ColladaConstants#COLLADA_MIME_TYPE}. */
+    /**
+     * @deprecated Use {@link ColladaConstants#COLLADA_MIME_TYPE}.
+     */
     @Deprecated
     final String COLLADA_MIME_TYPE = ColladaConstants.COLLADA_MIME_TYPE;
 
-    /** Most recent version of KML that WorldWind supports. */
+    /**
+     * Most recent version of KML that WorldWind supports.
+     */
     final String KML_VERSION = "2.2";
 
     // Style state enums

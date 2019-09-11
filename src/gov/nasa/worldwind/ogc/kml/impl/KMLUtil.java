@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml.impl;
 
 import gov.nasa.worldwind.WorldWind;
@@ -21,42 +20,43 @@ import java.util.ArrayList;
  * @author tag
  * @version $Id: KMLUtil.java 1838 2014-02-05 20:48:12Z dcollins $
  */
-public class KMLUtil
-{
+public class KMLUtil {
+
     public static final String KML_PIXELS = "pixels";
     public static final String KML_FRACTION = "fraction";
     public static final String KML_INSET_PIXELS = "insetPixels";
 
-    public static ShapeAttributes assembleLineAttributes(ShapeAttributes attrs, KMLLineStyle style)
-    {
+    public static ShapeAttributes assembleLineAttributes(ShapeAttributes attrs, KMLLineStyle style) {
         // Assign the attributes defined in the KML Feature element.
 
-        if (style.getWidth() != null)
+        if (style.getWidth() != null) {
             attrs.setOutlineWidth(style.getWidth());
+        }
 
-        if (style.getColor() != null)
+        if (style.getColor() != null) {
             attrs.setOutlineMaterial(new Material(WWUtil.decodeColorABGR(style.getColor())));
+        }
 
-        if (style.getColorMode() != null && "random".equals(style.getColorMode()))
+        if (style.getColorMode() != null && "random".equals(style.getColorMode())) {
             attrs.setOutlineMaterial(new Material(WWUtil.makeRandomColor(attrs.getOutlineMaterial().getDiffuse())));
+        }
 
         return attrs;
     }
 
-    public static ShapeAttributes assembleInteriorAttributes(ShapeAttributes attrs, KMLPolyStyle style)
-    {
+    public static ShapeAttributes assembleInteriorAttributes(ShapeAttributes attrs, KMLPolyStyle style) {
         // Assign the attributes defined in the KML Feature element.
 
-        if (style.getColor() != null)
-        {
+        if (style.getColor() != null) {
             Color color = WWUtil.decodeColorABGR(style.getColor());
 
             attrs.setInteriorMaterial(new Material(color));
             attrs.setInteriorOpacity((double) color.getAlpha() / 255);
         }
 
-        if (style.getColorMode() != null && "random".equals(style.getColorMode()))
+        if (style.getColorMode() != null && "random".equals(style.getColorMode())) {
             attrs.setInteriorMaterial(new Material(WWUtil.makeRandomColor(attrs.getOutlineMaterial().getDiffuse())));
+        }
 
         return attrs;
     }
@@ -68,25 +68,25 @@ public class KMLUtil
      *
      * @return true if the sub-style has the "highlight" field, otherwise false.
      */
-    public static boolean isHighlightStyleState(KMLAbstractSubStyle subStyle)
-    {
-        if (subStyle == null)
+    public static boolean isHighlightStyleState(KMLAbstractSubStyle subStyle) {
+        if (subStyle == null) {
             return false;
+        }
 
         String styleState = (String) subStyle.getField(KMLConstants.STYLE_STATE);
         return styleState != null && styleState.equals(KMLConstants.HIGHLIGHT);
     }
 
-    public static int convertAltitudeMode(String altMode, int defaultAltMode)
-    {
-        if ("clampToGround".equals(altMode))
+    public static int convertAltitudeMode(String altMode, int defaultAltMode) {
+        if ("clampToGround".equals(altMode)) {
             return WorldWind.CLAMP_TO_GROUND;
-        else if ("relativeToGround".equals(altMode))
+        } else if ("relativeToGround".equals(altMode)) {
             return WorldWind.RELATIVE_TO_GROUND;
-        else if ("absolute".equals(altMode))
+        } else if ("absolute".equals(altMode)) {
             return WorldWind.ABSOLUTE;
-        else
+        } else {
             return defaultAltMode;
+        }
     }
 
     /**
@@ -97,16 +97,16 @@ public class KMLUtil
      *
      * @return WW units, or null if the argument is not a valid KML unit.
      */
-    public static String kmlUnitsToWWUnits(String units)
-    {
-        if (KML_PIXELS.equals(units))
+    public static String kmlUnitsToWWUnits(String units) {
+        if (KML_PIXELS.equals(units)) {
             return AVKey.PIXELS;
-        else if (KML_FRACTION.equals(units))
+        } else if (KML_FRACTION.equals(units)) {
             return AVKey.FRACTION;
-        else if (KML_INSET_PIXELS.equals(units))
+        } else if (KML_INSET_PIXELS.equals(units)) {
             return AVKey.INSET_PIXELS;
-        else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -117,16 +117,16 @@ public class KMLUtil
      *
      * @return KML units, or null if the argument is not a valid WW unit.
      */
-    public static String wwUnitsToKMLUnits(String units)
-    {
-        if (AVKey.PIXELS.equals(units))
+    public static String wwUnitsToKMLUnits(String units) {
+        if (AVKey.PIXELS.equals(units)) {
             return KML_PIXELS;
-        else if (AVKey.FRACTION.equals(units))
+        } else if (AVKey.FRACTION.equals(units)) {
             return KML_FRACTION;
-        else if (AVKey.INSET_PIXELS.equals(units))
+        } else if (AVKey.INSET_PIXELS.equals(units)) {
             return KML_INSET_PIXELS;
-        else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -140,17 +140,16 @@ public class KMLUtil
      *
      * @throws IllegalArgumentException if the <code>box</code> is <code>null</code>.
      */
-    public static Sector createSectorFromLatLonBox(KMLAbstractLatLonBoxType box)
-    {
-        if (box == null)
-        {
+    public static Sector createSectorFromLatLonBox(KMLAbstractLatLonBoxType box) {
+        if (box == null) {
             String message = Logging.getMessage("nullValue.BoxIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (box.getNorth() == null || box.getSouth() == null || box.getEast() == null || box.getWest() == null)
+        if (box.getNorth() == null || box.getSouth() == null || box.getEast() == null || box.getWest() == null) {
             return null;
+        }
 
         double north = box.getNorth();
         double south = box.getSouth();
@@ -169,51 +168,41 @@ public class KMLUtil
      * Get all of the positions that make up a {@link KMLAbstractGeometry}. If the geometry contains other geometries,
      * this method collects all the points from all of the geometries.
      *
-     * @param globe     Globe to use to determine altitude above terrain.
-     * @param geometry  Geometry to collect positions from.
+     * @param globe Globe to use to determine altitude above terrain.
+     * @param geometry Geometry to collect positions from.
      * @param positions Placemark positions will be added to this list.
      */
-    public static void getPositions(Globe globe, KMLAbstractGeometry geometry, java.util.List<Position> positions)
-    {
-        if (geometry instanceof KMLPoint)
-        {
+    public static void getPositions(Globe globe, KMLAbstractGeometry geometry, java.util.List<Position> positions) {
+        if (geometry instanceof KMLPoint) {
             KMLPoint kmlPoint = (KMLPoint) geometry;
             Position pos = kmlPoint.getCoordinates();
 
-            if (pos != null)
+            if (pos != null) {
                 positions.add(computeAltitude(globe, pos, kmlPoint.getAltitudeMode()));
-        }
-        else if (geometry instanceof KMLModel)
-        {
+            }
+        } else if (geometry instanceof KMLModel) {
             KMLModel model = (KMLModel) geometry;
             KMLLocation location = model.getLocation();
-            if (location != null)
-            {
+            if (location != null) {
                 Position pos = location.getPosition();
-                if (pos != null)
+                if (pos != null) {
                     positions.add(computeAltitude(globe, pos, model.getAltitudeMode()));
+                }
             }
-        }
-        else if (geometry instanceof KMLLineString) // Also handles KMLLinearRing, since KMLLineString is a subclass of KMLLinearRing
+        } else if (geometry instanceof KMLLineString) // Also handles KMLLinearRing, since KMLLineString is a subclass of KMLLinearRing
         {
             KMLLineString lineString = (KMLLineString) geometry;
             Position.PositionList positionList = lineString.getCoordinates();
-            if (positionList != null)
-            {
+            if (positionList != null) {
                 positions.addAll(computeAltitude(globe, positionList.list, lineString.getAltitudeMode()));
             }
-        }
-        else if (geometry instanceof KMLPolygon)
-        {
+        } else if (geometry instanceof KMLPolygon) {
             KMLLinearRing ring = ((KMLPolygon) geometry).getOuterBoundary();
             // Recurse and let the LineString/LinearRing code handle the boundary positions
             getPositions(globe, ring, positions);
-        }
-        else if (geometry instanceof KMLMultiGeometry)
-        {
+        } else if (geometry instanceof KMLMultiGeometry) {
             java.util.List<KMLAbstractGeometry> geoms = ((KMLMultiGeometry) geometry).getGeometries();
-            for (KMLAbstractGeometry g : geoms)
-            {
+            for (KMLAbstractGeometry g : geoms) {
                 // Recurse, adding positions for the sub-geometry
                 getPositions(globe, g, positions);
             }
@@ -223,18 +212,16 @@ public class KMLUtil
     /**
      * Compute the altitude of each position in a list, based on altitude mode.
      *
-     * @param globe        Globe to use to determine altitude above terrain.
-     * @param positions    Positions to compute altitude for.
+     * @param globe Globe to use to determine altitude above terrain.
+     * @param positions Positions to compute altitude for.
      * @param altitudeMode A KML altitude mode string.
      *
      * @return A new list of positions with altitudes set based on {@code altitudeMode}.
      */
     public static java.util.List<Position> computeAltitude(Globe globe, java.util.List<? extends Position> positions,
-        String altitudeMode)
-    {
+            String altitudeMode) {
         java.util.List<Position> outPositions = new ArrayList<Position>(positions.size());
-        for (Position p : positions)
-        {
+        for (Position p : positions) {
             outPositions.add(computeAltitude(globe, p, altitudeMode));
         }
 
@@ -244,25 +231,25 @@ public class KMLUtil
     /**
      * Create a {@link Position}, taking into account an altitude mode.
      *
-     * @param globe        Globe to use to determine altitude above terrain.
-     * @param position     Position to evaluate.
+     * @param globe Globe to use to determine altitude above terrain.
+     * @param position Position to evaluate.
      * @param altitudeMode A KML altitude mode string.
      *
      * @return New Position.
      */
-    public static Position computeAltitude(Globe globe, Position position, String altitudeMode)
-    {
+    public static Position computeAltitude(Globe globe, Position position, String altitudeMode) {
         double height;
         Angle latitude = position.getLatitude();
         Angle longitude = position.getLongitude();
 
         int altMode = convertAltitudeMode(altitudeMode, WorldWind.CLAMP_TO_GROUND); // KML default
-        if (altMode == WorldWind.CLAMP_TO_GROUND)
+        if (altMode == WorldWind.CLAMP_TO_GROUND) {
             height = globe.getElevation(latitude, longitude);
-        else if (altMode == WorldWind.RELATIVE_TO_GROUND)
+        } else if (altMode == WorldWind.RELATIVE_TO_GROUND) {
             height = globe.getElevation(latitude, longitude) + position.getAltitude();
-        else
+        } else {
             height = position.getAltitude();
+        }
 
         return new Position(latitude, longitude, height);
     }
@@ -270,28 +257,24 @@ public class KMLUtil
     /**
      * Rotate the corners of a sector around a normal vector through the sector centroid.
      *
-     * @param globe    Globe to use to compute rotated positions.
-     * @param sector   Sector to rotate.
+     * @param globe Globe to use to compute rotated positions.
+     * @param sector Sector to rotate.
      * @param rotation Rotation angle. Positive angles produce counterclockwise rotation.
      *
      * @return List of rotated corners.
      */
-    public static java.util.List<LatLon> rotateSector(Globe globe, Sector sector, Angle rotation)
-    {
-        if (globe == null)
-        {
+    public static java.util.List<LatLon> rotateSector(Globe globe, Sector sector, Angle rotation) {
+        if (globe == null) {
             String message = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (sector == null)
-        {
+        if (sector == null) {
             String message = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (rotation == null)
-        {
+        if (rotation == null) {
             String message = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -309,8 +292,7 @@ public class KMLUtil
         Vec4 centerPoint = sector.computeCenterPoint(globe, 1);
 
         // Rotate each point around the surface normal, and convert back to geographic
-        for (Vec4 point : verts)
-        {
+        for (Vec4 point : verts) {
             point = point.subtract3(centerPoint).transformBy3(rotationMatrix).add3(centerPoint);
             LatLon ll = globe.computePositionFromPoint(point);
 

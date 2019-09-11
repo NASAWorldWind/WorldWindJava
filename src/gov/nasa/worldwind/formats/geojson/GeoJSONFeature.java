@@ -11,26 +11,22 @@ import gov.nasa.worldwind.avlist.AVList;
  * @author dcollins
  * @version $Id: GeoJSONFeature.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeoJSONFeature extends GeoJSONObject
-{
-    public GeoJSONFeature(AVList fields)
-    {
+public class GeoJSONFeature extends GeoJSONObject {
+
+    public GeoJSONFeature(AVList fields) {
         super(fields);
     }
 
     @Override
-    public boolean isFeature()
-    {
+    public boolean isFeature() {
         return true;
     }
 
-    public GeoJSONGeometry getGeometry()
-    {
+    public GeoJSONGeometry getGeometry() {
         return (GeoJSONGeometry) this.getValue(GeoJSONConstants.FIELD_GEOMETRY);
     }
 
-    public AVList getProperties()
-    {
+    public AVList getProperties() {
         return (AVList) this.getValue(GeoJSONConstants.FIELD_PROPERTIES);
     }
 }

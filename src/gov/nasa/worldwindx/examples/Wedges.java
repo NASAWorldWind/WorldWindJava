@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWind;
@@ -25,12 +24,11 @@ import java.util.Hashtable;
  * @author ccrick
  * @version $Id: Wedges.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class Wedges extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class Wedges extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             // Add detail hint slider panel
@@ -58,7 +56,6 @@ public class Wedges extends ApplicationTemplate
             attrs2.setDrawOutline(false);
 
             // ********* sample  Wedges  *******************
-
             // Wedge with equal axes, ABSOLUTE altitude mode
             Wedge wedge3 = new Wedge(Position.fromDegrees(40, -120, 80000), Angle.POS90, 50000, 50000, 50000);
             wedge3.setAltitudeMode(WorldWind.ABSOLUTE);
@@ -102,7 +99,7 @@ public class Wedges extends ApplicationTemplate
 
             // Scaled Wedge with a pre-set orientation
             Wedge wedge2 = new Wedge(Position.fromDegrees(0, 30, 750000), Angle.POS90, 500000, 500000, 500000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             wedge2.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             wedge2.setAttributes(attrs2);
             wedge2.setVisible(true);
@@ -111,7 +108,7 @@ public class Wedges extends ApplicationTemplate
 
             // Scaled Wedge with a pre-set orientation
             Wedge wedge6 = new Wedge(Position.fromDegrees(30, 30, 750000), Angle.POS90, 500000, 500000, 500000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             wedge6.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             wedge6.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
             wedge6.setAttributes(attrs2);
@@ -121,7 +118,7 @@ public class Wedges extends ApplicationTemplate
 
             // Scaled Wedge with a pre-set orientation
             Wedge wedge7 = new Wedge(Position.fromDegrees(60, 30, 750000), Angle.POS90, 500000, 500000, 500000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             wedge7.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             wedge7.setAttributes(attrs2);
             wedge7.setVisible(true);
@@ -130,7 +127,7 @@ public class Wedges extends ApplicationTemplate
 
             // Scaled, oriented Wedge in 3rd "quadrant" (-X, -Y, -Z)
             Wedge wedge8 = new Wedge(Position.fromDegrees(-45, -180, 750000), Angle.POS90, 500000, 1000000, 500000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             wedge8.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             wedge8.setAttributes(attrs2);
             wedge8.setVisible(true);
@@ -141,11 +138,10 @@ public class Wedges extends ApplicationTemplate
             insertBeforeCompass(getWwd(), layer);
         }
 
-        protected JPanel makeDetailHintControlPanel()
-        {
+        protected JPanel makeDetailHintControlPanel() {
             JPanel controlPanel = new JPanel(new BorderLayout(0, 10));
             controlPanel.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9),
-                new TitledBorder("Detail Hint")));
+                    new TitledBorder("Detail Hint")));
 
             JPanel elevationSliderPanel = new JPanel(new BorderLayout(0, 5));
             {
@@ -162,10 +158,8 @@ public class Wedges extends ApplicationTemplate
                 labelTable.put(10, new JLabel("1.0"));
                 slider.setLabelTable(labelTable);
                 slider.setPaintLabels(true);
-                slider.addChangeListener(new ChangeListener()
-                {
-                    public void stateChanged(ChangeEvent e)
-                    {
+                slider.addChangeListener(new ChangeListener() {
+                    public void stateChanged(ChangeEvent e) {
                         double hint = ((JSlider) e.getSource()).getValue() / 10d;
                         setWedgeDetailHint(hint);
                         getWwd().redraw();
@@ -181,12 +175,9 @@ public class Wedges extends ApplicationTemplate
             return controlPanel;
         }
 
-        protected RenderableLayer getLayer()
-        {
-            for (Layer layer : getWwd().getModel().getLayers())
-            {
-                if (layer.getName().contains("Renderable"))
-                {
+        protected RenderableLayer getLayer() {
+            for (Layer layer : getWwd().getModel().getLayers()) {
+                if (layer.getName().contains("Renderable")) {
                     return (RenderableLayer) layer;
                 }
             }
@@ -194,10 +185,8 @@ public class Wedges extends ApplicationTemplate
             return null;
         }
 
-        protected void setWedgeDetailHint(double hint)
-        {
-            for (Renderable renderable : getLayer().getRenderables())
-            {
+        protected void setWedgeDetailHint(double hint) {
+            for (Renderable renderable : getLayer().getRenderables()) {
                 Wedge current = (Wedge) renderable;
                 current.setDetailHint(hint);
             }
@@ -205,9 +194,7 @@ public class Wedges extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Wedges", AppFrame.class);
     }
 }
-

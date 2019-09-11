@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc;
 
 import gov.nasa.worldwind.util.xml.*;
@@ -19,8 +18,8 @@ import java.util.*;
  * @author tag
  * @version $Id: OGCServiceInformation.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class OGCServiceInformation extends AbstractXMLEventParser
-{
+public class OGCServiceInformation extends AbstractXMLEventParser {
+
     protected QName NAME;
     protected QName TITLE;
     protected QName ABSTRACT;
@@ -40,15 +39,13 @@ public class OGCServiceInformation extends AbstractXMLEventParser
     protected OGCOnlineResource onlineResource;
     protected OGCContactInformation contactInformation;
 
-    public OGCServiceInformation(String namespaceURI)
-    {
+    public OGCServiceInformation(String namespaceURI) {
         super(namespaceURI);
 
         this.initialize();
     }
 
-    private void initialize()
-    {
+    private void initialize() {
         NAME = new QName(this.getNamespaceURI(), "Name");
         TITLE = new QName(this.getNamespaceURI(), "Title");
         ABSTRACT = new QName(this.getNamespaceURI(), "Abstract");
@@ -61,171 +58,139 @@ public class OGCServiceInformation extends AbstractXMLEventParser
     }
 
     @Override
-    public XMLEventParser allocate(XMLEventParserContext ctx, XMLEvent event)
-    {
+    public XMLEventParser allocate(XMLEventParserContext ctx, XMLEvent event) {
         XMLEventParser defaultParser = null;
 
-        if (ctx.isStartElement(event, ONLINE_RESOURCE))
+        if (ctx.isStartElement(event, ONLINE_RESOURCE)) {
             defaultParser = new OGCOnlineResource(this.getNamespaceURI());
-        else if (ctx.isStartElement(event, CONTACT_INFORMATION))
+        } else if (ctx.isStartElement(event, CONTACT_INFORMATION)) {
             defaultParser = new OGCContactInformation(this.getNamespaceURI());
-        else if (ctx.isStartElement(event, KEYWORD_LIST))
+        } else if (ctx.isStartElement(event, KEYWORD_LIST)) {
             defaultParser = new StringSetXMLEventParser(this.getNamespaceURI(), KEYWORD);
+        }
 
         return ctx.allocate(event, defaultParser);
     }
 
     @Override
     protected void doParseEventContent(XMLEventParserContext ctx, XMLEvent event, Object... args)
-        throws XMLStreamException
-    {
-        if (ctx.isStartElement(event, NAME))
-        {
+            throws XMLStreamException {
+        if (ctx.isStartElement(event, NAME)) {
             this.setServiceName(ctx.getStringParser().parseString(ctx, event));
-        }
-        else if (ctx.isStartElement(event, TITLE))
-        {
+        } else if (ctx.isStartElement(event, TITLE)) {
             this.setServiceTitle(ctx.getStringParser().parseString(ctx, event));
-        }
-        else if (ctx.isStartElement(event, ABSTRACT))
-        {
+        } else if (ctx.isStartElement(event, ABSTRACT)) {
             this.setServiceAbstract(ctx.getStringParser().parseString(ctx, event));
-        }
-        else if (ctx.isStartElement(event, FEES))
-        {
+        } else if (ctx.isStartElement(event, FEES)) {
             this.setFees(ctx.getStringParser().parseString(ctx, event));
-        }
-        else if (ctx.isStartElement(event, ACCESS_CONSTRAINTS))
-        {
+        } else if (ctx.isStartElement(event, ACCESS_CONSTRAINTS)) {
             this.setAccessConstraints(ctx.getStringParser().parseString(ctx, event));
-        }
-        else if (ctx.isStartElement(event, KEYWORD_LIST))
-        {
+        } else if (ctx.isStartElement(event, KEYWORD_LIST)) {
             XMLEventParser parser = this.allocate(ctx, event);
-            if (parser != null)
-            {
+            if (parser != null) {
                 Object o = parser.parse(ctx, event, args);
-                if (o != null && o instanceof StringSetXMLEventParser)
+                if (o != null && o instanceof StringSetXMLEventParser) {
                     this.setKeywords(((StringSetXMLEventParser) o).getStrings());
+                }
             }
-        }
-        else if (ctx.isStartElement(event, ONLINE_RESOURCE))
-        {
+        } else if (ctx.isStartElement(event, ONLINE_RESOURCE)) {
             XMLEventParser parser = this.allocate(ctx, event);
-            if (parser != null)
-            {
+            if (parser != null) {
                 Object o = parser.parse(ctx, event, args);
-                if (o != null && o instanceof OGCOnlineResource)
+                if (o != null && o instanceof OGCOnlineResource) {
                     this.setOnlineResource((OGCOnlineResource) o);
+                }
             }
-        }
-        else if (ctx.isStartElement(event, CONTACT_INFORMATION))
-        {
+        } else if (ctx.isStartElement(event, CONTACT_INFORMATION)) {
             XMLEventParser parser = this.allocate(ctx, event);
-            if (parser != null)
-            {
+            if (parser != null) {
                 Object o = parser.parse(ctx, event, args);
-                if (o != null && o instanceof OGCContactInformation)
+                if (o != null && o instanceof OGCContactInformation) {
                     this.setContactInformation((OGCContactInformation) o);
+                }
             }
         }
     }
 
-    public OGCContactInformation getContactInformation()
-    {
+    public OGCContactInformation getContactInformation() {
         return contactInformation;
     }
 
-    protected void setContactInformation(OGCContactInformation contactInformation)
-    {
+    protected void setContactInformation(OGCContactInformation contactInformation) {
         this.contactInformation = contactInformation;
     }
 
-    public OGCOnlineResource getOnlineResource()
-    {
+    public OGCOnlineResource getOnlineResource() {
         return onlineResource;
     }
 
-    protected void setOnlineResource(OGCOnlineResource onlineResource)
-    {
+    protected void setOnlineResource(OGCOnlineResource onlineResource) {
         this.onlineResource = onlineResource;
     }
 
-    public Set<String> getKeywords()
-    {
-        if (keywords != null)
+    public Set<String> getKeywords() {
+        if (keywords != null) {
             return keywords;
-        else
+        } else {
             return Collections.emptySet();
+        }
     }
 
-    protected void setKeywords(Set<String> keywords)
-    {
+    protected void setKeywords(Set<String> keywords) {
         this.keywords = keywords;
     }
 
-    public String getAccessConstraints()
-    {
+    public String getAccessConstraints() {
         return accessConstraints;
     }
 
-    protected void setAccessConstraints(String accessConstraints)
-    {
+    protected void setAccessConstraints(String accessConstraints) {
         this.accessConstraints = accessConstraints;
     }
 
-    public String getFees()
-    {
+    public String getFees() {
         return fees;
     }
 
-    protected void setFees(String fees)
-    {
+    protected void setFees(String fees) {
         this.fees = fees;
     }
 
-    public String getServiceAbstract()
-    {
+    public String getServiceAbstract() {
         return serviceAbstract;
     }
 
-    protected void setServiceAbstract(String serviceAbstract)
-    {
+    protected void setServiceAbstract(String serviceAbstract) {
         this.serviceAbstract = serviceAbstract;
     }
 
-    public String getServiceTitle()
-    {
+    public String getServiceTitle() {
         return serviceTitle;
     }
 
-    protected void setServiceTitle(String serviceTitle)
-    {
+    protected void setServiceTitle(String serviceTitle) {
         this.serviceTitle = serviceTitle;
     }
 
-    public String getServiceName()
-    {
+    public String getServiceName() {
         return serviceName;
     }
 
-    protected void setServiceName(String serviceName)
-    {
+    protected void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
 
         sb.append("ServiceName: ").append(this.serviceName != null ? this.serviceName : "none").append("\n");
         sb.append("ServiceTitle: ").append(this.serviceTitle != null ? this.serviceTitle : "none").append("\n");
         sb.append("ServiceAbstract: ").append(this.serviceAbstract != null ? this.serviceAbstract : "none").append(
-            "\n");
+                "\n");
         sb.append("Fees: ").append(this.fees != null ? this.fees : "none").append("\n");
         sb.append("AccessConstraints: ").append(
-            this.accessConstraints != null ? this.accessConstraints : "none").append("\n");
+                this.accessConstraints != null ? this.accessConstraints : "none").append("\n");
         this.keywordsToString(sb);
         sb.append("OnlineResource: ").append(this.onlineResource != null ? this.onlineResource : "none").append("\n");
         sb.append(this.contactInformation != null ? this.contactInformation : "none").append("\n");
@@ -233,15 +198,12 @@ public class OGCServiceInformation extends AbstractXMLEventParser
         return sb.toString();
     }
 
-    protected void keywordsToString(StringBuilder sb)
-    {
+    protected void keywordsToString(StringBuilder sb) {
         sb.append("Keywords: ");
-        if (this.getKeywords().size() == 0)
+        if (this.getKeywords().size() == 0) {
             sb.append(" none");
-        else
-        {
-            for (String keyword : this.getKeywords())
-            {
+        } else {
+            for (String keyword : this.getKeywords()) {
                 sb.append(keyword != null ? keyword : "null").append(", ");
             }
         }

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.geom.*;
@@ -24,20 +23,26 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: MinimumSafeDistanceZones.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic implements PreRenderable
-{
+public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic implements PreRenderable {
+
     /**
      * Default angle used to position the graphic's labels. This default angle (60 degrees) is chosen to match the
      * graphic template defined by MIL-STD-2525C, pg. 613.
      */
     public final static Angle DEFAULT_LABEL_ANGLE = Angle.fromDegrees(60.0);
 
-    /** Position of the center of the range fan. */
+    /**
+     * Position of the center of the range fan.
+     */
     protected Iterable<? extends Position> positions;
-    /** Rings that make up the range fan. */
+    /**
+     * Rings that make up the range fan.
+     */
     protected List<SurfaceCircle> rings;
 
-    /** Position the labels along a line radiating out from the center of the circle at this angle from North. */
+    /**
+     * Position the labels along a line radiating out from the center of the circle at this angle from North.
+     */
     protected Angle labelAngle = DEFAULT_LABEL_ANGLE;
 
     /**
@@ -45,8 +50,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(TacGrpSidc.MOBSU_CBRN_MSDZ);
     }
 
@@ -55,8 +59,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public MinimumSafeDistanceZones(String sidc)
-    {
+    public MinimumSafeDistanceZones(String sidc) {
         super(sidc);
     }
 
@@ -66,8 +69,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
      *
      * @return The angle used to position this graphic's labels.
      */
-    public Angle getLabelAngle()
-    {
+    public Angle getLabelAngle() {
         return this.labelAngle;
     }
 
@@ -77,10 +79,8 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
      *
      * @param angle The angle used to position this graphic's labels.
      */
-    public void setLabelAngle(Angle angle)
-    {
-        if (angle == null)
-        {
+    public void setLabelAngle(Angle angle) {
+        if (angle == null) {
             String msg = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -94,8 +94,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
      *
      * @return The range fan center position.
      */
-    public Position getPosition()
-    {
+    public Position getPosition() {
         return this.getReferencePosition();
     }
 
@@ -104,8 +103,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
      *
      * @param position The new center position.
      */
-    public void setPosition(Position position)
-    {
+    public void setPosition(Position position) {
         this.moveTo(position);
     }
 
@@ -113,28 +111,22 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
      * {@inheritDoc}
      *
      * @param positions Control points. This graphic uses only one control point, which determines the center of the
-     *                  circle.
+     * circle.
      */
-    public void setPositions(Iterable<? extends Position> positions)
-    {
-        if (positions == null)
-        {
+    public void setPositions(Iterable<? extends Position> positions) {
+        if (positions == null) {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        try
-        {
+        try {
             // Ensure that the iterable provides at least four positions.
             Iterator<? extends Position> iterator = positions.iterator();
-            for (int i = 0; i < 3; i++)
-            {
+            for (int i = 0; i < 3; i++) {
                 iterator.next();
             }
-        }
-        catch (NoSuchElementException e)
-        {
+        } catch (NoSuchElementException e) {
             String message = Logging.getMessage("generic.InsufficientPositions");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -144,41 +136,41 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
         this.rings = null;
     }
 
-    /** {@inheritDoc} */
-    public Iterable<? extends Position> getPositions()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Iterable<? extends Position> getPositions() {
         return this.positions;
     }
 
-    /** {@inheritDoc} */
-    public Position getReferencePosition()
-    {
-        if (positions != null)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public Position getReferencePosition() {
+        if (positions != null) {
             Iterator<? extends Position> iterator = this.positions.iterator();
-            if (iterator.hasNext())
+            if (iterator.hasNext()) {
                 return iterator.next();
+            }
         }
         return null;
     }
 
-    /** {@inheritDoc} */
-    public void preRender(DrawContext dc)
-    {
-        if (!this.isVisible())
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public void preRender(DrawContext dc) {
+        if (!this.isVisible()) {
             return;
         }
 
-        if (this.rings == null)
-        {
+        if (this.rings == null) {
             this.createShapes(dc);
         }
 
         this.determineActiveAttributes();
 
-        for (SurfaceCircle ring : this.rings)
-        {
+        for (SurfaceCircle ring : this.rings) {
             ring.preRender(dc);
         }
     }
@@ -188,22 +180,21 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
      *
      * @param dc Current draw context.
      */
-    protected void doRenderGraphic(DrawContext dc)
-    {
-        for (SurfaceCircle ring : this.rings)
-        {
+    protected void doRenderGraphic(DrawContext dc) {
+        for (SurfaceCircle ring : this.rings) {
             ring.render(dc);
         }
     }
 
-    /** {@inheritDoc} */
-    protected void applyDelegateOwner(Object owner)
-    {
-        if (this.rings == null)
+    /**
+     * {@inheritDoc}
+     */
+    protected void applyDelegateOwner(Object owner) {
+        if (this.rings == null) {
             return;
+        }
 
-        for (SurfaceCircle ring : this.rings)
-        {
+        for (SurfaceCircle ring : this.rings) {
             ring.setDelegateOwner(owner);
         }
     }
@@ -213,10 +204,10 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
      *
      * @param dc Current draw context.
      */
-    protected void createShapes(DrawContext dc)
-    {
-        if (this.positions == null)
+    protected void createShapes(DrawContext dc) {
+        if (this.positions == null) {
             return;
+        }
 
         this.rings = new ArrayList<SurfaceCircle>();
 
@@ -225,8 +216,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
         Position center = iterator.next();
         double globeRadius = dc.getGlobe().getRadius();
 
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             SurfaceCircle ring = this.createCircle();
             ring.setCenter(center);
 
@@ -240,23 +230,25 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
         }
     }
 
-    /** Create labels for each ring. */
+    /**
+     * Create labels for each ring.
+     */
     @Override
-    protected void createLabels()
-    {
-        for (int i = 1; i <= this.rings.size(); i++)
-        {
+    protected void createLabels() {
+        for (int i = 1; i <= this.rings.size(); i++) {
             this.addLabel(String.valueOf(i));
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void determineLabelPositions(DrawContext dc)
-    {
+    protected void determineLabelPositions(DrawContext dc) {
         Position center = this.getReferencePosition();
-        if (center == null)
+        if (center == null) {
             return;
+        }
 
         // Position the labels along a line radiating out from the center of the circle. The angle (60 degrees) is
         // chosen to match the graphic template defined by MIL-STD-2525C, pg. 613.
@@ -265,8 +257,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
         Angle labelAngle = this.getLabelAngle();
 
         int i = 0;
-        for (SurfaceCircle ring : this.rings)
-        {
+        for (SurfaceCircle ring : this.rings) {
             double radius = ring.getRadius();
 
             LatLon ll = LatLon.greatCircleEndPosition(center, labelAngle.radians, radius / globeRadius);
@@ -281,8 +272,7 @@ public class MinimumSafeDistanceZones extends AbstractMilStd2525TacticalGraphic 
      *
      * @return New circle.
      */
-    protected SurfaceCircle createCircle()
-    {
+    protected SurfaceCircle createCircle() {
         SurfaceCircle circle = new SurfaceCircle();
         circle.setDelegateOwner(this.getActiveDelegateOwner());
         circle.setAttributes(this.getActiveShapeAttributes());

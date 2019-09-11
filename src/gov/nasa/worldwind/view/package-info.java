@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 /**
  * <p>
  * The view package contains implementations, and support for implementations of the {@link gov.nasa.worldwind.View}

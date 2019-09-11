@@ -15,6 +15,7 @@ import java.util.*;
  */
 public final class Intersection // Instances are immutable
 {
+
     protected Vec4 intersectionPoint;
     protected Double intersectionLength;
     protected Position intersectionPosition;
@@ -25,14 +26,12 @@ public final class Intersection // Instances are immutable
      * Constructs an Intersection from an intersection point and tangency indicator.
      *
      * @param intersectionPoint the intersection point.
-     * @param isTangent         true if the intersection is tangent to the object intersected, otherwise false.
+     * @param isTangent true if the intersection is tangent to the object intersected, otherwise false.
      *
      * @throws IllegalArgumentException if <code>intersectionPoint</code> is null
      */
-    public Intersection(Vec4 intersectionPoint, boolean isTangent)
-    {
-        if (intersectionPoint == null)
-        {
+    public Intersection(Vec4 intersectionPoint, boolean isTangent) {
+        if (intersectionPoint == null) {
             String message = Logging.getMessage("nullValue.IntersectionPointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -44,24 +43,21 @@ public final class Intersection // Instances are immutable
     /**
      * Constructs an Intersection from an intersection point and tangency indicator.
      *
-     * @param intersectionPoint  the intersection point
+     * @param intersectionPoint the intersection point
      * @param intersectionLength the parametric length along the intersection geometry. If the geometry was a line, then
-     *                           this value will be the parametric value of the intersection point along the line.
-     * @param isTangent          true if the intersection is tangent to the object intersected, otherwise false.
+     * this value will be the parametric value of the intersection point along the line.
+     * @param isTangent true if the intersection is tangent to the object intersected, otherwise false.
      *
      * @throws IllegalArgumentException if <code>intersectionPoint</code> is null
      */
-    public Intersection(Vec4 intersectionPoint, double intersectionLength, boolean isTangent)
-    {
+    public Intersection(Vec4 intersectionPoint, double intersectionLength, boolean isTangent) {
         this(intersectionPoint, isTangent);
 
         this.intersectionLength = intersectionLength;
     }
 
-    public Intersection(Vec4 intersectionPoint, Position intersectionPosition, boolean isTangent, Object object)
-    {
-        if (intersectionPoint == null)
-        {
+    public Intersection(Vec4 intersectionPoint, Position intersectionPosition, boolean isTangent, Object object) {
+        if (intersectionPoint == null) {
             String message = Logging.getMessage("nullValue.IntersectionPointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -78,8 +74,7 @@ public final class Intersection // Instances are immutable
      *
      * @return the intersection position, or null if the position has not been set.
      */
-    public Position getIntersectionPosition()
-    {
+    public Position getIntersectionPosition() {
         return intersectionPosition;
     }
 
@@ -88,8 +83,7 @@ public final class Intersection // Instances are immutable
      *
      * @param intersectionPosition the intersection position. May be null.
      */
-    public void setIntersectionPosition(Position intersectionPosition)
-    {
+    public void setIntersectionPosition(Position intersectionPosition) {
         this.intersectionPosition = intersectionPosition;
     }
 
@@ -98,8 +92,7 @@ public final class Intersection // Instances are immutable
      *
      * @return the object associated with the intersection, or null if no object is associated.
      */
-    public Object getObject()
-    {
+    public Object getObject() {
         return object;
     }
 
@@ -108,8 +101,7 @@ public final class Intersection // Instances are immutable
      *
      * @param object the object to associate with the intersection. May be null.
      */
-    public void setObject(Object object)
-    {
+    public void setObject(Object object) {
         this.object = object;
     }
 
@@ -118,8 +110,7 @@ public final class Intersection // Instances are immutable
      *
      * @return the intersection point.
      */
-    public Vec4 getIntersectionPoint()
-    {
+    public Vec4 getIntersectionPoint() {
         return intersectionPoint;
     }
 
@@ -128,8 +119,7 @@ public final class Intersection // Instances are immutable
      *
      * @param intersectionPoint the intersection point. May be null, but typically should not be.
      */
-    public void setIntersectionPoint(Vec4 intersectionPoint)
-    {
+    public void setIntersectionPoint(Vec4 intersectionPoint) {
         this.intersectionPoint = intersectionPoint;
     }
 
@@ -138,8 +128,7 @@ public final class Intersection // Instances are immutable
      *
      * @return true if the intersection is tangent, otherwise false.
      */
-    public boolean isTangent()
-    {
+    public boolean isTangent() {
         return isTangent;
     }
 
@@ -148,8 +137,7 @@ public final class Intersection // Instances are immutable
      *
      * @param tangent true if the intersection is tangent, otherwise false.
      */
-    public void setTangent(boolean tangent)
-    {
+    public void setTangent(boolean tangent) {
         isTangent = tangent;
     }
 
@@ -159,8 +147,7 @@ public final class Intersection // Instances are immutable
      *
      * @return the intersection length, or null if the length was not calculated.
      */
-    public Double getIntersectionLength()
-    {
+    public Double getIntersectionLength() {
         return intersectionLength;
     }
 
@@ -169,19 +156,17 @@ public final class Intersection // Instances are immutable
      * point.
      *
      * @param refPoint the reference point.
-     * @param listA    the first list of intersections.
-     * @param listB    the second list of intersections.
+     * @param listA the first list of intersections.
+     * @param listB the second list of intersections.
      *
      * @return the merged list of intersections, sorted by increasing distance from the reference point.
      */
-    public static Queue<Intersection> sort(final Vec4 refPoint, List<Intersection> listA, List<Intersection> listB)
-    {
-        PriorityQueue<Intersection> sorted = new PriorityQueue<Intersection>(10, new Comparator<Intersection>()
-        {
-            public int compare(Intersection losiA, Intersection losiB)
-            {
-                if (losiA.intersectionPoint == null || losiB.intersectionPoint == null)
+    public static Queue<Intersection> sort(final Vec4 refPoint, List<Intersection> listA, List<Intersection> listB) {
+        PriorityQueue<Intersection> sorted = new PriorityQueue<Intersection>(10, new Comparator<Intersection>() {
+            public int compare(Intersection losiA, Intersection losiB) {
+                if (losiA.intersectionPoint == null || losiB.intersectionPoint == null) {
                     return 0;
+                }
 
                 double dA = refPoint.distanceTo3(losiA.intersectionPoint);
                 double dB = refPoint.distanceTo3(losiB.intersectionPoint);
@@ -190,18 +175,14 @@ public final class Intersection // Instances are immutable
             }
         });
 
-        if (listA != null)
-        {
-            for (Intersection intersection : listA)
-            {
+        if (listA != null) {
+            for (Intersection intersection : listA) {
                 sorted.add(intersection);
             }
         }
 
-        if (listB != null)
-        {
-            for (Intersection intersection : listB)
-            {
+        if (listB != null) {
+            for (Intersection intersection : listB) {
                 sorted.add(intersection);
             }
         }
@@ -210,27 +191,29 @@ public final class Intersection // Instances are immutable
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
+        }
 
         final gov.nasa.worldwind.geom.Intersection that = (gov.nasa.worldwind.geom.Intersection) o;
 
-        if (isTangent != that.isTangent)
+        if (isTangent != that.isTangent) {
             return false;
+        }
         //noinspection RedundantIfStatement
-        if (!intersectionPoint.equals(that.intersectionPoint))
+        if (!intersectionPoint.equals(that.intersectionPoint)) {
             return false;
+        }
 
         return true;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result;
         result = intersectionPoint.hashCode();
         result = 29 * result + (isTangent ? 1 : 0);
@@ -238,8 +221,7 @@ public final class Intersection // Instances are immutable
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         String pt = "Intersection Point: " + this.intersectionPoint;
         String tang = this.isTangent ? " is a tangent." : " not a tangent";
         return pt + tang;

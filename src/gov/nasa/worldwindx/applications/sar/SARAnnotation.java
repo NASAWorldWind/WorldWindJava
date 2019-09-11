@@ -12,33 +12,28 @@ import gov.nasa.worldwind.geom.Position;
  * @author tag
  * @version $Id: SARAnnotation.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SARAnnotation extends GlobeAnnotation
-{
+public class SARAnnotation extends GlobeAnnotation {
+
     private SARTrack owner;
     private String id;
 
-    public SARAnnotation(String text, Position position)
-    {
+    public SARAnnotation(String text, Position position) {
         super(text, position);
     }
 
-    public SARTrack getOwner()
-    {
+    public SARTrack getOwner() {
         return this.owner;
     }
 
-    public void setOwner(SARTrack owner)
-    {
+    public void setOwner(SARTrack owner) {
         this.owner = owner;
     }
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 }

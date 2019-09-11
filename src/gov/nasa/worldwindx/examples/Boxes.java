@@ -19,12 +19,11 @@ import gov.nasa.worldwind.render.Box;
  * @author ccrick
  * @version $Id: Boxes.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class Boxes extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class Boxes extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             RenderableLayer layer = new RenderableLayer();
 
             // Create and set an attribute bundle.
@@ -47,7 +46,6 @@ public class Boxes extends ApplicationTemplate
             attrs2.setDrawOutline(false);
 
             // ********* sample  Boxes  *******************
-
             // Box with equal axes, ABSOLUTE altitude mode
             Box box3 = new Box(Position.fromDegrees(40, -120, 80000), 50000, 50000, 50000);
             box3.setAltitudeMode(WorldWind.ABSOLUTE);
@@ -91,7 +89,7 @@ public class Boxes extends ApplicationTemplate
 
             // Scaled Box with a pre-set orientation
             Box box2 = new Box(Position.fromDegrees(0, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             box2.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             box2.setAttributes(attrs2);
             box2.setVisible(true);
@@ -100,7 +98,7 @@ public class Boxes extends ApplicationTemplate
 
             // Scaled Box with a pre-set orientation
             Box box6 = new Box(Position.fromDegrees(30, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             box6.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             box6.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
             box6.setAttributes(attrs2);
@@ -110,7 +108,7 @@ public class Boxes extends ApplicationTemplate
 
             // Scaled Box with a pre-set orientation
             Box box7 = new Box(Position.fromDegrees(60, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             box7.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             box7.setAttributes(attrs2);
             box7.setVisible(true);
@@ -119,7 +117,7 @@ public class Boxes extends ApplicationTemplate
 
             // Scaled, oriented Box in 3rd "quadrant" (-X, -Y, -Z)
             Box box8 = new Box(Position.fromDegrees(-45, -180, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             box8.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             box8.setAttributes(attrs2);
             box8.setVisible(true);
@@ -131,8 +129,7 @@ public class Boxes extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Boxes", AppFrame.class);
     }
 }

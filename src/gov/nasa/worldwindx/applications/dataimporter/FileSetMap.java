@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.dataimporter;
 
 import java.util.HashMap;
@@ -14,6 +13,5 @@ import java.util.HashMap;
  * @author tag
  * @version $Id: FileSetMap.java 1180 2013-02-15 18:40:47Z tgaskins $
  */
-public class FileSetMap extends HashMap<Object, FileSet>
-{
+public class FileSetMap extends HashMap<Object, FileSet> {
 }

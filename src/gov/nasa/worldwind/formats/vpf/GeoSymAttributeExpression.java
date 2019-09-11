@@ -11,7 +11,7 @@ import gov.nasa.worldwind.avlist.AVList;
  * @author dcollins
  * @version $Id: GeoSymAttributeExpression.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface GeoSymAttributeExpression
-{
+public interface GeoSymAttributeExpression {
+
     boolean evaluate(AVList featureAttributes);
 }

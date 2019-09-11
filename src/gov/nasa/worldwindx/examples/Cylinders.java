@@ -25,12 +25,11 @@ import java.util.Hashtable;
  * @author ccrick
  * @version $Id: Cylinders.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class Cylinders extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class Cylinders extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             // Add detail hint slider panel
             this.getControlPanel().add(this.makeDetailHintControlPanel(), BorderLayout.SOUTH);
 
@@ -56,7 +55,6 @@ public class Cylinders extends ApplicationTemplate
             attrs2.setDrawOutline(false);
 
             // ********* sample  Cylinders  *******************
-
             // Cylinder with equal axes, ABSOLUTE altitude mode
             Cylinder cylinder3 = new Cylinder(Position.fromDegrees(40, -120, 80000), 100000, 50000);
             cylinder3.setAltitudeMode(WorldWind.ABSOLUTE);
@@ -100,7 +98,7 @@ public class Cylinders extends ApplicationTemplate
 
             // Scaled Cylinder with a pre-set orientation
             Cylinder cylinder2 = new Cylinder(Position.fromDegrees(0, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             cylinder2.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             cylinder2.setAttributes(attrs2);
             cylinder2.setValue(AVKey.DISPLAY_NAME, "Scaled Cylinder with a pre-set orientation");
@@ -110,7 +108,7 @@ public class Cylinders extends ApplicationTemplate
 
             // Scaled Cylinder with a pre-set orientation
             Cylinder cylinder6 = new Cylinder(Position.fromDegrees(30, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             cylinder6.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             cylinder6.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
             cylinder6.setAttributes(attrs2);
@@ -120,7 +118,7 @@ public class Cylinders extends ApplicationTemplate
 
             // Scaled Cylinder with a pre-set orientation
             Cylinder cylinder7 = new Cylinder(Position.fromDegrees(60, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             cylinder7.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             cylinder7.setAttributes(attrs2);
             cylinder7.setVisible(true);
@@ -129,7 +127,7 @@ public class Cylinders extends ApplicationTemplate
 
             // Scaled, oriented Cylinder in 3rd "quadrant" (-X, -Y, -Z)
             Cylinder cylinder8 = new Cylinder(Position.fromDegrees(-45, -180, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             cylinder8.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             cylinder8.setAttributes(attrs2);
             cylinder8.setVisible(true);
@@ -140,11 +138,10 @@ public class Cylinders extends ApplicationTemplate
             insertBeforeCompass(getWwd(), layer);
         }
 
-        protected JPanel makeDetailHintControlPanel()
-        {
+        protected JPanel makeDetailHintControlPanel() {
             JPanel controlPanel = new JPanel(new BorderLayout(0, 10));
             controlPanel.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9),
-                new TitledBorder("Detail Hint")));
+                    new TitledBorder("Detail Hint")));
 
             JPanel detailHintSliderPanel = new JPanel(new BorderLayout(0, 5));
             {
@@ -161,10 +158,8 @@ public class Cylinders extends ApplicationTemplate
                 labelTable.put(10, new JLabel("1.0"));
                 slider.setLabelTable(labelTable);
                 slider.setPaintLabels(true);
-                slider.addChangeListener(new ChangeListener()
-                {
-                    public void stateChanged(ChangeEvent e)
-                    {
+                slider.addChangeListener(new ChangeListener() {
+                    public void stateChanged(ChangeEvent e) {
                         double hint = ((JSlider) e.getSource()).getValue() / 10d;
                         setCylinderDetailHint(hint);
                         getWwd().redraw();
@@ -180,12 +175,9 @@ public class Cylinders extends ApplicationTemplate
             return controlPanel;
         }
 
-        protected RenderableLayer getLayer()
-        {
-            for (Layer layer : getWwd().getModel().getLayers())
-            {
-                if (layer.getName().contains("Renderable"))
-                {
+        protected RenderableLayer getLayer() {
+            for (Layer layer : getWwd().getModel().getLayers()) {
+                if (layer.getName().contains("Renderable")) {
                     return (RenderableLayer) layer;
                 }
             }
@@ -193,10 +185,8 @@ public class Cylinders extends ApplicationTemplate
             return null;
         }
 
-        protected void setCylinderDetailHint(double hint)
-        {
-            for (Renderable renderable : getLayer().getRenderables())
-            {
+        protected void setCylinderDetailHint(double hint) {
+            for (Renderable renderable : getLayer().getRenderables()) {
                 Cylinder current = (Cylinder) renderable;
                 current.setDetailHint(hint);
             }
@@ -204,9 +194,7 @@ public class Cylinders extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Cylinders", AppFrame.class);
     }
 }
-

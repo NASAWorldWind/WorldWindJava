@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.core;
 
 import gov.nasa.worldwind.Configuration;
@@ -19,100 +18,85 @@ import java.beans.*;
  * @author tag
  * @version $Id: ToolBarImpl.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ToolBarImpl extends AbstractFeature implements ToolBar
-{
+public class ToolBarImpl extends AbstractFeature implements ToolBar {
+
     private GradientToolBar toolBar;
 
-    public ToolBarImpl(Registry registry)
-    {
+    public ToolBarImpl(Registry registry) {
         super("Tool Bar", Constants.TOOL_BAR, registry);
     }
 
-    public void initialize(Controller controller)
-    {
+    public void initialize(Controller controller) {
         this.toolBar = new GradientToolBar();
         this.toolBar.setLayout(new GridLayout(1, 0));
         this.toolBar.setRollover(false);
         this.toolBar.setFloatable(false);
         this.toolBar.initialize(controller);
 
-        this.toolBar.addComponentListener(new ComponentAdapter()
-        {
+        this.toolBar.addComponentListener(new ComponentAdapter() {
             @Override
-            public void componentResized(ComponentEvent e)
-            {
-                for (Component c : toolBar.getComponents())
-                {
-                    if (c instanceof ToolBarButton)
+            public void componentResized(ComponentEvent e) {
+                for (Component c : toolBar.getComponents()) {
+                    if (c instanceof ToolBarButton) {
                         ((ToolBarButton) c).updateSize();
+                    }
                 }
             }
         });
     }
 
-    public JToolBar getJToolBar()
-    {
+    public JToolBar getJToolBar() {
         return this.toolBar;
     }
 
-    public void addFeature(Feature feature)
-    {
+    public void addFeature(Feature feature) {
         ToolBarButton btn = new ToolBarButton(feature);
         btn.initialize(controller);
         this.toolBar.add(btn);
     }
 
-    public static class GradientToolBar extends JToolBar implements Initializable
-    {
+    public static class GradientToolBar extends JToolBar implements Initializable {
+
         private ToolBarButton rolloverComponent;
         private MouseListener mouseListener;
 
-        public GradientToolBar()
-        {
+        public GradientToolBar() {
             setOpaque(false);
             setBorderPainted(false);
         }
 
-        public void initialize(Controller controller)
-        {
-            this.mouseListener = new MouseListener()
-            {
-                public void mouseClicked(MouseEvent mouseEvent)
-                {
+        public void initialize(Controller controller) {
+            this.mouseListener = new MouseListener() {
+                public void mouseClicked(MouseEvent mouseEvent) {
                 }
 
-                public void mousePressed(MouseEvent mouseEvent)
-                {
+                public void mousePressed(MouseEvent mouseEvent) {
                 }
 
-                public void mouseReleased(MouseEvent mouseEvent)
-                {
+                public void mouseReleased(MouseEvent mouseEvent) {
                 }
 
-                public void mouseEntered(MouseEvent mouseEvent)
-                {
-                    if (mouseEvent.getSource() instanceof ToolBarButton)
+                public void mouseEntered(MouseEvent mouseEvent) {
+                    if (mouseEvent.getSource() instanceof ToolBarButton) {
                         rolloverComponent = (ToolBarButton) mouseEvent.getSource();
-                    else
+                    } else {
                         rolloverComponent = null;
+                    }
                     repaint();
                 }
 
-                public void mouseExited(MouseEvent mouseEvent)
-                {
+                public void mouseExited(MouseEvent mouseEvent) {
                     rolloverComponent = null;
                     repaint();
                 }
             };
         }
 
-        public boolean isInitialized()
-        {
+        public boolean isInitialized() {
             return this.mouseListener != null;
         }
 
-        public void add(ToolBarButton button)
-        {
+        public void add(ToolBarButton button) {
             button.setBorderPainted(false);
             button.setOpaque(false);
             button.setHideActionText(true);
@@ -121,16 +105,15 @@ public class ToolBarImpl extends AbstractFeature implements ToolBar
             super.add(button);
         }
 
-        public void setRolloverComponent(Component c)
-        {
+        public void setRolloverComponent(Component c) {
             this.rolloverComponent = c != null && c instanceof ToolBarButton ? (ToolBarButton) c : null;
-            if (this.rolloverComponent != null)
+            if (this.rolloverComponent != null) {
                 this.repaint();
+            }
         }
 
         @Override
-        protected void paintComponent(Graphics g)
-        {
+        protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
 
             // Creates a two-stops gradient
@@ -149,16 +132,15 @@ public class ToolBarImpl extends AbstractFeature implements ToolBar
         }
 
         @Override
-        protected void paintChildren(Graphics g)
-        {
+        protected void paintChildren(Graphics g) {
             super.paintChildren(g);
 
-            if (this.rolloverComponent != null)
+            if (this.rolloverComponent != null) {
                 this.drawButtonLabel(this.rolloverComponent, (Graphics2D) g);
+            }
         }
 
-        public void drawButtonLabel(ToolBarButton c, Graphics2D g)
-        {
+        public void drawButtonLabel(ToolBarButton c, Graphics2D g) {
             Paint oldPaint = g.getPaint();
 
             Font font = Font.decode("Arial-Bold-14");
@@ -171,15 +153,15 @@ public class ToolBarImpl extends AbstractFeature implements ToolBar
             double ys = y + r.getHeight();
 
             LinearGradientPaint lg = new LinearGradientPaint(
-                new Point2D.Double(x, y),
-                new Point2D.Double(x, y + r.getHeight()),
-                new float[] {0f, 1f},
-                new Color[] {Color.BLACK, new Color(50, 50, 50)},
-                MultipleGradientPaint.CycleMethod.NO_CYCLE);
+                    new Point2D.Double(x, y),
+                    new Point2D.Double(x, y + r.getHeight()),
+                    new float[]{0f, 1f},
+                    new Color[]{Color.BLACK, new Color(50, 50, 50)},
+                    MultipleGradientPaint.CycleMethod.NO_CYCLE);
             g.setPaint(lg);
 
             RoundRectangle2D.Double bg = new RoundRectangle2D.Double(x, y, r.getWidth() + 20, r.getHeight() + 4, 20d,
-                20d);
+                    20d);
             g.fill(bg);
 
             g.setPaint(Color.WHITE);
@@ -189,31 +171,28 @@ public class ToolBarImpl extends AbstractFeature implements ToolBar
         }
     }
 
-    public static class ToolBarButton extends JButton implements Initializable
-    {
+    public static class ToolBarButton extends JButton implements Initializable {
+
         protected boolean initialized = false;
         protected ImageIcon originalIcon;
         protected ImageIcon currentIcon;
         protected int iconSize = Configuration.getIntegerValue(Constants.TOOL_BAR_ICON_SIZE_PROPERTY, 52);
 
-        public ToolBarButton(Feature feature)
-        {
+        public ToolBarButton(Feature feature) {
             super(feature);
 
             this.setOpaque(false);
             this.originalIcon = (ImageIcon) feature.getValue(Action.LARGE_ICON_KEY);
             this.setIconSize(iconSize + this.getInsets().left + this.getInsets().right);
-            if (feature.getValue(Constants.ACTION_COMMAND) != null)
+            if (feature.getValue(Constants.ACTION_COMMAND) != null) {
                 this.setActionCommand((String) feature.getValue(Constants.ACTION_COMMAND));
+            }
         }
 
-        public void initialize(final Controller controller)
-        {
+        public void initialize(final Controller controller) {
             // Set up to learn of changes to or by the feature
-            this.getFeature().addPropertyChangeListener(new PropertyChangeListener()
-            {
-                public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-                {
+            this.getFeature().addPropertyChangeListener(new PropertyChangeListener() {
+                public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
                     repaint();
                 }
             });
@@ -221,29 +200,26 @@ public class ToolBarImpl extends AbstractFeature implements ToolBar
             this.initialized = true;
         }
 
-        public boolean isInitialized()
-        {
+        public boolean isInitialized() {
             return this.initialized;
         }
 
-        public Feature getFeature()
-        {
+        public Feature getFeature() {
             return (Feature) this.getAction();
         }
 
         @Override
-        protected void paintComponent(Graphics g)
-        {
+        protected void paintComponent(Graphics g) {
 //        this.setIconSize(this.getSize().width);
             super.paintComponent(g);
 
-            if (this.getFeature().isOn())
+            if (this.getFeature().isOn()) {
                 drawDot(g);
+            }
         }
 
         // Draws a small image above the button to indicate that the button's feature is currently active or selected.
-        private void drawDot(Graphics g)
-        {
+        private void drawDot(Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
 
             // Saves the state
@@ -257,7 +233,7 @@ public class ToolBarImpl extends AbstractFeature implements ToolBar
             float cy = y + r - 1f;
 
             RadialGradientPaint p = new RadialGradientPaint(cx, cy, r,
-                new float[] {0f, 1f}, new Color[] {Color.WHITE, Color.GREEN});
+                    new float[]{0f, 1f}, new Color[]{Color.WHITE, Color.GREEN});
             g2.setPaint(p);
 
             Ellipse2D.Float dot = new Ellipse2D.Float(x, y, 2f * r, 2f * r);
@@ -270,23 +246,22 @@ public class ToolBarImpl extends AbstractFeature implements ToolBar
         }
 
         // Updates the button's size when the window is resized.
-        public void updateSize()
-        {
+        public void updateSize() {
             this.setIconSize(this.getWidth());
         }
 
-        public void setIconSize(int size)
-        {
+        public void setIconSize(int size) {
             size -= (this.getInsets().left + this.getInsets().right);
             if (this.currentIcon != null && this.currentIcon.getIconWidth() == size
-                && this.currentIcon.getIconHeight() == size)
+                    && this.currentIcon.getIconHeight() == size) {
                 return;
+            }
 
             size = Math.min(52, size);
             size = Math.max(16, size);
 
             this.currentIcon = new ImageIcon(
-                this.originalIcon.getImage().getScaledInstance(size, size, Image.SCALE_SMOOTH));
+                    this.originalIcon.getImage().getScaledInstance(size, size, Image.SCALE_SMOOTH));
             this.getAction().putValue(Action.LARGE_ICON_KEY, this.currentIcon);
         }
     }

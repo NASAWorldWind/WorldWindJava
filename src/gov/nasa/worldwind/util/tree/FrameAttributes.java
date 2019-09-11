@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.tree;
 
 import java.awt.*;
@@ -15,11 +14,11 @@ import java.awt.*;
  * @version $Id: FrameAttributes.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see ScrollFrame
  */
-public interface FrameAttributes
-{
+public interface FrameAttributes {
+
     /**
-     * Returns a new FrameAttributes instance of the same type as this FrameAttributes, who's properties are
-     * configured exactly as this FrameAttributes.
+     * Returns a new FrameAttributes instance of the same type as this FrameAttributes, who's properties are configured
+     * exactly as this FrameAttributes.
      *
      * @return a copy of this FrameAttributes.
      */

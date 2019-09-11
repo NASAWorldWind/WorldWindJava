@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.core.layermanager;
 
 import gov.nasa.worldwind.layers.*;
@@ -14,8 +13,8 @@ import gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager.L
  * @author tag
  * @version $Id: LayerManager.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface LayerManager extends Feature
-{
+public interface LayerManager extends Feature {
+
     Layer findLayerByTitle(String layerTitle, String groupTitle);
 
     void addGroup(LayerPath pathToGroup);
@@ -62,7 +61,7 @@ public interface LayerManager extends Feature
      * group. For some layer groups, such as the base group, it's not appropriate to turn them all on or all off.
      *
      * @param path the path to the group.
-     * @param tf   true if group selection should be allowed, false if group selection should not be allowed.
+     * @param tf true if group selection should be allowed, false if group selection should not be allowed.
      */
     void enableGroupSelection(LayerPath path, boolean tf);
 

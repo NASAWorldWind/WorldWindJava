@@ -18,15 +18,13 @@ import java.util.Iterator;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class AnnotationLayerTest
-{
+public class AnnotationLayerTest {
     //////////////////////////////////////////////////////////
     // Basic Operation Tests
     //////////////////////////////////////////////////////////
 
     @Test
-    public void testConstructor()
-    {
+    public void testConstructor() {
         AnnotationLayer layer;
 
         // Test the parameterless constructor.
@@ -35,13 +33,11 @@ public class AnnotationLayerTest
     }
 
     @Test
-    public void testAddAnnotation()
-    {
+    public void testAddAnnotation() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
-        for (Annotation item : annotations)
-        {
+        for (Annotation item : annotations) {
             layer.addAnnotation(item);
         }
 
@@ -50,8 +46,7 @@ public class AnnotationLayerTest
     }
 
     @Test
-    public void testAddAnnotations()
-    {
+    public void testAddAnnotations() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
@@ -62,17 +57,14 @@ public class AnnotationLayerTest
     }
 
     @Test
-    public void testRemoveAnnotation()
-    {
+    public void testRemoveAnnotation() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
-        for (Annotation item : annotations)
-        {
+        for (Annotation item : annotations) {
             layer.addAnnotation(item);
         }
-        for (Annotation item : annotations)
-        {
+        for (Annotation item : annotations) {
             layer.removeAnnotation(item);
         }
 
@@ -81,8 +73,7 @@ public class AnnotationLayerTest
     }
 
     @Test
-    public void testRemoveAllAnnotations()
-    {
+    public void testRemoveAllAnnotations() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
@@ -94,8 +85,7 @@ public class AnnotationLayerTest
     }
 
     @Test
-    public void testSetAnnotations()
-    {
+    public void testSetAnnotations() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
@@ -108,10 +98,8 @@ public class AnnotationLayerTest
     //////////////////////////////////////////////////////////
     // Edge Case Tests
     //////////////////////////////////////////////////////////
-
     @Test
-    public void testSetAnnotationsClearsAnnotations()
-    {
+    public void testSetAnnotationsClearsAnnotations() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
@@ -126,8 +114,7 @@ public class AnnotationLayerTest
     }
 
     @Test
-    public void testSetAnnotationsThenAddAnnotations()
-    {
+    public void testSetAnnotationsThenAddAnnotations() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
@@ -142,8 +129,7 @@ public class AnnotationLayerTest
     }
 
     @Test
-    public void testMaliciousGetAnnotations()
-    {
+    public void testMaliciousGetAnnotations() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
@@ -152,25 +138,18 @@ public class AnnotationLayerTest
         Iterable<Annotation> layerAnnotations = layer.getAnnotations();
 
         // Test that the returned list cannot be modified.
-        try
-        {
-            if (layerAnnotations instanceof java.util.Collection)
-            {
+        try {
+            if (layerAnnotations instanceof java.util.Collection) {
                 java.util.Collection<Annotation> collection = (java.util.Collection<Annotation>) layerAnnotations;
                 collection.clear();
-            }
-            else
-            {
+            } else {
                 java.util.Iterator<Annotation> iter = layerAnnotations.iterator();
-                while (iter.hasNext())
-                {
+                while (iter.hasNext()) {
                     iter.next();
                     iter.remove();
                 }
             }
-        }
-        catch (UnsupportedOperationException e)
-        {
+        } catch (UnsupportedOperationException e) {
             e.printStackTrace();
         }
 
@@ -179,8 +158,7 @@ public class AnnotationLayerTest
     }
 
     @Test
-    public void testMaliciousSetAnnotations()
-    {
+    public void testMaliciousSetAnnotations() {
         // Create an Iterable with null elements.
         java.util.List<Annotation> list = new java.util.ArrayList<Annotation>();
         list.add(null);
@@ -192,13 +170,10 @@ public class AnnotationLayerTest
         dc.setModel(new BasicModel());
         dc.setView(new BasicOrbitView());
 
-        try
-        {
+        try {
             // Test that the layer does not fail when the Iterable is used.
             layer.render(dc);
-        }
-        catch (NullPointerException e)
-        {
+        } catch (NullPointerException e) {
             fail("Layer does not check for null elements in Iterable");
         }
     }
@@ -206,83 +181,66 @@ public class AnnotationLayerTest
     //////////////////////////////////////////////////////////
     // Exceptional Condition Tests
     //////////////////////////////////////////////////////////
-
     @Test
-    public void testAddAnnotationFail()
-    {
+    public void testAddAnnotationFail() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
         layer.setAnnotations(annotations);
 
-        try
-        {
+        try {
             // Expecting an IllegalStateException here.
             layer.addAnnotation(new GlobeAnnotation("", Position.ZERO));
             fail("");
-        }
-        catch (IllegalStateException e)
-        {
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testAddAnnotationsFail()
-    {
+    public void testAddAnnotationsFail() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
         layer.setAnnotations(annotations);
 
-        try
-        {
+        try {
             // Expecting an IllegalStateException here.
             layer.addAnnotations(annotations);
             fail("");
-        }
-        catch (IllegalStateException e)
-        {
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testRemoveAnnotationFail()
-    {
+    public void testRemoveAnnotationFail() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
         layer.setAnnotations(annotations);
 
-        try
-        {
+        try {
             // Expecting an IllegalStateException here.
             layer.removeAnnotation(new GlobeAnnotation("", Position.ZERO));
             fail("");
-        }
-        catch (IllegalStateException e)
-        {
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testRemoveAllAnnotationsFail()
-    {
+    public void testRemoveAllAnnotationsFail() {
         Iterable<Annotation> annotations = createExampleIterable();
 
         AnnotationLayer layer = new AnnotationLayer();
         layer.setAnnotations(annotations);
 
-        try
-        {
+        try {
             // Expecting an IllegalStateException here.
             layer.removeAllAnnotations();
             fail("");
-        }
-        catch (IllegalStateException e)
-        {
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
     }
@@ -290,20 +248,14 @@ public class AnnotationLayerTest
     //////////////////////////////////////////////////////////
     // Helper Methods
     //////////////////////////////////////////////////////////
-
     @SuppressWarnings({"JavaDoc"})
-    private static void assertEquals(String message, Iterable<Annotation> expected, Iterable<Annotation> actual)
-    {
-        if (expected == null)
-        {
+    private static void assertEquals(String message, Iterable<Annotation> expected, Iterable<Annotation> actual) {
+        if (expected == null) {
             assertNull(message, actual);
-        }
-        else
-        {
+        } else {
             Iterator<Annotation> expectedIter = expected.iterator(), actualIter = actual.iterator();
             // Compare the elements in each iterator, as long as they both have elements.
-            while (expectedIter.hasNext() && actualIter.hasNext())
-            {
+            while (expectedIter.hasNext() && actualIter.hasNext()) {
                 Assert.assertEquals(message, expectedIter.next(), actualIter.next());
             }
             // If either iterator has more elements, then their lengths are different.
@@ -311,10 +263,9 @@ public class AnnotationLayerTest
         }
     }
 
-    private static Iterable<Annotation> createExampleIterable()
-    {
+    private static Iterable<Annotation> createExampleIterable() {
         //noinspection RedundantArrayCreation
-        return java.util.Arrays.asList(new Annotation[] {
+        return java.util.Arrays.asList(new Annotation[]{
             new GlobeAnnotation("", Position.ZERO),
             new GlobeAnnotation("", Position.ZERO),
             new GlobeAnnotation("", Position.ZERO)});

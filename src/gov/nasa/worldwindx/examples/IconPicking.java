@@ -24,12 +24,11 @@ import java.awt.*;
  * @see gov.nasa.worldwind.globes.FlatGlobe
  * @see EarthFlat
  */
-public class IconPicking extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class IconPicking extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             IconLayer layer = new IconLayer();
@@ -38,43 +37,39 @@ public class IconPicking extends ApplicationTemplate
             layer.setRegionCulling(true);
 
             UserFacingIcon icon = new UserFacingIcon("src/images/32x32-icon-nasa.png",
-                new Position(Angle.fromRadians(0), Angle.fromRadians(0), 0));
+                    new Position(Angle.fromRadians(0), Angle.fromRadians(0), 0));
             icon.setSize(new Dimension(24, 24));
             layer.addIcon(icon);
 
             icon = new UserFacingIcon("src/images/32x32-icon-nasa.png",
-                new Position(Angle.fromRadians(0.1), Angle.fromRadians(0.0), 0));
+                    new Position(Angle.fromRadians(0.1), Angle.fromRadians(0.0), 0));
             icon.setSize(new Dimension(24, 24));
             layer.addIcon(icon);
 
             icon = new UserFacingIcon("src/images/32x32-icon-nasa.png",
-                new Position(Angle.fromRadians(0.0), Angle.fromRadians(0.1), 0));
+                    new Position(Angle.fromRadians(0.0), Angle.fromRadians(0.1), 0));
             icon.setSize(new Dimension(24, 24));
             layer.addIcon(icon);
 
             icon = new UserFacingIcon("src/images/32x32-icon-nasa.png",
-                new Position(Angle.fromRadians(0.1), Angle.fromRadians(0.1), 0));
+                    new Position(Angle.fromRadians(0.1), Angle.fromRadians(0.1), 0));
             icon.setSize(new Dimension(24, 24));
             layer.addIcon(icon);
 
             icon = new UserFacingIcon("src/images/32x32-icon-nasa.png",
-                new Position(Angle.fromRadians(0), Angle.fromDegrees(180), 0));
+                    new Position(Angle.fromRadians(0), Angle.fromDegrees(180), 0));
             icon.setSize(new Dimension(24, 24));
             layer.addIcon(icon);
 
             ApplicationTemplate.insertAfterPlacenames(this.getWwd(), layer);
 
-            this.getWwd().addSelectListener(new SelectListener()
-            {
+            this.getWwd().addSelectListener(new SelectListener() {
                 @Override
-                public void selected(SelectEvent event)
-                {
-                    if (event.getEventAction().equals(SelectEvent.ROLLOVER))
-                    {
+                public void selected(SelectEvent event) {
+                    if (event.getEventAction().equals(SelectEvent.ROLLOVER)) {
                         PickedObjectList pol = event.getObjects();
                         System.out.println(" Picked Objects Size " + pol.size());
-                        for (PickedObject po : pol)
-                        {
+                        for (PickedObject po : pol) {
                             System.out.println(" Class " + po.getObject().getClass().getName() + "  isTerrian=" + po.isTerrain());
                         }
                     }
@@ -84,8 +79,7 @@ public class IconPicking extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Adjust configuration values before instantiation
         Configuration.setValue(AVKey.GLOBE_CLASS_NAME, EarthFlat.class.getName());
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 27e6);

@@ -13,15 +13,13 @@ import org.w3c.dom.Document;
  * @author tag
  * @version $Id: USGSDigitalOrtho.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class USGSDigitalOrtho extends BasicTiledImageLayer
-{
-    public USGSDigitalOrtho()
-    {
+public class USGSDigitalOrtho extends BasicTiledImageLayer {
+
+    public USGSDigitalOrtho() {
         super(getConfigurationDocument(), null);
     }
 
-    protected static Document getConfigurationDocument()
-    {
+    protected static Document getConfigurationDocument() {
         return WWXML.openDocumentFile("config/Earth/USGSDigitalOrthoLayer.xml", null);
     }
 }

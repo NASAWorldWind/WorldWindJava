@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.xml;
 
 import javax.xml.stream.XMLStreamException;
@@ -15,14 +14,14 @@ import javax.xml.stream.events.XMLEvent;
  * @author tag
  * @version $Id: XMLEventParser.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface XMLEventParser
-{
+public interface XMLEventParser {
+
     /**
      * Parse the event and initialize the parser's values to those found in the event.
      *
      * @param context a current parser context.
-     * @param event   the event to parse.
-     * @param args    an optional list of arguments that may by used by subclasses.
+     * @param event the event to parse.
+     * @param args an optional list of arguments that may by used by subclasses.
      *
      * @return if parsing is successful, returns <code>this</code>, otherwise returns null.
      *
@@ -37,7 +36,7 @@ public interface XMLEventParser
      * values.
      *
      * @return a new parser instance. The namespace URI is the same as the creating parser, but all other fields are
-     *         empty.
+     * empty.
      *
      * @throws Exception if an error or exception occurs while attempting to create the parser.
      */

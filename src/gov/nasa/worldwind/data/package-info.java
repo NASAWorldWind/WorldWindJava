@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 /**
  * <p>
  * This package provides classes for converting raw data sources into a form which can be used by standard WorldWind
@@ -40,7 +39,7 @@
  * formatted data.</li>
  * </ul>
  *
-<p>
+ * <p>
  * {@link gov.nasa.worldwind.data.DataStoreProducer} provides a common interface for converting raw data sources into a
  * form which can be used by standard WorldWind components. There are three concrete implementations of
  * DataStoreProducer:
@@ -55,7 +54,7 @@
  * structure into the WorldWind Java tile cache structure.</li>
  * </ul>
  *
-<p>
+ * <p>
  * <strong>Data Configuration Documents</strong> are a common mechanism and file format for describing a WorldWind
  * component's configuration. While data configuration documents are not part of the gov.nasa.worldwind.data package,
  * they are used as a configuration exchange mechanism by the classes in gov.nasa.worldwind.data. For example,
@@ -74,7 +73,7 @@
  * <!--********************  Supported Formats  *********************-->
  * <!--**************************************************************-->
  *
-<h2>Supported Formats</h2>
+ * <h2>Supported Formats</h2>
  * <ul>
  * <li>ADF - A proprietary BINARY format developed by ESRI for ARC/INFO GRID rasters stored in workspaces (INFO
  * directory, *.adf)
@@ -94,7 +93,8 @@
  * </li>
  * <li>CIB - Controlled Image Base format for ortho-photos (rectified grayscale aerial images), RPF and NITFS compliant
  * </li>
- * <li>COASP - Defence R&amp;D Canada (DRDC) designed data raster format for Configurable Airborne SAR Processor (*.coasp)
+ * <li>COASP - Defence R&amp;D Canada (DRDC) designed data raster format for Configurable Airborne SAR Processor
+ * (*.coasp)
  * </li>
  * <li>COSAR - "COmplex SAR", Annotated Binary Matrix (TerraSAR-X), plain binary image raster, limited to 4GB size
  * (*.cosar)
@@ -154,7 +154,7 @@
  * <li>TER - Terragen terrain file format to store a one band of Int16 elevation values (*.ter, *.terrain)</li>
  * <li>TIFF - Tagged Image File Format (TIFF) and GeoTIFF (*.tif, *.tiff, *.gtif)</li>
  *
-    <li>AirSAR, AirSAR Polarimetric Image, AirSAR</li>
+ * <li>AirSAR, AirSAR Polarimetric Image, AirSAR</li>
  * <li>BT, VTP .bt (Binary Terrain) 1.3 Format, BT</li>
  * <li>CEOS, CEOS Image, CEOS</li>
  * <li>COASP, DRDC COASP SAR Processor Raster, COASP</li>
@@ -174,7 +174,7 @@
  * <li>GenBin, Generic Binary (.hdr Labelled), GenBin</li>
  * <li>GSC, GSC Geogrid, GSC</li>
  *
-    <li>HFA, Erdas Imagine Images (.img)A</li>
+ * <li>HFA, Erdas Imagine Images (.img)A</li>
  * <li>IDA, Image Data and Analysis, IDA</li>
  * <li>ILWIS, ILWIS Raster Map, ILWIS</li>
  * <li>INGR, Intergraph Raster, INGR</li>
@@ -189,7 +189,7 @@
  * <li>PCIDSK, PCIDSK Database File, PCIDSK</li>
  * <li>PDS, NASA Planetary Data System, PDS</li>
  *
-    <li>RMF, Raster Matrix Format, RMF</li>
+ * <li>RMF, Raster Matrix Format, RMF</li>
  * <li>RS2, RadarSat 2 XML Product, RS2</li>
  * <li>RST, Idrisi Raster A.1, RST</li>
  * <li>SAGA, SAGA GIS Binary Grid (.sdat), SAGA</li>
@@ -201,13 +201,13 @@
  * <li>TSX, TerraSAR-X Product, TSX</li>
  * <li>XPM, X11 PixMap Format, XPM</li>
  *
-</ul>
+ * </ul>
  *
-<!--**************************************************************-->
+ * <!--**************************************************************-->
  * <!--********************  Supported Projections  *****************-->
  * <!--**************************************************************-->
  *
-<h2>Supported Projections</h2>
+ * <h2>Supported Projections</h2>
  * <ul>
  * <li>Albers Equal-Area Conic</li>
  * <li>Azimuthal Equidistant</li>
@@ -253,27 +253,27 @@
  * <li>VanDerGrinten</li>
  * </ul>
  *
-<!--**************************************************************-->
+ * <!--**************************************************************-->
  * <!--********************  Deploying GDAL Libraries  **************-->
  * <!--**************************************************************-->
  *
-<h2>Deploying WorldWind's GDAL Libraries</h2>
+ * <h2>Deploying WorldWind's GDAL Libraries</h2>
  *
-    The open-source GDAL and PROJ4 libraries are used to import many of WorldWind's supported data formats. WorldWind
+ * The open-source GDAL and PROJ4 libraries are used to import many of WorldWind's supported data formats. WorldWind
  * uses GDAL version 1.7.2 and PROJ4 version ?.? along with LizardTech's Decode SDK version 7.0.0.2167 for MrSID
  * support.
  * <!--TODO: fill in PROJ4 version number above-->
  *
-<h3>Supported Platforms</h3>
+ * <h3>Supported Platforms</h3>
  *
-    GDAL and PROJ4 have been incorporated for MacOSX (Snow Leopard, 64-bit), Windows 32 and Windows 64. Support for Linux
+ * GDAL and PROJ4 have been incorporated for MacOSX (Snow Leopard, 64-bit), Windows 32 and Windows 64. Support for Linux
  * 32-bit and 64-bit, and Solaris are expected in the very near future. If the GDAL library cannot be found, data import
  * operates without it but supports only a limited set of formats and projections, in particular, GeoTIFF, JPEG, PNG,
  * BIL and DTED, and either EPSG:4326f (WGS84, latitude/longitude), or UTM.
  *
  * <h3>GDAL Library Locations</h3>
  *
-    To simplify deployment, GDAL + PRO4 + MrSID bundles are provided as a single dynamic library with all dependent
+ * To simplify deployment, GDAL + PRO4 + MrSID bundles are provided as a single dynamic library with all dependent
  * libraries included. There is one such library per platform, each located in
  * <code>lib-external/gdal/<em>platform</em></code>, as follows:
  * <ul>
@@ -286,18 +286,18 @@
  * the current path, and if no GDAL bundle was found, will try to locate the GDAL bundle in the sub-folders.
  * <!--TODO: which sub-folders?-->
  *
-<h3>Deploying with Java Web Start</h3>
+ * <h3>Deploying with Java Web Start</h3>
  *
-    Instructions for using the WorldWind GDAL libraries with a Java Web Start application are available at
+ * Instructions for using the WorldWind GDAL libraries with a Java Web Start application are available at
  * <a href="https://goworldwind.org/getting-started/" target="_blank">https://goworldwind.org/getting-started/</a>.
  *
  * <!--**************************************************************-->
  * <!--********************  Use Case Examples  *********************-->
  * <!--**************************************************************-->
  *
-<h2><a id="Section_UseCaseExamples">Common Use Case Examples</a></h2>
+ * <h2><a id="Section_UseCaseExamples">Common Use Case Examples</a></h2>
  *
-    The following examples demonstrate the most common use cases which the classes in gov.nasa.worldwind.data are
+ * The following examples demonstrate the most common use cases which the classes in gov.nasa.worldwind.data are
  * designed to address. Additionally, several examples demonstrate data management use cases using data configuration
  * documents. These examples constitute an overview of how to convert raw data sources into a form which can be consumed
  * by WorldWind components, then manage the data in its converted form.
@@ -355,7 +355,7 @@
  * </pre>
  * </blockquote>
  *
-<!-- Example 2 -->
+ * <!-- Example 2 -->
  * <p>
  * <strong><a id="Example_2">Example 2: Converting Georeferenced Elevation Data to the WorldWind Tile Structure</a>
  * </strong>
@@ -365,7 +365,7 @@
  * {@link gov.nasa.worldwind.data.TiledImageProducer} with {@link gov.nasa.worldwind.data.TiledElevationProducer}.
  * </blockquote>
  *
-<!-- Example 3 -->
+ * <!-- Example 3 -->
  * <p>
  * <strong><a id="Example_3">Example 3: Converting WorldWind .NET LayerSets to the WorldWind Java Tile Structure
  * </a></strong>
@@ -375,7 +375,7 @@
  * {@link gov.nasa.worldwind.data.TiledImageProducer} with {@link gov.nasa.worldwind.data.WWDotNetLayerSetConverter}.
  * </blockquote>
  *
-<!-- Example 4 -->
+ * <!-- Example 4 -->
  * <p>
  * <strong><a id="Example_4">Example 4: Reading Data Configuration Documents from the File System</a></strong>
  * <blockquote>
@@ -392,7 +392,7 @@
  * </pre>
  * </blockquote>
  *
-<!-- Example 5 -->
+ * <!-- Example 5 -->
  * <p>
  * <strong><a id="Example_5">Example 5: Reading Data Configuration Documents from the WorldWind FileStore</a>
  * </strong>
@@ -420,7 +420,7 @@
  * </pre>
  * </blockquote>
  *
-<!-- Example 6 -->
+ * <!-- Example 6 -->
  * <p>
  * <strong><a id="Example_6">Example 6: Writing Data Configuration Documents</a></strong>
  * <blockquote>
@@ -460,7 +460,7 @@
  * </pre>
  * </blockquote>
  *
-<!-- Example 7 -->
+ * <!-- Example 7 -->
  * <p>
  * <strong><a id="Example_7">Example 7: Searching for Data Configuration Documents in the File System</a></strong>
  * <blockquote>
@@ -483,7 +483,7 @@
  * </pre>
  * </blockquote>
  *
-<!-- Example 8 -->
+ * <!-- Example 8 -->
  * <p>
  * <strong><a id="Example_8">Example 8: Searching for Data Configuration Documents in the WorldWind FileStore</a>
  * </strong>
@@ -534,7 +534,7 @@
  * </pre>
  * </blockquote>
  *
-<!-- Example 9 -->
+ * <!-- Example 9 -->
  * <p>
  * <strong><a id="Example_9">Example 9: Creating WorldWind Components from Data Configuration Documents</a></strong>
  * <blockquote>
@@ -582,11 +582,11 @@
  * </pre>
  * </blockquote>
  *
-<!--**************************************************************-->
+ * <!--**************************************************************-->
  * <!--********************  DataDescriptor Porting Guide  **********-->
  * <!--**************************************************************-->
  *
-<h2><a id="Section_DataDescriptorPortingGuide">DataDescriptor Porting Guide</a></h2>
+ * <h2><a id="Section_DataDescriptorPortingGuide">DataDescriptor Porting Guide</a></h2>
  * DataDescriptor has been replaced with data configuration documents. This guide explains why DataDescriptor has been
  * replaced, provides information on backward compatability with data configuration, and outlines how to update code
  * which uses DataDescriptor.

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 /**
  * <p>
  * Provides classes for parsing KML and KMZ files and streams.</p>
@@ -38,14 +37,14 @@
  * able to provide its own, and in some cases is expected to.
  * <h4>Extending the Classes</h4>
  *
-<p>
+ * <p>
  * This package's classes are designed for easy behavior modification and replacement, and for straightforward addition
  * of operations to be performed during parsing. See the description of {@link
  * gov.nasa.worldwind.util.xml.AbstractXMLEventParser} for further information.</p>
  *
-<h4>Relative References</h4>
+ * <h4>Relative References</h4>
  *
-<p>
+ * <p>
  * Because the KML specification requires relative references within KML files to be resolved relative to the location
  * of the file, a context is provided to resolve these references. The context is specific to the document type &#151;
  * file, stream, KML or KMZ &#151; and is provided by the {@link gov.nasa.worldwind.ogc.kml.io.KMLDoc} interface and its

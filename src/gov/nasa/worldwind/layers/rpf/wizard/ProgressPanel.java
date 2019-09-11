@@ -13,8 +13,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: ProgressPanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ProgressPanel extends JPanel
-{
+public class ProgressPanel extends JPanel {
+
     // Panel title and optional description.
     private JLabel title;
     private JLabel description;
@@ -23,59 +23,48 @@ public class ProgressPanel extends JPanel
     private JLabel progressDescription1;
     private JLabel progressDescription2;
 
-    public ProgressPanel()
-    {
+    public ProgressPanel() {
         makeComponents();
         layoutComponents();
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return this.title.getText();
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title.setText(title);
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return this.description.getText();
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description.setText(description);
     }
 
-    public JProgressBar getProgressBar()
-    {
+    public JProgressBar getProgressBar() {
         return this.progressBar;
     }
-    
-    public String getProgressDescription1()
-    {
+
+    public String getProgressDescription1() {
         return this.progressDescription1.getText();
     }
 
-    public void setProgressDescription1(String description)
-    {
+    public void setProgressDescription1(String description) {
         this.progressDescription1.setText(description);
     }
 
-    public String getProgressDescription2()
-    {
+    public String getProgressDescription2() {
         return this.progressDescription2.getText();
     }
 
-    public void setProgressDescription2(String description)
-    {
+    public void setProgressDescription2(String description) {
         this.progressDescription2.setText(description);
     }
 
-    private void makeComponents()
-    {
+    private void makeComponents() {
         this.title = new JLabel(" ");
         this.title.setBackground(Color.gray);
         this.title.setOpaque(true);
@@ -86,8 +75,7 @@ public class ProgressPanel extends JPanel
         this.progressDescription2 = new JLabel();
     }
 
-    private void layoutComponents()
-    {
+    private void layoutComponents() {
         removeAll();
         setLayout(new BorderLayout());
 

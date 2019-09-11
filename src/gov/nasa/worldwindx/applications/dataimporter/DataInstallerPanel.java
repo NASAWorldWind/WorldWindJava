@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.dataimporter;
 
 import gov.nasa.worldwind.*;
@@ -20,14 +19,13 @@ import java.beans.*;
  * @author tag
  * @version $Id: DataInstallerPanel.java 1180 2013-02-15 18:40:47Z tgaskins $
  */
-public class DataInstallerPanel extends JPanel
-{
+public class DataInstallerPanel extends JPanel {
+
     protected FileSetPanel fileSetPanel; // data available on disk
     protected FileStorePanel fileStorePanel; // data currently installed
     protected WorldWindow wwd;
 
-    public DataInstallerPanel(final WorldWindow wwd)
-    {
+    public DataInstallerPanel(final WorldWindow wwd) {
         super(new BorderLayout(5, 5));
 
         this.wwd = wwd;
@@ -45,24 +43,21 @@ public class DataInstallerPanel extends JPanel
 
         this.add(tabbedPane, BorderLayout.CENTER);
 
-        this.fileSetPanel.addPropertyChangeListener(new PropertyChangeListener()
-        {
+        this.fileSetPanel.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
-            public void propertyChange(PropertyChangeEvent event)
-            {
+            public void propertyChange(PropertyChangeEvent event) {
                 // Forward the event to this instance's listeners.
                 firePropertyChange(event.getPropertyName(), event.getOldValue(), event.getNewValue());
             }
         });
 
-        this.fileSetPanel.addPropertyChangeListener(new PropertyChangeListener()
-        {
+        this.fileSetPanel.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
-            public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-            {
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
                 // Update the installed-data panel when a new data set is installed.
-                if (propertyChangeEvent.getPropertyName().equals(DataInstaller.INSTALL_COMPLETE))
+                if (propertyChangeEvent.getPropertyName().equals(DataInstaller.INSTALL_COMPLETE)) {
                     fileStorePanel.update(WorldWind.getDataFileStore());
+                }
             }
         });
     }

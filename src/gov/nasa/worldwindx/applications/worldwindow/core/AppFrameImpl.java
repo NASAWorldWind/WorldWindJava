@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.core;
 
 import gov.nasa.worldwindx.applications.worldwindow.features.AbstractFeature;
@@ -17,41 +16,40 @@ import java.util.logging.Level;
  * @author tag
  * @version $Id: AppFrameImpl.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class AppFrameImpl extends AbstractFeature implements AppFrame
-{
+public class AppFrameImpl extends AbstractFeature implements AppFrame {
+
     // only one of these will be non-null
     protected JFrame frame;
 
-    public AppFrameImpl(Registry registry)
-    {
+    public AppFrameImpl(Registry registry) {
         super("App Frame", Constants.APP_FRAME, registry);
     }
 
-    public void initialize(final Controller controller)
-    {
+    public void initialize(final Controller controller) {
         super.initialize(controller);
         this.initializeApp();
     }
 
-    protected void initializeApp()
-    {
-        try
-        {
+    protected void initializeApp() {
+        try {
             frame = new JFrame();
             frame.setTitle(controller.getAppTitle());
             frame.getContentPane().add(controller.getAppPanel().getJPanel(), BorderLayout.CENTER);
 
             ToolBar toolBar = controller.getToolBar();
-            if (toolBar != null)
+            if (toolBar != null) {
                 frame.add(toolBar.getJToolBar(), BorderLayout.PAGE_START);
+            }
 
             StatusPanel statusPanel = controller.getStatusPanel();
-            if (statusPanel != null)
+            if (statusPanel != null) {
                 frame.add(statusPanel.getJPanel(), BorderLayout.PAGE_END);
+            }
 
             MenuBar menuBar = controller.getMenuBar();
-            if (menuBar != null)
+            if (menuBar != null) {
                 frame.setJMenuBar(menuBar.getJMenuBar());
+            }
 
             frame.pack();
 
@@ -69,17 +67,14 @@ public class AppFrameImpl extends AbstractFeature implements AppFrame
 
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             frame.setVisible(true);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String msg = "Unable to initialize the application.";
             Util.getLogger().log(Level.SEVERE, msg, e);
             this.controller.showErrorDialogLater(null, "Initialization Error", msg);
         }
     }
 
-    public Frame getFrame()
-    {
+    public Frame getFrame() {
         return this.frame;
     }
 }

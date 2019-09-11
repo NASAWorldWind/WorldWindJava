@@ -19,10 +19,10 @@ import java.util.ArrayList;
  * @author dcollins
  * @version $Id: AnalyticSurfaceLegend.java 2053 2014-06-10 20:16:57Z tgaskins $
  */
-public class AnalyticSurfaceLegend implements Renderable
-{
-    public interface LabelAttributes
-    {
+public class AnalyticSurfaceLegend implements Renderable {
+
+    public interface LabelAttributes {
+
         double getValue();
 
         String getText();
@@ -44,49 +44,41 @@ public class AnalyticSurfaceLegend implements Renderable
     protected Iterable<? extends Renderable> labels;
 
     public static AnalyticSurfaceLegend fromColorGradient(int width, int height, double minValue, double maxValue,
-        double minHue, double maxHue, Color borderColor, Iterable<? extends LabelAttributes> labels,
-        LabelAttributes titleLabel)
-    {
+            double minHue, double maxHue, Color borderColor, Iterable<? extends LabelAttributes> labels,
+            LabelAttributes titleLabel) {
         AnalyticSurfaceLegend legend = new AnalyticSurfaceLegend();
         legend.screenImage = new ScreenImage();
         legend.screenImage.setImageSource(legend.createColorGradientLegendImage(width, height, minHue, maxHue,
-            borderColor));
+                borderColor));
         legend.labels = legend.createColorGradientLegendLabels(width, height, minValue, maxValue, labels, titleLabel);
 
         return legend;
     }
 
     public static AnalyticSurfaceLegend fromColorGradient(double minValue, double maxValue, double minHue,
-        double maxHue, Iterable<? extends LabelAttributes> labels, LabelAttributes titleLabel)
-    {
+            double maxHue, Iterable<? extends LabelAttributes> labels, LabelAttributes titleLabel) {
         return fromColorGradient(DEFAULT_WIDTH, DEFAULT_HEIGHT, minValue, maxValue, minHue, maxHue, DEFAULT_COLOR,
-            labels,
-            titleLabel);
+                labels,
+                titleLabel);
     }
 
-    protected AnalyticSurfaceLegend()
-    {
+    protected AnalyticSurfaceLegend() {
     }
 
-    public boolean isVisible()
-    {
+    public boolean isVisible() {
         return this.visible;
     }
 
-    public void setVisible(boolean visible)
-    {
+    public void setVisible(boolean visible) {
         this.visible = visible;
     }
 
-    public double getOpacity()
-    {
+    public double getOpacity() {
         return this.screenImage.getOpacity();
     }
 
-    public void setOpacity(double opacity)
-    {
-        if (opacity < 0d || opacity > 1d)
-        {
+    public void setOpacity(double opacity) {
+        if (opacity < 0d || opacity > 1d) {
             String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -95,15 +87,12 @@ public class AnalyticSurfaceLegend implements Renderable
         this.screenImage.setOpacity(opacity);
     }
 
-    public Point getScreenLocation(DrawContext dc)
-    {
+    public Point getScreenLocation(DrawContext dc) {
         return this.screenImage.getScreenLocation(dc);
     }
 
-    public void setScreenLocation(Point point)
-    {
-        if (point == null)
-        {
+    public void setScreenLocation(Point point) {
+        if (point == null) {
             String message = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -112,10 +101,8 @@ public class AnalyticSurfaceLegend implements Renderable
         this.screenImage.setScreenLocation(point);
     }
 
-    public int getWidth(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public int getWidth(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -124,10 +111,8 @@ public class AnalyticSurfaceLegend implements Renderable
         return this.screenImage.getImageWidth(dc);
     }
 
-    public int getHeight(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public int getHeight(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -136,17 +121,16 @@ public class AnalyticSurfaceLegend implements Renderable
         return this.screenImage.getImageHeight(dc);
     }
 
-    public void render(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public void render(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!this.isVisible())
+        if (!this.isVisible()) {
             return;
+        }
 
         this.doRender(dc);
     }
@@ -154,30 +138,25 @@ public class AnalyticSurfaceLegend implements Renderable
     //**************************************************************//
     //********************  Legend Utilities  **********************//
     //**************************************************************//
-
     public static Iterable<? extends AnalyticSurfaceLegend.LabelAttributes> createDefaultColorGradientLabels(
-        double minValue, double maxValue, Format format)
-    {
-        if (format == null)
-        {
+            double minValue, double maxValue, Format format) {
+        if (format == null) {
             String message = Logging.getMessage("nullValue.Format");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         ArrayList<AnalyticSurfaceLegend.LabelAttributes> labels
-            = new ArrayList<AnalyticSurfaceLegend.LabelAttributes>();
+                = new ArrayList<AnalyticSurfaceLegend.LabelAttributes>();
 
         int numLabels = 5;
         Font font = Font.decode("Arial-BOLD-12");
 
-        for (int i = 0; i < numLabels; i++)
-        {
+        for (int i = 0; i < numLabels; i++) {
             double value = WWMath.mix(i / (double) (numLabels - 1), minValue, maxValue);
 
             String text = format.format(value);
-            if (!WWUtil.isEmpty(text))
-            {
+            if (!WWUtil.isEmpty(text)) {
                 labels.add(createLegendLabelAttributes(value, text, font, Color.WHITE, 5d, 0d));
             }
         }
@@ -185,10 +164,8 @@ public class AnalyticSurfaceLegend implements Renderable
         return labels;
     }
 
-    public static AnalyticSurfaceLegend.LabelAttributes createDefaultTitle(String text)
-    {
-        if (text == null)
-        {
+    public static AnalyticSurfaceLegend.LabelAttributes createDefaultTitle(String text) {
+        if (text == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -199,32 +176,25 @@ public class AnalyticSurfaceLegend implements Renderable
     }
 
     public static AnalyticSurfaceLegend.LabelAttributes createLegendLabelAttributes(final double value,
-        final String text, final Font font, final Color color, final double xOffset, final double yOffset)
-    {
-        return new AnalyticSurfaceLegend.LabelAttributes()
-        {
-            public double getValue()
-            {
+            final String text, final Font font, final Color color, final double xOffset, final double yOffset) {
+        return new AnalyticSurfaceLegend.LabelAttributes() {
+            public double getValue() {
                 return value;
             }
 
-            public String getText()
-            {
+            public String getText() {
                 return text;
             }
 
-            public Font getFont()
-            {
+            public Font getFont() {
                 return font;
             }
 
-            public Color getColor()
-            {
+            public Color getColor() {
                 return color;
             }
 
-            public Point2D getOffset()
-            {
+            public Point2D getOffset() {
                 return new Point2D.Double(xOffset, yOffset);
             }
         };
@@ -233,71 +203,71 @@ public class AnalyticSurfaceLegend implements Renderable
     //**************************************************************//
     //********************  Legend Rendering  **********************//
     //**************************************************************//
-
-    protected void doRender(DrawContext dc)
-    {
+    protected void doRender(DrawContext dc) {
         this.screenImage.render(dc);
 
-        if (!dc.isPickingMode() && this.labels != null)
-        {
-            for (Renderable renderable : this.labels)
-            {
-                if (renderable != null)
+        if (!dc.isPickingMode() && this.labels != null) {
+            for (Renderable renderable : this.labels) {
+                if (renderable != null) {
                     renderable.render(dc);
+                }
             }
         }
     }
 
-    protected void drawLabel(DrawContext dc, LabelAttributes attr, double x, double y, String halign, String valign)
-    {
+    protected void drawLabel(DrawContext dc, LabelAttributes attr, double x, double y, String halign, String valign) {
         String text = attr.getText();
-        if (WWUtil.isEmpty(text))
+        if (WWUtil.isEmpty(text)) {
             return;
+        }
 
         Font font = attr.getFont();
-        if (font == null)
+        if (font == null) {
             font = DEFAULT_FONT;
+        }
 
         Color color = DEFAULT_COLOR;
-        if (attr.getColor() != null)
+        if (attr.getColor() != null) {
             color = attr.getColor();
+        }
 
         Point location = this.getScreenLocation(dc);
-        if (location != null)
-        {
+        if (location != null) {
             x += location.getX() - this.screenImage.getImageWidth(dc) / 2;
             y += location.getY() - this.screenImage.getImageHeight(dc) / 2;
         }
 
         Point2D offset = attr.getOffset();
-        if (offset != null)
-        {
+        if (offset != null) {
             x += offset.getX();
             y += offset.getY();
         }
 
         TextRenderer tr = OGLTextRenderer.getOrCreateTextRenderer(dc.getTextRendererCache(), font);
-        if (tr == null)
+        if (tr == null) {
             return;
+        }
 
         Rectangle2D bounds = tr.getBounds(text);
-        if (bounds != null)
-        {
-            if (AVKey.CENTER.equals(halign))
+        if (bounds != null) {
+            if (AVKey.CENTER.equals(halign)) {
                 x += -(bounds.getWidth() / 2d);
-            if (AVKey.RIGHT.equals(halign))
+            }
+            if (AVKey.RIGHT.equals(halign)) {
                 x += -bounds.getWidth();
+            }
 
-            if (AVKey.CENTER.equals(valign))
+            if (AVKey.CENTER.equals(valign)) {
                 y += (bounds.getHeight() + bounds.getY());
-            if (AVKey.TOP.equals(valign))
+            }
+            if (AVKey.TOP.equals(valign)) {
                 y += bounds.getHeight();
+            }
         }
 
         Rectangle viewport = dc.getView().getViewport();
         tr.beginRendering(viewport.width, viewport.height);
-        try
-        {
+        try {
             double yInGLCoords = viewport.height - y - 1;
 
             // Draw the text outline, in a contrasting color.
@@ -310,9 +280,7 @@ public class AnalyticSurfaceLegend implements Renderable
             // Draw the text over its outline, in the specified color.
             tr.setColor(color);
             tr.draw(text, (int) x, (int) yInGLCoords);
-        }
-        finally
-        {
+        } finally {
             tr.endRendering();
         }
     }
@@ -320,29 +288,22 @@ public class AnalyticSurfaceLegend implements Renderable
     //**************************************************************//
     //********************  Hue Gradient Legend  *******************//
     //**************************************************************//
-
     protected BufferedImage createColorGradientLegendImage(int width, int height, double minHue, double maxHue,
-        Color borderColor)
-    {
+            Color borderColor) {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g2d = image.createGraphics();
-        try
-        {
-            for (int y = 0; y < height; y++)
-            {
+        try {
+            for (int y = 0; y < height; y++) {
                 double hue = WWMath.mix(1d - y / (double) (height - 1), minHue, maxHue);
                 g2d.setColor(Color.getHSBColor((float) hue, 1f, 1f));
                 g2d.drawLine(0, y, width - 1, y);
             }
 
-            if (borderColor != null)
-            {
+            if (borderColor != null) {
                 g2d.setColor(borderColor);
                 g2d.drawRect(0, 0, width - 1, height - 1);
             }
-        }
-        finally
-        {
+        } finally {
             g2d.dispose();
         }
 
@@ -350,16 +311,14 @@ public class AnalyticSurfaceLegend implements Renderable
     }
 
     protected Iterable<? extends Renderable> createColorGradientLegendLabels(int width, int height,
-        double minValue, double maxValue, Iterable<? extends LabelAttributes> labels, LabelAttributes titleLabel)
-    {
+            double minValue, double maxValue, Iterable<? extends LabelAttributes> labels, LabelAttributes titleLabel) {
         ArrayList<Renderable> list = new ArrayList<Renderable>();
 
-        if (labels != null)
-        {
-            for (LabelAttributes attr : labels)
-            {
-                if (attr == null)
+        if (labels != null) {
+            for (LabelAttributes attr : labels) {
+                if (attr == null) {
                     continue;
+                }
 
                 double factor = WWMath.computeInterpolationFactor(attr.getValue(), minValue, maxValue);
                 double y = (1d - factor) * (height - 1);
@@ -367,8 +326,7 @@ public class AnalyticSurfaceLegend implements Renderable
             }
         }
 
-        if (titleLabel != null)
-        {
+        if (titleLabel != null) {
             list.add(new LabelRenderable(this, titleLabel, width / 2d, 0d, AVKey.CENTER, AVKey.BOTTOM));
         }
 
@@ -378,25 +336,22 @@ public class AnalyticSurfaceLegend implements Renderable
     //**************************************************************//
     //********************  Legend Label  **************************//
     //**************************************************************//
+    protected static class LabelRenderable implements Renderable {
 
-    protected static class LabelRenderable implements Renderable
-    {
         protected final OrderedLabel orderedLabel;
 
         public LabelRenderable(AnalyticSurfaceLegend legend, LabelAttributes attr, double x, double y,
-            String halign, String valign)
-        {
+                String halign, String valign) {
             this.orderedLabel = new OrderedLabel(legend, attr, x, y, halign, valign);
         }
 
-        public void render(DrawContext dc)
-        {
+        public void render(DrawContext dc) {
             dc.addOrderedRenderable(this.orderedLabel);
         }
     }
 
-    protected static class OrderedLabel implements OrderedRenderable
-    {
+    protected static class OrderedLabel implements OrderedRenderable {
+
         protected final AnalyticSurfaceLegend legend;
         protected final LabelAttributes attr;
         protected final double x;
@@ -405,8 +360,7 @@ public class AnalyticSurfaceLegend implements Renderable
         protected final String valign;
 
         public OrderedLabel(AnalyticSurfaceLegend legend, LabelAttributes attr, double x, double y,
-            String halign, String valign)
-        {
+                String halign, String valign) {
             this.legend = legend;
             this.attr = attr;
             this.x = x;
@@ -415,18 +369,15 @@ public class AnalyticSurfaceLegend implements Renderable
             this.valign = valign;
         }
 
-        public double getDistanceFromEye()
-        {
+        public double getDistanceFromEye() {
             return 0;
         }
 
-        public void render(DrawContext dc)
-        {
+        public void render(DrawContext dc) {
             this.legend.drawLabel(dc, this.attr, this.x, this.y, this.halign, this.valign);
         }
 
-        public void pick(DrawContext dc, Point pickPoint)
-        {
+        public void pick(DrawContext dc, Point pickPoint) {
             // Intentionally left blank.
         }
     }

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.core;
 
 import gov.nasa.worldwind.util.*;
@@ -21,16 +20,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author tag
  * @version $Id: ImageLibrary.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ImageLibrary
-{
+public class ImageLibrary {
+
     // These images are available for situation where a desired image is not available.
-    private static final String[] WARNING_IMAGES = new String[]
-        {
-            "gov/nasa/worldwindx/applications/worldwindow/images/warning16.png",
-            "gov/nasa/worldwindx/applications/worldwindow/images/warning24.png",
-            "gov/nasa/worldwindx/applications/worldwindow/images/warning32.png",
-            "gov/nasa/worldwindx/applications/worldwindow/images/warning64.png"
-        };
+    private static final String[] WARNING_IMAGES = new String[]{
+        "gov/nasa/worldwindx/applications/worldwindow/images/warning16.png",
+        "gov/nasa/worldwindx/applications/worldwindow/images/warning24.png",
+        "gov/nasa/worldwindx/applications/worldwindow/images/warning32.png",
+        "gov/nasa/worldwindx/applications/worldwindow/images/warning64.png"
+    };
 
     private static ImageLibrary instance;
 
@@ -39,32 +37,25 @@ public class ImageLibrary
      *
      * @param library the image library instance.
      */
-    public static void setInstance(ImageLibrary library)
-    {
+    public static void setInstance(ImageLibrary library) {
         instance = library;
     }
 
     private ConcurrentHashMap<String, BufferedImage> imageMap = new ConcurrentHashMap<String, BufferedImage>();
     private ConcurrentHashMap<String, ImageIcon> iconMap = new ConcurrentHashMap<String, ImageIcon>();
 
-    public ImageLibrary()
-    {
+    public ImageLibrary() {
         this.loadWarningImages();
     }
 
-    protected void loadWarningImages()
-    {
-        for (String imageName : WARNING_IMAGES)
-        {
-            try
-            {
+    protected void loadWarningImages() {
+        for (String imageName : WARNING_IMAGES) {
+            try {
                 InputStream is = WWIO.openFileOrResourceStream(imageName, this.getClass());
                 this.imageMap.put(imageName, ImageUtil.toCompatibleImage(ImageIO.read(is)));
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 Util.getLogger().log(java.util.logging.Level.WARNING,
-                    e.getMessage() + " Stand-in image, name is " + imageName, e);
+                        e.getMessage() + " Stand-in image, name is " + imageName, e);
             }
         }
     }
@@ -76,16 +67,16 @@ public class ImageLibrary
      *
      * @return a warning image of the requested size, or one of size 64 if a size larger than 64 is requested.
      */
-    public static BufferedImage getWarningImage(int size)
-    {
-        if (size < 24)
+    public static BufferedImage getWarningImage(int size) {
+        if (size < 24) {
             return getImage(WARNING_IMAGES[0]);
-        else if (size < 32)
+        } else if (size < 32) {
             return getImage(WARNING_IMAGES[1]);
-        else if (size < 64)
+        } else if (size < 64) {
             return getImage(WARNING_IMAGES[2]);
-        else
+        } else {
             return getImage(WARNING_IMAGES[3]);
+        }
     }
 
     /**
@@ -95,16 +86,16 @@ public class ImageLibrary
      *
      * @return a warning icon of the requested size, or one of size 64 if a size larger than 64 is requested.
      */
-    public static Icon getWarningIcon(int size)
-    {
-        if (size < 24)
+    public static Icon getWarningIcon(int size) {
+        if (size < 24) {
             return getIcon(WARNING_IMAGES[0]);
-        else if (size < 32)
+        } else if (size < 32) {
             return getIcon(WARNING_IMAGES[1]);
-        else if (size < 64)
+        } else if (size < 64) {
             return getIcon(WARNING_IMAGES[2]);
-        else
+        } else {
             return getIcon(WARNING_IMAGES[3]);
+        }
     }
 
     /**
@@ -116,20 +107,17 @@ public class ImageLibrary
      *
      * @return the image if it's available, otherwise null.
      */
-    public static synchronized BufferedImage getImage(String imageName)
-    {
-        try
-        {
+    public static synchronized BufferedImage getImage(String imageName) {
+        try {
             BufferedImage image = !WWUtil.isEmpty(imageName) ? instance.imageMap.get(imageName) : null;
-            if (image != null)
+            if (image != null) {
                 return image;
+            }
 
             URL url = getImageURL(imageName);
-            if (url != null)
-            {
+            if (url != null) {
                 image = ImageIO.read(url);
-                if (image != null)
-                {
+                if (image != null) {
                     image = ImageUtil.toCompatibleImage(image);
                     register(imageName, image);
                     return image;
@@ -137,30 +125,32 @@ public class ImageLibrary
             }
 
             return null;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             Util.getLogger().log(java.util.logging.Level.SEVERE,
-                e.getMessage() + " Image name " + (imageName != null ? imageName : null), e);
+                    e.getMessage() + " Image name " + (imageName != null ? imageName : null), e);
             return null;
         }
     }
 
-    public static synchronized URL getImageURL(String imageName)
-    {
+    public static synchronized URL getImageURL(String imageName) {
         URL url = instance.getClass().getResource(imageName); // look locallly
-        if (url == null)
+        if (url == null) {
             url = instance.getClass().getResource("/" + imageName); // look locallly
-        if (url == null)
+        }
+        if (url == null) {
             url = instance.getClass().getResource("images" + File.separatorChar + imageName);
-        if (url == null)
+        }
+        if (url == null) {
             url = instance.getClass().getResource("/images" + File.separatorChar + imageName);
-        if (url == null)
+        }
+        if (url == null) {
             url = instance.getClass().getResource(
-                "gov/nasa/worldwindx/applications/worldwindow/images" + File.separatorChar + imageName);
-        if (url == null)
+                    "gov/nasa/worldwindx/applications/worldwindow/images" + File.separatorChar + imageName);
+        }
+        if (url == null) {
             url = instance.getClass().getResource(
-                "/gov/nasa/worldwindx/applications/worldwindow/images" + File.separatorChar + imageName);
+                    "/gov/nasa/worldwindx/applications/worldwindow/images" + File.separatorChar + imageName);
+        }
 
         return url;
     }
@@ -174,29 +164,25 @@ public class ImageLibrary
      *
      * @return the icon if it's available, otherwise null.
      */
-    public static synchronized ImageIcon getIcon(String iconName)
-    {
-        try
-        {
+    public static synchronized ImageIcon getIcon(String iconName) {
+        try {
             ImageIcon icon = !WWUtil.isEmpty(iconName) ? instance.iconMap.get(iconName) : null;
-            if (icon != null)
+            if (icon != null) {
                 return icon;
+            }
 
             // Load it as an image first, because image failures occur immediately.
             BufferedImage image = getImage(iconName);
-            if (image != null)
-            {
+            if (image != null) {
                 icon = new ImageIcon(image);
                 register(iconName, icon);
                 return icon;
             }
 
             return null;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Util.getLogger().log(java.util.logging.Level.SEVERE,
-                e.getMessage() + " Icon name " + (iconName != null ? iconName : null), e);
+                    e.getMessage() + " Icon name " + (iconName != null ? iconName : null), e);
             return null;
         }
     }
@@ -208,10 +194,10 @@ public class ImageLibrary
      *
      * @return the image associated with the icon, or null if the icon is not available.
      */
-    public static BufferedImage getImageForIcon(Icon icon)
-    {
-        if (icon == null)
+    public static BufferedImage getImageForIcon(Icon icon) {
+        if (icon == null) {
             return null;
+        }
 
         return getImage(getIconName(icon));
     }
@@ -219,19 +205,18 @@ public class ImageLibrary
     /**
      * Register an image with the library.
      *
-     * @param name  the image name. If null the image is not registered.
+     * @param name the image name. If null the image is not registered.
      * @param image the image. If null the image is not registered.
      *
      * @return the reference to the image passed in the <code>image</code> argument.
      */
-    public static synchronized Object register(String name, Object image)
-    {
-        if (!WWUtil.isEmpty(name) && image != null)
-        {
-            if (image instanceof BufferedImage)
+    public static synchronized Object register(String name, Object image) {
+        if (!WWUtil.isEmpty(name) && image != null) {
+            if (image instanceof BufferedImage) {
                 instance.imageMap.put(name, (BufferedImage) image);
-            else if (image instanceof ImageIcon)
+            } else if (image instanceof ImageIcon) {
                 instance.iconMap.put(name, (ImageIcon) image);
+            }
         }
 
         return image;
@@ -244,12 +229,11 @@ public class ImageLibrary
      *
      * @return the image name, or null if the image is not registered with this instance.
      */
-    public static String getImageName(BufferedImage image)
-    {
-        for (Map.Entry<String, BufferedImage> entry : instance.imageMap.entrySet())
-        {
-            if (entry.getValue() == image)
+    public static String getImageName(BufferedImage image) {
+        for (Map.Entry<String, BufferedImage> entry : instance.imageMap.entrySet()) {
+            if (entry.getValue() == image) {
                 return entry.getKey();
+            }
         }
 
         return null;
@@ -262,12 +246,11 @@ public class ImageLibrary
      *
      * @return the icon name, or null if the icon is not registered with this instance.
      */
-    public static String getIconName(Icon icon)
-    {
-        for (Map.Entry<String, ImageIcon> entry : instance.iconMap.entrySet())
-        {
-            if (entry.getValue() == icon)
+    public static String getIconName(Icon icon) {
+        for (Map.Entry<String, ImageIcon> entry : instance.iconMap.entrySet()) {
+            if (entry.getValue() == icon) {
                 return entry.getKey();
+            }
         }
 
         return null;

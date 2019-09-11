@@ -15,12 +15,12 @@ package gov.nasa.worldwind.formats.dds;
  * @author dcollins
  * @version $Id: ColorBlockExtractor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface ColorBlockExtractor
-{
+public interface ColorBlockExtractor {
+
     /**
      * Extracts a 4x4 block of pixel data at the specified coordinate <code>(x, y)</code>, and places the data in the
-     * specified <code>colorBlock</code>. If the coordinate <code>(x, y)</code> with the image, but the entire 4x4
-     * block is not, this will either truncate the block to fit the image, or copy nearby pixels to fill the block.
+     * specified <code>colorBlock</code>. If the coordinate <code>(x, y)</code> with the image, but the entire 4x4 block
+     * is not, this will either truncate the block to fit the image, or copy nearby pixels to fill the block.
      *
      * @param attributes the DXT compression attributes which may affect how colors are accessed.
      * @param x horizontal coordinate origin to extract pixel data from.

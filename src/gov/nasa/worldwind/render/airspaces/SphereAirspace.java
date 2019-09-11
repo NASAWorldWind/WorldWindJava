@@ -24,8 +24,8 @@ import java.util.*;
  * @author dcollins
  * @version $Id: SphereAirspace.java 2308 2014-09-16 19:27:22Z tgaskins $
  */
-public class SphereAirspace extends AbstractAirspace
-{
+public class SphereAirspace extends AbstractAirspace {
+
     protected static final int DEFAULT_SUBDIVISIONS = 3;
 
     private LatLon location = LatLon.ZERO;
@@ -33,16 +33,13 @@ public class SphereAirspace extends AbstractAirspace
     // Geometry.
     private int subdivisions = DEFAULT_SUBDIVISIONS;
 
-    public SphereAirspace(LatLon location, double radius)
-    {
-        if (location == null)
-        {
+    public SphereAirspace(LatLon location, double radius) {
+        if (location == null) {
             String message = Logging.getMessage("nullValue.LocationIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (radius < 0.0)
-        {
+        if (radius < 0.0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -53,19 +50,16 @@ public class SphereAirspace extends AbstractAirspace
         this.makeDefaultDetailLevels();
     }
 
-    public SphereAirspace(AirspaceAttributes attributes)
-    {
+    public SphereAirspace(AirspaceAttributes attributes) {
         super(attributes);
         this.makeDefaultDetailLevels();
     }
 
-    public SphereAirspace()
-    {
+    public SphereAirspace() {
         this.makeDefaultDetailLevels();
     }
 
-    public SphereAirspace(SphereAirspace source)
-    {
+    public SphereAirspace(SphereAirspace source) {
         super(source);
 
         this.location = source.location;
@@ -75,8 +69,7 @@ public class SphereAirspace extends AbstractAirspace
         this.makeDefaultDetailLevels();
     }
 
-    private void makeDefaultDetailLevels()
-    {
+    private void makeDefaultDetailLevels() {
         List<DetailLevel> levels = new ArrayList<DetailLevel>();
         double[] ramp = ScreenSizeDetailLevel.computeLinearScreenSizeRamp(7, 10.0, 600.0);
 
@@ -124,8 +117,7 @@ public class SphereAirspace extends AbstractAirspace
      *
      * @return location of the sphere.
      */
-    public LatLon getLocation()
-    {
+    public LatLon getLocation() {
         return this.location;
     }
 
@@ -136,10 +128,8 @@ public class SphereAirspace extends AbstractAirspace
      *
      * @throws IllegalArgumentException if <code>location</code> is null
      */
-    public void setLocation(LatLon location)
-    {
-        if (location == null)
-        {
+    public void setLocation(LatLon location) {
+        if (location == null) {
             String message = Logging.getMessage("nullValue.LocationIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -154,8 +144,7 @@ public class SphereAirspace extends AbstractAirspace
      *
      * @return radius of the sphere in meters.
      */
-    public double getRadius()
-    {
+    public double getRadius() {
         return this.radius;
     }
 
@@ -167,10 +156,8 @@ public class SphereAirspace extends AbstractAirspace
      *
      * @throws IllegalArgumentException if <code>radius</code> is less than zero
      */
-    public void setRadius(double radius)
-    {
-        if (radius < 0.0)
-        {
+    public void setRadius(double radius) {
+        if (radius < 0.0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -180,44 +167,39 @@ public class SphereAirspace extends AbstractAirspace
         this.invalidateAirspaceData();
     }
 
-    public Position getReferencePosition()
-    {
+    public Position getReferencePosition() {
         double[] altitudes = this.getAltitudes();
         return new Position(this.location, altitudes[0]);
     }
 
-    protected Extent computeExtent(Globe globe, double verticalExaggeration)
-    {
+    protected Extent computeExtent(Globe globe, double verticalExaggeration) {
         double altitude = this.getAltitudes(verticalExaggeration)[0];
         boolean terrainConformant = this.isTerrainConforming()[0];
         double radius = this.getRadius();
 
-        if (terrainConformant)
-        {
+        if (terrainConformant) {
             double[] extremes = globe.getMinAndMaxElevations(this.location.getLatitude(), this.location.getLongitude());
             double minAltitude = verticalExaggeration * extremes[0] + altitude - radius;
             double maxAltitude = verticalExaggeration * extremes[1] + altitude + radius;
             Vec4 bottomCenter = globe.computePointFromPosition(this.location, minAltitude);
             Vec4 topCenter = globe.computePointFromPosition(this.location, maxAltitude);
             return new Cylinder(bottomCenter, topCenter, radius);
-        }
-        else
-        {
+        } else {
             Vec4 centerPoint = globe.computePointFromPosition(this.location, altitude);
             return new Sphere(centerPoint, radius);
         }
     }
 
     @Override
-    protected List<Vec4> computeMinimalGeometry(Globe globe, double verticalExaggeration)
-    {
+    protected List<Vec4> computeMinimalGeometry(Globe globe, double verticalExaggeration) {
         return null; // Sphere has no need for a minimal geometry.
     }
 
     /**
      * Returns this SphereAirspace's {@link gov.nasa.worldwind.geom.Extent} for the specified DrawContext. This
-     * overrides {@link gov.nasa.worldwind.render.airspaces.AbstractAirspace#getExtent(gov.nasa.worldwind.render.DrawContext)}
-     * in order to bypass the superclass' extent caching. Unlike other Airspace's Extents, SphereAirspace's Extent is a
+     * overrides
+     * {@link gov.nasa.worldwind.render.airspaces.AbstractAirspace#getExtent(gov.nasa.worldwind.render.DrawContext)} in
+     * order to bypass the superclass' extent caching. Unlike other Airspace's Extents, SphereAirspace's Extent is a
      * perfect fitting {@link gov.nasa.worldwind.geom.Sphere}, who's center point depends on the current surface
      * geometry. For this reason SphereAirspace's exact bounding volume can be easily computed, and should not be
      * cached.
@@ -228,17 +210,14 @@ public class SphereAirspace extends AbstractAirspace
      *
      * @throws IllegalArgumentException if the DrawContext is null, or if the Globe held by the DrawContext is null.
      */
-    public Extent getExtent(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public Extent getExtent(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (dc.getGlobe() == null)
-        {
+        if (dc.getGlobe() == null) {
             String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -247,8 +226,7 @@ public class SphereAirspace extends AbstractAirspace
         return this.computeExtent(dc);
     }
 
-    protected Sphere computeExtent(DrawContext dc)
-    {
+    protected Sphere computeExtent(DrawContext dc) {
         double altitude = this.getAltitudes(dc.getVerticalExaggeration())[0];
         boolean terrainConformant = this.isTerrainConforming()[0];
         double radius = this.getRadius();
@@ -256,20 +234,17 @@ public class SphereAirspace extends AbstractAirspace
         this.clearElevationMap();
 
         Vec4 centerPoint = this.computePointFromPosition(dc, this.location.getLatitude(), this.location.getLongitude(),
-            altitude, terrainConformant);
+                altitude, terrainConformant);
         return new Sphere(centerPoint, radius);
     }
 
-    protected void doMoveTo(Globe globe, Position oldRef, Position newRef)
-    {
-        if (oldRef == null)
-        {
+    protected void doMoveTo(Globe globe, Position oldRef, Position newRef) {
+        if (oldRef == null) {
             String message = "nullValue.OldRefIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (newRef == null)
-        {
+        if (newRef == null) {
             String message = "nullValue.NewRefIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -283,16 +258,13 @@ public class SphereAirspace extends AbstractAirspace
         super.doMoveTo(oldRef, newRef);
     }
 
-    protected void doMoveTo(Position oldRef, Position newRef)
-    {
-        if (oldRef == null)
-        {
+    protected void doMoveTo(Position oldRef, Position newRef) {
+        if (oldRef == null) {
             String message = "nullValue.OldRefIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (newRef == null)
-        {
+        if (newRef == null) {
             String message = "nullValue.NewRefIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -303,8 +275,7 @@ public class SphereAirspace extends AbstractAirspace
         this.setLocation(newRef);
     }
 
-    protected double computeEyeDistance(DrawContext dc)
-    {
+    protected double computeEyeDistance(DrawContext dc) {
         Sphere sphere = this.computeExtent(dc);
         Vec4 eyePoint = dc.getView().getEyePoint();
 
@@ -315,35 +286,29 @@ public class SphereAirspace extends AbstractAirspace
     }
 
     @Override
-    protected SurfaceShape createSurfaceShape()
-    {
+    protected SurfaceShape createSurfaceShape() {
         return new SurfaceCircle();
     }
 
     @Override
-    protected void updateSurfaceShape(DrawContext dc, SurfaceShape shape)
-    {
+    protected void updateSurfaceShape(DrawContext dc, SurfaceShape shape) {
         super.updateSurfaceShape(dc, shape);
 
         shape.getAttributes().setDrawOutline(false); // suppress the surface shape's outline
     }
 
     @Override
-    protected void regenerateSurfaceShape(DrawContext dc, SurfaceShape shape)
-    {
+    protected void regenerateSurfaceShape(DrawContext dc, SurfaceShape shape) {
         ((SurfaceCircle) shape).setCenter(this.location);
         ((SurfaceCircle) shape).setRadius(this.radius);
     }
 
-    protected int getSubdivisions()
-    {
+    protected int getSubdivisions() {
         return this.subdivisions;
     }
 
-    protected void setSubdivisions(int subdivisions)
-    {
-        if (subdivisions < 0)
-        {
+    protected void setSubdivisions(int subdivisions) {
+        if (subdivisions < 0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions < 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -355,17 +320,13 @@ public class SphereAirspace extends AbstractAirspace
     //**************************************************************//
     //********************  Geometry Rendering  ********************//
     //**************************************************************//
-
-    protected void doRenderGeometry(DrawContext dc, String drawStyle)
-    {
-        if (dc == null)
-        {
+    protected void doRenderGeometry(DrawContext dc, String drawStyle) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (dc.getGL() == null)
-        {
+        if (dc.getGL() == null) {
             String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -373,29 +334,25 @@ public class SphereAirspace extends AbstractAirspace
 
         this.clearElevationMap();
 
-        if (Airspace.DRAW_STYLE_FILL.equals(drawStyle))
-        {
+        if (Airspace.DRAW_STYLE_FILL.equals(drawStyle)) {
             this.drawSphere(dc);
-        }
-        else if (Airspace.DRAW_STYLE_OUTLINE.equals(drawStyle))
-        {
+        } else if (Airspace.DRAW_STYLE_OUTLINE.equals(drawStyle)) {
             // Sphere airspaces do not display an outline.
         }
     }
 
-    protected void drawSphere(DrawContext dc)
-    {
+    protected void drawSphere(DrawContext dc) {
         double[] altitudes = this.getAltitudes(dc.getVerticalExaggeration());
         boolean[] terrainConformant = this.isTerrainConforming();
         int subdivisions = this.getSubdivisions();
 
-        if (this.isEnableLevelOfDetail())
-        {
+        if (this.isEnableLevelOfDetail()) {
             DetailLevel level = this.computeDetailLevel(dc);
 
             Object o = level.getValue(SUBDIVISIONS);
-            if (o != null && o instanceof Integer)
+            if (o != null && o instanceof Integer) {
                 subdivisions = (Integer) o;
+            }
 
             //o = level.getValue(DISABLE_TERRAIN_CONFORMANCE);
             //if (o != null && o instanceof Boolean && (Boolean) o)
@@ -403,7 +360,7 @@ public class SphereAirspace extends AbstractAirspace
         }
 
         Vec4 centerPoint = this.computePointFromPosition(dc,
-            this.location.getLatitude(), this.location.getLongitude(), altitudes[0], terrainConformant[0]);
+                this.location.getLatitude(), this.location.getLongitude(), altitudes[0], terrainConformant[0]);
 
         Matrix modelview = dc.getView().getModelviewMatrix();
         modelview = modelview.multiply(Matrix.fromTranslation(centerPoint));
@@ -415,8 +372,7 @@ public class SphereAirspace extends AbstractAirspace
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         gl.glPushAttrib(GL2.GL_POLYGON_BIT | GL2.GL_TRANSFORM_BIT);
-        try
-        {
+        try {
             gl.glEnable(GL.GL_CULL_FACE);
             gl.glFrontFace(GL.GL_CCW);
 
@@ -428,30 +384,24 @@ public class SphereAirspace extends AbstractAirspace
 
             gl.glMatrixMode(GL2.GL_MODELVIEW);
             gl.glPushMatrix();
-            try
-            {
+            try {
                 gl.glLoadMatrixd(matrixArray, 0);
                 this.drawUnitSphere(dc, subdivisions);
-            }
-            finally
-            {
+            } finally {
                 gl.glPopMatrix();
             }
-        }
-        finally
-        {
+        } finally {
             gl.glPopAttrib();
         }
     }
 
-    protected void drawUnitSphere(DrawContext dc, int subdivisions)
-    {
+    protected void drawUnitSphere(DrawContext dc, int subdivisions) {
         Object cacheKey = new Geometry.CacheKey(dc.getGlobe(), this.getClass(), "Sphere", subdivisions);
         Geometry geom = (Geometry) this.getGeometryCache().getObject(cacheKey);
-        if (geom == null || this.isExpired(dc, geom))
-        {
-            if (geom == null)
+        if (geom == null || this.isExpired(dc, geom)) {
+            if (geom == null) {
                 geom = new Geometry();
+            }
             this.makeSphere(1.0, subdivisions, geom);
             this.updateExpiryCriteria(dc, geom);
             this.getGeometryCache().add(cacheKey, geom);
@@ -460,8 +410,7 @@ public class SphereAirspace extends AbstractAirspace
         this.drawGeometry(dc, geom, geom);
     }
 
-    protected void makeSphere(double radius, int subdivisions, Geometry dest)
-    {
+    protected void makeSphere(double radius, int subdivisions, Geometry dest) {
         GeometryBuilder gb = this.getGeometryBuilder();
         gb.setOrientation(GeometryBuilder.OUTSIDE);
 
@@ -477,9 +426,7 @@ public class SphereAirspace extends AbstractAirspace
     //**************************************************************//
     //********************  END Geometry Rendering  ****************//
     //**************************************************************//
-
-    protected void doGetRestorableState(RestorableSupport rs, RestorableSupport.StateObject context)
-    {
+    protected void doGetRestorableState(RestorableSupport rs, RestorableSupport.StateObject context) {
         super.doGetRestorableState(rs, context);
 
         rs.addStateValueAsLatLon(context, "location", this.getLocation());
@@ -487,20 +434,22 @@ public class SphereAirspace extends AbstractAirspace
         rs.addStateValueAsInteger(context, "subdivisions", this.getSubdivisions());
     }
 
-    protected void doRestoreState(RestorableSupport rs, RestorableSupport.StateObject context)
-    {
+    protected void doRestoreState(RestorableSupport rs, RestorableSupport.StateObject context) {
         super.doRestoreState(rs, context);
 
         LatLon ll = rs.getStateValueAsLatLon(context, "location");
-        if (ll != null)
+        if (ll != null) {
             this.setLocation(ll);
+        }
 
         Double d = rs.getStateValueAsDouble(context, "radius");
-        if (d != null)
+        if (d != null) {
             this.setRadius(d);
+        }
 
         Integer i = rs.getStateValueAsInteger(context, "subdivisions");
-        if (i != null)
+        if (i != null) {
             this.setSubdivisions(i);
+        }
     }
 }

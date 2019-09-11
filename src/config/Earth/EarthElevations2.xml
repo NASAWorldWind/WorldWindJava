@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
-  ~ National Aeronautics and Space Administration.
-  ~ All Rights Reserved.
-  -->
+~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+~ National Aeronautics and Space Administration.
+~ All Rights Reserved.
+-->
 
 <!--$Id: EarthElevations2.xml 3087 2015-05-13 20:34:41Z dcollins $-->
 <ElevationModel version="1" modelType="Compound">

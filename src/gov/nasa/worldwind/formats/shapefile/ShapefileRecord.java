@@ -20,8 +20,8 @@ import java.util.*;
  * @author Patrick Murris
  * @version $Id: ShapefileRecord.java 2303 2014-09-14 22:33:36Z dcollins $
  */
-public abstract class ShapefileRecord
-{
+public abstract class ShapefileRecord {
+
     protected Shapefile shapeFile;
     protected int recordNumber;
     protected int contentLengthInBytes;
@@ -30,15 +30,17 @@ public abstract class ShapefileRecord
     protected int numberOfParts;
     protected int numberOfPoints;
     protected int firstPartNumber;
-    /** Indicates if the record's point coordinates should be normalized. Defaults to false. */
+    /**
+     * Indicates if the record's point coordinates should be normalized. Defaults to false.
+     */
     protected boolean normalizePoints;
 
     protected static final int RECORD_HEADER_LENGTH = 8;
     protected static List<String> measureTypes = new ArrayList<String>(Arrays.asList(
-        Shapefile.SHAPE_POINT_M, Shapefile.SHAPE_POINT_Z,
-        Shapefile.SHAPE_MULTI_POINT_M, Shapefile.SHAPE_MULTI_POINT_Z,
-        Shapefile.SHAPE_POLYLINE_M, Shapefile.SHAPE_POLYLINE_Z,
-        Shapefile.SHAPE_POLYGON_M, Shapefile.SHAPE_POLYGON_Z
+            Shapefile.SHAPE_POINT_M, Shapefile.SHAPE_POINT_Z,
+            Shapefile.SHAPE_MULTI_POINT_M, Shapefile.SHAPE_MULTI_POINT_Z,
+            Shapefile.SHAPE_POLYLINE_M, Shapefile.SHAPE_POLYLINE_Z,
+            Shapefile.SHAPE_POLYGON_M, Shapefile.SHAPE_POLYGON_Z
     ));
 
     /**
@@ -46,23 +48,20 @@ public abstract class ShapefileRecord
      * the start of the record, and will be the start of the next record when the constructor returns.
      *
      * @param shapeFile the parent {@link Shapefile}.
-     * @param buffer    the shapefile record {@link java.nio.ByteBuffer} to read from.
+     * @param buffer the shapefile record {@link java.nio.ByteBuffer} to read from.
      *
      * @throws IllegalArgumentException if any argument is null or otherwise invalid.
-     * @throws gov.nasa.worldwind.exception.WWRuntimeException
-     *                                  if the record's shape type does not match that of the shapefile.
+     * @throws gov.nasa.worldwind.exception.WWRuntimeException if the record's shape type does not match that of the
+     * shapefile.
      */
-    public ShapefileRecord(Shapefile shapeFile, ByteBuffer buffer)
-    {
-        if (shapeFile == null)
-        {
+    public ShapefileRecord(Shapefile shapeFile, ByteBuffer buffer) {
+        if (shapeFile == null) {
             String message = Logging.getMessage("nullValue.ShapefileIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (buffer == null)
-        {
+        if (buffer == null) {
             String message = Logging.getMessage("nullValue.BufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -70,12 +69,9 @@ public abstract class ShapefileRecord
 
         // Save the buffer's current position.
         int pos = buffer.position();
-        try
-        {
+        try {
             this.readFromBuffer(shapeFile, buffer);
-        }
-        finally
-        {
+        } finally {
             // Move to the end of the record.
             buffer.position(pos + this.contentLengthInBytes + RECORD_HEADER_LENGTH);
         }
@@ -86,8 +82,7 @@ public abstract class ShapefileRecord
      *
      * @return the shapefile containing this record.
      */
-    public Shapefile getShapeFile()
-    {
+    public Shapefile getShapeFile() {
         return this.shapeFile;
     }
 
@@ -96,8 +91,7 @@ public abstract class ShapefileRecord
      *
      * @return the record's ordinal position in the shapefile.
      */
-    public int getRecordNumber()
-    {
+    public int getRecordNumber() {
         return this.recordNumber;
     }
 
@@ -106,8 +100,7 @@ public abstract class ShapefileRecord
      *
      * @return the record' shape type. See {@link Shapefile} for a list of the defined shape types.
      */
-    public String getShapeType()
-    {
+    public String getShapeType() {
         return this.shapeType;
     }
 
@@ -116,8 +109,7 @@ public abstract class ShapefileRecord
      *
      * @return the record's attributes.
      */
-    public DBaseRecord getAttributes()
-    {
+    public DBaseRecord getAttributes() {
         return this.attributes;
     }
 
@@ -126,8 +118,7 @@ public abstract class ShapefileRecord
      *
      * @param attributes the shapefile's attributes. May be null.
      */
-    public void setAttributes(DBaseRecord attributes)
-    {
+    public void setAttributes(DBaseRecord attributes) {
         this.attributes = attributes;
     }
 
@@ -136,8 +127,7 @@ public abstract class ShapefileRecord
      *
      * @return the number of parts in the record.
      */
-    public int getNumberOfParts()
-    {
+    public int getNumberOfParts() {
         return this.numberOfParts;
     }
 
@@ -146,8 +136,7 @@ public abstract class ShapefileRecord
      *
      * @return the first part number in the record.
      */
-    public int getFirstPartNumber()
-    {
+    public int getFirstPartNumber() {
         return this.firstPartNumber;
     }
 
@@ -156,8 +145,7 @@ public abstract class ShapefileRecord
      *
      * @return the last part number in the record.
      */
-    public int getLastPartNumber()
-    {
+    public int getLastPartNumber() {
         return this.firstPartNumber + this.numberOfParts - 1;
     }
 
@@ -166,8 +154,7 @@ public abstract class ShapefileRecord
      *
      * @return the number of points in the record.
      */
-    public int getNumberOfPoints()
-    {
+    public int getNumberOfPoints() {
         return this.numberOfPoints;
     }
 
@@ -178,10 +165,8 @@ public abstract class ShapefileRecord
      *
      * @return the number of points in the specified part.
      */
-    public int getNumberOfPoints(int partNumber)
-    {
-        if (partNumber < 0 || partNumber >= this.getNumberOfParts())
-        {
+    public int getNumberOfPoints(int partNumber) {
+        if (partNumber < 0 || partNumber >= this.getNumberOfParts()) {
             String message = Logging.getMessage("generic.indexOutOfRange", partNumber);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -197,12 +182,10 @@ public abstract class ShapefileRecord
      * @param partNumber the part for which to return the point buffer.
      *
      * @return the buffer holding the part's points. The points are ordered X0,Y0,X1,Y1,...Xn-1,Yn-1, where "n" is the
-     *         number of points in the part.
+     * number of points in the part.
      */
-    public VecBuffer getPointBuffer(int partNumber)
-    {
-        if (partNumber < 0 || partNumber >= this.getNumberOfParts())
-        {
+    public VecBuffer getPointBuffer(int partNumber) {
+        if (partNumber < 0 || partNumber >= this.getNumberOfParts()) {
             String message = Logging.getMessage("generic.indexOutOfRange", partNumber);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -221,8 +204,7 @@ public abstract class ShapefileRecord
      *
      * @return a CompoundVecBuffer that holds this record's coordinate data.
      */
-    public CompoundVecBuffer getCompoundPointBuffer()
-    {
+    public CompoundVecBuffer getCompoundPointBuffer() {
         return this.getShapeFile().getPointBuffer().slice(this.getFirstPartNumber(), this.getLastPartNumber());
     }
 
@@ -234,8 +216,7 @@ public abstract class ShapefileRecord
      * coordinate system is geographic, the elements can be interpreted as angular degrees in the order minimum
      * latitude, maximum latitude, minimum longitude, and maximum longitude.
      *
-     * @return the record's bounding rectangle, or null to indicate that this record does not have a bounding
-     *         rectangle.
+     * @return the record's bounding rectangle, or null to indicate that this record does not have a bounding rectangle.
      */
     public abstract double[] getBoundingRectangle();
 
@@ -245,7 +226,7 @@ public abstract class ShapefileRecord
      * constructor returns.
      *
      * @param shapefile the containing {@link Shapefile}.
-     * @param buffer    the shapefile record {@link java.nio.ByteBuffer} to read from.
+     * @param buffer the shapefile record {@link java.nio.ByteBuffer} to read from.
      */
     protected abstract void doReadFromBuffer(Shapefile shapefile, ByteBuffer buffer);
 
@@ -254,10 +235,9 @@ public abstract class ShapefileRecord
      * be the start of the record and will be the start of the next record when the constructor returns.
      *
      * @param shapefile the containing {@link Shapefile}.
-     * @param buffer    the shapefile record {@link java.nio.ByteBuffer} to read from.
+     * @param buffer the shapefile record {@link java.nio.ByteBuffer} to read from.
      */
-    protected void readFromBuffer(Shapefile shapefile, ByteBuffer buffer)
-    {
+    protected void readFromBuffer(Shapefile shapefile, ByteBuffer buffer) {
         // Read record number and record length - big endian.
         buffer.order(ByteOrder.BIG_ENDIAN);
         this.recordNumber = buffer.getInt();
@@ -281,26 +261,23 @@ public abstract class ShapefileRecord
      * is not <code>{@link Shapefile#SHAPE_NULL}</code>. Records of type <code>SHAPE_NULL</code> are always valid, and
      * may appear in any Shapefile.
      * <p>
-     * For details, see the ESRI Shapefile specification at <a href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf"></a>,
-     * pages 4 and 5.
+     * For details, see the ESRI Shapefile specification at
+     * <a href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf"></a>, pages 4 and 5.
      *
      * @param shapefile the shapefile.
      * @param shapeType the record's shape type.
      *
-     * @throws WWRuntimeException       if the shape types do not match.
+     * @throws WWRuntimeException if the shape types do not match.
      * @throws IllegalArgumentException if the specified shape type is null.
      */
-    protected void validateShapeType(Shapefile shapefile, String shapeType)
-    {
-        if (shapeType == null)
-        {
+    protected void validateShapeType(Shapefile shapefile, String shapeType) {
+        if (shapeType == null) {
             String message = Logging.getMessage("nullValue.ShapeType");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!shapeType.equals(shapefile.getShapeType()) && !shapeType.equals(Shapefile.SHAPE_NULL))
-        {
+        if (!shapeType.equals(shapefile.getShapeType()) && !shapeType.equals(Shapefile.SHAPE_NULL)) {
             String message = Logging.getMessage("SHP.UnsupportedShapeType", shapeType);
             Logging.logger().severe(message);
             throw new WWRuntimeException(message);
@@ -313,8 +290,7 @@ public abstract class ShapefileRecord
      *
      * @return true if the record may contain measure values.
      */
-    protected boolean isMeasureType()
-    {
+    protected boolean isMeasureType() {
         return Shapefile.isMeasureType(this.getShapeType());
     }
 
@@ -323,8 +299,7 @@ public abstract class ShapefileRecord
      *
      * @return true if the record is a type containing Z values.
      */
-    protected boolean isZType()
-    {
+    protected boolean isZType() {
         return Shapefile.isZType(this.getShapeType());
     }
 
@@ -334,8 +309,7 @@ public abstract class ShapefileRecord
      *
      * @return true if this is a null record, otherwise false.
      */
-    public boolean isNullRecord()
-    {
+    public boolean isNullRecord() {
         return false;
     }
 
@@ -345,8 +319,7 @@ public abstract class ShapefileRecord
      *
      * @return true if this is a point record, otherwise false.
      */
-    public boolean isPointRecord()
-    {
+    public boolean isPointRecord() {
         return false;
     }
 
@@ -356,8 +329,7 @@ public abstract class ShapefileRecord
      *
      * @return true if this is a multi point record, otherwise false.
      */
-    public boolean isMultiPointRecord()
-    {
+    public boolean isMultiPointRecord() {
         return false;
     }
 
@@ -367,8 +339,7 @@ public abstract class ShapefileRecord
      *
      * @return true if this is a polyline record, otherwise false.
      */
-    public boolean isPolylineRecord()
-    {
+    public boolean isPolylineRecord() {
         return false;
     }
 
@@ -378,8 +349,7 @@ public abstract class ShapefileRecord
      *
      * @return true if this is a polygon record, otherwise false.
      */
-    public boolean isPolygonRecord()
-    {
+    public boolean isPolygonRecord() {
         return false;
     }
 
@@ -389,8 +359,7 @@ public abstract class ShapefileRecord
      *
      * @return this record cast as a ShapefileRecordNull.
      */
-    public ShapefileRecordNull asNullRecord()
-    {
+    public ShapefileRecordNull asNullRecord() {
         return (ShapefileRecordNull) this;
     }
 
@@ -400,8 +369,7 @@ public abstract class ShapefileRecord
      *
      * @return this record cast as a ShapefileRecordPoint.
      */
-    public ShapefileRecordPoint asPointRecord()
-    {
+    public ShapefileRecordPoint asPointRecord() {
         return (ShapefileRecordPoint) this;
     }
 
@@ -411,8 +379,7 @@ public abstract class ShapefileRecord
      *
      * @return this record cast as a ShapefileRecordMultiPoint.
      */
-    public ShapefileRecordMultiPoint asMultiPointRecord()
-    {
+    public ShapefileRecordMultiPoint asMultiPointRecord() {
         return (ShapefileRecordMultiPoint) this;
     }
 
@@ -422,8 +389,7 @@ public abstract class ShapefileRecord
      *
      * @return this record cast as a ShapefileRecordPolyline.
      */
-    public ShapefileRecordPolyline asPolylineRecord()
-    {
+    public ShapefileRecordPolyline asPolylineRecord() {
         return (ShapefileRecordPolyline) this;
     }
 
@@ -433,8 +399,7 @@ public abstract class ShapefileRecord
      *
      * @return this record cast as a ShapefileRecordPolygon.
      */
-    public ShapefileRecordPolygon asPolygonRecord()
-    {
+    public ShapefileRecordPolygon asPolygonRecord() {
         return (ShapefileRecordPolygon) this;
     }
 
@@ -443,8 +408,7 @@ public abstract class ShapefileRecord
      *
      * @return <code>true</code> if the record's points should be normalized; <code>false</code> otherwise.
      */
-    public boolean isNormalizePoints()
-    {
+    public boolean isNormalizePoints() {
         return this.normalizePoints;
     }
 
@@ -452,17 +416,14 @@ public abstract class ShapefileRecord
      * Specifies if the record's point coordinates should be normalized. Defaults to <code>false</code>.
      *
      * @param normalizePoints <code>true</code> if the record's points should be normalized; <code>false</code>
-     *                        otherwise.
+     * otherwise.
      */
-    public void setNormalizePoints(boolean normalizePoints)
-    {
+    public void setNormalizePoints(boolean normalizePoints) {
         this.normalizePoints = normalizePoints;
     }
 
-    public void exportAsXML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
-    {
-        if (xmlWriter == null)
-        {
+    public void exportAsXML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
+        if (xmlWriter == null) {
             String message = Logging.getMessage("Export.UnsupportedOutputObject");
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -476,8 +437,7 @@ public abstract class ShapefileRecord
         xmlWriter.writeAttribute("points", Integer.toString(this.getNumberOfPoints()));
         xmlWriter.writeCharacters("\n");
 
-        for (Map.Entry<String, Object> a : this.getAttributes().getEntries())
-        {
+        for (Map.Entry<String, Object> a : this.getAttributes().getEntries()) {
             xmlWriter.writeStartElement("Attribute");
 
             xmlWriter.writeAttribute("name", a.getKey() != null ? a.getKey().toString() : "");
@@ -487,11 +447,9 @@ public abstract class ShapefileRecord
             xmlWriter.writeCharacters("\n");
         }
 
-        if (this.getNumberOfParts() > 0)
-        {
+        if (this.getNumberOfParts() > 0) {
             VecBuffer vb = this.getPointBuffer(0);
-            for (LatLon ll : vb.getLocations())
-            {
+            for (LatLon ll : vb.getLocations()) {
                 xmlWriter.writeStartElement("Point");
                 xmlWriter.writeAttribute("x", Double.toString(ll.getLatitude().degrees));
                 xmlWriter.writeAttribute("y", Double.toString(ll.getLongitude().degrees));
@@ -501,7 +459,6 @@ public abstract class ShapefileRecord
         }
 
         // TODO: export record-type specific fields
-
         xmlWriter.writeEndElement(); // Record
     }
 
@@ -511,39 +468,37 @@ public abstract class ShapefileRecord
      *
      * @param xmlWriter Writer to receive KML.
      *
-     * @throws IOException        If an exception occurs while writing the KML
+     * @throws IOException If an exception occurs while writing the KML
      * @throws XMLStreamException If an exception occurs while exporting the data.
      */
-    public void exportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
-    {
+    public void exportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
     }
 
-    public void printInfo(boolean printCoordinates)
-    {
+    public void printInfo(boolean printCoordinates) {
         System.out.printf("%d, %s: %d parts, %d points", this.getRecordNumber(), this.getShapeType(),
-            this.getNumberOfParts(), this.getNumberOfPoints());
-        for (Map.Entry<String, Object> a : this.getAttributes().getEntries())
-        {
-            if (a.getKey() != null)
+                this.getNumberOfParts(), this.getNumberOfPoints());
+        for (Map.Entry<String, Object> a : this.getAttributes().getEntries()) {
+            if (a.getKey() != null) {
                 System.out.printf(", %s", a.getKey());
-            if (a.getValue() != null)
+            }
+            if (a.getValue() != null) {
                 System.out.printf(", %s", a.getValue());
+            }
         }
         System.out.println();
 
         System.out.print("\tAttributes: ");
-        for (Map.Entry<String, Object> entry : this.getAttributes().getEntries())
-        {
+        for (Map.Entry<String, Object> entry : this.getAttributes().getEntries()) {
             System.out.printf("%s = %s, ", entry.getKey(), entry.getValue());
         }
         System.out.println();
 
-        if (!printCoordinates)
+        if (!printCoordinates) {
             return;
+        }
 
         VecBuffer vb = this.getPointBuffer(0);
-        for (LatLon ll : vb.getLocations())
-        {
+        for (LatLon ll : vb.getLocations()) {
             System.out.printf("\t%f, %f\n", ll.getLatitude().degrees, ll.getLongitude().degrees);
         }
     }

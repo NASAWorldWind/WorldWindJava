@@ -15,8 +15,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: GeographicText.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface GeographicText
-{
+public interface GeographicText {
+
     /**
      * Indicates the text contained in this object.
      *

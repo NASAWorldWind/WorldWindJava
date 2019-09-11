@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.exception;
 
 /**
@@ -12,10 +11,9 @@ package gov.nasa.worldwind.exception;
  * @author tag
  * @version $Id: ServiceException.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ServiceException extends WWRuntimeException
-{
-    public ServiceException(String message)
-    {
+public class ServiceException extends WWRuntimeException {
+
+    public ServiceException(String message) {
         super(message);
     }
 }

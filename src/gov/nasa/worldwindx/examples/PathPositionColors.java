@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
@@ -27,12 +26,11 @@ import java.util.ArrayList;
  * @author dcollins
  * @version $Id: PathPositionColors.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class PathPositionColors extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class PathPositionColors extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             ArrayList<Position> pathPositions = new ArrayList<Position>();
@@ -69,12 +67,11 @@ public class PathPositionColors extends ApplicationTemplate
             // are evenly distributed along the path's length and gradually increasing in opacity. Position colors may
             // be assigned in any manner the application chooses. This example illustrates only one way of assigning
             // color to each path position.
-            Color[] colors =
-                {
-                    new Color(1f, 0f, 0f, 0.2f),
-                    new Color(0f, 1f, 0f, 0.6f),
-                    new Color(0f, 0f, 1f, 1.0f),
-                };
+            Color[] colors
+                    = {
+                        new Color(1f, 0f, 0f, 0.2f),
+                        new Color(0f, 1f, 0f, 0.6f),
+                        new Color(0f, 0f, 1f, 1.0f),};
             path.setPositionColors(new ExamplePositionColors(colors, pathPositions.size()));
 
             // Create a layer on which to display the path.
@@ -86,18 +83,15 @@ public class PathPositionColors extends ApplicationTemplate
 
             // Establish a select listener that causes the tooltip controller to show the picked path position's
             // ordinal.
-            this.setToolTipController(new ToolTipController(this.getWwd())
-            {
+            this.setToolTipController(new ToolTipController(this.getWwd()) {
                 @Override
-                public void selected(SelectEvent event)
-                {
+                public void selected(SelectEvent event) {
                     // Intercept the selected position and assign the selected object's display name to the picked
                     // ordinal.
                     PickedObject po = event.getTopPickedObject();
-                    if (po != null && po.getObject() instanceof Path)
-                    {
+                    if (po != null && po.getObject() instanceof Path) {
                         String name = (po.getValue(AVKey.ORDINAL) != null) ? "Position " + po.getValue(AVKey.ORDINAL)
-                            : null;
+                                : null;
                         ((Path) po.getObject()).setValue(AVKey.DISPLAY_NAME, name);
                     }
 
@@ -113,26 +107,23 @@ public class PathPositionColors extends ApplicationTemplate
      * blue (in that order) and the pathLength is 6, this assigns the following colors to each path ordinal: 0:red,
      * 1:red, 2:green, 3:green, 4:blue, 5:blue.
      */
-    public static class ExamplePositionColors implements Path.PositionColors
-    {
+    public static class ExamplePositionColors implements Path.PositionColors {
+
         protected Color[] colors;
         protected int pathLength;
 
-        public ExamplePositionColors(Color[] colors, int pathLength)
-        {
+        public ExamplePositionColors(Color[] colors, int pathLength) {
             this.colors = colors;
             this.pathLength = pathLength;
         }
 
-        public Color getColor(Position position, int ordinal)
-        {
+        public Color getColor(Position position, int ordinal) {
             int index = colors.length * ordinal / this.pathLength;
             return this.colors[index];
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 47.5890);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -122.3137);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 3000);

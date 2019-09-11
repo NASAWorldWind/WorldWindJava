@@ -26,15 +26,14 @@ import java.util.List;
  * @author dcollins
  * @version $Id: ScreenSelection.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class ScreenSelection extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+public class ScreenSelection extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         protected ScreenSelector screenSelector;
         protected SelectionHighlightController selectionHighlightController;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             // Create a screen selector to display a screen selection rectangle and track the objects intersecting
             // that rectangle.
             this.screenSelector = new ScreenSelector(this.getWwd());
@@ -55,24 +54,21 @@ public class ScreenSelection extends ApplicationTemplate
             this.addShapes();
         }
 
-        protected void addShapes()
-        {
+        protected void addShapes() {
             RenderableLayer layer = new RenderableLayer();
 
             ShapeAttributes highlightAttrs = new BasicShapeAttributes();
             highlightAttrs.setInteriorMaterial(Material.RED);
             highlightAttrs.setOutlineMaterial(Material.WHITE);
 
-            for (int lon = -180; lon <= 170; lon += 10)
-            {
-                for (int lat = -60; lat <= 60; lat += 10)
-                {
+            for (int lon = -180; lon <= 170; lon += 10) {
+                for (int lat = -60; lat <= 60; lat += 10) {
                     ExtrudedPolygon poly = new ExtrudedPolygon(Arrays.asList(
-                        LatLon.fromDegrees(lat - 1, Angle.normalizedDegreesLongitude(lon - 1)),
-                        LatLon.fromDegrees(lat - 1, Angle.normalizedDegreesLongitude(lon + 1)),
-                        LatLon.fromDegrees(lat + 1, Angle.normalizedDegreesLongitude(lon + 1)),
-                        LatLon.fromDegrees(lat + 1, Angle.normalizedDegreesLongitude(lon - 1))),
-                        100000d);
+                            LatLon.fromDegrees(lat - 1, Angle.normalizedDegreesLongitude(lon - 1)),
+                            LatLon.fromDegrees(lat - 1, Angle.normalizedDegreesLongitude(lon + 1)),
+                            LatLon.fromDegrees(lat + 1, Angle.normalizedDegreesLongitude(lon + 1)),
+                            LatLon.fromDegrees(lat + 1, Angle.normalizedDegreesLongitude(lon - 1))),
+                            100000d);
                     poly.setHighlightAttributes(highlightAttrs);
                     poly.setSideHighlightAttributes(highlightAttrs);
                     layer.addRenderable(poly);
@@ -82,29 +78,25 @@ public class ScreenSelection extends ApplicationTemplate
             this.getWwd().getModel().getLayers().add(layer);
         }
 
-        protected class EnableSelectorAction extends AbstractAction
-        {
-            public EnableSelectorAction()
-            {
+        protected class EnableSelectorAction extends AbstractAction {
+
+            public EnableSelectorAction() {
                 super("Start");
             }
 
-            public void actionPerformed(ActionEvent actionEvent)
-            {
+            public void actionPerformed(ActionEvent actionEvent) {
                 ((JButton) actionEvent.getSource()).setAction(new DisableSelectorAction());
                 screenSelector.enable();
             }
         }
 
-        protected class DisableSelectorAction extends AbstractAction
-        {
-            public DisableSelectorAction()
-            {
+        protected class DisableSelectorAction extends AbstractAction {
+
+            public DisableSelectorAction() {
                 super("Stop");
             }
 
-            public void actionPerformed(ActionEvent actionEvent)
-            {
+            public void actionPerformed(ActionEvent actionEvent) {
                 ((JButton) actionEvent.getSource()).setAction(new EnableSelectorAction());
                 screenSelector.disable();
             }
@@ -116,13 +108,12 @@ public class ScreenSelection extends ApplicationTemplate
      * objects highlighted by both cursor rollover events and screen selection changes, and ensures that objects stay
      * highlighted when they are either under cursor or in the ScreenSelector's selection rectangle.
      */
-    protected static class SelectionHighlightController extends HighlightController implements MessageListener
-    {
+    protected static class SelectionHighlightController extends HighlightController implements MessageListener {
+
         protected ScreenSelector screenSelector;
         protected List<Highlightable> lastBoxHighlightObjects = new ArrayList<Highlightable>();
 
-        public SelectionHighlightController(WorldWindow wwd, ScreenSelector screenSelector)
-        {
+        public SelectionHighlightController(WorldWindow wwd, ScreenSelector screenSelector) {
             super(wwd, SelectEvent.ROLLOVER);
 
             this.screenSelector = screenSelector;
@@ -130,40 +121,32 @@ public class ScreenSelection extends ApplicationTemplate
         }
 
         @Override
-        public void dispose()
-        {
+        public void dispose() {
             super.dispose();
 
             this.screenSelector.removeMessageListener(this);
         }
 
-        public void onMessage(Message msg)
-        {
-            try
-            {
+        public void onMessage(Message msg) {
+            try {
                 // Update the list of highlighted objects whenever the ScreenSelector's selection changes. We capture
                 // both the selection started and selection changed events to ensure that we clear the list of selected
                 // objects when the selection begins or re-starts, as well as update the list when it changes.
                 if (msg.getName().equals(ScreenSelector.SELECTION_STARTED)
-                    || msg.getName().equals(ScreenSelector.SELECTION_CHANGED))
-                {
+                        || msg.getName().equals(ScreenSelector.SELECTION_CHANGED)) {
                     this.highlightSelectedObjects(this.screenSelector.getSelectedObjects());
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 // Wrap the handler in a try/catch to keep exceptions from bubbling up
                 Util.getLogger().warning(e.getMessage() != null ? e.getMessage() : e.toString());
             }
         }
 
-        protected void highlight(Object o)
-        {
+        protected void highlight(Object o) {
             // Determine if the highlighted object under the cursor has changed, but should remain highlighted because
             // its in the selection box. In this case we assign the highlighted object under the cursor to null and
             // return, and thereby avoid changing the highlight state of objects still highlighted by the selection box.
-            if (this.lastHighlightObject != o && this.lastBoxHighlightObjects.contains(this.lastHighlightObject))
-            {
+            if (this.lastHighlightObject != o && this.lastBoxHighlightObjects.contains(this.lastHighlightObject)) {
                 this.lastHighlightObject = null;
                 return;
             }
@@ -171,27 +154,23 @@ public class ScreenSelection extends ApplicationTemplate
             super.highlight(o);
         }
 
-        protected void highlightSelectedObjects(List<?> list)
-        {
-            if (this.lastBoxHighlightObjects.equals(list))
+        protected void highlightSelectedObjects(List<?> list) {
+            if (this.lastBoxHighlightObjects.equals(list)) {
                 return; // same thing selected
-
+            }
             // Turn off highlight for the last set of selected objects, if any. Since one of these objects may still be
             // highlighted due to a cursor rollover, we detect that object and avoid changing its highlight state.
-            for (Highlightable h : this.lastBoxHighlightObjects)
-            {
-                if (h != this.lastHighlightObject)
+            for (Highlightable h : this.lastBoxHighlightObjects) {
+                if (h != this.lastHighlightObject) {
                     h.setHighlighted(false);
+                }
             }
             this.lastBoxHighlightObjects.clear();
 
-            if (list != null)
-            {
+            if (list != null) {
                 // Turn on highlight if object selected.
-                for (Object o : list)
-                {
-                    if (o instanceof Highlightable)
-                    {
+                for (Object o : list) {
+                    if (o instanceof Highlightable) {
                         ((Highlightable) o).setHighlighted(true);
                         this.lastBoxHighlightObjects.add((Highlightable) o);
                     }
@@ -207,8 +186,7 @@ public class ScreenSelection extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         start("WorldWind Screen Selection", AppFrame.class);
     }
 }

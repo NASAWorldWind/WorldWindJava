@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.collada.impl;
 
 import gov.nasa.worldwind.ogc.collada.ColladaRoot;
@@ -17,11 +16,15 @@ import gov.nasa.worldwind.util.Logging;
  * @author pabercrombie
  * @version $Id: ColladaController.java 661 2012-06-26 18:02:23Z pabercrombie $
  */
-public class ColladaController implements Renderable, PreRenderable
-{
-    /** Collada document rendered by this controller. */
+public class ColladaController implements Renderable, PreRenderable {
+
+    /**
+     * Collada document rendered by this controller.
+     */
     protected ColladaRoot colladaRoot;
-    /** Traversal context used to render the document. */
+    /**
+     * Traversal context used to render the document.
+     */
     protected ColladaTraversalContext tc;
 
     /**
@@ -29,8 +32,7 @@ public class ColladaController implements Renderable, PreRenderable
      *
      * @param root Parsed COLLADA document to render.
      */
-    public ColladaController(ColladaRoot root)
-    {
+    public ColladaController(ColladaRoot root) {
         this.setColladaRoot(root);
         this.setTraversalContext(new ColladaTraversalContext());
     }
@@ -40,8 +42,7 @@ public class ColladaController implements Renderable, PreRenderable
      *
      * @return The COLLADA document referenced by this controller.
      */
-    public ColladaRoot getColladaRoot()
-    {
+    public ColladaRoot getColladaRoot() {
         return this.colladaRoot;
     }
 
@@ -50,10 +51,8 @@ public class ColladaController implements Renderable, PreRenderable
      *
      * @param colladaRoot New COLLADA document to render.
      */
-    public void setColladaRoot(ColladaRoot colladaRoot)
-    {
-        if (colladaRoot == null)
-        {
+    public void setColladaRoot(ColladaRoot colladaRoot) {
+        if (colladaRoot == null) {
             String msg = Logging.getMessage("nullValue.ObjectIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -67,8 +66,7 @@ public class ColladaController implements Renderable, PreRenderable
      *
      * @return The active traversal context.
      */
-    public ColladaTraversalContext getTraversalContext()
-    {
+    public ColladaTraversalContext getTraversalContext() {
         return this.tc;
     }
 
@@ -77,10 +75,8 @@ public class ColladaController implements Renderable, PreRenderable
      *
      * @param tc New traversal context.
      */
-    public void setTraversalContext(ColladaTraversalContext tc)
-    {
-        if (tc == null)
-        {
+    public void setTraversalContext(ColladaTraversalContext tc) {
+        if (tc == null) {
             String msg = Logging.getMessage("nullValue.ObjectIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -89,16 +85,18 @@ public class ColladaController implements Renderable, PreRenderable
         this.tc = tc;
     }
 
-    /** {@inheritDoc} */
-    public void preRender(DrawContext dc)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void preRender(DrawContext dc) {
         this.initializeTraversalContext(this.getTraversalContext());
         this.colladaRoot.preRender(this.getTraversalContext(), dc);
     }
 
-    /** {@inheritDoc} */
-    public void render(DrawContext dc)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void render(DrawContext dc) {
         this.initializeTraversalContext(this.getTraversalContext());
         this.colladaRoot.render(this.getTraversalContext(), dc);
     }
@@ -110,8 +108,7 @@ public class ColladaController implements Renderable, PreRenderable
      *
      * @param tc the COLLADA traversal context to initialize.
      */
-    protected void initializeTraversalContext(ColladaTraversalContext tc)
-    {
+    protected void initializeTraversalContext(ColladaTraversalContext tc) {
         tc.initialize();
     }
 }

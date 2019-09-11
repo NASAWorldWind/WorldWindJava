@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Position;
@@ -15,26 +14,26 @@ import gov.nasa.worldwind.util.Logging;
  * @author pabercrombie
  * @version $Id: GlobeAnnotationBalloon.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GlobeAnnotationBalloon extends AbstractAnnotationBalloon implements GlobeBalloon
-{
+public class GlobeAnnotationBalloon extends AbstractAnnotationBalloon implements GlobeBalloon {
+
     protected Position position;
     protected int altitudeMode;
 
-    /** Annotation used to render the balloon. */
+    /**
+     * Annotation used to render the balloon.
+     */
     protected GlobeAnnotation annotation;
 
     /**
      * Create the balloon.
      *
-     * @param text     Text to display in the balloon. May not be null.
+     * @param text Text to display in the balloon. May not be null.
      * @param position The balloon's initial position. May not be null.
      */
-    public GlobeAnnotationBalloon(String text, Position position)
-    {
+    public GlobeAnnotationBalloon(String text, Position position) {
         super(text);
 
-        if (position == null)
-        {
+        if (position == null) {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -45,9 +44,10 @@ public class GlobeAnnotationBalloon extends AbstractAnnotationBalloon implements
         this.annotation = this.createAnnotation();
     }
 
-    /** {@inheritDoc} */
-    protected GlobeAnnotation createAnnotation()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    protected GlobeAnnotation createAnnotation() {
         GlobeAnnotation annotation = new GlobeAnnotation(this.getDecodedText(), this.position);
 
         // Don't make the balloon bigger when it is highlighted, the text looks blurry when it is scaled up.
@@ -56,25 +56,27 @@ public class GlobeAnnotationBalloon extends AbstractAnnotationBalloon implements
         return annotation;
     }
 
-    /** {@inheritDoc} */
-    protected GlobeAnnotation getAnnotation()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    protected GlobeAnnotation getAnnotation() {
         return this.annotation;
     }
 
-    /** {@inheritDoc} */
-    protected void computePosition(DrawContext dc)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    protected void computePosition(DrawContext dc) {
         GlobeAnnotation annotation = this.getAnnotation();
         annotation.setPosition(this.getPosition());
         annotation.setAltitudeMode(this.getAltitudeMode());
     }
 
-    /** {@inheritDoc} */
-    public void setPosition(Position position)
-    {
-        if (position == null)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public void setPosition(Position position) {
+        if (position == null) {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -83,21 +85,24 @@ public class GlobeAnnotationBalloon extends AbstractAnnotationBalloon implements
         this.position = position;
     }
 
-    /** {@inheritDoc} */
-    public Position getPosition()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Position getPosition() {
         return this.position;
     }
 
-    /** {@inheritDoc} */
-    public int getAltitudeMode()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public int getAltitudeMode() {
         return altitudeMode;
     }
 
-    /** {@inheritDoc} */
-    public void setAltitudeMode(int altitudeMode)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setAltitudeMode(int altitudeMode) {
         this.altitudeMode = altitudeMode;
     }
 }

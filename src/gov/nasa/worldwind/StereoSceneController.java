@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind;
 
 import gov.nasa.worldwind.geom.Angle;
@@ -17,8 +16,8 @@ import gov.nasa.worldwind.geom.Angle;
  * @author Tom Gaskins
  * @version $Id: StereoSceneController.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface StereoSceneController extends SceneController
-{
+public interface StereoSceneController extends SceneController {
+
     /**
      * Specifies the technique used to provide a stereo effect. Defined options are {@link
      * gov.nasa.worldwind.avlist.AVKey#STEREO_MODE_DEVICE} to request device supported stereo, {@link
@@ -39,7 +38,7 @@ public interface StereoSceneController extends SceneController
      * Indicates the current stereo mode of this controller.
      *
      * @return the current stereo mode. See this class' description for the possible modes. This method does not return
-     *         null. If a null mode was passed to {@link #setStereoMode(String)}, this instance's mode was set to {@link
+     * null. If a null mode was passed to {@link #setStereoMode(String)}, this instance's mode was set to {@link
      *         gov.nasa.worldwind.avlist.AVKey#STEREO_MODE_NONE}.
      */
     public String getStereoMode();

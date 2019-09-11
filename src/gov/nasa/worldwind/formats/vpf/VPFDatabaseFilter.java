@@ -11,11 +11,12 @@ import gov.nasa.worldwind.util.Logging;
  * @author dcollins
  * @version $Id: VPFDatabaseFilter.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class VPFDatabaseFilter implements java.io.FileFilter
-{
-    /** Constructs a VPFDatabaseFilter. */
-    public VPFDatabaseFilter()
-    {
+public class VPFDatabaseFilter implements java.io.FileFilter {
+
+    /**
+     * Constructs a VPFDatabaseFilter.
+     */
+    public VPFDatabaseFilter() {
     }
 
     /**
@@ -27,25 +28,21 @@ public class VPFDatabaseFilter implements java.io.FileFilter
      *
      * @throws IllegalArgumentException if the file is null.
      */
-    public boolean accept(java.io.File file)
-    {
-        if (file == null)
-        {
+    public boolean accept(java.io.File file) {
+        if (file == null) {
             String msg = Logging.getMessage("nullValue.FileIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         // First check the file path, optionally returning false if the path cannot be accepted for any reason.
-        if (!this.acceptFilePath(file))
+        if (!this.acceptFilePath(file)) {
             return false;
-
-        try
-        {
-            return VPFDatabase.isDatabase(file.getPath());
         }
-        catch (Exception e)
-        {
+
+        try {
+            return VPFDatabase.isDatabase(file.getPath());
+        } catch (Exception e) {
             // Not interested in logging or reporting the exception; just return false indicating that the file is not
             // a VPF database.
         }
@@ -53,10 +50,8 @@ public class VPFDatabaseFilter implements java.io.FileFilter
         return false;
     }
 
-    protected boolean acceptFilePath(java.io.File file)
-    {
-        if (file == null)
-        {
+    protected boolean acceptFilePath(java.io.File file) {
+        if (file == null) {
             String msg = Logging.getMessage("nullValue.FileIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);

@@ -13,11 +13,12 @@ import java.io.FileFilter;
  * @author dcollins
  * @version $Id: VPFFeatureTableFilter.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class VPFFeatureTableFilter implements FileFilter
-{
-    /** Creates a VPFFeatureTableFilter, but otherwise does nothing. */
-    public VPFFeatureTableFilter()
-    {
+public class VPFFeatureTableFilter implements FileFilter {
+
+    /**
+     * Creates a VPFFeatureTableFilter, but otherwise does nothing.
+     */
+    public VPFFeatureTableFilter() {
     }
 
     /**
@@ -29,10 +30,8 @@ public class VPFFeatureTableFilter implements FileFilter
      *
      * @throws IllegalArgumentException if the file is null.
      */
-    public boolean accept(java.io.File file)
-    {
-        if (file == null)
-        {
+    public boolean accept(java.io.File file) {
+        if (file == null) {
             String msg = Logging.getMessage("nullValue.FileIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);

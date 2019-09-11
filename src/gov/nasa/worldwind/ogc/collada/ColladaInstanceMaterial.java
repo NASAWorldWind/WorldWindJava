@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.collada;
 
 import java.util.*;
@@ -14,29 +13,27 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: ColladaInstanceMaterial.java 654 2012-06-25 04:15:52Z pabercrombie $
  */
-public class ColladaInstanceMaterial extends ColladaAbstractInstance<ColladaMaterial>
-{
+public class ColladaInstanceMaterial extends ColladaAbstractInstance<ColladaMaterial> {
+
     protected List<ColladaBindVertexInput> bindVertexInputs = new ArrayList<ColladaBindVertexInput>();
 
-    public ColladaInstanceMaterial(String ns)
-    {
+    public ColladaInstanceMaterial(String ns) {
         super(ns);
     }
 
-    public String getTarget()
-    {
+    public String getTarget() {
         return (String) this.getField("target");
     }
 
-    public String getSymbol()
-    {
+    public String getSymbol() {
         return (String) this.getField("symbol");
     }
 
-    /** Instance_material uses a "target" attribute instead of the "url" attribute used by other instance elements. */
+    /**
+     * Instance_material uses a "target" attribute instead of the "url" attribute used by other instance elements.
+     */
     @Override
-    public String getUrl()
-    {
+    public String getUrl() {
         return this.getTarget();
     }
 
@@ -45,21 +42,18 @@ public class ColladaInstanceMaterial extends ColladaAbstractInstance<ColladaMate
      *
      * @return The bind_vertex_input elements, if present. Otherwise null.
      */
-    public List<ColladaBindVertexInput> getBindVertexInputs()
-    {
+    public List<ColladaBindVertexInput> getBindVertexInputs() {
         return this.bindVertexInputs;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setField(String keyName, Object value)
-    {
-        if ("bind_vertex_input".equals(keyName))
-        {
+    public void setField(String keyName, Object value) {
+        if ("bind_vertex_input".equals(keyName)) {
             this.bindVertexInputs.add((ColladaBindVertexInput) value);
-        }
-        else
-        {
+        } else {
             super.setField(keyName, value);
         }
     }

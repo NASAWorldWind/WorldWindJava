@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.geom.*;
@@ -18,31 +17,27 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: MainAttack.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class MainAttack extends AbstractAxisArrow
-{
+public class MainAttack extends AbstractAxisArrow {
+
     /**
      * Indicates the graphics supported by this class.
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(TacGrpSidc.C2GM_OFF_LNE_AXSADV_GRD_MANATK);
     }
 
-    public MainAttack(String sidc)
-    {
+    public MainAttack(String sidc) {
         super(sidc, 2);
     }
 
     @Override
     protected double createArrowHeadPositions(List<Position> leftPositions, List<Position> rightPositions,
-        List<Position> arrowHeadPositions, Globe globe)
-    {
+            List<Position> arrowHeadPositions, Globe globe) {
         double halfWidth = super.createArrowHeadPositions(leftPositions, rightPositions, arrowHeadPositions, globe);
 
-        if (rightPositions.size() > 0 && leftPositions.size() > 0)
-        {
+        if (rightPositions.size() > 0 && leftPositions.size() > 0) {
             Position left = leftPositions.get(0);
             Position right = rightPositions.get(0);
             Position pos1 = this.positions.iterator().next();
