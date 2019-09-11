@@ -12,8 +12,8 @@ import gov.nasa.worldwind.geom.*;
  * @author tag
  * @version $Id: Level.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Level extends AVListImpl implements Comparable<Level>
-{
+public class Level extends AVListImpl implements Comparable<Level> {
+
     protected AVList params;
     protected int levelNumber;
     protected String levelName; // null or empty level name signifies no data resources associated with this level
@@ -37,10 +37,8 @@ public class Level extends AVListImpl implements Comparable<Level>
     int DEFAULT_MAX_ABSENT_TILE_ATTEMPTS = 2;
     int DEFAULT_MIN_ABSENT_TILE_CHECK_INTERVAL = 10000; // milliseconds
 
-    public Level(AVList params)
-    {
-        if (params == null)
-        {
+    public Level(AVList params) {
+        if (params == null) {
             String message = Logging.getMessage("nullValue.LevelConfigParams");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -48,8 +46,7 @@ public class Level extends AVListImpl implements Comparable<Level>
 
         this.params = params.copy(); // Private copy to insulate from subsequent changes by the app
         String message = this.validate(params);
-        if (message != null)
-        {
+        if (message != null) {
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -76,12 +73,14 @@ public class Level extends AVListImpl implements Comparable<Level>
         this.path = this.cacheName + "/" + this.levelName;
 
         Integer maxAbsentTileAttempts = (Integer) this.params.getValue(AVKey.MAX_ABSENT_TILE_ATTEMPTS);
-        if (maxAbsentTileAttempts == null)
+        if (maxAbsentTileAttempts == null) {
             maxAbsentTileAttempts = DEFAULT_MAX_ABSENT_TILE_ATTEMPTS;
+        }
 
         Integer minAbsentTileCheckInterval = (Integer) this.params.getValue(AVKey.MIN_ABSENT_TILE_CHECK_INTERVAL);
-        if (minAbsentTileCheckInterval == null)
+        if (minAbsentTileCheckInterval == null) {
             minAbsentTileCheckInterval = DEFAULT_MIN_ABSENT_TILE_CHECK_INTERVAL;
+        }
 
         this.absentTiles = new AbsentResourceList(maxAbsentTileAttempts, minAbsentTileCheckInterval);
     }
@@ -93,184 +92,174 @@ public class Level extends AVListImpl implements Comparable<Level>
      *
      * @return null if valid, otherwise a <code>String</code> containing a description of why it's invalid.
      */
-    protected String validate(AVList params)
-    {
+    protected String validate(AVList params) {
         StringBuffer sb = new StringBuffer();
 
         Object o = params.getValue(AVKey.LEVEL_NUMBER);
-        if (o == null || !(o instanceof Integer) || ((Integer) o) < 0)
+        if (o == null || !(o instanceof Integer) || ((Integer) o) < 0) {
             sb.append(Logging.getMessage("term.levelNumber")).append(" ");
-
-        o = params.getValue(AVKey.LEVEL_NAME);
-        if (o == null || !(o instanceof String))
-            sb.append(Logging.getMessage("term.levelName")).append(" ");
-
-        o = params.getValue(AVKey.TILE_WIDTH);
-        if (o == null || !(o instanceof Integer) || ((Integer) o) < 0)
-            sb.append(Logging.getMessage("term.tileWidth")).append(" ");
-
-        o = params.getValue(AVKey.TILE_HEIGHT);
-        if (o == null || !(o instanceof Integer) || ((Integer) o) < 0)
-            sb.append(Logging.getMessage("term.tileHeight")).append(" ");
-
-        o = params.getValue(AVKey.TILE_DELTA);
-        if (o == null || !(o instanceof LatLon))
-            sb.append(Logging.getMessage("term.tileDelta")).append(" ");
-
-        o = params.getValue(AVKey.DATA_CACHE_NAME);
-        if (o == null || !(o instanceof String) || ((String) o).length() < 1)
-            sb.append(Logging.getMessage("term.fileStoreFolder")).append(" ");
-
-        o = params.getValue(AVKey.TILE_URL_BUILDER);
-        if (o == null || !(o instanceof TileUrlBuilder))
-            sb.append(Logging.getMessage("term.tileURLBuilder")).append(" ");
-
-        o = params.getValue(AVKey.EXPIRY_TIME);
-        if (o != null && (!(o instanceof Long) || ((Long) o) < 1))
-            sb.append(Logging.getMessage("term.expiryTime")).append(" ");
-
-        if (params.getStringValue(AVKey.LEVEL_NAME).length() > 0)
-        {
-            o = params.getValue(AVKey.DATASET_NAME);
-            if (o == null || !(o instanceof String) || ((String) o).length() < 1)
-                sb.append(Logging.getMessage("term.datasetName")).append(" ");
-
-            o = params.getValue(AVKey.FORMAT_SUFFIX);
-            if (o == null || !(o instanceof String) || ((String) o).length() < 1)
-                sb.append(Logging.getMessage("term.formatSuffix")).append(" ");
         }
 
-        if (sb.length() == 0)
+        o = params.getValue(AVKey.LEVEL_NAME);
+        if (o == null || !(o instanceof String)) {
+            sb.append(Logging.getMessage("term.levelName")).append(" ");
+        }
+
+        o = params.getValue(AVKey.TILE_WIDTH);
+        if (o == null || !(o instanceof Integer) || ((Integer) o) < 0) {
+            sb.append(Logging.getMessage("term.tileWidth")).append(" ");
+        }
+
+        o = params.getValue(AVKey.TILE_HEIGHT);
+        if (o == null || !(o instanceof Integer) || ((Integer) o) < 0) {
+            sb.append(Logging.getMessage("term.tileHeight")).append(" ");
+        }
+
+        o = params.getValue(AVKey.TILE_DELTA);
+        if (o == null || !(o instanceof LatLon)) {
+            sb.append(Logging.getMessage("term.tileDelta")).append(" ");
+        }
+
+        o = params.getValue(AVKey.DATA_CACHE_NAME);
+        if (o == null || !(o instanceof String) || ((String) o).length() < 1) {
+            sb.append(Logging.getMessage("term.fileStoreFolder")).append(" ");
+        }
+
+        o = params.getValue(AVKey.TILE_URL_BUILDER);
+        if (o == null || !(o instanceof TileUrlBuilder)) {
+            sb.append(Logging.getMessage("term.tileURLBuilder")).append(" ");
+        }
+
+        o = params.getValue(AVKey.EXPIRY_TIME);
+        if (o != null && (!(o instanceof Long) || ((Long) o) < 1)) {
+            sb.append(Logging.getMessage("term.expiryTime")).append(" ");
+        }
+
+        if (params.getStringValue(AVKey.LEVEL_NAME).length() > 0) {
+            o = params.getValue(AVKey.DATASET_NAME);
+            if (o == null || !(o instanceof String) || ((String) o).length() < 1) {
+                sb.append(Logging.getMessage("term.datasetName")).append(" ");
+            }
+
+            o = params.getValue(AVKey.FORMAT_SUFFIX);
+            if (o == null || !(o instanceof String) || ((String) o).length() < 1) {
+                sb.append(Logging.getMessage("term.formatSuffix")).append(" ");
+            }
+        }
+
+        if (sb.length() == 0) {
             return null;
+        }
 
         return Logging.getMessage("layers.LevelSet.InvalidLevelDescriptorFields", sb.toString());
     }
 
-    public AVList getParams()
-    {
+    public AVList getParams() {
         return params;
     }
 
-    public String getPath()
-    {
+    public String getPath() {
         return this.path;
     }
 
-    public int getLevelNumber()
-    {
+    public int getLevelNumber() {
         return this.levelNumber;
     }
 
-    public String getLevelName()
-    {
+    public String getLevelName() {
         return this.levelName;
     }
 
-    public LatLon getTileDelta()
-    {
+    public LatLon getTileDelta() {
         return this.tileDelta;
     }
 
-    public int getTileWidth()
-    {
+    public int getTileWidth() {
         return this.tileWidth;
     }
 
-    public int getTileHeight()
-    {
+    public int getTileHeight() {
         return this.tileHeight;
     }
 
-    public String getFormatSuffix()
-    {
+    public String getFormatSuffix() {
         return this.formatSuffix;
     }
 
-    public String getService()
-    {
+    public String getService() {
         return this.service;
     }
 
-    public String getDataset()
-    {
+    public String getDataset() {
         return this.dataset;
     }
 
-    public String getCacheName()
-    {
+    public String getCacheName() {
         return this.cacheName;
     }
 
-    public double getTexelSize()
-    {
+    public double getTexelSize() {
         return this.texelSize;
     }
 
-    public boolean isEmpty()
-    {
+    public boolean isEmpty() {
         return this.levelName == null || this.levelName.equals("") || !this.active;
     }
 
-    public void markResourceAbsent(long tileNumber)
-    {
-        if (tileNumber >= 0)
+    public void markResourceAbsent(long tileNumber) {
+        if (tileNumber >= 0) {
             this.absentTiles.markResourceAbsent(tileNumber);
+        }
     }
 
-    public boolean isResourceAbsent(long tileNumber)
-    {
+    public boolean isResourceAbsent(long tileNumber) {
         return this.absentTiles.isResourceAbsent(tileNumber);
     }
 
-    public void unmarkResourceAbsent(long tileNumber)
-    {
-        if (tileNumber >= 0)
+    public void unmarkResourceAbsent(long tileNumber) {
+        if (tileNumber >= 0) {
             this.absentTiles.unmarkResourceAbsent(tileNumber);
+        }
     }
 
-    public long getExpiryTime()
-    {
+    public long getExpiryTime() {
         return this.expiryTime;
     }
 
-    public void setExpiryTime(long expTime)
-    {
+    public void setExpiryTime(long expTime) {
         this.expiryTime = expTime;
     }
 
-    public boolean isActive()
-    {
+    public boolean isActive() {
         return this.active;
     }
 
-    public void setActive(boolean active)
-    {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
-    public AbsentResourceList getAbsentTiles()
-    {
+    public AbsentResourceList getAbsentTiles() {
         return absentTiles;
     }
 
     @Override
-    public Object setValue(String key, Object value)
-    {
-        if (key != null && key.equals(AVKey.MAX_ABSENT_TILE_ATTEMPTS) && value instanceof Integer)
+    public Object setValue(String key, Object value) {
+        if (key != null && key.equals(AVKey.MAX_ABSENT_TILE_ATTEMPTS) && value instanceof Integer) {
             this.absentTiles.setMaxTries((Integer) value);
-        else if (key != null && key.equals(AVKey.MIN_ABSENT_TILE_CHECK_INTERVAL) && value instanceof Integer)
+        } else if (key != null && key.equals(AVKey.MIN_ABSENT_TILE_CHECK_INTERVAL) && value instanceof Integer) {
             this.absentTiles.setMinCheckInterval((Integer) value);
+        }
 
         return super.setValue(key, value);
     }
 
     @Override
-    public Object getValue(String key)
-    {
-        if (key != null && key.equals(AVKey.MAX_ABSENT_TILE_ATTEMPTS))
+    public Object getValue(String key) {
+        if (key != null && key.equals(AVKey.MAX_ABSENT_TILE_ATTEMPTS)) {
             return this.absentTiles.getMaxTries();
-        else if (key != null && key.equals(AVKey.MIN_ABSENT_TILE_CHECK_INTERVAL))
+        } else if (key != null && key.equals(AVKey.MIN_ABSENT_TILE_CHECK_INTERVAL)) {
             return this.absentTiles.getMinCheckInterval();
+        }
 
         return super.getValue(key);
     }
@@ -278,18 +267,16 @@ public class Level extends AVListImpl implements Comparable<Level>
     /**
      * Returns the URL necessary to retrieve the specified tile.
      *
-     * @param tile        the tile who's resources will be retrieved.
+     * @param tile the tile who's resources will be retrieved.
      * @param imageFormat a string identifying the mime type of the desired image format
      *
      * @return the resource URL.
      *
      * @throws java.net.MalformedURLException if the URL cannot be formed from the tile's parameters.
-     * @throws IllegalArgumentException       if <code>tile</code> is null.
+     * @throws IllegalArgumentException if <code>tile</code> is null.
      */
-    public java.net.URL getTileResourceURL(Tile tile, String imageFormat) throws java.net.MalformedURLException
-    {
-        if (tile == null)
-        {
+    public java.net.URL getTileResourceURL(Tile tile, String imageFormat) throws java.net.MalformedURLException {
+        if (tile == null) {
             String msg = Logging.getMessage("nullValue.TileIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -298,16 +285,13 @@ public class Level extends AVListImpl implements Comparable<Level>
         return this.urlBuilder.getURL(tile, imageFormat);
     }
 
-    public Sector computeSectorForPosition(Angle latitude, Angle longitude, LatLon tileOrigin)
-    {
-        if (latitude == null || longitude == null)
-        {
+    public Sector computeSectorForPosition(Angle latitude, Angle longitude, LatLon tileOrigin) {
+        if (latitude == null || longitude == null) {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (tileOrigin == null)
-        {
+        if (tileOrigin == null) {
             String message = Logging.getMessage("nullValue.TileOriginIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -327,10 +311,8 @@ public class Level extends AVListImpl implements Comparable<Level>
         return new Sector(minLatitude, minLatitude.add(dLat), minLongitude, minLongitude.add(dLon));
     }
 
-    public int compareTo(Level that)
-    {
-        if (that == null)
-        {
+    public int compareTo(Level that) {
+        if (that == null) {
             String msg = Logging.getMessage("nullValue.LevelIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -338,40 +320,49 @@ public class Level extends AVListImpl implements Comparable<Level>
         return this.levelNumber < that.levelNumber ? -1 : this.levelNumber == that.levelNumber ? 0 : 1;
     }
 
-    public boolean equals(Object o)
-    {
-        if (this == o)
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
+        }
 
         final Level level = (Level) o;
 
-        if (levelNumber != level.levelNumber)
+        if (levelNumber != level.levelNumber) {
             return false;
-        if (tileHeight != level.tileHeight)
+        }
+        if (tileHeight != level.tileHeight) {
             return false;
-        if (tileWidth != level.tileWidth)
+        }
+        if (tileWidth != level.tileWidth) {
             return false;
-        if (cacheName != null ? !cacheName.equals(level.cacheName) : level.cacheName != null)
+        }
+        if (cacheName != null ? !cacheName.equals(level.cacheName) : level.cacheName != null) {
             return false;
-        if (dataset != null ? !dataset.equals(level.dataset) : level.dataset != null)
+        }
+        if (dataset != null ? !dataset.equals(level.dataset) : level.dataset != null) {
             return false;
-        if (formatSuffix != null ? !formatSuffix.equals(level.formatSuffix) : level.formatSuffix != null)
+        }
+        if (formatSuffix != null ? !formatSuffix.equals(level.formatSuffix) : level.formatSuffix != null) {
             return false;
-        if (levelName != null ? !levelName.equals(level.levelName) : level.levelName != null)
+        }
+        if (levelName != null ? !levelName.equals(level.levelName) : level.levelName != null) {
             return false;
-        if (service != null ? !service.equals(level.service) : level.service != null)
+        }
+        if (service != null ? !service.equals(level.service) : level.service != null) {
             return false;
+        }
         //noinspection RedundantIfStatement
-        if (tileDelta != null ? !tileDelta.equals(level.tileDelta) : level.tileDelta != null)
+        if (tileDelta != null ? !tileDelta.equals(level.tileDelta) : level.tileDelta != null) {
             return false;
+        }
 
         return true;
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         int result;
         result = levelNumber;
         result = 29 * result + (levelName != null ? levelName.hashCode() : 0);
@@ -386,8 +377,7 @@ public class Level extends AVListImpl implements Comparable<Level>
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.path;
     }
 }

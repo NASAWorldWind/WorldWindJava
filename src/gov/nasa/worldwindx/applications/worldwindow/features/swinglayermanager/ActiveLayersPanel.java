@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager;
 
 import gov.nasa.worldwind.layers.*;
@@ -25,8 +24,8 @@ import java.util.ArrayList;
  * @version $Id: ActiveLayersPanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 @SuppressWarnings("unchecked")
-public class ActiveLayersPanel extends AbstractFeaturePanel implements ActiveLayersManager
-{
+public class ActiveLayersPanel extends AbstractFeaturePanel implements ActiveLayersManager {
+
     protected static final String TOOL_TIP = "Visible layers. Drag a layer to reposition it.";
 
     protected DefaultListModel model; // the list model
@@ -34,13 +33,11 @@ public class ActiveLayersPanel extends AbstractFeaturePanel implements ActiveLay
 
     private boolean on = false;
 
-    public ActiveLayersPanel(Registry registry)
-    {
+    public ActiveLayersPanel(Registry registry) {
         super("Layer List", Constants.FEATURE_ACTIVE_LAYERS_PANEL, new ShadedPanel(new BorderLayout()), registry);
     }
 
-    public void initialize(final Controller controller)
-    {
+    public void initialize(final Controller controller) {
         super.initialize(controller);
 
         this.model = new DefaultListModel();
@@ -67,17 +64,13 @@ public class ActiveLayersPanel extends AbstractFeaturePanel implements ActiveLay
         LayerList layerList = controller.getWWd().getModel().getLayers();
         fillModel(layerList);
 
-        layerList.addPropertyChangeListener(new PropertyChangeListener()
-        {
-            public void propertyChange(PropertyChangeEvent event)
-            {
+        layerList.addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent event) {
                 if (event.getSource() instanceof LayerList) // the layer list lost, gained or swapped layers
                 {
                     refresh(event);
                     controller.redraw();
-                }
-                else if (event.getSource() instanceof Layer)
-                {
+                } else if (event.getSource() instanceof Layer) {
                     jlist.repaint(); // just the state of the layer changed
                     controller.redraw();
                 }
@@ -90,25 +83,21 @@ public class ActiveLayersPanel extends AbstractFeaturePanel implements ActiveLay
 
         final JPopupMenu popup = this.makePopupMenu();
         this.jlist.setInheritsPopupMenu(true);
-        this.jlist.addMouseListener(new MouseInputAdapter()
-        {
+        this.jlist.addMouseListener(new MouseInputAdapter() {
             @Override
-            public void mousePressed(MouseEvent mouseEvent)
-            {
-                if (popup.isPopupTrigger(mouseEvent))
+            public void mousePressed(MouseEvent mouseEvent) {
+                if (popup.isPopupTrigger(mouseEvent)) {
                     popup.show(panel, mouseEvent.getX(), mouseEvent.getY());
+                }
             }
         });
     }
 
-    private JPopupMenu makePopupMenu()
-    {
+    private JPopupMenu makePopupMenu() {
         JCheckBoxMenuItem showInternal = new JCheckBoxMenuItem("Show Internal Layers");
         showInternal.setSelected(false);
-        showInternal.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
+        showInternal.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
                 setIncludeInternalLayers(((JCheckBoxMenuItem) event.getSource()).isSelected());
             }
         });
@@ -119,73 +108,66 @@ public class ActiveLayersPanel extends AbstractFeaturePanel implements ActiveLay
         return pm;
     }
 
-    public boolean isIncludeInternalLayers()
-    {
+    public boolean isIncludeInternalLayers() {
         return this.jlist.isIncludeInternalLayers();
     }
 
-    public void setIncludeInternalLayers(boolean includeInternalLayers)
-    {
-        if (includeInternalLayers == this.jlist.isIncludeInternalLayers())
+    public void setIncludeInternalLayers(boolean includeInternalLayers) {
+        if (includeInternalLayers == this.jlist.isIncludeInternalLayers()) {
             return;
+        }
 
         this.jlist.setIncludeInternalLayers(includeInternalLayers);
         this.fillModel(this.controller.getActiveLayers());
     }
 
     @Override
-    public boolean isTwoState()
-    {
+    public boolean isTwoState() {
         return true;
     }
 
     @Override
-    public boolean isOn()
-    {
+    public boolean isOn() {
         return this.on;
     }
 
     @Override
-    public void turnOn(boolean tf)
-    {
+    public void turnOn(boolean tf) {
         this.firePropertyChange("ShowLayerList", this.on, tf);
         this.on = !this.on;
     }
 
-    protected void fillModel(LayerList layerList)
-    {
+    protected void fillModel(LayerList layerList) {
         model.clear();
 
-        for (Layer layer : layerList)
-        {
+        for (Layer layer : layerList) {
             this.model.addElement(layer);
         }
     }
 
-    protected void refresh(PropertyChangeEvent event)
-    {
+    protected void refresh(PropertyChangeEvent event) {
         // update the model
-        if (event.getNewValue() instanceof LayerList)
+        if (event.getNewValue() instanceof LayerList) {
             this.fillModel((LayerList) event.getNewValue());
+        }
 
         // scroll list to changed layer
-        if (event.getOldValue() instanceof LayerList && event.getNewValue() instanceof LayerList)
-        {
+        if (event.getOldValue() instanceof LayerList && event.getNewValue() instanceof LayerList) {
             java.util.List<Layer> delta = LayerList.getLayersAdded((LayerList) event.getOldValue(),
-                (LayerList) event.getNewValue());
-            if (delta.size() > 0)
+                    (LayerList) event.getNewValue());
+            if (delta.size() > 0) {
                 this.jlist.ensureIndexIsVisible(((LayerList) event.getNewValue()).indexOf(delta.get(delta.size() - 1)));
+            }
         }
     }
 
-    public void updateLayerList(LayerList layerList)
-    {
-        if (layerList == null)
+    public void updateLayerList(LayerList layerList) {
+        if (layerList == null) {
             layerList = this.controller.getWWd().getModel().getLayers();
+        }
 
         ArrayList<Layer> newList = new ArrayList<Layer>(layerList.size());
-        for (int i = 0; i < this.model.size(); i++)
-        {
+        for (int i = 0; i < this.model.size(); i++) {
             newList.add((Layer) this.model.get(i));
         }
 
@@ -193,56 +175,47 @@ public class ActiveLayersPanel extends AbstractFeaturePanel implements ActiveLay
     }
 
     // Handles reordering of the WorldWind layer list via this panel.
-    protected class ReorderListener extends MouseAdapter
-    {
+    protected class ReorderListener extends MouseAdapter {
+
         protected JList list;
         protected int hotspot = new JCheckBox().getPreferredSize().width;
         protected int pressIndex = 0;
         protected int releaseIndex = 0;
 
-        public ReorderListener(JList list)
-        {
-            if (!(list.getModel() instanceof DefaultListModel))
-            {
+        public ReorderListener(JList list) {
+            if (!(list.getModel() instanceof DefaultListModel)) {
                 throw new IllegalArgumentException("List must have a DefaultListModel");
             }
             this.list = list;
         }
 
         @Override
-        public void mousePressed(MouseEvent e)
-        {
+        public void mousePressed(MouseEvent e) {
             int index = list.locationToIndex(e.getPoint());
             pressIndex = (e.getX() > list.getCellBounds(index, index).x + hotspot) ? index : -1;
-            if (pressIndex == -1)
-            {
+            if (pressIndex == -1) {
                 Layer layer = (Layer) model.get(index);
                 layer.setEnabled(!layer.isEnabled());
             }
         }
 
         @Override
-        public void mouseReleased(MouseEvent e)
-        {
+        public void mouseReleased(MouseEvent e) {
             releaseIndex = list.locationToIndex(e.getPoint());
-            if (releaseIndex != pressIndex && releaseIndex != -1 && pressIndex != -1)
-            {
+            if (releaseIndex != pressIndex && releaseIndex != -1 && pressIndex != -1) {
                 reorder();
             }
         }
 
         @Override
-        public void mouseDragged(MouseEvent e)
-        {
-            if (pressIndex != -1)
-            {
+        public void mouseDragged(MouseEvent e) {
+            if (pressIndex != -1) {
                 mouseReleased(e);
                 pressIndex = releaseIndex;
             }
         }
 
-        protected void reorder()
-        {
+        protected void reorder() {
             DefaultListModel model = (DefaultListModel) list.getModel();
             Object dragee = model.elementAt(pressIndex);
             model.removeElementAt(pressIndex);

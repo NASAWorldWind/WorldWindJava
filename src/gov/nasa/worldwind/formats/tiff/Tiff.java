@@ -9,12 +9,12 @@ package gov.nasa.worldwind.formats.tiff;
  * @author Lado Garakanidze
  * @version $Id: Tiff.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Tiff
-{
+public interface Tiff {
+
     public static final int Undefined = 0;
 
-    public interface Type
-    {
+    public interface Type {
+
         public static final int BYTE = 1;
         public static final int ASCII = 2;
         public static final int SHORT = 3;
@@ -29,8 +29,8 @@ public interface Tiff
         public static final int DOUBLE = 12;
     }
 
-    public interface Tag
-    {
+    public interface Tag {
+
         // Baseline Tiff 6.0 tags...
         public static final int IMAGE_WIDTH = 256;
         public static final int IMAGE_LENGTH = 257;
@@ -72,8 +72,8 @@ public interface Tiff
     }
 
     // The orientation of the image with respect to the rows and columns.
-    public interface Orientation
-    {
+    public interface Orientation {
+
         // 1 = The 0th row represents the visual top of the image,
         // and the 0th column represents the visual left-hand side.
         public static final int Row0_IS_TOP__Col0_IS_LHS = 1;
@@ -105,8 +105,8 @@ public interface Tiff
         public static final int DEFAULT = Row0_IS_TOP__Col0_IS_LHS;
     }
 
-    public interface BitsPerSample
-    {
+    public interface BitsPerSample {
+
         public static final int MONOCHROME_BYTE = 8;
         public static final int MONOCHROME_UINT8 = 8;
         public static final int MONOCHROME_UINT16 = 16;
@@ -117,8 +117,8 @@ public interface Tiff
         public static final int CMYK = 32;
     }
 
-    public interface SamplesPerPixel
-    {
+    public interface SamplesPerPixel {
+
         public static final int MONOCHROME = 1;
         public static final int RGB = 3;
         public static final int RGBA = 4;
@@ -127,8 +127,8 @@ public interface Tiff
     }
 
     // The color space of the image data
-    public interface Photometric
-    {
+    public interface Photometric {
+
         public static final int Undefined = -1;
 
         // 0 = WhiteIsZero
@@ -186,16 +186,16 @@ public interface Tiff
         // There is no default for PhotometricInterpretation, and it is required.
     }
 
-    public interface Compression
-    {
+    public interface Compression {
+
         public static final int NONE = 1;
         public static final int LZW = 5;
         public static final int JPEG = 6;
         public static final int PACKBITS = 32773;
     }
 
-    public interface PlanarConfiguration
-    {
+    public interface PlanarConfiguration {
+
         // CHUNKY
         // The component values for each pixel are stored contiguously.
         // The order of the components within the pixel is specified by PhotometricInterpretation.
@@ -219,15 +219,15 @@ public interface Tiff
         public static final int DEFAULT = CHUNKY;
     }
 
-    public interface ResolutionUnit
-    {
+    public interface ResolutionUnit {
+
         public static final int NONE = 1;
         public static final int INCH = 2;
         public static final int CENTIMETER = 3;
     }
 
-    public interface SampleFormat
-    {
+    public interface SampleFormat {
+
         public static final int UNSIGNED = 1;
         public static final int SIGNED = 2;
         public static final int IEEEFLOAT = 3;

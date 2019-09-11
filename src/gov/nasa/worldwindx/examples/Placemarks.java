@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
@@ -20,20 +19,19 @@ import java.awt.*;
 import java.awt.image.*;
 
 /**
- * Illustrates how to use {@link gov.nasa.worldwind.render.PointPlacemark}. Also shows how to use a 2525 tactical
- * symbol as a placemark image.
+ * Illustrates how to use {@link gov.nasa.worldwind.render.PointPlacemark}. Also shows how to use a 2525 tactical symbol
+ * as a placemark image.
  *
  * @see gov.nasa.worldwindx.examples.PlacemarkLabelEditing
  *
  * @author tag
  * @version $Id: Placemarks.java 2812 2015-02-17 21:00:43Z tgaskins $
  */
-public class Placemarks extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class Placemarks extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             final RenderableLayer layer = new RenderableLayer();
@@ -201,11 +199,9 @@ public class Placemarks extends ApplicationTemplate
 
             // Create a placemark that uses a 2525C tactical symbol. The symbol is downloaded from the internet on a
             // separate thread.
-            WorldWind.getTaskService().addTask(new Runnable()
-            {
+            WorldWind.getTaskService().addTask(new Runnable() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     createTacticalSymbolPointPlacemark(layer);
                 }
             });
@@ -215,13 +211,12 @@ public class Placemarks extends ApplicationTemplate
         }
     }
 
-    public static void createTacticalSymbolPointPlacemark(final RenderableLayer layer)
-    {
+    public static void createTacticalSymbolPointPlacemark(final RenderableLayer layer) {
         // *** This method is running on thread separate from the EDT. ***
 
         // Create an icon retriever using the path specified in the config file, or the default path.
         String iconRetrieverPath = Configuration.getStringValue(AVKey.MIL_STD_2525_ICON_RETRIEVER_PATH,
-            MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
+                MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
         IconRetriever iconRetriever = new MilStd2525IconRetriever(iconRetrieverPath);
 
         // Retrieve the tactical symbol image we'll use for the placemark.
@@ -233,13 +228,10 @@ public class Placemarks extends ApplicationTemplate
         final BufferedImage highlightImage = iconRetriever.createIcon("SFAPMFQM--GIUSA", params);
 
         // Add the placemark to WorldWind on the event dispatch thread.
-        SwingUtilities.invokeLater(new Runnable()
-        {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run()
-            {
-                try
-                {
+            public void run() {
+                try {
                     // Create the placemark
                     PointPlacemark pp = new PointPlacemark(Position.fromDegrees(30, -102, 0));
                     pp.setLabelText("Tactical Symbol");
@@ -263,17 +255,14 @@ public class Placemarks extends ApplicationTemplate
 
                     // Add the placemark to the layer.
                     layer.addRenderable(pp);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Placemarks", AppFrame.class);
     }
 }

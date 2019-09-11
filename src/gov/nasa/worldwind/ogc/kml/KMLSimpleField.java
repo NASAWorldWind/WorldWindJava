@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.util.xml.AbstractXMLEventParser;
@@ -14,30 +13,26 @@ import gov.nasa.worldwind.util.xml.AbstractXMLEventParser;
  * @author tag
  * @version $Id: KMLSimpleField.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLSimpleField extends AbstractXMLEventParser
-{
+public class KMLSimpleField extends AbstractXMLEventParser {
+
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLSimpleField(String namespaceURI)
-    {
+    public KMLSimpleField(String namespaceURI) {
         super(namespaceURI);
     }
 
-    public String getType()
-    {
+    public String getType() {
         return (String) this.getField("type");
     }
 
-    public String getName()
-    {
+    public String getName() {
         return (String) this.getField("name");
     }
 
-    public String getDisplayName()
-    {
+    public String getDisplayName() {
         return (String) this.getField("displayName");
     }
 }

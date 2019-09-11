@@ -18,31 +18,31 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: BasicWebViewFactory.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BasicWebViewFactory implements WebViewFactory
-{
-    /** Create the factory. */
-    public BasicWebViewFactory()
-    {
+public class BasicWebViewFactory implements WebViewFactory {
+
+    /**
+     * Create the factory.
+     */
+    public BasicWebViewFactory() {
     }
 
-    /** {@inheritDoc} */
-    public WebView createWebView(Dimension frameSize)
-    {
-        if (frameSize == null)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public WebView createWebView(Dimension frameSize) {
+        if (frameSize == null) {
             String message = Logging.getMessage("nullValue.SizeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (Configuration.isLinuxOS())
+        if (Configuration.isLinuxOS()) {
             return this.createLinuxWebView(frameSize);
-
-        else if (Configuration.isMacOS())
+        } else if (Configuration.isMacOS()) {
             return this.createMacWebView(frameSize);
-
-        else if (Configuration.isWindowsOS())
+        } else if (Configuration.isWindowsOS()) {
             return this.createWindowsWebView(frameSize);
+        }
 
         return this.createUnknownOSWebView(frameSize);
     }
@@ -57,8 +57,7 @@ public class BasicWebViewFactory implements WebViewFactory
      *
      * @throws UnsupportedOperationException Linux WebView is not supported at this time.
      */
-    protected WebView createLinuxWebView(Dimension frameSize)
-    {
+    protected WebView createLinuxWebView(Dimension frameSize) {
         return this.createUnknownOSWebView(frameSize); // TODO: implement native WebView for Linux.
     }
 
@@ -69,8 +68,7 @@ public class BasicWebViewFactory implements WebViewFactory
      *
      * @return WebView instance for Mac.
      */
-    protected WebView createMacWebView(Dimension frameSize)
-    {
+    protected WebView createMacWebView(Dimension frameSize) {
         return new MacWebView(frameSize);
     }
 
@@ -81,8 +79,7 @@ public class BasicWebViewFactory implements WebViewFactory
      *
      * @return WebView instance for Windows.
      */
-    protected WebView createWindowsWebView(Dimension frameSize)
-    {
+    protected WebView createWindowsWebView(Dimension frameSize) {
         return new WindowsWebView(frameSize);
     }
 
@@ -97,11 +94,10 @@ public class BasicWebViewFactory implements WebViewFactory
      *
      * @throws UnsupportedOperationException WebView is only implemented for Windows and Mac at this time.
      */
-    @SuppressWarnings( {"UnusedDeclaration"})
-    protected WebView createUnknownOSWebView(Dimension frameSize)
-    {
+    @SuppressWarnings({"UnusedDeclaration"})
+    protected WebView createUnknownOSWebView(Dimension frameSize) {
         String message = Logging.getMessage("NativeLib.UnsupportedOperatingSystem", "WebView",
-            System.getProperty("os.name"));
+                System.getProperty("os.name"));
         Logging.logger().severe(message);
         throw new UnsupportedOperationException(message);
     }

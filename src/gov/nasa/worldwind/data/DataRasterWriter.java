@@ -6,16 +6,16 @@
 package gov.nasa.worldwind.data;
 
 /**
- * <code>DataRasterWriter</code> is a common interface for objects
- * which can write a data raster in a particular file format.
+ * <code>DataRasterWriter</code> is a common interface for objects which can write a data raster in a particular file
+ * format.
  *
  * @author dcollins
  * @version $Id: DataRasterWriter.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface DataRasterWriter
-{
+public interface DataRasterWriter {
+
     /**
-     * Checks if a data raster could be written to a File  the given format.
+     * Checks if a data raster could be written to a File the given format.
      *
      * @param raster a data raster to be written to a <code>File</code> in the given format.
      * @param formatSuffix a <code>String</code> containing the format suffix
@@ -26,8 +26,8 @@ public interface DataRasterWriter
     boolean canWrite(DataRaster raster, String formatSuffix, java.io.File file);
 
     /**
-     * Writes an data raster to a <code>File</code> in the given format.
-     * If there is already a File present, its contents are discarded.
+     * Writes an data raster to a <code>File</code> in the given format. If there is already a File present, its
+     * contents are discarded.
      *
      * @param raster a data raster to be written
      * @param formatSuffix a <code>String</code> containing the format suffix

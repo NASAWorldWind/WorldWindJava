@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.dataimporter;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -21,14 +20,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author tag
  * @version $Id: DataInstallerProgressMonitor.java 1180 2013-02-15 18:40:47Z tgaskins $
  */
-public class DataInstallerProgressMonitor extends ProgressMonitor implements PropertyChangeListener
-{
+public class DataInstallerProgressMonitor extends ProgressMonitor implements PropertyChangeListener {
+
     protected DataStoreProducer producer;
     protected AtomicInteger progress;
     java.util.Timer progressTimer = new java.util.Timer();
 
-    public DataInstallerProgressMonitor(Component parent, DataStoreProducer producer)
-    {
+    public DataInstallerProgressMonitor(Component parent, DataStoreProducer producer) {
         super(parent, "Importing ....", null, 0, 100);
 
         this.producer = producer;
@@ -38,15 +36,15 @@ public class DataInstallerProgressMonitor extends ProgressMonitor implements Pro
 
         // Configure the ProgressMonitor to receive progress events from the DataStoreProducer. This stops sending
         // progress events when the user clicks the "Cancel" button, ensuring that the ProgressMonitor does not
-        PropertyChangeListener progressListener = new PropertyChangeListener()
-        {
-            public void propertyChange(PropertyChangeEvent evt)
-            {
-                if (DataInstallerProgressMonitor.this.isCanceled())
+        PropertyChangeListener progressListener = new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (DataInstallerProgressMonitor.this.isCanceled()) {
                     return;
+                }
 
-                if (evt.getPropertyName().equals(AVKey.PROGRESS))
+                if (evt.getPropertyName().equals(AVKey.PROGRESS)) {
                     DataInstallerProgressMonitor.this.progress.set((int) (100 * (Double) evt.getNewValue()));
+                }
             }
         };
 
@@ -54,33 +52,28 @@ public class DataInstallerProgressMonitor extends ProgressMonitor implements Pro
         this.setProgress(0);
     }
 
-    public void start()
-    {
+    public void start() {
         // Configure a timer to check if the user has clicked the ProgressMonitor's "Cancel" button. If so, stop
         // production as soon as possible. This just stops the production from completing; it doesn't clean up any
         // state
         // changes made during production,
         java.util.Timer progressTimer = new java.util.Timer();
-        progressTimer.schedule(new TimerTask()
-        {
-            public void run()
-            {
+        progressTimer.schedule(new TimerTask() {
+            public void run() {
                 setProgress(progress.get());
 
-                if (isCanceled())
-                {
-                    if (producer != null)
+                if (isCanceled()) {
+                    if (producer != null) {
                         producer.stopProduction();
+                    }
                     this.cancel();
                 }
             }
         }, this.getMillisToDecideToPopup(), 100L);
     }
 
-    public void stop()
-    {
-        if (this.producer != null)
-        {
+    public void stop() {
+        if (this.producer != null) {
             this.producer.removePropertyChangeListener(this);
             this.producer.removeAllDataSources();
         }
@@ -89,12 +82,13 @@ public class DataInstallerProgressMonitor extends ProgressMonitor implements Pro
         this.progressTimer.cancel();
     }
 
-    public void propertyChange(PropertyChangeEvent event)
-    {
-        if (DataInstallerProgressMonitor.this.isCanceled())
+    public void propertyChange(PropertyChangeEvent event) {
+        if (DataInstallerProgressMonitor.this.isCanceled()) {
             return;
+        }
 
-        if (event.getPropertyName().equals(AVKey.PROGRESS))
+        if (event.getPropertyName().equals(AVKey.PROGRESS)) {
             DataInstallerProgressMonitor.this.progress.set((int) (100 * (Double) event.getNewValue()));
+        }
     }
 }

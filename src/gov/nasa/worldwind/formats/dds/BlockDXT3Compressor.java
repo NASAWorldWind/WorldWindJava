@@ -11,14 +11,13 @@ import gov.nasa.worldwind.util.Logging;
  * Compressor for DXT2/DXT3 alpha and color blocks. This class is not thread safe. Unsynchronized access will result in
  * unpredictable behavior. Access to methods of this class must be synchronized by the caller.
  * <p>
- * Documentation on the DXT2/DXT3 format is available at http://msdn.microsoft.com/en-us/library/bb694531.aspx under
- * the name "BC2".
+ * Documentation on the DXT2/DXT3 format is available at http://msdn.microsoft.com/en-us/library/bb694531.aspx under the
+ * name "BC2".
  *
  * @author dcollins
  * @version $Id: BlockDXT3Compressor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BlockDXT3Compressor
-{
+public class BlockDXT3Compressor {
     // Implementation based on the NVidia Texture Tools
     // http://code.google.com/p/nvidia-texture-tools/
 
@@ -27,8 +26,7 @@ public class BlockDXT3Compressor
     /**
      * Creates a new DXT2/DXT3 block compressor.
      */
-    public BlockDXT3Compressor()
-    {
+    public BlockDXT3Compressor() {
         this.dxt1Compressor = new BlockDXT1Compressor();
     }
 
@@ -43,25 +41,21 @@ public class BlockDXT3Compressor
      *
      * @param colorBlock the 4x4 color block to compress.
      * @param attributes attributes that will control the compression.
-     * @param dxtBlock   the DXT2/DXT3 block that will receive the compressed data.
+     * @param dxtBlock the DXT2/DXT3 block that will receive the compressed data.
      * @throws IllegalArgumentException if either <code>colorBlock</code> or <code>dxtBlock</code> are null.
      */
-    public void compressBlockDXT3(ColorBlock4x4 colorBlock, DXTCompressionAttributes attributes, BlockDXT3 dxtBlock)
-    {
-        if (colorBlock == null)
-        {
+    public void compressBlockDXT3(ColorBlock4x4 colorBlock, DXTCompressionAttributes attributes, BlockDXT3 dxtBlock) {
+        if (colorBlock == null) {
             String message = Logging.getMessage("nullValue.ColorBlockIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (attributes == null)
-        {
+        if (attributes == null) {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (dxtBlock == null)
-        {
+        if (dxtBlock == null) {
             String message = Logging.getMessage("nullValue.DXTBlockIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -76,17 +70,14 @@ public class BlockDXT3Compressor
         this.compressBlockDXT3a(colorBlock, dxtBlock.alphaBlock);
     }
 
-    protected void compressBlockDXT3a(ColorBlock4x4 colorBlock, AlphaBlockDXT3 dxtBlock)
-    {
+    protected void compressBlockDXT3a(ColorBlock4x4 colorBlock, AlphaBlockDXT3 dxtBlock) {
         dxtBlock.alphaValueMask = computeAlphaValueMask(colorBlock);
     }
 
     //**************************************************************//
     //********************  Alpha Block Assembly  ******************//
     //**************************************************************//
-
-    protected static long computeAlphaValueMask(ColorBlock4x4 colorBlock)
-    {
+    protected static long computeAlphaValueMask(ColorBlock4x4 colorBlock) {
         // Alpha is encoded as 4 bit values. Each pair of values will be packed into one byte. The first value goes
         // in bits 0-4, and the second value goes in bits 5-8. The resultant 64 bit value is structured so that when
         // converted to little endian ordering, the alpha values will be in the correct order. Here's what the
@@ -98,8 +89,7 @@ public class BlockDXT3Compressor
 
         long bitmask = 0L;
 
-        for (int i = 0; i < 8; i++)
-        {
+        for (int i = 0; i < 8; i++) {
             int a0 = 0xF & alpha4FromAlpha8(colorBlock.color[2 * i].a);
             int a1 = 0xF & alpha4FromAlpha8(colorBlock.color[2 * i + 1].a);
             long mask10 = (a1 << 4) | a0;
@@ -112,9 +102,7 @@ public class BlockDXT3Compressor
     //**************************************************************//
     //********************  Alpha Arithmetic  **********************//
     //**************************************************************//
-
-    protected static int alpha4FromAlpha8(int alpha8)
-    {
+    protected static int alpha4FromAlpha8(int alpha8) {
         // Quantizes an 8 bit alpha value into 4 bits. To reduce rounding error, this will compare the three nearest
         // 4 bit values and choose the closest one.
 
@@ -130,19 +118,16 @@ public class BlockDXT3Compressor
         int d1 = alphaDistanceSquared(q1, alpha8);
         int d2 = alphaDistanceSquared(q2, alpha8);
 
-        if (d0 < d1 && d0 < d2)
-        {
+        if (d0 < d1 && d0 < d2) {
             return q0 >> 4;
         }
-        if (d1 < d2)
-        {
+        if (d1 < d2) {
             return q1 >> 4;
         }
         return q2 >> 4;
     }
 
-    protected static int alphaDistanceSquared(int a0, int a1)
-    {
+    protected static int alphaDistanceSquared(int a0, int a1) {
         return (a0 - a1) * (a0 - a1);
     }
 }

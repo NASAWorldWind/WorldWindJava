@@ -31,8 +31,8 @@ import java.util.List;
  * @author tag
  * @version $Id: NetworkStatus.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface NetworkStatus extends AVList
-{
+public interface NetworkStatus extends AVList {
+
     public static final String HOST_UNAVAILABLE = "gov.nasa.worldwind.util.NetworkStatus.HostUnavailable";
     public static final String HOST_AVAILABLE = "gov.nasa.worldwind.util.NetworkStatus.HostAvailable";
 
@@ -73,7 +73,7 @@ public interface NetworkStatus extends AVList
      * Indicates whether a public network can be reached or has been reached in a specified previous amount of time.
      *
      * @param checkInterval the number of milliseconds in the past used to determine whether the server was avaialble
-     *                      recently.
+     * recently.
      *
      * @return false if the network can be reached or has been reached in a specified time, otherwise true.
      */
@@ -139,7 +139,7 @@ public interface NetworkStatus extends AVList
      * Returns the server domain names of the sites used to test public network availability.
      *
      * @return the list of sites used to check network status. The list is a copy of the internal list, so changes to it
-     *         do not affect instances of this class.
+     * do not affect instances of this class.
      */
     List<String> getNetworkTestSites();
 
@@ -147,8 +147,7 @@ public interface NetworkStatus extends AVList
      * Sets the domain names, e.g., worldwind.arc.nasa.gov, of sites used to determine public network availability.
      *
      * @param networkTestSites the list of desired test sites. The list is copied internally, so changes made to the
-     *                         submitted list do not affect instances of this class. May be null, in which case no sites
-     *                         are consulted.
+     * submitted list do not affect instances of this class. May be null, in which case no sites are consulted.
      */
     void setNetworkTestSites(List<String> networkTestSites);
 }

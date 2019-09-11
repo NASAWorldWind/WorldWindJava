@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.layers.RenderableLayer;
@@ -22,12 +21,11 @@ import java.io.*;
  * @author tag
  * @version $Id: ScreenImageDragging.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class ScreenImageDragging extends ApplicationTemplate
-{
-    private static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame() throws IOException, ParserConfigurationException, SAXException
-        {
+public class ScreenImageDragging extends ApplicationTemplate {
+
+    private static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() throws IOException, ParserConfigurationException, SAXException {
             super(true, true, false);
 
             // Create a screen image and containing layer for the image/icon
@@ -41,10 +39,8 @@ public class ScreenImageDragging extends ApplicationTemplate
             this.getWwd().getModel().getLayers().add(layer);
 
             // Tell the input handler to pass mouse events here
-            this.getWwd().getInputHandler().addMouseMotionListener(new MouseMotionAdapter()
-            {
-                public void mouseDragged(MouseEvent event)
-                {
+            this.getWwd().getInputHandler().addMouseMotionListener(new MouseMotionAdapter() {
+                public void mouseDragged(MouseEvent event) {
                     // Update the layer's image location
                     screenImage.setScreenLocation(event.getPoint());
                     event.consume(); // tell the input handler that we've handled the event
@@ -53,8 +49,7 @@ public class ScreenImageDragging extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("Screen Image Dragging", AppFrame.class);
     }
 }

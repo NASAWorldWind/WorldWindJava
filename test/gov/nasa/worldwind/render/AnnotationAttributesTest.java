@@ -13,15 +13,13 @@ import org.junit.runners.JUnit4;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class AnnotationAttributesTest
-{
+public class AnnotationAttributesTest {
     //////////////////////////////////////////////////////////
     // Persistence Tests
     //////////////////////////////////////////////////////////
 
     @Test
-    public void testRestore_NewInstance()
-    {
+    public void testRestore_NewInstance() {
         AnnotationAttributes attrib = new AnnotationAttributes();
         assignExampleValues(attrib);
 
@@ -36,8 +34,7 @@ public class AnnotationAttributesTest
     }
 
     @Test
-    public void testRestore_SameInstance()
-    {
+    public void testRestore_SameInstance() {
         AnnotationAttributes attrib = new AnnotationAttributes();
         assignExampleValues(attrib);
 
@@ -52,14 +49,13 @@ public class AnnotationAttributesTest
     }
 
     @Test
-    public void testRestore_EmptyStateDocument()
-    {
+    public void testRestore_EmptyStateDocument() {
         AnnotationAttributes attrib = new AnnotationAttributes();
         assignExampleValues(attrib);
 
-        String emptyStateInXml =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<emptyDocumentRoot/>";
+        String emptyStateInXml
+                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<emptyDocumentRoot/>";
         attrib.restoreState(emptyStateInXml);
 
         // No attributes should have changed.        
@@ -70,35 +66,30 @@ public class AnnotationAttributesTest
     }
 
     @Test
-    public void testRestore_InvalidStateDocument()
-    {
-        try
-        {
+    public void testRestore_InvalidStateDocument() {
+        try {
             String badStateInXml = "!!invalid xml string!!";
             AnnotationAttributes attrib = new AnnotationAttributes();
             attrib.restoreState(badStateInXml);
 
             fail("Expected an IllegalArgumentException");
-        }
-        catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testRestore_PartialStateDocument()
-    {
+    public void testRestore_PartialStateDocument() {
         AnnotationAttributes attrib = new AnnotationAttributes();
         assignExampleValues(attrib);
 
-        String partialStateInXml =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<restorableState>" +
-                "<stateObject name=\"scale\">10.5</stateObject>" +
-                "<stateObject name=\"cornerRadius\">11</stateObject>" +
-                "<unknownElement name=\"unknownName\">unknownValue</unknownElement>" +
-                "</restorableState>";
+        String partialStateInXml
+                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<restorableState>"
+                + "<stateObject name=\"scale\">10.5</stateObject>"
+                + "<stateObject name=\"cornerRadius\">11</stateObject>"
+                + "<unknownElement name=\"unknownName\">unknownValue</unknownElement>"
+                + "</restorableState>";
         attrib.restoreState(partialStateInXml);
 
         AnnotationAttributes expected = new AnnotationAttributes();
@@ -110,17 +101,16 @@ public class AnnotationAttributesTest
     }
 
     @Test
-    public void testRestore_LegacyStateDocument()
-    {
+    public void testRestore_LegacyStateDocument() {
         AnnotationAttributes attrib = new AnnotationAttributes();
         assignExampleValues(attrib);
-        String partialStateInXml =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<restorableState>" +
-                "<stateObject name=\"textAlign\">2</stateObject>" +
-                "<stateObject name=\"imageRepeat\">render.Annotation.RepeatXY</stateObject>" +
-                "<stateObject name=\"adjustWidthToText\">render.Annotation.SizeFitText</stateObject>" +
-                "</restorableState>";
+        String partialStateInXml
+                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<restorableState>"
+                + "<stateObject name=\"textAlign\">2</stateObject>"
+                + "<stateObject name=\"imageRepeat\">render.Annotation.RepeatXY</stateObject>"
+                + "<stateObject name=\"adjustWidthToText\">render.Annotation.SizeFitText</stateObject>"
+                + "</restorableState>";
         attrib.restoreState(partialStateInXml);
 
         AnnotationAttributes expected = new AnnotationAttributes();
@@ -133,8 +123,7 @@ public class AnnotationAttributesTest
     }
 
     @Test
-    public void testRestore_PartialSave()
-    {
+    public void testRestore_PartialSave() {
         AnnotationAttributes attrib = new AnnotationAttributes();
         assignPartialExampleValues(attrib);
 
@@ -150,8 +139,7 @@ public class AnnotationAttributesTest
     }
 
     @Test
-    public void testRestore_CustomDefaults()
-    {
+    public void testRestore_CustomDefaults() {
         AnnotationAttributes defaults = new AnnotationAttributes();
         assignExampleValues(defaults);
         AnnotationAttributes attrib = new AnnotationAttributes();
@@ -173,10 +161,8 @@ public class AnnotationAttributesTest
     //////////////////////////////////////////////////////////
     // Helper Methods
     //////////////////////////////////////////////////////////
-
     @SuppressWarnings({"JavaDoc"})
-    private static void assignExampleValues(AnnotationAttributes attrib)
-    {
+    private static void assignExampleValues(AnnotationAttributes attrib) {
         attrib.setFrameShape(AVKey.SHAPE_ELLIPSE);
         attrib.setHighlighted(true);
         attrib.setHighlightScale(2.5);
@@ -209,8 +195,7 @@ public class AnnotationAttributesTest
         attrib.setEffect(AVKey.TEXT_EFFECT_OUTLINE);
     }
 
-    private static void assignNullValues(AnnotationAttributes attrib)
-    {
+    private static void assignNullValues(AnnotationAttributes attrib) {
         attrib.setFrameShape(null);
         attrib.setHighlighted(false);
         attrib.setHighlightScale(-1);
@@ -243,8 +228,7 @@ public class AnnotationAttributesTest
         attrib.setEffect(null);
     }
 
-    private static void assignPartialExampleValues(AnnotationAttributes attrib)
-    {
+    private static void assignPartialExampleValues(AnnotationAttributes attrib) {
         attrib.setFrameShape(AVKey.SHAPE_ELLIPSE);
         attrib.setHighlighted(true);
         attrib.setHighlightScale(2.5);
@@ -254,8 +238,7 @@ public class AnnotationAttributesTest
         attrib.setLeader(AVKey.SHAPE_NONE);
     }
 
-    private static void assertAnnotationAttributesEquals(AnnotationAttributes expected, AnnotationAttributes actual)
-    {
+    private static void assertAnnotationAttributesEquals(AnnotationAttributes expected, AnnotationAttributes actual) {
         assertNotNull("Expected is null", expected);
         assertNotNull("Acutal is null", actual);
         assertEquals("frameShape", expected.getFrameShape(), actual.getFrameShape());

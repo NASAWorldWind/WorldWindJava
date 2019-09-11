@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
@@ -23,10 +22,9 @@ import javax.swing.*;
  *
  * @version $Id: SimpleShapeDragging.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SimpleShapeDragging extends JFrame
-{
-    public SimpleShapeDragging()
-    {
+public class SimpleShapeDragging extends JFrame {
+
+    public SimpleShapeDragging() {
         final WorldWindowGLCanvas wwd = new WorldWindowGLCanvas();
         wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
         this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
@@ -39,24 +37,19 @@ public class SimpleShapeDragging extends JFrame
         insertBeforePlacenames(wwd, layer);
 
         // Set up to drag
-        wwd.addSelectListener(new SelectListener()
-        {
+        wwd.addSelectListener(new SelectListener() {
             private BasicDragger dragger = new BasicDragger(wwd);
 
-            public void selected(SelectEvent event)
-            {
+            public void selected(SelectEvent event) {
                 // Delegate dragging computations to a dragger.
                 this.dragger.selected(event);
             }
         });
     }
 
-    public static void main(String[] args)
-    {
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 JFrame frame = new SimpleShapeDragging();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
@@ -65,15 +58,14 @@ public class SimpleShapeDragging extends JFrame
         });
     }
 
-    public static void insertBeforePlacenames(WorldWindow wwd, Layer layer)
-    {
+    public static void insertBeforePlacenames(WorldWindow wwd, Layer layer) {
         // Insert the layer into the layer list just before the placenames.
         int compassPosition = 0;
         LayerList layers = wwd.getModel().getLayers();
-        for (Layer l : layers)
-        {
-            if (l instanceof PlaceNameLayer)
+        for (Layer l : layers) {
+            if (l instanceof PlaceNameLayer) {
                 compassPosition = layers.indexOf(l);
+            }
         }
         layers.add(compassPosition, layer);
     }

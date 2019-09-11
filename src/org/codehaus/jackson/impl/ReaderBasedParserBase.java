@@ -6,17 +6,14 @@ import org.codehaus.jackson.*;
 import org.codehaus.jackson.io.IOContext;
 
 /**
- * This is a simple low-level input reader base class, used by
- * JSON parser.
- * The reason for sub-classing (over composition)
- * is due to need for direct access to character buffers
- * and positions.
+ * This is a simple low-level input reader base class, used by JSON parser. The reason for sub-classing (over
+ * composition) is due to need for direct access to character buffers and positions.
  *
  * @author Tatu Saloranta
  */
 public abstract class ReaderBasedParserBase
-    extends JsonNumericParserBase
-{
+        extends JsonNumericParserBase {
+
     /*
     ////////////////////////////////////////////////////
     // Configuration
@@ -24,9 +21,8 @@ public abstract class ReaderBasedParserBase
      */
 
     /**
-     * Reader that can be used for reading more content, if one
-     * buffer from input source, but in some cases pre-loaded buffer
-     * is handed to the parser.
+     * Reader that can be used for reading more content, if one buffer from input source, but in some cases pre-loaded
+     * buffer is handed to the parser.
      */
     protected Reader _reader;
 
@@ -35,10 +31,8 @@ public abstract class ReaderBasedParserBase
     // Current input data
     ////////////////////////////////////////////////////
      */
-
     /**
-     * Current buffer from which data is read; generally data is read into
-     * buffer from input source.
+     * Current buffer from which data is read; generally data is read into buffer from input source.
      */
     protected char[] _inputBuffer;
 
@@ -47,9 +41,7 @@ public abstract class ReaderBasedParserBase
     // Life-cycle
     ////////////////////////////////////////////////////
      */
-
-    protected ReaderBasedParserBase(IOContext ctxt, int features, Reader r)
-    {
+    protected ReaderBasedParserBase(IOContext ctxt, int features, Reader r) {
         super(ctxt, features);
         _reader = r;
         _inputBuffer = ctxt.allocTokenBuffer();
@@ -60,11 +52,9 @@ public abstract class ReaderBasedParserBase
     // Low-level reading, other
     ////////////////////////////////////////////////////
      */
-
     @Override
-	protected final boolean loadMore()
-        throws IOException
-    {
+    protected final boolean loadMore()
+            throws IOException {
         _currInputProcessed += _inputEnd;
         _currInputRowStart -= _inputEnd;
 
@@ -79,15 +69,14 @@ public abstract class ReaderBasedParserBase
             _closeInput();
             // Should never return 0, so let's fail
             if (count == 0) {
-                throw new IOException("Reader returned 0 characters when trying to read "+_inputEnd);
+                throw new IOException("Reader returned 0 characters when trying to read " + _inputEnd);
             }
         }
         return false;
     }
 
     protected char getNextChar(String eofMsg)
-        throws IOException, JsonParseException
-    {
+            throws IOException, JsonParseException {
         if (_inputPtr >= _inputEnd) {
             if (!loadMore()) {
                 _reportInvalidEOF(eofMsg);
@@ -97,8 +86,7 @@ public abstract class ReaderBasedParserBase
     }
 
     @Override
-    protected void _closeInput() throws IOException
-    {
+    protected void _closeInput() throws IOException {
         /* 25-Nov-2008, tatus: As per [JACKSON-16] we are not to call close()
          *   on the underlying Reader, unless we "own" it, or auto-closing
          *   feature is enabled.
@@ -115,15 +103,12 @@ public abstract class ReaderBasedParserBase
     }
 
     /**
-     * Method called to release internal buffers owned by the base
-     * reader. This may be called along with {@link #_closeInput} (for
-     * example, when explicitly closing this reader instance), or
-     * separately (if need be).
+     * Method called to release internal buffers owned by the base reader. This may be called along with
+     * {@link #_closeInput} (for example, when explicitly closing this reader instance), or separately (if need be).
      */
     @Override
     protected void _releaseBuffers()
-        throws IOException
-    {
+            throws IOException {
         super._releaseBuffers();
         char[] buf = _inputBuffer;
         if (buf != null) {

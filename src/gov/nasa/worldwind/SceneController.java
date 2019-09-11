@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind;
 
 import gov.nasa.worldwind.cache.GpuResourceCache;
@@ -19,8 +18,8 @@ import java.util.*;
  * @author Tom Gaskins
  * @version $Id: SceneController.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface SceneController extends WWObject, Disposable
-{
+public interface SceneController extends WWObject, Disposable {
+
     /**
      * Indicates the scene controller's model. This returns <code>null</code> if the scene controller has no model.
      *
@@ -55,7 +54,7 @@ public interface SceneController extends WWObject, Disposable
      * Cause the window to regenerate the frame, including pick resolution.
      *
      * @return if greater than zero, the window should be automatically repainted again at the indicated number of
-     *         milliseconds from this method's return.
+     * milliseconds from this method's return.
      */
     int repaint();
 
@@ -86,7 +85,7 @@ public interface SceneController extends WWObject, Disposable
      * during the most recent call to repaint.
      *
      * @return the list of picked objects intersecting the pick rectangle, or null if no objects are currently
-     *         intersecting the rectangle.
+     * intersecting the rectangle.
      */
     PickedObjectList getObjectsInPickRectangle();
 
@@ -215,7 +214,9 @@ public interface SceneController extends WWObject, Disposable
      */
     DrawContext getDrawContext();
 
-    /** Reinitializes the scene controller. */
+    /**
+     * Reinitializes the scene controller.
+     */
     void reinitialize();
 
     /**
@@ -232,7 +233,7 @@ public interface SceneController extends WWObject, Disposable
      * the model of this screen controller.
      *
      * @param screenCreditRenderer the screen credit controller. May be null, in which case screen credits are not
-     *                             displayed.
+     * displayed.
      */
     void setScreenCreditController(ScreenCreditController screenCreditRenderer);
 

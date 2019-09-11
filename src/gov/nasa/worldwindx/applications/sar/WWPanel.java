@@ -21,24 +21,21 @@ import java.beans.*;
  * @author tag
  * @version $Id: WWPanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class WWPanel extends JPanel
-{
-    protected static class FocusablePanel extends JPanel
-    {
+public class WWPanel extends JPanel {
+
+    protected static class FocusablePanel extends JPanel {
+
         private Component focusContext;
 
-        public FocusablePanel(LayoutManager layoutManager, Component focusContext)
-        {
+        public FocusablePanel(LayoutManager layoutManager, Component focusContext) {
             super(layoutManager);
             this.focusContext = focusContext;
         }
 
-        protected void paintComponent(Graphics graphics)
-        {
+        protected void paintComponent(Graphics graphics) {
             super.paintComponent(graphics);
 
-            if (this.focusContext.isFocusOwner())
-            {
+            if (this.focusContext.isFocusOwner()) {
                 Rectangle bounds = this.getBounds();
                 BasicGraphicsUtils.drawDashedRect(graphics, 0, 0, bounds.width, bounds.height);
             }
@@ -49,38 +46,33 @@ public class WWPanel extends JPanel
     private WorldWindowGLCanvas wwd;
     private StatusBar statusBar;
 
-    private final PropertyChangeListener propertyChangeListener = new PropertyChangeListener()
-    {
+    private final PropertyChangeListener propertyChangeListener = new PropertyChangeListener() {
         @SuppressWarnings({"StringEquality"})
-        public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-        {
-            if (propertyChangeEvent.getPropertyName() == SARKey.ELEVATION_UNIT)
+        public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+            if (propertyChangeEvent.getPropertyName() == SARKey.ELEVATION_UNIT) {
                 updateElevationUnit(propertyChangeEvent.getNewValue());
-            if (propertyChangeEvent.getPropertyName() == SARKey.ANGLE_FORMAT)
+            }
+            if (propertyChangeEvent.getPropertyName() == SARKey.ANGLE_FORMAT) {
                 updateAngleFormat(propertyChangeEvent.getNewValue());
+            }
         }
     };
 
-    private final FocusListener focusListener = new FocusListener()
-    {
-        public void focusGained(FocusEvent focusEvent)
-        {
+    private final FocusListener focusListener = new FocusListener() {
+        public void focusGained(FocusEvent focusEvent) {
             this.focusChanged(focusEvent);
         }
 
-        public void focusLost(FocusEvent focusEvent)
-        {
+        public void focusLost(FocusEvent focusEvent) {
             this.focusChanged(focusEvent);
         }
 
-        protected void focusChanged(FocusEvent focusEvent)
-        {
+        protected void focusChanged(FocusEvent focusEvent) {
             repaint();
         }
     };
 
-    public WWPanel()
-    {
+    public WWPanel() {
         super(new BorderLayout(0, 0)); // hgap, vgap
 
         this.wwd = new WorldWindowGLCanvas();
@@ -104,44 +96,42 @@ public class WWPanel extends JPanel
         this.add(this.statusBar, BorderLayout.PAGE_END);
     }
 
-    public WorldWindowGLCanvas getWwd()
-    {
+    public WorldWindowGLCanvas getWwd() {
         return wwd;
     }
 
-    public StatusBar getStatusBar()
-    {
+    public StatusBar getStatusBar() {
         return statusBar;
     }
 
-    private void updateElevationUnit(Object newValue)
-    {
-        for (Layer layer : this.wwd.getModel().getLayers())
-        {
-            if (layer instanceof ScalebarLayer)
-            {
-                if (SAR2.UNIT_IMPERIAL.equals(newValue))
+    private void updateElevationUnit(Object newValue) {
+        for (Layer layer : this.wwd.getModel().getLayers()) {
+            if (layer instanceof ScalebarLayer) {
+                if (SAR2.UNIT_IMPERIAL.equals(newValue)) {
                     ((ScalebarLayer) layer).setUnit(ScalebarLayer.UNIT_IMPERIAL);
-                else // Default to metric units.
+                } else // Default to metric units.
+                {
                     ((ScalebarLayer) layer).setUnit(ScalebarLayer.UNIT_METRIC);
-            }
-            else if (layer instanceof TerrainProfileLayer)
-            {
-                if (SAR2.UNIT_IMPERIAL.equals(newValue))
+                }
+            } else if (layer instanceof TerrainProfileLayer) {
+                if (SAR2.UNIT_IMPERIAL.equals(newValue)) {
                     ((TerrainProfileLayer) layer).setUnit(TerrainProfileLayer.UNIT_IMPERIAL);
-                else // Default to metric units.
+                } else // Default to metric units.
+                {
                     ((TerrainProfileLayer) layer).setUnit(TerrainProfileLayer.UNIT_METRIC);
+                }
             }
         }
 
-        if (SAR2.UNIT_IMPERIAL.equals(newValue))
+        if (SAR2.UNIT_IMPERIAL.equals(newValue)) {
             this.statusBar.setElevationUnit(StatusBar.UNIT_IMPERIAL);
-        else // Default to metric units.
+        } else // Default to metric units.
+        {
             this.statusBar.setElevationUnit(StatusBar.UNIT_METRIC);
+        }
     }
 
-    private void updateAngleFormat(Object newValue)
-    {
-        this.statusBar.setAngleFormat((String)newValue);
+    private void updateAngleFormat(Object newValue) {
+        this.statusBar.setAngleFormat((String) newValue);
     }
 }

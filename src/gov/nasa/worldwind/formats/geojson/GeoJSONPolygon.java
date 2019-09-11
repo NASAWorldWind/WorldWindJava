@@ -13,44 +13,37 @@ import java.util.Arrays;
  * @author dcollins
  * @version $Id: GeoJSONPolygon.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeoJSONPolygon extends GeoJSONGeometry
-{
-    public GeoJSONPolygon(AVList fields)
-    {
+public class GeoJSONPolygon extends GeoJSONGeometry {
+
+    public GeoJSONPolygon(AVList fields) {
         super(fields);
     }
 
     @Override
-    public boolean isPolygon()
-    {
+    public boolean isPolygon() {
         return true;
     }
 
-    public int getInteriorRingCount()
-    {
+    public int getInteriorRingCount() {
         GeoJSONPositionArray[] array = this.getCoordinates();
         return array != null && array.length > 1 ? array.length - 1 : 0;
     }
 
-    public GeoJSONPositionArray[] getCoordinates()
-    {
+    public GeoJSONPositionArray[] getCoordinates() {
         return (GeoJSONPositionArray[]) this.getValue(GeoJSONConstants.FIELD_COORDINATES);
     }
 
-    public GeoJSONPositionArray getExteriorRing()
-    {
+    public GeoJSONPositionArray getExteriorRing() {
         GeoJSONPositionArray[] array = this.getCoordinates();
         return array != null && array.length > 0 ? array[0] : null;
     }
 
-    public GeoJSONPositionArray getInteriorRing(int ring)
-    {
+    public GeoJSONPositionArray getInteriorRing(int ring) {
         GeoJSONPositionArray[] array = this.getCoordinates();
         return array != null && array.length > 1 ? array[1 + ring] : null;
     }
 
-    public GeoJSONPositionArray[] getInteriorRings()
-    {
+    public GeoJSONPositionArray[] getInteriorRings() {
         GeoJSONPositionArray[] array = this.getCoordinates();
         return array != null && array.length > 1 ? Arrays.copyOfRange(array, 1, array.length) : null;
     }

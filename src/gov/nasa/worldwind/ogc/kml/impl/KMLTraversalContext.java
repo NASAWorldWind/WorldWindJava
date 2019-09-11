@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml.impl;
 
 import gov.nasa.worldwind.ogc.kml.KMLRegion;
@@ -18,8 +17,8 @@ import java.util.*;
  * @author tag
  * @version $Id: KMLTraversalContext.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLTraversalContext
-{
+public class KMLTraversalContext {
+
     /**
      * The <code>Deque</code> as this KML traversal context's Region stack. The region stack is used to implement
      * Regions inheritance of from a KML containers to their descendant KML features.
@@ -32,17 +31,17 @@ public class KMLTraversalContext
      */
     protected double detailHint;
 
-    /** Constructs a new KML traversal context in a default state, but otherwise does nothing. */
-    public KMLTraversalContext()
-    {
+    /**
+     * Constructs a new KML traversal context in a default state, but otherwise does nothing.
+     */
+    public KMLTraversalContext() {
     }
 
     /**
      * Initializes this KML traversal context to its default state. This should be called at the beginning of each frame
      * to prepare this traversal context for the coming render pass.
      */
-    public void initialize()
-    {
+    public void initialize() {
         this.regionStack.clear();
         this.detailHint = 0.0;
     }
@@ -57,10 +56,8 @@ public class KMLTraversalContext
      *
      * @throws IllegalArgumentException if <code>region</code> is <code>null</code>.
      */
-    public void pushRegion(KMLRegion region)
-    {
-        if (region == null)
-        {
+    public void pushRegion(KMLRegion region) {
+        if (region == null) {
             String message = Logging.getMessage("nullValue.RegionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -76,8 +73,7 @@ public class KMLTraversalContext
      *
      * @return the Region on the top of this context's stack, or <code>null</code> if the stack is empty.
      */
-    public KMLRegion peekRegion()
-    {
+    public KMLRegion peekRegion() {
         return this.regionStack.peek();
     }
 
@@ -90,8 +86,7 @@ public class KMLTraversalContext
      *
      * @throws NoSuchElementException if the Region stack is empty.
      */
-    public KMLRegion popRegion()
-    {
+    public KMLRegion popRegion() {
         return this.regionStack.pop();
     }
 
@@ -103,8 +98,7 @@ public class KMLTraversalContext
      *
      * @see #setDetailHint(double)
      */
-    public double getDetailHint()
-    {
+    public double getDetailHint() {
         return this.detailHint;
     }
 
@@ -116,11 +110,10 @@ public class KMLTraversalContext
      * 0. Values typically range between -0.5 and 0.5.
      *
      * @param detailHint the degree to modify the default relationship of KML scene resolution to screen resolution as
-     *                   viewing distance changes. Values greater than 0 increase the resolution. Values less than 0
-     *                   decrease the resolution. The default value is 0.
+     * viewing distance changes. Values greater than 0 increase the resolution. Values less than 0 decrease the
+     * resolution. The default value is 0.
      */
-    public void setDetailHint(double detailHint)
-    {
+    public void setDetailHint(double detailHint) {
         this.detailHint = detailHint;
     }
 }

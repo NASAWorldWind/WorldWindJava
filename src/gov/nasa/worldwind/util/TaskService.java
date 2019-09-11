@@ -9,8 +9,8 @@ package gov.nasa.worldwind.util;
  * @author tag
  * @version $Id: TaskService.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface TaskService
-{
+public interface TaskService {
+
     void shutdown(boolean immediately);
 
     boolean contains(Runnable runnable);

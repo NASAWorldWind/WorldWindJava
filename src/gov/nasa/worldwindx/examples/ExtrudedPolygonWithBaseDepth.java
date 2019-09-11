@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWind;
@@ -22,12 +21,11 @@ import java.util.ArrayList;
  * @author tag
  * @version $Id: ExtrudedPolygonWithBaseDepth.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class ExtrudedPolygonWithBaseDepth extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class ExtrudedPolygonWithBaseDepth extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             RenderableLayer layer = new RenderableLayer();
@@ -63,7 +61,7 @@ public class ExtrudedPolygonWithBaseDepth extends ApplicationTemplate
             layer.addRenderable(pgon);
 
             Path path = new Path(Position.fromDegrees(43.8425, -114.6355, 0),
-                Position.fromDegrees(43.8442, -114.6356, 0));
+                    Position.fromDegrees(43.8442, -114.6356, 0));
 
             ShapeAttributes pathAttributes = new BasicShapeAttributes();
             pathAttributes.setOutlineOpacity(1);
@@ -77,12 +75,11 @@ public class ExtrudedPolygonWithBaseDepth extends ApplicationTemplate
             insertBeforeCompass(getWwd(), layer);
 
             getWwd().getView().setEyePosition(
-                Position.fromDegrees(43.843162670564354, -114.63551647988652, 2652.865781935775));
+                    Position.fromDegrees(43.843162670564354, -114.63551647988652, 2652.865781935775));
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Extruded Polygon with Base Depth", AppFrame.class);
     }
 }

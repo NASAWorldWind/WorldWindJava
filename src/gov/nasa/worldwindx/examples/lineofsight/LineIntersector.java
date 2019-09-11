@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.lineofsight;
 
 import gov.nasa.worldwind.geom.*;
@@ -21,8 +20,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author tag
  * @version $Id: LineIntersector.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class LineIntersector implements Runnable
-{
+public abstract class LineIntersector implements Runnable {
+
     protected Terrain terrain;
     protected int numThreads;
 
@@ -39,13 +38,12 @@ public abstract class LineIntersector implements Runnable
     // Create a container to hold the intersections.
     protected Map<Position, List<Intersection>> allIntersections;
 
-    protected LineIntersector(Terrain terrain, int numThreads)
-    {
+    protected LineIntersector(Terrain terrain, int numThreads) {
         this.terrain = terrain;
         this.numThreads = numThreads;
 
         this.threadPool = new ThreadPoolExecutor(numThreads, numThreads, 200, TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<Runnable>());
+                new LinkedBlockingQueue<Runnable>());
 
         this.allIntersections = new ConcurrentHashMap<Position, List<Intersection>>();
     }
@@ -59,18 +57,15 @@ public abstract class LineIntersector implements Runnable
      */
     abstract protected void doPerformIntersection(Position position) throws InterruptedException;
 
-    public Terrain getTerrain()
-    {
+    public Terrain getTerrain() {
         return this.terrain;
     }
 
-    public int getNumThreads()
-    {
+    public int getNumThreads() {
         return this.numThreads;
     }
 
-    public Position getReferencePosition()
-    {
+    public Position getReferencePosition() {
         return this.referencePosition;
     }
 
@@ -79,13 +74,11 @@ public abstract class LineIntersector implements Runnable
      *
      * @param referencePosition the origin to use for all lines.
      */
-    public void setReferencePosition(Position referencePosition)
-    {
+    public void setReferencePosition(Position referencePosition) {
         this.referencePosition = referencePosition;
     }
 
-    public Iterable<Position> getPositions()
-    {
+    public Iterable<Position> getPositions() {
         return positions;
     }
 
@@ -95,104 +88,87 @@ public abstract class LineIntersector implements Runnable
      *
      * @param positions the positions.
      */
-    public void setPositions(Iterable<Position> positions)
-    {
+    public void setPositions(Iterable<Position> positions) {
         this.positions = positions;
 
         //noinspection UnusedDeclaration
-        for (Position p : this.positions)
-        {
+        for (Position p : this.positions) {
             ++this.numPositions;
         }
     }
 
-    public long getStartTime()
-    {
+    public long getStartTime() {
         return this.startTime;
     }
 
-    public long getEndTime()
-    {
+    public long getEndTime() {
         return this.endTime;
     }
 
-    public int getNumProcessedPositions()
-    {
+    public int getNumProcessedPositions() {
         return this.numProcessedPositions.get();
     }
 
-    public Map<Position, List<Intersection>> getAllIntersections()
-    {
+    public Map<Position, List<Intersection>> getAllIntersections() {
         return allIntersections;
     }
 
-    public List<Intersection> getIntersections(Position position)
-    {
+    public List<Intersection> getIntersections(Position position) {
         return position != null ? this.allIntersections.get(position) : null;
     }
 
-    public void run()
-    {
-        if (this.referencePosition == null || this.positions == null)
+    public void run() {
+        if (this.referencePosition == null || this.positions == null) {
             throw new IllegalStateException("No reference positions or grid positions specified.");
+        }
 
         this.startTime = System.currentTimeMillis();
         this.numProcessedPositions.set(0);
         this.allIntersections.clear();
 
-        try
-        {
+        try {
             this.referencePoint = terrain.getSurfacePoint(referencePosition.getLatitude(),
-                referencePosition.getLongitude(), referencePosition.getAltitude());
+                    referencePosition.getLongitude(), referencePosition.getAltitude());
 
-            for (Position position : this.positions)
-            {
-                if (this.numThreads > 1)
+            for (Position position : this.positions) {
+                if (this.numThreads > 1) {
                     this.threadPool.execute(new InternalIntersector(position));
-                else// if (!position.equals(this.referencePosition))
+                } else// if (!position.equals(this.referencePosition))
+                {
                     this.performIntersection(position);
+                }
             }
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    protected class InternalIntersector implements Runnable
-    {
+    protected class InternalIntersector implements Runnable {
+
         protected final Position position;
 
-        public InternalIntersector(Position position)
-        {
+        public InternalIntersector(Position position) {
             this.position = position;
         }
 
-        public void run()
-        {
-            try
-            {
+        public void run() {
+            try {
                 performIntersection(position);
-            }
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    protected void performIntersection(Position position) throws InterruptedException
-    {
-        try
-        {
+    protected void performIntersection(Position position) throws InterruptedException {
+        try {
             this.doPerformIntersection(position);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (this.numProcessedPositions.addAndGet(1) >= this.numPositions)
+        if (this.numProcessedPositions.addAndGet(1) >= this.numPositions) {
             this.endTime = System.currentTimeMillis();
+        }
     }
 }

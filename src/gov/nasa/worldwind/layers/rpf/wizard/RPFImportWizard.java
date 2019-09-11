@@ -16,27 +16,23 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: RPFImportWizard.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class RPFImportWizard extends Wizard
-{
-    public RPFImportWizard()
-    {
+public class RPFImportWizard extends Wizard {
+
+    public RPFImportWizard() {
         registerPanels();
     }
 
-    public RPFImportWizard(Dialog owner)
-    {
+    public RPFImportWizard(Dialog owner) {
         super(owner);
         registerPanels();
     }
 
-    public RPFImportWizard(Frame owner)
-    {
+    public RPFImportWizard(Frame owner) {
         super(owner);
         registerPanels();
     }
-    
-    private void registerPanels()
-    {
+
+    private void registerPanels() {
         // Step 1: Choose where to import from.
         WizardPanelDescriptor wpd = new FileChooserPanelDescriptor();
         registerWizardPanel(FileChooserPanelDescriptor.IDENTIFIER, wpd);

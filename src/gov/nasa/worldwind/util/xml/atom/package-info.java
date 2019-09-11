@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 /**
  * <p>
  * Provides classes for parsing the Atom namespace.</p>

@@ -17,63 +17,54 @@ import java.net.URL;
  * @author dcollins
  * @version $Id: AboutDialog.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class AboutDialog
-{
+public class AboutDialog {
+
     private Object content;
     private String contentType;
     private Dimension preferredSize;
 
-    public AboutDialog()
-    {
+    public AboutDialog() {
     }
 
-    public Object getContent()
-    {
+    public Object getContent() {
         return this.content;
     }
 
-    public void setContent(Object content)
-    {
+    public void setContent(Object content) {
         this.content = content;
     }
 
-    public String getContentType()
-    {
+    public String getContentType() {
         return this.contentType;
     }
 
-    public void setContentType(String contentType)
-    {
+    public void setContentType(String contentType) {
         this.contentType = contentType;
     }
 
-    public Dimension getPreferredSize()
-    {
+    public Dimension getPreferredSize() {
         return this.preferredSize;
     }
 
-    public void setPreferredSize(Dimension preferredSize)
-    {
+    public void setPreferredSize(Dimension preferredSize) {
         this.preferredSize = preferredSize;
     }
 
-    public void showDialog(Component parentComponent)
-    {
+    public void showDialog(Component parentComponent) {
         Component component = makeContentComponent();
         showContentDialog(parentComponent, component);
     }
 
-    private static void showContentDialog(Component parentComponent, Component component)
-    {
-        try
-        {
+    private static void showContentDialog(Component parentComponent, Component component) {
+        try {
             final JDialog dialog;
-            if (parentComponent instanceof Dialog)
+            if (parentComponent instanceof Dialog) {
                 dialog = new JDialog((Dialog) parentComponent);
-            else if (parentComponent instanceof Frame)
+            } else if (parentComponent instanceof Frame) {
                 dialog = new JDialog((Frame) parentComponent);
-            else
+            } else {
                 dialog = new JDialog();
+            }
 
             component.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent event) {
@@ -90,37 +81,31 @@ public class AboutDialog
             dialog.pack();
             SAR2.centerWindowInDesktop(dialog);
             dialog.setVisible(true);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = "Exception while displaying content dialog";
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
-    private Component makeContentComponent()
-    {
+    private Component makeContentComponent() {
         JEditorPane editor = null;
-        try
-        {
-            if (this.content != null)
-            {
+        try {
+            if (this.content != null) {
                 URL url = getClass().getResource(this.content.toString());
                 editor = new JEditorPane();
-                if (this.contentType != null)
+                if (this.contentType != null) {
                     editor.setContentType(this.contentType);
+                }
                 editor.setPage(url);
             }
 
-            if (editor != null)
-            {
+            if (editor != null) {
                 editor.setEditable(false);
-                if (this.preferredSize != null)
+                if (this.preferredSize != null) {
                     editor.setPreferredSize(this.preferredSize);
+                }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = "Exception while fetching content";
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             editor = null;

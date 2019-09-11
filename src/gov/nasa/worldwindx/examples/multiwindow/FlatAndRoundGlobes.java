@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.multiwindow;
 
 import gov.nasa.worldwind.*;
@@ -40,12 +39,11 @@ import java.util.ArrayList;
  * @author tag
  * @version $Id: FlatAndRoundGlobes.java 2219 2014-08-11 21:39:44Z dcollins $
  */
-public class FlatAndRoundGlobes
-{
-    public FlatAndRoundGlobes()
-    {
+public class FlatAndRoundGlobes {
+
+    public FlatAndRoundGlobes() {
         LayerList layers = this.makeCommonLayers();
-        
+
         Model roundModel = this.makeModel(new Earth(), layers);
         Model flatModel = this.makeModel(new EarthFlat(), layers);
         ((EarthFlat) flatModel.getGlobe()).setProjection(new ProjectionSinusoidal());
@@ -64,8 +62,7 @@ public class FlatAndRoundGlobes
         flatFrame.setVisible(true);
     }
 
-    protected LayerList makeCommonLayers()
-    {
+    protected LayerList makeCommonLayers() {
         LayerList layerList = new LayerList();
 
         layerList.add(new BMNGOneImage());
@@ -82,8 +79,7 @@ public class FlatAndRoundGlobes
         return layerList;
     }
 
-    protected Model makeModel(Globe globe, LayerList layers)
-    {
+    protected Model makeModel(Globe globe, LayerList layers) {
         Model model = new BasicModel(globe, new LayerList(layers));
 
         // Add per-window layers
@@ -94,20 +90,18 @@ public class FlatAndRoundGlobes
         return model;
     }
 
-    protected void addViewControlLayer(WWFrame wwf)
-    {
+    protected void addViewControlLayer(WWFrame wwf) {
         ViewControlsLayer layer = new ViewControlsLayer();
         wwf.wwPanel.wwd.getModel().getLayers().add(layer);
         wwf.wwPanel.wwd.addSelectListener(new ViewControlsSelectListener(wwf.wwPanel.wwd, layer));
     }
 
-    protected static class WWFrame extends JFrame
-    {
+    protected static class WWFrame extends JFrame {
+
         protected Dimension canvasSize = new Dimension(800, 600);
         protected WWPanel wwPanel;
 
-        public WWFrame(WorldWindowGLCanvas shareWith, Model model, String displayName, String position)
-        {
+        public WWFrame(WorldWindowGLCanvas shareWith, Model model, String displayName, String position) {
             this.getContentPane().setLayout(new BorderLayout(5, 5));
             this.wwPanel = new WWPanel(shareWith, canvasSize, model);
             this.getContentPane().add(this.wwPanel, BorderLayout.CENTER);
@@ -121,13 +115,12 @@ public class FlatAndRoundGlobes
         }
     }
 
-    protected static class WWPanel extends JPanel
-    {
+    protected static class WWPanel extends JPanel {
+
         protected WorldWindowGLCanvas wwd;
         protected HighlightController highlightController;
 
-        public WWPanel(WorldWindowGLCanvas shareWith, Dimension size, Model model)
-        {
+        public WWPanel(WorldWindowGLCanvas shareWith, Dimension size, Model model) {
             this.wwd = shareWith != null ? new WorldWindowGLCanvas(shareWith) : new WorldWindowGLCanvas();
             this.wwd.setSize(size);
             this.wwd.setModel(model);
@@ -153,8 +146,7 @@ public class FlatAndRoundGlobes
     protected static final int ALTITUDE_MODE = WorldWind.RELATIVE_TO_GROUND;
     protected static final double LINE_WIDTH = 1d;
 
-    protected Layer makePathLayer()
-    {
+    protected Layer makePathLayer() {
         RenderableLayer layer = new RenderableLayer();
         layer.setName("Paths");
         this.makePaths(layer, new Position(START_LOCATION, PATH_HEIGHT), NUM_PATHS, PATH_LENGTH, NUM_POSITIONS);
@@ -162,12 +154,10 @@ public class FlatAndRoundGlobes
         return layer;
     }
 
-    protected void makePaths(RenderableLayer layer, Position origin, int numPaths, Angle length, int numPositions)
-    {
+    protected void makePaths(RenderableLayer layer, Position origin, int numPaths, Angle length, int numPositions) {
         double dAngle = 360d / numPaths;
 
-        for (int i = 0; i < numPaths; i++)
-        {
+        for (int i = 0; i < numPaths; i++) {
             Angle heading = Angle.fromDegrees(i * dAngle);
             layer.addRenderable(this.makePath(origin, heading, length, numPositions));
         }
@@ -175,13 +165,11 @@ public class FlatAndRoundGlobes
         System.out.printf("%d paths, each with %d positions\n", NUM_PATHS, NUM_POSITIONS);
     }
 
-    protected Path makePath(Position startPosition, Angle heading, Angle length, int numPositions)
-    {
+    protected Path makePath(Position startPosition, Angle heading, Angle length, int numPositions) {
         double dLength = length.radians / (numPositions - 1);
         java.util.List<Position> positions = new ArrayList<Position>(numPositions);
 
-        for (int i = 0; i < numPositions - 1; i++)
-        {
+        for (int i = 0; i < numPositions - 1; i++) {
             LatLon ll = Position.greatCircleEndPosition(startPosition, heading, Angle.fromRadians(i * dLength));
             positions.add(new Position(ll, PATH_HEIGHT));
         }
@@ -206,8 +194,7 @@ public class FlatAndRoundGlobes
         return path;
     }
 
-    protected Layer makePolygonLayer()
-    {
+    protected Layer makePolygonLayer() {
         RenderableLayer layer = new RenderableLayer();
         layer.setName("Polygons");
 
@@ -261,15 +248,14 @@ public class FlatAndRoundGlobes
         normalAttributes.setInteriorOpacity(1);
         pgon.setAttributes(normalAttributes);
         pgon.setHighlightAttributes(highlightAttributes);
-        float[] texCoords = new float[] {0, 0, 1, 0, 1, 1, 0, 1, 0, 0};
+        float[] texCoords = new float[]{0, 0, 1, 0, 1, 1, 0, 1, 0, 0};
         pgon.setTextureImageSource("images/32x32-icon-nasa.png", texCoords, 5);
         layer.addRenderable(pgon);
 
         return layer;
     }
 
-    protected Layer makeExtrudedPolygonLayer()
-    {
+    protected Layer makeExtrudedPolygonLayer() {
         RenderableLayer layer = new RenderableLayer();
         layer.setName("Extruded Polygons");
 
@@ -330,17 +316,15 @@ public class FlatAndRoundGlobes
         return layer;
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         String appName = "WorldWind MultiGlobe";
 
-        if (Configuration.isMacOS())
+        if (Configuration.isMacOS()) {
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", appName);
+        }
 
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 new FlatAndRoundGlobes();
             }
         });

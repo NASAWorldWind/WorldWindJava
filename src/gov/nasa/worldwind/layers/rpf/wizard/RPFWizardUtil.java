@@ -16,18 +16,16 @@ import java.util.List;
  * @author dcollins
  * @version $Id: RPFWizardUtil.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class RPFWizardUtil
-{
+public class RPFWizardUtil {
+
     public static final String SELECTED_FILE = "selectedFile";
     public static final String FILE_LIST = "fileList";
     public static final String IS_FILE_LIST_CURRENT = "isFileListCurrent";
     public static final String FILE_SET_LIST = "fileSetList";
     public static final String LAYER_LIST = "layerList";
 
-    public static File getSelectedFile(WizardProperties properties)
-    {
-        if (properties == null)
-        {
+    public static File getSelectedFile(WizardProperties properties) {
+        if (properties == null) {
             String message = "WizardProperties is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -35,15 +33,14 @@ public class RPFWizardUtil
 
         File file = null;
         Object value = properties.getProperty(SELECTED_FILE);
-        if (value != null && value instanceof File)
+        if (value != null && value instanceof File) {
             file = (File) value;
+        }
         return file;
     }
 
-    public static void setSelectedFile(WizardProperties properties, File file)
-    {
-        if (properties == null)
-        {
+    public static void setSelectedFile(WizardProperties properties, File file) {
+        if (properties == null) {
             String message = "WizardProperties is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -53,10 +50,8 @@ public class RPFWizardUtil
     }
 
     @SuppressWarnings({"unchecked"})
-    public static List<File> getFileList(WizardProperties properties)
-    {
-        if (properties == null)
-        {
+    public static List<File> getFileList(WizardProperties properties) {
+        if (properties == null) {
             String message = "WizardProperties is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -64,15 +59,14 @@ public class RPFWizardUtil
 
         List<File> fileList = null;
         Object value = properties.getProperty(FILE_LIST);
-        if (value != null && value instanceof List)
+        if (value != null && value instanceof List) {
             fileList = (List<File>) value;
+        }
         return fileList;
     }
 
-    public static void setFileList(WizardProperties properties, List<File> fileList)
-    {
-        if (properties == null)
-        {
+    public static void setFileList(WizardProperties properties, List<File> fileList) {
+        if (properties == null) {
             String message = "WizardProperties is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -81,10 +75,8 @@ public class RPFWizardUtil
         properties.setProperty(FILE_LIST, fileList);
     }
 
-    public static boolean isFileListCurrent(WizardProperties properties)
-    {
-        if (properties == null)
-        {
+    public static boolean isFileListCurrent(WizardProperties properties) {
+        if (properties == null) {
             String message = "WizardProperties is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -92,15 +84,14 @@ public class RPFWizardUtil
 
         boolean isFileListCurrent = false;
         Boolean value = properties.getBooleanProperty(IS_FILE_LIST_CURRENT);
-        if (value != null)
+        if (value != null) {
             isFileListCurrent = value;
+        }
         return isFileListCurrent;
     }
 
-    public static void setFileListCurrent(WizardProperties properties, boolean current)
-    {
-        if (properties == null)
-        {
+    public static void setFileListCurrent(WizardProperties properties, boolean current) {
+        if (properties == null) {
             String message = "WizardProperties is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -110,10 +101,8 @@ public class RPFWizardUtil
     }
 
     @SuppressWarnings({"unchecked"})
-    public static List<FileSet> getFileSetList(WizardProperties properties)
-    {
-        if (properties == null)
-        {
+    public static List<FileSet> getFileSetList(WizardProperties properties) {
+        if (properties == null) {
             String message = "WizardProperties is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -121,15 +110,14 @@ public class RPFWizardUtil
 
         List<FileSet> fileSets = null;
         Object value = properties.getProperty(FILE_SET_LIST);
-        if (value != null && value instanceof List)
+        if (value != null && value instanceof List) {
             fileSets = (List<FileSet>) value;
+        }
         return fileSets;
     }
 
-    public static void setFileSetList(WizardProperties properties, List<FileSet> fileSetList)
-    {
-        if (properties == null)
-        {
+    public static void setFileSetList(WizardProperties properties, List<FileSet> fileSetList) {
+        if (properties == null) {
             String message = "WizardProperties is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -139,10 +127,8 @@ public class RPFWizardUtil
     }
 
     @SuppressWarnings({"unchecked"})
-    public static List<Layer> getLayerList(WizardProperties properties)
-    {
-        if (properties == null)
-        {
+    public static List<Layer> getLayerList(WizardProperties properties) {
+        if (properties == null) {
             String message = "WizardProperties is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -150,15 +136,14 @@ public class RPFWizardUtil
 
         List<Layer> fileSets = null;
         Object value = properties.getProperty(LAYER_LIST);
-        if (value != null && value instanceof List)
+        if (value != null && value instanceof List) {
             fileSets = (List<Layer>) value;
+        }
         return fileSets;
     }
 
-    public static void setLayerList(WizardProperties properties, List<Layer> layerList)
-    {
-        if (properties == null)
-        {
+    public static void setLayerList(WizardProperties properties, List<Layer> layerList) {
+        if (properties == null) {
             String message = "WizardProperties is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -167,10 +152,8 @@ public class RPFWizardUtil
         properties.setProperty(LAYER_LIST, layerList);
     }
 
-    public static String makeLarger(String text)
-    {
-        if (text == null)
-        {
+    public static String makeLarger(String text) {
+        if (text == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -185,10 +168,8 @@ public class RPFWizardUtil
         return sb.toString();
     }
 
-    public static String makeSmaller(String text)
-    {
-        if (text == null)
-        {
+    public static String makeSmaller(String text) {
+        if (text == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -203,10 +184,8 @@ public class RPFWizardUtil
         return sb.toString();
     }
 
-    public static String makeBold(String text)
-    {
-        if (text == null)
-        {
+    public static String makeBold(String text) {
+        if (text == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);

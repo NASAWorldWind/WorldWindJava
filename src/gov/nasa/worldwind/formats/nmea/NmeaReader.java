@@ -16,39 +16,34 @@ import java.util.Iterator;
  * @author Tom Gaskins
  * @version $Id: NmeaReader.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class NmeaReader implements Track, TrackSegment
-{
+public class NmeaReader implements Track, TrackSegment {
+
     private java.util.List<Track> tracks = new java.util.ArrayList<Track>();
-    private java.util.List<TrackSegment> segments =
-        new java.util.ArrayList<TrackSegment>();
-    private java.util.List<TrackPoint> points =
-        new java.util.ArrayList<TrackPoint>();
+    private java.util.List<TrackSegment> segments
+            = new java.util.ArrayList<TrackSegment>();
+    private java.util.List<TrackPoint> points
+            = new java.util.ArrayList<TrackPoint>();
     private String name;
     private int sentenceNumber = 0;
 
-    public NmeaReader()
-    {
+    public NmeaReader() {
         this.tracks.add(this);
         this.segments.add(this);
     }
 
-    public java.util.List<TrackSegment> getSegments()
-    {
+    public java.util.List<TrackSegment> getSegments() {
         return this.segments;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public int getNumPoints()
-    {
+    public int getNumPoints() {
         return this.points.size();
     }
 
-    public java.util.List<TrackPoint> getPoints()
-    {
+    public java.util.List<TrackPoint> getPoints() {
         return this.points;
     }
 
@@ -57,10 +52,8 @@ public class NmeaReader implements Track, TrackSegment
      * @throws IllegalArgumentException if <code>path</code> is null
      * @throws java.io.IOException if a read error occurs.
      */
-    public void readFile(String path) throws java.io.IOException
-    {
-        if (path == null)
-        {
+    public void readFile(String path) throws java.io.IOException {
+        if (path == null) {
             String msg = Logging.getMessage("nullValue.PathIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -69,8 +62,7 @@ public class NmeaReader implements Track, TrackSegment
         this.name = path;
 
         java.io.File file = new java.io.File(path);
-        if (!file.exists())
-        {
+        if (!file.exists()) {
             String msg = Logging.getMessage("generic.FileNotFound", path);
             Logging.logger().severe(msg);
             throw new java.io.FileNotFoundException(path);
@@ -79,8 +71,9 @@ public class NmeaReader implements Track, TrackSegment
         java.io.FileInputStream fis = new java.io.FileInputStream(file);
         this.doReadStream(fis);
 
-        if (this.tracks.isEmpty() || this.tracks.get(0).getNumPoints() == 0)
+        if (this.tracks.isEmpty() || this.tracks.get(0).getNumPoints() == 0) {
             throw new IllegalArgumentException(Logging.getMessage("formats.notNMEA", path));
+        }
 //        java.nio.ByteBuffer buffer = this.doReadFile(fis);
 //        this.parseBuffer(buffer);
     }
@@ -91,10 +84,8 @@ public class NmeaReader implements Track, TrackSegment
      * @throws IllegalArgumentException if <code>stream</code> is null
      * @throws java.io.IOException if a read error occurs.
      */
-    public void readStream(java.io.InputStream stream, String name) throws java.io.IOException
-    {
-        if (stream == null)
-        {
+    public void readStream(java.io.InputStream stream, String name) throws java.io.IOException {
+        if (stream == null) {
             String msg = Logging.getMessage("nullValue.InputStreamIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -104,56 +95,42 @@ public class NmeaReader implements Track, TrackSegment
         this.doReadStream(stream);
     }
 
-    public java.util.List<Track> getTracks()
-    {
+    public java.util.List<Track> getTracks() {
         return this.tracks;
     }
 
-    public Iterator<Position> getTrackPositionIterator()
-    {
-        return new Iterator<Position>()
-        {
+    public Iterator<Position> getTrackPositionIterator() {
+        return new Iterator<Position>() {
             private TrackPointIterator trackPoints = new TrackPointIteratorImpl(NmeaReader.this.tracks);
 
-            public boolean hasNext()
-            {
+            public boolean hasNext() {
                 return this.trackPoints.hasNext();
             }
 
-            public Position next()
-            {
+            public Position next() {
                 return this.trackPoints.next().getPosition();
             }
 
-            public void remove()
-            {
+            public void remove() {
                 this.trackPoints.remove();
             }
         };
     }
 
-    private void doReadStream(java.io.InputStream stream)
-    {
+    private void doReadStream(java.io.InputStream stream) {
         String sentence;
 
-        try
-        {
-            do
-            {
+        try {
+            do {
                 sentence = this.readSentence(stream);
-                if (sentence != null)
-                {
+                if (sentence != null) {
                     ++this.sentenceNumber;
                     this.parseSentence(sentence);
                 }
             } while (sentence != null);
-        }
-        catch (java.io.IOException e)
-        {
+        } catch (java.io.IOException e) {
             e.printStackTrace();
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -199,69 +176,63 @@ public class NmeaReader implements Track, TrackSegment
 //        }
 //    }
 
-    private String readSentence(java.io.InputStream stream) throws java.io.IOException, InterruptedException
-    {
+    private String readSentence(java.io.InputStream stream) throws java.io.IOException, InterruptedException {
         StringBuilder sb = null;
         boolean endOfSentence = false;
 
-        while (!endOfSentence && !Thread.currentThread().isInterrupted())
-        {
+        while (!endOfSentence && !Thread.currentThread().isInterrupted()) {
             int b = stream.read();
 
-            if (b < 0)
+            if (b < 0) {
                 return null;
-            else if (b == 0)
+            } else if (b == 0) {
                 Thread.sleep(200);
-            else if (b == '$')
+            } else if (b == '$') {
                 sb = new StringBuilder(100);
-            else if (b == '\r')
+            } else if (b == '\r') {
                 endOfSentence = true;
-            else if (sb != null)
+            } else if (sb != null) {
                 sb.append((char) b);
+            }
         }
 
         // TODO: check checksum
         return sb != null ? sb.toString() : null;
     }
 
-    private String readSentence(java.nio.ByteBuffer buffer)
-    {
+    private String readSentence(java.nio.ByteBuffer buffer) {
         StringBuilder sb = new StringBuilder(100);
         boolean endOfSentence = false;
-        while (!endOfSentence)
-        {
+        while (!endOfSentence) {
             byte b = buffer.get();
-            if (b == '\r')
+            if (b == '\r') {
                 endOfSentence = true;
-            else
+            } else {
                 sb.append((char) b);
+            }
         }
 
         return sb.toString();
     }
 
-    private void parseSentence(String sentence)
-    {
+    private void parseSentence(String sentence) {
         String[] words = sentence.split("[,*]");
 
-        if (words[0].equalsIgnoreCase("GPGGA"))
+        if (words[0].equalsIgnoreCase("GPGGA")) {
             this.doTrackPoint(words);
+        }
 //        else if (words[0].equalsIgnoreCase("GPRMC"))
 //            this.doTrackPoint(words);
     }
 
-    private void doTrackPoint(String[] words)
-    {
-        try
-        {
+    private void doTrackPoint(String[] words) {
+        try {
             gov.nasa.worldwind.formats.nmea.NmeaTrackPoint point = new gov.nasa.worldwind.formats.nmea.NmeaTrackPoint(
-                words);
+                    words);
             this.points.add(point);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.printf("Exception %s at sentence number %d for %s\n",
-                e.getMessage(), this.sentenceNumber, this.name);
+                    e.getMessage(), this.sentenceNumber, this.name);
         }
     }
 }

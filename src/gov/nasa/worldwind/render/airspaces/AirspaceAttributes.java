@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render.airspaces;
 
 import gov.nasa.worldwind.render.*;
@@ -18,8 +17,8 @@ import gov.nasa.worldwind.render.*;
  * @author dcollins
  * @version $Id: AirspaceAttributes.java 2222 2014-08-13 21:25:29Z dcollins $
  */
-public interface AirspaceAttributes extends ShapeAttributes
-{
+public interface AirspaceAttributes extends ShapeAttributes {
+
     /**
      * Get the <code>Material</code> used to draw the shape interior or volume. This method is deprecated, and should be
      * replaced with usage of {@link #getInteriorMaterial()}.
@@ -45,7 +44,7 @@ public interface AirspaceAttributes extends ShapeAttributes
      * #getInteriorOpacity()}.
      *
      * @return the shape's opacity in the range [0, 1], where 0 indicates full transparency and 1 indicates full
-     *         opacity.
+     * opacity.
      *
      * @deprecated Use {@link #getInteriorOpacity()} instead.
      */
@@ -56,7 +55,7 @@ public interface AirspaceAttributes extends ShapeAttributes
      * #setInteriorOpacity(double)}.
      *
      * @param opacity the shape's opacity in the range [0, 1], where 0 indicates full transparency and 1 indicates full
-     *                opacity.
+     * opacity.
      *
      * @deprecated Use {@link #setInteriorOpacity(double)} instead.
      */
@@ -67,7 +66,7 @@ public interface AirspaceAttributes extends ShapeAttributes
      * OpenGL material state with the interior material and the interior opacity. Otherwise, this sets the current
      * OpenGL color state to the interior material's diffuse color.
      *
-     * @param dc             the current drawing context.
+     * @param dc the current drawing context.
      * @param enableMaterial true to set OpenGL material state, false to set OpenGL color state.
      *
      * @throws IllegalArgumentException if the drawing context is null.
@@ -80,7 +79,7 @@ public interface AirspaceAttributes extends ShapeAttributes
      * OpenGL material state with the outline material and the outline opacity. Otherwise, this sets the current OpenGL
      * color state to the outline material's diffuse color.
      *
-     * @param dc             the current drawing context.
+     * @param dc the current drawing context.
      * @param enableMaterial true to set OpenGL material state, false to set OpenGL color state.
      *
      * @throws IllegalArgumentException if the drawing context is null.

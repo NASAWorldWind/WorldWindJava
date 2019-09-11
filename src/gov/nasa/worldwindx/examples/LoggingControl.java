@@ -13,19 +13,17 @@ import java.util.logging.*;
  * @author tag
  * @version $Id: LoggingControl.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class LoggingControl extends ApplicationTemplate
-{
+public class LoggingControl extends ApplicationTemplate {
+
     // Use the standard WorldWind application template
-    private static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+    private static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false); // status bar, layer panel, not statistics panel
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Get the WorldWind logger by name.
         Logger logger = Logger.getLogger("gov.nasa.worldwind");
 
@@ -46,10 +44,9 @@ public class LoggingControl extends ApplicationTemplate
         ApplicationTemplate.start("WorldWind Logging Control", AppFrame.class);
     }
 
-    private static class MyHandler extends ConsoleHandler
-    {
-        public void publish(LogRecord logRecord)
-        {
+    private static class MyHandler extends ConsoleHandler {
+
+        public void publish(LogRecord logRecord) {
             // Just redirect the record to ConsoleHandler for printing.
             System.out.printf("Hey, this came from Me!\n");
             super.publish(logRecord);

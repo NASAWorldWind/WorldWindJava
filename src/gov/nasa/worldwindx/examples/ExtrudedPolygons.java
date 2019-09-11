@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWind;
@@ -20,12 +19,11 @@ import java.util.ArrayList;
  * @author tag
  * @version $Id: ExtrudedPolygons.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class ExtrudedPolygons extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class ExtrudedPolygons extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             // Add a dragger to enable shape dragging
@@ -92,8 +90,7 @@ public class ExtrudedPolygons extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Extruded Polygons", AppFrame.class);
     }
 }

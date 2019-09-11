@@ -28,30 +28,28 @@ import java.util.ArrayList;
  * @author tag
  * @version $Id: Shapes.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Shapes
-{
-    private static class Info
-    {
+public class Shapes {
+
+    private static class Info {
+
         private final Object object;
         private final String name;
 
-        public Info(String name, Object object)
-        {
+        public Info(String name, Object object) {
             this.object = object;
             this.name = name;
         }
     }
 
     @SuppressWarnings("unchecked")
-    protected static class AppFrame extends JFrame
-    {
+    protected static class AppFrame extends JFrame {
+
         private Dimension canvasSize = new Dimension(800, 600);
         private ApplicationTemplate.AppPanel wwjPanel;
         private RenderableLayer layer = new RenderableLayer();
         private TextRenderer textRenderer = new TextRenderer(java.awt.Font.decode("Arial-Plain-13"), true, false);
 
-        public AppFrame()
-        {
+        public AppFrame() {
             // Create the WorldWindow.
             this.wwjPanel = new ApplicationTemplate.AppPanel(this.canvasSize, true);
             this.wwjPanel.setPreferredSize(canvasSize);
@@ -85,15 +83,13 @@ public class Shapes
             this.setLocation(x, y);
             this.setResizable(true);
 
-            wwjPanel.getWwd().addRenderingListener(new RenderingListener()
-            {
-                public void stageChanged(RenderingEvent event)
-                {
-                    if (!event.getStage().equals(RenderingEvent.BEFORE_BUFFER_SWAP))
+            wwjPanel.getWwd().addRenderingListener(new RenderingListener() {
+                public void stageChanged(RenderingEvent event) {
+                    if (!event.getStage().equals(RenderingEvent.BEFORE_BUFFER_SWAP)) {
                         return;
+                    }
 
-                    if (currentShape instanceof Polyline)
-                    {
+                    if (currentShape instanceof Polyline) {
                         Polyline p = (Polyline) currentShape;
                         String length = Double.toString(p.getLength());
                         textRenderer.beginRendering(wwjPanel.getWidth(), wwjPanel.getHeight());
@@ -131,91 +127,82 @@ public class Shapes
         private ArrayList<JComponent> onTerrainOnlyItems = new ArrayList<JComponent>();
         private ArrayList<JComponent> offTerrainOnlyItems = new ArrayList<JComponent>();
 
-        private void update()
-        {
-            for (JComponent c : onTerrainOnlyItems)
-            {
+        private void update() {
+            for (JComponent c : onTerrainOnlyItems) {
                 c.setEnabled(currentFollowTerrain);
             }
 
-            for (JComponent c : offTerrainOnlyItems)
-            {
+            for (JComponent c : offTerrainOnlyItems) {
                 c.setEnabled(!currentFollowTerrain);
             }
 
-            if (this.currentShape instanceof SurfaceShape)
-            {
+            if (this.currentShape instanceof SurfaceShape) {
                 SurfaceShape shape = (SurfaceShape) currentShape;
                 ShapeAttributes attr = shape.getAttributes();
 
-                if (attr == null)
+                if (attr == null) {
                     attr = new BasicShapeAttributes();
+                }
 
-                if (!currentBorderStyle.equals("None"))
-                {
+                if (!currentBorderStyle.equals("None")) {
                     float alpha = currentBorderOpacity >= 10 ? 1f : currentBorderOpacity <= 0 ? 0f
-                        : currentBorderOpacity / 10f;
+                            : currentBorderOpacity / 10f;
                     Color color = null;
-                    if (currentBorderColor.equals("Yellow"))
+                    if (currentBorderColor.equals("Yellow")) {
                         color = new Color(1f, 1f, 0f);
-                    else if (currentBorderColor.equals("Red"))
+                    } else if (currentBorderColor.equals("Red")) {
                         color = new Color(1f, 0f, 0f);
-                    else if (currentBorderColor.equals("Green"))
+                    } else if (currentBorderColor.equals("Green")) {
                         color = new Color(0f, 1f, 0f);
-                    else if (currentBorderColor.equals("Blue"))
+                    } else if (currentBorderColor.equals("Blue")) {
                         color = new Color(0f, 0f, 1f);
+                    }
 
                     attr.setDrawOutline(true);
                     attr.setOutlineMaterial(new Material(color));
                     attr.setOutlineOpacity(alpha);
                     attr.setOutlineWidth(currentBorderWidth);
-                }
-                else
-                {
+                } else {
                     attr.setDrawOutline(false);
                 }
 
-                if (!currentInteriorStyle.equals("None"))
-                {
+                if (!currentInteriorStyle.equals("None")) {
                     float alpha = currentInteriorOpacity >= 10 ? 1f : currentInteriorOpacity <= 0 ? 0f
-                        : currentInteriorOpacity / 10f;
+                            : currentInteriorOpacity / 10f;
                     Color color = null;
-                    if (currentInteriorColor.equals("Yellow"))
+                    if (currentInteriorColor.equals("Yellow")) {
                         color = new Color(1f, 1f, 0f);
-                    else if (currentInteriorColor.equals("Red"))
+                    } else if (currentInteriorColor.equals("Red")) {
                         color = new Color(1f, 0f, 0f);
-                    else if (currentInteriorColor.equals("Green"))
+                    } else if (currentInteriorColor.equals("Green")) {
                         color = new Color(0f, 1f, 0f);
-                    else if (currentInteriorColor.equals("Blue"))
+                    } else if (currentInteriorColor.equals("Blue")) {
                         color = new Color(0f, 0f, 1f);
+                    }
 
                     attr.setInteriorMaterial(new Material(color));
                     attr.setInteriorOpacity(alpha);
                     attr.setDrawInterior(true);
-                }
-                else
-                {
+                } else {
                     attr.setDrawInterior(false);
                 }
 
                 shape.setAttributes(attr);
-            }
-            else
-            {
+            } else {
                 float alpha = currentPathOpacity >= 10 ? 1f : currentPathOpacity <= 0 ? 0f
-                    : currentPathOpacity / 10f;
+                        : currentPathOpacity / 10f;
                 Color color = null;
-                if (currentPathColor.equals("Yellow"))
+                if (currentPathColor.equals("Yellow")) {
                     color = new Color(1f, 1f, 0f, alpha);
-                else if (currentPathColor.equals("Red"))
+                } else if (currentPathColor.equals("Red")) {
                     color = new Color(1f, 0f, 0f, alpha);
-                else if (currentPathColor.equals("Green"))
+                } else if (currentPathColor.equals("Green")) {
                     color = new Color(0f, 1f, 0f, alpha);
-                else if (currentPathColor.equals("Blue"))
+                } else if (currentPathColor.equals("Blue")) {
                     color = new Color(0f, 0f, 1f, alpha);
+                }
 
-                if (currentShape instanceof Polyline)
-                {
+                if (currentShape instanceof Polyline) {
                     Polyline pl = (Polyline) currentShape;
                     pl.setColor(color);
                     pl.setLineWidth(currentPathWidth);
@@ -223,34 +210,32 @@ public class Shapes
                     pl.setTerrainConformance(currentTerrainConformance);
                     pl.setNumSubsegments(currentNumSubsegments);
 
-                    if (currentPathType.equalsIgnoreCase("linear"))
+                    if (currentPathType.equalsIgnoreCase("linear")) {
                         pl.setPathType(Polyline.LINEAR);
-                    else if (currentPathType.equalsIgnoreCase("rhumb line"))
+                    } else if (currentPathType.equalsIgnoreCase("rhumb line")) {
                         pl.setPathType(Polyline.RHUMB_LINE);
-                    else
+                    } else {
                         pl.setPathType(Polyline.GREAT_CIRCLE);
+                    }
 
                     pl.setOffset(currentOffset);
 
-                    if (currentPathStyle.equals("Dash"))
-                    {
+                    if (currentPathStyle.equals("Dash")) {
                         pl.setStippleFactor(5);
                         pl.setStipplePattern((short) 0xAAAA);
-                    }
-                    else
-                    {
+                    } else {
                         pl.setStippleFactor(0); // solid
                     }
                 }
             }
             this.layer.removeAllRenderables();
-            if (this.currentShape != null)
+            if (this.currentShape != null) {
                 this.layer.addRenderable(this.currentShape);
+            }
             this.wwjPanel.getWwd().redraw();
         }
 
-        private Info[] buildSurfaceShapes()
-        {
+        private Info[] buildSurfaceShapes() {
             LatLon position = new LatLon(Angle.fromDegrees(38), Angle.fromDegrees(-105));
 
             ArrayList<LatLon> surfaceLinePositions = new ArrayList<LatLon>();
@@ -259,25 +244,21 @@ public class Shapes
 
 //            surfaceLinePositions.add(new LatLon(Angle.fromDegrees(0), Angle.fromDegrees(-150)));
 //            surfaceLinePositions.add(new LatLon(Angle.fromDegrees(60), Angle.fromDegrees(0)));
-
             surfaceLinePositions.add(position);
             surfaceLinePositions.add(LatLon.fromDegrees(39, -104));
             surfaceLinePositions.add(LatLon.fromDegrees(39, -105));
             surfaceLinePositions.add(position);
 
-            return new Info[]
-                {
-                    new Info("Circle", new SurfaceCircle(position, 100e3)),
-                    new Info("Ellipse", new SurfaceEllipse(position, 100e3, 90e3, Angle.ZERO)),
-                    new Info("Square", new SurfaceSquare(position, 100e3)),
-                    new Info("Quad", new SurfaceQuad(position, 100e3, 60e3, Angle.ZERO)),
-                    new Info("Sector", new SurfaceSector(Sector.fromDegrees(38, 40, -105, -103))),
-                    new Info("Polygon", new SurfacePolygon(surfaceLinePositions)),
-                };
+            return new Info[]{
+                new Info("Circle", new SurfaceCircle(position, 100e3)),
+                new Info("Ellipse", new SurfaceEllipse(position, 100e3, 90e3, Angle.ZERO)),
+                new Info("Square", new SurfaceSquare(position, 100e3)),
+                new Info("Quad", new SurfaceQuad(position, 100e3, 60e3, Angle.ZERO)),
+                new Info("Sector", new SurfaceSector(Sector.fromDegrees(38, 40, -105, -103))),
+                new Info("Polygon", new SurfacePolygon(surfaceLinePositions)),};
         }
 
-        private Info[] buildFreeShapes()
-        {
+        private Info[] buildFreeShapes() {
             double elevation = 10e3;
             ArrayList<Position> positions = new ArrayList<Position>();
             positions.add(new Position(Angle.fromDegrees(37.8484), Angle.fromDegrees(-119.9754), elevation));
@@ -290,8 +271,7 @@ public class Shapes
             positions2.add(new Position(Angle.fromDegrees(50), Angle.fromDegrees(0), elevation));
 
             ArrayList<Position> positions3 = new ArrayList<Position>();
-            for (double lat = 42, lon = -100; lat <= 45; lat += .1, lon += .1)
-            {
+            for (double lat = 42, lon = -100; lat <= 45; lat += .1, lon += .1) {
                 positions3.add(new Position(Angle.fromDegrees(lat), Angle.fromDegrees(lon), elevation));
             }
 
@@ -300,68 +280,61 @@ public class Shapes
             positions4.add(new Position(Angle.fromDegrees(-90), Angle.fromDegrees(-110), elevation));
 
             ArrayList<Position> positions5 = new ArrayList<Position>();
-            for (int i = 0; i < 100; i++)
-            {
+            for (int i = 0; i < 100; i++) {
                 positions5.add(Position.fromDegrees(38.0 + i * 0.0001, 30.0 + i * 0.0001, 1000.0 + i * 5.0));
             }
 
             @SuppressWarnings({"UnnecessaryLocalVariable"})
-            Info[] infos = new Info[]
-                {
-                    new Info("Short Path", new Polyline(positions)),
-                    new Info("Long Path", new Polyline(positions2)),
-                    new Info("Incremental Path", new Polyline(positions3)),
-                    new Info("Vertical Path", new Polyline(positions4)),
-                    new Info("Small-segment Path", new Polyline(positions5)),
-                    new Info("Quad", new Quadrilateral(Sector.fromDegrees(38, 40, -104, -105), elevation)),
-                    new Info("None", null)
-                };
+            Info[] infos = new Info[]{
+                new Info("Short Path", new Polyline(positions)),
+                new Info("Long Path", new Polyline(positions2)),
+                new Info("Incremental Path", new Polyline(positions3)),
+                new Info("Vertical Path", new Polyline(positions4)),
+                new Info("Small-segment Path", new Polyline(positions5)),
+                new Info("Quad", new Quadrilateral(Sector.fromDegrees(38, 40, -104, -105), elevation)),
+                new Info("None", null)
+            };
 
             return infos;
         }
 
-        private JPanel makeShapeSelectionPanel()
-        {
+        private JPanel makeShapeSelectionPanel() {
             final Info[] surfaceShapeInfos = this.buildSurfaceShapes();
             GridLayout layout = new GridLayout(surfaceShapeInfos.length, 1);
             JPanel ssPanel = new JPanel(layout);
             ButtonGroup group = new ButtonGroup();
-            for (final Info info : surfaceShapeInfos)
-            {
+            for (final Info info : surfaceShapeInfos) {
                 JRadioButton b = new JRadioButton(info.name);
-                b.addActionListener(new ActionListener()
-                {
-                    public void actionPerformed(ActionEvent actionEvent)
-                    {
+                b.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent actionEvent) {
                         currentShape = (Renderable) info.object;
                         update();
                     }
                 });
                 group.add(b);
                 ssPanel.add(b);
-                if (info.name.equalsIgnoreCase("none"))
+                if (info.name.equalsIgnoreCase("none")) {
                     b.setSelected(true);
+                }
             }
             ssPanel.setBorder(this.createTitleBorder("Surface Shapes"));
 
             final Info[] freeShapeInfos = this.buildFreeShapes();
             layout = new GridLayout(freeShapeInfos.length, 1);
             JPanel fsPanel = new JPanel(layout);
-            for (final Info info : freeShapeInfos)
-            {
+            for (final Info info : freeShapeInfos) {
                 JRadioButton b = new JRadioButton(info.name);
-                b.addActionListener(new ActionListener()
-                {
-                    public void actionPerformed(ActionEvent actionEvent)
-                    {
+                b.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent actionEvent) {
                         currentShape = (Renderable) info.object;
                         update();
                     }
                 });
                 group.add(b);
                 fsPanel.add(b);
-                if (info.name.equalsIgnoreCase("none"))
+                if (info.name.equalsIgnoreCase("none")) {
                     b.setSelected(true);
+                }
             }
             fsPanel.setBorder(this.createTitleBorder("Path Shapes"));
 
@@ -372,15 +345,13 @@ public class Shapes
             return shapesPanel;
         }
 
-        private Border createTitleBorder(String title)
-        {
+        private Border createTitleBorder(String title) {
             TitledBorder b = BorderFactory.createTitledBorder(title);
 //            b.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
             return new CompoundBorder(b, BorderFactory.createEmptyBorder(10, 10, 10, 10));
         }
 
-        private JPanel makeAttributesPanel()
-        {
+        private JPanel makeAttributesPanel() {
             JPanel panel = new JPanel(new GridLayout(1, 2, 8, 8));
             panel.add(this.makePathAttributesPanel());
             panel.add(this.makeInteriorAttributesPanel());
@@ -388,8 +359,7 @@ public class Shapes
             return panel;
         }
 
-        private JPanel makePathAttributesPanel()
-        {
+        private JPanel makePathAttributesPanel() {
             JPanel outerPanel = new JPanel(new BorderLayout(6, 6));
             outerPanel.setBorder(this.createTitleBorder("Path Attributes"));
 
@@ -402,10 +372,8 @@ public class Shapes
             namePanel.add(new JLabel("Follow Terrain"));
             JCheckBox ckb = new JCheckBox();
             ckb.setSelected(currentFollowTerrain);
-            ckb.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            ckb.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     currentFollowTerrain = ((JCheckBox) actionEvent.getSource()).isSelected();
                     update();
                 }
@@ -415,20 +383,17 @@ public class Shapes
             JLabel label;
 
             namePanel.add(label = new JLabel("Conformance"));
-            int[] values = new int[] {1, 2, 4, 8, 10, 15, 20, 30, 40, 50};
+            int[] values = new int[]{1, 2, 4, 8, 10, 15, 20, 30, 40, 50};
             String[] strings = new String[values.length];
-            for (int i = 0; i < values.length; i++)
-            {
+            for (int i = 0; i < values.length; i++) {
                 strings[i] = Integer.toString(values[i]) + " pixels";
             }
             JSpinner sp = new JSpinner(
-                new SpinnerListModel(strings));
+                    new SpinnerListModel(strings));
             onTerrainOnlyItems.add(label);
             onTerrainOnlyItems.add(sp);
-            sp.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent changeEvent)
-                {
+            sp.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent changeEvent) {
                     String v = (String) ((JSpinner) changeEvent.getSource()).getValue();
                     currentTerrainConformance = Integer.parseInt(v.substring(0, v.indexOf(" ")));
                     update();
@@ -438,13 +403,11 @@ public class Shapes
             valuePanel.add(sp);
 
             namePanel.add(label = new JLabel("Subsegments"));
-            sp = new JSpinner(new SpinnerListModel(new String[] {"1", "2", "5", "10", "20", "40", "50"}));
+            sp = new JSpinner(new SpinnerListModel(new String[]{"1", "2", "5", "10", "20", "40", "50"}));
             offTerrainOnlyItems.add(label);
             offTerrainOnlyItems.add(sp);
-            sp.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent changeEvent)
-                {
+            sp.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent changeEvent) {
                     String v = (String) ((JSpinner) changeEvent.getSource()).getValue();
                     currentNumSubsegments = Integer.parseInt(v);
                     update();
@@ -454,11 +417,9 @@ public class Shapes
             valuePanel.add(sp);
 
             namePanel.add(new JLabel("Type"));
-            final JComboBox cb = new JComboBox(new String[] {"Great Circle", "Linear", "Rhumb Line"});
-            cb.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            final JComboBox cb = new JComboBox(new String[]{"Great Circle", "Linear", "Rhumb Line"});
+            cb.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     currentPathType = (String) cb.getSelectedItem();
                     update();
                 }
@@ -467,11 +428,9 @@ public class Shapes
             valuePanel.add(cb);
 
             namePanel.add(new JLabel("Style"));
-            final JComboBox cb1 = new JComboBox(new String[] {"None", "Solid", "Dash"});
-            cb1.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            final JComboBox cb1 = new JComboBox(new String[]{"None", "Solid", "Dash"});
+            cb1.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     currentPathStyle = (String) cb1.getSelectedItem();
                     update();
                 }
@@ -481,10 +440,8 @@ public class Shapes
 
             namePanel.add(new JLabel("Width"));
             sp = new JSpinner(new SpinnerNumberModel(this.currentPathWidth, 1d, 10d, 1d));
-            sp.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent changeEvent)
-                {
+            sp.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent changeEvent) {
                     currentPathWidth = (Double) ((JSpinner) changeEvent.getSource()).getValue();
                     update();
                 }
@@ -493,12 +450,10 @@ public class Shapes
             valuePanel.add(sp);
 
             namePanel.add(new JLabel("Color"));
-            JComboBox cb2 = new JComboBox(new String[] {"Red", "Green", "Blue", "Yellow"});
+            JComboBox cb2 = new JComboBox(new String[]{"Red", "Green", "Blue", "Yellow"});
             cb2.setSelectedItem(currentPathColor);
-            cb2.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            cb2.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     currentPathColor = (String) ((JComboBox) actionEvent.getSource()).getSelectedItem();
                     update();
                 }
@@ -507,10 +462,8 @@ public class Shapes
 
             namePanel.add(new JLabel("Opacity"));
             sp = new JSpinner(new SpinnerNumberModel(this.currentPathOpacity, 0, 10, 1));
-            sp.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent changeEvent)
-                {
+            sp.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent changeEvent) {
                     currentPathOpacity = (Integer) ((JSpinner) changeEvent.getSource()).getValue();
                     update();
                 }
@@ -519,11 +472,9 @@ public class Shapes
 
             namePanel.add(new JLabel("Offset"));
             sp = new JSpinner(
-                new SpinnerListModel(new String[] {"0", "10", "100", "1000", "10000", "100000", "1000000"}));
-            sp.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent changeEvent)
-                {
+                    new SpinnerListModel(new String[]{"0", "10", "100", "1000", "10000", "100000", "1000000"}));
+            sp.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent changeEvent) {
                     currentOffset = Float.parseFloat((String) ((JSpinner) changeEvent.getSource()).getValue());
                     update();
                 }
@@ -537,8 +488,7 @@ public class Shapes
             return outerPanel;
         }
 
-        private JPanel makeInteriorAttributesPanel()
-        {
+        private JPanel makeInteriorAttributesPanel() {
             JPanel outerPanel = new JPanel(new BorderLayout(6, 6));
             outerPanel.setBorder(this.createTitleBorder("Surface Attributes"));
 
@@ -549,11 +499,9 @@ public class Shapes
             JPanel valuePanel = new JPanel(valueLayout);
 
             namePanel.add(new JLabel("Style"));
-            final JComboBox cb1 = new JComboBox(new String[] {"None", "Solid"});
-            cb1.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            final JComboBox cb1 = new JComboBox(new String[]{"None", "Solid"});
+            cb1.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     currentInteriorStyle = (String) cb1.getSelectedItem();
                     update();
                 }
@@ -563,10 +511,8 @@ public class Shapes
 
             namePanel.add(new JLabel("Opacity"));
             JSpinner sp = new JSpinner(new SpinnerNumberModel(this.currentBorderOpacity, 0, 10, 1));
-            sp.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent changeEvent)
-                {
+            sp.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent changeEvent) {
                     currentInteriorOpacity = (Integer) ((JSpinner) changeEvent.getSource()).getValue();
                     update();
                 }
@@ -574,12 +520,10 @@ public class Shapes
             valuePanel.add(sp);
 
             namePanel.add(new JLabel("Color"));
-            final JComboBox cb2 = new JComboBox(new String[] {"Red", "Green", "Blue", "Yellow"});
+            final JComboBox cb2 = new JComboBox(new String[]{"Red", "Green", "Blue", "Yellow"});
             cb2.setSelectedItem(currentInteriorColor);
-            cb2.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            cb2.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     currentInteriorColor = (String) ((JComboBox) actionEvent.getSource()).getSelectedItem();
                     update();
                 }
@@ -587,11 +531,9 @@ public class Shapes
             valuePanel.add(cb2);
 
             namePanel.add(new JLabel("Border"));
-            final JComboBox cb5 = new JComboBox(new String[] {"None", "Solid"});
-            cb5.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            final JComboBox cb5 = new JComboBox(new String[]{"None", "Solid"});
+            cb5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     currentBorderStyle = (String) cb5.getSelectedItem();
                     update();
                 }
@@ -601,10 +543,8 @@ public class Shapes
 
             namePanel.add(new JLabel("Border Width"));
             sp = new JSpinner(new SpinnerNumberModel(this.currentBorderWidth, 1d, 10d, 1d));
-            sp.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent changeEvent)
-                {
+            sp.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent changeEvent) {
                     currentBorderWidth = (Double) ((JSpinner) changeEvent.getSource()).getValue();
                     update();
                 }
@@ -613,12 +553,10 @@ public class Shapes
             valuePanel.add(sp);
 
             namePanel.add(new JLabel("Border Color"));
-            JComboBox cb4 = new JComboBox(new String[] {"Red", "Green", "Blue", "Yellow"});
+            JComboBox cb4 = new JComboBox(new String[]{"Red", "Green", "Blue", "Yellow"});
             cb4.setSelectedItem(currentBorderColor);
-            cb4.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            cb4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     currentBorderColor = (String) ((JComboBox) actionEvent.getSource()).getSelectedItem();
                     update();
                 }
@@ -627,10 +565,8 @@ public class Shapes
 
             namePanel.add(new JLabel("Border Opacity"));
             sp = new JSpinner(new SpinnerNumberModel(this.currentBorderOpacity, 0, 10, 1));
-            sp.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent changeEvent)
-                {
+            sp.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent changeEvent) {
                     currentBorderOpacity = (Integer) ((JSpinner) changeEvent.getSource()).getValue();
                     update();
                 }
@@ -643,57 +579,43 @@ public class Shapes
             return outerPanel;
         }
 
-        private void setupSelection()
-        {
-            this.wwjPanel.getWwd().addSelectListener(new SelectListener()
-            {
+        private void setupSelection() {
+            this.wwjPanel.getWwd().addSelectListener(new SelectListener() {
                 private WWIcon lastToolTipIcon = null;
                 private BasicDragger dragger = new BasicDragger(AppFrame.this.wwjPanel.getWwd());
 
-                public void selected(SelectEvent event)
-                {
+                public void selected(SelectEvent event) {
                     // Have hover selections show a picked icon's tool tip.
-                    if (event.getEventAction().equals(SelectEvent.HOVER))
-                    {
+                    if (event.getEventAction().equals(SelectEvent.HOVER)) {
                         // If a tool tip is already showing, undisplay it.
-                        if (lastToolTipIcon != null)
-                        {
+                        if (lastToolTipIcon != null) {
                             lastToolTipIcon.setShowToolTip(false);
                             this.lastToolTipIcon = null;
                             AppFrame.this.wwjPanel.getWwd().redraw();
                         }
 
                         // If there's a selection, we're not dragging, and the selection is an icon, show tool tip.
-                        if (event.hasObjects() && !this.dragger.isDragging())
-                        {
-                            if (event.getTopObject() instanceof WWIcon)
-                            {
+                        if (event.hasObjects() && !this.dragger.isDragging()) {
+                            if (event.getTopObject() instanceof WWIcon) {
                                 this.lastToolTipIcon = (WWIcon) event.getTopObject();
                                 lastToolTipIcon.setShowToolTip(true);
                                 AppFrame.this.wwjPanel.getWwd().redraw();
                             }
                         }
-                    }
-                    // Have rollover events highlight the rolled-over object.
-                    else if (event.getEventAction().equals(SelectEvent.ROLLOVER) && !this.dragger.isDragging())
-                    {
+                    } // Have rollover events highlight the rolled-over object.
+                    else if (event.getEventAction().equals(SelectEvent.ROLLOVER) && !this.dragger.isDragging()) {
 //                        AppFrame.this.highlight(event.getTopObject());
-                    }
-
-                    // Have drag events drag the selected object.
+                    } // Have drag events drag the selected object.
                     else if (event.getEventAction().equals(SelectEvent.DRAG_END)
-                        || event.getEventAction().equals(SelectEvent.DRAG))
-                    {
+                            || event.getEventAction().equals(SelectEvent.DRAG)) {
                         // Delegate dragging computations to a dragger.
                         this.dragger.selected(event);
 
                         // We missed any roll-over events while dragging, so highlight any under the cursor now,
                         // or de-highlight the dragged shape if it's no longer under the cursor.
-                        if (event.getEventAction().equals(SelectEvent.DRAG_END))
-                        {
+                        if (event.getEventAction().equals(SelectEvent.DRAG_END)) {
                             PickedObjectList pol = wwjPanel.getWwd().getObjectsAtCurrentPosition();
-                            if (pol != null)
-                            {
+                            if (pol != null) {
 //                                AppFrame.this.highlight(pol.getTopObject());
                                 AppFrame.this.wwjPanel.getWwd().redraw();
                             }
@@ -706,27 +628,21 @@ public class Shapes
 
     private static final String APP_NAME = "WorldWind Shapes";
 
-    static
-    {
-        if (Configuration.isMacOS())
-        {
+    static {
+        if (Configuration.isMacOS()) {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", APP_NAME);
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
         }
     }
 
-    public static void main(String[] args)
-    {
-        try
-        {
+    public static void main(String[] args) {
+        try {
             AppFrame frame = new AppFrame();
             frame.setTitle(APP_NAME);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

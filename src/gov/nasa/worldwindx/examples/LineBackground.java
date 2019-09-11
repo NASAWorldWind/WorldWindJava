@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.View;
@@ -23,16 +22,14 @@ import java.util.*;
  * @author tag
  * @version $Id: LineBackground.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class LineBackground extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class LineBackground extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
-            try
-            {
+            try {
                 // Specify attributes for the foreground line.
                 ShapeAttributes foregroundAttrs = new BasicShapeAttributes();
                 foregroundAttrs.setOutlineMaterial(new Material(Color.BLUE));
@@ -47,10 +44,10 @@ public class LineBackground extends ApplicationTemplate
 
                 // Create the primary line as a SurfacePolyline and set its attributes.
                 SurfacePolyline si1 = new SurfacePolyline(new ArrayList<LatLon>(Arrays.asList(
-                    LatLon.fromDegrees(33.7, 119.6),
-                    LatLon.fromDegrees(33.5, 125),
-                    LatLon.fromDegrees(35.1, 129.1),
-                    LatLon.fromDegrees(35.8, 127.1)
+                        LatLon.fromDegrees(33.7, 119.6),
+                        LatLon.fromDegrees(33.5, 125),
+                        LatLon.fromDegrees(35.1, 129.1),
+                        LatLon.fromDegrees(35.8, 127.1)
                 )));
                 si1.setClosed(true);
                 si1.setAttributes(foregroundAttrs);
@@ -62,8 +59,7 @@ public class LineBackground extends ApplicationTemplate
 
                 // Now do the same for the Polyline version, which is placed 2 degrees above the SurfacePolyline.
                 ArrayList<LatLon> plPoints = new ArrayList<LatLon>();
-                for (LatLon ll : si1.getLocations())
-                {
+                for (LatLon ll : si1.getLocations()) {
                     plPoints.add(ll.add(LatLon.fromDegrees(2, 0))); // add 2 degrees of latitude to separate the lines
                 }
                 Polyline pl1 = new Polyline(plPoints, 0); // the primary Polyline
@@ -99,16 +95,13 @@ public class LineBackground extends ApplicationTemplate
                 // Move the view to the line locations.
                 View view = getWwd().getView();
                 view.setEyePosition(Position.fromDegrees(35.3, 124.6, 1500e3));
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Line Backgrounds", AppFrame.class);
     }
 }

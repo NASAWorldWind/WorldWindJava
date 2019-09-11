@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.WorldWind;
@@ -22,12 +21,16 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: PullUpPoint.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class PullUpPoint extends AbstractCircularGraphic implements TacticalPoint, PreRenderable
-{
-    /** Default radius, in meters, for the circle. */
+public class PullUpPoint extends AbstractCircularGraphic implements TacticalPoint, PreRenderable {
+
+    /**
+     * Default radius, in meters, for the circle.
+     */
     public final static double DEFAULT_RADIUS = 1000.0;
 
-    /** Path to draw the bowtie in the middle of the circle. */
+    /**
+     * Path to draw the bowtie in the middle of the circle.
+     */
     protected Path bowtie;
 
     /**
@@ -35,8 +38,7 @@ public class PullUpPoint extends AbstractCircularGraphic implements TacticalPoin
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(TacGrpSidc.C2GM_AVN_PNT_PUP);
     }
 
@@ -45,27 +47,27 @@ public class PullUpPoint extends AbstractCircularGraphic implements TacticalPoin
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public PullUpPoint(String sidc)
-    {
+    public PullUpPoint(String sidc) {
         super(sidc);
         this.setRadius(DEFAULT_RADIUS);
     }
 
-    /** Invalidate the bowtie shape when the circle changes. */
+    /**
+     * Invalidate the bowtie shape when the circle changes.
+     */
     @Override
-    protected void reset()
-    {
+    protected void reset() {
         this.bowtie = null;
     }
 
-    /** {@inheritDoc} Overridden to draw airfield graphic. */
+    /**
+     * {@inheritDoc} Overridden to draw airfield graphic.
+     */
     @Override
-    protected void doRenderGraphic(DrawContext dc)
-    {
+    protected void doRenderGraphic(DrawContext dc) {
         super.doRenderGraphic(dc);
 
-        if (bowtie == null)
-        {
+        if (bowtie == null) {
             this.bowtie = this.createBowtie(dc);
         }
 
@@ -79,8 +81,7 @@ public class PullUpPoint extends AbstractCircularGraphic implements TacticalPoin
      *
      * @return Path for the bowtie.
      */
-    protected Path createBowtie(DrawContext dc)
-    {
+    protected Path createBowtie(DrawContext dc) {
         //  A     C
         //  |\  /|
         //  | \/ |
@@ -111,20 +112,19 @@ public class PullUpPoint extends AbstractCircularGraphic implements TacticalPoin
      *
      * @return Position list. All elevations will be set to zero.
      */
-    protected List<Position> asPositionList(LatLon... locations)
-    {
+    protected List<Position> asPositionList(LatLon... locations) {
         List<Position> positions = new ArrayList<Position>(locations.length);
-        for (LatLon loc : locations)
-        {
+        for (LatLon loc : locations) {
             positions.add(new Position(loc, 0));
         }
         return positions;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void createLabels()
-    {
+    protected void createLabels() {
         TacticalGraphicLabel label = this.addLabel("PUP");
         label.setTextAlign(AVKey.LEFT);
     }
@@ -135,8 +135,7 @@ public class PullUpPoint extends AbstractCircularGraphic implements TacticalPoin
      * @param dc Current draw context.
      */
     @Override
-    protected void determineLabelPositions(DrawContext dc)
-    {
+    protected void determineLabelPositions(DrawContext dc) {
         LatLon center = this.circle.getCenter();
         double distance = this.circle.getRadius() * 1.1; // Place the label just beyond the radius.
         Angle radius = Angle.fromRadians(distance / dc.getGlobe().getRadius());
@@ -151,8 +150,7 @@ public class PullUpPoint extends AbstractCircularGraphic implements TacticalPoin
      *
      * @return New path configured with defaults appropriate for this type of graphic.
      */
-    protected Path createPath()
-    {
+    protected Path createPath() {
         Path path = new Path();
         path.setFollowTerrain(true);
         path.setPathType(AVKey.GREAT_CIRCLE);

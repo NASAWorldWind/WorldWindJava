@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -17,21 +16,21 @@ import java.awt.geom.*;
  * @author pabercrombie
  * @version $Id: AbstractAnnotationBalloon.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class AbstractAnnotationBalloon extends AbstractBalloon
-{
+public abstract class AbstractAnnotationBalloon extends AbstractBalloon {
+
     /**
      * Create a new annotation balloon.
      *
      * @param text Balloon text. May not be null.
      */
-    public AbstractAnnotationBalloon(String text)
-    {
+    public AbstractAnnotationBalloon(String text) {
         super(text);
     }
 
-    /** {@inheritDoc} */
-    public Rectangle getBounds(DrawContext dc)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Rectangle getBounds(DrawContext dc) {
         return this.getAnnotation().getBounds(dc);
     }
 
@@ -56,11 +55,13 @@ public abstract class AbstractAnnotationBalloon extends AbstractBalloon
      */
     protected abstract void computePosition(DrawContext dc);
 
-    /** {@inheritDoc} */
-    public void render(DrawContext dc)
-    {
-        if (!this.isVisible())
+    /**
+     * {@inheritDoc}
+     */
+    public void render(DrawContext dc) {
+        if (!this.isVisible()) {
             return;
+        }
 
         this.determineActiveAttributes();
         this.applyAttributesToAnnotation();
@@ -72,9 +73,10 @@ public abstract class AbstractAnnotationBalloon extends AbstractBalloon
         this.getAnnotation().render(dc);
     }
 
-    /** Apply the balloon attributes to the annotation. */
-    protected void applyAttributesToAnnotation()
-    {
+    /**
+     * Apply the balloon attributes to the annotation.
+     */
+    protected void applyAttributesToAnnotation() {
         Annotation annotation = this.getAnnotation();
 
         Object delegateOwner = this.getDelegateOwner();
@@ -84,8 +86,9 @@ public abstract class AbstractAnnotationBalloon extends AbstractBalloon
         annotation.setPickEnabled(this.isPickEnabled());
 
         String text = this.getDecodedText();
-        if (text != null)
+        if (text != null) {
             annotation.setText(text);
+        }
 
         annotation.setMinActiveAltitude(this.getMinActiveAltitude());
         annotation.setMaxActiveAltitude(this.getMaxActiveAltitude());
@@ -97,8 +100,7 @@ public abstract class AbstractAnnotationBalloon extends AbstractBalloon
 
         BalloonAttributes balloonAttrs = this.getActiveAttributes();
 
-        if (balloonAttrs != null)
-        {
+        if (balloonAttrs != null) {
             annotationAttrs.setTextColor(balloonAttrs.getTextColor());
             annotationAttrs.setBorderWidth(balloonAttrs.getOutlineWidth());
             annotationAttrs.setBorderStippleFactor(balloonAttrs.getOutlineStippleFactor());
@@ -118,7 +120,7 @@ public abstract class AbstractAnnotationBalloon extends AbstractBalloon
             // Annotation attributes does not have an antialiasing enable/disable flag. Map the antialiasing flag to the
             // annotation attributes' antialias hint.
             annotationAttrs.setAntiAliasHint(
-                balloonAttrs.isEnableAntialiasing() ? Annotation.ANTIALIAS_NICEST : Annotation.ANTIALIAS_FASTEST);
+                    balloonAttrs.isEnableAntialiasing() ? Annotation.ANTIALIAS_NICEST : Annotation.ANTIALIAS_FASTEST);
 
             annotationAttrs.setImageSource(balloonAttrs.getImageSource());
             annotationAttrs.setImageOffset(balloonAttrs.getImageOffset());
@@ -130,15 +132,12 @@ public abstract class AbstractAnnotationBalloon extends AbstractBalloon
             // disable drawing the interior. We use the annotation's background color to accomplish both by storing the
             // interior opacity in the background color alpha channel, and setting the background color to transparent
             // black if interior drawing is disabled.
-            if (balloonAttrs.isDrawInterior() && balloonAttrs.getInteriorOpacity() > 0)
-            {
+            if (balloonAttrs.isDrawInterior() && balloonAttrs.getInteriorOpacity() > 0) {
                 Color color = balloonAttrs.getInteriorMaterial().getDiffuse();
                 double opacity = balloonAttrs.getInteriorOpacity();
                 annotationAttrs.setBackgroundColor(new Color(color.getRed(), color.getGreen(), color.getBlue(),
-                    (opacity < 1 ? (int) (opacity * 255 + 0.5) : 255)));
-            }
-            else
-            {
+                        (opacity < 1 ? (int) (opacity * 255 + 0.5) : 255)));
+            } else {
                 annotationAttrs.setBackgroundColor(new Color(0, 0, 0, 0));
             }
 
@@ -146,15 +145,12 @@ public abstract class AbstractAnnotationBalloon extends AbstractBalloon
             // drawing the outline. We use the annotation's background color to accomplish both by storing the outline
             // opacity in the border color alpha channel, and setting the border color to transparent black if outline
             // drawing is disabled.
-            if (balloonAttrs.isDrawOutline() && balloonAttrs.getOutlineOpacity() > 0)
-            {
+            if (balloonAttrs.isDrawOutline() && balloonAttrs.getOutlineOpacity() > 0) {
                 Color color = balloonAttrs.getOutlineMaterial().getDiffuse();
                 double opacity = balloonAttrs.getOutlineOpacity();
                 annotationAttrs.setBorderColor(new Color(color.getRed(), color.getGreen(), color.getBlue(),
-                    (opacity < 1 ? (int) (opacity * 255 + 0.5) : 255)));
-            }
-            else
-            {
+                        (opacity < 1 ? (int) (opacity * 255 + 0.5) : 255)));
+            } else {
                 annotationAttrs.setBorderColor(new Color(0, 0, 0, 0));
             }
         }
@@ -167,23 +163,21 @@ public abstract class AbstractAnnotationBalloon extends AbstractBalloon
      *
      * @param dc DrawContext in which the balloon is being rendered.
      */
-    protected void computeOffsets(DrawContext dc)
-    {
+    protected void computeOffsets(DrawContext dc) {
         Annotation annotation = this.getAnnotation();
         BalloonAttributes balloonAttrs = this.getActiveAttributes();
         AnnotationAttributes annotationAttrs = annotation.getAttributes();
 
-        if (balloonAttrs != null)
-        {
+        if (balloonAttrs != null) {
             // Compute the balloon's preferred size and the current screen viewport size.
             Dimension prefSize = annotation.getPreferredSize(dc);
             Rectangle viewport = dc.getView().getViewport();
 
             // Compute the balloon's current size on screen, and its offset in screen coordinates.
             Dimension screenSize = balloonAttrs.getSize().compute(prefSize.width, prefSize.height, viewport.width,
-                viewport.height);
+                    viewport.height);
             Point2D.Double screenOffset = balloonAttrs.getOffset().computeOffset(screenSize.width, screenSize.height,
-                1.0, 1.0);
+                    1.0, 1.0);
 
             // Apply the computed balloon size and offset to the internal annotation's attributes. Adjust the screen
             // offset so that an offset of (0, 0) pixels maps to the annotation's lower left corner, and an offset of
@@ -192,7 +186,7 @@ public abstract class AbstractAnnotationBalloon extends AbstractBalloon
             // center. We apply an additional offset of width/2 to compensate for this.
             annotationAttrs.setSize(screenSize);
             annotationAttrs.setDrawOffset(
-                new Point((int) -screenOffset.x + screenSize.width / 2, (int) -screenOffset.y));
+                    new Point((int) -screenOffset.x + screenSize.width / 2, (int) -screenOffset.y));
         }
     }
 }

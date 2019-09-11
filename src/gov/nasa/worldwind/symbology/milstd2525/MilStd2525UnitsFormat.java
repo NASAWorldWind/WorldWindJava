@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525;
 
 import gov.nasa.worldwind.geom.*;
@@ -15,14 +14,13 @@ import gov.nasa.worldwind.util.*;
  * @author pabercrombie
  * @version $Id: MilStd2525UnitsFormat.java 482 2012-03-27 01:27:15Z pabercrombie $
  */
-public class MilStd2525UnitsFormat extends UnitsFormat
-{
+public class MilStd2525UnitsFormat extends UnitsFormat {
+
     /**
      * Construct an instance that displays length in kilometers, area in square kilometers and angles in degrees,
      * minutes, seconds.
      */
-    public MilStd2525UnitsFormat()
-    {
+    public MilStd2525UnitsFormat() {
         this(UnitsFormat.KILOMETERS, UnitsFormat.SQUARE_KILOMETERS, true);
     }
 
@@ -31,13 +29,12 @@ public class MilStd2525UnitsFormat extends UnitsFormat
      *
      * @param lengthUnits the desired length units. Available length units are <code>METERS, KILOMETERS, MILES,
      *                    NAUTICAL_MILES, YARDS</code> and <code>FEET</code>.
-     * @param areaUnits   the desired area units. Available area units are <code>SQUARE_METERS, SQUARE_KILOMETERS,
+     * @param areaUnits the desired area units. Available area units are <code>SQUARE_METERS, SQUARE_KILOMETERS,
      *                    HECTARE, ACRE, SQUARE_YARD</code> and <code>SQUARE_FEET</code>.
      *
      * @throws IllegalArgumentException if either <code>lengthUnits</code> or <code>areaUnits</code> is null.
      */
-    public MilStd2525UnitsFormat(String lengthUnits, String areaUnits)
-    {
+    public MilStd2525UnitsFormat(String lengthUnits, String areaUnits) {
         this(lengthUnits, areaUnits, true);
     }
 
@@ -46,15 +43,14 @@ public class MilStd2525UnitsFormat extends UnitsFormat
      *
      * @param lengthUnits the desired length units. Available length units are <code>METERS, KILOMETERS, MILES,
      *                    NAUTICAL_MILES, YARDS</code> and <code>FEET</code>.
-     * @param areaUnits   the desired area units. Available area units are <code>SQUARE_METERS, SQUARE_KILOMETERS,
+     * @param areaUnits the desired area units. Available area units are <code>SQUARE_METERS, SQUARE_KILOMETERS,
      *                    HECTARE, ACRE, SQUARE_YARD</code> and <code>SQUARE_FEET</code>.
-     * @param showDMS     true if the desired angle format is degrees-minutes-seconds, false if the format is decimal
-     *                    degrees.
+     * @param showDMS true if the desired angle format is degrees-minutes-seconds, false if the format is decimal
+     * degrees.
      *
      * @throws IllegalArgumentException if either <code>lengthUnits</code> or <code>areaUnits</code> is null.
      */
-    public MilStd2525UnitsFormat(String lengthUnits, String areaUnits, boolean showDMS)
-    {
+    public MilStd2525UnitsFormat(String lengthUnits, String areaUnits, boolean showDMS) {
         super(lengthUnits, areaUnits, showDMS);
         this.setAltitudeUnits(FEET);
     }
@@ -70,22 +66,17 @@ public class MilStd2525UnitsFormat extends UnitsFormat
      * @throws IllegalArgumentException if the angle is null.
      */
     @Override
-    public String latitude(Angle angle)
-    {
-        if (angle == null)
-        {
+    public String latitude(Angle angle) {
+        if (angle == null) {
             String msg = Logging.getMessage("nullValue.LatLonIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (this.isShowDMS())
-        {
+        if (this.isShowDMS()) {
             double[] dms = angle.toDMS();
             return String.format("%02.0f%02.0f%04.1f%s", Math.abs(dms[0]), dms[1], dms[2], dms[0] < 0 ? "S" : "N");
-        }
-        else
-        {
+        } else {
             return super.latitude(angle);
         }
     }
@@ -101,32 +92,27 @@ public class MilStd2525UnitsFormat extends UnitsFormat
      * @throws IllegalArgumentException if the angle is null.
      */
     @Override
-    public String longitude(Angle angle)
-    {
-        if (angle == null)
-        {
+    public String longitude(Angle angle) {
+        if (angle == null) {
             String msg = Logging.getMessage("nullValue.LatLonIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (this.isShowDMS())
-        {
+        if (this.isShowDMS()) {
             double[] dms = angle.toDMS();
             return String.format("%03.0f%02.0f%04.1f%s", Math.abs(dms[0]), dms[1], dms[2], dms[0] < 0 ? "W" : "E");
-        }
-        else
-        {
+        } else {
             return super.longitude(angle);
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String latLon(LatLon latlon)
-    {
-        if (latlon == null)
-        {
+    public String latLon(LatLon latlon) {
+        if (latlon == null) {
             String msg = Logging.getMessage("nullValue.LatLonIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -135,20 +121,22 @@ public class MilStd2525UnitsFormat extends UnitsFormat
         return this.latitude(latlon.getLatitude()) + this.longitude(latlon.getLongitude());
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setAltitudeUnits(String altitudeUnits)
-    {
+    public void setAltitudeUnits(String altitudeUnits) {
         super.setAltitudeUnits(altitudeUnits);
 
         // Convert the altitude symbol to upper case, as per MIL-STD-2525C section 5.5.2.5.2 (pg. 41).
         this.altitudeUnitsSymbol = this.altitudeUnitsSymbol.toUpperCase();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void setDefaultLabels()
-    {
+    protected void setDefaultLabels() {
         this.setLabel(LABEL_LATITUDE, "");
         this.setLabel(LABEL_LONGITUDE, "");
         this.setLabel(LABEL_EYE_ALTITUDE, "");

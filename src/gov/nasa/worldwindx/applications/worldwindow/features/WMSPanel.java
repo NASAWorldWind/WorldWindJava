@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.features;
 
 import gov.nasa.worldwind.*;
@@ -34,8 +33,8 @@ import java.util.logging.Level;
  * @version $Id: WMSPanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 @SuppressWarnings("unchecked")
-public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener, NetworkActivitySignal.NetworkUser
-{
+public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener, NetworkActivitySignal.NetworkUser {
+
     protected static final String FEATURE_TITLE = "WMS Server Panel";
     protected static final String ICON_PATH = "gov/nasa/worldwindx/applications/worldwindow/images/wms-64x64.png";
 //    protected static final String[] INITIAL_SERVER_LIST = new String[]
@@ -51,23 +50,19 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
     protected Thread loadingThread;
     protected URI serverURI;
 
-    public WMSPanel(Registry registry)
-    {
+    public WMSPanel(Registry registry) {
         super(FEATURE_TITLE, Constants.FEATURE_WMS_PANEL, new ShadedPanel(new BorderLayout()), registry);
     }
 
-    public String getURLString()
-    {
+    public String getURLString() {
         return this.urlField.getText();
     }
 
-    public boolean hasNetworkActivity()
-    {
+    public boolean hasNetworkActivity() {
         return this.loadingThread != null && this.loadingThread.isAlive();
     }
 
-    public void initialize(final Controller controller)
-    {
+    public void initialize(final Controller controller) {
         super.initialize(controller);
 
         LayerTreeModel model = new LayerTreeModel();
@@ -89,24 +84,19 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
 
         this.urlField.addActionListener(new ActionListener() // listen for triggers to cause WMS server contact
         {
-            public void actionPerformed(ActionEvent actionEvent)
-            {
-                try
-                {
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
                     String serverURLString = urlField.getText();//getSelectedItem().toString();
-                    if (!WWUtil.isEmpty(serverURLString))
-                    {
-                        if (serverURI == null || !serverURI.toString().contains(serverURLString))
-                        {
-                            if (getTopGroup() != null)
+                    if (!WWUtil.isEmpty(serverURLString)) {
+                        if (serverURI == null || !serverURI.toString().contains(serverURLString)) {
+                            if (getTopGroup() != null) {
                                 firePropertyChange("NewServer", null, serverURLString);
-                            else
+                            } else {
                                 contactWMSServer(serverURLString);
+                            }
                         }
                     }
-                }
-                catch (URISyntaxException e)
-                {
+                } catch (URISyntaxException e) {
                     String msg = "Invalid URL";
                     Util.getLogger().log(Level.SEVERE, msg, e);
                     controller.showErrorDialog(e, "Invalid URL", msg);
@@ -114,13 +104,10 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
             }
         });
 
-        this.infoButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent actionEvent)
-            {
+        this.infoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
                 String urlString = (String) infoButton.getClientProperty("CapsURL");
-                if (!WWUtil.isEmpty(urlString))
-                {
+                if (!WWUtil.isEmpty(urlString)) {
                     controller.openLink(urlString);
                 }
             }
@@ -132,65 +119,59 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
      *
      * @param event the description of the change.
      */
-    public void treeNodesChanged(TreeModelEvent event)
-    {
+    public void treeNodesChanged(TreeModelEvent event) {
         Object[] changedNodes = event.getChildren();
-        if (changedNodes == null || changedNodes.length <= 0)
+        if (changedNodes == null || changedNodes.length <= 0) {
             return;
+        }
 
-        for (Object o : changedNodes)
-        {
-            if (o == null)
+        for (Object o : changedNodes) {
+            if (o == null) {
                 continue;
+            }
 
-            if (o instanceof LayerTreeGroupNode)
+            if (o instanceof LayerTreeGroupNode) {
                 this.handleGroupSelection((LayerTreeGroupNode) o);
-            else if (o instanceof LayerNode)
+            } else if (o instanceof LayerNode) {
                 this.handleLayerSelection((LayerNode) o);
+            }
         }
     }
 
-    protected void handleLayerSelection(LayerNode layerNode)
-    {
-        if (layerNode.getWmsLayerInfo() == null)
+    protected void handleLayerSelection(LayerNode layerNode) {
+        if (layerNode.getWmsLayerInfo() == null) {
             return;
+        }
 
         LayerManager layerManager = controller.getLayerManager();
 
-        if (layerNode.isSelected())
-        {
-            if (layerNode.getLayer() == null)
-                try
-                {
+        if (layerNode.isSelected()) {
+            if (layerNode.getLayer() == null) {
+                try {
                     this.createLayer(layerNode);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     String msg = "Error creating WMS layer " + layerNode.toString();
                     Util.getLogger().log(Level.SEVERE, msg, e);
                     this.controller.showErrorDialog(e, "WMS Error", msg);
                 }
+            }
 
-            if (layerNode.getLayer() != null)
-            {
+            if (layerNode.getLayer() != null) {
                 layerManager.addLayer(layerNode.getLayer(), new LayerPath(this.nameField.getText()));
                 layerManager.selectLayer(layerNode.getLayer(), true);
             }
-        }
-        else
-        {
+        } else {
             layerManager.removeLayer(layerNode.getLayer());
         }
     }
 
-    protected void handleGroupSelection(LayerTreeGroupNode groupNode)
-    {
+    protected void handleGroupSelection(LayerTreeGroupNode groupNode) {
         Enumeration iter = groupNode.breadthFirstEnumeration();
-        while (iter.hasMoreElements())
-        {
+        while (iter.hasMoreElements()) {
             Object o = iter.nextElement();
-            if (!(o instanceof LayerNode) || (o instanceof LayerTreeGroupNode))
+            if (!(o instanceof LayerNode) || (o instanceof LayerTreeGroupNode)) {
                 continue;
+            }
 
             LayerNode layerNode = (LayerNode) o;
             layerNode.setSelected(groupNode.isSelected());
@@ -198,25 +179,21 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
         }
 
         LayerNode topNode = this.getLayerManagerGroupNode();
-        if (topNode != null)
-        {
+        if (topNode != null) {
             topNode.setSelected(groupNode.isSelected());
             this.controller.getLayerManager().expandGroup(topNode.getTitle());
         }
         this.layerTree.repaint();
     }
 
-    protected void createLayer(LayerNode layerNode)
-    {
-        if (layerNode == null)
-        {
+    protected void createLayer(LayerNode layerNode) {
+        if (layerNode == null) {
             String msg = "LayerNode is null";
             Util.getLogger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (layerNode.getWmsLayerInfo() != null)
-        {
+        if (layerNode.getWmsLayerInfo() != null) {
             WMSLayerInfo wmsInfo = layerNode.getWmsLayerInfo();
             AVList configParams = wmsInfo.getParams().copy(); // Copy to insulate changes from the caller.
 
@@ -243,29 +220,30 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
     {
     }
 
-    public void cancel()
-    {
-        if (this.loadingThread != null && this.loadingThread.isAlive())
+    public void cancel() {
+        if (this.loadingThread != null && this.loadingThread.isAlive()) {
             this.loadingThread.interrupt();
+        }
     }
 
-    /** Clears the panel. Any layers currently in the layer manager are left there. */
-    public void clearPanel()
-    {
-        if (this.loadingThread != null && this.loadingThread.isAlive())
-        {
+    /**
+     * Clears the panel. Any layers currently in the layer manager are left there.
+     */
+    public void clearPanel() {
+        if (this.loadingThread != null && this.loadingThread.isAlive()) {
             this.loadingThread.interrupt();
             return; // just cancel any retrieval the first time called
         }
 
-        if (this.nameField != null)
+        if (this.nameField != null) {
             this.nameField.setText("");
+        }
 
-        if (this.urlField != null)
+        if (this.urlField != null) {
             this.urlField.setText("");
+        }
 
-        if (this.layerTree != null)
-        {
+        if (this.layerTree != null) {
             this.layerTree.clearTree();
         }
     }
@@ -277,51 +255,38 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
      *
      * @throws URISyntaxException if the URL is invalid.
      */
-    public void contactWMSServer(String URLString) throws URISyntaxException
-    {
+    public void contactWMSServer(String URLString) throws URISyntaxException {
         this.serverURI = new URI(URLString.trim()); // throws an exception if server name is not a valid uri.
 
         // Thread off a retrieval of the server's capabilities document and update of this panel.
-        this.loadingThread = new Thread(new Runnable()
-        {
-            public void run()
-            {
+        this.loadingThread = new Thread(new Runnable() {
+            public void run() {
                 controller.getNetworkActivitySignal().addNetworkUser(WMSPanel.this);
-                try
-                {
+                try {
                     CapabilitiesRequest request = new CapabilitiesRequest(serverURI);
                     WMSCapabilities caps = new WMSCapabilities(request);
                     caps.parse();
-                    if (!Thread.currentThread().isInterrupted())
+                    if (!Thread.currentThread().isInterrupted()) {
                         createLayerList(caps);
-                }
-                catch (XMLStreamException e)
-                {
+                    }
+                } catch (XMLStreamException e) {
                     String msg = "Error retrieving servers capabilities " + serverURI;
                     Util.getLogger().log(Level.SEVERE, msg, e);
                     controller.showErrorDialog(e, "Get Capabilities Error", msg);
-                }
-                catch (Exception e)
-                {
-                    if (e.getClass().getName().toLowerCase().contains("timeout"))
-                    {
+                } catch (Exception e) {
+                    if (e.getClass().getName().toLowerCase().contains("timeout")) {
                         String msg = "Connection to server timed out\n" + serverURI;
                         controller.showErrorDialog(e, "Connection Timeout", msg);
                         Util.getLogger().log(Level.SEVERE, msg + serverURI, e);
-                    }
-                    else
-                    {
+                    } else {
                         String msg = "Attempt to contact server failed\n" + serverURI;
                         controller.showErrorDialog(e, "Server Not Responding", msg);
                         Util.getLogger().log(Level.SEVERE, msg + serverURI, e);
                     }
-                }
-                finally // ensure that the cursor is restored to default whether succes or failure
+                } finally // ensure that the cursor is restored to default whether succes or failure
                 {
-                    EventQueue.invokeLater(new Runnable()
-                    {
-                        public void run()
-                        {
+                    EventQueue.invokeLater(new Runnable() {
+                        public void run() {
                             controller.getNetworkActivitySignal().removeNetworkUser(WMSPanel.this);
                             panel.setCursor(Cursor.getDefaultCursor());
                         }
@@ -335,33 +300,34 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
         this.panel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     }
 
-    protected void createLayerList(final WMSCapabilities caps)
-    {
+    protected void createLayerList(final WMSCapabilities caps) {
         java.util.List<WMSLayerCapabilities> layers = caps.getCapabilityInformation().getLayerCapabilities();
-        if (layers.size() == 0)
+        if (layers.size() == 0) {
             return;
+        }
 
         // TODO: Make the list for all top-level layers if more than one.
         WMSLayerCapabilities layer = layers.get(0);
         addLayer(caps, layer, null, (LayerTreeModel) this.layerTree.getModel());
 
         LayerTreeGroupNode topGroupNode = this.getTopGroup();
-        if (topGroupNode != null)
+        if (topGroupNode != null) {
             topGroupNode.setEnableSelectionBox(false); // Prevents user from selecting all the server's layers at once.
-
+        }
         String docAbstract = caps.getServiceInformation().getServiceAbstract();
-        if (docAbstract != null)
+        if (docAbstract != null) {
             this.infoButton.setToolTipText(Util.makeMultiLineToolTip(docAbstract));
+        }
         String infoUrl = caps.getServiceInformation().getOnlineResource().getHref();
         this.infoButton.putClientProperty("CapsURL", infoUrl != null ? infoUrl
-            : caps.getRequestURL("GetCapabilities", "HTTP", "Get"));
+                : caps.getRequestURL("GetCapabilities", "HTTP", "Get"));
 
         EventQueue.invokeLater(new Runnable() // UI changes should be finalized on the EDT
         {
-            public void run()
-            {
-                if (nameField.getText() == null || nameField.getText().length() == 0)
+            public void run() {
+                if (nameField.getText() == null || nameField.getText().length() == 0) {
                     nameField.setText(getServerDisplayString(caps));
+                }
 
                 urlField.setText(serverURI.toString());//SelectedItem(serverURI.toString());
 
@@ -370,42 +336,40 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
         });
     }
 
-    protected LayerTreeGroupNode getTopGroup()
-    {
+    protected LayerTreeGroupNode getTopGroup() {
         Object root = this.layerTree.getModel().getRoot();
         return root != null && root instanceof LayerTreeGroupNode
-            && ((LayerTreeGroupNode) root).getChildCount() > 0 ?
-            (LayerTreeGroupNode) ((LayerTreeGroupNode) root).getFirstChild() : null;
+                && ((LayerTreeGroupNode) root).getChildCount() > 0
+                ? (LayerTreeGroupNode) ((LayerTreeGroupNode) root).getFirstChild() : null;
     }
 
-    protected LayerNode getLayerManagerGroupNode()
-    {
+    protected LayerNode getLayerManagerGroupNode() {
         LayerTreeGroupNode localTopNode = this.getTopGroup();
-        if (localTopNode == null)
+        if (localTopNode == null) {
             return null;
+        }
 
         LayerPath path = new LayerPath(this.getTabTitle());
 
         return this.controller.getLayerManager().getNode(path);
     }
 
-    public void addItemToComboBox(JComboBox cmb, Object item)
-    {
-        if (cmb == null || item == null)
+    public void addItemToComboBox(JComboBox cmb, Object item) {
+        if (cmb == null || item == null) {
             return;
+        }
 
-        for (int i = 0; i < cmb.getItemCount(); i++)
-        {
+        for (int i = 0; i < cmb.getItemCount(); i++) {
             Object oi = cmb.getItemAt(i);
-            if (oi != null && oi.toString().trim().equals(item.toString().trim()))
+            if (oi != null && oi.toString().trim().equals(item.toString().trim())) {
                 return;
+            }
         }
 
         cmb.insertItemAt(item, 1);
     }
 
-    protected String getServerDisplayString(WMSCapabilities caps)
-    {
+    protected String getServerDisplayString(WMSCapabilities caps) {
         String title = caps.getServiceInformation().getServiceTitle();
         return title != null ? title : this.serverURI.getHost();
     }
@@ -413,63 +377,61 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
     /**
      * Recursively adds layers to the layer tree.
      *
-     * @param caps      the server's capabilities document.
+     * @param caps the server's capabilities document.
      * @param layerCaps the DOM description of the layer to retrieve.
      * @param groupNode the display group
-     * @param model     the layer tree model
+     * @param model the layer tree model
      */
     protected void addLayer(WMSCapabilities caps, WMSLayerCapabilities layerCaps, LayerTreeGroupNode groupNode,
-        LayerTreeModel model)
-    {
+            LayerTreeModel model) {
         java.util.List<WMSLayerCapabilities> subLayers = layerCaps.getLayers();
         if (subLayers != null && subLayers.size() > 0) // it's a grouping layer
         {
             LayerTreeGroupNode subGroupNode = new LayerTreeGroupNode(new WMSLayerInfo(caps, layerCaps, null));
 
-            if (groupNode == null)
+            if (groupNode == null) {
                 model.insertNodeInto(subGroupNode, (LayerTreeGroupNode) model.getRoot(),
-                    ((LayerTreeGroupNode) model.getRoot()).getChildCount());
-            else
+                        ((LayerTreeGroupNode) model.getRoot()).getChildCount());
+            } else {
                 model.insertNodeInto(subGroupNode, groupNode, groupNode.getChildCount());
+            }
 
-            for (WMSLayerCapabilities subLayerCaps : subLayers)
-            {
+            for (WMSLayerCapabilities subLayerCaps : subLayers) {
                 addLayer(caps, subLayerCaps, subGroupNode, model);
             }
 
             String toolTipText = layerCaps.getLayerAbstract();
-            if (!WWUtil.isEmpty(toolTipText))
+            if (!WWUtil.isEmpty(toolTipText)) {
                 subGroupNode.setToolTipText(Util.makeMultiLineToolTip(toolTipText));
-        }
-        else // it's a leaf layer
+            }
+        } else // it's a leaf layer
         {
             java.util.List<WMSLayerInfo> layerInfos = WMSLayerInfo.createLayerInfos(caps, layerCaps);
-            for (WMSLayerInfo layerInfo : layerInfos)
-            {
+            for (WMSLayerInfo layerInfo : layerInfos) {
                 LayerTreeNode layerNode = new LayerTreeNode(layerInfo);
                 layerNode.setSelected(false);
                 layerNode.setAllowsChildren(false); // indicates that the node is a leaf
-                if (groupNode == null)
+                if (groupNode == null) {
                     model.insertNodeInto(layerNode, (LayerTreeNode) model.getRoot(),
-                        ((DefaultMutableTreeNode) model.getRoot()).getChildCount());
-                else
+                            ((DefaultMutableTreeNode) model.getRoot()).getChildCount());
+                } else {
                     model.insertNodeInto(layerNode, groupNode, groupNode.getChildCount());
+                }
 
                 String toolTipText = layerCaps.getLayerAbstract();
-                if (!WWUtil.isEmpty(toolTipText))
+                if (!WWUtil.isEmpty(toolTipText)) {
                     layerNode.setToolTipText(Util.makeMultiLineToolTip(toolTipText));
+                }
             }
         }
     }
 
-    protected void createComponents(JPanel panel)
-    {
+    protected void createComponents(JPanel panel) {
         panel.add(makeTopPanel(), BorderLayout.NORTH);
         panel.add(makeTreePanel(), BorderLayout.CENTER);
     }
 
-    protected JPanel makeTopPanel()
-    {
+    protected JPanel makeTopPanel() {
         JPanel topPanel = new JPanel(new GridBagLayout());
         topPanel.setOpaque(false);
 
@@ -481,7 +443,7 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
         this.nameField.setToolTipText("Enter a display name for the server");
 
         this.infoButton = new JButton(
-            ImageLibrary.getIcon("gov/nasa/worldwindx/applications/worldwindow/images/info-20x20.png"));
+                ImageLibrary.getIcon("gov/nasa/worldwindx/applications/worldwindow/images/info-20x20.png"));
         this.infoButton.setOpaque(false);
         this.infoButton.setBackground(new Color(0, 0, 0, 0));
         this.infoButton.setBorderPainted(false);
@@ -498,25 +460,23 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
         int t = 5, l = 5, b = 5, r = 5;
         topPanel.add(nameLabel, new GB(0, 0).setWeight(0, 0).setAnchor(GB.WEST).setInsets(t, l, b, r));
         topPanel.add(this.nameField, new GB(1, 0).setWeight(100, 100).setAnchor(GB.WEST).setInsets(t, l, b, r).setFill(
-            GridBagConstraints.HORIZONTAL));
+                GridBagConstraints.HORIZONTAL));
         topPanel.add(this.infoButton, new GB(2, 0).setWeight(0, 0).setAnchor(GB.WEST).setInsets(t, l, b, r));
         topPanel.add(urlLabel, new GB(0, 1).setWeight(0, 0).setAnchor(GB.WEST).setInsets(t, l, b, r));
         topPanel.add(this.urlField,
-            new GB(1, 1, 2, 1).setWeight(100, 100).setAnchor(GB.WEST).setInsets(t, l, b, r).setFill(
-                GridBagConstraints.HORIZONTAL));
+                new GB(1, 1, 2, 1).setWeight(100, 100).setAnchor(GB.WEST).setInsets(t, l, b, r).setFill(
+                        GridBagConstraints.HORIZONTAL));
 
         // Inform the parent tabbed pane as the user enters the server name
-        this.nameField.getDocument().addUndoableEditListener(new UndoableEditListener()
-        {
-            public void undoableEditHappened(UndoableEditEvent event)
-            {
-                if (nameField.getText().trim().length() <= 0)
+        this.nameField.getDocument().addUndoableEditListener(new UndoableEditListener() {
+            public void undoableEditHappened(UndoableEditEvent event) {
+                if (nameField.getText().trim().length() <= 0) {
                     return;
+                }
 
                 // Change the layer name in the application's layer manager
                 LayerNode lmGroupNode = getLayerManagerGroupNode();
-                if (lmGroupNode != null)
-                {
+                if (lmGroupNode != null) {
                     lmGroupNode.setTitle(nameField.getText());
                     controller.getLayerManager().redraw();
                 }
@@ -529,21 +489,17 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
         return topPanel;
     }
 
-    protected void setTabTitle(String title)
-    {
+    protected void setTabTitle(String title) {
         Container parent = panel.getParent();
-        if (parent instanceof JTabbedPane)
-        {
+        if (parent instanceof JTabbedPane) {
             int index = ((JTabbedPane) panel.getParent()).indexOfComponent(panel);
             ((JTabbedPane) panel.getParent()).setTitleAt(index, title != null ? title : "");
         }
     }
 
-    protected String getTabTitle()
-    {
+    protected String getTabTitle() {
         Container parent = panel.getParent();
-        if (parent instanceof JTabbedPane)
-        {
+        if (parent instanceof JTabbedPane) {
             int index = ((JTabbedPane) panel.getParent()).indexOfComponent(panel);
             return ((JTabbedPane) panel.getParent()).getTitleAt(index);
         }
@@ -551,8 +507,7 @@ public class WMSPanel extends AbstractFeaturePanel implements TreeModelListener,
         return null;
     }
 
-    protected JPanel makeTreePanel()
-    {
+    protected JPanel makeTreePanel() {
         this.layerTree.setBorder(new EmptyBorder(10, 10, 10, 10));
         this.layerTree.setVisibleRowCount(15);
 //        this.layerTree.setToolTipText("Seleccionar las capas para agregar a la lista de capas disponibles");

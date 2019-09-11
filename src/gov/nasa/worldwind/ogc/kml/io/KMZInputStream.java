@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml.io;
 
 import gov.nasa.worldwind.util.*;
@@ -18,9 +17,11 @@ import java.util.zip.*;
  * @author tag
  * @version $Id: KMZInputStream.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMZInputStream implements KMLDoc
-{
-    /** The zip stream created for the specified input stream. */
+public class KMZInputStream implements KMLDoc {
+
+    /**
+     * The zip stream created for the specified input stream.
+     */
     protected ZipInputStream zipStream;
 
     /**
@@ -30,10 +31,14 @@ public class KMZInputStream implements KMLDoc
      */
     protected ZipEntry currentEntry;
 
-    /** A mapping of the files in the KMZ stream to their location in the temporary directory. */
+    /**
+     * A mapping of the files in the KMZ stream to their location in the temporary directory.
+     */
     protected Map<String, File> files;
 
-    /** The directory to hold files copied from the stream. Both the directory and the files copied there are temporary. */
+    /**
+     * The directory to hold files copied from the stream. Both the directory and the files copied there are temporary.
+     */
     protected File tempDir;
 
     /**
@@ -43,12 +48,10 @@ public class KMZInputStream implements KMLDoc
      * @param sourceStream the input stream to read from.
      *
      * @throws IllegalArgumentException if the specified stream is null.
-     * @throws java.io.IOException      if an error occurs while accessing the stream.
+     * @throws java.io.IOException if an error occurs while accessing the stream.
      */
-    public KMZInputStream(InputStream sourceStream) throws IOException
-    {
-        if (sourceStream == null)
-        {
+    public KMZInputStream(InputStream sourceStream) throws IOException {
+        if (sourceStream == null) {
             String message = Logging.getMessage("nullValue.InputStreamIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -64,13 +67,13 @@ public class KMZInputStream implements KMLDoc
      *
      * @throws IOException if an exception occurs while attempting to more the stream to the next entry.
      */
-    protected void moveToNextEntry() throws IOException
-    {
+    protected void moveToNextEntry() throws IOException {
         ZipEntry nextEntry = this.zipStream.getNextEntry();
 
         // Close the stream if there's nothing more to read from it.
-        if (nextEntry == null && this.currentEntry != null)
+        if (nextEntry == null && this.currentEntry != null) {
             this.zipStream.close();
+        }
 
         this.currentEntry = nextEntry;
     }
@@ -79,27 +82,22 @@ public class KMZInputStream implements KMLDoc
      * Returns an {@link java.io.InputStream} to the first KML file within the stream.
      *
      * @return an input stream positioned to the first KML file in the stream, or null if the stream does not contain a
-     *         KML file.
+     * KML file.
      *
      * @throws IOException if an error occurs while reading the stream.
      */
-    public synchronized InputStream getKMLStream() throws IOException
-    {
+    public synchronized InputStream getKMLStream() throws IOException {
         // Iterate through the stream's entries to find the KML file. It will normally be the first entry, but there's
         // no guarantee of that. If another file is encountered before the KML file, copy it to temp dir created to
         // capture the KMZ document's directory hierarchy.
 
-        while (this.currentEntry != null)
-        {
-            if (this.currentEntry.getName().toLowerCase().endsWith(".kml"))
-            {
+        while (this.currentEntry != null) {
+            if (this.currentEntry.getName().toLowerCase().endsWith(".kml")) {
                 String kmlEntryName = this.currentEntry.getName();
                 this.copyCurrentEntryToTempDir(); // copies the current entry to a temp file and adds it to this.files
                 File file = this.files.get(kmlEntryName);
                 return file != null ? new FileInputStream(file) : null;
-            }
-            else
-            {
+            } else {
                 this.copyCurrentEntryToTempDir();
             }
         }
@@ -118,19 +116,17 @@ public class KMZInputStream implements KMLDoc
      * @param path the path of the requested file.
      *
      * @return an input stream positioned to the start of the requested file, or null if the file does not exist or the
-     *         specified path is absolute.
+     * specified path is absolute.
      *
      * @throws IllegalArgumentException if the path is null.
-     * @throws IOException              if an error occurs while attempting to read the input stream.
+     * @throws IOException if an error occurs while attempting to read the input stream.
      */
-    public synchronized InputStream getSupportFileStream(String path) throws IOException
-    {
+    public synchronized InputStream getSupportFileStream(String path) throws IOException {
         // This method is called by the native WebView implementation to resolve resources in KMZ balloons. It may
         // not perform any synchronization with the EDT (such as calling invokeAndWait), or it will introduce a
         // potential deadlock when called by the WebView's native UI thread.
 
-        if (path == null)
-        {
+        if (path == null) {
             String message = Logging.getMessage("nullValue.FilePathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -140,13 +136,15 @@ public class KMZInputStream implements KMLDoc
         // the temporary directory created to represent the directory hierarchy in the KMZ document. If the most
         // recently copied file is the requested file, return it and suspend reading and copying until it's again
         // necessary. This prevents bogging down performance until everything is copied.
-
         File file = files.get(path);
-        if (file != null)
+        if (file != null) {
             return new FileInputStream(file);
+        }
 
         if (this.currentEntry == null) // no more entries in the zip stream
+        {
             return null;
+        }
 
         this.copyCurrentEntryToTempDir();
 
@@ -165,19 +163,17 @@ public class KMZInputStream implements KMLDoc
      * @param path the path of the requested file.
      *
      * @return an absolute path for the requested file, or null if the file does not exist or the specified path is
-     *         absolute.
+     * absolute.
      *
      * @throws IllegalArgumentException if the path is null.
-     * @throws IOException              if an error occurs while attempting to create a temporary file.
+     * @throws IOException if an error occurs while attempting to create a temporary file.
      */
-    public synchronized String getSupportFilePath(String path) throws IOException
-    {
+    public synchronized String getSupportFilePath(String path) throws IOException {
         // This method is called by the native WebView implementation to resolve resources in KMZ balloons. It may
         // not perform any synchronization with the EDT (such as calling invokeAndWait), or it will introduce a
         // potential deadlock when called by the WebView's native UI thread.
 
-        if (path == null)
-        {
+        if (path == null) {
             String message = Logging.getMessage("nullValue.FilePathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -187,13 +183,15 @@ public class KMZInputStream implements KMLDoc
         // the temporary directory created to represent the directory hierarchy in the KMZ document. If the most
         // recently copied file is the requested file, return it and suspend reading and copying until it's again
         // necessary. This prevents bogging down performance until everything is copied.
-
         File file = files.get(path);
-        if (file != null)
+        if (file != null) {
             return file.getPath();
+        }
 
         if (this.currentEntry == null) // no more entries in the zip stream
+        {
             return null;
+        }
 
         this.copyCurrentEntryToTempDir();
 
@@ -210,19 +208,20 @@ public class KMZInputStream implements KMLDoc
      *
      * @throws IOException if an error occurs during the copy.
      */
-    protected void copyCurrentEntryToTempDir() throws IOException
-    {
+    protected void copyCurrentEntryToTempDir() throws IOException {
         if (this.currentEntry == null) // no more entries in the zip stream
-            return;
-
-        if (this.currentEntry.isDirectory())
         {
+            return;
+        }
+
+        if (this.currentEntry.isDirectory()) {
             this.moveToNextEntry();
             return;
         }
 
-        if (this.tempDir == null)
+        if (this.tempDir == null) {
             this.tempDir = WWIO.makeTempDir();
+        }
 
         if (this.tempDir == null) // unlikely to occur, but define a reaction
         {

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology;
 
 import gov.nasa.worldwind.render.Material;
@@ -18,8 +17,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: TacticalSymbolAttributes.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface TacticalSymbolAttributes
-{
+public interface TacticalSymbolAttributes {
+
     /**
      * Copies the specified TacticalSymbolAttributes' properties into this object's properties. This does nothing if the
      * specified attributes is <code>null</code>.
@@ -108,8 +107,9 @@ public interface TacticalSymbolAttributes
     void setTextModifierFont(Font font);
 
     /**
-     * Indicates the material used to draw text modifiers. See {@link #setTextModifierMaterial(gov.nasa.worldwind.render.Material)}
-     * for a description of how the text modifier material is used.
+     * Indicates the material used to draw text modifiers. See
+     * {@link #setTextModifierMaterial(gov.nasa.worldwind.render.Material)} for a description of how the text modifier
+     * material is used.
      *
      * @return the text modifier material. May be <code>null</code>, indicating that the default material is used.
      */
@@ -122,7 +122,7 @@ public interface TacticalSymbolAttributes
      * the color of 2D text.
      *
      * @param material the text modifier material. May be <code>null</code>, indicating that the default material should
-     *                 be used.
+     * be used.
      */
     void setTextModifierMaterial(Material material);
 }

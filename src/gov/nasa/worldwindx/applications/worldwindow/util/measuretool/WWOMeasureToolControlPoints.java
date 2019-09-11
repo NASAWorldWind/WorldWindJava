@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.util.measuretool;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -18,47 +17,40 @@ import java.util.ArrayList;
  * @author tag
  * @version $Id: WWOMeasureToolControlPoints.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class WWOMeasureToolControlPoints implements WWOMeasureTool.ControlPointList, Renderable
-{
-    public class ControlPoint extends GlobeAnnotation implements WWOMeasureTool.ControlPoint
-    {
-        public ControlPoint(Position position)
-        {
+public class WWOMeasureToolControlPoints implements WWOMeasureTool.ControlPointList, Renderable {
+
+    public class ControlPoint extends GlobeAnnotation implements WWOMeasureTool.ControlPoint {
+
+        public ControlPoint(Position position) {
             super("", position, WWOMeasureToolControlPoints.this.controlPointAttributes);
         }
 
-        public WWOMeasureTool getParent()
-        {
+        public WWOMeasureTool getParent() {
             return WWOMeasureToolControlPoints.this.measureTool;
         }
 
         @Override
-        public void setPosition(Position position)
-        {
+        public void setPosition(Position position) {
             super.setPosition(position);
         }
 
         @Override
-        public Position getPosition()
-        {
+        public Position getPosition() {
             return super.getPosition();
         }
 
-        public void highlight(boolean tf)
-        {
+        public void highlight(boolean tf) {
             this.getAttributes().setHighlighted(tf);
             this.getAttributes().setBackgroundColor(tf ? this.getAttributes().getTextColor() : null);
         }
 
         @Override
-        public Object setValue(String key, Object value)
-        {
+        public Object setValue(String key, Object value) {
             return super.setValue(key, value);
         }
 
         @Override
-        public Object getValue(String key)
-        {
+        public Object getValue(String key) {
             return super.getValue(key);
         }
     }
@@ -67,8 +59,7 @@ public class WWOMeasureToolControlPoints implements WWOMeasureTool.ControlPointL
     protected ArrayList<ControlPoint> points = new ArrayList<ControlPoint>();
     protected AnnotationAttributes controlPointAttributes;
 
-    public WWOMeasureToolControlPoints(WWOMeasureTool measureTool)
-    {
+    public WWOMeasureToolControlPoints(WWOMeasureTool measureTool) {
         this.measureTool = measureTool;
 
         this.controlPointAttributes = new AnnotationAttributes();
@@ -89,55 +80,44 @@ public class WWOMeasureToolControlPoints implements WWOMeasureTool.ControlPointL
         this.controlPointAttributes.setDistanceMinOpacity(1);
     }
 
-    public void addToLayer(RenderableLayer layer)
-    {
+    public void addToLayer(RenderableLayer layer) {
         layer.addRenderable(this);
     }
 
-    public void removeFromLayer(RenderableLayer layer)
-    {
+    public void removeFromLayer(RenderableLayer layer) {
         layer.removeRenderable(this);
     }
 
-    public int size()
-    {
+    public int size() {
         return this.points.size();
     }
 
-    public WWOMeasureTool.ControlPoint createControlPoint(Position position)
-    {
+    public WWOMeasureTool.ControlPoint createControlPoint(Position position) {
         return new ControlPoint(position);
     }
 
-    public WWOMeasureTool.ControlPoint get(int index)
-    {
+    public WWOMeasureTool.ControlPoint get(int index) {
         return this.points.get(index);
     }
 
-    public void add(WWOMeasureTool.ControlPoint controlPoint)
-    {
+    public void add(WWOMeasureTool.ControlPoint controlPoint) {
         this.points.add((ControlPoint) controlPoint);
     }
 
-    public void remove(WWOMeasureTool.ControlPoint controlPoint)
-    {
+    public void remove(WWOMeasureTool.ControlPoint controlPoint) {
         this.points.remove((ControlPoint) controlPoint);
     }
 
-    public void remove(int index)
-    {
+    public void remove(int index) {
         this.points.remove(index);
     }
 
-    public void clear()
-    {
+    public void clear() {
         this.points.clear();
     }
 
-    public void render(DrawContext dc)
-    {
-        for (ControlPoint cp : this.points)
-        {
+    public void render(DrawContext dc) {
+        for (ControlPoint cp : this.points) {
             cp.render(dc);
         }
     }

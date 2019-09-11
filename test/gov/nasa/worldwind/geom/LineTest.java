@@ -12,11 +12,10 @@ import org.junit.runners.JUnit4;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class LineTest
-{
+public class LineTest {
+
     @Test
-    public void testFrustumClipping()
-    {
+    public void testFrustumClipping() {
         Frustum f = new Frustum(); // default frustum is [-1,1] in all 3 dimensions
         Vec4 pa, pb;
         Vec4[] clipped;
@@ -40,7 +39,7 @@ public class LineTest
         pb = new Vec4(.5, .5, -2);
         clipped = Line.clipToFrustum(pa, pb, f);
         assertTrue("Clipped at near and far",
-            clipped != null && clipped[0].equals(new Vec4(.5, .5, 1)) && clipped[1].equals(new Vec4(.5, .5, -1)));
+                clipped != null && clipped[0].equals(new Vec4(.5, .5, 1)) && clipped[1].equals(new Vec4(.5, .5, -1)));
 
         pa = new Vec4(.5, .5, .5);
         pb = new Vec4(.5, .5, -.5);
@@ -54,8 +53,7 @@ public class LineTest
     }
 
     @Test
-    public void testDistanceToPoint()
-    {
+    public void testDistanceToPoint() {
         Vec4 p0 = Vec4.ZERO;
         Vec4 p1 = new Vec4(2, 0, 0);
 

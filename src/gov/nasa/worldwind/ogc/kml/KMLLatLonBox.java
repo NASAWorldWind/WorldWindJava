@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -12,20 +11,18 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLLatLonBox.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLLatLonBox extends KMLAbstractLatLonBoxType
-{
+public class KMLLatLonBox extends KMLAbstractLatLonBoxType {
+
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLLatLonBox(String namespaceURI)
-    {
+    public KMLLatLonBox(String namespaceURI) {
         super(namespaceURI);
     }
 
-    public Double getRotation()
-    {
+    public Double getRotation() {
         return (Double) this.getField("rotation");
     }
 }

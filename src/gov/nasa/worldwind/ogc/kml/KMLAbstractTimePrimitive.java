@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.event.Message;
@@ -15,23 +14,20 @@ import gov.nasa.worldwind.util.Logging;
  * @author tag
  * @version $Id: KMLAbstractTimePrimitive.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class KMLAbstractTimePrimitive extends KMLAbstractObject
-{
+public abstract class KMLAbstractTimePrimitive extends KMLAbstractObject {
+
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    protected KMLAbstractTimePrimitive(String namespaceURI)
-    {
+    protected KMLAbstractTimePrimitive(String namespaceURI) {
         super(namespaceURI);
     }
 
     @Override
-    public void applyChange(KMLAbstractObject sourceValues)
-    {
-        if (!(sourceValues instanceof KMLAbstractTimePrimitive))
-        {
+    public void applyChange(KMLAbstractObject sourceValues) {
+        if (!(sourceValues instanceof KMLAbstractTimePrimitive)) {
             String message = Logging.getMessage("KML.InvalidElementType", sourceValues.getClass().getName());
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);

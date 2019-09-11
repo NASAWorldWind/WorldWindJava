@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -12,30 +11,26 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLScale.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLScale extends KMLAbstractObject
-{
+public class KMLScale extends KMLAbstractObject {
+
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLScale(String namespaceURI)
-    {
+    public KMLScale(String namespaceURI) {
         super(namespaceURI);
     }
 
-    public Double getX()
-    {
+    public Double getX() {
         return (Double) this.getField("x");
     }
 
-    public Double getY()
-    {
+    public Double getY() {
         return (Double) this.getField("y");
     }
 
-    public Double getZ()
-    {
+    public Double getZ() {
         return (Double) this.getField("z");
     }
 }

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.glider;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
@@ -19,8 +18,8 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * @author tag
  * @version $Id: GliderImage.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GliderImage extends AVListImpl
-{
+public class GliderImage extends AVListImpl {
+
     public static final String GLIDER_REGIONS_OF_INTEREST = "gov.nasa.worldwind.glider.RegionsOfInterest";
     public static final String GLIDER_IMAGE_SOURCE = "gov.nasa.worldwind.glider.ImageSource";
     public static final String GLIDER_IMAGE_OPACITY = "gov.nasa.worldwind.glider.ImageOpacity";
@@ -34,78 +33,71 @@ public class GliderImage extends AVListImpl
     protected PropertyChangeListener regionListener = new RegionListener();
 
     private CopyOnWriteArraySet<GliderRegionOfInterest> regionTable
-        = new CopyOnWriteArraySet<GliderRegionOfInterest>();
+            = new CopyOnWriteArraySet<GliderRegionOfInterest>();
 
     /**
      * Construct an image from a file.
      *
      * @param imageSource The path to the source image. Images can be any of those supported by {@link
      *                    javax.imageio.ImageIO}, as well as uncompressed TIFF images..
-     * @param corners     The lat/lon locations of the region in which to map the image. The image will be stretched as
-     *                    necessary to fully fill the region. The locations must be specified in counterclockwise order
-     *                    beginning with the lower-left image corner.
-     * @param altitude    The altitude at which to display the image. Specify 0 to have the image draped over the
-     *                    globe's surface.
+     * @param corners The lat/lon locations of the region in which to map the image. The image will be stretched as
+     * necessary to fully fill the region. The locations must be specified in counterclockwise order beginning with the
+     * lower-left image corner.
+     * @param altitude The altitude at which to display the image. Specify 0 to have the image draped over the globe's
+     * surface.
      *
      * @throws IllegalArgumentException if any of the first three arguments are null.
      */
-    public GliderImage(String imageSource, Iterable<? extends LatLon> corners, double altitude)
-    {
+    public GliderImage(String imageSource, Iterable<? extends LatLon> corners, double altitude) {
         this(imageSource, imageSource, corners, altitude);
     }
 
     /**
      * Construct an image from a file or {@link java.awt.image.BufferedImage} and an arbitrary bounding region.
      *
-     * @param name         A unique name to identify the image. If the image source is a file, the file path can be used
-     *                     as the name.
+     * @param name A unique name to identify the image. If the image source is a file, the file path can be used as the
+     * name.
      * @param alignedImage An aligned image containing a {@link BufferedImage} and a {@link Sector} specifying the image
-     *                     and the location to place it.The image will be stretched as necessary to fully fill the
-     *                     region.
-     * @param altitude     The altitude at which to display the image. Specify 0 to have the image draped over the
-     *                     globe's surface.
+     * and the location to place it.The image will be stretched as necessary to fully fill the region.
+     * @param altitude The altitude at which to display the image. Specify 0 to have the image draped over the globe's
+     * surface.
      *
      * @throws IllegalArgumentException if any of the first three arguments are null.
      */
-    public GliderImage(String name, ImageUtil.AlignedImage alignedImage, double altitude)
-    {
+    public GliderImage(String name, ImageUtil.AlignedImage alignedImage, double altitude) {
         this(name, alignedImage.image, alignedImage.sector, altitude);
     }
 
     /**
      * Construct an image from a file or {@link java.awt.image.BufferedImage} and an arbitrary bounding region.
      *
-     * @param name        A unique name to identify the image. If the image source is a file, the file path can be used
-     *                    as the name.
+     * @param name A unique name to identify the image. If the image source is a file, the file path can be used as the
+     * name.
      * @param imageSource Either the file path to the source image or a reference to the {@link
      *                    java.awt.image.BufferedImage} containing it. Images can be any of those supported by {@link
      *                    javax.imageio.ImageIO}, as well as uncompressed TIFF images.
-     * @param corners     The lat/lon locations of the region in which to map the image. The image will be stretched as
-     *                    necessary to fully fill the region. The locations must be specified in counterclockwise order
-     *                    beginning with the lower-left image corner.
-     * @param altitude    The altitude at which to display the image. Specify 0 to have the image draped over the
-     *                    globe's surface.
+     * @param corners The lat/lon locations of the region in which to map the image. The image will be stretched as
+     * necessary to fully fill the region. The locations must be specified in counterclockwise order beginning with the
+     * lower-left image corner.
+     * @param altitude The altitude at which to display the image. Specify 0 to have the image draped over the globe's
+     * surface.
      *
      * @throws IllegalArgumentException if any of the first three arguments are null.
      */
-    public GliderImage(String name, Object imageSource, Iterable<? extends LatLon> corners, double altitude)
-    {
-        if (name == null)
-        {
+    public GliderImage(String name, Object imageSource, Iterable<? extends LatLon> corners, double altitude) {
+        if (name == null) {
             String message = Logging.getMessage("nullValue.NameIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (imageSource == null)
-        {
+        if (imageSource == null) {
             String message = Logging.getMessage("nullValue.ImageSource");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (corners == null)
-        {
+        if (corners == null) {
             String message = Logging.getMessage("nullValue.LocationsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -117,8 +109,7 @@ public class GliderImage extends AVListImpl
         this.altitude = altitude;
 
         this.corners = new ArrayList<LatLon>();
-        for (LatLon c : corners)
-        {
+        for (LatLon c : corners) {
             this.corners.add(c);
         }
     }
@@ -146,8 +137,7 @@ public class GliderImage extends AVListImpl
 //        this.corners = image.corners;
 //    }
 
-    public void releaseImageSource()
-    {
+    public void releaseImageSource() {
         this.imageSource = null;
     }
 
@@ -157,8 +147,7 @@ public class GliderImage extends AVListImpl
      *
      * @return the image name.
      */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -167,13 +156,11 @@ public class GliderImage extends AVListImpl
      *
      * @return the image's location.
      */
-    public Sector getSector()
-    {
+    public Sector getSector() {
         return sector;
     }
 
-    public List<LatLon> getCorners()
-    {
+    public List<LatLon> getCorners() {
         return Collections.unmodifiableList(this.corners);
     }
 
@@ -182,8 +169,7 @@ public class GliderImage extends AVListImpl
      *
      * @return the image's altitude.
      */
-    public double getAltitude()
-    {
+    public double getAltitude() {
         return altitude;
     }
 
@@ -194,10 +180,8 @@ public class GliderImage extends AVListImpl
      *
      * @throws IllegalArgumentException if <code>newSource</code> is null.
      */
-    public void setImageSource(String newSource)
-    {
-        if (newSource == null)
-        {
+    public void setImageSource(String newSource) {
+        if (newSource == null) {
             String message = Logging.getMessage("nullValue.ImageSource");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -210,22 +194,19 @@ public class GliderImage extends AVListImpl
      * Changes the image source and gives the image a new name. The allowable sources are those allowed by {@link
      * #GliderImage}
      *
-     * @param newName   the new image name.
+     * @param newName the new image name.
      * @param newSource the new image source.
      *
      * @throws IllegalArgumentException if either argument is null.
      */
-    public void setImageSource(String newName, Object newSource)
-    {
-        if (newName == null)
-        {
+    public void setImageSource(String newName, Object newSource) {
+        if (newName == null) {
             String message = Logging.getMessage("nullValue.NameIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (newSource == null)
-        {
+        if (newSource == null) {
             String message = Logging.getMessage("nullValue.ImageSource");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -242,18 +223,15 @@ public class GliderImage extends AVListImpl
      *
      * @return the image source.
      */
-    public Object getImageSource()
-    {
+    public Object getImageSource() {
         return imageSource;
     }
 
-    public double getOpacity()
-    {
+    public double getOpacity() {
         return opacity;
     }
 
-    public void setOpacity(double opacity)
-    {
+    public void setOpacity(double opacity) {
         this.opacity = opacity;
         this.firePropertyChange(GLIDER_IMAGE_OPACITY, null, this);
     }
@@ -265,10 +243,8 @@ public class GliderImage extends AVListImpl
      *
      * @throws IllegalArgumentException if <code>region</code> is null.
      */
-    public void addRegionOfInterest(GliderRegionOfInterest region)
-    {
-        if (region == null)
-        {
+    public void addRegionOfInterest(GliderRegionOfInterest region) {
+        if (region == null) {
             String message = Logging.getMessage("nullValue.RegionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -277,8 +253,9 @@ public class GliderImage extends AVListImpl
         region.removePropertyChangeListener(this.regionListener); // prevent duplicate registrations
         region.addPropertyChangeListener(this.regionListener);
 
-        if (this.regionTable.add(region))
+        if (this.regionTable.add(region)) {
             this.firePropertyChange(GLIDER_REGIONS_OF_INTEREST, null, this.getRegionsOfInterest());
+        }
     }
 
     /**
@@ -288,10 +265,8 @@ public class GliderImage extends AVListImpl
      *
      * @throws IllegalArgumentException if <code>region</code> is null.
      */
-    public void removeRegionOfInterest(GliderRegionOfInterest region)
-    {
-        if (region == null)
-        {
+    public void removeRegionOfInterest(GliderRegionOfInterest region) {
+        if (region == null) {
             String message = Logging.getMessage("nullValue.RegionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -299,24 +274,22 @@ public class GliderImage extends AVListImpl
 
         region.removePropertyChangeListener(this.regionListener);
 
-        if (this.regionTable.remove(region))
+        if (this.regionTable.remove(region)) {
             this.firePropertyChange(GLIDER_REGIONS_OF_INTEREST, null, this.getRegionsOfInterest());
+        }
     }
 
-    public GliderRegionOfInterest.RegionSet getRegionsOfInterest()
-    {
+    public GliderRegionOfInterest.RegionSet getRegionsOfInterest() {
         return new GliderRegionOfInterest.RegionSet(this.regionTable);
     }
 
-    protected class RegionListener implements PropertyChangeListener
-    {
-        public void propertyChange(PropertyChangeEvent evt)
-        {
+    protected class RegionListener implements PropertyChangeListener {
+
+        public void propertyChange(PropertyChangeEvent evt) {
             //noinspection StringEquality
-            if (evt.getPropertyName() == GliderRegionOfInterest.GLIDER_REGION_OF_INTEREST)
-            {
+            if (evt.getPropertyName() == GliderRegionOfInterest.GLIDER_REGION_OF_INTEREST) {
                 GliderImage.this.firePropertyChange(GLIDER_REGIONS_OF_INTEREST, null,
-                    GliderImage.this.getRegionsOfInterest());
+                        GliderImage.this.getRegionsOfInterest());
             }
         }
     }
@@ -325,57 +298,58 @@ public class GliderImage extends AVListImpl
      * Reprojects an image into an aligned image, one with edges of constant latitude and longitude.
      *
      * @param sourceImage the image to reproject, typically a non-aligned image
-     * @param latitudes   an array identifying the latitude of each pixels if the source image. There must be an entry
-     *                    in the array for all pixels. The values are taken to be in row-major order relative to the
-     *                    image -- the horizontal component varies fastest.
-     * @param longitudes  an array identifying the longitude of each pixels if the source image. There must be an entry
-     *                    in the array for all pixels. The values are taken to be in row-major order relative to the
-     *                    image -- the horizontal component varies fastest.
+     * @param latitudes an array identifying the latitude of each pixels if the source image. There must be an entry in
+     * the array for all pixels. The values are taken to be in row-major order relative to the image -- the horizontal
+     * component varies fastest.
+     * @param longitudes an array identifying the longitude of each pixels if the source image. There must be an entry
+     * in the array for all pixels. The values are taken to be in row-major order relative to the image -- the
+     * horizontal component varies fastest.
      *
      * @return a new image containing the original image but reprojected to align to the sector. Pixels in the new image
-     *         that have no correspondence with the source image are transparent.
+     * that have no correspondence with the source image are transparent.
      *
      * @throws InterruptedException if any thread has interrupted the current thread while alignImage is running. The
-     *                              <i>interrupted status</i> of the current thread is cleared when this exception is
-     *                              thrown.
+     * <i>interrupted status</i> of the current thread is cleared when this exception is thrown.
      */
     public static ImageUtil.AlignedImage alignImage(BufferedImage sourceImage, float[] latitudes, float[] longitudes)
-        throws InterruptedException
-    {
+            throws InterruptedException {
         return ImageUtil.alignImage(sourceImage, latitudes, longitudes, null, null);
     }
 
-    public static void alignImageDump(BufferedImage sourceImage, float[] latitudes, float[] longitudes)
-    {
+    public static void alignImageDump(BufferedImage sourceImage, float[] latitudes, float[] longitudes) {
         ImageUtil.alignImageDump(sourceImage, latitudes, longitudes);
     }
 
     @SuppressWarnings({"RedundantIfStatement"})
-    public boolean equals(Object o)
-    {
-        if (this == o)
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
+        }
 
         GliderImage that = (GliderImage) o;
 
-        if (Double.compare(that.altitude, altitude) != 0)
+        if (Double.compare(that.altitude, altitude) != 0) {
             return false;
-        if (corners != null ? !corners.equals(that.corners) : that.corners != null)
+        }
+        if (corners != null ? !corners.equals(that.corners) : that.corners != null) {
             return false;
+        }
 //        if (imageSource != null ? !imageSource.equals(that.imageSource) : that.imageSource != null)
 //            return false;
-        if (name != null ? !name.equals(that.name) : that.name != null)
+        if (name != null ? !name.equals(that.name) : that.name != null) {
             return false;
-        if (sector != null ? !sector.equals(that.sector) : that.sector != null)
+        }
+        if (sector != null ? !sector.equals(that.sector) : that.sector != null) {
             return false;
+        }
 
         return true;
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         int result;
         long temp;
         result = (name != null ? name.hashCode() : 0);

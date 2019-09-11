@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Sector;
@@ -19,8 +18,8 @@ import java.util.List;
  * @author dcollins
  * @version $Id: SurfaceRenderable.java 2283 2014-08-30 15:58:43Z dcollins $
  */
-public interface SurfaceRenderable extends Renderable
-{
+public interface SurfaceRenderable extends Renderable {
+
     /**
      * Returns a list of sectors indicating the geographic region that bounds this renderable for the specified draw
      * context.

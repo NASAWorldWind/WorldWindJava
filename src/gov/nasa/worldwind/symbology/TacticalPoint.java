@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology;
 
 import gov.nasa.worldwind.geom.Position;
@@ -15,8 +14,8 @@ import gov.nasa.worldwind.geom.Position;
  * @version $Id: TacticalPoint.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see TacticalGraphicFactory#createPoint(String, gov.nasa.worldwind.geom.Position, gov.nasa.worldwind.avlist.AVList)
  */
-public interface TacticalPoint extends TacticalGraphic
-{
+public interface TacticalPoint extends TacticalGraphic {
+
     /**
      * Indicates the position of the graphic.
      *

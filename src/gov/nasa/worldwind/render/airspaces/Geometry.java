@@ -18,60 +18,60 @@ import java.util.Arrays;
  * @author dcollins
  * @version $Id: Geometry.java 2210 2014-08-08 22:06:02Z tgaskins $
  */
-public class Geometry extends AVListImpl implements Cacheable
-{
-    public static class CacheKey
-    {
+public class Geometry extends AVListImpl implements Cacheable {
+
+    public static class CacheKey {
+
         private final GlobeStateKey globeStateKey;
         private final Class cls;
         private final String key;
         private final Object[] params;
         private int hash = 0;
 
-        public CacheKey(Globe globe, Class cls, String key, Object... params)
-        {
+        public CacheKey(Globe globe, Class cls, String key, Object... params) {
             this.globeStateKey = globe != null ? globe.getGlobeStateKey() : null;
             this.cls = cls;
             this.key = key;
             this.params = params;
         }
 
-        public CacheKey(Class cls, String key, Object... params)
-        {
+        public CacheKey(Class cls, String key, Object... params) {
             this(null, cls, key, params);
         }
 
-        public CacheKey(String key, Object... params)
-        {
+        public CacheKey(String key, Object... params) {
             this(null, null, key, params);
         }
 
-        public boolean equals(Object o)
-        {
-            if (this == o)
+        public boolean equals(Object o) {
+            if (this == o) {
                 return true;
-            if (o == null || this.getClass() != o.getClass())
+            }
+            if (o == null || this.getClass() != o.getClass()) {
                 return false;
+            }
 
             CacheKey that = (CacheKey) o;
 
-            if (this.globeStateKey != null ? !this.globeStateKey.equals(that.globeStateKey) : that.globeStateKey != null)
+            if (this.globeStateKey != null ? !this.globeStateKey.equals(that.globeStateKey) : that.globeStateKey != null) {
                 return false;
-            if (this.cls != null ? !this.cls.equals(that.cls) : that.cls != null)
+            }
+            if (this.cls != null ? !this.cls.equals(that.cls) : that.cls != null) {
                 return false;
-            if (this.key != null ? !this.key.equals(that.key) : that.key != null)
+            }
+            if (this.key != null ? !this.key.equals(that.key) : that.key != null) {
                 return false;
+            }
             //noinspection RedundantIfStatement
-            if (!Arrays.deepEquals(this.params, that.params))
+            if (!Arrays.deepEquals(this.params, that.params)) {
                 return false;
+            }
 
             return true;
         }
 
-        public int hashCode()
-        {
-            if (this.hash == 0)
-            {
+        public int hashCode() {
+            if (this.hash == 0) {
                 int result;
                 result = (this.globeStateKey != null ? this.globeStateKey.hashCode() : 0);
                 result = 31 * result + (this.cls != null ? this.cls.hashCode() : 0);
@@ -96,8 +96,7 @@ public class Geometry extends AVListImpl implements Cacheable
     private int[] stride;
     private Buffer[] buffer;
 
-    public Geometry()
-    {
+    public Geometry() {
         this.mode = new int[4];
         this.count = new int[4];
         this.size = new int[4];
@@ -106,43 +105,35 @@ public class Geometry extends AVListImpl implements Cacheable
         this.buffer = new Buffer[4];
     }
 
-    public int getMode(int object)
-    {
+    public int getMode(int object) {
         return this.mode[object];
     }
 
-    public void setMode(int type, int mode)
-    {
+    public void setMode(int type, int mode) {
         this.mode[type] = mode;
     }
 
-    public int getCount(int type)
-    {
+    public int getCount(int type) {
         return this.count[type];
     }
 
-    public int getSize(int type)
-    {
+    public int getSize(int type) {
         return this.size[type];
     }
 
-    public int getGLType(int type)
-    {
+    public int getGLType(int type) {
         return this.glType[type];
     }
 
-    public int getStride(int type)
-    {
+    public int getStride(int type) {
         return this.stride[type];
     }
 
-    public Buffer getBuffer(int type)
-    {
+    public Buffer getBuffer(int type) {
         return this.buffer[type];
     }
 
-    public void setData(int type, int size, int glType, int stride, int count, int[] src, int srcPos)
-    {
+    public void setData(int type, int size, int glType, int stride, int count, int[] src, int srcPos) {
         this.size[type] = size;
         this.glType[type] = glType;
         this.stride[type] = stride;
@@ -150,17 +141,15 @@ public class Geometry extends AVListImpl implements Cacheable
 
         int numCoords = size * count;
         if (this.buffer[type] == null
-            || this.buffer[type].capacity() < numCoords
-            || !(this.buffer[type] instanceof IntBuffer))
-        {
+                || this.buffer[type].capacity() < numCoords
+                || !(this.buffer[type] instanceof IntBuffer)) {
             this.buffer[type] = Buffers.newDirectIntBuffer(numCoords);
         }
 
         this.bufferCopy(src, srcPos, (IntBuffer) this.buffer[type], 0, numCoords);
     }
 
-    public void setData(int type, int size, int stride, int count, float[] src, int srcPos)
-    {
+    public void setData(int type, int size, int stride, int count, float[] src, int srcPos) {
         this.size[type] = size;
         this.glType[type] = GL.GL_FLOAT;
         this.stride[type] = stride;
@@ -168,9 +157,8 @@ public class Geometry extends AVListImpl implements Cacheable
 
         int numCoords = size * count;
         if (this.buffer[type] == null
-            || this.buffer[type].capacity() < numCoords
-            || !(this.buffer[type] instanceof FloatBuffer))
-        {
+                || this.buffer[type].capacity() < numCoords
+                || !(this.buffer[type] instanceof FloatBuffer)) {
             this.buffer[type] = Buffers.newDirectFloatBuffer(numCoords);
         }
 
@@ -178,8 +166,7 @@ public class Geometry extends AVListImpl implements Cacheable
     }
 
     // version using float buffer instead of array
-    public void setData(int type, int size, int stride, int count, FloatBuffer src)
-    {
+    public void setData(int type, int size, int stride, int count, FloatBuffer src) {
         this.size[type] = size;
         this.glType[type] = GL.GL_FLOAT;
         this.stride[type] = stride;
@@ -187,22 +174,19 @@ public class Geometry extends AVListImpl implements Cacheable
 
         int numCoords = size * count;
         if (this.buffer[type] == null
-            || this.buffer[type].capacity() < numCoords
-            || !(this.buffer[type] instanceof FloatBuffer))
-        {
+                || this.buffer[type].capacity() < numCoords
+                || !(this.buffer[type] instanceof FloatBuffer)) {
             this.buffer[type] = src;
         }
     }
 
-    public void setElementData(int mode, int count, int[] src)
-    {
+    public void setElementData(int mode, int count, int[] src) {
         this.setMode(ELEMENT, mode);
         this.setData(ELEMENT, 1, GL.GL_UNSIGNED_INT, 0, count, src, 0);
     }
 
     // version using buffer instead of array
-    public void setElementData(int mode, int count, IntBuffer src)
-    {
+    public void setElementData(int mode, int count, IntBuffer src) {
         this.setMode(ELEMENT, mode);
         this.buffer[ELEMENT] = src;
         this.size[ELEMENT] = 1;
@@ -211,14 +195,12 @@ public class Geometry extends AVListImpl implements Cacheable
         this.count[ELEMENT] = count;
     }
 
-    public void setVertexData(int count, float[] src)
-    {
+    public void setVertexData(int count, float[] src) {
         this.setData(VERTEX, 3, 0, count, src, 0);
     }
 
     // version using float buffer
-    public void setVertexData(int count, FloatBuffer src)
-    {
+    public void setVertexData(int count, FloatBuffer src) {
         this.buffer[VERTEX] = src;
         this.size[VERTEX] = 3;
         this.glType[VERTEX] = GL.GL_FLOAT;
@@ -226,14 +208,12 @@ public class Geometry extends AVListImpl implements Cacheable
         this.count[VERTEX] = count;
     }
 
-    public void setNormalData(int count, float[] src)
-    {
+    public void setNormalData(int count, float[] src) {
         this.setData(NORMAL, 3, 0, count, src, 0);
     }
 
     // version using float buffer
-    public void setNormalData(int count, FloatBuffer src)
-    {
+    public void setNormalData(int count, FloatBuffer src) {
         this.buffer[NORMAL] = src;
         this.size[NORMAL] = 3;
         this.glType[NORMAL] = GL.GL_FLOAT;
@@ -241,14 +221,12 @@ public class Geometry extends AVListImpl implements Cacheable
         this.count[NORMAL] = count;
     }
 
-    public void setTextureCoordData(int count, float[] src)
-    {
+    public void setTextureCoordData(int count, float[] src) {
         this.setData(TEXTURE, 2, 0, count, src, 0);
     }
 
     // version using float buffer
-    public void setTextureCoordData(int count, FloatBuffer src)
-    {
+    public void setTextureCoordData(int count, FloatBuffer src) {
         this.buffer[TEXTURE] = src;
         this.size[NORMAL] = 2;
         this.glType[NORMAL] = GL.GL_FLOAT;
@@ -256,8 +234,7 @@ public class Geometry extends AVListImpl implements Cacheable
         this.count[NORMAL] = count;
     }
 
-    public void clear(int type)
-    {
+    public void clear(int type) {
         this.mode[type] = 0;
         this.count[type] = 0;
         this.size[type] = 0;
@@ -266,24 +243,21 @@ public class Geometry extends AVListImpl implements Cacheable
         this.buffer[type] = null;
     }
 
-    public long getSizeInBytes()
-    {
+    public long getSizeInBytes() {
         return this.bufferSize(ELEMENT) + this.bufferSize(VERTEX) + this.bufferSize(NORMAL);
     }
 
-    private long bufferSize(int bufferType)
-    {
+    private long bufferSize(int bufferType) {
         long size = 0L;
-        if (this.buffer[bufferType] != null)
+        if (this.buffer[bufferType] != null) {
             size = this.sizeOf(this.glType[bufferType]) * this.buffer[bufferType].capacity();
+        }
         return size;
     }
 
-    private long sizeOf(int glType)
-    {
+    private long sizeOf(int glType) {
         long size = 0L;
-        switch (glType)
-        {
+        switch (glType) {
             case GL2.GL_BYTE:
                 size = 1L;
                 break;
@@ -303,15 +277,13 @@ public class Geometry extends AVListImpl implements Cacheable
         return size;
     }
 
-    private void bufferCopy(int[] src, int srcPos, IntBuffer dest, int destPos, int length)
-    {
+    private void bufferCopy(int[] src, int srcPos, IntBuffer dest, int destPos, int length) {
         dest.position(destPos);
         dest.put(src, srcPos, length);
         dest.position(destPos);
     }
 
-    private void bufferCopy(float[] src, int srcPos, FloatBuffer dest, int destPos, int length)
-    {
+    private void bufferCopy(float[] src, int srcPos, FloatBuffer dest, int destPos, int length) {
         dest.position(destPos);
         dest.put(src, srcPos, length);
         dest.position(destPos);

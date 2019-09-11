@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!--
-  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
-  ~ National Aeronautics and Space Administration.
-  ~ All Rights Reserved.
-  -->
+~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+~ National Aeronautics and Space Administration.
+~ All Rights Reserved.
+-->
 
 <!-- WorldWind data-file store configuration -->
 <!--$Id: CacheLocationConfiguration.xml 2851 2015-02-26 01:09:46Z tgaskins $-->

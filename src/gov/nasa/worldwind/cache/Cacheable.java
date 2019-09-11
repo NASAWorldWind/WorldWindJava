@@ -3,14 +3,13 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.cache;
+
 /**
  * @author Tom Gaskins
  * @version $Id: Cacheable.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Cacheable
-{
+public interface Cacheable {
     // TODO: search for size queries that do not used this interface and change them to do so.
     // currently (22 Nov 2006), only  BasicElevationModel.addTileToCache(Tile, ShortBuffer) does not use Cacheable
 

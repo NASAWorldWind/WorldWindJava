@@ -23,31 +23,28 @@ import java.io.File;
  * <p>
  * To display VPF shapes with the appropriate color, style, and icon, applications must include the JAR file
  * <code>vpf-symbols.jar</code> in the Java class-path. If this JAR file is not in the Java class-path, VPFLayer outputs
- * the following message in the WorldWind log: <code>WARNING: GeoSym style support is disabled</code>. In this case,
- * VPF shapes are displayed as gray outlines, and icons are displayed as a gray question mark.
+ * the following message in the WorldWind log: <code>WARNING: GeoSym style support is disabled</code>. In this case, VPF
+ * shapes are displayed as gray outlines, and icons are displayed as a gray question mark.
  *
  * @author dcollins
  * @version $Id: VPFLayerDemo.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class VPFLayerDemo extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class VPFLayerDemo extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             this.makeControlPanel();
         }
 
-        protected void addVPFLayer(File file)
-        {
+        protected void addVPFLayer(File file) {
             VPFDatabase db = VPFUtils.readDatabase(file);
             VPFLayer layer = new VPFLayer(db);
             insertBeforePlacenames(this.getWwd(), layer);
             this.openVPFCoveragePanel(db, layer);
         }
 
-        protected void openVPFCoveragePanel(VPFDatabase db, VPFLayer layer)
-        {
+        protected void openVPFCoveragePanel(VPFDatabase db, VPFLayer layer) {
             VPFCoveragePanel panel = new VPFCoveragePanel(getWwd(), db);
             panel.setLayer(layer);
             JFrame frame = new JFrame(db.getName());
@@ -59,26 +56,23 @@ public class VPFLayerDemo extends ApplicationTemplate
             frame.setVisible(true);
         }
 
-        protected void showOpenDialog()
-        {
+        protected void showOpenDialog() {
             JFileChooser fc = new JFileChooser(Configuration.getUserHomeDirectory());
             fc.addChoosableFileFilter(new VPFFileFilter());
 
             int retVal = fc.showOpenDialog(this);
-            if (retVal != JFileChooser.APPROVE_OPTION)
+            if (retVal != JFileChooser.APPROVE_OPTION) {
                 return;
+            }
 
             File file = fc.getSelectedFile();
             this.addVPFLayer(file);
         }
 
-        protected void makeControlPanel()
-        {
+        protected void makeControlPanel() {
             JButton button = new JButton("Open VPF Database");
-            button.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     showOpenDialog();
                 }
             });
@@ -91,19 +85,16 @@ public class VPFLayerDemo extends ApplicationTemplate
         }
     }
 
-    public static class VPFFileFilter extends FileFilter
-    {
+    public static class VPFFileFilter extends FileFilter {
+
         protected VPFDatabaseFilter filter;
 
-        public VPFFileFilter()
-        {
+        public VPFFileFilter() {
             this.filter = new VPFDatabaseFilter();
         }
 
-        public boolean accept(File file)
-        {
-            if (file == null)
-            {
+        public boolean accept(File file) {
+            if (file == null) {
                 String message = Logging.getMessage("nullValue.FileIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -112,14 +103,12 @@ public class VPFLayerDemo extends ApplicationTemplate
             return file.isDirectory() || this.filter.accept(file);
         }
 
-        public String getDescription()
-        {
+        public String getDescription() {
             return "VPF Databases (dht)";
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         start("WorldWind VPF Shapes", AppFrame.class);
     }
 }

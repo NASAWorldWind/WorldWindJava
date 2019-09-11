@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 /**
  *
  * Provides classes for loading web content, laying out and rendering the content as an OpenGL texture, and interacting

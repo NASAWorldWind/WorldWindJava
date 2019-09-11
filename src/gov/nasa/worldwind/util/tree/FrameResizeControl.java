@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.tree;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -21,67 +20,73 @@ import java.awt.geom.*;
  * @author pabercrombie
  * @version $Id: FrameResizeControl.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class FrameResizeControl extends AbstractResizeHotSpot
-{
+public class FrameResizeControl extends AbstractResizeHotSpot {
+
     protected ScrollFrame frame;
 
     /**
      * Create a resize control.
      *
-     * @param frame     Frame to resize.
+     * @param frame Frame to resize.
      */
-    public FrameResizeControl(ScrollFrame frame)
-    {
+    public FrameResizeControl(ScrollFrame frame) {
         this.frame = frame;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void beginDrag(Point point)
-    {
+    protected void beginDrag(Point point) {
         super.beginDrag(point);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void endDrag()
-    {
+    protected void endDrag() {
         super.endDrag();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected Dimension getSize()
-    {
+    protected Dimension getSize() {
         return this.frame.getCurrentSize();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void setSize(Dimension newSize)
-    {
+    protected void setSize(Dimension newSize) {
         this.frame.setSize(Size.fromPixels(newSize.width, newSize.height));
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected Point getScreenPoint()
-    {
+    protected Point getScreenPoint() {
         Point2D point2D = this.frame.getScreenPoint();
-        return new Point((int)point2D.getX(), (int)point2D.getY());
+        return new Point((int) point2D.getX(), (int) point2D.getY());
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void setScreenPoint(Point newPoint)
-    {
+    protected void setScreenPoint(Point newPoint) {
         this.frame.setScreenLocation(new Offset(newPoint.getX(), newPoint.getY(), AVKey.PIXELS, AVKey.INSET_PIXELS));
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected Dimension getMinimumSize()
-    {
+    protected Dimension getMinimumSize() {
         return this.frame.getMinimumSize();
     }
 
@@ -91,10 +96,10 @@ public class FrameResizeControl extends AbstractResizeHotSpot
      *
      * @param event The event to handle.
      */
-    public void mouseWheelMoved(MouseWheelEvent event)
-    {
-        if (event == null || event.isConsumed())
+    public void mouseWheelMoved(MouseWheelEvent event) {
+        if (event == null || event.isConsumed()) {
             return;
+        }
 
         this.frame.mouseWheelMoved(event);
     }

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
@@ -21,12 +20,11 @@ import java.util.ArrayList;
  * @author pabercrombie
  * @version $Id: PathsWithDirection.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class PathsWithDirection extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class PathsWithDirection extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             RenderableLayer layer = new RenderableLayer();
@@ -64,8 +62,7 @@ public class PathsWithDirection extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 49.06);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -122.77);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 22000);

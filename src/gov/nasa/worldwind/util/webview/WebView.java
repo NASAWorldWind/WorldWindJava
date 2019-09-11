@@ -41,8 +41,8 @@ import java.net.URL;
  * @author dcollins
  * @version $Id: WebView.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface WebView extends AVList, Disposable
-{
+public interface WebView extends AVList, Disposable {
+
     /**
      * Specifies this <code>WebView's</code> HTML content as a string. The specified <code>htmlString</code> may be one
      * of the following:
@@ -55,8 +55,7 @@ public interface WebView extends AVList, Disposable
      * If the application sends input events to the WebView, the user may navigate away from the specified HTML content
      * by interacting with links or buttons in the content.
      *
-     * @param htmlString the WebView's HTML text content, or <code>null</code> to display an empty
-     *                   <code>WebView</code>.
+     * @param htmlString the WebView's HTML text content, or <code>null</code> to display an empty <code>WebView</code>.
      */
     void setHTMLString(String htmlString);
 
@@ -73,11 +72,9 @@ public interface WebView extends AVList, Disposable
      * by interacting with links or buttons in the content. Once the user navigates away from the content specified
      * here, the <code>htmlString</code> and <code>baseURL</code> are no longer used.
      *
-     * @param htmlString the WebView's HTML text content, or <code>null</code> to display an empty
-     *                   <code>WebView</code>.
-     * @param baseURL    the <code>URL</code> used to resolve relative paths in the <code>htmlString</code>, or
-     *                   <code>null</code> to indicate that relative paths should be interpreted as unresolved
-     *                   references.
+     * @param htmlString the WebView's HTML text content, or <code>null</code> to display an empty <code>WebView</code>.
+     * @param baseURL the <code>URL</code> used to resolve relative paths in the <code>htmlString</code>, or
+     * <code>null</code> to indicate that relative paths should be interpreted as unresolved references.
      */
     void setHTMLString(String htmlString, URL baseURL);
 
@@ -95,11 +92,10 @@ public interface WebView extends AVList, Disposable
      * by interacting with links or buttons in the content. Once the user navigates away from the content specified
      * here, the <code>htmlString</code> and <code>resourceResolver</code> are no longer used.
      *
-     * @param htmlString       the WebView's HTML text content, or <code>null</code> to display an empty
-     *                         <code>WebView</code>.
+     * @param htmlString the WebView's HTML text content, or <code>null</code> to display an empty <code>WebView</code>.
      * @param resourceResolver the <code>WebResourceResolver</code> used to resolve relative paths in the
-     *                         <code>htmlString</code>, or <code>null</code> to indicate that relative paths should be
-     *                         interpreted as unresolved references.
+     * <code>htmlString</code>, or <code>null</code> to indicate that relative paths should be interpreted as unresolved
+     * references.
      */
     void setHTMLString(String htmlString, WebResourceResolver resourceResolver);
 
@@ -119,7 +115,7 @@ public interface WebView extends AVList, Disposable
      * @param size the size of this WebView's frame in pixels.
      *
      * @throws IllegalArgumentException if <code>size</code> is <code>null</code>, if the width or height are less than
-     *                                  one, or if the width or height exceed the implementation-defined maximum.
+     * one, or if the width or height exceed the implementation-defined maximum.
      */
     void setFrameSize(Dimension size);
 
@@ -135,7 +131,7 @@ public interface WebView extends AVList, Disposable
      * See {@link #getMinContentSize()} for more information on how the minimum content size is used.
      *
      * @return the size of this WebView's content limited by the {@code minContentSize}, or <code>null</code> if this
-     *         WebView's content size is unknown.
+     * WebView's content size is unknown.
      *
      * @see #getMinContentSize()
      */
@@ -166,7 +162,7 @@ public interface WebView extends AVList, Disposable
      * navigates within its history, and always reflects the URL of the current content.
      *
      * @return the URL of this WebView's current content, or <code>null</code> if the current content is the HTML string
-     *         specified by <code>setHTMLString</code>.
+     * specified by <code>setHTMLString</code>.
      */
     URL getContentURL();
 
@@ -189,7 +185,7 @@ public interface WebView extends AVList, Disposable
      * <code>AVList</code> with multiple pickable rectangles.
      *
      * @return an <code>Iterable</code> of <code>AVList</code> parameters describing this <code>WebView's</code> visible
-     *         links.
+     * links.
      */
     Iterable<AVList> getLinks();
 
@@ -212,7 +208,7 @@ public interface WebView extends AVList, Disposable
      * Called when this WebView is activated or deactivated. The WebView only receives input events when it is active.
      *
      * @param active <code>true</code> if this WebView is being activated. <code>false</code> if this WebView is being
-     *               deactivated.
+     * deactivated.
      *
      * @see #sendEvent
      */
@@ -246,10 +242,14 @@ public interface WebView extends AVList, Disposable
      */
     void sendEvent(InputEvent event);
 
-    /** Navigate the WebView to the previous page in the browsing history. Has no effect if there is no previous page. */
+    /**
+     * Navigate the WebView to the previous page in the browsing history. Has no effect if there is no previous page.
+     */
     void goBack();
 
-    /** Navigate the WebView to the next page in the browsing history. Has no effect if there is no next page. */
+    /**
+     * Navigate the WebView to the next page in the browsing history. Has no effect if there is no next page.
+     */
     void goForward();
 
     /**

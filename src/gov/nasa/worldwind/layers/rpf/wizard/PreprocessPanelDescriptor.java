@@ -25,8 +25,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author dcollins
  * @version $Id: PreprocessPanelDescriptor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
-{
+public class PreprocessPanelDescriptor extends DefaultPanelDescriptor {
+
     private ProgressPanel panelComponent;
     // Preprocessor logical components.
     private RPFTiledImageProcessor preprocessor;
@@ -44,14 +44,13 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
     private static final int DEFAULT_THREAD_POOL_SIZE = 3;
     private static final int DEFAULT_STEPS_NEEDED_FOR_ESTIMATE = 20;
 
-    public PreprocessPanelDescriptor()
-    {
+    public PreprocessPanelDescriptor() {
         // Get preprocessor thread pool size, and num steps needed for ETR
         // from Configuration. Provide suitable defaults if these values
         // aren't specified.
         int threadPoolSize = Configuration.getIntegerValue(THREAD_POOL_SIZE, DEFAULT_THREAD_POOL_SIZE);
         int stepsNeededForEst = Configuration.getIntegerValue(STEPS_NEEDED_FOR_ESTIMATE,
-            DEFAULT_STEPS_NEEDED_FOR_ESTIMATE);
+                DEFAULT_STEPS_NEEDED_FOR_ESTIMATE);
 
         this.panelComponent = new ProgressPanel();
         this.preprocessor = new RPFTiledImageProcessor();
@@ -62,18 +61,15 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
         setPanelComponent(this.panelComponent);
     }
 
-    public Object getBackPanelDescriptor()
-    {
+    public Object getBackPanelDescriptor() {
         return null;
     }
 
-    public Object getNextPanelDescriptor()
-    {
+    public Object getNextPanelDescriptor() {
         return Wizard.FINISH;
     }
 
-    public void aboutToDisplayPanel()
-    {
+    public void aboutToDisplayPanel() {
         this.panelComponent.getProgressBar().setMinimum(0);
         this.panelComponent.getProgressBar().setMaximum(0);
         this.panelComponent.getProgressBar().setValue(0);
@@ -81,18 +77,15 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
         this.panelComponent.setProgressDescription2(" ");
     }
 
-    public void displayingPanel()
-    {
+    public void displayingPanel() {
         WizardModel model = getWizardModel();
         final Iterable<FileSet> fileSetList = RPFWizardUtil.getFileSetList(model);
         final File selectedFile = RPFWizardUtil.getSelectedFile(model);
-        if (fileSetList != null && selectedFile != null)
-        {
+        if (fileSetList != null && selectedFile != null) {
             this.panelComponent.setTitle(RPFWizardUtil.makeLarger("Importing Imagery"));
             this.panelComponent.setDescription("");
             this.panelComponent.getProgressBar().setVisible(true);
-            if (model != null)
-            {
+            if (model != null) {
                 model.setNextButtonEnabled(false);
             }
 
@@ -111,41 +104,33 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
                     finished();
                 }
             });
-        }
-        else
-        {
+        } else {
             this.panelComponent.setTitle(RPFWizardUtil.makeLarger("No Imagery to Import"));
             this.panelComponent.setDescription("No Imagery");
             this.panelComponent.getProgressBar().setVisible(false);
         }
     }
 
-    public void aboutToHidePanel()
-    {
+    public void aboutToHidePanel() {
         Wizard wizard = getWizard();
-        if (wizard != null && wizard.getReturnCode() == Wizard.FINISH_RETURN_CODE)
-        {
+        if (wizard != null && wizard.getReturnCode() == Wizard.FINISH_RETURN_CODE) {
             // "Finish" button pressed.
-        }
-        else
-        {
+        } else {
             // "<Back" or "Cancel" button pressed, or window closed.
-            if (this.preprocessor != null)
+            if (this.preprocessor != null) {
                 this.preprocessor.stop();
+            }
         }
     }
 
-    private void preprocess(File inFile, FileSet set, int setNumber, int numSets)
-    {
+    private void preprocess(File inFile, FileSet set, int setNumber, int numSets) {
         long startTime = System.currentTimeMillis();
 
         RPFFileIndex fileIndex = null;
         Layer layer = null;
-        try
-        {
+        try {
             String descr = makeDescription(set, setNumber, numSets);
-            if (inFile != null && set != null)
-            {
+            if (inFile != null && set != null) {
                 String subDescr = makeSubStepDescription(descr, "Processing Image Files");
                 this.panelComponent.setDescription(RPFWizardUtil.makeBold(subDescr));
 
@@ -154,27 +139,22 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
                 set.setProperty("filesWithErrors", this.stepsWithErrors.intValue());
             }
 
-            if (fileIndex != null)
-            {
+            if (fileIndex != null) {
                 String subDescr = makeSubStepDescription(descr, "Generating Overview Imagery");
                 this.panelComponent.setDescription(RPFWizardUtil.makeBold(subDescr));
 
                 layer = this.preprocessor.makeLayer(fileIndex);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = "Exception while preprocessing: " + (set != null ? set.getTitle() : "null");
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             layer = null;
         }
 
         WizardModel model = getWizardModel();
-        if (layer != null && model != null)
-        {
+        if (layer != null && model != null) {
             List<Layer> layerList = RPFWizardUtil.getLayerList(model);
-            if (layerList == null)
-            {
+            if (layerList == null) {
                 layerList = new ArrayList<Layer>();
                 RPFWizardUtil.setLayerList(model, layerList);
             }
@@ -187,8 +167,7 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
         Logging.logger().fine(message);
     }
 
-    private void finished()
-    {
+    private void finished() {
         this.panelComponent.setTitle(RPFWizardUtil.makeLarger("Finished"));
         this.panelComponent.setDescription(makeFinishedDescription());
         this.panelComponent.getProgressBar().setMinimum(0);
@@ -199,13 +178,13 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
         this.panelComponent.setProgressDescription2(" ");
 
         WizardModel model = getWizardModel();
-        if (model != null)
-        {
+        if (model != null) {
             model.setNextButtonEnabled(true);
         }
     }
 
     private class PropertyEvents implements PropertyChangeListener {
+
         public void propertyChange(PropertyChangeEvent evt) {
             if (evt != null && evt.getPropertyName() != null) {
                 if (evt.getPropertyName().equals(RPFTiledImageProcessor.BEGIN_SUB_TASK)) {
@@ -223,29 +202,26 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
         }
     }
 
-    private void beginTask()
-    {
+    private void beginTask() {
         this.stepsTaken.set(0);
         this.stepsWithErrors.set(0);
         this.etrCalc.setStartTime(System.currentTimeMillis());
     }
 
-    private void endTask()
-    {
+    private void endTask() {
         this.panelComponent.setProgressDescription1(" ");
         this.panelComponent.setProgressDescription2(" ");
     }
 
-    private void stepsForTask(int numSteps)
-    {
+    private void stepsForTask(int numSteps) {
         this.numSteps = numSteps;
     }
 
-    private void stepComplete(String description, boolean success)
-    {
+    private void stepComplete(String description, boolean success) {
         int n = this.stepsTaken.incrementAndGet();
-        if (!success)
+        if (!success) {
             this.stepsWithErrors.incrementAndGet();
+        }
 
         int numFiles = this.numSteps;
         this.etrCalc.setStep(n);
@@ -255,75 +231,66 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
         StringBuilder sb = new StringBuilder();
         sb.append(description);
         int nErrors = this.stepsWithErrors.get();
-        if (nErrors > 0)
-        {
-            if (sb.length() > 0)
+        if (nErrors > 0) {
+            if (sb.length() > 0) {
                 sb.append("; ");
+            }
             sb.append(formatFileCount(nErrors)).append(" with errors");
         }
         setProgressMessage(sb.toString());
         setProgress(n, numFiles, etr);
     }
 
-    private void setProgress(int progressValue, int progressRange, long remainingMillis)
-    {
-        if (progressValue >= 0 && progressValue < progressRange)
-        {
+    private void setProgress(int progressValue, int progressRange, long remainingMillis) {
+        if (progressValue >= 0 && progressValue < progressRange) {
             this.panelComponent.getProgressBar().setValue(progressValue);
             this.panelComponent.getProgressBar().setMaximum(progressRange);
             StringBuilder sb = new StringBuilder();
             sb.append(String.format("%,d of %,d", progressValue, progressRange));
-            if (remainingMillis > 0)
-            {
+            if (remainingMillis > 0) {
                 TimeFormatter tf = new TimeFormatter();
-                if (sb.length() > 0)
+                if (sb.length() > 0) {
                     sb.append(" - ");
+                }
                 sb.append(tf.formatEstimate(remainingMillis));
             }
             this.panelComponent.setProgressDescription2(sb.toString());
-        }
-        else
-        {
+        } else {
             this.panelComponent.getProgressBar().setValue(0);
             this.panelComponent.getProgressBar().setMaximum(0);
             this.panelComponent.setProgressDescription2(" ");
         }
     }
 
-    private void setProgressMessage(String message)
-    {
+    private void setProgressMessage(String message) {
         this.panelComponent.setProgressDescription1(message);
     }
 
-    private String formatFileCount(int n)
-    {
+    private String formatFileCount(int n) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%,d", n));
         sb.append(" file");
-        if (n != 1)
+        if (n != 1) {
             sb.append("s");
+        }
         return sb.toString();
     }
 
-    private String makeDescription(FileSet set, int value, int max)
-    {
+    private String makeDescription(FileSet set, int value, int max) {
         StringBuilder sb = new StringBuilder();
         sb.append("Importing ");
-        if (set != null && set.getTitle() != null)
-        {
+        if (set != null && set.getTitle() != null) {
             sb.append("\'");
             sb.append(set.getTitle());
             sb.append("\'");
         }
-        if (max > 1)
-        {
+        if (max > 1) {
             sb.append(" (").append(value).append(" of ").append(max).append(")");
         }
         return sb.toString();
     }
 
-    private String makeSubStepDescription(String description, String subDescription)
-    {
+    private String makeSubStepDescription(String description, String subDescription) {
         StringBuilder sb = new StringBuilder();
         sb.append("<br>");
         sb.append(description);
@@ -332,8 +299,7 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
         return sb.toString();
     }
 
-    private String makeFinishedDescription()
-    {
+    private String makeFinishedDescription() {
         StringBuilder sb = new StringBuilder();
         sb.append("<html>");
         sb.append("<br>");
@@ -344,26 +310,21 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
 
         WizardModel model = getWizardModel();
         Iterable<FileSet> fileSetList = RPFWizardUtil.getFileSetList(model);
-        if (fileSetList != null)
-        {
-            for (FileSet set : fileSetList)
-            {
-                if (set != null && set.isSelected())
-                {
+        if (fileSetList != null) {
+            for (FileSet set : fileSetList) {
+                if (set != null && set.isSelected()) {
                     sb.append("<b>");
                     sb.append(set.getTitle());
                     sb.append("</b>");
 
                     Integer filesProcessed = set.getIntegerProperty("filesProcessed");
                     Integer filesWithErrors = set.getIntegerProperty("filesWithErrors");
-                    if (filesProcessed != null && filesWithErrors != null)
-                    {
+                    if (filesProcessed != null && filesWithErrors != null) {
                         int numFilesOk = filesProcessed - filesWithErrors;
                         sb.append("<br>");
                         sb.append("<font size=\"-2\">");
                         sb.append(formatFileCount(numFilesOk)).append(" imported");
-                        if (filesWithErrors > 0)
-                        {
+                        if (filesWithErrors > 0) {
                             sb.append("; ");
                             sb.append("<font color=#990000>");
                             sb.append(formatFileCount(filesWithErrors)).append(" with errors");
@@ -380,17 +341,16 @@ public class PreprocessPanelDescriptor extends DefaultPanelDescriptor
         return sb.toString();
     }
 
-    private void startWorkerThread(Runnable runnable)
-    {
+    private void startWorkerThread(Runnable runnable) {
         killWorkerThread();
         this.workerThread = new Thread(runnable);
         this.workerThread.start();
     }
 
-    private void killWorkerThread()
-    {
-        if (this.workerThread != null && this.workerThread.isAlive())
+    private void killWorkerThread() {
+        if (this.workerThread != null && this.workerThread.isAlive()) {
             this.workerThread.interrupt();
+        }
         this.workerThread = null;
     }
 }

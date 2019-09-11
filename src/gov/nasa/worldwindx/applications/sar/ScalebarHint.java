@@ -26,8 +26,8 @@ import java.util.ArrayList;
  * @author Patrick Murris
  * @version $Id: ScalebarHint.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ScalebarHint
-{
+public class ScalebarHint {
+
     private WorldWindow wwd;
     private RenderableLayer layer = new RenderableLayer();
     private MarkerRenderer markerRenderer = new MarkerRenderer();
@@ -35,39 +35,37 @@ public class ScalebarHint
     MarkerAttributes markerAttributes;
     private boolean enabled = true;
 
-    public ScalebarHint()
-    {
+    public ScalebarHint() {
         this.layer.setName("Scalebar reference");
         this.layer.setEnabled(false);
         this.markerAttributes = new BasicMarkerAttributes(new Material(Color.YELLOW),
-                        BasicMarkerShape.CONE, 1, 10, 5);
+                BasicMarkerShape.CONE, 1, 10, 5);
         this.marker = new RenderableMarker(Position.ZERO, this.markerAttributes);
         this.layer.addRenderable(this.marker);
     }
 
-    public void setWwd(WorldWindow worldWindow)
-    {
+    public void setWwd(WorldWindow worldWindow) {
         this.wwd = worldWindow;
         // Enable picking on the scalebar layer
-        for (Layer l : this.wwd.getModel().getLayers())
-            if (l instanceof ScalebarLayer)
+        for (Layer l : this.wwd.getModel().getLayers()) {
+            if (l instanceof ScalebarLayer) {
                 l.setPickEnabled(true);
+            }
+        }
         // Add our layer
         this.wwd.getModel().getLayers().add(this.layer);
-        
+
         // Add scalebar select listener to handle rollover
-        this.wwd.addSelectListener(new SelectListener()
-        {
-            public void selected(SelectEvent event)
-            {
-                if (!enabled || event.getTopObject() == null || !(event.getTopObject() instanceof ScalebarLayer))
-                {
+        this.wwd.addSelectListener(new SelectListener() {
+            public void selected(SelectEvent event) {
+                if (!enabled || event.getTopObject() == null || !(event.getTopObject() instanceof ScalebarLayer)) {
                     layer.setEnabled(false);
                     return;
                 }
 
-                if (!event.getEventAction().equals(SelectEvent.ROLLOVER))
+                if (!event.getEventAction().equals(SelectEvent.ROLLOVER)) {
                     return;
+                }
 
                 marker.setPosition(event.getTopPickedObject().getPosition());
                 layer.setEnabled(true);
@@ -76,34 +74,28 @@ public class ScalebarHint
         });
     }
 
-    public MarkerAttributes getMarkerAttributes()
-    {
+    public MarkerAttributes getMarkerAttributes() {
         return this.markerAttributes;
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
-    public void setEnabled(boolean state)
-    {
+    public void setEnabled(boolean state) {
         this.enabled = state;
     }
 
-    private class RenderableMarker extends BasicMarker implements Renderable
-    {
+    private class RenderableMarker extends BasicMarker implements Renderable {
+
         private ArrayList<Marker> markerList;
 
-        public RenderableMarker(Position position, MarkerAttributes attrs)
-        {
+        public RenderableMarker(Position position, MarkerAttributes attrs) {
             super(position, attrs);
         }
 
-        public void render(DrawContext dc)
-        {
-            if (this.markerList == null)
-            {
+        public void render(DrawContext dc) {
+            if (this.markerList == null) {
                 this.markerList = new ArrayList<Marker>();
                 this.markerList.add(this);
             }

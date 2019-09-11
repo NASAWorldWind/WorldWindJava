@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -22,26 +21,34 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: DirectionOfAttackForFeint.java 545 2012-04-24 22:29:21Z pabercrombie $
  */
-public class DirectionOfAttackForFeint extends DirectionOfAttack
-{
+public class DirectionOfAttackForFeint extends DirectionOfAttack {
+
     /**
      * Offset applied to the label. This offset aligns the bottom edge of the label with the geographic position, in
      * order to keep the label above the graphic as the zoom changes.
      */
     protected final static Offset LABEL_OFFSET = new Offset(0.0, -1.0, AVKey.FRACTION, AVKey.FRACTION);
-    /** Default angle of the arrowhead. */
+    /**
+     * Default angle of the arrowhead.
+     */
     public final static Angle DEFAULT_ARROWHEAD_ANGLE = Angle.POS90;
     /**
      * Factor used to compute the distance between the solid and dashed lines in the arrow head. A larger value will
      * move the dashed line farther from the solid line.
      */
     protected static final double DASHED_LINE_DISTANCE = 0.5;
-    /** Default number of intervals used to draw the curve. */
+    /**
+     * Default number of intervals used to draw the curve.
+     */
     public final static int DEFAULT_NUM_INTERVALS = 32;
-    /** Default factor that determines the curvature of the line. */
+    /**
+     * Default factor that determines the curvature of the line.
+     */
     public final static double DEFAULT_CURVATURE = 0.5;
 
-    /** Number of intervals used to draw the curve. */
+    /**
+     * Number of intervals used to draw the curve.
+     */
     protected int intervals = DEFAULT_NUM_INTERVALS;
     /**
      * Factor that controls the curve of the line. Valid values are 0 to 1. Larger values result in a more pronounced
@@ -49,10 +56,14 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
      */
     protected double curvature = DEFAULT_CURVATURE;
 
-    /** Shape attributes for the dashed part of the graphic. */
+    /**
+     * Shape attributes for the dashed part of the graphic.
+     */
     protected ShapeAttributes dashedAttributes = new BasicShapeAttributes();
 
-    /** Position of the label along the curve. */
+    /**
+     * Position of the label along the curve.
+     */
     protected Position labelPosition;
     /**
      * Orientation position for the label. (The label is drawn on a line between this position and {@link
@@ -65,8 +76,7 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(TacGrpSidc.C2GM_DCPN_DAFF);
     }
 
@@ -75,8 +85,7 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public DirectionOfAttackForFeint(String sidc)
-    {
+    public DirectionOfAttackForFeint(String sidc) {
         super(sidc);
         this.setArrowAngle(DEFAULT_ARROWHEAD_ANGLE);
     }
@@ -87,8 +96,7 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
      *
      * @return Intervals used to draw arc.
      */
-    public int getIntervals()
-    {
+    public int getIntervals() {
         return this.intervals;
     }
 
@@ -98,10 +106,8 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
      *
      * @param intervals Number of intervals for drawing the curve. Must at least three.
      */
-    public void setIntervals(int intervals)
-    {
-        if (intervals < 3)
-        {
+    public void setIntervals(int intervals) {
+        if (intervals < 3) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -117,8 +123,7 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
      *
      * @return The factor that determines the curvature of the line.
      */
-    public double getCurvature()
-    {
+    public double getCurvature() {
         return this.curvature;
     }
 
@@ -128,10 +133,8 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
      *
      * @param factor The factor that determines the curvature of the line.
      */
-    public void setCurvature(double factor)
-    {
-        if (factor < 0.0 || factor > 1.0)
-        {
+    public void setCurvature(double factor) {
+        if (factor < 0.0 || factor > 1.0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -139,8 +142,7 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
         this.curvature = factor;
     }
 
-    protected void onShapeChanged()
-    {
+    protected void onShapeChanged() {
         this.paths = null; // Need to recompute paths
     }
 
@@ -150,8 +152,7 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
      * @param dc Current draw context.
      */
     @Override
-    protected void createShapes(DrawContext dc)
-    {
+    protected void createShapes(DrawContext dc) {
         // This graphic is composed of three paths:
         // 1) Curve from start position to the tip of the arrow head
         // 3) The arrow head
@@ -177,8 +178,7 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
         // Invoke the Bezier curve function to compute points along the curve.
         int intervals = this.getIntervals();
         double delta = 1.0 / intervals;
-        for (int i = 0; i < intervals; i++)
-        {
+        for (int i = 0; i < intervals; i++) {
             double t = i * delta;
             Vec4 p = TacticalGraphicUtil.bezierCurve(controlPoints, t, coefficients);
             Position pos = globe.computePositionFromPoint(p);
@@ -186,8 +186,7 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
 
             // Determine if this point is further from the control line than previous points.
             double dist = controlLine.distanceTo(p);
-            if (dist > maxDistance)
-            {
+            if (dist > maxDistance) {
                 furthestPoint = i;
                 maxDistance = dist;
             }
@@ -196,12 +195,9 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
 
         // Determine where to put the label.
         this.labelPosition = curvePositions.get(furthestPoint);
-        if (furthestPoint != curvePositions.size() - 1)
-        {
+        if (furthestPoint != curvePositions.size() - 1) {
             this.labelOrientationPosition = curvePositions.get(furthestPoint + 1);
-        }
-        else
-        {
+        } else {
             // If the furthest point is at the end of line then use the previous point as the orientation position.
             // This should never happen due to the shape of the curve in this graphic, but include this check in
             // case a subclass changes the curve control points.
@@ -228,10 +224,11 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
         this.paths[2].setAttributes(this.dashedAttributes);
     }
 
-    /** Determine active attributes for this frame. */
+    /**
+     * Determine active attributes for this frame.
+     */
     @Override
-    protected void determineActiveAttributes()
-    {
+    protected void determineActiveAttributes() {
         super.determineActiveAttributes();
 
         // Copy active attributes to the dashed attribute bundle.
@@ -243,30 +240,29 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
     }
 
     @Override
-    protected void createLabels()
-    {
+    protected void createLabels() {
         String text = this.getText();
-        if (!WWUtil.isEmpty(text))
-        {
+        if (!WWUtil.isEmpty(text)) {
             TacticalGraphicLabel label = this.addLabel(text);
             label.setOffset(LABEL_OFFSET);
         }
     }
 
     @Override
-    protected void determineLabelPositions(DrawContext dc)
-    {
-        if (WWUtil.isEmpty(this.labels))
+    protected void determineLabelPositions(DrawContext dc) {
+        if (WWUtil.isEmpty(this.labels)) {
             return;
+        }
 
         this.labels.get(0).setPosition(this.labelPosition);
         this.labels.get(0).setOrientationPosition(this.labelOrientationPosition);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected Offset getDefaultLabelOffset()
-    {
+    protected Offset getDefaultLabelOffset() {
         return LABEL_OFFSET;
     }
 
@@ -274,17 +270,16 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
      * Compute the position of control points that will generate a Bezier curve that looks like the Direction of Attack
      * for Feint graphic in MIL-STD-2525C (pg. 499).
      *
-     * @param dc        Current draw context.
-     * @param start     Beginning of the infiltration lane control line.
-     * @param end       End of the infiltration lane control line.
+     * @param dc Current draw context.
+     * @param start Beginning of the infiltration lane control line.
+     * @param end End of the infiltration lane control line.
      * @param curvature Factor that controls the curvature of the line. Valid values are between zero and one. A higher
-     *                  value results in a more pronounced curve.
+     * value results in a more pronounced curve.
      *
      * @return Control points for a Bezier curve. The first control point is equal to {@code start}, and the last point
-     *         is equal to {@code end}.
+     * is equal to {@code end}.
      */
-    protected Vec4[] computeBezierControlPoints(DrawContext dc, Vec4 start, Vec4 end, double curvature)
-    {
+    protected Vec4[] computeBezierControlPoints(DrawContext dc, Vec4 start, Vec4 end, double curvature) {
         Globe globe = dc.getGlobe();
 
         // Find length and direction of the control line.
@@ -309,10 +304,9 @@ public class DirectionOfAttackForFeint extends DirectionOfAttack
         // Choose regularly spaced points along the control line. At each point select a point to the left of the line,
         // on the line, or to the right of the line.
         double delta = length / (coefficients.length + 1);
-        for (int i = 0; i < coefficients.length; i++)
-        {
+        for (int i = 0; i < coefficients.length; i++) {
             controlPoints[i + 1] = start.add3(dir.multiply3((i + 1) * delta))
-                .add3(perpendicular.multiply3(coefficients[i]));
+                    .add3(perpendicular.multiply3(coefficients[i]));
         }
 
         return controlPoints;

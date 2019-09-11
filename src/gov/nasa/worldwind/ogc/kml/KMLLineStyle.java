@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -12,15 +11,13 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLLineStyle.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLLineStyle extends KMLAbstractColorStyle
-{
-    public KMLLineStyle(String namespaceURI)
-    {
+public class KMLLineStyle extends KMLAbstractColorStyle {
+
+    public KMLLineStyle(String namespaceURI) {
         super(namespaceURI);
     }
 
-    public Double getWidth()
-    {
+    public Double getWidth() {
         return (Double) this.getField("width");
     }
 }

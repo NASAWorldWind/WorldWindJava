@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.geom;
 
 import gov.nasa.worldwind.globes.*;
@@ -12,8 +11,8 @@ import gov.nasa.worldwind.globes.*;
  * @author tag
  * @version $Id: MeasurableLength.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface MeasurableLength
-{
+public interface MeasurableLength {
+
     /**
      * Returns the object's length in meters. If the object conforms to terrain, the length is that along the terrain,
      * including its hillsides and other undulations.

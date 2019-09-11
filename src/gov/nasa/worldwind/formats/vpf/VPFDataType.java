@@ -13,8 +13,7 @@ import java.util.*;
  * @author dcollins
  * @version $Id: VPFDataType.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public enum VPFDataType
-{
+public enum VPFDataType {
     NULL(VPFConstants.NULL, 0, new VPFBasicDataBufferFactory.NullDataFactory()),
     DATE_AND_TIME(VPFConstants.DATE_AND_TIME, 20, new VPFBasicDataBufferFactory.DateTimeDataFactory()),
     TRIPLET_ID(VPFConstants.TRIPLET_ID, -1, new VPFBasicDataBufferFactory.TripledIdDataFactory()),
@@ -40,26 +39,23 @@ public enum VPFDataType
     protected VPFDataBufferFactory dataBufferFactory;
     private static Map<String, VPFDataType> nameRegistry;
 
-    private VPFDataType(String name, int length, VPFDataBufferFactory dataBufferFactory)
-    {
+    private VPFDataType(String name, int length, VPFDataBufferFactory dataBufferFactory) {
         this.name = name;
         this.length = length;
         this.dataBufferFactory = dataBufferFactory;
         register(name, this);
     }
 
-    private static void register(String name, VPFDataType type)
-    {
-        if (nameRegistry == null)
+    private static void register(String name, VPFDataType type) {
+        if (nameRegistry == null) {
             nameRegistry = new HashMap<String, VPFDataType>();
+        }
 
         nameRegistry.put(name, type);
     }
 
-    public static VPFDataType fromTypeName(String name)
-    {
-        if (name == null)
-        {
+    public static VPFDataType fromTypeName(String name) {
+        if (name == null) {
             String message = Logging.getMessage("nullValue.NameIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -68,25 +64,20 @@ public enum VPFDataType
         return (nameRegistry != null) ? nameRegistry.get(name) : null;
     }
 
-    public String getFieldName()
-    {
+    public String getFieldName() {
         return this.name;
     }
 
-    public int getFieldLength()
-    {
+    public int getFieldLength() {
         return this.length;
     }
 
-    public boolean isVariableLength()
-    {
+    public boolean isVariableLength() {
         return this.length == -1;
     }
 
-    public VPFDataBuffer createDataBuffer(int numRows, int elementsPerRow)
-    {
-        if (numRows < 0)
-        {
+    public VPFDataBuffer createDataBuffer(int numRows, int elementsPerRow) {
+        if (numRows < 0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "numRows < 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);

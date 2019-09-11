@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.features;
 
 import gov.nasa.worldwind.WorldWind;
@@ -20,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author tag
  * @version $Id: NetworkActivitySignal.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class NetworkActivitySignal extends AbstractFeature
-{
-    public interface NetworkUser
-    {
+public class NetworkActivitySignal extends AbstractFeature {
+
+    public interface NetworkUser {
+
         public boolean hasNetworkActivity();
     }
 
@@ -32,13 +31,11 @@ public class NetworkActivitySignal extends AbstractFeature
     private JLabel networkLabel = new JLabel();
     private ImageIcon busySignal;
 
-    public NetworkActivitySignal(Registry registry)
-    {
+    public NetworkActivitySignal(Registry registry) {
         super("Network Activity Signal", Constants.NETWORK_STATUS_SIGNAL, registry);
     }
 
-    public void initialize(Controller controller)
-    {
+    public void initialize(Controller controller) {
         super.initialize(controller);
 
         // Must construct the busy signal from a URL rather than getResource used in the image library.
@@ -48,35 +45,25 @@ public class NetworkActivitySignal extends AbstractFeature
         this.networkLabel = new JLabel();
         this.networkLabel.setOpaque(false);
 
-        NetworkUser downloadUser = new NetworkUser()
-        {
-            public boolean hasNetworkActivity()
-            {
+        NetworkUser downloadUser = new NetworkUser() {
+            public boolean hasNetworkActivity() {
                 return WorldWind.getRetrievalService().hasActiveTasks();
             }
         };
         this.networkUsers.add(downloadUser);
 
-        Timer activityTimer = new Timer(500, new ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent actionEvent)
-            {
-                if (!isNetworkAvailable.get())
-                {
-                    if (networkLabel.getText() == null)
-                    {
+        Timer activityTimer = new Timer(500, new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+                if (!isNetworkAvailable.get()) {
+                    if (networkLabel.getText() == null) {
                         networkLabel.setIcon(null);
                         networkLabel.setText("No network");
                         networkLabel.setForeground(Color.RED);
                         networkLabel.setVisible(true);
                     }
-                }
-                else
-                {
-                    for (NetworkUser user : networkUsers)
-                    {
-                        if (user.hasNetworkActivity())
-                        {
+                } else {
+                    for (NetworkUser user : networkUsers) {
+                        if (user.hasNetworkActivity()) {
                             runBusySignal(true);
                             return;
                         }
@@ -87,14 +74,10 @@ public class NetworkActivitySignal extends AbstractFeature
         });
         activityTimer.start();
 
-        Timer netCheckTimer = new Timer(1000, new ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent actionEvent)
-            {
-                Thread t = new Thread(new Runnable()
-                {
-                    public void run()
-                    {
+        Timer netCheckTimer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+                Thread t = new Thread(new Runnable() {
+                    public void run() {
                         isNetworkAvailable.set(!WorldWind.getNetworkStatus().isNetworkUnavailable());
                     }
                 });
@@ -104,21 +87,15 @@ public class NetworkActivitySignal extends AbstractFeature
         netCheckTimer.start();
     }
 
-    private void runBusySignal(boolean tf)
-    {
-        if (tf)
-        {
-            if (this.networkLabel.getIcon() == null)
-            {
+    private void runBusySignal(boolean tf) {
+        if (tf) {
+            if (this.networkLabel.getIcon() == null) {
                 this.networkLabel.setIcon(this.busySignal);
                 this.networkLabel.setText(null);
                 this.networkLabel.setVisible(true);
             }
-        }
-        else
-        {
-            if (this.networkLabel.isVisible())
-            {
+        } else {
+            if (this.networkLabel.isVisible()) {
                 this.networkLabel.setText(null);
                 this.networkLabel.setIcon(null);
                 this.networkLabel.setVisible(false);
@@ -126,18 +103,15 @@ public class NetworkActivitySignal extends AbstractFeature
         }
     }
 
-    public JLabel getLabel()
-    {
+    public JLabel getLabel() {
         return this.networkLabel;
     }
 
-    public void addNetworkUser(NetworkUser user)
-    {
+    public void addNetworkUser(NetworkUser user) {
         this.networkUsers.add(user);
     }
 
-    public void removeNetworkUser(NetworkUser user)
-    {
+    public void removeNetworkUser(NetworkUser user) {
         this.networkUsers.remove(user);
     }
 }

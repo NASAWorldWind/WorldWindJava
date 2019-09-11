@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
@@ -35,15 +34,14 @@ import java.awt.*;
  * @author tag
  * @version $Id: SplitPaneUsage.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SplitPaneUsage
-{
-    public static class AppPanel extends JPanel
-    {
+public class SplitPaneUsage {
+
+    public static class AppPanel extends JPanel {
+
         private WorldWindowGLCanvas wwd;
 
         // Constructs a JPanel to hold the WorldWindow
-        public AppPanel(Dimension canvasSize, boolean includeStatusBar)
-        {
+        public AppPanel(Dimension canvasSize, boolean includeStatusBar) {
             super(new BorderLayout());
 
             // Create the WorldWindow and set its preferred size.
@@ -64,8 +62,7 @@ public class SplitPaneUsage
             this.add(this.wwd, BorderLayout.CENTER);
 
             // Add the status bar if desired.
-            if (includeStatusBar)
-            {
+            if (includeStatusBar) {
                 StatusBar statusBar = new StatusBar();
                 this.add(statusBar, BorderLayout.PAGE_END);
                 statusBar.setEventSource(wwd);
@@ -73,12 +70,11 @@ public class SplitPaneUsage
         }
     }
 
-    private static class AppFrame extends JFrame
-    {
+    private static class AppFrame extends JFrame {
+
         private Dimension canvasSize = new Dimension(800, 600); // the desired WorldWindow size
 
-        public AppFrame()
-        {
+        public AppFrame() {
             // Create the WorldWindow.
             final AppPanel wwjPanel = new AppPanel(this.canvasSize, true);
             LayerPanel layerPanel = new LayerPanel(wwjPanel.wwd);
@@ -123,33 +119,25 @@ public class SplitPaneUsage
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         start("WorldWind Split Pane Usage");
     }
 
-    public static void start(String appName)
-    {
-        if (Configuration.isMacOS() && appName != null)
-        {
+    public static void start(String appName) {
+        if (Configuration.isMacOS() && appName != null) {
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", appName);
         }
 
-        try
-        {
+        try {
             final AppFrame frame = new AppFrame();
             frame.setTitle(appName);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            java.awt.EventQueue.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
                     frame.setVisible(true);
                 }
             });
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

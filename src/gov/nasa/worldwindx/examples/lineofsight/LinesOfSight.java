@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.lineofsight;
 
 import gov.nasa.worldwind.*;
@@ -41,30 +40,38 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author tag
  * @version $Id: LinesOfSight.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class LinesOfSight extends ApplicationTemplate
-{
-    /** The width and height in degrees of the grid used to calculate intersections. */
+public class LinesOfSight extends ApplicationTemplate {
+
+    /**
+     * The width and height in degrees of the grid used to calculate intersections.
+     */
     protected static final Angle GRID_RADIUS = Angle.fromDegrees(0.005);
 
-    /** The number of cells along each edge of the grid. */
+    /**
+     * The number of cells along each edge of the grid.
+     */
     protected static final int GRID_DIMENSION = 10; // cells per side
 
     protected static final int REFERENCE_POSITION_HEIGHT = 5;
     protected static final int GRID_POSITION_HEIGHT = 1;
 
-    /** The desired terrain resolution to use in the intersection calculations. */
+    /**
+     * The desired terrain resolution to use in the intersection calculations.
+     */
     protected static final Double TARGET_RESOLUTION = 20d; // meters, or null for globe's highest resolution
 
     protected static final int NUM_TERRAIN_THREADS = 1; // set to 1 to run terrain intersections synchronously
     protected static final int NUM_SHAPE_THREADS = 1; // set to 1 to run shape intersections synchronously
 
-    /** The size of the Terrain's cache. * */
+    /**
+     * The size of the Terrain's cache. *
+     */
     protected static final long CACHE_SIZE = (long) 150e6;
 
     protected static final boolean SHOW_ONLY_FIRST_INTERSECTIONS = true;
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         private static final Cursor WaitCursor = new Cursor(Cursor.WAIT_CURSOR);
 
         protected HighResolutionTerrain terrain;
@@ -89,8 +96,7 @@ public class LinesOfSight extends ApplicationTemplate
         protected PointPlacemarkAttributes gridPointAttributes;
         protected PointPlacemarkAttributes selectedLocationAttributes;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             super(true, true, false);
 
             this.makeMenu();
@@ -128,23 +134,21 @@ public class LinesOfSight extends ApplicationTemplate
             this.shapeIntersector = new ShapeLineIntersector(this.terrain, NUM_SHAPE_THREADS);
 
             // Set up a mouse handler to generate a grid and start intersection calculations when the user shift-clicks.
-            this.getWwd().getInputHandler().addMouseListener(new MouseAdapter()
-            {
-                public void mouseClicked(MouseEvent mouseEvent)
-                {
+            this.getWwd().getInputHandler().addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent mouseEvent) {
                     // Control-Click cancels any currently running operation.
-                    if ((mouseEvent.getModifiers() & ActionEvent.CTRL_MASK) != 0)
-                    {
-                        if (calculationDispatchThread != null && calculationDispatchThread.isAlive())
+                    if ((mouseEvent.getModifiers() & ActionEvent.CTRL_MASK) != 0) {
+                        if (calculationDispatchThread != null && calculationDispatchThread.isAlive()) {
                             calculationDispatchThread.interrupt();
+                        }
                         return;
                     }
 
                     // Alt-Click repeats the most recent calculations.
-                    if ((mouseEvent.getModifiers() & ActionEvent.ALT_MASK) != 0)
-                    {
-                        if (previousCurrentPosition == null)
+                    if ((mouseEvent.getModifiers() & ActionEvent.ALT_MASK) != 0) {
+                        if (previousCurrentPosition == null) {
                             return;
+                        }
 
                         mouseEvent.consume(); // tell the rest of WW that this event has been processed
 
@@ -153,14 +157,16 @@ public class LinesOfSight extends ApplicationTemplate
                     }
 
                     // Perform the intersection tests in response to Shift-Click.
-                    if ((mouseEvent.getModifiers() & ActionEvent.SHIFT_MASK) == 0)
+                    if ((mouseEvent.getModifiers() & ActionEvent.SHIFT_MASK) == 0) {
                         return;
+                    }
 
                     mouseEvent.consume(); // tell the rest of WW that this event has been processed
 
                     final Position pos = getWwd().getCurrentPosition();
-                    if (pos == null)
+                    if (pos == null) {
                         return;
+                    }
 
                     computeAndShow(pos);
                 }
@@ -192,33 +198,23 @@ public class LinesOfSight extends ApplicationTemplate
             this.intersectionPointAttributes.setUsePointAsDefaultImage(true);
         }
 
-        protected void computeAndShow(final Position curPos)
-        {
+        protected void computeAndShow(final Position curPos) {
             this.previousCurrentPosition = curPos;
 
-            SwingUtilities.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
                     setCursor(WaitCursor);
                 }
             });
 
             // Dispatch the calculation threads in a separate thread to avoid locking up the user interface.
-            this.calculationDispatchThread = new Thread(new Runnable()
-            {
-                public void run()
-                {
-                    try
-                    {
+            this.calculationDispatchThread = new Thread(new Runnable() {
+                public void run() {
+                    try {
                         performIntersectionTests(curPos);
-                    }
-                    catch (InterruptedException e)
-                    {
+                    } catch (InterruptedException e) {
                         System.out.println("Operation was interrupted");
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -227,11 +223,10 @@ public class LinesOfSight extends ApplicationTemplate
             this.calculationDispatchThread.start();
         }
 
-        protected void performIntersectionTests(final Position curPos) throws InterruptedException
-        {
+        protected void performIntersectionTests(final Position curPos) throws InterruptedException {
             // Compute the position of the selected location (incorporate its height).
             this.referencePosition = new Position(curPos.getLatitude(), curPos.getLongitude(),
-                REFERENCE_POSITION_HEIGHT);
+                    REFERENCE_POSITION_HEIGHT);
             this.referencePoint = this.terrain.getSurfacePoint(this.referencePosition);
 
             // Form the grid.
@@ -243,18 +238,15 @@ public class LinesOfSight extends ApplicationTemplate
             this.terrainIntersector.setPositions(this.grid);
 
             // Add the renderables, if any, to the shape intersector.
-            if (this.renderableLayer.getNumRenderables() > 0)
-            {
+            if (this.renderableLayer.getNumRenderables() > 0) {
                 this.shapeIntersector.setReferencePosition(this.referencePosition);
                 this.shapeIntersector.setPositions(this.grid);
                 this.shapeIntersector.setRenderables(this.renderableLayer.getRenderables());
             }
 
             // On the EDT, show the grid.
-            SwingUtilities.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
                     progressBar.setValue(0);
                     progressBar.setString(null);
                     clearLayers();
@@ -263,14 +255,13 @@ public class LinesOfSight extends ApplicationTemplate
                 }
             });
 
-            if (this.updateProgressTimer != null)
+            if (this.updateProgressTimer != null) {
                 this.updateProgressTimer.cancel();
+            }
 
             this.updateProgressTimer = new java.util.Timer();
-            this.updateProgressTimer.schedule(new TimerTask()
-            {
-                public void run()
-                {
+            this.updateProgressTimer.schedule(new TimerTask() {
+                public void run() {
                     updateProgress();
                 }
             }, 500, 250);
@@ -280,48 +271,41 @@ public class LinesOfSight extends ApplicationTemplate
             this.computeIntersections();
         }
 
-        protected void clearLayers()
-        {
+        protected void clearLayers() {
             this.intersectionsLayer.removeAllRenderables();
             this.sightLinesLayer.removeAllRenderables();
             this.gridLayer.removeAllRenderables();
         }
 
-        protected void computeIntersections()
-        {
+        protected void computeIntersections() {
             Thread terrainThread = new Thread(this.terrainIntersector);
             terrainThread.start();
 
-            if (this.shapeIntersector.hasRenderables())
-            {
+            if (this.shapeIntersector.hasRenderables()) {
                 Thread shapeThread = new Thread(this.shapeIntersector);
                 shapeThread.start();
             }
         }
 
-        protected Sector computeGridSector(Position curPos, double gridRadius)
-        {
+        protected Sector computeGridSector(Position curPos, double gridRadius) {
             return Sector.fromDegrees(
-                curPos.getLatitude().degrees - gridRadius, curPos.getLatitude().degrees + gridRadius,
-                curPos.getLongitude().degrees - gridRadius, curPos.getLongitude().degrees + gridRadius);
+                    curPos.getLatitude().degrees - gridRadius, curPos.getLatitude().degrees + gridRadius,
+                    curPos.getLongitude().degrees - gridRadius, curPos.getLongitude().degrees + gridRadius);
         }
 
-        protected List<Position> buildGrid(Sector sector, double height, int nRows, int nCols)
-        {
+        protected List<Position> buildGrid(Sector sector, double height, int nRows, int nCols) {
             java.util.List<Position> grid = new ArrayList<Position>((nRows) * (nCols));
 
             double dLat = sector.getDeltaLatDegrees() / (nCols - 1);
             double dLon = sector.getDeltaLonDegrees() / (nRows - 1);
 
-            for (int j = 0; j < nRows; j++)
-            {
-                double lat = j == nRows - 1 ?
-                    sector.getMaxLatitude().degrees : sector.getMinLatitude().degrees + j * dLat;
+            for (int j = 0; j < nRows; j++) {
+                double lat = j == nRows - 1
+                        ? sector.getMaxLatitude().degrees : sector.getMinLatitude().degrees + j * dLat;
 
-                for (int i = 0; i < nCols; i++)
-                {
-                    double lon = i == nCols - 1 ?
-                        sector.getMaxLongitude().degrees : sector.getMinLongitude().degrees + i * dLon;
+                for (int i = 0; i < nCols; i++) {
+                    double lon = i == nCols - 1
+                            ? sector.getMaxLongitude().degrees : sector.getMinLongitude().degrees + i * dLon;
 
                     grid.add(Position.fromDegrees(lat, lon, height));
                 }
@@ -330,14 +314,14 @@ public class LinesOfSight extends ApplicationTemplate
             return grid;
         }
 
-        /** Keeps the progress meter current. When calculations are complete, displays the results. */
-        protected synchronized void updateProgress()
-        {
+        /**
+         * Keeps the progress meter current. When calculations are complete, displays the results.
+         */
+        protected synchronized void updateProgress() {
             int totalNum = this.grid.size();
             int numPositionsProcessed = this.terrainIntersector.getNumProcessedPositions();
 
-            if (this.renderableLayer.getNumRenderables() > 0)
-            {
+            if (this.renderableLayer.getNumRenderables() > 0) {
                 totalNum += this.grid.size();
                 numPositionsProcessed += this.shapeIntersector.getNumProcessedPositions();
             }
@@ -345,14 +329,11 @@ public class LinesOfSight extends ApplicationTemplate
             final int progress = (int) (100d * numPositionsProcessed / (double) totalNum);
 
             // On the EDT, update the progress bar and if calculations are complete, update the WorldWindow.
-            SwingUtilities.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
                     progressBar.setValue(progress);
 
-                    if (progress >= 100)
-                    {
+                    if (progress >= 100) {
                         endTime = System.currentTimeMillis();
                         updateProgressTimer.cancel();
                         updateProgressTimer = null;
@@ -365,52 +346,44 @@ public class LinesOfSight extends ApplicationTemplate
             });
         }
 
-        /** Updates the WorldWind model with the new intersection locations and sight lines. */
-        protected void showResults()
-        {
+        /**
+         * Updates the WorldWind model with the new intersection locations and sight lines.
+         */
+        protected void showResults() {
             this.intersectionsLayer.removeAllRenderables();
             this.sightLinesLayer.removeAllRenderables();
 
-            for (Position position : this.grid)
-            {
+            for (Position position : this.grid) {
                 this.showIntersectionsForPosition(position);
             }
 
             this.getWwd().redraw();
         }
 
-        protected void showIntersectionsForPosition(Position position)
-        {
+        protected void showIntersectionsForPosition(Position position) {
             List<Intersection> tIntersections = this.terrainIntersector.getIntersections(position);
             List<Intersection> sIntersections = this.shapeIntersector.getIntersections(position);
 
-            if (tIntersections == null && sIntersections == null)
-            {
+            if (tIntersections == null && sIntersections == null) {
                 this.showNonIntersection(position);
                 return;
             }
 
             Queue<Intersection> sortedIntersections = Intersection.sort(this.referencePoint, tIntersections,
-                sIntersections);
+                    sIntersections);
 
-            if (sortedIntersections.size() == 0)
-            {
+            if (sortedIntersections.size() == 0) {
                 this.showSightLine(position);
-            }
-            else if (SHOW_ONLY_FIRST_INTERSECTIONS)
-            {
+            } else if (SHOW_ONLY_FIRST_INTERSECTIONS) {
                 this.showSightLine(sortedIntersections.peek().getIntersectionPosition());
                 this.showIntersection(sortedIntersections.peek());
-            }
-            else
-            {
+            } else {
                 this.showSightLine(position);
                 this.showIntersections(sortedIntersections);
             }
         }
 
-        protected void showSightLine(Position position)
-        {
+        protected void showSightLine(Position position) {
             Position refPosAbsolute = this.referencePosition;
 
             Path path = new Path(refPosAbsolute, position);
@@ -419,8 +392,7 @@ public class LinesOfSight extends ApplicationTemplate
             this.sightLinesLayer.addRenderable(path);
         }
 
-        protected void showIntersection(Intersection losi)
-        {
+        protected void showIntersection(Intersection losi) {
             PointPlacemark pm = new PointPlacemark(losi.getIntersectionPosition());
             pm.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             pm.setAttributes(this.intersectionPointAttributes);
@@ -428,10 +400,8 @@ public class LinesOfSight extends ApplicationTemplate
             this.intersectionsLayer.addRenderable(pm);
         }
 
-        protected void showIntersections(Queue<Intersection> intersections)
-        {
-            for (Intersection losi : intersections)
-            {
+        protected void showIntersections(Queue<Intersection> intersections) {
+            for (Intersection losi : intersections) {
                 PointPlacemark pm = new PointPlacemark(losi.getIntersectionPosition());
                 pm.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
                 pm.setAttributes(this.intersectionPointAttributes);
@@ -440,18 +410,15 @@ public class LinesOfSight extends ApplicationTemplate
             }
         }
 
-        protected void showNonIntersection(Position position)
-        {
+        protected void showNonIntersection(Position position) {
             Path path = new Path(this.referencePosition, position);
             path.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             path.setAttributes(this.sightLineAttributes);
             this.sightLinesLayer.addRenderable(path);
         }
 
-        protected void showNonIntersections(Collection<Position> positions)
-        {
-            for (Position pos : positions)
-            {
+        protected void showNonIntersections(Collection<Position> positions) {
+            for (Position pos : positions) {
                 Path path = new Path(this.referencePosition, pos);
                 path.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
                 path.setAttributes(this.sightLineAttributes);
@@ -459,8 +426,7 @@ public class LinesOfSight extends ApplicationTemplate
             }
         }
 
-        protected void showGrid(java.util.List<Position> grid, Position cPos)
-        {
+        protected void showGrid(java.util.List<Position> grid, Position cPos) {
             this.gridLayer.removeAllRenderables();
 
             // Display the grid points in yellow.
@@ -470,8 +436,7 @@ public class LinesOfSight extends ApplicationTemplate
             gridPointAttributes.setScale(6d);
             gridPointAttributes.setUsePointAsDefaultImage(true);
 
-            for (Position p : grid)
-            {
+            for (Position p : grid) {
                 PointPlacemark pm = new PointPlacemark(p);
                 pm.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
                 pm.setAttributes(this.gridPointAttributes);
@@ -483,8 +448,7 @@ public class LinesOfSight extends ApplicationTemplate
             showCenterPoint(cPos);
         }
 
-        protected void showCenterPoint(Position cPos)
-        {
+        protected void showCenterPoint(Position cPos) {
             // Display the center point in red.
             PointPlacemarkAttributes selectedLocationAttributes;
             selectedLocationAttributes = new PointPlacemarkAttributes();
@@ -500,9 +464,10 @@ public class LinesOfSight extends ApplicationTemplate
             this.gridLayer.addRenderable(pm);
         }
 
-        /** Makes the menu for loading shapes from shapefiles. */
-        protected void makeMenu()
-        {
+        /**
+         * Makes the menu for loading shapes from shapefiles.
+         */
+        protected void makeMenu() {
             final JFileChooser fileChooser = new JFileChooser();
             fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("ESRI Shapefiles", "shp"));
 
@@ -510,22 +475,16 @@ public class LinesOfSight extends ApplicationTemplate
             this.setJMenuBar(menuBar);
             JMenu fileMenu = new JMenu("File");
             menuBar.add(fileMenu);
-            JMenuItem openMenuItem = new JMenuItem(new AbstractAction("Open File...")
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
-                    try
-                    {
+            JMenuItem openMenuItem = new JMenuItem(new AbstractAction("Open File...") {
+                public void actionPerformed(ActionEvent actionEvent) {
+                    try {
                         int status = fileChooser.showOpenDialog(AppFrame.this);
-                        if (status == JFileChooser.APPROVE_OPTION)
-                        {
+                        if (status == JFileChooser.APPROVE_OPTION) {
                             Thread t = new ShapeLoaderThread(fileChooser.getSelectedFile(), getWwd(), renderableLayer,
-                                AppFrame.this.layerPanel);
+                                    AppFrame.this.layerPanel);
                             t.start();
                         }
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -535,16 +494,15 @@ public class LinesOfSight extends ApplicationTemplate
         }
     }
 
-    public static class ShapeLoaderThread extends Thread
-    {
+    public static class ShapeLoaderThread extends Thread {
+
         protected File file;
         protected WorldWindow wwd;
         protected LayerPanel layerPanel;
         protected RenderableLayer layer;
         protected ShapeAttributes buildingAttributes;
 
-        public ShapeLoaderThread(File file, WorldWindow wwd, RenderableLayer layer, LayerPanel layerPanel)
-        {
+        public ShapeLoaderThread(File file, WorldWindow wwd, RenderableLayer layer, LayerPanel layerPanel) {
             this.file = file;
             this.wwd = wwd;
             this.layer = layer;
@@ -558,44 +516,37 @@ public class LinesOfSight extends ApplicationTemplate
             this.buildingAttributes.setInteriorOpacity(0.4);
         }
 
-        public void run()
-        {
+        public void run() {
             Shapefile sf = new Shapefile(this.file);
 
-            try
-            {
-                while (sf.hasNext())
-                {
+            try {
+                while (sf.hasNext()) {
                     ShapefileRecord r = sf.nextRecord();
-                    if (r == null)
+                    if (r == null) {
                         continue;
+                    }
 
-                    if (r.getNumberOfPoints() < 4)
+                    if (r.getNumberOfPoints() < 4) {
                         continue;
+                    }
 
                     this.layer.addRenderable(this.makeShape(r));
                 }
-            }
-            finally
-            {
+            } finally {
                 sf.close();
             }
 
-            SwingUtilities.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
                     insertBeforePlacenames(wwd, layer);
                 }
             });
         }
 
-        protected ExtrudedPolygon makeShape(ShapefileRecord record)
-        {
+        protected ExtrudedPolygon makeShape(ShapefileRecord record) {
             Double height = null;
             Object o = record.getAttributes().getValue("Height");
-            if (o != null)
-            {
+            if (o != null) {
                 height = Double.parseDouble(o.toString());
             }
 
@@ -609,8 +560,7 @@ public class LinesOfSight extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Adjust configuration values before instantiation
         ApplicationTemplate.start("WorldWind Terrain Intersections", AppFrame.class);
     }

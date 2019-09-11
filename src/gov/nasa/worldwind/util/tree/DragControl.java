@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.tree;
 
 import gov.nasa.worldwind.event.SelectEvent;
@@ -17,8 +16,8 @@ import java.awt.*;
  * @author pabercrombie
  * @version $Id: DragControl.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class DragControl extends TreeHotSpot
-{
+public abstract class DragControl extends TreeHotSpot {
+
     protected boolean dragging;
     protected Point dragRefPoint;
 
@@ -26,10 +25,9 @@ public abstract class DragControl extends TreeHotSpot
      * Create a drag control.
      *
      * @param parent The screen area that contains this drag control. Input events that cannot be handled by this object
-     *               will be passed to the parent. May be null.
+     * will be passed to the parent. May be null.
      */
-    public DragControl(HotSpot parent)
-    {
+    public DragControl(HotSpot parent) {
         super(parent);
     }
 
@@ -38,8 +36,7 @@ public abstract class DragControl extends TreeHotSpot
      *
      * @return True if the control is dragging.
      */
-    public boolean isDragging()
-    {
+    public boolean isDragging() {
         return this.dragging;
     }
 
@@ -51,25 +48,21 @@ public abstract class DragControl extends TreeHotSpot
      * @param event Select event.
      */
     @Override
-    public void selected(SelectEvent event)
-    {
-        if (event == null || this.isConsumed(event))
+    public void selected(SelectEvent event) {
+        if (event == null || this.isConsumed(event)) {
             return;
+        }
 
         Point pickPoint = event.getPickPoint();
-        if (event.isDrag())
-        {
-            if (!this.isDragging())
-            {
+        if (event.isDrag()) {
+            if (!this.isDragging()) {
                 this.dragging = true;
                 this.beginDrag(pickPoint);
             }
 
             this.drag(pickPoint);
             event.consume();
-        }
-        else if (event.isDragEnd())
-        {
+        } else if (event.isDragEnd()) {
             this.dragging = false;
             this.endDrag();
             event.consume();
@@ -81,8 +74,7 @@ public abstract class DragControl extends TreeHotSpot
      *
      * @param point Point at which dragging started.
      */
-    protected void beginDrag(Point point)
-    {
+    protected void beginDrag(Point point) {
         this.dragRefPoint = point;
     }
 
@@ -96,8 +88,7 @@ public abstract class DragControl extends TreeHotSpot
     /**
      * Called when a drag action ends. This implementation sets {@link #dragRefPoint} to null.
      */
-    protected void endDrag()
-    {
+    protected void endDrag() {
         this.dragRefPoint = null;
     }
 }

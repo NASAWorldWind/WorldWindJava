@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.geom.*;
@@ -21,22 +20,36 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: DirectionOfAttackAviation.java 545 2012-04-24 22:29:21Z pabercrombie $
  */
-public class DirectionOfAttackAviation extends DirectionOfAttack
-{
-    /** Default number of intervals used to draw the curve. */
+public class DirectionOfAttackAviation extends DirectionOfAttack {
+
+    /**
+     * Default number of intervals used to draw the curve.
+     */
     public final static int DEFAULT_NUM_INTERVALS = 32;
-    /** Default length of the bow tie part of the graphic, as a fraction of the graphic's total length. */
+    /**
+     * Default length of the bow tie part of the graphic, as a fraction of the graphic's total length.
+     */
     public final static double DEFAULT_BOW_TIE_LENGTH = 0.05;
-    /** Default width of the bow tie part of the graphic, as a fraction of the length of the bow tie. */
+    /**
+     * Default width of the bow tie part of the graphic, as a fraction of the length of the bow tie.
+     */
     public final static double DEFAULT_BOW_TIE_WIDTH = 0.25;
-    /** Default angle that determines the curvature of the line. */
+    /**
+     * Default angle that determines the curvature of the line.
+     */
     public final static Angle DEFAULT_CURVATURE = Angle.fromDegrees(25);
 
-    /** Number of intervals used to draw the curve. */
+    /**
+     * Number of intervals used to draw the curve.
+     */
     protected int intervals = DEFAULT_NUM_INTERVALS;
-    /** Length of the bow tie part of the graphic, as a fraction of the graphic's total length. */
+    /**
+     * Length of the bow tie part of the graphic, as a fraction of the graphic's total length.
+     */
     protected double bowTieLength = DEFAULT_BOW_TIE_LENGTH;
-    /** Width of the bow tie part of the graphic, as a fraction of the length of the bow tie. */
+    /**
+     * Width of the bow tie part of the graphic, as a fraction of the length of the bow tie.
+     */
     protected double bowTieWidth = DEFAULT_BOW_TIE_WIDTH;
     /**
      * Angle that controls the curve of the line. A large angle results in a more pronounced curve. An angle of zero
@@ -49,8 +62,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(TacGrpSidc.C2GM_OFF_LNE_DIRATK_AVN);
     }
 
@@ -59,8 +71,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public DirectionOfAttackAviation(String sidc)
-    {
+    public DirectionOfAttackAviation(String sidc) {
         super(sidc);
     }
 
@@ -70,8 +81,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      *
      * @return Intervals used to draw arc.
      */
-    public int getIntervals()
-    {
+    public int getIntervals() {
         return this.intervals;
     }
 
@@ -81,10 +91,8 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      *
      * @param intervals Number of intervals for drawing the curve.
      */
-    public void setIntervals(int intervals)
-    {
-        if (intervals < 1)
-        {
+    public void setIntervals(int intervals) {
+        if (intervals < 1) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -99,8 +107,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      *
      * @return Length of the bow tie as a fraction of the total length of the graphic.
      */
-    public double getBowTieLength()
-    {
+    public double getBowTieLength() {
         return this.bowTieLength;
     }
 
@@ -109,10 +116,8 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      *
      * @param bowTieLength Length of the bow tie as a fraction of the total length of the graphic.
      */
-    public void setBowTieLength(double bowTieLength)
-    {
-        if (bowTieLength < 0.0 || bowTieLength > 1.0)
-        {
+    public void setBowTieLength(double bowTieLength) {
+        if (bowTieLength < 0.0 || bowTieLength > 1.0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", bowTieLength);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -126,8 +131,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      *
      * @return Width of the bow tie as a fraction of the length of the bow tie.
      */
-    public double getBowTieWidth()
-    {
+    public double getBowTieWidth() {
         return this.bowTieWidth;
     }
 
@@ -136,10 +140,8 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      *
      * @param bowTieWidth Width of the bow tie as a fraction of the length of the bow tie.
      */
-    public void setBowTieWidth(double bowTieWidth)
-    {
-        if (bowTieWidth < 0.0 || bowTieWidth > 1.0)
-        {
+    public void setBowTieWidth(double bowTieWidth) {
+        if (bowTieWidth < 0.0 || bowTieWidth > 1.0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", bowTieWidth);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -154,8 +156,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      *
      * @return The angle that determines the curvature of the line.
      */
-    public Angle getCurvature()
-    {
+    public Angle getCurvature() {
         return this.curvature;
     }
 
@@ -165,10 +166,8 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      *
      * @param angle The angle that determines the curvature of the line.
      */
-    public void setCurvature(Angle angle)
-    {
-        if (angle == null)
-        {
+    public void setCurvature(Angle angle) {
+        if (angle == null) {
             String message = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -176,8 +175,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
         this.curvature = angle;
     }
 
-    protected void onShapeChanged()
-    {
+    protected void onShapeChanged() {
         this.paths = null; // Need to recompute paths
     }
 
@@ -187,8 +185,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      * @param dc Current draw context.
      */
     @Override
-    protected void createShapes(DrawContext dc)
-    {
+    protected void createShapes(DrawContext dc) {
         // This graphic is composed of four paths:
         // 1) Curve from the start position to the bow tie.
         // 2) Curve from the bow tie to the end position.
@@ -211,8 +208,7 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
         // Invoke the Hermite curve function to compute points along the curve.
         int intervals = this.getIntervals();
         double delta = 1.0 / intervals;
-        for (int i = 0; i < intervals; i++)
-        {
+        for (int i = 0; i < intervals; i++) {
             double t = i * delta;
             Vec4 p = this.hermiteCurve(p1, p2, t1, t1, t);
             Position pos = globe.computePositionFromPoint(p);
@@ -251,14 +247,13 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
     /**
      * Create positions required to to draw the bow tie part of the graphic.
      *
-     * @param dc   Current draw context.
+     * @param dc Current draw context.
      * @param pos1 Position at the center of one side of the bow tie.
      * @param pos2 Position at the center of the other side of the bow tie.
      *
      * @return Positions that describe the bow tie.
      */
-    protected List<Position> createBowTie(DrawContext dc, Position pos1, Position pos2)
-    {
+    protected List<Position> createBowTie(DrawContext dc, Position pos1, Position pos2) {
         //       A     C
         //       |\  /|
         // Pt. 1 | \/ | Pt. 2
@@ -299,42 +294,39 @@ public class DirectionOfAttackAviation extends DirectionOfAttack
      * H(t) = (1 - 3t<sup>2</sup> + 2t<sup>3</sup>)P<sub>1</sub> + t<sup>2</sup>(3 - 2t)P<sub>2</sub> + t(t -
      * 1)<sup>2</sup>T<sub>1</sub> + t<sup>2</sup>(t - 1)T<sub>2</sub>
      *
-     * @param pt1      First control point.
-     * @param pt2      Second control point.
+     * @param pt1 First control point.
+     * @param pt2 Second control point.
      * @param tangent1 Vector tangent to the curve at the first control point.
      * @param tangent2 Vector tangent to the curve at the second control point.
-     * @param t        Interpolation parameter in the range [0..1].
+     * @param t Interpolation parameter in the range [0..1].
      *
      * @return A point along the curve.
      */
-    protected Vec4 hermiteCurve(Vec4 pt1, Vec4 pt2, Vec4 tangent1, Vec4 tangent2, double t)
-    {
+    protected Vec4 hermiteCurve(Vec4 pt1, Vec4 pt2, Vec4 tangent1, Vec4 tangent2, double t) {
         double c1 = (1 - 3 * t * t + 2 * Math.pow(t, 3));
         double c2 = (3 - 2 * t) * t * t;
         double c3 = t * Math.pow(t - 1, 2);
         double c4 = (t - 1) * t * t;
 
         return pt1.multiply3(c1)
-            .add3(pt2.multiply3(c2))
-            .add3(tangent1.multiply3(c3))
-            .add3(tangent2.multiply3(c4));
+                .add3(pt2.multiply3(c2))
+                .add3(tangent1.multiply3(c3))
+                .add3(tangent2.multiply3(c4));
     }
 
     @Override
-    protected void createLabels()
-    {
+    protected void createLabels() {
         // This graphic supports only the hostile indicator label.
-        if (this.mustShowHostileIndicator())
-        {
+        if (this.mustShowHostileIndicator()) {
             this.addLabel(SymbologyConstants.HOSTILE_ENEMY);
         }
     }
 
     @Override
-    protected void determineLabelPositions(DrawContext dc)
-    {
-        if (WWUtil.isEmpty(this.labels) || this.paths == null)
+    protected void determineLabelPositions(DrawContext dc) {
+        if (WWUtil.isEmpty(this.labels) || this.paths == null) {
             return;
+        }
 
         Angle angle = LatLon.greatCircleDistance(this.startPosition, this.endPosition);
         double length = angle.radians * dc.getGlobe().getRadius();

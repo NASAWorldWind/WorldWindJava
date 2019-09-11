@@ -27,24 +27,22 @@ import java.io.File;
  * @author Patrick Murris
  * @version $Id: ShapefileViewer.java 3212 2015-06-18 02:45:56Z tgaskins $
  */
-public class ShapefileViewer extends ApplicationTemplate
-{
+public class ShapefileViewer extends ApplicationTemplate {
+
     public static class AppFrame extends ApplicationTemplate.AppFrame
-        implements ShapefileLayerFactory.CompletionCallback
-    {
+            implements ShapefileLayerFactory.CompletionCallback {
+
         protected RandomShapeAttributes randomAttrs = new RandomShapeAttributes();
 
-        public AppFrame()
-        {
+        public AppFrame() {
             makeMenu(this);
         }
 
-        public void loadShapefile(Object source)
-        {
+        public void loadShapefile(Object source) {
             this.randomAttrs.nextAttributes(); // display each shapefile in different attributes
 
             ShapefileLayerFactory factory = (ShapefileLayerFactory) WorldWind.createConfigurationComponent(
-                AVKey.SHAPEFILE_LAYER_FACTORY);
+                    AVKey.SHAPEFILE_LAYER_FACTORY);
             factory.setNormalPointAttributes(this.randomAttrs.asPointAttributes());
             factory.setNormalShapeAttributes(this.randomAttrs.asShapeAttributes());
             factory.createFromShapefileSource(source, this); // add the layer in the completion callback
@@ -53,15 +51,11 @@ public class ShapefileViewer extends ApplicationTemplate
         }
 
         @Override
-        public void completion(final Object result)
-        {
-            if (!SwingUtilities.isEventDispatchThread())
-            {
-                SwingUtilities.invokeLater(new Runnable()
-                {
+        public void completion(final Object result) {
+            if (!SwingUtilities.isEventDispatchThread()) {
+                SwingUtilities.invokeLater(new Runnable() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         completion(result);
                     }
                 });
@@ -73,8 +67,7 @@ public class ShapefileViewer extends ApplicationTemplate
             this.getWwd().getModel().getLayers().add(layer);
 
             Sector sector = (Sector) layer.getValue(AVKey.SECTOR);
-            if (sector != null)
-            {
+            if (sector != null) {
                 ExampleUtil.goTo(this.getWwd(), sector);
             }
 
@@ -82,14 +75,12 @@ public class ShapefileViewer extends ApplicationTemplate
         }
 
         @Override
-        public void exception(Exception e)
-        {
+        public void exception(Exception e) {
             Logging.logger().log(java.util.logging.Level.SEVERE, e.getMessage(), e);
         }
     }
 
-    protected static void makeMenu(final AppFrame appFrame)
-    {
+    protected static void makeMenu(final AppFrame appFrame) {
         final JFileChooser fileChooser = new JFileChooser();
         fileChooser.setMultiSelectionEnabled(true);
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Shapefile", "shp"));
@@ -100,23 +91,16 @@ public class ShapefileViewer extends ApplicationTemplate
         JMenu fileMenu = new JMenu("File");
         menuBar.add(fileMenu);
 
-        JMenuItem openFileMenuItem = new JMenuItem(new AbstractAction("Open File...")
-        {
-            public void actionPerformed(ActionEvent actionEvent)
-            {
-                try
-                {
+        JMenuItem openFileMenuItem = new JMenuItem(new AbstractAction("Open File...") {
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
                     int status = fileChooser.showOpenDialog(appFrame);
-                    if (status == JFileChooser.APPROVE_OPTION)
-                    {
-                        for (File file : fileChooser.getSelectedFiles())
-                        {
+                    if (status == JFileChooser.APPROVE_OPTION) {
+                        for (File file : fileChooser.getSelectedFiles()) {
                             appFrame.loadShapefile(file);
                         }
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -124,20 +108,14 @@ public class ShapefileViewer extends ApplicationTemplate
 
         fileMenu.add(openFileMenuItem);
 
-        JMenuItem openURLMenuItem = new JMenuItem(new AbstractAction("Open URL...")
-        {
-            public void actionPerformed(ActionEvent actionEvent)
-            {
-                try
-                {
+        JMenuItem openURLMenuItem = new JMenuItem(new AbstractAction("Open URL...") {
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
                     String status = JOptionPane.showInputDialog(appFrame, "URL");
-                    if (!WWUtil.isEmpty(status))
-                    {
+                    if (!WWUtil.isEmpty(status)) {
                         appFrame.loadShapefile(status.trim());
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -146,8 +124,7 @@ public class ShapefileViewer extends ApplicationTemplate
         fileMenu.add(openURLMenuItem);
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         start("WorldWind Shapefile Viewer", AppFrame.class);
     }
 }

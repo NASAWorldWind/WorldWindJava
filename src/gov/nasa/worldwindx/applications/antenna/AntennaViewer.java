@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.antenna;
 
 import gov.nasa.worldwind.*;
@@ -20,14 +19,13 @@ import java.io.InputStream;
  * @author tag
  * @version $Id: AntennaViewer.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class AntennaViewer extends ApplicationTemplate
-{
+public class AntennaViewer extends ApplicationTemplate {
+
     protected static Position ANTENNA_POSITION = Position.fromDegrees(35, -120, 1e3);
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             ShapeAttributes normalAttributes = new BasicShapeAttributes();
             normalAttributes.setOutlineOpacity(0.6);
             normalAttributes.setInteriorOpacity(0.4);
@@ -74,27 +72,22 @@ public class AntennaViewer extends ApplicationTemplate
         }
     }
 
-    private static Interpolator2D makeInterpolator()
-    {
+    private static Interpolator2D makeInterpolator() {
         Interpolator2D interpolator = new Interpolator2D();
         interpolator.setWrapT(true); // wrap along "phi"
 
-        try
-        {
+        try {
             InputStream is = WWIO.openFileOrResourceStream(
-                "gov/nasa/worldwindx/examples/data/ThetaPhi3.antennaTestFile.txt", AntennaViewer.class);
+                    "gov/nasa/worldwindx/examples/data/ThetaPhi3.antennaTestFile.txt", AntennaViewer.class);
             interpolator.addFromStream(is);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return interpolator;
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, ANTENNA_POSITION.getLatitude().degrees);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, ANTENNA_POSITION.getLongitude().degrees);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 30e3);

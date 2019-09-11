@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.dataimporter;
 
 import javax.swing.*;
@@ -17,12 +16,11 @@ import java.util.*;
  * @author tag
  * @version $Id: FileStoreTable.java 1180 2013-02-15 18:40:47Z tgaskins $
  */
-public class FileStoreTable extends JTable
-{
+public class FileStoreTable extends JTable {
+
     public static final String VISIBLE = "gov.nasa.worldwindx.dataimport.FileStoreTable.Visible";
 
-    public FileStoreTable()
-    {
+    public FileStoreTable() {
         super(new FileStoreTableModel());
 
         this.setIntercellSpacing(new Dimension(10, 1));
@@ -49,28 +47,26 @@ public class FileStoreTable extends JTable
         column.setCellRenderer(cellRenderer);
     }
 
-    public void setDataSets(java.util.List<FileStoreDataSet> sets)
-    {
+    public void setDataSets(java.util.List<FileStoreDataSet> sets) {
         ((FileStoreTableModel) this.getModel()).setDataSets(sets);
         this.setPreferredColumnWidths();
     }
 
-    public java.util.List<FileStoreDataSet> getSelectedDataSets()
-    {
+    public java.util.List<FileStoreDataSet> getSelectedDataSets() {
         int[] rows = this.getSelectedRows();
 
-        if (rows.length == 0)
+        if (rows.length == 0) {
             return Collections.emptyList();
+        }
 
         ArrayList<FileStoreDataSet> selected = new ArrayList<FileStoreDataSet>();
-        for (int i : rows)
-        {
+        for (int i : rows) {
             int modelRow = this.convertRowIndexToModel(i);
-            if (modelRow < ((FileStoreTableModel) this.getModel()).dataSets.size())
-            {
+            if (modelRow < ((FileStoreTableModel) this.getModel()).dataSets.size()) {
                 // Don't add disabled (non-visible) datasets to the selection list.
-                if ((((FileStoreTableModel) this.getModel()).dataSets.get(modelRow).getValue(VISIBLE) == null))
+                if ((((FileStoreTableModel) this.getModel()).dataSets.get(modelRow).getValue(VISIBLE) == null)) {
                     continue;
+                }
 
                 selected.add(((FileStoreTableModel) this.getModel()).dataSets.get(modelRow));
             }
@@ -79,39 +75,37 @@ public class FileStoreTable extends JTable
         return selected;
     }
 
-    protected void setPreferredColumnWidths()
-    {
-        for (int col = 1; col < getColumnModel().getColumnCount(); col++)
-        {
+    protected void setPreferredColumnWidths() {
+        for (int col = 1; col < getColumnModel().getColumnCount(); col++) {
             // Start with size of column header
             JLabel label = new JLabel(this.getColumnName(col));
             int size = label.getPreferredSize().width;
 
             // Find any cells in column that have a wider value
             TableColumn column = getColumnModel().getColumn(col);
-            for (int row = 0; row < this.getModel().getRowCount(); row++)
-            {
+            for (int row = 0; row < this.getModel().getRowCount(); row++) {
                 label = new JLabel(this.getValueAt(row, col).toString());
-                if (label.getPreferredSize().width > size)
+                if (label.getPreferredSize().width > size) {
                     size = label.getPreferredSize().width;
+                }
             }
 
             column.setPreferredWidth(size);
         }
     }
 
-    public void scrollToDataSet(FileStoreDataSet dataSet)
-    {
+    public void scrollToDataSet(FileStoreDataSet dataSet) {
         Integer row = ((FileStoreTableModel) this.getModel()).getRowForDataSet(dataSet);
 
-        if (row != null)
+        if (row != null) {
             this.scrollToVisible(row, 0);
+        }
     }
 
-    public void scrollToVisible(int rowIndex, int vColIndex)
-    {
-        if (!(this.getParent() instanceof JViewport))
+    public void scrollToVisible(int rowIndex, int vColIndex) {
+        if (!(this.getParent() instanceof JViewport)) {
             return;
+        }
 
         JViewport viewport = (JViewport) this.getParent();
 
@@ -131,23 +125,23 @@ public class FileStoreTable extends JTable
         viewport.scrollRectToVisible(rect);
     }
 
-    class NameRenderer extends DefaultTableCellRenderer
-    {
+    class NameRenderer extends DefaultTableCellRenderer {
+
         protected boolean enabled;
 
-        public void setValue(Object value)
-        {
+        public void setValue(Object value) {
             super.setValue(value);
 
-            FileStoreDataSet dataSet =
-                ((FileStoreTableModel) FileStoreTable.this.getModel()).getDataSetByName(value.toString());
+            FileStoreDataSet dataSet
+                    = ((FileStoreTableModel) FileStoreTable.this.getModel()).getDataSetByName(value.toString());
 
             // Determine whether the table row is enabled or not. This logic relies on the name cell being the first
             // cell for which this renderer is called. It uses the name to find the dataset and set the dataset's
             // visibility flag. The subsequent cells -- data type and data size -- inherit the enabled setting
             // determined during rendering of the name cell.
-            if (dataSet != null)
+            if (dataSet != null) {
                 this.enabled = dataSet.getValue(VISIBLE) != null;
+            }
 
             this.setEnabled(this.enabled);
 

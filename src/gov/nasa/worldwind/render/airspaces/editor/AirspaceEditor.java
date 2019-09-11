@@ -15,8 +15,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: AirspaceEditor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface AirspaceEditor extends Layer
-{
+public interface AirspaceEditor extends Layer {
+
     Airspace getAirspace();
 
     boolean isArmed();
@@ -49,21 +49,20 @@ public interface AirspaceEditor extends Layer
     // 2. they do not allow the editor any control over how to respond to input
     //
     // 3. they assume the editor can do something reasonable with the call
-
     void moveAirspaceLaterally(WorldWindow wwd, Airspace airspace,
-        Point mousePoint, Point previousMousePoint);
+            Point mousePoint, Point previousMousePoint);
 
     void moveAirspaceVertically(WorldWindow wwd, Airspace airspace,
-        Point mousePoint, Point previousMousePoint);
+            Point mousePoint, Point previousMousePoint);
 
-    AirspaceControlPoint addControlPoint(WorldWindow wwd, Airspace airspace, 
-        Point mousePoint);
+    AirspaceControlPoint addControlPoint(WorldWindow wwd, Airspace airspace,
+            Point mousePoint);
 
     void removeControlPoint(WorldWindow wwd, AirspaceControlPoint controlPoint);
 
     void moveControlPoint(WorldWindow wwd, AirspaceControlPoint controlPoint,
-        Point mousePoint, Point previousMousePoint);
+            Point mousePoint, Point previousMousePoint);
 
     void resizeAtControlPoint(WorldWindow wwd, AirspaceControlPoint controlPoint,
-        Point mousePoint, Point previousMousePoint);
+            Point mousePoint, Point previousMousePoint);
 }

@@ -13,8 +13,8 @@ import java.util.*;
  * @author dcollins
  * @version $Id: VPFFeatureClass.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class VPFFeatureClass extends AVListImpl
-{
+public class VPFFeatureClass extends AVListImpl {
+
     protected VPFCoverage coverage;
     protected VPFFeatureClassSchema schema;
     protected VPFRelation[] relations;
@@ -22,97 +22,90 @@ public class VPFFeatureClass extends AVListImpl
     protected String primitiveTableName;
 
     public VPFFeatureClass(VPFCoverage coverage, VPFFeatureClassSchema schema, String joinTableName,
-        String primitiveTableName)
-    {
+            String primitiveTableName) {
         this.coverage = coverage;
         this.schema = schema;
         this.joinTableName = joinTableName;
         this.primitiveTableName = primitiveTableName;
     }
 
-    public VPFCoverage getCoverage()
-    {
+    public VPFCoverage getCoverage() {
         return this.coverage;
     }
 
-    public VPFFeatureClassSchema getSchema()
-    {
+    public VPFFeatureClassSchema getSchema() {
         return this.schema;
     }
 
-    public String getClassName()
-    {
+    public String getClassName() {
         return this.schema.getClassName();
     }
 
-    public VPFFeatureType getType()
-    {
+    public VPFFeatureType getType() {
         return this.schema.getType();
     }
 
-    public String getFeatureTableName()
-    {
+    public String getFeatureTableName() {
         return this.schema.getFeatureTableName();
     }
 
-    public String getJoinTableName()
-    {
+    public String getJoinTableName() {
         return this.joinTableName;
     }
 
-    public String getPrimitiveTableName()
-    {
+    public String getPrimitiveTableName() {
         return this.primitiveTableName;
     }
 
-    public VPFRelation[] getRelations()
-    {
+    public VPFRelation[] getRelations() {
         return this.relations;
     }
 
-    public void setRelations(VPFRelation[] relations)
-    {
+    public void setRelations(VPFRelation[] relations) {
         this.relations = relations;
     }
 
-    public Collection<? extends VPFFeature> createFeatures(VPFFeatureFactory factory)
-    {
+    public Collection<? extends VPFFeature> createFeatures(VPFFeatureFactory factory) {
         return null;
     }
 
-    public Collection<? extends VPFSymbol> createFeatureSymbols(VPFSymbolFactory factory)
-    {
+    public Collection<? extends VPFSymbol> createFeatureSymbols(VPFSymbolFactory factory) {
         return null;
     }
 
-    public boolean equals(Object o)
-    {
-        if (this == o)
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        if (o == null || this.getClass() != o.getClass())
+        }
+        if (o == null || this.getClass() != o.getClass()) {
             return false;
+        }
 
         VPFFeatureClass that = (VPFFeatureClass) o;
 
         if (this.coverage != null ? !this.coverage.getFilePath().equals(that.coverage.getFilePath())
-            : that.coverage != null)
+                : that.coverage != null) {
             return false;
-        if (this.schema != null ? !this.schema.equals(that.schema) : that.schema != null)
+        }
+        if (this.schema != null ? !this.schema.equals(that.schema) : that.schema != null) {
             return false;
-        if (!Arrays.equals(this.relations, that.relations))
+        }
+        if (!Arrays.equals(this.relations, that.relations)) {
             return false;
-        if (this.joinTableName != null ? !this.joinTableName.equals(that.joinTableName) : that.joinTableName != null)
+        }
+        if (this.joinTableName != null ? !this.joinTableName.equals(that.joinTableName) : that.joinTableName != null) {
             return false;
+        }
         //noinspection RedundantIfStatement
         if (this.primitiveTableName != null ? !this.primitiveTableName.equals(that.primitiveTableName)
-            : that.primitiveTableName != null)
+                : that.primitiveTableName != null) {
             return false;
+        }
 
         return true;
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         int result = this.coverage != null ? this.coverage.hashCode() : 0;
         result = 31 * result + (this.schema != null ? this.schema.hashCode() : 0);
         result = 31 * result + (this.relations != null ? Arrays.hashCode(this.relations) : 0);

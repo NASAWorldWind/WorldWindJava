@@ -9,8 +9,8 @@ package gov.nasa.worldwind.cache;
  * @author Eric Dalgliesh
  * @version $Id: MemoryCache.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface MemoryCache
-{
+public interface MemoryCache {
+
     void setName(String name);
 
     String getName();
@@ -20,13 +20,13 @@ public interface MemoryCache
      * removal of an entry from the cache. A client may need to know a removal instigated by the cache occurred in order
      * to adjust its own state or to free resources associated with the removed entry.
      */
-    public interface CacheListener
-    {
+    public interface CacheListener {
+
         /**
          * Called just after an entry has been removed from the cache. Listeners should deallocate any resources that
          * won't be deallocated by normal garbage collection.
          *
-         * @param key          the entry's cache key.
+         * @param key the entry's cache key.
          * @param clientObject the cached object.
          */
         public void entryRemoved(Object key, Object clientObject);
@@ -34,8 +34,8 @@ public interface MemoryCache
         /**
          * Called when an exception occurs within the {@link #entryRemoved(Object, Object)} call.
          *
-         * @param exception    the exception that occurred.
-         * @param key          the entry's cache key.
+         * @param exception the exception that occurred.
+         * @param key the entry's cache key.
          * @param clientObject the cached object.
          */
         public void removalException(Throwable exception, Object key, Object clientObject);
@@ -57,8 +57,8 @@ public interface MemoryCache
     void removeCacheListener(CacheListener listener);
 
     /**
-     * Discovers whether or not this cache contains the object referenced by <code> key </code>. Currently no interface exists
-     * to discover if an object resides in the cache by referencing itself.
+     * Discovers whether or not this cache contains the object referenced by <code> key </code>. Currently no interface
+     * exists to discover if an object resides in the cache by referencing itself.
      *
      * @param key the key which the object is referenced by.
      *
@@ -76,9 +76,9 @@ public interface MemoryCache
      * <p>
      * This method should be declared <code>synchronized</code> when it is implemented.
      *
-     * @param key          an object used to reference the cached item.
+     * @param key an object used to reference the cached item.
      * @param clientObject the item to be cached.
-     * @param objectSize   the size of the item in cache units.
+     * @param objectSize the size of the item in cache units.
      *
      * @return true if object was added, false otherwise.
      */
@@ -90,7 +90,7 @@ public interface MemoryCache
      * <p>
      * This method should be declared <code>synchronized</code> when it is implemented.
      *
-     * @param key          an object used to reference the cached item.
+     * @param key an object used to reference the cached item.
      * @param clientObject the item to be cached.
      *
      * @return true if object was added, false otherwise.
@@ -128,7 +128,6 @@ public interface MemoryCache
 
     /* *************************************************************************/
     // capacity related accessors
-
     /**
      * Retrieve the number of items stored in the <code>MemoryCache</code>.
      *
@@ -169,7 +168,6 @@ public interface MemoryCache
 
     /* *******************************************************************************/
     //capacity related mutators
-
     /**
      * Sets the new low water capacity value for this <code>MemoryCache</code>. When a <code>MemoryCache</code> runs out
      * of free space, it must remove some items if it wishes to add any more. It continues removing items until the low

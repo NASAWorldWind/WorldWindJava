@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.wcs;
 
 import gov.nasa.worldwind.ogc.gml.*;
@@ -18,19 +17,15 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class WCSDescribeCoverageParsingTest
-{
+public class WCSDescribeCoverageParsingTest {
+
     @Test
-    public void testParsing001()
-    {
+    public void testParsing001() {
         WCS100DescribeCoverage caps = new WCS100DescribeCoverage("testData/WCS/WCSDescribeCoverage001.xml");
 
-        try
-        {
+        try {
             caps.parse();
-        }
-        catch (XMLStreamException e)
-        {
+        } catch (XMLStreamException e) {
             e.printStackTrace();
         }
 
@@ -51,9 +46,9 @@ public class WCSDescribeCoverageParsingTest
         assertEquals("Incorrect LonLatEnvelope SRS", "urn:ogc:def:crs:OGC:1.3:CRS84", lonLatEnvelope.getSRSName());
         assertEquals("Incorrect LonLatEnvelope position count", 2, lonLatEnvelope.getPositions().size());
         assertEquals("Incorrect LonLatEnvelope position 0", "-180.0 -90.0",
-            lonLatEnvelope.getPositions().get(0).getPosString());
+                lonLatEnvelope.getPositions().get(0).getPosString());
         assertEquals("Incorrect LonLatEnvelope position 1", "180.0 90.0",
-            lonLatEnvelope.getPositions().get(1).getPosString());
+                lonLatEnvelope.getPositions().get(1).getPosString());
 
         List<String> keywords = coverage.getKeywords();
         assertTrue("Keywords is null", keywords != null);
@@ -73,9 +68,9 @@ public class WCSDescribeCoverageParsingTest
         assertEquals("Incorrect envelope count", 1, envelopes.size());
         GMLEnvelope envelope = envelopes.get(0);
         assertEquals("Envelope position 0 is incorrect", "-180.0 -90.0",
-            envelope.getPositions().get(0).getPosString());
+                envelope.getPositions().get(0).getPosString());
         assertEquals("Envelope position 1 is incorrect", "180.0 90.0",
-            envelope.getPositions().get(1).getPosString());
+                envelope.getPositions().get(1).getPosString());
 
         List<GMLRectifiedGrid> rectifiedGrids = spatialDomain.getRectifiedGrids();
         assertNotNull("RectifiedGrid is null", rectifiedGrids);
@@ -96,7 +91,7 @@ public class WCSDescribeCoverageParsingTest
         GMLOrigin origin = rGrid.getOrigin();
         assertNotNull("Origin is null", origin);
         assertEquals("Incorrect origin values", "-179.99583333333334 89.99583333333334",
-            origin.getPos().getPosString());
+                origin.getPos().getPosString());
         List<String> offsetVectors = rGrid.getOffsetVectorStrings();
         assertNotNull("OffsetVectors is null", offsetVectors);
         assertEquals("Incorrect offsetVector count", 2, offsetVectors.size());
@@ -135,15 +130,15 @@ public class WCSDescribeCoverageParsingTest
         assertTrue("Missing format", supportedFormats.getStrings().contains("PNG"));
         assertTrue("Missing format", supportedFormats.getStrings().contains("TIFF"));
         assertEquals("Supported formats nativeFormat is incorrect", "ImageMosaic",
-            supportedFormats.getNativeFormat());
+                supportedFormats.getNativeFormat());
 
         WCS100SupportedCRSs supportedCRSs = coverage.getSupportedCRSs();
         assertNotNull("SupportedCRSs is null", supportedCRSs);
         assertNotNull("SupportedCRSs requestResponses is null", supportedCRSs.getRequestResponseCRSs());
         assertEquals("SupportedCRSs requestResponse count is incorrect", 1,
-            supportedCRSs.getRequestResponseCRSs().size());
+                supportedCRSs.getRequestResponseCRSs().size());
         assertEquals("RequestResponse value is incorrect", "EPSG:4326",
-            supportedCRSs.getRequestResponseCRSs().get(0));
+                supportedCRSs.getRequestResponseCRSs().get(0));
 
         WCS100SupportedInterpolations supportedInterpolations = coverage.getSupportedInterpolations();
         assertNotNull("SupportedInterpolations is null", supportedInterpolations);
@@ -152,20 +147,16 @@ public class WCSDescribeCoverageParsingTest
         assertTrue("Missing interpolation", supportedInterpolations.getStrings().contains("bilinear"));
         assertTrue("Missing interpolation", supportedInterpolations.getStrings().contains("bicubic"));
         assertEquals("Supported Interpolations default is incorrect", "nearest neighbor",
-            supportedInterpolations.getDefault());
+                supportedInterpolations.getDefault());
     }
 
     @Test
-    public void testParsing002()
-    {
+    public void testParsing002() {
         WCS100DescribeCoverage caps = new WCS100DescribeCoverage("testData/WCS/WCSDescribeCoverage002.xml");
 
-        try
-        {
+        try {
             caps.parse();
-        }
-        catch (XMLStreamException e)
-        {
+        } catch (XMLStreamException e) {
             e.printStackTrace();
         }
 
@@ -186,9 +177,9 @@ public class WCSDescribeCoverageParsingTest
         assertEquals("Incorrect LonLatEnvelope SRS", "WGS84(DD)", lonLatEnvelope.getSRSName());
         assertEquals("Incorrect LonLatEnvelope position count", 2, lonLatEnvelope.getPositions().size());
         assertEquals("Incorrect LonLatEnvelope position 0", "-179.99999999999991 -89.999999999999943",
-            lonLatEnvelope.getPositions().get(0).getPosString());
+                lonLatEnvelope.getPositions().get(0).getPosString());
         assertEquals("Incorrect LonLatEnvelope position 1", "180.00000000000003 84.00416666700005",
-            lonLatEnvelope.getPositions().get(1).getPosString());
+                lonLatEnvelope.getPositions().get(1).getPosString());
 
         WCS100DomainSet domainSet = coverage.getDomainSet();
         assertNotNull("DomainSet is null", domainSet);
@@ -203,15 +194,15 @@ public class WCSDescribeCoverageParsingTest
         assertNotNull("Envelope srsName is null", envelope.getSRSName());
         assertEquals("Envelope srsName is incorrect", "EPSG:4326", envelope.getSRSName());
         assertEquals("Envelope position 0 is incorrect", "-179.99999999999991 -89.999999999999943",
-            envelope.getPositions().get(0).getPosString());
+                envelope.getPositions().get(0).getPosString());
         assertEquals("Envelope position 1 is incorrect", "180.00000000000003 84.00416666700005",
-            envelope.getPositions().get(1).getPosString());
+                envelope.getPositions().get(1).getPosString());
         assertNotNull("Envelope position 0 dimension missing", envelope.getPositions().get(0).getDimension());
         assertNotNull("Envelope position 1 dimension missing", envelope.getPositions().get(1).getDimension());
         assertEquals("Envelope position 0 dimension is incorrect", "2",
-            envelope.getPositions().get(0).getDimension());
+                envelope.getPositions().get(0).getDimension());
         assertEquals("Envelope position 1 dimension is incorrect", "2",
-            envelope.getPositions().get(1).getDimension());
+                envelope.getPositions().get(1).getDimension());
 
         List<GMLRectifiedGrid> rectifiedGrids = spatialDomain.getRectifiedGrids();
         assertNotNull("RectifiedGrid is null", rectifiedGrids);
@@ -232,7 +223,7 @@ public class WCSDescribeCoverageParsingTest
         GMLOrigin origin = rGrid.getOrigin();
         assertNotNull("Origin is null", origin);
         assertEquals("Incorrect origin values", "-179.99583333333325 84.000000100105098",
-            origin.getPos().getPosString());
+                origin.getPos().getPosString());
         List<String> offsetVectors = rGrid.getOffsetVectorStrings();
         assertNotNull("OffsetVectors is null", offsetVectors);
         assertEquals("Incorrect offsetVector count", 2, offsetVectors.size());
@@ -274,20 +265,20 @@ public class WCSDescribeCoverageParsingTest
         assertTrue("Missing format", supportedFormats.getStrings().contains("HDF"));
         assertTrue("Missing format", supportedFormats.getStrings().contains("JPEG2000"));
         assertEquals("Supported formats nativeFormat is incorrect", "GeoTIFF",
-            supportedFormats.getNativeFormat());
+                supportedFormats.getNativeFormat());
 
         WCS100SupportedCRSs supportedCRSs = coverage.getSupportedCRSs();
         assertNotNull("SupportedCRSs is null", supportedCRSs);
         assertNotNull("SupportedCRSs requestResponses is null", supportedCRSs.getRequestResponseCRSs());
         assertEquals("SupportedCRSs requestResponse count is incorrect", 1,
-            supportedCRSs.getRequestResponseCRSs().size());
+                supportedCRSs.getRequestResponseCRSs().size());
         assertEquals("RequestResponse value is incorrect", "EPSG:4326",
-            supportedCRSs.getRequestResponseCRSs().get(0));
+                supportedCRSs.getRequestResponseCRSs().get(0));
         assertNotNull("SupportedCRSs nativeCRSs is null", supportedCRSs.getNativeCRSs());
         assertEquals("SupportedCRSs nativeCRSs count is incorrect", 1,
-            supportedCRSs.getRequestResponseCRSs().size());
+                supportedCRSs.getRequestResponseCRSs().size());
         assertEquals("NativeCRSs value is incorrect", "EPSG:4326",
-            supportedCRSs.getRequestResponseCRSs().get(0));
+                supportedCRSs.getRequestResponseCRSs().get(0));
 
         WCS100SupportedInterpolations supportedInterpolations = coverage.getSupportedInterpolations();
         assertNotNull("SupportedInterpolations is null", supportedInterpolations);
@@ -296,6 +287,6 @@ public class WCSDescribeCoverageParsingTest
         assertTrue("Missing interpolation", supportedInterpolations.getStrings().contains("bilinear"));
         assertTrue("Missing interpolation", supportedInterpolations.getStrings().contains("bicubic"));
         assertEquals("Supported Interpolations default is incorrect", "nearest neighbor",
-            supportedInterpolations.getDefault());
+                supportedInterpolations.getDefault());
     }
 }

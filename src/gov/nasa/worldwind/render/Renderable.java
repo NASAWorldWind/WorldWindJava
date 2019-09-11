@@ -9,8 +9,8 @@ package gov.nasa.worldwind.render;
  * @author Tom Gaskins
  * @version $Id: Renderable.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Renderable
-{
+public interface Renderable {
+
     /**
      * Causes this <code>Renderable</code> to render itself using the provided draw context.
      *

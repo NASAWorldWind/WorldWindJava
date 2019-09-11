@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.tree;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -20,20 +19,18 @@ import java.awt.*;
  * @author pabercrombie
  * @version $Id: TreeUtil.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class TreeUtil
-{
+public class TreeUtil {
+
     /**
      * Draw a rectangle in a unique pick color, and associate the color with a pickable object.
      *
-     * @param dc           Draw context.
-     * @param pickSupport  Pick support.
+     * @param dc Draw context.
+     * @param pickSupport Pick support.
      * @param pickedObject Object to associate with pickable rectangle.
-     * @param bounds       Bounds of the pickable rectangle.
+     * @param bounds Bounds of the pickable rectangle.
      */
-    public static void drawPickableRect(DrawContext dc, PickSupport pickSupport, Object pickedObject, Rectangle bounds)
-    {
-        if (dc == null)
-        {
+    public static void drawPickableRect(DrawContext dc, PickSupport pickSupport, Object pickedObject, Rectangle bounds) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawingContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -52,20 +49,17 @@ public class TreeUtil
     /**
      * Draw a rectangle.
      *
-     * @param gl     GL
+     * @param gl GL
      * @param bounds Bounds of the rectangle, in GL coordinates.
      */
-    public static void drawRect(GL2 gl, Rectangle bounds)
-    {
-        if (gl == null)
-        {
+    public static void drawRect(GL2 gl, Rectangle bounds) {
+        if (gl == null) {
             String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (bounds == null)
-        {
+        if (bounds == null) {
             String message = Logging.getMessage("nullValue.BoundingBoxIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -75,17 +69,14 @@ public class TreeUtil
     }
 
     public static void drawRectWithGradient(GL2 gl, Rectangle bounds, Color color1, Color color2, double opacity,
-        String gradientDirection)
-    {
-        if (gl == null)
-        {
+            String gradientDirection) {
+        if (gl == null) {
             String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (bounds == null)
-        {
+        if (bounds == null) {
             String message = Logging.getMessage("nullValue.BoundingBoxIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -93,8 +84,7 @@ public class TreeUtil
 
         gl.glBegin(GL2.GL_QUADS);
 
-        if (AVKey.HORIZONTAL.equals(gradientDirection))
-        {
+        if (AVKey.HORIZONTAL.equals(gradientDirection)) {
             OGLUtil.applyColor(gl, color1, opacity, false);
             gl.glVertex2d(bounds.getMinX(), bounds.getMaxY());
             gl.glVertex2d(bounds.getMinX(), bounds.getMinY());
@@ -102,9 +92,7 @@ public class TreeUtil
             OGLUtil.applyColor(gl, color2, opacity, false);
             gl.glVertex2d(bounds.getMaxX(), bounds.getMinY());
             gl.glVertex2d(bounds.getMaxX(), bounds.getMaxY());
-        }
-        else
-        {
+        } else {
             OGLUtil.applyColor(gl, color1, opacity, false);
             gl.glVertex2d(bounds.getMaxX(), bounds.getMaxY());
             gl.glVertex2d(bounds.getMinX(), bounds.getMaxY());

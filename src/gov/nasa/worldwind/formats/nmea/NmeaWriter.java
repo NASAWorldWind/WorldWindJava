@@ -14,29 +14,25 @@ import gov.nasa.worldwind.tracks.TrackPoint;
  * @author dcollins
  * @version $Id: NmeaWriter.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class NmeaWriter
-{
+public class NmeaWriter {
+
     private final java.io.PrintStream printStream;
     private final String encoding;
     @SuppressWarnings({"UnusedDeclaration"})
     private int sentenceNumber = 0;
     private static final String DEFAULT_ENCODING = "US-ASCII";
 
-    public NmeaWriter(String path) throws java.io.IOException
-    {
+    public NmeaWriter(String path) throws java.io.IOException {
         this(path, DEFAULT_ENCODING);
     }
 
-    public NmeaWriter(String path, String encoding) throws java.io.IOException
-    {
-        if (path == null)
-        {
+    public NmeaWriter(String path, String encoding) throws java.io.IOException {
+        if (path == null) {
             String msg = Logging.getMessage("nullValue.PathIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (encoding == null)
-        {
+        if (encoding == null) {
             String msg = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -44,47 +40,40 @@ public class NmeaWriter
 
         this.encoding = encoding;
         this.printStream = new java.io.PrintStream(
-            new java.io.BufferedOutputStream(new java.io.FileOutputStream(path)),
-            false, // Disable autoflush.
-            this.encoding); // Character mapping from 16-bit UTF characters to bytes.
+                new java.io.BufferedOutputStream(new java.io.FileOutputStream(path)),
+                false, // Disable autoflush.
+                this.encoding); // Character mapping from 16-bit UTF characters to bytes.
     }
 
-    public NmeaWriter(java.io.OutputStream stream) throws java.io.IOException
-    {
-        this(stream, DEFAULT_ENCODING);    
+    public NmeaWriter(java.io.OutputStream stream) throws java.io.IOException {
+        this(stream, DEFAULT_ENCODING);
     }
 
-    public NmeaWriter(java.io.OutputStream stream, String encoding) throws java.io.IOException
-    {
-        if (stream == null)
-        {
+    public NmeaWriter(java.io.OutputStream stream, String encoding) throws java.io.IOException {
+        if (stream == null) {
             String msg = Logging.getMessage("nullValue.InputStreamIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (encoding == null)
-        {
+        if (encoding == null) {
             String msg = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        
+
         this.encoding = encoding;
         this.printStream = new java.io.PrintStream(
-            new java.io.BufferedOutputStream(stream),
-            false, // Disable autoflush.
-            this.encoding); // Character mapping from 16-bit UTF characters to bytes.
+                new java.io.BufferedOutputStream(stream),
+                false, // Disable autoflush.
+                this.encoding); // Character mapping from 16-bit UTF characters to bytes.
     }
 
-    public final String getEncoding()
-    {
+    public final String getEncoding() {
         return this.encoding;
     }
 
-    public void writeTrack(Track track)
-    {
-        if (track == null)
-        {
+    public void writeTrack(Track track) {
+        if (track == null) {
             String msg = Logging.getMessage("nullValue.TrackIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -94,55 +83,46 @@ public class NmeaWriter
         doFlush();
     }
 
-    public void close()
-    {
+    public void close() {
         doFlush();
         this.printStream.close();
     }
 
-    private void doWriteTrack(Track track, java.io.PrintStream out)
-    {
-        if (track != null && track.getSegments() != null)
-        {
-            for (TrackSegment ts : track.getSegments())
+    private void doWriteTrack(Track track, java.io.PrintStream out) {
+        if (track != null && track.getSegments() != null) {
+            for (TrackSegment ts : track.getSegments()) {
                 doWriteTrackSegment(ts, out);
-        }
-    }
-
-    private void doWriteTrackSegment(TrackSegment segment, java.io.PrintStream out)
-    {
-        if (segment != null && segment.getPoints() != null)
-        {
-            for (TrackPoint tp : segment.getPoints())
-            {
-                if (tp instanceof NmeaTrackPoint)
-                    doWriteNmeaTrackPoint((NmeaTrackPoint) tp, out);
-                else
-                    doWriteTrackPoint(tp, out);
             }
         }
     }
 
-    private void doWriteTrackPoint(TrackPoint point, java.io.PrintStream out)
-    {
-        if (point != null)
-        {
+    private void doWriteTrackSegment(TrackSegment segment, java.io.PrintStream out) {
+        if (segment != null && segment.getPoints() != null) {
+            for (TrackPoint tp : segment.getPoints()) {
+                if (tp instanceof NmeaTrackPoint) {
+                    doWriteNmeaTrackPoint((NmeaTrackPoint) tp, out);
+                } else {
+                    doWriteTrackPoint(tp, out);
+                }
+            }
+        }
+    }
+
+    private void doWriteTrackPoint(TrackPoint point, java.io.PrintStream out) {
+        if (point != null) {
             writeGGASentence(point.getTime(), point.getLatitude(), point.getLongitude(), point.getElevation(), 0, out);
         }
     }
 
-    private void doWriteNmeaTrackPoint(NmeaTrackPoint point, java.io.PrintStream out)
-    {
-        if (point != null)
-        {
+    private void doWriteNmeaTrackPoint(NmeaTrackPoint point, java.io.PrintStream out) {
+        if (point != null) {
             // TODO: separate elevation and geoid-height
             writeGGASentence(point.getTime(), point.getLatitude(), point.getLongitude(), point.getElevation(), 0, out);
         }
     }
 
     private void writeGGASentence(String time, double lat, double lon, double altitude, double geoidHeight,
-                                  java.io.PrintStream out)
-    {
+            java.io.PrintStream out) {
         this.sentenceNumber++;
         // Documentation for NMEA Standard 0183
         // taken from http://www.gpsinformation.org/dale/nmea.htm#GGA
@@ -164,11 +144,11 @@ public class NmeaWriter
         //              1 = GPS fix (SPS)
         //              2 = DGPS fix
         //              3 = PPS fix
-		//              4 = Real Time Kinematic
-		//              5 = Float RTK
+        //              4 = Real Time Kinematic
+        //              5 = Float RTK
         //              6 = estimated (dead reckoning) (2.3 feature)
-		//              7 = Manual input mode
-		//              8 = Simulation mode
+        //              7 = Manual input mode
+        //              8 = Simulation mode
         sb.append(""); // Intentionally left blank.
         sb.append(",");
         // Number of satellites being tracked
@@ -200,53 +180,45 @@ public class NmeaWriter
         doFlush();
     }
 
-    private String formatTime(String time)
-    {
+    private String formatTime(String time) {
         // Format time as "HHMMSS"
         return (time != null) ? time : "";
     }
 
-    private String formatLatitude(double degrees)
-    {
+    private String formatLatitude(double degrees) {
         int d = (int) Math.floor(Math.abs(degrees));
         double m = 60 * (Math.abs(degrees) - d);
         // Format latitude as "DDMM.MMM[N|S]"
         return String.format("%02d%06.3f,%s", d, m, degrees < 0 ? "S" : "N");
     }
 
-    private String formatLongitude(double degrees)
-    {
+    private String formatLongitude(double degrees) {
         int d = (int) Math.floor(Math.abs(degrees));
         double m = 60 * (Math.abs(degrees) - d);
         // Format longitude as "DDDMM.MMM[N|S]"
         return String.format("%03d%06.3f,%s", d, m, degrees < 0 ? "W" : "E");
     }
 
-    private String formatElevation(double metersElevation)
-    {
+    private String formatElevation(double metersElevation) {
         // Format elevation with 1 digit of precision.
         // This provides decimeter resolution.
         return String.format("%.1f,M", metersElevation);
     }
 
-    private String formatChecksum(int checksum)
-    {
+    private String formatChecksum(int checksum) {
         return Integer.toHexString(checksum);
     }
 
-    private int computeChecksum(CharSequence s, int start, int end)
-    {
+    private int computeChecksum(CharSequence s, int start, int end) {
         int chksum = 0;
-        for (int i = start; i < end; i++)
-        {
+        for (int i = start; i < end; i++) {
             int c = 0xFF & (int) s.charAt(i);
             chksum ^= c;
         }
         return chksum;
     }
 
-    private void doFlush()
-    {
+    private void doFlush() {
         this.printStream.flush();
     }
 }

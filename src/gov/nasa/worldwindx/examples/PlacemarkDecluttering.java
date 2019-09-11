@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWind;
@@ -28,12 +27,11 @@ import java.awt.*;
  * @author tag
  * @version $Id: PlacemarkDecluttering.java 2388 2014-10-15 22:58:36Z tgaskins $
  */
-public class PlacemarkDecluttering extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class PlacemarkDecluttering extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             // Specify the decluttering filter to the scene controller.
@@ -205,21 +203,16 @@ public class PlacemarkDecluttering extends ApplicationTemplate
             insertBeforeCompass(getWwd(), layer);
 
             // Add a select listener in order to determine when a label is clicked on.
-            this.getWwd().addSelectListener(new SelectListener()
-            {
+            this.getWwd().addSelectListener(new SelectListener() {
                 @Override
-                public void selected(SelectEvent event)
-                {
+                public void selected(SelectEvent event) {
                     PickedObject po = event.getTopPickedObject();
-                    if (po != null && po.getObject() instanceof PointPlacemark)
-                    {
-                        if (event.getEventAction().equals(SelectEvent.LEFT_CLICK))
-                        {
+                    if (po != null && po.getObject() instanceof PointPlacemark) {
+                        if (event.getEventAction().equals(SelectEvent.LEFT_CLICK)) {
                             // See if it was the label that was picked. If so, raise an input dialog prompting
                             // for new label text.
                             Object placemarkPiece = po.getValue(AVKey.PICKED_OBJECT_ID);
-                            if (placemarkPiece != null && placemarkPiece.equals(AVKey.LABEL))
-                            {
+                            if (placemarkPiece != null && placemarkPiece.equals(AVKey.LABEL)) {
                                 PointPlacemark placemark = (PointPlacemark) po.getObject();
                                 String labelText = placemark.getLabelText();
                                 System.out.println(labelText);
@@ -231,8 +224,7 @@ public class PlacemarkDecluttering extends ApplicationTemplate
             });
         }
 
-        protected void setHighlightAttributes(PointPlacemark pp)
-        {
+        protected void setHighlightAttributes(PointPlacemark pp) {
             // Change the label color to orange when the placemark is selected.
             PointPlacemarkAttributes highlightAttributes = new PointPlacemarkAttributes(pp.getAttributes());
             highlightAttributes.setLabelMaterial(Material.ORANGE);
@@ -240,8 +232,7 @@ public class PlacemarkDecluttering extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Placemark Decluttering", AppFrame.class);
     }
 }

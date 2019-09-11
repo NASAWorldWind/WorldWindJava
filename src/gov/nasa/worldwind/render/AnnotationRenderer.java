@@ -14,8 +14,8 @@ import java.awt.*;
  * @author Patrick Murris
  * @version $Id: AnnotationRenderer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface AnnotationRenderer
-{
+public interface AnnotationRenderer {
+
     void pick(DrawContext dc, Iterable<Annotation> annotations, Point pickPoint, Layer annotationLayer);
 
     void pick(DrawContext dc, Annotation annotation, Vec4 annotationPoint, Point pickPoint, Layer annotationLayer);

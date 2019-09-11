@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwindx.examples.util.SectorSelector;
@@ -19,14 +18,13 @@ import java.beans.*;
  * @author tag
  * @version $Id: SectorSelection.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class SectorSelection extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+public class SectorSelection extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         private SectorSelector selector;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             super(true, true, false);
 
             this.selector = new SectorSelector(getWwd());
@@ -45,47 +43,40 @@ public class SectorSelection extends ApplicationTemplate
 
             // Listen for changes to the sector selector's region. Could also just wait until the user finishes
             // and query the result using selector.getSector().
-            this.selector.addPropertyChangeListener(SectorSelector.SECTOR_PROPERTY, new PropertyChangeListener()
-            {
-                public void propertyChange(PropertyChangeEvent evt)
-                {
+            this.selector.addPropertyChangeListener(SectorSelector.SECTOR_PROPERTY, new PropertyChangeListener() {
+                public void propertyChange(PropertyChangeEvent evt) {
 //                    Sector sector = (Sector) evt.getNewValue();
 //                    System.out.println(sector != null ? sector : "no sector");
                 }
             });
         }
 
-        private class EnableSelectorAction extends AbstractAction
-        {
-            public EnableSelectorAction()
-            {
+        private class EnableSelectorAction extends AbstractAction {
+
+            public EnableSelectorAction() {
                 super("Start");
             }
 
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 ((JButton) e.getSource()).setAction(new DisableSelectorAction());
                 selector.enable();
             }
         }
 
-        private class DisableSelectorAction extends AbstractAction
-        {
-            public DisableSelectorAction()
-            {
+        private class DisableSelectorAction extends AbstractAction {
+
+            public DisableSelectorAction() {
                 super("Stop");
             }
 
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 selector.disable();
                 ((JButton) e.getSource()).setAction(new EnableSelectorAction());
             }
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("Sector Selection", AppFrame.class);
     }
 }

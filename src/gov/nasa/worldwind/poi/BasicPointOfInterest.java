@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.poi;
 
 import gov.nasa.worldwind.WWObjectImpl;
@@ -14,26 +13,24 @@ import gov.nasa.worldwind.geom.LatLon;
  * @author tag
  * @version $Id: BasicPointOfInterest.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BasicPointOfInterest extends WWObjectImpl implements PointOfInterest
-{
-    public BasicPointOfInterest(LatLon latlon)
-    {
+public class BasicPointOfInterest extends WWObjectImpl implements PointOfInterest {
+
+    public BasicPointOfInterest(LatLon latlon) {
         this.latlon = latlon;
     }
 
     protected final LatLon latlon;
 
-    public LatLon getLatlon()
-    {
+    public LatLon getLatlon() {
         return latlon;
     }
 
-    public String toString()
-    {
+    public String toString() {
         String str = this.getStringValue(AVKey.DISPLAY_NAME);
-        if (str != null)
+        if (str != null) {
             return str;
-        else
+        } else {
             return latlon.toString();
+        }
     }
 }

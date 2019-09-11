@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.antenna;
 
 import java.io.*;
@@ -20,8 +19,8 @@ import java.util.regex.Pattern;
  * @author tag
  * @version $Id: Interpolator2D.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Interpolator2D
-{
+public class Interpolator2D {
+
     protected boolean wrapS = false;
     protected boolean wrapT = false;
     protected Double minS;
@@ -41,8 +40,7 @@ public class Interpolator2D
      *
      * @return the first coordinate's wrap flag.
      */
-    public boolean isWrapS()
-    {
+    public boolean isWrapS() {
         return wrapS;
     }
 
@@ -60,8 +58,7 @@ public class Interpolator2D
      *
      * @see #setWrapS(boolean)
      */
-    public void setWrapS(boolean wrapS)
-    {
+    public void setWrapS(boolean wrapS) {
         this.wrapS = wrapS;
     }
 
@@ -74,8 +71,7 @@ public class Interpolator2D
      *
      * @see #setWrapS(boolean)
      */
-    public boolean isWrapT()
-    {
+    public boolean isWrapT() {
         return wrapT;
     }
 
@@ -90,8 +86,7 @@ public class Interpolator2D
      *
      * @see #setWrapS(boolean)
      */
-    public void setWrapT(boolean wrapT)
-    {
+    public void setWrapT(boolean wrapT) {
         this.wrapT = wrapT;
     }
 
@@ -102,34 +97,38 @@ public class Interpolator2D
      * @param t the value's second coordinate.
      * @param r the value to add.
      */
-    public void addValue(double s, double t, double r)
-    {
+    public void addValue(double s, double t, double r) {
         TreeMap<Double, Double> tMap = this.map.get(s);
-        if (tMap == null)
-        {
+        if (tMap == null) {
             tMap = new TreeMap<Double, Double>();
             this.map.put(s, tMap);
         }
 
         tMap.put(t, r);
 
-        if (this.maxValue == null || r > this.maxValue)
+        if (this.maxValue == null || r > this.maxValue) {
             this.maxValue = r;
+        }
 
-        if (this.minValue == null || r < this.minValue)
+        if (this.minValue == null || r < this.minValue) {
             this.minValue = r;
+        }
 
-        if (this.maxS == null || s > this.maxS)
+        if (this.maxS == null || s > this.maxS) {
             this.maxS = s;
+        }
 
-        if (this.minS == null || s < this.minS)
+        if (this.minS == null || s < this.minS) {
             this.minS = s;
+        }
 
-        if (this.maxT == null || t > this.maxT)
+        if (this.maxT == null || t > this.maxT) {
             this.maxT = t;
+        }
 
-        if (this.minT == null || t < this.minT)
+        if (this.minT == null || t < this.minT) {
             this.minT = t;
+        }
     }
 
     /**
@@ -137,8 +136,7 @@ public class Interpolator2D
      *
      * @return this interpolator's minimum value, or null if the interpolator contains no values.
      */
-    public Double getMinValue()
-    {
+    public Double getMinValue() {
         return minValue;
     }
 
@@ -147,8 +145,7 @@ public class Interpolator2D
      *
      * @return this interpolator's maximum value, or null if the interpolator contains no values.
      */
-    public Double getMaxValue()
-    {
+    public Double getMaxValue() {
         return maxValue;
     }
 
@@ -157,8 +154,7 @@ public class Interpolator2D
      *
      * @return this interpolator's minimum first coordinate, or null if the interpolator contains no values.
      */
-    public Double getMinS()
-    {
+    public Double getMinS() {
         return minS;
     }
 
@@ -167,8 +163,7 @@ public class Interpolator2D
      *
      * @return this interpolator's maximum first coordinate, or null if the interpolator contains no values.
      */
-    public Double getMaxS()
-    {
+    public Double getMaxS() {
         return maxS;
     }
 
@@ -177,8 +172,7 @@ public class Interpolator2D
      *
      * @return this interpolator's minimum second coordinate, or null if the interpolator contains no values.
      */
-    public Double getMinT()
-    {
+    public Double getMinT() {
         return minT;
     }
 
@@ -187,8 +181,7 @@ public class Interpolator2D
      *
      * @return this interpolator's maximum second coordinate, or null if the interpolator contains no values.
      */
-    public Double getMaxT()
-    {
+    public Double getMaxT() {
         return maxT;
     }
 
@@ -198,51 +191,56 @@ public class Interpolator2D
      * @param s the first coordinate.
      * @param t the second coordinate.
      *
-     * @return the value at the specified coordinates, or null if a specified coordinate is outside the range  of this
-     *         interpolator and the corresponding wrap flag is false.
+     * @return the value at the specified coordinates, or null if a specified coordinate is outside the range of this
+     * interpolator and the corresponding wrap flag is false.
      *
      * @see #setWrapS(boolean)
      * @see #setWrapT(boolean)
      */
-    public Double getValue(double s, double t)
-    {
+    public Double getValue(double s, double t) {
         // Use bi-linear interpolation to determine the value at the specified coordinates.
 
         Map.Entry<Double, TreeMap<Double, Double>> sMinEntry = this.map.floorEntry(s);
-        if (sMinEntry == null && this.wrapS)
+        if (sMinEntry == null && this.wrapS) {
             sMinEntry = this.map.lastEntry(); // wrap
-        else if (sMinEntry == null)
+        } else if (sMinEntry == null) {
             return null;
+        }
 
         Map.Entry<Double, Double> sMintMinEntry = sMinEntry.getValue().floorEntry(t);
-        if (sMintMinEntry == null && this.wrapT)
+        if (sMintMinEntry == null && this.wrapT) {
             sMintMinEntry = sMinEntry.getValue().lastEntry(); // wrap
-        else if (sMintMinEntry == null)
+        } else if (sMintMinEntry == null) {
             return null;
+        }
 
         Map.Entry<Double, Double> sMintMaxEntry = sMinEntry.getValue().ceilingEntry(t);
-        if (sMintMaxEntry == null && this.wrapT)
+        if (sMintMaxEntry == null && this.wrapT) {
             sMintMaxEntry = sMinEntry.getValue().firstEntry(); // wrap
-        else if (sMintMaxEntry == null)
+        } else if (sMintMaxEntry == null) {
             return null;
+        }
 
         Map.Entry<Double, TreeMap<Double, Double>> sMaxEntry = this.map.ceilingEntry(s);
-        if (sMaxEntry == null && this.wrapS)
+        if (sMaxEntry == null && this.wrapS) {
             sMaxEntry = this.map.firstEntry(); // wrap
-        else if (sMaxEntry == null)
+        } else if (sMaxEntry == null) {
             return null;
+        }
 
         Map.Entry<Double, Double> sMaxtMinEntry = sMaxEntry.getValue().floorEntry(t);
-        if (sMaxtMinEntry == null && this.wrapT)
+        if (sMaxtMinEntry == null && this.wrapT) {
             sMaxtMinEntry = sMaxEntry.getValue().lastEntry(); // wrap
-        else if (sMaxtMinEntry == null)
+        } else if (sMaxtMinEntry == null) {
             return null;
+        }
 
         Map.Entry<Double, Double> sMaxtMaxEntry = sMaxEntry.getValue().ceilingEntry(t);
-        if (sMaxtMaxEntry == null && this.wrapT)
+        if (sMaxtMaxEntry == null && this.wrapT) {
             sMaxtMaxEntry = sMaxEntry.getValue().firstEntry();
-        else if (sMaxtMaxEntry == null)
+        } else if (sMaxtMaxEntry == null) {
             return null;
+        }
 
         double r00 = sMintMinEntry.getValue();
         double r10 = sMaxtMinEntry.getValue();
@@ -265,10 +263,10 @@ public class Interpolator2D
         return r;
     }
 
-    public void addFromStream(InputStream is)
-    {
-        if (is == null)
+    public void addFromStream(InputStream is) {
+        if (is == null) {
             return;
+        }
 
         // Recognize three successive floating-point values separated by white space, in the order s, t, r, where r is
         // the function value at the corresponding s and t.
@@ -277,41 +275,38 @@ public class Interpolator2D
 
         Scanner scanner = new Scanner(is);
 
-        try
-        {
-            while (scanner.hasNextLine())
-            {
+        try {
+            while (scanner.hasNextLine()) {
                 String scannedLine = scanner.findInLine(pattern);
-                if (scannedLine == null)
-                {
+                if (scannedLine == null) {
                     scanner.nextLine();
                     continue;
                 }
 
                 String numbers[] = scannedLine.split("\\s+");
-                if (numbers.length < 3)
+                if (numbers.length < 3) {
                     continue;
+                }
 
                 double theta = Double.parseDouble(numbers[0]);
                 double phi = Double.parseDouble(numbers[1]);
                 double r = Double.parseDouble(numbers[2]);
 
-                if (phi < 0)
+                if (phi < 0) {
                     phi += 360;
+                }
 
                 this.addValue(theta, phi, r);
             }
-        }
-        finally
-        {
+        } finally {
             scanner.close();
         }
     }
 
-    public void addFromFile(File file) throws FileNotFoundException
-    {
-        if (file == null || !file.exists())
+    public void addFromFile(File file) throws FileNotFoundException {
+        if (file == null || !file.exists()) {
             return;
+        }
 
         this.addFromStream(new FileInputStream(file));
     }

@@ -25,24 +25,20 @@ import java.awt.event.*;
  * @version $Id: FlatWorldPanel.java 2419 2014-11-08 04:44:55Z tgaskins $
  */
 @SuppressWarnings("unchecked")
-public class FlatWorldPanel extends JPanel
-{
+public class FlatWorldPanel extends JPanel {
+
     private WorldWindow wwd;
     private Globe roundGlobe;
     private FlatGlobe flatGlobe;
     private JComboBox projectionCombo;
 
-    public FlatWorldPanel(WorldWindow wwd)
-    {
+    public FlatWorldPanel(WorldWindow wwd) {
         super(new GridLayout(0, 2, 0, 0));
         this.wwd = wwd;
-        if (isFlatGlobe())
-        {
+        if (isFlatGlobe()) {
             this.flatGlobe = (FlatGlobe) wwd.getModel().getGlobe();
             this.roundGlobe = new Earth();
-        }
-        else
-        {
+        } else {
             this.flatGlobe = new EarthFlat();
             this.roundGlobe = wwd.getModel().getGlobe();
         }
@@ -50,21 +46,18 @@ public class FlatWorldPanel extends JPanel
         this.makePanel();
     }
 
-    private JPanel makePanel()
-    {
+    private JPanel makePanel() {
         JPanel controlPanel = this;
         controlPanel.setBorder(
-            new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("Globe")));
+                new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("Globe")));
         controlPanel.setToolTipText("Set the current projection");
 
         // Flat vs round buttons
         JPanel radioButtonPanel = new JPanel(new GridLayout(0, 2, 0, 0));
         JRadioButton roundRadioButton = new JRadioButton("Round");
         roundRadioButton.setSelected(!isFlatGlobe());
-        roundRadioButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
+        roundRadioButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
                 projectionCombo.setEnabled(false);
                 enableFlatGlobe(false);
             }
@@ -72,10 +65,8 @@ public class FlatWorldPanel extends JPanel
         radioButtonPanel.add(roundRadioButton);
         JRadioButton flatRadioButton = new JRadioButton("Flat");
         flatRadioButton.setSelected(isFlatGlobe());
-        flatRadioButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
+        flatRadioButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
                 projectionCombo.setEnabled(true);
                 enableFlatGlobe(true);
             }
@@ -87,19 +78,16 @@ public class FlatWorldPanel extends JPanel
 
         // Projection combo
         JPanel comboPanel = new JPanel(new GridLayout(0, 1, 0, 0));
-        this.projectionCombo = new JComboBox(new String[]
-            {"Lat-Lon", "Mercator", "Modified Sin.", "Sinusoidal",
-                "Transverse Mercator",
-                "North Polar",
-                "South Polar",
-                "UPS North",
-                "UPS South"
-            });
+        this.projectionCombo = new JComboBox(new String[]{"Lat-Lon", "Mercator", "Modified Sin.", "Sinusoidal",
+            "Transverse Mercator",
+            "North Polar",
+            "South Polar",
+            "UPS North",
+            "UPS South"
+        });
         this.projectionCombo.setEnabled(isFlatGlobe());
-        this.projectionCombo.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent actionEvent)
-            {
+        this.projectionCombo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
                 updateProjection();
             }
         });
@@ -111,57 +99,53 @@ public class FlatWorldPanel extends JPanel
     }
 
     // Update flat globe projection
-    private void updateProjection()
-    {
-        if (!isFlatGlobe())
+    private void updateProjection() {
+        if (!isFlatGlobe()) {
             return;
+        }
 
         this.flatGlobe.setProjection(this.getProjection());
 
         this.wwd.redraw();
     }
 
-    private GeographicProjection getProjection()
-    {
+    private GeographicProjection getProjection() {
         String item = (String) projectionCombo.getSelectedItem();
-        if (item.equals("Mercator"))
+        if (item.equals("Mercator")) {
             return new ProjectionMercator();
-        else if (item.equals("Sinusoidal"))
+        } else if (item.equals("Sinusoidal")) {
             return new ProjectionSinusoidal();
-        else if (item.equals("Modified Sin."))
+        } else if (item.equals("Modified Sin.")) {
             return new ProjectionModifiedSinusoidal();
-        else if (item.equals("Transverse Mercator"))
+        } else if (item.equals("Transverse Mercator")) {
             return new ProjectionTransverseMercator(wwd.getView().getCurrentEyePosition().getLongitude());
-        else if (item.equals("North Polar"))
+        } else if (item.equals("North Polar")) {
             return new ProjectionPolarEquidistant(AVKey.NORTH);
-        else if (item.equals("South Polar"))
+        } else if (item.equals("South Polar")) {
             return new ProjectionPolarEquidistant(AVKey.SOUTH);
-        else if (item.equals("UPS North"))
+        } else if (item.equals("UPS North")) {
             return new ProjectionUPS(AVKey.NORTH);
-        else if (item.equals("UPS South"))
+        } else if (item.equals("UPS South")) {
             return new ProjectionUPS(AVKey.SOUTH);
+        }
         // Default to lat-lon
         return new ProjectionEquirectangular();
     }
 
-    public boolean isFlatGlobe()
-    {
+    public boolean isFlatGlobe() {
         return wwd.getModel().getGlobe() instanceof FlatGlobe;
     }
 
-    public void enableFlatGlobe(boolean flat)
-    {
-        if (isFlatGlobe() == flat)
+    public void enableFlatGlobe(boolean flat) {
+        if (isFlatGlobe() == flat) {
             return;
+        }
 
-        if (!flat)
-        {
+        if (!flat) {
             // Switch to round globe
             wwd.getModel().setGlobe(roundGlobe);
             wwd.getView().stopMovement();
-        }
-        else
-        {
+        } else {
             // Switch to flat globe
             wwd.getModel().setGlobe(flatGlobe);
             wwd.getView().stopMovement();

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.formats.tiff;
 
 import gov.nasa.worldwind.util.Logging;
@@ -19,8 +18,8 @@ import java.nio.channels.FileChannel;
  * @author Lado Garakanidze
  * @version $Id: TIFFReader.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-class TIFFReader
-{
+class TIFFReader {
+
     private static final int CLEAR_CODE = 256;
     private static final int EOI_CODE = 257;
 
@@ -29,50 +28,41 @@ class TIFFReader
     private static final int INTEGER_SIZEOF = Integer.SIZE / Byte.SIZE;
     private static final int SHORT_SIZEOF = Short.SIZE / Byte.SIZE;
 
-
     private FileChannel theChannel;
-    private ByteOrder   tiffFileOrder;
+    private ByteOrder tiffFileOrder;
 
-    public TIFFReader( FileChannel fileChannel, ByteOrder byteOrder )
-    {
+    public TIFFReader(FileChannel fileChannel, ByteOrder byteOrder) {
         this.theChannel = fileChannel;
         this.tiffFileOrder = byteOrder;
     }
 
-    public TIFFReader( FileChannel fileChannel )
-    {
-        this( fileChannel,ByteOrder.BIG_ENDIAN );
+    public TIFFReader(FileChannel fileChannel) {
+        this(fileChannel, ByteOrder.BIG_ENDIAN);
     }
 
-    public void setByteOrder(ByteOrder byteOrder)
-    {
+    public void setByteOrder(ByteOrder byteOrder) {
         this.tiffFileOrder = byteOrder;
     }
 
-    public ByteOrder getByteOrder()
-    {
+    public ByteOrder getByteOrder() {
         return this.tiffFileOrder;
     }
 
 
-   /*
+    /*
     *
     *
-    */
+     */
     public byte[] readLZWCompressed(int width, int height, long offset, int samplesPerPixel,
-        boolean differencing, long[] stripOffsets, long[] stripCounts)
-        throws IOException
-    {
+            boolean differencing, long[] stripOffsets, long[] stripCounts)
+            throws IOException {
         this.theChannel.position(offset);
         byte[] pixels = new byte[width * height * samplesPerPixel];
         int base = 0;
-        for (int i = 0; i < stripOffsets.length; i++)
-        {
-            if (i > 0)
-            {
+        for (int i = 0; i < stripOffsets.length; i++) {
+            if (i > 0) {
                 long skip = stripOffsets[i] - stripOffsets[i - 1] - stripCounts[i - 1];
-                if (skip > 0)
-                {
+                if (skip > 0) {
                     //in.skip(skip);
                     this.theChannel.position(this.theChannel.position() + skip);
                 }
@@ -80,23 +70,20 @@ class TIFFReader
             byte[] byteArray = new byte[(int) stripCounts[i]];
             ByteBuffer bBuffer = ByteBuffer.wrap(byteArray);
             int read = 0, left = byteArray.length;
-            while (left > 0)
-            {
+            while (left > 0) {
                 long r = this.theChannel.read(bBuffer);
-                if (r == -1)
-                {
+                if (r == -1) {
                     break;
                 }
                 read += r;
                 left -= r;
             }
             byteArray = lzwUncompress(byteArray, (width * samplesPerPixel));
-            if (differencing)
-            {
-                for (int b = 0; b < byteArray.length; b++)
-                {
-                    if (b / samplesPerPixel % width == 0)
+            if (differencing) {
+                for (int b = 0; b < byteArray.length; b++) {
+                    if (b / samplesPerPixel % width == 0) {
                         continue;
+                    }
                     byteArray[b] += byteArray[b - samplesPerPixel];
                 }
             }
@@ -104,11 +91,11 @@ class TIFFReader
             int bytesToRead = byteArray.length;
             bytesToRead = bytesToRead - (bytesToRead % width);
             int pmax = base + bytesToRead;
-            if (pmax > width * height * samplesPerPixel)
+            if (pmax > width * height * samplesPerPixel) {
                 pmax = width * height * samplesPerPixel;
+            }
 
-            for (int j = base; j < pmax; j++)
-            {
+            for (int j = base; j < pmax; j++) {
                 pixels[j] = byteArray[k++];
             }
 
@@ -118,12 +105,10 @@ class TIFFReader
         return pixels;
     }
 
-
-
-    public byte[] lzwUncompress(byte[] input, int rowNumPixels)
-    {
-        if (input == null || input.length == 0)
+    public byte[] lzwUncompress(byte[] input, int rowNumPixels) {
+        if (input == null || input.length == 0) {
             return input;
+        }
         byte[][] symbolTable = new byte[4096][1];
         int bitsToRead = 9; //default
         int nextSymbol = 258;
@@ -133,33 +118,29 @@ class TIFFReader
         ByteBuffer out = java.nio.ByteBuffer.allocate(rowNumPixels);
         CodeReader bb = new CodeReader(input);
 
-        while (true)
-        {
+        while (true) {
             code = bb.getCode(bitsToRead);
 
-            if (code == EOI_CODE || code == -1)
+            if (code == EOI_CODE || code == -1) {
                 break;
-            if (code == CLEAR_CODE)
-            {
+            }
+            if (code == CLEAR_CODE) {
                 // initialize symbol table
-                for (int i = 0; i < 256; i++)
-                {
+                for (int i = 0; i < 256; i++) {
                     symbolTable[i][0] = (byte) i;
                 }
                 nextSymbol = 258;
                 bitsToRead = 9;
                 code = bb.getCode(bitsToRead);
 
-                if (code == EOI_CODE || code == -1)
+                if (code == EOI_CODE || code == -1) {
                     break;
+                }
 
                 out.put(symbolTable[code]);
                 oldCode = code;
-            }
-            else
-            {
-                if (code < nextSymbol)
-                {
+            } else {
+                if (code < nextSymbol) {
                     out.put(symbolTable[code]);
                     ByteBuffer symbol = java.nio.ByteBuffer.allocate((symbolTable[oldCode].length + 1));
                     symbol.put(symbolTable[oldCode]);
@@ -167,9 +148,7 @@ class TIFFReader
                     symbolTable[nextSymbol] = symbol.array();
                     oldCode = code;
                     nextSymbol++;
-                }
-                else
-                {
+                } else {
                     int size = symbolTable[oldCode].length + 1;
                     ByteBuffer symbol = java.nio.ByteBuffer.allocate(size);
                     symbol.put(symbolTable[oldCode]);
@@ -182,16 +161,13 @@ class TIFFReader
                     oldCode = code;
                     nextSymbol++;
                 }
-                if (nextSymbol == 511)
-                {
+                if (nextSymbol == 511) {
                     bitsToRead = 10;
                 }
-                if (nextSymbol == 1023)
-                {
+                if (nextSymbol == 1023) {
                     bitsToRead = 11;
                 }
-                if (nextSymbol == 2047)
-                {
+                if (nextSymbol == 2047) {
                     bitsToRead = 12;
                 }
             }
@@ -204,18 +180,17 @@ class TIFFReader
      *
      */
     public byte[][] readPixelInterleaved8(int width, int height, int samplesPerPixel,
-        long[] stripOffsets, long[] stripCounts) throws IOException
-    {
+            long[] stripOffsets, long[] stripCounts) throws IOException {
         byte[][] data = new byte[1][width * height * samplesPerPixel];
         int offset = 0;
 
         ByteBuffer buff = ByteBuffer.wrap(data[0]);
-        for (int i = 0; i < stripOffsets.length; i++)
-        {
+        for (int i = 0; i < stripOffsets.length; i++) {
             this.theChannel.position(stripOffsets[i]);
             int len = (int) stripCounts[i];
-            if ((offset + len) >= data[0].length)
+            if ((offset + len) >= data[0].length) {
                 len = data[0].length - offset;
+            }
             buff.limit(offset + len);
             this.theChannel.read(buff);
             offset += stripCounts[i];
@@ -227,28 +202,26 @@ class TIFFReader
     /*
     * Reads BYTE image data organized as separate image planes.
     *
-    */
+     */
     public byte[][] readPlanar8(int width, int height, int samplesPerPixel,
-        long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException
-    {
+            long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException {
         byte[][] data = new byte[samplesPerPixel][width * height];
         int band = 0;
         int offset = 0;
         int numRows = 0;
 
         ByteBuffer buff = ByteBuffer.wrap(data[band]);
-        for (int i = 0; i < stripOffsets.length; i++)
-        {
+        for (int i = 0; i < stripOffsets.length; i++) {
             this.theChannel.position(stripOffsets[i]);
             int len = (int) stripCounts[i];
-            if ((offset + len) >= data[band].length)
+            if ((offset + len) >= data[band].length) {
                 len = data[band].length - offset;
+            }
             buff.limit(offset + len);
             this.theChannel.read(buff);
             offset += stripCounts[i];
             numRows += rowsPerStrip;
-            if (numRows >= height && band < (data.length - 1))
-            {
+            if (numRows >= height && band < (data.length - 1)) {
                 buff = ByteBuffer.wrap(data[++band]);
                 numRows = 0;
                 offset = 0;
@@ -258,63 +231,57 @@ class TIFFReader
         return data;
     }
 
-/*
+    /*
      * Reads SHORT image data organized as PIXEL interleaved
      * b1p1, b2p1, b3p1, b4p1, b1p2, b2p2, b3p2, b4p2, b1p3, ...
      *
      */
     public short[] read16bitPixelInterleavedImage(int band, int width, int height, int samplesPerPixel,
-        long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException
-    {
+            long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException {
         short[] data = new short[width * height];
         int numRows = 0;
 
         ByteBuffer buff = null;
 
         int dataOffset = 0;
-        for (int i = 0; i < stripOffsets.length; i++)
-        {
-            this.theChannel.position( stripOffsets[i] );
+        for (int i = 0; i < stripOffsets.length; i++) {
+            this.theChannel.position(stripOffsets[i]);
 
             int stripSize = (int) stripCounts[i];
 
-            if( null == buff || buff.capacity() < stripSize )
-            {
-                buff = ByteBuffer.allocateDirect( stripSize );
-                buff.order( this.getByteOrder() );
+            if (null == buff || buff.capacity() < stripSize) {
+                buff = ByteBuffer.allocateDirect(stripSize);
+                buff.order(this.getByteOrder());
             }
             buff.clear().rewind();
 
-            buff.limit( stripSize );
+            buff.limit(stripSize);
 
-            this.theChannel.read( buff );
+            this.theChannel.read(buff);
 
             buff.flip();
             ShortBuffer sb = buff.asShortBuffer();
 
             int b = 0;
-            while(sb.hasRemaining())
-            {
-                if( band == (b++ % samplesPerPixel ))
-                {
-                    data[ dataOffset] = (short)(0xFFFF & sb.get());
+            while (sb.hasRemaining()) {
+                if (band == (b++ % samplesPerPixel)) {
+                    data[dataOffset] = (short) (0xFFFF & sb.get());
                     dataOffset++;
-                }
-                else
+                } else {
                     sb.get();
+                }
             }
         }
 
         return data;
     }
 
-/*
+    /*
      * Reads SHORT image data organized as separate image planes.
      *
      */
     public short[][] readPlanar16(int width, int height, int samplesPerPixel,
-        long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException
-    {
+            long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException {
         short[][] data = new short[samplesPerPixel][width * height];
         int band = 0;
         int numRows = 0;
@@ -322,17 +289,16 @@ class TIFFReader
         ByteBuffer buff = ByteBuffer.allocateDirect(width * height * SHORT_SIZEOF);
         buff.order(this.getByteOrder());
 
-        for (int i = 0; i < stripOffsets.length; i++)
-        {
+        for (int i = 0; i < stripOffsets.length; i++) {
             this.theChannel.position(stripOffsets[i]);
             int len = (int) stripCounts[i];
-            if ((buff.position() + len) > data[band].length * SHORT_SIZEOF)
+            if ((buff.position() + len) > data[band].length * SHORT_SIZEOF) {
                 len = data[band].length * SHORT_SIZEOF - buff.position();
+            }
             buff.limit(buff.position() + len);
             this.theChannel.read(buff);
             numRows += rowsPerStrip;
-            if (numRows >= height)
-            {
+            if (numRows >= height) {
                 buff.flip();
                 ShortBuffer sbuff = buff.asShortBuffer();
                 sbuff.get(data[band]);
@@ -350,8 +316,7 @@ class TIFFReader
      *
      */
     public float[][] readPlanarFloat32(int width, int height, int samplesPerPixel,
-        long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException
-    {
+            long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException {
         float[][] data = new float[samplesPerPixel][width * height];
         int band = 0;
         int numRows = 0;
@@ -359,17 +324,16 @@ class TIFFReader
         ByteBuffer buff = ByteBuffer.allocateDirect(width * height * FLOAT_SIZEOF);
         buff.order(this.getByteOrder());
 
-        for (int i = 0; i < stripOffsets.length; i++)
-        {
+        for (int i = 0; i < stripOffsets.length; i++) {
             this.theChannel.position(stripOffsets[i]);
             int len = (int) stripCounts[i];
-            if ((buff.position() + len) >= data[band].length * FLOAT_SIZEOF)
+            if ((buff.position() + len) >= data[band].length * FLOAT_SIZEOF) {
                 len = data[band].length * FLOAT_SIZEOF - buff.position();
+            }
             buff.limit(buff.position() + len);
             this.theChannel.read(buff);
             numRows += rowsPerStrip;
-            if (numRows >= height)
-            {
+            if (numRows >= height) {
                 buff.flip();
                 FloatBuffer fbuff = buff.asFloatBuffer();
                 fbuff.get(data[band]);
@@ -386,10 +350,8 @@ class TIFFReader
      * Reads a ColorMap.
      *
      */
-    public byte[][] readColorMap(TiffIFDEntry colorMapEntry) throws IOException
-    {
-        if (null == colorMapEntry)
-        {
+    public byte[][] readColorMap(TiffIFDEntry colorMapEntry) throws IOException {
+        if (null == colorMapEntry) {
             String message = Logging.getMessage("GeotiffReader.MissingColormap");
             Logging.logger().severe(message);
             throw new IOException(message);
@@ -414,12 +376,10 @@ class TIFFReader
         // TIFF gives a ColorMap composed of unsigned shorts. Java's IndexedColorModel wants unsigned bytes.
         // Something's got to give somewhere...we'll do our best.
         byte[][] cmap = new byte[3][numEntries];
-        for (int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             buff = ByteBuffer.wrap(tmp[i]);
             buff.order(this.getByteOrder());
-            for (int j = 0; j < numEntries; j++)
-            {
+            for (int j = 0; j < numEntries; j++) {
                 cmap[i][j] = (byte) (0x00ff & buff.getShort());
             }
         }
@@ -427,22 +387,19 @@ class TIFFReader
         return cmap;
     }
 
-    public static int getUnsignedShort(ByteBuffer b)
-    {
+    public static int getUnsignedShort(ByteBuffer b) {
         return 0xffff & (int) b.getShort();
     }
 
-    public static long getUnsignedInt(ByteBuffer b)
-    {
-        return 0xffffffffL & (long)b.getInt();
+    public static long getUnsignedInt(ByteBuffer b) {
+        return 0xffffffffL & (long) b.getInt();
     }
 
     /*
      * Reads and returns an array of bytes from the file.
      *
      */
-    public byte[] readBytes(TiffIFDEntry entry) throws IOException
-    {
+    public byte[] readBytes(TiffIFDEntry entry) throws IOException {
         byte[] bytes = new byte[(int) entry.count];
         ByteBuffer buff = ByteBuffer.wrap(bytes);
         this.theChannel.position(entry.asOffset());
@@ -450,17 +407,12 @@ class TIFFReader
         return bytes;
     }
 
-    public String readString(TiffIFDEntry entry)
-    {
-        try
-        {
-            if( null != entry && entry.type == Tiff.Type.ASCII )
-            {
-                return new String( this.readBytes( entry ));
+    public String readString(TiffIFDEntry entry) {
+        try {
+            if (null != entry && entry.type == Tiff.Type.ASCII) {
+                return new String(this.readBytes(entry));
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             Logging.logger().severe(e.getMessage());
         }
         return null;
@@ -506,22 +458,20 @@ class TIFFReader
 //
 //        return offsets;
 //    }
+    //Inner class for reading individual codes during decompression
+    private class CodeReader {
 
-        //Inner class for reading individual codes during decompression
-    private class CodeReader
-    {
         private int currentByte;
         private int currentBit;
         private byte[] byteBuffer;
         private int bufferLength;
-        private int[] backMask = new int[] {0x0000, 0x0001, 0x0003, 0x0007,
+        private int[] backMask = new int[]{0x0000, 0x0001, 0x0003, 0x0007,
             0x000F, 0x001F, 0x003F, 0x007F};
-        private int[] frontMask = new int[] {0x0000, 0x0080, 0x00C0, 0x00E0,
+        private int[] frontMask = new int[]{0x0000, 0x0080, 0x00C0, 0x00E0,
             0x00F0, 0x00F8, 0x00FC, 0x00FE};
         private boolean atEof;
 
-        public CodeReader(byte[] byteBuffer)
-        {
+        public CodeReader(byte[] byteBuffer) {
             //todo validate byteBuffer
             this.byteBuffer = byteBuffer;
             currentByte = 0;
@@ -529,17 +479,16 @@ class TIFFReader
             bufferLength = byteBuffer.length;
         }
 
-        public int getCode(int numBitsToRead)
-        {
-            if (numBitsToRead < 0)
+        public int getCode(int numBitsToRead) {
+            if (numBitsToRead < 0) {
                 return 0;
-            if (atEof)
+            }
+            if (atEof) {
                 return -1; //end of file
+            }
             int returnCode = 0;
-            while (numBitsToRead != 0 && !atEof)
-            {
-                if (numBitsToRead >= 8 - currentBit)
-                {
+            while (numBitsToRead != 0 && !atEof) {
+                if (numBitsToRead >= 8 - currentBit) {
                     if (currentBit == 0) //get first
                     {
                         returnCode = returnCode << 8;
@@ -547,18 +496,14 @@ class TIFFReader
                         returnCode += (cb < 0 ? 256 + cb : cb);
                         numBitsToRead -= 8;
                         currentByte++;
-                    }
-                    else
-                    {
+                    } else {
                         returnCode = returnCode << (8 - currentBit);
                         returnCode += ((int) byteBuffer[currentByte]) & backMask[8 - currentBit];
                         numBitsToRead -= (8 - currentBit);
                         currentBit = 0;
                         currentByte++;
                     }
-                }
-                else
-                {
+                } else {
                     returnCode = returnCode << numBitsToRead;
                     int cb = ((int) byteBuffer[currentByte]);
                     cb = (cb < 0 ? 256 + cb : cb);
@@ -566,7 +511,7 @@ class TIFFReader
                     currentBit += numBitsToRead;
                     numBitsToRead = 0;
                 }
-                if (currentByte == bufferLength)  //at eof
+                if (currentByte == bufferLength) //at eof
                 {
                     atEof = true;
                     return returnCode;

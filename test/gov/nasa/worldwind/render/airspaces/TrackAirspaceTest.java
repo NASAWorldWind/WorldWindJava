@@ -15,11 +15,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnit4.class)
-public class TrackAirspaceTest
-{
+public class TrackAirspaceTest {
+
     @Test
-    public void testRestoreState()
-    {
+    public void testRestoreState() {
         TrackAirspace expected = new TrackAirspace();
         // AbstractAirspace properties
         expected.setVisible(false);
@@ -47,8 +46,7 @@ public class TrackAirspaceTest
         assertTrackAirspaceEquals(expected, actual);
     }
 
-    private static void assertTrackAirspaceEquals(TrackAirspace expected, TrackAirspace actual)
-    {
+    private static void assertTrackAirspaceEquals(TrackAirspace expected, TrackAirspace actual) {
         assertAbstractAirspaceEquals(expected, actual);
         assertEquals(expected.isEnableInnerCaps(), actual.isEnableInnerCaps());
         assertEquals(expected.isEnableCenterLine(), actual.isEnableCenterLine());
@@ -58,14 +56,12 @@ public class TrackAirspaceTest
         List<Box> actualLegs = actual.getLegs();
         assertEquals(expectedLegs.size(), actualLegs.size());
 
-        for (int i = 0; i < expectedLegs.size(); i++)
-        {
+        for (int i = 0; i < expectedLegs.size(); i++) {
             assertLegEquals(expectedLegs.get(i), actualLegs.get(i));
         }
     }
 
-    private static void assertAbstractAirspaceEquals(AbstractAirspace expected, AbstractAirspace actual)
-    {
+    private static void assertAbstractAirspaceEquals(AbstractAirspace expected, AbstractAirspace actual) {
         assertEquals(expected.isVisible(), actual.isVisible());
         assertEquals(expected.getAttributes(), actual.getAttributes());
         assertEquals(expected.getHighlightAttributes(), actual.getHighlightAttributes());
@@ -86,8 +82,7 @@ public class TrackAirspaceTest
         assertEquals(expected.isEnableLevelOfDetail(), actual.isEnableLevelOfDetail());
     }
 
-    private static void assertLegEquals(Box expected, Box actual)
-    {
+    private static void assertLegEquals(Box expected, Box actual) {
         assertEquals(expected.getLocations()[0], actual.getLocations()[0]);
         assertEquals(expected.getLocations()[1], actual.getLocations()[1]);
         assertEquals(expected.getWidths()[0], actual.getWidths()[0], 0.0);

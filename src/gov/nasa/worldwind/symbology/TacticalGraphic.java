@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology;
 
 import gov.nasa.worldwind.Movable;
@@ -15,26 +14,26 @@ import gov.nasa.worldwind.util.UnitsFormat;
 /**
  * TacticalGraphic provides a common interface for displaying a graphic from a symbology set. A graphic can be an icon
  * that is drawn a geographic position, a vector graphic that is positioned using one or more control points, or a line
- * or polygon that is styled according to the symbol set's specification. See the TacticalGraphic 
- * <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a> 
+ * or polygon that is styled according to the symbol set's specification. See the TacticalGraphic
+ * <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
  * for instructions on using TacticalGraphic in an application.
  * <p>
- * See the {@link gov.nasa.worldwindx.examples.symbology.Symbology} and {@link gov.nasa.worldwindx.examples.symbology.TacticalGraphics}
- * example applications for examples of how to use tactical graphics.
+ * See the {@link gov.nasa.worldwindx.examples.symbology.Symbology} and
+ * {@link gov.nasa.worldwindx.examples.symbology.TacticalGraphics} example applications for examples of how to use
+ * tactical graphics.
  * <h1>Construction</h1>
  * <p>
  * TacticalGraphics are typically created by an instance of {@link TacticalGraphicFactory}. Each graphic within a symbol
  * set is identified by a string identifier. The format of this identifier depends on the symbol set. For example, a
  * MIL-STD-2525 Symbol Identification Code (SIDC) is a string of 15 characters.
  * <p>
- * You will need to instantiate the appropriate factory for the symbol set that you intend to use.  For example, {@link
+ * You will need to instantiate the appropriate factory for the symbol set that you intend to use. For example, {@link
  * gov.nasa.worldwind.symbology.milstd2525.MilStd2525GraphicFactory} creates graphics for the MIL-STD-2525 symbology
  * set.
  * <p>
  * The TacticalGraphic interface provides access to settings common to all tactical graphics. TacticalGraphic extends
  * the {@link Renderable} interface, so you can add a TacticalGraphic directly to a {@link
- * gov.nasa.worldwind.layers.RenderableLayer}. Here's an example of creating a graphic from the MIL-STD-2525 symbol
- * set:
+ * gov.nasa.worldwind.layers.RenderableLayer}. Here's an example of creating a graphic from the MIL-STD-2525 symbol set:
  * <pre>
  * // Create a graphic factory for MIL-STD-2525
  * TacticalGraphicFactory factory = new MilStd2525GraphicFactory();
@@ -65,10 +64,10 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * wwd.redraw();
  * </pre>
  * <p>
- * The symbol identifier ({@code GHGPGLP----AUSX}) tells the factory what type of graphic to create,  and how the
- * graphic should be styled. In the example above we added a text modifier of "Alpha" to identify our shape. These
- * parameters can be specified using a parameter list when the TacticalGraphic is created, as shown above. They can also
- * be set after creation using setters in the TacticalGraphic interface.
+ * The symbol identifier ({@code GHGPGLP----AUSX}) tells the factory what type of graphic to create, and how the graphic
+ * should be styled. In the example above we added a text modifier of "Alpha" to identify our shape. These parameters
+ * can be specified using a parameter list when the TacticalGraphic is created, as shown above. They can also be set
+ * after creation using setters in the TacticalGraphic interface.
  * <h1>Modifiers</h1>
  * <p>
  * Many graphics support text or graphic modifiers. Each modifier is identified by a String key. The set of possible
@@ -95,7 +94,7 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * <h1>Position</h1>
  * <p>
  * Each tactical graphic is positioned by one or more control points. How many points are required depends on the type
- * of graphic.  A point graphic will only require one point. A more complex shape may require three or four, and a line
+ * of graphic. A point graphic will only require one point. A more complex shape may require three or four, and a line
  * or area may allow any number.
  * <p>
  * Here is an example of how to create a point graphic in the MIL-STD-2525 symbol set:
@@ -133,8 +132,8 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * @version $Id: TacticalGraphic.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see TacticalGraphicFactory
  */
-public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVList
-{
+public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVList {
+
     /**
      * Indicates whether this graphic is drawn when in view.
      *
@@ -162,7 +161,7 @@ public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVL
      * Specifies the value of a text or graphic modifier.
      *
      * @param modifier Key that identifies the modifier to set. The possible modifiers depends on the symbol set.
-     * @param value    New value for the modifier.
+     * @param value New value for the modifier.
      */
     void setModifier(String modifier, Object value);
 
@@ -198,8 +197,7 @@ public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVL
      * Indicates whether or not the graphic should display its location as a text modifier. Not all graphics support the
      * location modifier.
      *
-     * @return true if the graphic will display the location modifier. Note that not all graphics support this
-     *         modifier.
+     * @return true if the graphic will display the location modifier. Note that not all graphics support this modifier.
      */
     boolean isShowLocation();
 
@@ -208,7 +206,7 @@ public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVL
      * location modifier. Setting showLocation on a graphic that does not support the modifier will have no effect.
      *
      * @param show true if the graphic will display the location modifier. Note that not all graphics support this
-     *             modifier.
+     * modifier.
      */
     void setShowLocation(boolean show);
 
@@ -217,8 +215,8 @@ public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVL
      * See comments on {@link #setShowHostileIndicator(boolean) setShowHostileIndicator} for more information.
      *
      * @return true if an indicator may be drawn when this graphic represents a hostile entity, if supported by the
-     *         graphic implementation. Note that some graphics may not display an indicator, even when representing a
-     *         hostile entity.
+     * graphic implementation. Note that some graphics may not display an indicator, even when representing a hostile
+     * entity.
      */
     boolean isShowHostileIndicator();
 
@@ -228,8 +226,8 @@ public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVL
      * and may not apply to all graphics in the symbol set.
      *
      * @param show true if this graphic should display an indicator when this graphic represents a hostile entity and
-     *             the graphic implementation supports such an indicator. Note that some graphics may not display an
-     *             indicator, even when representing a hostile entity.
+     * the graphic implementation supports such an indicator. Note that some graphics may not display an indicator, even
+     * when representing a hostile entity.
      */
     void setShowHostileIndicator(boolean show);
 
@@ -265,7 +263,7 @@ public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVL
      * Indicates the positions of the control points that place and orient the graphic.
      *
      * @return positions that orient the graphic. How many positions are returned depends on the type of graphic. Some
-     *         graphics require only a single position, others require many.
+     * graphics require only a single position, others require many.
      */
     Iterable<? extends Position> getPositions();
 
@@ -273,9 +271,8 @@ public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVL
      * Specifies the positions of the control points that place and orient the graphic.
      *
      * @param positions Positions that orient the graphic. How many positions are returned depends on the type of
-     *                  graphic. Some graphics require only a single position, others require many. The positions must
-     *                  be specified in the same order as the control points defined by the symbology set's template for
-     *                  this type of graphic.
+     * graphic. Some graphics require only a single position, others require many. The positions must be specified in
+     * the same order as the control points defined by the symbology set's template for this type of graphic.
      */
     void setPositions(Iterable<? extends Position> positions);
 
@@ -310,7 +307,7 @@ public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVL
      * interpreted.
      *
      * @param attributes Attributes to apply to the graphic when it is highlighted. May be null, in which default
-     *                   attributes are used.
+     * attributes are used.
      */
     void setHighlightAttributes(TacticalGraphicAttributes attributes);
 
@@ -340,7 +337,7 @@ public interface TacticalGraphic extends Renderable, Highlightable, Movable, AVL
      * object returned during picking. If null, the graphic itself is the pickable object returned during picking.
      *
      * @return the object used as the pickable object returned during picking, or null to indicate the the graphic is
-     *         returned during picking.
+     * returned during picking.
      */
     Object getDelegateOwner();
 

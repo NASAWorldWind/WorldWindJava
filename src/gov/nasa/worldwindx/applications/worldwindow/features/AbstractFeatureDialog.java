@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.features;
 
 import gov.nasa.worldwindx.applications.worldwindow.core.*;
@@ -18,8 +17,8 @@ import java.awt.event.*;
  * @author tag
  * @version $Id: AbstractFeatureDialog.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class AbstractFeatureDialog extends AbstractFeature implements WWODialog
-{
+public class AbstractFeatureDialog extends AbstractFeature implements WWODialog {
+
     protected JDialog dialog;
     protected JPanel dialogPanel;
     protected JPanel leftButtonPanel;
@@ -31,18 +30,15 @@ public class AbstractFeatureDialog extends AbstractFeature implements WWODialog
     private int horizontalLocation = SwingConstants.CENTER;
     private int verticalLocation = SwingConstants.CENTER;
 
-    protected AbstractFeatureDialog(String name, String featureID, Registry registry)
-    {
+    protected AbstractFeatureDialog(String name, String featureID, Registry registry) {
         super(name, featureID, registry);
     }
 
-    protected AbstractFeatureDialog(String name, String featureID, String largeIconPath, Registry registry)
-    {
+    protected AbstractFeatureDialog(String name, String featureID, String largeIconPath, Registry registry) {
         super(name, featureID, largeIconPath, registry);
     }
 
-    public void initialize(Controller controller)
-    {
+    public void initialize(Controller controller) {
         super.initialize(controller);
 
         this.dialog = new JDialog(this.controller.getFrame());
@@ -55,26 +51,21 @@ public class AbstractFeatureDialog extends AbstractFeature implements WWODialog
         this.setTitle(this.getName());
     }
 
-    public JDialog getJDialog()
-    {
+    public JDialog getJDialog() {
         return this.dialog;
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.dialog.setTitle(title != null ? title : "");
     }
 
-    protected void setTaskPanel(FeaturePanel panel)
-    {
+    protected void setTaskPanel(FeaturePanel panel) {
         this.setTaskComponent(panel.getJPanel());
     }
 
-    protected void setTaskPanel(String featureID)
-    {
+    protected void setTaskPanel(String featureID) {
         FeaturePanel panel = (FeaturePanel) this.controller.getRegisteredObject(featureID);
-        if (panel == null)
-        {
+        if (panel == null) {
             Util.getLogger().warning("Registrado ning\u00fan objeto para caracter\u00edstica " + featureID);
             return;
         }
@@ -82,77 +73,66 @@ public class AbstractFeatureDialog extends AbstractFeature implements WWODialog
         this.setTaskComponent(panel.getJPanel());
 
         JComponent[] dialogControls = panel.getDialogControls();
-        if (dialogControls != null)
-        {
-            for (JComponent c : dialogControls)
-            {
+        if (dialogControls != null) {
+            for (JComponent c : dialogControls) {
                 this.insertDialogComponent(c);
             }
         }
     }
 
     // Specifies the main component of the dialog, typically the main panel.
-    protected void setTaskComponent(JComponent component)
-    {
+    protected void setTaskComponent(JComponent component) {
         this.dialog.getContentPane().add(component, BorderLayout.CENTER);
     }
 
-    protected void insertLeftDialogComponent(JComponent component)
-    {
+    protected void insertLeftDialogComponent(JComponent component) {
         int n = this.leftButtonPanel.getComponentCount();
         this.leftButtonPanel.add(component,
-            n == 0 ? BorderLayout.WEST : n == 1 ? BorderLayout.CENTER : BorderLayout.EAST);
+                n == 0 ? BorderLayout.WEST : n == 1 ? BorderLayout.CENTER : BorderLayout.EAST);
     }
 
-    protected void insertRightDialogComponent(JComponent component)
-    {
+    protected void insertRightDialogComponent(JComponent component) {
         int n = this.rightButtonPanel.getComponentCount();
         this.rightButtonPanel.add(component,
-            n == 0 ? BorderLayout.EAST : n == 1 ? BorderLayout.CENTER : BorderLayout.WEST);
+                n == 0 ? BorderLayout.EAST : n == 1 ? BorderLayout.CENTER : BorderLayout.WEST);
     }
 
-    protected void insertCenterDialogComponent(JComponent component)
-    {
+    protected void insertCenterDialogComponent(JComponent component) {
         int n = this.centerButtonPanel.getComponentCount();
         this.centerButtonPanel.add(component,
-            n == 0 ? BorderLayout.CENTER : n == 1 ? BorderLayout.EAST : BorderLayout.WEST);
+                n == 0 ? BorderLayout.CENTER : n == 1 ? BorderLayout.EAST : BorderLayout.WEST);
     }
 
-    protected void insertDialogComponent(JComponent component)
-    {
+    protected void insertDialogComponent(JComponent component) {
         this.insertRightDialogComponent(component);
     }
 
-    protected void setLocation(int horizontal, int vertical)
-    {
+    protected void setLocation(int horizontal, int vertical) {
         this.horizontalLocation = horizontal;
         this.verticalLocation = vertical;
         this.positionInitialized = false;
     }
 
     @Override
-    public void turnOn(boolean tf)
-    {
+    public void turnOn(boolean tf) {
         this.setVisible(tf);
     }
 
-    public void setVisible(boolean tf)
-    {
-        if (tf)
+    public void setVisible(boolean tf) {
+        if (tf) {
             this.dialog.pack();
+        }
 
-        if (tf && !this.positionInitialized)
-        {
+        if (tf && !this.positionInitialized) {
             Util.positionDialogInContainer(this.dialog, this.controller.getAppPanel().getJPanel(),
-                this.horizontalLocation, this.verticalLocation);
+                    this.horizontalLocation, this.verticalLocation);
             this.positionInitialized = true;
         }
 
         this.dialog.setVisible(tf);
     }
 
-    private JPanel createButtonPanel()
-    {
+    private JPanel createButtonPanel() {
         this.leftButtonPanel = new JPanel(new BorderLayout(10, 5));
         this.rightButtonPanel = new JPanel(new BorderLayout(10, 5));
         this.centerButtonPanel = new JPanel(new BorderLayout(10, 5));
@@ -165,10 +145,8 @@ public class AbstractFeatureDialog extends AbstractFeature implements WWODialog
 
         this.closeButton = new JButton("Close");
         this.closeButton.setToolTipText("Close dialog");
-        this.closeButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent actionEvent)
-            {
+        this.closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
             }
         });

@@ -17,8 +17,8 @@ import java.io.File;
  * @author dcollins
  * @version $Id: SaveTrackDialog.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SaveTrackDialog
-{
+public class SaveTrackDialog {
+
     private JFileChooser fileChooser;
     private JCheckBox saveAnnotations;
 
@@ -26,176 +26,165 @@ public class SaveTrackDialog
     public static final int CANCEL_OPTION = JFileChooser.CANCEL_OPTION;
     public static final int ERROR_OPTION = JFileChooser.ERROR_OPTION;
 
-    public SaveTrackDialog()
-    {
+    public SaveTrackDialog() {
         initComponents();
     }
 
-    public File getSelectedFile()
-    {
+    public File getSelectedFile() {
         File file = this.fileChooser.getSelectedFile();
-        if (file == null)
+        if (file == null) {
             return null;
+        }
 
         SaveTrackFilter filter = this.getSelectedSaveFilter();
-        if (filter != null)
+        if (filter != null) {
             file = filter.appendSuffix(file);
+        }
 
         return file;
     }
 
-    public void setSelectedFile(File file)
-    {
+    public void setSelectedFile(File file) {
         this.fileChooser.setSelectedFile(file);
     }
 
-    public void setSelectedFile(SARTrack track)
-    {
-        if (track != null)
-        {
-            if (track.getFile() != null)
+    public void setSelectedFile(SARTrack track) {
+        if (track != null) {
+            if (track.getFile() != null) {
                 this.fileChooser.setSelectedFile(track.getFile());
-            else if (track.getName() != null && this.fileChooser.getCurrentDirectory() != null)
+            } else if (track.getName() != null && this.fileChooser.getCurrentDirectory() != null) {
                 this.fileChooser.setSelectedFile(new File(this.fileChooser.getCurrentDirectory(), track.getName()));
+            }
         }
     }
 
-    public boolean isSaveAnnotations()
-    {
+    public boolean isSaveAnnotations() {
         return this.saveAnnotations.isSelected();
     }
 
-    public void setSaveAnnotations(boolean saveAnnotations)
-    {
+    public void setSaveAnnotations(boolean saveAnnotations) {
         this.saveAnnotations.setSelected(saveAnnotations);
     }
 
-    public SaveTrackFilter getSelectedSaveFilter()
-    {
+    public SaveTrackFilter getSelectedSaveFilter() {
         FileFilter filter = this.fileChooser.getFileFilter();
         return (filter != null && filter instanceof SaveTrackFilter) ? (SaveTrackFilter) filter : null;
     }
 
-    public int getFileFormat()
-    {
+    public int getFileFormat() {
         SaveTrackFilter filter = this.getSelectedSaveFilter();
         return (filter != null) ? filter.getFormat() : 0;
     }
 
-    public void setFileFormat(int format)
-    {
+    public void setFileFormat(int format) {
         FileFilter ff = filterForFormat(format);
-        if (ff != null)
+        if (ff != null) {
             this.fileChooser.setFileFilter(ff);
-    }
-
-    public void setFileFormat(SARTrack track)
-    {
-        if (track != null)
-        {
-            FileFilter ff = filterForFormat(track.getFormat());
-            if (ff == null) // If the track format is invalid, default to CSV.
-                ff = filterForFormat(SARTrack.FORMAT_CSV);
-            if (ff != null)
-                this.fileChooser.setFileFilter(ff);
         }
     }
 
-    public File getCurrentDirectory()
-    {
+    public void setFileFormat(SARTrack track) {
+        if (track != null) {
+            FileFilter ff = filterForFormat(track.getFormat());
+            if (ff == null) // If the track format is invalid, default to CSV.
+            {
+                ff = filterForFormat(SARTrack.FORMAT_CSV);
+            }
+            if (ff != null) {
+                this.fileChooser.setFileFilter(ff);
+            }
+        }
+    }
+
+    public File getCurrentDirectory() {
         return this.fileChooser.getCurrentDirectory();
     }
 
-    public void setCurrentDirectory(File dir)
-    {
+    public void setCurrentDirectory(File dir) {
         this.fileChooser.setCurrentDirectory(dir);
     }
 
-    public String getDialogTitle()
-    {
+    public String getDialogTitle() {
         return this.fileChooser.getDialogTitle();
     }
 
-    public void setDialogTitle(String dialogTitle)
-    {
+    public void setDialogTitle(String dialogTitle) {
         this.fileChooser.setDialogTitle(dialogTitle);
     }
 
-    public void setDialogTitle(SARTrack track)
-    {
+    public void setDialogTitle(SARTrack track) {
         String title = null;
         String formatString = "Save \"%s\" As";
-        if (track.getName() != null)
+        if (track.getName() != null) {
             title = String.format(formatString, track.getName());
-        else if (track.getFile() != null)
+        } else if (track.getFile() != null) {
             title = String.format(formatString, track.getFile().getName());
+        }
 
-        if (title != null)
+        if (title != null) {
             this.fileChooser.setDialogTitle(title);
+        }
     }
 
-    public int showSaveDialog(Component parent) throws HeadlessException
-    {
+    public int showSaveDialog(Component parent) throws HeadlessException {
         return this.fileChooser.showSaveDialog(parent);
     }
 
-    public static int showSaveChangesPrompt(Component parent, String title, String message, SARTrack track)
-    {
-        if (title == null)
+    public static int showSaveChangesPrompt(Component parent, String title, String message, SARTrack track) {
+        if (title == null) {
             title = "Save";
+        }
 
         String formatString = "Save changes to the Track\n\"%s\" before closing?";
-        if (message == null)
-        {
-            if (track != null && track.getName() != null)
+        if (message == null) {
+            if (track != null && track.getName() != null) {
                 message = String.format(formatString, track.getName());
-            else if (track != null && track.getFile() != null)
+            } else if (track != null && track.getFile() != null) {
                 message = String.format(formatString, track.getFile().getName());
+            }
         }
 
         return JOptionPane.showOptionDialog(
-            parent, // parentComponent
-            message,
-            title,
-            JOptionPane.YES_NO_CANCEL_OPTION, // optionType
-            JOptionPane.WARNING_MESSAGE, // messageType
-            null, // icon
-            new Object[] {"Save", "Don't Save", "Cancel"}, // options
-            "Save"); // initialValue
+                parent, // parentComponent
+                message,
+                title,
+                JOptionPane.YES_NO_CANCEL_OPTION, // optionType
+                JOptionPane.WARNING_MESSAGE, // messageType
+                null, // icon
+                new Object[]{"Save", "Don't Save", "Cancel"}, // options
+                "Save"); // initialValue
     }
 
-    public static int showOverwritePrompt(Component parent, String title, String message, File file)
-    {
-        if (title == null)
+    public static int showOverwritePrompt(Component parent, String title, String message, File file) {
+        if (title == null) {
             title = "Save";
+        }
 
-        if (message == null)
-        {
-            if (file != null)
+        if (message == null) {
+            if (file != null) {
                 message = String.format("Overwrite existing file\n\"%s\"?", file.getPath());
-            else
+            } else {
                 message = "Overwrite existing file?";
+            }
         }
 
         return JOptionPane.showOptionDialog(
-            parent, // parentComponent
-            message,
-            title,
-            JOptionPane.YES_NO_OPTION, // optionType
-            JOptionPane.WARNING_MESSAGE, // messageType
-            null, // icon
-            new Object[] {"Overwrite", "Cancel"}, // options
-            "Overwrite"); // initialValue
+                parent, // parentComponent
+                message,
+                title,
+                JOptionPane.YES_NO_OPTION, // optionType
+                JOptionPane.WARNING_MESSAGE, // messageType
+                null, // icon
+                new Object[]{"Overwrite", "Cancel"}, // options
+                "Overwrite"); // initialValue
     }
 
-    private void initComponents()
-    {
-        this.fileChooser = new JFileChooser()
-        {
-            public void approveSelection()
-            {
-                if (doApproveSelection())
+    private void initComponents() {
+        this.fileChooser = new JFileChooser() {
+            public void approveSelection() {
+                if (doApproveSelection()) {
                     super.approveSelection();
+                }
             }
         };
         this.fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -204,21 +193,19 @@ public class SaveTrackDialog
         makeFileFilters();
     }
 
-    private boolean doApproveSelection()
-    {
+    private boolean doApproveSelection() {
         File f = this.getSelectedFile();
-        if (f != null && f.exists())
-        {
+        if (f != null && f.exists()) {
             int state = showOverwritePrompt(this.fileChooser, null, null, f);
-            if (state != JOptionPane.YES_OPTION)
+            if (state != JOptionPane.YES_OPTION) {
                 return false;
+            }
         }
 
         return true;
     }
 
-    private void makeAccessory()
-    {
+    private void makeAccessory() {
         Box box = Box.createVerticalBox();
         box.setBorder(new EmptyBorder(0, 10, 0, 10));
 
@@ -235,19 +222,15 @@ public class SaveTrackDialog
         this.fileChooser.setAccessory(box);
     }
 
-    private void makeFileFilters()
-    {
-        FileFilter[] filters = new FileFilter[]
-            {
-                new SaveTrackFilter(SARTrack.FORMAT_CSV, "Comma Separated Value (*.csv)", new String[] {".csv"}),
-                new SaveTrackFilter(SARTrack.FORMAT_GPX, "GPS Exchange Format (*.xml, *.gpx)",
-                    new String[] {".xml", ".gpx"}),
-                new SaveTrackFilter(SARTrack.FORMAT_NMEA, "National Marine Electronics Association (*.nmea)",
-                    new String[] {".nmea"}),
-            };
+    private void makeFileFilters() {
+        FileFilter[] filters = new FileFilter[]{
+            new SaveTrackFilter(SARTrack.FORMAT_CSV, "Comma Separated Value (*.csv)", new String[]{".csv"}),
+            new SaveTrackFilter(SARTrack.FORMAT_GPX, "GPS Exchange Format (*.xml, *.gpx)",
+            new String[]{".xml", ".gpx"}),
+            new SaveTrackFilter(SARTrack.FORMAT_NMEA, "National Marine Electronics Association (*.nmea)",
+            new String[]{".nmea"}),};
 
-        for (FileFilter filter : filters)
-        {
+        for (FileFilter filter : filters) {
             this.fileChooser.addChoosableFileFilter(filter);
         }
 
@@ -255,16 +238,12 @@ public class SaveTrackDialog
         this.fileChooser.setFileFilter(filters[0]);
     }
 
-    private FileFilter filterForFormat(int format)
-    {
+    private FileFilter filterForFormat(int format) {
         FileFilter result = null;
 
-        for (FileFilter filter : this.fileChooser.getChoosableFileFilters())
-        {
-            if (filter instanceof SaveTrackFilter)
-            {
-                if (((SaveTrackFilter) filter).getFormat() == format)
-                {
+        for (FileFilter filter : this.fileChooser.getChoosableFileFilters()) {
+            if (filter instanceof SaveTrackFilter) {
+                if (((SaveTrackFilter) filter).getFormat() == format) {
                     result = filter;
                     break;
                 }

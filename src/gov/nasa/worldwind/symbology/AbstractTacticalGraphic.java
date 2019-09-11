@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology;
 
 import gov.nasa.worldwind.WorldWind;
@@ -18,9 +17,9 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Base class for tactical graphics. See the TacticalGraphic <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a> 
- * for
- * instructions on using TacticalGraphic in an application. This base class provides functionality for creating and
+ * Base class for tactical graphics. See the TacticalGraphic
+ * <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
+ * for instructions on using TacticalGraphic in an application. This base class provides functionality for creating and
  * rendering a graphic that is made up of one or more shapes, and text labels.
  * <p>
  * Implementations must implement at least {@link #doRenderGraphic(gov.nasa.worldwind.render.DrawContext)
@@ -29,9 +28,11 @@ import java.util.List;
  * @author pabercrombie
  * @version $Id: AbstractTacticalGraphic.java 560 2012-04-26 16:28:24Z pabercrombie $
  */
-public abstract class AbstractTacticalGraphic extends AVListImpl implements TacticalGraphic, Renderable, Draggable
-{
-    /** The default highlight color. */
+public abstract class AbstractTacticalGraphic extends AVListImpl implements TacticalGraphic, Renderable, Draggable {
+
+    /**
+     * The default highlight color.
+     */
     protected static final Material DEFAULT_HIGHLIGHT_MATERIAL = Material.WHITE;
     /**
      * Opacity of label interiors. This value is multiplied by the label text opacity to determine the final interior
@@ -45,17 +46,29 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      */
     protected String text;
 
-    /** Indicates whether or not the graphic is highlighted. */
+    /**
+     * Indicates whether or not the graphic is highlighted.
+     */
     protected boolean highlighted;
-    /** Indicates whether or not to render the graphic. */
+    /**
+     * Indicates whether or not to render the graphic.
+     */
     protected boolean visible = true;
-    /** Indicates whether or not to render text modifiers. */
+    /**
+     * Indicates whether or not to render text modifiers.
+     */
     protected boolean showTextModifiers = true;
-    /** Indicates whether or not to render graphic modifiers. */
+    /**
+     * Indicates whether or not to render graphic modifiers.
+     */
     protected boolean showGraphicModifiers = true;
-    /** Indicates whether this object can be dragged. */
+    /**
+     * Indicates whether this object can be dragged.
+     */
     protected boolean dragEnabled = true;
-    /** Provides additional information for dragging regarding this particular object. */
+    /**
+     * Provides additional information for dragging regarding this particular object.
+     */
     protected DraggableSupport draggableSupport = null;
 
     // Implementation note: by default, show the hostile indicator (the letters "ENY"). Note that this default is
@@ -64,14 +77,22 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
     // display the indicator by default following the principle that by default hostile entities should look as
     // hostile as possible (to avoid being mistaken for friendly entities). In the case of tactical symbols, however,
     // the indicator is redundant to both the symbol frame and fill, so it is not displayed by default.
-    /** Indicates whether or not to render the hostile/enemy modifier. This modifier is displayed by default. */
+    /**
+     * Indicates whether or not to render the hostile/enemy modifier. This modifier is displayed by default.
+     */
     protected boolean showHostileIndicator = true;
-    /** Indicates whether or not to render the location modifier. */
+    /**
+     * Indicates whether or not to render the location modifier.
+     */
     protected boolean showLocation = true;
 
-    /** Object returned during picking to represent this graphic. */
+    /**
+     * Object returned during picking to represent this graphic.
+     */
     protected Object delegateOwner;
-    /** Unit format used to format location and altitude for text modifiers. */
+    /**
+     * Unit format used to format location and altitude for text modifiers.
+     */
     protected UnitsFormat unitsFormat = AbstractTacticalSymbol.DEFAULT_UNITS_FORMAT;
 
     /**
@@ -85,9 +106,13 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      */
     protected TacticalGraphicAttributes highlightAttributes;
 
-    /** Offset applied to the graphic's main label. */
+    /**
+     * Offset applied to the graphic's main label.
+     */
     protected Offset labelOffset;
-    /** Labels to render with the graphic. */
+    /**
+     * Labels to render with the graphic.
+     */
     protected List<TacticalGraphicLabel> labels;
 
     /**
@@ -96,10 +121,14 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      */
     protected AVList modifiers;
 
-    /** Current frame timestamp. */
+    /**
+     * Current frame timestamp.
+     */
     protected long frameTimestamp = -1L;
 
-    /** Override attributes for the current frame. */
+    /**
+     * Override attributes for the current frame.
+     */
     protected TacticalGraphicAttributes activeOverrides = new BasicTacticalGraphicAttributes();
     /**
      * Shape attributes shared by all shapes that make up this graphic. The graphic's active attributes are copied into
@@ -107,7 +136,9 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      */
     protected ShapeAttributes activeShapeAttributes = new BasicShapeAttributes();
 
-    /** Flag to indicate that labels must be recreated before the graphic is rendered. */
+    /**
+     * Flag to indicate that labels must be recreated before the graphic is rendered.
+     */
     protected boolean mustCreateLabels = true;
 
     /**
@@ -129,144 +160,166 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      */
     protected abstract void applyDelegateOwner(Object owner);
 
-    /** {@inheritDoc} */
-    public Object getModifier(String modifier)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Object getModifier(String modifier) {
         return this.modifiers != null ? this.modifiers.getValue(modifier) : null;
     }
 
-    /** {@inheritDoc} */
-    public void setModifier(String modifier, Object value)
-    {
-        if (this.modifiers == null)
+    /**
+     * {@inheritDoc}
+     */
+    public void setModifier(String modifier, Object value) {
+        if (this.modifiers == null) {
             this.modifiers = new AVListImpl();
+        }
 
         this.modifiers.setValue(modifier, value);
         this.onModifierChanged();
     }
 
-    /** {@inheritDoc} */
-    public boolean isShowTextModifiers()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isShowTextModifiers() {
         return this.showTextModifiers;
     }
 
-    /** {@inheritDoc} */
-    public void setShowTextModifiers(boolean showModifiers)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setShowTextModifiers(boolean showModifiers) {
         this.showTextModifiers = showModifiers;
     }
 
-    /** {@inheritDoc} */
-    public boolean isShowGraphicModifiers()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isShowGraphicModifiers() {
         return this.showGraphicModifiers;
     }
 
-    /** {@inheritDoc} */
-    public void setShowGraphicModifiers(boolean showModifiers)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setShowGraphicModifiers(boolean showModifiers) {
         this.showGraphicModifiers = showModifiers;
     }
 
-    /** {@inheritDoc} */
-    public boolean isShowHostileIndicator()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isShowHostileIndicator() {
         return this.showHostileIndicator;
     }
 
-    /** {@inheritDoc} */
-    public void setShowHostileIndicator(boolean showHostileIndicator)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setShowHostileIndicator(boolean showHostileIndicator) {
         this.showHostileIndicator = showHostileIndicator;
         this.onModifierChanged();
     }
 
-    /** {@inheritDoc} */
-    public boolean isShowLocation()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isShowLocation() {
         return this.showLocation;
     }
 
-    /** {@inheritDoc} */
-    public void setShowLocation(boolean showLocation)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setShowLocation(boolean showLocation) {
         this.showLocation = showLocation;
         this.onModifierChanged();
     }
 
-    /** {@inheritDoc} */
-    public String getText()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public String getText() {
         return this.text;
     }
 
-    /** {@inheritDoc} */
-    public void setText(String text)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setText(String text) {
         this.text = text;
         this.onModifierChanged();
     }
 
-    /** {@inheritDoc} */
-    public boolean isVisible()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isVisible() {
         return this.visible;
     }
 
-    /** {@inheritDoc} */
-    public void setVisible(boolean visible)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setVisible(boolean visible) {
         this.visible = visible;
     }
 
-    /** {@inheritDoc} */
-    public TacticalGraphicAttributes getAttributes()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public TacticalGraphicAttributes getAttributes() {
         return this.normalAttributes;
     }
 
-    /** {@inheritDoc} */
-    public void setAttributes(TacticalGraphicAttributes attributes)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setAttributes(TacticalGraphicAttributes attributes) {
         this.normalAttributes = attributes;
     }
 
-    /** {@inheritDoc} */
-    public TacticalGraphicAttributes getHighlightAttributes()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public TacticalGraphicAttributes getHighlightAttributes() {
         return this.highlightAttributes;
     }
 
-    /** {@inheritDoc} */
-    public void setHighlightAttributes(TacticalGraphicAttributes attributes)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setHighlightAttributes(TacticalGraphicAttributes attributes) {
         this.highlightAttributes = attributes;
     }
 
-    /** {@inheritDoc} */
-    public Object getDelegateOwner()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Object getDelegateOwner() {
         return this.delegateOwner;
     }
 
-    /** {@inheritDoc} */
-    public void setDelegateOwner(Object owner)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setDelegateOwner(Object owner) {
         this.delegateOwner = owner;
     }
 
-    /** {@inheritDoc} */
-    public UnitsFormat getUnitsFormat()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public UnitsFormat getUnitsFormat() {
         return this.unitsFormat;
     }
 
-    /** {@inheritDoc} */
-    public void setUnitsFormat(UnitsFormat unitsFormat)
-    {
-        if (unitsFormat == null)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public void setUnitsFormat(UnitsFormat unitsFormat) {
+        if (unitsFormat == null) {
             String msg = Logging.getMessage("nullValue.Format");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -275,39 +328,42 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
         this.unitsFormat = unitsFormat;
     }
 
-    /** {@inheritDoc} */
-    public Offset getLabelOffset()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Offset getLabelOffset() {
         return this.labelOffset;
     }
 
-    /** {@inheritDoc} */
-    public void setLabelOffset(Offset labelOffset)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setLabelOffset(Offset labelOffset) {
         this.labelOffset = labelOffset;
     }
 
-    /** {@inheritDoc} */
-    public boolean isHighlighted()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isHighlighted() {
         return this.highlighted;
     }
 
-    /** {@inheritDoc} */
-    public void setHighlighted(boolean highlighted)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setHighlighted(boolean highlighted) {
         this.highlighted = highlighted;
     }
 
     /////////////////////////////
     // Movable interface
     /////////////////////////////
-
-    /** {@inheritDoc} */
-    public void move(Position delta)
-    {
-        if (delta == null)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public void move(Position delta) {
+        if (delta == null) {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -317,17 +373,18 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
 
         // The reference position is null if this shape has no positions. In this case moving the shape by a
         // relative delta is meaningless. Therefore we fail softly by exiting and doing nothing.
-        if (refPos == null)
+        if (refPos == null) {
             return;
+        }
 
         this.moveTo(refPos.add(delta));
     }
 
-    /** {@inheritDoc} */
-    public void moveTo(Position position)
-    {
-        if (position == null)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public void moveTo(Position position) {
+        if (position == null) {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -337,53 +394,52 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
 
         // The reference position is null if this shape has no positions. In this case moving the shape to a new
         // reference position is meaningless. Therefore we fail softly by exiting and doing nothing.
-        if (oldPosition == null)
+        if (oldPosition == null) {
             return;
+        }
 
         List<Position> newPositions = Position.computeShiftedPositions(oldPosition, position, this.getPositions());
 
-        if (newPositions != null)
+        if (newPositions != null) {
             this.setPositions(newPositions);
+        }
     }
 
     @Override
-    public boolean isDragEnabled()
-    {
+    public boolean isDragEnabled() {
         return this.dragEnabled;
     }
 
     @Override
-    public void setDragEnabled(boolean enabled)
-    {
+    public void setDragEnabled(boolean enabled) {
         this.dragEnabled = enabled;
     }
 
     @Override
-    public void drag(DragContext dragContext)
-    {
-        if (!this.dragEnabled)
+    public void drag(DragContext dragContext) {
+        if (!this.dragEnabled) {
             return;
+        }
 
-        if (this.draggableSupport == null)
+        if (this.draggableSupport == null) {
             this.draggableSupport = new DraggableSupport(this, WorldWind.CLAMP_TO_GROUND);
+        }
 
         this.doDrag(dragContext);
     }
 
-    protected void doDrag(DragContext dragContext)
-    {
+    protected void doDrag(DragContext dragContext) {
         this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     /////////////
     // Rendering
     /////////////
-
-    /** {@inheritDoc} */
-    public void render(DrawContext dc)
-    {
-        if (!this.isVisible())
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public void render(DrawContext dc) {
+        if (!this.isVisible()) {
             return;
         }
 
@@ -391,11 +447,13 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
 
         this.doRenderGraphic(dc);
 
-        if (this.isShowTextModifiers())
+        if (this.isShowTextModifiers()) {
             this.doRenderTextModifiers(dc);
+        }
 
-        if (this.isShowGraphicModifiers())
+        if (this.isShowGraphicModifiers()) {
             this.doRenderGraphicModifiers(dc);
+        }
     }
 
     /**
@@ -404,16 +462,12 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @param dc Current draw context.
      */
-    protected void determinePerFrameAttributes(DrawContext dc)
-    {
+    protected void determinePerFrameAttributes(DrawContext dc) {
         long timeStamp = dc.getFrameTimeStamp();
-        if (this.frameTimestamp != timeStamp)
-        {
+        if (this.frameTimestamp != timeStamp) {
             // Allow the subclass to create labels, if necessary
-            if (this.mustCreateLabels)
-            {
-                if (this.labels != null)
-                {
+            if (this.mustCreateLabels) {
+                if (this.labels != null) {
                     this.labels.clear();
                 }
 
@@ -434,13 +488,12 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @param dc Current draw context.
      */
-    protected void doRenderTextModifiers(DrawContext dc)
-    {
-        if (this.labels == null)
+    protected void doRenderTextModifiers(DrawContext dc) {
+        if (this.labels == null) {
             return;
+        }
 
-        for (TacticalGraphicLabel label : this.labels)
-        {
+        for (TacticalGraphicLabel label : this.labels) {
             label.render(dc);
         }
     }
@@ -451,8 +504,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @param dc Current draw context.
      */
-    protected void doRenderGraphicModifiers(DrawContext dc)
-    {
+    protected void doRenderGraphicModifiers(DrawContext dc) {
         // Do nothing, but allow subclasses to override to add graphic modifiers.
     }
 
@@ -460,8 +512,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      * Invoked when a modifier is changed. This implementation marks the label text as invalid causing it to be
      * recreated based on the new modifiers.
      */
-    protected void onModifierChanged()
-    {
+    protected void onModifierChanged() {
         // Text may need to change to reflect new modifiers.
         this.mustCreateLabels = true;
     }
@@ -471,20 +522,18 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @param dc Current draw context.
      */
-    protected void determineLabelPositions(DrawContext dc)
-    {
+    protected void determineLabelPositions(DrawContext dc) {
         // Do nothing, but allow subclasses to override
     }
 
-    protected void createLabels()
-    {
+    protected void createLabels() {
         // Do nothing, but allow subclasses to override
     }
 
-    protected TacticalGraphicLabel addLabel(String text)
-    {
-        if (this.labels == null)
+    protected TacticalGraphicLabel addLabel(String text) {
+        if (this.labels == null) {
             this.labels = new ArrayList<TacticalGraphicLabel>();
+        }
 
         TacticalGraphicLabel label = new TacticalGraphicLabel();
         label.setText(text);
@@ -495,8 +544,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
         return label;
     }
 
-    protected void computeGeometry(DrawContext dc)
-    {
+    protected void computeGeometry(DrawContext dc) {
         // Allow the subclass to decide where to put the labels
         this.determineLabelPositions(dc);
     }
@@ -505,15 +553,12 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      * Determine the delegate owner for the current frame, and apply the owner to all renderable objects used to draw
      * the graphic.
      */
-    protected void determineDelegateOwner()
-    {
+    protected void determineDelegateOwner() {
         Object owner = this.getActiveDelegateOwner();
 
         // Apply the delegate owner to all label objects.
-        if (this.labels != null)
-        {
-            for (TacticalGraphicLabel label : this.labels)
-            {
+        if (this.labels != null) {
+            for (TacticalGraphicLabel label : this.labels) {
                 label.setDelegateOwner(owner);
             }
         }
@@ -527,32 +572,28 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @return Delegate owner, if specified, or {@code this} if an owner is not specified.
      */
-    protected Object getActiveDelegateOwner()
-    {
+    protected Object getActiveDelegateOwner() {
         Object owner = this.getDelegateOwner();
         return owner != null ? owner : this;
     }
 
-    /** Determine active attributes for this frame. */
-    protected void determineActiveAttributes()
-    {
+    /**
+     * Determine active attributes for this frame.
+     */
+    protected void determineActiveAttributes() {
         // Apply defaults for this graphic
         this.applyDefaultAttributes(this.activeShapeAttributes);
 
-        if (this.isHighlighted())
-        {
+        if (this.isHighlighted()) {
             TacticalGraphicAttributes highlightAttributes = this.getHighlightAttributes();
 
             // If the application specified overrides to the highlight attributes, then apply the overrides
-            if (highlightAttributes != null)
-            {
+            if (highlightAttributes != null) {
                 this.activeOverrides.copy(highlightAttributes);
 
                 // Apply overrides specified by application
                 this.applyOverrideAttributes(highlightAttributes, this.activeShapeAttributes);
-            }
-            else
-            {
+            } else {
                 // If no highlight attributes have been specified we need to use the normal attributes but adjust them
                 // to cause highlighting.
                 this.activeShapeAttributes.setOutlineMaterial(DEFAULT_HIGHLIGHT_MATERIAL);
@@ -560,13 +601,10 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
                 this.activeShapeAttributes.setInteriorOpacity(1.0);
                 this.activeShapeAttributes.setOutlineOpacity(1.0);
             }
-        }
-        else
-        {
+        } else {
             // Apply overrides specified by application
             TacticalGraphicAttributes normalAttributes = this.getAttributes();
-            if (normalAttributes != null)
-            {
+            if (normalAttributes != null) {
                 this.activeOverrides.copy(normalAttributes);
                 this.applyOverrideAttributes(normalAttributes, this.activeShapeAttributes);
             }
@@ -575,17 +613,20 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
         this.applyLabelAttributes();
     }
 
-    /** Apply the active attributes to the graphic's labels. */
-    protected void applyLabelAttributes()
-    {
-        if (WWUtil.isEmpty(this.labels))
+    /**
+     * Apply the active attributes to the graphic's labels.
+     */
+    protected void applyLabelAttributes() {
+        if (WWUtil.isEmpty(this.labels)) {
             return;
+        }
 
         Material labelMaterial = this.getLabelMaterial();
 
         Font font = this.activeOverrides.getTextModifierFont();
-        if (font == null)
+        if (font == null) {
             font = TacticalGraphicLabel.DEFAULT_FONT;
+        }
 
         double opacity = this.getActiveShapeAttributes().getInteriorOpacity();
 
@@ -593,8 +634,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
         // interior.
         double labelInteriorOpacity = this.computeLabelInteriorOpacity(opacity);
 
-        for (TacticalGraphicLabel label : this.labels)
-        {
+        for (TacticalGraphicLabel label : this.labels) {
             label.setMaterial(labelMaterial);
             label.setFont(font);
             label.setOpacity(opacity);
@@ -603,8 +643,9 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
 
         // Apply the offset to the main label.
         Offset offset = this.getLabelOffset();
-        if (offset == null)
+        if (offset == null) {
             offset = this.getDefaultLabelOffset();
+        }
         this.labels.get(0).setOffset(offset);
     }
 
@@ -616,8 +657,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @return Opacity of the label interior as a floating point number between 0.0 and 1.0.
      */
-    protected double computeLabelInteriorOpacity(double textOpacity)
-    {
+    protected double computeLabelInteriorOpacity(double textOpacity) {
         return textOpacity * DEFAULT_LABEL_INTERIOR_OPACITY;
     }
 
@@ -627,8 +667,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @return Offset to apply to the main label.
      */
-    protected Offset getDefaultLabelOffset()
-    {
+    protected Offset getDefaultLabelOffset() {
         return TacticalGraphicLabel.DEFAULT_OFFSET;
     }
 
@@ -637,8 +676,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @return Override attributes. Values set in this bundle override defaults specified by the symbol set.
      */
-    protected TacticalGraphicAttributes getActiveOverrideAttributes()
-    {
+    protected TacticalGraphicAttributes getActiveOverrideAttributes() {
         return this.activeOverrides;
     }
 
@@ -648,8 +686,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @return Active shape attributes.
      */
-    protected ShapeAttributes getActiveShapeAttributes()
-    {
+    protected ShapeAttributes getActiveShapeAttributes() {
         return this.activeShapeAttributes;
     }
 
@@ -659,13 +696,13 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @return The Material that should be used when drawing labels. May change each frame.
      */
-    protected Material getLabelMaterial()
-    {
+    protected Material getLabelMaterial() {
         Material material = this.activeOverrides.getTextModifierMaterial();
-        if (material != null)
+        if (material != null) {
             return material;
-        else
+        } else {
             return this.activeShapeAttributes.getOutlineMaterial();
+        }
     }
 
     /**
@@ -675,8 +712,7 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      *
      * @param attributes Attributes bundle to receive defaults.
      */
-    protected void applyDefaultAttributes(ShapeAttributes attributes)
-    {
+    protected void applyDefaultAttributes(ShapeAttributes attributes) {
         // Do nothing but allow subclasses to override
     }
 
@@ -685,37 +721,31 @@ public abstract class AbstractTacticalGraphic extends AVListImpl implements Tact
      * non-null properties of {@code graphicAttributes} will be applied to {@code shapeAttributes}.
      *
      * @param graphicAttributes Override attributes.
-     * @param shapeAttributes   Shape attributes to receive overrides.
+     * @param shapeAttributes Shape attributes to receive overrides.
      */
-    protected void applyOverrideAttributes(TacticalGraphicAttributes graphicAttributes, ShapeAttributes shapeAttributes)
-    {
+    protected void applyOverrideAttributes(TacticalGraphicAttributes graphicAttributes, ShapeAttributes shapeAttributes) {
         Material material = graphicAttributes.getInteriorMaterial();
-        if (material != null)
-        {
+        if (material != null) {
             shapeAttributes.setInteriorMaterial(material);
         }
 
         material = graphicAttributes.getOutlineMaterial();
-        if (material != null)
-        {
+        if (material != null) {
             shapeAttributes.setOutlineMaterial(material);
         }
 
         Double value = graphicAttributes.getInteriorOpacity();
-        if (value != null)
-        {
+        if (value != null) {
             shapeAttributes.setInteriorOpacity(value);
         }
 
         value = graphicAttributes.getOutlineOpacity();
-        if (value != null)
-        {
+        if (value != null) {
             shapeAttributes.setOutlineOpacity(value);
         }
 
         value = graphicAttributes.getOutlineWidth();
-        if (value != null)
-        {
+        if (value != null) {
             shapeAttributes.setOutlineWidth(value);
         }
     }

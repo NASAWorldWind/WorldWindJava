@@ -29,8 +29,8 @@ import java.util.List;
  * @author tag
  * @version $Id: BasicElevationModelFactory.java 2347 2014-09-24 23:37:03Z dcollins $
  */
-public class BasicElevationModelFactory extends BasicFactory
-{
+public class BasicElevationModelFactory extends BasicFactory {
+
     /**
      * Creates an elevation model from a general configuration source. The source can be one of the following: <ul>
      * <li>a {@link java.net.URL}</li> <li>a {@link java.io.File}</li> <li>a {@link java.io.InputStream}</li> <li> an
@@ -44,22 +44,20 @@ public class BasicElevationModelFactory extends BasicFactory
      * <li>"Offline" for elevation models that draw their data only from the local cache.</li> </ul>
      *
      * @param configSource the configuration source. See above for supported types.
-     * @param params       properties to associate with the elevation model during creation.
+     * @param params properties to associate with the elevation model during creation.
      *
      * @return an elevation model.
      *
      * @throws IllegalArgumentException if the configuration file name is null or an empty string.
-     * @throws WWUnrecognizedException  if the source type is unrecognized or the requested elevation-model type is
-     *                                  unrecognized.
-     * @throws WWRuntimeException       if object creation fails for other reasons. The exception identifying the source
-     *                                  of the failure is included as the {@link Exception#initCause(Throwable)}.
+     * @throws WWUnrecognizedException if the source type is unrecognized or the requested elevation-model type is
+     * unrecognized.
+     * @throws WWRuntimeException if object creation fails for other reasons. The exception identifying the source of
+     * the failure is included as the {@link Exception#initCause(Throwable)}.
      */
     @Override
-    public Object createFromConfigSource(Object configSource, AVList params)
-    {
+    public Object createFromConfigSource(Object configSource, AVList params) {
         ElevationModel model = (ElevationModel) super.createFromConfigSource(configSource, params);
-        if (model == null)
-        {
+        if (model == null) {
             String msg = Logging.getMessage("generic.UnrecognizedDocument", configSource);
             throw new WWUnrecognizedException(msg);
         }
@@ -68,27 +66,24 @@ public class BasicElevationModelFactory extends BasicFactory
     }
 
     @Override
-    protected ElevationModel doCreateFromCapabilities(OGCCapabilities caps, AVList params)
-    {
+    protected ElevationModel doCreateFromCapabilities(OGCCapabilities caps, AVList params) {
         String serviceName = caps.getServiceInformation().getServiceName();
         if (serviceName == null || !(serviceName.equalsIgnoreCase(OGCConstants.WMS_SERVICE_NAME)
-            || serviceName.equalsIgnoreCase("WMS")))
-        {
+                || serviceName.equalsIgnoreCase("WMS"))) {
             String message = Logging.getMessage("WMS.NotWMSService", serviceName != null ? serviceName : "null");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (params == null)
+        if (params == null) {
             params = new AVListImpl();
+        }
 
-        if (params.getStringValue(AVKey.LAYER_NAMES) == null)
-        {
+        if (params.getStringValue(AVKey.LAYER_NAMES) == null) {
             // Use the first named layer since no other guidance given
             List<WMSLayerCapabilities> namedLayers = ((WMSCapabilities) caps).getNamedLayers();
 
-            if (namedLayers == null || namedLayers.size() == 0 || namedLayers.get(0) == null)
-            {
+            if (namedLayers == null || namedLayers.size() == 0 || namedLayers.get(0) == null) {
                 String message = Logging.getMessage("WMS.NoLayersFound");
                 Logging.logger().severe(message);
                 throw new IllegalStateException(message);
@@ -100,8 +95,7 @@ public class BasicElevationModelFactory extends BasicFactory
         return new WMSBasicElevationModel((WMSCapabilities) caps, params);
     }
 
-    protected Object doCreateFromCapabilities(WCS100Capabilities caps, AVList params)
-    {
+    protected Object doCreateFromCapabilities(WCS100Capabilities caps, AVList params) {
         return new WCSElevationModel(caps, params);
     }
 
@@ -110,7 +104,7 @@ public class BasicElevationModelFactory extends BasicFactory
      * followed if it exists.
      *
      * @param domElement an XML element containing the elevation model description.
-     * @param params     any parameters to apply when creating the elevation models.
+     * @param params any parameters to apply when creating the elevation models.
      *
      * @return the requested elevation model, or null if the specified element does not describe an elevation model.
      *
@@ -118,27 +112,30 @@ public class BasicElevationModelFactory extends BasicFactory
      * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
     @Override
-    protected ElevationModel doCreateFromElement(Element domElement, AVList params) throws Exception
-    {
+    protected ElevationModel doCreateFromElement(Element domElement, AVList params) throws Exception {
         Element element = WWXML.getElement(domElement, ".", null);
-        if (element == null)
+        if (element == null) {
             return null;
+        }
 
         String href = WWXML.getText(element, "@href");
-        if (href != null && href.length() > 0)
+        if (href != null && href.length() > 0) {
             return (ElevationModel) this.createFromConfigSource(href, params);
+        }
 
         Element[] elements = WWXML.getElements(element, "./ElevationModel", null);
 
         String modelType = WWXML.getText(element, "@modelType");
-        if (modelType != null && modelType.equalsIgnoreCase("compound"))
+        if (modelType != null && modelType.equalsIgnoreCase("compound")) {
             return this.createCompoundModel(elements, params);
+        }
 
         String localName = WWXML.getUnqualifiedName(domElement);
-        if (elements != null && elements.length > 0)
+        if (elements != null && elements.length > 0) {
             return this.createCompoundModel(elements, params);
-        else if (localName != null && localName.equals("ElevationModel"))
+        } else if (localName != null && localName.equals("ElevationModel")) {
             return this.createNonCompoundModel(domElement, params);
+        }
 
         return null;
     }
@@ -150,30 +147,27 @@ public class BasicElevationModelFactory extends BasicFactory
      * models associated with the exceptions are not included in the returned compound model.
      *
      * @param elements the XML elements describing the models in the new elevation model.
-     * @param params   any parameters to apply when creating the elevation models.
+     * @param params any parameters to apply when creating the elevation models.
      *
      * @return a compound elevation model populated with the specified elevation models. The compound model will contain
-     *         no elevation models if none were specified or exceptions occurred for all that were specified.
+     * no elevation models if none were specified or exceptions occurred for all that were specified.
      *
      * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
-    protected CompoundElevationModel createCompoundModel(Element[] elements, AVList params)
-    {
+    protected CompoundElevationModel createCompoundModel(Element[] elements, AVList params) {
         CompoundElevationModel compoundModel = new CompoundElevationModel();
 
-        if (elements == null || elements.length == 0)
+        if (elements == null || elements.length == 0) {
             return compoundModel;
+        }
 
-        for (Element element : elements)
-        {
-            try
-            {
+        for (Element element : elements) {
+            try {
                 ElevationModel em = this.doCreateFromElement(element, params);
-                if (em != null)
+                if (em != null) {
                     compoundModel.addElevationModel(em);
-            }
-            catch (Exception e)
-            {
+                }
+            } catch (Exception e) {
                 String msg = Logging.getMessage("ElevationModel.ExceptionCreatingElevationModel");
                 Logging.logger().log(java.util.logging.Level.WARNING, msg, e);
             }
@@ -186,42 +180,30 @@ public class BasicElevationModelFactory extends BasicFactory
      * Create a simple elevation model.
      *
      * @param domElement the XML element describing the elevation model to create. The element must inculde a service
-     *                   name identifying the type of service to use to retrieve elevation data. Recognized service
-     *                   types are "Offline", "WWTileService" and "OGC:WMS".
-     * @param params     any parameters to apply when creating the elevation model.
+     * name identifying the type of service to use to retrieve elevation data. Recognized service types are "Offline",
+     * "WWTileService" and "OGC:WMS".
+     * @param params any parameters to apply when creating the elevation model.
      *
      * @return a new elevation model
      *
      * @throws WWUnrecognizedException if the service type given in the describing element is unrecognized.
      */
-    protected ElevationModel createNonCompoundModel(Element domElement, AVList params)
-    {
+    protected ElevationModel createNonCompoundModel(Element domElement, AVList params) {
         ElevationModel em;
 
         String serviceName = WWXML.getText(domElement, "Service/@serviceName");
 
-        if (serviceName.equals("Offline"))
-        {
+        if (serviceName.equals("Offline")) {
             em = new BasicElevationModel(domElement, params);
-        }
-        else if (serviceName.equals("WWTileService"))
-        {
+        } else if (serviceName.equals("WWTileService")) {
             em = new BasicElevationModel(domElement, params);
-        }
-        else if (serviceName.equals(OGCConstants.WMS_SERVICE_NAME))
-        {
+        } else if (serviceName.equals(OGCConstants.WMS_SERVICE_NAME)) {
             em = new WMSBasicElevationModel(domElement, params);
-        }
-        else if (serviceName.equals(OGCConstants.WCS_SERVICE_NAME))
-        {
+        } else if (serviceName.equals(OGCConstants.WCS_SERVICE_NAME)) {
             em = new WCSElevationModel(domElement, params);
-        }
-        else if (AVKey.SERVICE_NAME_LOCAL_RASTER_SERVER.equals(serviceName))
-        {
+        } else if (AVKey.SERVICE_NAME_LOCAL_RASTER_SERVER.equals(serviceName)) {
             em = new LocalRasterServerElevationModel(domElement, params);
-        }
-        else
-        {
+        } else {
             String msg = Logging.getMessage("generic.UnrecognizedServiceName", serviceName);
             throw new WWUnrecognizedException(msg);
         }

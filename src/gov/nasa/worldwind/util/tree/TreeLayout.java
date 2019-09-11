@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.tree;
 
 import gov.nasa.worldwind.WWObject;
@@ -16,8 +15,8 @@ import gov.nasa.worldwind.render.*;
  * @version $Id: TreeLayout.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see Tree
  */
-public interface TreeLayout extends WWObject, Renderable
-{
+public interface TreeLayout extends WWObject, Renderable {
+
     /**
      * Render a tree.
      *

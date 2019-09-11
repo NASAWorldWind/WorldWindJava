@@ -15,8 +15,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Shows the {@link gov.nasa.worldwind.layers.ViewControlsLayer} and allows you to adjust its size, orientation,
- * and available controls.
+ * Shows the {@link gov.nasa.worldwind.layers.ViewControlsLayer} and allows you to adjust its size, orientation, and
+ * available controls.
  *
  * @author Patrick Murris
  * @version $Id: ViewControls.java 2109 2014-06-30 16:52:38Z tgaskins $
@@ -24,21 +24,18 @@ import java.awt.event.*;
  * @see gov.nasa.worldwind.layers.ViewControlsSelectListener
  * @see gov.nasa.worldwind.layers.CompassLayer
  */
-public class ViewControls extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+public class ViewControls extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         protected ViewControlsLayer viewControlsLayer;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             super(true, true, false);
 
             // Find ViewControls layer and keep reference to it
-            for (Layer layer : this.getWwd().getModel().getLayers())
-            {
-                if (layer instanceof ViewControlsLayer)
-                {
+            for (Layer layer : this.getWwd().getModel().getLayers()) {
+                if (layer instanceof ViewControlsLayer) {
                     viewControlsLayer = (ViewControlsLayer) layer;
                 }
             }
@@ -47,12 +44,11 @@ public class ViewControls extends ApplicationTemplate
             this.getControlPanel().add(makeControlPanel(), BorderLayout.SOUTH);
         }
 
-        private JPanel makeControlPanel()
-        {
+        private JPanel makeControlPanel() {
             JPanel controlPanel = new JPanel();
             controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
             controlPanel.setBorder(
-                new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("View Controls")));
+                    new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("View Controls")));
             controlPanel.setToolTipText("Select active view controls");
 
             // Radio buttons - layout
@@ -61,10 +57,8 @@ public class ViewControls extends ApplicationTemplate
             ButtonGroup group = new ButtonGroup();
             JRadioButton button = new JRadioButton("Horizontal", true);
             group.add(button);
-            button.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     viewControlsLayer.setLayout(AVKey.HORIZONTAL);
                     getWwd().redraw();
                 }
@@ -72,10 +66,8 @@ public class ViewControls extends ApplicationTemplate
             layoutPanel.add(button);
             button = new JRadioButton("Vertical", false);
             group.add(button);
-            button.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     viewControlsLayer.setLayout(AVKey.VERTICAL);
                     getWwd().redraw();
                 }
@@ -87,10 +79,8 @@ public class ViewControls extends ApplicationTemplate
             scalePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
             scalePanel.add(new JLabel("Scale:"));
             JSlider scaleSlider = new JSlider(1, 20, 10);
-            scaleSlider.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent event)
-                {
+            scaleSlider.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent event) {
                     viewControlsLayer.setScale(((JSlider) event.getSource()).getValue() / 10d);
                     getWwd().redraw();
                 }
@@ -103,10 +93,8 @@ public class ViewControls extends ApplicationTemplate
 
             JCheckBox check = new JCheckBox("Pan");
             check.setSelected(true);
-            check.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            check.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     viewControlsLayer.setShowPanControls(((JCheckBox) actionEvent.getSource()).isSelected());
                     getWwd().redraw();
                 }
@@ -115,10 +103,8 @@ public class ViewControls extends ApplicationTemplate
 
             check = new JCheckBox("Look");
             check.setSelected(false);
-            check.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            check.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     viewControlsLayer.setShowLookControls(((JCheckBox) actionEvent.getSource()).isSelected());
                     getWwd().redraw();
                 }
@@ -127,10 +113,8 @@ public class ViewControls extends ApplicationTemplate
 
             check = new JCheckBox("Zoom");
             check.setSelected(true);
-            check.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            check.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     viewControlsLayer.setShowZoomControls(((JCheckBox) actionEvent.getSource()).isSelected());
                     getWwd().redraw();
                 }
@@ -139,10 +123,8 @@ public class ViewControls extends ApplicationTemplate
 
             check = new JCheckBox("Heading");
             check.setSelected(true);
-            check.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            check.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     viewControlsLayer.setShowHeadingControls(((JCheckBox) actionEvent.getSource()).isSelected());
                     getWwd().redraw();
                 }
@@ -151,10 +133,8 @@ public class ViewControls extends ApplicationTemplate
 
             check = new JCheckBox("Pitch");
             check.setSelected(true);
-            check.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            check.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     viewControlsLayer.setShowPitchControls(((JCheckBox) actionEvent.getSource()).isSelected());
                     getWwd().redraw();
                 }
@@ -163,10 +143,8 @@ public class ViewControls extends ApplicationTemplate
 
             check = new JCheckBox("Field of view");
             check.setSelected(false);
-            check.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            check.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     viewControlsLayer.setShowFovControls(((JCheckBox) actionEvent.getSource()).isSelected());
                     getWwd().redraw();
                 }
@@ -180,8 +158,7 @@ public class ViewControls extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind View Controls", AppFrame.class);
     }
 }

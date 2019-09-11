@@ -34,26 +34,23 @@ import java.io.File;
  * @author tag
  * @version $Id: InstallImagery.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class InstallImagery extends ApplicationTemplate
-{
+public class InstallImagery extends ApplicationTemplate {
+
     protected static final String BASE_CACHE_PATH = "Examples/"; // Define a subdirectory in the installed-data area
 
     // This example's imagery is loaded from the following class-path resource.
     protected static final String IMAGE_PATH = "gov/nasa/worldwindx/examples/data/craterlake-imagery-30m.tif";
 
     // Override ApplicationTemplate.AppFrame's constructor to install an elevation dataset.
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             // Show the WAIT cursor because the installation may take a while.
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 
             // Install the imagery on a thread other than the event-dispatch thread to avoid freezing the UI.
-            Thread t = new Thread(new Runnable()
-            {
-                public void run()
-                {
+            Thread t = new Thread(new Runnable() {
+                public void run() {
                     installImagery();
 
                     // Restore the cursor.
@@ -64,8 +61,7 @@ public class InstallImagery extends ApplicationTemplate
             t.start();
         }
 
-        protected void installImagery()
-        {
+        protected void installImagery() {
             // Download the source file.
             File sourceFile = ExampleUtil.saveResourceToTempFile(IMAGE_PATH, ".tif");
 
@@ -74,14 +70,13 @@ public class InstallImagery extends ApplicationTemplate
 
             // Install the imagery into the FileStore.
             final Layer layer = installSurfaceImage("Crater Lake Imagery 30m", sourceFile, fileStore);
-            if (layer == null)
+            if (layer == null) {
                 return;
+            }
 
             // Display a layer with the new imagery. Must do it on the event dispatch thread.
-            SwingUtilities.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
                     // Add the layer created by the install method to the layer list.
                     insertBeforePlacenames(AppFrame.this.getWwd(), layer);
 
@@ -94,8 +89,7 @@ public class InstallImagery extends ApplicationTemplate
             });
         }
 
-        protected Layer installSurfaceImage(String displayName, Object imageSource, FileStore fileStore)
-        {
+        protected Layer installSurfaceImage(String displayName, Object imageSource, FileStore fileStore) {
             // Use the FileStore's install location as the destination for the installed imagery. The default install
             // location is the FileStore's area for permanent storage.
             File fileStoreLocation = DataInstallUtil.getDefaultInstallLocation(fileStore);
@@ -111,17 +105,14 @@ public class InstallImagery extends ApplicationTemplate
 
             // Create a TiledImageProducer to install the imagery.
             TiledImageProducer producer = new TiledImageProducer();
-            try
-            {
+            try {
                 // Configure the TiledImageProducer with the parameter list and the image source.
                 producer.setStoreParameters(params);
                 producer.offerDataSource(imageSource, null);
 
                 // Install the imagery.
                 producer.startProduction();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 producer.removeProductionState(); // Clean up on failure.
                 e.printStackTrace();
                 return null;
@@ -131,12 +122,14 @@ public class InstallImagery extends ApplicationTemplate
             // completed, the TiledImageProducer should always contain a document in the production results, but test
             // the results anyway.
             Iterable<?> results = producer.getProductionResults();
-            if (results == null || results.iterator() == null || !results.iterator().hasNext())
+            if (results == null || results.iterator() == null || !results.iterator().hasNext()) {
                 return null;
+            }
 
             Object o = results.iterator().next();
-            if (o == null || !(o instanceof Document))
+            if (o == null || !(o instanceof Document)) {
                 return null;
+            }
 
             // Construct a Layer by passing the data configuration document to a LayerFactory.
             Layer layer = (Layer) BasicFactory.create(AVKey.LAYER_FACTORY, ((Document) o).getDocumentElement());
@@ -148,8 +141,7 @@ public class InstallImagery extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Imagery Installation", InstallImagery.AppFrame.class);
     }
 }

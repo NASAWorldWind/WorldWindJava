@@ -26,20 +26,18 @@ import java.util.Arrays;
  * @see gov.nasa.worldwind.globes.FlatGlobe
  * @see EarthFlat
  */
-public class FlatWorld extends ApplicationTemplate
-{
+public class FlatWorld extends ApplicationTemplate {
+
     protected static final String SURFACE_POLYGON_IMAGE_PATH = "gov/nasa/worldwindx/examples/images/georss.png";
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             this.makePaths();
             this.makeSurfaceShapes();
         }
 
-        protected void makePaths()
-        {
+        protected void makePaths() {
             RenderableLayer layer = new RenderableLayer();
             layer.setName("Paths");
 
@@ -53,15 +51,15 @@ public class FlatWorld extends ApplicationTemplate
             double originLat = 28;
             double originLon = -82;
             Iterable<Position> locations = Arrays.asList(
-                Position.fromDegrees(originLat + 5.0, originLon + 2.5, 100e3),
-                Position.fromDegrees(originLat + 5.0, originLon - 2.5, 100e3),
-                Position.fromDegrees(originLat + 2.5, originLon - 5.0, 100e3),
-                Position.fromDegrees(originLat - 2.5, originLon - 5.0, 100e3),
-                Position.fromDegrees(originLat - 5.0, originLon - 2.5, 100e3),
-                Position.fromDegrees(originLat - 5.0, originLon + 2.5, 100e3),
-                Position.fromDegrees(originLat - 2.5, originLon + 5.0, 100e3),
-                Position.fromDegrees(originLat + 2.5, originLon + 5.0, 100e3),
-                Position.fromDegrees(originLat + 5.0, originLon + 2.5, 100e3));
+                    Position.fromDegrees(originLat + 5.0, originLon + 2.5, 100e3),
+                    Position.fromDegrees(originLat + 5.0, originLon - 2.5, 100e3),
+                    Position.fromDegrees(originLat + 2.5, originLon - 5.0, 100e3),
+                    Position.fromDegrees(originLat - 2.5, originLon - 5.0, 100e3),
+                    Position.fromDegrees(originLat - 5.0, originLon - 2.5, 100e3),
+                    Position.fromDegrees(originLat - 5.0, originLon + 2.5, 100e3),
+                    Position.fromDegrees(originLat - 2.5, originLon + 5.0, 100e3),
+                    Position.fromDegrees(originLat + 2.5, originLon + 5.0, 100e3),
+                    Position.fromDegrees(originLat + 5.0, originLon + 2.5, 100e3));
             Path shape = new Path(locations);
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
@@ -75,12 +73,12 @@ public class FlatWorld extends ApplicationTemplate
             attrs.setOutlineWidth(3);
 
             locations = Arrays.asList(
-                Position.fromDegrees(20, -170, 100e3),
-                Position.fromDegrees(15, 170, 100e3),
-                Position.fromDegrees(10, -175, 100e3),
-                Position.fromDegrees(5, 170, 100e3),
-                Position.fromDegrees(0, -170, 100e3),
-                Position.fromDegrees(20, -170, 100e3));
+                    Position.fromDegrees(20, -170, 100e3),
+                    Position.fromDegrees(15, 170, 100e3),
+                    Position.fromDegrees(10, -175, 100e3),
+                    Position.fromDegrees(5, 170, 100e3),
+                    Position.fromDegrees(0, -170, 100e3),
+                    Position.fromDegrees(20, -170, 100e3));
             shape = new Path(locations);
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
@@ -93,12 +91,12 @@ public class FlatWorld extends ApplicationTemplate
             attrs.setOutlineWidth(3);
 
             locations = Arrays.asList(
-                Position.fromDegrees(80, 0, 100e3),
-                Position.fromDegrees(80, 90, 100e3),
-                Position.fromDegrees(80, 180, 100e3),
-//                Position.fromDegrees(80, -180, 100e3),
-                Position.fromDegrees(80, -90, 100e3),
-                Position.fromDegrees(80, 0, 100e3));
+                    Position.fromDegrees(80, 0, 100e3),
+                    Position.fromDegrees(80, 90, 100e3),
+                    Position.fromDegrees(80, 180, 100e3),
+                    //                Position.fromDegrees(80, -180, 100e3),
+                    Position.fromDegrees(80, -90, 100e3),
+                    Position.fromDegrees(80, 0, 100e3));
             shape = new Path(locations);
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
@@ -106,8 +104,7 @@ public class FlatWorld extends ApplicationTemplate
             ApplicationTemplate.insertBeforePlacenames(this.getWwd(), layer);
         }
 
-        protected void makeSurfaceShapes()
-        {
+        protected void makeSurfaceShapes() {
             RenderableLayer layer = new RenderableLayer();
             layer.setName("Surface Shapes");
 
@@ -123,15 +120,15 @@ public class FlatWorld extends ApplicationTemplate
             double originLat = 28;
             double originLon = -82;
             Iterable<LatLon> locations = Arrays.asList(
-                LatLon.fromDegrees(originLat + 5.0, originLon + 2.5),
-                LatLon.fromDegrees(originLat + 5.0, originLon - 2.5),
-                LatLon.fromDegrees(originLat + 2.5, originLon - 5.0),
-                LatLon.fromDegrees(originLat - 2.5, originLon - 5.0),
-                LatLon.fromDegrees(originLat - 5.0, originLon - 2.5),
-                LatLon.fromDegrees(originLat - 5.0, originLon + 2.5),
-                LatLon.fromDegrees(originLat - 2.5, originLon + 5.0),
-                LatLon.fromDegrees(originLat + 2.5, originLon + 5.0),
-                LatLon.fromDegrees(originLat + 5.0, originLon + 2.5));
+                    LatLon.fromDegrees(originLat + 5.0, originLon + 2.5),
+                    LatLon.fromDegrees(originLat + 5.0, originLon - 2.5),
+                    LatLon.fromDegrees(originLat + 2.5, originLon - 5.0),
+                    LatLon.fromDegrees(originLat - 2.5, originLon - 5.0),
+                    LatLon.fromDegrees(originLat - 5.0, originLon - 2.5),
+                    LatLon.fromDegrees(originLat - 5.0, originLon + 2.5),
+                    LatLon.fromDegrees(originLat - 2.5, originLon + 5.0),
+                    LatLon.fromDegrees(originLat + 2.5, originLon + 5.0),
+                    LatLon.fromDegrees(originLat + 5.0, originLon + 2.5));
             SurfaceShape shape = new SurfacePolygon(locations);
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
@@ -145,12 +142,12 @@ public class FlatWorld extends ApplicationTemplate
             attrs.setOutlineWidth(3);
 
             locations = Arrays.asList(
-                LatLon.fromDegrees(20, -170),
-                LatLon.fromDegrees(15, 170),
-                LatLon.fromDegrees(10, -175),
-                LatLon.fromDegrees(5, 170),
-                LatLon.fromDegrees(0, -170),
-                LatLon.fromDegrees(20, -170));
+                    LatLon.fromDegrees(20, -170),
+                    LatLon.fromDegrees(15, 170),
+                    LatLon.fromDegrees(10, -175),
+                    LatLon.fromDegrees(5, 170),
+                    LatLon.fromDegrees(0, -170),
+                    LatLon.fromDegrees(20, -170));
             shape = new SurfacePolygon(locations);
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
@@ -217,8 +214,8 @@ public class FlatWorld extends ApplicationTemplate
             attrs.setOutlineWidth(3);
 
             shape = new SurfaceSector(new Sector(
-                Angle.fromDegrees(41.0), Angle.fromDegrees(41.6),
-                Angle.fromDegrees(-122.5), Angle.fromDegrees(-121.7)));
+                    Angle.fromDegrees(41.0), Angle.fromDegrees(41.6),
+                    Angle.fromDegrees(-122.5), Angle.fromDegrees(-121.7)));
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
 
@@ -231,8 +228,8 @@ public class FlatWorld extends ApplicationTemplate
             attrs.setOutlineWidth(3);
 
             shape = new SurfaceSector(new Sector(
-                Angle.fromDegrees(38.9), Angle.fromDegrees(39.3),
-                Angle.fromDegrees(-120.2), Angle.fromDegrees(-119.9)));
+                    Angle.fromDegrees(38.9), Angle.fromDegrees(39.3),
+                    Angle.fromDegrees(-120.2), Angle.fromDegrees(-119.9)));
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
 
@@ -243,8 +240,8 @@ public class FlatWorld extends ApplicationTemplate
             attrs.setOutlineStippleFactor(2);
 
             locations = Arrays.asList(
-                LatLon.fromDegrees(-10, 170),
-                LatLon.fromDegrees(-10, -170));
+                    LatLon.fromDegrees(-10, 170),
+                    LatLon.fromDegrees(-10, -170));
             shape = new SurfacePolyline(locations);
             shape.setAttributes(attrs);
             ((SurfacePolyline) shape).setClosed(false);
@@ -254,8 +251,7 @@ public class FlatWorld extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Adjust configuration values before instantiation
         Configuration.setValue(AVKey.GLOBE_CLASS_NAME, EarthFlat.class.getName());
         start("WorldWind Flat World", AppFrame.class);

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.layers.Earth;
 
 import gov.nasa.worldwind.geom.Angle;
@@ -22,47 +21,45 @@ import java.util.List;
 public class NASAWFSPlaceNameLayer extends PlaceNameLayer {
 
     //String constants for name sets
-    public static final String OCEANS="topp:wpl_oceans";
-    public static final String CONTINENTS="topp:wpl_continents";
-    public static final String WATERBODIES="topp:wpl_waterbodies";
-    public static final String TRENCHESRIDGES="topp:wpl_trenchesridges";
-    public static final String DESERTSPLAINS="topp:wpl_desertsplains";
-    public static final String LAKESRIVERS="topp:wpl_lakesrivers";
-    public static final String MOUNTAINSVALLEYS="topp:wpl_mountainsvalleys";
-    public static final String COUNTRIES="topp:wpl_countries";
-    public static final String GEONET_P_PPC="topp:wpl_geonet_p_pplc";
-    public static final String CITIESOVER500K="topp:citiesover500k";
-    public static final String CITIESOVER100K="topp:citiesover100k";
-    public static final String CITIESOVER50K="topp:citiesover50k";
-    public static final String CITIESOVER10K="topp:citiesover10k";
-    public static final String CITIESOVER1K="topp:citiesover1k";
-    public static final String USCITIESOVER0="topp:wpl_uscitiesover0";
-    public static final String USCITIES0="topp:wpl_uscities0";
-    public static final String US_ANTHROPOGENIC="topp:wpl_us_anthropogenic";
-    public static final String US_WATER="topp:wpl_us_water";
-    public static final String US_TERRAIN="topp:wpl_us_terrain";
-    public static final String GEONET_A_ADM1="topp:wpl_geonet_a_adm1";
-    public static final String GEONET_A_ADM2="topp:wpl_geonet_a_adm2";
-    public static final String GEONET_P_PPLA="topp:wpl_geonet_p_ppla";
-    public static final String GEONET_P_PPL="topp:wpl_geonet_p_ppl";
-    public static final String GEONET_P_PPLC="topp:wpl_geonet_p_pplC";
+    public static final String OCEANS = "topp:wpl_oceans";
+    public static final String CONTINENTS = "topp:wpl_continents";
+    public static final String WATERBODIES = "topp:wpl_waterbodies";
+    public static final String TRENCHESRIDGES = "topp:wpl_trenchesridges";
+    public static final String DESERTSPLAINS = "topp:wpl_desertsplains";
+    public static final String LAKESRIVERS = "topp:wpl_lakesrivers";
+    public static final String MOUNTAINSVALLEYS = "topp:wpl_mountainsvalleys";
+    public static final String COUNTRIES = "topp:wpl_countries";
+    public static final String GEONET_P_PPC = "topp:wpl_geonet_p_pplc";
+    public static final String CITIESOVER500K = "topp:citiesover500k";
+    public static final String CITIESOVER100K = "topp:citiesover100k";
+    public static final String CITIESOVER50K = "topp:citiesover50k";
+    public static final String CITIESOVER10K = "topp:citiesover10k";
+    public static final String CITIESOVER1K = "topp:citiesover1k";
+    public static final String USCITIESOVER0 = "topp:wpl_uscitiesover0";
+    public static final String USCITIES0 = "topp:wpl_uscities0";
+    public static final String US_ANTHROPOGENIC = "topp:wpl_us_anthropogenic";
+    public static final String US_WATER = "topp:wpl_us_water";
+    public static final String US_TERRAIN = "topp:wpl_us_terrain";
+    public static final String GEONET_A_ADM1 = "topp:wpl_geonet_a_adm1";
+    public static final String GEONET_A_ADM2 = "topp:wpl_geonet_a_adm2";
+    public static final String GEONET_P_PPLA = "topp:wpl_geonet_p_ppla";
+    public static final String GEONET_P_PPL = "topp:wpl_geonet_p_ppl";
+    public static final String GEONET_P_PPLC = "topp:wpl_geonet_p_pplC";
 
-
-    private static final String[] allNameSets={OCEANS, CONTINENTS, WATERBODIES, TRENCHESRIDGES, DESERTSPLAINS, LAKESRIVERS,
-                                    MOUNTAINSVALLEYS, COUNTRIES, GEONET_P_PPC, CITIESOVER500K, CITIESOVER100K,
-                                    CITIESOVER50K, CITIESOVER10K, CITIESOVER1K, USCITIESOVER0,USCITIES0,
-                                    US_ANTHROPOGENIC, US_WATER, US_TERRAIN, GEONET_A_ADM1, GEONET_A_ADM2,
-                                    GEONET_P_PPLA, GEONET_P_PPL};
+    private static final String[] allNameSets = {OCEANS, CONTINENTS, WATERBODIES, TRENCHESRIDGES, DESERTSPLAINS, LAKESRIVERS,
+        MOUNTAINSVALLEYS, COUNTRIES, GEONET_P_PPC, CITIESOVER500K, CITIESOVER100K,
+        CITIESOVER50K, CITIESOVER10K, CITIESOVER1K, USCITIESOVER0, USCITIES0,
+        US_ANTHROPOGENIC, US_WATER, US_TERRAIN, GEONET_A_ADM1, GEONET_A_ADM2,
+        GEONET_P_PPLA, GEONET_P_PPL};
 
     private static List activeNamesList = Arrays.asList(allNameSets);
-    
+
     public NASAWFSPlaceNameLayer() {
         super(makePlaceNameServiceSet());
     }
 
-    public void setPlaceNameSetsVisible(List names)
-    {
-        activeNamesList=names;
+    public void setPlaceNameSetsVisible(List names) {
+        activeNamesList = names;
         makePlaceNameServiceSet();
     }
 
@@ -72,7 +69,7 @@ public class NASAWFSPlaceNameLayer extends PlaceNameLayer {
         PlaceNameServiceSet placeNameServiceSet = new PlaceNameServiceSet();
         placeNameServiceSet.setExpiryTime(new GregorianCalendar(2008, 1, 11).getTimeInMillis());
         PlaceNameService placeNameService;
-        final boolean addVersionTag=true;  //true if pointing to a new wfs server
+        final boolean addVersionTag = true;  //true if pointing to a new wfs server
         // Oceans
         if (activeNamesList.contains(OCEANS)) {
             placeNameService = new PlaceNameService(service, "topp:wpl_oceans", fileCachePath, Sector.FULL_SPHERE, GRID_1x1,
@@ -92,7 +89,7 @@ public class NASAWFSPlaceNameLayer extends PlaceNameLayer {
             placeNameServiceSet.addService(placeNameService, false);
         }
 
-         // Water Bodies
+        // Water Bodies
         if (activeNamesList.contains(WATERBODIES)) {
             placeNameService = new PlaceNameService(service, "topp:wpl_waterbodies", fileCachePath, Sector.FULL_SPHERE,
                     GRID_4x8, java.awt.Font.decode("Arial-ITALIC-10"), addVersionTag);
@@ -149,7 +146,7 @@ public class NASAWFSPlaceNameLayer extends PlaceNameLayer {
         // GeoNet World Capitals
         if (activeNamesList.contains(GEONET_P_PPLC)) {
             placeNameService = new PlaceNameService(service, "topp:wpl_geonet_p_pplc", fileCachePath, Sector.FULL_SPHERE,
-                    GRID_16x32,  java.awt.Font.decode("Arial-BOLD-10"), addVersionTag);
+                    GRID_16x32, java.awt.Font.decode("Arial-BOLD-10"), addVersionTag);
             placeNameService.setColor(java.awt.Color.yellow);
             placeNameService.setMinDisplayDistance(0d);
             placeNameService.setMaxDisplayDistance(LEVEL_D);
@@ -244,7 +241,7 @@ public class NASAWFSPlaceNameLayer extends PlaceNameLayer {
             placeNameService.setMaxDisplayDistance(LEVEL_M);
             placeNameServiceSet.addService(placeNameService, false);
         }
-       // US Terrain Features
+        // US Terrain Features
         if (activeNamesList.contains(US_TERRAIN)) {
             placeNameService = new PlaceNameService(service, "topp:wpl_us_terrain", fileCachePath, Sector.FULL_SPHERE, GRID_72x144,
                     java.awt.Font.decode("Arial-PLAIN-10"), addVersionTag);

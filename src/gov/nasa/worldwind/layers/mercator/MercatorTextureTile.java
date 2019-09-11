@@ -13,88 +13,87 @@ import gov.nasa.worldwind.util.*;
 /**
  * @version $Id: MercatorTextureTile.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class MercatorTextureTile extends TextureTile
-{
-	private MercatorSector mercatorSector;
+public class MercatorTextureTile extends TextureTile {
 
-	public MercatorTextureTile(MercatorSector mercatorSector, Level level,
-			int row, int col)
-	{
-		super(mercatorSector, level, row, col);
-		this.mercatorSector = mercatorSector;
-	}
+    private MercatorSector mercatorSector;
 
-	@Override
-	public MercatorTextureTile[] createSubTiles(Level nextLevel)
-	{
-		if (nextLevel == null)
-		{
-			String msg = Logging.getMessage("nullValue.LevelIsNull");
-			Logging.logger().severe(msg);
-			throw new IllegalArgumentException(msg);
-		}
-		double d0 = this.getMercatorSector().getMinLatPercent();
-		double d2 = this.getMercatorSector().getMaxLatPercent();
-		double d1 = d0 + (d2 - d0) / 2.0;
+    public MercatorTextureTile(MercatorSector mercatorSector, Level level,
+            int row, int col) {
+        super(mercatorSector, level, row, col);
+        this.mercatorSector = mercatorSector;
+    }
 
-		Angle t0 = this.getSector().getMinLongitude();
-		Angle t2 = this.getSector().getMaxLongitude();
-		Angle t1 = Angle.midAngle(t0, t2);
+    @Override
+    public MercatorTextureTile[] createSubTiles(Level nextLevel) {
+        if (nextLevel == null) {
+            String msg = Logging.getMessage("nullValue.LevelIsNull");
+            Logging.logger().severe(msg);
+            throw new IllegalArgumentException(msg);
+        }
+        double d0 = this.getMercatorSector().getMinLatPercent();
+        double d2 = this.getMercatorSector().getMaxLatPercent();
+        double d1 = d0 + (d2 - d0) / 2.0;
 
-		String nextLevelCacheName = nextLevel.getCacheName();
-		int nextLevelNum = nextLevel.getLevelNumber();
-		int row = this.getRow();
-		int col = this.getColumn();
+        Angle t0 = this.getSector().getMinLongitude();
+        Angle t2 = this.getSector().getMaxLongitude();
+        Angle t1 = Angle.midAngle(t0, t2);
 
-		MercatorTextureTile[] subTiles = new MercatorTextureTile[4];
+        String nextLevelCacheName = nextLevel.getCacheName();
+        int nextLevelNum = nextLevel.getLevelNumber();
+        int row = this.getRow();
+        int col = this.getColumn();
 
-		TileKey key = new TileKey(nextLevelNum, 2 * row, 2 * col,
-				nextLevelCacheName);
-		MercatorTextureTile subTile = this.getTileFromMemoryCache(key);
-		if (subTile != null)
-			subTiles[0] = subTile;
-		else
-			subTiles[0] = new MercatorTextureTile(new MercatorSector(d0, d1,
-					t0, t1), nextLevel, 2 * row, 2 * col);
+        MercatorTextureTile[] subTiles = new MercatorTextureTile[4];
 
-		key = new TileKey(nextLevelNum, 2 * row, 2 * col + 1,
-				nextLevelCacheName);
-		subTile = this.getTileFromMemoryCache(key);
-		if (subTile != null)
-			subTiles[1] = subTile;
-		else
-			subTiles[1] = new MercatorTextureTile(new MercatorSector(d0, d1,
-					t1, t2), nextLevel, 2 * row, 2 * col + 1);
+        TileKey key = new TileKey(nextLevelNum, 2 * row, 2 * col,
+                nextLevelCacheName);
+        MercatorTextureTile subTile = this.getTileFromMemoryCache(key);
+        if (subTile != null) {
+            subTiles[0] = subTile;
+        } else {
+            subTiles[0] = new MercatorTextureTile(new MercatorSector(d0, d1,
+                    t0, t1), nextLevel, 2 * row, 2 * col);
+        }
 
-		key = new TileKey(nextLevelNum, 2 * row + 1, 2 * col,
-				nextLevelCacheName);
-		subTile = this.getTileFromMemoryCache(key);
-		if (subTile != null)
-			subTiles[2] = subTile;
-		else
-			subTiles[2] = new MercatorTextureTile(new MercatorSector(d1, d2,
-					t0, t1), nextLevel, 2 * row + 1, 2 * col);
+        key = new TileKey(nextLevelNum, 2 * row, 2 * col + 1,
+                nextLevelCacheName);
+        subTile = this.getTileFromMemoryCache(key);
+        if (subTile != null) {
+            subTiles[1] = subTile;
+        } else {
+            subTiles[1] = new MercatorTextureTile(new MercatorSector(d0, d1,
+                    t1, t2), nextLevel, 2 * row, 2 * col + 1);
+        }
 
-		key = new TileKey(nextLevelNum, 2 * row + 1, 2 * col + 1,
-				nextLevelCacheName);
-		subTile = this.getTileFromMemoryCache(key);
-		if (subTile != null)
-			subTiles[3] = subTile;
-		else
-			subTiles[3] = new MercatorTextureTile(new MercatorSector(d1, d2,
-					t1, t2), nextLevel, 2 * row + 1, 2 * col + 1);
+        key = new TileKey(nextLevelNum, 2 * row + 1, 2 * col,
+                nextLevelCacheName);
+        subTile = this.getTileFromMemoryCache(key);
+        if (subTile != null) {
+            subTiles[2] = subTile;
+        } else {
+            subTiles[2] = new MercatorTextureTile(new MercatorSector(d1, d2,
+                    t0, t1), nextLevel, 2 * row + 1, 2 * col);
+        }
 
-		return subTiles;
-	}
+        key = new TileKey(nextLevelNum, 2 * row + 1, 2 * col + 1,
+                nextLevelCacheName);
+        subTile = this.getTileFromMemoryCache(key);
+        if (subTile != null) {
+            subTiles[3] = subTile;
+        } else {
+            subTiles[3] = new MercatorTextureTile(new MercatorSector(d1, d2,
+                    t1, t2), nextLevel, 2 * row + 1, 2 * col + 1);
+        }
 
-	protected MercatorTextureTile getTileFromMemoryCache(TileKey tileKey)
-	{
-		return (MercatorTextureTile) WorldWind.getMemoryCache(
-				MercatorTextureTile.class.getName()).getObject(tileKey);
-	}
+        return subTiles;
+    }
 
-	public MercatorSector getMercatorSector()
-	{
-		return mercatorSector;
-	}
+    protected MercatorTextureTile getTileFromMemoryCache(TileKey tileKey) {
+        return (MercatorTextureTile) WorldWind.getMemoryCache(
+                MercatorTextureTile.class.getName()).getObject(tileKey);
+    }
+
+    public MercatorSector getMercatorSector() {
+        return mercatorSector;
+    }
 }

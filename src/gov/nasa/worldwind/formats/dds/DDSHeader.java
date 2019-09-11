@@ -21,8 +21,8 @@ import java.nio.channels.ReadableByteChannel;
  * @author dcollins
  * @version $Id: DDSHeader.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class DDSHeader
-{
+public class DDSHeader {
+
     protected final int size = DDSConstants.DDS_HEADER_SIZE;
     protected int flags;
     protected int width;
@@ -38,8 +38,7 @@ public class DDSHeader
     protected int caps4;
     //protected int reserved2; // Unused
 
-    public DDSHeader()
-    {
+    public DDSHeader() {
         this.pixelFormat = new DDSPixelFormat();
     }
 
@@ -48,80 +47,64 @@ public class DDSHeader
      *
      * @return header size in bytes.
      */
-    public final int getSize()
-    {
+    public final int getSize() {
         return this.size;
     }
 
-    public int getFlags()
-    {
+    public int getFlags() {
         return this.flags;
     }
 
-    public void setFlags(int flags)
-    {
+    public void setFlags(int flags) {
         this.flags = flags;
     }
 
-    public int getWidth()
-    {
+    public int getWidth() {
         return this.width;
     }
 
-    public void setWidth(int width)
-    {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public int getHeight()
-    {
+    public int getHeight() {
         return this.height;
     }
 
-    public void setHeight(int height)
-    {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public int getLinearSize()
-    {
+    public int getLinearSize() {
         return this.linearSize;
     }
 
-    public void setLinearSize(int size)
-    {
+    public void setLinearSize(int size) {
         this.linearSize = size;
     }
 
-    public int getDepth()
-    {
+    public int getDepth() {
         return this.depth;
     }
 
-    public void setDepth(int depth)
-    {
+    public void setDepth(int depth) {
         this.depth = depth;
     }
 
-    public int getMipMapCount()
-    {
+    public int getMipMapCount() {
         return this.mipMapCount;
     }
 
-    public void setMipMapCount(int mipMapCount)
-    {
+    public void setMipMapCount(int mipMapCount) {
         this.mipMapCount = mipMapCount;
     }
 
-    public DDSPixelFormat getPixelFormat()
-    {
+    public DDSPixelFormat getPixelFormat() {
         return this.pixelFormat;
     }
 
-    public void setPixelFormat(DDSPixelFormat pixelFormat)
-    {
-        if (pixelFormat == null)
-        {
+    public void setPixelFormat(DDSPixelFormat pixelFormat) {
+        if (pixelFormat == null) {
             String message = Logging.getMessage("nullValue.PixelFormatIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -130,55 +113,45 @@ public class DDSHeader
         this.pixelFormat = pixelFormat;
     }
 
-    public int getCaps()
-    {
+    public int getCaps() {
         return this.caps;
     }
 
-    public void setCaps(int caps)
-    {
+    public void setCaps(int caps) {
         this.caps = caps;
     }
 
-    public int getCaps2()
-    {
+    public int getCaps2() {
         return this.caps2;
     }
 
-    public void setCaps2(int caps)
-    {
+    public void setCaps2(int caps) {
         this.caps2 = caps;
     }
 
-    public int getCaps3()
-    {
+    public int getCaps3() {
         return this.caps3;
     }
 
-    public void setCaps3(int caps)
-    {
+    public void setCaps3(int caps) {
         this.caps3 = caps;
     }
 
-    public int getCaps4()
-    {
+    public int getCaps4() {
         return this.caps4;
     }
 
-    public void setCaps4(int caps)
-    {
+    public void setCaps4(int caps) {
         this.caps4 = caps;
     }
 
-    public static DDSHeader readFrom(Object source) throws Exception
-    {
+    public static DDSHeader readFrom(Object source) throws Exception {
         boolean sourceIsInputStream = (null != source && source instanceof InputStream);
 
         InputStream inputStream = WWIO.openStream(source);
         ReadableByteChannel channel = Channels.newChannel(WWIO.getBufferedInputStream(inputStream));
 
-        try
-        {
+        try {
             int size = DDSConstants.DDS_SIGNATURE_SIZE + DDSConstants.DDS_HEADER_SIZE;
 
             ByteBuffer buffer = ByteBuffer.allocate(size);
@@ -186,11 +159,8 @@ public class DDSHeader
 
             WWIO.readChannelToBuffer(channel, buffer);
             return DDSHeader.readFrom(buffer);
-        }
-        finally
-        {
-            if (!sourceIsInputStream)
-            {
+        } finally {
+            if (!sourceIsInputStream) {
                 WWIO.closeStream(inputStream, ((null != source) ? source.toString() : "unknown"));
             }
         }
@@ -202,25 +172,21 @@ public class DDSHeader
      * @param buffer The buffer to read from
      * @return DDSHeader
      * @throws IllegalArgumentException if the ByteBuffer is null
-     * @throws IOException              if the buffer length or content is invalid
+     * @throws IOException if the buffer length or content is invalid
      */
-    public static DDSHeader readFrom(ByteBuffer buffer) throws IllegalArgumentException, IOException
-    {
-        if (null == buffer)
-        {
+    public static DDSHeader readFrom(ByteBuffer buffer) throws IllegalArgumentException, IOException {
+        if (null == buffer) {
             String message = Logging.getMessage("nullValue.BufferNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (buffer.order() != ByteOrder.LITTLE_ENDIAN)
-        {
+        if (buffer.order() != ByteOrder.LITTLE_ENDIAN) {
             buffer.order(ByteOrder.LITTLE_ENDIAN);
         }
 
         int ddsHeaderSize = DDSConstants.DDS_SIGNATURE_SIZE + DDSConstants.DDS_HEADER_SIZE;
-        if (buffer.remaining() < ddsHeaderSize)
-        {
+        if (buffer.remaining() < ddsHeaderSize) {
             String reason = buffer.remaining() + " < " + ddsHeaderSize;
             String message = Logging.getMessage("generic.LengthIsInvalid", reason);
             Logging.logger().severe(message);
@@ -228,16 +194,14 @@ public class DDSHeader
         }
 
         int signature = buffer.getInt();
-        if (DDSConstants.MAGIC != signature)
-        {
+        if (DDSConstants.MAGIC != signature) {
             String message = Logging.getMessage("generic.UnknownFileFormat", signature);
             Logging.logger().fine(message);
             throw new IOException(message);
         }
 
         int dwSize = buffer.getInt();
-        if (dwSize != DDSConstants.DDS_HEADER_SIZE)
-        {
+        if (dwSize != DDSConstants.DDS_HEADER_SIZE) {
             String message = Logging.getMessage("generic.UnknownContentType", dwSize);
             Logging.logger().fine(message);
             throw new IOException(message);
@@ -258,8 +222,7 @@ public class DDSHeader
         DDSPixelFormat pixelFormat = new DDSPixelFormat();
 
         dwSize = buffer.getInt();
-        if (dwSize != DDSConstants.DDS_PIXEL_FORMAT_SIZE)
-        {
+        if (dwSize != DDSConstants.DDS_PIXEL_FORMAT_SIZE) {
             String message = Logging.getMessage("generic.UnknownContentType", dwSize);
             Logging.logger().fine(message);
             throw new IOException(message);

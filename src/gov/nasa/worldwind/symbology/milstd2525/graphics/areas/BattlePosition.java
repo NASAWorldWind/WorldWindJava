@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.geom.*;
@@ -25,14 +24,20 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: BattlePosition.java 560 2012-04-26 16:28:24Z pabercrombie $
  */
-public class BattlePosition extends BasicArea
-{
-    /** Factor applied to the stipple pattern used to draw the dashed line for a Prepared but not Occupied area. */
+public class BattlePosition extends BasicArea {
+
+    /**
+     * Factor applied to the stipple pattern used to draw the dashed line for a Prepared but not Occupied area.
+     */
     protected static final int PBNO_OUTLINE_STIPPLE_FACTOR = 12;
 
-    /** Tactical symbol used to render the echelon modifier. */
+    /**
+     * Tactical symbol used to render the echelon modifier.
+     */
     protected TacticalSymbol echelonSymbol;
-    /** Attribute bundle for the echelon symbol. */
+    /**
+     * Attribute bundle for the echelon symbol.
+     */
     protected TacticalSymbolAttributes symbolAttributes;
 
     /**
@@ -40,11 +45,10 @@ public class BattlePosition extends BasicArea
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(
-            TacGrpSidc.C2GM_DEF_ARS_BTLPSN,
-            TacGrpSidc.C2GM_DEF_ARS_BTLPSN_PBNO);
+                TacGrpSidc.C2GM_DEF_ARS_BTLPSN,
+                TacGrpSidc.C2GM_DEF_ARS_BTLPSN_PBNO);
     }
 
     /**
@@ -52,47 +56,45 @@ public class BattlePosition extends BasicArea
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public BattlePosition(String sidc)
-    {
+    public BattlePosition(String sidc) {
         super(sidc);
 
         String echelon = this.symbolCode.getEchelon();
-        if (!SymbolCode.isFieldEmpty(echelon))
+        if (!SymbolCode.isFieldEmpty(echelon)) {
             this.echelonSymbol = this.createEchelonSymbol(sidc);
+        }
     }
 
-    /** {@inheritDoc} Overridden to render the echelon modifier. */
+    /**
+     * {@inheritDoc} Overridden to render the echelon modifier.
+     */
     @Override
-    protected void doRenderGraphicModifiers(DrawContext dc)
-    {
+    protected void doRenderGraphicModifiers(DrawContext dc) {
         super.doRenderGraphicModifiers(dc);
 
-        if (this.echelonSymbol != null)
-        {
+        if (this.echelonSymbol != null) {
             this.echelonSymbol.render(dc);
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected String createLabelText()
-    {
+    protected String createLabelText() {
         String label = this.getGraphicLabel();
         String text = this.getText();
 
-        if (label == null && text == null)
-        {
+        if (label == null && text == null) {
             return null;
         }
 
         StringBuilder sb = new StringBuilder();
-        if (!WWUtil.isEmpty(label))
-        {
+        if (!WWUtil.isEmpty(label)) {
             sb.append(label).append(" ");
         }
 
-        if (!WWUtil.isEmpty(text))
-        {
+        if (!WWUtil.isEmpty(text)) {
             sb.append(text);
         }
 
@@ -100,20 +102,22 @@ public class BattlePosition extends BasicArea
     }
 
     @Override
-    protected String getGraphicLabel()
-    {
-        if (TacGrpSidc.C2GM_DEF_ARS_BTLPSN_PBNO.equalsIgnoreCase(this.maskedSymbolCode))
+    protected String getGraphicLabel() {
+        if (TacGrpSidc.C2GM_DEF_ARS_BTLPSN_PBNO.equalsIgnoreCase(this.maskedSymbolCode)) {
             return "(P)";
+        }
 
         return null;
     }
 
-    /** {@inheritDoc} Overridden to determine the position of the echelon label. */
+    /**
+     * {@inheritDoc} Overridden to determine the position of the echelon label.
+     */
     @Override
-    protected void determineLabelPositions(DrawContext dc)
-    {
-        if (this.labels == null || this.labels.isEmpty())
+    protected void determineLabelPositions(DrawContext dc) {
+        if (this.labels == null || this.labels.isEmpty()) {
             return;
+        }
 
         Position mainLabelPosition = this.determineMainLabelPosition(dc);
         this.labels.get(0).setPosition(mainLabelPosition);
@@ -122,10 +126,11 @@ public class BattlePosition extends BasicArea
         this.determineIdentityLabelPositions();
     }
 
-    /** {@inheritDoc} Overridden to determine the position of the echelon label as well as the identity labels. */
+    /**
+     * {@inheritDoc} Overridden to determine the position of the echelon label as well as the identity labels.
+     */
     @Override
-    protected void determineIdentityLabelPositions()
-    {
+    protected void determineIdentityLabelPositions() {
         // Note: this method determines the position of the echelon modifier even though this modifier is implemented
         // as a tactical symbol and not as a label. The position of the echelon modifier is related to the position of
         // the identity labels, so it makes sense to handle them together.
@@ -139,17 +144,14 @@ public class BattlePosition extends BasicArea
         Position startPosition = first;
 
         LatLon midpoint = LatLon.interpolate(0.5, first, second);
-        if (this.echelonSymbol != null)
-        {
+        if (this.echelonSymbol != null) {
             this.echelonSymbol.setPosition(new Position(midpoint, 0));
         }
 
         int count = this.getPositionCount();
-        if (this.identityLabel1 != null)
-        {
+        if (this.identityLabel1 != null) {
             // Step one quarter of the way around the polygon and place the first identity label.
-            for (int i = 0; i < (count + 1) / 4; i++)
-            {
+            for (int i = 0; i < (count + 1) / 4; i++) {
                 first = second;
                 second = iterator.next();
             }
@@ -158,60 +160,55 @@ public class BattlePosition extends BasicArea
             this.identityLabel1.setPosition(new Position(midpoint, 0));
         }
 
-        if (this.identityLabel2 != null)
-        {
+        if (this.identityLabel2 != null) {
             // Step another quarter of the way and place the second identity label.  If the control points are more or less
             // evenly distributed, this will put the identity labels on opposite sides of the polygon, and away from the
             // echelon label.
-            for (int i = 0; i <= count / 4; i++)
-            {
+            for (int i = 0; i <= count / 4; i++) {
                 first = second;
                 second = iterator.hasNext() ? iterator.next() : startPosition;
             }
 
             midpoint = LatLon.interpolate(0.5, first, second);
-            if (this.identityLabel2 != null)
-            {
+            if (this.identityLabel2 != null) {
                 this.identityLabel2.setPosition(new Position(midpoint, 0));
             }
         }
     }
 
     @Override
-    protected void applyDefaultAttributes(ShapeAttributes attributes)
-    {
+    protected void applyDefaultAttributes(ShapeAttributes attributes) {
         super.applyDefaultAttributes(attributes);
 
         // Prepared but not Occupied graphic always renders with dashed lines.
-        if (TacGrpSidc.C2GM_DEF_ARS_BTLPSN_PBNO.equalsIgnoreCase(this.maskedSymbolCode))
-        {
+        if (TacGrpSidc.C2GM_DEF_ARS_BTLPSN_PBNO.equalsIgnoreCase(this.maskedSymbolCode)) {
             attributes.setOutlineStippleFactor(PBNO_OUTLINE_STIPPLE_FACTOR);
             attributes.setOutlineStipplePattern(this.getOutlineStipplePattern());
         }
     }
 
-    /** {@inheritDoc} Overridden to update echelon symbol attributes. */
+    /**
+     * {@inheritDoc} Overridden to update echelon symbol attributes.
+     */
     @Override
-    protected void determineActiveAttributes()
-    {
+    protected void determineActiveAttributes() {
         super.determineActiveAttributes();
 
         // Apply active attributes to the symbol.
-        if (this.symbolAttributes != null)
-        {
+        if (this.symbolAttributes != null) {
             ShapeAttributes activeAttributes = this.getActiveShapeAttributes();
             this.symbolAttributes.setOpacity(activeAttributes.getInteriorOpacity());
             this.symbolAttributes.setTextModifierMaterial(this.getLabelMaterial());
         }
     }
 
-    /** {@inheritDoc} Overridden to apply delegate owner to echelon symbol. */
+    /**
+     * {@inheritDoc} Overridden to apply delegate owner to echelon symbol.
+     */
     @Override
-    protected void applyDelegateOwner(Object owner)
-    {
+    protected void applyDelegateOwner(Object owner) {
         super.applyDelegateOwner(owner);
-        if (this.echelonSymbol != null)
-        {
+        if (this.echelonSymbol != null) {
             this.echelonSymbol.setDelegateOwner(owner);
         }
     }
@@ -223,12 +220,12 @@ public class BattlePosition extends BasicArea
      *
      * @return A symbol to render the echelon modifier.
      */
-    protected TacticalSymbol createEchelonSymbol(String sidc)
-    {
+    protected TacticalSymbol createEchelonSymbol(String sidc) {
         TacticalSymbol symbol = new EchelonSymbol(sidc);
 
-        if (this.symbolAttributes == null)
+        if (this.symbolAttributes == null) {
             this.symbolAttributes = new BasicTacticalSymbolAttributes();
+        }
         symbol.setAttributes(this.symbolAttributes);
 
         return symbol;

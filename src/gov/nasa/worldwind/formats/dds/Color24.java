@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.formats.dds;
 
 /**
@@ -12,9 +11,8 @@ package gov.nasa.worldwind.formats.dds;
  * @author Lado Garakanidze
  * @version $Id: Color24.java 1171 2013-02-11 21:45:02Z dcollins $
  */
+public class Color24 {
 
-public class Color24
-{
     /**
      * The red color component.
      */
@@ -31,25 +29,21 @@ public class Color24
     /**
      * Creates a 24 bit 888 RGB color with all values set to 0.
      */
-    public Color24()
-    {
+    public Color24() {
         this.r = this.g = this.b = 0;
     }
 
-    public Color24(int r, int g, int b)
-    {
+    public Color24(int r, int g, int b) {
         this.r = r;
         this.g = g;
         this.b = b;
     }
 
-    public int getPixel888()
-    {
+    public int getPixel888() {
         return (this.r << 16 | this.g << 8 | this.b);
     }
 
-    public static Color24 fromPixel565(int pixel)
-    {
+    public static Color24 fromPixel565(int pixel) {
         Color24 color = new Color24();
 
         color.r = (int) (((long) pixel) & 0xf800) >>> 8;
@@ -59,8 +53,7 @@ public class Color24
         return color;
     }
 
-    public static Color24 multiplyAlpha(Color24 color, int alpha)
-    {
+    public static Color24 multiplyAlpha(Color24 color, int alpha) {
         Color24 result = new Color24();
 
         double alphaF = alpha / 256.0;
@@ -72,8 +65,7 @@ public class Color24
         return result;
     }
 
-    public static Color24[] expandLookupTable(short minColor, short maxColor)
-    {
+    public static Color24[] expandLookupTable(short minColor, short maxColor) {
         Color24 colorMin = Color24.fromPixel565(minColor);
         Color24 colorMax = Color24.fromPixel565(maxColor);
 

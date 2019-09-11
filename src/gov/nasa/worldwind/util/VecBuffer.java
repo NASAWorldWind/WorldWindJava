@@ -21,8 +21,8 @@ import java.util.*;
  * @author dcollins
  * @version $Id: VecBuffer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class VecBuffer
-{
+public class VecBuffer {
+
     protected int coordsPerVec;
     protected BufferWrapper buffer;
 
@@ -30,21 +30,18 @@ public class VecBuffer
      * Constructs a new VecBuffer with the specified vector size, and backing BufferWrapper.
      *
      * @param coordsPerVec the number of coordinates per logical vector.
-     * @param buffer       the backing BufferWrapper.
+     * @param buffer the backing BufferWrapper.
      *
      * @throws IllegalArgumentException if coordsPerElem is 0 or negative, or if the buffer is null.
      */
-    public VecBuffer(int coordsPerVec, BufferWrapper buffer)
-    {
-        if (coordsPerVec < 1)
-        {
+    public VecBuffer(int coordsPerVec, BufferWrapper buffer) {
+        if (coordsPerVec < 1) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "coordsPerVec < 1");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (buffer == null)
-        {
+        if (buffer == null) {
             String message = Logging.getMessage("nullValue.BufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -61,8 +58,7 @@ public class VecBuffer
      *
      * @return the empty VecBuffer.
      */
-    public static VecBuffer emptyVecBuffer(int coordsPerVec)
-    {
+    public static VecBuffer emptyVecBuffer(int coordsPerVec) {
         return new VecBuffer(coordsPerVec, BufferWrapper.emptyBufferWrapper());
     }
 
@@ -71,8 +67,7 @@ public class VecBuffer
      *
      * @return the cardinality of a logical vector element.
      */
-    public int getCoordsPerVec()
-    {
+    public int getCoordsPerVec() {
         return this.coordsPerVec;
     }
 
@@ -81,8 +76,7 @@ public class VecBuffer
      *
      * @return the size of this VecBuffer, in units of logical vectors.
      */
-    public int getSize()
-    {
+    public int getSize() {
         return this.buffer.length() / this.coordsPerVec;
     }
 
@@ -91,8 +85,7 @@ public class VecBuffer
      *
      * @return the backing buffer.
      */
-    public BufferWrapper getBufferWrapper()
-    {
+    public BufferWrapper getBufferWrapper() {
         return this.buffer;
     }
 
@@ -102,23 +95,20 @@ public class VecBuffer
      * only the specified portion of the vector element is returned.
      *
      * @param position the logical vector position.
-     * @param array    the destination array.
+     * @param array the destination array.
      *
      * @return an array of vector elements.
      *
      * @throws IllegalArgumentException if the position is out of range, or if the array is null.
      */
-    public double[] get(int position, double[] array)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public double[] get(int position, double[] array) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (array == null)
-        {
+        if (array == null) {
             String message = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -126,8 +116,9 @@ public class VecBuffer
 
         int index = this.indexFromVectorPosition(position);
         int length = array.length;
-        if (length > this.coordsPerVec)
+        if (length > this.coordsPerVec) {
             length = this.coordsPerVec;
+        }
 
         this.buffer.getDouble(index, array, 0, length);
 
@@ -140,23 +131,20 @@ public class VecBuffer
      * only the specified portion of the vector element is returned.
      *
      * @param position the logical vector position.
-     * @param array    the destination array.
+     * @param array the destination array.
      *
      * @return an array of vector elements.
      *
      * @throws IllegalArgumentException if the position is out of range, or if the array is null.
      */
-    public float[] getFloat(int position, float[] array)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public float[] getFloat(int position, float[] array) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (array == null)
-        {
+        if (array == null) {
             String message = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -164,8 +152,9 @@ public class VecBuffer
 
         int index = this.indexFromVectorPosition(position);
         int length = array.length;
-        if (length > this.coordsPerVec)
+        if (length > this.coordsPerVec) {
             length = this.coordsPerVec;
+        }
 
         this.buffer.getFloat(index, array, 0, length);
 
@@ -178,21 +167,18 @@ public class VecBuffer
      * only the specified portion of the vector element is set.
      *
      * @param position the logical vector position.
-     * @param array    the source array.
+     * @param array the source array.
      *
      * @throws IllegalArgumentException if the position is out of range, or if the array is null.
      */
-    public void put(int position, double[] array)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public void put(int position, double[] array) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (array == null)
-        {
+        if (array == null) {
             String message = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -200,8 +186,9 @@ public class VecBuffer
 
         int index = this.indexFromVectorPosition(position);
         int length = array.length;
-        if (length > this.coordsPerVec)
+        if (length > this.coordsPerVec) {
             length = this.coordsPerVec;
+        }
 
         this.buffer.putDouble(index, array, 0, length);
     }
@@ -212,21 +199,18 @@ public class VecBuffer
      * only the specified portion of the vector element is set.
      *
      * @param position the logical vector position.
-     * @param array    the source array.
+     * @param array the source array.
      *
      * @throws IllegalArgumentException if the position is out of range, or if the array is null.
      */
-    public void putFloat(int position, float[] array)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public void putFloat(int position, float[] array) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (array == null)
-        {
+        if (array == null) {
             String message = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -234,8 +218,9 @@ public class VecBuffer
 
         int index = this.indexFromVectorPosition(position);
         int length = array.length;
-        if (length > this.coordsPerVec)
+        if (length > this.coordsPerVec) {
             length = this.coordsPerVec;
+        }
 
         this.buffer.putFloat(index, array, 0, length);
     }
@@ -247,24 +232,21 @@ public class VecBuffer
      * packed into the array, starting at index 0.
      *
      * @param position the starting logical vector position.
-     * @param array    the source array.
-     * @param count    the number of logical arrays to set.
+     * @param array the source array.
+     * @param count the number of logical arrays to set.
      *
      * @throws IllegalArgumentException if the position is out of range, if the array is null, or if the array has
-     *                                  insufficient length.
+     * insufficient length.
      */
-    public void putAll(int position, double[] array, int count)
-    {
-        if (position < 0 || position + count > this.getSize())
-        {
+    public void putAll(int position, double[] array, int count) {
+        if (position < 0 || position + count > this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                "position < 0 or position + count >= size");
+                    "position < 0 or position + count >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (array == null)
-        {
+        if (array == null) {
             String message = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -273,8 +255,7 @@ public class VecBuffer
         int index = this.indexFromVectorPosition(position);
         int length = this.indexFromVectorPosition(count);
 
-        if (array.length < length)
-        {
+        if (array.length < length) {
             String message = Logging.getMessage("generic.ArrayInvalidLength", array.length);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -289,14 +270,12 @@ public class VecBuffer
      * this buffer are reflected in the new buffer, and visa versa.
      *
      * @param position the new buffer's staring position, in logical vectors.
-     * @param size     the new buffer's size, in logical vectors.
+     * @param size the new buffer's size, in logical vectors.
      *
      * @return a subsequence of this buffer.
      */
-    public VecBuffer getSubBuffer(int position, int size)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public VecBuffer getSubBuffer(int position, int size) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -315,23 +294,19 @@ public class VecBuffer
      * must have the same logical vector size as this buffer (coordsPerVec must be equivalent).
      *
      * @param position the starting vector position to set.
-     * @param buffer   the input buffer.
+     * @param buffer the input buffer.
      *
      * @throws IllegalArgumentException if the position is out of range, if the buffer is null or incompatible, or if
-     *                                  this buffer has insufficient length to store the sub-buffer at the specified
-     *                                  position.
+     * this buffer has insufficient length to store the sub-buffer at the specified position.
      */
-    public void putSubBuffer(int position, VecBuffer buffer)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public void putSubBuffer(int position, VecBuffer buffer) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (buffer == null)
-        {
+        if (buffer == null) {
             String message = Logging.getMessage("nullValue.BufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -346,42 +321,36 @@ public class VecBuffer
      * the same logical vector size as this buffer (coordsPerVec must be equivalent).
      *
      * @param position the starting vector position to set.
-     * @param buffer   the input buffer.
-     * @param offset   the vector position to start copying values from the specified buffer.
-     * @param size     the number of vectors to read copy form the specified buffer.
+     * @param buffer the input buffer.
+     * @param offset the vector position to start copying values from the specified buffer.
+     * @param size the number of vectors to read copy form the specified buffer.
      *
      * @throws IllegalArgumentException if the position is out of range, if the buffer is null or incompatible, if this
-     *                                  buffer has insufficient length to store the sub-buffer at the specified
-     *                                  position, or if the specified offset and size define a range outside of the
-     *                                  specified buffer.
+     * buffer has insufficient length to store the sub-buffer at the specified position, or if the specified offset and
+     * size define a range outside of the specified buffer.
      */
-    public void putSubBuffer(int position, VecBuffer buffer, int offset, int size)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public void putSubBuffer(int position, VecBuffer buffer, int offset, int size) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (buffer == null)
-        {
+        if (buffer == null) {
             String message = Logging.getMessage("nullValue.BufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         // Not enough room in buffer.
-        if (buffer.getSize() < (offset + size))
-        {
+        if (buffer.getSize() < (offset + size)) {
             String message = Logging.getMessage("generic.BufferOverflow", buffer.getSize(), size);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         // Buffer is incompatible.
-        if (this.coordsPerVec != buffer.coordsPerVec)
-        {
+        if (this.coordsPerVec != buffer.coordsPerVec) {
             String message = Logging.getMessage("generic.BufferIncompatible", buffer);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -389,8 +358,7 @@ public class VecBuffer
 
         // Buffer is too large.
         int sizeNeeded = position + size;
-        if (this.getSize() < sizeNeeded)
-        {
+        if (this.getSize() < sizeNeeded) {
             String message = Logging.getMessage("generic.BufferOverflow", this.getSize(), sizeNeeded);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -412,17 +380,14 @@ public class VecBuffer
      *
      * @throws IllegalArgumentException if the position is out of range, or if this buffer cannot store a Vec4.
      */
-    public Vec4 getVector(int position)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public Vec4 getVector(int position) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4)
-        {
+        if (this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4) {
             String message = Logging.getMessage("generic.BufferIncompatible", this);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -438,29 +403,25 @@ public class VecBuffer
      * 3 or 4.
      *
      * @param position the logical vector position.
-     * @param vec      the vector to set.
+     * @param vec the vector to set.
      *
      * @throws IllegalArgumentException if the position is out of range, if the vector is null, or if this buffer cannot
-     *                                  store a Vec4.
+     * store a Vec4.
      */
-    public void putVector(int position, Vec4 vec)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public void putVector(int position, Vec4 vec) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (vec == null)
-        {
+        if (vec == null) {
             String message = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4)
-        {
+        if (this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4) {
             String message = Logging.getMessage("generic.BufferIncompatible", this);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -481,17 +442,14 @@ public class VecBuffer
      *
      * @throws IllegalArgumentException if the position is out of range, or if this buffer cannot store a LatLon.
      */
-    public LatLon getLocation(int position)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public LatLon getLocation(int position) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.coordsPerVec < 2)
-        {
+        if (this.coordsPerVec < 2) {
             String message = Logging.getMessage("generic.BufferIncompatible", this);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -508,29 +466,25 @@ public class VecBuffer
      * be at least 2.
      *
      * @param position the logical vector position.
-     * @param ll       the geographic location to set.
+     * @param ll the geographic location to set.
      *
      * @throws IllegalArgumentException if the position is out of range, if the LatLon is null, or if this buffer cannot
-     *                                  store a LatLon.
+     * store a LatLon.
      */
-    public void putLocation(int position, LatLon ll)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public void putLocation(int position, LatLon ll) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (ll == null)
-        {
+        if (ll == null) {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.coordsPerVec < 2)
-        {
+        if (this.coordsPerVec < 2) {
             String message = Logging.getMessage("generic.BufferIncompatible", this);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -553,17 +507,14 @@ public class VecBuffer
      *
      * @throws IllegalArgumentException if the position is out of range, or if this buffer cannot store a Position.
      */
-    public Position getPosition(int position)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public Position getPosition(int position) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.coordsPerVec < 2)
-        {
+        if (this.coordsPerVec < 2) {
             String message = Logging.getMessage("generic.BufferIncompatible", this);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -573,9 +524,9 @@ public class VecBuffer
         this.get(position, compArray);
 
         return Position.fromDegrees(
-            compArray[1],
-            compArray[0],
-            (this.coordsPerVec > 2) ? compArray[2] : 0);
+                compArray[1],
+                compArray[0],
+                (this.coordsPerVec > 2) ? compArray[2] : 0);
     }
 
     /**
@@ -583,29 +534,25 @@ public class VecBuffer
      * must be at least 2.
      *
      * @param position the logical vector position.
-     * @param p        the geographic Position to set.
+     * @param p the geographic Position to set.
      *
      * @throws IllegalArgumentException if the position is out of range, if the Position is null, or if this buffer
-     *                                  cannot store a Position.
+     * cannot store a Position.
      */
-    public void putPosition(int position, Position p)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public void putPosition(int position, Position p) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (p == null)
-        {
+        if (p == null) {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.coordsPerVec < 2)
-        {
+        if (this.coordsPerVec < 2) {
             String message = Logging.getMessage("generic.BufferIncompatible", this);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -629,10 +576,8 @@ public class VecBuffer
      *
      * @return the new buffer, with the specified size.
      */
-    public VecBuffer copyOf(int newSize)
-    {
-        if (newSize < this.getSize())
-        {
+    public VecBuffer copyOf(int newSize) {
+        if (newSize < this.getSize()) {
             String message = Logging.getMessage("generic.SizeOutOfRange", newSize);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -648,8 +593,7 @@ public class VecBuffer
      *
      * @return iterator over this buffer's vectors, as double[] arrays.
      */
-    public Iterable<double[]> getCoords()
-    {
+    public Iterable<double[]> getCoords() {
         return this.getCoords(this.coordsPerVec);
     }
 
@@ -663,12 +607,9 @@ public class VecBuffer
      *
      * @return iterator over this buffer's vectors, as double[] arrays.
      */
-    public Iterable<double[]> getCoords(final int minCoordsPerVec)
-    {
-        return new Iterable<double[]>()
-        {
-            public Iterator<double[]> iterator()
-            {
+    public Iterable<double[]> getCoords(final int minCoordsPerVec) {
+        return new Iterable<double[]>() {
+            public Iterator<double[]> iterator() {
                 return new BasicIterator<double[]>(new CoordAccessor(minCoordsPerVec));
             }
         };
@@ -684,12 +625,9 @@ public class VecBuffer
      *
      * @return reverse iterator over this buffer's vectors, as double[] arrays.
      */
-    public Iterable<double[]> getReverseCoords(final int minCoordsPerVec)
-    {
-        return new Iterable<double[]>()
-        {
-            public Iterator<double[]> iterator()
-            {
+    public Iterable<double[]> getReverseCoords(final int minCoordsPerVec) {
+        return new Iterable<double[]>() {
+            public Iterator<double[]> iterator() {
                 return new ReverseIterator<double[]>(new CoordAccessor(minCoordsPerVec));
             }
         };
@@ -705,17 +643,14 @@ public class VecBuffer
      *
      * @throws IllegalArgumentException if the position is out of range, or if the iterable is null.
      */
-    public void putCoords(int position, Iterable<double[]> iterable)
-    {
-        if (position < 0 || position >= this.getSize())
-        {
+    public void putCoords(int position, Iterable<double[]> iterable) {
+        if (position < 0 || position >= this.getSize()) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "position < 0 or position >= size");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (iterable == null)
-        {
+        if (iterable == null) {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -723,12 +658,12 @@ public class VecBuffer
 
         int pos = position;
 
-        for (double[] coords : iterable)
-        {
+        for (double[] coords : iterable) {
             this.put(pos, coords);
 
-            if (++pos >= this.getSize())
+            if (++pos >= this.getSize()) {
                 break;
+            }
         }
     }
 
@@ -737,12 +672,9 @@ public class VecBuffer
      *
      * @return iterator over this buffer's vectors, as Vec4 references.
      */
-    public Iterable<Vec4> getVectors()
-    {
-        return new Iterable<Vec4>()
-        {
-            public Iterator<Vec4> iterator()
-            {
+    public Iterable<Vec4> getVectors() {
+        return new Iterable<Vec4>() {
+            public Iterator<Vec4> iterator() {
                 return new BasicIterator<Vec4>(new VectorAccessor());
             }
         };
@@ -753,12 +685,9 @@ public class VecBuffer
      *
      * @return reverse iterator over this buffer's vectors, as Vec4 references.
      */
-    public Iterable<Vec4> getReverseVectors()
-    {
-        return new Iterable<Vec4>()
-        {
-            public Iterator<Vec4> iterator()
-            {
+    public Iterable<Vec4> getReverseVectors() {
+        return new Iterable<Vec4>() {
+            public Iterator<Vec4> iterator() {
                 return new ReverseIterator<Vec4>(new VectorAccessor());
             }
         };
@@ -774,12 +703,10 @@ public class VecBuffer
      * @param iterable iterator over the elements to set.
      *
      * @throws IllegalArgumentException if the position is out of range, if the iterable is null, or if this buffer
-     *                                  cannot store a Vec4.
+     * cannot store a Vec4.
      */
-    public void putVectors(int position, Iterable<? extends Vec4> iterable)
-    {
-        if (iterable == null)
-        {
+    public void putVectors(int position, Iterable<? extends Vec4> iterable) {
+        if (iterable == null) {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -787,12 +714,12 @@ public class VecBuffer
 
         int pos = position;
 
-        for (Vec4 vec : iterable)
-        {
+        for (Vec4 vec : iterable) {
             this.putVector(pos, vec);
 
-            if (++pos >= this.getSize())
+            if (++pos >= this.getSize()) {
                 break;
+            }
         }
     }
 
@@ -801,12 +728,9 @@ public class VecBuffer
      *
      * @return iterator over this buffer's vectors, as LatLon locations.
      */
-    public Iterable<LatLon> getLocations()
-    {
-        return new Iterable<LatLon>()
-        {
-            public Iterator<LatLon> iterator()
-            {
+    public Iterable<LatLon> getLocations() {
+        return new Iterable<LatLon>() {
+            public Iterator<LatLon> iterator() {
                 return new BasicIterator<LatLon>(new LocationAccessor());
             }
         };
@@ -817,12 +741,9 @@ public class VecBuffer
      *
      * @return reverse iterator over this buffer's vectors, as LatLon locations.
      */
-    public Iterable<LatLon> getReverseLocations()
-    {
-        return new Iterable<LatLon>()
-        {
-            public Iterator<LatLon> iterator()
-            {
+    public Iterable<LatLon> getReverseLocations() {
+        return new Iterable<LatLon>() {
+            public Iterator<LatLon> iterator() {
                 return new ReverseIterator<LatLon>(new LocationAccessor());
             }
         };
@@ -837,12 +758,10 @@ public class VecBuffer
      * @param iterable iterator over the elements to set.
      *
      * @throws IllegalArgumentException if the position is out of range, if the iterable is null, or if this buffer
-     *                                  cannot store a LatLon.
+     * cannot store a LatLon.
      */
-    public void putLocations(int position, Iterable<? extends LatLon> iterable)
-    {
-        if (iterable == null)
-        {
+    public void putLocations(int position, Iterable<? extends LatLon> iterable) {
+        if (iterable == null) {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -850,12 +769,12 @@ public class VecBuffer
 
         int pos = position;
 
-        for (LatLon ll : iterable)
-        {
+        for (LatLon ll : iterable) {
             this.putLocation(pos, ll);
 
-            if (++pos >= this.getSize())
+            if (++pos >= this.getSize()) {
                 break;
+            }
         }
     }
 
@@ -864,12 +783,9 @@ public class VecBuffer
      *
      * @return iterator over this buffer's vectors, as geographic Positions.
      */
-    public Iterable<Position> getPositions()
-    {
-        return new Iterable<Position>()
-        {
-            public Iterator<Position> iterator()
-            {
+    public Iterable<Position> getPositions() {
+        return new Iterable<Position>() {
+            public Iterator<Position> iterator() {
                 return new BasicIterator<Position>(new PositionAccessor());
             }
         };
@@ -880,12 +796,9 @@ public class VecBuffer
      *
      * @return reverse iterator over this buffer's vectors, as geographic Positions.
      */
-    public Iterable<Position> getReversePositions()
-    {
-        return new Iterable<Position>()
-        {
-            public Iterator<Position> iterator()
-            {
+    public Iterable<Position> getReversePositions() {
+        return new Iterable<Position>() {
+            public Iterator<Position> iterator() {
                 return new ReverseIterator<Position>(new PositionAccessor());
             }
         };
@@ -900,12 +813,10 @@ public class VecBuffer
      * @param iterable iterator over the elements to set.
      *
      * @throws IllegalArgumentException if the position is out of range, if the iterable is null, or if this buffer
-     *                                  cannot store a LatLon.
+     * cannot store a LatLon.
      */
-    public void putPositions(int position, Iterable<? extends Position> iterable)
-    {
-        if (iterable == null)
-        {
+    public void putPositions(int position, Iterable<? extends Position> iterable) {
+        if (iterable == null) {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -913,12 +824,12 @@ public class VecBuffer
 
         int pos = position;
 
-        for (Position p : iterable)
-        {
+        for (Position p : iterable) {
             this.putPosition(pos, p);
 
-            if (++pos >= this.getSize())
+            if (++pos >= this.getSize()) {
                 break;
+            }
         }
     }
 
@@ -930,21 +841,18 @@ public class VecBuffer
      * @param dc the current {@link DrawContext}.
      *
      * @throws IllegalArgumentException if the DrawContext is null, or if this buffer is not compatible as a color
-     *                                  buffer.
+     * buffer.
      */
-    public void bindAsColorBuffer(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public void bindAsColorBuffer(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.coordsPerVec != 3 && this.coordsPerVec != 4)
-        {
+        if (this.coordsPerVec != 3 && this.coordsPerVec != 4) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                "coordinates per vertex = " + this.coordsPerVec);
+                    "coordinates per vertex = " + this.coordsPerVec);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -961,21 +869,18 @@ public class VecBuffer
      * @param dc the current {@link DrawContext}.
      *
      * @throws IllegalArgumentException if the DrawContext is null, or if this buffer is not compatible as a normal
-     *                                  buffer.
+     * buffer.
      */
-    public void bindAsNormalBuffer(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public void bindAsNormalBuffer(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.coordsPerVec != 3)
-        {
+        if (this.coordsPerVec != 3) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                "coordinates per vertex = " + this.coordsPerVec);
+                    "coordinates per vertex = " + this.coordsPerVec);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -992,21 +897,18 @@ public class VecBuffer
      * @param dc the current DrawContext.
      *
      * @throws IllegalArgumentException if the DrawContext is null, or if this buffer is not compatible as a vertex
-     *                                  buffer.
+     * buffer.
      */
-    public void bindAsVertexBuffer(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public void bindAsVertexBuffer(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4)
-        {
+        if (this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                "coordinates per vertex = " + this.coordsPerVec);
+                    "coordinates per vertex = " + this.coordsPerVec);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -1016,7 +918,7 @@ public class VecBuffer
     }
 
     /**
-     * Binds this buffer as the source of texture coordinates to use when rendering OpenGL primitives.  The texture
+     * Binds this buffer as the source of texture coordinates to use when rendering OpenGL primitives. The texture
      * coordinate size is equal to coordsPerVertex, the texture coordinate type is equal to buffer's underlying
      * BufferWrapper GL type, the stride is 0, and the texture coordinate data itself is this buffer's backing NIO
      * Buffer. This buffer's vector size must be 1, 2, 3, or 4.
@@ -1024,21 +926,18 @@ public class VecBuffer
      * @param dc the current DrawContext.
      *
      * @throws IllegalArgumentException if the DrawContext is null, or if this buffer is not compatible as a normal
-     *                                  buffer.
+     * buffer.
      */
-    public void bindAsTexCoordBuffer(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public void bindAsTexCoordBuffer(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.coordsPerVec != 1 && this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4)
-        {
+        if (this.coordsPerVec != 1 && this.coordsPerVec != 2 && this.coordsPerVec != 3 && this.coordsPerVec != 4) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange",
-                "coordinates per vertex = " + this.coordsPerVec);
+                    "coordinates per vertex = " + this.coordsPerVec);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -1051,15 +950,13 @@ public class VecBuffer
      * Renders <code>getSize()</code> elements from the currently bounds OpenGL coordinate buffers, beginning with
      * element 0. The specified drawMode indicates which type of OpenGL primitives to render.
      *
-     * @param dc       the current DrawContext.
+     * @param dc the current DrawContext.
      * @param drawMode the type of OpenGL primtives to render.
      *
      * @throws IllegalArgumentException if the DrawContext is null.
      */
-    public void drawArrays(DrawContext dc, int drawMode)
-    {
-        if (dc == null)
-        {
+    public void drawArrays(DrawContext dc, int drawMode) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -1075,8 +972,7 @@ public class VecBuffer
      *
      * @return the physical buffer index.
      */
-    protected int indexFromVectorPosition(int position)
-    {
+    protected int indexFromVectorPosition(int position) {
         return this.coordsPerVec * position;
     }
 
@@ -1087,133 +983,113 @@ public class VecBuffer
      *
      * @return the vector position.
      */
-    protected int vectorPositionFromIndex(int index)
-    {
+    protected int vectorPositionFromIndex(int index) {
         return index / this.coordsPerVec;
     }
 
     //**************************************************************//
     //********************  Iterators  *****************************//
     //**************************************************************//
+    protected class BasicIterator<T> implements Iterator<T> {
 
-    protected class BasicIterator<T> implements Iterator<T>
-    {
         protected int position;
         protected final int size;
         protected ElementAccessor<T> accessor;
 
-        public BasicIterator(ElementAccessor<T> accessor)
-        {
+        public BasicIterator(ElementAccessor<T> accessor) {
             this.position = -1;
             this.size = getSize();
             this.accessor = accessor;
         }
 
-        public boolean hasNext()
-        {
+        public boolean hasNext() {
             return this.position < (this.size - 1);
         }
 
-        public T next()
-        {
+        public T next() {
             this.position++;
 
-            if (this.position < this.size)
-            {
+            if (this.position < this.size) {
                 return this.accessor.getElement(this.position);
-            }
-            else
-            {
+            } else {
                 throw new NoSuchElementException();
             }
         }
 
-        public void remove()
-        {
+        public void remove() {
             throw new UnsupportedOperationException();
         }
     }
 
-    protected class ReverseIterator<T> implements Iterator<T>
-    {
+    protected class ReverseIterator<T> implements Iterator<T> {
+
         protected int position;
         protected ElementAccessor<T> accessor;
 
-        public ReverseIterator(ElementAccessor<T> accessor)
-        {
+        public ReverseIterator(ElementAccessor<T> accessor) {
             this.position = getSize();
             this.accessor = accessor;
         }
 
-        public boolean hasNext()
-        {
+        public boolean hasNext() {
             return this.position > 0;
         }
 
-        public T next()
-        {
+        public T next() {
             this.position--;
 
-            if (this.position >= 0)
-            {
+            if (this.position >= 0) {
                 return this.accessor.getElement(this.position);
-            }
-            else
-            {
+            } else {
                 throw new NoSuchElementException();
             }
         }
 
-        public void remove()
-        {
+        public void remove() {
             throw new UnsupportedOperationException();
         }
     }
 
-    protected interface ElementAccessor<T>
-    {
+    protected interface ElementAccessor<T> {
+
         T getElement(int position);
     }
 
-    protected class CoordAccessor implements ElementAccessor<double[]>
-    {
+    protected class CoordAccessor implements ElementAccessor<double[]> {
+
         private int numCoords;
 
-        public CoordAccessor(int minCoordsPerVec)
-        {
+        public CoordAccessor(int minCoordsPerVec) {
             this.numCoords = coordsPerVec;
-            if (this.numCoords < minCoordsPerVec)
+            if (this.numCoords < minCoordsPerVec) {
                 this.numCoords = minCoordsPerVec;
+            }
         }
 
-        public double[] getElement(int position)
-        {
+        public double[] getElement(int position) {
             double[] compArray = new double[this.numCoords];
             get(position, compArray);
             return compArray;
         }
     }
 
-    protected class VectorAccessor implements ElementAccessor<Vec4>
-    {
-        public Vec4 getElement(int position)
-        {
+    protected class VectorAccessor implements ElementAccessor<Vec4> {
+
+        public Vec4 getElement(int position) {
             return getVector(position);
         }
     }
 
-    protected class LocationAccessor implements ElementAccessor<LatLon>
-    {
-        public LatLon getElement(int position)
-        {
+    protected class LocationAccessor implements ElementAccessor<LatLon> {
+
+        public LatLon getElement(int position) {
             return getLocation(position);
         }
     }
 
-    protected class PositionAccessor implements ElementAccessor<Position>
-    {
-        public Position getElement(int position)
-        {
+    protected class PositionAccessor implements ElementAccessor<Position> {
+
+        public Position getElement(int position) {
             return getPosition(position);
         }
     }

@@ -15,7 +15,6 @@ import java.util.List;
  * @author brownrigg
  * @version $Id: RPFBoundingRectangleSection.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-
 public class RPFBoundingRectangleSection {
 
     public RPFBoundingRectangleSection(ByteBuffer buffer) {
@@ -32,8 +31,9 @@ public class RPFBoundingRectangleSection {
     }
 
     private void parseBoundsRecords(ByteBuffer buffer) {
-        for (int i=0; i<this.numberOfRecords; i++)
+        for (int i = 0; i < this.numberOfRecords; i++) {
             bndRectRecords.add(new RPFBoundingRectangleRecord(buffer));
+        }
     }
 
     public class RPFBoundingRectangleRecord {
@@ -93,13 +93,13 @@ public class RPFBoundingRectangleSection {
         private double ewRes;
         private double latInterval;
         private double lonInterval;
-        private long   numFramesNS;
-        private long   numFramesEW;
+        private long numFramesNS;
+        private long numFramesEW;
     }
 
     private long tableOffset;
     private int numberOfRecords;
     private int recordLength;
-    private ArrayList<RPFBoundingRectangleRecord> bndRectRecords =
-            new ArrayList<RPFBoundingRectangleRecord>();
+    private ArrayList<RPFBoundingRectangleRecord> bndRectRecords
+            = new ArrayList<RPFBoundingRectangleRecord>();
 }

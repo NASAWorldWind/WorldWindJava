@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml.io;
 
 import java.io.*;
@@ -15,8 +14,8 @@ import java.io.*;
  * @author tag
  * @version $Id: KMLDoc.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface KMLDoc
-{
+public interface KMLDoc {
+
     /**
      * Returns an {@link InputStream} to the associated KML document within either a KML file or stream or a KMZ file or
      * stream.
@@ -40,7 +39,7 @@ public interface KMLDoc
      * @return an input stream positioned to the start of the requested file, or null if the file cannot be found.
      *
      * @throws IllegalArgumentException if the path is null.
-     * @throws IOException              if an error occurs while attempting to create or open the input stream.
+     * @throws IOException if an error occurs while attempting to create or open the input stream.
      */
     InputStream getSupportFileStream(String path) throws IOException;
 

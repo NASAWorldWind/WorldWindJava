@@ -15,8 +15,8 @@ import gov.nasa.worldwind.util.Logging;
  * @author Tom Gaskins
  * @version $Id: PolarPoint.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class PolarPoint
-{
+public class PolarPoint {
+
     public static final PolarPoint ZERO = new PolarPoint(Angle.ZERO, Angle.ZERO, 0d);
 
     private final Angle latitude;
@@ -26,26 +26,24 @@ public class PolarPoint
     /**
      * Obtains a <code>PolarPoint</code> from radians and a radius.
      *
-     * @param latitude  the latitude in radians
+     * @param latitude the latitude in radians
      * @param longitude the longitude in radians
-     * @param radius    the distance form the center
+     * @param radius the distance form the center
      * @return a new <code>PolarPoint</code>
      */
-    public static PolarPoint fromRadians(double latitude, double longitude, double radius)
-    {
+    public static PolarPoint fromRadians(double latitude, double longitude, double radius) {
         return new PolarPoint(Angle.fromRadians(latitude), Angle.fromRadians(longitude), radius);
     }
 
     /**
      * Obtains a <code>PolarPoint</code> from degrees and a radius.
      *
-     * @param latitude  the latitude in degrees
+     * @param latitude the latitude in degrees
      * @param longitude the longitude in degrees
-     * @param radius    the distance form the center
+     * @param radius the distance form the center
      * @return a new <code>PolarPoint</code>
      */
-    public static PolarPoint fromDegrees(double latitude, double longitude, double radius)
-    {
+    public static PolarPoint fromDegrees(double latitude, double longitude, double radius) {
         return new PolarPoint(Angle.fromDegrees(latitude), Angle.fromDegrees(longitude), radius);
     }
 
@@ -56,10 +54,8 @@ public class PolarPoint
      * @return the cartesian point expressed as a polar point
      * @throws IllegalArgumentException if <code>cartesianPoint</code> is null
      */
-    public static PolarPoint fromCartesian(Vec4 cartesianPoint)
-    {
-        if (cartesianPoint == null)
-        {
+    public static PolarPoint fromCartesian(Vec4 cartesianPoint) {
+        if (cartesianPoint == null) {
             String message = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -76,8 +72,7 @@ public class PolarPoint
      * @param z the z coordinate of the cartesian point
      * @return a polar point located at (x,y,z) in cartesian space
      */
-    public static PolarPoint fromCartesian(double x, double y, double z)
-    {
+    public static PolarPoint fromCartesian(double x, double y, double z) {
         double radius = Math.sqrt(x * x + y * y + z * z);
         double latRads = Math.atan2(y, Math.sqrt(x * x + z * z));
         double lonRads = Math.atan2(x, z);
@@ -87,15 +82,13 @@ public class PolarPoint
     /**
      * Obtains a <code>PolarPoint</code> from two <code>angles</code> and a radius.
      *
-     * @param latitude  the latitude
+     * @param latitude the latitude
      * @param longitude the longitude
-     * @param radius    the distance from the center
+     * @param radius the distance from the center
      * @throws IllegalArgumentException if <code>latitude</code> or <code>longitude</code> is null
      */
-    public PolarPoint(Angle latitude, Angle longitude, double radius)
-    {
-        if (latitude == null || longitude == null)
-        {
+    public PolarPoint(Angle latitude, Angle longitude, double radius) {
+        if (latitude == null || longitude == null) {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -111,8 +104,7 @@ public class PolarPoint
      *
      * @return this polar point's latitude
      */
-    public final Angle getLatitude()
-    {
+    public final Angle getLatitude() {
         return this.latitude;
     }
 
@@ -121,8 +113,7 @@ public class PolarPoint
      *
      * @return this polar point's longitude
      */
-    public final Angle getLongitude()
-    {
+    public final Angle getLongitude() {
         return this.longitude;
     }
 
@@ -131,8 +122,7 @@ public class PolarPoint
      *
      * @return the distance from this polar point to its origin
      */
-    public final double getRadius()
-    {
+    public final double getRadius() {
         return radius;
     }
 
@@ -141,8 +131,7 @@ public class PolarPoint
      *
      * @return this polar point in cartesian coordinates
      */
-    public final Vec4 toCartesian()
-    {
+    public final Vec4 toCartesian() {
         return toCartesian(this.latitude, this.longitude, this.radius);
     }
 
@@ -150,16 +139,14 @@ public class PolarPoint
      * Obtains a cartesian point from a given latitude, longitude and distance from center. This method is equivalent
      * to, but may perform faster than <code>Vec4 p = new PolarPoint(latitude, longitude, radius).toCartesian()</code>
      *
-     * @param latitude  the latitude
+     * @param latitude the latitude
      * @param longitude the longitude
-     * @param radius    the distance from the origin
+     * @param radius the distance from the origin
      * @return a cartesian point from two angles and a radius
      * @throws IllegalArgumentException if <code>latitude</code> or <code>longitude</code> is null
      */
-    public static Vec4 toCartesian(Angle latitude, Angle longitude, double radius)
-    {
-        if (latitude == null || longitude == null)
-        {
+    public static Vec4 toCartesian(Angle latitude, Angle longitude, double radius) {
+        if (latitude == null || longitude == null) {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -172,29 +159,32 @@ public class PolarPoint
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
+        }
 
         final gov.nasa.worldwind.geom.PolarPoint that = (gov.nasa.worldwind.geom.PolarPoint) o;
 
-        if (Double.compare(that.radius, radius) != 0)
+        if (Double.compare(that.radius, radius) != 0) {
             return false;
-        if (!latitude.equals(that.latitude))
+        }
+        if (!latitude.equals(that.latitude)) {
             return false;
+        }
         //noinspection RedundantIfStatement
-        if (!longitude.equals(that.longitude))
+        if (!longitude.equals(that.longitude)) {
             return false;
+        }
 
         return true;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result;
         long temp;
         result = latitude.hashCode();
@@ -205,9 +195,8 @@ public class PolarPoint
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "(lat: " + this.latitude.toString() + ", lon: " + this.longitude.toString() + ", r: " + this.radius
-            + ")";
+                + ")";
     }
 }

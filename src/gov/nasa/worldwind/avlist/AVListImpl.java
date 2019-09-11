@@ -24,17 +24,18 @@ import java.util.logging.Level;
  * @author Tom Gaskins
  * @version $Id: AVListImpl.java 2255 2014-08-22 17:36:32Z tgaskins $
  */
-public class AVListImpl implements AVList
-{
+public class AVListImpl implements AVList {
+
     // Identifies the property change support instance in the avlist
     private static final String PROPERTY_CHANGE_SUPPORT = "avlist.PropertyChangeSupport";
 
     // To avoid unnecessary overhead, this object's hash map is created only if needed.
     private Map<String, Object> avList;
 
-    /** Creates an empty attribute-value list. */
-    public AVListImpl()
-    {
+    /**
+     * Creates an empty attribute-value list.
+     */
+    public AVListImpl() {
     }
 
     /**
@@ -42,21 +43,18 @@ public class AVListImpl implements AVList
      *
      * @param sourceBean The bean to be given as the source for any events.
      */
-    public AVListImpl(Object sourceBean)
-    {
-        if (sourceBean != null)
+    public AVListImpl(Object sourceBean) {
+        if (sourceBean != null) {
             this.setValue(PROPERTY_CHANGE_SUPPORT, new PropertyChangeSupport(sourceBean));
+        }
     }
 
-    private boolean hasAvList()
-    {
+    private boolean hasAvList() {
         return this.avList != null;
     }
 
-    private Map<String, Object> createAvList()
-    {
-        if (!this.hasAvList())
-        {
+    private Map<String, Object> createAvList() {
+        if (!this.hasAvList()) {
             // The map type used must accept null values. java.util.concurrent.ConcurrentHashMap does not.
             this.avList = new java.util.HashMap<String, Object>(1);
         }
@@ -64,64 +62,54 @@ public class AVListImpl implements AVList
         return this.avList;
     }
 
-    private Map<String, Object> avList(boolean createIfNone)
-    {
-        if (createIfNone && !this.hasAvList())
+    private Map<String, Object> avList(boolean createIfNone) {
+        if (createIfNone && !this.hasAvList()) {
             this.createAvList();
+        }
 
         return this.avList;
     }
 
-    synchronized public Object getValue(String key)
-    {
-        if (key == null)
-        {
+    synchronized public Object getValue(String key) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.AttributeKeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.hasAvList())
+        if (this.hasAvList()) {
             return this.avList.get(key);
+        }
 
         return null;
     }
 
-    synchronized public Collection<Object> getValues()
-    {
+    synchronized public Collection<Object> getValues() {
         return this.hasAvList() ? this.avList.values() : this.createAvList().values();
     }
 
-    synchronized public Set<Map.Entry<String, Object>> getEntries()
-    {
+    synchronized public Set<Map.Entry<String, Object>> getEntries() {
         return this.hasAvList() ? this.avList.entrySet() : this.createAvList().entrySet();
     }
 
-    synchronized public String getStringValue(String key)
-    {
-        if (key == null)
-        {
+    synchronized public String getStringValue(String key) {
+        if (key == null) {
             String msg = Logging.getMessage("nullValue.AttributeKeyIsNull");
             Logging.logger().severe(msg);
             throw new IllegalStateException(msg);
         }
-        try
-        {
+        try {
             Object value = this.getValue(key);
             return value != null ? value.toString() : null;
-        }
-        catch (ClassCastException e)
-        {
+        } catch (ClassCastException e) {
             String msg = Logging.getMessage("AVAAccessibleImpl.AttributeValueForKeyIsNotAString", key);
             Logging.logger().severe(msg);
             throw new WWRuntimeException(msg, e);
         }
     }
 
-    synchronized public Object setValue(String key, Object value)
-    {
-        if (key == null)
-        {
+    synchronized public Object setValue(String key, Object value) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.AttributeKeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -130,28 +118,23 @@ public class AVListImpl implements AVList
         return this.avList(true).put(key, value);
     }
 
-    synchronized public AVList setValues(AVList list)
-    {
-        if (list == null)
-        {
+    synchronized public AVList setValues(AVList list) {
+        if (list == null) {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         Set<Map.Entry<String, Object>> entries = list.getEntries();
-        for (Map.Entry<String, Object> entry : entries)
-        {
+        for (Map.Entry<String, Object> entry : entries) {
             this.setValue(entry.getKey(), entry.getValue());
         }
 
         return this;
     }
 
-    synchronized public boolean hasKey(String key)
-    {
-        if (key == null)
-        {
+    synchronized public boolean hasKey(String key) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -160,10 +143,8 @@ public class AVListImpl implements AVList
         return this.hasAvList() && this.avList.containsKey(key);
     }
 
-    synchronized public Object removeKey(String key)
-    {
-        if (key == null)
-        {
+    synchronized public Object removeKey(String key) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -172,12 +153,10 @@ public class AVListImpl implements AVList
         return this.hasKey(key) ? this.avList.remove(key) : null;
     }
 
-    synchronized public AVList copy()
-    {
+    synchronized public AVList copy() {
         AVListImpl clone = new AVListImpl();
 
-        if (this.avList != null)
-        {
+        if (this.avList != null) {
             clone.createAvList();
             clone.avList.putAll(this.avList);
         }
@@ -185,18 +164,16 @@ public class AVListImpl implements AVList
         return clone;
     }
 
-    synchronized public AVList clearList()
-    {
-        if (this.hasAvList())
+    synchronized public AVList clearList() {
+        if (this.hasAvList()) {
             this.avList.clear();
+        }
         return this;
     }
 
-    synchronized protected PropertyChangeSupport getChangeSupport()
-    {
+    synchronized protected PropertyChangeSupport getChangeSupport() {
         Object pcs = this.getValue(PROPERTY_CHANGE_SUPPORT);
-        if (pcs == null || !(pcs instanceof PropertyChangeSupport))
-        {
+        if (pcs == null || !(pcs instanceof PropertyChangeSupport)) {
             pcs = new PropertyChangeSupport(this);
             this.setValue(PROPERTY_CHANGE_SUPPORT, pcs);
         }
@@ -204,16 +181,13 @@ public class AVListImpl implements AVList
         return (PropertyChangeSupport) pcs;
     }
 
-    synchronized public void addPropertyChangeListener(String propertyName, java.beans.PropertyChangeListener listener)
-    {
-        if (propertyName == null)
-        {
+    synchronized public void addPropertyChangeListener(String propertyName, java.beans.PropertyChangeListener listener) {
+        if (propertyName == null) {
             String msg = Logging.getMessage("nullValue.PropertyNameIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (listener == null)
-        {
+        if (listener == null) {
             String msg = Logging.getMessage("nullValue.ListenerIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -222,16 +196,13 @@ public class AVListImpl implements AVList
     }
 
     synchronized public void removePropertyChangeListener(String propertyName,
-        java.beans.PropertyChangeListener listener)
-    {
-        if (propertyName == null)
-        {
+            java.beans.PropertyChangeListener listener) {
+        if (propertyName == null) {
             String msg = Logging.getMessage("nullValue.PropertyNameIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (listener == null)
-        {
+        if (listener == null) {
             String msg = Logging.getMessage("nullValue.ListenerIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -239,10 +210,8 @@ public class AVListImpl implements AVList
         this.getChangeSupport().removePropertyChangeListener(propertyName, listener);
     }
 
-    synchronized public void addPropertyChangeListener(java.beans.PropertyChangeListener listener)
-    {
-        if (listener == null)
-        {
+    synchronized public void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
+        if (listener == null) {
             String msg = Logging.getMessage("nullValue.ListenerIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -250,10 +219,8 @@ public class AVListImpl implements AVList
         this.getChangeSupport().addPropertyChangeListener(listener);
     }
 
-    synchronized public void removePropertyChangeListener(java.beans.PropertyChangeListener listener)
-    {
-        if (listener == null)
-        {
+    synchronized public void removePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+        if (listener == null) {
             String msg = Logging.getMessage("nullValue.ListenerIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -261,10 +228,8 @@ public class AVListImpl implements AVList
         this.getChangeSupport().removePropertyChangeListener(listener);
     }
 
-    public void firePropertyChange(java.beans.PropertyChangeEvent propertyChangeEvent)
-    {
-        if (propertyChangeEvent == null)
-        {
+    public void firePropertyChange(java.beans.PropertyChangeEvent propertyChangeEvent) {
+        if (propertyChangeEvent == null) {
             String msg = Logging.getMessage("nullValue.PropertyChangeEventIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -272,10 +237,8 @@ public class AVListImpl implements AVList
         this.getChangeSupport().firePropertyChange(propertyChangeEvent);
     }
 
-    public void firePropertyChange(String propertyName, Object oldValue, Object newValue)
-    {
-        if (propertyName == null)
-        {
+    public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+        if (propertyName == null) {
             String msg = Logging.getMessage("nullValue.PropertyNameIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -284,125 +247,114 @@ public class AVListImpl implements AVList
     }
 
     // Static AVList utilities.
-    public static String getStringValue(AVList avList, String key, String defaultValue)
-    {
+    public static String getStringValue(AVList avList, String key, String defaultValue) {
         String v = getStringValue(avList, key);
         return v != null ? v : defaultValue;
     }
 
-    public static String getStringValue(AVList avList, String key)
-    {
-        try
-        {
+    public static String getStringValue(AVList avList, String key) {
+        try {
             return avList.getStringValue(key);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public static Integer getIntegerValue(AVList avList, String key, Integer defaultValue)
-    {
+    public static Integer getIntegerValue(AVList avList, String key, Integer defaultValue) {
         Integer v = getIntegerValue(avList, key);
         return v != null ? v : defaultValue;
     }
 
-    public static Integer getIntegerValue(AVList avList, String key)
-    {
+    public static Integer getIntegerValue(AVList avList, String key) {
         Object o = avList.getValue(key);
-        if (o == null)
+        if (o == null) {
             return null;
+        }
 
-        if (o instanceof Integer)
+        if (o instanceof Integer) {
             return (Integer) o;
+        }
 
         String v = getStringValue(avList, key);
-        if (v == null)
+        if (v == null) {
             return null;
-
-        try
-        {
-            return Integer.parseInt(v);
         }
-        catch (NumberFormatException e)
-        {
+
+        try {
+            return Integer.parseInt(v);
+        } catch (NumberFormatException e) {
             Logging.logger().log(Level.SEVERE, "Configuration.ConversionError", v);
             return null;
         }
     }
 
-    public static Long getLongValue(AVList avList, String key, Long defaultValue)
-    {
+    public static Long getLongValue(AVList avList, String key, Long defaultValue) {
         Long v = getLongValue(avList, key);
         return v != null ? v : defaultValue;
     }
 
-    public static Long getLongValue(AVList avList, String key)
-    {
+    public static Long getLongValue(AVList avList, String key) {
         Object o = avList.getValue(key);
-        if (o == null)
+        if (o == null) {
             return null;
+        }
 
-        if (o instanceof Long)
+        if (o instanceof Long) {
             return (Long) o;
+        }
 
         String v = getStringValue(avList, key);
-        if (v == null)
+        if (v == null) {
             return null;
-
-        try
-        {
-            return Long.parseLong(v);
         }
-        catch (NumberFormatException e)
-        {
+
+        try {
+            return Long.parseLong(v);
+        } catch (NumberFormatException e) {
             Logging.logger().log(Level.SEVERE, "Configuration.ConversionError", v);
             return null;
         }
     }
 
-    public static Double getDoubleValue(AVList avList, String key, Double defaultValue)
-    {
+    public static Double getDoubleValue(AVList avList, String key, Double defaultValue) {
         Double v = getDoubleValue(avList, key);
         return v != null ? v : defaultValue;
     }
 
-    public static Double getDoubleValue(AVList avList, String key)
-    {
+    public static Double getDoubleValue(AVList avList, String key) {
         Object o = avList.getValue(key);
-        if (o == null)
+        if (o == null) {
             return null;
+        }
 
-        if (o instanceof Double)
+        if (o instanceof Double) {
             return (Double) o;
+        }
 
         String v = getStringValue(avList, key);
-        if (v == null)
+        if (v == null) {
             return null;
-
-        try
-        {
-            return Double.parseDouble(v);
         }
-        catch (NumberFormatException e)
-        {
+
+        try {
+            return Double.parseDouble(v);
+        } catch (NumberFormatException e) {
             Logging.logger().log(Level.SEVERE, "Configuration.ConversionError", v);
             return null;
         }
     }
 
     public void getRestorableStateForAVPair(String key, Object value, RestorableSupport rs,
-        RestorableSupport.StateObject context)
-    {
-        if (value == null)
+            RestorableSupport.StateObject context) {
+        if (value == null) {
             return;
+        }
 
-        if (key.equals(PROPERTY_CHANGE_SUPPORT))
+        if (key.equals(PROPERTY_CHANGE_SUPPORT)) {
             return;
+        }
 
-        if (rs == null)
-        {
+        if (rs == null) {
             String message = Logging.getMessage("nullValue.RestorableStateIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -411,31 +363,29 @@ public class AVListImpl implements AVList
         rs.addStateValueAsString(context, key, value.toString());
     }
 
-    public static Boolean getBooleanValue(AVList avList, String key, Boolean defaultValue)
-    {
+    public static Boolean getBooleanValue(AVList avList, String key, Boolean defaultValue) {
         Boolean v = getBooleanValue(avList, key);
         return v != null ? v : defaultValue;
     }
 
-    public static Boolean getBooleanValue(AVList avList, String key)
-    {
+    public static Boolean getBooleanValue(AVList avList, String key) {
         Object o = avList.getValue(key);
-        if (o == null)
+        if (o == null) {
             return null;
+        }
 
-        if (o instanceof Boolean)
+        if (o instanceof Boolean) {
             return (Boolean) o;
+        }
 
         String v = getStringValue(avList, key);
-        if (v == null)
+        if (v == null) {
             return null;
-
-        try
-        {
-            return Boolean.parseBoolean(v);
         }
-        catch (NumberFormatException e)
-        {
+
+        try {
+            return Boolean.parseBoolean(v);
+        } catch (NumberFormatException e) {
             Logging.logger().log(Level.SEVERE, "Configuration.ConversionError", v);
             return null;
         }

@@ -11,8 +11,8 @@ package gov.nasa.worldwind.retrieve;
  * @author Patrick Murris
  * @version $Id: Progress.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Progress
-{
+public class Progress {
+
     private long startTime;         // from System.currentTimeMillis
     private long lastUpdateTime;    // from System.currentTimeMillis
     private long totalSize;
@@ -20,69 +20,55 @@ public class Progress
     private long totalCount;
     private long currentCount;
 
-    public Progress()
-    {
+    public Progress() {
         this.startTime = System.currentTimeMillis();
     }
 
-    public long getStartTime()
-    {
+    public long getStartTime() {
         return this.startTime;
     }
 
-    public void setStartTime(long time)
-    {
+    public void setStartTime(long time) {
         this.startTime = time;
     }
 
-    public long getLastUpdateTime()
-    {
+    public long getLastUpdateTime() {
         return this.lastUpdateTime;
     }
 
-    public void setLastUpdateTime(long time)
-    {
+    public void setLastUpdateTime(long time) {
         this.lastUpdateTime = time;
     }
 
-    public long getTotalSize()
-    {
+    public long getTotalSize() {
         return this.totalSize;
     }
 
-    public void setTotalSize(long size)
-    {
+    public void setTotalSize(long size) {
         this.totalSize = size;
     }
 
-    public long getCurrentSize()
-    {
+    public long getCurrentSize() {
         return this.currentSize;
     }
 
-    public void setCurrentSize(long size)
-    {
+    public void setCurrentSize(long size) {
         this.currentSize = size;
     }
 
-    public long getTotalCount()
-    {
+    public long getTotalCount() {
         return this.totalCount;
     }
 
-    public void setTotalCount(long count)
-    {
+    public void setTotalCount(long count) {
         this.totalCount = count;
     }
 
-    public long getCurrentCount()
-    {
+    public long getCurrentCount() {
         return this.currentCount;
     }
 
-    public void setCurrentCount(long count)
-    {
+    public void setCurrentCount(long count) {
         this.currentCount = count;
     }
 }
-

@@ -21,8 +21,8 @@ import java.util.ArrayList;
  * @author Patrick Murris
  * @version $Id: StarsConvertor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class StarsConvertor
-{
+public class StarsConvertor {
+
     private static final float DEFAULT_RADIUS = 6356752 * 10;        // Earth radius x 10
 
     /**
@@ -30,8 +30,7 @@ public class StarsConvertor
      *
      * @param tsvFileName name of tsv text star file
      */
-    public static void convertTsvToDat(String tsvFileName)
-    {
+    public static void convertTsvToDat(String tsvFileName) {
         String datFileName = WWIO.replaceSuffix(tsvFileName, ".dat");
 
         convertTsvToDat(tsvFileName, datFileName, DEFAULT_RADIUS);
@@ -41,10 +40,9 @@ public class StarsConvertor
      * Convert star tsv text file to binary dat file
      *
      * @param tsvFileName name of tsv text star file
-     * @param radius      radius of star sphere
+     * @param radius radius of star sphere
      */
-    public static void convertTsvToDat(String tsvFileName, float radius)
-    {
+    public static void convertTsvToDat(String tsvFileName, float radius) {
         String datFileName = WWIO.replaceSuffix(tsvFileName, ".dat");
 
         convertTsvToDat(tsvFileName, datFileName, radius);
@@ -56,8 +54,7 @@ public class StarsConvertor
      * @param tsvFileName name of tsv text star file
      * @param datFileName name of dat binary star file
      */
-    public static void convertTsvToDat(String tsvFileName, String datFileName)
-    {
+    public static void convertTsvToDat(String tsvFileName, String datFileName) {
         convertTsvToDat(tsvFileName, datFileName, DEFAULT_RADIUS);
     }
 
@@ -66,21 +63,17 @@ public class StarsConvertor
      *
      * @param tsvFileName name of tsv text star file
      * @param datFileName name of dat binary star file
-     * @param radius      radius of star sphere
+     * @param radius radius of star sphere
      */
-    public static void convertTsvToDat(String tsvFileName, String datFileName, float radius)
-    {
+    public static void convertTsvToDat(String tsvFileName, String datFileName, float radius) {
         //Convert the Tsv Star file to a ByteBuffer in little-endian order
         ByteBuffer bbuf = convertTsvToByteBuffer(tsvFileName, radius);
 
-        try
-        {
+        try {
             WWIO.saveBuffer(bbuf, new File(datFileName));
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("generic.ExceptionAttemptingToWriteTo", datFileName), e);
+                    Logging.getMessage("generic.ExceptionAttemptingToWriteTo", datFileName), e);
         }
     }
 
@@ -91,8 +84,7 @@ public class StarsConvertor
      *
      * @return ByteBuffer with interleaved color and vertex positions as floats in little-endian order
      */
-    public static ByteBuffer convertTsvToByteBuffer(String starsFileName)
-    {
+    public static ByteBuffer convertTsvToByteBuffer(String starsFileName) {
         return convertTsvToByteBuffer(starsFileName, DEFAULT_RADIUS);
     }
 
@@ -100,30 +92,27 @@ public class StarsConvertor
      * Converts a Stars tsv file to a ByteBuffer
      *
      * @param starsFileName filename of tsv file
-     * @param radius        radius of the sphere on which to paint stars
+     * @param radius radius of the sphere on which to paint stars
      *
      * @return ByteBuffer with interleaved color and vertex positions as floats in little-endian order
      */
-    public static ByteBuffer convertTsvToByteBuffer(String starsFileName, float radius)
-    {
-        try
-        {
+    public static ByteBuffer convertTsvToByteBuffer(String starsFileName, float radius) {
+        try {
             ArrayList<Float> tmpBuffer = new ArrayList<Float>();
 
             InputStream starsStream = StarsConvertor.class.getResourceAsStream("/" + starsFileName);
 
-            if (starsStream == null)
-            {
+            if (starsStream == null) {
                 File starsFile = new File(starsFileName);
-                if (starsFile.exists())
-                {
+                if (starsFile.exists()) {
                     starsStream = new FileInputStream(starsFile);
                 }
             }
 
-            if (starsStream == null)
-                // TODO: logger error
+            if (starsStream == null) // TODO: logger error
+            {
                 return null;
+            }
 
             BufferedReader starsReader = new BufferedReader(new InputStreamReader(starsStream));
 
@@ -139,12 +128,13 @@ public class StarsConvertor
             //Add the radius as the first value
             tmpBuffer.add(radius);
 
-            while ((line = starsReader.readLine()) != null)
-            {
-                if (line.length() < 3)
+            while ((line = starsReader.readLine()) != null) {
+                if (line.length() < 3) {
                     continue;
-                if (line.substring(0, 1).equals("#"))
+                }
+                if (line.substring(0, 1).equals("#")) {
                     continue;
+                }
                 if (isData) // Star data here
                 {
                     // Split data in ';' separated values
@@ -167,22 +157,21 @@ public class StarsConvertor
                     double DEm = Double.parseDouble(DEdms.substring(4, 6));
                     double DEs = Double.parseDouble(DEdms.substring(7));
                     latitude = DEd + (DEm / 60) + (DEs / 3600);
-                    if (DEsign.equals("-"))
+                    if (DEsign.equals("-")) {
                         latitude *= -1;
+                    }
                     // compute aparent magnitude -1.5 - 10 to grayscale 0 - 255
                     double VM = Double.parseDouble(Vmag);
                     double Vdec = 255 - ((VM + 1.5) * 255 / 10);
-                    if (Vdec > 255)
+                    if (Vdec > 255) {
                         Vdec = 255;
+                    }
                     Vdec /= 255;    // scale back to 0.0 - 1.0
                     // convert B-V  -0.5 - 4 for rgb color select
                     double BVdec;
-                    try
-                    {
+                    try {
                         BVdec = Double.parseDouble(BV);
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         BVdec = 0;
                     }
 
@@ -200,8 +189,9 @@ public class StarsConvertor
                 }
 
                 // Data starting next line
-                if (line.substring(0, 3).equals("---"))
+                if (line.substring(0, 3).equals("---")) {
                     isData = true;
+                }
             }
 
             starsReader.close();
@@ -210,24 +200,19 @@ public class StarsConvertor
             buf.order(ByteOrder.LITTLE_ENDIAN);
             FloatBuffer fBuf = buf.asFloatBuffer();
 
-            for (Float fVal : tmpBuffer)
-            {
+            for (Float fVal : tmpBuffer) {
                 fBuf.put(fVal);
             }
 
             buf.rewind();
 
             return buf;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             // TODO: Log proper message
             //String message = WorldWind.retrieveErrMsg("generic.IOExceptionWhileLoadingData");
             String message = "IOException while loading stars data from " + starsFileName;
             Logging.logger().severe(message);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = "Error while loading stars data from " + starsFileName;
             Logging.logger().severe(message);
         }
@@ -238,23 +223,22 @@ public class StarsConvertor
     /**
      * Converts position in spherical coordinates (lat/lon/radius) to cartesian (XYZ) coordinates.
      *
-     * @param latitude  Latitude in decimal degrees
+     * @param latitude Latitude in decimal degrees
      * @param longitude Longitude in decimal degrees
-     * @param radius    Radius
+     * @param radius Radius
      *
      * @return the corresponding Point
      */
-    private static Vec4 SphericalToCartesian(double latitude, double longitude, float radius)
-    {
+    private static Vec4 SphericalToCartesian(double latitude, double longitude, float radius) {
         latitude *= Math.PI / 180.0f;
         longitude *= Math.PI / 180.0f;
 
         double radCosLat = radius * Math.cos(latitude);
 
         return new Vec4(
-            radCosLat * Math.sin(longitude),
-            (double) radius * Math.sin(latitude),
-            radCosLat * Math.cos(longitude));
+                radCosLat * Math.sin(longitude),
+                (double) radius * Math.sin(latitude),
+                radCosLat * Math.cos(longitude));
     }
 
     /**
@@ -264,35 +248,34 @@ public class StarsConvertor
      *
      * @return the corresponding Color
      */
-    private static Color BVColor(double BV)
-    {
+    private static Color BVColor(double BV) {
         // TODO: interpolate between values
-        if (BV < 0)
+        if (BV < 0) {
             return new Color(.635f, .764f, .929f);            // Light blue
-        else if (BV < .5)
+        } else if (BV < .5) {
             return new Color(1f, 1f, 1f);                // White
-        else if (BV < 1)
+        } else if (BV < 1) {
             return new Color(1f, .984f, .266f);            // Yellow
-        else if (BV < 1.5)
+        } else if (BV < 1.5) {
             return new Color(.964f, .725f, .0784f);    // Orange
-        else
+        } else {
             return new Color(.921f, .376f, .0392f);                // Redish
+        }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(true);
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fileChooser.setMultiSelectionEnabled(true);
 
         int status = fileChooser.showOpenDialog(null);
-        if (status != JFileChooser.APPROVE_OPTION)
+        if (status != JFileChooser.APPROVE_OPTION) {
             return;
+        }
 
         File[] files = fileChooser.getSelectedFiles();
-        if (files == null)
-        {
+        if (files == null) {
             System.out.println("No files selected");
             return;
         }
@@ -302,26 +285,21 @@ public class StarsConvertor
 
         float radius;
 
-        while (true)
-        {
-            try
-            {
+        while (true) {
+            try {
                 radius = Float.parseFloat(ans);
                 break;
-            }
-            catch (NumberFormatException e)
-            {
+            } catch (NumberFormatException e) {
                 String message = Logging.getMessage("generic.NumberFormatException");
                 Logging.logger().warning(message);
 
                 ans = JOptionPane.showInputDialog(
-                    "<html><font color=#ff0000>INVALID VALUE: Please enter a floating point number."
+                        "<html><font color=#ff0000>INVALID VALUE: Please enter a floating point number."
                         + "</font><br>Enter star sphere radius?</html>", DEFAULT_RADIUS);
             }
         }
 
-        for (File file : files)
-        {
+        for (File file : files) {
             convertTsvToDat(file.getAbsolutePath(), radius);
         }
     }

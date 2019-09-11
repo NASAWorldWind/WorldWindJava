@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525;
 
 import gov.nasa.worldwind.symbology.milstd2525.graphics.*;
@@ -18,43 +17,36 @@ import static org.junit.Assert.*;
  * supported. Update this list when new graphics are implemented.
  */
 @RunWith(JUnit4.class)
-public class MilStd2525TacticalGraphicFactoryTest
-{
+public class MilStd2525TacticalGraphicFactoryTest {
+
     @Test
-    public void testGraphicSupported() throws IllegalAccessException
-    {
+    public void testGraphicSupported() throws IllegalAccessException {
         MilStd2525GraphicFactory factory = new MilStd2525GraphicFactory();
         assertTrue(factory.isSupported("GFGPGLP----AUSX"));
     }
 
     @Test
-    public void testGraphicNotSupported() throws IllegalAccessException
-    {
+    public void testGraphicNotSupported() throws IllegalAccessException {
         MilStd2525GraphicFactory factory = new MilStd2525GraphicFactory();
         assertFalse(factory.isSupported("GFGPXXX----AUSX")); // Non-existent function ID.
     }
 
     @Test
-    public void testTacGrp()
-    {
+    public void testTacGrp() {
         MilStd2525GraphicFactory factory = new MilStd2525GraphicFactory();
 
-        for (String id : ALL_SUPPORTED_TACGRP)
-        {
+        for (String id : ALL_SUPPORTED_TACGRP) {
             StringBuilder sidc = new StringBuilder(id);
 
-            for (char stdId : TacGrpSidcTest.ALL_STANDARD_IDENTITY)
-            {
-                for (char status : TacGrpSidcTest.ALL_STATUS)
-                {
-                    for (char echelon : TacGrpSidcTest.ALL_ECHELON)
-                    {
+            for (char stdId : TacGrpSidcTest.ALL_STANDARD_IDENTITY) {
+                for (char status : TacGrpSidcTest.ALL_STATUS) {
+                    for (char echelon : TacGrpSidcTest.ALL_ECHELON) {
                         sidc.setCharAt(1, stdId);
                         sidc.setCharAt(3, status);
                         sidc.setCharAt(11, echelon);
 
                         assertTrue("Missing graphic: " + sidc.toString(),
-                            factory.isSupported(sidc.toString()));
+                                factory.isSupported(sidc.toString()));
                     }
                 }
             }
@@ -62,18 +54,14 @@ public class MilStd2525TacticalGraphicFactoryTest
     }
 
     @Test
-    public void testEms()
-    {
+    public void testEms() {
         MilStd2525GraphicFactory factory = new MilStd2525GraphicFactory();
 
-        for (String id : ALL_SUPPORTED_EMS)
-        {
+        for (String id : ALL_SUPPORTED_EMS) {
             StringBuilder sidc = new StringBuilder(id);
 
-            for (char stdId : TacGrpSidcTest.ALL_STANDARD_IDENTITY)
-            {
-                for (char status : new char[] {'A', 'P'})
-                {
+            for (char stdId : TacGrpSidcTest.ALL_STANDARD_IDENTITY) {
+                for (char status : new char[]{'A', 'P'}) {
                     sidc.setCharAt(1, stdId);
                     sidc.setCharAt(3, status);
 
@@ -84,19 +72,18 @@ public class MilStd2525TacticalGraphicFactoryTest
     }
 
     @Test
-    public void testMetoc()
-    {
+    public void testMetoc() {
         MilStd2525GraphicFactory factory = new MilStd2525GraphicFactory();
 
-        for (String id : ALL_SUPPORTED_METOC)
-        {
+        for (String id : ALL_SUPPORTED_METOC) {
             assertTrue("Missing graphic: " + id, factory.isSupported(id));
         }
     }
 
     /**
      * All graphics from Appendix B that have been implemented. Update this list when new graphics are implemented. This
-     * list should match the list of supported graphics at https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphic-status/
+     * list should match the list of supported graphics at
+     * https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphic-status/
      */
     private static final String[] ALL_SUPPORTED_TACGRP = {
         TacGrpSidc.TSK_DSTY,
@@ -437,7 +424,9 @@ public class MilStd2525TacticalGraphicFactoryTest
         TacGrpSidc.OTH_FIX_EOP
     };
 
-    /** All graphics from Appendix C that have been implemented. */
+    /**
+     * All graphics from Appendix C that have been implemented.
+     */
     private static final String[] ALL_SUPPORTED_METOC = {
         MetocSidc.AMPHC_PRS_LOWCTR,
         MetocSidc.AMPHC_PRS_LOWCTR_CYC,
@@ -614,7 +603,9 @@ public class MilStd2525TacticalGraphicFactoryTest
         MetocSidc.OCA_MMD_PLE
     };
 
-    /** All graphics from Appendix G that have been implemented. */
+    /**
+     * All graphics from Appendix G that have been implemented.
+     */
     private static final String[] ALL_SUPPORTED_EMS = {
         EmsSidc.NATEVT_GEO_AFTSHK,
         EmsSidc.NATEVT_GEO_AVL,

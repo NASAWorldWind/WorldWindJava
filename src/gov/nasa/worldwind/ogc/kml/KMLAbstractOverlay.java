@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -12,30 +11,26 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLAbstractOverlay.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class KMLAbstractOverlay extends KMLAbstractFeature
-{
+public abstract class KMLAbstractOverlay extends KMLAbstractFeature {
+
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    protected KMLAbstractOverlay(String namespaceURI)
-    {
+    protected KMLAbstractOverlay(String namespaceURI) {
         super(namespaceURI);
     }
 
-    public String getColor()
-    {
+    public String getColor() {
         return (String) this.getField("color");
     }
 
-    public Integer getDrawOrder()
-    {
+    public Integer getDrawOrder() {
         return (Integer) this.getField("drawOrder");
     }
 
-    public KMLIcon getIcon()
-    {
+    public KMLIcon getIcon() {
         return (KMLIcon) this.getField("Icon");
     }
 }

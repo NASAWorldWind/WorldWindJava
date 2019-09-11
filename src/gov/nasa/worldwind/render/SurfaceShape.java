@@ -21,8 +21,8 @@ import gov.nasa.worldwind.globes.Globe;
  * @version $Id: SurfaceShape.java 2339 2014-09-22 18:22:37Z tgaskins $
  */
 public interface SurfaceShape
-    extends SurfaceObject, Highlightable, ExtentHolder, MeasurableArea, MeasurableLength, Restorable, Attributable
-{
+        extends SurfaceObject, Highlightable, ExtentHolder, MeasurableArea, MeasurableLength, Restorable, Attributable {
+
     /**
      * Indicates whether to highlight the surface shape.
      *
@@ -133,7 +133,7 @@ public interface SurfaceShape
      * @param maxEdgeIntervals the maximum number of interpolated edge intervals.
      *
      * @throws IllegalArgumentException if either of <code>minEdgeIntervals</code> or <code>maxEdgeIntervals</code> is
-     *                                  less than or equal to zero.
+     * less than or equal to zero.
      * @see #setTexelsPerEdgeInterval(double)
      */
     void setMinAndMaxEdgeIntervals(int minEdgeIntervals, int maxEdgeIntervals);
@@ -154,11 +154,11 @@ public interface SurfaceShape
      * Returns the shapes's area in square meters. If <code>terrainConformant</code> is true, the area returned is the
      * surface area of the terrain, including its hillsides and other undulations.
      *
-     * @param globe             the globe the shape is related to.
+     * @param globe the globe the shape is related to.
      * @param terrainConformant whether or not the returned area should treat the shape as conforming to the terrain.
      *
      * @return the shape's area in square meters. Returns -1 if the object does not form an area due to an insufficient
-     *         number of vertices or any other condition.
+     * number of vertices or any other condition.
      *
      * @throws IllegalArgumentException if <code>globe</code> is null.
      */

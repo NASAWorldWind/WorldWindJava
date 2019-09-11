@@ -78,8 +78,8 @@ package gov.nasa.worldwind.util.combine;
  * @see gov.nasa.worldwind.util.combine.CombineContext
  * @see gov.nasa.worldwind.util.combine.ShapeCombiner
  */
-public interface Combinable
-{
+public interface Combinable {
+
     /**
      * Causes this Combinable to draw its contours using the GLU tessellator attached to the provided CombineContext.
      * When the CombineContext is in bounding sector mode, this adds the Combinable's geographic bounding sector to the

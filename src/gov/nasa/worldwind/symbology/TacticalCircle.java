@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology;
 
 /**
@@ -13,10 +12,10 @@ package gov.nasa.worldwind.symbology;
  * @author pabercrombie
  * @version $Id: TacticalCircle.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see TacticalGraphicFactory#createCircle(String, gov.nasa.worldwind.geom.Position, double,
- *      gov.nasa.worldwind.avlist.AVList)
+ * gov.nasa.worldwind.avlist.AVList)
  */
-public interface TacticalCircle extends TacticalPoint
-{
+public interface TacticalCircle extends TacticalPoint {
+
     /**
      * Indicates the radius of this circle. Calling this method is equivalent to calling
      * <code>getModifier(SymbologyConstants.DISTANCE )</code>.

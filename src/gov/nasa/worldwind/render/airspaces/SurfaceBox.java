@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render.airspaces;
 
 import gov.nasa.worldwind.geom.*;
@@ -14,8 +13,8 @@ import gov.nasa.worldwind.util.*;
 import com.jogamp.opengl.GL2;
 import java.util.*;
 
-public class SurfaceBox extends AbstractSurfaceShape
-{
+public class SurfaceBox extends AbstractSurfaceShape {
+
     protected List<LatLon> locations;
     protected int lengthSegments;
     protected int widthSegments;
@@ -24,87 +23,73 @@ public class SurfaceBox extends AbstractSurfaceShape
     protected boolean enableCenterLine;
     protected List<List<LatLon>> activeCenterLineGeometry = new ArrayList<List<LatLon>>(); // re-determined each frame
 
-    public SurfaceBox()
-    {
+    public SurfaceBox() {
     }
 
-    public List<LatLon> getLocations()
-    {
+    public List<LatLon> getLocations() {
         return this.locations;
     }
 
-    public void setLocations(List<LatLon> locations)
-    {
+    public void setLocations(List<LatLon> locations) {
         this.locations = locations;
         this.onShapeChanged();
     }
 
-    public int getLengthSegments()
-    {
+    public int getLengthSegments() {
         return this.lengthSegments;
     }
 
-    public void setLengthSegments(int lengthSegments)
-    {
+    public void setLengthSegments(int lengthSegments) {
         this.lengthSegments = lengthSegments;
         this.onShapeChanged();
     }
 
-    public int getWidthSegments()
-    {
+    public int getWidthSegments() {
         return this.widthSegments;
     }
 
-    public void setWidthSegments(int widthSegments)
-    {
+    public void setWidthSegments(int widthSegments) {
         this.widthSegments = widthSegments;
         this.onShapeChanged();
     }
 
-    public boolean[] isEnableCaps()
-    {
-        return new boolean[] {this.enableStartCap, this.enableEndCap};
+    public boolean[] isEnableCaps() {
+        return new boolean[]{this.enableStartCap, this.enableEndCap};
     }
 
-    public void setEnableCaps(boolean enableStartCap, boolean enableEndCap)
-    {
+    public void setEnableCaps(boolean enableStartCap, boolean enableEndCap) {
         this.enableStartCap = enableStartCap;
         this.enableEndCap = enableEndCap;
         this.onShapeChanged();
     }
 
-    public boolean isEnableCenterLine()
-    {
+    public boolean isEnableCenterLine() {
         return this.enableCenterLine;
     }
 
-    public void setEnableCenterLine(boolean enable)
-    {
+    public void setEnableCenterLine(boolean enable) {
         this.enableCenterLine = enable;
     }
 
     @Override
-    public Position getReferencePosition()
-    {
+    public Position getReferencePosition() {
         return this.locations != null && this.locations.size() > 0 ? new Position(this.locations.get(0), 0) : null;
     }
 
     @Override
-    protected void doMoveTo(Position oldReferencePosition, Position newReferencePosition)
-    {
+    protected void doMoveTo(Position oldReferencePosition, Position newReferencePosition) {
         // Intentionally left blank.
     }
 
     @Override
-    protected void doMoveTo(Globe globe, Position oldReferencePosition, Position newReferencePosition)
-    {
+    protected void doMoveTo(Globe globe, Position oldReferencePosition, Position newReferencePosition) {
         // Intentionally left blank.
     }
 
-    protected List<List<LatLon>> createGeometry(Globe globe, double edgeIntervalsPerDegree)
-    {
-        if (this.locations == null)
+    protected List<List<LatLon>> createGeometry(Globe globe, double edgeIntervalsPerDegree) {
+        if (this.locations == null) {
             return null;
+        }
 
         ArrayList<List<LatLon>> geom = new ArrayList<List<LatLon>>();
 
@@ -112,8 +97,7 @@ public class SurfaceBox extends AbstractSurfaceShape
         ArrayList<LatLon> interior = new ArrayList<LatLon>();
         geom.add(interior);
 
-        for (int i = 0; i < this.locations.size() - 1; i++)
-        {
+        for (int i = 0; i < this.locations.size() - 1; i++) {
             LatLon a = this.locations.get(i);
             LatLon b = this.locations.get(i + 1); // first and last location are the same
             interior.add(a);
@@ -125,10 +109,8 @@ public class SurfaceBox extends AbstractSurfaceShape
         boolean[] sideFlag = {this.enableStartCap, true, this.enableEndCap, true};
 
         int offset = 0;
-        for (int i = 0; i < 4; i++)
-        {
-            if (sideFlag[i])
-            {
+        for (int i = 0; i < 4; i++) {
+            if (sideFlag[i]) {
                 geom.add(this.makeLocations(offset, sideSegments[i], edgeIntervalsPerDegree));
             }
 
@@ -147,35 +129,34 @@ public class SurfaceBox extends AbstractSurfaceShape
         return geom;
     }
 
-    protected ArrayList<LatLon> makeLocations(int offset, int count, double edgeIntervalsPerDegree)
-    {
+    protected ArrayList<LatLon> makeLocations(int offset, int count, double edgeIntervalsPerDegree) {
         ArrayList<LatLon> locations = new ArrayList<LatLon>();
 
-        for (int i = offset; i < offset + count; i++)
-        {
+        for (int i = offset; i < offset + count; i++) {
             LatLon a = this.locations.get(i);
             LatLon b = this.locations.get(i + 1);
 
             locations.add(a);
             this.addIntermediateLocations(a, b, edgeIntervalsPerDegree, locations);
 
-            if (i == offset + count - 1)
+            if (i == offset + count - 1) {
                 locations.add(b);
+            }
         }
 
         return locations;
     }
 
     @Override
-    protected void determineActiveGeometry(DrawContext dc, SurfaceTileDrawContext sdc)
-    {
+    protected void determineActiveGeometry(DrawContext dc, SurfaceTileDrawContext sdc) {
         this.activeGeometry.clear();
         this.activeOutlineGeometry.clear();
         this.activeCenterLineGeometry.clear();
 
         List<List<LatLon>> geom = this.getCachedGeometry(dc, sdc); // calls createGeometry
-        if (geom == null)
+        if (geom == null) {
             return;
+        }
 
         int index = 0; // interior geometry stored in index 0
         List<LatLon> interior = geom.get(index++);
@@ -183,13 +164,9 @@ public class SurfaceBox extends AbstractSurfaceShape
         if (pole != null) // interior compensates for poles and dateline crossing, see WWJ-284
         {
             this.activeGeometry.add(this.cutAlongDateLine(interior, pole, dc.getGlobe()));
-        }
-        else if (LatLon.locationsCrossDateLine(interior))
-        {
+        } else if (LatLon.locationsCrossDateLine(interior)) {
             this.activeGeometry.addAll(this.repeatAroundDateline(interior));
-        }
-        else
-        {
+        } else {
             this.activeGeometry.add(interior);
         }
 
@@ -199,9 +176,7 @@ public class SurfaceBox extends AbstractSurfaceShape
             if (LatLon.locationsCrossDateLine(outline)) // outlines compensate for dateline crossing, see WWJ-452
             {
                 this.activeOutlineGeometry.addAll(this.repeatAroundDateline(outline));
-            }
-            else
-            {
+            } else {
                 this.activeOutlineGeometry.add(outline);
             }
         }
@@ -212,39 +187,33 @@ public class SurfaceBox extends AbstractSurfaceShape
             if (LatLon.locationsCrossDateLine(centerLine)) // outlines compensate for dateline crossing, see WWJ-452
             {
                 this.activeCenterLineGeometry.addAll(this.repeatAroundDateline(centerLine));
-            }
-            else
-            {
+            } else {
                 this.activeCenterLineGeometry.add(centerLine);
             }
         }
     }
 
-    protected void drawOutline(DrawContext dc, SurfaceTileDrawContext sdc)
-    {
+    protected void drawOutline(DrawContext dc, SurfaceTileDrawContext sdc) {
         super.drawOutline(dc, sdc);
 
-        if (this.enableCenterLine)
-        {
+        if (this.enableCenterLine) {
             this.drawCenterLine(dc);
         }
     }
 
-    protected void drawCenterLine(DrawContext dc)
-    {
-        if (this.activeCenterLineGeometry.isEmpty())
+    protected void drawCenterLine(DrawContext dc) {
+        if (this.activeCenterLineGeometry.isEmpty()) {
             return;
+        }
 
         this.applyCenterLineState(dc, this.getActiveAttributes());
 
-        for (List<LatLon> drawLocations : this.activeCenterLineGeometry)
-        {
+        for (List<LatLon> drawLocations : this.activeCenterLineGeometry) {
             this.drawLineStrip(dc, drawLocations);
         }
     }
 
-    protected void applyCenterLineState(DrawContext dc, ShapeAttributes attributes)
-    {
+    protected void applyCenterLineState(DrawContext dc, ShapeAttributes attributes) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         if (!dc.isPickingMode() && attributes.getOutlineStippleFactor() <= 0) // don't override stipple in attributes
@@ -255,10 +224,8 @@ public class SurfaceBox extends AbstractSurfaceShape
     }
 
     @Override
-    public Iterable<? extends LatLon> getLocations(Globe globe)
-    {
-        if (globe == null)
-        {
+    public Iterable<? extends LatLon> getLocations(Globe globe) {
+        if (globe == null) {
             String message = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);

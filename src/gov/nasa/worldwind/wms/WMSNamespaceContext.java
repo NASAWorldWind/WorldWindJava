@@ -16,8 +16,8 @@ import javax.xml.XMLConstants;
  * @author dcollins
  * @version $Id: WMSNamespaceContext.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class WMSNamespaceContext extends BasicNamespaceContext
-{
+public class WMSNamespaceContext extends BasicNamespaceContext {
+
     public static final String WMS_NS_PREFIX = "wms";
     public static final String WMS_NS_URI = "http://www.opengis.net/wms";
 
@@ -28,8 +28,7 @@ public class WMSNamespaceContext extends BasicNamespaceContext
      * <tr><th>Prefix</th><th>URI</th></tr> <tr><td>wms</td><td>http://www.opengis.net/wms</td></tr>
      * <tr><td><code>DEFAULT_NS_PREFIX ("")</code></td><td>http://www.opengis.net/wms</td></tr> </table>
      */
-    public WMSNamespaceContext()
-    {
+    public WMSNamespaceContext() {
         this.addNamespace(WMS_NS_PREFIX, WMS_NS_URI);
         this.addNamespace(XMLConstants.DEFAULT_NS_PREFIX, WMS_NS_URI);
     }

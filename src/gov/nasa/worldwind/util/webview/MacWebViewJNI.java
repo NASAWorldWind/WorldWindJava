@@ -18,16 +18,12 @@ import java.util.logging.Level;
  * @author dcollins
  * @version $Id: MacWebViewJNI.java 1948 2014-04-19 20:02:38Z dcollins $
  */
-public class MacWebViewJNI
-{
-    static
-    {
-        try
-        {
+public class MacWebViewJNI {
+
+    static {
+        try {
             System.loadLibrary("webview");
-        }
-        catch (Throwable t)
-        {
+        } catch (Throwable t) {
             String message = Logging.getMessage("WebView.ExceptionCreatingWebView", t);
             Logging.logger().log(Level.SEVERE, message, t);
         }
@@ -42,7 +38,7 @@ public class MacWebViewJNI
     public static native void setHTMLStringWithBaseURL(long webViewWindowPtr, String htmlString, URL baseURL);
 
     public static native void setHTMLStringWithResourceResolver(long webViewWindowPtr, String htmlString,
-        WebResourceResolver resourceResolver);
+            WebResourceResolver resourceResolver);
 
     public static native Dimension getFrameSize(long webViewWindowPtr);
 

@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.cache;
 
 import com.jogamp.opengl.util.texture.Texture;
@@ -16,9 +15,11 @@ import com.jogamp.opengl.util.texture.Texture;
  * @author tag
  * @version $Id: GpuResourceCache.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface GpuResourceCache
-{
-    /** Identifies resources as textures. Corresponding object must be of type {@link Texture}. */
+public interface GpuResourceCache {
+
+    /**
+     * Identifies resources as textures. Corresponding object must be of type {@link Texture}.
+     */
     public static final String TEXTURE = "gov.nasa.worldwind.cache.GpuResourceCache.Texture";
 
     /**
@@ -35,10 +36,10 @@ public interface GpuResourceCache
     /**
      * Adds a new resource to this cache.
      *
-     * @param key          the  key identifying the resource.
-     * @param resource     the resource cached.
+     * @param key the key identifying the resource.
+     * @param resource the resource cached.
      * @param resourceType the type of resource, one of the resource-type constants described above.
-     * @param size         the size of the resource, expressed as the number of bytes it requires on the GPU.
+     * @param size the size of the resource, expressed as the number of bytes it requires on the GPU.
      *
      * @see #put(Object, com.jogamp.opengl.util.texture.Texture)
      */
@@ -47,7 +48,7 @@ public interface GpuResourceCache
     /**
      * Add a resource to this cache.
      *
-     * @param key     the key identifying the resource.
+     * @param key the key identifying the resource.
      * @param texture the resource to add to this cache.
      *
      * @throws IllegalArgumentException if either argument is null.
@@ -79,7 +80,7 @@ public interface GpuResourceCache
      *
      * @param key the texture resource's key.
      *
-     * @return the  texture resource associated with the key, or null if the key is not found in the cache.
+     * @return the texture resource associated with the key, or null if the key is not found in the cache.
      *
      * @throws IllegalArgumentException if the key is null.
      */
@@ -94,7 +95,9 @@ public interface GpuResourceCache
      */
     void remove(Object key);
 
-    /** Removes all entries from this cache. */
+    /**
+     * Removes all entries from this cache.
+     */
     void clear();
 
     /**
@@ -115,7 +118,7 @@ public interface GpuResourceCache
      * Indicates the amount of memory used by cached objects in this cache.
      *
      * @return the number of bytes of memory used by objects in this cache, as determined by the size associated with
-     *         each resource.
+     * each resource.
      *
      * @see #getCapacity()
      */
@@ -136,7 +139,7 @@ public interface GpuResourceCache
      * its low water level is reached.
      *
      * @param newCapacity the number of bytes allowed for the cache's resources. Values less than or equal to 0 are
-     *                    ignored and cause no change to this cache's capacity.
+     * ignored and cause no change to this cache's capacity.
      *
      * @see #setLowWater(long)
      */
@@ -147,7 +150,7 @@ public interface GpuResourceCache
      * existing resources are removed until the amount of memory used is at or below the low water size.
      *
      * @param loWater the size to reduce this cache to when added resources would exceed the cache's capacity. Values
-     *                less than or equal to 0 are ignored and cause no change to this cache's low water size.
+     * less than or equal to 0 are ignored and cause no change to this cache's low water size.
      *
      * @see #setCapacity(long)
      * @see #remove(Object)

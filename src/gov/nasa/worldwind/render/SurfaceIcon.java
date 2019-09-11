@@ -23,8 +23,8 @@ import java.util.List;
  * @author Patrick Murris
  * @version $Id: SurfaceIcon.java 1772 2013-12-18 02:43:27Z tgaskins $
  */
-public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, Draggable
-{
+public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, Draggable {
+
     private Object imageSource;
     private boolean useMipMaps = true;
     private LatLon location;
@@ -42,16 +42,15 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     protected boolean dragEnabled = true;
     protected DraggableSupport draggableSupport = null;
 
-    public SurfaceIcon(Object imageSource)
-    {
+    public SurfaceIcon(Object imageSource) {
         this(imageSource, null);
     }
 
-    public SurfaceIcon(Object imageSource, LatLon location)
-    {
+    public SurfaceIcon(Object imageSource, LatLon location) {
         this.setImageSource(imageSource);
-        if (location != null)
+        if (location != null) {
             this.setLocation(location);
+        }
     }
 
     /**
@@ -59,8 +58,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @return the icon reference location on the globe.
      */
-    public LatLon getLocation()
-    {
+    public LatLon getLocation() {
         return this.location;
     }
 
@@ -71,10 +69,8 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @throws IllegalArgumentException if location is <code>null</code>.
      */
-    public void setLocation(LatLon location)
-    {
-        if (location == null)
-        {
+    public void setLocation(LatLon location) {
+        if (location == null) {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -85,7 +81,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     }
 
     /**
-     * Get the icon displacement in pixels relative to the reference location.  Can be <code>null</code>.
+     * Get the icon displacement in pixels relative to the reference location. Can be <code>null</code>.
      * <p>
      * When <code>null</code> the icon will be drawn with it's image center on top of it's reference location - see
      * {@link #setLocation(LatLon)}. Otherwise the icon will be shifted of a distance equivalent to the number of pixels
@@ -94,8 +90,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @return the icon displacement in pixels relative to the reference location.
      */
-    public Vec4 getLocationOffset()
-    {
+    public Vec4 getLocationOffset() {
         return this.locationOffset;
     }
 
@@ -109,8 +104,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @param locationOffset the icon displacement in pixels relative to the reference location.
      */
-    public void setLocationOffset(Vec4 locationOffset)
-    {
+    public void setLocationOffset(Vec4 locationOffset) {
         this.locationOffset = locationOffset; // can be null
         this.onShapeChanged();
     }
@@ -121,8 +115,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @return the source for the icon image.
      */
-    public Object getImageSource()
-    {
+    public Object getImageSource() {
         return this.imageSource;
     }
 
@@ -134,10 +127,8 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @throws IllegalArgumentException if imageSource is <code>null</code>.
      */
-    public void setImageSource(Object imageSource)
-    {
-        if (imageSource == null)
-        {
+    public void setImageSource(Object imageSource) {
+        if (imageSource == null) {
             String message = Logging.getMessage("nullValue.ImageSource");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -155,8 +146,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @return <code>true</code> if the icon image is drawn with mip-map filtering; <code>false</code> otherwise.
      */
-    public boolean isUseMipMaps()
-    {
+    public boolean isUseMipMaps() {
         return this.useMipMaps;
     }
 
@@ -166,10 +156,9 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      * image is drawn smaller than it's native size in pixels.
      *
      * @param useMipMaps <code>true</code> if the icon image should be drawn with mip-map filtering; <code>false</code>
-     *                   otherwise.
+     * otherwise.
      */
-    public void setUseMipMaps(boolean useMipMaps)
-    {
+    public void setUseMipMaps(boolean useMipMaps) {
         this.useMipMaps = useMipMaps;
         this.texture = null;
         this.onShapeChanged();
@@ -180,8 +169,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @return the current scaling factor applied to the source image.
      */
-    public double getScale()
-    {
+    public double getScale() {
         return this.scale;
     }
 
@@ -193,10 +181,8 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @throws IllegalArgumentException if scale is zero or negative.
      */
-    public void setScale(double scale)
-    {
-        if (scale <= 0)
-        {
+    public void setScale(double scale) {
+        if (scale <= 0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "scale must be greater then zero");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -210,8 +196,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @return the current heading {@link Angle}, clockwise from North or <code>null</code>.
      */
-    public Angle getHeading()
-    {
+    public Angle getHeading() {
         return this.heading;
     }
 
@@ -221,8 +206,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @param heading the heading {@link Angle}, clockwise from North or <code>null</code>.
      */
-    public void setHeading(Angle heading)
-    {
+    public void setHeading(Angle heading) {
         this.heading = heading;  // can be null
         this.onShapeChanged();
     }
@@ -235,8 +219,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @return <code>true</code> if the icon constantly maintains it's apparent size.
      */
-    public boolean isMaintainSize()
-    {
+    public boolean isMaintainSize() {
         return this.maintainSize;
     }
 
@@ -248,8 +231,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @param state <code>true</code> if the icon should constantly maintains it's apparent size.
      */
-    public void setMaintainSize(boolean state)
-    {
+    public void setMaintainSize(boolean state) {
         this.maintainSize = state;
     }
 
@@ -263,8 +245,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @return the minimum size of the icon in meter.
      */
-    public double getMinSize()
-    {
+    public double getMinSize() {
         return this.minSize;
     }
 
@@ -278,8 +259,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @param sizeInMeter the minimum size of the icon in meter.
      */
-    public void setMinSize(double sizeInMeter)
-    {
+    public void setMinSize(double sizeInMeter) {
         this.minSize = sizeInMeter;
         this.onShapeChanged();
     }
@@ -294,8 +274,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @return the maximum size of the icon in meter.
      */
-    public double getMaxSize()
-    {
+    public double getMaxSize() {
         return this.maxSize;
     }
 
@@ -309,8 +288,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @param sizeInMeter the maximum size of the icon in meter.
      */
-    public void setMaxSize(double sizeInMeter)
-    {
+    public void setMaxSize(double sizeInMeter) {
         this.maxSize = sizeInMeter;
         this.onShapeChanged();
     }
@@ -320,8 +298,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @return the {@link Color} the source image is combined with.
      */
-    public Color getColor()
-    {
+    public Color getColor() {
         return this.color;
     }
 
@@ -335,10 +312,8 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      *
      * @throws IllegalArgumentException if color is <code>null</code>.
      */
-    public void setColor(Color color)
-    {
-        if (color == null)
-        {
+    public void setColor(Color color) {
+        if (color == null) {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -347,13 +322,11 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         this.onShapeChanged();
     }
 
-    protected boolean isMaintainAppearance()
-    {
+    protected boolean isMaintainAppearance() {
         return this.getHeading() == null || this.isMaintainSize();  // always facing or constant size
     }
 
     // *** SurfaceObject interface ***
-
     /**
      * {@inheritDoc}
      * <p>
@@ -365,19 +338,17 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
      * @see #isMaintainSize()
      */
     @Override
-    public Object getStateKey(DrawContext dc)
-    {
+    public Object getStateKey(DrawContext dc) {
         // If the icon always redraws, return a unique object that is not equivalent to any other state key.
-        if (this.isMaintainAppearance())
+        if (this.isMaintainAppearance()) {
             return new Object();
+        }
 
         return super.getStateKey(dc);
     }
 
-    public List<Sector> getSectors(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public List<Sector> getSectors(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -386,10 +357,8 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         return this.computeSectors(dc);
     }
 
-    public Extent getExtent(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public Extent getExtent(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -398,17 +367,15 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         return this.computeExtent(dc);
     }
 
-    public void drawGeographic(DrawContext dc, SurfaceTileDrawContext sdc)
-    {
+    public void drawGeographic(DrawContext dc, SurfaceTileDrawContext sdc) {
         WWTexture texture = getTexture();
-        if (texture == null)
+        if (texture == null) {
             return;
+        }
 
         this.beginDraw(dc);
-        try
-        {
-            if (texture.bind(dc))
-            {
+        try {
+            if (texture.bind(dc)) {
                 // Update image width and height
                 this.imageWidth = texture.getWidth(dc);
                 this.imageHeight = texture.getHeight(dc);
@@ -424,29 +391,24 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
                 //Draw
                 this.drawIcon(dc, sdc);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // TODO: log error
-        }
-        finally
-        {
+        } finally {
             // Restore gl state
             this.endDraw(dc);
         }
     }
 
-    protected List<Sector> computeSectors(DrawContext dc)
-    {
-        if (this.location == null)
+    protected List<Sector> computeSectors(DrawContext dc) {
+        if (this.location == null) {
             return null;
+        }
 
         Globe globe = dc.getGlobe();
         // Compute real world icon extent depending on distance from eye
         Rectangle2D.Double rect = computeDrawDimension(dc, this.location); // meter
         // If the icon does not redraw all the time, double it's dimension
-        if (!this.isMaintainAppearance())
-        {
+        if (!this.isMaintainAppearance()) {
             rect.setRect(rect.x, rect.y, rect.width * 2, rect.height * 2);
         }
         // Compute bounding sector and apply location offset to it
@@ -456,10 +418,10 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         double offsetLatRadians = locationOffset != null ? locationOffset.y * dLatRadians / this.imageHeight : 0;
         double offsetLonRadians = locationOffset != null ? locationOffset.x * dLonRadians / this.imageWidth : 0;
         Sector sector = new Sector(
-            this.location.getLatitude().subtractRadians(dLatRadians / 2).addRadians(offsetLatRadians),
-            this.location.getLatitude().addRadians(dLatRadians / 2).addRadians(offsetLatRadians),
-            this.location.getLongitude().subtractRadians(dLonRadians / 2).addRadians(offsetLonRadians),
-            this.location.getLongitude().addRadians(dLonRadians / 2).addRadians(offsetLonRadians)
+                this.location.getLatitude().subtractRadians(dLatRadians / 2).addRadians(offsetLatRadians),
+                this.location.getLatitude().addRadians(dLatRadians / 2).addRadians(offsetLatRadians),
+                this.location.getLongitude().subtractRadians(dLonRadians / 2).addRadians(offsetLonRadians),
+                this.location.getLongitude().addRadians(dLonRadians / 2).addRadians(offsetLonRadians)
         );
         // Rotate sector around location 
         sector = computeRotatedSectorBounds(sector, this.location, computeDrawHeading(dc));
@@ -467,15 +429,13 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         return computeNormalizedSectors(sector);
     }
 
-    protected Rectangle2D.Double computeDrawDimension(DrawContext dc, LatLon location)
-    {
+    protected Rectangle2D.Double computeDrawDimension(DrawContext dc, LatLon location) {
         // Compute icon extent at 1:1 depending on distance from eye
         double pixelSize = computePixelSizeAtLocation(dc, location);
         return computeDrawDimension(pixelSize);
     }
 
-    protected Rectangle2D.Double computeDrawDimension(double pixelSize)
-    {
+    protected Rectangle2D.Double computeDrawDimension(double pixelSize) {
         // Compute icon extent at 1:1 depending on target tile pixel size
         double height = this.imageHeight * this.scale * pixelSize;
         double width = this.imageWidth * this.scale * pixelSize;
@@ -486,22 +446,21 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         return new Rectangle2D.Double(0, 0, width * scale, height * scale); // meter
     }
 
-    protected Angle computeDrawHeading(DrawContext dc)
-    {
-        if (this.heading != null)
+    protected Angle computeDrawHeading(DrawContext dc) {
+        if (this.heading != null) {
             return this.heading;
+        }
 
         return getViewHeading(dc);
     }
 
-    protected void beginDraw(DrawContext dc)
-    {
+    protected void beginDraw(DrawContext dc) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         int attributeMask = GL2.GL_TRANSFORM_BIT // for modelview
-            | GL2.GL_CURRENT_BIT // for current color
-            | GL2.GL_COLOR_BUFFER_BIT // for alpha test func and ref, and blend
-            | GL2.GL_ENABLE_BIT; // for enable/disable changes
+                | GL2.GL_CURRENT_BIT // for current color
+                | GL2.GL_COLOR_BUFFER_BIT // for alpha test func and ref, and blend
+                | GL2.GL_ENABLE_BIT; // for enable/disable changes
         gl.glPushAttrib(attributeMask);
 
         // Suppress any fully transparent image pixels
@@ -514,28 +473,23 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glPushMatrix();
 
-        if (dc.isPickingMode())
-        {
+        if (dc.isPickingMode()) {
             // Set up to replace the non-transparent texture colors with the single pick color.
             gl.glEnable(GL.GL_TEXTURE_2D);
             gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_COMBINE);
             gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_SRC0_RGB, GL2.GL_PREVIOUS);
             gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_COMBINE_RGB, GL2.GL_REPLACE);
-        }
-        else
-        {
+        } else {
             gl.glEnable(GL.GL_TEXTURE_2D);
             gl.glEnable(GL.GL_BLEND);
             gl.glBlendFunc(GL.GL_ONE, GL.GL_ONE_MINUS_SRC_ALPHA);
         }
     }
 
-    protected void endDraw(DrawContext dc)
-    {
+    protected void endDraw(DrawContext dc) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        if (dc.isPickingMode())
-        {
+        if (dc.isPickingMode()) {
             gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, OGLUtil.DEFAULT_TEX_ENV_MODE);
             gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_SRC0_RGB, OGLUtil.DEFAULT_SRC0_RGB);
             gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_COMBINE_RGB, OGLUtil.DEFAULT_COMBINE_RGB);
@@ -553,8 +507,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void applyDrawTransform(DrawContext dc, SurfaceTileDrawContext sdc, LatLon location, double drawScale)
-    {
+    protected void applyDrawTransform(DrawContext dc, SurfaceTileDrawContext sdc, LatLon location, double drawScale) {
         // Compute icon viewport point
         // Apply hemisphere offset if needed - for icons that may cross the date line
         double offset = computeHemisphereOffset(sdc.getSector(), location);
@@ -571,35 +524,33 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         // Translate to lower left corner
         gl.glTranslated(-this.imageWidth / 2, -this.imageHeight / 2, 0);
         // Apply location offset if any
-        if (this.locationOffset != null)
+        if (this.locationOffset != null) {
             gl.glTranslated(this.locationOffset.x, this.locationOffset.y, 0);
+        }
     }
 
-    protected double computeDrawScale(DrawContext dc, SurfaceTileDrawContext sdc, LatLon location)
-    {
+    protected double computeDrawScale(DrawContext dc, SurfaceTileDrawContext sdc, LatLon location) {
         // Compute scaling to maintain apparent size
         double drawPixelSize;
         double regionPixelSize = this.computeDrawPixelSize(dc, sdc);
-        if (this.isMaintainAppearance())
-            // Compute precise size depending on eye distance
+        if (this.isMaintainAppearance()) // Compute precise size depending on eye distance
+        {
             drawPixelSize = this.computeDrawDimension(dc, location).width / this.imageWidth;
-        else
-            // Compute size according to draw tile resolution
+        } else // Compute size according to draw tile resolution
+        {
             drawPixelSize = this.computeDrawDimension(regionPixelSize).width / this.imageWidth;
+        }
         return drawPixelSize / regionPixelSize;
     }
 
-    protected void applyDrawColor(DrawContext dc)
-    {
-        if (!dc.isPickingMode())
-        {
+    protected void applyDrawColor(DrawContext dc) {
+        if (!dc.isPickingMode()) {
             GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
             applyPremultipliedAlphaColor(gl, this.color, getOpacity());
         }
     }
 
-    protected void drawIcon(DrawContext dc, SurfaceTileDrawContext sdc)
-    {
+    protected void drawIcon(DrawContext dc, SurfaceTileDrawContext sdc) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         double drawScale = this.computeDrawScale(dc, sdc, this.location);
@@ -608,41 +559,36 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         dc.drawUnitQuad(new TextureCoords(0, 0, 1, 1));
     }
 
-    protected WWTexture getTexture()
-    {
-        if (this.texture == null)
+    protected WWTexture getTexture() {
+        if (this.texture == null) {
             this.texture = new BasicWWTexture(this.imageSource, this.useMipMaps);
+        }
 
         return this.texture;
     }
 
     // *** Movable interface
-
-    public Position getReferencePosition()
-    {
+    public Position getReferencePosition() {
         return new Position(this.location, 0);
     }
 
-    public void move(Position delta)
-    {
-        if (delta == null)
-        {
+    public void move(Position delta) {
+        if (delta == null) {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         Position referencePos = this.getReferencePosition();
-        if (referencePos == null)
+        if (referencePos == null) {
             return;
+        }
 
         this.moveTo(referencePos.add(delta));
     }
 
-    public void moveTo(Position position)
-    {
-        if (position == null)
-        {
+    public void moveTo(Position position) {
+        if (position == null) {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -652,52 +598,47 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     }
 
     @Override
-    public boolean isDragEnabled()
-    {
+    public boolean isDragEnabled() {
         return this.dragEnabled;
     }
 
     @Override
-    public void setDragEnabled(boolean enabled)
-    {
+    public void setDragEnabled(boolean enabled) {
         this.dragEnabled = enabled;
     }
 
     @Override
-    public void drag(DragContext dragContext)
-    {
-        if (!this.dragEnabled)
+    public void drag(DragContext dragContext) {
+        if (!this.dragEnabled) {
             return;
+        }
 
-        if (this.draggableSupport == null)
+        if (this.draggableSupport == null) {
             this.draggableSupport = new DraggableSupport(this, WorldWind.CLAMP_TO_GROUND);
+        }
 
         this.doDrag(dragContext);
     }
 
-    protected void doDrag(DragContext dragContext)
-    {
+    protected void doDrag(DragContext dragContext) {
         this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
     //**************************************************************//
     //********************  Sector Cache Info  *********************//
     //**************************************************************//
+    protected static class SectorInfo {
 
-    protected static class SectorInfo
-    {
         protected List<Sector> sectors;
         protected Object globeStateKey;
 
-        public SectorInfo(List<Sector> sectors, DrawContext dc)
-        {
+        public SectorInfo(List<Sector> sectors, DrawContext dc) {
             // Surface icon sectors depend on the state of the globe used to compute it.
             this.sectors = sectors;
             this.globeStateKey = dc.getGlobe().getStateKey(dc);
         }
 
-        public boolean isValid(DrawContext dc)
-        {
+        public boolean isValid(DrawContext dc) {
             return this.globeStateKey.equals(dc.getGlobe().getStateKey(dc));
         }
     }

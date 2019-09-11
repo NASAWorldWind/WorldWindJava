@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.geom.Angle;
@@ -16,8 +15,8 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnit4.class)
-public class EGM96Test
-{
+public class EGM96Test {
+
     /**
      * The acceptable difference two double values may have and still satisfy an {@code assertEquals} method.
      */
@@ -33,8 +32,7 @@ public class EGM96Test
      */
     @SuppressWarnings({"unused", "UnusedAssignment"})
     @Test
-    public void testGetOffset_VerticalInterpolationTopGridPoint() throws IOException
-    {
+    public void testGetOffset_VerticalInterpolationTopGridPoint() throws IOException {
 
         // New EGM96 instance with EGM96 dataset
         EGM96 egm96 = new EGM96(OFFSETS_FILE_PATH);
@@ -50,16 +48,16 @@ public class EGM96Test
         double lat = latitude.degrees;
         double lon = longitude.degrees >= 0 ? longitude.degrees : longitude.degrees + 360;
         int topRow = (int) ((90 - lat) / EGM96.INTERVAL.degrees);
-        if (lat <= -90)
+        if (lat <= -90) {
             topRow = EGM96.NUM_ROWS - 2;
+        }
         int bottomRow = topRow + 1;
         // Note that the number of columns does not repeat the column at 0 longitude, so we must force the right
         // column to 0 for any longitude that's less than one interval from 360, and force the left column to the
         // last column of the grid.
         int leftCol = (int) (lon / EGM96.INTERVAL.degrees);
         int rightCol = leftCol + 1;
-        if (lon >= 360 - EGM96.INTERVAL.degrees)
-        {
+        if (lon >= 360 - EGM96.INTERVAL.degrees) {
             leftCol = EGM96.NUM_COLS - 1;
             rightCol = 0;
         }
@@ -87,8 +85,7 @@ public class EGM96Test
      */
     @SuppressWarnings({"unused", "UnusedAssignment"})
     @Test
-    public void testGetOffset_VerticalInterpolationPoint() throws IOException
-    {
+    public void testGetOffset_VerticalInterpolationPoint() throws IOException {
 
         // New EGM96 instance
         EGM96 egm96 = new EGM96(OFFSETS_FILE_PATH);
@@ -105,16 +102,16 @@ public class EGM96Test
         double lat = latitude.degrees;
         double lon = longitude.degrees >= 0 ? longitude.degrees : longitude.degrees + 360;
         int topRow = (int) ((90 - lat) / EGM96.INTERVAL.degrees);
-        if (lat <= -90)
+        if (lat <= -90) {
             topRow = EGM96.NUM_ROWS - 2;
+        }
         int bottomRow = topRow + 1;
         // Note that the number of columns does not repeat the column at 0 longitude, so we must force the right
         // column to 0 for any longitude that's less than one interval from 360, and force the left column to the
         // last column of the grid.
         int leftCol = (int) (lon / EGM96.INTERVAL.degrees);
         int rightCol = leftCol + 1;
-        if (lon >= 360 - EGM96.INTERVAL.degrees)
-        {
+        if (lon >= 360 - EGM96.INTERVAL.degrees) {
             leftCol = EGM96.NUM_COLS - 1;
             rightCol = 0;
         }
@@ -138,7 +135,7 @@ public class EGM96Test
         double latOffset = egm96.getOffset(latitude, longitude);
         double manuallyCalculatedV = (lat - latBottom) / (latTop - latBottom);
         double manuallyCalculatedInterpolationValue = (topOffsetValue - bottomOffsetValue) * manuallyCalculatedV
-            + bottomOffsetValue;
+                + bottomOffsetValue;
 
         // Ensure that they are equal
         assertEquals("interpolated matches actual latitude", manuallyCalculatedInterpolationValue, latOffset, DELTA);
@@ -149,8 +146,7 @@ public class EGM96Test
      */
     @SuppressWarnings({"unused", "UnusedAssignment"})
     @Test
-    public void testGetOffset_HorizontalInterpolationLeftGridPoint() throws IOException
-    {
+    public void testGetOffset_HorizontalInterpolationLeftGridPoint() throws IOException {
 
         // New EGM96 instance
         EGM96 egm96 = new EGM96(OFFSETS_FILE_PATH);
@@ -166,16 +162,16 @@ public class EGM96Test
         double lat = latitude.degrees;
         double lon = longitude.degrees >= 0 ? longitude.degrees : longitude.degrees + 360;
         int topRow = (int) ((90 - lat) / EGM96.INTERVAL.degrees);
-        if (lat <= -90)
+        if (lat <= -90) {
             topRow = EGM96.NUM_ROWS - 2;
+        }
         int bottomRow = topRow + 1;
         // Note that the number of columns does not repeat the column at 0 longitude, so we must force the right
         // column to 0 for any longitude that's less than one interval from 360, and force the left column to the
         // last column of the grid.
         int leftCol = (int) (lon / EGM96.INTERVAL.degrees);
         int rightCol = leftCol + 1;
-        if (lon >= 360 - EGM96.INTERVAL.degrees)
-        {
+        if (lon >= 360 - EGM96.INTERVAL.degrees) {
             leftCol = EGM96.NUM_COLS - 1;
             rightCol = 0;
         }
@@ -204,8 +200,7 @@ public class EGM96Test
      */
     @SuppressWarnings({"unused", "UnusedAssignment"})
     @Test
-    public void testGetOffset_HorizontalInterpolationPoint() throws IOException
-    {
+    public void testGetOffset_HorizontalInterpolationPoint() throws IOException {
 
         // New EGM96 instance
         EGM96 egm96 = new EGM96(OFFSETS_FILE_PATH);
@@ -222,16 +217,16 @@ public class EGM96Test
         double lat = latitude.degrees;
         double lon = longitude.degrees >= 0 ? longitude.degrees : longitude.degrees + 360;
         int topRow = (int) ((90 - lat) / EGM96.INTERVAL.degrees);
-        if (lat <= -90)
+        if (lat <= -90) {
             topRow = EGM96.NUM_ROWS - 2;
+        }
         int bottomRow = topRow + 1;
         // Note that the number of columns does not repeat the column at 0 longitude, so we must force the right
         // column to 0 for any longitude that's less than one interval from 360, and force the left column to the
         // last column of the grid.
         int leftCol = (int) (lon / EGM96.INTERVAL.degrees);
         int rightCol = leftCol + 1;
-        if (lon >= 360 - EGM96.INTERVAL.degrees)
-        {
+        if (lon >= 360 - EGM96.INTERVAL.degrees) {
             leftCol = EGM96.NUM_COLS - 1;
             rightCol = 0;
         }
@@ -255,7 +250,7 @@ public class EGM96Test
         double lonOffset = egm96.getOffset(latitude, longitude);
         double manuallyCalculatedH = (lon - lonLeft) / (lonRight - lonLeft);
         double manuallyCalculatedInterpolationValue = (rightOffsetValue - leftOffsetValue) * manuallyCalculatedH
-            + leftOffsetValue;
+                + leftOffsetValue;
 
         // Ensure that they are equal
         assertEquals("interpolated matches actual longitude", manuallyCalculatedInterpolationValue, lonOffset, DELTA);

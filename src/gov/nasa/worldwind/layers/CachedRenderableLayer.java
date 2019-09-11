@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.layers;
 
 import gov.nasa.worldwind.*;
@@ -24,8 +23,8 @@ import java.util.Collection;
  * @author tag
  * @version $Id: CachedRenderableLayer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class CachedRenderableLayer extends AbstractLayer
-{
+public class CachedRenderableLayer extends AbstractLayer {
+
     protected static final int DEFAULT_DEPTH = 4;
 
     protected BasicQuadTree<Renderable> extentTree; // this is used until we work out the caching and retrieval scheme
@@ -38,8 +37,7 @@ public class CachedRenderableLayer extends AbstractLayer
      *
      * @throws IllegalArgumentException if the coverage sector is null.
      */
-    public CachedRenderableLayer(Sector coverage)
-    {
+    public CachedRenderableLayer(Sector coverage) {
         // Extent tree checks args
         this.extentTree = new BasicQuadTree<Renderable>(DEFAULT_DEPTH, coverage, null);
     }
@@ -47,13 +45,12 @@ public class CachedRenderableLayer extends AbstractLayer
     /**
      * Constructs a layer instance.
      *
-     * @param coverage  the geographic area covered by the layer's Renderables.
+     * @param coverage the geographic area covered by the layer's Renderables.
      * @param numLevels the depth of the tree used to sort the Renderables.
      *
      * @throws IllegalArgumentException if the coverage sector is null or the number of levels is less than 1;
      */
-    public CachedRenderableLayer(Sector coverage, int numLevels)
-    {
+    public CachedRenderableLayer(Sector coverage, int numLevels) {
         // Extent tree checks args
         this.extentTree = new BasicQuadTree<Renderable>(numLevels, coverage, null);
     }
@@ -63,8 +60,7 @@ public class CachedRenderableLayer extends AbstractLayer
      *
      * @return true if the layer contains Renderables, otherwise false.
      */
-    public boolean hasItems()
-    {
+    public boolean hasItems() {
         return this.extentTree.hasItems();
     }
 
@@ -73,11 +69,11 @@ public class CachedRenderableLayer extends AbstractLayer
      *
      * @param item the Renderable to add.
      *
-     * @throws IllegalArgumentException if the item is null or does not implement {@link gov.nasa.worldwind.render.GeographicExtent}.
+     * @throws IllegalArgumentException if the item is null or does not implement
+     * {@link gov.nasa.worldwind.render.GeographicExtent}.
      * @see #add(gov.nasa.worldwind.render.Renderable, String)
      */
-    public void add(Renderable item)
-    {
+    public void add(Renderable item) {
         this.add(item, null); // extent tree checks args
     }
 
@@ -87,13 +83,12 @@ public class CachedRenderableLayer extends AbstractLayer
      * @param item the Renderable to add.
      * @param name a name for the Renderable. May be null, in which case the item has no name.
      *
-     * @throws IllegalArgumentException if the item is null or does not implement {@link gov.nasa.worldwind.render.GeographicExtent}.
+     * @throws IllegalArgumentException if the item is null or does not implement
+     * {@link gov.nasa.worldwind.render.GeographicExtent}.
      * @see #add(gov.nasa.worldwind.render.Renderable)
      */
-    public void add(Renderable item, String name)
-    {
-        if (!(item instanceof GeographicExtent))
-        {
+    public void add(Renderable item, String name) {
+        if (!(item instanceof GeographicExtent)) {
             String message = Logging.getMessage("GeographicTree.NotGeometricExtent");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -110,8 +105,7 @@ public class CachedRenderableLayer extends AbstractLayer
      *
      * @see #removeByName(String)
      */
-    public void remove(Renderable item)
-    {
+    public void remove(Renderable item) {
         // extent tree checks args
         this.extentTree.remove(item);
     }
@@ -123,8 +117,7 @@ public class CachedRenderableLayer extends AbstractLayer
      *
      * @see #remove(gov.nasa.worldwind.render.Renderable)
      */
-    public void removeByName(String name)
-    {
+    public void removeByName(String name) {
         this.extentTree.removeByName(name);
     }
 
@@ -138,8 +131,7 @@ public class CachedRenderableLayer extends AbstractLayer
      * @see #getRenderables(gov.nasa.worldwind.geom.Sector)
      * @see #getAllRenderables()
      */
-    public Collection<? extends Renderable> getRenderables(LatLon location)
-    {
+    public Collection<? extends Renderable> getRenderables(LatLon location) {
         // extent tree checks args
         return this.extentTree.getItemsAtLocation(location, null);
     }
@@ -154,8 +146,7 @@ public class CachedRenderableLayer extends AbstractLayer
      * @see #getRenderables(gov.nasa.worldwind.geom.LatLon)
      * @see #getAllRenderables()
      */
-    public Collection<? extends Renderable> getRenderables(Sector extent)
-    {
+    public Collection<? extends Renderable> getRenderables(Sector extent) {
         // extent tree checks args
         return this.extentTree.getItemsInRegion(extent, null);
     }
@@ -165,8 +156,7 @@ public class CachedRenderableLayer extends AbstractLayer
      *
      * @return an Iterable over all the Renderables in the layer.
      */
-    public Iterable<? extends Renderable> getAllRenderables()
-    {
+    public Iterable<? extends Renderable> getAllRenderables() {
         return this.extentTree; // the tree is an Iterable
     }
 
@@ -177,8 +167,7 @@ public class CachedRenderableLayer extends AbstractLayer
      *
      * @return the Renderable of the given name, or null if no Renderable with the name is in the layer.
      */
-    public Renderable getByName(String name)
-    {
+    public Renderable getByName(String name) {
         return this.extentTree.getByName(name);
     }
 
@@ -188,8 +177,7 @@ public class CachedRenderableLayer extends AbstractLayer
      * @param opacity the current opacity value, which is ignored by this layer.
      */
     @Override
-    public void setOpacity(double opacity)
-    {
+    public void setOpacity(double opacity) {
         super.setOpacity(opacity);
     }
 
@@ -200,28 +188,24 @@ public class CachedRenderableLayer extends AbstractLayer
      * @return The layer opacity, a value between 0 and 1.
      */
     @Override
-    public double getOpacity()
-    {
+    public double getOpacity() {
         return super.getOpacity();
     }
 
-    /** Disposes any Renderables implementing @{link Dispose} and removes all Renderables from the layer. */
-    public void dispose()
-    {
+    /**
+     * Disposes any Renderables implementing @{link Dispose} and removes all Renderables from the layer.
+     */
+    public void dispose() {
         this.disposeRenderables();
     }
 
-    protected void disposeRenderables()
-    {
-        for (Renderable renderable : this.getAllRenderables())
-        {
-            try
-            {
-                if (renderable instanceof Disposable)
+    protected void disposeRenderables() {
+        for (Renderable renderable : this.getAllRenderables()) {
+            try {
+                if (renderable instanceof Disposable) {
                     ((Disposable) renderable).dispose();
-            }
-            catch (Exception e)
-            {
+                }
+            } catch (Exception e) {
                 String msg = Logging.getMessage("generic.ExceptionAttemptingToDisposeRenderable");
                 Logging.logger().severe(msg);
                 // continue to next renderable
@@ -231,34 +215,27 @@ public class CachedRenderableLayer extends AbstractLayer
         this.extentTree.clear();
     }
 
-    protected void doPreRender(DrawContext dc)
-    {
+    protected void doPreRender(DrawContext dc) {
         this.doPreRender(dc, this.getAllRenderables());
     }
 
-    protected void doPick(DrawContext dc, java.awt.Point pickPoint)
-    {
+    protected void doPick(DrawContext dc, java.awt.Point pickPoint) {
         this.doPick(dc, this.getAllRenderables(), pickPoint);
     }
 
-    protected void doRender(DrawContext dc)
-    {
+    protected void doRender(DrawContext dc) {
         this.doRender(dc, this.getAllRenderables());
     }
 
-    protected void doPreRender(DrawContext dc, Iterable<? extends Renderable> renderables)
-    {
-        for (Renderable renderable : renderables)
-        {
-            try
-            {
+    protected void doPreRender(DrawContext dc, Iterable<? extends Renderable> renderables) {
+        for (Renderable renderable : renderables) {
+            try {
                 // If the caller has specified their own Iterable,
                 // then we cannot make any guarantees about its contents.
-                if (renderable != null && renderable instanceof PreRenderable)
+                if (renderable != null && renderable instanceof PreRenderable) {
                     ((PreRenderable) renderable).preRender(dc);
-            }
-            catch (Exception e)
-            {
+                }
+            } catch (Exception e) {
                 String msg = Logging.getMessage("generic.ExceptionWhilePrerenderingRenderable");
                 Logging.logger().severe(msg);
                 // continue to next renderable
@@ -266,31 +243,24 @@ public class CachedRenderableLayer extends AbstractLayer
         }
     }
 
-    protected void doPick(DrawContext dc, Iterable<? extends Renderable> renderables, java.awt.Point pickPoint)
-    {
+    protected void doPick(DrawContext dc, Iterable<? extends Renderable> renderables, java.awt.Point pickPoint) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         this.pickSupport.clearPickList();
         this.pickSupport.beginPicking(dc);
 
-        try
-        {
-            for (Renderable renderable : renderables)
-            {
+        try {
+            for (Renderable renderable : renderables) {
                 // If the caller has specified their own Iterable,
                 // then we cannot make any guarantees about its contents.
-                if (renderable != null)
-                {
+                if (renderable != null) {
                     float[] inColor = new float[4];
                     gl.glGetFloatv(GL2.GL_CURRENT_COLOR, inColor, 0);
                     java.awt.Color color = dc.getUniquePickColor();
                     gl.glColor3ub((byte) color.getRed(), (byte) color.getGreen(), (byte) color.getBlue());
 
-                    try
-                    {
+                    try {
                         renderable.render(dc);
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         String msg = Logging.getMessage("generic.ExceptionWhilePickingRenderable");
                         Logging.logger().severe(msg);
                         continue; // go on to next renderable
@@ -298,39 +268,30 @@ public class CachedRenderableLayer extends AbstractLayer
 
                     gl.glColor4fv(inColor, 0);
 
-                    if (renderable instanceof Locatable)
-                    {
+                    if (renderable instanceof Locatable) {
                         this.pickSupport.addPickableObject(color.getRGB(), renderable,
-                            ((Locatable) renderable).getPosition(), false);
-                    }
-                    else
-                    {
+                                ((Locatable) renderable).getPosition(), false);
+                    } else {
                         this.pickSupport.addPickableObject(color.getRGB(), renderable);
                     }
                 }
             }
 
             this.pickSupport.resolvePick(dc, pickPoint, this);
-        }
-        finally
-        {
+        } finally {
             this.pickSupport.endPicking(dc);
         }
     }
 
-    protected void doRender(DrawContext dc, Iterable<? extends Renderable> renderables)
-    {
-        for (Renderable renderable : renderables)
-        {
-            try
-            {
+    protected void doRender(DrawContext dc, Iterable<? extends Renderable> renderables) {
+        for (Renderable renderable : renderables) {
+            try {
                 // If the caller has specified their own Iterable,
                 // then we cannot make any guarantees about its contents.
-                if (renderable != null)
+                if (renderable != null) {
                     renderable.render(dc);
-            }
-            catch (Exception e)
-            {
+                }
+            } catch (Exception e) {
                 String msg = Logging.getMessage("generic.ExceptionWhileRenderingRenderable");
                 Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
                 // continue to next renderable
@@ -339,8 +300,7 @@ public class CachedRenderableLayer extends AbstractLayer
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return Logging.getMessage("layers.CachedRenderableLayer.Name");
     }
 }

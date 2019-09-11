@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.dataimporter;
 
 import gov.nasa.worldwind.*;
@@ -26,19 +25,17 @@ import java.awt.*;
  * @author tag
  * @version $Id: DataInstallerApp.java 1180 2013-02-15 18:40:47Z tgaskins $
  */
-public class DataInstallerApp
-{
+public class DataInstallerApp {
     // Most of this code was taken from ApplicationTemplate.
 
-    public static class AppPanel extends JPanel
-    {
+    public static class AppPanel extends JPanel {
+
         protected WorldWindow wwd;
         protected StatusBar statusBar;
         protected ToolTipController toolTipController;
         protected HighlightController highlightController;
 
-        public AppPanel()
-        {
+        public AppPanel() {
             super(new BorderLayout());
 
             this.wwd = new WorldWindowGLCanvas();
@@ -63,20 +60,18 @@ public class DataInstallerApp
     }
 
     // This is the application's main frame.
-    public static class AppFrame extends JFrame
-    {
+    public static class AppFrame extends JFrame {
+
         protected AppPanel wwjPanel;
         protected LayerAndElevationManagerPanel layerManagerPanel;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             initialize();
 
             WWUtil.alignComponent(null, this, AVKey.CENTER);
         }
 
-        protected void initialize()
-        {
+        protected void initialize() {
             // Create the WorldWindow.
             this.wwjPanel = new AppPanel();
 
@@ -98,10 +93,8 @@ public class DataInstallerApp
 
             // Search the layer list for layers that are also select listeners and register them with the World
             // Window. This enables interactive layers to be included without specific knowledge of them here.
-            for (Layer layer : this.getWwd().getModel().getLayers())
-            {
-                if (layer instanceof SelectListener)
-                {
+            for (Layer layer : this.getWwd().getModel().getLayers()) {
+                if (layer instanceof SelectListener) {
                     this.getWwd().addSelectListener((SelectListener) layer);
                 }
             }
@@ -113,58 +106,45 @@ public class DataInstallerApp
             this.setResizable(true);
         }
 
-        public WorldWindow getWwd()
-        {
+        public WorldWindow getWwd() {
             return this.wwjPanel.wwd;
         }
     }
 
-    static
-    {
+    static {
         System.setProperty("java.net.useSystemProxies", "true");
-        if (Configuration.isMacOS())
-        {
+        if (Configuration.isMacOS()) {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Application");
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
-        }
-        else if (Configuration.isWindowsOS())
-        {
+        } else if (Configuration.isWindowsOS()) {
             System.setProperty("sun.awt.noerasebackground", "true"); // prevents flashing during window resizing
         }
     }
 
-    public static AppFrame start(String appName, Class appFrameClass)
-    {
-        if (Configuration.isMacOS() && appName != null)
-        {
+    public static AppFrame start(String appName, Class appFrameClass) {
+        if (Configuration.isMacOS() && appName != null) {
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", appName);
         }
 
-        try
-        {
+        try {
             final AppFrame frame = (AppFrame) appFrameClass.newInstance();
             frame.setTitle(appName);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            java.awt.EventQueue.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
                     frame.setVisible(true);
                 }
             });
 
             return frame;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Logging.logger().log(java.util.logging.Level.SEVERE, "Exception at application start", e);
             return null;
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         start("Data Installer", AppFrame.class);
     }
 }

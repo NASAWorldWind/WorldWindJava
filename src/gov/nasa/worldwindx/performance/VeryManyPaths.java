@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.performance;
 
 import gov.nasa.worldwind.WorldWind;
@@ -19,8 +18,8 @@ import java.util.*;
  * @author tag
  * @version $Id: VeryManyPaths.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class VeryManyPaths extends ApplicationTemplate
-{
+public class VeryManyPaths extends ApplicationTemplate {
+
     protected static final int NUM_PATHS = 2000;
     protected static final int NUM_POSITIONS = 300;
     protected static final Angle PATH_LENGTH = Angle.fromDegrees(5);
@@ -29,16 +28,15 @@ public class VeryManyPaths extends ApplicationTemplate
     protected static final int ALTITUDE_MODE = WorldWind.ABSOLUTE;
     protected static final double LINE_WIDTH = 1d;
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         protected List<Path> paths;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             super(true, true, false);
 
             RenderableLayer layer = new RenderableLayer();
-            
+
             this.makePaths(layer, new Position(START_LOCATION, PATH_HEIGHT), NUM_PATHS, PATH_LENGTH, NUM_POSITIONS);
 
             // Add the layer to the model.
@@ -48,12 +46,10 @@ public class VeryManyPaths extends ApplicationTemplate
             this.getWwd().getView().setEyePosition(new Position(START_LOCATION, 3e6));
         }
 
-        protected void makePaths(RenderableLayer layer, Position origin, int numPaths, Angle length, int numPositions)
-        {
+        protected void makePaths(RenderableLayer layer, Position origin, int numPaths, Angle length, int numPositions) {
             double dAngle = 360d / numPaths;
 
-            for (int i = 0; i < numPaths; i++)
-            {
+            for (int i = 0; i < numPaths; i++) {
                 Angle heading = Angle.fromDegrees(i * dAngle);
                 layer.addRenderable(this.makePath(origin, heading, length, numPositions));
             }
@@ -61,13 +57,11 @@ public class VeryManyPaths extends ApplicationTemplate
             System.out.printf("%d paths, each with %d positions\n", NUM_PATHS, NUM_POSITIONS);
         }
 
-        protected Path makePath(Position startPosition, Angle heading, Angle length, int numPositions)
-        {
+        protected Path makePath(Position startPosition, Angle heading, Angle length, int numPositions) {
             double dLength = length.radians / (numPositions - 1);
             List<Position> positions = new ArrayList<Position>(numPositions);
 
-            for (int i = 0; i < numPositions - 1; i++)
-            {
+            for (int i = 0; i < numPositions - 1; i++) {
                 LatLon ll = Position.greatCircleEndPosition(startPosition, heading, Angle.fromRadians(i * dLength));
                 positions.add(new Position(ll, PATH_HEIGHT));
             }
@@ -93,8 +87,7 @@ public class VeryManyPaths extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Paths", AppFrame.class);
     }
 }

@@ -14,10 +14,8 @@ import javax.imageio.metadata.IIOInvalidTreeException;
  * @author brownrigg
  * @version $Id: GeotiffMetaData.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-
 public class GeotiffMetaData extends IIOMetadata {
 
-    
     public boolean isReadOnly() {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }

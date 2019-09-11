@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util;
 
 /**
@@ -12,8 +11,8 @@ package gov.nasa.worldwind.util;
  * @author pabercrombie
  * @version $Id: TextDecoder.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface TextDecoder
-{
+public interface TextDecoder {
+
     /**
      * Set the input text which the decoder will process.
      *
@@ -38,7 +37,7 @@ public interface TextDecoder
      * determine if the decoded text has changed since {@link #getDecodedText()} was last called.
      *
      * @return The time (as returned by {@code System.currentTimeMillis()}) at which the decoded text last changed.
-     *         Returns zero if called before the text is decoded.
+     * Returns zero if called before the text is decoded.
      */
     long getLastUpdateTime();
 }

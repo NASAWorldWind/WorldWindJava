@@ -25,11 +25,15 @@ import java.nio.channels.ClosedByInterruptException;
  * @author Tom Gaskins
  * @version $Id: AbstractRetrievalPostProcessor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class AbstractRetrievalPostProcessor implements RetrievalPostProcessor
-{
-    /** Holds miscellaneous parameters examined by this and subclasses. */
+public abstract class AbstractRetrievalPostProcessor implements RetrievalPostProcessor {
+
+    /**
+     * Holds miscellaneous parameters examined by this and subclasses.
+     */
     protected AVList avList;
-    /** The retriever associated with the post-processor. Only non-null after {@link #run(Retriever)} is called. */
+    /**
+     * The retriever associated with the post-processor. Only non-null after {@link #run(Retriever)} is called.
+     */
     protected Retriever retriever;
 
     /**
@@ -40,9 +44,10 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      */
     abstract protected File doGetOutputFile();
 
-    /** Create a default post-processor. */
-    public AbstractRetrievalPostProcessor()
-    {
+    /**
+     * Create a default post-processor.
+     */
+    public AbstractRetrievalPostProcessor() {
     }
 
     /**
@@ -50,8 +55,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @param avList an attribute-value list with values that might be used during post-processing.
      */
-    public AbstractRetrievalPostProcessor(AVList avList)
-    {
+    public AbstractRetrievalPostProcessor(AVList avList) {
         this.avList = avList;
     }
 
@@ -61,14 +65,12 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      * @param retriever the retriever to associate with the post-processor.
      *
      * @return a buffer containing the downloaded data, perhaps converted during content handling. null is returned if a
-     *         fatal problem occurred during post-processing.
+     * fatal problem occurred during post-processing.
      *
      * @throws IllegalArgumentException if the retriever is null.
      */
-    public ByteBuffer run(Retriever retriever)
-    {
-        if (retriever == null)
-        {
+    public ByteBuffer run(Retriever retriever) {
+        if (retriever == null) {
             String message = Logging.getMessage("nullValue.RetrieverIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -76,14 +78,12 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
 
         this.retriever = retriever;
 
-        if (!retriever.getState().equals(Retriever.RETRIEVER_STATE_SUCCESSFUL))
-        {
+        if (!retriever.getState().equals(Retriever.RETRIEVER_STATE_SUCCESSFUL)) {
             this.handleUnsuccessfulRetrieval();
             return null;
         }
 
-        if (!this.validateResponseCode())
-        {
+        if (!this.validateResponseCode()) {
             this.handleInvalidResponseCode();
             return null;
         }
@@ -96,8 +96,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return the retriever associated with the post-processor, or null if no retriever is associated.
      */
-    public Retriever getRetriever()
-    {
+    public Retriever getRetriever() {
         return this.retriever;
     }
 
@@ -106,10 +105,10 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      * subclasses to handle special error cases. The default implementation calls {@link #markResourceAbsent()} if the
      * retrieval state is {@link Retriever#RETRIEVER_STATE_ERROR}.
      */
-    protected void handleUnsuccessfulRetrieval()
-    {
-        if (this.getRetriever().getState().equals(Retriever.RETRIEVER_STATE_ERROR))
+    protected void handleUnsuccessfulRetrieval() {
+        if (this.getRetriever().getState().equals(Retriever.RETRIEVER_STATE_ERROR)) {
             this.markResourceAbsent();
+        }
     }
 
     /**
@@ -117,14 +116,10 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return a buffer containing the downloaded data, perhaps converted during content handling.
      */
-    protected ByteBuffer handleSuccessfulRetrieval()
-    {
-        try
-        {
+    protected ByteBuffer handleSuccessfulRetrieval() {
+        try {
             return this.handleContent();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.handleContentException(e);
             return null;
         }
@@ -134,17 +129,17 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      * Checks the retrieval response code.
      *
      * @return true if the response code is the OK value for the protocol, e.g., ({@link HttpURLConnection#HTTP_OK} for
-     *         HTTP protocol), otherwise false.
+     * HTTP protocol), otherwise false.
      */
-    protected boolean validateResponseCode()
-    {
+    protected boolean validateResponseCode() {
         //noinspection SimplifiableIfStatement
-        if (this.getRetriever() instanceof HTTPRetriever)
+        if (this.getRetriever() instanceof HTTPRetriever) {
             return this.validateHTTPResponseCode();
-        else if (this.getRetriever() instanceof JarRetriever)
+        } else if (this.getRetriever() instanceof JarRetriever) {
             return this.validateJarResponseCode();
-        else if (this.getRetriever() instanceof LocalRasterServerRetriever)
+        } else if (this.getRetriever() instanceof LocalRasterServerRetriever) {
             return true;
+        }
 
         return false;
     }
@@ -155,8 +150,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return true if the response code is {@link HttpURLConnection#HTTP_OK}, otherwise false.
      */
-    protected boolean validateHTTPResponseCode()
-    {
+    protected boolean validateHTTPResponseCode() {
         HTTPRetriever htr = (HTTPRetriever) this.getRetriever();
 
         return htr.getResponseCode() == HttpURLConnection.HTTP_OK;
@@ -168,8 +162,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return true if the response code is {@link HttpURLConnection#HTTP_OK}, otherwise false.
      */
-    protected boolean validateJarResponseCode()
-    {
+    protected boolean validateJarResponseCode() {
         JarRetriever htr = (JarRetriever) this.getRetriever();
 
         return htr.getResponseCode() == HttpURLConnection.HTTP_OK; // Re-using the HTTP response code for OK
@@ -180,23 +173,21 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      * default implementation calls {@link #markResourceAbsent()} and logs the contents of the retrieval buffer if it
      * contains content of type "text".
      */
-    protected void handleInvalidResponseCode()
-    {
+    protected void handleInvalidResponseCode() {
         this.markResourceAbsent();
 
-        if (this.isWMSException())
+        if (this.isWMSException()) {
             this.handleWMSExceptionContent();
-
-        else if (this.isPrimaryContentType("text", this.getRetriever().getContentType()))
+        } else if (this.isPrimaryContentType("text", this.getRetriever().getContentType())) {
             this.logTextBuffer(this.getRetriever().getBuffer()); // the buffer might contain error info, so log it
+        }
     }
 
     /**
      * Marks the retrieval target absent. Subclasses should override this method if they keep track of absent-resources.
      * The default implementation does nothing.
      */
-    protected void markResourceAbsent()
-    {
+    protected void markResourceAbsent() {
     }
 
     /**
@@ -206,12 +197,11 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      * of null.
      *
      * @return true if the buffer was saved, false if the output file could not be determined or already exists and not
-     *         overwritten.
+     * overwritten.
      *
      * @throws IOException if an IO error occurs while attempting to save the buffer.
      */
-    protected boolean saveBuffer() throws IOException
-    {
+    protected boolean saveBuffer() throws IOException {
         return this.saveBuffer(null);
     }
 
@@ -222,19 +212,20 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      * @param buffer the buffer to save.
      *
      * @return true if the buffer was saved, false if the output file could not be determined or already exists and not
-     *         overwritten.
+     * overwritten.
      *
      * @throws IOException if an IO error occurred when attempting to save the buffer.
      */
-    protected boolean saveBuffer(ByteBuffer buffer) throws IOException
-    {
+    protected boolean saveBuffer(ByteBuffer buffer) throws IOException {
         File outFile = this.getOutputFile();
 
-        if (outFile == null)
+        if (outFile == null) {
             return false;
+        }
 
-        if (outFile.exists() && !this.overwriteExistingFile())
+        if (outFile.exists() && !this.overwriteExistingFile()) {
             return false;
+        }
 
         synchronized (this.getFileLock()) // synchronize with read of file in another class
         {
@@ -249,12 +240,12 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return the output file, or null if a file could not be determined.
      */
-    protected File getOutputFile()
-    {
+    protected File getOutputFile() {
         File outFile = this.doGetOutputFile();
 
-        if (outFile != null && this.isDeleteOnExit(outFile))
+        if (outFile != null && this.isDeleteOnExit(outFile)) {
             outFile.deleteOnExit();
+        }
 
         return outFile;
     }
@@ -265,8 +256,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return true if an existing file should be overwritten, otherwise false.
      */
-    protected boolean overwriteExistingFile()
-    {
+    protected boolean overwriteExistingFile() {
         return false;
     }
 
@@ -278,8 +268,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return true if the output file's delete-on-exit flag should be set, otherwise false.
      */
-    protected boolean isDeleteOnExit(File outFile)
-    {
+    protected boolean isDeleteOnExit(File outFile) {
         return !outFile.exists() && this.avList != null && this.avList.getValue(AVKey.DELETE_CACHE_ON_EXIT) != null;
     }
 
@@ -290,25 +279,24 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return an object to use for read/write synchronization, or null if no lock is needed.
      */
-    protected Object getFileLock()
-    {
+    protected Object getFileLock() {
         return this;
     }
 
-    protected boolean isPrimaryContentType(String typeOfContent, String contentType)
-    {
-        if (WWUtil.isEmpty(contentType) || WWUtil.isEmpty(typeOfContent))
+    protected boolean isPrimaryContentType(String typeOfContent, String contentType) {
+        if (WWUtil.isEmpty(contentType) || WWUtil.isEmpty(typeOfContent)) {
             return false;
+        }
 
         return contentType.trim().toLowerCase().startsWith(typeOfContent);
     }
 
-    protected boolean isWMSException()
-    {
+    protected boolean isWMSException() {
         String contentType = this.getRetriever().getContentType();
 
-        if (WWUtil.isEmpty(contentType))
+        if (WWUtil.isEmpty(contentType)) {
             return false;
+        }
 
         return contentType.trim().equalsIgnoreCase("application/vnd.ogc.se_xml");
     }
@@ -322,38 +310,41 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @throws IOException if an IO error occurs while processing the data.
      */
-    protected ByteBuffer handleContent() throws IOException
-    {
+    protected ByteBuffer handleContent() throws IOException {
         String contentType = this.getRetriever().getContentType();
-        if (WWUtil.isEmpty(contentType))
-        {
+        if (WWUtil.isEmpty(contentType)) {
             // Try to determine the content type from the URL's suffix, if any.
             String suffix = WWIO.getSuffix(this.getRetriever().getName().split(";")[0]);
-            if (!WWUtil.isEmpty(suffix))
+            if (!WWUtil.isEmpty(suffix)) {
                 contentType = WWIO.makeMimeTypeForSuffix(suffix);
+            }
 
-            if (WWUtil.isEmpty(contentType))
-            {
+            if (WWUtil.isEmpty(contentType)) {
                 Logging.logger().severe(Logging.getMessage("nullValue.ContentTypeIsNullOrEmpty"));
                 return null;
             }
         }
         contentType = contentType.trim().toLowerCase();
 
-        if (this.isWMSException())
+        if (this.isWMSException()) {
             return this.handleWMSExceptionContent();
+        }
 
-        if (contentType.contains("zip"))
+        if (contentType.contains("zip")) {
             return this.handleZipContent();
+        }
 
-        if (this.isPrimaryContentType("text", contentType))
+        if (this.isPrimaryContentType("text", contentType)) {
             return this.handleTextContent();
+        }
 
-        if (this.isPrimaryContentType("image", contentType))
+        if (this.isPrimaryContentType("image", contentType)) {
             return this.handleImageContent();
+        }
 
-        if (this.isPrimaryContentType("application", contentType))
+        if (this.isPrimaryContentType("application", contentType)) {
             return this.handleApplicationContent();
+        }
 
         return this.handleUnknownContentType();
     }
@@ -364,19 +355,15 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @param e the exception to handle.
      */
-    protected void handleContentException(Exception e)
-    {
-        if (e instanceof ClosedByInterruptException)
-        {
+    protected void handleContentException(Exception e) {
+        if (e instanceof ClosedByInterruptException) {
             Logging.logger().log(java.util.logging.Level.FINE,
-                Logging.getMessage("generic.OperationCancelled",
-                    "retrieval post-processing for " + this.getRetriever().getName()), e);
-        }
-        else if (e instanceof IOException)
-        {
+                    Logging.getMessage("generic.OperationCancelled",
+                            "retrieval post-processing for " + this.getRetriever().getName()), e);
+        } else if (e instanceof IOException) {
             this.markResourceAbsent();
             Logging.logger().log(java.util.logging.Level.SEVERE,
-                Logging.getMessage("generic.ExceptionWhileSavingRetreivedData", this.getRetriever().getName()), e);
+                    Logging.getMessage("generic.ExceptionWhileSavingRetreivedData", this.getRetriever().getName()), e);
         }
     }
 
@@ -386,10 +373,9 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return null if no further processing should occur, otherwise the retrieved data, perhaps transformed.
      */
-    protected ByteBuffer handleUnknownContentType()
-    {
+    protected ByteBuffer handleUnknownContentType() {
         Logging.logger().log(java.util.logging.Level.WARNING,
-            Logging.getMessage("generic.UnknownContentType", this.getRetriever().getContentType()));
+                Logging.getMessage("generic.UnknownContentType", this.getRetriever().getContentType()));
 
         return null;
     }
@@ -403,15 +389,16 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @throws IOException if an IO error occurs while processing the data.
      */
-    protected ByteBuffer handleTextContent() throws IOException
-    {
+    protected ByteBuffer handleTextContent() throws IOException {
         String contentType = this.getRetriever().getContentType().trim().toLowerCase();
 
-        if (contentType.contains("xml"))
+        if (contentType.contains("xml")) {
             return this.handleXMLContent();
+        }
 
-        if (contentType.contains("html"))
+        if (contentType.contains("html")) {
             return this.handleHTMLContent();
+        }
 
         this.logTextBuffer(this.getRetriever().getBuffer());
 
@@ -426,8 +413,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @throws IOException if an IO error occurs while processing the data.
      */
-    protected ByteBuffer handleXMLContent() throws IOException
-    {
+    protected ByteBuffer handleXMLContent() throws IOException {
         this.logTextBuffer(this.getRetriever().getBuffer());
 
         return null;
@@ -441,8 +427,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @throws IOException if an IO error occurs while processing the data.
      */
-    protected ByteBuffer handleHTMLContent() throws IOException
-    {
+    protected ByteBuffer handleHTMLContent() throws IOException {
         this.logTextBuffer(this.getRetriever().getBuffer());
 
         return null;
@@ -454,10 +439,10 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @param buffer the content to log. The content is assumed to be of type "text".
      */
-    protected void logTextBuffer(ByteBuffer buffer)
-    {
-        if (buffer == null || !buffer.hasRemaining())
+    protected void logTextBuffer(ByteBuffer buffer) {
+        if (buffer == null || !buffer.hasRemaining()) {
             return;
+        }
 
         Logging.logger().warning(WWIO.byteBufferToString(buffer, 2048, null));
     }
@@ -470,11 +455,11 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @throws IOException if an IO error occurs while processing the data.
      */
-    protected ByteBuffer handleZipContent() throws IOException
-    {
+    protected ByteBuffer handleZipContent() throws IOException {
         File outFile = this.getOutputFile();
-        if (outFile == null)
+        if (outFile == null) {
             return null;
+        }
 
         this.saveBuffer();
 
@@ -489,8 +474,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @throws IOException if an IO error occurs while processing the data.
      */
-    protected ByteBuffer handleApplicationContent() throws IOException
-    {
+    protected ByteBuffer handleApplicationContent() throws IOException {
         this.saveBuffer();
 
         return this.getRetriever().getBuffer();
@@ -501,8 +485,7 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return a buffer containing the retrieved XML.
      */
-    protected ByteBuffer handleWMSExceptionContent()
-    {
+    protected ByteBuffer handleWMSExceptionContent() {
         // TODO: Parse the xml and include only the message text in the log message.
 
         StringBuilder sb = new StringBuilder(this.getRetriever().getName());
@@ -525,29 +508,29 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @throws IOException if an IO error occurs while processing the data.
      */
-    protected ByteBuffer handleImageContent() throws IOException
-    {
+    protected ByteBuffer handleImageContent() throws IOException {
         // BE CAREFUL: This method may be overridden by subclasses to handle special image cases. It's also implemented
         // to handle elevations as images correctly (just save them to the filestore).
 
         File outFile = this.getOutputFile();
-        if (outFile == null || (outFile.exists() && !this.overwriteExistingFile()))
+        if (outFile == null || (outFile.exists() && !this.overwriteExistingFile())) {
             return this.getRetriever().getBuffer();
+        }
 
-        if (outFile.getPath().endsWith("dds"))
+        if (outFile.getPath().endsWith("dds")) {
             return this.saveDDS();
+        }
 
         BufferedImage image = this.transformPixels();
 
-        if (image != null)
-        {
+        if (image != null) {
             synchronized (this.getFileLock()) // synchronize with read of file in another class
             {
                 ImageIO.write(image, this.getRetriever().getContentType().split("/")[1], outFile);
             }
-        }
-        else
+        } else {
             this.saveBuffer();
+        }
 
         return this.getRetriever().getBuffer();
     }
@@ -560,13 +543,12 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @return returns the transformed data if a transform is performed, otherwise returns the original data.
      */
-    protected BufferedImage transformPixels()
-    {
-        if (this.avList != null)
-        {
+    protected BufferedImage transformPixels() {
+        if (this.avList != null) {
             int[] colors = (int[]) this.avList.getValue(AVKey.TRANSPARENCY_COLORS);
-            if (colors != null)
+            if (colors != null) {
                 return ImageUtil.mapTransparencyColors(this.getRetriever().getBuffer(), colors);
+            }
         }
 
         return null;
@@ -579,12 +561,12 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @throws IOException if an IO error occurs while converting or saving the image.
      */
-    protected ByteBuffer saveDDS() throws IOException
-    {
+    protected ByteBuffer saveDDS() throws IOException {
         ByteBuffer buffer = this.getRetriever().getBuffer();
 
-        if (!this.getRetriever().getContentType().contains("dds"))
+        if (!this.getRetriever().getContentType().contains("dds")) {
             buffer = this.convertToDDS();
+        }
 
         this.saveBuffer(buffer);
 
@@ -599,15 +581,15 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @throws IOException if an IO error occurs while converting the image.
      */
-    protected ByteBuffer convertToDDS() throws IOException
-    {
+    protected ByteBuffer convertToDDS() throws IOException {
         ByteBuffer buffer;
 
         BufferedImage image = this.transformPixels();
-        if (image != null)
+        if (image != null) {
             buffer = DDSCompressor.compressImage(image);
-        else
+        } else {
             buffer = DDSCompressor.compressImageBuffer(this.getRetriever().getBuffer());
+        }
 
         return buffer;
     }

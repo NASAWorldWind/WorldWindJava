@@ -22,29 +22,26 @@ import java.util.*;
  */
 public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with SurfacePolygons
 {
+
     protected VPFFeature feature;
     protected VPFPrimitiveData primitiveData;
     protected VecBufferSequence buffer;
     protected LatLon referenceLocation;
     protected Object interiorDisplayListCacheKey = new Object();
 
-    public VPFSurfaceArea(VPFFeature feature, VPFPrimitiveData primitiveData)
-    {
+    public VPFSurfaceArea(VPFFeature feature, VPFPrimitiveData primitiveData) {
         this.feature = feature;
         this.primitiveData = primitiveData;
         this.buffer = computeAreaFeatureCoords(feature, primitiveData);
         this.referenceLocation = feature.getBounds().toSector().getCentroid();
     }
 
-    protected static VecBufferSequence computeAreaFeatureCoords(VPFFeature feature, VPFPrimitiveData primitiveData)
-    {
+    protected static VecBufferSequence computeAreaFeatureCoords(VPFFeature feature, VPFPrimitiveData primitiveData) {
         final int numEdges = traverseAreaEdges(feature, primitiveData, null);
         final IntBuffer edgeIds = IntBuffer.wrap(new int[numEdges]);
 
-        traverseAreaEdges(feature, primitiveData, new EdgeListener()
-        {
-            public void nextEdge(int edgeId, VPFPrimitiveData.EdgeInfo edgeInfo)
-            {
+        traverseAreaEdges(feature, primitiveData, new EdgeListener() {
+            public void nextEdge(int edgeId, VPFPrimitiveData.EdgeInfo edgeInfo) {
                 edgeIds.put(edgeId);
             }
         });
@@ -55,27 +52,24 @@ public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with Sur
         return (VecBufferSequence) buffer.slice(edgeIds.array(), 0, numEdges);
     }
 
-    protected interface EdgeListener
-    {
+    protected interface EdgeListener {
+
         void nextEdge(int edgeId, VPFPrimitiveData.EdgeInfo edgeInfo);
     }
 
-    protected static int traverseAreaEdges(VPFFeature feature, VPFPrimitiveData primitiveData, EdgeListener listener)
-    {
+    protected static int traverseAreaEdges(VPFFeature feature, VPFPrimitiveData primitiveData, EdgeListener listener) {
         int count = 0;
 
         String primitiveName = feature.getFeatureClass().getPrimitiveTableName();
 
-        for (int id : feature.getPrimitiveIds())
-        {
+        for (int id : feature.getPrimitiveIds()) {
             VPFPrimitiveData.FaceInfo faceInfo = (VPFPrimitiveData.FaceInfo) primitiveData.getPrimitiveInfo(
-                primitiveName, id);
+                    primitiveName, id);
 
             VPFPrimitiveData.Ring outerRing = faceInfo.getOuterRing();
             count += traverseRingEdges(outerRing, primitiveData, listener);
 
-            for (VPFPrimitiveData.Ring ring : faceInfo.getInnerRings())
-            {
+            for (VPFPrimitiveData.Ring ring : faceInfo.getInnerRings()) {
                 count += traverseRingEdges(ring, primitiveData, listener);
             }
         }
@@ -84,19 +78,16 @@ public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with Sur
     }
 
     protected static int traverseRingEdges(VPFPrimitiveData.Ring ring, VPFPrimitiveData primitiveData,
-        EdgeListener listener)
-    {
+            EdgeListener listener) {
         int count = 0;
 
-        for (int edgeId : ring.edgeId)
-        {
-            VPFPrimitiveData.EdgeInfo edgeInfo = (VPFPrimitiveData.EdgeInfo)
-                primitiveData.getPrimitiveInfo(VPFConstants.EDGE_PRIMITIVE_TABLE, edgeId);
+        for (int edgeId : ring.edgeId) {
+            VPFPrimitiveData.EdgeInfo edgeInfo = (VPFPrimitiveData.EdgeInfo) primitiveData.getPrimitiveInfo(VPFConstants.EDGE_PRIMITIVE_TABLE, edgeId);
 
-            if (!edgeInfo.isOnTileBoundary())
-            {
-                if (listener != null)
+            if (!edgeInfo.isOnTileBoundary()) {
+                if (listener != null) {
                     listener.nextEdge(edgeId, edgeInfo);
+                }
                 count++;
             }
         }
@@ -104,34 +95,30 @@ public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with Sur
         return count;
     }
 
-    protected List<Sector> computeSectors(Globe globe)
-    {
+    protected List<Sector> computeSectors(Globe globe) {
         Sector s = this.feature.getBounds().toSector();
-        if (s == null || s.equals(Sector.EMPTY_SECTOR))
+        if (s == null || s.equals(Sector.EMPTY_SECTOR)) {
             return null;
+        }
 
         return Arrays.asList(s);
     }
 
-    public Iterable<? extends LatLon> getLocations()
-    {
+    public Iterable<? extends LatLon> getLocations() {
         return this.buffer.getLocations();
     }
 
-    public void setLocations(Iterable<? extends LatLon> iterable)
-    {
+    public void setLocations(Iterable<? extends LatLon> iterable) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Position getReferencePosition()
-    {
+    public Position getReferencePosition() {
         return new Position(this.referenceLocation, 0d);
     }
 
     @Override
-    protected void applyModelviewTransform(DrawContext dc, SurfaceTileDrawContext sdc)
-    {
+    protected void applyModelviewTransform(DrawContext dc, SurfaceTileDrawContext sdc) {
         // Apply the geographic to surface tile coordinate transform.
         Matrix modelview = sdc.getModelviewMatrix();
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -139,18 +126,15 @@ public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with Sur
     }
 
     @Override
-    protected ShapeAttributes createActiveAttributes()
-    {
+    protected ShapeAttributes createActiveAttributes() {
         return new VPFSymbolAttributes();
     }
 
-    protected void determineActiveGeometry(DrawContext dc, SurfaceTileDrawContext sdc)
-    {
+    protected void determineActiveGeometry(DrawContext dc, SurfaceTileDrawContext sdc) {
         // Intentionally left blank in order to override the superclass behavior with nothing.
     }
 
-    protected void drawInterior(DrawContext dc, SurfaceTileDrawContext sdc)
-    {
+    protected void drawInterior(DrawContext dc, SurfaceTileDrawContext sdc) {
         // Concave shape makes no assumptions about the nature or structure of the shape's vertices. The interior is
         // treated as a potentially complex polygon, and this code will do its best to rasterize that polygon. The
         // outline is treated as a simple line loop, regardless of whether the shape's vertices actually define a
@@ -162,33 +146,29 @@ public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with Sur
         this.applyInteriorState(dc, sdc, this.getActiveAttributes(), this.getInteriorTexture(), LatLon.ZERO);
 
         int[] dlResource = (int[]) dc.getGpuResourceCache().get(this.interiorDisplayListCacheKey);
-        if (dlResource == null)
-        {
-            dlResource = new int[] {gl.glGenLists(1), 1};
+        if (dlResource == null) {
+            dlResource = new int[]{gl.glGenLists(1), 1};
             gl.glNewList(dlResource[0], GL2.GL_COMPILE);
             // Tessellate the interior vertices using a reference location of (0, 0), because VPFSurfaceArea's
             // coordinates do not need to be offset with respect to a reference location.
             Integer numBytes = this.tessellateInterior(dc);
             gl.glEndList();
 
-            if (numBytes == null)
-            {
+            if (numBytes == null) {
                 gl.glDeleteLists(dlResource[0], dlResource[1]);
                 dlResource = null;
-            }
-            else
-            {
+            } else {
                 dc.getGpuResourceCache().put(this.interiorDisplayListCacheKey, dlResource,
-                    GpuResourceCache.DISPLAY_LISTS, numBytes);
+                        GpuResourceCache.DISPLAY_LISTS, numBytes);
             }
         }
 
-        if (dlResource != null)
+        if (dlResource != null) {
             gl.glCallList(dlResource[0]);
+        }
     }
 
-    protected void drawOutline(DrawContext dc, SurfaceTileDrawContext sdc)
-    {
+    protected void drawOutline(DrawContext dc, SurfaceTileDrawContext sdc) {
         this.applyOutlineState(dc, this.getActiveAttributes());
 
         // Edges features are not necessarily closed loops, therefore each edge must be rendered as separate line strip.
@@ -196,17 +176,13 @@ public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with Sur
         this.buffer.multiDrawArrays(dc, GL.GL_LINE_STRIP);
     }
 
-    protected WWTexture getInteriorTexture()
-    {
-        if (this.getActiveAttributes().getImageSource() == null)
-        {
+    protected WWTexture getInteriorTexture() {
+        if (this.getActiveAttributes().getImageSource() == null) {
             this.texture = null;
-        }
-        else if (this.texture == null
-            || this.texture.getImageSource() != this.getActiveAttributes().getImageSource())
-        {
+        } else if (this.texture == null
+                || this.texture.getImageSource() != this.getActiveAttributes().getImageSource()) {
             this.texture = new BasicWWTexture(this.getActiveAttributes().getImageSource(),
-                ((VPFSymbolAttributes) this.getActiveAttributes()).isMipMapIconImage());
+                    ((VPFSymbolAttributes) this.getActiveAttributes()).isMipMapIconImage());
         }
 
         return this.texture;
@@ -215,9 +191,7 @@ public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with Sur
     //**************************************************************//
     //********************  Interior Tessellation  *****************//
     //**************************************************************//
-
-    protected Integer tessellateInteriorVertices(GLUtessellator tess)
-    {
+    protected Integer tessellateInteriorVertices(GLUtessellator tess) {
         // Setup the winding order to correctly tessellate the outer and inner rings. The outer ring is specified
         // with a clockwise winding order, while inner rings are specified with a counter-clockwise order. Inner
         // rings are subtracted from the outer ring, producing an area with holes.
@@ -227,20 +201,20 @@ public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with Sur
         int numBytes = 0; // approximate size of the display list
         String primitiveName = this.feature.getFeatureClass().getPrimitiveTableName();
 
-        for (int id : this.feature.getPrimitiveIds())
-        {
+        for (int id : this.feature.getPrimitiveIds()) {
             VPFPrimitiveData.FaceInfo faceInfo = (VPFPrimitiveData.FaceInfo) primitiveData.getPrimitiveInfo(
-                primitiveName, id);
+                    primitiveName, id);
 
             Integer nb = this.tessellateRing(tess, faceInfo.getOuterRing());
-            if (nb != null)
+            if (nb != null) {
                 numBytes += nb;
+            }
 
-            for (VPFPrimitiveData.Ring ring : faceInfo.getInnerRings())
-            {
+            for (VPFPrimitiveData.Ring ring : faceInfo.getInnerRings()) {
                 nb = this.tessellateRing(tess, ring);
-                if (nb != null)
+                if (nb != null) {
                     numBytes += nb;
+                }
             }
         }
 
@@ -249,22 +223,19 @@ public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with Sur
         return numBytes;
     }
 
-    protected Integer tessellateRing(GLUtessellator tess, VPFPrimitiveData.Ring ring)
-    {
+    protected Integer tessellateRing(GLUtessellator tess, VPFPrimitiveData.Ring ring) {
         GLU.gluTessBeginContour(tess);
 
         CompoundVecBuffer buffer = this.primitiveData.getPrimitiveCoords(VPFConstants.EDGE_PRIMITIVE_TABLE);
         int numEdges = ring.getNumEdges();
         int numBytes = 0;
 
-        for (int i = 0; i < numEdges; i++)
-        {
+        for (int i = 0; i < numEdges; i++) {
             VecBuffer vecBuffer = buffer.subBuffer(ring.getEdgeId(i));
-            Iterable<double[]> iterable = (ring.getEdgeOrientation(i) < 0) ?
-                vecBuffer.getReverseCoords(3) : vecBuffer.getCoords(3);
+            Iterable<double[]> iterable = (ring.getEdgeOrientation(i) < 0)
+                    ? vecBuffer.getReverseCoords(3) : vecBuffer.getCoords(3);
 
-            for (double[] coords : iterable)
-            {
+            for (double[] coords : iterable) {
                 GLU.gluTessVertex(tess, coords, 0, coords);
                 numBytes += 3 * 4; // 3 float coords
             }
@@ -282,13 +253,11 @@ public class VPFSurfaceArea extends SurfacePolygon // TODO: consolidate with Sur
      * @param dc the current DrawContext.
      */
     @Override
-    protected void handleUnsuccessfulInteriorTessellation(DrawContext dc)
-    {
+    protected void handleUnsuccessfulInteriorTessellation(DrawContext dc) {
         super.handleUnsuccessfulInteriorTessellation(dc);
 
         // If tessellating the shape's interior was unsuccessful, we modify the shape to avoid any additional
         // tessellation attempts, and free any resources that the shape won't use.
-
         // Replace the shape's coordinate buffer with an empty VecBufferSequence . This ensures that any rendering
         // code won't attempt to re-tessellate this shape.
         this.buffer = VecBufferSequence.emptyVecBufferSequence(2);

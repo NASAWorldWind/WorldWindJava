@@ -14,15 +14,14 @@ import java.util.*;
  * @author tag
  * @version $Id: GeographicSurfaceTileRenderer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeographicSurfaceTileRenderer extends SurfaceTileRenderer
-{
+public class GeographicSurfaceTileRenderer extends SurfaceTileRenderer {
+
     private double sgWidth;
     private double sgHeight;
     private double sgMinWE;
     private double sgMinSN;
 
-    protected void preComputeTextureTransform(DrawContext dc, SectorGeometry sg, Transform t)
-    {
+    protected void preComputeTextureTransform(DrawContext dc, SectorGeometry sg, Transform t) {
         Sector st = sg.getSector();
         this.sgWidth = st.getDeltaLonRadians();
         this.sgHeight = st.getDeltaLatRadians();
@@ -30,8 +29,7 @@ public class GeographicSurfaceTileRenderer extends SurfaceTileRenderer
         this.sgMinSN = st.getMinLatitude().radians;
     }
 
-    protected void computeTextureTransform(DrawContext dc, SurfaceTile tile, Transform t)
-    {
+    protected void computeTextureTransform(DrawContext dc, SurfaceTile tile, Transform t) {
         Sector st = tile.getSector();
         double tileWidth = st.getDeltaLonRadians();
         double tileHeight = st.getDeltaLatRadians();
@@ -45,17 +43,18 @@ public class GeographicSurfaceTileRenderer extends SurfaceTileRenderer
     }
 
     protected Iterable<SurfaceTile> getIntersectingTiles(DrawContext dc, SectorGeometry sg,
-        Iterable<? extends SurfaceTile> tiles)
-    {
+            Iterable<? extends SurfaceTile> tiles) {
         ArrayList<SurfaceTile> intersectingTiles = null;
 
-        for (SurfaceTile tile : tiles)
-        {
-            if (!tile.getSector().intersectsInterior(sg.getSector()))
+        for (SurfaceTile tile : tiles) {
+            if (!tile.getSector().intersectsInterior(sg.getSector())) {
                 continue;
+            }
 
             if (intersectingTiles == null) // lazy creation because most common case is no intersecting tiles
+            {
                 intersectingTiles = new ArrayList<SurfaceTile>();
+            }
 
             intersectingTiles.add(tile);
         }

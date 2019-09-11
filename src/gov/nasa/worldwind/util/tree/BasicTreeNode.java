@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util.tree;
 
 import gov.nasa.worldwind.*;
@@ -21,8 +20,8 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: BasicTreeNode.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BasicTreeNode extends WWObjectImpl implements TreeNode
-{
+public class BasicTreeNode extends WWObjectImpl implements TreeNode {
+
     protected String text;
     protected Object imageSource;
     protected BasicWWTexture texture;
@@ -47,21 +46,18 @@ public class BasicTreeNode extends WWObjectImpl implements TreeNode
      *
      * @param text Node text.
      */
-    public BasicTreeNode(String text)
-    {
+    public BasicTreeNode(String text) {
         this(text, null);
     }
 
     /**
      * Create a node with text and an icon.
      *
-     * @param text        Node text.
+     * @param text Node text.
      * @param imageSource Image source for the node icon. May be a String, URL, or BufferedImage.
      */
-    public BasicTreeNode(String text, Object imageSource)
-    {
-        if (text == null)
-        {
+    public BasicTreeNode(String text, Object imageSource) {
+        if (text == null) {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -71,67 +67,79 @@ public class BasicTreeNode extends WWObjectImpl implements TreeNode
         this.setImageSource(imageSource);
     }
 
-    /** {@inheritDoc} */
-    public String getText()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public String getText() {
         return this.text;
     }
 
-    /** {@inheritDoc} */
-    public TreeNode getParent()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public TreeNode getParent() {
         return this.parent;
     }
 
-    /** {@inheritDoc} */
-    public void setParent(TreeNode node)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setParent(TreeNode node) {
         this.parent = node;
     }
 
-    /** {@inheritDoc} */
-    public Iterable<TreeNode> getChildren()
-    {
-        if (this.children != null)
+    /**
+     * {@inheritDoc}
+     */
+    public Iterable<TreeNode> getChildren() {
+        if (this.children != null) {
             return Collections.unmodifiableList(this.children);
-        else
+        } else {
             return Collections.emptyList();
+        }
     }
 
-    /** {@inheritDoc} */
-    public boolean isEnabled()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isEnabled() {
         return this.enabled;
     }
 
-    /** {@inheritDoc} */
-    public void setEnabled(boolean enabled)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
-    /** {@inheritDoc} */
-    public boolean isSelected()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isSelected() {
         return this.selected;
     }
 
-    /** {@inheritDoc} */
-    public void setSelected(boolean selected)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setSelected(boolean selected) {
         boolean prevSelected = this.isSelected();
         this.selected = selected;
         this.treeSelected = null; // Need to recompute tree selected field
 
-        if (prevSelected != selected)
+        if (prevSelected != selected) {
             this.firePropertyChange(AVKey.TREE_NODE, null, this);
+        }
     }
 
-    /** {@inheritDoc} */
-    public String isTreeSelected()
-    {
-        if (this.treeSelected == null)
+    /**
+     * {@inheritDoc}
+     */
+    public String isTreeSelected() {
+        if (this.treeSelected == null) {
             this.treeSelected = this.computeTreeSelected();
+        }
 
         return this.treeSelected;
     }
@@ -141,16 +149,13 @@ public class BasicTreeNode extends WWObjectImpl implements TreeNode
      *
      * @return {@link #SELECTED}, {@link #NOT_SELECTED}, {@link #PARTIALLY_SELECTED}.
      */
-    protected String computeTreeSelected()
-    {
+    protected String computeTreeSelected() {
         String selected = this.isSelected() ? SELECTED : NOT_SELECTED;
 
-        for (TreeNode child : this.getChildren())
-        {
+        for (TreeNode child : this.getChildren()) {
             String childSelected = child.isTreeSelected();
 
-            if (!selected.equals(childSelected))
-            {
+            if (!selected.equals(childSelected)) {
                 selected = PARTIALLY_SELECTED;
                 break; // No need to look at other nodes
             }
@@ -159,58 +164,64 @@ public class BasicTreeNode extends WWObjectImpl implements TreeNode
         return selected;
     }
 
-    /** {@inheritDoc} */
-    public boolean isVisible()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isVisible() {
         return this.visible;
     }
 
-    /** {@inheritDoc} */
-    public boolean isLeaf()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isLeaf() {
         return WWUtil.isEmpty(this.children);
     }
 
-    /** {@inheritDoc} */
-    public void setVisible(boolean visible)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setVisible(boolean visible) {
         this.visible = visible;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description != null ? description.trim() : null;
     }
 
-    /** {@inheritDoc} */
-    public Object getImageSource()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Object getImageSource() {
         return imageSource;
     }
 
-    /** {@inheritDoc} */
-    public void setImageSource(Object imageSource)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setImageSource(Object imageSource) {
         this.imageSource = imageSource;
         this.texture = null;
     }
 
-    /** {@inheritDoc} */
-    public boolean hasImage()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean hasImage() {
         return this.getImageSource() != null;
     }
 
-    /** {@inheritDoc} */
-    public BasicWWTexture getTexture()
-    {
-        if (this.texture == null)
+    /**
+     * {@inheritDoc}
+     */
+    public BasicWWTexture getTexture() {
+        if (this.texture == null) {
             this.initializeTexture();
+        }
 
         return this.texture;
     }
@@ -219,36 +230,35 @@ public class BasicTreeNode extends WWObjectImpl implements TreeNode
      * Create and initialize the texture from the image source. If the image is not in memory this method will request
      * that it be loaded.
      */
-    protected void initializeTexture()
-    {
+    protected void initializeTexture() {
         Object imageSource = this.getImageSource();
-        if (imageSource instanceof String || imageSource instanceof URL)
-        {
+        if (imageSource instanceof String || imageSource instanceof URL) {
             URL imageURL = WorldWind.getDataFileStore().requestFile(imageSource.toString());
-            if (imageURL != null)
-            {
+            if (imageURL != null) {
                 this.texture = new BasicWWTexture(imageURL, true);
             }
-        }
-        else if (imageSource != null)
-        {
+        } else if (imageSource != null) {
             this.texture = new BasicWWTexture(imageSource, true);
         }
     }
 
-    /** {@inheritDoc} */
-    public void addChild(TreeNode child)
-    {
-        if (this.children == null)
+    /**
+     * {@inheritDoc}
+     */
+    public void addChild(TreeNode child) {
+        if (this.children == null) {
             this.children = new ArrayList<TreeNode>();
+        }
         this.addChild(this.children.size(), child);
     }
 
-    /** {@inheritDoc} */
-    public void addChild(int index, TreeNode child)
-    {
-        if (this.children == null)
+    /**
+     * {@inheritDoc}
+     */
+    public void addChild(int index, TreeNode child) {
+        if (this.children == null) {
             this.children = new ArrayList<TreeNode>();
+        }
         this.children.add(index, child);
 
         this.treeSelected = null;  // Need to recompute tree selected field
@@ -257,14 +267,15 @@ public class BasicTreeNode extends WWObjectImpl implements TreeNode
         this.firePropertyChange(AVKey.TREE_NODE, null, this);
     }
 
-    /** {@inheritDoc} */
-    public void removeChild(TreeNode child)
-    {
-        if (this.children != null)
+    /**
+     * {@inheritDoc}
+     */
+    public void removeChild(TreeNode child) {
+        if (this.children != null) {
             this.children.remove(child);
+        }
 
-        if (child != null && child.getParent() == this)
-        {
+        if (child != null && child.getParent() == this) {
             this.treeSelected = null;  // Need to recompute tree selected field
             child.setParent(null);
             child.removePropertyChangeListener(this);
@@ -272,18 +283,20 @@ public class BasicTreeNode extends WWObjectImpl implements TreeNode
         }
     }
 
-    /** {@inheritDoc} */
-    public void removeAllChildren()
-    {
-        if (this.children == null)
+    /**
+     * {@inheritDoc}
+     */
+    public void removeAllChildren() {
+        if (this.children == null) {
             return;
+        }
 
         Iterator<TreeNode> iterator = this.children.iterator();
-        if (!iterator.hasNext())
+        if (!iterator.hasNext()) {
             return;
+        }
 
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             TreeNode child = iterator.next();
             iterator.remove();
 
@@ -295,14 +308,14 @@ public class BasicTreeNode extends WWObjectImpl implements TreeNode
         this.firePropertyChange(AVKey.TREE_NODE, null, this);
     }
 
-    /** {@inheritDoc} */
-    public TreePath getPath()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public TreePath getPath() {
         TreePath path = new TreePath();
 
         TreeNode node = this;
-        while (node != null)
-        {
+        while (node != null) {
             path.add(0, node.getText());
             node = node.getParent();
         }
@@ -310,10 +323,11 @@ public class BasicTreeNode extends WWObjectImpl implements TreeNode
         return path;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-    {
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         this.treeSelected = null;  // Need to recompute tree selected field
         super.propertyChange(propertyChangeEvent);
     }

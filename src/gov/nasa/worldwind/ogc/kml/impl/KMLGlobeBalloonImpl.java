@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml.impl;
 
 import gov.nasa.worldwind.geom.Position;
@@ -17,9 +16,11 @@ import gov.nasa.worldwind.util.Logging;
  * @author pabercrombie
  * @version $Id: KMLGlobeBalloonImpl.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLGlobeBalloonImpl extends KMLAbstractBalloon implements GlobeBalloon
-{
-    /** The contained balloon. */
+public class KMLGlobeBalloonImpl extends KMLAbstractBalloon implements GlobeBalloon {
+
+    /**
+     * The contained balloon.
+     */
     protected GlobeBalloon balloon;
 
     /**
@@ -28,12 +29,10 @@ public class KMLGlobeBalloonImpl extends KMLAbstractBalloon implements GlobeBall
      * @param balloon Balloon to apply KML styling to.
      * @param feature The feature that defines the balloon style.
      */
-    public KMLGlobeBalloonImpl(GlobeBalloon balloon, KMLAbstractFeature feature)
-    {
+    public KMLGlobeBalloonImpl(GlobeBalloon balloon, KMLAbstractFeature feature) {
         super(feature);
 
-        if (balloon == null)
-        {
+        if (balloon == null) {
             String msg = Logging.getMessage("nullValue.BalloonIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -42,33 +41,38 @@ public class KMLGlobeBalloonImpl extends KMLAbstractBalloon implements GlobeBall
         this.initialize(balloon);
     }
 
-    /** {@inheritDoc} */
-    public GlobeBalloon getBalloon()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public GlobeBalloon getBalloon() {
         return this.balloon;
     }
 
-    /** {@inheritDoc}. This method passes through to the contained balloon. */
-    public void setPosition(Position position)
-    {
+    /**
+     * {@inheritDoc}. This method passes through to the contained balloon.
+     */
+    public void setPosition(Position position) {
         this.getBalloon().setPosition(position);
     }
 
-    /** {@inheritDoc}. This method passes through to the contained balloon. */
-    public Position getPosition()
-    {
+    /**
+     * {@inheritDoc}. This method passes through to the contained balloon.
+     */
+    public Position getPosition() {
         return this.getBalloon().getPosition();
     }
 
-    /** {@inheritDoc}. This method passes through to the contained balloon. */
-    public int getAltitudeMode()
-    {
+    /**
+     * {@inheritDoc}. This method passes through to the contained balloon.
+     */
+    public int getAltitudeMode() {
         return this.getBalloon().getAltitudeMode();
     }
 
-    /** {@inheritDoc}. This method passes through to the contained balloon. */
-    public void setAltitudeMode(int altitudeMode)
-    {
+    /**
+     * {@inheritDoc}. This method passes through to the contained balloon.
+     */
+    public void setAltitudeMode(int altitudeMode) {
         this.getBalloon().setAltitudeMode(altitudeMode);
     }
 }

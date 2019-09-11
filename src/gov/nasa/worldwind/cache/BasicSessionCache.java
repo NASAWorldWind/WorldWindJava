@@ -22,8 +22,8 @@ import gov.nasa.worldwind.util.*;
  * @author dcollins
  * @version $Id: BasicSessionCache.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BasicSessionCache implements SessionCache
-{
+public class BasicSessionCache implements SessionCache {
+
     protected static final int DEFAULT_CAPACITY = 8;
 
     protected BoundedHashMap<Object, Object> entries;
@@ -35,10 +35,8 @@ public class BasicSessionCache implements SessionCache
      *
      * @throws IllegalArgumentException if capacity is negative.
      */
-    public BasicSessionCache(int capacity)
-    {
-        if (capacity < 0)
-        {
+    public BasicSessionCache(int capacity) {
+        if (capacity < 0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "capacity < 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -47,9 +45,10 @@ public class BasicSessionCache implements SessionCache
         this.entries = new BoundedHashMap<Object, Object>(capacity);
     }
 
-    /** Creates a BasicSessionCache with the default capacity. */
-    public BasicSessionCache()
-    {
+    /**
+     * Creates a BasicSessionCache with the default capacity.
+     */
+    public BasicSessionCache() {
         this(DEFAULT_CAPACITY);
     }
 
@@ -58,8 +57,7 @@ public class BasicSessionCache implements SessionCache
      *
      * @return maximum number of entries in the cache.
      */
-    public synchronized int getCapacity()
-    {
+    public synchronized int getCapacity() {
         return this.entries.getCapacity();
     }
 
@@ -71,10 +69,8 @@ public class BasicSessionCache implements SessionCache
      *
      * @throws IllegalArgumentException if capacity is negative.
      */
-    public synchronized void setCapacity(int capacity)
-    {
-        if (capacity < 0)
-        {
+    public synchronized void setCapacity(int capacity) {
+        if (capacity < 0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "capacity < 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -88,8 +84,7 @@ public class BasicSessionCache implements SessionCache
      *
      * @return number of cached entries.
      */
-    public synchronized int getEntryCount()
-    {
+    public synchronized int getEntryCount() {
         return this.entries.size();
     }
 
@@ -99,8 +94,7 @@ public class BasicSessionCache implements SessionCache
      *
      * @return a {@link java.util.Set} view of the keys contained in the cache.
      */
-    public synchronized java.util.Set<Object> getKeySet()
-    {
+    public synchronized java.util.Set<Object> getKeySet() {
         return java.util.Collections.unmodifiableSet(this.entries.keySet());
     }
 
@@ -113,10 +107,8 @@ public class BasicSessionCache implements SessionCache
      *
      * @throws IllegalArgumentException if the key is null.
      */
-    public synchronized boolean contains(Object key)
-    {
-        if (key == null)
-        {
+    public synchronized boolean contains(Object key) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -135,10 +127,8 @@ public class BasicSessionCache implements SessionCache
      *
      * @throws IllegalArgumentException if the key is null.
      */
-    public synchronized Object get(Object key)
-    {
-        if (key == null)
-        {
+    public synchronized Object get(Object key) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -151,15 +141,13 @@ public class BasicSessionCache implements SessionCache
      * Adds an entry in the cache with a specified key and value. If the cache size after adding the new entry is
      * greater than its capacity, this evicts the eldest entry in the cache.
      *
-     * @param key   the entry's key. A null value is not permitted.
+     * @param key the entry's key. A null value is not permitted.
      * @param value the entry's value. A null value is permitted.
      *
      * @throws IllegalArgumentException if the key is null.
      */
-    public synchronized void put(Object key, Object value)
-    {
-        if (key == null)
-        {
+    public synchronized void put(Object key, Object value) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -176,10 +164,8 @@ public class BasicSessionCache implements SessionCache
      *
      * @return a reference to the removed entry's value, or null of no entry matches the specified key.
      */
-    public synchronized Object remove(Object key)
-    {
-        if (key == null)
-        {
+    public synchronized Object remove(Object key) {
+        if (key == null) {
             String message = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -188,9 +174,10 @@ public class BasicSessionCache implements SessionCache
         return this.entries.remove(key);
     }
 
-    /** Removes all entries from the cache. */
-    public synchronized void clear()
-    {
+    /**
+     * Removes all entries from the cache.
+     */
+    public synchronized void clear() {
         this.entries.clear();
     }
 }

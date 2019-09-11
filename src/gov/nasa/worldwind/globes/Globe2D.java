@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.globes;
 
 /**
@@ -12,15 +11,15 @@ package gov.nasa.worldwind.globes;
  * @author tag
  * @version $Id: Globe2D.java 2158 2014-07-19 00:00:57Z pabercrombie $
  */
-public interface Globe2D
-{
+public interface Globe2D {
+
     /**
      * Specifies whether to treat the associated projection as contiguous with itself. If true, the scene controller
      * will make the implementing globe appear to scroll continuously horizontally. Calling this method overrides the
      * associated projection's value for this field.
      *
      * @param continuous <code>true</code> if it makes sense to treat the associated projection as continuous, otherwise
-     *                   <code>false</code>.
+     * <code>false</code>.
      *
      * @see gov.nasa.worldwind.globes.GeographicProjection#isContinuous()
      */
@@ -31,7 +30,7 @@ public interface Globe2D
      * controller will make the implementing globe appear to scroll continuously horizontally.
      *
      * @return <code>true</code> if it makes sense to treat the associated projection as continuous, otherwise
-     *         <code>false</code>.
+     * <code>false</code>.
      */
     boolean isContinuous();
 

@@ -20,13 +20,19 @@ import java.beans.PropertyChangeEvent;
  * @author pabercrombie
  * @version $Id: AbstractWebView.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class AbstractWebView extends WWObjectImpl implements WebView, Disposable
-{
-    /** The size of the WebView frame in pixels. Initially null, indicating the default size is used. */
+public abstract class AbstractWebView extends WWObjectImpl implements WebView, Disposable {
+
+    /**
+     * The size of the WebView frame in pixels. Initially null, indicating the default size is used.
+     */
     protected Dimension frameSize;
-    /** The WebView's current texture representation. Lazily created in {@link #getTextureRepresentation}. */
+    /**
+     * The WebView's current texture representation. Lazily created in {@link #getTextureRepresentation}.
+     */
     protected WWTexture textureRep;
-    /** Indicates whether the WebView is active. */
+    /**
+     * Indicates whether the WebView is active.
+     */
     protected boolean active;
 
     /**
@@ -34,23 +40,23 @@ public abstract class AbstractWebView extends WWObjectImpl implements WebView, D
      * garbage collector. This does nothing if the WebView's owner has already called {@link #dispose()}.
      */
     @Override
-    protected void finalize() throws Throwable
-    {
+    protected void finalize() throws Throwable {
         this.dispose();
         super.finalize();
     }
 
-    /** {@inheritDoc} */
-    public Dimension getFrameSize()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Dimension getFrameSize() {
         return this.frameSize;
     }
 
-    /** {@inheritDoc} */
-    public void setFrameSize(Dimension size)
-    {
-        if (size == null)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public void setFrameSize(Dimension size) {
+        if (size == null) {
             String message = Logging.getMessage("nullValue.SizeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -58,8 +64,9 @@ public abstract class AbstractWebView extends WWObjectImpl implements WebView, D
 
         // Setting the frame size requires a call into native code, and requires us to regenerate the texture. Only
         // do this if the size has actually changed.
-        if (this.frameSize.equals(size))
+        if (this.frameSize.equals(size)) {
             return;
+        }
 
         this.frameSize = size;
         this.textureRep = null; // The texture needs to be regenerated because the frame size changed.
@@ -69,31 +76,34 @@ public abstract class AbstractWebView extends WWObjectImpl implements WebView, D
 
     protected abstract void doSetFrameSize(Dimension size);
 
-    /** {@inheritDoc} */
-    public WWTexture getTextureRepresentation(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public WWTexture getTextureRepresentation(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.textureRep == null)
+        if (this.textureRep == null) {
             this.textureRep = this.createTextureRepresentation(dc);
+        }
 
         return this.textureRep;
     }
 
-    /** {@inheritDoc} */
-    public void setActive(boolean active)
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public void setActive(boolean active) {
         this.active = active;
     }
 
-    /** {@inheritDoc} */
-    public boolean isActive()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isActive() {
         return this.active;
     }
 
@@ -107,20 +117,14 @@ public abstract class AbstractWebView extends WWObjectImpl implements WebView, D
     protected abstract WWTexture createTextureRepresentation(DrawContext dc);
 
     @Override
-    public void propertyChange(final PropertyChangeEvent event)
-    {
-        if (!SwingUtilities.isEventDispatchThread())
-        {
-            SwingUtilities.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+    public void propertyChange(final PropertyChangeEvent event) {
+        if (!SwingUtilities.isEventDispatchThread()) {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
                     propertyChange(event);
                 }
             });
-        }
-        else
-        {
+        } else {
             this.firePropertyChange(AVKey.REPAINT, null, this);
         }
     }

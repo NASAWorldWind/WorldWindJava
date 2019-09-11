@@ -25,24 +25,26 @@ import gov.nasa.worldwind.util.Logging;
  * @author Patrick Murris
  * @version $Id: FlatGlobe.java 2277 2014-08-28 21:19:37Z dcollins $
  */
-public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
-{
+public class FlatGlobe extends EllipsoidalGlobe implements Globe2D {
+
     /**
      * <a href="http://en.wikipedia.org/wiki/Plate_carr%C3%A9e_projection" target="_blank">Latitude/Longitude</a>
      * projection. Also known as the geographic projection, the equirectangular projection, or the Plate Carree
      * projection.
      */
     public final static String PROJECTION_LAT_LON = "gov.nasa.worldwind.globes.projectionLatLon";
-    /** <a href="http://en.wikipedia.org/wiki/Mercator_projection" target="_blank">Mercator</a> projection. */
+    /** <a href="http://en.wikipedia.org/wiki/Mercator_projection" target="_blank">Mercator</a> projection.
+     */
     public final static String PROJECTION_MERCATOR = "gov.nasa.worldwind.globes.projectionMercator";
-    /** <a href="http://en.wikipedia.org/wiki/Sinusoidal_projection" target="_blank">Sinusoidal</a> projection. */
+    /** <a href="http://en.wikipedia.org/wiki/Sinusoidal_projection" target="_blank">Sinusoidal</a> projection.
+     */
     public final static String PROJECTION_SINUSOIDAL = "gov.nasa.worldwind.globes.projectionSinusoidal";
-    public final static String PROJECTION_MODIFIED_SINUSOIDAL =
-        "gov.nasa.worldwind.globes.projectionModifiedSinusoidal";
+    public final static String PROJECTION_MODIFIED_SINUSOIDAL
+            = "gov.nasa.worldwind.globes.projectionModifiedSinusoidal";
 
     protected GeographicProjection projection = (GeographicProjection) WorldWind.createComponent(
-        Configuration.getStringValue(AVKey.GEOGRAPHIC_PROJECTION_CLASS_NAME,
-            "gov.nasa.worldwind.globes.projections.ProjectionEquirectangular"));
+            Configuration.getStringValue(AVKey.GEOGRAPHIC_PROJECTION_CLASS_NAME,
+                    "gov.nasa.worldwind.globes.projections.ProjectionEquirectangular"));
 
     protected boolean continuous;
     protected int offset;
@@ -53,62 +55,63 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
      * #setProjection(GeographicProjection)}.
      *
      * @param equatorialRadius Radius of the globe at the equator.
-     * @param polarRadius      Radius of the globe at the poles.
-     * @param es               Square of the globe's eccentricity.
-     * @param em               Elevation model. May be null.
+     * @param polarRadius Radius of the globe at the poles.
+     * @param es Square of the globe's eccentricity.
+     * @param em Elevation model. May be null.
      */
-    public FlatGlobe(double equatorialRadius, double polarRadius, double es, ElevationModel em)
-    {
+    public FlatGlobe(double equatorialRadius, double polarRadius, double es, ElevationModel em) {
         super(equatorialRadius, polarRadius, es, em);
     }
 
-    private class FlatStateKey extends StateKey
-    {
+    private class FlatStateKey extends StateKey {
+
         protected GeographicProjection projection;
         protected double verticalExaggeration;
         protected int offset;
 
-        public FlatStateKey(DrawContext dc)
-        {
+        public FlatStateKey(DrawContext dc) {
             super(dc);
             this.projection = FlatGlobe.this.getProjection();
             this.offset = FlatGlobe.this.offset;
         }
 
-        public FlatStateKey(Globe globe)
-        {
+        public FlatStateKey(Globe globe) {
             super(globe);
             this.projection = FlatGlobe.this.getProjection();
             this.offset = FlatGlobe.this.offset;
         }
 
         @Override
-        public boolean equals(Object o)
-        {
-            if (this == o)
+        public boolean equals(Object o) {
+            if (this == o) {
                 return true;
-            if (o == null || getClass() != o.getClass())
+            }
+            if (o == null || getClass() != o.getClass()) {
                 return false;
-            if (!super.equals(o))
+            }
+            if (!super.equals(o)) {
                 return false;
+            }
 
             FlatStateKey that = (FlatStateKey) o;
 
-            if (offset != that.offset)
+            if (offset != that.offset) {
                 return false;
-            if (Double.compare(that.verticalExaggeration, verticalExaggeration) != 0)
+            }
+            if (Double.compare(that.verticalExaggeration, verticalExaggeration) != 0) {
                 return false;
+            }
             //noinspection RedundantIfStatement
             if (projection != null ? !projection.equals(that.projection)
-                : that.projection != null)
+                    : that.projection != null) {
                 return false;
+            }
 
             return true;
         }
 
         @Override
-        public int hashCode()
-        {
+        public int hashCode() {
             int result = super.hashCode();
             long temp;
             result = 31 * result + (projection != null ? projection.hashCode() : 0);
@@ -119,18 +122,15 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
         }
     }
 
-    public Object getStateKey(DrawContext dc)
-    {
+    public Object getStateKey(DrawContext dc) {
         return this.getGlobeStateKey(dc);
     }
 
-    public GlobeStateKey getGlobeStateKey(DrawContext dc)
-    {
+    public GlobeStateKey getGlobeStateKey(DrawContext dc) {
         return new FlatStateKey(dc);
     }
 
-    public GlobeStateKey getGlobeStateKey()
-    {
+    public GlobeStateKey getGlobeStateKey() {
         return new FlatStateKey(this);
     }
 
@@ -142,41 +142,28 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
      *
      * @deprecated Use {@link #setProjection(GeographicProjection)}.
      */
-    public void setProjection(String projection)
-    {
-        if (projection == null)
-        {
+    public void setProjection(String projection) {
+        if (projection == null) {
             String message = Logging.getMessage("nullValue.GeographicProjectionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (projection.equals(PROJECTION_LAT_LON))
-        {
+        if (projection.equals(PROJECTION_LAT_LON)) {
             this.setProjection(new ProjectionEquirectangular());
-        }
-        else if (projection.equals(PROJECTION_MERCATOR))
-        {
+        } else if (projection.equals(PROJECTION_MERCATOR)) {
             this.setProjection(new ProjectionMercator());
-        }
-        else if (projection.equals(PROJECTION_SINUSOIDAL))
-        {
+        } else if (projection.equals(PROJECTION_SINUSOIDAL)) {
             this.setProjection(new ProjectionSinusoidal());
-        }
-        else if (projection.equals(PROJECTION_MODIFIED_SINUSOIDAL))
-        {
+        } else if (projection.equals(PROJECTION_MODIFIED_SINUSOIDAL)) {
             this.setProjection(new ProjectionModifiedSinusoidal());
-        }
-        else
-        {
+        } else {
             this.setProjection(new ProjectionEquirectangular());
         }
     }
 
-    public void setProjection(GeographicProjection projection)
-    {
-        if (projection == null)
-        {
+    public void setProjection(GeographicProjection projection) {
+        if (projection == null) {
             String message = Logging.getMessage("nullValue.GeographicProjectionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -192,54 +179,45 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
      *
      * @see #setProjection
      */
-    public GeographicProjection getProjection()
-    {
+    public GeographicProjection getProjection() {
         return this.projection;
     }
 
     @Override
-    public void setContinuous(boolean continuous)
-    {
+    public void setContinuous(boolean continuous) {
         this.continuous = continuous;
     }
 
     @Override
-    public boolean isContinuous()
-    {
+    public boolean isContinuous() {
         return this.continuous || (this.projection != null && this.projection.isContinuous());
     }
 
-    public int getOffset()
-    {
+    public int getOffset() {
         return offset;
     }
 
-    public void setOffset(int offset)
-    {
+    public void setOffset(int offset) {
         this.offset = offset;
         this.offsetVector = new Vec4(2.0 * Math.PI * this.equatorialRadius * this.offset, 0, 0);
     }
 
-    public boolean intersects(Frustum frustum)
-    {
-        if (frustum == null)
-        {
+    public boolean intersects(Frustum frustum) {
+        if (frustum == null) {
             String message = Logging.getMessage("nullValue.FrustumIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         return Sector.computeBoundingBox(this, 1.0, Sector.FULL_SPHERE, this.getMinElevation(),
-            this.getMaxElevation()).intersects(frustum);
+                this.getMaxElevation()).intersects(frustum);
     }
 
     @Override
-    protected Intersection[] intersect(Line line, double equRadius, double polarRadius)
-    {
+    protected Intersection[] intersect(Line line, double equRadius, double polarRadius) {
         // Flat World Note: plane/line intersection point (OK)
         // Flat World Note: extract altitude from equRadius by subtracting this.equatorialRadius (OK)
-        if (line == null)
-        {
+        if (line == null) {
             String message = Logging.getMessage("nullValue.LineIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -247,26 +225,28 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
         // Intersection with world plane
         Plane plane = new Plane(0, 0, 1, -(equRadius - this.equatorialRadius));   // Flat globe plane
         Vec4 p = plane.intersect(line);
-        if (p == null)
+        if (p == null) {
             return null;
+        }
         // Check if we are in the world boundaries
         Position pos = this.computePositionFromPoint(p);
-        if (pos == null)
+        if (pos == null) {
             return null;
-        if (pos.getLatitude().degrees < -90 || pos.getLatitude().degrees > 90)
+        }
+        if (pos.getLatitude().degrees < -90 || pos.getLatitude().degrees > 90) {
             return null;
-        if (!this.isContinuous() && (pos.getLongitude().degrees < -180 || pos.getLongitude().degrees > 180))
+        }
+        if (!this.isContinuous() && (pos.getLongitude().degrees < -180 || pos.getLongitude().degrees > 180)) {
             return null;
+        }
 
-        return new Intersection[] {new Intersection(p, false)};
+        return new Intersection[]{new Intersection(p, false)};
     }
 
     @Override
-    public boolean intersects(Line line)
-    {
+    public boolean intersects(Line line) {
         // Flat World Note: plane/line intersection test (OK)
-        if (line == null)
-        {
+        if (line == null) {
             String msg = Logging.getMessage("nullValue.LineIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -276,11 +256,9 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     }
 
     @Override
-    public boolean intersects(Plane plane)
-    {
+    public boolean intersects(Plane plane) {
         // Flat World Note: plane/plane intersection test (OK)
-        if (plane == null)
-        {
+        if (plane == null) {
             String msg = Logging.getMessage("nullValue.PlaneIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -291,11 +269,9 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     }
 
     @Override
-    public Vec4 computeSurfaceNormalAtLocation(Angle latitude, Angle longitude)
-    {
+    public Vec4 computeSurfaceNormalAtLocation(Angle latitude, Angle longitude) {
         // Flat World Note: return constant (OK)
-        if (latitude == null || longitude == null)
-        {
+        if (latitude == null || longitude == null) {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -305,11 +281,9 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     }
 
     @Override
-    public Vec4 computeSurfaceNormalAtPoint(Vec4 point)
-    {
+    public Vec4 computeSurfaceNormalAtPoint(Vec4 point) {
         // Flat World Note: return constant (OK)
-        if (point == null)
-        {
+        if (point == null) {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -319,10 +293,8 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     }
 
     @Override
-    public Vec4 computeNorthPointingTangentAtLocation(Angle latitude, Angle longitude)
-    {
-        if (latitude == null || longitude == null)
-        {
+    public Vec4 computeNorthPointingTangentAtLocation(Angle latitude, Angle longitude) {
+        if (latitude == null || longitude == null) {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -332,10 +304,8 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     }
 
     @Override
-    public Matrix computeSurfaceOrientationAtPosition(Angle latitude, Angle longitude, double metersElevation)
-    {
-        if (latitude == null || longitude == null)
-        {
+    public Matrix computeSurfaceOrientationAtPosition(Angle latitude, Angle longitude, double metersElevation) {
+        if (latitude == null || longitude == null) {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -354,18 +324,17 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
     }
 
     @Override
-    public double getElevation(Angle latitude, Angle longitude)
-    {
-        if (latitude == null || longitude == null)
-        {
+    public double getElevation(Angle latitude, Angle longitude) {
+        if (latitude == null || longitude == null) {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         // Flat World Note: return zero if outside the lat/lon normal boundaries (OK)
-        if (latitude.degrees < -90 || latitude.degrees > 90 || longitude.degrees < -180 || longitude.degrees > 180)
+        if (latitude.degrees < -90 || latitude.degrees > 90 || longitude.degrees < -180 || longitude.degrees > 180) {
             return 0d;
+        }
 
         return super.getElevation(latitude, longitude);
     }
@@ -376,52 +345,47 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
      * system, and points east. Latitude and longitude zero are at the origin on y and x respectively. Sea level is at z
      * = zero.
      *
-     * @param latitude        the latitude of the position.
-     * @param longitude       the longitude of the position.
+     * @param latitude the latitude of the position.
+     * @param longitude the longitude of the position.
      * @param metersElevation the number of meters above or below mean sea level.
      *
      * @return The Cartesian point corresponding to the input position.
      */
     @Override
-    protected Vec4 geodeticToCartesian(Angle latitude, Angle longitude, double metersElevation)
-    {
-        if (latitude == null || longitude == null)
-        {
+    protected Vec4 geodeticToCartesian(Angle latitude, Angle longitude, double metersElevation) {
+        if (latitude == null || longitude == null) {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         return this.projection.geographicToCartesian(this, latitude, longitude, metersElevation,
-            this.offsetVector);
+                this.offsetVector);
     }
 
     @Override
-    protected void geodeticToCartesian(Sector sector, int numLat, int numLon, double[] metersElevation, Vec4[] out)
-    {
+    protected void geodeticToCartesian(Sector sector, int numLat, int numLon, double[] metersElevation, Vec4[] out) {
         this.projection.geographicToCartesian(this, sector, numLat, numLon, metersElevation, this.offsetVector, out);
     }
 
     @Override
-    protected Position cartesianToGeodetic(Vec4 cart)
-    {
-        if (cart == null)
-        {
+    protected Position cartesianToGeodetic(Vec4 cart) {
+        if (cart == null) {
             String message = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         Position pos = this.projection.cartesianToGeographic(this, cart, this.offsetVector);
-        if (this.isContinuous())
-        {
+        if (this.isContinuous()) {
             // Wrap if the globe is continuous.
-            if (pos.getLongitude().degrees < -180)
+            if (pos.getLongitude().degrees < -180) {
                 pos = Position.fromDegrees(pos.getLatitude().degrees, pos.getLongitude().degrees + 360,
-                    pos.getAltitude());
-            else if (pos.getLongitude().degrees > 180)
+                        pos.getAltitude());
+            } else if (pos.getLongitude().degrees > 180) {
                 pos = Position.fromDegrees(pos.getLatitude().degrees, pos.getLongitude().degrees - 360,
-                    pos.getAltitude());
+                        pos.getAltitude());
+            }
         }
 
         return pos;
@@ -476,20 +440,19 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
 //
 //        return new Cylinder(centroidBot, centroidTop, radius);
 //    }
-
     /**
      * Determines whether a point is above a given elevation
      *
-     * @param point     the <code>Vec4</code> point to test.
+     * @param point the <code>Vec4</code> point to test.
      * @param elevation the elevation to test for.
      *
      * @return true if the given point is above the given elevation.
      */
-    public boolean isPointAboveElevation(Vec4 point, double elevation)
-    {
+    public boolean isPointAboveElevation(Vec4 point, double elevation) {
         //noinspection SimplifiableIfStatement
-        if (point == null)
+        if (point == null) {
             return false;
+        }
 
         return point.z() > elevation;
     }

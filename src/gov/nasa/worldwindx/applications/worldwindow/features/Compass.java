@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.features;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -14,20 +13,17 @@ import gov.nasa.worldwindx.applications.worldwindow.core.*;
  * @author tag
  * @version $Id: Compass.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Compass extends AbstractFeatureLayer
-{
-    public Compass()
-    {
+public class Compass extends AbstractFeatureLayer {
+
+    public Compass() {
         this(null);
     }
 
-    public Compass(Registry registry)
-    {
+    public Compass(Registry registry) {
         super("Compass", Constants.FEATURE_COMPASS, null, true, registry);
     }
 
-    protected Layer doAddLayer()
-    {
+    protected Layer doAddLayer() {
         CompassLayer layer = new CompassLayer();
         layer.setIconScale(0.3);
 

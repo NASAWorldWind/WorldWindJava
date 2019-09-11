@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.event.Message;
@@ -21,8 +20,8 @@ import java.util.*;
  * @author tag
  * @version $Id: KMLGroundOverlay.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderable
-{
+public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderable {
+
     protected KMLRenderable renderable;
 
     /**
@@ -30,28 +29,23 @@ public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderabl
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLGroundOverlay(String namespaceURI)
-    {
+    public KMLGroundOverlay(String namespaceURI) {
         super(namespaceURI);
     }
 
-    public Double getAltitude()
-    {
+    public Double getAltitude() {
         return (Double) this.getField("altitude");
     }
 
-    public String getAltitudeMode()
-    {
+    public String getAltitudeMode() {
         return (String) this.getField("altitudeMode");
     }
 
-    public KMLLatLonBox getLatLonBox()
-    {
+    public KMLLatLonBox getLatLonBox() {
         return (KMLLatLonBox) this.getField("LatLonBox");
     }
 
-    public GXLatLongQuad getLatLonQuad()
-    {
+    public GXLatLongQuad getLatLonQuad() {
         return (GXLatLongQuad) this.getField("LatLonQuad");
     }
 
@@ -63,14 +57,13 @@ public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderabl
      * @param dc the current draw context.
      */
     @Override
-    protected void doPreRender(KMLTraversalContext tc, DrawContext dc)
-    {
-        if (this.getRenderable() == null)
+    protected void doPreRender(KMLTraversalContext tc, DrawContext dc) {
+        if (this.getRenderable() == null) {
             this.initializeRenderable(tc);
+        }
 
         KMLRenderable r = this.getRenderable();
-        if (r != null)
-        {
+        if (r != null) {
             r.preRender(tc, dc);
         }
     }
@@ -82,14 +75,12 @@ public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderabl
      * @param dc the current draw context.
      */
     @Override
-    protected void doRender(KMLTraversalContext tc, DrawContext dc)
-    {
+    protected void doRender(KMLTraversalContext tc, DrawContext dc) {
         // We've already initialized the image renderable during the preRender pass. Render the image
         // without any further preparation.
 
         KMLRenderable r = this.getRenderable();
-        if (r != null)
-        {
+        if (r != null) {
             r.render(tc, dc);
         }
 
@@ -102,21 +93,19 @@ public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderabl
      *
      * @param tc the current KML traversal context.
      */
-    protected void initializeRenderable(KMLTraversalContext tc)
-    {
+    protected void initializeRenderable(KMLTraversalContext tc) {
         final String altitudeMode = this.getAltitudeMode();
-        if ("absolute".equals(altitudeMode))
-        {
+        if ("absolute".equals(altitudeMode)) {
             this.renderable = new KMLGroundOverlayPolygonImpl(tc, this);
-        }
-        else // Default to clampToGround
+        } else // Default to clampToGround
         {
             // If the overlay has an icon, create a surface image renderable. Otherwise, create a surface polygon to
             // render the overlay as a colored polygon.
-            if (this.getIcon() != null && this.getIcon().getHref() != null)
+            if (this.getIcon() != null && this.getIcon().getHref() != null) {
                 this.renderable = new KMLSurfaceImageImpl(tc, this);
-            else
+            } else {
                 this.renderable = new KMLSurfacePolygonImpl(tc, this);
+            }
         }
     }
 
@@ -126,8 +115,7 @@ public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderabl
      *
      * @return The renderable, or null if the renderable has not been created yet.
      */
-    public KMLRenderable getRenderable()
-    {
+    public KMLRenderable getRenderable() {
         return this.renderable;
     }
 
@@ -139,28 +127,21 @@ public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderabl
      *
      * @return A list of the positions that define the corner points of the overlay.
      */
-    public Position.PositionList getPositions()
-    {
+    public Position.PositionList getPositions() {
         double altitude = this.getAltitude() != null ? this.getAltitude() : 0.0;
 
         // Positions are specified either as a kml:LatLonBox or a gx:LatLonQuad
         List<Position> corners = new ArrayList<Position>(4);
         KMLLatLonBox box = this.getLatLonBox();
-        if (box != null)
-        {
+        if (box != null) {
             Sector sector = KMLUtil.createSectorFromLatLonBox(box);
-            for (LatLon ll : sector.getCorners())
-            {
+            for (LatLon ll : sector.getCorners()) {
                 corners.add(new Position(ll, altitude));
             }
-        }
-        else
-        {
+        } else {
             GXLatLongQuad latLonQuad = this.getLatLonQuad();
-            if (latLonQuad != null && latLonQuad.getCoordinates() != null)
-            {
-                for (Position position : latLonQuad.getCoordinates().list)
-                {
+            if (latLonQuad != null && latLonQuad.getCoordinates() != null) {
+                for (Position position : latLonQuad.getCoordinates().list) {
                     corners.add(new Position(position, altitude));
                 }
             }
@@ -170,10 +151,8 @@ public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderabl
     }
 
     @Override
-    public void applyChange(KMLAbstractObject sourceValues)
-    {
-        if (!(sourceValues instanceof KMLGroundOverlay))
-        {
+    public void applyChange(KMLAbstractObject sourceValues) {
+        if (!(sourceValues instanceof KMLGroundOverlay)) {
             String message = Logging.getMessage("nullValue.SourceIsNull");
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -185,15 +164,15 @@ public class KMLGroundOverlay extends KMLAbstractOverlay implements KMLRenderabl
     }
 
     @Override
-    public void onChange(Message msg)
-    {
-        if (KMLAbstractObject.MSG_LINK_CHANGED.equals(msg.getName()))
+    public void onChange(Message msg) {
+        if (KMLAbstractObject.MSG_LINK_CHANGED.equals(msg.getName())) {
             this.renderable = null;
+        }
 
-        if (KMLAbstractObject.MSG_BOX_CHANGED.equals(msg.getName()))
+        if (KMLAbstractObject.MSG_BOX_CHANGED.equals(msg.getName())) {
             this.renderable = null;
+        }
 
         super.onChange(msg);
     }
 }
-

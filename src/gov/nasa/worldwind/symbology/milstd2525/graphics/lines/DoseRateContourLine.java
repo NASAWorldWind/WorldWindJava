@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.geom.Position;
@@ -20,20 +19,18 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: DoseRateContourLine.java 545 2012-04-24 22:29:21Z pabercrombie $
  */
-public class DoseRateContourLine extends BasicArea
-{
+public class DoseRateContourLine extends BasicArea {
+
     /**
      * Indicates the graphics supported by this class.
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(TacGrpSidc.MOBSU_CBRN_DRCL);
     }
 
-    public DoseRateContourLine(String sidc)
-    {
+    public DoseRateContourLine(String sidc) {
         super(sidc);
     }
 
@@ -46,8 +43,7 @@ public class DoseRateContourLine extends BasicArea
      * @return Position for the graphic's main label.
      */
     @Override
-    protected Position determineMainLabelPosition(DrawContext dc)
-    {
+    protected Position determineMainLabelPosition(DrawContext dc) {
         return this.getReferencePosition();
     }
 }

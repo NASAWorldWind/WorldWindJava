@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples.lineofsight;
 
 import gov.nasa.worldwind.*;
@@ -23,17 +22,16 @@ import java.util.*;
  * @author tag
  * @version $Id: ExtrudedPolygonIntersection.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class ExtrudedPolygonIntersection extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+public class ExtrudedPolygonIntersection extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         protected HighResolutionTerrain terrain; // Use this class to test against high-resolution terrain
         protected ExtrudedPolygon polygon; // the polygon to intersect
         protected RenderableLayer resultsLayer; // holds the intersection geometry
         protected RenderableLayer shapeLayer; // holds the shape
 
-        public AppFrame()
-        {
+        public AppFrame() {
             super(true, true, false);
 
             // Create the extruded polygon boundary and then the extruded polygon.
@@ -66,10 +64,8 @@ public class ExtrudedPolygonIntersection extends ApplicationTemplate
 
             // Perform the intersection test within a timer callback. Intersection calculations would normally be done
             // on a separate, non-EDT thread, however.
-            final javax.swing.Timer timer = new javax.swing.Timer(3000, new ActionListener()
-            {
-                public void actionPerformed(ActionEvent actionEvent)
-                {
+            final javax.swing.Timer timer = new javax.swing.Timer(3000, new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
                     // Intersect the sides.
                     Position pA = Position.fromDegrees(40.5, -120.7, 5e3);
                     Position pB = Position.fromDegrees(40.5, -120.3, 5e3);
@@ -88,10 +84,8 @@ public class ExtrudedPolygonIntersection extends ApplicationTemplate
             timer.start();
         }
 
-        protected void performIntersection(Position pA, Position pB)
-        {
-            try
-            {
+        protected void performIntersection(Position pA, Position pB) {
+            try {
                 // Create the line to intersect with the shape.
                 Vec4 refPoint = terrain.getSurfacePoint(pA);
                 Vec4 targetPoint = terrain.getSurfacePoint(pB);
@@ -101,22 +95,17 @@ public class ExtrudedPolygonIntersection extends ApplicationTemplate
                 List<Intersection> intersections = this.polygon.intersect(line, this.terrain);
 
                 // Get and display the intersections.
-                if (intersections != null)
-                {
-                    for (Intersection intersection : intersections)
-                    {
+                if (intersections != null) {
+                    for (Intersection intersection : intersections) {
                         drawIntersection(intersection);
                     }
                 }
-            }
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        protected void drawLine(Position pA, Position pB)
-        {
+        protected void drawLine(Position pA, Position pB) {
             // Create and display the intersection line.
             Path path = new Path(pA, pB);
             ShapeAttributes pathAttributes = new BasicShapeAttributes();
@@ -131,8 +120,7 @@ public class ExtrudedPolygonIntersection extends ApplicationTemplate
             this.getWwd().redraw();
         }
 
-        protected void drawIntersection(Intersection intersection)
-        {
+        protected void drawIntersection(Intersection intersection) {
             // Display a point at the intersection.
             PointPlacemark iPoint = new PointPlacemark(intersection.getIntersectionPosition());
             iPoint.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
@@ -147,8 +135,7 @@ public class ExtrudedPolygonIntersection extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Configure the initial view parameters so that the balloons are immediately visible.
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 40.5);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -120.4);

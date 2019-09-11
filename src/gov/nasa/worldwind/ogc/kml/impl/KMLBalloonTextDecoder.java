@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.kml.impl;
 
 import gov.nasa.worldwind.ogc.kml.*;
@@ -18,8 +17,8 @@ import java.util.regex.*;
  * @author pabercrombie
  * @version $Id: KMLBalloonTextDecoder.java 1944 2014-04-18 16:50:49Z tgaskins $
  */
-public class KMLBalloonTextDecoder extends BasicTextDecoder
-{
+public class KMLBalloonTextDecoder extends BasicTextDecoder {
+
     /**
      * True if there are entities in the balloon text which may refer to unresolved schema. False if all entities have
      * been resolved, or are known to be unresolvable (because the data they refer to does not exist).
@@ -32,7 +31,9 @@ public class KMLBalloonTextDecoder extends BasicTextDecoder
      */
     protected Map<String, String> entityCache = new HashMap<String, String>();
 
-    /** Feature to use as context for entity replacements. */
+    /**
+     * Feature to use as context for entity replacements.
+     */
     protected KMLAbstractFeature feature;
 
     /**
@@ -41,10 +42,8 @@ public class KMLBalloonTextDecoder extends BasicTextDecoder
      *
      * @param feature Feature that is the context of entity replacements.
      */
-    public KMLBalloonTextDecoder(KMLAbstractFeature feature)
-    {
-        if (feature == null)
-        {
+    public KMLBalloonTextDecoder(KMLAbstractFeature feature) {
+        if (feature == null) {
             String message = Logging.getMessage("nullValue.FeatureIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -61,45 +60,46 @@ public class KMLBalloonTextDecoder extends BasicTextDecoder
      * @return String after replacements have been made. Returns null if the input text is null.
      */
     @Override
-    public synchronized String getDecodedText()
-    {
-        if (this.decodedText == null)
+    public synchronized String getDecodedText() {
+        if (this.decodedText == null) {
             this.lastUpdateTime = System.currentTimeMillis();
+        }
 
-        if (this.decodedText == null || this.isUnresolved)
+        if (this.decodedText == null || this.isUnresolved) {
             this.decodedText = this.decode(this.text);
+        }
 
         // If the text was fully decoded we can release our reference to the original text.
-        if (!this.isUnresolved)
+        if (!this.isUnresolved) {
             this.text = null;
+        }
 
         return this.decodedText;
     }
 
-    /** Perform entity substitution. */
+    /**
+     * Perform entity substitution.
+     */
     @Override
-    protected String decode(String textToDecode)
-    {
-        if (textToDecode == null)
+    protected String decode(String textToDecode) {
+        if (textToDecode == null) {
             return null;
+        }
 
         this.isUnresolved = false;
 
         Pattern p = Pattern.compile("\\$\\[(.*?)\\]");
         Matcher m = p.matcher(textToDecode);
         StringBuffer sb = new StringBuffer();
-        while (m.find())
-        {
+        while (m.find()) {
             String entity = m.group(1);
 
             // Check the entity cache to see if we've already resolved this entity.
             String r = this.entityCache.get(entity);
-            if (r == null)
-            {
+            if (r == null) {
                 // Try to resolve the entity
                 r = this.resolveEntityReference(entity);
-                if (r != null)
-                {
+                if (r != null) {
                     // Save the resolved entity in the cache, and set the last update time. Resolving this entity
                     // has changed the decoded string.
                     this.entityCache.put(entity, r);
@@ -113,10 +113,11 @@ public class KMLBalloonTextDecoder extends BasicTextDecoder
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public synchronized void setText(String input)
-    {
+    public synchronized void setText(String input) {
         super.setText(input);
         this.entityCache.clear();
     }
@@ -129,26 +130,26 @@ public class KMLBalloonTextDecoder extends BasicTextDecoder
      *  DataField/displayName
      *  SchemaName/SchemaField
      *  SchemaName/SchemaField/displayName
-     *  </pre>
-     * See the KML spec for details.
+     * </pre> See the KML spec for details.
      *
      * @param pattern Pattern of entity to resolve.
      *
      * @return Return the replacement string for the entity, or null if no replacement can be found.
      */
-    protected String resolveEntityReference(String pattern)
-    {
+    protected String resolveEntityReference(String pattern) {
         KMLAbstractFeature feature = this.getFeature();
 
-        if ("geDirections".equals(pattern))
+        if ("geDirections".equals(pattern)) {
             return this.getGeDirectionsText();
+        }
 
         // First look for a field in the Feature
         Object replacement = feature.getField(pattern);
-        if (replacement instanceof KMLAbstractObject)
+        if (replacement instanceof KMLAbstractObject) {
             return ((KMLAbstractObject) replacement).getCharacters();
-        else if (replacement != null)
+        } else if (replacement != null) {
             return replacement.toString();
+        }
 
         // Before searching data fields, split the pattern into name, field, and display name components
         String name;            // Name of data element or schema
@@ -168,22 +169,17 @@ public class KMLBalloonTextDecoder extends BasicTextDecoder
 
         // Next look for a data field in the Feature's extended data
         KMLExtendedData extendedData = feature.getExtendedData();
-        if (extendedData != null)
-        {
+        if (extendedData != null) {
             // Search through untyped data first
-            for (KMLData data : extendedData.getData())
-            {
-                if (name.equals(data.getName()))
-                {
-                    if (isDisplayName)
-                    {
-                        if (!WWUtil.isEmpty(data.getDisplayName()))
+            for (KMLData data : extendedData.getData()) {
+                if (name.equals(data.getName())) {
+                    if (isDisplayName) {
+                        if (!WWUtil.isEmpty(data.getDisplayName())) {
                             return data.getDisplayName();
-                        else
+                        } else {
                             return data.getName();
-                    }
-                    else
-                    {
+                        }
+                    } else {
                         return data.getValue();
                     }
                 }
@@ -192,49 +188,37 @@ public class KMLBalloonTextDecoder extends BasicTextDecoder
             // Search through typed schema data fields
             boolean schemaUnresolved = false;
             List<KMLSchemaData> schemaDataList = extendedData.getSchemaData();
-            for (KMLSchemaData schemaData : schemaDataList)
-            {
+            for (KMLSchemaData schemaData : schemaDataList) {
                 // Try to resolve the schema. The schema may not be available immediately
                 final String url = schemaData.getSchemaUrl();
                 KMLSchema schema = (KMLSchema) feature.getRoot().resolveReference(url);
 
-                if (schema != null && name.equals(schema.getName()))
-                {
+                if (schema != null && name.equals(schema.getName())) {
                     // We found the schema. Now we are looking for either the display name or the value of
                     // one of the fields.
-                    if (isDisplayName)
-                    {
+                    if (isDisplayName) {
                         // Search schema fields
-                        for (KMLSimpleField simpleField : schema.getSimpleFields())
-                        {
-                            if (field.equals(simpleField.getName()))
-                            {
+                        for (KMLSimpleField simpleField : schema.getSimpleFields()) {
+                            if (field.equals(simpleField.getName())) {
                                 return simpleField.getDisplayName();
                             }
                         }
-                    }
-                    else
-                    {
+                    } else {
                         // Search data fields
-                        for (KMLSimpleData simpleData : schemaData.getSimpleData())
-                        {
-                            if (field.equals(simpleData.getName()))
-                            {
+                        for (KMLSimpleData simpleData : schemaData.getSimpleData()) {
+                            if (field.equals(simpleData.getName())) {
                                 return simpleData.getCharacters();
                             }
                         }
                     }
-                }
-                else if (schema == null)
-                {
+                } else if (schema == null) {
                     schemaUnresolved = true;
                 }
             }
 
             // Set the balloon text to unresolved if we still haven't found a match, and there is at least one
             // unresolved schema, and the pattern could refer to a schema
-            if (schemaUnresolved && !WWUtil.isEmpty(name) && !WWUtil.isEmpty(field))
-            {
+            if (schemaUnresolved && !WWUtil.isEmpty(name) && !WWUtil.isEmpty(field)) {
                 this.isUnresolved = true;
             }
         }
@@ -247,8 +231,7 @@ public class KMLBalloonTextDecoder extends BasicTextDecoder
      *
      * @return The context feature.
      */
-    public KMLAbstractFeature getFeature()
-    {
+    public KMLAbstractFeature getFeature() {
         return this.feature;
     }
 
@@ -258,8 +241,7 @@ public class KMLBalloonTextDecoder extends BasicTextDecoder
      *
      * @return Text to replace the $[geDirections] entity.
      */
-    protected String getGeDirectionsText()
-    {
+    protected String getGeDirectionsText() {
         return "";
     }
 }

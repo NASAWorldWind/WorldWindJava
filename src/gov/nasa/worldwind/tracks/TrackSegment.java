@@ -9,7 +9,7 @@ package gov.nasa.worldwind.tracks;
  * @author tag
  * @version $Id: TrackSegment.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface TrackSegment
-{
+public interface TrackSegment {
+
     java.util.List<TrackPoint> getPoints();
 }

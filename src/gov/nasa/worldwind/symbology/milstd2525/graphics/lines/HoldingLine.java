@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.WorldWind;
@@ -31,14 +30,20 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: HoldingLine.java 555 2012-04-25 18:59:29Z pabercrombie $
  */
-public class HoldingLine extends AbstractMilStd2525TacticalGraphic
-{
-    /** Default number of intervals used to draw the arc. */
+public class HoldingLine extends AbstractMilStd2525TacticalGraphic {
+
+    /**
+     * Default number of intervals used to draw the arc.
+     */
     public final static int DEFAULT_NUM_INTERVALS = 32;
-    /** Scale factor that determines the curvature of the corners of the arc. */
+    /**
+     * Scale factor that determines the curvature of the corners of the arc.
+     */
     public final static double DEFAULT_CURVATURE = 0.3;
 
-    /** Path used to render the line. */
+    /**
+     * Path used to render the line.
+     */
     protected Path path;
 
     /**
@@ -46,14 +51,22 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      * produced square corners.
      */
     protected double curvature = DEFAULT_CURVATURE;
-    /** Number of intervals used to draw the arc. */
+    /**
+     * Number of intervals used to draw the arc.
+     */
     protected int intervals = DEFAULT_NUM_INTERVALS;
 
-    /** First control point, defines the start of the line. */
+    /**
+     * First control point, defines the start of the line.
+     */
     protected Position position1;
-    /** Second control point, defines the end of the line. */
+    /**
+     * Second control point, defines the end of the line.
+     */
     protected Position position2;
-    /** Third control point, defines the top of the arc. */
+    /**
+     * Third control point, defines the top of the arc.
+     */
     protected Position position3;
 
     /**
@@ -61,11 +74,10 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics()
-    {
+    public static List<String> getSupportedGraphics() {
         return Arrays.asList(
-            TacGrpSidc.C2GM_SPL_LNE_HGL,
-            TacGrpSidc.C2GM_SPL_LNE_BRGH);
+                TacGrpSidc.C2GM_SPL_LNE_HGL,
+                TacGrpSidc.C2GM_SPL_LNE_BRGH);
     }
 
     /**
@@ -73,8 +85,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public HoldingLine(String sidc)
-    {
+    public HoldingLine(String sidc) {
         super(sidc);
     }
 
@@ -83,25 +94,20 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      *
      * @param positions Control points that orient the graphic. Must provide at least three points.
      */
-    public void setPositions(Iterable<? extends Position> positions)
-    {
-        if (positions == null)
-        {
+    public void setPositions(Iterable<? extends Position> positions) {
+        if (positions == null) {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         // Ensure that the position list provides at least 3 control points.
-        try
-        {
+        try {
             Iterator<? extends Position> iterator = positions.iterator();
             this.position1 = iterator.next();
             this.position2 = iterator.next();
             this.position3 = iterator.next();
-        }
-        catch (NoSuchElementException e)
-        {
+        } catch (NoSuchElementException e) {
             String message = Logging.getMessage("generic.InsufficientPositions");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -110,15 +116,17 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
         this.path = null; // Need to regenerate
     }
 
-    /** {@inheritDoc} */
-    public Iterable<? extends Position> getPositions()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Iterable<? extends Position> getPositions() {
         return Arrays.asList(this.position1, this.position2, this.position3);
     }
 
-    /** {@inheritDoc} */
-    public Position getReferencePosition()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public Position getReferencePosition() {
         return this.position1;
     }
 
@@ -129,8 +137,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      *
      * @see #setCurvature(double)
      */
-    public double getCurvature()
-    {
+    public double getCurvature() {
         return this.curvature;
     }
 
@@ -140,10 +147,8 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      *
      * @param curvature Factor that determines curvature of the arc.
      */
-    public void setCurvature(double curvature)
-    {
-        if (curvature < 0.0 || curvature > 1.0)
-        {
+    public void setCurvature(double curvature) {
+        if (curvature < 0.0 || curvature > 1.0) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", curvature);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -157,8 +162,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      *
      * @return Intervals used to draw arc.
      */
-    public int getIntervals()
-    {
+    public int getIntervals() {
         return this.intervals;
     }
 
@@ -168,10 +172,8 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      *
      * @param intervals Number of intervals for drawing the arc.
      */
-    public void setIntervals(int intervals)
-    {
-        if (intervals < 1)
-        {
+    public void setIntervals(int intervals) {
+        if (intervals < 1) {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", intervals);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -181,27 +183,28 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
         this.onShapeChanged();
     }
 
-    protected void onShapeChanged()
-    {
+    protected void onShapeChanged() {
         this.path = null; // Need to recompute path
     }
 
-    /** {@inheritDoc} */
-    protected void doRenderGraphic(DrawContext dc)
-    {
-        if (this.path == null)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    protected void doRenderGraphic(DrawContext dc) {
+        if (this.path == null) {
             this.createShape(dc);
         }
 
         this.path.render(dc);
     }
 
-    /** {@inheritDoc} */
-    protected void applyDelegateOwner(Object owner)
-    {
-        if (this.path != null)
+    /**
+     * {@inheritDoc}
+     */
+    protected void applyDelegateOwner(Object owner) {
+        if (this.path != null) {
             this.path.setDelegateOwner(owner);
+        }
     }
 
     /**
@@ -209,8 +212,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      *
      * @param dc Current draw context.
      */
-    protected void createShape(DrawContext dc)
-    {
+    protected void createShape(DrawContext dc) {
         Globe globe = dc.getGlobe();
 
         // The graphic looks like this:
@@ -222,7 +224,6 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
         //                 |
         //                 |
         // Pt. 2 _________/  Corner 2
-
         Vec4 pt1 = globe.computePointFromLocation(this.position1);
         Vec4 pt2 = globe.computePointFromLocation(this.position2);
         Vec4 pt3 = globe.computePointFromLocation(this.position3);
@@ -259,17 +260,16 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
     /**
      * Compute positions to draw a rounded corner between three points.
      *
-     * @param globe     Current globe.
+     * @param globe Current globe.
      * @param positions Positions will be added to this list.
-     * @param ptLeg1    Point at the end of the one leg.
-     * @param ptVertex  Point at the vertex of the corner.
-     * @param ptLeg2    Point at the end of the other let.
-     * @param distance  Distance from the vertex at which the arc should begin and end.
+     * @param ptLeg1 Point at the end of the one leg.
+     * @param ptVertex Point at the vertex of the corner.
+     * @param ptLeg2 Point at the end of the other let.
+     * @param distance Distance from the vertex at which the arc should begin and end.
      * @param intervals Number of intervals to use to generate the arc.
      */
     protected void computeRoundCorner(Globe globe, List<Position> positions, Vec4 ptLeg1, Vec4 ptVertex, Vec4 ptLeg2,
-        double distance, int intervals)
-    {
+            double distance, int intervals) {
         Vec4 vertexTo1 = ptLeg1.subtract3(ptVertex);
         Vec4 vertexTo2 = ptLeg2.subtract3(ptVertex);
 
@@ -286,10 +286,10 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
         // Theta ->/____|________ Leg 2
         //  Vertex   d  Pt. A
         //
-
         Angle theta = vertexTo1.angleBetween3(vertexTo2);
-        if (Angle.ZERO.equals(theta))
+        if (Angle.ZERO.equals(theta)) {
             return;
+        }
 
         double radius = distance * theta.tanHalfAngle();
 
@@ -305,8 +305,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
         // Determine which direction the offset points by computing the scalar triple product of the perpendicular
         // vector and the vector from the vertex along leg 2. Reverse the sign of offset if necessary.
         double tripleProduct = perpendicular.dot3(vertexTo2);
-        if (tripleProduct < 0)
-        {
+        if (tripleProduct < 0) {
             offset = offset.multiply3(-1);
         }
 
@@ -319,25 +318,24 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
 
         // Compute the arc from A to B
         this.computeArc(globe, positions, arcCenter,
-            LatLon.greatCircleAzimuth(arcCenter, posA),
-            LatLon.greatCircleAzimuth(arcCenter, posB),
-            radius, intervals);
+                LatLon.greatCircleAzimuth(arcCenter, posA),
+                LatLon.greatCircleAzimuth(arcCenter, posB),
+                radius, intervals);
     }
 
     /**
      * Compute the positions required to draw an arc.
      *
-     * @param globe        Current globe.
-     * @param positions    Add arc positions to this list.
-     * @param center       Center point of the arc.
+     * @param globe Current globe.
+     * @param positions Add arc positions to this list.
+     * @param center Center point of the arc.
      * @param startAzimuth Starting azimuth.
-     * @param endAzimuth   Ending azimuth.
-     * @param radius       Radius of the arc, in meters.
-     * @param intervals    Number of intervals to generate.
+     * @param endAzimuth Ending azimuth.
+     * @param radius Radius of the arc, in meters.
+     * @param intervals Number of intervals to generate.
      */
     protected void computeArc(Globe globe, List<Position> positions, Position center, Angle startAzimuth,
-        Angle endAzimuth, double radius, int intervals)
-    {
+            Angle endAzimuth, double radius, int intervals) {
         // Compute the sweep between the start and end positions, and normalize to the range [-180, 180].
         Angle sweep = endAzimuth.subtract(startAzimuth).normalizedLongitude();
 
@@ -346,8 +344,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
         double radiusRadians = radius / globeRadius;
 
         // Compute the arc positions
-        for (int i = 0; i < intervals; i++)
-        {
+        for (int i = 0; i < intervals; i++) {
             double angle = i * da.radians + startAzimuth.radians;
 
             LatLon ll = LatLon.greatCircleEndPosition(center, angle, radiusRadians);
@@ -355,30 +352,32 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
         }
     }
 
-    /** Create labels for the start and end of the path. */
+    /**
+     * Create labels for the start and end of the path.
+     */
     @Override
-    protected void createLabels()
-    {
+    protected void createLabels() {
         String text = this.getGraphicLabel();
 
         this.addLabel(text); // Start label
         this.addLabel(text); // End label
     }
 
-    protected String getGraphicLabel()
-    {
+    protected String getGraphicLabel() {
         StringBuilder sb = new StringBuilder();
 
         sb.append("PL ");
 
         String text = this.getText();
-        if (!WWUtil.isEmpty(text))
+        if (!WWUtil.isEmpty(text)) {
             sb.append(text);
+        }
 
-        if (TacGrpSidc.C2GM_SPL_LNE_HGL.equalsIgnoreCase(this.maskedSymbolCode))
+        if (TacGrpSidc.C2GM_SPL_LNE_HGL.equalsIgnoreCase(this.maskedSymbolCode)) {
             sb.append("\n(HOLDING LINE)");
-        else if (TacGrpSidc.C2GM_SPL_LNE_BRGH.equalsIgnoreCase(this.maskedSymbolCode))
+        } else if (TacGrpSidc.C2GM_SPL_LNE_BRGH.equalsIgnoreCase(this.maskedSymbolCode)) {
             sb.append("\n(BRIDGEHEAD LINE)");
+        }
 
         return sb.toString();
     }
@@ -389,10 +388,10 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      * @param dc Current draw context.
      */
     @Override
-    protected void determineLabelPositions(DrawContext dc)
-    {
-        if (WWUtil.isEmpty(labels))
+    protected void determineLabelPositions(DrawContext dc) {
+        if (WWUtil.isEmpty(labels)) {
             return;
+        }
 
         TacticalGraphicLabel startLabel = this.labels.get(0);
         TacticalGraphicLabel endLabel = this.labels.get(1);
@@ -406,8 +405,7 @@ public class HoldingLine extends AbstractMilStd2525TacticalGraphic
      *
      * @return New path configured with defaults appropriate for this type of graphic.
      */
-    protected Path createPath()
-    {
+    protected Path createPath() {
         Path path = new Path();
         path.setFollowTerrain(true);
         path.setPathType(AVKey.GREAT_CIRCLE);

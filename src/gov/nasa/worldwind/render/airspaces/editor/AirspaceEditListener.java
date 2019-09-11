@@ -11,8 +11,8 @@ import java.util.EventListener;
  * @author dcollins
  * @version $Id: AirspaceEditListener.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface AirspaceEditListener extends EventListener
-{
+public interface AirspaceEditListener extends EventListener {
+
     void airspaceMoved(AirspaceEditEvent e);
 
     void airspaceResized(AirspaceEditEvent e);

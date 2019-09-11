@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.dataimporter;
 
 import gov.nasa.worldwind.*;
@@ -24,15 +23,14 @@ import java.util.*;
  * @author tag
  * @version $Id: FileStoreSectorHighlighter.java 1180 2013-02-15 18:40:47Z tgaskins $
  */
-public class FileStoreSectorHighlighter implements ListSelectionListener, SelectListener
-{
+public class FileStoreSectorHighlighter implements ListSelectionListener, SelectListener {
+
     protected static final String SECTOR_LAYER = "SectorLayer";
 
     protected FileStorePanel fileStorePanel;
     protected WorldWindow wwd;
 
-    public FileStoreSectorHighlighter(WorldWindow wwd, FileStorePanel panel)
-    {
+    public FileStoreSectorHighlighter(WorldWindow wwd, FileStorePanel panel) {
         this.wwd = wwd;
         this.fileStorePanel = panel;
 
@@ -41,39 +39,37 @@ public class FileStoreSectorHighlighter implements ListSelectionListener, Select
     }
 
     @Override
-    public void valueChanged(ListSelectionEvent listSelectionEvent)
-    {
+    public void valueChanged(ListSelectionEvent listSelectionEvent) {
         // This method is called when the table selection changes.
 
-        if (listSelectionEvent.getValueIsAdjusting())
+        if (listSelectionEvent.getValueIsAdjusting()) {
             return;
+        }
 
         this.handleSelection(this.fileStorePanel.getSelectedDataSets());
     }
 
     List<FileStoreDataSet> currentlyHighlightedSets = new ArrayList<FileStoreDataSet>();
 
-    protected void handleSelection(List<FileStoreDataSet> selectedDataSets)
-    {
+    protected void handleSelection(List<FileStoreDataSet> selectedDataSets) {
         this.unHighlightSelectedSets();
 
-        if (selectedDataSets == null || selectedDataSets.size() == 0)
+        if (selectedDataSets == null || selectedDataSets.size() == 0) {
             return;
+        }
 
         Sector overallSector = this.highlightSelectedSets(selectedDataSets);
-        if (overallSector != null)
+        if (overallSector != null) {
             ExampleUtil.goTo(this.wwd, overallSector);
-        else
+        } else {
             this.wwd.redraw();
+        }
     }
 
-    protected void unHighlightSelectedSets()
-    {
-        for (FileStoreDataSet dataSet : this.currentlyHighlightedSets)
-        {
+    protected void unHighlightSelectedSets() {
+        for (FileStoreDataSet dataSet : this.currentlyHighlightedSets) {
             Layer layer = (Layer) dataSet.getValue(SECTOR_LAYER);
-            if (layer != null)
-            {
+            if (layer != null) {
                 this.wwd.getModel().getLayers().remove(layer);
             }
         }
@@ -81,15 +77,12 @@ public class FileStoreSectorHighlighter implements ListSelectionListener, Select
         this.currentlyHighlightedSets.clear();
     }
 
-    protected Sector highlightSelectedSets(List<FileStoreDataSet> dataSets)
-    {
+    protected Sector highlightSelectedSets(List<FileStoreDataSet> dataSets) {
         Sector overallSector = null;
 
-        for (FileStoreDataSet dataSet : dataSets)
-        {
+        for (FileStoreDataSet dataSet : dataSets) {
             Layer layer = (Layer) dataSet.getValue(SECTOR_LAYER);
-            if (layer == null)
-            {
+            if (layer == null) {
                 layer = createSectorLayer(dataSet);
                 layer.setValue("FileStoreDataSet", dataSet);
                 layer.setValue(AVKey.IGNORE, true);
@@ -99,15 +92,15 @@ public class FileStoreSectorHighlighter implements ListSelectionListener, Select
             ApplicationTemplate.insertBeforePlacenames(this.wwd, layer);
 
             Sector sector = dataSet.getSector();
-            if (sector != null)
+            if (sector != null) {
                 overallSector = overallSector == null ? sector : overallSector.union(sector);
+            }
         }
 
         return overallSector;
     }
 
-    protected Layer createSectorLayer(FileStoreDataSet dataSet)
-    {
+    protected Layer createSectorLayer(FileStoreDataSet dataSet) {
         RenderableLayer layer = new RenderableLayer();
         dataSet.setValue(SECTOR_LAYER, layer);
 
@@ -116,11 +109,11 @@ public class FileStoreSectorHighlighter implements ListSelectionListener, Select
         return layer;
     }
 
-    protected void populateLayer(FileStoreDataSet dataSet, RenderableLayer layer)
-    {
+    protected void populateLayer(FileStoreDataSet dataSet, RenderableLayer layer) {
         Sector sector = (Sector) dataSet.getValue(AVKey.SECTOR);
-        if (sector == null)
+        if (sector == null) {
             return;
+        }
 
         BasicShapeAttributes attrs = new BasicShapeAttributes();
         attrs.setOutlineMaterial(new Material(dataSet.getColor()));
@@ -128,8 +121,7 @@ public class FileStoreSectorHighlighter implements ListSelectionListener, Select
 
         List<LatLon> locations = sector.asList();
         List<Position> positions = new ArrayList<Position>(5);
-        for (LatLon location : locations)
-        {
+        for (LatLon location : locations) {
             positions.add(new Position(location, 0));
         }
         positions.add(new Position(locations.get(0), 0)); // to form a closed path
@@ -145,21 +137,22 @@ public class FileStoreSectorHighlighter implements ListSelectionListener, Select
     }
 
     @Override
-    public void selected(SelectEvent event)
-    {
+    public void selected(SelectEvent event) {
         // This method is called when the user picks a displayed sector. It ensures that the corresponding data set is
         // visible in the installed-data table.
 
-        if (!event.getEventAction().equals(SelectEvent.LEFT_CLICK))
+        if (!event.getEventAction().equals(SelectEvent.LEFT_CLICK)) {
             return;
+        }
 
-        if (!(event.getTopObject() instanceof Path))
+        if (!(event.getTopObject() instanceof Path)) {
             return;
+        }
 
-        FileStoreDataSet dataSet = (FileStoreDataSet) event.getTopPickedObject().getParentLayer().getValue
-            ("FileStoreDataSet");
-        if (dataSet == null)
+        FileStoreDataSet dataSet = (FileStoreDataSet) event.getTopPickedObject().getParentLayer().getValue("FileStoreDataSet");
+        if (dataSet == null) {
             return;
+        }
 
         this.fileStorePanel.scrollToDataSet(dataSet);
     }

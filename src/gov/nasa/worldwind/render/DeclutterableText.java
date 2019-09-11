@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Vec4;
@@ -18,8 +17,8 @@ import java.awt.geom.*;
  * @author tag
  * @version $Id: DeclutterableText.java 704 2012-07-21 03:16:21Z tgaskins $
  */
-public class DeclutterableText implements Declutterable
-{
+public class DeclutterableText implements Declutterable {
+
     protected GeographicText text;
     protected Vec4 point;
     protected double eyeDistance;
@@ -31,13 +30,12 @@ public class DeclutterableText implements Declutterable
     /**
      * Construct an object for specified text and position.
      *
-     * @param text         the text to display.
-     * @param point        the Cartesian location of the text.
-     * @param eyeDistance  the distance to consider the text from the eye.
+     * @param text the text to display.
+     * @param point the Cartesian location of the text.
+     * @param eyeDistance the distance to consider the text from the eye.
      * @param textRenderer the text renderer to use to draw the text.
      */
-    DeclutterableText(GeographicText text, Vec4 point, double eyeDistance, DeclutteringTextRenderer textRenderer)
-    {
+    DeclutterableText(GeographicText text, Vec4 point, double eyeDistance, DeclutteringTextRenderer textRenderer) {
         this.text = text;
         this.point = point;
         this.eyeDistance = eyeDistance;
@@ -49,66 +47,58 @@ public class DeclutterableText implements Declutterable
      *
      * @return true (the default) if it should participate, otherwise false.
      */
-    public boolean isEnableDecluttering()
-    {
+    public boolean isEnableDecluttering() {
         return this.enableDecluttering;
     }
 
-    public double getDistanceFromEye()
-    {
+    public double getDistanceFromEye() {
         return this.eyeDistance;
     }
 
-    public GeographicText getText()
-    {
+    public GeographicText getText() {
         return text;
     }
 
-    public Vec4 getPoint()
-    {
+    public Vec4 getPoint() {
         return point;
     }
 
-    public Rectangle2D getBounds(DrawContext dc)
-    {
+    public Rectangle2D getBounds(DrawContext dc) {
         Font font = this.getText().getFont();
-        if (font == null)
+        if (font == null) {
             font = this.textRenderer.getDefaultFont();
+        }
 
-        if (this.textBounds != null && this.boundsFont == font)
+        if (this.textBounds != null && this.boundsFont == font) {
             return this.textBounds;
+        }
 
-        try
-        {
+        try {
             this.textBounds = this.textRenderer.computeTextBounds(dc, this);
             this.boundsFont = font;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionWhileRenderingText", e);
         }
 
         return this.textBounds;
     }
 
-    /** {@inheritDoc} */
-    public void render(DrawContext dc)
-    {
-        try
-        {
-            if (this.getBounds(dc) == null)
+    /**
+     * {@inheritDoc}
+     */
+    public void render(DrawContext dc) {
+        try {
+            if (this.getBounds(dc) == null) {
                 return;
+            }
 
             this.textRenderer.drawText(dc, this, 1, 1);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionWhileRenderingText", e);
         }
     }
 
-    public void pick(DrawContext dc, java.awt.Point pickPoint)
-    {
+    public void pick(DrawContext dc, java.awt.Point pickPoint) {
         // TODO
     }
 }

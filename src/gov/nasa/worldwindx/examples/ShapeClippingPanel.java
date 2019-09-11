@@ -25,10 +25,9 @@ import java.util.Hashtable;
  * @author dcollins
  * @version $Id: ShapeClippingPanel.java 2410 2014-10-29 23:48:07Z dcollins $
  */
-public class ShapeClippingPanel extends JPanel implements ActionListener
-{
-    public static enum ClipMode
-    {
+public class ShapeClippingPanel extends JPanel implements ActionListener {
+
+    public static enum ClipMode {
         LAND,
         WATER
     }
@@ -39,54 +38,44 @@ public class ShapeClippingPanel extends JPanel implements ActionListener
     protected Combinable clipShape;
     protected Combinable landShape;
 
-    public ShapeClippingPanel(WorldWindow wwd)
-    {
+    public ShapeClippingPanel(WorldWindow wwd) {
         this.wwd = wwd;
         this.makePanel();
     }
 
-    public ClipMode getClipMode()
-    {
+    public ClipMode getClipMode() {
         return this.clipMode;
     }
 
-    protected void setClipMode(ClipMode clipMode)
-    {
+    protected void setClipMode(ClipMode clipMode) {
         this.clipMode = clipMode;
     }
 
-    public double getResolution()
-    {
+    public double getResolution() {
         return this.resolution;
     }
 
-    protected void setResolution(double resolution)
-    {
+    protected void setResolution(double resolution) {
         this.resolution = resolution;
     }
 
-    public Combinable getClipShape()
-    {
+    public Combinable getClipShape() {
         return this.clipShape;
     }
 
-    public void setClipShape(Combinable clipShape)
-    {
+    public void setClipShape(Combinable clipShape) {
         this.clipShape = clipShape;
     }
 
-    public Combinable getLandShape()
-    {
+    public Combinable getLandShape() {
         return this.landShape;
     }
 
-    public void setLandShape(Combinable landShape)
-    {
+    public void setLandShape(Combinable landShape) {
         this.landShape = landShape;
     }
 
-    protected void makePanel()
-    {
+    protected void makePanel() {
         this.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("Clipping")));
         this.setLayout(new BorderLayout());
 
@@ -104,11 +93,9 @@ public class ShapeClippingPanel extends JPanel implements ActionListener
 
         JRadioButton landButton = new JRadioButton("Land");
         landButton.setSelected(this.getClipMode().equals(ClipMode.LAND));
-        landButton.addActionListener(new ActionListener()
-        {
+        landButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 setClipMode(ClipMode.LAND);
             }
         });
@@ -117,11 +104,9 @@ public class ShapeClippingPanel extends JPanel implements ActionListener
 
         JRadioButton waterButton = new JRadioButton("Water");
         waterButton.setSelected(this.getClipMode().equals(ClipMode.WATER));
-        waterButton.addActionListener(new ActionListener()
-        {
+        waterButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 setClipMode(ClipMode.WATER);
             }
         });
@@ -143,11 +128,9 @@ public class ShapeClippingPanel extends JPanel implements ActionListener
         resolutionSlider.setPaintTicks(true);
         resolutionSlider.setPaintLabels(true);
         resolutionSlider.setLabelTable(labelTable);
-        resolutionSlider.addChangeListener(new ChangeListener()
-        {
+        resolutionSlider.addChangeListener(new ChangeListener() {
             @Override
-            public void stateChanged(ChangeEvent e)
-            {
+            public void stateChanged(ChangeEvent e) {
                 setResolution(((JSlider) e.getSource()).getValue());
             }
         });
@@ -156,39 +139,30 @@ public class ShapeClippingPanel extends JPanel implements ActionListener
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
-    {
+    public void actionPerformed(ActionEvent e) {
         ContourList contours = this.clipShape();
 
-        if (contours.getContourCount() > 0)
-        {
+        if (contours.getContourCount() > 0) {
             this.displayClippedShape(contours);
         }
     }
 
-    protected ContourList clipShape()
-    {
+    protected ContourList clipShape() {
         Globe globe = this.wwd.getModel().getGlobe();
         double resolutionMeters = WWMath.clamp(this.getResolution(), 1000, Double.MAX_VALUE); // no less than 1km
         double resolutionRadians = resolutionMeters / globe.getRadius();
         ShapeCombiner combiner = new ShapeCombiner(globe, resolutionRadians);
 
-        if (this.getClipMode().equals(ClipMode.LAND))
-        {
+        if (this.getClipMode().equals(ClipMode.LAND)) {
             return combiner.intersection(this.getClipShape(), this.getLandShape()); // intersect with land
-        }
-        else if (this.getClipMode().equals(ClipMode.WATER))
-        {
+        } else if (this.getClipMode().equals(ClipMode.WATER)) {
             return combiner.difference(this.getClipShape(), this.getLandShape()); // subtract land from shape
-        }
-        else
-        {
+        } else {
             return new ContourList(); // empty contour list
         }
     }
 
-    protected void displayClippedShape(ContourList contours)
-    {
+    protected void displayClippedShape(ContourList contours) {
         Color color = this.getClipMode().equals(ClipMode.LAND) ? new Color(79, 213, 33) : new Color(7, 152, 249);
         Color outlineColor = WWUtil.makeColorBrighter(color);
 

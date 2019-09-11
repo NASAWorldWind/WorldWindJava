@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525;
 
 import gov.nasa.worldwind.geom.Position;
@@ -18,13 +17,19 @@ import gov.nasa.worldwind.util.Logging;
  * @version $Id: AbstractMilStd2525TacticalGraphic.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 public abstract class AbstractMilStd2525TacticalGraphic extends AbstractTacticalGraphic
-    implements MilStd2525TacticalGraphic, Renderable
-{
-    /** Factor applied to the stipple pattern used to draw graphics in present state. */
+        implements MilStd2525TacticalGraphic, Renderable {
+
+    /**
+     * Factor applied to the stipple pattern used to draw graphics in present state.
+     */
     protected static final int OUTLINE_STIPPLE_FACTOR_PRESENT = 0;
-    /** Factor applied to the stipple pattern used to draw graphics in anticipated state. */
+    /**
+     * Factor applied to the stipple pattern used to draw graphics in anticipated state.
+     */
     protected static final int OUTLINE_STIPPLE_FACTOR_ANTICIPATED = 6;
-    /** Stipple pattern applied to graphics in the anticipated state. */
+    /**
+     * Stipple pattern applied to graphics in the anticipated state.
+     */
     protected static final short OUTLINE_STIPPLE_PATTERN = (short) 0xAAAA;
 
     /**
@@ -40,8 +45,7 @@ public abstract class AbstractMilStd2525TacticalGraphic extends AbstractTactical
      */
     protected String maskedSymbolCode;
 
-    protected AbstractMilStd2525TacticalGraphic(String symbolCode)
-    {
+    protected AbstractMilStd2525TacticalGraphic(String symbolCode) {
         this.symbolCode = new SymbolCode(symbolCode);
         this.maskedSymbolCode = this.symbolCode.toMaskedString();
 
@@ -49,62 +53,62 @@ public abstract class AbstractMilStd2525TacticalGraphic extends AbstractTactical
         this.setUnitsFormat(MilStd2525TacticalSymbol.DEFAULT_UNITS_FORMAT);
     }
 
-    /** {@inheritDoc} */
-    public String getIdentifier()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public String getIdentifier() {
         return this.symbolCode.toString();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Object getModifier(String modifier)
-    {
-        if (SymbologyConstants.UNIQUE_DESIGNATION.equals(modifier) && this.text != null)
-        {
+    public Object getModifier(String modifier) {
+        if (SymbologyConstants.UNIQUE_DESIGNATION.equals(modifier) && this.text != null) {
             return this.text;
         }
         return super.getModifier(modifier);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setModifier(String modifier, Object value)
-    {
-        if (SymbologyConstants.UNIQUE_DESIGNATION.equals(modifier) && (value instanceof String))
-        {
+    public void setModifier(String modifier, Object value) {
+        if (SymbologyConstants.UNIQUE_DESIGNATION.equals(modifier) && (value instanceof String)) {
             this.setText((String) value);
-        }
-        else
-        {
+        } else {
             super.setModifier(modifier, value);
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String getText()
-    {
+    public String getText() {
         return this.text;
     }
 
-    /** {@inheritDoc} */
-    public String getStatus()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public String getStatus() {
         return this.symbolCode.getStatus();
     }
 
-    /** {@inheritDoc} */
-    public void setStatus(String value)
-    {
-        if (value == null)
-        {
+    /**
+     * {@inheritDoc}
+     */
+    public void setStatus(String value) {
+        if (value == null) {
             String msg = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (!SymbologyConstants.STATUS_ALL.contains(value.toUpperCase()))
-        {
+        if (!SymbologyConstants.STATUS_ALL.contains(value.toUpperCase())) {
             String msg = Logging.getMessage("Symbology.InvalidStatus", value);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -119,13 +123,12 @@ public abstract class AbstractMilStd2525TacticalGraphic extends AbstractTactical
      *
      * @return true if {@link #isShowHostileIndicator()} is true, and the graphic represents a hostile entity.
      */
-    protected boolean mustShowHostileIndicator()
-    {
+    protected boolean mustShowHostileIndicator() {
         String id = this.symbolCode.getStandardIdentity();
         boolean isHostile = SymbologyConstants.STANDARD_IDENTITY_HOSTILE.equalsIgnoreCase(id)
-            || SymbologyConstants.STANDARD_IDENTITY_SUSPECT.equalsIgnoreCase(id)
-            || SymbologyConstants.STANDARD_IDENTITY_FAKER.equalsIgnoreCase(id)
-            || SymbologyConstants.STANDARD_IDENTITY_JOKER.equalsIgnoreCase(id);
+                || SymbologyConstants.STANDARD_IDENTITY_SUSPECT.equalsIgnoreCase(id)
+                || SymbologyConstants.STANDARD_IDENTITY_FAKER.equalsIgnoreCase(id)
+                || SymbologyConstants.STANDARD_IDENTITY_JOKER.equalsIgnoreCase(id);
 
         return this.isShowHostileIndicator() && isHostile;
     }
@@ -138,8 +141,7 @@ public abstract class AbstractMilStd2525TacticalGraphic extends AbstractTactical
      * @param attributes Attributes bundle to receive defaults.
      */
     @Override
-    protected void applyDefaultAttributes(ShapeAttributes attributes)
-    {
+    protected void applyDefaultAttributes(ShapeAttributes attributes) {
         Material material = this.getDefaultMaterial();
         attributes.setOutlineMaterial(material);
         attributes.setInteriorMaterial(material);
@@ -148,13 +150,10 @@ public abstract class AbstractMilStd2525TacticalGraphic extends AbstractTactical
         // when in the Present status, and dashed lines when the status is not Present. Note that the default is
         //  overridden by some graphics, which always draw with dashed lines.
         String status = this.getStatus();
-        if (!SymbologyConstants.STATUS_PRESENT.equalsIgnoreCase(status))
-        {
+        if (!SymbologyConstants.STATUS_PRESENT.equalsIgnoreCase(status)) {
             attributes.setOutlineStippleFactor(this.getOutlineStippleFactor());
             attributes.setOutlineStipplePattern(this.getOutlineStipplePattern());
-        }
-        else
-        {
+        } else {
             attributes.setOutlineStippleFactor(OUTLINE_STIPPLE_FACTOR_PRESENT);
         }
 
@@ -170,8 +169,7 @@ public abstract class AbstractMilStd2525TacticalGraphic extends AbstractTactical
      *
      * @see gov.nasa.worldwind.render.ShapeAttributes#getOutlineStippleFactor()
      */
-    protected int getOutlineStippleFactor()
-    {
+    protected int getOutlineStippleFactor() {
         return OUTLINE_STIPPLE_FACTOR_ANTICIPATED;
     }
 
@@ -182,8 +180,7 @@ public abstract class AbstractMilStd2525TacticalGraphic extends AbstractTactical
      *
      * @see gov.nasa.worldwind.render.ShapeAttributes#getOutlineStipplePattern()
      */
-    protected short getOutlineStipplePattern()
-    {
+    protected short getOutlineStipplePattern() {
         return OUTLINE_STIPPLE_PATTERN;
     }
 
@@ -192,15 +189,13 @@ public abstract class AbstractMilStd2525TacticalGraphic extends AbstractTactical
      *
      * @return The default material, determined by the graphic's standard identity.
      */
-    protected Material getDefaultMaterial()
-    {
+    protected Material getDefaultMaterial() {
         return MilStd2525Util.getDefaultGraphicMaterial(this.symbolCode);
     }
 
-    protected TacticalSymbol createSymbol(String sidc, Position position, TacticalSymbolAttributes attrs)
-    {
+    protected TacticalSymbol createSymbol(String sidc, Position position, TacticalSymbolAttributes attrs) {
         TacticalSymbol symbol = new MilStd2525TacticalSymbol(sidc,
-            position != null ? position : Position.ZERO);
+                position != null ? position : Position.ZERO);
         symbol.setDelegateOwner(this);
         symbol.setAttributes(attrs);
         symbol.setShowTextModifiers(false);

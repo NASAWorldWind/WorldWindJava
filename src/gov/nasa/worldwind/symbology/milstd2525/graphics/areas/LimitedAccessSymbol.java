@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.Configuration;
@@ -24,50 +23,50 @@ import java.awt.image.*;
  * @version $Id: LimitedAccessSymbol.java 545 2012-04-24 22:29:21Z pabercrombie $
  * @see LimitedAccessArea
  */
-public class LimitedAccessSymbol extends AbstractTacticalSymbol
-{
-    /** Identifier for the symbol. */
+public class LimitedAccessSymbol extends AbstractTacticalSymbol {
+
+    /**
+     * Identifier for the symbol.
+     */
     protected String symbolId;
 
-    public LimitedAccessSymbol(String sidc, Position position)
-    {
+    public LimitedAccessSymbol(String sidc, Position position) {
         super(position);
         this.init(sidc);
     }
 
-    protected void init(String symbolId)
-    {
+    protected void init(String symbolId) {
         this.symbolId = symbolId;
 
         // Configure this tactical symbol's icon retriever and modifier retriever with either the configuration value or
         // the default value (in that order of precedence).
         String iconRetrieverPath = Configuration.getStringValue(AVKey.MIL_STD_2525_ICON_RETRIEVER_PATH,
-            MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
+                MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
         this.setIconRetriever(new IconRetriever(iconRetrieverPath));
         this.setModifierRetriever(new MilStd2525ModifierRetriever(iconRetrieverPath));
 
         this.setOffset(Offset.fromFraction(0.5, 0.0));
     }
 
-    /** {@inheritDoc} */
-    public String getIdentifier()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public String getIdentifier() {
         return this.symbolId;
     }
 
-    /** Icon retriever to retrieve an icon framed in a pentagon. */
-    static class IconRetriever extends MilStd2525IconRetriever
-    {
-        public IconRetriever(String retrieverPath)
-        {
+    /**
+     * Icon retriever to retrieve an icon framed in a pentagon.
+     */
+    static class IconRetriever extends MilStd2525IconRetriever {
+
+        public IconRetriever(String retrieverPath) {
             super(retrieverPath);
         }
 
         @Override
-        public BufferedImage createIcon(String symbolId, AVList params)
-        {
-            if (symbolId == null)
-            {
+        public BufferedImage createIcon(String symbolId, AVList params) {
+            if (symbolId == null) {
                 String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
                 Logging.logger().severe(msg);
                 throw new IllegalArgumentException(msg);
@@ -94,18 +93,17 @@ public class LimitedAccessSymbol extends AbstractTacticalSymbol
             //    \     /
             //     \   /
             //      \ /
-
             BufferedImage pentagonImg = new BufferedImage(pentagonWidth, pentagonHeight, image.getType());
 
             int lineWidth = (int) Math.max(imgWidth * 0.03, 1);
 
             Color color = this.getColorFromParams(params);
-            if (color == null)
+            if (color == null) {
                 color = this.getColorForStandardIdentity(symbolCode);
+            }
 
             Graphics2D g = null;
-            try
-            {
+            try {
                 g = pentagonImg.createGraphics();
                 g.setColor(color);
                 g.setStroke(new BasicStroke(lineWidth));
@@ -118,11 +116,10 @@ public class LimitedAccessSymbol extends AbstractTacticalSymbol
                 g.drawLine(pentagonWidth - 1, 0, pentagonWidth - 1, imgHeight); // Right edge of rect
                 g.drawLine(0, imgHeight, pentagonWidth / 2, pentagonHeight); // Left side of triangle
                 g.drawLine(pentagonWidth, imgHeight, pentagonWidth / 2, pentagonHeight); // Right side of triangle
-            }
-            finally
-            {
-                if (g != null)
+            } finally {
+                if (g != null) {
                     g.dispose();
+                }
             }
 
             return pentagonImg;
@@ -134,13 +131,13 @@ public class LimitedAccessSymbol extends AbstractTacticalSymbol
          * @param params Parameter list.
          *
          * @return The value of the AVKey.COLOR parameter, if such a parameter exists and is of type java.awt.Color.
-         *         Returns null if the parameter list is null, if there is no value for key AVKey.COLOR, or if the value
-         *         is not a Color.
+         * Returns null if the parameter list is null, if there is no value for key AVKey.COLOR, or if the value is not
+         * a Color.
          */
-        protected Color getColorFromParams(AVList params)
-        {
-            if (params == null)
+        protected Color getColorFromParams(AVList params) {
+            if (params == null) {
                 return null;
+            }
 
             Object o = params.getValue(AVKey.COLOR);
             return (o instanceof Color) ? (Color) o : null;
@@ -153,8 +150,7 @@ public class LimitedAccessSymbol extends AbstractTacticalSymbol
          *
          * @return Color to apply based on the standard identity. (Red for hostile entities, black for friendly, etc.)
          */
-        protected Color getColorForStandardIdentity(SymbolCode code)
-        {
+        protected Color getColorForStandardIdentity(SymbolCode code) {
             return MilStd2525Util.getDefaultGraphicMaterial(code).getDiffuse();
         }
     }

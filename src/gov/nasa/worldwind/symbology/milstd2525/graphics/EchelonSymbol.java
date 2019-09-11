@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.symbology.milstd2525.graphics;
 
 import gov.nasa.worldwind.*;
@@ -24,16 +23,22 @@ import java.awt.geom.*;
  * @author pabercrombie
  * @version $Id: EchelonSymbol.java 2196 2014-08-06 19:42:15Z tgaskins $
  */
-public class EchelonSymbol extends AbstractTacticalSymbol
-{
+public class EchelonSymbol extends AbstractTacticalSymbol {
+
     protected static final Offset DEFAULT_OFFSET = Offset.fromFraction(0.5, -0.5);
 
-    /** Identifier for this graphic. */
+    /**
+     * Identifier for this graphic.
+     */
     protected String sidc;
-    /** The label is drawn along a line from the label position to the orientation position. */
+    /**
+     * The label is drawn along a line from the label position to the orientation position.
+     */
     protected Position orientationPosition;
 
-    /** Rotation to apply to symbol, computed each frame. */
+    /**
+     * Rotation to apply to symbol, computed each frame.
+     */
     protected Angle rotation;
 
     /**
@@ -45,12 +50,10 @@ public class EchelonSymbol extends AbstractTacticalSymbol
      *
      * @throws IllegalArgumentException if {@code sidc} is null, or does not contain a value for the Echelon field.
      */
-    public EchelonSymbol(String sidc)
-    {
+    public EchelonSymbol(String sidc) {
         super();
 
-        if (sidc == null)
-        {
+        if (sidc == null) {
             String msg = Logging.getMessage("nullValue.SymbolCodeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -58,8 +61,7 @@ public class EchelonSymbol extends AbstractTacticalSymbol
 
         SymbolCode symbolCode = new SymbolCode(sidc);
         String echelon = symbolCode.getEchelon();
-        if (SymbolCode.isFieldEmpty(echelon))
-        {
+        if (SymbolCode.isFieldEmpty(echelon)) {
             String msg = Logging.getMessage("Symbology.InvalidSymbolCode", sidc);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -72,7 +74,7 @@ public class EchelonSymbol extends AbstractTacticalSymbol
         // Configure this tactical point graphic's icon retriever and modifier retriever with either the
         // configuration value or the default value (in that order of precedence).
         String iconRetrieverPath = Configuration.getStringValue(AVKey.MIL_STD_2525_ICON_RETRIEVER_PATH,
-            MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
+                MilStd2525Constants.DEFAULT_ICON_RETRIEVER_PATH);
         this.setIconRetriever(new MilStd2525ModifierRetriever(iconRetrieverPath));
     }
 
@@ -82,8 +84,7 @@ public class EchelonSymbol extends AbstractTacticalSymbol
      *
      * @return Position used to orient the label. May be null.
      */
-    public Position getOrientationPosition()
-    {
+    public Position getOrientationPosition() {
         return this.orientationPosition;
     }
 
@@ -93,14 +94,14 @@ public class EchelonSymbol extends AbstractTacticalSymbol
      *
      * @param orientationPosition Draw label oriented toward this position.
      */
-    public void setOrientationPosition(Position orientationPosition)
-    {
+    public void setOrientationPosition(Position orientationPosition) {
         this.orientationPosition = orientationPosition;
     }
 
-    /** {@inheritDoc} */
-    public String getIdentifier()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public String getIdentifier() {
         SymbolCode symbolCode = new SymbolCode(this.sidc);
         String echelon = symbolCode.getEchelon();
 
@@ -108,32 +109,31 @@ public class EchelonSymbol extends AbstractTacticalSymbol
     }
 
     @Override
-    protected AVList assembleIconRetrieverParameters(AVList params)
-    {
+    protected AVList assembleIconRetrieverParameters(AVList params) {
         params = super.assembleIconRetrieverParameters(params);
 
-        if (params == null)
+        if (params == null) {
             params = new AVListImpl();
+        }
 
         Material material = this.getActiveAttributes().getTextModifierMaterial();
-        if (material != null)
+        if (material != null) {
             params.setValue(AVKey.COLOR, material.getDiffuse());
+        }
 
         return params;
     }
 
     @Override
-    protected void computeTransform(DrawContext dc, OrderedSymbol osym)
-    {
+    protected void computeTransform(DrawContext dc, OrderedSymbol osym) {
         super.computeTransform(dc, osym);
 
         boolean orientationReversed = false;
-        if (this.orientationPosition != null)
-        {
+        if (this.orientationPosition != null) {
             // TODO apply altitude mode to orientation position
             // Project the orientation point onto the screen
             Vec4 orientationPlacePoint = dc.computeTerrainPoint(this.orientationPosition.getLatitude(),
-                this.orientationPosition.getLongitude(), 0);
+                    this.orientationPosition.getLongitude(), 0);
             Vec4 orientationScreenPoint = dc.getView().project(orientationPlacePoint);
 
             this.rotation = this.computeRotation(osym.screenPoint, orientationScreenPoint);
@@ -141,24 +141,21 @@ public class EchelonSymbol extends AbstractTacticalSymbol
             orientationReversed = (osym.screenPoint.x <= orientationScreenPoint.x);
         }
 
-        if (this.getOffset() != null && this.iconRect != null)
-        {
+        if (this.getOffset() != null && this.iconRect != null) {
             Point2D offsetPoint = this.getOffset().computeOffset(this.iconRect.getWidth(), this.iconRect.getHeight(),
-                null, null);
+                    null, null);
 
             // If a rotation is applied to the image, then rotate the offset as well. An offset in the x direction
             // will move the image along the orientation line, and a offset in the y direction will move the image
             // perpendicular to the orientation line.
-            if (this.rotation != null)
-            {
+            if (this.rotation != null) {
                 double dy = offsetPoint.getY();
 
                 // If the orientation is reversed we need to adjust the vertical offset to compensate for the flipped
                 // image. For example, if the offset normally aligns the top of the image with the place point then without
                 // this adjustment the bottom of the image would align with the place point when the orientation is
                 // reversed.
-                if (orientationReversed)
-                {
+                if (orientationReversed) {
                     dy = -(dy + this.iconRect.getHeight());
                 }
 
@@ -172,24 +169,21 @@ public class EchelonSymbol extends AbstractTacticalSymbol
 
             osym.dx = -this.iconRect.getX() - offsetPoint.getX();
             osym.dy = -(this.iconRect.getY() - offsetPoint.getY());
-        }
-        else
-        {
+        } else {
             osym.dx = 0;
             osym.dy = 0;
         }
     }
 
-    /** Overridden to apply rotation. */
+    /**
+     * Overridden to apply rotation.
+     */
     @Override
-    protected void drawIcon(DrawContext dc)
-    {
+    protected void drawIcon(DrawContext dc) {
         boolean matrixPushed = false;
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
-        try
-        {
-            if (this.rotation != null)
-            {
+        try {
+            if (this.rotation != null) {
                 gl.glPushMatrix();
                 gl.glRotated(this.rotation.degrees, 0, 0, 1);
                 matrixPushed = true;
@@ -199,37 +193,32 @@ public class EchelonSymbol extends AbstractTacticalSymbol
             gl.glDisable(GL.GL_DEPTH_TEST);
 
             super.drawIcon(dc);
-        }
-        finally
-        {
+        } finally {
             gl.glEnable(GL.GL_DEPTH_TEST);
 
-            if (matrixPushed)
+            if (matrixPushed) {
                 gl.glPopMatrix();
+            }
         }
     }
 
     /**
      * Compute the amount of rotation to apply to a label in order to keep it oriented toward its orientation position.
      *
-     * @param screenPoint            Geographic position of the text, projected onto the screen.
+     * @param screenPoint Geographic position of the text, projected onto the screen.
      * @param orientationScreenPoint Orientation position, projected onto the screen.
      *
      * @return The rotation angle to apply when drawing the label.
      */
-    protected Angle computeRotation(Vec4 screenPoint, Vec4 orientationScreenPoint)
-    {
+    protected Angle computeRotation(Vec4 screenPoint, Vec4 orientationScreenPoint) {
         // Determine delta between the orientation position and the label position
         double deltaX = screenPoint.x - orientationScreenPoint.x;
         double deltaY = screenPoint.y - orientationScreenPoint.y;
 
-        if (deltaX != 0)
-        {
+        if (deltaX != 0) {
             double angle = Math.atan(deltaY / deltaX);
             return Angle.fromRadians(angle);
-        }
-        else
-        {
+        } else {
             return Angle.POS90; // Vertical label
         }
     }

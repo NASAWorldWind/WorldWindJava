@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.ogc.collada;
 
 /**
@@ -13,9 +12,11 @@ package gov.nasa.worldwind.ogc.collada;
  * @author pabercrombie
  * @version $Id: ColladaAbstractInstance.java 600 2012-05-17 22:57:25Z pabercrombie $
  */
-public abstract class ColladaAbstractInstance<T> extends ColladaAbstractObject
-{
-    /** Resolved target of the link. */
+public abstract class ColladaAbstractInstance<T> extends ColladaAbstractObject {
+
+    /**
+     * Resolved target of the link.
+     */
     protected T instance;
 
     /**
@@ -23,8 +24,7 @@ public abstract class ColladaAbstractInstance<T> extends ColladaAbstractObject
      *
      * @param ns Namespace.
      */
-    public ColladaAbstractInstance(String ns)
-    {
+    public ColladaAbstractInstance(String ns) {
         super(ns);
     }
 
@@ -33,8 +33,7 @@ public abstract class ColladaAbstractInstance<T> extends ColladaAbstractObject
      *
      * @return URL field.
      */
-    public String getUrl()
-    {
+    public String getUrl() {
         return (String) this.getField("url");
     }
 
@@ -46,10 +45,8 @@ public abstract class ColladaAbstractInstance<T> extends ColladaAbstractObject
      * @return The linked resource, or null if the resource is not available.
      */
     @SuppressWarnings("unchecked")
-    public T get()
-    {
-        if (this.instance == null)
-        {
+    public T get() {
+        if (this.instance == null) {
             Object o = this.getRoot().resolveReference(this.getUrl());
             this.instance = (T) o; // May be null
         }

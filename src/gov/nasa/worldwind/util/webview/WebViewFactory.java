@@ -13,8 +13,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: WebViewFactory.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface WebViewFactory
-{
+public interface WebViewFactory {
+
     /**
      * Returns a new WebView with the specified {@code frameSize}.
      *

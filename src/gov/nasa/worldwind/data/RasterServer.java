@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.data;
 
 import gov.nasa.worldwind.avlist.AVList;
@@ -15,15 +14,15 @@ import java.nio.ByteBuffer;
  * @author tag
  * @version $Id: RasterServer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface RasterServer
-{
+public interface RasterServer {
+
     /**
      * Composes a Raster and returns as ByteBuffer in the requested format (image or elevation)
      *
      * @param params Required parameters in params:
-     *               <p>
-     *               AVKey.WIDTH - the height of the requested raster AVKey.HEIGHT - the height of the requested raster
-     *               AVKey.SECTOR - a regular Geographic Sector defined by lat/lon coordinates of corners
+     * <p>
+     * AVKey.WIDTH - the height of the requested raster AVKey.HEIGHT - the height of the requested raster AVKey.SECTOR -
+     * a regular Geographic Sector defined by lat/lon coordinates of corners
      *
      * @return ByteBuffer of the requested file format
      */

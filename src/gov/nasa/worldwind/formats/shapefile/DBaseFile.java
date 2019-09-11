@@ -19,19 +19,19 @@ import java.util.*;
  * @author Patrick Murris
  * @version $Id: DBaseFile.java 2257 2014-08-22 18:02:19Z tgaskins $
  */
-public class DBaseFile extends AVListImpl
-{
+public class DBaseFile extends AVListImpl {
+
     protected static final int FIXED_HEADER_LENGTH = 32;
     protected static final int FIELD_DESCRIPTOR_LENGTH = 32;
-    protected static String[] DBASE_CONTENT_TYPES =
-        {
-            "application/dbase",
-            "application/dbf",
-            "application/octet-stream"
-        };
+    protected static String[] DBASE_CONTENT_TYPES
+            = {
+                "application/dbase",
+                "application/dbf",
+                "application/octet-stream"
+            };
 
-    protected static class Header
-    {
+    protected static class Header {
+
         public int fileCode;
         public Date lastModificationDate;
         public int numberOfRecords;
@@ -48,134 +48,108 @@ public class DBaseFile extends AVListImpl
     protected int numRecordsRead;
     protected ByteBuffer recordBuffer;
 
-    public DBaseFile(Object source)
-    {
-        if (source == null || WWUtil.isEmpty(source))
-        {
+    public DBaseFile(Object source) {
+        if (source == null || WWUtil.isEmpty(source)) {
             String message = Logging.getMessage("nullValue.SourceIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        try
-        {
+        try {
             this.setValue(AVKey.DISPLAY_NAME, source.toString());
 
-            if (source instanceof File)
+            if (source instanceof File) {
                 this.initializeFromFile((File) source);
-            else if (source instanceof URL)
+            } else if (source instanceof URL) {
                 this.initializeFromURL((URL) source);
-            else if (source instanceof InputStream)
+            } else if (source instanceof InputStream) {
                 this.initializeFromStream((InputStream) source);
-            else if (source instanceof String)
+            } else if (source instanceof String) {
                 this.initializeFromPath((String) source);
-            else
-            {
+            } else {
                 String message = Logging.getMessage("generic.UnrecognizedSourceType", source);
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = Logging.getMessage("SHP.ExceptionAttemptingToReadDBase",
-                this.getStringValue(AVKey.DISPLAY_NAME));
+                    this.getStringValue(AVKey.DISPLAY_NAME));
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             throw new WWRuntimeException(message, e);
         }
     }
 
-    public DBaseFile(InputStream is)
-    {
-        if (is == null)
-        {
+    public DBaseFile(InputStream is) {
+        if (is == null) {
             String message = Logging.getMessage("nullValue.InputStreamIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        try
-        {
+        try {
             this.setValue(AVKey.DISPLAY_NAME, is.toString());
             this.initializeFromStream(is);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = Logging.getMessage("SHP.ExceptionAttemptingToReadDBase",
-                this.getStringValue(AVKey.DISPLAY_NAME));
+                    this.getStringValue(AVKey.DISPLAY_NAME));
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             throw new WWRuntimeException(message, e);
         }
     }
 
-    public Date getLastModificationDate()
-    {
+    public Date getLastModificationDate() {
         return this.header.lastModificationDate;
     }
 
-    public int getNumberOfRecords()
-    {
+    public int getNumberOfRecords() {
         return this.header.numberOfRecords;
     }
 
-    public int getHeaderLength()
-    {
+    public int getHeaderLength() {
         return this.header.headerLength;
     }
 
-    public int getRecordLength()
-    {
+    public int getRecordLength() {
         return this.header.recordLength;
     }
 
-    public int getNumberOfFields()
-    {
+    public int getNumberOfFields() {
         return (this.header.headerLength - 1 - FIXED_HEADER_LENGTH) / FIELD_DESCRIPTOR_LENGTH;
     }
 
-    public DBaseField[] getFields()
-    {
+    public DBaseField[] getFields() {
         return this.fields;
     }
 
-    public boolean hasNext()
-    {
+    public boolean hasNext() {
         return this.open && this.numRecordsRead < this.header.numberOfRecords;
     }
 
-    public DBaseRecord nextRecord()
-    {
-        if (!this.open)
-        {
+    public DBaseRecord nextRecord() {
+        if (!this.open) {
             String message = Logging.getMessage("SHP.DBaseFileClosed", this.getStringValue(AVKey.DISPLAY_NAME));
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
 
-        if (this.getNumberOfRecords() <= 0 || this.numRecordsRead >= this.getNumberOfRecords())
-        {
+        if (this.getNumberOfRecords() <= 0 || this.numRecordsRead >= this.getNumberOfRecords()) {
             String message = Logging.getMessage("SHP.NoRecords", this.getStringValue(AVKey.DISPLAY_NAME));
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
 
-        try
-        {
+        try {
             return this.readNextRecord();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             String message = Logging.getMessage("SHP.ExceptionAttemptingToReadDBaseRecord",
-                this.getStringValue(AVKey.DISPLAY_NAME));
+                    this.getStringValue(AVKey.DISPLAY_NAME));
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             throw new WWRuntimeException(message, e);
         }
     }
 
-    public void close()
-    {
-        if (this.channel != null)
-        {
+    public void close() {
+        if (this.channel != null) {
             WWIO.closeStream(this.channel, null);
             this.channel = null;
         }
@@ -187,11 +161,8 @@ public class DBaseFile extends AVListImpl
     //**************************************************************//
     //********************  Initialization  ************************//
     //**************************************************************//
-
-    protected void initializeFromFile(File file) throws IOException
-    {
-        if (!file.exists())
-        {
+    protected void initializeFromFile(File file) throws IOException {
+        if (!file.exists()) {
             String message = Logging.getMessage("generic.FileNotFound", file.getPath());
             Logging.logger().severe(message);
             throw new FileNotFoundException(message);
@@ -202,15 +173,13 @@ public class DBaseFile extends AVListImpl
         this.initialize();
     }
 
-    protected void initializeFromURL(URL url) throws IOException
-    {
+    protected void initializeFromURL(URL url) throws IOException {
         // Opening the Shapefile URL as a URL connection. Throw an IOException if the URL connection cannot be opened,
         // or if it's an invalid Shapefile connection.
         URLConnection connection = url.openConnection();
 
         String message = this.validateURLConnection(connection, DBASE_CONTENT_TYPES);
-        if (message != null)
-        {
+        if (message != null) {
             throw new IOException(message);
         }
 
@@ -218,24 +187,20 @@ public class DBaseFile extends AVListImpl
         this.initialize();
     }
 
-    protected void initializeFromStream(InputStream stream) throws IOException
-    {
+    protected void initializeFromStream(InputStream stream) throws IOException {
         this.channel = Channels.newChannel(WWIO.getBufferedInputStream(stream));
         this.initialize();
     }
 
-    protected void initializeFromPath(String path) throws IOException
-    {
+    protected void initializeFromPath(String path) throws IOException {
         File file = new File(path);
-        if (file.exists())
-        {
+        if (file.exists()) {
             this.initializeFromFile(file);
             return;
         }
 
         URL url = WWIO.makeURL(path);
-        if (url != null)
-        {
+        if (url != null) {
             this.initializeFromURL(url);
             return;
         }
@@ -245,37 +210,32 @@ public class DBaseFile extends AVListImpl
         throw new IllegalArgumentException(message);
     }
 
-    protected void initialize() throws IOException
-    {
+    protected void initialize() throws IOException {
         this.header = this.readHeader();
         this.fields = this.readFields();
         this.open = true;
     }
 
-    protected String validateURLConnection(URLConnection connection, String[] acceptedContentTypes)
-    {
-        try
-        {
-            if (connection instanceof HttpURLConnection &&
-                ((HttpURLConnection) connection).getResponseCode() != HttpURLConnection.HTTP_OK)
-            {
+    protected String validateURLConnection(URLConnection connection, String[] acceptedContentTypes) {
+        try {
+            if (connection instanceof HttpURLConnection
+                    && ((HttpURLConnection) connection).getResponseCode() != HttpURLConnection.HTTP_OK) {
                 return Logging.getMessage("HTTP.ResponseCode", ((HttpURLConnection) connection).getResponseCode(),
-                    connection.getURL());
+                        connection.getURL());
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return Logging.getMessage("URLRetriever.ErrorOpeningConnection", connection.getURL());
         }
 
         String contentType = connection.getContentType();
-        if (WWUtil.isEmpty(contentType))
+        if (WWUtil.isEmpty(contentType)) {
             return null;
+        }
 
-        for (String type : acceptedContentTypes)
-        {
-            if (contentType.trim().toLowerCase().startsWith(type))
+        for (String type : acceptedContentTypes) {
+            if (contentType.trim().toLowerCase().startsWith(type)) {
                 return null;
+            }
         }
 
         // Return an exception if the content type does not match the expected type.
@@ -285,7 +245,6 @@ public class DBaseFile extends AVListImpl
     //**************************************************************//
     //********************  Header  ********************************//
     //**************************************************************//
-
     /**
      * Reads the {@link Header} from this DBaseFile. This file is assumed to have a header.
      *
@@ -293,14 +252,12 @@ public class DBaseFile extends AVListImpl
      *
      * @throws IOException if the header cannot be read for any reason.
      */
-    protected Header readHeader() throws IOException
-    {
+    protected Header readHeader() throws IOException {
         // Read header fixed portion.
         ByteBuffer buffer = ByteBuffer.allocate(FIXED_HEADER_LENGTH);
         WWIO.readChannelToBuffer(this.channel, buffer);
 
-        if (buffer.remaining() < FIXED_HEADER_LENGTH)
-        {
+        if (buffer.remaining() < FIXED_HEADER_LENGTH) {
             // Let the caller catch and log the message.
             throw new WWRuntimeException(Logging.getMessage("generic.InvalidFileLength", buffer.remaining()));
         }
@@ -318,16 +275,14 @@ public class DBaseFile extends AVListImpl
      *
      * @return a {@link Header} instances.
      */
-    protected Header readHeaderFromBuffer(ByteBuffer buffer)
-    {
+    protected Header readHeaderFromBuffer(ByteBuffer buffer) {
         int pos = buffer.position();
 
         buffer.order(ByteOrder.LITTLE_ENDIAN);
 
         // Read file code - first byte
         int fileCode = buffer.get();
-        if (fileCode > 5)
-        {
+        if (fileCode > 5) {
             // Let the caller catch and log the message.
             throw new WWUnrecognizedException(Logging.getMessage("SHP.UnrecognizedDBaseFile", fileCode));
         }
@@ -364,7 +319,6 @@ public class DBaseFile extends AVListImpl
     //**************************************************************//
     //********************  Fields  ********************************//
     //**************************************************************//
-
     /**
      * Reads the {@link DBaseField} descriptions from this DBaseFile. This file is assumed to have one or more fields
      * available.
@@ -373,8 +327,7 @@ public class DBaseFile extends AVListImpl
      *
      * @throws IOException if the fields cannot be read for any reason.
      */
-    protected DBaseField[] readFields() throws IOException
-    {
+    protected DBaseField[] readFields() throws IOException {
         int fieldsLength = this.header.headerLength - FIXED_HEADER_LENGTH;
         ByteBuffer buffer = ByteBuffer.allocate(fieldsLength);
         WWIO.readChannelToBuffer(this.channel, buffer);
@@ -389,19 +342,17 @@ public class DBaseFile extends AVListImpl
      * The buffer current position is assumed to be set at the start of the sequence and will be set to the end of the
      * sequence after this method has completed.
      *
-     * @param buffer    the DBaseField sequence {@link java.nio.ByteBuffer} to read from.
+     * @param buffer the DBaseField sequence {@link java.nio.ByteBuffer} to read from.
      * @param numFields the number of DBaseFields to read.
      *
      * @return an array of {@link DBaseField} instances.
      */
-    protected DBaseField[] readFieldsFromBuffer(ByteBuffer buffer, int numFields)
-    {
+    protected DBaseField[] readFieldsFromBuffer(ByteBuffer buffer, int numFields) {
         int pos = buffer.position();
 
         DBaseField[] fields = new DBaseField[numFields];
 
-        for (int i = 0; i < numFields; i++)
-        {
+        for (int i = 0; i < numFields; i++) {
             fields[i] = new DBaseField(this, buffer);
         }
 
@@ -414,7 +365,6 @@ public class DBaseFile extends AVListImpl
     //**************************************************************//
     //********************  Records  *******************************//
     //**************************************************************//
-
     /**
      * Reads the next {@link DBaseRecord} instance from this DBaseFile. This file is assumed to have one or more
      * remaining records available.
@@ -423,11 +373,11 @@ public class DBaseFile extends AVListImpl
      *
      * @throws IOException if the record cannot be read for any reason.
      */
-    protected DBaseRecord readNextRecord() throws IOException
-    {
+    protected DBaseRecord readNextRecord() throws IOException {
         // Allocate a buffer to hold the record content.
-        if (this.recordBuffer == null)
+        if (this.recordBuffer == null) {
             this.recordBuffer = ByteBuffer.allocate(this.getRecordLength());
+        }
 
         // Read the record content.
         this.recordBuffer.limit(this.getRecordLength());
@@ -444,66 +394,59 @@ public class DBaseFile extends AVListImpl
      * The buffer current position is assumed to be set at the start of the record and will be set to the start of the
      * next record after this method has completed.
      *
-     * @param buffer       the DBase record {@link java.nio.ByteBuffer} to read from.
+     * @param buffer the DBase record {@link java.nio.ByteBuffer} to read from.
      * @param recordNumber the record's sequence number.
      *
      * @return a {@link DBaseRecord} instance.
      */
-    protected DBaseRecord readRecordFromBuffer(ByteBuffer buffer, int recordNumber)
-    {
+    protected DBaseRecord readRecordFromBuffer(ByteBuffer buffer, int recordNumber) {
         return new DBaseRecord(this, buffer, recordNumber);
     }
 
     //**************************************************************//
     //********************  String Parsing  ************************//
     //**************************************************************//
-
-    protected int readZeroTerminatedString(ByteBuffer buffer, byte[] bytes, int maxLength)
-    {
-        if (maxLength <= 0)
+    protected int readZeroTerminatedString(ByteBuffer buffer, byte[] bytes, int maxLength) {
+        if (maxLength <= 0) {
             return 0;
+        }
 
         buffer.get(bytes, 0, maxLength);
 
         int length;
-        for (length = 0; length < maxLength && bytes[length] != 0; length++)
-        {
+        for (length = 0; length < maxLength && bytes[length] != 0; length++) {
         }
 
         return length;
     }
 
-    protected String decodeString(byte[] bytes, int length)
-    {
-        if (length <= 0)
+    protected String decodeString(byte[] bytes, int length) {
+        if (length <= 0) {
             return null;
-
-        try
-        {
-            return new String(bytes, 0, length, "UTF-8");
         }
-        catch (UnsupportedEncodingException e)
-        {
+
+        try {
+            return new String(bytes, 0, length, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
             return new String(bytes, 0, length);
         }
     }
 
-    protected boolean isStringEmpty(byte[] bytes, int length)
-    {
+    protected boolean isStringEmpty(byte[] bytes, int length) {
         return length <= 0
-            || isArrayFilled(bytes, length, (byte) 0x20)  // Space character.
-            || isArrayFilled(bytes, length, (byte) 0x2A); // Asterisk character.
+                || isArrayFilled(bytes, length, (byte) 0x20) // Space character.
+                || isArrayFilled(bytes, length, (byte) 0x2A); // Asterisk character.
     }
 
-    protected static boolean isArrayFilled(byte[] bytes, int length, byte fillValue)
-    {
-        if (length <= 0)
+    protected static boolean isArrayFilled(byte[] bytes, int length, byte fillValue) {
+        if (length <= 0) {
             return false;
+        }
 
-        for (int i = 0; i < length; i++)
-        {
-            if (bytes[i] != fillValue)
+        for (int i = 0; i < length; i++) {
+            if (bytes[i] != fillValue) {
                 return false;
+            }
         }
 
         return true;

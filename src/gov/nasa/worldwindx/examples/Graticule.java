@@ -15,12 +15,11 @@ import gov.nasa.worldwind.layers.LatLonGraticuleLayer;
  * @author Patrick Murris
  * @version $Id: Graticule.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class Graticule extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class Graticule extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             // Add the graticule layer
@@ -28,8 +27,7 @@ public class Graticule extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Lat-Lon Graticule", AppFrame.class);
     }
 }

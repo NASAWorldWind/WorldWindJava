@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwind.util;
 
 import com.jogamp.opengl.util.texture.TextureCoords;
@@ -29,11 +28,15 @@ import java.net.URL;
  * @author dcollins
  * @version $Id: TextureAtlasElement.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class TextureAtlasElement implements Disposable
-{
-    /** Indicates the texture atlas this element belongs to. Specified during construction. */
+public class TextureAtlasElement implements Disposable {
+
+    /**
+     * Indicates the texture atlas this element belongs to. Specified during construction.
+     */
     protected TextureAtlas atlas;
-    /** Indicates the original image source associated with this element. Specified during construction. */
+    /**
+     * Indicates the original image source associated with this element. Specified during construction.
+     */
     protected Object imageSource;
     /**
      * The BufferedImage created as the image source is read. This intermediate field is necessary because the image
@@ -59,25 +62,21 @@ public class TextureAtlasElement implements Disposable
     /**
      * Creates a new texture atlas element with the specified atlas and image source.
      *
-     * @param atlas       the texture atlas this element belongs to.
+     * @param atlas the texture atlas this element belongs to.
      * @param imageSource a general image source. The source type may be one of the following: <ul> <li>a {@link
      *                    URL}</li> <li>an {@link java.io.InputStream}</li> <li>a {@link java.io.File}</li> <li>a {@link
-     *                    String} containing a valid URL description or a file or resource name available on the
-     *                    classpath.</li> </ul>
+     *                    String} containing a valid URL description or a file or resource name available on the classpath.</li> </ul>
      *
      * @throws IllegalArgumentException if either the atlas or the image source is <code>null</code>.
      */
-    public TextureAtlasElement(TextureAtlas atlas, Object imageSource)
-    {
-        if (atlas == null)
-        {
+    public TextureAtlasElement(TextureAtlas atlas, Object imageSource) {
+        if (atlas == null) {
             String msg = Logging.getMessage("nullValue.AtlasIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (WWUtil.isEmpty(imageSource))
-        {
+        if (WWUtil.isEmpty(imageSource)) {
             String msg = Logging.getMessage("nullValue.ImageSource");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -92,8 +91,7 @@ public class TextureAtlasElement implements Disposable
      *
      * @return this element's texture atlas.
      */
-    public TextureAtlas getTextureAtlas()
-    {
+    public TextureAtlas getTextureAtlas() {
         return this.atlas;
     }
 
@@ -102,8 +100,7 @@ public class TextureAtlasElement implements Disposable
      *
      * @return this element's image source.
      */
-    public Object getImageSource()
-    {
+    public Object getImageSource() {
         return this.imageSource;
     }
 
@@ -112,8 +109,7 @@ public class TextureAtlasElement implements Disposable
      *
      * @return <code>true</code> if this element's image source is a BufferedImage, and <code>false</code> otherwise.
      */
-    protected boolean isBufferedImageSource()
-    {
+    protected boolean isBufferedImageSource() {
         return this.getImageSource() instanceof BufferedImage;
     }
 
@@ -124,8 +120,7 @@ public class TextureAtlasElement implements Disposable
      *
      * @see #setImage(java.awt.image.BufferedImage)
      */
-    protected BufferedImage getImage()
-    {
+    protected BufferedImage getImage() {
         return this.image;
     }
 
@@ -136,8 +131,7 @@ public class TextureAtlasElement implements Disposable
      *
      * @param image this element's image.
      */
-    protected void setImage(BufferedImage image)
-    {
+    protected void setImage(BufferedImage image) {
         this.image = image;
     }
 
@@ -146,12 +140,11 @@ public class TextureAtlasElement implements Disposable
      * calling this method to ensure that the element is loaded into its texture atlas.
      *
      * @return the image dimensions associated with this texture atlas element, or <code>null</code> if this texture
-     *         atlas element has not yet loaded or has failed to load.
+     * atlas element has not yet loaded or has failed to load.
      *
      * @see #load(gov.nasa.worldwind.render.DrawContext)
      */
-    public Dimension getSize()
-    {
+    public Dimension getSize() {
         return this.getTextureAtlas().getSize(this.getImageSource());
     }
 
@@ -164,12 +157,11 @@ public class TextureAtlasElement implements Disposable
      * atlas has changed.
      *
      * @return the OpenGL texture coordinates corresponding this texture atlas element, or <code>null</code> if this
-     *         texture atlas element has not yet loaded or has failed to load.
+     * texture atlas element has not yet loaded or has failed to load.
      *
      * @see #load(gov.nasa.worldwind.render.DrawContext)
      */
-    public TextureCoords getTexCoords()
-    {
+    public TextureCoords getTexCoords() {
         return this.getTextureAtlas().getTexCoords(this.getImageSource());
     }
 
@@ -178,8 +170,7 @@ public class TextureAtlasElement implements Disposable
      *
      * @return <code>true</code> if this element's image failed to load, and <code>false</code> otherwise.
      */
-    public boolean isImageInitializationFailed()
-    {
+    public boolean isImageInitializationFailed() {
         return this.imageInitializationFailed;
     }
 
@@ -191,23 +182,23 @@ public class TextureAtlasElement implements Disposable
      * @param dc the current draw context. Used to generate a repaint event when the image source retrieval completes.
      *
      * @return <code>true</code> if this element's image is successfully loaded and added to the texture atlas,
-     *         otherwise <code>false</code>.
+     * otherwise <code>false</code>.
      */
-    public boolean load(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    public boolean load(DrawContext dc) {
+        if (dc == null) {
             String msg = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (this.isImageInitializationFailed())
+        if (this.isImageInitializationFailed()) {
             return false;
+        }
 
         // The atlas already contains an entry for this element then just return true.
-        if (this.getTextureAtlas().contains(this.getImageSource()))
+        if (this.getTextureAtlas().contains(this.getImageSource())) {
             return true;
+        }
 
         // The atlas does not contain an entry for this element. Issue a request for this element's image if it does not
         // exist, or load it into the atlas if it does. In this case we return true if this element was successfully
@@ -219,10 +210,10 @@ public class TextureAtlasElement implements Disposable
      * Removes this element's image from its texture atlas and disposes of this element's image resource. This does
      * nothing if this element's image has not yet been loaded.
      */
-    public void dispose()
-    {
-        if (this.getTextureAtlas().contains(this.getImageSource()))
+    public void dispose() {
+        if (this.getTextureAtlas().contains(this.getImageSource())) {
             this.getTextureAtlas().remove(this.getImageSource());
+        }
 
         this.setImage(null);
     }
@@ -234,31 +225,34 @@ public class TextureAtlasElement implements Disposable
      * @param o the object to test.
      *
      * @return <code>true</code> if the specified object is a TextureAtlasElement and its image source is equivalent to
-     *         this element's image source, otherwise <code>false</code>.
+     * this element's image source, otherwise <code>false</code>.
      */
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        if (o == null || this.getClass() != o.getClass())
+        }
+        if (o == null || this.getClass() != o.getClass()) {
             return false;
+        }
 
         TextureAtlasElement that = (TextureAtlasElement) o;
         return this.imageSource != null ? this.imageSource.equals(that.imageSource) : that.imageSource == null;
     }
 
-    /** Returns the hash code for this texture atlas element's image source. */
+    /**
+     * Returns the hash code for this texture atlas element's image source.
+     */
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return this.imageSource != null ? this.imageSource.hashCode() : 0;
     }
 
-    /** Returns the string representation of this texture atlas element's image source. */
+    /**
+     * Returns the string representation of this texture atlas element's image source.
+     */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.imageSource != null ? this.imageSource.toString() : null;
     }
 
@@ -272,24 +266,27 @@ public class TextureAtlasElement implements Disposable
      * @param dc the current draw context. Used to generate a repaint event when the image source retrieval completes.
      *
      * @return <code>true</code> if this element's image is loaded into the texture atlas, and <code>false</code>
-     *         otherwise.
+     * otherwise.
      */
-    protected boolean requestImage(DrawContext dc)
-    {
+    protected boolean requestImage(DrawContext dc) {
         // If the image source is already a buffered image, assign it to this element's image and let the subsequent
         // logic in this method take care of adding it to the atlas.
-        if (this.isBufferedImageSource())
+        if (this.isBufferedImageSource()) {
             this.setImage((BufferedImage) this.getImageSource());
+        }
 
-        if (this.getImage() != null && !this.getTextureAtlas().contains(this.getImageSource()))
+        if (this.getImage() != null && !this.getTextureAtlas().contains(this.getImageSource())) {
             return this.addAtlasImage();
+        }
 
-        if (WorldWind.getTaskService().isFull())
+        if (WorldWind.getTaskService().isFull()) {
             return false;
+        }
 
         Runnable task = this.createRequestTask();
-        if (WorldWind.getTaskService().contains(task))
+        if (WorldWind.getTaskService().contains(task)) {
             return false;
+        }
 
         // Use either the current layer or the layer list as the listener to notify when the request completes. The
         // latter is used when the image source is requested during ordered rendering mode, and the current layer is
@@ -306,25 +303,20 @@ public class TextureAtlasElement implements Disposable
      * is not loaded and stored in the <code>image</code> property.
      *
      * @return <code>true</code> if this element's image is successfully added to the texture atlas, and
-     *         <code>false</code> otherwise.
+     * <code>false</code> otherwise.
      */
-    protected boolean addAtlasImage()
-    {
-        if (this.getImage() == null)
-        {
+    protected boolean addAtlasImage() {
+        if (this.getImage() == null) {
             String msg = Logging.getMessage("nullValue.ImageIsNull");
             Logging.logger().severe(msg);
             throw new IllegalStateException(msg);
         }
 
-        try
-        {
+        try {
             // Place this element's image in the atlas, then release our reference to the image.
             this.getTextureAtlas().add(this.getImageSource(), this.getImage());
             this.setImage(null);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String msg = Logging.getMessage("TextureAtlas.ExceptionAddingImage", this.getImageSource().toString());
             Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             this.imageInitializationFailed = true;
@@ -340,8 +332,7 @@ public class TextureAtlasElement implements Disposable
      *
      * @return a new request task that retrieves and loads this element's image source.
      */
-    protected Runnable createRequestTask()
-    {
+    protected Runnable createRequestTask() {
         return new RequestTask(this);
     }
 
@@ -351,14 +342,13 @@ public class TextureAtlasElement implements Disposable
      *
      * @return <code>true</code> if the image source has been loaded successfully, and <code>false</code> otherwise.
      */
-    protected boolean loadImage()
-    {
+    protected boolean loadImage() {
         URL fileUrl = WorldWind.getDataFileStore().requestFile(this.getImageSource().toString());
-        if (fileUrl != null)
-        {
+        if (fileUrl != null) {
             BufferedImage image = this.readImage(fileUrl);
-            if (image != null)
+            if (image != null) {
                 this.setImage(image);
+            }
         }
 
         return this.getImage() != null;
@@ -371,16 +361,12 @@ public class TextureAtlasElement implements Disposable
      *
      * @return the image URL as a BufferedImage, or <code>null</code> if the image could not be read.
      */
-    protected BufferedImage readImage(URL fileUrl)
-    {
-        try
-        {
+    protected BufferedImage readImage(URL fileUrl) {
+        try {
             return ImageIO.read(fileUrl);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String msg = Logging.getMessage("generic.ExceptionAttemptingToReadImageFile",
-                this.getImageSource().toString());
+                    this.getImageSource().toString());
             Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
             this.imageInitializationFailed = true;
             return null;
@@ -391,10 +377,8 @@ public class TextureAtlasElement implements Disposable
      * Notifies this texture atlas element's listener that image loading has completed. This does nothing if this
      * texture atlas element has no listener.
      */
-    protected void notifyImageLoaded()
-    {
-        if (this.listener != null)
-        {
+    protected void notifyImageLoaded() {
+        if (this.listener != null) {
             this.listener.propertyChange(new PropertyChangeEvent(this, AVKey.IMAGE, null, this));
             this.listener = null; // Forget the listener to avoid dangling references.
         }
@@ -404,9 +388,11 @@ public class TextureAtlasElement implements Disposable
      * RequestTask is an implementation of the Runnable interface who's <code>run</code> method retrieves and loads this
      * element's image source.
      */
-    protected static class RequestTask implements Runnable
-    {
-        /** The texture atlas element associated with this request task. Specified during construction. */
+    protected static class RequestTask implements Runnable {
+
+        /**
+         * The texture atlas element associated with this request task. Specified during construction.
+         */
         protected TextureAtlasElement elem;
 
         /**
@@ -418,10 +404,8 @@ public class TextureAtlasElement implements Disposable
          *
          * @throws IllegalArgumentException if the element is <code>null</code>.
          */
-        protected RequestTask(TextureAtlasElement elem)
-        {
-            if (elem == null)
-            {
+        protected RequestTask(TextureAtlasElement elem) {
+            if (elem == null) {
                 String message = Logging.getMessage("nullValue.ElementIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -434,13 +418,13 @@ public class TextureAtlasElement implements Disposable
          * Retrieves and loads the image source from this request task's texture atlas element, and notifies the element
          * when the load completes. This does nothing if the current thread has been interrupted.
          */
-        public void run()
-        {
-            if (Thread.currentThread().isInterrupted())
+        public void run() {
+            if (Thread.currentThread().isInterrupted()) {
                 return; // The task was cancelled because it's a duplicate or for some other reason.
-
-            if (this.elem.loadImage())
+            }
+            if (this.elem.loadImage()) {
                 this.elem.notifyImageLoaded();
+            }
         }
 
         /**
@@ -450,31 +434,34 @@ public class TextureAtlasElement implements Disposable
          * @param o the object to test.
          *
          * @return <code>true</code> if the specified object is a RequestTask, and its texture atlas element is
-         *         equivalent to this task's texture atlas element.
+         * equivalent to this task's texture atlas element.
          */
         @Override
-        public boolean equals(Object o)
-        {
-            if (this == o)
+        public boolean equals(Object o) {
+            if (this == o) {
                 return true;
-            if (o == null || this.getClass() != o.getClass())
+            }
+            if (o == null || this.getClass() != o.getClass()) {
                 return false;
+            }
 
             RequestTask that = (RequestTask) o;
             return this.elem.equals(that.elem);
         }
 
-        /** Returns the hash code for this request task's texture atlas element. */
+        /**
+         * Returns the hash code for this request task's texture atlas element.
+         */
         @Override
-        public int hashCode()
-        {
+        public int hashCode() {
             return this.elem.hashCode();
         }
 
-        /** Returns the string representation of this request task's texture atlas element. */
+        /**
+         * Returns the string representation of this request task's texture atlas element.
+         */
         @Override
-        public String toString()
-        {
+        public String toString() {
             return this.elem.toString();
         }
     }

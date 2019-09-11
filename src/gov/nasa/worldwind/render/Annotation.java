@@ -18,18 +18,26 @@ import com.jogamp.opengl.GL;
  * @author Patrick Murris
  * @version $Id: Annotation.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Annotation extends Renderable, Disposable, Restorable
-{
-    /** @deprecated Use {@link AVKey#REPEAT_NONE} instead. */
+public interface Annotation extends Renderable, Disposable, Restorable {
+
+    /**
+     * @deprecated Use {@link AVKey#REPEAT_NONE} instead.
+     */
     @Deprecated
     public static final String IMAGE_REPEAT_NONE = AVKey.REPEAT_NONE;
-    /** @deprecated Use {@link AVKey#REPEAT_X} instead. */
+    /**
+     * @deprecated Use {@link AVKey#REPEAT_X} instead.
+     */
     @Deprecated
     public static final String IMAGE_REPEAT_X = AVKey.REPEAT_X;
-    /** @deprecated Use {@link AVKey#REPEAT_Y} instead. */
+    /**
+     * @deprecated Use {@link AVKey#REPEAT_Y} instead.
+     */
     @Deprecated
     public static final String IMAGE_REPEAT_Y = AVKey.REPEAT_Y;
-    /** @deprecated Use {@link AVKey#REPEAT_XY} instead. */
+    /**
+     * @deprecated Use {@link AVKey#REPEAT_XY} instead.
+     */
     @Deprecated
     public static final String IMAGE_REPEAT_XY = AVKey.REPEAT_XY;
 
@@ -37,10 +45,14 @@ public interface Annotation extends Renderable, Disposable, Restorable
     public final static int ANTIALIAS_FASTEST = GL.GL_FASTEST;
     public final static int ANTIALIAS_NICEST = GL.GL_NICEST;
 
-    /** @deprecated Use {@link AVKey#SIZE_FIXED} instead. */
+    /**
+     * @deprecated Use {@link AVKey#SIZE_FIXED} instead.
+     */
     @Deprecated
     public final static String SIZE_FIXED = AVKey.SIZE_FIXED;
-    /** @deprecated Use {@link AVKey#SIZE_FIT_TEXT} instead. */
+    /**
+     * @deprecated Use {@link AVKey#SIZE_FIT_TEXT} instead.
+     */
     @Deprecated
     public final static String SIZE_FIT_TEXT = AVKey.SIZE_FIT_TEXT;
 
@@ -98,10 +110,10 @@ public interface Annotation extends Renderable, Disposable, Restorable
      * draw with the specified width, height, and opacity. The GL should have its model view set to whatever
      * transformation is desired.
      *
-     * @param dc           the current DrawContext.
-     * @param width        the width of the Annotation.
-     * @param height       the height of the Annotation.
-     * @param opacity      the opacity of the Annotation.
+     * @param dc the current DrawContext.
+     * @param width the width of the Annotation.
+     * @param height the height of the Annotation.
+     * @param opacity the opacity of the Annotation.
      * @param pickPosition the picked Position assigned to the Annotation, if picking is enabled.
      *
      * @throws IllegalArgumentException if <code>dc</code> is null.
