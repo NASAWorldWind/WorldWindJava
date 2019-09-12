@@ -25,22 +25,25 @@ import java.util.ArrayList;
  * @author tag
  * @version $Id: TabbedPaneUsage.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class TabbedPaneUsage {
-
-    static {
-        if (Configuration.isMacOS()) {
+public class TabbedPaneUsage
+{
+    static
+    {
+        if (Configuration.isMacOS())
+        {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Tabbed Pane Application");
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
         }
     }
 
-    public static class WWJPanel extends JPanel {
-
+    public static class WWJPanel extends JPanel
+    {
         protected WorldWindow wwd;
         protected StatusBar statusBar;
 
-        public WWJPanel(Dimension canvasSize, boolean includeStatusBar) {
+        public WWJPanel(Dimension canvasSize, boolean includeStatusBar)
+        {
             super(new BorderLayout());
 
             this.wwd = new WorldWindowGLCanvas();
@@ -53,14 +56,16 @@ public class TabbedPaneUsage {
             this.addShapes();
 
             this.add(((Component) this.wwd), BorderLayout.CENTER);
-            if (includeStatusBar) {
+            if (includeStatusBar)
+            {
                 this.statusBar = new StatusBar();
                 this.add(statusBar, BorderLayout.PAGE_END);
                 this.statusBar.setEventSource(wwd);
             }
         }
 
-        protected void addMarkers() {
+        protected void addMarkers()
+        {
             ArrayList<Marker> markers = new ArrayList<Marker>();
 
             MarkerAttributes attrs = new BasicMarkerAttributes(Material.YELLOW, BasicMarkerShape.CONE, 1d, 10, 5);
@@ -76,7 +81,8 @@ public class TabbedPaneUsage {
             ApplicationTemplate.insertBeforePlacenames(this.wwd, layer);
         }
 
-        protected void addShapes() {
+        protected void addShapes()
+        {
             RenderableLayer layer = new RenderableLayer();
 
             // Create and set an attribute bundle.
@@ -88,6 +94,7 @@ public class TabbedPaneUsage {
             attrs.setDrawOutline(false);
 
             // ********* sample  Cones  *******************
+
             // Cone with equal axes, ABSOLUTE altitude mode
             Cone cone3 = new Cone(Position.fromDegrees(42, -118, 80000), 100000, 50000);
             cone3.setAltitudeMode(WorldWind.ABSOLUTE);
@@ -110,8 +117,10 @@ public class TabbedPaneUsage {
 
     protected static int wwjPaneNumber = 1;
 
-    public static void main(String[] args) {
-        try {
+    public static void main(String[] args)
+    {
+        try
+        {
             JFrame mainFrame = new JFrame();
 
             mainFrame.setTitle("WorldWind Tabbed Pane");
@@ -122,8 +131,10 @@ public class TabbedPaneUsage {
             final JPanel controlPanel = new JPanel();
 
             JButton detachButton = new JButton("Detach");
-            detachButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent actionEvent) {
+            detachButton.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent actionEvent)
+                {
                     System.out.print("Removing tab...");
                     tabbedPane.removeTabAt(0);
                     System.out.println("Tab removed");
@@ -131,8 +142,10 @@ public class TabbedPaneUsage {
             });
 
             JButton attachButton = new JButton("Attach");
-            attachButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent actionEvent) {
+            attachButton.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent actionEvent)
+                {
                     System.out.print("Adding tab...");
                     tabbedPane.insertTab("WWJ Pane " + ++wwjPaneNumber, null, wwjPanel, "Reattach", 0);
                     System.out.println("Tab added");
@@ -149,7 +162,9 @@ public class TabbedPaneUsage {
             mainFrame.pack();
             WWUtil.alignComponent(null, mainFrame, AVKey.CENTER);
             mainFrame.setVisible(true);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.collada.impl;
 
 import gov.nasa.worldwind.geom.Box;
@@ -14,8 +15,8 @@ import gov.nasa.worldwind.render.DrawContext;
  * @author pabercrombie
  * @version $Id: ColladaRenderable.java 1696 2013-10-31 18:46:55Z tgaskins $
  */
-public interface ColladaRenderable {
-
+public interface ColladaRenderable
+{
     /**
      * Returns this renderable's model coordinate extent.
      *

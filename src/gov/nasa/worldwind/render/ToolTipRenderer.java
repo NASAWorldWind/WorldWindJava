@@ -16,8 +16,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: ToolTipRenderer.java 2053 2014-06-10 20:16:57Z tgaskins $
  */
-public class ToolTipRenderer {
-
+public class ToolTipRenderer
+{
     private boolean useSystemLookAndFeel;
     private java.awt.Font font;
     private java.awt.Color textColor;
@@ -27,8 +27,10 @@ public class ToolTipRenderer {
     private double outlineWidth;
     private java.awt.Insets insets;
 
-    public ToolTipRenderer(java.awt.Font font) {
-        if (font == null) {
+    public ToolTipRenderer(java.awt.Font font)
+    {
+        if (font == null)
+        {
             String message = Logging.getMessage("nullValue.FontIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -44,36 +46,44 @@ public class ToolTipRenderer {
         this.insets = new java.awt.Insets(1, 1, 1, 1);
     }
 
-    public ToolTipRenderer(boolean useSystemLookAndFeel) {
+    public ToolTipRenderer(boolean useSystemLookAndFeel)
+    {
         this(java.awt.Font.decode("Arial-PLAIN-12"));
         this.setUseSystemLookAndFeel(useSystemLookAndFeel);
     }
 
-    public ToolTipRenderer() {
+    public ToolTipRenderer()
+    {
         this(java.awt.Font.decode("Arial-PLAIN-12"));
     }
 
-    public static java.awt.Color getContrastingColor(java.awt.Color color) {
+    public static java.awt.Color getContrastingColor(java.awt.Color color)
+    {
         float[] hsbvals = new float[3];
         java.awt.Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsbvals);
         java.awt.Color c = Color.getHSBColor(0, 0, (hsbvals[2] + 0.5f) % 1f);
         return new java.awt.Color(c.getRed(), c.getGreen(), c.getBlue(), color.getAlpha());
     }
 
-    public boolean isUseSystemLookAndFeel() {
+    public boolean isUseSystemLookAndFeel()
+    {
         return this.useSystemLookAndFeel;
     }
 
-    public void setUseSystemLookAndFeel(boolean useSystemLookAndFeel) {
+    public void setUseSystemLookAndFeel(boolean useSystemLookAndFeel)
+    {
         this.useSystemLookAndFeel = useSystemLookAndFeel;
     }
 
-    public java.awt.Font getFont() {
+    public java.awt.Font getFont()
+    {
         return this.font;
     }
 
-    public void setFont(java.awt.Font font) {
-        if (font == null) {
+    public void setFont(java.awt.Font font)
+    {
+        if (font == null)
+        {
             String message = Logging.getMessage("nullValue.FontIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -82,12 +92,15 @@ public class ToolTipRenderer {
         this.font = font;
     }
 
-    public Color getTextColor() {
+    public Color getTextColor()
+    {
         return this.textColor;
     }
 
-    public void setTextColor(Color color) {
-        if (color == null) {
+    public void setTextColor(Color color)
+    {
+        if (color == null)
+        {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -96,12 +109,15 @@ public class ToolTipRenderer {
         this.textColor = color;
     }
 
-    public Color getInteriorColor() {
+    public Color getInteriorColor()
+    {
         return this.interiorColor;
     }
 
-    public void setInteriorColor(Color color) {
-        if (color == null) {
+    public void setInteriorColor(Color color)
+    {
+        if (color == null)
+        {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -110,12 +126,15 @@ public class ToolTipRenderer {
         this.interiorColor = color;
     }
 
-    public Color getOutlineColor() {
+    public Color getOutlineColor()
+    {
         return this.outlineColor;
     }
 
-    public void setOutlineColor(Color color) {
-        if (color == null) {
+    public void setOutlineColor(Color color)
+    {
+        if (color == null)
+        {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -124,12 +143,15 @@ public class ToolTipRenderer {
         this.outlineColor = color;
     }
 
-    public double getOpacity() {
+    public double getOpacity()
+    {
         return this.opacity;
     }
 
-    public void setOpacity(double opacity) {
-        if (opacity < 0 || opacity > 1) {
+    public void setOpacity(double opacity)
+    {
+        if (opacity < 0 || opacity > 1)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "opacity < 0 or opacity > 1");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -138,12 +160,15 @@ public class ToolTipRenderer {
         this.opacity = opacity;
     }
 
-    public double getOutlineWidth() {
+    public double getOutlineWidth()
+    {
         return this.outlineWidth;
     }
 
-    public void setOutlineWidth(double width) {
-        if (width < 0) {
+    public void setOutlineWidth(double width)
+    {
+        if (width < 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "width < 0");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -152,13 +177,16 @@ public class ToolTipRenderer {
         this.outlineWidth = width;
     }
 
-    public java.awt.Insets getInsets() {
+    public java.awt.Insets getInsets()
+    {
         // Class java.awt.Insets is known to override the method Object.clone().
         return (java.awt.Insets) this.insets.clone();
     }
 
-    public void setInsets(java.awt.Insets insets) {
-        if (insets == null) {
+    public void setInsets(java.awt.Insets insets)
+    {
+        if (insets == null)
+        {
             String message = Logging.getMessage("nullValue.InsetsIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -168,14 +196,17 @@ public class ToolTipRenderer {
         this.insets = (java.awt.Insets) insets.clone();
     }
 
-    public void render(DrawContext dc, String text, int x, int y) {
-        if (dc == null) {
+    public void render(DrawContext dc, String text, int x, int y)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (text == null) {
+        if (text == null)
+        {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -184,20 +215,22 @@ public class ToolTipRenderer {
         this.doRender(dc, text, x, y);
     }
 
-    protected ToolTipAttributes getAttributes() {
+    protected ToolTipAttributes getAttributes()
+    {
         return new ToolTipAttributes(
-                this.getFont(),
-                this.getTextColor(),
-                this.getInteriorColor(),
-                this.getOutlineColor(),
-                this.getOpacity(),
-                this.getOpacity(),
-                this.getOpacity(),
-                this.getOutlineWidth(),
-                this.getInsets());
+            this.getFont(),
+            this.getTextColor(),
+            this.getInteriorColor(),
+            this.getOutlineColor(),
+            this.getOpacity(),
+            this.getOpacity(),
+            this.getOpacity(),
+            this.getOutlineWidth(),
+            this.getInsets());
     }
 
-    protected ToolTipAttributes getSystemLookAndFeelAttributes() {
+    protected ToolTipAttributes getSystemLookAndFeelAttributes()
+    {
         Font font = UIManager.getFont("ToolTip.font");
         Color textColor = UIManager.getColor("ToolTip.foreground");
         Color interiorColor = UIManager.getColor("ToolTip.background");
@@ -215,60 +248,61 @@ public class ToolTipRenderer {
             outlineWidth = ((LineBorder) border).getThickness();
         }
 
-        if (border != null) {
+        if (border != null)
             insets = border.getBorderInsets(null);
-        }
 
-        if (font == null) {
+        if (font == null)
             font = this.getFont();
-        }
 
-        if (textColor == null) {
+        if (textColor == null)
             textColor = this.getTextColor();
-        }
 
-        if (interiorColor == null) {
+        if (interiorColor == null)
             interiorColor = this.getInteriorColor();
-        }
 
-        if (outlineColor == null) {
+        if (outlineColor == null)
             outlineColor = this.getOutlineColor();
-        }
 
-        if (insets == null) {
+        if (insets == null)
             insets = this.getInsets();
-        }
 
         return new ToolTipAttributes(font, textColor, interiorColor, outlineColor, textOpacity, interiorOpacity,
-                outlineOpacity, outlineWidth, insets);
+            outlineOpacity, outlineWidth, insets);
     }
 
     //**************************************************************//
     //********************  Rendering  *****************************//
     //**************************************************************//
-    protected void doRender(DrawContext dc, String text, int x, int y) {
+
+    protected void doRender(DrawContext dc, String text, int x, int y)
+    {
         OGLStackHandler stackHandler = new OGLStackHandler();
 
         this.beginRendering(dc, stackHandler);
-        try {
+        try
+        {
             this.draw(dc, dc.getView().getViewport(), text, x, y);
-        } finally {
+        }
+        finally
+        {
             this.endRendering(dc, stackHandler);
         }
     }
 
-    protected void draw(DrawContext dc, java.awt.Rectangle viewport, String text, int x, int y) {
-        ToolTipAttributes attributes = this.isUseSystemLookAndFeel()
-                ? this.getSystemLookAndFeelAttributes() : this.getAttributes();
+    protected void draw(DrawContext dc, java.awt.Rectangle viewport, String text, int x, int y)
+    {
+        ToolTipAttributes attributes = this.isUseSystemLookAndFeel() ?
+            this.getSystemLookAndFeelAttributes() : this.getAttributes();
 
         this.drawToolTip(dc, viewport, text, x, y, attributes);
     }
 
     protected void drawToolTip(DrawContext dc, java.awt.Rectangle viewport, String text, int x, int y,
-            ToolTipAttributes attributes) {
+        ToolTipAttributes attributes)
+    {
         java.awt.geom.Rectangle2D textBounds = this.computeTextBounds(dc, text, attributes.getFont());
         java.awt.geom.Rectangle2D bgBounds = this.computeBackgroundBounds(dc,
-                textBounds.getWidth(), textBounds.getHeight(), attributes.getInsets());
+            textBounds.getWidth(), textBounds.getHeight(), attributes.getInsets());
 
         java.awt.Point screenPoint = this.adjustDrawPointToViewport(x, y, bgBounds, viewport);
         java.awt.geom.Point2D textTranslation = this.computeTextTranslation(dc, textBounds, attributes.getInsets());
@@ -277,20 +311,25 @@ public class ToolTipRenderer {
         OGLStackHandler stackHandler = new OGLStackHandler();
 
         stackHandler.pushModelview(gl);
-        try {
+        try
+        {
             gl.glTranslated(screenPoint.getX() + bgBounds.getX(), screenPoint.getY() + bgBounds.getY(), 0);
             this.drawToolTipInterior(dc, bgBounds.getWidth(), bgBounds.getHeight(), attributes);
             this.drawToolTipOutline(dc, bgBounds.getWidth(), bgBounds.getHeight(), attributes);
 
             gl.glTranslated(textTranslation.getX(), textTranslation.getY(), 0);
             this.drawToolTipText(dc, text, 0, 0, attributes);
-        } finally {
+        }
+        finally
+        {
             stackHandler.pop(gl);
         }
     }
 
-    protected void beginRendering(DrawContext dc, OGLStackHandler stackHandler) {
-        if (dc == null) {
+    protected void beginRendering(DrawContext dc, OGLStackHandler stackHandler)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -299,10 +338,10 @@ public class ToolTipRenderer {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         int attribMask = GL2.GL_COLOR_BUFFER_BIT // for alpha test func and ref, blend func
-                | GL2.GL_CURRENT_BIT // for current color
-                | GL2.GL_ENABLE_BIT // for enable/disable
-                | GL2.GL_LINE_BIT // for line width
-                | GL2.GL_TRANSFORM_BIT; // for matrix mode
+            | GL2.GL_CURRENT_BIT // for current color
+            | GL2.GL_ENABLE_BIT // for enable/disable
+            | GL2.GL_LINE_BIT // for line width
+            | GL2.GL_TRANSFORM_BIT; // for matrix mode
         stackHandler.pushAttrib(gl, attribMask);
 
         stackHandler.pushTextureIdentity(gl);
@@ -325,8 +364,10 @@ public class ToolTipRenderer {
         gl.glDisable(GL.GL_TEXTURE_2D);
     }
 
-    protected void endRendering(DrawContext dc, OGLStackHandler stackHandler) {
-        if (dc == null) {
+    protected void endRendering(DrawContext dc, OGLStackHandler stackHandler)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -340,7 +381,9 @@ public class ToolTipRenderer {
     //**************************************************************//
     //********************  Background Rendering  ******************//
     //**************************************************************//
-    protected void drawToolTipInterior(DrawContext dc, double width, double height, ToolTipAttributes attributes) {
+
+    protected void drawToolTipInterior(DrawContext dc, double width, double height, ToolTipAttributes attributes)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         this.applyColor(dc, attributes.getInteriorColor(), attributes.getInteriorOpacity());
@@ -349,7 +392,8 @@ public class ToolTipRenderer {
         gl.glRectd(0, 0, width, height);
     }
 
-    protected void drawToolTipOutline(DrawContext dc, double width, double height, ToolTipAttributes attributes) {
+    protected void drawToolTipOutline(DrawContext dc, double width, double height, ToolTipAttributes attributes)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         this.applyColor(dc, attributes.getOutlineColor(), attributes.getOutlineOpacity());
@@ -369,9 +413,11 @@ public class ToolTipRenderer {
     //**************************************************************//
     //********************  Text Rendering  ************************//
     //**************************************************************//
-    protected void drawToolTipText(DrawContext dc, String text, int x, int y, ToolTipAttributes attributes) {
+
+    protected void drawToolTipText(DrawContext dc, String text, int x, int y, ToolTipAttributes attributes)
+    {
         java.awt.Color textColor = this.modulateColorOpacity(attributes.getTextColor(),
-                attributes.getTextOpacity());
+            attributes.getTextOpacity());
 
         TextRenderer textRenderer = this.getTextRenderer(dc, attributes.getFont());
         textRenderer.begin3DRendering();
@@ -383,21 +429,24 @@ public class ToolTipRenderer {
     //**************************************************************//
     //********************  Rendering Utilities  *******************//
     //**************************************************************//
-    protected TextRenderer getTextRenderer(DrawContext dc, java.awt.Font font) {
+
+    protected TextRenderer getTextRenderer(DrawContext dc, java.awt.Font font)
+    {
         return OGLTextRenderer.getOrCreateTextRenderer(dc.getTextRendererCache(), font);
     }
 
-    protected void applyColor(DrawContext dc, java.awt.Color color, double opacity) {
-        if (dc.isPickingMode()) {
+    protected void applyColor(DrawContext dc, java.awt.Color color, double opacity)
+    {
+        if (dc.isPickingMode())
             return;
-        }
 
         double finalOpacity = opacity * (color.getAlpha() / 255.0);
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         OGLUtil.applyColor(gl, color, finalOpacity, true);
     }
 
-    protected java.awt.Color modulateColorOpacity(java.awt.Color color, double opacity) {
+    protected java.awt.Color modulateColorOpacity(java.awt.Color color, double opacity)
+    {
         float[] compArray = new float[4];
         color.getRGBComponents(compArray);
         compArray[3] *= (float) opacity;
@@ -408,45 +457,48 @@ public class ToolTipRenderer {
     //**************************************************************//
     //********************  Bounds Computation  ********************//
     //**************************************************************//
-    protected java.awt.geom.Rectangle2D computeTextBounds(DrawContext dc, String text, java.awt.Font font) {
+
+    protected java.awt.geom.Rectangle2D computeTextBounds(DrawContext dc, String text, java.awt.Font font)
+    {
         TextRenderer textRenderer = this.getTextRenderer(dc, font);
         return textRenderer.getBounds(text);
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
     protected java.awt.geom.Point2D computeTextTranslation(DrawContext dc, java.awt.geom.Rectangle2D textBounds,
-            java.awt.Insets insets) {
+        java.awt.Insets insets)
+    {
         // The text bounds are assumed to come from the return value of a call to TextRenderer.getBounds(). The bounds
         // place the origin in the upper left hand corner, with the y axis increasing downward. The y
         // coordinate in the bounds corresponds to the baseline of the leftmost character.
 
         return new java.awt.geom.Point2D.Double(
-                insets.left - textBounds.getX(),
-                insets.bottom + textBounds.getY() + textBounds.getHeight());
+            insets.left - textBounds.getX(),
+            insets.bottom + textBounds.getY() + textBounds.getHeight());
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
     protected java.awt.geom.Rectangle2D computeBackgroundBounds(DrawContext dc, double width, double height,
-            java.awt.Insets insets) {
+        java.awt.Insets insets)
+    {
         return new java.awt.geom.Rectangle2D.Double(
-                0, 0,
-                width + (insets.left + insets.right),
-                height + (insets.top + insets.bottom));
+            0, 0,
+            width + (insets.left + insets.right),
+            height + (insets.top + insets.bottom));
     }
 
     protected java.awt.Point adjustDrawPointToViewport(int x, int y, java.awt.geom.Rectangle2D bounds,
-            java.awt.Rectangle viewport) {
-        if (x + bounds.getMaxX() > viewport.getWidth()) {
+        java.awt.Rectangle viewport)
+    {
+        if (x + bounds.getMaxX() > viewport.getWidth())
             x = (int) (viewport.getWidth() - bounds.getWidth()) - 1;
-        } else if (x < 0) {
+        else if (x < 0)
             x = 0;
-        }
 
-        if (y + bounds.getMaxY() > viewport.getHeight()) {
+        if (y + bounds.getMaxY() > viewport.getHeight())
             y = (int) (viewport.getHeight() - bounds.getHeight()) - 1;
-        } else if (y < 0) {
+        else if (y < 0)
             y = 0;
-        }
 
         return new java.awt.Point(x, y);
     }
@@ -454,8 +506,9 @@ public class ToolTipRenderer {
     //**************************************************************//
     //********************  ToolTip Attributes  ********************//
     //**************************************************************//
-    protected static class ToolTipAttributes {
 
+    protected static class ToolTipAttributes
+    {
         protected java.awt.Font font;
         protected java.awt.Color textColor;
         protected java.awt.Color interiorColor;
@@ -467,9 +520,10 @@ public class ToolTipRenderer {
         protected java.awt.Insets insets;
 
         public ToolTipAttributes(java.awt.Font font, java.awt.Color textColor,
-                java.awt.Color interiorColor, java.awt.Color outlineColor,
-                double textOpacity, double interiorOpacity, double outlineOpacity,
-                double borderWidth, Insets insets) {
+            java.awt.Color interiorColor, java.awt.Color outlineColor,
+            double textOpacity, double interiorOpacity, double outlineOpacity,
+            double borderWidth, Insets insets)
+        {
             this.font = font;
             this.textColor = textColor;
             this.interiorColor = interiorColor;
@@ -481,75 +535,93 @@ public class ToolTipRenderer {
             this.insets = insets;
         }
 
-        public java.awt.Font getFont() {
+        public java.awt.Font getFont()
+        {
             return this.font;
         }
 
-        public void setFont(java.awt.Font font) {
+        public void setFont(java.awt.Font font)
+        {
             this.font = font;
         }
 
-        public java.awt.Color getTextColor() {
+        public java.awt.Color getTextColor()
+        {
             return this.textColor;
         }
 
-        public void setTextColor(java.awt.Color color) {
+        public void setTextColor(java.awt.Color color)
+        {
             this.textColor = color;
         }
 
-        public java.awt.Color getInteriorColor() {
+        public java.awt.Color getInteriorColor()
+        {
             return this.interiorColor;
         }
 
-        public void setInteriorColor(java.awt.Color color) {
+        public void setInteriorColor(java.awt.Color color)
+        {
             this.interiorColor = color;
         }
 
-        public java.awt.Color getOutlineColor() {
+        public java.awt.Color getOutlineColor()
+        {
             return this.outlineColor;
         }
 
-        public void setOutlineColor(java.awt.Color color) {
+        public void setOutlineColor(java.awt.Color color)
+        {
             this.outlineColor = color;
         }
 
-        public double getTextOpacity() {
+        public double getTextOpacity()
+        {
             return this.textOpacity;
         }
 
-        public void setTextOpacity(double textOpacity) {
+        public void setTextOpacity(double textOpacity)
+        {
             this.textOpacity = textOpacity;
         }
 
-        public double getInteriorOpacity() {
+        public double getInteriorOpacity()
+        {
             return this.interiorOpacity;
         }
 
-        public void setInteriorOpacity(double interiorOpacity) {
+        public void setInteriorOpacity(double interiorOpacity)
+        {
             this.interiorOpacity = interiorOpacity;
         }
 
-        public double getOutlineOpacity() {
+        public double getOutlineOpacity()
+        {
             return this.outlineOpacity;
         }
 
-        public void setOutlineOpacity(double outlineOpacity) {
+        public void setOutlineOpacity(double outlineOpacity)
+        {
             this.outlineOpacity = outlineOpacity;
         }
 
-        public double getBorderWidth() {
+        public double getBorderWidth()
+        {
             return this.borderWidth;
         }
 
-        public void setBorderWidth(double borderWidth) {
+        public void setBorderWidth(double borderWidth)
+        {
             this.borderWidth = borderWidth;
         }
 
-        public java.awt.Insets getInsets() {
+        public java.awt.Insets getInsets()
+        {
             return this.insets;
         }
 
-        public void setInsets(java.awt.Insets insets) {
+        public void setInsets(java.awt.Insets insets)
+        {
             this.insets = insets;
         }
     }

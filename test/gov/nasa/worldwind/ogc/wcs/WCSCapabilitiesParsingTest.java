@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.wcs;
 
 import gov.nasa.worldwind.ogc.ows.*;
@@ -17,15 +18,19 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class WCSCapabilitiesParsingTest {
-
+public class WCSCapabilitiesParsingTest
+{
     @Test
-    public void testParsing001() {
+    public void testParsing001()
+    {
         WCS100Capabilities caps = new WCS100Capabilities("testData/WCS/WCSCapabilities003.xml");
 
-        try {
+        try
+        {
             caps.parse();
-        } catch (XMLStreamException e) {
+        }
+        catch (XMLStreamException e)
+        {
             e.printStackTrace();
         }
 
@@ -90,7 +95,7 @@ public class WCSCapabilitiesParsingTest {
         assertNotNull("Facsimile is null", phone.getFacsimiles().get(0));
         assertEquals("Incorrect facsimile", "000-000-0000", phone.getFacsimiles().get(0));
         assertEquals("Incorrect contactInfo onlineResource href", "http://worldwind26.arc.nasa.gov/wms2?",
-                contactInfo.getOnlineResource());
+            contactInfo.getOnlineResource());
 
         assertNotNull("Fees is null", service.getFees());
         assertEquals("Incorrect country", "none", service.getFees());
@@ -138,7 +143,7 @@ public class WCSCapabilitiesParsingTest {
         assertEquals("Incorrect LonLatEnvelope 0 SRS", "urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName());
         assertEquals("Incorrect LonLatEnvelope 0 position count", 2, envelope.getPositions().size());
         assertEquals("Incorrect LonLatEnvelope 0 position 0", "-180 -83",
-                envelope.getPositions().get(0).getPosString());
+            envelope.getPositions().get(0).getPosString());
         assertEquals("Incorrect LonLatEnvelope 0 position 1", "180 83", envelope.getPositions().get(1).getPosString());
 
         coverage = coverages.get(1);
@@ -154,18 +159,22 @@ public class WCSCapabilitiesParsingTest {
         assertEquals("Incorrect LonLatEnvelope 1 position count", 2, envelope.getPositions().size());
         assertEquals("Incorrect LonLatEnvelope 1 position 0", "-125 25", envelope.getPositions().get(0).getPosString());
         assertEquals("Incorrect LonLatEnvelope 1 position 1", "-65.5 50",
-                envelope.getPositions().get(1).getPosString());
+            envelope.getPositions().get(1).getPosString());
 
         // There are more CoverageOfferingBrief elements in the file, but testing the two above is adequate.
     }
 
     @Test
-    public void testParsing002() {
+    public void testParsing002()
+    {
         WCS100Capabilities caps = new WCS100Capabilities("testData/WCS/WCSCapabilities002.xml");
 
-        try {
+        try
+        {
             caps.parse();
-        } catch (XMLStreamException e) {
+        }
+        catch (XMLStreamException e)
+        {
             e.printStackTrace();
         }
 
@@ -179,14 +188,14 @@ public class WCSCapabilitiesParsingTest {
         WCS100MetadataLink metadataLink = service.getMetadataLink();
         assertNotNull("MetadataLink is null", metadataLink);
         assertEquals("Incorrect metadataLink about value", "http://geoserver.sourceforge.net/html/index.php",
-                metadataLink.getField("about"));
+            metadataLink.getField("about"));
         assertEquals("Incorrect metadataLink type value", "simple", metadataLink.getField("type"));
         assertEquals("Incorrect metadataLink metadataType value", "other", metadataLink.getField("metadataType"));
 
         String description = service.getDescription();
         assertNotNull("Service description is null", description);
         assertTrue("Incorrect description",
-                description.startsWith("This server implements the WCS specification 1.0"));
+            description.startsWith("This server implements the WCS specification 1.0"));
 
         assertNotNull("Service name is null", service.getName());
         assertEquals("Incorrect service name", "WCS", service.getName());
@@ -207,7 +216,7 @@ public class WCSCapabilitiesParsingTest {
         assertEquals("Incorrect individualName", "Claudius Ptolomaeus", responsibleParty.getIndividualName());
         assertNotNull("OrganisationName is null", responsibleParty.getOrganisationName());
         assertEquals("Incorrect organisationName", "The ancient geographes INC",
-                responsibleParty.getOrganisationName());
+            responsibleParty.getOrganisationName());
         assertNotNull("PostionName is null", responsibleParty.getPositionName());
         assertEquals("Incorrect positionName", "Chief geographer", responsibleParty.getPositionName());
         OWSContactInfo contactInfo = responsibleParty.getContactInfo();
@@ -220,7 +229,7 @@ public class WCSCapabilitiesParsingTest {
         assertEquals("Incorrect country", "Egypt", address.getCountries().get(0));
         assertNotNull("ElectronicMailAddress is null", address.getElectronicMailAddresses());
         assertEquals("Incorrect electronicMailAddress", "claudius.ptolomaeus@gmail.com",
-                address.getElectronicMailAddresses().get(0));
+            address.getElectronicMailAddresses().get(0));
 
         assertNotNull("Fees is null", service.getFees());
         assertEquals("Incorrect country", "NONE", service.getFees());
@@ -260,22 +269,22 @@ public class WCSCapabilitiesParsingTest {
         assertNotNull("CoverageOfferingBrief 0 is null", coverage);
         assertNotNull("CoverageOfferingBrief 0 description is null", coverage.getDescription());
         assertEquals("Incorrect CoverageOfferingBrief 0 description", "Generated from arcGridSample",
-                coverage.getDescription());
+            coverage.getDescription());
         assertNotNull("CoverageOfferingBrief 0 name is null", coverage.getName());
         assertEquals("Incorrect CoverageOfferingBrief 0 name", "nurc:Arc_Sample",
-                coverage.getName());
+            coverage.getName());
         assertNotNull("CoverageOfferingBrief 0 label is null", coverage.getLabel());
         assertEquals("Incorrect CoverageOfferingBrief 0 label", "A sample ArcGrid file",
-                coverage.getLabel());
+            coverage.getLabel());
         WCS100LonLatEnvelope envelope = coverage.getLonLatEnvelope();
         assertNotNull("LonLatEnvelope 0 is null", envelope);
         assertNotNull("LonLatEnvelope 0 positions is null", envelope.getPositions());
         assertEquals("Incorrect LonLatEnvelope 0 SRS", "urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName());
         assertEquals("Incorrect LonLatEnvelope 0 position count", 2, envelope.getPositions().size());
         assertEquals("Incorrect LonLatEnvelope 0 position 0", "-180.0 -90.0",
-                envelope.getPositions().get(0).getPosString());
+            envelope.getPositions().get(0).getPosString());
         assertEquals("Incorrect LonLatEnvelope 0 position 1", "180.0 90.0",
-                envelope.getPositions().get(1).getPosString());
+            envelope.getPositions().get(1).getPosString());
         keywords = coverage.getKeywords();
         assertTrue("Keywords is null for CoverageOfferingBrief 0", keywords != null);
         assertEquals("Incorrect keyword count for CoverageOfferingBrief 0", 3, keywords.size());
@@ -287,22 +296,22 @@ public class WCSCapabilitiesParsingTest {
         assertNotNull("CoverageOfferingBrief 1 is null", coverage);
         assertNotNull("CoverageOfferingBrief 1 description is null", coverage.getDescription());
         assertEquals("Incorrect CoverageOfferingBrief 1 description", "Generated from ImageMosaic",
-                coverage.getDescription());
+            coverage.getDescription());
         assertNotNull("CoverageOfferingBrief 1 name is null", coverage.getName());
         assertEquals("Incorrect CoverageOfferingBrief 1 name", "WW:aster_v2",
-                coverage.getName());
+            coverage.getName());
         assertNotNull("CoverageOfferingBrief 1 label is null", coverage.getLabel());
         assertEquals("Incorrect CoverageOfferingBrief 1 label", "ASTER",
-                coverage.getLabel());
+            coverage.getLabel());
         envelope = coverage.getLonLatEnvelope();
         assertNotNull("LonLatEnvelope 1 is null", envelope);
         assertNotNull("LonLatEnvelope 1 positions is null", envelope.getPositions());
         assertEquals("Incorrect LonLatEnvelope 1 SRS", "urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName());
         assertEquals("Incorrect LonLatEnvelope 1 position count", 2, envelope.getPositions().size());
         assertEquals("Incorrect LonLatEnvelope 1 position 0", "-180.0001388888889 -83.0001388888889",
-                envelope.getPositions().get(0).getPosString());
+            envelope.getPositions().get(0).getPosString());
         assertEquals("Incorrect LonLatEnvelope 1 position 1", "180.00013888888887 83.00013888888888",
-                envelope.getPositions().get(1).getPosString());
+            envelope.getPositions().get(1).getPosString());
         keywords = coverage.getKeywords();
         assertTrue("Keywords is null for CoverageOfferingBrief 1", keywords != null);
         assertEquals("Incorrect keyword count for CoverageOfferingBrief 1", 3, keywords.size());
@@ -314,12 +323,16 @@ public class WCSCapabilitiesParsingTest {
     }
 
     @Test
-    public void testParsing003() {
+    public void testParsing003()
+    {
         WCSCapabilities caps = new WCSCapabilities("testData/WCS/WCSCapabilities001.xml");
 
-        try {
+        try
+        {
             caps.parse();
-        } catch (XMLStreamException e) {
+        }
+        catch (XMLStreamException e)
+        {
             e.printStackTrace();
         }
 
@@ -335,14 +348,16 @@ public class WCSCapabilitiesParsingTest {
         List<String> titles = serviceIdentification.getTitles();
         assertTrue("Titles is null", titles != null);
         assertEquals("Incorrect Title count", 1, titles.size());
-        for (String title : titles) {
+        for (String title : titles)
+        {
             assertEquals("Incorrect Title", "Web Coverage Service", title);
         }
 
         List<String> abstracts = serviceIdentification.getAbstracts();
         assertTrue("Abstracts is null", abstracts != null);
         assertEquals("Incorrect Abstract count", 1, abstracts.size());
-        for (String abs : abstracts) {
+        for (String abs : abstracts)
+        {
             assertTrue("Incorrect Abstract start", abs.startsWith("This server implements"));
             assertTrue("Incorrect Abstract end", abs.endsWith("available on WMS also."));
         }
@@ -363,7 +378,8 @@ public class WCSCapabilitiesParsingTest {
         List<String> accessConstraints = serviceIdentification.getAccessConstraints();
         assertTrue("AccessConstraints is null", accessConstraints != null);
         assertEquals("Incorrect AccessConstraints count", 1, abstracts.size());
-        for (String abs : accessConstraints) {
+        for (String abs : accessConstraints)
+        {
             assertEquals("Incorrect AccessConstraint", "NONE", abs);
         }
 
@@ -391,14 +407,16 @@ public class WCSCapabilitiesParsingTest {
         List<String> countries = address.getCountries();
         assertTrue("Countries is null", countries != null);
         assertEquals("Incorrect Country count", 1, countries.size());
-        for (String country : countries) {
+        for (String country : countries)
+        {
             assertEquals("Incorrect Country", "Egypt", country);
         }
 
         List<String> emails = address.getElectronicMailAddresses();
         assertTrue("ElectronicMailAddress is null", emails != null);
         assertEquals("Incorrect ElectronicMailAddress count", 1, emails.size());
-        for (String email : emails) {
+        for (String email : emails)
+        {
             assertEquals("Incorrect ElectronicMailAddress", "claudius.ptolomaeus@gmail.com", email);
         }
 
@@ -409,19 +427,22 @@ public class WCSCapabilitiesParsingTest {
         assertTrue("Operations is null", operations != null);
         assertEquals("Incorrect Operation count", 3, operations.size());
         Set<String> operationNames = new HashSet<String>(3);
-        for (OWSOperation operation : operations) {
+        for (OWSOperation operation : operations)
+        {
             operationNames.add(operation.getName());
         }
         assertTrue("Missing Operation", operationNames.contains("GetCapabilities"));
         assertTrue("Missing Operation", operationNames.contains("DescribeCoverage"));
         assertTrue("Missing Operation", operationNames.contains("GetCoverage"));
 
-        for (OWSOperation operation : operations) {
+        for (OWSOperation operation : operations)
+        {
             List<OWSDCP> dcps = operation.getDCPs();
             assertTrue("DCPs is null", dcps != null);
             assertEquals("Incorrect DCP count", 2, dcps.size());
 
-            for (OWSDCP dcp : dcps) {
+            for (OWSDCP dcp : dcps)
+            {
                 assertTrue("DCP HTTP is null", dcp.getHTTP() != null);
             }
         }
@@ -451,14 +472,16 @@ public class WCSCapabilitiesParsingTest {
         List<OWSParameter> parameters = coverageOp.getParameters();
         assertTrue("Operation Parameters is null", parameters != null);
         assertEquals("Operation Parameter count is incorrect", 1, parameters.size());
-        for (OWSParameter parameter : parameters) {
+        for (OWSParameter parameter : parameters)
+        {
             assertTrue("Store parameter is missing", parameter.getName() != null);
             assertEquals("Incorrect store value", "store", parameter.getName());
 
             List<OWSAllowedValues> allowedValues = parameter.getAllowedValues();
             assertTrue("AllowedValues is null", allowedValues != null);
             assertEquals("AllowedValues count is incorrect", 1, allowedValues.size());
-            for (OWSAllowedValues avs : allowedValues) {
+            for (OWSAllowedValues avs : allowedValues)
+            {
                 List<String> avals = avs.getValues();
                 assertTrue("AllowedValues values is null", avals != null);
                 assertEquals("Allowed Values values count is incorrect", 2, avals.size());
@@ -470,13 +493,15 @@ public class WCSCapabilitiesParsingTest {
         List<OWSConstraint> constraints = operationsMetadata.getConstraints();
         assertTrue("Constraints is null", constraints != null);
         assertEquals("Incorrect Constraint count", 1, constraints.size());
-        for (OWSConstraint constraint : constraints) {
+        for (OWSConstraint constraint : constraints)
+        {
             assertEquals("Incorrect Constraint", "PostEncoding", constraint.getName());
 
             List<OWSAllowedValues> allowedValues = constraint.getAllowedValues();
             assertTrue("AllowedValues is null", allowedValues != null);
             assertEquals("AllowedValues count is incorrect", 1, allowedValues.size());
-            for (OWSAllowedValues avs : allowedValues) {
+            for (OWSAllowedValues avs : allowedValues)
+            {
                 List<String> avals = avs.getValues();
                 assertTrue("AllowedValues values is null", avals != null);
                 assertEquals("Allowed Values values count is incorrect", 1, avals.size());
@@ -492,7 +517,8 @@ public class WCSCapabilitiesParsingTest {
         assertEquals("WCS CoverageSummarys count is incorrect", 7, coverageSummaries.size());
 
         Set<String> identifiers = new HashSet<String>(coverageSummaries.size());
-        for (WCSCoverageSummary summary : coverageSummaries) {
+        for (WCSCoverageSummary summary : coverageSummaries)
+        {
             identifiers.add(summary.getIdentifier());
         }
         assertTrue("Missing CoverageSummary Identifier", identifiers.contains("Arc_Sample"));
@@ -503,11 +529,13 @@ public class WCSCapabilitiesParsingTest {
         assertTrue("Missing CoverageSummary Identifier", identifiers.contains("mosaic"));
         assertTrue("Missing CoverageSummary Identifier", identifiers.contains("sfdem"));
 
-        for (WCSCoverageSummary summary : coverageSummaries) {
-            if (summary.getIdentifier().equals("Arc_Sample")) {
+        for (WCSCoverageSummary summary : coverageSummaries)
+        {
+            if (summary.getIdentifier().equals("Arc_Sample"))
+            {
                 assertEquals("CoverageSummary Title is incorrect", "A sample ArcGrid file", summary.getTitle());
                 assertEquals("CoverageSummary Abstract is incorrect", "Generated from arcGridSample",
-                        summary.getAbstract());
+                    summary.getAbstract());
 
                 keywords = summary.getKeywords();
                 assertTrue("Keywords is null", keywords != null);
@@ -520,10 +548,12 @@ public class WCSCapabilitiesParsingTest {
                 assertTrue("BoundingBox is null", bbox != null);
                 assertEquals("LowerCorner is incorrect", "-180.0 -90.0", bbox.getLowerCorner());
                 assertEquals("UpperCorner is incorrect", "180.0 90.0", bbox.getUpperCorner());
-            } else if (summary.getIdentifier().equals("aster_v2")) {
+            }
+            else if (summary.getIdentifier().equals("aster_v2"))
+            {
                 assertEquals("CoverageSummary Title is incorrect", "ASTER", summary.getTitle());
                 assertEquals("CoverageSummary Abstract is incorrect", "Generated from ImageMosaic",
-                        summary.getAbstract());
+                    summary.getAbstract());
 
                 keywords = summary.getKeywords();
                 assertTrue("Keywords is null", keywords != null);
@@ -535,14 +565,16 @@ public class WCSCapabilitiesParsingTest {
                 OWSWGS84BoundingBox bbox = summary.getBoundingBox();
                 assertTrue("BoundingBox is null", bbox != null);
                 assertEquals("LowerCorner is incorrect", "-180.0001388888889 -83.0001388888889",
-                        bbox.getLowerCorner());
+                    bbox.getLowerCorner());
                 assertEquals("UpperCorner is incorrect", "180.00013888888887 83.00013888888888",
-                        bbox.getUpperCorner());
-            } else if (summary.getIdentifier().equals("FAAChartsCroppedReprojected")) {
+                    bbox.getUpperCorner());
+            }
+            else if (summary.getIdentifier().equals("FAAChartsCroppedReprojected"))
+            {
                 assertEquals("CoverageSummary Title is incorrect", "FAAChartsCroppedReprojected",
-                        summary.getTitle());
+                    summary.getTitle());
                 assertEquals("CoverageSummary Abstract is incorrect", "Generated from ImageMosaic",
-                        summary.getAbstract());
+                    summary.getAbstract());
 
                 keywords = summary.getKeywords();
                 assertTrue("Keywords is null", keywords != null);
@@ -554,13 +586,15 @@ public class WCSCapabilitiesParsingTest {
                 OWSWGS84BoundingBox bbox = summary.getBoundingBox();
                 assertTrue("BoundingBox is null", bbox != null);
                 assertEquals("LowerCorner is incorrect", "-173.4897609604564 50.896520942672375",
-                        bbox.getLowerCorner());
+                    bbox.getLowerCorner());
                 assertEquals("UpperCorner is incorrect", "178.65474058869506 72.33574978977076",
-                        bbox.getUpperCorner());
-            } else if (summary.getIdentifier().equals("NASA_SRTM30_900m_Tiled")) {
+                    bbox.getUpperCorner());
+            }
+            else if (summary.getIdentifier().equals("NASA_SRTM30_900m_Tiled"))
+            {
                 assertEquals("CoverageSummary Title is incorrect", "NASA_SRTM30_900m_Tiled", summary.getTitle());
                 assertEquals("CoverageSummary Abstract is incorrect", "Generated from ImageMosaic",
-                        summary.getAbstract());
+                    summary.getAbstract());
 
                 keywords = summary.getKeywords();
                 assertTrue("Keywords is null", keywords != null);
@@ -573,11 +607,13 @@ public class WCSCapabilitiesParsingTest {
                 assertTrue("BoundingBox is null", bbox != null);
                 assertEquals("LowerCorner is incorrect", "-180.0 -90.0", bbox.getLowerCorner());
                 assertEquals("UpperCorner is incorrect", "180.0 90.0", bbox.getUpperCorner());
-            } else if (summary.getIdentifier().equals("Img_Sample")) {
+            }
+            else if (summary.getIdentifier().equals("Img_Sample"))
+            {
                 assertEquals("CoverageSummary Title is incorrect", "North America sample imagery",
-                        summary.getTitle());
+                    summary.getTitle());
                 assertEquals("CoverageSummary Abstract is incorrect", "A very rough imagery of North America",
-                        summary.getAbstract());
+                    summary.getAbstract());
 
                 keywords = summary.getKeywords();
                 assertTrue("Keywords is null", keywords != null);
@@ -590,10 +626,12 @@ public class WCSCapabilitiesParsingTest {
                 assertTrue("BoundingBox is null", bbox != null);
                 assertEquals("LowerCorner is incorrect", "-130.85168 20.7052", bbox.getLowerCorner());
                 assertEquals("UpperCorner is incorrect", "-62.0054 54.1141", bbox.getUpperCorner());
-            } else if (summary.getIdentifier().equals("mosaic")) {
+            }
+            else if (summary.getIdentifier().equals("mosaic"))
+            {
                 assertEquals("CoverageSummary Title is incorrect", "mosaic", summary.getTitle());
                 assertEquals("CoverageSummary Abstract is incorrect", "Generated from ImageMosaic",
-                        summary.getAbstract());
+                    summary.getAbstract());
 
                 keywords = summary.getKeywords();
                 assertTrue("Keywords is null", keywords != null);
@@ -606,11 +644,13 @@ public class WCSCapabilitiesParsingTest {
                 assertTrue("BoundingBox is null", bbox != null);
                 assertEquals("LowerCorner is incorrect", "6.346 36.492", bbox.getLowerCorner());
                 assertEquals("UpperCorner is incorrect", "20.83 46.591", bbox.getUpperCorner());
-            } else if (summary.getIdentifier().equals("sfdem")) {
+            }
+            else if (summary.getIdentifier().equals("sfdem"))
+            {
                 assertEquals("CoverageSummary Title is incorrect",
-                        "sfdem is a Tagged Image File Format with Geographic information", summary.getTitle());
+                    "sfdem is a Tagged Image File Format with Geographic information", summary.getTitle());
                 assertEquals("CoverageSummary Abstract is incorrect", "Generated from sfdem",
-                        summary.getAbstract());
+                    summary.getAbstract());
 
                 keywords = summary.getKeywords();
                 assertTrue("Keywords is null", keywords != null);
@@ -621,16 +661,19 @@ public class WCSCapabilitiesParsingTest {
                 OWSWGS84BoundingBox bbox = summary.getBoundingBox();
                 assertTrue("BoundingBox is null", bbox != null);
                 assertEquals("LowerCorner is incorrect", "-103.87108701853181 44.370187074132616",
-                        bbox.getLowerCorner());
+                    bbox.getLowerCorner());
                 assertEquals("UpperCorner is incorrect", "-103.62940739432703 44.5016011535299",
-                        bbox.getUpperCorner());
-            } else {
+                    bbox.getUpperCorner());
+            }
+            else
+            {
                 assertTrue("Unrecognized WCS CoverageSummary", false);
             }
         }
     }
 
-    private static void checkRequestDescription(WCS100RequestDescription requestDescription, String url) {
+    private static void checkRequestDescription(WCS100RequestDescription requestDescription, String url)
+    {
         List<WCS100DCPType> dcpTypes = requestDescription.getDCPTypes();
 
         assertNotNull("DCPTypes is null for " + requestDescription.getRequestName(), dcpTypes);
@@ -638,15 +681,14 @@ public class WCSCapabilitiesParsingTest {
 
         String get = null;
         String post = null;
-        for (WCS100DCPType dcpType : dcpTypes) {
+        for (WCS100DCPType dcpType : dcpTypes)
+        {
             WCS100HTTP http = dcpType.getHTTP();
             assertNotNull("HTTP is null for request name " + requestDescription.getRequestName(), http);
-            if (http.getGetAddress() != null) {
+            if (http.getGetAddress() != null)
                 get = http.getGetAddress();
-            }
-            if (http.getPostAddress() != null) {
+            if (http.getPostAddress() != null)
                 post = http.getPostAddress();
-            }
         }
 
         assertNotNull("Get address is null for request name " + requestDescription.getRequestName(), get);

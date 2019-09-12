@@ -18,35 +18,43 @@ import java.util.ArrayList;
  * @author dcollins
  * @version $Id: VPFTableReader.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class VPFTableReader {
-
-    public VPFTableReader() {
+public class VPFTableReader
+{
+    public VPFTableReader()
+    {
     }
 
-    public VPFBufferedRecordData read(File file) {
-        if (file == null) {
+    public VPFBufferedRecordData read(File file)
+    {
+        if (file == null)
+        {
             String message = Logging.getMessage("nullValue.FileIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        try {
+        try
+        {
             ByteBuffer buffer = this.readFileToBuffer(file);
             return this.doRead(file, buffer);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             String message = Logging.getMessage("VPF.ExceptionAttemptingToReadTable", file.getPath());
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             throw new WWRuntimeException(message, e);
         }
     }
 
-    protected ByteBuffer readFileToBuffer(File file) throws IOException {
+    protected ByteBuffer readFileToBuffer(File file) throws IOException
+    {
         ByteBuffer buffer = WWIO.readFileToBuffer(file, true); // Read VPF table to a direct ByteBuffer.
         buffer.order(ByteOrder.LITTLE_ENDIAN); // Default to least significant byte first order.
         return buffer;
     }
 
-    protected VPFBufferedRecordData doRead(File file, ByteBuffer buffer) {
+    protected VPFBufferedRecordData doRead(File file, ByteBuffer buffer)
+    {
         // Read the table header.
         Header header = this.readHeader(buffer);
         // Set the byte ordering to the ordering specified by the table header.
@@ -56,16 +64,15 @@ public class VPFTableReader {
         // Attempt to find a variable-length record index according to the file naming convention in
         // DIGEST Part 2 Annex C.2.3.1.2
         File recordIndexFile = new File(file.getParent(), getRecordIndexFilename(file.getName()));
-        if (recordIndexFile.exists()) {
+        if (recordIndexFile.exists())
             recordIndex = this.readRecordIndex(recordIndexFile);
-        }
         // If the record index is null, then attempt to compute it from the header's column definitions.
-        if (recordIndex == null) {
+        if (recordIndex == null)
             recordIndex = this.computeRecordIndex(buffer, header);
-        }
         // If the record index is still null, then we the column definitions are variable length, and there is no
         // variable-length record index associated with this table. In this case, we cannot read the table body.
-        if (recordIndex == null) {
+        if (recordIndex == null)
+        {
             String message = Logging.getMessage("VPF.VariableLengthIndexFileMissing");
             Logging.logger().severe(message);
             throw new WWRuntimeException(message);
@@ -78,26 +85,24 @@ public class VPFTableReader {
     //**************************************************************//
     //********************  Header  ********************************//
     //**************************************************************//
-    /**
-     * MIL-STD-2407, section 5.4.1.1
-     */
-    protected static class Header {
 
+    /** MIL-STD-2407, section 5.4.1.1 */
+    protected static class Header
+    {
         public int length;
         public ByteOrder byteOrder = ByteOrder.LITTLE_ENDIAN; // Default to least significant byte first order.
         public String description;
         public String narrativeTableName;
         public Column[] columns;
 
-        public Header() {
+        public Header()
+        {
         }
     }
 
-    /**
-     * MIL-STD-2407, section 5.4.1.1
-     */
-    public class Column {
-
+    /** MIL-STD-2407, section 5.4.1.1 */
+    public class Column
+    {
         public final String name;
         public String dataType;
         public int numElements;
@@ -108,38 +113,44 @@ public class VPFTableReader {
         public String narrativeTableName;
         public VPFDataBuffer dataBuffer;
 
-        public Column(String name) {
+        public Column(String name)
+        {
             this.name = name;
         }
 
-        public int getFieldLength() {
-            if (this.isVariableLengthField()) {
+        public int getFieldLength()
+        {
+            if (this.isVariableLengthField())
                 return -1;
-            }
 
             VPFDataType type = VPFDataType.fromTypeName(this.dataType);
             return this.numElements * type.getFieldLength();
         }
 
-        public boolean isVariableLengthField() {
+        public boolean isVariableLengthField()
+        {
             VPFDataType type = VPFDataType.fromTypeName(this.dataType);
             return (this.numElements < 0) || type.isVariableLength();
         }
 
-        public boolean isPrimaryKey() {
+        public boolean isPrimaryKey()
+        {
             return this.keyType.equals(VPFConstants.PRIMARY_KEY);
         }
 
-        public boolean isUniqueKey() {
+        public boolean isUniqueKey()
+        {
             return this.keyType.equals(VPFConstants.UNIQUE_KEY);
         }
 
-        public boolean isNonUniqueKey() {
+        public boolean isNonUniqueKey()
+        {
             return this.keyType.equals(VPFConstants.NON_UNIQUE_KEY);
         }
     }
 
-    protected Header readHeader(ByteBuffer buffer) {
+    protected Header readHeader(ByteBuffer buffer)
+    {
         int offset = buffer.position();
         int length = buffer.getInt();
 
@@ -147,31 +158,30 @@ public class VPFTableReader {
         header.length = length;
         header.byteOrder = ByteOrder.LITTLE_ENDIAN; // Default to least significant byte first order.
 
-        if (length == 0) {
+        if (length == 0)
+        {
             return header;
         }
 
         // Read the byte order character.
         String s = VPFUtils.readDelimitedText(buffer, ';');
-        if (s != null && s.equalsIgnoreCase("M")) {
+        if (s != null && s.equalsIgnoreCase("M"))
             header.byteOrder = ByteOrder.BIG_ENDIAN;
-        }
 
         // Read the table description string.
         s = VPFUtils.readDelimitedText(buffer, ';');
-        if (s != null) {
+        if (s != null)
             header.description = s.trim();
-        }
 
         // Read the narrative table name.
         s = VPFUtils.readDelimitedText(buffer, ';');
-        if (s != null && s.charAt(0) != '-') {
+        if (s != null && s.charAt(0) != '-')
             header.narrativeTableName = s.trim();
-        }
 
         ArrayList<Column> columnList = new ArrayList<Column>();
 
-        while (buffer.position() < (offset + length)) {
+        while (buffer.position() < (offset + length))
+        {
             Column col = this.readColumnDescription(buffer);
             columnList.add(col);
         }
@@ -185,9 +195,11 @@ public class VPFTableReader {
         return header;
     }
 
-    protected Column readColumnDescription(ByteBuffer buffer) {
+    protected Column readColumnDescription(ByteBuffer buffer)
+    {
         String s = VPFUtils.readDelimitedText(buffer, '=');
-        if (s == null) {
+        if (s == null)
+        {
             String message = Logging.getMessage("VPF.MissingColumnName");
             Logging.logger().severe(message);
             throw new WWRuntimeException(message);
@@ -196,40 +208,36 @@ public class VPFTableReader {
         Column col = new Column(s);
 
         s = VPFUtils.readDelimitedText(buffer, ',');
-        if (s != null) {
+        if (s != null)
             col.dataType = s;
-        }
 
         s = VPFUtils.readDelimitedText(buffer, ',');
-        if (s != null) {
+        if (s != null)
             col.numElements = parseNumElements(s);
-        }
 
         s = VPFUtils.readDelimitedText(buffer, ',');
-        if (s != null) {
+        if (s != null)
             col.keyType = s;
-        }
 
         s = VPFUtils.readDelimitedText(buffer, ',');
-        if (s != null) {
+        if (s != null)
             col.description = s;
-        }
 
         s = VPFUtils.readDelimitedText(buffer, ',');
-        if (s != null) {
+        if (s != null)
             col.valueDescriptionTableName = s;
-        }
 
         s = VPFUtils.readDelimitedText(buffer, ',');
-        if (s != null) {
+        if (s != null)
             col.thematicIndexName = s;
-        }
 
         // Consume any remaining text, up to the sub column delimiter ':'.
         s = VPFUtils.readDelimitedText(buffer, ':');
-        if (s != null) {
+        if (s != null)
+        {
             int pos = s.indexOf(",");
-            if (pos >= 0) {
+            if (pos >= 0)
+            {
                 s = s.substring(0, pos);
                 col.narrativeTableName = s;
             }
@@ -238,11 +246,11 @@ public class VPFTableReader {
         return col;
     }
 
-    protected static int parseNumElements(String numElements) {
+    protected static int parseNumElements(String numElements)
+    {
         // "*" denotes a field with variable length.
-        if (numElements == null || numElements.equals("*")) {
+        if (numElements == null || numElements.equals("*"))
             return -1;
-        }
 
         Integer i = WWUtil.convertStringToInteger(numElements);
         return (i != null) ? i : -1;
@@ -251,70 +259,81 @@ public class VPFTableReader {
     //**************************************************************//
     //********************  Record Data  ***************************//
     //**************************************************************//
-    protected interface RecordDataReader {
 
+    protected interface RecordDataReader
+    {
         VPFDataBuffer getDataBuffer();
 
         void read(ByteBuffer byteBuffer);
     }
 
-    protected abstract static class AbstractDataReader implements RecordDataReader {
-
+    protected abstract static class AbstractDataReader implements RecordDataReader
+    {
         protected VPFDataBuffer dataBuffer;
 
-        public AbstractDataReader(VPFDataBuffer dataBuffer) {
+        public AbstractDataReader(VPFDataBuffer dataBuffer)
+        {
             this.dataBuffer = dataBuffer;
         }
 
-        public VPFDataBuffer getDataBuffer() {
+        public VPFDataBuffer getDataBuffer()
+        {
             return this.dataBuffer;
         }
     }
 
-    protected static class FixedLengthDataReader extends AbstractDataReader {
-
+    protected static class FixedLengthDataReader extends AbstractDataReader
+    {
         protected int numElements;
 
-        public FixedLengthDataReader(VPFDataBuffer dataBuffer, int numElements) {
+        public FixedLengthDataReader(VPFDataBuffer dataBuffer, int numElements)
+        {
             super(dataBuffer);
             this.numElements = numElements;
         }
 
-        public void read(ByteBuffer byteBuffer) {
+        public void read(ByteBuffer byteBuffer)
+        {
             this.dataBuffer.read(byteBuffer, this.numElements);
         }
     }
 
-    protected static class VariableLengthDataReader extends AbstractDataReader {
-
-        public VariableLengthDataReader(VPFDataBuffer dataBuffer) {
+    protected static class VariableLengthDataReader extends AbstractDataReader
+    {
+        public VariableLengthDataReader(VPFDataBuffer dataBuffer)
+        {
             super(dataBuffer);
         }
 
-        public void read(ByteBuffer byteBuffer) {
+        public void read(ByteBuffer byteBuffer)
+        {
             this.dataBuffer.read(byteBuffer);
         }
     }
 
-    protected VPFBufferedRecordData readRecordData(ByteBuffer byteBuffer, Column[] columns, RecordIndex recordIndex) {
+    protected VPFBufferedRecordData readRecordData(ByteBuffer byteBuffer, Column[] columns, RecordIndex recordIndex)
+    {
         int numRows = recordIndex.numEntries;
         int numColumns = columns.length;
 
         // Create data readers for each column.
         RecordDataReader[] readers = new RecordDataReader[numColumns];
-        for (int col = 0; col < numColumns; col++) {
+        for (int col = 0; col < numColumns; col++)
+        {
             VPFDataType type = VPFDataType.fromTypeName(columns[col].dataType);
             VPFDataBuffer dataBuffer = type.createDataBuffer(numRows, columns[col].numElements);
-            readers[col] = columns[col].isVariableLengthField()
-                    ? new VariableLengthDataReader(dataBuffer)
-                    : new FixedLengthDataReader(dataBuffer, columns[col].numElements);
+            readers[col] = columns[col].isVariableLengthField() ?
+                new VariableLengthDataReader(dataBuffer)
+                : new FixedLengthDataReader(dataBuffer, columns[col].numElements);
         }
 
         // Read the column data associated with each row.
-        for (int row = 0; row < numRows; row++) {
+        for (int row = 0; row < numRows; row++)
+        {
             byteBuffer.position(recordIndex.entries[row].offset);
 
-            for (int col = 0; col < numColumns; col++) {
+            for (int col = 0; col < numColumns; col++)
+            {
                 readers[col].read(byteBuffer);
             }
         }
@@ -323,13 +342,15 @@ public class VPFTableReader {
         recordData.setNumRecords(numRows);
 
         // Set the record data buffer associated with each column.
-        for (int col = 0; col < numColumns; col++) {
+        for (int col = 0; col < numColumns; col++)
+        {
             recordData.setRecordData(columns[col].name, readers[col].getDataBuffer());
 
             // Compute an index for any columns which are identified as primary keys or unique keys.
-            if (!columns[col].name.equals(VPFConstants.ID)
-                    && (columns[col].name.equals(VPFConstants.PRIMARY_KEY)
-                    || columns[col].name.equals(VPFConstants.UNIQUE_KEY))) {
+            if (!columns[col].name.equals(VPFConstants.ID) &&
+                (columns[col].name.equals(VPFConstants.PRIMARY_KEY) ||
+                    columns[col].name.equals(VPFConstants.UNIQUE_KEY)))
+            {
                 recordData.buildRecordIndex(columns[col].name);
             }
         }
@@ -340,14 +361,16 @@ public class VPFTableReader {
     //**************************************************************//
     //********************  Record Index  **************************//
     //**************************************************************//
-    public static class RecordIndex {
 
-        public static class Entry {
-
+    public static class RecordIndex
+    {
+        public static class Entry
+        {
             public int offset;
             public int length;
 
-            public Entry(int offset, int length) {
+            public Entry(int offset, int length)
+            {
                 this.offset = offset;
                 this.length = length;
             }
@@ -357,7 +380,8 @@ public class VPFTableReader {
         public int headerLength;
         public Entry[] entries;
 
-        public RecordIndex() {
+        public RecordIndex()
+        {
         }
     }
 
@@ -370,7 +394,8 @@ public class VPFTableReader {
      *
      * @return the name of a variable-length index file associated with the table name.,
      */
-    protected static String getRecordIndexFilename(String tableName) {
+    protected static String getRecordIndexFilename(String tableName)
+    {
         boolean isFcs = tableName.equalsIgnoreCase(VPFConstants.FEATURE_CLASS_SCHEMA_TABLE);
 
         StringBuilder sb = new StringBuilder();
@@ -382,8 +407,10 @@ public class VPFTableReader {
         return sb.toString();
     }
 
-    protected RecordIndex readRecordIndex(File file) {
-        try {
+    protected RecordIndex readRecordIndex(File file)
+    {
+        try
+        {
             ByteBuffer buffer = this.readFileToBuffer(file);
             buffer.order(ByteOrder.LITTLE_ENDIAN); // Default to least significant byte first order.
 
@@ -392,27 +419,33 @@ public class VPFTableReader {
             index.headerLength = buffer.getInt();
             index.entries = new RecordIndex.Entry[index.numEntries];
 
-            for (int i = 0; i < index.numEntries; i++) {
+            for (int i = 0; i < index.numEntries; i++)
+            {
                 int recordOffset = buffer.getInt();
                 int recordLength = buffer.getInt();
                 index.entries[i] = new RecordIndex.Entry(recordOffset, recordLength);
             }
 
             return index;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             String message = Logging.getMessage("VPF.ExceptionAttemptingToReadRecordIndex", file.getPath());
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
             throw new WWRuntimeException(message, e);
         }
     }
 
-    protected RecordIndex computeRecordIndex(ByteBuffer buffer, Header header) {
+    protected RecordIndex computeRecordIndex(ByteBuffer buffer, Header header)
+    {
         // Compute a fixed length record size by summing the sizes of individual columns. Assume that the bytes of row
         // values are tightly packed.
         int recordLength = 0;
-        for (Column col : header.columns) {
+        for (Column col : header.columns)
+        {
             // If any column contains a variable length field, then we cannot compute a record size for this table.
-            if (col.isVariableLengthField()) {
+            if (col.isVariableLengthField())
+            {
                 return null;
             }
 
@@ -432,7 +465,8 @@ public class VPFTableReader {
         index.entries = new RecordIndex.Entry[numRecords];
 
         int offset = bodyOffset;
-        for (int i = 0; i < numRecords; i++) {
+        for (int i = 0; i < numRecords; i++)
+        {
             index.entries[i] = new RecordIndex.Entry(offset, recordLength);
             offset += index.entries[i].length;
         }

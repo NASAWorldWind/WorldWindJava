@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.worldwindow.features;
 
 import gov.nasa.worldwind.Disposable;
@@ -21,64 +22,72 @@ import java.util.*;
  * @author tag
  * @version $Id: AbstractElevationsFeature.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class AbstractElevationsFeature extends AbstractFeature implements NetworkActivitySignal.NetworkUser {
-
+public abstract class AbstractElevationsFeature extends AbstractFeature implements NetworkActivitySignal.NetworkUser
+{
     protected boolean on;
     protected List<ElevationModel> elevationModels;
     protected Thread createModelsThread;
 
     protected abstract void doCreateModels();
 
-    protected AbstractElevationsFeature(String name, String featureID, String largeIconPath, Registry registry) {
+    protected AbstractElevationsFeature(String name, String featureID, String largeIconPath, Registry registry)
+    {
         super(name, featureID, largeIconPath, registry);
     }
 
     @Override
-    public void initialize(Controller controller) {
+    public void initialize(Controller controller)
+    {
         super.initialize(controller);
 
         this.addToToolBar();
     }
 
-    public boolean hasNetworkActivity() {
+    public boolean hasNetworkActivity()
+    {
         return this.createModelsThread != null && this.createModelsThread.isAlive();
     }
 
     @Override
-    public boolean isOn() {
+    public boolean isOn()
+    {
         return this.on;
     }
 
-    protected void setOn(boolean tf) {
+    protected void setOn(boolean tf)
+    {
         this.on = tf;
     }
 
     @Override
-    public void turnOn(boolean tf) {
-        if (tf == this.isOn()) {
+    public void turnOn(boolean tf)
+    {
+        if (tf == this.isOn())
             return;
-        }
 
-        if (tf) {
-            if (this.getElevationModels().size() == 0) {
+        if (tf)
+        {
+            if (this.getElevationModels().size() == 0)
                 this.createModels(); // also adds them to the layer manager
-            } else {
+            else
                 this.addModels(this.getElevationModels());
-            }
-        } else {
-            this.removeModels();
         }
+        else
+            this.removeModels();
 
         this.setOn(tf);
         this.controller.redraw();
     }
 
-    public List<ElevationModel> getElevationModels() {
+    public List<ElevationModel> getElevationModels()
+    {
         return this.elevationModels != null ? this.elevationModels : new ArrayList<ElevationModel>();
     }
 
-    protected void handleInterrupt() {
-        if (Thread.currentThread().isInterrupted() && this.elevationModels != null) {
+    protected void handleInterrupt()
+    {
+        if (Thread.currentThread().isInterrupted() && this.elevationModels != null)
+        {
             Util.getLogger().info("Data retrieval cancelled");
 
             // Clean up so the user can try again later
@@ -86,14 +95,15 @@ public abstract class AbstractElevationsFeature extends AbstractFeature implemen
         }
     }
 
-    protected void destroyElevationModels() {
+    protected void destroyElevationModels()
+    {
         this.killPopulateLayerThread();
 
-        if (this.elevationModels == null) {
+        if (this.elevationModels == null)
             return;
-        }
 
-        for (ElevationModel em : this.elevationModels) {
+        for (ElevationModel em : this.elevationModels)
+        {
             this.destroyElevationModel(em);
         }
 
@@ -101,59 +111,71 @@ public abstract class AbstractElevationsFeature extends AbstractFeature implemen
         this.elevationModels = null;
     }
 
-    protected void destroyElevationModel(ElevationModel em) {
+    protected void destroyElevationModel(ElevationModel em)
+    {
         this.removeModel(em);
 
-        if (em instanceof Disposable) {
+        if (em instanceof Disposable)
             ((Disposable) em).dispose();
-        }
     }
 
-    protected void removeModels() {
-        for (ElevationModel em : this.getElevationModels()) {
+    protected void removeModels()
+    {
+        for (ElevationModel em : this.getElevationModels())
+        {
             this.removeModel(em);
         }
     }
 
-    protected void addModels(List<ElevationModel> models) {
-        for (ElevationModel em : models) {
+    protected void addModels(List<ElevationModel> models)
+    {
+        for (ElevationModel em : models)
+        {
             this.addModel(em);
         }
     }
 
-    protected void removeModel(ElevationModel em) {
-        if (em == null) {
+    protected void removeModel(ElevationModel em)
+    {
+        if (em == null)
             return;
-        }
 
         ElevationModel parentModel = this.controller.getWWd().getModel().getGlobe().getElevationModel();
 
-        if (parentModel instanceof CompoundElevationModel) {
+        if (parentModel instanceof CompoundElevationModel)
             ((CompoundElevationModel) parentModel).removeElevationModel(em);
-        }
     }
 
-    protected void killPopulateLayerThread() {
-        if (this.createModelsThread != null && this.createModelsThread.isAlive()) {
+    protected void killPopulateLayerThread()
+    {
+        if (this.createModelsThread != null && this.createModelsThread.isAlive())
+        {
             this.createModelsThread.interrupt();
             this.controller.getNetworkActivitySignal().removeNetworkUser(this);
             this.createModelsThread = null;
         }
     }
 
-    protected void createModels() {
-        if (this.elevationModels == null) {
+    protected void createModels()
+    {
+        if (this.elevationModels == null)
             this.elevationModels = new ArrayList<ElevationModel>();
-        }
 
-        this.createModelsThread = new Thread(new Runnable() {
-            public void run() {
-                try {
+        this.createModelsThread = new Thread(new Runnable()
+        {
+            public void run()
+            {
+                try
+                {
                     doCreateModels();
-                } finally {
+                }
+                finally
+                {
                     handleInterrupt();
-                    SwingUtilities.invokeLater(new Runnable() {
-                        public void run() {
+                    SwingUtilities.invokeLater(new Runnable()
+                    {
+                        public void run()
+                        {
                             controller.getNetworkActivitySignal().removeNetworkUser(AbstractElevationsFeature.this);
                             createModelsThread = null;
                             controller.redraw();
@@ -168,22 +190,23 @@ public abstract class AbstractElevationsFeature extends AbstractFeature implemen
         this.controller.getNetworkActivitySignal().addNetworkUser(AbstractElevationsFeature.this);
     }
 
-    protected void addModel(ElevationModel em) {
+    protected void addModel(ElevationModel em)
+    {
         this.removeModel(em);
         this.doAddModel(em);
 
-        if (this.elevationModels == null) {
+        if (this.elevationModels == null)
             this.elevationModels = new ArrayList<ElevationModel>();
-        }
 
-        if (!this.getElevationModels().contains(em)) {
+        if (!this.getElevationModels().contains(em))
             this.getElevationModels().add(em);
-        }
     }
 
-    protected void doAddModel(ElevationModel em) {
+    protected void doAddModel(ElevationModel em)
+    {
         ElevationModel globeEM = this.controller.getWWd().getModel().getGlobe().getElevationModel();
-        if (!(globeEM instanceof CompoundElevationModel)) {
+        if (!(globeEM instanceof CompoundElevationModel))
+        {
             CompoundElevationModel cem = new CompoundElevationModel();
             cem.addElevationModel(globeEM);
             globeEM = cem;
@@ -193,14 +216,20 @@ public abstract class AbstractElevationsFeature extends AbstractFeature implemen
         ((CompoundElevationModel) globeEM).addElevationModel(em);
     }
 
-    protected WMSCapabilities retrieveCapsDoc(String urlString) {
-        try {
+    protected WMSCapabilities retrieveCapsDoc(String urlString)
+    {
+        try
+        {
             CapabilitiesRequest request = new CapabilitiesRequest(new URI(urlString));
 
             return new WMSCapabilities(request);
-        } catch (URISyntaxException e) {
+        }
+        catch (URISyntaxException e)
+        {
             e.printStackTrace();
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e)
+        {
             e.printStackTrace();
         }
 

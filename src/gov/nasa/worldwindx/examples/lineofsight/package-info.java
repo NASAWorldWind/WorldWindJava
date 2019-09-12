@@ -3,11 +3,12 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 /**
  * <p>
  * Examples of how to perform line of sight calculations in WorldWind.</p>
  *
- * <p>
+<p>
  * Line of sight calculations can use both terrain data and shapes. {@link
  * gov.nasa.worldwindx.examples.lineofsight.LinesOfSight} shows how to find points that have line of sight to a given
  * position. It is also possible to determine the intersection of a shape and an arbitrary line. {@link

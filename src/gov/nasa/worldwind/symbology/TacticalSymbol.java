@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology;
 
 import gov.nasa.worldwind.WWObject;
@@ -13,8 +14,7 @@ import gov.nasa.worldwind.util.UnitsFormat;
 /**
  * TacticalSymbol provides a common interface for displaying tactical point symbols from symbology sets. A tactical
  * symbol displays graphic and textual information about an object at a single geographic position at a particular point
- * in time. See the
- * <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
+ * in time. See the <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
  * for instructions on using TacticalSymbol in an application.
  * <h2>Construction</h2> Implementations of this interface provide support for symbols belonging to a specific symbology
  * set. For example, class {@link gov.nasa.worldwind.symbology.milstd2525.MilStd2525TacticalSymbol} provides support for
@@ -106,21 +106,21 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * @author dcollins
  * @version $Id: TacticalSymbol.java 2370 2014-10-06 22:37:50Z tgaskins $
  */
-public interface TacticalSymbol extends WWObject, Renderable, Highlightable {
-
+public interface TacticalSymbol extends WWObject, Renderable, Highlightable
+{
     /**
      * An interface to enable application selection of tactical symbol level of detail.
      */
-    public interface LODSelector {
-
+    public interface LODSelector
+    {
         /**
          * Modifies the symbol's attributes and properties to achieve a desired level of detail during rendering. This
          * method is called during rendering in order to provide the application an opportunity to adjust the symbol's
          * attributes and properties to achieve a level of detail based on the symbol's distance from the view's eye
          * point or other criteria.
          *
-         * @param dc the current draw context.
-         * @param symbol the symbol about to be rendered.
+         * @param dc          the current draw context.
+         * @param symbol      the symbol about to be rendered.
          * @param eyeDistance the distance in meters from the view's eye point to the symbol's geographic position.
          */
         public void selectLOD(DrawContext dc, TacticalSymbol symbol, double eyeDistance);
@@ -137,7 +137,7 @@ public interface TacticalSymbol extends WWObject, Renderable, Highlightable {
      * Specifies this symbols level of detail selector.
      *
      * @param LODSelector the level of detail selector. May be null, the default, to indicate no level of detail
-     * selector.
+     *                    selector.
      */
     void setLODSelector(LODSelector LODSelector);
 
@@ -247,7 +247,7 @@ public interface TacticalSymbol extends WWObject, Renderable, Highlightable {
      * location modifier. Setting showLocation on a symbol that does not support the modifier will have no effect.
      *
      * @param show true if the symbol will display the location modifier. Note that not some symbols may not support
-     * this modifier.
+     *             this modifier.
      */
     void setShowLocation(boolean show);
 
@@ -262,11 +262,11 @@ public interface TacticalSymbol extends WWObject, Renderable, Highlightable {
 
     /**
      * Specifies whether or not to display an indicator when the symbol represents a hostile entity. The indicator is
-     * determined by the symbology set, and may not apply to all symbols in the symbol set. In the case of
+     * determined by the symbology set, and may not apply to all symbols in the symbol set.  In the case of
      * MIL-STD-2525C, the indicator is the letters "ENY" displayed at the lower right corner of the symbol.
      *
      * @param show true if this symbol will display an indicator when this symbol represents a hostile entity and the
-     * symbol specification supports such an indicator.
+     *             symbol specification supports such an indicator.
      */
     void setShowHostileIndicator(boolean show);
 
@@ -293,8 +293,8 @@ public interface TacticalSymbol extends WWObject, Renderable, Highlightable {
      * isShowGraphicModifiers or isShowTextModifiers, respectively, returns false.
      *
      * @param modifier the modifier key.
-     * @param value the modifier value. May be <code>null</code>, indicating that the modifier should be removed from
-     * this symbol.
+     * @param value    the modifier value. May be <code>null</code>, indicating that the modifier should be removed from
+     *                 this symbol.
      *
      * @throws IllegalArgumentException if the modifier is <code>null</code>.
      */
@@ -327,7 +327,7 @@ public interface TacticalSymbol extends WWObject, Renderable, Highlightable {
      * Specifies this symbol's highlight attributes.
      *
      * @param highlightAttrs the highlight attributes. May be <code>null</code>, in which case default highlight
-     * attributes are used.
+     *                       attributes are used.
      */
     void setHighlightAttributes(TacticalSymbolAttributes highlightAttrs);
 
@@ -362,3 +362,4 @@ public interface TacticalSymbol extends WWObject, Renderable, Highlightable {
      */
     void setUnitsFormat(UnitsFormat unitsFormat);
 }
+

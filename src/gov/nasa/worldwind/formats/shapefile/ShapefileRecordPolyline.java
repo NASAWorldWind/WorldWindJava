@@ -19,32 +19,30 @@ import java.util.Locale;
  * sequence of two or more points.
  * <p>
  * Polylines may have optional z-coordinates or m-coordinates that accompany each coordinate pair. If a Polyline has
- * z-coordinates, then <code>{@link #getZValues()}</code> returns a non-<code>null</code> array of values. If a Polyline
- * has m-coordinates, then <code>{@link #getMValues()}</code> returns a non-<code>null</code> array of values.
+ * z-coordinates, then <code>{@link #getZValues()}</code> returns a non-<code>null</code> array of values.  If a
+ * Polyline has m-coordinates, then <code>{@link #getMValues()}</code> returns a non-<code>null</code> array of values.
  *
  * @author Patrick Murris
  * @version $Id: ShapefileRecordPolyline.java 2303 2014-09-14 22:33:36Z dcollins $
  */
-public class ShapefileRecordPolyline extends ShapefileRecord {
-
+public class ShapefileRecordPolyline extends ShapefileRecord
+{
     protected double[] boundingRectangle;
     protected double[] zRange; // non-null only for Z types
     protected double[] zValues; // non-null only for Z types
     protected double[] mRange; // will be null if no measures
     protected double[] mValues; // will be null if no measures
 
-    /**
-     * {@inheritDoc}
-     */
-    public ShapefileRecordPolyline(Shapefile shapeFile, ByteBuffer buffer) {
+    /** {@inheritDoc} */
+    public ShapefileRecordPolyline(Shapefile shapeFile, ByteBuffer buffer)
+    {
         super(shapeFile, buffer);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public boolean isPolylineRecord() {
+    public boolean isPolylineRecord()
+    {
         return true;
     }
 
@@ -55,7 +53,8 @@ public class ShapefileRecordPolyline extends ShapefileRecord {
      *
      * @return an {@link Iterable} over the points X and Y coordinates.
      */
-    public Iterable<double[]> getPoints(int partNumber) {
+    public Iterable<double[]> getPoints(int partNumber)
+    {
         return this.getPointBuffer(partNumber).getCoords();
     }
 
@@ -64,7 +63,8 @@ public class ShapefileRecordPolyline extends ShapefileRecord {
      *
      * @return the shape's Z range. The range minimum is at index 0, the maximum at index 1.
      */
-    public double[] getZRange() {
+    public double[] getZRange()
+    {
         return this.zRange;
     }
 
@@ -73,7 +73,8 @@ public class ShapefileRecordPolyline extends ShapefileRecord {
      *
      * @return the shape's Z values.
      */
-    public double[] getZValues() {
+    public double[] getZValues()
+    {
         return this.zValues;
     }
 
@@ -81,9 +82,10 @@ public class ShapefileRecordPolyline extends ShapefileRecord {
      * Returns the shape's optional measure range.
      *
      * @return the shape's measure range, or null if no measures are in the record. The range minimum is at index 0, the
-     * maximum at index 1.
+     *         maximum at index 1.
      */
-    public double[] getMRange() {
+    public double[] getMRange()
+    {
         return this.mRange;
     }
 
@@ -92,65 +94,62 @@ public class ShapefileRecordPolyline extends ShapefileRecord {
      *
      * @return the shape's measure values, or null if no measures are in the record.
      */
-    public double[] getMValues() {
+    public double[] getMValues()
+    {
         return this.mValues;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public double[] getBoundingRectangle() {
+    public double[] getBoundingRectangle()
+    {
         return this.boundingRectangle != null ? this.boundingRectangle : null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected void doReadFromBuffer(Shapefile shapefile, ByteBuffer buffer) {
+    protected void doReadFromBuffer(Shapefile shapefile, ByteBuffer buffer)
+    {
         // Read the bounding rectangle.
         Shapefile.BoundingRectangle rect = shapefile.readBoundingRectangle(buffer);
         this.boundingRectangle = rect.coords;
 
         // Specify that the record's points should be normalized if the bounding rectangle is normalized. Ignore the
         // shapefile's normalizePoints property to avoid normalizing records that don't need it.
-        if (rect.isNormalized) {
+        if (rect.isNormalized)
             this.setNormalizePoints(true);
-        }
 
         // Read the number of parts and the number of points.
         this.numberOfParts = buffer.getInt();
         this.numberOfPoints = buffer.getInt();
         this.firstPartNumber = -1;
 
-        if (this.numberOfParts > 0 && this.numberOfPoints > 0) {
+        if (this.numberOfParts > 0 && this.numberOfPoints > 0)
+        {
             // Read the part positions.
             int[] partPositions = ShapefileUtils.readIntArray(buffer, this.numberOfParts);
 
-            for (int i = 0; i < this.numberOfParts; i++) {
+            for (int i = 0; i < this.numberOfParts; i++)
+            {
                 int length = (i == this.numberOfParts - 1) ? this.numberOfPoints - partPositions[i]
-                        : partPositions[i + 1] - partPositions[i];
+                    : partPositions[i + 1] - partPositions[i];
 
                 // Add the record's points to the Shapefile's point buffer, and record this record's part offset in the
                 // Shapefile's point buffer.
                 int offset = shapefile.addPoints(this, buffer, length);
 
-                if (this.firstPartNumber < 0) {
+                if (this.firstPartNumber < 0)
                     this.firstPartNumber = offset;
-                }
             }
         }
 
         // Read the optional Z value.
-        if (this.isZType()) {
+        if (this.isZType())
             this.readZ(buffer);
-        }
 
         // Read the optional measure value.
-        if (this.isMeasureType()) {
+        if (this.isMeasureType())
             this.readOptionalMeasures(buffer);
-        }
     }
 
     /**
@@ -158,7 +157,8 @@ public class ShapefileRecordPolyline extends ShapefileRecord {
      *
      * @param buffer the record buffer to read from.
      */
-    protected void readZ(ByteBuffer buffer) {
+    protected void readZ(ByteBuffer buffer)
+    {
         this.zRange = ShapefileUtils.readDoubleArray(buffer, 2);
         this.zValues = ShapefileUtils.readDoubleArray(buffer, this.getNumberOfPoints());
     }
@@ -168,9 +168,11 @@ public class ShapefileRecordPolyline extends ShapefileRecord {
      *
      * @param buffer the record buffer to read from.
      */
-    protected void readOptionalMeasures(ByteBuffer buffer) {
+    protected void readOptionalMeasures(ByteBuffer buffer)
+    {
         // Measure values are optional.
-        if (buffer.hasRemaining() && (buffer.limit() - buffer.position()) >= (this.getNumberOfPoints() * 8)) {
+        if (buffer.hasRemaining() && (buffer.limit() - buffer.position()) >= (this.getNumberOfPoints() * 8))
+        {
             this.mRange = ShapefileUtils.readDoubleArray(buffer, 2);
             this.mValues = ShapefileUtils.readDoubleArray(buffer, this.getNumberOfPoints());
         }
@@ -181,12 +183,15 @@ public class ShapefileRecordPolyline extends ShapefileRecord {
      *
      * @param xmlWriter XML writer to receive the generated KML.
      *
-     * @throws javax.xml.stream.XMLStreamException If an exception occurs while writing the KML
+     * @throws javax.xml.stream.XMLStreamException
+     *                             If an exception occurs while writing the KML
      * @throws java.io.IOException If an exception occurs while exporting the data.
      */
     @Override
-    public void exportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
-        for (int i = 0; i < this.getNumberOfParts(); i++) {
+    public void exportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
+    {
+        for (int i = 0; i < this.getNumberOfParts(); i++)
+        {
             xmlWriter.writeStartElement("Placemark");
             xmlWriter.writeStartElement("name");
             xmlWriter.writeCharacters(Integer.toString(this.getRecordNumber()));
@@ -207,16 +212,16 @@ public class ShapefileRecordPolyline extends ShapefileRecord {
 
             int index = 0;
             VecBuffer pointBuffer = this.getPointBuffer(i);
-            for (LatLon latLon : pointBuffer.getLocations()) {
+            for (LatLon latLon : pointBuffer.getLocations())
+            {
                 double z = 0.0;
-                if (zValues != null && index < zValues.length) {
+                if (zValues != null && index < zValues.length)
                     z = zValues[index];
-                }
 
                 xmlWriter.writeCharacters(String.format(Locale.US, "%f,%f,%f ",
-                        latLon.getLongitude().getDegrees(),
-                        latLon.getLatitude().getDegrees(),
-                        z));
+                    latLon.getLongitude().getDegrees(),
+                    latLon.getLatitude().getDegrees(),
+                    z));
 
                 index++;
             }

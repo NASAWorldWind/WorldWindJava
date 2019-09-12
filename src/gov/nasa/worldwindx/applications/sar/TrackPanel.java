@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.sar;
 
 import gov.nasa.worldwind.util.*;
@@ -16,11 +17,11 @@ import java.awt.event.*;
  * @author tag
  * @version $Id: TrackPanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class TrackPanel extends JPanel {
-
+public class TrackPanel extends JPanel
+{
     private String elevationUnit;
     private String angleFormat;
-
+    
     private JCheckBox visibilityFlag;
     private JScrollPane scrollPane;
     private PositionTable positionTable;
@@ -29,7 +30,8 @@ public class TrackPanel extends JPanel {
     private JSpinner offsetSpinner;
     private JLabel offsetUnitLabel;
 
-    public TrackPanel() {
+    public TrackPanel()
+    {
         this.initComponents();
         this.layoutComponents();
 
@@ -37,19 +39,23 @@ public class TrackPanel extends JPanel {
         this.positionTable.addMouseListener(new PositionsContextMenu(this.positionTable));
     }
 
-    public void setTrack(SARTrack sarTrack) {
+    public void setTrack(SARTrack sarTrack)
+    {
         this.positionTable.setSarTrack(sarTrack);
     }
 
-    public SARTrack getTrack() {
+    public SARTrack getTrack()
+    {
         return this.positionTable.getSarTrack();
     }
 
-    public String getElevationUnit() {
+    public String getElevationUnit()
+    {
         return this.elevationUnit;
     }
 
-    public void setElevationUnit(String unit) {
+    public void setElevationUnit(String unit)
+    {
         String oldValue = this.elevationUnit;
         this.elevationUnit = unit;
 
@@ -58,89 +64,100 @@ public class TrackPanel extends JPanel {
         this.changeOffsetUnit(oldValue, this.elevationUnit);
     }
 
-    public String getAngleFormat() {
+    public String getAngleFormat()
+    {
         return this.angleFormat;
     }
 
-    public void setAngleFormat(String format) {
+    public void setAngleFormat(String format)
+    {
         this.angleFormat = format;
         this.positionTable.setAngleFormat(format);
         this.positionTable.updateTableData();
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    private void visibilityActionPerformed(ActionEvent e) {
+    private void visibilityActionPerformed(ActionEvent e)
+    {
         String vis = this.visibilityFlag.isSelected() ? TrackController.TRACK_ENABLE : TrackController.TRACK_DISABLE;
         this.positionTable.getSarTrack().firePropertyChange(vis, null, this.positionTable.getSarTrack());
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    private void nextTrackPositionActionPerformed(ActionEvent e) {
-        this.positionTable.getSarTrack().firePropertyChange(TrackController.MOVE_TO_NEXT_POINT, null,
-                this.positionTable.getSarTrack());
+    private void nextTrackPositionActionPerformed(ActionEvent e)
+    {
+        this.positionTable.getSarTrack().firePropertyChange(TrackController.MOVE_TO_NEXT_POINT, null, 
+            this.positionTable.getSarTrack());
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    private void removeTrackPositionActionPerformed(ActionEvent e) {
+    private void removeTrackPositionActionPerformed(ActionEvent e)
+    {
         this.positionTable.getSarTrack().firePropertyChange(TrackController.REMOVE_LAST_POINT, null,
-                this.positionTable.getSarTrack());
+            this.positionTable.getSarTrack());
     }
 
     // Track offset control
+
     @SuppressWarnings({"UnusedDeclaration"})
-    private void offsetSpinnerStateChanged(ChangeEvent e) {
+    private void offsetSpinnerStateChanged(ChangeEvent e)
+    {
         applyTrackOffset(parseOffsetInput());
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    private void offsetToggleCheckBoxItemStateChanged(ItemEvent e) {
+    private void offsetToggleCheckBoxItemStateChanged(ItemEvent e)
+    {
         this.offsetSpinner.setEnabled(this.offsetToggleCheckBox.isSelected());
         double offset = this.offsetToggleCheckBox.isSelected() ? parseOffsetInput() : 0d;
         applyTrackOffset(offset);
     }
 
-    private double parseOffsetInput() {
-        return ((SpinnerNumberModel) this.offsetSpinner.getModel()).getNumber().doubleValue();
+    private double parseOffsetInput()
+    {
+        return ((SpinnerNumberModel)this.offsetSpinner.getModel()).getNumber().doubleValue();
     }
 
-    private void applyTrackOffset(double offset) {
+    private void applyTrackOffset(double offset)
+    {
         // The actual track offset will always be in meters. If the
         // user is working in imperial units, convert the slider
         // value to meters before passing it to SarTrack.
         double trackOffset;
-        if (SAR2.UNIT_IMPERIAL.equals(this.elevationUnit)) {
+        if (SAR2.UNIT_IMPERIAL.equals(this.elevationUnit))
             trackOffset = SAR2.feetToMeters(offset);
-        } else // Default to metric units.
-        {
+        else // Default to metric units.
             trackOffset = offset;
-        }
 
         this.positionTable.getSarTrack().setOffset(trackOffset);
         this.positionTable.getSarTrack().firePropertyChange(TrackController.TRACK_MODIFY, null,
-                this.positionTable.getSarTrack());
+            this.positionTable.getSarTrack());
     }
 
-    private void changeOffsetUnit(String oldUnit, String newUnit) {
-        if (newUnit.equals(oldUnit)) {
+    private void changeOffsetUnit(String oldUnit, String newUnit)
+    {
+        if (newUnit.equals(oldUnit))
             return;
-        }
 
         double offset = parseOffsetInput();
         SpinnerNumberModel sm;
-        if (SAR2.UNIT_IMPERIAL.equals(newUnit)) {
+        if (SAR2.UNIT_IMPERIAL.equals(newUnit))
+        {
             offset = SAR2.metersToFeet(offset);
             this.offsetUnitLabel.setText("ft");
-            sm = new SpinnerNumberModel((int) offset, -100000, 100000, 100);
-        } else // SAR2.UNIT_METRIC
+            sm = new SpinnerNumberModel((int)offset, -100000, 100000, 100);
+        }
+        else // SAR2.UNIT_METRIC
         {
             offset = SAR2.feetToMeters(offset);
             this.offsetUnitLabel.setText("m");
-            sm = new SpinnerNumberModel((int) offset, -100000, 100000, 100);
+            sm = new SpinnerNumberModel((int)offset, -100000, 100000, 100);
         }
         this.offsetSpinner.setModel(sm);
     }
 
-    private void initComponents() {
+    private void initComponents()
+    {
         this.setToolTipText("Track Positions");
 
         this.visibilityFlag = new JCheckBox();
@@ -151,7 +168,8 @@ public class TrackPanel extends JPanel {
         this.offsetUnitLabel = new JLabel();
     }
 
-    protected void layoutComponents() {
+    protected void layoutComponents()
+    {
         setLayout(new BorderLayout(0, 0)); // hgap, vgap
         this.setOpaque(false);
 
@@ -167,8 +185,10 @@ public class TrackPanel extends JPanel {
             this.visibilityFlag.setSelected(true);
             this.visibilityFlag.setOpaque(false);
             this.visibilityFlag.setToolTipText("Display track on the globe");
-            this.visibilityFlag.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+            this.visibilityFlag.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
                     visibilityActionPerformed(e);
                 }
             });
@@ -180,8 +200,10 @@ public class TrackPanel extends JPanel {
             this.offsetToggleCheckBox.setSelected(true);
             this.offsetToggleCheckBox.setOpaque(false);
             this.offsetToggleCheckBox.setToolTipText("Visually offset track altitude on the globe");
-            this.offsetToggleCheckBox.addItemListener(new ItemListener() {
-                public void itemStateChanged(ItemEvent e) {
+            this.offsetToggleCheckBox.addItemListener(new ItemListener()
+            {
+                public void itemStateChanged(ItemEvent e)
+                {
                     offsetToggleCheckBoxItemStateChanged(e);
                 }
             });
@@ -190,8 +212,10 @@ public class TrackPanel extends JPanel {
 
             SpinnerModel sm = new SpinnerNumberModel(0, -100000, 100000, 100);
             this.offsetSpinner.setModel(sm);
-            this.offsetSpinner.addChangeListener(new ChangeListener() {
-                public void stateChanged(ChangeEvent e) {
+            this.offsetSpinner.addChangeListener(new ChangeListener()
+            {
+                public void stateChanged(ChangeEvent e)
+                {
                     offsetSpinnerStateChanged(e);
                 }
             });
@@ -216,24 +240,31 @@ public class TrackPanel extends JPanel {
     }
 
     // *** Restorable interface ***
-    public String getRestorableState() {
+
+    public String getRestorableState()
+    {
         RestorableSupport rs = RestorableSupport.newRestorableSupport();
         this.doGetRestorableState(rs, null);
 
         return rs.getStateAsXml();
     }
 
-    public void restoreState(String stateInXml) {
-        if (stateInXml == null) {
+    public void restoreState(String stateInXml)
+    {
+        if (stateInXml == null)
+        {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         RestorableSupport rs;
-        try {
+        try
+        {
             rs = RestorableSupport.parse(stateInXml);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // Parsing the document specified by stateInXml failed.
             String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
             Logging.logger().severe(message);
@@ -243,29 +274,29 @@ public class TrackPanel extends JPanel {
         this.doRestoreState(rs, null);
     }
 
-    protected void doGetRestorableState(RestorableSupport rs, RestorableSupport.StateObject context) {
+    protected void doGetRestorableState(RestorableSupport rs, RestorableSupport.StateObject context)
+    {
         // Add state values
         rs.addStateValueAsBoolean(context, "offsetEnabled", this.offsetToggleCheckBox.isSelected());
 
         double value = parseOffsetInput();
-        if (this.elevationUnit.equals(SAR2.UNIT_IMPERIAL)) {
+        if (this.elevationUnit.equals(SAR2.UNIT_IMPERIAL))
             value = SAR2.feetToMeters(value); // convert to meter if needed
-        }
         rs.addStateValueAsDouble(context, "offsetValue", value);
     }
 
-    protected void doRestoreState(RestorableSupport rs, RestorableSupport.StateObject context) {
+    protected void doRestoreState(RestorableSupport rs, RestorableSupport.StateObject context)
+    {
         // Retrieve state values
         Boolean offsetEnabledState = rs.getStateValueAsBoolean(context, "offsetEnabled");
-        if (offsetEnabledState != null) {
+        if (offsetEnabledState != null)
             this.offsetToggleCheckBox.setSelected(offsetEnabledState);
-        }
 
         Double valueState = rs.getStateValueAsDouble(context, "offsetValue");
-        if (valueState != null) {
-            if (this.elevationUnit.equals(SAR2.UNIT_IMPERIAL)) {
+        if (valueState != null)
+        {
+            if (this.elevationUnit.equals(SAR2.UNIT_IMPERIAL))
                 valueState = SAR2.metersToFeet(valueState); // convert to feet if needed
-            }
             this.offsetSpinner.setValue(valueState);
         }
     }

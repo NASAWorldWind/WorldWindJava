@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.worldwindow.features;
 
 import gov.nasa.worldwind.util.WWUtil;
@@ -19,34 +20,37 @@ import java.net.URISyntaxException;
  * @author tag
  * @version $Id: WMSDialog.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class WMSDialog extends AbstractFeatureDialog {
-
+public class WMSDialog extends AbstractFeatureDialog
+{
     protected static final String FEATURE_TITLE = "WMS Servers...";
     protected static final String ICON_PATH = "gov/nasa/worldwindx/applications/worldwindow/images/wms-64x64.png";
 
     protected JTabbedPane tabbedPane = new JTabbedPane();
 
-    public WMSDialog(Registry registry) {
+    public WMSDialog(Registry registry)
+    {
         super(FEATURE_TITLE, Constants.FEATURE_WMS_DIALOG, ICON_PATH, registry);
     }
 
     @Override
-    public boolean isTwoState() {
+    public boolean isTwoState()
+    {
         return true;
     }
 
     @Override
-    public boolean isOn() {
+    public boolean isOn()
+    {
         return this.dialog != null && this.dialog.isVisible();
     }
 
-    public void initialize(final Controller controller) {
+    public void initialize(final Controller controller)
+    {
         super.initialize(controller);
 
         WWMenu fileMenu = (WWMenu) this.getController().getRegisteredObject(Constants.FILE_MENU);
-        if (fileMenu != null) {
+        if (fileMenu != null)
             fileMenu.addMenu(this.getFeatureID());
-        }
 
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setOpaque(false);
@@ -55,9 +59,12 @@ public class WMSDialog extends AbstractFeatureDialog {
         this.tabbedPane.setTitleAt(0, "+"); // this tab is just a button for adding servers/panels
         this.tabbedPane.setToolTipTextAt(0, "Connect to WMS Server");
 
-        this.tabbedPane.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent changeEvent) {
-                if (tabbedPane.getSelectedIndex() == 0) {
+        this.tabbedPane.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(ChangeEvent changeEvent)
+            {
+                if (tabbedPane.getSelectedIndex() == 0)
+                {
                     addNewPanel(tabbedPane); // Add new panel when '+' is selected
                 }
             }
@@ -72,13 +79,15 @@ public class WMSDialog extends AbstractFeatureDialog {
         this.getJDialog().setResizable(true);
 
         JButton deleteButton = new JButton(
-                ImageLibrary.getIcon("gov/nasa/worldwindx/applications/worldwindow/images/delete-20x20.png"));
+            ImageLibrary.getIcon("gov/nasa/worldwindx/applications/worldwindow/images/delete-20x20.png"));
         deleteButton.setToolTipText("Remove Server");
         deleteButton.setOpaque(false);
         deleteButton.setBackground(new Color(0, 0, 0, 0));
         deleteButton.setBorderPainted(false);
-        deleteButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        deleteButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
                 deleteCurrentPanel();
             }
         });
@@ -113,27 +122,25 @@ public class WMSDialog extends AbstractFeatureDialog {
 //            wmsPanel.cancel();
 //    }
 
-    protected void deleteCurrentPanel() {
+    protected void deleteCurrentPanel()
+    {
         JComponent tabPane = (JComponent) tabbedPane.getSelectedComponent();
-        if (tabPane == null) {
+        if (tabPane == null)
             return;
-        }
 
         WMSPanel wmsPanel = (WMSPanel) tabPane.getClientProperty(Constants.FEATURE_OWNER_PROPERTY);
 
         if (tabbedPane.getTabCount() > 2) // actually remove the tab only if there is more than one (plus the "+" tab)
-        {
             tabbedPane.remove(tabPane);
-        } else {
+        else
             tabbedPane.setTitleAt(1, "New Server");
-        }
 
-        if (wmsPanel != null) {
+        if (wmsPanel != null)
             wmsPanel.clearPanel();
-        }
     }
 
-    protected WMSPanel addNewPanel(final JTabbedPane tabPane) {
+    protected WMSPanel addNewPanel(final JTabbedPane tabPane)
+    {
         final WMSPanel wmsPanel = new WMSPanel(null); // the null indicates not to register the panel
         wmsPanel.initialize(this.controller);
         wmsPanel.getJPanel().putClientProperty("WMS_PANEL", wmsPanel);
@@ -143,14 +150,16 @@ public class WMSDialog extends AbstractFeatureDialog {
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
         tabPane.setToolTipTextAt(tabbedPane.getSelectedIndex(), "Server WMS Contents");
 
-        wmsPanel.addPropertyChangeListener(new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (evt.getPropertyName().equals("NewServer")) {
+        wmsPanel.addPropertyChangeListener(new PropertyChangeListener()
+        {
+            public void propertyChange(PropertyChangeEvent evt)
+            {
+                if (evt.getPropertyName().equals("NewServer"))
+                {
                     String serverLocation = (String) evt.getNewValue();
 
-                    if (WWUtil.isEmpty(serverLocation)) {
+                    if (WWUtil.isEmpty(serverLocation))
                         return;
-                    }
 //
 //                    // Check to see if it's already open.
 //                    for (int i = 0; i < tabbedPane.getTabCount(); i++)
@@ -167,10 +176,13 @@ public class WMSDialog extends AbstractFeatureDialog {
 //                        }
 //                    }
 
-                    try {
+                    try
+                    {
 
                         addNewPanel(tabPane).contactWMSServer(serverLocation);
-                    } catch (URISyntaxException e) {
+                    }
+                    catch (URISyntaxException e)
+                    {
                         e.printStackTrace(); // TODO
                     }
                 }

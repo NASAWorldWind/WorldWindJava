@@ -18,23 +18,25 @@ import com.jogamp.opengl.GL2;
  * @author dcollins
  * @version $Id: VecBufferSequence.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class VecBufferSequence extends CompoundVecBuffer {
-
+public class VecBufferSequence extends CompoundVecBuffer
+{
     protected int vecCount;
     protected VecBuffer buffer;
 
     /**
      * Constructs a PackedCompoundVecBuffer with the specified backing VecBuffer and the specified initial capacity.
      *
-     * @param buffer the backing VecBuffer.
+     * @param buffer   the backing VecBuffer.
      * @param capacity the PackedCompoundVecBuffer's initial capacity, in number of sub-buffers.
      *
      * @throws IllegalArgumentException if the buffer is null, or if the capacity is less than 1.
      */
-    public VecBufferSequence(VecBuffer buffer, int capacity) {
+    public VecBufferSequence(VecBuffer buffer, int capacity)
+    {
         super(capacity);
 
-        if (buffer == null) {
+        if (buffer == null)
+        {
             String message = Logging.getMessage("nullValue.BufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -50,18 +52,21 @@ public class VecBufferSequence extends CompoundVecBuffer {
      *
      * @throws IllegalArgumentException if the buffer is null.
      */
-    public VecBufferSequence(VecBuffer buffer) {
+    public VecBufferSequence(VecBuffer buffer)
+    {
         this(buffer, DEFAULT_INITIAL_CAPACITY);
     }
 
-    protected VecBufferSequence(VecBufferSequence that, int beginIndex, int endIndex) {
+    protected VecBufferSequence(VecBufferSequence that, int beginIndex, int endIndex)
+    {
         super(that, beginIndex, endIndex);
 
         this.vecCount = that.vecCount;
         this.buffer = that.buffer;
     }
 
-    protected VecBufferSequence(VecBufferSequence that, int[] indices, int offset, int length) {
+    protected VecBufferSequence(VecBufferSequence that, int[] indices, int offset, int length)
+    {
         super(that, indices, offset, length);
 
         this.vecCount = that.vecCount;
@@ -76,8 +81,10 @@ public class VecBufferSequence extends CompoundVecBuffer {
      *
      * @return the empty VecBufferSequence.
      */
-    public static VecBufferSequence emptyVecBufferSequence(int coordsPerVec) {
-        if (coordsPerVec < 1) {
+    public static VecBufferSequence emptyVecBufferSequence(int coordsPerVec)
+    {
+        if (coordsPerVec < 1)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", coordsPerVec);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -86,11 +93,11 @@ public class VecBufferSequence extends CompoundVecBuffer {
         return new VecBufferSequence(VecBuffer.emptyVecBuffer(coordsPerVec));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public int subBufferSize(int index) {
-        if (index < 0 || index >= this.count) {
+    /** {@inheritDoc} */
+    public int subBufferSize(int index)
+    {
+        if (index < 0 || index >= this.count)
+        {
             String message = Logging.getMessage("generic.indexOutOfRange", index);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -99,18 +106,16 @@ public class VecBufferSequence extends CompoundVecBuffer {
         return this.lengths.get(index);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void clear() {
+    /** {@inheritDoc} */
+    public void clear()
+    {
         super.clear();
         this.vecCount = 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public int getCoordsPerVec() {
+    /** {@inheritDoc} */
+    public int getCoordsPerVec()
+    {
         return this.buffer.getCoordsPerVec();
     }
 
@@ -119,7 +124,8 @@ public class VecBufferSequence extends CompoundVecBuffer {
      *
      * @return this PackedCompoundVecBuffer's backing VecBuffer.
      */
-    public VecBuffer getVecBuffer() {
+    public VecBuffer getVecBuffer()
+    {
         return this.buffer;
     }
 
@@ -134,17 +140,18 @@ public class VecBufferSequence extends CompoundVecBuffer {
      *
      * @throws IllegalArgumentException if the subBuffer is null.
      */
-    public int append(VecBuffer buffer) {
-        if (buffer == null) {
+    public int append(VecBuffer buffer)
+    {
+        if (buffer == null)
+        {
             String message = Logging.getMessage("nullValue.BufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         int minVecCount = buffer.getSize() + this.vecCount;
-        if (minVecCount > this.buffer.getSize()) {
+        if (minVecCount > this.buffer.getSize())
             this.expandBufferCapacity(minVecCount);
-        }
 
         int newBufferPos = this.vecCount;
         this.buffer.putSubBuffer(newBufferPos, buffer);
@@ -156,27 +163,35 @@ public class VecBufferSequence extends CompoundVecBuffer {
     //**************************************************************//
     //********************  Protected Interface  *******************//
     //**************************************************************//
-    protected VecBuffer createSubBuffer(int offset, int length) {
+
+    protected VecBuffer createSubBuffer(int offset, int length)
+    {
         return this.buffer.getSubBuffer(offset, length);
     }
 
-    protected CompoundVecBuffer createSlice(int[] indices, int offset, int length) {
+    protected CompoundVecBuffer createSlice(int[] indices, int offset, int length)
+    {
         return new VecBufferSequence(this, indices, offset, length);
     }
 
-    protected CompoundVecBuffer createSlice(int beginIndex, int endIndex) {
+    protected CompoundVecBuffer createSlice(int beginIndex, int endIndex)
+    {
         return new VecBufferSequence(this, beginIndex, endIndex);
     }
 
-    protected void expandBufferCapacity(int minCapacity) {
+    protected void expandBufferCapacity(int minCapacity)
+    {
         int newCapacity = 2 * this.buffer.getSize();
 
         // If the new capacity overflows the range of 32-bit integers, then use the largest 32-bit integer.
-        if (newCapacity < 0) {
+        if (newCapacity < 0)
+        {
             newCapacity = Integer.MAX_VALUE;
-        } // If the new capacity is still not large enough for the minimum capacity specified, then just use the minimum
+        }
+        // If the new capacity is still not large enough for the minimum capacity specified, then just use the minimum
         // capacity specified.
-        else if (newCapacity < minCapacity) {
+        else if (newCapacity < minCapacity)
+        {
             newCapacity = minCapacity;
         }
 
@@ -186,6 +201,7 @@ public class VecBufferSequence extends CompoundVecBuffer {
     //**************************************************************//
     //********************  OpenGL Vertex Buffer Interface  ********//
     //**************************************************************//
+
     /**
      * Binds this buffer as the source of normal coordinates to use when rendering OpenGL primitives. The normal type is
      * equal to buffer's underlying BufferWrapper GL type, the stride is 0, and the vertex data itself is this buffer's
@@ -194,10 +210,12 @@ public class VecBufferSequence extends CompoundVecBuffer {
      * @param dc the current {@link gov.nasa.worldwind.render.DrawContext}.
      *
      * @throws IllegalArgumentException if the DrawContext is null, or if this buffer is not compatible as a normal
-     * buffer.
+     *                                  buffer.
      */
-    public void bindAsNormalBuffer(DrawContext dc) {
-        if (dc == null) {
+    public void bindAsNormalBuffer(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -214,10 +232,12 @@ public class VecBufferSequence extends CompoundVecBuffer {
      * @param dc the current DrawContext.
      *
      * @throws IllegalArgumentException if the DrawContext is null, or if this buffer is not compatible as a vertex
-     * buffer.
+     *                                  buffer.
      */
-    public void bindAsVertexBuffer(DrawContext dc) {
-        if (dc == null) {
+    public void bindAsVertexBuffer(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -227,7 +247,7 @@ public class VecBufferSequence extends CompoundVecBuffer {
     }
 
     /**
-     * Binds this buffer as the source of texture coordinates to use when rendering OpenGL primitives. The texture
+     * Binds this buffer as the source of texture coordinates to use when rendering OpenGL primitives.  The texture
      * coordinate size is equal to coordsPerVertex, the texture coordinate type is equal to buffer's underlying
      * BufferWrapper GL type, the stride is 0, and the texture coordinate data itself is this buffer's backing NIO
      * Buffer. This buffer's vector size must be 1, 2, 3, or 4.
@@ -235,10 +255,12 @@ public class VecBufferSequence extends CompoundVecBuffer {
      * @param dc the current DrawContext.
      *
      * @throws IllegalArgumentException if the DrawContext is null, or if this buffer is not compatible as a normal
-     * buffer.
+     *                                  buffer.
      */
-    public void bindAsTexCoordBuffer(DrawContext dc) {
-        if (dc == null) {
+    public void bindAsTexCoordBuffer(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -251,13 +273,15 @@ public class VecBufferSequence extends CompoundVecBuffer {
      * Renders <code>getTotalBufferSize()</code> elements from the currently bounds OpenGL coordinate buffers, beginning
      * with element 0. The specified drawMode indicates which type of OpenGL primitives to render.
      *
-     * @param dc the current DrawContext.
+     * @param dc       the current DrawContext.
      * @param drawMode the type of OpenGL primtives to render.
      *
      * @throws IllegalArgumentException if the DrawContext is null.
      */
-    public void drawArrays(DrawContext dc, int drawMode) {
-        if (dc == null) {
+    public void drawArrays(DrawContext dc, int drawMode)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -271,13 +295,15 @@ public class VecBufferSequence extends CompoundVecBuffer {
      * #drawArrays(gov.nasa.worldwind.render.DrawContext, int)}, except that each sub-buffer is rendered independently.
      * The specified drawMode indicates which type of OpenGL primitives to render.
      *
-     * @param dc the current DrawContext.
+     * @param dc       the current DrawContext.
      * @param drawMode the type of OpenGL primtives to render.
      *
      * @throws IllegalArgumentException if the DrawContext is null.
      */
-    public void multiDrawArrays(DrawContext dc, int drawMode) {
-        if (dc == null) {
+    public void multiDrawArrays(DrawContext dc, int drawMode)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -285,16 +311,21 @@ public class VecBufferSequence extends CompoundVecBuffer {
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        if (this.haveMultiDrawArrays(dc)) {
+        if (this.haveMultiDrawArrays(dc))
+        {
             gl.glMultiDrawArrays(drawMode, this.offsets, this.lengths, this.count);
-        } else {
-            for (int i = 0; i < this.count; i++) {
+        }
+        else
+        {
+            for (int i = 0; i < this.count; i++)
+            {
                 gl.glDrawArrays(drawMode, this.offsets.get(i), this.lengths.get(i));
             }
         }
     }
 
-    protected boolean haveMultiDrawArrays(DrawContext dc) {
+    protected boolean haveMultiDrawArrays(DrawContext dc)
+    {
         return dc.getGL().isFunctionAvailable("glMultiDrawArrays");
     }
 }

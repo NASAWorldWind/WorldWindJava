@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology;
 
 /**
@@ -13,8 +14,8 @@ package gov.nasa.worldwind.symbology;
  * @version $Id: TacticalQuad.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see TacticalGraphicFactory#createQuad(String, Iterable, gov.nasa.worldwind.avlist.AVList)
  */
-public interface TacticalQuad extends TacticalGraphic {
-
+public interface TacticalQuad extends TacticalGraphic
+{
     /**
      * Indicates the width of the quad.
      *

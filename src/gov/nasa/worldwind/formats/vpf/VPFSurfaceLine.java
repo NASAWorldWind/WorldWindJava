@@ -19,12 +19,12 @@ import java.util.*;
  */
 public class VPFSurfaceLine extends SurfacePolyline // TODO: consolidate with SurfacePolylines
 {
-
     protected Sector sector;
     protected VecBufferSequence buffer;
     protected LatLon referenceLocation;
 
-    public VPFSurfaceLine(VPFFeature feature, VPFPrimitiveData primitiveData) {
+    public VPFSurfaceLine(VPFFeature feature, VPFPrimitiveData primitiveData)
+    {
         String primitiveName = feature.getFeatureClass().getPrimitiveTableName();
         int[] primitiveIds = feature.getPrimitiveIds();
 
@@ -33,29 +33,33 @@ public class VPFSurfaceLine extends SurfacePolyline // TODO: consolidate with Su
         this.referenceLocation = feature.getBounds().toSector().getCentroid();
     }
 
-    protected List<Sector> computeSectors(Globe globe) {
-        if (this.sector == null || this.sector.equals(Sector.EMPTY_SECTOR)) {
+    protected List<Sector> computeSectors(Globe globe)
+    {
+        if (this.sector == null || this.sector.equals(Sector.EMPTY_SECTOR))
             return null;
-        }
 
         return Arrays.asList(this.sector);
     }
 
-    public Iterable<? extends LatLon> getLocations() {
+    public Iterable<? extends LatLon> getLocations()
+    {
         return this.buffer.getLocations();
     }
 
-    public void setLocations(Iterable<? extends LatLon> iterable) {
+    public void setLocations(Iterable<? extends LatLon> iterable)
+    {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Position getReferencePosition() {
+    public Position getReferencePosition()
+    {
         return new Position(this.referenceLocation, 0d);
     }
 
     @Override
-    protected void applyModelviewTransform(DrawContext dc, SurfaceTileDrawContext sdc) {
+    protected void applyModelviewTransform(DrawContext dc, SurfaceTileDrawContext sdc)
+    {
         // Apply the geographic to surface tile coordinate transform.
         Matrix modelview = sdc.getModelviewMatrix();
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -63,15 +67,18 @@ public class VPFSurfaceLine extends SurfacePolyline // TODO: consolidate with Su
     }
 
     @Override
-    protected ShapeAttributes createActiveAttributes() {
+    protected ShapeAttributes createActiveAttributes()
+    {
         return new VPFSymbolAttributes();
     }
 
-    protected void determineActiveGeometry(DrawContext dc, SurfaceTileDrawContext sdc) {
+    protected void determineActiveGeometry(DrawContext dc, SurfaceTileDrawContext sdc)
+    {
         // Intentionally left blank in order to override the superclass behavior with nothing.
     }
 
-    protected void drawOutline(DrawContext dc, SurfaceTileDrawContext sdc) {
+    protected void drawOutline(DrawContext dc, SurfaceTileDrawContext sdc)
+    {
         this.applyOutlineState(dc, this.getActiveAttributes());
 
         int drawMode = (this.isClosed() ? GL.GL_LINE_LOOP : GL.GL_LINE_STRIP);

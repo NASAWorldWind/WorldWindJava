@@ -11,8 +11,8 @@ import java.nio.ByteBuffer;
  * @author dcollins
  * @version $Id: VPFDataBuffer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface VPFDataBuffer {
-
+public interface VPFDataBuffer
+{
     Object get(int index);
 
     Object getBackingData();

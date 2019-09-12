@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 /**
@@ -11,8 +12,8 @@ package gov.nasa.worldwind.render;
  * @author tag
  * @version $Id: Attributable.java 2339 2014-09-22 18:22:37Z tgaskins $
  */
-public interface Attributable {
-
+public interface Attributable
+{
     /**
      * Set the shape's attributes.
      *

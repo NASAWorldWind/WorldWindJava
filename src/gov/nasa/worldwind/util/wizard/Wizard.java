@@ -20,8 +20,8 @@ import java.beans.PropertyChangeEvent;
  * @author dcollins
  * @version $Id: Wizard.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Wizard {
-
+public class Wizard
+{
     // Logical Wizard components.
     private WizardModel model;
     private WizardController controller;
@@ -50,18 +50,21 @@ public class Wizard {
 
     public static final FinishIdentifier FINISH = new FinishIdentifier();
 
-    static class FinishIdentifier {
-
+    static class FinishIdentifier
+    {
         public static final String IDENTIFIER = "wizard.FinishIdentifier";
     }
-
-    public Wizard() {
+    
+    public Wizard()
+    {
         this.dialog = new JDialog();
         init();
     }
 
-    public Wizard(Dialog owner) {
-        if (owner == null) {
+    public Wizard(Dialog owner)
+    {
+        if (owner == null)
+        {
             String message = "Dialog is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -71,8 +74,10 @@ public class Wizard {
         init();
     }
 
-    public Wizard(Frame owner) {
-        if (owner == null) {
+    public Wizard(Frame owner)
+    {
+        if (owner == null)
+        {
             String message = "Frame is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -82,17 +87,21 @@ public class Wizard {
         init();
     }
 
-    public WizardPanelDescriptor getWizardPanel(Object id) {
+    public WizardPanelDescriptor getWizardPanel(Object id)
+    {
         return this.model.getWizardPanel(id);
     }
 
-    public void registerWizardPanel(Object id, WizardPanelDescriptor panel) {
-        if (id == null) {
+    public void registerWizardPanel(Object id, WizardPanelDescriptor panel)
+    {
+        if (id == null)
+        {
             String message = Logging.getMessage("nullValue.ObjectIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (panel == null || panel.getPanelComponent() == null) {
+        if (panel == null || panel.getPanelComponent() == null)
+        {
             String message = "Panel or PanelComponent is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -103,71 +112,81 @@ public class Wizard {
         this.model.registerWizardPanel(id, panel);
     }
 
-    public WizardPanelDescriptor getCurrentPanel() {
+    public WizardPanelDescriptor getCurrentPanel()
+    {
         return this.model.getCurrentPanel();
     }
 
-    public void setCurrentPanelDescriptor(Object id) {
-        if (id == null) {
+    public void setCurrentPanelDescriptor(Object id)
+    {
+        if (id == null)
+        {
             close(ERROR_RETURN_CODE);
             return;
         }
 
         WizardPanelDescriptor oldPanel = this.model.getCurrentPanel();
-        if (oldPanel != null) {
+        if (oldPanel != null)
             oldPanel.aboutToHidePanel();
-        }
 
-        if (!this.model.setCurrentPanel(id)) {
+        if (!this.model.setCurrentPanel(id))
+        {
             return;
         }
 
         WizardPanelDescriptor newPanel = this.model.getCurrentPanel();
 
-        if (newPanel != null) {
+        if (newPanel != null)
             newPanel.aboutToDisplayPanel();
-        }
 
         this.cardLayout.show(this.cardPanel, id.toString());
 
-        if (newPanel != null) {
+        if (newPanel != null)
             newPanel.displayingPanel();
-        }
     }
 
-    public WizardModel getModel() {
+    public WizardModel getModel()
+    {
         return this.model;
     }
 
-    public int getReturnCode() {
+    public int getReturnCode()
+    {
         return this.returnCode;
     }
 
-    public Window getOwner() {
+    public Window getOwner()
+    {
         return this.dialog.getOwner();
     }
 
-    public JDialog getDialog() {
+    public JDialog getDialog()
+    {
         return this.dialog;
     }
 
-    public boolean isModal() {
+    public boolean isModal()
+    {
         return this.dialog.isModal();
     }
 
-    public void setModal(boolean b) {
+    public void setModal(boolean b)
+    {
         this.dialog.setModal(b);
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return this.dialog.getTitle();
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.dialog.setTitle(title);
     }
 
-    public int showModalDialog() {
+    public int showModalDialog()
+    {
         this.dialog.setModal(true);
         this.dialog.pack();
         this.dialog.setVisible(true);
@@ -175,57 +194,67 @@ public class Wizard {
         return this.returnCode;
     }
 
-    void close(int code) {
+    void close(int code)
+    {
         this.returnCode = code;
 
         WizardPanelDescriptor panel = this.model.getCurrentPanel();
-        if (panel != null) {
+        if (panel != null)
             panel.aboutToHidePanel();
-        }
 
         this.dialog.dispose();
     }
 
-    public boolean isBackButtonEnabled() {
+    public boolean isBackButtonEnabled()
+    {
         Boolean b = this.model.isBackButtonEnabled();
         return b != null ? b : false;
     }
 
-    public void setBackButtonEnabled(boolean b) {
+    public void setBackButtonEnabled(boolean b)
+    {
         this.model.setBackButtonEnabled(b);
     }
 
-    public boolean isNextButtonEnabled() {
+    public boolean isNextButtonEnabled()
+    {
         Boolean b = this.model.isNextButtonEnabled();
         return b != null ? b : false;
     }
 
-    public void setNextButtonEnabled(boolean b) {
+    public void setNextButtonEnabled(boolean b)
+    {
         this.model.setNextButtonEnabled(b);
     }
 
-    public boolean isCancelButtonEnabled() {
+    public boolean isCancelButtonEnabled()
+    {
         Boolean b = this.model.isCancelButtonEnabled();
         return b != null ? b : false;
     }
 
-    public void setCancelButtonEnabled(boolean b) {
+    public void setCancelButtonEnabled(boolean b)
+    {
         this.model.setCancelButtonEnabled(b);
     }
 
-    public void giveFocusToBackButton() {
+    public void giveFocusToBackButton()
+    {
         this.backButton.requestFocusInWindow();
     }
 
-    public void giveFocusToNextButton() {
+    public void giveFocusToNextButton()
+    {
         this.nextButton.requestFocusInWindow();
     }
 
-    public void giveFocusToCancelButton() {
-        this.cancelButton.requestFocusInWindow();
+    public void giveFocusToCancelButton()
+    {
+        this.cancelButton.requestFocusInWindow();        
     }
 
-    private void init() {
+    private void init()
+    {
         // Initialize logical components.
         this.model = new WizardModel();
         this.controller = new WizardController(this);
@@ -243,7 +272,8 @@ public class Wizard {
         this.controller.resetButtonsToPanelRules();
     }
 
-    private void makeComponents() {
+    private void makeComponents()
+    {
         this.cardPanel = new JPanel();
         this.cardLayout = new CardLayout();
 
@@ -259,7 +289,8 @@ public class Wizard {
         this.dialog.getRootPane().setDefaultButton(this.nextButton);
     }
 
-    private void layoutComponents() {
+    private void layoutComponents()
+    {
         this.dialog.getContentPane().setLayout(new BorderLayout());
 
         this.cardPanel.setBorder(new EmptyBorder(5, 10, 5, 10));
@@ -281,26 +312,31 @@ public class Wizard {
         this.dialog.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    private void setButtonText(JButton button, Object value) {
-        if (button != null) {
+    private void setButtonText(JButton button, Object value)
+    {
+        if (button != null)
+        {
             button.setText(value != null ? value.toString() : null);
         }
     }
 
-    private void setButtonEnabled(JButton button, Object value) {
-        if (button != null) {
+    private void setButtonEnabled(JButton button, Object value)
+    {
+        if (button != null)
+        {
             button.setEnabled(value != null && Boolean.parseBoolean(value.toString()));
         }
     }
 
-    private void setButtonIcon(JButton button, Object value) {
-        if (button != null) {
+    private void setButtonIcon(JButton button, Object value)
+    {
+        if (button != null)
+        {
             button.setIcon((value != null && value instanceof Icon) ? (Icon) value : null);
         }
     }
-
+    
     private class PropertyEvents implements PropertyChangeListener {
-
         public void propertyChange(PropertyChangeEvent evt) {
             if (evt != null && evt.getPropertyName() != null) {
                 String propertyName = evt.getPropertyName();
@@ -334,7 +370,6 @@ public class Wizard {
     }
 
     private class WindowEvents extends WindowAdapter {
-
         public void windowClosing(WindowEvent e) {
             // Simulate a button's ActionEvent for window closing.
             if (controller != null) {

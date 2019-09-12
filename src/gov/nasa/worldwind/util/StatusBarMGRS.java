@@ -13,30 +13,38 @@ import gov.nasa.worldwind.geom.coords.MGRSCoord;
  * @author Patrick Murris
  * @version $Id: StatusBarMGRS.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class StatusBarMGRS extends StatusBar {
-
-    public void moved(PositionEvent event) {
+public class StatusBarMGRS extends StatusBar
+{
+    public void moved(PositionEvent event)
+    {
         this.handleCursorPositionChange(event);
     }
 
-    protected void handleCursorPositionChange(PositionEvent event) {
+    protected void handleCursorPositionChange(PositionEvent event)
+    {
         Position newPos = event.getPosition();
-        if (newPos != null) {
+        if (newPos != null)
+        {
             String las = String.format("%7.4f\u00B0 %7.4f\u00B0", newPos.getLatitude().getDegrees(), newPos.getLongitude().getDegrees());
             String els = makeCursorElevationDescription(
-                    getEventSource().getModel().getGlobe().getElevation(newPos.getLatitude(), newPos.getLongitude()));
+                getEventSource().getModel().getGlobe().getElevation(newPos.getLatitude(), newPos.getLongitude()));
             String los = "";
-            try {
+            try
+            {
                 MGRSCoord MGRS = MGRSCoord.fromLatLon(newPos.getLatitude(), newPos.getLongitude(),
                         getEventSource().getModel().getGlobe());
                 los = MGRS.toString();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 los = "";
             }
             latDisplay.setText(las);
             lonDisplay.setText(los);
             eleDisplay.setText(els);
-        } else {
+        }
+        else
+        {
             latDisplay.setText("");
             lonDisplay.setText("Off globe");
             eleDisplay.setText("");

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager;
 
 import gov.nasa.worldwind.layers.Layer;
@@ -12,8 +13,8 @@ import gov.nasa.worldwindx.applications.worldwindow.core.WMSLayerInfo;
  * @author tag
  * @version $Id: LayerNode.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface LayerNode {
-
+public interface LayerNode
+{
     Object getID();
 
     String getTitle();

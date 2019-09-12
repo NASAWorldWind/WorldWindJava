@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.worldwindow.core;
 
 import gov.nasa.worldwind.*;
@@ -21,19 +22,23 @@ import java.awt.*;
  * @author tag
  * @version $Id: WWPanelImpl.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class WWPanelImpl extends AbstractFeature implements WWPanel {
-
+public class WWPanelImpl extends AbstractFeature implements WWPanel
+{
     private JPanel panel;
     private WorldWindowGLCanvas wwd;
 
-    public WWPanelImpl(Registry registry) {
+    public WWPanelImpl(Registry registry)
+    {
         super("WorldWind Panel", Constants.WW_PANEL, registry);
 
         this.panel = new JPanel(new BorderLayout());
         this.wwd = new WorldWindowGLCanvas();
-        this.wwd.addRenderingExceptionListener(new RenderingExceptionListener() {
-            public void exceptionThrown(Throwable t) {
-                if (t instanceof WWAbsentRequirementException) {
+        this.wwd.addRenderingExceptionListener(new RenderingExceptionListener()
+        {
+            public void exceptionThrown(Throwable t)
+            {
+                if (t instanceof WWAbsentRequirementException)
+                {
                     String msg = "This computer is not capable of running ";
                     msg += Configuration.getStringValue(Constants.APPLICATION_DISPLAY_NAME);
                     msg += ".";
@@ -54,38 +59,44 @@ public class WWPanelImpl extends AbstractFeature implements WWPanel {
         this.panel.add(this.wwd, BorderLayout.CENTER);
     }
 
-    public void initialize(Controller controller) {
+    public void initialize(Controller controller)
+    {
         super.initialize(controller);
     }
 
-    public WorldWindow getWWd() {
+    public WorldWindow getWWd()
+    {
         return wwd;
     }
 
-    public JPanel getJPanel() {
+    public JPanel getJPanel()
+    {
         return this.panel;
     }
 
-    public Dimension getSize() {
+    public Dimension getSize()
+    {
         return this.panel.getSize();
     }
 
-    public void addLayer(Layer layer) {
-        if (layer != null) {
+    public void addLayer(Layer layer)
+    {
+        if (layer != null)
             this.wwd.getModel().getLayers().add(layer);
-        }
     }
 
-    public void removeLayer(Layer layer) {
+    public void removeLayer(Layer layer)
+    {
         this.wwd.getModel().getLayers().remove(layer);
     }
 
-    public void insertBeforeNamedLayer(Layer layer, String targetLayerName) {
-        if (layer == null) {
+    public void insertBeforeNamedLayer(Layer layer, String targetLayerName)
+    {
+        if (layer == null)
             return;
-        }
 
-        if (targetLayerName == null) {
+        if (targetLayerName == null)
+        {
             this.wwd.getModel().getLayers().add(layer);
             return;
         }
@@ -93,8 +104,10 @@ public class WWPanelImpl extends AbstractFeature implements WWPanel {
         // Insert the layer into the layer list just before the target layer.
         int targetPosition = 0;
         LayerList layers = this.wwd.getModel().getLayers();
-        for (Layer l : layers) {
-            if (l.getName().indexOf(targetLayerName) != -1) {
+        for (Layer l : layers)
+        {
+            if (l.getName().indexOf(targetLayerName) != -1)
+            {
                 targetPosition = layers.indexOf(l);
                 break;
             }
@@ -102,12 +115,13 @@ public class WWPanelImpl extends AbstractFeature implements WWPanel {
         layers.add(targetPosition, layer);
     }
 
-    public void insertAfterNamedLayer(Layer layer, String targetLayerName) {
-        if (layer == null) {
+    public void insertAfterNamedLayer(Layer layer, String targetLayerName)
+    {
+        if (layer == null)
             return;
-        }
 
-        if (targetLayerName == null) {
+        if (targetLayerName == null)
+        {
             this.wwd.getModel().getLayers().add(layer);
             return;
         }
@@ -115,10 +129,10 @@ public class WWPanelImpl extends AbstractFeature implements WWPanel {
         // Insert the layer into the layer list just after the target layer.
         int targetPosition = 0;
         LayerList layers = this.wwd.getModel().getLayers();
-        for (Layer l : layers) {
-            if (l.getName().indexOf(targetLayerName) != -1) {
+        for (Layer l : layers)
+        {
+            if (l.getName().indexOf(targetLayerName) != -1)
                 targetPosition = layers.indexOf(l);
-            }
         }
         layers.add(targetPosition + 1, layer);
     }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.dataimporter;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -19,27 +20,33 @@ import java.util.*;
  * @author tag
  * @version $Id: FileSetTableModel.java 1180 2013-02-15 18:40:47Z tgaskins $
  */
-public class FileSetTableModel extends AbstractTableModel implements PropertyChangeListener {
+public class FileSetTableModel extends AbstractTableModel implements PropertyChangeListener
+{
+    protected static final String[] columnTitles =
+        new String[]{"Key", "Preview", "Dataset Name", "Scale", "Type", "Files"};
 
-    protected static final String[] columnTitles
-            = new String[]{"Key", "Preview", "Dataset Name", "Scale", "Type", "Files"};
-
-    protected Set<FileSet> fileSets = new TreeSet<FileSet>(new Comparator<FileSet>() {
+    protected Set<FileSet> fileSets = new TreeSet<FileSet>(new Comparator<FileSet>()
+    {
         @Override
-        public int compare(FileSet fileSet, FileSet fileSet1) {
+        public int compare(FileSet fileSet, FileSet fileSet1)
+        {
             return fileSet.getName().compareTo(fileSet1.getName());
         }
     });
 
-    public FileSetTableModel(FileSetMap fileSetMap) {
+    public FileSetTableModel(FileSetMap fileSetMap)
+    {
         this.setFileSetMap(fileSetMap);
     }
 
-    public void setFileSetMap(FileSetMap fileSetMap) {
+    public void setFileSetMap(FileSetMap fileSetMap)
+    {
         this.clearFileSets();
 
-        if (fileSetMap != null) {
-            for (Map.Entry<Object, FileSet> entry : fileSetMap.entrySet()) {
+        if (fileSetMap != null)
+        {
+            for (Map.Entry<Object, FileSet> entry : fileSetMap.entrySet())
+            {
                 this.fileSets.add(entry.getValue());
                 entry.getValue().addPropertyChangeListener(this);
             }
@@ -49,23 +56,28 @@ public class FileSetTableModel extends AbstractTableModel implements PropertyCha
     }
 
     @Override
-    public int getRowCount() {
+    public int getRowCount()
+    {
         return this.fileSets.size();
     }
 
     @Override
-    public int getColumnCount() {
+    public int getColumnCount()
+    {
         return columnTitles.length;
     }
 
     @Override
-    public String getColumnName(int col) {
+    public String getColumnName(int col)
+    {
         return columnTitles[col];
     }
 
     @Override
-    public Class getColumnClass(int col) {
-        switch (col) {
+    public Class getColumnClass(int col)
+    {
+        switch (col)
+        {
             case 0:
                 return Color.class;
 
@@ -81,10 +93,12 @@ public class FileSetTableModel extends AbstractTableModel implements PropertyCha
     }
 
     @Override
-    public Object getValueAt(int row, int col) {
+    public Object getValueAt(int row, int col)
+    {
         FileSet fs = getRow(row);
 
-        switch (col) {
+        switch (col)
+        {
             case 0:
                 return fs.getColor();
 
@@ -108,12 +122,13 @@ public class FileSetTableModel extends AbstractTableModel implements PropertyCha
         }
     }
 
-    public Integer getRowForFileSet(FileSet fileSet) {
+    public Integer getRowForFileSet(FileSet fileSet)
+    {
         int index = 0;
-        for (FileSet fs : this.fileSets) {
-            if (fs == fileSet) {
+        for (FileSet fs : this.fileSets)
+        {
+            if (fs == fileSet)
                 return index;
-            }
 
             ++index;
         }
@@ -121,22 +136,24 @@ public class FileSetTableModel extends AbstractTableModel implements PropertyCha
         return null;
     }
 
-    public FileSet getRow(int row) {
+    public FileSet getRow(int row)
+    {
         Iterator<FileSet> iter = this.fileSets.iterator();
 
-        for (int i = 0; i < row; i++) {
+        for (int i = 0; i < row; i++)
+        {
             iter.next();
         }
 
         return iter.next();
     }
 
-    protected ImageIcon getImageIcon(final int row) {
+    protected ImageIcon getImageIcon(final int row)
+    {
         FileSet fileSet = this.getRow(row);
 
-        if (fileSet.getImageIcon() != null) {
+        if (fileSet.getImageIcon() != null)
             return fileSet.getImageIcon();
-        }
 
         // Register to be notified when the file set's preview image is ready.
         fileSet.addPropertyChangeListener(AVKey.IMAGE, this);
@@ -147,8 +164,10 @@ public class FileSetTableModel extends AbstractTableModel implements PropertyCha
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-        if (propertyChangeEvent.getPropertyName().equals(AVKey.IMAGE)) {
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent)
+    {
+        if (propertyChangeEvent.getPropertyName().equals(AVKey.IMAGE))
+        {
             FileSet fileSet = (FileSet) propertyChangeEvent.getSource();
             fireTableCellUpdated(this.getRowForFileSet(fileSet), 1);
 
@@ -157,9 +176,12 @@ public class FileSetTableModel extends AbstractTableModel implements PropertyCha
         }
     }
 
-    protected void clearFileSets() {
-        if (this.fileSets != null) {
-            for (FileSet fileSet : this.fileSets) {
+    protected void clearFileSets()
+    {
+        if (this.fileSets != null)
+        {
+            for (FileSet fileSet : this.fileSets)
+            {
                 fileSet.clear();
             }
         }

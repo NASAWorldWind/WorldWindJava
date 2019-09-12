@@ -9,20 +9,24 @@ package gov.nasa.worldwind.formats.rpf;
  * @author dcollins
  * @version $Id: RPFFrameFilenameFormatException.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class RPFFrameFilenameFormatException extends IllegalArgumentException {
-
-    public RPFFrameFilenameFormatException() {
+public class RPFFrameFilenameFormatException extends IllegalArgumentException
+{
+    public RPFFrameFilenameFormatException()
+    {
     }
 
-    public RPFFrameFilenameFormatException(String message) {
+    public RPFFrameFilenameFormatException(String message)
+    {
         super(message);
     }
 
-    public RPFFrameFilenameFormatException(String message, Throwable cause) {
+    public RPFFrameFilenameFormatException(String message, Throwable cause)
+    {
         super(message, cause);
     }
 
-    public RPFFrameFilenameFormatException(Throwable cause) {
+    public RPFFrameFilenameFormatException(Throwable cause)
+    {
         super(cause);
     }
 }

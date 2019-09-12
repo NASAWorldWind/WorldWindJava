@@ -12,7 +12,8 @@ import gov.nasa.worldwind.pick.PickSupport;
  * @author dcollins
  * @version $Id: AnnotationLayoutManager.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface AnnotationLayoutManager {
+public interface AnnotationLayoutManager
+{
     // TODO: Create javadocus, including pictures, illustrating how annotation layouts work
 
     PickSupport getPickSupport();
@@ -22,7 +23,7 @@ public interface AnnotationLayoutManager {
     java.awt.Dimension getPreferredSize(DrawContext dc, Iterable<? extends Annotation> annotations);
 
     void drawAnnotations(DrawContext dc, java.awt.Rectangle bounds,
-            Iterable<? extends Annotation> annotations, double opacity, Position pickPosition);
+        Iterable<? extends Annotation> annotations, double opacity, Position pickPosition);
 
     void beginDrawAnnotations(DrawContext dc, java.awt.Rectangle bounds);
 

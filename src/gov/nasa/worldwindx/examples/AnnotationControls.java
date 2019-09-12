@@ -28,8 +28,8 @@ import java.io.InputStream;
  * @author dcollins
  * @version $Id: AnnotationControls.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class AnnotationControls extends ApplicationTemplate {
-
+public class AnnotationControls extends ApplicationTemplate
+{
     protected final static String AUDIO = "Audio";
     protected final static String IMAGES = "Images";
 
@@ -43,14 +43,15 @@ public class AnnotationControls extends ApplicationTemplate {
     protected final static String IMAGE_PATH_IRELAND = "gov/nasa/worldwindx/examples/images/ireland.jpg";
     protected final static String IMAGE_PATH_NEW_ZEALAND = "gov/nasa/worldwindx/examples/images/new_zealand.gif";
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame implements SelectListener {
-
+    public static class AppFrame extends ApplicationTemplate.AppFrame implements SelectListener
+    {
         protected IconLayer iconLayer;
         protected WWIcon highlit;
         protected RenderableLayer contentLayer;
         protected BasicDragger dragger;
 
-        public AppFrame() {
+        public AppFrame()
+        {
             this.iconLayer = createIconLayer();
             this.contentLayer = new RenderableLayer();
             insertBeforePlacenames(this.getWwd(), this.iconLayer);
@@ -60,51 +61,64 @@ public class AnnotationControls extends ApplicationTemplate {
             this.dragger = new BasicDragger(this.getWwd());
         }
 
-        public IconLayer getIconLayer() {
+        public IconLayer getIconLayer()
+        {
             return this.iconLayer;
         }
 
-        public RenderableLayer getContentLayer() {
+        public RenderableLayer getContentLayer()
+        {
             return this.contentLayer;
         }
 
-        @SuppressWarnings({"StringEquality"})
-        public void selected(SelectEvent e) {
-            if (e == null) {
+        @SuppressWarnings( {"StringEquality"})
+        public void selected(SelectEvent e)
+        {
+            if (e == null)
                 return;
-            }
 
             PickedObject topPickedObject = e.getTopPickedObject();
 
-            if (e.getEventAction() == SelectEvent.LEFT_PRESS) {
-                if (topPickedObject != null && topPickedObject.getObject() instanceof WWIcon) {
+            if (e.getEventAction() == SelectEvent.LEFT_PRESS)
+            {
+                if (topPickedObject != null && topPickedObject.getObject() instanceof WWIcon)
+                {
                     WWIcon selected = (WWIcon) topPickedObject.getObject();
                     this.highlight(selected);
-                } else {
+                }
+                else
+                {
                     this.highlight(null);
                 }
-            } else if (e.getEventAction() == SelectEvent.LEFT_DOUBLE_CLICK) {
-                if (topPickedObject != null && topPickedObject.getObject() instanceof WWIcon) {
+            }
+            else if (e.getEventAction() == SelectEvent.LEFT_DOUBLE_CLICK)
+            {
+                if (topPickedObject != null && topPickedObject.getObject() instanceof WWIcon)
+                {
                     WWIcon selected = (WWIcon) topPickedObject.getObject();
                     this.highlight(selected);
                     this.openResource(selected);
                 }
-            } else if (e.getEventAction() == SelectEvent.DRAG || e.getEventAction() == SelectEvent.DRAG_END) {
+            }
+            else if (e.getEventAction() == SelectEvent.DRAG || e.getEventAction() == SelectEvent.DRAG_END)
+            {
                 this.dragger.selected(e);
             }
         }
 
-        public void highlight(WWIcon icon) {
-            if (this.highlit == icon) {
+        public void highlight(WWIcon icon)
+        {
+            if (this.highlit == icon)
                 return;
-            }
 
-            if (this.highlit != null) {
+            if (this.highlit != null)
+            {
                 this.highlit.setHighlighted(false);
                 this.highlit = null;
             }
 
-            if (icon != null) {
+            if (icon != null)
+            {
                 this.highlit = icon;
                 this.highlit.setHighlighted(true);
             }
@@ -112,75 +126,84 @@ public class AnnotationControls extends ApplicationTemplate {
             this.getWwd().redraw();
         }
 
-        protected void closeResource(ContentAnnotation content) {
-            if (content == null) {
+        protected void closeResource(ContentAnnotation content)
+        {
+            if (content == null)
                 return;
-            }
 
             content.detach();
         }
 
-        protected void openResource(WWIcon icon) {
-            if (icon == null) {
+        protected void openResource(WWIcon icon)
+        {
+            if (icon == null)
                 return;
-            }
 
             ContentAnnotation content = this.createContent(icon.getPosition(), icon);
 
-            if (content != null) {
+            if (content != null)
+            {
                 content.attach();
             }
         }
 
-        protected ContentAnnotation createContent(Position position, AVList params) {
+        protected ContentAnnotation createContent(Position position, AVList params)
+        {
             return createContentAnnotation(this, position, params);
         }
     }
 
-    public static class ContentAnnotation implements ActionListener {
-
+    public static class ContentAnnotation implements ActionListener
+    {
         protected AppFrame appFrame;
         protected DialogAnnotation annnotation;
         protected DialogAnnotationController controller;
 
-        public ContentAnnotation(AppFrame appFrame, DialogAnnotation annnotation, DialogAnnotationController controller) {
+        public ContentAnnotation(AppFrame appFrame, DialogAnnotation annnotation, DialogAnnotationController controller)
+        {
             this.appFrame = appFrame;
             this.annnotation = annnotation;
             this.annnotation.addActionListener(this);
             this.controller = controller;
         }
 
-        public AppFrame getAppFrame() {
+        public AppFrame getAppFrame()
+        {
             return this.appFrame;
         }
 
-        public DialogAnnotation getAnnotation() {
+        public DialogAnnotation getAnnotation()
+        {
             return this.annnotation;
         }
 
-        public DialogAnnotationController getController() {
+        public DialogAnnotationController getController()
+        {
             return this.controller;
         }
 
-        @SuppressWarnings({"StringEquality"})
-        public void actionPerformed(ActionEvent e) {
-            if (e == null) {
+        @SuppressWarnings( {"StringEquality"})
+        public void actionPerformed(ActionEvent e)
+        {
+            if (e == null)
                 return;
-            }
 
-            if (e.getActionCommand() == AVKey.CLOSE) {
+            if (e.getActionCommand() == AVKey.CLOSE)
+            {
                 this.getAppFrame().closeResource(this);
             }
         }
 
-        public void detach() {
+        public void detach()
+        {
             this.getController().setEnabled(false);
 
             RenderableLayer layer = this.getAppFrame().getContentLayer();
             layer.removeRenderable(this.getAnnotation());
         }
 
-        public void attach() {
+        public void attach()
+        {
             this.getController().setEnabled(true);
 
             RenderableLayer layer = this.appFrame.getContentLayer();
@@ -189,29 +212,33 @@ public class AnnotationControls extends ApplicationTemplate {
         }
     }
 
-    public static class AudioContentAnnotation extends ContentAnnotation {
-
+    public static class AudioContentAnnotation extends ContentAnnotation
+    {
         protected Clip clip;
         protected Object source;
         protected Thread readThread;
 
         public AudioContentAnnotation(AppFrame appFrame, AudioPlayerAnnotation annnotation,
-                AudioPlayerAnnotationController controller, Object source) {
+            AudioPlayerAnnotationController controller, Object source)
+        {
             super(appFrame, annnotation, controller);
             this.source = source;
             this.retrieveAndSetClip(source);
         }
 
-        public Object getSource() {
+        public Object getSource()
+        {
             return this.source;
         }
 
-        public void detach() {
+        public void detach()
+        {
             super.detach();
 
             // Stop any threads or timers the controller may be actively running.
             AudioPlayerAnnotationController controller = (AudioPlayerAnnotationController) this.getController();
-            if (controller != null) {
+            if (controller != null)
+            {
                 this.stopController(controller);
             }
 
@@ -219,21 +246,27 @@ public class AnnotationControls extends ApplicationTemplate {
             this.stopClipRetrieval();
         }
 
-        @SuppressWarnings({"StringEquality"})
-        protected void stopController(AudioPlayerAnnotationController controller) {
+        @SuppressWarnings( {"StringEquality"})
+        protected void stopController(AudioPlayerAnnotationController controller)
+        {
             String status = controller.getClipStatus();
-            if (status == AVKey.PLAY) {
+            if (status == AVKey.PLAY)
+            {
                 controller.stopClip();
             }
         }
 
-        protected void retrieveAndSetClip(Object source) {
+        protected void retrieveAndSetClip(Object source)
+        {
             this.startClipRetrieval(source);
         }
 
-        protected void doRetrieveAndSetClip(final Object source) {
-            javax.swing.SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
+        protected void doRetrieveAndSetClip(final Object source)
+        {
+            javax.swing.SwingUtilities.invokeLater(new Runnable()
+            {
+                public void run()
+                {
                     getAnnotation().setBusy(true);
                     appFrame.getWwd().redraw();
                 }
@@ -241,16 +274,21 @@ public class AnnotationControls extends ApplicationTemplate {
 
             final Clip clip = this.readClip(source);
 
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                public void run()
+                {
                     AudioPlayerAnnotationController controller = (AudioPlayerAnnotationController) getController();
-                    if (controller != null) {
+                    if (controller != null)
+                    {
                         controller.setClip(clip);
                     }
 
                     AudioPlayerAnnotation annotation = (AudioPlayerAnnotation) getAnnotation();
-                    if (annotation != null) {
-                        if (clip == null) {
+                    if (annotation != null)
+                    {
+                        if (clip == null)
+                        {
                             annotation.getTitleLabel().setText(createErrorTitle(source.toString()));
                         }
                     }
@@ -261,32 +299,44 @@ public class AnnotationControls extends ApplicationTemplate {
             });
         }
 
-        protected Clip readClip(Object source) {
+        protected Clip readClip(Object source)
+        {
             InputStream stream = null;
-            try {
+            try
+            {
                 stream = WWIO.openStream(source);
                 return openAudioStream(stream);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
-            } finally {
+            }
+            finally
+            {
                 WWIO.closeStream(stream, source.toString());
             }
 
             return null;
         }
 
-        protected void startClipRetrieval(final Object source) {
-            this.readThread = new Thread(new Runnable() {
-                public void run() {
+        protected void startClipRetrieval(final Object source)
+        {
+            this.readThread = new Thread(new Runnable()
+            {
+                public void run()
+                {
                     doRetrieveAndSetClip(source);
                 }
             });
             this.readThread.start();
         }
 
-        protected void stopClipRetrieval() {
-            if (this.readThread != null) {
-                if (this.readThread.isAlive()) {
+        protected void stopClipRetrieval()
+        {
+            if (this.readThread != null)
+            {
+                if (this.readThread.isAlive())
+                {
                     this.readThread.interrupt();
                 }
             }
@@ -295,27 +345,32 @@ public class AnnotationControls extends ApplicationTemplate {
         }
     }
 
-    public static class ImageContentAnnotation extends ContentAnnotation {
-
+    public static class ImageContentAnnotation extends ContentAnnotation
+    {
         public ImageContentAnnotation(AppFrame appFrame, SlideShowAnnotation annnotation,
-                SlideShowAnnotationController controller) {
+            SlideShowAnnotationController controller)
+        {
             super(appFrame, annnotation, controller);
         }
 
-        public void detach() {
+        public void detach()
+        {
             super.detach();
 
             // Stop any threads or timers the controller may be actively running.
             SlideShowAnnotationController controller = (SlideShowAnnotationController) this.getController();
-            if (controller != null) {
+            if (controller != null)
+            {
                 this.stopController(controller);
             }
         }
 
-        @SuppressWarnings({"StringEquality"})
-        protected void stopController(SlideShowAnnotationController controller) {
+        @SuppressWarnings( {"StringEquality"})
+        protected void stopController(SlideShowAnnotationController controller)
+        {
             String state = controller.getState();
-            if (state == AVKey.PLAY) {
+            if (state == AVKey.PLAY)
+            {
                 controller.stopSlideShow();
             }
 
@@ -323,39 +378,44 @@ public class AnnotationControls extends ApplicationTemplate {
         }
     }
 
-    public static IconLayer createIconLayer() {
+    public static IconLayer createIconLayer()
+    {
         IconLayer layer = new IconLayer();
         layer.setPickEnabled(true);
 
         WWIcon icon = createIcon(AUDIO, Position.fromDegrees(28.533513, -81.375789, 0),
-                "Music from the Java Sound demo", AUDIO_PATH_MUSIC);
+            "Music from the Java Sound demo", AUDIO_PATH_MUSIC);
         layer.addIcon(icon);
 
         icon = createIcon(IMAGES, Position.fromDegrees(46.1912, -122.1944, 0), "",
-                java.util.Arrays.asList(IMAGE_PATH_MT_ST_HELENS));
+            java.util.Arrays.asList(IMAGE_PATH_MT_ST_HELENS));
         layer.addIcon(icon);
 
         icon = createIcon(IMAGES, Position.fromDegrees(-12, -70, 0), "",
-                java.util.Arrays.asList(IMAGE_PATH_IRELAND, IMAGE_PATH_NEW_ZEALAND, IMAGE_PATH_THE_NUT));
+            java.util.Arrays.asList(IMAGE_PATH_IRELAND, IMAGE_PATH_NEW_ZEALAND, IMAGE_PATH_THE_NUT));
         layer.addIcon(icon);
 
         return layer;
     }
 
-    public static WWIcon createIcon(Object type, Position position, String title, Object data) {
-        if (position == null) {
+    public static WWIcon createIcon(Object type, Position position, String title, Object data)
+    {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (title == null) {
+        if (title == null)
+        {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (data == null) {
+        if (data == null)
+        {
             String message = Logging.getMessage("nullValue.DataSetIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -371,21 +431,25 @@ public class AnnotationControls extends ApplicationTemplate {
         return icon;
     }
 
-    @SuppressWarnings({"StringEquality"})
-    public static ContentAnnotation createContentAnnotation(AppFrame appFrame, Position position, AVList params) {
-        if (appFrame == null) {
+    @SuppressWarnings( {"StringEquality"})
+    public static ContentAnnotation createContentAnnotation(AppFrame appFrame, Position position, AVList params)
+    {
+        if (appFrame == null)
+        {
             String message = "AppFrameIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (position == null) {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (params == null) {
+        if (params == null)
+        {
             String message = Logging.getMessage("nullValue.ParamsIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -395,9 +459,12 @@ public class AnnotationControls extends ApplicationTemplate {
         String title = params.getStringValue(AVKey.TITLE);
         Object source = params.getValue(AVKey.URL);
 
-        if (type == AUDIO) {
+        if (type == AUDIO)
+        {
             return createAudioAnnotation(appFrame, position, title, source);
-        } else if (type == IMAGES) {
+        }
+        else if (type == IMAGES)
+        {
             return createImageAnnotation(appFrame, position, title, (Iterable) source);
         }
 
@@ -405,26 +472,31 @@ public class AnnotationControls extends ApplicationTemplate {
     }
 
     public static ContentAnnotation createAudioAnnotation(AppFrame appFrame, Position position, String title,
-            Object source) {
-        if (appFrame == null) {
+        Object source)
+    {
+        if (appFrame == null)
+        {
             String message = "AppFrameIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (position == null) {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (title == null) {
+        if (title == null)
+        {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (source == null) {
+        if (source == null)
+        {
             String message = Logging.getMessage("nullValue.SourceIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -439,28 +511,33 @@ public class AnnotationControls extends ApplicationTemplate {
         return new AudioContentAnnotation(appFrame, annotation, controller, source);
     }
 
-    @SuppressWarnings({"TypeParameterExplicitlyExtendsObject"})
+    @SuppressWarnings( {"TypeParameterExplicitlyExtendsObject"})
     public static ContentAnnotation createImageAnnotation(AppFrame appFrame, Position position, String title,
-            Iterable sources) {
-        if (appFrame == null) {
+        Iterable sources)
+    {
+        if (appFrame == null)
+        {
             String message = "AppFrameIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (position == null) {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (title == null) {
+        if (title == null)
+        {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (sources == null) {
+        if (sources == null)
+        {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -471,13 +548,15 @@ public class AnnotationControls extends ApplicationTemplate {
         annotation.getTitleLabel().setText(title);
 
         SlideShowAnnotationController controller = new SlideShowAnnotationController(appFrame.getWwd(), annotation,
-                sources);
+            sources);
 
         return new ImageContentAnnotation(appFrame, annotation, controller);
     }
 
-    public static Clip openAudioStream(InputStream stream) throws Exception {
-        if (stream == null) {
+    public static Clip openAudioStream(InputStream stream) throws Exception
+    {
+        if (stream == null)
+        {
             String message = Logging.getMessage("nullValue.InputStreamIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -486,7 +565,8 @@ public class AnnotationControls extends ApplicationTemplate {
         Clip clip = null;
 
         AudioInputStream ais = null;
-        try {
+        try
+        {
             // AudioSystem.getAudioInputStream requires that InputStreams for audio clip resources support the
             // mark/reset functionality. Streams opened to class-path resources do not support this functionality, so
             // we provide this functionality by wrapping the specified InputStream in a BufferedInputStream, which
@@ -498,29 +578,33 @@ public class AnnotationControls extends ApplicationTemplate {
             // http://java.sun.com/products/java-media/sound/samples/JavaSoundDemo
             //
             // We can't yet open the device for ALAW/ULAW playback, convert ALAW/ULAW to PCM.
-            if ((format.getEncoding() == AudioFormat.Encoding.ULAW)
-                    || (format.getEncoding() == AudioFormat.Encoding.ALAW)) {
+            if ((format.getEncoding() == AudioFormat.Encoding.ULAW) ||
+                (format.getEncoding() == AudioFormat.Encoding.ALAW))
+            {
                 AudioFormat tmp = new AudioFormat(
-                        AudioFormat.Encoding.PCM_SIGNED,
-                        format.getSampleRate(),
-                        format.getSampleSizeInBits() * 2,
-                        format.getChannels(),
-                        format.getFrameSize() * 2,
-                        format.getFrameRate(),
-                        true);
+                    AudioFormat.Encoding.PCM_SIGNED,
+                    format.getSampleRate(),
+                    format.getSampleSizeInBits() * 2,
+                    format.getChannels(),
+                    format.getFrameSize() * 2,
+                    format.getFrameRate(),
+                    true);
                 ais = AudioSystem.getAudioInputStream(tmp, ais);
                 format = tmp;
             }
 
             DataLine.Info info = new DataLine.Info(
-                    Clip.class,
-                    ais.getFormat(),
-                    ((int) ais.getFrameLength() * format.getFrameSize()));
+                Clip.class,
+                ais.getFormat(),
+                ((int) ais.getFrameLength() * format.getFrameSize()));
 
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(ais);
-        } finally {
-            if (ais != null) {
+        }
+        finally
+        {
+            if (ais != null)
+            {
                 ais.close();
             }
         }
@@ -528,8 +612,10 @@ public class AnnotationControls extends ApplicationTemplate {
         return clip;
     }
 
-    public static String createErrorTitle(String path) {
-        if (path == null) {
+    public static String createErrorTitle(String path)
+    {
+        if (path == null)
+        {
             String message = Logging.getMessage("nullValue.PathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -540,8 +626,10 @@ public class AnnotationControls extends ApplicationTemplate {
         return sb.toString();
     }
 
-    public static String createTitle(Iterable sources) {
-        if (sources == null) {
+    public static String createTitle(Iterable sources)
+    {
+        if (sources == null)
+        {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -550,12 +638,14 @@ public class AnnotationControls extends ApplicationTemplate {
         StringBuilder sb = new StringBuilder();
 
         java.util.Iterator iter = sources.iterator();
-        while (iter.hasNext()) {
+        while (iter.hasNext())
+        {
             Object o = iter.next();
 
             sb.append(o);
 
-            if (iter.hasNext()) {
+            if (iter.hasNext())
+            {
                 sb.append(", ");
             }
         }
@@ -563,7 +653,8 @@ public class AnnotationControls extends ApplicationTemplate {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Annotation Controls", AppFrame.class);
     }
 }

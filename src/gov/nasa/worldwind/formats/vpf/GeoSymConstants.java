@@ -9,8 +9,8 @@ package gov.nasa.worldwind.formats.vpf;
  * @author dcollins
  * @version $Id: GeoSymConstants.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface GeoSymConstants {
-
+public interface GeoSymConstants
+{
     // Column Types
     // MIL-DTL-89045 3.5.3.1
     final String INTEGER = "N";          // integer

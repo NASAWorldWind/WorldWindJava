@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Sector;
@@ -15,7 +16,6 @@ import gov.nasa.worldwind.geom.Sector;
  */
 public interface GeographicExtent extends Renderable//, AVList
 {
-
     /**
      * Returns the object's geographic extent.
      *

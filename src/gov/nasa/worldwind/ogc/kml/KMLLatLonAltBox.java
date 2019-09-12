@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -11,26 +12,30 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLLatLonAltBox.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLLatLonAltBox extends KMLAbstractLatLonBoxType {
-
+public class KMLLatLonAltBox extends KMLAbstractLatLonBoxType
+{
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLLatLonAltBox(String namespaceURI) {
+    public KMLLatLonAltBox(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
-    public Double getMinAltitude() {
+    public Double getMinAltitude()
+    {
         return (Double) this.getField("minAltitude");
     }
 
-    public Double getMaxAltitude() {
+    public Double getMaxAltitude()
+    {
         return (Double) this.getField("maxAltitude");
     }
 
-    public String getAltitudeMode() {
+    public String getAltitudeMode()
+    {
         return (String) this.getField("altitudeMode");
     }
 }

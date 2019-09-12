@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -16,10 +17,11 @@ import java.awt.*;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class SizeTest {
-
+public class SizeTest
+{
     @Test
-    public void testSize() {
+    public void testSize()
+    {
         // Test with native width and fractional height
         Size size = new Size(Size.NATIVE_DIMENSION, 0, AVKey.PIXELS, Size.EXPLICIT_DIMENSION, 0.5, AVKey.FRACTION);
         Dimension dim = size.compute(70, 10, 100, 100);
@@ -32,9 +34,10 @@ public class SizeTest {
     }
 
     @Test
-    public void testZeroSizeContainer() {
+    public void testZeroSizeContainer()
+    {
         Size size = new Size(Size.EXPLICIT_DIMENSION, 0.5, AVKey.FRACTION,
-                Size.EXPLICIT_DIMENSION, 0.5, AVKey.FRACTION);
+            Size.EXPLICIT_DIMENSION, 0.5, AVKey.FRACTION);
 
         Dimension dim = size.compute(100, 100, 0, 0);
 
@@ -43,10 +46,11 @@ public class SizeTest {
     }
 
     @Test
-    public void testZeroSizeRect() {
+    public void testZeroSizeRect()
+    {
         // Test with fractional dimensions
         Size size = new Size(Size.EXPLICIT_DIMENSION, 0.5, AVKey.FRACTION, Size.EXPLICIT_DIMENSION, 0.5,
-                AVKey.FRACTION);
+            AVKey.FRACTION);
         Dimension dim = size.compute(0, 0, 100, 100);
         assertTrue("Dimension should be 50 x 50", dim.equals(new Dimension(50, 50)));
 
@@ -67,10 +71,11 @@ public class SizeTest {
     }
 
     @Test
-    public void testRestorableStateExplicit() {
+    public void testRestorableStateExplicit()
+    {
         // Test with fractional dimensions
         Size expected = new Size(Size.EXPLICIT_DIMENSION, 0.5, AVKey.FRACTION, Size.EXPLICIT_DIMENSION, 0.5,
-                AVKey.FRACTION);
+            AVKey.FRACTION);
 
         RestorableSupport rs = RestorableSupport.newRestorableSupport();
         expected.getRestorableState(rs, null);
@@ -82,7 +87,8 @@ public class SizeTest {
     }
 
     @Test
-    public void testRestorableStateNative() {
+    public void testRestorableStateNative()
+    {
         // Test with fractional dimensions
         Size expected = new Size(Size.NATIVE_DIMENSION, 0, null, Size.NATIVE_DIMENSION, 0, null);
 
@@ -96,7 +102,8 @@ public class SizeTest {
     }
 
     @Test
-    public void testRestorableStateAspectRatio() {
+    public void testRestorableStateAspectRatio()
+    {
         // Test with fractional dimensions
         Size expected = new Size(Size.MAINTAIN_ASPECT_RATIO, 0, null, Size.MAINTAIN_ASPECT_RATIO, 0, null);
 
@@ -110,7 +117,8 @@ public class SizeTest {
     }
 
     @Test
-    public void testRestorableStateLegacy() {
+    public void testRestorableStateLegacy()
+    {
         // Test with fractional dimensions
         Size input = new Size("MaintainAspectRatio", 0, null, "ExplicitDimension", 100, AVKey.PIXELS);
         Size expected = new Size(Size.MAINTAIN_ASPECT_RATIO, 0, null, Size.EXPLICIT_DIMENSION, 100, AVKey.PIXELS);

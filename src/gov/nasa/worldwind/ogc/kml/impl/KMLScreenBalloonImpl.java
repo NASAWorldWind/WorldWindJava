@@ -17,11 +17,9 @@ import java.awt.*;
  * @author pabercrombie
  * @version $Id: KMLScreenBalloonImpl.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLScreenBalloonImpl extends KMLAbstractBalloon implements ScreenBalloon {
-
-    /**
-     * The contained balloon.
-     */
+public class KMLScreenBalloonImpl extends KMLAbstractBalloon implements ScreenBalloon
+{
+    /** The contained balloon. */
     protected ScreenBalloon balloon;
 
     /**
@@ -30,10 +28,12 @@ public class KMLScreenBalloonImpl extends KMLAbstractBalloon implements ScreenBa
      * @param balloon Balloon to apply KML styling to.
      * @param feature The feature that defines the balloon style.
      */
-    public KMLScreenBalloonImpl(ScreenBalloon balloon, KMLAbstractFeature feature) {
+    public KMLScreenBalloonImpl(ScreenBalloon balloon, KMLAbstractFeature feature)
+    {
         super(feature);
 
-        if (balloon == null) {
+        if (balloon == null)
+        {
             String msg = Logging.getMessage("nullValue.BalloonIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -42,24 +42,21 @@ public class KMLScreenBalloonImpl extends KMLAbstractBalloon implements ScreenBa
         this.initialize(balloon);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public ScreenBalloon getBalloon() {
+    /** {@inheritDoc} */
+    public ScreenBalloon getBalloon()
+    {
         return this.balloon;
     }
 
-    /**
-     * {@inheritDoc}. This method passes through to the contained balloon.
-     */
-    public void setScreenLocation(Point point) {
+    /** {@inheritDoc}. This method passes through to the contained balloon. */
+    public void setScreenLocation(Point point)
+    {
         this.getBalloon().setScreenLocation(point);
     }
 
-    /**
-     * {@inheritDoc}. This method passes through to the contained balloon.
-     */
-    public Point getScreenLocation() {
+    /** {@inheritDoc}. This method passes through to the contained balloon. */
+    public Point getScreenLocation()
+    {
         return this.getBalloon().getScreenLocation();
     }
 }

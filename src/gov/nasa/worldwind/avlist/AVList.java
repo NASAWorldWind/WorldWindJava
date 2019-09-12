@@ -13,18 +13,18 @@ import java.util.*;
  * @author Tom Gaskins
  * @version $Id: AVList.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface AVList {
-
+public interface AVList
+{
     /**
      * Adds a key/value pair to the list. Replaces an existing key/value pair if the list already contains the key.
      *
-     * @param key the attribute name. May not be <code>null</code>.
+     * @param key   the attribute name. May not be <code>null</code>.
      * @param value the attribute value. May be <code>null</code>, in which case any existing value for the key is
-     * removed from the collection.
+     *              removed from the collection.
      *
-     * @return previous value associated with specified key, or null if there was no mapping for key. A null return can
-     * also indicate that the map previously associated null with the specified key, if the implementation supports null
-     * values.
+     * @return previous value associated with specified key, or null  if there was no mapping for key. A null return can
+     *         also indicate that the map previously associated null  with the specified key, if the implementation
+     *         supports null values.
      *
      * @throws NullPointerException if <code>key</code> is <code>null</code>.
      */
@@ -63,8 +63,8 @@ public interface AVList {
      * @return the attribute value if one exists in the collection, otherwise <code>null</code>.
      *
      * @throws NullPointerException if <code>key</code> is <code>null</code>.
-     * @throws gov.nasa.worldwind.exception.WWRuntimeException if the value in the collection is not a
-     * <code>String</code> type.
+     * @throws gov.nasa.worldwind.exception.WWRuntimeException
+     *                              if the value in the collection is not a <code>String</code> type.
      */
     String getStringValue(String key);
 
@@ -87,7 +87,7 @@ public interface AVList {
      *
      * @param key the attribute name. May not be <code>null</code>.
      *
-     * @return previous value associated with specified key, or null if there was no mapping for key.
+     * @return previous value associated with specified key, or null  if there was no mapping for key.
      *
      * @throws NullPointerException if <code>key</code> is <code>null</code>.
      */
@@ -97,7 +97,7 @@ public interface AVList {
      * Adds a property change listener for the specified key.
      *
      * @param propertyName the key to associate the listener with.
-     * @param listener the listener to associate with the key.
+     * @param listener     the listener to associate with the key.
      *
      * @throws IllegalArgumentException if either <code>propertyName</code> or <code>listener</code> is null
      * @see java.beans.PropertyChangeSupport
@@ -108,7 +108,7 @@ public interface AVList {
      * Removes a property change listener associated with the specified key.
      *
      * @param propertyName the key associated with the change listener.
-     * @param listener the listener to remove.
+     * @param listener     the listener to remove.
      *
      * @throws IllegalArgumentException if either <code>propertyName</code> or <code>listener</code> is null
      * @see java.beans.PropertyChangeSupport
@@ -140,8 +140,8 @@ public interface AVList {
      * <code>odValue</code> and <code>newValue</code> are equal and non-null.
      *
      * @param propertyName the key
-     * @param oldValue the value associated with the key before the even causing the firing.
-     * @param newValue the new value associated with the key.
+     * @param oldValue     the value associated with the key before the even causing the firing.
+     * @param newValue     the new value associated with the key.
      *
      * @throws IllegalArgumentException if <code>propertyName</code> is null
      * @see java.beans.PropertyChangeSupport

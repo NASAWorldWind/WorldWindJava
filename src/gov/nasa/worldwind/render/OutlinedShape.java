@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 /**
@@ -14,12 +15,12 @@ package gov.nasa.worldwind.render;
  * @author tag
  * @version $Id: OutlinedShape.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface OutlinedShape {
-
+public interface OutlinedShape
+{
     /**
      * Indicates whether the shape's outline is drawn.
      *
-     * @param dc the current draw context.
+     * @param dc    the current draw context.
      * @param shape the shape being drawn.
      *
      * @return true if the shape's outline should be drawn, otherwise false.
@@ -29,7 +30,7 @@ public interface OutlinedShape {
     /**
      * Indicates whether the shape's faces are drawn.
      *
-     * @param dc the current draw context.
+     * @param dc    the current draw context.
      * @param shape the shape being drawn.
      *
      * @return true if the shape's faces should be drawn, otherwise false.
@@ -40,7 +41,7 @@ public interface OutlinedShape {
      * Indicates whether the shape's depth should be adjusted to give its filled faces priority over coincident items
      * previously drawn.
      *
-     * @param dc the current draw context.
+     * @param dc    the current draw context.
      * @param shape the shape being drawn.
      *
      * @return true if the shape should have priority, otherwise false.
@@ -50,7 +51,7 @@ public interface OutlinedShape {
     /**
      * Draws the shape's outline.
      *
-     * @param dc the current draw context.
+     * @param dc    the current draw context.
      * @param shape the shape being drawn.
      */
     void drawOutline(DrawContext dc, Object shape);
@@ -58,7 +59,7 @@ public interface OutlinedShape {
     /**
      * Draws the shape's filled faces.
      *
-     * @param dc the current draw context.
+     * @param dc    the current draw context.
      * @param shape the shape being drawn.
      */
     void drawInterior(DrawContext dc, Object shape);
@@ -66,13 +67,12 @@ public interface OutlinedShape {
     /**
      * Returns the depth-offset factor.
      * <p>
-     * The amount of depth offset when depth offset is enabled is computed by the formula <i>factor</i> * DZ + r
-     *
+     * The amount of depth offset when depth offset is enabled is computed by the formula <i>factor</i> * DZ + r *
      * <i>units</i>, where DZ is a measurement of the change in depth relative to the screen area of the shape, and r is
      * the smallest value guaranteed to produce a resolvable offset. <i>units</i> is the value return by {@link
      * #getDepthOffsetUnits(DrawContext, Object)}.
      *
-     * @param dc the current draw context.
+     * @param dc    the current draw context.
      * @param shape the shape being drawn.
      *
      * @return the depth offset factor to use for the shape.
@@ -82,13 +82,12 @@ public interface OutlinedShape {
     /**
      * Returns the depth-offset units.
      * <p>
-     * The amount of depth offset when depth offset is enabled is computed by the formula <i>factor</i> * DZ + r
-     *
+     * The amount of depth offset when depth offset is enabled is computed by the formula <i>factor</i> * DZ + r *
      * <i>units</i>, where DZ is a measurement of the change in depth relative to the screen area of the shape, and r is
      * the smallest value guaranteed to produce a resolvable offset. <i>factor</i> is the value return by {@link
      * #getDepthOffsetFactor(DrawContext, Object)}.
      *
-     * @param dc the current draw context.
+     * @param dc    the current draw context.
      * @param shape the shape being drawn.
      *
      * @return the depth units to use for the shape.

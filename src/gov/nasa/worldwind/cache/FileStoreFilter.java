@@ -11,13 +11,13 @@ package gov.nasa.worldwind.cache;
  * @author dcollins
  * @version $Id: FileStoreFilter.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface FileStoreFilter {
-
+public interface FileStoreFilter
+{
     /**
      * Returns whether or not this filter accepts the file name under a specified FileStore.
      *
      * @param fileStore the FileStore containing the named file path.
-     * @param fileName the named file path in question.
+     * @param fileName  the named file path in question.
      *
      * @return true if the file name should be accepted; false otherwise.
      */

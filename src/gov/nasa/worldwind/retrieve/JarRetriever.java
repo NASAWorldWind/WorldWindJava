@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.retrieve;
 
 import gov.nasa.worldwind.util.Logging;
@@ -19,25 +20,30 @@ import java.util.logging.Level;
  * @author tag
  * @version $Id: JarRetriever.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class JarRetriever extends URLRetriever {
-
+public class JarRetriever extends URLRetriever
+{
     private int responseCode;
     private String responseMessage;
 
-    public JarRetriever(URL url, RetrievalPostProcessor postProcessor) {
+    public JarRetriever(URL url, RetrievalPostProcessor postProcessor)
+    {
         super(url, postProcessor);
     }
 
-    public int getResponseCode() {
+    public int getResponseCode()
+    {
         return this.responseCode;
     }
 
-    public String getResponseMessage() {
+    public String getResponseMessage()
+    {
         return this.responseMessage;
     }
 
-    protected ByteBuffer doRead(URLConnection connection) throws Exception {
-        if (connection == null) {
+    protected ByteBuffer doRead(URLConnection connection) throws Exception
+    {
+        if (connection == null)
+        {
             String msg = Logging.getMessage("nullValue.ConnectionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -48,14 +54,12 @@ public class JarRetriever extends URLRetriever {
         this.responseMessage = this.responseCode >= 0 ? "OK" : "FAILED";
 
         String contentType = connection.getContentType();
-        Logging.logger().log(Level.FINE, "HTTPRetriever.ResponseInfo", new Object[]{this.responseCode,
+        Logging.logger().log(Level.FINE, "HTTPRetriever.ResponseInfo", new Object[] {this.responseCode,
             connection.getContentLength(), contentType != null ? contentType : "content type not returned",
             connection.getURL()});
 
         if (this.responseCode == HttpURLConnection.HTTP_OK) // intentionally re-using HTTP constant
-        {
             return super.doRead(connection);
-        }
 
         return null;
     }

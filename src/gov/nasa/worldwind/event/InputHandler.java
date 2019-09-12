@@ -14,8 +14,8 @@ import java.awt.event.*;
  * @author tag
  * @version $Id: InputHandler.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface InputHandler extends AVList, java.beans.PropertyChangeListener {
-
+public interface InputHandler extends AVList, java.beans.PropertyChangeListener
+{
     void setEventSource(WorldWindow newWorldWindow);
 
     WorldWindow getEventSource();

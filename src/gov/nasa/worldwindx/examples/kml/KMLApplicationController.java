@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.kml;
 
 import gov.nasa.worldwind.WorldWindow;
@@ -27,20 +28,16 @@ import java.beans.*;
  * @author pabercrombie
  * @version $Id: KMLApplicationController.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLApplicationController implements SelectListener, PropertyChangeListener {
-
+public class KMLApplicationController implements SelectListener, PropertyChangeListener
+{
     /**
      * Indicates the <code>WorldWindow</code> this controller listens to for select events and property change events.
      * Initialized during construction.
      */
     protected WorldWindow wwd;
-    /**
-     * Indicates the <code>TreeNode</code> currently under the cursor. Initially <code>null</code>.
-     */
+    /** Indicates the <code>TreeNode</code> currently under the cursor. Initially <code>null</code>. */
     protected TreeNode highlightedNode;
-    /**
-     * Controller to open balloons when KML features are selected.
-     */
+    /** Controller to open balloons when KML features are selected. */
     protected BalloonController balloonController;
 
     /**
@@ -49,12 +46,14 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      * refresh property change events.
      *
      * @param wwd the <code>WorldWindow</code> this listens to, and who's <code>View</code> is moved upon a refresh
-     * event.
+     *            event.
      *
      * @throws IllegalArgumentException if the <code>wwd</code> is <code>null</code>.
      */
-    public KMLApplicationController(WorldWindow wwd) {
-        if (wwd == null) {
+    public KMLApplicationController(WorldWindow wwd)
+    {
+        if (wwd == null)
+        {
             String message = Logging.getMessage("nullValue.WorldWindow");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -71,7 +70,8 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      *
      * @return Active BalloonController. May return {@code null} if no BalloonController is set.
      */
-    public BalloonController getBalloonController() {
+    public BalloonController getBalloonController()
+    {
         return this.balloonController;
     }
 
@@ -80,7 +80,8 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      *
      * @param balloonController New BalloonController. May be {@code null} to unset the balloon controller.
      */
-    public void setBalloonController(BalloonController balloonController) {
+    public void setBalloonController(BalloonController balloonController)
+    {
         this.balloonController = balloonController;
     }
 
@@ -89,20 +90,27 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      *
      * @param event Select event.
      */
-    public void selected(SelectEvent event) {
-        if (event.isLeftClick()) {
+    public void selected(SelectEvent event)
+    {
+        if (event.isLeftClick())
+        {
             Object topObject = event.getTopObject();
-            if (topObject instanceof TreeNode) {
+            if (topObject instanceof TreeNode)
+            {
                 // The KML feature should be attached to the node as the CONTEXT
                 Object context = ((TreeNode) topObject).getValue(AVKey.CONTEXT);
-                if (context instanceof KMLAbstractFeature) {
+                if (context instanceof KMLAbstractFeature)
+                {
                     this.onFeatureSelected((KMLAbstractFeature) context);
                 }
             }
-        } else if (event.isRollover()) {
+        }
+        else if (event.isRollover())
+        {
             Object topObject = event.getTopObject();
 
-            if (this.highlightedNode == topObject) {
+            if (this.highlightedNode == topObject)
+            {
                 return; // Same thing selected
             }
 
@@ -112,12 +120,14 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
                 this.setCursor(null); // Reset to default
             }
 
-            if (topObject instanceof TreeNode) {
+            if (topObject instanceof TreeNode)
+            {
                 // The KML feature should be attached to the node as the CONTEXT
                 TreeNode treeNode = (TreeNode) topObject;
 
                 Object context = treeNode.getValue(AVKey.CONTEXT);
-                if (context instanceof KMLAbstractFeature && this.canSelect((KMLAbstractFeature) context)) {
+                if (context instanceof KMLAbstractFeature && this.canSelect((KMLAbstractFeature) context))
+                {
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     this.highlightedNode = treeNode;
                 }
@@ -136,18 +146,22 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      * link's KML resource as follows: <ol> <li><code>NetworkLinkControl</code> child of link's KML resource.</li>
      * <li><code>AbstractFeature</code> child of link's KML resource.</li> </ol> If neither of the above features
      * contain a view, this ignores the event. Otherwise, this causes the <code>WorldWindow</code>'s <code>View</code>
-     * to fly to the feature's <code>KMLAbstractView</code> using a
-     * <code>{@link gov.nasa.worldwindx.examples.kml.KMLViewController}</code>
+     * to fly to the feature's <code>KMLAbstractView</code> using a <code>{@link gov.nasa.worldwindx.examples.kml.KMLViewController}</code>
      *
      * @param event a property change event from the <code>SceneController</code>.
      */
-    public void propertyChange(PropertyChangeEvent event) {
-        try {
+    public void propertyChange(PropertyChangeEvent event)
+    {
+        try
+        {
             if (AVKey.RETRIEVAL_STATE_SUCCESSFUL.equals(event.getPropertyName())
-                    && event.getNewValue() instanceof KMLNetworkLink) {
+                && event.getNewValue() instanceof KMLNetworkLink)
+            {
                 this.onNetworkLinkRefreshed((KMLNetworkLink) event.getNewValue());
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // Wrap the handler in a try/catch to keep exceptions from bubbling up.
             Logging.logger().warning(e.getMessage() != null ? e.getMessage() : e.toString());
         }
@@ -162,23 +176,26 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      *
      * @param networkLink the <code>KMLNetworkLink</code> that has been refreshed.
      */
-    protected void onNetworkLinkRefreshed(KMLNetworkLink networkLink) {
-        if (networkLink == null) {
+    protected void onNetworkLinkRefreshed(KMLNetworkLink networkLink)
+    {
+        if (networkLink == null)
             return;
-        }
 
         KMLRoot kmlRoot = networkLink.getNetworkResource();
-        if (kmlRoot == null) {
+        if (kmlRoot == null)
             return;
-        }
 
-        if (Boolean.TRUE.equals(networkLink.getFlyToView())) {
+        if (Boolean.TRUE.equals(networkLink.getFlyToView()))
+        {
             if (kmlRoot.getNetworkLinkControl() != null
-                    && kmlRoot.getNetworkLinkControl().getView() != null) {
+                && kmlRoot.getNetworkLinkControl().getView() != null)
+            {
                 this.moveTo(kmlRoot.getNetworkLinkControl().getView());
                 this.wwd.redraw();
-            } else if (kmlRoot.getFeature() != null
-                    && kmlRoot.getFeature().getView() != null) {
+            }
+            else if (kmlRoot.getFeature() != null
+                && kmlRoot.getFeature().getView() != null)
+            {
                 this.moveTo(kmlRoot.getFeature().getView());
                 this.wwd.redraw();
             }
@@ -191,24 +208,25 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      *
      * @param feature Feature that was selected.
      */
-    protected void onFeatureSelected(KMLAbstractFeature feature) {
+    protected void onFeatureSelected(KMLAbstractFeature feature)
+    {
         this.moveTo(feature);
 
-        if (this.balloonController != null) {
+        if (this.balloonController != null)
             this.balloonController.showBalloon(feature);
-        }
     }
 
     /**
-     * Smoothly moves the <code>WorldWindow</code>'s <code>View</code> to the specified <code>KMLAbstractFeature</code>.
+     * Smoothly moves the <code>WorldWindow</code>'s <code>View</code> to the specified
+     * <code>KMLAbstractFeature</code>.
      *
      * @param feature the <code>KMLAbstractFeature</code> to move to.
      */
-    protected void moveTo(KMLAbstractFeature feature) {
+    protected void moveTo(KMLAbstractFeature feature)
+    {
         KMLViewController viewController = KMLViewController.create(this.wwd);
-        if (viewController == null) {
+        if (viewController == null)
             return;
-        }
 
         viewController.goTo(feature);
     }
@@ -218,11 +236,11 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      *
      * @param view the <code>KMLAbstractView</code> to move to.
      */
-    protected void moveTo(KMLAbstractView view) {
+    protected void moveTo(KMLAbstractView view)
+    {
         KMLViewController viewController = KMLViewController.create(this.wwd);
-        if (viewController == null) {
+        if (viewController == null)
             return;
-        }
 
         viewController.goTo(view);
     }
@@ -232,10 +250,10 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      *
      * @param cursor New cursor. Pass {@code null} to reset the default cursor.
      */
-    protected void setCursor(Cursor cursor) {
-        if (this.wwd instanceof Component) {
+    protected void setCursor(Cursor cursor)
+    {
+        if (this.wwd instanceof Component)
             ((Component) this.wwd).setCursor(cursor);
-        }
     }
 
     /**
@@ -247,7 +265,8 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      *
      * @return {@code true} if the controller can either animate the view or open a balloon for the feature.
      */
-    protected boolean canSelect(KMLAbstractFeature feature) {
+    protected boolean canSelect(KMLAbstractFeature feature)
+    {
         return this.canMoveTo(feature) || this.canShowBalloon(feature);
     }
 
@@ -257,11 +276,12 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      * @param feature KML feature to test.
      *
      * @return {@code true} if the feature has a view associated with it. This can be an explicit <i>Camera</i> or
-     * <i>LookAt</i>, or a default view for a geographic feature. Not all features have a default view. For example,
-     * features attached to screen (<i>ScreenOverlay</i>) and container features (<i>Document</i> and
-     * <i>Folder</i>) do not have default views.
+     *         <i>LookAt</i>, or a default view for a geographic feature. Not all features have a default view. For
+     *         example, features attached to screen (<i>ScreenOverlay</i>) and container features (<i>Document</i> and
+     *         <i>Folder</i>) do not have default views.
      */
-    protected boolean canMoveTo(KMLAbstractFeature feature) {
+    protected boolean canMoveTo(KMLAbstractFeature feature)
+    {
         return (feature.getView() != null) || feature instanceof KMLPlacemark || feature instanceof KMLGroundOverlay;
     }
 
@@ -272,7 +292,8 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      *
      * @return {@code true} if the feature has a balloon.
      */
-    protected boolean canShowBalloon(KMLAbstractFeature feature) {
+    protected boolean canShowBalloon(KMLAbstractFeature feature)
+    {
         BalloonController balloonController = this.getBalloonController();
         return balloonController != null && balloonController.canShowBalloon(feature);
     }

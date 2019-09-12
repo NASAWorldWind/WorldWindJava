@@ -19,11 +19,13 @@ import java.awt.*;
  * @author Patrick Murris
  * @version $Id: MGRSGraticule.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class MGRSGraticule extends ApplicationTemplate {
+public class MGRSGraticule extends ApplicationTemplate
+{
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             super(true, true, false);
 
             MGRSGraticuleLayer layer = new MGRSGraticuleLayer();
@@ -39,16 +41,18 @@ public class MGRSGraticule extends ApplicationTemplate {
             this.getWwjPanel().add(sb, BorderLayout.SOUTH);
 
             // Add go to coordinate input panel
-            this.getControlPanel().add(new GoToCoordinatePanel(this.getWwd()), BorderLayout.SOUTH);
+            this.getControlPanel().add(new GoToCoordinatePanel(this.getWwd()),  BorderLayout.SOUTH);
 
             // Add MGRS graticule properties frame
             JDialog dialog = MGRSAttributesPanel.showDialog(this, "MGRS Graticule Properties", layer);
             Rectangle bounds = this.getBounds();
-            dialog.setLocation(bounds.x + bounds.width, bounds.y);
+            dialog.setLocation(bounds.x + bounds.width, bounds.y);  
         }
     }
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind UTM/MGRS Graticule", AppFrame.class);
     }
 }

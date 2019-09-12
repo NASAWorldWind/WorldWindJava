@@ -13,8 +13,8 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.JsonStreamContext;
 import org.codehaus.jackson.ObjectCodec;
 
-public class JsonGeneratorDelegate extends JsonGenerator {
-
+public class JsonGeneratorDelegate extends JsonGenerator
+{
     /**
      * Delegate object that method calls are delegated to.
      */
@@ -22,7 +22,7 @@ public class JsonGeneratorDelegate extends JsonGenerator {
 
     public JsonGeneratorDelegate(JsonGenerator d) {
         delegate = d;
-    }
+    }   
 
     @Override
     public void close() throws IOException {
@@ -88,7 +88,8 @@ public class JsonGeneratorDelegate extends JsonGenerator {
 
     @Override
     public void writeBinary(Base64Variant b64variant, byte[] data, int offset, int len)
-            throws IOException, JsonGenerationException {
+        throws IOException, JsonGenerationException
+    {
         delegate.writeBinary(b64variant, data, offset, len);
     }
 
@@ -158,7 +159,7 @@ public class JsonGeneratorDelegate extends JsonGenerator {
     }
 
     @Override
-    public void writeObject(Object pojo) throws IOException, JsonProcessingException {
+    public void writeObject(Object pojo) throws IOException,JsonProcessingException {
         delegate.writeObject(pojo);
     }
 
@@ -189,17 +190,17 @@ public class JsonGeneratorDelegate extends JsonGenerator {
 
     @Override
     public void writeRawValue(String text, int offset, int len) throws IOException, JsonGenerationException {
-        delegate.writeRawValue(text, offset, len);
+         delegate.writeRawValue(text, offset, len);
     }
 
     @Override
     public void writeRawValue(char[] text, int offset, int len) throws IOException, JsonGenerationException {
-        delegate.writeRawValue(text, offset, len);
+         delegate.writeRawValue(text, offset, len);
     }
 
     @Override
     public void writeStartArray() throws IOException, JsonGenerationException {
-        delegate.writeStartArray();
+         delegate.writeStartArray();
     }
 
     @Override
@@ -208,7 +209,7 @@ public class JsonGeneratorDelegate extends JsonGenerator {
     }
 
     @Override
-    public void writeString(String text) throws IOException, JsonGenerationException {
+    public void writeString(String text) throws IOException,JsonGenerationException {
         delegate.writeString(text);
     }
 

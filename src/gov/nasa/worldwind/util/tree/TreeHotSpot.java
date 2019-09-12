@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util.tree;
 
 import gov.nasa.worldwind.event.SelectEvent;
@@ -18,20 +19,19 @@ import java.awt.event.*;
  * @author pabercrombie
  * @version $Id: TreeHotSpot.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class TreeHotSpot extends AbstractHotSpot {
-
-    /**
-     * The parent HotSpot, or null if this TreeHotSpot has no parent.
-     */
+public class TreeHotSpot extends AbstractHotSpot
+{
+    /** The parent HotSpot, or null if this TreeHotSpot has no parent. */
     protected HotSpot parent;
 
     /**
      * Create a hot spot.
      *
      * @param parent The screen area that contains this hot spot. Input events that cannot be handled by this object
-     * will be passed to the parent. May be null.
+     *               will be passed to the parent. May be null.
      */
-    public TreeHotSpot(HotSpot parent) {
+    public TreeHotSpot(HotSpot parent)
+    {
         this.parent = parent;
     }
 
@@ -41,14 +41,13 @@ public class TreeHotSpot extends AbstractHotSpot {
      *
      * @param event The event to handle.
      */
-    public void selected(SelectEvent event) {
-        if (event == null || this.isConsumed(event)) {
+    public void selected(SelectEvent event)
+    {
+        if (event == null || this.isConsumed(event))
             return;
-        }
 
-        if (this.parent != null) {
+        if (this.parent != null)
             this.parent.selected(event);
-        }
     }
 
     /**
@@ -57,14 +56,13 @@ public class TreeHotSpot extends AbstractHotSpot {
      *
      * @param event The event to handle.
      */
-    public void mouseClicked(MouseEvent event) {
-        if (event == null || event.isConsumed()) {
+    public void mouseClicked(MouseEvent event)
+    {
+        if (event == null || event.isConsumed())
             return;
-        }
 
-        if (this.parent != null) {
+        if (this.parent != null)
             this.parent.mouseClicked(event);
-        }
     }
 
     /**
@@ -73,14 +71,13 @@ public class TreeHotSpot extends AbstractHotSpot {
      *
      * @param event The event to handle.
      */
-    public void mousePressed(MouseEvent event) {
-        if (event == null || event.isConsumed()) {
+    public void mousePressed(MouseEvent event)
+    {
+        if (event == null || event.isConsumed())
             return;
-        }
 
-        if (this.parent != null) {
+        if (this.parent != null)
             this.parent.mousePressed(event);
-        }
     }
 
     /**
@@ -89,14 +86,13 @@ public class TreeHotSpot extends AbstractHotSpot {
      *
      * @param event The event to handle.
      */
-    public void mouseReleased(MouseEvent event) {
-        if (event == null || event.isConsumed()) {
+    public void mouseReleased(MouseEvent event)
+    {
+        if (event == null || event.isConsumed())
             return;
-        }
 
-        if (this.parent != null) {
+        if (this.parent != null)
             this.parent.mouseReleased(event);
-        }
     }
 
     /**
@@ -105,13 +101,12 @@ public class TreeHotSpot extends AbstractHotSpot {
      *
      * @param event The event to handle.
      */
-    public void mouseWheelMoved(MouseWheelEvent event) {
-        if (event == null || event.isConsumed()) {
+    public void mouseWheelMoved(MouseWheelEvent event)
+    {
+        if (event == null || event.isConsumed())
             return;
-        }
 
-        if (this.parent != null) {
+        if (this.parent != null)
             this.parent.mouseWheelMoved(event);
-        }
     }
 }

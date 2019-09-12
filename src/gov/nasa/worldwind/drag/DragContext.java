@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.drag;
 
 import gov.nasa.worldwind.*;
@@ -15,8 +16,8 @@ import java.awt.*;
 /**
  * Provides information about mouse inputs and {@link WorldWindow} state for use in dragging operations.
  */
-public class DragContext {
-
+public class DragContext
+{
     /**
      * In accordance with the AWT screen coordinates the top left point of the window is the origin.
      */
@@ -44,7 +45,8 @@ public class DragContext {
      */
     protected View view;
     /**
-     * The current drag state, which can be one of the three following values:      {@link gov.nasa.worldwind.avlist.AVKey#DRAG_BEGIN}, {@link gov.nasa.worldwind.avlist.AVKey#DRAG_CHANGE},
+     * The current drag state, which can be one of the three following values:
+     * {@link gov.nasa.worldwind.avlist.AVKey#DRAG_BEGIN}, {@link gov.nasa.worldwind.avlist.AVKey#DRAG_CHANGE},
      * {@link gov.nasa.worldwind.avlist.AVKey#DRAG_ENDED}.
      */
     protected String dragState;
@@ -52,7 +54,8 @@ public class DragContext {
     /**
      * Creates a new {@link DragContext} instance.
      */
-    public DragContext() {
+    public DragContext()
+    {
     }
 
     /**
@@ -60,7 +63,8 @@ public class DragContext {
      *
      * @return the current screen point.
      */
-    public Point getPoint() {
+    public Point getPoint()
+    {
         return point;
     }
 
@@ -71,8 +75,10 @@ public class DragContext {
      *
      * @throws IllegalArgumentException if the point is null.
      */
-    public void setPoint(Point point) {
-        if (point == null) {
+    public void setPoint(Point point)
+    {
+        if (point == null)
+        {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -86,7 +92,8 @@ public class DragContext {
      *
      * @return the previous point.
      */
-    public Point getPreviousPoint() {
+    public Point getPreviousPoint()
+    {
         return previousPoint;
     }
 
@@ -97,8 +104,10 @@ public class DragContext {
      *
      * @throws IllegalArgumentException if the previousPoint is null.
      */
-    public void setPreviousPoint(Point previousPoint) {
-        if (previousPoint == null) {
+    public void setPreviousPoint(Point previousPoint)
+    {
+        if (previousPoint == null)
+        {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -113,7 +122,8 @@ public class DragContext {
      *
      * @return the initial screen point.
      */
-    public Point getInitialPoint() {
+    public Point getInitialPoint()
+    {
         return initialPoint;
     }
 
@@ -124,8 +134,10 @@ public class DragContext {
      *
      * @throws IllegalArgumentException if the initialPoint is null.
      */
-    public void setInitialPoint(Point initialPoint) {
-        if (initialPoint == null) {
+    public void setInitialPoint(Point initialPoint)
+    {
+        if (initialPoint == null)
+        {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -139,7 +151,8 @@ public class DragContext {
      *
      * @return the current {@link SceneController}.
      */
-    public SceneController getSceneController() {
+    public SceneController getSceneController()
+    {
         return sceneController;
     }
 
@@ -150,8 +163,10 @@ public class DragContext {
      *
      * @throws IllegalArgumentException if the scene controller is null.
      */
-    public void setSceneController(SceneController sceneController) {
-        if (sceneController == null) {
+    public void setSceneController(SceneController sceneController)
+    {
+        if (sceneController == null)
+        {
             String msg = Logging.getMessage("nullValue.SceneControllerIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -165,7 +180,8 @@ public class DragContext {
      *
      * @return the current {@link Globe}.
      */
-    public Globe getGlobe() {
+    public Globe getGlobe()
+    {
         return globe;
     }
 
@@ -176,8 +192,10 @@ public class DragContext {
      *
      * @throws IllegalArgumentException if the globe is null.
      */
-    public void setGlobe(Globe globe) {
-        if (globe == null) {
+    public void setGlobe(Globe globe)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -191,7 +209,8 @@ public class DragContext {
      *
      * @return the current {@link View}.
      */
-    public View getView() {
+    public View getView()
+    {
         return view;
     }
 
@@ -202,8 +221,10 @@ public class DragContext {
      *
      * @throws IllegalArgumentException if the view is null.
      */
-    public void setView(View view) {
-        if (view == null) {
+    public void setView(View view)
+    {
+        if (view == null)
+        {
             String msg = Logging.getMessage("nullValue.ViewIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -217,7 +238,8 @@ public class DragContext {
      *
      * @return the drag state.
      */
-    public String getDragState() {
+    public String getDragState()
+    {
         return dragState;
     }
 
@@ -229,15 +251,18 @@ public class DragContext {
      *
      * @throws IllegalArgumentException if the drag state is null or not one of the three states defined for dragging.
      */
-    public void setDragState(String dragState) {
-        if (dragState == null) {
+    public void setDragState(String dragState)
+    {
+        if (dragState == null)
+        {
             String msg = Logging.getMessage("nullValue.DragStateIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         if (!dragState.equals(AVKey.DRAG_BEGIN) && !dragState.equals(AVKey.DRAG_CHANGE)
-                && !dragState.equals(AVKey.DRAG_ENDED)) {
+            && !dragState.equals(AVKey.DRAG_ENDED))
+        {
             String msg = Logging.getMessage("generic.UnknownDragState", dragState);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);

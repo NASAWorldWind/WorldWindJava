@@ -3,14 +3,15 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.worldwindow.core;
 
 /**
  * @author tag
  * @version $Id: Constants.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Constants {
-
+public interface Constants
+{
     // Names and titles
     String APPLICATION_DISPLAY_NAME = "gov.nasa.worldwindx.applications.worldwindow.ApplicationDisplayName";
 
@@ -42,7 +43,7 @@ public interface Constants {
     String ACTIVE_LAYER = "gov.nasa.worldwindx.applications.worldwindow.ActiveLayer"; // force display in active layers
     String USER_LAYER = "gov.nasa.worldwindx.applications.worldwindow.UserLayer"; // User-generated layers
     String SCREEN_LAYER = "gov.nasa.worldwindx.applications.worldwindow.ScreenLayer";
-    // in-screen application controls, etc.
+        // in-screen application controls, etc.
 
     // Feature IDs
     String FEATURE = "gov.nasa.worldwindx.applications.worldwindow.feature";
@@ -52,7 +53,7 @@ public interface Constants {
     String FEATURE_CROSSHAIR = "gov.nasa.worldwindx.applications.worldwindow.feature.Crosshair";
     String FEATURE_COORDINATES_DISPLAY = "gov.nasa.worldwindx.applications.worldwindow.feature.CoordinatesDisplay";
     String FEATURE_EXTERNAL_LINK_CONTROLLER
-            = "gov.nasa.worldwindx.applications.worldwindow.feature.ExternalLinkController";
+        = "gov.nasa.worldwindx.applications.worldwindow.feature.ExternalLinkController";
     String FEATURE_GAZETTEER = "gov.nasa.worldwindx.applications.worldwindow.feature.Gazetteer";
     String FEATURE_GAZETTEER_PANEL = "gov.nasa.worldwindx.applications.worldwindow.feature.GazetteerPanel";
     String FEATURE_GRATICULE = "gov.nasa.worldwindx.applications.worldwindow.feature.Graticule";

@@ -15,8 +15,8 @@ import java.util.concurrent.*;
  *
  * @see TaskService
  */
-public interface ScheduledTaskService {
-
+public interface ScheduledTaskService
+{
     /**
      * Shut down the service. If the {@code immediate} parameter is {@code true}, the service will attempt to stop all
      * active tasks, and will not begin work on any other tasks in the queue. Otherwise, the service will complete all
@@ -39,11 +39,11 @@ public interface ScheduledTaskService {
      * Enqueues a task to run after a delay. Duplicate tasks are ignored.
      *
      * @param runnable the task to add.
-     * @param delay delay before execution of the task. {@code timeUnit} determines the units of the value.
+     * @param delay    delay before execution of the task. {@code timeUnit} determines the units of the value.
      * @param timeUnit time unit of {@code initialDelay} and {@code period}.
      *
      * @return a ScheduledFuture that can be used to get the result of the task, or cancel the task, or {@code null} if
-     * the task was not enqueued.
+     *         the task was not enqueued.
      *
      * @throws IllegalArgumentException if <code>runnable</code> is null
      */
@@ -53,14 +53,14 @@ public interface ScheduledTaskService {
      * Enqueues a task to run periodically. This method follows the same semantics as {@link
      * java.util.concurrent.ScheduledExecutorService#scheduleAtFixedRate}. Duplicate tasks are ignored.
      *
-     * @param runnable the task to add.
+     * @param runnable     the task to add.
      * @param initialDelay delay before the first execution of the task. {@code timeUnit} determines the units of the
-     * value.
-     * @param period interval between executions of the task. {@code timeUnit} determines the units of the value.
-     * @param timeUnit time unit of {@code initialDelay} and {@code period}.
+     *                     value.
+     * @param period       interval between executions of the task. {@code timeUnit} determines the units of the value.
+     * @param timeUnit     time unit of {@code initialDelay} and {@code period}.
      *
      * @return a ScheduledFuture that can be used to get the result of the task, or cancel the task, or {@code null} if
-     * the task was not enqueued.
+     *         the task was not enqueued.
      *
      * @throws IllegalArgumentException if <code>runnable</code> is null
      */

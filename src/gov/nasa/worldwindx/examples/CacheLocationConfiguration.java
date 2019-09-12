@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.Configuration;
@@ -16,13 +17,14 @@ import gov.nasa.worldwind.Configuration;
  * @author tag
  * @version $Id: CacheLocationConfiguration.java 2851 2015-02-26 01:09:46Z tgaskins $
  */
-public class CacheLocationConfiguration extends ApplicationTemplate {
-
-    public static void main(String[] args) {
+public class CacheLocationConfiguration extends ApplicationTemplate
+{
+    public static void main(String[] args)
+    {
         // Prior to starting WorldWind, specify the cache configuration file to Configuration.
         Configuration.setValue(
-                "gov.nasa.worldwind.avkey.DataFileStoreConfigurationFileName",
-                "gov/nasa/worldwindx/examples/data/CacheLocationConfiguration.xml");
+            "gov.nasa.worldwind.avkey.DataFileStoreConfigurationFileName",
+            "gov/nasa/worldwindx/examples/data/CacheLocationConfiguration.xml");
 
         ApplicationTemplate.start("WorldWind Cache Configuration", AppFrame.class);
     }

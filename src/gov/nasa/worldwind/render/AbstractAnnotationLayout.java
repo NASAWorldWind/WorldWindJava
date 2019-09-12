@@ -15,31 +15,37 @@ import com.jogamp.opengl.GL2;
  * @author dcollins
  * @version $Id: AbstractAnnotationLayout.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class AbstractAnnotationLayout implements AnnotationLayoutManager {
-
+public abstract class AbstractAnnotationLayout implements AnnotationLayoutManager
+{
     protected OGLStackHandler stackHandler;
     protected PickSupport pickSupport;
 
-    protected AbstractAnnotationLayout() {
+    protected AbstractAnnotationLayout()
+    {
         this.stackHandler = new OGLStackHandler();
     }
 
-    public PickSupport getPickSupport() {
+    public PickSupport getPickSupport()
+    {
         return this.pickSupport;
     }
 
-    public void setPickSupport(PickSupport pickSupport) {
+    public void setPickSupport(PickSupport pickSupport)
+    {
         this.pickSupport = pickSupport;
     }
 
-    public void beginDrawAnnotations(DrawContext dc, java.awt.Rectangle bounds) {
-        if (dc == null) {
+    public void beginDrawAnnotations(DrawContext dc, java.awt.Rectangle bounds)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (bounds == null) {
+        if (bounds == null)
+        {
             String message = Logging.getMessage("nullValue.RectangleIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -49,8 +55,10 @@ public abstract class AbstractAnnotationLayout implements AnnotationLayoutManage
         this.stackHandler.pushModelview(gl);
     }
 
-    public void endDrawAnnotations(DrawContext dc) {
-        if (dc == null) {
+    public void endDrawAnnotations(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -60,10 +68,14 @@ public abstract class AbstractAnnotationLayout implements AnnotationLayoutManage
         this.stackHandler.pop(gl);
     }
 
-    protected java.awt.Dimension getAnnotationSize(DrawContext dc, Annotation annotation) {
-        try {
+    protected java.awt.Dimension getAnnotationSize(DrawContext dc, Annotation annotation)
+    {
+        try
+        {
             return annotation.getPreferredSize(dc);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // Trap and log exceptions thrown by computing an annotation's preferred size. This will prevent one
             // annotation from throwing an exception and preventing all other anotations from reporting their
             // preferred size.
@@ -75,14 +87,17 @@ public abstract class AbstractAnnotationLayout implements AnnotationLayoutManage
     }
 
     protected void drawAnnotation(DrawContext dc, Annotation annotation, int width, int height, double opacity,
-            Position pickPosition) {
-        try {
-            if (this.pickSupport != null) {
+        Position pickPosition)
+    {
+        try
+        {
+            if (this.pickSupport != null)
                 annotation.setPickSupport(this.pickSupport);
-            }
 
             annotation.draw(dc, width, height, opacity, pickPosition);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // Trap and log exceptions thrown by rendering an annotation. This will prevent one annotation from
             // throwing an exception and preventing all other anotations from rendering.
             String message = Logging.getMessage("generic.ExceptionWhileRenderingAnnotation", annotation);

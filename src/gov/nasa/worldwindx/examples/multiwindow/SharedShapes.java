@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.multiwindow;
 
 import gov.nasa.worldwind.*;
@@ -35,8 +36,8 @@ import java.util.Arrays;
  * shared automatically. But OpenGL resources are not automatically shared. To share them, a reference to a previously
  * created WorldWindow must be specified as a constructor argument for subsequently created WorldWindows.
  * <p>
- * Most WorldWind Globe and {@link gov.nasa.worldwind.layers.Layer} objects can be shared among WorldWindows. Those that
- * cannot be shared have an operational dependency on the WorldWindow they're associated with. An example is the
+ * Most WorldWind Globe and {@link gov.nasa.worldwind.layers.Layer} objects can be shared among WorldWindows. Those
+ * that cannot be shared have an operational dependency on the WorldWindow they're associated with. An example is the
  * {@link gov.nasa.worldwind.layers.ViewControlsLayer} layer for on-screen navigation. Because this layer responds to
  * input events within a specific WorldWindow, it is not sharable. Refer to the WorldWind Overview page for a list of
  * layers that cannot be shared.
@@ -44,20 +45,20 @@ import java.util.Arrays;
  * @author dcollins
  * @version $Id: SharedShapes.java 2326 2014-09-17 22:35:45Z dcollins $
  */
-public class SharedShapes {
-
-    protected static class WWPanel extends JPanel {
-
+public class SharedShapes
+{
+    protected static class WWPanel extends JPanel
+    {
         protected WorldWindowGLCanvas wwd;
         protected HighlightController highlightController;
 
-        public WWPanel(WorldWindow shareWith, Model model, Dimension canvasSize) {
+        public WWPanel(WorldWindow shareWith, Model model, Dimension canvasSize)
+        {
             super(new BorderLayout(5, 5));
 
             this.wwd = shareWith != null ? new WorldWindowGLCanvas(shareWith) : new WorldWindowGLCanvas();
-            if (canvasSize != null) {
+            if (canvasSize != null)
                 this.wwd.setPreferredSize(canvasSize);
-            }
             this.wwd.setModel(model);
             this.add(this.wwd, BorderLayout.CENTER);
 
@@ -68,19 +69,21 @@ public class SharedShapes {
             this.highlightController = new HighlightController(this.wwd, SelectEvent.ROLLOVER);
         }
 
-        public WorldWindow getWwd() {
+        public WorldWindow getWwd()
+        {
             return this.wwd;
         }
     }
 
-    protected static class SharedLayerPanel extends JPanel {
-
+    protected static class SharedLayerPanel extends JPanel
+    {
         protected JComponent layersComponent;
 
-        public SharedLayerPanel(String title, Dimension preferredSize, Iterable<? extends Layer> layersIterable) {
+        public SharedLayerPanel(String title, Dimension preferredSize, Iterable<? extends Layer> layersIterable)
+        {
             this.setLayout(new BorderLayout());
             this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10),
-                    BorderFactory.createTitledBorder(title)));
+                BorderFactory.createTitledBorder(title)));
 
             // Create a box that holds the controls for each layer.
             this.layersComponent = javax.swing.Box.createVerticalBox();
@@ -93,17 +96,19 @@ public class SharedShapes {
             dummyPanel.add(this.layersComponent, BorderLayout.NORTH);
             JScrollPane scrollPane = new JScrollPane(dummyPanel);
             scrollPane.setBorder(BorderFactory.createEmptyBorder());
-            if (preferredSize != null) {
+            if (preferredSize != null)
                 scrollPane.setPreferredSize(preferredSize);
-            }
             this.add(scrollPane, BorderLayout.CENTER);
         }
 
-        public void update(Iterable<? extends Layer> layersIterable) {
+        public void update(Iterable<? extends Layer> layersIterable)
+        {
             this.layersComponent.removeAll();
 
-            if (layersIterable != null) {
-                for (Layer layer : layersIterable) {
+            if (layersIterable != null)
+            {
+                for (Layer layer : layersIterable)
+                {
                     this.addLayer(layer);
                 }
             }
@@ -111,10 +116,13 @@ public class SharedShapes {
             this.revalidate();
         }
 
-        protected void addLayer(final Layer layer) {
+        protected void addLayer(final Layer layer)
+        {
             final JCheckBox jcb = new JCheckBox(layer.getName(), layer.isEnabled());
-            jcb.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent actionEvent) {
+            jcb.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent actionEvent)
+                {
                     layer.setEnabled(jcb.isSelected());
                     layer.firePropertyChange(AVKey.LAYER, null, layer);
                 }
@@ -125,7 +133,8 @@ public class SharedShapes {
         }
     }
 
-    protected static Layer makeAirspaceLayer() {
+    protected static Layer makeAirspaceLayer()
+    {
         RenderableLayer layer = new RenderableLayer();
         layer.setName("Airspaces");
 
@@ -133,38 +142,38 @@ public class SharedShapes {
         AirspaceAttributes attrs = randomAttrs.nextAttributes().asAirspaceAttributes();
 
         Airspace airspace = new Orbit(LatLon.fromDegrees(37.5, -120), LatLon.fromDegrees(42.5, -120),
-                Orbit.OrbitType.CENTER, 100000);
+            Orbit.OrbitType.CENTER, 100000);
         airspace.setAltitudes(10000, 20000);
         airspace.setTerrainConforming(true);
         airspace.setAttributes(attrs);
         layer.addRenderable(airspace);
 
         airspace = new Curtain(Arrays.asList(
-                LatLon.fromDegrees(37.5, -112.5), LatLon.fromDegrees(42.5, -112.5), LatLon.fromDegrees(37.5, -107.5)));
+            LatLon.fromDegrees(37.5, -112.5), LatLon.fromDegrees(42.5, -112.5), LatLon.fromDegrees(37.5, -107.5)));
         airspace.setAltitudes(10000, 20000);
         airspace.setTerrainConforming(true);
         airspace.setAttributes(attrs);
         layer.addRenderable(airspace);
 
         airspace = new Polygon(Arrays.asList(
-                LatLon.fromDegrees(37.5, -102.5), LatLon.fromDegrees(42.5, -102.5), LatLon.fromDegrees(37.5, -97.5)));
+            LatLon.fromDegrees(37.5, -102.5), LatLon.fromDegrees(42.5, -102.5), LatLon.fromDegrees(37.5, -97.5)));
         airspace.setAltitudes(10000, 20000);
         airspace.setTerrainConforming(true);
         airspace.setAttributes(attrs);
         layer.addRenderable(airspace);
 
         airspace = new PolyArc(Arrays.asList(
-                LatLon.fromDegrees(37.5, -92.5), LatLon.fromDegrees(42.5, -92.5), LatLon.fromDegrees(37.5, -87.5)),
-                200000, Angle.fromDegrees(0), Angle.fromDegrees(90));
+            LatLon.fromDegrees(37.5, -92.5), LatLon.fromDegrees(42.5, -92.5), LatLon.fromDegrees(37.5, -87.5)),
+            200000, Angle.fromDegrees(0), Angle.fromDegrees(90));
         airspace.setAltitudes(10000, 20000);
         airspace.setTerrainConforming(true);
         airspace.setAttributes(attrs);
         layer.addRenderable(airspace);
 
         airspace = new Cake(Arrays.asList(
-                new Cake.Layer(LatLon.fromDegrees(40, -80), 100000, Angle.ZERO, Angle.ZERO, 10000, 20000),
-                new Cake.Layer(LatLon.fromDegrees(40, -80), 50000, Angle.ZERO, Angle.ZERO, 20000, 30000),
-                new Cake.Layer(LatLon.fromDegrees(40, -80), 25000, Angle.ZERO, Angle.ZERO, 30000, 40000)));
+            new Cake.Layer(LatLon.fromDegrees(40, -80), 100000, Angle.ZERO, Angle.ZERO, 10000, 20000),
+            new Cake.Layer(LatLon.fromDegrees(40, -80), 50000, Angle.ZERO, Angle.ZERO, 20000, 30000),
+            new Cake.Layer(LatLon.fromDegrees(40, -80), 25000, Angle.ZERO, Angle.ZERO, 30000, 40000)));
         airspace.setTerrainConforming(true);
         airspace.setAttributes(attrs);
         layer.addRenderable(airspace);
@@ -176,7 +185,7 @@ public class SharedShapes {
         layer.addRenderable(airspace);
 
         airspace = new PartialCappedCylinder(LatLon.fromDegrees(30, -110), 100000,
-                Angle.fromDegrees(30), Angle.fromDegrees(330));
+            Angle.fromDegrees(30), Angle.fromDegrees(330));
         airspace.setAltitudes(10000, 20000);
         airspace.setTerrainConforming(true);
         airspace.setAttributes(attrs);
@@ -189,8 +198,8 @@ public class SharedShapes {
         layer.addRenderable(airspace);
 
         airspace = new TrackAirspace(Arrays.asList(
-                new Box(LatLon.fromDegrees(27.5, -92.5), LatLon.fromDegrees(32.5, -92.5), 100000, 100000),
-                new Box(LatLon.fromDegrees(32.5, -92.5), LatLon.fromDegrees(27.5, -87.5), 100000, 100000)));
+            new Box(LatLon.fromDegrees(27.5, -92.5), LatLon.fromDegrees(32.5, -92.5), 100000, 100000),
+            new Box(LatLon.fromDegrees(32.5, -92.5), LatLon.fromDegrees(27.5, -87.5), 100000, 100000)));
         ((TrackAirspace) airspace).getLegs().get(0).setAltitudes(10000, 20000);
         ((TrackAirspace) airspace).getLegs().get(1).setAltitudes(20000, 30000);
         airspace.setTerrainConforming(true);
@@ -198,8 +207,8 @@ public class SharedShapes {
         layer.addRenderable(airspace);
 
         airspace = new Route(Arrays.asList(
-                LatLon.fromDegrees(27.5, -82.5), LatLon.fromDegrees(32.5, -82.5), LatLon.fromDegrees(27.5, -77.5)),
-                200000);
+            LatLon.fromDegrees(27.5, -82.5), LatLon.fromDegrees(32.5, -82.5), LatLon.fromDegrees(27.5, -77.5)),
+            200000);
         airspace.setAltitudes(10000, 20000);
         airspace.setTerrainConforming(true);
         airspace.setAttributes(attrs);
@@ -208,17 +217,21 @@ public class SharedShapes {
         return layer;
     }
 
-    public static void main(String[] args) {
-        Layer[] basicLayers = new Layer[]{
-            new StarsLayer(),
-            new CompassLayer(),
-            new BMNGOneImage(),
-            new BMNGWMSLayer(),
-            new LandsatI3WMSLayer(),};
+    public static void main(String[] args)
+    {
+        Layer[] basicLayers = new Layer[]
+            {
+                new StarsLayer(),
+                new CompassLayer(),
+                new BMNGOneImage(),
+                new BMNGWMSLayer(),
+                new LandsatI3WMSLayer(),
+            };
 
-        Layer[] shapeLayers = new Layer[]{
-            makeAirspaceLayer()
-        };
+        Layer[] shapeLayers = new Layer[]
+            {
+                makeAirspaceLayer()
+            };
 
         // Create the shared WorldWind layers.
         Layer[] layers = new Layer[basicLayers.length + shapeLayers.length];
@@ -234,7 +247,7 @@ public class SharedShapes {
 
         // Create a layer panel that displays the layer list shared by both WorldWindows.
         SharedLayerPanel layerPanel = new SharedLayerPanel("Shared Shapes", new Dimension(200, 0),
-                Arrays.asList(shapeLayers));
+            Arrays.asList(shapeLayers));
 
         // Create a box that arranges the layer panel and the WorldWind windows horizontally, and assigns each the
         // appropriate amount of space for its preferred size.

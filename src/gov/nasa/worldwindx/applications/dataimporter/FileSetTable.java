@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.dataimporter;
 
 import javax.swing.*;
@@ -16,9 +17,10 @@ import java.util.ArrayList;
  * @author tag
  * @version $Id: FileSetTable.java 1180 2013-02-15 18:40:47Z tgaskins $
  */
-public class FileSetTable extends JTable {
-
-    public FileSetTable(FileSetMap fileSetMap) {
+public class FileSetTable extends JTable
+{
+    public FileSetTable(FileSetMap fileSetMap)
+    {
         this.setModel(new FileSetTableModel(fileSetMap));
 
         this.setIntercellSpacing(new Dimension(10, 1));
@@ -45,20 +47,22 @@ public class FileSetTable extends JTable {
         column.setPreferredWidth(20);
     }
 
-    public void setFileSetMap(FileSetMap fileSetMap) {
+    public void setFileSetMap(FileSetMap fileSetMap)
+    {
         ((FileSetTableModel) this.getModel()).setFileSetMap(fileSetMap);
     }
 
-    public java.util.List<FileSet> getSelectedFileSets() {
+    public java.util.List<FileSet> getSelectedFileSets()
+    {
         int[] selectedRows = this.getSelectedRows();
 
-        if (selectedRows.length == 0) {
+        if (selectedRows.length == 0)
             return null;
-        }
 
         java.util.List<FileSet> selectedFileSets = new ArrayList<FileSet>(selectedRows.length);
 
-        for (int i = 0; i < selectedRows.length; i++) {
+        for (int i = 0; i < selectedRows.length; i++)
+        {
             int modelRow = this.convertRowIndexToModel(selectedRows[i]);
             FileSet fileSet = ((FileSetTableModel) this.getModel()).getRow(modelRow);
             selectedFileSets.add(fileSet);
@@ -67,18 +71,18 @@ public class FileSetTable extends JTable {
         return selectedFileSets;
     }
 
-    public void scrollToFileSet(FileSet fileSet) {
+    public void scrollToFileSet(FileSet fileSet)
+    {
         Integer row = ((FileSetTableModel) this.getModel()).getRowForFileSet(fileSet);
 
-        if (row != null) {
+        if (row != null)
             this.scrollToVisible(row, 0);
-        }
     }
 
-    public void scrollToVisible(int rowIndex, int vColIndex) {
-        if (!(this.getParent() instanceof JViewport)) {
+    public void scrollToVisible(int rowIndex, int vColIndex)
+    {
+        if (!(this.getParent() instanceof JViewport))
             return;
-        }
 
         JViewport viewport = (JViewport) this.getParent();
 

@@ -16,32 +16,37 @@ import java.util.*;
  * @author tag
  * @version $Id: CSVReader.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class CSVReader implements Track, TrackSegment {
-
+public class CSVReader implements Track, TrackSegment
+{
     private List<Track> tracks = new ArrayList<Track>();
     private List<TrackSegment> segments = new ArrayList<TrackSegment>();
     private List<TrackPoint> points = new ArrayList<TrackPoint>();
     private String name;
 //    private int lineNumber = 0;
 
-    public CSVReader() {
+    public CSVReader()
+    {
         this.tracks.add(this);
         this.segments.add(this);
     }
 
-    public List<TrackSegment> getSegments() {
+    public List<TrackSegment> getSegments()
+    {
         return this.segments;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return this.name;
     }
 
-    public int getNumPoints() {
+    public int getNumPoints()
+    {
         return this.points.size();
     }
 
-    public List<TrackPoint> getPoints() {
+    public List<TrackPoint> getPoints()
+    {
         return this.points;
     }
 
@@ -50,8 +55,10 @@ public class CSVReader implements Track, TrackSegment {
      * @throws IllegalArgumentException if <code>path</code> is null
      * @throws java.io.IOException If there are issues reading from the file.
      */
-    public void readFile(String path) throws IOException {
-        if (path == null) {
+    public void readFile(String path) throws IOException
+    {
+        if (path == null)
+        {
             String msg = Logging.getMessage("nullValue.PathIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -60,7 +67,8 @@ public class CSVReader implements Track, TrackSegment {
         this.name = path;
 
         java.io.File file = new java.io.File(path);
-        if (!file.exists()) {
+        if (!file.exists())
+        {
             String msg = Logging.getMessage("generic.FileNotFound", path);
             Logging.logger().severe(msg);
             throw new FileNotFoundException(path);
@@ -76,8 +84,10 @@ public class CSVReader implements Track, TrackSegment {
      * @throws IllegalArgumentException if <code>stream</code> is null
      * @throws java.io.IOException If there are issues reading the stream.
      */
-    public void readStream(InputStream stream, String name) throws IOException {
-        if (stream == null) {
+    public void readStream(InputStream stream, String name) throws IOException
+    {
+        if (stream == null)
+        {
             String msg = Logging.getMessage("nullValue.InputStreamIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -87,50 +97,64 @@ public class CSVReader implements Track, TrackSegment {
         this.doReadStream(stream);
     }
 
-    public List<Track> getTracks() {
+    public List<Track> getTracks()
+    {
         return this.tracks;
     }
 
-    public Iterator<Position> getTrackPositionIterator() {
-        return new Iterator<Position>() {
+    public Iterator<Position> getTrackPositionIterator()
+    {
+        return new Iterator<Position>()
+        {
             private TrackPointIterator trackPoints = new TrackPointIteratorImpl(CSVReader.this.tracks);
 
-            public boolean hasNext() {
+            public boolean hasNext()
+            {
                 return this.trackPoints.hasNext();
             }
 
-            public Position next() {
+            public Position next()
+            {
                 return this.trackPoints.next().getPosition();
             }
 
-            public void remove() {
+            public void remove()
+            {
                 this.trackPoints.remove();
             }
         };
     }
 
-    private void doReadStream(InputStream stream) {
+    private void doReadStream(InputStream stream)
+    {
         String sentence;
         Scanner scanner = new Scanner(stream);
 
-        try {
-            do {
+        try
+        {
+            do
+            {
                 sentence = scanner.nextLine();
-                if (sentence != null) {
+                if (sentence != null)
+                {
 //                    ++this.lineNumber;
                     this.parseLine(sentence);
                 }
             } while (sentence != null);
-        } catch (NoSuchElementException e) {
+        }
+        catch (NoSuchElementException e)
+        {
             //noinspection UnnecessaryReturnStatement
             return;
         }
     }
 
-    private void parseLine(String sentence) {
+    private void parseLine(String sentence)
+    {
 //        try
 //        {
-        if (sentence.trim().length() > 0) {
+        if ( sentence.trim().length() > 0)
+        {
             CSVTrackPoint point = new CSVTrackPoint(sentence.split(","));
             this.points.add(point);
         }

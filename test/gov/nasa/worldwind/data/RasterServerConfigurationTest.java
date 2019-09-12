@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.data;
 
 import gov.nasa.worldwind.geom.Sector;
@@ -16,15 +17,19 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class RasterServerConfigurationTest {
-
+public class RasterServerConfigurationTest
+{
     @Test
-    public void testParsing001() {
+    public void testParsing001()
+    {
         RasterServerConfiguration config = new RasterServerConfiguration("testData/RasterServerConfiguration.xml");
 
-        try {
+        try
+        {
             config.parse();
-        } catch (XMLStreamException e) {
+        }
+        catch (XMLStreamException e)
+        {
             e.printStackTrace();
         }
 

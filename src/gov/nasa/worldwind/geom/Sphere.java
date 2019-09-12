@@ -13,15 +13,13 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.*;
 
 /**
- * Represents a sphere in three dimensional space.
- * <p>
- * Instances of <code>Sphere</code> are immutable. </p>
+ * Represents a sphere in three dimensional space. <p> Instances of <code>Sphere</code> are immutable. </p>
  *
  * @author Tom Gaskins
  * @version $Id: Sphere.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public final class Sphere implements Extent, Renderable {
-
+public final class Sphere implements Extent, Renderable
+{
     public final static Sphere UNIT_SPHERE = new Sphere(Vec4.ZERO, 1);
 
     protected final Vec4 center;
@@ -36,14 +34,17 @@ public final class Sphere implements Extent, Renderable {
      *
      * @throws IllegalArgumentException if <code>points</code> is null or empty
      */
-    public static Sphere createBoundingSphere(Vec4 points[]) {
-        if (points == null) {
+    public static Sphere createBoundingSphere(Vec4 points[])
+    {
+        if (points == null)
+        {
             String message = Logging.getMessage("nullValue.PointsArrayIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (points.length < 1) {
+        if (points.length < 1)
+        {
             String message = Logging.getMessage("Geom.Sphere.NoPointsSpecified");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -52,9 +53,9 @@ public final class Sphere implements Extent, Renderable {
         // Creates the sphere around the axis aligned bounding box of the input points.
         Vec4[] extrema = Vec4.computeExtrema(points);
         Vec4 center = new Vec4(
-                (extrema[0].x + extrema[1].x) / 2.0,
-                (extrema[0].y + extrema[1].y) / 2.0,
-                (extrema[0].z + extrema[1].z) / 2.0);
+            (extrema[0].x + extrema[1].x) / 2.0,
+            (extrema[0].y + extrema[1].y) / 2.0,
+            (extrema[0].z + extrema[1].z) / 2.0);
         double radius = extrema[0].distanceTo3(extrema[1]) / 2.0;
 
         return new Sphere(center, radius);
@@ -69,14 +70,17 @@ public final class Sphere implements Extent, Renderable {
      *
      * @throws IllegalArgumentException if <code>buffer</code> is null or contains fewer than three values.
      */
-    public static Sphere createBoundingSphere(BufferWrapper buffer) {
-        if (buffer == null) {
+    public static Sphere createBoundingSphere(BufferWrapper buffer)
+    {
+        if (buffer == null)
+        {
             String message = Logging.getMessage("nullValue.BufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (buffer.getBackingBuffer().position() > buffer.getBackingBuffer().limit() - 3) {
+        if (buffer.getBackingBuffer().position() > buffer.getBackingBuffer().limit() - 3)
+        {
             String message = Logging.getMessage("Geom.Sphere.NoPointsSpecified");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -85,9 +89,9 @@ public final class Sphere implements Extent, Renderable {
         // Creates the sphere around the axis aligned bounding box of the input points.
         Vec4[] extrema = Vec4.computeExtrema(buffer);
         Vec4 center = new Vec4(
-                (extrema[0].x + extrema[1].x) / 2.0,
-                (extrema[0].y + extrema[1].y) / 2.0,
-                (extrema[0].z + extrema[1].z) / 2.0);
+            (extrema[0].x + extrema[1].x) / 2.0,
+            (extrema[0].y + extrema[1].y) / 2.0,
+            (extrema[0].z + extrema[1].z) / 2.0);
         double radius = extrema[0].distanceTo3(extrema[1]) / 2.0;
 
         return new Sphere(center, radius);
@@ -106,8 +110,10 @@ public final class Sphere implements Extent, Renderable {
      *
      * @throws IllegalArgumentException if the Iterable is null.
      */
-    public static Sphere createBoundingSphere(Iterable<? extends Extent> extents) {
-        if (extents == null) {
+    public static Sphere createBoundingSphere(Iterable<? extends Extent> extents)
+    {
+        if (extents == null)
+        {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -118,10 +124,10 @@ public final class Sphere implements Extent, Renderable {
         int count = 0;
 
         // Compute the mean center point of the specified extents.
-        for (Extent e : extents) {
-            if (e == null) {
+        for (Extent e : extents)
+        {
+            if (e == null)
                 continue;
-            }
 
             center = (center != null) ? e.getCenter().add3(center) : e.getCenter();
             count++;
@@ -129,23 +135,21 @@ public final class Sphere implements Extent, Renderable {
 
         // If the accumulated center point is null, then the specified Iterable is empty or contains only null elements.
         // We cannot compute an enclosing extent, so just return null.
-        if (center == null) {
+        if (center == null)
             return null;
-        }
 
         center = center.divide3(count);
 
         // Compute the maximum distance from the mean center point to the outermost point on each extent. This is
         // the radius of the enclosing extent.
-        for (Extent e : extents) {
-            if (e == null) {
+        for (Extent e : extents)
+        {
+            if (e == null)
                 continue;
-            }
 
             double distance = e.getCenter().distanceTo3(center) + e.getRadius();
-            if (radius < distance) {
+            if (radius < distance)
                 radius = distance;
-            }
         }
 
         return new Sphere(center, radius);
@@ -160,14 +164,17 @@ public final class Sphere implements Extent, Renderable {
      *
      * @throws IllegalArgumentException if <code>center</code> is null or if <code>radius</code> is non-positive
      */
-    public Sphere(Vec4 center, double radius) {
-        if (center == null) {
+    public Sphere(Vec4 center, double radius)
+    {
+        if (center == null)
+        {
             String message = Logging.getMessage("nullValue.CenterIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (radius <= 0) {
+        if (radius <= 0)
+        {
             String message = Logging.getMessage("Geom.Sphere.RadiusIsZeroOrNegative", radius);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -184,7 +191,8 @@ public final class Sphere implements Extent, Renderable {
      *
      * @return the radius of this sphere
      */
-    public final double getRadius() {
+    public final double getRadius()
+    {
         return this.radius;
     }
 
@@ -193,7 +201,8 @@ public final class Sphere implements Extent, Renderable {
      *
      * @return the diameter of this <code>Sphere</code>
      */
-    public final double getDiameter() {
+    public final double getDiameter()
+    {
         return 2 * this.radius;
     }
 
@@ -202,14 +211,14 @@ public final class Sphere implements Extent, Renderable {
      *
      * @return the <code>Vec4</code> situated at the center of this <code>Sphere</code>
      */
-    public final Vec4 getCenter() {
+    public final Vec4 getCenter()
+    {
         return this.center;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public double getEffectiveRadius(Plane plane) {
+    /** {@inheritDoc} */
+    public double getEffectiveRadius(Plane plane)
+    {
         return this.getRadius();
     }
 
@@ -222,8 +231,10 @@ public final class Sphere implements Extent, Renderable {
      *
      * @throws IllegalArgumentException if the location is null.
      */
-    public Vec4 getPointOnSphere(LatLon location) {
-        if (location == null) {
+    public Vec4 getPointOnSphere(LatLon location)
+    {
+        if (location == null)
+        {
             String msg = Logging.getMessage("nullValue.LocationIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -249,8 +260,10 @@ public final class Sphere implements Extent, Renderable {
      *
      * @throws IllegalArgumentException if <code>line</code> is null
      */
-    public final Intersection[] intersect(Line line) {
-        if (line == null) {
+    public final Intersection[] intersect(Line line)
+    {
+        if (line == null)
+        {
             String message = Logging.getMessage("nullValue.LineIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -261,19 +274,20 @@ public final class Sphere implements Extent, Renderable {
         double c = line.getOrigin().getLengthSquared3() - this.radius * this.radius;
 
         double discriminant = Sphere.discriminant(a, b, c);
-        if (discriminant < 0) {
+        if (discriminant < 0)
             return null;
-        }
 
         double discriminantRoot = Math.sqrt(discriminant);
-        if (discriminant == 0) {
+        if (discriminant == 0)
+        {
             Vec4 p = line.getPointAt((-b - discriminantRoot) / (2 * a));
-            return new Intersection[]{new Intersection(p, true)};
-        } else // (discriminant > 0)
+            return new Intersection[] {new Intersection(p, true)};
+        }
+        else // (discriminant > 0)
         {
             Vec4 near = line.getPointAt((-b - discriminantRoot) / (2 * a));
             Vec4 far = line.getPointAt((-b + discriminantRoot) / (2 * a));
-            return new Intersection[]{new Intersection(near, false), new Intersection(far, false)};
+            return new Intersection[] {new Intersection(near, false), new Intersection(far, false)};
         }
     }
 
@@ -288,7 +302,8 @@ public final class Sphere implements Extent, Renderable {
      *
      * @return the discriminant "b squared minus 4ac"
      */
-    private static double discriminant(double a, double b, double c) {
+    private static double discriminant(double a, double b, double c)
+    {
         return b * b - 4 * a * c;
     }
 
@@ -301,8 +316,10 @@ public final class Sphere implements Extent, Renderable {
      *
      * @throws IllegalArgumentException if the frustum is null.
      */
-    public final boolean intersects(Frustum frustum) {
-        if (frustum == null) {
+    public final boolean intersects(Frustum frustum)
+    {
+        if (frustum == null)
+        {
             String message = Logging.getMessage("nullValue.FrustumIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -312,28 +329,23 @@ public final class Sphere implements Extent, Renderable {
         // center point with each plane's vector provides a distance to each plane. If this distance is less than
         // -radius, the extent is completely clipped by that plane and therefore does not intersect the space enclosed
         // by this Frustum.
+
         Vec4 c = this.getCenter();
         double nr = -this.getRadius();
 
-        if (frustum.getFar().dot(c) <= nr) {
+        if (frustum.getFar().dot(c) <= nr)
             return false;
-        }
-        if (frustum.getLeft().dot(c) <= nr) {
+        if (frustum.getLeft().dot(c) <= nr)
             return false;
-        }
-        if (frustum.getRight().dot(c) <= nr) {
+        if (frustum.getRight().dot(c) <= nr)
             return false;
-        }
-        if (frustum.getTop().dot(c) <= nr) {
+        if (frustum.getTop().dot(c) <= nr)
             return false;
-        }
-        if (frustum.getBottom().dot(c) <= nr) {
+        if (frustum.getBottom().dot(c) <= nr)
             return false;
-        }
         //noinspection RedundantIfStatement
-        if (frustum.getNear().dot(c) <= nr) {
+        if (frustum.getNear().dot(c) <= nr)
             return false;
-        }
 
         return true;
     }
@@ -347,8 +359,10 @@ public final class Sphere implements Extent, Renderable {
      *
      * @throws IllegalArgumentException if <code>line</code> is null
      */
-    public boolean intersects(Line line) {
-        if (line == null) {
+    public boolean intersects(Line line)
+    {
+        if (line == null)
+        {
             String msg = Logging.getMessage("nullValue.LineIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -365,8 +379,10 @@ public final class Sphere implements Extent, Renderable {
      *
      * @throws IllegalArgumentException if <code>plane</code> is null
      */
-    public boolean intersects(Plane plane) {
-        if (plane == null) {
+    public boolean intersects(Plane plane)
+    {
+        if (plane == null)
+        {
             String msg = Logging.getMessage("nullValue.PlaneIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -376,11 +392,11 @@ public final class Sphere implements Extent, Renderable {
         return dq1 <= this.radius;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public double getProjectedArea(View view) {
-        if (view == null) {
+    /** {@inheritDoc} */
+    public double getProjectedArea(View view)
+    {
+        if (view == null)
+        {
             String message = Logging.getMessage("nullValue.ViewIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -397,8 +413,10 @@ public final class Sphere implements Extent, Renderable {
      *
      * @throws IllegalArgumentException if <code>dc</code> is null
      */
-    public void render(DrawContext dc) {
-        if (dc == null) {
+    public void render(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String msg = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -421,34 +439,33 @@ public final class Sphere implements Extent, Renderable {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Sphere: center = " + this.center.toString() + " radius = " + Double.toString(this.radius);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object o)
+    {
+        if (this == o)
             return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass())
             return false;
-        }
 
         final gov.nasa.worldwind.geom.Sphere sphere = (gov.nasa.worldwind.geom.Sphere) o;
 
-        if (Double.compare(sphere.radius, radius) != 0) {
+        if (Double.compare(sphere.radius, radius) != 0)
             return false;
-        }
         //noinspection RedundantIfStatement
-        if (!center.equals(sphere.center)) {
+        if (!center.equals(sphere.center))
             return false;
-        }
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result;
         long temp;
         result = center.hashCode();

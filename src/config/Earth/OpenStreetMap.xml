@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-~ Copyright (C) 2012 United States Government as represented by the Administrator of the
-~ National Aeronautics and Space Administration.
-~ All Rights Reserved.
--->
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
 
 <!-- Open Street Map imagery -->
 <!--$Id: OpenStreetMap.xml 1171 2013-02-11 21:45:02Z dcollins $-->
@@ -47,8 +47,8 @@
     <RetainLevelZeroTiles>false</RetainLevelZeroTiles>
     <UseTransparentTextures>true</UseTransparentTextures>
     <!--<ScreenCredit creditType="ScreenImage">-->
-    <!--<FileName>images/Bing_32x32.png</FileName>-->
-    <!--<Link>http://www.microsoft.com/maps/assets/docs/terms.aspx/</Link>-->
+        <!--<FileName>images/Bing_32x32.png</FileName>-->
+        <!--<Link>http://www.microsoft.com/maps/assets/docs/terms.aspx/</Link>-->
     <!--</ScreenCredit>-->
     <RetrievalTimeouts>
         <ReadTimeout>

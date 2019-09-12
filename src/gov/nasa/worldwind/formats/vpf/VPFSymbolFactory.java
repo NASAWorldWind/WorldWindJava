@@ -11,8 +11,8 @@ import java.util.Collection;
  * @author dcollins
  * @version $Id: VPFSymbolFactory.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface VPFSymbolFactory {
-
+public interface VPFSymbolFactory
+{
     Collection<? extends VPFSymbol> createPointSymbols(VPFFeatureClass featureClass);
 
     Collection<? extends VPFSymbol> createLineSymbols(VPFFeatureClass featureClass);

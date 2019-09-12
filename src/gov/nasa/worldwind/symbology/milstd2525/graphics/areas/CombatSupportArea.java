@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc;
@@ -19,22 +20,23 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: CombatSupportArea.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class CombatSupportArea extends BasicArea {
-
+public class CombatSupportArea extends BasicArea
+{
     /**
      * Indicates the graphics supported by this class.
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics() {
+    public static List<String> getSupportedGraphics()
+    {
         return Arrays.asList(
-                TacGrpSidc.CSS_ARA_DHA,
-                TacGrpSidc.CSS_ARA_EPWHA,
-                TacGrpSidc.CSS_ARA_FARP,
-                TacGrpSidc.CSS_ARA_RHA,
-                TacGrpSidc.CSS_ARA_SUPARS_BSA,
-                TacGrpSidc.CSS_ARA_SUPARS_DSA,
-                TacGrpSidc.CSS_ARA_SUPARS_RSA);
+            TacGrpSidc.CSS_ARA_DHA,
+            TacGrpSidc.CSS_ARA_EPWHA,
+            TacGrpSidc.CSS_ARA_FARP,
+            TacGrpSidc.CSS_ARA_RHA,
+            TacGrpSidc.CSS_ARA_SUPARS_BSA,
+            TacGrpSidc.CSS_ARA_SUPARS_DSA,
+            TacGrpSidc.CSS_ARA_SUPARS_RSA);
     }
 
     /**
@@ -42,35 +44,34 @@ public class CombatSupportArea extends BasicArea {
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public CombatSupportArea(String sidc) {
+    public CombatSupportArea(String sidc)
+    {
         super(sidc);
 
         // Do not draw "ENY" labels for hostile entities
         this.setShowHostileIndicator(false);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected String getGraphicLabel() {
+    protected String getGraphicLabel()
+    {
         String code = this.maskedSymbolCode;
 
-        if (TacGrpSidc.CSS_ARA_DHA.equalsIgnoreCase(code)) {
+        if (TacGrpSidc.CSS_ARA_DHA.equalsIgnoreCase(code))
             return "DETAINEE\nHOLDING\nAREA";
-        } else if (TacGrpSidc.CSS_ARA_EPWHA.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.CSS_ARA_EPWHA.equalsIgnoreCase(code))
             return "EPW\nHOLDING\nAREA";
-        } else if (TacGrpSidc.CSS_ARA_FARP.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.CSS_ARA_FARP.equalsIgnoreCase(code))
             return "FARP";
-        } else if (TacGrpSidc.CSS_ARA_RHA.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.CSS_ARA_RHA.equalsIgnoreCase(code))
             return "REFUGEE\nHOLDING\nAREA";
-        } else if (TacGrpSidc.CSS_ARA_SUPARS_BSA.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.CSS_ARA_SUPARS_BSA.equalsIgnoreCase(code))
             return "BSA";
-        } else if (TacGrpSidc.CSS_ARA_SUPARS_DSA.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.CSS_ARA_SUPARS_DSA.equalsIgnoreCase(code))
             return "DSA";
-        } else if (TacGrpSidc.CSS_ARA_SUPARS_RSA.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.CSS_ARA_SUPARS_RSA.equalsIgnoreCase(code))
             return "RSA";
-        }
 
         return "";
     }

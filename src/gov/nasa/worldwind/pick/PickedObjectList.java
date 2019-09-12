@@ -11,9 +11,10 @@ import java.util.*;
  * @author tag
  * @version $Id: PickedObjectList.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class PickedObjectList extends ArrayList<PickedObject> {
-
-    public PickedObjectList() {
+public class PickedObjectList extends ArrayList<PickedObject>
+{
+    public PickedObjectList()
+    {
     }
 
     public PickedObjectList(PickedObjectList list) // clone a shallow copy
@@ -21,40 +22,46 @@ public class PickedObjectList extends ArrayList<PickedObject> {
         super(list);
     }
 
-    public PickedObject getTopPickedObject() {
+    public PickedObject getTopPickedObject()
+    {
         int size = this.size();
 
-        if (1 < size) {
-            for (PickedObject po : this) {
-                if (po.isOnTop()) {
+        if (1 < size)
+        {
+            for (PickedObject po : this)
+            {
+                if (po.isOnTop())
                     return po;
-                }
             }
         }
 
-        if (0 < size) {   // if we are here, then no objects were mark as 'top'
+        if (0 < size)
+        {   // if we are here, then no objects were mark as 'top'
             return this.get(0);
         }
 
         return null;
     }
 
-    public Object getTopObject() {
+    public Object getTopObject()
+    {
         PickedObject po = this.getTopPickedObject();
         return po != null ? po.getObject() : null;
     }
 
-    public PickedObject getTerrainObject() {
-        for (PickedObject po : this) {
-            if (po.isTerrain()) {
+    public PickedObject getTerrainObject()
+    {
+        for (PickedObject po : this)
+        {
+            if (po.isTerrain())
                 return po;
-            }
         }
 
         return null;
     }
 
-    public PickedObject getMostRecentPickedObject() {
+    public PickedObject getMostRecentPickedObject()
+    {
         return this.size() > 0 ? this.get(this.size() - 1) : null;
     }
 
@@ -64,14 +71,16 @@ public class PickedObjectList extends ArrayList<PickedObject> {
      *
      * @return a new list of the picked objects marked as on top, or <code>null</code> if nothing is marked as on top.
      */
-    public List<PickedObject> getAllTopPickedObjects() {
+    public List<PickedObject> getAllTopPickedObjects()
+    {
         List<PickedObject> list = null; // Lazily create the list to avoid unnecessary allocations.
 
-        for (PickedObject po : this) {
-            if (po.isOnTop()) {
-                if (list == null) {
+        for (PickedObject po : this)
+        {
+            if (po.isOnTop())
+            {
+                if (list == null)
                     list = new ArrayList<PickedObject>();
-                }
                 list.add(po);
             }
         }
@@ -84,16 +93,18 @@ public class PickedObjectList extends ArrayList<PickedObject> {
      * returns <code>null</code> if this list is empty, or does not contain any picked objects marked as on top.
      *
      * @return a new list of the objects associated with a picked object marked as on top, or <code>null</code> if
-     * nothing is marked as on top.
+     *         nothing is marked as on top.
      */
-    public List<?> getAllTopObjects() {
+    public List<?> getAllTopObjects()
+    {
         List<Object> list = null; // Lazily create the list to avoid unnecessary allocations.
 
-        for (PickedObject po : this) {
-            if (po.isOnTop()) {
-                if (list == null) {
+        for (PickedObject po : this)
+        {
+            if (po.isOnTop())
+            {
+                if (list == null)
                     list = new ArrayList<Object>();
-                }
                 list.add(po.getObject());
             }
         }
@@ -101,7 +112,8 @@ public class PickedObjectList extends ArrayList<PickedObject> {
         return list;
     }
 
-    public boolean hasNonTerrainObjects() {
+    public boolean hasNonTerrainObjects()
+    {
         return this.size() > 1 || (this.size() == 1 && this.getTerrainObject() == null);
     }
 }

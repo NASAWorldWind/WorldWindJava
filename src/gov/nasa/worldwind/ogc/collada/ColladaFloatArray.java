@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.collada;
 
 import gov.nasa.worldwind.util.WWUtil;
@@ -17,11 +18,9 @@ import javax.xml.stream.events.XMLEvent;
  * @author pabercrombie
  * @version $Id: ColladaFloatArray.java 662 2012-06-26 19:05:46Z pabercrombie $
  */
-public class ColladaFloatArray extends ColladaAbstractObject {
-
-    /**
-     * Floats parsed from this element.
-     */
+public class ColladaFloatArray extends ColladaAbstractObject
+{
+    /** Floats parsed from this element. */
     protected float[] floats;
 
     /**
@@ -29,7 +28,8 @@ public class ColladaFloatArray extends ColladaAbstractObject {
      *
      * @param ns the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public ColladaFloatArray(String ns) {
+    public ColladaFloatArray(String ns)
+    {
         super(ns);
     }
 
@@ -38,22 +38,22 @@ public class ColladaFloatArray extends ColladaAbstractObject {
      *
      * @return Floats contained in this element. May return an empty array, but will not return null.
      */
-    public float[] getFloats() {
+    public float[] getFloats()
+    {
         return (this.floats != null) ? this.floats : new float[0];
     }
 
-    /**
-     * {@inheritDoc} Overridden to parse character content into a float[].
-     */
+    /** {@inheritDoc} Overridden to parse character content into a float[]. */
     @Override
-    public Object parse(XMLEventParserContext ctx, XMLEvent event, Object... args) throws XMLStreamException {
+    public Object parse(XMLEventParserContext ctx, XMLEvent event, Object... args) throws XMLStreamException
+    {
         super.parse(ctx, event, args);
 
-        if (this.hasField(CHARACTERS_CONTENT)) {
+        if (this.hasField(CHARACTERS_CONTENT))
+        {
             String s = (String) this.getField(CHARACTERS_CONTENT);
-            if (!WWUtil.isEmpty(s)) {
+            if (!WWUtil.isEmpty(s))
                 this.floats = this.parseFloats(s);
-            }
 
             // Don't need to keep string version of the floats
             this.removeField(CHARACTERS_CONTENT);
@@ -69,15 +69,16 @@ public class ColladaFloatArray extends ColladaAbstractObject {
      *
      * @return Array of parsed floats.
      */
-    protected float[] parseFloats(String floatArrayString) {
+    protected float[] parseFloats(String floatArrayString)
+    {
         String[] arrayOfNumbers = floatArrayString.split("\\s");
         float[] ary = new float[arrayOfNumbers.length];
 
         int i = 0;
-        for (String s : arrayOfNumbers) {
-            if (!WWUtil.isEmpty(s)) {
+        for (String s : arrayOfNumbers)
+        {
+            if (!WWUtil.isEmpty(s))
                 ary[i++] = Float.parseFloat(s);
-            }
         }
 
         return ary;

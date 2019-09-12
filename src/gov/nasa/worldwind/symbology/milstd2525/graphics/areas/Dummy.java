@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.WorldWind;
@@ -21,8 +22,8 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: Dummy.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Dummy extends AbstractMilStd2525TacticalGraphic {
-
+public class Dummy extends AbstractMilStd2525TacticalGraphic
+{
     protected Path path;
 
     /**
@@ -30,27 +31,27 @@ public class Dummy extends AbstractMilStd2525TacticalGraphic {
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics() {
+    public static List<String> getSupportedGraphics()
+    {
         return Arrays.asList(TacGrpSidc.C2GM_DCPN_DMY);
     }
 
-    public Dummy(String sidc) {
+    public Dummy(String sidc)
+    {
         super(sidc);
         this.path = this.createPath();
         this.path.setAttributes(this.getActiveShapeAttributes());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void doRenderGraphic(DrawContext dc) {
+    /** {@inheritDoc} */
+    protected void doRenderGraphic(DrawContext dc)
+    {
         this.path.render(dc);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void applyDelegateOwner(Object owner) {
+    /** {@inheritDoc} */
+    protected void applyDelegateOwner(Object owner)
+    {
         this.path.setDelegateOwner(owner);
     }
 
@@ -61,43 +62,47 @@ public class Dummy extends AbstractMilStd2525TacticalGraphic {
      *
      * @throws IllegalArgumentException if less than three control points are provided.
      */
-    public void setPositions(Iterable<? extends Position> positions) {
-        if (positions == null) {
+    public void setPositions(Iterable<? extends Position> positions)
+    {
+        if (positions == null)
+        {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        try {
+        try
+        {
             Iterator<? extends Position> iterator = positions.iterator();
             Position pt1 = iterator.next();
             Position pt2 = iterator.next();
             Position pt3 = iterator.next();
 
             this.path.setPositions(Arrays.asList(pt2, pt1, pt3));
-        } catch (NoSuchElementException e) {
+        }
+        catch (NoSuchElementException e)
+        {
             String message = Logging.getMessage("generic.InsufficientPositions");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Iterable<? extends Position> getPositions() {
+    /** {@inheritDoc} */
+    public Iterable<? extends Position> getPositions()
+    {
         return this.path.getPositions();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Position getReferencePosition() {
+    /** {@inheritDoc} */
+    public Position getReferencePosition()
+    {
         return this.path.getReferencePosition();
     }
 
     @Override
-    protected void applyDefaultAttributes(ShapeAttributes attributes) {
+    protected void applyDefaultAttributes(ShapeAttributes attributes)
+    {
         super.applyDefaultAttributes(attributes);
 
         attributes.setOutlineWidth(2.0);
@@ -105,7 +110,8 @@ public class Dummy extends AbstractMilStd2525TacticalGraphic {
         attributes.setOutlineStipplePattern((short) 0xAAAA);
     }
 
-    protected Path createPath() {
+    protected Path createPath()
+    {
         Path path = new Path();
         path.setFollowTerrain(true);
         path.setPathType(AVKey.GREAT_CIRCLE);

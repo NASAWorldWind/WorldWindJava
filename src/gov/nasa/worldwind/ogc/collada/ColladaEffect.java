@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.collada;
 
 import gov.nasa.worldwind.render.Material;
@@ -15,14 +16,15 @@ import java.awt.*;
  * @author pabercrombie
  * @version $Id: ColladaEffect.java 654 2012-06-25 04:15:52Z pabercrombie $
  */
-public class ColladaEffect extends ColladaAbstractParamContainer {
-
+public class ColladaEffect extends ColladaAbstractParamContainer
+{
     /**
      * Construct an instance.
      *
      * @param ns the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public ColladaEffect(String ns) {
+    public ColladaEffect(String ns)
+    {
         super(ns);
     }
 
@@ -31,7 +33,8 @@ public class ColladaEffect extends ColladaAbstractParamContainer {
      *
      * @return The value of the <i>profile_COMMON</i> field, or null if the field is not set.
      */
-    public ColladaProfileCommon getProfileCommon() {
+    public ColladaProfileCommon getProfileCommon()
+    {
         return (ColladaProfileCommon) this.getField("profile_COMMON");
     }
 
@@ -41,26 +44,23 @@ public class ColladaEffect extends ColladaAbstractParamContainer {
      *
      * @return The texture specified by this effect, or null if the texture cannot be resolved.
      */
-    public ColladaTexture getTexture() {
+    public ColladaTexture getTexture()
+    {
         ColladaProfileCommon profile = this.getProfileCommon();
-        if (profile == null) {
+        if (profile == null)
             return null;
-        }
 
         ColladaTechnique technique = profile.getTechnique();
-        if (technique == null) {
+        if (technique == null)
             return null;
-        }
 
         ColladaAbstractShader shader = technique.getShader();
-        if (shader == null) {
+        if (shader == null)
             return null;
-        }
 
         ColladaTextureOrColor diffuse = shader.getDiffuse();
-        if (diffuse == null) {
+        if (diffuse == null)
             return null;
-        }
 
         return diffuse.getTexture();
     }
@@ -71,21 +71,19 @@ public class ColladaEffect extends ColladaAbstractParamContainer {
      *
      * @return The material for this effect, or null if the material cannot be resolved.
      */
-    public Material getMaterial() {
+    public Material getMaterial()
+    {
         ColladaProfileCommon profile = this.getProfileCommon();
-        if (profile == null) {
+        if (profile == null)
             return null;
-        }
 
         ColladaTechnique technique = profile.getTechnique();
-        if (technique == null) {
+        if (technique == null)
             return null;
-        }
 
         ColladaAbstractShader shader = technique.getShader();
-        if (shader == null) {
+        if (shader == null)
             return null;
-        }
 
         Color emission = null;
         Color ambient = null;
@@ -93,57 +91,46 @@ public class ColladaEffect extends ColladaAbstractParamContainer {
         Color specular = null;
 
         ColladaTextureOrColor textureOrColor = shader.getEmission();
-        if (textureOrColor != null) {
+        if (textureOrColor != null)
             emission = textureOrColor.getColor();
-        }
 
         textureOrColor = shader.getAmbient();
-        if (textureOrColor != null) {
+        if (textureOrColor != null)
             ambient = textureOrColor.getColor();
-        }
 
         textureOrColor = shader.getSpecular();
-        if (textureOrColor != null) {
+        if (textureOrColor != null)
             specular = textureOrColor.getColor();
-        }
 
         textureOrColor = shader.getDiffuse();
-        if (textureOrColor != null) {
+        if (textureOrColor != null)
             diffuse = textureOrColor.getColor();
-        }
 
         // TODO what should be we do with materials that don't have Diffuse?
-        if (diffuse == null) {
+        if (diffuse == null)
             return null;
-        }
 
-        if (emission == null) {
+        if (emission == null)
             emission = new Color(0, 0, 0, diffuse.getAlpha());
-        }
-        if (ambient == null) {
+        if (ambient == null)
             ambient = diffuse;
-        }
-        if (specular == null) {
+        if (specular == null)
             specular = new Color(255, 255, 255, diffuse.getAlpha());
-        }
 
         return new Material(specular, diffuse, ambient, emission, 1f);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public ColladaNewParam getParam(String sid) {
+    public ColladaNewParam getParam(String sid)
+    {
         ColladaNewParam param = super.getParam(sid);
-        if (param != null) {
+        if (param != null)
             return param;
-        }
 
         ColladaProfileCommon profile = this.getProfileCommon();
-        if (profile == null) {
+        if (profile == null)
             return null;
-        }
 
         return profile.getParam(sid);
     }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.globes;
 
 import gov.nasa.worldwind.geom.*;
@@ -17,8 +18,8 @@ import gov.nasa.worldwind.geom.*;
  * @author tag
  * @version $Id: GeographicProjection.java 2277 2014-08-28 21:19:37Z dcollins $
  */
-public interface GeographicProjection {
-
+public interface GeographicProjection
+{
     /**
      * Returns the projection name.
      *
@@ -30,7 +31,8 @@ public interface GeographicProjection {
      * Indicates whether it makes sense to treat this projection as contiguous with itself. If true, the scene
      * controller will make the globe using the projection appear to scroll continuously horizontally.
      *
-     * @return <code>true</code> if it makes sense to treat this projection as continuous, otherwise <code>false</code>.
+     * @return <code>true</code> if it makes sense to treat this projection as continuous, otherwise
+     *         <code>false</code>.
      */
     boolean isContinuous();
 
@@ -47,7 +49,7 @@ public interface GeographicProjection {
      * @param projectionLimits The projection limits.
      *
      * @throws IllegalArgumentException if the specified limits is null or the limits are outside the normal range of
-     * latitude or longitude.
+     *                                  latitude or longitude.
      */
     void setProjectionLimits(Sector projectionLimits);
 
@@ -57,12 +59,13 @@ public interface GeographicProjection {
      * Note: The input arguments are not checked for <code>null</code> prior to being used. The caller, typically a
      * {@link Globe2D} implementation, is expected do perform that check prior to calling this method.
      *
-     * @param globe The globe this projection is applied to.
-     * @param latitude The latitude of the position.
-     * @param longitude The longitude of the position.
+     * @param globe           The globe this projection is applied to.
+     * @param latitude        The latitude of the position.
+     * @param longitude       The longitude of the position.
      * @param metersElevation The elevation of the position, in meters.
-     * @param offset An optional offset to be applied to the Cartesian output. Typically only projections that are
-     * continuous (see {@link #isContinuous()} apply this offset. Others ignore it. May be null.
+     * @param offset          An optional offset to be applied to the Cartesian output. Typically only projections that
+     *                        are continuous (see {@link #isContinuous()} apply this offset. Others ignore it. May be
+     *                        null.
      *
      * @return The Cartesian point, in meters, corresponding to the input position.
      *
@@ -81,22 +84,23 @@ public interface GeographicProjection {
      * For each grid point within the sector, an elevation value is specified via an array of elevations. The
      * calculation at each position incorporates the associated elevation.
      *
-     * @param globe The globe this projection is applied to.
-     * @param sector The sector over which to generate the points.
-     * @param numLat The number of points to generate latitudinally.
-     * @param numLon The number of points to generate longitudinally.
+     * @param globe           The globe this projection is applied to.
+     * @param sector          The sector over which to generate the points.
+     * @param numLat          The number of points to generate latitudinally.
+     * @param numLon          The number of points to generate longitudinally.
      * @param metersElevation An array of elevations to incorporate in the point calculations. There must be one
-     * elevation value in the array for each generated point, so the array must have a length of at least
-     * <code>numLon x numLat</code>. Elevations are read from this array in row major order, beginning with the row of
-     * minimum latitude.
-     * @param offset An optional offset to be applied to the Cartesian output. Typically only projections that are
-     * continuous (see {@link #isContinuous()} apply this offset. Others ignore it. May be null.
-     * @param out An array to hold the computed cartesian points. It must have a length of at least
-     * <code>numLon x numLat</code>. Points are written to this array in row major order, beginning with the row of
-     * minimum latitude.
+     *                        elevation value in the array for each generated point, so the array must have a length of
+     *                        at least <code>numLon x numLat</code>. Elevations are read from this array in row major
+     *                        order, beginning with the row of minimum latitude.
+     * @param offset          An optional offset to be applied to the Cartesian output. Typically only projections that
+     *                        are continuous (see {@link #isContinuous()} apply this offset. Others ignore it. May be
+     *                        null.
+     * @param out             An array to hold the computed cartesian points. It must have a length of at least
+     *                        <code>numLon x numLat</code>. Points are written to this array in row major order,
+     *                        beginning with the row of minimum latitude.
      */
     void geographicToCartesian(Globe globe, Sector sector, int numLat, int numLon, double[] metersElevation,
-            Vec4 offset, Vec4[] out);
+        Vec4 offset, Vec4[] out);
 
     /**
      * Converts a Cartesian point in meters to a geographic position.
@@ -104,15 +108,16 @@ public interface GeographicProjection {
      * Note: The input arguments are not checked for <code>null</code> prior to being used. The caller, typically a
      * {@link Globe2D} implementation, is expected do perform that check prior to calling this method.
      *
-     * @param globe The globe this projection is applied to.
-     * @param cart The Cartesian point, in meters.
+     * @param globe  The globe this projection is applied to.
+     * @param cart   The Cartesian point, in meters.
      * @param offset An optional offset to be applied to the Cartesian input prior to converting it. Typically only
-     * projections that are continuous (see {@link #isContinuous()} apply this offset. Others ignore it. May be null.
+     *               projections that are continuous (see {@link #isContinuous()} apply this offset. Others ignore it.
+     *               May be null.
      *
      * @return The geographic position corresponding to the input point.
      *
      * @see #geographicToCartesian(Globe, gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double,
-     * gov.nasa.worldwind.geom.Vec4)
+     *      gov.nasa.worldwind.geom.Vec4)
      */
     Position cartesianToGeographic(Globe globe, Vec4 cart, Vec4 offset);
 
@@ -120,8 +125,8 @@ public interface GeographicProjection {
      * Computes a Cartesian vector that points north and is tangent to the meridian at the specified geographic
      * location.
      *
-     * @param globe The globe this projection is applied to.
-     * @param latitude The latitude of the location.
+     * @param globe     The globe this projection is applied to.
+     * @param latitude  The latitude of the location.
      * @param longitude The longitude of the location.
      *
      * @return The north pointing tangent corresponding to the input location.

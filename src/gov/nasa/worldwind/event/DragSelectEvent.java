@@ -16,12 +16,13 @@ import java.awt.event.*;
  * @author tag
  * @version $Id: DragSelectEvent.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class DragSelectEvent extends SelectEvent {
-
+public class DragSelectEvent extends SelectEvent
+{
     private final java.awt.Point previousPickPoint;
 
     public DragSelectEvent(Object source, String eventAction, MouseEvent mouseEvent, PickedObjectList pickedObjects,
-            java.awt.Point previousPickPoint) {
+        java.awt.Point previousPickPoint)
+    {
         super(source, eventAction, mouseEvent, pickedObjects);
         this.previousPickPoint = previousPickPoint;
     }
@@ -31,7 +32,8 @@ public class DragSelectEvent extends SelectEvent {
      *
      * @return the screen position of the event just prior to this one.
      */
-    public java.awt.Point getPreviousPickPoint() {
+    public java.awt.Point getPreviousPickPoint()
+    {
         return this.previousPickPoint;
     }
 }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.symbology.TacticalGraphicUtil;
@@ -16,38 +17,41 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: Smoke.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Smoke extends BasicArea {
-
+public class Smoke extends BasicArea
+{
     /**
      * Indicates the graphics supported by this class.
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics() {
+    public static List<String> getSupportedGraphics()
+    {
         return Arrays.asList(TacGrpSidc.FSUPP_ARS_ARATGT_SMK);
     }
 
-    public Smoke(String sidc) {
+    public Smoke(String sidc)
+    {
         super(sidc);
         // Do not draw "ENY" labels for hostile entities
         this.setShowHostileIndicator(false);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected String createLabelText() {
+    protected String createLabelText()
+    {
         StringBuilder sb = new StringBuilder();
         sb.append("SMOKE\n");
 
         Object[] dates = TacticalGraphicUtil.getDateRange(this);
-        if (dates[0] != null) {
+        if (dates[0] != null)
+        {
             sb.append(dates[0]);
             sb.append(" - \n");
         }
 
-        if (dates[1] != null) {
+        if (dates[1] != null)
+        {
             sb.append(dates[1]);
         }
 

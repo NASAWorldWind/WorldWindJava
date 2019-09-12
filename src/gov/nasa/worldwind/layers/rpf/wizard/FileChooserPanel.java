@@ -20,90 +20,104 @@ import java.io.File;
  * @author dcollins
  * @version $Id: FileChooserPanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class FileChooserPanel extends JPanel {
-
+public class FileChooserPanel extends JPanel
+{
     private JLabel title;
     private JLabel description;
     private JFormattedTextField fileField;
     private JButton chooseButton;
     private JFileChooser fileChooser;
-
-    public FileChooserPanel() {
+    
+    public FileChooserPanel()
+    {
         makeComponents();
         layoutComponents();
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return this.title.getText();
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title.setText(title);
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return this.description.getText();
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description.setText(description);
     }
 
-    public JFileChooser getFileChooser() {
+    public JFileChooser getFileChooser()
+    {
         return this.fileChooser;
     }
 
-    public void setFileChooser(JFileChooser fileChooser) {
-        if (fileChooser == null) {
+    public void setFileChooser(JFileChooser fileChooser)
+    {
+        if (fileChooser == null)
+        {
             String message = "JFileChooser is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-
+        
         this.fileChooser = fileChooser;
     }
 
-    public File getSelectedFile() {
+    public File getSelectedFile()
+    {
         return getValueAsFile(this.fileField.getValue());
     }
 
-    private File getValueAsFile(Object value) {
-        if (value != null) {
-            if (value instanceof File) {
+    private File getValueAsFile(Object value)
+    {
+        if (value != null)
+        {
+            if (value instanceof File)
                 return (File) value;
-            } else {
+            else
                 return new File(value.toString());
-            }
         }
         return null;
     }
 
-    public void promptForNewSelection() {
+    public void promptForNewSelection()
+    {
         onChooseClicked();
     }
 
-    private void onChooseClicked() {
+    private void onChooseClicked()
+    {
         int returnCode = this.fileChooser.showDialog(this, "Choose");
-        if (returnCode == JFileChooser.APPROVE_OPTION && this.fileChooser.getSelectedFile() != null) {
+        if (returnCode == JFileChooser.APPROVE_OPTION && this.fileChooser.getSelectedFile() != null)
+        {
             this.fileField.setValue(this.fileChooser.getSelectedFile());
         }
     }
 
-    private void onFileFieldChanged(Object newValue) {
+    private void onFileFieldChanged(Object newValue)
+    {
         File newFile = getValueAsFile(newValue);
         firePropertyChange("selectedFile", null, newFile);
     }
 
-    private void makeComponents() {
+    private void makeComponents()
+    {
         this.title = new JLabel(" ");
         this.title.setBackground(Color.gray);
-        this.title.setOpaque(true);
+        this.title.setOpaque(true);        
         this.description = new JLabel();
         this.fileField = new JFormattedTextField("Click 'Choose...'");
         Font font = this.fileField.getFont();
-        if (!font.isBold()) {
+        if (!font.isBold())
             font = new Font(font.getName(), Font.BOLD | font.getStyle(), font.getSize());
-        }
         this.fileField.setFont(font);
         // Override input-path maximum size to avoid any vertical stretching by the layout manager.
         Dimension preferred = this.fileField.getPreferredSize();
@@ -128,7 +142,8 @@ public class FileChooserPanel extends JPanel {
         this.fileChooser.setMultiSelectionEnabled(false);
     }
 
-    private void layoutComponents() {
+    private void layoutComponents()
+    {
         setLayout(new BorderLayout());
 
         JPanel p = new JPanel();

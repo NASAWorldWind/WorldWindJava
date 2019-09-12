@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.collada;
 
 /**
@@ -11,14 +12,15 @@ package gov.nasa.worldwind.ogc.collada;
  * @author pabercrombie
  * @version $Id: ColladaTriangles.java 654 2012-06-25 04:15:52Z pabercrombie $
  */
-public class ColladaTriangles extends ColladaAbstractGeometry {
-
+public class ColladaTriangles extends ColladaAbstractGeometry
+{
     /**
      * Construct an instance.
      *
      * @param ns the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public ColladaTriangles(String ns) {
+    public ColladaTriangles(String ns)
+    {
         super(ns);
     }
 
@@ -28,7 +30,8 @@ public class ColladaTriangles extends ColladaAbstractGeometry {
      * @return Three
      */
     @Override
-    protected int getVerticesPerShape() {
+    protected int getVerticesPerShape()
+    {
         return 3;
     }
 }

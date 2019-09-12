@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.lineofsight;
 
 import gov.nasa.worldwind.*;
@@ -19,19 +20,19 @@ import java.util.*;
 
 /**
  * Shows how to determine and display the intersection of a line with an {@link Polygon}.
- *
  * @author tag
  * @version $Id: PolygonIntersection.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class PolygonIntersection extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
+public class PolygonIntersection extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
         protected HighResolutionTerrain terrain; // Use this class to test against high-resolution terrain
         protected Polygon polygon; // the polygon to intersect
         protected RenderableLayer layer; // layer to display the polygon and the intersection
 
-        public AppFrame() {
+        public AppFrame()
+        {
             super(true, true, false);
 
             // Create the polygon boundary and then the polygon.
@@ -60,19 +61,23 @@ public class PolygonIntersection extends ApplicationTemplate {
 
             // Perform the intersection test within a timer callback. Intersection calculations would normally be done
             // on a separate, non-EDT thread, however.
-            Timer timer = new Timer(3000, new ActionListener() {
-                public void actionPerformed(ActionEvent actionEvent) {
+            Timer timer = new Timer(3000, new ActionListener()
+            {
+                public void actionPerformed(ActionEvent actionEvent)
+                {
                     Position pA = Position.fromDegrees(40.5, -120.5, 0);
                     Position pB = new Position(pA, 20e3);
-                    drawLine(pA, pB);
+                    drawLine(pA,  pB);
                     performIntersection();
                 }
             });
             timer.start();
         }
 
-        protected void performIntersection() {
-            try {
+        protected void performIntersection()
+        {
+            try
+            {
                 // Create the line to intersect with the shape.
                 Position referencePosition = Position.fromDegrees(40.5, -120.5, 0);
                 Vec4 referencePoint = terrain.getSurfacePoint(referencePosition);
@@ -85,17 +90,22 @@ public class PolygonIntersection extends ApplicationTemplate {
                 List<Intersection> intersections = this.polygon.intersect(line, this.terrain);
 
                 // Get and display the intersections.
-                if (intersections != null) {
-                    for (Intersection intersection : intersections) {
+                if (intersections != null)
+                {
+                    for (Intersection intersection : intersections)
+                    {
                         drawIntersection(intersection);
                     }
                 }
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e)
+            {
                 e.printStackTrace();
             }
         }
 
-        protected void drawLine(Position pA, Position pB) {
+        protected void drawLine(Position pA, Position pB)
+        {
             // Create and display the intersection line.
             Path path = new Path(pA, pB);
             ShapeAttributes pathAttributes = new BasicShapeAttributes();
@@ -110,7 +120,8 @@ public class PolygonIntersection extends ApplicationTemplate {
             this.getWwd().redraw();
         }
 
-        protected void drawIntersection(Intersection intersection) {
+        protected void drawIntersection(Intersection intersection)
+        {
             // Display a point at the intersection.
             PointPlacemark iPoint = new PointPlacemark(intersection.getIntersectionPosition());
             iPoint.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
@@ -125,7 +136,8 @@ public class PolygonIntersection extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         // Configure the initial view parameters so that the balloons are immediately visible.
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 40.5);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -120.4);

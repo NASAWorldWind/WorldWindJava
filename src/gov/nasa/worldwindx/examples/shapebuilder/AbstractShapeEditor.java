@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.shapebuilder;
 
 import gov.nasa.worldwind.*;
@@ -16,7 +17,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * An abstract class defining common functionality and fields for editors used in the RigidShapeBuilder example. These
+ * An abstract class defining common functionality and fields for editors used in the RigidShapeBuilder example.  These
  * include field variables and getters and setters for the shape's annotations that are displayed during editing (and
  * related labels), references to the current WorldWindow and mouse location, flags indicating whether the editor is
  * currently armed and whether annotations should be shown, as well as fields indicating the current action being
@@ -28,11 +29,11 @@ import java.awt.event.*;
  * @author ccrick
  * @version $Id: AbstractShapeEditor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class AbstractShapeEditor extends AbstractLayer implements MouseListener, MouseMotionListener {
-
+public abstract class AbstractShapeEditor extends AbstractLayer implements MouseListener, MouseMotionListener
+{
     /**
      * Labels used in the annotations which are displayed during editing to show the current value of various shape
-     * parameters. Actual label values are retrieved from the WorldWind message resource bundle.
+     * parameters.  Actual label values are retrieved from the WorldWind message resource bundle.
      */
     public static final String ANGLE_LABEL = "MeasureTool.AngleLabel";
     public static final String AREA_LABEL = "MeasureTool.AreaLabel";
@@ -73,62 +74,75 @@ public abstract class AbstractShapeEditor extends AbstractLayer implements Mouse
     protected String editMode;
     protected int altitudeMode = WorldWind.ABSOLUTE;
 
-    public WorldWindow getWorldWindow() {
+    public WorldWindow getWorldWindow()
+    {
         return this.wwd;
     }
 
-    public void setWorldWindow(WorldWindow wwd) {
-        if (this.wwd == wwd) {
+    public void setWorldWindow(WorldWindow wwd)
+    {
+        if (this.wwd == wwd)
             return;
-        }
 
-        if (this.wwd != null) {
+        if (this.wwd != null)
+        {
             this.wwd.getInputHandler().removeMouseListener(this);
             this.wwd.getInputHandler().removeMouseMotionListener(this);
         }
 
         this.wwd = wwd;
 
-        if (this.wwd != null) {
+        if (this.wwd != null)
+        {
             this.wwd.getInputHandler().addMouseListener(this);
             this.wwd.getInputHandler().addMouseMotionListener(this);
         }
     }
 
-    public boolean isArmed() {
+    public boolean isArmed()
+    {
         return this.armed;
     }
 
-    public void setArmed(boolean armed) {
+    public void setArmed(boolean armed)
+    {
         this.armed = armed;
     }
 
-    public int getAltitudeMode() {
+    public int getAltitudeMode()
+    {
         return this.altitudeMode;
     }
 
-    public void setAltitudeMode(int altitudeMode) {
+    public void setAltitudeMode(int altitudeMode)
+    {
         this.altitudeMode = altitudeMode;
     }
 
-    public boolean isShowAnnotation() {
+    public boolean isShowAnnotation()
+    {
         return this.showAnnotation;
     }
 
-    public void setShowAnnotation(boolean state) {
+    public void setShowAnnotation(boolean state)
+    {
         this.showAnnotation = state;
     }
 
-    public boolean isAboveGround() {
+    public boolean isAboveGround()
+    {
         return this.aboveGround;
     }
 
-    public void setAboveGround(boolean state) {
+    public void setAboveGround(boolean state)
+    {
         this.aboveGround = state;
     }
 
-    public String getLabel(String labelName) {
-        if (labelName == null) {
+    public String getLabel(String labelName)
+    {
+        if (labelName == null)
+        {
             String msg = Logging.getMessage("nullValue.LabelName");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -136,28 +150,30 @@ public abstract class AbstractShapeEditor extends AbstractLayer implements Mouse
 
         String label = this.getStringValue(labelName);
 
-        if (label != null) {
+        if (label != null)
             return label;
-        } else {
-            if (this.unitsFormat == null) {
+        else
+        {
+            if (this.unitsFormat == null)
                 this.unitsFormat = new UnitsFormat();
-            }
 
             return this.unitsFormat.getStringValue(labelName);
         }
     }
 
-    public void setLabel(String labelName, String label) {
-        if (labelName != null && labelName.length() > 0) {
+    public void setLabel(String labelName, String label)
+    {
+        if (labelName != null && labelName.length() > 0)
             this.setValue(labelName, label);
-        }
     }
 
-    protected void setAnnotationAttributes(AnnotationAttributes attributes) {
+    protected void setAnnotationAttributes(AnnotationAttributes attributes)
+    {
         this.annotationAttributes = attributes;
     }
 
-    protected AnnotationAttributes getAnnotationAttributes() {
+    protected AnnotationAttributes getAnnotationAttributes()
+    {
         return this.annotationAttributes;
     }
 
@@ -169,7 +185,8 @@ public abstract class AbstractShapeEditor extends AbstractLayer implements Mouse
 
     abstract public void updateAnnotation(Position pos);
 
-    protected void initializeAnnotation() {
+    protected void initializeAnnotation()
+    {
         // Annotation attributes
         this.setInitialLabels();
 
@@ -189,7 +206,8 @@ public abstract class AbstractShapeEditor extends AbstractLayer implements Mouse
         this.annotation.getAttributes().setDrawOffset(null); // use defaults
     }
 
-    protected void setInitialLabels() {
+    protected void setInitialLabels()
+    {
         this.setLabel(ACCUMULATED_LABEL, Logging.getMessage(ACCUMULATED_LABEL));
         this.setLabel(ANGLE_LABEL, Logging.getMessage(ANGLE_LABEL));
         this.setLabel(AREA_LABEL, Logging.getMessage(AREA_LABEL));
@@ -213,24 +231,22 @@ public abstract class AbstractShapeEditor extends AbstractLayer implements Mouse
         this.setLabel(WIDTH_LABEL, Logging.getMessage(WIDTH_LABEL));
     }
 
-    protected boolean arePositionsRedundant(Position posA, Position posB) {
-        if (posA == null || posB == null) {
+    protected boolean arePositionsRedundant(Position posA, Position posB)
+    {
+        if (posA == null || posB == null)
             return false;
-        }
 
         String aLat = this.unitsFormat.angleNL("", posA.getLatitude());
         String bLat = this.unitsFormat.angleNL("", posB.getLatitude());
 
-        if (!aLat.equals(bLat)) {
+        if (!aLat.equals(bLat))
             return false;
-        }
 
         String aLon = this.unitsFormat.angleNL("", posA.getLongitude());
         String bLon = this.unitsFormat.angleNL("", posB.getLongitude());
 
-        if (!aLon.equals(bLon)) {
+        if (!aLon.equals(bLon))
             return false;
-        }
 
         String aAlt = this.unitsFormat.lengthNL("", posA.getAltitude());
         String bAlt = this.unitsFormat.lengthNL("", posB.getAltitude());

@@ -8,14 +8,15 @@ import org.codehaus.jackson.*;
 
 /**
  * Helper class that implements
- * <a href="http://en.wikipedia.org/wiki/Delegation_pattern">delegation pattern</a> for {@link JsonParser}, to allow for
- * simple overridability of basic parsing functionality. The idea is that any functionality to be modified can be simply
+ * <a href="http://en.wikipedia.org/wiki/Delegation_pattern">delegation pattern</a> for {@link JsonParser},
+ * to allow for simple overridability of basic parsing functionality.
+ * The idea is that any functionality to be modified can be simply
  * overridden; and anything else will be delegated by default.
- *
+ * 
  * @since 1.4
  */
-public class JsonParserDelegate extends JsonParser {
-
+public class JsonParserDelegate extends JsonParser
+{
     /**
      * Delegate object that method calls are delegated to.
      */
@@ -30,6 +31,7 @@ public class JsonParserDelegate extends JsonParser {
     /* Public API, configuration
     /**************************************************
      */
+
     @Override
     public void setCodec(ObjectCodec c) {
         delegate.setCodec(c);
@@ -49,16 +51,17 @@ public class JsonParserDelegate extends JsonParser {
         delegate.disable(f);
         return this;
     }
-
+ 
     public boolean isEnabled(Feature f) {
         return delegate.isEnabled(f);
     }
-
+    
     /*
     /**************************************************
     /* Closeable impl
     /**************************************************
      */
+
     @Override
     public void close() throws IOException {
         delegate.close();
@@ -74,6 +77,7 @@ public class JsonParserDelegate extends JsonParser {
     /* Public API, token accessors
     /**************************************************
      */
+
     public JsonToken getCurrentToken() {
         return delegate.getCurrentToken();
     }
@@ -83,7 +87,7 @@ public class JsonParserDelegate extends JsonParser {
     }
 
     public void clearCurrentToken() {
-        delegate.clearCurrentToken();
+        delegate.clearCurrentToken();        
     }
 
     @Override
@@ -111,6 +115,7 @@ public class JsonParserDelegate extends JsonParser {
     /* Public API, access to token information, text
     /**************************************************
      */
+
     @Override
     public String getText() throws IOException, JsonParseException {
         return delegate.getText();
@@ -137,8 +142,9 @@ public class JsonParserDelegate extends JsonParser {
     /* Public API, access to token information, numeric
     /**************************************************
      */
+    
     @Override
-    public BigInteger getBigIntegerValue() throws IOException, JsonParseException {
+    public BigInteger getBigIntegerValue() throws IOException,JsonParseException {
         return delegate.getBigIntegerValue();
     }
 

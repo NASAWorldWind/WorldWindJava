@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.geom;
 
 import gov.nasa.worldwind.util.Logging;
@@ -16,21 +17,23 @@ import java.awt.*;
  * @author Jeff Addison
  * @version $Id: PickPointFrustum.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class PickPointFrustum extends Frustum {
-
+public class PickPointFrustum extends Frustum
+{
     private final Rectangle screenRect;
 
     /**
      * Constructs a new PickPointFrustum from another Frustum and screen rectangle
      *
      * @param frustum frustum to create the PickPointFrustum from
-     * @param rect screen rectangle to store with this frustum
+     * @param rect    screen rectangle to store with this frustum
      */
-    public PickPointFrustum(Frustum frustum, Rectangle rect) {
+    public PickPointFrustum(Frustum frustum, Rectangle rect)
+    {
         super(frustum.getLeft(), frustum.getRight(), frustum.getBottom(), frustum.getTop(), frustum.getNear(),
-                frustum.getFar());
+            frustum.getFar());
 
-        if (rect == null) {
+        if (rect == null)
+        {
             String message = Logging.getMessage("nullValue.RectangleIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -40,6 +43,7 @@ public class PickPointFrustum extends Frustum {
     }
 
     // ============== Intersection Functions ======================= //
+
     /**
      * Returns true if the specified 2D screen {@link java.awt.Rectangle} intersects the space enclosed by this view
      * aligned frustums screen rectangle.
@@ -50,8 +54,10 @@ public class PickPointFrustum extends Frustum {
      *
      * @throws IllegalArgumentException if the extent is null.
      */
-    public final boolean intersects(Rectangle rect) {
-        if (rect == null) {
+    public final boolean intersects(Rectangle rect)
+    {
+        if (rect == null)
+        {
             String message = Logging.getMessage("nullValue.RectangleIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
@@ -70,7 +76,8 @@ public class PickPointFrustum extends Frustum {
      *
      * @throws IllegalArgumentException if the point is null.
      */
-    public final boolean contains(double x, double y) {
+    public final boolean contains(double x, double y)
+    {
         return this.screenRect.contains(x, y);
     }
 
@@ -83,8 +90,10 @@ public class PickPointFrustum extends Frustum {
      *
      * @throws IllegalArgumentException if the point is null.
      */
-    public final boolean contains(Point point) {
-        if (point == null) {
+    public final boolean contains(Point point)
+    {
+        if (point == null)
+        {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().fine(msg);
             throw new IllegalArgumentException(msg);
@@ -102,8 +111,10 @@ public class PickPointFrustum extends Frustum {
      *
      * @throws IllegalArgumentException if the matrix is null
      */
-    public PickPointFrustum transformBy(Matrix matrix) {
-        if (matrix == null) {
+    public PickPointFrustum transformBy(Matrix matrix)
+    {
+        if (matrix == null)
+        {
             String msg = Logging.getMessage("nullValue.MatrixIsNull");
             Logging.logger().fine(msg);
             throw new IllegalArgumentException(msg);
@@ -117,7 +128,8 @@ public class PickPointFrustum extends Frustum {
      *
      * @return screenRect associated with this frustum
      */
-    public Rectangle getScreenRect() {
+    public Rectangle getScreenRect()
+    {
         return screenRect;
     }
 }

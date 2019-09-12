@@ -16,11 +16,12 @@ import gov.nasa.worldwindx.examples.util.LayerManagerLayer;
  * @see LayerTreeUsage
  * @see LayerPanel
  */
-public class OnScreenLayerManager extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+public class OnScreenLayerManager extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             super(true, false, false);
 
             // Add the layer manager layer to the model layer list
@@ -28,7 +29,8 @@ public class OnScreenLayerManager extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind On-Screen Layer Manager", AppFrame.class);
     }
 }

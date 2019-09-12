@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWind;
@@ -22,11 +23,12 @@ import java.util.*;
  * @author tag
  * @version $Id: Paths.java 2292 2014-09-02 21:13:05Z tgaskins $
  */
-public class Paths extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+public class Paths extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             super(true, true, false);
 
             // Add a dragger to enable shape dragging
@@ -87,7 +89,8 @@ public class Paths extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Paths", AppFrame.class);
     }
 }

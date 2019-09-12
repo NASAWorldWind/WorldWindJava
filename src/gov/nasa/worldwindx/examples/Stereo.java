@@ -15,9 +15,10 @@ import gov.nasa.worldwind.avlist.AVKey;
  * @author tag
  * @version $Id: Stereo.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Stereo extends ApplicationTemplate {
-
-    public static void main(String[] args) {
+public class Stereo extends ApplicationTemplate
+{
+    public static void main(String[] args)
+    {
         // Set the stereo.mode property to request stereo. Request red-blue anaglyph in this case. Can also request
         // "device" if the display device supports stereo directly. To prevent stereo, leave the property unset or set
         // it to an empty string.

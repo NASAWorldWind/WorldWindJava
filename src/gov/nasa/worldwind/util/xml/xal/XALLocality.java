@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util.xml.xal;
 
 /**
@@ -11,8 +12,8 @@ package gov.nasa.worldwind.util.xml.xal;
  */
 public class XALLocality extends XALAbstractObject // TODO
 {
-
-    public XALLocality(String namespaceURI) {
+    public XALLocality(String namespaceURI)
+    {
         super(namespaceURI);
     }
 }

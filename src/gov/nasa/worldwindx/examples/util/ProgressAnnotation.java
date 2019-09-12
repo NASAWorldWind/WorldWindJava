@@ -15,8 +15,8 @@ import com.jogamp.opengl.*;
  * @author dcollins
  * @version $Id: ProgressAnnotation.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ProgressAnnotation extends ScreenAnnotation {
-
+public class ProgressAnnotation extends ScreenAnnotation
+{
     protected double value;
     protected double min;
     protected double max;
@@ -24,7 +24,8 @@ public class ProgressAnnotation extends ScreenAnnotation {
     protected java.awt.Color interiorColor;
     protected java.awt.Insets interiorInsets;
 
-    public ProgressAnnotation(double value, double min, double max) {
+    public ProgressAnnotation(double value, double min, double max)
+    {
         super("", new java.awt.Point());
 
         this.value = value;
@@ -36,40 +37,50 @@ public class ProgressAnnotation extends ScreenAnnotation {
         this.interiorInsets = new java.awt.Insets(2, 2, 2, 2);
     }
 
-    public ProgressAnnotation() {
+    public ProgressAnnotation()
+    {
         this(0, 0, 1);
     }
 
-    public double getValue() {
+    public double getValue()
+    {
         return this.value;
     }
 
-    public void setValue(double value) {
+    public void setValue(double value)
+    {
         this.value = value;
     }
 
-    public double getMin() {
+    public double getMin()
+    {
         return this.min;
     }
 
-    public void setMin(double min) {
+    public void setMin(double min)
+    {
         this.min = min;
     }
 
-    public double getMax() {
+    public double getMax()
+    {
         return this.max;
     }
 
-    public void setMax(double max) {
+    public void setMax(double max)
+    {
         this.max = max;
     }
 
-    public java.awt.Color getOutlineColor() {
+    public java.awt.Color getOutlineColor()
+    {
         return this.outlineColor;
     }
 
-    public void setOutlineColor(java.awt.Color color) {
-        if (color == null) {
+    public void setOutlineColor(java.awt.Color color)
+    {
+        if (color == null)
+        {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -78,12 +89,15 @@ public class ProgressAnnotation extends ScreenAnnotation {
         this.outlineColor = color;
     }
 
-    public java.awt.Color getInteriorColor() {
+    public java.awt.Color getInteriorColor()
+    {
         return this.interiorColor;
     }
 
-    public void setInteriorColor(java.awt.Color color) {
-        if (color == null) {
+    public void setInteriorColor(java.awt.Color color)
+    {
+        if (color == null)
+        {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -92,13 +106,16 @@ public class ProgressAnnotation extends ScreenAnnotation {
         this.interiorColor = color;
     }
 
-    public java.awt.Insets getInteriorInsets() {
+    public java.awt.Insets getInteriorInsets()
+    {
         // Class java.awt.Insets is known to override the method Object.clone().
         return (java.awt.Insets) this.interiorInsets.clone();
     }
 
-    public void setInteriorInsets(java.awt.Insets insets) {
-        if (insets == null) {
+    public void setInteriorInsets(java.awt.Insets insets)
+    {
+        if (insets == null)
+        {
             String message = Logging.getMessage("nullValue.InsetsIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -111,15 +128,17 @@ public class ProgressAnnotation extends ScreenAnnotation {
     //**************************************************************//
     //********************  Rendering  *****************************//
     //**************************************************************//
-    protected void doDraw(DrawContext dc, int width, int height, double opacity, Position pickPosition) {
+
+    protected void doDraw(DrawContext dc, int width, int height, double opacity, Position pickPosition)
+    {
         super.doDraw(dc, width, height, opacity, pickPosition);
         this.drawProgress(dc, width, height, opacity, pickPosition);
     }
 
-    protected void drawProgress(DrawContext dc, int width, int height, double opacity, Position pickPosition) {
-        if (dc.isPickingMode()) {
+    protected void drawProgress(DrawContext dc, int width, int height, double opacity, Position pickPosition)
+    {
+        if (dc.isPickingMode())
             return;
-        }
 
         this.drawProgressContainer(dc, width, height, opacity, pickPosition);
         this.drawProgressBar(dc, width, height, opacity, pickPosition);
@@ -127,7 +146,8 @@ public class ProgressAnnotation extends ScreenAnnotation {
 
     @SuppressWarnings({"UnusedDeclaration"})
     protected void drawProgressContainer(DrawContext dc, int width, int height, double opacity,
-            Position pickPosition) {
+        Position pickPosition)
+    {
         java.awt.Rectangle bounds = this.computeProgressContainerBounds(width, height);
 
         GL gl = dc.getGL();
@@ -141,14 +161,16 @@ public class ProgressAnnotation extends ScreenAnnotation {
 
     @SuppressWarnings({"UnusedDeclaration"})
     protected void drawProgressBar(DrawContext dc, int width, int height, double opacity,
-            Position pickPosition) {
+        Position pickPosition)
+    {
         java.awt.Rectangle bounds = this.computeProgressBarBounds(width, height);
 
         this.applyColor(dc, this.getInteriorColor(), opacity, true);
         this.drawCallout(dc, GL.GL_TRIANGLE_FAN, bounds, false);
     }
 
-    protected void drawCallout(DrawContext dc, int mode, java.awt.Rectangle bounds, boolean useTexCoords) {
+    protected void drawCallout(DrawContext dc, int mode, java.awt.Rectangle bounds, boolean useTexCoords)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         OGLStackHandler stackHandler = new OGLStackHandler();
@@ -163,30 +185,32 @@ public class ProgressAnnotation extends ScreenAnnotation {
     //**************************************************************//
     //********************  Bounds Computation  ********************//
     //**************************************************************//
-    protected java.awt.Rectangle computeProgressContainerBounds(int width, int height) {
+
+    protected java.awt.Rectangle computeProgressContainerBounds(int width, int height)
+    {
         return this.computeInsetBounds(width, height);
     }
 
-    protected java.awt.Rectangle computeProgressBarBounds(int width, int height) {
+    protected java.awt.Rectangle computeProgressBarBounds(int width, int height)
+    {
         java.awt.Rectangle containerBounds = this.computeProgressContainerBounds(width, height);
 
         int progressBarWidth = this.computeProgressBarWidth(containerBounds.width)
-                - (this.interiorInsets.left + this.interiorInsets.right);
+            - (this.interiorInsets.left + this.interiorInsets.right);
         int progressBarHeight = containerBounds.height - (this.interiorInsets.bottom + this.interiorInsets.top);
 
-        if (progressBarWidth < 0) {
+        if (progressBarWidth < 0)
             progressBarWidth = 0;
-        }
-        if (progressBarHeight < 0) {
+        if (progressBarHeight < 0)
             progressBarHeight = 0;
-        }
 
         return new java.awt.Rectangle(
-                containerBounds.x + this.interiorInsets.left, containerBounds.y + this.interiorInsets.bottom,
-                progressBarWidth, progressBarHeight);
+            containerBounds.x + this.interiorInsets.left, containerBounds.y + this.interiorInsets.bottom,
+            progressBarWidth, progressBarHeight);
     }
 
-    protected int computeProgressBarWidth(int containerWidth) {
+    protected int computeProgressBarWidth(int containerWidth)
+    {
         double factor = (this.value - this.min) / (this.max - this.min);
         return (int) (factor * containerWidth);
     }

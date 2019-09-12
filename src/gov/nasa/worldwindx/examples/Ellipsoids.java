@@ -24,11 +24,12 @@ import java.util.Hashtable;
  * @author ccrick
  * @version $Id: Ellipsoids.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class Ellipsoids extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+public class Ellipsoids extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             // Add detail hint slider panel
             this.getControlPanel().add(makeDetailHintControlPanel(), BorderLayout.SOUTH);
 
@@ -54,6 +55,7 @@ public class Ellipsoids extends ApplicationTemplate {
             attrs2.setDrawOutline(false);
 
             // ********* sample  Ellipsoids  *******************
+
             // Ellipsoid with equal axes, ABSOLUTE altitude mode
             Ellipsoid ellipsoid3 = new Ellipsoid(Position.fromDegrees(40, -120, 80000), 50000, 50000, 50000);
             ellipsoid3.setAltitudeMode(WorldWind.ABSOLUTE);
@@ -97,7 +99,7 @@ public class Ellipsoids extends ApplicationTemplate {
 
             // Scaled Ellipsoid with a pre-set orientation
             Ellipsoid ellipsoid2 = new Ellipsoid(Position.fromDegrees(0, 30, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             ellipsoid2.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             ellipsoid2.setAttributes(attrs2);
             ellipsoid2.setVisible(true);
@@ -106,7 +108,7 @@ public class Ellipsoids extends ApplicationTemplate {
 
             // Scaled Ellipsoid with a pre-set orientation
             Ellipsoid ellipsoid6 = new Ellipsoid(Position.fromDegrees(30, 30, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             ellipsoid6.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             ellipsoid6.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
             ellipsoid6.setAttributes(attrs2);
@@ -116,7 +118,7 @@ public class Ellipsoids extends ApplicationTemplate {
 
             // Scaled Ellipsoid with a pre-set orientation
             Ellipsoid ellipsoid7 = new Ellipsoid(Position.fromDegrees(60, 30, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             ellipsoid7.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             ellipsoid7.setAttributes(attrs2);
             ellipsoid7.setVisible(true);
@@ -125,7 +127,7 @@ public class Ellipsoids extends ApplicationTemplate {
 
             // Scaled, oriented Ellipsoid in 3rd "quadrant" (-X, -Y, -Z)
             Ellipsoid ellipsoid8 = new Ellipsoid(Position.fromDegrees(-45, -180, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             ellipsoid8.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             ellipsoid8.setAttributes(attrs2);
             ellipsoid8.setVisible(true);
@@ -136,10 +138,11 @@ public class Ellipsoids extends ApplicationTemplate {
             insertBeforeCompass(getWwd(), layer);
         }
 
-        protected JPanel makeDetailHintControlPanel() {
+        protected JPanel makeDetailHintControlPanel()
+        {
             JPanel controlPanel = new JPanel(new BorderLayout(0, 10));
             controlPanel.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9),
-                    new TitledBorder("Detail Hint")));
+                new TitledBorder("Detail Hint")));
 
             JPanel detailHintSliderPanel = new JPanel(new BorderLayout(0, 5));
             {
@@ -156,8 +159,10 @@ public class Ellipsoids extends ApplicationTemplate {
                 labelTable.put(10, new JLabel("1.0"));
                 slider.setLabelTable(labelTable);
                 slider.setPaintLabels(true);
-                slider.addChangeListener(new ChangeListener() {
-                    public void stateChanged(ChangeEvent e) {
+                slider.addChangeListener(new ChangeListener()
+                {
+                    public void stateChanged(ChangeEvent e)
+                    {
                         double hint = ((JSlider) e.getSource()).getValue() / 10d;
                         setEllipsoidDetailHint(hint);
                         getWwd().redraw();
@@ -173,9 +178,12 @@ public class Ellipsoids extends ApplicationTemplate {
             return controlPanel;
         }
 
-        protected RenderableLayer getLayer() {
-            for (Layer layer : getWwd().getModel().getLayers()) {
-                if (layer.getName().contains("Renderable")) {
+        protected RenderableLayer getLayer()
+        {
+            for (Layer layer : getWwd().getModel().getLayers())
+            {
+                if (layer.getName().contains("Renderable"))
+                {
                     return (RenderableLayer) layer;
                 }
             }
@@ -183,8 +191,10 @@ public class Ellipsoids extends ApplicationTemplate {
             return null;
         }
 
-        protected void setEllipsoidDetailHint(double hint) {
-            for (Renderable renderable : getLayer().getRenderables()) {
+        protected void setEllipsoidDetailHint(double hint)
+        {
+            for (Renderable renderable : getLayer().getRenderables())
+            {
                 Ellipsoid current = (Ellipsoid) renderable;
                 current.setDetailHint(hint);
             }
@@ -192,7 +202,8 @@ public class Ellipsoids extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Ellipsoids", AppFrame.class);
     }
 }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.formats.tiff;
 
 import javax.imageio.*;
@@ -20,74 +21,78 @@ import java.util.*;
  * @author brownrigg
  * @version $Id: GeotiffImageReader.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeotiffImageReader extends ImageReader {
+public class GeotiffImageReader extends ImageReader
+{
 
-    public GeotiffImageReader(ImageReaderSpi provider) {
+    public GeotiffImageReader(ImageReaderSpi provider)
+    {
         super(provider);
     }
 
     @Override
-    public int getNumImages(boolean allowSearch) throws IOException {
+    public int getNumImages(boolean allowSearch) throws IOException
+    {
         // TODO:  This should allow for multiple images that may be present. For now, we'll ignore all but first.
         return 1;
     }
 
     @Override
-    public int getWidth(int imageIndex) throws IOException {
-        if (imageIndex < 0 || imageIndex >= getNumImages(true)) {
+    public int getWidth(int imageIndex) throws IOException
+    {
+        if (imageIndex < 0 || imageIndex >= getNumImages(true))
             throw new IllegalArgumentException(
-                    this.getClass().getName() + ".getWidth(): illegal imageIndex: " + imageIndex);
-        }
+                this.getClass().getName() + ".getWidth(): illegal imageIndex: " + imageIndex);
 
-        if (ifds.size() == 0) {
+        if (ifds.size() == 0)
             readIFDs();
-        }
-
+        
         TiffIFDEntry widthEntry = getByTag(ifds.get(imageIndex), Tiff.Tag.IMAGE_WIDTH);
         return (int) widthEntry.asLong();
     }
 
     @Override
-    public int getHeight(int imageIndex) throws IOException {
-        if (imageIndex < 0 || imageIndex >= getNumImages(true)) {
+    public int getHeight(int imageIndex) throws IOException
+    {
+        if (imageIndex < 0 || imageIndex >= getNumImages(true))
             throw new IllegalArgumentException(
-                    this.getClass().getName() + ".getHeight(): illegal imageIndex: " + imageIndex);
-        }
+                this.getClass().getName() + ".getHeight(): illegal imageIndex: " + imageIndex);
 
-        if (ifds.size() == 0) {
+        if (ifds.size() == 0)
             readIFDs();
-        }
 
         TiffIFDEntry heightEntry = getByTag(ifds.get(imageIndex), Tiff.Tag.IMAGE_LENGTH);
         return (int) heightEntry.asLong();
     }
 
     @Override
-    public Iterator<ImageTypeSpecifier> getImageTypes(int imageIndex) throws IOException {
+    public Iterator<ImageTypeSpecifier> getImageTypes(int imageIndex) throws IOException
+    {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public IIOMetadata getStreamMetadata() throws IOException {
+    public IIOMetadata getStreamMetadata() throws IOException
+    {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public IIOMetadata getImageMetadata(int imageIndex) throws IOException {
+    public IIOMetadata getImageMetadata(int imageIndex) throws IOException
+    {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public BufferedImage read(int imageIndex, ImageReadParam param) throws IOException {
+    public BufferedImage read(int imageIndex, ImageReadParam param) throws IOException
+    {
         // TODO: For this first implementation, we are completely ignoring the ImageReadParam given to us.
         //       Our target functionality is not the entire ImageIO, but only that needed to support the static
         //       read method ImageIO.read("myImage.tif").
 
         // TODO: more generally, the following test should reflect that more than one image is possible in a Tiff.
-        if (imageIndex != 0) {
+        if (imageIndex != 0)
             throw new IllegalArgumentException(
-                    this.getClass().getName() + ".read(): illegal imageIndex: " + imageIndex);
-        }
+                this.getClass().getName() + ".read(): illegal imageIndex: " + imageIndex);
 
         readIFDs();
 
@@ -105,8 +110,10 @@ public class GeotiffImageReader extends ImageReader {
         TiffIFDEntry sampleFormatEntry = null;
 
         TiffIFDEntry[] ifd = ifds.get(imageIndex);
-        for (TiffIFDEntry entry : ifd) {
-            switch (entry.tag) {
+        for (TiffIFDEntry entry : ifd)
+        {
+            switch (entry.tag)
+            {
                 case Tiff.Tag.IMAGE_WIDTH:
                     widthEntry = entry;
                     break;
@@ -144,11 +151,10 @@ public class GeotiffImageReader extends ImageReader {
         }
 
         // Check that we have the mandatory tags present...
-        if (widthEntry == null || lengthEntry == null || samplesPerPixelEntry == null || photoInterpEntry == null
-                || stripOffsetsEntry == null || stripCountsEntry == null || rowsPerStripEntry == null
-                || planarConfigEntry == null) {
+        if (widthEntry == null || lengthEntry == null || samplesPerPixelEntry == null || photoInterpEntry == null ||
+            stripOffsetsEntry == null || stripCountsEntry == null || rowsPerStripEntry == null
+            || planarConfigEntry == null)
             throw new IIOException(this.getClass().getName() + ".read(): unable to decipher image organization");
-        }
 
         int width = (int) widthEntry.asLong();
         int height = (int) lengthEntry.asLong();
@@ -166,125 +172,136 @@ public class GeotiffImageReader extends ImageReader {
         //
         // TODO: This isn't terribly robust; we know how to deal with a few specific types...
         //
-        if (samplesPerPixel == 1 && bitsPerSample.length == 1 && bitsPerSample[0] == 16) {
+
+        if (samplesPerPixel == 1 && bitsPerSample.length == 1 && bitsPerSample[0] == 16)
+        {
             // 16-bit grayscale (typical of elevation data, for example)...
-            long sampleFormat
-                    = (sampleFormatEntry != null) ? sampleFormatEntry.asLong() : Tiff.SampleFormat.UNSIGNED;
-            int dataBuffType
-                    = (sampleFormat == Tiff.SampleFormat.SIGNED) ? DataBuffer.TYPE_SHORT : DataBuffer.TYPE_USHORT;
+            long sampleFormat =
+                (sampleFormatEntry != null) ? sampleFormatEntry.asLong() : Tiff.SampleFormat.UNSIGNED;
+            int dataBuffType =
+                (sampleFormat == Tiff.SampleFormat.SIGNED) ? DataBuffer.TYPE_SHORT : DataBuffer.TYPE_USHORT;
 
             colorModel = new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY), bitsPerSample, false,
-                    false, Transparency.OPAQUE, dataBuffType);
+                false, Transparency.OPAQUE, dataBuffType);
             int[] offsets = new int[]{0};
             ComponentSampleModel sampleModel = new ComponentSampleModel(dataBuffType, width, height, 1, width, offsets);
             short[][] imageData = readPlanar16(width, height, samplesPerPixel, stripOffsets, stripCounts, rowsPerStrip);
-            DataBuffer dataBuff = (dataBuffType == DataBuffer.TYPE_SHORT)
-                    ? new DataBufferShort(imageData, width * height, offsets)
-                    : new DataBufferUShort(imageData, width * height, offsets);
+            DataBuffer dataBuff = (dataBuffType == DataBuffer.TYPE_SHORT) ?
+                new DataBufferShort(imageData, width * height, offsets) :
+                new DataBufferUShort(imageData, width * height, offsets);
 
             raster = Raster.createWritableRaster(sampleModel, dataBuff, new Point(0, 0));
-        } else if (samplesPerPixel == 1 && bitsPerSample.length == 1 && bitsPerSample[0] == 32
-                && sampleFormatEntry != null && sampleFormatEntry.asLong() == Tiff.SampleFormat.IEEEFLOAT) {
+        }
+        else if (samplesPerPixel == 1 && bitsPerSample.length == 1 && bitsPerSample[0] == 32 &&
+            sampleFormatEntry != null && sampleFormatEntry.asLong() == Tiff.SampleFormat.IEEEFLOAT)
+        {
             // 32-bit grayscale (typical of elevation data, for example)...
             colorModel = new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY), bitsPerSample, false,
-                    false, Transparency.OPAQUE, DataBuffer.TYPE_FLOAT);
+                false, Transparency.OPAQUE, DataBuffer.TYPE_FLOAT);
             int[] offsets = new int[]{0};
             ComponentSampleModel sampleModel = new ComponentSampleModel(DataBuffer.TYPE_FLOAT, width, height, 1, width,
-                    offsets);
+                offsets);
             float[][] imageData = readPlanarFloat32(width, height, samplesPerPixel, stripOffsets, stripCounts,
-                    rowsPerStrip);
+                rowsPerStrip);
             DataBuffer dataBuff = new DataBufferFloat(imageData, width * height, offsets);
             raster = Raster.createWritableRaster(sampleModel, dataBuff, new Point(0, 0));
-        } else {
+        }
+        else
+        {
 
             // make sure a DataBufferByte is going to do the trick
-            for (int bits : bitsPerSample) {
-                if (bits != 8) {
-                    throw new IIOException(this.getClass().getName() + ".read(): only expecting 8 bits/sample; found "
-                            + bits);
-                }
+            for (int bits : bitsPerSample)
+            {
+                if (bits != 8)
+                    throw new IIOException(this.getClass().getName() + ".read(): only expecting 8 bits/sample; found " +
+                        bits);
             }
 
             // byte image data; could be RGB-component, grayscale, or indexed-color.
             // Set up an appropriate ColorModel...
             colorModel = null;
-            if (samplesPerPixel > 1) {
+            if (samplesPerPixel > 1)
+            {
                 int transparency = Transparency.OPAQUE;
                 boolean hasAlpha = false;
-                if (samplesPerPixel == 4) {
+                if (samplesPerPixel == 4)
+                {
                     transparency = Transparency.TRANSLUCENT;
                     hasAlpha = true;
                 }
                 colorModel = new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_sRGB), bitsPerSample,
-                        hasAlpha,
-                        false, transparency, DataBuffer.TYPE_BYTE);
-            } else {
+                    hasAlpha,
+                    false, transparency, DataBuffer.TYPE_BYTE);
+            }
+            else
+            {
                 // grayscale or indexed-color?
-                if (photoInterp == Tiff.Photometric.Color_Palette) {
+                if (photoInterp == Tiff.Photometric.Color_Palette)
+                {
                     // indexed...
-                    if (colorMapEntry == null) {
+                    if (colorMapEntry == null)
                         throw new IIOException(
-                                this.getClass().getName() + ".read(): no ColorMap found for indexed image type");
-                    }
+                            this.getClass().getName() + ".read(): no ColorMap found for indexed image type");
                     byte[][] cmap = readColorMap(colorMapEntry);
                     colorModel = new IndexColorModel(bitsPerSample[0], (int) colorMapEntry.count / 3, cmap[0], cmap[1],
-                            cmap[2]);
-                } else {
+                        cmap[2]);
+                }
+                else
+                {
                     // grayscale...
                     colorModel = new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY), bitsPerSample,
-                            false,
-                            false, Transparency.OPAQUE, DataBuffer.TYPE_BYTE);
+                        false,
+                        false, Transparency.OPAQUE, DataBuffer.TYPE_BYTE);
                 }
             }
 
             int[] bankOffsets = new int[samplesPerPixel];
-            for (int i = 0; i < samplesPerPixel; i++) {
+            for (int i = 0; i < samplesPerPixel; i++)
+            {
                 bankOffsets[i] = i;
             }
             int[] offsets = new int[(planarConfig == Tiff.PlanarConfiguration.CHUNKY) ? 1 : samplesPerPixel];
-            for (int i = 0; i < offsets.length; i++) {
+            for (int i = 0; i < offsets.length; i++)
+            {
                 offsets[i] = 0;
             }
 
             // construct the right SampleModel...
             ComponentSampleModel sampleModel;
-            if (samplesPerPixel == 1) {
+            if (samplesPerPixel == 1)
                 sampleModel = new ComponentSampleModel(DataBuffer.TYPE_BYTE, width, height, 1, width, bankOffsets);
-            } else {
-                sampleModel = (planarConfig == Tiff.PlanarConfiguration.CHUNKY)
-                        ? new PixelInterleavedSampleModel(DataBuffer.TYPE_BYTE, width, height, samplesPerPixel,
-                                width * samplesPerPixel, bankOffsets)
-                        : new BandedSampleModel(DataBuffer.TYPE_BYTE, width, height, width, bankOffsets, offsets);
-            }
+            else
+                sampleModel = (planarConfig == Tiff.PlanarConfiguration.CHUNKY) ?
+                    new PixelInterleavedSampleModel(DataBuffer.TYPE_BYTE, width, height, samplesPerPixel,
+                        width * samplesPerPixel, bankOffsets) :
+                    new BandedSampleModel(DataBuffer.TYPE_BYTE, width, height, width, bankOffsets, offsets);
 
             // Get the image data and make our Raster...
             byte[][] imageData;
-            if (planarConfig == Tiff.PlanarConfiguration.CHUNKY) {
+            if (planarConfig == Tiff.PlanarConfiguration.CHUNKY)
                 imageData = readPixelInterleaved8(width, height, samplesPerPixel, stripOffsets, stripCounts);
-            } else {
+            else
                 imageData = readPlanar8(width, height, samplesPerPixel, stripOffsets, stripCounts, rowsPerStrip);
-            }
             DataBufferByte dataBuff = new DataBufferByte(imageData, width * height, offsets);
             raster = Raster.createWritableRaster(sampleModel, dataBuff, new Point(0, 0));
         }
 
-        /**
-         * ***********************************
-         */
+        /**************************************/
         decodeGeotiffInfo();
-        /**
-         * ***********************************
-         */
+        /**************************************/
 
         // Finally, put it all together to get our BufferedImage...
         return new BufferedImage(colorModel, raster, false, null);
     }
 
-    private void decodeGeotiffInfo() throws IOException {
+    private void decodeGeotiffInfo() throws IOException
+    {
         readIFDs();
         TiffIFDEntry[] ifd = ifds.get(0);
-        for (TiffIFDEntry entry : ifd) {
-            switch (entry.tag) {
+        for (TiffIFDEntry entry : ifd)
+        {
+            switch (entry.tag)
+            {
                 case GeoTiff.Tag.MODEL_PIXELSCALE:
                     geoPixelScale = readDoubles(entry);
                     break;
@@ -309,28 +326,37 @@ public class GeotiffImageReader extends ImageReader {
      * Coordinates reading all the ImageFileDirectories in a Tiff file (there's typically only one).
      * 
      */
-    private void readIFDs() throws IOException {
-        if (this.theStream != null) {
+    private void readIFDs() throws IOException
+    {
+        if (this.theStream != null)
             return;
-        }
 
-        if (super.input == null || !(super.input instanceof ImageInputStream)) {
+        if (super.input == null || !(super.input instanceof ImageInputStream))
+        {
             throw new IIOException(this.getClass().getName() + ": null/invalid ImageInputStream");
         }
         this.theStream = (ImageInputStream) super.input;
 
         // determine byte ordering...
         byte[] ifh = new byte[2];  // Tiff image-file header
-        try {
+        try
+        {
             theStream.readFully(ifh);
-            if (ifh[0] == 0x4D && ifh[1] == 0x4D) {
+            if (ifh[0] == 0x4D && ifh[1] == 0x4D)
+            {
                 theStream.setByteOrder(ByteOrder.BIG_ENDIAN);
-            } else if (ifh[0] == 0x49 && ifh[1] == 0x49) {
+            }
+            else if (ifh[0] == 0x49 && ifh[1] == 0x49)
+            {
                 theStream.setByteOrder(ByteOrder.LITTLE_ENDIAN);
-            } else {
+            }
+            else
+            {
                 throw new IOException();
             }
-        } catch (IOException ex) {
+        }
+        catch (IOException ex)
+        {
             throw new IIOException(this.getClass().getName() + ": error reading signature");
         }
 
@@ -344,13 +370,16 @@ public class GeotiffImageReader extends ImageReader {
     * Reads an ImageFileDirectory and places it in our list.  Calls itself recursively if additional
     * IFDs are indicated.
     *
-     */
-    private void readIFD(long offset) throws IIOException {
-        try {
+    */
+    private void readIFD(long offset) throws IIOException
+    {
+        try
+        {
             theStream.seek(offset);
             int numEntries = theStream.readUnsignedShort();
             TiffIFDEntry[] ifd = new TiffIFDEntry[numEntries];
-            for (int i = 0; i < numEntries; i++) {
+            for (int i = 0; i < numEntries; i++)
+            {
                 int tag = theStream.readUnsignedShort();
                 int type = theStream.readUnsignedShort();
                 long count = theStream.readUnsignedInt();
@@ -360,19 +389,23 @@ public class GeotiffImageReader extends ImageReader {
                     int upper = theStream.readUnsignedShort();
                     int lower = theStream.readUnsignedShort();
                     valoffset = (0xffff & upper) << 16 | (0xffff & lower);
-                } else {
-                    valoffset = theStream.readUnsignedInt();
                 }
+                else
+                    valoffset = theStream.readUnsignedInt();
                 ifd[i] = new TiffIFDEntry(tag, type, count, valoffset);
             }
 
             ifds.add(ifd);
 
-            /**
-             * **** TODO: UNCOMMENT; IN GENERAL, THERE CAN BE MORE THAN ONE IFD IN A TIFF FILE long nextIFDOffset =
-             * theStream.readUnsignedInt(); if (nextIFDOffset > 0) readIFD(nextIFDOffset);
+            /****** TODO: UNCOMMENT;  IN GENERAL, THERE CAN BE MORE THAN ONE IFD IN A TIFF FILE
+             long nextIFDOffset = theStream.readUnsignedInt();
+             if (nextIFDOffset > 0)
+             readIFD(nextIFDOffset);
              */
-        } catch (Exception ex) {
+
+        }
+        catch (Exception ex)
+        {
             throw new IIOException("Error reading Tiff IFD: " + ex.getMessage());
         }
     }
@@ -380,17 +413,18 @@ public class GeotiffImageReader extends ImageReader {
     /*
     * Reads BYTE image data organized as a singular image plane (and pixel interleaved, in the case of color images).
     *
-     */
+    */
     private byte[][] readPixelInterleaved8(int width, int height, int samplesPerPixel,
-            long[] stripOffsets, long[] stripCounts) throws IOException {
+        long[] stripOffsets, long[] stripCounts) throws IOException
+    {
         byte[][] data = new byte[1][width * height * samplesPerPixel];
         int offset = 0;
-        for (int i = 0; i < stripOffsets.length; i++) {
+        for (int i = 0; i < stripOffsets.length; i++)
+        {
             this.theStream.seek(stripOffsets[i]);
             int len = (int) stripCounts[i];
-            if ((offset + len) >= data[0].length) {
+            if ((offset + len) >= data[0].length)
                 len = data[0].length - offset;
-            }
             this.theStream.readFully(data[0], offset, len);
             offset += stripCounts[i];
         }
@@ -402,21 +436,23 @@ public class GeotiffImageReader extends ImageReader {
      *
      */
     private byte[][] readPlanar8(int width, int height, int samplesPerPixel,
-            long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException {
+        long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException
+    {
         byte[][] data = new byte[samplesPerPixel][width * height];
         int band = 0;
         int offset = 0;
         int numRows = 0;
-        for (int i = 0; i < stripOffsets.length; i++) {
+        for (int i = 0; i < stripOffsets.length; i++)
+        {
             this.theStream.seek(stripOffsets[i]);
             int len = (int) stripCounts[i];
-            if ((offset + len) >= data[band].length) {
+            if ((offset + len) >= data[band].length)
                 len = data[band].length - offset;
-            }
             this.theStream.readFully(data[band], offset, len);
             offset += stripCounts[i];
             numRows += rowsPerStrip;
-            if (numRows >= height) {
+            if (numRows >= height)
+            {
                 ++band;
                 numRows = 0;
                 offset = 0;
@@ -431,21 +467,23 @@ public class GeotiffImageReader extends ImageReader {
      *
      */
     private short[][] readPlanar16(int width, int height, int samplesPerPixel,
-            long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException {
+        long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException
+    {
         short[][] data = new short[samplesPerPixel][width * height];
         int band = 0;
         int offset = 0;
         int numRows = 0;
-        for (int i = 0; i < stripOffsets.length; i++) {
+        for (int i = 0; i < stripOffsets.length; i++)
+        {
             this.theStream.seek(stripOffsets[i]);
             int len = (int) stripCounts[i] / Short.SIZE;    // strip-counts are in bytes, we're reading shorts...
-            if ((offset + len) >= data[band].length) {
+            if ((offset + len) >= data[band].length)
                 len = data[band].length - offset;
-            }
             this.theStream.readFully(data[band], offset, len);
             offset += stripCounts[i] / Short.SIZE;
             numRows += rowsPerStrip;
-            if (numRows >= height) {
+            if (numRows >= height)
+            {
                 ++band;
                 numRows = 0;
                 offset = 0;
@@ -460,21 +498,23 @@ public class GeotiffImageReader extends ImageReader {
      *
      */
     private float[][] readPlanarFloat32(int width, int height, int samplesPerPixel,
-            long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException {
+        long[] stripOffsets, long[] stripCounts, long rowsPerStrip) throws IOException
+    {
         float[][] data = new float[samplesPerPixel][width * height];
         int band = 0;
         int offset = 0;
         int numRows = 0;
-        for (int i = 0; i < stripOffsets.length; i++) {
+        for (int i = 0; i < stripOffsets.length; i++)
+        {
             this.theStream.seek(stripOffsets[i]);
             int len = (int) stripCounts[i] / Float.SIZE;    // strip-counts are in bytes, we're reading floats...
-            if ((offset + len) >= data[band].length) {
+            if ((offset + len) >= data[band].length)
                 len = data[band].length - offset;
-            }
             this.theStream.readFully(data[band], offset, len);
             offset += stripCounts[i] / Float.SIZE;
             numRows += rowsPerStrip;
-            if (numRows >= height) {
+            if (numRows >= height)
+            {
                 ++band;
                 numRows = 0;
                 offset = 0;
@@ -488,7 +528,8 @@ public class GeotiffImageReader extends ImageReader {
      * Reads a ColorMap.
      *
      */
-    private byte[][] readColorMap(TiffIFDEntry colorMapEntry) throws IOException {
+    private byte[][] readColorMap(TiffIFDEntry colorMapEntry) throws IOException
+    {
         // NOTE: TIFF gives total number of cmap values, which is 3 times the size of cmap table...
         int numEntries = (int) colorMapEntry.count / 3;
         short[][] tmp = new short[3][numEntries];
@@ -503,8 +544,10 @@ public class GeotiffImageReader extends ImageReader {
         // TIFF gives a ColorMap composed of unsigned shorts. Java's IndexedColorModel wants unsigned bytes.
         // Something's got to give somewhere...we'll do our best.
         byte[][] cmap = new byte[3][numEntries];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < numEntries; j++) {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < numEntries; j++)
+            {
                 cmap[i][j] = (byte) (0x00ff & tmp[i][j]);
             }
         }
@@ -516,14 +559,16 @@ public class GeotiffImageReader extends ImageReader {
      * Reads and returns an array of doubles from the file.
      *
      */
-    private double[] readDoubles(TiffIFDEntry entry) throws IOException {
+    private double[] readDoubles(TiffIFDEntry entry) throws IOException
+    {
         double[] doubles = new double[(int) entry.count];
         this.theStream.seek(entry.asOffset());
         this.theStream.readFully(doubles, 0, doubles.length);
         return doubles;
     }
 
-    private void readGeoKeys(TiffIFDEntry entry) throws IOException {
+    private void readGeoKeys(TiffIFDEntry entry) throws IOException
+    {
         short[] keyValRec = new short[4];
         this.theStream.seek(entry.asLong());
 
@@ -535,14 +580,16 @@ public class GeotiffImageReader extends ImageReader {
         this.theStream.readFully(keyValRec, 0, numKeys * 4);
 
         int j = 0;
-        for (int i = 0; i < numKeys * 4; i += 4) {
+        for (int i = 0; i < numKeys * 4; i += 4)
+        {
             GeoKey key = new GeoKey();
             key.key = keyValRec[i];
-            if (keyValRec[i + 1] == 0) {
+            if (keyValRec[i + 1] == 0)
                 key.value = new Integer(keyValRec[i + 3]);
-            } else {
+            else
+            {
                 // TODO: This isn't quite right....
-                key.value = getByTag(ifds.get(0), (0x0000ffff & keyValRec[i + 1]));
+                key.value = getByTag(ifds.get(0),  (0x0000ffff & keyValRec[i + 1]));
             }
             geoKeys[j++] = key;
         }
@@ -552,9 +599,12 @@ public class GeotiffImageReader extends ImageReader {
      * Returns the (first!) IFD-Entry with the given tag, or null if not found.
      * 
      */
-    private TiffIFDEntry getByTag(TiffIFDEntry[] ifds, int tag) {
-        for (TiffIFDEntry ifd : ifds) {
-            if (ifd.tag == tag) {
+    private TiffIFDEntry getByTag(TiffIFDEntry[] ifds, int tag)
+    {
+        for (TiffIFDEntry ifd : ifds)
+        {
+            if (ifd.tag == tag)
+            {
                 return ifd;
             }
         }
@@ -563,24 +613,29 @@ public class GeotiffImageReader extends ImageReader {
 
     /*
     * Utility method intended to read the array of StripOffsets or StripByteCounts.
-     */
-    private long[] getStripsArray(TiffIFDEntry stripsEntry) throws IOException {
+    */
+    private long[] getStripsArray(TiffIFDEntry stripsEntry) throws IOException
+    {
         long[] offsets = new long[(int) stripsEntry.count];
-        if (stripsEntry.count == 1) {
+        if (stripsEntry.count == 1)
+        {
             // this is a special case, and it *does* happen!
             offsets[0] = stripsEntry.asLong();
-        } else {
+        }
+        else
+        {
             long fileOffset = stripsEntry.asLong();
             this.theStream.seek(fileOffset);
-            if (stripsEntry.type == Tiff.Type.SHORT) {
-                for (int i = 0; i < stripsEntry.count; i++) {
+            if (stripsEntry.type == Tiff.Type.SHORT)
+                for (int i = 0; i < stripsEntry.count; i++)
+                {
                     offsets[i] = this.theStream.readUnsignedShort();
                 }
-            } else {
-                for (int i = 0; i < stripsEntry.count; i++) {
+            else
+                for (int i = 0; i < stripsEntry.count; i++)
+                {
                     offsets[i] = this.theStream.readUnsignedInt();
                 }
-            }
         }
         return offsets;
     }
@@ -592,26 +647,30 @@ public class GeotiffImageReader extends ImageReader {
      * to go track them down elsewhere in the file.  Finally, as bitsPerSample is optional for bilevel images,
      * we'll return something sane if this tag is absent.
      */
-    private int[] getBitsPerSample(TiffIFDEntry entry) throws IOException {
-        if (entry == null) {
+    private int[] getBitsPerSample(TiffIFDEntry entry) throws IOException
+    {
+        if (entry == null)
+        {
             return new int[]{1};
         }  // the default according to the Tiff6.0 spec.
 
-        if (entry.count == 1) {
+        if (entry.count == 1)
+        {
             return new int[]{(int) entry.asLong()};
         }
 
         long[] tmp = getStripsArray(entry);
         int[] bits = new int[tmp.length];
-        for (int i = 0; i < tmp.length; i++) {
+        for (int i = 0; i < tmp.length; i++)
+        {
             bits[i] = (int) tmp[i];
         }
 
         return bits;
     }
 
-    private class GeoKey {
-
+    private class GeoKey
+    {
         short key;
         Object value;
     }

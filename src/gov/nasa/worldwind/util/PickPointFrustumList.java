@@ -14,12 +14,14 @@ import java.util.ArrayList;
  * @author Jeff Addison
  * @version $Id: PickPointFrustumList.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
-
-    public PickPointFrustumList() {
+public class PickPointFrustumList extends ArrayList<PickPointFrustum>
+{
+    public PickPointFrustumList()
+    {
     }
 
-    public PickPointFrustumList(PickPointFrustumList list) {
+    public PickPointFrustumList(PickPointFrustumList list)
+    {
         super(list);
     }
 
@@ -32,15 +34,19 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
      *
      * @throws IllegalArgumentException if the point is null.
      */
-    public final boolean containsInAll(Vec4 point) {
-        if (point == null) {
+    public final boolean containsInAll(Vec4 point)
+    {
+        if (point == null)
+        {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().fine(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        for (PickPointFrustum frustum : this) {
-            if (!frustum.contains(point)) {
+        for (PickPointFrustum frustum : this)
+        {
+            if (!frustum.contains(point))
+            {
                 return false;
             }
         }
@@ -57,15 +63,19 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
      *
      * @throws IllegalArgumentException if the point is null.
      */
-    public final boolean containsInAny(Vec4 point) {
-        if (point == null) {
+    public final boolean containsInAny(Vec4 point)
+    {
+        if (point == null)
+        {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().fine(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        for (PickPointFrustum frustum : this) {
-            if (frustum.contains(point)) {
+        for (PickPointFrustum frustum : this)
+        {
+            if (frustum.contains(point))
+            {
                 return true;
             }
         }
@@ -82,15 +92,19 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
      *
      * @throws IllegalArgumentException if the point is null.
      */
-    public final boolean containsInAll(Point point) {
-        if (point == null) {
+    public final boolean containsInAll(Point point)
+    {
+        if (point == null)
+        {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().fine(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        for (PickPointFrustum frustum : this) {
-            if (!frustum.contains(point)) {
+        for (PickPointFrustum frustum : this)
+        {
+            if (!frustum.contains(point))
+            {
                 return false;
             }
         }
@@ -108,9 +122,12 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
      *
      * @throws IllegalArgumentException if the point is null.
      */
-    public final boolean containsInAny(double x, double y) {
-        for (PickPointFrustum frustum : this) {
-            if (frustum.contains(x, y)) {
+    public final boolean containsInAny(double x, double y)
+    {
+        for (PickPointFrustum frustum : this)
+        {
+            if (frustum.contains(x, y))
+            {
                 return true;
             }
         }
@@ -127,15 +144,19 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
      *
      * @throws IllegalArgumentException if the point is null.
      */
-    public final boolean containsInAny(Point point) {
-        if (point == null) {
+    public final boolean containsInAny(Point point)
+    {
+        if (point == null)
+        {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().fine(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        for (PickPointFrustum frustum : this) {
-            if (frustum.contains(point)) {
+        for (PickPointFrustum frustum : this)
+        {
+            if (frustum.contains(point))
+            {
                 return true;
             }
         }
@@ -153,15 +174,19 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
      *
      * @throws IllegalArgumentException if the extent is null.
      */
-    public final boolean intersectsAll(Extent extent) {
-        if (extent == null) {
+    public final boolean intersectsAll(Extent extent)
+    {
+        if (extent == null)
+        {
             String msg = Logging.getMessage("nullValue.ExtentIsNull");
             Logging.logger().fine(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        for (PickPointFrustum frustum : this) {
-            if (!frustum.intersects(extent)) {
+        for (PickPointFrustum frustum : this)
+        {
+            if (!frustum.intersects(extent))
+            {
                 return false;
             }
         }
@@ -178,15 +203,19 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
      *
      * @throws IllegalArgumentException if the extent is null.
      */
-    public final boolean intersectsAny(Extent extent) {
-        if (extent == null) {
+    public final boolean intersectsAny(Extent extent)
+    {
+        if (extent == null)
+        {
             String msg = Logging.getMessage("nullValue.ExtentIsNull");
             Logging.logger().fine(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        for (PickPointFrustum frustum : this) {
-            if (frustum.intersects(extent)) {
+        for (PickPointFrustum frustum : this)
+        {
+            if (frustum.intersects(extent))
+            {
                 return true;
             }
         }
@@ -204,11 +233,12 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
      *
      * @throws IllegalArgumentException if either point is null.
      */
-    public final boolean intersectsAny(Vec4 pa, Vec4 pb) {
-        for (PickPointFrustum frustum : this) {
-            if (frustum.intersectsSegment(pa, pb)) {
+    public final boolean intersectsAny(Vec4 pa, Vec4 pb)
+    {
+        for (PickPointFrustum frustum : this)
+        {
+            if (frustum.intersectsSegment(pa, pb))
                 return true;
-            }
         }
 
         return false;
@@ -221,19 +251,23 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
      * @param rect the Rectangle to test.
      *
      * @return true if the specified Rectangle intersects the 2D screen space enclosed by ALL Frustums, and false
-     * otherwise.
+     *         otherwise.
      *
      * @throws IllegalArgumentException if the extent is null.
      */
-    public final boolean intersectsAll(Rectangle rect) {
-        if (rect == null) {
+    public final boolean intersectsAll(Rectangle rect)
+    {
+        if (rect == null)
+        {
             String msg = Logging.getMessage("nullValue.RectangleIsNull");
             Logging.logger().fine(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        for (PickPointFrustum frustum : this) {
-            if (!frustum.intersects(rect)) {
+        for (PickPointFrustum frustum : this)
+        {
+            if (!frustum.intersects(rect))
+            {
                 return false;
             }
         }
@@ -248,19 +282,23 @@ public class PickPointFrustumList extends ArrayList<PickPointFrustum> {
      * @param rect the Rectangle to test.
      *
      * @return true if the specified Rectangle intersects the 2D screen space enclosed by ANY of the Frustums, and false
-     * otherwise.
+     *         otherwise.
      *
      * @throws IllegalArgumentException if the extent is null.
      */
-    public final boolean intersectsAny(Rectangle rect) {
-        if (rect == null) {
+    public final boolean intersectsAny(Rectangle rect)
+    {
+        if (rect == null)
+        {
             String msg = Logging.getMessage("nullValue.RectangleIsNull");
             Logging.logger().fine(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        for (PickPointFrustum frustum : this) {
-            if (frustum.intersects(rect)) {
+        for (PickPointFrustum frustum : this)
+        {
+            if (frustum.intersects(rect))
+            {
                 return true;
             }
         }

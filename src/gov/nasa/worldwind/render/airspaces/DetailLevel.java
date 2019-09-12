@@ -12,8 +12,8 @@ import gov.nasa.worldwind.render.*;
  * @author dcollins
  * @version $Id: DetailLevel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface DetailLevel extends Comparable<DetailLevel>, AVList {
-
+public interface DetailLevel extends Comparable<DetailLevel>, AVList
+{
     boolean meetsCriteria(DrawContext dc, Airspace airspace);
 
     int compareTo(DetailLevel level);

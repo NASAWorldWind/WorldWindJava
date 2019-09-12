@@ -18,8 +18,8 @@ import java.util.*;
  * @author tag
  * @version $Id: PickSupport.java 2281 2014-08-29 23:08:04Z dcollins $
  */
-public class PickSupport {
-
+public class PickSupport
+{
     /**
      * The picked objects currently registered with this PickSupport, represented as a map of color codes to picked
      * objects. This maps provides constant time access to a picked object when its color code is known.
@@ -37,28 +37,33 @@ public class PickSupport {
      */
     protected int[] minAndMaxColorCodes;
 
-    public void clearPickList() {
+    public void clearPickList()
+    {
         this.getPickableObjects().clear();
         this.getPickableObjectRanges().clear();
         this.minAndMaxColorCodes = null; // Reset the min and max color codes.
     }
 
-    public void addPickableObject(int colorCode, Object o, Position position, boolean isTerrain) {
+    public void addPickableObject(int colorCode, Object o, Position position, boolean isTerrain)
+    {
         this.getPickableObjects().put(colorCode, new PickedObject(colorCode, o, position, isTerrain));
         this.adjustExtremeColorCodes(colorCode);
     }
 
-    public void addPickableObject(int colorCode, Object o, Position position) {
+    public void addPickableObject(int colorCode, Object o, Position position)
+    {
         this.getPickableObjects().put(colorCode, new PickedObject(colorCode, o, position, false));
         this.adjustExtremeColorCodes(colorCode);
     }
 
-    public void addPickableObject(int colorCode, Object o) {
+    public void addPickableObject(int colorCode, Object o)
+    {
         this.getPickableObjects().put(colorCode, new PickedObject(colorCode, o));
         this.adjustExtremeColorCodes(colorCode);
     }
 
-    public void addPickableObject(PickedObject po) {
+    public void addPickableObject(PickedObject po)
+    {
         this.getPickableObjects().put(po.getColorCode(), po);
         this.adjustExtremeColorCodes(po.getColorCode());
     }
@@ -70,32 +75,29 @@ public class PickSupport {
      * actually be picked.
      *
      * @param colorCode the first color code associated with the range of sequential color codes.
-     * @param count the number of sequential color codes in the range of sequential color codes.
-     * @param factory the PickedObjectFactory to use when creating a PickedObject for a color in the specified range.
+     * @param count     the number of sequential color codes in the range of sequential color codes.
+     * @param factory   the PickedObjectFactory to use when creating a PickedObject for a color in the specified range.
      */
-    public void addPickableObjectRange(int colorCode, int count, PickedObjectFactory factory) {
+    public void addPickableObjectRange(int colorCode, int count, PickedObjectFactory factory)
+    {
         Range range = new Range(colorCode, count);
         this.pickableObjectRanges.put(range, factory);
         this.adjustExtremeColorCodes(colorCode);
         this.adjustExtremeColorCodes(colorCode + count - 1); // max code is last element in sequence of count codes
     }
 
-    public PickedObject getTopObject(DrawContext dc, Point pickPoint) {
+    public PickedObject getTopObject(DrawContext dc, Point pickPoint)
+    {
         if (!this.hasPickableObjects()) // avoid reading the current GL color when no pickable objects are registered
-        {
             return null;
-        }
 
         int colorCode = this.getTopColor(dc, pickPoint);
         if (colorCode == 0) // getTopColor returns 0 if the pick point selects the clear color.
-        {
             return null;
-        }
 
         PickedObject pickedObject = this.lookupPickableObject(colorCode);
-        if (pickedObject == null) {
+        if (pickedObject == null)
             return null;
-        }
 
         return pickedObject;
     }
@@ -110,34 +112,31 @@ public class PickSupport {
      * rectangle and does not attempt to determine which picked objects intersect it. This does nothing if no picked
      * objects are currently registered with this PickSupport.
      *
-     * @param dc the draw context which receives the picked object.
+     * @param dc        the draw context which receives the picked object.
      * @param pickPoint the point in AWT screen coordinates.
-     * @param layer the layer associated with the picked object.
+     * @param layer     the layer associated with the picked object.
      *
      * @return the picked object added to the draw context, or <code>null</code> if no picked object is drawn at the
-     * specified point.
+     *         specified point.
      */
-    public PickedObject resolvePick(DrawContext dc, Point pickPoint, Layer layer) {
+    public PickedObject resolvePick(DrawContext dc, Point pickPoint, Layer layer)
+    {
         if (!this.hasPickableObjects()) // avoid reading the current GL color when no pickable objects are registered
-        {
             return null;
-        }
 
         PickedObject po = null;
 
         // Resolve the object at the pick point, if any, adding it to the draw context's list of objects at the pick
         // point. If any object is at the pick point we return it. Note that the pick point can be null when the pick
         // rectangle is specified but the pick point is not.
-        if (pickPoint != null) {
+        if (pickPoint != null)
             po = this.doResolvePick(dc, pickPoint, layer);
-        }
 
         // Resolve the objects in the pick rectangle, if any, adding them to the draw context's list of objects
         // intersecting the pick rectangle. Note that the pick rectangle can be null when the pick point is specified
         // but the pick rectangle is not.
-        if (dc.getPickRectangle() != null && !dc.getPickRectangle().isEmpty()) {
+        if (dc.getPickRectangle() != null && !dc.getPickRectangle().isEmpty())
             this.doResolvePick(dc, dc.getPickRectangle(), layer);
-        }
 
         this.clearPickList();
 
@@ -148,19 +147,20 @@ public class PickSupport {
      * Adds a picked object registered with this PickSupport that is drawn at the specified point in AWT screen
      * coordinates (if one exists) to the draw context's list of picked objects.
      *
-     * @param dc the draw context which receives the picked object.
+     * @param dc        the draw context which receives the picked object.
      * @param pickPoint the point in AWT screen coordinates.
-     * @param layer the layer associated with the picked object.
+     * @param layer     the layer associated with the picked object.
      *
      * @return the picked object added to the draw context, or <code>null</code> if no picked object is drawn at the
-     * specified point.
+     *         specified point.
      */
-    protected PickedObject doResolvePick(DrawContext dc, Point pickPoint, Layer layer) {
+    protected PickedObject doResolvePick(DrawContext dc, Point pickPoint, Layer layer)
+    {
         PickedObject pickedObject = this.getTopObject(dc, pickPoint);
-        if (pickedObject != null) {
-            if (layer != null) {
+        if (pickedObject != null)
+        {
+            if (layer != null)
                 pickedObject.setParentLayer(layer);
-            }
 
             dc.addPickedObject(pickedObject);
         }
@@ -172,35 +172,32 @@ public class PickSupport {
      * Adds all picked objects that are registered with this PickSupport and intersect the specified rectangle in AWT
      * screen coordinates (if any) to the draw context's list of picked objects.
      *
-     * @param dc the draw context which receives the picked objects.
+     * @param dc       the draw context which receives the picked objects.
      * @param pickRect the rectangle in AWT screen coordinates.
-     * @param layer the layer associated with the picked objects.
+     * @param layer    the layer associated with the picked objects.
      */
-    protected void doResolvePick(DrawContext dc, Rectangle pickRect, Layer layer) {
+    protected void doResolvePick(DrawContext dc, Rectangle pickRect, Layer layer)
+    {
         // Get the unique pick colors in the specified screen rectangle. Use the minimum and maximum color codes to cull
         // the number of colors that the draw context must consider with identifying the unique pick colors in the
         // specified rectangle.
         int[] colorCodes = dc.getPickColorsInRectangle(pickRect, this.minAndMaxColorCodes);
-        if (colorCodes == null || colorCodes.length == 0) {
+        if (colorCodes == null || colorCodes.length == 0)
             return;
-        }
 
         // Lookup the pickable object (if any) for each unique color code appearing in the pick rectangle. Each picked
         // object that corresponds to a picked color is added to the draw context.
-        for (int colorCode : colorCodes) {
+        for (int colorCode : colorCodes)
+        {
             if (colorCode == 0) // This should never happen, but we check anyway.
-            {
                 continue;
-            }
 
             PickedObject po = this.lookupPickableObject(colorCode);
-            if (po == null) {
+            if (po == null)
                 continue;
-            }
 
-            if (layer != null) {
+            if (layer != null)
                 po.setParentLayer(layer);
-            }
 
             dc.addObjectInPickRectangle(po);
         }
@@ -215,18 +212,20 @@ public class PickSupport {
      * This returns 0 if the point is <code>null</code>, if the point contains the clear color, or if the point is
      * outside the draw context's drawable area.
      *
-     * @param dc the draw context to return a color for.
+     * @param dc        the draw context to return a color for.
      * @param pickPoint the point to return a color for, in AWT screen coordinates.
      *
      * @return the RGB color corresponding to the specified point.
      */
-    public int getTopColor(DrawContext dc, Point pickPoint) {
+    public int getTopColor(DrawContext dc, Point pickPoint)
+    {
         // This method's implementation has been moved into DrawContext.getPickColor in order to consolidate this logic
         // into one place. We've left this method here to avoid removing an interface that applications may rely on.
         return pickPoint != null ? dc.getPickColorAtPoint(pickPoint) : 0;
     }
 
-    public void beginPicking(DrawContext dc) {
+    public void beginPicking(DrawContext dc)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         gl.glPushAttrib(GL2.GL_ENABLE_BIT | GL2.GL_CURRENT_BIT);
@@ -237,12 +236,12 @@ public class PickSupport {
         gl.glDisable(GL.GL_BLEND);
         gl.glDisable(GL.GL_TEXTURE_2D);
 
-        if (dc.isDeepPickingEnabled()) {
+        if (dc.isDeepPickingEnabled())
             gl.glDisable(GL.GL_DEPTH_TEST);
-        }
     }
 
-    public void endPicking(DrawContext dc) {
+    public void endPicking(DrawContext dc)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         gl.glPopAttrib();
 
@@ -251,33 +250,36 @@ public class PickSupport {
         gl.glColor3ub((byte) 255, (byte) 255, (byte) 255);
     }
 
-    protected Map<Integer, PickedObject> getPickableObjects() {
+    protected Map<Integer, PickedObject> getPickableObjects()
+    {
         return this.pickableObjects;
     }
 
-    protected Map<Range, PickedObjectFactory> getPickableObjectRanges() {
+    protected Map<Range, PickedObjectFactory> getPickableObjectRanges()
+    {
         return this.pickableObjectRanges;
     }
 
-    protected boolean hasPickableObjects() {
+    protected boolean hasPickableObjects()
+    {
         return this.getPickableObjects().size() > 0 || this.getPickableObjectRanges().size() > 0;
     }
 
-    protected PickedObject lookupPickableObject(int colorCode) {
+    protected PickedObject lookupPickableObject(int colorCode)
+    {
         // Try looking up the color code in the pickable object map.
         PickedObject po = this.getPickableObjects().get(colorCode);
-        if (po != null) {
+        if (po != null)
             return po;
-        }
 
         // Try matching the color code to one of the pickable object ranges.
-        for (Map.Entry<Range, PickedObjectFactory> entry : this.getPickableObjectRanges().entrySet()) {
+        for (Map.Entry<Range, PickedObjectFactory> entry : this.getPickableObjectRanges().entrySet())
+        {
             Range range = entry.getKey();
             PickedObjectFactory factory = entry.getValue();
 
-            if (range.contains(colorCode) && factory != null) {
+            if (range.contains(colorCode) && factory != null)
                 return factory.createPickedObject(colorCode);
-            }
         }
 
         return null;
@@ -290,16 +292,16 @@ public class PickSupport {
      *
      * @param colorCode the code used to adjust the current min and max codes.
      */
-    protected void adjustExtremeColorCodes(int colorCode) {
-        if (this.minAndMaxColorCodes == null) {
-            this.minAndMaxColorCodes = new int[]{colorCode, colorCode};
-        } else {
-            if (this.minAndMaxColorCodes[0] > colorCode) {
+    protected void adjustExtremeColorCodes(int colorCode)
+    {
+        if (this.minAndMaxColorCodes == null)
+            this.minAndMaxColorCodes = new int[] {colorCode, colorCode};
+        else
+        {
+            if (this.minAndMaxColorCodes[0] > colorCode)
                 this.minAndMaxColorCodes[0] = colorCode;
-            }
-            if (this.minAndMaxColorCodes[1] < colorCode) {
+            if (this.minAndMaxColorCodes[1] < colorCode)
                 this.minAndMaxColorCodes[1] = colorCode;
-            }
         }
     }
 
@@ -311,7 +313,8 @@ public class PickSupport {
      *
      * @return true if both objects are not null and they refer to the same user object, otherwise false.
      */
-    public static boolean areSelectionsTheSame(PickedObject a, PickedObject b) {
+    public static boolean areSelectionsTheSame(PickedObject a, PickedObject b)
+    {
         return a != null && b != null && a.getObject() == b.getObject();
     }
 }

@@ -14,8 +14,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: UserFacingText.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class UserFacingText implements GeographicText {
-
+public class UserFacingText implements GeographicText
+{
     private CharSequence text;
     private Position textPosition;
     private Font textFont; // Can be null to indicate the default font.
@@ -24,8 +24,10 @@ public class UserFacingText implements GeographicText {
     private boolean isVisible = true;
     double priority;  //used for label culling
 
-    public UserFacingText(CharSequence text, Position textPosition) {
-        if (text == null) {
+    public UserFacingText(CharSequence text, Position textPosition)
+    {
+        if (text == null)
+        {
             String message = Logging.getMessage("nullValue.CharSequenceIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -35,12 +37,15 @@ public class UserFacingText implements GeographicText {
         this.textPosition = textPosition;
     }
 
-    public CharSequence getText() {
+    public CharSequence getText()
+    {
         return this.text;
     }
 
-    public void setText(CharSequence text) {
-        if (text == null) {
+    public void setText(CharSequence text)
+    {
+        if (text == null)
+        {
             String message = Logging.getMessage("nullValue.CharSequenceIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -49,51 +54,63 @@ public class UserFacingText implements GeographicText {
         this.text = text;
     }
 
-    public double getPriority() {
+    public double getPriority()
+    {
         return priority;
     }
 
-    public void setPriority(double priority) {
+    public void setPriority(double priority)
+    {
         this.priority = priority;
     }
 
-    public Position getPosition() {
+    public Position getPosition()
+    {
         return this.textPosition;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(Position position)
+    {
         this.textPosition = position;
     }
 
-    public Font getFont() {
+    public Font getFont()
+    {
         return this.textFont;
     }
 
-    public void setFont(Font font) {
+    public void setFont(Font font)
+    {
         this.textFont = font;
     }
 
-    public Color getColor() {
+    public Color getColor()
+    {
         return this.textColor;
     }
 
-    public void setColor(Color color) {
+    public void setColor(Color color)
+    {
         this.textColor = color;
     }
 
-    public Color getBackgroundColor() {
+    public Color getBackgroundColor()
+    {
         return this.textBackgroundColor;
     }
 
-    public void setBackgroundColor(Color background) {
+    public void setBackgroundColor(Color background)
+    {
         this.textBackgroundColor = background;
     }
 
-    public boolean isVisible() {
+    public boolean isVisible()
+    {
         return this.isVisible;
     }
 
-    public void setVisible(boolean visible) {
+    public void setVisible(boolean visible)
+    {
         this.isVisible = visible;
     }
 }

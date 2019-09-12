@@ -14,53 +14,63 @@ import java.io.File;
  * @author dcollins
  * @version $Id: FileSet.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class FileSet extends WizardProperties {
-
+public class FileSet extends WizardProperties
+{
     public static final String IDENTIFIER = "fileSet.Identifier";
     public static final String FILES = "fileSet.Files";
     public static final String TITLE = "fileSet.Title";
     public static final String SELECTED = "fileSet.Selected";
 
-    public FileSet() {
+    public FileSet()
+    {
     }
 
-    public String getIdentifier() {
+    public String getIdentifier()
+    {
         return getStringProperty(IDENTIFIER);
     }
 
-    public void setIdentifier(String identifier) {
+    public void setIdentifier(String identifier)
+    {
         setProperty(IDENTIFIER, identifier);
     }
 
     @SuppressWarnings({"unchecked"})
-    public Collection<File> getFiles() {
+    public Collection<File> getFiles()
+    {
         Object value = getProperty(FILES);
         return (value != null && value instanceof Collection) ? (Collection<File>) value : null;
     }
 
-    public void setFiles(Collection<File> files) {
+    public void setFiles(Collection<File> files)
+    {
         setProperty(FILES, files);
     }
 
-    public int getFileCount() {
+    public int getFileCount()
+    {
         Collection<File> files = getFiles();
         return files != null ? files.size() : 0;
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return getStringProperty(TITLE);
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         setProperty(TITLE, title);
     }
 
-    public boolean isSelected() {
+    public boolean isSelected()
+    {
         Boolean b = getBooleanProperty(SELECTED);
         return b != null ? b : false;
     }
 
-    public void setSelected(boolean b) {
+    public void setSelected(boolean b)
+    {
         setProperty(SELECTED, b);
     }
 }

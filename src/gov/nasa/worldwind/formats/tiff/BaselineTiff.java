@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.formats.tiff;
 
 import gov.nasa.worldwind.util.Logging;
@@ -13,8 +14,8 @@ import gov.nasa.worldwind.util.Logging;
  * @author Lado Garakanidze
  * @version $Id: BaselineTiff.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-class BaselineTiff {
-
+class BaselineTiff
+{
     public int width = Tiff.Undefined;
     public int height = Tiff.Undefined;
     public int samplesPerPixel = Tiff.Undefined;
@@ -32,19 +33,25 @@ class BaselineTiff {
     public String softwareVersion = null;
     public String dateTime = null;
 
-    private BaselineTiff() {
+    private BaselineTiff()
+    {
     }
 
-    public static BaselineTiff extract(TiffIFDEntry[] ifd, TIFFReader tiffReader) {
-        if (null == ifd || null == tiffReader) {
+    public static BaselineTiff extract(TiffIFDEntry[] ifd, TIFFReader tiffReader)
+    {
+        if (null == ifd || null == tiffReader)
+        {
             return null;
         }
 
         BaselineTiff tiff = new BaselineTiff();
 
-        for (TiffIFDEntry entry : ifd) {
-            try {
-                switch (entry.tag) {
+        for (TiffIFDEntry entry : ifd)
+        {
+            try
+            {
+                switch (entry.tag)
+                {
                     // base TIFF tags
                     case Tiff.Tag.IMAGE_WIDTH:
                         tiff.width = (int) entry.asLong();
@@ -102,7 +109,9 @@ class BaselineTiff {
                         tiff.maxSampleValue = entry.asShort();
                         break;
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Logging.logger().finest(e.toString());
             }
         }
@@ -110,7 +119,8 @@ class BaselineTiff {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuffer sb = new StringBuffer("{ ");
         sb.append("width=").append(this.width).append(", ");
         sb.append("height=").append(this.height).append(", ");
@@ -120,23 +130,27 @@ class BaselineTiff {
         sb.append("planarConfig=").append(this.planarConfig).append(", ");
 
         sb.append("sampleFormat=( ");
-        if (null != this.sampleFormat) {
-            for (int i = 0; i < this.sampleFormat.length; i++) {
+        if (null != this.sampleFormat)
+        {
+            for (int i = 0; i < this.sampleFormat.length; i++)
+            {
                 sb.append(this.sampleFormat[i]).append(" ");
             }
-        } else {
-            sb.append(" NULL ");
         }
+        else
+            sb.append(" NULL ");
         sb.append("), ");
 
         sb.append("bitsPerSample=( ");
-        if (null != this.bitsPerSample) {
-            for (int i = 0; i < this.bitsPerSample.length; i++) {
+        if (null != this.bitsPerSample)
+        {
+            for (int i = 0; i < this.bitsPerSample.length; i++)
+            {
                 sb.append(this.bitsPerSample[i]).append(" ");
             }
-        } else {
-            sb.append(" NULL ");
         }
+        else
+            sb.append(" NULL ");
         sb.append("), ");
 
         sb.append("displayName=").append(this.displayName).append(", ");

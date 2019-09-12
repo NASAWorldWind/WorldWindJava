@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.collada;
 
 /**
@@ -11,14 +12,15 @@ package gov.nasa.worldwind.ogc.collada;
  * @author pabercrombie
  * @version $Id$
  */
-public class ColladaLines extends ColladaAbstractGeometry {
-
+public class ColladaLines extends ColladaAbstractGeometry
+{
     /**
      * Construct an instance.
      *
      * @param ns the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public ColladaLines(String ns) {
+    public ColladaLines(String ns)
+    {
         super(ns);
     }
 
@@ -28,7 +30,8 @@ public class ColladaLines extends ColladaAbstractGeometry {
      * @return Two
      */
     @Override
-    protected int getVerticesPerShape() {
+    protected int getVerticesPerShape()
+    {
         return 2;
     }
 }

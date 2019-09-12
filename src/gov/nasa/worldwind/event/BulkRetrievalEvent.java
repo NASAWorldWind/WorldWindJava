@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.event;
 
 import gov.nasa.worldwind.retrieve.BulkRetrievable;
@@ -14,16 +15,12 @@ import gov.nasa.worldwind.retrieve.BulkRetrievable;
  * @version $Id: BulkRetrievalEvent.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see gov.nasa.worldwind.retrieve.BulkRetrievable
  */
-public class BulkRetrievalEvent extends WWEvent {
-
-    /**
-     * Constant indicating retrieval failure.
-     */
+public class BulkRetrievalEvent extends WWEvent
+{
+    /** Constant indicating retrieval failure. */
     public static String RETRIEVAL_FAILED = "gov.nasa.worldwind.retrieve.BulkRetrievable.RetrievalFailed";
 
-    /**
-     * Constant indicating retrieval success.
-     */
+    /** Constant indicating retrieval success. */
     public static String RETRIEVAL_SUCCEEDED = "gov.nasa.worldwind.retrieve.BulkRetrievable.RetrievalSucceeded";
 
     protected String eventType;
@@ -32,13 +29,14 @@ public class BulkRetrievalEvent extends WWEvent {
     /**
      * Creates a new event.
      *
-     * @param source the event source, typically either a tiled image layer, elevation model or placename layer.
+     * @param source    the event source, typically either a tiled image layer, elevation model or placename layer.
      * @param eventType indicates success or failure. One of {@link #RETRIEVAL_SUCCEEDED} or {@link #RETRIEVAL_FAILED}.
-     * @param item the cache location of the item whose retrieval succeeded or failed.
+     * @param item      the cache location of the item whose retrieval succeeded or failed.
      *
      * @see gov.nasa.worldwind.retrieve.BulkRetrievable
      */
-    public BulkRetrievalEvent(BulkRetrievable source, String eventType, String item) {
+    public BulkRetrievalEvent(BulkRetrievable source, String eventType, String item)
+    {
         super(source);
 
         this.eventType = eventType;
@@ -52,7 +50,8 @@ public class BulkRetrievalEvent extends WWEvent {
      *
      * @see gov.nasa.worldwind.retrieve.BulkRetrievable
      */
-    public BulkRetrievable getSource() {
+    public BulkRetrievable getSource()
+    {
         return super.getSource() instanceof BulkRetrievable ? (BulkRetrievable) super.getSource() : null;
     }
 
@@ -61,7 +60,8 @@ public class BulkRetrievalEvent extends WWEvent {
      *
      * @return the event type.
      */
-    public String getEventType() {
+    public String getEventType()
+    {
         return eventType;
     }
 
@@ -70,7 +70,8 @@ public class BulkRetrievalEvent extends WWEvent {
      *
      * @return the filestore location of the item.
      */
-    public String getItem() {
+    public String getItem()
+    {
         return item;
     }
 }

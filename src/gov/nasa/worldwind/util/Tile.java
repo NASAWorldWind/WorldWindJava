@@ -22,15 +22,13 @@ import java.util.Random;
  * @author tag
  * @version $Id: Tile.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Tile implements Comparable<Tile>, Cacheable {
-
+public class Tile implements Comparable<Tile>, Cacheable
+{
     private final Sector sector;
     private final Level level;
     private final int row;
     private final int column;
-    /**
-     * An optional cache name. Overrides the Level's cache name when non-null.
-     */
+    /** An optional cache name. Overrides the Level's cache name when non-null. */
     private final String cacheName;
     private final TileKey tileKey;
     private double priority = Double.MAX_VALUE; // Default is minimum priority
@@ -41,20 +39,23 @@ public class Tile implements Comparable<Tile>, Cacheable {
      * Constructs a tile for a given sector, level, row and column of the tile's containing tile set.
      *
      * @param sector the sector corresponding with the tile.
-     * @param level the tile's level within a containing level set.
-     * @param row the row index (0 origin) of the tile within the indicated level.
+     * @param level  the tile's level within a containing level set.
+     * @param row    the row index (0 origin) of the tile within the indicated level.
      * @param column the column index (0 origin) of the tile within the indicated level.
      *
      * @throws IllegalArgumentException if <code>sector</code> or <code>level</code> is null.
      */
-    public Tile(Sector sector, Level level, int row, int column) {
-        if (sector == null) {
+    public Tile(Sector sector, Level level, int row, int column)
+    {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (level == null) {
+        if (level == null)
+        {
             String msg = Logging.getMessage("nullValue.LevelIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -92,22 +93,25 @@ public class Tile implements Comparable<Tile>, Cacheable {
      * is non-null, it overrides the level's cache name and is returned by {@link #getCacheName()}. Otherwise, the
      * level's cache name is used.
      *
-     * @param sector the sector corresponding with the tile.
-     * @param level the tile's level within a containing level set.
-     * @param row the row index (0 origin) of the tile within the indicated level.
-     * @param column the column index (0 origin) of the tile within the indicated level.
+     * @param sector    the sector corresponding with the tile.
+     * @param level     the tile's level within a containing level set.
+     * @param row       the row index (0 origin) of the tile within the indicated level.
+     * @param column    the column index (0 origin) of the tile within the indicated level.
      * @param cacheName optional cache name to override the Level's cache name. May be null.
      *
      * @throws IllegalArgumentException if <code>sector</code> or <code>level</code> is null.
      */
-    public Tile(Sector sector, Level level, int row, int column, String cacheName) {
-        if (sector == null) {
+    public Tile(Sector sector, Level level, int row, int column, String cacheName)
+    {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (level == null) {
+        if (level == null)
+        {
             String msg = Logging.getMessage("nullValue.LevelIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -126,17 +130,20 @@ public class Tile implements Comparable<Tile>, Cacheable {
      * Constructs a texture tile for a given sector and level, and with a default row and column.
      *
      * @param sector the sector to create the tile for.
-     * @param level the level to associate the tile with
+     * @param level  the level to associate the tile with
      *
      * @throws IllegalArgumentException if sector or level are null.
      */
-    public Tile(Sector sector, Level level) {
-        if (sector == null) {
+    public Tile(Sector sector, Level level)
+    {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (level == null) {
+        if (level == null)
+        {
             String msg = Logging.getMessage("nullValue.LevelIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -156,8 +163,10 @@ public class Tile implements Comparable<Tile>, Cacheable {
      *
      * @param sector the sector to create the tile for.
      */
-    public Tile(Sector sector) {
-        if (sector == null) {
+    public Tile(Sector sector)
+    {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -174,61 +183,68 @@ public class Tile implements Comparable<Tile>, Cacheable {
         this.path = null;
     }
 
-    public long getSizeInBytes() {
+    public long getSizeInBytes()
+    {
         // Return just an approximate size
         long size = 0;
 
-        if (this.sector != null) {
+        if (this.sector != null)
             size += this.sector.getSizeInBytes();
-        }
 
-        if (this.path != null) {
+        if (this.path != null)
             size += this.getPath().length();
-        }
 
         size += 32; // to account for the references and the TileKey size
 
         return size;
     }
 
-    public String getPath() {
-        if (this.path == null) {
+    public String getPath()
+    {
+        if (this.path == null)
+        {
             this.path = this.level.getPath() + "/" + this.row + "/" + this.row + "_" + this.column;
-            if (!this.level.isEmpty()) {
+            if (!this.level.isEmpty())
                 path += this.level.getFormatSuffix();
-            }
         }
 
         return this.path;
     }
 
-    public String getPathBase() {
+    public String getPathBase()
+    {
         String path = this.getPath();
 
         return path.contains(".") ? path.substring(0, path.lastIndexOf(".")) : path;
     }
 
-    public final Sector getSector() {
+    public final Sector getSector()
+    {
         return sector;
     }
 
-    public Level getLevel() {
+    public Level getLevel()
+    {
         return level;
     }
 
-    public final int getLevelNumber() {
+    public final int getLevelNumber()
+    {
         return this.level != null ? this.level.getLevelNumber() : 0;
     }
 
-    public final String getLevelName() {
+    public final String getLevelName()
+    {
         return this.level != null ? this.level.getLevelName() : "";
     }
 
-    public final int getRow() {
+    public final int getRow()
+    {
         return row;
     }
 
-    public final int getColumn() {
+    public final int getColumn()
+    {
         return column;
     }
 
@@ -238,31 +254,36 @@ public class Tile implements Comparable<Tile>, Cacheable {
      *
      * @return the tile's cache name.
      */
-    public final String getCacheName() {
-        if (this.cacheName != null) {
+    public final String getCacheName()
+    {
+        if (this.cacheName != null)
             return this.cacheName;
-        }
 
         return this.level != null ? this.level.getCacheName() : null;
     }
 
-    public final String getFormatSuffix() {
+    public final String getFormatSuffix()
+    {
         return this.level != null ? this.level.getFormatSuffix() : null;
     }
 
-    public final TileKey getTileKey() {
+    public final TileKey getTileKey()
+    {
         return this.tileKey;
     }
 
-    public java.net.URL getResourceURL() throws java.net.MalformedURLException {
+    public java.net.URL getResourceURL() throws java.net.MalformedURLException
+    {
         return this.level != null ? this.level.getTileResourceURL(this, null) : null;
     }
 
-    public java.net.URL getResourceURL(String imageFormat) throws java.net.MalformedURLException {
+    public java.net.URL getResourceURL(String imageFormat) throws java.net.MalformedURLException
+    {
         return this.level != null ? this.level.getTileResourceURL(this, imageFormat) : null;
     }
 
-    public String getLabel() {
+    public String getLabel()
+    {
         StringBuilder sb = new StringBuilder();
 
         sb.append(this.getLevelNumber());
@@ -275,57 +296,53 @@ public class Tile implements Comparable<Tile>, Cacheable {
         return sb.toString();
     }
 
-    public int getWidth() {
+    public int getWidth()
+    {
         return this.getLevel().getTileWidth();
     }
 
-    public int getHeight() {
+    public int getHeight()
+    {
         return this.getLevel().getTileHeight();
     }
 
-    public int compareTo(Tile tile) {
-        if (tile == null) {
+    public int compareTo(Tile tile)
+    {
+        if (tile == null)
+        {
             String msg = Logging.getMessage("nullValue.TileIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         // No need to compare Sectors or path because they are redundant with row and column
-        if (tile.getLevelNumber() == this.getLevelNumber() && tile.row == this.row && tile.column == this.column) {
+        if (tile.getLevelNumber() == this.getLevelNumber() && tile.row == this.row && tile.column == this.column)
             return 0;
-        }
 
         if (this.getLevelNumber() < tile.getLevelNumber()) // Lower-res levels compare lower than higher-res
-        {
             return -1;
-        }
-        if (this.getLevelNumber() > tile.getLevelNumber()) {
+        if (this.getLevelNumber() > tile.getLevelNumber())
             return 1;
-        }
 
-        if (this.row < tile.row) {
+        if (this.row < tile.row)
             return -1;
-        }
-        if (this.row > tile.row) {
+        if (this.row > tile.row)
             return 1;
-        }
 
-        if (this.column < tile.column) {
+        if (this.column < tile.column)
             return -1;
-        }
 
         return 1; // tile.column must be > this.column because equality was tested above
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         // Equality based only on the tile key
-        if (this == o) {
+        if (this == o)
             return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass())
             return false;
-        }
 
         final Tile tile = (Tile) o;
 
@@ -333,41 +350,47 @@ public class Tile implements Comparable<Tile>, Cacheable {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return (tileKey != null ? tileKey.hashCode() : 0);
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return this.getPath();
     }
 
     /**
      * Computes the row index of a latitude in the global tile grid corresponding to a specified grid interval.
      *
-     * @param delta the grid interval
+     * @param delta    the grid interval
      * @param latitude the latitude for which to compute the row index
-     * @param origin the origin of the grid
+     * @param origin   the origin of the grid
      *
      * @return the row index of the row containing the specified latitude
      *
      * @throws IllegalArgumentException if <code>delta</code> is null or non-positive, or <code>latitude</code> is null,
-     * greater than positive 90 degrees, or less than negative 90 degrees
+     *                                  greater than positive 90 degrees, or less than  negative 90 degrees
      */
-    public static int computeRow(Angle delta, Angle latitude, Angle origin) {
-        if (delta == null || latitude == null || origin == null) {
+    public static int computeRow(Angle delta, Angle latitude, Angle origin)
+    {
+        if (delta == null || latitude == null || origin == null)
+        {
             String message = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (delta.degrees <= 0d) {
+        if (delta.degrees <= 0d)
+        {
             String message = Logging.getMessage("generic.DeltaAngleOutOfRange", delta);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (latitude.degrees < -90d || latitude.degrees > 90d) {
+        if (latitude.degrees < -90d || latitude.degrees > 90d)
+        {
             String message = Logging.getMessage("generic.AngleOutOfRange", latitude);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -375,9 +398,8 @@ public class Tile implements Comparable<Tile>, Cacheable {
 
         int row = (int) ((latitude.degrees - origin.degrees) / delta.degrees);
         // Latitude is at the end of the grid. Subtract 1 from the computed row to return the last row.
-        if ((latitude.degrees - origin.degrees) == 180d) {
+        if ((latitude.degrees - origin.degrees) == 180d)
             row = row - 1;
-        }
 
         return row;
     }
@@ -385,29 +407,33 @@ public class Tile implements Comparable<Tile>, Cacheable {
     /**
      * Computes the column index of a longitude in the global tile grid corresponding to a specified grid interval.
      *
-     * @param delta the grid interval
+     * @param delta     the grid interval
      * @param longitude the longitude for which to compute the column index
-     * @param origin the origin of the grid
+     * @param origin    the origin of the grid
      *
      * @return the column index of the column containing the specified latitude
      *
      * @throws IllegalArgumentException if <code>delta</code> is null or non-positive, or <code>longitude</code> is
-     * null, greater than positive 180 degrees, or less than negative 180 degrees
+     *                                  null, greater than positive 180 degrees, or less than  negative 180 degrees
      */
-    public static int computeColumn(Angle delta, Angle longitude, Angle origin) {
-        if (delta == null || longitude == null || origin == null) {
+    public static int computeColumn(Angle delta, Angle longitude, Angle origin)
+    {
+        if (delta == null || longitude == null || origin == null)
+        {
             String message = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (delta.degrees <= 0d) {
+        if (delta.degrees <= 0d)
+        {
             String message = Logging.getMessage("generic.DeltaAngleOutOfRange", delta);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (longitude.degrees < -180d || longitude.degrees > 180d) {
+        if (longitude.degrees < -180d || longitude.degrees > 180d)
+        {
             String message = Logging.getMessage("generic.AngleOutOfRange", longitude);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -416,15 +442,13 @@ public class Tile implements Comparable<Tile>, Cacheable {
         // Compute the longitude relative to the grid. The grid provides 360 degrees of longitude from the grid origin.
         // We wrap grid longitude values so that the grid begins and ends at the origin.
         double gridLongitude = longitude.degrees - origin.degrees;
-        if (gridLongitude < 0.0) {
+        if (gridLongitude < 0.0)
             gridLongitude = 360d + gridLongitude;
-        }
 
         int col = (int) (gridLongitude / delta.degrees);
         // Longitude is at the end of the grid. Subtract 1 from the computed column to return the last column.
-        if ((longitude.degrees - origin.degrees) == 360d) {
+        if ((longitude.degrees - origin.degrees) == 360d)
             col = col - 1;
-        }
 
         return col;
     }
@@ -432,28 +456,32 @@ public class Tile implements Comparable<Tile>, Cacheable {
     /**
      * Determines the minimum latitude of a row in the global tile grid corresponding to a specified grid interval.
      *
-     * @param row the row index of the row in question
-     * @param delta the grid interval
+     * @param row    the row index of the row in question
+     * @param delta  the grid interval
      * @param origin the origin of the grid
      *
      * @return the minimum latitude of the tile corresponding to the specified row
      *
      * @throws IllegalArgumentException if the grid interval (<code>delta</code>) is null or zero or the row index is
-     * negative.
+     *                                  negative.
      */
-    public static Angle computeRowLatitude(int row, Angle delta, Angle origin) {
-        if (delta == null || origin == null) {
+    public static Angle computeRowLatitude(int row, Angle delta, Angle origin)
+    {
+        if (delta == null || origin == null)
+        {
             String message = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (row < 0) {
+        if (row < 0)
+        {
             String msg = Logging.getMessage("generic.RowIndexOutOfRange", row);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (delta.degrees <= 0d) {
+        if (delta.degrees <= 0d)
+        {
             String message = Logging.getMessage("generic.DeltaAngleOutOfRange", delta);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -467,27 +495,31 @@ public class Tile implements Comparable<Tile>, Cacheable {
      * Determines the minimum longitude of a column in the global tile grid corresponding to a specified grid interval.
      *
      * @param column the row index of the row in question
-     * @param delta the grid interval
+     * @param delta  the grid interval
      * @param origin the origin of the grid
      *
      * @return the minimum longitude of the tile corresponding to the specified column
      *
      * @throws IllegalArgumentException if the grid interval (<code>delta</code>) is null or zero or the column index is
-     * negative.
+     *                                  negative.
      */
-    public static Angle computeColumnLongitude(int column, Angle delta, Angle origin) {
-        if (delta == null || origin == null) {
+    public static Angle computeColumnLongitude(int column, Angle delta, Angle origin)
+    {
+        if (delta == null || origin == null)
+        {
             String message = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (column < 0) {
+        if (column < 0)
+        {
             String msg = Logging.getMessage("generic.ColumnIndexOutOfRange", column);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (delta.degrees <= 0d) {
+        if (delta.degrees <= 0d)
+        {
             String message = Logging.getMessage("generic.DeltaAngleOutOfRange", delta);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -497,11 +529,13 @@ public class Tile implements Comparable<Tile>, Cacheable {
         return Angle.fromDegrees(lonDegrees);
     }
 
-    public double getPriority() {
+    public double getPriority()
+    {
         return priority;
     }
 
-    public void setPriority(double priority) {
+    public void setPriority(double priority)
+    {
         this.priority = priority;
     }
 }

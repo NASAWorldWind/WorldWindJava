@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-~ Copyright (C) 2012 United States Government as represented by the Administrator of the
-~ National Aeronautics and Space Administration.
-~ All Rights Reserved.
--->
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
 
 <!--$Id: worldwind.layers.xml 2256 2014-08-22 17:46:18Z tgaskins $-->
 <!--This document specifies the initial layers to load in WorldWind-->

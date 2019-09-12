@@ -17,46 +17,30 @@ import gov.nasa.worldwind.cache.BasicSessionCache;
  * @author tag
  * @version $Id: AbsentResourceList.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class AbsentResourceList {
+public class AbsentResourceList
+{
     // Absent resources: A resource is deemed absent if a specified maximum number of attempts have been made to retrieve it.
     // Retrieval attempts are governed by a minimum time interval between successive attempts. If an attempt is made
     // within this interval, the resource is still deemed to be absent until the interval expires.
 
-    /**
-     * The default number of times a resource is marked as absent before being marked as permanently absent.
-     */
+    /** The default number of times a resource is marked as absent before being marked as permanently absent. */
     protected static final int DEFAULT_MAX_ABSENT_RESOURCE_TRIES = 3;
-    /**
-     * The default interval to wait before indicating the resource is not absent.
-     */
+    /** The default interval to wait before indicating the resource is not absent. */
     protected static final int DEFAULT_MIN_ABSENT_RESOURCE_CHECK_INTERVAL = 10000;
-    /**
-     * The default interval at which a resources is marked as not absent after having been marked permanently absent.
-     */
+    /** The default interval at which a resources is marked as not absent after having been marked permanently absent. */
     protected static final int DEFAULT_TRY_AGAIN_INTERVAL = (int) 60e3; // seconds
 
-    /**
-     * The maximum number of times a resource is marked as absent before being marked as permanently absent.
-     */
+    /** The maximum number of times a resource is marked as absent before being marked as permanently absent. */
     protected int maxTries = DEFAULT_MAX_ABSENT_RESOURCE_TRIES;
-    /**
-     * The interval to wait, in milliseconds, before indicating the resource is not absent.
-     */
+    /** The interval to wait, in milliseconds, before indicating the resource is not absent. */
     protected int minCheckInterval = DEFAULT_MIN_ABSENT_RESOURCE_CHECK_INTERVAL;
-    /**
-     * The interval at which a resource is marked as not absent after having been marked as permanently absent.
-     */
+    /** The interval at which a resource is marked as not absent after having been marked as permanently absent. */
     protected int tryAgainInterval = DEFAULT_TRY_AGAIN_INTERVAL;
 
-    /**
-     * Internal class that maintains a resource's state.
-     */
-    protected static class AbsentResourceEntry {
-
-        /**
-         * The time the resource was last marked as absent by a call to
-         * {@link AbsentResourceList#markResourceAbsent(String)}.
-         */
+    /** Internal class that maintains a resource's state. */
+    protected static class AbsentResourceEntry
+    {
+        /** The time the resource was last marked as absent by a call to {@link AbsentResourceList#markResourceAbsent(String)}. */
         long timeOfLastMark; // meant to be the time of the most recent attempt to find the resource
         /**
          * The maximum number of times the resource is marked as absent beyond which the resource is considered
@@ -65,33 +49,35 @@ public class AbsentResourceList {
         int numTries;
     }
 
-    /**
-     * The map of absent resources.
-     */
+    /** The map of absent resources. */
     protected BasicSessionCache possiblyAbsent = new BasicSessionCache(1000);
 
     /**
      * Construct an absent-resource list with default values for max tries (3), check interval (10 seconds) and
      * try-again interval (60 seconds).
      */
-    public AbsentResourceList() {
+    public AbsentResourceList()
+    {
     }
 
     /**
      * Construct an absent-resource list with a specified number of maximum tries and a check interval.
      *
-     * @param maxTries the number of max tries. Must be greater than 0.
+     * @param maxTries         the number of max tries. Must be greater than 0.
      * @param minCheckInterval the check interval. Must be greater than or equal to 0.
      *
      * @throws IllegalArgumentException if max-tries is less than 1 or the minimum check interval is less than 0.
      */
-    public AbsentResourceList(int maxTries, int minCheckInterval) {
-        if (maxTries < 1) {
+    public AbsentResourceList(int maxTries, int minCheckInterval)
+    {
+        if (maxTries < 1)
+        {
             String message = Logging.getMessage("AbsentResourceList.MaxTriesLessThanOne");
             throw new IllegalArgumentException(message);
         }
 
-        if (minCheckInterval < 0) {
+        if (minCheckInterval < 0)
+        {
             String message = Logging.getMessage("AbsentResourceList.CheckIntervalLessThanZero");
             throw new IllegalArgumentException(message);
         }
@@ -104,40 +90,44 @@ public class AbsentResourceList {
      * Construct an absent-resource list with a specified number of maximum tries, a check interval and a retry
      * interval.
      *
-     * @param cacheSize the maximum number of absent resources the list may hold. If this limit is exceeded, the oldest
-     * entries in the list are ejected and the resources they refer to are subsequently not considered to be absent
-     * resources.
-     * @param maxTries the number of max tries. Must be greater than 0.
+     * @param cacheSize        the maximum number of absent resources the list may hold. If this limit is exceeded, the
+     *                         oldest entries in the list are ejected and the resources they refer to are subsequently
+     *                         not considered to be absent resources.
+     * @param maxTries         the number of max tries. Must be greater than 0.
      * @param minCheckInterval the check interval. Must be greater than or equal to 0.
-     * @param tryAgainInterval the try-again interval. Must be greater than or equal to 0.
+     * @param tryAgainInterval the try-again interval.  Must be greater than or equal to 0.
      *
      * @throws IllegalArgumentException if max-tries is less than 1 or if either the minimum check interval or try-again
-     * interval is less than 0.
+     *                                  interval is less than 0.
      */
-    public AbsentResourceList(Integer cacheSize, int maxTries, int minCheckInterval, int tryAgainInterval) {
-        if (maxTries < 1) {
+    public AbsentResourceList(Integer cacheSize, int maxTries, int minCheckInterval, int tryAgainInterval)
+    {
+        if (maxTries < 1)
+        {
             String message = Logging.getMessage("AbsentResourceList.MaxTriesLessThanOne");
             throw new IllegalArgumentException(message);
         }
 
-        if (minCheckInterval < 0) {
+        if (minCheckInterval < 0)
+        {
             String message = Logging.getMessage("AbsentResourceList.CheckIntervalLessThanZero");
             throw new IllegalArgumentException(message);
         }
 
-        if (tryAgainInterval < 0) {
+        if (tryAgainInterval < 0)
+        {
             String message = Logging.getMessage("AbsentResourceList.RetryIntervalLessThanZero");
             throw new IllegalArgumentException(message);
         }
 
-        if (cacheSize != null && cacheSize < 1) {
+        if (cacheSize != null && cacheSize < 1)
+        {
             String message = Logging.getMessage("AbsentResourceList.MaximumListSizeLessThanOne");
             throw new IllegalArgumentException(message);
         }
 
-        if (cacheSize != null) {
+        if (cacheSize != null)
             this.possiblyAbsent.setCapacity(cacheSize);
-        }
 
         this.maxTries = Math.max(maxTries, 1);
         this.minCheckInterval = minCheckInterval;
@@ -149,7 +139,8 @@ public class AbsentResourceList {
      *
      * @return the maximum number of absent markings.
      */
-    public int getMaxTries() {
+    public int getMaxTries()
+    {
         return maxTries;
     }
 
@@ -160,8 +151,10 @@ public class AbsentResourceList {
      *
      * @throws IllegalArgumentException if max-tries is less than 1.
      */
-    public void setMaxTries(int maxTries) {
-        if (maxTries < 1) {
+    public void setMaxTries(int maxTries)
+    {
+        if (maxTries < 1)
+        {
             String message = Logging.getMessage("AbsentResourceList.MaxTriesLessThanOne");
             throw new IllegalArgumentException(message);
         }
@@ -175,7 +168,8 @@ public class AbsentResourceList {
      *
      * @return the interval, in milliseconds.
      */
-    public int getMinCheckInterval() {
+    public int getMinCheckInterval()
+    {
         return minCheckInterval;
     }
 
@@ -187,8 +181,10 @@ public class AbsentResourceList {
      *
      * @throws IllegalArgumentException if the minimum check interval is less than 0.
      */
-    public void setMinCheckInterval(int minCheckInterval) {
-        if (minCheckInterval < 0) {
+    public void setMinCheckInterval(int minCheckInterval)
+    {
+        if (minCheckInterval < 0)
+        {
             String message = Logging.getMessage("AbsentResourceList.CheckIntervalLessThanZero");
             throw new IllegalArgumentException(message);
         }
@@ -202,7 +198,8 @@ public class AbsentResourceList {
      *
      * @return the interval, in milliseconds.
      */
-    public int getTryAgainInterval() {
+    public int getTryAgainInterval()
+    {
         return tryAgainInterval;
     }
 
@@ -210,12 +207,14 @@ public class AbsentResourceList {
      * Specifies the time interval that must elapse before a resource marked as permanently absent is again considered
      * not absent. This effectively expires the absent state of the resource.
      *
-     * @param tryAgainInterval the try-again interval. Must be greater than or equal to 0.
+     * @param tryAgainInterval the try-again interval.  Must be greater than or equal to 0.
      *
      * @throws IllegalArgumentException if the try-again interval is less than 0.
      */
-    public void setTryAgainInterval(int tryAgainInterval) {
-        if (tryAgainInterval < 0) {
+    public void setTryAgainInterval(int tryAgainInterval)
+    {
+        if (tryAgainInterval < 0)
+        {
             String message = Logging.getMessage("AbsentResourceList.RetryIntervalLessThanZero");
             throw new IllegalArgumentException(message);
         }
@@ -229,7 +228,8 @@ public class AbsentResourceList {
      *
      * @param resourceID the resource to mark as absent.
      */
-    public final void markResourceAbsent(long resourceID) {
+    public final void markResourceAbsent(long resourceID)
+    {
         this.markResourceAbsent(Long.toString(resourceID));
     }
 
@@ -240,7 +240,8 @@ public class AbsentResourceList {
      *
      * @return true if the resource is considered absent, otherwise false.
      */
-    public final boolean isResourceAbsent(long resourceID) {
+    public final boolean isResourceAbsent(long resourceID)
+    {
         return this.isResourceAbsent(Long.toString(resourceID));
     }
 
@@ -249,7 +250,8 @@ public class AbsentResourceList {
      *
      * @param resourceID the resource to mark as not absent.
      */
-    public final void unmarkResourceAbsent(long resourceID) {
+    public final void unmarkResourceAbsent(long resourceID)
+    {
         this.unmarkResourceAbsent(Long.toString(resourceID));
     }
 
@@ -259,11 +261,11 @@ public class AbsentResourceList {
      *
      * @param resourceID the resource to mark as absent.
      */
-    synchronized public final void markResourceAbsent(String resourceID) {
+    synchronized public final void markResourceAbsent(String resourceID)
+    {
         AbsentResourceEntry entry = (AbsentResourceEntry) this.possiblyAbsent.get(resourceID);
-        if (entry == null) {
+        if (entry == null)
             this.possiblyAbsent.put(resourceID, entry = new AbsentResourceEntry());
-        }
 
         ++entry.numTries;
         entry.timeOfLastMark = System.currentTimeMillis();
@@ -276,15 +278,16 @@ public class AbsentResourceList {
      *
      * @return true if the resource is considered absent, otherwise false.
      */
-    synchronized public final boolean isResourceAbsent(String resourceID) {
+    synchronized public final boolean isResourceAbsent(String resourceID)
+    {
         AbsentResourceEntry entry = (AbsentResourceEntry) this.possiblyAbsent.get(resourceID);
-        if (entry == null) {
+        if (entry == null)
             return false;
-        }
 
         long timeSinceLastMark = System.currentTimeMillis() - entry.timeOfLastMark;
 
-        if (timeSinceLastMark > this.tryAgainInterval) {
+        if (timeSinceLastMark > this.tryAgainInterval)
+        {
             this.possiblyAbsent.remove(resourceID);
             return false;
         }
@@ -297,7 +300,8 @@ public class AbsentResourceList {
      *
      * @param resourceID the resource to remove from this list.
      */
-    synchronized public final void unmarkResourceAbsent(String resourceID) {
+    synchronized public final void unmarkResourceAbsent(String resourceID)
+    {
         this.possiblyAbsent.remove(resourceID);
     }
 }

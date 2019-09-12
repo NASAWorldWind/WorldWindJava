@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.formats.rpf;
 
 import gov.nasa.worldwind.formats.nitfs.NITFSUtil;
@@ -11,22 +12,23 @@ import gov.nasa.worldwind.formats.nitfs.NITFSUtil;
  * @author Lado Garakanidze
  * @version $Id: RPFHeaderSection.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-class RPFHeaderSection {
-
+class RPFHeaderSection
+{
     public static final String DATA_TAG = "RPFHDR";
 
-    public boolean endianIndicator;
-    public short headerLength;
-    public String filename;
-    public short updateIndicator; // new | replacement | update
-    public String govSpecNumber;
-    public String govSpecDate;
-    public String securityClass;
-    public String securityCountryCode;
-    public String securityReleaseMark;
-    public int locationSectionLocation;
+    public boolean  endianIndicator;
+    public short    headerLength;
+    public String   filename;
+    public short    updateIndicator; // new | replacement | update
+    public String   govSpecNumber;
+    public String   govSpecDate;
+    public String   securityClass;
+    public String   securityCountryCode;
+    public String   securityReleaseMark;
+    public int      locationSectionLocation;
 
-    public RPFHeaderSection(java.nio.ByteBuffer buffer) {
+    public RPFHeaderSection(java.nio.ByteBuffer buffer)
+    {
         this.endianIndicator = ((byte) 0 != buffer.get());         // reads 1 byte, 0 for big endian
         this.headerLength = buffer.getShort();                     // reads 2 bytes
         this.filename = NITFSUtil.getString(buffer, 12);

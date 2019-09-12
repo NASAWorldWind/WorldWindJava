@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util.tree;
 
 import java.awt.*;
@@ -15,19 +16,19 @@ import java.awt.*;
  * @version $Id: TreeAttributes.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see TreeLayout
  */
-public interface TreeAttributes {
-
+public interface TreeAttributes
+{
     /**
-     * Returns a new TreeAttributes instance of the same type as this TreeAttributes, who's properties are configured
-     * exactly as this TreeAttributes.
+     * Returns a new TreeAttributes instance of the same type as this TreeAttributes, who's properties are
+     * configured exactly as this TreeAttributes.
      *
      * @return a copy of this TreeAttributes.
      */
     TreeAttributes copy();
 
     /**
-     * Copies the specified TreeAttributes' properties into this object's properties. This does nothing if the specified
-     * attributes is null.
+     * Copies the specified TreeAttributes' properties into this object's properties. This does nothing if the
+     * specified attributes is null.
      *
      * @param attributes the attributes to copy.
      */
@@ -70,16 +71,16 @@ public interface TreeAttributes {
     void setColor(Color textColor);
 
     /**
-     * Get the color of filled checkboxes that indicate if nodes are selected. The checkboxes are drawn as a gradient of
-     * two colors.
+     * Get the color of filled checkboxes that indicate if nodes are selected. The checkboxes are drawn as a gradient
+     * of two colors.
      *
      * @return two element array of the colors that make up the checkbox gradient.
      */
     Color[] getCheckBoxColor();
 
     /**
-     * Set the color of filled checkboxes that indicate if a node is selected. The checkboxes are drawn as a gradient of
-     * two colors.
+     * Set the color of filled checkboxes that indicate if a node is selected. The checkboxes are drawn as a gradient
+     * of two colors.
      *
      * @param color1 first color in the checkbox gradient.
      * @param color2 second color in the checkbox gradient.

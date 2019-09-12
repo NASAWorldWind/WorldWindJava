@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.exception.WWRuntimeException;
@@ -23,10 +24,11 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class KMLTest {
-
+public class KMLTest
+{
     @Test
-    public void testRootElement() {
+    public void testRootElement()
+    {
         StringBuilder sb = this.newDocument();
         this.endDocument(sb);
 
@@ -37,7 +39,8 @@ public class KMLTest {
     }
 
     @Test
-    public void testRootHint() {
+    public void testRootHint()
+    {
         StringBuilder sb = this.newDocument();
         sb = new StringBuilder(sb.toString().replace("<kml", "<kml hint=\"yes\""));
         this.endDocument(sb);
@@ -49,7 +52,8 @@ public class KMLTest {
     }
 
     @Test
-    public void testAbstractObjectAttributes() {
+    public void testAbstractObjectAttributes()
+    {
         String ID = "ABC123";
         String targetID = "DEF456";
 
@@ -67,7 +71,8 @@ public class KMLTest {
     }
 
     @Test
-    public void testUnassignedAbstractObjectAttributes() {
+    public void testUnassignedAbstractObjectAttributes()
+    {
         StringBuilder sb = this.newDocument();
         sb.append("<Document>");
         sb.append("</Document>");
@@ -85,7 +90,8 @@ public class KMLTest {
 
     @SuppressWarnings({"ConstantConditions"})
     @Test
-    public void testAbstractFeatureAttributes() {
+    public void testAbstractFeatureAttributes()
+    {
         String name = "XXXYYYZZZ";
         boolean visibility = true;
         boolean open = false;
@@ -101,6 +107,7 @@ public class KMLTest {
         // TODO style selector
         // TODO time
         // TODO extended data
+
         StringBuilder sb = this.newDocument();
         sb.append("<Document>");
         sb.append("<name>").append(name).append("</name>");
@@ -176,7 +183,8 @@ public class KMLTest {
 
     @SuppressWarnings({"ConstantConditions"})
     @Test
-    public void testUnassignedAbstractFeatureAttributes() {
+    public void testUnassignedAbstractFeatureAttributes()
+    {
         StringBuilder sb = this.newDocument();
         sb.append("<Document>");
         sb.append("</Document>");
@@ -208,7 +216,8 @@ public class KMLTest {
 
     @SuppressWarnings({"ConstantConditions"})
     @Test
-    public void testPrefixUsage() {
+    public void testPrefixUsage()
+    {
         String altitudeMode = "absolute";
         boolean extrude = true;
         Position coords = Position.fromDegrees(23.56, -18.3, 9);
@@ -244,7 +253,8 @@ public class KMLTest {
 
     @SuppressWarnings({"ConstantConditions"})
     @Test
-    public void testNoDefaultNamespace() {
+    public void testNoDefaultNamespace()
+    {
         String altitudeMode = "absolute";
         boolean extrude = true;
         Position coords = Position.fromDegrees(23.56, -18.3, 9);
@@ -281,7 +291,8 @@ public class KMLTest {
 
     @SuppressWarnings({"ConstantConditions"})
     @Test
-    public void testPoint() {
+    public void testPoint()
+    {
         String altitudeMode = "absolute";
         boolean extrude = true;
         Position coords = Position.fromDegrees(23.56, -18.3, 9);
@@ -317,7 +328,8 @@ public class KMLTest {
 
     @SuppressWarnings({"ConstantConditions"})
     @Test
-    public void testLinearRing() {
+    public void testLinearRing()
+    {
         String altitudeMode = "clampToGround";
         boolean extrude = true;
         boolean tessellate = false;
@@ -334,7 +346,8 @@ public class KMLTest {
         sb.append("<tessellate>").append(tessellate ? "1" : "0").append("</tessellate>");
         sb.append("<altitudeMode>").append(altitudeMode).append("</altitudeMode>");
         sb.append("<coordinates>");
-        for (Position p : coords) {
+        for (Position p : coords)
+        {
             sb.append(p.getLongitude().degrees).append(",");
             sb.append(p.getLatitude().degrees).append(",");
             sb.append(p.getElevation()).append(" ");
@@ -362,7 +375,8 @@ public class KMLTest {
 
     @SuppressWarnings({"ConstantConditions"})
     @Test
-    public void testLineString() {
+    public void testLineString()
+    {
         String altitudeMode = "clampToGround";
         boolean extrude = false;
         boolean tessellate = true;
@@ -379,7 +393,8 @@ public class KMLTest {
         sb.append("<tessellate>").append(tessellate ? "1" : "0").append("</tessellate>");
         sb.append("<altitudeMode>").append(altitudeMode).append("</altitudeMode>");
         sb.append("<coordinates>");
-        for (Position p : coords) {
+        for (Position p : coords)
+        {
             sb.append(p.getLongitude().degrees).append(",");
             sb.append(p.getLatitude().degrees).append(",");
             sb.append(p.getElevation()).append(" ");
@@ -407,7 +422,8 @@ public class KMLTest {
 
     @SuppressWarnings({"ConstantConditions"})
     @Test
-    public void testPolygon() {
+    public void testPolygon()
+    {
         String altitudeMode = "clampToGround";
         boolean extrude = false;
         boolean tessellate = true;
@@ -443,7 +459,8 @@ public class KMLTest {
         sb.append("<tessellate>").append(outerTessellate ? "1" : "0").append("</tessellate>");
         sb.append("<altitudeMode>").append(outerAltitudeMode).append("</altitudeMode>");
         sb.append("<coordinates>");
-        for (Position p : outerCoords) {
+        for (Position p : outerCoords)
+        {
             sb.append(p.getLongitude().degrees).append(",");
             sb.append(p.getLatitude().degrees).append(",");
             sb.append(p.getElevation()).append(" ");
@@ -458,7 +475,8 @@ public class KMLTest {
         sb.append("<tessellate>").append(innerTessellate ? "1" : "0").append("</tessellate>");
         sb.append("<altitudeMode>").append(innerAltitudeMode).append("</altitudeMode>");
         sb.append("<coordinates>");
-        for (Position p : innerCoords) {
+        for (Position p : innerCoords)
+        {
             sb.append(p.getLongitude().degrees).append(",");
             sb.append(p.getLatitude().degrees).append(",");
             sb.append(p.getElevation()).append(" ");
@@ -486,11 +504,11 @@ public class KMLTest {
         assertEquals("Tessellate not as expected", pgon.getTessellate(), tessellate);
 
         assertEquals("Outer coordinates not as expected", pgon.getOuterBoundary().getCoordinates().list,
-                outerCoords);
+            outerCoords);
         assertEquals("Outer altitude mode not as expected", pgon.getOuterBoundary().getAltitudeMode(),
-                outerAltitudeMode);
+            outerAltitudeMode);
         assertEquals("Outer extrude not as expected", pgon.getOuterBoundary().isExtrude(),
-                outerExtrude);
+            outerExtrude);
         assertEquals("Outer tessellate not as expected", pgon.getOuterBoundary().getTessellate(), outerTessellate);
 
         Iterable<? extends KMLLinearRing> innerBoundaries = pgon.getInnerBoundaries();
@@ -499,16 +517,17 @@ public class KMLTest {
         KMLLinearRing innerBoundary = innerBoundaries.iterator().next();
         assertNotNull(innerBoundary);
         assertEquals("Inner coordinates not as expected", innerBoundary.getCoordinates().list,
-                innerCoords);
+            innerCoords);
         assertEquals("Inner altitude mode not as expected", innerBoundary.getAltitudeMode(),
-                innerAltitudeMode);
+            innerAltitudeMode);
         assertEquals("Inner extrude not as expected", innerBoundary.isExtrude(),
-                innerExtrude);
+            innerExtrude);
         assertEquals("Inner tessellate not as expected", innerBoundary.getTessellate(), innerTessellate);
     }
 
     @Test
-    public void testSimpleDataType() {
+    public void testSimpleDataType()
+    {
         String item = "Test a String";
         String name = "SimpleData Name";
 
@@ -531,7 +550,8 @@ public class KMLTest {
     }
 
     @Test
-    public void testUnrecognizedElement() {
+    public void testUnrecognizedElement()
+    {
         String item = "Test a String";
         String name = "SimpleData Name";
 
@@ -546,8 +566,10 @@ public class KMLTest {
         KMLRoot root = this.newParsedRoot(sb, true);
         assertNotNull("KML root is null", root);
 
-        for (Map.Entry<String, Object> field : root.getFields().getEntries()) {
-            if (field.getKey().equals("Unrecognized") && field.getValue() instanceof UnrecognizedXMLEventParser) {
+        for (Map.Entry<String, Object> field : root.getFields().getEntries())
+        {
+            if (field.getKey().equals("Unrecognized") && field.getValue() instanceof UnrecognizedXMLEventParser)
+            {
                 UnrecognizedXMLEventParser uField = (UnrecognizedXMLEventParser) field.getValue();
                 Object o = uField.getField("Placemark");
                 assertNotNull("No SimpleData", o);
@@ -566,7 +588,8 @@ public class KMLTest {
 
     @SuppressWarnings({"ConstantConditions"})
     @Test
-    public void testCoordinatesParser() {
+    public void testCoordinatesParser()
+    {
         // Test parsing coordinates separated by newline and tab characters instead of just spaces
         List<String> separators = Arrays.asList("\n", "\n\r", "\t");
 
@@ -581,11 +604,12 @@ public class KMLTest {
         sb.append("<coordinates>");
 
         Iterator<String> separator = separators.iterator();
-        for (Position p : coords) {
+        for (Position p : coords)
+        {
             sb.append(p.getLongitude().degrees).append(",");
             sb.append(p.getLatitude().degrees).append(",");
             sb.append(p.getElevation()).append(
-                    separator.next());   // Separate coordinate tuple with newline instead of space
+                separator.next());   // Separate coordinate tuple with newline instead of space
         }
         sb.append("</coordinates>");
         sb.append("</LinearRing>");
@@ -605,11 +629,10 @@ public class KMLTest {
         assertEquals("Coordinates not as expected", ring.getCoordinates().list, coords);
     }
 
-    /**
-     * Test coordinate tokenizer with a mix of well formed and not so well formed input.
-     */
+    /** Test coordinate tokenizer with a mix of well formed and not so well formed input. */
     @Test
-    public void testCoordinatesTokenizer() {
+    public void testCoordinatesTokenizer()
+    {
         List<Position> coords = new ArrayList<Position>();
         coords.add(Position.fromDegrees(23.56, -18.3, 9));
         coords.add(Position.fromDegrees(56.0, 34.9, 2));
@@ -622,12 +645,13 @@ public class KMLTest {
         // Test with well formed coordinate tuples, and also tuples with spaces to ensure that the tokenizer
         // is able to handle input that is not well formed.
         String coordString = "-18.3,23.56,9     34.9, 56.0, 2     \t56.9, 19     90.0,23.9,44   "
-                + " 12.3,18,8,3.3,57,-110.9,50,80.1,-23.1";
+            + " 12.3,18,8,3.3,57,-110.9,50,80.1,-23.1";
 
         KMLCoordinateTokenizer tokenizer = new KMLCoordinateTokenizer(coordString);
 
         List<Position> positions = new ArrayList<Position>();
-        while (tokenizer.hasMoreTokens()) {
+        while (tokenizer.hasMoreTokens())
+        {
             positions.add(tokenizer.nextPosition());
         }
 
@@ -635,7 +659,8 @@ public class KMLTest {
     }
 
     @Test
-    public void testNestedUnrecognizedElement() {
+    public void testNestedUnrecognizedElement()
+    {
         String item = "Test a String";
         String name = "SimpleData Name";
 
@@ -656,8 +681,10 @@ public class KMLTest {
         assertNotNull("Document is null", doc);
         assertTrue("Unrecognized object not as expected", doc instanceof KMLDocument);
 
-        for (Map.Entry<String, Object> field : doc.getFields().getEntries()) {
-            if (field.getKey().equals("Unrecognized") && field.getValue() instanceof UnrecognizedXMLEventParser) {
+        for (Map.Entry<String, Object> field : doc.getFields().getEntries())
+        {
+            if (field.getKey().equals("Unrecognized") && field.getValue() instanceof UnrecognizedXMLEventParser)
+            {
                 UnrecognizedXMLEventParser uField = (UnrecognizedXMLEventParser) field.getValue();
                 Object o = uField.getField("Placemark");
                 assertNotNull("No SimpleData", o);
@@ -675,16 +702,17 @@ public class KMLTest {
     }
 
     @Test
-    public void testGoogleTutorialExample01() {
+    public void testGoogleTutorialExample01()
+    {
         KMLRoot root = this.openAndParseFile("testData/KML/GoogleTutorialExample01.kml");
 
         KMLAbstractFeature feature = root.getFeature();
         assertTrue("Root feature is not as expected", feature instanceof KMLPlacemark);
         assertEquals("Incorrect name", "Simple placemark", feature.getName());
         assertEquals("Incorrect description",
-                "Attached to the ground. Intelligently places itself\n"
+            "Attached to the ground. Intelligently places itself\n"
                 + "            at the height of the underlying terrain.",
-                feature.getDescription());
+            feature.getDescription());
 
         KMLAbstractGeometry geometry = ((KMLPlacemark) feature).getGeometry();
         assertTrue("Geometry not a Point", geometry instanceof KMLPoint);
@@ -696,7 +724,8 @@ public class KMLTest {
     }
 
     @Test
-    public void testGoogleTutorialExample02() {
+    public void testGoogleTutorialExample02()
+    {
         KMLRoot root = this.openAndParseFile("testData/KML/GoogleTutorialExample02.kml");
 
         KMLAbstractFeature document = root.getFeature();
@@ -708,8 +737,8 @@ public class KMLTest {
 
         KMLPlacemark placemark = (KMLPlacemark) features.get(0);
         assertEquals("Incorrect name", "CDATA example", placemark.getName());
-        String s
-                = "\n"
+        String s =
+            "\n"
                 + "          <h1>CDATA Tags are useful!</h1>\n"
                 + "          <p><font color=\"red\">Text is <i>more readable</i> and\n"
                 + "          <b>easier to write</b> when you can avoid using entity\n"
@@ -728,7 +757,8 @@ public class KMLTest {
     }
 
     @Test
-    public void testGoogleTutorialExample03() {
+    public void testGoogleTutorialExample03()
+    {
         KMLRoot root = this.openAndParseFile("testData/KML/GoogleTutorialExample03.kml");
 
         KMLAbstractFeature document = root.getFeature();
@@ -741,10 +771,10 @@ public class KMLTest {
         KMLPlacemark placemark = (KMLPlacemark) features.get(0);
         assertEquals("Incorrect name", "Entity references example", placemark.getName());
         assertEquals("Incorrect description",
-                "<h1>Entity references are hard to type!</h1><p><font color=\"green\">Text\n                "
+            "<h1>Entity references are hard to type!</h1><p><font color=\"green\">Text\n                "
                 + "is <i>more readable</i> and <b>easier to write</b> when you can avoid using\n                "
                 + "entity references.</font></p>",
-                placemark.getDescription());
+            placemark.getDescription());
 
         KMLAbstractGeometry geometry = placemark.getGeometry();
         assertTrue("Geometry not a Point", geometry instanceof KMLPoint);
@@ -756,7 +786,8 @@ public class KMLTest {
     }
 
     @Test
-    public void testGoogleTutorialExample04() {
+    public void testGoogleTutorialExample04()
+    {
         KMLRoot root = this.openAndParseFile("testData/KML/GoogleTutorialExample04.kml");
 
         KMLAbstractFeature document = root.getFeature();
@@ -771,13 +802,13 @@ public class KMLTest {
         KMLGroundOverlay overlay = (KMLGroundOverlay) features.get(0);
         assertEquals("Incorrect name", "Large-scale overlay on terrain", overlay.getName());
         assertEquals("Incorrect description",
-                "Overlay shows Mount Etna erupting\n"
+            "Overlay shows Mount Etna erupting\n"
                 + "                on July 13th, 2001.", overlay.getDescription());
 
         KMLIcon icon = overlay.getIcon();
         assertNotNull("Overlay icon is null", icon);
         assertEquals("Incorrect icon href", "https://developers.google.com/kml/documentation/images/etna.jpg",
-                icon.getHref());
+            icon.getHref());
 
         KMLLatLonBox box = overlay.getLatLonBox();
         assertNotNull("Overlay LatLonBox is null", box);
@@ -788,7 +819,8 @@ public class KMLTest {
     }
 
     @Test
-    public void testStyleReference() {
+    public void testStyleReference()
+    {
         KMLRoot root = this.openAndParseFile("testData/KML/StyleReferences.kml");
 
         KMLAbstractFeature document = root.getFeature();
@@ -822,36 +854,44 @@ public class KMLTest {
     }
 
     @Test
-    public void testKMZFromFileURL() {
-        try {
+    public void testKMZFromFileURL()
+    {
+        try
+        {
             File file = new File("testData/KML/kmztest01.kmz");
             KMLRoot root = KMLRoot.create(new URL("file:///" + file.getAbsolutePath().replace(" ", "%20")));
             root.parse();
 
-            String[] fileNames = new String[]{
-                "files/BurjOverlay.png",
-                "files/CNOverlay.png",
-                "files/EmpireOverlay.png",
-                "files/PetronasOverlay.png",
-                "files/SearsOverlay.png",
-                "files/ShanghaiOverlay.png",
-                "files/TaipeiOverlay.png",
-                "files/TurningOverlay.png",
-                "files/ContinueOverlay.png",
-                "files/camera_mode.png",
-                "files/3DBuildingsLayer3.png",};
+            String[] fileNames = new String[]
+                {
+                    "files/BurjOverlay.png",
+                    "files/CNOverlay.png",
+                    "files/EmpireOverlay.png",
+                    "files/PetronasOverlay.png",
+                    "files/SearsOverlay.png",
+                    "files/ShanghaiOverlay.png",
+                    "files/TaipeiOverlay.png",
+                    "files/TurningOverlay.png",
+                    "files/ContinueOverlay.png",
+                    "files/camera_mode.png",
+                    "files/3DBuildingsLayer3.png",
+                };
 
-            for (String name : fileNames) {
+            for (String name : fileNames)
+            {
                 InputStream is = root.getKMLDoc().getSupportFileStream(name);
                 assertNotNull("Support file not found in KMZ: " + name, is);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             throw new WWRuntimeException();
         }
     }
 
-    private StringBuilder newDocument() {
+    private StringBuilder newDocument()
+    {
         StringBuilder sb = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         sb.append("<kml");
         sb.append(" xmlns=\"").append(KMLConstants.KML_NAMESPACE).append("\"");
@@ -863,7 +903,8 @@ public class KMLTest {
         return sb;
     }
 
-    private StringBuilder newPrefixedDocument() {
+    private StringBuilder newPrefixedDocument()
+    {
         StringBuilder sb = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         sb.append("<kml:kml");
         sb.append(" xmlns:kml=\"").append(KMLConstants.KML_NAMESPACE).append("\"");
@@ -875,56 +916,72 @@ public class KMLTest {
         return sb;
     }
 
-    private void endDocument(StringBuilder sb) {
+    private void endDocument(StringBuilder sb)
+    {
         sb.append("</kml>");
     }
 
-    private void endPrefixedDocument(StringBuilder sb) {
+    private void endPrefixedDocument(StringBuilder sb)
+    {
         sb.append("</kml:kml>");
     }
 
-    private KMLRoot newParsedRoot(StringBuilder sb) {
+    private KMLRoot newParsedRoot(StringBuilder sb)
+    {
         KMLRoot root;
-        try {
+        try
+        {
             root = new KMLRoot(WWIO.getInputStreamFromString(sb.toString()), KMLConstants.KML_MIME_TYPE);
             return root.parse();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
     }
 
-    private KMLRoot newParsedRoot(StringBuilder sb, boolean suppressLogging) {
+    private KMLRoot newParsedRoot(StringBuilder sb, boolean suppressLogging)
+    {
         KMLRoot root;
-        try {
+        try
+        {
             root = new KMLRoot(WWIO.getInputStreamFromString(sb.toString()), KMLConstants.KML_MIME_TYPE);
 
-            if (suppressLogging) {
-                root.setNotificationListener(new XMLParserNotificationListener() {
-                    public void notify(XMLParserNotification notification) {
+            if (suppressLogging)
+            {
+                root.setNotificationListener(new XMLParserNotificationListener()
+                {
+                    public void notify(XMLParserNotification notification)
+                    {
                         // Do nothing. This prevents logging of notification messages.
                     }
                 });
             }
 
             return root.parse();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
     }
 
-    private KMLRoot openAndParseFile(String sourceDoc) {
+    private KMLRoot openAndParseFile(String sourceDoc)
+    {
         KMLRoot root;
         final StringBuilder parserMessage = new StringBuilder();
 
-        try {
+        try
+        {
             root = new KMLRoot(new File(sourceDoc));
-            root.setNotificationListener(new XMLParserNotificationListener() {
-                public void notify(XMLParserNotification notificationEvent) {
-                    if (parserMessage.length() != 0) {
+            root.setNotificationListener(new XMLParserNotificationListener()
+            {
+                public void notify(XMLParserNotification notificationEvent)
+                {
+                    if (parserMessage.length() != 0)
                         parserMessage.append(", ");
-                    }
 
                     parserMessage.append(notificationEvent.toString());
                 }
@@ -933,8 +990,10 @@ public class KMLTest {
 
             assertNotNull("KML root is null", root);
             assertTrue("Parser notification occurred\n" + sourceDoc + ":" + parserMessage,
-                    parserMessage.length() == 0);
-        } catch (Exception e) {
+                parserMessage.length() == 0);
+        }
+        catch (Exception e)
+        {
             throw new RuntimeException(e);
         }
 

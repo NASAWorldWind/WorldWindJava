@@ -22,73 +22,43 @@ import static gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil.kmlBoolean;
  * @author dcollins
  * @version $Id: BasicShapeAttributes.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BasicShapeAttributes implements ShapeAttributes {
-
-    /**
-     * Indicates whether or not some of the shape's attributes are unresolved. Initially <code>false</code>.
-     */
+public class BasicShapeAttributes implements ShapeAttributes
+{
+    /** Indicates whether or not some of the shape's attributes are unresolved. Initially <code>false</code>. */
     protected boolean unresolved;
-    /**
-     * Indicates whether or not the shape's interior is drawn. Initially <code>false</code>.
-     */
+    /** Indicates whether or not the shape's interior is drawn. Initially <code>false</code>. */
     protected boolean drawInterior;
-    /**
-     * Indicates whether or not the shape's outline is drawn. Initially <code>false</code>.
-     */
+    /** Indicates whether or not the shape's outline is drawn. Initially <code>false</code>. */
     protected boolean drawOutline;
-    /**
-     * Indicates whether or not the shape should be rendered with smooth lines and edges. Initially <code>false</code>.
-     */
+    /** Indicates whether or not the shape should be rendered with smooth lines and edges. Initially <code>false</code>. */
     protected boolean enableAntialiasing;
-    /**
-     * Indicates whether lighting is applied to the shape. Initially <code>false</code>.
-     */
+    /** Indicates whether lighting is applied to the shape. Initially <code>false</code>. */
     protected boolean enableLighting;
-    /**
-     * Indicates the material properties of the shape's interior. Initially <code>null</code>.
-     */
+    /** Indicates the material properties of the shape's interior. Initially <code>null</code>. */
     protected Material interiorMaterial;
-    /**
-     * Indicates the material properties of the shape's outline. Initially <code>null</code>.
-     */
+    /** Indicates the material properties of the shape's outline. Initially <code>null</code>. */
     protected Material outlineMaterial;
-    /**
-     * Indicates the opacity of the shape's interior as a floating-point value in the range 0.0 to 1.0. Initially 0.0.
-     */
+    /** Indicates the opacity of the shape's interior as a floating-point value in the range 0.0 to 1.0. Initially 0.0. */
     protected double interiorOpacity;
-    /**
-     * Indicates the opacity of the shape's outline as a floating-point value in the range 0.0 to 1.0. Initially 0.0.
-     */
+    /** Indicates the opacity of the shape's outline as a floating-point value in the range 0.0 to 1.0. Initially 0.0. */
     protected double outlineOpacity;
-    /**
-     * Indicates the line width (in pixels) used when rendering the shape's outline. Initially 0.0.
-     */
+    /** Indicates the line width (in pixels) used when rendering the shape's outline. Initially 0.0. */
     protected double outlineWidth;
-    /**
-     * Indicates the number of times each bit in the outline stipple pattern is repeated. Initially 0.
-     */
+    /** Indicates the number of times each bit in the outline stipple pattern is repeated. Initially 0. */
     protected int outlineStippleFactor;
-    /**
-     * Indicates the 16-bit integer that defines which pixels are rendered in the shape's outline. Initially 0.
-     */
+    /** Indicates the 16-bit integer that defines which pixels are rendered in the shape's outline. Initially 0. */
     protected short outlineStipplePattern;
-    /**
-     * Indicates the image source that is applied as a texture to the shape's interior. Initially <code>null</code>.
-     */
+    /** Indicates the image source that is applied as a texture to the shape's interior. Initially <code>null</code>. */
     protected Object imageSource;
-    /**
-     * Indicates the amount the balloon's texture is scaled by as a floating-point value. Initially 0.0.
-     */
+    /** Indicates the amount the balloon's texture is scaled by as a floating-point value. Initially 0.0. */
     protected double imageScale;
 
     /**
      * Creates a new <code>BasicShapeAttributes</code> with the default attributes. The default attributes are as
      * follows:
-     * <table> <caption style="font-weight: bold;">Default Attributes</caption><tr><th>Attribute</th><th>Default
-     * Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
+     * <table> <caption style="font-weight: bold;">Default Attributes</caption><tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
      * <tr><td>drawInterior</td><td><code>true</code></td></tr> <tr><td>drawOutline</td><td><code>true</code></td></tr>
-     * <tr><td>enableAntialiasing</td><td><code>true</code></td></tr>
-     * <tr><td>enableLighting</td><td><code>false</code></td></tr>
+     * <tr><td>enableAntialiasing</td><td><code>true</code></td></tr> <tr><td>enableLighting</td><td><code>false</code></td></tr>
      * <tr><td>interiorMaterial</td><td>{@link gov.nasa.worldwind.render.Material#WHITE}</td></tr>
      * <tr><td>outlineMaterial</td><td>{@link gov.nasa.worldwind.render.Material#BLACK}</td></tr>
      * <tr><td>interiorOpacity</td><td>1.0</td></tr> <tr><td>outlineOpacity</td><td>1.0</td></tr>
@@ -96,7 +66,8 @@ public class BasicShapeAttributes implements ShapeAttributes {
      * <tr><td>outlineStipplePattern</td><td>0xF0F0</td></tr> <tr><td>imageSource</td><td><code>null</code></td></tr>
      * <tr><td>imageScale</td><td>1.0</td></tr> </table>
      */
-    public BasicShapeAttributes() {
+    public BasicShapeAttributes()
+    {
         // Note: update the above constructor comment if these defaults change.
 
         this.drawInterior = true;
@@ -121,8 +92,10 @@ public class BasicShapeAttributes implements ShapeAttributes {
      *
      * @throws IllegalArgumentException if <code>attributes</code> is <code>null</code>.
      */
-    public BasicShapeAttributes(ShapeAttributes attributes) {
-        if (attributes == null) {
+    public BasicShapeAttributes(ShapeAttributes attributes)
+    {
+        if (attributes == null)
+        {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -143,18 +116,17 @@ public class BasicShapeAttributes implements ShapeAttributes {
         this.imageScale = attributes.getImageScale();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public ShapeAttributes copy() {
+    /** {@inheritDoc} */
+    public ShapeAttributes copy()
+    {
         return new BasicShapeAttributes(this);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void copy(ShapeAttributes attributes) {
-        if (attributes != null) {
+    /** {@inheritDoc} */
+    public void copy(ShapeAttributes attributes)
+    {
+        if (attributes != null)
+        {
             this.drawInterior = attributes.isDrawInterior();
             this.drawOutline = attributes.isDrawOutline();
             this.enableAntialiasing = attributes.isEnableAntialiasing();
@@ -171,88 +143,77 @@ public class BasicShapeAttributes implements ShapeAttributes {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isUnresolved() {
+    /** {@inheritDoc} */
+    public boolean isUnresolved()
+    {
         return unresolved;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setUnresolved(boolean unresolved) {
+    /** {@inheritDoc} */
+    public void setUnresolved(boolean unresolved)
+    {
         this.unresolved = unresolved;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isDrawInterior() {
+    /** {@inheritDoc} */
+    public boolean isDrawInterior()
+    {
         return this.drawInterior;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setDrawInterior(boolean draw) {
+    /** {@inheritDoc} */
+    public void setDrawInterior(boolean draw)
+    {
         this.drawInterior = draw;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isDrawOutline() {
+    /** {@inheritDoc} */
+    public boolean isDrawOutline()
+    {
         return this.drawOutline;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setDrawOutline(boolean draw) {
+    /** {@inheritDoc} */
+    public void setDrawOutline(boolean draw)
+    {
         this.drawOutline = draw;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isEnableAntialiasing() {
+    /** {@inheritDoc} */
+    public boolean isEnableAntialiasing()
+    {
         return this.enableAntialiasing;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setEnableAntialiasing(boolean enable) {
+    /** {@inheritDoc} */
+    public void setEnableAntialiasing(boolean enable)
+    {
         this.enableAntialiasing = enable;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isEnableLighting() {
+    /** {@inheritDoc} */
+    public boolean isEnableLighting()
+    {
         return enableLighting;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setEnableLighting(boolean enableLighting) {
+    /** {@inheritDoc} */
+    public void setEnableLighting(boolean enableLighting)
+    {
         this.enableLighting = enableLighting;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Material getInteriorMaterial() {
+    /** {@inheritDoc} */
+    public Material getInteriorMaterial()
+    {
         return this.interiorMaterial;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setInteriorMaterial(Material material) {
-        if (material == null) {
+    /** {@inheritDoc} */
+    public void setInteriorMaterial(Material material)
+    {
+        if (material == null)
+        {
             String message = Logging.getMessage("nullValue.MaterialIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -261,18 +222,17 @@ public class BasicShapeAttributes implements ShapeAttributes {
         this.interiorMaterial = material;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Material getOutlineMaterial() {
+    /** {@inheritDoc} */
+    public Material getOutlineMaterial()
+    {
         return this.outlineMaterial;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setOutlineMaterial(Material material) {
-        if (material == null) {
+    /** {@inheritDoc} */
+    public void setOutlineMaterial(Material material)
+    {
+        if (material == null)
+        {
             String message = Logging.getMessage("nullValue.MaterialIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -281,18 +241,17 @@ public class BasicShapeAttributes implements ShapeAttributes {
         this.outlineMaterial = material;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public double getInteriorOpacity() {
+    /** {@inheritDoc} */
+    public double getInteriorOpacity()
+    {
         return this.interiorOpacity;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setInteriorOpacity(double opacity) {
-        if (opacity < 0 || opacity > 1) {
+    /** {@inheritDoc} */
+    public void setInteriorOpacity(double opacity)
+    {
+        if (opacity < 0 || opacity > 1)
+        {
             String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -301,18 +260,17 @@ public class BasicShapeAttributes implements ShapeAttributes {
         this.interiorOpacity = opacity;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public double getOutlineOpacity() {
+    /** {@inheritDoc} */
+    public double getOutlineOpacity()
+    {
         return this.outlineOpacity;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setOutlineOpacity(double opacity) {
-        if (opacity < 0 || opacity > 1) {
+    /** {@inheritDoc} */
+    public void setOutlineOpacity(double opacity)
+    {
+        if (opacity < 0 || opacity > 1)
+        {
             String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -321,18 +279,17 @@ public class BasicShapeAttributes implements ShapeAttributes {
         this.outlineOpacity = opacity;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public double getOutlineWidth() {
+    /** {@inheritDoc} */
+    public double getOutlineWidth()
+    {
         return this.outlineWidth;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setOutlineWidth(double width) {
-        if (width < 0) {
+    /** {@inheritDoc} */
+    public void setOutlineWidth(double width)
+    {
+        if (width < 0)
+        {
             String message = Logging.getMessage("Geom.WidthIsNegative", width);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -341,18 +298,17 @@ public class BasicShapeAttributes implements ShapeAttributes {
         this.outlineWidth = width;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public int getOutlineStippleFactor() {
+    /** {@inheritDoc} */
+    public int getOutlineStippleFactor()
+    {
         return this.outlineStippleFactor;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setOutlineStippleFactor(int factor) {
-        if (factor < 0) {
+    /** {@inheritDoc} */
+    public void setOutlineStippleFactor(int factor)
+    {
+        if (factor < 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "factor < 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -361,47 +317,42 @@ public class BasicShapeAttributes implements ShapeAttributes {
         this.outlineStippleFactor = factor;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public short getOutlineStipplePattern() {
+    /** {@inheritDoc} */
+    public short getOutlineStipplePattern()
+    {
         return this.outlineStipplePattern;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setOutlineStipplePattern(short pattern) {
+    /** {@inheritDoc} */
+    public void setOutlineStipplePattern(short pattern)
+    {
         this.outlineStipplePattern = pattern;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Object getImageSource() {
+    /** {@inheritDoc} */
+    public Object getImageSource()
+    {
         return this.imageSource;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setImageSource(Object imageSource) {
+    /** {@inheritDoc} */
+    public void setImageSource(Object imageSource)
+    {
         // Can be null
         this.imageSource = imageSource;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public double getImageScale() {
+    /** {@inheritDoc} */
+    public double getImageScale()
+    {
         return this.imageScale;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setImageScale(double scale) {
-        if (scale <= 0) {
+    /** {@inheritDoc} */
+    public void setImageScale(double scale)
+    {
+        if (scale <= 0)
+        {
             String message = Logging.getMessage("generic.ScaleOutOfRange", scale);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -410,11 +361,11 @@ public class BasicShapeAttributes implements ShapeAttributes {
         this.imageScale = scale;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void getRestorableState(RestorableSupport rs, RestorableSupport.StateObject so) {
-        if (rs == null) {
+    /** {@inheritDoc} */
+    public void getRestorableState(RestorableSupport rs, RestorableSupport.StateObject so)
+    {
+        if (rs == null)
+        {
             String message = Logging.getMessage("nullValue.RestorableSupportIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -442,151 +393,123 @@ public class BasicShapeAttributes implements ShapeAttributes {
 
         rs.addStateValueAsInteger(so, "outlineStipplePattern", this.getOutlineStipplePattern());
 
-        if (this.getImageSource() != null && this.getImageSource() instanceof String) {
+        if (this.getImageSource() != null && this.getImageSource() instanceof String)
             rs.addStateValueAsString(so, "interiorImagePath", (String) this.getImageSource());
-        }
 
         rs.addStateValueAsDouble(so, "interiorImageScale", this.getImageScale());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void restoreState(RestorableSupport rs, RestorableSupport.StateObject so) {
-        if (rs == null) {
+    /** {@inheritDoc} */
+    public void restoreState(RestorableSupport rs, RestorableSupport.StateObject so)
+    {
+        if (rs == null)
+        {
             String message = Logging.getMessage("nullValue.RestorableSupportIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         Boolean b = rs.getStateValueAsBoolean(so, "drawInterior");
-        if (b != null) {
+        if (b != null)
             this.setDrawInterior(b);
-        }
 
         b = rs.getStateValueAsBoolean(so, "drawOutline");
-        if (b != null) {
+        if (b != null)
             this.setDrawOutline(b);
-        }
 
         b = rs.getStateValueAsBoolean(so, "enableAntialiasing");
-        if (b != null) {
+        if (b != null)
             this.setEnableAntialiasing(b);
-        }
 
         b = rs.getStateValueAsBoolean(so, "enableLighting");
-        if (b != null) {
+        if (b != null)
             this.setEnableLighting(b);
-        }
 
         RestorableSupport.StateObject mo = rs.getStateObject(so, "interiorMaterial");
-        if (mo != null) {
+        if (mo != null)
             this.setInteriorMaterial(this.getInteriorMaterial().restoreState(rs, mo));
-        }
 
         mo = rs.getStateObject(so, "outlineMaterial");
-        if (mo != null) {
+        if (mo != null)
             this.setOutlineMaterial(this.getOutlineMaterial().restoreState(rs, mo));
-        }
 
         Double d = rs.getStateValueAsDouble(so, "interiorOpacity");
-        if (d != null) {
+        if (d != null)
             this.setInteriorOpacity(d);
-        }
 
         d = rs.getStateValueAsDouble(so, "outlineOpacity");
-        if (d != null) {
+        if (d != null)
             this.setOutlineOpacity(d);
-        }
 
         d = rs.getStateValueAsDouble(so, "outlineWidth");
-        if (d != null) {
+        if (d != null)
             this.setOutlineWidth(d);
-        }
 
         Integer i = rs.getStateValueAsInteger(so, "outlineStippleFactor");
-        if (i != null) {
+        if (i != null)
             this.setOutlineStippleFactor(i);
-        }
 
         i = rs.getStateValueAsInteger(so, "outlineStipplePattern");
-        if (i != null) {
+        if (i != null)
             this.setOutlineStipplePattern(i.shortValue());
-        }
 
         String s = rs.getStateValueAsString(so, "interiorImagePath");
-        if (s != null) {
+        if (s != null)
             this.setImageSource(s);
-        }
 
         d = rs.getStateValueAsDouble(so, "interiorImageScale");
-        if (d != null) {
+        if (d != null)
             this.setImageScale(d);
-        }
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object o)
+    {
+        if (this == o)
             return true;
-        }
-        if (o == null || this.getClass() != o.getClass()) {
+        if (o == null || this.getClass() != o.getClass())
             return false;
-        }
 
         BasicShapeAttributes that = (BasicShapeAttributes) o;
 
-        if (this.unresolved != that.unresolved) {
+        if (this.unresolved != that.unresolved)
             return false;
-        }
-        if (this.drawInterior != that.drawInterior) {
+        if (this.drawInterior != that.drawInterior)
             return false;
-        }
-        if (this.drawOutline != that.drawOutline) {
+        if (this.drawOutline != that.drawOutline)
             return false;
-        }
-        if (this.enableAntialiasing != that.enableAntialiasing) {
+        if (this.enableAntialiasing != that.enableAntialiasing)
             return false;
-        }
-        if (this.enableLighting != that.enableLighting) {
+        if (this.enableLighting != that.enableLighting)
             return false;
-        }
         if (this.interiorMaterial != null ? !this.interiorMaterial.equals(that.interiorMaterial)
-                : that.interiorMaterial != null) {
+            : that.interiorMaterial != null)
             return false;
-        }
         if (this.outlineMaterial != null ? !this.outlineMaterial.equals(that.outlineMaterial)
-                : that.outlineMaterial != null) {
+            : that.outlineMaterial != null)
             return false;
-        }
-        if (Double.compare(this.interiorOpacity, that.interiorOpacity) != 0) {
+        if (Double.compare(this.interiorOpacity, that.interiorOpacity) != 0)
             return false;
-        }
-        if (Double.compare(this.outlineOpacity, that.outlineOpacity) != 0) {
+        if (Double.compare(this.outlineOpacity, that.outlineOpacity) != 0)
             return false;
-        }
-        if (Double.compare(this.outlineWidth, that.outlineWidth) != 0) {
+        if (Double.compare(this.outlineWidth, that.outlineWidth) != 0)
             return false;
-        }
-        if (this.outlineStippleFactor != that.outlineStippleFactor) {
+        if (this.outlineStippleFactor != that.outlineStippleFactor)
             return false;
-        }
-        if (this.outlineStipplePattern != that.outlineStipplePattern) {
+        if (this.outlineStipplePattern != that.outlineStipplePattern)
             return false;
-        }
-        if (this.imageSource != null ? !this.imageSource.equals(that.imageSource) : that.imageSource != null) {
+        if (this.imageSource != null ? !this.imageSource.equals(that.imageSource) : that.imageSource != null)
             return false;
-        }
         //noinspection RedundantIfStatement
-        if (Double.compare(this.imageScale, that.imageScale) != 0) {
+        if (Double.compare(this.imageScale, that.imageScale) != 0)
             return false;
-        }
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result;
         long temp;
 
@@ -612,41 +535,46 @@ public class BasicShapeAttributes implements ShapeAttributes {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String isExportFormatSupported(String mimeType) {
-        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType)) {
+    /** {@inheritDoc} */
+    public String isExportFormatSupported(String mimeType)
+    {
+        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
             return Exportable.FORMAT_SUPPORTED;
-        } else {
+        else
             return Exportable.FORMAT_NOT_SUPPORTED;
-        }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void export(String mimeType, Object output) throws IOException, UnsupportedOperationException {
-        if (mimeType == null) {
+    /** {@inheritDoc} */
+    public void export(String mimeType, Object output) throws IOException, UnsupportedOperationException
+    {
+        if (mimeType == null)
+        {
             String message = Logging.getMessage("nullValue.Format");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (output == null) {
+        if (output == null)
+        {
             String message = Logging.getMessage("nullValue.OutputBufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType)) {
-            try {
+        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
+        {
+            try
+            {
                 exportAsKML(output);
-            } catch (XMLStreamException e) {
+            }
+            catch (XMLStreamException e)
+            {
                 Logging.logger().throwing(getClass().getName(), "export", e);
                 throw new IOException(e);
             }
-        } else {
+        }
+        else
+        {
             String message = Logging.getMessage("Export.UnsupportedFormat", mimeType);
             Logging.logger().warning(message);
             throw new UnsupportedOperationException(message);
@@ -662,21 +590,28 @@ public class BasicShapeAttributes implements ShapeAttributes {
      * @throws XMLStreamException If an exception occurs while writing the KML
      * @see #export(String, Object)
      */
-    protected void exportAsKML(Object output) throws XMLStreamException {
+    protected void exportAsKML(Object output) throws XMLStreamException
+    {
         XMLStreamWriter xmlWriter = null;
         XMLOutputFactory factory = XMLOutputFactory.newInstance();
         boolean closeWriterWhenFinished = true;
 
-        if (output instanceof XMLStreamWriter) {
+        if (output instanceof XMLStreamWriter)
+        {
             xmlWriter = (XMLStreamWriter) output;
             closeWriterWhenFinished = false;
-        } else if (output instanceof Writer) {
+        }
+        else if (output instanceof Writer)
+        {
             xmlWriter = factory.createXMLStreamWriter((Writer) output);
-        } else if (output instanceof OutputStream) {
+        }
+        else if (output instanceof OutputStream)
+        {
             xmlWriter = factory.createXMLStreamWriter((OutputStream) output);
         }
 
-        if (xmlWriter == null) {
+        if (xmlWriter == null)
+        {
             String message = Logging.getMessage("Export.UnsupportedOutputObject");
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -688,7 +623,8 @@ public class BasicShapeAttributes implements ShapeAttributes {
         xmlWriter.writeStartElement("LineStyle");
 
         final Color lineColor = this.getOutlineMaterial().getDiffuse();
-        if (lineColor != null) {
+        if (lineColor != null)
+        {
             xmlWriter.writeStartElement("color");
             xmlWriter.writeCharacters(KMLExportUtil.stripHexPrefix(WWUtil.encodeColorABGR(lineColor)));
             xmlWriter.writeEndElement();
@@ -699,7 +635,8 @@ public class BasicShapeAttributes implements ShapeAttributes {
         }
 
         final Double lineWidth = this.getOutlineWidth();
-        if (lineWidth != null) {
+        if (lineWidth != null)
+        {
             xmlWriter.writeStartElement("width");
             xmlWriter.writeCharacters(Double.toString(lineWidth));
             xmlWriter.writeEndElement();
@@ -711,7 +648,8 @@ public class BasicShapeAttributes implements ShapeAttributes {
         xmlWriter.writeStartElement("PolyStyle");
 
         final Color fillColor = this.getInteriorMaterial().getDiffuse();
-        if (fillColor != null) {
+        if (fillColor != null)
+        {
             xmlWriter.writeStartElement("color");
             xmlWriter.writeCharacters(KMLExportUtil.stripHexPrefix(WWUtil.encodeColorABGR(fillColor)));
             xmlWriter.writeEndElement();
@@ -733,8 +671,7 @@ public class BasicShapeAttributes implements ShapeAttributes {
         xmlWriter.writeEndElement(); // Style
 
         xmlWriter.flush();
-        if (closeWriterWhenFinished) {
+        if (closeWriterWhenFinished)
             xmlWriter.close();
-        }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-~ Copyright (C) 2012 United States Government as represented by the Administrator of the
-~ National Aeronautics and Space Administration.
-~ All Rights Reserved.
--->
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
 
 <!--$Id: AsterWCS.xml 2089 2014-06-24 21:39:21Z tgaskins $-->
 <ElevationModel version="1" modelType="Compound">

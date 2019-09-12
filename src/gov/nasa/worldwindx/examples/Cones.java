@@ -24,11 +24,12 @@ import java.util.Hashtable;
  * @author ccrick
  * @version $Id: Cones.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class Cones extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+public class Cones extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             // Add detail hint slider panel
             this.getControlPanel().add(makeDetailHintControlPanel(), BorderLayout.SOUTH);
 
@@ -54,6 +55,7 @@ public class Cones extends ApplicationTemplate {
             attrs2.setDrawOutline(false);
 
             // ********* sample  Cones  *******************
+
             // Cone with equal axes, ABSOLUTE altitude mode
             Cone cone3 = new Cone(Position.fromDegrees(40, -120, 80000), 100000, 50000);
             cone3.setAltitudeMode(WorldWind.ABSOLUTE);
@@ -97,7 +99,7 @@ public class Cones extends ApplicationTemplate {
 
             // Scaled Cone with a pre-set orientation
             Cone cone2 = new Cone(Position.fromDegrees(0, 30, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             cone2.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             cone2.setAttributes(attrs2);
             cone2.setValue(AVKey.DISPLAY_NAME, "Scaled Cone with a pre-set orientation");
@@ -107,7 +109,7 @@ public class Cones extends ApplicationTemplate {
 
             // Scaled Cone with a pre-set orientation
             Cone cone6 = new Cone(Position.fromDegrees(30, 30, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             cone6.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             cone6.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
             cone6.setAttributes(attrs2);
@@ -117,7 +119,7 @@ public class Cones extends ApplicationTemplate {
 
             // Scaled Cone with a pre-set orientation
             Cone cone7 = new Cone(Position.fromDegrees(60, 30, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             cone7.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             cone7.setAttributes(attrs2);
             cone7.setVisible(true);
@@ -126,7 +128,7 @@ public class Cones extends ApplicationTemplate {
 
             // Scaled, oriented Cone in 3rd "quadrant" (-X, -Y, -Z)
             Cone cone8 = new Cone(Position.fromDegrees(-45, -180, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             cone8.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             cone8.setAttributes(attrs2);
             cone8.setVisible(true);
@@ -137,10 +139,11 @@ public class Cones extends ApplicationTemplate {
             insertBeforeCompass(getWwd(), layer);
         }
 
-        protected JPanel makeDetailHintControlPanel() {
+        protected JPanel makeDetailHintControlPanel()
+        {
             JPanel controlPanel = new JPanel(new BorderLayout(0, 10));
             controlPanel.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9),
-                    new TitledBorder("Detail Hint")));
+                new TitledBorder("Detail Hint")));
 
             JPanel detailHintSliderPanel = new JPanel(new BorderLayout(0, 5));
             {
@@ -157,8 +160,10 @@ public class Cones extends ApplicationTemplate {
                 labelTable.put(10, new JLabel("1.0"));
                 slider.setLabelTable(labelTable);
                 slider.setPaintLabels(true);
-                slider.addChangeListener(new ChangeListener() {
-                    public void stateChanged(ChangeEvent e) {
+                slider.addChangeListener(new ChangeListener()
+                {
+                    public void stateChanged(ChangeEvent e)
+                    {
                         double hint = ((JSlider) e.getSource()).getValue() / 10d;
                         setConeDetailHint(hint);
                         getWwd().redraw();
@@ -174,9 +179,12 @@ public class Cones extends ApplicationTemplate {
             return controlPanel;
         }
 
-        protected RenderableLayer getLayer() {
-            for (Layer layer : getWwd().getModel().getLayers()) {
-                if (layer.getName().contains("Renderable")) {
+        protected RenderableLayer getLayer()
+        {
+            for (Layer layer : getWwd().getModel().getLayers())
+            {
+                if (layer.getName().contains("Renderable"))
+                {
                     return (RenderableLayer) layer;
                 }
             }
@@ -184,8 +192,10 @@ public class Cones extends ApplicationTemplate {
             return null;
         }
 
-        protected void setConeDetailHint(double hint) {
-            for (Renderable renderable : getLayer().getRenderables()) {
+        protected void setConeDetailHint(double hint)
+        {
+            for (Renderable renderable : getLayer().getRenderables())
+            {
                 Cone current = (Cone) renderable;
                 current.setDetailHint(hint);
             }
@@ -193,7 +203,9 @@ public class Cones extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Cones", AppFrame.class);
     }
 }
+

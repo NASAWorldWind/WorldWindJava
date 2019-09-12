@@ -11,8 +11,8 @@ package gov.nasa.worldwind.formats.dds;
  * @author dcollins
  * @version $Id: DDSPixelFormat.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class DDSPixelFormat {
-
+public class DDSPixelFormat
+{
     protected final int size = DDSConstants.DDS_PIXEL_FORMAT_SIZE;
     protected int flags;
     protected int fourCC;
@@ -22,7 +22,8 @@ public class DDSPixelFormat {
     protected int bBitMask;
     protected int aBitMask;
 
-    public DDSPixelFormat() {
+    public DDSPixelFormat()
+    {
     }
 
     /**
@@ -30,63 +31,78 @@ public class DDSPixelFormat {
      *
      * @return pixel format structure size in bytes.
      */
-    public final int getSize() {
+    public final int getSize()
+    {
         return this.size;
     }
 
-    public int getFlags() {
+    public int getFlags()
+    {
         return this.flags;
     }
 
-    public void setFlags(int flags) {
+    public void setFlags(int flags)
+    {
         this.flags = flags;
     }
 
-    public int getFourCC() {
+    public int getFourCC()
+    {
         return this.fourCC;
     }
 
-    public void setFourCC(int fourCC) {
+    public void setFourCC(int fourCC)
+    {
         this.fourCC = fourCC;
     }
 
-    public int getRGBBitCount() {
+    public int getRGBBitCount()
+    {
         return this.rgbBitCount;
     }
 
-    public void setRGBBitCount(int bitCount) {
+    public void setRGBBitCount(int bitCount)
+    {
         this.rgbBitCount = bitCount;
     }
 
-    public int getRBitMask() {
+    public int getRBitMask()
+    {
         return this.rBitMask;
     }
 
-    public void setRBitMask(int rBitMask) {
+    public void setRBitMask(int rBitMask)
+    {
         this.rBitMask = rBitMask;
     }
 
-    public int getGBitMask() {
+    public int getGBitMask()
+    {
         return this.gBitMask;
     }
 
-    public void setGBitMask(int gBitMask) {
+    public void setGBitMask(int gBitMask)
+    {
         this.gBitMask = gBitMask;
     }
 
-    public int getBBitMask() {
+    public int getBBitMask()
+    {
         return this.bBitMask;
     }
 
-    public void setBBitMask(int bBitMask) {
+    public void setBBitMask(int bBitMask)
+    {
         this.bBitMask = bBitMask;
     }
 
-    public int getABitMask() {
+    public int getABitMask()
+    {
         return this.aBitMask;
     }
 
-    public void setABitMask(int aBitMask) {
+    public void setABitMask(int aBitMask)
+    {
         this.aBitMask = aBitMask;
     }
 }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.util.xml.*;
@@ -17,8 +18,8 @@ import java.util.*;
  * @author tag
  * @version $Id: KMLSchema.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLSchema extends AbstractXMLEventParser {
-
+public class KMLSchema extends AbstractXMLEventParser
+{
     protected List<KMLSimpleField> simpleFields = new ArrayList<KMLSimpleField>();
 
     /**
@@ -26,33 +27,38 @@ public class KMLSchema extends AbstractXMLEventParser {
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLSchema(String namespaceURI) {
+    public KMLSchema(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
     @Override
     protected void doAddEventContent(Object o, XMLEventParserContext ctx, XMLEvent event, Object... args)
-            throws XMLStreamException {
-        if (o instanceof KMLSimpleField) {
+        throws XMLStreamException
+    {
+        if (o instanceof KMLSimpleField)
             this.addSimpleField((KMLSimpleField) o);
-        } else {
+        else
             super.doAddEventContent(o, ctx, event, args);
-        }
     }
 
-    public String getName() {
+    public String getName()
+    {
         return (String) this.getField("name");
     }
 
-    public String getId() {
+    public String getId()
+    {
         return (String) this.getField("id");
     }
 
-    protected void addSimpleField(KMLSimpleField o) {
+    protected void addSimpleField(KMLSimpleField o)
+    {
         this.simpleFields.add(o);
     }
 
-    public List<KMLSimpleField> getSimpleFields() {
+    public List<KMLSimpleField> getSimpleFields()
+    {
         return this.simpleFields;
     }
 }

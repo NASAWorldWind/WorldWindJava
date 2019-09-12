@@ -17,8 +17,8 @@ import java.util.Collection;
  * @author dcollins
  * @version $Id: Airspace.java 2394 2014-10-22 01:16:43Z tgaskins $
  */
-public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, Highlightable, Attributable {
-
+public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, Highlightable, Attributable
+{
     public static final String DRAW_STYLE_FILL = "Airspace.DrawStyleFill";
     public static final String DRAW_STYLE_OUTLINE = "Airspace.DrawStyleOutline";
 
@@ -98,13 +98,13 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      * argument descriptions below for the mapping of the boolean values of this method to the altitude-datum values.
      *
      * @param lowerTerrainConformant the lower altitude datum. A value of true indicates a lower altitude datum of
-     * {@link AVKey#ABOVE_GROUND_LEVEL} (terrain conforming), a value of false indicates a lower altitude datum of {link
-     * AVKey#ABOVE_MEAN_SEA_LEVEL} (not terrain conforming). the terrain-conforming, a value of false indicates that
-     * it's not.
+     *                               {@link AVKey#ABOVE_GROUND_LEVEL} (terrain conforming), a value of false indicates a
+     *                               lower altitude datum of {link AVKey#ABOVE_MEAN_SEA_LEVEL} (not terrain conforming).
+     *                               the terrain-conforming, a value of false indicates that it's not.
      * @param upperTerrainConformant the upper altitude datum. A value of true indicates an upper altitude datum of
-     * {@link AVKey#ABOVE_GROUND_LEVEL} (terrain conforming), a value of false indicates an upper altitude datum of
-     * {link AVKey#ABOVE_MEAN_SEA_LEVEL} (not terrain conforming. the terrain-conforming, a value of false indicates
-     * that it's not.
+     *                               {@link AVKey#ABOVE_GROUND_LEVEL} (terrain conforming), a value of false indicates
+     *                               an upper altitude datum of {link AVKey#ABOVE_MEAN_SEA_LEVEL} (not terrain
+     *                               conforming. the terrain-conforming, a value of false indicates that it's not.
      *
      * @see #setAltitudeDatum(String, String)
      */
@@ -125,7 +125,7 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      * gov.nasa.worldwind.render.airspaces.Cake} airspaces.
      *
      * @param alwaysOnTop if <code>true</code>, this airspace is drawn after all others. Otherwise this airspace is
-     * drawn with its normal priority, which is its relative distance to the eye point.
+     *                    drawn with its normal priority, which is its relative distance to the eye point.
      */
     void setAlwaysOnTop(boolean alwaysOnTop);
 
@@ -141,7 +141,7 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      * specified in the shape.
      *
      * @param drawSurfaceShape <code>true</code> if this shape is drawn flat and on the surface, otherwise
-     * <code>false</code>.
+     *                         <code>false</code>.
      */
     void setDrawSurfaceShape(boolean drawSurfaceShape);
 
@@ -152,7 +152,7 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      * the boolean values of this method to the altitude-datum values.
      *
      * @param terrainConformant the altitude datum. See {@link #setTerrainConforming(boolean, boolean)} for a
-     * description of the possible values.
+     *                          description of the possible values.
      */
     void setTerrainConforming(boolean terrainConformant);
 
@@ -180,7 +180,7 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      * a specified {@link gov.nasa.worldwind.globes.Globe} and vertical exaggeration (see {@link
      * gov.nasa.worldwind.SceneController#getVerticalExaggeration()}.
      *
-     * @param globe the Globe this Airspace is related to.
+     * @param globe                the Globe this Airspace is related to.
      * @param verticalExaggeration the vertical exaggeration of the scene containing this Airspace.
      *
      * @return this Airspace's Extent in model coordinates.
@@ -253,9 +253,9 @@ public interface Airspace extends Renderable, Restorable, AVList, ExtentHolder, 
      * than this.
      *
      * @param groundReference the location at which to compute the terrain elevation used to offset an upper or lower
-     * airspace surface. The location need not be within the airspace's bounds. If null, an airspace-specific position
-     * is chosen from those defining the airspace. See the method descriptions for the individual airspaces to determine
-     * the position used.
+     *                        airspace surface. The location need not be within the airspace's bounds. If null, an
+     *                        airspace-specific position is chosen from those defining the airspace. See the method
+     *                        descriptions for the individual airspaces to determine the position used.
      *
      * @see #setAltitudeDatum(String, String)
      */

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
@@ -31,8 +32,8 @@ import java.util.Arrays;
  * @author tag
  * @version $Id: VideoOnTerrain.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class VideoOnTerrain extends ApplicationTemplate {
-
+public class VideoOnTerrain extends ApplicationTemplate
+{
     protected static final int IMAGE_SIZE = 512;
     protected static final double IMAGE_OPACITY = 0.5;
     protected static final double IMAGE_SELECTED_OPACITY = 0.8;
@@ -40,15 +41,16 @@ public class VideoOnTerrain extends ApplicationTemplate {
     // These corners do not form a Sector, so SurfaceImage must generate a texture rather than simply using the source
     // image.
     protected static final java.util.List<LatLon> CORNERS = Arrays.asList(
-            LatLon.fromDegrees(37.8313, -105.0653),
-            LatLon.fromDegrees(37.8313, -105.0396),
-            LatLon.fromDegrees(37.8539, -105.04),
-            LatLon.fromDegrees(37.8539, -105.0653)
+        LatLon.fromDegrees(37.8313, -105.0653),
+        LatLon.fromDegrees(37.8313, -105.0396),
+        LatLon.fromDegrees(37.8539, -105.04),
+        LatLon.fromDegrees(37.8539, -105.0653)
     );
 
-    protected static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+    protected static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             super(true, true, true);
 
             RenderableLayer layer = new RenderableLayer();
@@ -62,8 +64,10 @@ public class VideoOnTerrain extends ApplicationTemplate {
             surfaceImage.setOpacity(IMAGE_OPACITY);
             layer.addRenderable(surfaceImage);
 
-            javax.swing.Timer timer = new javax.swing.Timer(50, new ActionListener() {
-                public void actionPerformed(ActionEvent actionEvent) {
+            javax.swing.Timer timer = new javax.swing.Timer(50, new ActionListener()
+            {
+                public void actionPerformed(ActionEvent actionEvent)
+                {
                     Iterable<LatLon> corners = surfaceImage.getCorners();
                     surfaceImage.setImageSource(makeImage(), corners);
                     getWwd().redraw();
@@ -75,7 +79,8 @@ public class VideoOnTerrain extends ApplicationTemplate {
         protected long counter;
         protected long start = System.currentTimeMillis();
 
-        protected BufferedImage makeImage() {
+        protected BufferedImage makeImage()
+        {
             BufferedImage image = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, BufferedImage.TYPE_4BYTE_ABGR);
             Graphics2D g = image.createGraphics();
 
@@ -95,63 +100,72 @@ public class VideoOnTerrain extends ApplicationTemplate {
         }
     }
 
-    protected static class SurfaceImageDragger implements SelectListener {
-
+    protected static class SurfaceImageDragger implements SelectListener
+    {
         protected WorldWindow wwd;
         protected SurfaceImage lastHighlit;
         protected BasicDragger dragger;
 
-        public SurfaceImageDragger(WorldWindow wwd) {
+        public SurfaceImageDragger(WorldWindow wwd)
+        {
             this.wwd = wwd;
             this.dragger = new BasicDragger(wwd);
         }
 
-        public void selected(SelectEvent event) {
+        public void selected(SelectEvent event)
+        {
             // Have rollover events highlight the rolled-over object.
-            if (event.getEventAction().equals(SelectEvent.ROLLOVER) && !this.dragger.isDragging()) {
+            if (event.getEventAction().equals(SelectEvent.ROLLOVER) && !this.dragger.isDragging())
+            {
                 this.highlight(event.getTopObject());
                 this.wwd.redraw();
             }
 
             // Drag the selected object.
-            if (event.getEventAction().equals(SelectEvent.DRAG)
-                    || event.getEventAction().equals(SelectEvent.DRAG_END)) {
+            if (event.getEventAction().equals(SelectEvent.DRAG) ||
+                event.getEventAction().equals(SelectEvent.DRAG_END))
+            {
                 this.dragger.selected(event);
 
-                if (this.dragger.isDragging()) {
+                if (this.dragger.isDragging())
                     this.wwd.redraw();
-                }
             }
 
             // We missed any roll-over events while dragging, so highlight any under the cursor now.
-            if (event.getEventAction().equals(SelectEvent.DRAG_END)) {
+            if (event.getEventAction().equals(SelectEvent.DRAG_END))
+            {
                 PickedObjectList pol = this.wwd.getObjectsAtCurrentPosition();
-                if (pol != null) {
+                if (pol != null)
+                {
                     this.highlight(pol.getTopObject());
                     this.wwd.redraw();
                 }
             }
         }
 
-        protected void highlight(Object o) {
-            if (this.lastHighlit == o) {
+        protected void highlight(Object o)
+        {
+            if (this.lastHighlit == o)
                 return; // Same thing selected
-            }
+
             // Turn off highlight if on.
-            if (this.lastHighlit != null) {
+            if (this.lastHighlit != null)
+            {
                 this.lastHighlit.setOpacity(IMAGE_OPACITY);
                 this.lastHighlit = null;
             }
 
             // Turn on highlight if selected object is a SurfaceImage.
-            if (o instanceof SurfaceImage) {
+            if (o instanceof SurfaceImage)
+            {
                 this.lastHighlit = (SurfaceImage) o;
                 this.lastHighlit.setOpacity(IMAGE_SELECTED_OPACITY);
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 37.8432);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -105.0527);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 7000);

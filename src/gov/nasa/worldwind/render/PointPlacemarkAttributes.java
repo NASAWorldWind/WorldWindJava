@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.*;
@@ -18,11 +19,9 @@ import java.awt.image.*;
 import java.io.*;
 import java.util.UUID;
 
-/**
- * Holds attributes for {@link gov.nasa.worldwind.render.PointPlacemark}s.
- */
-public class PointPlacemarkAttributes implements Exportable {
-
+/** Holds attributes for {@link gov.nasa.worldwind.render.PointPlacemark}s. */
+public class PointPlacemarkAttributes implements Exportable
+{
     protected String imageAddress;
     protected BufferedImage image;
     protected Double scale;
@@ -47,52 +46,35 @@ public class PointPlacemarkAttributes implements Exportable {
     protected boolean drawImage = true;
     protected boolean drawLabel = true;
 
-    /**
-     * The image file to use for the placemark's icon if no image file is specified in the placemark attributes.
-     */
-    public static final String DEFAULT_IMAGE_PATH
-            = Configuration.getStringValue("gov.nasa.worldwind.render.PointPlacemarkAttributes.DefaultImagePath",
-                    "images/pushpins/plain-yellow.png");
-    /**
-     * The image offset to use if none specified. This value is that required by the default image.
-     */
+    /** The image file to use for the placemark's icon if no image file is specified in the placemark attributes. */
+    public static final String DEFAULT_IMAGE_PATH =
+        Configuration.getStringValue("gov.nasa.worldwind.render.PointPlacemarkAttributes.DefaultImagePath",
+            "images/pushpins/plain-yellow.png");
+    /** The image offset to use if none specified. This value is that required by the default image. */
     public static final Offset DEFAULT_IMAGE_OFFSET = new Offset(19d, 8d, AVKey.PIXELS, AVKey.PIXELS);
-    /**
-     * The image scale to use if none specified. This value is appropriate for the default image.
-     */
+    /** The image scale to use if none specified. This value is appropriate for the default image. */
     public static final Double DEFAULT_IMAGE_SCALE = 0.6;
-    /**
-     * The label scale to use if none specified.
-     */
+    /** The label scale to use if none specified. */
     public static final Double DEFAULT_LABEL_SCALE = 1.0;
-    /**
-     * The default image color.
-     */
+    /** The default image color. */
     protected static final Color DEFAULT_IMAGE_COLOR = Color.WHITE;
-    /**
-     * The default label offset. This value is appropriate for the default image.
-     */
+    /** The default label offset. This value is appropriate for the default image. */
     public static final Offset DEFAULT_LABEL_OFFSET = new Offset(0.9d, 0.6d, AVKey.FRACTION, AVKey.FRACTION);
-    /**
-     * The default font to use for the placemark's label.
-     */
+    /** The default font to use for the placemark's label. */
     public static final Font DEFAULT_LABEL_FONT = Font.decode(
-            Configuration.getStringValue("gov.nasa.worldwind.render.PointPlacemarkAttributes.DefaultLabelFont",
-                    "Arial-BOLD-14"));
-    /**
-     * The default label color.
-     */
+        Configuration.getStringValue("gov.nasa.worldwind.render.PointPlacemarkAttributes.DefaultLabelFont",
+            "Arial-BOLD-14"));
+    /** The default label color. */
     protected static final Color DEFAULT_LABEL_COLOR = Color.WHITE;
-    /**
-     * The default line color.
-     */
+    /** The default line color. */
     protected static final Color DEFAULT_LINE_COLOR = Color.WHITE;
 
     /**
      * Constructs an instance with default values for image address, image offset, image scale, label offset, label font
      * and label color.
      */
-    public PointPlacemarkAttributes() {
+    public PointPlacemarkAttributes()
+    {
     }
 
     /**
@@ -100,7 +82,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param attrs the instance from which to copy the initial attribute values of this. May be null.
      */
-    public PointPlacemarkAttributes(PointPlacemarkAttributes attrs) {
+    public PointPlacemarkAttributes(PointPlacemarkAttributes attrs)
+    {
         this.copy(attrs);
     }
 
@@ -109,8 +92,10 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param attrs the instance to copy values from.
      */
-    public void copy(PointPlacemarkAttributes attrs) {
-        if (attrs != null) {
+    public void copy(PointPlacemarkAttributes attrs)
+    {
+        if (attrs != null)
+        {
             this.setImageAddress(attrs.getImageAddress());
             this.setScale(attrs.getScale());
             this.setHeading(attrs.getHeading());
@@ -139,7 +124,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the line width.
      */
-    public Double getLineWidth() {
+    public Double getLineWidth()
+    {
         return lineWidth;
     }
 
@@ -148,7 +134,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param lineWidth the line width. May be null, in which case a width of 1 is used during rendering.
      */
-    public void setLineWidth(Double lineWidth) {
+    public void setLineWidth(Double lineWidth)
+    {
         this.lineWidth = lineWidth;
     }
 
@@ -157,7 +144,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the line color.
      */
-    public Material getLineMaterial() {
+    public Material getLineMaterial()
+    {
         return this.lineMaterial;
     }
 
@@ -166,7 +154,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the label's diffuse color.
      */
-    public Color getLineColor() {
+    public Color getLineColor()
+    {
         return lineMaterial == null ? null : this.lineMaterial.getDiffuse();
     }
 
@@ -175,7 +164,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param lineColor the line color. May be null.
      */
-    public void setLineMaterial(Material lineColor) {
+    public void setLineMaterial(Material lineColor)
+    {
         this.lineMaterial = lineColor;
     }
 
@@ -184,7 +174,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param lineColorString the line color. May be null.
      */
-    public void setLineColor(String lineColorString) {
+    public void setLineColor(String lineColorString)
+    {
         this.setLineMaterial(new Material(WWUtil.decodeColorABGR(lineColorString)));
     }
 
@@ -196,7 +187,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @see #setImageColor(java.awt.Color)
      */
-    public Color getImageColor() {
+    public Color getImageColor()
+    {
         return this.imageColor;
     }
 
@@ -208,7 +200,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @see #getImageColor()
      */
-    public void setImageColor(Color imageColor) {
+    public void setImageColor(Color imageColor)
+    {
         this.imageColor = imageColor;
     }
 
@@ -217,7 +210,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the anti-alias hint.
      */
-    public int getAntiAliasHint() {
+    public int getAntiAliasHint()
+    {
         return antiAliasHint;
     }
 
@@ -227,7 +221,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param antiAliasHint the anti-alias hint.
      */
-    public void setAntiAliasHint(int antiAliasHint) {
+    public void setAntiAliasHint(int antiAliasHint)
+    {
         this.antiAliasHint = antiAliasHint;
     }
 
@@ -236,7 +231,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the address of the placemark's image. May be null.
      */
-    public String getImageAddress() {
+    public String getImageAddress()
+    {
         return this.imageAddress;
     }
 
@@ -245,7 +241,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param address the address of the placemark's image. May be null, in which case a default image is used.
      */
-    public void setImageAddress(String address) {
+    public void setImageAddress(String address)
+    {
         this.imageAddress = address;
     }
 
@@ -255,7 +252,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return The image previously specified for this attribute bundle.
      */
-    public BufferedImage getImage() {
+    public BufferedImage getImage()
+    {
         return image;
     }
 
@@ -265,9 +263,10 @@ public class PointPlacemarkAttributes implements Exportable {
      * set to a unique identifier for the image.
      *
      * @param image the buffered image to use for the associated point placemarks. May be null, in which case this
-     * attribute bundle's image address is set to null by this method.
+     *              attribute bundle's image address is set to null by this method.
      */
-    public void setImage(BufferedImage image) {
+    public void setImage(BufferedImage image)
+    {
         this.image = image;
 
         this.setImageAddress(this.image != null ? UUID.randomUUID().toString() : null);
@@ -278,7 +277,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the placemark image scale.
      */
-    public Double getScale() {
+    public Double getScale()
+    {
         return this.scale;
     }
 
@@ -288,7 +288,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param scale the placemark image scale. May be null, in which case no scaling is applied.
      */
-    public void setScale(Double scale) {
+    public void setScale(Double scale)
+    {
         this.scale = scale;
     }
 
@@ -297,7 +298,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the placemark image heading.
      */
-    public Double getHeading() {
+    public Double getHeading()
+    {
         return this.heading;
     }
 
@@ -306,9 +308,10 @@ public class PointPlacemarkAttributes implements Exportable {
      * image.
      *
      * @param heading the placemark heading in degrees clockwise from North. May be null, in which case no heading is
-     * applied during rendering.
+     *                applied during rendering.
      */
-    public void setHeading(Double heading) {
+    public void setHeading(Double heading)
+    {
         this.heading = heading;
     }
 
@@ -319,7 +322,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @see #setHeadingReference(String)
      */
-    public String getHeadingReference() {
+    public String getHeadingReference()
+    {
         return headingReference;
     }
 
@@ -334,7 +338,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param headingReference the heading reference. See the description for possible values.
      */
-    public void setHeadingReference(String headingReference) {
+    public void setHeadingReference(String headingReference)
+    {
         this.headingReference = headingReference;
     }
 
@@ -343,7 +348,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the placemark image pitch.
      */
-    public Double getPitch() {
+    public Double getPitch()
+    {
         return this.pitch;
     }
 
@@ -352,7 +358,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param pitch the placemark pitch in degrees. May be null, in which case no pitch is applied during rendering.
      */
-    public void setPitch(Double pitch) {
+    public void setPitch(Double pitch)
+    {
         this.pitch = pitch;
     }
 
@@ -361,7 +368,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the image offset.
      */
-    public Offset getImageOffset() {
+    public Offset getImageOffset()
+    {
         return imageOffset;
     }
 
@@ -369,9 +377,10 @@ public class PointPlacemarkAttributes implements Exportable {
      * Specifies a location within the placemark image to align with the placemark point.
      *
      * @param offset the hot spot controlling the image's placement relative to the placemark point. May be null to
-     * indicate that the image's lower left corner is aligned with the placemark point.
+     *               indicate that the image's lower left corner is aligned with the placemark point.
      */
-    public void setImageOffset(Offset offset) {
+    public void setImageOffset(Offset offset)
+    {
         this.imageOffset = offset;
     }
 
@@ -381,7 +390,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return true if there are unresolved fields, false if no fields remain unresolved.
      */
-    public boolean isUnresolved() {
+    public boolean isUnresolved()
+    {
         return unresolved;
     }
 
@@ -391,15 +401,18 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param unresolved true if there are unresolved fields, false if no fields remain unresolved.
      */
-    public void setUnresolved(boolean unresolved) {
+    public void setUnresolved(boolean unresolved)
+    {
         this.unresolved = unresolved;
     }
 
-    public Font getLabelFont() {
+    public Font getLabelFont()
+    {
         return labelFont;
     }
 
-    public void setLabelFont(Font labelFont) {
+    public void setLabelFont(Font labelFont)
+    {
         this.labelFont = labelFont;
     }
 
@@ -408,7 +421,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the label offset.
      */
-    public Offset getLabelOffset() {
+    public Offset getLabelOffset()
+    {
         return labelOffset;
     }
 
@@ -423,9 +437,10 @@ public class PointPlacemarkAttributes implements Exportable {
      * the same level as the top of the image. (An offset of (X = 1.0, Y = 0.6, both in fraction units.)
      *
      * @param offset the hot spot controlling the image's placement relative to the placemark point. May be null to
-     * indicate the default label offset.
+     *               indicate the default label offset.
      */
-    public void setLabelOffset(Offset offset) {
+    public void setLabelOffset(Offset offset)
+    {
         this.labelOffset = offset;
     }
 
@@ -434,7 +449,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the label material.
      */
-    public Material getLabelMaterial() {
+    public Material getLabelMaterial()
+    {
         return labelMaterial;
     }
 
@@ -443,7 +459,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the label's diffuse color.
      */
-    public Color getLabelColor() {
+    public Color getLabelColor()
+    {
         return labelMaterial == null ? null : this.labelMaterial.getDiffuse();
     }
 
@@ -452,7 +469,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param color the line material. May be null.
      */
-    public void setLabelMaterial(Material color) {
+    public void setLabelMaterial(Material color)
+    {
         this.labelMaterial = color;
     }
 
@@ -461,7 +479,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param labelColorString the line color. May be null.
      */
-    public void setLabelColor(String labelColorString) {
+    public void setLabelColor(String labelColorString)
+    {
         this.setLabelMaterial(new Material(WWUtil.decodeColorABGR(labelColorString)));
     }
 
@@ -470,7 +489,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return the placemark label scale.
      */
-    public Double getLabelScale() {
+    public Double getLabelScale()
+    {
         return labelScale;
     }
 
@@ -480,7 +500,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param scale the placemark image scale. May be null, in which case no scaling is applied.
      */
-    public void setLabelScale(Double scale) {
+    public void setLabelScale(Double scale)
+    {
         this.labelScale = scale;
     }
 
@@ -491,7 +512,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @see #setUsePointAsDefaultImage(boolean)
      */
-    public boolean isUsePointAsDefaultImage() {
+    public boolean isUsePointAsDefaultImage()
+    {
         return usePointAsDefaultImage;
     }
 
@@ -504,19 +526,18 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @see #isUsePointAsDefaultImage()
      */
-    public void setUsePointAsDefaultImage(boolean usePointAsDefaultImage) {
+    public void setUsePointAsDefaultImage(boolean usePointAsDefaultImage)
+    {
         this.usePointAsDefaultImage = usePointAsDefaultImage;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String isExportFormatSupported(String format) {
-        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(format)) {
+    /** {@inheritDoc} */
+    public String isExportFormatSupported(String format)
+    {
+        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(format))
             return Exportable.FORMAT_SUPPORTED;
-        } else {
+        else
             return Exportable.FORMAT_NOT_SUPPORTED;
-        }
     }
 
     /**
@@ -524,7 +545,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return <code>true</code> if the image is drawn, otherwise <code>false</code>.
      */
-    public boolean isDrawImage() {
+    public boolean isDrawImage()
+    {
         return drawImage;
     }
 
@@ -534,7 +556,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param drawImage <code>true</code> to draw the image, otherwise <code>false</code>.
      */
-    public void setDrawImage(boolean drawImage) {
+    public void setDrawImage(boolean drawImage)
+    {
         this.drawImage = drawImage;
     }
 
@@ -543,7 +566,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @return <code>true</code> if the label is drawn, otherwise <code>false</code>.
      */
-    public boolean isDrawLabel() {
+    public boolean isDrawLabel()
+    {
         return drawLabel;
     }
 
@@ -552,7 +576,8 @@ public class PointPlacemarkAttributes implements Exportable {
      *
      * @param drawLabel <code>true</code> to draw the label, otherwise <code>false</code>.
      */
-    public void setDrawLabel(boolean drawLabel) {
+    public void setDrawLabel(boolean drawLabel)
+    {
         this.drawLabel = drawLabel;
     }
 
@@ -568,32 +593,41 @@ public class PointPlacemarkAttributes implements Exportable {
      * </pre>
      *
      * @param mimeType MIME type of desired export format.
-     * @param output An object that will receive the exported data. The type of this object depends on the export format
-     * (see above).
+     * @param output   An object that will receive the exported data. The type of this object depends on the export
+     *                 format (see above).
      *
      * @throws IOException If an exception occurs writing to the output object.
      */
-    public void export(String mimeType, Object output) throws IOException, UnsupportedOperationException {
-        if (mimeType == null) {
+    public void export(String mimeType, Object output) throws IOException, UnsupportedOperationException
+    {
+        if (mimeType == null)
+        {
             String message = Logging.getMessage("nullValue.Format");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (output == null) {
+        if (output == null)
+        {
             String message = Logging.getMessage("nullValue.OutputBufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType)) {
-            try {
+        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
+        {
+            try
+            {
                 exportAsKML(output);
-            } catch (XMLStreamException e) {
+            }
+            catch (XMLStreamException e)
+            {
                 Logging.logger().throwing(getClass().getName(), "export", e);
                 throw new IOException(e);
             }
-        } else {
+        }
+        else
+        {
             String message = Logging.getMessage("Export.UnsupportedFormat", mimeType);
             Logging.logger().warning(message);
             throw new UnsupportedOperationException(message);
@@ -609,21 +643,28 @@ public class PointPlacemarkAttributes implements Exportable {
      * @throws XMLStreamException If an exception occurs while writing the KML
      * @see #export(String, Object)
      */
-    protected void exportAsKML(Object output) throws XMLStreamException {
+    protected void exportAsKML(Object output) throws XMLStreamException
+    {
         XMLStreamWriter xmlWriter = null;
         XMLOutputFactory factory = XMLOutputFactory.newInstance();
         boolean closeWriterWhenFinished = true;
 
-        if (output instanceof XMLStreamWriter) {
+        if (output instanceof XMLStreamWriter)
+        {
             xmlWriter = (XMLStreamWriter) output;
             closeWriterWhenFinished = false;
-        } else if (output instanceof Writer) {
+        }
+        else if (output instanceof Writer)
+        {
             xmlWriter = factory.createXMLStreamWriter((Writer) output);
-        } else if (output instanceof OutputStream) {
+        }
+        else if (output instanceof OutputStream)
+        {
             xmlWriter = factory.createXMLStreamWriter((OutputStream) output);
         }
 
-        if (xmlWriter == null) {
+        if (xmlWriter == null)
+        {
             String message = Logging.getMessage("Export.UnsupportedOutputObject");
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -635,7 +676,8 @@ public class PointPlacemarkAttributes implements Exportable {
         xmlWriter.writeStartElement("IconStyle");
 
         final Color imageColor = this.getImageColor();
-        if (imageColor != null) {
+        if (imageColor != null)
+        {
             xmlWriter.writeStartElement("color");
             xmlWriter.writeCharacters(KMLExportUtil.stripHexPrefix(WWUtil.encodeColorABGR(imageColor)));
             xmlWriter.writeEndElement();
@@ -650,14 +692,16 @@ public class PointPlacemarkAttributes implements Exportable {
         xmlWriter.writeEndElement();
 
         final Double heading = this.getHeading();
-        if (heading != null) {
+        if (heading != null)
+        {
             xmlWriter.writeStartElement("heading");
             xmlWriter.writeCharacters(Double.toString(this.getHeading()));
             xmlWriter.writeEndElement();
         }
 
         String imgAddress = this.getImageAddress();
-        if (imgAddress != null) {
+        if (imgAddress != null)
+        {
             xmlWriter.writeStartElement("Icon");
             xmlWriter.writeStartElement("href");
             xmlWriter.writeCharacters(imgAddress);
@@ -666,7 +710,8 @@ public class PointPlacemarkAttributes implements Exportable {
         }
 
         Offset offset = this.getImageOffset();
-        if (offset != null) {
+        if (offset != null)
+        {
             KMLExportUtil.exportOffset(xmlWriter, offset, "hotSpot");
         }
 
@@ -676,14 +721,16 @@ public class PointPlacemarkAttributes implements Exportable {
         xmlWriter.writeStartElement("LabelStyle");
 
         final Double labelScale = this.getLabelScale();
-        if (labelScale != null) {
+        if (labelScale != null)
+        {
             xmlWriter.writeStartElement("scale");
             xmlWriter.writeCharacters(Double.toString(labelScale));
             xmlWriter.writeEndElement();
         }
 
         final Color labelColor = this.getLabelColor();
-        if (labelColor != null) {
+        if (labelColor != null)
+        {
             xmlWriter.writeStartElement("color");
             xmlWriter.writeCharacters(KMLExportUtil.stripHexPrefix(WWUtil.encodeColorABGR(labelColor)));
             xmlWriter.writeEndElement();
@@ -699,14 +746,16 @@ public class PointPlacemarkAttributes implements Exportable {
         xmlWriter.writeStartElement("LineStyle");
 
         final Double lineWidth = this.getLineWidth();
-        if (lineWidth != null) {
+        if (lineWidth != null)
+        {
             xmlWriter.writeStartElement("width");
             xmlWriter.writeCharacters(Double.toString(lineWidth));
             xmlWriter.writeEndElement();
         }
 
         final Color lineColor = this.getLineColor();
-        if (lineColor != null) {
+        if (lineColor != null)
+        {
             xmlWriter.writeStartElement("color");
             xmlWriter.writeCharacters(KMLExportUtil.stripHexPrefix(WWUtil.encodeColorABGR(lineColor)));
             xmlWriter.writeEndElement();
@@ -720,8 +769,7 @@ public class PointPlacemarkAttributes implements Exportable {
         xmlWriter.writeEndElement(); // Style
 
         xmlWriter.flush();
-        if (closeWriterWhenFinished) {
+        if (closeWriterWhenFinished)
             xmlWriter.close();
-        }
     }
 }

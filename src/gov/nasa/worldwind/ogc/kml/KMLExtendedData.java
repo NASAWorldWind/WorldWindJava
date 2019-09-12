@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.util.xml.XMLEventParserContext;
@@ -17,8 +18,8 @@ import java.util.*;
  * @author tag
  * @version $Id: KMLExtendedData.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLExtendedData extends KMLAbstractObject {
-
+public class KMLExtendedData extends KMLAbstractObject
+{
     protected List<KMLData> data = new ArrayList<KMLData>();
     protected List<KMLSchemaData> schemaData = new ArrayList<KMLSchemaData>();
 
@@ -27,35 +28,40 @@ public class KMLExtendedData extends KMLAbstractObject {
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLExtendedData(String namespaceURI) {
+    public KMLExtendedData(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
     @Override
     protected void doAddEventContent(Object o, XMLEventParserContext ctx, XMLEvent event, Object... args)
-            throws XMLStreamException {
-        if (o instanceof KMLData) {
+        throws XMLStreamException
+    {
+        if (o instanceof KMLData)
             this.addData((KMLData) o);
-        } else if (o instanceof KMLSchemaData) {
+        else if (o instanceof KMLSchemaData)
             this.addSchemaData((KMLSchemaData) o);
-        } else {
+        else
             super.doAddEventContent(o, ctx, event, args);
-        }
     }
 
-    protected void addData(KMLData o) {
+    protected void addData(KMLData o)
+    {
         this.data.add(o);
     }
 
-    public List<KMLData> getData() {
+    public List<KMLData> getData()
+    {
         return this.data;
     }
 
-    protected void addSchemaData(KMLSchemaData o) {
+    protected void addSchemaData(KMLSchemaData o)
+    {
         this.schemaData.add(o);
     }
 
-    public List<KMLSchemaData> getSchemaData() {
+    public List<KMLSchemaData> getSchemaData()
+    {
         return this.schemaData;
     }
 }

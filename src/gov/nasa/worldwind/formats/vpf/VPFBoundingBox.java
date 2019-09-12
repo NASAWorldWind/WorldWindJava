@@ -12,55 +12,64 @@ import gov.nasa.worldwind.util.*;
  * @author dcollins
  * @version $Id: VPFBoundingBox.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class VPFBoundingBox {
-
+public class VPFBoundingBox
+{
     private double xmin;
     private double ymin;
     private double xmax;
     private double ymax;
 
-    public VPFBoundingBox(double xmin, double ymin, double xmax, double ymax) {
+    public VPFBoundingBox(double xmin, double ymin, double xmax, double ymax)
+    {
         this.xmin = xmin;
         this.ymin = ymin;
         this.xmax = xmax;
         this.ymax = ymax;
     }
 
-    public double getXmin() {
+    public double getXmin()
+    {
         return this.xmin;
     }
 
-    public double getYmin() {
+    public double getYmin()
+    {
         return this.ymin;
     }
 
-    public double getXmax() {
+    public double getXmax()
+    {
         return this.xmax;
     }
 
-    public double getYmax() {
+    public double getYmax()
+    {
         return this.ymax;
     }
 
-    public Sector toSector() {
+    public Sector toSector()
+    {
         return Sector.fromDegrees(this.ymin, this.ymax, this.xmin, this.xmax);
     }
 
-    public VPFBoundingBox union(VPFBoundingBox boundingBox) {
-        if (boundingBox == null) {
+    public VPFBoundingBox union(VPFBoundingBox boundingBox)
+    {
+        if (boundingBox == null)
+        {
             String message = Logging.getMessage("nullValue.BoundingBoxIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         return new VPFBoundingBox(
-                (this.xmin < boundingBox.xmin) ? this.xmin : boundingBox.xmin,
-                (this.ymin < boundingBox.ymin) ? this.ymin : boundingBox.ymin,
-                (this.xmax > boundingBox.xmax) ? this.xmax : boundingBox.xmax,
-                (this.ymax > boundingBox.ymax) ? this.ymax : boundingBox.ymax);
+            (this.xmin < boundingBox.xmin) ? this.xmin : boundingBox.xmin,
+            (this.ymin < boundingBox.ymin) ? this.ymin : boundingBox.ymin,
+            (this.xmax > boundingBox.xmax) ? this.xmax : boundingBox.xmax,
+            (this.ymax > boundingBox.ymax) ? this.ymax : boundingBox.ymax);
     }
 
-    public String toString() {
+    public String toString()
+    {
         StringBuilder sb = new StringBuilder();
 
         sb.append("xmin=").append(this.xmin).append(", ");
@@ -71,14 +80,17 @@ public class VPFBoundingBox {
         return sb.toString();
     }
 
-    public static VPFBoundingBox fromVecBuffer(VecBuffer buffer) {
-        if (buffer == null) {
+    public static VPFBoundingBox fromVecBuffer(VecBuffer buffer)
+    {
+        if (buffer == null)
+        {
             String message = Logging.getMessage("nullValue.BufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (buffer.getCoordsPerVec() < 2) {
+        if (buffer.getCoordsPerVec() < 2)
+        {
             String message = Logging.getMessage("generic.BufferIncompatible", buffer);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -92,22 +104,19 @@ public class VPFBoundingBox {
         int bufferSize = buffer.getSize();
         double[] compArray = new double[2];
 
-        for (int i = 0; i < bufferSize; i++) {
+        for (int i = 0; i < bufferSize; i++)
+        {
             buffer.get(i, compArray);
 
-            if (xmin > compArray[0]) {
+            if (xmin > compArray[0])
                 xmin = compArray[0];
-            }
-            if (xmax < compArray[0]) {
+            if (xmax < compArray[0])
                 xmax = compArray[0];
-            }
 
-            if (ymin > compArray[1]) {
+            if (ymin > compArray[1])
                 ymin = compArray[1];
-            }
-            if (ymax < compArray[1]) {
+            if (ymax < compArray[1])
                 ymax = compArray[1];
-            }
         }
 
         return new VPFBoundingBox(xmin, ymin, xmax, ymax);

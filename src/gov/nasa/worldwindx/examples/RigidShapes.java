@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWind;
@@ -24,15 +25,17 @@ import java.util.ArrayList;
  * @author ccrick
  * @version $Id: RigidShapes.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class RigidShapes extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+public class RigidShapes extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             this.makeShapes();
         }
 
-        protected void makeShapes() {
+        protected void makeShapes()
+        {
             RenderableLayer layer = new RenderableLayer();
             layer.setName("Rigid Shapes");
 
@@ -71,7 +74,7 @@ public class RigidShapes extends ApplicationTemplate {
 
             // Wedge with equal axes, CLAMP_TO_GROUND.
             Wedge wedge = new Wedge(Position.fromDegrees(35, -110, 200000), Angle.fromDegrees(225),
-                    200000, 200000, 200000);
+                200000, 200000, 200000);
             wedge.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
             wedge.setAttributes(attrs);
             wedge.setValue(AVKey.DISPLAY_NAME, "Wedge with equal axes, CLAMP_TO_GROUND altitude mode");
@@ -117,7 +120,7 @@ public class RigidShapes extends ApplicationTemplate {
 
             // Ellipsoid with a pre-set orientation.
             Ellipsoid ellipsoid = new Ellipsoid(Position.fromDegrees(0, 30, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             ellipsoid.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             ellipsoid.setAttributes(attrs2);
             ellipsoid.setValue(AVKey.DISPLAY_NAME, "Ellipsoid with a pre-set orientation");
@@ -125,7 +128,7 @@ public class RigidShapes extends ApplicationTemplate {
 
             // Ellipsoid with a pre-set orientation.
             ellipsoid = new Ellipsoid(Position.fromDegrees(30, 30, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             ellipsoid.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             ellipsoid.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
             ellipsoid.setAttributes(attrs2);
@@ -134,7 +137,7 @@ public class RigidShapes extends ApplicationTemplate {
 
             // Ellipsoid with a pre-set orientation.
             ellipsoid = new Ellipsoid(Position.fromDegrees(60, 30, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             ellipsoid.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             ellipsoid.setAttributes(attrs2);
             ellipsoid.setValue(AVKey.DISPLAY_NAME, "Ellipsoid with a pre-set orientation");
@@ -142,7 +145,7 @@ public class RigidShapes extends ApplicationTemplate {
 
             // Ellipsoid oriented in 3rd "quadrant" (-X, -Y, -Z).
             ellipsoid = new Ellipsoid(Position.fromDegrees(-45, -180, 750000), 1000000, 500000, 100000,
-                    Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
             ellipsoid.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             ellipsoid.setAttributes(attrs2);
             ellipsoid.setValue(AVKey.DISPLAY_NAME, "Ellipsoid oriented in 3rd \"quadrant\" (-X, -Y, -Z)");
@@ -153,7 +156,8 @@ public class RigidShapes extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Rigid Shapes", AppFrame.class);
     }
 }

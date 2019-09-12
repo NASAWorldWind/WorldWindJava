@@ -12,8 +12,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: WizardPanelDescriptor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface WizardPanelDescriptor {
-
+public interface WizardPanelDescriptor
+{
     Component getPanelComponent();
 
     Object getBackPanelDescriptor();

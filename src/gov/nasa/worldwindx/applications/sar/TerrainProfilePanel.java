@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.sar;
 
 import gov.nasa.worldwind.*;
@@ -30,8 +31,8 @@ import java.util.HashMap;
  * @version $Id: TerrainProfilePanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 @SuppressWarnings({"FieldCanBeLocal", "unchecked"})
-public class TerrainProfilePanel extends JPanel implements Restorable {
-
+public class TerrainProfilePanel extends JPanel implements Restorable
+{
     public static final String TERRAIN_PROFILE_OPEN = "TerrainProfilePanel.Open";
     public static final String TERRAIN_PROFILE_CHANGE = "TerrainProfilePanel.Change";
 
@@ -39,45 +40,51 @@ public class TerrainProfilePanel extends JPanel implements Restorable {
     private static final String GRAPH_SIZE_SMALL_TEXT = "Small Graph";
     private static final String GRAPH_SIZE_MEDIUM_TEXT = "Medium Graph";
     private static final String GRAPH_SIZE_LARGE_TEXT = "Large Graph";
-    private static final String FOLLOW_VIEW_TEXT = "Profile At Screen Center";
+    private static final String FOLLOW_VIEW_TEXT   = "Profile At Screen Center";
     private static final String FOLLOW_CURSOR_TEXT = "Profile Under Cursor";
     //private static final String FOLLOW_EYE_TEXT    = "Profile Under Eye";
     private static final String FOLLOW_OBJECT_TEXT = "Profile Under Aircraft";
-    private static final String FOLLOW_NONE_TEXT = "No Profile";
+    private static final String FOLLOW_NONE_TEXT   = "No Profile";
 
-    public TerrainProfilePanel() {
+    public TerrainProfilePanel()
+    {
         initComponents();
         this.controller = new TerrainProfileController();
     }
 
-    public WorldWindow getWwd() {
+    public WorldWindow getWwd()
+    {
         return this.controller.getWwd();
     }
 
-    public void setWwd(WorldWindow wwd) {
+    public void setWwd(WorldWindow wwd)
+    {
         this.controller.setWwd(wwd);
         this.matchProfileToPanel();
     }
 
-    private void matchProfileToPanel() {
+    private void matchProfileToPanel()
+    {
         this.setFollow();
         this.controller.setProfileSize((String) this.sizeComboBox.getSelectedItem());
         this.controller.setKeepProportions(this.proportionalCheckBox.isSelected());
         this.controller.setShowEyePosition(this.showEyeCheckBox.isSelected());
         this.controller.setZeroBased(this.zeroBaseCheckBox.isSelected());
         this.controller.setProfileWidthFactor(
-                Double.parseDouble(((String) this.profileWidthSpinner.getValue()).replace("x", "")));
+            Double.parseDouble(((String)this.profileWidthSpinner.getValue()).replace("x", "")));
         this.controller.setProfileLengthFactor(
-                Double.parseDouble(((String) this.profileLengthSpinner.getValue()).replace("x", "")));
+            Double.parseDouble(((String)this.profileLengthSpinner.getValue()).replace("x", "")));
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    private void sizeComboBoxActionPerformed(ActionEvent e) {
+    private void sizeComboBoxActionPerformed(ActionEvent e)
+    {
         this.controller.setProfileSize((String) this.sizeComboBox.getSelectedItem());
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    private void followComboBoxActionPerformed(ActionEvent e) {
+    private void followComboBoxActionPerformed(ActionEvent e)
+    {
         this.setFollow();
     }
 
@@ -85,36 +92,37 @@ public class TerrainProfilePanel extends JPanel implements Restorable {
     //{
     //    this.followComboBox.getModel().setSelectedItem(FOLLOW_EYE_TEXT);
     //}/
-    public void setFollowObject() {
+
+    public void setFollowObject()
+    {
         this.followComboBox.getModel().setSelectedItem(FOLLOW_OBJECT_TEXT);
     }
 
     @SuppressWarnings({"StringEquality"})
-    private void setFollow() {
+    private void setFollow()
+    {
         this.controller.setFollow((String) this.followComboBox.getSelectedItem());
         String follow = this.controller.getFollow();
 
-        if (follow == TerrainProfileLayer.FOLLOW_VIEW) {
-            if (this.showEyeCheckBox.isEnabled()) {
+        if (follow == TerrainProfileLayer.FOLLOW_VIEW)
+        {
+            if (this.showEyeCheckBox.isEnabled())
                 this.showEyeCheckBox.setEnabled(false);
-            }
-            if (!this.profileWidthSpinner.isEnabled()) {
+            if (!this.profileWidthSpinner.isEnabled())
                 this.profileWidthSpinner.setEnabled(true);
-            }
-            if (this.profileLengthSpinner.isEnabled()) {
+            if (this.profileLengthSpinner.isEnabled())
                 this.profileLengthSpinner.setEnabled(false);
-            }
-        } else if (follow == TerrainProfileLayer.FOLLOW_CURSOR) {
-            if (this.showEyeCheckBox.isEnabled()) {
+        }
+        else if (follow == TerrainProfileLayer.FOLLOW_CURSOR)
+        {
+            if (this.showEyeCheckBox.isEnabled())
                 this.showEyeCheckBox.setEnabled(false);
-            }
-            if (!this.profileWidthSpinner.isEnabled()) {
+            if (!this.profileWidthSpinner.isEnabled())
                 this.profileWidthSpinner.setEnabled(true);
-            }
-            if (this.profileLengthSpinner.isEnabled()) {
+            if (this.profileLengthSpinner.isEnabled())
                 this.profileLengthSpinner.setEnabled(false);
-            }
-        } //else if (follow == TerrainProfileLayer.FOLLOW_EYE)
+        }
+        //else if (follow == TerrainProfileLayer.FOLLOW_EYE)
         //{
         //    if (!this.showEyeCheckBox.isEnabled())
         //        this.showEyeCheckBox.setEnabled(true);
@@ -123,82 +131,87 @@ public class TerrainProfilePanel extends JPanel implements Restorable {
         //    if (!this.profileLengthSlider.isEnabled())
         //        this.profileLengthSlider.setEnabled(true);
         //}
-        else if (follow == TerrainProfileLayer.FOLLOW_OBJECT) {
-            if (!this.showEyeCheckBox.isEnabled()) {
+        else if (follow == TerrainProfileLayer.FOLLOW_OBJECT)
+        {
+            if (!this.showEyeCheckBox.isEnabled())
                 this.showEyeCheckBox.setEnabled(true);
-            }
-            if (!this.profileWidthSpinner.isEnabled()) {
+            if (!this.profileWidthSpinner.isEnabled())
                 this.profileWidthSpinner.setEnabled(true);
-            }
-            if (!this.profileLengthSpinner.isEnabled()) {
+            if (!this.profileLengthSpinner.isEnabled())
                 this.profileLengthSpinner.setEnabled(true);
-            }
-        } else if (follow == TerrainProfileLayer.FOLLOW_NONE) {
-            if (this.showEyeCheckBox.isEnabled()) {
+        }
+        else if (follow == TerrainProfileLayer.FOLLOW_NONE)
+        {
+            if (this.showEyeCheckBox.isEnabled())
                 this.showEyeCheckBox.setEnabled(false);
-            }
-            if (this.profileWidthSpinner.isEnabled()) {
+            if (this.profileWidthSpinner.isEnabled())
                 this.profileWidthSpinner.setEnabled(false);
-            }
-            if (this.profileLengthSpinner.isEnabled()) {
+            if (this.profileLengthSpinner.isEnabled())
                 this.profileLengthSpinner.setEnabled(false);
-            }
         }
     }
 
-    private void proportionalCheckBoxItemStateChanged(ItemEvent e) {
+    private void proportionalCheckBoxItemStateChanged(ItemEvent e)
+    {
         this.controller.setKeepProportions(((JCheckBox) e.getSource()).isSelected());
     }
 
-    private void showEyeCheckBoxItemStateChanged(ItemEvent e) {
+    private void showEyeCheckBoxItemStateChanged(ItemEvent e)
+    {
         this.controller.setShowEyePosition(((JCheckBox) e.getSource()).isSelected());
     }
 
-    private void zeroBaseCheckBoxItemStateChanged(ItemEvent e) {
+    private void zeroBaseCheckBoxItemStateChanged(ItemEvent e)
+    {
         this.controller.setZeroBased(((JCheckBox) e.getSource()).isSelected());
     }
 
-    private void profileWidthSpinnerStateChanged(ChangeEvent e) {
-        String value = (String) ((JSpinner) e.getSource()).getValue();
+    private void profileWidthSpinnerStateChanged(ChangeEvent e)
+    {
+        String value = (String)((JSpinner) e.getSource()).getValue();
         value = value.replace("x", "");
         this.controller.setProfileWidthFactor(Double.parseDouble(value));
-        if (this.profilesSameSize.isSelected()) {
+        if (this.profilesSameSize.isSelected())
             this.profileLengthSpinner.setValue(this.profileWidthSpinner.getValue());
-        }
     }
 
-    private void profileLengthSpinnerStateChanged(ChangeEvent e) {
-        String value = (String) ((JSpinner) e.getSource()).getValue();
+    private void profileLengthSpinnerStateChanged(ChangeEvent e)
+    {
+        String value = (String)((JSpinner) e.getSource()).getValue();
         value = value.replace("x", "");
         this.controller.setProfileLengthFactor(Double.parseDouble(value));
-        if (this.profilesSameSize.isSelected()) {
+        if (this.profilesSameSize.isSelected())
             this.profileWidthSpinner.setValue(this.profileLengthSpinner.getValue());
-        }
     }
 
-    public void profilesSameSizeStateChanged(ChangeEvent e) {
-        if (((JCheckBox) e.getSource()).isSelected()) {
+    public void profilesSameSizeStateChanged(ChangeEvent e)
+    {
+        if (((JCheckBox)e.getSource()).isSelected())
             this.profileLengthSpinner.setValue(this.profileWidthSpinner.getValue());
-        }
     }
 
-    public void profileFollowPathStateChanged(ChangeEvent e) {
-        this.controller.setWholeTrackLength(((JCheckBox) e.getSource()).isSelected());
+    public void profileFollowPathStateChanged(ChangeEvent e)
+    {
+        this.controller.setWholeTrackLength(((JCheckBox)e.getSource()).isSelected());
     }
 
-    public void updatePosition(Position position, Angle heading) {
+    public void updatePosition(Position position, Angle heading)
+    {
         this.controller.updatePosition(position, heading);
     }
 
-    public void updatePath(ArrayList<? extends LatLon> positions) {
+    public void updatePath(ArrayList<? extends LatLon> positions)
+    {
         this.controller.updatePath(positions);
     }
 
-    public String getFollow() {
+    public String getFollow()
+    {
         return this.controller.getFollow();
     }
 
-    private void initComponents() {
+    private void initComponents()
+    {
         this.panel1 = new JPanel();
         this.panel2 = new JPanel();
         this.panel6 = new JPanel();
@@ -228,109 +241,109 @@ public class TerrainProfilePanel extends JPanel implements Restorable {
 
         //======== panel1 ========
         {
-            this.panel1.setLayout(new BorderLayout(20, 20));
+        	this.panel1.setLayout(new BorderLayout(20, 20));
 
-            //======== panel2 ========
-            {
-                this.panel2.setLayout(new GridLayout(1, 2, 20, 10));
+        	//======== panel2 ========
+        	{
+        		this.panel2.setLayout(new GridLayout(1, 2, 20, 10));
 
-                //======== panel6 ========
-                {
-                    this.panel6.setLayout(new GridLayout(1, 2, 20, 10));
+        		//======== panel6 ========
+        		{
+        			this.panel6.setLayout(new GridLayout(1, 2, 20, 10));
 
-                    //======== panel5 ========
-                    {
-                        this.panel5.setLayout(new BorderLayout(5, 5));
+        			//======== panel5 ========
+        			{
+        				this.panel5.setLayout(new BorderLayout(5, 5));
 
-                        //---- sizeComboBox ----
-                        this.sizeComboBox.setModel(new DefaultComboBoxModel(new String[]{
-                            GRAPH_SIZE_SMALL_TEXT,
-                            GRAPH_SIZE_MEDIUM_TEXT,
-                            GRAPH_SIZE_LARGE_TEXT
-                        }));
-                        this.sizeComboBox.setToolTipText("Size of profile graph");
-                        this.sizeComboBox.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                sizeComboBoxActionPerformed(e);
-                            }
-                        });
-                        this.panel5.add(this.sizeComboBox, BorderLayout.CENTER);
-                    }
-                    this.panel6.add(this.panel5);
+        				//---- sizeComboBox ----
+        				this.sizeComboBox.setModel(new DefaultComboBoxModel(new String[] {
+                                GRAPH_SIZE_SMALL_TEXT,
+                                GRAPH_SIZE_MEDIUM_TEXT,
+                                GRAPH_SIZE_LARGE_TEXT
+        				}));
+        				this.sizeComboBox.setToolTipText("Size of profile graph");
+        				this.sizeComboBox.addActionListener(new ActionListener() {
+        					public void actionPerformed(ActionEvent e) {
+        						sizeComboBoxActionPerformed(e);
+        					}
+        				});
+        				this.panel5.add(this.sizeComboBox, BorderLayout.CENTER);
+        			}
+        			this.panel6.add(this.panel5);
 
-                    //======== panel7 ========
-                    {
-                        this.panel7.setLayout(new BorderLayout(5, 5));
+        			//======== panel7 ========
+        			{
+        				this.panel7.setLayout(new BorderLayout(5, 5));
 
-                        //---- followComboBox ----
-                        this.followComboBox.setModel(new DefaultComboBoxModel(new String[]{
-                            FOLLOW_VIEW_TEXT,
-                            FOLLOW_CURSOR_TEXT,
-                            //FOLLOW_EYE_TEXT,
-                            FOLLOW_OBJECT_TEXT,
+        				//---- followComboBox ----
+        				this.followComboBox.setModel(new DefaultComboBoxModel(new String[] {
+        					FOLLOW_VIEW_TEXT,
+        					FOLLOW_CURSOR_TEXT,
+        					//FOLLOW_EYE_TEXT,
+        					FOLLOW_OBJECT_TEXT,
                             FOLLOW_NONE_TEXT
                         }));
-                        this.followComboBox.setToolTipText("Set profile behavior");
-                        this.followComboBox.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                followComboBoxActionPerformed(e);
-                            }
-                        });
-                        this.panel7.add(this.followComboBox, BorderLayout.CENTER);
-                    }
-                    this.panel6.add(this.panel7);
-                }
-                this.panel2.add(this.panel6);
-            }
-            this.panel1.add(this.panel2, BorderLayout.NORTH);
+        				this.followComboBox.setToolTipText("Set profile behavior");
+        				this.followComboBox.addActionListener(new ActionListener() {
+        					public void actionPerformed(ActionEvent e) {
+        						followComboBoxActionPerformed(e);
+        					}
+        				});
+        				this.panel7.add(this.followComboBox, BorderLayout.CENTER);
+        			}
+        			this.panel6.add(this.panel7);
+        		}
+        		this.panel2.add(this.panel6);
+        	}
+        	this.panel1.add(this.panel2, BorderLayout.NORTH);
 
-            //======== panel3 ========
-            {
-                this.panel3.setLayout(new GridLayout(1, 3, 10, 10));
+        	//======== panel3 ========
+        	{
+        		this.panel3.setLayout(new GridLayout(1, 3, 10, 10));
 
-                //---- proportionalCheckBox ----
-                this.proportionalCheckBox.setText("Proportional");
-                this.proportionalCheckBox.setToolTipText("Maintain 1:1 profile dimensions");
-                this.proportionalCheckBox.setAlignmentX(0.5F);
-                this.proportionalCheckBox.addItemListener(new ItemListener() {
-                    public void itemStateChanged(ItemEvent e) {
-                        proportionalCheckBoxItemStateChanged(e);
-                    }
-                });
-                this.panel3.add(this.proportionalCheckBox);
+        		//---- proportionalCheckBox ----
+        		this.proportionalCheckBox.setText("Proportional");
+        		this.proportionalCheckBox.setToolTipText("Maintain 1:1 profile dimensions");
+        		this.proportionalCheckBox.setAlignmentX(0.5F);
+        		this.proportionalCheckBox.addItemListener(new ItemListener() {
+        			public void itemStateChanged(ItemEvent e) {
+        				proportionalCheckBoxItemStateChanged(e);
+        			}
+        		});
+        		this.panel3.add(this.proportionalCheckBox);
 
-                //---- showEyeCheckBox ----
-                this.showEyeCheckBox.setText("Show A/C Position");
-                this.showEyeCheckBox.setToolTipText("Show aircraft position in profile graph");
-                this.showEyeCheckBox.setAlignmentX(0.5F);
-                this.showEyeCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
-                this.showEyeCheckBox.setSelected(true);
-                this.showEyeCheckBox.addItemListener(new ItemListener() {
-                    public void itemStateChanged(ItemEvent e) {
-                        showEyeCheckBoxItemStateChanged(e);
-                    }
-                });
-                this.panel3.add(this.showEyeCheckBox);
+        		//---- showEyeCheckBox ----
+        		this.showEyeCheckBox.setText("Show A/C Position");
+        		this.showEyeCheckBox.setToolTipText("Show aircraft position in profile graph");
+        		this.showEyeCheckBox.setAlignmentX(0.5F);
+        		this.showEyeCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
+        		this.showEyeCheckBox.setSelected(true);
+        		this.showEyeCheckBox.addItemListener(new ItemListener() {
+        			public void itemStateChanged(ItemEvent e) {
+        				showEyeCheckBoxItemStateChanged(e);
+        			}
+        		});
+        		this.panel3.add(this.showEyeCheckBox);
 
-                //---- zeroBaseCheckBox ----
-                this.zeroBaseCheckBox.setText("MSL Base");
-                this.zeroBaseCheckBox.setToolTipText("Show mean sea level in profile graph");
-                this.zeroBaseCheckBox.setAlignmentX(0.5F);
-                this.zeroBaseCheckBox.setHorizontalAlignment(SwingConstants.TRAILING);
-                this.zeroBaseCheckBox.setSelected(true);
-                this.zeroBaseCheckBox.addItemListener(new ItemListener() {
-                    public void itemStateChanged(ItemEvent e) {
-                        zeroBaseCheckBoxItemStateChanged(e);
-                    }
-                });
-                this.panel3.add(this.zeroBaseCheckBox);
-            }
-            this.panel1.add(this.panel3, BorderLayout.CENTER);
+        		//---- zeroBaseCheckBox ----
+        		this.zeroBaseCheckBox.setText("MSL Base");
+        		this.zeroBaseCheckBox.setToolTipText("Show mean sea level in profile graph");
+        		this.zeroBaseCheckBox.setAlignmentX(0.5F);
+        		this.zeroBaseCheckBox.setHorizontalAlignment(SwingConstants.TRAILING);
+        		this.zeroBaseCheckBox.setSelected(true);
+        		this.zeroBaseCheckBox.addItemListener(new ItemListener() {
+        			public void itemStateChanged(ItemEvent e) {
+        				zeroBaseCheckBoxItemStateChanged(e);
+        			}
+        		});
+        		this.panel3.add(this.zeroBaseCheckBox);
+        	}
+        	this.panel1.add(this.panel3, BorderLayout.CENTER);
 
             //======== panel8 ========
             {
                 this.panel8.setLayout(new GridLayout(2, 2, 20, 10));
-                String[] profileSizeValues = new String[]{"x1", "x2", "x3", "x4", "x5", "x7", "x10"};
+                String[] profileSizeValues = new String[] {"x1", "x2", "x3", "x4", "x5", "x7", "x10"};
 
                 //======== panel4 ========
                 {
@@ -441,15 +454,17 @@ public class TerrainProfilePanel extends JPanel implements Restorable {
     private JPanel panel4d;
     private JCheckBox profileFollowPath;
 
-    private static class TerrainProfileController {
-
+    private static class TerrainProfileController
+    {
         private static final HashMap<String, Dimension> sizes = new HashMap<String, Dimension>();
 
-        public static String[] getSizeKeys() {
+        public static String[] getSizeKeys()
+        {
             return sizes.keySet().toArray(new String[1]);
         }
 
-        static {
+        static
+        {
             sizes.put(GRAPH_SIZE_SMALL_TEXT, new Dimension(250, 100));
             sizes.put(GRAPH_SIZE_MEDIUM_TEXT, new Dimension(450, 140));
             sizes.put(GRAPH_SIZE_LARGE_TEXT, new Dimension(655, 240));
@@ -457,11 +472,13 @@ public class TerrainProfilePanel extends JPanel implements Restorable {
 
         private static final HashMap<String, String> follows = new HashMap<String, String>();
 
-        public static String[] getFollowKeys() {
+        public static String[] getFollowKeys()
+        {
             return follows.keySet().toArray(new String[1]);
         }
 
-        static {
+        static
+        {
             follows.put(FOLLOW_VIEW_TEXT, TerrainProfileLayer.FOLLOW_VIEW);
             follows.put(FOLLOW_CURSOR_TEXT, TerrainProfileLayer.FOLLOW_CURSOR);
             //follows.put(FOLLOW_EYE_TEXT, TerrainProfileLayer.FOLLOW_EYE);
@@ -474,7 +491,8 @@ public class TerrainProfilePanel extends JPanel implements Restorable {
         private TerrainProfileLayer tpl2; // Parallel to the track
         private boolean wholeTrackLength = false;
 
-        public TerrainProfileController() {
+        public TerrainProfileController()
+        {
             this.tpl = new TerrainProfileLayer();
             this.tpl.setZeroBased(true);
             this.tpl2 = new TerrainProfileLayer();
@@ -482,125 +500,143 @@ public class TerrainProfilePanel extends JPanel implements Restorable {
             this.tpl2.setPosition(AVKey.SOUTHEAST);
         }
 
-        public WorldWindow getWwd() {
+        public WorldWindow getWwd()
+        {
             return wwd;
         }
 
-        public void setWwd(WorldWindow wwd) {
+        public void setWwd(WorldWindow wwd)
+        {
             this.wwd = wwd;
-            if (this.wwd != null) {
+            if (this.wwd != null)
+            {
                 ApplicationTemplate.insertBeforeCompass(wwd, tpl);
                 this.tpl.setEventSource(wwd);
                 ApplicationTemplate.insertBeforeCompass(wwd, tpl2);
                 this.tpl2.setEventSource(wwd);
                 this.tpl2.setPathType(Polyline.RHUMB_LINE);
                 // Move scalebar to north west
-                for (Layer layer : wwd.getModel().getLayers()) {
-                    if (layer instanceof ScalebarLayer) {
-                        ((ScalebarLayer) layer).setPosition(AVKey.NORTHWEST);
-                    }
-                }
+                for (Layer layer : wwd.getModel().getLayers())
+                    if (layer instanceof ScalebarLayer)
+                        ((ScalebarLayer)layer).setPosition(AVKey.NORTHWEST);
                 update();
             }
         }
 
-        private void update() {
-            if (this.wwd != null) {
+        private void update()
+        {
+            if (this.wwd != null)
                 this.wwd.redraw();
-            }
         }
 
-        public void setShowEyePosition(boolean showEye) {
+        public void setShowEyePosition(boolean showEye)
+        {
             this.tpl.setShowEyePosition(showEye);
             this.tpl2.setShowEyePosition(showEye);
             this.update();
         }
 
-        public boolean getShowEyePosition() {
+        public boolean getShowEyePosition()
+        {
             return this.tpl.getShowEyePosition();
         }
 
-        public void setZeroBased(boolean keepProportions) {
+        public void setZeroBased(boolean keepProportions)
+        {
             this.tpl.setZeroBased(keepProportions);
             this.tpl2.setZeroBased(keepProportions);
             this.update();
         }
 
-        public boolean getShowZeroBased() {
+        public boolean getShowZeroBased()
+        {
             return this.tpl.getZeroBased();
         }
 
-        public void setKeepProportions(boolean keepProportions) {
+        public void setKeepProportions(boolean keepProportions)
+        {
             this.tpl.setKeepProportions(keepProportions);
             this.tpl2.setKeepProportions(keepProportions);
             this.update();
         }
 
-        public boolean getKeepProportions() {
+        public boolean getKeepProportions()
+        {
             return this.tpl.getKeepProportions();
         }
 
-        public void setProfileSize(String size) {
+        public void setProfileSize(String size)
+        {
             Dimension dim = sizes.get(size);
-            if (dim != null) {
+            if (dim != null)
+            {
                 this.tpl.setSize(dim);
                 this.tpl2.setSize(dim);
                 this.update();
             }
         }
 
-        public Dimension getProfileSize() {
+        public Dimension getProfileSize()
+        {
             return this.tpl.getSize();
         }
 
-        public void setFollow(String followName) {
+        public void setFollow(String followName)
+        {
             String follow = follows.get(followName);
-            if (follow != null) {
+            if (follow != null)
+            {
                 this.tpl.setFollow(follow);
-                if (follow.equals(TerrainProfileLayer.FOLLOW_OBJECT) || follow.equals(TerrainProfileLayer.FOLLOW_EYE)) {
+                if (follow.equals(TerrainProfileLayer.FOLLOW_OBJECT) || follow.equals(TerrainProfileLayer.FOLLOW_EYE))
                     this.tpl2.setFollow(
-                            this.wholeTrackLength ? TerrainProfileLayer.FOLLOW_PATH : TerrainProfileLayer.FOLLOW_OBJECT);
-                } else {
+                        this.wholeTrackLength ? TerrainProfileLayer.FOLLOW_PATH : TerrainProfileLayer.FOLLOW_OBJECT);
+                else
                     this.tpl2.setFollow(TerrainProfileLayer.FOLLOW_NONE);
-                }
                 this.update();
             }
         }
 
-        public String getFollow() {
+        public String getFollow()
+        {
             return this.tpl.getFollow();
         }
 
-        public void setWholeTrackLength(boolean state) {
-            if (this.wholeTrackLength != state) {
+        public void setWholeTrackLength(boolean state)
+        {
+            if (this.wholeTrackLength != state)
+            {
                 this.wholeTrackLength = state;
-                if (!this.tpl2.getFollow().equals(TerrainProfileLayer.FOLLOW_NONE)) {
+                if (!this.tpl2.getFollow().equals(TerrainProfileLayer.FOLLOW_NONE))
                     this.tpl2.setFollow(
-                            this.wholeTrackLength ? TerrainProfileLayer.FOLLOW_PATH : TerrainProfileLayer.FOLLOW_OBJECT);
-                }
+                        this.wholeTrackLength ? TerrainProfileLayer.FOLLOW_PATH : TerrainProfileLayer.FOLLOW_OBJECT);
                 this.update();
             }
         }
 
-        public void setProfileWidthFactor(double factor) {
+        public void setProfileWidthFactor(double factor)
+        {
             this.tpl.setProfileLengthFactor(factor);  // perpendicular profile
             this.update();
         }
 
-        public void setProfileLengthFactor(double factor) {
+        public void setProfileLengthFactor(double factor)
+        {
             this.tpl2.setProfileLengthFactor(factor);   // along track rofile
             this.update();
         }
 
-        public double getProfileWidthFactor() {
+        public double getProfileWidthFactor()
+        {
             return this.tpl.getProfileLenghtFactor();
         }
 
-        public double getProfileLengthFactor() {
+        public double getProfileLengthFactor()
+        {
             return this.tpl2.getProfileLenghtFactor();
         }
 
-        public void updatePosition(Position position, Angle heading) {
+        public void updatePosition(Position position, Angle heading)
+        {
             this.tpl.setObjectPosition(position);
             this.tpl.setObjectHeading(heading);
             this.tpl2.setObjectPosition(position);
@@ -608,31 +644,39 @@ public class TerrainProfilePanel extends JPanel implements Restorable {
             this.update();
         }
 
-        public void updatePath(ArrayList<? extends LatLon> positions) {
+        public void updatePath(ArrayList<? extends LatLon> positions)
+        {
             this.tpl2.setPathPositions(positions);
             this.update();
         }
     }
 
     // *** Restorable interface ***
-    public String getRestorableState() {
+
+    public String getRestorableState()
+    {
         RestorableSupport rs = RestorableSupport.newRestorableSupport();
         this.doGetRestorableState(rs, null);
 
         return rs.getStateAsXml();
     }
 
-    public void restoreState(String stateInXml) {
-        if (stateInXml == null) {
+    public void restoreState(String stateInXml)
+    {
+        if (stateInXml == null)
+        {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         RestorableSupport rs;
-        try {
+        try
+        {
             rs = RestorableSupport.parse(stateInXml);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // Parsing the document specified by stateInXml failed.
             String message = Logging.getMessage("generic.ExceptionAttemptingToParseStateXml", stateInXml);
             Logging.logger().severe(message);
@@ -642,65 +686,58 @@ public class TerrainProfilePanel extends JPanel implements Restorable {
         this.doRestoreState(rs, null);
     }
 
-    protected void doGetRestorableState(RestorableSupport rs, RestorableSupport.StateObject context) {
+    protected void doGetRestorableState(RestorableSupport rs, RestorableSupport.StateObject context)
+    {
         // Add state values
-        rs.addStateValueAsString(context, "size", (String) this.sizeComboBox.getSelectedItem());
-        rs.addStateValueAsString(context, "follow", (String) this.followComboBox.getSelectedItem());
+        rs.addStateValueAsString(context, "size", (String)this.sizeComboBox.getSelectedItem());
+        rs.addStateValueAsString(context, "follow", (String)this.followComboBox.getSelectedItem());
         rs.addStateValueAsBoolean(context, "proportional", this.proportionalCheckBox.isSelected());
         rs.addStateValueAsBoolean(context, "zeroBase", this.zeroBaseCheckBox.isSelected());
         rs.addStateValueAsBoolean(context, "showEye", this.showEyeCheckBox.isSelected());
-        rs.addStateValueAsString(context, "width", (String) this.profileWidthSpinner.getValue());
-        rs.addStateValueAsString(context, "length", (String) this.profileLengthSpinner.getValue());
+        rs.addStateValueAsString(context, "width", (String)this.profileWidthSpinner.getValue());
+        rs.addStateValueAsString(context, "length", (String)this.profileLengthSpinner.getValue());
         rs.addStateValueAsBoolean(context, "sameSize", this.profilesSameSize.isSelected());
         rs.addStateValueAsBoolean(context, "followPath", this.profileFollowPath.isSelected());
     }
 
-    protected void doRestoreState(RestorableSupport rs, RestorableSupport.StateObject context) {
+    protected void doRestoreState(RestorableSupport rs, RestorableSupport.StateObject context)
+    {
         // Retrieve state values
         String sizeState = rs.getStateValueAsString(context, "size");
-        if (sizeState != null) {
+        if (sizeState != null)
             this.sizeComboBox.setSelectedItem(sizeState);
-        }
 
         String followState = rs.getStateValueAsString(context, "follow");
-        if (followState != null) {
+        if (followState != null)
             this.followComboBox.setSelectedItem(followState);
-        }
 
         Boolean proportionalState = rs.getStateValueAsBoolean(context, "proportional");
-        if (proportionalState != null) {
+        if (proportionalState != null)
             this.proportionalCheckBox.setSelected(proportionalState);
-        }
 
         Boolean zeroBaseState = rs.getStateValueAsBoolean(context, "zeroBase");
-        if (zeroBaseState != null) {
+        if (zeroBaseState != null)
             this.zeroBaseCheckBox.setSelected(zeroBaseState);
-        }
 
         Boolean showEyeState = rs.getStateValueAsBoolean(context, "showEye");
-        if (showEyeState != null) {
+        if (showEyeState != null)
             this.showEyeCheckBox.setSelected(showEyeState);
-        }
 
         String widthState = rs.getStateValueAsString(context, "width");
-        if (widthState != null) {
+        if (widthState != null)
             this.profileWidthSpinner.setValue(widthState);
-        }
 
         String lengthState = rs.getStateValueAsString(context, "length");
-        if (lengthState != null) {
+        if (lengthState != null)
             this.profileLengthSpinner.setValue(lengthState);
-        }
 
         Boolean sameSizeState = rs.getStateValueAsBoolean(context, "sameSize");
-        if (sameSizeState != null) {
+        if (sameSizeState != null)
             this.profilesSameSize.setSelected(sameSizeState);
-        }
 
         Boolean followPathState = rs.getStateValueAsBoolean(context, "followPath");
-        if (followPathState != null) {
+        if (followPathState != null)
             this.profileFollowPath.setSelected(followPathState);
-        }
     }
 
 }

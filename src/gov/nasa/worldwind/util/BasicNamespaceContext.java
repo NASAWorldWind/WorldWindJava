@@ -16,8 +16,8 @@ import java.util.*;
  * @author dcollins
  * @version $Id: BasicNamespaceContext.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BasicNamespaceContext implements NamespaceContext {
-
+public class BasicNamespaceContext implements NamespaceContext
+{
     public static final String XLINK_NS_PREFIX = "xlink";
     public static final String XLINK_NS_URI = "http://www.w3.org/1999/xlink";
 
@@ -25,14 +25,13 @@ public class BasicNamespaceContext implements NamespaceContext {
     private Map<String, Set<String>> prefixesByURI = new HashMap<String, Set<String>>();
 
     /**
-     * Sole constructor for BasicNamespaceContext. This configures the following namespaces:
-     * <table><caption style="font-weight: bold;">Namespaces</caption>
+     * Sole constructor for BasicNamespaceContext. This configures the following namespaces: <table><caption style="font-weight: bold;">Namespaces</caption>
      * <tr><th>Prefix</th><th>URI</th></tr> <tr><td>xml</td><td>http://www.w3.org/XML/1998/namespace</td></tr>
-     * <tr><td>xmlns</td><td>http://www.w3.org/2000/xmlns/</td></tr>
-     * <tr><td>xlink</td><td>http://www.w3.org/1999/xlink</td></tr>
+     * <tr><td>xmlns</td><td>http://www.w3.org/2000/xmlns/</td></tr> <tr><td>xlink</td><td>http://www.w3.org/1999/xlink</td></tr>
      * </table>
      */
-    public BasicNamespaceContext() {
+    public BasicNamespaceContext()
+    {
         // Configure the default xml and xmlns namespaces according to the documentation of the NamespaceContext
         // interface.
         this.addNamespace(XMLConstants.XML_NS_PREFIX, XMLConstants.XML_NS_URI);
@@ -43,19 +42,22 @@ public class BasicNamespaceContext implements NamespaceContext {
     /**
      * Adds a namepsace binding to this XML namespace context. The specified URI is bound to the specified prefix.
      *
-     * @param prefix the namespace prefix.
+     * @param prefix       the namespace prefix.
      * @param namespaceURI the namespace URI.
      *
      * @throws IllegalArgumentException if either the prefix or the namepsace URI are null.
      */
-    public synchronized void addNamespace(String prefix, String namespaceURI) {
-        if (prefix == null) {
+    public synchronized void addNamespace(String prefix, String namespaceURI)
+    {
+        if (prefix == null)
+        {
             String message = Logging.getMessage("nullValue.PrefixIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (namespaceURI == null) {
+        if (namespaceURI == null)
+        {
             String message = Logging.getMessage("nullValue.NamespaceURIIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -63,37 +65,43 @@ public class BasicNamespaceContext implements NamespaceContext {
 
         this.urisByPrefix.put(prefix, namespaceURI);
 
-        if (this.prefixesByURI.containsKey(namespaceURI)) {
+        if (this.prefixesByURI.containsKey(namespaceURI))
+        {
             this.prefixesByURI.get(namespaceURI).add(prefix);
-        } else {
+        }
+        else
+        {
             Set<String> set = new HashSet<String>();
             set.add(prefix);
             this.prefixesByURI.put(namespaceURI, set);
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getNamespaceURI(String prefix) {
-        if (prefix == null) {
+    /** {@inheritDoc} */
+    public String getNamespaceURI(String prefix)
+    {
+        if (prefix == null)
+        {
             String message = Logging.getMessage("nullValue.PrefixIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.urisByPrefix.containsKey(prefix)) {
+        if (this.urisByPrefix.containsKey(prefix))
+        {
             return this.urisByPrefix.get(prefix);
-        } else {
+        }
+        else
+        {
             return XMLConstants.NULL_NS_URI;
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getPrefix(String namespaceURI) {
-        if (namespaceURI == null) {
+    /** {@inheritDoc} */
+    public String getPrefix(String namespaceURI)
+    {
+        if (namespaceURI == null)
+        {
             String message = Logging.getMessage("nullValue.NamespaceURIIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -102,19 +110,22 @@ public class BasicNamespaceContext implements NamespaceContext {
         return (String) this.getPrefixes(namespaceURI).next();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Iterator getPrefixes(String namespaceURI) {
-        if (namespaceURI == null) {
+    /** {@inheritDoc} */
+    public Iterator getPrefixes(String namespaceURI)
+    {
+        if (namespaceURI == null)
+        {
             String message = Logging.getMessage("nullValue.NamespaceURIIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.prefixesByURI.containsKey(namespaceURI)) {
+        if (this.prefixesByURI.containsKey(namespaceURI))
+        {
             return Collections.unmodifiableSet(this.prefixesByURI.get(namespaceURI)).iterator();
-        } else {
+        }
+        else
+        {
             return Collections.EMPTY_SET.iterator();
         }
     }

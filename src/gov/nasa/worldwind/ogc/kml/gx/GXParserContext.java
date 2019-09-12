@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml.gx;
 
 import gov.nasa.worldwind.ogc.kml.*;
@@ -16,21 +17,28 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author tag
  * @version $Id: GXParserContext.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GXParserContext extends BasicXMLEventParserContext {
+public class GXParserContext extends BasicXMLEventParserContext
+{
+    protected static final String[] StringFields = new String[]
+        {
+            "altitudeMode",
+            "description",
+            "flyToMode",
+            "playMode",
+        };
 
-    protected static final String[] StringFields = new String[]{
-        "altitudeMode",
-        "description",
-        "flyToMode",
-        "playMode",};
+    protected static final String[] DoubleFields = new String[]
+        {
+            "duration",
+        };
 
-    protected static final String[] DoubleFields = new String[]{
-        "duration",};
+    protected static final String[] BooleanFields = new String[]
+        {
+            "balloonVisibility",
+        };
 
-    protected static final String[] BooleanFields = new String[]{
-        "balloonVisibility",};
-
-    public static Map<QName, XMLEventParser> getDefaultParsers() {
+    public static Map<QName, XMLEventParser> getDefaultParsers()
+    {
         ConcurrentHashMap<QName, XMLEventParser> parsers = new ConcurrentHashMap<QName, XMLEventParser>();
 
         String ns = GXConstants.GX_NAMESPACE;
@@ -46,17 +54,20 @@ public class GXParserContext extends BasicXMLEventParserContext {
         parsers.put(new QName(ns, "Wait"), new GXWait(ns));
 
         StringXMLEventParser stringParser = new StringXMLEventParser();
-        for (String s : StringFields) {
+        for (String s : StringFields)
+        {
             parsers.put(new QName(ns, s), stringParser);
         }
 
         DoubleXMLEventParser doubleParser = new DoubleXMLEventParser();
-        for (String s : DoubleFields) {
+        for (String s : DoubleFields)
+        {
             parsers.put(new QName(ns, s), doubleParser);
         }
 
         BooleanXMLEventParser booleanParser = new BooleanXMLEventParser();
-        for (String s : BooleanFields) {
+        for (String s : BooleanFields)
+        {
             parsers.put(new QName(ns, s), booleanParser);
         }
 

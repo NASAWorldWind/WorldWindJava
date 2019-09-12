@@ -26,8 +26,8 @@ import java.util.List;
  * @author Tom Gaskins
  * @version $Id: EllipsoidalGlobe.java 2295 2014-09-04 17:33:25Z tgaskins $
  */
-public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
-
+public class EllipsoidalGlobe extends WWObjectImpl implements Globe
+{
     protected final double equatorialRadius;
     protected final double polarRadius;
     protected final double es;
@@ -41,11 +41,12 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
      * defined by the {@link AVKey#TESSELLATOR_CLASS_NAME} configuration parameter.
      *
      * @param equatorialRadius Radius of the globe at the equator.
-     * @param polarRadius Radius of the globe at the poles.
-     * @param es Square of the globe's eccentricity.
-     * @param em Elevation model. May be null.
+     * @param polarRadius      Radius of the globe at the poles.
+     * @param es               Square of the globe's eccentricity.
+     * @param em               Elevation model. May be null.
      */
-    public EllipsoidalGlobe(double equatorialRadius, double polarRadius, double es, ElevationModel em) {
+    public EllipsoidalGlobe(double equatorialRadius, double polarRadius, double es, ElevationModel em)
+    {
         this.equatorialRadius = equatorialRadius;
         this.polarRadius = polarRadius;
         this.es = es; // assume it's consistent with the two radii
@@ -59,12 +60,13 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
      * defined by the {@link AVKey#TESSELLATOR_CLASS_NAME} configuration parameter.
      *
      * @param equatorialRadius Radius of the globe at the equator.
-     * @param polarRadius Radius of the globe at the poles.
-     * @param es Square of the globe's eccentricity.
-     * @param em Elevation model. May be null.
-     * @param center Cartesian coordinates of the globe's center point.
+     * @param polarRadius      Radius of the globe at the poles.
+     * @param es               Square of the globe's eccentricity.
+     * @param em               Elevation model. May be null.
+     * @param center           Cartesian coordinates of the globe's center point.
      */
-    public EllipsoidalGlobe(double equatorialRadius, double polarRadius, double es, ElevationModel em, Vec4 center) {
+    public EllipsoidalGlobe(double equatorialRadius, double polarRadius, double es, ElevationModel em, Vec4 center)
+    {
         this.equatorialRadius = equatorialRadius;
         this.polarRadius = polarRadius;
         this.es = es; // assume it's consistent with the two radii
@@ -73,15 +75,17 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         this.tessellator = (Tessellator) WorldWind.createConfigurationComponent(AVKey.TESSELLATOR_CLASS_NAME);
     }
 
-    protected class StateKey implements GlobeStateKey {
-
+    protected class StateKey implements GlobeStateKey
+    {
         protected Globe globe;
         protected final Tessellator tessellator;
         protected double verticalExaggeration;
         protected ElevationModel elevationModel;
 
-        public StateKey(DrawContext dc) {
-            if (dc == null) {
+        public StateKey(DrawContext dc)
+        {
+            if (dc == null)
+            {
                 String msg = Logging.getMessage("nullValue.DrawContextIsNull");
                 Logging.logger().severe(msg);
                 throw new IllegalArgumentException(msg);
@@ -93,48 +97,46 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
             this.elevationModel = this.globe.getElevationModel();
         }
 
-        public StateKey(Globe globe) {
+        public StateKey(Globe globe)
+        {
             this.globe = globe;
             this.tessellator = EllipsoidalGlobe.this.tessellator;
             this.verticalExaggeration = 1;
             this.elevationModel = this.globe.getElevationModel();
         }
 
-        public Globe getGlobe() {
+        public Globe getGlobe()
+        {
             return this.globe;
         }
 
         @SuppressWarnings({"RedundantIfStatement"})
         @Override
-        public boolean equals(Object o) {
-            if (this == o) {
+        public boolean equals(Object o)
+        {
+            if (this == o)
                 return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
+            if (o == null || getClass() != o.getClass())
                 return false;
-            }
 
             StateKey stateKey = (StateKey) o;
 
-            if (Double.compare(stateKey.verticalExaggeration, verticalExaggeration) != 0) {
+            if (Double.compare(stateKey.verticalExaggeration, verticalExaggeration) != 0)
                 return false;
-            }
-            if (elevationModel != null ? !elevationModel.equals(stateKey.elevationModel)
-                    : stateKey.elevationModel != null) {
+            if (elevationModel != null ? !elevationModel.equals(stateKey.elevationModel) :
+                stateKey.elevationModel != null)
                 return false;
-            }
-            if (globe != null ? !globe.equals(stateKey.globe) : stateKey.globe != null) {
+            if (globe != null ? !globe.equals(stateKey.globe) : stateKey.globe != null)
                 return false;
-            }
-            if (tessellator != null ? !tessellator.equals(stateKey.tessellator) : stateKey.tessellator != null) {
+            if (tessellator != null ? !tessellator.equals(stateKey.tessellator) : stateKey.tessellator != null)
                 return false;
-            }
 
             return true;
         }
 
         @Override
-        public int hashCode() {
+        public int hashCode()
+        {
             int result;
             long temp;
             result = globe != null ? globe.hashCode() : 0;
@@ -146,52 +148,65 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         }
     }
 
-    public Object getStateKey(DrawContext dc) {
+    public Object getStateKey(DrawContext dc)
+    {
         return this.getGlobeStateKey(dc);
     }
 
-    public GlobeStateKey getGlobeStateKey(DrawContext dc) {
+    public GlobeStateKey getGlobeStateKey(DrawContext dc)
+    {
         return new StateKey(dc);
     }
 
-    public GlobeStateKey getGlobeStateKey() {
+    public GlobeStateKey getGlobeStateKey()
+    {
         return new StateKey(this);
     }
 
-    public Tessellator getTessellator() {
+    public Tessellator getTessellator()
+    {
         return tessellator;
     }
 
-    public void setTessellator(Tessellator tessellator) {
+    public void setTessellator(Tessellator tessellator)
+    {
         this.tessellator = tessellator;
     }
 
-    public ElevationModel getElevationModel() {
+    public ElevationModel getElevationModel()
+    {
         return elevationModel;
     }
 
-    public void setElevationModel(ElevationModel elevationModel) {
+    public void setElevationModel(ElevationModel elevationModel)
+    {
         this.elevationModel = elevationModel;
     }
 
-    public double getRadius() {
+    public double getRadius()
+    {
         return this.equatorialRadius;
     }
 
-    public double getEquatorialRadius() {
+    public double getEquatorialRadius()
+    {
         return this.equatorialRadius;
     }
 
-    public double getPolarRadius() {
+    public double getPolarRadius()
+    {
         return this.polarRadius;
     }
 
-    public double getMaximumRadius() {
+    public double getMaximumRadius()
+    {
         return this.equatorialRadius;
     }
 
-    public double getRadiusAt(Angle latitude, Angle longitude) {
-        if (latitude == null || longitude == null) {
+    public double getRadiusAt(Angle latitude, Angle longitude)
+    {
+        if (latitude == null || longitude == null)
+        {
             String msg = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -201,14 +216,17 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         // observing that the length of the ellipsoidal point at the specified latitude and longitude indicates the
         // radius at that location. The formula for the length of the ellipsoidal point was then converted into the
         // simplified form below.
+
         double sinLat = Math.sin(latitude.radians);
         double rpm = this.equatorialRadius / Math.sqrt(1.0 - this.es * sinLat * sinLat);
 
         return rpm * Math.sqrt(1.0 + (this.es * this.es - 2.0 * this.es) * sinLat * sinLat);
     }
 
-    public double getRadiusAt(LatLon location) {
-        if (location == null) {
+    public double getRadiusAt(LatLon location)
+    {
+        if (location == null)
+        {
             String msg = Logging.getMessage("nullValue.LocationIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -217,59 +235,72 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return this.getRadiusAt(location.latitude, location.longitude);
     }
 
-    public double getEccentricitySquared() {
+    public double getEccentricitySquared()
+    {
         return this.es;
     }
 
-    public double getDiameter() {
+    public double getDiameter()
+    {
         return this.equatorialRadius * 2;
     }
 
-    public Vec4 getCenter() {
+    public Vec4 getCenter()
+    {
         return this.center;
     }
 
-    public double getMaxElevation() {
+    public double getMaxElevation()
+    {
         return this.elevationModel != null ? this.elevationModel.getMaxElevation() : 0;
     }
 
-    public double getMinElevation() {
+    public double getMinElevation()
+    {
         // TODO: The value returned might not reflect the globe's actual minimum elevation if the elevation model does
         // not span the full globe. See WWJINT-435.
         return this.elevationModel != null ? this.elevationModel.getMinElevation() : 0;
     }
 
-    public double[] getMinAndMaxElevations(Angle latitude, Angle longitude) {
-        if (latitude == null || longitude == null) {
+    public double[] getMinAndMaxElevations(Angle latitude, Angle longitude)
+    {
+        if (latitude == null || longitude == null)
+        {
             String msg = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return this.elevationModel != null ? this.elevationModel.getExtremeElevations(latitude, longitude)
-                : new double[]{0, 0};
+            : new double[] {0, 0};
     }
 
-    public double[] getMinAndMaxElevations(Sector sector) {
-        if (sector == null) {
+    public double[] getMinAndMaxElevations(Sector sector)
+    {
+        if (sector == null)
+        {
             String message = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        return this.elevationModel != null ? this.elevationModel.getExtremeElevations(sector) : new double[]{0, 0};
+        return this.elevationModel != null ? this.elevationModel.getExtremeElevations(sector) : new double[] {0, 0};
     }
 
-    public Extent getExtent() {
+    public Extent getExtent()
+    {
         return this;
     }
 
-    public double getEffectiveRadius(Plane plane) {
+    public double getEffectiveRadius(Plane plane)
+    {
         return this.getRadius();
     }
 
-    public boolean intersects(Frustum frustum) {
-        if (frustum == null) {
+    public boolean intersects(Frustum frustum)
+    {
+        if (frustum == null)
+        {
             String message = Logging.getMessage("nullValue.FrustumIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -278,20 +309,23 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return frustum.intersects(new Sphere(Vec4.ZERO, this.getRadius()));
     }
 
-    public Intersection[] intersect(Line line) {
+    public Intersection[] intersect(Line line)
+    {
         return this.intersect(line, this.equatorialRadius, this.polarRadius);
     }
 
-    public Intersection[] intersect(Line line, double altitude) {
+    public Intersection[] intersect(Line line, double altitude)
+    {
         return this.intersect(line, this.equatorialRadius + altitude, this.polarRadius + altitude);
     }
 
-    protected Intersection[] intersect(Line line, double equRadius, double polRadius) {
-        if (line == null) {
+    protected Intersection[] intersect(Line line, double equRadius, double polRadius)
+    {
+        if (line == null)
             return null;
-        }
 
         // Taken from Lengyel, 2Ed., Section 5.2.3, page 148.
+
         double m = equRadius / polRadius; // "ratio of the x semi-axis length to the y semi-axis length"
         double n = 1d;                    // "ratio of the x semi-axis length to the z semi-axis length"
         double m2 = m * m;
@@ -310,99 +344,92 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         double c = sx * sx + m2 * sy * sy + n2 * sz * sz - r2;
 
         double discriminant = discriminant(a, b, c);
-        if (discriminant < 0) {
+        if (discriminant < 0)
             return null;
-        }
 
         double discriminantRoot = Math.sqrt(discriminant);
-        if (discriminant == 0) {
+        if (discriminant == 0)
+        {
             Vec4 p = line.getPointAt((-b - discriminantRoot) / (2 * a));
-            return new Intersection[]{new Intersection(p, true)};
-        } else // (discriminant > 0)
+            return new Intersection[] {new Intersection(p, true)};
+        }
+        else // (discriminant > 0)
         {
             Vec4 near = line.getPointAt((-b - discriminantRoot) / (2 * a));
             Vec4 far = line.getPointAt((-b + discriminantRoot) / (2 * a));
             if (c >= 0) // Line originates outside the Globe.
-            {
-                return new Intersection[]{new Intersection(near, false), new Intersection(far, false)};
-            } else // Line originates inside the Globe.
-            {
-                return new Intersection[]{new Intersection(far, false)};
-            }
+                return new Intersection[] {new Intersection(near, false), new Intersection(far, false)};
+            else // Line originates inside the Globe.
+                return new Intersection[] {new Intersection(far, false)};
         }
     }
 
-    static private double discriminant(double a, double b, double c) {
+    static private double discriminant(double a, double b, double c)
+    {
         return b * b - 4 * a * c;
     }
 
-    public Intersection[] intersect(Triangle t, double elevation) {
-        if (t == null) {
+    public Intersection[] intersect(Triangle t, double elevation)
+    {
+        if (t == null)
             return null;
-        }
 
         boolean bA = isPointAboveElevation(t.getA(), elevation);
         boolean bB = isPointAboveElevation(t.getB(), elevation);
         boolean bC = isPointAboveElevation(t.getC(), elevation);
 
-        if (!(bA ^ bB) && !(bB ^ bC)) {
+        if (!(bA ^ bB) && !(bB ^ bC))
             return null; // all triangle points are either above or below the given elevation
-        }
+
         Intersection[] inter = new Intersection[2];
         int idx = 0;
 
         // Assumes that intersect(Line) returns only one intersection when the line
         // originates inside the ellipsoid at the given elevation.
-        if (bA ^ bB) {
-            if (bA) {
+        if (bA ^ bB)
+            if (bA)
                 inter[idx++] = intersect(new Line(t.getB(), t.getA().subtract3(t.getB())), elevation)[0];
-            } else {
+            else
                 inter[idx++] = intersect(new Line(t.getA(), t.getB().subtract3(t.getA())), elevation)[0];
-            }
-        }
 
-        if (bB ^ bC) {
-            if (bB) {
+        if (bB ^ bC)
+            if (bB)
                 inter[idx++] = intersect(new Line(t.getC(), t.getB().subtract3(t.getC())), elevation)[0];
-            } else {
+            else
                 inter[idx++] = intersect(new Line(t.getB(), t.getC().subtract3(t.getB())), elevation)[0];
-            }
-        }
 
-        if (bC ^ bA) {
-            if (bC) {
+        if (bC ^ bA)
+            if (bC)
                 inter[idx] = intersect(new Line(t.getA(), t.getC().subtract3(t.getA())), elevation)[0];
-            } else {
+            else
                 inter[idx] = intersect(new Line(t.getC(), t.getA().subtract3(t.getC())), elevation)[0];
-            }
-        }
 
         return inter;
     }
 
-    public boolean intersects(Line line) {
+    public boolean intersects(Line line)
+    {
         //noinspection SimplifiableIfStatement
-        if (line == null) {
+        if (line == null)
             return false;
-        }
 
         return line.distanceTo(this.center) <= this.equatorialRadius;
     }
 
-    public boolean intersects(Plane plane) {
-        if (plane == null) {
+    public boolean intersects(Plane plane)
+    {
+        if (plane == null)
             return false;
-        }
 
         double dq1 = plane.dot(this.center);
         return dq1 <= this.equatorialRadius;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public double getProjectedArea(View view) {
-        if (view == null) {
+    /** {@inheritDoc} */
+    public double getProjectedArea(View view)
+    {
+        if (view == null)
+        {
             String message = Logging.getMessage("nullValue.ViewIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -411,24 +438,26 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return WWMath.computeSphereProjectedArea(view, this.getCenter(), this.getRadius());
     }
 
-    public void applyEGMA96Offsets(String offsetsFilePath) throws IOException {
-        if (offsetsFilePath != null) {
+    public void applyEGMA96Offsets(String offsetsFilePath) throws IOException
+    {
+        if (offsetsFilePath != null)
             this.egm96 = new EGM96(offsetsFilePath);
-        } else {
+        else
             this.egm96 = null;
-        }
     }
 
     public double getElevations(Sector sector, List<? extends LatLon> latlons, double targetResolution,
-            double[] elevations) {
-        if (this.elevationModel == null) {
+        double[] elevations)
+    {
+        if (this.elevationModel == null)
             return 0;
-        }
 
         double resolution = this.elevationModel.getElevations(sector, latlons, targetResolution, elevations);
 
-        if (this.egm96 != null) {
-            for (int i = 0; i < elevations.length; i++) {
+        if (this.egm96 != null)
+        {
+            for (int i = 0; i < elevations.length; i++)
+            {
                 LatLon latLon = latlons.get(i);
                 elevations[i] = elevations[i] + this.egm96.getOffset(latLon.getLatitude(), latLon.getLongitude());
             }
@@ -438,15 +467,17 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
     }
 
     public double[] getElevations(Sector sector, List<? extends LatLon> latLons, double[] targetResolution,
-            double[] elevations) {
-        if (this.elevationModel == null) {
-            return new double[]{0};
-        }
+        double[] elevations)
+    {
+        if (this.elevationModel == null)
+            return new double[] {0};
 
         double[] resolution = this.elevationModel.getElevations(sector, latLons, targetResolution, elevations);
 
-        if (this.egm96 != null) {
-            for (int i = 0; i < elevations.length; i++) {
+        if (this.egm96 != null)
+        {
+            for (int i = 0; i < elevations.length; i++)
+            {
                 LatLon latLon = latLons.get(i);
                 elevations[i] = elevations[i] + this.egm96.getOffset(latLon.getLatitude(), latLon.getLongitude());
             }
@@ -455,28 +486,30 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return resolution;
     }
 
-    public double getElevation(Angle latitude, Angle longitude) {
-        if (latitude == null || longitude == null) {
+    public double getElevation(Angle latitude, Angle longitude)
+    {
+        if (latitude == null || longitude == null)
+        {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.elevationModel == null) {
+        if (this.elevationModel == null)
             return 0;
-        }
 
         double elevation = this.elevationModel.getElevation(latitude, longitude);
 
-        if (this.egm96 != null) {
+        if (this.egm96 != null)
             elevation += this.egm96.getOffset(latitude, longitude);
-        }
 
         return elevation;
     }
 
-    public Vec4 computePointFromPosition(Position position) {
-        if (position == null) {
+    public Vec4 computePointFromPosition(Position position)
+    {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -485,8 +518,10 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return this.geodeticToCartesian(position.getLatitude(), position.getLongitude(), position.getElevation());
     }
 
-    public Vec4 computePointFromLocation(LatLon location) {
-        if (location == null) {
+    public Vec4 computePointFromLocation(LatLon location)
+    {
+        if (location == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -495,8 +530,10 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return this.geodeticToCartesian(location.getLatitude(), location.getLongitude(), 0);
     }
 
-    public Vec4 computePointFromPosition(LatLon latLon, double metersElevation) {
-        if (latLon == null) {
+    public Vec4 computePointFromPosition(LatLon latLon, double metersElevation)
+    {
+        if (latLon == null)
+        {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -505,8 +542,10 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return this.geodeticToCartesian(latLon.getLatitude(), latLon.getLongitude(), metersElevation);
     }
 
-    public Vec4 computePointFromPosition(Angle latitude, Angle longitude, double metersElevation) {
-        if (latitude == null || longitude == null) {
+    public Vec4 computePointFromPosition(Angle latitude, Angle longitude, double metersElevation)
+    {
+        if (latitude == null || longitude == null)
+        {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -515,8 +554,10 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return this.geodeticToCartesian(latitude, longitude, metersElevation);
     }
 
-    public Position computePositionFromPoint(Vec4 point) {
-        if (point == null) {
+    public Position computePositionFromPoint(Vec4 point)
+    {
+        if (point == null)
+        {
             String message = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -525,30 +566,33 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return this.cartesianToGeodetic(point);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public void computePointsFromPositions(Sector sector, int numLat, int numLon, double[] metersElevation, Vec4[] out) {
-        if (sector == null) {
+    public void computePointsFromPositions(Sector sector, int numLat, int numLon, double[] metersElevation, Vec4[] out)
+    {
+        if (sector == null)
+        {
             String message = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (numLat <= 0 || numLon <= 0) {
+        if (numLat <= 0 || numLon <= 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "numLat <= 0 or numLon <= 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (metersElevation == null) {
+        if (metersElevation == null)
+        {
             String message = Logging.getMessage("nullValue.ElevationsIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (out == null) {
+        if (out == null)
+        {
             String message = Logging.getMessage("nullValue.OutputIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -560,13 +604,15 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
     /**
      * Returns the normal to the Globe at the specified position.
      *
-     * @param latitude the latitude of the position.
+     * @param latitude  the latitude of the position.
      * @param longitude the longitude of the position.
      *
      * @return the Globe normal at the specified position.
      */
-    public Vec4 computeSurfaceNormalAtLocation(Angle latitude, Angle longitude) {
-        if (latitude == null || longitude == null) {
+    public Vec4 computeSurfaceNormalAtLocation(Angle latitude, Angle longitude)
+    {
+        if (latitude == null || longitude == null)
+        {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -582,8 +628,10 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
      *
      * @return the Globe normal at the specified point.
      */
-    public Vec4 computeSurfaceNormalAtPoint(Vec4 point) {
-        if (point == null) {
+    public Vec4 computeSurfaceNormalAtPoint(Vec4 point)
+    {
+        if (point == null)
+        {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -599,8 +647,10 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return new Vec4(x, y, z).normalize3();
     }
 
-    public Vec4 computeNorthPointingTangentAtLocation(Angle latitude, Angle longitude) {
-        if (latitude == null || longitude == null) {
+    public Vec4 computeNorthPointingTangentAtLocation(Angle latitude, Angle longitude)
+    {
+        if (latitude == null || longitude == null)
+        {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -632,19 +682,21 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return new Vec4(x, y, z).normalize3();
     }
 
-    public Matrix computeModelCoordinateOriginTransform(Angle latitude, Angle longitude, double metersElevation) {
+    public Matrix computeModelCoordinateOriginTransform(Angle latitude, Angle longitude, double metersElevation)
+    {
         return this.computeSurfaceOrientationAtPosition(latitude, longitude, metersElevation);
     }
 
-    public Matrix computeModelCoordinateOriginTransform(Position position) {
+    public Matrix computeModelCoordinateOriginTransform(Position position)
+    {
         return this.computeSurfaceOrientationAtPosition(position);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Matrix computeSurfaceOrientationAtPosition(Angle latitude, Angle longitude, double metersElevation) {
-        if (latitude == null || longitude == null) {
+    /** {@inheritDoc} */
+    public Matrix computeSurfaceOrientationAtPosition(Angle latitude, Angle longitude, double metersElevation)
+    {
+        if (latitude == null || longitude == null)
+        {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -653,26 +705,26 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return this.computeEllipsoidalOrientationAtPosition(latitude, longitude, metersElevation);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Matrix computeSurfaceOrientationAtPosition(Position position) {
-        if (position == null) {
+    /** {@inheritDoc} */
+    public Matrix computeSurfaceOrientationAtPosition(Position position)
+    {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         return this.computeSurfaceOrientationAtPosition(position.getLatitude(), position.getLongitude(),
-                position.getElevation());
+            position.getElevation());
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public Vec4 computeEllipsoidalPointFromPosition(Angle latitude, Angle longitude, double metersElevation) {
-        if (latitude == null || longitude == null) {
+    public Vec4 computeEllipsoidalPointFromPosition(Angle latitude, Angle longitude, double metersElevation)
+    {
+        if (latitude == null || longitude == null)
+        {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -681,27 +733,27 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return this.geodeticToEllipsoidal(latitude, longitude, metersElevation);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public Vec4 computeEllipsoidalPointFromPosition(Position position) {
-        if (position == null) {
+    public Vec4 computeEllipsoidalPointFromPosition(Position position)
+    {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         return this.computeEllipsoidalPointFromPosition(position.getLatitude(), position.getLongitude(),
-                position.getAltitude());
+            position.getAltitude());
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public Vec4 computeEllipsoidalPointFromLocation(LatLon location) {
-        if (location == null) {
+    public Vec4 computeEllipsoidalPointFromLocation(LatLon location)
+    {
+        if (location == null)
+        {
             String message = Logging.getMessage("nullValue.LocationIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -710,12 +762,12 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return this.geodeticToEllipsoidal(location.getLatitude(), location.getLongitude(), 0);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public Position computePositionFromEllipsoidalPoint(Vec4 ellipsoidalPoint) {
-        if (ellipsoidalPoint == null) {
+    public Position computePositionFromEllipsoidalPoint(Vec4 ellipsoidalPoint)
+    {
+        if (ellipsoidalPoint == null)
+        {
             String message = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -724,12 +776,12 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return this.ellipsoidalToGeodetic(ellipsoidalPoint);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public Vec4 computeEllipsoidalNormalAtLocation(Angle latitude, Angle longitude) {
-        if (latitude == null || longitude == null) {
+    public Vec4 computeEllipsoidalNormalAtLocation(Angle latitude, Angle longitude)
+    {
+        if (latitude == null || longitude == null)
+        {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -752,8 +804,10 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
 
     @Override
     public Matrix computeEllipsoidalOrientationAtPosition(Angle latitude, Angle longitude,
-            double metersElevation) {
-        if (latitude == null || longitude == null) {
+        double metersElevation)
+    {
+        if (latitude == null || longitude == null)
+        {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -772,17 +826,18 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         return transform;
     }
 
-    public Position getIntersectionPosition(Line line) {
-        if (line == null) {
+    public Position getIntersectionPosition(Line line)
+    {
+        if (line == null)
+        {
             String msg = Logging.getMessage("nullValue.LineIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         Intersection[] intersections = this.intersect(line);
-        if (intersections == null) {
+        if (intersections == null)
             return null;
-        }
 
         return this.computePositionFromPoint(intersections[0].getIntersectionPoint());
     }
@@ -793,13 +848,14 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
      * coordinate system, and is 90 degrees east of the Z axis and also in the equatorial plane. Sea level is at z =
      * zero.
      *
-     * @param latitude the latitude of the position.
-     * @param longitude the longitude of the position.
+     * @param latitude        the latitude of the position.
+     * @param longitude       the longitude of the position.
      * @param metersElevation the number of meters above or below mean sea level.
      *
      * @return The Cartesian point corresponding to the input position.
      */
-    protected Vec4 geodeticToCartesian(Angle latitude, Angle longitude, double metersElevation) {
+    protected Vec4 geodeticToCartesian(Angle latitude, Angle longitude, double metersElevation)
+    {
         return this.geodeticToEllipsoidal(latitude, longitude, metersElevation);
     }
 
@@ -809,16 +865,18 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
      * coordinate system, and is 90 degrees east of the Z axis and also in the equatorial plane. Sea level is at z =
      * zero.
      *
-     * @param latitude the latitude of the position.
-     * @param longitude the longitude of the position.
+     * @param latitude        the latitude of the position.
+     * @param longitude       the longitude of the position.
      * @param metersElevation the number of meters above or below mean sea level.
      *
      * @return The ellipsoidal point corresponding to the input position.
      *
      * @see #ellipsoidalToGeodetic(gov.nasa.worldwind.geom.Vec4)
      */
-    protected Vec4 geodeticToEllipsoidal(Angle latitude, Angle longitude, double metersElevation) {
-        if (latitude == null || longitude == null) {
+    protected Vec4 geodeticToEllipsoidal(Angle latitude, Angle longitude, double metersElevation)
+    {
+        if (latitude == null || longitude == null)
+        {
             String message = Logging.getMessage("nullValue.LatitudeOrLongitudeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -829,9 +887,8 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         double cosLon = Math.cos(longitude.radians);
         double sinLon = Math.sin(longitude.radians);
 
-        double rpm
-                = // getRadius (in meters) of vertical in prime meridian
-                this.equatorialRadius / Math.sqrt(1.0 - this.es * sinLat * sinLat);
+        double rpm = // getRadius (in meters) of vertical in prime meridian
+            this.equatorialRadius / Math.sqrt(1.0 - this.es * sinLat * sinLat);
 
         double x = (rpm + metersElevation) * cosLat * sinLon;
         double y = (rpm * (1.0 - this.es) + metersElevation) * sinLat;
@@ -854,20 +911,21 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
      * For each grid point within the sector, an elevation value is specified via an array of elevations. The
      * calculation at each position incorporates the associated elevation.
      *
-     * @param sector The sector over which to generate the points.
-     * @param numLat The number of points to generate latitudinally.
-     * @param numLon The number of points to generate longitudinally.
+     * @param sector          The sector over which to generate the points.
+     * @param numLat          The number of points to generate latitudinally.
+     * @param numLon          The number of points to generate longitudinally.
      * @param metersElevation An array of elevations to incorporate in the point calculations. There must be one
-     * elevation value in the array for each generated point, so the array must have a length of at least
-     * <code>numLon x numLat</code>. Elevations are read from this array in row major order, beginning with the row of
-     * minimum latitude.
-     * @param out An array to hold the computed cartesian points. It must have a length of at least
-     * <code>numLon x numLat</code>. Points are written to this array in row major order, beginning with the row of
-     * minimum latitude.
+     *                        elevation value in the array for each generated point, so the array must have a length of
+     *                        at least <code>numLon x numLat</code>. Elevations are read from this array in row major
+     *                        order, beginning with the row of minimum latitude.
+     * @param out             An array to hold the computed cartesian points. It must have a length of at least
+     *                        <code>numLon x numLat</code>. Points are written to this array in row major order,
+     *                        beginning with the row of minimum latitude.
      *
      * @throws IllegalArgumentException If any argument is null, or if numLat or numLon are less than or equal to zero.
      */
-    protected void geodeticToCartesian(Sector sector, int numLat, int numLon, double[] metersElevation, Vec4[] out) {
+    protected void geodeticToCartesian(Sector sector, int numLat, int numLon, double[] metersElevation, Vec4[] out)
+    {
         double minLat = sector.getMinLatitude().radians;
         double maxLat = sector.getMaxLatitude().radians;
         double minLon = sector.getMinLongitude().radians;
@@ -881,11 +939,10 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         double[] cosLon = new double[numLon];
         double[] sinLon = new double[numLon];
         double lon = minLon;
-        for (int i = 0; i < numLon; i++, lon += deltaLon) {
+        for (int i = 0; i < numLon; i++, lon += deltaLon)
+        {
             if (i == numLon - 1) // explicitly set the last lon to the max longitude to ensure alignment
-            {
                 lon = maxLon;
-            }
 
             cosLon[i] = Math.cos(lon);
             sinLon[i] = Math.sin(lon);
@@ -894,18 +951,18 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         // Iterate over the latitude and longitude coordinates in the specified sector, computing the Cartesian point
         // corresponding to each latitude and longitude.
         double lat = minLat;
-        for (int j = 0; j < numLat; j++, lat += deltaLat) {
+        for (int j = 0; j < numLat; j++, lat += deltaLat)
+        {
             if (j == numLat - 1) // explicitly set the last lat to the max latitude to ensure alignment
-            {
                 lat = maxLat;
-            }
 
             // Latitude is constant for each row. Values that are a function of latitude can be computed once per row.
             double cosLat = Math.cos(lat);
             double sinLat = Math.sin(lat);
             double rpm = this.equatorialRadius / Math.sqrt(1.0 - this.es * sinLat * sinLat);
 
-            for (int i = 0; i < numLon; i++) {
+            for (int i = 0; i < numLon; i++)
+            {
                 double elev = metersElevation[pos];
                 double x = (rpm + elev) * cosLat * sinLon[i];
                 double y = (rpm * (1.0 - this.es) + elev) * sinLat;
@@ -956,6 +1013,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
 //
 //        return Position.fromRadians(lat, lon, elevation);
 //    }
+
     /**
      * Compute the geographic position to corresponds to a Cartesian point.
      *
@@ -965,7 +1023,8 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
      *
      * @see #geodeticToCartesian(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double)
      */
-    protected Position cartesianToGeodetic(Vec4 cart) {
+    protected Position cartesianToGeodetic(Vec4 cart)
+    {
         return this.ellipsoidalToGeodetic(cart);
     }
 
@@ -979,10 +1038,12 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
      * @see #geodeticToEllipsoidal(gov.nasa.worldwind.geom.Angle, gov.nasa.worldwind.geom.Angle, double)
      */
     @SuppressWarnings({"SuspiciousNameCombination"})
-    protected Position ellipsoidalToGeodetic(Vec4 cart) {
+    protected Position ellipsoidalToGeodetic(Vec4 cart)
+    {
         // Contributed by Nathan Kronenfeld. Integrated 1/24/2011. Brings this calculation in line with Vermeille's
         // most recent update.
-        if (null == cart) {
+        if (null == cart)
+        {
             String message = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -1013,23 +1074,30 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         double phi;
 
         double evoluteBorderTest = 8 * r * r * r + e4 * p * q;
-        if (evoluteBorderTest > 0 || q != 0) {
+        if (evoluteBorderTest > 0 || q != 0)
+        {
             double u;
 
-            if (evoluteBorderTest > 0) {
+            if (evoluteBorderTest > 0)
+            {
                 // Step 2: general case
                 double rad1 = Math.sqrt(evoluteBorderTest);
                 double rad2 = Math.sqrt(e4 * p * q);
 
                 // 10*e2 is my arbitrary decision of what Vermeille means by "near... the cusps of the evolute".
-                if (evoluteBorderTest > 10 * e2) {
+                if (evoluteBorderTest > 10 * e2)
+                {
                     double rad3 = Math.cbrt((rad1 + rad2) * (rad1 + rad2));
                     u = r + 0.5 * rad3 + 2 * r * r / rad3;
-                } else {
-                    u = r + 0.5 * Math.cbrt((rad1 + rad2) * (rad1 + rad2)) + 0.5 * Math.cbrt(
-                            (rad1 - rad2) * (rad1 - rad2));
                 }
-            } else {
+                else
+                {
+                    u = r + 0.5 * Math.cbrt((rad1 + rad2) * (rad1 + rad2)) + 0.5 * Math.cbrt(
+                        (rad1 - rad2) * (rad1 - rad2));
+                }
+            }
+            else
+            {
                 // Step 3: near evolute
                 double rad1 = Math.sqrt(-evoluteBorderTest);
                 double rad2 = Math.sqrt(-8 * r * r * r);
@@ -1047,7 +1115,9 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
 
             h = (k + e2 - 1) * sqrtDDpZZ / k;
             phi = 2 * Math.atan2(Z, sqrtDDpZZ + D);
-        } else {
+        }
+        else
+        {
             // Step 4: singular disk
             double rad1 = Math.sqrt(1 - e2);
             double rad2 = Math.sqrt(e2 - p);
@@ -1060,13 +1130,18 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
         // Compute lambda
         double lambda;
         double s2 = Math.sqrt(2);
-        if ((s2 - 1) * Y < sqrtXXpYY + X) {
+        if ((s2 - 1) * Y < sqrtXXpYY + X)
+        {
             // case 1 - -135deg < lambda < 135deg
             lambda = 2 * Math.atan2(Y, sqrtXXpYY + X);
-        } else if (sqrtXXpYY + Y < (s2 + 1) * X) {
+        }
+        else if (sqrtXXpYY + Y < (s2 + 1) * X)
+        {
             // case 2 - -225deg < lambda < 45deg
             lambda = -Math.PI * 0.5 + 2 * Math.atan2(X, sqrtXXpYY - Y);
-        } else {
+        }
+        else
+        {
             // if (sqrtXXpYY-Y<(s2=1)*X) {  // is the test, if needed, but it's not
             // case 3: - -45deg < lambda < 225deg
             lambda = Math.PI * 0.5 - 2 * Math.atan2(X, sqrtXXpYY + Y);
@@ -1217,11 +1292,14 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
 //        return Cylinder.compute(points);
 //    }
 
-    public SectorGeometryList tessellate(DrawContext dc) {
-        if (this.tessellator == null) {
+    public SectorGeometryList tessellate(DrawContext dc)
+    {
+        if (this.tessellator == null)
+        {
             this.tessellator = (Tessellator) WorldWind.createConfigurationComponent(AVKey.TESSELLATOR_CLASS_NAME);
 
-            if (this.tessellator == null) {
+            if (this.tessellator == null)
+            {
                 String msg = Logging.getMessage("Tessellator.TessellatorUnavailable");
                 Logging.logger().severe(msg);
                 throw new IllegalStateException(msg);
@@ -1234,33 +1312,35 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe {
     /**
      * Determines whether a point is above a given elevation
      *
-     * @param point the <code>Vec4</code> point to test.
+     * @param point     the <code>Vec4</code> point to test.
      * @param elevation the elevation to test for.
      *
      * @return true if the given point is above the given elevation.
      */
-    public boolean isPointAboveElevation(Vec4 point, double elevation) {
+    public boolean isPointAboveElevation(Vec4 point, double elevation)
+    {
         //noinspection SimplifiableIfStatement
-        if (point == null) {
+        if (point == null)
             return false;
-        }
 
         return (point.x() * point.x()) / ((this.equatorialRadius + elevation) * (this.equatorialRadius + elevation))
-                + (point.y() * point.y()) / ((this.polarRadius + elevation) * (this.polarRadius + elevation))
-                + (point.z() * point.z()) / ((this.equatorialRadius + elevation) * (this.equatorialRadius + elevation))
-                - 1 > 0;
+            + (point.y() * point.y()) / ((this.polarRadius + elevation) * (this.polarRadius + elevation))
+            + (point.z() * point.z()) / ((this.equatorialRadius + elevation) * (this.equatorialRadius + elevation))
+            - 1 > 0;
     }
 
     /**
      * Construct an elevation model given a key for a configuration source and the source's default value.
      *
-     * @param key the key identifying the configuration property in {@link Configuration}.
+     * @param key          the key identifying the configuration property in {@link Configuration}.
      * @param defaultValue the default value of the property to use if it's not found in {@link Configuration}.
      *
      * @return a new elevation model configured according to the configuration source.
      */
-    public static ElevationModel makeElevationModel(String key, String defaultValue) {
-        if (key == null) {
+    public static ElevationModel makeElevationModel(String key, String defaultValue)
+    {
+        if (key == null)
+        {
             String msg = Logging.getMessage("nullValue.KeyIsNull");
             throw new IllegalArgumentException(msg);
         }

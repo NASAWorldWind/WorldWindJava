@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.event.Message;
@@ -16,8 +17,8 @@ import gov.nasa.worldwind.util.Logging;
  * @author tag
  * @version $Id: KMLScreenOverlay.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLScreenOverlay extends KMLAbstractOverlay {
-
+public class KMLScreenOverlay extends KMLAbstractOverlay
+{
     protected KMLRenderable renderable;
 
     /**
@@ -25,27 +26,33 @@ public class KMLScreenOverlay extends KMLAbstractOverlay {
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLScreenOverlay(String namespaceURI) {
+    public KMLScreenOverlay(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
-    public KMLVec2 getOverlayXY() {
+    public KMLVec2 getOverlayXY()
+    {
         return (KMLVec2) this.getField("overlayXY");
     }
 
-    public KMLVec2 getScreenXY() {
+    public KMLVec2 getScreenXY()
+    {
         return (KMLVec2) this.getField("screenXY");
     }
 
-    public KMLVec2 getRotationXY() {
+    public KMLVec2 getRotationXY()
+    {
         return (KMLVec2) this.getField("rotationXY");
     }
 
-    public KMLVec2 getSize() {
+    public KMLVec2 getSize()
+    {
         return (KMLVec2) this.getField("size");
     }
 
-    public Double getRotation() {
+    public Double getRotation()
+    {
         return (Double) this.getField("rotation");
     }
 
@@ -57,13 +64,14 @@ public class KMLScreenOverlay extends KMLAbstractOverlay {
      * @param dc the current draw context.
      */
     @Override
-    protected void doPreRender(KMLTraversalContext tc, DrawContext dc) {
-        if (this.getRenderable() == null) {
+    protected void doPreRender(KMLTraversalContext tc, DrawContext dc)
+    {
+        if (this.getRenderable() == null)
             this.initializeRenderable(tc);
-        }
 
         KMLRenderable r = this.getRenderable();
-        if (r != null) {
+        if (r != null)
+        {
             r.preRender(tc, dc);
         }
     }
@@ -75,12 +83,14 @@ public class KMLScreenOverlay extends KMLAbstractOverlay {
      * @param dc the current draw context.
      */
     @Override
-    protected void doRender(KMLTraversalContext tc, DrawContext dc) {
+    protected void doRender(KMLTraversalContext tc, DrawContext dc)
+    {
         // We've already initialized the screen image renderable during the preRender pass. Render the screen image
         // without any further preparation.
 
         KMLRenderable r = this.getRenderable();
-        if (r != null) {
+        if (r != null)
+        {
             r.render(tc, dc);
         }
 
@@ -93,7 +103,8 @@ public class KMLScreenOverlay extends KMLAbstractOverlay {
      *
      * @param tc the current KML traversal context.
      */
-    protected void initializeRenderable(KMLTraversalContext tc) {
+    protected void initializeRenderable(KMLTraversalContext tc)
+    {
         renderable = new KMLScreenImageImpl(tc, this);
     }
 
@@ -103,13 +114,16 @@ public class KMLScreenOverlay extends KMLAbstractOverlay {
      *
      * @return The renderable, or null if the renderable has not been created yet.
      */
-    public KMLRenderable getRenderable() {
+    public KMLRenderable getRenderable()
+    {
         return renderable;
     }
 
     @Override
-    public void applyChange(KMLAbstractObject sourceValues) {
-        if (!(sourceValues instanceof KMLScreenOverlay)) {
+    public void applyChange(KMLAbstractObject sourceValues)
+    {
+        if (!(sourceValues instanceof KMLScreenOverlay))
+        {
             String message = Logging.getMessage("nullValue.SourceIsNull");
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -121,10 +135,10 @@ public class KMLScreenOverlay extends KMLAbstractOverlay {
     }
 
     @Override
-    public void onChange(Message msg) {
-        if (KMLAbstractObject.MSG_LINK_CHANGED.equals(msg.getName())) {
+    public void onChange(Message msg)
+    {
+        if (KMLAbstractObject.MSG_LINK_CHANGED.equals(msg.getName()))
             this.renderable = null;
-        }
 
         super.onChange(msg);
     }

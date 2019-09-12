@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Position;
@@ -13,8 +14,8 @@ import gov.nasa.worldwind.geom.Position;
  * @author pabercrombie
  * @version $Id: GlobeBalloon.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface GlobeBalloon extends Balloon {
-
+public interface GlobeBalloon extends Balloon
+{
     /**
      * Get the position of the balloon.
      *
@@ -40,8 +41,7 @@ public interface GlobeBalloon extends Balloon {
      * Specifies the balloon's altitude mode. Recognized modes are: <ul> <li><b>@link WorldWind#CLAMP_TO_GROUND}</b> --
      * the balloon is placed on the terrain at the latitude and longitude of its position.</li> <li><b>@link
      * WorldWind#RELATIVE_TO_GROUND}</b> -- the balloon is placed above the terrain at the latitude and longitude of its
-     * position and the distance specified by its elevation.</li>
-     * <li><b>{@link gov.nasa.worldwind.WorldWind#ABSOLUTE}</b>
+     * position and the distance specified by its elevation.</li> <li><b>{@link gov.nasa.worldwind.WorldWind#ABSOLUTE}</b>
      * -- the balloon is placed at its specified position. </ul>
      *
      * @param altitudeMode the altitude mode

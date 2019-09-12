@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWind;
@@ -22,11 +23,12 @@ import java.util.*;
  * @author tag
  * @version $Id: Polygons.java 2291 2014-08-30 21:38:47Z tgaskins $
  */
-public class Polygons extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+public class Polygons extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             super(true, true, false);
 
             // Add a dragger to enable shape dragging
@@ -86,7 +88,7 @@ public class Polygons extends ApplicationTemplate {
             normalAttributes.setInteriorOpacity(1);
             pgon.setAttributes(normalAttributes);
             pgon.setHighlightAttributes(highlightAttributes);
-            float[] texCoords = new float[]{0, 0, 1, 0, 1, 1, 0, 1, 0, 0};
+            float[] texCoords = new float[] {0, 0, 1, 0, 1, 1, 0, 1, 0, 0};
             pgon.setTextureImageSource("images/32x32-icon-nasa.png", texCoords, 5);
             layer.addRenderable(pgon);
 
@@ -134,7 +136,8 @@ public class Polygons extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Polygons", AppFrame.class);
     }
 }

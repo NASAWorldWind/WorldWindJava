@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author dcollins
  * @version $Id: JSONEventParser.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface JSONEventParser {
-
+public interface JSONEventParser
+{
     Object parse(JSONEventParserContext ctx, JSONEvent event) throws IOException;
 }

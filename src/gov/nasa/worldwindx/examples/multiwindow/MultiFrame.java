@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.multiwindow;
 
 import gov.nasa.worldwind.*;
@@ -28,20 +29,21 @@ import java.awt.*;
  * shared among WorldWindows. Those that cannot be shared have an operational dependency on the WorldWindow they're
  * associated with. An example is the {@link gov.nasa.worldwind.layers.ViewControlsLayer} layer for on-screen
  * navigation. Because this layer responds to input events within a specific WorldWindow, it is not sharable. Refer to
- * the WorldWind Overview page for a list of layers that cannot be shared. // TODO: include the reference to
- * overview.html.
+ * the WorldWind Overview page for a list of layers that cannot be shared.
+ * // TODO: include the reference to overview.html.
  *
  * @author tag
  * @version $Id: MultiFrame.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class MultiFrame {
-
+public class MultiFrame
+{
     // A panel to hold a WorldWindow and status bar.
-    private static class WWPanel extends JPanel {
-
+    private static class WWPanel extends JPanel
+    {
         private WorldWindowGLCanvas wwd;
 
-        public WWPanel(WorldWindowGLCanvas shareWith, int width, int height, Model model) {
+        public WWPanel(WorldWindowGLCanvas shareWith, int width, int height, Model model)
+        {
             // To share resources among WorldWindows, pass the first WorldWindow to the constructor of the other
             // WorldWindows.
             this.wwd = shareWith != null ? new WorldWindowGLCanvas(shareWith) : new WorldWindowGLCanvas();
@@ -58,11 +60,12 @@ public class MultiFrame {
     }
 
     // A JFrame to hold one WorldWindow panel. Multiple of these are created in main below.
-    private static class CanvasFrame extends javax.swing.JFrame {
-
+    private static class CanvasFrame extends javax.swing.JFrame
+    {
         private WWPanel wwp;
 
-        public CanvasFrame(WorldWindow shareWith, Model model, String side) {
+        public CanvasFrame(WorldWindow shareWith, Model model, String side)
+        {
             this.getContentPane().setLayout(new BorderLayout(5, 5));
 
             this.wwp = new WWPanel((WorldWindowGLCanvas) shareWith, 500, 500, model);
@@ -85,17 +88,21 @@ public class MultiFrame {
         }
     }
 
-    public static void main(String[] args) {
-        try {
+    public static void main(String[] args)
+    {
+        try
+        {
             // Create a Model for each window, starting with the Globe they share.
             Globe earth = new Earth();
 
             // Create layers that both WorldWindows can share.
-            Layer[] layers = new Layer[]{
-                new StarsLayer(),
-                new CompassLayer(),
-                new BMNGWMSLayer(),
-                new LandsatI3WMSLayer(),};
+            Layer[] layers = new Layer[]
+                {
+                    new StarsLayer(),
+                    new CompassLayer(),
+                    new BMNGWMSLayer(),
+                    new LandsatI3WMSLayer(),
+                };
 
             // Create two models and pass them the shared layers.
             Model modelForWindowA = new BasicModel();
@@ -128,7 +135,9 @@ public class MultiFrame {
             ViewControlsLayer viewControlsB = new ViewControlsLayer();
             frameB.wwp.wwd.getModel().getLayers().add(viewControlsB);
             frameB.wwp.wwd.addSelectListener(new ViewControlsSelectListener(frameB.wwp.wwd, viewControlsB));
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

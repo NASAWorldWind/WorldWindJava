@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.dataimport;
 
 import gov.nasa.worldwind.*;
@@ -32,44 +33,52 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author tag
  * @version $Id: InstallDTED.java 2915 2015-03-20 16:48:43Z tgaskins $
  */
-public class InstallDTED extends ApplicationTemplate {
-
+public class InstallDTED extends ApplicationTemplate
+{
     // Define a subdirectory in the installed-data area to place the installed elevation tiles.
     protected static final String BASE_CACHE_PATH = "DTED0/";
 
     // Override ApplicationTemplate.AppFrame's constructor to install an elevation dataset.
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
         protected ProgressMonitor progressMonitor;
         protected PropertyChangeListener progressListener;
         protected java.util.Timer progressTimer;
         protected TiledElevationProducer producer;
 
-        public AppFrame() {
-            Timer timer = new Timer(3000, new ActionListener() {
+        public AppFrame()
+        {
+            Timer timer = new Timer(3000, new ActionListener()
+            {
                 @Override
-                public void actionPerformed(ActionEvent e) {
+                public void actionPerformed(ActionEvent e)
+                {
                     JFileChooser fileChooser = new JFileChooser();
                     fileChooser.setDialogTitle("Choose a DTED folder");
                     fileChooser.setApproveButtonText("Choose");
                     fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                     fileChooser.setMultiSelectionEnabled(false);
                     int status = fileChooser.showOpenDialog(wwjPanel);
-                    if (status == JFileChooser.APPROVE_OPTION) {
+                    if (status == JFileChooser.APPROVE_OPTION)
+                    {
                         final File sourceDir = fileChooser.getSelectedFile();
 
                         // Show the WAIT cursor because the installation may take a while.
                         setCursor(new Cursor(Cursor.WAIT_CURSOR));
 
                         // Install the elevations on a thread other than the event-dispatch thread to avoid freezing the UI.
-                        Thread t = new Thread(new Runnable() {
-                            public void run() {
+                        Thread t = new Thread(new Runnable()
+                        {
+                            public void run()
+                            {
                                 installElevations(sourceDir);
 
                                 // Clean up everything on the event dispatch thread.
-                                SwingUtilities.invokeLater(new Runnable() {
+                                SwingUtilities.invokeLater(new Runnable()
+                                {
                                     @Override
-                                    public void run() {
+                                    public void run()
+                                    {
                                         // Restore the cursor.
                                         setCursor(Cursor.getDefaultCursor());
 
@@ -96,7 +105,8 @@ public class InstallDTED extends ApplicationTemplate {
             timer.start();
         }
 
-        protected void installElevations(File sourceDir) {
+        protected void installElevations(File sourceDir)
+        {
             // Get a reference to the FileStore into which we'll install the elevations.
             FileStore fileStore = WorldWind.getDataFileStore();
 
@@ -105,15 +115,16 @@ public class InstallDTED extends ApplicationTemplate {
             this.findDTEDFiles(sourceDir, sources);
             System.out.println("Found " + sources.size() + " DTED files.");
             final ElevationModel em = installElevations("DTED Elevations", sources, fileStore);
-            if (em == null) {
+            if (em == null)
                 return;
-            }
 
             // Add the new elevation model to the current (default) one. Must do it on the event dispatch thread.
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                public void run()
+                {
                     CompoundElevationModel model
-                            = (CompoundElevationModel) AppFrame.this.getWwd().getModel().getGlobe().getElevationModel();
+                        = (CompoundElevationModel) AppFrame.this.getWwd().getModel().getGlobe().getElevationModel();
                     model.addElevationModel(em);
 
                     // Set the view to look at the installed elevations. Get the location from the elevation model's
@@ -125,24 +136,29 @@ public class InstallDTED extends ApplicationTemplate {
             });
         }
 
-        protected void findDTEDFiles(File directory, ArrayList<File> files) {
+        protected void findDTEDFiles(File directory, ArrayList<File> files)
+        {
             File[] thisDirectoryFiles = directory.listFiles();
-            if (thisDirectoryFiles == null) {
+            if (thisDirectoryFiles == null)
                 return;
-            }
 
-            for (File file : thisDirectoryFiles) {
-                if (file.isDirectory()) {
+            for (File file : thisDirectoryFiles)
+            {
+                if (file.isDirectory())
+                {
                     this.findDTEDFiles(file, files);
-                } else if (file.getName().endsWith("dt0")
-                        || file.getName().endsWith("dt1")
-                        || file.getName().endsWith("dt2")) {
+                }
+                else if (file.getName().endsWith("dt0")
+                    || file.getName().endsWith("dt1")
+                    || file.getName().endsWith("dt2"))
+                {
                     files.add(file);
                 }
             }
         }
 
-        protected ElevationModel installElevations(String displayName, ArrayList<File> sources, FileStore fileStore) {
+        protected ElevationModel installElevations(String displayName, ArrayList<File> sources, FileStore fileStore)
+        {
             // Use the FileStore's install location as the destination for the imported elevation tiles. The install
             // location is an area in the data file store for permanent storage.
             File fileStoreLocation = DataInstallUtil.getDefaultInstallLocation(fileStore);
@@ -166,17 +182,22 @@ public class InstallDTED extends ApplicationTemplate {
             this.producer.setStoreParameters(params);
             this.producer.offerAllDataSources(sources);
 
-            try {
+            try
+            {
                 // Install the elevations.
                 System.out.println("Starting production");
-                SwingUtilities.invokeLater(new Runnable() {
+                SwingUtilities.invokeLater(new Runnable()
+                {
                     @Override
-                    public void run() {
+                    public void run()
+                    {
                         setupProgressMonitor();
                     }
                 });
                 this.producer.startProduction();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 this.producer.removeProductionState();
                 e.printStackTrace();
                 return null;
@@ -187,21 +208,20 @@ public class InstallDTED extends ApplicationTemplate {
             // completed, the TiledElevationProducer should always contain a document in the production results, but
             // test the results anyway.
             Iterable<?> results = this.producer.getProductionResults();
-            if (results == null || results.iterator() == null || !results.iterator().hasNext()) {
+            if (results == null || results.iterator() == null || !results.iterator().hasNext())
                 return null;
-            }
 
             Object o = results.iterator().next();
-            if (o == null || !(o instanceof Document)) {
+            if (o == null || !(o instanceof Document))
                 return null;
-            }
 
             // Construct an ElevationModel by passing the data configuration document to an ElevationModelFactory.
             return (ElevationModel) BasicFactory.create(AVKey.ELEVATION_MODEL_FACTORY,
-                    ((Document) o).getDocumentElement());
+                ((Document) o).getDocumentElement());
         }
 
-        protected void setupProgressMonitor() {
+        protected void setupProgressMonitor()
+        {
             // Create a ProgressMonitor that will provide feedback on the installation.
             this.progressMonitor = new ProgressMonitor(this.wwjPanel, "Installing", null, 0, 100);
 
@@ -209,15 +229,15 @@ public class InstallDTED extends ApplicationTemplate {
 
             // Configure the ProgressMonitor to receive progress events from the DataStoreProducer. This stops sending
             // progress events when the user clicks the "Cancel" button, ensuring that the ProgressMonitor does not
-            this.progressListener = new PropertyChangeListener() {
-                public void propertyChange(PropertyChangeEvent evt) {
-                    if (progressMonitor.isCanceled()) {
+            this.progressListener = new PropertyChangeListener()
+            {
+                public void propertyChange(PropertyChangeEvent evt)
+                {
+                    if (progressMonitor.isCanceled())
                         return;
-                    }
 
-                    if (evt.getPropertyName().equals(AVKey.PROGRESS)) {
+                    if (evt.getPropertyName().equals(AVKey.PROGRESS))
                         progress.set((int) (100 * (Double) evt.getNewValue()));
-                    }
                 }
             };
             this.producer.addPropertyChangeListener(this.progressListener);
@@ -227,11 +247,14 @@ public class InstallDTED extends ApplicationTemplate {
             // production as soon as possible. This just stops the production from completing; it doesn't clean up any state
             // changes made during production,
             this.progressTimer = new java.util.Timer();
-            this.progressTimer.schedule(new TimerTask() {
-                public void run() {
+            this.progressTimer.schedule(new TimerTask()
+            {
+                public void run()
+                {
                     progressMonitor.setProgress(progress.get());
 
-                    if (progressMonitor.isCanceled()) {
+                    if (progressMonitor.isCanceled())
+                    {
                         producer.stopProduction();
                         this.cancel();
                     }
@@ -240,7 +263,8 @@ public class InstallDTED extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind DTED Installation", InstallDTED.AppFrame.class);
     }
 }

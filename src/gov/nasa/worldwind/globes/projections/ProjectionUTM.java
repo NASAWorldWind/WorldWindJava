@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.globes.projections;
 
 import gov.nasa.worldwind.geom.Angle;
@@ -14,16 +15,15 @@ import gov.nasa.worldwind.util.Logging;
  * @author tag
  * @version $Id: ProjectionUTM.java 2097 2014-06-25 18:19:42Z tgaskins $
  */
-public class ProjectionUTM extends ProjectionTransverseMercator {
-
+public class ProjectionUTM extends ProjectionTransverseMercator
+{
     protected static final int DEFAULT_ZONE = 1;
 
     protected int zone = DEFAULT_ZONE;
 
-    /**
-     * Creates a projection for UTM zone 1.
-     */
-    public ProjectionUTM() {
+    /** Creates a projection for UTM zone 1. */
+    public ProjectionUTM()
+    {
         super(centralMeridianForZone(DEFAULT_ZONE));
     }
 
@@ -34,11 +34,13 @@ public class ProjectionUTM extends ProjectionTransverseMercator {
      *
      * @throws IllegalArgumentException if the specified zone is less than 1 or greater than 60.
      */
-    public ProjectionUTM(int zone) {
+    public ProjectionUTM(int zone)
+    {
         super(centralMeridianForZone(zone));
     }
 
-    protected double getScale() {
+    protected double getScale()
+    {
         return 0.9996;
     }
 
@@ -47,7 +49,8 @@ public class ProjectionUTM extends ProjectionTransverseMercator {
      *
      * @return The UTM zone, a value between 1 and 60, inclusive.
      */
-    public int getZone() {
+    public int getZone()
+    {
         return zone;
     }
 
@@ -59,8 +62,10 @@ public class ProjectionUTM extends ProjectionTransverseMercator {
      * @throws IllegalArgumentException If the specified zone is less than 1 or greater than 60.
      * @see ProjectionTransverseMercator
      */
-    public void setZone(int zone) {
-        if (zone < 1 || zone > 60) {
+    public void setZone(int zone)
+    {
+        if (zone < 1 || zone > 60)
+        {
             String message = Logging.getMessage("UTM.InvalidZone", zone);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -71,8 +76,10 @@ public class ProjectionUTM extends ProjectionTransverseMercator {
         this.setCentralMeridian(centralMeridianForZone(this.zone));
     }
 
-    public static Angle centralMeridianForZone(int zone) {
-        if (zone < 1 || zone > 60) {
+    public static Angle centralMeridianForZone(int zone)
+    {
+        if (zone < 1 || zone > 60)
+        {
             String message = Logging.getMessage("UTM.InvalidZone", zone);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);

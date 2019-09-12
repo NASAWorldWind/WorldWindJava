@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.exception;
 
 /**
@@ -11,9 +12,10 @@ package gov.nasa.worldwind.exception;
  * @author tag
  * @version $Id: NoItemException.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class NoItemException extends WWRuntimeException {
-
-    public NoItemException(String string) {
+public class NoItemException extends WWRuntimeException
+{
+    public NoItemException(String string)
+    {
         super(string);
     }
 }

@@ -18,8 +18,8 @@ import gov.nasa.worldwind.util.RestorableSupport;
  * @author dcollins
  * @version $Id: ShapeAttributes.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface ShapeAttributes extends Exportable {
-
+public interface ShapeAttributes extends Exportable
+{
     /**
      * Returns a new ShapeAttributes instance of the same type as this ShapeAttributes who's properties are configured
      * exactly as this ShapeAttributes.
@@ -52,7 +52,7 @@ public interface ShapeAttributes extends Exportable {
      * attributes knows that the attributes are complete when unresolved is <code>false</code>.
      *
      * @param unresolved <code>true</code> to specify that one or more attributes are unresolved, otherwise
-     * <code>false</code>.
+     *                   <code>false</code>.
      *
      * @see #isUnresolved()
      */
@@ -315,7 +315,7 @@ public interface ShapeAttributes extends Exportable {
      * shape is rendered.
      *
      * @param imageSource the source of the shape's texture, either a <code>String</code> path, a <code>URL</code>, a
-     * <code>BufferedImage</code>, or <code>null</code>.
+     *                    <code>BufferedImage</code>, or <code>null</code>.
      *
      * @see #getImageSource()
      */
@@ -324,8 +324,8 @@ public interface ShapeAttributes extends Exportable {
     /**
      * Indicates the amount the shape's texture is scaled by as a floating-point value.
      *
-     * @return the amount the shape's texture is scaled by as a floating-point value. This value is always greater than
-     * zero.
+     * @return the amount the shape's texture is scaled by as a floating-point value. This value is always greater
+     *         than zero.
      *
      * @see #setImageScale(double)
      */

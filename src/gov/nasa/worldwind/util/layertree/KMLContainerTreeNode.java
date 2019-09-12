@@ -15,8 +15,8 @@ import gov.nasa.worldwind.util.tree.TreeNode;
  * @author dcollins
  * @version $Id: KMLContainerTreeNode.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLContainerTreeNode extends KMLFeatureTreeNode {
-
+public class KMLContainerTreeNode extends KMLFeatureTreeNode
+{
     /**
      * Creates a new <code>KMLContainerTreeNode</code> from the specified <code>container</code>. The node's name is set
      * to the feature's name, and the node's hierarchy is populated from the container's KML features.
@@ -25,7 +25,8 @@ public class KMLContainerTreeNode extends KMLFeatureTreeNode {
      *
      * @throws IllegalArgumentException if the <code>container</code> is <code>null</code>.
      */
-    public KMLContainerTreeNode(KMLAbstractContainer container) {
+    public KMLContainerTreeNode(KMLAbstractContainer container)
+    {
         super(container);
     }
 
@@ -35,29 +36,28 @@ public class KMLContainerTreeNode extends KMLFeatureTreeNode {
      * @return this node's KML container.
      */
     @Override
-    public KMLAbstractContainer getFeature() {
+    public KMLAbstractContainer getFeature()
+    {
         return (KMLAbstractContainer) super.getFeature();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected void initialize() {
+    protected void initialize()
+    {
         super.initialize();
         this.refresh();
     }
 
-    /**
-     * Populate this node's hierarchy from the KML features in its <code>KMLAbstractContainer</code>.
-     */
-    protected void refresh() {
+    /** Populate this node's hierarchy from the KML features in its <code>KMLAbstractContainer</code>. */
+    protected void refresh()
+    {
         this.removeAllChildren();
 
-        for (KMLAbstractFeature child : this.getFeature().getFeatures()) {
-            if (child != null) {
+        for (KMLAbstractFeature child : this.getFeature().getFeatures())
+        {
+            if (child != null)
                 this.addFeatureNode(child);
-            }
         }
     }
 
@@ -66,10 +66,10 @@ public class KMLContainerTreeNode extends KMLFeatureTreeNode {
      *
      * @param feature the KML feature to add.
      */
-    protected void addFeatureNode(KMLAbstractFeature feature) {
+    protected void addFeatureNode(KMLAbstractFeature feature)
+    {
         TreeNode featureNode = KMLFeatureTreeNode.fromKMLFeature(feature);
-        if (featureNode != null) {
+        if (featureNode != null)
             this.addChild(featureNode);
-        }
     }
 }

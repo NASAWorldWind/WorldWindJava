@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.geom;
 
 import gov.nasa.worldwind.globes.*;
@@ -14,15 +15,15 @@ import gov.nasa.worldwind.globes.*;
  * @author tag
  * @version $Id: MeasurableArea.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface MeasurableArea {
-
+public interface MeasurableArea
+{
     /**
      * Returns the object's area in square meters. If the object conforms to terrain, the area returned is the surface
      * area of the terrain, including its hillsides and other undulations.
      *
      * @param globe The globe the object is related to.
      * @return the object's area in square meters. Returns -1 if the object does not form an area due to an insufficient
-     * number of vertices or any other condition.
+     *         number of vertices or any other condition.
      * @throws IllegalArgumentException if the <code>globe</code> is null.
      */
     double getArea(Globe globe);
@@ -33,7 +34,7 @@ public interface MeasurableArea {
      *
      * @param globe The globe the object is related to.
      * @return the object's perimeter in meters. Returns -1 if the object does not form an area due to an insufficient
-     * number of vertices or any other condition.
+     *         number of vertices or any other condition.
      * @throws IllegalArgumentException if the <code>globe</code> is null.
      */
     double getPerimeter(Globe globe);

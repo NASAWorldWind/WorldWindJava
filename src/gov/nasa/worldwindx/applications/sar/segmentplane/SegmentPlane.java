@@ -17,10 +17,10 @@ import java.util.*;
  * @author dcollins
  * @version $Id: SegmentPlane.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SegmentPlane extends WWObjectImpl {
-
-    public static class ControlPoint {
-
+public class SegmentPlane extends WWObjectImpl
+{
+    public static class ControlPoint
+    {
         private Object owner;
         private Object key;
         private double uCoordinate;
@@ -29,13 +29,16 @@ public class SegmentPlane extends WWObjectImpl {
         private String shapeType;
 
         public ControlPoint(Object owner, Object key, double uCoordinate, double vCoordinate,
-                boolean relativeToSurface, String shapeType) {
-            if (owner == null) {
+            boolean relativeToSurface, String shapeType)
+        {
+            if (owner == null)
+            {
                 String message = Logging.getMessage("nullValue.OwnerIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
             }
-            if (key == null) {
+            if (key == null)
+            {
                 String message = Logging.getMessage("nullValue.KeyIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -49,50 +52,56 @@ public class SegmentPlane extends WWObjectImpl {
             this.shapeType = shapeType;
         }
 
-        public Object getOwner() {
+        public Object getOwner()
+        {
             return this.owner;
         }
 
-        public Object getKey() {
+        public Object getKey()
+        {
             return this.key;
         }
 
-        public double[] getCoordinates() {
-            return new double[]{this.uCoordinate, this.vCoordinate};
+        public double[] getCoordinates()
+        {
+            return new double[] {this.uCoordinate, this.vCoordinate};
         }
 
-        public boolean isRelativeToSurface() {
+        public boolean isRelativeToSurface()
+        {
             return this.relativeToSurface;
         }
 
-        public String getShapeType() {
+        public String getShapeType()
+        {
             return this.shapeType;
         }
     }
 
-    protected static class StateKey {
-
+    protected static class StateKey
+    {
         private final SegmentPlane segmentPlane;
         private final long serialNumber;
 
-        public StateKey(SegmentPlane segmentPlane, long serialNumber) {
+        public StateKey(SegmentPlane segmentPlane, long serialNumber)
+        {
             this.segmentPlane = segmentPlane;
             this.serialNumber = serialNumber;
         }
 
-        public boolean equals(Object o) {
-            if (this == o) {
+        public boolean equals(Object o)
+        {
+            if (this == o)
                 return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
+            if (o == null || getClass() != o.getClass())
                 return false;
-            }
 
             StateKey that = (StateKey) o;
             return this.segmentPlane.equals(that.segmentPlane) && (this.serialNumber == that.serialNumber);
         }
 
-        public int hashCode() {
+        public int hashCode()
+        {
             int result = this.segmentPlane != null ? this.segmentPlane.hashCode() : 0;
             result = 31 * result + (int) (this.serialNumber ^ (this.serialNumber >>> 32));
             return result;
@@ -137,7 +146,8 @@ public class SegmentPlane extends WWObjectImpl {
     private List<ControlPoint> controlPointList;
     protected long serialNumber = 1;
 
-    public SegmentPlane() {
+    public SegmentPlane()
+    {
         this.visible = true;
         this.attributes = new SegmentPlaneAttributes();
         this.planeLowerAltitude = 0.0;
@@ -160,36 +170,43 @@ public class SegmentPlane extends WWObjectImpl {
         this.addDefaultAttributes(SEGMENT_END);
         this.addDefaultAttributes(ALTIMETER);
 
-        this.addDefaultControlPoint(CONTROL_POINT_LOWER_RIGHT, 1.0, 0.0, true, BasicMarkerShape.SPHERE);
-        this.addDefaultControlPoint(CONTROL_POINT_UPPER_RIGHT, 1.0, 1.0, false, BasicMarkerShape.SPHERE);
-        this.addDefaultControlPoint(CONTROL_POINT_TOP_EDGE, 0.5, 1.0, false, BasicMarkerShape.SPHERE);
+        this.addDefaultControlPoint(CONTROL_POINT_LOWER_RIGHT,  1.0, 0.0, true, BasicMarkerShape.SPHERE);
+        this.addDefaultControlPoint(CONTROL_POINT_UPPER_RIGHT,  1.0, 1.0, false, BasicMarkerShape.SPHERE);
+        this.addDefaultControlPoint(CONTROL_POINT_TOP_EDGE,     0.5, 1.0, false, BasicMarkerShape.SPHERE);
         this.addDefaultControlPoint(CONTROL_POINT_LEADING_EDGE, 1.0, 0.5, true, BasicMarkerShape.SPHERE);
     }
 
-    protected void addDefaultAttributes(Object key) {
+    protected void addDefaultAttributes(Object key)
+    {
         this.getAttributes().setGeometryAttributes(key, new SegmentPlaneAttributes.GeometryAttributes());
         this.getAttributes().setLabelAttributes(key, new SegmentPlaneAttributes.LabelAttributes());
     }
 
-    protected void addDefaultControlPoint(Object key, double u, double v, boolean relativeToSurface, String shapeType) {
+    protected void addDefaultControlPoint(Object key, double u, double v, boolean relativeToSurface, String shapeType)
+    {
         this.addControlPoint(new ControlPoint(this, key, u, v, relativeToSurface, shapeType));
         this.addDefaultAttributes(key);
     }
 
-    public boolean isVisible() {
+    public boolean isVisible()
+    {
         return this.visible;
     }
 
-    public void setVisible(boolean visible) {
+    public void setVisible(boolean visible)
+    {
         this.visible = visible;
     }
 
-    public SegmentPlaneAttributes getAttributes() {
+    public SegmentPlaneAttributes getAttributes()
+    {
         return attributes;
     }
 
-    public void setAttributes(SegmentPlaneAttributes attributes) {
-        if (attributes == null) {
+    public void setAttributes(SegmentPlaneAttributes attributes)
+    {
+        if (attributes == null)
+        {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -198,8 +215,9 @@ public class SegmentPlane extends WWObjectImpl {
         this.attributes = attributes;
     }
 
-    public double[] getPlaneAltitudes() {
-        return new double[]{this.planeLowerAltitude, this.planeUpperAltitude};
+    public double[] getPlaneAltitudes()
+    {
+        return new double[] {this.planeLowerAltitude, this.planeUpperAltitude};
     }
 
     /**
@@ -208,7 +226,8 @@ public class SegmentPlane extends WWObjectImpl {
      * @param lowerAltitude the lower altitude limit, in meters relative to mean sea level
      * @param upperAltitude the upper altitude limit, in meters relative to mean sea level
      */
-    public void setPlaneAltitudes(double lowerAltitude, double upperAltitude) {
+    public void setPlaneAltitudes(double lowerAltitude, double upperAltitude)
+    {
         double[] oldAltitudes = this.getPlaneAltitudes();
 
         this.planeLowerAltitude = lowerAltitude;
@@ -218,17 +237,21 @@ public class SegmentPlane extends WWObjectImpl {
         this.firePropertyChange(PLANE_ALTITUDES, oldAltitudes, this.getPlaneAltitudes());
     }
 
-    public LatLon[] getPlaneLocations() {
-        return new LatLon[]{this.planeLocation1, this.planeLocation2};
+    public LatLon[] getPlaneLocations()
+    {
+        return new LatLon[] {this.planeLocation1, this.planeLocation2};
     }
 
-    public void setPlaneLocations(LatLon location1, LatLon location2) {
-        if (location1 == null) {
+    public void setPlaneLocations(LatLon location1, LatLon location2)
+    {
+        if (location1 == null)
+        {
             String message = "nullValue.Location1IsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (location2 == null) {
+        if (location2 == null)
+        {
             String message = "nullValue.Location2IsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -243,17 +266,21 @@ public class SegmentPlane extends WWObjectImpl {
         this.firePropertyChange(PLANE_LOCATIONS, oldLocations, this.getPlaneLocations());
     }
 
-    public double[] getGridCellDimensions() {
-        return new double[]{this.gridCellWidth, this.gridCellHeight};
+    public double[] getGridCellDimensions()
+    {
+        return new double[] {this.gridCellWidth, this.gridCellHeight};
     }
 
-    public void setGridCellDimensions(double width, double height) {
-        if (width <= 0.0) {
+    public void setGridCellDimensions(double width, double height)
+    {
+        if (width <= 0.0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "width <= 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (height <= 0.0) {
+        if (height <= 0.0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "height <= 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -268,35 +295,43 @@ public class SegmentPlane extends WWObjectImpl {
         this.firePropertyChange(PLANE_GRID_DIMENSIONS, oldGridDimensions, this.getGridCellDimensions());
     }
 
-    public int getPlaneOutlineMask() {
+    public int getPlaneOutlineMask()
+    {
         return this.planeOutlineMask;
     }
 
-    public void setPlaneOutlineMask(int mask) {
+    public void setPlaneOutlineMask(int mask)
+    {
         this.planeOutlineMask = mask;
         this.setStateExpired();
     }
 
-    public int getBorderMask() {
+    public int getBorderMask()
+    {
         return this.borderMask;
     }
 
-    public void setBorderMask(int mask) {
+    public void setBorderMask(int mask)
+    {
         this.borderMask = mask;
         this.setStateExpired();
     }
 
-    public Position[] getSegmentPositions() {
-        return new Position[]{this.segmentBeginPosition, this.segmentEndPosition};
+    public Position[] getSegmentPositions()
+    {
+        return new Position[] {this.segmentBeginPosition, this.segmentEndPosition};
     }
 
-    public void setSegmentPositions(Position position1, Position position2) {
-        if (position1 == null) {
+    public void setSegmentPositions(Position position1, Position position2)
+    {
+        if (position1 == null)
+        {
             String message = "nullValue.Position1IsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (position2 == null) {
+        if (position2 == null)
+        {
             String message = "nullValue.Position2IsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -306,8 +341,10 @@ public class SegmentPlane extends WWObjectImpl {
         this.setSegmentEndPosition(position2);
     }
 
-    public void setSegmentBeginPosition(Position position) {
-        if (position == null) {
+    public void setSegmentBeginPosition(Position position)
+    {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -319,8 +356,10 @@ public class SegmentPlane extends WWObjectImpl {
         this.firePropertyChange(SEGMENT_BEGIN, oldPosition, this.segmentBeginPosition);
     }
 
-    public void setSegmentEndPosition(Position position) {
-        if (position == null) {
+    public void setSegmentEndPosition(Position position)
+    {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -332,26 +371,32 @@ public class SegmentPlane extends WWObjectImpl {
         this.firePropertyChange(SEGMENT_END, oldPosition, this.segmentEndPosition);
     }
 
-    public List<ControlPoint> getControlPoints() {
+    public List<ControlPoint> getControlPoints()
+    {
         return Collections.unmodifiableList(this.controlPointList);
     }
 
-    public void setControlPoints(Iterable<? extends ControlPoint> controlPoints) {
-        if (controlPoints == null) {
+    public void setControlPoints(Iterable<? extends ControlPoint> controlPoints)
+    {
+        if (controlPoints == null)
+        {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         this.controlPointList.clear();
-        for (ControlPoint p : controlPoints) {
+        for (ControlPoint p : controlPoints)
+        {
             this.addControlPoint(p);
         }
         this.setStateExpired();
     }
 
-    protected void addControlPoint(ControlPoint controlPoint) {
-        if (controlPoint.getOwner() != this) {
+    protected void addControlPoint(ControlPoint controlPoint)
+    {
+        if (controlPoint.getOwner() != this)
+        {
             String message = Logging.getMessage("generic.OwnerIsInvalid", controlPoint.getOwner());
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -360,12 +405,15 @@ public class SegmentPlane extends WWObjectImpl {
         this.controlPointList.add(controlPoint);
     }
 
-    public Object getStateKey() {
+    public Object getStateKey()
+    {
         return new StateKey(this, this.serialNumber);
     }
 
-    public Plane computeInfinitePlane(Globe globe) {
-        if (globe == null) {
+    public Plane computeInfinitePlane(Globe globe)
+    {
+        if (globe == null)
+        {
             String message = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -379,15 +427,18 @@ public class SegmentPlane extends WWObjectImpl {
         Vec4 n = a.cross3(b).normalize3();
         double d = -corners[0].dot3(n);
 
-        if (n.equals(Vec4.ZERO)) {
+        if (n.equals(Vec4.ZERO))
+        {
             return null;
         }
 
         return new Plane(n.x, n.y, n.z, d);
     }
 
-    public BilinearInterpolator createPlaneInterpolator(Globe globe) {
-        if (globe == null) {
+    public BilinearInterpolator createPlaneInterpolator(Globe globe)
+    {
+        if (globe == null)
+        {
             String message = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -404,7 +455,8 @@ public class SegmentPlane extends WWObjectImpl {
         return new BilinearInterpolator(ll, lr, ur, ul);
     }
 
-    protected void setStateExpired() {
+    protected void setStateExpired()
+    {
         this.serialNumber++;
     }
 }

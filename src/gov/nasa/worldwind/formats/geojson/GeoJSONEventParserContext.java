@@ -14,19 +14,22 @@ import java.io.IOException;
  * @author dcollins
  * @version $Id: GeoJSONEventParserContext.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeoJSONEventParserContext extends BasicJSONEventParserContext {
-
-    public GeoJSONEventParserContext(JsonParser parser) throws IOException {
+public class GeoJSONEventParserContext extends BasicJSONEventParserContext
+{
+    public GeoJSONEventParserContext(JsonParser parser) throws IOException
+    {
         super(parser);
         this.registerEventParsers();
     }
 
     @Override
-    public JSONEventParser getUnrecognizedParser() {
+    public JSONEventParser getUnrecognizedParser()
+    {
         return new GeoJSONEventParser();
     }
 
-    protected void registerEventParsers() {
+    protected void registerEventParsers()
+    {
         this.registerParser(GeoJSONConstants.FIELD_COORDINATES, new GeoJSONCoordinateParser());
     }
 }

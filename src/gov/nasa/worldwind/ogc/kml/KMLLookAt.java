@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -11,42 +12,50 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLLookAt.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLLookAt extends KMLAbstractView {
-
+public class KMLLookAt extends KMLAbstractView
+{
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLLookAt(String namespaceURI) {
+    public KMLLookAt(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
-    public Double getLongitude() {
+    public Double getLongitude()
+    {
         return (Double) this.getField("longitude");
     }
 
-    public Double getLatitude() {
+    public Double getLatitude()
+    {
         return (Double) this.getField("latitude");
     }
 
-    public Double getAltitude() {
+    public Double getAltitude()
+    {
         return (Double) this.getField("altitude");
     }
 
-    public Double getHeading() {
+    public Double getHeading()
+    {
         return (Double) this.getField("heading");
     }
 
-    public Double getTilt() {
+    public Double getTilt()
+    {
         return (Double) this.getField("tilt");
     }
 
-    public Double getRange() {
+    public Double getRange()
+    {
         return (Double) this.getField("range");
     }
 
-    public String getAltitudeMode() {
+    public String getAltitudeMode()
+    {
         return (String) this.getField("altitudeMode");
     }
 }

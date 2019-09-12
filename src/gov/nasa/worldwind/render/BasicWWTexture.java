@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import com.jogamp.opengl.util.texture.*;
@@ -29,8 +30,8 @@ import java.net.URL;
  * @version $Id: BasicWWTexture.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see LazilyLoadedTexture
  */
-public class BasicWWTexture implements WWTexture {
-
+public class BasicWWTexture implements WWTexture
+{
     private Object imageSource;
     private boolean useMipMaps;
     private boolean useAnisotropy = true;
@@ -47,11 +48,12 @@ public class BasicWWTexture implements WWTexture {
      * displayed the image source is not read.
      *
      * @param imageSource the source of the image, either a file path {@link String} or a {@link BufferedImage}.
-     * @param useMipMaps Indicates whether to generate and use mipmaps for the image.
+     * @param useMipMaps  Indicates whether to generate and use mipmaps for the image.
      *
      * @throws IllegalArgumentException if the <code>imageSource</code> is null.
      */
-    public BasicWWTexture(Object imageSource, boolean useMipMaps) {
+    public BasicWWTexture(Object imageSource, boolean useMipMaps)
+    {
         initialize(imageSource, useMipMaps);
     }
 
@@ -65,12 +67,15 @@ public class BasicWWTexture implements WWTexture {
      *
      * @throws IllegalArgumentException if the <code>imageSource</code> is null.
      */
-    public BasicWWTexture(Object imageSource) {
+    public BasicWWTexture(Object imageSource)
+    {
         this(imageSource, false);
     }
 
-    protected void initialize(Object imageSource, boolean useMipMaps) {
-        if (imageSource == null) {
+    protected void initialize(Object imageSource, boolean useMipMaps)
+    {
+        if (imageSource == null)
+        {
             String message = Logging.getMessage("nullValue.ImageSource");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -80,24 +85,25 @@ public class BasicWWTexture implements WWTexture {
         this.useMipMaps = useMipMaps;
     }
 
-    public Object getImageSource() {
+    public Object getImageSource()
+    {
         return imageSource;
     }
 
-    public int getWidth(DrawContext dc) {
-        if (this.width != null) {
+    public int getWidth(DrawContext dc)
+    {
+        if (this.width != null)
             return this.width;
-        }
 
         Texture t = this.getTexture(dc, true);
 
         return t != null ? t.getWidth() : 0;
     }
 
-    public int getHeight(DrawContext dc) {
-        if (this.height != null) {
+    public int getHeight(DrawContext dc)
+    {
+        if (this.height != null)
             return this.height;
-        }
 
         Texture t = this.getTexture(dc, true);
 
@@ -107,17 +113,20 @@ public class BasicWWTexture implements WWTexture {
     /**
      * Indicates whether the texture creates and uses mipmaps.
      *
-     * @return true if mipmaps are used, false if not.
+     * @return true if mipmaps are used, false if  not.
      */
-    public boolean isUseMipMaps() {
+    public boolean isUseMipMaps()
+    {
         return useMipMaps;
     }
 
-    public TextureCoords getTexCoords() {
+    public TextureCoords getTexCoords()
+    {
         return texCoords;
     }
 
-    public boolean isTextureCurrent(DrawContext dc) {
+    public boolean isTextureCurrent(DrawContext dc)
+    {
         return true;
     }
 
@@ -126,7 +135,8 @@ public class BasicWWTexture implements WWTexture {
      *
      * @return useAnisotropy true if anisotropy is to be applied, otherwise false.
      */
-    public boolean isUseAnisotropy() {
+    public boolean isUseAnisotropy()
+    {
         return useAnisotropy;
     }
 
@@ -135,27 +145,31 @@ public class BasicWWTexture implements WWTexture {
      *
      * @param useAnisotropy true if anisotropy is to be applied, otherwise false.
      */
-    public void setUseAnisotropy(boolean useAnisotropy) {
+    public void setUseAnisotropy(boolean useAnisotropy)
+    {
         this.useAnisotropy = useAnisotropy;
     }
 
-    public boolean isTextureInitializationFailed() {
+    public boolean isTextureInitializationFailed()
+    {
         return textureInitializationFailed;
     }
 
-    protected Texture getTexture(DrawContext dc, boolean initialize) {
+    protected Texture getTexture(DrawContext dc, boolean initialize)
+    {
         Texture t = this.getTextureFromCache(dc);
 
-        if (t == null && initialize) {
+        if (t == null && initialize)
             t = this.initializeTexture(dc, this.imageSource);
-        }
 
         return t;
     }
 
-    protected Texture getTextureFromCache(DrawContext dc) {
+    protected Texture getTextureFromCache(DrawContext dc)
+    {
         Texture t = dc.getTextureCache().getTexture(this.imageSource);
-        if (t != null && this.width == null) {
+        if (t != null && this.width == null)
+        {
             this.width = t.getWidth();
             this.height = t.getHeight();
             this.texCoords = t.getImageTexCoords();
@@ -164,26 +178,28 @@ public class BasicWWTexture implements WWTexture {
         return t;
     }
 
-    public boolean bind(DrawContext dc) {
-        if (dc == null) {
+    public boolean bind(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
 
         Texture t = this.getTextureFromCache(dc);
-        if (t == null) {
+        if (t == null)
+        {
             t = this.initializeTexture(dc, this.imageSource);
-            if (t != null) {
+            if (t != null)
                 return true; // texture was bound during initialization.
-            }
         }
 
-        if (t != null) {
+        if (t != null)
             t.bind(dc.getGL());
-        }
 
-        if (t != null && this.width == 0 && this.height == 0) {
+        if (t != null && this.width == 0 && this.height == 0)
+        {
             this.width = t.getWidth();
             this.height = t.getHeight();
             this.texCoords = t.getImageTexCoords();
@@ -192,8 +208,10 @@ public class BasicWWTexture implements WWTexture {
         return t != null;
     }
 
-    public void applyInternalTransform(DrawContext dc) {
-        if (dc == null) {
+    public void applyInternalTransform(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -201,12 +219,13 @@ public class BasicWWTexture implements WWTexture {
 
         // Use the tile's texture if available.
         Texture t = this.getTextureFromCache(dc);
-        if (t == null) {
+        if (t == null)
             t = this.initializeTexture(dc, this.imageSource);
-        }
 
-        if (t != null) {
-            if (t.getMustFlipVertically()) {
+        if (t != null)
+        {
+            if (t.getMustFlipVertically())
+            {
                 GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
                 gl.glMatrixMode(GL2.GL_TEXTURE);
                 gl.glLoadIdentity();
@@ -216,62 +235,77 @@ public class BasicWWTexture implements WWTexture {
         }
     }
 
-    protected Texture initializeTexture(DrawContext dc, Object imageSource) {
-        if (dc == null) {
+    protected Texture initializeTexture(DrawContext dc, Object imageSource)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
 
-        if (this.textureInitializationFailed) {
+        if (this.textureInitializationFailed)
             return null;
-        }
 
         Texture t;
         boolean haveMipMapData;
         GL gl = dc.getGL();
 
-        if (imageSource instanceof String) {
+        if (imageSource instanceof String)
+        {
             String path = (String) imageSource;
 
             Object streamOrException = WWIO.getFileOrResourceAsStream(path, this.getClass());
-            if (streamOrException == null || streamOrException instanceof Exception) {
+            if (streamOrException == null || streamOrException instanceof Exception)
+            {
                 Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionAttemptingToReadImageFile",
-                        streamOrException != null ? streamOrException : path);
+                    streamOrException != null ? streamOrException : path);
                 this.textureInitializationFailed = true;
                 return null;
             }
 
-            try {
+            try
+            {
                 TextureData td = OGLUtil.newTextureData(gl.getGLProfile(), (InputStream) streamOrException,
-                        this.useMipMaps);
+                    this.useMipMaps);
                 t = TextureIO.newTexture(td);
                 haveMipMapData = td.getMipmapData() != null;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 String msg = Logging.getMessage("layers.TextureLayer.ExceptionAttemptingToReadTextureFile",
-                        imageSource);
+                    imageSource);
                 Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
                 this.textureInitializationFailed = true;
                 return null;
             }
-        } else if (imageSource instanceof BufferedImage) {
-            try {
+        }
+        else if (imageSource instanceof BufferedImage)
+        {
+            try
+            {
                 TextureData td = AWTTextureIO.newTextureData(gl.getGLProfile(), (BufferedImage) imageSource,
-                        this.useMipMaps);
+                    this.useMipMaps);
                 t = TextureIO.newTexture(td);
                 haveMipMapData = td.getMipmapData() != null;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 String msg = Logging.getMessage("generic.IOExceptionDuringTextureInitialization");
                 Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
                 this.textureInitializationFailed = true;
                 return null;
             }
-        } else if (imageSource instanceof URL) {
-            try {
+        }
+        else if (imageSource instanceof URL)
+        {
+            try
+            {
                 InputStream stream = ((URL) imageSource).openStream();
-                if (stream == null) {
+                if (stream == null)
+                {
                     Logging.logger().log(java.util.logging.Level.SEVERE, "generic.ExceptionAttemptingToReadImageFile",
-                            imageSource);
+                        imageSource);
                     this.textureInitializationFailed = true;
                     return null;
                 }
@@ -279,16 +313,20 @@ public class BasicWWTexture implements WWTexture {
                 TextureData td = OGLUtil.newTextureData(gl.getGLProfile(), stream, this.useMipMaps);
                 t = TextureIO.newTexture(td);
                 haveMipMapData = td.getMipmapData() != null;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 String msg = Logging.getMessage("layers.TextureLayer.ExceptionAttemptingToReadTextureFile",
-                        imageSource);
+                    imageSource);
                 Logging.logger().log(java.util.logging.Level.SEVERE, msg, e);
                 this.textureInitializationFailed = true;
                 return null;
             }
-        } else {
+        }
+        else
+        {
             Logging.logger().log(java.util.logging.Level.SEVERE, "generic.UnrecognizedImageSourceType",
-                    imageSource.getClass().getName());
+                imageSource.getClass().getName());
             this.textureInitializationFailed = true;
             return null;
         }
@@ -296,7 +334,7 @@ public class BasicWWTexture implements WWTexture {
         if (t == null) // In case JOGL TextureIO returned null
         {
             Logging.logger().log(java.util.logging.Level.SEVERE, "generic.TextureUnreadable",
-                    imageSource instanceof String ? imageSource : imageSource.getClass().getName());
+                imageSource instanceof String ? imageSource : imageSource.getClass().getName());
             this.textureInitializationFailed = true;
             return null;
         }
@@ -310,14 +348,16 @@ public class BasicWWTexture implements WWTexture {
         // enabled, and the texture itself supports mip-mapping.
         boolean useMipMapFilter = this.useMipMaps && (haveMipMapData || t.isUsingAutoMipmapGeneration());
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER,
-                useMipMapFilter ? GL.GL_LINEAR_MIPMAP_LINEAR : GL.GL_LINEAR);
+            useMipMapFilter ? GL.GL_LINEAR_MIPMAP_LINEAR : GL.GL_LINEAR);
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR);
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_CLAMP_TO_EDGE);
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_CLAMP_TO_EDGE);
 
-        if (this.isUseAnisotropy() && useMipMapFilter) {
+        if (this.isUseAnisotropy() && useMipMapFilter)
+        {
             double maxAnisotropy = dc.getGLRuntimeCapabilities().getMaxTextureAnisotropy();
-            if (dc.getGLRuntimeCapabilities().isUseAnisotropicTextureFilter() && maxAnisotropy >= 2.0) {
+            if (dc.getGLRuntimeCapabilities().isUseAnisotropicTextureFilter() && maxAnisotropy >= 2.0)
+            {
                 gl.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAX_ANISOTROPY_EXT, (float) maxAnisotropy);
             }
         }

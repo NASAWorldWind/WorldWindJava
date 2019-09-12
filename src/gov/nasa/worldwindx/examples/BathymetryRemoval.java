@@ -15,11 +15,12 @@ import gov.nasa.worldwind.terrain.BathymetryFilterElevationModel;
  * @author tag
  * @version $Id: BathymetryRemoval.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BathymetryRemoval extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+public class BathymetryRemoval extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             // Get the current elevation model.
             ElevationModel currentElevationModel = this.getWwd().getModel().getGlobe().getElevationModel();
 
@@ -34,7 +35,8 @@ public class BathymetryRemoval extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Bathymetry Removal", AppFrame.class);
     }
 }

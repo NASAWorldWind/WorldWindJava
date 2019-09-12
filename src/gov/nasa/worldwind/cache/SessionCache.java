@@ -16,8 +16,8 @@ package gov.nasa.worldwind.cache;
  * @author dcollins
  * @version $Id: SessionCache.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface SessionCache {
-
+public interface SessionCache
+{
     /**
      * Returns the maximum number of entries in the cache.
      *
@@ -68,7 +68,7 @@ public interface SessionCache {
     /**
      * Adds an entry in the cache with a specified key and value.
      *
-     * @param key the entry's key.
+     * @param key   the entry's key.
      * @param value the entry's value.
      */
     void put(Object key, Object value);

@@ -9,7 +9,7 @@ package gov.nasa.worldwind.retrieve;
  * @author Tom Gaskins
  * @version $Id: RetrievalPostProcessor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface RetrievalPostProcessor {
-
+public interface RetrievalPostProcessor
+{
     public java.nio.ByteBuffer run(Retriever retriever);
 }

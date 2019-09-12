@@ -21,8 +21,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: SegmentPlaneEditor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SegmentPlaneEditor extends AbstractLayer {
-
+public class SegmentPlaneEditor extends AbstractLayer
+{
     protected static final int SEGMENT_BEGIN_INDEX = 0;
     protected static final int SEGMENT_END_INDEX = 1;
 
@@ -31,91 +31,104 @@ public class SegmentPlaneEditor extends AbstractLayer {
     private SegmentPlane segmentPlane; // Can be null.
     private SegmentPlaneRenderer renderer; // Can be null.
 
-    public SegmentPlaneEditor() {
+    public SegmentPlaneEditor()
+    {
         this.armed = false;
         this.snapToGrid = true;
         this.renderer = new SegmentPlaneRenderer();
     }
 
-    public boolean isArmed() {
+    public boolean isArmed()
+    {
         return this.armed;
     }
 
-    public void setArmed(boolean armed) {
+    public void setArmed(boolean armed)
+    {
         this.armed = armed;
     }
 
-    public boolean isSnapToGrid() {
+    public boolean isSnapToGrid()
+    {
         return this.snapToGrid;
     }
 
-    public void setSnapToGrid(boolean snapToGrid) {
+    public void setSnapToGrid(boolean snapToGrid)
+    {
         this.snapToGrid = snapToGrid;
     }
 
-    public SegmentPlane getSegmentPlane() {
+    public SegmentPlane getSegmentPlane()
+    {
         return this.segmentPlane;
     }
 
-    public void setSegmentPlane(SegmentPlane segmentPlane) {
+    public void setSegmentPlane(SegmentPlane segmentPlane)
+    {
         this.segmentPlane = segmentPlane;
     }
 
-    public SegmentPlaneRenderer getSegmentPlaneRenderer() {
+    public SegmentPlaneRenderer getSegmentPlaneRenderer()
+    {
         return this.renderer;
     }
 
-    public void setSegmentPlaneRenderer(SegmentPlaneRenderer renderer) {
+    public void setSegmentPlaneRenderer(SegmentPlaneRenderer renderer)
+    {
         this.renderer = renderer;
     }
 
-    protected void doRender(DrawContext dc) {
-        if (!this.isArmed()) {
+    protected void doRender(DrawContext dc)
+    {
+        if (!this.isArmed())
             return;
-        }
 
-        if (this.getSegmentPlane() == null || this.getSegmentPlaneRenderer() == null) {
+        if (this.getSegmentPlane() == null || this.getSegmentPlaneRenderer() == null)
             return;
-        }
 
         this.getSegmentPlaneRenderer().render(dc, this.getSegmentPlane());
     }
 
-    protected void doPick(DrawContext dc, java.awt.Point pickPoint) {
-        if (!this.isArmed()) {
+    protected void doPick(DrawContext dc, java.awt.Point pickPoint)
+    {
+        if (!this.isArmed())
             return;
-        }
 
-        if (this.getSegmentPlane() == null || this.getSegmentPlaneRenderer() == null) {
+        if (this.getSegmentPlane() == null || this.getSegmentPlaneRenderer() == null)
             return;
-        }
 
         this.getSegmentPlaneRenderer().pick(dc, this.getSegmentPlane(), pickPoint, this);
     }
 
-    public void moveControlPoint(WorldWindow wwd, PickedObject pickedObject, Point mousePoint, Point previousMousePoint) {
-        if (wwd == null) {
+    public void moveControlPoint(WorldWindow wwd, PickedObject pickedObject, Point mousePoint, Point previousMousePoint)
+    {
+        if (wwd == null)
+        {
             String message = Logging.getMessage("nullValue.WorldWindow");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (pickedObject == null) {
+        if (pickedObject == null)
+        {
             String message = Logging.getMessage("nullValue.PickedObject");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         // Include this test to ensure any derived implementation performs it.
-        if (this.getSegmentPlane() == null) {
+        if (this.getSegmentPlane() == null)
+        {
             return;
         }
 
-        if (!(pickedObject.getObject() instanceof SegmentPlane.ControlPoint)) {
+        if (!(pickedObject.getObject() instanceof SegmentPlane.ControlPoint))
+        {
             return;
         }
 
         SegmentPlane.ControlPoint controlPoint = (SegmentPlane.ControlPoint) pickedObject.getObject();
-        if (this.getSegmentPlane() != controlPoint.getOwner()) {
+        if (this.getSegmentPlane() != controlPoint.getOwner())
+        {
             return;
         }
 
@@ -123,24 +136,35 @@ public class SegmentPlaneEditor extends AbstractLayer {
     }
 
     protected void doMoveControlPoint(WorldWindow wwd, PickedObject pickedObject,
-            Point mousePoint, Point previousMousePoint) {
+        Point mousePoint, Point previousMousePoint)
+    {
         SegmentPlane.ControlPoint controlPoint = (SegmentPlane.ControlPoint) pickedObject.getObject();
 
         Object key = controlPoint.getKey();
-        if (key == null) {
+        if (key == null)
+        {
             return;
         }
 
-        if (key.equals(SegmentPlane.SEGMENT_BEGIN) || key.equals(SegmentPlane.SEGMENT_END)) {
+        if (key.equals(SegmentPlane.SEGMENT_BEGIN) || key.equals(SegmentPlane.SEGMENT_END))
+        {
             this.doMoveSegmentPoint(wwd, pickedObject, mousePoint, previousMousePoint);
-        } else if (key.equals(SegmentPlane.CONTROL_POINT_LOWER_LEFT)) {
+        }
+        else if (key.equals(SegmentPlane.CONTROL_POINT_LOWER_LEFT))
+        {
             this.doMoveSegmentPlane(wwd, pickedObject, mousePoint, previousMousePoint);
-        } else if (key.equals(SegmentPlane.CONTROL_POINT_LOWER_RIGHT)
-                || key.equals(SegmentPlane.CONTROL_POINT_UPPER_RIGHT)) {
+        }
+        else if (key.equals(SegmentPlane.CONTROL_POINT_LOWER_RIGHT) 
+            || key.equals(SegmentPlane.CONTROL_POINT_UPPER_RIGHT))
+        {
             this.doMoveLateralControlPoint(wwd, pickedObject, mousePoint, previousMousePoint);
-        } else if (key.equals(SegmentPlane.CONTROL_POINT_TOP_EDGE)) {
+        }
+        else if (key.equals(SegmentPlane.CONTROL_POINT_TOP_EDGE))
+        {
             this.doMoveVerticalControlPoint(wwd, pickedObject, mousePoint, previousMousePoint);
-        } else if (key.equals(SegmentPlane.CONTROL_POINT_LEADING_EDGE)) {
+        }
+        else if (key.equals(SegmentPlane.CONTROL_POINT_LEADING_EDGE))
+        {
             this.doMoveHorizontalControlPoint(wwd, pickedObject, mousePoint, previousMousePoint);
         }
     }
@@ -148,8 +172,10 @@ public class SegmentPlaneEditor extends AbstractLayer {
     //**************************************************************//
     //********************  Segment Plane Movement  ****************//
     //**************************************************************//
+
     protected void doMoveSegmentPlane(WorldWindow wwd, PickedObject pickedObject,
-            Point mousePoint, Point previousMousePoint) {
+        Point mousePoint, Point previousMousePoint)
+    {
         View view = wwd.getView();
         Globe globe = wwd.getModel().getGlobe();
         LatLon[] locations = this.getSegmentPlane().getPlaneLocations();
@@ -167,15 +193,15 @@ public class SegmentPlaneEditor extends AbstractLayer {
         // Find intersection of screen coord ref-point with globe.
         double x = screenRefPoint.x + dx;
         double y = screenRefPoint.y + dy;
-        if (wwd instanceof Component) {
+        if (wwd instanceof Component)
+        {
             y = ((Component) wwd).getSize().height - screenRefPoint.y + dy - 1;
         }
 
         Line ray = view.computeRayFromScreenPoint(x, y);
         Intersection[] intersections = globe.intersect(ray, refPos.getElevation());
-        if (intersections == null || intersections.length == 0) {
+        if (intersections == null || intersections.length == 0)
             return;
-        }
 
         Position newPos = globe.computePositionFromPoint(intersections[0].getIntersectionPoint());
 
@@ -193,22 +219,27 @@ public class SegmentPlaneEditor extends AbstractLayer {
     //**************************************************************//
     //********************  Segment Point Actions  *****************//
     //**************************************************************//
+
     @SuppressWarnings({"UnusedDeclaration"})
     protected void doMoveSegmentPoint(WorldWindow wwd, PickedObject pickedObject,
-            Point mousePoint, Point previousMousePoint) {
+        Point mousePoint, Point previousMousePoint)
+    {
         Position oldPosition = pickedObject.getPosition();
         Position newPosition = this.computeNewPositionFromPlaneGeometry(wwd);
 
         // If the mouse point is not on the plane geometry, we compute an intersection with the infinite plane
         // defined by the SegmentPlane's corners.
-        if (newPosition == null) {
-            newPosition = this.computeNewPositionFromPlaneIntersection(wwd, mousePoint);
-            if (newPosition != null) {
+        if (newPosition == null)
+        {
+            newPosition  = this.computeNewPositionFromPlaneIntersection(wwd, mousePoint);
+            if (newPosition != null)
+            {
                 newPosition = this.resizeSegmentPlaneToFitPosition(wwd, newPosition);
             }
         }
 
-        if (newPosition == null) {
+        if (newPosition == null)
+        {
             return;
         }
 
@@ -217,59 +248,72 @@ public class SegmentPlaneEditor extends AbstractLayer {
         Position[] positions = this.getSegmentPlane().getSegmentPositions();
 
         Object endpointId = pickedObject.getValue(AVKey.PICKED_OBJECT_ID);
-        if (endpointId.equals(SegmentPlane.SEGMENT_BEGIN)) {
+        if (endpointId.equals(SegmentPlane.SEGMENT_BEGIN))
+        {
             positions[0] = new Position(oldPosition, newPosition.getElevation());
-        } else if (endpointId.equals(SegmentPlane.SEGMENT_END)) {
+        }
+        else if (endpointId.equals(SegmentPlane.SEGMENT_END))
+        {
             positions[1] = newPosition;
         }
 
         this.getSegmentPlane().setSegmentPositions(positions[0], positions[1]);
     }
 
-    protected Position computeNewPositionFromPlaneGeometry(WorldWindow wwd) {
-        if (this.isSnapToGrid()) {
+    protected Position computeNewPositionFromPlaneGeometry(WorldWindow wwd)
+    {
+        if (this.isSnapToGrid())
+        {
             PickedObject gridObject = this.getPickedSegmentPlaneObject(wwd, SegmentPlane.PLANE_GRID);
-            if (gridObject != null) {
+            if (gridObject != null)
+            {
                 return gridObject.getPosition();
             }
         }
 
         PickedObject planeObject = this.getPickedSegmentPlaneObject(wwd, SegmentPlane.PLANE_BACKGROUND);
-        if (planeObject != null) {
+        if (planeObject != null)
+        {
             return planeObject.getPosition();
         }
 
         return null;
     }
 
-    protected Position computeNewPositionFromPlaneIntersection(WorldWindow wwd, Point mousePoint) {
+    protected Position computeNewPositionFromPlaneIntersection(WorldWindow wwd, Point mousePoint)
+    {
         View view = wwd.getView();
         Globe globe = wwd.getModel().getGlobe();
-
+        
         Line ray = view.computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Plane plane = this.getSegmentPlane().computeInfinitePlane(globe);
-        if (plane == null) {
+        if (plane == null)
+        {
             return null;
         }
 
         Vec4 newPoint = plane.intersect(ray);
-        if (newPoint == null) {
+        if (newPoint == null)
+        {
             return null;
         }
 
         return globe.computePositionFromPoint(newPoint);
     }
 
-    protected Position resizeSegmentPlaneToFitPosition(WorldWindow wwd, Position position) {
+    protected Position resizeSegmentPlaneToFitPosition(WorldWindow wwd, Position position)
+    {
         Globe globe = wwd.getModel().getGlobe();
         double[] altitudes = this.getSegmentPlane().getPlaneAltitudes();
         double[] gridSizes = this.getSegmentPlane().getGridCellDimensions();
         LatLon[] locations = this.getSegmentPlane().getPlaneLocations();
 
-        if (position.getElevation() < altitudes[0]) {
+        if (position.getElevation() < altitudes[0])
+        {
             altitudes[0] = altitudes[0] + this.getNextGridStep(position.getElevation(), altitudes[0], gridSizes[1]);
         }
-        if (position.getElevation() > altitudes[1]) {
+        if (position.getElevation() > altitudes[1])
+        {
             altitudes[1] = altitudes[0] + this.getNextGridStep(position.getElevation(), altitudes[0], gridSizes[1]);
         }
 
@@ -284,15 +328,17 @@ public class SegmentPlaneEditor extends AbstractLayer {
         double dot = p.dot3(n);
 
         // Resize only in the positive direction.
-        if (dot > length) {
+        if (dot > length)
+        {
             double nextLength = this.getNextGridStep(dot, 0.0, gridSizes[0]);
             Vec4 nextPoint = segment[0].add3(n.multiply3(nextLength));
             locations[1] = new LatLon(globe.computePositionFromPoint(nextPoint));
         }
-        if (dot < 0.0) {
+        if (dot < 0.0)
+        {
             position = new Position(locations[0], position.getElevation());
         }
-
+        
         this.getSegmentPlane().setPlaneAltitudes(altitudes[0], altitudes[1]);
         this.getSegmentPlane().setPlaneLocations(locations[0], locations[1]);
 
@@ -302,9 +348,11 @@ public class SegmentPlaneEditor extends AbstractLayer {
     //**************************************************************//
     //********************  Segment Plane Orientation/Length  ******//
     //**************************************************************//
+
     @SuppressWarnings({"UnusedDeclaration"})
     protected void doMoveLateralControlPoint(WorldWindow wwd, PickedObject pickedObject,
-            Point mousePoint, Point previousMousePoint) {
+        Point mousePoint, Point previousMousePoint)
+    {
         View view = wwd.getView();
         Globe globe = wwd.getModel().getGlobe();
         double[] altitudes = this.getSegmentPlane().getPlaneAltitudes();
@@ -313,16 +361,16 @@ public class SegmentPlaneEditor extends AbstractLayer {
         Position pos = pickedObject.getPosition();
         Line ray = view.computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Intersection[] intersection = globe.intersect(ray, pos.getElevation());
-        if (intersection == null || intersection.length < 0) {
+        if (intersection == null || intersection.length < 0)
             return;
-        }
 
         Vec4 newPoint = intersection[0].getIntersectionPoint();
         LatLon newLatLon = new LatLon(globe.computePositionFromPoint(newPoint));
 
         Object id = pickedObject.getValue(AVKey.PICKED_OBJECT_ID);
         if (id.equals(SegmentPlane.CONTROL_POINT_LOWER_RIGHT)
-                || id.equals(SegmentPlane.CONTROL_POINT_UPPER_RIGHT)) {
+            ||id.equals(SegmentPlane.CONTROL_POINT_UPPER_RIGHT))
+        {
             locations[1] = newLatLon;
             this.moveSegmentLocationWithPlane(locations, SEGMENT_END_INDEX);
         }
@@ -333,9 +381,11 @@ public class SegmentPlaneEditor extends AbstractLayer {
     //**************************************************************//
     //********************  Segment Plane Height  ******************//
     //**************************************************************//
+
     @SuppressWarnings({"UnusedDeclaration"})
     protected void doMoveVerticalControlPoint(WorldWindow wwd, PickedObject pickedObject,
-            Point mousePoint, Point previousMousePoint) {
+        Point mousePoint, Point previousMousePoint)
+    {
         View view = wwd.getView();
         Globe globe = wwd.getModel().getGlobe();
         double[] altitudes = this.getSegmentPlane().getPlaneAltitudes();
@@ -353,14 +403,13 @@ public class SegmentPlaneEditor extends AbstractLayer {
 
         altitudes[1] = newPos.getElevation();
 
-        if (altitudes[1] < altitudes[0]) {
+        if (altitudes[1] < altitudes[0])
             altitudes[1] = altitudes[0];
-        }
 
-        for (int i = 0; i < 2; i++) {
-            if (altitudes[1] < segmentPositions[i].getElevation()) {
+        for (int i = 0; i < 2; i++)
+        {
+            if (altitudes[1] < segmentPositions[i].getElevation())
                 altitudes[1] = segmentPositions[i].getElevation();
-            }
         }
 
         this.getSegmentPlane().setPlaneAltitudes(altitudes[0], altitudes[1]);
@@ -369,9 +418,11 @@ public class SegmentPlaneEditor extends AbstractLayer {
     //**************************************************************//
     //********************  Segment Plane Length  ******************//
     //**************************************************************//
+
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void doMoveHorizontalControlPoint(WorldWindow wwd, PickedObject pickedObject,
-            Point mousePoint, Point previousMousePoint) {
+    protected void doMoveHorizontalControlPoint(WorldWindow wwd, PickedObject pickedObject, 
+        Point mousePoint, Point previousMousePoint)
+    {
         View view = wwd.getView();
         Globe globe = wwd.getModel().getGlobe();
         LatLon[] locations = this.getSegmentPlane().getPlaneLocations();
@@ -380,9 +431,8 @@ public class SegmentPlaneEditor extends AbstractLayer {
         Position pos = pickedObject.getPosition();
         Line ray = view.computeRayFromScreenPoint(mousePoint.getX(), mousePoint.getY());
         Intersection[] intersection = globe.intersect(ray, pos.getElevation());
-        if (intersection == null || intersection.length < 0) {
+        if (intersection == null || intersection.length < 0)
             return;
-        }
 
         Vec4 newPoint = intersection[0].getIntersectionPoint();
         LatLon newLatLon = new LatLon(globe.computePositionFromPoint(newPoint));
@@ -391,9 +441,8 @@ public class SegmentPlaneEditor extends AbstractLayer {
         Angle distance = LatLon.rhumbDistance(locations[0], newLatLon);
 
         Angle minDistance = LatLon.rhumbDistance(locations[0], segmentPositions[1]);
-        if (distance.compareTo(minDistance) < 0) {
+        if (distance.compareTo(minDistance) < 0)
             distance = minDistance;
-        }
 
         locations[1] = LatLon.rhumbEndPosition(locations[0], heading, distance);
 
@@ -403,37 +452,41 @@ public class SegmentPlaneEditor extends AbstractLayer {
     //**************************************************************//
     //********************  Utility Methods  ***********************//
     //**************************************************************//
-    protected Position moveSegmentAltitudeWithPlane(Position position, double[] minAndMaxElevation) {
+
+    protected Position moveSegmentAltitudeWithPlane(Position position, double[] minAndMaxElevation)
+    {
         double elevation = position.getElevation();
-        if (elevation >= minAndMaxElevation[0] && elevation <= minAndMaxElevation[1]) {
+        if (elevation >= minAndMaxElevation[0] && elevation <= minAndMaxElevation[1])
+        {
             return null;
         }
 
-        if (elevation < minAndMaxElevation[0]) {
+        if (elevation < minAndMaxElevation[0])
             elevation = minAndMaxElevation[0];
-        }
-        if (elevation > minAndMaxElevation[1]) {
+        if (elevation > minAndMaxElevation[1])
             elevation = minAndMaxElevation[1];
-        }
 
         return new Position(position, elevation);
     }
-
-    protected void moveSegmentLocationWithPlane(LatLon[] newPlaneLocations, int segmentPositionIndex) {
+    
+    protected void moveSegmentLocationWithPlane(LatLon[] newPlaneLocations, int segmentPositionIndex)
+    {
         LatLon[] planeLocations = this.getSegmentPlane().getPlaneLocations();
         Position segmentPosition = this.getSegmentPlane().getSegmentPositions()[segmentPositionIndex];
 
-        if (segmentPositionIndex == SEGMENT_BEGIN_INDEX) {
+        if (segmentPositionIndex == SEGMENT_BEGIN_INDEX)
+        {
             Position newSegmentPosition = new Position(newPlaneLocations[0], segmentPosition.getElevation());
             this.getSegmentPlane().setSegmentBeginPosition(newSegmentPosition);
-        } else if (segmentPositionIndex == SEGMENT_END_INDEX) {
+        }
+        else if (segmentPositionIndex == SEGMENT_END_INDEX)
+        {
             Angle newHeading = LatLon.rhumbAzimuth(newPlaneLocations[0], newPlaneLocations[1]);
 
             Angle distance = LatLon.rhumbDistance(planeLocations[0], segmentPosition);
             Angle maxDistance = LatLon.rhumbDistance(newPlaneLocations[0], newPlaneLocations[1]);
-            if (distance.compareTo(maxDistance) > 0) {
+            if (distance.compareTo(maxDistance) > 0)
                 distance = maxDistance;
-            }
 
             LatLon newLatLon = LatLon.rhumbEndPosition(newPlaneLocations[0], newHeading, distance);
             Position newSegmentPosition = new Position(newLatLon, segmentPosition.getElevation());
@@ -442,15 +495,20 @@ public class SegmentPlaneEditor extends AbstractLayer {
         }
     }
 
-    protected PickedObject getPickedSegmentPlaneObject(WorldWindow wwd, Object pickedObjectId) {
-        if (wwd.getSceneController().getPickedObjectList() == null) {
+    protected PickedObject getPickedSegmentPlaneObject(WorldWindow wwd, Object pickedObjectId)
+    {
+        if (wwd.getSceneController().getPickedObjectList() == null)
+        {
             return null;
         }
 
-        for (PickedObject po : wwd.getSceneController().getPickedObjectList()) {
-            if (po != null && po.getObject() == this.getSegmentPlane()) {
+        for (PickedObject po : wwd.getSceneController().getPickedObjectList())
+        {
+            if (po != null && po.getObject() == this.getSegmentPlane())
+            {
                 Object id = po.getValue(AVKey.PICKED_OBJECT_ID);
-                if (id == pickedObjectId) {
+                if (id == pickedObjectId)
+                {
                     return po;
                 }
             }
@@ -459,28 +517,30 @@ public class SegmentPlaneEditor extends AbstractLayer {
         return null;
     }
 
-    protected Position computePositionOnOrAboveSurface(WorldWindow wwd, Position position) {
-        if (wwd.getSceneController().getTerrain() != null) {
+    protected Position computePositionOnOrAboveSurface(WorldWindow wwd, Position position)
+    {
+        if (wwd.getSceneController().getTerrain() != null)
+        {
             Vec4 point = wwd.getSceneController().getTerrain().getSurfacePoint(
-                    position.getLatitude(), position.getLongitude());
-            if (point != null) {
+                position.getLatitude(), position.getLongitude());
+            if (point != null)
+            {
                 Position pos = wwd.getModel().getGlobe().computePositionFromPoint(point);
-                if (position.getElevation() < pos.getElevation()) {
+                if (position.getElevation() < pos.getElevation())
                     return new Position(position, pos.getElevation());
-                }
                 return position;
             }
         }
 
         double elev = wwd.getModel().getGlobe().getElevation(position.getLatitude(), position.getLongitude());
-        if (position.getElevation() < elev) {
+        if (position.getElevation() < elev)
             return new Position(position, elev);
-        }
 
         return position;
     }
 
-    protected double getNextGridStep(double value, double origin, double gridSize) {
+    protected double getNextGridStep(double value, double origin, double gridSize)
+    {
         double x = Math.ceil((value - origin) / gridSize);
         return gridSize * x;
     }

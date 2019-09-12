@@ -21,9 +21,10 @@ import com.jogamp.opengl.GLAutoDrawable;
  * @author dcollins
  * @version $Id: ConfiguringGLRuntimeCapabilities.java 3432 2015-10-01 19:40:30Z dcollins $
  */
-public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate {
-
-    static {
+public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate
+{
+    static
+    {
         // Modify the configuration to specify our custom WorldWindowGLDrawable. Normally, an application would specify
         // this in a configuration file. For example, via the standard WorldWind XML configuration file:
         //
@@ -48,12 +49,11 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate {
      * gov.nasa.worldwind.WorldWindowGLAutoDrawable#init(com.jogamp.opengl.GLAutoDrawable)} to configure the OpenGL
      * features used by the WorldWind SDK.
      */
-    public static class MyGLAutoDrawable extends WorldWindowGLAutoDrawable {
-
-        /**
-         * Constructs a new MyGLAutoDrawable, but otherwise does nothing.
-         */
-        public MyGLAutoDrawable() {
+    public static class MyGLAutoDrawable extends WorldWindowGLAutoDrawable
+    {
+        /** Constructs a new MyGLAutoDrawable, but otherwise does nothing. */
+        public MyGLAutoDrawable()
+        {
         }
 
         /**
@@ -62,28 +62,29 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate {
          *
          * @param glAutoDrawable the drawable
          */
-        public void init(GLAutoDrawable glAutoDrawable) {
+        public void init(GLAutoDrawable glAutoDrawable)
+        {
             // Invoked when the GL context changes. The host machine capabilities may have changed, so re-configure the
             // OpenGL features used by the WorldWind SDK.
             super.init(glAutoDrawable);
             this.configureGLRuntimeCaps();
         }
 
-        /**
-         * Configures the OpenGL runtime features used by the WorldWind SDK.
-         */
-        protected void configureGLRuntimeCaps() {
+        /** Configures the OpenGL runtime features used by the WorldWind SDK. */
+        protected void configureGLRuntimeCaps()
+        {
             // Get a reference to the OpenGL Runtime Capabilities associated with this WorldWindow's SceneController.
             SceneController sc = this.getSceneController();
-            if (sc == null) {
+            if (sc == null)
                 return;
-            }
 
             // Note: if your application uses a WWJ version prior to SVN revision #12956, then replace any calls to
             // SceneController.getGLRuntimeCapabilities() with
             //  SceneController.getDrawContext().getGLRuntimeCapabilities().
+
             GLRuntimeCapabilities glrc = sc.getGLRuntimeCapabilities();
-            if (glrc == null) {
+            if (glrc == null)
+            {
                 String message = Logging.getMessage("nullValue.GLRuntimeCapabilitiesIsNull");
                 Logging.logger().warning(message);
                 return;
@@ -101,7 +102,8 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate {
          *
          * @return true ot enable use of GL framebuffer objects; false otherwise.
          */
-        protected boolean isEnableFramebufferObjects() {
+        protected boolean isEnableFramebufferObjects()
+        {
             // Applications inject their logic for determining whether or not to enable use of OpenGL framebuffer
             // objects in the WorldWind SDK. If OpenGL framebuffer objects are not available on the host machine,
             // this setting is ignored.
@@ -109,7 +111,8 @@ public class ConfiguringGLRuntimeCapabilities extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         start("WorldWind Configuring GL Runtime Capabilities", AppFrame.class);
     }
 }

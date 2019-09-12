@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -19,8 +20,8 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: Airhead.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Airhead extends BasicArea {
-
+public class Airhead extends BasicArea
+{
     /**
      * Default offset to apply to the label. The default aligns the top center of the label with the label's geographic
      * position, in order to keep the text South of the area.
@@ -32,7 +33,8 @@ public class Airhead extends BasicArea {
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics() {
+    public static List<String> getSupportedGraphics()
+    {
         return Arrays.asList(TacGrpSidc.C2GM_SPL_ARA_AHD);
     }
 
@@ -41,13 +43,15 @@ public class Airhead extends BasicArea {
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public Airhead(String sidc) {
+    public Airhead(String sidc)
+    {
         super(sidc);
         this.setShowHostileIndicator(false);
     }
 
     @Override
-    protected String createLabelText() {
+    protected String createLabelText()
+    {
         String text = this.getText();
 
         StringBuilder sb = new StringBuilder();
@@ -55,7 +59,8 @@ public class Airhead extends BasicArea {
         sb.append("AIRHEAD LINE\n");
         sb.append("(PL ");
 
-        if (!WWUtil.isEmpty(text)) {
+        if (!WWUtil.isEmpty(text))
+        {
             sb.append(text);
         }
         sb.append(")");
@@ -72,11 +77,11 @@ public class Airhead extends BasicArea {
      * @return Position for the graphic's main label.
      */
     @Override
-    protected Position determineMainLabelPosition(DrawContext dc) {
+    protected Position determineMainLabelPosition(DrawContext dc)
+    {
         Iterable<? extends LatLon> locations = this.polygon.getLocations();
-        if (locations == null) {
+        if (locations == null)
             return null;
-        }
 
         Sector sector = Sector.boundingSector(locations);
 
@@ -87,11 +92,10 @@ public class Airhead extends BasicArea {
         return new Position(minLat, avgLon, 0);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected Offset getDefaultLabelOffset() {
+    protected Offset getDefaultLabelOffset()
+    {
         return DEFAULT_OFFSET;
     }
 }

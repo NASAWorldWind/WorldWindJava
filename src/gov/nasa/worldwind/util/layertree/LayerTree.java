@@ -23,26 +23,21 @@ import gov.nasa.worldwind.util.tree.*;
  * @see LayerTreeModel
  * @see LayerTreeNode
  */
-public class LayerTree extends BasicTree {
-
-    /**
-     * The default screen location: 20x140 pixels from the upper left screen corner.
-     */
+public class LayerTree extends BasicTree
+{
+    /** The default screen location: 20x140 pixels from the upper left screen corner. */
     protected static final Offset DEFAULT_OFFSET = new Offset(20d, 140d, AVKey.PIXELS, AVKey.INSET_PIXELS);
-    /**
-     * The default frame image. Appears to the left of the frame title.
-     */
+    /** The default frame image. Appears to the left of the frame title. */
     protected static final String DEFAULT_FRAME_IMAGE = "images/layer-manager-64x64.png";
-    /**
-     * The default frame title: "Layers".
-     */
+    /** The default frame title: "Layers". */
     protected static final String DEFAULT_FRAME_TITLE = "Layers";
 
     /**
      * Creates a new <code>LayerTree</code> with an empty <code>LayerTreeModel</code> and the default screen location.
      * The tree's upper left corner is placed 20x140 pixels from the upper left screen corner.
      */
-    public LayerTree() {
+    public LayerTree()
+    {
         this.initialize(null, null);
     }
 
@@ -54,8 +49,10 @@ public class LayerTree extends BasicTree {
      *
      * @throws IllegalArgumentException if <code>model</code> is <code>null</code>.
      */
-    public LayerTree(LayerTreeModel model) {
-        if (model == null) {
+    public LayerTree(LayerTreeModel model)
+    {
+        if (model == null)
+        {
             String message = Logging.getMessage("nullValue.ModelIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -65,14 +62,17 @@ public class LayerTree extends BasicTree {
     }
 
     /**
-     * Creates a new <code>LayerTree</code> with an empty <code>LayerTreeModel</code> and the specified screen location.
+     * Creates a new <code>LayerTree</code> with an empty <code>LayerTreeModel</code> and the specified screen
+     * location.
      *
      * @param offset the screen location of the tree's upper left corner, relative to the screen's upper left corner.
      *
      * @throws IllegalArgumentException if <code>offset</code> is <code>null</code>.
      */
-    public LayerTree(Offset offset) {
-        if (offset == null) {
+    public LayerTree(Offset offset)
+    {
+        if (offset == null)
+        {
             String message = Logging.getMessage("nullValue.OffsetIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -84,20 +84,23 @@ public class LayerTree extends BasicTree {
     /**
      * Creates a new <code>LayerTree</code> with the specified <code>model</code> and the specified screen location.
      *
-     * @param model the tree model to use.
+     * @param model  the tree model to use.
      * @param offset the screen location of the tree's upper left corner, relative to the screen's upper left corner.
      *
      * @throws IllegalArgumentException if <code>model</code> is <code>null</code>, or if <code>offset</code> is
-     * <code>null</code>.
+     *                                  <code>null</code>.
      */
-    public LayerTree(LayerTreeModel model, Offset offset) {
-        if (model == null) {
+    public LayerTree(LayerTreeModel model, Offset offset)
+    {
+        if (model == null)
+        {
             String message = Logging.getMessage("nullValue.ModelIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (offset == null) {
+        if (offset == null)
+        {
             String message = Logging.getMessage("nullValue.OffsetIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -111,13 +114,13 @@ public class LayerTree extends BasicTree {
      * model, its layout, and expands the path to the root node. If either parameter is <code>null</code> this uses a
      * suitable default.
      *
-     * @param model this tree's model to use, or <code>null</code> to create a new <code>LayerTreeModel</code>.
+     * @param model  this tree's model to use, or <code>null</code> to create a new <code>LayerTreeModel</code>.
      * @param offset the screen location of this tree's upper left corner, or <code>null</code> to use the default.
      */
-    protected void initialize(LayerTreeModel model, Offset offset) {
-        if (model == null) {
+    protected void initialize(LayerTreeModel model, Offset offset)
+    {
+        if (model == null)
             model = this.createTreeModel();
-        }
 
         this.setModel(model);
         this.setLayout(this.createTreeLayout(offset));
@@ -129,7 +132,8 @@ public class LayerTree extends BasicTree {
      *
      * @return a new <code>LayerTreeModel</code>.
      */
-    protected LayerTreeModel createTreeModel() {
+    protected LayerTreeModel createTreeModel()
+    {
         return new LayerTreeModel();
     }
 
@@ -141,10 +145,10 @@ public class LayerTree extends BasicTree {
      *
      * @return new <code>TreeLayout</code>.
      */
-    protected TreeLayout createTreeLayout(Offset offset) {
-        if (offset == null) {
+    protected TreeLayout createTreeLayout(Offset offset)
+    {
+        if (offset == null)
             offset = DEFAULT_OFFSET;
-        }
 
         BasicTreeLayout layout = new BasicTreeLayout(this, offset);
         layout.getFrame().setFrameTitle(DEFAULT_FRAME_TITLE);
@@ -169,10 +173,9 @@ public class LayerTree extends BasicTree {
         return layout;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public LayerTreeModel getModel() {
+    /** {@inheritDoc} */
+    public LayerTreeModel getModel()
+    {
         return (LayerTreeModel) super.getModel();
     }
 }

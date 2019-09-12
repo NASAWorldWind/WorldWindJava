@@ -11,8 +11,8 @@ import gov.nasa.worldwind.WWObject;
  * @author Tom Gaskins
  * @version $Id: Retriever.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Retriever extends WWObject, java.util.concurrent.Callable<Retriever> {
-
+public interface Retriever extends WWObject, java.util.concurrent.Callable<Retriever>
+{
     public final String RETRIEVER_STATE_NOT_STARTED = "gov.nasa.worldwind.RetrieverStatusNotStarted";
     public final String RETRIEVER_STATE_STARTED = "gov.nasa.worldwind.RetrieverStatusStarted";
     public final String RETRIEVER_STATE_CONNECTING = "gov.nasa.worldwind.RetrieverStatusConnecting";
@@ -37,7 +37,7 @@ public interface Retriever extends WWObject, java.util.concurrent.Callable<Retri
      * Indicates the expiration time of the resource retrieved by this Retriever.
      *
      * @return The expiration time of the resource, in milliseconds since the Epoch (January 1, 1970, 00:00:00 GMT).
-     * Zero indicates that there is no expiration time.
+     *         Zero indicates that there is no expiration time.
      */
     long getExpirationTime();
 
