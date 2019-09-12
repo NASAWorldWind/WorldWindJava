@@ -11,10 +11,10 @@ import gov.nasa.worldwind.util.*;
  * @author dcollins
  * @version $Id: Vec4.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Vec4 {
-
-    public static final Vec4 INFINITY
-            = new Vec4(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, 0);
+public class Vec4
+{
+    public static final Vec4 INFINITY =
+        new Vec4(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, 0);
     public static final Vec4 ZERO = new Vec4(0, 0, 0, 1);
     public static final Vec4 ONE = new Vec4(1, 1, 1, 1);
     public static final Vec4 UNIT_X = new Vec4(1, 0, 0, 0);
@@ -36,42 +36,47 @@ public class Vec4 {
     // Cached computations.
     private int hashCode;
 
-    public Vec4(double value) {
+    public Vec4(double value)
+    {
         this(value, value, value);
     }
 
-    public Vec4(double x, double y) {
+    public Vec4(double x, double y)
+    {
         this(x, y, 0, DEFAULT_W);
     }
 
-    public Vec4(double x, double y, double z) {
+    public Vec4(double x, double y, double z)
+    {
         this(x, y, z, DEFAULT_W);
     }
 
-    public Vec4(double x, double y, double z, double w) {
+    public Vec4(double x, double y, double z, double w)
+    {
         this.x = x;
         this.y = y;
         this.z = z;
         this.w = w;
     }
 
-    public final boolean equals(Object obj) {
-        if (this == obj) {
+    public final boolean equals(Object obj)
+    {
+        if (this == obj)
             return true;
-        }
-        if (obj == null || obj.getClass() != this.getClass()) {
+        if (obj == null || obj.getClass() != this.getClass())
             return false;
-        }
 
         Vec4 that = (Vec4) obj;
         return (this.x == that.x)
-                && (this.y == that.y)
-                && (this.z == that.z)
-                && (this.w == that.w);
+            && (this.y == that.y)
+            && (this.z == that.z)
+            && (this.w == that.w);
     }
 
-    public final int hashCode() {
-        if (this.hashCode == 0) {
+    public final int hashCode()
+    {
+        if (this.hashCode == 0)
+        {
             int result;
             long tmp;
             tmp = Double.doubleToLongBits(this.x);
@@ -90,58 +95,58 @@ public class Vec4 {
     /**
      * Constructs a new Vec4 with coordinate values read from the specified double array. The specified offset must be 0
      * or greater, the specified length must be 1 or greater, and the array must have capacity equal to or greater than
-     * <code>offset + length</code>. Coordinates are assigned as follows:
-     * <p>
-     * <code>x = array[offset]</code><br> <code>y
+     * <code>offset + length</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br> <code>y
      * = array[offset + 1]</code> if <code>length &gt; 1</code>, otherwise <code>y=0</code><br><code>z = array[offset +
      * 2]</code> if <code>length &gt; 2</code>, otherwise <code>z=0</code><br><code>w = array[offset + 3]</code> if
      * <code>length &gt; 3</code>, otherwise <code>w=1</code></p>
      *
-     * @param array the double array from which to read coordinate data.
+     * @param array  the double array from which to read coordinate data.
      * @param offset the array starting index.
      * @param length the number of coordinates to read.
      *
      * @return a new Vec4 with coordinate values read from the specified double array.
      *
      * @throws IllegalArgumentException if the array is null, if offset is negative, if length is less than 1, or if the
-     * array's capacity is less than <code>offset + length</code>.
+     *                                  array's capacity is less than <code>offset + length</code>.
      */
-    public static Vec4 fromDoubleArray(double[] array, int offset, int length) {
-        if (array == null) {
+    public static Vec4 fromDoubleArray(double[] array, int offset, int length)
+    {
+        if (array == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (offset < 0) {
+        if (offset < 0)
+        {
             String msg = Logging.getMessage("generic.OffsetIsInvalid", offset);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (length < 1) {
+        if (length < 1)
+        {
             String msg = Logging.getMessage("generic.LengthIsInvalid", length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (array.length < offset + length) {
+        if (array.length < offset + length)
+        {
             String msg = Logging.getMessage("generic.ArrayInvalidLength", array.length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (length == 1) {
+        if (length == 1)
             return new Vec4(array[offset], 0d);
-        }
 
-        if (length == 2) {
+        if (length == 2)
             return new Vec4(array[offset], array[offset + 1]);
-        }
 
-        if (length == 3) {
+        if (length == 3)
             return new Vec4(array[offset], array[offset + 1], array[offset + 2]);
-        }
 
         return new Vec4(array[offset], array[offset + 1], array[offset + 2], array[offset + 3]);
     }
@@ -149,54 +154,55 @@ public class Vec4 {
     /**
      * Constructs a new Vec4 with coordinate values read from the specified float array. The specified offset must be 0
      * or greater, the specified length must be 1 or greater, and the array must have capacity equal to or greater than
-     * <code>offset + length</code>. Coordinates are assigned as follows:
-     * <p>
-     * <code>x = array[offset]</code><br> <code>y
+     * <code>offset + length</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br> <code>y
      * = array[offset + 1]</code> if <code>length &gt; 1</code>, otherwise <code>y=0</code><br><code>z = array[offset +
      * 2]</code> if <code>length &gt; 2</code>, otherwise <code>z=0</code><br><code>w = array[offset + 3]</code> if
      * <code>length &gt; 3</code>, otherwise <code>w=1</code></p>
      *
-     * @param array the float array from which to read coordinate data.
+     * @param array  the float array from which to read coordinate data.
      * @param offset the array starting index.
      * @param length the number of coordinates to read.
      *
      * @return a new Vec4 with coordinate values read from the specified double array.
      *
      * @throws IllegalArgumentException if the array is null, if offset is negative, if length is less than 1, or if the
-     * array's capacity is less than <code>offset + length</code>.
+     *                                  array's capacity is less than <code>offset + length</code>.
      */
-    public static Vec4 fromFloatArray(float[] array, int offset, int length) {
-        if (array == null) {
+    public static Vec4 fromFloatArray(float[] array, int offset, int length)
+    {
+        if (array == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (offset < 0) {
+        if (offset < 0)
+        {
             String msg = Logging.getMessage("generic.OffsetIsInvalid", offset);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (length < 1) {
+        if (length < 1)
+        {
             String msg = Logging.getMessage("generic.LengthIsInvalid", length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (array.length < offset + length) {
+        if (array.length < offset + length)
+        {
             String msg = Logging.getMessage("generic.ArrayInvalidLength", array.length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (length == 2) {
+        if (length == 2)
             return new Vec4(array[offset], array[offset + 1], 0d);
-        }
 
-        if (length == 3) {
+        if (length == 3)
             return new Vec4(array[offset], array[offset + 1], array[offset + 2]);
-        }
 
         return new Vec4(array[offset], array[offset + 1], array[offset + 2], array[offset + 3]);
     }
@@ -204,21 +210,21 @@ public class Vec4 {
     /**
      * Constructs a new Vec4 with <code>x</code> and <code>y</code> values from the specified double array. The
      * specified offset must be 0 or greater, and the array must have capacity equal to or greater than <code>offset +
-     * 2</code>. Coordinates are assigned as follows:
-     * <p>
-     * <code>x = array[offset]</code><br><code>y = array[offset +
+     * 2</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br><code>y = array[offset +
      * 1]</code></p>
      *
-     * @param array the double array from which to read coordinate data.
+     * @param array  the double array from which to read coordinate data.
      * @param offset the array starting index.
      *
      * @return a new Vec4 with <code>x</code> and <code>y</code> coordinate values from the specified double array.
      *
      * @throws IllegalArgumentException if the array is null, if offset is negative, or if the array's capacity is less
-     * than <code>offset + 2</code>.
+     *                                  than <code>offset + 2</code>.
      */
-    public static Vec4 fromArray2(double[] array, int offset) {
-        if (array == null) {
+    public static Vec4 fromArray2(double[] array, int offset)
+    {
+        if (array == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -230,22 +236,22 @@ public class Vec4 {
     /**
      * Constructs a new Vec4 with <code>x</code>, <code>y</code> and <code>z</code> values from the specified double
      * array. The specified offset must be 0 or greater, and the array must have capacity equal to or greater than
-     * <code>offset + 3</code>. Coordinates are assigned as follows:
-     * <p>
-     * <code>x = array[offset]</code><br><code>y =
+     * <code>offset + 3</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br><code>y =
      * array[offset + 1]</code><br><code>z = array[offset + 2]</code></p>
      *
-     * @param array the double array from which to read coordinate data.
+     * @param array  the double array from which to read coordinate data.
      * @param offset the array starting index.
      *
      * @return a new Vec4 with <code>x</code>, <code>y</code> and <code>z</code> coordinate values from the specified
-     * double array.
+     *         double array.
      *
      * @throws IllegalArgumentException if the array is null, if offset is negative, or if the array's capacity is less
-     * than <code>offset + 3</code>.
+     *                                  than <code>offset + 3</code>.
      */
-    public static Vec4 fromArray3(double[] array, int offset) {
-        if (array == null) {
+    public static Vec4 fromArray3(double[] array, int offset)
+    {
+        if (array == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -257,23 +263,23 @@ public class Vec4 {
     /**
      * Constructs a new Vec4 with <code>x</code>, <code>y</code>, <code>z</code> and <code>w</code> values from the
      * specified double array. The specified offset must be 0 or greater, and the array must have capacity equal to or
-     * greater than <code>offset + 4</code>. Coordinates are assigned as follows:
-     * <p>
-     * <code>x =
+     * greater than <code>offset + 4</code>. Coordinates are assigned as follows:<p><code>x =
      * array[offset]</code><br><code>y = array[offset + 1]</code><br><code>z = array[offset + 2]</code><br><code>w =
      * array[offset + 3]</code></p>
      *
-     * @param array the double array from which to read coordinate data.
+     * @param array  the double array from which to read coordinate data.
      * @param offset the array starting index.
      *
      * @return a new Vec4 with <code>x</code>, <code>y</code>, <code>z</code> and <code>w</code> coordinate values from
-     * the specified double array.
+     *         the specified double array.
      *
      * @throws IllegalArgumentException if the array is null, if offset is negative, or if the array's capacity is less
-     * than <code>offset + 4</code>.
+     *                                  than <code>offset + 4</code>.
      */
-    public static Vec4 fromArray4(double[] array, int offset) {
-        if (array == null) {
+    public static Vec4 fromArray4(double[] array, int offset)
+    {
+        if (array == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -285,43 +291,46 @@ public class Vec4 {
     /**
      * Writes this Vec4's coordinate values to the specified double array. The specified offset must be 0 or greater,
      * the specified length must be 1 or greater, and the array must have capacity equal to or greater than <code>offset
-     * + length</code>. Coordinates are written to the array as follows:
-     * <p>
-     * <code>array[offset] =
+     * + length</code>. Coordinates are written to the array as follows:<p><code>array[offset] =
      * x</code><br><code>array[offset + 1] = y</code> if <code>length &gt; 1</code>, otherwise <code>array[offset +
      * 1]</code> is not written to<br> <code>array[offset + 2] = z</code> if <code>length &gt; 2</code>, otherwise
      * <code>array[offset + 2]</code> is not written to<br><code>array[offset + 3] = w</code> if <code>length &gt;
      * 3</code>, otherwise <code>array[offset + 3]</code> is not written to</p>
      *
-     * @param array the double array to receive the coordinate data.
+     * @param array  the double array to receive the coordinate data.
      * @param offset the array starting index.
      * @param length the number of coordinates to write.
      *
      * @return the specified double array.
      *
      * @throws IllegalArgumentException if the array is null, if offset is negative, if length is less than 1, or if the
-     * array's capacity is less than <code>offset + length</code>.
+     *                                  array's capacity is less than <code>offset + length</code>.
      */
-    public final double[] toDoubleArray(double[] array, int offset, int length) {
-        if (array == null) {
+    public final double[] toDoubleArray(double[] array, int offset, int length)
+    {
+        if (array == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (offset < 0) {
+        if (offset < 0)
+        {
             String msg = Logging.getMessage("generic.OffsetIsInvalid", offset);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (length < 1) {
+        if (length < 1)
+        {
             String msg = Logging.getMessage("generic.LengthIsInvalid", length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (array.length < offset + length) {
+        if (array.length < offset + length)
+        {
             String msg = Logging.getMessage("generic.ArrayInvalidLength", array.length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -329,15 +338,12 @@ public class Vec4 {
 
         array[offset] = this.x;
 
-        if (length > 1) {
+        if (length > 1)
             array[offset + 1] = this.y;
-        }
-        if (length > 2) {
+        if (length > 2)
             array[offset + 2] = this.z;
-        }
-        if (length > 3) {
+        if (length > 3)
             array[offset + 3] = this.w;
-        }
 
         return array;
     }
@@ -345,43 +351,46 @@ public class Vec4 {
     /**
      * Writes this Vec4's coordinate values to the specified float array. The specified offset must be 0 or greater, the
      * specified length must be 1 or greater, and the array must have capacity equal to or greater than <code>offset +
-     * length</code>. Coordinates are written to the array as follows:
-     * <p>
-     * <code>array[offset] =
+     * length</code>. Coordinates are written to the array as follows:<p><code>array[offset] =
      * x</code><br><code>array[offset + 1] = y</code> if <code>length &gt; 1</code>, otherwise <code>array[offset +
      * 1]</code> is not written to<br> <code>array[offset + 2] = z</code> if <code>length &gt; 2</code>, otherwise
      * <code>array[offset + 2]</code> is not written to<br><code>array[offset + 3] = w</code> if <code>length &gt;
      * 3</code>, otherwise <code>array[offset + 3]</code> is not written to</p>
      *
-     * @param array the float array to receive the coordinate data.
+     * @param array  the float array to receive the coordinate data.
      * @param offset the array starting index.
      * @param length the number of coordinates to write.
      *
      * @return the specified double array.
      *
      * @throws IllegalArgumentException if the array is null, if offset is negative, if length is less than 1, or if the
-     * array's capacity is less than <code>offset + length</code>.
+     *                                  array's capacity is less than <code>offset + length</code>.
      */
-    public final float[] toFloatArray(float[] array, int offset, int length) {
-        if (array == null) {
+    public final float[] toFloatArray(float[] array, int offset, int length)
+    {
+        if (array == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (offset < 0) {
+        if (offset < 0)
+        {
             String msg = Logging.getMessage("generic.OffsetIsInvalid", offset);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (length < 1) {
+        if (length < 1)
+        {
             String msg = Logging.getMessage("generic.LengthIsInvalid", length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (array.length < offset + length) {
+        if (array.length < offset + length)
+        {
             String msg = Logging.getMessage("generic.ArrayInvalidLength", array.length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -390,12 +399,10 @@ public class Vec4 {
         array[offset] = (float) this.x;
         array[offset + 1] = (float) this.y;
 
-        if (length > 2) {
+        if (length > 2)
             array[offset + 2] = (float) this.z;
-        }
-        if (length > 3) {
+        if (length > 3)
             array[offset + 3] = (float) this.w;
-        }
 
         return array;
     }
@@ -403,21 +410,21 @@ public class Vec4 {
     /**
      * Writes this Vec4's <code>x</code> and <code>y</code> values to the specified double array. The specified offset
      * must be 0 or greater, and the array must have have capacity equal to or greater than <code>offset + 2</code>.
-     * Coordinates are written to the array as follows:
-     * <p>
-     * <code>array[offset] = x</code><br><code>array[offset + 1] =
+     * Coordinates are written to the array as follows:<p><code>array[offset] = x</code><br><code>array[offset + 1] =
      * y</code></p>
      *
-     * @param array the double array to receive the coordinate data.
+     * @param array  the double array to receive the coordinate data.
      * @param offset the array starting index.
      *
      * @return the specified double array.
      *
      * @throws IllegalArgumentException if the array is null, if offset is negative, or if the array's capacity is less
-     * than <code>offset + 2</code>.
+     *                                  than <code>offset + 2</code>.
      */
-    public final double[] toArray2(double[] array, int offset) {
-        if (array == null) {
+    public final double[] toArray2(double[] array, int offset)
+    {
+        if (array == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -429,21 +436,21 @@ public class Vec4 {
     /**
      * Writes this Vec4's <code>x</code>, <code>y</code> and <code>z</code> values to the specified double array. The
      * specified offset must be 0 or greater, and the array must have have capacity equal to or greater than
-     * <code>offset + 3</code>. Coordinates are written to the array as follows:
-     * <p>
-     * <code>array[offset] =
+     * <code>offset + 3</code>. Coordinates are written to the array as follows:<p><code>array[offset] =
      * x</code><br><code>array[offset + 1] = y</code><br><code>array[offset + 2] = z</code></p>
      *
-     * @param array the double array to receive the coordinate data.
+     * @param array  the double array to receive the coordinate data.
      * @param offset the array starting index.
      *
      * @return the specified double array.
      *
      * @throws IllegalArgumentException if the array is null, if offset is negative, or if the array's capacity is less
-     * than <code>offset + 3</code>.
+     *                                  than <code>offset + 3</code>.
      */
-    public final double[] toArray3(double[] array, int offset) {
-        if (array == null) {
+    public final double[] toArray3(double[] array, int offset)
+    {
+        if (array == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -455,22 +462,22 @@ public class Vec4 {
     /**
      * Writes this Vec4's <code>x</code>, <code>y</code>, <code>z</code> and <code>w</code> values to the specified
      * double array. The specified offset must be 0 or greater, and the array must have have capacity equal to or
-     * greater than <code>offset + 4</code>. Coordinates are written to the array as follows:
-     * <p>
-     * <code>array[offset] =
+     * greater than <code>offset + 4</code>. Coordinates are written to the array as follows:<p><code>array[offset] =
      * x</code><br><code>array[offset + 1] = y</code><br><code>array[offset + 2] = z</code><br><code>array[offset +
      * 3] = w</code></p>
      *
-     * @param array the double array to receive the coordinate data.
+     * @param array  the double array to receive the coordinate data.
      * @param offset the array starting index.
      *
      * @return the specified double array.
      *
      * @throws IllegalArgumentException if the array is null, if offset is negative, or if the array's capacity is less
-     * than <code>offset + 4</code>.
+     *                                  than <code>offset + 4</code>.
      */
-    public final double[] toArray4(double[] array, int offset) {
-        if (array == null) {
+    public final double[] toArray4(double[] array, int offset)
+    {
+        if (array == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -490,13 +497,13 @@ public class Vec4 {
      *
      * @return this <code>Vec4</code> converted to a point vector in four-dimensional homogeneous coordinates.
      */
-    public Vec4 toHomogeneousPoint3() {
+    public Vec4 toHomogeneousPoint3()
+    {
         // For a discussion of homogeneous coordinates, see "Mathematics for 3D Game Programming and Computer Graphics,
         // Second Edition" by Eric Lengyel, Section 3.4 (pages 81-84).
 
-        if (this.w == 1.0) {
+        if (this.w == 1.0)
             return this;
-        }
 
         return new Vec4(this.x, this.y, this.z, 1.0);
     }
@@ -512,18 +519,19 @@ public class Vec4 {
      *
      * @return this <code>Vec4</code> converted to a direction vector in four-dimensional homogeneous coordinates.
      */
-    public Vec4 toHomogeneousDirection3() {
+    public Vec4 toHomogeneousDirection3()
+    {
         // For a discussion of homogeneous coordinates, see "Mathematics for 3D Game Programming and Computer Graphics, 
         // Second Edition" by Eric Lengyel, Section 3.4 (pages 81-84).
 
-        if (this.w == 0.0) {
+        if (this.w == 0.0)
             return this;
-        }
 
         return new Vec4(this.x, this.y, this.z, 0.0);
     }
 
-    public final String toString() {
+    public final String toString()
+    {
         StringBuilder sb = new StringBuilder();
         sb.append("(");
         sb.append(this.x).append(", ");
@@ -534,52 +542,63 @@ public class Vec4 {
         return sb.toString();
     }
 
-    public final double getX() {
+    public final double getX()
+    {
         return this.x;
     }
 
-    public final double getY() {
+    public final double getY()
+    {
         return this.y;
     }
 
-    public final double getZ() {
+    public final double getZ()
+    {
         return this.z;
     }
 
-    public final double getW() {
+    public final double getW()
+    {
         return this.w;
     }
 
-    public final double x() {
+    public final double x()
+    {
         return this.x;
     }
 
-    public final double y() {
+    public final double y()
+    {
         return this.y;
     }
 
-    public final double z() {
+    public final double z()
+    {
         return this.z;
     }
 
-    public final double w() {
+    public final double w()
+    {
         return this.w;
     }
 
     // ============== Factory Functions ======================= //
     // ============== Factory Functions ======================= //
     // ============== Factory Functions ======================= //
-    public static Vec4 fromLine3(Vec4 origin, double t, Vec4 direction) {
-        if (origin == null || direction == null) {
+
+    public static Vec4 fromLine3(Vec4 origin, double t, Vec4 direction)
+    {
+        if (origin == null || direction == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                origin.x + (direction.x * t),
-                origin.y + (direction.y * t),
-                origin.z + (direction.z * t));
+            origin.x + (direction.x * t),
+            origin.y + (direction.y * t),
+            origin.z + (direction.z * t));
 
 //        return fromLine3(
 //            origin.x, origin.y, origin.z,
@@ -614,132 +633,157 @@ public class Vec4 {
     // ============== Arithmetic Functions ======================= //
     // ============== Arithmetic Functions ======================= //
     // ============== Arithmetic Functions ======================= //
-    public final Vec4 add3(Vec4 vec4) {
-        if (vec4 == null) {
+
+    public final Vec4 add3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                this.x + vec4.x,
-                this.y + vec4.y,
-                this.z + vec4.z,
-                this.w);
+            this.x + vec4.x,
+            this.y + vec4.y,
+            this.z + vec4.z,
+            this.w);
     }
 
-    public final Vec4 add3(double x, double y, double z) {
+    public final Vec4 add3(double x, double y, double z)
+    {
         return new Vec4(this.x + x, this.y + y, this.z + z, this.w);
     }
 
-    public final Vec4 subtract3(Vec4 vec4) {
-        if (vec4 == null) {
+    public final Vec4 subtract3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                this.x - vec4.x,
-                this.y - vec4.y,
-                this.z - vec4.z,
-                this.w);
+            this.x - vec4.x,
+            this.y - vec4.y,
+            this.z - vec4.z,
+            this.w);
     }
 
-    public final Vec4 subtract3(double x, double y, double z) {
+    public final Vec4 subtract3(double x, double y, double z)
+    {
         return new Vec4(this.x - x, this.y - y, this.z - z, this.w);
     }
 
-    public final Vec4 multiply3(double value) {
+    public final Vec4 multiply3(double value)
+    {
         return new Vec4(
-                this.x * value,
-                this.y * value,
-                this.z * value,
-                this.w);
+            this.x * value,
+            this.y * value,
+            this.z * value,
+            this.w);
     }
 
-    public final Vec4 multiply3(Vec4 vec4) {
-        if (vec4 == null) {
+    public final Vec4 multiply3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                this.x * vec4.x,
-                this.y * vec4.y,
-                this.z * vec4.z,
-                this.w);
+            this.x * vec4.x,
+            this.y * vec4.y,
+            this.z * vec4.z,
+            this.w);
     }
 
-    public final Vec4 divide3(double value) {
-        if (value == 0) {
+    public final Vec4 divide3(double value)
+    {
+        if (value == 0)
+        {
             String msg = Logging.getMessage("generic.ArgumentOutOfRange", value);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                this.x / value,
-                this.y / value,
-                this.z / value,
-                this.w);
+            this.x / value,
+            this.y / value,
+            this.z / value,
+            this.w);
     }
 
-    public final Vec4 divide3(Vec4 vec4) {
-        if (vec4 == null) {
+    public final Vec4 divide3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                this.x / vec4.x,
-                this.y / vec4.y,
-                this.z / vec4.z,
-                this.w);
+            this.x / vec4.x,
+            this.y / vec4.y,
+            this.z / vec4.z,
+            this.w);
     }
 
-    public final Vec4 getNegative3() {
+    public final Vec4 getNegative3()
+    {
         return new Vec4(
-                0.0 - this.x,
-                0.0 - this.y,
-                0.0 - this.z,
-                this.w);
+            0.0 - this.x,
+            0.0 - this.y,
+            0.0 - this.z,
+            this.w);
     }
 
-    public final Vec4 getAbs3() {
+    public final Vec4 getAbs3()
+    {
         return new Vec4(Math.abs(this.x), Math.abs(this.y), Math.abs(this.z));
     }
 
     // ============== Geometric Functions ======================= //
     // ============== Geometric Functions ======================= //
     // ============== Geometric Functions ======================= //
-    public final double getLength3() {
+
+    public final double getLength3()
+    {
         return Math.sqrt(this.getLengthSquared3());
     }
 
-    public final double getLengthSquared3() {
+    public final double getLengthSquared3()
+    {
         return (this.x * this.x)
-                + (this.y * this.y)
-                + (this.z * this.z);
+            + (this.y * this.y)
+            + (this.z * this.z);
     }
 
-    public final Vec4 normalize3() {
+    public final Vec4 normalize3()
+    {
         double length = this.getLength3();
         // Vector has zero length.
-        if (length == 0) {
+        if (length == 0)
+        {
             return this;
-        } else {
+        }
+        else
+        {
             return new Vec4(
-                    this.x / length,
-                    this.y / length,
-                    this.z / length);
+                this.x / length,
+                this.y / length,
+                this.z / length);
         }
     }
 
-    public final double distanceTo2(Vec4 vec4) {
-        if (vec4 == null) {
+    public final double distanceTo2(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -750,8 +794,10 @@ public class Vec4 {
         return Math.sqrt(dx * dx + dy * dy);
     }
 
-    public final double distanceTo3(Vec4 vec4) {
-        if (vec4 == null) {
+    public final double distanceTo3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -760,8 +806,10 @@ public class Vec4 {
         return Math.sqrt(this.distanceToSquared3(vec4));
     }
 
-    public final double distanceToSquared3(Vec4 vec4) {
-        if (vec4 == null) {
+    public final double distanceToSquared3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -778,8 +826,10 @@ public class Vec4 {
         return result;
     }
 
-    public final double dot3(Vec4 vec4) {
-        if (vec4 == null) {
+    public final double dot3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -788,8 +838,10 @@ public class Vec4 {
         return (this.x * vec4.x) + (this.y * vec4.y) + (this.z * vec4.z);
     }
 
-    public final double dot4(Vec4 vec4) {
-        if (vec4 == null) {
+    public final double dot4(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -798,29 +850,35 @@ public class Vec4 {
         return (this.x * vec4.x) + (this.y * vec4.y) + (this.z * vec4.z) + (this.w * vec4.w);
     }
 
-    public final double dotSelf3() {
+    public final double dotSelf3()
+    {
         return this.dot3(this);
     }
 
-    public final double dotSelf4() {
+    public final double dotSelf4()
+    {
         return this.dot4(this);
     }
 
-    public final Vec4 cross3(Vec4 vec4) {
-        if (vec4 == null) {
+    public final Vec4 cross3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                (this.y * vec4.z) - (this.z * vec4.y),
-                (this.z * vec4.x) - (this.x * vec4.z),
-                (this.x * vec4.y) - (this.y * vec4.x));
+            (this.y * vec4.z) - (this.z * vec4.y),
+            (this.z * vec4.x) - (this.x * vec4.z),
+            (this.x * vec4.y) - (this.y * vec4.x));
     }
 
-    public final Angle angleBetween3(Vec4 vec4) {
-        if (vec4 == null) {
+    public final Angle angleBetween3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -830,17 +888,15 @@ public class Vec4 {
         // Compute the sum of magnitudes.
         double length = this.getLength3() * vec4.getLength3();
         // Normalize the dot product, if necessary.
-        if (!(length == 0) && (length != 1.0)) {
+        if (!(length == 0) && (length != 1.0))
             a_dot_b /= length;
-        }
 
         // The normalized dot product should be in the range [-1, 1]. Otherwise the result is an error from floating
         // point roundoff. So if a_dot_b is less than -1 or greater than +1, we treat it as -1 and +1 respectively.
-        if (a_dot_b < -1.0) {
+        if (a_dot_b < -1.0)
             a_dot_b = -1.0;
-        } else if (a_dot_b > 1.0) {
+        else if (a_dot_b > 1.0)
             a_dot_b = 1.0;
-        }
 
         // Angle is arc-cosine of normalized dot product.
         return Angle.fromRadians(Math.acos(a_dot_b));
@@ -849,22 +905,25 @@ public class Vec4 {
     /**
      * Compute the angle and rotation axis required to rotate one vector to align with another.
      *
-     * @param v1 The base vector.
-     * @param v2 The vector to rotate into alignment with <code>v1</code>.
+     * @param v1     The base vector.
+     * @param v2     The vector to rotate into alignment with <code>v1</code>.
      * @param result A reference to an array in which to return the computed axis. May not be null.
      *
      * @return The rotation angle.
      *
      * @throws IllegalArgumentException if any parameter is null.
      */
-    public static Angle axisAngle(Vec4 v1, Vec4 v2, Vec4[] result) {
-        if (v1 == null || v2 == null) {
+    public static Angle axisAngle(Vec4 v1, Vec4 v2, Vec4[] result)
+    {
+        if (v1 == null || v2 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (result == null) {
+        if (result == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -885,8 +944,10 @@ public class Vec4 {
         return angle;
     }
 
-    public final Vec4 projectOnto3(Vec4 vec4) {
-        if (vec4 == null) {
+    public final Vec4 projectOnto3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -895,14 +956,15 @@ public class Vec4 {
         double dot = this.dot3(vec4);
         double length = vec4.getLength3();
         // Normalize the dot product, if necessary.
-        if (!(length == 0) && (length != 1.0)) {
+        if (!(length == 0) && (length != 1.0))
             dot /= (length * length);
-        }
         return vec4.multiply3(dot);
     }
 
-    public final Vec4 perpendicularTo3(Vec4 vec4) {
-        if (vec4 == null) {
+    public final Vec4 perpendicularTo3(Vec4 vec4)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -916,32 +978,37 @@ public class Vec4 {
      *
      * @return an array of two unit vectors mutually orthogonal to this vector.
      */
-    public Vec4[] perpendicularVectors() {
+    public Vec4[] perpendicularVectors()
+    {
         // For the first vector, use the direction of the least component of this, which indicates the more
         // orthogonal axis to this.
         Vec4 v = this;
         Vec4 v1 = v.x <= v.y && v.x <= v.z ? Vec4.UNIT_X : v.y <= v.x && v.y <= v.z ? Vec4.UNIT_Y : Vec4.UNIT_Z;
-        Vec4 va  = v.cross3(v1).normalize3();
+        Vec4 va = v.cross3(v1).normalize3();
         Vec4 vb = v.cross3(va).normalize3();
 
-        return new Vec4[]{va, vb};
+        return new Vec4[] {va, vb};
     }
 
-    public final Vec4 transformBy3(Matrix matrix) {
-        if (matrix == null) {
+    public final Vec4 transformBy3(Matrix matrix)
+    {
+        if (matrix == null)
+        {
             String msg = Logging.getMessage("nullValue.MatrixIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                (matrix.m11 * this.x) + (matrix.m12 * this.y) + (matrix.m13 * this.z),
-                (matrix.m21 * this.x) + (matrix.m22 * this.y) + (matrix.m23 * this.z),
-                (matrix.m31 * this.x) + (matrix.m32 * this.y) + (matrix.m33 * this.z));
+            (matrix.m11 * this.x) + (matrix.m12 * this.y) + (matrix.m13 * this.z),
+            (matrix.m21 * this.x) + (matrix.m22 * this.y) + (matrix.m23 * this.z),
+            (matrix.m31 * this.x) + (matrix.m32 * this.y) + (matrix.m33 * this.z));
     }
 
-    public final Vec4 transformBy3(Quaternion quaternion) {
-        if (quaternion == null) {
+    public final Vec4 transformBy3(Quaternion quaternion)
+    {
+        if (quaternion == null)
+        {
             String msg = Logging.getMessage("nullValue.QuaternionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -953,80 +1020,90 @@ public class Vec4 {
         return new Vec4(tmp.x, tmp.y, tmp.z, 0.0);
     }
 
-    public final Vec4 transformBy4(Matrix matrix) {
-        if (matrix == null) {
+    public final Vec4 transformBy4(Matrix matrix)
+    {
+        if (matrix == null)
+        {
             String msg = Logging.getMessage("nullValue.MatrixIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                (matrix.m11 * this.x) + (matrix.m12 * this.y) + (matrix.m13 * this.z) + (matrix.m14 * this.w),
-                (matrix.m21 * this.x) + (matrix.m22 * this.y) + (matrix.m23 * this.z) + (matrix.m24 * this.w),
-                (matrix.m31 * this.x) + (matrix.m32 * this.y) + (matrix.m33 * this.z) + (matrix.m34 * this.w),
-                (matrix.m41 * this.x) + (matrix.m42 * this.y) + (matrix.m43 * this.z) + (matrix.m44 * this.w));
+            (matrix.m11 * this.x) + (matrix.m12 * this.y) + (matrix.m13 * this.z) + (matrix.m14 * this.w),
+            (matrix.m21 * this.x) + (matrix.m22 * this.y) + (matrix.m23 * this.z) + (matrix.m24 * this.w),
+            (matrix.m31 * this.x) + (matrix.m32 * this.y) + (matrix.m33 * this.z) + (matrix.m34 * this.w),
+            (matrix.m41 * this.x) + (matrix.m42 * this.y) + (matrix.m43 * this.z) + (matrix.m44 * this.w));
     }
 
     // ============== Mixing Functions ======================= //
     // ============== Mixing Functions ======================= //
     // ============== Mixing Functions ======================= //
-    public static Vec4 min3(Vec4 value1, Vec4 value2) {
-        if ((value1 == null) || (value2 == null)) {
+
+    public static Vec4 min3(Vec4 value1, Vec4 value2)
+    {
+        if ((value1 == null) || (value2 == null))
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                (value1.x < value2.x) ? value1.x : value2.x,
-                (value1.y < value2.y) ? value1.y : value2.y,
-                (value1.z < value2.z) ? value1.z : value2.z);
+            (value1.x < value2.x) ? value1.x : value2.x,
+            (value1.y < value2.y) ? value1.y : value2.y,
+            (value1.z < value2.z) ? value1.z : value2.z);
     }
 
-    public static Vec4 max3(Vec4 value1, Vec4 value2) {
-        if ((value1 == null) || (value2 == null)) {
+    public static Vec4 max3(Vec4 value1, Vec4 value2)
+    {
+        if ((value1 == null) || (value2 == null))
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                (value1.x > value2.x) ? value1.x : value2.x,
-                (value1.y > value2.y) ? value1.y : value2.y,
-                (value1.z > value2.z) ? value1.z : value2.z);
+            (value1.x > value2.x) ? value1.x : value2.x,
+            (value1.y > value2.y) ? value1.y : value2.y,
+            (value1.z > value2.z) ? value1.z : value2.z);
     }
 
-    public static Vec4 clamp3(Vec4 vec4, double min, double max) {
-        if (vec4 == null) {
+    public static Vec4 clamp3(Vec4 vec4, double min, double max)
+    {
+        if (vec4 == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         return new Vec4(
-                (vec4.x < min) ? min : ((vec4.x > max) ? max : vec4.x),
-                (vec4.y < min) ? min : ((vec4.y > max) ? max : vec4.y),
-                (vec4.z < min) ? min : ((vec4.z > max) ? max : vec4.z));
+            (vec4.x < min) ? min : ((vec4.x > max) ? max : vec4.x),
+            (vec4.y < min) ? min : ((vec4.y > max) ? max : vec4.y),
+            (vec4.z < min) ? min : ((vec4.z > max) ? max : vec4.z));
     }
 
-    public static Vec4 mix3(double amount, Vec4 value1, Vec4 value2) {
-        if ((value1 == null) || (value2 == null)) {
+    public static Vec4 mix3(double amount, Vec4 value1, Vec4 value2)
+    {
+        if ((value1 == null) || (value2 == null))
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (amount < 0.0) {
+        if (amount < 0.0)
             return value1;
-        } else if (amount > 1.0) {
+        else if (amount > 1.0)
             return value2;
-        }
 
         double t1 = 1.0 - amount;
         return new Vec4(
-                (value1.x * t1) + (value2.x * amount),
-                (value1.y * t1) + (value2.y * amount),
-                (value1.z * t1) + (value2.z * amount));
+            (value1.x * t1) + (value2.x * amount),
+            (value1.y * t1) + (value2.y * amount),
+            (value1.z * t1) + (value2.z * amount));
     }
 
     /**
@@ -1036,12 +1113,14 @@ public class Vec4 {
      * @param points the Iterable of points which define the returned arithmetic mean.
      *
      * @return the arithmetic mean point of the specified points Iterable, or null if the Iterable is empty or contains
-     * only null points.
+     *         only null points.
      *
      * @throws IllegalArgumentException if the Iterable is null.
      */
-    public static Vec4 computeAveragePoint(Iterable<? extends Vec4> points) {
-        if (points == null) {
+    public static Vec4 computeAveragePoint(Iterable<? extends Vec4> points)
+    {
+        if (points == null)
+        {
             String msg = Logging.getMessage("nullValue.PointListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -1053,10 +1132,10 @@ public class Vec4 {
         double z = 0d;
         double w = 0d;
 
-        for (Vec4 vec : points) {
-            if (vec == null) {
+        for (Vec4 vec : points)
+        {
+            if (vec == null)
                 continue;
-            }
 
             count++;
             x += vec.x;
@@ -1065,9 +1144,8 @@ public class Vec4 {
             w += vec.w;
         }
 
-        if (count == 0) {
+        if (count == 0)
             return null;
-        }
 
         return new Vec4(x / (double) count, y / (double) count, z / (double) count, w / (double) count);
     }
@@ -1084,22 +1162,25 @@ public class Vec4 {
      * remaining elements that follow the last complete tuple.
      *
      * @param coordinates the buffer containing the point coordinates for which to compute a bounding volume.
-     * @param stride the number of elements between the first coordinate of consecutive points. If stride is 3, this
-     * interprets the buffer has having tightly packed XYZ coordinate tuples.
+     * @param stride      the number of elements between the first coordinate of consecutive points. If stride is 3,
+     *                    this interprets the buffer has having tightly packed XYZ coordinate tuples.
      *
      * @return the arithmetic mean point of the specified points Iterable, or null if the Iterable is empty or contains
-     * only null points.
+     *         only null points.
      *
      * @throws IllegalArgumentException if the buffer is null, or if the stride is less than three.
      */
-    public static Vec4 computeAveragePoint3(BufferWrapper coordinates, int stride) {
-        if (coordinates == null) {
+    public static Vec4 computeAveragePoint3(BufferWrapper coordinates, int stride)
+    {
+        if (coordinates == null)
+        {
             String msg = Logging.getMessage("nullValue.CoordinatesAreNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (stride < 3) {
+        if (stride < 3)
+        {
             String msg = Logging.getMessage("generic.StrideIsInvalid");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -1110,22 +1191,24 @@ public class Vec4 {
         double y = 0d;
         double z = 0d;
 
-        for (int i = 0; i <= coordinates.length() - stride; i += stride) {
+        for (int i = 0; i <= coordinates.length() - stride; i += stride)
+        {
             count++;
             x += coordinates.getDouble(i);
             y += coordinates.getDouble(i + 1);
             z += coordinates.getDouble(i + 2);
         }
 
-        if (count == 0) {
+        if (count == 0)
             return null;
-        }
 
         return new Vec4(x / (double) count, y / (double) count, z / (double) count);
     }
 
-    public static double getAverageDistance(Iterable<? extends Vec4> points) {
-        if ((points == null)) {
+    public static double getAverageDistance(Iterable<? extends Vec4> points)
+    {
+        if ((points == null))
+        {
             String msg = Logging.getMessage("nullValue.PointListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -1134,9 +1217,12 @@ public class Vec4 {
         double totalDistance = 0.0;
         int count = 0;
 
-        for (Vec4 p1 : points) {
-            for (Vec4 p2 : points) {
-                if (p1 != p2) {
+        for (Vec4 p1 : points)
+        {
+            for (Vec4 p2 : points)
+            {
+                if (p1 != p2)
+                {
                     double d = p1.distanceTo3(p2);
                     totalDistance += d;
                     count++;
@@ -1159,16 +1245,17 @@ public class Vec4 {
      *
      * @throws IllegalArgumentException if <code>points</code> is null
      */
-    public static Vec4[] computeExtrema(Vec4 points[]) {
-        if (points == null) {
+    public static Vec4[] computeExtrema(Vec4 points[])
+    {
+        if (points == null)
+        {
             String message = Logging.getMessage("nullValue.PointsArrayIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (points.length == 0) {
+        if (points.length == 0)
             return null;
-        }
 
         double xmin = points[0].x;
         double ymin = points[0].y;
@@ -1177,42 +1264,53 @@ public class Vec4 {
         double ymax = ymin;
         double zmax = zmin;
 
-        for (int i = 1; i < points.length; i++) {
+        for (int i = 1; i < points.length; i++)
+        {
             double x = points[i].x;
-            if (x > xmax) {
+            if (x > xmax)
+            {
                 xmax = x;
-            } else if (x < xmin) {
+            }
+            else if (x < xmin)
+            {
                 xmin = x;
             }
 
             double y = points[i].y;
-            if (y > ymax) {
+            if (y > ymax)
+            {
                 ymax = y;
-            } else if (y < ymin) {
+            }
+            else if (y < ymin)
+            {
                 ymin = y;
             }
 
             double z = points[i].z;
-            if (z > zmax) {
+            if (z > zmax)
+            {
                 zmax = z;
-            } else if (z < zmin) {
+            }
+            else if (z < zmin)
+            {
                 zmin = z;
             }
         }
 
-        return new Vec4[]{new Vec4(xmin, ymin, zmin), new Vec4(xmax, ymax, zmax)};
+        return new Vec4[] {new Vec4(xmin, ymin, zmin), new Vec4(xmax, ymax, zmax)};
     }
 
-    public static Vec4[] computeExtrema(BufferWrapper buffer) {
-        if (buffer == null) {
+    public static Vec4[] computeExtrema(BufferWrapper buffer)
+    {
+        if (buffer == null)
+        {
             String message = Logging.getMessage("nullValue.BufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (buffer.getBackingBuffer().position() > buffer.getBackingBuffer().limit() - 3) {
+        if (buffer.getBackingBuffer().position() > buffer.getBackingBuffer().limit() - 3)
             return null;
-        }
 
         double xmin = buffer.getDouble(0);
         double ymin = buffer.getDouble(1);
@@ -1221,30 +1319,40 @@ public class Vec4 {
         double ymax = ymin;
         double zmax = zmin;
 
-        for (int i = 1; i < buffer.length() / 3; i++) {
+        for (int i = 1; i < buffer.length() / 3; i++)
+        {
             double x = buffer.getDouble(i * 3);
-            if (x > xmax) {
+            if (x > xmax)
+            {
                 xmax = x;
-            } else if (x < xmin) {
+            }
+            else if (x < xmin)
+            {
                 xmin = x;
             }
 
             double y = buffer.getDouble(i * 3 + 1);
-            if (y > ymax) {
+            if (y > ymax)
+            {
                 ymax = y;
-            } else if (y < ymin) {
+            }
+            else if (y < ymin)
+            {
                 ymin = y;
             }
 
             double z = buffer.getDouble(i * 3 + 2);
-            if (z > zmax) {
+            if (z > zmax)
+            {
                 zmax = z;
-            } else if (z < zmin) {
+            }
+            else if (z < zmin)
+            {
                 zmin = z;
             }
         }
 
-        return new Vec4[]{new Vec4(xmin, ymin, zmin), new Vec4(xmax, ymax, zmax)};
+        return new Vec4[] {new Vec4(xmin, ymin, zmin), new Vec4(xmax, ymax, zmax)};
     }
 
     /**
@@ -1258,8 +1366,10 @@ public class Vec4 {
      *
      * @throws IllegalArgumentException if any argument is null.
      */
-    public static boolean areColinear(Vec4 a, Vec4 b, Vec4 c) {
-        if (a == null || b == null || c == null) {
+    public static boolean areColinear(Vec4 a, Vec4 b, Vec4 c)
+    {
+        if (a == null || b == null || c == null)
+        {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);

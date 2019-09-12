@@ -16,21 +16,25 @@ import java.awt.*;
  * @author jparsons
  * @version $Id: PlaceNames.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class PlaceNames extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+public class PlaceNames extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             super(true, true, false);
-            this.getControlPanel().add(makeControlPanel(), BorderLayout.SOUTH);
+            this.getControlPanel().add(makeControlPanel(),  BorderLayout.SOUTH);
         }
 
-        private JPanel makeControlPanel() {
+
+        private JPanel makeControlPanel()
+        { 
             return new PlaceNamesPanel(this.getWwd());
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Place Names", AppFrame.class);
     }
 }

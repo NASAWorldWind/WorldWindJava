@@ -16,13 +16,15 @@ import java.util.*;
  * @author dcollins
  * @version $Id: ShapeCombiner.java 2413 2014-10-30 21:33:37Z dcollins $
  */
-public class ShapeCombiner {
-
+public class ShapeCombiner
+{
     protected Globe globe;
     protected double resolution;
 
-    public ShapeCombiner(Globe globe, double resolution) {
-        if (globe == null) {
+    public ShapeCombiner(Globe globe, double resolution)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -32,16 +34,20 @@ public class ShapeCombiner {
         this.resolution = resolution;
     }
 
-    public Globe getGlobe() {
+    public Globe getGlobe()
+    {
         return this.globe;
     }
 
-    public double getResolution() {
+    public double getResolution()
+    {
         return this.resolution;
     }
 
-    public ContourList union(Combinable... shapes) {
-        if (shapes == null) {
+    public ContourList union(Combinable... shapes)
+    {
+        if (shapes == null)
+        {
             String msg = Logging.getMessage("nullValue.ListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -49,17 +55,22 @@ public class ShapeCombiner {
 
         CombineContext cc = this.createContext();
 
-        try {
+        try
+        {
             this.union(cc, shapes);
-        } finally {
+        }
+        finally
+        {
             cc.dispose(); // releases GLU tessellator resources
         }
 
         return cc.getContours();
     }
 
-    public ContourList intersection(Combinable... shapes) {
-        if (shapes == null) {
+    public ContourList intersection(Combinable... shapes)
+    {
+        if (shapes == null)
+        {
             String msg = Logging.getMessage("nullValue.ListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -67,85 +78,102 @@ public class ShapeCombiner {
 
         CombineContext cc = this.createContext();
 
-        try {
-            if (shapes.length == 1) {
+        try
+        {
+            if (shapes.length == 1)
                 this.union(cc, shapes); // equivalent to the identity of the first shape
-            } else if (shapes.length > 1) {
+            else if (shapes.length > 1)
                 this.intersection(cc, shapes);
-            }
-        } finally {
+        }
+        finally
+        {
             cc.dispose(); // releases GLU tessellator resources
         }
 
         return cc.getContours();
     }
 
-    public ContourList difference(Combinable... shapes) {
-        if (shapes == null) {
+    public ContourList difference(Combinable... shapes)
+    {
+        if (shapes == null)
+        {
             String msg = Logging.getMessage("nullValue.ListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         CombineContext cc = this.createContext();
-        try {
-            if (shapes.length == 1) {
+        try
+        {
+            if (shapes.length == 1)
                 this.union(cc, shapes); // equivalent to the identity of the first shape
-            } else if (shapes.length > 1) {
+            else if (shapes.length > 1)
                 this.difference(cc, shapes);
-            }
-        } finally {
+        }
+        finally
+        {
             cc.dispose(); // releases GLU tessellator resources
         }
 
         return cc.getContours();
     }
 
-    protected CombineContext createContext() {
+    protected CombineContext createContext()
+    {
         return new CombineContext(this.globe, this.resolution);
     }
 
-    protected void union(CombineContext cc, Combinable... shapes) {
+    protected void union(CombineContext cc, Combinable... shapes)
+    {
         GLUtessellator tess = cc.getTessellator();
 
-        try {
+        try
+        {
             GLU.gluTessProperty(tess, GLU.GLU_TESS_WINDING_RULE, GLU.GLU_TESS_WINDING_NONZERO);
             GLU.gluTessBeginPolygon(tess, null);
 
-            for (Combinable combinable : shapes) {
+            for (Combinable combinable : shapes)
+            {
                 combinable.combine(cc);
             }
-        } finally {
+        }
+        finally
+        {
             GLU.gluTessEndPolygon(tess);
         }
     }
 
-    protected void reverseUnion(CombineContext cc, Combinable... shapes) {
+    protected void reverseUnion(CombineContext cc, Combinable... shapes)
+    {
         GLUtessellator tess = cc.getTessellator();
 
-        try {
+        try
+        {
             GLU.gluTessProperty(tess, GLU.GLU_TESS_WINDING_RULE, GLU.GLU_TESS_WINDING_NONZERO);
             GLU.gluTessNormal(tess, 0, 0, -1); // reverse the winding order of the tessellated boundaries
             GLU.gluTessBeginPolygon(tess, null);
 
-            for (Combinable combinable : shapes) {
+            for (Combinable combinable : shapes)
+            {
                 combinable.combine(cc);
             }
-        } finally {
+        }
+        finally
+        {
             GLU.gluTessEndPolygon(tess);
         }
     }
 
-    protected void intersection(CombineContext cc, Combinable... shapes) {
+    protected void intersection(CombineContext cc, Combinable... shapes)
+    {
         // Limit this operation to the intersection of the bounding regions. Since this is an intersection operation,
         // shapes outside of this region can be ignored or simplified.
         this.assembleBoundingSectors(cc, shapes);
 
         // Exit immediately if the bounding regions do not intersect.
         Sector sector = Sector.intersection(cc.getBoundingSectors());
-        if (sector == null) {
+        if (sector == null)
             return;
-        }
 
         cc.setSector(sector);
 
@@ -154,8 +182,10 @@ public class ShapeCombiner {
 
         // When the caller has specified more than two shapes, repeatedly compute the intersection of the current
         // contours with the next shape. This has the effect of progressively computing the intersection of all shapes.
-        if (shapes.length > 2) {
-            for (int i = 2; i < shapes.length; i++) {
+        if (shapes.length > 2)
+        {
+            for (int i = 2; i < shapes.length; i++)
+            {
                 ContourList result = new ContourList(cc.getContours());
                 cc.removeAllContours();
 
@@ -164,30 +194,34 @@ public class ShapeCombiner {
         }
     }
 
-    protected void intersection(CombineContext cc, Combinable a, Combinable b) {
+    protected void intersection(CombineContext cc, Combinable a, Combinable b)
+    {
         GLUtessellator tess = cc.getTessellator();
 
-        try {
+        try
+        {
             GLU.gluTessProperty(tess, GLU.GLU_TESS_WINDING_RULE, GLU.GLU_TESS_WINDING_ABS_GEQ_TWO);
             GLU.gluTessBeginPolygon(tess, null);
 
             a.combine(cc);
             b.combine(cc);
-        } finally {
+        }
+        finally
+        {
             GLU.gluTessEndPolygon(tess);
         }
     }
 
-    protected void difference(CombineContext cc, Combinable... shapes) {
+    protected void difference(CombineContext cc, Combinable... shapes)
+    {
         // Limit this operation to the region bounding the shape that we're subtracting from. Since this is a difference
         // operation, shapes outside of this region can be ignored or simplified.
         Combinable a = shapes[0];
         this.assembleBoundingSectors(cc, a);
 
         // Exit immediately if the first shape has no bounding region.
-        if (cc.getBoundingSectors().size() == 0) {
+        if (cc.getBoundingSectors().size() == 0)
             return;
-        }
 
         cc.setSector(cc.getBoundingSectors().get(0));
 
@@ -199,26 +233,34 @@ public class ShapeCombiner {
         // Combine the first shape with the union of all shapes exception the first. Since the union has its winding
         // order reversed, this has the effect of subtracting the union from the first shape.
         GLUtessellator tess = cc.getTessellator();
-        try {
+        try
+        {
             GLU.gluTessProperty(tess, GLU.GLU_TESS_WINDING_RULE, GLU.GLU_TESS_WINDING_POSITIVE);
             GLU.gluTessNormal(tess, 0, 0, 1); // restore the GLU tessellator's normal vector
             GLU.gluTessBeginPolygon(tess, null);
 
             a.combine(cc);
             b.combine(cc);
-        } finally {
+        }
+        finally
+        {
             GLU.gluTessEndPolygon(tess);
         }
     }
 
-    protected void assembleBoundingSectors(CombineContext cc, Combinable... shapes) {
-        try {
+    protected void assembleBoundingSectors(CombineContext cc, Combinable... shapes)
+    {
+        try
+        {
             cc.setBoundingSectorMode(true);
 
-            for (Combinable combinable : shapes) {
+            for (Combinable combinable : shapes)
+            {
                 combinable.combine(cc);
             }
-        } finally {
+        }
+        finally
+        {
             cc.setBoundingSectorMode(false);
         }
     }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.worldwindow.features;
 
 import gov.nasa.worldwind.*;
@@ -23,8 +24,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Displays UI components for a set of caller specified imported data, and manages creation of WorldWind components from
- * that data. Callers fill the panel with imported data by invoking {@link #addImportedData(org.w3c.dom.Element,
+ * Displays UI components for a set of caller specified imported data, and manages creation of WorldWind components
+ * from that data. Callers fill the panel with imported data by invoking {@link #addImportedData(org.w3c.dom.Element,
  * gov.nasa.worldwind.avlist.AVList)}. This adds the UI components for a specified data set (a "Go To" button, and a
  * label description), creates a WorldWind component from the DataConfiguration, and adds the component to the World
  * Window passed to the panel during construction.
@@ -32,8 +33,8 @@ import java.awt.event.*;
  * @author dcollins
  * @version $Id: ImportedDataPanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ImportedDataPanel extends ShadedPanel {
-
+public class ImportedDataPanel extends ShadedPanel
+{
     protected Controller controller;
     protected JPanel dataConfigPanel;
 
@@ -42,15 +43,17 @@ public class ImportedDataPanel extends ShadedPanel {
      * configured to accept imported data via calls to {@link #addImportedData(org.w3c.dom.Element,
      * gov.nasa.worldwind.avlist.AVList)}.
      *
-     * @param title the panel's title, displayed in a titled border.
+     * @param title      the panel's title, displayed in a titled border.
      * @param controller the application controller.
      *
      * @throws IllegalArgumentException if the WorldWindow is null.
      */
-    public ImportedDataPanel(String title, Controller controller) {
+    public ImportedDataPanel(String title, Controller controller)
+    {
         super(new BorderLayout());
 
-        if (controller == null) {
+        if (controller == null)
+        {
             String message = Logging.getMessage("nullValue.WorldWindow");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -65,12 +68,14 @@ public class ImportedDataPanel extends ShadedPanel {
      * from the data to the WorldWindow passed to this panel during construction.
      *
      * @param domElement the document which describes a WorldWind data configuration.
-     * @param params the parameter list which overrides or extends information contained in the document.
+     * @param params     the parameter list which overrides or extends information contained in the document.
      *
      * @throws IllegalArgumentException if the Element is null.
      */
-    public void addImportedData(final Element domElement, final AVList params) {
-        if (domElement == null) {
+    public void addImportedData(final Element domElement, final AVList params)
+    {
+        if (domElement == null)
+        {
             String message = Logging.getMessage("nullValue.DocumentIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -93,7 +98,8 @@ public class ImportedDataPanel extends ShadedPanel {
         this.revalidate();
     }
 
-    protected void layoutComponents(String title) {
+    protected void layoutComponents(String title)
+    {
         this.add(new PanelTitle(title, SwingConstants.CENTER), BorderLayout.NORTH);
 
         this.dataConfigPanel = new JPanel(new GridLayout(0, 1, 0, 4));
@@ -123,90 +129,113 @@ public class ImportedDataPanel extends ShadedPanel {
     //**************************************************************//
     //********************  DataConfiguration Utils  ***************//
     //**************************************************************//
-    protected String getDescription(Element domElement) {
+
+    protected String getDescription(Element domElement)
+    {
         String displayName = DataConfigurationUtils.getDataConfigDisplayName(domElement);
         String type = DataConfigurationUtils.getDataConfigType(domElement);
 
         StringBuilder sb = new StringBuilder(displayName);
 
-        if (type.equalsIgnoreCase("Layer")) {
+        if (type.equalsIgnoreCase("Layer"))
+        {
             sb.append(" (Layer)");
-        } else if (type.equalsIgnoreCase("ElevationModel")) {
+        }
+        else if (type.equalsIgnoreCase("ElevationModel"))
+        {
             sb.append(" (Elevations)");
         }
 
         return sb.toString();
     }
 
-    protected Sector getSector(Element domElement) {
+    protected Sector getSector(Element domElement)
+    {
         return WWXML.getSector(domElement, "Sector", null);
     }
 
-    protected void addToWorldWindow(Element domElement, AVList params) {
+    protected void addToWorldWindow(Element domElement, AVList params)
+    {
         String type = DataConfigurationUtils.getDataConfigType(domElement);
-        if (type == null) {
+        if (type == null)
             return;
-        }
 
-        if (type.equalsIgnoreCase("Layer")) {
+        if (type.equalsIgnoreCase("Layer"))
+        {
             this.addLayerToWorldWindow(domElement, params);
-        } else if (type.equalsIgnoreCase("ElevationModel")) {
+        }
+        else if (type.equalsIgnoreCase("ElevationModel"))
+        {
             this.addElevationModelToWorldWindow(domElement, params);
         }
     }
 
-    protected void addLayerToWorldWindow(Element domElement, AVList params) {
-        try {
+    protected void addLayerToWorldWindow(Element domElement, AVList params)
+    {
+        try
+        {
             Factory factory = (Factory) WorldWind.createConfigurationComponent(AVKey.LAYER_FACTORY);
             Layer layer = (Layer) factory.createFromConfigSource(domElement, params);
-            if (layer != null) {
+            if (layer != null)
+            {
                 layer.setEnabled(true);
                 this.addLayer(layer, new LayerPath("Imported"));
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             String message = Logging.getMessage("generic.CreationFromConfigurationFailed",
-                    DataConfigurationUtils.getDataConfigDisplayName(domElement));
+                DataConfigurationUtils.getDataConfigDisplayName(domElement));
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
-    protected void addLayer(final Layer layer, final LayerPath pathToParent) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+    protected void addLayer(final Layer layer, final LayerPath pathToParent)
+    {
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 LayerPath path = new LayerPath(pathToParent, layer.getName());
                 doAddLayer(layer, path);
             }
         });
     }
 
-    protected void doAddLayer(final Layer layer, final LayerPath path) {
+    protected void doAddLayer(final Layer layer, final LayerPath path)
+    {
         LayerManager layerManager = controller.getLayerManager();
         layerManager.addLayer(layer, path.lastButOne());
         layerManager.selectLayer(layer, true);
         layerManager.expandPath(path.lastButOne());
     }
 
-    protected void addElevationModelToWorldWindow(Element domElement, AVList params) {
+    protected void addElevationModelToWorldWindow(Element domElement, AVList params)
+    {
         ElevationModel em = null;
-        try {
+        try
+        {
             Factory factory = (Factory) WorldWind.createConfigurationComponent(AVKey.ELEVATION_MODEL_FACTORY);
             em = (ElevationModel) factory.createFromConfigSource(domElement, params);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             String message = Logging.getMessage("generic.CreationFromConfigurationFailed",
-                    DataConfigurationUtils.getDataConfigDisplayName(domElement));
+                DataConfigurationUtils.getDataConfigDisplayName(domElement));
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
 
-        if (em == null) {
+        if (em == null)
             return;
-        }
 
         ElevationModel defaultElevationModel = this.controller.getWWd().getModel().getGlobe().getElevationModel();
-        if (defaultElevationModel instanceof CompoundElevationModel) {
-            if (!((CompoundElevationModel) defaultElevationModel).containsElevationModel(em)) {
+        if (defaultElevationModel instanceof CompoundElevationModel)
+        {
+            if (!((CompoundElevationModel) defaultElevationModel).containsElevationModel(em))
                 ((CompoundElevationModel) defaultElevationModel).addElevationModel(em);
-            }
-        } else {
+        }
+        else
+        {
             CompoundElevationModel cm = new CompoundElevationModel();
             cm.addElevationModel(defaultElevationModel);
             cm.addElevationModel(em);
@@ -217,19 +246,22 @@ public class ImportedDataPanel extends ShadedPanel {
     //**************************************************************//
     //********************  Actions  *******************************//
     //**************************************************************//
-    protected class GoToSectorAction extends AbstractAction {
 
+    protected class GoToSectorAction extends AbstractAction
+    {
         protected Sector sector;
 
-        public GoToSectorAction(Sector sector) {
+        public GoToSectorAction(Sector sector)
+        {
             super("Go To");
             this.sector = sector;
             this.setEnabled(this.sector != null);
         }
 
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e)
+        {
             Extent extent = Sector.computeBoundingCylinder(controller.getWWd().getModel().getGlobe(),
-                    controller.getWWd().getSceneController().getVerticalExaggeration(), this.sector);
+                controller.getWWd().getSceneController().getVerticalExaggeration(), this.sector);
 
             Angle fov = controller.getWWd().getView().getFieldOfView();
             Position centerPos = new Position(this.sector.getCentroid(), 0d);

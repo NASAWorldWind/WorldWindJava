@@ -12,15 +12,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.codehaus.jackson;
 
 /**
- * Shared base class for streaming processing contexts used during reading and writing of Json content using Streaming
- * API. This context is also exposed to applications: context object can be used by applications to get an idea of
- * relative position of the parser/generator within json content being processed. This allows for some contextual
- * processing: for example, output within Array context can differ from that of Object context.
+ * Shared base class for streaming processing contexts used during
+ * reading and writing of Json content using Streaming API.
+ * This context is also exposed to applications:
+ * context object can be used by applications to get an idea of
+ * relative position of the parser/generator within json content
+ * being processed. This allows for some contextual processing: for
+ * example, output within Array context can differ from that of
+ * Object context.
  */
-public abstract class JsonStreamContext {
+public abstract class JsonStreamContext
+{
     // // // Type constants used internally
 
     protected final static int TYPE_ROOT = 0;
@@ -30,9 +36,11 @@ public abstract class JsonStreamContext {
     protected int _type;
 
     /**
-     * Index of the currently processed entry. Starts with -1 to signal that no entries have been started, and gets
-     * advanced each time a new entry is started, either by encountering an expected separator, or with new values if no
-     * separators are expected (the case for root context).
+     * Index of the currently processed entry. Starts with -1 to signal
+     * that no entries have been started, and gets advanced each
+     * time a new entry is started, either by encountering an expected
+     * separator, or with new values if no separators are expected
+     * (the case for root context).
      */
     protected int _index;
 
@@ -41,7 +49,9 @@ public abstract class JsonStreamContext {
     // Life-cycle
     //////////////////////////////////////////////////
      */
-    public JsonStreamContext(int type) {
+
+    public JsonStreamContext(int type)
+    {
         _type = type;
         _index = -1;
     }
@@ -51,46 +61,36 @@ public abstract class JsonStreamContext {
     // Public API, accessors
     //////////////////////////////////////////////////
      */
+
     public abstract JsonStreamContext getParent();
 
     /**
-     * Method that returns true if this context is an Array context; that is, content is being read from or written to a
-     * Json Array.
-     *
-     * @return Undocumented.
+     * Method that returns true if this context is an Array context;
+     * that is, content is being read from or written to a Json Array.
+     * @return  Undocumented.
      */
-    public final boolean inArray() {
-        return _type == TYPE_ARRAY;
-    }
+    public final boolean inArray() { return _type == TYPE_ARRAY; }
 
     /**
-     * Method that returns true if this context is a Root context; that is, content is being read from or written to
-     * without enclosing array or object structure.
-     *
-     * @return Undocumented.
+     * Method that returns true if this context is a Root context;
+     * that is, content is being read from or written to without
+     * enclosing array or object structure.
+     * @return  Undocumented.
      */
-    public final boolean inRoot() {
-        return _type == TYPE_ROOT;
-    }
+    public final boolean inRoot() { return _type == TYPE_ROOT; }
 
     /**
-     * Method that returns true if this context is an Object context; that is, content is being read from or written to
-     * a Json Object.
-     *
-     * @return Undocumented.
+     * Method that returns true if this context is an Object context;
+     * that is, content is being read from or written to a Json Object.
+     * @return  Undocumented.
      */
-    public final boolean inObject() {
-        return _type == TYPE_OBJECT;
-    }
+    public final boolean inObject() { return _type == TYPE_OBJECT; }
 
     public final String getTypeDesc() {
         switch (_type) {
-            case TYPE_ROOT:
-                return "ROOT";
-            case TYPE_ARRAY:
-                return "ARRAY";
-            case TYPE_OBJECT:
-                return "OBJECT";
+        case TYPE_ROOT: return "ROOT";
+        case TYPE_ARRAY: return "ARRAY";
+        case TYPE_OBJECT: return "OBJECT";
         }
         return "?";
     }
@@ -98,14 +98,16 @@ public abstract class JsonStreamContext {
     /**
      * @return Number of entries that are complete and started.
      */
-    public final int getEntryCount() {
+    public final int getEntryCount()
+    {
         return _index + 1;
     }
 
     /**
      * @return Index of the currently processed entry, if any
      */
-    public final int getCurrentIndex() {
+    public final int getCurrentIndex()
+    {
         return (_index < 0) ? 0 : _index;
     }
 

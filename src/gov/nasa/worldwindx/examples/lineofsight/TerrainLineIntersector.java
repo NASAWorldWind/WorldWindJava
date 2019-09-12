@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.lineofsight;
 
 import gov.nasa.worldwind.geom.*;
@@ -19,37 +20,40 @@ import java.util.*;
  * @author tag
  * @version $Id: TerrainLineIntersector.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class TerrainLineIntersector extends LineIntersector {
-
+public class TerrainLineIntersector extends LineIntersector
+{
     /**
      * Consruct an terrain intersector.
      *
-     * @param terrain the terrain to use to determine terrain geometry.
+     * @param terrain    the terrain to use to determine terrain geometry.
      * @param numThreads the number of threads to use.
      */
-    public TerrainLineIntersector(Terrain terrain, int numThreads) {
+    public TerrainLineIntersector(Terrain terrain, int numThreads)
+    {
         super(terrain, numThreads);
     }
 
-    protected void doPerformIntersection(Position position) throws InterruptedException {
+    protected void doPerformIntersection(Position position) throws InterruptedException
+    {
         // Intersect the line between this grid point and the selected position.
         Intersection[] intersections = this.terrain.intersect(this.referencePosition, position);
-        if (intersections == null || intersections.length == 0) {
+        if (intersections == null || intersections.length == 0)
             return; // No intersection
-        }
+
         // Check to see whether the first intersection is beyond the grid point.
         Vec4 iPoint = intersections[0].getIntersectionPoint();
         Vec4 gPoint = terrain.getSurfacePoint(position.getLatitude(), position.getLongitude(), position.getAltitude());
 
-        if (iPoint.distanceTo3(this.referencePoint) >= gPoint.distanceTo3(this.referencePoint)) {
+        if (iPoint.distanceTo3(this.referencePoint) >= gPoint.distanceTo3(this.referencePoint))
             return; // Intersection is beyond the position.
-        }
+
         Position iPosition = this.terrain.getGlobe().computePositionFromPoint(iPoint);
 
         List<Intersection> iList = new ArrayList<Intersection>();
         iList.add(new Intersection(iPoint, new Position(iPosition, 0), false, null));
 
-        for (int i = 1; i < intersections.length; i++) {
+        for (int i = 1; i < intersections.length; i++)
+        {
             iPoint = intersections[i].getIntersectionPoint();
             iPosition = this.terrain.getGlobe().computePositionFromPoint(iPoint);
             iList.add(new Intersection(iPoint, new Position(iPosition, 0), false, null));

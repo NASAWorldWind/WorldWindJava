@@ -27,8 +27,8 @@ import java.util.Queue;
  * @author Tom Gaskins
  * @version $Id: DrawContext.java 2281 2014-08-29 23:08:04Z dcollins $
  */
-public interface DrawContext extends WWObject, Disposable {
-
+public interface DrawContext extends WWObject, Disposable
+{
     /**
      * Assigns this <code>DrawContext</code> a new <code>com.jogamp.opengl.GLContext</code>. May throw a
      * <code>NullPointerException</code> if <code>glContext</code> is null.
@@ -236,7 +236,7 @@ public interface DrawContext extends WWObject, Disposable {
      * Retrieves a list of all the sectors rendered so far this frame.
      *
      * @return a <code>SectorGeometryList</code> containing every <code>SectorGeometry</code> rendered so far this
-     * render pass.
+     *         render pass.
      *
      * @since 1.5
      */
@@ -311,7 +311,7 @@ public interface DrawContext extends WWObject, Disposable {
      * @param count the number of unique colors to allocate.
      *
      * @return the first unique pick color if there are sufficient unique colors remaining and <code>count</code> is
-     * greater than 0, otherwise null.
+     *         greater than 0, otherwise null.
      */
     Color getUniquePickColorRange(int count);
 
@@ -354,20 +354,18 @@ public interface DrawContext extends WWObject, Disposable {
      * the colors that must be considered by this method and the caller. When specified, these integers must be
      * formatted exactly as the integers this method returns.
      *
-     * @param rectangle the rectangle to return unique colors for, in AWT screen coordinates.
+     * @param rectangle           the rectangle to return unique colors for, in AWT screen coordinates.
      * @param minAndMaxColorCodes an two element array representing the minimum and maximum RGB colors to return. May be
-     * <code>null</code> to specify that all color codes must be returned.
+     *                            <code>null</code> to specify that all color codes must be returned.
      *
      * @return the unique RGB colors corresponding to the specified rectangle, or <code>null</code> if the rectangle is
-     * empty or the rectangle contains only the clear color.
+     *         empty or the rectangle contains only the clear color.
      *
      * @throws IllegalArgumentException if the rectangle is <code>null</code>.
      */
     int[] getPickColorsInRectangle(Rectangle rectangle, int[] minAndMaxColorCodes);
 
-    /**
-     * Specifies that the scene controller is beginning its pick traversal.
-     */
+    /** Specifies that the scene controller is beginning its pick traversal. */
     void enablePickingMode();
 
     /**
@@ -377,9 +375,7 @@ public interface DrawContext extends WWObject, Disposable {
      */
     boolean isPickingMode();
 
-    /**
-     * Specifies that the scene controller has ended its pick traversal.
-     */
+    /** Specifies that the scene controller has ended its pick traversal. */
     void disablePickingMode();
 
     /**
@@ -414,8 +410,9 @@ public interface DrawContext extends WWObject, Disposable {
      * those ordered renderables are drawn according to the order in which they are added.
      *
      * @param orderedRenderable the ordered renderable to add.
-     * @param isBehind          <code>true</code> to specify that the ordered renderable is behind all other ordered renderables,
-     * or <code>false</code> to interpret the ordered renderable according to its eye distance.
+     * @param isBehind          <code>true</code> to specify that the ordered renderable is behind all other ordered
+     *                          renderables, or <code>false</code> to interpret the ordered renderable according to its
+     *                          eye distance.
      */
     void addOrderedRenderable(OrderedRenderable orderedRenderable, boolean isBehind);
 
@@ -468,7 +465,7 @@ public interface DrawContext extends WWObject, Disposable {
     /**
      * Computes a location's Cartesian point on the currently visible terrain.
      *
-     * @param latitude the location's latitude.
+     * @param latitude  the location's latitude.
      * @param longitude the location's longitude.
      *
      * @return the location's corresponding Cartesian point, or null if the location is not currently visible.
@@ -564,7 +561,7 @@ public interface DrawContext extends WWObject, Disposable {
      * null. If either is null then statistics are not gathered.
      *
      * @param statKeys the keys identifying the statistics to monitor.
-     * @param stats a list in which the statistics are placed as they're monitored.
+     * @param stats    a list in which the statistics are placed as they're monitored.
      */
     void setPerFrameStatisticsKeys(Set<String> statKeys, Collection<PerformanceStatistic> stats);
 
@@ -572,9 +569,9 @@ public interface DrawContext extends WWObject, Disposable {
      * Specifies a performance statistic that's assigned for each frame. Use this method to update the value of a
      * specific statistic.
      *
-     * @param key the key identifying the statistic to monitor.
+     * @param key         the key identifying the statistic to monitor.
      * @param displayName the name to use when displaying this statistic.
-     * @param statistic the statistic's value. May be null.
+     * @param statistic   the statistic's value. May be null.
      *
      * @throws IllegalArgumentException if either the key or display name are null.
      * @see #setPerFrameStatistics(java.util.Collection)
@@ -616,7 +613,7 @@ public interface DrawContext extends WWObject, Disposable {
      * Indicates the geographic coordinates of the point on the terrain at the current viewport's center.
      *
      * @return the geographic coordinates of the current viewport's center. Returns null if the globe's surface is not
-     * under the viewport's center point.
+     *         under the viewport's center point.
      */
     Position getViewportCenterPosition();
 
@@ -689,12 +686,12 @@ public interface DrawContext extends WWObject, Disposable {
      * The search may take more than the specified time, but will terminate if no time is left before starting a
      * higher-resolution search.
      *
-     * @param resolutions the resolutions of the sectors to return, in latitude.
-     * @param timeLimit the amount of time, in milliseconds, to allow for searching.
+     * @param resolutions  the resolutions of the sectors to return, in latitude.
+     * @param timeLimit    the amount of time, in milliseconds, to allow for searching.
      * @param searchSector the sector to decompose into visible sectors.
      *
      * @return the visible sectors at the best resolution achievable given the time limit. The actual resolution can be
-     * determined by examining the delta-latitude value of any of the returned sectors.
+     *         determined by examining the delta-latitude value of any of the returned sectors.
      *
      * @throws IllegalArgumentException if the resolutions array or the search sector is null.
      */
@@ -789,7 +786,7 @@ public interface DrawContext extends WWObject, Disposable {
      * this DrawContext does not accumulate rendering exceptions.
      *
      * @return the Collection used to accumulate rendering exceptions, or null if this DrawContext does not accumulate
-     * rendering exceptions.
+     *         rendering exceptions.
      */
     Collection<Throwable> getRenderingExceptions();
 
@@ -800,7 +797,7 @@ public interface DrawContext extends WWObject, Disposable {
      * indicates this DrawContext should not accumulate rendering exceptions.
      *
      * @param exceptions the Collection of exceptions to be used to accumulate rendering exceptions, or null to disable
-     * accumulation of rendering exception.
+     *                   accumulation of rendering exception.
      */
     void setRenderingExceptions(Collection<Throwable> exceptions);
 
@@ -822,12 +819,12 @@ public interface DrawContext extends WWObject, Disposable {
      * <em>Note:</em> This capability is meant to be applied only within a single Renderable. It is not intended as a
      * means to offset a whole Renderable or collection of Renderables.
      * <p>
-     * See "Mathematics for Game Programming and 3D Computer Graphics, 2 ed." by Eric Lengyel, Section 9.1, "Depth Value
-     * Offset" for a description of this technique.
+     * See "Mathematics for Game Programming and 3D Computer Graphics, 2 ed." by  Eric Lengyel, Section 9.1, "Depth
+     * Value Offset" for a description of this technique.
      *
      * @param offset a reference to an offset value, typically near 1.0, or null to request use of the default value.
-     * Values less than 1.0 pull objects toward the eye point, values greater than 1.0 push objects away from the eye
-     * point. The default value is 0.99.
+     *               Values less than 1.0 pull objects toward the eye point, values greater than 1.0 push objects away
+     *               from the eye point. The default value is 0.99.
      *
      * @see #popProjectionOffest()
      */
@@ -866,8 +863,8 @@ public interface DrawContext extends WWObject, Disposable {
      * shapes previously drawn in favor of the current shape.
      *
      * @param renderer an object implementing the {@link gov.nasa.worldwind.render.OutlinedShape} interface for the
-     * shape.
-     * @param shape the shape to render.
+     *                 shape.
+     * @param shape    the shape to render.
      *
      * @see gov.nasa.worldwind.render.OutlinedShape
      */
@@ -882,9 +879,7 @@ public interface DrawContext extends WWObject, Disposable {
      */
     void beginStandardLighting();
 
-    /**
-     * Pops the OpenGL state previously established by {@link #beginStandardLighting()}.
-     */
+    /** Pops the OpenGL state previously established by {@link #beginStandardLighting()}. */
     void endStandardLighting();
 
     /**
@@ -904,8 +899,8 @@ public interface DrawContext extends WWObject, Disposable {
     /**
      * Compute a model-coordinate point on the terrain.
      *
-     * @param lat the point's latitude.
-     * @param lon the point's longitude.
+     * @param lat    the point's latitude.
+     * @param lon    the point's longitude.
      * @param offset an distance in meters to place the point above or below the terrain.
      *
      * @return a model-coordinate point offset the specified amount from the current terrain.
@@ -917,7 +912,7 @@ public interface DrawContext extends WWObject, Disposable {
     /**
      * Indicates whether a specified extent is smaller than a specified number of pixels for the current view.
      *
-     * @param extent the extent to test. May be null, in which case this method returns false.
+     * @param extent    the extent to test. May be null, in which case this method returns false.
      * @param numPixels the number of pixels at and below which the extent is considered too small.
      *
      * @return true if the projected extent is smaller than the specified number of pixels, otherwise false.
@@ -928,8 +923,8 @@ public interface DrawContext extends WWObject, Disposable {
      * This is a diagnostic method to display normal vectors.
      *
      * @param length the length to draw the vectors, in meters.
-     * @param vBuf a vertex buffer. If null, no vectors are drawn.
-     * @param nBuf a buffer of normal vectors corresponding to the vertex buffer. If null, no vectors are drawn.
+     * @param vBuf   a vertex buffer. If null, no vectors are drawn.
+     * @param nBuf   a buffer of normal vectors corresponding to the vertex buffer. If null, no vectors are drawn.
      */
     void drawNormals(float length, FloatBuffer vBuf, FloatBuffer nBuf);
 
@@ -957,19 +952,13 @@ public interface DrawContext extends WWObject, Disposable {
      */
     Terrain getTerrain();
 
-    /**
-     * Restores the current OpenGL context's blending state to its default.
-     */
+    /** Restores the current OpenGL context's blending state to its default. */
     void restoreDefaultBlending();
 
-    /**
-     * Restores the current OpenGL context's current color to its default.
-     */
+    /** Restores the current OpenGL context's current color to its default. */
     void restoreDefaultCurrentColor();
 
-    /**
-     * Restores the current OpenGL context's depth testing state to its default.
-     */
+    /** Restores the current OpenGL context's depth testing state to its default. */
     void restoreDefaultDepthTesting();
 
     /**
@@ -993,7 +982,7 @@ public interface DrawContext extends WWObject, Disposable {
     /**
      * Computes a Cartesian point from a specified geographic position, applying a specified altitude mode.
      *
-     * @param position the position to convert.
+     * @param position     the position to convert.
      * @param altitudeMode the altitude mode.
      *
      * @return the Cartesian point corresponding to the specified position and this context's current globe or terrain.
@@ -1009,9 +998,7 @@ public interface DrawContext extends WWObject, Disposable {
      */
     DeclutteringTextRenderer getDeclutteringTextRenderer();
 
-    /**
-     * Filter overlapping text from the ordered renderable list.
-     */
+    /** Filter overlapping text from the ordered renderable list. */
     void applyClutterFilter();
 //
 //    void applyGroupingFilters();

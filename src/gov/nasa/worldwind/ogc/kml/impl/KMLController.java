@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml.impl;
 
 import gov.nasa.worldwind.WWObjectImpl;
@@ -17,48 +18,53 @@ import gov.nasa.worldwind.render.*;
  * @author tag
  * @version $Id: KMLController.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLController extends WWObjectImpl implements PreRenderable, Renderable, MessageListener {
-
+public class KMLController extends WWObjectImpl implements PreRenderable, Renderable, MessageListener
+{
     protected KMLRoot kmlRoot;
     protected KMLTraversalContext tc;
 
-    public KMLController(KMLRoot root) {
+    public KMLController(KMLRoot root)
+    {
         this.setKmlRoot(root);
         this.setTraversalContext(new KMLTraversalContext());
     }
 
-    public KMLRoot getKmlRoot() {
+    public KMLRoot getKmlRoot()
+    {
         return this.kmlRoot;
     }
 
-    public void setKmlRoot(KMLRoot kmlRoot) {
+    public void setKmlRoot(KMLRoot kmlRoot)
+    {
         // Stop listening for property changes in previous KMLRoot
         KMLRoot oldRoot = this.getKmlRoot();
-        if (oldRoot != null) {
+        if (oldRoot != null)
             oldRoot.removePropertyChangeListener(this);
-        }
 
         this.kmlRoot = kmlRoot;
 
-        if (kmlRoot != null) {
+        if (kmlRoot != null)
             kmlRoot.addPropertyChangeListener(this);
-        }
     }
 
-    public void setTraversalContext(KMLTraversalContext tc) {
+    public void setTraversalContext(KMLTraversalContext tc)
+    {
         this.tc = tc;
     }
 
-    public KMLTraversalContext getTraversalContext() {
+    public KMLTraversalContext getTraversalContext()
+    {
         return this.tc;
     }
 
-    public void preRender(DrawContext dc) {
+    public void preRender(DrawContext dc)
+    {
         this.initializeTraversalContext(this.getTraversalContext());
         this.kmlRoot.preRender(this.getTraversalContext(), dc);
     }
 
-    public void render(DrawContext dc) {
+    public void render(DrawContext dc)
+    {
         this.initializeTraversalContext(this.getTraversalContext());
         this.kmlRoot.render(this.getTraversalContext(), dc);
     }
@@ -70,15 +76,16 @@ public class KMLController extends WWObjectImpl implements PreRenderable, Render
      *
      * @param tc the KML traversal context to initialize.
      */
-    protected void initializeTraversalContext(KMLTraversalContext tc) {
+    protected void initializeTraversalContext(KMLTraversalContext tc)
+    {
         tc.initialize();
         tc.setDetailHint(this.kmlRoot.getDetailHint());
     }
 
     @Override
-    public void onMessage(Message msg) {
-        if (this.kmlRoot != null) {
+    public void onMessage(Message msg)
+    {
+        if (this.kmlRoot != null)
             this.kmlRoot.onMessage(msg);
-        }
     }
 }

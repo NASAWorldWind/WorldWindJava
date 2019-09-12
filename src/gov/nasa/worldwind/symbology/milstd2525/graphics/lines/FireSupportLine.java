@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.WorldWind;
@@ -25,11 +26,9 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: FireSupportLine.java 709 2012-08-06 18:27:00Z pabercrombie $
  */
-public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
-
-    /**
-     * Factor applied to the stipple pattern used to draw the dashed line for a Coordinated Fire Line.
-     */
+public class FireSupportLine extends AbstractMilStd2525TacticalGraphic
+{
+    /** Factor applied to the stipple pattern used to draw the dashed line for a Coordinated Fire Line. */
     protected static final int CFL_OUTLINE_STIPPLE_FACTOR = 12;
 
     /**
@@ -46,15 +45,12 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
     /**
      * The value of an optional second text string for the graphic. This value is equivalent to the "T1" modifier
      * defined by MIL-STD-2525C. It can be set using {@link #setAdditionalText(String)}, or by passing an Iterable to
-     * {@link #setModifier(String, Object)} with a key of
-     * {@link gov.nasa.worldwind.symbology.SymbologyConstants#UNIQUE_DESIGNATION} (additional text is the second value
-     * in the iterable).
+     * {@link #setModifier(String, Object)} with a key of {@link gov.nasa.worldwind.symbology.SymbologyConstants#UNIQUE_DESIGNATION}
+     * (additional text is the second value in the iterable).
      */
     protected String additionalText;
 
-    /**
-     * Paths used to render the graphic.
-     */
+    /** Paths used to render the graphic. */
     protected Path path;
 
     /**
@@ -62,11 +58,12 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics() {
+    public static List<String> getSupportedGraphics()
+    {
         return Arrays.asList(
-                TacGrpSidc.FSUPP_LNE_C2LNE_FSCL,
-                TacGrpSidc.FSUPP_LNE_C2LNE_CFL,
-                TacGrpSidc.FSUPP_LNE_C2LNE_RFL
+            TacGrpSidc.FSUPP_LNE_C2LNE_FSCL,
+            TacGrpSidc.FSUPP_LNE_C2LNE_CFL,
+            TacGrpSidc.FSUPP_LNE_C2LNE_RFL
         );
     }
 
@@ -75,7 +72,8 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public FireSupportLine(String sidc) {
+    public FireSupportLine(String sidc)
+    {
         super(sidc);
         this.path = this.createPath();
     }
@@ -86,7 +84,8 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return The additional text. May be null.
      */
-    public String getAdditionalText() {
+    public String getAdditionalText()
+    {
         return this.additionalText;
     }
 
@@ -96,15 +95,18 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @param text The additional text. May be null.
      */
-    public void setAdditionalText(String text) {
+    public void setAdditionalText(String text)
+    {
         this.additionalText = text;
         this.onModifierChanged();
     }
 
     @Override
-    public Object getModifier(String key) {
+    public Object getModifier(String key)
+    {
         // If two values are set for the Unique Designation, return both in a list.
-        if (SymbologyConstants.UNIQUE_DESIGNATION.equals(key) && this.additionalText != null) {
+        if (SymbologyConstants.UNIQUE_DESIGNATION.equals(key) && this.additionalText != null)
+        {
             return Arrays.asList(this.getText(), this.getAdditionalText());
         }
 
@@ -112,18 +114,24 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
     }
 
     @Override
-    public void setModifier(String key, Object value) {
-        if (SymbologyConstants.UNIQUE_DESIGNATION.equals(key) && value instanceof Iterable) {
+    public void setModifier(String key, Object value)
+    {
+        if (SymbologyConstants.UNIQUE_DESIGNATION.equals(key) && value instanceof Iterable)
+        {
             Iterator iterator = ((Iterable) value).iterator();
-            if (iterator.hasNext()) {
+            if (iterator.hasNext())
+            {
                 this.setText((String) iterator.next());
             }
 
             // The Final Protective Fire graphic supports a second Unique Designation value
-            if (iterator.hasNext()) {
+            if (iterator.hasNext())
+            {
                 this.setAdditionalText((String) iterator.next());
             }
-        } else {
+        }
+        else
+        {
             super.setModifier(key, value);
         }
     }
@@ -133,8 +141,10 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @param positions Control points that orient the graphic. Must provide at least three points.
      */
-    public void setPositions(Iterable<? extends Position> positions) {
-        if (positions == null) {
+    public void setPositions(Iterable<? extends Position> positions)
+    {
+        if (positions == null)
+        {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -143,39 +153,34 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
         this.path.setPositions(positions);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Iterable<? extends Position> getPositions() {
+    /** {@inheritDoc} */
+    public Iterable<? extends Position> getPositions()
+    {
         return this.path.getPositions();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Position getReferencePosition() {
+    /** {@inheritDoc} */
+    public Position getReferencePosition()
+    {
         return this.path.getReferencePosition();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void doRenderGraphic(DrawContext dc) {
+    /** {@inheritDoc} */
+    protected void doRenderGraphic(DrawContext dc)
+    {
         this.path.render(dc);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void applyDelegateOwner(Object owner) {
+    /** {@inheritDoc} */
+    protected void applyDelegateOwner(Object owner)
+    {
         this.path.setDelegateOwner(owner);
     }
 
-    /**
-     * Create labels for the graphic.
-     */
+    /** Create labels for the graphic. */
     @Override
-    protected void createLabels() {
+    protected void createLabels()
+    {
         // First two labels are the start and end labels.
         String text = this.getEndOfLineText();
         this.addLabel(text).setTextAlign(AVKey.RIGHT); // Start label
@@ -194,7 +199,8 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
         label = this.addLabel(bottomText);
         label.setOffset(bottomLabelOffset);
 
-        if (this.isDrawDoubleLabel()) {
+        if (this.isDrawDoubleLabel())
+        {
             label = this.addLabel(topText);
             label.setOffset(topLabelOffset);
 
@@ -210,7 +216,8 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return true if the graphic includes two pairs of top/bottom labels. Both pairs contain the same text content.
      */
-    protected boolean isDrawDoubleLabel() {
+    protected boolean isDrawDoubleLabel()
+    {
         return !TacGrpSidc.FSUPP_LNE_C2LNE_CFL.equalsIgnoreCase(this.maskedSymbolCode);
     }
 
@@ -219,11 +226,13 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return Text for the end of line labels.
      */
-    protected String getEndOfLineText() {
+    protected String getEndOfLineText()
+    {
         StringBuilder sb = new StringBuilder("PL");
 
         String text = this.getAdditionalText();
-        if (!WWUtil.isEmpty(text)) {
+        if (!WWUtil.isEmpty(text))
+        {
             sb.append(" ");
             sb.append(text);
         }
@@ -236,19 +245,24 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return Text for the top label. May return null if there is no top label.
      */
-    protected String getTopLabelText() {
+    protected String getTopLabelText()
+    {
         StringBuilder sb = new StringBuilder();
 
         String text = this.getText();
-        if (!WWUtil.isEmpty(text)) {
+        if (!WWUtil.isEmpty(text))
             sb.append(text);
-        }
 
-        if (TacGrpSidc.FSUPP_LNE_C2LNE_FSCL.equalsIgnoreCase(this.maskedSymbolCode)) {
+        if (TacGrpSidc.FSUPP_LNE_C2LNE_FSCL.equalsIgnoreCase(this.maskedSymbolCode))
+        {
             sb.append(" FSCL");
-        } else if (TacGrpSidc.FSUPP_LNE_C2LNE_CFL.equalsIgnoreCase(this.maskedSymbolCode)) {
+        }
+        else if (TacGrpSidc.FSUPP_LNE_C2LNE_CFL.equalsIgnoreCase(this.maskedSymbolCode))
+        {
             sb.insert(0, "CFL ");
-        } else if (TacGrpSidc.FSUPP_LNE_C2LNE_RFL.equalsIgnoreCase(this.maskedSymbolCode)) {
+        }
+        else if (TacGrpSidc.FSUPP_LNE_C2LNE_RFL.equalsIgnoreCase(this.maskedSymbolCode))
+        {
             sb.insert(0, "RFL ");
         }
 
@@ -260,30 +274,31 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return Text for the bottom label. May return null if there is no bottom label.
      */
-    protected String getBottomLabelText() {
+    protected String getBottomLabelText()
+    {
         StringBuilder sb = new StringBuilder();
 
         Object[] dates = TacticalGraphicUtil.getDateRange(this);
-        if (dates[0] != null) {
+        if (dates[0] != null)
+        {
             sb.append(dates[0]);
             sb.append("-\n");
         }
 
-        if (dates[1] != null) {
+        if (dates[1] != null)
+        {
             sb.append(dates[1]);
         }
 
         return sb.toString();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected void determineLabelPositions(DrawContext dc) {
-        if (this.labels == null || this.labels.size() == 0) {
+    protected void determineLabelPositions(DrawContext dc)
+    {
+        if (this.labels == null || this.labels.size() == 0)
             return;
-        }
 
         Object[] pathData = this.computePathLength(dc);
         Position startPosition = (Position) pathData[0];
@@ -301,10 +316,13 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
         endLabel.setPosition(endPosition);
 
         // Set the West-most label to right alignment, and the East-most label to left alignment.
-        if (startPosition.longitude.degrees < endPosition.longitude.degrees) {
+        if (startPosition.longitude.degrees < endPosition.longitude.degrees)
+        {
             startLabel.setTextAlign(AVKey.RIGHT);
             endLabel.setTextAlign(AVKey.LEFT);
-        } else {
+        }
+        else
+        {
             startLabel.setTextAlign(AVKey.LEFT);
             endLabel.setTextAlign(AVKey.RIGHT);
         }
@@ -322,7 +340,8 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
         TacticalGraphicUtil.placeLabelsOnPath(dc, positions, topLabel, bottomLabel, dist);
 
         // If there are more labels it will be a second top/bottom pair. (Note that CFL graphic has only one top/bottom pair.)
-        if (labelIterator.hasNext()) {
+        if (labelIterator.hasNext())
+        {
             topLabel = labelIterator.next();
             bottomLabel = labelIterator.next();
 
@@ -337,9 +356,10 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      * @param dc Current draw context.
      *
      * @return Returns the path's start position, end position, and length (non-terrain following) as a three element
-     * array: [Position start, Position end, Double length].
+     *         array: [Position start, Position end, Double length].
      */
-    protected Object[] computePathLength(DrawContext dc) {
+    protected Object[] computePathLength(DrawContext dc)
+    {
         Iterator<? extends Position> iterator = this.path.getPositions().iterator();
 
         Globe globe = dc.getGlobe();
@@ -352,7 +372,8 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
 
         double pathLength = 0;
         pt1 = globe.computePointFromLocation(startPosition);
-        while (iterator.hasNext()) {
+        while (iterator.hasNext())
+        {
             endPosition = iterator.next();
             pt2 = globe.computePointFromLocation(endPosition);
 
@@ -360,14 +381,13 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
             pt1 = pt2;
         }
 
-        return new Object[]{startPosition, endPosition, pathLength};
+        return new Object[] {startPosition, endPosition, pathLength};
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected Offset getDefaultLabelOffset() {
+    protected Offset getDefaultLabelOffset()
+    {
         return TOP_LABEL_OFFSET;
     }
 
@@ -376,7 +396,8 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return Offset applied to the upper label.
      */
-    protected Offset getTopLabelOffset() {
+    protected Offset getTopLabelOffset()
+    {
         return TOP_LABEL_OFFSET;
     }
 
@@ -385,19 +406,20 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return Offset applied to the bottom label.
      */
-    protected Offset getBottomLabelOffset() {
+    protected Offset getBottomLabelOffset()
+    {
         return BOTTOM_LABEL_OFFSET;
     }
 
-    /**
-     * {@inheritDoc} Overridden to draw Coordinated Fire Line with dashed pattern.
-     */
+    /** {@inheritDoc} Overridden to draw Coordinated Fire Line with dashed pattern. */
     @Override
-    protected void applyDefaultAttributes(ShapeAttributes attributes) {
+    protected void applyDefaultAttributes(ShapeAttributes attributes)
+    {
         super.applyDefaultAttributes(attributes);
 
         // Coordinated Fire Line always renders with dashed lines.
-        if (TacGrpSidc.FSUPP_LNE_C2LNE_CFL.equalsIgnoreCase(this.maskedSymbolCode)) {
+        if (TacGrpSidc.FSUPP_LNE_C2LNE_CFL.equalsIgnoreCase(this.maskedSymbolCode))
+        {
             attributes.setOutlineStippleFactor(CFL_OUTLINE_STIPPLE_FACTOR);
             attributes.setOutlineStipplePattern(this.getOutlineStipplePattern());
         }
@@ -408,7 +430,8 @@ public class FireSupportLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return New path configured with defaults appropriate for this type of graphic.
      */
-    protected Path createPath() {
+    protected Path createPath()
+    {
         Path path = new Path();
         path.setFollowTerrain(true);
         path.setPathType(AVKey.GREAT_CIRCLE);

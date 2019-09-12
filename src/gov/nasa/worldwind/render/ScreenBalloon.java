@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import java.awt.*;
@@ -13,8 +14,8 @@ import java.awt.*;
  * @author pabercrombie
  * @version $Id: ScreenBalloon.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface ScreenBalloon extends Balloon {
-
+public interface ScreenBalloon extends Balloon
+{
     /**
      * Get the position of the balloon on the screen.
      *

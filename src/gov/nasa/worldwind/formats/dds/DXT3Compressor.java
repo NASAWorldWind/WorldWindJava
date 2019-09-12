@@ -11,47 +11,57 @@ import gov.nasa.worldwind.util.Logging;
  * @author dcollins
  * @version $Id: DXT3Compressor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class DXT3Compressor implements DXTCompressor {
-
-    public DXT3Compressor() {
+public class DXT3Compressor implements DXTCompressor
+{
+    public DXT3Compressor()
+    {
     }
 
-    public int getDXTFormat() {
+    public int getDXTFormat()
+    {
         return DDSConstants.D3DFMT_DXT3;
     }
 
-    public int getCompressedSize(java.awt.image.BufferedImage image, DXTCompressionAttributes attributes) {
-        if (image == null) {
+    public int getCompressedSize(java.awt.image.BufferedImage image, DXTCompressionAttributes attributes)
+    {
+        if (image == null)
+        {
             String message = Logging.getMessage("nullValue.ImageIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (attributes == null) {
+        if (attributes == null)
+        {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         // TODO: comment, provide documentation reference
+
         int width = Math.max(image.getWidth(), 4);
         int height = Math.max(image.getHeight(), 4);
-
+        
         return (width * height);
     }
-
+    
     public void compressImage(java.awt.image.BufferedImage image, DXTCompressionAttributes attributes,
-            java.nio.ByteBuffer buffer) {
-        if (image == null) {
+        java.nio.ByteBuffer buffer)
+    {
+        if (image == null)
+        {
             String message = Logging.getMessage("nullValue.ImageIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (attributes == null) {
+        if (attributes == null)
+        {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (buffer == null) {
+        if (buffer == null)
+        {
             String message = Logging.getMessage("nullValue.BufferNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -66,8 +76,10 @@ public class DXT3Compressor implements DXTCompressor {
         int width = image.getWidth();
         int height = image.getHeight();
 
-        for (int j = 0; j < height; j += 4) {
-            for (int i = 0; i < width; i += 4) {
+        for (int j = 0; j < height; j += 4)
+        {
+            for (int i = 0; i < width; i += 4)
+            {
                 colorBlockExtractor.extractColorBlock4x4(attributes, i, j, colorBlock);
                 dxt3Compressor.compressBlockDXT3(colorBlock, attributes, dxt3Block);
 
@@ -82,7 +94,8 @@ public class DXT3Compressor implements DXTCompressor {
         }
     }
 
-    protected ColorBlockExtractor getColorBlockExtractor(java.awt.image.BufferedImage image) {
+    protected ColorBlockExtractor getColorBlockExtractor(java.awt.image.BufferedImage image)
+    {
         return new BasicColorBlockExtractor(image);
     }
 }

@@ -13,18 +13,20 @@ import gov.nasa.worldwind.util.Logging;
  * @version $Id: GpxTrackSegment.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 public class GpxTrackSegment extends gov.nasa.worldwind.formats.gpx.ElementParser
-        implements TrackSegment {
+    implements TrackSegment
+{
+    private java.util.List<TrackPoint> points =
+        new java.util.ArrayList<TrackPoint>();
 
-    private java.util.List<TrackPoint> points
-            = new java.util.ArrayList<TrackPoint>();
-
-    public GpxTrackSegment(String uri, String lname, String qname, org.xml.sax.Attributes attributes) {
+    public GpxTrackSegment(String uri, String lname, String qname, org.xml.sax.Attributes attributes)
+    {
         super("trkseg");
 
         // dont' validate uri, lname, qname or attributes as they aren't used.
     }
 
-    public java.util.List<TrackPoint> getPoints() {
+    public java.util.List<TrackPoint> getPoints()
+    {
         return this.points;
     }
 
@@ -38,30 +40,36 @@ public class GpxTrackSegment extends gov.nasa.worldwind.formats.gpx.ElementParse
      */
     @Override
     public void doStartElement(String uri, String lname, String qname, org.xml.sax.Attributes attributes)
-            throws org.xml.sax.SAXException {
-        if (lname == null) {
+        throws org.xml.sax.SAXException
+    {
+        if (lname == null)
+        {
             String msg = Logging.getMessage("nullValue.LNameIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (uri == null) {
+        if (uri == null)
+        {
             String msg = Logging.getMessage("nullValue.URIIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (qname == null) {
+        if (qname == null)
+        {
             String msg = Logging.getMessage("nullValue.QNameIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (attributes == null) {
+        if (attributes == null)
+        {
             String msg = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (lname.equalsIgnoreCase("trkpt")) {
+        if (lname.equalsIgnoreCase("trkpt"))
+        {
             this.currentElement = new gov.nasa.worldwind.formats.gpx.GpxTrackPoint(uri, lname, qname, attributes);
             this.points.add((TrackPoint) this.currentElement);
         }

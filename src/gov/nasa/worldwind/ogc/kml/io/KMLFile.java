@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml.io;
 
 import gov.nasa.worldwind.util.Logging;
@@ -18,11 +19,9 @@ import java.io.*;
  * @author tag
  * @version $Id: KMLFile.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLFile implements KMLDoc {
-
-    /**
-     * The {@link File} reference specified to the constructor.
-     */
+public class KMLFile implements KMLDoc
+{
+    /** The {@link File} reference specified to the constructor. */
     protected File kmlFile;
 
     /**
@@ -32,8 +31,10 @@ public class KMLFile implements KMLDoc {
      *
      * @throws IllegalArgumentException if the specified file is null.
      */
-    public KMLFile(File file) {
-        if (file == null) {
+    public KMLFile(File file)
+    {
+        if (file == null)
+        {
             String message = Logging.getMessage("nullValue.FileIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -47,7 +48,8 @@ public class KMLFile implements KMLDoc {
      *
      * @return the file specified to the constructor.
      */
-    public File getZipFile() {
+    public File getZipFile()
+    {
         return this.kmlFile;
     }
 
@@ -58,7 +60,8 @@ public class KMLFile implements KMLDoc {
      *
      * @throws IOException if an error occurs attempting to create the input stream.
      */
-    public InputStream getKMLStream() throws IOException {
+    public InputStream getKMLStream() throws IOException
+    {
         return new FileInputStream(this.kmlFile);
     }
 
@@ -71,34 +74,36 @@ public class KMLFile implements KMLDoc {
      *
      * @throws IOException if an error occurs while attempting to query or open the file.
      */
-    public InputStream getSupportFileStream(String path) throws IOException {
-        if (path == null) {
+    public InputStream getSupportFileStream(String path) throws IOException
+    {
+        if (path == null)
+        {
             String message = Logging.getMessage("nullValue.FilePathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         File pathFile = new File(path);
-        if (pathFile.isAbsolute()) {
+        if (pathFile.isAbsolute())
             return null;
-        }
 
         pathFile = new File(this.kmlFile.getParentFile(), path);
 
         return pathFile.exists() ? new FileInputStream(pathFile) : null;
     }
 
-    public String getSupportFilePath(String path) {
-        if (path == null) {
+    public String getSupportFilePath(String path)
+    {
+        if (path == null)
+        {
             String message = Logging.getMessage("nullValue.FilePathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         File pathFile = new File(path);
-        if (pathFile.isAbsolute()) {
+        if (pathFile.isAbsolute())
             return null;
-        }
 
         pathFile = new File(this.kmlFile.getParentFile(), path);
 

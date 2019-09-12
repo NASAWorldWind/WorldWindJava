@@ -16,10 +16,10 @@ import java.util.Arrays;
  * @author Patrick Murris
  * @version $Id: VPFSymbolAttributes.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class VPFSymbolAttributes extends BasicShapeAttributes {
-
-    public static class LabelAttributes {
-
+public class VPFSymbolAttributes extends BasicShapeAttributes
+{
+    public static class LabelAttributes
+    {
         private Font font;
         private Color color;
         private Color backgroundColor;
@@ -30,14 +30,17 @@ public class VPFSymbolAttributes extends BasicShapeAttributes {
         private String attributeName;
         private int abbreviationTableId;
 
-        public LabelAttributes() {
+        public LabelAttributes()
+        {
             this.font = defaultFont;
             this.color = defaultColor;
             this.backgroundColor = defaultBackgroundColor;
         }
 
-        public LabelAttributes(LabelAttributes attributes) {
-            if (attributes == null) {
+        public LabelAttributes(LabelAttributes attributes)
+        {
+            if (attributes == null)
+            {
                 String message = Logging.getMessage("nullValue.AttributesIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -54,129 +57,139 @@ public class VPFSymbolAttributes extends BasicShapeAttributes {
             this.abbreviationTableId = attributes.getAbbreviationTableId();
         }
 
-        public LabelAttributes copy() {
+        public LabelAttributes copy()
+        {
             return new LabelAttributes(this);
         }
 
-        public Font getFont() {
+        public Font getFont()
+        {
             return this.font;
         }
 
-        public void setFont(Font font) {
+        public void setFont(Font font)
+        {
             this.font = font;
         }
 
-        public Color getColor() {
+        public Color getColor()
+        {
             return this.color;
         }
 
-        public void setColor(Color color) {
+        public void setColor(Color color)
+        {
             this.color = color;
         }
 
-        public Color getBackgroundColor() {
+        public Color getBackgroundColor()
+        {
             return this.backgroundColor;
         }
 
-        public void setBackgroundColor(Color color) {
+        public void setBackgroundColor(Color color)
+        {
             this.backgroundColor = color;
         }
 
-        public double getOffset() {
+        public double getOffset()
+        {
             return offset;
         }
 
-        public void setOffset(double offset) {
+        public void setOffset(double offset)
+        {
             this.offset = offset;
         }
 
-        public Angle getOffsetAngle() {
+        public Angle getOffsetAngle()
+        {
             return this.offsetAngle;
         }
 
-        public void setOffsetAngle(Angle angle) {
+        public void setOffsetAngle(Angle angle)
+        {
             this.offsetAngle = angle;
         }
 
-        public String getPrepend() {
+        public String getPrepend()
+        {
             return this.prepend;
         }
 
-        public void setPrepend(String text) {
+        public void setPrepend(String text)
+        {
             this.prepend = text;
         }
 
-        public String getAppend() {
+        public String getAppend()
+        {
             return this.append;
         }
 
-        public void setAppend(String text) {
+        public void setAppend(String text)
+        {
             this.append = text;
         }
 
-        public String getAttributeName() {
+        public String getAttributeName()
+        {
             return this.attributeName;
         }
 
-        public void setAttributeName(String name) {
+        public void setAttributeName(String name)
+        {
             this.attributeName = name;
         }
 
-        public int getAbbreviationTableId() {
+        public int getAbbreviationTableId()
+        {
             return this.abbreviationTableId;
         }
 
-        public void setAbbreviationTableId(int tableId) {
+        public void setAbbreviationTableId(int tableId)
+        {
             this.abbreviationTableId = tableId;
         }
 
         @SuppressWarnings({"RedundantIfStatement"})
         @Override
-        public boolean equals(Object o) {
-            if (this == o) {
+        public boolean equals(Object o)
+        {
+            if (this == o)
                 return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
+            if (o == null || getClass() != o.getClass())
                 return false;
-            }
 
             LabelAttributes that = (LabelAttributes) o;
 
-            if (this.abbreviationTableId != that.abbreviationTableId) {
+            if (this.abbreviationTableId != that.abbreviationTableId)
                 return false;
-            }
-            if (Double.compare(this.offset, that.offset) != 0) {
+            if (Double.compare(this.offset, that.offset) != 0)
                 return false;
-            }
-            if (this.append != null ? !this.append.equals(that.append) : that.append != null) {
+            if (this.append != null ? !this.append.equals(that.append) : that.append != null)
                 return false;
-            }
             if (this.attributeName != null ? !this.attributeName.equals(that.attributeName)
-                    : that.attributeName != null) {
+                : that.attributeName != null)
                 return false;
-            }
             if (this.backgroundColor != null ? !this.backgroundColor.equals(that.backgroundColor)
-                    : that.backgroundColor != null) {
+                : that.backgroundColor != null)
                 return false;
-            }
-            if (this.color != null ? !this.color.equals(that.color) : that.color != null) {
+            if (this.color != null ? !this.color.equals(that.color) : that.color != null)
                 return false;
-            }
-            if (this.font != null ? !this.font.equals(that.font) : that.font != null) {
+            if (this.font != null ? !this.font.equals(that.font) : that.font != null)
                 return false;
-            }
-            if (this.offsetAngle != null ? !this.offsetAngle.equals(that.offsetAngle) : that.offsetAngle != null) {
+            if (this.offsetAngle != null ? !this.offsetAngle.equals(that.offsetAngle) : that.offsetAngle != null)
                 return false;
-            }
-            if (this.prepend != null ? !this.prepend.equals(that.prepend) : that.prepend != null) {
+            if (this.prepend != null ? !this.prepend.equals(that.prepend) : that.prepend != null)
                 return false;
-            }
 
             return true;
         }
 
         @Override
-        public int hashCode() {
+        public int hashCode()
+        {
             int result;
             long temp;
             result = this.font != null ? this.font.hashCode() : 0;
@@ -207,10 +220,12 @@ public class VPFSymbolAttributes extends BasicShapeAttributes {
     private String orientationAttributeName;
     private String description;
 
-    public VPFSymbolAttributes() {
+    public VPFSymbolAttributes()
+    {
     }
 
-    public VPFSymbolAttributes(VPFFeatureType featureType, VPFSymbolKey symbolKey) {
+    public VPFSymbolAttributes(VPFFeatureType featureType, VPFSymbolKey symbolKey)
+    {
         this.featureType = featureType;
         this.symbolKey = symbolKey;
         this.iconImageSource = null;
@@ -222,7 +237,8 @@ public class VPFSymbolAttributes extends BasicShapeAttributes {
         this.description = null;
     }
 
-    public VPFSymbolAttributes(VPFSymbolAttributes attributes) {
+    public VPFSymbolAttributes(VPFSymbolAttributes attributes)
+    {
         super(attributes);
         this.featureType = attributes.getFeatureType();
         this.symbolKey = attributes.getSymbolKey();
@@ -233,31 +249,32 @@ public class VPFSymbolAttributes extends BasicShapeAttributes {
         this.orientationAttributeName = attributes.getOrientationAttributeName();
         this.description = attributes.getDescription();
 
-        if (attributes.getLabelAttributes() != null) {
+        if (attributes.getLabelAttributes() != null)
+        {
             LabelAttributes[] array = attributes.getLabelAttributes();
             int numLabelAttributes = array.length;
             this.labelAttributes = new LabelAttributes[numLabelAttributes];
 
-            for (int i = 0; i < numLabelAttributes; i++) {
+            for (int i = 0; i < numLabelAttributes; i++)
+            {
                 this.labelAttributes[i] = (array[i] != null) ? array[i].copy() : null;
             }
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public ShapeAttributes copy() {
+    /** {@inheritDoc} */
+    public ShapeAttributes copy()
+    {
         return new VPFSymbolAttributes(this);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void copy(ShapeAttributes attributes) {
+    /** {@inheritDoc} */
+    public void copy(ShapeAttributes attributes)
+    {
         super.copy(attributes);
 
-        if (attributes instanceof VPFSymbolAttributes) {
+        if (attributes instanceof VPFSymbolAttributes)
+        {
             VPFSymbolAttributes vpfAttrs = (VPFSymbolAttributes) attributes;
             this.featureType = vpfAttrs.getFeatureType();
             this.symbolKey = vpfAttrs.getSymbolKey();
@@ -268,132 +285,140 @@ public class VPFSymbolAttributes extends BasicShapeAttributes {
             this.orientationAttributeName = vpfAttrs.getOrientationAttributeName();
             this.description = vpfAttrs.getDescription();
 
-            if (vpfAttrs.getLabelAttributes() != null) {
+            if (vpfAttrs.getLabelAttributes() != null)
+            {
                 LabelAttributes[] array = vpfAttrs.getLabelAttributes();
                 int numLabelAttributes = array.length;
                 this.labelAttributes = new LabelAttributes[numLabelAttributes];
 
-                for (int i = 0; i < numLabelAttributes; i++) {
+                for (int i = 0; i < numLabelAttributes; i++)
+                {
                     this.labelAttributes[i] = (array[i] != null) ? array[i].copy() : null;
                 }
             }
         }
     }
 
-    public VPFFeatureType getFeatureType() {
+    public VPFFeatureType getFeatureType()
+    {
         return this.featureType;
     }
 
-    public VPFSymbolKey getSymbolKey() {
+    public VPFSymbolKey getSymbolKey()
+    {
         return this.symbolKey;
     }
 
-    public Object getIconImageSource() {
+    public Object getIconImageSource()
+    {
         return this.iconImageSource;
     }
 
-    public void setIconImageSource(Object imageSource) {
+    public void setIconImageSource(Object imageSource)
+    {
         this.iconImageSource = imageSource;
     }
 
-    public double getIconImageScale() {
+    public double getIconImageScale()
+    {
         return this.iconImageScale;
     }
 
-    public void setIconImageScale(double scale) {
+    public void setIconImageScale(double scale)
+    {
         this.iconImageScale = scale;
     }
 
-    public boolean isMipMapIconImage() {
+    public boolean isMipMapIconImage()
+    {
         return this.mipMapIconImage;
     }
 
-    public void setMipMapIconImage(boolean mipMap) {
+    public void setMipMapIconImage(boolean mipMap)
+    {
         this.mipMapIconImage = mipMap;
     }
 
-    public LabelAttributes[] getLabelAttributes() {
+    public LabelAttributes[] getLabelAttributes()
+    {
         return this.labelAttributes;
     }
 
-    public void setLabelAttributes(LabelAttributes[] attributes) {
+    public void setLabelAttributes(LabelAttributes[] attributes)
+    {
         this.labelAttributes = attributes;
     }
 
-    public double getDisplayPriority() {
+    public double getDisplayPriority()
+    {
         return this.displayPriority;
     }
 
-    public void setDisplayPriority(double displayPriority) {
+    public void setDisplayPriority(double displayPriority)
+    {
         this.displayPriority = displayPriority;
     }
 
-    public String getOrientationAttributeName() {
+    public String getOrientationAttributeName()
+    {
         return this.orientationAttributeName;
     }
 
-    public void setOrientationAttributeName(String name) {
+    public void setOrientationAttributeName(String name)
+    {
         this.orientationAttributeName = name;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return this.description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
     @SuppressWarnings({"RedundantIfStatement"})
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object o)
+    {
+        if (this == o)
             return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass())
             return false;
-        }
-        if (!super.equals(o)) {
+        if (!super.equals(o))
             return false;
-        }
 
         VPFSymbolAttributes that = (VPFSymbolAttributes) o;
 
-        if (Double.compare(this.displayPriority, that.displayPriority) != 0) {
+        if (Double.compare(this.displayPriority, that.displayPriority) != 0)
             return false;
-        }
-        if (Double.compare(this.iconImageScale, that.iconImageScale) != 0) {
+        if (Double.compare(this.iconImageScale, that.iconImageScale) != 0)
             return false;
-        }
-        if (this.mipMapIconImage != that.mipMapIconImage) {
+        if (this.mipMapIconImage != that.mipMapIconImage)
             return false;
-        }
-        if (this.description != null ? !this.description.equals(that.description) : that.description != null) {
+        if (this.description != null ? !this.description.equals(that.description) : that.description != null)
             return false;
-        }
-        if (this.featureType != that.featureType) {
+        if (this.featureType != that.featureType)
             return false;
-        }
         if (this.iconImageSource != null ? !this.iconImageSource.equals(that.iconImageSource)
-                : that.iconImageSource != null) {
+            : that.iconImageSource != null)
             return false;
-        }
-        if (!Arrays.equals(this.labelAttributes, that.labelAttributes)) {
+        if (!Arrays.equals(this.labelAttributes, that.labelAttributes))
             return false;
-        }
         if (this.orientationAttributeName != null ? !this.orientationAttributeName.equals(that.orientationAttributeName)
-                : that.orientationAttributeName != null) {
+            : that.orientationAttributeName != null)
             return false;
-        }
-        if (this.symbolKey != null ? !this.symbolKey.equals(that.symbolKey) : that.symbolKey != null) {
+        if (this.symbolKey != null ? !this.symbolKey.equals(that.symbolKey) : that.symbolKey != null)
             return false;
-        }
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result = super.hashCode();
         long temp;
         result = 31 * result + (this.featureType != null ? this.featureType.hashCode() : 0);

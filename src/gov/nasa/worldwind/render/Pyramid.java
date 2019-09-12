@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import com.jogamp.common.nio.Buffers;
@@ -24,8 +25,8 @@ import java.util.List;
  * @author ccrick
  * @version $Id: Pyramid.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Pyramid extends RigidShape {
-
+public class Pyramid extends RigidShape
+{
     protected static final int DEFAULT_SUBDIVISIONS = 0;
 
     // Geometry.
@@ -38,10 +39,9 @@ public class Pyramid extends RigidShape {
     // face 4: square base
     protected int subdivisions = DEFAULT_SUBDIVISIONS;
 
-    /**
-     * Construct a Pyramid with default parameters
-     */
-    public Pyramid() {
+    /** Construct a Pyramid with default parameters */
+    public Pyramid()
+    {
         this.setUpGeometryCache();
     }
 
@@ -49,19 +49,22 @@ public class Pyramid extends RigidShape {
      * Construct a Pyramid from a specified center position, height and width.
      *
      * @param centerPosition the Pyramid's center position.
-     * @param height the Pyramid's height, in meters.
-     * @param width the width of the Pyramid's base, in meters.
+     * @param height         the Pyramid's height, in meters.
+     * @param width          the width of the Pyramid's base, in meters.
      *
      * @throws IllegalArgumentException if the center position is null or any of the radii are not greater than 0.
      */
-    public Pyramid(Position centerPosition, double height, double width) {
-        if (centerPosition == null) {
+    public Pyramid(Position centerPosition, double height, double width)
+    {
+        if (centerPosition == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (height <= 0 || width <= 0) {
+        if (height <= 0 || width <= 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -77,21 +80,24 @@ public class Pyramid extends RigidShape {
     /**
      * Construct a Pyramid from a specified center position and axes lengths.
      *
-     * @param centerPosition the Pyramid's center position.
+     * @param centerPosition   the Pyramid's center position.
      * @param northSouthRadius the Pyramid's north-south radius, in meters.
-     * @param verticalRadius the Pyramid's vertical radius, in meters.
-     * @param eastWestRadius the Pyramid's east-west radius, in meters.
+     * @param verticalRadius   the Pyramid's vertical radius, in meters.
+     * @param eastWestRadius   the Pyramid's east-west radius, in meters.
      *
      * @throws IllegalArgumentException if the center position is null or any of the radii are not greater than 0.
      */
-    public Pyramid(Position centerPosition, double northSouthRadius, double verticalRadius, double eastWestRadius) {
-        if (centerPosition == null) {
+    public Pyramid(Position centerPosition, double northSouthRadius, double verticalRadius, double eastWestRadius)
+    {
+        if (centerPosition == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0) {
+        if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -108,23 +114,26 @@ public class Pyramid extends RigidShape {
      * Construct a Pyramid from a specified center position, axes lengths and rotation angles. All angles are specified
      * in degrees and positive angles are counter-clockwise.
      *
-     * @param centerPosition the Pyramid's center position.
+     * @param centerPosition   the Pyramid's center position.
      * @param northSouthRadius the Pyramid's north-south radius, in meters.
-     * @param verticalRadius the Pyramid's vertical radius, in meters.
-     * @param eastWestRadius the Pyramid's east-west radius, in meters.
-     * @param heading the Pyramid's azimuth, its rotation about its vertical axis.
-     * @param tilt the Pyramid pitch, its rotation about its east-west axis.
-     * @param roll the Pyramid's roll, its rotation about its north-south axis.
+     * @param verticalRadius   the Pyramid's vertical radius, in meters.
+     * @param eastWestRadius   the Pyramid's east-west radius, in meters.
+     * @param heading          the Pyramid's azimuth, its rotation about its vertical axis.
+     * @param tilt             the Pyramid pitch, its rotation about its east-west axis.
+     * @param roll             the Pyramid's roll, its rotation about its north-south axis.
      */
     public Pyramid(Position centerPosition, double northSouthRadius, double verticalRadius, double eastWestRadius,
-            Angle heading, Angle tilt, Angle roll) {
-        if (centerPosition == null) {
+        Angle heading, Angle tilt, Angle roll)
+    {
+        if (centerPosition == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0) {
+        if (northSouthRadius <= 0 || eastWestRadius <= 0 || verticalRadius <= 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius <= 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -142,7 +151,8 @@ public class Pyramid extends RigidShape {
     }
 
     @Override
-    protected void initialize() {
+    protected void initialize()
+    {
         // Nothing to override
     }
 
@@ -151,7 +161,8 @@ public class Pyramid extends RigidShape {
      *
      * @return this Pyramid's height.
      */
-    public double getHeight() {
+    public double getHeight()
+    {
         return verticalRadius * 2;
     }
 
@@ -163,8 +174,10 @@ public class Pyramid extends RigidShape {
      *
      * @throws IllegalArgumentException if the height is not greater than 0.
      */
-    public void setHeight(double height) {
-        if (height <= 0) {
+    public void setHeight(double height)
+    {
+        if (height <= 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "height <= 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -183,8 +196,10 @@ public class Pyramid extends RigidShape {
      *
      * @throws IllegalArgumentException if the width is not greater than 0.
      */
-    public void setWidth(double width) {
-        if (width <= 0) {
+    public void setWidth(double width)
+    {
+        if (width <= 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "width <= 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -196,11 +211,13 @@ public class Pyramid extends RigidShape {
     }
 
     @Override
-    public int getFaceCount() {
+    public int getFaceCount()
+    {
         return this.faceCount;
     }
 
-    public int getSubdivisions() {
+    public int getSubdivisions()
+    {
         return this.subdivisions;
     }
 
@@ -208,44 +225,48 @@ public class Pyramid extends RigidShape {
      * Computes the number of subdivisions necessary to achieve the expected Level of Detail given the shape's
      * relationship to the viewer.
      *
-     * @param dc the current drawContext.
+     * @param dc        the current drawContext.
      * @param shapeData the current globe-specific shape data
      */
-    protected void computeSubdivisions(DrawContext dc, ShapeData shapeData) {
+    protected void computeSubdivisions(DrawContext dc, ShapeData shapeData)
+    {
     }
 
     //**************************************************************//
     //********************  Geometry Rendering  ********************//
     //**************************************************************//
+
     /**
      * Sets the Geometry mesh for this Pyramid, either by pulling it from the geometryCache, or by creating it anew if
      * the appropriate geometry does not yet exist in the cache.
      *
      * @param shapeData the current shape data.
      */
-    protected void makeGeometry(ShapeData shapeData) {
+    protected void makeGeometry(ShapeData shapeData)
+    {
         // attempt to retrieve a cached unit box with the same number of subdivisions
         Object cacheKey = new Geometry.CacheKey(this.getClass(), "Pyramid0", this.subdivisions);
         Geometry geom = (Geometry) this.getGeometryCache().getObject(cacheKey);
-        if (geom == null) {
+        if (geom == null)
+        {
             // if none exists, create a new one
             makeUnitPyramid(this.subdivisions, shapeData.getMeshes());
-            for (int piece = 0; piece < getFaceCount(); piece++) {
-                if (offsets.get(piece) == null) // if texture offsets don't exist, set default values to 0
-                {
+            for (int piece = 0; piece < getFaceCount(); piece++)
+            {
+                if (offsets.get(piece) == null)  // if texture offsets don't exist, set default values to 0
                     offsets.put(piece, new OffsetsList());
-                }
                 // add the new mesh pieces to the cache
                 cacheKey = new Geometry.CacheKey(this.getClass(), "Pyramid" + piece, this.subdivisions);
                 this.getGeometryCache().add(cacheKey, shapeData.getMesh(piece));
             }
-        } else {
+        }
+        else
+        {
             // otherwise, just use the one from the cache
-            for (int piece = 0; piece < getFaceCount(); piece++) {
-                if (offsets.get(piece) == null) // if texture offsets don't exist, set default values to 0
-                {
+            for (int piece = 0; piece < getFaceCount(); piece++)
+            {
+                if (offsets.get(piece) == null)  // if texture offsets don't exist, set default values to 0
                     offsets.put(piece, new OffsetsList());
-                }
                 cacheKey = new Geometry.CacheKey(this.getClass(), "Pyramid" + piece, this.subdivisions);
                 geom = (Geometry) this.getGeometryCache().getObject(cacheKey);
                 shapeData.addMesh(piece, geom);
@@ -258,7 +279,7 @@ public class Pyramid extends RigidShape {
      * with the specified number of divisions.
      *
      * @param subdivisions the number of times to subdivide the unit pyramid geometry
-     * @param dest the Geometry container to hold the computed points, etc.
+     * @param dest         the Geometry container to hold the computed points, etc.
      */
     /*
     protected void makeUnitPyramid(int subdivisions, Geometry dest)
@@ -283,25 +304,28 @@ public class Pyramid extends RigidShape {
         dest.setNormalData(normalBuffer.limit(), normalBuffer);
         dest.setTextureCoordData(textureCoordBuffer.limit(), textureCoordBuffer);
     }
-     */
+    */
+
     /**
      * Generates a unit pyramid geometry, including the vertices, indices, normals and texture coordinates, tessellated
      * with the specified number of divisions.
      *
      * @param subdivisions the number of times to subdivide the unit pyramid geometry
-     * @param meshes the Geometry list to hold the computed points, etc. for all Geometries
+     * @param meshes       the Geometry list to hold the computed points, etc. for all Geometries
      */
-    protected void makeUnitPyramid(int subdivisions, List<Geometry> meshes) {
+    protected void makeUnitPyramid(int subdivisions, List<Geometry> meshes)
+    {
         float radius = 1.0f;
         Geometry dest;
 
         GeometryBuilder gb = this.getGeometryBuilder();
         gb.setOrientation(GeometryBuilder.OUTSIDE);
 
-        for (int index = 0; index < getFaceCount(); index++) {
+        for (int index = 0; index < getFaceCount(); index++)
+        {
             // create box in model space
-            GeometryBuilder.IndexedTriangleBuffer itb
-                    = gb.tessellatePyramidBuffer(index, radius, subdivisions);
+            GeometryBuilder.IndexedTriangleBuffer itb =
+                gb.tessellatePyramidBuffer(index, radius, subdivisions);
 
             FloatBuffer normalBuffer = Buffers.newDirectFloatBuffer(3 * itb.getVertexCount());
             gb.makeIndexedTriangleBufferNormals(itb, normalBuffer);
@@ -323,16 +347,18 @@ public class Pyramid extends RigidShape {
     /**
      * Renders the Pyramid, using data from the provided buffer and the given parameters
      *
-     * @param dc the current draw context
-     * @param mode the render mode
-     * @param count the number of elements to be drawn
-     * @param type the data type of the elements to be drawn
+     * @param dc            the current draw context
+     * @param mode          the render mode
+     * @param count         the number of elements to be drawn
+     * @param type          the data type of the elements to be drawn
      * @param elementBuffer the buffer containing the list of elements to be drawn
-     * @param shapeData the current globe-specific shape data
+     * @param shapeData     the current globe-specific shape data
      */
     protected void drawGeometry(DrawContext dc, int mode, int count, int type, Buffer elementBuffer,
-            ShapeData shapeData, int face) {
-        if (elementBuffer == null) {
+        ShapeData shapeData, int face)
+    {
+        if (elementBuffer == null)
+        {
             String message = "nullValue.ElementBufferIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -340,7 +366,8 @@ public class Pyramid extends RigidShape {
 
         Geometry mesh = shapeData.getMesh(face);
 
-        if (mesh.getBuffer(Geometry.VERTEX) == null) {
+        if (mesh.getBuffer(Geometry.VERTEX) == null)
+        {
             String message = "nullValue.VertexBufferIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -357,12 +384,17 @@ public class Pyramid extends RigidShape {
         vertexBuffer = mesh.getBuffer(Geometry.VERTEX);
 
         normalBuffer = null;
-        if (!dc.isPickingMode()) {
-            if (mustApplyLighting(dc, null)) {
+        if (!dc.isPickingMode())
+        {
+            if (mustApplyLighting(dc, null))
+            {
                 normalBuffer = mesh.getBuffer(Geometry.NORMAL);
-                if (normalBuffer == null) {
+                if (normalBuffer == null)
+                {
                     gl.glDisableClientState(GL2.GL_NORMAL_ARRAY);
-                } else {
+                }
+                else
+                {
                     glType = mesh.getGLType(Geometry.NORMAL);
                     stride = mesh.getStride(Geometry.NORMAL);
                     gl.glNormalPointer(glType, stride, normalBuffer);
@@ -373,11 +405,14 @@ public class Pyramid extends RigidShape {
         // cull the back face
         //gl.glEnable(GL.GL_CULL_FACE);
         //gl.glFrontFace(GL.GL_CCW);
+
         // Testing: disable VBO's
         // boolean vboState = dc.getGLRuntimeCapabilities().isVertexBufferObjectEnabled();
         // dc.getGLRuntimeCapabilities().setVertexBufferObjectEnabled(true);
+
         // decide whether to draw with VBO's or VA's
-        if (this.shouldUseVBOs(dc) && (this.getVboIds(getSubdivisions(), dc)) != null) {
+        if (this.shouldUseVBOs(dc) && (this.getVboIds(getSubdivisions(), dc)) != null)
+        {
             // render using VBO's
             gl.glBindBuffer(GL.GL_ARRAY_BUFFER, getVboIds(getSubdivisions(), dc)[2 * face]);
             gl.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER, this.getVboIds(getSubdivisions(), dc)[2 * face + 1]);
@@ -387,7 +422,9 @@ public class Pyramid extends RigidShape {
 
             gl.glBindBuffer(GL.GL_ARRAY_BUFFER, 0);
             gl.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER, 0);
-        } else {
+        }
+        else
+        {
             // render using vertex arrays
             gl.glVertexPointer(size, glType, stride, vertexBuffer.rewind());
             gl.glDrawElements(mode, count, type, elementBuffer);
@@ -398,20 +435,24 @@ public class Pyramid extends RigidShape {
 
         // Testing: restore VBO state
         // dc.getGLRuntimeCapabilities().setVertexBufferObjectEnabled(false);
+
         // disable back face culling
         // gl.glDisable(GL.GL_CULL_FACE);
-        if (!dc.isPickingMode()) {
-            if (mustApplyLighting(dc, null)) {
+
+        if (!dc.isPickingMode())
+        {
+            if (mustApplyLighting(dc, null))
+            {
                 // re-enable normals if we temporarily turned them off earlier
-                if (normalBuffer == null) {
+                if (normalBuffer == null)
                     gl.glEnableClientState(GL2.GL_NORMAL_ARRAY);
-                }
             }
             // this.logGeometryStatistics(dc, geom);
         }
     }
 
-    protected ShapeData createIntersectionGeometry(Terrain terrain) {
+    protected ShapeData createIntersectionGeometry(Terrain terrain)
+    {
         ShapeData shapeData = new ShapeData(null, this);
         shapeData.setGlobeStateKey(terrain.getGlobe().getGlobeStateKey());
         Geometry mesh;
@@ -421,32 +462,33 @@ public class Pyramid extends RigidShape {
         // transform the vertices from local to world coords
         Matrix matrix = computeRenderMatrix(terrain.getGlobe(), terrain.getVerticalExaggeration());
 
-        for (int i = 0; i < getFaceCount(); i++) {
+        for (int i = 0; i < getFaceCount(); i++)
+        {
             mesh = shapeData.getMesh(i);
             // transform the vertices from local to world coords
             FloatBuffer newVertices = computeTransformedVertices((FloatBuffer) mesh.getBuffer(Geometry.VERTEX),
-                    mesh.getCount(Geometry.VERTEX), matrix);
+                mesh.getCount(Geometry.VERTEX), matrix);
             mesh.setVertexData(mesh.getCount(Geometry.VERTEX), newVertices);
         }
 
         shapeData.setReferencePoint(this.computeReferencePoint(terrain.getGlobe(),
-                terrain.getVerticalExaggeration()));
+            terrain.getVerticalExaggeration()));
         shapeData.setExtent(getExtent(terrain.getGlobe(), terrain.getVerticalExaggeration()));
 
         return shapeData;
     }
 
-    /**
-     * No export formats supported.
-     */
+    /** No export formats supported. */
     @Override
-    public String isExportFormatSupported(String mimeType) {
+    public String isExportFormatSupported(String mimeType)
+    {
         // Overridden because this shape does not support export to KML.
         return Exportable.FORMAT_NOT_SUPPORTED;
     }
 
     @Override
-    protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
+    protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
+    {
         String message = Logging.getMessage("generic.UnsupportedOperation", "doExportAsKML");
         Logging.logger().severe(message);
         throw new UnsupportedOperationException(message);

@@ -23,14 +23,15 @@ import java.util.*;
  * @author dcollins
  * @version $Id: FileSearchPanelDescriptor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
-
+public class FileSearchPanelDescriptor extends DefaultPanelDescriptor
+{
     private ProgressPanel panelComponent;
     private PropertyEvents propertyEvents;
     private Thread workerThread;
     public static final String IDENTIFIER = "gov.nasa.worldwind.rpf.wizard.FileSearchPanel";
 
-    public FileSearchPanelDescriptor() {
+    public FileSearchPanelDescriptor()
+    {
         this.panelComponent = new ProgressPanel();
         this.propertyEvents = new PropertyEvents();
         this.panelComponent.addPropertyChangeListener(this.propertyEvents);
@@ -38,37 +39,41 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
         setPanelComponent(this.panelComponent);
     }
 
-    public Object getBackPanelDescriptor() {
+    public Object getBackPanelDescriptor()
+    {
         return FileChooserPanelDescriptor.IDENTIFIER;
     }
 
-    public Object getNextPanelDescriptor() {
+    public Object getNextPanelDescriptor()
+    {
         return DataChooserPanelDescriptor.IDENTIFIER;
     }
 
-    public void registerPanel(Wizard wizard) {
+    public void registerPanel(Wizard wizard)
+    {
         WizardModel oldWizardModel = getWizardModel();
-        if (oldWizardModel != null) {
+        if (oldWizardModel != null)
             oldWizardModel.removePropertyChangeListener(this.propertyEvents);
-        }
 
         super.registerPanel(wizard);
 
         WizardModel newWizardModel = getWizardModel();
-        if (newWizardModel != null) {
+        if (newWizardModel != null)
             newWizardModel.addPropertyChangeListener(this.propertyEvents);
-        }
     }
 
-    public void aboutToDisplayPanel() {
+    public void aboutToDisplayPanel()
+    {
         this.panelComponent.setTitle(RPFWizardUtil.makeLarger("Searching for Imagery"));
         this.panelComponent.setProgressDescription1(" ");
         this.panelComponent.setProgressDescription2(" ");
         this.panelComponent.getProgressBar().setIndeterminate(false);
         WizardModel model = getWizardModel();
-        if (model != null) {
+        if (model != null)
+        {
             File selectedFile = RPFWizardUtil.getSelectedFile(model);
-            if (selectedFile != null) {
+            if (selectedFile != null)
+            {
                 StringBuilder sb = new StringBuilder();
                 sb.append("<br>");
                 sb.append("Searching ");
@@ -79,18 +84,19 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
         }
     }
 
-    public void displayingPanel() {
+    public void displayingPanel()
+    {
         WizardModel model = getWizardModel();
-        if (model != null && !RPFWizardUtil.isFileListCurrent(model)) {
+        if (model != null && !RPFWizardUtil.isFileListCurrent(model))
+        {
             this.panelComponent.getProgressBar().setIndeterminate(true);
             startWorkerThread(new Runnable() {
                 public void run() {
                     refreshFileList();
 
                     WizardModel model = getWizardModel();
-                    if (model != null) {
+                    if (model != null)
                         RPFWizardUtil.setFileListCurrent(model, true);
-                    }
 
                     moveToNextPanel();
                 }
@@ -98,27 +104,31 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
         }
     }
 
-    public void aboutToHidePanel() {
+    public void aboutToHidePanel()
+    {
         killWorkerThread();
     }
 
-    private void moveToNextPanel() {
+    private void moveToNextPanel()
+    {
         Wizard wizard = getWizard();
         Object nextPanel = getNextPanelDescriptor();
-        if (wizard != null && nextPanel != null) {
+        if (wizard != null && nextPanel != null)
+        {
             wizard.setCurrentPanelDescriptor(nextPanel);
         }
     }
 
-    private void selectedFileChanged() {
+    private void selectedFileChanged()
+    {
         WizardModel model = getWizardModel();
-        if (model != null) {
+        if (model != null)
+        {
             RPFWizardUtil.setFileListCurrent(model, false);
         }
     }
 
     private class PropertyEvents implements PropertyChangeListener {
-
         public void propertyChange(PropertyChangeEvent evt) {
             if (evt != null && evt.getPropertyName() != null) {
                 String propertyName = evt.getPropertyName();
@@ -129,9 +139,11 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
         }
     }
 
-    private void refreshFileList() {
+    private void refreshFileList()
+    {
         WizardModel model = getWizardModel();
-        if (model != null) {
+        if (model != null)
+        {
             // Disable the "<Back" and "Next>" buttons.
             boolean backEnabled = model.isBackButtonEnabled();
             boolean nextEnabled = model.isNextButtonEnabled();
@@ -147,7 +159,8 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
 
             // Create FileSets from the search results (if any).
             List<FileSet> fileSetList = makeFileSetList(fileList);
-            if (fileSetList != null) {
+            if (fileSetList != null)
+            {
                 makeDefaultSelections(fileSetList);
                 makeTitles(fileSetList);
                 sortFileSetList(fileSetList);
@@ -163,15 +176,12 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
     }
 
     private static class UpdateDescriptionFilter implements FileFilter {
-
         private FileFilter delegate;
         private ProgressPanel panel;
-
         private UpdateDescriptionFilter(FileFilter delegate, ProgressPanel panel) {
             this.delegate = delegate;
             this.panel = panel;
         }
-
         public boolean accept(File pathname) {
             if (!Thread.interrupted()) {
                 if (this.panel != null && pathname != null) {
@@ -187,17 +197,20 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
         }
     }
 
-    private List<File> searchSelectedFile(File fileToSearch, FileFilter fileFilter) {
-        if (Thread.interrupted()) {
+    private List<File> searchSelectedFile(File fileToSearch, FileFilter fileFilter)
+    {
+        if (Thread.interrupted())
             return null;
-        }
 
         List<File> fileList;
-        try {
+        try
+        {
             FileTree fileTree = new FileTree(fileToSearch);
             fileTree.setMode(FileTree.FILES_ONLY);
             fileList = fileTree.asList(fileFilter);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t)
+        {
             String message = String.format("Exception while searching file: %s", fileToSearch);
             Logging.logger().log(java.util.logging.Level.SEVERE, message, t);
             fileList = null;
@@ -206,7 +219,6 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
     }
 
     private static class AcceptRPFFilter implements FileFilter {
-
         public boolean accept(File pathname) {
             if (pathname != null && pathname.getName() != null) {
                 String filename = pathname.getName().toUpperCase();
@@ -216,24 +228,31 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
         }
     }
 
-    private List<FileSet> makeFileSetList(List<File> fileList) {
+    private List<FileSet> makeFileSetList(List<File> fileList)
+    {
         List<FileSet> result = null;
-        if (fileList != null) {
+        if (fileList != null)
+        {
             Map<String, FileSet> map = new HashMap<String, FileSet>();
-            for (File file : fileList) {
-                try {
+            for (File file : fileList)
+            {
+                try
+                {
                     String filename = file.getName().toUpperCase();
                     RPFFrameFilename rpfFilename = RPFFrameFilename.parseFilename(filename);
                     String id = rpfFilename.getDataSeriesCode();
                     FileSet set = map.get(id);
-                    if (set == null) {
+                    if (set == null)
+                    {
                         set = new FileSet();
                         set.setIdentifier(id);
                         set.setFiles(new LinkedList<File>());
                         map.put(id, set);
                     }
                     set.getFiles().add(file);
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -243,35 +262,44 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
         return result;
     }
 
-    private void makeDefaultSelections(List<FileSet> fileSetList) {
+    private void makeDefaultSelections(List<FileSet> fileSetList)
+    {
         // If only one FileSet is available, select it.
         if (fileSetList != null
-                && fileSetList.size() == 1
-                && fileSetList.get(0) != null) {
+            && fileSetList.size() == 1
+            && fileSetList.get(0) != null)
+        {
             fileSetList.get(0).setSelected(true);
         }
     }
 
-    private void makeTitles(Iterable<FileSet> fileSetList) {
-        if (fileSetList != null) {
-            for (FileSet set : fileSetList) {
+    private void makeTitles(Iterable<FileSet> fileSetList)
+    {
+        if (fileSetList != null)
+        {
+            for (FileSet set : fileSetList)
                 makeTitle(set);
-            }
         }
     }
 
-    private void makeTitle(FileSet set) {
-        if (set != null && set.getIdentifier() != null) {
+    private void makeTitle(FileSet set)
+    {
+        if (set != null && set.getIdentifier() != null)
+        {
             String id = set.getIdentifier();
             RPFDataSeries ds;
-            try {
+            try
+            {
                 ds = RPFDataSeries.dataSeriesFor(id);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
                 ds = null;
             }
 
-            if (ds != null) {
+            if (ds != null)
+            {
                 StringBuilder sb = new StringBuilder();
                 sb.append(ds.dataSeries);
                 sb.append(" (");
@@ -282,25 +310,27 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
         }
     }
 
-    private void sortFileSetList(List<FileSet> fileSetList) {
+    private void sortFileSetList(List<FileSet> fileSetList)
+    {
         Comparator<FileSet> comparator = new Comparator<FileSet>() {
             public int compare(FileSet o1, FileSet o2) {
                 // Don't care about ordering in this case.
-                if (o1 == null || o2 == null) {
+                if (o1 == null || o2 == null)
                     return 0;
-                }
                 String id1 = o1.getIdentifier();
                 String id2 = o2.getIdentifier();
                 // Don't care about ordering in this case.
-                if (id1 == null || id2 == null) {
+                if (id1 == null || id2 == null)
                     return 0;
-                }
 
                 RPFDataSeries ds1, ds2;
-                try {
+                try
+                {
                     ds1 = RPFDataSeries.dataSeriesFor(id1);
                     ds2 = RPFDataSeries.dataSeriesFor(id2);
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     e.printStackTrace();
                     ds1 = ds2 = null;
                 }
@@ -313,16 +343,17 @@ public class FileSearchPanelDescriptor extends DefaultPanelDescriptor {
         Collections.sort(fileSetList, comparator);
     }
 
-    private void startWorkerThread(Runnable runnable) {
+    private void startWorkerThread(Runnable runnable)
+    {
         killWorkerThread();
         this.workerThread = new Thread(runnable);
         this.workerThread.start();
     }
 
-    private void killWorkerThread() {
-        if (this.workerThread != null && this.workerThread.isAlive()) {
+    private void killWorkerThread()
+    {
+        if (this.workerThread != null && this.workerThread.isAlive())
             this.workerThread.interrupt();
-        }
         this.workerThread = null;
     }
 }

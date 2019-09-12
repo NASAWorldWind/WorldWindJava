@@ -23,12 +23,13 @@ import java.util.logging.*;
  * @see gov.nasa.worldwind.Configuration
  * @see java.util.logging
  */
-public class Logging {
-
+public class Logging
+{
     protected static final String MESSAGE_BUNDLE_NAME = Logging.class.getPackage().getName() + ".MessageStrings";
     protected static final int MAX_MESSAGE_REPEAT = Configuration.getIntegerValue(AVKey.MAX_MESSAGE_REPEAT, 10);
 
-    private Logging() {
+    private Logging()
+    {
     } // Prevent instantiation
 
     /**
@@ -36,13 +37,17 @@ public class Logging {
      *
      * @return The logger.
      */
-    public static Logger logger() {
-        try {
+    public static Logger logger()
+    {
+        try
+        {
             // The Configuration singleton may not be established yet, so catch the exception that occurs if it's not
             // and use the default logger name.
             String loggerName = Configuration.getStringValue(AVKey.LOGGER_NAME, Configuration.DEFAULT_LOGGER_NAME);
             return logger(loggerName);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             return logger(Configuration.DEFAULT_LOGGER_NAME);
         }
     }
@@ -58,7 +63,8 @@ public class Logging {
      *
      * @return The logger.
      */
-    public static Logger logger(String loggerName) {
+    public static Logger logger(String loggerName)
+    {
         return Logger.getLogger(loggerName != null ? loggerName : "", MESSAGE_BUNDLE_NAME);
     }
 
@@ -69,10 +75,14 @@ public class Logging {
      *
      * @return The requested message.
      */
-    public static String getMessage(String property) {
-        try {
+    public static String getMessage(String property)
+    {
+        try
+        {
             return (String) ResourceBundle.getBundle(MESSAGE_BUNDLE_NAME, Locale.getDefault()).getObject(property);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             String message = "Exception looking up message from bundle " + MESSAGE_BUNDLE_NAME;
             logger().log(java.util.logging.Level.SEVERE, message, e);
             return message;
@@ -84,13 +94,14 @@ public class Logging {
      * inserted into the message via {@link java.text.MessageFormat}.
      *
      * @param property the property identifying which message to retrieve.
-     * @param arg the single argument referenced by the format string identified <code>property</code>.
+     * @param arg      the single argument referenced by the format string identified <code>property</code>.
      *
      * @return The requested string formatted with the argument.
      *
      * @see java.text.MessageFormat
      */
-    public static String getMessage(String property, String arg) {
+    public static String getMessage(String property, String arg)
+    {
         return arg != null ? getMessage(property, (Object) arg) : getMessage(property);
     }
 
@@ -99,27 +110,34 @@ public class Logging {
      * are inserted into the message via {@link java.text.MessageFormat}.
      *
      * @param property the property identifying which message to retrieve.
-     * @param args the arguments referenced by the format string identified <code>property</code>.
+     * @param args     the arguments referenced by the format string identified <code>property</code>.
      *
      * @return The requested string formatted with the arguments.
      *
      * @see java.text.MessageFormat
      */
-    public static String getMessage(String property, Object... args) {
+    public static String getMessage(String property, Object... args)
+    {
         String message;
 
-        try {
+        try
+        {
             message = (String) ResourceBundle.getBundle(MESSAGE_BUNDLE_NAME, Locale.getDefault()).getObject(property);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             message = "Exception looking up message from bundle " + MESSAGE_BUNDLE_NAME;
             logger().log(Level.SEVERE, message, e);
             return message;
         }
 
-        try {
+        try
+        {
             // TODO: This is no longer working with more than one arg in the message string, e.g., {1}
             return args == null ? message : MessageFormat.format(message, args);
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e)
+        {
             message = "Message arguments do not match format string: " + property;
             logger().log(Level.SEVERE, message, e);
             return message;
@@ -132,7 +150,8 @@ public class Logging {
      *
      * @return the maximum number of times to repeat a message.
      */
-    public static int getMaxMessageRepeatCount() {
+    public static int getMaxMessageRepeatCount()
+    {
         return MAX_MESSAGE_REPEAT;
     }
 }

@@ -19,8 +19,8 @@ import java.awt.event.*;
  * @author dcollins
  * @version $Id: AbstractViewInputHandler.java 2251 2014-08-21 21:17:46Z dcollins $
  */
-public abstract class AbstractViewInputHandler implements ViewInputHandler, java.beans.PropertyChangeListener {
-
+public abstract class AbstractViewInputHandler implements ViewInputHandler, java.beans.PropertyChangeListener
+{
     protected WorldWindow wwd;
     protected ViewInputAttributes attributes;
     protected ViewInputAttributes.ActionAttributesMap mouseActionMap;
@@ -67,20 +67,21 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     protected static final String SCALE_FUNC_ZOOM = "ScaleFuncZoom";
     protected static final String SCALE_FUNC_ZOOM_EXP = "ScaleFuncZoomExp";
 
-    protected int[] modifierList
-            = {
-                KeyEvent.ALT_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK,
-                KeyEvent.ALT_DOWN_MASK | KeyEvent.CTRL_DOWN_MASK,
-                KeyEvent.ALT_DOWN_MASK | KeyEvent.META_DOWN_MASK,
-                KeyEvent.SHIFT_DOWN_MASK,
-                KeyEvent.CTRL_DOWN_MASK,
-                KeyEvent.META_DOWN_MASK,
-                KeyEvent.ALT_DOWN_MASK,
-                0
-            };
+    protected int[] modifierList =
+        {
+            KeyEvent.ALT_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK,
+            KeyEvent.ALT_DOWN_MASK | KeyEvent.CTRL_DOWN_MASK,
+            KeyEvent.ALT_DOWN_MASK | KeyEvent.META_DOWN_MASK,
+            KeyEvent.SHIFT_DOWN_MASK,
+            KeyEvent.CTRL_DOWN_MASK,
+            KeyEvent.META_DOWN_MASK,
+            KeyEvent.ALT_DOWN_MASK,
+            0
+        };
     protected final int NUM_MODIFIERS = 8;
 
-    public AbstractViewInputHandler() {
+    public AbstractViewInputHandler()
+    {
         this.enableSmoothing = true;
         this.lockHeading = true;
         this.stopOnFocusLost = true;
@@ -91,8 +92,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         this.keyActionMap = this.attributes.getActionMap(ViewInputAttributes.DEVICE_KEYBOARD);
         this.keyModsActionMap = this.attributes.getModifierActionMap(ViewInputAttributes.DEVICE_KEYBOARD);
         this.mouseModsActionMap = this.attributes.getModifierActionMap(ViewInputAttributes.DEVICE_MOUSE);
-        this.mouseWheelModsActionMap
-                = this.attributes.getModifierActionMap(ViewInputAttributes.DEVICE_MOUSE_WHEEL);
+        this.mouseWheelModsActionMap =
+            this.attributes.getModifierActionMap(ViewInputAttributes.DEVICE_MOUSE_WHEEL);
 
     }
 
@@ -103,30 +104,33 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
      * @return the <code>WorldWindow</code> this ViewInputHandler is listening to, and will modify in response to
      * events.
      */
-    public WorldWindow getWorldWindow() {
+    public WorldWindow getWorldWindow()
+    {
         return this.wwd;
     }
 
     /**
      * Sets the <code>WorldWindow</code> this ViewInputHandler should listen to for input events, and should modify in
-     * response to those events. If the parameter <code>newWorldWindow</code> is null, then this ViewInputHandler will
-     * do nothing.
+     * response to those events. If the parameter <code>newWorldWindow</code> is null, then this ViewInputHandler
+     * will do nothing.
      *
      * @param newWorldWindow the <code>WorldWindow</code> to listen on, and modify in response to events.
      */
-    public void setWorldWindow(WorldWindow newWorldWindow) {
-        if (newWorldWindow == this.wwd) {
+    public void setWorldWindow(WorldWindow newWorldWindow)
+    {
+        if (newWorldWindow == this.wwd)
             return;
-        }
 
-        if (this.wwd != null) {
+        if (this.wwd != null)
+        {
             //this.wwd.removeRenderingListener(this);
             this.wwd.getSceneController().removePropertyChangeListener(this);
         }
 
         this.wwd = newWorldWindow;
 
-        if (this.wwd != null) {
+        if (this.wwd != null)
+        {
             //this.wwd.addRenderingListener(this);
             this.wwd.getSceneController().addPropertyChangeListener(this);
         }
@@ -137,13 +141,15 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
      *
      * @return values that are be used to transform raw input into view movement.
      */
-    public ViewInputAttributes getAttributes() {
+    public ViewInputAttributes getAttributes()
+    {
         return this.attributes;
     }
 
     /**
-     * Sets the values that will be used to transform raw input events into view movements. ViewInputAttributes define a
-     * calibration value for each combination of device and action, and a general sensitivity value for each device.
+     * Sets the values that will be used to transform raw input events into view movements. ViewInputAttributes
+     * define a calibration value for each combination of device and action, and a general sensitivity value
+     * for each device.
      *
      * @param attributes values that will be used to transform raw input into view movement.
      *
@@ -151,8 +157,10 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
      *
      * @see ViewInputAttributes
      */
-    public void setAttributes(ViewInputAttributes attributes) {
-        if (attributes == null) {
+    public void setAttributes(ViewInputAttributes attributes)
+    {
+        if (attributes == null)
+        {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -166,18 +174,20 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
      *
      * @return true if the view will movements are smoothed; false otherwise.
      */
-    public boolean isEnableSmoothing() {
+    public boolean isEnableSmoothing()
+    {
         return this.enableSmoothing;
     }
 
     /**
-     * Sets whether the ViewInputHandler should smooth view movements in response to input events. A value of true will
-     * cause the ViewInputHandler to delegate decisions about whether to smooth a certain input event to its
+     * Sets whether the ViewInputHandler should smooth view movements in response to input events. A value of true
+     * will cause the ViewInputHandler to delegate decisions about whether to smooth a certain input event to its
      * {@link ViewInputAttributes}. A value of false will disable all smoothing.
      *
      * @param enable true to smooth view movements; false otherwise.
      */
-    public void setEnableSmoothing(boolean enable) {
+    public void setEnableSmoothing(boolean enable)
+    {
         this.enableSmoothing = enable;
     }
 
@@ -186,18 +196,20 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
      *
      * @return true if the view's heading will stay the same unless explicity changed; false otherwise.
      */
-    public boolean isLockHeading() {
+    public boolean isLockHeading()
+    {
         return this.lockHeading;
     }
 
     /**
-     * Sets whether the view's heading should stay the same unless explicitly changed. For example, moving forward along
-     * a great arc would suggest a change in position and heading. If the heading had been locked, the ViewInputHandler
-     * will move forward in a way that doesn't change the heading.
+     * Sets whether the view's heading should stay the same unless explicitly changed. For example, moving forward
+     * along a great arc would suggest a change in position and heading. If the heading had been locked, the
+     * ViewInputHandler will move forward in a way that doesn't change the heading.
      *
      * @param lock true if the view's heading should stay the same unless explicity changed; false otherwise.
      */
-    public void setLockHeading(boolean lock) {
+    public void setLockHeading(boolean lock)
+    {
         this.lockHeading = lock;
     }
 
@@ -206,7 +218,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
      *
      * @return true if the view will stop when the WorldWindow looses focus; false otherwise.
      */
-    public boolean isStopOnFocusLost() {
+    public boolean isStopOnFocusLost()
+    {
         return this.stopOnFocusLost;
     }
 
@@ -215,37 +228,41 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
      *
      * @param stop true if the view should stop when the WorldWindow looses focus; false otherwise.
      */
-    public void setStopOnFocusLost(boolean stop) {
+    public void setStopOnFocusLost(boolean stop)
+    {
         this.stopOnFocusLost = stop;
     }
 
     /**
-     * Returns the <code>factor</code> that dampens view movement when the user pans drags the cursor in a way that
-     * could cause an abrupt transition.
+     * Returns the <code>factor</code> that dampens view movement when the user pans drags the cursor in a way that could
+     * cause an abrupt transition.
      *
      * @return factor dampening view movement when a mouse drag event would cause an abrupt transition.
      * @see #setDragSlopeFactor
      */
-    public double getDragSlopeFactor() {
+    public double getDragSlopeFactor()
+    {
         return this.dragSlopeFactor;
     }
 
     /**
-     * Sets the <code>factor</code> that dampens view movement when a mouse drag event would cause an abrupt transition.
-     * The drag slope is the ratio of screen pixels to Cartesian distance moved, measured by the previous and current
-     * mouse points. As drag slope gets larger, it becomes more difficult to operate the view. This typically happens
-     * while dragging over and around the horizon, where movement of a few pixels can cause the view to move many
-     * kilometers. This <code>factor</code> is the amount of damping applied to the view movement in such cases. Setting
-     * <code>factor</code> to zero will disable this behavior, while setting <code>factor</code> to a positive value may
-     * dampen the effects of mouse dragging.
+     * Sets the <code>factor</code> that dampens view movement when a mouse drag event would cause an abrupt
+     * transition. The drag slope is the ratio of screen pixels to Cartesian distance moved, measured by the previous
+     * and current mouse points. As drag slope gets larger, it becomes more difficult to operate the view. This
+     * typically happens while dragging over and around the horizon, where movement of a few pixels can cause the view
+     * to move many kilometers. This <code>factor</code> is the amount of damping applied to the view movement in such
+     * cases. Setting <code>factor</code> to zero will disable this behavior, while setting <code>factor</code> to a
+     * positive value may dampen the effects of mouse dragging.
      *
      * @param factor dampening view movement when a mouse drag event would cause an abrupt transition. Must be greater
      * than or equal to zero.
      *
      * @throws IllegalArgumentException if <code>factor</code> is less than zero.
      */
-    public void setDragSlopeFactor(double factor) {
-        if (factor < 0) {
+    public void setDragSlopeFactor(double factor)
+    {
+        if (factor < 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "factor < 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -254,54 +271,68 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         this.dragSlopeFactor = factor;
     }
 
-    protected long getPerFrameInputInterval() {
+    protected long getPerFrameInputInterval()
+    {
         return this.perFrameInputInterval;
     }
 
-    protected void setPerFrameInputInterval(long milliseconds) {
+    protected void setPerFrameInputInterval(long milliseconds)
+    {
         this.perFrameInputInterval = milliseconds;
     }
 
-    protected View getView() {
+    protected View getView()
+    {
         return (this.wwd != null) ? this.wwd.getView() : null;
     }
 
     //**************************************************************//
     //********************  AWT Event Support  *********************//
     //**************************************************************//
-    protected boolean isWorldWindowFocusOwner() {
+
+    protected boolean isWorldWindowFocusOwner()
+    {
         return this.wwdFocusOwner;
     }
 
-    protected void setWorldWindowFocusOwner(boolean focusOwner) {
+    protected void setWorldWindowFocusOwner(boolean focusOwner)
+    {
         this.wwdFocusOwner = focusOwner;
     }
 
-    protected Point getMousePoint() {
+    protected Point getMousePoint()
+    {
         return this.mousePoint;
     }
 
-    protected Point getLastMousePoint() {
+    protected Point getLastMousePoint()
+    {
         return this.lastMousePoint;
     }
 
-    protected void updateMousePoint(MouseEvent e) {
+    protected void updateMousePoint(MouseEvent e)
+    {
         this.lastMousePoint = this.mousePoint;
         this.mousePoint = new Point(e.getPoint());
     }
 
-    protected Position getSelectedPosition() {
+    protected Position getSelectedPosition()
+    {
         return this.selectedPosition;
     }
 
-    protected void setSelectedPosition(Position position) {
+    protected void setSelectedPosition(Position position)
+    {
         this.selectedPosition = position;
     }
 
-    protected Position computeSelectedPosition() {
+    protected Position computeSelectedPosition()
+    {
         PickedObjectList pickedObjects = this.wwd.getObjectsAtCurrentPosition();
-        if (pickedObjects != null) {
-            if (pickedObjects.getTerrainObject() != null) {
+        if (pickedObjects != null)
+        {
+            if (pickedObjects.getTerrainObject() != null)
+            {
                 return pickedObjects.getTerrainObject().getPosition();
             }
         }
@@ -311,7 +342,9 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     //**************************************************************//
     //********************  View Change Events  ********************//
     //**************************************************************//
-    protected void onStopView() {
+
+    protected void onStopView()
+    {
         View view = this.getView();
         if (view == null) // include this test to ensure any derived implementation performs it
         {
@@ -324,7 +357,9 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     //**************************************************************//
     //********************  Key Events  ****************************//
     //**************************************************************//
-    public void keyTyped(KeyEvent e) {
+
+    public void keyTyped(KeyEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -338,7 +373,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         this.keyEventState.keyTyped(e);
     }
 
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -353,7 +389,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         this.handleKeyPressed(e);
     }
 
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -369,26 +406,32 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleKeyPressed(KeyEvent e) {
+    protected void handleKeyPressed(KeyEvent e)
+    {
         // Determine whether or not the current key state would have generated a view change event.
         // If so, issue a repaint event to give the per-frame input a chance to run.
-        if (this.handlePerFrameKeyState(this.keyEventState, QUERY_EVENTS)) {
+        if (this.handlePerFrameKeyState(this.keyEventState, QUERY_EVENTS))
+        {
             View view = this.getView();
-            if (view != null) {
+            if (view != null)
+            {
                 view.firePropertyChange(AVKey.VIEW, null, view);
             }
         }
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleKeyReleased(KeyEvent e) {
+    protected void handleKeyReleased(KeyEvent e)
+    {
 
     }
 
     //**************************************************************//
     //********************  Mouse Events  **************************//
     //**************************************************************//
-    public void mouseClicked(MouseEvent e) {
+
+    public void mouseClicked(MouseEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -402,7 +445,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         this.handleMouseClicked(e);
     }
 
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -420,7 +464,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         this.handleMousePressed(e);
     }
 
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -437,8 +482,9 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         this.handleMouseReleased(e);
     }
 
-    public void mouseEntered(MouseEvent e) {
-        if (this.wwd == null) // include this test to ensure any derived implementation performs it
+    public void mouseEntered(MouseEvent e)
+    {
+       if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
         }
@@ -450,7 +496,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         }
     }
 
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -464,29 +511,36 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleMouseClicked(MouseEvent e) {
+    protected void handleMouseClicked(MouseEvent e)
+    {
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleMousePressed(MouseEvent e) {
+    protected void handleMousePressed(MouseEvent e)
+    {
         // Determine whether or not the current key state would have generated a view change event.
         // If so, issue a repaint event to give the per-frame input a chance to run.
-        if (this.handlePerFrameMouseState(this.keyEventState, QUERY_EVENTS)) {
+        if (this.handlePerFrameMouseState(this.keyEventState, QUERY_EVENTS))
+        {
             View view = this.getView();
-            if (view != null) {
+            if (view != null)
+            {
                 view.firePropertyChange(AVKey.VIEW, null, view);
             }
         }
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleMouseReleased(MouseEvent e) {
+    protected void handleMouseReleased(MouseEvent e)
+    {
     }
 
     //**************************************************************//
     //********************  Mouse Motion Events  *******************//
     //**************************************************************//
-    public void mouseDragged(MouseEvent e) {
+
+    public void mouseDragged(MouseEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -501,7 +555,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         this.handleMouseDragged(e);
     }
 
-    public void mouseMoved(MouseEvent e) {
+    public void mouseMoved(MouseEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -517,17 +572,21 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleMouseDragged(MouseEvent e) {
+    protected void handleMouseDragged(MouseEvent e)
+    {
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleMouseMoved(MouseEvent e) {
+    protected void handleMouseMoved(MouseEvent e)
+    {
     }
 
     //**************************************************************//
     //********************  Mouse Wheel Events  ********************//
     //**************************************************************//
-    public void mouseWheelMoved(MouseWheelEvent e) {
+
+    public void mouseWheelMoved(MouseWheelEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -542,13 +601,16 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleMouseWheelMoved(MouseWheelEvent e) {
+    protected void handleMouseWheelMoved(MouseWheelEvent e)
+    {
     }
 
     //**************************************************************//
     //********************  Focus Events  **************************//
     //**************************************************************//
-    public void focusGained(FocusEvent e) {
+
+    public void focusGained(FocusEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -563,7 +625,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         this.handleFocusGained(e);
     }
 
-    public void focusLost(FocusEvent e) {
+    public void focusLost(FocusEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -580,20 +643,23 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleFocusGained(FocusEvent e) {
+    protected void handleFocusGained(FocusEvent e)
+    {
 
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handleFocusLost(FocusEvent e) {
-        if (this.isStopOnFocusLost()) {
+    protected void handleFocusLost(FocusEvent e)
+    {
+        if (this.isStopOnFocusLost())
             this.onStopView();
-        }
     }
 
-    public void apply() {
+    public void apply()
+    {
         // Process per-frame input only when the WorldWindow is the focus owner.
-        if (!this.isWorldWindowFocusOwner()) {
+        if (!this.isWorldWindowFocusOwner())
+        {
             return;
         }
 
@@ -601,7 +667,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         // balance the input response of high and low framerate applications.
         long now = System.currentTimeMillis();
         long interval = now - this.lastPerFrameInputTime;
-        if (interval >= this.getPerFrameInputInterval()) {
+        if (interval >= this.getPerFrameInputInterval())
+        {
             this.handlePerFrameKeyState(this.keyEventState, GENERATE_EVENTS);
             this.handlePerFrameMouseState(this.keyEventState, GENERATE_EVENTS);
             this.handlePerFrameAnimation(GENERATE_EVENTS);
@@ -612,36 +679,43 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
 
         // Determine whether or not the current key state would have generated a view change event. If so, issue
         // a repaint event to give the per-frame input a chance to run again.
-        if (this.handlePerFrameKeyState(this.keyEventState, QUERY_EVENTS)
-                || this.handlePerFrameMouseState(this.keyEventState, QUERY_EVENTS)
-                || this.handlePerFrameAnimation(QUERY_EVENTS)) {
+        if (this.handlePerFrameKeyState(this.keyEventState, QUERY_EVENTS) ||
+            this.handlePerFrameMouseState(this.keyEventState, QUERY_EVENTS) ||
+            this.handlePerFrameAnimation(QUERY_EVENTS))
+        {
             this.getWorldWindow().redraw();
         }
     }
 
-    public void viewApplied() {
+    public void viewApplied()
+    {
     }
 
     // Interpret the current key state according to the specified target. If the target is KEY_POLL_GENERATE_EVENTS,
     // then the the key state will generate any appropriate view change events. If the target is KEY_POLL_QUERY_EVENTS,
     // then the key state will not generate events, and this will return whether or not any view change events would
     // have been generated.
-    protected boolean handlePerFrameKeyState(KeyEventState keys, String target) {
+    protected boolean handlePerFrameKeyState(KeyEventState keys, String target)
+    {
         return false;
     }
 
-    protected boolean handlePerFrameMouseState(KeyEventState keys, String target) {
+    protected boolean handlePerFrameMouseState(KeyEventState keys, String target)
+    {
         return false;
     }
 
-    protected boolean handlePerFrameAnimation(String target) {
+    protected boolean handlePerFrameAnimation(String target)
+    {
         return false;
     }
 
     //**************************************************************//
     //********************  Property Change Events  ****************//
     //**************************************************************//
-    public void propertyChange(java.beans.PropertyChangeEvent e) {
+
+    public void propertyChange(java.beans.PropertyChangeEvent e)
+    {
         if (this.wwd == null) // include this test to ensure any derived implementation performs it
         {
             return;
@@ -656,19 +730,22 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void handlePropertyChange(java.beans.PropertyChangeEvent e) {
+    protected void handlePropertyChange(java.beans.PropertyChangeEvent e)
+    {
 
     }
 
     //**************************************************************//
     //********************  Raw Input Transformation  **************//
     //**************************************************************//
+
     // Translates raw user input into a change in value, according to the specified device and action attributes.
     // The input is scaled by the action attribute range (depending on eye position), then scaled by the device
     // sensitivity.
     protected double rawInputToChangeInValue(double rawInput,
-            ViewInputAttributes.DeviceAttributes deviceAttributes, ViewInputAttributes.ActionAttributes actionAttributes,
-            String scaleFunc) {
+        ViewInputAttributes.DeviceAttributes deviceAttributes, ViewInputAttributes.ActionAttributes actionAttributes,
+        String scaleFunc)
+    {
         double value = rawInput;
 
         double[] range = actionAttributes.getValues();
@@ -678,28 +755,36 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         return value;
     }
 
-    protected double getScaledValue(double minValue, double maxValue, String scaleFunc) {
-        if (scaleFunc == null) {
+    protected double getScaledValue(double minValue, double maxValue, String scaleFunc)
+    {
+        if (scaleFunc == null)
+        {
             return minValue;
         }
 
         double t = 0.0;
-        if (scaleFunc.startsWith(SCALE_FUNC_EYE_ALTITUDE)) {
+        if (scaleFunc.startsWith(SCALE_FUNC_EYE_ALTITUDE))
+        {
             t = this.evaluateScaleFuncEyeAltitude();
-        } else if (scaleFunc.startsWith(SCALE_FUNC_ZOOM)) {
+        }
+        else if (scaleFunc.startsWith(SCALE_FUNC_ZOOM))
+        {
             t = this.evaluateScaleFuncZoom();
         }
 
-        if (scaleFunc.toLowerCase().endsWith("exp")) {
+        if (scaleFunc.toLowerCase().endsWith("exp"))
+        {
             t = Math.pow(2.0, t) - 1.0;
         }
 
         return minValue * (1.0 - t) + maxValue * t;
     }
 
-    protected double evaluateScaleFuncEyeAltitude() {
+    protected double evaluateScaleFuncEyeAltitude()
+    {
         View view = this.getView();
-        if (view == null) {
+        if (view == null)
+        {
             return 0.0;
         }
 
@@ -710,13 +795,16 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         return (t < 0 ? 0 : (t > 1 ? 1 : t));
     }
 
-    protected double evaluateScaleFuncZoom() {
+    protected double evaluateScaleFuncZoom()
+    {
         View view = this.getView();
-        if (view == null) {
+        if (view == null)
+        {
             return 0.0;
         }
 
-        if (view instanceof OrbitView) {
+        if (view instanceof OrbitView)
+        {
             double radius = this.wwd.getModel().getGlobe().getRadius();
             double t = ((OrbitView) view).getZoom() / (3.0 * radius);
             return (t < 0 ? 0 : (t > 1 ? 1 : t));
@@ -725,10 +813,13 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         return 0.0;
     }
 
+
     protected double getScaleValueElevation(
-            ViewInputAttributes.DeviceAttributes deviceAttributes, ViewInputAttributes.ActionAttributes actionAttributes) {
+        ViewInputAttributes.DeviceAttributes deviceAttributes, ViewInputAttributes.ActionAttributes actionAttributes)
+    {
         View view = this.getView();
-        if (view == null) {
+        if (view == null)
+        {
             return 0.0;
         }
 
@@ -737,34 +828,40 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         Position eyePos = view.getEyePosition();
         double radius = this.wwd.getModel().getGlobe().getRadius();
         double surfaceElevation = this.wwd.getModel().getGlobe().getElevation(eyePos.getLatitude(),
-                eyePos.getLongitude());
+            eyePos.getLongitude());
         double t = getScaleValue(range[0], range[1],
-                eyePos.getElevation() - surfaceElevation, 3.0 * radius, true);
-        t *= deviceAttributes.getSensitivity();
+            eyePos.getElevation() - surfaceElevation, 3.0 * radius, true);
+         t *= deviceAttributes.getSensitivity();
 
         return t;
     }
 
     protected double getScaleValue(double minValue, double maxValue,
-            double value, double range, boolean isExp) {
+        double value, double range, boolean isExp)
+    {
         double t = value / range;
         t = t < 0 ? 0 : (t > 1 ? 1 : t);
-        if (isExp) {
+        if (isExp)
+        {
             t = Math.pow(2.0, t) - 1.0;
         }
-        return (minValue * (1.0 - t) + maxValue * t);
+        return(minValue * (1.0 - t) + maxValue * t);
     }
 
     //**************************************************************//
     //********************  Utility Methods  ***********************//
     //**************************************************************//
-    protected Vec4 computeSelectedPointAt(Point point) {
-        if (this.getSelectedPosition() == null) {
+
+    protected Vec4 computeSelectedPointAt(Point point)
+    {
+        if (this.getSelectedPosition() == null)
+        {
             return null;
         }
 
         View view = this.getView();
-        if (view == null) {
+        if (view == null)
+        {
             return null;
         }
 
@@ -772,7 +869,8 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         // essentially dragging along the inside of a sphere, and the effects of dragging are reversed. To the user
         // this behavior appears unpredictable.
         double elevation = this.getSelectedPosition().getElevation();
-        if (view.getEyePosition().getElevation() <= elevation) {
+        if (view.getEyePosition().getElevation() <= elevation)
+        {
             return null;
         }
 
@@ -780,14 +878,18 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         // same proportions as the actual Globe. This will simulate dragging the selected position more accurately.
         Line ray = view.computeRayFromScreenPoint(point.getX(), point.getY());
         Intersection[] intersections = this.wwd.getModel().getGlobe().intersect(ray, elevation);
-        if (intersections == null || intersections.length == 0) {
+        if (intersections == null || intersections.length == 0)
+        {
             return null;
         }
 
         return ray.nearestIntersectionPoint(intersections);
     }
 
-    protected LatLon getChangeInLocation(Point point1, Point point2, Vec4 vec1, Vec4 vec2) {
+
+
+    protected LatLon getChangeInLocation(Point point1, Point point2, Vec4 vec1, Vec4 vec2)
+    {
         // Modify the distance we'll actually travel based on the slope of world distance travelled to screen
         // distance travelled . A large slope means the user made a small change in screen space which resulted
         // in a large change in world space. We want to reduce the impact of that change to something reasonable.
@@ -804,9 +906,11 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         return pos1.subtract(adjustedLocation);
     }
 
-    public double computeDragSlope(Point point1, Point point2, Vec4 vec1, Vec4 vec2) {
+    public double computeDragSlope(Point point1, Point point2, Vec4 vec1, Vec4 vec2)
+    {
         View view = this.getView();
-        if (view == null) {
+        if (view == null)
+        {
             return 0.0;
         }
 
@@ -822,57 +926,59 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
 
         // Return the ratio of world distance to screen distance.
         double slope = vec1.distanceTo3(vec2) / (pixelDistance * pixelSize);
-        if (slope < 1.0) {
+        if (slope < 1.0)
             slope = 1.0;
-        }
 
         return slope - 1.0;
     }
 
-    protected static Point constrainToSourceBounds(Point point, Object source) {
-        if (point == null) {
+    protected static Point constrainToSourceBounds(Point point, Object source)
+    {
+        if (point == null)
             return null;
-        }
 
-        if (!(source instanceof Component)) {
+        if (!(source instanceof Component))
             return point;
-        }
 
         Component c = (Component) source;
 
         int x = (int) point.getX();
-        if (x < 0) {
+        if (x < 0)
             x = 0;
-        }
-        if (x > c.getWidth()) {
+        if (x > c.getWidth())
             x = c.getWidth();
-        }
 
         int y = (int) point.getY();
-        if (y < 0) {
+        if (y < 0)
             y = 0;
-        }
-        if (y > c.getHeight()) {
+        if (y > c.getHeight())
             y = c.getHeight();
-        }
 
         return new Point(x, y);
     }
 
-    public Point getMouseDownPoint() {
+
+
+    public Point getMouseDownPoint()
+    {
         return mouseDownPoint;
     }
 
-    public void setMouseDownPoint(Point mouseDownPoint) {
+    public void setMouseDownPoint(Point mouseDownPoint)
+    {
         this.mouseDownPoint = mouseDownPoint;
     }
 
-    protected void setMouseDownView(View mouseDownView) {
-        if (mouseDownView != null) {
+    protected void setMouseDownView(View mouseDownView)
+    {
+        if (mouseDownView != null)
+        {
             this.mouseDownModelview = mouseDownView.getModelviewMatrix();
             this.mouseDownProjection = mouseDownView.getProjectionMatrix();
             this.mouseDownViewport = mouseDownView.getViewport();
-        } else {
+        }
+        else
+        {
             this.mouseDownModelview = null;
             this.mouseDownProjection = null;
             this.mouseDownViewport = null;

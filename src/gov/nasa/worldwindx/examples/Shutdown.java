@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
@@ -18,15 +19,16 @@ import java.awt.event.*;
  * @author tag
  * @version $Id: Shutdown.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class Shutdown {
-
-    private static class AppFrame extends javax.swing.JFrame {
-
+public class Shutdown
+{
+    private static class AppFrame extends javax.swing.JFrame
+    {
         private WorldWindow wwd;
         private ShutdownWindowAction shutdownAction;
         private CreateWindowAction createWindowAction;
 
-        public AppFrame() {
+        public AppFrame()
+        {
             this.getContentPane().setLayout(new BorderLayout(10, 10));
 
             JPanel controlPanel = new JPanel(new BorderLayout(10, 10));
@@ -49,7 +51,8 @@ public class Shutdown {
             this.pack();
         }
 
-        private void createWindow() {
+        private void createWindow()
+        {
             WorldWindowGLCanvas wwc = new WorldWindowGLCanvas();
             wwc.setPreferredSize(new java.awt.Dimension(800, 600));
             this.getContentPane().add(wwc, java.awt.BorderLayout.CENTER);
@@ -57,21 +60,26 @@ public class Shutdown {
             this.wwd = wwc;
         }
 
-        private void destroyCurrentWindow() {
-            if (this.wwd != null) {
+        private void destroyCurrentWindow()
+        {
+            if (this.wwd != null)
+            {
                 getContentPane().remove((Component) wwd);
                 wwd = null;
             }
         }
 
-        private class ShutdownWindowAction extends AbstractAction {
-
-            public ShutdownWindowAction() {
+        private class ShutdownWindowAction extends AbstractAction
+        {
+            public ShutdownWindowAction()
+            {
                 super("Shutdown Window");
             }
 
-            public void actionPerformed(ActionEvent e) {
-                if (wwd != null) {
+            public void actionPerformed(ActionEvent e)
+            {
+                if (wwd != null)
+                {
                     wwd.shutdown();
                     destroyCurrentWindow();
                     this.setEnabled(false);
@@ -80,14 +88,16 @@ public class Shutdown {
             }
         }
 
-        private class CreateWindowAction extends AbstractAction {
-
-            public CreateWindowAction() {
+        private class CreateWindowAction extends AbstractAction
+        {
+            public CreateWindowAction()
+            {
                 super("Create Window");
                 this.setEnabled(false);
             }
 
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 createWindow();
                 pack();
                 this.setEnabled(false);
@@ -95,13 +105,15 @@ public class Shutdown {
             }
         }
 
-        private class ShutdownWorldWindAction extends AbstractAction {
-
-            public ShutdownWorldWindAction() {
+        private class ShutdownWorldWindAction extends AbstractAction
+        {
+            public ShutdownWorldWindAction()
+            {
                 super("Shutdown WorldWind");
             }
 
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 WorldWind.shutDown();
                 destroyCurrentWindow();
                 createWindowAction.setEnabled(true);
@@ -109,13 +121,17 @@ public class Shutdown {
         }
     }
 
-    public static void main(String[] args) {
-        if (Configuration.isMacOS()) {
+    public static void main(String[] args)
+    {
+        if (Configuration.isMacOS())
+        {
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Shutdown WorldWind");
         }
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 // Create an AppFrame and immediately make it visible. As per Swing convention, this
                 // is done within an invokeLater call so that it executes on an AWT thread.
                 AppFrame appFrame = new AppFrame();

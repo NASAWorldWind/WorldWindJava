@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -11,26 +12,30 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLData.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLData extends KMLAbstractObject {
-
+public class KMLData extends KMLAbstractObject
+{
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLData(String namespaceURI) {
+    public KMLData(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
-    public String getName() {
+    public String getName()
+    {
         return (String) this.getField("name");
     }
 
-    public String getDisplayName() {
+    public String getDisplayName()
+    {
         return (String) this.getField("displayName");
     }
 
-    public String getValue() {
+    public String getValue()
+    {
         return (String) this.getField("value");
     }
 }

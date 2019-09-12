@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.util.WWUtil;
@@ -18,8 +19,8 @@ import java.util.*;
  * @author tag
  * @version $Id: KMLDelete.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLDelete extends AbstractXMLEventParser implements KMLUpdateOperation {
-
+public class KMLDelete extends AbstractXMLEventParser implements KMLUpdateOperation
+{
     protected List<KMLAbstractFeature> features = new ArrayList<KMLAbstractFeature>();
 
     /**
@@ -27,46 +28,48 @@ public class KMLDelete extends AbstractXMLEventParser implements KMLUpdateOperat
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLDelete(String namespaceURI) {
+    public KMLDelete(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
     @Override
     protected void doAddEventContent(Object o, XMLEventParserContext ctx, XMLEvent event, Object... args)
-            throws XMLStreamException {
-        if (o instanceof KMLAbstractFeature) {
+        throws XMLStreamException
+    {
+        if (o instanceof KMLAbstractFeature)
             this.addFeature((KMLAbstractFeature) o);
-        } else {
+        else
             super.doAddEventContent(o, ctx, event, args);
-        }
     }
 
-    protected void addFeature(KMLAbstractFeature o) {
+    protected void addFeature(KMLAbstractFeature o)
+    {
         this.features.add(o);
     }
 
-    public List<KMLAbstractFeature> getFeatures() {
+    public List<KMLAbstractFeature> getFeatures()
+    {
         return this.features;
     }
 
-    public void applyOperation(KMLRoot targetRoot) {
-        for (KMLAbstractFeature feature : this.features) {
+    public void applyOperation(KMLRoot targetRoot)
+    {
+        for (KMLAbstractFeature feature : this.features)
+        {
             String targetId = feature.getTargetId();
-            if (WWUtil.isEmpty(targetId)) {
+            if (WWUtil.isEmpty(targetId))
                 continue;
-            }
 
             Object o = targetRoot.getItemByID(targetId);
-            if (o == null || !(o instanceof KMLAbstractFeature)) {
+            if (o == null || !(o instanceof KMLAbstractFeature))
                 continue;
-            }
 
             KMLAbstractFeature featureToDelete = (KMLAbstractFeature) o;
 
             Object p = featureToDelete.getParent();
-            if (!(p instanceof KMLAbstractContainer)) {
+            if (!(p instanceof KMLAbstractContainer))
                 continue;
-            }
 
             ((KMLAbstractContainer) p).removeFeature(featureToDelete);
         }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -18,11 +19,9 @@ import java.util.Arrays;
  * @author pabercrombie
  * @version $Id: WeaponsFreeZone.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class WeaponsFreeZone extends AviationZone {
-
-    /**
-     * Path to the image used for the polygon fill pattern.
-     */
+public class WeaponsFreeZone extends AviationZone
+{
+    /** Path to the image used for the polygon fill pattern. */
     protected static final String DIAGONAL_FILL_PATH = "images/diagonal-fill-16x16.png";
 
     /**
@@ -30,35 +29,36 @@ public class WeaponsFreeZone extends AviationZone {
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static java.util.List<String> getSupportedGraphics() {
+    public static java.util.List<String> getSupportedGraphics()
+    {
         return Arrays.asList(TacGrpSidc.C2GM_AVN_ARS_WFZ);
     }
 
-    public WeaponsFreeZone(String sidc) {
+    public WeaponsFreeZone(String sidc)
+    {
         super(sidc);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected String getGraphicLabel() {
+    protected String getGraphicLabel()
+    {
         return "WFZ";
     }
 
     @Override
-    protected void createLabels() {
+    protected void createLabels()
+    {
         TacticalGraphicLabel label = this.addLabel(this.createLabelText());
         label.setTextAlign(AVKey.LEFT);
         label.setEffect(AVKey.TEXT_EFFECT_NONE);
         label.setDrawInterior(true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected void applyDefaultAttributes(ShapeAttributes attributes) {
+    protected void applyDefaultAttributes(ShapeAttributes attributes)
+    {
         super.applyDefaultAttributes(attributes);
 
         // Enable the polygon interior and set the image source to draw a fill pattern of diagonal lines.
@@ -71,7 +71,8 @@ public class WeaponsFreeZone extends AviationZone {
      * altitude modifier.
      */
     @Override
-    protected String createLabelText() {
+    protected String createLabelText()
+    {
         return this.doCreateLabelText(false);
     }
 
@@ -80,7 +81,8 @@ public class WeaponsFreeZone extends AviationZone {
      *
      * @return The source of the polygon fill pattern.
      */
-    protected Object getImageSource() {
+    protected Object getImageSource()
+    {
         return DIAGONAL_FILL_PATH;
     }
 }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -11,14 +12,15 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLBalloonStyle.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLBalloonStyle extends KMLAbstractSubStyle {
-
+public class KMLBalloonStyle extends KMLAbstractSubStyle
+{
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLBalloonStyle(String namespaceURI) {
+    public KMLBalloonStyle(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
@@ -29,7 +31,8 @@ public class KMLBalloonStyle extends KMLAbstractSubStyle {
      *
      * @return the background color as a hexadecimal string.
      */
-    public String getColor() {
+    public String getColor()
+    {
         return (String) this.getField("color");
     }
 
@@ -39,11 +42,13 @@ public class KMLBalloonStyle extends KMLAbstractSubStyle {
      *
      * @return the background color as a hexadecimal string.
      */
-    public String getBgColor() {
+    public String getBgColor()
+    {
         return (String) this.getField("bgColor");
     }
 
-    public String getTextColor() {
+    public String getTextColor()
+    {
         return (String) this.getField("textColor");
     }
 
@@ -52,11 +57,13 @@ public class KMLBalloonStyle extends KMLAbstractSubStyle {
      *
      * @return Balloon text field.
      */
-    public String getText() {
+    public String getText()
+    {
         return (String) this.getField("text");
     }
 
-    public String getDisplayMode() {
+    public String getDisplayMode()
+    {
         return (String) this.getField("displayMode");
     }
 
@@ -66,11 +73,12 @@ public class KMLBalloonStyle extends KMLAbstractSubStyle {
      *
      * @return True if at least one of the BalloonStyle fields is set (text, displayMode, bgColor, etc).
      */
-    public boolean hasStyleFields() {
+    public boolean hasStyleFields()
+    {
         return this.hasField("text")
-                || this.hasField("bgColor")
-                || this.hasField("textColor")
-                || this.hasField("color")
-                || this.hasField("displayMode");
+            || this.hasField("bgColor")
+            || this.hasField("textColor")
+            || this.hasField("color")
+            || this.hasField("displayMode");
     }
 }

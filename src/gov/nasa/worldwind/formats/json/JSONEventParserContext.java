@@ -11,8 +11,8 @@ import java.io.IOException;
  * @author dcollins
  * @version $Id: JSONEventParserContext.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface JSONEventParserContext {
-
+public interface JSONEventParserContext
+{
     boolean hasNext();
 
     JSONEvent nextEvent() throws IOException;

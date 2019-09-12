@@ -12,8 +12,8 @@ import gov.nasa.worldwind.avlist.AVList;
  * @author dcollins
  * @version $Id: DataStoreProducer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface DataStoreProducer extends WWObject {
-
+public interface DataStoreProducer extends WWObject
+{
     AVList getStoreParameters();
 
     void setStoreParameters(AVList parameters);

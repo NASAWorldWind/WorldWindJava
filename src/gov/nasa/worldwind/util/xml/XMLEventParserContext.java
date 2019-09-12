@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util.xml;
 
 import gov.nasa.worldwind.avlist.AVList;
@@ -18,8 +19,8 @@ import java.util.Map;
  * @author tag
  * @version $Id: XMLEventParserContext.java 1981 2014-05-08 03:59:04Z tgaskins $
  */
-public interface XMLEventParserContext extends AVList {
-
+public interface XMLEventParserContext extends AVList
+{
     /**
      * Identifies the name of the parser handling unrecognized elements. Can be used to explicitly specify the context's
      * parser-table entry for unrecognized elements.
@@ -54,7 +55,7 @@ public interface XMLEventParserContext extends AVList {
     /**
      * Determines whether an event is a start event for a specific event type.
      *
-     * @param event an event identifying the event type of interest.
+     * @param event       an event identifying the event type of interest.
      * @param elementName the event name.
      *
      * @return true if the event is a start event for the named event type.
@@ -64,7 +65,7 @@ public interface XMLEventParserContext extends AVList {
     /**
      * Determines whether an event is a start event for a specific event type indicated by its local name.
      *
-     * @param event an event identifying the event type of interest.
+     * @param event       an event identifying the event type of interest.
      * @param elementName the local part of the event name to match.
      *
      * @return true if the event is a start event for the named event type.
@@ -77,7 +78,7 @@ public interface XMLEventParserContext extends AVList {
      * Note: Only the event's element name and type are compared. The method returns true if the start and end events
      * are the corresponding event types for an element of the same name.
      *
-     * @param event the event of interest.
+     * @param event        the event of interest.
      * @param startElement the start event associated with the potential end event.
      *
      * @return true if the event is the corresponding end event to the specified start event, otherwise false.
@@ -122,7 +123,7 @@ public interface XMLEventParserContext extends AVList {
     BooleanIntegerXMLEventParser getBooleanIntegerParser();
 
     /**
-     * Returns the default parser for a simple integer.
+     * Returns the default parser for a simple  integer.
      *
      * @return an integer parser.
      */
@@ -133,7 +134,7 @@ public interface XMLEventParserContext extends AVList {
      * #getParser(javax.xml.stream.events.XMLEvent)} is called for the same element name.
      *
      * @param elementName the element name for which to return a parser.
-     * @param parser the parser to register.
+     * @param parser      the parser to register.
      */
     void registerParser(QName elementName, XMLEventParser parser);
 
@@ -183,14 +184,14 @@ public interface XMLEventParserContext extends AVList {
      * @param qb second element name
      *
      * @return true if both names have the same namespace (or no namespace) and local name, or if either name has no
-     * namespace but the namespace of the other is the context's default namespace.
+     *         namespace but the namespace of the other is the context's default namespace.
      */
     boolean isSameName(QName qa, QName qb);
 
     /**
      * Create a parser for a specified event's element name, if a parser for that name is registered with the context.
      *
-     * @param event the event whose element name identifies the parser to create.
+     * @param event         the event whose element name identifies the parser to create.
      * @param defaultParser a parser to return if no parser is registered for the specified name. May be null.
      *
      * @return a new parser, or the specified default parser if no parser has been registered for the element name.
@@ -227,7 +228,7 @@ public interface XMLEventParserContext extends AVList {
      * Adds a mapping of an <i>id</i> attribute to its associated KML object.
      *
      * @param id the object id. If null, this method returns without creating a mapping.
-     * @param o the object to associate with the id.
+     * @param o  the object to associate with the id.
      */
     void addId(String id, Object o);
 
@@ -238,12 +239,12 @@ public interface XMLEventParserContext extends AVList {
      * element they refer to the referring object's field table.
      *
      * @param referenceName the element name of the elements whose references this method resolves. An example is
-     * <i>styleUrl</i>. Resolution is performed for only elements of this name.
-     * @param fieldName the key used to identify the resolved object in a parser's field table. After this method
-     * resolves references, the referenced object can be obtained by calling the parsers {@link
-     *                      gov.nasa.worldwind.util.xml.AbstractXMLEventParser#getField(javax.xml.namespace.QName)} method with the
-     * <code>fieldName</code> specified here as the name argument.
-     * @param parser the parser whose references to resolve.
+     *                      <i>styleUrl</i>. Resolution is performed for only elements of this name.
+     * @param fieldName     the key used to identify the resolved object in a parser's field table. After this method
+     *                      resolves references, the referenced object can be obtained by calling the parsers {@link
+     *                      gov.nasa.worldwind.util.xml.AbstractXMLEventParser#getField(javax.xml.namespace.QName)}
+     *                      method with the <code>fieldName</code> specified here as the name argument.
+     * @param parser        the parser whose references to resolve.
      *
      * @deprecated Reference resolution is handled by parsers specific to a certain document type. For example, {@link
      *             gov.nasa.worldwind.ogc.kml.KMLRoot} handles resolution of references in KML files.
@@ -282,7 +283,7 @@ public interface XMLEventParserContext extends AVList {
     /**
      * Add string list parsers for a list of element types and qualified for a specified namespace.
      *
-     * @param namespace the namespace URI.
+     * @param namespace    the namespace URI.
      * @param stringFields the string list parser names.
      */
     void addStringParsers(String namespace, String[] stringFields);
@@ -290,7 +291,7 @@ public interface XMLEventParserContext extends AVList {
     /**
      * Add double parsers for a list of element types and qualified for a specified namespace.
      *
-     * @param namespace the namespace URI.
+     * @param namespace    the namespace URI.
      * @param doubleFields the string parsers.
      */
     void addDoubleParsers(String namespace, String[] doubleFields);
@@ -298,7 +299,7 @@ public interface XMLEventParserContext extends AVList {
     /**
      * Add integer parsers for a list of element types and qualified for a specified namespace.
      *
-     * @param namespace the namespace URI.
+     * @param namespace     the namespace URI.
      * @param integerFields the string parsers.
      */
     void addIntegerParsers(String namespace, String[] integerFields);
@@ -306,7 +307,7 @@ public interface XMLEventParserContext extends AVList {
     /**
      * Add boolean parsers for a list of element types and qualified for a specified namespace.
      *
-     * @param namespace the namespace URI.
+     * @param namespace     the namespace URI.
      * @param booleanFields the string parsers.
      */
     void addBooleanParsers(String namespace, String[] booleanFields);
@@ -314,7 +315,7 @@ public interface XMLEventParserContext extends AVList {
     /**
      * Add boolean integer parsers for a list of element types and qualified for a specified namespace.
      *
-     * @param namespace the namespace URI.
+     * @param namespace            the namespace URI.
      * @param booleanIntegerFields the string parser.
      */
     void addBooleanIntegerParsers(String namespace, String[] booleanIntegerFields);

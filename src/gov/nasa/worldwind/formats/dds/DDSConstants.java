@@ -12,14 +12,15 @@ package gov.nasa.worldwind.formats.dds;
  * @author dcollins
  * @version $Id: DDSConstants.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class DDSConstants {
-
+public class DDSConstants
+{
     public static final int DDS_SIGNATURE_SIZE = 4;
     public static final int DDS_HEADER_SIZE = 124;
     public static final int DDS_PIXEL_FORMAT_SIZE = 32;
     public static final int DDS_PIXEL_FORMAT_OFFSET = 76;
 
     public static final int DDS_DATA_OFFSET = DDS_SIGNATURE_SIZE + DDS_HEADER_SIZE;
+
 
     public static final int DDPF_FOURCC = 0x0004;
     public static final int DDSCAPS_TEXTURE = 0x1000;
@@ -39,10 +40,11 @@ public class DDSConstants {
     // A DWORD (magic number) containing the four character code value 'DDS ' (0x20534444)
     public static final int MAGIC = makeFourCC('D', 'D', 'S', ' ');
 
-    public static int makeFourCC(char ch0, char ch1, char ch2, char ch3) {
+    public static int makeFourCC(char ch0, char ch1, char ch2, char ch3)
+    {
         return (((int) ch0))
-                | (((int) ch1) << 8)
-                | (((int) ch2) << 16)
-                | (((int) ch3) << 24);
+               | (((int) ch1) << 8)
+               | (((int) ch2) << 16)
+               | (((int) ch3) << 24);
     }
 }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.geom.*;
@@ -19,17 +20,15 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: AdvanceForFeint.java 545 2012-04-24 22:29:21Z pabercrombie $
  */
-public class AdvanceForFeint extends AbstractAxisArrow {
-
+public class AdvanceForFeint extends AbstractAxisArrow
+{
     /**
      * Factor used to compute the distance between the solid and dashed lines in the arrow head. A larger value will
      * move the dashed line farther from the solid line.
      */
     protected static final double DASHED_LINE_DISTANCE = 0.2;
 
-    /**
-     * Shape attributes for the dashed part of the graphic.
-     */
+    /** Shape attributes for the dashed part of the graphic. */
     protected ShapeAttributes dashedAttributes = new BasicShapeAttributes();
 
     /**
@@ -37,7 +36,8 @@ public class AdvanceForFeint extends AbstractAxisArrow {
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics() {
+    public static List<String> getSupportedGraphics()
+    {
         return Arrays.asList(TacGrpSidc.C2GM_DCPN_AAFF);
     }
 
@@ -46,7 +46,8 @@ public class AdvanceForFeint extends AbstractAxisArrow {
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public AdvanceForFeint(String sidc) {
+    public AdvanceForFeint(String sidc)
+    {
         super(sidc, 2);
 
         // Path 1 is used to draw the dashed line. This path needs its own shape attributes because it is always drawn
@@ -54,20 +55,18 @@ public class AdvanceForFeint extends AbstractAxisArrow {
         this.paths[1].setAttributes(this.dashedAttributes);
     }
 
-    /**
-     * {@inheritDoc} Overridden to compute positions for the dashed portion of the arrow head.
-     */
+    /** {@inheritDoc} Overridden to compute positions for the dashed portion of the arrow head. */
     @Override
     protected double createArrowHeadPositions(List<Position> leftPositions, List<Position> rightPositions,
-            List<Position> arrowHeadPositions, Globe globe) {
+        List<Position> arrowHeadPositions, Globe globe)
+    {
         // This graphic has a double line for the arrowhead, and the outer line is always drawn dashed. Take the
         // arrowhead computed by the super class and create the other line from it.
         double halfWidth = super.createArrowHeadPositions(leftPositions, rightPositions, arrowHeadPositions, globe);
 
         // The rest of the method assumes that the superclass populates arrowHeadPositions with three positions.
-        if (arrowHeadPositions == null || arrowHeadPositions.size() != 3) {
+        if (arrowHeadPositions == null || arrowHeadPositions.size() != 3)
             throw new IllegalStateException();
-        }
 
         Iterator<? extends Position> positions = this.positions.iterator();
         Position pos1 = positions.next();
@@ -93,9 +92,9 @@ public class AdvanceForFeint extends AbstractAxisArrow {
         ptN_prime = ptN_prime.add3(dir);
 
         List<Position> newPositions = Arrays.asList(
-                globe.computePositionFromPoint(ptN),
-                pos1,
-                globe.computePositionFromPoint(ptN_prime));
+            globe.computePositionFromPoint(ptN),
+            pos1,
+            globe.computePositionFromPoint(ptN_prime));
 
         this.paths[1].setPositions(new ArrayList<Position>(newPositions));
 
@@ -109,11 +108,10 @@ public class AdvanceForFeint extends AbstractAxisArrow {
         return halfWidth;
     }
 
-    /**
-     * Determine active attributes for this frame.
-     */
+    /** Determine active attributes for this frame. */
     @Override
-    protected void determineActiveAttributes() {
+    protected void determineActiveAttributes()
+    {
         super.determineActiveAttributes();
 
         // Copy active attributes to the dashed attribute bundle.
@@ -124,15 +122,13 @@ public class AdvanceForFeint extends AbstractAxisArrow {
         this.dashedAttributes.setOutlineStippleFactor(this.getOutlineStippleFactor());
     }
 
-    /**
-     * Create labels for the start and end of the path.
-     */
+    /** Create labels for the start and end of the path. */
     @Override
-    protected void createLabels() {
+    protected void createLabels()
+    {
         String text = this.getText();
-        if (!WWUtil.isEmpty(text)) {
+        if (!WWUtil.isEmpty(text))
             this.addLabel(text);
-        }
     }
 
     /**
@@ -141,10 +137,10 @@ public class AdvanceForFeint extends AbstractAxisArrow {
      * @param dc Current draw context.
      */
     @Override
-    protected void determineLabelPositions(DrawContext dc) {
-        if (WWUtil.isEmpty(this.labels)) {
+    protected void determineLabelPositions(DrawContext dc)
+    {
+        if (WWUtil.isEmpty(this.labels))
             return;
-        }
 
         Iterator<? extends Position> positions = this.positions.iterator();
         Position pos1 = positions.next();

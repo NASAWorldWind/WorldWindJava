@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.formats.tiff;
 
 import gov.nasa.worldwind.Version;
@@ -19,50 +20,56 @@ import java.util.*;
  * @author brownrigg
  * @version $Id: GeotiffImageReaderSpi.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeotiffImageReaderSpi extends ImageReaderSpi {
+public class GeotiffImageReaderSpi extends ImageReaderSpi
+{
 
-    public static GeotiffImageReaderSpi inst() {
-        if (theInstance == null) {
+    public static GeotiffImageReaderSpi inst()
+    {
+        if (theInstance == null)
             theInstance = new GeotiffImageReaderSpi();
-        }
         return theInstance;
     }
 
-    private GeotiffImageReaderSpi() {
+    private GeotiffImageReaderSpi()
+    {
         super(vendorName, version, names, suffixes, mimeTypes,
-                readerClassname, new Class[]{ImageInputStream.class},
-                null, false, null, null, null, null,
-                false, null, null, null, null);
+            readerClassname, new Class[] {ImageInputStream.class},
+            null, false, null, null, null, null,
+            false, null, null, null, null);
     }
 
     @Override
-    public boolean canDecodeInput(Object source) throws IOException {
-        if (source == null || !(source instanceof ImageInputStream)) {
+    public boolean canDecodeInput(Object source) throws IOException
+    {
+        if (source == null || !(source instanceof ImageInputStream))
             return false;
-        }
 
         ImageInputStream inp = (ImageInputStream) source;
         byte[] ifh = new byte[8];  // Tiff image-file header
-        try {
+        try
+        {
             inp.mark();
             inp.readFully(ifh);
             inp.reset();
-        } catch (IOException ex) {
+        }
+        catch (IOException ex)
+        {
             return false;
         }
 
-        return (ifh[0] == 0x4D && ifh[1] == 0x4D && ifh[2] == 0x00 && ifh[3] == 0x2A)
-                || // big-endian
-                (ifh[0] == 0x49 && ifh[1] == 0x49 && ifh[2] == 0x2A && ifh[3] == 0x00);    // little-endian
+        return (ifh[0] == 0x4D && ifh[1] == 0x4D && ifh[2] == 0x00 && ifh[3] == 0x2A) ||  // big-endian
+            (ifh[0] == 0x49 && ifh[1] == 0x49 && ifh[2] == 0x2A && ifh[3] == 0x00);    // little-endian
     }
 
     @Override
-    public ImageReader createReaderInstance(Object extension) throws IOException {
+    public ImageReader createReaderInstance(Object extension) throws IOException
+    {
         return new GeotiffImageReader(this);
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(Locale locale)
+    {
         return "NASA WorldWind Geotiff Image Reader";
     }
 

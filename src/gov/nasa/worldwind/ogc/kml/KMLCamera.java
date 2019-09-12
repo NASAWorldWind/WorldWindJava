@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -11,42 +12,50 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLCamera.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLCamera extends KMLAbstractView {
-
+public class KMLCamera extends KMLAbstractView
+{
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLCamera(String namespaceURI) {
+    public KMLCamera(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
-    public Double getLongitude() {
+    public Double getLongitude()
+    {
         return (Double) this.getField("longitude");
     }
 
-    public Double getLatitude() {
+    public Double getLatitude()
+    {
         return (Double) this.getField("latitude");
     }
 
-    public Double getAltitude() {
+    public Double getAltitude()
+    {
         return (Double) this.getField("altitude");
     }
 
-    public Double getHeading() {
+    public Double getHeading()
+    {
         return (Double) this.getField("heading");
     }
 
-    public Double getTilt() {
+    public Double getTilt()
+    {
         return (Double) this.getField("tilt");
     }
 
-    public Double getRoll() {
+    public Double getRoll()
+    {
         return (Double) this.getField("roll");
     }
 
-    public String getAltitudeMode() {
+    public String getAltitudeMode()
+    {
         return (String) this.getField("altitudeMode");
     }
 }

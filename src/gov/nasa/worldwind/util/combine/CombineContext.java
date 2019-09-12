@@ -32,14 +32,14 @@ import java.util.*;
  * @author dcollins
  * @version $Id: CombineContext.java 2412 2014-10-30 21:32:34Z dcollins $
  */
-public class CombineContext implements Disposable {
-
+public class CombineContext implements Disposable
+{
     /**
      * Implementation of GLUtessellatorCallback that forwards GLU tessellator callbacks to protected methods on
      * CombineContext.
      */
-    protected static class TessCallbackAdapter extends GLUtessellatorCallbackAdapter {
-
+    protected static class TessCallbackAdapter extends GLUtessellatorCallbackAdapter
+    {
         /**
          * The CombineContext that receives forwarded GLU tessellator callbacks.
          */
@@ -51,7 +51,8 @@ public class CombineContext implements Disposable {
          *
          * @param cc the CombineContext that receives forwarded GLU tessellator callbacks.
          */
-        public TessCallbackAdapter(CombineContext cc) {
+        public TessCallbackAdapter(CombineContext cc)
+        {
             this.cc = cc;
         }
 
@@ -61,7 +62,8 @@ public class CombineContext implements Disposable {
          * @param type the GL primitive type.
          */
         @Override
-        public void begin(int type) {
+        public void begin(int type)
+        {
             this.cc.tessBegin(type);
         }
 
@@ -71,7 +73,8 @@ public class CombineContext implements Disposable {
          * @param vertexData the caller specified vertex data.
          */
         @Override
-        public void vertex(Object vertexData) {
+        public void vertex(Object vertexData)
+        {
             this.cc.tessVertex(vertexData);
         }
 
@@ -79,21 +82,23 @@ public class CombineContext implements Disposable {
          * Calls CombineContext.tessEnd.
          */
         @Override
-        public void end() {
+        public void end()
+        {
             this.cc.tessEnd();
         }
 
         /**
          * Calls CombineContext.tessCombine with the specified arguments.
          *
-         * @param coords A three element array containing the x, y and z coordinates of the new vertex.
+         * @param coords     A three element array containing the x, y and z coordinates of the new vertex.
          * @param vertexData The caller specified vertex data of the original vertices.
-         * @param weight The coefficients of the linear combination. These weights sum to 1.
-         * @param outData A one element array that must contain the caller specified data associated with the new vertex
-         * after this method returns.
+         * @param weight     The coefficients of the linear combination. These weights sum to 1.
+         * @param outData    A one element array that must contain the caller specified data associated with the new
+         *                   vertex after this method returns.
          */
         @Override
-        public void combine(double[] coords, Object[] vertexData, float[] weight, Object[] outData) {
+        public void combine(double[] coords, Object[] vertexData, float[] weight, Object[] outData)
+        {
             this.cc.tessCombine(coords, vertexData, weight, outData);
         }
 
@@ -103,56 +108,43 @@ public class CombineContext implements Disposable {
          * @param errno a GLU enumeration indicating the error.
          */
         @Override
-        public void error(int errno) {
+        public void error(int errno)
+        {
             this.cc.tessError(errno);
         }
     }
 
-    /**
-     * The globe associated with the context.
-     */
+    /** The globe associated with the context. */
     protected Globe globe;
-    /**
-     * A geographic sector indicating the context's region of interest.
-     */
+    /** A geographic sector indicating the context's region of interest. */
     protected Sector sector = Sector.FULL_SPHERE;
-    /**
-     * A minimum resolution in radians used to filter shape detail and compute resolution independent geometry.
-     */
+    /** A minimum resolution in radians used to filter shape detail and compute resolution independent geometry. */
     protected double resolution;
-    /**
-     * The GLU tessellator used to draw shape contours. Initalized during construction.
-     */
+    /** The GLU tessellator used to draw shape contours. Initalized during construction. */
     protected GLUtessellator tess;
-    /**
-     * The list of contours representing the result of a boolean operation on one or more Combinable shapes.
-     */
+    /** The list of contours representing the result of a boolean operation on one or more Combinable shapes. */
     protected ContourList contours = new ContourList();
-    /**
-     * The vertices of the current contour currently being assembled. Used by the tess* methods.
-     */
+    /** The vertices of the current contour currently being assembled. Used by the tess* methods. */
     protected ArrayList<LatLon> currentContour;
-    /**
-     * Indicates whether this context is currently operating in bounding sector mode.
-     */
+    /** Indicates whether this context is currently operating in bounding sector mode. */
     protected boolean isBoundingSectorMode;
-    /**
-     * The shape bounding sectors associated with this context.
-     */
+    /** The shape bounding sectors associated with this context. */
     protected ArrayList<Sector> boundingSectors = new ArrayList<Sector>();
 
     /**
      * Creates a new combine context with the specified globe, resolution, and the default region of interest.
      *
-     * @param globe the globe to associate with this context. Shape geometry defined relative to a globe must use this
-     * globe to compute that geometry.
+     * @param globe      the globe to associate with this context. Shape geometry defined relative to a globe must use
+     *                   this globe to compute that geometry.
      * @param resolution the minimum resolution, in radians. Used to filter shape detail and compute geometry for
-     * resolution independent shapes.
+     *                   resolution independent shapes.
      *
      * @throws java.lang.IllegalArgumentException if the globe is null.
      */
-    public CombineContext(Globe globe, double resolution) {
-        if (globe == null) {
+    public CombineContext(Globe globe, double resolution)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -177,7 +169,8 @@ public class CombineContext implements Disposable {
      * Releases the releases GLU tessellator resources associated with this context.
      */
     @Override
-    public void dispose() {
+    public void dispose()
+    {
         GLU.gluDeleteTess(this.tess);
         this.tess = null;
     }
@@ -188,7 +181,8 @@ public class CombineContext implements Disposable {
      *
      * @return the globe associated with this context.
      */
-    public Globe getGlobe() {
+    public Globe getGlobe()
+    {
         return this.globe;
     }
 
@@ -200,8 +194,10 @@ public class CombineContext implements Disposable {
      *
      * @throws java.lang.IllegalArgumentException if the globe is null.
      */
-    public void setGlobe(Globe globe) {
-        if (globe == null) {
+    public void setGlobe(Globe globe)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -216,7 +212,8 @@ public class CombineContext implements Disposable {
      *
      * @return the geographic sector indicating the context's region of interest.
      */
-    public Sector getSector() {
+    public Sector getSector()
+    {
         return this.sector;
     }
 
@@ -228,8 +225,10 @@ public class CombineContext implements Disposable {
      *
      * @throws java.lang.IllegalArgumentException if the sector is null.
      */
-    public void setSector(Sector sector) {
-        if (sector == null) {
+    public void setSector(Sector sector)
+    {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -244,7 +243,8 @@ public class CombineContext implements Disposable {
      *
      * @return the minimum resolution, in radians.
      */
-    public double getResolution() {
+    public double getResolution()
+    {
         return this.resolution;
     }
 
@@ -254,7 +254,8 @@ public class CombineContext implements Disposable {
      *
      * @param resolution the minimum resolution, in radians.
      */
-    public void setResolution(double resolution) {
+    public void setResolution(double resolution)
+    {
         this.resolution = resolution;
     }
 
@@ -267,7 +268,8 @@ public class CombineContext implements Disposable {
      *
      * @return the GLU tessellator used to draw shape contours.
      */
-    public GLUtessellator getTessellator() {
+    public GLUtessellator getTessellator()
+    {
         return this.tess;
     }
 
@@ -276,7 +278,8 @@ public class CombineContext implements Disposable {
      *
      * @return the list of contours associated with this context.
      */
-    public ContourList getContours() {
+    public ContourList getContours()
+    {
         return this.contours;
     }
 
@@ -287,8 +290,10 @@ public class CombineContext implements Disposable {
      *
      * @throws java.lang.IllegalArgumentException if the contour is null.
      */
-    public void addContour(Iterable<? extends LatLon> contour) {
-        if (contour == null) {
+    public void addContour(Iterable<? extends LatLon> contour)
+    {
+        if (contour == null)
+        {
             String msg = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -300,33 +305,39 @@ public class CombineContext implements Disposable {
     /**
      * Removes all entries from this context's list of contours.
      */
-    public void removeAllContours() {
+    public void removeAllContours()
+    {
         this.contours.removeAllContours();
     }
 
     @SuppressWarnings("UnusedParameters")
-    protected void tessBegin(int type) {
+    protected void tessBegin(int type)
+    {
         this.currentContour = new ArrayList<LatLon>();
     }
 
-    protected void tessVertex(Object vertexData) {
+    protected void tessVertex(Object vertexData)
+    {
         double[] vertex = (double[]) vertexData; // longitude, latitude, 0
         double latDegrees = Angle.normalizedDegreesLatitude(vertex[1]);
         double lonDegrees = Angle.normalizedDegreesLongitude(vertex[0]);
         this.currentContour.add(LatLon.fromDegrees(latDegrees, lonDegrees));
     }
 
-    protected void tessEnd() {
+    protected void tessEnd()
+    {
         this.addContour(this.currentContour);
         this.currentContour = null;
     }
 
     @SuppressWarnings("UnusedParameters")
-    protected void tessCombine(double[] coords, Object[] vertexData, float[] weight, Object[] outData) {
+    protected void tessCombine(double[] coords, Object[] vertexData, float[] weight, Object[] outData)
+    {
         outData[0] = coords;
     }
 
-    protected void tessError(int errno) {
+    protected void tessError(int errno)
+    {
         String errstr = GLUTessellatorSupport.convertGLUTessErrorToString(errno);
         String msg = Logging.getMessage("generic.ExceptionWhileTessellating", errstr);
         Logging.logger().severe(msg);
@@ -339,7 +350,8 @@ public class CombineContext implements Disposable {
      *
      * @return true if the context is currently in bounding sector mode, otherwise false.
      */
-    public boolean isBoundingSectorMode() {
+    public boolean isBoundingSectorMode()
+    {
         return this.isBoundingSectorMode;
     }
 
@@ -350,7 +362,8 @@ public class CombineContext implements Disposable {
      *
      * @param tf true to set the context is bounding sector mode, otherwise false.
      */
-    public void setBoundingSectorMode(boolean tf) {
+    public void setBoundingSectorMode(boolean tf)
+    {
         this.isBoundingSectorMode = tf;
     }
 
@@ -362,7 +375,8 @@ public class CombineContext implements Disposable {
      *
      * @see #isBoundingSectorMode()
      */
-    public List<Sector> getBoundingSectors() {
+    public List<Sector> getBoundingSectors()
+    {
         return this.boundingSectors;
     }
 
@@ -373,8 +387,10 @@ public class CombineContext implements Disposable {
      *
      * @throws java.lang.IllegalArgumentException if the sector is null.
      */
-    public void addBoundingSector(Sector sector) {
-        if (sector == null) {
+    public void addBoundingSector(Sector sector)
+    {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -386,7 +402,8 @@ public class CombineContext implements Disposable {
     /**
      * Removes all entries from this context's list of shape bounding sectors.
      */
-    public void removeAllBoundingSectors() {
+    public void removeAllBoundingSectors()
+    {
         this.boundingSectors.clear();
     }
 }

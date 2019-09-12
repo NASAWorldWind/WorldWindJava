@@ -14,22 +14,26 @@ import java.io.*;
  * @author dcollins
  * @version $Id: CSVTrackReader.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class CSVTrackReader extends AbstractTrackReader {
-
-    public CSVTrackReader() {
+public class CSVTrackReader extends AbstractTrackReader
+{
+    public CSVTrackReader()
+    {
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return "Comma Separated Value (*.csv)";
     }
 
-    protected Track[] doRead(InputStream inputStream) throws IOException {
+    protected Track[] doRead(InputStream inputStream) throws IOException
+    {
         CSVReader reader = new CSVReader();
         reader.readStream(inputStream, null); // un-named stream
         return this.asArray(reader.getTracks());
     }
 
-    protected boolean acceptFilePath(String filePath) {
+    protected boolean acceptFilePath(String filePath)
+    {
         return filePath.toLowerCase().endsWith(".csv");
     }
 }

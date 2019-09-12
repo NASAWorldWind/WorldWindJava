@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.util;
 
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
@@ -15,15 +16,16 @@ import gov.nasa.worldwind.util.tree.*;
  * @author pabercrombie
  * @version $Id: TreeControl.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class TreeControl extends ApplicationTemplate {
-
+public class TreeControl extends ApplicationTemplate
+{
     private static final String ICON_PATH = "images/16x16-icon-nasa.png";
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
         HotSpotController controller;
 
-        public AppFrame() {
+        public AppFrame()
+        {
             super(true, true, false);
 
             RenderableLayer layer = new RenderableLayer();
@@ -71,7 +73,8 @@ public class TreeControl extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("Tree Control", AppFrame.class);
     }
 }

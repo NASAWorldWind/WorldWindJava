@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-~ Copyright (C) 2012 United States Government as represented by the Administrator of the
-~ National Aeronautics and Space Administration.
-~ All Rights Reserved.
--->
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
 
 <!--Blue Marble Next generation 2004 + Bathymetry imagery, using the default month (May).-->
 <!--$Id: BMNGWMSLayer2.xml 1382 2013-05-31 00:37:46Z tgaskins $-->

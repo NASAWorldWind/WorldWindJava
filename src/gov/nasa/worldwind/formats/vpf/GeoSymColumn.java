@@ -9,51 +9,61 @@ package gov.nasa.worldwind.formats.vpf;
  * @author dcollins
  * @version $Id: GeoSymColumn.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeoSymColumn {
-
+public class GeoSymColumn
+{
     private final String name;
     private String dataType;
     private String dataSize;
     private String description;
     private String codeRef;
 
-    public GeoSymColumn(String name) {
+    public GeoSymColumn(String name)
+    {
         this.name = name;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public String getDataType() {
+    public String getDataType()
+    {
         return dataType;
     }
 
-    public void setDataType(String dataType) {
+    public void setDataType(String dataType)
+    {
         this.dataType = dataType;
     }
 
-    public String getDataSize() {
+    public String getDataSize()
+    {
         return dataSize;
     }
 
-    public void setDataSize(String dataSize) {
+    public void setDataSize(String dataSize)
+    {
         this.dataSize = dataSize;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
-    public String getCodeRef() {
+    public String getCodeRef()
+    {
         return codeRef;
     }
 
-    public void setCodeRef(String codeRef) {
+    public void setCodeRef(String codeRef)
+    {
         this.codeRef = codeRef;
     }
 }

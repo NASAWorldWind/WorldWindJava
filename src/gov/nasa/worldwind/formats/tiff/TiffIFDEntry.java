@@ -17,7 +17,6 @@ import java.nio.*;
  * @version $Id: TiffIFDEntry.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
-
     private ByteBuffer data = null;
 
     public TiffIFDEntry(int tag, int type, long count, long valOffset) throws IllegalArgumentException {
@@ -37,16 +36,14 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
     }
 
     public long asLong() throws IllegalStateException {
-        if (this.type != Tiff.Type.SHORT && this.type != Tiff.Type.LONG) {
+        if (this.type != Tiff.Type.SHORT && this.type != Tiff.Type.LONG)
             throw new IllegalStateException("Attempt to access Tiff IFD-entry as int: tag/type="
                     + Long.toHexString(tag) + "/" + type);
-        }
 
-        if (this.type == Tiff.Type.SHORT && this.count == 1) {
+        if (this.type == Tiff.Type.SHORT && this.count == 1)
             return 0xFFFFL & (valOffset >> 16);
-        } else {
+        else
             return valOffset;
-        }
     }
 
     public Double getAsDouble() throws IOException {
@@ -65,17 +62,15 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
 
             case Tiff.Type.FLOAT: {
                 float[] values = this.getFloats();
-                if (null != values) {
+                if (null != values)
                     value = (double) values[0];
-                }
             }
             break;
 
             case Tiff.Type.DOUBLE: {
                 double[] values = this.getDoubles();
-                if (null != values) {
+                if (null != values)
                     value = values[0];
-                }
             }
             break;
         }
@@ -91,13 +86,12 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
         }
 
         if (this.count > 0) {
-            if (this.count == 1) {
+            if (this.count == 1)
                 return 0xFFFF & (int) (valOffset >> 16L);
-            } else {
+            else {
                 int[] values = this.getShortsAsInts();
-                if (null != values && values.length > 0) {
+                if (null != values && values.length > 0)
                     return values[0];
-                }
             }
         }
 
@@ -115,9 +109,8 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
 
         if (this.count > index) {
             int[] values = this.getShortsAsInts();
-            if (null != values && values.length > index) {
+            if (null != values && values.length > index)
                 return values[index];
-            }
         }
 
         String message = Logging.getMessage("generic.indexOutOfRange", this.count);
@@ -132,9 +125,8 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
             throw new IllegalArgumentException(message);
         }
 
-        if (this.count == 1) {
+        if (this.count == 1)
             return new int[]{this.asShort()};
-        }
 
         if (this.count > 0 && null != this.data) {
             int[] array = new int[(int) this.count];
@@ -158,6 +150,7 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
+
 
         if (this.count == 1) {
             return new long[]{this.asLong()};
@@ -192,9 +185,8 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
             throw new IllegalArgumentException(message);
         }
 
-        if (this.count == 1) {
+        if (this.count == 1)
             return new short[]{(short) this.asShort()};
-        }
 
         if (this.count > 0 && null != this.data) {
             ShortBuffer sb = ((ByteBuffer) this.data.rewind()).asShortBuffer();
@@ -214,6 +206,7 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
      * Reads and returns an array of doubles from the file.
      *
      */
+
     public double[] getDoubles() throws IOException {
         if (this.type != Tiff.Type.DOUBLE) {
             String message = Logging.getMessage("GeotiffReader.InvalidType", "double", this.tag, this.type);
@@ -221,9 +214,8 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
             throw new IllegalArgumentException(message);
         }
 
-        if (this.count == 0 || null == this.data) {
+        if (this.count == 0 || null == this.data)
             return null;
-        }
 
         DoubleBuffer db = ((ByteBuffer) this.data.rewind()).asDoubleBuffer();
         this.data.rewind();
@@ -244,18 +236,16 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
             throw new IllegalArgumentException(message);
         }
 
-        if (this.count == 0) {
+        if (this.count == 0)
             return null;
-        }
 
         if (this.count == 1) {
             int num = (int) (0xFFFFFFFFL & this.valOffset);
             return new float[]{Float.intBitsToFloat(num)};
         }
 
-        if (null == this.data) {
+        if (null == this.data)
             return null;
-        }
 
         FloatBuffer db = ((ByteBuffer) this.data.rewind()).asFloatBuffer();
         this.data.rewind();
@@ -276,9 +266,8 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
             throw new IllegalArgumentException(message);
         }
 
-        if (this.count != 1 || null == this.data) {
+        if (this.count != 1 || null == this.data)
             return null;
-        }
 
         CharBuffer cbuf = ((ByteBuffer) this.data.rewind()).asCharBuffer();
         return cbuf.toString();
@@ -288,6 +277,7 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
 //  2 = ASCII 8-bit byte that contains a 7-bit ASCII code; the last byte must be NUL (binary zero).
 //  3 = SHORT 16-bit (2-byte) unsigned integer.
 //  4 = LONG 32-bit (4-byte) unsigned integer.
+
     public long asOffset() {
         return valOffset;
     }
@@ -303,18 +293,16 @@ public class TiffIFDEntry implements Comparable<TiffIFDEntry> {
         final int EQUAL = 0;
         final int AFTER = 1;
 
-        if (this == o) {
+        if (this == o)
             return EQUAL;
-        }
 
         if (o != null) {
-            if (this.tag < o.tag) {
+            if (this.tag < o.tag)
                 return BEFORE;
-            } else if (this.tag > o.tag) {
+            else if (this.tag > o.tag)
                 return AFTER;
-            } else {
+            else
                 return EQUAL;
-            }
         }
 
         return AFTER;

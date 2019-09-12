@@ -12,21 +12,24 @@ import gov.nasa.worldwind.util.Logging;
  * @author dcollins
  * @version $Id: VPFFeature.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class VPFFeature extends AVListImpl {
-
+public class VPFFeature extends AVListImpl
+{
     protected VPFFeatureClass featureClass;
     protected int id;
     protected VPFBoundingBox bounds;
     private int[] primitiveIds;
 
-    public VPFFeature(VPFFeatureClass featureClass, int id, VPFBoundingBox bounds, int[] primitiveIds) {
-        if (featureClass == null) {
+    public VPFFeature(VPFFeatureClass featureClass, int id, VPFBoundingBox bounds, int[] primitiveIds)
+    {
+        if (featureClass == null)
+        {
             String message = Logging.getMessage("nullValue.FeatureClassIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (bounds == null) {
+        if (bounds == null)
+        {
             String message = Logging.getMessage("nullValue.BoundingBoxIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -38,23 +41,28 @@ public class VPFFeature extends AVListImpl {
         this.primitiveIds = primitiveIds;
     }
 
-    public VPFFeatureClass getFeatureClass() {
+    public VPFFeatureClass getFeatureClass()
+    {
         return this.featureClass;
     }
 
-    public VPFFeatureType getType() {
+    public VPFFeatureType getType()
+    {
         return this.featureClass.getType();
     }
 
-    public int getId() {
+    public int getId()
+    {
         return this.id;
     }
 
-    public VPFBoundingBox getBounds() {
+    public VPFBoundingBox getBounds()
+    {
         return this.bounds;
     }
 
-    public int[] getPrimitiveIds() {
+    public int[] getPrimitiveIds()
+    {
         return this.primitiveIds;
     }
 }

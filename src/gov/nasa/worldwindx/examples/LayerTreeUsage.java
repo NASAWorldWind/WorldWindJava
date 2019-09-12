@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -19,16 +20,17 @@ import java.awt.*;
  * @author pabercrombie
  * @version $Id: LayerTreeUsage.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class LayerTreeUsage extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
+public class LayerTreeUsage extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
         protected LayerTree layerTree;
         protected RenderableLayer hiddenLayer;
 
         protected HotSpotController controller;
 
-        public AppFrame() {
+        public AppFrame()
+        {
             super(true, false, false); // Don't include the layer panel; we're using the on-screen layer tree.
 
             this.layerTree = new LayerTree();
@@ -57,7 +59,8 @@ public class LayerTreeUsage extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Layer Tree", AppFrame.class);
     }
 }

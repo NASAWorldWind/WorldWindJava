@@ -5,11 +5,13 @@ import org.codehaus.jackson.util.BufferRecycler;
 import org.codehaus.jackson.util.TextBuffer;
 
 /**
- * To limit number of configuration and state objects to pass, all contextual objects that need to be passed by the
- * factory to readers and writers are combined under this object. One instance is created for each reader and writer.
+ * To limit number of configuration and state objects to pass, all
+ * contextual objects that need to be passed by the factory to
+ * readers and writers are combined under this object. One instance
+ * is created for each reader and writer.
  */
-public final class IOContext {
-
+public final class IOContext
+{
     /*
     //////////////////////////////////////////////////////
     // Configuration
@@ -17,7 +19,8 @@ public final class IOContext {
      */
 
     /**
-     * Reference to the source object, which can be used for displaying location information
+     * Reference to the source object, which can be used for displaying
+     * location information
      */
     final Object _sourceRef;
 
@@ -27,10 +30,12 @@ public final class IOContext {
     protected JsonEncoding _encoding;
 
     /**
-     * Flag that indicates whether underlying input/output source/target object is fully managed by the owner of this
-     * context (parser or generator). If true, it is, and is to be closed by parser/generator; if false, calling
-     * application has to do closing (unless auto-closing feature is enabled for the parser/generator in question; in
-     * which case it acts like the owner).
+     * Flag that indicates whether underlying input/output source/target
+     * object is fully managed by the owner of this context (parser or
+     * generator). If true, it is, and is to be closed by parser/generator;
+     * if false, calling application has to do closing (unless auto-closing
+     * feature is enabled for the parser/generator in question; in which
+     * case it acts like the owner).
      */
     protected final boolean _managedResource;
 
@@ -39,37 +44,43 @@ public final class IOContext {
     // Buffer handling, recycling
     //////////////////////////////////////////////////////
      */
+
     /**
      * Recycler used for actual allocation/deallocation/reuse
      */
     final BufferRecycler _bufferRecycler;
 
     /**
-     * Reference to the allocated I/O buffer for low-level input reading, if any allocated.
+     * Reference to the allocated I/O buffer for low-level input reading,
+     * if any allocated.
      */
     protected byte[] _readIOBuffer = null;
 
     /**
-     * Reference to the allocated I/O buffer used for low-level encoding-related buffering.
+     * Reference to the allocated I/O buffer used for low-level
+     * encoding-related buffering.
      */
     protected byte[] _writeEncodingBuffer = null;
-
+    
     /**
-     * Reference to the buffer allocated for tokenization purposes, in which character input is read, and from which it
-     * can be further returned.
+     * Reference to the buffer allocated for tokenization purposes,
+     * in which character input is read, and from which it can be
+     * further returned.
      */
     protected char[] _tokenCBuffer = null;
 
     /**
-     * Reference to the buffer allocated for buffering it for output, before being encoded: generally this means
-     * concatenating output, then encoding when buffer fills up.
+     * Reference to the buffer allocated for buffering it for
+     * output, before being encoded: generally this means concatenating
+     * output, then encoding when buffer fills up.
      */
     protected char[] _concatCBuffer = null;
 
     /**
-     * Reference temporary buffer Parser instances need if calling app decides it wants to access name via
-     * 'getTextCharacters' method. Regular text buffer can not be used as it may contain textual representation of the
-     * value token.
+     * Reference temporary buffer Parser instances need if calling
+     * app decides it wants to access name via 'getTextCharacters' method.
+     * Regular text buffer can not be used as it may contain textual
+     * representation of the value token.
      */
     protected char[] _nameCopyBuffer = null;
 
@@ -78,13 +89,16 @@ public final class IOContext {
     // Life-cycle
     //////////////////////////////////////////////////////
      */
-    public IOContext(BufferRecycler br, Object sourceRef, boolean managedResource) {
+
+    public IOContext(BufferRecycler br, Object sourceRef, boolean managedResource)
+    {
         _bufferRecycler = br;
         _sourceRef = sourceRef;
         _managedResource = managedResource;
     }
 
-    public void setEncoding(JsonEncoding enc) {
+    public void setEncoding(JsonEncoding enc)
+    {
         _encoding = enc;
     }
 
@@ -93,34 +107,29 @@ public final class IOContext {
     // Public API, accessors
     //////////////////////////////////////////////////////
      */
-    public Object getSourceReference() {
-        return _sourceRef;
-    }
 
-    public JsonEncoding getEncoding() {
-        return _encoding;
-    }
-
-    public boolean isResourceManaged() {
-        return _managedResource;
-    }
+    public Object getSourceReference() { return _sourceRef; }
+    public JsonEncoding getEncoding() { return _encoding; }
+    public boolean isResourceManaged() { return _managedResource; }
 
     /*
     //////////////////////////////////////////////////////
     // Public API, buffer management
     //////////////////////////////////////////////////////
      */
-    public TextBuffer constructTextBuffer() {
+
+    public TextBuffer constructTextBuffer()
+    {
         return new TextBuffer(_bufferRecycler);
     }
 
     /**
-     * <p>
+     *<p>
      * Note: the method can only be called once during its life cycle.This is to protect against accidental sharing.
-     *
      * @return Undocumented.
      */
-    public byte[] allocReadIOBuffer() {
+    public byte[] allocReadIOBuffer()
+    {
         if (_readIOBuffer != null) {
             throw new IllegalStateException("Trying to call allocReadIOBuffer() second time");
         }
@@ -128,15 +137,17 @@ public final class IOContext {
         return _readIOBuffer;
     }
 
-    public byte[] allocWriteEncodingBuffer() {
+    public byte[] allocWriteEncodingBuffer()
+    {
         if (_writeEncodingBuffer != null) {
             throw new IllegalStateException("Trying to call allocWriteEncodingBuffer() second time");
         }
         _writeEncodingBuffer = _bufferRecycler.allocByteBuffer(BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER);
         return _writeEncodingBuffer;
     }
-
-    public char[] allocTokenBuffer() {
+    
+    public char[] allocTokenBuffer()
+    {
         if (_tokenCBuffer != null) {
             throw new IllegalStateException("Trying to call allocTokenBuffer() second time");
         }
@@ -144,7 +155,8 @@ public final class IOContext {
         return _tokenCBuffer;
     }
 
-    public char[] allocConcatBuffer() {
+    public char[] allocConcatBuffer()
+    {
         if (_concatCBuffer != null) {
             throw new IllegalStateException("Trying to call allocConcatBuffer() second time");
         }
@@ -152,7 +164,8 @@ public final class IOContext {
         return _concatCBuffer;
     }
 
-    public char[] allocNameCopyBuffer(int minSize) {
+    public char[] allocNameCopyBuffer(int minSize)
+    {
         if (_nameCopyBuffer != null) {
             throw new IllegalStateException("Trying to call allocNameCopyBuffer() second time");
         }
@@ -161,11 +174,12 @@ public final class IOContext {
     }
 
     /**
-     * Method to call when all the processing buffers can be safely recycled.
-     *
+     * Method to call when all the processing buffers can be safely
+     * recycled.
      * @param buf Undocumented.
      */
-    public void releaseReadIOBuffer(byte[] buf) {
+    public void releaseReadIOBuffer(byte[] buf)
+    {
         if (buf != null) {
             /* Let's do sanity checks to ensure once-and-only-once release,
              * as well as avoiding trying to release buffers not owned
@@ -178,7 +192,8 @@ public final class IOContext {
         }
     }
 
-    public void releaseWriteEncodingBuffer(byte[] buf) {
+    public void releaseWriteEncodingBuffer(byte[] buf)
+    {
         if (buf != null) {
             /* Let's do sanity checks to ensure once-and-only-once release,
              * as well as avoiding trying to release buffers not owned
@@ -190,8 +205,9 @@ public final class IOContext {
             _bufferRecycler.releaseByteBuffer(BufferRecycler.ByteBufferType.WRITE_ENCODING_BUFFER, buf);
         }
     }
-
-    public void releaseTokenBuffer(char[] buf) {
+    
+    public void releaseTokenBuffer(char[] buf)
+    {
         if (buf != null) {
             if (buf != _tokenCBuffer) {
                 throw new IllegalArgumentException("Trying to release buffer not owned by the context");
@@ -201,7 +217,8 @@ public final class IOContext {
         }
     }
 
-    public void releaseConcatBuffer(char[] buf) {
+    public void releaseConcatBuffer(char[] buf)
+    {
         if (buf != null) {
             if (buf != _concatCBuffer) {
                 throw new IllegalArgumentException("Trying to release buffer not owned by the context");
@@ -211,7 +228,8 @@ public final class IOContext {
         }
     }
 
-    public void releaseNameCopyBuffer(char[] buf) {
+    public void releaseNameCopyBuffer(char[] buf)
+    {
         if (buf != null) {
             if (buf != _nameCopyBuffer) {
                 throw new IllegalArgumentException("Trying to release buffer not owned by the context");

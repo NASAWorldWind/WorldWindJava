@@ -18,19 +18,22 @@ import java.util.*;
  * @author Patrick Murris
  * @version $Id: ContourLinePolygon.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ContourLinePolygon extends ContourLine {
-
+public class ContourLinePolygon extends ContourLine
+{
     private ArrayList<? extends LatLon> positions;
 
-    public ContourLinePolygon() {
+    public ContourLinePolygon()
+    {
         super();
     }
 
-    public ContourLinePolygon(double elevation) {
+    public ContourLinePolygon(double elevation)
+    {
         super(elevation);
     }
 
-    public ContourLinePolygon(double elevation, ArrayList<? extends LatLon> positions) {
+    public ContourLinePolygon(double elevation, ArrayList<? extends LatLon> positions)
+    {
         super(elevation);
         this.setPositions(positions);
     }
@@ -40,7 +43,8 @@ public class ContourLinePolygon extends ContourLine {
      *
      * @return the list of {@link LatLon} that describe the current bounding polygon.
      */
-    public List<? extends LatLon> getPositions() {
+    public List<? extends LatLon> getPositions()
+    {
         return this.positions;
     }
 
@@ -52,8 +56,10 @@ public class ContourLinePolygon extends ContourLine {
      *
      * @throws IllegalArgumentException if positions is <code>null</code>.
      */
-    public void setPositions(ArrayList<? extends LatLon> positions) {
-        if (positions == null) {
+    public void setPositions(ArrayList<? extends LatLon> positions)
+    {
+        if (positions == null)
+        {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -68,30 +74,32 @@ public class ContourLinePolygon extends ContourLine {
      * Filters the given intersection segments list according to some criteria - here the inclusion inside the current
      * polygon.
      *
-     * @param dc the current {@link DrawContext}
+     * @param dc   the current {@link DrawContext}
      * @param list the list of {@link Intersection} to be filtered.
      *
      * @return the filtered list.
      */
-    protected ArrayList<Intersection> filterIntersections(DrawContext dc, ArrayList<Intersection> list) {
+    protected ArrayList<Intersection> filterIntersections(DrawContext dc, ArrayList<Intersection> list)
+    {
         // Filter against the bounding sector first
         list = super.filterIntersections(dc, list);
 
         // Filter the remaining segments against the polygon
-        if (this.getPositions() == null) {
+        if (this.getPositions() == null)
             return list;
-        }
 
         Globe globe = dc.getGlobe();
         int i = 0;
-        while (i < list.size()) {
+        while (i < list.size())
+        {
             if (WWMath.isLocationInside(globe.computePositionFromPoint(list.get(i).getIntersectionPoint()),
-                    this.positions)
-                    && WWMath.isLocationInside(globe.computePositionFromPoint(list.get(i + 1).getIntersectionPoint()),
-                            this.positions)) // Keep segment
-            {
+                this.positions) &&
+                WWMath.isLocationInside(globe.computePositionFromPoint(list.get(i + 1).getIntersectionPoint()),
+                    this.positions))
+                // Keep segment
                 i += 2;
-            } else {
+            else
+            {
                 // Remove segment
                 list.remove(i);
                 list.remove(i);

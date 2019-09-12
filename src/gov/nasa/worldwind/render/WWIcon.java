@@ -20,8 +20,8 @@ import java.awt.*;
  * @author tag
  * @version $Id: WWIcon.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface WWIcon extends AVList, Restorable {
-
+public interface WWIcon extends AVList, Restorable
+{
     /**
      * Specifies the source image for the icon. Implementations of this interface determine the allowed source types,
      * but generally allow at least a {@link String} file path and a {@link java.awt.image.BufferedImage}.
@@ -50,7 +50,7 @@ public interface WWIcon extends AVList, Restorable {
      * Sets the icon's geographic position.
      *
      * @param iconPosition the icon's geographic position. May be null to indicate that the icon has no current position
-     * and therefore should not be displayed.
+     *                     and therefore should not be displayed.
      */
     void setPosition(Position iconPosition);
 
@@ -166,7 +166,7 @@ public interface WWIcon extends AVList, Restorable {
      * Indicates the color in which the icon's tool tip, if any, is drawn.
      *
      * @return the tool tip's text color. The default value is null, in which case an implementation dependent color is
-     * used.
+     *         used.
      */
     Color getToolTipTextColor();
 
@@ -174,7 +174,7 @@ public interface WWIcon extends AVList, Restorable {
      * Specifies the color in which to display the icon's tool tip text, if any.
      *
      * @param textColor the tool tip text color. The default is null, in which case an implementation dependent color is
-     * used.
+     *                  used.
      */
     void setToolTipTextColor(Color textColor);
 

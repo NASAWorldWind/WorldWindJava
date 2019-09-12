@@ -25,13 +25,14 @@ import java.util.ArrayList;
  * @author tag
  * @version $Id: ViewIteration.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ViewIteration extends ApplicationTemplate {
-
-    public static class AppFrame extends JFrame {
-
+public class ViewIteration extends ApplicationTemplate
+{
+    public static class AppFrame extends JFrame
+    {
         static ArrayList<Position> path;
 
-        static {
+        static
+        {
             path = new ArrayList<Position>();
             path.add(Position.fromDegrees(0, 0, 1e5));
             path.add(Position.fromDegrees(0, 10, 1e5));
@@ -45,18 +46,20 @@ public class ViewIteration extends ApplicationTemplate {
 
         protected int pathPosition = 0;
 
-        protected PathAction[] pathActions
-                = new PathAction[]{
-                    new GoToLatLonFromCurrent("Zero", LatLon.ZERO),
-                    new FollowPath("Follow"),
-                    new Heading("Heading"),
-                    new Forward("Forward"),
-                    new Backwards("Backwards"),};
+        protected PathAction[] pathActions =
+            new PathAction[] {
+                new GoToLatLonFromCurrent("Zero", LatLon.ZERO),
+                new FollowPath("Follow"),
+                new Heading("Heading"),
+                new Forward("Forward"),
+                new Backwards("Backwards"),
+            };
 
         protected Dimension canvasSize = new Dimension(800, 600);
         protected ApplicationTemplate.AppPanel wwjPanel;
 
-        public AppFrame() {
+        public AppFrame()
+        {
             // Create the WorldWindow.
             this.wwjPanel = new ApplicationTemplate.AppPanel(this.canvasSize, true);
             this.wwjPanel.setPreferredSize(canvasSize);
@@ -79,12 +82,14 @@ public class ViewIteration extends ApplicationTemplate {
             this.setResizable(true);
         }
 
-        protected JPanel makeControlPanel() {
+        protected JPanel makeControlPanel()
+        {
             JPanel innerPanel = new JPanel(new GridLayout(8, 1));
             innerPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Go To"),
-                    BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
-            for (PathAction pa : pathActions) {
+            for (PathAction pa : pathActions)
+            {
                 JButton btn = new JButton(pa);
                 innerPanel.add(btn);
             }
@@ -95,9 +100,10 @@ public class ViewIteration extends ApplicationTemplate {
             return cp;
         }
 
-        protected abstract class PathAction extends AbstractAction {
-
-            PathAction(String name) {
+        protected abstract class PathAction extends AbstractAction
+        {
+            PathAction(String name)
+            {
                 super(name);
             }
         }
@@ -105,14 +111,18 @@ public class ViewIteration extends ApplicationTemplate {
         //
         // Specific Actions
         //
-        protected class Forward extends PathAction {
 
-            public Forward(String name) {
+        protected class Forward extends PathAction
+        {
+            public Forward(String name)
+            {
                 super(name);
             }
 
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (pathPosition < path.size() - 1) {
+            public void actionPerformed(ActionEvent actionEvent)
+            {
+                if (pathPosition < path.size() - 1)
+                {
                     BasicOrbitView view = (BasicOrbitView) wwjPanel.getWwd().getView();
                     view.setHeading(Angle.fromDegrees(90));
                     view.addEyePositionAnimator(4000, view.getEyePosition(), path.get(++pathPosition));
@@ -120,14 +130,17 @@ public class ViewIteration extends ApplicationTemplate {
             }
         }
 
-        protected class Backwards extends PathAction {
-
-            public Backwards(String name) {
+        protected class Backwards extends PathAction
+        {
+            public Backwards(String name)
+            {
                 super(name);
             }
 
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (pathPosition > 0) {
+            public void actionPerformed(ActionEvent actionEvent)
+            {
+                if (pathPosition > 0)
+                {
                     BasicOrbitView view = (BasicOrbitView) wwjPanel.getWwd().getView();
 
                     view.addEyePositionAnimator(4000, view.getEyePosition(), path.get(--pathPosition));
@@ -135,50 +148,55 @@ public class ViewIteration extends ApplicationTemplate {
             }
         }
 
-        protected class Heading extends PathAction {
-
-            public Heading(String name) {
+        protected class Heading extends PathAction
+        {
+            public Heading(String name)
+            {
                 super(name);
             }
 
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void actionPerformed(ActionEvent actionEvent)
+            {
                 Angle heading;
-                if (pathPosition == 0) {
+                if (pathPosition == 0)
                     heading = computeHeading(path.get(0), path.get(1));
-                } else {
+                else
                     heading = computeHeading(path.get(pathPosition - 1), path.get(pathPosition));
-                }
 
                 BasicOrbitView view = (BasicOrbitView) wwjPanel.getWwd().getView();
                 view.addHeadingAnimator(view.getHeading(), heading);
             }
         }
 
-        protected Angle computeHeading(Position pa, Position pb) {
+        protected Angle computeHeading(Position pa, Position pb)
+        {
             return LatLon.greatCircleAzimuth(pa, pb);
         }
 
-        protected class GoToLatLonFromCurrent extends PathAction {
-
+        protected class GoToLatLonFromCurrent extends PathAction
+        {
             protected final LatLon latlon;
 
-            GoToLatLonFromCurrent(String name, LatLon latlon) {
+            GoToLatLonFromCurrent(String name, LatLon latlon)
+            {
                 super(name);
                 this.latlon = latlon;
             }
 
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void actionPerformed(ActionEvent actionEvent)
+            {
                 BasicOrbitView view = (BasicOrbitView) wwjPanel.getWwd().getView();
                 view.addEyePositionAnimator(
-                        4000, view.getEyePosition(), new Position(this.latlon, view.getEyePosition().getElevation()));
+                    4000, view.getEyePosition(), new Position(this.latlon, view.getEyePosition().getElevation()));
             }
         }
 
-        protected class FollowPath extends PathAction {
-
+        protected class FollowPath extends PathAction
+        {
             ArrayList<Position> path = new ArrayList<Position>();
 
-            FollowPath(String name) {
+            FollowPath(String name)
+            {
                 super(name);
                 path.add(Position.fromDegrees(0, 0, 1e5));
                 path.add(Position.fromDegrees(1, 3, 1e5));
@@ -186,23 +204,29 @@ public class ViewIteration extends ApplicationTemplate {
                 path.add(Position.fromDegrees(3, 5, 1e5));
             }
 
-            public void actionPerformed(ActionEvent actionEvent) {
-                for (Position p : path) {
+            public void actionPerformed(ActionEvent actionEvent)
+            {
+                for (Position p : path)
+                {
                     final BasicOrbitView view = (BasicOrbitView) wwjPanel.getWwd().getView();
                     view.addEyePositionAnimator(4000,
-                            view.getEyePosition(), new Position(p, view.getEyePosition().getElevation()));
+                        view.getEyePosition(), new Position(p, view.getEyePosition().getElevation()));
                 }
             }
         }
     }
 
-    public static void main(String[] args) {
-        try {
+    public static void main(String[] args)
+    {
+        try
+        {
             AppFrame frame = new AppFrame();
             frame.setTitle("WorldWind View Paths");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

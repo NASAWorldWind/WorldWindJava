@@ -11,18 +11,21 @@ import gov.nasa.worldwind.avlist.AVList;
  * @author dcollins
  * @version $Id: GeoJSONGeometryCollection.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeoJSONGeometryCollection extends GeoJSONGeometry {
-
-    public GeoJSONGeometryCollection(AVList fields) {
+public class GeoJSONGeometryCollection extends GeoJSONGeometry
+{
+    public GeoJSONGeometryCollection(AVList fields)
+    {
         super(fields);
     }
 
     @Override
-    public boolean isGeometryCollection() {
+    public boolean isGeometryCollection()
+    {
         return true;
     }
 
-    public GeoJSONGeometry[] getGeometries() {
+    public GeoJSONGeometry[] getGeometries()
+    {
         return (GeoJSONGeometry[]) this.getValue(GeoJSONConstants.FIELD_GEOMETRIES);
     }
 }

@@ -36,23 +36,26 @@ import java.io.File;
  * @author tag
  * @version $Id: InstallElevations.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class InstallElevations extends ApplicationTemplate {
-
+public class InstallElevations extends ApplicationTemplate
+{
     // Define a subdirectory in the installed-data area to place the installed elevation tiles.
     protected static final String BASE_CACHE_PATH = "Examples/";
     // This example's elevations file is loaded from the following class-path resource.
     protected static final String ELEVATIONS_PATH = "gov/nasa/worldwindx/examples/data/craterlake-elev-16bit-30m.tif";
 
     // Override ApplicationTemplate.AppFrame's constructor to install an elevation dataset.
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             // Show the WAIT cursor because the installation may take a while.
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 
             // Install the elevations on a thread other than the event-dispatch thread to avoid freezing the UI.
-            Thread t = new Thread(new Runnable() {
-                public void run() {
+            Thread t = new Thread(new Runnable()
+            {
+                public void run()
+                {
                     installElevations();
 
                     // Restore the cursor.
@@ -63,7 +66,8 @@ public class InstallElevations extends ApplicationTemplate {
             t.start();
         }
 
-        protected void installElevations() {
+        protected void installElevations()
+        {
             // Download the source file.
             File sourceFile = ExampleUtil.saveResourceToTempFile(ELEVATIONS_PATH, ".tif");
 
@@ -72,15 +76,16 @@ public class InstallElevations extends ApplicationTemplate {
 
             // Install the elevations and get the resulting elevation model.
             final ElevationModel em = installElevations("Crater Lake Elevations 16bit 30m", sourceFile, fileStore);
-            if (em == null) {
+            if (em == null)
                 return;
-            }
 
             // Add the new elevation model to the current (default) one. Must do it on the event dispatch thread.
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                public void run()
+                {
                     CompoundElevationModel model
-                            = (CompoundElevationModel) AppFrame.this.getWwd().getModel().getGlobe().getElevationModel();
+                        = (CompoundElevationModel) AppFrame.this.getWwd().getModel().getGlobe().getElevationModel();
                     model.addElevationModel(em);
 
                     // Set the view to look at the installed elevations. Get the location from the elevation model's
@@ -92,7 +97,8 @@ public class InstallElevations extends ApplicationTemplate {
             });
         }
 
-        protected ElevationModel installElevations(String displayName, Object elevationSource, FileStore fileStore) {
+        protected ElevationModel installElevations(String displayName, Object elevationSource, FileStore fileStore)
+        {
             // Use the FileStore's install location as the destination for the imported elevation tiles. The install
             // location is an area in the data file store for permanent storage.
             File fileStoreLocation = DataInstallUtil.getDefaultInstallLocation(fileStore);
@@ -108,14 +114,17 @@ public class InstallElevations extends ApplicationTemplate {
 
             // Create a TiledImageProducer to install the imagery.
             TiledElevationProducer producer = new TiledElevationProducer();
-            try {
+            try
+            {
                 // Configure the TiledElevationProducer with the parameter list and the elevation data source.
                 producer.setStoreParameters(params);
                 producer.offerDataSource(elevationSource, null);
 
                 // Install the elevations.
                 producer.startProduction();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 producer.removeProductionState();
                 e.printStackTrace();
                 return null;
@@ -125,22 +134,21 @@ public class InstallElevations extends ApplicationTemplate {
             // completed, the TiledElevationProducer should always contain a document in the production results, but
             // test the results anyway.
             Iterable<?> results = producer.getProductionResults();
-            if (results == null || results.iterator() == null || !results.iterator().hasNext()) {
+            if (results == null || results.iterator() == null || !results.iterator().hasNext())
                 return null;
-            }
 
             Object o = results.iterator().next();
-            if (o == null || !(o instanceof Document)) {
+            if (o == null || !(o instanceof Document))
                 return null;
-            }
 
             // Construct an ElevationModel by passing the data configuration document to an ElevationModelFactory.
             return (ElevationModel) BasicFactory.create(AVKey.ELEVATION_MODEL_FACTORY,
-                    ((Document) o).getDocumentElement());
+                ((Document) o).getDocumentElement());
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Elevation Installation", InstallElevations.AppFrame.class);
     }
 }

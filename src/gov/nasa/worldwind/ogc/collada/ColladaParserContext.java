@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.collada;
 
 import gov.nasa.worldwind.util.xml.*;
@@ -16,72 +17,71 @@ import javax.xml.stream.XMLEventReader;
  * @author jfb
  * @version $Id: ColladaParserContext.java 644 2012-06-14 20:07:17Z pabercrombie $
  */
-public class ColladaParserContext extends BasicXMLEventParserContext {
-
-    /**
-     * The key used to identify the coordinates parser in the parser context's parser map.
-     */
+public class ColladaParserContext extends BasicXMLEventParserContext
+{
+    /** The key used to identify the coordinates parser in the parser context's parser map. */
     protected static QName COORDINATES = new QName("Coordinates");
 
-    /**
-     * The names of elements that contain merely string data and can be parsed by a generic string parser.
-     */
-    protected static final String[] StringFields = new String[]{
-        "author",
-        "name",
-        "authoring_tool",
-        "source_data",
-        "init_from",
-        "created",
-        "modified",
-        "up_axis",};
+    /** The names of elements that contain merely string data and can be parsed by a generic string parser. */
+    protected static final String[] StringFields = new String[]
+        {
+            "author",
+            "name",
+            "authoring_tool",
+            "source_data",
+            "init_from",
+            "created",
+            "modified",
+            "up_axis",
+        };
 
-    /**
-     * The names of elements that contain merely double data and can be parsed by a generic double parser.
-     */
-    protected static final String[] DoubleFields = new String[]{
-        "revision",
-        "float"
-    };
+    /** The names of elements that contain merely double data and can be parsed by a generic double parser. */
+    protected static final String[] DoubleFields = new String[]
+        {
+            "revision",
+            "float"
+        };
 
-    /**
-     * The names of elements that contain merely integer data and can be parsed by a generic integer parser.
-     */
-    protected static final String[] IntegerFields = new String[]{
-        "drawOrder",
-        "meter",
-        "double_sided" // Not part of core COLLADA spec, but included in most SketchUp models.
-    };
+    /** The names of elements that contain merely integer data and can be parsed by a generic integer parser. */
+    protected static final String[] IntegerFields = new String[]
+        {
+            "drawOrder",
+            "meter",
+            "double_sided" // Not part of core COLLADA spec, but included in most SketchUp models.
+        };
 
     /**
      * The names of elements that contain merely boolean integer (0 or 1) data and can be parsed by a generic boolean
      * integer parser.
      */
-    protected static final String[] BooleanFields = new String[]{
-        "extrude",};
+    protected static final String[] BooleanFields = new String[]
+        {
+            "extrude",
+        };
 
     /**
      * Creates a parser context instance.
      *
-     * @param eventReader the event reader from which to read events.
-     * @param defaultNamespace the default namespace. If null,
-     * {@link gov.nasa.worldwind.ogc.collada.ColladaConstants#COLLADA_NAMESPACE}
+     * @param eventReader      the event reader from which to read events.
+     * @param defaultNamespace the default namespace. If null, {@link gov.nasa.worldwind.ogc.collada.ColladaConstants#COLLADA_NAMESPACE}
      */
-    public ColladaParserContext(XMLEventReader eventReader, String defaultNamespace) {
+    public ColladaParserContext(XMLEventReader eventReader, String defaultNamespace)
+    {
         super(eventReader, defaultNamespace != null ? defaultNamespace : ColladaConstants.COLLADA_NAMESPACE);
     }
 
     /**
      * Creates a parser context instance.
      *
-     * @param defaultNamespace the default namespace. If null,
-     * {@link gov.nasa.worldwind.ogc.collada.ColladaConstants#COLLADA_NAMESPACE}
+     * @param defaultNamespace the default namespace. If null, {@link gov.nasa.worldwind.ogc.collada.ColladaConstants#COLLADA_NAMESPACE}
      */
-    public ColladaParserContext(String defaultNamespace) {
+    public ColladaParserContext(String defaultNamespace)
+    {
         this(null, defaultNamespace);
     }
 
-    public ColladaParserContext(ColladaParserContext ctx) {
+    public ColladaParserContext(ColladaParserContext ctx)
+    {
         super(ctx);
     }
 
@@ -90,13 +90,15 @@ public class ColladaParserContext extends BasicXMLEventParserContext {
      * #registerParser(javax.xml.namespace.QName, gov.nasa.worldwind.util.xml.XMLEventParser)}.
      */
     @Override
-    protected void initializeParsers() {
+    protected void initializeParsers()
+    {
         super.initializeParsers();
 
         this.initializeParsers(ColladaConstants.COLLADA_NAMESPACE);
     }
 
-    protected void initializeParsers(String ns) {
+    protected void initializeParsers(String ns)
+    {
         this.parsers.put(new QName(ns, "unit"), new ColladaUnit(ns));
         this.parsers.put(new QName(ns, "material"), new ColladaMaterial(ns));
         this.parsers.put(new QName(ns, "technique"), new ColladaTechnique(ns));

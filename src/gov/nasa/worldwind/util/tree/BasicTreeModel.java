@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util.tree;
 
 import gov.nasa.worldwind.WWObjectImpl;
@@ -13,17 +14,14 @@ import gov.nasa.worldwind.WWObjectImpl;
  * @author pabercrombie
  * @version $Id: BasicTreeModel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BasicTreeModel extends WWObjectImpl implements TreeModel {
-
-    /**
-     * The root node.
-     */
+public class BasicTreeModel extends WWObjectImpl implements TreeModel
+{
+    /** The root node. */
     protected TreeNode root;
 
-    /**
-     * Create a new tree model.
-     */
-    public BasicTreeModel() {
+    /** Create a new tree model. */
+    public BasicTreeModel()
+    {
     }
 
     /**
@@ -31,14 +29,14 @@ public class BasicTreeModel extends WWObjectImpl implements TreeModel {
      *
      * @param root The root node.
      */
-    public BasicTreeModel(TreeNode root) {
+    public BasicTreeModel(TreeNode root)
+    {
         this.setRoot(root);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public TreeNode getRoot() {
+    /** {@inheritDoc} */
+    public TreeNode getRoot()
+    {
         return this.root;
     }
 
@@ -47,15 +45,14 @@ public class BasicTreeModel extends WWObjectImpl implements TreeModel {
      *
      * @param root New root.
      */
-    public void setRoot(TreeNode root) {
-        if (this.root != null) {
+    public void setRoot(TreeNode root)
+    {
+        if (this.root != null)
             this.root.removePropertyChangeListener(this);
-        }
 
         this.root = root;
 
-        if (this.root != null) {
+        if (this.root != null)
             this.root.addPropertyChangeListener(this);
-        }
     }
 }

@@ -7,13 +7,16 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonToken;
 
 /**
- * Intermediate class that implements handling of numeric parsing, when using UTF-8 encoded byte-based input source.
- * Separate from the actual parser class just to isolate numeric parsing: would be nice to use aggregation, but
- * unfortunately many parts are hard to implement without direct access to underlying buffers.
+ * Intermediate class that implements handling of numeric parsing,
+ * when using UTF-8 encoded byte-based input source.
+ * Separate from the actual parser class just to isolate numeric
+ * parsing: would be nice to use aggregation, but unfortunately
+ * many parts are hard to implement without direct access to
+ * underlying buffers.
  */
 public abstract class Utf8NumericParser
-        extends StreamBasedParserBase {
-
+    extends StreamBasedParserBase
+{
     /*
     ////////////////////////////////////////////////////
     // Life-cycle
@@ -21,9 +24,10 @@ public abstract class Utf8NumericParser
      */
 
     public Utf8NumericParser(IOContext pc, int features,
-            InputStream in,
-            byte[] inputBuffer, int start, int end,
-            boolean bufferRecyclable) {
+                             InputStream in,
+                             byte[] inputBuffer, int start, int end,
+                             boolean bufferRecyclable)
+    {
         super(pc, features, in, inputBuffer, start, end, bufferRecyclable);
     }
 
@@ -32,19 +36,26 @@ public abstract class Utf8NumericParser
     // Textual parsing of number values
     ////////////////////////////////////////////////////
      */
+
     /**
-     * Initial parsing method for number values. It needs to be able to parse enough input to be able to determine
-     * whether the value is to be considered a simple integer value, or a more generic decimal value: latter of which
-     * needs to be expressed as a floating point number. The basic rule is that if the number has no fractional or
-     * exponential part, it is an integer; otherwise a floating point number.
-     * <p>
-     * Because much of input has to be processed in any case, no partial parsing is done: all input text will be stored
-     * for further processing. However, actual numeric value conversion will be deferred, since it is usually the most
-     * complicated and costliest part of processing.
+     * Initial parsing method for number values. It needs to be able
+     * to parse enough input to be able to determine whether the
+     * value is to be considered a simple integer value, or a more
+     * generic decimal value: latter of which needs to be expressed
+     * as a floating point number. The basic rule is that if the number
+     * has no fractional or exponential part, it is an integer; otherwise
+     * a floating point number.
+     *<p>
+     * Because much of input has to be processed in any case, no partial
+     * parsing is done: all input text will be stored for further
+     * processing. However, actual numeric value conversion will be
+     * deferred, since it is usually the most complicated and costliest
+     * part of processing.
      */
     @Override
     protected final JsonToken parseNumberText(int c)
-            throws IOException, JsonParseException {
+        throws IOException, JsonParseException
+    {
         char[] outBuf = _textBuffer.emptyAndGetCurrentSegment();
         int outPtr = 0;
         boolean negative = (c == INT_MINUS);
@@ -71,7 +82,7 @@ public abstract class Utf8NumericParser
             ++intLen;
             // Quickie check: no leading zeroes allowed
             if (intLen == 2) {
-                if (outBuf[outPtr - 1] == '0') {
+                if (outBuf[outPtr-1] == '0') {
                     reportInvalidNumber("Leading zeroes not allowed");
                 }
             }
@@ -90,7 +101,7 @@ public abstract class Utf8NumericParser
         }
         // Also, integer part is not optional
         if (intLen == 0) {
-            reportInvalidNumber("Missing integer part (next char " + _getCharDesc(c) + ")");
+            reportInvalidNumber("Missing integer part (next char "+_getCharDesc(c)+")");
         }
 
         int fractLen = 0;

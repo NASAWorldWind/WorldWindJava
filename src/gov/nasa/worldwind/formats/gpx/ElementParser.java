@@ -11,8 +11,8 @@ import gov.nasa.worldwind.util.Logging;
  * @author tag
  * @version $Id: ElementParser.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ElementParser {
-
+public class ElementParser
+{
     protected final String elementName;
     protected ElementParser currentElement = null;
     protected String currentCharacters = null;
@@ -21,8 +21,10 @@ public class ElementParser {
      * @param elementName the element's name, may not be null
      * @throws IllegalArgumentException if <code>elementName</code> is null
      */
-    protected ElementParser(String elementName) {
-        if (elementName == null) {
+    protected ElementParser(String elementName)
+    {
+        if (elementName == null)
+        {
             String msg = Logging.getMessage("nullValue.ElementNameIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -31,7 +33,8 @@ public class ElementParser {
         this.elementName = elementName;
     }
 
-    public String getElementName() {
+    public String getElementName()
+    {
         return this.elementName;
     }
 
@@ -46,33 +49,37 @@ public class ElementParser {
      * @throws IllegalArgumentException if any argument is null
      */
     public void startElement(String uri, String lname, String qname, org.xml.sax.Attributes attributes)
-            throws org.xml.sax.SAXException {
-        if (uri == null) {
+        throws org.xml.sax.SAXException
+    {
+        if (uri == null)
+        {
             String msg = Logging.getMessage("nullValue.URIIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (lname == null) {
+        if (lname == null)
+        {
             String msg = Logging.getMessage("nullValue.LNameIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (qname == null) {
+        if (qname == null)
+        {
             String msg = Logging.getMessage("nullValue.QNameIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (attributes == null) {
+        if (attributes == null)
+        {
             String msg = Logging.getMessage("nullValue.org.xml.sax.AttributesIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (this.currentElement != null) {
+        if (this.currentElement != null)
             this.currentElement.startElement(uri, lname, qname, attributes);
-        } else {
+        else
             this.doStartElement(uri, lname, qname, attributes);
-        }
     }
 
     /**
@@ -81,30 +88,34 @@ public class ElementParser {
      * @param uri Element URI.
      * @param lname Element lname.
      * @param qname Element qname.
-     * @throws org.xml.sax.SAXException if a parsing error occurs.
+     * @throws org.xml.sax.SAXException  if a parsing error occurs.
      * @throws IllegalArgumentException if any argument is null
      */
-    public void endElement(String uri, String lname, String qname) throws org.xml.sax.SAXException {
-        if (uri == null) {
+    public void endElement(String uri, String lname, String qname) throws org.xml.sax.SAXException
+    {
+        if (uri == null)
+        {
             String msg = Logging.getMessage("nullValue.URIIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (lname == null) {
+        if (lname == null)
+        {
             String msg = Logging.getMessage("nullValue.LNameIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (qname == null) {
+        if (qname == null)
+        {
             String msg = Logging.getMessage("nullValue.QNameIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (this.currentElement != null) {
+        if (this.currentElement != null)
+        {
             this.currentElement.endElement(uri, lname, qname);
-            if (lname.equalsIgnoreCase(this.currentElement.elementName)) {
+            if (lname.equalsIgnoreCase(this.currentElement.elementName))
                 this.currentElement = null;
-            }
         }
 
         this.doEndElement(uri, lname, qname);
@@ -113,10 +124,12 @@ public class ElementParser {
     }
 
     protected void doStartElement(String uri, String lname, String qname, org.xml.sax.Attributes attributes)
-            throws org.xml.sax.SAXException {
+        throws org.xml.sax.SAXException
+    {
     }
 
-    protected void doEndElement(String uri, String lname, String qname) throws org.xml.sax.SAXException {
+    protected void doEndElement(String uri, String lname, String qname) throws org.xml.sax.SAXException
+    {
     }
 
     /**
@@ -125,34 +138,38 @@ public class ElementParser {
      * @param length The length of the data.
      * @throws IllegalArgumentException if <code>data</code> has length less than 1
      */
-    public void characters(char[] data, int start, int length) {
-        if (data == null) {
+    public void characters(char[] data, int start, int length)
+    {
+        if (data == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (data.length < 1) {
+        if (data.length < 1)
+        {
             String msg = Logging.getMessage("generic.ArrayInvalidLength", data.length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (start < 0) {
+        if (start < 0)
+        {
             String msg = Logging.getMessage("generic.indexOutOfRange", start);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (start + length > data.length) {
+        if (start + length > data.length)
+        {
             String msg = Logging.getMessage("generic.indexOutOfRange", start + length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (this.currentElement != null) {
+        if (this.currentElement != null)
             this.currentElement.characters(data, start, length);
-        } else if (this.currentCharacters != null) {
+        else if (this.currentCharacters != null)
             this.currentCharacters += new String(data, start, length);
-        } else {
+        else
             this.currentCharacters = new String(data, start, length);
-        }
     }
 }

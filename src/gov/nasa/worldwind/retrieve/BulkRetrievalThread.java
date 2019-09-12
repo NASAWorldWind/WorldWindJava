@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.retrieve;
 
 import gov.nasa.worldwind.cache.FileStore;
@@ -18,8 +19,8 @@ import javax.swing.event.*;
  * @author Patrick Murris
  * @version $Id: BulkRetrievalThread.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class BulkRetrievalThread extends Thread {
-
+public abstract class BulkRetrievalThread extends Thread
+{
     protected int RETRIEVAL_SERVICE_POLL_DELAY = 1000;
 
     protected final BulkRetrievable retrievable;
@@ -34,36 +35,39 @@ public abstract class BulkRetrievalThread extends Thread {
      * {@link Sector} and resolution.
      * <p>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
-     * a downloader that has not been started, construct a
-     * {@link gov.nasa.worldwind.terrain.BasicElevationModelBulkDownloader}.
+     * a downloader that has not been started, construct a {@link gov.nasa.worldwind.terrain.BasicElevationModelBulkDownloader}.
      * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
      * @param retrievable the retrievable to retrieve data for.
-     * @param sector the sector of interest.
-     * @param resolution the target resolution, provided in radians of latitude per texel.
-     * @param fileStore the file store to examine.
-     * @param listener an optional retrieval listener. May be null.
+     * @param sector      the sector of interest.
+     * @param resolution  the target resolution, provided in radians of latitude per texel.
+     * @param fileStore   the file store to examine.
+     * @param listener    an optional retrieval listener. May be null.
      *
      * @throws IllegalArgumentException if either the retrievable, sector or file store are null, or the resolution is
-     * less than or equal to zero.
+     *                                  less than or equal to zero.
      */
     public BulkRetrievalThread(BulkRetrievable retrievable, Sector sector, double resolution, FileStore fileStore,
-            BulkRetrievalListener listener) {
-        if (retrievable == null) {
+        BulkRetrievalListener listener)
+    {
+        if (retrievable == null)
+        {
             String msg = Logging.getMessage("nullValue.RetrievableIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (sector == null) {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (fileStore == null) {
+        if (fileStore == null)
+        {
             String msg = Logging.getMessage("nullValue.FileStoreIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -82,9 +86,8 @@ public abstract class BulkRetrievalThread extends Thread {
         this.fileStore = fileStore;
         this.progress = new Progress();
 
-        if (listener != null) {
+        if (listener != null)
             this.addRetrievalListener(listener);
-        }
     }
 
     public abstract void run();
@@ -94,7 +97,8 @@ public abstract class BulkRetrievalThread extends Thread {
      *
      * @return the {@link BulkRetrievable} instance.
      */
-    public BulkRetrievable getRetrievable() {
+    public BulkRetrievable getRetrievable()
+    {
         return this.retrievable;
     }
 
@@ -103,7 +107,8 @@ public abstract class BulkRetrievalThread extends Thread {
      *
      * @return the requested {@link Sector}.
      */
-    public Sector getSector() {
+    public Sector getSector()
+    {
         return this.sector;
     }
 
@@ -112,7 +117,8 @@ public abstract class BulkRetrievalThread extends Thread {
      *
      * @return the requested resolution.
      */
-    public double getResolution() {
+    public double getResolution()
+    {
         return this.resolution;
     }
 
@@ -121,7 +127,8 @@ public abstract class BulkRetrievalThread extends Thread {
      *
      * @return the file store associated with this downloader.
      */
-    public FileStore getFileStore() {
+    public FileStore getFileStore()
+    {
         return fileStore;
     }
 
@@ -130,28 +137,32 @@ public abstract class BulkRetrievalThread extends Thread {
      *
      * @return a {@link Progress} instance providing information about this task progress.
      */
-    public Progress getProgress() {
+    public Progress getProgress()
+    {
         return this.progress;
     }
 
-    public void addRetrievalListener(BulkRetrievalListener listener) {
-        if (listener != null) {
+    public void addRetrievalListener(BulkRetrievalListener listener)
+    {
+        if (listener != null)
             this.retrievalListeners.add(BulkRetrievalListener.class, listener);
-        }
     }
 
-    public void removeRetrievalListener(BulkRetrievalListener listener) {
-        if (listener != null) {
+    public void removeRetrievalListener(BulkRetrievalListener listener)
+    {
+        if (listener != null)
             this.retrievalListeners.remove(BulkRetrievalListener.class, listener);
-        }
     }
 
-    protected boolean hasRetrievalListeners() {
+    protected boolean hasRetrievalListeners()
+    {
         return this.retrievalListeners.getListenerCount() > 0;
     }
 
-    protected void callRetrievalListeners(BulkRetrievalEvent event) {
-        for (BulkRetrievalListener listener : this.retrievalListeners.getListeners(BulkRetrievalListener.class)) {
+    protected void callRetrievalListeners(BulkRetrievalEvent event)
+    {
+        for (BulkRetrievalListener listener : this.retrievalListeners.getListeners(BulkRetrievalListener.class))
+        {
             listener.eventOccurred(event);
         }
     }

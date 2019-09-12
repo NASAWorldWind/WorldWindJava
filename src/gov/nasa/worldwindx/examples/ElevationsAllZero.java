@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.render.SurfaceImage;
@@ -16,22 +17,25 @@ import javax.swing.*;
  * @author tag
  * @version $Id: ElevationsAllZero.java 699 2012-07-13 17:53:47Z tgaskins $
  */
-public class ElevationsAllZero {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
+public class ElevationsAllZero
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
         protected SurfaceImage surfaceImage;
         protected JSlider opacitySlider;
 
-        public AppFrame() {
+        public AppFrame()
+        {
             super(true, true, false);
 
             // Eliminate elevations by simply setting the globe's elevation model to ZeroElevationModel.
+
             this.getWwd().getModel().getGlobe().setElevationModel(new ZeroElevationModel());
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Zero Elevations", AppFrame.class);
     }
 }

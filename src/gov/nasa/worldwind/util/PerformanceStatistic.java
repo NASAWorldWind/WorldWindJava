@@ -7,21 +7,17 @@ package gov.nasa.worldwind.util;
 
 import java.util.*;
 
-public class PerformanceStatistic implements Comparable<PerformanceStatistic> {
-
+public class PerformanceStatistic implements Comparable<PerformanceStatistic>
+{
     public static final String ALL = "gov.nasa.worldwind.perfstat.All";
-
-    /**
-     * @deprecated Airspace geometry count is no longer logged during airspace rendering.
-     */
+    
+    /** @deprecated Airspace geometry count is no longer logged during airspace rendering. */
     @Deprecated
     public static final String AIRSPACE_GEOMETRY_COUNT = "gov.nasa.worldwind.perfstat.AirspaceGeometryCount";
-    /**
-     * @deprecated Airspace vertex count is no longer logged during airspace rendering.
-     */
+    /** @deprecated Airspace vertex count is no longer logged during airspace rendering. */
     @Deprecated
     public static final String AIRSPACE_VERTEX_COUNT = "gov.nasa.worldwind.perfstat.AirspaceVertexCount";
-
+    
     public static final String FRAME_RATE = "gov.nasa.worldwind.perfstat.FrameRate";
     public static final String FRAME_TIME = "gov.nasa.worldwind.perfstat.FrameTime";
     public static final String IMAGE_TILE_COUNT = "gov.nasa.worldwind.perfstat.ImageTileCount";
@@ -33,8 +29,8 @@ public class PerformanceStatistic implements Comparable<PerformanceStatistic> {
     public static final String TEXTURE_CACHE = "gov.nasa.worldwind.perfstat.TextureCache";
 
     public static final Set<String> ALL_STATISTICS_SET = new HashSet<String>(1);
-
-    static {
+    static
+    {
         ALL_STATISTICS_SET.add(PerformanceStatistic.ALL);
     }
 
@@ -42,65 +38,65 @@ public class PerformanceStatistic implements Comparable<PerformanceStatistic> {
     private final String displayString;
     private final Object value;
 
-    public PerformanceStatistic(String key, String displayString, Object value) {
+    public PerformanceStatistic(String key, String displayString, Object value)
+    {
         this.key = key;
         this.displayString = displayString;
         this.value = value;
     }
 
-    public String getKey() {
+    public String getKey()
+    {
         return key;
     }
 
-    public String getDisplayString() {
+    public String getDisplayString()
+    {
         return displayString;
     }
 
-    public Object getValue() {
+    public Object getValue()
+    {
         return value;
     }
 
     @Override
-    public int compareTo(PerformanceStatistic that) {
+    public int compareTo(PerformanceStatistic that)
+    {
         //noinspection StringEquality
-        if (this.displayString == that.displayString) {
+        if (this.displayString == that.displayString)
             return 0;
-        }
 
-        if (this.displayString != null && that.displayString != null) {
+        if (this.displayString != null && that.displayString != null)
             return this.displayString.compareTo(that.displayString);
-        }
 
         return this.displayString == null ? -1 : 1;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object o)
+    {
+        if (this == o)
             return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass())
             return false;
-        }
 
         PerformanceStatistic that = (PerformanceStatistic) o;
 
-        if (displayString != null ? !displayString.equals(that.displayString) : that.displayString != null) {
+        if (displayString != null ? !displayString.equals(that.displayString) : that.displayString != null)
             return false;
-        }
-        if (key != null ? !key.equals(that.key) : that.key != null) {
+        if (key != null ? !key.equals(that.key) : that.key != null)
             return false;
-        }
         //noinspection RedundantIfStatement
-        if (value != null ? !value.equals(that.value) : that.value != null) {
+        if (value != null ? !value.equals(that.value) : that.value != null)
             return false;
-        }
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result;
         result = (key != null ? key.hashCode() : 0);
         result = 31 * result + (displayString != null ? displayString.hashCode() : 0);
@@ -109,7 +105,8 @@ public class PerformanceStatistic implements Comparable<PerformanceStatistic> {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return this.displayString + " " + this.value.toString();
     }
 }

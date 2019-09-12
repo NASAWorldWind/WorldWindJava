@@ -14,13 +14,15 @@ import org.junit.runners.JUnit4;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class GlobeAnnotationTest {
+public class GlobeAnnotationTest
+{
     //////////////////////////////////////////////////////////
     // Persistence Tests
     //////////////////////////////////////////////////////////
 
     @Test
-    public void testRestore_NewInstance() {
+    public void testRestore_NewInstance()
+    {
         GlobeAnnotation annotation = new GlobeAnnotation("", Position.fromDegrees(0.0, 0.0, 0.0));
         assignExampleValues(annotation);
 
@@ -35,7 +37,8 @@ public class GlobeAnnotationTest {
     }
 
     @Test
-    public void testRestore_SameInstance() {
+    public void testRestore_SameInstance()
+    {
         GlobeAnnotation annotation = new GlobeAnnotation("", Position.fromDegrees(0.0, 0.0, 0.0));
         assignExampleValues(annotation);
 
@@ -50,13 +53,14 @@ public class GlobeAnnotationTest {
     }
 
     @Test
-    public void testRestore_EmptyStateDocument() {
+    public void testRestore_EmptyStateDocument()
+    {
         GlobeAnnotation annotation = new GlobeAnnotation("", Position.fromDegrees(0.0, 0.0, 0.0));
         assignExampleValues(annotation);
 
-        String emptyStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<emptyDocumentRoot/>";
+        String emptyStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<emptyDocumentRoot/>";
         annotation.restoreState(emptyStateInXml);
 
         // No attributes should have changed.
@@ -67,29 +71,34 @@ public class GlobeAnnotationTest {
     }
 
     @Test
-    public void testRestore_InvalidStateDocument() {
-        try {
+    public void testRestore_InvalidStateDocument()
+    {
+        try
+        {
             String badStateInXml = "!!invalid xml string!!";
             GlobeAnnotation annotation = new GlobeAnnotation("", Position.fromDegrees(0.0, 0.0, 0.0));
             annotation.restoreState(badStateInXml);
 
             fail("Expected an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e)
+        {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testRestore_PartialStateDocument() {
+    public void testRestore_PartialStateDocument()
+    {
         GlobeAnnotation annotation = new GlobeAnnotation("", Position.fromDegrees(0.0, 0.0, 0.0));
         assignExampleValues(annotation);
 
-        String partialStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<restorableState>"
-                + "<stateObject name=\"text\">Hello, World!</stateObject>"
-                + "<unknownElement name=\"unknownName\">unknownValue</unknownElement>"
-                + "</restorableState>";
+        String partialStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<restorableState>" +
+                "<stateObject name=\"text\">Hello, World!</stateObject>" +
+                "<unknownElement name=\"unknownName\">unknownValue</unknownElement>" +
+                "</restorableState>";
         annotation.restoreState(partialStateInXml);
 
         GlobeAnnotation expected = new GlobeAnnotation("", Position.fromDegrees(0.0, 0.0, 0.0));
@@ -100,7 +109,8 @@ public class GlobeAnnotationTest {
     }
 
     @Test
-    public void testRestore_AnnotationSharing() {
+    public void testRestore_AnnotationSharing()
+    {
         GlobeAnnotation annotation1 = new GlobeAnnotation("", Position.fromDegrees(0.0, 0.0, 0.0));
         GlobeAnnotation annotation2 = new GlobeAnnotation("", Position.fromDegrees(0.0, 0.0, 0.0));
         AnnotationAttributes sharedAttributes = new AnnotationAttributes();
@@ -119,7 +129,8 @@ public class GlobeAnnotationTest {
     }
 
     @Test
-    public void test_SaveGlobeAnnotation_RestoreScreenAnnotation() {
+    public void test_SaveGlobeAnnotation_RestoreScreenAnnotation()
+    {
         GlobeAnnotation globeAnnotation = new GlobeAnnotation("", Position.fromDegrees(0.0, 0.0, 0.0));
         assignExampleValues(globeAnnotation);
 
@@ -134,21 +145,25 @@ public class GlobeAnnotationTest {
     //////////////////////////////////////////////////////////
     // Helper Methods
     //////////////////////////////////////////////////////////
+
     @SuppressWarnings({"JavaDoc"})
-    private static void assignExampleValues(GlobeAnnotation annotation) {
+    private static void assignExampleValues(GlobeAnnotation annotation)
+    {
         annotation.setText(
-                "<p>\n<b><font color=\"#664400\">LA CLAPI\u00c8RE</font></b><br />\n<i>Alt: 1100-1700m</i>\n</p>\n<p>\n<b>Glissement de terrain majeur</b> dans la haute Tin\u00e9e, sur un flanc du <a href=\"http://www.mercantour.eu\">Parc du Mercantour</a>, Alpes Maritimes.\n</p>\n<p>\nRisque aggrav\u00e9 d'<b>inondation</b> du village de <i>Saint \u00c9tienne de Tin\u00e9e</i> juste en amont.\n</p>");
+            "<p>\n<b><font color=\"#664400\">LA CLAPI\u00c8RE</font></b><br />\n<i>Alt: 1100-1700m</i>\n</p>\n<p>\n<b>Glissement de terrain majeur</b> dans la haute Tin\u00e9e, sur un flanc du <a href=\"http://www.mercantour.eu\">Parc du Mercantour</a>, Alpes Maritimes.\n</p>\n<p>\nRisque aggrav\u00e9 d'<b>inondation</b> du village de <i>Saint \u00c9tienne de Tin\u00e9e</i> juste en amont.\n</p>");
         annotation.setPosition(Position.fromDegrees(44.2522, 6.9424, 0));
         assignExampleValues(annotation.getAttributes());
     }
 
-    private static void assignNullValues(GlobeAnnotation annotation) {
+    private static void assignNullValues(GlobeAnnotation annotation)
+    {
         annotation.setText("");
         annotation.setPosition(null);
         assignNullValues(annotation.getAttributes());
     }
 
-    private static void assignExampleValues(AnnotationAttributes attrib) {
+    private static void assignExampleValues(AnnotationAttributes attrib)
+    {
         attrib.setFrameShape(AVKey.SHAPE_ELLIPSE);
         attrib.setHighlighted(true);
         attrib.setHighlightScale(2.5);
@@ -180,7 +195,8 @@ public class GlobeAnnotationTest {
         attrib.setEffect(AVKey.TEXT_EFFECT_OUTLINE);
     }
 
-    private static void assignNullValues(AnnotationAttributes attrib) {
+    private static void assignNullValues(AnnotationAttributes attrib)
+    {
         attrib.setFrameShape(null);
         attrib.setHighlighted(false);
         attrib.setHighlightScale(-1);
@@ -212,31 +228,37 @@ public class GlobeAnnotationTest {
         attrib.setEffect(null);
     }
 
-    private static void assertAnnotationEquals(Annotation expected, Annotation actual) {
+    private static void assertAnnotationEquals(Annotation expected, Annotation actual)
+    {
         assertNotNull("Expected is null", expected);
         assertNotNull("Acutal is null", actual);
         assertEquals("text", expected.getText(), actual.getText());
         assertAnnotationAttributesEquals(expected.getAttributes(), actual.getAttributes());
     }
 
-    private static void assertGlobeAnnotationEquals(GlobeAnnotation expected, GlobeAnnotation actual) {
+    private static void assertGlobeAnnotationEquals(GlobeAnnotation expected, GlobeAnnotation actual)
+    {
         assertNotNull("Expected is null", expected);
         assertNotNull("Acutal is null", actual);
         assertEquals("text", expected.getText(), actual.getText());
-        if (expected.getPosition() != null && actual.getPosition() != null) {
+        if (expected.getPosition() != null && actual.getPosition() != null)
+        {
             assertEquals("position.latitude", expected.getPosition().getLatitude(), actual.getPosition().getLatitude());
             assertEquals("position.longitude", expected.getPosition().getLongitude(),
-                    actual.getPosition().getLongitude());
+                actual.getPosition().getLongitude());
             assertEquals("position.elevation", expected.getPosition().getElevation(),
-                    actual.getPosition().getElevation(), 0.0);
-        } else {
+                actual.getPosition().getElevation(), 0.0);
+        }
+        else
+        {
             assertNull("Expected position is not null", expected.getPosition());
             assertNull("Actual position is not null", actual.getPosition());
         }
         assertAnnotationAttributesEquals(expected.getAttributes(), actual.getAttributes());
     }
 
-    private static void assertAnnotationAttributesEquals(AnnotationAttributes expected, AnnotationAttributes actual) {
+    private static void assertAnnotationAttributesEquals(AnnotationAttributes expected, AnnotationAttributes actual)
+    {
         assertNotNull("Expected is null", expected);
         assertNotNull("Acutal is null", actual);
         assertEquals("frameShape", expected.getFrameShape(), actual.getFrameShape());

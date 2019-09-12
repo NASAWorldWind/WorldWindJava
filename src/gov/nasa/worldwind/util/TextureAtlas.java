@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util;
 
 import com.jogamp.opengl.util.packrect.*;
@@ -27,20 +28,21 @@ import java.util.Queue;
  * @author dcollins
  * @version $Id: TextureAtlas.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class TextureAtlas {
-
+public class TextureAtlas
+{
     /**
      * Implementation of the JOGL BackingStoreManager interface for texture atlas. This is used by the JOGL {@link
      * RectanglePacker}, and delegates calls from a JOGL rectangle packer to methods in this texture atlas.
      */
-    protected class AtlasBackingStore implements BackingStoreManager {
-
+    protected class AtlasBackingStore implements BackingStoreManager
+    {
         /**
          * {@inheritDoc}
          * <p>
          * Calls {@link TextureAtlas#createBackingImage(int, int)} with the specified width and height.
          */
-        public Object allocateBackingStore(int w, int h) {
+        public Object allocateBackingStore(int w, int h)
+        {
             return createBackingImage(w, h);
         }
 
@@ -49,7 +51,8 @@ public class TextureAtlas {
          * <p>
          * Calls {@link TextureAtlas#disposeBackingImage()}.
          */
-        public void deleteBackingStore(Object backingStore) {
+        public void deleteBackingStore(Object backingStore)
+        {
             disposeBackingImage();
         }
 
@@ -58,7 +61,8 @@ public class TextureAtlas {
          * <p>
          * Returns <code>true</code>. The texture atlas can always attempt to expand or compact.
          */
-        public boolean canCompact() {
+        public boolean canCompact()
+        {
             return true;
         }
 
@@ -69,7 +73,8 @@ public class TextureAtlas {
          * so, texture atlas evicts old elements in <code>additionFailed</code> if this texture atlas is full and the
          * addition would otherwise fail.
          */
-        public boolean preExpand(Rect cause, int attemptNumber) {
+        public boolean preExpand(Rect cause, int attemptNumber)
+        {
             return false;
         }
 
@@ -82,12 +87,12 @@ public class TextureAtlas {
          *
          * @throws WWRuntimeException if this backing store cannot fit the rectangle in its layout.
          */
-        public boolean additionFailed(Rect cause, int attemptNumber) {
-            if (!isEvictOldElements() || !removeLeastRecentlyUsedEntry()) {
+        public boolean additionFailed(Rect cause, int attemptNumber)
+        {
+            if (!isEvictOldElements() || !removeLeastRecentlyUsedEntry())
                 throw new WWRuntimeException(Logging.getMessage("TextureAtlas.AtlasIsFull"));
-            } else {
+            else
                 return true;
-            }
         }
 
         /**
@@ -96,7 +101,8 @@ public class TextureAtlas {
          * Calls {@link TextureAtlas#beginMoveEntries(java.awt.image.BufferedImage, java.awt.image.BufferedImage)},
          * casting the specified backing stores to BufferedImages.
          */
-        public void beginMovement(Object oldBackingStore, Object newBackingStore) {
+        public void beginMovement(Object oldBackingStore, Object newBackingStore)
+        {
             beginMoveEntries((BufferedImage) oldBackingStore, (BufferedImage) newBackingStore);
         }
 
@@ -107,7 +113,8 @@ public class TextureAtlas {
          * java.awt.image.BufferedImage, com.jogamp.opengl.util.packrect.Rect)}, casting the specified backing stores to
          * BufferedImages.
          */
-        public void move(Object oldBackingStore, Rect oldLocation, Object newBackingStore, Rect newLocation) {
+        public void move(Object oldBackingStore, Rect oldLocation, Object newBackingStore, Rect newLocation)
+        {
             moveEntry((BufferedImage) oldBackingStore, oldLocation, (BufferedImage) newBackingStore, newLocation);
         }
 
@@ -117,7 +124,8 @@ public class TextureAtlas {
          * Calls {@link TextureAtlas#endMoveEntries(java.awt.image.BufferedImage, java.awt.image.BufferedImage)},
          * casting the specified backing stores to BufferedImages.
          */
-        public void endMovement(Object oldBackingStore, Object newBackingStore) {
+        public void endMovement(Object oldBackingStore, Object newBackingStore)
+        {
             endMoveEntries((BufferedImage) oldBackingStore, (BufferedImage) newBackingStore);
         }
     }
@@ -128,23 +136,15 @@ public class TextureAtlas {
      * timestamp indicating the last time the element was used. Implements the {@link Comparable} interface by comparing
      * the lastUsed timestamp, ordered from least recently used to most recently used.
      */
-    protected static class Entry implements Comparable<Entry> {
-
-        /**
-         * Indicates the element's key. Initialized during construction.
-         */
+    protected static class Entry implements Comparable<Entry>
+    {
+        /** Indicates the element's key. Initialized during construction. */
         public final Object key;
-        /**
-         * Indicates the element's bounding rectangle within the texture atlas. Initialized during construction.
-         */
+        /** Indicates the element's bounding rectangle within the texture atlas. Initialized during construction. */
         public Rect rect;
-        /**
-         * Indicates the element's image X offset withing the bounding rectangle. Initialized during construction.
-         */
+        /** Indicates the element's image X offset withing the bounding rectangle. Initialized during construction. */
         public int imageOffsetX;
-        /**
-         * Indicates the element's image Y offset withing the bounding rectangle. Initialized during construction.
-         */
+        /** Indicates the element's image Y offset withing the bounding rectangle. Initialized during construction. */
         public int imageOffsetY;
         /**
          * Indicates the element's image width. May be smaller than the bounding rectangle's width. Initialized during
@@ -156,23 +156,22 @@ public class TextureAtlas {
          * construction.
          */
         public int imageHeight;
-        /**
-         * Indicates the last time this entry was used.
-         */
+        /** Indicates the last time this entry was used. */
         public long lastUsed;
 
         /**
          * Constructs a texture atlas entry corresponding with a texture atlas element with the specified key, bounding
          * rectangle, and image offsets within the bounding rectangle.
          *
-         * @param key the element's key.
-         * @param rect the element's bounding rectangle within the texture atlas.
+         * @param key          the element's key.
+         * @param rect         the element's bounding rectangle within the texture atlas.
          * @param imageOffsetX the element's image X offset withing the bounding rectangle.
          * @param imageOffsetY the element's image Y offset withing the bounding rectangle.
-         * @param imageWidth the element's image width. May be smaller than the bounding rectangle's width.
-         * @param imageHeight the element's image height. May be smaller than the bounding rectangle's height.
+         * @param imageWidth   the element's image width. May be smaller than the bounding rectangle's width.
+         * @param imageHeight  the element's image height. May be smaller than the bounding rectangle's height.
          */
-        public Entry(Object key, Rect rect, int imageOffsetX, int imageOffsetY, int imageWidth, int imageHeight) {
+        public Entry(Object key, Rect rect, int imageOffsetX, int imageOffsetY, int imageWidth, int imageHeight)
+        {
             this.key = key;
             this.rect = rect;
             this.imageOffsetX = imageOffsetX;
@@ -189,12 +188,14 @@ public class TextureAtlas {
          * @param that the texture atlas entry this entry is compared to.
          *
          * @return -1, 0, or 1 if this entry's last used time is earlier than, the same as, or later than the specified
-         * entry's last used time.
+         *         entry's last used time.
          *
          * @throws IllegalArgumentException if the specified entry is <code>null</code>.
          */
-        public int compareTo(Entry that) {
-            if (that == null) {
+        public int compareTo(Entry that)
+        {
+            if (that == null)
+            {
                 String msg = Logging.getMessage("nullValue.EntryIsNull");
                 Logging.logger().severe(msg);
                 throw new IllegalArgumentException(msg);
@@ -204,17 +205,11 @@ public class TextureAtlas {
         }
     }
 
-    /**
-     * The texture atlas' default setting for the useMipMaps property: <code>true</code>.
-     */
+    /** The texture atlas' default setting for the useMipMaps property: <code>true</code>. */
     protected static final boolean DEFAULT_USE_MIP_MAPS = true;
-    /**
-     * The texture atlas' default setting for the useAnisotropy property: <code>true</code>.
-     */
+    /** The texture atlas' default setting for the useAnisotropy property: <code>true</code>. */
     protected static final boolean DEFAULT_USE_ANISOTROPY = true;
-    /**
-     * The texture atlas' default maximum vertical fragmentation: 0.7.
-     */
+    /** The texture atlas' default maximum vertical fragmentation: 0.7. */
     protected static final double DEFAULT_MAX_VERTICAL_FRAGMENTATION = 0.7;
 
     /**
@@ -277,7 +272,8 @@ public class TextureAtlas {
     protected Graphics2D g;
     /**
      * Indicates the current key corresponding to this texture atlas' OpenGL texture in the GPU resource cache. This key
-     * is assigned to a new instance whenever this texture atlas creates new backing image. Initialized to a new Object.
+     * is assigned to a new instance whenever this texture atlas creates new backing image. Initialized to a new
+     * Object.
      */
     protected Object textureKey = new Object();
     /**
@@ -293,15 +289,18 @@ public class TextureAtlas {
      * zero, and the maximum dimensions must be greater than or equal to the initial dimensions. The constructed texture
      * atlas generates mip-maps and applies an anisotropic filter to each element.
      *
-     * @param initialWidth the texture atlas' initial width, in pixels. Must be greater than zero.
+     * @param initialWidth  the texture atlas' initial width, in pixels. Must be greater than zero.
      * @param initialHeight the texture atlas' initial height, in pixels. Must be greater than zero.
-     * @param maxWidth the texture atlas' maximum width, in pixels. Must be greater than or equal to initialWidth.
-     * @param maxHeight the texture atlas' maximum height, in pixels. Must be greater than or equal to initialHeight.
+     * @param maxWidth      the texture atlas' maximum width, in pixels. Must be greater than or equal to initialWidth.
+     * @param maxHeight     the texture atlas' maximum height, in pixels. Must be greater than or equal to
+     *                      initialHeight.
      *
      * @throws IllegalArgumentException if any of initialWidth, initialHeight, maxWidth, or maxHeight are less than or
-     * equal to zero, if maxWidth is less than initialWidth, or if maxHeight is less than initialHeight.
+     *                                  equal to zero, if maxWidth is less than initialWidth, or if maxHeight is less
+     *                                  than initialHeight.
      */
-    public TextureAtlas(int initialWidth, int initialHeight, int maxWidth, int maxHeight) {
+    public TextureAtlas(int initialWidth, int initialHeight, int maxWidth, int maxHeight)
+    {
         this(initialWidth, initialHeight, maxWidth, maxHeight, DEFAULT_USE_MIP_MAPS, DEFAULT_USE_ANISOTROPY);
     }
 
@@ -311,39 +310,47 @@ public class TextureAtlas {
      * enables specification of whether the texture atlas generates mip-maps and applies an anisotropic filter to each
      * element.
      *
-     * @param initialWidth the texture atlas' initial width, in pixels. Must be greater than zero.
+     * @param initialWidth  the texture atlas' initial width, in pixels. Must be greater than zero.
      * @param initialHeight the texture atlas' initial height, in pixels. Must be greater than zero.
-     * @param maxWidth the texture atlas' maximum width, in pixels. Must be greater than or equal to initialWidth.
-     * @param maxHeight the texture atlas' maximum height, in pixels. Must be greater than or equal to initialHeight.
-     * @param useMipMaps whether to generate mip-maps for each atlas element. <code>true</code> to generate mip-maps,
-     * and <code>false</code> otherwise.
+     * @param maxWidth      the texture atlas' maximum width, in pixels. Must be greater than or equal to initialWidth.
+     * @param maxHeight     the texture atlas' maximum height, in pixels. Must be greater than or equal to
+     *                      initialHeight.
+     * @param useMipMaps    whether to generate mip-maps for each atlas element. <code>true</code> to generate mip-maps,
+     *                      and <code>false</code> otherwise.
      * @param useAnisotropy whether to apply an anisotropic filter to each atlas element. <code>true</code> to apply an
-     * anisotropic filter, and <code>false</code> otherwise. This has no effect if useMipMaps is <code>false</code>.
+     *                      anisotropic filter, and <code>false</code> otherwise. This has no effect if useMipMaps is
+     *                      <code>false</code>.
      *
      * @throws IllegalArgumentException if any of initialWidth, initialHeight, maxWidth, or maxHeight are less than or
-     * equal to zero, if maxWidth is less than initialWidth, or if maxHeight is less than initialHeight.
+     *                                  equal to zero, if maxWidth is less than initialWidth, or if maxHeight is less
+     *                                  than initialHeight.
      */
     public TextureAtlas(int initialWidth, int initialHeight, int maxWidth, int maxHeight, boolean useMipMaps,
-            boolean useAnisotropy) {
-        if (initialWidth < 1) {
+        boolean useAnisotropy)
+    {
+        if (initialWidth < 1)
+        {
             String msg = Logging.getMessage("TextureAtlas.InitialWidthInvalid", initialWidth);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (initialHeight < 1) {
+        if (initialHeight < 1)
+        {
             String msg = Logging.getMessage("TextureAtlas.InitialHeightInvalid", initialHeight);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (maxWidth < initialWidth) {
+        if (maxWidth < initialWidth)
+        {
             String msg = Logging.getMessage("TextureAtlas.MaxWidthInvalid", maxWidth);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (maxHeight < initialHeight) {
+        if (maxHeight < initialHeight)
+        {
             String msg = Logging.getMessage("TextureAtlas.MaxWidthInvalid", maxHeight);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -365,12 +372,13 @@ public class TextureAtlas {
      * within this texture atlas' backing image. By default, this returns a rectangle packer with an {@link
      * AtlasBackingStore} as the backing store manager. Called during construction.
      *
-     * @param initialWidth this texture atlas' initial width.
+     * @param initialWidth  this texture atlas' initial width.
      * @param initialHeight this texture atlas' initial height.
      *
      * @return a new JOGL rectangle packer with the specified initial dimensions.
      */
-    protected RectanglePacker createRectanglePacker(int initialWidth, int initialHeight) {
+    protected RectanglePacker createRectanglePacker(int initialWidth, int initialHeight)
+    {
         return new RectanglePacker(new AtlasBackingStore(), initialWidth, initialHeight);
     }
 
@@ -379,7 +387,8 @@ public class TextureAtlas {
      *
      * @return this texture atlas' current width.
      */
-    public int getWidth() {
+    public int getWidth()
+    {
         return ((BufferedImage) this.rectPacker.getBackingStore()).getWidth();
     }
 
@@ -388,7 +397,8 @@ public class TextureAtlas {
      *
      * @return this texture atlas' current height.
      */
-    public int getHeight() {
+    public int getHeight()
+    {
         return ((BufferedImage) this.rectPacker.getBackingStore()).getHeight();
     }
 
@@ -397,7 +407,8 @@ public class TextureAtlas {
      *
      * @return this texture atlas' maximum width.
      */
-    public int getMaxWidth() {
+    public int getMaxWidth()
+    {
         return this.maxWidth;
     }
 
@@ -406,7 +417,8 @@ public class TextureAtlas {
      *
      * @return this texture atlas' maximum height.
      */
-    public int getMaxHeight() {
+    public int getMaxHeight()
+    {
         return this.maxHeight;
     }
 
@@ -415,7 +427,8 @@ public class TextureAtlas {
      *
      * @return <code>true</code> if this texture atlas generates mip-maps, and <code>false</code> otherwise.
      */
-    public boolean isUseMipMaps() {
+    public boolean isUseMipMaps()
+    {
         return this.useMipMaps;
     }
 
@@ -425,7 +438,8 @@ public class TextureAtlas {
      *
      * @return <code>true</code> if this texture atlas applies an anisotropic filter, and <code>false</code> otherwise.
      */
-    public boolean isUseAnisotropy() {
+    public boolean isUseAnisotropy()
+    {
         return this.useAnisotropy;
     }
 
@@ -434,11 +448,12 @@ public class TextureAtlas {
      * atlas is full.
      *
      * @return <code>true</code> if this atlas evicts old elements to make room for new elements, and <code>false</code>
-     * otherwise.
+     *         otherwise.
      *
      * @see #setEvictOldElements(boolean)
      */
-    public boolean isEvictOldElements() {
+    public boolean isEvictOldElements()
+    {
         return this.evictOldElements;
     }
 
@@ -449,9 +464,10 @@ public class TextureAtlas {
      * oldest elements are evicted until there is enough space to fit the element in the layout.
      *
      * @param evictOldElements <code>true</code> if this atlas should evict old elements to make room for new elements,
-     * and <code>false</code> otherwise.
+     *                         and <code>false</code> otherwise.
      */
-    public void setEvictOldElements(boolean evictOldElements) {
+    public void setEvictOldElements(boolean evictOldElements)
+    {
         this.evictOldElements = evictOldElements;
     }
 
@@ -460,7 +476,8 @@ public class TextureAtlas {
      *
      * @return the number of elements in this texture atlas, or 0 if this atlas does not contain any elements.
      */
-    public int getNumElements() {
+    public int getNumElements()
+    {
         return this.entryMap.size();
     }
 
@@ -469,7 +486,8 @@ public class TextureAtlas {
      *
      * @return <code>true</code> if this texture atlas contains at least one element, and <code>false</code> otherwise.
      */
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return this.entryMap.isEmpty();
     }
 
@@ -485,36 +503,43 @@ public class TextureAtlas {
      * requires space for an image with dimensions (width + 2, height + 2), where width and height are the image's
      * original dimensions.
      *
-     * @param key an object used to reference the image.
+     * @param key   an object used to reference the image.
      * @param image the image to add.
      *
      * @throws IllegalArgumentException if either the key or image is <code>null</code>, or if the image dimensions are
-     * greater than this texture atlas' maximum dimensions.
-     * @throws WWRuntimeException if this texture atlas is too full to fit the image in its layout.
+     *                                  greater than this texture atlas' maximum dimensions.
+     * @throws WWRuntimeException       if this texture atlas is too full to fit the image in its layout.
      */
-    public void add(Object key, BufferedImage image) {
-        if (key == null) {
+    public void add(Object key, BufferedImage image)
+    {
+        if (key == null)
+        {
             String msg = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (image == null) {
+        if (image == null)
+        {
             String msg = Logging.getMessage("nullValue.ImageIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         // Add two to account for the 1 pixel border we add to the image.
-        if (image.getWidth() + 2 > this.maxWidth || image.getHeight() + 2 > this.maxHeight) {
+        if (image.getWidth() + 2 > this.maxWidth || image.getHeight() + 2 > this.maxHeight)
+        {
             String msg = Logging.getMessage("TextureAtlas.ImageTooLarge", key);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        try {
+        try
+        {
             this.doAdd(key, image);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // doAdd throws a WWRuntimeException when the rectangle packer cannot fit the specified image into the
             // backing store.
             String msg = Logging.getMessage("TextureAtlas.AtlasIsFull", key);
@@ -526,16 +551,18 @@ public class TextureAtlas {
     /**
      * Adds a new element to this texture atlas with the specified key and image.
      *
-     * @param key an object used to reference the image.
+     * @param key   an object used to reference the image.
      * @param image the image to add.
      *
      * @throws WWRuntimeException if this texture atlas is too full to fit the image in its layout.
      */
-    protected void doAdd(Object key, BufferedImage image) {
+    protected void doAdd(Object key, BufferedImage image)
+    {
         // Remove any existing entry and add it to the list of unused entries before attempting to add one with the same
         // key. This ensures that the old entry is not orphaned in the rectangle packer's list of rectangles.
         Entry entry = this.entryMap.remove(key);
-        if (entry != null) {
+        if (entry != null)
+        {
             this.doRemove(entry);
         }
 
@@ -575,19 +602,22 @@ public class TextureAtlas {
      * @param key an object used to reference the element to remove.
      *
      * @return <code>true</code> if this texture atlas contained an element with the specified key, and
-     * <code>false</code> otherwise.
+     *         <code>false</code> otherwise.
      *
      * @throws IllegalArgumentException if the key is <code>null</code>.
      */
-    public boolean remove(Object key) {
-        if (key == null) {
+    public boolean remove(Object key)
+    {
+        if (key == null)
+        {
             String msg = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         Entry entry = this.entryMap.remove(key);
-        if (entry != null) {
+        if (entry != null)
+        {
             this.doRemove(entry);
         }
 
@@ -600,7 +630,8 @@ public class TextureAtlas {
      *
      * @param entry the entry to remove.
      */
-    protected void doRemove(Entry entry) {
+    protected void doRemove(Entry entry)
+    {
         Rect rect = entry.rect;
 
         // Remove the element's rectangle from the JOGL rectangle packer. This frees space for the
@@ -614,9 +645,8 @@ public class TextureAtlas {
         // Compact the remaining entries if the vertical fragmentation ratio is larger than this texture atlas'
         // configured threshold. This avoids wasting texture space when many elements of different sizes are
         // subsequently added and removed.
-        if (this.rectPacker.verticalFragmentationRatio() > this.maxVerticalFragmentation) {
+        if (this.rectPacker.verticalFragmentationRatio() > this.maxVerticalFragmentation)
             this.rectPacker.compact();
-        }
     }
 
     /**
@@ -625,12 +655,14 @@ public class TextureAtlas {
      * @param key the key which the element is referenced by.
      *
      * @return <code>true</code> if this texture atlas contains an element with the specified key, and
-     * <code>false</code> otherwise.
+     *         <code>false</code> otherwise.
      *
      * @throws IllegalArgumentException if the key is <code>null</code>.
      */
-    public boolean contains(Object key) {
-        if (key == null) {
+    public boolean contains(Object key)
+    {
+        if (key == null)
+        {
             String msg = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -646,19 +678,20 @@ public class TextureAtlas {
      * @param key the key which the element is referenced by.
      *
      * @return the image dimensions corresponding to the specified element, or <code>null</code> if this texture atlas
-     * does not contain the element.
+     *         does not contain the element.
      */
-    public Dimension getSize(Object key) {
-        if (key == null) {
+    public Dimension getSize(Object key)
+    {
+        if (key == null)
+        {
             String msg = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         Entry entry = this.entryMap.get(key);
-        if (entry == null) {
+        if (entry == null)
             return null;
-        }
 
         // Mark that the entry has been used at the current time.
         this.markUsed(entry);
@@ -676,19 +709,20 @@ public class TextureAtlas {
      * @param key the key which the element is referenced by.
      *
      * @return the OpenGL texture coordinates corresponding to the specified element, or <code>null</code> if this
-     * texture atlas does not contain the element.
+     *         texture atlas does not contain the element.
      */
-    public TextureCoords getTexCoords(Object key) {
-        if (key == null) {
+    public TextureCoords getTexCoords(Object key)
+    {
+        if (key == null)
+        {
             String msg = Logging.getMessage("nullValue.KeyIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         Entry entry = this.entryMap.get(key);
-        if (entry == null) {
+        if (entry == null)
             return null;
-        }
 
         // Mark that the entry has been used at the current time.
         this.markUsed(entry);
@@ -713,10 +747,9 @@ public class TextureAtlas {
         return new TextureCoords(tx1, ty2, tx2, ty1);
     }
 
-    /**
-     * Removes all elements from this texture atlas. The backing image retains its current dimensions after this call.
-     */
-    public void clear() {
+    /** Removes all elements from this texture atlas. The backing image retains its current dimensions after this call. */
+    public void clear()
+    {
         this.rectPacker.clear();
         this.entryMap.clear();
 
@@ -737,8 +770,10 @@ public class TextureAtlas {
      *
      * @throws IllegalArgumentException if the draw context is <code>null</code>.
      */
-    public boolean bind(DrawContext dc) {
-        if (dc == null) {
+    public boolean bind(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String msg = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -751,10 +786,13 @@ public class TextureAtlas {
 
         // Synchronize the OpenGL texture with the backing image, creating OpenGL texture as necessary.
         Texture texture = this.syncTexture(dc);
-        if (texture != null) {
+        if (texture != null)
+        {
             texture.bind(dc.getGL());
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -765,12 +803,13 @@ public class TextureAtlas {
      * always returns an image with power-of-two dimensions in order to maximize compatibility with different graphics
      * cards.
      *
-     * @param width the backing image's minimum width, in pixels.
+     * @param width  the backing image's minimum width, in pixels.
      * @param height the backing image's minimum height, in pixels.
      *
      * @return a new BufferedImage to use as this texture atlas' backing image.
      */
-    protected BufferedImage createBackingImage(int width, int height) {
+    protected BufferedImage createBackingImage(int width, int height)
+    {
         // Create an image with power-of-two dimensions in order to maximize compatibility with different graphics
         // cards. This eliminates the need for the individual images to have power-of-two dimensions.
         int potWidth = WWMath.powerOfTwoCeiling(width);
@@ -785,10 +824,9 @@ public class TextureAtlas {
         return bi;
     }
 
-    /**
-     * Disposes of this texture atlas' current backing image.
-     */
-    protected void disposeBackingImage() {
+    /** Disposes of this texture atlas' current backing image. */
+    protected void disposeBackingImage()
+    {
         // The rectangle packer is expanding or compacting the backing image, so we need to dispose of the current
         // backing image and its associated texture. We dispose of the texture by generating a new texture key and
         // adding the old key to the list of disposed texture keys. The current key may not be associated with any
@@ -803,18 +841,22 @@ public class TextureAtlas {
      * Fills the specified rectangle with the clear color in the backing image.
      *
      * @param backingImage the destination backing image to fill with the clear color.
-     * @param x the X coordinate of the rectangle's upper-left corner, in pixels.
-     * @param y the Y coordinates of the rectangle's upper-left corner, in pixels.
-     * @param width the rectangle's width, in pixels.
-     * @param height the rectangle's height, in pixels.
+     * @param x            the X coordinate of the rectangle's upper-left corner, in pixels.
+     * @param y            the Y coordinates of the rectangle's upper-left corner, in pixels.
+     * @param width        the rectangle's width, in pixels.
+     * @param height       the rectangle's height, in pixels.
      */
-    protected void clearRect(BufferedImage backingImage, int x, int y, int width, int height) {
+    protected void clearRect(BufferedImage backingImage, int x, int y, int width, int height)
+    {
         Graphics2D g = backingImage.createGraphics();
-        try {
+        try
+        {
             g.setComposite(AlphaComposite.Src); // Replace destination pixels with the clear color (disables blending).
             g.setColor(this.clearColor);
             g.fillRect(x, y, width, height);
-        } finally {
+        }
+        finally
+        {
             g.dispose();
         }
     }
@@ -822,77 +864,83 @@ public class TextureAtlas {
     /**
      * Draws the specified image in the backing image at the specified (x, y) location. If drawBorder is
      * <code>true</code>, this copies the image's outer pixels into 1 pixel border surrounding the original image. This
-     * border avoids sampling pixels from neighboring atlas elements when an OpenGL box filter is applied to this image.
+     * border avoids sampling pixels from neighboring atlas elements when an OpenGL box filter is applied to this
+     * image.
      *
      * @param backingImage the destination backing image to draw into.
-     * @param image the source image to draw.
-     * @param x the X coordinate of the image's upper-left corner, in pixels.
-     * @param y the Y coordinates of the image's upper-left corner, in pixels.
+     * @param image        the source image to draw.
+     * @param x            the X coordinate of the image's upper-left corner, in pixels.
+     * @param y            the Y coordinates of the image's upper-left corner, in pixels.
      * @param drawBorder   <code>true</code> this copy the image's outer pixels into 1 pixel border surrounding the
-     * original image, or <code>false</code> to draw only the image.
+     *                     original image, or <code>false</code> to draw only the image.
      */
-    protected void drawImage(BufferedImage backingImage, BufferedImage image, int x, int y, boolean drawBorder) {
+    protected void drawImage(BufferedImage backingImage, BufferedImage image, int x, int y, boolean drawBorder)
+    {
         int w = image.getWidth();
         int h = image.getHeight();
 
         Graphics2D g = backingImage.createGraphics();
-        try {
+        try
+        {
             // Replace destination pixels with source pixels (disables blending).
             g.setComposite(AlphaComposite.Src);
 
             // Copy the entire image to (x, y).
             g.drawImage(image, x, y, null);
 
-            if (drawBorder) {
+            if (drawBorder)
+            {
                 // Copy the image's top left corner to (x - 1, y - 1).
                 g.drawImage(image,
-                        x - 1, y - 1, x, y, // dstX1, dstY1, dstX2, dstY2
-                        0, 0, 1, 1, // srcX1, srcY1, srcX2, srcY2
-                        null);
+                    x - 1, y - 1, x, y, // dstX1, dstY1, dstX2, dstY2
+                    0, 0, 1, 1, // srcX1, srcY1, srcX2, srcY2
+                    null);
 
                 // Copy the image's top row to (x, y - 1).
                 g.drawImage(image,
-                        x, y - 1, x + w, y, // dstX1, dstY1, dstX2, dstY2
-                        0, 0, w, 1, // srcX1, srcY1, srcX2, srcY2
-                        null);
+                    x, y - 1, x + w, y, // dstX1, dstY1, dstX2, dstY2
+                    0, 0, w, 1, // srcX1, srcY1, srcX2, srcY2
+                    null);
 
                 // Copy the image's top right corner to (x + w, y - 1).
                 g.drawImage(image,
-                        x + w, y - 1, x + w + 1, y, // dstX1, dstY1, dstX2, dstY2
-                        w - 1, 0, w, 1, // srcX1, srcY1, srcX2, srcY2
-                        null);
+                    x + w, y - 1, x + w + 1, y, // dstX1, dstY1, dstX2, dstY2
+                    w - 1, 0, w, 1, // srcX1, srcY1, srcX2, srcY2
+                    null);
 
                 // Copy the image's right column to (x + w, y).
                 g.drawImage(image,
-                        x + w, y, x + w + 1, y + h, // dstX1, dstY1, dstX2, dstY2
-                        w - 1, 0, w, h, // srcX1, srcY1, srcX2, srcY2
-                        null);
+                    x + w, y, x + w + 1, y + h, // dstX1, dstY1, dstX2, dstY2
+                    w - 1, 0, w, h, // srcX1, srcY1, srcX2, srcY2
+                    null);
 
                 // Copy the image's bottom right corner to (x + w, y + h).
                 g.drawImage(image,
-                        x + w, y + h, x + w + 1, y + h + 1, // dstX1, dstY1, dstX2, dstY2
-                        w - 1, h - 1, w, h, // srcX1, srcY1, srcX2, srcY2
-                        null);
+                    x + w, y + h, x + w + 1, y + h + 1, // dstX1, dstY1, dstX2, dstY2
+                    w - 1, h - 1, w, h, // srcX1, srcY1, srcX2, srcY2
+                    null);
 
                 // Copy the image's bottom row to (x, y + h).
                 g.drawImage(image,
-                        x, y + h, x + w, y + h + 1, // dstX1, dstY1, dstX2, dstY2
-                        0, h - 1, w, h, // srcX1, srcY1, srcX2, srcY2
-                        null);
+                    x, y + h, x + w, y + h + 1, // dstX1, dstY1, dstX2, dstY2
+                    0, h - 1, w, h, // srcX1, srcY1, srcX2, srcY2
+                    null);
 
                 // Copy the image's bottom left corner to (x - 1, y + h).
                 g.drawImage(image,
-                        x - 1, y + h, x, y + h + 1, // dstX1, dstY1, dstX2, dstY2
-                        0, h - 1, 1, h, // srcX1, srcY1, srcX2, srcY2
-                        null);
+                    x - 1, y + h, x, y + h + 1, // dstX1, dstY1, dstX2, dstY2
+                    0, h - 1, 1, h, // srcX1, srcY1, srcX2, srcY2
+                    null);
 
                 // Copy the image's left column to (x - 1, y).
                 g.drawImage(image,
-                        x - 1, y, x, y + h, // dstX1, dstY1, dstX2, dstY2
-                        0, 0, 1, h, // srcX1, srcY1, srcX2, srcY2
-                        null);
+                    x - 1, y, x, y + h, // dstX1, dstY1, dstX2, dstY2
+                    0, 0, 1, h, // srcX1, srcY1, srcX2, srcY2
+                    null);
             }
-        } finally {
+        }
+        finally
+        {
             g.dispose();
         }
     }
@@ -907,11 +955,10 @@ public class TextureAtlas {
      * @param newBackingImage the backing image corresponding to the new layout.
      */
     @SuppressWarnings({"UnusedParameters"})
-    protected void beginMoveEntries(BufferedImage oldBackingImage, BufferedImage newBackingImage) {
+    protected void beginMoveEntries(BufferedImage oldBackingImage, BufferedImage newBackingImage)
+    {
         if (this.g != null) // This should never happen, but we check anyway.
-        {
             this.g.dispose();
-        }
 
         this.g = newBackingImage.createGraphics();
         this.g.setComposite(AlphaComposite.Src); // Replace destination pixels with source pixels.
@@ -927,7 +974,8 @@ public class TextureAtlas {
      * @param newBackingImage the backing image corresponding to the new layout.
      */
     @SuppressWarnings({"UnusedParameters"})
-    protected void endMoveEntries(BufferedImage oldBackingImage, BufferedImage newBackingImage) {
+    protected void endMoveEntries(BufferedImage oldBackingImage, BufferedImage newBackingImage)
+    {
         if (this.g != null) // This should never happen, but we check anyway.
         {
             this.g.dispose();
@@ -947,29 +995,33 @@ public class TextureAtlas {
      * image and new backing image.
      *
      * @param oldBackingImage the backing image corresponding to the previous layout.
-     * @param oldRect the element's location in oldBackingImage.
+     * @param oldRect         the element's location in oldBackingImage.
      * @param newBackingImage the backing image corresponding to the new layout.
-     * @param newRect the element's location in newBackingImage.
+     * @param newRect         the element's location in newBackingImage.
      */
-    protected void moveEntry(BufferedImage oldBackingImage, Rect oldRect, BufferedImage newBackingImage, Rect newRect) {
+    protected void moveEntry(BufferedImage oldBackingImage, Rect oldRect, BufferedImage newBackingImage, Rect newRect)
+    {
         // Note that there is no need to update the rectangle instance associated with the entry for this rectangle. The
         // JOGL rectangle packer automatically takes care of updating the rectangle for us.
 
         this.g.setComposite(AlphaComposite.Src); // Replace destination pixels with the clear color (disables blending).
 
-        if (oldBackingImage == newBackingImage) {
+        if (oldBackingImage == newBackingImage)
+        {
             // The backing image has not changed. Move the entry's rectangle from its old location to its new location.
             this.g.copyArea(oldRect.x(), oldRect.y(), oldRect.w(), oldRect.h(), // x, y, width, height
-                    newRect.x() - oldRect.x(), newRect.y() - oldRect.y()); // dx, dy
-        } else {
+                newRect.x() - oldRect.x(), newRect.y() - oldRect.y()); // dx, dy
+        }
+        else
+        {
             // The backing image is changing. Copy the entry from its location in the old backing images to its location
             // in the new backing image.
             this.g.drawImage(oldBackingImage,
-                    // dstX1, dstY1, dstX2, dstY2
-                    newRect.x(), newRect.y(), newRect.x() + newRect.w(), newRect.y() + newRect.h(),
-                    // srcX1, srcY1, srcX2, srcY2
-                    oldRect.x(), oldRect.y(), oldRect.x() + oldRect.w(), oldRect.y() + oldRect.h(),
-                    null);
+                // dstX1, dstY1, dstX2, dstY2
+                newRect.x(), newRect.y(), newRect.x() + newRect.w(), newRect.y() + newRect.h(),
+                // srcX1, srcY1, srcX2, srcY2
+                oldRect.x(), oldRect.y(), oldRect.x() + oldRect.w(), oldRect.y() + oldRect.h(),
+                null);
         }
     }
 
@@ -978,7 +1030,8 @@ public class TextureAtlas {
      *
      * @param entry the entry who's last used time is marked.
      */
-    protected void markUsed(Entry entry) {
+    protected void markUsed(Entry entry)
+    {
         entry.lastUsed = System.nanoTime();
     }
 
@@ -987,10 +1040,10 @@ public class TextureAtlas {
      *
      * @return <code>true</code> if this removed an entry, and <code>false</code> if there are no entries to remove.
      */
-    protected boolean removeLeastRecentlyUsedEntry() {
-        if (this.entryMap.isEmpty()) {
+    protected boolean removeLeastRecentlyUsedEntry()
+    {
+        if (this.entryMap.isEmpty())
             return false;
-        }
 
         Entry[] timeOrderedEntries = new Entry[this.entryMap.size()];
         Arrays.sort(this.entryMap.values().toArray(timeOrderedEntries));
@@ -1008,7 +1061,8 @@ public class TextureAtlas {
      *
      * @return the region of this texture atlas that must be synchronized.
      */
-    protected Rectangle getDirtyRect() {
+    protected Rectangle getDirtyRect()
+    {
         return this.dirtyRect;
     }
 
@@ -1016,26 +1070,27 @@ public class TextureAtlas {
      * Marks a region of this texture atlas' backing image as needing to be synchronized with the OpenGL texture. If
      * there is already a dirty region, the final dirty region is the union of the two.
      *
-     * @param x the X coordinate of the region's upper-left corner, in pixels.
-     * @param y the Y coordinate of the region's upper-left corner, in pixels.
-     * @param width the region's width, in pixels.
+     * @param x      the X coordinate of the region's upper-left corner, in pixels.
+     * @param y      the Y coordinate of the region's upper-left corner, in pixels.
+     * @param width  the region's width, in pixels.
      * @param height the region's height, in pixels.
      */
-    protected void markDirty(int x, int y, int width, int height) {
+    protected void markDirty(int x, int y, int width, int height)
+    {
         Rectangle rect = new Rectangle(x, y, width, height);
 
-        if (this.dirtyRect == null) {
+        if (this.dirtyRect == null)
             this.dirtyRect = rect;
-        } else {
+        else
             this.dirtyRect.add(rect);
-        }
     }
 
     /**
      * Removes any regions in this texture atlas' backing image previously marked as needing to be synchronized with the
      * OpenGL texture.
      */
-    protected void clearDirtyRect() {
+    protected void clearDirtyRect()
+    {
         this.dirtyRect = null;
     }
 
@@ -1046,18 +1101,20 @@ public class TextureAtlas {
      *
      * @return this instance's OpenGL texture, or <code>null</code> if the texture does not currently exist.
      */
-    protected Texture getTexture(DrawContext dc) {
+    protected Texture getTexture(DrawContext dc)
+    {
         return dc.getTextureCache().getTexture(this.textureKey);
     }
 
     /**
      * Specifies the OpenGL {@link Texture} associated with this texture atlas.
      *
-     * @param dc the current draw context.
+     * @param dc      the current draw context.
      * @param texture this instance's OpenGL texture, or <code>null</code> to specify that this texture atlas has no
-     * texture.
+     *                texture.
      */
-    protected void setTexture(DrawContext dc, Texture texture) {
+    protected void setTexture(DrawContext dc, Texture texture)
+    {
         dc.getTextureCache().put(this.textureKey, texture);
     }
 
@@ -1069,18 +1126,19 @@ public class TextureAtlas {
      *
      * @param dc the draw context containing the GPU resource cache to remove textures from.
      */
-    protected void disposeOldTextures(DrawContext dc) {
+    protected void disposeOldTextures(DrawContext dc)
+    {
         // Process each key in the disposedTextureKeys queue. Since TextureAtlas keys are unique to each instance, the
         // texture keys are not shared with any other object, and therefore are orphaned once they're unused. We
         // explicitly remove them from the texture cache to ensure that this texture atlas uses a minimal amount of
         // texture memory.
         Object key;
-        while ((key = this.disposedTextureKeys.poll()) != null) {
+        while ((key = this.disposedTextureKeys.poll()) != null)
+        {
             // The key may never have been be associated with a texture if this texture atlas was expanded or contracted
             // more than once between calls to bind. In this case we just ignore the disposed key and continue.
-            if (dc.getTextureCache().contains(key)) {
+            if (dc.getTextureCache().contains(key))
                 dc.getTextureCache().remove(key);
-            }
         }
     }
 
@@ -1093,14 +1151,18 @@ public class TextureAtlas {
      *
      * @return this texture atlas' OpenGL texture.
      */
-    protected Texture syncTexture(DrawContext dc) {
+    protected Texture syncTexture(DrawContext dc)
+    {
         Texture texture = this.getTexture(dc);
 
-        if (texture == null) {
+        if (texture == null)
+        {
             // This texture atlas' OpenGL texture does not exist on the specified draw context. Load the entire backing
             // image into a new texture and use that as this texture atlas' OpenGL texture.
             texture = this.makeTextureWithBackingImage(dc);
-        } else if (this.getDirtyRect() != null) {
+        }
+        else if (this.getDirtyRect() != null)
+        {
             // A region of this texture atlas' OpenGL texture is out-of-sync; load only the necessary portion of the
             // backing image into the texture.
             texture = this.updateTextureWithSubImage(dc, this.getDirtyRect());
@@ -1120,7 +1182,8 @@ public class TextureAtlas {
      *
      * @return a new OpenGL texture containing the data from this texture atlas' backing image.
      */
-    protected Texture makeTextureWithBackingImage(DrawContext dc) {
+    protected Texture makeTextureWithBackingImage(DrawContext dc)
+    {
         BufferedImage backingImage = (BufferedImage) this.rectPacker.getBackingStore();
         Texture texture = AWTTextureIO.newTexture(dc.getGL().getGLProfile(), backingImage, this.isUseMipMaps());
 
@@ -1134,13 +1197,14 @@ public class TextureAtlas {
      * Loads a sub-region of this texture atlas' backing image into its OpenGL texture. This does nothing and returns
      * code <code>null</code> if this texture atlas' does not have an OpenGL texture.
      *
-     * @param dc the current draw context.
+     * @param dc   the current draw context.
      * @param rect the rectangle to load.
      *
      * @return this texture atlas' OpenGL texture, or <code>null</code> if this texture atlas' does not have an OpenGL
-     * texture.
+     *         texture.
      */
-    protected Texture updateTextureWithSubImage(DrawContext dc, Rectangle rect) {
+    protected Texture updateTextureWithSubImage(DrawContext dc, Rectangle rect)
+    {
         Texture texture = this.getTexture(dc);
         if (texture == null) // This should never happen, but we check anyway.
         {
@@ -1149,7 +1213,8 @@ public class TextureAtlas {
             return null;
         }
 
-        if (!this.isUseMipMaps() || texture.isUsingAutoMipmapGeneration()) {
+        if (!this.isUseMipMaps() || texture.isUsingAutoMipmapGeneration())
+        {
             // If we're either not using mip-maps or we have automatic mip-map generation, then load the sub-image
             // corresponding to the specified rectangle into the OpenGL texture. Note that the x and y coordinates of
             // the dirty region do not need to be translated because the image and texture share the same coordinate
@@ -1159,7 +1224,9 @@ public class TextureAtlas {
             GL gl = dc.getGL();
             TextureData subTextureData = AWTTextureIO.newTextureData(gl.getGLProfile(), subImage, false);
             texture.updateSubImage(gl, subTextureData, 0, rect.x, rect.y);
-        } else {
+        }
+        else
+        {
             // If we're using mip-maps but do not have automatic mip-map generation, we must load the entire image into
             // the texture in order to force JOGL to recompute the mip-map data for all levels in Java. We must also
             // respecify the texture parameters, because Texture.updateImage overwrites the texture parameters with
@@ -1180,7 +1247,8 @@ public class TextureAtlas {
      *
      * @param dc the current draw context.
      */
-    protected void setTextureParameters(DrawContext dc) {
+    protected void setTextureParameters(DrawContext dc)
+    {
         GL gl = dc.getGL();
 
         // The JOGL Texture class specifies appropriate default values for the following OpenGL texture parameters:
@@ -1188,9 +1256,12 @@ public class TextureAtlas {
         // - GL_TEXTURE_MAG_FILTER
         // - GL_TEXTURE_WRAP_S
         // - GL_TEXTURE_WRAP_T
-        if (this.isUseMipMaps() && this.isUseAnisotropy()) {
+
+        if (this.isUseMipMaps() && this.isUseAnisotropy())
+        {
             double maxAnisotropy = dc.getGLRuntimeCapabilities().getMaxTextureAnisotropy();
-            if (dc.getGLRuntimeCapabilities().isUseAnisotropicTextureFilter() && maxAnisotropy >= 2.0) {
+            if (dc.getGLRuntimeCapabilities().isUseAnisotropicTextureFilter() && maxAnisotropy >= 2.0)
+            {
                 gl.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAX_ANISOTROPY_EXT, (float) maxAnisotropy);
             }
         }

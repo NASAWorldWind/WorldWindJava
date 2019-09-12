@@ -14,11 +14,12 @@ import gov.nasa.worldwind.util.*;
  * @author tag
  * @version $Id: BMNGOneImage.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BMNGOneImage extends RenderableLayer {
-
+public class BMNGOneImage extends RenderableLayer
+{
     protected static final String IMAGE_PATH = "images/BMNG_world.topo.bathy.200405.3.2048x1024.dds";
 
-    public BMNGOneImage() {
+    public BMNGOneImage()
+    {
         this.setName(Logging.getMessage("layers.Earth.BlueMarbleOneImageLayer.Name"));
         this.addRenderable(new SurfaceImage(IMAGE_PATH, Sector.FULL_SPHERE));
 
@@ -27,7 +28,8 @@ public class BMNGOneImage extends RenderableLayer {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return Logging.getMessage("layers.Earth.BlueMarbleOneImageLayer.Name");
     }
 }

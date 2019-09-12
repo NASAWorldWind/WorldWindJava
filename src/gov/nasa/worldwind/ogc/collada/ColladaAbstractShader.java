@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.collada;
 
 /**
@@ -11,14 +12,15 @@ package gov.nasa.worldwind.ogc.collada;
  * @author pabercrombie
  * @version $Id: ColladaAbstractShader.java 654 2012-06-25 04:15:52Z pabercrombie $
  */
-public class ColladaAbstractShader extends ColladaAbstractObject {
-
+public class ColladaAbstractShader extends ColladaAbstractObject
+{
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    protected ColladaAbstractShader(String namespaceURI) {
+    protected ColladaAbstractShader(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
@@ -27,7 +29,8 @@ public class ColladaAbstractShader extends ColladaAbstractObject {
      *
      * @return The emission parameter, or null if none is set.
      */
-    public ColladaTextureOrColor getEmission() {
+    public ColladaTextureOrColor getEmission()
+    {
         return (ColladaTextureOrColor) this.getField("emission");
     }
 
@@ -36,7 +39,8 @@ public class ColladaAbstractShader extends ColladaAbstractObject {
      *
      * @return The ambient parameter, or null if none is set.
      */
-    public ColladaTextureOrColor getAmbient() {
+    public ColladaTextureOrColor getAmbient()
+    {
         return (ColladaTextureOrColor) this.getField("ambient");
     }
 
@@ -45,7 +49,8 @@ public class ColladaAbstractShader extends ColladaAbstractObject {
      *
      * @return The diffuse parameter, or null if none is set.
      */
-    public ColladaTextureOrColor getDiffuse() {
+    public ColladaTextureOrColor getDiffuse()
+    {
         return (ColladaTextureOrColor) this.getField("diffuse");
     }
 
@@ -54,7 +59,8 @@ public class ColladaAbstractShader extends ColladaAbstractObject {
      *
      * @return The specular parameter, or null if none is set.
      */
-    public ColladaTextureOrColor getSpecular() {
+    public ColladaTextureOrColor getSpecular()
+    {
         return (ColladaTextureOrColor) this.getField("specular");
     }
 }

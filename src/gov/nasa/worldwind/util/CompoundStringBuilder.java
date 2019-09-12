@@ -14,8 +14,8 @@ import java.util.Arrays;
  * @author dcollins
  * @version $Id: CompoundStringBuilder.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class CompoundStringBuilder {
-
+public class CompoundStringBuilder
+{
     protected static final int DEFAULT_INITIAL_CAPACITY = 16;
 
     protected StringBuilder buffer;
@@ -28,18 +28,21 @@ public class CompoundStringBuilder {
      * Constructs a CompoundStringBuilder with the specified backing StringBuilder and initial capacity.
      *
      * @param stringBuilder the StringBuilder in which to store the string data.
-     * @param capacity the compound buffer's initial capacity.
+     * @param capacity      the compound buffer's initial capacity.
      *
      * @throws IllegalArgumentException if the stringBuilder is null or if the capacity is less than 1.
      */
-    public CompoundStringBuilder(StringBuilder stringBuilder, int capacity) {
-        if (stringBuilder == null) {
+    public CompoundStringBuilder(StringBuilder stringBuilder, int capacity)
+    {
+        if (stringBuilder == null)
+        {
             String message = Logging.getMessage("nullValue.StringBuilderIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (capacity < 1) {
+        if (capacity < 1)
+        {
             String message = Logging.getMessage("generic.CapacityIsInvalid", capacity);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -58,14 +61,14 @@ public class CompoundStringBuilder {
      *
      * @throws IllegalArgumentException if the capacity is less than 1.
      */
-    public CompoundStringBuilder(int capacity) {
+    public CompoundStringBuilder(int capacity)
+    {
         this(new StringBuilder(), capacity);
     }
 
-    /**
-     * Constructs a CompoundStringBuilder with a default backing StringBuilder, and the default initial capacity.
-     */
-    public CompoundStringBuilder() {
+    /** Constructs a CompoundStringBuilder with a default backing StringBuilder, and the default initial capacity. */
+    public CompoundStringBuilder()
+    {
         this(new StringBuilder(), DEFAULT_INITIAL_CAPACITY);
     }
 
@@ -74,7 +77,8 @@ public class CompoundStringBuilder {
      *
      * @return the number of strings in this CompoundStringBuilder.
      */
-    public int size() {
+    public int size()
+    {
         return this.count;
     }
 
@@ -87,8 +91,10 @@ public class CompoundStringBuilder {
      *
      * @throws IllegalArgumentException if the index is out of range.
      */
-    public int substringLength(int index) {
-        if (index < 0 || index >= this.count) {
+    public int substringLength(int index)
+    {
+        if (index < 0 || index >= this.count)
+        {
             String message = Logging.getMessage("generic.indexOutOfRange", index);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -106,8 +112,10 @@ public class CompoundStringBuilder {
      *
      * @throws IllegalArgumentException if the index is out of range.
      */
-    public String substring(int index) {
-        if (index < 0 || index >= this.count) {
+    public String substring(int index)
+    {
+        if (index < 0 || index >= this.count)
+        {
             String message = Logging.getMessage("generic.indexOutOfRange", index);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -126,8 +134,10 @@ public class CompoundStringBuilder {
      *
      * @throws IllegalArgumentException if the index is out of range.
      */
-    public CharSequence subSequence(int index) {
-        if (index < 0 || index >= this.count) {
+    public CharSequence subSequence(int index)
+    {
+        if (index < 0 || index >= this.count)
+        {
             String message = Logging.getMessage("generic.indexOutOfRange", index);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -149,17 +159,18 @@ public class CompoundStringBuilder {
      *
      * @throws IllegalArgumentException if the charSequence is null.
      */
-    public int append(CharSequence charSequence) {
-        if (charSequence == null) {
+    public int append(CharSequence charSequence)
+    {
+        if (charSequence == null)
+        {
             String message = Logging.getMessage("nullValue.CharSequenceIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         int newCount = 1 + this.count;
-        if (newCount > this.capacity) {
+        if (newCount > this.capacity)
             this.expandCapacity(newCount);
-        }
 
         int index = this.count;
         this.offsets[index] = this.buffer.length();
@@ -174,20 +185,25 @@ public class CompoundStringBuilder {
      * Clears this CompoundStringBuilder's backing StringBuilder and sets the number of substrings to zero. This does
      * not free any memory associated with this CompoundStringBuilder.
      */
-    public void clear() {
+    public void clear()
+    {
         this.buffer.delete(0, this.buffer.length());
         this.count = 0;
     }
 
-    protected void expandCapacity(int minCapacity) {
+    protected void expandCapacity(int minCapacity)
+    {
         int newCapacity = 2 * this.capacity;
 
         // If the new capacity overflows the range of 32-bit integers, then use the largest 32-bit integer.
-        if (newCapacity < 0) {
+        if (newCapacity < 0)
+        {
             newCapacity = Integer.MAX_VALUE;
-        } // If the new capacity is still not large enough for the minimum capacity specified, then just use the minimum
+        }
+        // If the new capacity is still not large enough for the minimum capacity specified, then just use the minimum
         // capacity specified.
-        else if (newCapacity < minCapacity) {
+        else if (newCapacity < minCapacity)
+        {
             newCapacity = minCapacity;
         }
 

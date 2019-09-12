@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.multiwindow;
 
 import gov.nasa.worldwind.*;
@@ -29,19 +30,19 @@ import java.awt.event.*;
  * Most WorldWind {@link Globe} and {@link Layer} objects can be shared among WorldWindows. Those that cannot be shared
  * have an operational dependency on the WorldWindow they're associated with. An example is the {@link
  * ViewControlsLayer} layer for on-screen navigation. Because this layer responds to input events within a specific
- * WorldWindow, it is not sharable. Refer to the WorldWind Overview page for a list of layers that cannot be shared. //
- * TODO: include the reference to overview.html.
+ * WorldWindow, it is not sharable. Refer to the WorldWind Overview page for a list of layers that cannot be shared.
+ * // TODO: include the reference to overview.html.
  *
  * @version $Id: CardLayoutUsage.java 1853 2014-02-28 19:28:23Z tgaskins $
  */
-public class CardLayoutUsage extends JFrame {
-
+public class CardLayoutUsage extends JFrame
+{
     private static class WWPanel extends JPanel // A class to encapsulate a WorldWindow that shares resources.
     {
-
         WorldWindowGLCanvas wwd;
 
-        public WWPanel(WorldWindowGLCanvas shareWith, int width, int height) {
+        public WWPanel(WorldWindowGLCanvas shareWith, int width, int height)
+        {
             // To share resources among WorldWindows, pass the first WorldWindow to the constructor of the other
             // WorldWindows.
             this.wwd = shareWith != null ? new WorldWindowGLCanvas(shareWith) : new WorldWindowGLCanvas();
@@ -60,8 +61,10 @@ public class CardLayoutUsage extends JFrame {
     private WWPanel wwpA;
     private WWPanel wwpB;
 
-    public CardLayoutUsage() {
-        try {
+    public CardLayoutUsage()
+    {
+        try
+        {
             // Create an inner panel and the CardLayout manager.
             JPanel cardPanel = new JPanel();
             cardPanel.setLayout(new CardLayout());
@@ -76,11 +79,13 @@ public class CardLayoutUsage extends JFrame {
             Globe earth = new Earth();
 
             // Create layers that both WorldWindows can share.
-            Layer[] layers = new Layer[]{
-                new StarsLayer(),
-                new CompassLayer(),
-                new BMNGWMSLayer(),
-                new LandsatI3WMSLayer(),};
+            Layer[] layers = new Layer[]
+                {
+                    new StarsLayer(),
+                    new CompassLayer(),
+                    new BMNGWMSLayer(),
+                    new LandsatI3WMSLayer(),
+                };
 
             // Create two models and pass them the shared layers.
             Model modelForWindowA = new BasicModel();
@@ -121,17 +126,22 @@ public class CardLayoutUsage extends JFrame {
 
             wwpA.wwd.redraw();
             wwpB.wwd.redraw();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
-    private JPanel makeControlPanel(final CardLayout cardLayout, final JPanel cardLayoutParent) {
+    private JPanel makeControlPanel(final CardLayout cardLayout, final JPanel cardLayoutParent)
+    {
         final JButton buttonA = new JButton("WorldWindow A");
         final JButton buttonB = new JButton(" WorldWindow B");
 
-        buttonA.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+        buttonA.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent actionEvent)
+            {
                 cardLayout.show(cardLayoutParent, "WorldWindow A");
                 buttonA.setEnabled(false);
                 buttonB.setEnabled(true);
@@ -139,8 +149,10 @@ public class CardLayoutUsage extends JFrame {
             }
         });
 
-        buttonB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+        buttonB.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent actionEvent)
+            {
                 cardLayout.show(cardLayoutParent, "WorldWindow B");
                 buttonA.setEnabled(true);
                 buttonB.setEnabled(false);
@@ -158,9 +170,12 @@ public class CardLayoutUsage extends JFrame {
         return panel;
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+    public static void main(String[] args)
+    {
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new CardLayoutUsage();
             }
         });

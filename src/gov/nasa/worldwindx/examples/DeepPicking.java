@@ -17,17 +17,17 @@ import gov.nasa.worldwind.render.airspaces.Airspace;
  * SelectEvent.
  * <p>
  * In order to enable deep picking, any batch picking for the desired elements must be disabled and the
- * SceneController's deep picking property must be enabled. See
- * <code>{@link gov.nasa.worldwind.SceneController#setDeepPickEnabled(boolean)}</code>.
+ * SceneController's deep picking property must be enabled. See <code>{@link gov.nasa.worldwind.SceneController#setDeepPickEnabled(boolean)}</code>.
  *
  * @author tag
  * @version $Id: DeepPicking.java 2231 2014-08-15 19:03:12Z dcollins $
  */
-public class DeepPicking extends Airspaces {
-
-    public static class AppFrame extends Airspaces.AppFrame {
-
-        public AppFrame() {
+public class DeepPicking extends Airspaces
+{
+    public static class AppFrame extends Airspaces.AppFrame
+    {
+        public AppFrame()
+        {
             // Prohibit batch picking for the airspaces.
             this.disableBatchPicking();
 
@@ -35,12 +35,17 @@ public class DeepPicking extends Airspaces {
             this.getWwd().getSceneController().setDeepPickEnabled(true);
 
             // Register a select listener to print the class names of the items under the cursor.
-            this.getWwd().addSelectListener(new SelectListener() {
-                public void selected(SelectEvent event) {
-                    if (event.getEventAction().equals(SelectEvent.HOVER) && event.getObjects() != null) {
+            this.getWwd().addSelectListener(new SelectListener()
+            {
+                public void selected(SelectEvent event)
+                {
+                    if (event.getEventAction().equals(SelectEvent.HOVER) && event.getObjects() != null)
+                    {
                         System.out.printf("%d objects\n", event.getObjects().size());
-                        if (event.getObjects().size() > 1) {
-                            for (PickedObject po : event.getObjects()) {
+                        if (event.getObjects().size() > 1)
+                        {
+                            for (PickedObject po : event.getObjects())
+                            {
                                 System.out.println(po.getObject().getClass().getName());
                             }
                         }
@@ -49,20 +54,23 @@ public class DeepPicking extends Airspaces {
             });
         }
 
-        protected void disableBatchPicking() {
-            for (Layer layer : this.getWwd().getModel().getLayers()) {
-                if (!layer.getName().toLowerCase().contains("airspace")) {
+        protected void disableBatchPicking()
+        {
+            for (Layer layer : this.getWwd().getModel().getLayers())
+            {
+                if (!layer.getName().toLowerCase().contains("airspace"))
                     continue;
-                }
 
-                for (Renderable airspace : ((RenderableLayer) layer).getRenderables()) {
+                for (Renderable airspace : ((RenderableLayer) layer).getRenderables())
+                {
                     ((Airspace) airspace).setEnableBatchPicking(false);
                 }
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         start("WorldWind Deep Picking", AppFrame.class);
     }
 }

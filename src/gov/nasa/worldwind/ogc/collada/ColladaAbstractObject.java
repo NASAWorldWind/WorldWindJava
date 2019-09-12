@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.collada;
 
 import gov.nasa.worldwind.geom.Box;
@@ -16,22 +17,22 @@ import gov.nasa.worldwind.util.xml.*;
  * @author pabercrombie
  * @version $Id: ColladaAbstractObject.java 1696 2013-10-31 18:46:55Z tgaskins $
  */
-public abstract class ColladaAbstractObject extends AbstractXMLEventParser {
-
+public abstract class ColladaAbstractObject extends AbstractXMLEventParser
+{
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    protected ColladaAbstractObject(String namespaceURI) {
+    protected ColladaAbstractObject(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
-    /**
-     * {@inheritDoc} Overridden to return ColladaRoot instead of a XMLEventParser.
-     */
+    /** {@inheritDoc} Overridden to return ColladaRoot instead of a XMLEventParser. */
     @Override
-    public ColladaRoot getRoot() {
+    public ColladaRoot getRoot()
+    {
         XMLEventParser root = super.getRoot();
         return root instanceof ColladaRoot ? (ColladaRoot) root : null;
     }
@@ -44,8 +45,10 @@ public abstract class ColladaAbstractObject extends AbstractXMLEventParser {
      *
      * @throws IllegalArgumentException if either the traversal context is null.
      */
-    public Box getLocalExtent(ColladaTraversalContext tc) {
-        if (tc == null) {
+    public Box getLocalExtent(ColladaTraversalContext tc)
+    {
+        if (tc == null)
+        {
             String message = Logging.getMessage("nullValue.TraversalContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);

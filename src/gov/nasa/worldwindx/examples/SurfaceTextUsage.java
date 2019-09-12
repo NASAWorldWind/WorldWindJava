@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.Configuration;
@@ -17,11 +18,12 @@ import gov.nasa.worldwind.render.SurfaceText;
  * @author pabercrombie
  * @version $Id: SurfaceTextUsage.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SurfaceTextUsage extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+public class SurfaceTextUsage extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             super(true, true, false);
 
             RenderableLayer layer = new RenderableLayer();
@@ -33,7 +35,8 @@ public class SurfaceTextUsage extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 38.9345);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -120.1670);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 50000);

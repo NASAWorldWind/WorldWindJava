@@ -19,8 +19,8 @@ import java.beans.PropertyChangeEvent;
  * @author dcollins
  * @version $Id: DataChooserPanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class DataChooserPanel extends JPanel {
-
+public class DataChooserPanel extends JPanel
+{
     private JLabel title;
     private JLabel description;
     // Logical data components.
@@ -34,46 +34,56 @@ public class DataChooserPanel extends JPanel {
     private JScrollPane dataScrollPane;
     private JLabel dataDescription;
 
-    public DataChooserPanel() {
+    public DataChooserPanel()
+    {
         this.propertyEvents = new PropertyEvents();
         makeComponents();
         layoutComponents();
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return this.title.getText();
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title.setText(title);
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return this.description.getText();
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description.setText(description);
     }
 
-    public String getDataDescription() {
+    public String getDataDescription()
+    {
         return this.dataDescription.getText();
     }
 
-    public void setDataDescription(String dataDescription) {
+    public void setDataDescription(String dataDescription)
+    {
         this.dataDescription.setText(dataDescription);
     }
 
-    public void setFileSetList(Collection<FileSet> fileSetList) {
+    public void setFileSetList(Collection<FileSet> fileSetList)
+    {
         removeListeners(this.fileSetList);
         this.fileSetList = fileSetList;
         addListeners(this.fileSetList);
 
         this.selectButtons = new HashMap<FileSet, JToggleButton>();
 
-        if (fileSetList != null && fileSetList.size() > 0) {
+        if (fileSetList != null && fileSetList.size() > 0)
+        {
             Box box = Box.createVerticalBox();
-            for (FileSet set : fileSetList) {
+            for (FileSet set : fileSetList)
+            {
                 JCheckBox checkBox = new JCheckBox();
                 checkBox.putClientProperty("fileSet", set);
                 checkBox.setSelected(set.isSelected());
@@ -90,7 +100,9 @@ public class DataChooserPanel extends JPanel {
             }
             this.dataScrollPane.setViewportView(box);
             this.dataPanel.setVisible(true);
-        } else {
+        }
+        else
+        {
             this.dataScrollPane.setViewportView(null);
             this.dataPanel.setVisible(false);
         }
@@ -99,24 +111,25 @@ public class DataChooserPanel extends JPanel {
         fileSetSelectionChanged(null);
     }
 
-    private String makeTitle(FileSet set) {
+    private String makeTitle(FileSet set)
+    {
         String title = null;
-        if (set != null) {
+        if (set != null)
+        {
             StringBuilder sb = new StringBuilder();
             sb.append("<html>");
-            if (set.getTitle() != null) {
+            if (set.getTitle() != null)
                 sb.append(set.getTitle());
-            } else if (set.getIdentifier() != null) {
+            else if (set.getIdentifier() != null)
                 sb.append(set.getIdentifier());
-            } else {
+            else
                 sb.append("Various");
-            }
             int fileCount = set.getFileCount();
-            if (fileCount > 0) {
+            if (fileCount > 0)
+            {
                 sb.append("<font size=\"-2\">");
-                if (sb.length() > 0) {
+                if (sb.length() > 0)
                     sb.append(" - ");
-                }
                 sb.append(String.format("%,d", fileCount)).append(" file").append(fileCount > 1 ? "s" : "");
                 sb.append("</font>");
             }
@@ -126,57 +139,67 @@ public class DataChooserPanel extends JPanel {
         return title;
     }
 
-    private void fileSetClicked(ItemEvent e) {
-        if (e != null) {
+    private void fileSetClicked(ItemEvent e)
+    {
+        if (e != null)
+        {
             FileSet set = null;
-            if (e.getItem() != null && e.getItem() instanceof JComponent) {
+            if (e.getItem() != null && e.getItem() instanceof JComponent)
+            {
                 Object property = ((JComponent) e.getItem()).getClientProperty("fileSet");
-                if (property != null && property instanceof FileSet) {
+                if (property != null && property instanceof FileSet)
                     set = (FileSet) property;
-                }
             }
 
-            if (set != null) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
+            if (set != null)
+            {
+                if (e.getStateChange() == ItemEvent.SELECTED)
                     set.setSelected(true);
-                } else if (e.getStateChange() == ItemEvent.DESELECTED) {
+                else if (e.getStateChange() == ItemEvent.DESELECTED)
                     set.setSelected(false);
-                }
             }
         }
     }
 
-    private void setAllSelected(boolean b) {
-        if (this.fileSetList != null) {
-            for (FileSet set : this.fileSetList) {
+    private void setAllSelected(boolean b)
+    {
+        if (this.fileSetList != null)
+        {
+            for (FileSet set : this.fileSetList)
+            {
                 set.setSelected(b);
             }
         }
     }
 
-    private void selectAllPressed() {
+    private void selectAllPressed()
+    {
         setAllSelected(true);
     }
 
-    private void deselectAllPressed() {
+    private void deselectAllPressed()
+    {
         setAllSelected(false);
     }
 
-    private void fileSetSelectionChanged(Object source) {
+    private void fileSetSelectionChanged(Object source)
+    {
         // Make sure the CheckBox selection reflects the FileSet selection state.
-        if (source != null && source instanceof FileSet) {
+        if (source != null && source instanceof FileSet)
+        {
             FileSet set = (FileSet) source;
             JToggleButton button = this.selectButtons.get(set);
-            if (button != null) {
+            if (button != null)
                 button.setSelected(set.isSelected());
-            }
         }
 
         // Enable "Select All" and "Select None" only when necessary.
         boolean allSelected = true;
         boolean anySelected = false;
-        if (this.fileSetList != null) {
-            for (FileSet set : this.fileSetList) {
+        if (this.fileSetList != null)
+        {
+            for (FileSet set : this.fileSetList)
+            {
                 allSelected &= set.isSelected();
                 anySelected |= set.isSelected();
             }
@@ -185,24 +208,29 @@ public class DataChooserPanel extends JPanel {
         this.deselectAllButton.setEnabled(anySelected);
     }
 
-    private void addListeners(Collection<FileSet> fileSetList) {
-        if (fileSetList != null) {
-            for (FileSet set : fileSetList) {
+    private void addListeners(Collection<FileSet> fileSetList)
+    {
+        if (fileSetList != null)
+        {
+            for (FileSet set : fileSetList)
+            {
                 set.addPropertyChangeListener(this.propertyEvents);
             }
         }
     }
 
-    private void removeListeners(Collection<FileSet> fileSetList) {
-        if (fileSetList != null) {
-            for (FileSet set : fileSetList) {
+    private void removeListeners(Collection<FileSet> fileSetList)
+    {
+        if (fileSetList != null)
+        {
+            for (FileSet set : fileSetList)
+            {
                 set.removePropertyChangeListener(this.propertyEvents);
             }
         }
     }
 
     private class PropertyEvents implements PropertyChangeListener {
-
         public void propertyChange(PropertyChangeEvent evt) {
             if (evt != null && evt.getPropertyName() != null) {
                 String propertyName = evt.getPropertyName();
@@ -214,7 +242,8 @@ public class DataChooserPanel extends JPanel {
         }
     }
 
-    private void makeComponents() {
+    private void makeComponents()
+    {
         this.title = new JLabel(" ");
         this.title.setBackground(Color.gray);
         this.title.setOpaque(true);
@@ -250,7 +279,8 @@ public class DataChooserPanel extends JPanel {
         this.dataDescription = new JLabel(" ");
     }
 
-    private void layoutComponents() {
+    private void layoutComponents()
+    {
         setLayout(new BorderLayout());
 
         JPanel p = new JPanel();

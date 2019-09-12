@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.*;
@@ -26,76 +27,44 @@ import java.util.Arrays;
  * @version $Id: SurfaceText.java 3092 2015-05-14 22:21:32Z tgaskins $
  */
 // TODO: add support for heading
-public class SurfaceText extends AbstractSurfaceObject implements GeographicText, Movable, Draggable {
-
-    /**
-     * Default text size.
-     */
+public class SurfaceText extends AbstractSurfaceObject implements GeographicText, Movable, Draggable
+{
+    /** Default text size. */
     public final static double DEFAULT_TEXT_SIZE_IN_METERS = 1000;
-    /**
-     * Default font.
-     */
+    /** Default font. */
     public static final Font DEFAULT_FONT = Font.decode("Arial-BOLD-24");
-    /**
-     * Default text color.
-     */
+    /** Default text color. */
     public static final Color DEFAULT_COLOR = Color.WHITE;
-    /**
-     * Default offset. The default offset centers the text on its geographic position both horizontally and vertically.
-     */
+    /** Default offset. The default offset centers the text on its geographic position both horizontally and vertically. */
     public static final Offset DEFAULT_OFFSET = new Offset(-0.5d, -0.5d, AVKey.FRACTION, AVKey.FRACTION);
 
-    /**
-     * The text to draw.
-     */
+    /** The text to draw. */
     protected CharSequence text;
-    /**
-     * Location at which to draw the text.
-     */
+    /** Location at which to draw the text. */
     protected Position location;
-    /**
-     * The height of the text in meters.
-     */
+    /** The height of the text in meters. */
     protected double textSizeInMeters = DEFAULT_TEXT_SIZE_IN_METERS;
-    /**
-     * Dragging Support
-     */
+    /** Dragging Support */
     protected boolean dragEnabled = true;
     protected DraggableSupport draggableSupport = null;
 
-    /**
-     * Font to use to draw the text. Defaults to {@link #DEFAULT_FONT}.
-     */
+    /** Font to use to draw the text. Defaults to {@link #DEFAULT_FONT}. */
     protected Font font = DEFAULT_FONT;
-    /**
-     * Color to use to draw the text. Defaults to {@link #DEFAULT_COLOR}.
-     */
+    /** Color to use to draw the text. Defaults to {@link #DEFAULT_COLOR}. */
     protected Color color = DEFAULT_COLOR;
-    /**
-     * Background color for the text. By default color will be generated to contrast with the text color.
-     */
+    /** Background color for the text. By default color will be generated to contrast with the text color. */
     protected Color bgColor;
-    /**
-     * Text priority. Can be used to implement text culling.
-     */
+    /** Text priority. Can be used to implement text culling. */
     protected double priority;
-    /**
-     * Offset that specifies where to place the text in relation to it's geographic position.
-     */
+    /** Offset that specifies where to place the text in relation to it's geographic position. */
     protected Offset offset = DEFAULT_OFFSET;
 
     // Computed each time text is rendered
-    /**
-     * Bounds of the text in pixels.
-     */
+    /** Bounds of the text in pixels. */
     protected Rectangle2D textBounds;
-    /**
-     * Geographic size of a pixel.
-     */
+    /** Geographic size of a pixel. */
     protected double pixelSizeInMeters;
-    /**
-     * Scaling factor applied to the text to maintain a constant geographic size.
-     */
+    /** Scaling factor applied to the text to maintain a constant geographic size. */
     protected double scale;
 
     /**
@@ -111,10 +80,11 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     /**
      * Create a new surface text object.
      *
-     * @param text Text to draw.
+     * @param text     Text to draw.
      * @param position Geographic location at which to draw the text.
      */
-    public SurfaceText(String text, Position position) {
+    public SurfaceText(String text, Position position)
+    {
         this.setText(text);
         this.setPosition(position);
     }
@@ -122,30 +92,30 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     /**
      * Create a new surface text object.
      *
-     * @param text Text to draw.
+     * @param text     Text to draw.
      * @param position Geographic location at which to draw the text.
-     * @param font Font to use when drawing text.
-     * @param color Color to use when drawing text.
+     * @param font     Font to use when drawing text.
+     * @param color    Color to use when drawing text.
      */
-    public SurfaceText(String text, Position position, Font font, Color color) {
+    public SurfaceText(String text, Position position, Font font, Color color)
+    {
         this.setText(text);
         this.setPosition(position);
         this.setFont(font);
         this.setColor(color);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public CharSequence getText() {
+    /** {@inheritDoc} */
+    public CharSequence getText()
+    {
         return this.text;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setText(CharSequence text) {
-        if (text == null) {
+    /** {@inheritDoc} */
+    public void setText(CharSequence text)
+    {
+        if (text == null)
+        {
             String message = Logging.getMessage("nullValue.StringIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -156,10 +126,9 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
         this.onShapeChanged();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Position getPosition() {
+    /** {@inheritDoc} */
+    public Position getPosition()
+    {
         return this.location;
     }
 
@@ -171,8 +140,10 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      *
      * @see #setOffset(Offset)
      */
-    public void setPosition(Position position) {
-        if (position == null) {
+    public void setPosition(Position position)
+    {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -182,88 +153,86 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
         this.onShapeChanged();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Font getFont() {
+    /** {@inheritDoc} */
+    public Font getFont()
+    {
         return this.font;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setFont(Font font) {
-        if (font == null) {
+    /** {@inheritDoc} */
+    public void setFont(Font font)
+    {
+        if (font == null)
+        {
             String message = Logging.getMessage("nullValue.FontIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         // Only set the font if it is different than the active font
-        if (!font.equals(this.font)) {
+        if (!font.equals(this.font))
+        {
             this.font = font;
             this.textBounds = null; // Need to recompute bounds
             this.onShapeChanged();
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Color getColor() {
+    /** {@inheritDoc} */
+    public Color getColor()
+    {
         return this.color;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setColor(Color color) {
-        if (color == null) {
+    /** {@inheritDoc} */
+    public void setColor(Color color)
+    {
+        if (color == null)
+        {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!color.equals(this.color)) {
+        if (!color.equals(this.color))
+        {
             this.color = color;
             this.onShapeChanged();
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Color getBackgroundColor() {
+    /** {@inheritDoc} */
+    public Color getBackgroundColor()
+    {
         return this.bgColor;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setBackgroundColor(Color background) {
-        if (background == null) {
+    /** {@inheritDoc} */
+    public void setBackgroundColor(Color background)
+    {
+        if (background == null)
+        {
             String message = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (bgColor == null || !bgColor.equals(background)) {
+        if (bgColor == null || !bgColor.equals(background))
+        {
             this.bgColor = background;
             this.onShapeChanged();
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setPriority(double priority) {
+    /** {@inheritDoc} */
+    public void setPriority(double priority)
+    {
         this.priority = priority;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public double getPriority() {
+    /** {@inheritDoc} */
+    public double getPriority()
+    {
         return this.priority;
     }
 
@@ -274,7 +243,8 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      *
      * @see #setOffset(Offset)
      */
-    public Offset getOffset() {
+    public Offset getOffset()
+    {
         return this.offset;
     }
 
@@ -289,97 +259,100 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      *
      * @param offset Offset that controls where to position the label relative to its geographic location.
      */
-    public void setOffset(Offset offset) {
-        if (offset == null) {
+    public void setOffset(Offset offset)
+    {
+        if (offset == null)
+        {
             String message = Logging.getMessage("nullValue.OffsetIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!offset.equals(this.offset)) {
+        if (!offset.equals(this.offset))
+        {
             this.offset = offset;
             this.onShapeChanged();
         }
     }
 
-    public double getTextSize() {
+    public double getTextSize()
+    {
         return this.textSizeInMeters;
     }
 
-    public void setTextSize(double meters) {
+    public void setTextSize(double meters)
+    {
         this.textSizeInMeters = meters;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public void preRender(DrawContext dc) {
-        if (this.textBounds == null) {
+    public void preRender(DrawContext dc)
+    {
+        if (this.textBounds == null)
+        {
             this.updateTextBounds(dc);
         }
 
         super.preRender(dc);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Position getReferencePosition() {
+    /** {@inheritDoc} */
+    public Position getReferencePosition()
+    {
         return new Position(this.location, 0);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void move(Position position) {
+    /** {@inheritDoc} */
+    public void move(Position position)
+    {
         Position refPos = this.getReferencePosition();
-        if (refPos == null) {
+        if (refPos == null)
             return;
-        }
 
         this.moveTo(refPos.add(position));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void moveTo(Position position) {
+    /** {@inheritDoc} */
+    public void moveTo(Position position)
+    {
         this.setPosition(position);
     }
 
     @Override
-    public boolean isDragEnabled() {
+    public boolean isDragEnabled()
+    {
         return this.dragEnabled;
     }
 
     @Override
-    public void setDragEnabled(boolean enabled) {
+    public void setDragEnabled(boolean enabled)
+    {
         this.dragEnabled = enabled;
     }
 
     @Override
-    public void drag(DragContext dragContext) {
-        if (!this.dragEnabled) {
+    public void drag(DragContext dragContext)
+    {
+        if (!this.dragEnabled)
             return;
-        }
 
-        if (this.draggableSupport == null) {
+        if (this.draggableSupport == null)
             this.draggableSupport = new DraggableSupport(this, WorldWind.CLAMP_TO_GROUND);
-        }
 
         this.doDrag(dragContext);
     }
 
-    protected void doDrag(DragContext dragContext) {
+    protected void doDrag(DragContext dragContext)
+    {
         this.draggableSupport.dragGlobeSizeConstant(dragContext);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public java.util.List<Sector> getSectors(DrawContext dc) {
-        if (dc == null) {
+    /** {@inheritDoc} */
+    public java.util.List<Sector> getSectors(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -388,26 +361,27 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
         return Arrays.asList(this.computeSector(dc));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void drawGeographic(DrawContext dc, SurfaceTileDrawContext sdc) {
+    /** {@inheritDoc} */
+    protected void drawGeographic(DrawContext dc, SurfaceTileDrawContext sdc)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         OGLStackHandler ogsh = new OGLStackHandler();
         ogsh.pushAttrib(gl,
-                GL2.GL_CURRENT_BIT // For current color (used by JOGL TextRenderer).
+            GL2.GL_CURRENT_BIT       // For current color (used by JOGL TextRenderer).
                 | GL2.GL_TRANSFORM_BIT); // For matrix mode.
         ogsh.pushModelview(gl);
-        try {
+        try
+        {
             this.computeGeometry(dc, sdc);
 
-            if (this.isSmall()) {
+            if (this.isSmall())
                 return;
-            }
 
             this.applyDrawTransform(dc, sdc);
             this.drawText(dc);
-        } finally {
+        }
+        finally
+        {
             ogsh.pop(gl);
         }
     }
@@ -417,16 +391,18 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      *
      * @param dc Current draw context.
      */
-    protected void drawText(DrawContext dc) {
+    protected void drawText(DrawContext dc)
+    {
         TextRenderer tr = this.getTextRenderer(dc);
 
         Point2D point = this.getOffset().computeOffset(this.textBounds.getWidth(), this.textBounds.getHeight(), null,
-                null);
+            null);
 
         int x = (int) point.getX();
         int y = (int) point.getY();
 
-        try {
+        try
+        {
             tr.begin3DRendering();
 
             Color bgColor = this.determineBackgroundColor(this.color);
@@ -436,7 +412,9 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
             tr.draw(text, x + 1, y - 1);
             tr.setColor(this.getColor());
             tr.draw(text, x, y);
-        } finally {
+        }
+        finally
+        {
             tr.end3DRendering();
         }
     }
@@ -444,10 +422,11 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     /**
      * Compute the text size and position.
      *
-     * @param dc Current draw context.
+     * @param dc  Current draw context.
      * @param sdc Current surface tile draw context.
      */
-    protected void computeGeometry(DrawContext dc, SurfaceTileDrawContext sdc) {
+    protected void computeGeometry(DrawContext dc, SurfaceTileDrawContext sdc)
+    {
         // Determine the geographic size of a pixel in the tile
         this.pixelSizeInMeters = this.computePixelSize(dc, sdc);
 
@@ -461,15 +440,16 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
     /**
      * Apply a transform to the GL state to draw the text at the proper location and scale.
      *
-     * @param dc Current draw context.
+     * @param dc  Current draw context.
      * @param sdc Current surface tile draw context.
      */
-    protected void applyDrawTransform(DrawContext dc, SurfaceTileDrawContext sdc) {
+    protected void applyDrawTransform(DrawContext dc, SurfaceTileDrawContext sdc)
+    {
         Vec4 point = new Vec4(this.location.getLongitude().degrees, this.location.getLatitude().degrees, 1);
         // If the text box spans the anti-meridian and we're drawing tiles to the right of the anti-meridian, then we
         // need to map the translation into coordinates relative to that side of the anti-meridian.
-        if (this.spansAntimeridian
-                && Math.signum(sdc.getSector().getMinLongitude().degrees) != Math.signum(this.drawLocation.longitude.degrees)) {
+        if (this.spansAntimeridian &&
+            Math.signum(sdc.getSector().getMinLongitude().degrees) != Math.signum(this.drawLocation.longitude.degrees)) {
             point = new Vec4(this.location.getLongitude().degrees - 360, this.location.getLatitude().degrees, 1);
         }
         point = point.transformBy4(sdc.getModelviewMatrix());
@@ -488,19 +468,21 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      *
      * @return {@code true} if the height of the text is less than one pixel.
      */
-    protected boolean isSmall() {
+    protected boolean isSmall()
+    {
         return this.scale * this.textSizeInMeters < this.pixelSizeInMeters;
     }
 
     /**
      * Compute the size of a pixel in the surface tile.
      *
-     * @param dc Current draw context.
+     * @param dc  Current draw context.
      * @param sdc Current surface tile draw context.
      *
      * @return The size of a tile pixel in meters.
      */
-    protected double computePixelSize(DrawContext dc, SurfaceTileDrawContext sdc) {
+    protected double computePixelSize(DrawContext dc, SurfaceTileDrawContext sdc)
+    {
         return dc.getGlobe().getRadius() * sdc.getSector().getDeltaLatRadians() / sdc.getViewport().height;
     }
 
@@ -512,12 +494,12 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      *
      * @return the user specified background color, or a default color that contrasts with the text color.
      */
-    protected Color determineBackgroundColor(Color color) {
+    protected Color determineBackgroundColor(Color color)
+    {
         // If the app specified a background color, use that.
         Color bgColor = this.getBackgroundColor();
-        if (bgColor != null) {
+        if (bgColor != null)
             return bgColor;
-        }
 
         // Otherwise compute a color that contrasts with the text color.
         return this.computeBackgroundColor(color);
@@ -530,16 +512,16 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      *
      * @return a color that contrasts with the text color.
      */
-    protected Color computeBackgroundColor(Color color) {
+    protected Color computeBackgroundColor(Color color)
+    {
         // Otherwise compute a color that contrasts with the text color.
         float[] colorArray = new float[4];
         Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), colorArray);
 
-        if (colorArray[2] > 0.5) {
+        if (colorArray[2] > 0.5)
             return new Color(0, 0, 0, 0.7f);
-        } else {
+        else
             return new Color(1, 1, 1, 0.7f);
-        }
     }
 
     /**
@@ -549,7 +531,8 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      *
      * @return The sector covered by the surface text.
      */
-    protected Sector[] computeSector(DrawContext dc) {
+    protected Sector[] computeSector(DrawContext dc)
+    {
         // Compute text extent depending on distance from eye
         Globe globe = dc.getGlobe();
 
@@ -588,7 +571,7 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
             return sectors;
         } else {
             this.spansAntimeridian = false;
-            return new Sector[]{Sector.fromDegrees(minLat, maxLat, minLon, maxLon)};
+            return new Sector[] {Sector.fromDegrees(minLat, maxLat, minLon, maxLon)};
         }
     }
 
@@ -599,7 +582,8 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      *
      * @return The text renderer that will be used to draw the surface text.
      */
-    protected TextRenderer getTextRenderer(DrawContext dc) {
+    protected TextRenderer getTextRenderer(DrawContext dc)
+    {
         return OGLTextRenderer.getOrCreateTextRenderer(dc.getTextRendererCache(), this.getFont(), true, false, false);
     }
 
@@ -608,7 +592,8 @@ public class SurfaceText extends AbstractSurfaceObject implements GeographicText
      *
      * @param dc Current draw context.
      */
-    protected void updateTextBounds(DrawContext dc) {
+    protected void updateTextBounds(DrawContext dc)
+    {
         this.textBounds = this.getTextRenderer(dc).getBounds(this.text);
     }
 }

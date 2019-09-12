@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.collada.impl;
 
 import gov.nasa.worldwind.geom.Matrix;
@@ -17,17 +18,14 @@ import java.util.Stack;
  * @author pabercrombie
  * @version $Id: ColladaTraversalContext.java 661 2012-06-26 18:02:23Z pabercrombie $
  */
-public class ColladaTraversalContext {
-
-    /**
-     * Transform matrix stack.
-     */
+public class ColladaTraversalContext
+{
+    /** Transform matrix stack. */
     protected Stack<Matrix> matrixStack = new Stack<Matrix>();
 
-    /**
-     * Create a new traversal context. The traversal matrix stack initially contains one element: the identity matrix.
-     */
-    public ColladaTraversalContext() {
+    /** Create a new traversal context. The traversal matrix stack initially contains one element: the identity matrix. */
+    public ColladaTraversalContext()
+    {
         this.matrixStack = new Stack<Matrix>();
         this.matrixStack.push(Matrix.IDENTITY);
     }
@@ -37,14 +35,14 @@ public class ColladaTraversalContext {
      *
      * @return The matrix at the top of the matrix stack.
      */
-    public Matrix peekMatrix() {
+    public Matrix peekMatrix()
+    {
         return this.matrixStack.peek();
     }
 
-    /**
-     * Clone the matrix at the top of the matrix stack and push the clone onto the stack.
-     */
-    public void pushMatrix() {
+    /** Clone the matrix at the top of the matrix stack and push the clone onto the stack. */
+    public void pushMatrix()
+    {
         this.matrixStack.push(this.peekMatrix());
     }
 
@@ -53,8 +51,10 @@ public class ColladaTraversalContext {
      *
      * @param m Matrix to add to the stack. This matrix becomes the new top matrix.
      */
-    public void pushMatrix(Matrix m) {
-        if (m == null) {
+    public void pushMatrix(Matrix m)
+    {
+        if (m == null)
+        {
             String msg = Logging.getMessage("nullValue.MatrixIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -68,7 +68,8 @@ public class ColladaTraversalContext {
      *
      * @return The matrix that was at the top of the stack.
      */
-    public Matrix popMatrix() {
+    public Matrix popMatrix()
+    {
         return this.matrixStack.pop();
     }
 
@@ -77,8 +78,10 @@ public class ColladaTraversalContext {
      *
      * @param m Matrix to multiply. Multiplication is performed as top * m.
      */
-    public void multiplyMatrix(Matrix m) {
-        if (m == null) {
+    public void multiplyMatrix(Matrix m)
+    {
+        if (m == null)
+        {
             String msg = Logging.getMessage("nullValue.MatrixIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -88,10 +91,9 @@ public class ColladaTraversalContext {
         this.pushMatrix(top.multiply(m));
     }
 
-    /**
-     * Reset the context so that it may be used for a fresh traversal.
-     */
-    public void initialize() {
+    /** Reset the context so that it may be used for a fresh traversal. */
+    public void initialize()
+    {
         this.matrixStack.clear();
         this.pushMatrix(Matrix.IDENTITY);
     }

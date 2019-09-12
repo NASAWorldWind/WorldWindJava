@@ -14,20 +14,21 @@ import java.awt.*;
 import java.util.Arrays;
 
 /**
- * Illustrates how to enable shape dragging in WorldWind by using a
- * <code>{@link gov.nasa.worldwind.util.BasicDragger}</code>. This creates multiple shapes on the surface terrain that
- * can be dragged to a new location on the terrain. The shapes retain their form when dragged.
+ * Illustrates how to enable shape dragging in WorldWind by using a <code>{@link gov.nasa.worldwind.util.BasicDragger}</code>. This creates
+ * multiple shapes on the surface terrain that can be dragged to a new location on the terrain. The shapes retain their
+ * form when dragged.
  *
  * @author dcollins
  * @version $Id: DraggingShapes.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class DraggingShapes extends ApplicationTemplate {
-
-    protected static class AppFrame extends ApplicationTemplate.AppFrame {
-
+public class DraggingShapes extends ApplicationTemplate
+{
+    protected static class AppFrame extends ApplicationTemplate.AppFrame
+    {
         protected static final String SURFACE_POLYGON_IMAGE_PATH = "gov/nasa/worldwindx/examples/images/georss.png";
 
-        public AppFrame() {
+        public AppFrame()
+        {
             // Add a basic dragger to the WorldWindow's select listeners to enable shape dragging.
             this.getWwd().addSelectListener(new BasicDragger(this.getWwd()));
 
@@ -35,7 +36,8 @@ public class DraggingShapes extends ApplicationTemplate {
             this.makeShapes();
         }
 
-        protected void makeShapes() {
+        protected void makeShapes()
+        {
             RenderableLayer layer = new RenderableLayer();
             layer.setName("Surface Shapes");
 
@@ -51,15 +53,15 @@ public class DraggingShapes extends ApplicationTemplate {
             double originLat = 28;
             double originLon = -82;
             Iterable<LatLon> locations = Arrays.asList(
-                    LatLon.fromDegrees(originLat + 5.0, originLon + 2.5),
-                    LatLon.fromDegrees(originLat + 5.0, originLon - 2.5),
-                    LatLon.fromDegrees(originLat + 2.5, originLon - 5.0),
-                    LatLon.fromDegrees(originLat - 2.5, originLon - 5.0),
-                    LatLon.fromDegrees(originLat - 5.0, originLon - 2.5),
-                    LatLon.fromDegrees(originLat - 5.0, originLon + 2.5),
-                    LatLon.fromDegrees(originLat - 2.5, originLon + 5.0),
-                    LatLon.fromDegrees(originLat + 2.5, originLon + 5.0),
-                    LatLon.fromDegrees(originLat + 5.0, originLon + 2.5));
+                LatLon.fromDegrees(originLat + 5.0, originLon + 2.5),
+                LatLon.fromDegrees(originLat + 5.0, originLon - 2.5),
+                LatLon.fromDegrees(originLat + 2.5, originLon - 5.0),
+                LatLon.fromDegrees(originLat - 2.5, originLon - 5.0),
+                LatLon.fromDegrees(originLat - 5.0, originLon - 2.5),
+                LatLon.fromDegrees(originLat - 5.0, originLon + 2.5),
+                LatLon.fromDegrees(originLat - 2.5, originLon + 5.0),
+                LatLon.fromDegrees(originLat + 2.5, originLon + 5.0),
+                LatLon.fromDegrees(originLat + 5.0, originLon + 2.5));
             SurfaceShape shape = new SurfacePolygon(locations);
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
@@ -73,12 +75,12 @@ public class DraggingShapes extends ApplicationTemplate {
             attrs.setOutlineWidth(3);
 
             locations = Arrays.asList(
-                    LatLon.fromDegrees(20, -170),
-                    LatLon.fromDegrees(15, 170),
-                    LatLon.fromDegrees(10, -175),
-                    LatLon.fromDegrees(5, 170),
-                    LatLon.fromDegrees(0, -170),
-                    LatLon.fromDegrees(20, -170));
+                LatLon.fromDegrees(20, -170),
+                LatLon.fromDegrees(15, 170),
+                LatLon.fromDegrees(10, -175),
+                LatLon.fromDegrees(5, 170),
+                LatLon.fromDegrees(0, -170),
+                LatLon.fromDegrees(20, -170));
             shape = new SurfacePolygon(locations);
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
@@ -145,8 +147,8 @@ public class DraggingShapes extends ApplicationTemplate {
             attrs.setOutlineWidth(3);
 
             shape = new SurfaceSector(new Sector(
-                    Angle.fromDegrees(41.0), Angle.fromDegrees(41.6),
-                    Angle.fromDegrees(-122.5), Angle.fromDegrees(-121.7)));
+                Angle.fromDegrees(41.0), Angle.fromDegrees(41.6),
+                Angle.fromDegrees(-122.5), Angle.fromDegrees(-121.7)));
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
 
@@ -159,8 +161,8 @@ public class DraggingShapes extends ApplicationTemplate {
             attrs.setOutlineWidth(3);
 
             shape = new SurfaceSector(new Sector(
-                    Angle.fromDegrees(38.9), Angle.fromDegrees(39.3),
-                    Angle.fromDegrees(-120.2), Angle.fromDegrees(-119.9)));
+                Angle.fromDegrees(38.9), Angle.fromDegrees(39.3),
+                Angle.fromDegrees(-120.2), Angle.fromDegrees(-119.9)));
             shape.setAttributes(attrs);
             layer.addRenderable(shape);
 
@@ -171,8 +173,8 @@ public class DraggingShapes extends ApplicationTemplate {
             attrs.setOutlineStippleFactor(2);
 
             locations = Arrays.asList(
-                    LatLon.fromDegrees(-10, 170),
-                    LatLon.fromDegrees(-10, -170));
+                LatLon.fromDegrees(-10, 170),
+                LatLon.fromDegrees(-10, -170));
             shape = new SurfacePolyline(locations);
             shape.setAttributes(attrs);
             ((SurfacePolyline) shape).setClosed(false);
@@ -183,7 +185,8 @@ public class DraggingShapes extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Dragging Shapes", AppFrame.class);
     }
 }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc;
@@ -17,19 +18,20 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: OffenseArea.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class OffenseArea extends BasicArea {
-
+public class OffenseArea extends BasicArea
+{
     /**
      * Indicates the graphics supported by this class.
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics() {
+    public static List<String> getSupportedGraphics()
+    {
         return Arrays.asList(
-                TacGrpSidc.C2GM_OFF_ARS_ASTPSN,
-                TacGrpSidc.C2GM_OFF_ARS_ATKPSN,
-                TacGrpSidc.C2GM_OFF_ARS_OBJ,
-                TacGrpSidc.C2GM_OFF_ARS_PBX);
+            TacGrpSidc.C2GM_OFF_ARS_ASTPSN,
+            TacGrpSidc.C2GM_OFF_ARS_ATKPSN,
+            TacGrpSidc.C2GM_OFF_ARS_OBJ,
+            TacGrpSidc.C2GM_OFF_ARS_PBX);
     }
 
     /**
@@ -37,35 +39,34 @@ public class OffenseArea extends BasicArea {
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public OffenseArea(String sidc) {
+    public OffenseArea(String sidc)
+    {
         super(sidc);
         this.setShowHostileIndicator(false);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected String createLabelText() {
+    protected String createLabelText()
+    {
         // Penetration box graphic does not support text modifiers.
-        if (TacGrpSidc.C2GM_OFF_ARS_PBX.equalsIgnoreCase(this.maskedSymbolCode)) {
+        if (TacGrpSidc.C2GM_OFF_ARS_PBX.equalsIgnoreCase(this.maskedSymbolCode))
             return null;
-        }
 
         return super.createLabelText();
     }
 
     @Override
-    protected String getGraphicLabel() {
+    protected String getGraphicLabel()
+    {
         String code = this.maskedSymbolCode;
 
-        if (TacGrpSidc.C2GM_OFF_ARS_ASTPSN.equalsIgnoreCase(code)) {
+        if (TacGrpSidc.C2GM_OFF_ARS_ASTPSN.equalsIgnoreCase(code))
             return "ASLT\nPSN";
-        } else if (TacGrpSidc.C2GM_OFF_ARS_ATKPSN.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_OFF_ARS_ATKPSN.equalsIgnoreCase(code))
             return "ATK";
-        } else if (TacGrpSidc.C2GM_OFF_ARS_OBJ.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_OFF_ARS_OBJ.equalsIgnoreCase(code))
             return "OBJ";
-        }
 
         return "";
     }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.WorldWind;
@@ -32,11 +33,9 @@ import java.util.concurrent.atomic.*;
  * @author tag
  * @version $Id: KMLNetworkLink.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChangeListener {
-
-    /**
-     * Indicates the network resource referenced by this <code>KMLNetworkLink</code>. Initially <code>null</code>.
-     */
+public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChangeListener
+{
+    /** Indicates the network resource referenced by this <code>KMLNetworkLink</code>. Initially <code>null</code>. */
     protected AtomicReference<KMLRoot> networkResource = new AtomicReference<KMLRoot>();
     /**
      * Time, in milliseconds since the Epoch, at which this <code>KMLNetworkLink's</code> network resource was last
@@ -46,9 +45,7 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
 
     protected AtomicLong firstRetrievalTime;
 
-    /**
-     * Flag to indicate that the Link has been fetched from the hash map.
-     */
+    /** Flag to indicate that the Link has been fetched from the hash map. */
     protected boolean linkFetched = false;
     protected KMLLink link;
 
@@ -69,7 +66,8 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLNetworkLink(String namespaceURI) {
+    public KMLNetworkLink(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
@@ -78,45 +76,51 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      *
      * @param evt Event to forward.
      */
-    public void propertyChange(PropertyChangeEvent evt) {
+    public void propertyChange(PropertyChangeEvent evt)
+    {
         this.getRoot().firePropertyChange(evt);
     }
 
     @Override
-    public void onMessage(Message msg) {
+    public void onMessage(Message msg)
+    {
         KMLLink link = this.getLinkOrUrl();
-        if (link != null) {
+        if (link != null)
+        {
             link.onMessage(msg);
         }
 
         KMLRoot networkResource = this.getNetworkResource();
-        if (networkResource != null) {
+        if (networkResource != null)
+        {
             networkResource.onMessage(msg);
         }
     }
 
-    /**
-     * {@inheritDoc} Overridden to cache the root instead of climbing the parse tree each time.
-     */
+    /** {@inheritDoc} Overridden to cache the root instead of climbing the parse tree each time. */
     @Override
-    public KMLRoot getRoot() {
-        if (root == null) {
+    public KMLRoot getRoot()
+    {
+        if (root == null)
             this.root = super.getRoot();
-        }
 
         return this.root;
     }
 
-    public Boolean getRefreshVisibility() {
+    public Boolean getRefreshVisibility()
+    {
         return (Boolean) this.getField("refreshVisibility");
     }
 
-    public Boolean getFlyToView() {
+    public Boolean getFlyToView()
+    {
         return (Boolean) this.getField("flyToView");
     }
 
-    public KMLLink getNetworkLink() {
-        if (!this.linkFetched) {
+    public KMLLink getNetworkLink()
+    {
+        if (!this.linkFetched)
+        {
             this.linkFetched = true;
             this.link = (KMLLink) this.getField("Link");
         }
@@ -124,7 +128,8 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
         return this.link;
     }
 
-    public KMLLink getUrl() {
+    public KMLLink getUrl()
+    {
         return (KMLLink) this.getField("Url");
     }
 
@@ -135,14 +140,14 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * <code>Url</code> element is returned.
      *
      * @return this <code>NetworkLink's</code> <code>Link</code> element, if one is specified. Otherwise, this
-     * <code>NetworkLink's</code> <code>Url</code> element. Returns <code>null</code> if neither <code>Link</code> or a
-     * <code>Url</code> are specified.
+     *         <code>NetworkLink's</code> <code>Url</code> element. Returns <code>null</code> if neither
+     *         <code>Link</code> or a <code>Url</code> are specified.
      */
-    protected KMLLink getLinkOrUrl() {
+    protected KMLLink getLinkOrUrl()
+    {
         KMLLink link = this.getNetworkLink();
-        if (link != null) {
+        if (link != null)
             return link;
-        }
 
         return this.getUrl();
     }
@@ -155,7 +160,8 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      *
      * @see #setNetworkResource(KMLRoot)
      */
-    public KMLRoot getNetworkResource() {
+    public KMLRoot getNetworkResource()
+    {
         return networkResource.get();
     }
 
@@ -164,47 +170,47 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * prevents retrieving network links in inactive regions.
      */
     @Override
-    protected boolean isFeatureActive(KMLTraversalContext tc, DrawContext dc) {
-        if (this.getVisibility() != null && !this.getVisibility()) {
+    protected boolean isFeatureActive(KMLTraversalContext tc, DrawContext dc)
+    {
+        if (this.getVisibility() != null && !this.getVisibility())
             return false;
-        }
 
         KMLRegion region = this.getRegion();
-        if (region == null) {
+        if (region == null)
             region = tc.peekRegion();
-        }
 
         return region == null || region.isActive(tc, dc);
     }
 
-    protected boolean hasNetworkLinkControl() {
+    protected boolean hasNetworkLinkControl()
+    {
         return this.getRoot().getNetworkLinkControl() != null;
     }
 
     @Override
-    public String getName() {
-        if (this.hasNetworkLinkControl() && !WWUtil.isEmpty(this.getRoot().getNetworkLinkControl().getLinkName())) {
+    public String getName()
+    {
+        if (this.hasNetworkLinkControl() && !WWUtil.isEmpty(this.getRoot().getNetworkLinkControl().getLinkName()))
             return this.getRoot().getNetworkLinkControl().getLinkName();
-        }
 
         return super.getName();
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription()
+    {
         if (this.hasNetworkLinkControl()
-                && !WWUtil.isEmpty(this.getRoot().getNetworkLinkControl().getLinkDescription())) {
+            && !WWUtil.isEmpty(this.getRoot().getNetworkLinkControl().getLinkDescription()))
             return this.getRoot().getNetworkLinkControl().getLinkDescription();
-        }
 
         return super.getDescription();
     }
 
     @Override
-    public Object getSnippet() {
-        if (this.hasNetworkLinkControl() && !WWUtil.isEmpty(this.getRoot().getNetworkLinkControl().getLinkSnippet())) {
+    public Object getSnippet()
+    {
+        if (this.hasNetworkLinkControl() && !WWUtil.isEmpty(this.getRoot().getNetworkLinkControl().getLinkSnippet()))
             return this.getRoot().getNetworkLinkControl().getLinkSnippet();
-        }
 
         return super.getSnippet();
     }
@@ -219,34 +225,35 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      *
      * @see #getNetworkResource()
      */
-    public void setNetworkResource(final KMLRoot kmlRoot) {
+    public void setNetworkResource(final KMLRoot kmlRoot)
+    {
         // Remove any property change listeners previously set on the KMLRoot. This eliminates dangling references from
         // the KMLNetworkLink to its previous KMLRoot.
         KMLRoot resource = this.getNetworkResource();
-        if (resource != null) {
+        if (resource != null)
             resource.removePropertyChangeListener(this);
-        }
 
         this.networkResource.set(kmlRoot);
         this.networkResourceRetrievalTime.set(System.currentTimeMillis());
-        if (this.firstRetrievalTime == null) {
+        if (this.firstRetrievalTime == null)
             this.firstRetrievalTime = new AtomicLong(this.networkResourceRetrievalTime.get());
-        }
 
         // Set up to listen for property change events on the KMLRoot. KMLNetworkLink must forward REPAINT and REFRESH
         // property change events from its internal KMLRoot to its parent KMLRoot to support BrowserBalloon repaint
         // events and recursive KMLNetworkLink elements.
-        if (kmlRoot != null) {
+        if (kmlRoot != null)
+        {
             kmlRoot.addPropertyChangeListener(this);
 
             // Apply any updates contained in the new root's optional network link control.
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                public void run()
+                {
                     if (kmlRoot.getNetworkLinkControl() != null
-                            && kmlRoot.getNetworkLinkControl().getUpdate() != null
-                            && !kmlRoot.getNetworkLinkControl().getUpdate().isUpdatesApplied()) {
+                        && kmlRoot.getNetworkLinkControl().getUpdate() != null
+                        && !kmlRoot.getNetworkLinkControl().getUpdate().isUpdatesApplied())
                         kmlRoot.getNetworkLinkControl().getUpdate().applyOperations();
-                    }
                 }
             });
         }
@@ -256,9 +263,8 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * Pre-renders the network resource referenced by this <code>KMLNetworkLink</code>. If this link must retrieve its
      * network resource, this initiates a retrieval and does nothing until the resource is retrieved and loaded. Once
      * the network resource is retrieved and loaded, this calls <code>{@link #setNetworkResource(KMLRoot)}</code> to
-     * specify this link's new network resource, and sends an
-     * <code>{@link gov.nasa.worldwind.avlist.AVKey#RETRIEVAL_STATE_SUCCESSFUL}</code> property change event to this
-     * link's property change listeners.
+     * specify this link's new network resource, and sends an <code>{@link gov.nasa.worldwind.avlist.AVKey#RETRIEVAL_STATE_SUCCESSFUL}</code>
+     * property change event to this link's property change listeners.
      *
      * @param tc the current KML traversal context.
      * @param dc the current draw context.
@@ -266,16 +272,15 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * @see #getNetworkResource()
      */
     @Override
-    protected void doPreRender(KMLTraversalContext tc, DrawContext dc) {
+    protected void doPreRender(KMLTraversalContext tc, DrawContext dc)
+    {
         super.doPreRender(tc, dc);
 
-        if (this.mustRetrieveNetworkResource()) {
+        if (this.mustRetrieveNetworkResource())
             this.requestResource(dc);
-        }
 
-        if (this.getNetworkResource() != null) {
+        if (this.getNetworkResource() != null)
             this.getNetworkResource().preRender(tc, dc);
-        }
     }
 
     /**
@@ -286,12 +291,12 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * @param dc the current draw context.
      */
     @Override
-    protected void doRender(KMLTraversalContext tc, DrawContext dc) {
+    protected void doRender(KMLTraversalContext tc, DrawContext dc)
+    {
         super.doRender(tc, dc);
 
-        if (this.getNetworkResource() != null) {
+        if (this.getNetworkResource() != null)
             this.getNetworkResource().render(tc, dc);
-        }
     }
 
     /**
@@ -299,34 +304,34 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * <code>false</code> if this <code>KMLNetworkLink</code> has no <code>KMLLink</code>.
      *
      * @return <code>true</code> if this <code>KMLNetworkLink</code> must retrieve its network resource, otherwise
-     * <code>false</code>.
+     *         <code>false</code>.
      */
-    protected boolean mustRetrieveNetworkResource() {
+    protected boolean mustRetrieveNetworkResource()
+    {
         KMLLink link = this.getLinkOrUrl();
-        if (link == null) {
+        if (link == null)
             return false; // If both the Link and the Url are null, then there's nothing to retrieve.
-        }
+
         // If the resource has already been retrieved, but is not a KML file, don't retrieve the resource again.
-        if (this.invalidTarget) {
+        if (this.invalidTarget)
             return false;
-        }
 
         // Make sure a refresh doesn't occur within the minimum refresh period, if one is specified.
         KMLNetworkLinkControl linkControl = this.getRoot().getNetworkLinkControl();
-        if (linkControl != null && linkControl.getMinRefreshPeriod() != null) {
+        if (linkControl != null && linkControl.getMinRefreshPeriod() != null)
+        {
             long now = System.currentTimeMillis();
             if (this.firstRetrievalTime != null // be sure it gets retrieved a first time
-                    && this.networkResourceRetrievalTime.get() + linkControl.getMinRefreshPeriod() * 1000 > now) {
+                && this.networkResourceRetrievalTime.get() + linkControl.getMinRefreshPeriod() * 1000 > now)
                 return false;
-            }
         }
 
         // Make sure a refresh doesn't occur after the max session length is reached, if one is specified.
-        if (linkControl != null && linkControl.getMaxSessionLength() != null && this.firstRetrievalTime != null) {
+        if (linkControl != null && linkControl.getMaxSessionLength() != null && this.firstRetrievalTime != null)
+        {
             long now = System.currentTimeMillis();
-            if (this.firstRetrievalTime.get() + linkControl.getMaxSessionLength() * 1000 > now) {
+            if (this.firstRetrievalTime.get() + linkControl.getMaxSessionLength() * 1000 > now)
                 return false;
-            }
         }
 
         // The resource must be retrieved if the link has been updated since the resource was
@@ -340,27 +345,24 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      *
      * @param dc the current draw context.
      */
-    protected void requestResource(DrawContext dc) {
-        if (WorldWind.getTaskService().isFull()) {
+    protected void requestResource(DrawContext dc)
+    {
+        if (WorldWind.getTaskService().isFull())
             return;
-        }
 
         KMLLink link = this.getLinkOrUrl();
-        if (link == null) {
+        if (link == null)
             return; // If both the Link and the Url are null, then there's nothing to retrieve.
-        }
+
         String address = link.getAddress(dc);
-        if (address != null) {
+        if (address != null)
             address = address.trim();
-        }
 
-        if (WWUtil.isEmpty(address)) {
+        if (WWUtil.isEmpty(address))
             return;
-        }
 
-        if (this.hasNetworkLinkControl() && this.getRoot().getNetworkLinkControl().getCookie() != null) {
+        if (this.hasNetworkLinkControl() && this.getRoot().getNetworkLinkControl().getCookie() != null)
             address = address + this.getRoot().getNetworkLinkControl().getCookie();
-        }
 
         WorldWind.getTaskService().addTask(new RequestTask(this, address));
     }
@@ -368,15 +370,15 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
     /**
      * Initiates a retrieval of the network resource referenced by this <code>KMLNetworkLink</code>. Once the network
      * resource is retrieved and loaded, this calls <code>{@link #setNetworkResource(KMLRoot)}</code> to specify this
-     * link's new network resource, and sends an
-     * <code>{@link gov.nasa.worldwind.avlist.AVKey#RETRIEVAL_STATE_SUCCESSFUL}</code> property change event to this
-     * link's property change listeners.
+     * link's new network resource, and sends an <code>{@link gov.nasa.worldwind.avlist.AVKey#RETRIEVAL_STATE_SUCCESSFUL}</code>
+     * property change event to this link's property change listeners.
      * <p>
      * This does nothing if this <code>KMLNetworkLink</code> has no <code>KMLLink</code>.
      *
      * @param address the address of the resource to retrieve
      */
-    protected void retrieveNetworkResource(String address) {
+    protected void retrieveNetworkResource(String address)
+    {
         // Treat the address as either a path to a local document, or as an absolute URL to a remote document. If the
         // address references a remote document, this attempts to retrieve it and loads the document once retrieval
         // succeeds. This does not handle absolute local file paths; absolute local file paths are not supported by the
@@ -389,12 +391,14 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
         long updateTime = 0L;
 
         KMLLink link = this.getLinkOrUrl();
-        if (link != null) {
+        if (link != null)
+        {
             updateTime = link.getUpdateTime();
         }
 
         Object o = this.getRoot().resolveNetworkLink(address, this.isLinkCacheable(), updateTime);
-        if (o instanceof KMLRoot) {
+        if (o instanceof KMLRoot)
+        {
             KMLRoot newRoot = (KMLRoot) o;
             this.setNetworkResource(newRoot);
 
@@ -403,8 +407,10 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
             this.getLinkOrUrl().setExpirationTime(expiration);
 
             this.getRoot().firePropertyChange(AVKey.RETRIEVAL_STATE_SUCCESSFUL, null, KMLNetworkLink.this);
-        } // Anything other than a KMLRoot is not a valid link target
-        else if (o != null) {
+        }
+        // Anything other than a KMLRoot is not a valid link target
+        else if (o != null)
+        {
             String message = Logging.getMessage("KML.InvalidNetworkLinkTarget", address);
             Logging.logger().warning(message);
             this.invalidTarget = true; // Stop trying to retrieve this resource
@@ -416,15 +422,17 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * NetworkLinkControl/expires element in the target document, a HTTP Cache-Control header, or an HTTP Expires
      * header.
      *
-     * @param root Root of target resource.
+     * @param root    Root of target resource.
      * @param address Address of linked resource.
      *
      * @return The expiration time of the resource, in milliseconds since the Epoch. Zero indicates that there is no
-     * expiration time.
+     *         expiration time.
      */
-    protected long computeExpiryRefreshTime(KMLRoot root, String address) {
+    protected long computeExpiryRefreshTime(KMLRoot root, String address)
+    {
         KMLNetworkLinkControl linkControl = root.getNetworkLinkControl();
-        if (linkControl != null && linkControl.getExpires() != null) {
+        if (linkControl != null && linkControl.getExpires() != null)
+        {
             Long time = WWUtil.parseTimeString(linkControl.getExpires());
             return time != null ? time : 0;
         }
@@ -435,26 +443,29 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
 
     /**
      * Indicates whether the network resource references by this <code>KMLNetworkLink</code> should be retrieved to the
-     * WorldWind cache or to a temporary location. This returns <code>true</code> if all of the following conditions are
-     * met, and <code>false</code> otherwise:
+     * WorldWind cache or to a temporary location. This returns <code>true</code> if all of the following conditions
+     * are met, and <code>false</code> otherwise:
      * <ul> <li>This network link has either a <code>Link</code> or a <code>Url</code> element.</li> <li>The Link or Url
      * element's <code>refreshMode</code> is not <code>onInterval</code> or <code>onExpire</code>.</li> <li>The Link or
      * Url element's <code>viewRefreshMode</code> is not <code>onStop</code>.</li> </ul>
      *
      * @return <code>true</code> if this link's network resource can should be stored in a cache, or <code>false</code>
-     * if it should be stored in a temporary location.
+     *         if it should be stored in a temporary location.
      */
-    public boolean isLinkCacheable() {
+    public boolean isLinkCacheable()
+    {
         KMLLink link = this.getLinkOrUrl();
         return link != null
-                && !KMLConstants.ON_INTERVAL.equalsIgnoreCase(link.getRefreshMode())
-                && !KMLConstants.ON_EXPIRE.equalsIgnoreCase(link.getRefreshMode())
-                && !KMLConstants.ON_STOP.equalsIgnoreCase(link.getViewRefreshMode());
+            && !KMLConstants.ON_INTERVAL.equalsIgnoreCase(link.getRefreshMode())
+            && !KMLConstants.ON_EXPIRE.equalsIgnoreCase(link.getRefreshMode())
+            && !KMLConstants.ON_STOP.equalsIgnoreCase(link.getViewRefreshMode());
     }
 
     @Override
-    public void applyChange(KMLAbstractObject sourceValues) {
-        if (!(sourceValues instanceof KMLNetworkLink)) {
+    public void applyChange(KMLAbstractObject sourceValues)
+    {
+        if (!(sourceValues instanceof KMLNetworkLink))
+        {
             String message = Logging.getMessage("nullValue.SourceIsNull");
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -463,23 +474,23 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
         KMLNetworkLink sourceLink = (KMLNetworkLink) sourceValues;
 
         // Reset this network link only if the change contains a new link
-        if (sourceLink.getLinkOrUrl() != null) {
+        if (sourceLink.getLinkOrUrl() != null)
             this.reset();
-        }
 
         super.applyChange(sourceValues);
     }
 
     @Override
-    public void onChange(Message msg) {
-        if (KMLAbstractObject.MSG_LINK_CHANGED.equals(msg.getName())) {
+    public void onChange(Message msg)
+    {
+        if (KMLAbstractObject.MSG_LINK_CHANGED.equals(msg.getName()))
             this.reset();
-        }
 
         super.onChange(msg);
     }
 
-    protected void reset() {
+    protected void reset()
+    {
         this.networkResource.set(null);
         this.networkResourceRetrievalTime.set(-1);
         this.firstRetrievalTime = null;
@@ -490,34 +501,31 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
         this.getRoot().requestRedraw(); // cause doPreRender to be called to initiate new link retrieval
     }
 
-    /**
-     * Attempts to find this network link resource file locally, and if that fails attempts to find it remotely.
-     */
-    protected static class RequestTask implements Runnable {
-
-        /**
-         * The link associated with this request.
-         */
+    /** Attempts to find this network link resource file locally, and if that fails attempts to find it remotely. */
+    protected static class RequestTask implements Runnable
+    {
+        /** The link associated with this request. */
         protected final KMLNetworkLink link;
-        /**
-         * The resource's address.
-         */
+        /** The resource's address. */
         protected final String address;
 
         /**
          * Construct a request task for a specified network link resource.
          *
-         * @param link the network link for which to construct the request task.
+         * @param link    the network link for which to construct the request task.
          * @param address the address of the resource to request.
          */
-        protected RequestTask(KMLNetworkLink link, String address) {
-            if (link == null) {
+        protected RequestTask(KMLNetworkLink link, String address)
+        {
+            if (link == null)
+            {
                 String message = Logging.getMessage("nullValue.ObjectIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
             }
 
-            if (address == null) {
+            if (address == null)
+            {
                 String message = Logging.getMessage("nullValue.PathIsNull");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -527,43 +535,43 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
             this.address = address;
         }
 
-        public void run() {
-            if (Thread.currentThread().isInterrupted()) {
+        public void run()
+        {
+            if (Thread.currentThread().isInterrupted())
                 return; // the task was cancelled because it's a duplicate or for some other reason
-            }
+
             this.link.retrieveNetworkResource(this.address);
         }
 
         @Override
-        public boolean equals(Object o) {
-            if (this == o) {
+        public boolean equals(Object o)
+        {
+            if (this == o)
                 return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
+            if (o == null || getClass() != o.getClass())
                 return false;
-            }
 
             RequestTask that = (RequestTask) o;
 
-            if (!this.address.equals(that.address)) {
+            if (!this.address.equals(that.address))
                 return false;
-            }
             //noinspection RedundantIfStatement
-            if (!this.link.equals(that.link)) {
+            if (!this.link.equals(that.link))
                 return false;
-            }
 
             return true;
         }
 
         @Override
-        public int hashCode() {
+        public int hashCode()
+        {
             int result = link.hashCode();
             result = 31 * result + address.hashCode();
             return result;
         }
 
-        public String toString() {
+        public String toString()
+        {
             return this.address;
         }
     }

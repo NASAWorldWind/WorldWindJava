@@ -21,8 +21,8 @@ import java.nio.channels.ClosedByInterruptException;
  * @author dcollins
  * @version $Id: SessionCacheRetrievalPostProcessor.java 3086 2015-05-13 20:27:38Z dcollins $
  */
-public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcessor {
-
+public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcessor
+{
     protected String name;
     protected final SessionCache cache;
     protected final Object cacheKey;
@@ -35,23 +35,26 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      * Constructs a SessionCachePostProcessor with a specified cache and cache key, and an optional property listener
      * and property name.
      *
-     * @param cache cache that receives the retrieved data.
-     * @param cacheKey cache key to place the retrieved data under.
+     * @param cache              cache that receives the retrieved data.
+     * @param cacheKey           cache key to place the retrieved data under.
      * @param absentResourceList the absent resource list to update.
-     * @param resourceID the resource ID to use in the absent resource list.
-     * @param propertyListener property listener to notify when the data is available. Can be null.
-     * @param propertyName property name to use for the property event when the data is available. Can be null.
+     * @param resourceID         the resource ID to use in the absent resource list.
+     * @param propertyListener   property listener to notify when the data is available. Can be null.
+     * @param propertyName       property name to use for the property event when the data is available. Can be null.
      */
     public SessionCacheRetrievalPostProcessor(SessionCache cache, Object cacheKey,
-            AbsentResourceList absentResourceList, long resourceID,
-            PropertyChangeListener propertyListener, String propertyName) {
-        if (cache == null) {
+        AbsentResourceList absentResourceList, long resourceID,
+        PropertyChangeListener propertyListener, String propertyName)
+    {
+        if (cache == null)
+        {
             String message = Logging.getMessage("nullValue.CacheIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (cacheKey == null) {
+        if (cacheKey == null)
+        {
             String message = Logging.getMessage("nullValue.CacheKeyIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -70,7 +73,8 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      *
      * @return this post processor's name. May be null.
      */
-    public String getName() {
+    public String getName()
+    {
         return this.name;
     }
 
@@ -80,7 +84,8 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      *
      * @param name this post processor's name. May be null.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
@@ -89,7 +94,8 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      *
      * @return the session cache that receives data.
      */
-    public final SessionCache getCache() {
+    public final SessionCache getCache()
+    {
         return this.cache;
     }
 
@@ -98,7 +104,8 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      *
      * @return cache key for the retrieved data.
      */
-    public final Object getCacheKey() {
+    public final Object getCacheKey()
+    {
         return this.cacheKey;
     }
 
@@ -107,7 +114,8 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      *
      * @return the absent resource list.
      */
-    public final AbsentResourceList getAbsentResourceList() {
+    public final AbsentResourceList getAbsentResourceList()
+    {
         return this.absentResourceList;
     }
 
@@ -116,7 +124,8 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      *
      * @return resource ID to use in the absent resource list.
      */
-    public final long getResourceID() {
+    public final long getResourceID()
+    {
         return this.resourceID;
     }
 
@@ -126,7 +135,8 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      *
      * @return property change listener to fire when retrieved data is available.
      */
-    public final PropertyChangeListener getPropertyListener() {
+    public final PropertyChangeListener getPropertyListener()
+    {
         return this.propertyListener;
     }
 
@@ -136,7 +146,8 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      *
      * @return property name to fire when retrieved data is available.
      */
-    public final String getPropertyName() {
+    public final String getPropertyName()
+    {
         return this.propertyName;
     }
 
@@ -150,8 +161,10 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      *
      * @return the retrieved data.
      */
-    public java.nio.ByteBuffer run(Retriever retriever) {
-        if (retriever == null) {
+    public java.nio.ByteBuffer run(Retriever retriever)
+    {
+        if (retriever == null)
+        {
             String message = Logging.getMessage("nullValue.RetrieverIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -159,9 +172,12 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
 
         String message = this.validate(retriever);
 
-        if (message == null) {
+        if (message == null)
+        {
             this.onRetrievalSuceeded(retriever);
-        } else {
+        }
+        else
+        {
             this.onRetrievalFailed(retriever);
             Logging.logger().severe(message);
         }
@@ -170,73 +186,87 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
         return retriever.getBuffer();
     }
 
-    protected void onRetrievalSuceeded(Retriever retriever) {
-        try {
+    protected void onRetrievalSuceeded(Retriever retriever)
+    {
+        try
+        {
             this.handleContent(retriever);
 
-            if (this.absentResourceList != null) {
+            if (this.absentResourceList != null)
                 this.absentResourceList.unmarkResourceAbsent(this.resourceID);
-            }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             this.handleContentException(retriever, e);
         }
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    protected void onRetrievalFailed(Retriever retriever) {
-        if (this.absentResourceList != null) {
+    protected void onRetrievalFailed(Retriever retriever)
+    {
+        if (this.absentResourceList != null)
             this.absentResourceList.markResourceAbsent(this.resourceID);
-        }
     }
 
-    protected String validate(Retriever retriever) {
-        if (!retriever.getState().equals(Retriever.RETRIEVER_STATE_SUCCESSFUL)) {
+    protected String validate(Retriever retriever)
+    {
+        if (!retriever.getState().equals(Retriever.RETRIEVER_STATE_SUCCESSFUL))
             return Logging.getMessage("generic.RetrievalFailed", this.toString());
-        }
 
-        if (retriever.getBuffer() == null || retriever.getBuffer().limit() == 0) {
+        if (retriever.getBuffer() == null || retriever.getBuffer().limit() == 0)
             return Logging.getMessage("generic.RetrievalReturnedNoContent", this.toString());
-        }
 
         return null;
     }
 
-    protected void signalRetrievalComplete() {
+    protected void signalRetrievalComplete()
+    {
         // If both the property listener and property name are non-null, then fire a property change event,
         // signalling that the retrieval has completed.s
-        if (this.propertyListener != null && this.propertyName != null) {
+        if (this.propertyListener != null && this.propertyName != null)
+        {
             this.propertyListener.propertyChange(
-                    new PropertyChangeEvent(this, this.propertyName, null, this.propertyListener));
+                new PropertyChangeEvent(this, this.propertyName, null, this.propertyListener));
         }
     }
 
-    protected void handleContent(Retriever retriever) throws Exception {
+    protected void handleContent(Retriever retriever) throws Exception
+    {
         String uppercaseName = retriever.getName().toUpperCase();
-        if (uppercaseName.contains("SERVICE=WMS") && uppercaseName.contains("REQUEST=GETCAPABILITIES")) {
+        if (uppercaseName.contains("SERVICE=WMS") && uppercaseName.contains("REQUEST=GETCAPABILITIES"))
+        {
             this.handleWMSCapabilitiesContent(retriever);
-        } else {
+        }
+        else
+        {
             this.handleUnknownContent(retriever);
         }
     }
 
-    protected void handleWMSCapabilitiesContent(Retriever retriever) throws Exception {
+    protected void handleWMSCapabilitiesContent(Retriever retriever) throws Exception
+    {
         WMSCapabilities caps = new WMSCapabilities(retriever.getBuffer());
         this.cache.put(this.cacheKey, caps.parse());
     }
 
-    protected void handleUnknownContent(Retriever retriever) throws Exception {
+    protected void handleUnknownContent(Retriever retriever) throws Exception
+    {
         this.cache.put(this.cacheKey, retriever.getBuffer());
     }
 
-    protected void handleContentException(Retriever retriever, Exception e) {
-        if (e instanceof ClosedByInterruptException) {
+    protected void handleContentException(Retriever retriever, Exception e)
+    {
+        if (e instanceof ClosedByInterruptException)
+        {
             Logging.logger().log(java.util.logging.Level.FINE,
-                    Logging.getMessage("generic.OperationCancelled",
-                            "retrieval post-processing for " + retriever.getName()), e);
-        } else {
+                Logging.getMessage("generic.OperationCancelled",
+                    "retrieval post-processing for " + retriever.getName()), e);
+        }
+        else
+        {
             this.onRetrievalFailed(retriever);
             Logging.logger().log(java.util.logging.Level.SEVERE,
-                    Logging.getMessage("generic.ExceptionWhileSavingRetreivedData", retriever.getName()), e);
+                Logging.getMessage("generic.ExceptionWhileSavingRetreivedData", retriever.getName()), e);
         }
     }
 
@@ -246,10 +276,10 @@ public class SessionCacheRetrievalPostProcessor implements RetrievalPostProcesso
      *
      * @return String representation of this post processor.
      */
-    public String toString() {
-        if (this.getName() != null) {
+    public String toString()
+    {
+        if (this.getName() != null)
             return this.getName();
-        }
 
         return super.toString();
     }

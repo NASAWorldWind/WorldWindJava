@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.WorldWind;
@@ -25,22 +26,18 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: LimitedAccessArea.java 555 2012-04-25 18:59:29Z pabercrombie $
  */
-public class LimitedAccessArea extends AbstractMilStd2525TacticalGraphic {
-
+public class LimitedAccessArea extends AbstractMilStd2525TacticalGraphic
+{
     protected TacticalSymbol symbol;
     protected Path path;
 
     protected Position symbolPosition;
     protected Position attachmentPosition;
 
-    /**
-     * Altitude mode for this graphic.
-     */
+    /** Altitude mode for this graphic. */
     protected int altitudeMode = WorldWind.CLAMP_TO_GROUND;
 
-    /**
-     * Attributes applied to the symbol.
-     */
+    /** Attributes applied to the symbol. */
     protected TacticalSymbolAttributes symbolAttributes;
 
     /**
@@ -48,34 +45,40 @@ public class LimitedAccessArea extends AbstractMilStd2525TacticalGraphic {
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics() {
+    public static List<String> getSupportedGraphics()
+    {
         return Arrays.asList(TacGrpSidc.C2GM_GNL_ARS_LAARA);
     }
 
-    public LimitedAccessArea(String symbolCode) {
+    public LimitedAccessArea(String symbolCode)
+    {
         super(symbolCode);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public void setModifier(String modifier, Object value) {
-        if (SymbologyConstants.SYMBOL_INDICATOR.equals(modifier) && value instanceof String) {
+    public void setModifier(String modifier, Object value)
+    {
+        if (SymbologyConstants.SYMBOL_INDICATOR.equals(modifier) && value instanceof String)
+        {
             this.setSymbol((String) value);
-        } else {
+        }
+        else
+        {
             super.setModifier(modifier, value);
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public Object getModifier(String modifier) {
-        if (SymbologyConstants.SYMBOL_INDICATOR.equals(modifier)) {
+    public Object getModifier(String modifier)
+    {
+        if (SymbologyConstants.SYMBOL_INDICATOR.equals(modifier))
+        {
             return this.getSymbol();
-        } else {
+        }
+        else
+        {
             return super.getModifier(modifier);
         }
     }
@@ -85,7 +88,8 @@ public class LimitedAccessArea extends AbstractMilStd2525TacticalGraphic {
      *
      * @return The symbol drawn at the center of the range fan. May be null.
      */
-    public String getSymbol() {
+    public String getSymbol()
+    {
         return this.symbol != null ? this.symbol.getIdentifier() : null;
     }
 
@@ -95,16 +99,19 @@ public class LimitedAccessArea extends AbstractMilStd2525TacticalGraphic {
      * center position.
      *
      * @param sidc Identifier for a MIL-STD-2525C symbol to draw at the center of the range fan. May be null to indicate
-     * that no symbol is drawn.
+     *             that no symbol is drawn.
      */
-    public void setSymbol(String sidc) {
-        if (sidc != null) {
-            if (this.symbolAttributes == null) {
+    public void setSymbol(String sidc)
+    {
+        if (sidc != null)
+        {
+            if (this.symbolAttributes == null)
                 this.symbolAttributes = new BasicTacticalSymbolAttributes();
-            }
 
             this.symbol = this.createSymbol(sidc);
-        } else {
+        }
+        else
+        {
             // Null value indicates no symbol.
             this.symbol = null;
             this.symbolAttributes = null;
@@ -118,7 +125,8 @@ public class LimitedAccessArea extends AbstractMilStd2525TacticalGraphic {
      *
      * @return this graphic's altitude mode.
      */
-    public int getAltitudeMode() {
+    public int getAltitudeMode()
+    {
         return this.altitudeMode;
     }
 
@@ -133,121 +141,114 @@ public class LimitedAccessArea extends AbstractMilStd2525TacticalGraphic {
      *
      * @param altitudeMode this graphic new altitude mode.
      */
-    public void setAltitudeMode(int altitudeMode) {
+    public void setAltitudeMode(int altitudeMode)
+    {
         this.altitudeMode = altitudeMode;
 
-        if (this.symbol != null) {
+        if (this.symbol != null)
             this.symbol.setAltitudeMode(altitudeMode);
-        }
-        if (this.path != null) {
+        if (this.path != null)
             this.path.setAltitudeMode(altitudeMode);
-        }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected void doRenderGraphic(DrawContext dc) {
-        if (this.symbol != null) {
+    protected void doRenderGraphic(DrawContext dc)
+    {
+        if (this.symbol != null)
             this.symbol.render(dc);
-        }
 
-        if (this.path != null) {
+        if (this.path != null)
             this.path.render(dc);
-        }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    protected void applyDelegateOwner(Object owner) {
-        if (this.symbol != null) {
+    protected void applyDelegateOwner(Object owner)
+    {
+        if (this.symbol != null)
             this.symbol.setDelegateOwner(owner);
-        }
-        if (this.path != null) {
+        if (this.path != null)
             this.path.setDelegateOwner(owner);
-        }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Iterable<? extends Position> getPositions() {
+    /** {@inheritDoc} */
+    public Iterable<? extends Position> getPositions()
+    {
         List<Position> positions = new ArrayList<Position>();
-        if (this.symbolPosition != null) {
+        if (this.symbolPosition != null)
             positions.add(this.symbolPosition);
-        }
-        if (this.attachmentPosition != null) {
+        if (this.attachmentPosition != null)
             positions.add(this.attachmentPosition);
-        }
 
         return positions;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setPositions(Iterable<? extends Position> positions) {
-        if (positions == null) {
+    /** {@inheritDoc} */
+    public void setPositions(Iterable<? extends Position> positions)
+    {
+        if (positions == null)
+        {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         Iterator<? extends Position> iterator = positions.iterator();
-        if (iterator.hasNext()) {
+        if (iterator.hasNext())
+        {
             this.symbolPosition = iterator.next();
-        } else {
+        }
+        else
+        {
             String message = Logging.getMessage("generic.InsufficientPositions");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (iterator.hasNext()) {
+        if (iterator.hasNext())
             this.attachmentPosition = iterator.next();
-        }
 
-        if (this.symbol != null) {
+        if (this.symbol != null)
+        {
             this.symbol.setPosition(this.symbolPosition);
         }
 
-        if (this.attachmentPosition != null) {
-            if (this.path == null) {
+        if (this.attachmentPosition != null)
+        {
+            if (this.path == null)
                 this.path = this.createPath();
-            }
 
             this.path.setPositions(Arrays.asList(this.symbolPosition, this.attachmentPosition));
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Position getReferencePosition() {
+    /** {@inheritDoc} */
+    public Position getReferencePosition()
+    {
         return this.symbolPosition;
     }
 
-    /**
-     * {@inheritDoc} Overridden to update symbol attributes.
-     */
+    /** {@inheritDoc} Overridden to update symbol attributes. */
     @Override
-    protected void determineActiveAttributes() {
+    protected void determineActiveAttributes()
+    {
         super.determineActiveAttributes();
 
         // Apply active attributes to the symbol.
-        if (this.symbolAttributes != null) {
+        if (this.symbolAttributes != null)
+        {
             ShapeAttributes activeAttributes = this.getActiveShapeAttributes();
             this.symbolAttributes.setOpacity(activeAttributes.getInteriorOpacity());
             this.symbolAttributes.setScale(this.activeOverrides.getScale());
         }
     }
 
-    protected TacticalSymbol createSymbol(String sidc) {
+    protected TacticalSymbol createSymbol(String sidc)
+    {
         Position symbolPosition = this.getReferencePosition();
         TacticalSymbol symbol = new LimitedAccessSymbol(sidc,
-                symbolPosition != null ? symbolPosition : Position.ZERO);
+            symbolPosition != null ? symbolPosition : Position.ZERO);
         symbol.setDelegateOwner(this);
         symbol.setAttributes(this.symbolAttributes);
         symbol.setAltitudeMode(this.getAltitudeMode());
@@ -259,7 +260,8 @@ public class LimitedAccessArea extends AbstractMilStd2525TacticalGraphic {
      *
      * @return New path configured with defaults appropriate for this type of graphic.
      */
-    protected Path createPath() {
+    protected Path createPath()
+    {
         Path path = new Path();
         path.setFollowTerrain(true);
         path.setPathType(AVKey.LINEAR);

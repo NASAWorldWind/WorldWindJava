@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.tutorial;
 
 import gov.nasa.worldwind.Configuration;
@@ -20,25 +21,20 @@ import java.awt.*;
 /**
  * Example of a custom {@link Renderable} that draws a cube at a geographic position. This class shows the simplest
  * possible example of a custom Renderable, while still following WorldWind best practices. See
- * https://worldwind.arc.nasa.gov/java/tutorials/build-a-custom-renderable/ for a complete description of this example.
+ * https://worldwind.arc.nasa.gov/java/tutorials/build-a-custom-renderable/ for a complete description of this
+ * example.
  *
  * @author pabercrombie
  * @version $Id: Cube.java 691 2012-07-12 19:17:17Z pabercrombie $
  */
-public class Cube extends ApplicationTemplate implements Renderable {
-
-    /**
-     * Geographic position of the cube.
-     */
+public class Cube extends ApplicationTemplate implements Renderable
+{
+    /** Geographic position of the cube. */
     protected Position position;
-    /**
-     * Length of each face, in meters.
-     */
+    /** Length of each face, in meters. */
     protected double size;
 
-    /**
-     * Support object to help with pick resolution.
-     */
+    /** Support object to help with pick resolution. */
     protected PickSupport pickSupport = new PickSupport();
 
     // Determined each frame
@@ -49,55 +45,56 @@ public class Cube extends ApplicationTemplate implements Renderable {
      * This class holds the Cube's Cartesian coordinates. An instance of it is added to the scene controller's ordered
      * renderable queue during picking and rendering.
      */
-    protected class OrderedCube implements OrderedRenderable {
-
-        /**
-         * Cartesian position of the cube, computed from {@link gov.nasa.worldwindx.examples.tutorial.Cube#position}.
-         */
+    protected class OrderedCube implements OrderedRenderable
+    {
+        /** Cartesian position of the cube, computed from
+         * {@link gov.nasa.worldwindx.examples.tutorial.Cube#position}. */
         protected Vec4 placePoint;
-        /**
-         * Distance from the eye point to the cube.
-         */
+        /** Distance from the eye point to the cube. */
         protected double eyeDistance;
         /**
          * The cube's Cartesian bounding extent.
          */
         protected Extent extent;
 
-        public double getDistanceFromEye() {
+        public double getDistanceFromEye()
+        {
             return this.eyeDistance;
         }
 
-        public void pick(DrawContext dc, Point pickPoint) {
+        public void pick(DrawContext dc, Point pickPoint)
+        {
             // Use same code for rendering and picking.
             this.render(dc);
         }
 
-        public void render(DrawContext dc) {
+        public void render(DrawContext dc)
+        {
             Cube.this.drawOrderedRenderable(dc, Cube.this.pickSupport);
         }
     }
 
-    public Cube(Position position, double sizeInMeters) {
+    public Cube(Position position, double sizeInMeters)
+    {
         this.position = position;
         this.size = sizeInMeters;
     }
 
-    public void render(DrawContext dc) {
+    public void render(DrawContext dc)
+    {
         // Render is called twice, once for picking and once for rendering. In both cases an OrderedCube is added to
         // the ordered renderable queue.
 
         OrderedCube orderedCube = this.makeOrderedRenderable(dc);
 
-        if (orderedCube.extent != null) {
-            if (!this.intersectsFrustum(dc, orderedCube)) {
+        if (orderedCube.extent != null)
+        {
+            if (!this.intersectsFrustum(dc, orderedCube))
                 return;
-            }
 
             // If the shape is less that a pixel in size, don't render it.
-            if (dc.isSmall(orderedCube.extent, 1)) {
+            if (dc.isSmall(orderedCube.extent, 1))
                 return;
-            }
         }
 
         // Add the cube to the ordered renderable queue. The SceneController sorts the ordered renderables by eye
@@ -113,10 +110,10 @@ public class Cube extends ApplicationTemplate implements Renderable {
      *
      * @return true if this cube intersects the frustum, otherwise false.
      */
-    protected boolean intersectsFrustum(DrawContext dc, OrderedCube orderedCube) {
-        if (dc.isPickingMode()) {
+    protected boolean intersectsFrustum(DrawContext dc, OrderedCube orderedCube)
+    {
+        if (dc.isPickingMode())
             return dc.getPickFrustums().intersectsAny(orderedCube.extent);
-        }
 
         return dc.getView().getFrustumInModelCoordinates().intersects(orderedCube.extent);
     }
@@ -127,21 +124,26 @@ public class Cube extends ApplicationTemplate implements Renderable {
      * @param dc Current draw context.
      * @return The resulting cube.
      */
-    protected OrderedCube makeOrderedRenderable(DrawContext dc) {
+    protected OrderedCube makeOrderedRenderable(DrawContext dc)
+    {
         // This method is called twice each frame: once during picking and once during rendering. We only need to
         // compute the placePoint, eye distance and extent once per frame, so check the frame timestamp to see if
         // this is a new frame. However, we can't use this optimization for 2D continuous globes because the
         // Cartesian coordinates of the cube are different for each 2D globe drawn during the current frame.
 
-        if (dc.getFrameTimeStamp() != this.frameTimestamp || dc.isContinuous2DGlobe()) {
+        if (dc.getFrameTimeStamp() != this.frameTimestamp || dc.isContinuous2DGlobe())
+        {
             OrderedCube orderedCube = new OrderedCube();
 
             // Convert the cube's geographic position to a position in Cartesian coordinates. If drawing to a 2D
             // globe ignore the shape's altitude.
-            if (dc.is2DGlobe()) {
+            if (dc.is2DGlobe())
+            {
                 orderedCube.placePoint = dc.getGlobe().computePointFromPosition(this.position.getLatitude(),
-                        this.position.getLongitude(), 0);
-            } else {
+                    this.position.getLongitude(), 0);
+            }
+            else
+            {
                 orderedCube.placePoint = dc.getGlobe().computePointFromPosition(this.position);
             }
 
@@ -157,7 +159,9 @@ public class Cube extends ApplicationTemplate implements Renderable {
             this.currentFramesOrderedCube = orderedCube;
 
             return orderedCube;
-        } else {
+        }
+        else
+        {
             return this.currentFramesOrderedCube;
         }
     }
@@ -169,11 +173,14 @@ public class Cube extends ApplicationTemplate implements Renderable {
      * @param dc Current draw context.
      * @param pickCandidates The pick candidates list.
      */
-    protected void drawOrderedRenderable(DrawContext dc, PickSupport pickCandidates) {
+    protected void drawOrderedRenderable(DrawContext dc, PickSupport pickCandidates)
+    {
         this.beginDrawing(dc);
-        try {
+        try
+        {
             GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
-            if (dc.isPickingMode()) {
+            if (dc.isPickingMode())
+            {
                 Color pickColor = dc.getUniquePickColor();
                 pickCandidates.addPickableObject(pickColor.getRGB(), this, this.position);
                 gl.glColor3ub((byte) pickColor.getRed(), (byte) pickColor.getGreen(), (byte) pickColor.getBlue());
@@ -182,7 +189,9 @@ public class Cube extends ApplicationTemplate implements Renderable {
             // Render a unit cube and apply a scaling factor to scale the cube to the appropriate size.
             gl.glScaled(this.size, this.size, this.size);
             this.drawUnitCube(dc);
-        } finally {
+        }
+        finally
+        {
             this.endDrawing(dc);
         }
     }
@@ -193,14 +202,16 @@ public class Cube extends ApplicationTemplate implements Renderable {
      *
      * @param dc Active draw context.
      */
-    protected void beginDrawing(DrawContext dc) {
+    protected void beginDrawing(DrawContext dc)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         int attrMask = GL2.GL_CURRENT_BIT | GL2.GL_COLOR_BUFFER_BIT;
 
         gl.glPushAttrib(attrMask);
 
-        if (!dc.isPickingMode()) {
+        if (!dc.isPickingMode())
+        {
             dc.beginStandardLighting();
             gl.glEnable(GL.GL_BLEND);
             OGLUtil.applyBlending(gl, false);
@@ -228,12 +239,12 @@ public class Cube extends ApplicationTemplate implements Renderable {
      *
      * @param dc Active draw context.
      */
-    protected void endDrawing(DrawContext dc) {
+    protected void endDrawing(DrawContext dc)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        if (!dc.isPickingMode()) {
+        if (!dc.isPickingMode())
             dc.endStandardLighting();
-        }
 
         gl.glPopAttrib();
     }
@@ -243,10 +254,11 @@ public class Cube extends ApplicationTemplate implements Renderable {
      *
      * @param dc Current draw context.
      */
-    protected void drawUnitCube(DrawContext dc) {
+    protected void drawUnitCube(DrawContext dc)
+    {
         // Vertices of a unit cube, centered on the origin.
         float[][] v = {{-0.5f, 0.5f, -0.5f}, {-0.5f, 0.5f, 0.5f}, {0.5f, 0.5f, 0.5f}, {0.5f, 0.5f, -0.5f},
-        {-0.5f, -0.5f, 0.5f}, {0.5f, -0.5f, 0.5f}, {0.5f, -0.5f, -0.5f}, {-0.5f, -0.5f, -0.5f}};
+            {-0.5f, -0.5f, 0.5f}, {0.5f, -0.5f, 0.5f}, {0.5f, -0.5f, -0.5f}, {-0.5f, -0.5f, -0.5f}};
 
         // Array to group vertices into faces
         int[][] faces = {{0, 1, 2, 3}, {2, 5, 6, 3}, {1, 4, 5, 2}, {0, 7, 4, 1}, {0, 7, 6, 3}, {4, 7, 6, 5}};
@@ -258,22 +270,28 @@ public class Cube extends ApplicationTemplate implements Renderable {
         // or vertex buffer objects to achieve better performance.
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         gl.glBegin(GL2.GL_QUADS);
-        try {
-            for (int i = 0; i < faces.length; i++) {
+        try
+        {
+            for (int i = 0; i < faces.length; i++)
+            {
                 gl.glNormal3f(n[i][0], n[i][1], n[i][2]);
 
-                for (int j = 0; j < faces[0].length; j++) {
+                for (int j = 0; j < faces[0].length; j++)
+                {
                     gl.glVertex3f(v[faces[i][j]][0], v[faces[i][j]][1], v[faces[i][j]][2]);
                 }
             }
-        } finally {
+        }
+        finally
+        {
             gl.glEnd();
         }
     }
 
-    protected static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+    protected static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
             super(true, true, false);
 
             RenderableLayer layer = new RenderableLayer();
@@ -284,7 +302,8 @@ public class Cube extends ApplicationTemplate implements Renderable {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 35.0);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -120.0);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 15500);

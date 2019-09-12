@@ -19,12 +19,13 @@ import java.awt.*;
  * @see LayerTreeUsage
  * @see OnScreenLayerManager
  */
-public class LayerPanel extends JPanel {
-
+public class LayerPanel extends JPanel
+{
     protected LayerManagerPanel layerManagerPanel;
     protected ElevationModelManagerPanel elevationModelManagerPanel;
 
-    public LayerPanel(WorldWindow wwd) {
+    public LayerPanel(WorldWindow wwd)
+    {
         super(new BorderLayout(10, 10));
 
         this.add(this.layerManagerPanel = new LayerManagerPanel(wwd), BorderLayout.CENTER);
@@ -32,11 +33,13 @@ public class LayerPanel extends JPanel {
         this.add(this.elevationModelManagerPanel = new ElevationModelManagerPanel(wwd), BorderLayout.SOUTH);
     }
 
-    public void updateLayers(WorldWindow wwd) {
+    public void updateLayers(WorldWindow wwd)
+    {
         this.layerManagerPanel.update(wwd);
     }
 
-    public void updateElevations(WorldWindow wwd) {
+    public void updateElevations(WorldWindow wwd)
+    {
         this.elevationModelManagerPanel.update(wwd);
     }
 
@@ -44,7 +47,8 @@ public class LayerPanel extends JPanel {
     /**
      * @deprecated There is no need to call this method. As of 6/30/14 it is a no-op.
      */
-    public void update(WorldWindow wwd) {
+    public void update(WorldWindow wwd)
+    {
         // This is here merely to provide backwards compatibility for users of the previous version of LayerPanel.
     }
 }

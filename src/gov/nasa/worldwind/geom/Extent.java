@@ -14,8 +14,8 @@ import gov.nasa.worldwind.View;
  * @author Tom Gaskins
  * @version $Id: Extent.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Extent {
-
+public interface Extent
+{
     /**
      * Returns the extent's center point.
      *
@@ -57,7 +57,7 @@ public interface Extent {
      * @param line the <code>Line</code> with which to intersect this <code>Extent</code>.
      *
      * @return an array of intersections representing all the points where <code>line</code> enters or leave this
-     * <code>Extent</code>.
+     *         <code>Extent</code>.
      */
     gov.nasa.worldwind.geom.Intersection[] intersect(gov.nasa.worldwind.geom.Line line);
 
@@ -105,8 +105,8 @@ public interface Extent {
      * @param view the <code>View</code> for which to compute a projected screen area.
      *
      * @return the projected screen area of this <code>Extent</code> in square pixels, or
-     * <code>Double.POSITIVE_INFINITY</code> if the <code>view's</code> eye point is inside this <code>Extent</code> or
-     * part of this <code>Extent</code> is behind the <code>view's</code> eye point.
+     *         <code>Double.POSITIVE_INFINITY</code> if the <code>view's</code> eye point is inside this
+     *         <code>Extent</code> or part of this <code>Extent</code> is behind the <code>view's</code> eye point.
      *
      * @throws IllegalArgumentException if the <code>view</code> is <code>null</code>.
      */

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.worldwindow.core.layermanager;
 
 import gov.nasa.worldwind.layers.LayerList;
@@ -13,8 +14,8 @@ import gov.nasa.worldwindx.applications.worldwindow.features.Feature;
  * @author tag
  * @version $Id: ActiveLayersManager.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface ActiveLayersManager extends Feature {
-
+public interface ActiveLayersManager extends Feature
+{
     /**
      * Indicates whether to show internal layers, those whose attribute-value list contains {@link
      * Constants#INTERNAL_LAYER}.

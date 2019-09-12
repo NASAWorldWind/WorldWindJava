@@ -13,8 +13,8 @@ import gov.nasa.worldwind.render.DrawContext;
  * @author Tom Gaskins
  * @version $Id: Layer.java 1824 2014-01-22 22:41:10Z dcollins $
  */
-public interface Layer extends WWObject, Disposable, Restorable {
-
+public interface Layer extends WWObject, Disposable, Restorable
+{
     /**
      * Indicates whether the layer is enabled for rendering and selection.
      *
@@ -61,7 +61,7 @@ public interface Layer extends WWObject, Disposable, Restorable {
      * renderables. See the description of this method in specific layers to determine usage there.
      *
      * @param opacity The layer opacity, a value between 0 and 1. 0 indicates non-opaque (fully transparent), 1
-     * indicates fully opaque. Values between 0 and 1 indicate partial opacity.
+     *                indicates fully opaque. Values between 0 and 1 indicate partial opacity.
      */
     void setOpacity(double opacity);
 
@@ -88,7 +88,8 @@ public interface Layer extends WWObject, Disposable, Restorable {
     /**
      * Causes the layer to perform any actions necessary to subsequently render the layer. The layer has exclusive
      * access to the frame buffer during the call, and may use it to generate images or other information that is
-     * subsequently used to render the layer's contents. Upon return, the OpenGL state must be restored to its original.
+     * subsequently used to render the layer's contents. Upon return, the OpenGL state must be restored to its
+     * original.
      *
      * @param dc the current draw context.
      */
@@ -106,7 +107,7 @@ public interface Layer extends WWObject, Disposable, Restorable {
      * on the screen. Objects that intersect that point are added to the draw context's pick list and are conveyed to
      * the application via selection events or by a direct query of {@link WorldWindow#getObjectsAtCurrentPosition()}.
      *
-     * @param dc the current draw context for rendering.
+     * @param dc        the current draw context for rendering.
      * @param pickPoint the screen coordinate point
      *
      * @see SelectEvent
@@ -224,14 +225,12 @@ public interface Layer extends WWObject, Disposable, Restorable {
      * Indicates the altitude above which this layer likely has low value or is not expected to be active. This value is
      * independent of the maximum active altitude, {@link #setMaxActiveAltitude(double)} and does not reflect it.
      * <p>
-     * The returned altitude is valid when the field of view indicated by
-     * {@link gov.nasa.worldwind.View#getFieldOfView()} is set to its default value. Changing the field of view to any
-     * value other than the default may change this layer's maximum effective altitude, but the returned altitude will
-     * not reflect that change.
+     * The returned altitude is valid when the field of view indicated by {@link gov.nasa.worldwind.View#getFieldOfView()}
+     * is set to its default value. Changing the field of view to any value other than the default may change this
+     * layer's maximum effective altitude, but the returned altitude will not reflect that change.
      *
      * @param radius the radius of the {@link gov.nasa.worldwind.globes.Globe} the layer is associated with. May be
-     * null, in which case the Earth's equatorial radius is used,
-     * {@link gov.nasa.worldwind.globes.Earth#WGS84_EQUATORIAL_RADIUS}.
+     *               null, in which case the Earth's equatorial radius is used, {@link gov.nasa.worldwind.globes.Earth#WGS84_EQUATORIAL_RADIUS}.
      *
      * @return the layer's maximum effective altitude.
      */
@@ -241,14 +240,12 @@ public interface Layer extends WWObject, Disposable, Restorable {
      * Indicates the altitude below which this layer likely has low value or is not expected to be active. This value is
      * independent of the minimum active altitude, {@link #setMinActiveAltitude(double)} and does not reflect it.
      * <p>
-     * The returned altitude is valid when the field of view indicated by
-     * {@link gov.nasa.worldwind.View#getFieldOfView()} is set to its default value. Changing the field of view to any
-     * value other than the default may change this layer's minimum effective altitude, but the returned altitude will
-     * not reflect that change.
+     * The returned altitude is valid when the field of view indicated by {@link gov.nasa.worldwind.View#getFieldOfView()}
+     * is set to its default value. Changing the field of view to any value other than the default may change this
+     * layer's minimum effective altitude, but the returned altitude will not reflect that change.
      *
      * @param radius the radius of the {@link gov.nasa.worldwind.globes.Globe} the layer is associated with. May be
-     * null, in which case the Earth's equatorial radius is used,
-     * {@link gov.nasa.worldwind.globes.Earth#WGS84_EQUATORIAL_RADIUS}.
+     *               null, in which case the Earth's equatorial radius is used, {@link gov.nasa.worldwind.globes.Earth#WGS84_EQUATORIAL_RADIUS}.
      *
      * @return the layer's minimum effective altitude.
      */

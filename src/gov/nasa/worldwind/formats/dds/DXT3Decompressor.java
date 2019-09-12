@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.formats.dds;
 
 import gov.nasa.worldwind.util.Logging;
@@ -17,47 +18,58 @@ import java.util.logging.Level;
  * @author Lado Garakanidze
  * @version $Id: DXT3Decompressor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class DXT3Decompressor implements DXTDecompressor {
 
+public class DXT3Decompressor implements DXTDecompressor
+{
     public static final int DXT3_BLOCK_SIZE = 4;
 
-    public DXT3Decompressor() {
+    public DXT3Decompressor()
+    {
 
     }
 
-    public BufferedImage decompress(ByteBuffer buffer, int width, int height) throws IOException, IllegalArgumentException {
-        if (null == buffer) {
+    public BufferedImage decompress(ByteBuffer buffer, int width, int height) throws IOException, IllegalArgumentException
+    {
+        if (null == buffer)
+        {
             String message = Logging.getMessage("nullValue.ByteBufferIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (width <= 0 || height <= 0) {
+        if (width <= 0 || height <= 0)
+        {
             String message = Logging.getMessage("generic.InvalidImageSize", width, height);
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
         }
 
         // TODO check buffer's remaining with image size
+
         return this.decodeDxt3Buffer(buffer, width, height);
     }
 
     protected BufferedImage decodeDxt3Buffer(ByteBuffer buffer, int width, int height)
-            throws IllegalArgumentException, IOException {
-        if (null == buffer) {
+            throws IllegalArgumentException, IOException
+    {
+        if (null == buffer)
+        {
             String message = Logging.getMessage("nullValue.ByteBufferIsNull");
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (width < DXT3_BLOCK_SIZE || height < DXT3_BLOCK_SIZE) {
+        if (width < DXT3_BLOCK_SIZE || height < DXT3_BLOCK_SIZE)
+        {
             String message = Logging.getMessage("generic.InvalidImageSize", width, height);
             Logging.logger().fine(message);
             throw new IllegalArgumentException(message);
         }
 
-        try {
-            if (buffer.order() != ByteOrder.LITTLE_ENDIAN) {
+        try
+        {
+            if (buffer.order() != ByteOrder.LITTLE_ENDIAN)
+            {
                 buffer.order(ByteOrder.LITTLE_ENDIAN);
             }
 
@@ -69,8 +81,10 @@ public class DXT3Decompressor implements DXTDecompressor {
 
             BufferedImage result = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB_PRE);
 
-            for (int row = 0; row < numTilesHigh; row++) {
-                for (int col = 0; col < numTilesWide; col++) {
+            for (int row = 0; row < numTilesHigh; row++)
+            {
+                for (int col = 0; col < numTilesWide; col++)
+                {
                     long alphaData = buffer.getLong();
                     short minColor = buffer.getShort();
                     short maxColor = buffer.getShort();
@@ -78,7 +92,8 @@ public class DXT3Decompressor implements DXTDecompressor {
 
                     Color24[] lookupTable = Color24.expandLookupTable(minColor, maxColor);
 
-                    for (int k = DXT3_BLOCK_SIZE * DXT3_BLOCK_SIZE - 1; k >= 0; k--) {
+                    for (int k = DXT3_BLOCK_SIZE * DXT3_BLOCK_SIZE - 1; k >= 0; k--)
+                    {
                         int alpha = (int) (alphaData >>> (k * 4)) & 0xF; // Alphas are just 4 bits per pixel
                         alpha <<= 4;
 
@@ -86,6 +101,7 @@ public class DXT3Decompressor implements DXTDecompressor {
 
                         // No need to multiply alpha, it is already pre-multiplied
 //                      Color24 color = Color24.multiplyAlpha(lookupTable[colorIndex], alpha );
+
                         Color24 color = lookupTable[colorIndex];
                         int pixel8888 = (alpha << 24) | color.getPixel888();
 
@@ -99,7 +115,9 @@ public class DXT3Decompressor implements DXTDecompressor {
                 result.setRGB(0, row * DXT3_BLOCK_SIZE, width, DXT3_BLOCK_SIZE, pixels, 0, width);
             }
             return result;
-        } catch (Throwable t) {
+        }
+        catch (Throwable t)
+        {
             String message = t.getMessage();
             message = (null == message) ? t.getCause().getMessage() : message;
             Logging.logger().log(Level.FINEST, message, t);

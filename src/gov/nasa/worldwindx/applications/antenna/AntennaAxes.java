@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.antenna;
 
 import com.jogamp.common.nio.Buffers;
@@ -27,8 +28,8 @@ import java.nio.*;
  * @author tag
  * @version $Id: AntennaAxes.java 2053 2014-06-10 20:16:57Z tgaskins $
  */
-public class AntennaAxes extends AbstractShape {
-
+public class AntennaAxes extends AbstractShape
+{
     public static final int DISPLAY_MODE_FILL = GL2.GL_FILL;
     public static final int DISPLAY_MODE_LINE = GL2.GL_LINE;
 
@@ -49,8 +50,8 @@ public class AntennaAxes extends AbstractShape {
      * This class holds globe-specific data for this shape. It's managed via the shape-data cache in {@link
      * gov.nasa.worldwind.render.AbstractShape.AbstractShapeData}.
      */
-    protected static class ShapeData extends AbstractShapeData {
-
+    protected static class ShapeData extends AbstractShapeData
+    {
         protected FloatBuffer vertices;
         protected IntBuffer[] indices;
         protected FloatBuffer normals;
@@ -61,15 +62,17 @@ public class AntennaAxes extends AbstractShape {
         /**
          * Construct a cache entry using the boundaries of this shape.
          *
-         * @param dc the current draw context.
+         * @param dc    the current draw context.
          * @param shape this shape.
          */
-        public ShapeData(DrawContext dc, AntennaAxes shape) {
+        public ShapeData(DrawContext dc, AntennaAxes shape)
+        {
             super(dc, shape.minExpiryTime, shape.maxExpiryTime);
         }
     }
 
-    protected AbstractShapeData createCacheEntry(DrawContext dc) {
+    protected AbstractShapeData createCacheEntry(DrawContext dc)
+    {
         return new ShapeData(dc, this);
     }
 
@@ -78,19 +81,23 @@ public class AntennaAxes extends AbstractShape {
      *
      * @return the current data cache entry.
      */
-    protected ShapeData getCurrent() {
+    protected ShapeData getCurrent()
+    {
         return (ShapeData) this.getCurrentData();
     }
 
-    public AntennaAxes() {
+    public AntennaAxes()
+    {
     }
 
     @Override
-    protected void initialize() {
+    protected void initialize()
+    {
         // Nothing unique to initialize.
     }
 
-    public Position getPosition() {
+    public Position getPosition()
+    {
         return position;
     }
 
@@ -99,8 +106,10 @@ public class AntennaAxes extends AbstractShape {
      *
      * @param position the position of the axes' origin.
      */
-    public void setPosition(Position position) {
-        if (position == null) {
+    public void setPosition(Position position)
+    {
+        if (position == null)
+        {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -110,7 +119,8 @@ public class AntennaAxes extends AbstractShape {
         this.reset();
     }
 
-    public Angle getAzimuth() {
+    public Angle getAzimuth()
+    {
         return azimuth;
     }
 
@@ -119,11 +129,13 @@ public class AntennaAxes extends AbstractShape {
      *
      * @param azimuth the angle from north.
      */
-    public void setAzimuth(Angle azimuth) {
+    public void setAzimuth(Angle azimuth)
+    {
         this.azimuth = azimuth;
     }
 
-    public Angle getElevationAngle() {
+    public Angle getElevationAngle()
+    {
         return elevationAngle;
     }
 
@@ -133,20 +145,24 @@ public class AntennaAxes extends AbstractShape {
      *
      * @param elevationAngle the elevation angle.
      */
-    public void setElevationAngle(Angle elevationAngle) {
+    public void setElevationAngle(Angle elevationAngle)
+    {
         this.elevationAngle = elevationAngle;
     }
 
-    public double getRadius() {
+    public double getRadius()
+    {
         return radius;
     }
 
-    public void setRadius(double radius) {
+    public void setRadius(double radius)
+    {
         this.radius = radius;
         this.reset();
     }
 
-    public double getLength() {
+    public double getLength()
+    {
         return length;
     }
 
@@ -155,144 +171,159 @@ public class AntennaAxes extends AbstractShape {
      *
      * @param length the axes length in meters.
      */
-    public void setLength(double length) {
+    public void setLength(double length)
+    {
         this.length = length;
         this.reset();
     }
 
-    public Font getLabelFont() {
+    public Font getLabelFont()
+    {
         return labelFont;
     }
 
-    public void setLabelFont(Font labelFont) {
+    public void setLabelFont(Font labelFont)
+    {
         this.labelFont = labelFont;
     }
 
-    public String getXAxisLabel() {
+    public String getXAxisLabel()
+    {
         return xAxisLabel;
     }
 
-    public void setXAxisLabel(String xAxisLabel) {
+    public void setXAxisLabel(String xAxisLabel)
+    {
         this.xAxisLabel = xAxisLabel;
     }
 
-    public String getYAxisLabel() {
+    public String getYAxisLabel()
+    {
         return yAxisLabel;
     }
 
-    public void setYAxisLabel(String yAxisLabel) {
+    public void setYAxisLabel(String yAxisLabel)
+    {
         this.yAxisLabel = yAxisLabel;
     }
 
-    public String getZAxisLabel() {
+    public String getZAxisLabel()
+    {
         return zAxisLabel;
     }
 
-    public void setZAxisLabel(String zAxisLabel) {
+    public void setZAxisLabel(String zAxisLabel)
+    {
         this.zAxisLabel = zAxisLabel;
     }
 
-    public Position getReferencePosition() {
+    public Position getReferencePosition()
+    {
         return this.getPosition();
     }
 
-    public Extent getExtent(Globe globe, double verticalExaggeration) {
+    public Extent getExtent(Globe globe, double verticalExaggeration)
+    {
         // See if we've cached an extent associated with the globe.
         Extent extent = super.getExtent(globe, verticalExaggeration);
-        if (extent != null) {
+        if (extent != null)
             return extent;
-        }
 
         this.getCurrent().setExtent(new Sphere(globe.computePointFromPosition(this.getReferencePosition()),
-                this.getRadius()));
+            this.getRadius()));
 
         return this.getCurrent().getExtent();
     }
 
-    public Sector getSector() {
-        if (this.sector == null) {
+    public Sector getSector()
+    {
+        if (this.sector == null)
             this.sector = null; // TODO
-        }
+
         return this.sector;
     }
 
-    protected boolean mustApplyTexture(DrawContext dc) {
+    protected boolean mustApplyTexture(DrawContext dc)
+    {
         return false;
     }
 
     @Override
-    protected boolean shouldUseVBOs(DrawContext dc) {
+    protected boolean shouldUseVBOs(DrawContext dc)
+    {
         return false;
     }
 
     @Override
-    public void render(DrawContext dc) {
+    public void render(DrawContext dc)
+    {
         super.render(dc);
     }
 
     @Override
-    protected boolean mustDrawOutline() {
+    protected boolean mustDrawOutline()
+    {
         return false;
     }
 
-    protected boolean mustRegenerateGeometry(DrawContext dc) {
+    protected boolean mustRegenerateGeometry(DrawContext dc)
+    {
         ShapeData shapeData = this.getCurrent();
 
-        if (shapeData.vertices == null) {
+        if (shapeData.vertices == null)
             return true;
-        }
 
         if (this.getAltitudeMode() == WorldWind.ABSOLUTE
-                && shapeData.getGlobeStateKey() != null
-                && shapeData.getGlobeStateKey().equals(dc.getGlobe().getGlobeStateKey(dc))) {
+            && shapeData.getGlobeStateKey() != null
+            && shapeData.getGlobeStateKey().equals(dc.getGlobe().getGlobeStateKey(dc)))
             return false;
-        }
 
         // Determine whether the reference point has changed. If it hasn't, then no other points need to change.
         Vec4 rp = this.computePoint(dc.getTerrain(), this.getPosition());
-        if (shapeData.getReferencePoint() != null && shapeData.getReferencePoint().equals(rp)) {
+        if (shapeData.getReferencePoint() != null && shapeData.getReferencePoint().equals(rp))
             return false;
-        }
 
         return super.mustRegenerateGeometry(dc);
     }
 
-    protected boolean doMakeOrderedRenderable(DrawContext dc) {
-        if (!this.intersectsFrustum(dc)) {
+    protected boolean doMakeOrderedRenderable(DrawContext dc)
+    {
+        if (!this.intersectsFrustum(dc))
             return false;
-        }
 
         this.makeCylinderVertices(dc);
         this.makeCone();
 
         ShapeData shapeData = this.getCurrent();
 
-        if (shapeData.indices == null) {
+        if (shapeData.indices == null)
             this.makeCylinderIndices();
-        }
 
-        if (shapeData.normals == null) {
+        if (shapeData.normals == null)
             this.makeCylinderNormals();
-        }
 
         return true;
     }
 
-    protected boolean isOrderedRenderableValid(DrawContext dc) {
+    protected boolean isOrderedRenderableValid(DrawContext dc)
+    {
         ShapeData shapeData = this.getCurrent();
 
         return shapeData.vertices != null && shapeData.indices != null && shapeData.normals != null;
     }
 
-    protected void doDrawOutline(DrawContext dc) {
+    protected void doDrawOutline(DrawContext dc)
+    {
         return;
     }
 
-    protected void doDrawInterior(DrawContext dc) {
+    protected void doDrawInterior(DrawContext dc)
+    {
         this.drawAxes(dc);
     }
 
-    public void drawAxes(DrawContext dc) {
+    public void drawAxes(DrawContext dc)
+    {
         ShapeData shapeData = this.getCurrent();
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
@@ -307,20 +338,17 @@ public class AntennaAxes extends AbstractShape {
         gl.glRotated(Math.abs(90 - this.getPosition().getLatitude().degrees), 1, 0, 0);
 
         // Apply the azimuth.
-        if (this.getAzimuth() != null) {
+        if (this.getAzimuth() != null)
             gl.glRotated(-this.getAzimuth().degrees, 0, 1, 0);
-        }
 
         // Apply the elevation angle.
-        if (this.getElevationAngle() != null) {
+        if (this.getElevationAngle() != null)
             gl.glRotated(this.getElevationAngle().degrees, 1, 0, 0);
-        }
 
         gl.glVertexPointer(3, GL.GL_FLOAT, 0, shapeData.vertices.rewind());
 
-        if (!dc.isPickingMode() && this.mustApplyLighting(dc, null)) {
+        if (!dc.isPickingMode() && this.mustApplyLighting(dc, null))
             gl.glNormalPointer(GL.GL_FLOAT, 0, shapeData.normals.rewind());
-        }
 
         // Draw the "Z axis
         this.drawCylinder(dc, shapeData);
@@ -341,9 +369,8 @@ public class AntennaAxes extends AbstractShape {
         // Draw the axis cones.
         gl.glVertexPointer(3, GL.GL_FLOAT, 0, shapeData.coneVertices.rewind());
 
-        if (!dc.isPickingMode() && this.mustApplyLighting(dc, null)) {
+        if (!dc.isPickingMode() && this.mustApplyLighting(dc, null))
             gl.glNormalPointer(GL.GL_FLOAT, 0, shapeData.coneNormals.rewind());
-        }
 
         // Draw the "Z axis cone
         this.drawCone(dc, shapeData);
@@ -363,43 +390,44 @@ public class AntennaAxes extends AbstractShape {
         gl.glPopMatrix();
 
         if (!dc.isPickingMode()) // labels aren't pickable
-        {
             this.drawLabels(dc);
-        }
     }
 
-    protected void drawCylinder(DrawContext dc, ShapeData shapeData) {
+    protected void drawCylinder(DrawContext dc, ShapeData shapeData)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        for (IntBuffer iBuffer : shapeData.indices) {
+        for (IntBuffer iBuffer : shapeData.indices)
+        {
             gl.glDrawElements(GL.GL_TRIANGLE_STRIP, iBuffer.limit(), GL.GL_UNSIGNED_INT, iBuffer.rewind());
         }
     }
 
-    protected void drawCone(DrawContext dc, ShapeData shapeData) {
+    protected void drawCone(DrawContext dc, ShapeData shapeData)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         IntBuffer iBuffer = shapeData.coneIndices;
         gl.glDrawElements(GL.GL_TRIANGLE_FAN, iBuffer.limit(), GL.GL_UNSIGNED_INT, iBuffer.rewind());
     }
 
-    protected void drawLabels(DrawContext dc) {
+    protected void drawLabels(DrawContext dc)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         // Compute the positioning transform.
         Matrix lat = Matrix.fromAxisAngle(Angle.POS90.subtract(this.position.getLatitude()), Vec4.UNIT_X);
         Matrix lon = Matrix.fromAxisAngle(this.position.getLongitude(), Vec4.UNIT_Y);
         Matrix baseM = lon.multiply(lat);
-        if (this.getAzimuth() != null) {
+        if (this.getAzimuth() != null)
             baseM = baseM.multiply(Matrix.fromAxisAngle(this.getAzimuth().multiply(-1), Vec4.UNIT_Y));
-        }
-        if (this.getElevationAngle() != null) {
+        if (this.getElevationAngle() != null)
             baseM = baseM.multiply(Matrix.fromAxisAngle(this.getElevationAngle(), Vec4.UNIT_X));
-        }
 
         // Compute the screen points at which to place the labels. These are all points on the WorldWind principal
         // axes, not the antenna model's axes. The correct labeling of those takes place below when the labels are
         // drawn. They have the same directions, but in the antenna model WW's Y axis is the model's Z axis, WW's Z
         // axis is the model's X axis, and WW's X axis is the model's Y axis.
+
         Vec4 px = new Vec4(1.1 * this.getLength(), 0, 0).transformBy3(baseM); // define points along principal axes
         Vec4 py = new Vec4(0, 1.1 * this.getLength(), 0).transformBy3(baseM);
         Vec4 pz = new Vec4(0, 0, 1.1 * this.getLength()).transformBy3(baseM);
@@ -420,19 +448,21 @@ public class AntennaAxes extends AbstractShape {
 
         OGLStackHandler osh = new OGLStackHandler();
 
-        try {
+        try
+        {
             osh.pushProjectionIdentity(gl);
             gl.glOrtho(0d, dc.getView().getViewport().width, 0d, dc.getView().getViewport().height, -1d, 1d);
 
             osh.pushModelviewIdentity(gl);
 
             // Draw the labels.
+
             TextRenderer textRenderer = OGLTextRenderer.getOrCreateTextRenderer(dc.getTextRendererCache(),
-                    this.labelFont);
+                this.labelFont);
 
             Color textColor = this.getActiveAttributes().getInteriorMaterial().getDiffuse();
             Color backgroundColor = (textColor.getAlpha() < 255 ? new Color(0, 0, 0, textColor.getAlpha())
-                    : Color.BLACK);
+                : Color.BLACK);
 
             // Do not depth buffer the labels.
             osh.pushAttrib(gl, GL2.GL_DEPTH_BUFFER_BIT);
@@ -441,27 +471,34 @@ public class AntennaAxes extends AbstractShape {
 
             textRenderer.begin3DRendering();
 
-            try {
+            try
+            {
                 this.drawLabel(textRenderer, this.getYAxisLabel(), screenPointX, textColor, backgroundColor);
                 this.drawLabel(textRenderer, this.getZAxisLabel(), screenPointY, textColor, backgroundColor);
                 this.drawLabel(textRenderer, this.getXAxisLabel(), screenPointZ, textColor, backgroundColor);
-            } finally {
+            }
+            finally
+            {
                 textRenderer.end3DRendering();
             }
-        } finally {
+        }
+        finally
+        {
             osh.pop(gl);
             dc.getView().pushReferenceCenter(dc, getCurrent().getReferencePoint());
         }
     }
 
-    protected void drawLabel(TextRenderer textRenderer, String text, Vec4 screenPoint, Color textColor, Color bgColor) {
+    protected void drawLabel(TextRenderer textRenderer, String text, Vec4 screenPoint, Color textColor, Color bgColor)
+    {
         textRenderer.setColor(bgColor);
         textRenderer.draw3D(text, (int) screenPoint.x + 1, (int) screenPoint.y - 1, 0, 1);
         textRenderer.setColor(textColor);
         textRenderer.draw3D(text, (int) screenPoint.x, (int) screenPoint.y, 0, 1);
     }
 
-    protected void makeCylinderVertices(DrawContext dc) {
+    protected void makeCylinderVertices(DrawContext dc)
+    {
         ShapeData shapeData = this.getCurrent();
 
         Vec4 rp = this.computePoint(dc.getTerrain(), this.getPosition());
@@ -479,19 +516,19 @@ public class AntennaAxes extends AbstractShape {
 
         Double r = this.getRadius();
 
-        for (int ih = 0; ih <= this.nHeightIntervals; ih++) {
+        for (int ih = 0; ih <= this.nHeightIntervals; ih++)
+        {
             double height = ih * dHeight;
 
-            if (ih == this.nHeightIntervals) {
+            if (ih == this.nHeightIntervals)
                 height = this.getLength();
-            }
 
-            for (int it = 0; it <= this.nThetaIntervals; it++) {
+            for (int it = 0; it <= this.nThetaIntervals; it++)
+            {
                 double theta = it * dTheta;
 
-                if (it == this.nThetaIntervals) {
+                if (it == this.nThetaIntervals)
                     theta = 0;
-                }
 
                 double x = r * Math.sin(theta);
                 double z = r * Math.cos(theta);
@@ -500,15 +537,12 @@ public class AntennaAxes extends AbstractShape {
                 double xa = Math.abs(x);
                 double ya = Math.abs(y);
                 double za = Math.abs(z);
-                if (xa > xMax) {
+                if (xa > xMax)
                     xMax = xa;
-                }
-                if (ya > yMax) {
+                if (ya > yMax)
                     yMax = ya;
-                }
-                if (za > zMax) {
+                if (za > zMax)
                     zMax = za;
-                }
 
                 shapeData.vertices.put((float) x).put((float) y).put((float) z);
             }
@@ -517,15 +551,18 @@ public class AntennaAxes extends AbstractShape {
         shapeData.setExtent(new Sphere(rp, Math.sqrt(xMax * xMax + yMax * yMax + zMax * zMax)));
     }
 
-    protected void makeCylinderIndices() {
+    protected void makeCylinderIndices()
+    {
         ShapeData shapeData = this.getCurrent();
 
         shapeData.indices = new IntBuffer[this.nHeightIntervals];
 
-        for (int j = 0; j < this.nHeightIntervals; j++) {
+        for (int j = 0; j < this.nHeightIntervals; j++)
+        {
             shapeData.indices[j] = Buffers.newDirectIntBuffer(2 * this.nThetaIntervals + 2);
 
-            for (int i = 0; i <= this.nThetaIntervals; i++) {
+            for (int i = 0; i <= this.nThetaIntervals; i++)
+            {
                 int k1 = i + j * (this.nThetaIntervals + 1);
                 int k2 = k1 + this.nThetaIntervals + 1;
                 shapeData.indices[j].put(k1).put(k2);
@@ -533,19 +570,22 @@ public class AntennaAxes extends AbstractShape {
         }
     }
 
-    protected void makeCylinderNormals() {
+    protected void makeCylinderNormals()
+    {
         ShapeData shapeData = this.getCurrent();
 
         shapeData.normals = Buffers.newDirectFloatBuffer(shapeData.vertices.limit());
 
-        for (int i = 0; i < shapeData.vertices.limit(); i += 3) {
+        for (int i = 0; i < shapeData.vertices.limit(); i += 3)
+        {
             Vec4 n = new Vec4(shapeData.vertices.get(i), 0, shapeData.vertices.get(i + 2)).normalize3();
 
             shapeData.normals.put((float) -n.x).put(0f).put((float) -n.z);
         }
     }
 
-    protected void makeCone() {
+    protected void makeCone()
+    {
         double dTheta = 2 * Math.PI / this.nThetaIntervals;
 
         // This is the center vertex for a triangle fan.
@@ -554,7 +594,8 @@ public class AntennaAxes extends AbstractShape {
         // Compute the outer vertices.
         double r = 1.0 * this.getRadius();
         Vec4[] outerVerts = new Vec4[this.nThetaIntervals];
-        for (int i = 0; i < outerVerts.length; i++) {
+        for (int i = 0; i < outerVerts.length; i++)
+        {
             double theta = i * dTheta;
 
             double x = r * Math.sin(theta);
@@ -568,18 +609,23 @@ public class AntennaAxes extends AbstractShape {
 
         Vec4[] outerNormals = new Vec4[outerVerts.length];
         Vec4 na = null, nb;
-        Vec4 va,
-         vb, vc;
-        for (int i = 0; i < outerVerts.length; i++) {
-            if (i == 0) {
-                va  = outerVerts[outerVerts.length - 1].subtract3(v0);
+        Vec4 va, vb, vc;
+        for (int i = 0; i < outerVerts.length; i++)
+        {
+            if (i == 0)
+            {
+                va = outerVerts[outerVerts.length - 1].subtract3(v0);
                 vb = outerVerts[i].subtract3(v0);
                 vc = outerVerts[i + 1].subtract3(v0);
                 na = va.cross3(vb).multiply3(0.5);
-            } else if (i == outerVerts.length - 1) {
+            }
+            else if (i == outerVerts.length - 1)
+            {
                 vb = outerVerts[i].subtract3(v0);
                 vc = outerVerts[0].subtract3(v0);
-            } else {
+            }
+            else
+            {
                 vb = outerVerts[i].subtract3(v0);
                 vc = outerVerts[i + 1].subtract3(v0);
             }
@@ -596,7 +642,8 @@ public class AntennaAxes extends AbstractShape {
         shapeData.coneVertices.put((float) v0.x).put((float) v0.y).put((float) v0.z);
         shapeData.coneNormals.put(0f).put(1f).put(0f);
 
-        for (int i = 0; i < outerVerts.length; i++) {
+        for (int i = 0; i < outerVerts.length; i++)
+        {
             Vec4 vert = outerVerts[i];
             Vec4 normal = outerNormals[i];
 
@@ -605,32 +652,38 @@ public class AntennaAxes extends AbstractShape {
         }
 
         shapeData.coneIndices = Buffers.newDirectIntBuffer(outerVerts.length + 2);
-        for (int i = 0; i < shapeData.coneIndices.capacity() - 1; i++) {
+        for (int i = 0; i < shapeData.coneIndices.capacity() - 1; i++)
+        {
             shapeData.coneIndices.put(i);
         }
         shapeData.coneIndices.put(1); // close the fan by duplicating first outer vertex as last outer vertex
     }
 
     @Override
-    protected void fillVBO(DrawContext dc) {
+    protected void fillVBO(DrawContext dc)
+    {
     }
 
     @Override
-    public void moveTo(Position position) {
+    public void moveTo(Position position)
+    {
     }
 
     @Override
-    public java.util.List<Intersection> intersect(Line line, Terrain terrain) throws InterruptedException {
+    public java.util.List<Intersection> intersect(Line line, Terrain terrain) throws InterruptedException
+    {
         return null;
     }
 
     @Override
-    public String isExportFormatSupported(String mimeType) {
+    public String isExportFormatSupported(String mimeType)
+    {
         return Exportable.FORMAT_NOT_SUPPORTED;
     }
 
     @Override
-    protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
+    protected void doExportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
+    {
         throw new UnsupportedOperationException("KML output not supported for AntennaModel");
     }
 }

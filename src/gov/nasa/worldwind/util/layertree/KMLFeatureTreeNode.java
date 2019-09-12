@@ -23,11 +23,9 @@ import gov.nasa.worldwind.util.EntityMap;
  * @author dcollins
  * @version $Id: KMLFeatureTreeNode.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLFeatureTreeNode extends BasicTreeNode {
-
-    /**
-     * Indicates the KML feature this node represents. Initialized during construction.
-     */
+public class KMLFeatureTreeNode extends BasicTreeNode
+{
+    /** Indicates the KML feature this node represents. Initialized during construction. */
     protected KMLAbstractFeature feature;
 
     /**
@@ -38,10 +36,12 @@ public class KMLFeatureTreeNode extends BasicTreeNode {
      *
      * @throws IllegalArgumentException if the <code>feature</code> is <code>null</code>.
      */
-    public KMLFeatureTreeNode(KMLAbstractFeature feature) {
+    public KMLFeatureTreeNode(KMLAbstractFeature feature)
+    {
         super(""); // Node text is set below
 
-        if (feature == null) {
+        if (feature == null)
+        {
             String message = Logging.getMessage("nullValue.FeatureIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -52,10 +52,9 @@ public class KMLFeatureTreeNode extends BasicTreeNode {
         this.initialize();
     }
 
-    /**
-     * Places the KML feature in the node's <code>AVKey.CONTEXT</code> field.
-     */
-    protected void initialize() {
+    /** Places the KML feature in the node's <code>AVKey.CONTEXT</code> field. */
+    protected void initialize()
+    {
         // The CONTEXT key identifies the KML feature this tree node is associated with.
         this.setValue(AVKey.CONTEXT, this.getFeature());
     }
@@ -71,20 +70,21 @@ public class KMLFeatureTreeNode extends BasicTreeNode {
      *
      * @throws IllegalArgumentException if the <code>feature</code> is <code>null</code>.
      */
-    public static KMLFeatureTreeNode fromKMLFeature(KMLAbstractFeature feature) {
-        if (feature == null) {
+    public static KMLFeatureTreeNode fromKMLFeature(KMLAbstractFeature feature)
+    {
+        if (feature == null)
+        {
             String message = Logging.getMessage("nullValue.FeatureIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (feature instanceof KMLNetworkLink) {
+        if (feature instanceof KMLNetworkLink)
             return new KMLNetworkLinkTreeNode((KMLNetworkLink) feature);
-        } else if (feature instanceof KMLAbstractContainer) {
+        else if (feature instanceof KMLAbstractContainer)
             return new KMLContainerTreeNode((KMLAbstractContainer) feature);
-        } else {
+        else
             return new KMLFeatureTreeNode(feature);
-        }
     }
 
     /**
@@ -92,7 +92,8 @@ public class KMLFeatureTreeNode extends BasicTreeNode {
      *
      * @return this node's KML feature.
      */
-    public KMLAbstractFeature getFeature() {
+    public KMLAbstractFeature getFeature()
+    {
         return this.feature;
     }
 
@@ -102,7 +103,8 @@ public class KMLFeatureTreeNode extends BasicTreeNode {
      * @return <code>true</code> if the KML feature is enabled for rendering, otherwise <code>false</code>.
      */
     @Override
-    public boolean isSelected() {
+    public boolean isSelected()
+    {
         Boolean b = this.feature.getVisibility();
         return b == null || b;
     }
@@ -114,7 +116,8 @@ public class KMLFeatureTreeNode extends BasicTreeNode {
      * @param selected <code>true</code> to enable the KML feature, otherwise <code>false</code>.
      */
     @Override
-    public void setSelected(boolean selected) {
+    public void setSelected(boolean selected)
+    {
         super.setSelected(selected);
         this.getFeature().setVisibility(selected);
     }
@@ -132,21 +135,22 @@ public class KMLFeatureTreeNode extends BasicTreeNode {
      *
      * @throws IllegalArgumentException if the <code>tree</code> is null.
      */
-    public void expandOpenContainers(Tree tree) {
-        if (tree == null) {
+    public void expandOpenContainers(Tree tree)
+    {
+        if (tree == null)
+        {
             String message = Logging.getMessage("nullValue.TreeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.mustExpandNode()) {
+        if (this.mustExpandNode())
             tree.expandPath(this.getPath());
-        }
 
-        for (TreeNode child : this.getChildren()) {
-            if (child instanceof KMLFeatureTreeNode) {
+        for (TreeNode child : this.getChildren())
+        {
+            if (child instanceof KMLFeatureTreeNode)
                 ((KMLFeatureTreeNode) child).expandOpenContainers(tree);
-            }
         }
     }
 
@@ -156,19 +160,22 @@ public class KMLFeatureTreeNode extends BasicTreeNode {
      *
      * @return <code>true</code> if the tree path for this node must be expanded, otherwise <code>false</code>.
      */
-    protected boolean mustExpandNode() {
+    protected boolean mustExpandNode()
+    {
         return Boolean.TRUE.equals(this.getFeature().getOpen());
     }
 
     @Override
-    public String getText() {
+    public String getText()
+    {
         String name = feature.getName();
 
         return name != null ? this.stripHtmlTags(name) : feature.getClass().getSimpleName();
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription()
+    {
         return this.makeFeatureDescription();
     }
 
@@ -178,21 +185,24 @@ public class KMLFeatureTreeNode extends BasicTreeNode {
      *
      * @return The feature description.
      */
-    protected String makeFeatureDescription() {
+    protected String makeFeatureDescription()
+    {
         String text;
 
         Object snippet = this.getFeature().getSnippet();
-        if (snippet instanceof KMLSnippet) {
+        if (snippet instanceof KMLSnippet)
+        {
             KMLSnippet kmlSnippet = (KMLSnippet) snippet;
 
             // Check the maxLines property of the snippet. maxLines == 0, don't set any description.
             Integer maxLines = kmlSnippet.getMaxLines();
-            if (maxLines == null || maxLines > 0) {
+            if (maxLines == null || maxLines > 0)
                 text = kmlSnippet.getCharacters();
-            } else {
+            else
                 text = null;
-            }
-        } else {
+        }
+        else
+        {
             text = this.getFeature().getDescription();
         }
 
@@ -205,36 +215,44 @@ public class KMLFeatureTreeNode extends BasicTreeNode {
      * @param input Text to strip of HTML tags and extra whitespace.
      *
      * @return The input string with HTML tags removed, and runs of whitespace collapsed to a single space. Returns
-     * {@code null} if {@code input} is {@code null}.
+     *         {@code null} if {@code input} is {@code null}.
      */
-    protected String stripHtmlTags(String input) {
-        if (input == null) {
+    protected String stripHtmlTags(String input)
+    {
+        if (input == null)
             return null;
-        }
 
         StringBuilder output = new StringBuilder();
 
         boolean inTag = false;
         boolean inWhitespace = false;
 
-        for (int i = 0; i < input.length(); i++) {
+        for (int i = 0; i < input.length(); i++)
+        {
             char c = input.charAt(i);
 
-            if (Character.isWhitespace(c)) {
+            if (Character.isWhitespace(c))
+            {
                 inWhitespace = true;
                 continue;
             }
 
-            if (!inTag && inWhitespace && output.length() > 0) {
+            if (!inTag && inWhitespace && output.length() > 0)
+            {
                 output.append(' ');
             }
             inWhitespace = false;
 
-            if (c == '<') {
+            if (c == '<')
+            {
                 inTag = true;
-            } else if (c == '>') {
+            }
+            else if (c == '>')
+            {
                 inTag = false;
-            } else if (!inTag) {
+            }
+            else if (!inTag)
+            {
                 output.append(c);
             }
         }

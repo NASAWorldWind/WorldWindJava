@@ -14,13 +14,15 @@ import org.junit.runners.JUnit4;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class BasicOrbitViewTest {
+public class BasicOrbitViewTest
+{
     //////////////////////////////////////////////////////////
     // Persistence Tests
     //////////////////////////////////////////////////////////
 
     @Test
-    public void testRestore_NewInstance() {
+    public void testRestore_NewInstance()
+    {
         BasicOrbitView orbitView = new BasicOrbitView();
         assignExampleValues(orbitView);
 
@@ -34,7 +36,8 @@ public class BasicOrbitViewTest {
     }
 
     @Test
-    public void testRestore_SameInstance() {
+    public void testRestore_SameInstance()
+    {
         BasicOrbitView orbitView = new BasicOrbitView();
         assignExampleValues(orbitView);
 
@@ -48,13 +51,14 @@ public class BasicOrbitViewTest {
     }
 
     @Test
-    public void testRestore_EmptyStateDocument() {
+    public void testRestore_EmptyStateDocument()
+    {
         BasicOrbitView orbitView = new BasicOrbitView();
         assignExampleValues(orbitView);
 
-        String emptyStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<emptyDocumentRoot/>";
+        String emptyStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<emptyDocumentRoot/>";
         orbitView.restoreState(emptyStateInXml);
 
         // No attributes should have changed.
@@ -64,29 +68,34 @@ public class BasicOrbitViewTest {
     }
 
     @Test
-    public void testRestore_InvalidStateDocument() {
-        try {
+    public void testRestore_InvalidStateDocument()
+    {
+        try
+        {
             String badStateInXml = "!!invalid xml string!!";
             OrbitView orbitView = new BasicOrbitView();
             orbitView.restoreState(badStateInXml);
             fail("Expected an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e)
+        {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testRestore_PartialStateDocument() {
+    public void testRestore_PartialStateDocument()
+    {
         BasicOrbitView orbitView = new BasicOrbitView();
         assignNullValues(orbitView);
 
-        String partialStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<restorableState>"
-                + "<stateObject name=\"fieldOfView\">10.5</stateObject>"
-                + "<stateObject name=\"zoom\">1000.5</stateObject>"
-                + "<unknownElement name=\"unknownName\">unknownValue</unknownElement>"
-                + "</restorableState>";
+        String partialStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<restorableState>" +
+                "<stateObject name=\"fieldOfView\">10.5</stateObject>" +
+                "<stateObject name=\"zoom\">1000.5</stateObject>" +
+                "<unknownElement name=\"unknownName\">unknownValue</unknownElement>" +
+                "</restorableState>";
         orbitView.restoreState(partialStateInXml);
 
         BasicOrbitView expected = new BasicOrbitView();
@@ -97,30 +106,31 @@ public class BasicOrbitViewTest {
     }
 
     @Test
-    public void testLegacyStateDocument() {
+    public void testLegacyStateDocument()
+    {
         BasicOrbitView orbitView = new BasicOrbitView();
         assignNullValues(orbitView);
 
-        String partialStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<restorableState>"
-                + "<stateObject name=\"orbitViewLimits\">"
-                + "    <stateObject name=\"minHeadingDegrees\">-1.0</stateObject>"
-                + "    <stateObject name=\"maxHeadingDegrees\">1.0</stateObject>"
-                + "    <stateObject name=\"minPitchDegrees\">-40.0</stateObject>"
-                + "    <stateObject name=\"maxPitchDegrees\">-20.0</stateObject>"
-                + "    <stateObject name=\"centerLocationLimits\">"
-                + "        <stateObject name=\"minLatitudeDegrees\">-10.0</stateObject>"
-                + "        <stateObject name=\"maxLatitudeDegrees\">10.0</stateObject>"
-                + "        <stateObject name=\"minLongitudeDegrees\">30.0</stateObject>"
-                + "        <stateObject name=\"maxLongitudeDegrees\">50.0</stateObject>"
-                + "    </stateObject>"
-                + "    <stateObject name=\"minCenterElevation\">-10.0</stateObject>"
-                + "    <stateObject name=\"maxCenterElevation\">100.0</stateObject>"
-                + "    <stateObject name=\"minZoom\">1000.0</stateObject>"
-                + "    <stateObject name=\"maxZoom\">2000.0</stateObject>"
-                + "</stateObject>"
-                + "</restorableState>";
+        String partialStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<restorableState>" +
+                "<stateObject name=\"orbitViewLimits\">" +
+                "    <stateObject name=\"minHeadingDegrees\">-1.0</stateObject>" +
+                "    <stateObject name=\"maxHeadingDegrees\">1.0</stateObject>" +
+                "    <stateObject name=\"minPitchDegrees\">-40.0</stateObject>" +
+                "    <stateObject name=\"maxPitchDegrees\">-20.0</stateObject>" +
+                "    <stateObject name=\"centerLocationLimits\">" +
+                "        <stateObject name=\"minLatitudeDegrees\">-10.0</stateObject>" +
+                "        <stateObject name=\"maxLatitudeDegrees\">10.0</stateObject>" +
+                "        <stateObject name=\"minLongitudeDegrees\">30.0</stateObject>" +
+                "        <stateObject name=\"maxLongitudeDegrees\">50.0</stateObject>" +
+                "    </stateObject>" +
+                "    <stateObject name=\"minCenterElevation\">-10.0</stateObject>" +
+                "    <stateObject name=\"maxCenterElevation\">100.0</stateObject>" +
+                "    <stateObject name=\"minZoom\">1000.0</stateObject>" +
+                "    <stateObject name=\"maxZoom\">2000.0</stateObject>" +
+                "</stateObject>" +
+                "</restorableState>";
         orbitView.restoreState(partialStateInXml);
 
         BasicOrbitView expected = new BasicOrbitView();
@@ -137,21 +147,22 @@ public class BasicOrbitViewTest {
     }
 
     @Test
-    public void testRestore_OldVersionStateDocument() {
+    public void testRestore_OldVersionStateDocument()
+    {
         BasicOrbitView orbitView = new BasicOrbitView();
-        String stateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<restorableState>"
-                + "<stateObject name=\"center\">"
-                + "<stateObject name=\"latitude\">-20.5</stateObject>"
-                + "<stateObject name=\"longitude\">30.5</stateObject>"
-                + "<stateObject name=\"elevation\">100.5</stateObject>"
-                + "</stateObject>"
-                + "<stateObject name=\"heading\">-40.5</stateObject>"
-                + "<stateObject name=\"pitch\">50.5</stateObject>"
-                + "<stateObject name=\"zoom\">1000.5</stateObject>"
-                + "<stateObject name=\"fieldOfView\">10.5</stateObject>"
-                + "</restorableState>";
+        String stateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<restorableState>" +
+                "<stateObject name=\"center\">" +
+                "<stateObject name=\"latitude\">-20.5</stateObject>" +
+                "<stateObject name=\"longitude\">30.5</stateObject>" +
+                "<stateObject name=\"elevation\">100.5</stateObject>" +
+                "</stateObject>" +
+                "<stateObject name=\"heading\">-40.5</stateObject>" +
+                "<stateObject name=\"pitch\">50.5</stateObject>" +
+                "<stateObject name=\"zoom\">1000.5</stateObject>" +
+                "<stateObject name=\"fieldOfView\">10.5</stateObject>" +
+                "</restorableState>";
         orbitView.restoreState(stateInXml);
 
         BasicOrbitView expected = new BasicOrbitView();
@@ -167,7 +178,9 @@ public class BasicOrbitViewTest {
     //////////////////////////////////////////////////////////
     // Helper Methods
     //////////////////////////////////////////////////////////
-    private static void assignExampleValues(OrbitView orbitView) {
+
+    private static void assignExampleValues(OrbitView orbitView)
+    {
         OrbitViewLimits limits = new BasicOrbitViewLimits();
         limits.setCenterLocationLimits(Sector.fromDegrees(-10, 10, 30, 50));
         limits.setCenterElevationLimits(-10, 100);
@@ -185,7 +198,8 @@ public class BasicOrbitViewTest {
         orbitView.setDetectCollisions(false);
     }
 
-    private static void assignNullValues(OrbitView orbitView) {
+    private static void assignNullValues(OrbitView orbitView)
+    {
         orbitView.setCenterPosition(Position.fromDegrees(0.0, 0.0, 0.0));
         orbitView.setHeading(Angle.fromDegrees(0.0));
         orbitView.setPitch(Angle.fromDegrees(0.0));
@@ -197,7 +211,8 @@ public class BasicOrbitViewTest {
         orbitView.setOrbitViewLimits(new BasicOrbitViewLimits());
     }
 
-    private static void assertOrbitViewEquals(OrbitView expected, OrbitView actual) {
+    private static void assertOrbitViewEquals(OrbitView expected, OrbitView actual)
+    {
         assertNotNull("Expected is null", expected);
         assertNotNull("Actual is null", actual);
 
@@ -214,15 +229,17 @@ public class BasicOrbitViewTest {
         assertOrbitViewLimitsEquals(expected.getOrbitViewLimits(), actual.getOrbitViewLimits());
     }
 
-    private static void assertOrbitViewLimitsEquals(OrbitViewLimits expected, OrbitViewLimits actual) {
+    private static void assertOrbitViewLimitsEquals(OrbitViewLimits expected, OrbitViewLimits actual)
+    {
         assertNotNull("Expected is null", expected);
         assertNotNull("Actual is null", actual);
 
         assertEquals("centerLocationLimits", expected.getCenterLocationLimits(), actual.getCenterLocationLimits());
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++)
+        {
             assertEquals("centerElevationLimits[" + i + "]", expected.getCenterElevationLimits()[i],
-                    actual.getCenterElevationLimits()[i], 0.0);
+                actual.getCenterElevationLimits()[i], 0.0);
             assertEquals("headingLimits[" + i + "]", expected.getHeadingLimits()[i], actual.getHeadingLimits()[i]);
             assertEquals("pitchLimits[" + i + "]", expected.getPitchLimits()[i], actual.getPitchLimits()[i]);
             assertEquals("zoomLimits[" + i + "]", expected.getZoomLimits()[i], actual.getZoomLimits()[i], 0.0);

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.geom.*;
@@ -32,53 +33,56 @@ import java.util.*;
  * @author dcollins
  * @version $Id: ContourBuilder.java 2436 2014-11-14 23:20:50Z danm $
  */
-public class ContourBuilder {
-
-    protected static class CellInfo {
-
+public class ContourBuilder
+{
+    protected static class CellInfo
+    {
         public final int x;
         public final int y;
         public final int contourMask;
         public final Map<Direction, Double> edgeWeights = new HashMap<Direction, Double>();
         public final Set<Direction> visitedDirections = new HashSet<Direction>(4);
 
-        public CellInfo(int x, int y, int contourMask) {
+        public CellInfo(int x, int y, int contourMask)
+        {
             this.x = x;
             this.y = y;
             this.contourMask = contourMask;
         }
     }
 
-    protected static class CellKey {
-
+    protected static class CellKey
+    {
         public final int x;
         public final int y;
 
-        public CellKey(int x, int y) {
+        public CellKey(int x, int y)
+        {
             this.x = x;
             this.y = y;
         }
 
         @Override
-        public boolean equals(Object o) {
-            if (this == o) {
+        public boolean equals(Object o)
+        {
+            if (this == o)
                 return true;
-            }
-            if (o == null || this.getClass() != o.getClass()) {
+            if (o == null || this.getClass() != o.getClass())
                 return false;
-            }
 
             CellKey that = (CellKey) o;
             return this.x == that.x && this.y == that.y;
         }
 
         @Override
-        public int hashCode() {
+        public int hashCode()
+        {
             return 31 * this.x + this.y;
         }
     }
 
-    protected static enum Direction {
+    protected static enum Direction
+    {
         NORTH, SOUTH, EAST, WEST
     }
 
@@ -92,9 +96,10 @@ public class ContourBuilder {
 
     protected static Map<Direction, Direction> dirRev = new HashMap<Direction, Direction>();
     protected static Map<Integer, LinkedHashMap<Direction, Direction>> dirNext
-            = new HashMap<Integer, LinkedHashMap<Direction, Direction>>();
+        = new HashMap<Integer, LinkedHashMap<Direction, Direction>>();
 
-    static {
+    static
+    {
         dirRev.put(Direction.NORTH, Direction.SOUTH);
         dirRev.put(Direction.SOUTH, Direction.NORTH);
         dirRev.put(Direction.EAST, Direction.WEST);
@@ -181,35 +186,41 @@ public class ContourBuilder {
      * Creates a new ContourBuilder with the specified rectangular array arguments. The array is understood to be
      * organized in row-major order, with the first index indicating the value at the rectangle's upper-left corner.
      *
-     * @param width the rectangular array width.
+     * @param width  the rectangular array width.
      * @param height the rectangular array height.
      * @param values the rectangular array values, as a one-dimensional array. Must contain at least width * height
-     * values. This array is understood to be organized in row-major order, with the first index indicating the value at
-     * the rectangle's upper-left corner.
+     *               values. This array is understood to be organized in row-major order, with the first index
+     *               indicating the value at the rectangle's upper-left corner.
      *
      * @throws java.lang.IllegalArgumentException if either the width or the height are less than 1, if the array is
-     * null, or if the array length is insufficient for the specified width and height.
+     *                                            null, or if the array length is insufficient for the specified width
+     *                                            and height.
      */
-    public ContourBuilder(int width, int height, double[] values) {
-        if (width < 1) {
+    public ContourBuilder(int width, int height, double[] values)
+    {
+        if (width < 1)
+        {
             String msg = Logging.getMessage("generic.InvalidWidth", width);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (height < 1) {
+        if (height < 1)
+        {
             String msg = Logging.getMessage("generic.InvalidHeight", height);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (values == null) {
+        if (values == null)
+        {
             String msg = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (values.length != width * height) {
+        if (values.length != width * height)
+        {
             String msg = Logging.getMessage("generic.ArrayInvalidLength", values.length);
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -235,7 +246,8 @@ public class ContourBuilder {
      *
      * @return a list containing the contour lines for the threshold value.
      */
-    public List<List<double[]>> buildContourLines(double value) {
+    public List<List<double[]>> buildContourLines(double value)
+    {
         this.assembleContourCells(value);
         this.traverseContourCells();
 
@@ -263,17 +275,20 @@ public class ContourBuilder {
      * less than the rectangular array's minimum value, or when the value is greater than the rectangular array's
      * maximum value.
      *
-     * @param value the threshold value (i.e. isovalue) to compute contour lines for.
-     * @param sector the sector to associate with the rectangular array. The array's upper left corner is mapped to the
-     * sector's Northwest corner, and the array's lower right corner is mapped to the sector's Southeast corner.
+     * @param value    the threshold value (i.e. isovalue) to compute contour lines for.
+     * @param sector   the sector to associate with the rectangular array. The array's upper left corner is mapped to
+     *                 the sector's Northwest corner, and the array's lower right corner is mapped to the sector's
+     *                 Southeast corner.
      * @param altitude the altitude to assign to the geographic positions.
      *
      * @return a list containing the geographic contour lines for the threshold value.
      *
      * @throws java.lang.IllegalArgumentException if the sector is null.
      */
-    public List<List<Position>> buildContourLines(double value, Sector sector, double altitude) {
-        if (sector == null) {
+    public List<List<Position>> buildContourLines(double value, Sector sector, double altitude)
+    {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -289,10 +304,12 @@ public class ContourBuilder {
 
         List<List<Position>> result = new ArrayList<List<Position>>();
 
-        for (List<double[]> coordList : this.contourList) {
+        for (List<double[]> coordList : this.contourList)
+        {
             ArrayList<Position> positionList = new ArrayList<Position>();
 
-            for (double[] coord : coordList) {
+            for (double[] coord : coordList)
+            {
                 double s = coord[0] / (this.width - 1); // normalized x coordinate in the range 0 to 1
                 double t = coord[1] / (this.height - 1); // normalized y coordinate in the range 0 to 1
                 double lat = maxLat - t * deltaLat; // map y coordinate to latitude
@@ -308,7 +325,8 @@ public class ContourBuilder {
         return result;
     }
 
-    protected void assembleContourCells(double value) {
+    protected void assembleContourCells(double value)
+    {
         // Divide the 2D scalar field into a grid of evenly spaced contouring cells. Every 2x2 block of field values
         // forms a cell. The contouring grid's dimensions are therefore one less than the 2D scalar field. Based on
         // the approach outlined at http://en.wikipedia.org/wiki/Marching_squares
@@ -316,8 +334,10 @@ public class ContourBuilder {
         this.contourCellMap.clear();
         this.contourCellList.clear();
 
-        for (int y = 0; y < this.height - 1; y++) {
-            for (int x = 0; x < this.width - 1; x++) {
+        for (int y = 0; y < this.height - 1; y++)
+        {
+            for (int x = 0; x < this.width - 1; x++)
+            {
                 // Get the field values associated with the contouring cell's four corners.
                 double nw = this.valueFor(x, y);
                 double ne = this.valueFor(x + 1, y);
@@ -335,43 +355,38 @@ public class ContourBuilder {
                 mask <<= 1;
                 mask |= (sw > value) ? 1 : 0; // 0001
 
-                if (mask == 0 || mask == 15) {
+                if (mask == 0 || mask == 15)
                     continue; // no contour; all values above or below the threshold value
-                }
+
                 // Disambiguate saddle point for masks 0x0101 and 0x1010, per Wikipedia page suggestion.
-                if (mask == 5 || mask == 10) {
+                if (mask == 5 || mask == 10)
+                {
                     double ctr = (nw + ne + se + sw) / 4; // sample center value as the average of four corners
                     if (mask == 5 && ctr <= value) // center value causes change in direction; flip the mask to 10
-                    {
                         mask = 10;
-                    } else if (mask == 10 && ctr <= value) // center value causes change in direction; flip the mask to 5
-                    {
+                    else if (mask == 10 && ctr <= value) // center value causes change in direction; flip the mask to 5
                         mask = 5;
-                    }
                 }
 
                 CellInfo cell = new CellInfo(x, y, mask);
 
                 // Compute weights associated with edge intersections.
-                if ((ne > value) ^ (nw > value)) {
+                if ((ne > value) ^ (nw > value))
                     cell.edgeWeights.put(Direction.NORTH, (value - nw) / (ne - nw));
-                }
-                if ((se > value) ^ (sw > value)) {
+                if ((se > value) ^ (sw > value))
                     cell.edgeWeights.put(Direction.SOUTH, (value - sw) / (se - sw));
-                }
-                if ((se > value) ^ (ne > value)) {
+                if ((se > value) ^ (ne > value))
                     cell.edgeWeights.put(Direction.EAST, (value - ne) / (se - ne));
-                }
-                if ((sw > value) ^ (nw > value)) {
+                if ((sw > value) ^ (nw > value))
                     cell.edgeWeights.put(Direction.WEST, (value - nw) / (sw - nw));
-                }
 
                 this.putContourCell(cell);
             }
         }
     }
 
-    protected void traverseContourCells() {
+    protected void traverseContourCells()
+    {
         List<List<double[]>> contours = new ArrayList<List<double[]>>();
 
         this.contourList.clear();
@@ -382,7 +397,8 @@ public class ContourBuilder {
 
             for (Direction dir : dirNext.get(cell.contourMask).keySet()) // either 2 or 4 starting directions
             {
-                if (cell.visitedDirections.contains(dir)) {
+                if (cell.visitedDirections.contains(dir))
+                {
                     continue;
                 }
 
@@ -393,10 +409,13 @@ public class ContourBuilder {
 
                 if (contours.size() == 2) // combine each pair of starting directions into a single polyline
                 {
-                    if (contours.get(0).size() == 0 && contours.get(1).size() == 0) {
+                    if (contours.get(0).size() == 0 && contours.get(1).size() == 0)
+                    {
                         String msg = Logging.getMessage("generic.UnexpectedCondition", "both contours are of zero length");
                         Logging.logger().severe(msg);
-                    } else {
+                    }
+                    else
+                    {
                         Collections.reverse(contours.get(0));
                         contours.get(0).addAll(contours.get(1));
                         this.contourList.add(contours.get(0));
@@ -406,18 +425,21 @@ public class ContourBuilder {
                 }
             }
 
-            if (contours.size() != 0) {
+            if (contours.size() != 0)
+            {
                 String msg = Logging.getMessage("generic.UnexpectedCondition", "non-empty contours list");
                 Logging.logger().severe(msg);
             }
         }
     }
 
-    protected void traverseContour(CellInfo cell, Direction dir) {
+    protected void traverseContour(CellInfo cell, Direction dir)
+    {
         Direction dirNext = dir;
         Direction dirPrev = dir;  // use Prev same as Next for first iteration (i.e., for seed cell)
 
-        while (cell != null && !cell.visitedDirections.contains(dirNext)) {
+        while (cell != null && !cell.visitedDirections.contains(dirNext))
+        {
             // Mark the contour cell as visited.
             cell.visitedDirections.add(dirNext);
             cell.visitedDirections.add(dirPrev);
@@ -428,7 +450,8 @@ public class ContourBuilder {
             cell = this.nextCell(cell, dirNext);
 
             // guard cell use in computing dirNext
-            if (cell != null) {
+            if (cell != null)
+            {
                 // Advance to the next direction.
                 dirPrev = ContourBuilder.dirRev.get(dirNext);
                 dirNext = ContourBuilder.dirNext.get(cell.contourMask).get(dirPrev);
@@ -436,13 +459,15 @@ public class ContourBuilder {
         }
     }
 
-    protected void addIntersection(CellInfo cell, Direction dir) {
+    protected void addIntersection(CellInfo cell, Direction dir)
+    {
         // Compute the intersection of the contour cell in the next direction. The cell's xy coordinates initially
         // indicate the cell's Southwest corner.
         double xIntersect = cell.x;
         double yIntersect = cell.y;
 
-        switch (dir) {
+        switch (dir)
+        {
             case NORTH:
                 xIntersect += cell.edgeWeights.get(dir); // interpolate along the north edge
                 break;
@@ -463,21 +488,24 @@ public class ContourBuilder {
                 break;
         }
 
-        this.currentContour.add(new double[]{xIntersect, yIntersect});
+        this.currentContour.add(new double[] {xIntersect, yIntersect});
     }
 
-    protected void clearContourCells() {
+    protected void clearContourCells()
+    {
         this.contourCellMap.clear();
         this.contourCellList.clear();
         this.contourList.clear();
         this.currentContour = null;
     }
 
-    protected CellInfo nextCell(CellInfo cell, Direction dir) {
+    protected CellInfo nextCell(CellInfo cell, Direction dir)
+    {
         int x = cell.x;
         int y = cell.y;
 
-        switch (dir) {
+        switch (dir)
+        {
             case NORTH:
                 return this.getContourCell(x, y - 1);
             case SOUTH:
@@ -493,17 +521,20 @@ public class ContourBuilder {
         }
     }
 
-    protected double valueFor(int x, int y) {
+    protected double valueFor(int x, int y)
+    {
         return this.values[x + y * this.width];
     }
 
-    protected void putContourCell(CellInfo cell) {
+    protected void putContourCell(CellInfo cell)
+    {
         CellKey key = new CellKey(cell.x, cell.y);
         this.contourCellMap.put(key, cell);
         this.contourCellList.add(key);
     }
 
-    protected CellInfo getContourCell(int x, int y) {
+    protected CellInfo getContourCell(int x, int y)
+    {
         return this.contourCellMap.get(new CellKey(x, y));
     }
 }

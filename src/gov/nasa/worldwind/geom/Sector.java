@@ -22,19 +22,15 @@ import java.util.*;
  * 90 degrees latitude and +/- 180 degrees longitude. The minimums and maximums are relative to these ranges, e.g., -80
  * is less than 20. Behavior of the class is undefined for angles outside these ranges. Normalization is not performed
  * on the angles by this class, nor is it verified by the class' methods. See {@link Angle} for a description of
- * specifying angles.
- * <p>
- * <code>Sector</code> instances are immutable. </p>
+ * specifying angles. <p> <code>Sector</code> instances are immutable. </p>
  *
  * @author Tom Gaskins
  * @version $Id: Sector.java 2397 2014-10-28 17:13:04Z dcollins $
  * @see Angle
  */
-public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
-
-    /**
-     * A <code>Sector</code> of latitude [-90 degrees, + 90 degrees] and longitude [-180 degrees, + 180 degrees].
-     */
+public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
+{
+    /** A <code>Sector</code> of latitude [-90 degrees, + 90 degrees] and longitude [-180 degrees, + 180 degrees]. */
     public static final Sector FULL_SPHERE = new Sector(Angle.NEG90, Angle.POS90, Angle.NEG180, Angle.POS180);
     public static final Sector EMPTY_SECTOR = new Sector(Angle.ZERO, Angle.ZERO, Angle.ZERO, Angle.ZERO);
 
@@ -49,47 +45,45 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * Creates a new <code>Sector</code> and initializes it to the specified angles. The angles are assumed to be
      * normalized to +/- 90 degrees latitude and +/- 180 degrees longitude, but this method does not verify that.
      *
-     * @param minLatitude the sector's minimum latitude in degrees.
-     * @param maxLatitude the sector's maximum latitude in degrees.
+     * @param minLatitude  the sector's minimum latitude in degrees.
+     * @param maxLatitude  the sector's maximum latitude in degrees.
      * @param minLongitude the sector's minimum longitude in degrees.
      * @param maxLongitude the sector's maximum longitude in degrees.
      *
      * @return the new <code>Sector</code>
      */
     public static Sector fromDegrees(double minLatitude, double maxLatitude, double minLongitude,
-            double maxLongitude) {
+        double maxLongitude)
+    {
         return new Sector(Angle.fromDegrees(minLatitude), Angle.fromDegrees(maxLatitude), Angle.fromDegrees(
-                minLongitude), Angle.fromDegrees(maxLongitude));
+            minLongitude), Angle.fromDegrees(maxLongitude));
     }
 
     /**
      * Creates a new <code>Sector</code> and initializes it to the specified angles. The angles are assumed to be
      * normalized to +/- 90 degrees latitude and +/- 180 degrees longitude, but this method does not verify that.
      *
-     * @param minLatitude the sector's minimum latitude in degrees.
-     * @param maxLatitude the sector's maximum latitude in degrees.
+     * @param minLatitude  the sector's minimum latitude in degrees.
+     * @param maxLatitude  the sector's maximum latitude in degrees.
      * @param minLongitude the sector's minimum longitude in degrees.
      * @param maxLongitude the sector's maximum longitude in degrees.
      *
      * @return the new <code>Sector</code>
      */
     public static Sector fromDegreesAndClamp(double minLatitude, double maxLatitude, double minLongitude,
-            double maxLongitude) {
-        if (minLatitude < -90) {
+        double maxLongitude)
+    {
+        if (minLatitude < -90)
             minLatitude = -90;
-        }
-        if (maxLatitude > 90) {
+        if (maxLatitude > 90)
             maxLatitude = 90;
-        }
-        if (minLongitude < -180) {
+        if (minLongitude < -180)
             minLongitude = -180;
-        }
-        if (maxLongitude > 180) {
+        if (maxLongitude > 180)
             maxLongitude = 180;
-        }
 
         return new Sector(Angle.fromDegrees(minLatitude), Angle.fromDegrees(maxLatitude), Angle.fromDegrees(
-                minLongitude), Angle.fromDegrees(maxLongitude));
+            minLongitude), Angle.fromDegrees(maxLongitude));
     }
 
     /**
@@ -104,14 +98,17 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @throws IllegalArgumentException if <code>array</code> is null or if its length is less than 4.
      */
-    public static Sector fromDegrees(double[] array) {
-        if (array == null) {
+    public static Sector fromDegrees(double[] array)
+    {
+        if (array == null)
+        {
             String message = Logging.getMessage("nullValue.ArrayIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (array.length < 4) {
+        if (array.length < 4)
+        {
             String message = Logging.getMessage("generic.ArrayInvalidLength", array.length);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -130,7 +127,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return the new <code>Sector</code>
      */
-    public static Sector fromDegrees(java.awt.geom.Rectangle2D rectangle) {
+    public static Sector fromDegrees(java.awt.geom.Rectangle2D rectangle)
+    {
         return fromDegrees(rectangle.getY(), rectangle.getMaxY(), rectangle.getX(), rectangle.getMaxX());
     }
 
@@ -139,46 +137,50 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * normalized to +/- \u03c0/2 radians latitude and +/- \u03c0 radians longitude, but this method does not verify
      * that.
      *
-     * @param minLatitude the sector's minimum latitude in radians.
-     * @param maxLatitude the sector's maximum latitude in radians.
+     * @param minLatitude  the sector's minimum latitude in radians.
+     * @param maxLatitude  the sector's maximum latitude in radians.
      * @param minLongitude the sector's minimum longitude in radians.
      * @param maxLongitude the sector's maximum longitude in radians.
      *
      * @return the new <code>Sector</code>
      */
     public static Sector fromRadians(double minLatitude, double maxLatitude, double minLongitude,
-            double maxLongitude) {
+        double maxLongitude)
+    {
         return new Sector(Angle.fromRadians(minLatitude), Angle.fromRadians(maxLatitude), Angle.fromRadians(
-                minLongitude), Angle.fromRadians(maxLongitude));
+            minLongitude), Angle.fromRadians(maxLongitude));
     }
 
     /**
      * Returns a geographic Sector which bounds the specified UTM rectangle. The UTM rectangle is located in specified
      * UTM zone and hemisphere.
      *
-     * @param zone the UTM zone.
-     * @param hemisphere the UTM hemisphere, either {@link gov.nasa.worldwind.avlist.AVKey#NORTH} or {@link
+     * @param zone        the UTM zone.
+     * @param hemisphere  the UTM hemisphere, either {@link gov.nasa.worldwind.avlist.AVKey#NORTH} or {@link
      *                    gov.nasa.worldwind.avlist.AVKey#SOUTH}.
-     * @param minEasting the minimum UTM easting, in meters.
-     * @param maxEasting the maximum UTM easting, in meters.
+     * @param minEasting  the minimum UTM easting, in meters.
+     * @param maxEasting  the maximum UTM easting, in meters.
      * @param minNorthing the minimum UTM northing, in meters.
      * @param maxNorthing the maximum UTM northing, in meters.
      *
      * @return a Sector that bounds the specified UTM rectangle.
      *
      * @throws IllegalArgumentException if <code>zone</code> is outside the range 1-60, if <code>hemisphere</code> is
-     * null, or if <code>hemisphere</code> is not one of {@link
+     *                                  null, or if <code>hemisphere</code> is not one of {@link
      *                                  gov.nasa.worldwind.avlist.AVKey#NORTH} or {@link gov.nasa.worldwind.avlist.AVKey#SOUTH}.
      */
     public static Sector fromUTMRectangle(int zone, String hemisphere, double minEasting, double maxEasting,
-            double minNorthing, double maxNorthing) {
-        if (zone < 1 || zone > 60) {
+        double minNorthing, double maxNorthing)
+    {
+        if (zone < 1 || zone > 60)
+        {
             String message = Logging.getMessage("generic.ZoneIsInvalid", zone);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!AVKey.NORTH.equals(hemisphere) && !AVKey.SOUTH.equals(hemisphere)) {
+        if (!AVKey.NORTH.equals(hemisphere) && !AVKey.SOUTH.equals(hemisphere))
+        {
             String message = Logging.getMessage("generic.HemisphereIsInvalid", hemisphere);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -192,16 +194,17 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         return boundingSector(Arrays.asList(ll, lr, ur, ul));
     }
 
-    public static Sector boundingSector(java.util.Iterator<TrackPoint> positions) {
-        if (positions == null) {
+    public static Sector boundingSector(java.util.Iterator<TrackPoint> positions)
+    {
+        if (positions == null)
+        {
             String message = Logging.getMessage("nullValue.TracksPointsIteratorNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!positions.hasNext()) {
+        if (!positions.hasNext())
             return EMPTY_SECTOR;
-        }
 
         TrackPoint position = positions.next();
         double minLat = position.getLatitude();
@@ -209,72 +212,71 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         double maxLat = minLat;
         double maxLon = minLon;
 
-        while (positions.hasNext()) {
+        while (positions.hasNext())
+        {
             TrackPoint p = positions.next();
             double lat = p.getLatitude();
-            if (lat < minLat) {
+            if (lat < minLat)
                 minLat = lat;
-            } else if (lat > maxLat) {
+            else if (lat > maxLat)
                 maxLat = lat;
-            }
 
             double lon = p.getLongitude();
-            if (lon < minLon) {
+            if (lon < minLon)
                 minLon = lon;
-            } else if (lon > maxLon) {
+            else if (lon > maxLon)
                 maxLon = lon;
-            }
         }
 
         return Sector.fromDegrees(minLat, maxLat, minLon, maxLon);
     }
 
-    public static Sector boundingSector(Iterable<? extends LatLon> locations) {
-        if (locations == null) {
+    public static Sector boundingSector(Iterable<? extends LatLon> locations)
+    {
+        if (locations == null)
+        {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!locations.iterator().hasNext()) {
+        if (!locations.iterator().hasNext())
             return EMPTY_SECTOR; // TODO: should be returning null
-        }
+
         double minLat = Angle.POS90.getDegrees();
         double minLon = Angle.POS180.getDegrees();
         double maxLat = Angle.NEG90.getDegrees();
         double maxLon = Angle.NEG180.getDegrees();
 
-        for (LatLon p : locations) {
+        for (LatLon p : locations)
+        {
             double lat = p.getLatitude().getDegrees();
-            if (lat < minLat) {
+            if (lat < minLat)
                 minLat = lat;
-            }
-            if (lat > maxLat) {
+            if (lat > maxLat)
                 maxLat = lat;
-            }
 
             double lon = p.getLongitude().getDegrees();
-            if (lon < minLon) {
+            if (lon < minLon)
                 minLon = lon;
-            }
-            if (lon > maxLon) {
+            if (lon > maxLon)
                 maxLon = lon;
-            }
         }
 
         return Sector.fromDegrees(minLat, maxLat, minLon, maxLon);
     }
 
-    public static Sector[] splitBoundingSectors(Iterable<? extends LatLon> locations) {
-        if (locations == null) {
+    public static Sector[] splitBoundingSectors(Iterable<? extends LatLon> locations)
+    {
+        if (locations == null)
+        {
             String message = Logging.getMessage("nullValue.LocationInListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!locations.iterator().hasNext()) {
+        if (!locations.iterator().hasNext())
             return null;
-        }
 
         double minLat = Angle.POS90.getDegrees();
         double minLon = Angle.POS180.getDegrees();
@@ -283,27 +285,27 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
 
         LatLon lastLocation = null;
 
-        for (LatLon ll : locations) {
+        for (LatLon ll : locations)
+        {
             double lat = ll.getLatitude().getDegrees();
-            if (lat < minLat) {
+            if (lat < minLat)
                 minLat = lat;
-            }
-            if (lat > maxLat) {
+            if (lat > maxLat)
                 maxLat = lat;
-            }
 
             double lon = ll.getLongitude().getDegrees();
-            if (lon >= 0 && lon < minLon) {
+            if (lon >= 0 && lon < minLon)
                 minLon = lon;
-            }
-            if (lon <= 0 && lon > maxLon) {
+            if (lon <= 0 && lon > maxLon)
                 maxLon = lon;
-            }
 
-            if (lastLocation != null) {
+            if (lastLocation != null)
+            {
                 double lastLon = lastLocation.getLongitude().getDegrees();
-                if (Math.signum(lon) != Math.signum(lastLon)) {
-                    if (Math.abs(lon - lastLon) < 180) {
+                if (Math.signum(lon) != Math.signum(lastLon))
+                {
+                    if (Math.abs(lon - lastLon) < 180)
+                    {
                         // Crossing the zero longitude line too
                         maxLon = 0;
                         minLon = 0;
@@ -313,18 +315,20 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
             lastLocation = ll;
         }
 
-        if (minLat == maxLat && minLon == maxLon) {
+        if (minLat == maxLat && minLon == maxLon)
             return null;
-        }
 
-        return new Sector[]{
-            Sector.fromDegrees(minLat, maxLat, minLon, 180), // Sector on eastern hemisphere.
-            Sector.fromDegrees(minLat, maxLat, -180, maxLon) // Sector on western hemisphere.
-        };
+        return new Sector[]
+            {
+                Sector.fromDegrees(minLat, maxLat, minLon, 180), // Sector on eastern hemisphere.
+                Sector.fromDegrees(minLat, maxLat, -180, maxLon) // Sector on western hemisphere.
+            };
     }
 
-    public static Sector boundingSector(LatLon pA, LatLon pB) {
-        if (pA == null || pB == null) {
+    public static Sector boundingSector(LatLon pA, LatLon pB)
+    {
+        if (pA == null || pB == null)
+        {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -335,17 +339,15 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         double maxLat = pA.getLatitude().degrees;
         double maxLon = pA.getLongitude().degrees;
 
-        if (pB.getLatitude().degrees < minLat) {
+        if (pB.getLatitude().degrees < minLat)
             minLat = pB.getLatitude().degrees;
-        } else if (pB.getLatitude().degrees > maxLat) {
+        else if (pB.getLatitude().degrees > maxLat)
             maxLat = pB.getLatitude().degrees;
-        }
 
-        if (pB.getLongitude().degrees < minLon) {
+        if (pB.getLongitude().degrees < minLon)
             minLon = pB.getLongitude().degrees;
-        } else if (pB.getLongitude().degrees > maxLon) {
+        else if (pB.getLongitude().degrees > maxLon)
             maxLon = pB.getLongitude().degrees;
-        }
 
         return Sector.fromDegrees(minLat, maxLat, minLon, maxLon);
     }
@@ -354,24 +356,24 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * Returns a new <code>Sector</code> encompassing a circle centered at a given position, with a given radius in
      * meter.
      *
-     * @param globe a Globe instance.
+     * @param globe  a Globe instance.
      * @param center the circle center position.
      * @param radius the circle radius in meter.
      *
      * @return the circle bounding sector.
      */
-    public static Sector boundingSector(Globe globe, LatLon center, double radius) {
+    public static Sector boundingSector(Globe globe, LatLon center, double radius)
+    {
         double halfDeltaLatRadians = radius / globe.getRadiusAt(center);
         double halfDeltaLonRadians = Math.PI * 2;
-        if (center.getLatitude().cos() > 0) {
+        if (center.getLatitude().cos() > 0)
             halfDeltaLonRadians = halfDeltaLatRadians / center.getLatitude().cos();
-        }
 
         return new Sector(
-                Angle.fromRadiansLatitude(center.getLatitude().radians - halfDeltaLatRadians),
-                Angle.fromRadiansLatitude(center.getLatitude().radians + halfDeltaLatRadians),
-                Angle.fromRadiansLongitude(center.getLongitude().radians - halfDeltaLonRadians),
-                Angle.fromRadiansLongitude(center.getLongitude().radians + halfDeltaLonRadians));
+            Angle.fromRadiansLatitude(center.getLatitude().radians - halfDeltaLatRadians),
+            Angle.fromRadiansLatitude(center.getLatitude().radians + halfDeltaLatRadians),
+            Angle.fromRadiansLongitude(center.getLongitude().radians - halfDeltaLonRadians),
+            Angle.fromRadiansLongitude(center.getLongitude().radians + halfDeltaLonRadians));
     }
 
     /**
@@ -380,7 +382,7 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * for each side of the dateline. Otherwise, this will return a single bounding sector. This returns null if the
      * radius is zero.
      *
-     * @param globe a Globe instance.
+     * @param globe  a Globe instance.
      * @param center the circle center location.
      * @param radius the circle radius in meters.
      *
@@ -388,20 +390,24 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @throws IllegalArgumentException if either the globe or center is null, or if the radius is less than zero.
      */
-    public static Sector[] splitBoundingSectors(Globe globe, LatLon center, double radius) {
-        if (globe == null) {
+    public static Sector[] splitBoundingSectors(Globe globe, LatLon center, double radius)
+    {
+        if (globe == null)
+        {
             String message = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (center == null) {
+        if (center == null)
+        {
             String message = Logging.getMessage("nullValue.CenterIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (radius < 0) {
+        if (radius < 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "radius < 0");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -416,7 +422,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         double maxLon;
 
         // If the circle does not cross a pole, then compute the max and min longitude.
-        if (minLat >= Angle.NEG90.radians && maxLat <= Angle.POS90.radians) {
+        if (minLat >= Angle.NEG90.radians && maxLat <= Angle.POS90.radians)
+        {
             // We want to find the maximum and minimum longitude values on the circle. We will start with equation 5-6
             // from "Map Projections - A Working Manual", page 31, and solve for the value of Az that will maximize
             // lon - lon0.
@@ -448,38 +455,41 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
             // circle would cover a pole.
             double az;
             if (Math.abs(Angle.POS90.radians - halfDeltaLatRadians)
-                    > 0.001) // Consider within 1/1000th of a radian to be equal
-            {
+                > 0.001) // Consider within 1/1000th of a radian to be equal
                 az = Math.acos(Math.tan(halfDeltaLatRadians) * Math.tan(center.latitude.radians));
-            } else {
+            else
                 az = Angle.POS90.radians;
-            }
 
             LatLon east = LatLon.greatCircleEndPosition(center, az, halfDeltaLatRadians);
             LatLon west = LatLon.greatCircleEndPosition(center, -az, halfDeltaLatRadians);
 
             minLon = Math.min(east.longitude.radians, west.longitude.radians);
             maxLon = Math.max(east.longitude.radians, west.longitude.radians);
-        } else {
+        }
+        else
+        {
             // If the circle crosses the pole then it spans the full circle of longitude
             minLon = Angle.NEG180.radians;
             maxLon = Angle.POS180.radians;
         }
 
         LatLon ll = new LatLon(
-                Angle.fromRadiansLatitude(minLat),
-                Angle.normalizedLongitude(Angle.fromRadians(minLon)));
+            Angle.fromRadiansLatitude(minLat),
+            Angle.normalizedLongitude(Angle.fromRadians(minLon)));
         LatLon ur = new LatLon(
-                Angle.fromRadiansLatitude(maxLat),
-                Angle.normalizedLongitude(Angle.fromRadians(maxLon)));
+            Angle.fromRadiansLatitude(maxLat),
+            Angle.normalizedLongitude(Angle.fromRadians(maxLon)));
 
         Iterable<? extends LatLon> locations = java.util.Arrays.asList(ll, ur);
 
-        if (LatLon.locationsCrossDateLine(locations)) {
+        if (LatLon.locationsCrossDateLine(locations))
+        {
             return splitBoundingSectors(locations);
-        } else {
+        }
+        else
+        {
             Sector s = boundingSector(locations);
-            return (s != null && !s.equals(Sector.EMPTY_SECTOR)) ? new Sector[]{s} : null;
+            return (s != null && !s.equals(Sector.EMPTY_SECTOR)) ? new Sector[] {s} : null;
         }
     }
 
@@ -487,15 +497,17 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * Creates a new <code>Sector</code> and initializes it to the specified angles. The angles are assumed to be
      * normalized to +/- 90 degrees latitude and +/- 180 degrees longitude, but this method does not verify that.
      *
-     * @param minLatitude the sector's minimum latitude.
-     * @param maxLatitude the sector's maximum latitude.
+     * @param minLatitude  the sector's minimum latitude.
+     * @param maxLatitude  the sector's maximum latitude.
      * @param minLongitude the sector's minimum longitude.
      * @param maxLongitude the sector's maximum longitude.
      *
      * @throws IllegalArgumentException if any of the angles are null
      */
-    public Sector(Angle minLatitude, Angle maxLatitude, Angle minLongitude, Angle maxLongitude) {
-        if (minLatitude == null || maxLatitude == null || minLongitude == null || maxLongitude == null) {
+    public Sector(Angle minLatitude, Angle maxLatitude, Angle minLongitude, Angle maxLongitude)
+    {
+        if (minLatitude == null || maxLatitude == null || minLongitude == null || maxLongitude == null)
+        {
             String message = Logging.getMessage("nullValue.InputAnglesNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -509,8 +521,10 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         this.deltaLon = Angle.fromDegrees(this.maxLongitude.degrees - this.minLongitude.degrees);
     }
 
-    public Sector(Sector sector) {
-        if (sector == null) {
+    public Sector(Sector sector)
+    {
+        if (sector == null)
+        {
             String message = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -529,7 +543,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return The sector's minimum latitude.
      */
-    public final Angle getMinLatitude() {
+    public final Angle getMinLatitude()
+    {
         return minLatitude;
     }
 
@@ -538,7 +553,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return The sector's minimum longitude.
      */
-    public final Angle getMinLongitude() {
+    public final Angle getMinLongitude()
+    {
         return minLongitude;
     }
 
@@ -547,7 +563,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return The sector's maximum latitude.
      */
-    public final Angle getMaxLatitude() {
+    public final Angle getMaxLatitude()
+    {
         return maxLatitude;
     }
 
@@ -556,7 +573,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return The sector's maximum longitude.
      */
-    public final Angle getMaxLongitude() {
+    public final Angle getMaxLongitude()
+    {
         return maxLongitude;
     }
 
@@ -565,15 +583,18 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return The angular difference between the sector's minimum and maximum latitudes.
      */
-    public final Angle getDeltaLat() {
+    public final Angle getDeltaLat()
+    {
         return this.deltaLat;//Angle.fromDegrees(this.maxLatitude.degrees - this.minLatitude.degrees);
     }
 
-    public final double getDeltaLatDegrees() {
+    public final double getDeltaLatDegrees()
+    {
         return this.deltaLat.degrees;//this.maxLatitude.degrees - this.minLatitude.degrees;
     }
 
-    public final double getDeltaLatRadians() {
+    public final double getDeltaLatRadians()
+    {
         return this.deltaLat.radians;//this.maxLatitude.radians - this.minLatitude.radians;
     }
 
@@ -582,33 +603,38 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return The angular difference between the sector's minimum and maximum longitudes
      */
-    public final Angle getDeltaLon() {
+    public final Angle getDeltaLon()
+    {
         return this.deltaLon;//Angle.fromDegrees(this.maxLongitude.degrees - this.minLongitude.degrees);
     }
 
-    public final double getDeltaLonDegrees() {
+    public final double getDeltaLonDegrees()
+    {
         return this.deltaLon.degrees;//this.maxLongitude.degrees - this.minLongitude.degrees;
     }
 
-    public final double getDeltaLonRadians() {
+    public final double getDeltaLonRadians()
+    {
         return this.deltaLon.radians;//this.maxLongitude.radians - this.minLongitude.radians;
     }
 
-    public boolean isWithinLatLonLimits() {
+    public boolean isWithinLatLonLimits()
+    {
         return this.minLatitude.degrees >= -90 && this.maxLatitude.degrees <= 90
-                && this.minLongitude.degrees >= -180 && this.maxLongitude.degrees <= 180;
+            && this.minLongitude.degrees >= -180 && this.maxLongitude.degrees <= 180;
     }
 
-    public boolean isSameSector(Iterable<? extends LatLon> corners) {
-        if (corners == null) {
+    public boolean isSameSector(Iterable<? extends LatLon> corners)
+    {
+        if (corners == null)
+        {
             String message = Logging.getMessage("nullValue.LocationsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (!isSector(corners)) {
+        if (!isSector(corners))
             return false;
-        }
 
         Sector s = Sector.boundingSector(corners);
 
@@ -616,8 +642,10 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
     }
 
     @SuppressWarnings({"RedundantIfStatement"})
-    public static boolean isSector(Iterable<? extends LatLon> corners) {
-        if (corners == null) {
+    public static boolean isSector(Iterable<? extends LatLon> corners)
+    {
+        if (corners == null)
+        {
             String message = Logging.getMessage("nullValue.LocationsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -626,30 +654,25 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         LatLon[] latlons = new LatLon[5];
 
         int i = 0;
-        for (LatLon ll : corners) {
-            if (i > 4 || ll == null) {
+        for (LatLon ll : corners)
+        {
+            if (i > 4 || ll == null)
                 return false;
-            }
 
             latlons[i++] = ll;
         }
 
-        if (!latlons[0].getLatitude().equals(latlons[1].getLatitude())) {
+        if (!latlons[0].getLatitude().equals(latlons[1].getLatitude()))
             return false;
-        }
-        if (!latlons[2].getLatitude().equals(latlons[3].getLatitude())) {
+        if (!latlons[2].getLatitude().equals(latlons[3].getLatitude()))
             return false;
-        }
-        if (!latlons[0].getLongitude().equals(latlons[3].getLongitude())) {
+        if (!latlons[0].getLongitude().equals(latlons[3].getLongitude()))
             return false;
-        }
-        if (!latlons[1].getLongitude().equals(latlons[2].getLongitude())) {
+        if (!latlons[1].getLongitude().equals(latlons[2].getLongitude()))
             return false;
-        }
 
-        if (i == 5 && !latlons[4].equals(latlons[0])) {
+        if (i == 5 && !latlons[4].equals(latlons[0]))
             return false;
-        }
 
         return true;
     }
@@ -660,7 +683,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return The latitude and longitude of the sector's angular center
      */
-    public LatLon getCentroid() {
+    public LatLon getCentroid()
+    {
         Angle la = Angle.fromDegrees(0.5 * (this.getMaxLatitude().degrees + this.getMinLatitude().degrees));
         Angle lo = Angle.fromDegrees(0.5 * (this.getMaxLongitude().degrees + this.getMinLongitude().degrees));
         return new LatLon(la, lo);
@@ -669,15 +693,17 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
     /**
      * Computes the Cartesian coordinates of a Sector's center.
      *
-     * @param globe The globe associated with the sector.
+     * @param globe        The globe associated with the sector.
      * @param exaggeration The vertical exaggeration to apply.
      *
      * @return the Cartesian coordinates of the sector's center.
      *
      * @throws IllegalArgumentException if <code>globe</code> is null.
      */
-    public Vec4 computeCenterPoint(Globe globe, double exaggeration) {
-        if (globe == null) {
+    public Vec4 computeCenterPoint(Globe globe, double exaggeration)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -694,15 +720,17 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
     /**
      * Computes the Cartesian coordinates of a Sector's corners.
      *
-     * @param globe The globe associated with the sector.
+     * @param globe        The globe associated with the sector.
      * @param exaggeration The vertical exaggeration to apply.
      *
      * @return an array of four Cartesian points.
      *
      * @throws IllegalArgumentException if <code>globe</code> is null.
      */
-    public Vec4[] computeCornerPoints(Globe globe, double exaggeration) {
-        if (globe == null) {
+    public Vec4[] computeCornerPoints(Globe globe, double exaggeration)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -725,22 +753,25 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
     /**
      * Returns a sphere that minimally surrounds the sector at a specified vertical exaggeration.
      *
-     * @param globe the globe the sector is associated with
+     * @param globe                the globe the sector is associated with
      * @param verticalExaggeration the vertical exaggeration to apply to the globe's elevations when computing the
-     * sphere.
-     * @param sector the sector to return the bounding sphere for.
+     *                             sphere.
+     * @param sector               the sector to return the bounding sphere for.
      *
      * @return The minimal bounding sphere in Cartesian coordinates.
      *
      * @throws IllegalArgumentException if <code>globe</code> or <code>sector</code> is null
      */
-    static public Sphere computeBoundingSphere(Globe globe, double verticalExaggeration, Sector sector) {
-        if (globe == null) {
+    static public Sphere computeBoundingSphere(Globe globe, double verticalExaggeration, Sector sector)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (sector == null) {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -772,22 +803,25 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * the minimum and maximum elevation are equal, this assumes a maximum elevation of 10 + the minimum. If this fails
      * to compute a box enclosing the sector, this returns a unit box enclosing one of the boxes corners.
      *
-     * @param globe the globe the extent relates to.
+     * @param globe                the globe the extent relates to.
      * @param verticalExaggeration the globe's vertical surface exaggeration.
-     * @param sector a sector on the globe's surface to compute a bounding box for.
+     * @param sector               a sector on the globe's surface to compute a bounding box for.
      *
      * @return a box enclosing the globe's surface on the specified sector.
      *
      * @throws IllegalArgumentException if either the globe or sector is null.
      */
-    public static Box computeBoundingBox(Globe globe, double verticalExaggeration, Sector sector) {
-        if (globe == null) {
+    public static Box computeBoundingBox(Globe globe, double verticalExaggeration, Sector sector)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (sector == null) {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -804,25 +838,28 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * maximum elevation are equal, this assumes a maximum elevation of 10 + the minimum. If this fails to compute a box
      * enclosing the sector, this returns a unit box enclosing one of the boxes corners.
      *
-     * @param globe the globe the extent relates to.
+     * @param globe                the globe the extent relates to.
      * @param verticalExaggeration the globe's vertical surface exaggeration.
-     * @param sector a sector on the globe's surface to compute a bounding box for.
-     * @param minElevation the globe's minimum elevation in the sector.
-     * @param maxElevation the globe's maximum elevation in the sector.
+     * @param sector               a sector on the globe's surface to compute a bounding box for.
+     * @param minElevation         the globe's minimum elevation in the sector.
+     * @param maxElevation         the globe's maximum elevation in the sector.
      *
      * @return a box enclosing the globe's surface on the specified sector.
      *
      * @throws IllegalArgumentException if either the globe or sector is null.
      */
     public static Box computeBoundingBox(Globe globe, double verticalExaggeration, Sector sector,
-            double minElevation, double maxElevation) {
-        if (globe == null) {
+        double minElevation, double maxElevation)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (sector == null) {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -833,7 +870,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         double max = maxElevation * verticalExaggeration;
 
         // Ensure the top and bottom heights are not equal.
-        if (min == max) {
+        if (min == max)
+        {
             max = min + 10;
         }
 
@@ -847,9 +885,12 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         Vec4[] points = new Vec4[15];
         globe.computePointsFromPositions(sector, 3, 5, elevations, points);
 
-        try {
+        try
+        {
             return Box.computeBoundingBox(Arrays.asList(points));
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             return new Box(points[0]); // unit box around point
         }
     }
@@ -857,23 +898,26 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
     /**
      * Returns a cylinder that minimally surrounds the specified sector at a specified vertical exaggeration.
      *
-     * @param globe The globe associated with the sector.
+     * @param globe                The globe associated with the sector.
      * @param verticalExaggeration the vertical exaggeration to apply to the minimum and maximum elevations when
-     * computing the cylinder.
-     * @param sector the sector to return the bounding cylinder for.
+     *                             computing the cylinder.
+     * @param sector               the sector to return the bounding cylinder for.
      *
      * @return The minimal bounding cylinder in Cartesian coordinates.
      *
      * @throws IllegalArgumentException if <code>sector</code> is null
      */
-    static public Cylinder computeBoundingCylinder(Globe globe, double verticalExaggeration, Sector sector) {
-        if (globe == null) {
+    static public Cylinder computeBoundingCylinder(Globe globe, double verticalExaggeration, Sector sector)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (sector == null) {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -881,33 +925,36 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
 
         double[] minAndMaxElevations = globe.getMinAndMaxElevations(sector);
         return computeBoundingCylinder(globe, verticalExaggeration, sector,
-                minAndMaxElevations[0], minAndMaxElevations[1]);
+            minAndMaxElevations[0], minAndMaxElevations[1]);
     }
 
     /**
      * Returns a cylinder that minimally surrounds the specified sector at a specified vertical exaggeration and minimum
      * and maximum elevations for the sector.
      *
-     * @param globe The globe associated with the sector.
+     * @param globe                The globe associated with the sector.
      * @param verticalExaggeration the vertical exaggeration to apply to the minimum and maximum elevations when
-     * computing the cylinder.
-     * @param sector the sector to return the bounding cylinder for.
-     * @param minElevation the minimum elevation of the bounding cylinder.
-     * @param maxElevation the maximum elevation of the bounding cylinder.
+     *                             computing the cylinder.
+     * @param sector               the sector to return the bounding cylinder for.
+     * @param minElevation         the minimum elevation of the bounding cylinder.
+     * @param maxElevation         the maximum elevation of the bounding cylinder.
      *
      * @return The minimal bounding cylinder in Cartesian coordinates.
      *
      * @throws IllegalArgumentException if <code>sector</code> is null
      */
     public static Cylinder computeBoundingCylinder(Globe globe, double verticalExaggeration, Sector sector,
-            double minElevation, double maxElevation) {
-        if (globe == null) {
+        double minElevation, double maxElevation)
+    {
+        if (globe == null)
+        {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (sector == null) {
+        if (sector == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -917,17 +964,19 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         double minHeight = minElevation * verticalExaggeration;
         double maxHeight = maxElevation * verticalExaggeration;
 
-        if (minHeight == maxHeight) {
+        if (minHeight == maxHeight)
             maxHeight = minHeight + 1; // ensure the top and bottom of the cylinder won't be coincident
-        }
+
         List<Vec4> points = new ArrayList<Vec4>();
-        for (LatLon ll : sector) {
+        for (LatLon ll : sector)
+        {
             points.add(globe.computePointFromPosition(ll, minHeight));
             points.add(globe.computePointFromPosition(ll, maxHeight));
         }
         points.add(globe.computePointFromPosition(sector.getCentroid(), maxHeight));
 
-        if (sector.getDeltaLonDegrees() > 180) {
+        if (sector.getDeltaLonDegrees() > 180)
+        {
             // Need to compute more points to ensure the box encompasses the full sector.
             Angle cLon = sector.getCentroid().getLongitude();
             Angle cLat = sector.getCentroid().getLatitude();
@@ -945,14 +994,18 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
             points.add(globe.computePointFromPosition(cLat, sector.getMaxLongitude(), maxHeight));
         }
 
-        try {
+        try
+        {
             return Cylinder.computeBoundingCylinder(points);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             return new Cylinder(points.get(0), points.get(0).add3(Vec4.UNIT_Y), 1);
         }
     }
 
-    static public Cylinder computeBoundingCylinderOrig(Globe globe, double verticalExaggeration, Sector sector) {
+    static public Cylinder computeBoundingCylinderOrig(Globe globe, double verticalExaggeration, Sector sector)
+    {
         return Cylinder.computeVerticalBoundingCylinder(globe, verticalExaggeration, sector);
     }
 
@@ -960,25 +1013,28 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * Returns a cylinder that minimally surrounds the specified minimum and maximum elevations in the sector at a
      * specified vertical exaggeration.
      *
-     * @param globe The globe associated with the sector.
+     * @param globe                The globe associated with the sector.
      * @param verticalExaggeration the vertical exaggeration to apply to the minimum and maximum elevations when
-     * computing the cylinder.
-     * @param sector the sector to return the bounding cylinder for.
-     * @param minElevation the minimum elevation of the bounding cylinder.
-     * @param maxElevation the maximum elevation of the bounding cylinder.
+     *                             computing the cylinder.
+     * @param sector               the sector to return the bounding cylinder for.
+     * @param minElevation         the minimum elevation of the bounding cylinder.
+     * @param maxElevation         the maximum elevation of the bounding cylinder.
      *
      * @return The minimal bounding cylinder in Cartesian coordinates.
      *
      * @throws IllegalArgumentException if <code>sector</code> is null
      */
     public static Cylinder computeBoundingCylinderOrig(Globe globe, double verticalExaggeration, Sector sector,
-            double minElevation, double maxElevation) {
+        double minElevation, double maxElevation)
+    {
         return Cylinder.computeVerticalBoundingCylinder(globe, verticalExaggeration, sector, minElevation,
-                maxElevation);
+            maxElevation);
     }
 
-    public final boolean contains(Angle latitude, Angle longitude) {
-        if (latitude == null || longitude == null) {
+    public final boolean contains(Angle latitude, Angle longitude)
+    {
+        if (latitude == null || longitude == null)
+        {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -998,8 +1054,10 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @throws IllegalArgumentException if <code>latlon</code> is null.
      */
-    public final boolean contains(LatLon latLon) {
-        if (latLon == null) {
+    public final boolean contains(LatLon latLon)
+    {
+        if (latLon == null)
+        {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -1013,19 +1071,21 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * are assumed to be normalized to +/- 90 degrees latitude and +/- 180 degrees longitude. The result of the
      * operation is undefined if they are not.
      *
-     * @param radiansLatitude the latitude in radians of the position to test, normalized +/- &#960;.
+     * @param radiansLatitude  the latitude in radians of the position to test, normalized +/- &#960;.
      * @param radiansLongitude the longitude in radians of the position to test, normalized +/- 2&#960;.
      *
      * @return <code>true</code> if the position is within the sector, <code>false</code> otherwise.
      */
-    public boolean containsRadians(double radiansLatitude, double radiansLongitude) {
+    public boolean containsRadians(double radiansLatitude, double radiansLongitude)
+    {
         return radiansLatitude >= this.minLatitude.radians && radiansLatitude <= this.maxLatitude.radians
-                && radiansLongitude >= this.minLongitude.radians && radiansLongitude <= this.maxLongitude.radians;
+            && radiansLongitude >= this.minLongitude.radians && radiansLongitude <= this.maxLongitude.radians;
     }
 
-    public boolean containsDegrees(double degreesLatitude, double degreesLongitude) {
+    public boolean containsDegrees(double degreesLatitude, double degreesLongitude)
+    {
         return degreesLatitude >= this.minLatitude.degrees && degreesLatitude <= this.maxLatitude.degrees
-                && degreesLongitude >= this.minLongitude.degrees && degreesLongitude <= this.maxLongitude.degrees;
+            && degreesLongitude >= this.minLongitude.degrees && degreesLongitude <= this.maxLongitude.degrees;
     }
 
     /**
@@ -1037,25 +1097,21 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return <code>true</code> if this sector fully contains the input sector, otherwise <code>false</code>.
      */
-    public boolean contains(Sector that) {
-        if (that == null) {
+    public boolean contains(Sector that)
+    {
+        if (that == null)
             return false;
-        }
 
         // Assumes normalized angles -- [-180, 180], [-90, 90]
-        if (that.minLongitude.degrees < this.minLongitude.degrees) {
+        if (that.minLongitude.degrees < this.minLongitude.degrees)
             return false;
-        }
-        if (that.maxLongitude.degrees > this.maxLongitude.degrees) {
+        if (that.maxLongitude.degrees > this.maxLongitude.degrees)
             return false;
-        }
-        if (that.minLatitude.degrees < this.minLatitude.degrees) {
+        if (that.minLatitude.degrees < this.minLatitude.degrees)
             return false;
-        }
         //noinspection RedundantIfStatement
-        if (that.maxLatitude.degrees > this.maxLatitude.degrees) {
+        if (that.maxLatitude.degrees > this.maxLatitude.degrees)
             return false;
-        }
 
         return true;
     }
@@ -1069,25 +1125,21 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return <code>true</code> if the sectors intersect, otherwise <code>false</code>.
      */
-    public boolean intersects(Sector that) {
-        if (that == null) {
+    public boolean intersects(Sector that)
+    {
+        if (that == null)
             return false;
-        }
 
         // Assumes normalized angles -- [-180, 180], [-90, 90]
-        if (that.maxLongitude.degrees < this.minLongitude.degrees) {
+        if (that.maxLongitude.degrees < this.minLongitude.degrees)
             return false;
-        }
-        if (that.minLongitude.degrees > this.maxLongitude.degrees) {
+        if (that.minLongitude.degrees > this.maxLongitude.degrees)
             return false;
-        }
-        if (that.maxLatitude.degrees < this.minLatitude.degrees) {
+        if (that.maxLatitude.degrees < this.minLatitude.degrees)
             return false;
-        }
         //noinspection RedundantIfStatement
-        if (that.minLatitude.degrees > this.maxLatitude.degrees) {
+        if (that.minLatitude.degrees > this.maxLatitude.degrees)
             return false;
-        }
 
         return true;
     }
@@ -1103,25 +1155,21 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @see #intersects(Sector)
      */
-    public boolean intersectsInterior(Sector that) {
-        if (that == null) {
+    public boolean intersectsInterior(Sector that)
+    {
+        if (that == null)
             return false;
-        }
 
         // Assumes normalized angles -- [-180, 180], [-90, 90]
-        if (that.maxLongitude.degrees <= this.minLongitude.degrees) {
+        if (that.maxLongitude.degrees <= this.minLongitude.degrees)
             return false;
-        }
-        if (that.minLongitude.degrees >= this.maxLongitude.degrees) {
+        if (that.minLongitude.degrees >= this.maxLongitude.degrees)
             return false;
-        }
-        if (that.maxLatitude.degrees <= this.minLatitude.degrees) {
+        if (that.maxLatitude.degrees <= this.minLatitude.degrees)
             return false;
-        }
         //noinspection RedundantIfStatement
-        if (that.minLatitude.degrees >= this.maxLatitude.degrees) {
+        if (that.minLatitude.degrees >= this.maxLatitude.degrees)
             return false;
-        }
 
         return true;
     }
@@ -1133,20 +1181,23 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * begin and end locations.
      *
      * @param begin the line segment begin location.
-     * @param end the line segment end location.
+     * @param end   the line segment end location.
      *
      * @return true <code>true</code> if this sector intersects the line segment, otherwise <code>false</code>.
      *
      * @throws IllegalArgumentException if either the begin location or the end location is null.
      */
-    public boolean intersectsSegment(LatLon begin, LatLon end) {
-        if (begin == null) {
+    public boolean intersectsSegment(LatLon begin, LatLon end)
+    {
+        if (begin == null)
+        {
             String message = Logging.getMessage("nullValue.BeginIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (end == null) {
+        if (end == null)
+        {
             String message = Logging.getMessage("nullValue.EndIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -1166,19 +1217,21 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
 
         Vec4 diff = segmentCenter.subtract3(boxCenter);
 
-        if (Math.abs(diff.x) > (boxExtentX + segmentExtent * Math.abs(segmentDirection.x))) {
+        if (Math.abs(diff.x) > (boxExtentX + segmentExtent * Math.abs(segmentDirection.x)))
+        {
             return false;
         }
 
-        if (Math.abs(diff.y) > (boxExtentY + segmentExtent * Math.abs(segmentDirection.y))) {
+        if (Math.abs(diff.y) > (boxExtentY + segmentExtent * Math.abs(segmentDirection.y)))
+        {
             return false;
         }
 
         //noinspection SuspiciousNameCombination
         Vec4 segmentPerp = new Vec4(segmentDirection.y, -segmentDirection.x, 0);
 
-        return Math.abs(segmentPerp.dot3(diff))
-                <= (boxExtentX * Math.abs(segmentPerp.x) + boxExtentY * Math.abs(segmentPerp.y));
+        return Math.abs(segmentPerp.dot3(diff)) <=
+            (boxExtentX * Math.abs(segmentPerp.x) + boxExtentY * Math.abs(segmentPerp.y));
     }
 
     /**
@@ -1191,17 +1244,19 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @throws java.lang.IllegalArgumentException if the iterable is null.
      */
-    public boolean intersectsAny(Iterable<? extends Sector> sectors) {
-        if (sectors == null) {
+    public boolean intersectsAny(Iterable<? extends Sector> sectors)
+    {
+        if (sectors == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        for (Sector s : sectors) {
-            if (s != null && s.intersects(this)) {
+        for (Sector s : sectors)
+        {
+            if (s != null && s.intersects(this))
                 return true;
-            }
         }
 
         return false;
@@ -1216,65 +1271,58 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * @param that the sector to join with <code>this</code>.
      *
      * @return A new sector formed from the extremes of the two sectors, or <code>this</code> if the incoming sector is
-     * <code>null</code>.
+     *         <code>null</code>.
      */
-    public final Sector union(Sector that) {
-        if (that == null) {
+    public final Sector union(Sector that)
+    {
+        if (that == null)
             return this;
-        }
 
         Angle minLat = this.minLatitude;
         Angle maxLat = this.maxLatitude;
         Angle minLon = this.minLongitude;
         Angle maxLon = this.maxLongitude;
 
-        if (that.minLatitude.degrees < this.minLatitude.degrees) {
+        if (that.minLatitude.degrees < this.minLatitude.degrees)
             minLat = that.minLatitude;
-        }
-        if (that.maxLatitude.degrees > this.maxLatitude.degrees) {
+        if (that.maxLatitude.degrees > this.maxLatitude.degrees)
             maxLat = that.maxLatitude;
-        }
-        if (that.minLongitude.degrees < this.minLongitude.degrees) {
+        if (that.minLongitude.degrees < this.minLongitude.degrees)
             minLon = that.minLongitude;
-        }
-        if (that.maxLongitude.degrees > this.maxLongitude.degrees) {
+        if (that.maxLongitude.degrees > this.maxLongitude.degrees)
             maxLon = that.maxLongitude;
-        }
 
         return new Sector(minLat, maxLat, minLon, maxLon);
     }
 
-    public final Sector union(Angle latitude, Angle longitude) {
-        if (latitude == null || longitude == null) {
+    public final Sector union(Angle latitude, Angle longitude)
+    {
+        if (latitude == null || longitude == null)
             return this;
-        }
 
         Angle minLat = this.minLatitude;
         Angle maxLat = this.maxLatitude;
         Angle minLon = this.minLongitude;
         Angle maxLon = this.maxLongitude;
 
-        if (latitude.degrees < this.minLatitude.degrees) {
+        if (latitude.degrees < this.minLatitude.degrees)
             minLat = latitude;
-        }
-        if (latitude.degrees > this.maxLatitude.degrees) {
+        if (latitude.degrees > this.maxLatitude.degrees)
             maxLat = latitude;
-        }
-        if (longitude.degrees < this.minLongitude.degrees) {
+        if (longitude.degrees < this.minLongitude.degrees)
             minLon = longitude;
-        }
-        if (longitude.degrees > this.maxLongitude.degrees) {
+        if (longitude.degrees > this.maxLongitude.degrees)
             maxLon = longitude;
-        }
 
         return new Sector(minLat, maxLat, minLon, maxLon);
     }
 
-    public static Sector union(Sector sectorA, Sector sectorB) {
-        if (sectorA == null || sectorB == null) {
-            if (sectorA == sectorB) {
+    public static Sector union(Sector sectorA, Sector sectorB)
+    {
+        if (sectorA == null || sectorB == null)
+        {
+            if (sectorA == sectorB)
                 return sectorA;
-            }
 
             return sectorB == null ? sectorA : sectorB;
         }
@@ -1282,8 +1330,10 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         return sectorA.union(sectorB);
     }
 
-    public static Sector union(Iterable<? extends Sector> sectors) {
-        if (sectors == null) {
+    public static Sector union(Iterable<? extends Sector> sectors)
+    {
+        if (sectors == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -1294,60 +1344,54 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         Angle minLon = Angle.POS180;
         Angle maxLon = Angle.NEG180;
 
-        for (Sector s : sectors) {
-            if (s == null) {
+        for (Sector s : sectors)
+        {
+            if (s == null)
                 continue;
-            }
 
-            for (LatLon p : s) {
-                if (p.getLatitude().degrees < minLat.degrees) {
+            for (LatLon p : s)
+            {
+                if (p.getLatitude().degrees < minLat.degrees)
                     minLat = p.getLatitude();
-                }
-                if (p.getLatitude().degrees > maxLat.degrees) {
+                if (p.getLatitude().degrees > maxLat.degrees)
                     maxLat = p.getLatitude();
-                }
-                if (p.getLongitude().degrees < minLon.degrees) {
+                if (p.getLongitude().degrees < minLon.degrees)
                     minLon = p.getLongitude();
-                }
-                if (p.getLongitude().degrees > maxLon.degrees) {
+                if (p.getLongitude().degrees > maxLon.degrees)
                     maxLon = p.getLongitude();
-                }
             }
         }
 
         return new Sector(minLat, maxLat, minLon, maxLon);
     }
 
-    public final Sector intersection(Sector that) {
-        if (that == null) {
+    public final Sector intersection(Sector that)
+    {
+        if (that == null)
             return this;
-        }
 
         Angle minLat, maxLat;
         minLat = (this.minLatitude.degrees > that.minLatitude.degrees) ? this.minLatitude : that.minLatitude;
         maxLat = (this.maxLatitude.degrees < that.maxLatitude.degrees) ? this.maxLatitude : that.maxLatitude;
-        if (minLat.degrees > maxLat.degrees) {
+        if (minLat.degrees > maxLat.degrees)
             return null;
-        }
 
         Angle minLon, maxLon;
         minLon = (this.minLongitude.degrees > that.minLongitude.degrees) ? this.minLongitude : that.minLongitude;
         maxLon = (this.maxLongitude.degrees < that.maxLongitude.degrees) ? this.maxLongitude : that.maxLongitude;
-        if (minLon.degrees > maxLon.degrees) {
+        if (minLon.degrees > maxLon.degrees)
             return null;
-        }
 
         return new Sector(minLat, maxLat, minLon, maxLon);
     }
 
-    public final Sector intersection(Angle latitude, Angle longitude) {
-        if (latitude == null || longitude == null) {
+    public final Sector intersection(Angle latitude, Angle longitude)
+    {
+        if (latitude == null || longitude == null)
             return this;
-        }
 
-        if (!this.contains(latitude, longitude)) {
+        if (!this.contains(latitude, longitude))
             return null;
-        }
         return new Sector(latitude, latitude, longitude, longitude);
     }
 
@@ -1364,8 +1408,10 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @throws java.lang.IllegalArgumentException if the iterable is null.
      */
-    public static Sector intersection(Iterable<? extends Sector> sectors) {
-        if (sectors == null) {
+    public static Sector intersection(Iterable<? extends Sector> sectors)
+    {
+        if (sectors == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -1373,21 +1419,22 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
 
         Sector result = null;
 
-        for (Sector s : sectors) {
-            if (s == null) {
+        for (Sector s : sectors)
+        {
+            if (s == null)
                 continue; // ignore null sectors
-            }
-            if (result == null) {
+
+            if (result == null)
                 result = s; // start with the first non-null sector
-            } else if ((result = result.intersection(s)) == null) {
+            else if ((result = result.intersection(s)) == null)
                 break; // at least one of the sectors does not intersect the others
-            }
         }
 
         return result;
     }
 
-    public Sector[] subdivide() {
+    public Sector[] subdivide()
+    {
         Angle midLat = Angle.average(this.minLatitude, this.maxLatitude);
         Angle midLon = Angle.average(this.minLongitude, this.maxLongitude);
 
@@ -1400,19 +1447,22 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         return sectors;
     }
 
-    public Sector[] subdivide(int div) {
+    public Sector[] subdivide(int div)
+    {
         double dLat = this.deltaLat.degrees / div;
         double dLon = this.deltaLon.degrees / div;
 
         Sector[] sectors = new Sector[div * div];
         int idx = 0;
-        for (int row = 0; row < div; row++) {
-            for (int col = 0; col < div; col++) {
+        for (int row = 0; row < div; row++)
+        {
+            for (int col = 0; col < div; col++)
+            {
                 sectors[idx++] = Sector.fromDegrees(
-                        this.minLatitude.degrees + dLat * row,
-                        this.minLatitude.degrees + dLat * row + dLat,
-                        this.minLongitude.degrees + dLon * col,
-                        this.minLongitude.degrees + dLon * col + dLon);
+                    this.minLatitude.degrees + dLat * row,
+                    this.minLatitude.degrees + dLat * row + dLat,
+                    this.minLongitude.degrees + dLon * col,
+                    this.minLongitude.degrees + dLon * col + dLon);
             }
         }
 
@@ -1425,21 +1475,24 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * specified point and this sector's corner points or its center point. The draw context defines the globe and the
      * elevations that are used to compute the corner points and the center point.
      *
-     * @param dc The draw context defining the surface geometry.
+     * @param dc    The draw context defining the surface geometry.
      * @param point The model coordinate point to compute a distance to.
      *
      * @return The distance between this sector's surface geometry and the specified point, in model coordinates.
      *
      * @throws IllegalArgumentException if any argument is null.
      */
-    public double distanceTo(DrawContext dc, Vec4 point) {
-        if (dc == null) {
+    public double distanceTo(DrawContext dc, Vec4 point)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (point == null) {
+        if (point == null)
+        {
             String message = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -1457,18 +1510,14 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
 
         // Find the minimum distance.
         double minDistance = d1;
-        if (minDistance > d2) {
+        if (minDistance > d2)
             minDistance = d2;
-        }
-        if (minDistance > d3) {
+        if (minDistance > d3)
             minDistance = d3;
-        }
-        if (minDistance > d4) {
+        if (minDistance > d4)
             minDistance = d4;
-        }
-        if (minDistance > d5) {
+        if (minDistance > d5)
             minDistance = d5;
-        }
 
         return minDistance;
     }
@@ -1479,11 +1528,13 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return four-element array containing the Sector's angles.
      */
-    public double[] toArrayDegrees() {
-        return new double[]{
-            this.minLatitude.degrees, this.maxLatitude.degrees,
-            this.minLongitude.degrees, this.maxLongitude.degrees
-        };
+    public double[] toArrayDegrees()
+    {
+        return new double[]
+            {
+                this.minLatitude.degrees, this.maxLatitude.degrees,
+                this.minLongitude.degrees, this.maxLongitude.degrees
+            };
     }
 
     /**
@@ -1492,9 +1543,10 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return a {@link java.awt.geom.Rectangle2D} corresponding to this Sector in degrees lat-lon coordinates.
      */
-    public Rectangle2D toRectangleDegrees() {
+    public Rectangle2D toRectangleDegrees()
+    {
         return new Rectangle2D.Double(this.getMinLongitude().degrees, this.getMinLatitude().degrees,
-                this.getDeltaLonDegrees(), this.getDeltaLatDegrees());
+            this.getDeltaLonDegrees(), this.getDeltaLatDegrees());
     }
 
     /**
@@ -1503,7 +1555,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * @return A string indicating the sector's angles.
      */
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder sb = new StringBuilder();
         sb.append("(");
         sb.append(this.minLatitude.toString());
@@ -1527,7 +1580,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return the size of this object in bytes
      */
-    public long getSizeInBytes() {
+    public long getSizeInBytes()
+    {
         return 4 * minLatitude.getSizeInBytes();  // 4 angles
     }
 
@@ -1541,44 +1595,38 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @throws IllegalArgumentException if <code>that</code> is null
      */
-    public int compareTo(Sector that) {
-        if (that == null) {
+    public int compareTo(Sector that)
+    {
+        if (that == null)
+        {
             String msg = Logging.getMessage("nullValue.SectorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (this.getMinLatitude().compareTo(that.getMinLatitude()) < 0) {
+        if (this.getMinLatitude().compareTo(that.getMinLatitude()) < 0)
             return -1;
-        }
 
-        if (this.getMinLatitude().compareTo(that.getMinLatitude()) > 0) {
+        if (this.getMinLatitude().compareTo(that.getMinLatitude()) > 0)
             return 1;
-        }
 
-        if (this.getMinLongitude().compareTo(that.getMinLongitude()) < 0) {
+        if (this.getMinLongitude().compareTo(that.getMinLongitude()) < 0)
             return -1;
-        }
 
-        if (this.getMinLongitude().compareTo(that.getMinLongitude()) > 0) {
+        if (this.getMinLongitude().compareTo(that.getMinLongitude()) > 0)
             return 1;
-        }
 
-        if (this.getMaxLatitude().compareTo(that.getMaxLatitude()) < 0) {
+        if (this.getMaxLatitude().compareTo(that.getMaxLatitude()) < 0)
             return -1;
-        }
 
-        if (this.getMaxLatitude().compareTo(that.getMaxLatitude()) > 0) {
+        if (this.getMaxLatitude().compareTo(that.getMaxLatitude()) > 0)
             return 1;
-        }
 
-        if (this.getMaxLongitude().compareTo(that.getMaxLongitude()) < 0) {
+        if (this.getMaxLongitude().compareTo(that.getMaxLongitude()) < 0)
             return -1;
-        }
 
-        if (this.getMaxLongitude().compareTo(that.getMaxLongitude()) > 0) {
+        if (this.getMaxLongitude().compareTo(that.getMaxLongitude()) > 0)
             return 1;
-        }
 
         return 0;
     }
@@ -1589,21 +1637,25 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return an iterator for the sector.
      */
-    public Iterator<LatLon> iterator() {
-        return new Iterator<LatLon>() {
+    public Iterator<LatLon> iterator()
+    {
+        return new Iterator<LatLon>()
+        {
             private int position = 0;
 
-            public boolean hasNext() {
+            public boolean hasNext()
+            {
                 return this.position < 4;
             }
 
-            public LatLon next() {
-                if (this.position > 3) {
+            public LatLon next()
+            {
+                if (this.position > 3)
                     throw new NoSuchElementException();
-                }
 
                 LatLon p;
-                switch (this.position) {
+                switch (this.position)
+                {
                     case 0:
                         p = new LatLon(Sector.this.getMinLatitude(), Sector.this.getMinLongitude());
                         break;
@@ -1622,7 +1674,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
                 return p;
             }
 
-            public void remove() {
+            public void remove()
+            {
                 throw new UnsupportedOperationException();
             }
         };
@@ -1633,10 +1686,12 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return the list of sector coordinates.
      */
-    public List<LatLon> asList() {
+    public List<LatLon> asList()
+    {
         ArrayList<LatLon> list = new ArrayList<LatLon>(4);
 
-        for (LatLon ll : this) {
+        for (LatLon ll : this)
+        {
             list.add(ll);
         }
 
@@ -1649,11 +1704,13 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return the array of sector coordinates.
      */
-    public double[] asDegreesArray() {
-        return new double[]{
-            this.getMinLatitude().degrees, this.getMaxLatitude().degrees,
-            this.getMinLongitude().degrees, this.getMaxLongitude().degrees
-        };
+    public double[] asDegreesArray()
+    {
+        return new double[]
+            {
+                this.getMinLatitude().degrees, this.getMaxLatitude().degrees,
+                this.getMinLongitude().degrees, this.getMaxLongitude().degrees
+            };
     }
 
     /**
@@ -1662,11 +1719,13 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return the array of sector coordinates.
      */
-    public double[] asRadiansArray() {
-        return new double[]{
-            this.getMinLatitude().radians, this.getMaxLatitude().radians,
-            this.getMinLongitude().radians, this.getMaxLongitude().radians
-        };
+    public double[] asRadiansArray()
+    {
+        return new double[]
+            {
+                this.getMinLatitude().radians, this.getMaxLatitude().radians,
+                this.getMinLongitude().radians, this.getMaxLongitude().radians
+            };
     }
 
     /**
@@ -1674,7 +1733,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      *
      * @return an array of the four corner locations, in the order SW, SE, NE, NW
      */
-    public LatLon[] getCorners() {
+    public LatLon[] getCorners()
+    {
         LatLon[] corners = new LatLon[4];
 
         corners[0] = new LatLon(this.minLatitude, this.minLongitude);
@@ -1691,32 +1751,27 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * @param o the sector to compareTo with <code>this</code>.
      *
      * @return <code>true</code> if the four corresponding angles of each sector are equal, <code>false</code>
-     * otherwise.
+     *         otherwise.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object o)
+    {
+        if (this == o)
             return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass())
             return false;
-        }
 
         final gov.nasa.worldwind.geom.Sector sector = (gov.nasa.worldwind.geom.Sector) o;
 
-        if (!maxLatitude.equals(sector.maxLatitude)) {
+        if (!maxLatitude.equals(sector.maxLatitude))
             return false;
-        }
-        if (!maxLongitude.equals(sector.maxLongitude)) {
+        if (!maxLongitude.equals(sector.maxLongitude))
             return false;
-        }
-        if (!minLatitude.equals(sector.minLatitude)) {
+        if (!minLatitude.equals(sector.minLatitude))
             return false;
-        }
         //noinspection RedundantIfStatement
-        if (!minLongitude.equals(sector.minLongitude)) {
+        if (!minLongitude.equals(sector.minLongitude))
             return false;
-        }
 
         return true;
     }
@@ -1727,7 +1782,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
      * @return a hash code incorporating the sector's four angles.
      */
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result;
         result = minLatitude.hashCode();
         result = 29 * result + maxLatitude.hashCode();

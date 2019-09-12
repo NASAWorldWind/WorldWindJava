@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.codehaus.jackson.util;
 
 import java.io.IOException;
@@ -19,39 +20,46 @@ import java.io.OutputStream;
 import java.util.*;
 
 /**
- * Helper class that is similar to {@link java.io.ByteArrayOutputStream} in usage, but more geared to Jackson use cases
- * internally. Specific changes include segment storage (no need to have linear backing buffer, can avoid reallocs,
- * copying), as well API not based on {@link java.io.OutputStream}. In short, a very much specialized builder object.
- * <p>
- * Since version 1.5, also implements {@link OutputStream} to allow efficient aggregation of output content as a byte
- * array, similar to how {@link java.io.ByteArrayOutputStream} works, but somewhat more efficiently for many use cases.
+ * Helper class that is similar to {@link java.io.ByteArrayOutputStream}
+ * in usage, but more geared to Jackson use cases internally.
+ * Specific changes include segment storage (no need to have linear
+ * backing buffer, can avoid reallocs, copying), as well API
+ * not based on {@link java.io.OutputStream}. In short, a very much
+ * specialized builder object.
+ *<p>
+ * Since version 1.5, also implements {@link OutputStream} to allow
+ * efficient aggregation of output content as a byte array, similar
+ * to how {@link java.io.ByteArrayOutputStream} works, but somewhat more
+ * efficiently for many use cases.
  */
 public final class ByteArrayBuilder
-        extends OutputStream {
-
+    extends OutputStream
+{
     private final static byte[] NO_BYTES = new byte[0];
-
+    
     /**
      * Size of the first block we will allocate.
      */
     private final static int INITIAL_BLOCK_SIZE = 500;
-
+    
     /**
-     * Maximum block size we will use for individual non-aggregated blocks. Let's limit to using 256k chunks.
+     * Maximum block size we will use for individual non-aggregated
+     * blocks. Let's limit to using 256k chunks.
      */
     private final static int MAX_BLOCK_SIZE = (1 << 18);
-
+    
     final static int DEFAULT_BLOCK_ARRAY_SIZE = 40;
 
     /**
-     * Optional buffer recycler instance that we can use for allocating the first block.
-     *
+     * Optional buffer recycler instance that we can use for allocating
+     * the first block.
+     * 
      * @since 1.5
      */
     private final BufferRecycler _bufferRecycler;
-
+    
     private final LinkedList<byte[]> _pastBlocks = new LinkedList<byte[]>();
-
+    
     /**
      * Number of bytes within byte arrays in {@link _pastBlocks}.
      */
@@ -60,20 +68,15 @@ public final class ByteArrayBuilder
     private byte[] _currBlock;
 
     private int _currBlockPtr;
+    
+    public ByteArrayBuilder() { this(null); }
 
-    public ByteArrayBuilder() {
-        this(null);
-    }
+    public ByteArrayBuilder(BufferRecycler br) { this(br, INITIAL_BLOCK_SIZE); }
 
-    public ByteArrayBuilder(BufferRecycler br) {
-        this(br, INITIAL_BLOCK_SIZE);
-    }
+    public ByteArrayBuilder(int firstBlockSize) { this(null, firstBlockSize); }
 
-    public ByteArrayBuilder(int firstBlockSize) {
-        this(null, firstBlockSize);
-    }
-
-    public ByteArrayBuilder(BufferRecycler br, int firstBlockSize) {
+    public ByteArrayBuilder(BufferRecycler br, int firstBlockSize)
+    {
         _bufferRecycler = br;
         if (br == null) {
             _currBlock = new byte[firstBlockSize];
@@ -82,7 +85,8 @@ public final class ByteArrayBuilder
         }
     }
 
-    public void reset() {
+    public void reset()
+    {
         _pastLen = 0;
         _currBlockPtr = 0;
 
@@ -93,8 +97,9 @@ public final class ByteArrayBuilder
     }
 
     /**
-     * Clean up method to call to release all buffers this object may be using. After calling the method, no other
-     * accessors can be used (and attempt to do so may result in an exception)
+     * Clean up method to call to release all buffers this object may be
+     * using. After calling the method, no other accessors can be used (and
+     * attempt to do so may result in an exception)
      */
     public void release() {
         reset();
@@ -103,7 +108,8 @@ public final class ByteArrayBuilder
         }
     }
 
-    public void append(int i) {
+    public void append(int i)
+    {
         byte b = (byte) i;
         if (_currBlockPtr >= _currBlock.length) {
             _allocMore();
@@ -111,7 +117,8 @@ public final class ByteArrayBuilder
         _currBlock[_currBlockPtr++] = b;
     }
 
-    public void appendTwoBytes(int b16) {
+    public void appendTwoBytes(int b16)
+    {
         if ((_currBlockPtr + 1) < _currBlock.length) {
             _currBlock[_currBlockPtr++] = (byte) (b16 >> 8);
             _currBlock[_currBlockPtr++] = (byte) b16;
@@ -121,7 +128,8 @@ public final class ByteArrayBuilder
         }
     }
 
-    public void appendThreeBytes(int b24) {
+    public void appendThreeBytes(int b24)
+    {
         if ((_currBlockPtr + 2) < _currBlock.length) {
             _currBlock[_currBlockPtr++] = (byte) (b24 >> 16);
             _currBlock[_currBlockPtr++] = (byte) (b24 >> 8);
@@ -134,17 +142,18 @@ public final class ByteArrayBuilder
     }
 
     /**
-     * Method called when results are finalized and we can get the full aggregated result buffer to return to the caller
-     *
+     * Method called when results are finalized and we can get the
+     * full aggregated result buffer to return to the caller
      * @return Undocumented.
      */
-    public byte[] toByteArray() {
+    public byte[] toByteArray()
+    {
         int totalLen = _pastLen + _currBlockPtr;
-
+        
         if (totalLen == 0) { // quick check: nothing aggregated?
             return NO_BYTES;
         }
-
+        
         byte[] result = new byte[totalLen];
         int offset = 0;
 
@@ -156,7 +165,7 @@ public final class ByteArrayBuilder
         System.arraycopy(_currBlock, 0, result, offset, _currBlockPtr);
         offset += _currBlockPtr;
         if (offset != totalLen) { // just a sanity check
-            throw new RuntimeException("Internal error: total len assumed to be " + totalLen + ", copied " + offset + " bytes");
+            throw new RuntimeException("Internal error: total len assumed to be "+totalLen+", copied "+offset+" bytes");
         }
         // Let's only reset if there's sizable use, otherwise will get reset later on
         if (!_pastBlocks.isEmpty()) {
@@ -164,8 +173,9 @@ public final class ByteArrayBuilder
         }
         return result;
     }
-
-    private void _allocMore() {
+    
+    private void _allocMore()
+    {
         _pastLen += _currBlock.length;
 
         /* Let's allocate block that's half the total size, except
@@ -189,13 +199,15 @@ public final class ByteArrayBuilder
     /* OutputStream implementation
     /*******************************************************
      */
+    
     @Override
     public void write(byte[] b) {
         write(b, 0, b.length);
     }
 
     @Override
-    public void write(byte[] b, int off, int len) {
+    public void write(byte[] b, int off, int len)
+    {
         while (true) {
             int max = _currBlock.length - _currBlockPtr;
             int toCopy = Math.min(max, len);
@@ -205,9 +217,7 @@ public final class ByteArrayBuilder
                 _currBlockPtr += toCopy;
                 len -= toCopy;
             }
-            if (len <= 0) {
-                break;
-            }
+            if (len <= 0) break;
             _allocMore();
         }
     }
@@ -217,11 +227,8 @@ public final class ByteArrayBuilder
         append(b);
     }
 
-    @Override
-    public void close() {
-        /* NOP */ }
+    @Override public void close() { /* NOP */ }
 
-    @Override
-    public void flush() {
-        /* NOP */ }
+    @Override public void flush() { /* NOP */ }
 }
+

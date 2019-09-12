@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.wms;
 
 import gov.nasa.worldwind.util.WWUtil;
@@ -17,64 +18,75 @@ import java.util.Iterator;
  * @author tag
  * @version $Id: WMSLayerExtent.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class WMSLayerExtent extends AbstractXMLEventParser {
-
+public class WMSLayerExtent extends AbstractXMLEventParser
+{
     protected String extent;
     protected String name;
     protected String defaultValue;
     protected Boolean nearestValue;
 
-    public WMSLayerExtent(String namespaceURI) {
+    public WMSLayerExtent(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
     @Override
-    protected void doParseEventAttributes(XMLEventParserContext ctx, XMLEvent event, Object... args) {
+    protected void doParseEventAttributes(XMLEventParserContext ctx, XMLEvent event, Object... args)
+    {
         Iterator iter = event.asStartElement().getAttributes();
-        if (iter == null) {
+        if (iter == null)
             return;
-        }
 
-        while (iter.hasNext()) {
+        while (iter.hasNext())
+        {
             Attribute attr = (Attribute) iter.next();
-            if (attr.getName().getLocalPart().equals("name") && attr.getValue() != null) {
+            if (attr.getName().getLocalPart().equals("name") && attr.getValue() != null)
                 this.setName(attr.getValue());
-            } else if (attr.getName().getLocalPart().equals("default") && attr.getValue() != null) {
+
+            else if (attr.getName().getLocalPart().equals("default") && attr.getValue() != null)
                 this.setDefaultValue(attr.getValue());
-            } else if (attr.getName().getLocalPart().equals("nearestValue") && attr.getValue() != null) {
+
+            else if (attr.getName().getLocalPart().equals("nearestValue") && attr.getValue() != null)
+            {
                 Boolean d = WWUtil.convertStringToBoolean(attr.getValue());
-                if (d != null) {
+                if (d != null)
                     this.setNearestValue(d);
-                }
             }
         }
     }
 
-    public String getExtent() {
+    public String getExtent()
+    {
         return this.getCharacters();
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    protected void setName(String name) {
+    protected void setName(String name)
+    {
         this.name = name;
     }
 
-    public String getDefaultValue() {
+    public String getDefaultValue()
+    {
         return defaultValue;
     }
 
-    protected void setDefaultValue(String defaultValue) {
+    protected void setDefaultValue(String defaultValue)
+    {
         this.defaultValue = defaultValue;
     }
 
-    public Boolean isNearestValue() {
+    public Boolean isNearestValue()
+    {
         return nearestValue;
     }
 
-    protected void setNearestValue(Boolean nearestValue) {
+    protected void setNearestValue(Boolean nearestValue)
+    {
         this.nearestValue = nearestValue;
     }
 }

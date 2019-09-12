@@ -20,12 +20,13 @@ import java.util.*;
 // integrated into MarkerRenderer. There are two key pieces of additional functionality:
 // (1) an attribute representing the maximum marker size, and
 // (2) the ability to disable the depth test.
+
 /**
  * @author dcollins
  * @version $Id: BasicAirspaceControlPointRenderer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRenderer {
-
+public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRenderer
+{
     private boolean enableLighting;
     private Marker controlPointMarker;
     private Material lightMaterial;
@@ -35,8 +36,10 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     private double maxMarkerSize;
     private PickSupport pickSupport = new PickSupport();
 
-    public BasicAirspaceControlPointRenderer(Marker controlPointMarker) {
-        if (controlPointMarker == null) {
+    public BasicAirspaceControlPointRenderer(Marker controlPointMarker)
+    {
+        if (controlPointMarker == null)
+        {
             String message = Logging.getMessage("nullValue.MarkerIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -49,31 +52,38 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
         this.enableDepthTest = true;
     }
 
-    public BasicAirspaceControlPointRenderer() {
+    public BasicAirspaceControlPointRenderer()
+    {
         this(createDefaultMarker());
     }
 
-    public static Marker createDefaultMarker() {
+    public static Marker createDefaultMarker()
+    {
         // Create an opaque blue sphere. By default the sphere has a 16 pixel radius, but its radius must be at least
         // 0.1 meters .
         MarkerAttributes attributes = new BasicMarkerAttributes(Material.BLUE, BasicMarkerShape.SPHERE, 1.0, 16, 0.1);
         return new BasicMarker(null, attributes, null);
     }
 
-    public boolean isEnableLighting() {
+    public boolean isEnableLighting()
+    {
         return this.enableLighting;
     }
 
-    public void setEnableLighting(boolean enable) {
+    public void setEnableLighting(boolean enable)
+    {
         this.enableLighting = enable;
     }
 
-    public Marker getControlPointMarker() {
+    public Marker getControlPointMarker()
+    {
         return controlPointMarker;
     }
 
-    public void setControlPointMarker(Marker marker) {
-        if (marker == null) {
+    public void setControlPointMarker(Marker marker)
+    {
+        if (marker == null)
+        {
             String message = Logging.getMessage("nullValue.MarkerIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -82,12 +92,15 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
         this.controlPointMarker = marker;
     }
 
-    public Material getLightMaterial() {
+    public Material getLightMaterial()
+    {
         return this.lightMaterial;
     }
 
-    public void setLightMaterial(Material material) {
-        if (material != null) {
+    public void setLightMaterial(Material material)
+    {
+        if (material != null)
+        {
             String message = Logging.getMessage("nullValue.MaterialIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -96,12 +109,15 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
         this.lightMaterial = material;
     }
 
-    public Vec4 getLightDirection() {
+    public Vec4 getLightDirection()
+    {
         return this.lightDirection;
     }
 
-    public void setLightDirection(Vec4 direction) {
-        if (direction != null) {
+    public void setLightDirection(Vec4 direction)
+    {
+        if (direction != null)
+        {
             String message = Logging.getMessage("nullValue.DirectionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -110,21 +126,26 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
         this.lightDirection = direction;
     }
 
-    public boolean isEnableDepthTest() {
+    public boolean isEnableDepthTest()
+    {
         return this.enableDepthTest;
     }
 
-    public void setEnableDepthTest(boolean enable) {
+    public void setEnableDepthTest(boolean enable)
+    {
         this.enableDepthTest = enable;
     }
 
-    public void render(DrawContext dc, Iterable<? extends AirspaceControlPoint> controlPoints) {
-        if (dc == null) {
+    public void render(DrawContext dc, Iterable<? extends AirspaceControlPoint> controlPoints)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
-        if (controlPoints == null) {
+        if (controlPoints == null)
+        {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -134,13 +155,16 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     }
 
     public void pick(DrawContext dc, Iterable<? extends AirspaceControlPoint> controlPoints, Point pickPoint,
-            Layer layer) {
-        if (dc == null) {
+        Layer layer)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
-        if (controlPoints == null) {
+        if (controlPoints == null)
+        {
             String message = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -155,35 +179,46 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     //**************************************************************//
     //********************  Control Point Rendering  ***************//
     //**************************************************************//
-    protected void draw(DrawContext dc, Iterable<? extends AirspaceControlPoint> controlPoints) {
+
+    protected void draw(DrawContext dc, Iterable<? extends AirspaceControlPoint> controlPoints)
+    {
         this.begin(dc);
-        try {
+        try
+        {
             this.drawControlPoints(dc, controlPoints);
-        } finally {
+        }
+        finally
+        {
             this.end(dc);
         }
     }
 
-    protected void drawControlPoints(DrawContext dc, Iterable<? extends AirspaceControlPoint> controlPoints) {
+    protected void drawControlPoints(DrawContext dc, Iterable<? extends AirspaceControlPoint> controlPoints)
+    {
         // Render the control points from back-to front.
         SortedSet<AirspaceControlPoint> sortedPoints = this.sortControlPoints(dc, controlPoints);
         this.drawMarkers(dc, sortedPoints);
     }
 
-    protected void begin(DrawContext dc) {
+    protected void begin(DrawContext dc)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-        if (dc.isPickingMode()) {
+        if (dc.isPickingMode())
+        {
             this.pickSupport.beginPicking(dc);
             gl.glPushAttrib(GL2.GL_CURRENT_BIT | GL2.GL_DEPTH_BUFFER_BIT | GL2.GL_TRANSFORM_BIT);
-        } else {
+        }
+        else
+        {
             gl.glPushAttrib(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_CURRENT_BIT | GL2.GL_DEPTH_BUFFER_BIT | GL2.GL_HINT_BIT
-                    | GL2.GL_LIGHTING_BIT | GL2.GL_TRANSFORM_BIT);
+                | GL2.GL_LIGHTING_BIT | GL2.GL_TRANSFORM_BIT);
 
             gl.glEnable(GL.GL_BLEND);
             gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 
-            if (this.isEnableLighting()) {
+            if (this.isEnableLighting())
+            {
                 this.setupLighting(dc);
             }
 
@@ -196,9 +231,12 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
             gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
         }
 
-        if (this.isEnableDepthTest()) {
+        if (this.isEnableDepthTest())
+        {
             gl.glEnable(GL.GL_DEPTH_TEST);
-        } else {
+        }
+        else
+        {
             gl.glDisable(GL.GL_DEPTH_TEST);
         }
 
@@ -206,34 +244,43 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
         gl.glPushMatrix();
     }
 
-    protected void end(DrawContext dc) {
+    protected void end(DrawContext dc)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         gl.glPopMatrix();
 
         gl.glPopAttrib();
 
-        if (dc.isPickingMode()) {
+        if (dc.isPickingMode())
+        {
             this.pickSupport.endPicking(dc);
         }
     }
 
-    protected PickSupport getPickSupport() {
+    protected PickSupport getPickSupport()
+    {
         return this.pickSupport;
     }
 
     //**************************************************************//
     //********************  Marker Rendering  **********************//
     //**************************************************************//
-    protected void drawMarkers(DrawContext dc, Iterable<? extends AirspaceControlPoint> controlPoints) {
+
+    protected void drawMarkers(DrawContext dc, Iterable<? extends AirspaceControlPoint> controlPoints)
+    {
         // Compute the maximum marker size as a function of the control points to render.
         this.setMaxMarkerSize(this.computeMaxMarkerSize(controlPoints));
 
         // Apply the marker attributes.
-        if (!dc.isPickingMode()) {
-            if (this.isEnableLighting()) {
+        if (!dc.isPickingMode())
+        {
+            if (this.isEnableLighting())
+            {
                 this.getControlPointMarker().getAttributes().apply(dc);
-            } else {
+            }
+            else
+            {
                 float[] compArray = new float[4];
                 Color color = this.getControlPointMarker().getAttributes().getMaterial().getDiffuse();
                 color.getRGBComponents(compArray);
@@ -242,17 +289,19 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
             }
         }
 
-        for (AirspaceControlPoint p : controlPoints) {
+        for (AirspaceControlPoint p : controlPoints)
+        {
             this.drawMarker(dc, p);
         }
     }
 
-    protected void drawMarker(DrawContext dc, AirspaceControlPoint controlPoint) {
-        if (!dc.getView().getFrustumInModelCoordinates().contains(controlPoint.getPoint())) {
+    protected void drawMarker(DrawContext dc, AirspaceControlPoint controlPoint)
+    {
+        if (!dc.getView().getFrustumInModelCoordinates().contains(controlPoint.getPoint()))
             return;
-        }
 
-        if (dc.isPickingMode()) {
+        if (dc.isPickingMode())
+        {
             java.awt.Color color = dc.getUniquePickColor();
             int colorCode = color.getRGB();
             PickedObject po = new PickedObject(colorCode, controlPoint);
@@ -267,26 +316,32 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
         this.getControlPointMarker().render(dc, point, radius);
     }
 
-    protected double getMaxMarkerSize() {
+    protected double getMaxMarkerSize()
+    {
         return this.maxMarkerSize;
     }
 
-    protected void setMaxMarkerSize(double size) {
+    protected void setMaxMarkerSize(double size)
+    {
         this.maxMarkerSize = size;
     }
 
-    protected double computeMarkerRadius(DrawContext dc, Marker marker, Vec4 point) {
+    protected double computeMarkerRadius(DrawContext dc, Marker marker, Vec4 point)
+    {
         double d = dc.getView().getEyePoint().distanceTo3(point);
         double radius = marker.getAttributes().getMarkerPixels() * dc.getView().computePixelSizeAtDistance(d);
 
         // Constrain the minimum marker size by the marker attributes.
-        if (radius < marker.getAttributes().getMinMarkerSize()) {
+        if (radius < marker.getAttributes().getMinMarkerSize())
+        {
             radius = marker.getAttributes().getMinMarkerSize();
         }
 
         // Constrain the maximum marker size by the computed maximum size.
-        if (this.getMaxMarkerSize() > 0.0) {
-            if (radius > this.getMaxMarkerSize()) {
+        if (this.getMaxMarkerSize() > 0.0)
+        {
+            if (radius > this.getMaxMarkerSize())
+            {
                 radius = this.getMaxMarkerSize();
             }
         }
@@ -294,16 +349,20 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
         return radius;
     }
 
-    protected double computeMaxMarkerSize(Iterable<? extends AirspaceControlPoint> controlPoints) {
+    protected double computeMaxMarkerSize(Iterable<? extends AirspaceControlPoint> controlPoints)
+    {
         // Compute the maximum marker size as a fraction of the average distance between control points. This will
         // prevent all but the nearest control points from touching as the view moves away from the airspace.
 
         double totalDistance = 0.0;
         int count = 0;
 
-        for (AirspaceControlPoint p1 : controlPoints) {
-            for (AirspaceControlPoint p2 : controlPoints) {
-                if (p1 != p2) {
+        for (AirspaceControlPoint p1 : controlPoints)
+        {
+            for (AirspaceControlPoint p2 : controlPoints)
+            {
+                if (p1 != p2)
+                {
                     double d = p1.getPoint().distanceTo3(p2.getPoint());
                     totalDistance += d;
                     count++;
@@ -320,7 +379,9 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     //**************************************************************//
     //********************  Rendering Support  *********************//
     //**************************************************************//
-    protected void setupLighting(DrawContext dc) {
+
+    protected void setupLighting(DrawContext dc)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         float[] modelAmbient = new float[4];
@@ -355,6 +416,7 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
         //     a directional light.
         // (b) Invoke the light position call with the identity matrix on the modelview stack. Since the position
         //     is transfomed by the
+
         Vec4 vec = getLightDirection().normalize3();
         float[] params = new float[4];
         params[0] = (float) vec.x;
@@ -372,37 +434,52 @@ public class BasicAirspaceControlPointRenderer implements AirspaceControlPointRe
     }
 
     protected SortedSet<AirspaceControlPoint> sortControlPoints(DrawContext dc,
-            Iterable<? extends AirspaceControlPoint> unsortedPoints) {
+        Iterable<? extends AirspaceControlPoint> unsortedPoints)
+    {
         final Vec4 eyePoint = dc.getView().getEyePoint();
 
         // Sort control points from lower altitude to upper altitude, then from back to front. This will give priority
         // to the upper altitude control points during picking. We give priority to the upper points, in case the
         // shape has been flattened against the terrain. In this case the lower points may not be movable, therefore
         // the user must be able to select an upper point to raise the shape and fix the problem.
-        TreeSet<AirspaceControlPoint> set = new TreeSet<AirspaceControlPoint>(new Comparator<AirspaceControlPoint>() {
-            public int compare(AirspaceControlPoint p1, AirspaceControlPoint p2) {
+
+        TreeSet<AirspaceControlPoint> set = new TreeSet<AirspaceControlPoint>(new Comparator<AirspaceControlPoint>()
+        {
+            public int compare(AirspaceControlPoint p1, AirspaceControlPoint p2)
+            {
                 double d1 = p1.getPoint().distanceTo3(eyePoint);
                 double d2 = p2.getPoint().distanceTo3(eyePoint);
                 int alt1 = p1.getAltitudeIndex();
                 int alt2 = p2.getAltitudeIndex();
 
-                if (alt2 < alt1) {
+                if (alt2 < alt1)
+                {
                     return -1;
-                } else if (alt2 > alt1) {
+                }
+                else if (alt2 > alt1)
+                {
                     return 1;
-                } else {
-                    if (d1 < d2) {
+                }
+                else
+                {
+                    if (d1 < d2)
+                    {
                         return 1;
-                    } else if (d1 > d2) {
+                    }
+                    else if (d1 > d2)
+                    {
                         return -1;
-                    } else {
+                    }
+                    else
+                    {
                         return 0;
                     }
                 }
             }
         });
 
-        for (AirspaceControlPoint p : unsortedPoints) {
+        for (AirspaceControlPoint p : unsortedPoints)
+        {
             set.add(p);
         }
 

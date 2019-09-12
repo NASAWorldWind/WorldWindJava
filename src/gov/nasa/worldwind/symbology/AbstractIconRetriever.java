@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology;
 
 import gov.nasa.worldwind.util.*;
@@ -68,11 +69,9 @@ import java.net.URL;
  * @author ccrick
  * @version $Id: AbstractIconRetriever.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class AbstractIconRetriever implements IconRetriever {
-
-    /**
-     * Path in the file system or network to the symbol repository.
-     */
+public abstract class AbstractIconRetriever implements IconRetriever
+{
+    /** Path in the file system or network to the symbol repository. */
     protected String retrieverPath;
 
     /**
@@ -82,8 +81,10 @@ public abstract class AbstractIconRetriever implements IconRetriever {
      *
      * @param retrieverPath URL to to the base symbol directory on the local file system or the network.
      */
-    public AbstractIconRetriever(String retrieverPath) {
-        if (retrieverPath == null || retrieverPath.length() == 0) {
+    public AbstractIconRetriever(String retrieverPath)
+    {
+        if (retrieverPath == null || retrieverPath.length() == 0)
+        {
             String msg = Logging.getMessage("nullValue.PathIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -99,7 +100,8 @@ public abstract class AbstractIconRetriever implements IconRetriever {
      *
      * @return File system or network path to symbol repository.
      */
-    public String getRetrieverPath() {
+    public String getRetrieverPath()
+    {
         return this.retrieverPath;
     }
 
@@ -109,26 +111,24 @@ public abstract class AbstractIconRetriever implements IconRetriever {
      * @param o Object to compare.
      *
      * @return {@code true} if {@code o} is an instance of AbstractIconRetriever and has the same retrieval path as this
-     * retriever.
+     *         retriever.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object o)
+    {
+        if (this == o)
             return true;
-        }
-        if (o == null || this.getClass() != o.getClass()) {
+        if (o == null || this.getClass() != o.getClass())
             return false;
-        }
 
         AbstractIconRetriever that = (AbstractIconRetriever) o;
         return this.retrieverPath != null ? this.retrieverPath.equals(that.retrieverPath) : that.retrieverPath == null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return this.retrieverPath != null ? this.retrieverPath.hashCode() : 0;
     }
 
@@ -141,8 +141,10 @@ public abstract class AbstractIconRetriever implements IconRetriever {
      *
      * @return The requested icon as a BufferedImage, or null if the icon cannot be loaded.
      */
-    protected BufferedImage readImage(String path) {
-        if (path == null) {
+    protected BufferedImage readImage(String path)
+    {
+        if (path == null)
+        {
             String msg = Logging.getMessage("nullValue.PathIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -154,20 +156,23 @@ public abstract class AbstractIconRetriever implements IconRetriever {
         sb.append(WWIO.stripLeadingSeparator(path));
 
         InputStream is = null;
-        try {
+        try
+        {
             URL url = WWIO.makeURL(sb.toString());
-            if (url != null) {
+            if (url != null)
                 return ImageIO.read(url);
-            }
 
             is = WWIO.openFileOrResourceStream(sb.toString(), this.getClass());
-            if (is != null) {
+            if (is != null)
                 return ImageIO.read(is);
-            }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             String msg = Logging.getMessage("generic.ExceptionWhileReading", sb.toString());
             Logging.logger().fine(msg);
-        } finally {
+        }
+        finally
+        {
             WWIO.closeStream(is, sb.toString());
         }
 
@@ -177,32 +182,37 @@ public abstract class AbstractIconRetriever implements IconRetriever {
     /**
      * Draw one image into another image. The image is drawn at location (0, 0).
      *
-     * @param src Image to draw.
+     * @param src  Image to draw.
      * @param dest Image to draw into.
      *
      * @return {@code dest} BufferedImage.
      */
-    protected BufferedImage drawImage(BufferedImage src, BufferedImage dest) {
-        if (src == null) {
+    protected BufferedImage drawImage(BufferedImage src, BufferedImage dest)
+    {
+        if (src == null)
+        {
             String msg = Logging.getMessage("nullValue.SourceIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (dest == null) {
+        if (dest == null)
+        {
             String msg = Logging.getMessage("nullValue.DestinationIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         Graphics2D g = null;
-        try {
+        try
+        {
             g = dest.createGraphics();
             g.drawImage(src, 0, 0, null);
-        } finally {
-            if (g != null) {
+        }
+        finally
+        {
+            if (g != null)
                 g.dispose();
-            }
         }
 
         return dest;
@@ -217,14 +227,17 @@ public abstract class AbstractIconRetriever implements IconRetriever {
      *
      * @see #replaceColor(java.awt.image.BufferedImage, java.awt.Color)
      */
-    protected void multiply(BufferedImage image, Color color) {
-        if (image == null) {
+    protected void multiply(BufferedImage image, Color color)
+    {
+        if (image == null)
+        {
             String msg = Logging.getMessage("nullValue.ImageIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (color == null) {
+        if (color == null)
+        {
             String msg = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -233,9 +246,8 @@ public abstract class AbstractIconRetriever implements IconRetriever {
         int w = image.getWidth();
         int h = image.getHeight();
 
-        if (w == 0 || h == 0) {
+        if (w == 0 || h == 0)
             return;
-        }
 
         int[] pixels = new int[w];
         int c = color.getRGB();
@@ -244,10 +256,12 @@ public abstract class AbstractIconRetriever implements IconRetriever {
         float cg = ((c >> 8) & 0xff) / 255f;
         float cb = (c & 0xff) / 255f;
 
-        for (int y = 0; y < h; y++) {
+        for (int y = 0; y < h; y++)
+        {
             image.getRGB(0, y, w, 1, pixels, 0, w);
 
-            for (int x = 0; x < w; x++) {
+            for (int x = 0; x < w; x++)
+            {
                 int s = pixels[x];
                 float sa = ((s >> 24) & 0xff) / 255f;
                 float sr = ((s >> 16) & 0xff) / 255f;
@@ -260,9 +274,9 @@ public abstract class AbstractIconRetriever implements IconRetriever {
                 int fb = (int) (cb * sb * 255 + 0.5);
 
                 pixels[x] = (fa & 0xff) << 24
-                        | (fr & 0xff) << 16
-                        | (fg & 0xff) << 8
-                        | (fb & 0xff);
+                    | (fr & 0xff) << 16
+                    | (fg & 0xff) << 8
+                    | (fb & 0xff);
             }
 
             image.setRGB(0, y, w, 1, pixels, 0, w);
@@ -279,14 +293,17 @@ public abstract class AbstractIconRetriever implements IconRetriever {
      *
      * @see #multiply(java.awt.image.BufferedImage, java.awt.Color)
      */
-    protected void replaceColor(BufferedImage image, Color color) {
-        if (image == null) {
+    protected void replaceColor(BufferedImage image, Color color)
+    {
+        if (image == null)
+        {
             String msg = Logging.getMessage("nullValue.ImageIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (color == null) {
+        if (color == null)
+        {
             String msg = Logging.getMessage("nullValue.ColorIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -295,9 +312,8 @@ public abstract class AbstractIconRetriever implements IconRetriever {
         int w = image.getWidth();
         int h = image.getHeight();
 
-        if (w == 0 || h == 0) {
+        if (w == 0 || h == 0)
             return;
-        }
 
         int[] pixels = new int[w];
         int c = color.getRGB();
@@ -305,10 +321,12 @@ public abstract class AbstractIconRetriever implements IconRetriever {
         float cg = ((c >> 8) & 0xff) / 255f;
         float cb = (c & 0xff) / 255f;
 
-        for (int y = 0; y < h; y++) {
+        for (int y = 0; y < h; y++)
+        {
             image.getRGB(0, y, w, 1, pixels, 0, w);
 
-            for (int x = 0; x < w; x++) {
+            for (int x = 0; x < w; x++)
+            {
                 int s = pixels[x];
                 float sa = ((s >> 24) & 0xff) / 255f;
 
@@ -318,9 +336,9 @@ public abstract class AbstractIconRetriever implements IconRetriever {
                 int fb = (int) (cb * 255 + 0.5);
 
                 pixels[x] = (fa & 0xff) << 24
-                        | (fr & 0xff) << 16
-                        | (fg & 0xff) << 8
-                        | (fb & 0xff);
+                    | (fr & 0xff) << 16
+                    | (fg & 0xff) << 8
+                    | (fb & 0xff);
             }
 
             image.setRGB(0, y, w, 1, pixels, 0, w);

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 /**
  * <p>
  * Provides classes for parsing COLLADA files and streams.</p>
@@ -30,16 +31,16 @@
  * </li>
  * </ol>
  *
- * <h4>Extending the Classes</h4>
+<h4>Extending the Classes</h4>
  *
- * <p>
+<p>
  * This package's classes are designed for easy behavior modification and replacement, and for straightforward addition
  * of operations to be performed during parsing. See the description of {@link
  * gov.nasa.worldwind.util.xml.AbstractXMLEventParser} for further information.</p>
  *
- * <h4>Relative References</h4>
+<h4>Relative References</h4>
  *
- * <p>
+<p>
  * By default, relative references will be resolved relative to the location of the COLLADA file that includes the
  * reference. However, this behavior can be overridden by providing the ColladaRoot with a {@link
  * gov.nasa.worldwind.ogc.collada.ColladaResourceResolver}.</p>

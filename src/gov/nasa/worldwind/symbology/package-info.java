@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 /**
  * <p>
  * Provides classes for creating and displaying graphics from standard symbol sets. See {@link

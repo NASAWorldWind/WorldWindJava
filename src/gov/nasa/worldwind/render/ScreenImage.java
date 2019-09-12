@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import com.jogamp.opengl.util.texture.TextureCoords;
@@ -27,8 +28,8 @@ import java.net.URL;
  * @author tag
  * @version $Id: ScreenImage.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ScreenImage extends WWObjectImpl implements Renderable, Exportable {
-
+public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
+{
     protected Object imageSource;
     protected BasicWWTexture texture;
     protected OrderedImage orderedImage = new OrderedImage();
@@ -66,17 +67,20 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
     protected double dy;
     protected Layer pickLayer;
 
-    protected class OrderedImage implements OrderedRenderable {
-
-        public double getDistanceFromEye() {
+    protected class OrderedImage implements OrderedRenderable
+    {
+        public double getDistanceFromEye()
+        {
             return 0;
         }
 
-        public void pick(DrawContext dc, Point pickPoint) {
+        public void pick(DrawContext dc, Point pickPoint)
+        {
             ScreenImage.this.draw(dc);
         }
 
-        public void render(DrawContext dc) {
+        public void render(DrawContext dc)
+        {
             ScreenImage.this.draw(dc);
         }
     }
@@ -94,7 +98,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      * @see #getImageOffset()
      * @see #getScreenOffset()
      */
-    public Point getScreenLocation() {
+    public Point getScreenLocation()
+    {
         return this.awtScreenLocation;
     }
 
@@ -106,7 +111,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @return the current screen position.
      */
-    public Point getScreenLocation(DrawContext dc) {
+    public Point getScreenLocation(DrawContext dc)
+    {
         this.computeOffsets(dc);
         return this.awtScreenLocation;
     }
@@ -116,12 +122,13 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      * is relative to the upper-left corner of the WorldWindow, and the image is centered on this location.
      *
      * @param screenLocation the screen location on which to center the image. May be null, in which case the image is
-     * not displayed.
+     *                       not displayed.
      *
      * @see #setScreenOffset(Offset)
      * @see #setImageOffset(Offset)
      */
-    public void setScreenLocation(Point screenLocation) {
+    public void setScreenLocation(Point screenLocation)
+    {
         // Use units PIXELS for the X screen offset, and and INSET_PIXELS for the Y screen offset. The Offset is in
         // OpenGL coordinates with the origin in the lower-left corner, but the Point is in AWT coordinates with the
         // origin in the upper-left corner. This offset translates the origin from the lower-left to the upper-left
@@ -142,7 +149,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @see #getImageOffset()
      */
-    public Offset getScreenOffset() {
+    public Offset getScreenOffset()
+    {
         return screenOffset;
     }
 
@@ -154,7 +162,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @see #setImageOffset(Offset)
      */
-    public void setScreenOffset(Offset screenOffset) {
+    public void setScreenOffset(Offset screenOffset)
+    {
         this.screenOffset = screenOffset;
     }
 
@@ -165,7 +174,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @see #getScreenOffset()
      */
-    public Offset getImageOffset() {
+    public Offset getImageOffset()
+    {
         return imageOffset;
     }
 
@@ -176,7 +186,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @see #setScreenOffset(Offset)
      */
-    public void setImageOffset(Offset imageOffset) {
+    public void setImageOffset(Offset imageOffset)
+    {
         this.imageOffset = imageOffset;
     }
 
@@ -187,7 +198,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @see #getRotationOffset()
      */
-    public Double getRotation() {
+    public Double getRotation()
+    {
         return rotation;
     }
 
@@ -198,7 +210,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @see #setRotationOffset(Offset)
      */
-    public void setRotation(Double rotation) {
+    public void setRotation(Double rotation)
+    {
         this.rotation = rotation;
     }
 
@@ -206,11 +219,12 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      * Get the point about which the image is rotated.
      *
      * @return Rotation point in image coordinates, or null if there is no rotation point set. The origin of the
-     * coordinate system is at the lower left corner of the image.
+     *         coordinate system is at the lower left corner of the image.
      *
      * @see #getRotation()
      */
-    public Offset getRotationOffset() {
+    public Offset getRotationOffset()
+    {
         return rotationOffset;
     }
 
@@ -221,7 +235,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @see #setRotation(Double)
      */
-    public void setRotationOffset(Offset rotationOffset) {
+    public void setRotationOffset(Offset rotationOffset)
+    {
         this.rotationOffset = rotationOffset;
     }
 
@@ -230,7 +245,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @return Image dimension.
      */
-    public Size getSize() {
+    public Size getSize()
+    {
         return size;
     }
 
@@ -240,8 +256,10 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @param size Image dimension. May not be null.
      */
-    public void setSize(Size size) {
-        if (size == null) {
+    public void setSize(Size size)
+    {
+        if (size == null)
+        {
             String msg = Logging.getMessage("nullValue.SizeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -257,7 +275,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @see #getImageSource()
      */
-    public Object getImageSource() {
+    public Object getImageSource()
+    {
         return this.imageSource;
     }
 
@@ -270,8 +289,10 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @throws IllegalArgumentException if the <code>imageSource</code> is null.
      */
-    public void setImageSource(Object imageSource) {
-        if (imageSource == null) {
+    public void setImageSource(Object imageSource)
+    {
+        if (imageSource == null)
+        {
             String message = Logging.getMessage("nullValue.ImageSource");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -287,15 +308,20 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @return The texture, or null if the texture is not yet available.
      */
-    protected BasicWWTexture initializeTexture() {
+    protected BasicWWTexture initializeTexture()
+    {
         Object imageSource = this.getImageSource();
-        if (imageSource instanceof String || imageSource instanceof URL) {
+        if (imageSource instanceof String || imageSource instanceof URL)
+        {
             URL imageURL = WorldWind.getDataFileStore().requestFile(imageSource.toString());
-            if (imageURL != null) {
+            if (imageURL != null)
+            {
                 this.texture = new BasicWWTexture(imageURL, true);
                 this.texture.setUseAnisotropy(false);
             }
-        } else if (imageSource != null) {
+        }
+        else if (imageSource != null)
+        {
             this.texture = new BasicWWTexture(imageSource, true);
             return this.texture;
         }
@@ -309,7 +335,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @return the surface opacity.
      */
-    public double getOpacity() {
+    public double getOpacity()
+    {
         return opacity;
     }
 
@@ -318,7 +345,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @return The color for the default rectangle.
      */
-    public Color getColor() {
+    public Color getColor()
+    {
         return this.color;
     }
 
@@ -328,7 +356,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @param defaultColor New color for the default rectangle.
      */
-    public void setColor(Color defaultColor) {
+    public void setColor(Color defaultColor)
+    {
         this.color = defaultColor;
     }
 
@@ -340,8 +369,10 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @throws IllegalArgumentException if the specified opacity is less than zero.
      */
-    public void setOpacity(double opacity) {
-        if (opacity < 0) {
+    public void setOpacity(double opacity)
+    {
+        if (opacity < 0)
+        {
             String message = Logging.getMessage("generic.OpacityOutOfRange", opacity);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -360,8 +391,10 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @see #getSize()
      */
-    public int getImageWidth(DrawContext dc) {
-        if (dc == null) {
+    public int getImageWidth(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String msg = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -380,8 +413,10 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @see #getSize()
      */
-    public int getImageHeight(DrawContext dc) {
-        if (dc == null) {
+    public int getImageHeight(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String msg = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -395,7 +430,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @return the object identified as the picked object.
      */
-    public Object getDelegateOwner() {
+    public Object getDelegateOwner()
+    {
         return delegateOwner;
     }
 
@@ -404,7 +440,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @param delegateOwner the object included in {@link gov.nasa.worldwind.event.SelectEvent}s as the picked object.
      */
-    public void setDelegateOwner(Object delegateOwner) {
+    public void setDelegateOwner(Object delegateOwner)
+    {
         this.delegateOwner = delegateOwner;
     }
 
@@ -415,33 +452,41 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @param dc DrawContext into which the image will be rendered.
      */
-    protected void computeOffsets(DrawContext dc) {
-        if (dc.getFrameTimeStamp() != this.frameNumber) {
+    protected void computeOffsets(DrawContext dc)
+    {
+        if (dc.getFrameTimeStamp() != this.frameNumber)
+        {
             final BasicWWTexture texture = this.getTexture();
 
             final int viewportWidth = dc.getView().getViewport().width;
             final int viewportHeight = dc.getView().getViewport().height;
 
             // Compute image size
-            if (texture != null) {
+            if (texture != null)
+            {
                 this.originalImageWidth = texture.getWidth(dc);
                 this.originalImageHeight = texture.getHeight(dc);
-            } else if (this.getImageSource() == null) // If no image source is set, draw a rectangle
+            }
+            else if (this.getImageSource() == null) // If no image source is set, draw a rectangle
             {
                 this.originalImageWidth = 1;
                 this.originalImageHeight = 1;
-            } else // If an image source is set, but the image is not available yet, don't draw anything
+            }
+            else // If an image source is set, but the image is not available yet, don't draw anything
             {
                 this.frameNumber = dc.getFrameTimeStamp();
                 return;
             }
 
-            if (this.size != null) {
+            if (this.size != null)
+            {
                 Dimension d = this.size.compute(this.originalImageWidth, this.originalImageHeight,
-                        viewportWidth, viewportHeight);
+                    viewportWidth, viewportHeight);
                 this.width = d.width;
                 this.height = d.height;
-            } else {
+            }
+            else
+            {
                 this.width = this.originalImageWidth;
                 this.height = this.originalImageHeight;
             }
@@ -450,25 +495,31 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
             Offset rotationOffset = this.getRotationOffset();
 
             // If no rotation offset is set, rotate around the center of the image.
-            if (rotationOffset != null) {
+            if (rotationOffset != null)
+            {
                 // The KML specification according to both OGC and Google states that the rotation point is specified in
                 // a coordinate system with the origin at the lower left corner of the screen (0.5, 0.5 is the center
                 // of the screen). But Google Earth interprets the point in a coordinate system with origin at the lower
                 // left corner of the image (0.5, 0.5 is the center of the image), so we'll do that too.
                 Point.Double pointD = rotationOffset.computeOffset(this.width, this.height, null, null);
                 rotationPoint = new Point((int) pointD.x, (int) pointD.y);
-            } else {
+            }
+            else
+            {
                 this.rotationPoint = new Point(this.width, this.height);
             }
 
             // Compute position
-            if (this.screenOffset != null) {
+            if (this.screenOffset != null)
+            {
                 // Compute the screen location in OpenGL coordinates. There is no need to convert from AWT to OpenGL
                 // coordinates because the Offset is already in OpenGL coordinates with its origin in the lower-left
                 // corner.
                 Point.Double pointD = this.screenOffset.computeOffset(viewportWidth, viewportHeight, null, null);
                 this.screenLocation = new Point((int) pointD.x, (int) (pointD.y));
-            } else {
+            }
+            else
+            {
                 this.screenLocation = new Point(viewportWidth / 2, viewportHeight / 2);
             }
 
@@ -478,11 +529,10 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
             this.awtScreenLocation = new Point(this.screenLocation.x, viewportHeight - this.screenLocation.y);
 
             Point.Double overlayPoint;
-            if (this.imageOffset != null) {
+            if (this.imageOffset != null)
                 overlayPoint = this.imageOffset.computeOffset(this.width, this.height, null, null);
-            } else {
+            else
                 overlayPoint = new Point.Double(this.originalImageWidth / 2.0, this.originalImageHeight / 2.0);
-            }
 
             this.dx = -overlayPoint.x;
             this.dy = -overlayPoint.y;
@@ -497,36 +547,38 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      *
      * @return The texture or null if the texture is not yet available.
      */
-    protected BasicWWTexture getTexture() {
-        if (this.texture != null) {
+    protected BasicWWTexture getTexture()
+    {
+        if (this.texture != null)
             return this.texture;
-        } else {
+        else
             return this.initializeTexture();
-        }
     }
 
-    public void render(DrawContext dc) {
+    public void render(DrawContext dc)
+    {
         this.computeOffsets(dc);
         this.doRender(dc);
     }
 
     @SuppressWarnings({"UnusedParameters"})
-    public void pick(DrawContext dc, Point pickPoint) {
+    public void pick(DrawContext dc, Point pickPoint)
+    {
         this.doRender(dc);
     }
 
-    protected void doRender(DrawContext dc) {
-        if (dc.isPickingMode()) {
+    protected void doRender(DrawContext dc)
+    {
+        if (dc.isPickingMode())
             this.pickLayer = dc.getCurrentLayer();
-        }
 
         dc.addOrderedRenderable(this.orderedImage);
     }
 
-    protected void draw(DrawContext dc) {
-        if (this.screenLocation == null) {
+    protected void draw(DrawContext dc)
+    {
+        if (this.screenLocation == null)
             return;
-        }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
@@ -534,13 +586,14 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
         boolean modelviewPushed = false;
         boolean projectionPushed = false;
 
-        try {
+        try
+        {
             gl.glPushAttrib(GL2.GL_DEPTH_BUFFER_BIT
-                    | GL2.GL_COLOR_BUFFER_BIT
-                    | GL2.GL_ENABLE_BIT
-                    | GL2.GL_TRANSFORM_BIT
-                    | GL2.GL_VIEWPORT_BIT
-                    | GL2.GL_CURRENT_BIT);
+                | GL2.GL_COLOR_BUFFER_BIT
+                | GL2.GL_ENABLE_BIT
+                | GL2.GL_TRANSFORM_BIT
+                | GL2.GL_VIEWPORT_BIT
+                | GL2.GL_CURRENT_BIT);
             attribsPushed = true;
 
             // Don't depth buffer.
@@ -567,7 +620,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
             gl.glTranslated(this.screenLocation.x + this.dx, this.screenLocation.y + this.dy, 0d);
 
             Double rotation = this.getRotation();
-            if (rotation != null) {
+            if (rotation != null)
+            {
                 gl.glTranslated(rotationPoint.x, rotationPoint.y, 0);
                 gl.glRotated(rotation, 0, 0, 1);
                 gl.glTranslated(-rotationPoint.x, -rotationPoint.y, 0);
@@ -576,28 +630,32 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
             double xscale = (double) this.getImageWidth(dc) / originalImageWidth;
             double yscale = (double) this.getImageHeight(dc) / originalImageHeight;
 
-            if (!dc.isPickingMode()) {
+            if (!dc.isPickingMode())
+            {
                 // Draw either an image or a filled rectangle
                 boolean drawImage = this.getTexture() != null;
 
                 gl.glEnable(GL.GL_TEXTURE_2D);
-                if (drawImage) {
-                    if (this.getTexture().bind(dc)) {
+                if (drawImage)
+                {
+                    if (this.getTexture().bind(dc))
                         gl.glColor4d(1d, 1d, 1d, this.opacity);
-                    } else {
+                    else
                         drawImage = false; // Can't bind texture, draw rectangle instead
-                    }
                 }
 
                 gl.glEnable(GL.GL_BLEND);
                 gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 
-                if (drawImage) {
+                if (drawImage)
+                {
                     TextureCoords texCoords = this.getTexture().getTexCoords();
                     gl.glScaled(xscale * this.originalImageWidth, yscale * this.originalImageHeight, 1d);
                     dc.drawUnitQuad(texCoords);
                     gl.glBindTexture(GL.GL_TEXTURE_2D, 0);
-                } else {
+                }
+                else
+                {
                     // Set color of the rectangle that will be drawn instead of an image
                     final Color color = this.getColor();
                     float[] colorRGB = color.getRGBColorComponents(null);
@@ -607,43 +665,46 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
                     gl.glScaled(xscale, yscale, 1d);
                     dc.drawUnitQuad();
                 }
-            } else {
+            }
+            else
+            {
                 this.pickSupport.clearPickList();
                 this.pickSupport.beginPicking(dc);
                 Color color = dc.getUniquePickColor();
                 int colorCode = color.getRGB();
                 this.pickSupport.addPickableObject(colorCode, this.delegateOwner != null ? this.delegateOwner : this,
-                        null, false);
+                    null, false);
                 gl.glColor3ub((byte) color.getRed(), (byte) color.getGreen(), (byte) color.getBlue());
                 gl.glScaled(xscale * this.originalImageWidth, yscale * this.originalImageHeight, 1d);
                 dc.drawUnitQuad();
                 this.pickSupport.endPicking(dc);
                 this.pickSupport.resolvePick(dc, dc.getPickPoint(), this.pickLayer);
             }
-        } finally {
-            if (projectionPushed) {
+        }
+        finally
+        {
+            if (projectionPushed)
+            {
                 gl.glMatrixMode(GL2.GL_PROJECTION);
                 gl.glPopMatrix();
             }
-            if (modelviewPushed) {
+            if (modelviewPushed)
+            {
                 gl.glMatrixMode(GL2.GL_MODELVIEW);
                 gl.glPopMatrix();
             }
-            if (attribsPushed) {
+            if (attribsPushed)
                 gl.glPopAttrib();
-            }
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String isExportFormatSupported(String format) {
-        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(format)) {
+    /** {@inheritDoc} */
+    public String isExportFormatSupported(String format)
+    {
+        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(format))
             return Exportable.FORMAT_SUPPORTED;
-        } else {
+        else
             return Exportable.FORMAT_NOT_SUPPORTED;
-        }
     }
 
     /**
@@ -658,32 +719,41 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      * </pre>
      *
      * @param mimeType MIME type of desired export format.
-     * @param output An object that will receive the exported data. The type of this object depends on the export format
-     * (see above).
+     * @param output   An object that will receive the exported data. The type of this object depends on the export
+     *                 format (see above).
      *
      * @throws java.io.IOException If an exception occurs writing to the output object.
      */
-    public void export(String mimeType, Object output) throws IOException {
-        if (mimeType == null) {
+    public void export(String mimeType, Object output) throws IOException
+    {
+        if (mimeType == null)
+        {
             String message = Logging.getMessage("nullValue.Format");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (output == null) {
+        if (output == null)
+        {
             String message = Logging.getMessage("nullValue.OutputBufferIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType)) {
-            try {
+        if (KMLConstants.KML_MIME_TYPE.equalsIgnoreCase(mimeType))
+        {
+            try
+            {
                 exportAsKML(output);
-            } catch (XMLStreamException e) {
+            }
+            catch (XMLStreamException e)
+            {
                 Logging.logger().throwing(getClass().getName(), "export", e);
                 throw new IOException(e);
             }
-        } else {
+        }
+        else
+        {
             String message = Logging.getMessage("Export.UnsupportedFormat", mimeType);
             Logging.logger().warning(message);
             throw new UnsupportedOperationException(message);
@@ -700,24 +770,31 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
      * @param output Object to receive the generated KML.
      *
      * @throws XMLStreamException If an exception occurs while writing the KML
-     * @throws IOException if an exception occurs while exporting the data.
+     * @throws IOException        if an exception occurs while exporting the data.
      * @see #export(String, Object)
      */
-    protected void exportAsKML(Object output) throws IOException, XMLStreamException {
+    protected void exportAsKML(Object output) throws IOException, XMLStreamException
+    {
         XMLStreamWriter xmlWriter = null;
         XMLOutputFactory factory = XMLOutputFactory.newInstance();
         boolean closeWriterWhenFinished = true;
 
-        if (output instanceof XMLStreamWriter) {
+        if (output instanceof XMLStreamWriter)
+        {
             xmlWriter = (XMLStreamWriter) output;
             closeWriterWhenFinished = false;
-        } else if (output instanceof Writer) {
+        }
+        else if (output instanceof Writer)
+        {
             xmlWriter = factory.createXMLStreamWriter((Writer) output);
-        } else if (output instanceof OutputStream) {
+        }
+        else if (output instanceof OutputStream)
+        {
             xmlWriter = factory.createXMLStreamWriter((OutputStream) output);
         }
 
-        if (xmlWriter == null) {
+        if (xmlWriter == null)
+        {
             String message = Logging.getMessage("Export.UnsupportedOutputObject");
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -731,23 +808,26 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
 
         String imgSrcString = null;
         Object imageSource = this.getImageSource();
-        if (imageSource instanceof String) {
+        if (imageSource instanceof String)
             imgSrcString = (String) imageSource;
-        } else if (imageSource instanceof URL) {
+        else if (imageSource instanceof URL)
             imgSrcString = imageSource.toString();
-        }
 
         // We can only export a link to the image if the image source is a path or URL. 
-        if (imgSrcString != null) {
+        if (imgSrcString != null)
+        {
             xmlWriter.writeStartElement("Icon");
             xmlWriter.writeStartElement("href");
             xmlWriter.writeCharacters(imgSrcString);
             xmlWriter.writeEndElement(); // href
             xmlWriter.writeEndElement(); // Icon
-        } else {
+        }
+        else
+        {
             // No image string, try to export the color
             Color color = this.getColor();
-            if (color != null) {
+            if (color != null)
+            {
                 xmlWriter.writeStartElement("color");
                 xmlWriter.writeCharacters(KMLExportUtil.stripHexPrefix(WWUtil.encodeColorABGR(color)));
                 xmlWriter.writeEndElement();
@@ -758,7 +838,8 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
         KMLExportUtil.exportOffset(xmlWriter, this.getScreenOffset(), "screenXY");
 
         Double rotation = this.getRotation();
-        if (rotation != null) {
+        if (rotation != null)
+        {
             xmlWriter.writeStartElement("rotation");
             xmlWriter.writeCharacters(rotation.toString());
             xmlWriter.writeEndElement();  // rotation
@@ -771,8 +852,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable 
         xmlWriter.writeEndElement(); // ScreenOverlay
 
         xmlWriter.flush();
-        if (closeWriterWhenFinished) {
+        if (closeWriterWhenFinished)
             xmlWriter.close();
-        }
     }
 }

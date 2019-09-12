@@ -72,7 +72,7 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String DATA_CACHE_NAME = "gov.nasa.worldwind.avkey.DataCacheNameKey";
     final String DATA_FILE_STORE_CLASS_NAME = "gov.nasa.worldwind.avkey.DataFileStoreClassName";
     final String DATA_FILE_STORE_CONFIGURATION_FILE_NAME
-            = "gov.nasa.worldwind.avkey.DataFileStoreConfigurationFileName";
+        = "gov.nasa.worldwind.avkey.DataFileStoreConfigurationFileName";
     final String DATASET_NAME = "gov.nasa.worldwind.avkey.DatasetNameKey";
     final String DATA_RASTER_READER_FACTORY_CLASS_NAME = "gov.nasa.worldwind.avkey.DataRasterReaderFactoryClassName";
     final String DATASET_TYPE = "gov.nasa.worldwind.avkey.DatasetTypeKey";
@@ -85,9 +85,9 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String DATA_TYPE = "gov.nasa.worldwind.avkey.DataType";
     final String DELETE_CACHE_ON_EXIT = "gov.nasa.worldwind.avkey.DeleteCacheOnExit";
     /**
-     * Indicates the WorldWind scene's worst-case depth resolution, in meters. This is typically interpreted by the View
-     * as the desired resolution at the scene's maximum drawing distance. In this case, the resolution closer to the
-     * viewer's eye point is significantly better then the worst-case resolution. Decreasing this value enables the
+     * Indicates the WorldWind scene's worst-case depth resolution, in meters. This is typically interpreted by the
+     * View as the desired resolution at the scene's maximum drawing distance. In this case, the resolution closer to
+     * the viewer's eye point is significantly better then the worst-case resolution. Decreasing this value enables the
      * viewer to get closer to 3D shapes positioned above the terrain at the coast of potential rendering artifacts
      * between shapes that are places closely together or close to the terrain.
      */
@@ -296,10 +296,8 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String PIXEL_FORMAT = "gov.nasa.worldwind.avkey.PixelFormat";
     final String PIXEL_HEIGHT = "gov.nasa.worldwind.avkey.PixelHeight";
     final String PIXEL_WIDTH = "gov.nasa.worldwind.avkey.PixelWidth";
-
-    /**
-     * @deprecated Use <code>{@link #DATA_TYPE} instead.</code>.
-     */
+    
+    /** @deprecated Use <code>{@link #DATA_TYPE} instead.</code>. */
     @Deprecated
     final String PIXEL_TYPE = AVKey.DATA_TYPE;
 
@@ -355,18 +353,14 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String REPEAT_XY = "gov.nasa.worldwind.avkey.RepeatXY";
 
     final String RESIZE = "gov.nasa.worldwind.avkey.Resize";
-    /**
-     * On window resize, scales the item to occupy a constant relative size of the viewport.
-     */
+    /** On window resize, scales the item to occupy a constant relative size of the viewport. */
     final String RESIZE_STRETCH = "gov.nasa.worldwind.CompassLayer.ResizeStretch";
     /**
      * On window resize, scales the item to occupy a constant relative size of the viewport, but not larger than the
      * item's inherent size scaled by the layer's item scale factor.
      */
     final String RESIZE_SHRINK_ONLY = "gov.nasa.worldwind.CompassLayer.ResizeShrinkOnly";
-    /**
-     * Does not modify the item size when the window changes size.
-     */
+    /** Does not modify the item size when the window changes size. */
     final String RESIZE_KEEP_FIXED_SIZE = "gov.nasa.worldwind.CompassLayer.ResizeKeepFixedSize";
     final String RETAIN_LEVEL_ZERO_TILES = "gov.nasa.worldwind.avkey.RetainLevelZeroTiles";
     final String RETRIEVAL_POOL_SIZE = "gov.nasa.worldwind.avkey.RetrievalPoolSize";
@@ -463,8 +457,8 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String TILED_IMAGERY = "gov.nasa.worldwind.avkey.TiledImagery";
     final String TILED_ELEVATIONS = "gov.nasa.worldwind.avkey.TiledElevations";
     final String TILED_RASTER_PRODUCER_CACHE_SIZE = "gov.nasa.worldwind.avkey.TiledRasterProducerCacheSize";
-    final String TILED_RASTER_PRODUCER_LARGE_DATASET_THRESHOLD
-            = "gov.nasa.worldwind.avkey.TiledRasterProducerLargeDatasetThreshold";
+    final String TILED_RASTER_PRODUCER_LARGE_DATASET_THRESHOLD =
+        "gov.nasa.worldwind.avkey.TiledRasterProducerLargeDatasetThreshold";
     final String TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL = "gov.nasa.worldwind.avkey.TiledRasterProducer.LimitMaxLevel";
     final String TILT = "gov.nasa.worldwind.avkey.Tilt";
     final String TITLE = "gov.nasa.worldwind.avkey.Title";

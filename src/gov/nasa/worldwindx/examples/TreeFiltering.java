@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.event.*;
@@ -25,11 +26,12 @@ import java.util.HashSet;
  * @author tag
  * @version $Id: TreeFiltering.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class TreeFiltering extends ApplicationTemplate {
-
-    private static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() throws IOException, ParserConfigurationException, SAXException {
+public class TreeFiltering extends ApplicationTemplate
+{
+    private static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame() throws IOException, ParserConfigurationException, SAXException
+        {
             super(true, true, false);
 
             final MyMarkerLayer layer = new MyMarkerLayer(this.makeDatabase());
@@ -37,14 +39,17 @@ public class TreeFiltering extends ApplicationTemplate {
             layer.setPickEnabled(true);
             insertBeforePlacenames(this.getWwd(), layer);
 
-            this.getWwd().addPositionListener(new PositionListener() {
-                public void moved(PositionEvent event) {
+            this.getWwd().addPositionListener(new PositionListener()
+            {
+                public void moved(PositionEvent event)
+                {
                     layer.setCursorLocation(event.getPosition());
                 }
             });
         }
 
-        private BasicQuadTree<Marker> makeDatabase() {
+        private BasicQuadTree<Marker> makeDatabase()
+        {
             int treeDepth = 5;
             int minLat = 23, maxLat = 50, latDelta = 3;
             int minLon = -130, maxLon = -70, lonDelta = 3;
@@ -52,10 +57,12 @@ public class TreeFiltering extends ApplicationTemplate {
 
             MarkerAttributes attrs = new BasicMarkerAttributes();
 
-            for (int lat = minLat; lat <= maxLat; lat += latDelta) {
-                for (int lon = minLon; lon <= maxLon; lon += lonDelta) {
+            for (int lat = minLat; lat <= maxLat; lat += latDelta)
+            {
+                for (int lon = minLon; lon <= maxLon; lon += lonDelta)
+                {
                     tree.add(new BasicMarker(Position.fromDegrees(lat, lon, 0), attrs),
-                            new double[]{(double) lat, (double) lon}, null);
+                        new double[] {(double) lat, (double) lon}, null);
                 }
             }
 
@@ -63,49 +70,53 @@ public class TreeFiltering extends ApplicationTemplate {
         }
     }
 
-    private static class MyMarkerLayer extends MarkerLayer {
-
-        private static final double[] REGION_SIZES = new double[]{5, 2};
+    private static class MyMarkerLayer extends MarkerLayer
+    {
+        private static final double[] REGION_SIZES = new double[] {5, 2};
         private static final long TIME_LIMIT = 5; // ms
 
         private BasicQuadTree<Marker> database;
         private Position position;
         private Iterable<Marker> markers;
 
-        public MyMarkerLayer(BasicQuadTree<Marker> database) {
+        public MyMarkerLayer(BasicQuadTree<Marker> database)
+        {
             this.database = database;
             this.setOverrideMarkerElevation(true);
             this.setKeepSeparated(false);
         }
 
-        public void setCursorLocation(Position position) {
+        public void setCursorLocation(Position position)
+        {
             this.position = position;
         }
 
-        protected void draw(DrawContext dc, Point pickPoint) {
-            if (this.position == null) {
+        protected void draw(DrawContext dc, Point pickPoint)
+        {
+            if (this.position == null)
                 return;
-            }
 
             // Refresh the visibility tree only during the pick pass, or the display pass if picking is disabled
-            if (!this.isPickEnabled() || dc.isPickingMode() || this.markers == null) {
+            if (!this.isPickEnabled() || dc.isPickingMode() || this.markers == null)
                 this.markers = this.getVisibleMarkers(dc);
-            }
 
             this.setMarkers(this.markers);
             super.draw(dc, pickPoint);
         }
 
-        private Iterable<Marker> getVisibleMarkers(DrawContext dc) {
+        private Iterable<Marker> getVisibleMarkers(DrawContext dc)
+        {
             HashSet<Marker> markers = new HashSet<Marker>();
-            for (Sector sector : dc.getVisibleSectors(REGION_SIZES, TIME_LIMIT, this.computeSector())) {
+            for (Sector sector : dc.getVisibleSectors(REGION_SIZES, TIME_LIMIT, this.computeSector()))
+            {
                 this.database.getItemsInRegion(sector, markers);
             }
 
             return markers;
         }
 
-        private Sector computeSector() {
+        private Sector computeSector()
+        {
             double size = 5;
             double lat = this.position.getLatitude().degrees;
             double lon = this.position.getLongitude().degrees;
@@ -118,7 +129,8 @@ public class TreeFiltering extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Filtering by Region", AppFrame.class);
     }
 }

@@ -3,15 +3,16 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-package gov.nasa.worldwind.formats.nitfs;
 
+package gov.nasa.worldwind.formats.nitfs;
 /**
  * @author Lado Garakanidze
  * @version $Id: NITFSReservedExtensionSegment.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class NITFSReservedExtensionSegment extends NITFSSegment {
-
-    public NITFSReservedExtensionSegment(java.nio.ByteBuffer buffer, int headerStartOffset, int headerLength, int dataStartOffset, int dataLength) {
+public class NITFSReservedExtensionSegment extends NITFSSegment
+{
+    public NITFSReservedExtensionSegment(java.nio.ByteBuffer buffer, int headerStartOffset, int headerLength, int dataStartOffset, int dataLength)
+    {
         super(NITFSSegmentType.RESERVED_EXTENSION_SEGMENT, buffer, headerStartOffset, headerLength, dataStartOffset, dataLength);
 
         this.restoreBufferPosition();

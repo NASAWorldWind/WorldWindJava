@@ -1,17 +1,20 @@
+
 package org.codehaus.jackson.io;
 
 import java.io.*;
 
+
 /**
- * Simple basic class for optimized readers in this package; implements "cookie-cutter" methods that are used by all
- * actual implementations.
+ * Simple basic class for optimized readers in this package; implements
+ * "cookie-cutter" methods that are used by all actual implementations.
  */
 abstract class BaseReader
-        extends Reader {
-
+    extends Reader
+{
     /**
-     * JSON actually limits available Unicode range in the high end to the same as xml (to basically limit UTF-8 max
-     * byte sequence length to 4)
+     * JSON actually limits available Unicode range in the high end
+     * to the same as xml (to basically limit UTF-8 max byte sequence
+     * length to 4)
      */
     final protected static int LAST_VALID_UNICODE_CHAR = 0x10FFFF;
 
@@ -31,9 +34,11 @@ abstract class BaseReader
     ////////////////////////////////////////
     // Life-cycle
     ////////////////////////////////////////
-     */
+    */
+
     protected BaseReader(IOContext context,
-            InputStream in, byte[] buf, int ptr, int len) {
+                         InputStream in, byte[] buf, int ptr, int len)
+    {
         mContext = context;
         mIn = in;
         mBuffer = buf;
@@ -45,9 +50,11 @@ abstract class BaseReader
     ////////////////////////////////////////
     // Reader API
     ////////////////////////////////////////
-     */
+    */
+
     public void close()
-            throws IOException {
+        throws IOException
+    {
         InputStream in = mIn;
 
         if (in != null) {
@@ -60,11 +67,13 @@ abstract class BaseReader
     char[] mTmpBuf = null;
 
     /**
-     * Although this method is implemented by the base class, AND it should never be called by main code, let's still
-     * implement it bit more efficiently just in case
+     * Although this method is implemented by the base class, AND it should
+     * never be called by main code, let's still implement it bit more
+     * efficiently just in case
      */
     public int read()
-            throws IOException {
+        throws IOException
+    {
         if (mTmpBuf == null) {
             mTmpBuf = new char[1];
         }
@@ -78,12 +87,15 @@ abstract class BaseReader
     ////////////////////////////////////////
     // Internal/package methods:
     ////////////////////////////////////////
-     */
+    */
+
     /**
-     * This method should be called along with (or instead of) normal close. After calling this method, no further reads
-     * should be tried. Method will try to recycle read buffers (if any).
+     * This method should be called along with (or instead of) normal
+     * close. After calling this method, no further reads should be tried.
+     * Method will try to recycle read buffers (if any).
      */
-    public final void freeBuffers() {
+    public final void freeBuffers()
+    {
         byte[] buf = mBuffer;
         if (buf != null) {
             mBuffer = null;
@@ -92,12 +104,14 @@ abstract class BaseReader
     }
 
     protected void reportBounds(char[] cbuf, int start, int len)
-            throws IOException {
-        throw new ArrayIndexOutOfBoundsException("read(buf," + start + "," + len + "), cbuf[" + cbuf.length + "]");
+        throws IOException
+    {
+        throw new ArrayIndexOutOfBoundsException("read(buf,"+start+","+len+"), cbuf["+cbuf.length+"]");
     }
 
     protected void reportStrangeStream()
-            throws IOException {
+        throws IOException
+    {
         throw new IOException("Strange I/O stream, returned 0 bytes on read");
     }
 }

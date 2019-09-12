@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.layermanager;
 
 import gov.nasa.worldwind.WorldWindow;
@@ -18,12 +19,12 @@ import java.awt.event.*;
  * @author tag
  * @version $Id: LayerPanel.java 1179 2013-02-15 17:47:37Z tgaskins $
  */
-public class LayerPanel extends JPanel {
-
-    public static final ImageIcon UP_ARROW
-            = new ImageIcon(LayerPanel.class.getResource("/images/up_arrow_16x16.png"));
-    public static final ImageIcon DOWN_ARROW
-            = new ImageIcon(LayerPanel.class.getResource("/images/down_arrow_16x16.png"));
+public class LayerPanel extends JPanel
+{
+    public static final ImageIcon UP_ARROW =
+        new ImageIcon(LayerPanel.class.getResource("/images/up_arrow_16x16.png"));
+    public static final ImageIcon DOWN_ARROW =
+        new ImageIcon(LayerPanel.class.getResource("/images/down_arrow_16x16.png"));
 
     protected Layer layer; // the layer represented by this instance
 
@@ -31,7 +32,8 @@ public class LayerPanel extends JPanel {
     protected JButton upButton;
     protected JButton downButton;
 
-    public LayerPanel(final WorldWindow wwd, final Layer layer) {
+    public LayerPanel(final WorldWindow wwd, final Layer layer)
+    {
         super(new BorderLayout(10, 10));
 
         this.layer = layer;
@@ -42,15 +44,19 @@ public class LayerPanel extends JPanel {
         this.add(this.checkBox, BorderLayout.CENTER);
 
         this.upButton = new JButton(UP_ARROW);
-        this.upButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+        this.upButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent actionEvent)
+            {
                 moveLayer(wwd, layer, -1);
             }
         });
 
         this.downButton = new JButton(DOWN_ARROW);
-        this.downButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+        this.downButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent actionEvent)
+            {
                 moveLayer(wwd, layer, +1);
             }
         });
@@ -73,25 +79,29 @@ public class LayerPanel extends JPanel {
         this.downButton.setEnabled(index != wwd.getModel().getLayers().size() - 1);
     }
 
-    public Layer getLayer() {
+    public Layer getLayer()
+    {
         return this.layer;
     }
 
-    public Font getLayerNameFont() {
+    public Font getLayerNameFont()
+    {
         return this.checkBox.getFont();
     }
 
-    public void setLayerNameFont(Font font) {
+    public void setLayerNameFont(Font font)
+    {
         this.checkBox.setFont(font);
     }
 
-    protected void moveLayer(WorldWindow wwd, Layer layer, int direction) {
+    protected void moveLayer(WorldWindow wwd, Layer layer, int direction)
+    {
         // Moves the layer associated with this instance in the direction indicated relative to the other layers.
 
         int index = this.findLayerPosition(wwd, layer);
-        if (index < 0) {
+        if (index < 0)
             return; // layer not found
-        }
+
         LayerList layerList = wwd.getModel().getLayers();
 
         this.upButton.setEnabled(true);
@@ -110,38 +120,41 @@ public class LayerPanel extends JPanel {
         }
 
         // Remove the layer from the layer list and then re-insert it.
+
         layerList.remove(layer);
 
-        if (direction > 0) {
+        if (direction > 0)
             layerList.add(index + 1, layer);
-        } else if (direction < 0) {
+        else if (direction < 0)
             layerList.add(index - 1, layer);
-        }
 
         // Update WorldWind so the change is visible.
         wwd.redraw();
     }
 
-    protected int findLayerPosition(WorldWindow wwd, Layer layer) {
+    protected int findLayerPosition(WorldWindow wwd, Layer layer)
+    {
         // Determines the ordinal location of a layer in the layer list.
 
-        for (int i = 0; i < wwd.getModel().getLayers().size(); i++) {
-            if (layer == wwd.getModel().getLayers().get(i)) {
+        for (int i = 0; i < wwd.getModel().getLayers().size(); i++)
+        {
+            if (layer == wwd.getModel().getLayers().get(i))
                 return i;
-            }
         }
 
         return -1;
     }
 
-    protected static class SelectLayerAction extends AbstractAction {
+    protected static class SelectLayerAction extends AbstractAction
+    {
         // This action handles layer selection and de-selection.
 
         protected WorldWindow wwd;
         protected Layer layer;
         protected boolean selected;
 
-        public SelectLayerAction(WorldWindow wwd, Layer layer, boolean selected) {
+        public SelectLayerAction(WorldWindow wwd, Layer layer, boolean selected)
+        {
             super(layer.getName());
 
             this.wwd = wwd;
@@ -150,13 +163,13 @@ public class LayerPanel extends JPanel {
             this.layer.setEnabled(this.selected);
         }
 
-        public void actionPerformed(ActionEvent actionEvent) {
+        public void actionPerformed(ActionEvent actionEvent)
+        {
             // Simply enable or disable the layer based on its toggle button.
-            if (((JCheckBox) actionEvent.getSource()).isSelected()) {
+            if (((JCheckBox) actionEvent.getSource()).isSelected())
                 this.layer.setEnabled(true);
-            } else {
+            else
                 this.layer.setEnabled(false);
-            }
 
             wwd.redraw();
         }

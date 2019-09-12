@@ -14,34 +14,35 @@ import org.junit.runners.JUnit4;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnit4.class)
-public class AirspaceAttributesTest {
-
+public class AirspaceAttributesTest
+{
     @Test
-    public void testDefaultConstructor() {
+    public void testDefaultConstructor()
+    {
         String stateInXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
-                + "<restorableState>"
-                + "<stateObject name=\"drawInterior\">true</stateObject>"
-                + "<stateObject name=\"drawOutline\">false</stateObject>"
-                + "<stateObject name=\"enableAntialiasing\">false</stateObject>"
-                + "<stateObject name=\"enableLighting\">true</stateObject>"
-                + "<stateObject name=\"interiorMaterial\">"
-                + "<stateObject name=\"ambient\">0X4C4C4CFF</stateObject>"
-                + "<stateObject name=\"diffuse\">0XFFFFFFFF</stateObject>"
-                + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
-                + "<stateObject name=\"emission\">0X0000FF</stateObject>"
-                + "<stateObject name=\"shininess\">80.0</stateObject>"
-                + "</stateObject>"
-                + "<stateObject name=\"outlineMaterial\">"
-                + "<stateObject name=\"ambient\">0X000000FF</stateObject>"
-                + "<stateObject name=\"diffuse\">0X000000FF</stateObject>"
-                + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
-                + "<stateObject name=\"emission\">0X0000FF</stateObject>"
-                + "<stateObject name=\"shininess\">80.0</stateObject>"
-                + "</stateObject>"
-                + "<stateObject name=\"interiorOpacity\">1.0</stateObject>"
-                + "<stateObject name=\"outlineOpacity\">1.0</stateObject>"
-                + "<stateObject name=\"outlineWidth\">1.0</stateObject>"
-                + "</restorableState>";
+            + "<restorableState>"
+            + "<stateObject name=\"drawInterior\">true</stateObject>"
+            + "<stateObject name=\"drawOutline\">false</stateObject>"
+            + "<stateObject name=\"enableAntialiasing\">false</stateObject>"
+            + "<stateObject name=\"enableLighting\">true</stateObject>"
+            + "<stateObject name=\"interiorMaterial\">"
+            + "<stateObject name=\"ambient\">0X4C4C4CFF</stateObject>"
+            + "<stateObject name=\"diffuse\">0XFFFFFFFF</stateObject>"
+            + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
+            + "<stateObject name=\"emission\">0X0000FF</stateObject>"
+            + "<stateObject name=\"shininess\">80.0</stateObject>"
+            + "</stateObject>"
+            + "<stateObject name=\"outlineMaterial\">"
+            + "<stateObject name=\"ambient\">0X000000FF</stateObject>"
+            + "<stateObject name=\"diffuse\">0X000000FF</stateObject>"
+            + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
+            + "<stateObject name=\"emission\">0X0000FF</stateObject>"
+            + "<stateObject name=\"shininess\">80.0</stateObject>"
+            + "</stateObject>"
+            + "<stateObject name=\"interiorOpacity\">1.0</stateObject>"
+            + "<stateObject name=\"outlineOpacity\">1.0</stateObject>"
+            + "<stateObject name=\"outlineWidth\">1.0</stateObject>"
+            + "</restorableState>";
         RestorableSupport rs = RestorableSupport.parse(stateInXml);
         AirspaceAttributes expected = new BasicAirspaceAttributes();
         expected.restoreState(rs, null);
@@ -52,31 +53,32 @@ public class AirspaceAttributesTest {
     }
 
     @Test
-    public void testOtherConstructor() {
+    public void testOtherConstructor()
+    {
         String stateInXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
-                + "<restorableState>"
-                + "<stateObject name=\"drawInterior\">true</stateObject>"
-                + "<stateObject name=\"drawOutline\">false</stateObject>"
-                + "<stateObject name=\"enableAntialiasing\">false</stateObject>"
-                + "<stateObject name=\"enableLighting\">true</stateObject>"
-                + "<stateObject name=\"interiorMaterial\">"
-                + "<stateObject name=\"ambient\">0X4C0000FF</stateObject>"
-                + "<stateObject name=\"diffuse\">0XFF0000FF</stateObject>"
-                + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
-                + "<stateObject name=\"emission\">0X0000FF</stateObject>"
-                + "<stateObject name=\"shininess\">80.0</stateObject>"
-                + "</stateObject>"
-                + "<stateObject name=\"outlineMaterial\">"
-                + "<stateObject name=\"ambient\">0X000000FF</stateObject>"
-                + "<stateObject name=\"diffuse\">0X000000FF</stateObject>"
-                + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
-                + "<stateObject name=\"emission\">0X0000FF</stateObject>"
-                + "<stateObject name=\"shininess\">80.0</stateObject>"
-                + "</stateObject>"
-                + "<stateObject name=\"interiorOpacity\">0.5</stateObject>"
-                + "<stateObject name=\"outlineOpacity\">1.0</stateObject>"
-                + "<stateObject name=\"outlineWidth\">1.0</stateObject>"
-                + "</restorableState>";
+            + "<restorableState>"
+            + "<stateObject name=\"drawInterior\">true</stateObject>"
+            + "<stateObject name=\"drawOutline\">false</stateObject>"
+            + "<stateObject name=\"enableAntialiasing\">false</stateObject>"
+            + "<stateObject name=\"enableLighting\">true</stateObject>"
+            + "<stateObject name=\"interiorMaterial\">"
+            + "<stateObject name=\"ambient\">0X4C0000FF</stateObject>"
+            + "<stateObject name=\"diffuse\">0XFF0000FF</stateObject>"
+            + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
+            + "<stateObject name=\"emission\">0X0000FF</stateObject>"
+            + "<stateObject name=\"shininess\">80.0</stateObject>"
+            + "</stateObject>"
+            + "<stateObject name=\"outlineMaterial\">"
+            + "<stateObject name=\"ambient\">0X000000FF</stateObject>"
+            + "<stateObject name=\"diffuse\">0X000000FF</stateObject>"
+            + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
+            + "<stateObject name=\"emission\">0X0000FF</stateObject>"
+            + "<stateObject name=\"shininess\">80.0</stateObject>"
+            + "</stateObject>"
+            + "<stateObject name=\"interiorOpacity\">0.5</stateObject>"
+            + "<stateObject name=\"outlineOpacity\">1.0</stateObject>"
+            + "<stateObject name=\"outlineWidth\">1.0</stateObject>"
+            + "</restorableState>";
         RestorableSupport rs = RestorableSupport.parse(stateInXml);
         AirspaceAttributes expected = new BasicAirspaceAttributes();
         expected.restoreState(rs, null);
@@ -87,7 +89,8 @@ public class AirspaceAttributesTest {
     }
 
     @Test
-    public void testPropertyAccessors() {
+    public void testPropertyAccessors()
+    {
         AirspaceAttributes attrs = new BasicAirspaceAttributes();
         attrs.setInteriorMaterial(Material.RED);
         attrs.setOutlineMaterial(Material.GREEN);
@@ -104,7 +107,8 @@ public class AirspaceAttributesTest {
 
     @SuppressWarnings("deprecation")
     @Test
-    public void testDeprecatedPropertyAccessors() {
+    public void testDeprecatedPropertyAccessors()
+    {
         // Set and get using the deprecated property accessors.
         AirspaceAttributes attrs = new BasicAirspaceAttributes();
         attrs.setMaterial(Material.RED);
@@ -149,7 +153,8 @@ public class AirspaceAttributesTest {
     }
 
     @Test
-    public void testRestoreState() {
+    public void testRestoreState()
+    {
         AirspaceAttributes expected = new BasicAirspaceAttributes();
         expected.setDrawInterior(false);
         expected.setDrawOutline(true);
@@ -171,7 +176,8 @@ public class AirspaceAttributesTest {
     }
 
     @Test
-    public void testRestoreDeprecatedState() {
+    public void testRestoreDeprecatedState()
+    {
         AirspaceAttributes expected = new BasicAirspaceAttributes();
         expected.setDrawInterior(false);
         expected.setDrawOutline(true);
@@ -182,27 +188,27 @@ public class AirspaceAttributesTest {
         expected.setOutlineWidth(10.0);
 
         String stateInXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
-                + "<restorableState>"
-                + "<stateObject name=\"drawInterior\">false</stateObject>"
-                + "<stateObject name=\"drawOutline\">true</stateObject>"
-                + "<stateObject name=\"material\">"
-                + "<stateObject name=\"ambient\">0X4C0000FF</stateObject>"
-                + "<stateObject name=\"diffuse\">0XFF0000FF</stateObject>"
-                + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
-                + "<stateObject name=\"emission\">0X0000FF</stateObject>"
-                + "<stateObject name=\"shininess\">80.0</stateObject>"
-                + "</stateObject>"
-                + "<stateObject name=\"outlineMaterial\">"
-                + "<stateObject name=\"ambient\">0X4C00FF</stateObject>"
-                + "<stateObject name=\"diffuse\">0XFF00FF</stateObject>"
-                + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
-                + "<stateObject name=\"emission\">0X0000FF</stateObject>"
-                + "<stateObject name=\"shininess\">80.0</stateObject>"
-                + "</stateObject>"
-                + "<stateObject name=\"opacity\">0.5</stateObject>"
-                + "<stateObject name=\"outlineOpacity\">0.75</stateObject>"
-                + "<stateObject name=\"outlineWidth\">10.0</stateObject>"
-                + "</restorableState>";
+            + "<restorableState>"
+            + "<stateObject name=\"drawInterior\">false</stateObject>"
+            + "<stateObject name=\"drawOutline\">true</stateObject>"
+            + "<stateObject name=\"material\">"
+            + "<stateObject name=\"ambient\">0X4C0000FF</stateObject>"
+            + "<stateObject name=\"diffuse\">0XFF0000FF</stateObject>"
+            + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
+            + "<stateObject name=\"emission\">0X0000FF</stateObject>"
+            + "<stateObject name=\"shininess\">80.0</stateObject>"
+            + "</stateObject>"
+            + "<stateObject name=\"outlineMaterial\">"
+            + "<stateObject name=\"ambient\">0X4C00FF</stateObject>"
+            + "<stateObject name=\"diffuse\">0XFF00FF</stateObject>"
+            + "<stateObject name=\"specular\">0XFFFFFFFF</stateObject>"
+            + "<stateObject name=\"emission\">0X0000FF</stateObject>"
+            + "<stateObject name=\"shininess\">80.0</stateObject>"
+            + "</stateObject>"
+            + "<stateObject name=\"opacity\">0.5</stateObject>"
+            + "<stateObject name=\"outlineOpacity\">0.75</stateObject>"
+            + "<stateObject name=\"outlineWidth\">10.0</stateObject>"
+            + "</restorableState>";
         RestorableSupport rs = RestorableSupport.parse(stateInXml);
         AirspaceAttributes actual = new BasicAirspaceAttributes();
         actual.restoreState(rs, null);

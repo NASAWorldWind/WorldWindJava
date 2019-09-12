@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
 
 import gov.nasa.worldwind.WorldWind;
@@ -26,11 +27,9 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: PhaseLine.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class PhaseLine extends AbstractMilStd2525TacticalGraphic {
-
-    /**
-     * Factor applied to the stipple pattern used to draw the dashed line for a Probable Line of Deployment.
-     */
+public class PhaseLine extends AbstractMilStd2525TacticalGraphic
+{
+    /** Factor applied to the stipple pattern used to draw the dashed line for a Probable Line of Deployment. */
     protected static final int PLD_OUTLINE_STIPPLE_FACTOR = 12;
 
     /**
@@ -38,23 +37,22 @@ public class PhaseLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics() {
+    public static List<String> getSupportedGraphics()
+    {
         return Arrays.asList(
-                TacGrpSidc.C2GM_GNL_LNE_PHELNE,
-                TacGrpSidc.C2GM_GNL_LNE_LITLNE,
-                TacGrpSidc.C2GM_OFF_LNE_FCL,
-                TacGrpSidc.C2GM_OFF_LNE_LMTADV,
-                TacGrpSidc.C2GM_OFF_LNE_LD,
-                TacGrpSidc.C2GM_OFF_LNE_LDLC,
-                TacGrpSidc.C2GM_OFF_LNE_PLD,
-                TacGrpSidc.C2GM_SPL_LNE_REL,
-                TacGrpSidc.FSUPP_LNE_C2LNE_NFL
+            TacGrpSidc.C2GM_GNL_LNE_PHELNE,
+            TacGrpSidc.C2GM_GNL_LNE_LITLNE,
+            TacGrpSidc.C2GM_OFF_LNE_FCL,
+            TacGrpSidc.C2GM_OFF_LNE_LMTADV,
+            TacGrpSidc.C2GM_OFF_LNE_LD,
+            TacGrpSidc.C2GM_OFF_LNE_LDLC,
+            TacGrpSidc.C2GM_OFF_LNE_PLD,
+            TacGrpSidc.C2GM_SPL_LNE_REL,
+            TacGrpSidc.FSUPP_LNE_C2LNE_NFL
         );
     }
 
-    /**
-     * Path used to render the line.
-     */
+    /** Path used to render the line. */
     protected Path path;
 
     /**
@@ -62,27 +60,31 @@ public class PhaseLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public PhaseLine(String sidc) {
+    public PhaseLine(String sidc)
+    {
         super(sidc);
         this.path = this.createPath();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setPositions(Iterable<? extends Position> positions) {
-        if (positions == null) {
+    /** {@inheritDoc} */
+    public void setPositions(Iterable<? extends Position> positions)
+    {
+        if (positions == null)
+        {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        try {
+        try
+        {
             // Ensure that at least two positions are provided.
             Iterator<? extends Position> iterator = positions.iterator();
             iterator.next();
             iterator.next();
-        } catch (NoSuchElementException e) {
+        }
+        catch (NoSuchElementException e)
+        {
             String message = Logging.getMessage("generic.InsufficientPositions");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -91,31 +93,27 @@ public class PhaseLine extends AbstractMilStd2525TacticalGraphic {
         this.path.setPositions(positions);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Iterable<? extends Position> getPositions() {
+    /** {@inheritDoc} */
+    public Iterable<? extends Position> getPositions()
+    {
         return this.path.getPositions();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Position getReferencePosition() {
+    /** {@inheritDoc} */
+    public Position getReferencePosition()
+    {
         return this.path.getReferencePosition();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void doRenderGraphic(DrawContext dc) {
+    /** {@inheritDoc} */
+    protected void doRenderGraphic(DrawContext dc)
+    {
         this.path.render(dc);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void applyDelegateOwner(Object owner) {
+    /** {@inheritDoc} */
+    protected void applyDelegateOwner(Object owner)
+    {
         this.path.setDelegateOwner(owner);
     }
 
@@ -124,7 +122,8 @@ public class PhaseLine extends AbstractMilStd2525TacticalGraphic {
      *
      * @return New path configured with defaults appropriate for this type of graphic.
      */
-    protected Path createPath() {
+    protected Path createPath()
+    {
         Path path = new Path();
         path.setFollowTerrain(true);
         path.setPathType(AVKey.GREAT_CIRCLE);
@@ -134,32 +133,33 @@ public class PhaseLine extends AbstractMilStd2525TacticalGraphic {
         return path;
     }
 
-    protected String getGraphicLabel() {
+    protected String getGraphicLabel()
+    {
         String code = this.maskedSymbolCode;
 
         String pattern = null;
 
-        if (TacGrpSidc.C2GM_GNL_LNE_PHELNE.equalsIgnoreCase(code)) {
+        if (TacGrpSidc.C2GM_GNL_LNE_PHELNE.equalsIgnoreCase(code))
             pattern = "PL %s";
-        } else if (TacGrpSidc.C2GM_GNL_LNE_LITLNE.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_GNL_LNE_LITLNE.equalsIgnoreCase(code))
             pattern = "LL\n(PL %s)";
-        } else if (TacGrpSidc.C2GM_OFF_LNE_FCL.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_OFF_LNE_FCL.equalsIgnoreCase(code))
             pattern = "FINAL CL\n(PL %s)";
-        } else if (TacGrpSidc.C2GM_OFF_LNE_LMTADV.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_OFF_LNE_LMTADV.equalsIgnoreCase(code))
             pattern = "LOA\n(PL %s)";
-        } else if (TacGrpSidc.C2GM_OFF_LNE_LD.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_OFF_LNE_LD.equalsIgnoreCase(code))
             pattern = "LD\n(PL %s)";
-        } else if (TacGrpSidc.C2GM_OFF_LNE_LDLC.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_OFF_LNE_LDLC.equalsIgnoreCase(code))
             pattern = "LD/LC\n(PL %s)";
-        } else if (TacGrpSidc.C2GM_OFF_LNE_PLD.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_OFF_LNE_PLD.equalsIgnoreCase(code))
             pattern = "PLD\n(PL %s)";
-        } else if (TacGrpSidc.C2GM_SPL_LNE_REL.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_SPL_LNE_REL.equalsIgnoreCase(code))
             pattern = "RL\n(PL %s)";
-        } else if (TacGrpSidc.FSUPP_LNE_C2LNE_NFL.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.FSUPP_LNE_C2LNE_NFL.equalsIgnoreCase(code))
             pattern = "NFL\n(PL %s)";
-        }
 
-        if (pattern != null) {
+        if (pattern != null)
+        {
             String text = this.getText();
             return String.format(pattern, text != null ? text : "");
         }
@@ -167,11 +167,10 @@ public class PhaseLine extends AbstractMilStd2525TacticalGraphic {
         return "";
     }
 
-    /**
-     * Create labels for the start and end of the path.
-     */
+    /** Create labels for the start and end of the path. */
     @Override
-    protected void createLabels() {
+    protected void createLabels()
+    {
         String text = this.getGraphicLabel();
 
         this.addLabel(text); // Start label
@@ -184,13 +183,15 @@ public class PhaseLine extends AbstractMilStd2525TacticalGraphic {
      * @param dc Current draw context.
      */
     @Override
-    protected void determineLabelPositions(DrawContext dc) {
+    protected void determineLabelPositions(DrawContext dc)
+    {
         Iterator<? extends Position> iterator = this.path.getPositions().iterator();
 
         // Find the first and last positions on the path
         Position first = iterator.next();
         Position last = first;
-        while (iterator.hasNext()) {
+        while (iterator.hasNext())
+        {
             last = iterator.next();
         }
 
@@ -202,21 +203,26 @@ public class PhaseLine extends AbstractMilStd2525TacticalGraphic {
         endLabel.setPosition(last);
 
         // Set the West-most label to right alignment, and the East-most label to left alignment.
-        if (first.longitude.degrees < last.longitude.degrees) {
+        if (first.longitude.degrees < last.longitude.degrees)
+        {
             startLabel.setTextAlign(AVKey.RIGHT);
             endLabel.setTextAlign(AVKey.LEFT);
-        } else {
+        }
+        else
+        {
             startLabel.setTextAlign(AVKey.LEFT);
             endLabel.setTextAlign(AVKey.RIGHT);
         }
     }
 
     @Override
-    protected void applyDefaultAttributes(ShapeAttributes attributes) {
+    protected void applyDefaultAttributes(ShapeAttributes attributes)
+    {
         super.applyDefaultAttributes(attributes);
 
         // Probable Line of Deployment graphic always renders with dashed lines.
-        if (TacGrpSidc.C2GM_OFF_LNE_PLD.equalsIgnoreCase(this.maskedSymbolCode)) {
+        if (TacGrpSidc.C2GM_OFF_LNE_PLD.equalsIgnoreCase(this.maskedSymbolCode))
+        {
             attributes.setOutlineStippleFactor(PLD_OUTLINE_STIPPLE_FACTOR);
             attributes.setOutlineStipplePattern(this.getOutlineStipplePattern());
         }

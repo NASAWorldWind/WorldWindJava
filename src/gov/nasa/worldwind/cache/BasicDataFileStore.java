@@ -22,29 +22,23 @@ import java.util.*;
  * @author Tom Gaskins
  * @version $Id: BasicDataFileStore.java 1950 2014-04-20 18:52:47Z tgaskins $
  */
-public class BasicDataFileStore extends AbstractFileStore {
-
-    /**
-     * The number of milliseconds to wait before a retrieval request for the same file can be reissued.
-     */
+public class BasicDataFileStore extends AbstractFileStore
+{
+    /** The number of milliseconds to wait before a retrieval request for the same file can be reissued. */
     protected static final long TIMEOUT = (long) 5e3;
-    /**
-     * The default content types used to determine an unknown file format in <code>requestFile</code>.
-     */
+    /** The default content types used to determine an unknown file format in <code>requestFile</code>. */
     protected static final List<String> DEFAULT_CACHE_CONTENT_TYPES = Arrays.asList(
-            "application/vnd.google-earth.kml+xml",
-            "application/vnd.google-earth.kmz",
-            "model/collada+xml",
-            "image/dds",
-            "image/gif",
-            "image/jpeg",
-            "image/jpg",
-            "image/png"
+        "application/vnd.google-earth.kml+xml",
+        "application/vnd.google-earth.kmz",
+        "model/collada+xml",
+        "image/dds",
+        "image/gif",
+        "image/jpeg",
+        "image/jpg",
+        "image/png"
     );
 
-    /**
-     * The map of cached entries.
-     */
+    /** The map of cached entries. */
     protected BasicMemoryCache db = new BasicMemoryCache((long) 3e5, (long) 5e5);
     /**
      * Absent-resource list to keep track of resources that were requested by requestFile but failed. The default list
@@ -73,11 +67,13 @@ public class BasicDataFileStore extends AbstractFileStore {
      * Create an instance.
      *
      * @throws IllegalStateException if the configuration file name cannot be determined from {@link Configuration} or
-     * the configuration file cannot be found.
+     *                               the configuration file cannot be found.
      */
-    public BasicDataFileStore() {
+    public BasicDataFileStore()
+    {
         String configPath = Configuration.getStringValue(AVKey.DATA_FILE_STORE_CONFIGURATION_FILE_NAME);
-        if (configPath == null) {
+        if (configPath == null)
+        {
             String message = Logging.getMessage("FileStore.NoConfiguration");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -85,20 +81,26 @@ public class BasicDataFileStore extends AbstractFileStore {
 
         java.io.InputStream is = null;
         File configFile = new File(configPath);
-        if (configFile.exists()) {
-            try {
+        if (configFile.exists())
+        {
+            try
+            {
                 is = new FileInputStream(configFile);
-            } catch (FileNotFoundException e) {
+            }
+            catch (FileNotFoundException e)
+            {
                 String message = Logging.getMessage("FileStore.LocalConfigFileNotFound", configPath);
                 Logging.logger().finest(message);
             }
         }
 
-        if (is == null) {
+        if (is == null)
+        {
             is = this.getClass().getClassLoader().getResourceAsStream(configPath);
         }
 
-        if (is == null) {
+        if (is == null)
+        {
             String message = Logging.getMessage("FileStore.ConfigurationNotFound", configPath);
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -112,8 +114,10 @@ public class BasicDataFileStore extends AbstractFileStore {
      *
      * @param directoryPath the directory to manage as a file store.
      */
-    public BasicDataFileStore(File directoryPath) {
-        if (directoryPath == null) {
+    public BasicDataFileStore(File directoryPath)
+    {
+        if (directoryPath == null)
+        {
             String message = Logging.getMessage("nullValue.PathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -129,19 +133,21 @@ public class BasicDataFileStore extends AbstractFileStore {
     }
 
     @Override
-    protected void initialize(InputStream xmlConfigStream) {
+    protected void initialize(InputStream xmlConfigStream)
+    {
         super.initialize(xmlConfigStream);
 
         String s = Configuration.getStringValue(AVKey.CACHE_CONTENT_TYPES);
-        if (s != null) {
+        if (s != null)
+        {
             this.cacheContentTypes.clear();
 
             String[] contentTypes = s.split(",");
-            for (String type : contentTypes) {
+            for (String type : contentTypes)
+            {
                 type = type.trim();
-                if (!WWUtil.isEmpty(type)) {
+                if (!WWUtil.isEmpty(type))
                     this.cacheContentTypes.add(type);
-                }
             }
         }
     }
@@ -151,7 +157,8 @@ public class BasicDataFileStore extends AbstractFileStore {
      *
      * @return the file store's absent-resource list.
      */
-    protected AbsentResourceList getAbsentResourceList() {
+    protected AbsentResourceList getAbsentResourceList()
+    {
         return this.absentResources;
     }
 
@@ -160,33 +167,32 @@ public class BasicDataFileStore extends AbstractFileStore {
      *
      * @return the file store's list of content types.
      */
-    protected List<String> getCacheContentTypes() {
+    protected List<String> getCacheContentTypes()
+    {
         return this.cacheContentTypes;
     }
 
-    public String getContentType(String address) {
-        if (address == null) {
+    public String getContentType(String address)
+    {
+        if (address == null)
             return null;
-        }
 
         DBEntry entry = (DBEntry) this.db.getObject(address);
         return entry != null ? entry.contentType : null;
     }
 
-    public long getExpirationTime(String address) {
-        if (address == null) {
+    public long getExpirationTime(String address)
+    {
+        if (address == null)
             return 0;
-        }
 
         DBEntry entry = (DBEntry) this.db.getObject(address);
         return entry != null ? entry.expiration : 0;
     }
 
-    /**
-     * Holds information for entries in the cache database.
-     */
-    protected static class DBEntry implements Cacheable {
-
+    /** Holds information for entries in the cache database. */
+    protected static class DBEntry implements Cacheable
+    {
         protected final static int NONE = 0;
         protected final static int PENDING = 1;
         protected final static int LOCAL = 2;
@@ -198,31 +204,33 @@ public class BasicDataFileStore extends AbstractFileStore {
         protected long lastUpdateTime;
         protected int state;
 
-        public DBEntry(String name) {
+        public DBEntry(String name)
+        {
             this.name = name;
             this.state = NONE;
             this.lastUpdateTime = System.currentTimeMillis();
         }
 
-        public long getSizeInBytes() {
+        public long getSizeInBytes()
+        {
             return 40 + (name != null ? 2 * name.length() : 0);
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public synchronized void removeFile(String address) {
-        if (address == null) {
+    /** {@inheritDoc} */
+    public synchronized void removeFile(String address)
+    {
+        if (address == null)
+        {
             String message = Logging.getMessage("nullValue.AddressIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
 
         DBEntry entry = (DBEntry) this.db.getObject(address);
-        if (entry == null) {
+        if (entry == null)
             return; // Nothing to delete
-        }
+
         // Delete the cache file
         this.removeFile(entry.localUrl);
 
@@ -230,11 +238,11 @@ public class BasicDataFileStore extends AbstractFileStore {
         this.db.remove(address);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public synchronized URL requestFile(String address) {
-        if (address == null) {
+    /** {@inheritDoc} */
+    public synchronized URL requestFile(String address)
+    {
+        if (address == null)
+        {
             String message = Logging.getMessage("nullValue.AddressIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -245,33 +253,31 @@ public class BasicDataFileStore extends AbstractFileStore {
         return this.requestFile(address, true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public synchronized URL requestFile(String address, boolean cacheRemoteFile) {
-        if (address == null) {
+    /** {@inheritDoc} */
+    public synchronized URL requestFile(String address, boolean cacheRemoteFile)
+    {
+        if (address == null)
+        {
             String message = Logging.getMessage("nullValue.AddressIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
 
-        if (this.getAbsentResourceList().isResourceAbsent(address)) {
+        if (this.getAbsentResourceList().isResourceAbsent(address))
             return null;
-        }
 
         DBEntry entry = (DBEntry) this.db.getObject(address);
-        if (entry != null) {
+        if (entry != null)
+        {
             long now = System.currentTimeMillis();
             boolean expired = entry.expiration != 0 && now > entry.expiration;
 
             // Return the resource if it is local and has not expired.
-            if (entry.state == DBEntry.LOCAL && !expired) {
+            if (entry.state == DBEntry.LOCAL && !expired)
                 return entry.localUrl;
-            }
 
-            if (entry.state == DBEntry.PENDING && (now - entry.lastUpdateTime <= TIMEOUT)) {
+            if (entry.state == DBEntry.PENDING && (now - entry.lastUpdateTime <= TIMEOUT))
                 return null;
-            }
         }
 
         URL url = WWIO.makeURL(address); // this may or may not make a URL, depending on address type
@@ -279,44 +285,44 @@ public class BasicDataFileStore extends AbstractFileStore {
 
         // If the address is already a URL in the "file" scheme, we can just use return this URL. Otherwise,
         // attempt to find a local file for the address.
-        if (url != null && "file".equalsIgnoreCase(url.getProtocol())) {
+        if (url != null && "file".equalsIgnoreCase(url.getProtocol()))
             localUrl = url;
-        } else {
+        else
             localUrl = this.getLocalFileUrl(address, url, cacheRemoteFile); // Don't look for temp files in the cache.
-        }
+
         if (localUrl != null) // file exists if local URL is non-null
-        {
             return localUrl;
-        }
 
         // If the address' URL is not null but the file was not found locally, try to make it local. Store the retrieved
         // file in the cache if cacheRemoteFile is true, otherwise store it in a temporary location.
-        if (url != null && !this.getAbsentResourceList().isResourceAbsent(address)) {
+        if (url != null && !this.getAbsentResourceList().isResourceAbsent(address))
             this.makeLocal(address, url, cacheRemoteFile);
-        } else if (url == null) {
+        else if (url == null)
             this.getAbsentResourceList().markResourceAbsent(address); // no URL for address and not a local file
-        }
+
         return null;
     }
 
     /**
      * Returns a file from the cache, the local file system or the classpath if the file exists. The specified address
      * may be a jar URL. See {@link java.net.JarURLConnection} for a description of jar URLs. If
-     * <code>searchLocalCache</code> is <code>true</code> this looks for the file in the WorldWind cache, otherwise this
-     * only looks for the file in the local file system and the classpath.
+     * <code>searchLocalCache</code> is <code>true</code> this looks for the file in the WorldWind cache, otherwise
+     * this only looks for the file in the local file system and the classpath.
      *
-     * @param address the name used to identify the cached file.
-     * @param retrievalUrl the URL to obtain the file if it is not in the cache. Used only to determine a location to
-     * search in the local cache. May be null.
+     * @param address          the name used to identify the cached file.
+     * @param retrievalUrl     the URL to obtain the file if it is not in the cache. Used only to determine a location
+     *                         to search in the local cache. May be null.
      * @param searchLocalCache <code>true</code> to look for the file in the WorldWind cache, otherwise
-     * <code>false</code>.
+     *                         <code>false</code>.
      *
      * @return the requested file if it exists, otherwise null.
      *
      * @throws IllegalArgumentException if the specified address is null.
      */
-    protected synchronized URL getLocalFileUrl(String address, URL retrievalUrl, boolean searchLocalCache) {
-        if (address == null) {
+    protected synchronized URL getLocalFileUrl(String address, URL retrievalUrl, boolean searchLocalCache)
+    {
+        if (address == null)
+        {
             String message = Logging.getMessage("nullValue.FilePathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -324,12 +330,15 @@ public class BasicDataFileStore extends AbstractFileStore {
 
         URL cacheFileUrl = null;
 
-        if (address.trim().startsWith("jar:")) {
+        if (address.trim().startsWith("jar:"))
+        {
             URL jarUrl = WWIO.makeURL(address); // retrieval URL may be other than the address' URL
-            if (WWIO.isLocalJarAddress(jarUrl)) {
-                if (this.getJarLength(jarUrl) > 0) {
+            if (WWIO.isLocalJarAddress(jarUrl))
+            {
+                if (this.getJarLength(jarUrl) > 0)
                     cacheFileUrl = jarUrl;
-                } else {
+                else
+                {
                     getAbsentResourceList().markResourceAbsent(address);
                     return null;
                 }
@@ -337,15 +346,18 @@ public class BasicDataFileStore extends AbstractFileStore {
         }
 
         String addressProtocol = retrievalUrl != null ? retrievalUrl.getProtocol() : null;
-        if (cacheFileUrl == null && (addressProtocol == null || addressProtocol.equals("file"))) {
+        if (cacheFileUrl == null && (addressProtocol == null || addressProtocol.equals("file")))
+        {
             File f = new File(address);
-            if (f.exists()) {
-                try {
+            if (f.exists())
+                try
+                {
                     cacheFileUrl = f.toURI().toURL();  // makes a file URL
-                } catch (MalformedURLException e) {
+                }
+                catch (MalformedURLException e)
+                {
                     // The toURL call shouldn't fail, but continue on if it does.
                 }
-            }
         }
 
         // If the address is a file, look for the file in the classpath and WorldWind disk cache. We perform this step
@@ -353,13 +365,13 @@ public class BasicDataFileStore extends AbstractFileStore {
         // We need to ensure that the address is not a network address (HTTP, etc.) because the getResource call in
         // findFile will attempt to retrieve from that URL on the thread that called this method, which might be the EDT
         // (See WWJ-434).
-        if (cacheFileUrl == null && (addressProtocol == null || addressProtocol.equals("file"))) {
+        if (cacheFileUrl == null && (addressProtocol == null || addressProtocol.equals("file")))
             cacheFileUrl = WorldWind.getDataFileStore().findFile(address, true);
-        }
 
         // Look for the file in the WorldWind disk cache by creating a cache path from the file's address. We ignore this
         // step if searchLocalCache is false.
-        if (cacheFileUrl == null && retrievalUrl != null && searchLocalCache) {
+        if (cacheFileUrl == null && retrievalUrl != null && searchLocalCache)
+        {
             String cachePath = this.makeCachePath(retrievalUrl, null);
             cacheFileUrl = WorldWind.getDataFileStore().findFile(cachePath, true);
 
@@ -370,18 +382,20 @@ public class BasicDataFileStore extends AbstractFileStore {
             // and located it in the cache. Note that if the address has a suffix but is simply not in the cache, we do
             // not attempt to locate it by guessing its content type.
             String suffix = WWIO.getSuffix(cachePath);
-            if (cacheFileUrl == null && (suffix == null || suffix.length() > 4)) {
-                for (String contentType : this.getCacheContentTypes()) {
+            if (cacheFileUrl == null && (suffix == null || suffix.length() > 4))
+            {
+                for (String contentType : this.getCacheContentTypes())
+                {
                     String pathWithSuffix = cachePath + WWIO.makeSuffixForMimeType(contentType);
                     cacheFileUrl = WorldWind.getDataFileStore().findFile(pathWithSuffix, true);
-                    if (cacheFileUrl != null) {
+                    if (cacheFileUrl != null)
                         break;
-                    }
                 }
             }
         }
 
-        if (cacheFileUrl != null) {
+        if (cacheFileUrl != null)
+        {
             DBEntry entry = new DBEntry(address);
             entry.localUrl = cacheFileUrl;
             entry.state = DBEntry.LOCAL;
@@ -404,10 +418,14 @@ public class BasicDataFileStore extends AbstractFileStore {
      *
      * @return the jar file's content length, or -1 if a connection to the URL can't be formed or queried.
      */
-    protected int getJarLength(URL jarUrl) {
-        try {
+    protected int getJarLength(URL jarUrl)
+    {
+        try
+        {
             return jarUrl.openConnection().getContentLength();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             String message = Logging.getMessage("generic.JarOpenFailed", jarUrl.toString());
             Logging.logger().log(java.util.logging.Level.WARNING, message, e);
 
@@ -419,15 +437,15 @@ public class BasicDataFileStore extends AbstractFileStore {
      * Retrieves a specified file and either adds it to the cache or saves it in a temporary file, depending on the
      * value of <code>saveInLocalCache</code>.
      *
-     * @param address the name used to identify the cached file.
-     * @param url the URL to obtain the file.
+     * @param address          the name used to identify the cached file.
+     * @param url              the URL to obtain the file.
      * @param saveInLocalCache <code>true</code> to add the file to the cache, or <code>false</code> to save it in a
-     * temporary location.
+     *                         temporary location.
      */
-    protected synchronized void makeLocal(String address, URL url, boolean saveInLocalCache) {
-        if (WorldWind.getNetworkStatus().isHostUnavailable(url) || !WorldWind.getRetrievalService().isAvailable()) {
+    protected synchronized void makeLocal(String address, URL url, boolean saveInLocalCache)
+    {
+        if (WorldWind.getNetworkStatus().isHostUnavailable(url) || !WorldWind.getRetrievalService().isAvailable())
             return;
-        }
 
         DBEntry newEntry = new DBEntry(address);
         this.db.add(address, newEntry);
@@ -435,61 +453,64 @@ public class BasicDataFileStore extends AbstractFileStore {
 
         Retriever retriever = URLRetriever.createRetriever(url, new PostProcessor(address, url, saveInLocalCache));
 
-        if (retriever != null && !WorldWind.getRetrievalService().contains(retriever)) {
+        if (retriever != null && !WorldWind.getRetrievalService().contains(retriever))
             WorldWind.getRetrievalService().runRetriever(retriever);
-        }
     }
 
-    protected class PostProcessor extends AbstractRetrievalPostProcessor {
-
+    protected class PostProcessor extends AbstractRetrievalPostProcessor
+    {
         protected String address;
         protected URL retrievalUrl;
         protected URL localFileUrl = null;
         protected File outputFile = null;
         protected boolean saveInLocalCache;
 
-        public PostProcessor(String address, URL url, boolean saveInLocalCache) {
+        public PostProcessor(String address, URL url, boolean saveInLocalCache)
+        {
             this.address = address;
             this.retrievalUrl = url;
             this.saveInLocalCache = saveInLocalCache;
         }
 
         @Override
-        protected boolean overwriteExistingFile() {
+        protected boolean overwriteExistingFile()
+        {
             return true;
         }
 
-        protected File doGetOutputFile() {
+        protected File doGetOutputFile()
+        {
             // Create the output file once and cache the result to avoid creating unused temporary files. If this
             // PostProcessor's saveInLocalCache method is false, then make makeOutputFile creates a unique temporary
             // file on each call. Since this method is potentially called multiple times by
             // AbstractRetrievalPostProcessor, we call makeOutputFile at most one time so that only one temporary output
             // file is created.
-            if (this.outputFile == null) {
+            if (this.outputFile == null)
                 this.outputFile = this.makeOutputFile();
-            }
 
             return this.outputFile;
         }
 
-        protected File makeOutputFile() {
+        protected File makeOutputFile()
+        {
             File file;
 
             String path = makeCachePath(this.retrievalUrl, this.getRetriever().getContentType());
-            if (this.saveInLocalCache && path.length() <= WWIO.MAX_FILE_PATH_LENGTH) {
+            if (this.saveInLocalCache && path.length() <= WWIO.MAX_FILE_PATH_LENGTH)
                 file = WorldWind.getDataFileStore().newFile(path);
-            } else {
+            else
                 file = BasicDataFileStore.this.makeTempFile(this.retrievalUrl, this.getRetriever().getContentType());
-            }
 
-            if (file == null) {
+            if (file == null)
                 return null;
-            }
 
-            try {
+            try
+            {
                 this.localFileUrl = file.toURI().toURL();
                 return file;
-            } catch (MalformedURLException e) {
+            }
+            catch (MalformedURLException e)
+            {
                 String message = Logging.getMessage("generic.MalformedURL", file.toURI());
                 Logging.logger().finest(message);
                 return null;
@@ -497,34 +518,36 @@ public class BasicDataFileStore extends AbstractFileStore {
         }
 
         @Override
-        protected boolean saveBuffer() throws IOException {
+        protected boolean saveBuffer() throws IOException
+        {
             boolean tf = super.saveBuffer();
             BasicDataFileStore.this.updateEntry(this.address, this.localFileUrl,
-                    this.getRetriever().getExpirationTime());
+                this.getRetriever().getExpirationTime());
             return tf;
         }
 
         @Override
-        protected ByteBuffer handleSuccessfulRetrieval() {
+        protected ByteBuffer handleSuccessfulRetrieval()
+        {
             ByteBuffer buffer = super.handleSuccessfulRetrieval();
 
             firePropertyChange(
-                    new PropertyChangeEvent(BasicDataFileStore.this, AVKey.RETRIEVAL_STATE_SUCCESSFUL, this.retrievalUrl,
-                            this.localFileUrl));
+                new PropertyChangeEvent(BasicDataFileStore.this, AVKey.RETRIEVAL_STATE_SUCCESSFUL, this.retrievalUrl,
+                    this.localFileUrl));
 
             return buffer;
         }
 
         @Override
-        protected void markResourceAbsent() {
+        protected void markResourceAbsent()
+        {
             BasicDataFileStore.this.getAbsentResourceList().markResourceAbsent(this.address);
         }
 
-        /**
-         * {@inheritDoc} Overridden to save text files in the cache.
-         */
+        /** {@inheritDoc} Overridden to save text files in the cache. */
         @Override
-        protected ByteBuffer handleTextContent() throws IOException {
+        protected ByteBuffer handleTextContent() throws IOException
+        {
             this.saveBuffer();
 
             return this.getRetriever().getBuffer();
@@ -534,16 +557,16 @@ public class BasicDataFileStore extends AbstractFileStore {
     /**
      * Updates a cache entry with information available once the file is retrieved.
      *
-     * @param address the name used to identify the file in the cache.
+     * @param address      the name used to identify the file in the cache.
      * @param localFileUrl the path to the local copy of the file.
-     * @param expiration time (in milliseconds since the Epoch) at which this entry expires, or zero to indicate that
-     * there is no expiration time.
+     * @param expiration   time (in milliseconds since the Epoch) at which this entry expires, or zero to indicate that
+     *                     there is no expiration time.
      */
-    protected synchronized void updateEntry(String address, URL localFileUrl, long expiration) {
+    protected synchronized void updateEntry(String address, URL localFileUrl, long expiration)
+    {
         DBEntry entry = (DBEntry) this.db.getObject(address);
-        if (entry == null) {
+        if (entry == null)
             return;
-        }
 
         entry.state = DBEntry.LOCAL;
         entry.localUrl = localFileUrl;
@@ -555,15 +578,15 @@ public class BasicDataFileStore extends AbstractFileStore {
     /**
      * Makes a path to the file in the cache from the file's URL and content type.
      *
-     * @param url the URL to obtain the file.
+     * @param url         the URL to obtain the file.
      * @param contentType the mime type of the file's contents.
      *
      * @return a path name.
      */
-    protected String makeCachePath(URL url, String contentType) {
-        if ("jar".equals(url.getProtocol())) {
+    protected String makeCachePath(URL url, String contentType)
+    {
+        if ("jar".equals(url.getProtocol()))
             return this.makeJarURLCachePath(url, contentType);
-        }
 
         return this.makeGenericURLCachePath(url, contentType);
     }
@@ -593,17 +616,19 @@ public class BasicDataFileStore extends AbstractFileStore {
      * anyone using the same machine. If the query string is empty after removing any private parameters, it is ignored
      * and only the path part of the URL is used as the filename.
      *
-     * @param url the URL to obtain the file.
+     * @param url         the URL to obtain the file.
      * @param contentType the mime type of the file's contents.
      *
      * @return a path name.
      */
-    protected String makeGenericURLCachePath(URL url, String contentType) {
+    protected String makeGenericURLCachePath(URL url, String contentType)
+    {
         String host = WWIO.replaceIllegalFileNameCharacters(url.getHost());
         String path = WWIO.replaceIllegalFileNameCharacters(url.getPath());
         String filename = path;
 
-        if (!WWUtil.isEmpty(url.getQuery())) {
+        if (!WWUtil.isEmpty(url.getQuery()))
+        {
             // Remove private query parameters from the query string, and replace any illegal filename characters with
             // an underscore. This avoids exposing private parameters to other users by writing them to the cache as
             // part of the cache name.
@@ -612,7 +637,8 @@ public class BasicDataFileStore extends AbstractFileStore {
 
             // If the query string is not empty after removing private parameters and illegal filename characters, we
             // use it as part of the cache name by appending it to the path part.
-            if (!WWUtil.isEmpty(query)) {
+            if (!WWUtil.isEmpty(query))
+            {
                 filename = path + "_" + query;
             }
         }
@@ -622,9 +648,8 @@ public class BasicDataFileStore extends AbstractFileStore {
         // the same hash folder name can be re-created from the same address. If two URLs have the same hash string,
         // both URLs are stored under the same hash folder and are differentiated by their filenames.
         String hashString = String.valueOf(Math.abs(filename.hashCode()));
-        if (hashString.length() > 4) {
+        if (hashString.length() > 4)
             hashString = hashString.substring(0, 4);
-        }
 
         StringBuilder sb = new StringBuilder();
         sb.append(host);
@@ -634,9 +659,8 @@ public class BasicDataFileStore extends AbstractFileStore {
         sb.append(filename);
 
         String suffix = this.makeSuffix(filename, contentType);
-        if (suffix != null) {
+        if (suffix != null)
             sb.append(suffix);
-        }
 
         return sb.toString();
     }
@@ -650,12 +674,13 @@ public class BasicDataFileStore extends AbstractFileStore {
      * Where <code>host</code> is the path to the JAR file, <code>path</code> is the file's path within the JAR archive,
      * and <code>suffix</code> is either the path's suffix or a suffix created from the specified content type.
      *
-     * @param jarURL the URL to obtain the file. This URL is assumed to have the "jar" protocol.
+     * @param jarURL      the URL to obtain the file. This URL is assumed to have the "jar" protocol.
      * @param contentType the mime type of the file's contents.
      *
      * @return a path name.
      */
-    protected String makeJarURLCachePath(URL jarURL, String contentType) {
+    protected String makeJarURLCachePath(URL jarURL, String contentType)
+    {
         String innerAddress = jarURL.getPath();
         URL innerUrl = WWIO.makeURL(innerAddress);
         String host = WWIO.replaceIllegalFileNameCharacters(innerUrl.getHost());
@@ -667,9 +692,8 @@ public class BasicDataFileStore extends AbstractFileStore {
         sb.append(path);
 
         String suffix = this.makeSuffix(path, contentType);
-        if (suffix != null) {
+        if (suffix != null)
             sb.append(suffix);
-        }
 
         return sb.toString();
     }
@@ -679,30 +703,32 @@ public class BasicDataFileStore extends AbstractFileStore {
      * not persist a mapping of retrieved URLs to temp files, this deletes the returned temp file when the current Java
      * Virtual Machine terminates.
      *
-     * @param url the URL to be associated with the temp file. Used only to determine an appropriate suffix.
+     * @param url         the URL to be associated with the temp file. Used only to determine an appropriate suffix.
      * @param contentType the mime type of the file contents. Used to determine the file's suffix.
      *
      * @return a temporary file, or null if a file could not be created.
      */
-    protected File makeTempFile(URL url, String contentType) {
+    protected File makeTempFile(URL url, String contentType)
+    {
         // Use a suffix based on the content type if the content type and the URL's suffix do not match. Otherwise
         // attempt to use the URL's suffix. If neither of these attempts produce a non-null suffix, File.createTmpFile
         // uses the default suffix ".tmp".
         String suffix = this.makeSuffix(url.toString(), contentType); // null if the URL suffix and content type match.
-        if (suffix == null) {
+        if (suffix == null)
             suffix = WWIO.getSuffix(url.toString());
-        }
 
         // Ensure that the suffix starts with the "." character.
-        if (!suffix.startsWith(".")) {
+        if (!suffix.startsWith("."))
             suffix = "." + suffix;
-        }
 
-        try {
+        try
+        {
             File file = File.createTempFile("wwfs", suffix); // Uses the default suffix ".tmp" if this suffix is null.
             file.deleteOnExit();
             return file;
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             String message = Logging.getMessage("generic.CannotCreateTempFile");
             Logging.logger().fine(message);
             return null;
@@ -714,13 +740,14 @@ public class BasicDataFileStore extends AbstractFileStore {
      * specified content type, then this method returns null. Otherwise the method determines and returns a suffix for
      * the specified content type.
      *
-     * @param path the path whose suffix is to be validated if it exists.
+     * @param path        the path whose suffix is to be validated if it exists.
      * @param contentType the mime type of the data associated with the path.
      *
      * @return a suffix appropriate to the content type, or null if the specified path already has an appropriate
-     * suffix.
+     *         suffix.
      */
-    protected String makeSuffix(String path, String contentType) {
+    protected String makeSuffix(String path, String contentType)
+    {
         // If the cache path does not end in a suffix that matches the specified content type, we append the appropriate
         // suffix. If the content type is not known, we do not append any suffix. If the caller does not know the
         // content type used to create a cache file path, it must attempt to use known mime types until it finds a
@@ -730,15 +757,13 @@ public class BasicDataFileStore extends AbstractFileStore {
 
         // The suffix returned by makeSuffixForMimeType is always ".jpg" for a JPEG mime type. We must convert any
         // existing using "jpeg" to "jpg" to correctly match against the suffix created from the content type.
-        if (existingSuffix != null && existingSuffix.equalsIgnoreCase("jpeg")) {
+        if (existingSuffix != null && existingSuffix.equalsIgnoreCase("jpeg"))
             existingSuffix = "jpg";
-        }
 
-        if (suffix != null && (existingSuffix == null || !existingSuffix.equalsIgnoreCase(suffix.substring(1)))) {
+        if (suffix != null && (existingSuffix == null || !existingSuffix.equalsIgnoreCase(suffix.substring(1))))
             return suffix;
-        } else {
+        else
             return null;
-        }
     }
 
     /**
@@ -754,12 +779,12 @@ public class BasicDataFileStore extends AbstractFileStore {
      * @param queryString the query string to examine.
      *
      * @return a new string with the private query parameters removed. This string is empty if the query string is
-     * empty, or if the query string contains only private parameters.
+     *         empty, or if the query string contains only private parameters.
      */
-    protected String removePrivateQueryParameters(String queryString) {
-        if (WWUtil.isEmpty(queryString)) {
+    protected String removePrivateQueryParameters(String queryString)
+    {
+        if (WWUtil.isEmpty(queryString))
             return queryString;
-        }
 
         // Remove the "connectid" query parameter, its corresponding value, and any trailing parameter delimiter. We
         // specify the regular expression directive "(?i)" to enable case-insensitive matching. The regular expression
@@ -768,9 +793,8 @@ public class BasicDataFileStore extends AbstractFileStore {
 
         // If we removed the query string's last parameter, we need to clean up the trailing delimiter from the previous
         // query parameter.
-        if (s.endsWith("&")) {
+        if (s.endsWith("&"))
             s = s.substring(0, s.length() - 1);
-        }
 
         return s;
     }

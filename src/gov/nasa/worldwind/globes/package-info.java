@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 /**
  * <p>
  * Provides classes for representing the shape and terrain of a planet. A {@link gov.nasa.worldwind.globes.Globe} is

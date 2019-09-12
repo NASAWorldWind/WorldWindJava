@@ -19,17 +19,16 @@ import gov.nasa.worldwind.util.Logging;
  * @see gov.nasa.worldwind.render.Annotation
  * @see gov.nasa.worldwind.render.AnnotationRenderer
  */
-public class AnnotationLayer extends AbstractLayer {
-
-    protected final java.util.Collection<Annotation> annotations
-            = new java.util.concurrent.ConcurrentLinkedQueue<Annotation>();
+public class AnnotationLayer extends AbstractLayer
+{
+    protected final java.util.Collection<Annotation> annotations =
+        new java.util.concurrent.ConcurrentLinkedQueue<Annotation>();
     protected Iterable<Annotation> annotationsOverride;
     private AnnotationRenderer annotationRenderer = new BasicAnnotationRenderer();
 
-    /**
-     * Creates a new <code>AnnotationLayer</code> with an empty collection of Annotations.
-     */
-    public AnnotationLayer() {
+    /** Creates a new <code>AnnotationLayer</code> with an empty collection of Annotations. */
+    public AnnotationLayer()
+    {
     }
 
     /**
@@ -39,15 +38,18 @@ public class AnnotationLayer extends AbstractLayer {
      * @param annotation Annotation to add.
      *
      * @throws IllegalArgumentException If <code>annotation</code> is null.
-     * @throws IllegalStateException If a custom Iterable has been specified by a call to <code>setAnnotations</code>.
+     * @throws IllegalStateException    If a custom Iterable has been specified by a call to <code>setAnnotations</code>.
      */
-    public void addAnnotation(Annotation annotation) {
-        if (annotation == null) {
+    public void addAnnotation(Annotation annotation)
+    {
+        if (annotation == null)
+        {
             String msg = Logging.getMessage("nullValue.AnnotationIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (this.annotationsOverride != null) {
+        if (this.annotationsOverride != null)
+        {
             String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
             Logging.logger().severe(msg);
             throw new IllegalStateException(msg);
@@ -63,25 +65,28 @@ public class AnnotationLayer extends AbstractLayer {
      * @param annotations Annotations to add.
      *
      * @throws IllegalArgumentException If <code>annotations</code> is null.
-     * @throws IllegalStateException If a custom Iterable has been specified by a call to <code>setAnnotations</code>.
+     * @throws IllegalStateException    If a custom Iterable has been specified by a call to <code>setAnnotations</code>.
      */
-    public void addAnnotations(Iterable<Annotation> annotations) {
-        if (annotations == null) {
+    public void addAnnotations(Iterable<Annotation> annotations)
+    {
+        if (annotations == null)
+        {
             String msg = Logging.getMessage("nullValue.IterableIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (this.annotationsOverride != null) {
+        if (this.annotationsOverride != null)
+        {
             String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
             Logging.logger().severe(msg);
             throw new IllegalStateException(msg);
         }
 
-        for (Annotation annotation : annotations) {
+        for (Annotation annotation : annotations)
+        {
             // Internal list of annotations does not accept null values.
-            if (annotation != null) {
+            if (annotation != null)
                 this.annotations.add(annotation);
-            }
         }
     }
 
@@ -93,15 +98,18 @@ public class AnnotationLayer extends AbstractLayer {
      * @param annotation Annotation to remove.
      *
      * @throws IllegalArgumentException If <code>annotation</code> is null.
-     * @throws IllegalStateException If a custom Iterable has been specified by a call to <code>setAnnotations</code>.
+     * @throws IllegalStateException    If a custom Iterable has been specified by a call to <code>setAnnotations</code>.
      */
-    public void removeAnnotation(Annotation annotation) {
-        if (annotation == null) {
+    public void removeAnnotation(Annotation annotation)
+    {
+        if (annotation == null)
+        {
             String msg = Logging.getMessage("nullValue.IconIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (this.annotationsOverride != null) {
+        if (this.annotationsOverride != null)
+        {
             String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
             Logging.logger().severe(msg);
             throw new IllegalStateException(msg);
@@ -116,8 +124,10 @@ public class AnnotationLayer extends AbstractLayer {
      *
      * @throws IllegalStateException If a custom Iterable has been specified by a call to <code>setAnnotations</code>.
      */
-    public void removeAllAnnotations() {
-        if (this.annotationsOverride != null) {
+    public void removeAllAnnotations()
+    {
+        if (this.annotationsOverride != null)
+        {
             String msg = Logging.getMessage("generic.LayerIsUsingCustomIterable");
             Logging.logger().severe(msg);
             throw new IllegalStateException(msg);
@@ -126,10 +136,10 @@ public class AnnotationLayer extends AbstractLayer {
         clearAnnotations();
     }
 
-    protected void clearAnnotations() {
-        if (this.annotations != null && this.annotations.size() > 0) {
+    protected void clearAnnotations()
+    {
+        if (this.annotations != null && this.annotations.size() > 0)
             this.annotations.clear();
-        }
     }
 
     /**
@@ -140,7 +150,8 @@ public class AnnotationLayer extends AbstractLayer {
      *
      * @return Iterable of currently active Annotations.
      */
-    public Iterable<Annotation> getAnnotations() {
+    public Iterable<Annotation> getAnnotations()
+    {
         return getActiveAnnotations();
     }
 
@@ -152,10 +163,14 @@ public class AnnotationLayer extends AbstractLayer {
      *
      * @return Iterable of currently active Annotations.
      */
-    protected Iterable<Annotation> getActiveAnnotations() {
-        if (this.annotationsOverride != null) {
+    protected Iterable<Annotation> getActiveAnnotations()
+    {
+        if (this.annotationsOverride != null)
+        {
             return this.annotationsOverride;
-        } else {
+        }
+        else
+        {
             // Return an unmodifiable reference to the internal list of annotations.
             // This prevents callers from changing this list and invalidating any invariants we have established.
             return java.util.Collections.unmodifiableCollection(this.annotations);
@@ -172,9 +187,10 @@ public class AnnotationLayer extends AbstractLayer {
      * collection.
      *
      * @param annotationIterable Iterable to use instead of this layer's internal collection, or null to use this
-     * layer's internal collection.
+     *                           layer's internal collection.
      */
-    public void setAnnotations(Iterable<Annotation> annotationIterable) {
+    public void setAnnotations(Iterable<Annotation> annotationIterable)
+    {
         this.annotationsOverride = annotationIterable;
         // Clear the internal collection of Annotations.
         clearAnnotations();
@@ -186,7 +202,8 @@ public class AnnotationLayer extends AbstractLayer {
      * @param opacity the current opacity value, which is ignored by this layer.
      */
     @Override
-    public void setOpacity(double opacity) {
+    public void setOpacity(double opacity)
+    {
         super.setOpacity(opacity);
     }
 
@@ -197,7 +214,8 @@ public class AnnotationLayer extends AbstractLayer {
      * @return The layer opacity, a value between 0 and 1.
      */
     @Override
-    public double getOpacity() {
+    public double getOpacity()
+    {
         return super.getOpacity();
     }
 
@@ -206,7 +224,8 @@ public class AnnotationLayer extends AbstractLayer {
      *
      * @return <code>AnnotationRenderer</code> used to pick and render <code>Annotations</code>.
      */
-    public AnnotationRenderer getAnnotationRenderer() {
+    public AnnotationRenderer getAnnotationRenderer()
+    {
         return this.annotationRenderer;
     }
 
@@ -217,8 +236,10 @@ public class AnnotationLayer extends AbstractLayer {
      *
      * @throws IllegalArgumentException If <code>annotationRenderer</code> is null.
      */
-    public void setAnnotationRenderer(AnnotationRenderer annotationRenderer) {
-        if (annotationRenderer == null) {
+    public void setAnnotationRenderer(AnnotationRenderer annotationRenderer)
+    {
+        if (annotationRenderer == null)
+        {
             String msg = Logging.getMessage("nullValue.RendererIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -228,17 +249,20 @@ public class AnnotationLayer extends AbstractLayer {
     }
 
     @Override
-    protected void doPick(DrawContext dc, java.awt.Point pickPoint) {
+    protected void doPick(DrawContext dc, java.awt.Point pickPoint)
+    {
         this.annotationRenderer.pick(dc, getActiveAnnotations(), pickPoint, this);
     }
 
     @Override
-    protected void doRender(DrawContext dc) {
+    protected void doRender(DrawContext dc)
+    {
         this.annotationRenderer.render(dc, getActiveAnnotations(), this);
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return Logging.getMessage("layers.AnnotationLayer.Name");
     }
 }

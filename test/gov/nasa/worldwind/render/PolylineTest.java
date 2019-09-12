@@ -17,13 +17,15 @@ import static org.junit.Assert.*;
 
 @SuppressWarnings("deprecation")
 @RunWith(JUnit4.class)
-public class PolylineTest {
+public class PolylineTest
+{
     //////////////////////////////////////////////////////////
     // Persistence Tests
     //////////////////////////////////////////////////////////
 
     @Test
-    public void testSaveAndRestoreOnNewObject_Polyline() {
+    public void testSaveAndRestoreOnNewObject_Polyline()
+    {
         Polyline polyline = new Polyline();
         assignExampleValues(polyline);
 
@@ -38,7 +40,8 @@ public class PolylineTest {
     }
 
     @Test
-    public void testSaveAndRestoreOnSameObject_Polyline() {
+    public void testSaveAndRestoreOnSameObject_Polyline()
+    {
         Polyline polyline = new Polyline();
         assignExampleValues(polyline);
 
@@ -53,13 +56,14 @@ public class PolylineTest {
     }
 
     @Test
-    public void testEmptyStateDocument_Polyline() {
+    public void testEmptyStateDocument_Polyline()
+    {
         Polyline polyline = new Polyline();
         assignExampleValues(polyline);
 
-        String emptyStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<emptyDocumentRoot/>";
+        String emptyStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<emptyDocumentRoot/>";
         polyline.restoreState(emptyStateInXml);
 
         // No attributes should have changed.
@@ -70,30 +74,35 @@ public class PolylineTest {
     }
 
     @Test
-    public void testInvalidStateDocument_Polyline() {
-        try {
+    public void testInvalidStateDocument_Polyline()
+    {
+        try
+        {
             String badStateInXml = "!!invalid xml string!!";
             Polyline polyline = new Polyline();
             polyline.restoreState(badStateInXml);
 
             fail("Expected an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e)
+        {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testPartialStateDocument_Polyline() {
+    public void testPartialStateDocument_Polyline()
+    {
         Polyline polyline = new Polyline();
         assignNullValues(polyline);
 
-        String partialStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<restorableState>"
-                + "<stateObject name=\"filled\">true</stateObject>"
-                + "<stateObject name=\"offset\">1000.5</stateObject>"
-                + "<unknownElement name=\"unknownName\">unknownValue</unknownElement>"
-                + "</restorableState>";
+        String partialStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<restorableState>" +
+                "<stateObject name=\"filled\">true</stateObject>" +
+                "<stateObject name=\"offset\">1000.5</stateObject>" +
+                "<unknownElement name=\"unknownName\">unknownValue</unknownElement>" +
+                "</restorableState>";
         polyline.restoreState(partialStateInXml);
 
         Polyline expected = new Polyline();
@@ -107,8 +116,10 @@ public class PolylineTest {
     //////////////////////////////////////////////////////////
     // Helper Methods
     //////////////////////////////////////////////////////////
+
     @SuppressWarnings({"JavaDoc"})
-    private static void assignExampleValues(Polyline polyline) {
+    private static void assignExampleValues(Polyline polyline)
+    {
         polyline.setColor(Color.MAGENTA);
         polyline.setHighlightColor(Color.CYAN);
         polyline.setAntiAliasHint(Polyline.ANTIALIAS_NICEST);
@@ -124,12 +135,13 @@ public class PolylineTest {
         polyline.setStippleFactor(128);
         polyline.setNumSubsegments(100);
         polyline.setPositions(Arrays.asList(
-                Position.fromDegrees(2, 3, 0.5),
-                Position.fromDegrees(4, 9, 111.5),
-                Position.fromDegrees(8, 27, 222.5)));
+            Position.fromDegrees(2, 3, 0.5),
+            Position.fromDegrees(4, 9, 111.5),
+            Position.fromDegrees(8, 27, 222.5)));
     }
 
-    private static void assignNullValues(Polyline polyline) {
+    private static void assignNullValues(Polyline polyline)
+    {
         polyline.setColor(Color.WHITE);
         polyline.setAntiAliasHint(Polyline.ANTIALIAS_DONT_CARE);
         polyline.setFilled(false);
@@ -145,7 +157,8 @@ public class PolylineTest {
         polyline.setPositions(new ArrayList<Position>());
     }
 
-    private static void assertPolylineEquals(Polyline expected, Polyline actual) {
+    private static void assertPolylineEquals(Polyline expected, Polyline actual)
+    {
         assertNotNull("Expected is null", expected);
         assertNotNull("Actual is null", actual);
 
@@ -166,7 +179,8 @@ public class PolylineTest {
         // Position does not override equals(), so we must compare the contents of "positions" ourselves.
         Iterator<Position> expectedPositions = expected.getPositions().iterator();
         Iterator<Position> actualPositions = actual.getPositions().iterator();
-        while (expectedPositions.hasNext() && actualPositions.hasNext()) {
+        while (expectedPositions.hasNext() && actualPositions.hasNext())
+        {
             Position expectedPos = expectedPositions.next(), actualPos = actualPositions.next();
             assertEquals("positions.i.latitude", expectedPos.getLatitude(), actualPos.getLatitude());
             assertEquals("positions.i.longitude", expectedPos.getLongitude(), actualPos.getLongitude());

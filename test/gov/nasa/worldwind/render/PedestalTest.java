@@ -15,13 +15,15 @@ import java.awt.*;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class PedestalTest {
+public class PedestalTest
+{
     //////////////////////////////////////////////////////////
     // Persistence Tests
     //////////////////////////////////////////////////////////
 
     @Test
-    public void testRestore_NewInstance() {
+    public void testRestore_NewInstance()
+    {
         Pedestal pedestal = new Pedestal("", null);
         assignExampleValues(pedestal);
 
@@ -36,7 +38,8 @@ public class PedestalTest {
     }
 
     @Test
-    public void testRestore_SameInstance() {
+    public void testRestore_SameInstance()
+    {
         Pedestal pedestal = new Pedestal("", null);
         assignExampleValues(pedestal);
 
@@ -51,13 +54,14 @@ public class PedestalTest {
     }
 
     @Test
-    public void testRestore_EmptyStateDocument() {
+    public void testRestore_EmptyStateDocument()
+    {
         Pedestal pedestal = new Pedestal("", null);
         assignExampleValues(pedestal);
 
-        String emptyStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<emptyDocumentRoot/>";
+        String emptyStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<emptyDocumentRoot/>";
         pedestal.restoreState(emptyStateInXml);
 
         // No attributes should have changed.
@@ -68,32 +72,37 @@ public class PedestalTest {
     }
 
     @Test
-    public void testRestore_InvalidStateDocument() {
-        try {
+    public void testRestore_InvalidStateDocument()
+    {
+        try
+        {
             String badStateInXml = "!!invalid xml string!!";
             Pedestal pedestal = new Pedestal("", null);
             pedestal.restoreState(badStateInXml);
 
             fail("Expected an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e)
+        {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testRestore_PartialStateDocument() {
+    public void testRestore_PartialStateDocument()
+    {
         Pedestal pedestal = new Pedestal("", null);
         assignNullValues(pedestal);
 
-        String partialStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<restorableState>"
-                + "<stateObject name=\"highlighted\">true</stateObject>"
-                + "<stateObject name=\"highlightScale\">3.141592</stateObject>"
-                + "<stateObject name=\"spacingPixels\">3.5</stateObject>"
-                + "<stateObject name=\"scale\">5.5</stateObject>"
-                + "<unknownElement name=\"unknownName\">unknownValue</unknownElement>"
-                + "</restorableState>";
+        String partialStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<restorableState>" +
+                "<stateObject name=\"highlighted\">true</stateObject>" +
+                "<stateObject name=\"highlightScale\">3.141592</stateObject>" +
+                "<stateObject name=\"spacingPixels\">3.5</stateObject>" +
+                "<stateObject name=\"scale\">5.5</stateObject>" +
+                "<unknownElement name=\"unknownName\">unknownValue</unknownElement>" +
+                "</restorableState>";
         pedestal.restoreState(partialStateInXml);
 
         Pedestal expected = new Pedestal("", null);
@@ -109,7 +118,9 @@ public class PedestalTest {
     //////////////////////////////////////////////////////////
     // Helper Methods
     //////////////////////////////////////////////////////////
-    private static void assignExampleValues(Pedestal pedestal) {
+
+    private static void assignExampleValues(Pedestal pedestal)
+    {
         // WWIcon properties
         pedestal.setImageSource("path/to/image.ext");
         pedestal.setPosition(Position.fromDegrees(45.5, 55.5, 100.5));
@@ -127,7 +138,8 @@ public class PedestalTest {
         pedestal.setScale(5.5);
     }
 
-    private static void assignNullValues(Pedestal pedestal) {
+    private static void assignNullValues(Pedestal pedestal)
+    {
         // WWIcon properties
         pedestal.setImageSource("");
         pedestal.setPosition(null);
@@ -145,18 +157,22 @@ public class PedestalTest {
         pedestal.setScale(0.0);
     }
 
-    private static void assertPedestalEquals(Pedestal expected, Pedestal actual) {
+    private static void assertPedestalEquals(Pedestal expected, Pedestal actual)
+    {
         // WWIcon equality
         assertNotNull("Expected is null", expected);
         assertNotNull("Actual is null", actual);
         assertEquals("imageSource", expected.getImageSource(), actual.getImageSource());
-        if (expected.getPosition() != null && actual.getPosition() != null) {
+        if (expected.getPosition() != null && actual.getPosition() != null)
+        {
             assertEquals("position.latitude", expected.getPosition().getLatitude(), actual.getPosition().getLatitude());
             assertEquals("position.longitude", expected.getPosition().getLongitude(),
-                    actual.getPosition().getLongitude());
+                actual.getPosition().getLongitude());
             assertEquals("position.elevation", expected.getPosition().getElevation(),
-                    actual.getPosition().getElevation(), 0.0);
-        } else {
+                actual.getPosition().getElevation(), 0.0);
+        }
+        else
+        {
             assertNull("Expected position is not null", expected.getPosition());
             assertNull("Actual position is not null", actual.getPosition());
         }

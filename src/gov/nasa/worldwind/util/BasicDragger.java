@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.*;
@@ -22,8 +23,8 @@ import java.awt.*;
  * <p>
  * For objects not yet implementing the {@link Draggable} interface the legacy dragging functionality will be used.
  */
-public class BasicDragger implements SelectListener {
-
+public class BasicDragger implements SelectListener
+{
     /**
      * The {@link WorldWindow} this dragger will utilize for the {@link Globe}, {@link View}, and
      * {@link SceneController} objects.
@@ -45,8 +46,10 @@ public class BasicDragger implements SelectListener {
      *
      * @throws IllegalArgumentException if the provided {@link WorldWindow} is null.
      */
-    public BasicDragger(WorldWindow wwd) {
-        if (wwd == null) {
+    public BasicDragger(WorldWindow wwd)
+    {
+        if (wwd == null)
+        {
             String msg = Logging.getMessage("nullValue.WorldWindow");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -62,7 +65,8 @@ public class BasicDragger implements SelectListener {
      * @deprecated the useTerrain property has been deprecated in favor of the {@link Draggable} interface which allows
      * the object to define the drag behavior.
      */
-    public BasicDragger(WorldWindow wwd, boolean useTerrain) {
+    public BasicDragger(WorldWindow wwd, boolean useTerrain)
+    {
         this(wwd);
     }
 
@@ -71,7 +75,8 @@ public class BasicDragger implements SelectListener {
      *
      * @return <code>true</code> if a drag operation is executing.
      */
-    public boolean isDragging() {
+    public boolean isDragging()
+    {
         return this.dragging;
     }
 
@@ -80,7 +85,8 @@ public class BasicDragger implements SelectListener {
      * @return <code>false</code> as this functionality has been deprecated.
      * @deprecated the {@link Draggable} provides the object being dragged complete control over the dragging behavior.
      */
-    public boolean isUseTerrain() {
+    public boolean isUseTerrain()
+    {
         return false;
     }
 
@@ -89,28 +95,33 @@ public class BasicDragger implements SelectListener {
      *
      * @deprecated definition of dragging behavior now defined by the object in the {@link Draggable} interface.
      */
-    public void setUseTerrain(boolean useTerrain) {
+    public void setUseTerrain(boolean useTerrain)
+    {
         // ignored - functionality deprecated
     }
 
     @Override
-    public void selected(SelectEvent event) {
-        if (event == null) {
+    public void selected(SelectEvent event)
+    {
+        if (event == null)
+        {
             String msg = Logging.getMessage("nullValue.EventIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (event.getEventAction().equals(SelectEvent.DRAG_END)) {
+        if (event.getEventAction().equals(SelectEvent.DRAG_END))
+        {
             this.dragContext.setDragState(AVKey.DRAG_ENDED);
             this.fireDrag((DragSelectEvent) event);
             this.dragContext = null;
             this.dragging = false;
-        } else if (event.getEventAction().equals(SelectEvent.DRAG)) {
+        }
+        else if (event.getEventAction().equals(SelectEvent.DRAG))
+        {
 
-            if (this.dragContext == null) {
+            if (this.dragContext == null)
                 this.dragContext = new DragContext();
-            }
 
             this.dragContext.setPoint(event.getPickPoint());
             this.dragContext.setPreviousPoint(((DragSelectEvent) event).getPreviousPickPoint());
@@ -118,10 +129,13 @@ public class BasicDragger implements SelectListener {
             this.dragContext.setGlobe(this.wwd.getModel().getGlobe());
             this.dragContext.setSceneController(this.wwd.getSceneController());
 
-            if (this.dragging) {
+            if (this.dragging)
+            {
                 this.dragContext.setDragState(AVKey.DRAG_CHANGE);
                 this.fireDrag((DragSelectEvent) event);
-            } else {
+            }
+            else
+            {
                 this.dragContext.setDragState(AVKey.DRAG_BEGIN);
                 this.dragContext.setInitialPoint(((DragSelectEvent) event).getPreviousPickPoint());
                 this.dragging = true;
@@ -140,8 +154,10 @@ public class BasicDragger implements SelectListener {
      *
      * @throws IllegalArgumentException if the {@link DragContext} is null.
      */
-    protected void fireDrag(DragSelectEvent dragEvent) {
-        if (dragEvent == null || dragEvent.getTopObject() == null) {
+    protected void fireDrag(DragSelectEvent dragEvent)
+    {
+        if (dragEvent == null || dragEvent.getTopObject() == null)
+        {
             String msg = Logging.getMessage("nullValue.ObjectIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -149,9 +165,12 @@ public class BasicDragger implements SelectListener {
 
         Object dragObject = dragEvent.getTopObject();
 
-        if (dragObject instanceof Draggable) {
+        if (dragObject instanceof Draggable)
+        {
             ((Draggable) dragObject).drag(this.dragContext);
-        } else if ((dragObject instanceof Movable2) || (dragObject instanceof Movable)) {
+        }
+        else if ((dragObject instanceof Movable2) || (dragObject instanceof Movable))
+        {
             // Utilize the existing behavior
             this.dragLegacy(dragEvent);
         }
@@ -169,13 +188,13 @@ public class BasicDragger implements SelectListener {
      *
      * @param event the current {@link SelectEvent}.
      */
-    protected void dragLegacy(SelectEvent event) {
+    protected void dragLegacy(SelectEvent event)
+    {
 
         DragSelectEvent dragEvent = (DragSelectEvent) event;
         Object dragObject = dragEvent.getTopObject();
-        if (dragObject == null) {
+        if (dragObject == null)
             return;
-        }
 
         View view = wwd.getView();
         Globe globe = wwd.getModel().getGlobe();
@@ -183,18 +202,16 @@ public class BasicDragger implements SelectListener {
         // Compute dragged object ref-point in model coordinates.
         // Use the Icon and Annotation logic of elevation as offset above ground when below max elevation.
         Position refPos = null;
-        if (dragObject instanceof Movable2) {
+        if (dragObject instanceof Movable2)
             refPos = ((Movable2) dragObject).getReferencePosition();
-        } else if (dragObject instanceof Movable) {
+        else if (dragObject instanceof Movable)
             refPos = ((Movable) dragObject).getReferencePosition();
-        }
-        if (refPos == null) {
+        if (refPos == null)
             return;
-        }
 
         Vec4 refPoint = globe.computePointFromPosition(refPos);
 
-        if (this.dragContext.getDragState().equals(AVKey.DRAG_BEGIN)) // Dragging started
+        if (this.dragContext.getDragState().equals(AVKey.DRAG_BEGIN))   // Dragging started
         {
             // Save initial reference points for object and cursor in screen coordinates
             // Note: y is inverted for the object point.
@@ -216,19 +233,18 @@ public class BasicDragger implements SelectListener {
         Position pickPos = null;
         // Use intersection with sphere at reference altitude.
         Intersection inters[] = globe.intersect(ray, this.dragRefAltitude);
-        if (inters != null) {
+        if (inters != null)
             pickPos = globe.computePositionFromPoint(inters[0].getIntersectionPoint());
-        }
 
-        if (pickPos != null) {
+        if (pickPos != null)
+        {
             // Intersection with globe. Move reference point to the intersection point,
             // but maintain current altitude.
             Position p = new Position(pickPos, refPos.getElevation());
-            if (dragObject instanceof Movable2) {
+            if (dragObject instanceof Movable2)
                 ((Movable2) dragObject).moveTo(globe, p);
-            } else {
+            else
                 ((Movable) dragObject).moveTo(p);
-            }
         }
     }
 }

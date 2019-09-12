@@ -3,18 +3,20 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.formats.nitfs;
 
 /**
  * @author Lado Garakanidze
  * @version $Id: NITFSUserDefinedHeaderSegment.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class NITFSUserDefinedHeaderSegment extends NITFSSegment {
+public abstract class NITFSUserDefinedHeaderSegment extends NITFSSegment
+{
+    protected  int overflow;
+    protected  String dataTag;
 
-    protected int overflow;
-    protected String dataTag;
-
-    public NITFSUserDefinedHeaderSegment(java.nio.ByteBuffer buffer) {
+    public NITFSUserDefinedHeaderSegment(java.nio.ByteBuffer buffer)
+    {
         super(NITFSSegmentType.USER_DEFINED_HEADER_SEGMENT, buffer, 0, 0, 0, 0);
 
         this.headerLength = Integer.parseInt(NITFSUtil.getString(buffer, 5));

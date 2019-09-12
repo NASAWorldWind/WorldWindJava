@@ -22,8 +22,8 @@ import java.io.*;
  * @author Patrick Murris
  * @version $Id: CrosshairLayer.java 1953 2014-04-21 15:43:35Z tgaskins $
  */
-public class CrosshairLayer extends AbstractLayer {
-
+public class CrosshairLayer extends AbstractLayer
+{
     private String iconFilePath = "images/32x32-crosshair-simple.png"; // TODO: make configurable
     private double toViewportScale = 1d; // TODO: make configurable
     private double iconScale = 1d;
@@ -35,26 +35,31 @@ public class CrosshairLayer extends AbstractLayer {
     // Draw it as ordered with an eye distance of 0 so that it shows up in front of most other things.
     private OrderedIcon orderedImage = new OrderedIcon();
 
-    private class OrderedIcon implements OrderedRenderable {
-
-        public double getDistanceFromEye() {
+    private class OrderedIcon implements OrderedRenderable
+    {
+        public double getDistanceFromEye()
+        {
             return 0;
         }
 
-        public void pick(DrawContext dc, Point pickPoint) {
+        public void pick(DrawContext dc, Point pickPoint)
+        {
             // Not implemented
         }
 
-        public void render(DrawContext dc) {
+        public void render(DrawContext dc)
+        {
             CrosshairLayer.this.draw(dc);
         }
     }
 
-    public CrosshairLayer() {
+    public CrosshairLayer()
+    {
         this.setOpacity(0.8); // TODO: make configurable
     }
 
-    public CrosshairLayer(String iconFilePath) {
+    public CrosshairLayer(String iconFilePath)
+    {
         this.setIconFilePath(iconFilePath);
         this.setOpacity(0.8); // TODO: make configurable
     }
@@ -64,7 +69,8 @@ public class CrosshairLayer extends AbstractLayer {
      *
      * @return the icon file path
      */
-    public String getIconFilePath() {
+    public String getIconFilePath()
+    {
         return iconFilePath;
     }
 
@@ -75,8 +81,10 @@ public class CrosshairLayer extends AbstractLayer {
      *
      * @param iconFilePath the path to the icon's image file
      */
-    public void setIconFilePath(String iconFilePath) {
-        if (iconFilePath == null) {
+    public void setIconFilePath(String iconFilePath)
+    {
+        if (iconFilePath == null)
+        {
             String message = Logging.getMessage("nullValue.IconFilePath");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -89,7 +97,8 @@ public class CrosshairLayer extends AbstractLayer {
      *
      * @return the crosshair-to-viewport scale factor
      */
-    public double getToViewportScale() {
+    public double getToViewportScale()
+    {
         return toViewportScale;
     }
 
@@ -101,7 +110,8 @@ public class CrosshairLayer extends AbstractLayer {
      *
      * @param toViewportScale the compass to viewport scale factor
      */
-    public void setToViewportScale(double toViewportScale) {
+    public void setToViewportScale(double toViewportScale)
+    {
         this.toViewportScale = toViewportScale;
     }
 
@@ -110,7 +120,8 @@ public class CrosshairLayer extends AbstractLayer {
      *
      * @return the current icon scale
      */
-    public double getIconScale() {
+    public double getIconScale()
+    {
         return iconScale;
     }
 
@@ -122,7 +133,8 @@ public class CrosshairLayer extends AbstractLayer {
      *
      * @param iconScale the icon scale factor
      */
-    public void setIconScale(double iconScale) {
+    public void setIconScale(double iconScale)
+    {
         this.iconScale = iconScale;
     }
 
@@ -131,7 +143,8 @@ public class CrosshairLayer extends AbstractLayer {
      *
      * @return the icon's resize behavior
      */
-    public String getResizeBehavior() {
+    public String getResizeBehavior()
+    {
         return resizeBehavior;
     }
 
@@ -147,7 +160,8 @@ public class CrosshairLayer extends AbstractLayer {
      *
      * @param resizeBehavior the desired resize behavior
      */
-    public void setResizeBehavior(String resizeBehavior) {
+    public void setResizeBehavior(String resizeBehavior)
+    {
         this.resizeBehavior = resizeBehavior;
     }
 
@@ -157,7 +171,8 @@ public class CrosshairLayer extends AbstractLayer {
      *
      * @return the crosshair location inside the viewport.
      */
-    public Vec4 getLocationCenter() {
+    public Vec4 getLocationCenter()
+    {
         return locationCenter;
     }
 
@@ -167,18 +182,20 @@ public class CrosshairLayer extends AbstractLayer {
      *
      * @param locationCenter the crosshair location inside the viewport.
      */
-    public void setLocationCenter(Vec4 locationCenter) {
+    public void setLocationCenter(Vec4 locationCenter)
+    {
         this.locationCenter = locationCenter;
     }
 
-    protected void doRender(DrawContext dc) {
+    protected void doRender(DrawContext dc)
+    {
         dc.addOrderedRenderable(this.orderedImage);
     }
 
-    private void draw(DrawContext dc) {
-        if (this.getIconFilePath() == null) {
+    private void draw(DrawContext dc)
+    {
+        if (this.getIconFilePath() == null)
             return;
-        }
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
@@ -186,20 +203,23 @@ public class CrosshairLayer extends AbstractLayer {
         boolean modelviewPushed = false;
         boolean projectionPushed = false;
 
-        try {
+        try
+        {
             gl.glPushAttrib(GL2.GL_DEPTH_BUFFER_BIT
-                    | GL2.GL_COLOR_BUFFER_BIT
-                    | GL2.GL_ENABLE_BIT
-                    | GL2.GL_TRANSFORM_BIT
-                    | GL2.GL_VIEWPORT_BIT
-                    | GL2.GL_CURRENT_BIT);
+                | GL2.GL_COLOR_BUFFER_BIT
+                | GL2.GL_ENABLE_BIT
+                | GL2.GL_TRANSFORM_BIT
+                | GL2.GL_VIEWPORT_BIT
+                | GL2.GL_CURRENT_BIT);
             attribsPushed = true;
 
             Texture iconTexture = dc.getTextureCache().getTexture(this.getIconFilePath());
-            if (iconTexture == null) {
+            if (iconTexture == null)
+            {
                 this.initializeTexture(dc);
                 iconTexture = dc.getTextureCache().getTexture(this.getIconFilePath());
-                if (iconTexture == null) {
+                if (iconTexture == null)
+                {
                     String msg = Logging.getMessage("generic.ImageReadFailed");
                     Logging.logger().finer(msg);
                     return;
@@ -246,44 +266,58 @@ public class CrosshairLayer extends AbstractLayer {
             TextureCoords texCoords = iconTexture.getImageTexCoords();
             gl.glScaled(width, height, 1d);
             dc.drawUnitQuad(texCoords);
-        } finally {
+        }
+        finally
+        {
             gl.glBindTexture(GL.GL_TEXTURE_2D, 0);
 
-            if (projectionPushed) {
+            if (projectionPushed)
+            {
                 gl.glMatrixMode(GL2.GL_PROJECTION);
                 gl.glPopMatrix();
             }
-            if (modelviewPushed) {
+            if (modelviewPushed)
+            {
                 gl.glMatrixMode(GL2.GL_MODELVIEW);
                 gl.glPopMatrix();
             }
-            if (attribsPushed) {
+            if (attribsPushed)
                 gl.glPopAttrib();
-            }
         }
     }
 
-    private double computeScale(Rectangle viewport) {
-        if (this.resizeBehavior.equals(AVKey.RESIZE_SHRINK_ONLY)) {
+    private double computeScale(Rectangle viewport)
+    {
+        if (this.resizeBehavior.equals(AVKey.RESIZE_SHRINK_ONLY))
+        {
             return Math.min(1d, (this.toViewportScale) * viewport.width / this.getScaledIconWidth());
-        } else if (this.resizeBehavior.equals(AVKey.RESIZE_STRETCH)) {
+        }
+        else if (this.resizeBehavior.equals(AVKey.RESIZE_STRETCH))
+        {
             return (this.toViewportScale) * viewport.width / this.getScaledIconWidth();
-        } else if (this.resizeBehavior.equals(AVKey.RESIZE_KEEP_FIXED_SIZE)) {
+        }
+        else if (this.resizeBehavior.equals(AVKey.RESIZE_KEEP_FIXED_SIZE))
+        {
             return 1d;
-        } else {
+        }
+        else
+        {
             return 1d;
         }
     }
 
-    private double getScaledIconWidth() {
+    private double getScaledIconWidth()
+    {
         return this.iconWidth * this.iconScale;
     }
 
-    private double getScaledIconHeight() {
+    private double getScaledIconHeight()
+    {
         return this.iconHeight * this.iconScale;
     }
 
-    private Vec4 computeLocation(Rectangle viewport, double scale) {
+    private Vec4 computeLocation(Rectangle viewport, double scale)
+    {
         double width = this.getScaledIconWidth();
         double height = this.getScaledIconHeight();
 
@@ -293,10 +327,12 @@ public class CrosshairLayer extends AbstractLayer {
         double x;
         double y;
 
-        if (this.locationCenter != null) {
+        if (this.locationCenter != null)
+        {
             x = this.locationCenter.x - scaledWidth / 2;
             y = this.locationCenter.y - scaledHeight / 2;
-        } else // viewport center
+        }
+        else // viewport center
         {
             x = viewport.getWidth() / 2 - scaledWidth / 2;
             y = viewport.getHeight() / 2 - scaledHeight / 2;
@@ -305,19 +341,22 @@ public class CrosshairLayer extends AbstractLayer {
         return new Vec4(x, y, 0);
     }
 
-    private void initializeTexture(DrawContext dc) {
+    private void initializeTexture(DrawContext dc)
+    {
         Texture iconTexture = dc.getTextureCache().getTexture(this.getIconFilePath());
-        if (iconTexture != null) {
+        if (iconTexture != null)
             return;
-        }
 
         GL gl = dc.getGL();
 
-        try {
+        try
+        {
             InputStream iconStream = this.getClass().getResourceAsStream("/" + this.getIconFilePath());
-            if (iconStream == null) {
+            if (iconStream == null)
+            {
                 File iconFile = new File(this.getIconFilePath());
-                if (iconFile.exists()) {
+                if (iconFile.exists())
+                {
                     iconStream = new FileInputStream(iconFile);
                 }
             }
@@ -328,7 +367,9 @@ public class CrosshairLayer extends AbstractLayer {
             this.iconWidth = iconTexture.getWidth();
             this.iconHeight = iconTexture.getHeight();
             dc.getTextureCache().put(this.getIconFilePath(), iconTexture);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             String msg = Logging.getMessage("layers.IOExceptionDuringInitialization");
             Logging.logger().severe(msg);
             throw new WWRuntimeException(msg, e);
@@ -345,7 +386,8 @@ public class CrosshairLayer extends AbstractLayer {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return Logging.getMessage("layers.CrosshairLayer.Name");
     }
 }

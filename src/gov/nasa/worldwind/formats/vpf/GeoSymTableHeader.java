@@ -15,39 +15,47 @@ import java.util.*;
  * @author dcollins
  * @version $Id: GeoSymTableHeader.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class GeoSymTableHeader {
-
+public class GeoSymTableHeader
+{
     protected String fileName;
     protected String description;
     // Use LinkedHashMap to acheive predictable ordering of table columns.
     protected LinkedHashMap<String, GeoSymColumn> columnMap;
 
-    public GeoSymTableHeader() {
+    public GeoSymTableHeader()
+    {
         this.columnMap = new LinkedHashMap<String, GeoSymColumn>();
     }
 
-    public String getFileName() {
+    public String getFileName()
+    {
         return this.fileName;
     }
 
-    public void setFileName(String fileName) {
+    public void setFileName(String fileName)
+    {
         this.fileName = fileName;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return this.description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
-    public int getNumColumns() {
+    public int getNumColumns()
+    {
         return this.columnMap.size();
     }
 
-    public boolean containsColumn(String name) {
-        if (name == null) {
+    public boolean containsColumn(String name)
+    {
+        if (name == null)
+        {
             String message = Logging.getMessage("nullValue.NameIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -56,8 +64,10 @@ public class GeoSymTableHeader {
         return this.columnMap.containsKey(name);
     }
 
-    public GeoSymColumn getColumn(String name) {
-        if (name == null) {
+    public GeoSymColumn getColumn(String name)
+    {
+        if (name == null)
+        {
             String message = Logging.getMessage("nullValue.NameIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -66,24 +76,28 @@ public class GeoSymTableHeader {
         return this.columnMap.get(name);
     }
 
-    public Set<String> getColumnNames() {
+    public Set<String> getColumnNames()
+    {
         return Collections.unmodifiableSet(this.columnMap.keySet());
     }
 
-    public Collection<GeoSymColumn> getColumns() {
+    public Collection<GeoSymColumn> getColumns()
+    {
         return Collections.unmodifiableCollection(this.columnMap.values());
     }
 
-    public void setColumns(Collection<? extends GeoSymColumn> collection) {
+    public void setColumns(Collection<? extends GeoSymColumn> collection)
+    {
         this.removeAllColumns();
 
-        if (collection != null) {
+        if (collection != null)
             this.addAllColumns(collection);
-        }
     }
 
-    public void addColumn(GeoSymColumn column) {
-        if (column == null) {
+    public void addColumn(GeoSymColumn column)
+    {
+        if (column == null)
+        {
             String message = Logging.getMessage("nullValue.ColumnIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -92,20 +106,25 @@ public class GeoSymTableHeader {
         this.columnMap.put(column.getName(), column);
     }
 
-    public void addAllColumns(Collection<? extends GeoSymColumn> collection) {
-        if (collection == null) {
+    public void addAllColumns(Collection<? extends GeoSymColumn> collection)
+    {
+        if (collection == null)
+        {
             String message = Logging.getMessage("nullValue.CollectionIsNulln");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        for (GeoSymColumn col : collection) {
+        for (GeoSymColumn col : collection)
+        {
             this.addColumn(col);
         }
     }
 
-    public void removeColumn(GeoSymColumn column) {
-        if (column == null) {
+    public void removeColumn(GeoSymColumn column)
+    {
+        if (column == null)
+        {
             String message = Logging.getMessage("nullValue.ColumnIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -114,7 +133,8 @@ public class GeoSymTableHeader {
         this.columnMap.remove(column.getName());
     }
 
-    public void removeAllColumns() {
+    public void removeAllColumns()
+    {
         this.columnMap.clear();
     }
 }

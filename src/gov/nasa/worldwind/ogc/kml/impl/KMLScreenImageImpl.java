@@ -18,78 +18,80 @@ import java.io.IOException;
  * @author pabercrombie
  * @version $Id: KMLScreenImageImpl.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable {
-
-    /**
-     * Size value that KML uses to indicate that the native image dimension should be maintained.
-     */
+public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable
+{
+    /** Size value that KML uses to indicate that the native image dimension should be maintained. */
     protected static final int KML_NATIVE_DIMENSION = -1;
 
-    /**
-     * Size value that KML uses to indicate that the image aspect ration should be maintained.
-     */
+    /** Size value that KML uses to indicate that the image aspect ration should be maintained. */
     protected static final int KML_MAINTAIN_ASPECT_RATIO = 0;
 
     protected final KMLScreenOverlay parent;
 
-    /**
-     * Indicates the time at which the image source was specified.
-     */
+    /** Indicates the time at which the image source was specified. */
     protected long iconRetrievalTime;
 
     /**
      * Create an screen image.
      *
-     * @param tc the current {@link KMLTraversalContext}.
+     * @param tc      the current {@link KMLTraversalContext}.
      * @param overlay the <i>Overlay</i> element containing.
      *
-     * @throws NullPointerException if the traversal context is null.
+     * @throws NullPointerException     if the traversal context is null.
      * @throws IllegalArgumentException if the parent overlay or the traversal context is null.
      */
-    public KMLScreenImageImpl(KMLTraversalContext tc, KMLScreenOverlay overlay) {
+    public KMLScreenImageImpl(KMLTraversalContext tc, KMLScreenOverlay overlay)
+    {
         this.parent = overlay;
 
-        if (tc == null) {
+        if (tc == null)
+        {
             String msg = Logging.getMessage("nullValue.TraversalContextIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (overlay == null) {
+        if (overlay == null)
+        {
             String msg = Logging.getMessage("nullValue.ParentIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         KMLVec2 xy = this.parent.getScreenXY();
-        if (xy != null) {
+        if (xy != null)
+        {
             this.screenOffset = new Offset(xy.getX(), xy.getY(), KMLUtil.kmlUnitsToWWUnits(xy.getXunits()),
-                    KMLUtil.kmlUnitsToWWUnits(xy.getYunits()));
+                KMLUtil.kmlUnitsToWWUnits(xy.getYunits()));
         }
 
         xy = this.parent.getOverlayXY();
-        if (xy != null) {
+        if (xy != null)
+        {
             this.imageOffset = new Offset(xy.getX(), xy.getY(), KMLUtil.kmlUnitsToWWUnits(xy.getXunits()),
-                    KMLUtil.kmlUnitsToWWUnits(xy.getYunits()));
+                KMLUtil.kmlUnitsToWWUnits(xy.getYunits()));
         }
 
         this.setRotation(overlay.getRotation());
 
         xy = this.parent.getRotationXY();
-        if (xy != null) {
+        if (xy != null)
+        {
             setRotationOffset(new Offset(xy.getX(), xy.getY(), KMLUtil.kmlUnitsToWWUnits(xy.getXunits()),
-                    KMLUtil.kmlUnitsToWWUnits(xy.getYunits())));
+                KMLUtil.kmlUnitsToWWUnits(xy.getYunits())));
         }
 
         String colorStr = overlay.getColor();
-        if (colorStr != null) {
+        if (colorStr != null)
+        {
             Color color = WWUtil.decodeColorABGR(colorStr);
             this.setColor(color);
         }
 
         // Compute desired image size, and the scale factor that will make it that size
         KMLVec2 kmlSize = this.parent.getSize();
-        if (kmlSize != null) {
+        if (kmlSize != null)
+        {
             Size size = new Size();
             size.setWidth(getSizeMode(kmlSize.getX()), kmlSize.getX(), KMLUtil.kmlUnitsToWWUnits(kmlSize.getXunits()));
             size.setHeight(getSizeMode(kmlSize.getY()), kmlSize.getY(), KMLUtil.kmlUnitsToWWUnits(kmlSize.getYunits()));
@@ -97,10 +99,9 @@ public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void preRender(KMLTraversalContext tc, DrawContext dc) {
+    /** {@inheritDoc} */
+    public void preRender(KMLTraversalContext tc, DrawContext dc)
+    {
         // No pre-rendering
     }
 
@@ -110,12 +111,12 @@ public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable {
      *
      * @return True if the image source must be resolved.
      */
-    protected boolean mustResolveHref() {
+    protected boolean mustResolveHref()
+    {
         KMLIcon icon = this.parent.getIcon();
         //noinspection SimplifiableIfStatement
-        if (icon == null || icon.getHref() == null) {
+        if (icon == null || icon.getHref() == null)
             return false;
-        }
 
         // Resolve the reference if the image hasn't been retrieved, or if the link has expired.
         return this.getImageSource() == null || icon.getUpdateTime() > this.iconRetrievalTime;
@@ -126,14 +127,18 @@ public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable {
      *
      * @return The resolved path to the image source.
      */
-    protected String resolveHref() {
+    protected String resolveHref()
+    {
         // The icon reference may be to a support file within a KMZ file, so check for that. If it's not, then just
         // let the normal ScreenImage code resolve the reference.
         String href = this.parent.getIcon().getHref();
         String localAddress = null;
-        try {
+        try
+        {
             localAddress = this.parent.getRoot().getSupportFilePath(href);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             String message = Logging.getMessage("generic.UnableToResolveReference", href);
             Logging.logger().warning(message);
         }
@@ -141,10 +146,9 @@ public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable {
         return localAddress != null ? localAddress : href;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void render(KMLTraversalContext tc, DrawContext dc) {
+    /** {@inheritDoc} */
+    public void render(KMLTraversalContext tc, DrawContext dc)
+    {
         if (this.mustResolveHref()) // resolve the href to either a local file or a remote URL
         {
             String path = this.resolveHref();
@@ -163,9 +167,11 @@ public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable {
      * {@inheritDoc} Overridden to set the link expiration time based on HTTP headers after the image has been
      * retrieved.
      */
-    protected BasicWWTexture initializeTexture() {
+    protected BasicWWTexture initializeTexture()
+    {
         BasicWWTexture ret = super.initializeTexture();
-        if (this.texture != null) {
+        if (this.texture != null)
+        {
             this.iconRetrievalTime = System.currentTimeMillis();
 
             String path = this.resolveHref();
@@ -187,24 +193,22 @@ public class KMLScreenImageImpl extends ScreenImage implements KMLRenderable {
      *
      * @param size The KML size attribute
      *
-     * @return One of
-     * {@link gov.nasa.worldwind.render.Size#NATIVE_DIMENSION}, {@link gov.nasa.worldwind.render.Size#MAINTAIN_ASPECT_RATIO},
-     * or {@link gov.nasa.worldwind.render.Size#EXPLICIT_DIMENSION}.
+     * @return One of {@link gov.nasa.worldwind.render.Size#NATIVE_DIMENSION}, {@link gov.nasa.worldwind.render.Size#MAINTAIN_ASPECT_RATIO},
+     *         or {@link gov.nasa.worldwind.render.Size#EXPLICIT_DIMENSION}.
      */
-    protected String getSizeMode(Double size) {
+    protected String getSizeMode(Double size)
+    {
         // KML spec requires a value, but if there isn't one, use the image's native size.
-        if (size == null) {
+        if (size == null)
             return Size.NATIVE_DIMENSION;
-        }
 
         int s = (int) size.doubleValue();
 
-        if (s == KML_NATIVE_DIMENSION) {
+        if (s == KML_NATIVE_DIMENSION)
             return Size.NATIVE_DIMENSION;
-        } else if (size == KML_MAINTAIN_ASPECT_RATIO) {
+        else if (size == KML_MAINTAIN_ASPECT_RATIO)
             return Size.MAINTAIN_ASPECT_RATIO;
-        } else {
+        else
             return Size.EXPLICIT_DIMENSION;
-        }
     }
 }

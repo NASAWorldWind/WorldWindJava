@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util.tree;
 
 import gov.nasa.worldwind.render.DrawContext;
@@ -17,29 +18,30 @@ import java.awt.*;
  * @version $Id: Scrollable.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see ScrollFrame
  */
-public interface Scrollable {
-
+public interface Scrollable
+{
     /**
      * Render the scrollable component. The component should render itself with the lower left corner of the content
      * located at {@code location}.in the rectangle specified by {@code bounds}. Note that some of the content may be
      * clipped by the scroll frame.
      *
-     * @param dc Draw context.
-     * @param location Point at which to draw the Scrollable contents. This point indicates the location of the lower
-     * left corner of the content, in GL screen coordinates (origin at lower left corner of the screen).
-     * @param frameSize Size of the frame that will hold the content.
+     * @param dc         Draw context.
+     * @param location   Point at which to draw the Scrollable contents. This point indicates the location of the lower
+     *                   left corner of the content, in GL screen coordinates (origin at lower left corner of the
+     *                   screen).
+     * @param frameSize  Size of the frame that will hold the content.
      * @param clipBounds Bounds of the clip rectangle. Any pixels outside of this box will be discarded, and do not need
-     * to be drawn. The rectangle is specified in GL screen coordinates.
+     *                   to be drawn. The rectangle is specified in GL screen coordinates.
      */
     public void renderScrollable(DrawContext dc, Point location, Dimension frameSize, Rectangle clipBounds);
 
     /**
      * Get the size of the object on screen.
      *
-     * @param dc Draw context.
+     * @param dc        Draw context.
      * @param frameSize Size of the frame that will hold the the scrollable content. Implementations should be prepared
-     * to handle a {@code null} frame size because the frame may need to determine the content size before it can
-     * determine its own size.
+     *                  to handle a {@code null} frame size because the frame may need to determine the content size
+     *                  before it can determine its own size.
      *
      * @return The size of the scrollable object.
      */

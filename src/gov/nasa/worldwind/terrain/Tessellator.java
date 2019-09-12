@@ -12,8 +12,8 @@ import gov.nasa.worldwind.render.DrawContext;
  * @author tag
  * @version $Id: Tessellator.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface Tessellator extends WWObject {
-
+public interface Tessellator extends WWObject
+{
     /**
      * Tessellate a globe for the currently visible region.
      *

@@ -11,24 +11,21 @@ package gov.nasa.worldwind.util;
  * @author dcollins
  * @version $Id: Range.java 2281 2014-08-29 23:08:04Z dcollins $
  */
-public class Range {
-
-    /**
-     * The start index of the range. 0 indicates the first item in the series.
-     */
+public class Range
+{
+    /** The start index of the range. 0 indicates the first item in the series. */
     public int location;
-    /**
-     * The number of items in the range. May be 0 to indicate an empty range.
-     */
+    /** The number of items in the range. May be 0 to indicate an empty range. */
     public int length;
 
     /**
      * Creates a new range with the specified start index and number of items.
      *
      * @param location The start index of the range.
-     * @param length The number of items in the range. May be 0 to indicate an empty range.
+     * @param length   The number of items in the range. May be 0 to indicate an empty range.
      */
-    public Range(int location, int length) {
+    public Range(int location, int length)
+    {
         this.location = location;
         this.length = length;
     }
@@ -42,7 +39,8 @@ public class Range {
      *
      * @return true if the location is in this range, otherwise false.
      */
-    public boolean contains(int location) {
+    public boolean contains(int location)
+    {
         return location >= this.location && location < this.location + this.length;
     }
 }

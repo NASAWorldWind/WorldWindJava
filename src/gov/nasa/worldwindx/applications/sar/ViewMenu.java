@@ -18,20 +18,24 @@ import java.awt.*;
  * @author jparsons
  * @version $Id: ViewMenu.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ViewMenu extends JMenu {
-
+public class ViewMenu extends JMenu
+{
     private WorldWindow wwd;
 
-    public ViewMenu() {
+    public ViewMenu()
+    {
         super("View");
     }
 
-    public void setWwd(WorldWindow wwdInstance) {
+    public void setWwd(WorldWindow wwdInstance)
+    {
         this.wwd = wwdInstance;
 
         // Layers
-        for (Layer layer : wwd.getModel().getLayers()) {
-            if (isAbstractLayerMenuItem(layer)) {
+        for (Layer layer : wwd.getModel().getLayers())
+        {
+            if (isAbstractLayerMenuItem(layer))
+            {
                 JCheckBoxMenuItem mi = new JCheckBoxMenuItem(new LayerVisibilityAction(wwd, layer));
                 mi.setState(layer.isEnabled());
                 this.add(mi);
@@ -42,8 +46,10 @@ public class ViewMenu extends JMenu {
         JMenuItem mi = new JMenuItem("Terrain profile...");
         mi.setMnemonic('T');
         mi.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        mi.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
+        mi.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {
                 wwd.firePropertyChange(TerrainProfilePanel.TERRAIN_PROFILE_OPEN, null, null);
             }
         });
@@ -53,42 +59,47 @@ public class ViewMenu extends JMenu {
         mi = new JMenuItem("Cloud Contour...");
         mi.setMnemonic('C');
         mi.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        mi.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
+        mi.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {
                 wwd.firePropertyChange(CloudCeilingPanel.CLOUD_CEILING_OPEN, null, null);
             }
         });
         this.add(mi);
     }
 
-    private boolean isAbstractLayerMenuItem(Layer layer) {
-        if (layer instanceof RenderableLayer) //detect PlaneModel layer
+    private boolean isAbstractLayerMenuItem(Layer layer)
+    {
+        if (layer instanceof RenderableLayer)  //detect PlaneModel layer
         {
-            Iterable<Renderable> iter = ((RenderableLayer) layer).getRenderables();
-            for (Renderable rend : iter) {
-                if (rend instanceof PlaneModel) {
+            Iterable<Renderable> iter = ((RenderableLayer)layer).getRenderables();
+            for (Renderable rend: iter)
+            {
+                if (rend instanceof PlaneModel)
                     return true;
-                }
             }
         }
 
         return ((layer instanceof ScalebarLayer
                 || layer instanceof CrosshairLayer
-                || layer instanceof CompassLayer));
+                || layer instanceof CompassLayer));  
     }
 
-    private static class LayerVisibilityAction extends AbstractAction {
-
+    private static class LayerVisibilityAction extends AbstractAction
+    {
         private final Layer layer;
         private final WorldWindow wwd;
 
-        public LayerVisibilityAction(WorldWindow wwd, Layer layer) {
+        public LayerVisibilityAction(WorldWindow wwd, Layer layer)
+        {
             super(layer.getName());
             this.layer = layer;
             this.wwd = wwd;
         }
 
-        public void actionPerformed(ActionEvent actionEvent) {
+        public void actionPerformed(ActionEvent actionEvent)
+        {
             layer.setEnabled(((JCheckBoxMenuItem) actionEvent.getSource()).getState());
             this.wwd.redraw();
         }

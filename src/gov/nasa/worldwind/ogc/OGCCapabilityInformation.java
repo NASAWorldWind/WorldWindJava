@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc;
 
 import gov.nasa.worldwind.util.xml.*;
@@ -18,8 +19,8 @@ import java.util.*;
  * @author tag
  * @version $Id: OGCCapabilityInformation.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-abstract public class OGCCapabilityInformation extends AbstractXMLEventParser {
-
+abstract public class OGCCapabilityInformation extends AbstractXMLEventParser
+{
     abstract protected boolean isRequestName(XMLEventParserContext ctx, QName name);
 
     protected QName REQUEST;
@@ -32,13 +33,15 @@ abstract public class OGCCapabilityInformation extends AbstractXMLEventParser {
     protected Set<OGCRequestDescription> requestDescriptions = new HashSet<OGCRequestDescription>();
     protected Map<String, String> userDefinedSymbolization;
 
-    public OGCCapabilityInformation(String namespaceURI) {
+    public OGCCapabilityInformation(String namespaceURI)
+    {
         super(namespaceURI);
 
         this.initialize();
     }
 
-    private void initialize() {
+    private void initialize()
+    {
         REQUEST = new QName(this.getNamespaceURI(), "Request");
         EXCEPTION = new QName(this.getNamespaceURI(), "Exception");
         FORMAT = new QName(this.getNamespaceURI(), "Format");
@@ -47,127 +50,146 @@ abstract public class OGCCapabilityInformation extends AbstractXMLEventParser {
     }
 
     @Override
-    public XMLEventParser allocate(XMLEventParserContext ctx, XMLEvent event) {
+    public XMLEventParser allocate(XMLEventParserContext ctx, XMLEvent event)
+    {
         XMLEventParser defaultParser = null;
 
-        if (this.isRequestName(ctx, event.asStartElement().getName())) {
+        if (this.isRequestName(ctx, event.asStartElement().getName()))
             defaultParser = new OGCRequestDescription(this.getNamespaceURI());
-        } else if (ctx.isStartElement(event, EXCEPTION)) {
+        else if (ctx.isStartElement(event, EXCEPTION))
             defaultParser = new StringSetXMLEventParser(this.getNamespaceURI(), FORMAT);
-        }
 
         return ctx.allocate(event, defaultParser);
     }
 
     @Override
     protected void doParseEventContent(XMLEventParserContext ctx, XMLEvent event, Object... args)
-            throws XMLStreamException {
-        if (ctx.isStartElement(event, EXCEPTION)) {
+        throws XMLStreamException
+    {
+        if (ctx.isStartElement(event, EXCEPTION))
+        {
             XMLEventParser parser = this.allocate(ctx, event);
-            if (parser != null) {
+            if (parser != null)
+            {
                 Object o = parser.parse(ctx, event, args);
-                if (o != null && o instanceof StringSetXMLEventParser) {
+                if (o != null && o instanceof StringSetXMLEventParser)
                     this.setExceptionFormats(((StringSetXMLEventParser) o).getStrings());
-                }
             }
-        } else if (event.isStartElement() && this.isRequestName(ctx, event.asStartElement().getName())) {
+        }
+        else if (event.isStartElement() && this.isRequestName(ctx, event.asStartElement().getName()))
+        {
             XMLEventParser parser = this.allocate(ctx, event);
-            if (parser != null) {
+            if (parser != null)
+            {
                 Object o = parser.parse(ctx, event, args);
-                if (o != null && o instanceof OGCRequestDescription) {
+                if (o != null && o instanceof OGCRequestDescription)
                     this.requestDescriptions.add((OGCRequestDescription) o);
-                }
             }
-        } else if (ctx.isStartElement(event, USER_DEFINED_SYMBOLIZATION)) {
+        }
+        else if (ctx.isStartElement(event, USER_DEFINED_SYMBOLIZATION))
+        {
             // Break out the parsing so that it can be overridden by subclasses.
             this.parseUserDefinedSymbolization(event);
-        } else if (ctx.isStartElement(event, EXTENDED_CAPABILITIES)) {
+        }
+        else if (ctx.isStartElement(event, EXTENDED_CAPABILITIES))
+        {
             // Break out the parsing so that it can be overridden by subclasses.
             this.parseExtendedCapabilities(ctx, event, args);
         }
     }
 
     protected void parseExtendedCapabilities(XMLEventParserContext ctx, XMLEvent event, Object... args)
-            throws XMLStreamException {
+        throws XMLStreamException
+    {
         XMLEventParser parser = this.allocate(ctx, event);
-        if (parser != null) {
+        if (parser != null)
+        {
             Object o = parser.parse(ctx, event, args);
-            if (o != null) {
+            if (o != null)
                 this.setExtendedCapabilities(o);
-            }
         }
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
-    protected void setExtendedCapabilities(Object extendedCapabilities) {
+    @SuppressWarnings( {"UnusedDeclaration"})
+    protected void setExtendedCapabilities(Object extendedCapabilities)
+    {
         // Override in subclass to handle extended capabilities.
     }
 
-    protected void parseUserDefinedSymbolization(XMLEvent event) throws XMLStreamException {
+    protected void parseUserDefinedSymbolization(XMLEvent event) throws XMLStreamException
+    {
         Iterator iter = event.asStartElement().getAttributes();
-        if (iter == null) {
+        if (iter == null)
             return;
-        }
 
-        while (iter.hasNext()) {
+        while (iter.hasNext())
+        {
             Attribute attr = (Attribute) iter.next();
             this.addUserDefinedSymbolization(attr.getName().getLocalPart(), attr.getValue());
         }
     }
 
-    public Set<String> getExceptionFormats() {
-        if (this.exceptionFormats != null) {
+    public Set<String> getExceptionFormats()
+    {
+        if (this.exceptionFormats != null)
             return exceptionFormats;
-        } else {
+        else
             return Collections.emptySet();
-        }
     }
 
-    protected void setExceptionFormats(Set<String> exceptionFormats) {
+    protected void setExceptionFormats(Set<String> exceptionFormats)
+    {
         this.exceptionFormats = exceptionFormats;
     }
 
-    public Set<OGCRequestDescription> getRequestDescriptions() {
+    public Set<OGCRequestDescription> getRequestDescriptions()
+    {
         return requestDescriptions;
     }
 
-    protected void setRequestDescriptions(Set<OGCRequestDescription> requestDescriptions) {
+    protected void setRequestDescriptions(Set<OGCRequestDescription> requestDescriptions)
+    {
         this.requestDescriptions = requestDescriptions;
     }
 
-    public Map<String, String> getUserDefinedSymbolization() {
-        if (this.userDefinedSymbolization != null) {
+    public Map<String, String> getUserDefinedSymbolization()
+    {
+        if (this.userDefinedSymbolization != null)
             return userDefinedSymbolization;
-        } else {
+        else
             return Collections.emptyMap();
-        }
     }
 
-    protected void setUserDefinedSymbolization(Map<String, String> userDefinedSymbolization) {
+    protected void setUserDefinedSymbolization(Map<String, String> userDefinedSymbolization)
+    {
         this.userDefinedSymbolization = userDefinedSymbolization;
     }
 
-    protected void addUserDefinedSymbolization(String key, String value) {
-        if (this.userDefinedSymbolization == null) {
+    protected void addUserDefinedSymbolization(String key, String value)
+    {
+        if (this.userDefinedSymbolization == null)
             this.userDefinedSymbolization = new HashMap<String, String>();
-        }
 
         this.userDefinedSymbolization.put(key, value);
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder sb = new StringBuilder();
 
-        for (String ef : this.getExceptionFormats()) {
+        for (String ef : this.getExceptionFormats())
+        {
             sb.append("Exception format: ").append(ef).append("\n");
         }
 
-        for (OGCRequestDescription rd : this.getRequestDescriptions()) {
+        for (OGCRequestDescription rd : this.getRequestDescriptions())
+        {
             sb.append(rd);
         }
 
-        for (Map.Entry<String, String> uds : this.getUserDefinedSymbolization().entrySet()) {
+        for (Map.Entry<String, String> uds : this.getUserDefinedSymbolization().entrySet())
+        {
             sb.append(uds.getKey()).append("=").append(uds.getValue()).append("\n");
         }
 

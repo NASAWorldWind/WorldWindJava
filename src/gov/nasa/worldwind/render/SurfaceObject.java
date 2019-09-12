@@ -28,8 +28,8 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: SurfaceObject.java 2283 2014-08-30 15:58:43Z dcollins $
  */
-public interface SurfaceObject extends OrderedRenderable, SurfaceRenderable, PreRenderable, AVList {
-
+public interface SurfaceObject extends OrderedRenderable, SurfaceRenderable, PreRenderable, AVList
+{
     /**
      * Indicates whether the surface object should be drawn during rendering.
      *
@@ -77,7 +77,7 @@ public interface SurfaceObject extends OrderedRenderable, SurfaceRenderable, Pre
      * during picking.
      *
      * @return the object used as the pickable object returned during picking, or null to indicate the the surface
-     * object is returned during picking.
+     *         object is returned during picking.
      */
     Object getDelegateOwner();
 
@@ -87,7 +87,7 @@ public interface SurfaceObject extends OrderedRenderable, SurfaceRenderable, Pre
      * returned during picking.
      *
      * @param owner the object to use as the pickable object returned during picking, or null to return the surface
-     * object.
+     *              object.
      */
     void setDelegateOwner(Object owner);
 
@@ -115,7 +115,7 @@ public interface SurfaceObject extends OrderedRenderable, SurfaceRenderable, Pre
      * Causes the surface object to draw a pickable representation of itself on the surface terrain, using the provided
      * draw context.
      *
-     * @param dc the current draw context.
+     * @param dc        the current draw context.
      * @param pickPoint the pick point.
      *
      * @throws IllegalArgumentException if the draw context is null.

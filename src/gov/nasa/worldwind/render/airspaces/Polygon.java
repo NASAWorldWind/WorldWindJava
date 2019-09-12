@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render.airspaces;
 
 import gov.nasa.worldwind.avlist.AVKey;
@@ -21,8 +22,8 @@ import java.util.*;
  * @author tag
  * @version $Id: Polygon.java 2309 2014-09-17 00:04:08Z tgaskins $
  */
-public class Polygon extends AbstractAirspace {
-
+public class Polygon extends AbstractAirspace
+{
     protected static final int DEFAULT_SUBDIVISIONS = 3;
     protected static final int MINIMAL_GEOMETRY_SUBDIVISIONS = 2;
 
@@ -30,7 +31,8 @@ public class Polygon extends AbstractAirspace {
     private boolean enableCaps = true;
     private int subdivisions = DEFAULT_SUBDIVISIONS;
 
-    public Polygon(Polygon source) {
+    public Polygon(Polygon source)
+    {
         super(source);
 
         this.enableCaps = source.enableCaps;
@@ -40,21 +42,25 @@ public class Polygon extends AbstractAirspace {
         this.makeDefaultDetailLevels();
     }
 
-    public Polygon(Iterable<? extends LatLon> locations) {
+    public Polygon(Iterable<? extends LatLon> locations)
+    {
         this.addLocations(locations);
         this.makeDefaultDetailLevels();
     }
 
-    public Polygon(AirspaceAttributes attributes) {
+    public Polygon(AirspaceAttributes attributes)
+    {
         super(attributes);
         this.makeDefaultDetailLevels();
     }
 
-    public Polygon() {
+    public Polygon()
+    {
         this.makeDefaultDetailLevels();
     }
 
-    private void makeDefaultDetailLevels() {
+    private void makeDefaultDetailLevels()
+    {
         List<DetailLevel> levels = new ArrayList<DetailLevel>();
         double[] ramp = ScreenSizeDetailLevel.computeDefaultScreenSizeRamp(5);
 
@@ -87,48 +93,56 @@ public class Polygon extends AbstractAirspace {
         this.setDetailLevels(levels);
     }
 
-    public List<LatLon> getLocations() {
+    public List<LatLon> getLocations()
+    {
         return Collections.unmodifiableList(this.locations);
     }
 
-    public void setLocations(Iterable<? extends LatLon> locations) {
+    public void setLocations(Iterable<? extends LatLon> locations)
+    {
         this.locations.clear();
         this.addLocations(locations);
     }
 
-    protected List<LatLon> getLocationList() {
+    protected List<LatLon> getLocationList()
+    {
         return this.locations;
     }
 
-    protected void addLocations(Iterable<? extends LatLon> newLocations) {
-        if (newLocations != null) {
-            for (LatLon ll : newLocations) {
-                if (ll != null) {
+    protected void addLocations(Iterable<? extends LatLon> newLocations)
+    {
+        if (newLocations != null)
+        {
+            for (LatLon ll : newLocations)
+            {
+                if (ll != null)
                     this.locations.add(ll);
-                }
             }
         }
 
         this.invalidateAirspaceData();
     }
 
-    public boolean isEnableCaps() {
+    public boolean isEnableCaps()
+    {
         return this.enableCaps;
     }
 
-    public void setEnableCaps(boolean enable) {
+    public void setEnableCaps(boolean enable)
+    {
         this.enableCaps = enable;
     }
 
-    public Position getReferencePosition() {
+    public Position getReferencePosition()
+    {
         return this.computeReferencePosition(this.locations, this.getAltitudes());
     }
 
-    protected Extent computeExtent(Globe globe, double verticalExaggeration) {
+    protected Extent computeExtent(Globe globe, double verticalExaggeration)
+    {
         List<Vec4> points = this.computeMinimalGeometry(globe, verticalExaggeration);
-        if (points == null || points.isEmpty()) {
+        if (points == null || points.isEmpty())
             return null;
-        }
 
         // Add a point at the center of this polygon to the points used to compute its extent. The center point captures
         // the curvature of the globe when the polygon's minimal geometry only contain any points near the polygon's
@@ -141,11 +155,11 @@ public class Polygon extends AbstractAirspace {
     }
 
     @Override
-    protected List<Vec4> computeMinimalGeometry(Globe globe, double verticalExaggeration) {
+    protected List<Vec4> computeMinimalGeometry(Globe globe, double verticalExaggeration)
+    {
         List<LatLon> locations = this.getLocations();
-        if (locations == null || locations.isEmpty()) {
+        if (locations == null || locations.isEmpty())
             return null;
-        }
 
         ArrayList<LatLon> copyOfLocations = new ArrayList<LatLon>(locations);
         ArrayList<LatLon> tessellatedLocations = new ArrayList<LatLon>();
@@ -157,13 +171,16 @@ public class Polygon extends AbstractAirspace {
         return points;
     }
 
-    protected void doMoveTo(Globe globe, Position oldRef, Position newRef) {
-        if (oldRef == null) {
+    protected void doMoveTo(Globe globe, Position oldRef, Position newRef)
+    {
+        if (oldRef == null)
+        {
             String message = "nullValue.OldRefIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (newRef == null) {
+        if (newRef == null)
+        {
             String message = "nullValue.NewRefIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -175,13 +192,16 @@ public class Polygon extends AbstractAirspace {
         super.doMoveTo(oldRef, newRef);
     }
 
-    protected void doMoveTo(Position oldRef, Position newRef) {
-        if (oldRef == null) {
+    protected void doMoveTo(Position oldRef, Position newRef)
+    {
+        if (oldRef == null)
+        {
             String message = "nullValue.OldRefIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (newRef == null) {
+        if (newRef == null)
+        {
             String message = "nullValue.NewRefIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -191,7 +211,8 @@ public class Polygon extends AbstractAirspace {
 
         int count = this.locations.size();
         LatLon[] newLocations = new LatLon[count];
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++)
+        {
             LatLon ll = this.locations.get(i);
             double distance = LatLon.greatCircleDistance(oldRef, ll).radians;
             double azimuth = LatLon.greatCircleAzimuth(oldRef, ll).radians;
@@ -201,12 +222,14 @@ public class Polygon extends AbstractAirspace {
     }
 
     @Override
-    protected SurfaceShape createSurfaceShape() {
+    protected SurfaceShape createSurfaceShape()
+    {
         return new SurfacePolygon();
     }
 
     @Override
-    protected void updateSurfaceShape(DrawContext dc, SurfaceShape shape) {
+    protected void updateSurfaceShape(DrawContext dc, SurfaceShape shape)
+    {
         super.updateSurfaceShape(dc, shape);
 
         boolean mustDrawInterior = this.getActiveAttributes().isDrawInterior() && this.isEnableCaps();
@@ -214,16 +237,20 @@ public class Polygon extends AbstractAirspace {
     }
 
     @Override
-    protected void regenerateSurfaceShape(DrawContext dc, SurfaceShape shape) {
+    protected void regenerateSurfaceShape(DrawContext dc, SurfaceShape shape)
+    {
         ((SurfacePolygon) shape).setOuterBoundary(this.locations);
     }
 
-    protected int getSubdivisions() {
+    protected int getSubdivisions()
+    {
         return this.subdivisions;
     }
 
-    protected void setSubdivisions(int subdivisions) {
-        if (subdivisions < 0) {
+    protected void setSubdivisions(int subdivisions)
+    {
+        if (subdivisions < 0)
+        {
             String message = Logging.getMessage("generic.ArgumentOutOfRange", "subdivisions=" + subdivisions);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -235,35 +262,41 @@ public class Polygon extends AbstractAirspace {
     //**************************************************************//
     //********************  Geometry Rendering  ********************//
     //**************************************************************//
-    protected Vec4 computeReferenceCenter(DrawContext dc) {
+
+    protected Vec4 computeReferenceCenter(DrawContext dc)
+    {
         Extent extent = this.getExtent(dc);
         return extent != null ? extent.getCenter() : null;
     }
 
-    protected void doRenderGeometry(DrawContext dc, String drawStyle) {
+    protected void doRenderGeometry(DrawContext dc, String drawStyle)
+    {
         this.doRenderGeometry(dc, drawStyle, this.locations, null);
     }
 
-    protected void doRenderGeometry(DrawContext dc, String drawStyle, List<LatLon> locations, List<Boolean> edgeFlags) {
-        if (dc == null) {
+    protected void doRenderGeometry(DrawContext dc, String drawStyle, List<LatLon> locations, List<Boolean> edgeFlags)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (dc.getGL() == null) {
+        if (dc.getGL() == null)
+        {
             String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (locations == null) {
+        if (locations == null)
+        {
             String message = "nullValue.LocationsIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (locations.size() == 0) {
+        if (locations.size() == 0)
             return;
-        }
 
         double[] altitudes = this.getAltitudes(dc.getVerticalExaggeration());
         boolean[] terrainConformant = this.isTerrainConforming();
@@ -271,22 +304,22 @@ public class Polygon extends AbstractAirspace {
         int subdivisions = this.subdivisions;
 
         if (this.getAltitudeDatum()[0].equals(AVKey.ABOVE_GROUND_REFERENCE)
-                || this.getAltitudeDatum()[1].equals(AVKey.ABOVE_GROUND_REFERENCE)) {
+            || this.getAltitudeDatum()[1].equals(AVKey.ABOVE_GROUND_REFERENCE))
+        {
             this.adjustForGroundReference(dc, terrainConformant, altitudes);
         }
 
-        if (this.isEnableLevelOfDetail()) {
+        if (this.isEnableLevelOfDetail())
+        {
             DetailLevel level = this.computeDetailLevel(dc);
 
             Object o = level.getValue(SUBDIVISIONS);
-            if (o != null && o instanceof Integer) {
+            if (o != null && o instanceof Integer)
                 subdivisions = (Integer) o;
-            }
 
             o = level.getValue(DISABLE_TERRAIN_CONFORMANCE);
-            if (o != null && o instanceof Boolean && (Boolean) o) {
+            if (o != null && o instanceof Boolean && (Boolean) o)
                 terrainConformant[0] = terrainConformant[1] = false;
-            }
         }
 
         Vec4 referenceCenter = this.computeReferenceCenter(dc);
@@ -295,69 +328,83 @@ public class Polygon extends AbstractAirspace {
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         OGLStackHandler ogsh = new OGLStackHandler();
-        try {
+        try
+        {
             dc.getView().pushReferenceCenter(dc, referenceCenter);
 
-            if (Airspace.DRAW_STYLE_FILL.equals(drawStyle)) {
-                if (enableCaps && !this.isAirspaceCollapsed()) {
+            if (Airspace.DRAW_STYLE_FILL.equals(drawStyle))
+            {
+                if (enableCaps && !this.isAirspaceCollapsed())
+                {
                     ogsh.pushAttrib(gl, GL2.GL_POLYGON_BIT);
                     gl.glEnable(GL.GL_CULL_FACE);
                     gl.glFrontFace(GL.GL_CCW);
                 }
 
                 this.drawPolygonFill(dc, locations, edgeFlags, altitudes, terrainConformant, enableCaps, subdivisions,
-                        referenceCenter);
-            } else if (Airspace.DRAW_STYLE_OUTLINE.equals(drawStyle)) {
-                this.drawPolygonOutline(dc, locations, edgeFlags, altitudes, terrainConformant, enableCaps,
-                        subdivisions, referenceCenter);
+                    referenceCenter);
             }
-        } finally {
+            else if (Airspace.DRAW_STYLE_OUTLINE.equals(drawStyle))
+            {
+                this.drawPolygonOutline(dc, locations, edgeFlags, altitudes, terrainConformant, enableCaps,
+                    subdivisions, referenceCenter);
+            }
+        }
+        finally
+        {
             dc.getView().popReferenceCenter(dc);
             ogsh.pop(gl);
         }
     }
 
-    protected void adjustForGroundReference(DrawContext dc, boolean[] terrainConformant, double[] altitudes) {
+    protected void adjustForGroundReference(DrawContext dc, boolean[] terrainConformant, double[] altitudes)
+    {
         LatLon groundRef = this.getGroundReference();
 
-        if (groundRef == null && this.getLocationList().size() > 0) {
+        if (groundRef == null && this.getLocationList().size() > 0)
             groundRef = this.getLocationList().get(0);
-        }
 
         this.adjustForGroundReference(dc, terrainConformant, altitudes, groundRef); // no-op if groudRef is null
     }
 
     protected int computeEllipsoidalPolygon(Globe globe, List<? extends LatLon> locations, List<Boolean> edgeFlags,
-            Vec4[] points, Boolean[] edgeFlagArray, Matrix[] transform) {
-        if (globe == null) {
+        Vec4[] points, Boolean[] edgeFlagArray, Matrix[] transform)
+    {
+        if (globe == null)
+        {
             String message = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (locations == null) {
+        if (locations == null)
+        {
             String message = "nullValue.LocationsIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (points == null) {
+        if (points == null)
+        {
             String message = "nullValue.LocationsIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (points.length < (1 + locations.size())) {
+        if (points.length < (1 + locations.size()))
+        {
             String message = Logging.getMessage("generic.ArrayInvalidLength",
-                    "points.length < " + (1 + locations.size()));
+                "points.length < " + (1 + locations.size()));
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (transform == null) {
+        if (transform == null)
+        {
             String message = "nullValue.TransformIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (transform.length < 1) {
+        if (transform.length < 1)
+        {
             String message = Logging.getMessage("generic.ArrayInvalidLength",
-                    "transform.length < 1");
+                "transform.length < 1");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -366,24 +413,24 @@ public class Polygon extends AbstractAirspace {
         int locationCount = locations.size();
 
         // Compute the cartesian points for each location.
-        for (int i = 0; i < locationCount; i++) {
+        for (int i = 0; i < locationCount; i++)
+        {
             LatLon ll = locations.get(i);
             points[i] = globe.computeEllipsoidalPointFromPosition(ll.getLatitude(), ll.getLongitude(), 0.0);
 
-            if (edgeFlagArray != null) {
+            if (edgeFlagArray != null)
                 edgeFlagArray[i] = (edgeFlags != null) ? edgeFlags.get(i) : true;
-            }
         }
 
         // Compute the average of the cartesian points.
         Vec4 centerPoint = Vec4.computeAveragePoint(Arrays.asList(points));
 
         // Test whether the polygon is closed. If it is not closed, repeat the first vertex.
-        if (!points[0].equals(points[locationCount - 1])) {
+        if (!points[0].equals(points[locationCount - 1]))
+        {
             points[locationCount] = points[0];
-            if (edgeFlagArray != null) {
+            if (edgeFlagArray != null)
                 edgeFlagArray[locationCount] = edgeFlagArray[0];
-            }
 
             locationCount++;
         }
@@ -392,10 +439,11 @@ public class Polygon extends AbstractAirspace {
         // of the points and oriented with the globe surface.
         Position centerPos = globe.computePositionFromEllipsoidalPoint(centerPoint);
         Matrix tx = globe.computeEllipsoidalOrientationAtPosition(centerPos.latitude, centerPos.longitude,
-                centerPos.elevation);
+            centerPos.elevation);
         Matrix txInv = tx.getInverse();
         // Map the cartesian points to a local coordinate space.
-        for (int i = 0; i < locationCount; i++) {
+        for (int i = 0; i < locationCount; i++)
+        {
             points[i] = points[i].transformBy4(txInv);
         }
 
@@ -404,8 +452,10 @@ public class Polygon extends AbstractAirspace {
         return locationCount;
     }
 
-    private void makePolygonVertices(int count, Vec4[] points, float[] vertices) {
-        for (int i = 0; i < count; i++) {
+    private void makePolygonVertices(int count, Vec4[] points, float[] vertices)
+    {
+        for (int i = 0; i < count; i++)
+        {
             int index = 3 * i;
             vertices[index] = (float) points[i].x;
             vertices[index + 1] = (float) points[i].y;
@@ -416,31 +466,37 @@ public class Polygon extends AbstractAirspace {
     //**************************************************************//
     //********************  Polygon  ******************//
     //**************************************************************//
-    protected static class PolygonGeometry implements Cacheable {
 
+    protected static class PolygonGeometry implements Cacheable
+    {
         private Geometry fillIndexGeometry;
         private Geometry outlineIndexGeometry;
         private Geometry vertexGeometry;
 
-        public PolygonGeometry() {
+        public PolygonGeometry()
+        {
             this.fillIndexGeometry = new Geometry();
             this.outlineIndexGeometry = new Geometry();
             this.vertexGeometry = new Geometry();
         }
 
-        public Geometry getFillIndexGeometry() {
+        public Geometry getFillIndexGeometry()
+        {
             return this.fillIndexGeometry;
         }
 
-        public Geometry getOutlineIndexGeometry() {
+        public Geometry getOutlineIndexGeometry()
+        {
             return this.outlineIndexGeometry;
         }
 
-        public Geometry getVertexGeometry() {
+        public Geometry getVertexGeometry()
+        {
             return this.vertexGeometry;
         }
 
-        public long getSizeInBytes() {
+        public long getSizeInBytes()
+        {
             long sizeInBytes = 0L;
             sizeInBytes += (this.fillIndexGeometry != null) ? this.fillIndexGeometry.getSizeInBytes() : 0L;
             sizeInBytes += (this.outlineIndexGeometry != null) ? this.outlineIndexGeometry.getSizeInBytes() : 0L;
@@ -451,31 +507,35 @@ public class Polygon extends AbstractAirspace {
     }
 
     private PolygonGeometry getPolygonGeometry(DrawContext dc, List<LatLon> locations, List<Boolean> edgeFlags,
-            double[] altitudes, boolean[] terrainConformant,
-            boolean enableCaps, int subdivisions,
-            Vec4 referenceCenter) {
+        double[] altitudes, boolean[] terrainConformant,
+        boolean enableCaps, int subdivisions,
+        Vec4 referenceCenter)
+    {
         Object cacheKey = new Geometry.CacheKey(dc.getGlobe(), this.getClass(), "Polygon",
-                locations, edgeFlags, altitudes[0], altitudes[1], terrainConformant[0], terrainConformant[1],
-                enableCaps, subdivisions, referenceCenter);
+            locations, edgeFlags, altitudes[0], altitudes[1], terrainConformant[0], terrainConformant[1],
+            enableCaps, subdivisions, referenceCenter);
 
         // Wrap geometry creation in a try/catch block. We do this to catch and handle OutOfMemoryErrors caused during
         // tessellation of the polygon vertices. If the polygon cannot be tessellated, we replace the polygon's
         // locations with an empty list to prevent subsequent tessellation attempts, and to avoid rendering a misleading
         // representation by omitting any part of the geometry.
-        try {
+        try
+        {
             PolygonGeometry geom = (PolygonGeometry) this.getGeometryCache().getObject(cacheKey);
-            if (geom == null || this.isExpired(dc, geom.getVertexGeometry())) {
-                if (geom == null) {
+            if (geom == null || this.isExpired(dc, geom.getVertexGeometry()))
+            {
+                if (geom == null)
                     geom = new PolygonGeometry();
-                }
                 this.makePolygon(dc, locations, edgeFlags, altitudes, terrainConformant, enableCaps, subdivisions,
-                        referenceCenter, geom);
+                    referenceCenter, geom);
                 this.updateExpiryCriteria(dc, geom.getVertexGeometry());
                 this.getGeometryCache().add(cacheKey, geom);
             }
 
             return geom;
-        } catch (OutOfMemoryError e) {
+        }
+        catch (OutOfMemoryError e)
+        {
             String message = Logging.getMessage("generic.ExceptionWhileTessellating", this);
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
 
@@ -487,7 +547,8 @@ public class Polygon extends AbstractAirspace {
         }
     }
 
-    protected void handleUnsuccessfulGeometryCreation() {
+    protected void handleUnsuccessfulGeometryCreation()
+    {
         // If creating the polygon geometry was unsuccessful, we modify the polygon to avoid any additional creation
         // attempts, and free any resources that the polygon won't use. This is done to gracefully handle
         // OutOfMemoryErrors throws while tessellating the polygon geometry.
@@ -500,35 +561,35 @@ public class Polygon extends AbstractAirspace {
     }
 
     private void drawPolygonFill(DrawContext dc, List<LatLon> locations, List<Boolean> edgeFlags,
-            double[] altitudes, boolean[] terrainConformant,
-            boolean enableCaps, int subdivisions,
-            Vec4 referenceCenter) {
+        double[] altitudes, boolean[] terrainConformant,
+        boolean enableCaps, int subdivisions,
+        Vec4 referenceCenter)
+    {
         PolygonGeometry geom = this.getPolygonGeometry(dc, locations, edgeFlags, altitudes, terrainConformant,
-                enableCaps, subdivisions, referenceCenter);
-        if (geom != null) {
+            enableCaps, subdivisions, referenceCenter);
+        if (geom != null)
             this.drawGeometry(dc, geom.getFillIndexGeometry(), geom.getVertexGeometry());
-        }
     }
 
     private void drawPolygonOutline(DrawContext dc, List<LatLon> locations, List<Boolean> edgeFlags,
-            double[] altitudes, boolean[] terrainConformant,
-            boolean enableCaps, int subdivisions,
-            Vec4 referenceCenter) {
+        double[] altitudes, boolean[] terrainConformant,
+        boolean enableCaps, int subdivisions,
+        Vec4 referenceCenter)
+    {
         PolygonGeometry geom = this.getPolygonGeometry(dc, locations, edgeFlags, altitudes, terrainConformant,
-                enableCaps, subdivisions, referenceCenter);
-        if (geom != null) {
+            enableCaps, subdivisions, referenceCenter);
+        if (geom != null)
             this.drawGeometry(dc, geom.getOutlineIndexGeometry(), geom.getVertexGeometry());
-        }
     }
 
     private void makePolygon(DrawContext dc, List<LatLon> locations, List<Boolean> edgeFlags,
-            double[] altitudes, boolean[] terrainConformant,
-            boolean enableCaps, int subdivisions,
-            Vec4 referenceCenter,
-            PolygonGeometry dest) {
-        if (locations.size() == 0) {
+        double[] altitudes, boolean[] terrainConformant,
+        boolean enableCaps, int subdivisions,
+        Vec4 referenceCenter,
+        PolygonGeometry dest)
+    {
+        if (locations.size() == 0)
             return;
-        }
 
         GeometryBuilder gb = this.getGeometryBuilder();
 
@@ -536,12 +597,13 @@ public class Polygon extends AbstractAirspace {
         Boolean[] polyEdgeFlags = new Boolean[locations.size() + 1];
         Matrix[] polyTransform = new Matrix[1];
         int polyCount = this.computeEllipsoidalPolygon(dc.getGlobe(), locations, edgeFlags, polyPoints, polyEdgeFlags,
-                polyTransform);
+            polyTransform);
 
         // Compute the winding order of the planar cartesian points. If the order is not counter-clockwise, then
         // reverse the locations and points ordering.
         int winding = gb.computePolygonWindingOrder2(0, polyCount, polyPoints);
-        if (winding != GeometryBuilder.COUNTER_CLOCKWISE) {
+        if (winding != GeometryBuilder.COUNTER_CLOCKWISE)
+        {
             gb.reversePoints(0, polyCount, polyPoints);
             gb.reversePoints(0, polyCount, polyEdgeFlags);
         }
@@ -562,16 +624,19 @@ public class Polygon extends AbstractAirspace {
         outlineIndexCount += this.getEdgeOutlineIndexCount(polyCount, subdivisions, polyEdgeFlags);
         vertexCount += this.getEdgeVertexCount(polyCount, subdivisions);
 
-        if (enableCaps) {
+        if (enableCaps)
+        {
             ita = gb.tessellatePolygon2(0, polyCount, polyVertices);
-            for (int i = 0; i < subdivisions; i++) {
+            for (int i = 0; i < subdivisions; i++)
+            {
                 gb.subdivideIndexedTriangleArray(ita);
             }
 
             fillIndexCount += ita.getIndexCount();
             vertexCount += ita.getVertexCount();
             // Bottom cap isn't drawn if airspace is collapsed.
-            if (!this.isAirspaceCollapsed()) {
+            if (!this.isAirspaceCollapsed())
+            {
                 fillIndexCount += ita.getIndexCount();
                 vertexCount += ita.getVertexCount();
             }
@@ -587,21 +652,23 @@ public class Polygon extends AbstractAirspace {
         int vertexPos = 0;
 
         this.makeEdge(dc, polyCount, polyVertices, polyEdgeFlags, altitudes, terrainConformant, subdivisions,
-                GeometryBuilder.OUTSIDE, polyTransform[0], referenceCenter,
-                fillIndexPos, fillIndices, outlineIndexPos, outlineIndices, vertexPos, vertices, normals);
+            GeometryBuilder.OUTSIDE, polyTransform[0], referenceCenter,
+            fillIndexPos, fillIndices, outlineIndexPos, outlineIndices, vertexPos, vertices, normals);
         fillIndexPos += this.getEdgeFillIndexCount(polyCount, subdivisions);
         outlineIndexPos += this.getEdgeOutlineIndexCount(polyCount, subdivisions, polyEdgeFlags);
         vertexPos += this.getEdgeVertexCount(polyCount, subdivisions);
 
-        if (enableCaps) {
+        if (enableCaps)
+        {
             this.makeCap(dc, ita, altitudes[1], terrainConformant[1], GeometryBuilder.OUTSIDE, polyTransform[0],
-                    referenceCenter, fillIndexPos, fillIndices, vertexPos, vertices, normals);
+                referenceCenter, fillIndexPos, fillIndices, vertexPos, vertices, normals);
             fillIndexPos += ita.getIndexCount();
             vertexPos += ita.getVertexCount();
             // Bottom cap isn't drawn if airspace is collapsed.
-            if (!this.isAirspaceCollapsed()) {
+            if (!this.isAirspaceCollapsed())
+            {
                 this.makeCap(dc, ita, altitudes[0], terrainConformant[0], GeometryBuilder.INSIDE, polyTransform[0],
-                        referenceCenter, fillIndexPos, fillIndices, vertexPos, vertices, normals);
+                    referenceCenter, fillIndexPos, fillIndices, vertexPos, vertices, normals);
                 fillIndexPos += ita.getIndexCount();
                 vertexPos += ita.getVertexCount();
             }
@@ -614,16 +681,17 @@ public class Polygon extends AbstractAirspace {
     }
 
     protected void makeTessellatedLocations(Globe globe, int subdivisions, List<LatLon> locations,
-            List<LatLon> tessellatedLocations) {
+        List<LatLon> tessellatedLocations)
+    {
         ArrayList<Vec4> points = new ArrayList<Vec4>();
-        for (LatLon ll : locations) {
+        for (LatLon ll : locations)
+        {
             points.add(globe.computeEllipsoidalPointFromPosition(ll.latitude, ll.longitude, 0));
         }
 
         //noinspection StringEquality
-        if (WWMath.computeWindingOrderOfLocations(locations) != AVKey.COUNTER_CLOCKWISE) {
+        if (WWMath.computeWindingOrderOfLocations(locations) != AVKey.COUNTER_CLOCKWISE)
             Collections.reverse(locations);
-        }
 
         Vec4 centerPoint = Vec4.computeAveragePoint(points);
         Position centerPos = globe.computePositionFromEllipsoidalPoint(centerPoint);
@@ -631,19 +699,22 @@ public class Polygon extends AbstractAirspace {
 
         int numPoints = points.size();
         float[] coords = new float[3 * numPoints];
-        for (int i = 0; i < numPoints; i++) {
+        for (int i = 0; i < numPoints; i++)
+        {
             points.get(i).toFloatArray(coords, 3 * i, 3);
         }
 
         GeometryBuilder gb = new GeometryBuilder();
         GeometryBuilder.IndexedTriangleArray tessellatedPoints = gb.tessellatePolygon(0, numPoints, coords,
-                surfaceNormal);
+            surfaceNormal);
 
-        for (int i = 0; i < subdivisions; i++) {
+        for (int i = 0; i < subdivisions; i++)
+        {
             gb.subdivideIndexedTriangleArray(tessellatedPoints);
         }
 
-        for (int i = 0; i < tessellatedPoints.getVertexCount(); i++) {
+        for (int i = 0; i < tessellatedPoints.getVertexCount(); i++)
+        {
             Vec4 v = Vec4.fromFloatArray(tessellatedPoints.getVertices(), 3 * i, 3);
             tessellatedLocations.add(globe.computePositionFromEllipsoidalPoint(v));
         }
@@ -652,71 +723,79 @@ public class Polygon extends AbstractAirspace {
     //**************************************************************//
     //********************  Polygon Edge        ********************//
     //**************************************************************//
-    private int getEdgeFillIndexCount(int count, int subdivisions) {
+
+    private int getEdgeFillIndexCount(int count, int subdivisions)
+    {
         return (count - 1) * this.getSectionFillIndexCount(subdivisions);
     }
 
-    private int getEdgeOutlineIndexCount(int count, int subdivisions, Boolean[] edgeFlags) {
+    private int getEdgeOutlineIndexCount(int count, int subdivisions, Boolean[] edgeFlags)
+    {
         int sum = 0;
-        for (int i = 0; i < count - 1; i++) {
+        for (int i = 0; i < count - 1; i++)
+        {
             sum += this.getSectionOutlineIndexCount(subdivisions, edgeFlags[i], edgeFlags[i + 1]);
         }
 
         return sum;
     }
 
-    private int getEdgeVertexCount(int count, int subdivisions) {
+    private int getEdgeVertexCount(int count, int subdivisions)
+    {
         return (count - 1) * this.getSectionVertexCount(subdivisions);
     }
 
-    private int getSectionFillIndexCount(int subdivisions) {
+    private int getSectionFillIndexCount(int subdivisions)
+    {
         GeometryBuilder gb = this.getGeometryBuilder();
         return 6 * (gb.getSubdivisionPointsVertexCount(subdivisions) - 1);
     }
 
-    private int getSectionOutlineIndexCount(int subdivisions, boolean beginEdgeFlag, boolean endEdgeFlag) {
+    private int getSectionOutlineIndexCount(int subdivisions, boolean beginEdgeFlag, boolean endEdgeFlag)
+    {
         GeometryBuilder gb = this.getGeometryBuilder();
         int count = 4 * (gb.getSubdivisionPointsVertexCount(subdivisions) - 1);
-        if (beginEdgeFlag) {
+        if (beginEdgeFlag)
             count += 2;
-        }
-        if (endEdgeFlag) {
+        if (endEdgeFlag)
             count += 2;
-        }
 
         return count;
     }
 
-    private int getSectionVertexCount(int subdivisions) {
+    private int getSectionVertexCount(int subdivisions)
+    {
         GeometryBuilder gb = this.getGeometryBuilder();
         return 2 * gb.getSubdivisionPointsVertexCount(subdivisions);
     }
 
     private void makeEdge(DrawContext dc, int count, float[] locations, Boolean[] edgeFlags,
-            double[] altitudes, boolean[] terrainConformant,
-            int subdivisions, int orientation,
-            Matrix locationTransform,
-            Vec4 referenceCenter,
-            int fillIndexPos, int[] fillIndices,
-            int outlineIndexPos, int[] outlineIndices,
-            int vertexPos, float[] vertices, float[] normals) {
+        double[] altitudes, boolean[] terrainConformant,
+        int subdivisions, int orientation,
+        Matrix locationTransform,
+        Vec4 referenceCenter,
+        int fillIndexPos, int[] fillIndices,
+        int outlineIndexPos, int[] outlineIndices,
+        int vertexPos, float[] vertices, float[] normals)
+    {
         GeometryBuilder gb = this.getGeometryBuilder();
         gb.setOrientation(orientation);
 
         int sectionFillIndexCount = this.getSectionFillIndexCount(subdivisions);
         int sectionVertexCount = this.getSectionVertexCount(subdivisions);
 
-        for (int i = 0; i < count - 1; i++) {
+        for (int i = 0; i < count - 1; i++)
+        {
             boolean beginEdgeFlag = edgeFlags[i];
             boolean endEdgeFlag = edgeFlags[i + 1];
 
             this.makeSectionFillIndices(subdivisions, vertexPos, fillIndexPos, fillIndices);
             this.makeSectionOutlineIndices(subdivisions, vertexPos, outlineIndexPos, outlineIndices,
-                    beginEdgeFlag, endEdgeFlag);
+                beginEdgeFlag, endEdgeFlag);
             this.makeSectionVertices(dc, i, locations, altitudes, terrainConformant, subdivisions,
-                    locationTransform, referenceCenter, vertexPos, vertices);
+                locationTransform, referenceCenter, vertexPos, vertices);
             gb.makeIndexedTriangleArrayNormals(fillIndexPos, sectionFillIndexCount, fillIndices,
-                    vertexPos, sectionVertexCount, vertices, normals);
+                vertexPos, sectionVertexCount, vertices, normals);
 
             fillIndexPos += sectionFillIndexCount;
             outlineIndexPos += this.getSectionOutlineIndexCount(subdivisions, beginEdgeFlag, endEdgeFlag);
@@ -724,13 +803,15 @@ public class Polygon extends AbstractAirspace {
         }
     }
 
-    private void makeSectionFillIndices(int subdivisions, int vertexPos, int indexPos, int[] indices) {
+    private void makeSectionFillIndices(int subdivisions, int vertexPos, int indexPos, int[] indices)
+    {
         GeometryBuilder gb = this.getGeometryBuilder();
         int count = gb.getSubdivisionPointsVertexCount(subdivisions);
 
         int index = indexPos;
         int pos, nextPos;
-        for (int i = 0; i < count - 1; i++) {
+        for (int i = 0; i < count - 1; i++)
+        {
             pos = vertexPos + 2 * i;
             nextPos = vertexPos + 2 * (i + 1);
             indices[index++] = pos + 1;
@@ -743,20 +824,23 @@ public class Polygon extends AbstractAirspace {
     }
 
     private void makeSectionOutlineIndices(int subdivisions, int vertexPos, int indexPos, int[] indices,
-            boolean beginEdgeFlag, boolean endEdgeFlag) {
+        boolean beginEdgeFlag, boolean endEdgeFlag)
+    {
         GeometryBuilder gb = this.getGeometryBuilder();
         int count = gb.getSubdivisionPointsVertexCount(subdivisions);
 
         int index = indexPos;
         int pos, nextPos;
 
-        if (beginEdgeFlag) {
+        if (beginEdgeFlag)
+        {
             pos = vertexPos;
             indices[index++] = pos;
             indices[index++] = pos + 1;
         }
 
-        for (int i = 0; i < count - 1; i++) {
+        for (int i = 0; i < count - 1; i++)
+        {
             pos = vertexPos + 2 * i;
             nextPos = vertexPos + 2 * (i + 1);
             indices[index++] = pos;
@@ -765,7 +849,8 @@ public class Polygon extends AbstractAirspace {
             indices[index++] = nextPos + 1;
         }
 
-        if (endEdgeFlag) {
+        if (endEdgeFlag)
+        {
             pos = vertexPos + 2 * (count - 1);
             indices[index++] = pos;
             indices[index] = pos + 1;
@@ -773,11 +858,12 @@ public class Polygon extends AbstractAirspace {
     }
 
     private void makeSectionVertices(DrawContext dc, int locationPos, float[] locations,
-            double[] altitude, boolean[] terrainConformant,
-            int subdivisions,
-            Matrix locationTransform,
-            Vec4 referenceCenter,
-            int vertexPos, float[] vertices) {
+        double[] altitude, boolean[] terrainConformant,
+        int subdivisions,
+        Matrix locationTransform,
+        Vec4 referenceCenter,
+        int vertexPos, float[] vertices)
+    {
         GeometryBuilder gb = this.getGeometryBuilder();
         int numPoints = gb.getSubdivisionPointsVertexCount(subdivisions);
 
@@ -787,19 +873,21 @@ public class Polygon extends AbstractAirspace {
 
         float[] locationVerts = new float[3 * numPoints];
         gb.makeSubdivisionPoints(
-                locations[index1], locations[index1 + 1], locations[index1 + 2],
-                locations[index2], locations[index2 + 1], locations[index2 + 2],
-                subdivisions, locationVerts);
+            locations[index1], locations[index1 + 1], locations[index1 + 2],
+            locations[index2], locations[index2 + 1], locations[index2 + 2],
+            subdivisions, locationVerts);
 
-        for (int i = 0; i < numPoints; i++) {
+        for (int i = 0; i < numPoints; i++)
+        {
             int index = 3 * i;
             Vec4 vec = new Vec4(locationVerts[index], locationVerts[index + 1], locationVerts[index + 2]);
             vec = vec.transformBy4(locationTransform);
             Position pos = globe.computePositionFromEllipsoidalPoint(vec); // ellipsoidal-coordinate point and transform
 
-            for (int j = 0; j < 2; j++) {
+            for (int j = 0; j < 2; j++)
+            {
                 vec = this.computePointFromPosition(dc, pos.getLatitude(), pos.getLongitude(), altitude[j],
-                        terrainConformant[j]); // final model-coordinate point
+                    terrainConformant[j]); // final model-coordinate point
 
                 index = 2 * i + j;
                 index = 3 * (vertexPos + index);
@@ -813,13 +901,15 @@ public class Polygon extends AbstractAirspace {
     //**************************************************************//
     //********************  Polygon Cap         ********************//
     //**************************************************************//
+
     private void makeCap(DrawContext dc, GeometryBuilder.IndexedTriangleArray ita,
-            double altitude, boolean terrainConformant,
-            int orientation,
-            Matrix locationTransform,
-            Vec4 referenceCenter,
-            int indexPos, int[] indices,
-            int vertexPos, float[] vertices, float[] normals) {
+        double altitude, boolean terrainConformant,
+        int orientation,
+        Matrix locationTransform,
+        Vec4 referenceCenter,
+        int indexPos, int[] indices,
+        int vertexPos, float[] vertices, float[] normals)
+    {
         GeometryBuilder gb = this.getGeometryBuilder();
         Globe globe = dc.getGlobe();
 
@@ -829,16 +919,17 @@ public class Polygon extends AbstractAirspace {
         float[] locationVerts = ita.getVertices();
 
         this.copyIndexArray(indexCount, (orientation == GeometryBuilder.INSIDE), locationIndices,
-                vertexPos, indexPos, indices);
+            vertexPos, indexPos, indices);
 
-        for (int i = 0; i < vertexCount; i++) {
+        for (int i = 0; i < vertexCount; i++)
+        {
             int index = 3 * i;
             Vec4 vec = new Vec4(locationVerts[index], locationVerts[index + 1], locationVerts[index + 2]);
             vec = vec.transformBy4(locationTransform);
 
             Position pos = globe.computePositionFromEllipsoidalPoint(vec); // ellipsoidal-coordinate point and transform
             vec = this.computePointFromPosition(dc, pos.getLatitude(), pos.getLongitude(), altitude,
-                    terrainConformant); // final model-coordinate point
+                terrainConformant); // final model-coordinate point
 
             index = 3 * (vertexPos + i);
             vertices[index] = (float) (vec.x - referenceCenter.x);
@@ -847,17 +938,22 @@ public class Polygon extends AbstractAirspace {
         }
 
         gb.makeIndexedTriangleArrayNormals(indexPos, indexCount, indices, vertexPos, vertexCount, vertices,
-                normals);
+            normals);
     }
 
     private void copyIndexArray(int indexCount, boolean reverseWinding, int[] indices,
-            int destVertexPos, int destIndexPos, int[] dest) {
-        for (int i = 0; i < indexCount; i += 3) {
-            if (reverseWinding) {
+        int destVertexPos, int destIndexPos, int[] dest)
+    {
+        for (int i = 0; i < indexCount; i += 3)
+        {
+            if (reverseWinding)
+            {
                 dest[destIndexPos + i] = destVertexPos + indices[i + 2];
                 dest[destIndexPos + i + 1] = destVertexPos + indices[i + 1];
                 dest[destIndexPos + i + 2] = destVertexPos + indices[i];
-            } else {
+            }
+            else
+            {
                 dest[destIndexPos + i] = destVertexPos + indices[i];
                 dest[destIndexPos + i + 1] = destVertexPos + indices[i + 1];
                 dest[destIndexPos + i + 2] = destVertexPos + indices[i + 2];
@@ -868,29 +964,29 @@ public class Polygon extends AbstractAirspace {
     //**************************************************************//
     //********************  END Geometry Rendering  ****************//
     //**************************************************************//
+
     @Override
-    protected void doGetRestorableState(RestorableSupport rs, RestorableSupport.StateObject context) {
+    protected void doGetRestorableState(RestorableSupport rs, RestorableSupport.StateObject context)
+    {
         super.doGetRestorableState(rs, context);
 
         rs.addStateValueAsBoolean(context, "enableCaps", this.enableCaps);
 
-        if (this.locations != null) {
+        if (this.locations != null)
             rs.addStateValueAsLatLonList(context, "locations", this.locations);
-        }
     }
 
     @Override
-    protected void doRestoreState(RestorableSupport rs, RestorableSupport.StateObject context) {
+    protected void doRestoreState(RestorableSupport rs, RestorableSupport.StateObject context)
+    {
         super.doRestoreState(rs, context);
 
         Boolean booleanState = rs.getStateValueAsBoolean(context, "enableCaps");
-        if (booleanState != null) {
+        if (booleanState != null)
             this.setEnableCaps(booleanState);
-        }
 
         List<LatLon> locations = rs.getStateValueAsLatLonList(context, "locations");
-        if (locations != null) {
+        if (locations != null)
             this.setLocations(locations);
-        }
     }
 }

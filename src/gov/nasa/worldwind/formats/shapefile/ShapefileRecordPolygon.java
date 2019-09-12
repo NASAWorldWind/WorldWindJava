@@ -22,26 +22,24 @@ import java.util.*;
  * rings defining holes in the polygon have a counter-clockwise winding order.
  * <p>
  * Polygons may have optional z-coordinates or m-coordinates that accompany each coordinate pair. If a Polygon has
- * z-coordinates, then <code>{@link #getZValues()}</code> returns a non-<code>null</code> array of values. If a Polygon
+ * z-coordinates, then <code>{@link #getZValues()}</code> returns a non-<code>null</code> array of values.  If a Polygon
  * has m-coordinates, then <code>{@link #getMValues()}</code> returns a non-<code>null</code> array of values.
  *
  * @author Patrick Murris
  * @version $Id: ShapefileRecordPolygon.java 2303 2014-09-14 22:33:36Z dcollins $
  */
-public class ShapefileRecordPolygon extends ShapefileRecordPolyline {
-
-    /**
-     * {@inheritDoc}
-     */
-    public ShapefileRecordPolygon(Shapefile shapeFile, ByteBuffer buffer) {
+public class ShapefileRecordPolygon extends ShapefileRecordPolyline
+{
+    /** {@inheritDoc} */
+    public ShapefileRecordPolygon(Shapefile shapeFile, ByteBuffer buffer)
+    {
         super(shapeFile, buffer);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
-    public boolean isPolygonRecord() {
+    public boolean isPolygonRecord()
+    {
         return true;
     }
 
@@ -51,18 +49,21 @@ public class ShapefileRecordPolygon extends ShapefileRecordPolyline {
      *
      * @param xmlWriter XML writer to receive the generated KML.
      *
-     * @throws javax.xml.stream.XMLStreamException If an exception occurs while writing the KML
+     * @throws javax.xml.stream.XMLStreamException
+     *                             If an exception occurs while writing the KML
      * @throws java.io.IOException If an exception occurs while exporting the data.
      */
     @Override
-    public void exportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
+    public void exportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException
+    {
         Iterable<? extends LatLon> outerBoundary = null;
         List<Iterable<? extends LatLon>> innerBoundaries = new ArrayList<Iterable<? extends LatLon>>();
 
         // If the polygon has a "height" attribute, export as an extruded polygon.
         Double height = ShapefileUtils.extractHeightAttribute(this);
 
-        for (int i = 0; i < this.getNumberOfParts(); i++) {
+        for (int i = 0; i < this.getNumberOfParts(); i++)
+        {
             // Although the shapefile spec says that inner and outer boundaries can be listed in any order, it's
             // assumed here that inner boundaries are at least listed adjacent to their outer boundary, either
             // before or after it. The below code accumulates inner boundaries into the polygon until an
@@ -71,27 +72,35 @@ public class ShapefileRecordPolygon extends ShapefileRecordPolyline {
             // polygon is started.
 
             VecBuffer buffer = this.getCompoundPointBuffer().subBuffer(i);
-            if (WWMath.computeWindingOrderOfLocations(buffer.getLocations()).equals(AVKey.CLOCKWISE)) {
-                if (outerBoundary == null) {
+            if (WWMath.computeWindingOrderOfLocations(buffer.getLocations()).equals(AVKey.CLOCKWISE))
+            {
+                if (outerBoundary == null)
+                {
                     outerBoundary = buffer.getLocations();
-                } else {
+                }
+                else
+                {
                     this.exportPolygonAsKML(xmlWriter, outerBoundary, innerBoundaries, height);
 
                     outerBoundary = this.getCompoundPointBuffer().getLocations();
                     innerBoundaries.clear();
                 }
-            } else {
+            }
+            else
+            {
                 innerBoundaries.add(buffer.getLocations());
             }
         }
 
-        if (outerBoundary != null && outerBoundary.iterator().hasNext()) {
+        if (outerBoundary != null && outerBoundary.iterator().hasNext())
+        {
             this.exportPolygonAsKML(xmlWriter, outerBoundary, innerBoundaries, height);
         }
     }
 
     protected void exportPolygonAsKML(XMLStreamWriter xmlWriter, Iterable<? extends LatLon> outerBoundary,
-            List<Iterable<? extends LatLon>> innerBoundaries, Double height) throws IOException, XMLStreamException {
+        List<Iterable<? extends LatLon>> innerBoundaries, Double height) throws IOException, XMLStreamException
+    {
         xmlWriter.writeStartElement("Placemark");
         xmlWriter.writeStartElement("name");
         xmlWriter.writeCharacters(Integer.toString(this.getRecordNumber()));
@@ -100,13 +109,16 @@ public class ShapefileRecordPolygon extends ShapefileRecordPolyline {
         xmlWriter.writeStartElement("Polygon");
 
         String altitudeMode;
-        if (height != null) {
+        if (height != null)
+        {
             xmlWriter.writeStartElement("extrude");
             xmlWriter.writeCharacters("1");
             xmlWriter.writeEndElement();
 
             altitudeMode = "absolute";
-        } else {
+        }
+        else
+        {
             altitudeMode = "clampToGround";
             height = 0.0;
         }
@@ -119,7 +131,8 @@ public class ShapefileRecordPolygon extends ShapefileRecordPolyline {
         KMLExportUtil.exportBoundaryAsLinearRing(xmlWriter, outerBoundary, height);
         xmlWriter.writeEndElement(); // outerBoundaryIs
 
-        for (Iterable<? extends LatLon> innerBoundary : innerBoundaries) {
+        for (Iterable<? extends LatLon> innerBoundary : innerBoundaries)
+        {
             xmlWriter.writeStartElement("innerBoundaryIs");
             KMLExportUtil.exportBoundaryAsLinearRing(xmlWriter, innerBoundary, height);
             xmlWriter.writeEndElement(); // innerBoundaryIs

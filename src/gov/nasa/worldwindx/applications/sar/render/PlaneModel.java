@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.sar.render;
 
 import gov.nasa.worldwind.geom.Angle;
@@ -17,9 +18,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Renders a plane model at a position with a given heading. The plane is parallel to the ground. An optional 'shadow'
- * shape is rendered on the ground.
- *
+ * Renders a plane model at a position with a given heading. The plane is parallel to the ground.
+ * An optional 'shadow' shape is rendered on the ground.
  * @author Patrick Murris
  * @version $Id: PlaneModel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
@@ -41,24 +41,27 @@ public class PlaneModel implements Renderable {
     /**
      * Renders a plane model with the defaul dimensions and color.
      */
-    public PlaneModel() {
+    public PlaneModel()
+    {
     }
 
     /**
      * Renders a plane model with the specified dimensions and color.
-     *
      * @param length the plane length in meters
      * @param width the plane width in meter.
      * @param color the plane color.
      */
-    public PlaneModel(Double length, Double width, Color color) {
+    public PlaneModel(Double length, Double width, Color color)
+    {
         this.length = length;
         this.width = width;
         this.color = color;
     }
 
-    public void setPosition(Position pos) {
-        if (pos == null) {
+    public void setPosition(Position pos)
+    {
+        if (pos == null)
+        {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -67,12 +70,15 @@ public class PlaneModel implements Renderable {
         clearRenderables();
     }
 
-    public Position getPosition() {
+    public Position getPosition()
+    {
         return this.position;
     }
 
-    public void setHeading(Angle head) {
-        if (head == null) {
+    public void setHeading(Angle head)
+    {
+        if (head == null)
+        {
             String msg = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -81,58 +87,66 @@ public class PlaneModel implements Renderable {
         clearRenderables();
     }
 
-    public Angle getHeading() {
+    public Angle getHeading()
+    {
         return this.heading;
     }
 
-    public void setShowShadow(boolean state) {
+    public void setShowShadow(boolean state)
+    {
         this.showShadow = state;
     }
 
-    public boolean getShowShadow() {
+    public boolean getShowShadow()
+    {
         return this.showShadow;
     }
 
-    public double getShadowScale() {
+    public double getShadowScale()
+    {
         return this.shadowScale;
     }
 
-    public void setShadowScale(double shadowScale) {
+    public void setShadowScale(double shadowScale)
+    {
         this.shadowScale = shadowScale;
         clearRenderables();
     }
 
-    public Color getShadowColor() {
+    public Color getShadowColor()
+    {
         return this.shadowColor;
     }
 
-    public void setShadowColor(Color shadowColor) {
+    public void setShadowColor(Color shadowColor)
+    {
         this.shadowColor = shadowColor;
         clearRenderables();
     }
 
-    public void render(DrawContext dc) {
-        if (dc == null) {
+    public void render(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String msg = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        if (this.position == null || this.heading == null) {
+        if( this.position == null || this.heading == null)
             return;
-        }
 
         //renderPlane(dc);
-        if (this.planeModel == null) {
+
+        if (this.planeModel == null)
             createRenderables(dc);
-        }
 
         this.planeModel.render(dc);
-        if (this.showShadow && this.shadowModel != null) {
+        if (this.showShadow && this.shadowModel != null)
             this.shadowModel.render(dc);
-        }
     }
 
-    private void createRenderables(DrawContext dc) {
+    private void createRenderables(DrawContext dc)
+    {
         ArrayList<LatLon> positions = computePlaneShape(dc, this.width, this.length);
         this.planeModel = new Polyline(positions, this.position.getElevation());
         this.planeModel.setPathType(Polyline.LINEAR);
@@ -147,12 +161,14 @@ public class PlaneModel implements Renderable {
         this.shadowModel.setColor(this.shadowColor);
     }
 
-    private void clearRenderables() {
+    private void clearRenderables()
+    {
         this.planeModel = null;
         this.shadowModel = null;
     }
 
-    private ArrayList<LatLon> computePlaneShape(DrawContext dc, double width, double length) {
+    private ArrayList<LatLon> computePlaneShape(DrawContext dc, double width, double length)
+    {
         ArrayList<LatLon> positions = new ArrayList<LatLon>();
         LatLon center = this.position;
         double hl = length / 2;
@@ -174,7 +190,7 @@ public class PlaneModel implements Renderable {
 
         return positions;
     }
-    /*
+/*
     private void renderPlane(DrawContext dc)
     {
         GL gl = dc.getGL();
@@ -208,5 +224,5 @@ public class PlaneModel implements Renderable {
         gl.glPopAttrib();
 
     }
-     */
+*/
 }

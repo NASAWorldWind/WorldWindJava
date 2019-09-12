@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.geom.Position;
@@ -15,11 +16,13 @@ import gov.nasa.worldwind.render.GlobeAnnotation;
  * @author tag
  * @version $Id: GlobeAnnotationExample.java 2134 2014-07-09 23:26:32Z tgaskins $
  */
-public class GlobeAnnotationExample extends ApplicationTemplate {
+public class GlobeAnnotationExample extends ApplicationTemplate
+{
+    protected static class AppFrame extends ApplicationTemplate.AppFrame
+    {
 
-    protected static class AppFrame extends ApplicationTemplate.AppFrame {
-
-        public AppFrame() {
+        public AppFrame()
+        {
             RenderableLayer layer = new RenderableLayer();
             layer.setName("Annotation");
             insertBeforePlacenames(this.getWwd(), layer);
@@ -30,7 +33,8 @@ public class GlobeAnnotationExample extends ApplicationTemplate {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Globe Annotation", AppFrame.class);
     }
 }

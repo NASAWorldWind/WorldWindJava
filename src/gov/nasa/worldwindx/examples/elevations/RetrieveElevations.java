@@ -25,19 +25,20 @@ import java.util.*;
  * @author garakl
  * @version $Id: RetrieveElevations.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class RetrieveElevations extends ApplicationTemplate {
-
+public class RetrieveElevations extends ApplicationTemplate
+{
     public static final String ACTION_COMMAND_BUTTON1 = "ActionCommand_Button1";
     public static final String ACTION_COMMAND_BUTTON2 = "ActionCommand_Button2";
     public static final String ACTION_COMMAND_BUTTON3 = "ActionCommand_Button3";
     public static final String ACTION_COMMAND_VERTICAL_EXAGGERATION = "ActionCommandVerticalExaggeration";
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame {
-
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
         protected ElevationsDemoController controller;
         protected LayerPanel layerPanel;
 
-        public AppFrame() {
+        public AppFrame()
+        {
             // We add our own LayerPanel, but keep the StatusBar from ApplicationTemplate.
             super(true, false, false);
             this.controller = new ElevationsDemoController(this.getWwd());
@@ -47,7 +48,8 @@ public class RetrieveElevations extends ApplicationTemplate {
             this.pack();
         }
 
-        protected void makeComponents() {
+        protected void makeComponents()
+        {
             ((Component) this.getWwd()).setPreferredSize(new Dimension(1024, 768));
 
             JPanel panel = new JPanel(new BorderLayout());
@@ -96,8 +98,10 @@ public class RetrieveElevations extends ApplicationTemplate {
                     labelTable.put(8, new JLabel("8x"));
                     slider.setLabelTable(labelTable);
                     slider.setPaintLabels(true);
-                    slider.addChangeListener(new ChangeListener() {
-                        public void stateChanged(ChangeEvent e) {
+                    slider.addChangeListener(new ChangeListener()
+                    {
+                        public void stateChanged(ChangeEvent e)
+                        {
                             double ve = ((JSlider) e.getSource()).getValue();
                             ActionEvent ae = new ActionEvent(ve, 0, ACTION_COMMAND_VERTICAL_EXAGGERATION);
                             controller.actionPerformed(ae);
@@ -116,31 +120,41 @@ public class RetrieveElevations extends ApplicationTemplate {
         }
     }
 
-    public static class ElevationsDemoController implements ActionListener {
-
+    public static class ElevationsDemoController implements ActionListener
+    {
         protected RetrieveElevations.AppFrame frame;
         // WorldWind stuff.
         protected WorldWindow wwd;
 
-        public ElevationsDemoController(WorldWindow wwd) {
+        public ElevationsDemoController(WorldWindow wwd)
+        {
             this.wwd = wwd;
         }
 
-        public void actionPerformed(ActionEvent e) {
-            if (ACTION_COMMAND_BUTTON1.equalsIgnoreCase(e.getActionCommand())) {
+        public void actionPerformed(ActionEvent e)
+        {
+            if (ACTION_COMMAND_BUTTON1.equalsIgnoreCase(e.getActionCommand()))
+            {
                 this.doActionOnButton1();
-            } else if (ACTION_COMMAND_BUTTON2.equalsIgnoreCase(e.getActionCommand())) {
+            }
+            else if (ACTION_COMMAND_BUTTON2.equalsIgnoreCase(e.getActionCommand()))
+            {
                 this.doActionOnButton2();
-            } else if (ACTION_COMMAND_BUTTON3.equalsIgnoreCase(e.getActionCommand())) {
+            }
+            else if (ACTION_COMMAND_BUTTON3.equalsIgnoreCase(e.getActionCommand()))
+            {
                 this.doActionOnButton3();
-            } else if (ACTION_COMMAND_VERTICAL_EXAGGERATION.equalsIgnoreCase(e.getActionCommand())) {
+            }
+            else if (ACTION_COMMAND_VERTICAL_EXAGGERATION.equalsIgnoreCase(e.getActionCommand()))
+            {
                 Double ve = (Double) e.getSource();
                 this.doSetVerticalExaggeration(ve);
                 this.wwd.redraw();
             }
         }
 
-        public void doActionOnButton1() {
+        public void doActionOnButton1()
+        {
             Logging.logger().info("Zooming to Matterhorn");
 
             View view = this.wwd.getView();
@@ -150,7 +164,8 @@ public class RetrieveElevations extends ApplicationTemplate {
             view.goTo(matterhorn, 5000d);
         }
 
-        public void doActionOnButton2() {
+        public void doActionOnButton2()
+        {
             ArrayList<LatLon> latlons = new ArrayList<LatLon>();
 
             latlons.add(LatLon.fromDegrees(45.50d, -123.3d));
@@ -168,10 +183,11 @@ public class RetrieveElevations extends ApplicationTemplate {
             double targetResolution = Angle.fromDegrees(1d).radians / 3600;
 
             double resolutionAchieved = this.wwd.getModel().getGlobe().getElevationModel().getElevations(
-                    sector, latlons, targetResolution, elevations);
+                sector, latlons, targetResolution, elevations);
 
             StringBuffer sb = new StringBuffer();
-            for (double e : elevations) {
+            for (double e : elevations)
+            {
                 sb.append("\n").append(e);
             }
             sb.append("\nresolutionAchieved = ").append(resolutionAchieved);
@@ -180,7 +196,8 @@ public class RetrieveElevations extends ApplicationTemplate {
             Logging.logger().info(sb.toString());
         }
 
-        public void doActionOnButton3() {
+        public void doActionOnButton3()
+        {
             ArrayList<LatLon> latlons = new ArrayList<LatLon>();
 
             latlons.add(LatLon.fromDegrees(45.50d, -123.3d));
@@ -193,7 +210,8 @@ public class RetrieveElevations extends ApplicationTemplate {
             ElevationModel model = this.wwd.getModel().getGlobe().getElevationModel();
 
             StringBuffer sb = new StringBuffer();
-            for (LatLon ll : latlons) {
+            for (LatLon ll : latlons)
+            {
                 double e = model.getElevation(ll.getLatitude(), ll.getLongitude());
                 sb.append("\n").append(e);
             }
@@ -201,12 +219,14 @@ public class RetrieveElevations extends ApplicationTemplate {
             Logging.logger().info(sb.toString());
         }
 
-        public void doSetVerticalExaggeration(double ve) {
+        public void doSetVerticalExaggeration(double ve)
+        {
             this.wwd.getSceneController().setVerticalExaggeration(ve);
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         start("WorldWind Get Elevations Demo", AppFrame.class);
     }
 }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import com.jogamp.opengl.util.texture.TextureCoords;
@@ -17,8 +18,8 @@ import com.jogamp.opengl.util.texture.TextureCoords;
  * @author tag
  * @version $Id: WWTexture.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface WWTexture {
-
+public interface WWTexture
+{
     /**
      * Returns the texture's image source.
      *

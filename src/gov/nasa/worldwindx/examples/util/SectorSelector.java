@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples.util;
 
 import gov.nasa.worldwind.*;
@@ -27,8 +28,8 @@ import java.awt.event.*;
  * @version $Id: SectorSelector.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 public class SectorSelector extends WWObjectImpl
-        implements SelectListener, MouseListener, MouseMotionListener, RenderingListener {
-
+    implements SelectListener, MouseListener, MouseMotionListener, RenderingListener
+{
     public final static String SECTOR_PROPERTY = "gov.nasa.worldwind.SectorSelector";
 
     protected static final int NONE = 0;
@@ -58,8 +59,10 @@ public class SectorSelector extends WWObjectImpl
     private Position previousPosition = null;
     private Sector previousSector = null;
 
-    public SectorSelector(WorldWindow worldWindow) {
-        if (worldWindow == null) {
+    public SectorSelector(WorldWindow worldWindow)
+    {
+        if (worldWindow == null)
+        {
             String msg = Logging.getMessage("nullValue.WorldWindow");
             Logging.logger().log(java.util.logging.Level.SEVERE, msg);
             throw new IllegalArgumentException(msg);
@@ -72,20 +75,24 @@ public class SectorSelector extends WWObjectImpl
         ((RenderableLayer) this.layer).addRenderable(this.shape);
     }
 
-    protected SectorSelector(WorldWindow worldWindow, RegionShape shape, RenderableLayer rLayer) {
-        if (worldWindow == null) {
+    protected SectorSelector(WorldWindow worldWindow, RegionShape shape, RenderableLayer rLayer)
+    {
+        if (worldWindow == null)
+        {
             String msg = Logging.getMessage("nullValue.WorldWindow");
             Logging.logger().log(java.util.logging.Level.SEVERE, msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (shape == null) {
+        if (shape == null)
+        {
             String msg = Logging.getMessage("nullValue.Shape");
             Logging.logger().log(java.util.logging.Level.SEVERE, msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (rLayer == null) {
+        if (rLayer == null)
+        {
             String msg = Logging.getMessage("nullValue.Layer");
             Logging.logger().log(java.util.logging.Level.SEVERE, msg);
             throw new IllegalArgumentException(msg);
@@ -97,26 +104,27 @@ public class SectorSelector extends WWObjectImpl
         rLayer.addRenderable(this.shape);
     }
 
-    public WorldWindow getWwd() {
+    public WorldWindow getWwd()
+    {
         return wwd;
     }
 
-    public Layer getLayer() {
+    public Layer getLayer()
+    {
         return layer;
     }
 
-    public void enable() {
+    public void enable()
+    {
         this.getShape().setStartPosition(null);
 
         LayerList layers = this.getWwd().getModel().getLayers();
 
-        if (!layers.contains(this.getLayer())) {
+        if (!layers.contains(this.getLayer()))
             layers.add(this.getLayer());
-        }
 
-        if (!this.getLayer().isEnabled()) {
+        if (!this.getLayer().isEnabled())
             this.getLayer().setEnabled(true);
-        }
 
         this.setArmed(true);
 
@@ -128,7 +136,8 @@ public class SectorSelector extends WWObjectImpl
         this.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
     }
 
-    public void disable() {
+    public void disable()
+    {
         this.getWwd().removeRenderingListener(this);
         this.getWwd().removeSelectListener(this);
         this.getWwd().getInputHandler().removeMouseListener(this);
@@ -139,107 +148,132 @@ public class SectorSelector extends WWObjectImpl
         this.getShape().clear();
     }
 
-    public Sector getSector() {
+    public Sector getSector()
+    {
         return this.getShape().hasSelection() ? this.getShape().getSector() : null;
         // TODO: Determine how to handle date-line spanning sectors.
     }
 
-    public Color getInteriorColor() {
+    public Color getInteriorColor()
+    {
         return this.getShape().getInteriorColor();
     }
 
-    public void setInteriorColor(Color color) {
+    public void setInteriorColor(Color color)
+    {
         this.getShape().setInteriorColor(color);
     }
 
-    public Color getBorderColor() {
+    public Color getBorderColor()
+    {
         return this.getShape().getBorderColor();
     }
 
-    public void setBorderColor(Color color) {
+    public void setBorderColor(Color color)
+    {
         this.getShape().setBorderColor(color);
     }
 
-    public double getInteriorOpacity() {
+    public double getInteriorOpacity()
+    {
         return this.getShape().getInteriorOpacity();
     }
 
-    public void setInteriorOpacity(double opacity) {
+    public void setInteriorOpacity(double opacity)
+    {
         this.getShape().setInteriorOpacity(opacity);
     }
 
-    public double getBorderOpacity() {
+    public double getBorderOpacity()
+    {
         return this.getShape().getBorderOpacity();
     }
 
-    public void setBorderOpacity(double opacity) {
+    public void setBorderOpacity(double opacity)
+    {
         this.getShape().setBorderOpacity(opacity);
     }
 
-    public double getBorderWidth() {
+    public double getBorderWidth()
+    {
         return this.getShape().getBorderWidth();
     }
 
-    public void setBorderWidth(double width) {
+    public void setBorderWidth(double width)
+    {
         this.getShape().setBorderWidth(width);
     }
 
-    protected RegionShape getShape() {
+    protected RegionShape getShape()
+    {
         return shape;
     }
 
-    protected boolean isArmed() {
+    protected boolean isArmed()
+    {
         return armed;
     }
 
-    protected void setArmed(boolean armed) {
+    protected void setArmed(boolean armed)
+    {
         this.armed = armed;
     }
 
-    protected int getOperation() {
+    protected int getOperation()
+    {
         return operation;
     }
 
-    protected void setOperation(int operation) {
+    protected void setOperation(int operation)
+    {
         this.operation = operation;
     }
 
-    protected int getSide() {
+    protected int getSide()
+    {
         return side;
     }
 
-    protected void setSide(int side) {
+    protected void setSide(int side)
+    {
         this.side = side;
     }
 
-    protected Position getPreviousPosition() {
+    protected Position getPreviousPosition()
+    {
         return previousPosition;
     }
 
-    protected void setPreviousPosition(Position previousPosition) {
+    protected void setPreviousPosition(Position previousPosition)
+    {
         this.previousPosition = previousPosition;
     }
 
-    protected double getEdgeFactor() {
+    protected double getEdgeFactor()
+    {
         return edgeFactor;
     }
 
-    protected void setEdgeFactor(double edgeFactor) {
+    protected void setEdgeFactor(double edgeFactor)
+    {
         this.edgeFactor = edgeFactor;
     }
 
-    public void stageChanged(RenderingEvent event) {
-        if (!event.getStage().equals(RenderingEvent.AFTER_BUFFER_SWAP)) {
+    public void stageChanged(RenderingEvent event)
+    {
+        if (!event.getStage().equals(RenderingEvent.AFTER_BUFFER_SWAP))
             return;
-        }
 
         // We notify of changes during this rendering stage because the sector is updated within the region shape's
         // render method.
+
         this.notifySectorChanged();
     }
 
-    protected void notifySectorChanged() {
-        if (this.getShape().hasSelection() && this.getSector() != null && !this.getSector().equals(this.previousSector)) {
+    protected void notifySectorChanged()
+    {
+        if (this.getShape().hasSelection() && this.getSector() != null && !this.getSector().equals(this.previousSector))
+        {
             this.firePropertyChange(SECTOR_PROPERTY, this.previousSector, this.getShape().getSector());
             this.previousSector = this.getSector();
         }
@@ -251,14 +285,14 @@ public class SectorSelector extends WWObjectImpl
     // selector is then disarmed so that subsequent mouse presses either size or move the region when they occur on
     // the region, or move the globe if they occur outside the region.
     //
-    public void mousePressed(MouseEvent mouseEvent) {
-        if (MouseEvent.BUTTON1_DOWN_MASK != mouseEvent.getModifiersEx()) {
-            return;
-        }
 
-        if (!this.isArmed()) {
+    public void mousePressed(MouseEvent mouseEvent)
+    {
+        if (MouseEvent.BUTTON1_DOWN_MASK != mouseEvent.getModifiersEx())
             return;
-        }
+
+        if (!this.isArmed())
+            return;
 
         this.getShape().setResizeable(true);
         this.getShape().setStartPosition(null);
@@ -267,14 +301,13 @@ public class SectorSelector extends WWObjectImpl
         mouseEvent.consume();
     }
 
-    public void mouseReleased(MouseEvent mouseEvent) {
-        if (MouseEvent.BUTTON1 != mouseEvent.getButton()) {
+    public void mouseReleased(MouseEvent mouseEvent)
+    {
+        if (MouseEvent.BUTTON1 != mouseEvent.getButton())
             return;
-        }
 
-        if (this.getShape().isResizeable()) {
+        if (this.getShape().isResizeable())
             this.setCursor(null);
-        }
 
         this.getShape().setResizeable(false);
 
@@ -283,72 +316,85 @@ public class SectorSelector extends WWObjectImpl
         this.firePropertyChange(SECTOR_PROPERTY, this.previousSector, null);
     }
 
-    public void mouseDragged(MouseEvent mouseEvent) {
-        if (MouseEvent.BUTTON1_DOWN_MASK != mouseEvent.getModifiersEx()) {
+    public void mouseDragged(MouseEvent mouseEvent)
+    {
+        if (MouseEvent.BUTTON1_DOWN_MASK != mouseEvent.getModifiersEx())
             return;
-        }
 
-        if (this.getShape().isResizeable()) {
+        if (this.getShape().isResizeable())
             mouseEvent.consume(); // prevent view operations
-        }
     }
 
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e)
+    {
     }
 
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e)
+    {
     }
 
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e)
+    {
     }
 
-    public void mouseMoved(MouseEvent e) {
+    public void mouseMoved(MouseEvent e)
+    {
     }
 
     //
     // Selection events are used to resize and move the region
     //
-    public void selected(SelectEvent event) {
-        if (event == null) {
+
+    public void selected(SelectEvent event)
+    {
+        if (event == null)
+        {
             String msg = Logging.getMessage("nullValue.EventIsNull");
             Logging.logger().log(java.util.logging.Level.FINE, msg);
             throw new IllegalArgumentException(msg);
         }
 
         if (this.getOperation() == NONE
-                && event.getTopObject() != null && !(event.getTopPickedObject().getParentLayer() == this.layer)) {
+            && event.getTopObject() != null && !(event.getTopPickedObject().getParentLayer() == this.layer))
+        {
             this.setCursor(null);
             return;
         }
 
-        if (event.getEventAction().equals(SelectEvent.LEFT_PRESS)) {
+        if (event.getEventAction().equals(SelectEvent.LEFT_PRESS))
+        {
             this.setPreviousPosition(this.getWwd().getCurrentPosition());
-        } else if (event.getEventAction().equals(SelectEvent.DRAG)) {
+        }
+        else if (event.getEventAction().equals(SelectEvent.DRAG))
+        {
             DragSelectEvent dragEvent = (DragSelectEvent) event;
             Object topObject = dragEvent.getTopObject();
-            if (topObject == null) {
+            if (topObject == null)
                 return;
-            }
 
             RegionShape dragObject = this.getShape();
 
-            if (this.getOperation() == SIZING) {
+            if (this.getOperation() == SIZING)
+            {
                 Sector newSector = this.resizeShape(dragObject, this.getSide());
-                if (newSector != null) {
+                if (newSector != null)
                     dragObject.setSector(newSector);
-                }
                 event.consume();
-            } else {
+            }
+            else
+            {
                 this.setSide(this.determineAdjustmentSide(dragObject, this.getEdgeFactor()));
 
-                if (this.getSide() == NONE || this.getOperation() == MOVING) {
+                if (this.getSide() == NONE || this.getOperation() == MOVING)
+                {
                     this.setOperation(MOVING);
                     this.dragWholeShape(dragEvent, dragObject);
-                } else {
+                }
+                else
+                {
                     Sector newSector = this.resizeShape(dragObject, this.getSide());
-                    if (newSector != null) {
+                    if (newSector != null)
                         dragObject.setSector(newSector);
-                    }
                     this.setOperation(SIZING);
                 }
                 event.consume();
@@ -356,34 +402,40 @@ public class SectorSelector extends WWObjectImpl
 
             this.setPreviousPosition(this.getWwd().getCurrentPosition());
             this.notifySectorChanged();
-        } else if (event.getEventAction().equals(SelectEvent.DRAG_END)) {
+        }
+        else if (event.getEventAction().equals(SelectEvent.DRAG_END))
+        {
             this.setOperation(NONE);
             this.setPreviousPosition(null);
-        } else if (event.getEventAction().equals(SelectEvent.ROLLOVER) && this.getOperation() == NONE) {
-            if (!(this.getWwd() instanceof Component)) {
+        }
+        else if (event.getEventAction().equals(SelectEvent.ROLLOVER) && this.getOperation() == NONE)
+        {
+            if (!(this.getWwd() instanceof Component))
                 return;
-            }
 
-            if (event.getTopObject() == null || event.getTopPickedObject().isTerrain()) {
+            if (event.getTopObject() == null || event.getTopPickedObject().isTerrain())
+            {
                 this.setCursor(null);
                 return;
             }
 
-            if (!(event.getTopObject() instanceof Movable)) {
+            if (!(event.getTopObject() instanceof Movable))
                 return;
-            }
 
             this.setCursor(this.determineAdjustmentSide((Movable) event.getTopObject(), this.getEdgeFactor()));
         }
     }
 
-    protected int determineAdjustmentSide(Movable dragObject, double factor) {
-        if (dragObject instanceof SurfaceSector) {
+    protected int determineAdjustmentSide(Movable dragObject, double factor)
+    {
+        if (dragObject instanceof SurfaceSector)
+        {
             SurfaceSector quad = (SurfaceSector) dragObject;
             Sector s = quad.getSector(); // TODO: go over all sectors
             Position p = this.getWwd().getCurrentPosition();
 
-            if (p == null) {
+            if (p == null)
+            {
                 return NONE;
             }
 
@@ -395,42 +447,37 @@ public class SectorSelector extends WWObjectImpl
             double sLat = factor * s.getDeltaLatDegrees();
             double sLon = factor * s.getDeltaLonDegrees();
 
-            if (dN < sLat && dW < sLon) {
+            if (dN < sLat && dW < sLon)
                 return NORTHWEST;
-            }
-            if (dN < sLat && dE < sLon) {
+            if (dN < sLat && dE < sLon)
                 return NORTHEAST;
-            }
-            if (dS < sLat && dW < sLon) {
+            if (dS < sLat && dW < sLon)
                 return SOUTHWEST;
-            }
-            if (dS < sLat && dE < sLon) {
+            if (dS < sLat && dE < sLon)
                 return SOUTHEAST;
-            }
-            if (dN < sLat) {
+            if (dN < sLat)
                 return NORTH;
-            }
-            if (dS < sLat) {
+            if (dS < sLat)
                 return SOUTH;
-            }
-            if (dW < sLon) {
+            if (dW < sLon)
                 return WEST;
-            }
-            if (dE < sLon) {
+            if (dE < sLon)
                 return EAST;
-            }
         }
 
         return NONE;
     }
 
-    protected Sector resizeShape(Movable dragObject, int side) {
-        if (dragObject instanceof SurfaceSector) {
+    protected Sector resizeShape(Movable dragObject, int side)
+    {
+        if (dragObject instanceof SurfaceSector)
+        {
             SurfaceSector quad = (SurfaceSector) dragObject;
             Sector s = quad.getSector(); // TODO: go over all sectors
             Position p = this.getWwd().getCurrentPosition();
 
-            if (p == null || this.getPreviousPosition() == null) {
+            if (p == null || this.getPreviousPosition() == null)
+            {
                 return null;
             }
 
@@ -442,24 +489,39 @@ public class SectorSelector extends WWObjectImpl
             Angle newMaxLat = s.getMaxLatitude();
             Angle newMaxLon = s.getMaxLongitude();
 
-            if (side == NORTH) {
+            if (side == NORTH)
+            {
                 newMaxLat = s.getMaxLatitude().add(dLat);
-            } else if (side == SOUTH) {
+            }
+            else if (side == SOUTH)
+            {
                 newMinLat = s.getMinLatitude().add(dLat);
-            } else if (side == EAST) {
+            }
+            else if (side == EAST)
+            {
                 newMaxLon = s.getMaxLongitude().add(dLon);
-            } else if (side == WEST) {
+            }
+            else if (side == WEST)
+            {
                 newMinLon = s.getMinLongitude().add(dLon);
-            } else if (side == NORTHWEST) {
+            }
+            else if (side == NORTHWEST)
+            {
                 newMaxLat = s.getMaxLatitude().add(dLat);
                 newMinLon = s.getMinLongitude().add(dLon);
-            } else if (side == NORTHEAST) {
+            }
+            else if (side == NORTHEAST)
+            {
                 newMaxLat = s.getMaxLatitude().add(dLat);
                 newMaxLon = s.getMaxLongitude().add(dLon);
-            } else if (side == SOUTHWEST) {
+            }
+            else if (side == SOUTHWEST)
+            {
                 newMinLat = s.getMinLatitude().add(dLat);
                 newMinLon = s.getMinLongitude().add(dLon);
-            } else if (side == SOUTHEAST) {
+            }
+            else if (side == SOUTHEAST)
+            {
                 newMinLat = s.getMinLatitude().add(dLat);
                 newMaxLon = s.getMaxLongitude().add(dLon);
             }
@@ -470,19 +532,20 @@ public class SectorSelector extends WWObjectImpl
         return null;
     }
 
-    private static double abs(double a) {
+    private static double abs(double a)
+    {
         return a >= 0 ? a : -a;
     }
 
-    protected void dragWholeShape(DragSelectEvent dragEvent, Movable dragObject) {
+    protected void dragWholeShape(DragSelectEvent dragEvent, Movable dragObject)
+    {
         View view = getWwd().getView();
         EllipsoidalGlobe globe = (EllipsoidalGlobe) getWwd().getModel().getGlobe();
 
         // Compute ref-point position in screen coordinates.
         Position refPos = dragObject.getReferencePosition();
-        if (refPos == null) {
+        if (refPos == null)
             return;
-        }
 
         Vec4 refPoint = globe.computePointFromPosition(refPos);
         Vec4 screenRefPoint = view.project(refPoint);
@@ -497,17 +560,20 @@ public class SectorSelector extends WWObjectImpl
         Line ray = view.computeRayFromScreenPoint(x, y);
         Intersection inters[] = globe.intersect(ray, refPos.getElevation());
 
-        if (inters != null) {
+        if (inters != null)
+        {
             // Intersection with globe. Move reference point to the intersection point.
             Position p = globe.computePositionFromPoint(inters[0].getIntersectionPoint());
             dragObject.moveTo(p);
         }
     }
 
-    protected void setCursor(int sideName) {
+    protected void setCursor(int sideName)
+    {
         Cursor cursor = null;
 
-        switch (sideName) {
+        switch (sideName)
+        {
             case NONE:
                 cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
                 break;
@@ -540,18 +606,20 @@ public class SectorSelector extends WWObjectImpl
         this.setCursor(cursor);
     }
 
-    protected void setCursor(Cursor cursor) {
+    protected void setCursor(Cursor cursor)
+    {
         ((Component) this.getWwd()).setCursor(cursor != null ? cursor : Cursor.getDefaultCursor());
     }
 
-    protected static class RegionShape extends SurfaceSector {
-
+    protected static class RegionShape extends SurfaceSector
+    {
         private boolean resizeable = false;
         private Position startPosition;
         private Position endPosition;
         private SurfaceSector borderShape;
 
-        protected RegionShape(Sector sector) {
+        protected RegionShape(Sector sector)
+        {
             super(sector);
 
             // Create the default border shape.
@@ -581,91 +649,111 @@ public class SectorSelector extends WWObjectImpl
             this.getBorder().setHighlightAttributes(borderAttrs);
         }
 
-        public Color getInteriorColor() {
+        public Color getInteriorColor()
+        {
             return this.getAttributes().getInteriorMaterial().getDiffuse();
         }
 
-        public void setInteriorColor(Color color) {
+        public void setInteriorColor(Color color)
+        {
             ShapeAttributes attr = this.getAttributes();
             attr.setInteriorMaterial(new Material(color));
             this.setAttributes(attr);
         }
 
-        public Color getBorderColor() {
+        public Color getBorderColor()
+        {
             return this.getBorder().getAttributes().getOutlineMaterial().getDiffuse();
         }
 
-        public void setBorderColor(Color color) {
+        public void setBorderColor(Color color)
+        {
             ShapeAttributes attr = this.getBorder().getAttributes();
             attr.setOutlineMaterial(new Material(color));
             this.getBorder().setAttributes(attr);
         }
 
-        public double getInteriorOpacity() {
+        public double getInteriorOpacity()
+        {
             return this.getAttributes().getInteriorOpacity();
         }
 
-        public void setInteriorOpacity(double opacity) {
+        public void setInteriorOpacity(double opacity)
+        {
             ShapeAttributes attr = this.getAttributes();
             attr.setInteriorOpacity(opacity);
             this.setAttributes(attr);
         }
 
-        public double getBorderOpacity() {
+        public double getBorderOpacity()
+        {
             return this.getBorder().getAttributes().getOutlineOpacity();
         }
 
-        public void setBorderOpacity(double opacity) {
+        public void setBorderOpacity(double opacity)
+        {
             ShapeAttributes attr = this.getBorder().getAttributes();
             attr.setOutlineOpacity(opacity);
             this.getBorder().setAttributes(attr);
         }
 
-        public double getBorderWidth() {
+        public double getBorderWidth()
+        {
             return this.getBorder().getAttributes().getOutlineWidth();
         }
 
-        public void setBorderWidth(double width) {
+        public void setBorderWidth(double width)
+        {
             ShapeAttributes attr = this.getBorder().getAttributes();
             attr.setOutlineWidth(width);
             this.getBorder().setAttributes(attr);
         }
 
-        public void setSector(Sector sector) {
+        public void setSector(Sector sector)
+        {
             super.setSector(sector);
             this.getBorder().setSector(sector);
         }
 
-        protected boolean isResizeable() {
+        protected boolean isResizeable()
+        {
             return resizeable;
         }
 
-        protected void setResizeable(boolean resizeable) {
+        protected void setResizeable(boolean resizeable)
+        {
             this.resizeable = resizeable;
         }
 
-        protected Position getStartPosition() {
+        protected Position getStartPosition()
+        {
             return startPosition;
         }
 
-        protected void setStartPosition(Position startPosition) {
+        protected void setStartPosition(Position startPosition)
+        {
             this.startPosition = startPosition;
         }
 
-        protected Position getEndPosition() {
+        protected Position getEndPosition()
+        {
             return endPosition;
         }
 
-        protected void setEndPosition(Position endPosition) {
+        protected void setEndPosition(Position endPosition)
+        {
             this.endPosition = endPosition;
         }
 
-        protected SurfaceSector getBorder() {
+        protected SurfaceSector getBorder()
+        {
             return borderShape;
         }
 
-        protected void setBorder(SurfaceSector shape) {
-            if (shape == null) {
+        protected void setBorder(SurfaceSector shape)
+        {
+            if (shape == null)
+            {
                 String message = Logging.getMessage("nullValue.Shape");
                 Logging.logger().severe(message);
                 throw new IllegalArgumentException(message);
@@ -674,22 +762,26 @@ public class SectorSelector extends WWObjectImpl
             this.borderShape = shape;
         }
 
-        protected boolean hasSelection() {
+        protected boolean hasSelection()
+        {
             return getStartPosition() != null && getEndPosition() != null;
         }
 
-        protected void clear() {
+        protected void clear()
+        {
             this.setStartPosition(null);
             this.setEndPosition(null);
             this.setSector(Sector.EMPTY_SECTOR);
         }
 
-        public void preRender(DrawContext dc) {
+        public void preRender(DrawContext dc)
+        {
             // This is called twice: once during normal rendering, then again during ordered surface rendering. During
             // normal renering we pre-render both the interior and border shapes. During ordered surface rendering, both
             // shapes are already added to the DrawContext and both will be individually processed. Therefore we just 
             // call our superclass behavior
-            if (dc.isOrderedRenderingMode()) {
+            if (dc.isOrderedRenderingMode())
+            {
                 super.preRender(dc);
                 return;
             }
@@ -698,22 +790,25 @@ public class SectorSelector extends WWObjectImpl
         }
 
         @Override
-        public void render(DrawContext dc) {
-            if (dc.isPickingMode() && this.isResizeable()) {
+        public void render(DrawContext dc)
+        {
+            if (dc.isPickingMode() && this.isResizeable())
                 return;
-            }
 
             // This is called twice: once during normal rendering, then again during ordered surface rendering. During
             // normal renering we render both the interior and border shapes. During ordered surface rendering, both
             // shapes are already added to the DrawContext and both will be individually processed. Therefore we just
             // call our superclass behavior
-            if (dc.isOrderedRenderingMode()) {
+            if (dc.isOrderedRenderingMode())
+            {
                 super.render(dc);
                 return;
             }
 
-            if (!this.isResizeable()) {
-                if (this.hasSelection()) {
+            if (!this.isResizeable())
+            {
+                if (this.hasSelection())
+                {
                     this.doRender(dc);
                 }
                 return;
@@ -722,45 +817,54 @@ public class SectorSelector extends WWObjectImpl
             PickedObjectList pos = dc.getPickedObjects();
             PickedObject terrainObject = pos != null ? pos.getTerrainObject() : null;
 
-            if (terrainObject == null) {
+            if (terrainObject == null)
                 return;
-            }
 
-            if (this.getStartPosition() != null) {
+            if (this.getStartPosition() != null)
+            {
                 Position end = terrainObject.getPosition();
-                if (!this.getStartPosition().equals(end)) {
+                if (!this.getStartPosition().equals(end))
+                {
                     this.setEndPosition(end);
                     this.setSector(Sector.boundingSector(this.getStartPosition(), this.getEndPosition()));
                     this.doRender(dc);
                 }
-            } else {
+            }
+            else
+            {
                 this.setStartPosition(pos.getTerrainObject().getPosition());
             }
         }
 
-        protected void doPreRender(DrawContext dc) {
+        protected void doPreRender(DrawContext dc)
+        {
             this.doPreRenderInterior(dc);
             this.doPreRenderBorder(dc);
         }
 
-        protected void doPreRenderInterior(DrawContext dc) {
+        protected void doPreRenderInterior(DrawContext dc)
+        {
             super.preRender(dc);
         }
 
-        protected void doPreRenderBorder(DrawContext dc) {
+        protected void doPreRenderBorder(DrawContext dc)
+        {
             this.getBorder().preRender(dc);
         }
 
-        protected void doRender(DrawContext dc) {
+        protected void doRender(DrawContext dc)
+        {
             this.doRenderInterior(dc);
             this.doRenderBorder(dc);
         }
 
-        protected void doRenderInterior(DrawContext dc) {
+        protected void doRenderInterior(DrawContext dc)
+        {
             super.render(dc);
         }
 
-        protected void doRenderBorder(DrawContext dc) {
+        protected void doRenderBorder(DrawContext dc)
+        {
             this.getBorder().render(dc);
         }
     }

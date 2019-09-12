@@ -10,19 +10,18 @@ package gov.nasa.worldwindx.examples;
  * Surface shapes are used to visualize flat standard shapes types that follow the terrain. This illustrates how to use
  * all 7 standard surface shape types:
  * <ul> <li><code>{@link gov.nasa.worldwind.render.SurfacePolygon}</code></li> <li><code>{@link
- * gov.nasa.worldwind.render.SurfaceEllipse}</code></li>
- * <li><code>{@link gov.nasa.worldwind.render.SurfaceCircle}</code></li>
+ * gov.nasa.worldwind.render.SurfaceEllipse}</code></li> <li><code>{@link gov.nasa.worldwind.render.SurfaceCircle}</code></li>
  * <li><code>{@link gov.nasa.worldwind.render.SurfaceQuad}</code></li> <li><code>{@link
- * gov.nasa.worldwind.render.SurfaceSquare}</code></li>
- * <li><code>{@link gov.nasa.worldwind.render.SurfaceSector}</code></li>
+ * gov.nasa.worldwind.render.SurfaceSquare}</code></li> <li><code>{@link gov.nasa.worldwind.render.SurfaceSector}</code></li>
  * <li><code>{@link gov.nasa.worldwind.render.SurfacePolyline}</code></li> </ul>
  *
  * @author dcollins
  * @version $Id: SurfaceShapes.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SurfaceShapes extends DraggingShapes {
-
-    public static void main(String[] args) {
+public class SurfaceShapes extends DraggingShapes
+{
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Surface Shapes", AppFrame.class);
     }
 }

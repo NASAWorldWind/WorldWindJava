@@ -31,8 +31,9 @@ import java.util.*;
  * @version $Id: ExtrudedPolygonBuilder.java 2109 2014-06-30 16:52:38Z tgaskins $
  * @see ExtrudedPolygon
  */
-public class ExtrudedPolygonBuilder extends ApplicationTemplate {
 
+public class ExtrudedPolygonBuilder extends ApplicationTemplate
+{
     protected static final String POLYGON_LAYER_NAME = "Polygons";
     protected static final String CLEAR_SELECTION = "ExtrudedPolygonBuilder.ClearSelection";
     protected static final String SIZE_NEW_SHAPES_TO_VIEWPORT = "ExtrudedPolygonBuilder.SizeNewShapesToViewport";
@@ -44,132 +45,165 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
     //*************************************************************//
     //********************  Polygon Builder Model  ****************//
     //*************************************************************//
-    protected static class PolygonEntry extends WWObjectImpl {
 
+    protected static class PolygonEntry extends WWObjectImpl
+    {
         protected ExtrudedPolygon polygon;
         protected ShapeAttributes attributes;
         protected boolean editing = false;
         protected boolean selected = false;
 
-        public PolygonEntry(ExtrudedPolygon polygon) {
+        public PolygonEntry(ExtrudedPolygon polygon)
+        {
             this.polygon = polygon;
             this.attributes = this.polygon.getAttributes();
         }
 
-        public boolean isEditing() {
+        public boolean isEditing()
+        {
             return this.editing;
         }
 
-        public void setEditing(boolean editing) {
+        public void setEditing(boolean editing)
+        {
             this.editing = editing;
             this.updateAttributes();
         }
 
-        public boolean isSelected() {
+        public boolean isSelected()
+        {
             return this.selected;
         }
 
-        public void setSelected(boolean selected) {
+        public void setSelected(boolean selected)
+        {
             this.selected = selected;
             this.updateAttributes();
         }
 
-        public String getName() {
+        public String getName()
+        {
             return this.getStringValue(AVKey.DISPLAY_NAME);
         }
 
-        public void setName(String name) {
+        public void setName(String name)
+        {
             this.setValue(AVKey.DISPLAY_NAME, name);
         }
 
-        public ExtrudedPolygon getPolygon() {
+        public ExtrudedPolygon getPolygon()
+        {
             return polygon;
         }
 
-        public ShapeAttributes getAttributes() {
+        public ShapeAttributes getAttributes()
+        {
             return this.attributes;
         }
 
-        public String toString() {
+        public String toString()
+        {
             return this.getName();
         }
 
-        public Object getValue(String key) {
+        public Object getValue(String key)
+        {
             Object value = super.getValue(key);
-            if (value == null) {
+            if (value == null)
+            {
                 value = this.polygon.getValue(key);
             }
             return value;
         }
 
-        public Object setValue(String key, Object value) {
+        public Object setValue(String key, Object value)
+        {
             //noinspection StringEquality
-            if (key == AVKey.DISPLAY_NAME) {
+            if (key == AVKey.DISPLAY_NAME)
+            {
                 return this.polygon.setValue(key, value);
-            } else {
+            }
+            else
+            {
                 return super.setValue(key, value);
             }
         }
 
-        protected void updateAttributes() {
-            if (this.isSelected()) {
+        protected void updateAttributes()
+        {
+            if (this.isSelected())
+            {
                 this.polygon.setAttributes(getSelectionAttributes());
-            } else {
+            }
+            else
+            {
                 this.polygon.setAttributes(this.getAttributes());
             }
         }
     }
 
-    protected static class PolygonBuilderModel extends AbstractTableModel {
-
+    protected static class PolygonBuilderModel extends AbstractTableModel
+    {
         protected static String[] columnName = {"Name"};
         protected static Class[] columnClass = {String.class};
         protected static String[] columnAttribute = {AVKey.DISPLAY_NAME};
 
         protected ArrayList<PolygonEntry> entryList = new ArrayList<PolygonEntry>();
 
-        public PolygonBuilderModel() {
+        public PolygonBuilderModel()
+        {
         }
 
-        public String getColumnName(int columnIndex) {
+        public String getColumnName(int columnIndex)
+        {
             return columnName[columnIndex];
         }
 
-        public Class<?> getColumnClass(int columnIndex) {
+        public Class<?> getColumnClass(int columnIndex)
+        {
             return columnClass[columnIndex];
         }
 
-        public int getRowCount() {
+        public int getRowCount()
+        {
             return this.entryList.size();
         }
 
-        public int getColumnCount() {
+        public int getColumnCount()
+        {
             return 1;
         }
 
-        public boolean isCellEditable(int rowIndex, int columnIndex) {
+        public boolean isCellEditable(int rowIndex, int columnIndex)
+        {
             return true;
         }
 
-        public Object getValueAt(int rowIndex, int columnIndex) {
+        public Object getValueAt(int rowIndex, int columnIndex)
+        {
             PolygonEntry entry = this.entryList.get(rowIndex);
             return entry.getValue(columnAttribute[columnIndex]);
         }
 
-        public void setValueAt(Object aObject, int rowIndex, int columnIndex) {
+        public void setValueAt(Object aObject, int rowIndex, int columnIndex)
+        {
             PolygonEntry entry = this.entryList.get(rowIndex);
             String key = columnAttribute[columnIndex];
             entry.setValue(key, aObject);
         }
 
-        public java.util.List<PolygonEntry> getEntries() {
+        public java.util.List<PolygonEntry> getEntries()
+        {
             return Collections.unmodifiableList(this.entryList);
         }
 
-        public void setEntries(Iterable<? extends PolygonEntry> entries) {
+        public void setEntries(Iterable<? extends PolygonEntry> entries)
+        {
             this.entryList.clear();
-            if (entries != null) {
-                for (PolygonEntry entry : entries) {
+            if (entries != null)
+            {
+                for (PolygonEntry entry : entries)
+                {
                     this.entryList.add(entry);
                 }
             }
@@ -177,46 +211,55 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             this.fireTableDataChanged();
         }
 
-        public void addEntry(PolygonEntry entry) {
+        public void addEntry(PolygonEntry entry)
+        {
             this.entryList.add(entry);
             int index = this.entryList.size() - 1;
             this.fireTableRowsInserted(index, index);
         }
 
-        public void removeEntry(PolygonEntry entry) {
+        public void removeEntry(PolygonEntry entry)
+        {
             int index = this.entryList.indexOf(entry);
-            if (index != -1) {
+            if (index != -1)
+            {
                 this.entryList.remove(entry);
                 this.fireTableRowsDeleted(index, index);
             }
         }
 
-        public void removeAllEntries() {
+        public void removeAllEntries()
+        {
             this.entryList.clear();
             this.fireTableDataChanged();
         }
 
-        public PolygonEntry getEntry(int index) {
+        public PolygonEntry getEntry(int index)
+        {
             return this.entryList.get(index);
         }
 
-        public PolygonEntry setEntry(int index, PolygonEntry entry) {
+        public PolygonEntry setEntry(int index, PolygonEntry entry)
+        {
             return this.entryList.set(index, entry);
         }
 
-        public int getIndexForEntry(PolygonEntry entry) {
+        public int getIndexForEntry(PolygonEntry entry)
+        {
             return this.entryList.indexOf(entry);
         }
     }
 
     protected static final double DEFAULT_SHAPE_SIZE_METERS = 200000.0; // 200 km
 
-    protected static class ExtrudedPolygonFactory {
-
-        public ExtrudedPolygonFactory() {
+    protected static class ExtrudedPolygonFactory
+    {
+        public ExtrudedPolygonFactory()
+        {
         }
 
-        public ExtrudedPolygon createPolygon(WorldWindow wwd, boolean fitShapeToViewport) {
+        public ExtrudedPolygon createPolygon(WorldWindow wwd, boolean fitShapeToViewport)
+        {
             ExtrudedPolygon poly = new ExtrudedPolygon();
             poly.setAttributes(getDefaultAttributes());
             poly.setValue(AVKey.DISPLAY_NAME, getNextName(toString()));
@@ -225,28 +268,31 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             return poly;
         }
 
-        protected void initializePolygon(WorldWindow wwd, ExtrudedPolygon polygon, boolean fitShapeToViewport) {
+        protected void initializePolygon(WorldWindow wwd, ExtrudedPolygon polygon, boolean fitShapeToViewport)
+        {
             // Creates a rectangle in the center of the viewport. Attempts to guess at a reasonable size and height.
 
             Position position = ShapeUtils.getNewShapePosition(wwd);
             Angle heading = ShapeUtils.getNewShapeHeading(wwd, true);
-            double heightInMeters = fitShapeToViewport
-                    ? ShapeUtils.getViewportScaleFactor(wwd) : DEFAULT_SHAPE_SIZE_METERS;
+            double heightInMeters = fitShapeToViewport ?
+                ShapeUtils.getViewportScaleFactor(wwd) : DEFAULT_SHAPE_SIZE_METERS;
 
             java.util.List<Position> locations = ShapeUtils.createPositionSquareInViewport(wwd, position, heading,
-                    heightInMeters);
+                heightInMeters);
 
             polygon.setOuterBoundary(locations);
             polygon.setHeight(heightInMeters);
             polygon.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
         }
 
-        public String toString() {
+        public String toString()
+        {
             return "Polygon";
         }
     }
 
-    public static ShapeAttributes getDefaultAttributes() {
+    public static ShapeAttributes getDefaultAttributes()
+    {
         ShapeAttributes attributes = new BasicShapeAttributes();
         attributes.setInteriorMaterial(new Material(Color.BLACK, Color.LIGHT_GRAY, Color.DARK_GRAY, Color.BLACK, 0.0f));
         attributes.setOutlineMaterial(Material.DARK_GRAY);
@@ -257,7 +303,8 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
         return attributes;
     }
 
-    public static ShapeAttributes getSelectionAttributes() {
+    public static ShapeAttributes getSelectionAttributes()
+    {
         ShapeAttributes attributes = new BasicShapeAttributes();
         attributes.setInteriorMaterial(Material.WHITE);
         attributes.setOutlineMaterial(Material.BLACK);
@@ -268,7 +315,8 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
         return attributes;
     }
 
-    public static String getNextName(String base) {
+    public static String getNextName(String base)
+    {
         StringBuilder sb = new StringBuilder();
         sb.append(base);
         sb.append(nextEntryNumber++);
@@ -280,34 +328,43 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
     //*************************************************************//
     //********************  Polygon Builder Panel  ****************//
     //*************************************************************//
-    protected static class PolygonBuilderPanel extends JPanel {
 
+    protected static class PolygonBuilderPanel extends JPanel
+    {
         protected JTable entryTable;
         protected boolean ignoreSelectEvents = false;
 
-        public PolygonBuilderPanel(PolygonBuilderModel model, PolygonBuilderController controller) {
+        public PolygonBuilderPanel(PolygonBuilderModel model, PolygonBuilderController controller)
+        {
             this.initComponents(model, controller);
         }
 
-        public int[] getSelectedIndices() {
+        public int[] getSelectedIndices()
+        {
             return this.entryTable.getSelectedRows();
         }
 
-        public void setSelectedIndices(int[] indices) {
+        public void setSelectedIndices(int[] indices)
+        {
             this.ignoreSelectEvents = true;
 
-            if (indices != null && indices.length != 0) {
-                for (int index : indices) {
+            if (indices != null && indices.length != 0)
+            {
+                for (int index : indices)
+                {
                     this.entryTable.setRowSelectionInterval(index, index);
                 }
-            } else {
+            }
+            else
+            {
                 this.entryTable.clearSelection();
             }
 
             this.ignoreSelectEvents = false;
         }
 
-        protected void initComponents(PolygonBuilderModel model, final PolygonBuilderController controller) {
+        protected void initComponents(PolygonBuilderModel model, final PolygonBuilderController controller)
+        {
             final JCheckBox resizeNewShapesCheckBox;
             final JCheckBox enableEditCheckBox;
 
@@ -352,9 +409,12 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
                 this.entryTable.setColumnSelectionAllowed(false);
                 this.entryTable.setRowSelectionAllowed(true);
                 this.entryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                this.entryTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                    public void valueChanged(ListSelectionEvent e) {
-                        if (!ignoreSelectEvents) {
+                this.entryTable.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+                {
+                    public void valueChanged(ListSelectionEvent e)
+                    {
+                        if (!ignoreSelectEvents)
+                        {
                             controller.actionPerformed(new ActionEvent(e.getSource(), -1, SELECTION_CHANGED));
                         }
                     }
@@ -394,15 +454,20 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             this.add(entryPanel, BorderLayout.CENTER);
             this.add(selectionPanel, BorderLayout.EAST);
 
-            controller.addPropertyChangeListener(new PropertyChangeListener() {
-                public void propertyChange(PropertyChangeEvent e) {
+            controller.addPropertyChangeListener(new PropertyChangeListener()
+            {
+                public void propertyChange(PropertyChangeEvent e)
+                {
                     //noinspection StringEquality
-                    if (e.getPropertyName() == SIZE_NEW_SHAPES_TO_VIEWPORT) {
+                    if (e.getPropertyName() == SIZE_NEW_SHAPES_TO_VIEWPORT)
+                    {
                         resizeNewShapesCheckBox.setSelected(controller.isResizeNewShapesToViewport());
-                    } else //noinspection StringEquality
-                    if (e.getPropertyName() == ENABLE_EDIT) {
-                        enableEditCheckBox.setSelected(controller.isEnableEdit());
                     }
+                    else //noinspection StringEquality
+                        if (e.getPropertyName() == ENABLE_EDIT)
+                        {
+                            enableEditCheckBox.setSelected(controller.isEnableEdit());
+                        }
                 }
             });
         }
@@ -411,8 +476,9 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
     //**************************************************************//
     //********************  Polygon Builder Controller  ***********//
     //**************************************************************//
-    protected static class PolygonBuilderController extends WWObjectImpl implements ActionListener, MouseListener {
 
+    protected static class PolygonBuilderController extends WWObjectImpl implements ActionListener, MouseListener
+    {
         protected AppFrame app;
         protected PolygonBuilderModel model;
         protected PolygonBuilderPanel view;
@@ -422,7 +488,8 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
         protected boolean enableEdit = true;
         protected boolean resizeNewShapes;
 
-        public PolygonBuilderController(AppFrame app) {
+        public PolygonBuilderController(AppFrame app)
+        {
             this.app = app;
             this.editor = new ExtrudedPolygonEditor();
 
@@ -431,146 +498,180 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             this.app.getWwd().getInputHandler().addMouseListener(this);
         }
 
-        public AppFrame getApp() {
+        public AppFrame getApp()
+        {
             return this.app;
         }
 
-        public PolygonBuilderModel getModel() {
+        public PolygonBuilderModel getModel()
+        {
             return this.model;
         }
 
-        public void setModel(PolygonBuilderModel model) {
+        public void setModel(PolygonBuilderModel model)
+        {
             this.model = model;
         }
 
-        public PolygonBuilderPanel getView() {
+        public PolygonBuilderPanel getView()
+        {
             return this.view;
         }
 
-        public void setView(PolygonBuilderPanel view) {
+        public void setView(PolygonBuilderPanel view)
+        {
             this.view = view;
         }
 
-        public boolean isEnabled() {
+        public boolean isEnabled()
+        {
             return this.enabled;
         }
 
-        public void setEnabled(boolean enabled) {
+        public void setEnabled(boolean enabled)
+        {
             this.enabled = enabled;
             getView().setEnabled(enabled);
             getApp().setEnabled(enabled);
         }
 
-        public boolean isEnableEdit() {
+        public boolean isEnableEdit()
+        {
             return this.enableEdit;
         }
 
-        public void setEnableEdit(boolean enable) {
+        public void setEnableEdit(boolean enable)
+        {
             this.enableEdit = enable;
             this.handleEnableEdit(enable);
             this.firePropertyChange(ENABLE_EDIT, null, enable);
         }
 
-        public boolean isResizeNewShapesToViewport() {
+        public boolean isResizeNewShapesToViewport()
+        {
             return this.resizeNewShapes;
         }
 
-        public void setResizeNewShapesToViewport(boolean resize) {
+        public void setResizeNewShapesToViewport(boolean resize)
+        {
             this.resizeNewShapes = resize;
             this.firePropertyChange(SIZE_NEW_SHAPES_TO_VIEWPORT, null, resize);
         }
 
-        public void actionPerformed(ActionEvent e) {
-            if (!this.isEnabled()) {
+        public void actionPerformed(ActionEvent e)
+        {
+            if (!this.isEnabled())
+            {
                 return;
             }
 
             //noinspection StringEquality
-            if (e.getActionCommand() == NEW_POLYGON) {
+            if (e.getActionCommand() == NEW_POLYGON)
+            {
                 this.createNewEntry(new ExtrudedPolygonFactory());
-            } else //noinspection StringEquality
-            if (e.getActionCommand() == CLEAR_SELECTION) {
-                this.selectEntry(null, true);
-            } else //noinspection StringEquality
-            if (e.getActionCommand() == SIZE_NEW_SHAPES_TO_VIEWPORT) {
-                if (e.getSource() instanceof AbstractButton) {
-                    boolean selected = ((AbstractButton) e.getSource()).isSelected();
-                    this.setResizeNewShapesToViewport(selected);
-                }
-            } else //noinspection StringEquality
-            if (e.getActionCommand() == ENABLE_EDIT) {
-                if (e.getSource() instanceof AbstractButton) {
-                    boolean selected = ((AbstractButton) e.getSource()).isSelected();
-                    this.setEnableEdit(selected);
-                }
-            } else //noinspection StringEquality
-            if (e.getActionCommand() == REMOVE_SELECTED) {
-                this.removeEntries(Arrays.asList(this.getSelectedEntries()));
-            } else //noinspection StringEquality
-            if (e.getActionCommand() == SELECTION_CHANGED) {
-                this.viewSelectionChanged();
             }
+            else //noinspection StringEquality
+                if (e.getActionCommand() == CLEAR_SELECTION)
+                {
+                    this.selectEntry(null, true);
+                }
+                else //noinspection StringEquality
+                    if (e.getActionCommand() == SIZE_NEW_SHAPES_TO_VIEWPORT)
+                    {
+                        if (e.getSource() instanceof AbstractButton)
+                        {
+                            boolean selected = ((AbstractButton) e.getSource()).isSelected();
+                            this.setResizeNewShapesToViewport(selected);
+                        }
+                    }
+                    else //noinspection StringEquality
+                        if (e.getActionCommand() == ENABLE_EDIT)
+                        {
+                            if (e.getSource() instanceof AbstractButton)
+                            {
+                                boolean selected = ((AbstractButton) e.getSource()).isSelected();
+                                this.setEnableEdit(selected);
+                            }
+                        }
+                        else //noinspection StringEquality
+                            if (e.getActionCommand() == REMOVE_SELECTED)
+                            {
+                                this.removeEntries(Arrays.asList(this.getSelectedEntries()));
+                            }
+                            else //noinspection StringEquality
+                                if (e.getActionCommand() == SELECTION_CHANGED)
+                                {
+                                    this.viewSelectionChanged();
+                                }
         }
 
-        public void mouseClicked(MouseEvent e) {
+        public void mouseClicked(MouseEvent e)
+        {
         }
 
-        public void mousePressed(MouseEvent e) {
-            if (e == null || e.isConsumed()) {
+        public void mousePressed(MouseEvent e)
+        {
+            if (e == null || e.isConsumed())
+            {
                 return;
             }
 
-            if (!this.isEnabled()) {
+            if (!this.isEnabled())
+            {
                 return;
             }
 
             //noinspection StringEquality
-            if (e.getButton() == MouseEvent.BUTTON1) {
+            if (e.getButton() == MouseEvent.BUTTON1)
+            {
                 this.handleSelect();
             }
         }
 
-        public void mouseReleased(MouseEvent e) {
+        public void mouseReleased(MouseEvent e)
+        {
         }
 
-        public void mouseEntered(MouseEvent e) {
+        public void mouseEntered(MouseEvent e)
+        {
         }
 
-        public void mouseExited(MouseEvent e) {
+        public void mouseExited(MouseEvent e)
+        {
         }
 
-        protected void handleSelect() {
+        protected void handleSelect()
+        {
             // If the picked object is null or something other than a polygon, then ignore the mouse click. If we
             // deselect the current entry at this point, the user cannot easily navigate without losing the selection.
 
             PickedObjectList pickedObjects = this.getApp().getWwd().getObjectsAtCurrentPosition();
 
             Object topObject = pickedObjects.getTopObject();
-            if (!(topObject instanceof ExtrudedPolygon)) {
+            if (!(topObject instanceof ExtrudedPolygon))
                 return;
-            }
 
             PolygonEntry pickedEntry = this.getEntryFor((ExtrudedPolygon) topObject);
-            if (pickedEntry == null) {
+            if (pickedEntry == null)
                 return;
-            }
 
-            if (this.getSelectedEntry() != pickedEntry) {
+            if (this.getSelectedEntry() != pickedEntry)
+            {
                 this.selectEntry(pickedEntry, true);
             }
         }
 
-        protected void handleEnableEdit(boolean enable) {
-            if (this.getSelectedEntry() == null) {
+        protected void handleEnableEdit(boolean enable)
+        {
+            if (this.getSelectedEntry() == null)
                 return;
-            }
 
-            if (this.isSelectionEditing() != enable) {
+            if (this.isSelectionEditing() != enable)
                 this.setSelectionEditing(enable);
-            }
         }
 
-        public void createNewEntry(ExtrudedPolygonFactory factory) {
+        public void createNewEntry(ExtrudedPolygonFactory factory)
+        {
             ExtrudedPolygon polygon = factory.createPolygon(this.getApp().getWwd(), this.isResizeNewShapesToViewport());
             PolygonEntry entry = new PolygonEntry(polygon);
 
@@ -579,23 +680,29 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             this.selectEntry(entry, true);
         }
 
-        public void removeEntries(Iterable<? extends PolygonEntry> entries) {
-            if (entries != null) {
-                for (PolygonEntry entry : entries) {
+        public void removeEntries(Iterable<? extends PolygonEntry> entries)
+        {
+            if (entries != null)
+            {
+                for (PolygonEntry entry : entries)
+                {
                     this.removeEntry(entry);
                 }
             }
         }
 
-        public void addEntry(PolygonEntry entry) {
+        public void addEntry(PolygonEntry entry)
+        {
             this.getModel().addEntry(entry);
 
             this.getApp().getPolygonLayer().addRenderable(entry.getPolygon());
             this.getApp().getWwd().redraw();
         }
 
-        public void removeEntry(PolygonEntry entry) {
-            if (this.getSelectedEntry() == entry) {
+        public void removeEntry(PolygonEntry entry)
+        {
+            if (this.getSelectedEntry() == entry)
+            {
                 this.selectEntry(null, true);
             }
 
@@ -605,24 +712,32 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             this.getApp().getWwd().redraw();
         }
 
-        public PolygonEntry getSelectedEntry() {
+        public PolygonEntry getSelectedEntry()
+        {
             return this.selectedEntry;
         }
 
-        public void selectEntry(PolygonEntry entry, boolean updateView) {
+        public void selectEntry(PolygonEntry entry, boolean updateView)
+        {
             this.setSelectedEntry(entry);
 
-            if (updateView) {
-                if (entry != null) {
+            if (updateView)
+            {
+                if (entry != null)
+                {
                     int index = this.getModel().getIndexForEntry(entry);
-                    this.getView().setSelectedIndices(new int[]{index});
-                } else {
+                    this.getView().setSelectedIndices(new int[] {index});
+                }
+                else
+                {
                     this.getView().setSelectedIndices(new int[0]);
                 }
             }
 
-            if (this.isEnableEdit()) {
-                if (this.getSelectedEntry() != null && !this.isSelectionEditing()) {
+            if (this.isEnableEdit())
+            {
+                if (this.getSelectedEntry() != null && !this.isSelectionEditing())
+                {
                     this.setSelectionEditing(true);
                 }
             }
@@ -630,9 +745,12 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             this.getApp().getWwd().redraw();
         }
 
-        protected void setSelectedEntry(PolygonEntry entry) {
-            if (this.selectedEntry != null) {
-                if (this.selectedEntry != entry && this.selectedEntry.isEditing()) {
+        protected void setSelectedEntry(PolygonEntry entry)
+        {
+            if (this.selectedEntry != null)
+            {
+                if (this.selectedEntry != entry && this.selectedEntry.isEditing())
+                {
                     this.setSelectionEditing(false);
                 }
 
@@ -641,21 +759,26 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
 
             this.selectedEntry = entry;
 
-            if (this.selectedEntry != null) {
+            if (this.selectedEntry != null)
+            {
                 this.selectedEntry.setSelected(true);
             }
         }
 
-        protected boolean isSelectionEditing() {
+        protected boolean isSelectionEditing()
+        {
             return this.selectedEntry != null && this.selectedEntry.isEditing();
         }
 
-        protected void setSelectionEditing(boolean editing) {
-            if (this.selectedEntry == null) {
+        protected void setSelectionEditing(boolean editing)
+        {
+            if (this.selectedEntry == null)
+            {
                 throw new IllegalStateException();
             }
 
-            if (this.selectedEntry.isEditing() == editing) {
+            if (this.selectedEntry.isEditing() == editing)
+            {
                 throw new IllegalStateException();
             }
 
@@ -664,9 +787,12 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             this.editor.setPolygon(this.selectedEntry.getPolygon());
             this.editor.setArmed(editing);
 
-            if (editing) {
+            if (editing)
+            {
                 insertBeforePlacenames(this.getApp().getWwd(), this.editor);
-            } else {
+            }
+            else
+            {
                 this.getApp().getWwd().getModel().getLayers().remove(this.editor);
             }
 
@@ -674,10 +800,13 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             this.getModel().fireTableRowsUpdated(index, index);
         }
 
-        protected void viewSelectionChanged() {
+        protected void viewSelectionChanged()
+        {
             int[] indices = this.getView().getSelectedIndices();
-            if (indices != null) {
-                for (PolygonEntry entry : this.getEntriesFor(indices)) {
+            if (indices != null)
+            {
+                for (PolygonEntry entry : this.getEntriesFor(indices))
+                {
                     this.selectEntry(entry, false);
                 }
             }
@@ -685,26 +814,33 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             this.getApp().getWwd().redraw();
         }
 
-        protected PolygonEntry[] getSelectedEntries() {
+        protected PolygonEntry[] getSelectedEntries()
+        {
             int[] indices = this.getView().getSelectedIndices();
-            if (indices != null) {
+            if (indices != null)
+            {
                 return this.getEntriesFor(indices);
             }
 
             return new PolygonEntry[0];
         }
 
-        protected PolygonEntry[] getEntriesFor(int[] indices) {
+        protected PolygonEntry[] getEntriesFor(int[] indices)
+        {
             PolygonEntry[] entries = new PolygonEntry[indices.length];
-            for (int i = 0; i < indices.length; i++) {
+            for (int i = 0; i < indices.length; i++)
+            {
                 entries[i] = this.getModel().getEntry(indices[i]);
             }
             return entries;
         }
 
-        protected PolygonEntry getEntryFor(ExtrudedPolygon polygon) {
-            for (PolygonEntry entry : this.getModel().getEntries()) {
-                if (entry.getPolygon() == polygon) {
+        protected PolygonEntry getEntryFor(ExtrudedPolygon polygon)
+        {
+            for (PolygonEntry entry : this.getModel().getEntries())
+            {
+                if (entry.getPolygon() == polygon)
+                {
                     return entry;
                 }
             }
@@ -715,15 +851,17 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
     //**************************************************************//
     //********************  Main  **********************************//
     //**************************************************************//
-    protected static class AppFrame extends ApplicationTemplate.AppFrame {
 
+    protected static class AppFrame extends ApplicationTemplate.AppFrame
+    {
         // Polygon layer and editor UI components.
         protected RenderableLayer polygonLayer;
         protected PolygonBuilderModel builderModel;
         protected PolygonBuilderPanel builderView;
         protected PolygonBuilderController builderController;
 
-        public AppFrame() {
+        public AppFrame()
+        {
             this.polygonLayer = new RenderableLayer();
             this.polygonLayer.setName(POLYGON_LAYER_NAME);
             insertBeforePlacenames(this.getWwd(), this.polygonLayer);
@@ -740,15 +878,18 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             makeMenuBar(this, this.builderController);
         }
 
-        public PolygonBuilderPanel getPolygonBuilderPanel() {
+        public PolygonBuilderPanel getPolygonBuilderPanel()
+        {
             return this.builderView;
         }
 
-        public RenderableLayer getPolygonLayer() {
+        public RenderableLayer getPolygonLayer()
+        {
             return this.polygonLayer;
         }
 
-        public static void makeMenuBar(JFrame frame, final PolygonBuilderController controller) {
+        public static void makeMenuBar(JFrame frame, final PolygonBuilderController controller)
+        {
             JMenuBar menuBar = new JMenuBar();
             final JMenuItem newShapeMenuItem;
             final JCheckBoxMenuItem resizeNewShapesItem;
@@ -779,7 +920,7 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
             {
                 JMenuItem item = new JMenuItem("Deselect");
                 item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,
-                        Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
                 item.setActionCommand(CLEAR_SELECTION);
                 item.addActionListener(controller);
                 menu.add(item);
@@ -794,21 +935,27 @@ public class ExtrudedPolygonBuilder extends ApplicationTemplate {
 
             frame.setJMenuBar(menuBar);
 
-            controller.addPropertyChangeListener(new PropertyChangeListener() {
-                public void propertyChange(PropertyChangeEvent e) {
+            controller.addPropertyChangeListener(new PropertyChangeListener()
+            {
+                public void propertyChange(PropertyChangeEvent e)
+                {
                     //noinspection StringEquality
-                    if (e.getPropertyName() == SIZE_NEW_SHAPES_TO_VIEWPORT) {
+                    if (e.getPropertyName() == SIZE_NEW_SHAPES_TO_VIEWPORT)
+                    {
                         resizeNewShapesItem.setSelected(controller.isResizeNewShapesToViewport());
-                    } else //noinspection StringEquality
-                    if (e.getPropertyName() == ENABLE_EDIT) {
-                        enableEditItem.setSelected(controller.isEnableEdit());
                     }
+                    else //noinspection StringEquality
+                        if (e.getPropertyName() == ENABLE_EDIT)
+                        {
+                            enableEditItem.setSelected(controller.isEnableEdit());
+                        }
                 }
             });
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("Extruded Polygon Builder", AppFrame.class);
     }
 }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.symbology.milstd2525.graphics.areas;
 
 import gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc;
@@ -17,18 +18,19 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: SpecialInterestArea.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SpecialInterestArea extends BasicArea {
-
+public class SpecialInterestArea extends BasicArea
+{
     /**
      * Indicates the graphics supported by this class.
      *
      * @return List of masked SIDC strings that identify graphics that this class supports.
      */
-    public static List<String> getSupportedGraphics() {
+    public static List<String> getSupportedGraphics()
+    {
         return Arrays.asList(
-                TacGrpSidc.C2GM_SPL_ARA_AOO,
-                TacGrpSidc.C2GM_SPL_ARA_NAI,
-                TacGrpSidc.C2GM_SPL_ARA_TAI);
+            TacGrpSidc.C2GM_SPL_ARA_AOO,
+            TacGrpSidc.C2GM_SPL_ARA_NAI,
+            TacGrpSidc.C2GM_SPL_ARA_TAI);
     }
 
     /**
@@ -36,22 +38,23 @@ public class SpecialInterestArea extends BasicArea {
      *
      * @param sidc Symbol code the identifies the graphic.
      */
-    public SpecialInterestArea(String sidc) {
+    public SpecialInterestArea(String sidc)
+    {
         super(sidc);
         this.setShowHostileIndicator(false);
     }
 
     @Override
-    protected String getGraphicLabel() {
+    protected String getGraphicLabel()
+    {
         String code = this.maskedSymbolCode;
 
-        if (TacGrpSidc.C2GM_SPL_ARA_AOO.equalsIgnoreCase(code)) {
+        if (TacGrpSidc.C2GM_SPL_ARA_AOO.equalsIgnoreCase(code))
             return "AO";
-        } else if (TacGrpSidc.C2GM_SPL_ARA_NAI.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_SPL_ARA_NAI.equalsIgnoreCase(code))
             return "NAI";
-        } else if (TacGrpSidc.C2GM_SPL_ARA_TAI.equalsIgnoreCase(code)) {
+        else if (TacGrpSidc.C2GM_SPL_ARA_TAI.equalsIgnoreCase(code))
             return "TAI";
-        }
 
         return "";
     }

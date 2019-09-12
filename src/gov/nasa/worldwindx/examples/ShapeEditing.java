@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
@@ -25,14 +26,15 @@ import java.util.*;
  * @author tag
  * @version $Id: ShapeEditing.java 3423 2015-09-23 20:59:03Z tgaskins $
  */
-public class ShapeEditing extends ApplicationTemplate {
-
-    public static class AppFrame extends ApplicationTemplate.AppFrame implements SelectListener {
-
+public class ShapeEditing extends ApplicationTemplate
+{
+    public static class AppFrame extends ApplicationTemplate.AppFrame implements SelectListener
+    {
         protected ShapeEditor editor;
         protected ShapeAttributes lastAttrs;
 
-        public AppFrame() {
+        public AppFrame()
+        {
             this.getWwd().addSelectListener(this);
 
             RenderableLayer layer = new RenderableLayer();
@@ -82,7 +84,7 @@ public class ShapeEditing extends ApplicationTemplate {
             layer.addRenderable(cylinder);
 
             Orbit orbit = new Orbit(LatLon.fromDegrees(40, -114), LatLon.fromDegrees(41, -114), Orbit.OrbitType.CENTER,
-                    4e4);
+                4e4);
             orbit.setDrawSurfaceShape(useSurfaceAirspaces);
             orbit.setAttributes(attrs);
             orbit.setHighlightAttributes(highlightAttrs);
@@ -147,7 +149,7 @@ public class ShapeEditing extends ApplicationTemplate {
             layer.addRenderable(track);
 
             CappedEllipticalCylinder cec = new CappedEllipticalCylinder(LatLon.fromDegrees(40.5, -100), 5e4, 6e4,
-                    Angle.fromDegrees(0));
+                Angle.fromDegrees(0));
             cec.setRadii(3e4, 4e4, 5e4, 6e4);
             cec.setDrawSurfaceShape(useSurfaceAirspaces);
             cec.setAttributes(attrs);
@@ -157,6 +159,7 @@ public class ShapeEditing extends ApplicationTemplate {
             layer.addRenderable(cec);
 
             // Surface Shapes
+
             ShapeAttributes shapeAttributes = new BasicShapeAttributes();
             attrs.setDrawInterior(true);
             attrs.setDrawOutline(true);
@@ -223,20 +226,26 @@ public class ShapeEditing extends ApplicationTemplate {
         }
 
         @Override
-        public void selected(SelectEvent event) {
+        public void selected(SelectEvent event)
+        {
             // This select method identifies the shape to edit.
 
             PickedObject topObject = event.getTopPickedObject();
 
-            if (event.getEventAction().equals(SelectEvent.LEFT_CLICK)) {
-                if (topObject != null && this.isEditableShape(topObject.getObject())) {
-                    if (this.editor == null) {
+            if (event.getEventAction().equals(SelectEvent.LEFT_CLICK))
+            {
+                if (topObject != null && this.isEditableShape(topObject.getObject()))
+                {
+                    if (this.editor == null)
+                    {
                         // Enable editing of the selected shape.
                         this.editor = new ShapeEditor(getWwd(), (Renderable) topObject.getObject());
                         this.editor.setArmed(true);
                         this.keepShapeHighlighted(true);
                         event.consume();
-                    } else if (this.editor.getShape() != event.getTopObject()) {
+                    }
+                    else if (this.editor.getShape() != event.getTopObject())
+                    {
                         // Switch editor to a different shape.
                         this.keepShapeHighlighted(false);
                         this.editor.setArmed(false);
@@ -244,8 +253,10 @@ public class ShapeEditing extends ApplicationTemplate {
                         this.editor.setArmed(true);
                         this.keepShapeHighlighted(true);
                         event.consume();
-                    } else if ((event.getMouseEvent().getModifiersEx() & MouseEvent.SHIFT_DOWN_MASK) == 0
-                            && (event.getMouseEvent().getModifiersEx() & MouseEvent.ALT_DOWN_MASK) == 0) {
+                    }
+                    else if ((event.getMouseEvent().getModifiersEx() & MouseEvent.SHIFT_DOWN_MASK) == 0
+                        && (event.getMouseEvent().getModifiersEx() & MouseEvent.ALT_DOWN_MASK) == 0)
+                    {
                         // Disable editing of the current shape. Shift and Alt are used by the editor, so ignore
                         // events with those buttons down.
                         this.editor.setArmed(false);
@@ -257,22 +268,28 @@ public class ShapeEditing extends ApplicationTemplate {
             }
         }
 
-        protected boolean isEditableShape(Object object) {
+        protected boolean isEditableShape(Object object)
+        {
             return object instanceof Airspace || object instanceof SurfaceShape;
         }
 
-        protected void keepShapeHighlighted(boolean tf) {
-            if (tf) {
-                this.lastAttrs = ((Attributable) this.editor.getShape()).getAttributes();
+        protected void keepShapeHighlighted(boolean tf)
+        {
+            if (tf)
+            {
+                this.lastAttrs = ((Attributable)this.editor.getShape()).getAttributes();
                 ((Attributable) this.editor.getShape()).setAttributes(
-                        ((Attributable) this.editor.getShape()).getHighlightAttributes());
-            } else {
-                ((Attributable) this.editor.getShape()).setAttributes(this.lastAttrs);
+                    ((Attributable) this.editor.getShape()).getHighlightAttributes());
+            }
+            else
+            {
+                ((Attributable)this.editor.getShape()).setAttributes(this.lastAttrs);
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationTemplate.start("WorldWind Shape Editing", ShapeEditing.AppFrame.class);
     }
 }

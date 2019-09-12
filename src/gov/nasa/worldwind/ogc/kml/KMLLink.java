@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.*;
@@ -30,27 +31,19 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author tag
  * @version $Id: KMLLink.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLLink extends KMLAbstractObject {
-
+public class KMLLink extends KMLAbstractObject
+{
     protected static final String DEFAULT_VIEW_FORMAT = "BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]";
 
-    /**
-     * The time, in milliseconds since the Epoch, at which the linked content was most recently updated.
-     */
+    /** The time, in milliseconds since the Epoch, at which the linked content was most recently updated. */
     protected AtomicLong updateTime = new AtomicLong();
 
-    /**
-     * If this link's href does not need to be modified with a query string, this value is the resource address.
-     */
+    /** If this link's href does not need to be modified with a query string, this value is the resource address. */
     protected String finalHref;
-    /**
-     * The {@link URL} for the raw href. Will be null if the href is not a remote URL or this link has a query string
-     */
+    /** The {@link URL} for the raw href. Will be null if the href is not a remote URL or this link has a query string */
     protected URL hrefURL;
 
-    /**
-     * Scheduled task that will update the when it runs. Used to implement {@code onInterval} refresh mode.
-     */
+    /** Scheduled task that will update the when it runs. Used to implement {@code onInterval} refresh mode. */
     protected ScheduledFuture refreshTask;
 
     /**
@@ -58,51 +51,60 @@ public class KMLLink extends KMLAbstractObject {
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public KMLLink(String namespaceURI) {
+    public KMLLink(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
-    public String getHref() {
+    public String getHref()
+    {
         return (String) this.getField("href");
     }
 
-    public String getRefreshMode() {
+    public String getRefreshMode()
+    {
         return (String) this.getField("refreshMode");
     }
 
-    public Double getRefreshInterval() {
+    public Double getRefreshInterval()
+    {
         return (Double) this.getField("refreshInterval");
     }
 
-    public String getViewRefreshMode() {
+    public String getViewRefreshMode()
+    {
         return (String) this.getField("viewRefreshMode");
     }
 
-    public Double getViewRefreshTime() {
+    public Double getViewRefreshTime()
+    {
         return (Double) this.getField("viewRefreshTime");
     }
 
-    public Double getViewBoundScale() {
+    public Double getViewBoundScale()
+    {
         return (Double) this.getField("viewBoundScale");
     }
 
-    public String getViewFormat() {
+    public String getViewFormat()
+    {
         return (String) this.getField("viewFormat");
     }
 
-    public String getHttpQuery() {
+    public String getHttpQuery()
+    {
         return (String) this.getField("httpQuery");
     }
 
-    /**
-     * {@inheritDoc} Overridden to mark {@code onChange} links as updated when a field set.
-     */
+    /** {@inheritDoc} Overridden to mark {@code onChange} links as updated when a field set. */
     @Override
-    public void setField(String keyName, Object value) {
+    public void setField(String keyName, Object value)
+    {
         super.setField(keyName, value);
 
         // If the link refreshes "onChange", mark the link as updated because it has changed.
-        if (KMLConstants.ON_CHANGE.equals(this.getRefreshMode())) {
+        if (KMLConstants.ON_CHANGE.equals(this.getRefreshMode()))
+        {
             this.setUpdateTime(System.currentTimeMillis());
         }
     }
@@ -111,9 +113,10 @@ public class KMLLink extends KMLAbstractObject {
      * Returns the time at which the linked resource was last updated. This method is safe to call from any thread.
      *
      * @return The time at which the linked content was most recently updated. See {@link System#currentTimeMillis()}
-     * for its numerical meaning of this timestamp.
+     *         for its numerical meaning of this timestamp.
      */
-    public long getUpdateTime() {
+    public long getUpdateTime()
+    {
         // Schedule a task to refresh the link if the refresh mode requires it. If the client code never calls
         // getUpdateTime, the link may never refresh. But in this case, the link is never rendered, so it doesn't matter.
         // Scheduling a refresh task only when the link is actually used avoids creating a long running update task
@@ -124,12 +127,13 @@ public class KMLLink extends KMLAbstractObject {
     }
 
     /**
-     * Specifies the time at which the linked resource was last updated. This method is safe to call from any thread.
+     * Specifies the time at which the linked resource was last updated.  This method is safe to call from any thread.
      *
      * @param updateTime The time at which the linked content was most recently updated. See {@link
      *                   System#currentTimeMillis()} for its numerical meaning of this timestamp.
      */
-    public void setUpdateTime(long updateTime) {
+    public void setUpdateTime(long updateTime)
+    {
         this.updateTime.set(updateTime);
     }
 
@@ -139,16 +143,18 @@ public class KMLLink extends KMLAbstractObject {
      *
      * @param time Time, in milliseconds since the Epoch, at which the link expires. Zero indicates no expiration.
      */
-    public void setExpirationTime(long time) {
+    public void setExpirationTime(long time)
+    {
         // If the refresh mode is onExpire, schedule a task to update the link at the expiration time. Otherwise
         // we don't care about the expiration.
-        if (KMLConstants.ON_EXPIRE.equals(this.getRefreshMode())) {
+        if (KMLConstants.ON_EXPIRE.equals(this.getRefreshMode()))
+        {
             // If there is already a task running, cancel it
-            if (this.refreshTask != null) {
+            if (this.refreshTask != null)
                 this.refreshTask.cancel(false);
-            }
 
-            if (time != 0) {
+            if (time != 0)
+            {
                 long refreshDelay = time - System.currentTimeMillis();
                 this.refreshTask = this.scheduleDelayedTask(new RefreshTask(), refreshDelay, TimeUnit.MILLISECONDS);
             }
@@ -160,48 +166,49 @@ public class KMLLink extends KMLAbstractObject {
      * {@code onExpire} refresh modes, this method schedules a task to update the link after the refresh interval
      * elapses, but only if such a task has not already been scheduled (only one refresh task is active at a time).
      */
-    protected void scheduleRefreshIfNeeded() {
+    protected void scheduleRefreshIfNeeded()
+    {
         Long refreshTime = this.computeRefreshTime();
-        if (refreshTime == null) {
+        if (refreshTime == null)
             return;
-        }
 
         // Determine if the refresh interval has elapsed since the last refresh task was scheduled.
         boolean intervalElapsed = System.currentTimeMillis() > refreshTime;
 
         // If the refresh interval has already elapsed then the link needs to refresh immediately.
-        if (intervalElapsed) {
+        if (intervalElapsed)
             this.updateTime.set(System.currentTimeMillis());
-        }
 
         // Schedule a refresh if the refresh interval has elapsed, or if no refresh task is already active.
         // Checking the refresh interval ensures that even if the task fails to run for some reason, a new
         // task will be scheduled after the interval expires.
-        if (intervalElapsed || this.refreshTask == null || this.refreshTask.isDone()) {
+        if (intervalElapsed || this.refreshTask == null || this.refreshTask.isDone())
+        {
             long refreshDelay = refreshTime - System.currentTimeMillis();
             this.refreshTask = this.scheduleDelayedTask(new RefreshTask(), refreshDelay, TimeUnit.MILLISECONDS);
         }
     }
 
-    protected Long computeRefreshTime() {
+    protected Long computeRefreshTime()
+    {
         Long refreshTime = null;
 
         // Only handle onInterval here. onExpire is handled by KMLNetworkLink when the network resource is retrieved.
-        if (KMLConstants.ON_INTERVAL.equals(this.getRefreshMode())) {
+        if (KMLConstants.ON_INTERVAL.equals(this.getRefreshMode()))
+        {
             Double ri = this.getRefreshInterval();
             refreshTime = ri != null ? this.updateTime.get() + (long) (ri * 1000d) : null;
         }
 
-        if (refreshTime == null) {
+        if (refreshTime == null)
             return null;
-        }
 
         KMLNetworkLinkControl linkControl = this.getRoot().getNetworkLinkControl();
-        if (linkControl != null) {
+        if (linkControl != null)
+        {
             Long minRefresh = (long) (linkControl.getMinRefreshPeriod() * 1000d);
-            if (minRefresh != null && minRefresh > refreshTime) {
+            if (minRefresh != null && minRefresh > refreshTime)
                 refreshTime = minRefresh;
-            }
         }
 
         return refreshTime;
@@ -214,11 +221,14 @@ public class KMLLink extends KMLAbstractObject {
      * @param msg The message that was received.
      */
     @Override
-    public void onMessage(Message msg) {
+    public void onMessage(Message msg)
+    {
         String viewRefreshMode = this.getViewRefreshMode();
-        if (View.VIEW_STOPPED.equals(msg.getName()) && KMLConstants.ON_STOP.equals(viewRefreshMode)) {
+        if (View.VIEW_STOPPED.equals(msg.getName()) && KMLConstants.ON_STOP.equals(viewRefreshMode))
+        {
             Double refreshTime = this.getViewRefreshTime();
-            if (refreshTime != null) {
+            if (refreshTime != null)
+            {
                 this.scheduleDelayedTask(new RefreshTask(), refreshTime.longValue(), TimeUnit.SECONDS);
             }
         }
@@ -227,27 +237,28 @@ public class KMLLink extends KMLAbstractObject {
     /**
      * Schedule a task to mark a link as updated after a delay. The task only executes once.
      *
-     * @param task Task to schedule.
-     * @param delay Delay to wait before executing the task. The time unit is determined by {code timeUnit}.
+     * @param task     Task to schedule.
+     * @param delay    Delay to wait before executing the task. The time unit is determined by {code timeUnit}.
      * @param timeUnit The time unit of {@code delay}.
      *
      * @return Future that represents the scheduled task.
      */
-    protected ScheduledFuture scheduleDelayedTask(Runnable task, long delay, TimeUnit timeUnit) {
+    protected ScheduledFuture scheduleDelayedTask(Runnable task, long delay, TimeUnit timeUnit)
+    {
         return WorldWind.getScheduledTaskService().addScheduledTask(task, delay, timeUnit);
     }
 
-    /**
-     * {@inheritDoc} Overridden to set a default refresh mode of {@code onChange} if the refresh mode is not specified.
-     */
+    /** {@inheritDoc} Overridden to set a default refresh mode of {@code onChange} if the refresh mode is not specified. */
     @Override
-    public Object parse(XMLEventParserContext ctx, XMLEvent inputEvent, Object... args) throws XMLStreamException {
+    public Object parse(XMLEventParserContext ctx, XMLEvent inputEvent, Object... args) throws XMLStreamException
+    {
         Object o = super.parse(ctx, inputEvent, args);
 
         // If the link does not have a refresh mode, set the default refresh mode of "onChange". We set an explicit
         // default after parsing is complete so that we can distinguish links that do not specify a refresh mode from
         // those in which the refresh mode has not yet been parsed.
-        if (WWUtil.isEmpty(this.getRefreshMode())) {
+        if (WWUtil.isEmpty(this.getRefreshMode()))
+        {
             this.setField("refreshMode", KMLConstants.ON_CHANGE);
         }
 
@@ -260,8 +271,8 @@ public class KMLLink extends KMLAbstractObject {
      * <code>viewFormat</code> and <code>httpQuery</code>. Otherwise, this returns the concatenation of the
      * <code>href</code>, the <code>viewFormat</code> and the <code>httpQuery</code> for form an absolute URL string. If
      * the the <code>href</code> contains a query string, the <code>viewFormat</code> and <code>httpQuery</code> are
-     * appended to that string. If necessary, this inserts the <code>&amp;</code> character between the
-     * <code>href</code>'s query string, the <code>viewFormat</code>, and the <code>httpQuery</code>.
+     * appended to that string. If necessary, this inserts the <code>&amp;</code> character between the <code>href</code>'s
+     * query string, the <code>viewFormat</code>, and the <code>httpQuery</code>.
      * <p>
      * This substitutes the following parameters in <code>viewFormat</code> and <code>httpQuery</code>: <ul>
      * <li><code>[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]</code> - visible bounds of the globe, or 0 if the globe
@@ -297,51 +308,55 @@ public class KMLLink extends KMLAbstractObject {
      * @see #getHttpQuery()
      * @see gov.nasa.worldwind.Configuration
      */
-    public String getAddress(DrawContext dc) {
-        if (dc == null) {
+    public String getAddress(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         // See if we've already determined the href is a local reference
-        if (this.finalHref != null) {
+        if (this.finalHref != null)
             return this.finalHref;
-        }
 
         String href = this.getHref();
-        if (href != null) {
+        if (href != null)
             href = href.trim();
-        }
 
-        if (WWUtil.isEmpty(href)) {
+        if (WWUtil.isEmpty(href))
             return href;
-        }
 
         // If the href is a local resource, the viewFormat and httpQuery parameters are ignored, and we return the href.
         // We treat the href as a local resource reference if it fails to parse as a URL, or if the URL's protocol is
         // "file" or "jar".
         // See OGC KML specification 2.2.0, section 13.1.2.
         URL url = this.hrefURL != null ? this.hrefURL : WWIO.makeURL(href);
-        if (url == null || this.isLocalReference(url)) {
+        if (url == null || this.isLocalReference(url))
+        {
             this.finalHref = href; // don't need to parse the href anymore
             return href;
         }
 
         String queryString = this.buildQueryString(dc);
-        if (WWUtil.isEmpty(queryString)) {
+        if (WWUtil.isEmpty(queryString))
+        {
             this.finalHref = href; // don't need to parse the href anymore
             return href;
         }
 
         this.hrefURL = url; // retain it so that we don't regenerate it every time
 
-        try {
+        try
+        {
             // Create a new URL, with the full query string.
             URL newUrl = new URL(this.hrefURL.getProtocol(), this.hrefURL.getHost(), this.hrefURL.getPort(),
-                    this.hrefURL.getPath() + queryString);
+                this.hrefURL.getPath() + queryString);
             return newUrl.toString();
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e)
+        {
             return href; // If constructing a URL from the href and query string fails, assume this is a local file.
         }
     }
@@ -353,7 +368,8 @@ public class KMLLink extends KMLAbstractObject {
      *
      * @return <code>true</code> if the <code>url</code> specifies a local resource, otherwise <code>false</code>.
      */
-    protected boolean isLocalReference(URL url) {
+    protected boolean isLocalReference(URL url)
+    {
         return url.getProtocol() == null || "file".equals(url.getProtocol()) || "jar".equals(url.getProtocol());
     }
 
@@ -362,42 +378,42 @@ public class KMLLink extends KMLAbstractObject {
      * the <code>httpQuery</code> to form the link URL's query part. This returns <code>null</code> if this link's
      * <code>href</code> does not specify a URL. This substitutes parameters in <code>viewFormat</code> according to the
      * specified <code>DrawContext</code>'s current viewing parameters, and substitutes parameters in
-     * <code>httpQuery</code> according to the current <code>{@link gov.nasa.worldwind.Configuration}</code> parameters.
+     * <code>httpQuery</code> according to the current <code>{@link gov.nasa.worldwind.Configuration}</code>
+     * parameters.
      *
      * @param dc the <code>DrawContext</code> used to determine the current view parameters.
      *
      * @return the query part of this KML link's address, or <code>null</code> if this link does not specify a URL.
      */
-    protected String buildQueryString(DrawContext dc) {
+    protected String buildQueryString(DrawContext dc)
+    {
         URL url = WWIO.makeURL(this.getHref());
-        if (url == null) {
+        if (url == null)
             return null;
-        }
 
         StringBuilder queryString = new StringBuilder(url.getQuery() != null ? url.getQuery() : "");
 
         String viewRefreshMode = this.getViewRefreshMode();
-        if (viewRefreshMode != null) {
+        if (viewRefreshMode != null)
             viewRefreshMode = viewRefreshMode.trim();
-        }
 
         // Ignore the viewFormat if the viewRefreshMode is unspecified or if the viewRefreshMode is "never".
         // See OGC KML specification 2.2.0, section 16.22.1.
-        if (!WWUtil.isEmpty(viewRefreshMode) && !KMLConstants.NEVER.equals(viewRefreshMode)) {
+        if (!WWUtil.isEmpty(viewRefreshMode) && !KMLConstants.NEVER.equals(viewRefreshMode))
+        {
             String s = this.getViewFormat();
-            if (s != null) {
+            if (s != null)
                 s = s.trim();
-            }
 
             // Use a default viewFormat that includes the view bounding box parameters if no viewFormat is specified
             // and the viewRefreshMode is "onStop".
             // See Google KML Reference: http://code.google.com/apis/kml/documentation/kmlreference.html#link
-            if (s == null && KMLConstants.ON_STOP.equals(viewRefreshMode)) {
+            if (s == null && KMLConstants.ON_STOP.equals(viewRefreshMode))
                 s = DEFAULT_VIEW_FORMAT;
-            }
 
             // Ignore the viewFormat if it's specified but empty.
-            if (!WWUtil.isEmpty(s)) {
+            if (!WWUtil.isEmpty(s))
+            {
                 Sector viewBounds = this.computeVisibleBounds(dc);
                 //noinspection ConstantConditions
                 s = s.replaceAll("\\[bboxWest\\]", Double.toString(viewBounds.getMinLongitude().degrees));
@@ -408,7 +424,8 @@ public class KMLLink extends KMLAbstractObject {
                 View view = dc.getView();
 
                 Vec4 centerPoint = view.getCenterPoint();
-                if (centerPoint != null) {
+                if (centerPoint != null)
+                {
                     // Use the view's center position as the "look at" position.
                     Position centerPosition = view.getGlobe().computePositionFromPoint(centerPoint);
                     s = s.replaceAll("\\[lookatLat\\]", Double.toString(centerPosition.getLatitude().degrees));
@@ -439,20 +456,20 @@ public class KMLLink extends KMLAbstractObject {
                 s = s.replaceAll("\\[vertPixels\\]", Integer.toString(viewport.height));
 
                 // TODO: Implement support for the remaining viewFormat parameters: [vertFov] [terrainEnabled].
-                if (queryString.length() > 0 && queryString.charAt(queryString.length() - 1) != '&') {
+
+                if (queryString.length() > 0 && queryString.charAt(queryString.length() - 1) != '&')
                     queryString.append('&');
-                }
                 queryString.append(s, s.startsWith("&") ? 1 : 0, s.length());
             }
         }
 
         // Ignore the httpQuery if it's unspecified, or if an empty httpQuery is specified.
         String s = this.getHttpQuery();
-        if (s != null) {
+        if (s != null)
             s = s.trim();
-        }
 
-        if (!WWUtil.isEmpty(s)) {
+        if (!WWUtil.isEmpty(s))
+        {
             String clientName = Configuration.getStringValue(AVKey.NAME, Version.getVersionName());
             String clientVersion = Configuration.getStringValue(AVKey.VERSION, Version.getVersionNumber());
 
@@ -462,15 +479,13 @@ public class KMLLink extends KMLAbstractObject {
             s = s.replaceAll("\\[clientName\\]", clientName);
             s = s.replaceAll("\\[language\\]", Locale.getDefault().getLanguage());
 
-            if (queryString.length() > 0 && queryString.charAt(queryString.length() - 1) != '&') {
+            if (queryString.length() > 0 && queryString.charAt(queryString.length() - 1) != '&')
                 queryString.append('&');
-            }
             queryString.append(s, s.startsWith("&") ? 1 : 0, s.length());
         }
 
-        if (queryString.length() > 0 && queryString.charAt(0) != '?') {
+        if (queryString.length() > 0 && queryString.charAt(0) != '?')
             queryString.insert(0, '?');
-        }
 
         return queryString.length() > 0 ? queryString.toString() : null;
     }
@@ -485,8 +500,10 @@ public class KMLLink extends KMLAbstractObject {
      *
      * @return the current visible bounds on the specified <code>DrawContext</code>.
      */
-    protected Sector computeVisibleBounds(DrawContext dc) {
-        if (dc.getVisibleSector() != null && this.getViewBoundScale() != null) {
+    protected Sector computeVisibleBounds(DrawContext dc)
+    {
+        if (dc.getVisibleSector() != null && this.getViewBoundScale() != null)
+        {
             // If the DrawContext has a visible sector and a viewBoundScale is specified, compute the view bounding box
             // by scaling the DrawContext's visible sector from its centroid, based on the scale factor specified by
             // viewBoundScale.
@@ -500,15 +517,19 @@ public class KMLLink extends KMLAbstractObject {
             // methods Angle.fromDegreesLatitude and Angle.fromDegreesLongitude automatically limit latitude and
             // longitude to these ranges.
             return new Sector(
-                    Angle.fromDegreesLatitude(centerLat - this.getViewBoundScale() * (latDelta / 2d)),
-                    Angle.fromDegreesLatitude(centerLat + this.getViewBoundScale() * (latDelta / 2d)),
-                    Angle.fromDegreesLongitude(centerLon - this.getViewBoundScale() * (lonDelta / 2d)),
-                    Angle.fromDegreesLongitude(centerLon + this.getViewBoundScale() * (lonDelta / 2d)));
-        } else if (dc.getVisibleSector() != null) {
+                Angle.fromDegreesLatitude(centerLat - this.getViewBoundScale() * (latDelta / 2d)),
+                Angle.fromDegreesLatitude(centerLat + this.getViewBoundScale() * (latDelta / 2d)),
+                Angle.fromDegreesLongitude(centerLon - this.getViewBoundScale() * (lonDelta / 2d)),
+                Angle.fromDegreesLongitude(centerLon + this.getViewBoundScale() * (lonDelta / 2d)));
+        }
+        else if (dc.getVisibleSector() != null)
+        {
             // If the DrawContext has a visible sector but no viewBoundScale is specified, use the DrawContext's visible
             // sector as the view bounding box.
             return dc.getVisibleSector();
-        } else {
+        }
+        else
+        {
             // If the DrawContext does not have a visible sector, use the standard EMPTY_SECTOR as the view bounding
             // box. If the viewFormat contains bounding box parameters, we must substitute them with a valid value. In
             // this case we substitute them with 0.
@@ -517,8 +538,10 @@ public class KMLLink extends KMLAbstractObject {
     }
 
     @Override
-    public void applyChange(KMLAbstractObject sourceValues) {
-        if (!(sourceValues instanceof KMLLink)) {
+    public void applyChange(KMLAbstractObject sourceValues)
+    {
+        if (!(sourceValues instanceof KMLLink))
+        {
             String message = Logging.getMessage("nullValue.SourceIsNull");
             Logging.logger().warning(message);
             throw new IllegalArgumentException(message);
@@ -536,15 +559,12 @@ public class KMLLink extends KMLAbstractObject {
         this.onChange(new Message(KMLAbstractObject.MSG_LINK_CHANGED, this));
     }
 
-    /**
-     * A Runnable task that marks a KMLLink as updated when the task executes.
-     */
-    class RefreshTask implements Runnable {
-
-        /**
-         * Mark the link as updated.
-         */
-        public void run() {
+    /** A Runnable task that marks a KMLLink as updated when the task executes. */
+    class RefreshTask implements Runnable
+    {
+        /** Mark the link as updated. */
+        public void run()
+        {
             // Mark the link as updated.
             KMLLink.this.setUpdateTime(System.currentTimeMillis());
 

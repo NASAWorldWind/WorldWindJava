@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.drag;
 
 /**
@@ -10,8 +11,8 @@ package gov.nasa.worldwind.drag;
  * Draggable#drag(DragContext)} method includes information on the screen coordinates and the state of the
  * {@link gov.nasa.worldwind.WorldWindow}.
  */
-public interface Draggable {
-
+public interface Draggable
+{
     /**
      * Indicates whether the object is enabled for dragging.
      *

@@ -17,13 +17,12 @@ import java.awt.event.*;
  * @author dcollins
  * @version $Id: HotSpot.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface HotSpot extends SelectListener, KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
-
+public interface HotSpot extends SelectListener, KeyListener, MouseListener, MouseMotionListener, MouseWheelListener
+{
     /**
      * Called when this HotSpot is activated or deactivated. The HotSpot only receives input events when it is active.
      *
-     * @param active {@code true} if this HotSpot is being activated. {@code false} if this HotSpot is being
-     * deactivated.
+     * @param active {@code true} if this HotSpot is being activated. {@code false} if this HotSpot is being deactivated.
      */
     void setActive(boolean active);
 

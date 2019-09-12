@@ -3,25 +3,26 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-package gov.nasa.worldwind.formats.nitfs;
 
+package gov.nasa.worldwind.formats.nitfs;
 /**
  * @author Lado Garakanidze
  * @version $Id: NITFSSegment.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class NITFSSegment {
-
+public class NITFSSegment
+{
     protected java.nio.ByteBuffer buffer;
     protected NITFSSegmentType segmentType;
     protected int savedBufferOffset;
-
+    
     protected int headerStartOffset;
     protected int headerLength;
     protected int dataStartOffset;
     protected int dataLength;
 
     public NITFSSegment(NITFSSegmentType segmentType, java.nio.ByteBuffer buffer,
-            int headerStartOffset, int headerLength, int dataStartOffset, int dataLength) {
+        int headerStartOffset, int headerLength, int dataStartOffset, int dataLength)
+    {
         this.buffer = buffer;
         this.segmentType = segmentType;
         this.headerStartOffset = headerStartOffset;
@@ -31,7 +32,9 @@ public class NITFSSegment {
         this.savedBufferOffset = buffer.position();
     }
 
-    protected void restoreBufferPosition() {
+    protected void restoreBufferPosition()
+    {
         this.buffer.position(this.savedBufferOffset);
     }
 }
+

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.worldwindow.util;
 
 import javax.swing.*;
@@ -12,43 +13,50 @@ import java.awt.*;
  * @author tag
  * @version $Id: ShadedPanel.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ShadedPanel extends JPanel {
-
+public class ShadedPanel extends JPanel
+{
     protected Color c1 = new Color(0xFFFFFF);
     protected Color c2 = new Color(0xC8D2DE);
 
-    public ShadedPanel(LayoutManager layoutManager, boolean b) {
+    public ShadedPanel(LayoutManager layoutManager, boolean b)
+    {
         super(layoutManager, b);
         this.setOpaque(false);
     }
 
-    public ShadedPanel(LayoutManager layoutManager) {
+    public ShadedPanel(LayoutManager layoutManager)
+    {
         super(layoutManager);
         this.setOpaque(false);
     }
 
-    public ShadedPanel(boolean b) {
+    public ShadedPanel(boolean b)
+    {
         super(b);
         this.setOpaque(false);
     }
 
-    public ShadedPanel() {
+    public ShadedPanel()
+    {
         this.setOpaque(false);
     }
 
-    public void setColors(Color c1, Color c2) {
+    public void setColors(Color c1, Color c2)
+    {
         this.c1 = c1;
         this.c2 = c2;
     }
 
-    public void reverseShadingDirection() {
+    public void reverseShadingDirection()
+    {
         Color t = this.c1;
         this.c1 = this.c2;
         this.c2 = t;
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g)
+    {
         Graphics2D g2 = (Graphics2D) g;
 
         // Creates a two-stops gradient
@@ -71,5 +79,6 @@ public class ShadedPanel extends JPanel {
 
         // Paints borders, text...
 //            super.paintComponent(g);
+
     }
 }

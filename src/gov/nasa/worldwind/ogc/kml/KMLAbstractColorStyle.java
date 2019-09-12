@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.kml;
 
 /**
@@ -11,22 +12,25 @@ package gov.nasa.worldwind.ogc.kml;
  * @author tag
  * @version $Id: KMLAbstractColorStyle.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public abstract class KMLAbstractColorStyle extends KMLAbstractSubStyle {
-
+public abstract class KMLAbstractColorStyle extends KMLAbstractSubStyle
+{
     /**
      * Construct an instance.
      *
      * @param namespaceURI the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    protected KMLAbstractColorStyle(String namespaceURI) {
+    protected KMLAbstractColorStyle(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
-    public String getColor() {
+    public String getColor()
+    {
         return (String) this.getField("color");
     }
 
-    public String getColorMode() {
+    public String getColorMode()
+    {
         return (String) this.getField("colorMode");
     }
 }

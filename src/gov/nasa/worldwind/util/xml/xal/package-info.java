@@ -3,11 +3,12 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 /**
  * <p>
  * Provides classes for parsing the XAL namespace.</p>
  *
- * <h3>Note: This package is not yet complete.</h3>
+<h3>Note: This package is not yet complete.</h3>
  *
  */
 package gov.nasa.worldwind.util.xml.xal;

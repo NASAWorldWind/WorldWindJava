@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.avlist.AVList;
@@ -15,8 +16,8 @@ import gov.nasa.worldwind.util.TextDecoder;
  * @version $Id: Balloon.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see BalloonAttributes
  */
-public interface Balloon extends Renderable, Highlightable, AVList {
-
+public interface Balloon extends Renderable, Highlightable, AVList
+{
     /**
      * Is the balloon always on top?
      *
@@ -109,13 +110,14 @@ public interface Balloon extends Renderable, Highlightable, AVList {
      * object returned during picking. If null, the balloon itself is the pickable object returned during picking.
      *
      * @return the object used as the pickable object returned during picking, or null to indicate the the balloon is
-     * returned during picking.
+     *         returned during picking.
      */
     Object getDelegateOwner();
 
     /**
-     * Specifies the delegate owner of the balloon. If non-null, the delegate owner replaces the balloon as the pickable
-     * object returned during picking. If null, the balloon itself is the pickable object returned during picking.
+     * Specifies the delegate owner of the balloon. If non-null, the delegate owner replaces the balloon as the
+     * pickable object returned during picking. If null, the balloon itself is the pickable object returned during
+     * picking.
      *
      * @param owner the object to use as the pickable object returned during picking, or null to return the balloon.
      */

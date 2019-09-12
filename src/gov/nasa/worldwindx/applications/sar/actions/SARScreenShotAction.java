@@ -14,9 +14,10 @@ import javax.swing.*;
  * @author dcollins
  * @version $Id: SARScreenShotAction.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class SARScreenShotAction extends ScreenShotAction {
-
-    public SARScreenShotAction(WorldWindow wwd, Icon icon) {
+public class SARScreenShotAction extends ScreenShotAction
+{
+    public SARScreenShotAction(WorldWindow wwd, Icon icon)
+    {
         super(wwd);
         this.putValue(Action.NAME, "Screen Shot...");
         this.putValue(Action.SHORT_DESCRIPTION, "Save a screen shot");

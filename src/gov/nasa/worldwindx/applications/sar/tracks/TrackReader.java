@@ -11,8 +11,8 @@ import gov.nasa.worldwind.tracks.Track;
  * @author dcollins
  * @version $Id: TrackReader.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface TrackReader {
-
+public interface TrackReader
+{
     String getDescription();
 
     boolean canRead(Object source);

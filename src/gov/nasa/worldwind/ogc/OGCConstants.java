@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc;
 
 /**
@@ -11,8 +12,8 @@ package gov.nasa.worldwind.ogc;
  * @author tag
  * @version $Id: OGCConstants.java 2057 2014-06-14 01:13:52Z tgaskins $
  */
-public interface OGCConstants {
-
+public interface OGCConstants
+{
     /**
      * The name of the OGC Web Service <code>GetCapabilities</code> operation. The <code>GetCapabilities</code>
      * operation returns metadata about the operations and data provided by an OGC Web Service.

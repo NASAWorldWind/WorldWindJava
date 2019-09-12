@@ -9,8 +9,8 @@ package gov.nasa.worldwind.formats.vpf;
  * @author dcollins
  * @version $Id: VPFConstants.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface VPFConstants {
-
+public interface VPFConstants
+{
     // Column Types
     // DIGEST Part 2, Annex C, Table C-11
     final String TEXT = "T";           // Text (US ASCII)

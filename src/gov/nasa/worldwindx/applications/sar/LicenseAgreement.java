@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwindx.applications.sar;
 
 import gov.nasa.worldwind.WWObjectImpl;
@@ -19,8 +20,8 @@ import java.io.File;
  * @author dcollins
  * @version $Id: LicenseAgreement.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class LicenseAgreement extends WWObjectImpl {
-
+public class LicenseAgreement extends WWObjectImpl
+{
     private final Object license;
     private final String licenseKey;
 
@@ -37,59 +38,63 @@ public class LicenseAgreement extends WWObjectImpl {
     public static final String LICENSE_ACCEPTED_AND_INSTALLED = "gov.nasa.worldwind.LicenseAcceptedAndInstalled";
     public static final String LICENSE_DECLINED = "gov.nasa.worldwind.LicenseDeclined";
 
-    public LicenseAgreement(Object license, String licenseKey) {
+    public LicenseAgreement(Object license, String licenseKey)
+    {
         this(license, licenseKey, null);
     }
 
-    public LicenseAgreement(Object license, String licenseKey, AVList params) {
-        if (license == null) {
+    public LicenseAgreement(Object license, String licenseKey, AVList params)
+    {
+        if (license == null)
+        {
             String message = "nullValue.licenseIsNull";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (licenseKey == null) {
+        if (licenseKey == null)
+        {
             String message = "nullValue.licenseKeyIsNull";
             Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(message);   
         }
 
         this.license = license;
         this.licenseKey = licenseKey;
-        if (params != null) {
+        if (params != null)
             setValues(params);
-        }
     }
 
-    public final Object getLicense() {
+    public final Object getLicense()
+    {
         return this.license;
     }
 
-    public final String getLicenseKey() {
+    public final String getLicenseKey()
+    {
         return this.licenseKey;
     }
 
-    public String checkForLicenseAgreement(Component parentComponent) {
+    public String checkForLicenseAgreement(Component parentComponent)
+    {
         // License has already been accepted and installed.
-        if (isLicenseInstalled()) {
+        if (isLicenseInstalled())
             return LICENSE_ACCEPTED_AND_INSTALLED;
-        }
 
         // License is not installed - display license agreement.
         int result = displayLicenseAgreement(parentComponent);
-        if (result == LicenseDialog.DECLINE_OPTION) {
+        if (result == LicenseDialog.DECLINE_OPTION)
             return LICENSE_DECLINED;
-        }
 
         // Install the license key only if the user accepted,
         // and no problems occurred displaying the license. 
-        if (result == LicenseDialog.ACCEPT_OPTION) {
+        if (result == LicenseDialog.ACCEPT_OPTION)
             installLicenseKey();
-        }
 
         return isLicenseInstalled() ? LICENSE_ACCEPTED_AND_INSTALLED : LICENSE_ACCEPTED;
     }
 
-    public int displayLicenseAgreement(Component parentComponent) {
+    public int displayLicenseAgreement(Component parentComponent)
+    {
         String contentType = getStringValue(this, LICENSE_CONTENT_TYPE, DEFAULT_LICENSE_CONTENT_TYPE);
         Object dialogSize = getValue(DIALOG_PREFERRED_SIZE);
         String dialogTitle = getStringValue(this, DIALOG_TITLE, DEFAULT_DIALOG_TITLE);
@@ -97,37 +102,44 @@ public class LicenseAgreement extends WWObjectImpl {
         LicenseDialog dialog = new LicenseDialog(this.license);
         dialog.setContentType(contentType);
         dialog.setTitle(dialogTitle);
-        if (dialogSize != null && dialogSize instanceof Dimension) {
+        if (dialogSize != null && dialogSize instanceof Dimension)
             dialog.setPreferredSize((Dimension) dialogSize);
-        }
-
+        
         return dialog.showDialog(parentComponent);
     }
 
-    public boolean isLicenseInstalled() {
+    public boolean isLicenseInstalled()
+    {
         File keyFile = getLicenseKeyFile();
         return keyFile != null && keyFile.exists();
     }
 
-    private void installLicenseKey() {
+    private void installLicenseKey()
+    {
         File keyFile = getLicenseKeyFile();
-        try {
-            if (keyFile != null) {
+        try
+        {
+            if (keyFile != null)
                 keyFile.createNewFile();
-            }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             String message = "Exception while installing license key file";
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }
     }
 
-    private File getLicenseKeyFile() {
+    private File getLicenseKeyFile()
+    {
         File keyFile = null;
-        try {
+        try
+        {
             String cacheName = getStringValue(this, LICENSE_KEY_CACHE_NAME, DEFAULT_LICENSE_KEY_CACHE_NAME);
             String keyPath = WWIO.formPath(cacheName, this.licenseKey);
             keyFile = WorldWind.getDataFileStore().newFile(keyPath);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             String message = "Exception while searching license key file";
             Logging.logger().log(java.util.logging.Level.SEVERE, message, e);
         }

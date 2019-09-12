@@ -17,10 +17,11 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
-public class ShapeAttributesTest {
-
+public class ShapeAttributesTest
+{
     @Parameterized.Parameters
-    public static Collection<Object[]> data() {
+    public static Collection<Object[]> data()
+    {
         BasicShapeAttributes defaultBasicAttrs = new BasicShapeAttributes();
         BasicShapeAttributes exampleBasicAttrs = new BasicShapeAttributes();
         exampleBasicAttrs.setUnresolved(true); // set unresolved to true; it is false by default.
@@ -53,7 +54,7 @@ public class ShapeAttributesTest {
         exampleBalloonAttrs.setOutlineStippleFactor(256);
         exampleBalloonAttrs.setOutlineStipplePattern((short) 0xABAB);
         exampleBalloonAttrs.setSize(new Size(Size.EXPLICIT_DIMENSION, 0.5, AVKey.FRACTION,
-                Size.EXPLICIT_DIMENSION, 100.0, AVKey.PIXELS));
+            Size.EXPLICIT_DIMENSION, 100.0, AVKey.PIXELS));
         exampleBalloonAttrs.setOffset(new Offset(0.5, 0.0, AVKey.FRACTION, AVKey.PIXELS));
         exampleBalloonAttrs.setInsets(new Insets(5, 10, 15, 20));
         exampleBalloonAttrs.setBalloonShape(AVKey.SHAPE_ELLIPSE);
@@ -68,7 +69,7 @@ public class ShapeAttributesTest {
         exampleBalloonAttrs.setImageOpacity(0.5);
         exampleBalloonAttrs.setImageRepeat(AVKey.REPEAT_NONE);
 
-        return Arrays.asList(new Object[][]{
+        return Arrays.asList(new Object[][] {
             {defaultBasicAttrs, exampleBasicAttrs},
             {defaultBalloonAttrs, exampleBalloonAttrs}
         });
@@ -77,13 +78,15 @@ public class ShapeAttributesTest {
     private ShapeAttributes defaultAttributes;
     private ShapeAttributes exampleAttributes;
 
-    public ShapeAttributesTest(ShapeAttributes defaultAttributes, ShapeAttributes exampleAttributes) {
+    public ShapeAttributesTest(ShapeAttributes defaultAttributes, ShapeAttributes exampleAttributes)
+    {
         this.defaultAttributes = defaultAttributes;
         this.exampleAttributes = exampleAttributes;
     }
 
     @Test
-    public void testBasicSaveRestore() {
+    public void testBasicSaveRestore()
+    {
         RestorableSupport rs = RestorableSupport.newRestorableSupport();
 
         ShapeAttributes expected = this.exampleAttributes.copy();
@@ -96,7 +99,8 @@ public class ShapeAttributesTest {
     }
 
     @Test
-    public void testRestoreSameInstance() {
+    public void testRestoreSameInstance()
+    {
         RestorableSupport rs = RestorableSupport.newRestorableSupport();
 
         ShapeAttributes expected = this.exampleAttributes.copy();
@@ -110,25 +114,30 @@ public class ShapeAttributesTest {
     }
 
     @Test
-    public void testRestoreNullDocument() {
-        try {
+    public void testRestoreNullDocument()
+    {
+        try
+        {
             ShapeAttributes attrs = this.defaultAttributes.copy();
             attrs.restoreState(null, null);
             fail("Expected an IllegalArgumentException");
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testRestoreEmptyDocument() {
+    public void testRestoreEmptyDocument()
+    {
         ShapeAttributes expected = this.exampleAttributes.copy();
 
         // Restoring an empty state document should not change any attributes.
         ShapeAttributes actual = this.exampleAttributes.copy();
-        String emptyStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<emptyDocumentRoot/>";
+        String emptyStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<emptyDocumentRoot/>";
         RestorableSupport rs = RestorableSupport.parse(emptyStateInXml);
         actual.restoreState(rs, null);
 
@@ -136,17 +145,18 @@ public class ShapeAttributesTest {
     }
 
     @Test
-    public void testRestoreOneAttribute() {
+    public void testRestoreOneAttribute()
+    {
         ShapeAttributes expected = this.exampleAttributes.copy();
         expected.setOutlineWidth(11);
 
         ShapeAttributes actual = this.exampleAttributes.copy();
-        String partialStateInXml
-                = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<restorableState>"
-                + "<stateObject name=\"outlineWidth\">11</stateObject>"
-                + "<unknownElement name=\"unknownName\">unknownValue</unknownElement>"
-                + "</restorableState>";
+        String partialStateInXml =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<restorableState>" +
+                "<stateObject name=\"outlineWidth\">11</stateObject>" +
+                "<unknownElement name=\"unknownName\">unknownValue</unknownElement>" +
+                "</restorableState>";
         RestorableSupport rs = RestorableSupport.parse(partialStateInXml);
         actual.restoreState(rs, null);
 

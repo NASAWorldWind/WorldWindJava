@@ -14,26 +14,30 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: DefaultPanelDescriptor.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class DefaultPanelDescriptor implements WizardPanelDescriptor {
-
+public class DefaultPanelDescriptor implements WizardPanelDescriptor
+{
     private Wizard wizard;
     private Object panelIdentifier;
     private Component panelComponent;
 
     private static final String DEFAULT_PANEL_IDENTIFIER = "wizard.DefaultPanelIdentifier";
 
-    public DefaultPanelDescriptor() {
+    public DefaultPanelDescriptor()
+    {
         this.panelIdentifier = DEFAULT_PANEL_IDENTIFIER;
         this.panelComponent = new JPanel();
     }
 
-    public DefaultPanelDescriptor(Object id, Component panel) {
-        if (id == null) {
+    public DefaultPanelDescriptor(Object id, Component panel)
+    {
+        if (id == null)
+        {
             String message = Logging.getMessage("nullValue.ObjectIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (panel == null) {
+        if (panel == null)
+        {
             String message = "Component is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -43,20 +47,25 @@ public class DefaultPanelDescriptor implements WizardPanelDescriptor {
         this.panelComponent = panel;
     }
 
-    public final Wizard getWizard() {
+    public final Wizard getWizard()
+    {
         return this.wizard;
     }
 
-    public final WizardModel getWizardModel() {
+    public final WizardModel getWizardModel()
+    {
         return this.wizard != null ? this.wizard.getModel() : null;
     }
 
-    public final Object getPanelIdentifier() {
+    public final Object getPanelIdentifier()
+    {
         return this.panelIdentifier;
     }
 
-    public final void setPanelIdentifier(Object panelIdentifier) {
-        if (panelIdentifier == null) {
+    public final void setPanelIdentifier(Object panelIdentifier)
+    {
+        if (panelIdentifier == null)
+        {
             String message = Logging.getMessage("nullValue.ObjectIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -65,12 +74,15 @@ public class DefaultPanelDescriptor implements WizardPanelDescriptor {
         this.panelIdentifier = panelIdentifier;
     }
 
-    public final Component getPanelComponent() {
+    public final Component getPanelComponent()
+    {
         return this.panelComponent;
     }
 
-    public final void setPanelComponent(Component panel) {
-        if (panel == null) {
+    public final void setPanelComponent(Component panel)
+    {
+        if (panel == null)
+        {
             String message = "Component is null";
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -79,24 +91,30 @@ public class DefaultPanelDescriptor implements WizardPanelDescriptor {
         this.panelComponent = panel;
     }
 
-    public Object getBackPanelDescriptor() {
+    public Object getBackPanelDescriptor()
+    {
         return null;
     }
 
-    public Object getNextPanelDescriptor() {
+    public Object getNextPanelDescriptor()
+    {
         return null;
     }
 
-    public void registerPanel(Wizard wizard) {
+    public void registerPanel(Wizard wizard)
+    {
         this.wizard = wizard;
     }
 
-    public void aboutToDisplayPanel() {
+    public void aboutToDisplayPanel()
+    {
     }
 
-    public void displayingPanel() {
+    public void displayingPanel()
+    {
     }
 
-    public void aboutToHidePanel() {
+    public void aboutToHidePanel()
+    {
     }
 }

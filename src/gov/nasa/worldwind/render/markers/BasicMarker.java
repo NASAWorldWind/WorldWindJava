@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render.markers;
 
 import gov.nasa.worldwind.geom.*;
@@ -13,8 +14,8 @@ import gov.nasa.worldwind.util.Logging;
  * @author tag
  * @version $Id: BasicMarker.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class BasicMarker implements Marker {
-
+public class BasicMarker implements Marker
+{
     protected Position position; // may be null
     protected Angle heading; // may be null
     protected Angle pitch; // may be null
@@ -24,8 +25,10 @@ public class BasicMarker implements Marker {
     // required to be specified at construction.
     protected MarkerAttributes attributes;
 
-    public BasicMarker(Position position, MarkerAttributes attrs) {
-        if (attrs == null) {
+    public BasicMarker(Position position, MarkerAttributes attrs)
+    {
+        if (attrs == null)
+        {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -35,8 +38,10 @@ public class BasicMarker implements Marker {
         this.attributes = attrs;
     }
 
-    public BasicMarker(Position position, MarkerAttributes attrs, Angle heading) {
-        if (attrs == null) {
+    public BasicMarker(Position position, MarkerAttributes attrs, Angle heading)
+    {
+        if (attrs == null)
+        {
             String message = Logging.getMessage("nullValue.AttributesIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -47,69 +52,69 @@ public class BasicMarker implements Marker {
         this.attributes = attrs;
     }
 
-    public Position getPosition() {
+    public Position getPosition()
+    {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(Position position)
+    {
         this.position = position;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Angle getHeading() {
+    /** {@inheritDoc} */
+    public Angle getHeading()
+    {
         return this.heading;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setHeading(Angle heading) {
+    /** {@inheritDoc} */
+    public void setHeading(Angle heading)
+    {
         this.heading = heading;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Angle getRoll() {
+    /** {@inheritDoc} */
+    public Angle getRoll()
+    {
         return this.roll;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setRoll(Angle roll) {
+    /** {@inheritDoc} */
+    public void setRoll(Angle roll)
+    {
         this.roll = roll;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Angle getPitch() {
+    /** {@inheritDoc} */
+    public Angle getPitch()
+    {
         return this.pitch;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setPitch(Angle pitch) {
+    /** {@inheritDoc} */
+    public void setPitch(Angle pitch)
+    {
         this.pitch = pitch;
     }
 
-    public MarkerAttributes getAttributes() {
+    public MarkerAttributes getAttributes()
+    {
         return attributes;
     }
 
-    public void setAttributes(MarkerAttributes attributes) {
+    public void setAttributes(MarkerAttributes attributes)
+    {
         this.attributes = attributes;
     }
 
-    public void render(DrawContext dc, Vec4 point, double radius, boolean isRelative) {
+    public void render(DrawContext dc, Vec4 point, double radius, boolean isRelative)
+    {
         this.attributes.getShape(dc).render(dc, this, point, radius, isRelative);
     }
 
-    public void render(DrawContext dc, Vec4 point, double radius) {
+    public void render(DrawContext dc, Vec4 point, double radius)
+    {
         this.attributes.getShape(dc).render(dc, this, point, radius, false);
     }
 }

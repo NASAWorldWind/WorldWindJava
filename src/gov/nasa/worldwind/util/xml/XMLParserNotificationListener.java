@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util.xml;
 
 /**
@@ -11,8 +12,8 @@ package gov.nasa.worldwind.util.xml;
  * @author tag
  * @version $Id: XMLParserNotificationListener.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public interface XMLParserNotificationListener {
-
+public interface XMLParserNotificationListener
+{
     /**
      * Receives notification events from the parser context.
      *

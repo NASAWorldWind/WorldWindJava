@@ -16,35 +16,40 @@ import java.awt.*;
  * @author dcollins
  * @version $Id: ViewVolumeRenderer.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ViewVolumeRenderer {
-
+public class ViewVolumeRenderer
+{
     protected double size = 1d;
 
-    public ViewVolumeRenderer() {
+    public ViewVolumeRenderer()
+    {
     }
 
-    public double getSize() {
+    public double getSize()
+    {
         return this.size;
     }
 
-    public void setSize(double size) {
+    public void setSize(double size)
+    {
         this.size = size;
     }
 
-    public void render(DrawContext dc, Matrix modelview, Matrix projection, Rectangle viewport) {
-        if (dc.isPickingMode()) {
+    public void render(DrawContext dc, Matrix modelview, Matrix projection, Rectangle viewport)
+    {
+        if (dc.isPickingMode())
             return;
-        }
 
         dc.addOrderedRenderable(new OrderedViewVolume(modelview, projection, viewport));
     }
 
-    protected void draw(DrawContext dc, Matrix modelview, Matrix projection, Rectangle viewport) {
+    protected void draw(DrawContext dc, Matrix modelview, Matrix projection, Rectangle viewport)
+    {
         this.drawClipVolume(dc, modelview, projection, viewport);
         this.drawAxes(dc, modelview);
     }
 
-    protected void drawAxes(DrawContext dc, Matrix modelview) {
+    protected void drawAxes(DrawContext dc, Matrix modelview)
+    {
         Matrix modelviewInv = modelview.getInverse();
         Vec4 origin = Vec4.UNIT_W.transformBy4(modelviewInv);
         Vec4 x = origin.add3(Vec4.UNIT_X.transformBy4(modelviewInv).multiply3(this.getSize()));
@@ -54,9 +59,10 @@ public class ViewVolumeRenderer {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         OGLStackHandler ogsh = new OGLStackHandler();
         ogsh.pushAttrib(gl, GL2.GL_CURRENT_BIT
-                | GL2.GL_LINE_BIT
-                | GL2.GL_POINT_BIT);
-        try {
+            | GL2.GL_LINE_BIT
+            | GL2.GL_POINT_BIT);
+        try
+        {
             gl.glEnable(GL.GL_BLEND);
             gl.glLineWidth(1f);
             gl.glPointSize(5f);
@@ -73,38 +79,45 @@ public class ViewVolumeRenderer {
             drawLine(dc, origin, y);
             gl.glColor3ub((byte) 0, (byte) 0, (byte) 255); // Set the current RGB color to Blue.
             drawLine(dc, origin, z);
-        } finally {
+        }
+        finally
+        {
             ogsh.pop(gl);
         }
     }
 
-    protected void drawClipVolume(DrawContext dc, Matrix modelview, Matrix projection, Rectangle viewport) {
+    protected void drawClipVolume(DrawContext dc, Matrix modelview, Matrix projection, Rectangle viewport)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         OGLStackHandler ogsh = new OGLStackHandler();
         ogsh.pushAttrib(gl,
-                GL2.GL_CURRENT_BIT | GL2.GL_COLOR_BUFFER_BIT | GL2.GL_LINE_BIT | GL2.GL_ENABLE_BIT
+            GL2.GL_CURRENT_BIT | GL2.GL_COLOR_BUFFER_BIT | GL2.GL_LINE_BIT | GL2.GL_ENABLE_BIT
                 | GL2.GL_DEPTH_BUFFER_BIT);
-        try {
+        try
+        {
             gl.glLineWidth(1f);
             gl.glEnable(GL.GL_BLEND);
             OGLUtil.applyBlending(gl, false);
             drawVolume(dc, modelview, projection, viewport);
-        } finally {
+        }
+        finally
+        {
             ogsh.pop(gl);
         }
     }
 
-    protected static void drawVolume(DrawContext dc, Matrix modelview, Matrix projection, Rectangle viewport) {
+    protected static void drawVolume(DrawContext dc, Matrix modelview, Matrix projection, Rectangle viewport)
+    {
         Vec4 eye = Vec4.UNIT_W.transformBy4(modelview.getInverse());
         Vec4 near_ll = worldPointFromScreenPoint(dc, viewport, modelview, projection, new Vec4(0, 0, 0));
         Vec4 near_lr = worldPointFromScreenPoint(dc, viewport, modelview, projection, new Vec4(viewport.width, 0, 0));
         Vec4 near_ur = worldPointFromScreenPoint(dc, viewport, modelview, projection,
-                new Vec4(viewport.width, viewport.height, 0));
+            new Vec4(viewport.width, viewport.height, 0));
         Vec4 near_ul = worldPointFromScreenPoint(dc, viewport, modelview, projection, new Vec4(0, viewport.height, 0));
         Vec4 far_ll = worldPointFromScreenPoint(dc, viewport, modelview, projection, new Vec4(0, 0, 1));
         Vec4 far_lr = worldPointFromScreenPoint(dc, viewport, modelview, projection, new Vec4(viewport.width, 0, 1));
         Vec4 far_ur = worldPointFromScreenPoint(dc, viewport, modelview, projection,
-                new Vec4(viewport.width, viewport.height, 1));
+            new Vec4(viewport.width, viewport.height, 1));
         Vec4 far_ul = worldPointFromScreenPoint(dc, viewport, modelview, projection, new Vec4(0, viewport.height, 1));
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -160,7 +173,8 @@ public class ViewVolumeRenderer {
         drawLine(dc, eye, near_ul);
     }
 
-    protected static void drawLine(DrawContext dc, Vec4 a, Vec4 b) {
+    protected static void drawLine(DrawContext dc, Vec4 a, Vec4 b)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         gl.glBegin(GL2.GL_LINES);
         gl.glVertex3d(a.x, a.y, a.z);
@@ -168,7 +182,8 @@ public class ViewVolumeRenderer {
         gl.glEnd();
     }
 
-    protected static void drawQuad(DrawContext dc, Vec4 ll, Vec4 lr, Vec4 ur, Vec4 ul) {
+    protected static void drawQuad(DrawContext dc, Vec4 ll, Vec4 lr, Vec4 ur, Vec4 ul)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         gl.glBegin(GL2.GL_QUADS);
         gl.glVertex3d(ll.x, ll.y, ll.z);
@@ -178,7 +193,8 @@ public class ViewVolumeRenderer {
         gl.glEnd();
     }
 
-    protected static void drawTriangle(DrawContext dc, Vec4 a, Vec4 b, Vec4 c) {
+    protected static void drawTriangle(DrawContext dc, Vec4 a, Vec4 b, Vec4 c)
+    {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         gl.glBegin(GL2.GL_TRIANGLES);
         gl.glVertex3d(a.x, a.y, a.z);
@@ -188,49 +204,55 @@ public class ViewVolumeRenderer {
     }
 
     protected static Vec4 worldPointFromScreenPoint(DrawContext dc, Rectangle viewport, Matrix modelview,
-            Matrix projection, Vec4 screenPoint) {
+        Matrix projection, Vec4 screenPoint)
+    {
         // GLU expects matrices as column-major arrays.
         double[] modelviewArray = new double[16];
         double[] projectionArray = new double[16];
         modelview.toArray(modelviewArray, 0, false);
         projection.toArray(projectionArray, 0, false);
         // GLU expects the viewport as a four-component array.
-        int[] viewportArray = new int[]{viewport.x, viewport.y, viewport.width, viewport.height};
+        int[] viewportArray = new int[] {viewport.x, viewport.y, viewport.width, viewport.height};
 
         double[] result = new double[3];
         if (!dc.getGLU().gluUnProject(
-                screenPoint.x, screenPoint.y, screenPoint.z,
-                modelviewArray, 0,
-                projectionArray, 0,
-                viewportArray, 0,
-                result, 0)) {
+            screenPoint.x, screenPoint.y, screenPoint.z,
+            modelviewArray, 0,
+            projectionArray, 0,
+            viewportArray, 0,
+            result, 0))
+        {
             return null;
         }
 
         return Vec4.fromArray3(result, 0);
     }
 
-    protected class OrderedViewVolume implements OrderedRenderable {
-
+    protected class OrderedViewVolume implements OrderedRenderable
+    {
         protected Matrix modelview;
         protected Matrix projection;
         protected Rectangle viewport;
 
-        public OrderedViewVolume(Matrix modelview, Matrix projection, Rectangle viewport) {
+        public OrderedViewVolume(Matrix modelview, Matrix projection, Rectangle viewport)
+        {
             this.modelview = modelview;
             this.projection = projection;
             this.viewport = new Rectangle(viewport);
         }
 
-        public double getDistanceFromEye() {
+        public double getDistanceFromEye()
+        {
             return 0d;
         }
 
-        public void render(DrawContext dc) {
+        public void render(DrawContext dc)
+        {
             draw(dc, this.modelview, this.projection, this.viewport);
         }
 
-        public void pick(DrawContext dc, Point pickPoint) {
+        public void pick(DrawContext dc, Point pickPoint)
+        {
         }
     }
 }

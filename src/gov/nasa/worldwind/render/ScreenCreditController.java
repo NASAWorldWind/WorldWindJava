@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.*;
@@ -17,8 +18,8 @@ import java.util.*;
  * @author tag
  * @version $Id: ScreenCreditController.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class ScreenCreditController implements Renderable, SelectListener, Disposable {
-
+public class ScreenCreditController implements Renderable, SelectListener, Disposable
+{
     private int creditWidth = 32;
     private int creditHeight = 32;
     private int leftMargin = 240;
@@ -29,8 +30,10 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
     private WorldWindow wwd;
     private boolean enabled = true;
 
-    public ScreenCreditController(WorldWindow wwd) {
-        if (wwd == null) {
+    public ScreenCreditController(WorldWindow wwd)
+    {
+        if (wwd == null)
+        {
             String msg = Logging.getMessage("nullValue.WorldWindow");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -38,50 +41,52 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
 
         this.wwd = wwd;
 
-        if (wwd.getSceneController().getScreenCreditController() != null) {
+        if (wwd.getSceneController().getScreenCreditController() != null)
             wwd.getSceneController().getScreenCreditController().dispose();
-        }
 
         wwd.getSceneController().setScreenCreditController(this);
         wwd.addSelectListener(this);
     }
 
-    public void dispose() {
+    public void dispose()
+    {
         wwd.removeSelectListener(this);
-        if (wwd.getSceneController() == this) {
+        if (wwd.getSceneController() == this)
             wwd.getSceneController().setScreenCreditController(null);
-        }
     }
 
-    public boolean isEnabled() {
+    public boolean isEnabled()
+    {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(boolean enabled)
+    {
         this.enabled = enabled;
     }
 
-    public void pick(DrawContext dc, Point pickPoint) {
-        if (dc == null) {
+    public void pick(DrawContext dc, Point pickPoint)
+    {
+        if (dc == null)
+        {
             String msg = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (!this.isEnabled()) {
+        if (!this.isEnabled())
             return;
-        }
 
-        if (dc.getScreenCredits() == null || dc.getScreenCredits().size() < 1) {
+        if (dc.getScreenCredits() == null || dc.getScreenCredits().size() < 1)
             return;
-        }
 
         Set<Map.Entry<ScreenCredit, Long>> credits = dc.getScreenCredits().entrySet();
 
         int y = dc.getView().getViewport().height - (bottomMargin + creditHeight / 2);
         int x = leftMargin + creditWidth / 2;
 
-        for (Map.Entry<ScreenCredit, Long> entry : credits) {
+        for (Map.Entry<ScreenCredit, Long> entry : credits)
+        {
             ScreenCredit credit = entry.getKey();
             Rectangle viewport = new Rectangle(x, y, creditWidth, creditHeight);
 
@@ -92,32 +97,34 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
         }
     }
 
-    public void render(DrawContext dc) {
-        if (dc == null) {
+    public void render(DrawContext dc)
+    {
+        if (dc == null)
+        {
             String msg = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (dc.getScreenCredits() == null || dc.getScreenCredits().size() < 1) {
+        if (dc.getScreenCredits() == null || dc.getScreenCredits().size() < 1)
             return;
-        }
 
-        if (!this.isEnabled()) {
+        if (!this.isEnabled())
             return;
-        }
 
         Set<Map.Entry<ScreenCredit, Long>> credits = dc.getScreenCredits().entrySet();
 
         int y = dc.getView().getViewport().height - (bottomMargin + creditHeight / 2);
         int x = leftMargin + creditWidth / 2;
 
-        for (Map.Entry<ScreenCredit, Long> entry : credits) {
+        for (Map.Entry<ScreenCredit, Long> entry : credits)
+        {
             ScreenCredit credit = entry.getKey();
             Rectangle viewport = new Rectangle(x, y, creditWidth, creditHeight);
 
             credit.setViewport(viewport);
-            if (entry.getValue() == dc.getFrameTimeStamp()) {
+            if (entry.getValue() == dc.getFrameTimeStamp())
+            {
                 Object po = dc.getPickedObjects().getTopObject();
                 credit.setOpacity(po != null && po instanceof ScreenCredit ? this.highlightOpacity : this.baseOpacity);
                 credit.render(dc);
@@ -127,15 +134,17 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
         }
     }
 
-    public void selected(SelectEvent event) {
-        if (event.getMouseEvent() != null && event.getMouseEvent().isConsumed()) {
+    public void selected(SelectEvent event)
+    {
+        if (event.getMouseEvent() != null && event.getMouseEvent().isConsumed())
             return;
-        }
 
         Object po = event.getTopObject();
 
-        if (po != null && po instanceof ScreenCredit) {
-            if (event.getEventAction().equals(SelectEvent.LEFT_DOUBLE_CLICK)) {
+        if (po != null && po instanceof ScreenCredit)
+        {
+            if (event.getEventAction().equals(SelectEvent.LEFT_DOUBLE_CLICK))
+            {
                 openBrowser((ScreenCredit) po);
             }
         }
@@ -143,21 +152,28 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
 
     private Set<String> badURLsReported = new HashSet<String>();
 
-    protected void openBrowser(ScreenCredit credit) {
-        if (credit.getLink() != null && credit.getLink().length() > 0) {
-            try {
+    protected void openBrowser(ScreenCredit credit)
+    {
+        if (credit.getLink() != null && credit.getLink().length() > 0)
+        {
+            try
+            {
                 BrowserOpener.browse(new URL(credit.getLink()));
-            } catch (MalformedURLException e) {
+            }
+            catch (MalformedURLException e)
+            {
                 if (!badURLsReported.contains(credit.getLink())) // report it only once
                 {
                     String msg = Logging.getMessage("generic.URIInvalid",
-                            credit.getLink() != null ? credit.getLink() : "null");
+                        credit.getLink() != null ? credit.getLink() : "null");
                     Logging.logger().warning(msg);
                     badURLsReported.add(credit.getLink());
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 String msg = Logging.getMessage("generic.ExceptionAttemptingToInvokeWebBrower for URL",
-                        credit.getLink());
+                    credit.getLink());
                 Logging.logger().warning(msg);
             }
         }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.util.xml.atom;
 
 import gov.nasa.worldwind.util.xml.*;
@@ -15,16 +16,19 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author tag
  * @version $Id: AtomParserContext.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class AtomParserContext extends BasicXMLEventParserContext {
+public class AtomParserContext extends BasicXMLEventParserContext
+{
+    protected static final String[] StringFields = new String[]
+        {
+            "base",
+            "email",
+            "lang",
+            "name",
+            "uri",
+        };
 
-    protected static final String[] StringFields = new String[]{
-        "base",
-        "email",
-        "lang",
-        "name",
-        "uri",};
-
-    public static Map<QName, XMLEventParser> getDefaultParsers() {
+    public static Map<QName, XMLEventParser> getDefaultParsers()
+    {
         ConcurrentHashMap<QName, XMLEventParser> parsers = new ConcurrentHashMap<QName, XMLEventParser>();
 
         String ans = AtomConstants.ATOM_NAMESPACE;
@@ -32,7 +36,8 @@ public class AtomParserContext extends BasicXMLEventParserContext {
         parsers.put(new QName(ans, "link"), new AtomLink(ans));
 
         StringXMLEventParser stringParser = new StringXMLEventParser();
-        for (String s : StringFields) {
+        for (String s : StringFields)
+        {
             parsers.put(new QName(ans, s), stringParser);
         }
 

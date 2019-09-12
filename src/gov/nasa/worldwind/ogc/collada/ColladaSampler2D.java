@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc.collada;
 
 /**
@@ -11,14 +12,15 @@ package gov.nasa.worldwind.ogc.collada;
  * @author pabercrombie
  * @version $Id: ColladaSampler2D.java 654 2012-06-25 04:15:52Z pabercrombie $
  */
-public class ColladaSampler2D extends ColladaAbstractObject {
-
+public class ColladaSampler2D extends ColladaAbstractObject
+{
     /**
      * Construct an instance.
      *
      * @param ns the qualifying namespace URI. May be null to indicate no namespace qualification.
      */
-    public ColladaSampler2D(String ns) {
+    public ColladaSampler2D(String ns)
+    {
         super(ns);
     }
 
@@ -27,7 +29,8 @@ public class ColladaSampler2D extends ColladaAbstractObject {
      *
      * @return The value of the <i>source</i> field, or null if the field is not set.
      */
-    public ColladaSource getSource() {
+    public ColladaSource getSource()
+    {
         return (ColladaSource) this.getField("source");
     }
 }

@@ -3,6 +3,7 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
+
 package gov.nasa.worldwind.ogc;
 
 import gov.nasa.worldwind.util.*;
@@ -17,8 +18,8 @@ import java.util.Iterator;
  * @author tag
  * @version $Id: OGCBoundingBox.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class OGCBoundingBox extends AbstractXMLEventParser {
-
+public class OGCBoundingBox extends AbstractXMLEventParser
+{
     private String crs;
     private double minx;
     private double maxx;
@@ -28,10 +29,12 @@ public class OGCBoundingBox extends AbstractXMLEventParser {
     private double resy;
 
     public static OGCBoundingBox createFromStrings(String crs, String minx, String maxx, String miny, String maxy,
-            String resx, String resy) {
+        String resx, String resy)
+    {
         OGCBoundingBox bbox = new OGCBoundingBox(null);
 
-        try {
+        try
+        {
             bbox.crs = crs;
             bbox.minx = Double.parseDouble(minx);
             bbox.maxx = Double.parseDouble(maxx);
@@ -39,7 +42,9 @@ public class OGCBoundingBox extends AbstractXMLEventParser {
             bbox.maxy = Double.parseDouble(maxy);
             bbox.resx = resx != null && !resx.equals("") ? Double.parseDouble(resx) : 0;
             bbox.resy = resy != null && !resy.equals("") ? Double.parseDouble(resy) : 0;
-        } catch (NumberFormatException e) {
+        }
+        catch (NumberFormatException e)
+        {
             String message = Logging.getMessage("XML.ImproperDataType");
             Logging.logger().severe(message);
             throw e;
@@ -48,116 +53,139 @@ public class OGCBoundingBox extends AbstractXMLEventParser {
         return bbox;
     }
 
-    public OGCBoundingBox(String namespaceURI) {
+    public OGCBoundingBox(String namespaceURI)
+    {
         super(namespaceURI);
     }
 
     @Override
-    protected void doParseEventAttributes(XMLEventParserContext ctx, XMLEvent event, Object... args) {
+    protected void doParseEventAttributes(XMLEventParserContext ctx, XMLEvent event, Object... args)
+    {
         Iterator iter = event.asStartElement().getAttributes();
-        if (iter == null) {
+        if (iter == null)
             return;
-        }
 
-        while (iter.hasNext()) {
+        while (iter.hasNext())
+        {
             Attribute attr = (Attribute) iter.next();
-            if (attr.getName().getLocalPart().equals("CRS") && attr.getValue() != null) {
+            if (attr.getName().getLocalPart().equals("CRS") && attr.getValue() != null)
+            {
                 String s = attr.getValue();
-                if (s != null) {
+                if (s != null)
                     this.setCRS(s);
-                }
-            } else if (attr.getName().getLocalPart().equals("minx") && attr.getValue() != null) {
+            }
+            else if (attr.getName().getLocalPart().equals("minx") && attr.getValue() != null)
+            {
                 Double d = WWUtil.convertStringToDouble(attr.getValue());
-                if (d != null) {
+                if (d != null)
                     this.setMinx(d);
-                }
-            } else if (attr.getName().getLocalPart().equals("miny") && attr.getValue() != null) {
+            }
+            else if (attr.getName().getLocalPart().equals("miny") && attr.getValue() != null)
+            {
                 Double d = WWUtil.convertStringToDouble(attr.getValue());
-                if (d != null) {
+                if (d != null)
                     this.setMiny(d);
-                }
-            } else if (attr.getName().getLocalPart().equals("maxx") && attr.getValue() != null) {
+            }
+            else if (attr.getName().getLocalPart().equals("maxx") && attr.getValue() != null)
+            {
                 Double d = WWUtil.convertStringToDouble(attr.getValue());
-                if (d != null) {
+                if (d != null)
                     this.setMaxx(d);
-                }
-            } else if (attr.getName().getLocalPart().equals("maxy") && attr.getValue() != null) {
+            }
+            else if (attr.getName().getLocalPart().equals("maxy") && attr.getValue() != null)
+            {
                 Double d = WWUtil.convertStringToDouble(attr.getValue());
-                if (d != null) {
+                if (d != null)
                     this.setMaxy(d);
-                }
-            } else if (attr.getName().getLocalPart().equals("resx") && attr.getValue() != null) {
+            }
+            else if (attr.getName().getLocalPart().equals("resx") && attr.getValue() != null)
+            {
                 Double d = WWUtil.convertStringToDouble(attr.getValue());
-                if (d != null) {
+                if (d != null)
                     this.setResx(d);
-                }
-            } else if (attr.getName().getLocalPart().equals("resy") && attr.getValue() != null) {
+            }
+            else if (attr.getName().getLocalPart().equals("resy") && attr.getValue() != null)
+            {
                 Double d = WWUtil.convertStringToDouble(attr.getValue());
-                if (d != null) {
+                if (d != null)
                     this.setResy(d);
-                }
             }
         }
     }
 
-    public String getCRS() {
+    public String getCRS()
+    {
         return crs;
     }
 
-    protected void setCRS(String crs) {
+    protected void setCRS(String crs)
+    {
         this.crs = crs;
     }
 
-    public double getMinx() {
+    public double getMinx()
+    {
         return minx;
     }
 
-    protected void setMinx(double minx) {
+    protected void setMinx(double minx)
+    {
         this.minx = minx;
     }
 
-    public double getMaxx() {
+    public double getMaxx()
+    {
         return maxx;
     }
 
-    protected void setMaxx(double maxx) {
+    protected void setMaxx(double maxx)
+    {
         this.maxx = maxx;
     }
 
-    public double getMiny() {
+    public double getMiny()
+    {
         return miny;
     }
 
-    protected void setMiny(double miny) {
+    protected void setMiny(double miny)
+    {
         this.miny = miny;
     }
 
-    public double getMaxy() {
+    public double getMaxy()
+    {
         return maxy;
     }
 
-    protected void setMaxy(double maxy) {
+    protected void setMaxy(double maxy)
+    {
         this.maxy = maxy;
     }
 
-    public double getResx() {
+    public double getResx()
+    {
         return resx;
     }
 
-    protected void setResx(double resx) {
+    protected void setResx(double resx)
+    {
         this.resx = resx;
     }
 
-    public double getResy() {
+    public double getResy()
+    {
         return resy;
     }
 
-    protected void setResy(double resy) {
+    protected void setResy(double resy)
+    {
         this.resy = resy;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder sb = new StringBuilder();
 
         sb.append(this.crs);
