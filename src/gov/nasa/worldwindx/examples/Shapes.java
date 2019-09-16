@@ -211,7 +211,7 @@ public class Shapes {
                     path.setLineWidth(currentPathWidth);
                     path.setFollowTerrain(currentFollowTerrain);
                     if (path.isFollowTerrain()) {
-                        path.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+                        path.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
                     } else {
                         path.setAltitudeMode(WorldWind.ABSOLUTE);
                     }

@@ -673,6 +673,7 @@ public class Path extends AbstractShape {
 
     protected String pathType = DEFAULT_PATH_TYPE;
     protected boolean followTerrain; // true if altitude mode indicates terrain following
+    protected double offset = 0; // offset to use in clamp to ground mode
     protected boolean extrude;
     protected double terrainConformance = DEFAULT_TERRAIN_CONFORMANCE;
     protected int numSubsegments = DEFAULT_NUM_SUBSEGMENTS;
@@ -1608,7 +1609,7 @@ public class Path extends AbstractShape {
         FloatBuffer path = pathData.renderedPath;
 
         if (this.getAltitudeMode() == WorldWind.CLAMP_TO_GROUND || dc.is2DGlobe()) {
-            path = this.computePointsRelativeToTerrain(dc, positions, 0d, path, pathData);
+            path = this.computePointsRelativeToTerrain(dc, positions, offset, path, pathData);
         } else if (this.getAltitudeMode() == WorldWind.RELATIVE_TO_GROUND) {
             path = this.computePointsRelativeToTerrain(dc, positions, null, path, pathData);
         } else {
@@ -2588,11 +2589,8 @@ public class Path extends AbstractShape {
      * @param offset the path offset in meters.
      */
     public void setOffset(double offset) {
-        ArrayList<Position> newPositions = new ArrayList<>();
-        for (Position p : this.positions) {
-            newPositions.add(new Position(p, offset));
-        }
-        this.setPositions(newPositions);
+        this.offset=offset;
+        this.reset();
     }
 
     /**
