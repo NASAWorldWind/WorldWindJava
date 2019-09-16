@@ -144,27 +144,6 @@ public class Path extends AbstractShape {
     }
 
     /**
-     * Provides a concrete implementation of PositionColors that specifies a single color per position. Provided
-     * primarily to ease migration from {@link Polyline}.
-     */
-    public class OneColorPositionColors implements PositionColors {
-
-        Color color;
-
-        OneColorPositionColors(Color color) {
-            this.color = color;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public Color getColor(Position position, int ordinal) {
-            return color;
-        }
-    }
-
-    /**
      * Maintains globe-dependent computed data such as Cartesian vertices and extents. One entry exists for each
      * distinct globe that this shape encounters in calls to {@link AbstractShape#render(DrawContext)}. See {@link
      * AbstractShape}.
@@ -769,7 +748,7 @@ public class Path extends AbstractShape {
             throw new IllegalArgumentException(message);
         }
 
-        List<Position> endPoints = new ArrayList<Position>(2);
+        List<Position> endPoints = new ArrayList<>(2);
         endPoints.add(posA);
         endPoints.add(posB);
         this.setPositions(endPoints);
@@ -825,6 +804,7 @@ public class Path extends AbstractShape {
         this.positions = positions;
         this.computePositionCount();
         this.positionsSpanDateline = LatLon.locationsCrossDateLine(this.positions);
+        this.measurer.setPositions(this.positions);
 
         this.reset();
     }
@@ -955,11 +935,11 @@ public class Path extends AbstractShape {
      * @return the path's length in meters.
      */
     public double getLength() {
-        Object foo = this.getCurrentPathData().getEntries(); //.iterator();
-        System.out.println(foo);
-//        this.getCurrentPathData().getEntries()
-//        Iterator<Position> infos = this.positions.values().iterator();
-        return 0; // infos.hasNext() ? this.measurer.getLength(infos.next().globe) : 0;
+        PathData data = this.getCurrentPathData();
+        if (data != null && data.getGlobeStateKey() != null) {
+            return this.measurer.getLength(data.getGlobeStateKey().getGlobe());
+        }
+        return 0;
     }
 
     public double getLength(Globe globe) {
@@ -1102,6 +1082,7 @@ public class Path extends AbstractShape {
         this.showPositionsThreshold = showPositionsThreshold;
     }
 
+    @Override
     public Sector getSector() {
         if (this.sector == null && this.positions != null) {
             this.sector = Sector.boundingSector(this.positions);
@@ -1563,6 +1544,7 @@ public class Path extends AbstractShape {
      *
      * @param dc the current draw context.
      */
+    @Override
     protected void doDrawInterior(DrawContext dc) {
         if (this.shouldUseVBOs(dc)) {
             int[] vboIds = this.getVboIds(dc);
@@ -1867,8 +1849,8 @@ public class Path extends AbstractShape {
 
         if (pathData.tessellatedPositions == null || pathData.tessellatedPositions.size() < this.numPositions) {
             int size = (this.numSubsegments * (this.numPositions - 1) + 1) * (this.isExtrude() ? 2 : 1);
-            pathData.tessellatedPositions = new ArrayList<Position>(size);
-            pathData.tessellatedColors = (this.positionColors != null) ? new ArrayList<Color>(size) : null;
+            pathData.tessellatedPositions = new ArrayList<>(size);
+            pathData.tessellatedColors = (this.positionColors != null) ? new ArrayList<>(size) : null;
         } else {
             pathData.tessellatedPositions.clear();
 
@@ -1964,7 +1946,7 @@ public class Path extends AbstractShape {
 
                 // Mark where the split position is so a new line is started there during rendering.
                 if (pathData.splitPositions == null) {
-                    pathData.splitPositions = new ArrayList<Integer>(1);
+                    pathData.splitPositions = new ArrayList<>(1);
                 }
                 pathData.splitPositions.add(pathData.tessellatedPositions.size());
 
@@ -2347,6 +2329,7 @@ public class Path extends AbstractShape {
         return box;
     }
 
+    @Override
     public Extent getExtent(Globe globe, double verticalExaggeration) {
         // See if we've cached an extent associated with the globe.
         Extent extent = super.getExtent(globe, verticalExaggeration);
@@ -2375,10 +2358,12 @@ public class Path extends AbstractShape {
      *
      * @return the computed reference position.
      */
+    @Override
     public Position getReferencePosition() {
         return this.numPositions < 1 ? null : this.positions.iterator().next(); // use the first position
     }
 
+    @Override
     protected void fillVBO(DrawContext dc) {
         PathData pathData = this.getCurrentPathData();
         int numIds = this.isShowPositions() ? 3 : pathData.hasExtrusionPoints && this.isDrawVerticals() ? 2 : 1;
@@ -2433,6 +2418,7 @@ public class Path extends AbstractShape {
         return null;
     }
 
+    @Override
     public void move(Position delta) {
         if (delta == null) {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
@@ -2452,6 +2438,7 @@ public class Path extends AbstractShape {
         this.moveTo(refPos.add(delta));
     }
 
+    @Override
     public void moveTo(Position position) {
         if (position == null) {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
@@ -2546,83 +2533,13 @@ public class Path extends AbstractShape {
     }
 
     /**
-     * Provided to ease the transition from Polyline
-     *
-     * @param color
-     */
-    public void setColor(Color color) {
-        if (color == null) {
-            String msg = Logging.getMessage("nullValue.ColorIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
-        }
-
-        setPositionColors(new OneColorPositionColors(color));
-        if (this.surfaceShape != null) {
-            ShapeAttributes attrs = this.surfaceShape.getAttributes();
-            attrs.setOutlineMaterial(new Material(color));
-            attrs.setOutlineOpacity(color.getAlpha() / 255.0);
-            attrs.setInteriorMaterial(attrs.getOutlineMaterial());
-            attrs.setInteriorOpacity(attrs.getOutlineOpacity());
-        }
-
-    }
-
-    /**
-     * Provided to ease the transition from Polyline
-     *
-     * @param lineWidth
-     */
-    public void setLineWidth(double lineWidth) {
-
-        this.activeAttributes.setOutlineWidth(lineWidth);
-        this.reset();
-        if (this.surfaceShape != null) {
-            this.surfaceShape.getAttributes().setOutlineWidth(this.activeAttributes.getOutlineWidth());
-        }
-    }
-
-    /**
-     * Specifies an offset, in meters, to add to the path points when the path's follow-terrain attribute is true. See
-     * {@link #setFollowTerrain(boolean)}. Provided to ease the transition from Polyline
+     * Specifies an offset, in meters, to add to the path points when the path's altitude mode is
+     * {@link WorldWind.CLAMP_TO_GROUND}. See {@link #setAltitudeMode(int) }.
      *
      * @param offset the path offset in meters.
      */
     public void setOffset(double offset) {
-        this.offset=offset;
+        this.offset = offset;
         this.reset();
     }
-
-    /**
-     * Sets the stipple pattern for specifying line types other than solid. See the OpenGL specification or programming
-     * guides for a description of this parameter. Stipple is also affected by the path's stipple factor, {@link
-     * #setStippleFactor(int)}.
-     *
-     * @param stipplePattern the stipple pattern.
-     */
-    public void setStipplePattern(short stipplePattern) {
-        System.out.println("foo");
-
-//        this.stipplePattern = stipplePattern;
-//        if (this.surfaceShape != null) {
-//            this.surfaceShape.getAttributes().setOutlineStipplePattern(this.stipplePattern);
-//        }
-    }
-
-    /**
-     * Sets the stipple factor for specifying line types other than solid. See the OpenGL specification or programming
-     * guides for a description of this parameter. Stipple is also affected by the path's stipple pattern, {@link
-     * #setStipplePattern(short)}.
-     *
-     * @param stippleFactor the stipple factor.
-     */
-    public void setStippleFactor(int stippleFactor) {
-        System.out.println("foo");
-//        this.stippleFactor = stippleFactor;
-//
-//        if (this.surfaceShape != null) {
-//            this.surfaceShape.getAttributes().setOutlineStippleFactor(this.stippleFactor);
-//        }
-    }
-
 }

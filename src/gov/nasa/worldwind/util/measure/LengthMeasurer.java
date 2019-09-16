@@ -70,11 +70,25 @@ public class LengthMeasurer implements MeasurableLength {
             throw new IllegalArgumentException(message);
         }
 
-        ArrayList<Position> newPositions = new ArrayList<Position>();
+        ArrayList<Position> newPositions = new ArrayList<>();
         for (LatLon pos : positions) {
             newPositions.add(new Position(pos, elevation));
         }
 
+        setPositions(newPositions);
+    }
+
+    public void setPositions(Iterable<? extends Position> positions) {
+        if (positions == null) {
+            String message = Logging.getMessage("nullValue.PositionsListIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        ArrayList<Position> newPositions = new ArrayList<>();
+        for (Position p:positions) {
+            newPositions.add(p);
+        }
         setPositions(newPositions);
     }
 
@@ -170,7 +184,7 @@ public class LengthMeasurer implements MeasurableLength {
      * @param pathType the type of path to measure.
      */
     public void setPathType(String pathType) {
-        if (this.pathType != pathType) {
+        if (!this.pathType.equals(pathType)) {
             this.pathType = pathType;
             clearCachedValues();
         }
@@ -262,6 +276,7 @@ public class LengthMeasurer implements MeasurableLength {
      *
      * @return the current path length or -1 if the position list is too short.
      */
+    @Override
     public double getLength(Globe globe) {
         if (globe == null) {
             String message = Logging.getMessage("nullValue.GlobeIsNull");
@@ -308,20 +323,6 @@ public class LengthMeasurer implements MeasurableLength {
         return length;
     }
 
-//    // This tries not to use the globe.computePointFromPosition so as to report accurate length on flat globes
-//    // However, it shows significant deviations for east-west measurements.
-//    private double computeSegmentLengthLinearApprox(Globe globe, Position pos1, Position pos2)
-//    {
-//        // Cartesian distance approximation for short segments - only needs globe radius
-//        LatLon midPoint = LatLon.interpolate(.5, pos1, pos2);
-//        double radius = globe.getRadiusAt(midPoint);
-//        double cosLat = Math.cos(midPoint.getLatitude().radians);
-//        return new Vec4(
-//                (pos2.getLongitude().radians - pos1.getLongitude().radians) * radius * cosLat,
-//                (pos2.getLatitude().radians - pos1.getLatitude().radians) * radius,
-//                pos2.getElevation() - pos1.getElevation()
-//        ).getLength3(); // Meters
-//    }
     /**
      * Subdivide a list of positions so that no segment is longer then the provided maxLength.
      * <p>
@@ -333,7 +334,7 @@ public class LengthMeasurer implements MeasurableLength {
      * @param positions the original position list
      * @param maxLength the maximum length for one segment.
      * @param followTerrain true if the positions should be on the terrain surface.
-     * @param pathType the type of path to use in between two positions.
+     * @param avkeyPathType the type of path to use in between two positions.
      *
      * @return a list of positions with no segment longer then maxLength and elevations following terrain or not.
      */
@@ -369,7 +370,7 @@ public class LengthMeasurer implements MeasurableLength {
             return positions;
         }
 
-        ArrayList<Position> newPositions = new ArrayList<Position>();
+        ArrayList<Position> newPositions = new ArrayList<>();
         // Add first position
         Position pos1 = positions.get(start);
         if (followTerrain) {
