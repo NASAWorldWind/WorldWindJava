@@ -362,25 +362,29 @@ public abstract class JsonParser
      * @param f Undocumented.
      * @param state Undocumented.
      */
+    @Deprecated
     public void setFeature(Feature f, boolean state) { configure(f, state); }
 
     /**
      * @deprecated Use {@link #enable(Feature)} instead
      * @param f Undocumented.
      */
+    @Deprecated
     public void enableFeature(Feature f) { enable(f); }
 
     /**
      * @param f Undocumented.
      * @deprecated Use {@link #disable(Feature)} instead
      */
-    public void disableFeature(Feature f) { disable(f); }
+   @Deprecated
+   public void disableFeature(Feature f) { disable(f); }
 
     /**
      * @param f Undocumented.
      * @return Undocumented. 
      * @deprecated Use {@link #isEnabled(Feature)} instead
      */
+    @Deprecated
     public final boolean isFeatureEnabled(Feature f) { return isEnabled(f); }
 
 

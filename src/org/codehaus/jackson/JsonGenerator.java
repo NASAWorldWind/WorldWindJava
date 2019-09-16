@@ -224,12 +224,14 @@ public abstract class JsonGenerator
      *  @deprecated Use {@link #enable} instead
      * @param f Undocumented.
      */
+    @Deprecated
     public void enableFeature(Feature f) { enable(f); }
 
     /**
      *  @deprecated Use {@link #disable} instead
      * @param f Undocumented.
      */
+    @Deprecated
     public void disableFeature(Feature f) { disable(f); }
 
     /**
@@ -237,6 +239,7 @@ public abstract class JsonGenerator
      * @param f Undocumented.
      * @param state Undocumented.
      */
+    @Deprecated
     public void setFeature(Feature f, boolean state) { configure(f, state); }
 
     /**
@@ -244,6 +247,7 @@ public abstract class JsonGenerator
      * @return  Undocumented. 
      * @deprecated Use {@link #isEnabled} instead
      */
+    @Deprecated
     public boolean isFeatureEnabled(Feature f) { return isEnabled(f); }
 
 

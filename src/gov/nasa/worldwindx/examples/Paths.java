@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWind;
@@ -23,12 +22,11 @@ import java.util.*;
  * @author tag
  * @version $Id: Paths.java 2292 2014-09-02 21:13:05Z tgaskins $
  */
-public class Paths extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+public class Paths extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             // Add a dragger to enable shape dragging
@@ -42,7 +40,7 @@ public class Paths extends ApplicationTemplate
             attrs.setOutlineWidth(2d);
 
             // Create a path, set some of its properties and set its attributes.
-            ArrayList<Position> pathPositions = new ArrayList<Position>();
+            ArrayList<Position> pathPositions = new ArrayList<>();
             pathPositions.add(Position.fromDegrees(28, -102, 1e4));
             pathPositions.add(Position.fromDegrees(35, -100, 1e4));
             Path path = new Path(pathPositions);
@@ -53,14 +51,14 @@ public class Paths extends ApplicationTemplate
             layer.addRenderable(path);
 
             // Create a path that uses all default values.
-            pathPositions = new ArrayList<Position>();
+            pathPositions = new ArrayList<>();
             pathPositions.add(Position.fromDegrees(28, -104, 1e4));
             pathPositions.add(Position.fromDegrees(35, -102, 1e4));
             path = new Path(pathPositions);
             layer.addRenderable(path);
 
             // Create a path with more than two positions and closed.
-            pathPositions = new ArrayList<Position>();
+            pathPositions = new ArrayList<>();
             pathPositions.add(Position.fromDegrees(28, -106, 4e4));
             pathPositions.add(Position.fromDegrees(35, -104, 4e4));
             pathPositions.add(Position.fromDegrees(35, -107, 4e4));
@@ -89,8 +87,7 @@ public class Paths extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Paths", AppFrame.class);
     }
 }
