@@ -711,6 +711,28 @@ public class Path extends AbstractShape {
     }
 
     /**
+     * Creates a path with specified coordinates.
+     * <p>
+     * Note: If fewer than two coordinates is specified, no path is drawn.
+     *
+     * @param coords the path coordinates. This reference is retained by this shape; the positions are not copied. If
+     * any positions in the set change, {@link #setPositions(Iterable)} must be called to inform this shape of the
+     * change.
+     * @param elevation the elevation to use for the coordinates.
+     *
+     * @throws IllegalArgumentException if positions is null.
+     */
+    public Path(Iterable<? extends LatLon> coords, double elevation) {
+        ArrayList<Position> newPositions = new ArrayList<>();
+        coords.forEach((c) -> {
+            newPositions.add(new Position(c, elevation));
+        });
+        this.setPositions(newPositions);
+        this.measurer.setFollowTerrain(this.followTerrain);
+        this.measurer.setPathType(this.pathType);
+    }
+
+    /**
      * Creates a path with positions specified via a generic list.
      * <p>
      * Note: If fewer than two positions is specified, the path is not drawn.

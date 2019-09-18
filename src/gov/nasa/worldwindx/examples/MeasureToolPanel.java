@@ -424,7 +424,7 @@ public class MeasureToolPanel extends JPanel
             public void actionPerformed(ActionEvent actionEvent)
             {
                 shapeCombo.setSelectedIndex(1);
-                measureTool.setMeasureShape(new Polyline(PATH));
+                measureTool.setMeasureShape(new Path(PATH));
             }
         });
         presetPanel.add(bt);

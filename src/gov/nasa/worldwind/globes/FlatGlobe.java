@@ -142,6 +142,7 @@ public class FlatGlobe extends EllipsoidalGlobe implements Globe2D
      *
      * @deprecated Use {@link #setProjection(GeographicProjection)}.
      */
+    @Deprecated
     public void setProjection(String projection)
     {
         if (projection == null)

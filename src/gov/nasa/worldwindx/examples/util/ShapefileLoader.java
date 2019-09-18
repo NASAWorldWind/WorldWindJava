@@ -31,6 +31,7 @@ import gov.nasa.worldwind.util.*;
  * @version $Id: ShapefileLoader.java 2326 2014-09-17 22:35:45Z dcollins $
  * @deprecated Use {@link ShapefileLayerFactory} instead.
  */
+@Deprecated
 public class ShapefileLoader
 {
     protected static final RandomShapeAttributes randomAttrs = new RandomShapeAttributes();

@@ -1218,7 +1218,7 @@ public abstract class AbstractShape extends WWObjectImpl
      *
      * @deprecated Use the more general {@link #createPickedObject(int)} instead.
      */
-    @SuppressWarnings({"UnusedParameters"})
+    @Deprecated
     protected PickedObject createPickedObject(DrawContext dc, Color pickColor)
     {
         return this.createPickedObject(pickColor.getRGB());

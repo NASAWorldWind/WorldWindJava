@@ -341,6 +341,7 @@ public class HighResolutionTerrain extends WWObjectImpl implements Terrain
      *
      * @deprecated
      */
+    @Deprecated
     public Intersection[] intersect(Line line)
     {
         if (line == null)

@@ -195,7 +195,7 @@ public class ContextMenusOnShapes extends ApplicationTemplate
 
             // Create and set an attribute bundle.
             PointPlacemarkAttributes attrs = new PointPlacemarkAttributes();
-            attrs.setAntiAliasHint(Polyline.ANTIALIAS_FASTEST);
+            attrs.setAntiAliasHint(WorldWind.ANTIALIAS_FASTEST);
             attrs.setLineMaterial(Material.WHITE);
             attrs.setLineWidth(2d);
             attrs.setImageAddress("images/pushpins/push-pin-yellow.png");

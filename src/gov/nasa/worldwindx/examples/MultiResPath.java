@@ -80,7 +80,7 @@ public class MultiResPath extends ApplicationTemplate
             attrs.setDrawInterior(false);
             attrs.setOutlineMaterial(Material.RED);
 
-            MultiResolutionPath path = new MultiResolutionPath(positions);
+            Path path = new Path(positions);
 
             // Indicate that dots are to be drawn at each specified path position.
             path.setShowPositions(true);

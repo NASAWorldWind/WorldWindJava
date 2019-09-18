@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * The measurer must be provided a list of at least two positions to be able to compute a distance.</p>
  * <p>
  * Segments which are longer then the current maxSegmentLength will be subdivided along lines following the current
- * pathType - Polyline.LINEAR, Polyline.RHUMB_LINE or Polyline.GREAT_CIRCLE.</p>
+ * pathType - AVKey.LINEAR, AVKey.RHUMB_LINE or AVKey.GREAT_CIRCLE.</p>
  * <p>
  * If the measurer is set to follow terrain, the computed length will account for terrain deformations as if someone was
  * walking along that path. Otherwise the length is the sum of the cartesian distance between the positions.</p>
@@ -71,9 +71,9 @@ public class LengthMeasurer implements MeasurableLength {
         }
 
         ArrayList<Position> newPositions = new ArrayList<>();
-        for (LatLon pos : positions) {
+        positions.forEach((pos) -> {
             newPositions.add(new Position(pos, elevation));
-        }
+        });
 
         setPositions(newPositions);
     }
@@ -86,7 +86,7 @@ public class LengthMeasurer implements MeasurableLength {
         }
 
         ArrayList<Position> newPositions = new ArrayList<>();
-        for (Position p:positions) {
+        for (Position p : positions) {
             newPositions.add(p);
         }
         setPositions(newPositions);
@@ -146,11 +146,12 @@ public class LengthMeasurer implements MeasurableLength {
     }
 
     /**
-     * Sets the type of path used when subdividing long segments, one of Polyline.GREAT_CIRCLE, which draws segments as
-     * a great circle, Polyline.LINEAR, which determines the intermediate positions between segments by interpolating
-     * the segment endpoints, or Polyline.RHUMB_LINE, which draws segments as a line of constant heading.
+     * Sets the type of path used when subdividing long segments, one of AVKey.GREAT_CIRCLE, which draws segments as
+     * a great circle, AVKey.LINEAR, which determines the intermediate positions between segments by interpolating
+     * the segment endpoints, or AVKey.RHUMB_LINE, which draws segments as a line of constant heading.
      *
      * @param pathType the type of path to measure.
+     * @deprecated 
      */
     @Deprecated
     public void setPathType(int pathType) {
@@ -177,9 +178,9 @@ public class LengthMeasurer implements MeasurableLength {
     }
 
     /**
-     * Sets the type of path used when subdividing long segments, one of Polyline.GREAT_CIRCLE, which draws segments as
-     * a great circle, Polyline.LINEAR, which determines the intermediate positions between segments by interpolating
-     * the segment endpoints, or Polyline.RHUMB_LINE, which draws segments as a line of constant heading.
+     * Sets the type of path used when subdividing long segments, one of AVKey.GREAT_CIRCLE, which draws segments as
+     * a great circle, AVKey.LINEAR, which determines the intermediate positions between segments by interpolating
+     * the segment endpoints, or AVKey.RHUMB_LINE, which draws segments as a line of constant heading.
      *
      * @param pathType the type of path to measure.
      */
@@ -327,7 +328,7 @@ public class LengthMeasurer implements MeasurableLength {
      * Subdivide a list of positions so that no segment is longer then the provided maxLength.
      * <p>
      * If needed, new intermediate positions will be created along lines that follow the given polylinePathType - one of
-     * Polyline.LINEAR, Polyline.RHUMB_LINE or Polyline.GREAT_CIRCLE. All position elevations will be either at the
+     * AVKey.LINEAR, AVKey.RHUMB_LINE or AVKey.GREAT_CIRCLE. All position elevations will be either at the
      * terrain surface if followTerrain is true, or interpolated according to the original elevations.</p>
      *
      * @param globe the globe to draw elevations and points from.
@@ -349,7 +350,7 @@ public class LengthMeasurer implements MeasurableLength {
      * between start and start + count - 1 will be processed.
      * <p>
      * If needed, new intermediate positions will be created along lines that follow the given pathType - one of
-     * Polyline.LINEAR, Polyline.RHUMB_LINE or Polyline.GREAT_CIRCLE. All position elevations will be either at the
+     * AVKey.LINEAR, AVKey.RHUMB_LINE or AVKey.GREAT_CIRCLE. All position elevations will be either at the
      * terrain surface if followTerrain is true, or interpolated according to the original elevations.</p>
      *
      * @param globe the globe to draw elevations and points from.

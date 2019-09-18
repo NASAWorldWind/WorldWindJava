@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.worldwindow.util.measuretool;
 
 import gov.nasa.worldwind.*;
@@ -26,10 +25,10 @@ import java.util.ArrayList;
  * @version $Id: WWOMeasureTool.java 1171 2013-02-11 21:45:02Z dcollins $
  */
 public class WWOMeasureTool extends AVListImpl
-    implements Disposable, MouseListener, MouseMotionListener, SelectListener, PositionListener, RenderingListener
-{
-    public interface MeasureDisplay
-    {
+        implements Disposable, MouseListener, MouseMotionListener, SelectListener, PositionListener, RenderingListener {
+
+    public interface MeasureDisplay {
+
         public void updateMeasureDisplay(Position position);
 
         public void addToLayer(RenderableLayer layer);
@@ -59,8 +58,8 @@ public class WWOMeasureTool extends AVListImpl
         boolean isAnnotation(Object o);
     }
 
-    public interface ControlPoint
-    {
+    public interface ControlPoint {
+
         public WWOMeasureTool getParent();
 
         public Object setValue(String key, Object value);
@@ -74,8 +73,8 @@ public class WWOMeasureTool extends AVListImpl
         public void highlight(boolean tf);
     }
 
-    public interface ControlPointList
-    {
+    public interface ControlPointList {
+
         public int size();
 
         public ControlPoint createControlPoint(Position position);
@@ -120,7 +119,7 @@ public class WWOMeasureTool extends AVListImpl
     protected boolean showAnnotation = true;
     protected UnitsFormat unitsFormat = new UnitsFormat();
 
-    protected ArrayList<Position> positions = new ArrayList<Position>();
+    protected ArrayList<Position> positions = new ArrayList<>();
     protected Rectangle2D.Double shapeRectangle = null;
     protected Position shapeCenterPosition = null;
     protected Angle shapeOrientation = null;
@@ -137,17 +136,14 @@ public class WWOMeasureTool extends AVListImpl
     protected WWOMeasureTool.ControlPoint movingTarget;
     protected WWOMeasureTool.ControlPoint lastPickedObject;
 
-    public WWOMeasureTool(final WorldWindow wwd, Renderable shape, String lineType, RenderableLayer controlPointsLayer)
-    {
-        if (wwd == null)
-        {
+    public WWOMeasureTool(final WorldWindow wwd, Renderable shape, String lineType, RenderableLayer controlPointsLayer) {
+        if (wwd == null) {
             String msg = Logging.getMessage("nullValue.WorldWindow");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (shape == null)
-        {
+        if (shape == null) {
             String msg = Logging.getMessage("nullValue.Shape");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -169,14 +165,14 @@ public class WWOMeasureTool extends AVListImpl
         this.getWwd().addRenderingListener(this);
 
         this.shape = shape;
-        if (this.shape instanceof Polyline)
-            this.setMeasureShape((Polyline) this.shape, lineType);
-        else
+        if (this.shape instanceof Path) {
+            this.setMeasureShape((Path) this.shape, lineType);
+        } else {
             this.setMeasureShape((SurfaceShape) this.shape);
+        }
     }
 
-    public void dispose()
-    {
+    public void dispose() {
         this.getWwd().getInputHandler().removeMouseListener(this);
         this.getWwd().getInputHandler().removeMouseMotionListener(this);
         this.getWwd().removePositionListener(this);
@@ -188,25 +184,20 @@ public class WWOMeasureTool extends AVListImpl
         this.getControlPoints().clear();
     }
 
-    protected ControlPointList createControlPoints()
-    {
+    protected ControlPointList createControlPoints() {
         return new WWOMeasureToolControlPoints(this);
     }
 
-    protected MeasureDisplay createMeasureDisplay()
-    {
+    protected MeasureDisplay createMeasureDisplay() {
         return new WWOMeasureDisplay(this);
     }
 
-    public WorldWindow getWwd()
-    {
+    public WorldWindow getWwd() {
         return this.wwd;
     }
 
-    public void setUnitsFormat(UnitsFormat unitsFormat)
-    {
-        if (unitsFormat == null)
-        {
+    public void setUnitsFormat(UnitsFormat unitsFormat) {
+        if (unitsFormat == null) {
             String msg = Logging.getMessage("nullValue.Format");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -215,82 +206,66 @@ public class WWOMeasureTool extends AVListImpl
         this.unitsFormat = unitsFormat;
     }
 
-    public UnitsFormat getUnitsFormat()
-    {
+    public UnitsFormat getUnitsFormat() {
         return this.unitsFormat;
     }
 
-    public void setLabel(String labelName, String label)
-    {
+    public void setLabel(String labelName, String label) {
         this.measureDisplay.setLabel(labelName, label);
     }
 
-    public String getLabel(String labelName)
-    {
+    public String getLabel(String labelName) {
         return this.measureDisplay.getLabel(labelName);
     }
 
-    public Renderable getShape()
-    {
+    public Renderable getShape() {
         return this.shape;
     }
 
-    public boolean isShowControlPoints()
-    {
+    public boolean isShowControlPoints() {
         return this.showControlPoints;
     }
 
-    public void setShowControlPoints(boolean state)
-    {
+    public void setShowControlPoints(boolean state) {
         this.showControlPoints = state;
         this.controlPointsLayer.setEnabled(state);
         this.getWwd().redraw();
     }
 
-    public boolean isShowAnnotation()
-    {
+    public boolean isShowAnnotation() {
         return this.showAnnotation;
     }
 
-    public void setShowAnnotation(boolean state)
-    {
+    public void setShowAnnotation(boolean state) {
         this.showAnnotation = state;
     }
 
-    public boolean isUseRubberBand()
-    {
+    public boolean isUseRubberBand() {
         return this.useRubberBand;
     }
 
-    public void setUseRubberBand(boolean state)
-    {
+    public void setUseRubberBand(boolean state) {
         this.useRubberBand = state;
     }
 
-    public boolean isFreeHand()
-    {
+    public boolean isFreeHand() {
         return this.freeHand;
     }
 
-    public void setFreeHand(boolean state)
-    {
+    public void setFreeHand(boolean state) {
         this.freeHand = state;
     }
 
-    public double getFreeHandMinSpacing()
-    {
+    public double getFreeHandMinSpacing() {
         return this.freeHandMinSpacing;
     }
 
-    public void setFreeHandMinSpacing(double distance)
-    {
+    public void setFreeHandMinSpacing(double distance) {
         this.freeHandMinSpacing = distance;
     }
 
-    public void clear()
-    {
-        while (this.positions.size() > 0 || this.getControlPoints().size() > 0)
-        {
+    public void clear() {
+        while (this.positions.size() > 0 || this.getControlPoints().size() > 0) {
             this.removeControlPoint();
         }
 
@@ -299,63 +274,51 @@ public class WWOMeasureTool extends AVListImpl
         this.shapeRectangle = null;
     }
 
-    public String getMeasureShapeType()
-    {
+    public String getMeasureShapeType() {
         return this.measureShapeType;
     }
 
-    public ArrayList<? extends Position> getPositions()
-    {
+    public ArrayList<? extends Position> getPositions() {
         return this.positions;
     }
 
-    protected ControlPointList getControlPoints()
-    {
+    protected ControlPointList getControlPoints() {
         return this.controlPoints;
     }
 
-    protected ControlPoint createControlPoint(Position position)
-    {
+    protected ControlPoint createControlPoint(Position position) {
         return this.controlPoints.createControlPoint(position);
     }
 
-    public Rectangle2D.Double getShapeRectangle()
-    {
+    public Rectangle2D.Double getShapeRectangle() {
         return this.shapeRectangle;
     }
 
-    protected void setMeasureShape(Polyline line, String shapeType)
-    {
-        if (line == null)
-        {
+    protected void setMeasureShape(Path line, String shapeType) {
+        if (line == null) {
             String msg = Logging.getMessage("nullValue.Shape");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
-        this.setArmed(false);
-        this.clear();
 
         this.shape = line;
         this.regularShape = false;
 
         // Update position list and create control points
         int i = 0;
-        for (Position pos : line.getPositions())
-        {
+        for (Position pos : line.getPositions()) {
             this.positions.add(pos);
             addControlPoint(pos, "PositionIndex", i++);
         }
         // Set proper measure shape type
         this.measureShapeType = (shapeType != null && shapeType.equals(AVKey.SHAPE_PATH))
-            ? AVKey.SHAPE_PATH : AVKey.SHAPE_LINE;
+                ? AVKey.SHAPE_PATH : AVKey.SHAPE_LINE;
         this.firePropertyChange(EVENT_POSITION_REPLACE, null, null);
         this.getWwd().redraw();
     }
 
-    protected void setMeasureShape(SurfaceShape newShape)
-    {
-        if (newShape == null)
-        {
+    protected void setMeasureShape(SurfaceShape newShape) {
+        if (newShape == null) {
             String msg = Logging.getMessage("nullValue.Shape");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -364,8 +327,7 @@ public class WWOMeasureTool extends AVListImpl
         this.setArmed(false);
         this.clear();
 
-        if (newShape instanceof SurfaceQuad)
-        {
+        if (newShape instanceof SurfaceQuad) {
             this.shape = newShape;
             this.regularShape = true;
             this.measureShapeType = newShape instanceof SurfaceSquare ? AVKey.SHAPE_SQUARE : AVKey.SHAPE_QUAD;
@@ -378,9 +340,7 @@ public class WWOMeasureTool extends AVListImpl
             this.updateShapeControlPoints();
             // Extract positions from shape
             this.updatePositionsFromShape();
-        }
-        else if (newShape instanceof SurfaceEllipse)
-        {
+        } else if (newShape instanceof SurfaceEllipse) {
             // Set measure shape type
             this.shape = newShape;
             this.regularShape = true;
@@ -389,14 +349,13 @@ public class WWOMeasureTool extends AVListImpl
             SurfaceEllipse shape = ((SurfaceEllipse) newShape);
             this.shapeCenterPosition = new Position(shape.getCenter(), 0);
             this.shapeRectangle = new Rectangle2D.Double(0, 0, shape.getMajorRadius() * 2,
-                shape.getMinorRadius() * 2);
+                    shape.getMinorRadius() * 2);
             this.shapeOrientation = shape.getHeading();
             // Create control points for regular shapes
             this.updateShapeControlPoints();
             // Extract positions from shape
             this.updatePositionsFromShape();
-        }
-        else // SurfacePolygon, SurfacePolyline, SurfaceSector, or some custom shape
+        } else // SurfacePolygon, SurfacePolyline, SurfaceSector, or some custom shape
         {
             // Set measure shape type
             this.shape = newShape;
@@ -404,8 +363,7 @@ public class WWOMeasureTool extends AVListImpl
             // Extract positions from shape
             updatePositionsFromShape();
             // Create control points for each position except the last that is the same as the first
-            for (int i = 0; i < this.positions.size() - 1; i++)
-            {
+            for (int i = 0; i < this.positions.size() - 1; i++) {
                 addControlPoint(this.positions.get(i), "PositionIndex", i);
             }
         }
@@ -414,101 +372,85 @@ public class WWOMeasureTool extends AVListImpl
         this.getWwd().redraw();
     }
 
-    protected boolean isRegularShape()
-    {
+    protected boolean isRegularShape() {
         return this.regularShape;
     }
 
     // *** Metric accessors ***
-
-    public double getLength()
-    {
-        if (this.shape == null)
+    public double getLength() {
+        if (this.shape == null) {
             return -1;
+        }
 
-        if (this.shape instanceof Polyline)
-            return ((Polyline) this.shape).getLength();
-        else
+        if (this.shape instanceof Path) {
+            return ((Path) this.shape).getLength();
+        } else {
             return ((SurfaceShape) this.shape).getPerimeter(this.getWwd().getModel().getGlobe());
+        }
     }
 
-    public double getArea()
-    {
-        return this.shape != null && this.shape instanceof SurfaceShape ?
-            ((SurfaceShape) this.shape).getArea(this.getWwd().getModel().getGlobe(), true) : -1;
+    public double getArea() {
+        return this.shape != null && this.shape instanceof SurfaceShape
+                ? ((SurfaceShape) this.shape).getArea(this.getWwd().getModel().getGlobe(), true) : -1;
     }
 
-    public double getWidth()
-    {
+    public double getWidth() {
         return this.shapeRectangle != null ? this.shapeRectangle.width : -1;
     }
 
-    public double getHeight()
-    {
+    public double getHeight() {
         return this.shapeRectangle != null ? this.shapeRectangle.height : -1;
     }
 
-    public Angle getOrientation()
-    {
+    public Angle getOrientation() {
         return this.shapeOrientation;
     }
 
-    public Position getCenterPosition()
-    {
+    public Position getCenterPosition() {
         return this.shapeCenterPosition;
     }
 
     // *** Editing shapes ***
-
-    /** Add a control point to the current measure shape at the cuurrent WorldWindow position. */
-    public void addControlPoint()
-    {
+    /**
+     * Add a control point to the current measure shape at the cuurrent WorldWindow position.
+     */
+    public void addControlPoint() {
         Position curPos = this.getWwd().getCurrentPosition();
-        if (curPos == null)
+        if (curPos == null) {
             return;
+        }
 
-        if (this.isRegularShape())
-        {
+        if (this.isRegularShape()) {
             // Regular shapes are defined in two steps: 1. center, 2. east point.
-            if (this.shapeCenterPosition == null)
-            {
+            if (this.shapeCenterPosition == null) {
                 this.shapeCenterPosition = curPos;
                 updateShapeControlPoints();
-            }
-            else if (this.shapeRectangle == null)
-            {
+            } else if (this.shapeRectangle == null) {
                 // Compute shape rectangle and heading, curPos being east of center
                 updateShapeProperties("East", curPos);
                 // Update or create control points
                 updateShapeControlPoints();
             }
-        }
-        else
-        {
-            if (!this.measureShapeType.equals(AVKey.SHAPE_POLYGON) || this.positions.size() <= 1)
-            {
+        } else {
+            if (!this.measureShapeType.equals(AVKey.SHAPE_POLYGON) || this.positions.size() <= 1) {
                 // Line, path or polygons with less then two points
                 this.positions.add(curPos);
                 addControlPoint(this.positions.get(this.positions.size() - 1), "PositionIndex",
-                    this.positions.size() - 1);
-                if (this.measureShapeType.equals(AVKey.SHAPE_POLYGON) && this.positions.size() == 2)
-                {
+                        this.positions.size() - 1);
+                if (this.measureShapeType.equals(AVKey.SHAPE_POLYGON) && this.positions.size() == 2) {
                     // Once we have two points of a polygon, add an extra position
                     // to loop back to the first position and have a closed shape
                     this.positions.add(this.positions.get(0));
                 }
-                if (this.measureShapeType.equals(AVKey.SHAPE_LINE) && this.positions.size() > 1)
-                {
+                if (this.measureShapeType.equals(AVKey.SHAPE_LINE) && this.positions.size() > 1) {
                     // Two points on a line, update line heading info
                     this.shapeOrientation = LatLon.greatCircleAzimuth(this.positions.get(0), this.positions.get(1));
                 }
-            }
-            else
-            {
+            } else {
                 // For polygons with more then 2 points, the last position is the same as the first, so insert before it
                 this.positions.add(positions.size() - 1, curPos);
                 addControlPoint(this.positions.get(this.positions.size() - 2), "PositionIndex",
-                    this.positions.size() - 2);
+                        this.positions.size() - 2);
             }
         }
         // Update screen shapes
@@ -517,49 +459,43 @@ public class WWOMeasureTool extends AVListImpl
         this.getWwd().redraw();
     }
 
-    /** Remove the last control point from the current measure shape. */
-    public void removeControlPoint()
-    {
+    /**
+     * Remove the last control point from the current measure shape.
+     */
+    public void removeControlPoint() {
         Position currentLastPosition = null;
-        if (this.isRegularShape())
-        {
-            if (this.shapeRectangle != null)
-            {
+        if (this.isRegularShape()) {
+            if (this.shapeRectangle != null) {
                 this.shapeRectangle = null;
                 this.shapeOrientation = null;
                 this.positions.clear();
                 // remove all control points except center which is first
-                while (this.getControlPoints().size() > 1)
-                {
+                while (this.getControlPoints().size() > 1) {
                     this.getControlPoints().remove(1);
                 }
-            }
-            else if (this.shapeCenterPosition != null)
-            {
+            } else if (this.shapeCenterPosition != null) {
                 this.shapeCenterPosition = null;
                 this.getControlPoints().clear();
             }
-        }
-        else
-        {
-            if (this.positions.size() == 0)
+        } else {
+            if (this.positions.size() == 0) {
                 return;
+            }
 
-            if (!this.measureShapeType.equals(AVKey.SHAPE_POLYGON) || this.positions.size() == 1)
-            {
+            if (!this.measureShapeType.equals(AVKey.SHAPE_POLYGON) || this.positions.size() == 1) {
                 currentLastPosition = this.positions.get(this.positions.size() - 1);
                 this.positions.remove(this.positions.size() - 1);
-            }
-            else
-            {
+            } else {
                 // For polygons with more then 2 points, the last position is the same as the first, so remove before it
                 currentLastPosition = this.positions.get(this.positions.size() - 2);
                 this.positions.remove(this.positions.size() - 2);
-                if (positions.size() == 2)
+                if (positions.size() == 2) {
                     positions.remove(1); // remove last loop position when a polygon shrank to only two (same) positions
+                }
             }
-            if (this.getControlPoints().size() > 0)
+            if (this.getControlPoints().size() > 0) {
                 this.getControlPoints().remove(this.getControlPoints().size() - 1);
+            }
         }
 
         // Update screen shapes
@@ -573,35 +509,33 @@ public class WWOMeasureTool extends AVListImpl
      *
      * @param point one of the shape control points.
      */
-    public void moveControlPoint(ControlPoint point)
-    {
-        if (point == null)
-        {
+    public void moveControlPoint(ControlPoint point) {
+        if (point == null) {
             String msg = Logging.getMessage("nullValue.PointIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (point.getValue("Control") != null)
-        {
+        if (point.getValue("Control") != null) {
             // Update shape properties
             updateShapeProperties((String) point.getValue("Control"), point.getPosition());
             updateShapeControlPoints();
             //positions = makeShapePositions();
         }
 
-        if (point.getValue("PositionIndex") != null)
-        {
+        if (point.getValue("PositionIndex") != null) {
             int positionIndex = (Integer) point.getValue("PositionIndex");
             // Update positions
             Position surfacePosition = computeSurfacePosition(point.getPosition());
             positions.set(positionIndex, surfacePosition);
             // Update last pos too if polygon and first pos changed
-            if (measureShapeType.equals(AVKey.SHAPE_POLYGON) && positions.size() > 2 && positionIndex == 0)
+            if (measureShapeType.equals(AVKey.SHAPE_POLYGON) && positions.size() > 2 && positionIndex == 0) {
                 positions.set(positions.size() - 1, surfacePosition);
+            }
             // Update heading for simple line
-            if (measureShapeType.equals(AVKey.SHAPE_LINE) && positions.size() > 1)
+            if (measureShapeType.equals(AVKey.SHAPE_LINE) && positions.size() > 1) {
                 shapeOrientation = LatLon.greatCircleAzimuth(positions.get(0), positions.get(1));
+            }
         }
 
         // Update rendered shapes
@@ -612,128 +546,113 @@ public class WWOMeasureTool extends AVListImpl
      * Move the current measure shape along a great circle arc at a given azimuth <code>Angle</code> for a given
      * distance <code>Angle</code>.
      *
-     * @param azimuth  the azimuth <code>Angle</code>.
+     * @param azimuth the azimuth <code>Angle</code>.
      * @param distance the distance <code>Angle</code>.
      */
-    public void moveMeasureShape(Angle azimuth, Angle distance)
-    {
-        if (distance == null)
-        {
+    public void moveMeasureShape(Angle azimuth, Angle distance) {
+        if (distance == null) {
             String msg = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (azimuth == null)
-        {
+        if (azimuth == null) {
             String msg = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (this.isRegularShape())
-        {
+        if (this.isRegularShape()) {
             // Move regular shape center
-            if (getControlPoints().size() > 0)
-            {
+            if (getControlPoints().size() > 0) {
                 ControlPoint point = getControlPoints().get(0);
                 point.setPosition(
-                    new Position(LatLon.greatCircleEndPosition(point.getPosition(), azimuth, distance), 0));
+                        new Position(LatLon.greatCircleEndPosition(point.getPosition(), azimuth, distance), 0));
                 moveControlPoint(point);
             }
-        }
-        else
-        {
+        } else {
             // Move all positions and control points
-            for (int i = 0; i < positions.size(); i++)
-            {
+            for (int i = 0; i < positions.size(); i++) {
                 Position newPos = computeSurfacePosition(
-                    LatLon.greatCircleEndPosition(positions.get(i), azimuth, distance));
+                        LatLon.greatCircleEndPosition(positions.get(i), azimuth, distance));
                 positions.set(i, newPos);
-                if (!this.measureShapeType.equals(AVKey.SHAPE_POLYGON) || i < positions.size() - 1)
+                if (!this.measureShapeType.equals(AVKey.SHAPE_POLYGON) || i < positions.size() - 1) {
                     getControlPoints().get(i).setPosition(new Position(newPos, 0));
+                }
             }
             // Update heading for simple line
-            if (measureShapeType.equals(AVKey.SHAPE_LINE) && positions.size() > 1)
+            if (measureShapeType.equals(AVKey.SHAPE_LINE) && positions.size() > 1) {
                 shapeOrientation = LatLon.greatCircleAzimuth(positions.get(0), positions.get(1));
+            }
             // Update rendered shapes
             updateMeasureShape();
         }
     }
 
-    protected Position computeSurfacePosition(LatLon latLon)
-    {
+    protected Position computeSurfacePosition(LatLon latLon) {
         Vec4 surfacePoint = getWwd().getSceneController().getTerrain().getSurfacePoint(latLon.getLatitude(),
-            latLon.getLongitude());
-        if (surfacePoint != null)
+                latLon.getLongitude());
+        if (surfacePoint != null) {
             return getWwd().getModel().getGlobe().computePositionFromPoint(surfacePoint);
-        else
+        } else {
             return new Position(latLon, getWwd().getModel().getGlobe().getElevation(latLon.getLatitude(),
-                latLon.getLongitude()));
+                    latLon.getLongitude()));
+        }
     }
 
-    protected void updateShapeProperties(String control, Position newPosition)
-    {
-        if (control.equals("Center"))
-        {
+    protected void updateShapeProperties(String control, Position newPosition) {
+        if (control.equals("Center")) {
             // Update center position
             this.shapeCenterPosition = newPosition;
-        }
-        else
-        {
+        } else {
             // Compute shape rectangle and heading
             double headingOffset = control.equals("East") ? 90
-                : control.equals("South") ? 180
+                    : control.equals("South") ? 180
                     : control.equals("West") ? 270
-                        : 0;
+                    : 0;
             this.shapeOrientation = LatLon.greatCircleAzimuth(this.shapeCenterPosition, newPosition)
-                .subtractDegrees(headingOffset);
+                    .subtractDegrees(headingOffset);
             // Compute distance - have a minimal distance to avoid zero sized shape
             Angle distanceAngle = LatLon.greatCircleDistance(this.shapeCenterPosition, newPosition);
             double distance = Math.max(distanceAngle.radians * getWwd().getModel().getGlobe().getRadius(), .1);
             double width, height;
-            if (control.equals("East") || control.equals("West"))
-            {
+            if (control.equals("East") || control.equals("West")) {
                 width = distance * 2;
                 height = this.shapeRectangle != null ? this.shapeRectangle.height : width;
                 if (this.measureShapeType.equals(AVKey.SHAPE_CIRCLE) || this.measureShapeType.equals(
-                    AVKey.SHAPE_SQUARE))
-                    //noinspection SuspiciousNameCombination
+                        AVKey.SHAPE_SQUARE)) //noinspection SuspiciousNameCombination
+                {
                     height = width;
-                else if (this.isActive())
+                } else if (this.isActive()) {
                     height = width * .6;   // during shape creation
-            }
-            else
-            {
+                }
+            } else {
                 height = distance * 2;
                 width = this.shapeRectangle != null ? this.shapeRectangle.width : height;
                 if (this.measureShapeType.equals(AVKey.SHAPE_CIRCLE) || this.measureShapeType.equals(
-                    AVKey.SHAPE_SQUARE))
-                    //noinspection SuspiciousNameCombination
+                        AVKey.SHAPE_SQUARE)) //noinspection SuspiciousNameCombination
+                {
                     width = height;
-                else if (this.isActive())
+                } else if (this.isActive()) {
                     width = height * 0.6;   // during shape creation
+                }
             }
             this.shapeRectangle = new Rectangle2D.Double(0, 0, width, height);
         }
     }
 
-    protected void updateShapeControlPoints()
-    {
-        if (this.shapeCenterPosition != null && this.getControlPoints().size() < 1)
-        {
+    protected void updateShapeControlPoints() {
+        if (this.shapeCenterPosition != null && this.getControlPoints().size() < 1) {
             // Create center control point
             addControlPoint(Position.ZERO, "Control", "Center");
         }
 
-        if (this.shapeCenterPosition != null)
-        {
+        if (this.shapeCenterPosition != null) {
             // Update center control point position
             this.getControlPoints().get(0).setPosition(new Position(this.shapeCenterPosition, 0));
         }
 
-        if (this.shapeRectangle != null && this.getControlPoints().size() < 5)
-        {
+        if (this.shapeRectangle != null && this.getControlPoints().size() < 5) {
             // Add control points in four directions
             addControlPoint(Position.ZERO, "Control", "North");
             addControlPoint(Position.ZERO, "Control", "East");
@@ -741,69 +660,59 @@ public class WWOMeasureTool extends AVListImpl
             addControlPoint(Position.ZERO, "Control", "West");
         }
 
-        if (this.shapeRectangle != null)
-        {
+        if (this.shapeRectangle != null) {
             Angle halfWidthAngle = Angle.fromRadians(this.shapeRectangle.width / 2
-                / getWwd().getModel().getGlobe().getRadius());
+                    / getWwd().getModel().getGlobe().getRadius());
             Angle halfHeightAngle = Angle.fromRadians(this.shapeRectangle.height / 2
-                / getWwd().getModel().getGlobe().getRadius());
+                    / getWwd().getModel().getGlobe().getRadius());
             // Update control points positions in four directions
             Position controlPos;
             // North
             controlPos = new Position(LatLon.greatCircleEndPosition(
-                this.shapeCenterPosition, this.shapeOrientation, halfHeightAngle), 0);
+                    this.shapeCenterPosition, this.shapeOrientation, halfHeightAngle), 0);
             getControlPoints().get(1).setPosition(controlPos);
             // East
             controlPos = new Position(LatLon.greatCircleEndPosition(
-                this.shapeCenterPosition, this.shapeOrientation.addDegrees(90), halfWidthAngle), 0);
+                    this.shapeCenterPosition, this.shapeOrientation.addDegrees(90), halfWidthAngle), 0);
             getControlPoints().get(2).setPosition(controlPos);
             // South
             controlPos = new Position(LatLon.greatCircleEndPosition(
-                this.shapeCenterPosition, this.shapeOrientation.addDegrees(180), halfHeightAngle), 0);
+                    this.shapeCenterPosition, this.shapeOrientation.addDegrees(180), halfHeightAngle), 0);
             getControlPoints().get(3).setPosition(controlPos);
             // West
             controlPos = new Position(LatLon.greatCircleEndPosition(
-                this.shapeCenterPosition, this.shapeOrientation.addDegrees(270), halfWidthAngle), 0);
+                    this.shapeCenterPosition, this.shapeOrientation.addDegrees(270), halfWidthAngle), 0);
             getControlPoints().get(4).setPosition(controlPos);
         }
     }
 
-    protected void updateMeasureShape()
-    {
+    protected void updateMeasureShape() {
         // Update line
-        if (this.measureShapeType.equals(AVKey.SHAPE_LINE) || this.measureShapeType.equals(AVKey.SHAPE_PATH))
-        {
+        if (this.measureShapeType.equals(AVKey.SHAPE_LINE) || this.measureShapeType.equals(AVKey.SHAPE_PATH)) {
             // Update current line
-            if (this.positions.size() > 1 && this.shape != null)
+            if (this.positions.size() > 1 && this.shape != null) {
                 ((Polyline) this.shape).setPositions(this.positions);
-        }
-        // Update polygon
-        else if (this.measureShapeType.equals(AVKey.SHAPE_POLYGON))
-        {
-            if (this.shape != null)
-            {
+            }
+        } // Update polygon
+        else if (this.measureShapeType.equals(AVKey.SHAPE_POLYGON)) {
+            if (this.shape != null) {
                 // Update current shape
                 ((SurfacePolygon) this.shape).setLocations(this.positions);
             }
-        }
-        // Update regular shape
-        else if (this.isRegularShape())
-        {
-            if (this.shape != null && this.shapeRectangle != null)
-            {
+        } // Update regular shape
+        else if (this.isRegularShape()) {
+            if (this.shape != null && this.shapeRectangle != null) {
                 // Update current shape
-                if (this.measureShapeType.equals(AVKey.SHAPE_QUAD) || this.measureShapeType.equals(AVKey.SHAPE_SQUARE))
-                {
+                if (this.measureShapeType.equals(AVKey.SHAPE_QUAD) || this.measureShapeType.equals(AVKey.SHAPE_SQUARE)) {
                     ((SurfaceQuad) this.shape).setCenter(this.shapeCenterPosition);
                     ((SurfaceQuad) this.shape).setSize(this.shapeRectangle.width, this.shapeRectangle.height);
                     ((SurfaceQuad) this.shape).setHeading(this.shapeOrientation);
                 }
                 if (this.measureShapeType.equals(AVKey.SHAPE_ELLIPSE) || this.measureShapeType.equals(
-                    AVKey.SHAPE_CIRCLE))
-                {
+                        AVKey.SHAPE_CIRCLE)) {
                     ((SurfaceEllipse) this.shape).setCenter(this.shapeCenterPosition);
                     ((SurfaceEllipse) this.shape).setRadii(this.shapeRectangle.width / 2,
-                        this.shapeRectangle.height / 2);
+                            this.shapeRectangle.height / 2);
                     ((SurfaceEllipse) this.shape).setHeading(this.shapeOrientation);
                 }
                 // Update position from shape list with zero elevation
@@ -812,53 +721,43 @@ public class WWOMeasureTool extends AVListImpl
         }
     }
 
-    protected void updatePositionsFromShape()
-    {
+    protected void updatePositionsFromShape() {
         Globe globe = this.getWwd().getModel().getGlobe();
 
         this.positions.clear();
 
         Iterable<? extends LatLon> locations = ((SurfaceShape) this.shape).getLocations(globe);
-        if (locations != null)
-        {
-            for (LatLon latLon : locations)
-            {
+        if (locations != null) {
+            for (LatLon latLon : locations) {
                 this.positions.add(new Position(latLon, 0));
             }
         }
     }
 
-    protected void addControlPoint(Position position, String key, Object value)
-    {
+    protected void addControlPoint(Position position, String key, Object value) {
         ControlPoint controlPoint = createControlPoint(new Position(position, 0));
         controlPoint.setValue(key, value);
         this.getControlPoints().add(controlPoint);
     }
 
     ///////////// Controller ///////////////
-
-    protected boolean isActive()
-    {
+    protected boolean isActive() {
         return this.active;
     }
 
-    protected void setActive(boolean state)
-    {
+    protected void setActive(boolean state) {
         this.active = state;
     }
 
-    protected boolean isMoving()
-    {
+    protected boolean isMoving() {
         return this.moving;
     }
 
-    protected void setMoving(boolean state)
-    {
+    protected void setMoving(boolean state) {
         this.moving = state;
     }
 
-    public boolean isArmed()
-    {
+    public boolean isArmed() {
         return this.armed;
     }
 
@@ -868,61 +767,49 @@ public class WWOMeasureTool extends AVListImpl
      *
      * @param armed true to arm the controller, false to disarm it.
      */
-    public void setArmed(boolean armed)
-    {
-        if (this.armed != armed)
-        {
+    public void setArmed(boolean armed) {
+        if (this.armed != armed) {
             this.armed = armed;
             this.firePropertyChange(WWOMeasureTool.EVENT_ARMED, !armed, armed);
         }
     }
 
     // Handle mouse actions
-    public void mousePressed(MouseEvent mouseEvent)
-    {
-        if (this.isArmed() && this.useRubberBand && mouseEvent.getButton() == MouseEvent.BUTTON1)
-        {
-            if ((mouseEvent.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0)
-            {
-                if (!mouseEvent.isControlDown())
-                {
+    public void mousePressed(MouseEvent mouseEvent) {
+        if (this.isArmed() && this.useRubberBand && mouseEvent.getButton() == MouseEvent.BUTTON1) {
+            if ((mouseEvent.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0) {
+                if (!mouseEvent.isControlDown()) {
                     this.setActive(true);
                     this.addControlPoint();
-                    if (this.getControlPoints().size() == 1)
-                    {
+                    if (this.getControlPoints().size() == 1) {
                         this.addControlPoint(); // Simulate a second click
                     }
                     // Set the rubber band target to the last control point or the east one for regular shapes.
                     rubberBandTarget = this.getControlPoints().get(
-                        this.isRegularShape() ? 2 : this.getControlPoints().size() - 1);
+                            this.isRegularShape() ? 2 : this.getControlPoints().size() - 1);
                     this.firePropertyChange(WWOMeasureTool.EVENT_RUBBERBAND_START, null, null);
                 }
             }
             mouseEvent.consume();
-        }
-        else if (!this.isArmed() && mouseEvent.getButton() == MouseEvent.BUTTON1 && mouseEvent.isAltDown())
-        {
+        } else if (!this.isArmed() && mouseEvent.getButton() == MouseEvent.BUTTON1 && mouseEvent.isAltDown()) {
             this.setMoving(true);
             this.movingTarget = this.lastPickedObject;
             mouseEvent.consume();
         }
     }
 
-    public void mouseReleased(MouseEvent mouseEvent)
-    {
-        if (this.isArmed() && this.useRubberBand && mouseEvent.getButton() == MouseEvent.BUTTON1)
-        {
-            if (this.useRubberBand && this.getPositions().size() == 1)
+    public void mouseReleased(MouseEvent mouseEvent) {
+        if (this.isArmed() && this.useRubberBand && mouseEvent.getButton() == MouseEvent.BUTTON1) {
+            if (this.useRubberBand && this.getPositions().size() == 1) {
                 this.removeControlPoint();
+            }
             this.setActive(false);
             rubberBandTarget = null;
             // Disarm after second control point of a line or regular shape
             autoDisarm();
             mouseEvent.consume();
             this.firePropertyChange(WWOMeasureTool.EVENT_RUBBERBAND_STOP, null, null);
-        }
-        else if (this.isMoving() && mouseEvent.getButton() == MouseEvent.BUTTON1)
-        {
+        } else if (this.isMoving() && mouseEvent.getButton() == MouseEvent.BUTTON1) {
             this.setMoving(false);
             this.movingTarget = null;
             mouseEvent.consume();
@@ -930,14 +817,11 @@ public class WWOMeasureTool extends AVListImpl
     }
 
     // Handle single click for removing control points
-    public void mouseClicked(MouseEvent mouseEvent)
-    {
-        if (this.isArmed() && mouseEvent.getButton() == MouseEvent.BUTTON1)
-        {
-            if (mouseEvent.isControlDown())
+    public void mouseClicked(MouseEvent mouseEvent) {
+        if (this.isArmed() && mouseEvent.getButton() == MouseEvent.BUTTON1) {
+            if (mouseEvent.isControlDown()) {
                 this.removeControlPoint();
-            else if (!this.useRubberBand)
-            {
+            } else if (!this.useRubberBand) {
                 this.addControlPoint();
                 // Disarm after second control point of a line or regular shape
                 autoDisarm();
@@ -947,10 +831,8 @@ public class WWOMeasureTool extends AVListImpl
     }
 
     // Handle mouse motion
-    public void mouseDragged(MouseEvent mouseEvent)
-    {
-        if (this.isArmed() && (mouseEvent.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0)
-        {
+    public void mouseDragged(MouseEvent mouseEvent) {
+        if (this.isArmed() && (mouseEvent.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0) {
             // Don't update the control point here because the wwd current cursor position will not
             // have been updated to reflect the current mouse position. Wait to update in the
             // position listener, but consume the event so the view doesn't respond to it.
@@ -958,37 +840,36 @@ public class WWOMeasureTool extends AVListImpl
         }
     }
 
-    public void mouseMoved(MouseEvent mouseEvent)
-    {
+    public void mouseMoved(MouseEvent mouseEvent) {
     }
 
-    public void mouseEntered(MouseEvent e)
-    {
+    public void mouseEntered(MouseEvent e) {
     }// Handle cursor position change for rubber band
 
-    public void mouseExited(MouseEvent e)
-    {
+    public void mouseExited(MouseEvent e) {
     }
 
-    public void moved(PositionEvent event)
-    {
-        if ((!this.active && !this.moving))
+    public void moved(PositionEvent event) {
+        if ((!this.active && !this.moving)) {
             return;
+        }
 
         this.doMoved();
     }
 
     // Handle dragging of control points
-    public void selected(SelectEvent event)
-    {
-        if ((this.isArmed() && this.useRubberBand))
+    public void selected(SelectEvent event) {
+        if ((this.isArmed() && this.useRubberBand)) {
             return;
+        }
 
-        if (dragger == null)
+        if (dragger == null) {
             dragger = new BasicDragger(this.getWwd());
+        }
 
-        if (event.getEventAction().equals(SelectEvent.ROLLOVER))
+        if (event.getEventAction().equals(SelectEvent.ROLLOVER)) {
             highlight(event.getTopObject());
+        }
 
         this.doSelected(event);
     }
@@ -1002,40 +883,32 @@ public class WWOMeasureTool extends AVListImpl
 //        }
     }
 
-    protected void doMoved()
-    {
-        if (this.active && rubberBandTarget != null && this.getWwd().getCurrentPosition() != null)
-        {
+    protected void doMoved() {
+        if (this.active && rubberBandTarget != null && this.getWwd().getCurrentPosition() != null) {
             if (!this.freeHand || (!this.getMeasureShapeType().equals(AVKey.SHAPE_PATH)
-                && !this.getMeasureShapeType().equals(AVKey.SHAPE_POLYGON)))
-            {
+                    && !this.getMeasureShapeType().equals(AVKey.SHAPE_POLYGON))) {
                 // Rubber band - Move control point and update shape
                 Position lastPosition = rubberBandTarget.getPosition();
                 rubberBandTarget.setPosition(new Position(this.getWwd().getCurrentPosition(), 0));
                 this.moveControlPoint(rubberBandTarget);
                 this.firePropertyChange(WWOMeasureTool.EVENT_POSITION_REPLACE,
-                    lastPosition, rubberBandTarget.getPosition());
+                        lastPosition, rubberBandTarget.getPosition());
                 this.getWwd().redraw();
-            }
-            else
-            {
+            } else {
                 // Free hand - Compute distance from current control point (rubber band target)
                 Position lastPosition = rubberBandTarget.getPosition();
                 Position newPosition = this.getWwd().getCurrentPosition();
                 double distance = LatLon.greatCircleDistance(lastPosition, newPosition).radians
-                    * this.getWwd().getModel().getGlobe().getRadius();
-                if (distance >= freeHandMinSpacing)
-                {
+                        * this.getWwd().getModel().getGlobe().getRadius();
+                if (distance >= freeHandMinSpacing) {
                     // Add new control point
                     this.addControlPoint();
                     rubberBandTarget = this.getControlPoints().get(
-                        this.getControlPoints().size() - 1);
+                            this.getControlPoints().size() - 1);
                     this.getWwd().redraw();
                 }
             }
-        }
-        else if (this.moving && movingTarget != null && this.getWwd().getCurrentPosition() != null)
-        {
+        } else if (this.moving && movingTarget != null && this.getWwd().getCurrentPosition() != null) {
             // Moving the whole shape
             Position lastPosition = movingTarget.getPosition();
             Position newPosition = this.getWwd().getCurrentPosition();
@@ -1044,8 +917,7 @@ public class WWOMeasureTool extends AVListImpl
         }
     }
 
-    protected void moveToPosition(Position oldPosition, Position newPosition)
-    {
+    protected void moveToPosition(Position oldPosition, Position newPosition) {
         Angle distanceAngle = LatLon.greatCircleDistance(oldPosition, newPosition);
         Angle azimuthAngle = LatLon.greatCircleAzimuth(oldPosition, newPosition);
         this.moveMeasureShape(azimuthAngle, distanceAngle);
@@ -1054,132 +926,121 @@ public class WWOMeasureTool extends AVListImpl
 
     protected EventListenerList eventListeners = new EventListenerList();
 
-    public void addSelectListener(SelectListener listener)
-    {
+    public void addSelectListener(SelectListener listener) {
         this.eventListeners.add(SelectListener.class, listener);
     }
 
-    protected void callSelectListeners(final SelectEvent event)
-    {
-        EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                for (SelectListener listener : eventListeners.getListeners(SelectListener.class))
-                {
+    protected void callSelectListeners(final SelectEvent event) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                for (SelectListener listener : eventListeners.getListeners(SelectListener.class)) {
                     listener.selected(event);
                 }
             }
         });
     }
 
-    protected void doSelected(SelectEvent event)
-    {
-        if (event.getTopObject() != null)
-        {
-            if (event.getTopObject() instanceof WWOMeasureTool.ControlPoint)
-            {
+    protected void doSelected(SelectEvent event) {
+        if (event.getTopObject() != null) {
+            if (event.getTopObject() instanceof WWOMeasureTool.ControlPoint) {
                 WWOMeasureTool.ControlPoint point = (WWOMeasureTool.ControlPoint) event.getTopObject();
                 // Check whether this control point belongs to our measure tool
-                if (point.getParent() != this)
+                if (point.getParent() != this) {
                     return;
+                }
 
                 // Have rollover events highlight the rolled-over object.
-                if (event.getEventAction().equals(SelectEvent.ROLLOVER) && !this.dragger.isDragging())
-                {
+                if (event.getEventAction().equals(SelectEvent.ROLLOVER) && !this.dragger.isDragging()) {
                     this.highlight(point);
-                }
-                // Have drag events drag the selected object.
+                } // Have drag events drag the selected object.
                 else if (movingTarget == null && (event.getEventAction().equals(SelectEvent.DRAG_END)
-                    || event.getEventAction().equals(SelectEvent.DRAG)))
-                {
+                        || event.getEventAction().equals(SelectEvent.DRAG))) {
                     this.dragSelected(event);
                 }
-            }
-            else if (measureDisplay.isAnnotation(event.getTopObject()))
-            {
+            } else if (measureDisplay.isAnnotation(event.getTopObject())) {
                 Position pos = null;
-                if (event.getObjects().getTerrainObject() != null)
+                if (event.getObjects().getTerrainObject() != null) {
                     pos = event.getObjects().getTerrainObject().getPosition();
+                }
 
-                if (isShowAnnotation())
+                if (isShowAnnotation()) {
                     measureDisplay.updateMeasureDisplay(pos);
-            }
-            else if (event.getTopObject() == shape)
-            {
-                for (SelectListener listener : eventListeners.getListeners(SelectListener.class))
-                {
+                }
+            } else if (event.getTopObject() == shape) {
+                for (SelectListener listener : eventListeners.getListeners(SelectListener.class)) {
                     listener.selected(event);
                 }
 
                 Position pos = null;
-                if (event.getObjects().getTerrainObject() != null)
+                if (event.getObjects().getTerrainObject() != null) {
                     pos = event.getObjects().getTerrainObject().getPosition();
+                }
 
-                if (isShowAnnotation())
+                if (isShowAnnotation()) {
                     measureDisplay.updateMeasureDisplay(pos);
-            }
-            else
-            {
-                if (isShowAnnotation())
+                }
+            } else {
+                if (isShowAnnotation()) {
                     measureDisplay.updateMeasureDisplay(null);
+                }
             }
         }
     }
 
-    protected void dragSelected(SelectEvent event)
-    {
+    protected void dragSelected(SelectEvent event) {
         WWOMeasureTool.ControlPoint point = (WWOMeasureTool.ControlPoint) event.getTopObject();
 
         LatLon lastPosition = point.getPosition();
-        if (point.getValue("PositionIndex") != null)
+        if (point.getValue("PositionIndex") != null) {
             lastPosition = this.getPositions().get((Integer) point.getValue("PositionIndex"));
+        }
 
         // Delegate dragging computations to a dragger.
         this.dragger.selected(event);
 
         this.moveControlPoint(point);
-        if (this.isShowAnnotation())
+        if (this.isShowAnnotation()) {
             this.measureDisplay.updateMeasureDisplay(point.getPosition());
+        }
         this.firePropertyChange(WWOMeasureTool.EVENT_POSITION_REPLACE,
-            lastPosition, point.getPosition());
+                lastPosition, point.getPosition());
         this.getWwd().redraw();
     }
 
-    protected void highlight(Object o)
-    {
+    protected void highlight(Object o) {
         // Manage highlighting of control points
-        if (this.lastPickedObject == o)
+        if (this.lastPickedObject == o) {
             return; // Same thing selected
-
+        }
         if (o != null && o instanceof WWOMeasureTool.ControlPoint
-            && ((WWOMeasureTool.ControlPoint) o).getParent() != this)
+                && ((WWOMeasureTool.ControlPoint) o).getParent() != this) {
             return; // Does not belong to this measure tool
-
+        }
         // Turn off highlight if on.
-        if (this.lastPickedObject != null)
-        {
+        if (this.lastPickedObject != null) {
             this.lastPickedObject.highlight(false);
             this.lastPickedObject = null;
-            if (this.isShowAnnotation())
+            if (this.isShowAnnotation()) {
                 this.measureDisplay.updateMeasureDisplay(null);
+            }
         }
 
         // Turn on highlight if object selected.
-        if (o != null && o instanceof WWOMeasureTool.ControlPoint)
-        {
+        if (o != null && o instanceof WWOMeasureTool.ControlPoint) {
             this.lastPickedObject = (WWOMeasureTool.ControlPoint) o;
             this.lastPickedObject.highlight(true);
-            if (this.isShowAnnotation())
+            if (this.isShowAnnotation()) {
                 this.measureDisplay.updateMeasureDisplay(this.lastPickedObject.getPosition());
+            }
         }
     }
 
-    protected void autoDisarm()
-    {
+    protected void autoDisarm() {
         // Disarm after second control point of a line or regular shape
-        if (this.isRegularShape() || this.getMeasureShapeType().equals(AVKey.SHAPE_LINE))
-            if (this.getControlPoints().size() > 1)
+        if (this.isRegularShape() || this.getMeasureShapeType().equals(AVKey.SHAPE_LINE)) {
+            if (this.getControlPoints().size() > 1) {
                 this.setArmed(false);
+            }
+        }
     }
 }

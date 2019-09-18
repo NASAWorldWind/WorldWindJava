@@ -129,6 +129,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
      *
      * @deprecated Use {@link #getInteriorMaterial()} instead.
      */
+    @Deprecated
     public Material getMaterial()
     {
         return this.getInteriorMaterial();
@@ -139,6 +140,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
      *
      * @deprecated Use {@link #setInteriorMaterial(gov.nasa.worldwind.render.Material)} instead.
      */
+    @Deprecated
     public void setMaterial(Material material)
     {
         if (material == null)
@@ -156,6 +158,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
      *
      * @deprecated Use {@link #getInteriorOpacity()} instead.
      */
+    @Deprecated
     public double getOpacity()
     {
         return this.getInteriorOpacity();
@@ -166,6 +169,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
      *
      * @deprecated Use {@link #setInteriorOpacity(double)} instead.
      */
+    @Deprecated
     public void setOpacity(double opacity)
     {
         if (opacity < 0 || opacity > 1)
@@ -183,6 +187,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
      *
      * @deprecated Use {@link Material#apply(com.jogamp.opengl.GL2, int)} or make OpenGL state changes directly.
      */
+    @Deprecated
     public void applyInterior(DrawContext dc, boolean enableMaterial)
     {
         if (dc == null)
@@ -200,6 +205,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
      *
      * @deprecated Use {@link Material#apply(com.jogamp.opengl.GL2, int)} or make OpenGL state changes directly.
      */
+    @Deprecated
     public void applyOutline(DrawContext dc, boolean enableMaterial)
     {
         if (dc == null)
