@@ -847,7 +847,14 @@ public class TacticalGraphicLabel
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * Causes this <code>Renderable</code> to render itself using the provided draw context.
+     *
+     * @param dc the <code>DrawContext</code> to be used
+     *
+     * @throws IllegalArgumentException if the draw context is null.
+     * @see DrawContext
+     */
     public void render(DrawContext dc)
     {
         // This render method is called twice during frame generation. It's first called as a Renderable

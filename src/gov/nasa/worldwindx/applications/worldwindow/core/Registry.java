@@ -41,7 +41,7 @@ public class Registry
 
         try
         {
-            return Class.forName(className.trim()).newInstance();
+            return Class.forName(className.trim()).getConstructor().newInstance();
         }
         catch (Exception e)
         {

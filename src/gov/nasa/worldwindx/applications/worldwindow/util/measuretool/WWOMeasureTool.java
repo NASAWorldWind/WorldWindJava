@@ -691,7 +691,7 @@ public class WWOMeasureTool extends AVListImpl
         if (this.measureShapeType.equals(AVKey.SHAPE_LINE) || this.measureShapeType.equals(AVKey.SHAPE_PATH)) {
             // Update current line
             if (this.positions.size() > 1 && this.shape != null) {
-                ((Polyline) this.shape).setPositions(this.positions);
+                ((Path) this.shape).setPositions(this.positions);
             }
         } // Update polygon
         else if (this.measureShapeType.equals(AVKey.SHAPE_POLYGON)) {

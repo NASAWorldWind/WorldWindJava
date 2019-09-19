@@ -56,9 +56,9 @@ public class GeoRSSParserTest
         assertTrue("", shapes.size() != 0);
         assertNotNull("", shapes.get(0));
         // <georss:line> is translated to a WWJ Polyline.
-        assertTrue("", shapes.get(0) instanceof Polyline);
+        assertTrue("", shapes.get(0) instanceof Path);
 
-        Polyline shape = (Polyline) shapes.get(0);
+        Path shape = (Path) shapes.get(0);
         java.util.List<Position> positions = (java.util.List<Position>) shape.getPositions();
         assertNotNull("", positions);
         assertEquals("", 3, positions.size());
@@ -80,9 +80,9 @@ public class GeoRSSParserTest
         assertTrue("", shapes.size() != 0);
         assertNotNull("", shapes.get(0));
         // <georss:line> is translated to a WWJ Polyline.
-        assertTrue("", shapes.get(0) instanceof Polyline);
+        assertTrue("", shapes.get(0) instanceof Path);
 
-        Polyline shape = (Polyline) shapes.get(0);
+        Path shape = (Path) shapes.get(0);
         java.util.List<Position> positions = (java.util.List<Position>) shape.getPositions();
         assertNotNull("", positions);
         assertEquals("", 3, positions.size());
@@ -128,9 +128,9 @@ public class GeoRSSParserTest
         assertTrue("", shapes.size() != 0);
         assertNotNull("", shapes.get(0));
         // <georss:polygon> is translated to a WWJ Polyline when an elevation is specified.
-        assertTrue("", shapes.get(0) instanceof Polyline);
+        assertTrue("", shapes.get(0) instanceof Path);
 
-        Polyline shape = (Polyline) shapes.get(0);
+        Path shape = (Path) shapes.get(0);
         java.util.List<Position> positions = (java.util.List<Position>) shape.getPositions();
         assertNotNull("", positions);
         assertEquals("", 4, positions.size());
@@ -224,10 +224,10 @@ public class GeoRSSParserTest
         assertNotNull("", shapes);
         assertTrue("", shapes.size() != 0);
         assertNotNull("", shapes.get(0));
-        // <gml:LineString> is translated to a WWJ Polyline.
-        assertTrue("", shapes.get(0) instanceof Polyline);
+        // <gml:LineString> is translated to a WWJ Path.
+        assertTrue("", shapes.get(0) instanceof Path);
 
-        Polyline shape = (Polyline) shapes.get(0);
+        Path shape = (Path) shapes.get(0);
         java.util.List<Position> positions = (java.util.List<Position>) shape.getPositions();
         assertNotNull("", positions);
         assertEquals("", 3, positions.size());
@@ -438,14 +438,14 @@ public class GeoRSSParserTest
         assertNotNull("", shapes.get(0));
         assertNotNull("", shapes.get(1));
         // <georss:line> is translated to a WWJ Polyline.
-        assertTrue("", shapes.get(0) instanceof Polyline);
+        assertTrue("", shapes.get(0) instanceof Path);
         // <georss:polygon> is translated to a WWJ Polyline when an elevation is specified.
-        assertTrue("", shapes.get(1) instanceof Polyline);
+        assertTrue("", shapes.get(1) instanceof Path);
 
-        Polyline shape;
+        Path shape;
         java.util.List<Position> positions;
 
-        shape = (Polyline) shapes.get(0);
+        shape = (Path) shapes.get(0);
         positions = (java.util.List<Position>) shape.getPositions();
         assertNotNull("", positions);
         assertEquals("", 3, positions.size());
@@ -453,7 +453,7 @@ public class GeoRSSParserTest
         assertEquals("", Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1));
         assertEquals("", Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2));
 
-        shape = (Polyline) shapes.get(1);
+        shape = (Path) shapes.get(1);
         positions = (java.util.List<Position>) shape.getPositions();
         assertNotNull("", positions);
         assertEquals("", 3, positions.size());
@@ -474,9 +474,9 @@ public class GeoRSSParserTest
         assertTrue("", shapes.size() != 0);
         assertNotNull("", shapes.get(0));
         // <georss:line> is translated to a WWJ Polyline.
-        assertTrue("", shapes.get(0) instanceof Polyline);
+        assertTrue("", shapes.get(0) instanceof Path);
 
-        Polyline shape = (Polyline) shapes.get(0);
+        Path shape = (Path) shapes.get(0);
         java.util.List<Position> positions = (java.util.List<Position>) shape.getPositions();
         assertNotNull("", positions);
         assertEquals("", 3, positions.size());

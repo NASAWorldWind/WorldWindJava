@@ -2556,7 +2556,7 @@ public class Path extends AbstractShape {
 
     /**
      * Specifies an offset, in meters, to add to the path points when the path's altitude mode is
-     * {@link WorldWind.CLAMP_TO_GROUND}. See {@link #setAltitudeMode(int) }.
+     * {@link WorldWind#CLAMP_TO_GROUND}. See {@link #setAltitudeMode(int) }.
      *
      * @param offset the path offset in meters.
      */

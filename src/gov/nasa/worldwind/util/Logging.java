@@ -12,16 +12,15 @@ import java.text.MessageFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.*;
-
 /**
  * This class of static methods provides the interface to logging for WorldWind components. Logging is performed via
- * {@link java.util.logging}. The default logger name is <code>gov.nasa.worldwind</code>. The logger name is
+ * {@link java.util.logging.Logger}. The default logger name is <code>gov.nasa.worldwind</code>. The logger name is
  * configurable via {@link gov.nasa.worldwind.Configuration}.
  *
  * @author tag
  * @version $Id: Logging.java 1171 2013-02-11 21:45:02Z dcollins $
  * @see gov.nasa.worldwind.Configuration
- * @see java.util.logging
+ * @see java.util.logging.Logger
  */
 public class Logging
 {

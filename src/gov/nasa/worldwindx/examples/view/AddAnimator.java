@@ -15,6 +15,7 @@ import gov.nasa.worldwind.view.firstperson.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * This example demonstrates the use of {@link gov.nasa.worldwind.view.firstperson.BasicFlyView} with a {@link
@@ -36,7 +37,7 @@ public class AddAnimator extends ApplicationTemplate
             public class FlyViewGazetteerPanel extends GazetteerPanel
             {
                 FlyViewGazetteerPanel(final WorldWindow wwd, String FlyViewGazetteerPanel)
-                    throws IllegalAccessException, InstantiationException, ClassNotFoundException
+                    throws IllegalAccessException, InstantiationException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException
                 {
                     super(wwd, FlyViewGazetteerPanel);
                 }

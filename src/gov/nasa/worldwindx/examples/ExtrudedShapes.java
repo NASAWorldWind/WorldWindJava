@@ -148,8 +148,8 @@ public class ExtrudedShapes extends ApplicationTemplate
 
                 try
                 {
-                    Class c = Class.forName(tokens[0]);
-                    Airspace airspace = (Airspace) c.newInstance();
+                    Class<?> c = Class.forName(tokens[0]);
+                    Airspace airspace = (Airspace) c.getConstructor().newInstance();
                     BufferedReader input = new BufferedReader(new InputStreamReader(zipFile.getInputStream(entry)));
                     String s = input.readLine();
                     airspace.restoreState(s);

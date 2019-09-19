@@ -101,7 +101,7 @@ public class LayerManagerApp
         }
     }
 
-    public static AppFrame start(String appName, Class appFrameClass)
+    public static AppFrame start(String appName, Class<?> appFrameClass)
     {
         if (Configuration.isMacOS() && appName != null)
         {
@@ -110,7 +110,7 @@ public class LayerManagerApp
 
         try
         {
-            final AppFrame frame = (AppFrame) appFrameClass.newInstance();
+            final AppFrame frame = (AppFrame) appFrameClass.getConstructor().newInstance();
             frame.setTitle(appName);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             java.awt.EventQueue.invokeLater(new Runnable()

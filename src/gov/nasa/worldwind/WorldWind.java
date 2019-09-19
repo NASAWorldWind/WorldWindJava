@@ -211,8 +211,8 @@ public final class WorldWind
 
         try
         {
-            Class c = Class.forName(className.trim());
-            return c.newInstance();
+            Class<?> c = Class.forName(className.trim());
+            return c.getConstructor().newInstance();
         }
         catch (Exception e)
         {

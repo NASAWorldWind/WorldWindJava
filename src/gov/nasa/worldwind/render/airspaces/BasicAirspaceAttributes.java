@@ -119,7 +119,7 @@ public class BasicAirspaceAttributes extends BasicShapeAttributes implements Air
     }
 
     /** {@inheritDoc} */
-    public void copy(AirspaceAttributes attributes)
+    public void copy(ShapeAttributes attributes)
     {
         super.copy(attributes);
     }

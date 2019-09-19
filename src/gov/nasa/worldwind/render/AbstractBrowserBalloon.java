@@ -2170,7 +2170,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         if (event instanceof MouseWheelEvent)
         {
             this.webView.sendEvent(
-                new MouseWheelEvent((Component) event.getSource(), event.getID(), event.getWhen(), event.getModifiers(),
+                new MouseWheelEvent((Component) event.getSource(), event.getID(), event.getWhen(), event.getModifiersEx(),
                     webViewPoint.x, webViewPoint.y, event.getClickCount(), event.isPopupTrigger(),
                     ((MouseWheelEvent) event).getScrollType(), ((MouseWheelEvent) event).getScrollAmount(),
                     ((MouseWheelEvent) event).getWheelRotation()));
@@ -2178,7 +2178,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         else
         {
             this.webView.sendEvent(
-                new MouseEvent((Component) event.getSource(), event.getID(), event.getWhen(), event.getModifiers(),
+                new MouseEvent((Component) event.getSource(), event.getID(), event.getWhen(), event.getModifiersEx(),
                     webViewPoint.x, webViewPoint.y, event.getClickCount(), event.isPopupTrigger(), event.getButton()));
         }
     }

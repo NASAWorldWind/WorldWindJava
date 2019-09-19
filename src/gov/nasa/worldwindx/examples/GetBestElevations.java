@@ -90,7 +90,7 @@ public class GetBestElevations extends ApplicationTemplate
             {
                 public void mouseClicked(MouseEvent mouseEvent)
                 {
-                    if ((mouseEvent.getModifiers() & ActionEvent.SHIFT_MASK) == 0)
+                    if ((mouseEvent.getModifiersEx() & InputEvent.SHIFT_DOWN_MASK) == 0)
                         return;
                     mouseEvent.consume();
 

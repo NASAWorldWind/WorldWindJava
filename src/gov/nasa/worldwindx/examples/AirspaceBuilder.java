@@ -1266,8 +1266,8 @@ public class AirspaceBuilder extends ApplicationTemplate
 
                     try
                     {
-                        Class c = Class.forName(tokens[0]);
-                        Airspace airspace = (Airspace) c.newInstance();
+                        Class<?> c = Class.forName(tokens[0]);
+                        Airspace airspace = (Airspace) c.getConstructor().newInstance();
                         BufferedReader input = new BufferedReader(new InputStreamReader(zipFile.getInputStream(entry)));
                         String s = input.readLine();
                         airspace.restoreState(s);
@@ -1329,8 +1329,8 @@ public class AirspaceBuilder extends ApplicationTemplate
                             String[] name = file.getName().split("-");
                             try
                             {
-                                Class c = Class.forName(name[0]);
-                                Airspace airspace = (Airspace) c.newInstance();
+                                Class<?> c = Class.forName(name[0]);
+                                Airspace airspace = (Airspace) c.getConstructor().newInstance();
                                 BufferedReader input = new BufferedReader(new FileReader(file));
                                 String s = input.readLine();
                                 airspace.restoreState(s);
@@ -1514,7 +1514,7 @@ public class AirspaceBuilder extends ApplicationTemplate
             {
                 JMenuItem item = new JMenuItem("Open...");
                 item.setAccelerator(KeyStroke.getKeyStroke(
-                    KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 item.setActionCommand(OPEN);
                 item.addActionListener(controller);
                 menu.add(item);
@@ -1526,7 +1526,7 @@ public class AirspaceBuilder extends ApplicationTemplate
 
                 item = new JMenuItem("Save...");
                 item.setAccelerator(KeyStroke.getKeyStroke(
-                    KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 item.setActionCommand(SAVE);
                 item.addActionListener(controller);
                 menu.add(item);
@@ -1575,7 +1575,7 @@ public class AirspaceBuilder extends ApplicationTemplate
             {
                 JMenuItem item = new JMenuItem("Deselect");
                 item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 item.setActionCommand(CLEAR_SELECTION);
                 item.addActionListener(controller);
                 menu.add(item);
