@@ -283,8 +283,9 @@ public class GeoRSSParser {
         if (elevation != 0) {
             Path path = new Path(positions, elevation);
             path.setAttributes(new BasicShapeAttributes());
+            path.getAttributes().setOutlineMaterial(Material.WHITE);
+            path.setFollowTerrain(true);
             path.setPathType(AVKey.GREAT_CIRCLE);
-
             return path;
         } else {
             return new SurfacePolygon(positions);
@@ -382,13 +383,17 @@ public class GeoRSSParser {
         }
 
         double elevation = attrs != null ? getElevation(node, attrs) : 0d;
+        Path path;
         if (elevation != 0) {
-            Path path = new Path(positions, elevation);
-            path.setPathType(AVKey.GREAT_CIRCLE);
-            return path;
+            path = new Path(positions, elevation);
         } else {
-            return new Path(positions, 0);
+            path = new Path(positions, 0);
         }
+        path.setAttributes(new BasicShapeAttributes());
+        path.getAttributes().setOutlineMaterial(Material.WHITE);
+        path.setFollowTerrain(true);
+        path.setPathType(AVKey.GREAT_CIRCLE);
+        return path;
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
