@@ -22,7 +22,9 @@ import java.beans.PropertyChangeListener;
 
 /**
  * Synchronous file upload using HTTP POST as a multi-part form data
+ * @deprecated 
  */
+@Deprecated
 public class HTTPFileUpload {
 
     private final PropertyChangeSupport propertyChangeSupport;

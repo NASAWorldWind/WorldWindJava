@@ -63,17 +63,19 @@ public class LineBackground extends ApplicationTemplate {
                     plPoints.add(ll.add(LatLon.fromDegrees(2, 0))); // add 2 degrees of latitude to separate the lines
                 }
                 Path path1 = new Path(plPoints, 0); // the primary Path
-                path1.setFollowTerrain(true);
+                path1.setSurfacePath(true);
                 path1.setPathType(AVKey.RHUMB_LINE);
                 path1.setAttributes(foregroundAttrs);
+                path1.makeClosed();
 
                 Path path2 = new Path(plPoints, 0); // the background Path
-                path2.setFollowTerrain(true);
+                path2.setSurfacePath(true);
                 path2.setPathType(AVKey.RHUMB_LINE);
                 float[] c = backgroundAttrs.getOutlineMaterial().getDiffuse().getColorComponents(new float[3]);
                 var attrs = new BasicShapeAttributes(backgroundAttrs);
                 attrs.setOutlineMaterial(new Material(new Color(c[0], c[1], c[2], (float) backgroundAttrs.getOutlineOpacity())));
                 path2.setAttributes(attrs);
+                path2.makeClosed();
 
                 // Add all the lines to the scene.
                 RenderableLayer layer = new RenderableLayer();

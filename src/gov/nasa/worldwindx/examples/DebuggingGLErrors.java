@@ -19,10 +19,9 @@ import com.jogamp.opengl.*;
  * @author dcollins
  * @version $Id: DebuggingGLErrors.java 3433 2015-10-01 19:40:46Z dcollins $
  */
-public class DebuggingGLErrors extends ApplicationTemplate
-{
-    static
-    {
+public class DebuggingGLErrors extends ApplicationTemplate {
+
+    static {
         // Modify the configuration to specify our custom WorldWindowGLDrawable. Normally, an application would specify
         // this in a configuration file. For example, via the standard WorldWind XML configuration file:
         //
@@ -47,11 +46,12 @@ public class DebuggingGLErrors extends ApplicationTemplate
      * gov.nasa.worldwind.WorldWindowGLAutoDrawable#init(com.jogamp.opengl.GLAutoDrawable)} to configure the OpenGL
      * error logger.
      */
-    public static class MyGLAutoDrawable extends WorldWindowGLAutoDrawable
-    {
-        /** Constructs a new MyGLAutoDrawable, but otherwise does nothing. */
-        public MyGLAutoDrawable()
-        {
+    public static class MyGLAutoDrawable extends WorldWindowGLAutoDrawable {
+
+        /**
+         * Constructs a new MyGLAutoDrawable, but otherwise does nothing.
+         */
+        public MyGLAutoDrawable() {
         }
 
         /**
@@ -60,8 +60,8 @@ public class DebuggingGLErrors extends ApplicationTemplate
          *
          * @param glAutoDrawable the drawable
          */
-        public void init(GLAutoDrawable glAutoDrawable)
-        {
+        @Override
+        public void init(GLAutoDrawable glAutoDrawable) {
             // Invoked when the GL context changes. The host machine capabilities may have changed, so re-configure the
             // OpenGL features used by the WorldWind SDK.
             super.init(glAutoDrawable);
@@ -74,8 +74,7 @@ public class DebuggingGLErrors extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         start("WorldWind Debugging GL Errors", AppFrame.class);
     }
 }

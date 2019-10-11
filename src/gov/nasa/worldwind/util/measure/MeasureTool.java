@@ -435,9 +435,9 @@ public class MeasureTool extends AVListImpl implements Disposable {
     }
 
     /**
-     * Returns the polyline currently used to display lines and path.
+     * Returns the path currently used to display lines and path.
      *
-     * @return the polyline currently used to display lines and path.
+     * @return the path currently used to display lines and path.
      */
     public Path getLine() {
         return this.line;
@@ -888,6 +888,11 @@ public class MeasureTool extends AVListImpl implements Disposable {
         this.followTerrain = followTerrain;
         if (this.line != null) {
             this.line.setFollowTerrain(followTerrain);
+            if (followTerrain) {
+                this.line.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
+            } else {
+                this.line.setAltitudeMode(WorldWind.ABSOLUTE);
+            }
         }
     }
 
@@ -1746,9 +1751,9 @@ public class MeasureTool extends AVListImpl implements Disposable {
         // Update line
         if (this.measureShapeType.equals(SHAPE_LINE) || this.measureShapeType.equals(SHAPE_PATH)) {
             if (this.positions.size() > 1 && this.line == null) {
-                // Init polyline
+                // Init path
                 this.line = new Path();
-                this.line.setFollowTerrain(this.isFollowTerrain());
+                setFollowTerrain(this.isFollowTerrain());
                 this.line.setPathType(this.getPathType());
                 var attrs = new BasicShapeAttributes();
                 attrs.setOutlineWidth(this.getLineWidth());

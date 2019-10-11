@@ -721,9 +721,8 @@ public class AbstractGraticuleLayer extends AbstractLayer
     {
         Path path = new Path(positions);
         path.setPathType(pathType);
-        path.setFollowTerrain(true);
+        path.setSurfacePath(true);
         path.setTerrainConformance(1);
-        path.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
         return path;
     }
 

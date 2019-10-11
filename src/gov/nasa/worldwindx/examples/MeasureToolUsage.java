@@ -25,17 +25,16 @@ import java.util.ArrayList;
  * @see gov.nasa.worldwind.util.measure.MeasureToolController
  * @see MeasureToolPanel
  */
-public class MeasureToolUsage extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+public class MeasureToolUsage extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         private int lastTabIndex = -1;
         private final JTabbedPane tabbedPane = new JTabbedPane();
-        private TerrainProfileLayer profile = new TerrainProfileLayer();
-        private PropertyChangeListener measureToolListener = new MeasureToolListener();
+        private final TerrainProfileLayer profile = new TerrainProfileLayer();
+        private final PropertyChangeListener measureToolListener = new MeasureToolListener();
 
-        public AppFrame()
-        {
+        public AppFrame() {
             super(true, true, false); // no layer or statistics panel
 
             // Add terrain profile layer
@@ -47,24 +46,17 @@ public class MeasureToolUsage extends ApplicationTemplate
             // Add + tab
             tabbedPane.add(new JPanel());
             tabbedPane.setTitleAt(0, "+");
-            tabbedPane.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent changeEvent)
-                {
-                    if (tabbedPane.getSelectedIndex() == 0)
-                    {
-                        // Add new measure tool in a tab when '+' selected
-                        MeasureTool measureTool = new MeasureTool(getWwd());
-                        measureTool.setController(new MeasureToolController());
-                        tabbedPane.add(new MeasureToolPanel(getWwd(), measureTool));
-                        tabbedPane.setTitleAt(tabbedPane.getTabCount() - 1, "" + (tabbedPane.getTabCount() - 1));
-                        tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
-                        switchMeasureTool();
-                    }
-                    else
-                    {
-                        switchMeasureTool();
-                    }
+            tabbedPane.addChangeListener((ChangeEvent changeEvent) -> {
+                if (tabbedPane.getSelectedIndex() == 0) {
+                    // Add new measure tool in a tab when '+' selected
+                    MeasureTool measureTool = new MeasureTool(getWwd());
+                    measureTool.setController(new MeasureToolController());
+                    tabbedPane.add(new MeasureToolPanel(getWwd(), measureTool));
+                    tabbedPane.setTitleAt(tabbedPane.getTabCount() - 1, "" + (tabbedPane.getTabCount() - 1));
+                    tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
+                    switchMeasureTool();
+                } else {
+                    switchMeasureTool();
                 }
             });
 
@@ -80,53 +72,47 @@ public class MeasureToolUsage extends ApplicationTemplate
             this.pack();
         }
 
-        private class MeasureToolListener implements PropertyChangeListener
-        {
-            public void propertyChange(PropertyChangeEvent event)
-            {
+        private class MeasureToolListener implements PropertyChangeListener {
+
+            @Override
+            public void propertyChange(PropertyChangeEvent event) {
                 // Measure shape position list changed - update terrain profile
                 if (event.getPropertyName().equals(MeasureTool.EVENT_POSITION_ADD)
                         || event.getPropertyName().equals(MeasureTool.EVENT_POSITION_REMOVE)
-                        || event.getPropertyName().equals(MeasureTool.EVENT_POSITION_REPLACE))
-                {
-                    updateProfile(((MeasureTool)event.getSource()));
+                        || event.getPropertyName().equals(MeasureTool.EVENT_POSITION_REPLACE)) {
+                    updateProfile(((MeasureTool) event.getSource()));
                 }
             }
         }
 
-        private void switchMeasureTool()
-        {
+        private void switchMeasureTool() {
             // Disarm last measure tool when changing tab and switching tool
-            if (lastTabIndex != -1)
-            {
-                MeasureTool mt = ((MeasureToolPanel)tabbedPane.getComponentAt(lastTabIndex)).getMeasureTool();
+            if (lastTabIndex != -1) {
+                MeasureTool mt = ((MeasureToolPanel) tabbedPane.getComponentAt(lastTabIndex)).getMeasureTool();
                 mt.setArmed(false);
                 mt.removePropertyChangeListener(measureToolListener);
             }
             // Update terrain profile from current measure tool
             lastTabIndex = tabbedPane.getSelectedIndex();
-            MeasureTool mt = ((MeasureToolPanel)tabbedPane.getComponentAt(lastTabIndex)).getMeasureTool();
+            MeasureTool mt = ((MeasureToolPanel) tabbedPane.getComponentAt(lastTabIndex)).getMeasureTool();
             mt.addPropertyChangeListener(measureToolListener);
             updateProfile(mt);
         }
 
-        private void updateProfile(MeasureTool mt)
-        {
+        private void updateProfile(MeasureTool mt) {
             ArrayList<? extends LatLon> positions = mt.getPositions();
-            if (positions != null && positions.size() > 1)
-            {
+            if (positions != null && positions.size() > 1) {
                 profile.setPathPositions(positions);
                 profile.setEnabled(true);
-            }
-            else
+            } else {
                 profile.setEnabled(false);
-            
+            }
+
             getWwd().redraw();
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Measure Tool", MeasureToolUsage.AppFrame.class);
     }
 

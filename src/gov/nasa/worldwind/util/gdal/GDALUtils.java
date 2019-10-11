@@ -64,6 +64,7 @@ public class GDALUtils {
 
     private static class GDALLibraryLoader implements gdal.LibraryLoader {
 
+        @Override
         public void load(String libName) throws UnsatisfiedLinkError {
             if (WWUtil.isEmpty(libName)) {
                 String message = Logging.getMessage("nullValue.LibraryIsNull");
@@ -272,7 +273,7 @@ public class GDALUtils {
 
     protected static String buildPathString(String[] folders, boolean addDefaultValues) {
         String del = System.getProperty("path.separator");
-        StringBuffer path = new StringBuffer();
+        StringBuilder path = new StringBuilder();
 
         path.append("lib-external/gdal").append(del);
 
@@ -291,7 +292,7 @@ public class GDALUtils {
     }
 
     protected static void listAllRegisteredDrivers() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < gdal.GetDriverCount(); i++) {
             Driver drv = gdal.GetDriver(i);
             String msg = Logging.getMessage("gdal.DriverDetails", drv.getShortName(), drv.getLongName(),
@@ -477,8 +478,6 @@ public class GDALUtils {
             throw new IllegalArgumentException(message);
         }
 
-        BufferedImage img = null;
-
         int width = ds.getRasterXSize();
         int height = ds.getRasterYSize();
         int bandCount = ds.getRasterCount();
@@ -496,7 +495,7 @@ public class GDALUtils {
         int[] offsets = new int[bandCount];
 
         int imgSize = width * height;
-        int bandDataType = 0, buf_size = 0;
+        int bandDataType = 0;
 
         double maxValue = -Double.MAX_VALUE;
 
@@ -510,7 +509,7 @@ public class GDALUtils {
             }
 
             bandDataType = imageBand.getDataType();
-            buf_size = imgSize * (gdal.GetDataTypeSize(bandDataType) / 8);
+            int buf_size = imgSize * (gdal.GetDataTypeSize(bandDataType) / 8);
 
             ByteBuffer data = ByteBuffer.allocateDirect(buf_size);
             data.order(ByteOrder.nativeOrder());
@@ -561,11 +560,9 @@ public class GDALUtils {
             actualBitsPerColor = (Integer) params.getValue(AVKey.RASTER_BAND_ACTUAL_BITS_PER_PIXEL);
         } else if (maxValue > 0d) {
             actualBitsPerColor = (int) Math.ceil(Math.log(maxValue) / Math.log(2d));
-        } else {
-            actualBitsPerColor = bitsPerColor;
         }
 
-        int[] reqBandOrder = bandsOrder;
+        int[] reqBandOrder;
         try {
             reqBandOrder = extractBandOrder(ds, params);
             if (null == reqBandOrder || 0 == reqBandOrder.length) {
@@ -670,6 +667,7 @@ public class GDALUtils {
         ColorModel cm;
 
         Band band1 = ds.GetRasterBand(1);
+        BufferedImage img;
         if (band1.GetRasterColorInterpretation() == gdalconstConstants.GCI_PaletteIndex) {
             cm = band1.GetRasterColorTable().getIndexColorModel(gdal.GetDataTypeSize(bandDataType));
             img = new BufferedImage(cm, raster, false, null);
@@ -718,11 +716,9 @@ public class GDALUtils {
             img = new BufferedImage(cm, raster, false, null);
         }
 
-        if (null != img) {
-            if (AVListImpl.getBooleanValue(params, AVKey.BLACK_GAPS_DETECTION, false)) {
-                // remove voids
-                img = detectVoidsAndMakeThemTransparent(img);
-            }
+        if (AVListImpl.getBooleanValue(params, AVKey.BLACK_GAPS_DETECTION, false)) {
+            // remove voids
+            img = detectVoidsAndMakeThemTransparent(img);
         }
 
         return BufferedImageRaster.wrap(img, params);
@@ -775,7 +771,7 @@ public class GDALUtils {
             return;
         }
 
-        ArrayList<Integer> voids = new ArrayList<Integer>();
+        ArrayList<Integer> voids = new ArrayList<>();
         voids.add(0); // a=r=g=b=0
         voids.add(0xFF << 24); // a=255, r=g=b=0
         voids.add(0xFFFFFFFF); // a=255, r=g=b=255
@@ -1327,8 +1323,6 @@ public class GDALUtils {
         }
 
         if (null != srs) {
-            Sector sector = null;
-
             if (!params.hasKey(AVKey.SPATIAL_REFERENCE_WKT)) {
                 params.setValue(AVKey.SPATIAL_REFERENCE_WKT, srs.ExportToWkt());
             }
@@ -1338,20 +1332,16 @@ public class GDALUtils {
                 String msg = Logging.getMessage("generic.UnknownCoordinateSystem", proj_wkt);
                 Logging.logger().severe(msg);
                 return params;
-//                throw new WWRuntimeException(msg);
             }
 
             // save area in image's native CS and Projection 
             GDAL.Area area = new GDAL.Area(srs, ds);
-
-            if (null != area) {
-                params.setValue(AVKey.GDAL_AREA, area);
-                sector = area.getSector();
-                if (null != sector) {
-                    params.setValue(AVKey.SECTOR, sector);
-                    LatLon origin = new LatLon(sector.getMaxLatitude(), sector.getMinLongitude());
-                    params.setValue(AVKey.ORIGIN, origin);
-                }
+            Sector sector = area.getSector();
+            params.setValue(AVKey.GDAL_AREA, area);
+            if (null != sector) {
+                params.setValue(AVKey.SECTOR, sector);
+                LatLon origin = new LatLon(sector.getMaxLatitude(), sector.getMinLongitude());
+                params.setValue(AVKey.ORIGIN, origin);
             }
 
             if (srs.IsGeographic() == 1) {
@@ -1390,9 +1380,6 @@ public class GDALUtils {
                 //      AUTHORITY [ "EPSG", "26986" ]
                 //  ]
                 // ----8><----------------------------------------------------------------------------------------
-//                String projcs = srs.GetAttrValue("PROJCS");
-//                String geocs = srs.GetAttrValue("PROJCS|GEOGCS");
-//                String projcs_unit = srs.GetAttrValue("PROJCS|GEOGCS|UNIT");
                 String projection = srs.GetAttrValue("PROJCS|PROJECTION");
                 String unit = srs.GetAttrValue("PROJCS|UNIT");
                 if (null != unit) {

@@ -5,6 +5,7 @@
  */
 package gov.nasa.worldwindx.applications.glider;
 
+import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.render.*;
 
@@ -151,7 +152,8 @@ public class GliderImageLayer extends AbstractLayer {
             var attrs = new BasicShapeAttributes();
             attrs.setOutlineMaterial(new Material(region.getColor()));
             p.setAttributes(attrs);
-            p.setFollowTerrain(true);
+            p.setSurfacePath(true);
+            p.makeClosed();
             paths.add(p);
         }
 

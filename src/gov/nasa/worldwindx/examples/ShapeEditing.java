@@ -214,8 +214,7 @@ public class ShapeEditing extends ApplicationTemplate
             positions.add(Position.fromDegrees(-90, 180));
             positions.add(Position.fromDegrees(90, 180));
             Path antiMeridian = new Path(positions);
-            antiMeridian.setFollowTerrain(true);
-            antiMeridian.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
+            antiMeridian.setSurfacePath(true);
             ShapeAttributes antiMeridianAttributes = new BasicShapeAttributes();
             shapeAttributes.setOutlineMaterial(Material.WHITE);
             antiMeridian.setAttributes(antiMeridianAttributes);

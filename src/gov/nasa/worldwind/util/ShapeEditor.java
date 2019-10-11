@@ -1269,8 +1269,7 @@ public class ShapeEditor implements SelectListener, PropertyChangeListener
         }
         else if (this.getShapeAltitudeMode() == WorldWind.CLAMP_TO_GROUND)
         {
-            rotationLine.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
-            rotationLine.setFollowTerrain(true);
+            rotationLine.setSurfacePath(true);
         }
         else
         {

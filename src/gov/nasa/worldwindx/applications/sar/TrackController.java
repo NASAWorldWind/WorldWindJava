@@ -179,7 +179,7 @@ public class TrackController {
         airPath.setAttributes(attrs);
 
         Path groundPath = new Path(track);
-        groundPath.setFollowTerrain(true);
+        groundPath.setSurfacePath(true);
         groundPath.setPathType(AVKey.RHUMB_LINE);
         attrs = new BasicShapeAttributes();
         attrs.setOutlineMaterial(new Material(track.getColor()));

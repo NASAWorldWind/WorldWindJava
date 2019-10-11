@@ -68,25 +68,6 @@ public class OGLTextRenderer extends TextRenderer
     {
         this.setSmoothing(DEFAULT_SMOOTHING);
         this.setUseVertexArrays(DEFAULT_USE_VERTEX_ARRAYS);
-
-//        if (System.getProperty("gov.nasa.worldwind.textRenderer.DisableGlyphCache") != null)
-//        {
-//            try
-//            {
-//                Field field = TextRenderer.class.getDeclaredField("DISABLE_GLYPH_CACHE");
-//                field.setAccessible(true);
-//                Field modifiersField = Field.class.getDeclaredField("modifiers");
-//                modifiersField.setAccessible(true);
-//                modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-//                field.setBoolean(TextRenderer.class, true);
-//                boolean tf = field.getBoolean(this);
-//                System.out.println(tf);
-//            }
-//            catch (Exception e)
-//            {
-//                // TODO: issue a warning
-//            }
-//        }
     }
 
     //**************************************************************//

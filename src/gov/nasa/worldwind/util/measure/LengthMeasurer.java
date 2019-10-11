@@ -125,6 +125,14 @@ public class LengthMeasurer implements MeasurableLength {
         }
     }
 
+    /**
+     * Get the type of path used when subdividing long segments, one of Polyline.GREAT_CIRCLE, which draws segments as a
+     * great circle, Polyline.LINEAR, which determines the intermediate positions between segments by interpolating the
+     * segment endpoints, or Polyline.RHUMB_LINE, which draws segments as a line of constant heading.
+     *
+     * @return The path type
+     * @deprecated Superseded by {@link getAVKeyPathType}
+     */
     @Deprecated
     public int getPathType() {
         switch (pathType) {
@@ -141,17 +149,24 @@ public class LengthMeasurer implements MeasurableLength {
         }
     }
 
+    /**
+     * Get the type of path used when subdividing long segments, one of AVKey.GREAT_CIRCLE, which draws segments as a
+     * great circle, AVKey.LINEAR, which determines the intermediate positions between segments by interpolating the
+     * segment endpoints, or AVKey.RHUMB_LINE, which draws segments as a line of constant heading.
+     *
+     * @return The path type
+     */
     public String getAVKeyPathType() {
         return this.pathType;
     }
 
     /**
-     * Sets the type of path used when subdividing long segments, one of AVKey.GREAT_CIRCLE, which draws segments as
-     * a great circle, AVKey.LINEAR, which determines the intermediate positions between segments by interpolating
-     * the segment endpoints, or AVKey.RHUMB_LINE, which draws segments as a line of constant heading.
+     * Sets the type of path used when subdividing long segments, one of AVKey.GREAT_CIRCLE, which draws segments as a
+     * great circle, AVKey.LINEAR, which determines the intermediate positions between segments by interpolating the
+     * segment endpoints, or AVKey.RHUMB_LINE, which draws segments as a line of constant heading.
      *
      * @param pathType the type of path to measure.
-     * @deprecated 
+     * @deprecated Superseded by {@link setPathType(String)}
      */
     @Deprecated
     public void setPathType(int pathType) {
@@ -178,9 +193,9 @@ public class LengthMeasurer implements MeasurableLength {
     }
 
     /**
-     * Sets the type of path used when subdividing long segments, one of AVKey.GREAT_CIRCLE, which draws segments as
-     * a great circle, AVKey.LINEAR, which determines the intermediate positions between segments by interpolating
-     * the segment endpoints, or AVKey.RHUMB_LINE, which draws segments as a line of constant heading.
+     * Sets the type of path used when subdividing long segments, one of AVKey.GREAT_CIRCLE, which draws segments as a
+     * great circle, AVKey.LINEAR, which determines the intermediate positions between segments by interpolating the
+     * segment endpoints, or AVKey.RHUMB_LINE, which draws segments as a line of constant heading.
      *
      * @param pathType the type of path to measure.
      */
@@ -327,9 +342,9 @@ public class LengthMeasurer implements MeasurableLength {
     /**
      * Subdivide a list of positions so that no segment is longer then the provided maxLength.
      * <p>
-     * If needed, new intermediate positions will be created along lines that follow the given polylinePathType - one of
-     * AVKey.LINEAR, AVKey.RHUMB_LINE or AVKey.GREAT_CIRCLE. All position elevations will be either at the
-     * terrain surface if followTerrain is true, or interpolated according to the original elevations.</p>
+     * If needed, new intermediate positions will be created along lines that follow the given PathType - one of
+     * AVKey.LINEAR, AVKey.RHUMB_LINE or AVKey.GREAT_CIRCLE. All position elevations will be either at the terrain
+     * surface if followTerrain is true, or interpolated according to the original elevations.</p>
      *
      * @param globe the globe to draw elevations and points from.
      * @param positions the original position list
@@ -350,8 +365,8 @@ public class LengthMeasurer implements MeasurableLength {
      * between start and start + count - 1 will be processed.
      * <p>
      * If needed, new intermediate positions will be created along lines that follow the given pathType - one of
-     * AVKey.LINEAR, AVKey.RHUMB_LINE or AVKey.GREAT_CIRCLE. All position elevations will be either at the
-     * terrain surface if followTerrain is true, or interpolated according to the original elevations.</p>
+     * AVKey.LINEAR, AVKey.RHUMB_LINE or AVKey.GREAT_CIRCLE. All position elevations will be either at the terrain
+     * surface if followTerrain is true, or interpolated according to the original elevations.</p>
      *
      * @param globe the globe to draw elevations and points from.
      * @param positions the original position list

@@ -98,14 +98,17 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
 
     protected class OrderedIcon implements OrderedRenderable {
 
+        @Override
         public double getDistanceFromEye() {
             return 0;
         }
 
+        @Override
         public void pick(DrawContext dc, Point pickPoint) {
             TerrainProfileLayer.this.drawProfile(dc);
         }
 
+        @Override
         public void render(DrawContext dc) {
             TerrainProfileLayer.this.drawProfile(dc);
         }
@@ -152,7 +155,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     }
 
     /**
-     * Set wheter the profile graph should be maximized - displays over the whole viewport.
+     * Set whether the profile graph should be maximized - displays over the whole viewport.
      *
      * @param state true if the profile should be maximized.
      */
@@ -679,9 +682,9 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     }
 
     /**
-     * Get the <code>Polyline</code> used to render the profile line on the ground.
+     * Get the <code>Path</code> used to render the profile line on the ground.
      *
-     * @return the <code>Polyline</code> used to render the profile line on the ground.
+     * @return the <code>Path</code> used to render the profile line on the ground.
      */
     @SuppressWarnings({"UnusedDeclaration"})
     public Path getProfileLine() {
@@ -689,9 +692,9 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     }
 
     /**
-     * Get the <code>Polyline</code> used to render the picked position on the terrain.
+     * Get the <code>Path</code> used to render the picked position on the terrain.
      *
-     * @return the <code>Polyline</code> used to render the picked position on the terrain.
+     * @return the <code>Path</code> used to render the picked position on the terrain.
      */
     @SuppressWarnings({"UnusedDeclaration"})
     public Path getPickedLine() {
@@ -1185,14 +1188,15 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
 
     // ** Dimensions and positionning ************************************************************
     protected double computeScale(java.awt.Rectangle viewport) {
-        if (this.resizeBehavior.equals(AVKey.RESIZE_SHRINK_ONLY)) {
-            return Math.min(1d, (this.toViewportScale) * viewport.width / this.size.width);
-        } else if (this.resizeBehavior.equals(AVKey.RESIZE_STRETCH)) {
-            return (this.toViewportScale) * viewport.width / this.size.width;
-        } else if (this.resizeBehavior.equals(AVKey.RESIZE_KEEP_FIXED_SIZE)) {
-            return 1d;
-        } else {
-            return 1d;
+        switch (this.resizeBehavior) {
+            case AVKey.RESIZE_SHRINK_ONLY:
+                return Math.min(1d, (this.toViewportScale) * viewport.width / this.size.width);
+            case AVKey.RESIZE_STRETCH:
+                return (this.toViewportScale) * viewport.width / this.size.width;
+            case AVKey.RESIZE_KEEP_FIXED_SIZE:
+                return 1d;
+            default:
+                return 1d;
         }
     }
 
@@ -1259,8 +1263,8 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
                 if (sample >= 0 && sample < this.samples) {
                     pickPosition = this.positions[sample];
                     this.pickedSample = sample;
-                    // Update polyline indicator
-                    ArrayList<Position> posList = new ArrayList<Position>();
+                    // Update path indicator
+                    ArrayList<Position> posList = new ArrayList<>();
                     posList.add(positions[sample]);
                     posList.add(new Position(positions[sample].getLatitude(), positions[sample].getLongitude(),
                             positions[sample].getElevation() + this.length / 10));
@@ -1328,11 +1332,13 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     }
 
     // ** Position listener impl. ************************************************************
+    @Override
     public void moved(PositionEvent event) {
         this.positions = null;
     }
 
     // ** Select listener impl. ************************************************************
+    @Override
     public void selected(SelectEvent event) {
         if (event.hasObjects() && event.getEventAction().equals(SelectEvent.LEFT_CLICK)) {
             if (event.getMouseEvent() != null && event.getMouseEvent().isConsumed()) {
@@ -1355,6 +1361,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
     }
 
     // ** Property change listener ***********************************************************
+    @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         this.positions = null;
     }
@@ -1401,14 +1408,21 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
             // Find center position
             View view = this.wwd.getView();
             Position groundPos = null;
-            if (this.follow.equals(FOLLOW_VIEW)) {
-                groundPos = this.computeViewCenterPosition(dc);
-            } else if (this.follow.equals(FOLLOW_CURSOR)) {
-                groundPos = this.computeCursorPosition(dc);
-            } else if (this.follow.equals(FOLLOW_EYE)) {
-                groundPos = view.getEyePosition();
-            } else if (this.follow.equals(FOLLOW_OBJECT)) {
-                groundPos = this.objectPosition;
+            switch (this.follow) {
+                case FOLLOW_VIEW:
+                    groundPos = this.computeViewCenterPosition(dc);
+                    break;
+                case FOLLOW_CURSOR:
+                    groundPos = this.computeCursorPosition(dc);
+                    break;
+                case FOLLOW_EYE:
+                    groundPos = view.getEyePosition();
+                    break;
+                case FOLLOW_OBJECT:
+                    groundPos = this.objectPosition;
+                    break;
+                default:
+                    break;
             }
             // Compute profile if we can
             if ((this.follow.equals(FOLLOW_VIEW) && groundPos != null)
@@ -1429,7 +1443,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
                 // Update shape on ground
                 if (this.selectionShape == null) {
                     this.selectionShape = new Path(Arrays.asList(this.positions));
-                    this.selectionShape.setFollowTerrain(true);
+                    this.selectionShape.setSurfacePath(true);
                     var attrs = new BasicShapeAttributes();
                     attrs.setOutlineWidth(2);
                     attrs.setOutlineMaterial(new Material(new Color(this.color.getRed(),

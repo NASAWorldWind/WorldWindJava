@@ -8,7 +8,7 @@
 <Configuration version="1">
     <!-- Order matters in the instantiation of some of these -->
     <!-- Core infrastructure classes must be instantiated first, and in the order given here -->
-    <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.core.MenuBarImpl"/>-->
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.MenuBarImpl"/>
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.ToolBarImpl"/>
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.core.WWPanelImpl"/>
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager.ControlsPanelImpl"/>
@@ -30,15 +30,18 @@
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.GazetteerPanel"/>
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager.ActiveLayersPanel"/>
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager.LayerManagerPanel"/>
-    <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.features.Measurement"/>-->
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.Measurement"/>
     <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.features.WMS"/>-->
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.FileMenu"/>
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.WMSDialog"/>
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.YahooGazetteer"/>
-    <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.features.MeasurementDialog" featureID="gov.nasa.worldwindx.applications.worldwindow.feature.MeasurementDialog" actuate="onDemand"/>-->
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.ImportedDataDialog"/>
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.MeasurementDialog" featureID="gov.nasa.worldwindx.applications.worldwindow.feature.MeasurementDialog" actuate="onDemand"/>
     <!--<Feature className="gov.nasa.worldwindx.applications.worldwindow.features.NASACopyrightDialog"/>-->
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.Navigation"/>
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.Graticule"/>
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.LatLonGraticule"/>
     <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.UTMGraticule"/>
     <!-- Menus just point to other things, so instantiate them last -->
+    <Feature className="gov.nasa.worldwindx.applications.worldwindow.features.OpenFile"/>
 </Configuration>

@@ -154,8 +154,7 @@ public class FileSetHighlighter implements ListSelectionListener, SelectListener
             positions.add(new Position(locations.get(0), 0)); // to form a closed path
 
             Path path = new Path(positions);
-            path.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
-            path.setFollowTerrain(true);
+            path.setSurfacePath(true);
             path.setAttributes(attrs);
 
             layer.addRenderable(path);

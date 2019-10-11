@@ -5,6 +5,7 @@
  */
 package gov.nasa.worldwind.render;
 
+import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.util.*;
@@ -204,6 +205,7 @@ public class ContourLine implements Renderable {
         return this.renderables;
     }
 
+    @Override
     public void render(DrawContext dc) {
         if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
@@ -257,7 +259,7 @@ public class ContourLine implements Renderable {
         Intersection[] interArray = dc.getSurfaceGeometry().intersect(this.getElevation() * ve, this.getSector());
 
         if (interArray != null) {
-            ArrayList<Intersection> inter = new ArrayList<Intersection>(
+            ArrayList<Intersection> inter = new ArrayList<>(
                     Arrays.asList(interArray));
 
             // Filter intersection segment list
@@ -266,7 +268,7 @@ public class ContourLine implements Renderable {
             }
             inter = filterIntersections(dc, inter);
 
-            // Create polyline segments
+            // Create path segments
             makePathsConnected(dc, inter, this.maxConnectingDistance);
         }
     }
@@ -328,14 +330,14 @@ public class ContourLine implements Renderable {
     }
 
     /**
-     * Add a set of <code>Polyline</code> objects to the contour line renderable list by connecting as much as possible
-     * the segments from the given <code>Intersection</code> array.
+     * Add a set of <code>Path</code> objects to the contour line renderable list by connecting as much as possible the
+     * segments from the given <code>Intersection</code> array.
      *
      * @param dc the current <code>DrawContext</code>.
      * @param inter the list of <code>Intersection</code> to sort out.
      * @param tolerance how far in meter can two points be considered connected.
      *
-     * @return the number of <code>Polyline</code> objects added.
+     * @return the number of <code>Path</code> objects added.
      */
     protected int makePathsConnected(DrawContext dc, ArrayList<Intersection> inter, int tolerance) {
         if (inter == null) {
@@ -395,10 +397,10 @@ public class ContourLine implements Renderable {
                 // Next segment
                 i += 2;
             }
-            // Create polyline
+            // Create path
             line = new Path(positions);
             line.setNumSubsegments(0);
-            line.setFollowTerrain(true);
+            line.setSurfacePath(true);
             var attrs = new BasicShapeAttributes();
             attrs.setOutlineWidth(this.getLineWidth());
             attrs.setOutlineMaterial(new Material(this.getColor()));

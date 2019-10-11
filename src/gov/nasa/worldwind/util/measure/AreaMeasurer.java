@@ -52,6 +52,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea {
         super(positions);
     }
 
+    @Override
     protected void clearCachedValues() {
         super.clearCachedValues();
         this.subdividedPositions = null;
@@ -59,6 +60,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea {
         this.surfaceArea = -1;
     }
 
+    @Override
     public void setPositions(ArrayList<? extends Position> positions) {
         Sector oldSector = getBoundingSector();
         super.setPositions(positions); // will call clearCachedData()
@@ -113,6 +115,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea {
      * short.
      * @throws IllegalArgumentException if globe is <code>null</code>.
      */
+    @Override
     public double getArea(Globe globe) {
         return this.isFollowTerrain() ? getSurfaceArea(globe) : getProjectedArea(globe);
     }
@@ -145,10 +148,12 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea {
         return this.projectedArea;
     }
 
+    @Override
     public double getPerimeter(Globe globe) {
         return getLength(globe);
     }
 
+    @Override
     public double getWidth(Globe globe) {
         if (globe == null) {
             String message = Logging.getMessage("nullValue.GlobeIsNull");
@@ -165,6 +170,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea {
         return -1;
     }
 
+    @Override
     public double getHeight(Globe globe) {
         if (globe == null) {
             String message = Logging.getMessage("nullValue.GlobeIsNull");
@@ -201,7 +207,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea {
             // Subdivide long segments if needed
             if (this.subdividedPositions == null) {
                 this.subdividedPositions = subdividePositions(globe, getPositions(), getMaxSegmentLength(),
-                         isFollowTerrain(), getAVKeyPathType());
+                        isFollowTerrain(), getAVKeyPathType());
             }
             // First: tessellate polygon
             int verticesCount = this.subdividedPositions.size() - 1; // trim last pos which is same as first
@@ -224,7 +230,7 @@ public class AreaMeasurer extends LengthMeasurer implements MeasurableArea {
             for (int i = 0; i < triangleCount; i++) {
                 idx = i * 3;
                 area += computeTriangleProjectedArea(globe, ita.getVertices(), indices[idx] * 3,
-                         indices[idx + 1] * 3, indices[idx + 2] * 3);
+                        indices[idx + 1] * 3, indices[idx + 2] * 3);
             }
             return area;
         }

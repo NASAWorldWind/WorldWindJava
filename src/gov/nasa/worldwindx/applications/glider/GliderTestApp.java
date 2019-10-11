@@ -3,7 +3,6 @@
  * National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
-
 package gov.nasa.worldwindx.applications.glider;
 
 import gov.nasa.worldwind.WorldWindow;
@@ -24,32 +23,28 @@ import java.util.List;
  * @author tag
  * @version $Id: GliderTestApp.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class GliderTestApp extends ApplicationTemplate
-{
-    public static class GliderAppPanel extends AppPanel
-    {
-        public GliderAppPanel(Dimension canvasSize, boolean includeStatusBar)
-        {
+public class GliderTestApp extends ApplicationTemplate {
+
+    public static class GliderAppPanel extends AppPanel {
+
+        public GliderAppPanel(Dimension canvasSize, boolean includeStatusBar) {
             super(canvasSize, includeStatusBar);
         }
 
         @Override
-        protected WorldWindow createWorldWindow()
-        {
+        protected WorldWindow createWorldWindow() {
             return new GliderWorldWindow();
         }
     }
 
-    public static class GliderAppFrame extends AppFrame
-    {
-        public GliderAppFrame()
-        {
+    public static class GliderAppFrame extends AppFrame {
+
+        public GliderAppFrame() {
             super(true, true, false);
         }
 
         @Override
-        protected AppPanel createAppPanel(Dimension canvasSize, boolean includeStatusBar)
-        {
+        protected AppPanel createAppPanel(Dimension canvasSize, boolean includeStatusBar) {
             return new GliderAppPanel(canvasSize, includeStatusBar);
         }
     }
@@ -62,8 +57,7 @@ public class GliderTestApp extends ApplicationTemplate
 
     protected static String cloudImagePath = "gov/nasa/worldwindx/examples/images/GLIDERTestImage-800x519.jpg";
 
-    protected static float[][] makeField(List<LatLon> corners, int width, int height, Angle angle)
-    {
+    protected static float[][] makeField(List<LatLon> corners, int width, int height, Angle angle) {
         Sector sector = Sector.boundingSector(corners);
         double dLat = sector.getDeltaLatDegrees() / (height - 1d);
         double dLon = sector.getDeltaLonDegrees() / (width - 1d);
@@ -71,10 +65,8 @@ public class GliderTestApp extends ApplicationTemplate
         float[] lons = new float[width * height];
         float[] lats = new float[lons.length];
 
-        for (int j = 0; j < height; j++)
-        {
-            for (int i = 0; i < width; i++)
-            {
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
                 lons[j * width + i] = (float) (sector.getMinLongitude().degrees + i * dLon);
                 lats[j * width + i] = (float) (sector.getMaxLatitude().degrees - j * dLat);
             }
@@ -87,10 +79,8 @@ public class GliderTestApp extends ApplicationTemplate
         float cx = (float) c.getLongitude().degrees;
         float cy = (float) c.getLatitude().degrees;
 
-        for (int j = 0; j < height; j++)
-        {
-            for (int i = 0; i < width; i++)
-            {
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
                 int index = j * width + i;
 
                 float x = lons[index];
@@ -101,43 +91,38 @@ public class GliderTestApp extends ApplicationTemplate
             }
         }
 
-        return new float[][] {lats, lons};
+        return new float[][]{lats, lons};
     }
 
-    protected static ArrayList<LatLon> makeBorder(float[][] field, int width, int height, ArrayList<LatLon> latLons)
-    {
-        for (int i = 0; i < width; i++)
-        {
+    protected static ArrayList<LatLon> makeBorder(float[][] field, int width, int height, ArrayList<LatLon> latLons) {
+        for (int i = 0; i < width; i++) {
             latLons.add(LatLon.fromDegrees(field[0][i], field[1][i]));
         }
-        for (int i = 2 * width - 1; i < height * width; i += width)
-        {
+        for (int i = 2 * width - 1; i < height * width; i += width) {
             latLons.add(LatLon.fromDegrees(field[0][i], field[1][i]));
         }
-        for (int i = width * height - 2; i > width * (height - 1); i--)
-        {
+        for (int i = width * height - 2; i > width * (height - 1); i--) {
             latLons.add(LatLon.fromDegrees(field[0][i], field[1][i]));
         }
-        for (int i = width * (height - 2); i > 0; i -= width)
-        {
+        for (int i = width * (height - 2); i > 0; i -= width) {
             latLons.add(LatLon.fromDegrees(field[0][i], field[1][i]));
         }
 
         return latLons;
     }
 
-    public static void main(String[] args)
-    {
+    private static double opacityIncrement = -0.1;
+
+    public static void main(String[] args) {
         final ImageUtil.AlignedImage projectedImage;
         final String imageName;
         final BufferedImage testImage;
-        final ArrayList<LatLon> latLons = new ArrayList<LatLon>();
+        final ArrayList<LatLon> latLons = new ArrayList<>();
 
         final AppFrame frame = start("GLIDER Test Application", GliderAppFrame.class);
 
         InputStream stream = null;
-        try
-        {
+        try {
             stream = WWIO.openFileOrResourceStream(cloudImagePath, null);
             testImage = ImageIO.read(stream);
             long start = System.currentTimeMillis();
@@ -146,48 +131,37 @@ public class GliderTestApp extends ApplicationTemplate
             projectedImage = GliderImage.alignImage(testImage, field[0], field[1]);
             System.out.printf("Image projected, %d ms\n", System.currentTimeMillis() - start);
             imageName = WWIO.getFilename(cloudImagePath);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return;
-        }
-        finally
-        {
+        } finally {
             WWIO.closeStream(stream, cloudImagePath);
         }
 
-        SwingUtilities.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                final GliderImage image = new GliderImage(imageName, projectedImage, 100);
-                final GliderRegionOfInterest regionOfInterest = new GliderRegionOfInterest(latLons, Color.RED);
-                image.addRegionOfInterest(regionOfInterest);
+        SwingUtilities.invokeLater(() -> {
+            final GliderImage image = new GliderImage(imageName, projectedImage, 100);
+            final GliderRegionOfInterest regionOfInterest = new GliderRegionOfInterest(latLons, Color.RED);
+            image.addRegionOfInterest(regionOfInterest);
 
-                final javax.swing.Timer timer = new javax.swing.Timer(1000, new ActionListener()
-                {
-                    @SuppressWarnings( {"StringEquality"})
-                    public void actionPerformed(ActionEvent evt)
-                    {
-                        try
-                        {
-                            if (((GliderWorldWindow) ((GliderAppFrame) frame).getWwd()).getImages().size() == 0)
-                            {
-                                System.out.println("ADDING");
-                                ((GliderWorldWindow) ((GliderAppFrame) frame).getWwd()).addImage(image);
-                                image.releaseImageSource();
-                            }
-                        }
-                        catch (IOException e)
-                        {
-                            e.printStackTrace();
+            final javax.swing.Timer timer = new javax.swing.Timer(1000, (ActionEvent evt) -> {
+                try {
+                    if (((GliderWorldWindow) ((GliderAppFrame) frame).getWwd()).getImages().isEmpty()) {
+                        System.out.println("ADDING");
+                        ((GliderWorldWindow) ((GliderAppFrame) frame).getWwd()).addImage(image);
+                        image.releaseImageSource();
+                    } else {
+                        double opacity = image.getOpacity() + opacityIncrement;
+                        image.setOpacity(opacity);
+                        if (opacity <= 0.1 || opacity >= 1.0) {
+                            opacityIncrement *= -1.0;
                         }
                     }
-                });
-                timer.setRepeats(false);
-                timer.start();
-            }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            timer.setRepeats(true);
+            timer.start();
         });
     }
 }

@@ -12,6 +12,7 @@ import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.render.markers.*;
 import gov.nasa.worldwind.util.*;
+import java.awt.Color;
 
 import java.util.*;
 
@@ -36,7 +37,7 @@ public class Paths extends ApplicationTemplate {
 
             // Create and set an attribute bundle.
             ShapeAttributes attrs = new BasicShapeAttributes();
-            attrs.setOutlineMaterial(new Material(WWUtil.makeRandomColor(null)));
+            attrs.setOutlineMaterial(new Material(Color.YELLOW));
             attrs.setOutlineWidth(2d);
 
             // Create a path, set some of its properties and set its attributes.
@@ -48,6 +49,13 @@ public class Paths extends ApplicationTemplate {
             path.setVisible(true);
             path.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             path.setPathType(AVKey.GREAT_CIRCLE);
+            layer.addRenderable(path);
+
+            // Create a path that follows the terrain
+            path = new Path(pathPositions);
+            path.setAttributes(attrs);
+            path.setVisible(true);
+            path.setSurfacePath(true);
             layer.addRenderable(path);
 
             // Create a path that uses all default values.
@@ -69,8 +77,8 @@ public class Paths extends ApplicationTemplate {
             path.setPathType(AVKey.LINEAR);
 
             attrs = new BasicShapeAttributes();
-            attrs.setOutlineMaterial(new Material(WWUtil.makeRandomColor(null)));
-            attrs.setInteriorMaterial(new Material(WWUtil.makeRandomColor(null)));
+            attrs.setOutlineMaterial(new Material(Color.BLUE));
+            attrs.setInteriorMaterial(new Material(Color.RED));
             attrs.setOutlineWidth(2);
             path.setAttributes(attrs);
 
@@ -79,7 +87,7 @@ public class Paths extends ApplicationTemplate {
             // Add the layer to the model.
             insertBeforeCompass(getWwd(), layer);
 
-            List<Marker> markers = new ArrayList<Marker>(1);
+            List<Marker> markers = new ArrayList<>(1);
             markers.add(new BasicMarker(Position.fromDegrees(90, 0), new BasicMarkerAttributes()));
             MarkerLayer markerLayer = new MarkerLayer();
             markerLayer.setMarkers(markers);

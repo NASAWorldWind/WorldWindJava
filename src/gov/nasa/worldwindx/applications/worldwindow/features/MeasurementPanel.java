@@ -13,6 +13,7 @@ import gov.nasa.worldwindx.applications.worldwindow.core.*;
 import gov.nasa.worldwindx.applications.worldwindow.util.*;
 import gov.nasa.worldwindx.applications.worldwindow.util.measuretool.WWOMeasureTool;
 
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
@@ -190,7 +191,8 @@ public class MeasurementPanel extends AbstractFeaturePanel {
     private Renderable makeMeasureShape(String shapeType) {
         if (shapeType.equals(LINE) || shapeType.equals(PATH) || shapeType.equals(FREEHAND)) {
             Path line = new Path();
-            line.setFollowTerrain(true);
+            line.setPositions(new ArrayList<>());
+            line.setSurfacePath(true);
             var attrs = new BasicShapeAttributes();
             attrs.setOutlineWidth(shapeType.equals(FREEHAND) ? 2 : 4);
             line.setAttributes(attrs);

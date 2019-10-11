@@ -5,7 +5,6 @@
  */
 package gov.nasa.worldwindx.applications.sar;
 
-import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.avlist.AVKey;
@@ -16,7 +15,6 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.layers.ScalebarLayer;
 import gov.nasa.worldwind.layers.TerrainProfileLayer;
-import gov.nasa.worldwind.render.Path;
 
 import javax.swing.*;
 import javax.swing.border.*;

@@ -154,9 +154,8 @@ public class PullUpPoint extends AbstractCircularGraphic implements TacticalPoin
     protected Path createPath()
     {
         Path path = new Path();
-        path.setFollowTerrain(true);
+        path.setSurfacePath(true);
         path.setPathType(AVKey.GREAT_CIRCLE);
-        path.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
         path.setDelegateOwner(this);
         path.setAttributes(this.getActiveShapeAttributes());
         return path;

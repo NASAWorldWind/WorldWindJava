@@ -147,7 +147,7 @@ public class KeepingObjectsInView extends ApplicationTemplate {
     }
 
     public static Iterable<?> createObjectsToTrack() {
-        ArrayList<Object> objects = new ArrayList<Object>();
+        ArrayList<Object> objects = new ArrayList<>();
         Sector sector = Sector.fromDegrees(35, 45, -110, -100);
 
         for (int i = 0; i < 3; i++) {
@@ -173,7 +173,7 @@ public class KeepingObjectsInView extends ApplicationTemplate {
             randLocation1 = randomLocation(sector);
             randLocation2 = randomLocation(sector);
             Path path = new Path(Arrays.asList(randLocation1, randLocation2), 0d);
-            path.setFollowTerrain(true);
+            path.setSurfacePath(true);
             var attrs = new BasicShapeAttributes();
             attrs.setOutlineWidth(3);
             attrs.setOutlineMaterial(new Material(Color.RED));
@@ -321,9 +321,9 @@ public class KeepingObjectsInView extends ApplicationTemplate {
                 return;
             }
 
-            ArrayList<ExtentHolder> extentHolders = new ArrayList<ExtentHolder>();
+            ArrayList<ExtentHolder> extentHolders = new ArrayList<>();
             ArrayList<ExtentVisibilitySupport.ScreenExtent> screenExtents
-                    = new ArrayList<ExtentVisibilitySupport.ScreenExtent>();
+                    = new ArrayList<>();
 
             for (Object o : iterable) {
                 if (o == null) {

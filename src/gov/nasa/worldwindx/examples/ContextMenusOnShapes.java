@@ -27,66 +27,65 @@ import java.util.ArrayList;
  * @author tag
  * @version $Id: ContextMenusOnShapes.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class ContextMenusOnShapes extends ApplicationTemplate
-{
-    /** The Controller listens for selection events and either highlights a selected item or shows its context menu. */
-    protected static class ContextMenuController implements SelectListener
-    {
+public class ContextMenusOnShapes extends ApplicationTemplate {
+
+    /**
+     * The Controller listens for selection events and either highlights a selected item or shows its context menu.
+     */
+    protected static class ContextMenuController implements SelectListener {
+
         protected PointPlacemark lastPickedPlacemark = null;
 
-        public void selected(SelectEvent event)
-        {
-            try
-            {
-                if (event.getEventAction().equals(SelectEvent.ROLLOVER))
+        @Override
+        public void selected(SelectEvent event) {
+            try {
+                if (event.getEventAction().equals(SelectEvent.ROLLOVER)) {
                     highlight(event, event.getTopObject());
-                else if (event.getEventAction().equals(SelectEvent.RIGHT_PRESS)) // Could do RIGHT_CLICK instead
+                } else if (event.getEventAction().equals(SelectEvent.RIGHT_PRESS)) // Could do RIGHT_CLICK instead
+                {
                     showContextMenu(event);
-            }
-            catch (Exception e)
-            {
+                }
+            } catch (Exception e) {
                 Util.getLogger().warning(e.getMessage() != null ? e.getMessage() : e.toString());
             }
         }
 
-        @SuppressWarnings( {"UnusedDeclaration"})
-        protected void highlight(SelectEvent event, Object o)
-        {
-            if (this.lastPickedPlacemark == o)
+        @SuppressWarnings({"UnusedDeclaration"})
+        protected void highlight(SelectEvent event, Object o) {
+            if (this.lastPickedPlacemark == o) {
                 return; // same thing selected
-
+            }
             // Turn off highlight if on.
-            if (this.lastPickedPlacemark != null)
-            {
+            if (this.lastPickedPlacemark != null) {
                 this.lastPickedPlacemark.setHighlighted(false);
                 this.lastPickedPlacemark = null;
             }
 
             // Turn on highlight if object selected.
-            if (o != null && o instanceof PointPlacemark)
-            {
+            if (o != null && o instanceof PointPlacemark) {
                 this.lastPickedPlacemark = (PointPlacemark) o;
                 this.lastPickedPlacemark.setHighlighted(true);
             }
         }
 
-        protected void showContextMenu(SelectEvent event)
-        {
-            if (!(event.getTopObject() instanceof PointPlacemark))
+        protected void showContextMenu(SelectEvent event) {
+            if (!(event.getTopObject() instanceof PointPlacemark)) {
                 return;
+            }
 
             // See if the top picked object has context-menu info defined. Show the menu if it does.
-
             Object o = event.getTopObject();
             if (o instanceof AVList) // Uses an AVList in order to be applicable to all shapes.
             {
                 AVList params = (AVList) o;
                 ContextMenuInfo menuInfo = (ContextMenuInfo) params.getValue(ContextMenu.CONTEXT_MENU_INFO);
-                if (menuInfo == null)
+                if (menuInfo == null) {
                     return;
+                }
 
-                if (!(event.getSource() instanceof Component))
+                if (!(event.getSource() instanceof Component)) {
                     return;
+                }
 
                 ContextMenu menu = new ContextMenu((Component) event.getSource(), menuInfo);
                 menu.show(event.getMouseEvent());
@@ -94,18 +93,19 @@ public class ContextMenusOnShapes extends ApplicationTemplate
         }
     }
 
-    /** The ContextMenu class implements the context menu. */
-    protected static class ContextMenu
-    {
+    /**
+     * The ContextMenu class implements the context menu.
+     */
+    protected static class ContextMenu {
+
         public static final String CONTEXT_MENU_INFO = "ContextMenuInfo";
 
         protected ContextMenuInfo ctxMenuInfo;
         protected Component sourceComponent;
         protected JMenuItem menuTitleItem;
-        protected ArrayList<JMenuItem> menuItems = new ArrayList<JMenuItem>();
+        protected ArrayList<JMenuItem> menuItems = new ArrayList<>();
 
-        public ContextMenu(Component sourceComponent, ContextMenuInfo contextMenuInfo)
-        {
+        public ContextMenu(Component sourceComponent, ContextMenuInfo contextMenuInfo) {
             this.sourceComponent = sourceComponent;
             this.ctxMenuInfo = contextMenuInfo;
 
@@ -113,29 +113,24 @@ public class ContextMenusOnShapes extends ApplicationTemplate
             this.makeMenuItems();
         }
 
-        protected void makeMenuTitle()
-        {
+        protected void makeMenuTitle() {
             this.menuTitleItem = new JMenuItem(this.ctxMenuInfo.menuTitle);
         }
 
-        protected void makeMenuItems()
-        {
-            for (ContextMenuItemInfo itemInfo : this.ctxMenuInfo.menuItems)
-            {
+        protected void makeMenuItems() {
+            for (ContextMenuItemInfo itemInfo : this.ctxMenuInfo.menuItems) {
                 this.menuItems.add(new JMenuItem(new ContextMenuItemAction(itemInfo)));
             }
         }
 
-        public void show(final MouseEvent event)
-        {
+        public void show(final MouseEvent event) {
             JPopupMenu popup = new JPopupMenu();
 
             popup.add(this.menuTitleItem);
 
             popup.addSeparator();
 
-            for (JMenuItem subMenu : this.menuItems)
-            {
+            for (JMenuItem subMenu : this.menuItems) {
                 popup.add(subMenu);
             }
 
@@ -143,54 +138,55 @@ public class ContextMenusOnShapes extends ApplicationTemplate
         }
     }
 
-    /** The ContextMenuInfo class specifies the contents of the context menu. */
-    protected static class ContextMenuInfo
-    {
+    /**
+     * The ContextMenuInfo class specifies the contents of the context menu.
+     */
+    protected static class ContextMenuInfo {
+
         protected String menuTitle;
         protected ContextMenuItemInfo[] menuItems;
 
-        public ContextMenuInfo(String title, ContextMenuItemInfo[] menuItems)
-        {
+        public ContextMenuInfo(String title, ContextMenuItemInfo[] menuItems) {
             this.menuTitle = title;
             this.menuItems = menuItems;
         }
     }
 
-    /** The ContextMenuItemInfo class specifies the contents of one entry in the context menu. */
-    protected static class ContextMenuItemInfo
-    {
+    /**
+     * The ContextMenuItemInfo class specifies the contents of one entry in the context menu.
+     */
+    protected static class ContextMenuItemInfo {
+
         protected String displayString;
 
-        public ContextMenuItemInfo(String displayString)
-        {
+        public ContextMenuItemInfo(String displayString) {
             this.displayString = displayString;
         }
     }
 
-    /** The ContextMenuItemAction responds to user selection of a context menu item. */
-    public static class ContextMenuItemAction extends AbstractAction
-    {
+    /**
+     * The ContextMenuItemAction responds to user selection of a context menu item.
+     */
+    public static class ContextMenuItemAction extends AbstractAction {
+
         protected ContextMenuItemInfo itemInfo;
 
-        public ContextMenuItemAction(ContextMenuItemInfo itemInfo)
-        {
+        public ContextMenuItemAction(ContextMenuItemInfo itemInfo) {
             super(itemInfo.displayString);
 
             this.itemInfo = itemInfo;
         }
 
-        public void actionPerformed(ActionEvent event)
-        {
+        @Override
+        public void actionPerformed(ActionEvent event) {
             System.out.println(this.itemInfo.displayString); // Replace with application's menu-item response.
         }
     }
 
     // The code below makes and displays some placemarks. The context menu info for each placemark is also specified.
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+        public AppFrame() {
             RenderableLayer layer = new RenderableLayer();
 
             // Create and set an attribute bundle.
@@ -205,12 +201,10 @@ public class ContextMenusOnShapes extends ApplicationTemplate
             PointPlacemarkAttributes highlightAttrs = new PointPlacemarkAttributes(attrs);
             highlightAttrs.setScale(0.7);
 
-            ContextMenuItemInfo[] itemActionNames = new ContextMenuItemInfo[]
-                {
-                    new ContextMenuItemInfo("Do This"),
-                    new ContextMenuItemInfo("Do That"),
-                    new ContextMenuItemInfo("Do the Other Thing"),
-                };
+            ContextMenuItemInfo[] itemActionNames = new ContextMenuItemInfo[]{
+                new ContextMenuItemInfo("Do This"),
+                new ContextMenuItemInfo("Do That"),
+                new ContextMenuItemInfo("Do the Other Thing"),};
 
             PointPlacemark pp = new PointPlacemark(Position.fromDegrees(28, -102, 1e4));
             pp.setAttributes(attrs);
@@ -254,8 +248,7 @@ public class ContextMenusOnShapes extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Context Menus on Shapes", AppFrame.class);
     }
 }

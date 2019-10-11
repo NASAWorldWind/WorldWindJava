@@ -71,7 +71,7 @@ public class LineBuilder extends AVListImpl {
             line = path;
         } else {
             this.line = new Path();
-            this.line.setFollowTerrain(true);
+            this.line.setSurfacePath(true);
         }
         this.layer = lineLayer != null ? lineLayer : new RenderableLayer();
         this.layer.addRenderable(this.line);

@@ -95,8 +95,7 @@ public class ContourBuilderExample extends ApplicationTemplate
             {
                 Path path = new Path(positions);
                 path.setAttributes(attrs);
-                path.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
-                path.setFollowTerrain(true);
+                path.setSurfacePath(true);
                 path.setValue(AVKey.DISPLAY_NAME, text);
                 layer.addRenderable(path);
             }

@@ -832,6 +832,22 @@ public class Path extends AbstractShape {
     }
 
     /**
+     * Convenience method for migration from Polyline.setClosed. Simply appends a copy of the starting Position to the
+     * end of the position list.
+     */
+    public void makeClosed() {
+        if (this.positions != null && this.positions.iterator().hasNext()) {
+            ArrayList<Position> newPositions = new ArrayList<>();
+            this.positions.forEach((p) -> {
+                newPositions.add(new Position(p));
+            });
+
+            newPositions.add(new Position(newPositions.get(0)));
+            this.setPositions(newPositions);
+        }
+    }
+
+    /**
      * Indicates the PositionColors that defines the RGBA color for each of this path's positions. A return value of
      * <code>null</code> is valid and indicates that this path's positions are colored according to its ShapeAttributes.
      *
@@ -1152,15 +1168,48 @@ public class Path extends AbstractShape {
 
     /**
      * Indicates whether this Path's defining positions and the positions in between are located on the underlying
-     * terrain.This returns <code>true</code> if this Path's altitude mode is <code>WorldWind.CLAMP_TO_GROUND</code> and
-     * the follow-terrain property is <code>true</code>. Otherwise this returns <code>false</code>.
+     * terrain. This returns <code>true</code> if this Path's altitude mode is <code>WorldWind.CLAMP_TO_GROUND</code>
+     * and the follow-terrain property is <code>true</code>. Otherwise this returns <code>false</code>.
      *
      * @param dc The current draw context.
      * @return <code>true</code> if this Path's positions and the positions in between are located on the underlying
      * terrain, and <code>false</code> otherwise.
      */
     protected boolean isSurfacePath(DrawContext dc) {
-        return (this.getAltitudeMode() == WorldWind.CLAMP_TO_GROUND && this.isFollowTerrain()) || dc.is2DGlobe();
+        return this.isSurfacePath() || dc.is2DGlobe();
+    }
+
+    /**
+     * Indicates whether this Path's defining positions and the positions in between are located on the underlying
+     * terrain. This returns <code>true</code> if this Path's altitude mode is <code>WorldWind.CLAMP_TO_GROUND</code>
+     * and the follow-terrain property is <code>true</code>. Otherwise this returns <code>false</code>.
+     *
+     * @return <code>true</code> if this Path's positions and the positions in between are located on the underlying
+     * terrain, and <code>false</code> otherwise.
+     */
+    public boolean isSurfacePath() {
+        return (this.getAltitudeMode() == WorldWind.CLAMP_TO_GROUND && this.isFollowTerrain());
+    }
+
+    /**
+     * Sets whether this Path's defining positions and the positions in between are located on the underlying terrain.
+     *
+     * If the surfacePath parameter is true this Path's altitude mode is set to <code>WorldWind.CLAMP_TO_GROUND</code>
+     * and the follow terrain property is set to <code>true</code>.
+     *
+     * If the surfacePath parameter is false this Path's altitude mode and follow terrain property are returned to their
+     * defaults.
+     *
+     * @param surfacePath whether or not this Path should be located on the underlying terrain.
+     */
+    public void setSurfacePath(boolean surfacePath) {
+        if (surfacePath) {
+            this.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
+            this.setFollowTerrain(true);
+        } else {
+            this.setAltitudeMode(Path.DEFAULT_ALTITUDE_MODE);
+            this.setFollowTerrain(false);
+        }
     }
 
     @Override

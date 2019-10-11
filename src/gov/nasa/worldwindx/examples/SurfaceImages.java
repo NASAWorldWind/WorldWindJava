@@ -51,18 +51,20 @@ public class SurfaceImages extends ApplicationTemplate {
                         LatLon.fromDegrees(38.1321, -105.1674)
                 )));
                 Path boundary = new Path(si1.getCorners(), 0);
-                boundary.setFollowTerrain(true);
+                boundary.setSurfacePath(true);
                 boundary.setPathType(AVKey.RHUMB_LINE);
                 var attrs = new BasicShapeAttributes();
                 attrs.setOutlineMaterial(new Material(new Color(0, 255, 0)));
                 boundary.setAttributes(attrs);
+                boundary.makeClosed();
 
                 Path boundary2 = new Path(si2.getCorners(), 0);
-                boundary2.setFollowTerrain(true);
+                boundary2.setSurfacePath(true);
                 boundary2.setPathType(AVKey.RHUMB_LINE);
                 attrs = new BasicShapeAttributes();
                 attrs.setOutlineMaterial(new Material(new Color(0, 255, 0)));
                 boundary2.setAttributes(attrs);
+                boundary2.makeClosed();
 
                 RenderableLayer layer = new RenderableLayer();
                 layer.setName("Surface Images");

@@ -148,7 +148,7 @@ public class PlaneModel implements Renderable {
         positions = computePlaneShape(dc, this.shadowScale * this.width, this.shadowScale * this.length);
         this.shadowModel = new Path(positions, this.position.getElevation());
         this.shadowModel.setPathType(AVKey.LINEAR);
-        this.shadowModel.setFollowTerrain(true);
+        this.shadowModel.setSurfacePath(true);
         attrs = new BasicShapeAttributes();
         attrs.setOutlineMaterial(new Material(this.shadowColor));
         this.shadowModel.setAttributes(attrs);
@@ -160,7 +160,7 @@ public class PlaneModel implements Renderable {
     }
 
     private ArrayList<LatLon> computePlaneShape(DrawContext dc, double width, double length) {
-        ArrayList<LatLon> positions = new ArrayList<LatLon>();
+        ArrayList<LatLon> positions = new ArrayList<>();
         LatLon center = this.position;
         double hl = length / 2;
         double hw = width / 2;
