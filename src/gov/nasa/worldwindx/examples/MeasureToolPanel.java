@@ -116,7 +116,7 @@ public class MeasureToolPanel extends JPanel {
         JPanel shapePanel = new JPanel(new GridLayout(1, 2, 5, 5));
         shapePanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
         shapePanel.add(new JLabel("Shape:"));
-        shapeCombo = new JComboBox(new String[]{"Line", "Path", "Polygon", "Circle", "Ellipse", "Square", "Rectangle"});
+        shapeCombo = new JComboBox<>(new String[]{"Line", "Path", "Polygon", "Circle", "Ellipse", "Square", "Rectangle"});
         shapeCombo.addActionListener((ActionEvent event) -> {
             String item = (String) ((JComboBox) event.getSource()).getSelectedItem();
             switch (item) {
@@ -151,7 +151,7 @@ public class MeasureToolPanel extends JPanel {
         JPanel pathTypePanel = new JPanel(new GridLayout(1, 2, 5, 5));
         pathTypePanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
         pathTypePanel.add(new JLabel("Path type:"));
-        pathTypeCombo = new JComboBox(new String[]{"Linear", "Rhumb", "Great circle"});
+        pathTypeCombo = new JComboBox<>(new String[]{"Linear", "Rhumb", "Great circle"});
         pathTypeCombo.setSelectedIndex(2);
         pathTypeCombo.addActionListener((ActionEvent event) -> {
             String item = (String) ((JComboBox) event.getSource()).getSelectedItem();
@@ -175,7 +175,7 @@ public class MeasureToolPanel extends JPanel {
         JPanel unitsPanel = new JPanel(new GridLayout(1, 2, 5, 5));
         unitsPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
         unitsPanel.add(new JLabel("Units:"));
-        unitsCombo = new JComboBox(new String[]{"M/M\u00b2", "KM/KM\u00b2", "KM/Hectare", "Feet/Feet\u00b2",
+        unitsCombo = new JComboBox<>(new String[]{"M/M\u00b2", "KM/KM\u00b2", "KM/Hectare", "Feet/Feet\u00b2",
             "Miles/Miles\u00b2", "Nm/Miles\u00b2", "Yards/Acres"});
         unitsCombo.setSelectedItem("KM/KM\u00b2");
         unitsCombo.addActionListener((ActionEvent event) -> {
@@ -219,7 +219,7 @@ public class MeasureToolPanel extends JPanel {
         JPanel anglesPanel = new JPanel(new GridLayout(1, 2, 5, 5));
         anglesPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
         anglesPanel.add(new JLabel("Angle Format:"));
-        anglesCombo = new JComboBox(new String[]{"DD", "DMS"});
+        anglesCombo = new JComboBox<>(new String[]{"DD", "DMS"});
         anglesCombo.setSelectedItem("DD");
         anglesCombo.addActionListener((ActionEvent event) -> {
             String item = (String) ((JComboBox) event.getSource()).getSelectedItem();

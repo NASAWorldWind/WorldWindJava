@@ -13,8 +13,8 @@
 
     <!-- Import the ANT build properties and project ANT macros. -->
 
-    <property file="build.properties"/>
-    <import file="build.macros.xml"/>
+    <property file="release-build.properties"/>
+    <import file="release-build.macros.xml"/>
 
     <!-- Main build targets. Provides generic targets that compile the Java sources, bundle JAR libraries, assemble API
          documentation, test the Java sources, and clean up the build output. -->
