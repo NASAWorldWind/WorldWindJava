@@ -384,6 +384,7 @@ public abstract class JsonNode
      *   or org.codehaus.jackson.map.ObjectMapper
      *   instead.
      */
+    @Deprecated
     public abstract void writeTo(JsonGenerator jg)
         throws IOException, JsonGenerationException;
 

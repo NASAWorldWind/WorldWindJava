@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.regex.*;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Gazetteer search panel that allows the user to enter a search term in a text field. When a search is performed the
@@ -50,9 +51,11 @@ public class GazetteerPanel extends JPanel
      * @throws IllegalAccessException if the gazetteer class does not expose a publicly accessible no-arg constructor.
      * @throws InstantiationException if an exception occurs while instantiating the the gazetteer class.
      * @throws ClassNotFoundException if the gazetteer class cannot be found.
+     * @throws java.lang.NoSuchMethodException if the gazetteer class doesn't have a default constructor.
+     * @throws java.lang.reflect.InvocationTargetException if the gazetteer class construction fails.
      */
     public GazetteerPanel(final WorldWindow wwd, String gazetteerClassName)
-        throws IllegalAccessException, InstantiationException, ClassNotFoundException
+        throws IllegalAccessException, InstantiationException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException
     {
         super(new BorderLayout());
 
@@ -145,7 +148,7 @@ public class GazetteerPanel extends JPanel
     }
 
     private Gazetteer constructGazetteer(String className)
-        throws ClassNotFoundException, IllegalAccessException, InstantiationException
+        throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException
     {
         if (className == null || className.length() == 0)
         {
@@ -153,7 +156,7 @@ public class GazetteerPanel extends JPanel
         }
 
         Class c = Class.forName(className.trim());
-        Object o = c.newInstance();
+        Object o = c.getConstructor().newInstance();
 
         if (!(o instanceof Gazetteer))
             throw new IllegalArgumentException("Gazetteer class name is null");

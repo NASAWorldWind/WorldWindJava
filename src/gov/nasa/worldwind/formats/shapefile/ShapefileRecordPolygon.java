@@ -30,7 +30,17 @@ import java.util.*;
  */
 public class ShapefileRecordPolygon extends ShapefileRecordPolyline
 {
-    /** {@inheritDoc} */
+    /**
+     * Constructs a record instance from the given {@link java.nio.ByteBuffer}. The buffer's current position must be
+     * the start of the record, and will be the start of the next record when the constructor returns.
+     *
+     * @param shapeFile the parent {@link Shapefile}.
+     * @param buffer    the shapefile record {@link java.nio.ByteBuffer} to read from.
+     *
+     * @throws IllegalArgumentException if any argument is null or otherwise invalid.
+     * @throws gov.nasa.worldwind.exception.WWRuntimeException
+     *                                  if the record's shape type does not match that of the shapefile.
+     */
     public ShapefileRecordPolygon(Shapefile shapeFile, ByteBuffer buffer)
     {
         super(shapeFile, buffer);

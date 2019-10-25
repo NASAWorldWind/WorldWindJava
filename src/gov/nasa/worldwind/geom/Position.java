@@ -14,46 +14,44 @@ import java.util.*;
  * @author tag
  * @version $Id: Position.java 2291 2014-08-30 21:38:47Z tgaskins $
  */
-public class Position extends LatLon
-{
+public class Position extends LatLon {
+
     public static final Position ZERO = new Position(Angle.ZERO, Angle.ZERO, 0d);
 
     public final double elevation;
 
-    public static Position fromRadians(double latitude, double longitude, double elevation)
-    {
+    public static Position fromRadians(double latitude, double longitude, double elevation) {
         return new Position(Angle.fromRadians(latitude), Angle.fromRadians(longitude), elevation);
     }
 
-    public static Position fromDegrees(double latitude, double longitude, double elevation)
-    {
+    public static Position fromDegrees(double latitude, double longitude, double elevation) {
         return new Position(Angle.fromDegrees(latitude), Angle.fromDegrees(longitude), elevation);
     }
 
-    public static Position fromDegrees(double latitude, double longitude)
-    {
+    public static Position fromDegrees(double latitude, double longitude) {
         return new Position(Angle.fromDegrees(latitude), Angle.fromDegrees(longitude), 0);
     }
 
-    public Position(Angle latitude, Angle longitude, double elevation)
-    {
+    public Position(Angle latitude, Angle longitude, double elevation) {
         super(latitude, longitude);
         this.elevation = elevation;
     }
 
-    public Position(LatLon latLon, double elevation)
-    {
+    public Position(LatLon latLon, double elevation) {
         super(latLon);
         this.elevation = elevation;
     }
 
+    public Position(Position that) {
+        this(that.latitude, that.longitude, that.elevation);
+    }
+
     // A class that makes it easier to pass around position lists.
-    public static class PositionList
-    {
+    public static class PositionList {
+
         public List<? extends Position> list;
 
-        public PositionList(List<? extends Position> list)
-        {
+        public PositionList(List<? extends Position> list) {
             this.list = list;
         }
     }
@@ -63,8 +61,7 @@ public class Position extends LatLon
      *
      * @return this position's elevation
      */
-    public double getElevation()
-    {
+    public double getElevation() {
         return this.elevation;
     }
 
@@ -73,21 +70,18 @@ public class Position extends LatLon
      *
      * @return this position's elevation
      */
-    public double getAltitude()
-    {
+    public double getAltitude() {
         return this.elevation;
     }
 
-    public Position add(Position that)
-    {
+    public Position add(Position that) {
         Angle lat = Angle.normalizedLatitude(this.latitude.add(that.latitude));
         Angle lon = Angle.normalizedLongitude(this.longitude.add(that.longitude));
 
         return new Position(lat, lon, this.elevation + that.elevation);
     }
 
-    public Position subtract(Position that)
-    {
+    public Position subtract(Position that) {
         Angle lat = Angle.normalizedLatitude(this.latitude.subtract(that.latitude));
         Angle lon = Angle.normalizedLongitude(this.longitude.subtract(that.longitude));
 
@@ -106,19 +100,18 @@ public class Position extends LatLon
      *
      * @throws IllegalArgumentException if either position is null.
      */
-    public static Position interpolate(double amount, Position value1, Position value2)
-    {
-        if (value1 == null || value2 == null)
-        {
+    public static Position interpolate(double amount, Position value1, Position value2) {
+        if (value1 == null || value2 == null) {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (amount < 0)
+        if (amount < 0) {
             return value1;
-        else if (amount > 1)
+        } else if (amount > 1) {
             return value2;
+        }
 
         LatLon latLon = LatLon.interpolate(amount, value1, value2);
         // Elevation is independent of geographic interpolation method (i.e. rhumb, great-circle, linear), so we
@@ -142,14 +135,12 @@ public class Position extends LatLon
      * @param value2 the second position.
      *
      * @return an interpolated position along the great-arc between <code>value1</code> and <code>value2</code>, with a
-     *         linearly interpolated elevation component.
+     * linearly interpolated elevation component.
      *
      * @throws IllegalArgumentException if either location is null.
      */
-    public static Position interpolateGreatCircle(double amount, Position value1, Position value2)
-    {
-        if (value1 == null || value2 == null)
-        {
+    public static Position interpolateGreatCircle(double amount, Position value1, Position value2) {
+        if (value1 == null || value2 == null) {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -177,14 +168,12 @@ public class Position extends LatLon
      * @param value2 the second position.
      *
      * @return an interpolated position along the great-arc between <code>value1</code> and <code>value2</code>, with a
-     *         linearly interpolated elevation component.
+     * linearly interpolated elevation component.
      *
      * @throws IllegalArgumentException if either location is null.
      */
-    public static Position interpolateRhumb(double amount, Position value1, Position value2)
-    {
-        if (value1 == null || value2 == null)
-        {
+    public static Position interpolateRhumb(double amount, Position value1, Position value2) {
+        if (value1 == null || value2 == null) {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -198,27 +187,23 @@ public class Position extends LatLon
         return new Position(latLon, elevation);
     }
 
-    public static boolean positionsCrossDateLine(Iterable<? extends Position> positions)
-    {
-        if (positions == null)
-        {
+    public static boolean positionsCrossDateLine(Iterable<? extends Position> positions) {
+        if (positions == null) {
             String msg = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
         Position pos = null;
-        for (Position posNext : positions)
-        {
-            if (pos != null)
-            {
+        for (Position posNext : positions) {
+            if (pos != null) {
                 // A segment cross the line if end pos have different longitude signs
                 // and are more than 180 degress longitude apart
-                if (Math.signum(pos.getLongitude().degrees) != Math.signum(posNext.getLongitude().degrees))
-                {
+                if (Math.signum(pos.getLongitude().degrees) != Math.signum(posNext.getLongitude().degrees)) {
                     double delta = Math.abs(pos.getLongitude().degrees - posNext.getLongitude().degrees);
-                    if (delta > 180 && delta < 360)
+                    if (delta > 180 && delta < 360) {
                         return true;
+                    }
                 }
             }
             pos = posNext;
@@ -232,25 +217,22 @@ public class Position extends LatLon
      *
      * @param oldPosition the original reference position.
      * @param newPosition the new reference position.
-     * @param positions   the positions to translate.
+     * @param positions the positions to translate.
      *
      * @return the translated positions, or null if the positions could not be translated.
      *
      * @throws IllegalArgumentException if any argument is null.
      */
     public static List<Position> computeShiftedPositions(Position oldPosition, Position newPosition,
-        Iterable<? extends Position> positions)
-    {
+            Iterable<? extends Position> positions) {
         // TODO: Account for dateline spanning
-        if (oldPosition == null || newPosition == null)
-        {
+        if (oldPosition == null || newPosition == null) {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (positions == null)
-        {
+        if (positions == null) {
             String msg = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -260,8 +242,7 @@ public class Position extends LatLon
 
         double elevDelta = newPosition.getElevation() - oldPosition.getElevation();
 
-        for (Position pos : positions)
-        {
+        for (Position pos : positions) {
             Angle distance = LatLon.greatCircleDistance(oldPosition, pos);
             Angle azimuth = LatLon.greatCircleAzimuth(oldPosition, pos);
             LatLon newLocation = LatLon.greatCircleEndPosition(newPosition, azimuth, distance);
@@ -274,24 +255,20 @@ public class Position extends LatLon
     }
 
     public static List<Position> computeShiftedPositions(Globe globe, Position oldPosition, Position newPosition,
-        Iterable<? extends Position> positions)
-    {
-        if (globe == null)
-        {
+            Iterable<? extends Position> positions) {
+        if (globe == null) {
             String msg = Logging.getMessage("nullValue.GlobeIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (oldPosition == null || newPosition == null)
-        {
+        if (oldPosition == null || newPosition == null) {
             String msg = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (positions == null)
-        {
+        if (positions == null) {
             String msg = Logging.getMessage("nullValue.PositionsListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
@@ -304,8 +281,7 @@ public class Position extends LatLon
         Vec4 newPoint = globe.computePointFromPosition(newPosition);
         Vec4 delta = newPoint.subtract3(oldPoint);
 
-        for (Position pos : positions)
-        {
+        for (Position pos : positions) {
             Vec4 point = globe.computePointFromPosition(pos);
             point = point.add3(delta);
             Position newPos = globe.computePositionFromPoint(point);
@@ -318,27 +294,29 @@ public class Position extends LatLon
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
-        if (!super.equals(o))
+        }
+        if (!super.equals(o)) {
             return false;
+        }
 
         Position position = (Position) o;
 
         //noinspection RedundantIfStatement
-        if (Double.compare(position.elevation, elevation) != 0)
+        if (Double.compare(position.elevation, elevation) != 0) {
             return false;
+        }
 
         return true;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result = super.hashCode();
         long temp;
         temp = elevation != +0.0d ? Double.doubleToLongBits(elevation) : 0L;
@@ -346,8 +324,7 @@ public class Position extends LatLon
         return result;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return "(" + this.latitude.toString() + ", " + this.longitude.toString() + ", " + this.elevation + ")";
     }
 }

@@ -54,8 +54,7 @@ public class PathPositionColors extends ApplicationTemplate
 
             // Create a path with the specified positions that follows the terrain and draws a point at each position.
             Path path = new Path(pathPositions);
-            path.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
-            path.setFollowTerrain(true);
+            path.setSurfacePath(true);
             path.setShowPositions(true);
             path.setShowPositionsScale(3);
 

@@ -585,7 +585,7 @@ public class GeotiffImageReader extends ImageReader
             GeoKey key = new GeoKey();
             key.key = keyValRec[i];
             if (keyValRec[i + 1] == 0)
-                key.value = new Integer(keyValRec[i + 3]);
+                key.value = Integer.valueOf(keyValRec[i + 3]);
             else
             {
                 // TODO: This isn't quite right....

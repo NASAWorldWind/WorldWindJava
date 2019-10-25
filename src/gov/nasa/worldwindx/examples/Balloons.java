@@ -44,19 +44,18 @@ import java.io.InputStream;
  * @author pabercrombie
  * @version $Id: Balloons.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class Balloons extends ApplicationTemplate
-{
-    protected static final String BROWSER_BALLOON_CONTENT_PATH
-        = "gov/nasa/worldwindx/examples/data/BrowserBalloonExample.html";
+public class Balloons extends ApplicationTemplate {
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+    protected static final String BROWSER_BALLOON_CONTENT_PATH
+            = "gov/nasa/worldwindx/examples/data/BrowserBalloonExample.html";
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         protected HotSpotController hotSpotController;
         protected BalloonController balloonController;
         protected RenderableLayer layer;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             super(true, true, false);
 
             // Add a controller to send input events to BrowserBalloons.
@@ -81,10 +80,9 @@ public class Balloons extends ApplicationTemplate
             WWUtil.alignComponent(null, this, AVKey.CENTER);
         }
 
-        protected void makeAnnotationBalloon()
-        {
+        protected void makeAnnotationBalloon() {
             Balloon balloon = new ScreenAnnotationBalloon("<b>AnnotationBalloon</b> attached to the screen",
-                new Point(50, 300));
+                    new Point(50, 300));
 
             BalloonAttributes attrs = new BasicBalloonAttributes();
             // Size the balloon to fit its text, place its lower-left corner at the point, put event padding between the
@@ -103,28 +101,23 @@ public class Balloons extends ApplicationTemplate
             this.layer.addRenderable(balloon);
         }
 
-        protected void makeBrowserBalloon()
-        {
+        protected void makeBrowserBalloon() {
             String htmlString = null;
             InputStream contentStream = null;
 
-            try
-            {
+            try {
                 // Read the URL content into a String using the default encoding (UTF-8).
                 contentStream = WWIO.openFileOrResourceStream(BROWSER_BALLOON_CONTENT_PATH, this.getClass());
                 htmlString = WWIO.readStreamToString(contentStream, null);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
-            }
-            finally
-            {
+            } finally {
                 WWIO.closeStream(contentStream, BROWSER_BALLOON_CONTENT_PATH);
             }
 
-            if (htmlString == null)
+            if (htmlString == null) {
                 htmlString = Logging.getMessage("generic.ExceptionAttemptingToReadFile", BROWSER_BALLOON_CONTENT_PATH);
+            }
 
             Position balloonPosition = Position.fromDegrees(38.883056, -77.016389);
 
@@ -148,8 +141,7 @@ public class Balloons extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Configure the initial view parameters so that the browser balloon is centered in the viewport.
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 60);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -85);

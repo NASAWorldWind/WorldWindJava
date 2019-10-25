@@ -133,7 +133,7 @@ public class LinesOfSight extends ApplicationTemplate
                 public void mouseClicked(MouseEvent mouseEvent)
                 {
                     // Control-Click cancels any currently running operation.
-                    if ((mouseEvent.getModifiers() & ActionEvent.CTRL_MASK) != 0)
+                    if ((mouseEvent.getModifiersEx() & InputEvent.CTRL_DOWN_MASK) != 0)
                     {
                         if (calculationDispatchThread != null && calculationDispatchThread.isAlive())
                             calculationDispatchThread.interrupt();
@@ -141,7 +141,7 @@ public class LinesOfSight extends ApplicationTemplate
                     }
 
                     // Alt-Click repeats the most recent calculations.
-                    if ((mouseEvent.getModifiers() & ActionEvent.ALT_MASK) != 0)
+                    if ((mouseEvent.getModifiersEx() & InputEvent.ALT_DOWN_MASK) != 0)
                     {
                         if (previousCurrentPosition == null)
                             return;
@@ -153,7 +153,7 @@ public class LinesOfSight extends ApplicationTemplate
                     }
 
                     // Perform the intersection tests in response to Shift-Click.
-                    if ((mouseEvent.getModifiers() & ActionEvent.SHIFT_MASK) == 0)
+                    if ((mouseEvent.getModifiersEx() & InputEvent.SHIFT_DOWN_MASK) == 0)
                         return;
 
                     mouseEvent.consume(); // tell the rest of WW that this event has been processed

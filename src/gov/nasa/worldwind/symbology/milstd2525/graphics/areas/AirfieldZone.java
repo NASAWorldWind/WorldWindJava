@@ -133,8 +133,7 @@ public class AirfieldZone extends BasicArea
     protected void configurePath(Path path)
     {
         path.setDelegateOwner(this);
-        path.setFollowTerrain(true);
-        path.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
+        path.setSurfacePath(true);
         path.setAttributes(this.activeShapeAttributes);
     }
 }

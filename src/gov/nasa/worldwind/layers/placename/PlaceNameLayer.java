@@ -105,6 +105,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
      *
      * @deprecated This flag no longer has any effect. Placenames participate in global decluttering.
      */
+    @Deprecated
     public boolean isCullNames()
     {
         return cullNames;
@@ -115,6 +116,7 @@ public class PlaceNameLayer extends AbstractLayer implements BulkRetrievable
      *
      * @deprecated This flag no longer has any effect. Placenames participate in global decluttering.
      */
+    @Deprecated
     public void setCullNames(boolean cullNames)
     {
         this.cullNames = cullNames;

@@ -408,20 +408,4 @@ public class BasicMemoryCache implements MemoryCache
         return "MemoryCache " + this.name + " max size = " + this.getCapacity() + " current size = "
             + this.currentUsedCapacity.get() + " number of items: " + this.getNumObjects();
     }
-
-    @Override
-    protected void finalize() throws Throwable
-    {
-        try
-        {
-            // clear doesn't throw any checked exceptions
-            // but this is in case of an unchecked exception
-            // basically, we don't want to exit without calling super.finalize
-            this.clear();
-        }
-        finally
-        {
-            super.finalize();
-        }
-    }
 }

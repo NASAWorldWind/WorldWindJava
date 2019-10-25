@@ -179,7 +179,7 @@ public class ButtonAnnotation extends ImageAnnotation implements SelectListener
     protected void onButtonPressed(SelectEvent e)
     {
         java.awt.event.MouseEvent mouseEvent = e.getMouseEvent();
-        this.fireActionPerformed(mouseEvent.getID(), mouseEvent.getWhen(), mouseEvent.getModifiers());
+        this.fireActionPerformed(mouseEvent.getID(), mouseEvent.getWhen(), mouseEvent.getModifiersEx());
     }
 
     //**************************************************************//

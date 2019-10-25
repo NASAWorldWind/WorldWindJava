@@ -435,13 +435,13 @@ public class WindowsWebView extends AbstractWebView
 
         if (e instanceof MouseWheelEvent)
         {
-            return new MouseWheelEvent((Component) e.getSource(), e.getID(), e.getWhen(), e.getModifiers(), x, y,
+            return new MouseWheelEvent((Component) e.getSource(), e.getID(), e.getWhen(), e.getModifiersEx(), x, y,
                 e.getClickCount(), e.isPopupTrigger(), ((MouseWheelEvent) e).getScrollType(),
                 ((MouseWheelEvent) e).getScrollAmount(), ((MouseWheelEvent) e).getWheelRotation());
         }
         else
         {
-            return new MouseEvent((Component) e.getSource(), e.getID(), e.getWhen(), e.getModifiers(), x, y,
+            return new MouseEvent((Component) e.getSource(), e.getID(), e.getWhen(), e.getModifiersEx(), x, y,
                 e.getClickCount(), e.isPopupTrigger(), e.getButton());
         }
     }

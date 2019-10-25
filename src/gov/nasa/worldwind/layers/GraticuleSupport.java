@@ -204,7 +204,7 @@ public class GraticuleSupport
 
         if (params.getValue(GraticuleRenderingParams.KEY_LINE_WIDTH) == null)
             //noinspection UnnecessaryBoxing
-            params.setValue(GraticuleRenderingParams.KEY_LINE_WIDTH, new Double(1));
+            params.setValue(GraticuleRenderingParams.KEY_LINE_WIDTH, Double.valueOf(1));
 
         if (params.getValue(GraticuleRenderingParams.KEY_LINE_STYLE) == null)
             params.setValue(GraticuleRenderingParams.KEY_LINE_STYLE, GraticuleRenderingParams.VALUE_LINE_STYLE_SOLID);

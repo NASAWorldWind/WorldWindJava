@@ -65,6 +65,7 @@ public class BasicDragger implements SelectListener
      * @deprecated the useTerrain property has been deprecated in favor of the {@link Draggable} interface which allows
      * the object to define the drag behavior.
      */
+    @Deprecated
     public BasicDragger(WorldWindow wwd, boolean useTerrain)
     {
         this(wwd);
@@ -85,6 +86,7 @@ public class BasicDragger implements SelectListener
      * @return <code>false</code> as this functionality has been deprecated.
      * @deprecated the {@link Draggable} provides the object being dragged complete control over the dragging behavior.
      */
+    @Deprecated
     public boolean isUseTerrain()
     {
         return false;
@@ -95,6 +97,7 @@ public class BasicDragger implements SelectListener
      *
      * @deprecated definition of dragging behavior now defined by the object in the {@link Draggable} interface.
      */
+    @Deprecated
     public void setUseTerrain(boolean useTerrain)
     {
         // ignored - functionality deprecated

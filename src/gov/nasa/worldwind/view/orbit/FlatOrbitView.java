@@ -13,6 +13,7 @@ import gov.nasa.worldwind.geom.*;
  * @deprecated Use {@link gov.nasa.worldwind.view.orbit.BasicOrbitView} instead. BasicOrbitView implements the correct
  *             horizon distance and far clip distance when used with a 2D globe.
  */
+@Deprecated
 public class FlatOrbitView extends BasicOrbitView
 {
     // TODO: make configurable

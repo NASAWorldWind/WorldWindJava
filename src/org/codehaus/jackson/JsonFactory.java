@@ -190,6 +190,7 @@ public class JsonFactory
      * @param f Undocumented.
      * @deprecated Use {@link #enable(JsonParser.Feature)} instead
      */
+    @Deprecated
     public final void enableParserFeature(JsonParser.Feature f) {
         enable(f);
     }
@@ -198,6 +199,7 @@ public class JsonFactory
      * @param f Undocumented.
      * @deprecated Use {@link #disable(JsonParser.Feature)} instead
      */
+    @Deprecated
     public final void disableParserFeature(JsonParser.Feature f) {
         disable(f);
     }
@@ -207,6 +209,7 @@ public class JsonFactory
      * @param state Undocumented.
      * @deprecated Use {@link #configure(JsonParser.Feature, boolean)} instead
      */
+    @Deprecated
     public final void setParserFeature(JsonParser.Feature f, boolean state) {
         configure(f, state);
     }
@@ -216,6 +219,7 @@ public class JsonFactory
      * @return  Undocumented.
      * @deprecated Use {@link #isEnabled(JsonParser.Feature)} instead
      */
+    @Deprecated
     public final boolean isParserFeatureEnabled(JsonParser.Feature f) {
         return (_parserFeatures & f.getMask()) != 0;
     }
@@ -288,6 +292,7 @@ public class JsonFactory
      * @param f Undocumented.
      * @deprecated Use {@link #enable(JsonGenerator.Feature)} instead
      */
+    @Deprecated
     public final void enableGeneratorFeature(JsonGenerator.Feature f) {
         enable(f);
     }
@@ -296,6 +301,7 @@ public class JsonFactory
      * @param f Undocumented.
      * @deprecated Use {@link #disable(JsonGenerator.Feature)} instead
      */
+    @Deprecated
     public final void disableGeneratorFeature(JsonGenerator.Feature f) {
         disable(f);
     }
@@ -305,6 +311,7 @@ public class JsonFactory
      * @param state Undocumented.
      * @deprecated Use {@link #configure(JsonGenerator.Feature, boolean)} instead
      */
+    @Deprecated
     public final void setGeneratorFeature(JsonGenerator.Feature f, boolean state) {
         configure(f, state);
     }
@@ -314,6 +321,7 @@ public class JsonFactory
      * @return  Undocumented.
      * @deprecated Use {@link #isEnabled(JsonGenerator.Feature)} instead
      */
+    @Deprecated
     public final boolean isGeneratorFeatureEnabled(JsonGenerator.Feature f) {
         return isEnabled(f);
     }

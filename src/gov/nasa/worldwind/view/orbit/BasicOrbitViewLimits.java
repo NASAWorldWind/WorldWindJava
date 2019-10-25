@@ -157,7 +157,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
      *             gov.nasa.worldwind.geom.Position)}, {@link #limitHeading(gov.nasa.worldwind.View,
      *             gov.nasa.worldwind.geom.Angle)}, etc.
      */
-    @SuppressWarnings("deprecation")
+    @Deprecated
     public static void applyLimits(OrbitView view, OrbitViewLimits viewLimits)
     {
         if (view == null)
@@ -189,7 +189,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitCenterPosition(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Position)} instead.
      */
-    @SuppressWarnings("deprecation")
+    @Deprecated
     public static Position limitCenterPosition(Position position, OrbitViewLimits viewLimits)
     {
         if (position == null)
@@ -221,6 +221,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitCenterPosition(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Position)} instead.
      */
+    @Deprecated
     public static LatLon limitCenterLocation(Angle latitude, Angle longitude, OrbitViewLimits viewLimits)
     {
         if (latitude == null || longitude == null)
@@ -271,6 +272,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitCenterPosition(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Position)} instead.
      */
+    @Deprecated
     public static double limitCenterElevation(double value, OrbitViewLimits viewLimits)
     {
         if (viewLimits == null)
@@ -305,6 +307,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitZoom(gov.nasa.worldwind.View, double)} instead.
      */
+    @Deprecated
     public static double limitZoom(double value, OrbitViewLimits viewLimits)
     {
         if (viewLimits == null)
@@ -333,6 +336,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
     //******************** Restorable State  ***********************//
     //**************************************************************//
 
+    @Override
     public void getRestorableState(RestorableSupport rs, RestorableSupport.StateObject context)
     {
         super.getRestorableState(rs, context);
@@ -344,6 +348,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
         rs.addStateValueAsDouble(context, "maxZoom", this.maxZoom);
     }
 
+    @Override
     public void restoreState(RestorableSupport rs, RestorableSupport.StateObject context)
     {
         super.restoreState(rs, context);
