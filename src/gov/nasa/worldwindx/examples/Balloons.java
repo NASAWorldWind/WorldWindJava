@@ -101,6 +101,7 @@ public class Balloons extends ApplicationTemplate {
             this.layer.addRenderable(balloon);
         }
 
+        @Deprecated
         protected void makeBrowserBalloon() {
             String htmlString = null;
             InputStream contentStream = null;

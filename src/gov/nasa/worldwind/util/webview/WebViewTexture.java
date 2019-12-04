@@ -17,7 +17,9 @@ import java.util.logging.Level;
 /**
  * @author dcollins
  * @version $Id: WebViewTexture.java 1171 2013-02-11 21:45:02Z dcollins $
+ * @deprecated 
  */
+@Deprecated
 public class WebViewTexture extends BasicWWTexture
 {
     protected Dimension frameSize;

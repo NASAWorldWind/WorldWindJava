@@ -17,7 +17,9 @@ import java.util.logging.Level;
 /**
  * @author dcollins
  * @version $Id: MacWebViewJNI.java 1948 2014-04-19 20:02:38Z dcollins $
+ * @deprecated 
  */
+@Deprecated
 public class MacWebViewJNI
 {
     static

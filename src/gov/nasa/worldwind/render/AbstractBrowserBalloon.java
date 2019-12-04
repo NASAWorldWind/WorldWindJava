@@ -93,7 +93,9 @@ import java.util.List;
  *
  * @author dcollins
  * @version $Id: AbstractBrowserBalloon.java 2148 2014-07-14 16:27:49Z tgaskins $
+ * @deprecated 
  */
+@Deprecated
 public abstract class AbstractBrowserBalloon extends AbstractBalloon implements HotSpot, Disposable
 {
 

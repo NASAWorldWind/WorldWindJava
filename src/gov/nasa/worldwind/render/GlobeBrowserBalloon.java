@@ -21,7 +21,9 @@ import java.awt.*;
  * @author pabercrombie
  * @version $Id: GlobeBrowserBalloon.java 2272 2014-08-25 23:24:45Z tgaskins $
  * @see gov.nasa.worldwind.render.AbstractBrowserBalloon
+ * @deprecated 
  */
+@Deprecated
 public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements GlobeBalloon
 {
     protected class OrderedGlobeBrowserBalloon extends OrderedBrowserBalloon

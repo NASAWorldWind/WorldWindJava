@@ -18,7 +18,9 @@ import java.awt.*;
  * @author pabercrombie
  * @version $Id: ScreenBrowserBalloon.java 2148 2014-07-14 16:27:49Z tgaskins $
  * @see gov.nasa.worldwind.render.AbstractBrowserBalloon
+ * @deprecated 
  */
+@Deprecated
 public class ScreenBrowserBalloon extends AbstractBrowserBalloon implements ScreenBalloon
 {
     /**

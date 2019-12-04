@@ -608,7 +608,7 @@ public class Configuration // Singleton
     public static boolean isUnixOS()
     {
         String osName = System.getProperty("os.name");
-        return osName != null && osName.toLowerCase().contains("unix");
+        return osName != null && (osName.toLowerCase().contains("linux") || osName.toLowerCase().contains("unix"));
     }
 
     /**

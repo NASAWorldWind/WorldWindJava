@@ -83,6 +83,7 @@ public abstract class KMLAbstractBalloon implements Balloon, WebResourceResolver
      *
      * @param balloon The balloon contained in this wrapper object.
      */
+    @SuppressWarnings("deprecation")
     protected void initialize(Balloon balloon)
     {
         balloon.setTextDecoder(this.createTextDecoder(this.parent));
