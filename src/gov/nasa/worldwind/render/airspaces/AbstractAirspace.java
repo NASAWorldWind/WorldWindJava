@@ -195,13 +195,13 @@ public abstract class AbstractAirspace extends WWObjectImpl
 
         this.attributes = attributes;
 
-        if (!WorldWind.getMemoryCacheSet().containsCache(GEOMETRY_CACHE_KEY))
-        {
-            long size = Configuration.getLongValue(AVKey.AIRSPACE_GEOMETRY_CACHE_SIZE, DEFAULT_GEOMETRY_CACHE_SIZE);
-            MemoryCache cache = new BasicMemoryCache((long) (0.85 * size), size);
-            cache.setName(GEOMETRY_CACHE_NAME);
-            WorldWind.getMemoryCacheSet().addCache(GEOMETRY_CACHE_KEY, cache);
-        }
+//        if (!WorldWind.getMemoryCacheSet().containsCache(GEOMETRY_CACHE_KEY))
+//        {
+//            long size = Configuration.getLongValue(AVKey.AIRSPACE_GEOMETRY_CACHE_SIZE, DEFAULT_GEOMETRY_CACHE_SIZE);
+//            MemoryCache cache = new BasicMemoryCache((long) (0.85 * size), size);
+//            cache.setName(GEOMETRY_CACHE_NAME);
+//            WorldWind.getMemoryCacheSet().addCache(GEOMETRY_CACHE_KEY, cache);
+//        }
     }
 
     protected abstract Extent computeExtent(Globe globe, double verticalExaggeration);

@@ -1,0 +1,7 @@
+target=cmu.symbolic.PolyArcTest
+classpath=${user.home}/Projects/WorldWindJava/classes
+sourcepath=${user.home}/Projects/WorldWindJava/src
+symbolic.method=PolyArcTest.set_radius(sym#sym#sym#sym#sym#sym),PolyArcTest.set_azimuths(sym#sym#sym#sym#sym#sym#sym)
+symbolic.lazy=on
+search.multiple_errors=true
+symbolic.dp=z3

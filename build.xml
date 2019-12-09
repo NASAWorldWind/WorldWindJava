@@ -19,7 +19,7 @@
     <!-- Main build targets. Provides generic targets that compile the Java sources, bundle JAR libraries, assemble API
          documentation, test the Java sources, and clean up the build output. -->
 
-    <target name="build" depends="assemble, test"
+    <target name="build" depends="assemble"
             description="Default build target. Assembles and tests this project."/>
 
     <target name="clean" description="Deletes the build directory.">
@@ -28,7 +28,7 @@
         <delete file="${basedir}/worldwindx.jar"/>
     </target>
 
-    <target name="assemble" depends="assembleDebug, assembleRelease, assembleJavadoc, assembleWebStart, assembleSdkArchive"
+    <target name="assemble" depends="assembleDebug, assembleRelease, assembleWebStart, assembleSdkArchive"
             description="Assembles JAR libraries for all build types and assembles the project documentation."/>
 
     <!-- Targets for compiling Java sources and bundling JAR libraries. -->
