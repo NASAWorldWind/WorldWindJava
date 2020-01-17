@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: USGSUrbanAreaOrthoLayer.xml 1171 2013-02-11 21:45:02Z dcollins $-->
+<!--DEPRECATED - this service has been decommissioned by the USGS and is no longer hosted at NASA -->
+<Layer version="1" layerType="TiledImageLayer">
+    <DisplayName>USGS Urban Area Ortho</DisplayName>
+    <Service serviceName="WWTileService">
+        <URL>https://worldwind25.arc.nasa.gov/tile/tile.aspx</URL>
+    </Service>
+    <!-- day month year hours:minutes:seconds timezone -->
+    <LastUpdate>19 09 2009 04:10:00 GMT</LastUpdate>
+    <DatasetName>104</DatasetName>
+    <DataCacheName>Earth/USGS Urban Area Ortho</DataCacheName>
+    <AvailableImageFormats>
+        <ImageFormat>image/jpg</ImageFormat>
+    </AvailableImageFormats>
+    <FormatSuffix>.jpg</FormatSuffix>
+    <NumLevels count="15" numEmpty="5"/>
+    <TileOrigin>
+        <LatLon units="degrees" latitude="-90.0" longitude="-180.0"/>
+    </TileOrigin>
+    <LevelZeroTileDelta>
+        <LatLon units="degrees" latitude="25.6" longitude="25.6"/>
+    </LevelZeroTileDelta>
+    <TileSize>
+        <Dimension height="512" width="512"/>
+    </TileSize>
+    <Sector>
+        <SouthWest>
+            <LatLon units="degrees" latitude="17.84" longitude="-168.67"/>
+        </SouthWest>
+        <NorthEast>
+            <LatLon units="degrees" latitude="71.55" longitude="-65.15"/>
+        </NorthEast>
+    </Sector>
+    <ActiveAltitudes max="100e3"/>
+    <RetrievalTimeouts>
+        <ReadTimeout>
+            <Time units="milliseconds" value="30000"/>
+        </ReadTimeout>
+        <ConnectTimeout>
+            <Time units="milliseconds" value="30000"/>
+        </ConnectTimeout>
+        <StaleRequestLimit>
+            <Time units="milliseconds" value="30000"/>
+        </StaleRequestLimit>
+    </RetrievalTimeouts>
+    <!--<TransparencyColors>-->
+        <!--<Color red="255" green="255" blue="255"/>-->
+        <!--<Color red="254" green="254" blue="254"/>-->
+        <!--<Color red="254" green="254" blue="254"/>-->
+        <!--<Color red="254" green="254" blue="254"/>-->
+        <!--<Color red="254" green="254" blue="254"/>-->
+    <!--</TransparencyColors>-->
+</Layer>

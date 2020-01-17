@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: USGSTopoLowResLayer.xml 1171 2013-02-11 21:45:02Z dcollins $-->
+<Layer version="1" layerType="TiledImageLayer">
+    <DisplayName>USGS Topo Scanned Maps 1:250K</DisplayName>
+    <LastUpdate>25 06 2011 05:00:00 GMT</LastUpdate>
+    <ActiveAltitudes max="50e6"/>
+    <MapScale>250e3</MapScale>
+    <DetailHint>0.3</DetailHint>
+    <NumLevels count="10" numEmpty="0"/>
+    <Service serviceName="OGC:WMS" version="1.3">
+        <GetCapabilitiesURL>https://worldwind47.arc.nasa.gov/topo</GetCapabilitiesURL>
+        <GetMapURL>https://worldwind47.arc.nasa.gov/topo</GetMapURL>
+        <LayerNames>US_TOPO_1</LayerNames>
+    </Service>
+    <DataCacheName>Earth/USGS Topographic Maps 250k Scale</DataCacheName>
+    <RetrievePropertiesFromService>true</RetrievePropertiesFromService>
+    <AvailableImageFormats>
+        <ImageFormat>image/png</ImageFormat>
+        <ImageFormat>image/jpeg</ImageFormat>
+        <ImageFormat>image/dds</ImageFormat>
+    </AvailableImageFormats>
+    <ImageFormat>image/png</ImageFormat>
+    <FormatSuffix>.png</FormatSuffix>
+    <TileOrigin>
+        <LatLon units="degrees" latitude="-90" longitude="-180"/>
+    </TileOrigin>
+    <LevelZeroTileDelta>
+        <LatLon units="degrees" latitude="20" longitude="20"/>
+    </LevelZeroTileDelta>
+    <TileSize>
+        <Dimension width="512" height="512"/>
+    </TileSize>
+    <Sector>
+        <SouthWest>
+            <LatLon units="degrees" latitude="18" longitude="-178"/>
+        </SouthWest>
+        <NorthEast>
+            <LatLon units="degrees" latitude="72" longitude="-66"/>
+        </NorthEast>
+    </Sector>
+</Layer>

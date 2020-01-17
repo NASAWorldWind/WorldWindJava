@@ -16,6 +16,9 @@ import gov.nasa.worldwind.geom.Position;
  */
 public class KMLLocation extends KMLAbstractObject
 {
+    private static final String LATITUDE_KEY="latitude";
+    private static final String LONGITUDE_KEY="longitude";
+    private static final String ALTITUDE_KEY="altitude";
     /**
      * Construct an instance.
      *
@@ -28,17 +31,17 @@ public class KMLLocation extends KMLAbstractObject
 
     public Double getLongitude()
     {
-        return (Double) this.getField("longitude");
+        return (Double) this.getField(LONGITUDE_KEY);
     }
 
     public Double getLatitude()
     {
-        return (Double) this.getField("latitude");
+        return (Double) this.getField(LATITUDE_KEY);
     }
 
     public Double getAltitude()
     {
-        return (Double) this.getField("altitude");
+        return (Double) this.getField(ALTITUDE_KEY);
     }
 
     /**
@@ -56,5 +59,11 @@ public class KMLLocation extends KMLAbstractObject
             lat != null ? lat : 0,
             lon != null ? lon : 0,
             alt != null ? alt : 0);
+    }
+    
+    public void setPosition(Position pos) {
+        this.setField(LATITUDE_KEY, pos.latitude.degrees);
+        this.setField(LONGITUDE_KEY, pos.longitude.degrees);
+        this.setField(ALTITUDE_KEY, pos.elevation);
     }
 }

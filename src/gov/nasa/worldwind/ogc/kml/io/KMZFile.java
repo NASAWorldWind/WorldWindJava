@@ -7,8 +7,10 @@
 package gov.nasa.worldwind.ogc.kml.io;
 
 import gov.nasa.worldwind.util.*;
+import gov.nasa.worldwind.util.xml.XMLDoc;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.zip.*;
 
@@ -21,7 +23,7 @@ import java.util.zip.*;
  * @author tag
  * @version $Id: KMZFile.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMZFile implements KMLDoc
+public class KMZFile extends XMLDoc
 {
     /** The {@link ZipFile} reference specified to the constructor. */
     protected ZipFile zipFile;
@@ -69,7 +71,7 @@ public class KMZFile implements KMLDoc
      * @return an input stream positioned to the first KML file in the KMZ file, or null if the KMZ file does not
      *         contain a KML file.
      */
-    public synchronized InputStream getKMLStream() throws IOException
+    public synchronized InputStream getInputStream() throws IOException
     {
         Enumeration<? extends ZipEntry> zipEntries = this.zipFile.entries();
         while (zipEntries.hasMoreElements())
@@ -140,34 +142,41 @@ public class KMZFile implements KMLDoc
      * @throws IllegalArgumentException if the path is null.
      * @throws IOException              if an error occurs while attempting to create a temporary file.
      */
-    public synchronized String getSupportFilePath(String path) throws IOException
-    {
+    public synchronized String getSupportFilePath(String path) throws IOException {
         // This method is called by the native WebView implementation to resolve resources in KMZ balloons. It may
         // not perform any synchronization with the EDT (such as calling invokeAndWait), or it will introduce a
         // potential deadlock when called by the WebView's native UI thread.
 
-        if (path == null)
-        {
+        if (path == null) {
             String message = Logging.getMessage("nullValue.FilePathIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         File file = this.files.get(path);
-        if (file != null)
+        if (file != null) {
             return file.getPath();
+        }
 
+        String requestedFilePath = null;
+        Path root = Path.of(".");
+        Path requestedFolder = Path.of(path).getParent();
+        requestedFolder = (requestedFolder == null) ? root : requestedFolder;
         Enumeration<? extends ZipEntry> zipEntries = this.zipFile.entries();
-        while (zipEntries.hasMoreElements())
-        {
+        while (zipEntries.hasMoreElements()) {
             ZipEntry entry = zipEntries.nextElement();
-            if (entry.getName().equals(path))
-            {
-                return this.copyEntryToTempDir(entry);
+            if (entry.getName().equals(path)) {
+                requestedFilePath = this.copyEntryToTempDir(entry);
+            } else {
+                Path entryFolder = Path.of(entry.getName()).getParent();
+                entryFolder = (entryFolder == null) ? root : entryFolder;
+                if (entryFolder.equals(requestedFolder)) {
+                    this.copyEntryToTempDir(entry);
+                }
             }
         }
 
-        return null;
+        return requestedFilePath;
     }
 
     /**

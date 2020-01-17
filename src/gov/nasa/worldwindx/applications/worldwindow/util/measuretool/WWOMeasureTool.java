@@ -877,6 +877,7 @@ public class WWOMeasureTool extends AVListImpl
     // Wait for end of rendering to update metrics - length, area...
     public void stageChanged(RenderingEvent event) // TODO: Why?
     {
+        System.out.println("foo");
 //        if (event.getStage().equals(RenderingEvent.AFTER_BUFFER_SWAP))
 //        {
 //            this.firePropertyChange(GPXMeasureTool.EVENT_METRIC_CHANGED, null, null);

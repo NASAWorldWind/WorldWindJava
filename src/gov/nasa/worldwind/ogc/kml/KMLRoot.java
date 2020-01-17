@@ -10,6 +10,8 @@ import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.event.Message;
 import gov.nasa.worldwind.exception.*;
+import gov.nasa.worldwind.geom.Position;
+import gov.nasa.worldwind.geom.Vec4;
 import gov.nasa.worldwind.ogc.kml.impl.*;
 import gov.nasa.worldwind.ogc.kml.io.*;
 import gov.nasa.worldwind.render.DrawContext;
@@ -21,7 +23,7 @@ import javax.xml.stream.events.XMLEvent;
 import java.beans.PropertyChangeSupport;
 import java.io.*;
 import java.net.*;
-import java.util.Map;
+import java.util.*;
 import java.util.zip.*;
 
 /**
@@ -31,10 +33,10 @@ import java.util.zip.*;
  * @author tag
  * @version $Id: KMLRoot.java 1951 2014-04-20 18:57:50Z tgaskins $
  */
-public class KMLRoot extends KMLAbstractObject implements KMLRenderable
+public class KMLRoot extends KMLAbstractObject implements KMLRenderable, XMLRoot
 {
-    /** Reference to the KMLDoc representing the KML or KMZ file. */
-    protected KMLDoc kmlDoc;
+    /** Reference to the XMLDoc representing the KML or KMZ file. */
+    protected XMLDoc kmlDoc;
     /** The event reader used to parse the document's XML. */
     protected XMLEventReader eventReader;
     /** The input stream underlying the event reader. */
@@ -175,31 +177,31 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     }
 
     /**
-     * Create a new <code>KMLRoot</code> for a {@link KMLDoc} instance. A KMLDoc represents KML and KMZ files from
+     * Create a new <code>KMLRoot</code> for a {@link XMLDoc} instance. A XMLDoc represents KML and KMZ files from
      * either files or input streams.
      *
-     * @param docSource the KMLDoc instance representing the KML document.
+     * @param docSource the XMLDoc instance representing the KML document.
      *
      * @throws IllegalArgumentException if the document source is null.
      * @throws IOException              if an error occurs while reading the KML document.
      */
-    public KMLRoot(KMLDoc docSource) throws IOException
+    public KMLRoot(XMLDoc docSource) throws IOException
     {
         this(docSource, true);
     }
 
     /**
-     * Create a new <code>KMLRoot</code> for a {@link KMLDoc} instance. A KMLDoc represents KML and KMZ files from
+     * Create a new <code>KMLRoot</code> for a {@link XMLDoc} instance. A XMLDoc represents KML and KMZ files from
      * either files or input streams.
      *
-     * @param docSource      the KMLDoc instance representing the KML document.
+     * @param docSource      the XMLDoc instance representing the KML document.
      * @param namespaceAware specifies whether to use a namespace-aware XML parser. <code>true</code> if so,
      *                       <code>false</code> if not.
      *
      * @throws IllegalArgumentException if the document source is null.
      * @throws IOException              if an error occurs while reading the KML document.
      */
-    public KMLRoot(KMLDoc docSource, boolean namespaceAware) throws IOException
+    public KMLRoot(XMLDoc docSource, boolean namespaceAware) throws IOException
     {
         super(KMLConstants.KML_NAMESPACE);
 
@@ -387,13 +389,13 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      * gov.nasa.worldwind.ogc.kml.KMLConstants#KML_NAMESPACE}).
      *
      * @param namespaceURI the default namespace URI.
-     * @param docSource    the KML source specified via a {@link KMLDoc} instance. A KMLDoc represents KML and KMZ files
+     * @param docSource    the KML source specified via a {@link XMLDoc} instance. A XMLDoc represents KML and KMZ files
      *                     from either files or input streams.
      *
      * @throws IllegalArgumentException if the document source is null.
      * @throws java.io.IOException      if an I/O error occurs attempting to open the document source.
      */
-    public KMLRoot(String namespaceURI, KMLDoc docSource) throws IOException
+    public KMLRoot(String namespaceURI, XMLDoc docSource) throws IOException
     {
         this(namespaceURI, docSource, true);
     }
@@ -403,7 +405,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      * gov.nasa.worldwind.ogc.kml.KMLConstants#KML_NAMESPACE}).
      *
      * @param namespaceURI   the default namespace URI.
-     * @param docSource      the KML source specified via a {@link KMLDoc} instance. A KMLDoc represents KML and KMZ
+     * @param docSource      the KML source specified via a {@link XMLDoc} instance. A XMLDoc represents KML and KMZ
      *                       files from either files or input streams.
      * @param namespaceAware specifies whether to use a namespace-aware XML parser. <code>true</code> if so,
      *                       <code>false</code> if not.
@@ -411,7 +413,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      * @throws IllegalArgumentException if the document source is null.
      * @throws java.io.IOException      if an I/O error occurs attempting to open the document source.
      */
-    public KMLRoot(String namespaceURI, KMLDoc docSource, boolean namespaceAware) throws IOException
+    public KMLRoot(String namespaceURI, XMLDoc docSource, boolean namespaceAware) throws IOException
     {
         super(namespaceURI);
 
@@ -437,7 +439,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      */
     protected void initialize(boolean namespaceAware) throws IOException
     {
-        this.eventStream = this.getKMLDoc().getKMLStream();
+        this.eventStream = this.getKMLDoc().getInputStream();
         this.eventReader = this.createReader(this.eventStream, namespaceAware);
         if (this.eventReader == null)
             throw new WWRuntimeException(Logging.getMessage("XML.UnableToOpenDocument", this.getKMLDoc()));
@@ -522,7 +524,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      *
      * @return the KML document for this root.
      */
-    public KMLDoc getKMLDoc()
+    public XMLDoc getKMLDoc()
     {
         return this.kmlDoc;
     }
@@ -618,61 +620,8 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
      *
      * @throws IllegalArgumentException if the <code>link</code> is <code>null</code>.
      */
-    public Object resolveReference(String link, boolean cacheRemoteFile)
-    {
-        if (link == null)
-        {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
-        }
-
-        try
-        {
-            String[] linkParts = link.split("#");
-            String linkBase = linkParts[0];
-            String linkRef = linkParts.length > 1 ? linkParts[1] : null;
-
-            // See if it's a reference to an internal element.
-            if (WWUtil.isEmpty(linkBase) && !WWUtil.isEmpty(linkRef))
-                return this.getItemByID(linkRef);
-
-            // Interpret the path relative to the current document.
-            String path = this.getSupportFilePath(linkBase);
-            if (path == null)
-                path = linkBase;
-
-            // See if it's an already found and parsed KML file.
-            Object o = WorldWind.getSessionCache().get(path);
-            if (o != null && o instanceof KMLRoot)
-                return linkRef != null ? ((KMLRoot) o).getItemByID(linkRef) : o;
-
-            URL url = WWIO.makeURL(path);
-            if (url == null)
-            {
-                // See if the reference can be resolved to a local file.
-                o = this.resolveLocalReference(path, linkRef);
-            }
-
-            // If we didn't find a local file, treat it as a remote reference.
-            if (o == null)
-                o = this.resolveRemoteReference(path, linkRef, cacheRemoteFile);
-
-            if (o != null)
-                return o;
-
-            // If the reference was not resolved as a remote reference, look for a local element identified by the
-            // reference string. This handles the case of malformed internal references that omit the # sign at the
-            // beginning of the reference.
-            return this.getItemByID(link);
-        }
-        catch (Exception e)
-        {
-            String message = Logging.getMessage("generic.UnableToResolveReference", link);
-            Logging.logger().warning(message);
-        }
-
-        return null;
+    public Object resolveReference(String link, boolean cacheRemoteFile) {
+        return this.getKMLDoc().resolveReference(this, link, cacheRemoteFile);
     }
 
     /**
@@ -1041,7 +990,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
     protected KMLRoot parseCachedKMLFile(URL url, String linkBase, String contentType, boolean namespaceAware)
         throws IOException, XMLStreamException
     {
-        KMLDoc kmlDoc;
+        XMLDoc kmlDoc;
 
         InputStream refStream = url.openStream();
 
@@ -1123,8 +1072,8 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         }
     }
 
-    protected XMLEventParserContext getParserContext()
-    {
+    @Override
+    public XMLEventParserContext getParserContext() {
         return this.parserContext;
     }
 
@@ -1341,4 +1290,52 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
             this.propertyChangeSupport = new PropertyChangeSupport(this);
         return this.propertyChangeSupport;
     }
+    
+    private void setChildPositions(Collection<? extends Object> children, Position position) {
+        children.forEach((v) -> {
+            if (v instanceof KMLMutable) {
+                ((KMLMutable) v).setPosition(position);
+            } else if (v instanceof KMLAbstractContainer) {
+                setChildPositions(((KMLAbstractContainer) v).getFeatures(), position);
+            }
+        });
+    }
+
+    /**
+     * Specifies this shape's geographic position. The position's altitude is relative to this shape's altitude mode.
+     *
+     * @param position this shape's geographic position.
+     *
+     * @throws IllegalArgumentException if the position is null.
+     */
+    public void setPosition(Position position) {
+        if (position == null) {
+            String message = Logging.getMessage("nullValue.PositionIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        setChildPositions(this.getFields().getValues(), position);
+    }
+
+    private void setChildScales(Collection<? extends Object> children, Vec4 scale) {
+        children.forEach((v) -> {
+            if (v instanceof KMLMutable) {
+                ((KMLMutable) v).setScale(scale);
+            } else if (v instanceof KMLAbstractContainer) {
+                setChildScales(((KMLAbstractContainer) v).getFeatures(), scale);
+            }
+        });
+    }
+
+    /**
+     * Specifies this shape's scale. The scale is applied to the shape's model definition in the model's coordinate
+     * system prior to oriented and positioning the model.
+     *
+     * @param scale this shape's scale. May be null, in which case no scaling is applied.
+     */
+    public void setScale(Vec4 scale) {
+        this.setChildScales(this.getFields().getValues(), scale);
+    }
+
 }

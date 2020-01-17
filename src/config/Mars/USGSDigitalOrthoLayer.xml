@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: USGSDigitalOrthoLayer.xml 1171 2013-02-11 21:45:02Z dcollins $-->
+<!--DEPRECATED - this service has been decommissioned by the USGS and is no longer hosted at NASA -->
+<Layer version="1" layerType="TiledImageLayer">
+    <DisplayName>USGS Digital Ortho</DisplayName>
+    <Service serviceName="WWTileService">
+        <URL>https://worldwind25.arc.nasa.gov/tile/tile.aspx</URL>
+    </Service>
+    <!-- day month year hours:minutes:seconds timezone -->
+    <LastUpdate>19 09 2009 04:10:00 GMT</LastUpdate>
+    <DatasetName>101</DatasetName>
+    <DataCacheName>Earth/USGS Digital Ortho</DataCacheName>
+    <FormatSuffix>.jpg</FormatSuffix>
+    <NumLevels count="13" numEmpty="5"/>
+    <TileOrigin>
+        <LatLon units="degrees" latitude="-90" longitude="-180"/>
+    </TileOrigin>
+    <LevelZeroTileDelta>
+        <LatLon units="degrees" latitude="25.6" longitude="25.6"/>
+    </LevelZeroTileDelta>
+    <TileSize>
+        <Dimension width="512" height="512"/>
+    </TileSize>
+    <Sector>
+        <SouthWest>
+            <LatLon units="degrees" latitude="17.84" longitude="-168.67"/>
+        </SouthWest>
+        <NorthEast>
+            <LatLon units="degrees" latitude="71.55" longitude="-65.15"/>
+        </NorthEast>
+    </Sector>
+    <ActiveAltitudes max="7e3"/>
+</Layer>

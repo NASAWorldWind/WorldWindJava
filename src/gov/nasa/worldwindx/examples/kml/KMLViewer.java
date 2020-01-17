@@ -257,6 +257,7 @@ public class KMLViewer extends ApplicationTemplate
         final JFileChooser fileChooser = new JFileChooser();
         fileChooser.setMultiSelectionEnabled(true);
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("KML/KMZ File", "kml", "kmz"));
+        fileChooser.setCurrentDirectory(new File("/home/mpeterson/d/foo/aol-data"));
 
         JMenuBar menuBar = new JMenuBar();
         appFrame.setJMenuBar(menuBar);

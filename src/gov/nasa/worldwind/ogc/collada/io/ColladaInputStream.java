@@ -7,6 +7,7 @@
 package gov.nasa.worldwind.ogc.collada.io;
 
 import gov.nasa.worldwind.util.Logging;
+import gov.nasa.worldwind.util.xml.XMLDoc;
 
 import java.io.*;
 import java.net.URI;
@@ -17,7 +18,7 @@ import java.net.URI;
  * @author pabercrombie
  * @version $Id: ColladaInputStream.java 660 2012-06-26 16:13:11Z pabercrombie $
  */
-public class ColladaInputStream implements ColladaDoc
+public class ColladaInputStream extends XMLDoc
 {
     /** The {@link java.io.InputStream} specified to the constructor. */
     protected InputStream inputStream;
@@ -74,6 +75,11 @@ public class ColladaInputStream implements ColladaDoc
             if (remoteFile != null)
                 return remoteFile.toString();
         }
+        return null;
+    }
+
+    @Override
+    public InputStream getSupportFileStream(String path) throws IOException {
         return null;
     }
 }

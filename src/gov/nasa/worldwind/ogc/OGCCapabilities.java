@@ -186,7 +186,7 @@ abstract public class OGCCapabilities extends AbstractXMLEventParser
         }
     }
 
-    protected XMLEventParserContext getParserContext()
+    public XMLEventParserContext getParserContext()
     {
         return this.parserContext;
     }

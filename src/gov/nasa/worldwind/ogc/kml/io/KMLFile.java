@@ -7,6 +7,7 @@
 package gov.nasa.worldwind.ogc.kml.io;
 
 import gov.nasa.worldwind.util.Logging;
+import gov.nasa.worldwind.util.xml.XMLDoc;
 
 import java.io.*;
 
@@ -19,7 +20,7 @@ import java.io.*;
  * @author tag
  * @version $Id: KMLFile.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLFile implements KMLDoc
+public class KMLFile extends XMLDoc
 {
     /** The {@link File} reference specified to the constructor. */
     protected File kmlFile;
@@ -60,7 +61,7 @@ public class KMLFile implements KMLDoc
      *
      * @throws IOException if an error occurs attempting to create the input stream.
      */
-    public InputStream getKMLStream() throws IOException
+    public InputStream getInputStream() throws IOException
     {
         return new FileInputStream(this.kmlFile);
     }

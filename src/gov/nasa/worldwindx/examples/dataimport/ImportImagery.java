@@ -29,7 +29,7 @@ import java.io.File;
 public class ImportImagery extends ApplicationTemplate
 {
     // The data to import.
-    protected static final String IMAGE_PATH = "gov/nasa/worldwindx/examples/data/craterlake-imagery-30m.tif";
+    protected static final String IMAGE_PATH = "/home/mpeterson/d/foo/usgs14-30cm-corpuschristi_2797134_nc/usgs14-nc-30cm-corpuschristi_14rpr5576.jp2";
 
     public static class AppFrame extends ApplicationTemplate.AppFrame
     {

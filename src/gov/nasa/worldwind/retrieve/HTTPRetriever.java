@@ -15,46 +15,54 @@ import java.util.logging.Level;
  * @author Tom Gaskins
  * @version $Id: HTTPRetriever.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class HTTPRetriever extends URLRetriever
-{
+public class HTTPRetriever extends URLRetriever {
+
     private int responseCode;
     private String responseMessage;
 
-    public HTTPRetriever(URL url, RetrievalPostProcessor postProcessor)
-    {
+    public HTTPRetriever(URL url, RetrievalPostProcessor postProcessor) {
         super(url, postProcessor);
     }
 
-    public int getResponseCode()
-    {
+    public int getResponseCode() {
         return this.responseCode;
     }
 
-    public String getResponseMessage()
-    {
+    public String getResponseMessage() {
         return this.responseMessage;
     }
 
-    protected ByteBuffer doRead(URLConnection connection) throws Exception
-    {
-        if (connection == null)
-        {
+    protected ByteBuffer doRead(URLConnection connection) throws Exception {
+        if (connection == null) {
             String msg = Logging.getMessage("nullValue.ConnectionIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
+        String url = connection.getURL().toString();
         HttpURLConnection htpc = (HttpURLConnection) connection;
         this.responseCode = htpc.getResponseCode();
         this.responseMessage = htpc.getResponseMessage();
         String contentType = connection.getContentType();
 
-        Logging.logger().log(Level.FINE, "HTTPRetriever.ResponseInfo", new Object[] {this.responseCode,
+        Logging.logger().log(Level.FINE, "HTTPRetriever.ResponseInfo", new Object[]{this.responseCode,
             connection.getContentLength(), contentType != null ? contentType : "content type not returned",
             connection.getURL()});
 
-        if (this.responseCode == HttpURLConnection.HTTP_OK)
-            return super.doRead(connection);
+//        if (url.contains("localhost") && url.contains("lidar")) {
+//            int cl = connection.getContentLength();
+//            if (cl > 0) {
+//                System.out.println(url);
+//            }
+//        }
+        if (this.responseCode == HttpURLConnection.HTTP_OK) {
+            ByteBuffer bb = super.doRead(connection);
+//            if (url.contains("localhost") && url.contains("lidar")) {
+//                System.out.println(bb.array().length+","+url);
+//            }
+            return bb;
+        }
+//             return super.doRead(connection);
 
         return null;
     }

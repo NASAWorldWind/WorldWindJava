@@ -26,6 +26,8 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String ACTION = "gov.nasa.worldwind.avkey.Action";
     final String AIRSPACE_GEOMETRY_CACHE_SIZE = "gov.nasa.worldwind.avkey.AirspaceGeometryCacheSize";
     final String ALLOW = "gov.nasa.worldwind.avkey.Allow";
+    final String ANIMATION_META_DATA="gov.nasa.worldwind.animation.Metadata";
+    final String ANIMATION_ANNOTATION="gov.nasa.worldwind.animation.Annotation";
     final String AUTH_TOKEN = "gov.nasa.worldwind.avkey.AuthToken";
 
     final String AVAILABLE_IMAGE_FORMATS = "gov.nasa.worldwind.avkey.AvailableImageFormats";

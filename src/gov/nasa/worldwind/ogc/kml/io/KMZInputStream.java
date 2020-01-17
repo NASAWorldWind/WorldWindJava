@@ -7,6 +7,7 @@
 package gov.nasa.worldwind.ogc.kml.io;
 
 import gov.nasa.worldwind.util.*;
+import gov.nasa.worldwind.util.xml.XMLDoc;
 
 import java.io.*;
 import java.util.*;
@@ -18,7 +19,7 @@ import java.util.zip.*;
  * @author tag
  * @version $Id: KMZInputStream.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMZInputStream implements KMLDoc
+public class KMZInputStream extends XMLDoc
 {
     /** The zip stream created for the specified input stream. */
     protected ZipInputStream zipStream;
@@ -83,7 +84,7 @@ public class KMZInputStream implements KMLDoc
      *
      * @throws IOException if an error occurs while reading the stream.
      */
-    public synchronized InputStream getKMLStream() throws IOException
+    public synchronized InputStream getInputStream() throws IOException
     {
         // Iterate through the stream's entries to find the KML file. It will normally be the first entry, but there's
         // no guarantee of that. If another file is encountered before the KML file, copy it to temp dir created to

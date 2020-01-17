@@ -515,8 +515,10 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         // Level 0 tiles are held in the model itself; other levels are placed in the memory cache.
         if (tile.getLevelNumber() == 0)
             this.levelZeroTiles.put(tile.getTileKey(), tile);
-        else
+        else {
             this.getMemoryCache().add(tile.getTileKey(), tile, elevations.getSizeInBytes());
+        }
+        
     }
 
     protected boolean areElevationsInMemory(TileKey key)
@@ -1303,6 +1305,7 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
+        //System.out.println("sector="+sector);
 
         Level targetLevel = this.getTargetLevel(sector, targetResolution);
         if (targetLevel == null)

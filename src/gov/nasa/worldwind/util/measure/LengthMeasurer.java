@@ -54,6 +54,10 @@ public class LengthMeasurer implements MeasurableLength {
         this.setPositions(positions);
     }
 
+    public LengthMeasurer(Position[] positions) {
+        this.setPositions(positions);
+    }
+
     protected void clearCachedValues() {
         this.subdividedPositions = null;
         this.length = -1;
@@ -75,6 +79,20 @@ public class LengthMeasurer implements MeasurableLength {
             newPositions.add(new Position(pos, elevation));
         });
 
+        setPositions(newPositions);
+    }
+
+    public void setPositions(Position[] positions) {
+        if (positions == null) {
+            String message = Logging.getMessage("nullValue.PositionsListIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        ArrayList<Position> newPositions = new ArrayList<>();
+        for (Position p : positions) {
+            newPositions.add(p);
+        }
         setPositions(newPositions);
     }
 

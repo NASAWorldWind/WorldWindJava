@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--Blue Marble Next generation 2004 + Bathymetry imagery, using the default month (May).-->
+<!--$Id: BMNG256.xml 1865 2014-03-13 21:00:05Z tgaskins $-->
+<Layer version="1" layerType="TiledImageLayer">
+    <DisplayName>Blue Marble 200405 -- 256</DisplayName>
+    <Service serviceName="OGC:WMS" version="1.3">
+        <GetCapabilitiesURL>https://worldwind25.arc.nasa.gov/wms</GetCapabilitiesURL>
+        <GetMapURL>https://worldwind25.arc.nasa.gov/wms</GetMapURL>
+        <LayerNames>BlueMarble-200405</LayerNames>
+    </Service>
+    <RetrievePropertiesFromService>true</RetrievePropertiesFromService>
+    <!-- day month year hours:minutes:seconds timezone -->
+    <DataCacheName>Earth/BMNG256</DataCacheName>
+    <ImageFormat>image/jpeg</ImageFormat>
+    <AvailableImageFormats>
+        <ImageFormat>image/jpeg</ImageFormat>
+        <ImageFormat>image/png</ImageFormat>
+    </AvailableImageFormats>
+    <FormatSuffix>.jpg</FormatSuffix>
+    <NumLevels count="5" numEmpty="0"/>
+    <TileOrigin>
+        <LatLon units="degrees" latitude="-90" longitude="-180"/>
+    </TileOrigin>
+    <LevelZeroTileDelta>
+        <LatLon units="degrees" latitude="45" longitude="45"/>
+    </LevelZeroTileDelta>
+    <TileSize>
+        <Dimension width="256" height="256"/>
+    </TileSize>
+    <Sector>
+        <SouthWest>
+            <LatLon units="degrees" latitude="-90" longitude="-180"/>
+        </SouthWest>
+        <NorthEast>
+            <LatLon units="degrees" latitude="90" longitude="180"/>
+        </NorthEast>
+    </Sector>
+    <ForceLevelZeroLoads>true</ForceLevelZeroLoads>
+    <RetainLevelZeroTiles>true</RetainLevelZeroTiles>
+    <UseTransparentTextures>false</UseTransparentTextures>
+    <RetrievalTimeouts>
+        <ReadTimeout>
+            <Time units="milliseconds" value="30000"/>
+        </ReadTimeout>
+    </RetrievalTimeouts>
+    <!-- The following lines are included just to show how to set the values to other than their defaults -->
+    <MaxAbsentTileAttempts>2</MaxAbsentTileAttempts>
+    <MinAbsentTileCheckInterval>1000</MinAbsentTileCheckInterval>
+</Layer>

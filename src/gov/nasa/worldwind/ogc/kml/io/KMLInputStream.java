@@ -7,6 +7,7 @@
 package gov.nasa.worldwind.ogc.kml.io;
 
 import gov.nasa.worldwind.util.*;
+import gov.nasa.worldwind.util.xml.XMLDoc;
 
 import java.io.*;
 import java.net.*;
@@ -17,7 +18,7 @@ import java.net.*;
  * @author tag
  * @version $Id: KMLInputStream.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLInputStream implements KMLDoc
+public class KMLInputStream extends XMLDoc
 {
     /** The {@link InputStream} specified to the constructor. */
     protected InputStream inputStream;
@@ -53,7 +54,7 @@ public class KMLInputStream implements KMLDoc
      *
      * @return the input stream reference passed to the constructor.
      */
-    public InputStream getKMLStream() throws IOException
+    public InputStream getInputStream() throws IOException
     {
         return this.inputStream;
     }

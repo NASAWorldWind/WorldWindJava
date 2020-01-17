@@ -319,4 +319,6 @@ public interface XMLEventParserContext extends AVList
      * @param booleanIntegerFields the string parser.
      */
     void addBooleanIntegerParsers(String namespace, String[] booleanIntegerFields);
+    
+    boolean shouldWarnUnrecognized(XMLEventParser parser);
 }

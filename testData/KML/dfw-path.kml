@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document>
+        <Folder>
+            <name>default_folder</name>
+            <Placemark>
+                <visibility>1</visibility>
+                <StyleMap>
+                    <Pair>
+                        <key>normal</key>
+                        <Style>
+                            <LineStyle>
+                                <color>FF000000</color>
+                                <colorMode>normal</colorMode>
+                                <width>1.0</width>
+                            </LineStyle>
+                            <PolyStyle>
+                                <color>FF000000</color>
+                                <colorMode>normal</colorMode>
+                                <fill>1</fill>
+                                <outline>1</outline>
+                            </PolyStyle>
+                        </Style>
+                    </Pair>
+                </StyleMap>
+                <Polygon>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>-97.102586,32.943062,0.000000 -97.108565,32.929818,0.000000 -97.111291,32.853930,0.000000 -97.099977,32.835219,0.000000 -97.082242,32.829944,0.000000 -96.963229,32.829720,0.000000 -96.948699,32.834714,0.000000 -96.944754,32.845059,0.000000 -96.947845,32.933450,0.000000 -96.957827,32.945574,0.000000 -96.973468,32.949967,0.000000 -97.086505,32.949047,0.000000 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+            </Placemark>
+        </Folder>
+    </Document>
+</kml>
+

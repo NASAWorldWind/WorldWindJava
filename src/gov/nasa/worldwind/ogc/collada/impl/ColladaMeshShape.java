@@ -367,7 +367,12 @@ public class ColladaMeshShape extends AbstractGeneralShape
         }
         current.setExtent(extent);
 
+        try {
         this.render(dc);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -1195,6 +1200,9 @@ public class ColladaMeshShape extends AbstractGeneralShape
      */
     protected String getTextureSource(ColladaAbstractGeometry geometry)
     {
+        if (this.bindMaterial==null) {
+            return null;
+        }
         ColladaTechniqueCommon techniqueCommon = this.bindMaterial.getTechniqueCommon();
         if (techniqueCommon == null)
             return null;
@@ -1301,6 +1309,10 @@ public class ColladaMeshShape extends AbstractGeneralShape
      */
     protected ColladaEffect getEffect(ColladaAbstractGeometry geometry)
     {
+        if (this.bindMaterial==null) {
+            return null;
+        }
+        
         ColladaTechniqueCommon techniqueCommon = this.bindMaterial.getTechniqueCommon();
         if (techniqueCommon == null)
             return null;

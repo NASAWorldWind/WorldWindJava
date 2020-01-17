@@ -292,8 +292,9 @@ abstract public class AbstractXMLEventParser implements XMLEventParser
             {
                 if (event.isCharacters())
                     this.doAddCharacters(ctx, event, args);
-                else
+                else {
                     this.doParseEventContent(ctx, event, args);
+                }
             }
             catch (XMLStreamException e)
             {
@@ -325,7 +326,7 @@ abstract public class AbstractXMLEventParser implements XMLEventParser
     {
         return (String) this.getField(CHARACTERS_CONTENT);
     }
-
+    
     /**
      * Parse an event's sub-elements.
      *
@@ -345,11 +346,12 @@ abstract public class AbstractXMLEventParser implements XMLEventParser
 
             if (parser == null)
             {
-                ctx.firePropertyChange(
-                    new XMLParserNotification(ctx, XMLParserNotification.UNRECOGNIZED, event, "XML.UnrecognizedElement",
-                        null, event));
+                XMLParserNotification notification=new XMLParserNotification(ctx, XMLParserNotification.UNRECOGNIZED, event, "XML.UnrecognizedElement",null, event);
+                if (ctx.shouldWarnUnrecognized(this)) {
+                    ctx.firePropertyChange(notification);
+                }
                 parser = ctx.getUnrecognizedElementParser();
-
+                parser.setParent(this);
                 // Register an unrecognized parser for the element type.
                 QName elementName = event.asStartElement().getName();
                 if (elementName != null)
@@ -370,6 +372,8 @@ abstract public class AbstractXMLEventParser implements XMLEventParser
     protected void doAddEventContent(Object o, XMLEventParserContext ctx, XMLEvent event, Object... args)
         throws XMLStreamException
     {
+        //Object ase=event.asStartElement();
+        //System.out.println(ase);
         // Override in subclass if need to react to certain elements.
         this.setField(event.asStartElement().getName(), o);
     }
@@ -422,6 +426,10 @@ abstract public class AbstractXMLEventParser implements XMLEventParser
             }
         }
 
+        return null;
+    }
+    
+    public XMLEventParserContext getParserContext() {
         return null;
     }
 }

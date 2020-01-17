@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: USDANAIPWMSImageLayer.xml 1171 2013-02-11 21:45:02Z dcollins $-->
+<!--DEPRECATED. The preferred NAIP layer is USGS NAIP Plus (USGSNAIPPlusLayer.xml) -->
+<Layer version="1" layerType="TiledImageLayer">
+    <DisplayName>USDA NAIP</DisplayName>
+    <Service serviceName="OGC:WMS" version="1.3">
+        <GetCapabilitiesURL>https://worldwind47.arc.nasa.gov/wms</GetCapabilitiesURL>
+        <GetMapURL>https://worldwind47.arc.nasa.gov/wms</GetMapURL>
+        <LayerNames>NAIP</LayerNames>
+    </Service>
+    <LastUpdate>1240509300000</LastUpdate>
+    <!-- day month year hours:minutes:seconds timezone -->
+    <LastUpdate>23 04 2009 17:55:00 GMT</LastUpdate>
+    <DataCacheName>Earth/USDA NAIP</DataCacheName>
+    <ImageFormat>image/dds</ImageFormat>
+    <AvailableImageFormats>
+        <ImageFormat>image/png</ImageFormat>
+        <ImageFormat>image/dds</ImageFormat>
+    </AvailableImageFormats>
+    <FormatSuffix>.dds</FormatSuffix>
+    <NumLevels count="15" numEmpty="6"/>
+    <TileOrigin>
+        <LatLon units="degrees" latitude="-90" longitude="-180"/>
+    </TileOrigin>
+    <LevelZeroTileDelta>
+        <LatLon units="degrees" latitude="36" longitude="36"/>
+    </LevelZeroTileDelta>
+    <TileSize>
+        <Dimension width="512" height="512"/>
+    </TileSize>
+    <Sector>
+        <SouthWest>
+            <LatLon units="degrees" latitude="24.0" longitude="-125.0"/>
+        </SouthWest>
+        <NorthEast>
+            <LatLon units="degrees" latitude="50.0" longitude="-66.0"/>
+        </NorthEast>
+    </Sector>
+    <UseTransparentTextures>true</UseTransparentTextures>
+    <ScreenCredit creditType="ScreenImage">
+        <FileName>images/usda_logo-32x32.png</FileName>
+        <Link>http://www.fsa.usda.gov/FSA</Link>
+    </ScreenCredit>
+    <RetrievalTimeouts>
+        <ReadTimeout>
+            <Time units="milliseconds" value="30000"/>
+        </ReadTimeout>
+    </RetrievalTimeouts>
+</Layer>

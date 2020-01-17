@@ -6,6 +6,8 @@
 
 package gov.nasa.worldwind.ogc.kml;
 
+import gov.nasa.worldwind.geom.Vec4;
+
 /**
  * Represents the KML <i>Scale</i> element and provides access to its contents.
  *
@@ -37,5 +39,11 @@ public class KMLScale extends KMLAbstractObject
     public Double getZ()
     {
         return (Double) this.getField("z");
+    }
+    
+    public void setScale(Vec4 scale) {
+        this.setField("x", scale.x);
+        this.setField("y", scale.y);
+        this.setField("z", scale.z);
     }
 }

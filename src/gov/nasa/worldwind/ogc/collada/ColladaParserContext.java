@@ -167,6 +167,16 @@ public class ColladaParserContext extends BasicXMLEventParserContext
 
         // The following elements are valid COLLADA markup, but are not used by WorldWind.
         parser = new ColladaUnsupported(ns);
+        this.parsers.put(new QName(ns, "wrap_s"), parser);
+        this.parsers.put(new QName(ns, "wrap_t"), parser);
+        this.parsers.put(new QName(ns, "minfilter"), parser);
+        this.parsers.put(new QName(ns, "magfilter"), parser);
+        this.parsers.put(new QName(ns, "mipfilter"), parser);
+        this.parsers.put(new QName(ns, "comments"), parser);
+        this.parsers.put(new QName(ns, "copyright"), parser);
+        this.parsers.put(new QName(ns, "instance_light"), parser);
+        this.parsers.put(new QName(ns, "library_controllers"), parser);
+        this.parsers.put(new QName(ns, "library_lights"), parser);
         this.parsers.put(new QName(ns, "library_cameras"), parser);
         this.parsers.put(new QName(ns, "instance_camera"), parser);
         this.parsers.put(new QName(ns, "camera"), parser);
@@ -185,4 +195,17 @@ public class ColladaParserContext extends BasicXMLEventParserContext
         this.addIntegerParsers(ns, IntegerFields);
         this.addBooleanParsers(ns, BooleanFields);
     }
+    
+    @Override
+    public boolean shouldWarnUnrecognized(XMLEventParser parser) {
+        while (parser!=null) {
+            if (parser instanceof ColladaExtra || parser instanceof ColladaUnsupported) {
+                return false;
+            }
+            
+            parser=parser.getParent();
+        }
+        return true;
+    }
+
 }

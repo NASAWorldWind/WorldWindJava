@@ -9,10 +9,12 @@ package gov.nasa.worldwind.ogc.kml;
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.event.Message;
+import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.ogc.kml.impl.*;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.xml.XMLEventParserContext;
+import gov.nasa.worldwind.geom.Vec4;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
@@ -24,7 +26,7 @@ import java.util.*;
  * @author tag
  * @version $Id: KMLPlacemark.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-public class KMLPlacemark extends KMLAbstractFeature
+public class KMLPlacemark extends KMLAbstractFeature implements KMLMutable
 {
     protected KMLAbstractGeometry geometry;
     protected List<KMLRenderable> renderables;
@@ -282,5 +284,28 @@ public class KMLPlacemark extends KMLAbstractFeature
         }
 
         super.onChange(msg);
+    }
+    
+    
+    @Override
+    public void setPosition(Position position) {
+        if (this.geometry instanceof KMLMutable) {
+            ((KMLMutable) this.geometry).setPosition(position);
+        }
+    }
+
+    @Override
+    public Position getPosition() {
+        if (this.geometry instanceof KMLMutable) {
+            return ((KMLMutable) this.geometry).getPosition();
+        }
+        return null;
+    }
+
+    @Override
+    public void setScale(Vec4 scale) {
+        if (this.geometry instanceof KMLMutable) {
+            ((KMLMutable) this.geometry).setScale(scale);
+        }
     }
 }

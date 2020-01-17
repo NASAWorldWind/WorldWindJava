@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
+  ~ National Aeronautics and Space Administration.
+  ~ All Rights Reserved.
+  -->
+
+<!--$Id: LandsatI3WMSLayer.xml 1958 2014-04-24 19:25:37Z tgaskins $-->
+<!--DEPRECATED. Use LandsatI3WMSLayer2.xml-->
+<Layer version="1" layerType="TiledImageLayer">
+    <DisplayName>i-cubed Landsat</DisplayName>
+    <Service serviceName="OGC:WMS" version="1.3">
+        <GetCapabilitiesURL>https://data.worldwind.arc.nasa.gov/wms</GetCapabilitiesURL>
+        <GetMapURL>https://data.worldwind.arc.nasa.gov/wms</GetMapURL>
+        <LayerNames>esat</LayerNames>
+    </Service>
+    <RetrievePropertiesFromService>true</RetrievePropertiesFromService>
+    <!-- day month year hours:minutes:seconds timezone -->
+    <LastUpdate>26 03 2009 00:00:00 GMT</LastUpdate>
+    <DataCacheName>Earth/NASA LandSat I3 WMS</DataCacheName>
+    <ImageFormat>image/dds</ImageFormat>
+    <AvailableImageFormats>
+        <ImageFormat>image/png</ImageFormat>
+        <ImageFormat>image/dds</ImageFormat>
+    </AvailableImageFormats>
+    <FormatSuffix>.dds</FormatSuffix>
+    <NumLevels count="10" numEmpty="4"/>
+    <TileOrigin>
+        <LatLon units="degrees" latitude="-90" longitude="-180"/>
+    </TileOrigin>
+    <LevelZeroTileDelta>
+        <LatLon units="degrees" latitude="36" longitude="36"/>
+    </LevelZeroTileDelta>
+    <TileSize>
+        <Dimension width="512" height="512"/>
+    </TileSize>
+    <Sector>
+        <SouthWest>
+            <LatLon units="degrees" latitude="-90" longitude="-180"/>
+        </SouthWest>
+        <NorthEast>
+            <LatLon units="degrees" latitude="90" longitude="180"/>
+        </NorthEast>
+    </Sector>
+    <UseTransparentTextures>true</UseTransparentTextures>
+    <!--<ScreenCredit creditType="ScreenImage">-->
+    <!--<FileName>images/32x32-icon-nasa.png</FileName>-->
+    <!--<Link>https://worldwind.arc.nasa.gov</Link>-->
+    <!--</ScreenCredit>-->
+    <RetrievalTimeouts>
+        <ReadTimeout>
+            <Time units="milliseconds" value="20000"/>
+        </ReadTimeout>
+    </RetrievalTimeouts>
+</Layer>

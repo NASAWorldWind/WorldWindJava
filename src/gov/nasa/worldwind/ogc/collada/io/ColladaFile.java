@@ -7,6 +7,7 @@
 package gov.nasa.worldwind.ogc.collada.io;
 
 import gov.nasa.worldwind.util.Logging;
+import gov.nasa.worldwind.util.xml.XMLDoc;
 
 import java.io.*;
 
@@ -16,7 +17,7 @@ import java.io.*;
  * @author pabercrombie
  * @version $Id: ColladaFile.java 660 2012-06-26 16:13:11Z pabercrombie $
  */
-public class ColladaFile implements ColladaDoc
+public class ColladaFile extends XMLDoc
 {
     /** File from which COLLADA content is read. */
     protected File colladaFile;
@@ -61,5 +62,10 @@ public class ColladaFile implements ColladaDoc
         pathFile = new File(this.colladaFile.getParentFile(), path);
 
         return pathFile.exists() ? pathFile.getPath() : null;
+    }
+
+    @Override
+    public InputStream getSupportFileStream(String path) throws IOException {
+        return null;
     }
 }

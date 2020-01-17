@@ -241,6 +241,12 @@ public class BasicXMLEventParserContext extends AVListImpl implements XMLEventPa
     {
         this.notificationListener = listener;
     }
+    
+    
+    @Override
+    public boolean shouldWarnUnrecognized(XMLEventParser parser) {
+        return true;
+    }
 
     public Map<String, Object> getIdTable()
     {

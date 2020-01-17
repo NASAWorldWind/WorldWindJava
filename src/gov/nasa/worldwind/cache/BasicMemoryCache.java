@@ -386,6 +386,7 @@ public class BasicMemoryCache implements MemoryCache
         CacheEntry[] timeOrderedEntries = new CacheEntry[this.entries.size()];
         java.util.Arrays.sort(this.entries.values().toArray(timeOrderedEntries)); // TODO
 
+        System.out.println(this.name+"Making space");
         int i = 0;
         while (this.getFreeCapacity() < spaceRequired || this.getUsedCapacity() > this.lowWater)
         {
