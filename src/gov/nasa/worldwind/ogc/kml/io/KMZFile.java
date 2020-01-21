@@ -165,6 +165,7 @@ public class KMZFile extends XMLDoc
         Enumeration<? extends ZipEntry> zipEntries = this.zipFile.entries();
         while (zipEntries.hasMoreElements()) {
             ZipEntry entry = zipEntries.nextElement();
+            System.out.println(entry);
             if (entry.getName().equals(path)) {
                 requestedFilePath = this.copyEntryToTempDir(entry);
             } else {
