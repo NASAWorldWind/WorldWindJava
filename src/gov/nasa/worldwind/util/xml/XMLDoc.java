@@ -97,7 +97,7 @@ public abstract class XMLDoc {
                 linkBase = linkBase.substring(2);
             }
             // Interpret the path relative to the current document.
-            String path = this.getSupportFilePath(linkBase);
+            String path = root.getSupportFilePath(linkBase);
             if (path == null) {
                 path = linkBase;
             }

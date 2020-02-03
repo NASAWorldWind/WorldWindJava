@@ -1,5 +1,7 @@
 package gov.nasa.worldwind.util.xml;
 
+import java.io.IOException;
+
 public interface XMLRoot {
 
     /**
@@ -47,15 +49,28 @@ public interface XMLRoot {
      * for a retrieved file does not persist between runtime sessions, and subsequent invocations of this method may not
      * return the same temporary location.
      *
-     * @param linkBase        the address of the document containing the requested element.
-     * @param linkRef         the element's identifier.
+     * @param linkBase the address of the document containing the requested element.
+     * @param linkRef the element's identifier.
      * @param cacheRemoteFile <code>true</code> to store remote files in the WorldWind cache, or <code>false</code> to
-     *                        store remote files in a temporary location. Has no effect if the address is a local file.
+     * store remote files in a temporary location. Has no effect if the address is a local file.
      *
      * @return URL to the requested file, parsed KMLRoot, or KML feature. Returns null if the document is not yet
-     *         available in the FileStore.
+     * available in the FileStore.
      *
      * @throws IllegalArgumentException if the {@code linkBase} is null.
      */
     public Object resolveRemoteReference(String linkBase, String linkRef, boolean cacheRemoteFile);
+
+    /**
+     * Returns an absolute path or URL to a file indicated by a path relative to the XML file's location.
+     *
+     * @param path the path of the requested file.
+     *
+     * @return an absolute path or URL to the file, or null if the file does not exist.
+     *
+     * @throws IllegalArgumentException if the specified path is null.
+     * @throws java.io.IOException if an error occurs while attempting to read the support file.
+     */
+    public String getSupportFilePath(String path) throws IOException;
+
 }

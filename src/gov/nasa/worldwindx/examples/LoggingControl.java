@@ -5,6 +5,10 @@
  */
 package gov.nasa.worldwindx.examples;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+//import org.apache.log4j.LogManager;
+//import org.apache.log4j.Logger;
 import java.util.logging.*;
 
 /**
@@ -24,10 +28,14 @@ public class LoggingControl extends ApplicationTemplate
         }
     }
 
+    private static final Logger log4j = LogManager.getLogger("HelloWorld");
     public static void main(String[] args)
     {
+        //log4j.info("Log4J: Hello, World!");
+        //log4j.fatal("Log4J: Hello, World!");
+        
         // Get the WorldWind logger by name.
-        Logger logger = Logger.getLogger("gov.nasa.worldwind");
+        java.util.logging.Logger logger = java.util.logging.Logger.getLogger("gov.nasa.worldwind");
 
         // Turn off logging to parent handlers of the WorldWind handler.
         logger.setUseParentHandlers(false);
@@ -51,7 +59,8 @@ public class LoggingControl extends ApplicationTemplate
         public void publish(LogRecord logRecord)
         {
             // Just redirect the record to ConsoleHandler for printing.
-            System.out.printf("Hey, this came from Me!\n");
+            //System.out.printf("Hey, this came from Me!\n");
+            log4j.error(logRecord.toString());
             super.publish(logRecord);
         }
     }
