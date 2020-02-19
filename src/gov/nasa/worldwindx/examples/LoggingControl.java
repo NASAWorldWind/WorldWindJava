@@ -16,48 +16,43 @@ import java.util.logging.*;
 public class LoggingControl extends ApplicationTemplate
 {
     // Use the standard WorldWind application template
-//    private static class AppFrame extends ApplicationTemplate.AppFrame
-//    {
-//        public AppFrame()
-//        {
-//            super(true, true, false); // status bar, layer panel, not statistics panel
-//        }
-//    }
-//
-//    private static final Logger log4j = LogManager.getLogger("HelloWorld");
-//    public static void main(String[] args)
-//    {
-//        //log4j.info("Log4J: Hello, World!");
-//        //log4j.fatal("Log4J: Hello, World!");
-//        
-//        // Get the WorldWind logger by name.
-//        java.util.logging.Logger logger = java.util.logging.Logger.getLogger("gov.nasa.worldwind");
-//
-//        // Turn off logging to parent handlers of the WorldWind handler.
-//        logger.setUseParentHandlers(false);
-//
-//        // Create a console handler (defined below) that we use to write log messages.
-//        final ConsoleHandler handler = new MyHandler();
-//
-//        // Enable all logging levels on both the logger and the handler.
-//        logger.setLevel(Level.ALL);
-//        handler.setLevel(Level.ALL);
-//
-//        // Add our handler to the logger
-//        logger.addHandler(handler);
-//
-//        // Start the application.
-//        ApplicationTemplate.start("WorldWind Logging Control", AppFrame.class);
-//    }
-//
-//    private static class MyHandler extends ConsoleHandler
-//    {
-//        public void publish(LogRecord logRecord)
-//        {
-//            // Just redirect the record to ConsoleHandler for printing.
-//            //System.out.printf("Hey, this came from Me!\n");
-//            log4j.error(logRecord.toString());
-//            super.publish(logRecord);
-//        }
-//    }
+    private static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
+            super(true, true, false); // status bar, layer panel, not statistics panel
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        // Get the WorldWind logger by name.
+        Logger logger = Logger.getLogger("gov.nasa.worldwind");
+
+        // Turn off logging to parent handlers of the WorldWind handler.
+        logger.setUseParentHandlers(false);
+
+        // Create a console handler (defined below) that we use to write log messages.
+        final ConsoleHandler handler = new MyHandler();
+
+        // Enable all logging levels on both the logger and the handler.
+        logger.setLevel(Level.ALL);
+        handler.setLevel(Level.ALL);
+
+        // Add our handler to the logger
+        logger.addHandler(handler);
+
+        // Start the application.
+        ApplicationTemplate.start("WorldWind Logging Control", AppFrame.class);
+    }
+
+    private static class MyHandler extends ConsoleHandler
+    {
+        public void publish(LogRecord logRecord)
+        {
+            // Just redirect the record to ConsoleHandler for printing.
+            System.out.printf("Hey, this came from Me!\n");
+            super.publish(logRecord);
+        }
+    }
 }
