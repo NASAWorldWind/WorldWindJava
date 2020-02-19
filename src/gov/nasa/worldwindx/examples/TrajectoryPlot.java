@@ -102,6 +102,6 @@ public class TrajectoryPlot extends ApplicationTemplate {
         if (args.length > 0) {
             TRAJECTORY_FILE_NAME = args[0];
         }
-        ApplicationTemplate.start("WorldWind Paths", AppFrame.class);
+        ApplicationTemplate.start("WorldWind CSV Trajectory Plotter", AppFrame.class);
     }
 }

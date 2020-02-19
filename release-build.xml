@@ -28,7 +28,7 @@
         <delete file="${basedir}/worldwindx.jar"/>
     </target>
 
-    <target name="assemble" depends="assembleDebug, assembleRelease, assembleJavadoc, assembleSdkArchive"
+    <target name="assemble" depends="assembleDebug, assembleRelease, assembleJavadoc, assembleExecutable, assembleSdkArchive"
             description="Assembles JAR libraries for all build types and assembles the project documentation."/>
 
     <!-- Targets for compiling Java sources and bundling JAR libraries. -->
@@ -119,6 +119,114 @@
         </zip>
     </target>
 
+    <!-- Tasks for assembling the project Executable package. -->
+
+    <target name="assembleExecutable"
+            depends="assembleRelease, bundleExecutableLibraries, bundleExecutable"
+            description="Assembles the Executable deployment package."/>
+            
+    <target name="bundleExecutableLibraries">
+        <mkdir dir="${executable.jar.dir}"/>
+        <!-- World Wind library JAR files. -->
+        <copy file="${worldwind.jar.dir}/release/worldwind.jar" tofile="${executable.jar.dir}/worldwind.jar"/>
+        <copy file="${worldwind.jar.dir}/release/worldwindx.jar" tofile="${executable.jar.dir}/worldwindx.jar"/>
+        <!-- JOGL and GlueGen library JAR files. -->
+        <copy todir="${executable.jar.dir}">
+            <fileset dir="${basedir}">
+                <include name="jogl-all*.jar"/>
+                <include name="gluegen-rt*.jar"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+        <!-- GDAL library JAR files. -->
+        <copy file="${basedir}/gdal.jar" todir="${executable.jar.dir}"/>
+        <jar jarfile="${executable.jar.dir}/gdaldata.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal/data">
+                <include name="**"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <!-- GDAL native library JAR files. -->
+        <jar jarfile="${executable.jar.dir}/gdal-natives-macosx-universal.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="libgdalalljni.jnilib"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${executable.jar.dir}/gdal-natives-windows-i586.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="gdalminjni32.dll"/>
+                <include name="gdalalljni32.dll"/>
+                <include name="gdalalljni32.dll.manifest"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${executable.jar.dir}/gdal-natives-windows-amd64.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="gdalminjni64.dll"/>
+                <include name="gdalalljni64.dll"/>
+                <include name="gdalalljni64.dll.manifest"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${executable.jar.dir}/gdal-natives-linux-i586.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="libgdalalljni32.so"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+        <jar jarfile="${executable.jar.dir}/gdal-natives-linux-amd64.jar">
+            <manifest>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+            <fileset dir="${basedir}/lib-external/gdal">
+                <include name="GDAL_License.txt"/>
+                <include name="LizardTech_DSDK_License.txt"/>
+                <include name="LizardTech_3rd_Party.txt"/>
+                <include name="LizardTech_Redistributable.txt"/>
+                <include name="libgdalalljni64.so"/>
+                <type type="file"/>
+            </fileset>
+        </jar>
+    </target>
+    
+    <target name="bundleExecutable">
+        <zip destfile="${executable.out.dir}/worldwind-executable.zip">
+            <fileset dir="${executable.jar.dir}"/>
+        </zip>
+    </target>
+    
     <!-- Targets for assembling the project SDK archive. -->
 
     <target name="assembleSdkArchive" depends="assembleRelease">
