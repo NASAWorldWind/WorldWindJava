@@ -100,7 +100,7 @@ public class TrajectoryPlot extends ApplicationTemplate {
 
     public static void main(String[] args) {
         if (args.length > 0) {
-            TRAJECTORY_FILE_NAME = args[1];
+            TRAJECTORY_FILE_NAME = args[0];
         }
         ApplicationTemplate.start("WorldWind Paths", AppFrame.class);
     }
