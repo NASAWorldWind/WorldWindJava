@@ -39,7 +39,6 @@ public class HTTPRetriever extends URLRetriever {
             throw new IllegalArgumentException(msg);
         }
 
-        String url = connection.getURL().toString();
         HttpURLConnection htpc = (HttpURLConnection) connection;
         this.responseCode = htpc.getResponseCode();
         this.responseMessage = htpc.getResponseMessage();
@@ -49,20 +48,10 @@ public class HTTPRetriever extends URLRetriever {
             connection.getContentLength(), contentType != null ? contentType : "content type not returned",
             connection.getURL()});
 
-//        if (url.contains("localhost") && url.contains("lidar")) {
-//            int cl = connection.getContentLength();
-//            if (cl > 0) {
-//                System.out.println(url);
-//            }
-//        }
         if (this.responseCode == HttpURLConnection.HTTP_OK) {
             ByteBuffer bb = super.doRead(connection);
-//            if (url.contains("localhost") && url.contains("lidar")) {
-//                System.out.println(bb.array().length+","+url);
-//            }
             return bb;
         }
-//             return super.doRead(connection);
 
         return null;
     }

@@ -435,7 +435,6 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator 
                 }
 
                 Sector tileSector = new Sector(lastLat, lat, lastLon, lon);
-                //System.out.println("tileSector="+tileSector);
                 boolean skipTile = dc.is2DGlobe() && this.skipTile(dc, tileSector);
 
                 if (!skipTile) {
@@ -535,12 +534,10 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator 
         // 50% has the same effect on object size as decreasing the distance between the eye and the object by 50%.
         // The detail hint is reduced by 50% for tiles above 75 degrees north and below 75 degrees south.
         double s = this.computeTileResolutionTarget(dc, tile);
-        //System.out.println("sector="+tile.getSector()+" cellSizRadians=" + cellSizeRadians);
         if (tile.getSector().getMinLatitude().degrees >= 75 || tile.getSector().getMaxLatitude().degrees <= -75) {
             s *= 0.5;
         }
         double detailScale = Math.pow(10, -s);
-        //System.out.println("detailScale="+detailScale);
         double fieldOfViewScale = dc.getView().getFieldOfView().tanHalfAngle() / Angle.fromDegrees(45).tanHalfAngle();
         fieldOfViewScale = WWMath.clamp(fieldOfViewScale, 0, 1);
 
@@ -548,7 +545,6 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator 
         // by multiplying the actual distance by the level of detail scale and the field of view scale.
         double eyeDistanceMeters = tile.getSector().distanceTo(dc, dc.getView().getEyePoint());
         double scaledEyeDistanceMeters = eyeDistanceMeters * detailScale * fieldOfViewScale;
-        //System.out.println("eyeDistanceMeters=" + eyeDistanceMeters + " scaledEyeDistanceMeters=" + scaledEyeDistanceMeters + " cellSizeMeters=" + cellSizeMeters);
         // Split when the cell size in meters becomes greater than the specified fraction of the eye distance, also in
         // meters. Another way to say it is, use the current tile if its cell size is less than the specified fraction
         // of the eye distance.
@@ -569,9 +565,6 @@ public class RectangularTessellator extends WWObjectImpl implements Tessellator 
         Sector[] sectors = tile.sector.subdivide();
 
         RectTile[] subTiles = new RectTile[4];
-//        for (Sector s:sectors) {
-//            System.out.println(s);
-//        }
         subTiles[0] = this.createTile(dc, sectors[0], tile.level + 1);
         subTiles[1] = this.createTile(dc, sectors[1], tile.level + 1);
         subTiles[2] = this.createTile(dc, sectors[2], tile.level + 1);
