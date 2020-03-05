@@ -41,9 +41,11 @@ import gov.nasa.worldwind.util.xml.AbstractXMLEventParser;
 import java.awt.Dimension;
 import java.awt.Font;
 import gov.nasa.worldwind.ogc.kml.io.*;
+import gov.nasa.worldwind.ogc.kml.impl.*;
 import gov.nasa.worldwind.util.Logging;
 import javax.xml.stream.XMLStreamException;
-import gov.nasa.worldwind.render.airspaces.*;
+import gov.nasa.worldwind.render.airspaces.AirspaceAttributes;
+import gov.nasa.worldwind.render.airspaces.BasicAirspaceAttributes;
 
 public class ObjectAnimations extends ApplicationTemplate {
 
@@ -85,176 +87,180 @@ public class ObjectAnimations extends ApplicationTemplate {
             WorldWindow wwd = this.getWwd();
             // Add view control panel to the layer panel
             this.vcp = new ViewControlPanel(wwd);
-            BasicFlyView flyView = new BasicFlyView();
+            //BasicFlyView flyView = new BasicFlyView();
             //getWwd().setView(flyView);
             this.getControlPanel().add(this.vcp, BorderLayout.SOUTH);
-            Position eyePos = new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 25000.0); // DFW
-//            Position eyePos = new Position(Angle.fromDegreesLatitude(39.52616886908606), Angle.fromDegreesLongitude(-119.81207373509578), 6000.0); // Reno
-            View v = wwd.getView();
-            v.setEyePosition(eyePos);
-            flyView.setEyePosition(eyePos);
-            flyView.setHeading(Angle.fromDegrees(0));
-            flyView.setPitch(Angle.fromDegrees(90));
-            flyView.setFieldOfView(Angle.fromDegrees(45));
-            flyView.setRoll(Angle.fromDegrees(0));
+//            flyView.setEyePosition(eyePos);
+//            flyView.setHeading(Angle.fromDegrees(0));
+//            flyView.setPitch(Angle.fromDegrees(90));
+//            flyView.setFieldOfView(Angle.fromDegrees(45));
+//            flyView.setRoll(Angle.fromDegrees(0));
             for (Layer layer : wwd.getModel().getLayers()) {
                 if (layer.getName().toLowerCase().contains("bing")) {
                     layer.setEnabled(true);
                 }
             }
             try {
-                //planeModel.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 1500.0));
-                AnnotationAttributes infoAttrs = new AnnotationAttributes();
-                infoAttrs.setCornerRadius(0);
-                infoAttrs.setInsets(new Insets(4, 4, 4, 4));
-                infoAttrs.setBackgroundColor(new Color(0f, 0f, 0f, .5f));
-                infoAttrs.setTextColor(Color.WHITE);
-                infoAttrs.setBorderColor(Color.yellow);
-                infoAttrs.setBorderWidth(1);
-                infoAttrs.setLeaderGapWidth(4);
-                infoAttrs.setDrawOffset(new Point(0, 40));
-                RenderableLayer infoLayer = new RenderableLayer();;
-                wwd.getModel().getLayers().add(infoLayer);
-                Position.PositionList flightPositions = getPositionsFromKml("testData/KML/dfw-path.kml");
-                int nFlights = 50;
-                double curAltitude = 2500;
-                RenderableLayer layer = new RenderableLayer();
-                AnimatedObjectController controller = new AnimatedObjectController(wwd, layer, infoLayer);
-                ShapeAttributes attrs = new BasicShapeAttributes();
-                attrs.setOutlineMaterial(new Material(Color.RED));
-                attrs.setOutlineWidth(2d);
-                int nPositions = flightPositions.list.size();
-//                TestParser messageParser = new TestParser();
-//                messageParser.parseMessages("/home/mpeterson/d/temp/aol-data");
-//                ArrayList<AOLFlightPlan> plans = messageParser.getPlans();
-//                final Color[] colorMap = {Color.red, Color.YELLOW, Color.white, Color.blue, Color.CYAN};
-//                HashMap<String, Color> colors = new HashMap<>();
-//                HashMap<String, String> callSigns = new HashMap<>();
-//                int colorIdx = 0;
-//                RenderableLayer layer = new RenderableLayer();
-//                for (AOLFlightPlan p : plans) {
-//                    String key = p.getGufi();
-//                    if (!colors.containsKey(key)) {
-//                        colors.put(key, colorMap[colorIdx]);
-//                        colorIdx++;
-//                        if (colorIdx >= colorMap.length) {
-//                            colorIdx = 0;
-//                        }
-//                    }
-//
-//                    if (!callSigns.containsKey(key)) {
-//                        callSigns.put(key, p.getCallSign());
-//                    }
-//                    ArrayList<OperationVolume> opVolumes = p.getOpVolumes();
-//                    AirspaceAttributes attrs = new BasicAirspaceAttributes();
-//                    Color color = colors.get(key);
-//                    attrs.setInteriorMaterial(new Material(color));
-//                    attrs.setOutlineMaterial(new Material(WWUtil.makeColorBrighter(color)));
-//                    attrs.setInteriorOpacity(0.7);
-//                    attrs.setOutlineWidth(2);
-//                    attrs.setDrawOutline(true);
-//                    attrs.setEnableAntialiasing(true);
-//                    attrs.setEnableLighting(true);
-//                    for (OperationVolume ov : opVolumes) {
-//                        Polygon poly = new Polygon(attrs);
-//                        GeoJSONPolygon geo = ov.getFlight_geography();
-//                        GeoJSONPositionArray[] positions = geo.getCoordinates();
-//                        poly.setLocations(positions[0]);
-//                        poly.setAltitudes(ov.getMin_altitude().getAltitudeValue(), ov.getMax_altitude().getAltitudeValue());
-//                        poly.setAltitudeDatum(AVKey.ABOVE_GROUND_LEVEL, AVKey.ABOVE_GROUND_REFERENCE);
-//                        poly.setValue(AVKey.DISPLAY_NAME, p.getCallSign());
-//                        layer.addRenderable(poly);
-//                    }
-//                }
-//                ArrayList<AOLPosition> positions = messageParser.getPositions();
-//                positions.forEach((p) -> {
-//                    PointPlacemark pp = new PointPlacemark(p.getLLA());
-//                    //pp.setLabelText(callSigns.get(p.getGufi()));
-//                    pp.setValue(AVKey.DISPLAY_NAME, callSigns.get(p.getGufi()));
-//                    pp.setLineEnabled(false);
-//                    pp.setAltitudeMode(WorldWind.ABSOLUTE);
-//                    pp.setEnableLabelPicking(true); // enable label picking for this placemark
-//                    PointPlacemarkAttributes attrs = new PointPlacemarkAttributes();
-//                    attrs.setImageAddress("/home/mpeterson/d/nasa/WorldWindJava/src/images/plane-icon.png");
-//                    Color c = colors.get(p.getGufi());
-//                    c = (c == null) ? Color.MAGENTA : c;
-//                    attrs.setImageColor(c);
-//                    //attrs.setScale(0.6);
-//                    attrs.setLabelOffset(new Offset(0.9d, 0.6d, AVKey.FRACTION, AVKey.FRACTION));
-//                    pp.setAttributes(attrs);
-//                    layer.addRenderable(pp);
-//                });
-//                KMLRoot model1 = openKML("/home/mpeterson/d/foo/aol-data/airbus-popup/Airbus_Popup.kmz");
-//                KMLRoot model2 = openKML("/home/mpeterson/d/foo/aol-data/octocopter/Octocopter.kmz");
-                // KMLRoot model3 = openKML("/home/mpeterson/d/nasa/WorldWindJava/testData/KML/models/macky-normal.kmz");
-                //KMLPlacemark pm=(KMLPlacemark) model1.getField("Placemark");
-                //KMLModel foo=(KMLModel) pm.getGeometry();
-//                model1.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 1500.0));
-//                model1.setScale(new Vec4(200, 200, 200));
-//                model2.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 2000.0));
-//                model2.setScale(new Vec4(1000, 1000, 1000));
-//                model3.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 2000.0));
-//                model3.setScale(new Vec4(1000, 1000, 1000));
-                //System.out.println(foo);
-                //KMLController kmlController = new KMLController(model);
-//                layer.addRenderable(new KMLController(model1));
-//                layer.addRenderable(new KMLController(model2));
-//                layer.addRenderable(new KMLController(model3));
-                for (int i = 0; i < nFlights; i++) {
-                    ColladaRoot planeModel = ColladaRoot.createAndParse("testData/collada/airliner.dae");
-                    //ColladaRoot planeModel = ColladaRoot.createAndParse("/home/mpeterson/d/foo/aol-data/airbus-popup/files/model0.dae");
+                planesOverDFW(1);
+                //modelDisplay();
+                //messageDisplay();
+//                 this.addFpsText(layer);
+                wwd.setPerFrameStatisticsKeys(PerformanceStatistic.ALL_STATISTICS_SET);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        private void modelDisplay() throws Exception {
+            WorldWindow wwd = this.getWwd();
+            Position eyePos = new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 25000.0); // DFW
+            RenderableLayer layer = new RenderableLayer();
+            wwd.getModel().getLayers().add(layer);
+            wwd.getView().setEyePosition(eyePos);
+            KMLRoot model1 = openKML("/home/mpeterson/d/temp/aol-data/airbus-popup/Airbus_Popup.kmz");
+            model1.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 1500.0));
+            model1.setScale(new Vec4(200, 200, 200));
+            layer.addRenderable(new KMLController(model1));
+//            KMLRoot model2 = openKML("/home/mpeterson/d/temp/aol-data/octocopter/Octocopter.kmz");
+//            model2.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 2000.0));
+//            model2.setScale(new Vec4(1000, 1000, 1000));
+//            layer.addRenderable(new KMLController(model2));
+
+        }
+
+        private void messageDisplay() throws Exception {
+            Position eyePos = new Position(Angle.fromDegreesLatitude(39.52616886908606), Angle.fromDegreesLongitude(-119.81207373509578), 6000.0); // Reno
+            WorldWindow wwd = this.getWwd();
+            wwd.getView().setEyePosition(eyePos);
+            TestParser messageParser = new TestParser();
+            messageParser.parseMessages("/home/mpeterson/d/temp/aol-data");
+            ArrayList<AOLFlightPlan> plans = messageParser.getPlans();
+            final Color[] colorMap = {Color.red, Color.YELLOW, Color.white, Color.blue, Color.CYAN};
+            HashMap<String, Color> colors = new HashMap<>();
+            HashMap<String, String> callSigns = new HashMap<>();
+            int colorIdx = 0;
+            RenderableLayer layer = new RenderableLayer();
+            wwd.getModel().getLayers().add(layer);
+            for (AOLFlightPlan p : plans) {
+                String key = p.getGufi();
+                if (!colors.containsKey(key)) {
+                    colors.put(key, colorMap[colorIdx]);
+                    colorIdx++;
+                    if (colorIdx >= colorMap.length) {
+                        colorIdx = 0;
+                    }
+                }
+
+                if (!callSigns.containsKey(key)) {
+                    callSigns.put(key, p.getCallSign());
+                }
+                ArrayList<OperationVolume> opVolumes = p.getOpVolumes();
+                AirspaceAttributes attrs = new BasicAirspaceAttributes();
+                Color color = colors.get(key);
+                attrs.setInteriorMaterial(new Material(color));
+                attrs.setOutlineMaterial(new Material(WWUtil.makeColorBrighter(color)));
+                attrs.setInteriorOpacity(0.7);
+                attrs.setOutlineWidth(2);
+                attrs.setDrawOutline(true);
+                attrs.setEnableAntialiasing(true);
+                attrs.setEnableLighting(true);
+                for (OperationVolume ov : opVolumes) {
+                    gov.nasa.worldwind.render.airspaces.Polygon poly = new gov.nasa.worldwind.render.airspaces.Polygon(attrs);
+                    GeoJSONPolygon geo = ov.getFlight_geography();
+                    GeoJSONPositionArray[] positions = geo.getCoordinates();
+                    poly.setLocations(positions[0]);
+                    poly.setAltitudes(ov.getMin_altitude().getAltitudeValue(), ov.getMax_altitude().getAltitudeValue());
+                    poly.setAltitudeDatum(AVKey.ABOVE_GROUND_LEVEL, AVKey.ABOVE_GROUND_REFERENCE);
+                    poly.setValue(AVKey.DISPLAY_NAME, p.getCallSign());
+                    layer.addRenderable(poly);
+                }
+            }
+            ArrayList<AOLPosition> positions = messageParser.getPositions();
+            positions.forEach((p) -> {
+                PointPlacemark pp = new PointPlacemark(p.getLLA());
+                //pp.setLabelText(callSigns.get(p.getGufi()));
+                pp.setValue(AVKey.DISPLAY_NAME, callSigns.get(p.getGufi()));
+                pp.setLineEnabled(false);
+                pp.setAltitudeMode(WorldWind.ABSOLUTE);
+                pp.setEnableLabelPicking(true); // enable label picking for this placemark
+                PointPlacemarkAttributes attrs = new PointPlacemarkAttributes();
+                attrs.setImageAddress("/home/mpeterson/d/nasa/WorldWindJava/src/images/plane-icon.png");
+                Color c = colors.get(p.getGufi());
+                c = (c == null) ? Color.MAGENTA : c;
+                attrs.setImageColor(c);
+                //attrs.setScale(0.6);
+                attrs.setLabelOffset(new Offset(0.9d, 0.6d, AVKey.FRACTION, AVKey.FRACTION));
+                pp.setAttributes(attrs);
+                layer.addRenderable(pp);
+            });
+
+        }
+
+        private void planesOverDFW(int nFlights) throws Exception {
+            WorldWindow wwd = this.getWwd();
+            Position eyePos = new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 25000.0); // DFW
+            wwd.getView().setEyePosition(eyePos);
+            RenderableLayer layer = new RenderableLayer();
+            wwd.getModel().getLayers().add(layer);
+            RenderableLayer infoLayer = new RenderableLayer();
+            wwd.getModel().getLayers().add(infoLayer);
+            AnimatedObjectController controller = new AnimatedObjectController(wwd, layer, infoLayer);
+            ShapeAttributes attrs = new BasicShapeAttributes();
+            attrs.setOutlineMaterial(new Material(Color.RED));
+            attrs.setOutlineWidth(2d);
+            Position.PositionList flightPositions = getPositionsFromKml("testData/KML/dfw-path.kml");
+            int nPositions = flightPositions.list.size();
+            //int nFlights = 50;
+            double curAltitude = 2500;
+            for (int i = 0; i < nFlights; i++) {
+                ColladaRoot planeModel = ColladaRoot.createAndParse("testData/collada/airliner.dae");
+                //ColladaRoot planeModel = ColladaRoot.createAndParse("/home/mpeterson/d/foo/aol-data/airbus-popup/files/model0.dae");
 //                    ColladaRoot planeModel = null;
 //                    if (i == 0) {
 //                        KMLRoot kmzModel = openKML("/home/mpeterson/d/foo/aol-data/airbus-popup/Airbus_Popup.kmz");
 //                        System.out.println(kmzModel);
 //                    }
 //                    //printColladaTable(planeModel);
-                    planeModel.setAltitudeMode(WorldWind.ABSOLUTE);
-                    planeModel.setModelScale(new Vec4(4,4,4));
-                    planeModel.setHeading(Angle.ZERO);
-                    AnimatedObject plane = new AnimatedObject(planeModel);
-                    ArrayList<Position> positions3D = new ArrayList<>();
-                    int curPos = (int) Math.floor(Math.random() * nPositions);
-                    int posDir = (int) Math.floor(Math.random() * 2);
-                    for (int j = 0; j < nPositions; j++) {
-                        Position p = flightPositions.list.get(curPos);
-                        positions3D.add(new Position(p, curAltitude));
-                        switch (posDir) {
-                            case 1:
-                                curPos++;
-                                if (curPos >= nPositions) {
-                                    curPos = 0;
-                                }
-                                break;
-                            default:
-                                curPos--;
-                                if (curPos < 0) {
-                                    curPos = nPositions - 1;
-                                }
-                                break;
-                        }
+                planeModel.setAltitudeMode(WorldWind.ABSOLUTE);
+                planeModel.setModelScale(new Vec4(4, 4, 4));
+                planeModel.setHeading(Angle.ZERO);
+                AnimatedObject plane = new AnimatedObject(planeModel);
+                ArrayList<Position> positions3D = new ArrayList<>();
+                int curPos = (int) Math.floor(Math.random() * nPositions);
+                int posDir = (int) Math.floor(Math.random() * 2);
+                for (int j = 0; j < nPositions; j++) {
+                    Position p = flightPositions.list.get(curPos);
+                    positions3D.add(new Position(p, curAltitude));
+                    switch (posDir) {
+                        case 1:
+                            curPos++;
+                            if (curPos >= nPositions) {
+                                curPos = 0;
+                            }
+                            break;
+                        default:
+                            curPos--;
+                            if (curPos < 0) {
+                                curPos = nPositions - 1;
+                            }
+                            break;
                     }
-                    curAltitude += 500;
-                    Path flightPath = new Path(positions3D);
-                    flightPath.makeClosed();
-                    flightPath.setAltitudeMode(WorldWind.ABSOLUTE);
-                    flightPath.setAttributes(attrs);
-                    plane.setRoute(flightPath);
-                    plane.setVelocity(100 + Math.random() * 150);
-                    plane.setMetadata(String.format("N%4d\n%f MPH", i, ((plane.getVelocity() * 3600) / 1000) * 0.6));
-                    controller.addObject(plane);
-                    layer.addRenderable(flightPath);
-                    layer.addRenderable(new ColladaController(planeModel));
                 }
-
-//                 this.addFpsText(layer);
-                controller.startAnimations();
-                wwd.getModel().getLayers().add(layer);
-                wwd.setPerFrameStatisticsKeys(PerformanceStatistic.ALL_STATISTICS_SET);
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                curAltitude += 500;
+                Path flightPath = new Path(positions3D);
+                flightPath.makeClosed();
+                flightPath.setAltitudeMode(WorldWind.ABSOLUTE);
+                flightPath.setAttributes(attrs);
+                plane.setRoute(flightPath);
+                plane.setVelocity(100 + Math.random() * 150);
+                plane.setMetadata(String.format("N%4d\n%f MPH", i, ((plane.getVelocity() * 3600) / 1000) * 0.6));
+                controller.addObject(plane);
+                layer.addRenderable(flightPath);
+                layer.addRenderable(new ColladaController(planeModel));
             }
+
+            controller.startAnimations();
         }
 
         private KMLRoot openKML(String source) throws Exception {
