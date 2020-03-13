@@ -362,6 +362,16 @@ public abstract class ShapefileRecord
     }
 
     /**
+     * TODO
+     *
+     * @return true if this is a multi patch record, otherwise false.
+     */
+    public boolean isMultiPatchRecord()
+    {
+        return false;
+    }
+
+    /**
      * Indicates whether this is a polyline record. When true, this record may be cast to a ShapefileRecordPolyline by
      * calling {@link #asPolylineRecord()}.
      *

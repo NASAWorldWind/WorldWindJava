@@ -34,8 +34,6 @@ import gov.nasa.worldwind.ogc.kml.*;
 import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwind.formats.geojson.*;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.render.AnnotationAttributes;
-import gov.nasa.worldwind.render.ScreenRelativeAnnotation;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.xml.AbstractXMLEventParser;
 import java.awt.Dimension;

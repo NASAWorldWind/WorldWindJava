@@ -74,62 +74,62 @@ public class Polygons extends ApplicationTemplate
             pgon.setRotation(-170d);
             layer.addRenderable(pgon);
 
-            ArrayList<Position> pathLocations = new ArrayList<Position>();
-            pathLocations.add(Position.fromDegrees(28, -110, 5e4));
-            pathLocations.add(Position.fromDegrees(35, -108, 5e4));
-            pathLocations.add(Position.fromDegrees(35, -111, 5e4));
-            pathLocations.add(Position.fromDegrees(28, -111, 5e4));
-            pathLocations.add(Position.fromDegrees(28, -110, 5e4));
-            pgon = new Polygon(pathLocations);
-            pgon.setValue(AVKey.DISPLAY_NAME, "Has an image");
-            normalAttributes = new BasicShapeAttributes(normalAttributes);
-            normalAttributes.setDrawInterior(true);
-            normalAttributes.setInteriorMaterial(Material.WHITE);
-            normalAttributes.setInteriorOpacity(1);
-            pgon.setAttributes(normalAttributes);
-            pgon.setHighlightAttributes(highlightAttributes);
-            float[] texCoords = new float[] {0, 0, 1, 0, 1, 1, 0, 1, 0, 0};
-            pgon.setTextureImageSource("images/32x32-icon-nasa.png", texCoords, 5);
-            layer.addRenderable(pgon);
+//            ArrayList<Position> pathLocations = new ArrayList<Position>();
+//            pathLocations.add(Position.fromDegrees(28, -110, 5e4));
+//            pathLocations.add(Position.fromDegrees(35, -108, 5e4));
+//            pathLocations.add(Position.fromDegrees(35, -111, 5e4));
+//            pathLocations.add(Position.fromDegrees(28, -111, 5e4));
+//            pathLocations.add(Position.fromDegrees(28, -110, 5e4));
+//            pgon = new Polygon(pathLocations);
+//            pgon.setValue(AVKey.DISPLAY_NAME, "Has an image");
+//            normalAttributes = new BasicShapeAttributes(normalAttributes);
+//            normalAttributes.setDrawInterior(true);
+//            normalAttributes.setInteriorMaterial(Material.WHITE);
+//            normalAttributes.setInteriorOpacity(1);
+//            pgon.setAttributes(normalAttributes);
+//            pgon.setHighlightAttributes(highlightAttributes);
+//            float[] texCoords = new float[] {0, 0, 1, 0, 1, 1, 0, 1, 0, 0};
+//            pgon.setTextureImageSource("images/32x32-icon-nasa.png", texCoords, 5);
+//            layer.addRenderable(pgon);
 
-            pathLocations.clear();
-            pathLocations.add(Position.fromDegrees(28, -170, 29e4));
-            pathLocations.add(Position.fromDegrees(35, -174, 29e4));
-            pathLocations.add(Position.fromDegrees(35, 174, 29e4));
-            pathLocations.add(Position.fromDegrees(28, 170, 29e4));
-            pathLocations.add(Position.fromDegrees(28, -170, 29e4));
-            pgon = new Polygon(pathLocations);
-            pgon.setValue(AVKey.DISPLAY_NAME, "Spans dateline\nRotated -45\u00b0");
-            normalAttributes = new BasicShapeAttributes(normalAttributes);
-            normalAttributes.setDrawInterior(true);
-            pgon.setAttributes(normalAttributes);
-            pgon.setHighlightAttributes(highlightAttributes);
-            pgon.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-            pgon.setRotation(-45d);
-            layer.addRenderable(pgon);
-
-            // Polygon over the north pole
-            pathLocations.clear();
-            pathLocations.add(Position.fromDegrees(80, 0, 100e3));
-            pathLocations.add(Position.fromDegrees(80, 90, 100e3));
-            pathLocations.add(Position.fromDegrees(80, 180, 100e3));
-            pathLocations.add(Position.fromDegrees(80, -90, 100e3));
-            pathLocations.add(Position.fromDegrees(80, 0, 100e3));
-            pgon = new Polygon(pathLocations);
-            pgon.setValue(AVKey.DISPLAY_NAME, "Surrounds the north pole");
-            normalAttributes = new BasicShapeAttributes(normalAttributes);
-            normalAttributes.setDrawInterior(true);
-            normalAttributes.setInteriorMaterial(Material.RED);
-            pgon.setAttributes(normalAttributes);
-            pgon.setHighlightAttributes(highlightAttributes);
-            pgon.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-            layer.addRenderable(pgon);
-
-            List<Marker> markers = new ArrayList<Marker>(1);
-            markers.add(new BasicMarker(Position.fromDegrees(90, 0), new BasicMarkerAttributes()));
-            MarkerLayer markerLayer = new MarkerLayer();
-            markerLayer.setMarkers(markers);
-            insertBeforeCompass(getWwd(), markerLayer);
+//            pathLocations.clear();
+//            pathLocations.add(Position.fromDegrees(28, -170, 29e4));
+//            pathLocations.add(Position.fromDegrees(35, -174, 29e4));
+//            pathLocations.add(Position.fromDegrees(35, 174, 29e4));
+//            pathLocations.add(Position.fromDegrees(28, 170, 29e4));
+//            pathLocations.add(Position.fromDegrees(28, -170, 29e4));
+//            pgon = new Polygon(pathLocations);
+//            pgon.setValue(AVKey.DISPLAY_NAME, "Spans dateline\nRotated -45\u00b0");
+//            normalAttributes = new BasicShapeAttributes(normalAttributes);
+//            normalAttributes.setDrawInterior(true);
+//            pgon.setAttributes(normalAttributes);
+//            pgon.setHighlightAttributes(highlightAttributes);
+//            pgon.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+//            pgon.setRotation(-45d);
+//            layer.addRenderable(pgon);
+//
+//            // Polygon over the north pole
+//            pathLocations.clear();
+//            pathLocations.add(Position.fromDegrees(80, 0, 100e3));
+//            pathLocations.add(Position.fromDegrees(80, 90, 100e3));
+//            pathLocations.add(Position.fromDegrees(80, 180, 100e3));
+//            pathLocations.add(Position.fromDegrees(80, -90, 100e3));
+//            pathLocations.add(Position.fromDegrees(80, 0, 100e3));
+//            pgon = new Polygon(pathLocations);
+//            pgon.setValue(AVKey.DISPLAY_NAME, "Surrounds the north pole");
+//            normalAttributes = new BasicShapeAttributes(normalAttributes);
+//            normalAttributes.setDrawInterior(true);
+//            normalAttributes.setInteriorMaterial(Material.RED);
+//            pgon.setAttributes(normalAttributes);
+//            pgon.setHighlightAttributes(highlightAttributes);
+//            pgon.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+//            layer.addRenderable(pgon);
+//
+//            List<Marker> markers = new ArrayList<Marker>(1);
+//            markers.add(new BasicMarker(Position.fromDegrees(90, 0), new BasicMarkerAttributes()));
+//            MarkerLayer markerLayer = new MarkerLayer();
+//            markerLayer.setMarkers(markers);
+//            insertBeforeCompass(getWwd(), markerLayer);
 
             // Add the layer to the model.
             insertBeforeCompass(getWwd(), layer);

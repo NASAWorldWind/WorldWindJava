@@ -79,7 +79,7 @@
     <Property name="gov.nasa.worldwind.avkey.ElevationTileCacheSize" value="20000000"/>
     <Property name="gov.nasa.worldwind.avkey.ElevationExtremesLookupCacheSize" value="20000000"/>
     <Property name="gov.nasa.worldwind.avkey.SectorGeometryCacheSize" value="10000000"/>
-    <Property name="gov.nasa.worldwind.avkey.TextureTileCacheSize" value="10000000"/>
+    <Property name="gov.nasa.worldwind.avkey.TextureTileCacheSize" value="500000000"/>
     <Property name="gov.nasa.worldwind.avkey.PlacenameLayerCacheSize" value="4000000"/>
     <Property name="gov.nasa.worldwind.avkey.AirspaceGeometryCacheSize" value="32000000"/>
     <Property name="gov.nasa.worldwind.avkey.VBOUsage" value="true"/>

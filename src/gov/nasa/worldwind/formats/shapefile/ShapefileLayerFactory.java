@@ -89,6 +89,8 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
     protected PointPlacemarkAttributes normalPointAttributes;
     protected PointPlacemarkAttributes highlightPointAttributes;
     protected ShapefileRenderable.AttributeDelegate attributeDelegate;
+    private int renderableIndex=0;
+    private static final int[] showRenderables={1};
 
     /**
      * Indicates the mappings between shapefile attribute names and av-list keys attached to created shapes.
@@ -673,6 +675,18 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
 
     protected void addRenderablesForShapefile(Shapefile shp, RenderableLayer layer)
     {
+//        boolean showRenderable=false;
+//        for (int idx:showRenderables) {
+//            if (idx==this.renderableIndex) {
+//                showRenderable=true;
+//                break;
+//            }
+//        }
+//        this.renderableIndex++;
+//        if (!showRenderable) {
+//            return;
+//        }
+        
         if (Shapefile.isPointType(shp.getShapeType()))
         {
             this.addRenderablesForPoints(shp, layer);
@@ -688,6 +702,10 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
         else if (Shapefile.isPolygonType(shp.getShapeType()))
         {
             this.addRenderablesForPolygons(shp, layer);
+        }
+        else if (Shapefile.isMultiPatchType(shp.getShapeType()))
+        {
+            this.addRenderablesForMultiPatch(shp, layer);
         }
         else
         {
@@ -733,7 +751,14 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
         }
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
+    protected void addRenderablesForMultiPatch(Shapefile shp, RenderableLayer layer)
+    {
+       ShapefileMultiPatch shape = new ShapefileMultiPatch(shp, this.normalShapeAttributes,
+            this.highlightShapeAttributes, this);
+        //layer.addRenderable(shape);
+        layer.addRenderables(shape.getRenderables());
+    }
+
     protected Renderable createPoint(ShapefileRecord record, double latDegrees, double lonDegrees, AVList mappings)
     {
         PointPlacemark placemark = new PointPlacemark(Position.fromDegrees(latDegrees, lonDegrees, 0));

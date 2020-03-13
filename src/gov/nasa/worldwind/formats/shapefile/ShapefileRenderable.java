@@ -246,7 +246,7 @@ public abstract class ShapefileRenderable extends WWObjectImpl
 
     protected void assembleRecords(Shapefile shapefile)
     {
-        this.records = new ArrayList<ShapefileRenderable.Record>();
+        this.records = new ArrayList<>();
 
         while (shapefile.hasNext())
         {
