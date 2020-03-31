@@ -49,15 +49,15 @@ public class Boxes extends ApplicationTemplate
             // ********* sample  Boxes  *******************
 
             // Box with equal axes, ABSOLUTE altitude mode
-            Box box3 = new Box(Position.fromDegrees(40, -120, 80000), 50000, 50000, 50000);
-            box3.setAltitudeMode(WorldWind.ABSOLUTE);
-            box3.setAttributes(attrs);
-            box3.setVisible(true);
-            box3.setValue(AVKey.DISPLAY_NAME, "Box with equal axes, ABSOLUTE altitude mode");
-            layer.addRenderable(box3);
+//            Box box3 = new Box(Position.fromDegrees(40, -120, 80000), 50000, 50000, 50000);
+//            box3.setAltitudeMode(WorldWind.ABSOLUTE);
+//            box3.setAttributes(attrs);
+//            box3.setVisible(true);
+//            box3.setValue(AVKey.DISPLAY_NAME, "Box with equal axes, ABSOLUTE altitude mode");
+//            layer.addRenderable(box3);
 
-            // Box with equal axes, RELATIVE_TO_GROUND
-            Box box4 = new Box(Position.fromDegrees(37.5, -115, 50000), 50000, 50000, 50000);
+            // Box with equal axes, RELATIVE_TO_GROUND 42.3638), Angle.fromDegreesLongitude(-71.0607
+            Box box4 = new Box(Position.fromDegrees(42.3638, -71.0607, 0), 100, 300, 100);
             box4.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
             box4.setAttributes(attrs);
             box4.setVisible(true);
@@ -65,68 +65,70 @@ public class Boxes extends ApplicationTemplate
             layer.addRenderable(box4);
 
             // Box with equal axes, CLAMP_TO_GROUND
-            Box box5 = new Box(Position.fromDegrees(35, -110, 50000), 50000, 50000, 50000);
-            box5.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
-            box5.setAttributes(attrs);
-            box5.setVisible(true);
-            box5.setValue(AVKey.DISPLAY_NAME, "Box with equal axes, CLAMP_TO_GROUND altitude mode");
-            layer.addRenderable(box5);
-
-            // Box with a texture
-            Box box9 = new Box(Position.fromDegrees(0, -90, 600000), 600000, 600000, 600000);
-            box9.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-            box9.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
-            box9.setAttributes(attrs);
-            box9.setVisible(true);
-            box9.setValue(AVKey.DISPLAY_NAME, "Box with a texture");
-            layer.addRenderable(box9);
-
-            // Scaled Box with default orientation
-            Box box = new Box(Position.ZERO, 1000000, 500000, 100000);
-            box.setAltitudeMode(WorldWind.ABSOLUTE);
-            box.setAttributes(attrs);
-            box.setVisible(true);
-            box.setValue(AVKey.DISPLAY_NAME, "Scaled Box with default orientation");
-            layer.addRenderable(box);
-
-            // Scaled Box with a pre-set orientation
-            Box box2 = new Box(Position.fromDegrees(0, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
-            box2.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-            box2.setAttributes(attrs2);
-            box2.setVisible(true);
-            box2.setValue(AVKey.DISPLAY_NAME, "Scaled Box with a pre-set orientation");
-            layer.addRenderable(box2);
-
-            // Scaled Box with a pre-set orientation
-            Box box6 = new Box(Position.fromDegrees(30, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
-            box6.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-            box6.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
-            box6.setAttributes(attrs2);
-            box6.setVisible(true);
-            box6.setValue(AVKey.DISPLAY_NAME, "Scaled Box with a pre-set orientation");
-            layer.addRenderable(box6);
-
-            // Scaled Box with a pre-set orientation
-            Box box7 = new Box(Position.fromDegrees(60, 30, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
-            box7.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-            box7.setAttributes(attrs2);
-            box7.setVisible(true);
-            box7.setValue(AVKey.DISPLAY_NAME, "Scaled Box with a pre-set orientation");
-            layer.addRenderable(box7);
-
-            // Scaled, oriented Box in 3rd "quadrant" (-X, -Y, -Z)
-            Box box8 = new Box(Position.fromDegrees(-45, -180, 750000), 1000000, 500000, 100000,
-                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
-            box8.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-            box8.setAttributes(attrs2);
-            box8.setVisible(true);
-            box8.setValue(AVKey.DISPLAY_NAME, "Scaled, oriented Box in the 3rd 'quadrant' (-X, -Y, -Z)");
-            layer.addRenderable(box8);
+//            Box box5 = new Box(Position.fromDegrees(35, -110, 50000), 50000, 50000, 50000);
+//            box5.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
+//            box5.setAttributes(attrs);
+//            box5.setVisible(true);
+//            box5.setValue(AVKey.DISPLAY_NAME, "Box with equal axes, CLAMP_TO_GROUND altitude mode");
+//            layer.addRenderable(box5);
+//
+//            // Box with a texture
+//            Box box9 = new Box(Position.fromDegrees(0, -90, 600000), 600000, 600000, 600000);
+//            box9.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+//            box9.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
+//            box9.setAttributes(attrs);
+//            box9.setVisible(true);
+//            box9.setValue(AVKey.DISPLAY_NAME, "Box with a texture");
+//            layer.addRenderable(box9);
+//
+//            // Scaled Box with default orientation
+//            Box box = new Box(Position.ZERO, 1000000, 500000, 100000);
+//            box.setAltitudeMode(WorldWind.ABSOLUTE);
+//            box.setAttributes(attrs);
+//            box.setVisible(true);
+//            box.setValue(AVKey.DISPLAY_NAME, "Scaled Box with default orientation");
+//            layer.addRenderable(box);
+//
+//            // Scaled Box with a pre-set orientation
+//            Box box2 = new Box(Position.fromDegrees(0, 30, 750000), 1000000, 500000, 100000,
+//                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+//            box2.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+//            box2.setAttributes(attrs2);
+//            box2.setVisible(true);
+//            box2.setValue(AVKey.DISPLAY_NAME, "Scaled Box with a pre-set orientation");
+//            layer.addRenderable(box2);
+//
+//            // Scaled Box with a pre-set orientation
+//            Box box6 = new Box(Position.fromDegrees(30, 30, 750000), 1000000, 500000, 100000,
+//                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+//            box6.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+//            box6.setImageSources("gov/nasa/worldwindx/examples/images/500px-Checkerboard_pattern.png");
+//            box6.setAttributes(attrs2);
+//            box6.setVisible(true);
+//            box6.setValue(AVKey.DISPLAY_NAME, "Scaled Box with a pre-set orientation");
+//            layer.addRenderable(box6);
+//
+//            // Scaled Box with a pre-set orientation
+//            Box box7 = new Box(Position.fromDegrees(60, 30, 750000), 1000000, 500000, 100000,
+//                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+//            box7.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+//            box7.setAttributes(attrs2);
+//            box7.setVisible(true);
+//            box7.setValue(AVKey.DISPLAY_NAME, "Scaled Box with a pre-set orientation");
+//            layer.addRenderable(box7);
+//
+//            // Scaled, oriented Box in 3rd "quadrant" (-X, -Y, -Z)
+//            Box box8 = new Box(Position.fromDegrees(-45, -180, 750000), 1000000, 500000, 100000,
+//                Angle.fromDegrees(90), Angle.fromDegrees(45), Angle.fromDegrees(30));
+//            box8.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+//            box8.setAttributes(attrs2);
+//            box8.setVisible(true);
+//            box8.setValue(AVKey.DISPLAY_NAME, "Scaled, oriented Box in the 3rd 'quadrant' (-X, -Y, -Z)");
+//            layer.addRenderable(box8);
 
             // Add the layer to the model.
+            Position eyePos = new Position(Angle.fromDegreesLatitude(42.3638), Angle.fromDegreesLongitude(-71.0607), 3000.0); // Boston
+            this.getWwd().getView().setEyePosition(eyePos);
             insertBeforeCompass(getWwd(), layer);
         }
     }

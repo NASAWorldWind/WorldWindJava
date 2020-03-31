@@ -6,6 +6,8 @@
 package gov.nasa.worldwind.ogc.collada;
 
 import gov.nasa.worldwind.util.Logging;
+import gov.nasa.worldwind.render.meshes.AbstractGeometry;
+import gov.nasa.worldwind.ogc.collada.impl.ColladaMeshShape;
 
 import java.nio.FloatBuffer;
 import java.util.*;
@@ -16,7 +18,7 @@ import java.util.*;
  * @author pabercrombie
  * @version $Id: ColladaAbstractGeometry.java 618 2012-06-01 17:35:11Z pabercrombie $
  */
-public abstract class ColladaAbstractGeometry extends ColladaAbstractObject {
+public abstract class ColladaAbstractGeometry extends ColladaAbstractObject implements AbstractGeometry {
 
     /**
      * Default semantic that identifies texture coordinates. Used the a file does not specify the semantic using a
@@ -25,18 +27,11 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject {
     public static final String DEFAULT_TEX_COORD_SEMANTIC = "TEXCOORD";
 
     /**
-     * Number of coordinates per vertex.
-     */
-    public static final int COORDS_PER_VERTEX = 3;
-    /**
-     * Number of texture coordinates per vertex.
-     */
-    public static final int TEX_COORDS_PER_VERTEX = 2;
-
-    /**
      * Inputs for the geometry. Inputs provide the geometry with vertices, texture coordinates, etc.
      */
-    protected List<ColladaInput> inputs = new ArrayList<ColladaInput>();
+    protected List<ColladaInput> inputs = new ArrayList<>();
+
+    protected ColladaMeshShape parentMesh;
 
     /**
      * Indicates the number of vertices per shape in the geometry.
@@ -86,6 +81,7 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject {
      *
      * @param buffer Buffer to receive coordinates.
      */
+    @Override
     public void getVertices(FloatBuffer buffer) {
         this.getFloatFromAccessor(buffer, this.getVertexAccessor(), "VERTEX", COORDS_PER_VERTEX);
     }
@@ -95,6 +91,7 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject {
      *
      * @param buffer Buffer to receive coordinates.
      */
+    @Override
     public void getNormals(FloatBuffer buffer) {
         this.getFloatFromAccessor(buffer, this.getNormalAccessor(), "NORMAL", COORDS_PER_VERTEX);
     }
@@ -112,6 +109,24 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject {
         }
 
         this.getFloatFromAccessor(buffer, this.getTexCoordAccessor(semantic), semantic, TEX_COORDS_PER_VERTEX);
+    }
+
+    /**
+     * Retrieves the texture coordinates of vertices in this geometry.
+     *
+     * @param buffer Buffer to receive coordinates.
+      */
+    @Override
+    public void getTextureCoordinates(FloatBuffer buffer) {
+        String semantic = null;
+        if (this.parentMesh != null) {
+            semantic = this.parentMesh.getTexCoordSemantic(this);
+        }
+        getTextureCoordinates(buffer, semantic);
+    }
+
+    public void setParentMesh(ColladaMeshShape parent) {
+        this.parentMesh = parent;
     }
 
     /**
@@ -283,5 +298,10 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject {
         } else {
             super.setField(keyName, value);
         }
+    }
+    
+    @Override
+    public boolean hasNormals() {
+        return this.getNormalAccessor() != null;
     }
 }

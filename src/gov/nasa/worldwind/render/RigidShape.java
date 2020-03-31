@@ -1148,6 +1148,9 @@ public abstract class RigidShape extends AbstractShape
         Position refPosition = dc.getGlobe().computePositionFromPoint(this.computeReferencePoint(dc));
         matrix = matrix.multiply(dc.getGlobe().computeSurfaceOrientationAtPosition(refPosition));
 
+        System.out.println(this.computeReferencePoint(dc));
+        System.out.println(refPosition);
+        System.out.println(matrix);
         // now apply the user-specified heading/tilt/roll
         // order corresponds to KML rotations (YXZ, positive clockwise)
 
@@ -1169,6 +1172,8 @@ public abstract class RigidShape extends AbstractShape
         matrix = matrix.multiply(Matrix.fromScale(this.getEastWestRadius(),
             this.getNorthSouthRadius(), this.getVerticalRadius()));
 
+        System.out.println("**");
+        System.out.println(matrix);
         return matrix;
     }
 

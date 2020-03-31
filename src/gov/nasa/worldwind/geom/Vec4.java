@@ -58,6 +58,10 @@ public class Vec4
         this.z = z;
         this.w = w;
     }
+    
+    public Vec4(Vec4 that) {
+        this(that.x,that.y,that.z,that.w);
+    }
 
     public final boolean equals(Object obj)
     {

@@ -916,6 +916,7 @@ public abstract class AbstractShape extends WWObjectImpl
         }
     }
 
+    @Override
     public void render(DrawContext dc)
     {
         // This render method is called three times during frame generation. It's first called as a {@link Renderable}
@@ -961,6 +962,7 @@ public abstract class AbstractShape extends WWObjectImpl
 
         if (this.getExtent() != null)
         {
+            // System.out.println(this.getExtent());
             if (!this.intersectsFrustum(dc))
                 return;
 

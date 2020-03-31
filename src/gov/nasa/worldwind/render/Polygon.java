@@ -995,8 +995,8 @@ public class Polygon extends AbstractShape
                 boundaryVertices[i] = this.computePoint(terrain, boundary.positions.get(i)).subtract3(refPoint);
             else
                 boundaryVertices[i] = this.computePoint(terrain, boundary.positions.get(i)).transformBy4(
-                    rotationMatrix).subtract3(refPoint);
-        }
+                        rotationMatrix).subtract3(refPoint);
+            }
 
         boundary.vertices = boundaryVertices;
     }
@@ -1145,6 +1145,7 @@ public class Polygon extends AbstractShape
         for (int i = 0; i < nVerts; i++)
         {
             nBuf.put((float) (avgX / length)).put((float) (avgY / length)).put((float) (avgZ / length));
+            System.out.println((avgX / length)+","+(avgY / length)+","+(avgZ / length));
         }
 
         return nBuf;
@@ -1289,6 +1290,14 @@ public class Polygon extends AbstractShape
             }
         }
 
+//        IntBuffer dump=Buffers.newDirectIntBuffer(shapeData.interiorIndicesBuffer.capacity());
+//        shapeData.interiorIndicesBuffer.rewind();
+//        dump.put(shapeData.interiorIndicesBuffer);
+//        dump.rewind();
+//        for (int i=0; i<dump.capacity(); i++) {
+//            System.out.print(dump.get(i)+",");
+//        }
+//        System.out.println();
         shapeData.interiorIndicesBuffer.flip();
         shapeData.refillIndexBuffer = false;
         shapeData.refillIndexVBO = true;
