@@ -29,7 +29,9 @@ import java.io.InputStream;
  *
  * @author dcollins
  * @version $Id: WebBrowserBalloons.java 2109 2014-06-30 16:52:38Z tgaskins $
+ * @deprecated 
  */
+@Deprecated
 public class WebBrowserBalloons extends ApplicationTemplate
 {
     protected static final String BROWSER_BALLOON_CONTENT_PATH

@@ -19,7 +19,9 @@ import java.beans.PropertyChangeEvent;
  *
  * @author pabercrombie
  * @version $Id: AbstractWebView.java 1171 2013-02-11 21:45:02Z dcollins $
+ * @deprecated 
  */
+@Deprecated
 public abstract class AbstractWebView extends WWObjectImpl implements WebView, Disposable
 {
     /** The size of the WebView frame in pixels. Initially null, indicating the default size is used. */

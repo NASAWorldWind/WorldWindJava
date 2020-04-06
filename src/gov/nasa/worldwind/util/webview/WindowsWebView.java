@@ -32,7 +32,9 @@ import java.util.logging.Level;
  *
  * @author pabercrombie
  * @version $Id: WindowsWebView.java 1171 2013-02-11 21:45:02Z dcollins $
+ * @deprecated 
  */
+@Deprecated
 public class WindowsWebView extends AbstractWebView
 {
     /** Lock to protect creation of the web view message loop thread. */

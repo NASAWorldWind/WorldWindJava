@@ -65,7 +65,9 @@ import java.beans.PropertyChangeListener;
  *
  * @author pabercrombie
  * @version $Id: WindowsWebViewJNI.java 1171 2013-02-11 21:45:02Z dcollins $
+ * @deprecated 
  */
+@Deprecated
 public class WindowsWebViewJNI
 {
     static

@@ -226,6 +226,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void selected(SelectEvent event)
     {
         if (event == null || event.isConsumed()
@@ -344,6 +345,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
      * @param browserBalloon Balloon involved in action.
      * @param action         Identifier for the action that occurred.
      */
+    @SuppressWarnings("deprecation")
     protected void onBalloonAction(AbstractBrowserBalloon browserBalloon, String action)
     {
         if (AVKey.CLOSE.equals(action))
@@ -797,6 +799,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
      *
      * @return New balloon. May return null if the feature should not have a balloon.
      */
+    @SuppressWarnings("deprecation")
     protected Balloon createBalloon(KMLAbstractFeature feature)
     {
         KMLBalloonStyle balloonStyle = (KMLBalloonStyle) feature.getSubStyle(new KMLBalloonStyle(null),

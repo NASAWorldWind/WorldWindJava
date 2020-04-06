@@ -40,7 +40,9 @@ import java.net.URL;
  *
  * @author dcollins
  * @version $Id: WebView.java 1171 2013-02-11 21:45:02Z dcollins $
+ * @deprecated 
  */
+@Deprecated
 public interface WebView extends AVList, Disposable
 {
     /**

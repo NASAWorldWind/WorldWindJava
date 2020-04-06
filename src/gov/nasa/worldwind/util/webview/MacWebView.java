@@ -20,7 +20,9 @@ import java.util.logging.Level;
 /**
  * @author dcollins
  * @version $Id: MacWebView.java 1171 2013-02-11 21:45:02Z dcollins $
+ * @deprecated 
  */
+@Deprecated
 public class MacWebView extends AbstractWebView
 {
     /** The address of the native WebViewWindow object. Initialized during construction. */
