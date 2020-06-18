@@ -140,8 +140,8 @@ L.3) The GlueGen source tree contains CGRAM http://www.antlr.org/grammar/cgram/,
 A.1) The GlueGen source tree contains code from The Apache Software Foundation
      which is covered by the Apache License Version 2.0
 
-   Apache Harmony - Open Source Java SE
-   =====================================
+A.1.1) Apache Harmony - Open Source Java SE
+   ===============================================
 
    <http://harmony.apache.org/>
 
@@ -156,6 +156,25 @@ A.1) The GlueGen source tree contains code from The Apache Software Foundation
    Files:
     - src/java/com/jogamp/common/net/Uri.java 
       (derived from java.net.URI.Helper and heavily modified)
+
+A.1.2) Apache Avro - A data serialization system.
+   ===============================================
+
+   <https://avro.apache.org/>
+
+   Copyright 2010-2019 The Apache Software Foundation
+
+   Apache License Version 2.0, January 2004
+   http://www.apache.org/licenses/LICENSE-2.0
+   Or within this repository: doc/licenses/Apache.LICENSE-2.0
+
+   Files:
+    - src/java/com/jogamp/common/util/WeakIdentityHashMap.java
+
+      <https://github.com/apache/avro/blob/master/lang/java/avro/src/main/java/org/apache/avro/util/WeakIdentityHashMap.java>
+      Taken as commit 70260919426f89825ca148f5ee815f3b2cf4764d
+      and using our JogAmp 'New BSD 2-Clause License' since migration.
+
 
 A.2) The GlueGen source tree contains code from Ben Mankin, a.k.a 'Shevek',
      which is covered by the Apache License Version 2.0
