@@ -8,15 +8,15 @@
 <!--Blue Marble Next generation 2004 + Bathymetry imagery, using the default month (May).-->
 <!--$Id: BMNGWMSLayer2.xml 1382 2013-05-31 00:37:46Z tgaskins $-->
 <Layer version="1" layerType="TiledImageLayer">
-    <DisplayName>Blue Marble May 2004</DisplayName>
+    <DisplayName>Moon Imagery</DisplayName>
     <Service serviceName="OGC:WMS" version="1.3">
-        <GetCapabilitiesURL>https://worldwind25.arc.nasa.gov/wms</GetCapabilitiesURL>
-        <GetMapURL>https://worldwind25.arc.nasa.gov/wms</GetMapURL>
-        <LayerNames>BlueMarble-200405</LayerNames>
+        <GetCapabilitiesURL>https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/earth/moon_simp_cyl.map</GetCapabilitiesURL>
+        <GetMapURL>https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/earth/moon_simp_cyl.map</GetMapURL>
+        <LayerNames>LOLA_color</LayerNames>
     </Service>
     <RetrievePropertiesFromService>true</RetrievePropertiesFromService>
     <!-- day month year hours:minutes:seconds timezone -->
-    <DataCacheName>Earth/BMNGWMS2/BMNG(Shaded + Bathymetry) Tiled - Version 1.1 - 5.2004</DataCacheName>
+    <DataCacheName>Earth/BMNGWMS2/Moon_LOLA</DataCacheName> 
     <ImageFormat>image/jpeg</ImageFormat>
     <AvailableImageFormats>
         <ImageFormat>image/jpeg</ImageFormat>
