@@ -2,7 +2,7 @@
 
 # WorldWind Java
 
-## NASA Releases New WorldWind Versions
+## New versions of WorldWind released
 Web WorldWind 0.10.0 and WorldWind Java 2.2.0 are now available on GitHub. The new version of Web WorldWind addresses potential vulnerabilities in the code and underlying packages.  The new version of WorldWind Java focuses on upgrading to Java 11 and JOGL 2.4 as well as a switch to Apache 2.0 license.  WorldWind's API remains largely unchanged in this release and we are committed to maintaining a consistent API in future releases.
 More information on the release can be found at these links: [Web WorldWind 0.10.0](https://github.com/NASAWorldWind/WebWorldWind/releases) and [WorldWind Java 2.2.0](https://github.com/NASAWorldWind/WorldWindJava/releases).
 
