@@ -1,7 +1,29 @@
 #
-# Copyright (C) 2013 United States Government as represented by the Administrator of the
-# National Aeronautics and Space Administration.
-# All Rights Reserved.
+# Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All rights reserved.
+# 
+# The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+# Version 2.0 (the "License"); you may not use this file except in compliance
+# with the License. You may obtain a copy of the License at
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software distributed
+# under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+# CONDITIONS OF ANY KIND, either express or implied. See the License for the
+# specific language governing permissions and limitations under the License.
+# 
+# NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+# software:
+# 
+#     Jackson Parser – Licensed under Apache 2.0
+#     GDAL – Licensed under MIT
+#     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+#     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+# 
+# A complete listing of 3rd Party software notices and licenses included in
+# NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+# notices and licenses PDF found in code directory.
 #
 
 # $Id: README_DEVELOPER.txt 1934 2014-04-15 19:24:07Z dcollins $
@@ -16,8 +38,8 @@ The JOGL library provides WorldWind Java with (1) a Java binding to the OpenGL A
 with Java's AWT and Swing windowing toolkits:
 http://jogamp.org/jogl/www/
 
-WorldWind Java uses JOGL v2.1.5, released on 11 March 2014 and downloaded from:
-http://jogamp.org/deployment/v2.1.5/archive/jogamp-all-platforms.7z
+WorldWind Java uses JOGL v2.4, released on March 7th, 2020 and downloaded from:
+https://jogamp.org/deployment/v2.4.0-rc-20200307/archive/jogamp-all-platforms.7z
 
 The JOGL library compiled JAR files and README files are checked into the WorldWind Java source, distributed with all
 WorldWind Java builds and included in the WorldWind Java Web Start deployment. This is necessary in order ensure
@@ -50,21 +72,7 @@ jogl-all.jar
 jogl.LICENSE.txt
 jogl.README.txt
 
-3) Remove the Codebase manifest attribute from all JOGL JAR files. This step enables the JOGL JAR files to be
-deployed via the WorldWind Java Web Start site:
-- Run the ANT task jogl.jarfiles.unpack. This task extracts the contents of all 12 GlueGen and JOGL JAR files into
-individual folders under jogl-jarfiles.
-- For each JAR file folder under jogl-jarfiles open the file META-INF/MANIFEST.MF, delete the line
-'Codebase: *.jogamp.org', then save the file.
-- Run the ANT task jogl.jarfiles.pack. This task builds new copies of all 12 GlueGen and JOGL JAR files under
-jogl-jarfiles, using the same JAR settings as the JOGL build script.
-- Copy the new 12 GlueGen and JOGL JAR files from jogl-jarfiles to the project root, overwriting the existing GlueGen
-and JOGL JAR files.
-- Delete the folder jogl-jarfiles.
-
-4) Update the JOGL version in the following files:
-webstart/gluegen-rt.jnlp
-webstart/jogl-all.jnlp
+3) Update the JOGL version in the following files:
 README.txt
 README_DEVELOPER.txt (this document)
-build.xml (JOGL link in javadocs target)
+release-build.xml (JOGL link in javadocs target)

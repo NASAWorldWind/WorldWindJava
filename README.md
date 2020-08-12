@@ -15,8 +15,7 @@ worldwind-info@lists.nasa.gov
 3D virtual globe API for desktop Java, developed by NASA. Provides a geographic context with high-resolution terrain, for visualizing geographic or geo-located information in 3D and 2D. Developers can customize the globe's terrain and imagery. Provides a collection of shapes for displaying and interacting with geographic data and representing a range of geometric objects.
 
 - [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov) has setup instructions, developers guides, API documentation and more
-- [WorldWind Forum](https://forum.worldwindcentral.com) provides help from the WorldWind community
-- [IntelliJ IDEA](https://www.jetbrains.com/idea) is used by the NASA WorldWind development team
+- [Apache NetBeans](https://netbeans.apache.org) is used by the NASA WorldWind development team
 
 ## Releases and Roadmap
 
@@ -77,31 +76,28 @@ binary JAR files as follows:
 
 ## License
 
-    NASA WORLDWIND
+Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+Administrator of the National Aeronautics and Space Administration.
+All rights reserved.
 
-    Copyright (C) 2001 United States Government
-    as represented by the Administrator of the
-    National Aeronautics and Space Administration.
-    All Rights Reserved.
+The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+Version 2.0 (the "License"); you may not use this file except in compliance
+with the License. You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
 
-    NASA OPEN SOURCE AGREEMENT VERSION 1.3
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied. See the License for the
+specific language governing permissions and limitations under the License.
 
-    This open source agreement ("agreement") defines the rights of use, reproduction,
-    distribution, modification and redistribution of certain computer software originally
-    released by the United States Government as represented by the Government Agency
-    listed below ("Government Agency"). The United States Government, as represented by
-    Government Agency, is an intended third-party beneficiary of all subsequent
-    distributions or redistributions of the subject software. Anyone who uses, reproduces,
-    distributes, modifies or redistributes the subject software, as defined herein, or any
-    part thereof, is, by that action, accepting in full the responsibilities and obligations
-    contained in this agreement.
+NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+software:
 
-    Government Agency: National Aeronautics and Space Administration (NASA)
-    Government Agency Original Software Designation: ARC-15166-1
-    Government Agency Original Software Title: NASA WorldWind
-    User Registration Requested. Please send email with your contact information to Patrick.Hogan@nasa.gov
-    Government Agency Point of Contact for Original Software: Patrick.Hogan@nasa.gov
+    Jackson Parser – Licensed under Apache 2.0
+    GDAL – Licensed under MIT
+    JOGL – Licensed under  Berkeley Software Distribution (BSD)
+    Gluegen – Licensed under Berkeley Software Distribution (BSD)
 
-    You may obtain a full copy of the license at:
-
-        https://worldwind.arc.nasa.gov/LICENSE.html
+A complete listing of 3rd Party software notices and licenses included in
+NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+notices and licenses PDF found in code directory.
