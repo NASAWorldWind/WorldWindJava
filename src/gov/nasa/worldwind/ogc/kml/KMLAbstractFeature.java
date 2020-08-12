@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.ogc.kml;
@@ -20,7 +42,7 @@ import java.util.*;
 
 /**
  * Represents the KML <i>Feature</i> element and provides access to its contents.
- * <p/>
+ * <p>
  * <code>KMLAbstractFeature</code> implements the <code>KMLRenderable</code> interface, but does not actually render
  * anything. Subclasses should override the methods <code>{@link #doPreRender(gov.nasa.worldwind.ogc.kml.impl.KMLTraversalContext,
  * gov.nasa.worldwind.render.DrawContext)}</code> and <code>{@link #doRender(gov.nasa.worldwind.ogc.kml.impl.KMLTraversalContext,
@@ -224,7 +246,7 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
 
     /**
      * Set the balloon associated with this feature.
-     * <p/>
+     * <p>
      * Note: Balloon is not a field in the KML Feature element. It's a direct field of this class and enables the client
      * to associate a balloon with the feature.
      *
@@ -294,14 +316,13 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
     /**
      * Indicates whether this <code>KMLAbstractFeature</code> is active and should be rendered on the specified
      * <code>DrawContext</code>. This returns <code>true</code> if the following conditions are all <code>true</code>:
-     * <p/>
      * <ul> <li>This feature's <code>visibility</code> is unspecified (<code>null</code>) or is set to
      * <code>true</code>.</li> <li>This feature as no Region and does not inherit a Region from an ancestor, or its
      * Region is active for the specified <code>DrawContext</code>.</li> </ul>
-     * <p/>
+     * <p>
      * If this feature has no Region, this inherits the Region of its nearest ancestor by using the Region on the top of
      * the KML traversal context's region stack (if any). If there is no ancestor Region this feature is assumed to be
-     * the <code>DrawContext's</cod> view and is rendered according to its <code>visibility</code> flag. A Region is
+     * the <code>DrawContext's</code> view and is rendered according to its <code>visibility</code> flag. A Region is
      * considered active if it is visible, and the <code>DrawContext</code> meets the Region's level of detail
      * criteria.
      *
@@ -364,7 +385,7 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
      * Obtains the effective values for a specified sub-style (<i>IconStyle</i>, <i>ListStyle</i>, etc.) and state
      * (<i>normal</i> or <i>highlight</i>). The returned style is the result of merging values from this feature
      * instance's style selectors and its styleUrl, if any, with precedence given to style selectors.
-     * <p/>
+     * <p>
      * A remote <i>styleUrl</i> that has not yet been resolved is not included in the result. In this case the returned
      * sub-style is marked with the value {@link gov.nasa.worldwind.avlist.AVKey#UNRESOLVED}. The same is true when a
      * StyleMap style selector contains a reference to an external Style and that reference has not been resolved.

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -9,7 +31,7 @@ import gov.nasa.worldwind.Exportable;
 import gov.nasa.worldwind.util.RestorableSupport;
 
 /**
- * Holds common attributes for World Wind shapes such as {@link gov.nasa.worldwind.render.Path}, {@link
+ * Holds common attributes for WorldWind shapes such as {@link gov.nasa.worldwind.render.Path}, {@link
  * gov.nasa.worldwind.render.Polygon}, and {@link gov.nasa.worldwind.render.SurfaceShape}. Changes made to the
  * attributes are applied to the shape when the <code>WorldWindow</code> renders the next frame. Instances of
  * <code>ShapeAttributes</code> may be shared by many shapes, thereby reducing the memory normally required to store
@@ -257,7 +279,7 @@ public interface ShapeAttributes extends Exportable
      * used. For example, if <code>factor</code> is 3, each bit is repeated 3 times before using the next bit. The
      * specified <code>factor</code> must be either zero or an integer greater than zero. The <code>factor</code> may be
      * limited by an implementation-defined maximum during rendering. The maximum stipple factor is typically 256.
-     * <p/>
+     * <p>
      * To disable outline stippling, either specify a stipple factor of 0, or specify a stipple pattern of all 1 bits:
      * <code>0xFFFF</code>.
      *
@@ -285,7 +307,7 @@ public interface ShapeAttributes extends Exportable
      * the bit pattern repeats after reaching n*16 pixels, where n is the stipple factor. Each bit is repeated n-times
      * according to the outline stipple factor. For example, if the outline stipple factor is 3, each bit is repeated 3
      * times before using the next bit.
-     * <p/>
+     * <p>
      * To disable outline stippling, either specify a stipple factor of 0, or specify a stipple pattern of all 1 bits:
      * <code>0xFFFF</code>.
      *

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.symbology;
@@ -24,11 +46,12 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Demonstrates how to create and display World Wind tactical graphics. See the <a title="Symbology Usage Guide"
- * href="http://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology Usage Guide</a> for more
- * information on symbology support in World Wind.
- * <p/>
- * See the {@link TacticalSymbols} for a detailed example of using World Wind tactical symbols in an application.
+ * Demonstrates how to create and display WorldWind tactical graphics. See the 
+ * <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
+ * for more
+ * information on symbology support in WorldWind.
+ * <p>
+ * See the {@link TacticalSymbols} for a detailed example of using WorldWind tactical symbols in an application.
  *
  * @author pabercrombie
  * @version $Id: TacticalGraphics.java 2109 2014-06-30 16:52:38Z tgaskins $
@@ -84,7 +107,7 @@ public class TacticalGraphics extends ApplicationTemplate
 
             this.addGraphicControls();
 
-            // Size the World Window to provide enough screen space for the graphics, and center the World Window
+            // Size the WorldWindow to provide enough screen space for the graphics, and center the WorldWindow
             // on the screen.
             Dimension size = new Dimension(1800, 1000);
             this.setPreferredSize(size);
@@ -945,7 +968,7 @@ public class TacticalGraphics extends ApplicationTemplate
                     sharedPointAttrs.setInteriorOpacity(opacity);
                     sharedPointAttrs.setOutlineOpacity(opacity);
 
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             box.add(javax.swing.Box.createVerticalStrut(10));
@@ -966,7 +989,7 @@ public class TacticalGraphics extends ApplicationTemplate
                     this.setShowModifiers(lineLayer, tf);
                     this.setShowModifiers(areaLayer, tf);
 
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
 
                 protected void setShowModifiers(RenderableLayer layer, boolean show)
@@ -994,7 +1017,7 @@ public class TacticalGraphics extends ApplicationTemplate
                     this.setShowModifiers(lineLayer, tf);
                     this.setShowModifiers(areaLayer, tf);
 
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
 
                 protected void setShowModifiers(RenderableLayer layer, boolean show)
@@ -1022,7 +1045,7 @@ public class TacticalGraphics extends ApplicationTemplate
                     this.setShowHostile(lineLayer, tf);
                     this.setShowHostile(areaLayer, tf);
 
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
 
                 protected void setShowHostile(RenderableLayer layer, boolean show)
@@ -1048,6 +1071,6 @@ public class TacticalGraphics extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -117.44);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 155000);
 
-        ApplicationTemplate.start("World Wind Tactical Graphics", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Tactical Graphics", AppFrame.class);
     }
 }

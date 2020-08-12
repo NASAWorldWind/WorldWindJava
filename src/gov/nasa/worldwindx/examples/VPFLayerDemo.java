@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples;
 
@@ -17,13 +39,13 @@ import java.awt.event.*;
 import java.io.File;
 
 /**
- * Illustrates how to import data from a Vector Product Format (VPF) database into World Wind. This uses <code>{@link
+ * Illustrates how to import data from a Vector Product Format (VPF) database into WorldWind. This uses <code>{@link
  * VPFLayer}</code> to display an imported VPF database, and uses <code>{@link VPFCoveragePanel}</code> to enable the
  * user to choose which shapes from the VPF database to display.
- * <p/>
+ * <p>
  * To display VPF shapes with the appropriate color, style, and icon, applications must include the JAR file
  * <code>vpf-symbols.jar</code> in the Java class-path. If this JAR file is not in the Java class-path, VPFLayer outputs
- * the following message in the World Wind log: <code>WARNING: GeoSym style support is disabled</code>. In this case,
+ * the following message in the WorldWind log: <code>WARNING: GeoSym style support is disabled</code>. In this case,
  * VPF shapes are displayed as gray outlines, and icons are displayed as a gray question mark.
  *
  * @author dcollins
@@ -120,6 +142,6 @@ public class VPFLayerDemo extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        start("World Wind VPF Shapes", AppFrame.class);
+        start("WorldWind VPF Shapes", AppFrame.class);
     }
 }

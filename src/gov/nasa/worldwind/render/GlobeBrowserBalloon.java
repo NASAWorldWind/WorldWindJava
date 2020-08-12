@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -11,7 +33,7 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.pick.PickedObject;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.awt.*;
 
 /**
@@ -21,7 +43,9 @@ import java.awt.*;
  * @author pabercrombie
  * @version $Id: GlobeBrowserBalloon.java 2272 2014-08-25 23:24:45Z tgaskins $
  * @see gov.nasa.worldwind.render.AbstractBrowserBalloon
+ * @deprecated 
  */
+@Deprecated
 public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements GlobeBalloon
 {
     protected class OrderedGlobeBrowserBalloon extends OrderedBrowserBalloon
@@ -109,7 +133,6 @@ public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements Globe
     /**
      * Computes and stores this balloon's model and screen coordinates. This assigns balloon coordinate properties as
      * follows:
-     * <p/>
      * <ul> <li><code>placePoint</code> - this balloon's model-coordinate point, according to its altitude mode.</li>
      * <li><code>screenPlacePoint</code> - screen-space projection of the <code>placePoint</code>.</li>
      * <li><code>screenOffset</code> - the balloon frame's screen-coordinate offset from this balloon's
@@ -117,7 +140,7 @@ public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements Globe
      * rectangle.</li> <li><code>screenExtent</code> - this balloon's screen-coordinate bounding rectangle.</li>
      * <li><code>screenPickExtent</code> - this balloon's screen-coordinate bounding rectangle, including area covered
      * by the balloon's pickable outline.</li> <li><code>webViewRect</code> - the WebView's screen-coordinate content
-     * frame.</li> <li><code>eyeDistance</code> - always 0.</li>
+     * frame.</li> <li><code>eyeDistance</code> - always 0.</li></ul>
      *
      * @param dc the current draw context.
      */
@@ -212,7 +235,7 @@ public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements Globe
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to return <code>false</code> if the balloon's position is either behind the <code>View's</code> near
      * clipping plane or in front of the <code>View's</code> far clipping plane. Otherwise this delegates to the super
      * class' behavior.
@@ -239,7 +262,7 @@ public class GlobeBrowserBalloon extends AbstractBrowserBalloon implements Globe
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to use this balloon's position as the picked object's position.
      */
     @Override

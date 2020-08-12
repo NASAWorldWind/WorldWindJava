@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.layers;
 
@@ -20,7 +42,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Displays a collection of local images on the globe.
- * <p/>
+ * <p>
  * Note: The view input handlers detect surface images rather than the terrain as the top picked object in {@link
  * gov.nasa.worldwind.event.SelectEvent}s and will not respond to the user's attempts at navigation when the cursor is
  * over the image. If this is not the desired behavior, disable picking for the layer containing the surface image.
@@ -45,14 +67,14 @@ public class SurfaceImageLayer extends RenderableLayer
     }
 
     /**
-     * Add an image to the collection, reprojecting it to geographic (latitude & longitude) coordinates if necessary.
+     * Add an image to the collection, reprojecting it to geographic (latitude and longitude) coordinates if necessary.
      * The image's location is determined from metadata files co-located with the image file. The number, names and
      * contents of these files are governed by the type of the specified image. Location metadata must be available.
-     * <p/>
+     * <p>
      * If projection information is available and reprojection of the image's projection type is supported, the image
      * will be reprojected to geographic coordinates. If projection information is not available then it's assumed that
      * the image is already in geographic projection.
-     * <p/>
+     * <p>
      * Only reprojection from UTM is currently provided.
      *
      * @param imagePath the path to the image file.
@@ -183,7 +205,7 @@ public class SurfaceImageLayer extends RenderableLayer
 
     /**
      * Add an image to the collection and specify its coverage. The image is assumed to be in geographic projection
-     * (latitude & longitude).
+     * (latitude and longitude).
      *
      * @param imagePath the path to the image file.
      * @param sector    the geographic location of the image.
@@ -219,7 +241,7 @@ public class SurfaceImageLayer extends RenderableLayer
 
     /**
      * Add a {@link BufferedImage} to the collection at an explicitly specified location. The image is assumed to be in
-     * geographic projection (latitude & longitude).
+     * geographic projection (latitude and longitude).
      *
      * @param name   a unique name to associate with the image so that it can be subsequently referred to without having
      *               to keep a reference to the image itself. Use this name in calls to {@link #removeImage(String)}.
@@ -286,7 +308,7 @@ public class SurfaceImageLayer extends RenderableLayer
 
     /**
      * Add an image to the collection at an explicitly specified location. The image is assumed to be in geographic
-     * projection (latitude & longitude).
+     * projection (latitude and longitude).
      *
      * @param imagePath the path to the image file.
      * @param corners   the geographic location of the image's corners, specified in order of lower-left, lower-right,
@@ -323,7 +345,7 @@ public class SurfaceImageLayer extends RenderableLayer
 
     /**
      * Add a {@link BufferedImage} to the collection at an explicitly specified location. The image is assumed to be in
-     * geographic projection (latitude & longitude).
+     * geographic projection (latitude and longitude).
      *
      * @param name    a unique name to associate with the image so that it can be subsequently referred to without
      *                having to keep a reference to the image itself. Use this name in calls to {@link

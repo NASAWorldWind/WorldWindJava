@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.view.firstperson;
 
@@ -12,30 +34,29 @@ import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.view.*;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 
 /**
  * This is a basic view that implements a yaw-pitch-roll model that can be applied to first-person style view
  * applications (such as flight simulation).
- * <p/>
+ * <p>
  * Note that the pitch angle is defined as normal to the ground plane, not parallel as in most body axis
- * representations.  This is to be consistent with the definition of pitch within WorldWind. Applications will need to
+ * representations. This is to be consistent with the definition of pitch within WorldWind. Applications will need to
  * correct for pitch values by adding 90 degrees when commanding pitch (i.e. to get a horizontal view, enter 90 degrees
- * pitch.  To get straight down, enter 0 degrees).
+ * pitch. To get straight down, enter 0 degrees).
  *
  * @author jym
  * @author M. Duquette
  * @version $Id: BasicFlyView.java 1933 2014-04-14 22:54:19Z dcollins $
  */
-public class BasicFlyView extends BasicView
-{
+public class BasicFlyView extends BasicView {
+
     protected final static double DEFAULT_MIN_ELEVATION = 0;
     protected final static double DEFAULT_MAX_ELEVATION = 4000000;
     protected final static Angle DEFAULT_MIN_PITCH = Angle.ZERO;
     protected final static Angle DEFAULT_MAX_PITCH = Angle.fromDegrees(180);
 
-    public BasicFlyView()
-    {
+    public BasicFlyView() {
         this.viewInputHandler = new FlyViewInputHandler();
 
         this.viewLimits = new FlyViewLimits();
@@ -45,82 +66,63 @@ public class BasicFlyView extends BasicView
         loadConfigurationValues();
     }
 
-    protected void loadConfigurationValues()
-    {
+    protected void loadConfigurationValues() {
         Double initLat = Configuration.getDoubleValue(AVKey.INITIAL_LATITUDE);
         Double initLon = Configuration.getDoubleValue(AVKey.INITIAL_LONGITUDE);
         double initElev = 50000.0;
 
         // Set center latitude and longitude. Do not change center elevation.
         Double initAltitude = Configuration.getDoubleValue(AVKey.INITIAL_ALTITUDE);
-        if (initAltitude != null)
+        if (initAltitude != null) {
             initElev = initAltitude;
-        if (initLat != null && initLon != null)
-        {
+        }
+        if (initLat != null && initLon != null) {
             initElev = ((FlyViewLimits) viewLimits).limitEyeElevation(initElev);
 
             setEyePosition(Position.fromDegrees(initLat, initLon, initElev));
+        } // Set only center latitude. Do not change center longitude or center elevation.
+        else if (initLat != null) {
+            setEyePosition(Position.fromDegrees(initLat, this.eyePosition.getLongitude().degrees, initElev));
+        } // Set only center longitude. Do not center latitude or center elevation.
+        else if (initLon != null) {
+            setEyePosition(Position.fromDegrees(this.eyePosition.getLatitude().degrees, initLon, initElev));
         }
 
-        // Set only center latitude. Do not change center longitude or center elevation.
-        else if (initLat != null)
-            setEyePosition(Position.fromDegrees(initLat, this.eyePosition.getLongitude().degrees, initElev));
-            // Set only center longitude. Do not center latitude or center elevation.
-        else if (initLon != null)
-            setEyePosition(Position.fromDegrees(this.eyePosition.getLatitude().degrees, initLon, initElev));
-
         Double initHeading = Configuration.getDoubleValue(AVKey.INITIAL_HEADING);
-        if (initHeading != null)
+        if (initHeading != null) {
             setHeading(Angle.fromDegrees(initHeading));
+        }
 
         Double initPitch = Configuration.getDoubleValue(AVKey.INITIAL_PITCH);
-        if (initPitch != null)
+        if (initPitch != null) {
             setPitch(Angle.fromDegrees(initPitch));
+        }
 
         Double initFov = Configuration.getDoubleValue(AVKey.FOV);
-        if (initFov != null)
+        if (initFov != null) {
             setFieldOfView(Angle.fromDegrees(initFov));
+        }
     }
 
     @Override
-    public void setEyePosition(Position eyePosition)
-    {
-        if (eyePosition == null)
-        {
+    public void setEyePosition(Position eyePosition) {
+        if (eyePosition == null) {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.getGlobe() != null)
-        {
-            double elevation = ((FlyViewLimits) this.viewLimits).limitEyeElevation(
-                eyePosition, this.getGlobe());
-            LatLon location = BasicViewPropertyLimits.limitEyePositionLocation(
-                eyePosition.getLatitude(), eyePosition.getLongitude(), this.viewLimits);
-            this.eyePosition = new Position(location, elevation);
-        }
-        else
-        {
-            LatLon location = BasicViewPropertyLimits.limitEyePositionLocation(
-                eyePosition.getLatitude(), eyePosition.getLongitude(), this.viewLimits);
-            this.eyePosition = new Position(location, eyePosition.getElevation());
-            this.eyePosition = eyePosition;
-        }
-
+        this.eyePosition = this.viewLimits.limitEyePosition(this, eyePosition);
         this.updateModelViewStateID();
     }
 
-    public Matrix getModelViewMatrix(Position eyePosition, Position centerPosition)
-    {
-        if (eyePosition == null || centerPosition == null)
-        {
+    public Matrix getModelViewMatrix(Position eyePosition, Position centerPosition) {
+        if (eyePosition == null || centerPosition == null) {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
-        if (this.globe == null)
-        {
+        if (this.globe == null) {
             String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -128,8 +130,7 @@ public class BasicFlyView extends BasicView
 
         Vec4 newEyePoint = this.globe.computePointFromPosition(eyePosition);
         Vec4 newCenterPoint = this.globe.computePointFromPosition(centerPosition);
-        if (newEyePoint == null || newCenterPoint == null)
-        {
+        if (newEyePoint == null || newCenterPoint == null) {
             String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -140,22 +141,18 @@ public class BasicFlyView extends BasicView
         Vec4 up = this.globe.computeSurfaceNormalAtPoint(newCenterPoint);
         // Otherwise, estimate the up direction by using the *current* heading with the new center position.
         Vec4 forward = newCenterPoint.subtract3(newEyePoint).normalize3();
-        if (forward.cross3(up).getLength3() < 0.001)
-        {
+        if (forward.cross3(up).getLength3() < 0.001) {
             Matrix modelview = ViewUtil.computeTransformMatrix(this.globe, eyePosition, this.heading, Angle.ZERO,
-                Angle.ZERO);
-            if (modelview != null)
-            {
+                    Angle.ZERO);
+            if (modelview != null) {
                 Matrix modelviewInv = modelview.getInverse();
-                if (modelviewInv != null)
-                {
+                if (modelviewInv != null) {
                     up = Vec4.UNIT_Y.transformBy4(modelviewInv);
                 }
             }
         }
 
-        if (up == null)
-        {
+        if (up == null) {
             String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -166,17 +163,14 @@ public class BasicFlyView extends BasicView
         return (modelViewMatrix);
     }
 
-    public ViewUtil.ViewState getViewState(Position eyePosition, Position centerPosition)
-    {
-        if (eyePosition == null || centerPosition == null)
-        {
+    public ViewUtil.ViewState getViewState(Position eyePosition, Position centerPosition) {
+        if (eyePosition == null || centerPosition == null) {
             String message = Logging.getMessage("nullValue.PositionIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (this.globe == null)
-        {
+        if (this.globe == null) {
             String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
@@ -184,8 +178,7 @@ public class BasicFlyView extends BasicView
 
         Vec4 newEyePoint = this.globe.computePointFromPosition(eyePosition);
         Vec4 newCenterPoint = this.globe.computePointFromPosition(centerPosition);
-        if (newEyePoint == null || newCenterPoint == null)
-        {
+        if (newEyePoint == null || newCenterPoint == null) {
             String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -197,20 +190,18 @@ public class BasicFlyView extends BasicView
 
         // Otherwise, estimate the up direction by using the *current* heading with the new center position.
         Vec4 forward = newCenterPoint.subtract3(newEyePoint).normalize3();
-        if (forward.cross3(up).getLength3() < 0.001)
-        {
+        if (forward.cross3(up).getLength3() < 0.001) {
             Matrix modelview = ViewUtil.computeTransformMatrix(this.globe, eyePosition, this.heading, Angle.ZERO,
-                Angle.ZERO);
-            if (modelview != null)
-            {
+                    Angle.ZERO);
+            if (modelview != null) {
                 Matrix modelviewInv = modelview.getInverse();
-                if (modelviewInv != null)
+                if (modelviewInv != null) {
                     up = Vec4.UNIT_Y.transformBy4(modelviewInv);
+                }
             }
         }
 
-        if (up == null)
-        {
+        if (up == null) {
             String message = Logging.getMessage("View.ErrorSettingOrientation", eyePosition, centerPosition);
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -222,24 +213,20 @@ public class BasicFlyView extends BasicView
     }
 
     @Override
-    protected void doApply(DrawContext dc)
-    {
-        if (dc == null)
-        {
+    protected void doApply(DrawContext dc) {
+        if (dc == null) {
             String message = Logging.getMessage("nullValue.DrawContextIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (dc.getGL() == null)
-        {
+        if (dc.getGL() == null) {
             String message = Logging.getMessage("nullValue.DrawingContextGLIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (dc.getGlobe() == null)
-        {
+        if (dc.getGlobe() == null) {
             String message = Logging.getMessage("nullValue.DrawingContextGlobeIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
@@ -252,14 +239,16 @@ public class BasicFlyView extends BasicView
         //========== modelview matrix state ==========//
         // Compute the current modelview matrix.
         this.modelview = ViewUtil.computeTransformMatrix(this.globe, this.eyePosition, this.heading, this.pitch,
-            this.roll);
-        if (this.modelview == null)
+                this.roll);
+        if (this.modelview == null) {
             this.modelview = Matrix.IDENTITY;
+        }
 
         // Compute the current inverse-modelview matrix.
         this.modelviewInv = this.modelview.getInverse();
-        if (this.modelviewInv == null)
+        if (this.modelviewInv == null) {
             this.modelviewInv = Matrix.IDENTITY;
+        }
 
         //========== projection matrix state ==========//
         // Get the current OpenGL viewport state.
@@ -278,11 +267,11 @@ public class BasicFlyView extends BasicView
 
         // Compute the current projection matrix.
         this.projection = Matrix.fromPerspective(this.fieldOfView, viewportWidth, viewportHeight, this.nearClipDistance,
-            this.farClipDistance);
+                this.farClipDistance);
 
         // Compute the current frustum.
         this.frustum = Frustum.fromPerspective(this.fieldOfView, (int) viewportWidth, (int) viewportHeight,
-            this.nearClipDistance, this.farClipDistance);
+                this.nearClipDistance, this.farClipDistance);
 
         //========== load GL matrix state ==========//
         loadGLViewState(dc, this.modelview, this.projection);
@@ -291,8 +280,7 @@ public class BasicFlyView extends BasicView
         afterDoApply();
     }
 
-    protected void afterDoApply()
-    {
+    protected void afterDoApply() {
         // Establish frame-specific values.
         this.lastEyePosition = this.computeEyePositionFromModelview();
         this.horizonDistance = this.computeHorizonDistance();
@@ -305,22 +293,15 @@ public class BasicFlyView extends BasicView
     }
 
     @Override
-    protected void setViewState(ViewUtil.ViewState viewState)
-    {
-        if (viewState == null)
-        {
+    protected void setViewState(ViewUtil.ViewState viewState) {
+        if (viewState == null) {
             String message = Logging.getMessage("nullValue.ViewStateIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        if (viewState.getPosition() != null)
-        {
-            Position eyePos = ViewUtil.normalizedEyePosition(viewState.getPosition());
-            LatLon limitedLocation = BasicViewPropertyLimits.limitEyePositionLocation(
-                this.eyePosition.getLatitude(),
-                this.eyePosition.getLongitude(), this.getViewPropertyLimits());
-            this.eyePosition = new Position(limitedLocation, eyePos.getElevation());
+        if (viewState.getPosition() != null) {
+            this.eyePosition = this.viewLimits.limitEyePosition(this, this.eyePosition);
         }
 
         this.setHeading(viewState.getHeading());
@@ -329,41 +310,36 @@ public class BasicFlyView extends BasicView
     }
 
     @Override
-    public void setHeading(Angle heading)
-    {
-        if (heading == null)
-        {
+    public void setHeading(Angle heading) {
+        if (heading == null) {
             String message = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         this.heading = ViewUtil.normalizedHeading(heading);
-        this.heading = BasicViewPropertyLimits.limitHeading(this.heading, this.getViewPropertyLimits());
+        this.heading = this.viewLimits.limitHeading(this, this.heading);
 
         this.updateModelViewStateID();
     }
 
     @Override
-    public void setPitch(Angle pitch)
-    {
-        if (pitch == null)
-        {
+    public void setPitch(Angle pitch) {
+        if (pitch == null) {
             String message = Logging.getMessage("nullValue.AngleIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
         this.pitch = ViewUtil.normalizedPitch(pitch);
-        this.pitch = BasicViewPropertyLimits.limitPitch(this.pitch, this.getViewPropertyLimits());
+        this.pitch = this.viewLimits.limitPitch(this, this.pitch);
 
         this.updateModelViewStateID();
     }
 
-    public void setViewPropertyLimits(ViewPropertyLimits limits)
-    {
+    public void setViewPropertyLimits(ViewPropertyLimits limits) {
         this.viewLimits = limits;
         this.setViewState(new ViewUtil.ViewState(this.getEyePosition(),
-            this.getHeading(), this.getPitch(), Angle.ZERO));
+                this.getHeading(), this.getPitch(), Angle.ZERO));
     }
 }

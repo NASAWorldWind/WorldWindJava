@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology;
@@ -9,7 +31,7 @@ package gov.nasa.worldwind.symbology;
 import java.util.*;
 
 /**
- * Defines constants used by the World Wind symbology classes, including symbolic constants and modifier keys for
+ * Defines constants used by the WorldWind symbology classes, including symbolic constants and modifier keys for
  * MIL-STD-2525 tactical symbols and tactical graphics.
  *
  * @author dcollins
@@ -37,13 +59,11 @@ public interface SymbologyConstants
      * associated with a MIL-STD-2525 symbol (SIDC positions 11-12). A symbol's auxiliary equipment is currently used to
      * define towed sonar arrays. See MIL-STD-2525C section 5.3.4.4 (page 27) and table VII (page 28). When used as a
      * key, the corresponding value must be one of the following:
-     * <p/>
      * <ul> <li>AUXILIARY_EQUIPMENT_TOWED_SONAR_ARRAY_SHORT</li> <li>AUXILIARY_EQUIPMENT_TOWED_SONAR_ARRAY_LONG</li>
      * </ul>
-     * <p/>
+     * <p>
      * The auxiliary equipment codes are the same for all symbology schemes that use them, and are defined in each
      * appendix of the MIL-STD-2525C specification:
-     * <p/>
      * <ul> <li>Warfighting - section A.5.2.1.f (page 51) and table A-II (pages 52-54)</li> </ul>
      */
     final String AUXILIARY_EQUIPMENT = "AG";
@@ -75,14 +95,12 @@ public interface SymbologyConstants
      * dimension defines the primary mission area for the object being represented. See MIL-STD-2525C section 5.3.1.3
      * (page 17), table I (page 15) and table II (page 16). When used as a key, the corresponding value must be one of
      * the following:
-     * <p/>
      * <ul> <li>BATTLE_DIMENSION_SPACE</li> <li>BATTLE_DIMENSION_AIR</li> <li>BATTLE_DIMENSION_GROUND</li>
      * <li>BATTLE_DIMENSION_SEA_SURFACE</li> <li>BATTLE_DIMENSION_SEA_SUBSURFACE</li> <li>BATTLE_DIMENSION_SOF</li>
      * <li>BATTLE_DIMENSION_OTHER</li> </ul>
-     * <p/>
+     * <p>
      * The battle dimension codes are the same for all symbology schemes that use them, and are defined in each appendix
      * of the MIL-STD-2525C specification:
-     * <p/>
      * <ul> <li>Warfighting - section A.5.2.1.c (page 51) and table A-I (page 51)</li> <li>Signals Intelligence -
      * section D.5.2.1.c (page 963) and table D-I (page 964)</li> </ul>
      */
@@ -154,22 +172,19 @@ public interface SymbologyConstants
      * Indicates the category code associated with a MIL-STD-2525 symbol (SIDC position 3). The meaning of a symbol's
      * category and the recognized values depend on the specific MIL-STD-2525 symbology scheme the symbol belongs to,
      * and are defined in each appendix of the MIL-STD-2525C specification:
-     * <p/>
-     * <strong>Tactical Graphics</strong> <br/> See MIL-STD-2525C section B5.2.1.c (page 304) and table B-I (page 305).
-     * <p/>
+     * <p>
+     * <strong>Tactical Graphics</strong> <br> See MIL-STD-2525C section B5.2.1.c (page 304) and table B-I (page 305).
      * <ul> <li>CATEGORY_TASKS</li> <li>CATEGORY_COMMAND_CONTROL_GENERAL_MANEUVER</li>
      * <li>CATEGORY_MOBILITY_SURVIVABILITY</li> <li>CATEGORY_FIRE_SUPPORT</li> <li>CATEGORY_COMBAT_SERVICE_SUPPORT</li>
      * <li>CATEGORY_OTHER</li> </ul>
-     * <p/>
-     * <strong>Stability Operations</strong> <br/> See MIL-STD-2525C section E5.2.1.c (page 991) and table E-I (page
+     * <p>
+     * <strong>Stability Operations</strong> <br> See MIL-STD-2525C section E5.2.1.c (page 991) and table E-I (page
      * 991).
-     * <p/>
      * <ul> <li>CATEGORY_VIOLENT_ACTIVITIES</li> <li>CATEGORY_LOCATIONS</li> <li>CATEGORY_OPERATIONS</li>
      * <li>CATEGORY_ITEMS</li> <li>CATEGORY_INDIVIDUAL</li> <li>CATEGORY_NONMILITARY_GROUP_ORGANIZATION</li>
      * <li>CATEGORY_RAPE</li> </ul>
-     * <p/>
-     * <strong>Emergency Management</strong> <br/> See MIL-STD-2525C table G-I (page 1032).
-     * <p/>
+     * <p>
+     * <strong>Emergency Management</strong> <br> See MIL-STD-2525C table G-I (page 1032).
      * <ul> <li>CATEGORY_INCIDENT</li> <li>CATEGORY_NATURAL_EVENTS</li> <li>CATEGORY_OPERATIONS</li>
      * <li>CATEGORY_INFRASTRUCTURE</li> </ul>
      */
@@ -299,7 +314,6 @@ public interface SymbologyConstants
      * Indicates the country code associated with a MIL-STD-2525 symbol (SIDC positions 13-14). See <a
      * href="http://www.iso.org/iso/country_codes.htm" target="_blank">ISO 3166-1</a> for a definition of valid country
      * codes. The country codes are the same for all symbology schemes that use them:
-     * <p/>
      * <ul> <li>Warfighting - section A.5.2.1.g and table A-I (page 51)</li> <li>Tactical Graphics - section B.5.2.1.g
      * (page 304) and table B-I (page 305)</li> <li>Signals Intelligence - section D.5.2.1.g and table D-I (page
      * 964)</li> <li>Stability Operations - section E.5.2.1.g and table E-I (page 991)</li> <li>Emergency Management -
@@ -333,15 +347,13 @@ public interface SymbologyConstants
      * (SIDC position 12). A symbol's echelon defines the command level of a unit represented by the symbol. See
      * MIL-STD-2525 section 5.3.4.2 (page 25), section 5.5.2.2 (page 40), and table V (pages 25-26). When used as a key,
      * the corresponding value must be one of the following:
-     * <p/>
      * <ul> <li>ECHELON_TEAM_CREW</li> <li>ECHELON_SQUAD</li> <li>ECHELON_SECTION</li>
      * <li>ECHELON_PLATOON_DETACHMENT</li> <li>ECHELON_COMPANY_BATTERY_TROOP</li> <li>ECHELON_BATTALION_SQUADRON</li>
      * <li>ECHELON_REGIMENT_GROUP</li> <li>ECHELON_BRIGADE</li> <li>ECHELON_DIVISION</li> <li>ECHELON_CORPS</li>
      * <li>ECHELON_ARMY</li> <li>ECHELON_ARMY_GROUP_FRONT</li> <li>ECHELON_REGION</li> <li>ECHELON_COMMAND</li> </ul>
-     * <p/>
+     * <p>
      * The echelon codes are the same for all symbology schemes that use them, and are defined in each appendix of the
      * MIL-STD-2525C specification:
-     * <p/>
      * <ul> <li>Warfighting - section A.5.2.1.f (page 51) and table A-II (pages 52-54)</li> <li>Tactical Graphics -
      * section B.5.2.1.f (page 304) and table B-II (page 305)</li> <li>Stability Operations - section E.5.2.1.f (page
      * 991) and table E-II (pages 992-994)</li> </ul>
@@ -439,15 +451,15 @@ public interface SymbologyConstants
      * The MIL-STD-2525 Evaluation Rating modifier field ID. Indicates the reliability and credibility of a unit,
      * equipment, or installation. When used as a key, the corresponding value must be a string containing two
      * characters.
-     * <p/>
+     * <p>
      * The first character indicates the reliability rating, and must be one of the following: <ul> <li>"A" - completely
      * reliable</li> <li>"B" - usually reliable</li> <li>"C" - fairly reliable</li> <li>"D" - not usually reliable</li>
      * <li>"E" - unreliable</li> <li>"F" - reliability cannot be judged</li> </ul>
-     * <p/>
+     * <p>
      * The second character indicates the credibility rating, and must be one of the following: <ul> <li>"1" - confirmed
      * by other sources</li> <li>"2" - probably true</li> <li>"3" - possibly true</li> <li>"4" - doubtfully true</li>
      * <li>"5" - improbable</li> <li>"6" - truth cannot be judged</li> </ul>
-     * <p/>
+     * <p>
      * See FM 34-3, Intelligence Analysis, March 1990, pages 2-13 through 2-17 for complete definitions of evaluation
      * ratings.
      */
@@ -460,11 +472,9 @@ public interface SymbologyConstants
      * changed to include a dashed inverted "V" above its frame. See MIL-STD-2525 section 5.3.4.7 (page 28). When used
      * as a key, the corresponding value must be a boolean value. The value is <code>true</code> if the symbol's
      * represented object is a feint/dummy, and <code>false</code> otherwise.
-     * <p/>
+     * <p>
      * The following symbology schemes support the feint/dummy modifier:
-     * <p/>
      * <ul> <li>Warfighting</li> <li>Stability Operations</li> </ul>
-     * <p/>
      */
     final String FEINT_DUMMY = "AB";
 
@@ -485,20 +495,17 @@ public interface SymbologyConstants
      * Indicates the function ID associated with a MIL-STD-2525 symbol (SIDC positions 5-10). The function IDs are
      * unique to each symbology schemes that uses them, and are defined in each appendix of the MIL-STD-2525C
      * specification:
-     * <p/>
      * <ul> <li>Warfighting - section A.5.2.1.e (page 51) and table A-I (page 51)</li> <li>Tactical Graphics - section
      * B.5.2.1.e (page 304) and table B-I (page 305)</li> <li>Meteorological and Oceanographic - section C.5.2.1.d (page
      * 763) and table C-I (page 763)</li> <li>Signals Intelligence - section D.5.2.1.e (page 964) and table D-I (page
      * 964)</li> <li>Stability Operations - section E.5.2.1.e (page 991) and table E-I (page 991)</li> <li>Emergency
      * Management - table G-I (page 1032)</li> </ul>
-     * <p/>
      */
     final String FUNCTION_ID = "gov.nasa.worldwind.symbology.FunctionId";
 
     /**
      * Indicates the type of a graphic in the Meteorological and Oceanographic scheme (SIDC positions 11-13). When used
      * as a key, the corresponding value must be one of the following:
-     * <p/>
      * <ul> <li>GRAPHIC_TYPE_POINT</li> <li>GRAPHIC_TYPE_LINE</li> <li>GRAPHIC_TYPE_AREA</li> </ul>
      */
     final String GRAPHIC_TYPE = "gov.nasa.worldwind.symbology.GraphicType";
@@ -521,9 +528,8 @@ public interface SymbologyConstants
      * downward from the left side of its frame. See MIL-STD-2525 section 5.3.4.8 (page 29). When used as a key, the
      * corresponding value must be a boolean value. The value is <code>true</code> if the symbol's represented object is
      * a headquarters, and <code>false</code> otherwise.
-     * <p/>
+     * <p>
      * The following symbology schemes support the headquarters modifier:
-     * <p/>
      * <ul> <li>Warfighting</li> <li>Stability Operations</li> </ul>
      */
     final String HEADQUARTERS = "S";
@@ -558,12 +564,10 @@ public interface SymbologyConstants
      * symbol (SIDC positions 11-12). When a marked as an installation, a symbol's represented object is a military camp
      * or base. See MIL-STD-2525 section 5.3.4.5 (page 28). When used as a key, the corresponding value must be one of
      * the following:
-     * <p/>
      * <ul> <li>INSTALLATION_NORMAL</li> <li>INSTALLATION_FEINT_DUMMY</li>  </ul>
-     * <p/>
+     * <p>
      * The installation codes are the same for all symbology schemes that use them, and are defined in each appendix of
      * the MIL-STD-2525C specification:
-     * <p/>
      * <ul> <li>Warfighting - section A.5.2.1.f (page 51) and table A-II (pages 52-54)</li> <li>Stability Operations -
      * section E.5.2.1.f (page 991) and table E-II (pages 992-994)</li> <li>Emergency Management - section G.5.5.5 (page
      * 1030) and table G-II (page 1032)</li> </ul>
@@ -595,15 +599,13 @@ public interface SymbologyConstants
      * object, other than mobility intrinsic to the represented object. Mobility codes are currently used only to
      * describe mobility features of equipment. See MIL-STD-2525 section 5.3.4.3 (page 26) and table VI (pages 26-27).
      * When used as a key, the corresponding value must be one of the following:
-     * <p/>
      * <ul> <li>MOBILITY_WHEELED</li> <li>MOBILITY_CROSS_COUNTRY</li> <li>MOBILITY_TRACKED</li>
      * <li>MOBILITY_WHEELED_TRACKED_COMBINATION</li> <li>MOBILITY_TOWED</li> <li>MOBILITY_RAIL</li>
      * <li>MOBILITY_OVER_THE_SNOW</li> <li>MOBILITY_SLED</li> <li>MOBILITY_PACK_ANIMALS</li> <li>MOBILITY_BARGE</li>
      * <li>MOBILITY_AMPHIBIOUS</li> </ul>
-     * <p/>
+     * <p>
      * The mobility codes are the same for all symbology schemes that use them, and are defined in each appendix of the
      * MIL-STD-2525C specification:
-     * <p/>
      * <ul> <li>Warfighting - section A.5.2.1.f (page 51) and table A-II (pages 52-54)</li> <li>Emergency Management -
      * section G.5.5.5 (page 1030) and table G-II (page 1032)</li> </ul>
      */
@@ -765,17 +767,15 @@ public interface SymbologyConstants
      * battle provides additional information about the symbol in the operational environment. The recognized values
      * depend on the specific MIL-STD-2525 symbology scheme the symbol belongs to, and are defined in each appendix of
      * the MIL-STD-2525C specification:
-     * <p/>
-     * <strong>Warfighting, Signals Intelligence, Stability Operations, Emergency Management</strong> <br/> See
+     * <p>
+     * <strong>Warfighting, Signals Intelligence, Stability Operations, Emergency Management</strong> <br> See
      * MIL-STD-2525C section A.5.2.1.h (page 51), table A-I (page 51), section D.5.2.1.h (page 964), table D-I (page
      * 964), section E.5.2.1.h (page 991), table E-I (page 991), and table G-I (page 1032).
-     * <p/>
      * <ul> <li>ORDER_OF_BATTLE_AIR</li> <li>ORDER_OF_BATTLE_ELECTRONIC</li> <li>ORDER_OF_BATTLE_CIVILIAN</li>
      * <li>ORDER_OF_BATTLE_GROUND</li> <li>ORDER_OF_BATTLE_MARITIME</li> <li>ORDER_OF_BATTLE_STRATEGIC_FORCE_RELATED</li>
      * </ul>
-     * <p/>
-     * <strong>Tactical Graphics</strong> <br/> See MIL-STD-2525C section B5.2.1.h (page 304) and table B-I (page 305).
-     * <p/>
+     * <p>
+     * <strong>Tactical Graphics</strong> <br> See MIL-STD-2525C section B5.2.1.h (page 304) and table B-I (page 305).
      * <ul> <li>ORDER_OF_BATTLE_CONTROL_MARKINGS</li> </ul>
      */
     final String ORDER_OF_BATTLE = "gov.nasa.worldwind.symbology.OrderOfBattle";
@@ -830,7 +830,6 @@ public interface SymbologyConstants
     /**
      * The MIL-STD-2525 Reinforced or Reduced modifier field ID. Indicates whether a unit is reinforced or reduced, or
      * both. When used as a key, the corresponding value must be one of the following values:
-     * <p/>
      * <ul> <li>REINFORCED to indicate that the unit is reinforced</li> <li>REDUCED to indicate that the unit is
      * reduced</li> <li>REINFORCED_AND_REDUCED to indicate that the unit is reinforced and reduced</li> </ul>
      */
@@ -846,7 +845,6 @@ public interface SymbologyConstants
      * Indicates the scheme code associated with a MIL-STD-2525 symbol (SIDC position 1). A symbol's scheme defines the
      * specific MIL-STD-2525 symbology set that it belongs to. The scheme codes are defined in each appendix of the
      * MIL-STD-2525 specification. When used as a key, the corresponding value must be one of the following:
-     * <p/>
      * <ul> <li>SCHEME_WARFIGHTING</li> <li>SCHEME_TACTICAL_GRAPHICS</li> <li>SCHEME_METOC</li>
      * <li>SCHEME_INTELLIGENCE</li> <li>SCHEME_STABILITY_OPERATIONS</li> <li>SCHEME_EMERGENCY_MANAGEMENT</li> </ul>
      */
@@ -946,17 +944,15 @@ public interface SymbologyConstants
      * identity defines the threat posed by the object being represented. See MIL-STD-2525C section 3.2.39 (page 10),
      * section 5.3.1.1 (page 17), table I (page 15), and table II (page 16). When used as a key, the corresponding value
      * must be one of the following:
-     * <p/>
      * <ul> <li>STANDARD_IDENTITY_PENDING</li> <li>STANDARD_IDENTITY_UNKNOWN</li> <li>STANDARD_IDENTITY_ASSUMED_FRIEND</li>
      * <li>STANDARD_IDENTITY_FRIEND</li> <li>STANDARD_IDENTITY_NEUTRAL</li> <li>STANDARD_IDENTITY_SUSPECT</li>
      * <li>STANDARD_IDENTITY_HOSTILE</li> <li>STANDARD_IDENTITY_EXERCISE_PENDING</li>
      * <li>STANDARD_IDENTITY_EXERCISE_UNKNOWN</li> <li>STANDARD_IDENTITY_EXERCISE_ASSUMED_FRIEND</li>
      * <li>STANDARD_IDENTITY_EXERCISE_FRIEND</li> <li>STANDARD_IDENTITY_EXERCISE_NEUTRAL</li>
      * <li>STANDARD_IDENTITY_JOKER</li> <li>STANDARD_IDENTITY_FAKER</li> </ul>
-     * <p/>
+     * <p>
      * The standard identity codes are the same for all symbology schemes that use them, and are defined in each
      * appendix of the MIL-STD-2525 specification:
-     * <p/>
      * <ul> <li>Warfighting - table A-I (page 51)</li> <li>Tactical Graphics - table B-I (page 305)</li> <li>Signals
      * Intelligence - table D-I (page 964)</li> <li>Stability Operations - table E-I (page 991)</li> <li>Emergency
      * Management - table G-I (page 1032)</li> </ul>
@@ -1053,7 +1049,6 @@ public interface SymbologyConstants
     /**
      * Indicates if a graphic in the Meteorological and Oceanographic scheme is static or dynamic (SIDC positions 3 and
      * 4). When used as a key, the corresponding value must be one of the following:
-     * <p/>
      * <ul> <li>STATIC</li> <li>DYNAMIC</li> </ul>
      */
     final String STATIC_DYNAMIC = "gov.nasa.worldwind.symbology.StaticDynamic";
@@ -1073,21 +1068,18 @@ public interface SymbologyConstants
      * define its operational condition. See MIL-STD-2525C section 3.2.41 (page 10), section 5.3.1.4 (pages 17-18), and
      * tables III and III-2 (pages 18-17). The recognized values depend on the specific MIL-STD-2525 symbology scheme
      * the symbol belongs to, and are defined in each appendix of the MIL-STD-2525C specification:
-     * <p/>
-     * <strong>Warfighting, Signals Intelligence, Stability Operations</strong> <br/> See MIL-STD-2525C section
+     * <p>
+     * <strong>Warfighting, Signals Intelligence, Stability Operations</strong> <br> See MIL-STD-2525C section
      * A.5.2.1.d (page 51), table A-I (page 51), section D.5.2.1.d (page 964), table D-I (page 964), section E.5.2.1.d
      * (page 991), and table E-I (page 991).
-     * <p/>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> <li>STATUS_PRESENT_FULLY_CAPABLE</li>
      * <li>STATUS_PRESENT_DAMAGED</li> <li>STATUS_PRESENT_DESTROYED</li> <li>STATUS_PRESENT_FULL_TO_CAPACITY</li> </ul>
-     * <p/>
-     * <strong>Tactical Graphics</strong> <br/> See MIL-STD-2525C section B5.2.1.d (page 304) and table B-I (page 305).
-     * <p/>
+     * <p>
+     * <strong>Tactical Graphics</strong> <br> See MIL-STD-2525C section B5.2.1.d (page 304) and table B-I (page 305).
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
-     * <p/>
-     * <strong>Emergency Management</strong> <br/> See MIL-STD-2525C section G.5.2.4 (page 1028) and table G-I (page
+     * <p>
+     * <strong>Emergency Management</strong> <br> See MIL-STD-2525C section G.5.2.4 (page 1028) and table G-I (page
      * 1032).
-     * <p/>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      */
     final String STATUS = "AL";
@@ -1170,7 +1162,6 @@ public interface SymbologyConstants
      * feint/dummy, installation, task force, headquarters staff, equipment mobility, and auxiliary equipment. The
      * recognized values depend on the specific MIL-STD-2525 symbology scheme the symbol belongs to, and are defined in
      * each appendix of the MIL-STD-2525C specification:
-     * <p/>
      * <ul> <li>Warfighting - section A.5.2.1.f (page 51) and table A-II (pages 52-54)</li> <li>Stability Operations -
      * section E.5.2.1.f (page 991) and table E-II (pages 992-994)</li> <li>Emergency Management - section G.5.5 (page
      * 1029) and table EG-II (page 1032)</li> </ul>
@@ -1190,9 +1181,8 @@ public interface SymbologyConstants
      * its echelon. See MIL-STD-2525 section 5.3.4.6 (page 28). When used as a key, the corresponding value must be a
      * boolean value. The value is <code>true</code> if the symbol's represented object is a task force, and
      * <code>false</code> otherwise.
-     * <p/>
+     * <p>
      * The following symbology schemes support the task force modifier:
-     * <p/>
      * <ul> <li>Warfighting</li> <li>Stability Operations</li> </ul>
      */
     final String TASK_FORCE = "D";

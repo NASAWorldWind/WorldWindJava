@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.layers;
 
@@ -14,14 +36,14 @@ import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * This class manages the conversion and timing of image data to a JOGL Texture, and provides an interface for binding
  * the texture and applying any texture transforms to align the texture and texture coordinates.
- * <p/>
+ * <p>
  *
  * @author tag
  * @version $Id: TextureTile.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -102,7 +124,7 @@ public class TextureTile extends Tile implements SurfaceTile
     /**
      * Returns the texture data most recently specified for the tile. New texture data is typically specified when a new
      * image is read, either initially or in response to image expiration.
-     * <p/>
+     * <p>
      * If texture data is non-null, a new texture is created from the texture data when the tile is next bound or
      * otherwise initialized. The texture data field is then set to null. Subsequently setting texture data to be
      * non-null causes a new texture to be created when the tile is next bound or initialized.
@@ -117,11 +139,11 @@ public class TextureTile extends Tile implements SurfaceTile
     /**
      * Specifies new texture data for the tile. New texture data is typically specified when a new image is read, either
      * initially or in response to image expiration.
-     * <p/>
+     * <p>
      * If texture data is non-null, a new texture is created from the texture data when the tile is next bound or
      * otherwise initialized. The texture data field is then set to null. Subsequently setting texture data to be
      * non-null causes a new texture to be created when the tile is next bound or initialized.
-     * <p/>
+     * <p>
      * When a texture is created from the texture data, the texture data field is set to null to indicate that the data
      * has been converted to a texture and its resources may be released.
      *

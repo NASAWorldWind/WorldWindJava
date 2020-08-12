@@ -414,9 +414,12 @@ public final class Utf8StreamParser
     }
 
     /**
-     * Method called when not even first 8 bytes are guaranteed
-     * to come consequtively. Happens rarely, so this is offlined;
-     * plus we'll also do full checks for escaping etc.
+     * Method called when not even first 8 bytes are guaranteed to come consequtively.Happens rarely, so this is
+     * offlined; plus we'll also do full checks for escaping etc.
+     *
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     protected Name slowParseFieldName()
         throws IOException, JsonParseException
@@ -447,11 +450,17 @@ public final class Utf8StreamParser
     }
 
     /**
-     * Slower parsing method which is generally branched to when
-     * an escape sequence is detected (or alternatively for long
-     * names, or ones crossing input buffer boundary). In any case,
-     * needs to be able to handle more exceptional cases, gets
-     * slower, and hance is offlined to a separate method.
+     * Slower parsing method which is generally branched to when an escape sequence is detected (or alternatively for
+     * long names, or ones crossing input buffer boundary).In any case, needs to be able to handle more exceptional
+     * cases, gets slower, and hance is offlined to a separate method.
+     *
+     * @param quads Undocumented.
+     * @param qlen Undocumented.
+     * @param currQuad Undocumented.
+     * @param ch Undocumented.
+     * @param currQuadBytes Undocumented.
+     * @return Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     protected Name parseEscapedFieldName(int[] quads, int qlen, int currQuad, int ch,
                                          int currQuadBytes)
@@ -550,9 +559,12 @@ public final class Utf8StreamParser
 
     /**
      * Method called when we see non-white space character other
-     * than double quote, when expecting a field name.
-     * In standard mode will just throw an expection; but
-     * in non-standard modes may be able to parse name.
+     * than double quote, when expecting a field name.In standard mode will just throw an expection; but
+ in non-standard modes may be able to parse name.
+     * @param ch Undocumented.
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException  Undocumented.
      */
     protected final Name _handleUnusualFieldName(int ch)
         throws IOException, JsonParseException
@@ -998,9 +1010,11 @@ public final class Utf8StreamParser
     }
 
     /**
-     * Method called to skim through rest of unparsed String value,
-     * if it is not needed. This can be done bit faster if contents
-     * need not be stored for future access.
+     * Method called to skim through rest of unparsed String value, if it is not needed.This can be done bit faster if
+     * contents need not be stored for future access.
+     *
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     protected void _skipString()
         throws IOException, JsonParseException
@@ -1067,6 +1081,10 @@ public final class Utf8StreamParser
      * Method for handling cases where first non-space character
      * of an expected value token is not legal for standard JSON content.
      *
+     * @param c Undocumented.
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException  Undocumented.
      * @since 1.3
      */
     protected final JsonToken _handleUnexpectedValue(int c)
@@ -1618,6 +1636,7 @@ public final class Utf8StreamParser
     /**
      * We actually need to check the character value here
      * (to see if we have \n following \r).
+     * @throws java.io.IOException Undocumented.
      */
     protected final void _skipCR() throws IOException
     {
@@ -1801,8 +1820,12 @@ public final class Utf8StreamParser
     }
 
     /**
+     * @param b64variant Undocumented.
+     * @param ch Undocumented.
      * @param bindex Relative index within base64 character unit; between 0
      *   and 3 (as unit has exactly 4 characters)
+     * @param msg Undocumented.
+     * @return  Undocumented.
      */
     protected IllegalArgumentException reportInvalidChar(Base64Variant b64variant, int ch, int bindex, String msg)
         throws IllegalArgumentException

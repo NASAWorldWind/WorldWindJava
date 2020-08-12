@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util.layertree;
 
@@ -14,7 +36,7 @@ import gov.nasa.worldwind.util.EntityMap;
 /**
  * A <code>TreeNode</code> that represents a KML feature defined by a <code>{@link
  * gov.nasa.worldwind.ogc.kml.KMLAbstractFeature}</code>.
- * <p/>
+ * <p>
  * The node's selection state is synchronized with its KML feature's visibility state. <code>{@link
  * #isSelected()}</code> returns whether the node's feature is visible. Calling <code>{@link
  * #setSelected(boolean)}</code> specifies both the the node's selection state, and whether its feature should be
@@ -125,9 +147,9 @@ public class KMLFeatureTreeNode extends BasicTreeNode
     /**
      * Expands paths in the specified <code>tree</code> corresponding to open KML container elements. This assumes that
      * the <code>tree</code>'s model contains this node.
-     * <p/>
+     * <p>
      * This node's path is expanded if the feature's <code>open</code> property is <code>true</code>.
-     * <p/>
+     * <p>
      * This calls <code>expandOpenContainers</code> on all children which are instances of
      * <code>KMLFeatureTreeNode</code>.
      *

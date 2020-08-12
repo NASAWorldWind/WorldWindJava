@@ -3,7 +3,7 @@ package com.zebraimaging;
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.awt.*;
 
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * An alternative input handler used to synchronize input with the Zebra Imaging display controller. Applications are
  * not expected to create instances of this class directly or call its methods. To use it, specify it as the
- * gov.nasa.worldwind.avkey.InputHandlerClassName in the World Wind configuration file.
+ * gov.nasa.worldwind.avkey.InputHandlerClassName in the WorldWind configuration file.
  */
 public class ZebraInputHandler extends AWTInputHandler
 {

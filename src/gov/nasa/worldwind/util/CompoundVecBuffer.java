@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util;
 
@@ -15,10 +37,10 @@ import java.util.*;
  * gov.nasa.worldwind.util.VecBuffer} objects. Each VecBuffer is retrieved via an index. The range of valid indices in a
  * CompoundVecBuffer is [0, size() - 1], inclusive. Implementations of CompoundVecBuffer define how each VecBuffer is
  * stored and retrieved according to its index.
- * <p/>
+ * <p>
  * To retrieve a single VecBuffer given an index, invoke {@link #subBuffer(int)}. To retrieve a VecBuffer's size, in
  * number of logical tuples, invoke {@link #subBufferSize(int)}.
- * <p/>
+ * <p>
  * To create a new view of this CompoundVecBuffer from one or many VecBuffers, invoke one of the <code>slice</code>
  * methods: <ul> <li>{@link #slice(int, int)} creates a view of this CompoundVecbufer given a contiguous sequence of
  * VecBuffer indices.</li> <li>{@link #slice(int[], int, int)} creates a view of this CompoundVecBuffer given an array
@@ -187,7 +209,7 @@ public abstract class CompoundVecBuffer
      *
      * @return a new CompoundVecBuffer representing a subset of this CompoundVecBuffer.
      *
-     * @throws IllegalArgumentException if beginIndex is out of range, if endIndex is out of range, or if beginIndex >
+     * @throws IllegalArgumentException if beginIndex is out of range, if endIndex is out of range, or if beginIndex &gt;
      *                                  endIndex.
      */
     public CompoundVecBuffer slice(int beginIndex, int endIndex)

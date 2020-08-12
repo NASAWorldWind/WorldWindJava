@@ -24,11 +24,12 @@ import java.lang.annotation.Target;
  * Note: while any class can be indicated as the Key class, there
  * must be a registered Key Deserializer for the type.
  *
- * @deprecated As of version 1.1, use {@link org.codehaus.jackson.map.annotate.JsonDeserialize#keyAs} instead
+ * @deprecated
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @JacksonAnnotation
+@Deprecated
 public @interface JsonKeyClass
 {
     /**
@@ -39,6 +40,7 @@ public @interface JsonKeyClass
      *<p>
      * Note: if a non-property method is annotated with this annotation,
      * deserializer will throw an exception to denote invalid annotation.
+     * @return Undocumented
      */
     public Class<?> value();
 }

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.symbology;
@@ -23,11 +45,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Demonstrates how to create and display World Wind tactical symbols. See the <a title="Symbology Usage Guide"
- * href="http://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology Usage Guide</a> for more
- * information on symbology support in World Wind.
- * <p/>
- * See the {@link TacticalGraphics} for a detailed example of using World Wind tactical graphics in an application.
+ * Demonstrates how to create and display WorldWind tactical symbols. See the 
+ * <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
+ * for more
+ * information on symbology support in WorldWind.
+ * <p>
+ * See the {@link TacticalGraphics} for a detailed example of using WorldWind tactical graphics in an application.
  *
  * @author dcollins
  * @version $Id: TacticalSymbols.java 2196 2014-08-06 19:42:15Z tgaskins $
@@ -45,7 +68,7 @@ public class TacticalSymbols extends ApplicationTemplate
         {
             // Create a renderable layer to display the tactical symbols. This example adds only three symbols, but many
             // symbols can be added to a single layer. Note that tactical symbols and tactical graphics can be combined
-            // in the same RenderableLayer, along with any World Wind object implementing the Renderable interface.
+            // in the same RenderableLayer, along with any WorldWind object implementing the Renderable interface.
             this.symbolLayer = new RenderableLayer();
             this.symbolLayer.setName("Tactical Symbols");
 
@@ -124,7 +147,7 @@ public class TacticalSymbols extends ApplicationTemplate
             machineGunSymbolAtDateline.setModifier(SymbologyConstants.DATE_TIME_GROUP, "30140000ZSEP97");
             this.symbolLayer.addRenderable(machineGunSymbolAtDateline);
 
-            // Add the symbol layer to the World Wind model.
+            // Add the symbol layer to the WorldWind model.
             this.getWwd().getModel().getLayers().add(symbolLayer);
 
             // Add a dragging controller to enable user click-and-drag control over tactical symbols.
@@ -134,7 +157,7 @@ public class TacticalSymbols extends ApplicationTemplate
             // Create a Swing control panel that provides user control over the symbol's appearance.
             this.addSymbolControls();
 
-            // Size the World Window to provide enough screen space for the symbols and center the World Window on the
+            // Size the WorldWindow to provide enough screen space for the symbols and center the WorldWindow on the
             // screen.
             Dimension size = new Dimension(1800, 1000);
             this.setPreferredSize(size);
@@ -161,7 +184,7 @@ public class TacticalSymbols extends ApplicationTemplate
                     double scale = (double) slider.getValue() / 100d;
                     sharedAttrs.setScale(scale);
                     sharedHighlightAttrs.setScale(scale);
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             label.setAlignmentX(JComponent.LEFT_ALIGNMENT);
@@ -181,7 +204,7 @@ public class TacticalSymbols extends ApplicationTemplate
                     JSlider slider = (JSlider) changeEvent.getSource();
                     double opacity = (double) slider.getValue() / 100d;
                     sharedAttrs.setOpacity(opacity);
-                    getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                    getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                 }
             });
             box.add(Box.createVerticalStrut(10));
@@ -202,7 +225,7 @@ public class TacticalSymbols extends ApplicationTemplate
                     {
                         if (r instanceof TacticalSymbol)
                             ((TacticalSymbol) r).setShowGraphicModifiers(tf);
-                        getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                        getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                     }
                 }
             });
@@ -222,7 +245,7 @@ public class TacticalSymbols extends ApplicationTemplate
                     {
                         if (r instanceof TacticalSymbol)
                             ((TacticalSymbol) r).setShowTextModifiers(tf);
-                        getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                        getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                     }
                 }
             });
@@ -242,7 +265,7 @@ public class TacticalSymbols extends ApplicationTemplate
                     {
                         if (r instanceof TacticalSymbol)
                             ((MilStd2525TacticalSymbol) r).setShowFrame(tf);
-                        getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                        getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                     }
                 }
             });
@@ -262,7 +285,7 @@ public class TacticalSymbols extends ApplicationTemplate
                     {
                         if (r instanceof TacticalSymbol)
                             ((MilStd2525TacticalSymbol) r).setShowFill(tf);
-                        getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                        getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                     }
                 }
             });
@@ -282,7 +305,7 @@ public class TacticalSymbols extends ApplicationTemplate
                     {
                         if (r instanceof TacticalSymbol)
                             ((MilStd2525TacticalSymbol) r).setShowIcon(tf);
-                        getWwd().redraw(); // Cause the World Window to refresh in order to make these changes visible.
+                        getWwd().redraw(); // Cause the WorldWindow to refresh in order to make these changes visible.
                     }
                 }
             });
@@ -303,6 +326,6 @@ public class TacticalSymbols extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_PITCH, 82);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 20000);
 
-        start("World Wind Tactical Symbols", AppFrame.class);
+        start("WorldWind Tactical Symbols", AppFrame.class);
     }
 }

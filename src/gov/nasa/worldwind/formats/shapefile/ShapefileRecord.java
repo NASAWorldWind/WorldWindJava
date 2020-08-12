@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.formats.shapefile;
 
@@ -229,7 +251,7 @@ public abstract class ShapefileRecord
     /**
      * Returns a four-element array containing this record's bounding rectangle, or null if this record has no bounding
      * rectangle.
-     * <p/>
+     * <p>
      * The returned array is ordered as follows: minimum Y, maximum Y, minimum X, and maximum X. If the Shapefile's
      * coordinate system is geographic, the elements can be interpreted as angular degrees in the order minimum
      * latitude, maximum latitude, minimum longitude, and maximum longitude.
@@ -280,8 +302,8 @@ public abstract class ShapefileRecord
      * records in a Shapefile must be of the same type. Throws an exception if the types do not match and the shape type
      * is not <code>{@link Shapefile#SHAPE_NULL}</code>. Records of type <code>SHAPE_NULL</code> are always valid, and
      * may appear in any Shapefile.
-     * <p/>
-     * For details, see the ESRI Shapefile specification at <a href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf"/>,
+     * <p>
+     * For details, see the ESRI Shapefile specification at <a href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf"></a>,
      * pages 4 and 5.
      *
      * @param shapefile the shapefile.

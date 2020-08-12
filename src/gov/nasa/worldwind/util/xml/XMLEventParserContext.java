@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util.xml;
@@ -74,7 +96,7 @@ public interface XMLEventParserContext extends AVList
 
     /**
      * Determines whether an event is the corresponding end element for a specified start event.
-     * <p/>
+     * <p>
      * Note: Only the event's element name and type are compared. The method returns true if the start and end events
      * are the corresponding event types for an element of the same name.
      *
@@ -256,7 +278,7 @@ public interface XMLEventParserContext extends AVList
      * Specify the object to receive notifications, which are sent when exceptions occur during parsing and when
      * unrecognized element types are encountered. See {@link gov.nasa.worldwind.util.xml.XMLParserNotification} for
      * more information.
-     * <p/>
+     * <p>
      * The parser context may have only one notification listener. That listener may be changed at any time.
      *
      * @param listener the object to receive notification events.

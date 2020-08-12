@@ -160,6 +160,10 @@ public final class WriterBasedGenerator
     /**
      * Specialized version of <code>_writeFieldName</code>, off-lined
      * to keep the "fast path" as simple (and hopefully fast) as possible.
+     * @param name Undocumented.
+     * @param commaBefore Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     protected final void _writePPFieldName(String name, boolean commaBefore)
         throws IOException, JsonGenerationException

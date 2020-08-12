@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.geom;
 
@@ -95,10 +117,10 @@ public class Vec4
     /**
      * Constructs a new Vec4 with coordinate values read from the specified double array. The specified offset must be 0
      * or greater, the specified length must be 1 or greater, and the array must have capacity equal to or greater than
-     * <code>offset + length</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br/> <code>y
-     * = array[offset + 1]</code> if <code>length > 1</code>, otherwise <code>y=0</code><br/><code>z = array[offset +
-     * 2]</code> if <code>length > 2</code>, otherwise <code>z=0</code><br/><code>w = array[offset + 3]</code> if
-     * <code>length > 3</code>, otherwise <code>w=1</code></p>
+     * <code>offset + length</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br> <code>y
+     * = array[offset + 1]</code> if <code>length &gt; 1</code>, otherwise <code>y=0</code><br><code>z = array[offset +
+     * 2]</code> if <code>length &gt; 2</code>, otherwise <code>z=0</code><br><code>w = array[offset + 3]</code> if
+     * <code>length &gt; 3</code>, otherwise <code>w=1</code></p>
      *
      * @param array  the double array from which to read coordinate data.
      * @param offset the array starting index.
@@ -154,10 +176,10 @@ public class Vec4
     /**
      * Constructs a new Vec4 with coordinate values read from the specified float array. The specified offset must be 0
      * or greater, the specified length must be 1 or greater, and the array must have capacity equal to or greater than
-     * <code>offset + length</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br/> <code>y
-     * = array[offset + 1]</code> if <code>length > 1</code>, otherwise <code>y=0</code><br/><code>z = array[offset +
-     * 2]</code> if <code>length > 2</code>, otherwise <code>z=0</code><br/><code>w = array[offset + 3]</code> if
-     * <code>length > 3</code>, otherwise <code>w=1</code></p>
+     * <code>offset + length</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br> <code>y
+     * = array[offset + 1]</code> if <code>length &gt; 1</code>, otherwise <code>y=0</code><br><code>z = array[offset +
+     * 2]</code> if <code>length &gt; 2</code>, otherwise <code>z=0</code><br><code>w = array[offset + 3]</code> if
+     * <code>length &gt; 3</code>, otherwise <code>w=1</code></p>
      *
      * @param array  the float array from which to read coordinate data.
      * @param offset the array starting index.
@@ -210,7 +232,7 @@ public class Vec4
     /**
      * Constructs a new Vec4 with <code>x</code> and <code>y</code> values from the specified double array. The
      * specified offset must be 0 or greater, and the array must have capacity equal to or greater than <code>offset +
-     * 2</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br/><code>y = array[offset +
+     * 2</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br><code>y = array[offset +
      * 1]</code></p>
      *
      * @param array  the double array from which to read coordinate data.
@@ -236,8 +258,8 @@ public class Vec4
     /**
      * Constructs a new Vec4 with <code>x</code>, <code>y</code> and <code>z</code> values from the specified double
      * array. The specified offset must be 0 or greater, and the array must have capacity equal to or greater than
-     * <code>offset + 3</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br/><code>y =
-     * array[offset + 1]</code><br/><code>z = array[offset + 2]</code></p>
+     * <code>offset + 3</code>. Coordinates are assigned as follows:<p><code>x = array[offset]</code><br><code>y =
+     * array[offset + 1]</code><br><code>z = array[offset + 2]</code></p>
      *
      * @param array  the double array from which to read coordinate data.
      * @param offset the array starting index.
@@ -264,7 +286,7 @@ public class Vec4
      * Constructs a new Vec4 with <code>x</code>, <code>y</code>, <code>z</code> and <code>w</code> values from the
      * specified double array. The specified offset must be 0 or greater, and the array must have capacity equal to or
      * greater than <code>offset + 4</code>. Coordinates are assigned as follows:<p><code>x =
-     * array[offset]</code><br/><code>y = array[offset + 1]</code><br/><code>z = array[offset + 2]</code><br/><code>w =
+     * array[offset]</code><br><code>y = array[offset + 1]</code><br><code>z = array[offset + 2]</code><br><code>w =
      * array[offset + 3]</code></p>
      *
      * @param array  the double array from which to read coordinate data.
@@ -292,9 +314,9 @@ public class Vec4
      * Writes this Vec4's coordinate values to the specified double array. The specified offset must be 0 or greater,
      * the specified length must be 1 or greater, and the array must have capacity equal to or greater than <code>offset
      * + length</code>. Coordinates are written to the array as follows:<p><code>array[offset] =
-     * x</code><br/><code>array[offset + 1] = y</code> if <code>length > 1</code>, otherwise <code>array[offset +
-     * 1]</code> is not written to<br/> <code>array[offset + 2] = z</code> if <code>length > 2</code>, otherwise
-     * <code>array[offset + 2]</code> is not written to<br/><code>array[offset + 3] = w</code> if <code>length >
+     * x</code><br><code>array[offset + 1] = y</code> if <code>length &gt; 1</code>, otherwise <code>array[offset +
+     * 1]</code> is not written to<br> <code>array[offset + 2] = z</code> if <code>length &gt; 2</code>, otherwise
+     * <code>array[offset + 2]</code> is not written to<br><code>array[offset + 3] = w</code> if <code>length &gt;
      * 3</code>, otherwise <code>array[offset + 3]</code> is not written to</p>
      *
      * @param array  the double array to receive the coordinate data.
@@ -352,9 +374,9 @@ public class Vec4
      * Writes this Vec4's coordinate values to the specified float array. The specified offset must be 0 or greater, the
      * specified length must be 1 or greater, and the array must have capacity equal to or greater than <code>offset +
      * length</code>. Coordinates are written to the array as follows:<p><code>array[offset] =
-     * x</code><br/><code>array[offset + 1] = y</code> if <code>length > 1</code>, otherwise <code>array[offset +
-     * 1]</code> is not written to<br/> <code>array[offset + 2] = z</code> if <code>length > 2</code>, otherwise
-     * <code>array[offset + 2]</code> is not written to<br/><code>array[offset + 3] = w</code> if <code>length >
+     * x</code><br><code>array[offset + 1] = y</code> if <code>length &gt; 1</code>, otherwise <code>array[offset +
+     * 1]</code> is not written to<br> <code>array[offset + 2] = z</code> if <code>length &gt; 2</code>, otherwise
+     * <code>array[offset + 2]</code> is not written to<br><code>array[offset + 3] = w</code> if <code>length &gt;
      * 3</code>, otherwise <code>array[offset + 3]</code> is not written to</p>
      *
      * @param array  the float array to receive the coordinate data.
@@ -410,7 +432,7 @@ public class Vec4
     /**
      * Writes this Vec4's <code>x</code> and <code>y</code> values to the specified double array. The specified offset
      * must be 0 or greater, and the array must have have capacity equal to or greater than <code>offset + 2</code>.
-     * Coordinates are written to the array as follows:<p><code>array[offset] = x</code><br/><code>array[offset + 1] =
+     * Coordinates are written to the array as follows:<p><code>array[offset] = x</code><br><code>array[offset + 1] =
      * y</code></p>
      *
      * @param array  the double array to receive the coordinate data.
@@ -437,7 +459,7 @@ public class Vec4
      * Writes this Vec4's <code>x</code>, <code>y</code> and <code>z</code> values to the specified double array. The
      * specified offset must be 0 or greater, and the array must have have capacity equal to or greater than
      * <code>offset + 3</code>. Coordinates are written to the array as follows:<p><code>array[offset] =
-     * x</code><br/><code>array[offset + 1] = y</code><br/><code>array[offset + 2] = z</code></p>
+     * x</code><br><code>array[offset + 1] = y</code><br><code>array[offset + 2] = z</code></p>
      *
      * @param array  the double array to receive the coordinate data.
      * @param offset the array starting index.
@@ -463,7 +485,7 @@ public class Vec4
      * Writes this Vec4's <code>x</code>, <code>y</code>, <code>z</code> and <code>w</code> values to the specified
      * double array. The specified offset must be 0 or greater, and the array must have have capacity equal to or
      * greater than <code>offset + 4</code>. Coordinates are written to the array as follows:<p><code>array[offset] =
-     * x</code><br/><code>array[offset + 1] = y</code><br/><code>array[offset + 2] = z</code><br/><code>array[offset +
+     * x</code><br><code>array[offset + 1] = y</code><br><code>array[offset + 2] = z</code><br><code>array[offset +
      * 3] = w</code></p>
      *
      * @param array  the double array to receive the coordinate data.
@@ -490,7 +512,7 @@ public class Vec4
      * Returns a representation of this vector as an <code>x y z</code> point suitable for use where four-dimensional
      * homogeneous coordinates are required. The returned vector has <code>x y z</code> coordinates are equal to this
      * vector's <code>x y z</code> coordinates, and has <code>w</code> coordinate equal to 1.0.
-     * <p/>
+     * <p>
      * A three-dimensional point in homogeneous coordinates is necessary when transforming that point by a 4x4
      * transformation matrix, or when calculating the dot product of the point and the equation of a plane. The returned
      * vector is affected by the translation component of a 4x4 transformation matrix.
@@ -512,7 +534,7 @@ public class Vec4
      * Returns a representation of this vector as an <code>x y z</code> direction suitable for use where
      * four-dimensional homogeneous coordinates are required. The returned vector has <code>x y z</code> coordinates are
      * equal to this vector's <code>x y z</code> coordinates, and has <code>w</code> coordinate equal to 0.0.
-     * <p/>
+     * <p>
      * A three-dimensional direction in homogeneous coordinates is necessary when transforming that direction by a 4x4
      * transformation matrix. The returned vector is not affected by the translation component of a 4x4 transformation
      * matrix, and therefore remains invariant under translation.
@@ -1153,7 +1175,7 @@ public class Vec4
     /**
      * Returns the arithmetic mean of the x, y, z coordinates of the specified points buffer. This returns null if the
      * buffer is empty.
-     * <p/>
+     * <p>
      * The buffer must contain XYZ coordinate tuples which are either tightly packed or offset by the specified stride.
      * The stride specifies the number of buffer elements between the first coordinate of consecutive tuples. For
      * example, a stride of 3 specifies that each tuple is tightly packed as XYZXYZXYZ, whereas a stride of 5 specifies

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.formats.dds;
 
@@ -10,7 +32,7 @@ import gov.nasa.worldwind.util.Logging;
 /**
  * Compressor for DXT2/DXT3 alpha and color blocks. This class is not thread safe. Unsynchronized access will result in
  * unpredictable behavior. Access to methods of this class must be synchronized by the caller.
- * <p/>
+ * <p>
  * Documentation on the DXT2/DXT3 format is available at http://msdn.microsoft.com/en-us/library/bb694531.aspx under
  * the name "BC2".
  *
@@ -36,7 +58,7 @@ public class BlockDXT3Compressor
      * Compress the 4x4 color block into a DXT2/DXT3 block using 16 4 bit alpha values, and four colors. This method
      * compresses the color block exactly as a DXT1 compressor, except that it guarantees that the DXT1 block will use
      * four colors.
-     * <p/>
+     * <p>
      * Access to this method must be synchronized by the caller. This method is frequently invoked by the DXT
      * compressor, so in order to reduce garbage each instance of this class has unsynchronized properties that are
      * reused during each call.

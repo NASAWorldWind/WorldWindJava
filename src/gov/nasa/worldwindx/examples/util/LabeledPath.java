@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples.util;
 
@@ -16,7 +38,7 @@ import java.awt.*;
  * LabeledPath draws a {@link gov.nasa.worldwind.render.Annotation} on a specified path. The path itself is not drawn.
  * Instead, the annotation is drawn at the location that maximizes the annotation's visible area in the viewport. The
  * annotation is not drawn if the location list is {@code null}, or if no location in the list is visible.
- * <p/>
+ * <p>
  * The caller must specify the screen annotation used to draw the path's label by calling {@link
  * #setAnnotation(gov.nasa.worldwind.render.ScreenAnnotation)}. The path sets the specified annotation's screen point to
  * control the label's location, but otherwise does not modify the annotation.
@@ -128,7 +150,7 @@ public class LabeledPath implements Renderable
     /**
      * Specifies the labeled path's altitude mode, one of {@link gov.nasa.worldwind.WorldWind#ABSOLUTE}, {@link
      * gov.nasa.worldwind.WorldWind#RELATIVE_TO_GROUND} or {@link gov.nasa.worldwind.WorldWind#CLAMP_TO_GROUND}.
-     * <p/>
+     * <p>
      * Note: If the altitude mode is unrecognized, {@link gov.nasa.worldwind.WorldWind#ABSOLUTE} is used.
      *
      * @param altitudeMode the altitude mode. The default value is {@link gov.nasa.worldwind.WorldWind#ABSOLUTE}.

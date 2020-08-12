@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.geom;
 
@@ -1607,12 +1629,12 @@ public class Matrix
     /**
      * Computes a symmetric covariance Matrix from the x, y, z coordinates of the specified points Iterable. This
      * returns null if the points Iterable is empty, or if all of the points are null.
-     * <p/>
+     * <p>
      * The returned covariance matrix represents the correlation between each pair of x-, y-, and z-coordinates as
      * they're distributed about the point Iterable's arithmetic mean. Its layout is as follows:
-     * <p/>
-     * <code> C(x, x)  C(x, y)  C(x, z) <br/> C(x, y)  C(y, y)  C(y, z) <br/> C(x, z)  C(y, z)  C(z, z) </code>
-     * <p/>
+     * <p>
+     * <code> C(x, x)  C(x, y)  C(x, z) <br> C(x, y)  C(y, y)  C(y, z) <br> C(x, z)  C(y, z)  C(z, z) </code>
+     * <p>
      * C(i, j) is the covariance of coordinates i and j, where i or j are a coordinate's dispersion about its mean
      * value. If any entry is zero, then there's no correlation between the two coordinates defining that entry. If the
      * returned matrix is diagonal, then all three coordinates are uncorrelated, and the specified point Iterable is
@@ -1672,17 +1694,17 @@ public class Matrix
     /**
      * Computes a symmetric covariance Matrix from the x, y, z coordinates of the specified buffer of points. This
      * returns null if the buffer is empty.
-     * <p/>
+     * <p>
      * The returned covariance matrix represents the correlation between each pair of x-, y-, and z-coordinates as
      * they're distributed about the points arithmetic mean. Its layout is as follows:
-     * <p/>
-     * <code> C(x, x)  C(x, y)  C(x, z) <br/> C(x, y)  C(y, y)  C(y, z) <br/> C(x, z)  C(y, z)  C(z, z) </code>
-     * <p/>
+     * <p>
+     * <code> C(x, x)  C(x, y)  C(x, z) <br> C(x, y)  C(y, y)  C(y, z) <br> C(x, z)  C(y, z)  C(z, z) </code>
+     * <p>
      * C(i, j) is the covariance of coordinates i and j, where i or j are a coordinate's dispersion about its mean
      * value. If any entry is zero, then there's no correlation between the two coordinates defining that entry. If the
      * returned matrix is diagonal, then all three coordinates are uncorrelated, and the specified points are
      * distributed evenly about their mean point.
-     * <p/>
+     * <p>
      * The buffer must contain XYZ coordinate tuples which are either tightly packed or offset by the specified stride.
      * The stride specifies the number of buffer elements between the first coordinate of consecutive tuples. For
      * example, a stride of 3 specifies that each tuple is tightly packed as XYZXYZXYZ, whereas a stride of 5 specifies
@@ -2422,10 +2444,10 @@ public class Matrix
 
     /**
      * Extracts this viewing matrix's eye point.
-     * <p/>
+     * <p>
      * This method assumes that this matrix represents a viewing matrix. If this does not represent a viewing matrix the
      * results are undefined.
-     * <p/>
+     * <p>
      * In model coordinates, a viewing matrix's eye point is the point the viewer is looking from and maps to the center
      * of the screen.
      *
@@ -2445,10 +2467,10 @@ public class Matrix
 
     /**
      * Extracts this viewing matrix's forward vector.
-     * <p/>
+     * <p>
      * This method assumes that this matrix represents a viewing matrix. If this does not represent a viewing matrix the
      * results are undefined.
-     * <p/>
+     * <p>
      * In model coordinates, a viewing matrix's forward vector is the direction the viewer is looking and maps to a
      * vector going into the screen.
      *
@@ -2463,10 +2485,10 @@ public class Matrix
 
     /**
      * Extracts this viewing matrix's parameters given a viewing origin and a globe.
-     * <p/>
+     * <p>
      * This method assumes that this matrix represents a viewing matrix. If this does not represent a viewing matrix the
      * results are undefined.
-     * <p/>
+     * <p>
      * This returns a parameterization of this viewing matrix based on the specified origin and globe. The origin
      * indicates the model coordinate point that the view's orientation is relative to, while the globe provides the
      * necessary model coordinate context for the origin and the orientation. The origin should be either the view's eye

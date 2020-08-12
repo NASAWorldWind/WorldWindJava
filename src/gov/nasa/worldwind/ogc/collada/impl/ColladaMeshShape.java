@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.ogc.collada.impl;
@@ -17,7 +39,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.nio.FloatBuffer;
 import java.util.*;
@@ -29,7 +51,7 @@ import java.util.List;
  * instances are created by {@link #createTriangleMesh(java.util.List, gov.nasa.worldwind.ogc.collada.ColladaBindMaterial)
  * createTriangleMesh} and {@link #createLineMesh(java.util.List, gov.nasa.worldwind.ogc.collada.ColladaBindMaterial)
  * createLineMesh}.
- * <p/>
+ * <p>
  * This shape supports only COLLADA line and triangle geometries.
  *
  * @author pabercrombie
@@ -227,6 +249,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
      *
      * @param geometries   COLLADA elements that defines geometry for this shape. Must contain at least one element.
      * @param bindMaterial Material applied to the mesh. May be null.
+     * @return The resulting shape.
      */
     public static ColladaMeshShape createTriangleMesh(List<ColladaTriangles> geometries,
         ColladaBindMaterial bindMaterial)
@@ -245,6 +268,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
      *
      * @param geometries   COLLADA elements that defines geometry for this shape. Must contain at least one element.
      * @param bindMaterial Material applied to the mesh. May be null.
+     * @return The resulting shape.
      */
     public static ColladaMeshShape createLineMesh(List<ColladaLines> geometries,
         ColladaBindMaterial bindMaterial)
@@ -283,7 +307,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * COLLADA shapes do not support intersection tests because the shape may be rendered multiple times with different
      * transform matrices. It's not possible to determine intersection without the transform matrix applied when the
      * shape is rendered.
@@ -721,7 +745,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
 
     /**
      * Compute enough geometry to determine this shape's extent, reference point and eye distance.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc        the current draw context.
@@ -967,7 +991,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
 
     /**
      * Computes the minimum distance between this shape and the eye point.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -1043,6 +1067,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
     /**
      * Indicates the texture applied to this shape.
      *
+     * @param geometry The geometry to set the texture from.
      * @return The texture that must be applied to the shape, or null if there is no texture, or the texture is not
      *         available.
      */

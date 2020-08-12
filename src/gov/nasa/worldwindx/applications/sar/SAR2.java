@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.applications.sar;
@@ -741,7 +763,7 @@ public class SAR2 extends JFrame
     private void initComponents()
     {
         //======== this ========
-        setTitle("World Wind Search and Rescue");
+        setTitle("WorldWind Search and Rescue");
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter()
         {
@@ -785,7 +807,7 @@ public class SAR2 extends JFrame
                 newTrack.setText("New Track...");
                 newTrack.setMnemonic('N');
                 newTrack.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 newTrack.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent e)
@@ -800,7 +822,7 @@ public class SAR2 extends JFrame
                 openTrackFile.setText("Open Track File...");
                 openTrackFile.setMnemonic('O');
                 openTrackFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 openTrackFile.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent e)
@@ -815,7 +837,7 @@ public class SAR2 extends JFrame
                 openTrackURL.setText("Open Track URL...");
                 openTrackURL.setMnemonic('U');
                 openTrackURL.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 openTrackURL.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent e)
@@ -831,7 +853,7 @@ public class SAR2 extends JFrame
                 removeTrack.setMnemonic('C');
                 removeTrack.setAccelerator(KeyStroke.getKeyStroke(
                     Configuration.isMacOS() ? KeyEvent.VK_W : KeyEvent.VK_F4,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 removeTrack.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent e)
@@ -849,7 +871,7 @@ public class SAR2 extends JFrame
                 saveTrack.setText("Save Track");
                 saveTrack.setMnemonic('S');
                 saveTrack.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 saveTrack.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent event)
@@ -866,7 +888,7 @@ public class SAR2 extends JFrame
                 saveTrackAs.setText("Save Track As...");
                 saveTrackAs.setMnemonic('A');
                 saveTrackAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + java.awt.Event.SHIFT_MASK));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() + java.awt.event.InputEvent.SHIFT_DOWN_MASK));
                 saveTrackAs.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent event)
@@ -882,7 +904,7 @@ public class SAR2 extends JFrame
                 screenShot.setIcon(null); // Make sure the menu items displays only text.
                 screenShot.setMnemonic('T');
                 screenShot.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 fileMenu.add(screenShot);
 
                 //--------
@@ -892,7 +914,7 @@ public class SAR2 extends JFrame
                 bulkDownload.setText("Bulk download...");
                 bulkDownload.setMnemonic('B');
                 bulkDownload.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 bulkDownload.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent event)
@@ -982,7 +1004,7 @@ public class SAR2 extends JFrame
                 metersMenuItem.setText("Meters");
                 metersMenuItem.setMnemonic('M');
                 metersMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 metersMenuItem.setActionCommand(UNIT_METRIC);
                 metersMenuItem.addActionListener(new ActionListener()
                 {
@@ -998,7 +1020,7 @@ public class SAR2 extends JFrame
                 feetMenuItem.setText("Feet");
                 feetMenuItem.setMnemonic('F');
                 feetMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
-                    java.awt.event.InputEvent.ALT_MASK));
+                    java.awt.event.InputEvent.ALT_DOWN_MASK));
                 feetMenuItem.setActionCommand(UNIT_IMPERIAL);
                 feetMenuItem.addActionListener(new ActionListener()
                 {
@@ -1020,7 +1042,7 @@ public class SAR2 extends JFrame
                 angleDDMenuItem.setText("Angles DD");
                 angleDDMenuItem.setMnemonic('D');
                 angleDDMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 angleDDMenuItem.setActionCommand(Angle.ANGLE_FORMAT_DD);
                 angleDDMenuItem.addActionListener(new ActionListener()
                 {
@@ -1036,7 +1058,7 @@ public class SAR2 extends JFrame
                 angleDMSMenuItem.setText("Angles DMS");
                 angleDMSMenuItem.setMnemonic('S');
                 angleDMSMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,
-                    java.awt.event.InputEvent.ALT_MASK));
+                    java.awt.event.InputEvent.ALT_DOWN_MASK));
                 angleDMSMenuItem.setActionCommand(Angle.ANGLE_FORMAT_DMS);
                 angleDMSMenuItem.addActionListener(new ActionListener()
                 {
@@ -1064,7 +1086,7 @@ public class SAR2 extends JFrame
                 newAnnotation.setText("New Annotation...");
                 newAnnotation.setMnemonic('N');
                 newAnnotation.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 newAnnotation.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent e)
@@ -1079,7 +1101,7 @@ public class SAR2 extends JFrame
                 removeAnnotation.setText("Remove Annotation");
                 removeAnnotation.setMnemonic('R');
                 removeAnnotation.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + java.awt.Event.SHIFT_MASK));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() + java.awt.event.InputEvent.SHIFT_DOWN_MASK));
                 removeAnnotation.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent event)
@@ -1094,7 +1116,7 @@ public class SAR2 extends JFrame
                 showAnnotations.setText("Show Annotations");
                 showAnnotations.setMnemonic('S');
                 showAnnotations.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
-                    java.awt.event.InputEvent.ALT_MASK));
+                    java.awt.event.InputEvent.ALT_DOWN_MASK));
                 showAnnotations.setSelected(true);
                 showAnnotations.addItemListener(new ItemListener()
                 {
@@ -1135,7 +1157,7 @@ public class SAR2 extends JFrame
                     sarHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
                 else
                     sarHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_HELP,
-                        Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                        Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 sarHelp.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent e)
@@ -1145,7 +1167,7 @@ public class SAR2 extends JFrame
                 });
                 helpMenu.add(sarHelp);
 
-                //---- "About [World Wind Search and Rescue Prototype]" ----
+                //---- "About [WorldWind Search and Rescue Prototype]" ----
                 if (!Configuration.isMacOS())
                 {
                     JMenuItem about = new JMenuItem();

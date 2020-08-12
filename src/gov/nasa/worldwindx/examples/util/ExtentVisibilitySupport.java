@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples.util;
 
@@ -24,11 +46,11 @@ import java.util.ArrayList;
  * The static convenience method {@link #extentsFromExtentHolders(Iterable, gov.nasa.worldwind.globes.Globe, double)}
  * makes it easy to for callers to convert an Iterable of Extents references to an Iterable of {@link
  * gov.nasa.worldwind.geom.ExtentHolder} references.
- * <p/>
+ * <p>
  * The method {@link #areExtentsContained(gov.nasa.worldwind.View)} provides a mechanism for callers to test whether or
  * not the currently configured scene is entirely contained within a certain {@link gov.nasa.worldwind.View}. This
  * method tests containment on both the model coordinate extents and screen coordinate extents.
- * <p/>
+ * <p>
  * The method {@link #computeViewLookAtContainingExtents(gov.nasa.worldwind.globes.Globe, double,
  * gov.nasa.worldwind.View)} returns a viewing coordinate system which contains the currently configured scene, while
  * preserving the current view's orientation to the globe (heading and pitch). This has the effect of computing the pan
@@ -296,7 +318,7 @@ public class ExtentVisibilitySupport
      * elements. The returned look-at vectors define a new viewing coordinate system as follows: The vector at index 0
      * defines the eye point, the vector at index 1 defines the reference center point, and the value at index 2 defines
      * the up vector.
-     * <p/>
+     * <p>
      * The specified eye point, reference center point, and up vector define the input view coordinate system, and the
      * returned view coordinates preserve the input view coordinates' orientation relative to the specified Globe. The
      * field-of-view, viewport and clip distances define the input view projection parameters, and are used to compute
@@ -428,7 +450,7 @@ public class ExtentVisibilitySupport
      * elements. The returned look-at vectors define a new viewing coordinate system as follows: The vector at index 0
      * defines the eye point, the vector at index 1 defines the reference center point, and the value at index 2 defines
      * the up vector.
-     * <p/>
+     * <p>
      * The specified View defines both the input view coordinate system, and the input view projection parameters. The
      * returned view coordinates preserve the input view's orientation relative to the specified Globe, and are optimal
      * for the View's projection parameters.

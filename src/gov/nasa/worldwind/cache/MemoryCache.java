@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.cache;
 
@@ -57,7 +79,7 @@ public interface MemoryCache
     void removeCacheListener(CacheListener listener);
 
     /**
-     * Discovers whether or not this cache contains the object referenced by <code> key. Currently no interface exists
+     * Discovers whether or not this cache contains the object referenced by <code> key </code>. Currently no interface exists
      * to discover if an object resides in the cache by referencing itself.
      *
      * @param key the key which the object is referenced by.
@@ -70,10 +92,10 @@ public interface MemoryCache
      * Attempts to add the object <code>clientObject</code>, with size <code>objectSize</code> and referred to by
      * <code>key</code> to the cache. <code>objectSize</code> is the size in cache units, but is not checked for
      * accuracy. Returns whether or not the add was successful.
-     * <p/>
+     * <p>
      * Note that the size passed in may be used, rather than the real size of the object. In some implementations, the
      * accuracy of the space used calls will depend on the collection of these sizes, rather than actual size.
-     * <p/>
+     * <p>
      * This method should be declared <code>synchronized</code> when it is implemented.
      *
      * @param key          an object used to reference the cached item.
@@ -87,7 +109,7 @@ public interface MemoryCache
     /**
      * Attempts to add the <code>Cacheable</code> object referenced by the key. No explicit size value is required as
      * this method queries the Cacheable to discover the size.
-     * <p/>
+     * <p>
      * This method should be declared <code>synchronized</code> when it is implemented.
      *
      * @param key          an object used to reference the cached item.
@@ -120,7 +142,7 @@ public interface MemoryCache
     /**
      * Empties the cache. After calling <code>clear()</code> on a <code>MemoryCache</code>, calls relating to used
      * capacity and number of items should return zero and the free capacity should be the maximum capacity.
-     * <p/>
+     * <p>
      * This method should be declared <code>synchronized</code> when it is implemented and should notify all
      * <code>CacheListener</code>s of entries removed.
      */

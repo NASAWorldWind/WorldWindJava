@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util;
@@ -125,7 +147,7 @@ public class WWMath
      * @param min the floor.
      * @param max the ceiling
      *
-     * @return the nearest value such that min <= v <= max.
+     * @return the nearest value such that min &lt;= v &lt;= max.
      */
     public static double clamp(double v, double min, double max)
     {
@@ -139,7 +161,7 @@ public class WWMath
      * @param min the floor.
      * @param max the ceiling
      *
-     * @return the nearest value such that min <= v <= max.
+     * @return the nearest value such that min &lt;= v &lt;= max.
      */
     public static int clamp(int v, int min, int max)
     {
@@ -150,10 +172,10 @@ public class WWMath
      * Returns a number between 0.0 and 1.0 indicating whether a specified floating point value is before, between or
      * after the specified min and max. Returns a linear interpolation of min and max when the value is between the
      * two.
-     * <p/>
-     * The returned number is undefined if min > max. Otherwise, the returned number is equivalent to the following:
-     * <ul> <li>0.0 - If value < min</li> <li>1.0 - If value > max</li> <li>Linear interpolation of min and max - If min
-     * <= value <= max</li> </ul>
+     * <p>
+     * The returned number is undefined if min &gt; max. Otherwise, the returned number is equivalent to the following:
+     * <ul> <li>0.0 - If value &lt; min</li> <li>1.0 - If value &gt; max</li> <li>Linear interpolation of min and max - If min
+     * &lt;= value &lt;= max</li> </ul>
      *
      * @param value the value to compare to the minimum and maximum.
      * @param min   the minimum value.
@@ -185,16 +207,15 @@ public class WWMath
      * Returns a number between 0.0 and 1.0 indicating whether a specified floating point value is before, between or
      * after the specified min and max. Returns a smooth interpolation of min and max when the value is between the
      * two.
-     * <p/>
+     * <p>
      * This method's smooth interpolation is similar to the interpolation performed by {@link #stepValue(double, double,
      * double)}, except that the first derivative of the returned number approaches zero as the value approaches the
      * minimum or maximum. This causes the returned number to ease-in and ease-out as the value travels between the
      * minimum and maximum.
-     * <p/>
-     * The returned number is undefined if min > max. Otherwise, the returned number is equivalent to the following:
-     * <p/>
-     * <ul> <li>0.0 - If value < min</li> <li>1.0 - If value > max</li> <li>Smooth interpolation of min and max - If min
-     * <= value <= max</li> </ul>
+     * <p>
+     * The returned number is undefined if min &gt; max. Otherwise, the returned number is equivalent to the following:
+     * <ul> <li>0.0 - If value &lt; min</li> <li>1.0 - If value &gt; max</li> <li>Smooth interpolation of min and max - If min
+     * &lt;= value &lt;= max</li> </ul>
      *
      * @param value the value to compare to the minimum and maximum.
      * @param min   the minimum value.
@@ -495,7 +516,7 @@ public class WWMath
      * viewport. The returned value is the screen area that the sphere covers in the infinite plane defined by the
      * <code>view's</code> viewport. This area is not limited to the size of the <code>view's</code> viewport, and
      * portions of the sphere are not clipped by the <code>view's</code> frustum.
-     * <p/>
+     * <p>
      * This returns zero if the specified <code>radius</code> is zero.
      *
      * @param view   the <code>View</code> for which to compute a projected screen area.
@@ -887,7 +908,7 @@ public class WWMath
      * the specified buffer of points, sorted from the most prominent axis to the least prominent. This returns null if
      * the buffer is empty. The returned array contains three normalized orthogonal vectors defining a coordinate system
      * which best fits the distribution of the points about its arithmetic mean.
-     * <p/>
+     * <p>
      * The buffer must contain XYZ coordinate tuples which are either tightly packed or offset by the specified stride.
      * The stride specifies the number of buffer elements between the first coordinate of consecutive tuples. For
      * example, a stride of 3 specifies that each tuple is tightly packed as XYZXYZXYZ, whereas a stride of 5 specifies
@@ -1161,7 +1182,7 @@ public class WWMath
 
     /**
      * Intersect a line with a convex polytope and return the intersection points.
-     * <p/>
+     * <p>
      * See "3-D Computer Graphics" by Samuel R. Buss, 2005, Section X.1.4.
      *
      * @param line   the line to intersect with the polytope.
@@ -1257,10 +1278,10 @@ public class WWMath
     /**
      * Computes an index buffer in the system native byte order that tessellates the interior of a vertex grid as a
      * triangle strip. The returned buffer may be used as the source <code>buffer</code> in a call to {@link
-     * javax.media.opengl.GL2#glDrawElements(int, int, int, java.nio.Buffer)}, where <code>mode</code> is {@link
-     * javax.media.opengl.GL#GL_TRIANGLE_STRIP}, <code>count</code> is the number of elements remaining in the buffer,
-     * and <code>type</code> is {@link javax.media.opengl.GL#GL_UNSIGNED_INT}.
-     * <p/>
+     * com.jogamp.opengl.GL2#glDrawElements(int, int, int, java.nio.Buffer)}, where <code>mode</code> is {@link
+     * com.jogamp.opengl.GL#GL_TRIANGLE_STRIP}, <code>count</code> is the number of elements remaining in the buffer,
+     * and <code>type</code> is {@link com.jogamp.opengl.GL#GL_UNSIGNED_INT}.
+     * <p>
      * For details the drawing OpenGL primitives, see <a href="http://www.glprogramming.com/red/chapter02.html#name14">http://www.glprogramming.com/red/chapter02.html#name14</a>.
      *
      * @param width  the patch width, in vertices.
@@ -1313,10 +1334,10 @@ public class WWMath
     /**
      * Computes an index buffer in the system native byte order that tessellates the outline of a vertex grid as a line
      * strip. The returned buffer may be used as the source <code>buffer</code> in a call to {@link
-     * javax.media.opengl.GL2#glDrawElements(int, int, int, java.nio.Buffer)}, where <code>mode</code> is {@link
-     * javax.media.opengl.GL#GL_LINE_STRIP}, <code>count</code> is the number of elements remaining in the buffer, and
-     * <code>type</code> is {@link javax.media.opengl.GL#GL_UNSIGNED_INT}.
-     * <p/>
+     * com.jogamp.opengl.GL2#glDrawElements(int, int, int, java.nio.Buffer)}, where <code>mode</code> is {@link
+     * com.jogamp.opengl.GL#GL_LINE_STRIP}, <code>count</code> is the number of elements remaining in the buffer, and
+     * <code>type</code> is {@link com.jogamp.opengl.GL#GL_UNSIGNED_INT}.
+     * <p>
      * For details the drawing OpenGL primitives, see <a href="http://www.glprogramming.com/red/chapter02.html#name14">http://www.glprogramming.com/red/chapter02.html#name14</a>.
      *
      * @param width  the patch width, in vertices.
@@ -1375,7 +1396,7 @@ public class WWMath
      * to store the same number of vertices as the vertex buffer. The vertex buffer is assumed to contain tightly packed
      * 3-coordinate tuples. The 3-coordinate normal for each vertex is stored in the normal buffer at the same position
      * each vertex appears in the vertex buffer.
-     * <p/>
+     * <p>
      * For details the drawing OpenGL primitives, see <a href="http://www.glprogramming.com/red/chapter02.html#name14">http://www.glprogramming.com/red/chapter02.html#name14</a>.
      *
      * @param indices  indices into the vertex buffer defining a triangle strip.

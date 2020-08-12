@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.formats.tiff;
 
@@ -171,12 +193,12 @@ class GeoCodec
     /**
      * Returns the geocoordinates for a given pixel, as determined by the modeling coordinate tranformation embodied in
      * the GeoCodec.
-     * <p/>
+     * <p>
      * TODO: Also throws UnsupportedOperationException if this is anything other than a "simple" georeferenced mapping,
      * meaning that there's a single tie-point known about the point 0,0, we know the inter-pixel spacing, and there's
      * no rotation of the image required.  Geo referencing may also be specified via a general 4x4 matrix, or by a list
      * if tie-points, implying a rubbersheeting transformation. These two cases remain to be implemented.
-     * <p/>
+     * <p>
      *
      * @param row pixel-row index
      * @param col pixel-column index
@@ -202,7 +224,7 @@ class GeoCodec
 
     /**
      * Gets the values of the given GeoKey as an array of ints.
-     * <p/>
+     * <p>
      * While this method handles the general case of multiple ints associated with a key, typically there will be only a
      * single value.
      *

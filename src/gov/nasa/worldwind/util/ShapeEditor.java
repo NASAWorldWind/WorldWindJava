@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2014 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util;
@@ -28,14 +50,14 @@ import java.util.List;
 /**
  * Provides a user interface for editing a shape and performs editing. Depending on the shape type, the shape is shown
  * with control points for vertex locations and size. All shapes are shown with a handle that provides rotation.
- * <p/>
+ * <p>
  * Left-drag on the shape's body moves the whole shape. Left-drag on a control point performs the action associated with
  * that control point. The editor provides vertex insertion and removal for airspace Polygon, Curtain, Route and Track
  * shapes, and SurfacePolygon and SurfacePolyline. Shift-left-click when the cursor is over the shape inserts a control
  * point at the cursor's position. Alt-left-click when the cursor is over a control point removes that control point.
  * Control points are added to the ends of airspace Polygon, Curtain, Route and Track, and SurfacePolyline by
  * shift-left-click on the first or last control point of the shape.
- * <p/>
+ * <p>
  * This editor supports airspaces other than Cake and all surface shapes except SurfaceMultiPolygon and SurfaceImage.
  *
  * @author tag
@@ -297,7 +319,7 @@ public class ShapeEditor implements SelectListener, PropertyChangeListener
      * @param wwd           the {@link gov.nasa.worldwind.WorldWindow} associated with the specified shape.
      * @param originalShape the shape to edit.
      *
-     * @throws java.lang.IllegalArgumentException if either the specified world window or shape is null.
+     * @throws java.lang.IllegalArgumentException if either the specified WorldWindow or shape is null.
      */
     public ShapeEditor(WorldWindow wwd, Renderable originalShape)
     {
@@ -418,9 +440,9 @@ public class ShapeEditor implements SelectListener, PropertyChangeListener
     }
 
     /**
-     * Indicates the World Window associated with this editor.
+     * Indicates the WorldWindow associated with this editor.
      *
-     * @return the World Window associated with this editor.
+     * @return the WorldWindow associated with this editor.
      */
     public WorldWindow getWwd()
     {
@@ -1269,8 +1291,7 @@ public class ShapeEditor implements SelectListener, PropertyChangeListener
         }
         else if (this.getShapeAltitudeMode() == WorldWind.CLAMP_TO_GROUND)
         {
-            rotationLine.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
-            rotationLine.setFollowTerrain(true);
+            rotationLine.setSurfacePath(true);
         }
         else
         {

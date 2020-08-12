@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology.milstd2525.graphics.lines;
@@ -160,7 +182,6 @@ public abstract class AbstractAxisArrow extends AbstractMilStd2525TacticalGraphi
      * default. However, some applications may prefer to specify the width of the route rather than the width of the
      * arrowhead. In the diagram below, the default behavior is for the final control point to specify point A. When
      * {@code finalPointWidthOfRoute} is true the final control point specifies point B instead.
-     * <p/>
      * <pre>
      *                 A
      *                 |\
@@ -223,7 +244,7 @@ public abstract class AbstractAxisArrow extends AbstractMilStd2525TacticalGraphi
 
     /**
      * Create positions that make up the arrow head.
-     * <p/>
+     * <p>
      * The arrow head is defined by the first two control points, and the last point. Pt. 1' is the point on the center
      * line at the base of the arrow head, and Pt. N' is the reflection of Pt. N about the center line.
      * <pre>
@@ -418,9 +439,8 @@ public abstract class AbstractAxisArrow extends AbstractMilStd2525TacticalGraphi
     protected Path createPath()
     {
         Path path = new Path();
-        path.setFollowTerrain(true);
+        path.setSurfacePath(true);
         path.setPathType(AVKey.GREAT_CIRCLE);
-        path.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
         path.setDelegateOwner(this.getActiveDelegateOwner());
         path.setAttributes(this.getActiveShapeAttributes());
         return path;

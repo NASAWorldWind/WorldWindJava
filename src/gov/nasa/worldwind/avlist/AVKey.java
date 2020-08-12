@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.avlist;
 
@@ -85,7 +107,7 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String DATA_TYPE = "gov.nasa.worldwind.avkey.DataType";
     final String DELETE_CACHE_ON_EXIT = "gov.nasa.worldwind.avkey.DeleteCacheOnExit";
     /**
-     * Indicates the World Wind scene's worst-case depth resolution, in meters. This is typically interpreted by the
+     * Indicates the WorldWind scene's worst-case depth resolution, in meters. This is typically interpreted by the
      * View as the desired resolution at the scene's maximum drawing distance. In this case, the resolution closer to
      * the viewer's eye point is significantly better then the worst-case resolution. Decreasing this value enables the
      * viewer to get closer to 3D shapes positioned above the terrain at the coast of potential rendering artifacts
@@ -296,7 +318,9 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String PIXEL_FORMAT = "gov.nasa.worldwind.avkey.PixelFormat";
     final String PIXEL_HEIGHT = "gov.nasa.worldwind.avkey.PixelHeight";
     final String PIXEL_WIDTH = "gov.nasa.worldwind.avkey.PixelWidth";
+    
     /** @deprecated Use <code>{@link #DATA_TYPE} instead.</code>. */
+    @Deprecated
     final String PIXEL_TYPE = AVKey.DATA_TYPE;
 
     final String PLACENAME_LAYER_CACHE_SIZE = "gov.nasa.worldwind.avkey.PlacenameLayerCacheSize";

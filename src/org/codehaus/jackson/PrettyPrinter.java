@@ -30,6 +30,9 @@ public interface PrettyPrinter
      * allow values to be parsed correctly. Pretty-printer is
      * to output some other suitable and nice-looking separator
      * (tab(s), space(s), linefeed(s) or any combination thereof).
+     * @param jg  Undocumented.
+     * @throws java.io.IOException  Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException  Undocumented.
      */
     public void writeRootValueSeparator(JsonGenerator jg)
         throws IOException, JsonGenerationException;
@@ -45,6 +48,9 @@ public interface PrettyPrinter
      * Pretty-printer is
      * to output a curly bracket as well, but can surround that
      * with other (white-space) decoration.
+     * @param jg Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     public void writeStartObject(JsonGenerator jg)
         throws IOException, JsonGenerationException;
@@ -59,8 +65,10 @@ public interface PrettyPrinter
      * to output a curly bracket as well, but can surround that
      * with other (white-space) decoration.
      *
+     * @param jg  Undocumented.
      * @param nrOfEntries Number of direct members of the array that
      *   have been output
+     * @throws org.codehaus.jackson.JsonGenerationException  Undocumented.
      */
     public void writeEndObject(JsonGenerator jg, int nrOfEntries)
         throws IOException, JsonGenerationException;
@@ -73,6 +81,9 @@ public interface PrettyPrinter
      * comma to separate the two. Pretty-printer is
      * to output a comma as well, but can surround that with other
      * (white-space) decoration.
+     * @param jg Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     public void writeObjectEntrySeparator(JsonGenerator jg)
         throws IOException, JsonGenerationException;
@@ -85,6 +96,9 @@ public interface PrettyPrinter
      * colon to separate the two. Pretty-printer is
      * to output a colon as well, but can surround that with other
      * (white-space) decoration.
+     * @param jg Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     public void writeObjectFieldValueSeparator(JsonGenerator jg)
         throws IOException, JsonGenerationException;
@@ -100,6 +114,9 @@ public interface PrettyPrinter
      * Pretty-printer is
      * to output a bracket as well, but can surround that
      * with other (white-space) decoration.
+     * @param jg Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     public void writeStartArray(JsonGenerator jg)
         throws IOException, JsonGenerationException;
@@ -114,8 +131,11 @@ public interface PrettyPrinter
      * to output a bracket as well, but can surround that
      * with other (white-space) decoration.
      *
+     * @param jg Undocumented.
      * @param nrOfValues Number of direct members of the array that
      *   have been output
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     public void writeEndArray(JsonGenerator jg, int nrOfValues)
         throws IOException, JsonGenerationException;
@@ -128,6 +148,9 @@ public interface PrettyPrinter
      * comma to separate the two. Pretty-printer is
      * to output a comma as well, but can surround that with other
      * (white-space) decoration.
+     * @param jg Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     public void writeArrayValueSeparator(JsonGenerator jg)
         throws IOException, JsonGenerationException;
@@ -142,11 +165,12 @@ public interface PrettyPrinter
 
     /**
      * Method called after array start marker has been output,
-     * and right before the first value is to be output.
-     * It is <b>not</b> called for arrays with no values.
-     *<p>
+     * and right before the first value is to be output.It is <b>not</b> called for arrays with no values.<p>
      * Default handling does not output anything, but pretty-printer
      * is free to add any white space decoration.
+     * @param jg Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     public void beforeArrayValues(JsonGenerator jg)
         throws IOException, JsonGenerationException;
@@ -154,11 +178,11 @@ public interface PrettyPrinter
     /**
      * Method called after object start marker has been output,
      * and right before the field name of the first entry is
-     * to be output.
-     * It is <b>not</b> called for objects without entries.
-     *<p>
+     * to be output.It is <b>not</b> called for objects without entries.<p>
      * Default handling does not output anything, but pretty-printer
      * is free to add any white space decoration.
+     * @param jg Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     public void beforeObjectEntries(JsonGenerator jg)
         throws IOException, JsonGenerationException;

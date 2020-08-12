@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util;
@@ -107,7 +129,7 @@ public class UnitsFormat extends AVListImpl
      * Constructs an instance that display length and area in specified units, and angles in decimal degrees.
      *
      * @param lengthUnits the desired length units. Available length units are <code>METERS, KILOMETERS, MILES,
-     *                    NAUTICAL_MILES, YARDS</code> and <code>FEET</code.
+     *                    NAUTICAL_MILES, YARDS</code> and <code>FEET</code>.
      * @param areaUnits   the desired area units. Available area units are <code>SQUARE_METERS, SQUARE_KILOMETERS,
      *                    HECTARE, ACRE, SQUARE_YARD</code> and <code>SQUARE_FEET</code>.
      *
@@ -122,7 +144,7 @@ public class UnitsFormat extends AVListImpl
      * Constructs an instance that display length and area in specified units, and angles in a specified format.
      *
      * @param lengthUnits the desired length units. Available length units are <code>METERS, KILOMETERS, MILES,
-     *                    NAUTICAL_MILES, YARDS</code> and <code>FEET</code.
+     *                    NAUTICAL_MILES, YARDS</code> and <code>FEET</code>.
      * @param areaUnits   the desired area units. Available area units are <code>SQUARE_METERS, SQUARE_KILOMETERS,
      *                    HECTARE, ACRE, SQUARE_YARD</code> and <code>SQUARE_FEET</code>.
      * @param showDMS     true if the desired angle format is degrees-minutes-seconds, false if the format is decimal
@@ -638,7 +660,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an angle of latitude and append a new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_LATITUDE} and angle format.
      *
      * @param angle the angle to format.
@@ -661,7 +683,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an angle of latitude.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_LATITUDE} and angle format.
      *
      * @param angle the angle to format.
@@ -684,7 +706,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an angle of longitude and append a new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_LONGITUDE} and angle format.
      *
      * @param angle the angle to format.
@@ -705,7 +727,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an angle of longitude.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_LONGITUDE} and angle format.
      *
      * @param angle the angle to format.
@@ -728,7 +750,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an angle of heading according to the current angle format, and append a new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_HEADING} and angle format.
      *
      * @param angle the heading angle to format.
@@ -744,7 +766,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an angle of heading according to the current angle format.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_HEADING} and angle format.
      *
      * @param angle the heading angle to format.
@@ -767,7 +789,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an angle of heading in degrees according to the current angle format, and append a new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_HEADING} and {@link #FORMAT_HEADING}. The default
      * <code>FORMAT_HEADING</code> is " %9.2f\u00b0".
      *
@@ -782,7 +804,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an angle of heading in degrees according to the current angle format.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_HEADING} and {@link #FORMAT_HEADING}. The default
      * <code>FORMAT_HEADING</code> is " %9.2f\u00b0".
      *
@@ -797,7 +819,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format angles of latitude and longitude according to the current angle format, and append a new-line character.
-     * <p/>
+     * <p>
      * The values are formatted using the current {@link #LABEL_LATLON_LAT}, {@link #LABEL_LATLON_LON} and angle
      * format.
      *
@@ -821,7 +843,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format angles of latitude and longitude according to the current angle format.
-     * <p/>
+     * <p>
      * The values are formatted using the current {@link #LABEL_LATLON_LAT}, {@link #LABEL_LATLON_LON} and angle
      * format.
      *
@@ -947,7 +969,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an eye altitude according to the current eye altitude format, and append a new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_EYE_ALTITUDE}, {@link #FORMAT_EYE_ALTITUDE} and length
      * format.
      *
@@ -962,7 +984,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an eye altitude according to the current eye altitude format.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_EYE_ALTITUDE}, {@link #FORMAT_EYE_ALTITUDE} and length
      * format.
      *
@@ -984,7 +1006,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an angle of pitch according to the current angle format, and append a new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_PITCH} and {@link #FORMAT_PITCH}. The default
      * <code>FORMAT_PITCH</code> is " %9.2f\u00b0".
      *
@@ -999,7 +1021,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an angle of pitch according to the current angle format.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_PITCH} and {@link #FORMAT_PITCH}. The default
      * <code>FORMAT_PITCH</code> is " %9.2f\u00b0".
      *
@@ -1014,7 +1036,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format a UTM zone according to the current UTM zone format and append a new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_UTM_ZONE}.
      *
      * @param zone the UTM zone to format.
@@ -1028,7 +1050,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format a UTM zone according to the current UTM zone format.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_UTM_ZONE}.
      *
      * @param zone the UTM zone to format.
@@ -1042,7 +1064,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format a UTM northing value according to the current UTM northing format and append a new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_UTM_NORTHING} and current {@link #FORMAT_UTM_NORTHING}.
      * The default UTM northing format is " %,11.1f". No units symbol is included in the formatted string because UTM
      * northing units are always meters.
@@ -1058,7 +1080,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format a UTM northing value according to the current UTM northing format.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_UTM_NORTHING} and current {@link #FORMAT_UTM_NORTHING}.
      * The default UTM northing format is " %,11.1f". No units symbol is included in the formatted string because UTM
      * northing units are always meters.
@@ -1074,7 +1096,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format a UTM easting value according to the current UTM easting format and append a new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_UTM_EASTING} and current {@link #FORMAT_UTM_EASTING}. The
      * default UTM easting format is " %,11.1f". No units symbol is included in the formatted string because UTM easting
      * units are always meters.
@@ -1090,7 +1112,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format a UTM easting value according to the current UTM easting format.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_UTM_EASTING} and current {@link #FORMAT_UTM_EASTING}. The
      * default UTM easting format is " %,11.1f". No units symbol is included in the formatted string because UTM easting
      * units are always meters.
@@ -1120,12 +1142,12 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format a terrain height value according to the current configuration and append a new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #LABEL_TERRAIN_HEIGHT}, {@link #FORMAT_TERRAIN_HEIGHT} and length
      * units symbol. The default terrain height format is " (ve %3.1f): %,6d %s", where the %3.1f specifier stands for
      * the vertical exaggeration, the %,6d specifier stands for the terrain height, and the %s specifier stands for the
      * units symbol.
-     * <p/>
+     * <p>
      * Note: While the <code>FORMAT_TERRAIN_HEIGHT</code> string may be specified by the application, the terrain height
      * components are always passed to the internal formatter in the order: vertical exaggeration, terrain height, units
      * symbol.
@@ -1158,7 +1180,7 @@ public class UnitsFormat extends AVListImpl
     /**
      * Format a length according to the current length configuration. Prepend a specified label and append a new-line
      * character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #FORMAT_LENGTH} and length units symbol,  and is converted to the
      * current length units prior to formatting. The default length format is " %,12.1f %s", where the %s specifier
      * stands for the units symbol.
@@ -1175,7 +1197,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format a length according to the current length configuration. Prepend a specified label.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #FORMAT_LENGTH} and length units symbol,  and is converted to the
      * current length units prior to formatting. The default length format is " %,12.1f %s", where the %s specifier
      * stands for the units symbol.
@@ -1196,7 +1218,7 @@ public class UnitsFormat extends AVListImpl
     /**
      * Format an area value according to the current length configuration. Prepend a specified label and append a
      * new-line character.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #FORMAT_AREA} and area units symbol,  and is converted to the
      * current area units prior to formatting. The default area format is " %,12.1f %s", where the %s specifier stands
      * for the units symbol.
@@ -1213,7 +1235,7 @@ public class UnitsFormat extends AVListImpl
 
     /**
      * Format an area value according to the current length configuration and prepend a specified label.
-     * <p/>
+     * <p>
      * The value is formatted using the current {@link #FORMAT_AREA} and area units symbol,  and is converted to the
      * current area units prior to formatting. The default area format is " %,12.1f %s", where the %s specifier stands
      * for the units symbol.

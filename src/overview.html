@@ -3,9 +3,9 @@
 <body>
 
 <p>
-    World Wind is a collection of components that interactively display 3D geographic information within Java
-    applications. Applications use World Wind by placing one or more {@link gov.nasa.worldwind.WorldWindow} components
-    in their user interface. The World Wind components are extensible. The API is defined primarily by interfaces, so
+    WorldWind is a collection of components that interactively display 3D geographic information within Java
+    applications. Applications use WorldWind by placing one or more {@link gov.nasa.worldwind.WorldWindow} components
+    in their user interface. The WorldWind components are extensible. The API is defined primarily by interfaces, so
     components can be selectively replaced by alternative components.</p>
 
 <p>
@@ -14,7 +14,7 @@
                              gov.nasa.worldwind.awt.WorldWindowGLCanvas}.</p>
 
 <p>
-    In addition to <code>WorldWindow</code>, there are five major World Wind interfaces. They are:</p>
+    In addition to <code>WorldWindow</code>, there are five major WorldWind interfaces. They are:</p>
 <ul>
     <li>{@link gov.nasa.worldwind.globes.Globe} &mdash; represents a planet's shape and terrain.</li>
     <li>{@link gov.nasa.worldwind.layers.Layer} &mdash; applies imagery or information to a <code>Globe</code>.</li>
@@ -33,28 +33,28 @@
     conjunction with an interactive <code>View</code> that defines the user's view of the planet. </p>
 
 <p>
-    The objects implementing the above interfaces may be those provided by World Wind or those created by application
+    The objects implementing the above interfaces may be those provided by WorldWind or those created by application
     developers. Objects implementing a particular interface may be used wherever that interface is called for. World
     Wind provides several <code>Globe</code> objects representing Earth, Mars and the Earth's moon, and provides basic
     implementations of <code>Model</code>, <code>SceneController</code> and <code>View</code>. </p>
 
 <p>
-    Most of World Wind's components are defined by interfaces. This allows application developers to create their own
-    implementations and easily integrate them into World Wind. </p>
+    Most of WorldWind's components are defined by interfaces. This allows application developers to create their own
+    implementations and easily integrate them into WorldWind. </p>
 
 <h2>The <code>WorldWind</code> Class</h2>
 
 <p>TODO</p>
 
-<h2>Multiple World Wind Windows</h2>
+<h2>Multiple WorldWind Windows</h2>
 
 <p>TODO</p>
 
 <h2>Data Retrieval</h2>
 
 <p>
-    World Wind works with enormous quantities of data and information, all of which exist primarily on remote data
-    servers. Retrieval and local caching of that data is therefore a primary feature of World Wind. The classes that
+    WorldWind works with enormous quantities of data and information, all of which exist primarily on remote data
+    servers. Retrieval and local caching of that data is therefore a primary feature of WorldWind. The classes that
     implement retrieval are {@link gov.nasa.worldwind.retrieve.Retriever} and {@link
     gov.nasa.worldwind.retrieve.RetrievalService}. </p>
 
@@ -83,7 +83,7 @@
 
 <p>
     Data that has been previously retrieved or is otherwise local (on disk) is brought into memory in a thread separate
-    from the event-dispatching thread or the rendering thread. One of the World Wind conventions is that no code may
+    from the event-dispatching thread or the rendering thread. One of the WorldWind conventions is that no code may
     access the computer's disk in any way during rendering. Therefore loading the data from disk is dispatched to
     another thread pool, the {@link gov.nasa.worldwind.util.ThreadedTaskService}. This service has a similar interface
     to RetrievalService. Tasks it runs typically read the data from disk and add it to the global memory cache
@@ -101,7 +101,7 @@
 
 <h2>Memory Cache</h2>
 
-<p>So that data can be shared among caching objects, most cached data used within World Wind is cached in a {@link
+<p>So that data can be shared among caching objects, most cached data used within WorldWind is cached in a {@link
    gov.nasa.worldwind.cache.MemoryCache}. <code>MemoryCache</code> enable cached data to be shared among all
    WorldWindWindow instantiations in an application. Thus two Earth globes each displayed in a separate window will
    share any image or elevation tiles that they are using simultaneously. The same would be true of any place name
@@ -116,7 +116,7 @@
 
 <h2>Picking and Selection</h2>
 
-<p>World Wind can determine the displayed objects at a given screen position in a <code>WorldWindow</code>. When the
+<p>WorldWind can determine the displayed objects at a given screen position in a <code>WorldWindow</code>. When the
    application wants to know what's displayed at a particular point, say the cursor position, it calls a method on
     <code>WorldWindow</code> that accepts the point and returns a description of what's drawn there. In general the
    application specifies a pick region rather than a single point, with the region a few pixels wide and high and
@@ -124,7 +124,7 @@
    exactly at the screen position. Since several objects may intersect the pick region, descriptions of all these
    objects are returned to the application. Which of these objects are meaningful is determined by the application.</p>
 
-<p>World Wind uses a method similar to drawing to detect objects in the pick region. During picking, the frame
+<p>WorldWind uses a method similar to drawing to detect objects in the pick region. During picking, the frame
    controller invokes each layer's {@link gov.nasa.worldwind.layers.AbstractLayer#doPick(DrawContext, java.awt.Point)}.
    As in drawing, the methods are invoked in turn, according to the layer's position in the model's layer list. During
    the call, each layer is responsible for determining which of its items, if any, are picked. Prior to traversing the
@@ -136,7 +136,7 @@
    region. To do that usually requires transforming the screen point into model coordinates and determining intersection
    in that coordinate system. But depth values are ambiguous with only a two-dimensional screen point as input,
    complicating transformation to model coordinates, and geometric intersection determination can be very difficult and
-   time consuming. To overcome this, World Wind implements a widely used method of sampling the window's color buffer to
+   time consuming. To overcome this, WorldWind implements a widely used method of sampling the window's color buffer to
    detect intersection, and makes this method easy for layers to use.</p>
 
 <p>The method works as follows: The frame controller precedes a pick traversal by first setting the current view's
@@ -155,12 +155,12 @@
    can compare their pick identifiers with the final colors and mark themselves as "on top." The application then
    receives the full list of picked items, with the truly visible ones marked as such.</p>
 
-<p>World Wind provides utility classes to make it simple for layers to participate in this picking scheme. See {@link
+<p>WorldWind provides utility classes to make it simple for layers to participate in this picking scheme. See {@link
    gov.nasa.worldwind.pick.PickSupport} </p>
 
 <h2>Use of Proxies</h2>
 
-<p></p>A proxy is set by calling {@link gov.nasa.worldwind.Configuration#setValue} for each of the following keys:
+<p>A proxy is set by calling {@link gov.nasa.worldwind.Configuration#setValue} for each of the following keys:
 <ul>
     <li>{@link gov.nasa.worldwind.avlist.AVKey#URL_PROXY_HOST} &mdash; indicates the proxy host address</li>
     <li>{@link gov.nasa.worldwind.avlist.AVKey#URL_PROXY_PORT} &mdash; indicates the port to use on that host</li>
@@ -172,11 +172,11 @@
 
 <h2>Offline Mode</h2>
 
-<p>World Wind's use of the network can be disabled by calling {@link gov.nasa.worldwind.WorldWind#setOfflineMode}. Prior
-   to attempting retrieval of a network resource &mdash; anything addressed by a URL &mdash; World Wind checks the
+<p>WorldWind's use of the network can be disabled by calling {@link gov.nasa.worldwind.WorldWind#setOfflineMode}. Prior
+   to attempting retrieval of a network resource &mdash; anything addressed by a URL &mdash; WorldWind checks the
    offline-mode setting and does not attempt retrieval if the value is true.</p>
 
-<h2><a name="path-types">Path Types</a></h2>
+<h2><a id="path-types">Path Types</a></h2>
 
 <p>There is only one way to draw a straight line on a plane, but there are several ways to draw a straight line on the
    surface of a globe. Most shapes support the following path types:</p>

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2014 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util.combine;
 
@@ -10,8 +32,8 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.glu.*;
 import java.util.*;
 
 /**
@@ -23,7 +45,7 @@ import java.util.*;
  * The globe is used by shapes that define geometry relative to a globe. The resolution is used to filter shape detail
  * and compute geometry for resolution independent shapes. Shape geometry outside of the region of interest may be
  * ignored, clipped, or simplified at the discretion of the shape.
- * <p/>
+ * <p>
  * CombineContext initializes its GLU tessellator according to the conventions for Combinable shapes. See the {@link
  * gov.nasa.worldwind.util.combine.Combinable} interface documentation for information on drawing Combinable contours.
  * The complex set of contours computed as a result of drawing shapes into the tessellator are collected in the

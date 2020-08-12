@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology.milstd2525.graphics;
@@ -23,7 +45,7 @@ import java.util.List;
  * Implementation of TacticalSymbol to render point graphics defined by MIL-STD-2525C Appendix B (Tactical Graphics).
  * This class implements the logic for rendering tactical point graphics, but actually implements the TacticalSymbol
  * interface.
- * <p/>
+ * <p>
  * This class is not meant to be used directly by applications. Instead, apps should use {@link MilStd2525PointGraphic},
  * which implements the {@link TacticalGraphic} interface. (MilStd2525PointGraphic uses TacticalGraphicSymbol internally
  * to render the point graphic.)
@@ -141,17 +163,14 @@ public class TacticalGraphicSymbol extends AbstractTacticalSymbol
      * Specifies this graphic's Status/Operational Condition field. A graphic's Status defines whether the represented
      * object exists at the time the symbol was generated, or is anticipated to exist in the future. Additionally, a
      * graphic's Status can define its operational condition. The recognized values depend on the graphic's scheme:
-     * <p/>
+     * <p>
      * <strong>Tactical graphics</strong>
-     * <p/>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Meteorological and Oceanographic</strong>
-     * <p/>
      * <ul> <li>Not supported</li> </ul>
-     * <p/>
+     * <p>
      * <strong>Emergency Management</strong>
-     * <p/>
      * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      *
      * @param value the new value for the Status/Operational Condition field.

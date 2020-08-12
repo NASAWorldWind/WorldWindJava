@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.util;
@@ -33,37 +55,32 @@ import java.util.Timer;
  * Controller to display a {@link Balloon} and handle balloon events. The controller does the following: <ul>
  * <li>Display a balloon when an object is selected</li> <li>Handle URL selection events in balloons</li> <li>Resize
  * BrowserBalloons</li> <li>Handle close, back, and forward events in BrowserBalloon</li> </ul>
- * <p/>
  * <h2>Displaying a balloon for a selected object</h2>
- * <p/>
+ * <p>
  * When a object is clicked, the controller looks for a Balloon attached to the object. The controller includes special
  * logic for handling balloons attached to KML features.
- * <p/>
  * <h3>KML Features</h3>
- * <p/>
+ * <p>
  * The KMLAbstractFeature is attached to the top PickedObject under AVKey.CONTEXT. The controller looks for the balloon
  * in the KMLAbstractFeature under key AVKey.BALLOON.
- * <p/>
  * <h3>Other objects</h3>
- * <p/>
+ * <p>
  * If the top object is an instance of AVList, the controller looks for a Balloon under AVKey.BALLOON.
- * <p/>
  * <h2>URL events</h2>
- * <p/>
+ * <p>
  * The controller looks for a value under AVKey.URL attached to either the top PickedObject. If the URL refers to a KML
  * or KMZ document, the document is loaded into a new layer. If the link includes a reference to a KML feature,
  * controller will animate the view to that feature and/or open the feature balloon.
- * <p/>
+ * <p>
  * If the link should open in a new window (determined by an AVKey.TARGET of "_blank"), the controller will launch the
  * system web browser and navigate to the link. Otherwise it will allow the BrowserBalloon to navigate to the link.
- * <p/>
+ * <p>
  * Consuming a SelectEvent in the BalloonController will prevent the balloon from taking action on that event. For
  * example, a BrowserBalloon will navigate in place when a link is clicked, but it will not if the balloon controller
  * consumes the left press and left click select events. This allows the balloon controller to override the default
  * action for certain URLs.
- * <p/>
  * <h2>BrowserBalloon control events</h2>
- * <p/>
+ * <p>
  * {@link gov.nasa.worldwind.render.AbstractBrowserBalloon} identifies its controls by attaching a value to the
  * PickedObject's AVList under AVKey.ACTION. The controller reads this value and performs the appropriate action. The
  * possible actions are AVKey.RESIZE, AVKey.BACK, AVKey.FORWARD, and AVKey.CLOSE.
@@ -231,6 +248,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void selected(SelectEvent event)
     {
         if (event == null || event.isConsumed()
@@ -349,6 +367,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
      * @param browserBalloon Balloon involved in action.
      * @param action         Identifier for the action that occurred.
      */
+    @SuppressWarnings("deprecation")
     protected void onBalloonAction(AbstractBrowserBalloon browserBalloon, String action)
     {
         if (AVKey.CLOSE.equals(action))
@@ -422,19 +441,19 @@ public class BalloonController extends MouseAdapter implements SelectListener
     /**
      * Called when a URL in a balloon is activated. This method handles links to KML documents, features in KML
      * documents, and links that target a new browser window.
-     * <p/>
+     * <p>
      * The possible cases are:
-     * <p/>
+     * <p>
      * <b>KML/KMZ document</b> - Load the document in a new layer.<br> <b>Feature in KML/KMZ document</b> - Load the
      * document, navigate to the feature and/or open feature balloon.<br> <b>Feature in currently open KML/KMZ
      * document</b> - Navigate to the feature and/or open feature balloon. <br> <b>HTML document, target current
      * window</b> - No action, let the BrowserBalloon navigate to the URL. <br> <b>HTML document, target new window</b>
      * - Launch the system web browser and navigate to the URL.
-     * <p/>
+     * <p>
      * If the URL matches one of the cases defined above, the SelectEvent will be marked as consumed. Marking the event
      * as consumed prevents BrowserBalloon from handling the event. However, the controller will only take action on the
      * event if the event is a link activation trigger.
-     * <p/>
+     * <p>
      * For example, if a left click event (a link activation event) occurs on a link to a KML document, the event will
      * be marked as consumed and the document will be opened. If a left press event (not a link activation event) occurs
      * with the same URL, the event will be consumed but the document will not be opened (if the press is followed by a
@@ -747,7 +766,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
      * Get the balloon attached to a PickedObject. If the PickedObject represents a KML feature, then the balloon will
      * be retrieved from the feature.  Otherwise, the balloon will be retrieved from the user object's field
      * AVKey.BALLOON.
-     * <p/>
+     * <p>
      * If a KML feature is picked, and the feature does not have a balloon, a new balloon may be created and attached to
      * the feature. {@link #canShowBalloon(gov.nasa.worldwind.ogc.kml.KMLAbstractFeature) canShowBalloon} determines if
      * a balloon will be created for the feature.
@@ -802,6 +821,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
      *
      * @return New balloon. May return null if the feature should not have a balloon.
      */
+    @SuppressWarnings("deprecation")
     protected Balloon createBalloon(KMLAbstractFeature feature)
     {
         KMLBalloonStyle balloonStyle = (KMLBalloonStyle) feature.getSubStyle(new KMLBalloonStyle(null),
@@ -1412,7 +1432,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
     /**
      * Adds the specified <code>document</code> to this controller's <code>WorldWindow</code> as a new
      * <code>Layer</code>.
-     * <p/>
+     * <p>
      * This expects the <code>kmlRoot</code>'s <code>AVKey.DISPLAY_NAME</code> field to contain a display name suitable
      * for use as a layer name.
      *
@@ -1436,7 +1456,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
      * Dispatch Thread (EDT) to either {@link BalloonController#onDocumentLoaded(String,
      * gov.nasa.worldwind.ogc.kml.KMLRoot, String) onDocumentLoaded} or {@link BalloonController#onDocumentFailed(String,
      * Exception) onDocumentFailed}.
-     * <p/>
+     * <p>
      * This task is designed to be repeated periodically. The task will cancel itself when the document becomes
      * available, or the timeout is exceeded.
      */

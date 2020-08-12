@@ -1,18 +1,40 @@
 /*
- * Copyright (C) 2013 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util;
 
-import javax.media.nativewindow.*;
-import javax.media.opengl.*;
+import com.jogamp.nativewindow.*;
+import com.jogamp.opengl.*;
 import java.util.List;
 
 /**
- * BasicGLCapabilitiesChooser provides an implementation of {@link javax.media.opengl.GLCapabilitiesChooser} for use
+ * BasicGLCapabilitiesChooser provides an implementation of {@link com.jogamp.opengl.GLCapabilitiesChooser} for use
  * with WorldWindow implementations (for example, WorldWindowGLCanvas and WorldWindowGLJPanel).
- * <p/>
+ * <p>
  * BasicGLCapabilitiesChooser extends the behavior of the default GLCapabilitiesChooser by implementing a fallback
  * behavior when device supported stereo is requested but is not supported by the hardware. In this case,
  * BasicGLCapabilitiesChooser attempts to find a match to the desired capabilities, but without device supported stereo.

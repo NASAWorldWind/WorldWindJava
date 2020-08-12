@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.symbology;
@@ -21,11 +43,11 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Demonstrates the simplest possible usage of World Wind {@link TacticalSymbol} and {@link
- * gov.nasa.worldwind.symbology.TacticalGraphic} to display symbols from the MIL-STD-2525 symbology set. See the <a
- * title="Symbology Usage Guide" href="http://goworldwind.org/developers-guide/symbology/" target="_blank">Symbology
- * Usage Guide</a> for more information on symbology support in World Wind.
- * <p/>
+ * Demonstrates the simplest possible usage of WorldWind {@link TacticalSymbol} and {@link
+ * gov.nasa.worldwind.symbology.TacticalGraphic} to display symbols from the MIL-STD-2525 symbology set. See the
+ * <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
+ * for more information on symbology support in WorldWind.
+ * <p>
  * For more detailed examples of how to use TacticalSymbol and TacticalGraphic in an application, see the {@link
  * TacticalSymbols} example and the {@link TacticalGraphics} example.
  *
@@ -40,13 +62,13 @@ public class Symbology extends ApplicationTemplate
         {
             super(true, true, false);
 
-            // Create a layer that displays World Wind tactical symbols.
+            // Create a layer that displays WorldWind tactical symbols.
             this.addTacticalSymbols();
 
-            // Create a layer that displays World Wind tactical graphics.
+            // Create a layer that displays WorldWind tactical graphics.
             this.addTacticalGraphics();
 
-            // Size the World Window to provide enough screen space for the graphics, and center the World Window
+            // Size the WorldWindow to provide enough screen space for the graphics, and center the WorldWindow
             // on the screen.
             Dimension size = new Dimension(1800, 1000);
             this.setPreferredSize(size);
@@ -70,7 +92,7 @@ public class Symbology extends ApplicationTemplate
             symbol.setShowLocation(false);
             layer.addRenderable(symbol);
 
-            // Add the symbol layer to the World Wind model.
+            // Add the symbol layer to the WorldWind model.
             this.getWwd().getModel().getLayers().add(layer);
         }
 
@@ -100,7 +122,7 @@ public class Symbology extends ApplicationTemplate
             // provides a visualization of how the control point positions affect the displayed graphic.
             this.addControlPoints(positions, layer);
 
-            // Add the graphic layer to the World Wind model.
+            // Add the graphic layer to the WorldWind model.
             this.getWwd().getModel().getLayers().add(layer);
         }
 
@@ -134,6 +156,6 @@ public class Symbology extends ApplicationTemplate
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -117.5250);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 40000);
 
-        ApplicationTemplate.start("World Wind Symbology", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Symbology", AppFrame.class);
     }
 }

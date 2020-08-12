@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.ogc.kml;
@@ -67,7 +89,7 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      * Indicates whether this <code>KMLAbstractContainer</code> is active and should be rendered on the specified
      * <code>DrawContext</code>. This returns <code>true</code> if this container's <code>visibility</code> is
      * unspecified (<code>null</code>) or is set to <code>true</code>.
-     * <p/>
+     * <p>
      * Regions do not apply directly to KML containers, because a descendant features can override the container's
      * Region with its own. Since a descendant Region may be larger or have a less restrictive LOD range than this
      * container, we cannot determine the visibility of the entire tree based on this container's Region. A container's
@@ -87,7 +109,7 @@ public class KMLAbstractContainer extends KMLAbstractFeature
 
     /**
      * Pre-renders the KML features held by this <code>KMLAbstractContainer</code>.
-     * <p/>
+     * <p>
      * Pushes this container's Region on the KML traversal context's region stack before rendering the features, and
      * pops the Region off the stack afterward. Descendant features use the KML traversal context's region stack to
      * inherit Regions from parent containers.
@@ -111,7 +133,7 @@ public class KMLAbstractContainer extends KMLAbstractFeature
 
     /**
      * Renders the KML features held by this <code>KMLAbstractContainer</code>.
-     * <p/>
+     * <p>
      * Pushes this container's Region on the KML traversal context's region stack before rendering the features, and
      * pops the Region off the stack afterward. Descendant features use the KML traversal context's region stack to
      * inherit Regions from parent containers.

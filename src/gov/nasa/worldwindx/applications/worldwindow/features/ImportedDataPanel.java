@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.applications.worldwindow.features;
@@ -24,10 +46,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Displays UI components for a set of caller specified imported data, and manages creation of World Wind components
+ * Displays UI components for a set of caller specified imported data, and manages creation of WorldWind components
  * from that data. Callers fill the panel with imported data by invoking {@link #addImportedData(org.w3c.dom.Element,
  * gov.nasa.worldwind.avlist.AVList)}. This adds the UI components for a specified data set (a "Go To" button, and a
- * label description), creates a World Wind component from the DataConfiguration, and adds the component to the World
+ * label description), creates a WorldWind component from the DataConfiguration, and adds the component to the World
  * Window passed to the panel during construction.
  *
  * @author dcollins
@@ -64,10 +86,10 @@ public class ImportedDataPanel extends ShadedPanel
     }
 
     /**
-     * Adds the UI components for the specified imported data to this panel, and adds the World Wind component created
+     * Adds the UI components for the specified imported data to this panel, and adds the WorldWind component created
      * from the data to the WorldWindow passed to this panel during construction.
      *
-     * @param domElement the document which describes a World Wind data configuration.
+     * @param domElement the document which describes a WorldWind data configuration.
      * @param params     the parameter list which overrides or extends information contained in the document.
      *
      * @throws IllegalArgumentException if the Element is null.

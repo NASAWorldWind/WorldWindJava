@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology;
@@ -14,11 +36,10 @@ import java.awt.*;
  * Holds attributes for a {@link TacticalGraphic}. Changes made to the attributes are applied to the graphic when the
  * <code>WorldWindow</code> renders the next frame. Instances of <code>TacticalGraphicAttributes</code> may be shared by
  * many graphics, thereby reducing the memory normally required to store attributes for each graphic.
- * <p/>
+ * <p>
  * TacticalGraphicAttributes is used to override default attributes determined by a graphic's symbol set. Any non-null
  * attributes will override the corresponding default attributes. Here's an example of overriding only the outline
  * material of a graphic without affecting other styling specified by the symbol set:
- * <p/>
  * <pre>
  * TacticalGraphic graphic = ...
  * TacticalGraphicAttributes attrs = new BasicTacticalGraphicAttributes();
@@ -54,7 +75,7 @@ public interface TacticalGraphicAttributes
     /**
      * Indicates the graphic scale as a ratio of the graphics's original size. See {@link #setScale(Double)} for a
      * description of how scale is used.
-     * <p/>
+     * <p>
      * Scale directly affects the size of point graphics. Line and area graphics do not change size based on the scale,
      * but if a line or area graphic includes a tactical symbol as part of a composite shape, the scale may be applied
      * to the symbol.
@@ -68,7 +89,7 @@ public interface TacticalGraphicAttributes
      * number greater than 0.0: values less than 1.0 make the graphic smaller, while values greater than 1.0 make the
      * symbol larger. The scale applies to both the graphic and the graphic modifiers. The specified scale must be
      * either <code>null</code> or greater than or equal to 0.0.
-     * <p/>
+     * <p>
      * Scale directly affects the size of point graphics. Line and area graphics do not change size based on the scale,
      * but if a line or area graphic includes a tactical symbol as part of a composite shape, the scale may be applied
      * to the symbol.

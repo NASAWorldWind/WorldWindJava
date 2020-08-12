@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2015 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples.util;
 
@@ -11,7 +33,7 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.nio.FloatBuffer;
 import java.util.*;
 
@@ -73,7 +95,7 @@ public class DirectedSurfacePolyline extends SurfacePolyline
 
     /**
      * Constructs a new directed surface polyline with the default attributes and the specified iterable of locations.
-     * <p/>
+     * <p>
      * Note: If fewer than two locations is specified, no polyline is drawn.
      *
      * @param iterable the polyline locations.
@@ -89,7 +111,7 @@ public class DirectedSurfacePolyline extends SurfacePolyline
      * Constructs a new directed surface polyline with the specified normal (as opposed to highlight) attributes and the
      * specified iterable of locations. Modifying the attribute reference after calling this constructor causes this
      * shape's appearance to change accordingly.
-     * <p/>
+     * <p>
      * Note: If fewer than two locations is specified, no polyline is drawn.
      *
      * @param normalAttrs the normal attributes. May be null, in which case default attributes are used.
@@ -209,7 +231,7 @@ public class DirectedSurfacePolyline extends SurfacePolyline
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to also draw direction arrows.
      *
      * @param dc  the current draw context.

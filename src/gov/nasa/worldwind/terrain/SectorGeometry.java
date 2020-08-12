@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.terrain;
 
@@ -14,7 +36,7 @@ import java.nio.DoubleBuffer;
 
 /**
  * This interface provides access to individual terrain tiles, which are contained in a {@link SectorGeometryList}.
- * <p/>
+ * <p>
  * Note: Three methods of this class assume that the {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
  * method of the containing sector geometry list has been called prior to calling them. They are {@link
  * #pick(gov.nasa.worldwind.render.DrawContext, java.awt.Point)}, {@link #pick(gov.nasa.worldwind.render.DrawContext,
@@ -41,7 +63,7 @@ public interface SectorGeometry extends Renderable
     /**
      * Performs a pick on the geometry. The result, if any, is added to the draw context's picked-object list. See
      * {@link gov.nasa.worldwind.render.DrawContext#getPickedObjects()}.
-     * <p/>
+     * <p>
      * Note: This method assumes that {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
      * was called prior to this method.
      *
@@ -85,7 +107,7 @@ public interface SectorGeometry extends Renderable
     /**
      * Displays the geometry. The number of texture units to use may be specified, but at most only the number of
      * available units are used.
-     * <p/>
+     * <p>
      * Note: This method assumes that {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
      * was called prior to this method.
      *
@@ -128,7 +150,7 @@ public interface SectorGeometry extends Renderable
 
     /**
      * Performs a pick on the geometry.
-     * <p/>
+     * <p>
      * Note: This method assumes that {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
      * was called prior to this method.
      *
@@ -184,7 +206,7 @@ public interface SectorGeometry extends Renderable
     /**
      * Displays the geometry. The number of texture units to use may be specified, but at most only the number of
      * available units are used.
-     * <p/>
+     * <p>
      * Note: This method allows but does not require that {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
      * was called prior to this method. See the description of the <code>beginRenderingCalled</code> argument.
      *
@@ -192,7 +214,7 @@ public interface SectorGeometry extends Renderable
      * @param numTextureUnits      the number of texture units to attempt to use.
      * @param beginRenderingCalled indicates whether this sector geometry's <code>beginRendering</code> method has been
      *                             called prior to calling this method. True indicated it was called, false indicates
-     *                             that it was not. Calling <beginRendering> eliminates redundant rendering set-up and
+     *                             that it was not. Calling &lt;beginRendering&gt; eliminates redundant rendering set-up and
      *                             is used when this sector geometry is rendered several times in succession.
      *
      * @throws IllegalArgumentException if the draw context is null or the number of texture units is less than one.
@@ -202,14 +224,14 @@ public interface SectorGeometry extends Renderable
 
     /**
      * Displays the geometry.
-     * <p/>
+     * <p>
      * Note: This method allows but does not require that {@link SectorGeometryList#beginRendering(gov.nasa.worldwind.render.DrawContext)}
      * was called prior to this method. See the description of the <code>beginRenderingCalled</code> argument.
      *
      * @param dc                   the current draw context.
      * @param beginRenderingCalled indicates whether this sector geometry's <code>beginRendering</code> method has been
      *                             called prior to calling this method. True indicated it was called, false indicates
-     *                             that it was not. Calling <beginRendering> eliminates redundant rendering set-up and
+     *                             that it was not. Calling &lt;beginRendering&gt; eliminates redundant rendering set-up and
      *                             is used when this sector geometry is rendered several times in succession.
      *
      * @throws IllegalArgumentException if the draw context is null or the number of texture units is less than one.

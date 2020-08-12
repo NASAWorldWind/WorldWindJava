@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -15,14 +37,14 @@ import gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil;
 import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.stream.*;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
 
 /**
- * Draws an image parallel to the screen at a specified screen location relative to the World Window. If no image is
+ * Draws an image parallel to the screen at a specified screen location relative to the WorldWindow. If no image is
  * specified, a filled rectangle is drawn in its place.
  *
  * @author tag
@@ -119,7 +141,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
 
     /**
      * Convenience method to specify the location of the image on the screen. The specified <code>screenLocation</code>
-     * is relative to the upper-left corner of the World Window, and the image is centered on this location.
+     * is relative to the upper-left corner of the WorldWindow, and the image is centered on this location.
      *
      * @param screenLocation the screen location on which to center the image. May be null, in which case the image is
      *                       not displayed.
@@ -710,7 +732,6 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     /**
      * Export the screen image. The {@code output} object will receive the exported data. The type of this object
      * depends on the export format. The formats and object types supported by this class are:
-     * <p/>
      * <pre>
      * Format                                         Supported output object types
      * ================================================================================
@@ -764,7 +785,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     /**
      * Export the screen image to KML as a {@code <ScreenOverlay>} element. The {@code output} object will receive the
      * data. This object must be one of: java.io.Writer java.io.OutputStream javax.xml.stream.XMLStreamWriter.
-     * <p/>
+     * <p>
      * The image path can only be exported if the image source is a path or URL. If the image source is a BufferedImage,
      * for example, the image will not be exported and no icon reference will be written into the ScreenOverlay tag.
      *

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.ogc.kml;
@@ -19,13 +41,13 @@ import java.util.concurrent.atomic.*;
 
 /**
  * Represents the KML <i>NetworkLink</i> element and provides access to its contents.
- * <p/>
+ * <p>
  * During rendering, <code>KMLNetworkLink</code> retrieves and loads its network resource whenever necessary. Upon a
  * successful retrieval, <code>KMLNetworkLink</code> sends an <code>AVKey.RETRIEVAL_STATE_SUCCESSFUL</code> property
  * change event to this link's property change listeners. Once retrieved and loaded, <code>KMLNetworkLink</code> stores
  * its network resource by calling <code>setNetworkResource</code>, draws its network resource during preRendering and
  * rendering, and forwards property change events from the network resource to its property change listeners.
- * <p/>
+ * <p>
  * During retrieval, <code>KMLNetworkLink</code> attempts to use either the <code>Link</code> or the <code>Url</code>.
  * The <code>Link</code> is the preferred method for encoding a KML NetworkLink's address since KML version 2.1,
  * therefore we give it priority over <code>Url</code>.
@@ -217,7 +239,7 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
 
     /**
      * Specifies the network resource referenced by this <code>KMLNetworkLink</code>, or <code>null</code> if this link
-     * has no resource. If the specified <code>kmlRoot</code> is not <code>null</code, this link draws the
+     * has no resource. If the specified <code>kmlRoot</code> is not <code>null</code>, this link draws the
      * <code>kmlRoot</code> during preRendering and rendering, and forwards property change events from the
      * <code>kmlRoot</code> to this link's property change listeners.
      *
@@ -372,7 +394,7 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * resource is retrieved and loaded, this calls <code>{@link #setNetworkResource(KMLRoot)}</code> to specify this
      * link's new network resource, and sends an <code>{@link gov.nasa.worldwind.avlist.AVKey#RETRIEVAL_STATE_SUCCESSFUL}</code>
      * property change event to this link's property change listeners.
-     * <p/>
+     * <p>
      * This does nothing if this <code>KMLNetworkLink</code> has no <code>KMLLink</code>.
      *
      * @param address the address of the resource to retrieve
@@ -443,9 +465,8 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
 
     /**
      * Indicates whether the network resource references by this <code>KMLNetworkLink</code> should be retrieved to the
-     * World Wind cache or to a temporary location. This returns <code>true</code> if all of the following conditions
+     * WorldWind cache or to a temporary location. This returns <code>true</code> if all of the following conditions
      * are met, and <code>false</code> otherwise:
-     * <p/>
      * <ul> <li>This network link has either a <code>Link</code> or a <code>Url</code> element.</li> <li>The Link or Url
      * element's <code>refreshMode</code> is not <code>onInterval</code> or <code>onExpire</code>.</li> <li>The Link or
      * Url element's <code>viewRefreshMode</code> is not <code>onStop</code>.</li> </ul>

@@ -323,11 +323,13 @@ public final class ReaderBasedParser
     }
 
     /**
-     * Method called when we see non-white space character other
-     * than double quote, when expecting a field name.
-     * In standard mode will just throw an expection; but
-     * in non-standard modes may be able to parse name.
+     * Method called when we see non-white space character other than double quote, when expecting a field name.In
+     * standard mode will just throw an expection; but in non-standard modes may be able to parse name.
      *
+     * @param i Undocumented.
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      * @since 1.2
      */
     protected final String _handleUnusualFieldName(int i)
@@ -419,6 +421,10 @@ public final class ReaderBasedParser
      * Method for handling cases where first non-space character
      * of an expected value token is not legal for standard JSON content.
      *
+     * @param i Undocumented.
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException  Undocumented.
      * @since 1.3
      */
     protected final JsonToken _handleUnexpectedValue(int i)
@@ -603,9 +609,11 @@ public final class ReaderBasedParser
     }
 
     /**
-     * Method called to skim through rest of unparsed String value,
-     * if it is not needed. This can be done bit faster if contents
-     * need not be stored for future access.
+     * Method called to skim through rest of unparsed String value, if it is not needed.This can be done bit faster if
+     * contents need not be stored for future access.
+     *
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     protected void _skipString()
         throws IOException, JsonParseException
@@ -653,6 +661,9 @@ public final class ReaderBasedParser
 
     /**
      * Method called to much one of literal tokens we may expect
+     * @param token Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     protected void _matchToken(JsonToken token)
         throws IOException, JsonParseException
@@ -714,6 +725,7 @@ public final class ReaderBasedParser
     /**
      * We actually need to check the character value here
      * (to see if we have \n following \r).
+     * @throws java.io.IOException Undocumented.
      */
     protected final void _skipCR() throws IOException
     {
@@ -1015,8 +1027,12 @@ public final class ReaderBasedParser
     }
 
     /**
+     * @param b64variant Undocumented.
+     * @param ch Undocumented.
      * @param bindex Relative index within base64 character unit; between 0
      *   and 3 (as unit has exactly 4 characters)
+     * @param msg Undocumented.
+     * @return  Undocumented.
      */
     protected IllegalArgumentException reportInvalidChar(Base64Variant b64variant, char ch, int bindex, String msg)
         throws IllegalArgumentException

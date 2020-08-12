@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.view;
 
@@ -14,7 +36,7 @@ import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * A base class from which {@link View} implementations can be derived. Currently {@link
@@ -22,7 +44,7 @@ import javax.media.opengl.GL2;
  * derived from {@link BasicView} {@link BasicView} models the view in terms of a geographic position, and a pitch,
  * heading, and roll. It provides a mapping from that geocentric view model to a 3D graphics modelview matrix. BasicView
  * also manages the projection matrix via a {@link Frustum}.
- * <p/>
+ * <p>
  * The view model is based on
  *
  * @author jym
@@ -73,7 +95,7 @@ public class BasicView extends WWObjectImpl implements View
     protected static final double MINIMUM_NEAR_DISTANCE = 1;
     protected static final double MINIMUM_FAR_DISTANCE = 1000;
     /**
-     * The views's default worst-case depth resolution, in meters. May be specified in the World Wind configuration file
+     * The views's default worst-case depth resolution, in meters. May be specified in the WorldWind configuration file
      * as the <code>gov.nasa.worldwind.avkey.DepthResolution</code> property. The default if not specified in the
      * configuration is 3.0 meters.
      */
@@ -664,7 +686,7 @@ public class BasicView extends WWObjectImpl implements View
         }
 
         // Prevent the near clip plane from becoming unnecessarily small. A very small clip plane is not useful for
-        // rendering the World Wind scene, and significantly reduces the depth precision in the majority of the scene.
+        // rendering the WorldWind scene, and significantly reduces the depth precision in the majority of the scene.
         if (nearDistance < MINIMUM_NEAR_DISTANCE)
             nearDistance = MINIMUM_NEAR_DISTANCE;
 
@@ -898,7 +920,7 @@ public class BasicView extends WWObjectImpl implements View
     /**
      * Removes the model-view matrix on top of the matrix stack, and restores the original matrix.
      *
-     * @param dc the current World Wind drawing context on which the original matrix will be restored.
+     * @param dc the current WorldWind drawing context on which the original matrix will be restored.
      *
      * @throws IllegalArgumentException if <code>dc</code> is null, or if the <code>Globe</code> or <code>GL</code>
      *                                  instances in <code>dc</code> are null.

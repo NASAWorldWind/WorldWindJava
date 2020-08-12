@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.cache;
 
@@ -100,7 +122,7 @@ public interface FileStore extends WWObject
 
     /**
      * Creates a new, empty file in the file store.
-     * <p/>
+     * <p>
      * If the file store has no write location, the file is not created and null is returned.
      *
      * @param fileName the name of the file to create.
@@ -200,7 +222,7 @@ public interface FileStore extends WWObject
      * Requests a file. If the file exists locally, including as a resource on the classpath, this returns a
      * <code>{@link URL}</code> to the file. Otherwise if the specified address is a URL to a remote location, this
      * initiates a request for the file and returns <code>null</code>. When the request succeeds the file is stored in
-     * the local World Wind cache and subsequent invocations of this method return a URL to the retrieved file.
+     * the local WorldWind cache and subsequent invocations of this method return a URL to the retrieved file.
      *
      * @param address the file address: either a local file, a URL, or a path relative to the root of the file store.
      *
@@ -215,20 +237,20 @@ public interface FileStore extends WWObject
      * Requests a file and specifies whether to store retrieved files in the cache or in a temporary location. If the
      * file exists locally, including as a resource on the classpath, this returns a <code>{@link URL}</code> to the
      * file. Otherwise if the specified address is a URL to a remote location, this initiates a request for the file and
-     * returns <code>null</code>. When the request succeeds the file is stored either in the local World Wind cache or
+     * returns <code>null</code>. When the request succeeds the file is stored either in the local WorldWind cache or
      * in a temporary location and subsequent invocations of this method return a URL to the retrieved file.
-     * <p/>
-     * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the World Wind
+     * <p>
+     * The <code>cacheRemoteFile</code> parameter specifies whether to store a retrieved remote file in the WorldWind
      * cache or in a temporary location. This parameter has no effect if the file exists locally. The temporary location
      * for a retrieved file does not persist between runtime sessions, and subsequent invocations of this method may not
      * return the same temporary location.
-     * <p/>
+     * <p>
      * If a remote file is requested multiple times with different values for <code>cacheRemoteFile</code>, it is
-     * undefined whether the retrieved file is stored in the World Wind cache or in a temporary location.
+     * undefined whether the retrieved file is stored in the WorldWind cache or in a temporary location.
      *
      * @param address         the file address: either a local file, a URL, or a path relative to the root of the file
      *                        store.
-     * @param cacheRemoteFile <code>true</code> to store remote files in the World Wind cache, or <code>false</code> to
+     * @param cacheRemoteFile <code>true</code> to store remote files in the WorldWind cache, or <code>false</code> to
      *                        store remote files in a temporary location. Has no effect if the address is a local file.
      *
      * @return the file's URL if it exists locally or is a remote file that has been retrieved, otherwise

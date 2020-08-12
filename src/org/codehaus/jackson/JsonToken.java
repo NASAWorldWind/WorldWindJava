@@ -150,9 +150,10 @@ public enum JsonToken
     }
 
     /**
-     * Method that can be used to check whether this token represents
-     * a valid non-structured value. This means all tokens other than
-     * Object/Array start/end markers all field names.
+     * Method that can be used to check whether this token represents a valid non-structured value.This means all tokens
+     * other than Object/Array start/end markers all field names.
+     *
+     * @return Undocumented.
      */
     public boolean isScalarValue() {
         return ordinal() >= VALUE_STRING.ordinal();

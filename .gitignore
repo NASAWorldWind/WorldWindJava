@@ -1,6 +1,10 @@
 .DS_Store
 
-.idea/dictionaries
+.idea/shelf
+
+.idea/tasks.xml
+
+.idea/workspace.xml
 
 build
 
@@ -8,12 +12,9 @@ classes
 
 testClasses
 
-keystore.properties
-
-keystore.tar
-
 worldwind.jar
 
 worldwindx.jar
+/dist/
+/nbproject/private/
 
-wwstore

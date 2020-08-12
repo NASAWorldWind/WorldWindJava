@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.retrieve;
 
@@ -11,7 +33,7 @@ import gov.nasa.worldwind.geom.Sector;
 
 /**
  * Interface for classes whose data may be retrieved in bulk from its remote source. When used, will copy the requested
- * data to either the local World Wind cache or a specified filestore. Data already contained in the specified location
+ * data to either the local WorldWind cache or a specified filestore. Data already contained in the specified location
  * is not recopied.
  *
  * @author Patrick Murris
@@ -20,7 +42,7 @@ import gov.nasa.worldwind.geom.Sector;
 public interface BulkRetrievable
 {
     /**
-     * Initiates data retrieval to the current World Wind data cache. The method starts a new thread to perform the
+     * Initiates data retrieval to the current WorldWind data cache. The method starts a new thread to perform the
      * retrieval. The thread terminates when either all the requested data has been retrieved or when any data not
      * retrieved is determined to be unretrievable.
      *
@@ -37,7 +59,7 @@ public interface BulkRetrievable
     BulkRetrievalThread makeLocal(Sector sector, double resolution, BulkRetrievalListener listener);
 
     /**
-     * Estimates the amount of data, in bytes, that must be retrieved to the World Wind data cache for a specified
+     * Estimates the amount of data, in bytes, that must be retrieved to the WorldWind data cache for a specified
      * sector and resolution.
      *
      * @param sector     the sector for which to retrieve the data.
@@ -55,7 +77,7 @@ public interface BulkRetrievable
      * @param sector     the sector for which to retrieve the data.
      * @param resolution the resolution desired. All data within the specified sector up to and including this
      *                   resolution is downloaded.
-     * @param fileStore  the location to place the data. If null, the current World Wind cache is used.
+     * @param fileStore  the location to place the data. If null, the current WorldWind cache is used.
      *
      * @return the estimated data size, in bytes.
      */
@@ -73,7 +95,7 @@ public interface BulkRetrievable
      *                   individual retrievals. Note: The listener is called on the thread performing the download,
      *                   which is not the event dispatch thread. Therefore any interaction with AWT or Swing within the
      *                   call must be done within a call to SwingUtilities.invokeLater().
-     * @param fileStore  the location to place the data. If null, the current World Wind cache is used.
+     * @param fileStore  the location to place the data. If null, the current WorldWind cache is used.
      *
      * @return returns the running thread created to perform the retrieval.
      */

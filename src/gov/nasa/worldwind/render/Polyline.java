@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -16,7 +38,7 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.measure.LengthMeasurer;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -25,10 +47,11 @@ import java.util.List;
  * @author tag
  * @version $Id: Polyline.java 2188 2014-07-30 15:01:16Z tgaskins $
  * @deprecated Use {@link Path} instead.
- *             <p/>
+ *             <p>
  *             When drawn on a 2D globe, this shape uses either a {@link SurfacePolyline} or {@link SurfacePolygon} to
  *             represent itself.
  */
+@Deprecated
 public class Polyline extends AVListImpl implements Renderable, OrderedRenderable, Movable, Restorable,
     MeasurableLength, ExtentHolder, PreRenderable, Highlightable, Draggable
 {
@@ -753,7 +776,7 @@ public class Polyline extends AVListImpl implements Renderable, OrderedRenderabl
      * If the scene controller is rendering ordered renderables, this method draws this placemark's image as an ordered
      * renderable. Otherwise the method determines whether this instance should be added to the ordered renderable
      * list.
-     * <p/>
+     * <p>
      * The Cartesian and screen points of the placemark are computed during the first call per frame and re-used in
      * subsequent calls of that frame.
      *

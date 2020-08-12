@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.kml;
@@ -86,7 +108,7 @@ public class KMLViewer extends ApplicationTemplate
             // KML feature balloons when feature's are selected in the on-screen layer tree.
             this.kmlAppController.setBalloonController(balloonController);
 
-            // Size the World Window to take up the space typically used by the layer panel.
+            // Size the WorldWindow to take up the space typically used by the layer panel.
             Dimension size = new Dimension(1400, 800);
             this.setPreferredSize(size);
             this.pack();
@@ -109,7 +131,7 @@ public class KMLViewer extends ApplicationTemplate
          * Adds the specified <code>kmlRoot</code> to this app frame's <code>WorldWindow</code> as a new
          * <code>Layer</code>, and adds a new <code>KMLLayerTreeNode</code> for the <code>kmlRoot</code> to this app
          * frame's on-screen layer tree.
-         * <p/>
+         * <p>
          * This expects the <code>kmlRoot</code>'s <code>AVKey.DISPLAY_NAME</code> field to contain a display name
          * suitable for use as a layer name.
          *
@@ -117,7 +139,7 @@ public class KMLViewer extends ApplicationTemplate
          */
         protected void addKMLLayer(KMLRoot kmlRoot)
         {
-            // Create a KMLController to adapt the KMLRoot to the World Wind renderable interface.
+            // Create a KMLController to adapt the KMLRoot to the WorldWind renderable interface.
             KMLController kmlController = new KMLController(kmlRoot);
 
             // Adds a new layer containing the KMLRoot to the end of the WorldWindow's layer list. This
@@ -187,7 +209,7 @@ public class KMLViewer extends ApplicationTemplate
          * then adds the new <code>KMLRoot</code> to this worker thread's <code>AppFrame</code>. The
          * <code>KMLRoot</code>'s <code>AVKey.DISPLAY_NAME</code> field contains a display name created from either the
          * KML source or the KML root feature name.
-         * <p/>
+         * <p>
          * If loading the KML source fails, this prints the exception and its stack trace to the standard error stream,
          * but otherwise does nothing.
          */
@@ -312,6 +334,6 @@ public class KMLViewer extends ApplicationTemplate
     public static void main(String[] args)
     {
         //noinspection UnusedDeclaration
-        final AppFrame af = (AppFrame) start("World Wind KML Viewer", AppFrame.class);
+        final AppFrame af = (AppFrame) start("WorldWind KML Viewer", AppFrame.class);
     }
 }

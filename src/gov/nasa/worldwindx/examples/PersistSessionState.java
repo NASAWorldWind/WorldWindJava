@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples;
@@ -22,7 +44,7 @@ public class PersistSessionState extends ApplicationTemplate
     public static class AppFrame extends ApplicationTemplate.AppFrame
     {
         /**
-         * Create a SessionState utility to load and save World Wind's layer and view state to the default location.
+         * Create a SessionState utility to load and save WorldWind's layer and view state to the default location.
          * Initialized to a new SessionState with its session key set to this application's class name.
          */
         protected SessionState sessionState = new SessionState(PersistSessionState.class.getName());
@@ -103,6 +125,6 @@ public class PersistSessionState extends ApplicationTemplate
             System.setProperty("apple.eawt.quitStrategy", "CLOSE_ALL_WINDOWS");
         }
 
-        start("World Wind Persist Session State", AppFrame.class);
+        start("WorldWind Persist Session State", AppFrame.class);
     }
 }

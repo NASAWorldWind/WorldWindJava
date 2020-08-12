@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -14,7 +36,7 @@ import java.util.*;
 
 /**
  * Basic implementation of the {@link gov.nasa.worldwind.render.BalloonAttributes} interface. Extends
- * <code>BasicShapeAttributes</code> to include attributes for World Wind {@link gov.nasa.worldwind.render.Balloon}
+ * <code>BasicShapeAttributes</code> to include attributes for WorldWind {@link gov.nasa.worldwind.render.Balloon}
  * shapes.
  *
  * @author pabercrombie
@@ -52,8 +74,8 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
     /**
      * Creates a new <code>BasicBalloonAttributes</code> with the default attributes. The default attributes are as
      * follows:
-     * <p/>
-     * <table> <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
+     * <table><caption style="font-weight: bold;">Attributes</caption>
+     * <tr><th>Attribute</th><th>Default Value</th></tr> <tr><td>unresolved</td><td><code>true</code></td></tr>
      * <tr><td>drawInterior</td><td><code>true</code></td></tr> <tr><td>drawOutline</td><td><code>true</code></td></tr>
      * <tr><td>enableAntialiasing</td><td><code>true</code></td></tr> <tr><td>enableLighting</td><td><code>false</code></td></tr>
      * <tr><td>interiorMaterial</td><td>{@link gov.nasa.worldwind.render.Material#WHITE}</td></tr>
@@ -62,12 +84,12 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
      * <tr><td>outlineWidth</td><td>1.0</td></tr> <tr><td>outlineStippleFactor</td><td>0</td></tr>
      * <tr><td>outlineStipplePattern</td><td>0xF0F0</td></tr> <tr><td>interiorImageSource</td><td><code>null</code></td></tr>
      * <tr><td>interiorImageScale</td><td>1.0</td></tr> <tr><td>size</td><td>350x350 pixels (width x height)</td></tr>
-     * <tr><td>maximumSize</td><td><code>null</code></td></tr> <tr><td>offset</td><td>40,60 pixels (x,
+     * <tr><td>maximumSize</td><td><code>null</code></td></tr> <tr><td>offset</td><td><code>40,60 pixels (x,
      * y)</code></td></tr> <tr><td>insets</td><td>30,15,15,15 (top, left, bottom, right)</td></tr>
      * <tr><td>balloonShape</td><td>{@link AVKey#SHAPE_RECTANGLE}</td></tr> <tr><td>leaderShape</td><td>{@link
      * AVKey#SHAPE_TRIANGLE}</td></tr> <tr><td>leaderWidth</td><td>40.0</td></tr> <tr><td>cornerRadius</td><td>20.0</td></tr>
      * <tr><td>font</td><td>Arial Plain 12</td></tr> <tr><td>textColor</td><td>{@link java.awt.Color#BLACK}</td></tr>
-     * <tr><td>imageOffset</td><td>0,0 (x, y)</code></td></tr> <tr><td>imageOpacity</td><td>1</td></tr>
+     * <tr><td>imageOffset</td><td><code>0,0 (x, y)</code></td></tr> <tr><td>imageOpacity</td><td>1</td></tr>
      * <tr><td>imageRepeat</td><td>{@link gov.nasa.worldwind.avlist.AVKey#REPEAT_XY}</td></tr> </table>
      */
     public BasicBalloonAttributes()
@@ -114,7 +136,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overrides the superclass' behavior to return a new <code>BasicBalloonAttributes</code>.
      */
     public ShapeAttributes copy()
@@ -124,7 +146,7 @@ public class BasicBalloonAttributes extends BasicShapeAttributes implements Ball
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Extends the superclass' behavior to copy <code>BalloonAttributes</code> if the specified <code>attributes</code>
      * is an instance of <code>BalloonAttributes</code>.
      */

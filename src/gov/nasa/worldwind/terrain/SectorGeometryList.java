@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.terrain;
 
@@ -10,7 +32,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -103,7 +125,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
 
     /**
      * Detects the locations of the sector geometries in this list that intersect a specified screen point.
-     * <p/>
+     * <p>
      * Note: Prior to calling this method, {@link #beginRendering(gov.nasa.worldwind.render.DrawContext)} must be
      * called.
      *
@@ -163,7 +185,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
     /**
      * Detects the locations of the sector geometries in this list that intersect any of the points in a specified list
      * of screen points.
-     * <p/>
+     * <p>
      * Note: Prior to calling this method, {@link #beginRendering(gov.nasa.worldwind.render.DrawContext)} must be
      * called.
      *
@@ -382,7 +404,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
      *
      * @param line the <code>Line</code> for which an intersection is to be found.
      *
-     * @return the <Vec4> point closest to the ray origin where an intersection has been found or null if no
+     * @return the &lt;Vec4&gt; point closest to the ray origin where an intersection has been found or null if no
      *         intersection was found.
      */
     public Intersection[] intersect(Line line)
@@ -436,10 +458,10 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
 
     /**
      * Determines if and where the geometry intersects the ellipsoid at a given elevation.
-     * <p/>
+     * <p>
      * The returned array of <code>Intersection</code> describes a list of individual segments - two
      * <code>Intersection</code> for each, corresponding to each geometry triangle that intersects the given elevation.
-     * <p/>
+     * <p>
      * Note that the provided bounding <code>Sector</code> only serves as a 'hint' to avoid processing unnecessary
      * geometry tiles. The returned intersection list may contain segments outside that sector.
      *

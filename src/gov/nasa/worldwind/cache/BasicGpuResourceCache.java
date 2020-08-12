@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.cache;
@@ -9,7 +31,7 @@ package gov.nasa.worldwind.cache;
 import com.jogamp.opengl.util.texture.Texture;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.util.logging.Level;
 
 /**
@@ -17,7 +39,7 @@ import java.util.logging.Level;
  * maintains a map of resources that fit within a specifiable memory capacity. If adding a resource would exceed this
  * cache's capacity, existing but least recently used resources are removed from the cache to make room. The cache is
  * reduced to the "low water" size in this case (see {@link #setLowWater(long)}.
- * <p/>
+ * <p>
  * When a resource is removed from the cache, and if it is a recognized OpenGL resource -- a texture, a list of vertex
  * buffer IDs, a list of display list IDs, etc. -- and there is a current Open GL context, the appropriate glDelete
  * function is called to de-register the resource with the GPU. If there is no current OpenGL context the resource is
@@ -196,9 +218,9 @@ public class BasicGpuResourceCache implements GpuResourceCache
 
     /**
      * Sets the new low water level in bytes, which controls how aggresively the cache discards items.
-     * <p/>
+     * <p>
      * When the cache fills, it removes items until it reaches the low water level.
-     * <p/>
+     * <p>
      * Setting a high loWater level will increase cache misses, but decrease average add time, but setting a low loWater
      * will do the opposite.
      *

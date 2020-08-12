@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology.milstd2525;
@@ -17,15 +39,15 @@ import java.util.MissingResourceException;
 
 /**
  * Retriever to fetch icons for MIL-STD-2525C point graphics. The retriever can fetch images from either local or remote
- * locations. See <a href="http://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use">Offline
+ * locations. See <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-symbols/#offline-use">Offline
  * Use</a> for information on how to set the icon retrieval location.
- * <p/>
+ * <p>
  * The retriever base URL must identify a location on a local or remote file system (including zip and jar files) that
  * holds the icon files in an expected directory structure. Each icon URL is constructed from three parts:
  * [base]/icons/[scheme]/[sidc].png. Parts of the SIDC that do not identify a type of graphic (such as echelon, status,
  * standard identity, order of battle, etc.) are replaced with hyphens. For example, the Underwater Datum graphic
  * (2.X.2.1.1.1.1.1) will be retrieved from this URL: [base]/icons/tacgrp/g-g-gpuud------.png
- * <p/>
+ * <p>
  * An application should only use this class directly if it needs to access point graphics independent of the {@link
  * TacticalGraphic} system (for example, to populate a UI independent of the globe).
  *

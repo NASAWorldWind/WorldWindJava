@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -9,23 +31,23 @@ import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 
 /**
  * GLRuntimeCapabilities describes the GL capabilities supported by the current GL runtime. It provides the caller with
  * the current GL version, with information about which GL features are available, and with properties defining the
  * capabilities of those features.
- * <p/>
+ * <p>
  * For each GL feature, there are three key pieces of information available through GLRuntimeCapabilities: <ul> <li>The
  * property <code>is[Feature]Available</code> defines whether or not the feature is supported by the current GL runtime.
  * This is an attribute of the GL runtime, and is typically configured automatically by a call to {@link
- * #initialize(javax.media.opengl.GLContext)}.</li> <li>The property <code>is[Feature]Enabled</code> defines whether or
+ * #initialize(com.jogamp.opengl.GLContext)}.</li> <li>The property <code>is[Feature]Enabled</code> defines whether or
  * not this feature should be used, and must be configured by the caller. </li> <li>The convenience method
  * <code>isUse[Feature]()</code>. This returns whether or not the feature is available and is enabled for use (it is
  * simply a conjunction of the "available" and "enabled" properties).</li> </ul>
- * <p/>
+ * <p>
  * GLRuntimeCapabilities is designed to automatically configure itself with information about the current GL runtime. To
- * invoke this behavior, call {@link #initialize(javax.media.opengl.GLContext)} with a valid GLContext at the beginning
+ * invoke this behavior, call {@link #initialize(com.jogamp.opengl.GLContext)} with a valid GLContext at the beginning
  * of each rendering pass.
  *
  * @author dcollins
@@ -53,8 +75,8 @@ public class GLRuntimeCapabilities
      * Constructs a new GLAtttributes, enabling framebuffer objects, anisotropic texture filtering, and vertex buffer
      * objects. Note that these properties are marked as enabled, but they are not known to be available yet. All other
      * properties are set to default values which may be set explicitly by the caller, or implicitly by calling {@link
-     * #initialize(javax.media.opengl.GLContext)}.
-     * <p/>
+     * #initialize(com.jogamp.opengl.GLContext)}.
+     * <p>
      * Note: The default vertex-buffer usage flag can be set via {@link gov.nasa.worldwind.Configuration} using the key
      * "gov.nasa.worldwind.avkey.VBOUsage". If that key is not specified in the configuration then vertex-buffer usage
      * defaults to <code>true</code>.
@@ -68,7 +90,7 @@ public class GLRuntimeCapabilities
     }
 
     /**
-     * Initialize this GLRuntimeCapabilities from the specified {@link javax.media.opengl.GLContext}. The context's
+     * Initialize this GLRuntimeCapabilities from the specified {@link com.jogamp.opengl.GLContext}. The context's
      * runtime GL capabilities are examined, and the properties of this GLRuntimeCapabilities are modified accordingly.
      * Invoking initialize() may change any property of this GLRuntimeCapabilities, except the caller specified enable
      * flags: is[Feature]Enabled.
@@ -181,7 +203,7 @@ public class GLRuntimeCapabilities
     /**
      * Returns true if the OpenGL implementation is provided by the VMware SVGA 3D driver. Otherwise this returns
      * false.
-     * <p/>
+     * <p>
      * This flag is used to work around bugs and unusual behavior in the VMware SVGA 3D driver. For details on VMware
      * graphics drivers, see <a href="http://www.vmware.com/files/pdf/techpaper/vmware-horizon-view-graphics-acceleration-deployment.pdf">http://www.vmware.com/files/pdf/techpaper/vmware-horizon-view-graphics-acceleration-deployment.pdf</a>.
      *

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -17,8 +39,8 @@ import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.combine.*;
 import gov.nasa.worldwind.util.measure.AreaMeasurer;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.*;
 import javax.xml.stream.XMLStreamException;
 import java.awt.*;
 import java.io.IOException;
@@ -30,11 +52,11 @@ import java.util.List;
  * Common superclass for surface conforming shapes such as {@link gov.nasa.worldwind.render.SurfacePolygon}, {@link
  * gov.nasa.worldwind.render.SurfacePolyline}, {@link gov.nasa.worldwind.render.SurfaceEllipse}, {@link
  * gov.nasa.worldwind.render.SurfaceQuad}, and {@link gov.nasa.worldwind.render.SurfaceSector}.
- * <p/>
+ * <p>
  * SurfaceShapes have separate attributes for normal display and highlighted display. If no attributes are specified,
  * default attributes are used. See {@link #DEFAULT_INTERIOR_MATERIAL}, {@link #DEFAULT_OUTLINE_MATERIAL}, and {@link
  * #DEFAULT_HIGHLIGHT_MATERIAL}.
- * <p/>
+ * <p>
  * AbstractSurfaceShape extends from {@link gov.nasa.worldwind.render.AbstractSurfaceObject}, and therefore inherits
  * AbstractSurfaceObject's batch rendering capabilities.
  *
@@ -228,7 +250,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * The returned state key is constructed the SurfaceShape's unique ID, last modified time, and its active
      * attributes. The returned state key has no dependency on the {@link gov.nasa.worldwind.globes.Globe}. Subclasses
      * that depend on the Globe should return a state key that include the globe's state key.
@@ -603,15 +625,9 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     protected abstract void doMoveTo(Position oldReferencePosition, Position newReferencePosition);
     protected abstract void doMoveTo(Globe globe, Position oldReferencePosition, Position newReferencePosition);
 
-    protected void onShapeChanged()
-    {
-        this.updateModifiedTime();
-        this.clearCaches();
-    }
-
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to clear this SurfaceShape's internal sector and geometry caches.
      */
     @Override
@@ -1666,7 +1682,7 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
      * Represents a surface shapes's current state. SurfaceShapeStateKey extends {@link
      * gov.nasa.worldwind.render.AbstractSurfaceObject.SurfaceObjectStateKey} by adding the shape's current {@link
      * gov.nasa.worldwind.render.ShapeAttributes} and the globe's state key.
-     * <p/>
+     * <p>
      * SurfaceShapeStateKey uniquely identifies a surface shapes's current state exactly as SurfaceObjectStateKey does,
      * but also distinguishes the shape's active ShapeAttributes from any previous attributes, and distinguishes between
      * different globes via the globe state key.
@@ -1793,7 +1809,6 @@ public abstract class AbstractSurfaceShape extends AbstractSurfaceObject impleme
     /**
      * Export the Polygon. The {@code output} object will receive the exported data. The type of this object depends on
      * the export format. The formats and object types supported by this class are:
-     * <p/>
      * <pre>
      * Format                                         Supported output object types
      * ================================================================================

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology;
@@ -16,23 +38,21 @@ import java.net.URL;
 
 /**
  * Base class for icon retrievers. This class provides methods for loading and manipulating icons.
- * <p/>
  * <h2>Icon retrieval</h2>
- * <p/>
+ * <p>
  * Each symbol in a symbology set must have a unique identifier. The IconRetriever's job is to create a BufferedImage to
  * represent a symbol given the symbol identifier. Usually this means retrieving an image from the file system or the
  * network, and optionally manipulating the symbol (for example, changing the color to represent a hostile or friendly
  * entity).
- * <p/>
+ * <p>
  * Each instance of AbstractIconRetriever is configured with a retrieval path which specifies the location of a symbol
  * repository on the file system or the network. {@link #readImage(String) readImage} retrieves images relative to this
  * base path. The retrieval path may be a file URL to a directory on the local file system (for example,
  * file:///symbols/mil-std-2525). A URL to a network resource (http://myserver.com/milstd2525/), or a URL to a JAR or
  * ZIP file (jar:file:milstd2525-symbols.zip!).
- * <p/>
+ * <p>
  * A simple icon retriever might use a symbol repository that is a simple directory of PNG files, where each file name
  * matches a symbol identifier. Such an icon retriever could be implemented like this:
- * <p/>
  * <pre>
  * class SimpleIconRetriever extends AbstractIconRetriever
  * {
@@ -43,9 +63,8 @@ import java.net.URL;
  *     }
  * }
  * </pre>
- * <p/>
  * <h2>Composite icons</h2>
- * <p/>
+ * <p>
  * Complicated symbols may be made up of several different graphical elements. {@link
  * #drawImage(java.awt.image.BufferedImage, java.awt.image.BufferedImage) drawImage} helps build a complex symbol from
  * simple pieces. For example, if a symbol is composed of a frame and an icon, the icon retriever could load the frame
@@ -61,9 +80,8 @@ import java.net.URL;
  * // Return the composite image.
  * return fullImage;
  * </pre>
- * <p/>
  * <h2>Changing the color of an icon</h2>
- * <p/>
+ * <p>
  * {@link #multiply(java.awt.image.BufferedImage, java.awt.Color) multiply} can change the color of an image by
  * multiplying each pixel in the image by a color. The multiplication color will replace any white pixels and black
  * pixels will be unaffected. For example, a symbol set in which hostile symbols are drawn in red and friendly symbols

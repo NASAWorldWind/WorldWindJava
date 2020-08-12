@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind;
@@ -10,23 +32,22 @@ import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.render.DrawContext;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 
 /**
  * TODO: This file needs to be updated to implement "correct" stereo, as described at:
  * http://www.orthostereo.com/geometryopengl.html
- * <p/>
- * <p/>
+ * <p>
  * This scene controller draws in stereo, either red-blue anaglyph or device supported if the display device provides
  * stereo directly. It can also draw without applying stereo. To select stereo, prior to calling this class' constructor
  * set the Java VM property <code>gov.nasa.worldwind.stereo.mode</code> to "device" for device supported stereo (if
  * provided by the device) or "redblue" for red-blue anaglyph stereo. If the property is not set or is any other value,
  * this class does not draw in stereo.
- * <p/>
+ * <p>
  * The {@link WorldWindow} instance must support stereo in order to use device-supported stereo. A stereo
  * <code>WorldWindow</code> is selected by specifying the Java VM property described above prior to creating it. See
  * {@link gov.nasa.worldwind.awt.WorldWindowGLCanvas} for further details.
- * <p/>
+ * <p>
  * Note: The logic and much of the code here was contributed by Xander Enzmann of Mitre Corporation.
  *
  * @author tag
@@ -35,7 +56,7 @@ import javax.media.opengl.*;
 public class StereoOptionSceneController extends BasicSceneController implements StereoSceneController
 {
     /**
-     * The default focus angle. May be specified in the World Wind configuration file as the
+     * The default focus angle. May be specified in the WorldWind configuration file as the
      * <code>gov.nasa.worldwind.StereoFocusAngle</code> property. The default if not specified in the configuration is
      * 1.6 degrees.
      */
@@ -114,7 +135,7 @@ public class StereoOptionSceneController extends BasicSceneController implements
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * If the display device is providing stereo -- {@link #isHardwareStereo()} is <code>true</code> -- this method
      * returns true even if the stereo mode is {@link AVKey#STEREO_MODE_NONE}. In this case, individual stereo images
      * are drawn for left and right eyes in order to prevent a blurred scene.
@@ -158,7 +179,7 @@ public class StereoOptionSceneController extends BasicSceneController implements
 
     /**
      * Implement no stereo ("Mono") while using a stereo device.
-     * <p/>
+     * <p>
      * Note that this method draws the image twice, once to each of the left and right eye buffers, even when stereo is
      * not in effect. This is to prevent the stereo device from drawing blurred scenes.
      *

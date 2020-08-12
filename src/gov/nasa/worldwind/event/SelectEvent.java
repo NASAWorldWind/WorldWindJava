@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.event;
 
@@ -17,25 +39,25 @@ import java.util.List;
  * caused the signal. See the <em>Field Summary</em> for a description of the possible operations. When a SelectEvent
  * occurs, all select event listeners registered with the associated {@link gov.nasa.worldwind.WorldWindow} are called.
  * Select event listeners are registered by calling {@link gov.nasa.worldwind.WorldWindow#addSelectListener(SelectListener)}.
- * <p/>
+ * <p>
  * A <code>ROLLOVER</code> SelectEvent is generated every frame when the cursor is over a visible object either because
- * the user moved it there or because the World Window was repainted and a visible object was found to be under the
+ * the user moved it there or because the WorldWindow was repainted and a visible object was found to be under the
  * cursor. A <code>ROLLOVER</code> SelectEvent is also generated when there are no longer any objects under the cursor.
  * Select events generated for objects under the cursor have a non-null pickPoint, and contain the top-most visible
  * object of all objects at the cursor position.
- * <p/>
+ * <p>
  * A <code>BOX_ROLLOVER</code> SelectEvent is generated every frame when the selection box intersects a visible object
- * either because the user moved or expanded it or because the World Window was repainted and a visible object was found
+ * either because the user moved or expanded it or because the WorldWindow was repainted and a visible object was found
  * to intersect the box. A <code>BOX_ROLLOVER</code> SelectEvent is also generated when there are no longer any objects
  * intersecting the selection box. Select events generated for objects intersecting the selection box have a non-null
  * pickRectangle, and contain all top-most visible objects of all objects intersecting the selection box.
- * <p/>
+ * <p>
  * If a select listener performs some action in response to a select event, it should call the event's {@link
  * #consume()} method in order to indicate to subsequently called listeners that the event has been responded to and no
  * further action should be taken. Left press select events should not be consumed unless it is necessary to do so.
  * Consuming left press events prevents the WorldWindow from gaining focus, thereby preventing it from receiving key
  * events.
- * <p/>
+ * <p>
  * If no object is under the cursor but the cursor is over terrain, the select event will identify the terrain as the
  * picked object and will include the corresponding geographic position. See {@link
  * gov.nasa.worldwind.pick.PickedObject#isTerrain()}.

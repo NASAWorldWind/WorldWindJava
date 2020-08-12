@@ -1,14 +1,36 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.Configuration;
 
-import javax.media.opengl.*;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,14 +40,13 @@ import java.util.Map;
  * @author tag
  * @version $Id: WorldWindDiagnostics.java 2319 2014-09-17 19:22:58Z dcollins $
  */
-public class WorldWindDiagnostics
-{
-    private static class GLFrame extends JFrame implements GLEventListener
-    {
-        private JTextArea outputArea;
+public class WorldWindDiagnostics {
 
-        GLFrame(JTextArea outputArea)
-        {
+    private static class GLFrame extends JFrame implements GLEventListener {
+
+        private final JTextArea outputArea;
+
+        GLFrame(JTextArea outputArea) {
             this.outputArea = outputArea;
             GLCapabilities caps = new GLCapabilities(Configuration.getMaxCompatibleGLProfile());
             caps.setAlphaBits(8);
@@ -38,34 +59,32 @@ public class WorldWindDiagnostics
             this.setSize(200, 200);
         }
 
-        private static class Attr
-        {
-            private Attr(Object attr, String name)
-            {
+        private static class Attr {
+
+            private Attr(Object attr, String name) {
                 this.attr = attr;
                 this.name = name;
             }
 
-            private Object attr;
-            private String name;
+            private final Object attr;
+            private final String name;
         }
 
-        private static Attr[] attrs = new Attr[]
-            {
-                new Attr(GL.GL_STENCIL_BITS, "stencil bits"),
-                new Attr(GL.GL_DEPTH_BITS, "depth bits"),
-                new Attr(GL2.GL_MAX_TEXTURE_UNITS, "max texture units"),
-                new Attr(GL2.GL_MAX_TEXTURE_IMAGE_UNITS_ARB, "max texture image units"),
-                new Attr(GL2.GL_MAX_TEXTURE_COORDS_ARB, "max texture coords"),
-                new Attr(GL.GL_MAX_TEXTURE_SIZE, "max texture size"),
-                new Attr(GL2.GL_MAX_ELEMENTS_INDICES, "max elements indices"),
-                new Attr(GL2.GL_MAX_ELEMENTS_VERTICES, "max elements vertices"),
-                new Attr(GL2.GL_MAX_LIGHTS, "max lights"),
-                new Attr(GL2.GL_LINE_WIDTH_RANGE, "line width range")
-            };
+        private static Attr[] attrs = new Attr[]{
+            new Attr(GL.GL_STENCIL_BITS, "stencil bits"),
+            new Attr(GL.GL_DEPTH_BITS, "depth bits"),
+            new Attr(GL2.GL_MAX_TEXTURE_UNITS, "max texture units"),
+            new Attr(GL2.GL_MAX_TEXTURE_IMAGE_UNITS_ARB, "max texture image units"),
+            new Attr(GL2.GL_MAX_TEXTURE_COORDS_ARB, "max texture coords"),
+            new Attr(GL.GL_MAX_TEXTURE_SIZE, "max texture size"),
+            new Attr(GL2.GL_MAX_ELEMENTS_INDICES, "max elements indices"),
+            new Attr(GL2.GL_MAX_ELEMENTS_VERTICES, "max elements vertices"),
+            new Attr(GL2.GL_MAX_LIGHTS, "max lights"),
+            new Attr(GL2.GL_LINE_WIDTH_RANGE, "line width range")
+        };
 
-        public void init(GLAutoDrawable glAutoDrawable)
-        {
+        @Override
+        public void init(GLAutoDrawable glAutoDrawable) {
             StringBuilder sb = new StringBuilder();
 
             sb.append(gov.nasa.worldwind.Version.getVersion() + "\n");
@@ -76,8 +95,7 @@ public class WorldWindDiagnostics
             sb.append("Max memory: " + Runtime.getRuntime().maxMemory() + " bytes\n");
             sb.append("Total memory: " + Runtime.getRuntime().totalMemory() + " bytes\n");
 
-            for (Map.Entry prop : System.getProperties().entrySet())
-            {
+            for (Map.Entry prop : System.getProperties().entrySet()) {
                 sb.append(prop.getKey() + " = " + prop.getValue() + "\n");
             }
 
@@ -95,12 +113,10 @@ public class WorldWindDiagnostics
             sb.append("OpenGL renderer: " + oglRenderer + "\n");
 
             int[] intVals = new int[2];
-            for (Attr attr : attrs)
-            {
+            for (Attr attr : attrs) {
                 sb.append(attr.name).append(": ");
 
-                if (attr.attr instanceof Integer)
-                {
+                if (attr.attr instanceof Integer) {
                     gl.glGetIntegerv((Integer) attr.attr, intVals, 0);
                     sb.append(intVals[0]).append(intVals[1] > 0 ? ", " + intVals[1] : "");
                 }
@@ -111,24 +127,19 @@ public class WorldWindDiagnostics
             String extensionString = gl.glGetString(GL.GL_EXTENSIONS);
             String[] extensions = extensionString.split(" ");
             sb.append("Extensions\n");
-            for (String ext : extensions)
-            {
+            for (String ext : extensions) {
                 sb.append("    " + ext + "\n");
             }
 
             sb.append("\nJOGL Values\n");
-            String pkgName = "javax.media.opengl";
-            try
-            {
+            String pkgName = "com.jogamp.opengl";
+            try {
                 getClass().getClassLoader().loadClass(pkgName + ".GL");
 
-                Package p = Package.getPackage(pkgName);
-                if (p == null)
-                {
+                Package p = getClass().getClassLoader().getDefinedPackage(pkgName);
+                if (p == null) {
                     sb.append("WARNING: Package.getPackage(" + pkgName + ") is null\n");
-                }
-                else
-                {
+                } else {
                     sb.append(p + "\n");
                     sb.append("Specification Title = " + p.getSpecificationTitle() + "\n");
                     sb.append("Specification Vendor = " + p.getSpecificationVendor() + "\n");
@@ -136,49 +147,45 @@ public class WorldWindDiagnostics
                     sb.append("Implementation Vendor = " + p.getImplementationVendor() + "\n");
                     sb.append("Implementation Version = " + p.getImplementationVersion() + "\n");
                 }
-            }
-            catch (ClassNotFoundException e)
-            {
+            } catch (ClassNotFoundException e) {
                 sb.append("Unable to load " + pkgName + "\n");
             }
 
             this.outputArea.setText(sb.toString());
         }
 
-        public void dispose(GLAutoDrawable glAutoDrawable)
-        {
+        @Override
+        public void dispose(GLAutoDrawable glAutoDrawable) {
         }
 
-        public void display(GLAutoDrawable glAutoDrawable)
-        {
+        public void display(GLAutoDrawable glAutoDrawable) {
             glAutoDrawable.getGL().glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         }
 
-        public void reshape(GLAutoDrawable glAutoDrawable, int x, int y, int width, int height)
-        {
+        @Override
+        public void reshape(GLAutoDrawable glAutoDrawable, int x, int y, int width, int height) {
         }
     }
 
-    private static class MainFrame extends JFrame
-    {
-        private static JTextArea outputArea = new JTextArea(20, 80);
+    private static class MainFrame extends JFrame {
 
-        private static class RunAction extends AbstractAction
-        {
-            public RunAction()
-            {
+        private static final JTextArea outputArea = new JTextArea(20, 80);
+
+        private static class RunAction extends AbstractAction {
+
+            public RunAction() {
                 super("Re-run Test");
             }
 
-            public void actionPerformed(ActionEvent actionEvent)
-            {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
                 outputArea.setText("");
                 GLFrame glFrame = new GLFrame(outputArea);
                 glFrame.setVisible(true);
             }
         }
 
-        private static Action[] operations = new Action[] {
+        private static final Action[] operations = new Action[]{
             new RunAction()
         };
 
@@ -186,10 +193,8 @@ public class WorldWindDiagnostics
         private JPanel controlContainer = new JPanel(new BorderLayout());
         private JPanel outputContainer = new JPanel();
 
-        public MainFrame()
-        {
-            try
-            {
+        public MainFrame() {
+            try {
                 mainPanel.setLayout(new BorderLayout());
                 mainPanel.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
                 mainPanel.add(outputContainer, java.awt.BorderLayout.CENTER);
@@ -199,15 +204,14 @@ public class WorldWindDiagnostics
 
                 this.getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
-                java.util.ArrayList<JButton> btns = new java.util.ArrayList<JButton>();
+                java.util.ArrayList<JButton> btns = new java.util.ArrayList<>();
                 {
                     JPanel westPanel = new JPanel(new GridLayout(0, 1, 0, 10));
                     westPanel.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
                     JPanel opsPanel = new JPanel(new GridLayout(6, 1));
                     opsPanel.setBorder(new javax.swing.border.TitledBorder("Operations"));
 
-                    for (Action action : operations)
-                    {
+                    for (Action action : operations) {
                         JPanel p = new JPanel(new BorderLayout());
                         JButton jb = new JButton(action);
                         btns.add(jb);
@@ -223,8 +227,7 @@ public class WorldWindDiagnostics
                 this.pack();
 
                 Dimension dim = btns.get(0).getSize();
-                for (JButton btn : btns)
-                {
+                for (JButton btn : btns) {
                     btn.setPreferredSize(dim);
                 }
 
@@ -239,37 +242,33 @@ public class WorldWindDiagnostics
                 int y = parentLocation.y + (parentSize.height - prefSize.height) / 2;
                 this.setLocation(x, y);
                 this.setResizable(true);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        protected void processWindowEvent(java.awt.event.WindowEvent e)
-        {
+        @Override
+        protected void processWindowEvent(java.awt.event.WindowEvent e) {
             super.processWindowEvent(e);
 
-            if (e.getID() != java.awt.event.WindowEvent.WINDOW_OPENED)
-                //noinspection UnnecessaryReturnStatement
+            if (e.getID() != java.awt.event.WindowEvent.WINDOW_OPENED) //noinspection UnnecessaryReturnStatement
+            {
                 return;
+            }
             GLFrame glFrame = new GLFrame(outputArea);
             glFrame.setVisible(true);
         }
     }
 
-    static
-    {
-        if (Configuration.isMacOS())
-        {
+    static {
+        if (Configuration.isMacOS()) {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "World Wind Diagnostic Program");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WorldWind Diagnostic Program");
             System.setProperty("com.apple.mrj.application.growbox.intrudes", "false");
         }
     }
 
-    public static void main(String[] arg)
-    {
+    public static void main(String[] arg) {
         final MainFrame frame = new MainFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
