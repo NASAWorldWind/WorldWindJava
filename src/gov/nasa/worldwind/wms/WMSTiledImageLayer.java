@@ -201,7 +201,7 @@ public class WMSTiledImageLayer extends BasicTiledImageLayer
             {
                 this.wmsVersion = MAX_VERSION;
                 coordSystemKey = "&crs=";
-                defaultCS = "CRS:84"; // would like to do EPSG:4326 but that's incompatible with our old WMS server, see WWJ-474
+                defaultCS = "EPSG:4326"; //defaultCS = "CRS:84"; // would like to do EPSG:4326 but that's incompatible with our old WMS server, see WWJ-474
             }
             else
             {
