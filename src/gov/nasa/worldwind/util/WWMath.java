@@ -1181,6 +1181,110 @@ public class WWMath
     }
 
     /**
+     * Given a segment <code>p1</code>-><code>p2</code>, compute the closest coordinate on the segment to the supplied
+     * <code>point</code>.
+     *
+     * @param p1 the first segment point.
+     * @param p2 the second segment point.
+     * @param point the point to find the closest coordinate for.
+     *
+     * @return The closes coordinate on the segment to point.
+     *
+     * @throws IllegalArgumentException if <code>p1</code>, <code>p2</code>, or <code>point</code> is null
+     */
+    public static Vec4 nearestPointOnSegment(Vec4 p1, Vec4 p2, Vec4 point) {
+        if (p1 == null || p2 == null || point == null) {
+            String msg = Logging.getMessage("nullValue.Vec4IsNull");
+            Logging.logger().severe(msg);
+            throw new IllegalArgumentException(msg);
+        }
+
+        Vec4 segment = p2.subtract3(p1);
+        Vec4 dir = segment.normalize3();
+
+        double dot = point.subtract3(p1).dot3(dir);
+        if (dot < 0.0) {
+            return p1;
+        } else if (dot > segment.getLength3()) {
+            return p2;
+        } else {
+            return Vec4.fromLine3(p1, dot, dir);
+        }
+    }
+    
+    private static Vec4 getVertex3(int position, DoubleBuffer vertices) {
+        double[] compArray = new double[3];
+        vertices.position(3 * position);
+        vertices.get(compArray, 0, 3);
+        return Vec4.fromArray3(compArray, 0);
+    }
+    
+    // TODO: this method could be of general use
+    public static Vec4 computeNearestLineToPoint(Vec4 point, int count, IntBuffer indices, DoubleBuffer vertices,
+            Vec4 referenceCenter) {
+        Vec4 intersectionPoint = null;
+        double nearestDistance = Double.MAX_VALUE;
+
+        for (int i = 0; i < (count - 1); i += 2) {
+            int position = indices.get(i);
+            Vec4 v1 = getVertex3(position, vertices).add3(referenceCenter);
+            position = indices.get(i + 1);
+            Vec4 v2 = getVertex3(position, vertices).add3(referenceCenter);
+
+            Vec4 vec = nearestPointOnSegment(v1, v2, point);
+            if (vec != null) {
+                double d = point.distanceTo3(vec);
+                if (d < nearestDistance) {
+                    nearestDistance = d;
+                    intersectionPoint = vec;
+                }
+            }
+        }
+
+        indices.rewind();
+        vertices.rewind();
+
+        return intersectionPoint;
+    }
+
+    // TODO: this method could be of general use
+    public static Vec4 intersectRayWithTriangleStrip(Line ray, int count, IntBuffer indices, DoubleBuffer vertices,
+            Vec4 referenceCenter) {
+        Vec4 intersectionPoint = null;
+        double nearestDistance = Double.MAX_VALUE;
+
+        for (int i = 0; i < (count - 2); i++) {
+            int position = indices.get(i);
+            Vec4 v1 = getVertex3(position, vertices).add3(referenceCenter);
+            position = indices.get(i + 1);
+            Vec4 v2 = getVertex3(position, vertices).add3(referenceCenter);
+            position = indices.get(i + 2);
+            Vec4 v3 = getVertex3(position, vertices).add3(referenceCenter);
+
+            Triangle triangle;
+            if ((i % 2) == 0) {
+                triangle = new Triangle(v1, v2, v3);
+            } else {
+                triangle = new Triangle(v2, v1, v3);
+            }
+
+            Vec4 vec = triangle.intersect(ray);
+            if (vec != null) {
+                double d = ray.getOrigin().distanceTo3(vec);
+                if (d < nearestDistance) {
+                    nearestDistance = d;
+                    intersectionPoint = vec;
+                }
+            }
+        }
+
+        indices.rewind();
+        vertices.rewind();
+
+        return intersectionPoint;
+    }
+    
+    /**
      * Intersect a line with a convex polytope and return the intersection points.
      * <p>
      * See "3-D Computer Graphics" by Samuel R. Buss, 2005, Section X.1.4.

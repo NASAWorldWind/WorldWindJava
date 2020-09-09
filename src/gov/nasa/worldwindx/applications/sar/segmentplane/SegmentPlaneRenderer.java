@@ -1911,82 +1911,19 @@ public class SegmentPlaneRenderer
         return null;
     }
 
-    // TODO: this method could be of general use
+    @Deprecated
     protected Vec4 computeNearestLineToPoint(Vec4 point, int count, IntBuffer indices, DoubleBuffer vertices,
-        Vec4 referenceCenter)
-    {
-        Vec4 intersectionPoint = null;
-        double nearestDistance = Double.MAX_VALUE;
-
-        for (int i = 0; i < (count - 1); i += 2)
-        {
-            int position = indices.get(i);
-            Vec4 v1 = getVertex3(position, vertices).add3(referenceCenter);
-            position = indices.get(i + 1);
-            Vec4 v2 = getVertex3(position, vertices).add3(referenceCenter);
-
-            Vec4 vec = nearestPointOnSegment(v1, v2, point);
-            if (vec != null)
-            {
-                double d = point.distanceTo3(vec);
-                if (d < nearestDistance)
-                {
-                    nearestDistance = d;
-                    intersectionPoint = vec;
-                }
-            }
-        }
-
-        indices.rewind();
-        vertices.rewind();
-
-        return intersectionPoint;
+            Vec4 referenceCenter) {
+        return WWMath.computeNearestLineToPoint(point, count, indices, vertices, referenceCenter);
     }
 
-    // TODO: this method could be of general use
+    @Deprecated
     protected Vec4 intersectRayWithTriangleStrip(Line ray, int count, IntBuffer indices, DoubleBuffer vertices,
-        Vec4 referenceCenter)
-    {
-        Vec4 intersectionPoint = null;
-        double nearestDistance = Double.MAX_VALUE;
-
-        for (int i = 0; i < (count - 2); i++)
-        {
-            int position = indices.get(i);
-            Vec4 v1 = getVertex3(position, vertices).add3(referenceCenter);
-            position = indices.get(i + 1);
-            Vec4 v2 = getVertex3(position, vertices).add3(referenceCenter);
-            position = indices.get(i + 2);
-            Vec4 v3 = getVertex3(position, vertices).add3(referenceCenter);
-
-            Triangle triangle;
-            if ((i % 2) == 0)
-            {
-                triangle = new Triangle(v1, v2, v3);
-            }
-            else
-            {
-                triangle = new Triangle(v2, v1, v3);
-            }
-
-            Vec4 vec = triangle.intersect(ray);
-            if (vec != null)
-            {
-                double d = ray.getOrigin().distanceTo3(vec);
-                if (d < nearestDistance)
-                {
-                    nearestDistance = d;
-                    intersectionPoint = vec;
-                }
-            }
-        }
-
-        indices.rewind();
-        vertices.rewind();
-
-        return intersectionPoint;
+            Vec4 referenceCenter) {
+        return WWMath.intersectRayWithTriangleStrip(ray, count, indices, vertices, referenceCenter);
     }
 
+    @Deprecated
     protected static Vec4 getVertex3(int position, DoubleBuffer vertices)
     {
         double[] compArray = new double[3];
@@ -2003,24 +1940,4 @@ public class SegmentPlaneRenderer
         vertices.put(compArray, 0, 3);
     }
 
-    // TODO: identical to a method in AirspaceEditorUtil; consolidate usage in a general place
-    private static Vec4 nearestPointOnSegment(Vec4 p1, Vec4 p2, Vec4 point)
-    {
-        Vec4 segment = p2.subtract3(p1);
-        Vec4 dir = segment.normalize3();
-
-        double dot = point.subtract3(p1).dot3(dir);
-        if (dot < 0.0)
-        {
-            return p1;
-        }
-        else if (dot > segment.getLength3())
-        {
-            return p2;
-        }
-        else
-        {
-            return Vec4.fromLine3(p1, dot, dir);
-        }
-    }
 }

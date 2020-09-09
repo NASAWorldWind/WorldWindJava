@@ -30,6 +30,7 @@ package gov.nasa.worldwind.render.airspaces.editor;
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.airspaces.Airspace;
+import gov.nasa.worldwind.util.WWMath;
 
 import java.util.*;
 
@@ -329,25 +330,11 @@ public class AirspaceEditorUtil
 
         return source.getPointAt(t1);
     }
-
+    
+    @Deprecated
     public static Vec4 nearestPointOnSegment(Vec4 p1, Vec4 p2, Vec4 point)
     {
-        Vec4 segment = p2.subtract3(p1);
-        Vec4 dir = segment.normalize3();
-
-        double dot = point.subtract3(p1).dot3(dir);
-        if (dot < 0.0)
-        {
-            return p1;
-        }
-        else if (dot > segment.getLength3())
-        {
-            return p2;
-        }
-        else
-        {
-            return Vec4.fromLine3(p1, dot, dir);
-        }
+        return WWMath.nearestPointOnSegment(p1, p2, point);
     }
 
     public static Vec4 nearestIntersectionPoint(Line line, Intersection[] intersections)

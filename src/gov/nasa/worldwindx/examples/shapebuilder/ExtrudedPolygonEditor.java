@@ -474,7 +474,7 @@ public class ExtrudedPolygonEditor extends AbstractShapeEditor
             ControlPointMarker nextMarker = (ControlPointMarker) this.controlPoints.get(
                 (i + 1) % this.controlPoints.size());
 
-            Vec4 pointOnEdge = AirspaceEditorUtil.nearestPointOnSegment(thisMarker.point, nextMarker.point, pickPoint);
+            Vec4 pointOnEdge = WWMath.nearestPointOnSegment(thisMarker.point, nextMarker.point, pickPoint);
             if (!AirspaceEditorUtil.isPointBehindLineOrigin(ray, pointOnEdge))
             {
                 double d = pointOnEdge.distanceTo3(pickPoint);
