@@ -42,7 +42,7 @@ import java.awt.*;
 import java.io.File;
 
 /**
- * Shows how to load {@link <a href="https://www.khronos.org/collada/">COLLADA</a> 3D models.
+ * Shows how to load <a href="https://www.khronos.org/collada/">COLLADA</a> 3D models.
  */
 public class ColladaViewer extends ApplicationTemplate {
 
@@ -88,10 +88,10 @@ public class ColladaViewer extends ApplicationTemplate {
 
         // Indicates the source of the COLLADA file loaded by this thread. Initialized during construction.
         protected Object colladaSource;
-        
+
         // Geographic position of the COLLADA model.
         protected Position position;
-        
+
         // Indicates the <code>AppFrame</code> the COLLADA file content is displayed in. Initialized during
         // construction.
         protected AppFrame appFrame;
@@ -131,21 +131,21 @@ public class ColladaViewer extends ApplicationTemplate {
             }
         }
     }
-    
+
     public static void main(String[] args) {
-        
+
         // Set camera position and pitch angle.
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 40.028);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -105.27284091410579);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 4000);
         Configuration.setValue(AVKey.INITIAL_PITCH, 50);
-           
+
         // Set the application frame to update, a position for the model, and a path to the COLLADA file.
         final AppFrame af = (AppFrame) start("WorldWind COLLADA Viewer", AppFrame.class);
         final Position MackyAuditoriumPosition = Position.fromDegrees(40.009993372683, -105.272774533734);
         final File ColladaFile = new File("testData/collada/cu_macky/CU Macky.dae");
-        
-        // Invoque the <code>Thread</code> to load the COLLADA model asynchronously.
+
+        // Invoke the <code>Thread</code> to load the COLLADA model asynchronously.
         new WorkerThread(ColladaFile, MackyAuditoriumPosition, af).start();
 
     }
