@@ -1197,6 +1197,40 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
     }
 
     /**
+     * Determines whether this sector intersects the specified geographic path. The locations are are assumed to be
+     * connected by a linear path in geographic space. This returns true if any location along that linear path
+     * intersects this sector, including the path coordinates themselves.
+     *
+     * @param coords the coordinates of the path
+     *
+     * @return true <code>true</code> if this sector intersects the path, otherwise <code>false</code>.
+     *
+     * @throws IllegalArgumentException if either the coordinate list is null.
+     */
+    public boolean intersectsPath(Iterable<? extends LatLon> coords) {
+        if (coords == null) {
+            String message = Logging.getMessage("nullValue.PathIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        Iterator<? extends LatLon> it = coords.iterator();
+        LatLon c1 = null;
+        if (it.hasNext()) {
+            c1 = it.next();
+        }
+
+        while (it.hasNext()) {
+            LatLon c2 = it.next();
+            if (intersectsSegment(c1, c2)) {
+                return true;
+            }
+            c1 = c2;
+        }
+        return false;
+    }
+
+    /**
      * Determines whether this sector intersects the specified geographic line segment. The line segment is specified by
      * a begin location and an end location. The locations are are assumed to be connected by a linear path in
      * geographic space. This returns true if any location along that linear path intersects this sector, including the

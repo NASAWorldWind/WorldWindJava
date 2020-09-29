@@ -10,7 +10,7 @@
                 <IconStyle>
                     <Icon>
                         <href>
-                            http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_random_image.php
+                            http://localhost/java/NetworkLinkExpiration/NetworkLinkExpiration_random_image.php
                         </href>
                         <refreshMode>onExpire</refreshMode>
                     </Icon>
@@ -25,7 +25,7 @@
             <name>Ground Overlay</name>
             <visibility>1</visibility>
             <Icon>
-                <href>http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_random_image.php
+                <href>http://localhost/java/NetworkLinkExpiration/NetworkLinkExpiration_random_image.php
                 </href>
                 <refreshMode>onExpire</refreshMode>
             </Icon>
@@ -41,7 +41,7 @@
             <name>Screen Overlay</name>
             <visibility>1</visibility>
             <Icon>
-                <href>http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_random_image.php
+                <href>http://localhost/java/NetworkLinkExpiration/NetworkLinkExpiration_random_image.php
                 </href>
                 <refreshMode>onExpire</refreshMode>
             </Icon>

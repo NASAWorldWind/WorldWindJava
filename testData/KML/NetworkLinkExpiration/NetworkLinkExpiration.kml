@@ -15,7 +15,7 @@
             <open>1</open>
             <Link>
                 <href>
-                    http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_expires.php
+                    http://localhost/java/NetworkLinkExpiration/NetworkLinkExpiration_expires.php
                 </href>
                 <refreshMode>onExpire</refreshMode>
             </Link>
@@ -26,7 +26,7 @@
             <open>1</open>
             <Link>
                 <href>
-                    http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_max_age.php
+                    http://localhost/java/NetworkLinkExpiration/NetworkLinkExpiration_max_age.php
                 </href>
                 <refreshMode>onExpire</refreshMode>
             </Link>
@@ -37,7 +37,7 @@
             <open>1</open>
             <Link>
                 <href>
-                    http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_expires_and_max_age.php
+                    http://localhost/java/NetworkLinkExpiration/NetworkLinkExpiration_expires_and_max_age.php
                 </href>
                 <refreshMode>onExpire</refreshMode>
             </Link>
@@ -48,7 +48,7 @@
             <open>1</open>
             <Link>
                 <href>
-                    http://worldwind.arc.nasa.gov/java/NetworkLinkExpiration/NetworkLinkExpiration_expires_and_link_control.php
+                    http://localhost/java/NetworkLinkExpiration/NetworkLinkExpiration_expires_and_link_control.php
                 </href>
                 <refreshMode>onExpire</refreshMode>
             </Link>

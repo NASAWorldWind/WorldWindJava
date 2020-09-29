@@ -17,3 +17,7 @@ How to test
 
 Open NetworkLinkExpiration.kml in KMLViewer. Each link loads one placemark. The label on each placemark should change
 every 5 seconds.
+
+http://localhost/java/NetworkLinkExpiration/NetworkLinkExpiration.kml
+http://localhost/java/NetworkLinkExpiration/IconExpiration.kml
+http://localhost/java/NetworkLinkExpiration/on-interval.kml

@@ -64,6 +64,7 @@ public abstract class TiledImageLayer extends AbstractLayer
     protected double detailHint = 0;
     protected boolean useMipMaps = true;
     protected boolean useTransparentTextures = false;
+    private boolean useBrightness = false;
     protected ArrayList<String> supportedImageFormats = new ArrayList<String>();
     protected String textureFormat;
 
@@ -262,6 +263,20 @@ public abstract class TiledImageLayer extends AbstractLayer
     public void setUseMipMaps(boolean useMipMaps)
     {
         this.useMipMaps = useMipMaps;
+    }
+
+    /**
+     * @return the useBrightness
+     */
+    public boolean isUseBrightness() {
+        return useBrightness;
+    }
+
+    /**
+     * @param useBrightness the useBrightness to set
+     */
+    public void setUseBrightness(boolean useBrightness) {
+        this.useBrightness = useBrightness;
     }
 
     public boolean isUseTransparentTextures()
@@ -640,7 +655,8 @@ public abstract class TiledImageLayer extends AbstractLayer
 
             GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
-            if (this.isUseTransparentTextures() || this.getOpacity() < 1)
+            if (this.isUseTransparentTextures() || this.getOpacity() < 1.0d ||
+                    this.isUseBrightness() || this.getBrightness()<1.0d)
             {
                 gl.glPushAttrib(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_POLYGON_BIT | GL2.GL_CURRENT_BIT);
                 this.setBlendingFunction(dc);
@@ -699,7 +715,8 @@ public abstract class TiledImageLayer extends AbstractLayer
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         double alpha = this.getOpacity();
-        gl.glColor4d(alpha, alpha, alpha, alpha);
+        double brightness = this.getBrightness();
+        gl.glColor4d(brightness, brightness, brightness, alpha);
         gl.glEnable(GL.GL_BLEND);
         gl.glBlendFunc(GL.GL_ONE, GL.GL_ONE_MINUS_SRC_ALPHA);
     }

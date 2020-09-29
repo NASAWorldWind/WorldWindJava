@@ -47,6 +47,7 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
     private boolean enabled = true;
     private boolean pickable = true;
     private double opacity = 1d;
+    private double brightness = 1d;
     private double minActiveAltitude = -Double.MAX_VALUE;
     private double maxActiveAltitude = Double.MAX_VALUE;
     private boolean networkDownloadEnabled = true;
@@ -95,6 +96,20 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
         return n != null ? n.toString() : super.toString();
     }
 
+    /**
+     * @return the brightness
+     */
+    public double getBrightness() {
+        return brightness;
+    }
+
+    /**
+     * @param brightness the brightness to set
+     */
+    public void setBrightness(double brightness) {
+        this.brightness = brightness;
+    }
+    
     public double getOpacity()
     {
         return opacity;

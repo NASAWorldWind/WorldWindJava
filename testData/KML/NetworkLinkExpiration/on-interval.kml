@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- $Id: GroundOverlay.kml 15607 2011-06-14 04:28:40Z pabercrombie $ -->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+
+        <GroundOverlay>
+            <name>Ground Overlay</name>
+            <visibility>1</visibility>
+            <Icon>
+                <href>http://localhost/java/NetworkLinkExpiration/NetworkLinkExpiration_random_image.php
+                </href>
+                <refreshMode>onInterval</refreshMode>
+                <refreshInterval>3</refreshInterval>
+            </Icon>
+            <LatLonBox>
+                <north>43</north>
+                <south>42</south>
+                <east>-95</east>
+                <west>-96</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>
