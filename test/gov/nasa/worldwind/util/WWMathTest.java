@@ -63,4 +63,16 @@ public class WWMathTest {
         assertEquals("Normal computation 2 Y", expectedNormal.y, normal.y, DELTA);
         assertEquals("Normal computation 2 Z", expectedNormal.z, normal.z, DELTA);
     }
+
+    @Test
+    public void testNearestPointOnSegment() {
+        Vec4 p1 = new Vec4(-4996458.568318479, 3922992.9158430896, 474531.19037852297);
+        Vec4 p2 = new Vec4(-4971245.092682739, 3922931.006284242, 691024.8682215725);
+        Vec4 point = new Vec4(-4856085.0756414365, 4082981.637116746, 565231.0140551733);
+        Vec4 expectedNearestPoint = new Vec4(-4984163.530594123, 3922962.7264169063, 580101.6390790505);
+        Vec4 normal = WWMath.nearestPointOnSegment(p1, p2, point);
+        assertEquals("Normal computation 1 X", expectedNearestPoint.x, normal.x, DELTA);
+        assertEquals("Normal computation 1 Y", expectedNearestPoint.y, normal.y, DELTA);
+        assertEquals("Normal computation 1 Z", expectedNearestPoint.z, normal.z, DELTA);
+    }
 }

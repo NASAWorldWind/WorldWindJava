@@ -1219,9 +1219,32 @@ public class WWMath
         return Vec4.fromArray3(compArray, 0);
     }
     
-    // TODO: this method could be of general use
+    /**
+     * Given a <code>point</code> and a set of indexed geometry represented by <code>indices</code> and
+     * <code>vertices</code>, compute the closest coordinate on the geometry to the supplied <code>point</code>.
+     *
+     * @param point the point to find the closest location for.
+     * @param count the number of indices to process
+     * @param indices the geometry indices.
+     * @param vertices the geometry vertices.
+     * @param referenceCenter the coordinate by which to translate the geometry in R3.
+     *
+     * @return The closes coordinate on the geometry to point.
+     *
+     * @throws IllegalArgumentException if any of the arguments is null
+     */
     public static Vec4 computeNearestLineToPoint(Vec4 point, int count, IntBuffer indices, DoubleBuffer vertices,
             Vec4 referenceCenter) {
+        if (point == null || referenceCenter == null) {
+            String msg = Logging.getMessage("nullValue.Vec4IsNull");
+            Logging.logger().severe(msg);
+            throw new IllegalArgumentException(msg);
+        }
+        if (indices == null || vertices == null) {
+            String msg = Logging.getMessage("nullValue.BufferIsNull");
+            Logging.logger().severe(msg);
+            throw new IllegalArgumentException(msg);
+        }
         Vec4 intersectionPoint = null;
         double nearestDistance = Double.MAX_VALUE;
 
@@ -1247,7 +1270,20 @@ public class WWMath
         return intersectionPoint;
     }
 
-    // TODO: this method could be of general use
+    /**
+     * Given a <code>ray</code> and a set of indexed geometry represented by <code>indices</code> and
+     * <code>vertices</code>, compute the closest coordinate on the geometry to the supplied <code>ray</code>.
+     *
+     * @param ray the line with which to intersect the geometry and find the closest location for.
+     * @param count the number of indices to process
+     * @param indices the geometry indices.
+     * @param vertices the geometry vertices.
+     * @param referenceCenter the coordinate by which to translate the geometry in R3.
+     *
+     * @return The closes coordinate on the geometry intersecting the ray.
+     *
+     * @throws IllegalArgumentException if any of the arguments is null
+     */
     public static Vec4 intersectRayWithTriangleStrip(Line ray, int count, IntBuffer indices, DoubleBuffer vertices,
             Vec4 referenceCenter) {
         Vec4 intersectionPoint = null;
