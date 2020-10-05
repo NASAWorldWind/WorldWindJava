@@ -86,7 +86,28 @@ public interface Layer extends WWObject, Disposable, Restorable
      *                indicates fully opaque. Values between 0 and 1 indicate partial opacity.
      */
     void setOpacity(double opacity);
+    
+    /**
+     * Returns the layer's brightness, the degree to which it is blended with underlying layers.
+     * <p>
+     * Many layers apply special usage of opacity, and some ignore it in favor of the opacity settings of their internal
+     * renderables. See the description of this method in specific layers to determine usage there.
+     *
+     * @return The layer's opacity, a value between 0 and 1.
+     */
+    double getBrightness();
 
+    /**
+     * Sets the layer's opacity, the degree to which it is blended with underlying layers.
+     * <p>
+     * Many layers apply special usage of opacity, and some ignore it in favor of the opacity settings of their internal
+     * renderables. See the description of this method in specific layers to determine usage there.
+     *
+     * @param brightness The layer opacity, a value between 0 and 1. 0 indicates non-opaque (fully transparent), 1
+     *                indicates fully opaque. Values between 0 and 1 indicate partial opacity.
+     */
+    void setBrightness(double brightness);
+    
     /**
      * Indicates whether the layer performs selection during picking.
      * <p>

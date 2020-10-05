@@ -83,6 +83,10 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         Double d = (Double) params.getValue(AVKey.OPACITY);
         if (d != null)
             this.setOpacity(d);
+        
+        d = (Double) params.getValue(AVKey.BRIGHTNESS);
+        if (d != null)
+            this.setBrightness(d);
 
         d = (Double) params.getValue(AVKey.MAX_ACTIVE_ALTITUDE);
         if (d != null)
@@ -976,6 +980,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
 
         rs.addStateValueAsBoolean(context, "Layer.Enabled", this.isEnabled());
         rs.addStateValueAsDouble(context, "Layer.Opacity", this.getOpacity());
+        rs.addStateValueAsDouble(context, "Layer.Brightness", this.getBrightness());
         rs.addStateValueAsDouble(context, "Layer.MinActiveAltitude", this.getMinActiveAltitude());
         rs.addStateValueAsDouble(context, "Layer.MaxActiveAltitude", this.getMaxActiveAltitude());
         rs.addStateValueAsBoolean(context, "Layer.NetworkRetrievalEnabled", this.isNetworkRetrievalEnabled());
@@ -1029,6 +1034,10 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         Double d = rs.getStateValueAsDouble(context, "Layer.Opacity");
         if (d != null)
             this.setOpacity(d);
+        
+        d = rs.getStateValueAsDouble(context, "Layer.Brightness");
+        if (d != null)
+            this.setBrightness(d);
 
         d = rs.getStateValueAsDouble(context, "Layer.MinActiveAltitude");
         if (d != null)

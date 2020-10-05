@@ -27,19 +27,13 @@
  */
 package gov.nasa.worldwindx.examples;
 
-import gov.nasa.worldwind.*;
-import gov.nasa.worldwind.avlist.AVKey;
+import com.jogamp.opengl.util.*;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.event.*;
-import gov.nasa.worldwind.exception.WWAbsentRequirementException;
+import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.layers.*;
-import gov.nasa.worldwind.layers.placename.PlaceNameLayer;
-import gov.nasa.worldwind.util.*;
-import gov.nasa.worldwindx.examples.util.*;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.concurrent.TimeUnit;
+import com.jogamp.opengl.GLAnimatorControl;
         
 /**
  * Shows how to change brightness of an imagery layer
@@ -47,32 +41,63 @@ import java.util.concurrent.TimeUnit;
  */
 public class LayerBrightness extends ApplicationTemplate
 {
-    public static class AppFrame extends ApplicationTemplate.AppFrame
+    public static class AppFrame extends ApplicationTemplate.AppFrame implements RenderingListener
     {
+        protected GLAnimatorControl animator;
+        protected double decreaseOfOpacityPerTick = 0.2;
+        protected long lastTime;
+        protected double blueMarbleLayerOpacity = getWwd().getModel().getLayers().getLayerByName("NASA Blue Marble Image").getOpacity();
+        protected Position eyePosition = Position.fromDegrees(0, 0, 20000000);
+
         public AppFrame()
         {
-            for (int i = 0; i < 5; i++) {
-                try {
-                    Thread.sleep(1500);                 //1500 milliseconds is one second.
-                } catch(InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
-                System.out.print("Hello ");
+            // Reduce the frequency at which terrain is regenerated.
+            getWwd().getModel().getGlobe().getTessellator().setUpdateFrequency(5000);
+            
+            getWwd().getModel().getLayers().getLayerByName("Blue Marble May 2004").setOpacity(1.0d);
+            System.out.print(getWwd().getModel().getLayers().getLayerByName("Blue Marble May 2004").getBrightness());
+            
+            getWwd().getModel().getLayers().getLayerByName("Blue Marble May 2004").setBrightness(0.1f);
+
+            // Add a rendering listener to update a layer's brightness each frame. It's implementation is the
+            // stageChanged method below.
+            getWwd().addRenderingListener(this);
+
+            // Use a JOGL Animator to spin the globe
+            lastTime = System.currentTimeMillis();
+            animator = new FPSAnimator((WorldWindowGLCanvas) getWwd(), 60 /*frames per second*/);
+            animator.start();
+        }
+
+        @Override
+        public void stageChanged(RenderingEvent event)
+        {
+            if (event.getStage().equals(RenderingEvent.BEFORE_RENDERING))
+            {
+                // The globe may not be instantiated the first time the listener is called.
+                if (getWwd().getView().getGlobe() == null)
+                    return;
+
+                long now = System.currentTimeMillis();
+                double elapsedSeconds = (now - lastTime) * 1.0e-3;
+                //double rotationDegrees = rotationDegreesPerSecond * elapsedSeconds;
+                double currentOpacity = decreaseOfOpacityPerTick * elapsedSeconds;
+                //System.out.print(opacity + "\n");
+                //System.out.print(elapsedSeconds + "\n");
+                lastTime = now;
+
+//                double lat = eyePosition.getLatitude().degrees;
+//                double lon = Angle.normalizedDegreesLongitude(eyePosition.getLongitude().degrees + rotationDegrees);
+//                double alt = eyePosition.getAltitude();
+
+                //eyePosition = Position.fromDegrees(lat, lon, alt);
+                //getWwd().getModel().getLayers().getLayerByName("Blue Marble May 2004").setOpacity(currentOpacity);
+                //getWwd().getView().stopAnimations();
+                
+                
+                
+                //getWwd().getView().setEyePosition(eyePosition);
             }
-            // Add the layer to the model.
-            // insertBeforeCompass(getWwd(), layer);
-        }
-    }
-    
-    public static void wait(int ms)
-    {
-        try
-        {
-            Thread.sleep(ms);
-        }
-        catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
         }
     }
 
