@@ -425,7 +425,8 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
      * following parameters: <table> <caption style="font-weight: bold;">Append Elements</caption>
      * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
      * AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#OPACITY}</td><td>Opacity</td><td>Double</td></tr> <tr><td>{@link AVKey#MAX_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@max</td><td>Double</td></tr>
+     * AVKey#OPACITY}</td><td>Opacity</td><td>Double</td></tr> <tr><td>{@link
+     * AVKey#BRIGHTNESS}</td><td>Brightness</td><td>Double</td></tr> <tr><td>{@link AVKey#MAX_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@max</td><td>Double</td></tr>
      * <tr><td>{@link AVKey#MIN_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@min</td><td>Double</td></tr> <tr><td>{@link
      * AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr> <tr><td>{@link
      * AVKey#MAP_SCALE}</td><td>MapScale</td><td>Double</td></tr> <tr><td>{@link AVKey#SCREEN_CREDIT}</td><td>ScreenCredit</td><td>ScreenCredit</td></tr>
@@ -456,6 +457,7 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
 
         WWXML.checkAndAppendTextElement(params, AVKey.DISPLAY_NAME, context, "DisplayName");
         WWXML.checkAndAppendDoubleElement(params, AVKey.OPACITY, context, "Opacity");
+        WWXML.checkAndAppendDoubleElement(params, AVKey.OPACITY, context, "Brigthness");
 
         Double maxAlt = AVListImpl.getDoubleValue(params, AVKey.MAX_ACTIVE_ALTITUDE);
         Double minAlt = AVListImpl.getDoubleValue(params, AVKey.MIN_ACTIVE_ALTITUDE);
@@ -482,7 +484,8 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
      * and parameter names are: <table> <caption style="font-weight: bold;">Supported Names</caption>
      * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
      * AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> <tr><td>{@link
-     * AVKey#OPACITY}</td><td>Opacity</td><td>Double</td></tr> <tr><td>{@link AVKey#MAX_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@max</td><td>Double</td></tr>
+     * AVKey#OPACITY}</td><td>Opacity</td><td>Double</td></tr> <tr><td>{@link
+     * AVKey#BRIGHTNESS}</td><td>Brightness</td><td>Double</td></tr> <tr><td>{@link AVKey#MAX_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@max</td><td>Double</td></tr>
      * <tr><td>{@link AVKey#MIN_ACTIVE_ALTITUDE}</td><td>ActiveAltitudes/@min</td><td>Double</td></tr> <tr><td>{@link
      * AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr> <tr><td>{@link
      * AVKey#MAP_SCALE}</td><td>MapScale</td><td>Double</td></tr> <tr><td>{@link AVKey#SCREEN_CREDIT}</td><td>ScreenCredit</td><td>{@link
@@ -511,6 +514,7 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
         XPath xpath = WWXML.makeXPath();
 
         WWXML.checkAndSetStringParam(domElement, params, AVKey.DISPLAY_NAME, "DisplayName", xpath);
+        WWXML.checkAndSetDoubleParam(domElement, params, AVKey.BRIGHTNESS, "Brightness", xpath);
         WWXML.checkAndSetDoubleParam(domElement, params, AVKey.OPACITY, "Opacity", xpath);
         WWXML.checkAndSetDoubleParam(domElement, params, AVKey.MAX_ACTIVE_ALTITUDE, "ActiveAltitudes/@max", xpath);
         WWXML.checkAndSetDoubleParam(domElement, params, AVKey.MIN_ACTIVE_ALTITUDE, "ActiveAltitudes/@min", xpath);

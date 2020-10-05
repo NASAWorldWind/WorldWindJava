@@ -59,6 +59,7 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String BEGIN = "gov.nasa.worldwind.avkey.Begin";
     final String BIG_ENDIAN = "gov.nasa.worldwind.avkey.BigEndian";
     final String BOTTOM = "gov.nasa.worldwind.avkey.Bottom";
+    final String BRIGHTNESS = "gov.nasa.worldwind.avkey.Brightness";
     final String BYTE_ORDER = "gov.nasa.worldwind.avkey.ByteOrder";
     final String BANDS_ORDER = "gov.nasa.worldwind.avkey.BandsOrder";
 
