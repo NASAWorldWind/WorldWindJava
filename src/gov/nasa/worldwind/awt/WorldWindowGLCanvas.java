@@ -39,6 +39,8 @@ import gov.nasa.worldwind.util.*;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.beans.*;
 import java.util.*;
 
@@ -486,5 +488,35 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
     public Collection<PerformanceStatistic> getPerFrameStatistics()
     {
         return this.wwd.getPerFrameStatistics();
+    }
+    
+    @Override
+    protected void processMouseEvent(MouseEvent e) {
+        double dpiScalingFactor = (double) (Toolkit.getDefaultToolkit().getScreenResolution() / 96.0);
+        int x = (int) (e.getPoint().x * dpiScalingFactor);
+        int y = (int) (e.getPoint().y * dpiScalingFactor);
+        MouseEvent scaledEvent = new MouseEvent((Component)e.getSource(), e.getID(),
+                e.getWhen(), e.getModifiersEx(), x, y, e.getXOnScreen(), e.getYOnScreen(), e.getClickCount(), false,e.getButton());
+        super.processMouseEvent(scaledEvent);
+    }
+    
+    @Override
+    protected void processMouseMotionEvent(MouseEvent e) {
+        double dpiScalingFactor = (double) (Toolkit.getDefaultToolkit().getScreenResolution() / 96.0);
+        int x = (int) (e.getPoint().x * dpiScalingFactor);
+        int y = (int) (e.getPoint().y * dpiScalingFactor);
+        MouseEvent scaledEvent = new MouseEvent((Component) e.getSource(), e.getID(), e.getWhen(), e.getModifiersEx(),
+                x, y, e.getXOnScreen(), e.getYOnScreen(), e.getClickCount(), false, e.getButton());
+        super.processMouseMotionEvent(scaledEvent);
+    }
+    
+    @Override
+    protected void processMouseWheelEvent(MouseWheelEvent e) {
+        double dpiScalingFactor = (double) (Toolkit.getDefaultToolkit().getScreenResolution() / 96.0);;
+        int x = (int) (e.getPoint().x * dpiScalingFactor);
+        int y = (int) (e.getPoint().y * dpiScalingFactor);
+        MouseWheelEvent scaledEvent = new MouseWheelEvent((Component) e.getSource(),
+                e.getID(), e.getWhen(), e.getModifiersEx(), x, y, e.getXOnScreen(), e.getYOnScreen(), e.getClickCount(), false, e.getScrollType(),e.getScrollAmount(),e.getWheelRotation());
+        super.processMouseWheelEvent(scaledEvent);
     }
 }
