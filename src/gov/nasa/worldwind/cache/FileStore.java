@@ -217,6 +217,14 @@ public interface FileStore extends WWObject
      *         indicates that there is no expiration time.
      */
     long getExpirationTime(String address);
+    
+   /**
+     * Test for the presence of a data base entry.
+     *
+     * @param address the address to search for.
+     * @return true if an entry exists, false otherwise.
+     */
+    public boolean hasEntry(String address);
 
     /**
      * Requests a file. If the file exists locally, including as a resource on the classpath, this returns a

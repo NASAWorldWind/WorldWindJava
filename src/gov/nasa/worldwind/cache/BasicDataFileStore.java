@@ -193,6 +193,17 @@ public class BasicDataFileStore extends AbstractFileStore
     {
         return this.cacheContentTypes;
     }
+    
+    /**
+     * Test for the presence of a data base entry.
+     *
+     * @param address the address to search for.
+     * @return true if an entry exists, false otherwise.
+     */
+    @Override
+    public boolean hasEntry(String address) {
+        return this.db.getObject(address) != null;
+    }
 
     public String getContentType(String address)
     {

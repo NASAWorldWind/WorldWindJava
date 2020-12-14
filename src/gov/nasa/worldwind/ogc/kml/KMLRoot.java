@@ -45,7 +45,6 @@ import java.io.*;
 import java.net.*;
 import java.util.Map;
 import java.util.zip.*;
-
 /**
  * Parses a KML or KMZ document and provides access to its contents. Instructions for parsing KML/KMZ files and streams
  * are given in the Description section of {@link gov.nasa.worldwind.ogc.kml}.
@@ -1021,7 +1020,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
             String path = this.getSupportFilePath(link);
             if (path == null)
                 path = link;
-
+            
             return WorldWind.getDataFileStore().getExpirationTime(path);
         }
         catch (IOException e)
@@ -1031,6 +1030,35 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         }
 
         return 0;
+    }
+    
+    /**
+     * Returns true if the resource is present in the file store and available for queries like getExpiration.
+     *
+     * @param link the address of the file (the same address as was previously passed to resolveReference). If null,
+     *             zero is returned.
+     *
+     * @return true if the resource is present, false otherwise.
+     */
+    public boolean isResourceAvailable(String link) {
+        try {
+            if (link == null) {
+                return false;
+            }
+
+            // Interpret the path relative to the current document.
+            String path = this.getSupportFilePath(link);
+            if (path == null) {
+                path = link;
+            }
+            
+            return WorldWind.getDataFileStore().hasEntry(path);
+        } catch (IOException e) {
+            String message = Logging.getMessage("generic.UnableToResolveReference", link);
+            Logging.logger().warning(message);
+        }
+
+        return false;
     }
 
     /**

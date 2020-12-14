@@ -122,8 +122,8 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
         this.setPickEnabled(false);
     }
 
-    public void preRender(KMLTraversalContext tc, DrawContext dc)
-    {
+    @Override
+    public void preRender(KMLTraversalContext tc, DrawContext dc) {
         if (this.mustResolveHref()) // resolve the href to either a local file or a remote URL
         {
             String path = this.resolveHref();
@@ -132,18 +132,20 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
             // This prevents fetching a stale resource out of the cache when the Icon is updated.
             this.parent.getRoot().evictIfExpired(path, this.iconRetrievalTime);
 
+            if (dc.getTextureCache().contains(path)) {
+                dc.getTextureCache().remove(path);
+            }
             this.setImageSource(path, this.getCorners());
             this.iconRetrievalTime = System.currentTimeMillis();
             this.textureResolved = false;
         }
 
+        String path = this.resolveHref();
         // Set the Icon's expiration time the first time that the image is rendered after the texture has been retrieved.
         // The expiration time comes from the HTTP headers, so we can't do this until the resource is available.
         boolean mustSetExpiration = !this.textureResolved && this.sourceTexture != null
-            && this.sourceTexture.isTextureCurrent(dc);
-        if (mustSetExpiration)
-        {
-            String path = this.resolveHref();
+                && this.sourceTexture.isTextureCurrent(dc) && this.parent.getRoot().isResourceAvailable(path);
+        if (mustSetExpiration) {
 
             // Query the KMLRoot for the expiration time.
             long expiration = this.parent.getRoot().getExpiration(path);
@@ -154,8 +156,7 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
         }
 
         // Apply rotation the first time the overlay is rendered
-        if (this.mustApplyRotation)
-        {
+        if (this.mustApplyRotation) {
             this.applyRotation(dc);
             this.mustApplyRotation = false;
         }
@@ -175,7 +176,7 @@ public class KMLSurfaceImageImpl extends SurfaceImage implements KMLRenderable
         //noinspection SimplifiableIfStatement
         if (icon == null || icon.getHref() == null)
             return false;
-
+        
         // Resolve the reference if the image hasn't been retrieved, or if the link has expired.
         return this.getImageSource() == null || icon.getUpdateTime() > this.iconRetrievalTime;
     }
