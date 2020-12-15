@@ -27,6 +27,7 @@
  */
 package gov.nasa.worldwindx.examples;
 
+import gov.nasa.worldwind.geom.Position;
 import javax.swing.SwingUtilities;
 
 import gov.nasa.worldwind.ogc.kml.KMLRoot;
@@ -34,9 +35,8 @@ import gov.nasa.worldwind.ogc.kml.impl.KMLController;
 import gov.nasa.worldwind.layers.RenderableLayer;
 
 public class KMLReload extends ApplicationTemplate {
-   public static boolean APP_RUNNING=true;
 
-   public static class LoaderThread extends Thread {
+    public static class LoaderThread extends Thread {
 
         protected String kmlSource;
 
@@ -47,9 +47,9 @@ public class KMLReload extends ApplicationTemplate {
         @Override
         public void run() {
             try {
-                Class c=KMLReload.class;
-                
-                final KMLRoot kmlRoot = KMLRoot.createAndParse(c.getResource(kmlSource));
+//                Class c = KMLReload.class;
+
+                final KMLRoot kmlRoot = KMLRoot.createAndParse(kmlSource);
 
                 // Schedule a task on the EDT to add the parsed document to a layer
                 SwingUtilities.invokeLater(() -> {
@@ -62,7 +62,7 @@ public class KMLReload extends ApplicationTemplate {
     }
 
     public static class AppFrame extends ApplicationTemplate.AppFrame {
-        
+
         private final RenderableLayer kmlLayer;
         private KMLController kmlController;
         private final LoaderThread loaderThread;
@@ -71,17 +71,19 @@ public class KMLReload extends ApplicationTemplate {
         public AppFrame() {
             kmlController = null;
             kmlLayer = new RenderableLayer();
-            loaderThread=new LoaderThread("/gov/nasa/worldwindx/examples/data/IconExpiration.kml");
+//            loaderThread=new LoaderThread("/gov/nasa/worldwindx/examples/data/IconExpiration.kml");
+            loaderThread = new LoaderThread("http://localhost/tile/doc.kml");
+//            loaderThread=new LoaderThread("http://localhost/Tile.kmz");
 
             // Add the layer to the model.
             insertBeforeCompass(getWwd(), kmlLayer);
-            AppFrame.thisFrame=this;
+            AppFrame.thisFrame = this;
         }
 
         public void start() {
             loaderThread.start();
         }
-        
+
         public void addKml(KMLRoot root) {
             if (kmlController != null) {
                 kmlLayer.removeRenderable(kmlController);
@@ -90,12 +92,14 @@ public class KMLReload extends ApplicationTemplate {
             kmlController = new KMLController(root);
             kmlLayer.addRenderable(kmlController);
             this.getWwd().redraw();
+
+            getWwd().getView().setEyePosition(Position.fromDegrees(78, 60, 10000000));
         }
 
     }
 
-     public static void main(String[] args) {
-        KMLReload.AppFrame frame=(KMLReload.AppFrame) ApplicationTemplate.start("KML Reload", AppFrame.class);
+    public static void main(String[] args) {
+        KMLReload.AppFrame frame = (KMLReload.AppFrame) ApplicationTemplate.start("KML Reload", AppFrame.class);
         frame.start();
     }
 }
