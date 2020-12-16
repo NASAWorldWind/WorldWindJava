@@ -1431,21 +1431,11 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     @Override
     public boolean isSmall(Extent extent, int numPixels)
     {
-<<<<<<< HEAD
-        if (extent != null) {
-            System.out.println(this.getView().getEyePoint());
-            System.out.println(extent.getCenter());
-            System.out.println(this.getView().computePixelSizeAtDistance(
-                    this.getView().getEyePoint().distanceTo3(
-                            extent.getCenter())));
-        }
-=======
 //        System.out.println("*****");
 //        System.out.println(extent.getDiameter());
 //        System.out.println(extent.getCenter());
 //        System.out.println(this.getView().getEyePoint().distanceTo3(extent.getCenter()));
 //        System.out.println(this.getView().computePixelSizeAtDistance(this.getView().getEyePoint().distanceTo3(extent.getCenter())));
->>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         return extent != null && extent.getDiameter() <= numPixels * this.getView().computePixelSizeAtDistance(
                 this.getView().getEyePoint().distanceTo3(
                         extent.getCenter()));                                                    // -- so box could return small when one dim is narrow?
