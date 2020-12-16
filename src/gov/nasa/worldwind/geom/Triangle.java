@@ -8,6 +8,7 @@ package gov.nasa.worldwind.geom;
 import gov.nasa.worldwind.util.Logging;
 
 import com.jogamp.opengl.GL;
+import gov.nasa.worldwind.util.WWMath;
 import java.nio.*;
 import java.util.*;
 
@@ -48,6 +49,10 @@ public class Triangle
         this.b = b;
         this.c = c;
     }
+    
+    public Triangle(Vec4[] points) {
+        this(points[0],points[1],points[2]);
+    }
 
     /**
      * Returns the first vertex.
@@ -77,6 +82,14 @@ public class Triangle
     public Vec4 getC()
     {
         return this.c;
+    }
+    
+    public Vec4[] getVertices() {
+        return new Vec4[] {this.a,this.b,this.c};
+    }
+    
+    public String getWinding() {
+        return WWMath.computeWindingOrderOfTriangle(this);
     }
 
 //    private Plane getPlane()
@@ -1116,7 +1129,7 @@ public class Triangle
 
         return intersection;
     }
-
+    
     protected static boolean coplanarTriangles(Vec4 n, Vec4[] v, Vec4[] u)
     {
         // First project onto an axis-aligned plane that maximizes the are of the triangles.

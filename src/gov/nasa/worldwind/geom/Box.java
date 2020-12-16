@@ -568,7 +568,7 @@ public class Box implements Extent, Renderable
             double x = coordinates.getDouble(i);
             double y = coordinates.getDouble(i + 1);
             double z = coordinates.getDouble(i + 2);
-
+            
             double pdr = x * r.x + y * r.y + z * r.z;
             if (pdr < minDotR)
                 minDotR = pdr;
@@ -1130,7 +1130,11 @@ public class Box implements Extent, Renderable
         result = 31 * result + (t != null ? t.hashCode() : 0);
         return result;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
     @Override
     public String toString() {
         String ret = "[bottomCenter = " + this.bottomCenter

@@ -28,7 +28,7 @@ public class ShapefileRecordMultiPatch extends ShapefileRecord {
     };
     protected double[] boundingRectangle;
     protected double[] zRange; // non-null only for Z types
-    protected double[] zValues; // non-null only for Z types
+    protected double[][] partZValues; // non-null only for Z types
     protected double[] mRange; // will be null if no measures
     protected double[] mValues; // will be null if no measures
     // Multipatch shapefiles need a specialized type for each part which can be:
@@ -89,12 +89,13 @@ public class ShapefileRecordMultiPatch extends ShapefileRecord {
     /**
      * Returns the shape's Z values.
      *
+     * @param partNo the number of the part of this record - zero based.
      * @return the shape's Z values.
      */
-    public double[] getZValues() {
-        return this.zValues;
+    public double[] getZValues(int partNo) {
+        return this.partZValues[partNo];
     }
-    
+
     public PartType[] getPartTypes() {
         return this.partTypes;
     }
@@ -154,11 +155,11 @@ public class ShapefileRecordMultiPatch extends ShapefileRecord {
             for (int i = 0; i < rawPartTypes.length; i++) {
                 this.partTypes[i] = PartType.values()[rawPartTypes[i]];
             }
-
+            this.partZValues = new double[this.numberOfParts][];
             for (int i = 0; i < this.numberOfParts; i++) {
                 int length = (i == this.numberOfParts - 1) ? this.numberOfPoints - partPositions[i]
                         : partPositions[i + 1] - partPositions[i];
-
+                this.partZValues[i] = new double[length];
                 // Add the record's points to the Shapefile's point buffer, and record this record's part offset in the
                 // Shapefile's point buffer.
                 int offset = shapefile.addPoints(this, buffer, length);
@@ -169,9 +170,11 @@ public class ShapefileRecordMultiPatch extends ShapefileRecord {
             }
         }
 
-        // Read the optional Z value.
-        if (this.isZType()) {
-            this.readZ(buffer);
+        double[] zValues = this.readZ(buffer);
+        int zPartIndex = 0;
+        for (int i = 0; i < this.numberOfParts; i++) {
+            System.arraycopy(zValues, zPartIndex, this.partZValues[i], 0, this.partZValues[i].length);
+            zPartIndex += this.partZValues[i].length;
         }
 
         // Read the optional measure value.
@@ -185,9 +188,9 @@ public class ShapefileRecordMultiPatch extends ShapefileRecord {
      *
      * @param buffer the record buffer to read from.
      */
-    protected void readZ(ByteBuffer buffer) {
+    protected double[] readZ(ByteBuffer buffer) {
         this.zRange = ShapefileUtils.readDoubleArray(buffer, 2);
-        this.zValues = ShapefileUtils.readDoubleArray(buffer, this.getNumberOfPoints());
+        return ShapefileUtils.readDoubleArray(buffer, this.getNumberOfPoints());
     }
 
     /**
@@ -213,44 +216,45 @@ public class ShapefileRecordMultiPatch extends ShapefileRecord {
      */
     @Override
     public void exportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
-        xmlWriter.writeStartElement("Placemark");
-        xmlWriter.writeStartElement("name");
-        xmlWriter.writeCharacters(Integer.toString(this.getRecordNumber()));
-        xmlWriter.writeEndElement();
-
-        // Write geometry
-        xmlWriter.writeStartElement("MultiGeometry");
-
-        String altitudeMode = this.isZType() ? "absolute" : "clampToGround";
-
-        Iterable<double[]> points = this.getPoints(0);
-        double[] zValues = this.getZValues();
-
-        int index = 0;
-        for (double[] point : points) {
-            xmlWriter.writeStartElement("Point");
-
-            double z = 0.0;
-            if (zValues != null && index < zValues.length) {
-                z = zValues[index];
-            }
-
-            xmlWriter.writeStartElement("altitudeMode");
-            xmlWriter.writeCharacters(altitudeMode);
-            xmlWriter.writeEndElement();
-
-            String coordString = String.format("%f,%f,%f", point[0], point[1], z);
-            xmlWriter.writeStartElement("coordinates");
-            xmlWriter.writeCharacters(coordString);
-            xmlWriter.writeEndElement();
-
-            xmlWriter.writeEndElement(); // Point
-            index++;
-        }
-
-        xmlWriter.writeEndElement(); // MultiGeometry
-        xmlWriter.writeEndElement(); // Placemark
-
-        xmlWriter.flush();
+        // TODO
+//        xmlWriter.writeStartElement("Placemark");
+//        xmlWriter.writeStartElement("name");
+//        xmlWriter.writeCharacters(Integer.toString(this.getRecordNumber()));
+//        xmlWriter.writeEndElement();
+//
+//        // Write geometry
+//        xmlWriter.writeStartElement("MultiGeometry");
+//
+//        String altitudeMode = this.isZType() ? "absolute" : "clampToGround";
+//
+//        Iterable<double[]> points = this.getPoints(0);
+//        double[] zValues = this.getZValues();
+//
+//        int index = 0;
+//        for (double[] point : points) {
+//            xmlWriter.writeStartElement("Point");
+//
+//            double z = 0.0;
+//            if (zValues != null && index < zValues.length) {
+//                z = zValues[index];
+//            }
+//
+//            xmlWriter.writeStartElement("altitudeMode");
+//            xmlWriter.writeCharacters(altitudeMode);
+//            xmlWriter.writeEndElement();
+//
+//            String coordString = String.format("%f,%f,%f", point[0], point[1], z);
+//            xmlWriter.writeStartElement("coordinates");
+//            xmlWriter.writeCharacters(coordString);
+//            xmlWriter.writeEndElement();
+//
+//            xmlWriter.writeEndElement(); // Point
+//            index++;
+//        }
+//
+//        xmlWriter.writeEndElement(); // MultiGeometry
+//        xmlWriter.writeEndElement(); // Placemark
+//
+//        xmlWriter.flush();
     }
 }

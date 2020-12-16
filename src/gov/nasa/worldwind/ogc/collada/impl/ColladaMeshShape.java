@@ -5,21 +5,20 @@
  */
 package gov.nasa.worldwind.ogc.collada.impl;
 
-import com.jogamp.common.nio.Buffers;
-import gov.nasa.worldwind.cache.GpuResourceCache;
 import gov.nasa.worldwind.geom.Box;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.ogc.collada.*;
-import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
-import gov.nasa.worldwind.terrain.Terrain;
+import gov.nasa.worldwind.render.meshes.*;
 import gov.nasa.worldwind.util.*;
 
 import com.jogamp.opengl.*;
+<<<<<<< HEAD
 import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+=======
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
 import java.nio.FloatBuffer;
 import java.util.*;
 import java.util.List;
@@ -36,6 +35,7 @@ import java.util.List;
  * @author pabercrombie
  * @version $Id: ColladaMeshShape.java 2216 2014-08-11 20:29:24Z tgaskins $
  */
+<<<<<<< HEAD
 public class ColladaMeshShape extends AbstractGeneralShape {
 
     /**
@@ -82,11 +82,14 @@ public class ColladaMeshShape extends AbstractGeneralShape {
             this.mesh.render(dc, this.renderMatrix);
         }
     }
+=======
+public class ColladaMeshShape extends Mesh3D {
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
 
     /**
-     * This class holds globe-specific data for this shape. It's managed via the shape-data cache in {@link
-     * gov.nasa.worldwind.render.AbstractShape.AbstractShapeData}.
+     * Material applied to this mesh.
      */
+<<<<<<< HEAD
     protected static class ShapeData extends AbstractGeneralShape.ShapeData {
 
         /**
@@ -248,6 +251,10 @@ public class ColladaMeshShape extends AbstractGeneralShape {
      */
     protected int texCoordBufferPosition;
 
+=======
+    protected ColladaBindMaterial bindMaterial;
+
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
     /**
      * Create a triangle mesh shape.
      *
@@ -255,13 +262,21 @@ public class ColladaMeshShape extends AbstractGeneralShape {
      * @param bindMaterial Material applied to the mesh. May be null.
      * @return The resulting shape.
      */
+<<<<<<< HEAD
     public static ColladaMeshShape createTriangleMesh(List<ColladaTriangles> geometries,
             ColladaBindMaterial bindMaterial) {
+=======
+    public static ColladaMeshShape createTriangleMesh(List<ColladaTriangles> geometries, ColladaBindMaterial bindMaterial) {
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         ColladaMeshShape shape = new ColladaMeshShape(geometries);
 
+        geometries.forEach((geometry) -> {
+            geometry.setParentMesh(shape);
+        });
+
         shape.bindMaterial = bindMaterial;
-        shape.elementType = GL.GL_TRIANGLES;
-        shape.vertsPerShape = 3;
+        shape.setElementType(GL.GL_TRIANGLES);
+        shape.setVertsPerShape(3);
 
         return shape;
     }
@@ -273,13 +288,21 @@ public class ColladaMeshShape extends AbstractGeneralShape {
      * @param bindMaterial Material applied to the mesh. May be null.
      * @return The resulting shape.
      */
+<<<<<<< HEAD
     public static ColladaMeshShape createLineMesh(List<ColladaLines> geometries,
             ColladaBindMaterial bindMaterial) {
+=======
+    public static ColladaMeshShape createLineMesh(List<ColladaLines> geometries, ColladaBindMaterial bindMaterial) {
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         ColladaMeshShape shape = new ColladaMeshShape(geometries);
 
+        geometries.forEach((geometry) -> {
+            geometry.setParentMesh(shape);
+        });
+
         shape.bindMaterial = bindMaterial;
-        shape.elementType = GL.GL_LINES;
-        shape.vertsPerShape = 2;
+        shape.setElementType(GL.GL_LINES);
+        shape.setVertsPerShape(2);
 
         return shape;
     }
@@ -291,11 +314,16 @@ public class ColladaMeshShape extends AbstractGeneralShape {
      * or {@link ColladaLines}.
      */
     protected ColladaMeshShape(List<? extends ColladaAbstractGeometry> geometries) {
+<<<<<<< HEAD
+=======
+        super(geometries);
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         if (WWUtil.isEmpty(geometries)) {
             String message = Logging.getMessage("generic.ListIsEmpty");
             Logging.logger().severe(message);
             throw new IllegalStateException(message);
         }
+<<<<<<< HEAD
 
         this.geometries = new ArrayList<Geometry>(geometries.size());
         for (ColladaAbstractGeometry geometry : geometries) {
@@ -809,6 +837,10 @@ public class ColladaMeshShape extends AbstractGeneralShape {
         return box;
     }
 
+=======
+    }
+
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
     public Box getLocalExtent(ColladaTraversalContext tc) {
         if (tc == null) {
             String message = Logging.getMessage("nullValue.TraversalContextIsNull");
@@ -816,11 +848,18 @@ public class ColladaMeshShape extends AbstractGeneralShape {
             throw new IllegalArgumentException(message);
         }
 
-        int size = this.shapeCount * this.vertsPerShape * ColladaAbstractGeometry.COORDS_PER_VERTEX;
+        int size = getShapeCount() * getVertsPerShape() * ColladaAbstractGeometry.COORDS_PER_VERTEX;
         FloatBuffer vertexBuffer = WWBufferUtil.newFloatBuffer(size, true);
 
+<<<<<<< HEAD
         for (Geometry geometry : this.geometries) {
             geometry.colladaGeometry.getVertices(vertexBuffer);
+=======
+        ArrayList<Geometry> geometries = getGeometries();
+
+        for (Geometry geometry : geometries) {
+            geometry.getNativeGeometry().getVertices(vertexBuffer);
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         }
 
         // Compute a bounding box around the vertices in this shape.
@@ -829,7 +868,7 @@ public class ColladaMeshShape extends AbstractGeneralShape {
                 ColladaAbstractGeometry.COORDS_PER_VERTEX);
 
         // Compute the corners of the bounding box and transform with the active transform matrix.
-        List<Vec4> extrema = new ArrayList<Vec4>();
+        List<Vec4> extrema = new ArrayList<>();
         Vec4[] corners = box.getCorners();
         for (Vec4 corner : corners) {
             extrema.add(corner.transformBy4(tc.peekMatrix()));
@@ -843,6 +882,7 @@ public class ColladaMeshShape extends AbstractGeneralShape {
         return Box.computeBoundingBox(extrema);
     }
 
+<<<<<<< HEAD
     /**
      * Create the shape's vertex coordinates. The coordinates are stored in {@link #coordBuffer}.
      *
@@ -1002,15 +1042,16 @@ public class ColladaMeshShape extends AbstractGeneralShape {
         return current.surfaceOrientationMatrix.multiply(current.renderMatrix);
     }
 
+=======
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
     //////////////////////////////////////////////////////////////////////
     // Materials and textures
     //////////////////////////////////////////////////////////////////////
     /**
      * {@inheritDoc}
-     *
-     * @return True if any geometry in this shape includes a texture.
      */
     @Override
+<<<<<<< HEAD
     protected boolean mustApplyTexture(DrawContext dc) {
         for (Geometry geometry : this.geometries) {
             if (this.mustApplyTexture(geometry)) {
@@ -1088,6 +1129,11 @@ public class ColladaMeshShape extends AbstractGeneralShape {
     protected Material getMaterial(Geometry geometry) {
         ColladaInstanceMaterial myMaterialInstance = this.getInstanceMaterial(geometry);
 
+=======
+    public Material getMaterial(AbstractGeometry geometry) {
+        ColladaInstanceMaterial myMaterialInstance = this.getInstanceMaterial((ColladaAbstractGeometry) geometry);
+
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         if (myMaterialInstance == null) {
             return DEFAULT_INTERIOR_MATERIAL;
         }
@@ -1115,11 +1161,15 @@ public class ColladaMeshShape extends AbstractGeneralShape {
     /**
      * Indicates the <i>instance_material</i> element for a geometry.
      *
-     * @param geometry Geometry for which to find material.
+     * @param colladaGeometry Geometry for which to find material.
      *
      * @return Material for the specified geometry, or null if the material cannot be resolved.
      */
+<<<<<<< HEAD
     protected ColladaInstanceMaterial getInstanceMaterial(Geometry geometry) {
+=======
+    protected ColladaInstanceMaterial getInstanceMaterial(ColladaAbstractGeometry colladaGeometry) {
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         if (this.bindMaterial == null) {
             return null;
         }
@@ -1129,7 +1179,11 @@ public class ColladaMeshShape extends AbstractGeneralShape {
             return null;
         }
 
+<<<<<<< HEAD
         String materialSource = geometry.colladaGeometry.getMaterial();
+=======
+        String materialSource = colladaGeometry.getMaterial();
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         if (materialSource == null) {
             return null;
         }
@@ -1146,13 +1200,18 @@ public class ColladaMeshShape extends AbstractGeneralShape {
      * Indicates the semantic that identifies texture coordinates. This may be specified for each material using a
      * <i>bind_vertex_input</i> element.
      *
-     * @param geometry Geometry for which to find semantic.
+     * @param colladaGeometry Geometry for which to find semantic.
      *
      * @return The semantic string that identifies the texture coordinates, or null if the geometry does not define the
      * semantic.
      */
+<<<<<<< HEAD
     protected String getTexCoordSemantic(Geometry geometry) {
         ColladaEffect effect = this.getEffect(geometry.colladaGeometry);
+=======
+    public String getTexCoordSemantic(ColladaAbstractGeometry colladaGeometry) {
+        ColladaEffect effect = this.getEffect(colladaGeometry);
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         if (effect == null) {
             return null;
         }
@@ -1167,7 +1226,7 @@ public class ColladaMeshShape extends AbstractGeneralShape {
             return null;
         }
 
-        ColladaInstanceMaterial instanceMaterial = this.getInstanceMaterial(geometry);
+        ColladaInstanceMaterial instanceMaterial = this.getInstanceMaterial(colladaGeometry);
         String inputSemantic = null;
 
         // Search bind_vertex_input to find the semantic that identifies the texture coords.
@@ -1187,7 +1246,12 @@ public class ColladaMeshShape extends AbstractGeneralShape {
      *
      * @return The source of the texture, or null if it cannot be resolved.
      */
+<<<<<<< HEAD
     protected String getTextureSource(ColladaAbstractGeometry geometry) {
+=======
+    protected String getTextureSource(AbstractGeometry geometry) {
+        ColladaAbstractGeometry colladaGeometry = (ColladaAbstractGeometry) geometry;
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         if (this.bindMaterial == null) {
             return null;
         }
@@ -1196,7 +1260,11 @@ public class ColladaMeshShape extends AbstractGeneralShape {
             return null;
         }
 
+<<<<<<< HEAD
         String materialSource = geometry.getMaterial();
+=======
+        String materialSource = colladaGeometry.getMaterial();
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         if (materialSource == null) {
             return null;
         }
@@ -1247,7 +1315,11 @@ public class ColladaMeshShape extends AbstractGeneralShape {
         }
 
         // imageRef identifiers an <image> element (may be external). This element will give us the filename.
+<<<<<<< HEAD
         Object o = geometry.getRoot().resolveReference(imageRef);
+=======
+        Object o = colladaGeometry.getRoot().resolveReference(imageRef);
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         if (o instanceof ColladaImage) {
             return ((ColladaImage) o).getInitFrom();
         }
@@ -1351,17 +1423,16 @@ public class ColladaMeshShape extends AbstractGeneralShape {
     }
 
     /**
-     * Indicates whether or not a geometry is double sided. A geometry is double sided if its <i>effect</i> element
-     * contains a <i>technique</i> for the profile "GOOGLEEARTH", and the technique includes a <i>double_sided</i>
-     * field. The <i>double_sided</i> field is not part of the COLLADA specification, but many COLLADA models packaged
-     * in KML include the element.
-     *
-     * @param geometry Geometry to test.
-     *
-     * @return True if the geometry is marked as double sided. Otherwise false.
+     * {@inheritDoc}
      */
+<<<<<<< HEAD
     protected boolean isDoubleSided(ColladaAbstractGeometry geometry) {
         ColladaEffect effect = this.getEffect(geometry);
+=======
+    @Override
+    protected boolean isDoubleSided(AbstractGeometry geometry) {
+        ColladaEffect effect = this.getEffect((ColladaAbstractGeometry) geometry);
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
         if (effect == null) {
             return false;
         }
@@ -1384,4 +1455,36 @@ public class ColladaMeshShape extends AbstractGeneralShape {
         Integer i = (Integer) technique.getField("double_sided");
         return i != null && i == 1;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean mustApplyTexture(Geometry geometry) {
+        ColladaAbstractGeometry colladaGeometry = (ColladaAbstractGeometry) geometry.getNativeGeometry();
+        String semantic = this.getTexCoordSemantic(colladaGeometry);
+        return colladaGeometry.getTexCoordAccessor(semantic) != null && this.getTexture(geometry) != null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected WWTexture getTexture(Geometry geometry) {
+        if (geometry.getTexture() != null) {
+            return geometry.getTexture();
+        }
+
+        ColladaAbstractGeometry colladaGeometry = (ColladaAbstractGeometry) geometry.getNativeGeometry();
+        String source = this.getTextureSource(colladaGeometry);
+        if (source != null) {
+            Object o = colladaGeometry.getRoot().resolveReference(source);
+            if (o != null) {
+                geometry.setTexture(new LazilyLoadedTexture(o));
+            }
+        }
+
+        return geometry.getTexture();
+    }
+
 }

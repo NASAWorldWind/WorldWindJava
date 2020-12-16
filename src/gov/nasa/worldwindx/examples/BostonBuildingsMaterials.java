@@ -15,9 +15,10 @@ import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwindx.examples.util.RandomShapeAttributes;
 import gov.nasa.worldwind.geom.*;
-import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.render.meshes.*;
+import gov.nasa.worldwind.layers.Layer;
+import java.awt.Color;
 
 /**
  * Illustrates how to import ESRI Shapefiles into WorldWind. This uses a <code>{@link ShapefileLayerFactory}</code> to
@@ -25,7 +26,7 @@ import gov.nasa.worldwind.render.meshes.*;
  *
  * @version $Id: Shapefiles.java 3212 2015-06-18 02:45:56Z tgaskins $
  */
-public class BostonBuildings extends ApplicationTemplate {
+public class BostonBuildingsMaterials extends ApplicationTemplate {
 
     public static class AppFrame extends ApplicationTemplate.AppFrame {
 
@@ -60,26 +61,31 @@ public class BostonBuildings extends ApplicationTemplate {
 //                ex.printStackTrace();
 //            }
             // Load the shapefile. Define the completion callback.
-           for (Layer layer : this.getWwd().getModel().getLayers()) {
+            for (Layer layer : this.getWwd().getModel().getLayers()) {
                 if (layer.getName().toLowerCase().contains("bing")) {
                     layer.setEnabled(true);
                 }
             }
             ShapeAttributes normalAttributes = new BasicShapeAttributes();
             normalAttributes.setInteriorMaterial(Material.LIGHT_GRAY);
-//            normalAttributes.setOutlineOpacity(0.5);
-//            normalAttributes.setInteriorOpacity(0.8);
-            normalAttributes.setOutlineMaterial(Material.GREEN);
             normalAttributes.setOutlineWidth(2);
             normalAttributes.setDrawOutline(true);
             normalAttributes.setDrawInterior(true);
             normalAttributes.setEnableLighting(true);
+
+            Color[] colors = new Color[]{new Color(145, 92, 76),new Color(105,87,75),new Color(125,134,131),new Color(154,150,138)};
+            ShapeAttributes[] verticalAttributes = new ShapeAttributes[colors.length]; //new BasicShapeAttributes(normalAttributes);
+            for (int i = 0; i < verticalAttributes.length; i++) {
+                verticalAttributes[i] = new BasicShapeAttributes(normalAttributes);
+                verticalAttributes[i].setInteriorMaterial(new Material(colors[i]));
+            }
             Position eyePos = new Position(Angle.fromDegreesLatitude(42.3638), Angle.fromDegreesLongitude(-71.0607), 3000.0); // Boston
 //             Position eyePos = new Position(Angle.fromDegreesLatitude(0.0025), Angle.fromDegreesLongitude(0.0025), 2500.0);
             this.getWwd().getView().setEyePosition(eyePos);
-            double delta = 0.004;
+            double delta = 0.008;
             factory.setAOIFilter(new Sector(eyePos.latitude.subtractDegrees(delta), eyePos.latitude.addDegrees(delta),
                     eyePos.longitude.subtractDegrees(delta), eyePos.longitude.addDegrees(delta)));
+            factory.setUseTextureMaps(false);
 //            factory.createFromShapefileSource("/home/mpeterson/d/temp/multi.shp",
             factory.createFromShapefileSource("/home/mpeterson/d/temp/boston/boston4236.shp",
                     new ShapefileLayerFactory.CompletionCallback() {
@@ -92,9 +98,24 @@ public class BostonBuildings extends ApplicationTemplate {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            for (Renderable r:layer.getRenderables()) {
-                                if (r instanceof Mesh3D) {
-                                    Mesh3D mesh=(Mesh3D) r;
+                            HashMap<Object,ShapeAttributes> materialMap=new HashMap<>();
+                            ShapeAttributes attrs;
+                            int matIndex=0;
+                            for (Renderable r : layer.getRenderables()) {
+                                if (r instanceof ShapefileMultiPatch) {
+                                    ShapefileMultiPatch mesh = (ShapefileMultiPatch) r;
+                                    if (materialMap.containsKey(mesh.getRecord())) {
+                                        attrs=materialMap.get(mesh.getRecord());
+                                    }
+                                    else {
+                                        attrs=verticalAttributes[matIndex];
+                                        materialMap.put(mesh.getRecord(),attrs);
+                                        matIndex++;
+                                        if (matIndex>=verticalAttributes.length) {
+                                            matIndex=0;
+                                        }
+                                    }
+                                    mesh.setVerticalAttributes(attrs);
                                     mesh.setAttributes(normalAttributes);
                                 }
                             }

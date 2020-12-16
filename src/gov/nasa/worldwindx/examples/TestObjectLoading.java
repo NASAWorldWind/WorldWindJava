@@ -20,6 +20,7 @@ public class TestObjectLoading extends ApplicationTemplate {
 
             WorldWindow wwd = this.getWwd();
             try {
+<<<<<<< HEAD
                 ColladaRoot planeModel = ColladaRoot.createAndParse("testData/collada/airliner.dae");
                 planeModel.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 1500.0));
                 planeModel.setModelScale(new Vec4(10, 10, 10));
@@ -27,6 +28,19 @@ public class TestObjectLoading extends ApplicationTemplate {
                 wwd.getModel().getLayers().add(layer);
                 layer.addRenderable(new ColladaController(planeModel));
                 Position eyePos = new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 2000.0); // DFW
+=======
+//                ColladaRoot model = ColladaRoot.createAndParse("testData/collada/airliner.dae");
+                ColladaRoot model = ColladaRoot.createAndParse("testData/texture-cube.dae");
+                // model.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 1500.0));
+                Position eyePos = Position.fromDegrees(42.3638,-71.0607, 2000.0); // Boston
+                model.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+                model.setPosition(new Position(eyePos.latitude, eyePos.longitude,eyePos.elevation-1000));
+                model.setModelScale(new Vec4(100, 100, 100));
+                RenderableLayer layer = new RenderableLayer();
+                wwd.getModel().getLayers().add(layer);
+                layer.addRenderable(new ColladaController(model));
+//                Position eyePos = new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 2000.0); // DFW
+>>>>>>> b00680ddd1dd32135e402d3796d95c2682f8b8ee
                 wwd.getView().setEyePosition(eyePos);
             } catch (Exception ex) {
                 ex.printStackTrace();

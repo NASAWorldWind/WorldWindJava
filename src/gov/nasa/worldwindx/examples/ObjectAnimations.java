@@ -99,8 +99,8 @@ public class ObjectAnimations extends ApplicationTemplate {
                 }
             }
             try {
-                planesOverDFW(1);
-                //modelDisplay();
+                //planesOverDFW(1);
+                modelDisplay();
                 //messageDisplay();
 //                 this.addFpsText(layer);
                 wwd.setPerFrameStatisticsKeys(PerformanceStatistic.ALL_STATISTICS_SET);
@@ -120,10 +120,10 @@ public class ObjectAnimations extends ApplicationTemplate {
             model1.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 1500.0));
             model1.setScale(new Vec4(200, 200, 200));
             layer.addRenderable(new KMLController(model1));
-//            KMLRoot model2 = openKML("/home/mpeterson/d/temp/aol-data/octocopter/Octocopter.kmz");
-//            model2.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 2000.0));
-//            model2.setScale(new Vec4(1000, 1000, 1000));
-//            layer.addRenderable(new KMLController(model2));
+            KMLRoot model2 = openKML("/home/mpeterson/d/temp/aol-data/octocopter/Octocopter.kmz");
+            model2.setPosition(new Position(Angle.fromDegreesLatitude(32.897), Angle.fromDegreesLongitude(-97.04), 2000.0));
+            model2.setScale(new Vec4(1000, 1000, 1000));
+            layer.addRenderable(new KMLController(model2));
 
         }
 
