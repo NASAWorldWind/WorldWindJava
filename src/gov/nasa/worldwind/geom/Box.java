@@ -1130,4 +1130,28 @@ public class Box implements Extent, Renderable
         result = 31 * result + (t != null ? t.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        String ret = "[bottomCenter = " + this.bottomCenter
+                + " topCenter = " + this.topCenter
+                + " center = " + this.center
+                + " r = " + this.r
+                + " s = " + this.s
+                + " t = " + this.t
+                + " ru = " + this.ru
+                + " su = " + this.su
+                + " tu = " + this.tu
+                + " rLength = " + this.rLength
+                + " sLength = " + this.sLength
+                + " tLength = " + this.tLength + " planes = ";
+        if (this.planes!=null) {
+            for (Plane p : this.planes) {
+                ret += p+", ";
+            }
+            ret=ret.substring(0,ret.length()-2);
+        }
+        ret += "]";
+        return ret;
+    }
 }

@@ -1430,6 +1430,13 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
 
     public boolean isSmall(Extent extent, int numPixels)
     {
+        if (extent != null) {
+            System.out.println(this.getView().getEyePoint());
+            System.out.println(extent.getCenter());
+            System.out.println(this.getView().computePixelSizeAtDistance(
+                    this.getView().getEyePoint().distanceTo3(
+                            extent.getCenter())));
+        }
         return extent != null && extent.getDiameter() <= numPixels * this.getView().computePixelSizeAtDistance(
             // burkey couldnt we make this minimum dimension
             this.getView().getEyePoint().distanceTo3(
