@@ -344,38 +344,42 @@ public abstract class AbstractRetrievalPostProcessor implements RetrievalPostPro
      *
      * @throws IOException if an IO error occurs while processing the data.
      */
-    protected ByteBuffer handleContent() throws IOException
-    {
+    protected ByteBuffer handleContent() throws IOException {
         String contentType = this.getRetriever().getContentType();
-        if (WWUtil.isEmpty(contentType))
-        {
+        if (WWUtil.isEmpty(contentType)) {
             // Try to determine the content type from the URL's suffix, if any.
             String suffix = WWIO.getSuffix(this.getRetriever().getName().split(";")[0]);
-            if (!WWUtil.isEmpty(suffix))
+            if (!WWUtil.isEmpty(suffix)) {
                 contentType = WWIO.makeMimeTypeForSuffix(suffix);
+            }
 
-            if (WWUtil.isEmpty(contentType))
-            {
+            if (WWUtil.isEmpty(contentType)) {
                 Logging.logger().severe(Logging.getMessage("nullValue.ContentTypeIsNullOrEmpty"));
                 return null;
             }
         }
         contentType = contentType.trim().toLowerCase();
 
-        if (this.isWMSException())
+        if (this.isWMSException()) {
             return this.handleWMSExceptionContent();
+        }
 
-        if (contentType.contains("zip"))
+        if (contentType.contains("zip")) {
             return this.handleZipContent();
+        }
 
-        if (this.isPrimaryContentType("text", contentType))
+        if (this.isPrimaryContentType("text", contentType)
+                || this.isPrimaryContentType("model", contentType)) {
             return this.handleTextContent();
+        }
 
-        if (this.isPrimaryContentType("image", contentType))
+        if (this.isPrimaryContentType("image", contentType)) {
             return this.handleImageContent();
+        }
 
-        if (this.isPrimaryContentType("application", contentType))
+        if (this.isPrimaryContentType("application", contentType)) {
             return this.handleApplicationContent();
+        }
 
         return this.handleUnknownContentType();
     }

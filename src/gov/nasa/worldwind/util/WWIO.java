@@ -1407,7 +1407,7 @@ public class WWIO
         mimeTypeToSuffixMap.put("multipart/zip", "zip");
         mimeTypeToSuffixMap.put("multipart/x-gzip", "gzip");
 
-        mimeTypeToSuffixMap.put("text/collada+xml", "dae");
+        mimeTypeToSuffixMap.put("model/vnd.collada+xml", "dae");
 
         mimeTypeToSuffixMap.put("text/html", "html");
         mimeTypeToSuffixMap.put("text/plain", "txt");
@@ -1448,7 +1448,7 @@ public class WWIO
         suffixToMimeTypeMap.put("bil32", "application/bil32");
         suffixToMimeTypeMap.put("bin", "application/octet-stream");
         suffixToMimeTypeMap.put("bmp", "image/bmp");
-        suffixToMimeTypeMap.put("dae", "text/collada+xml");
+        suffixToMimeTypeMap.put("dae", "model/vnd.collada+xml");
         suffixToMimeTypeMap.put("dds", "image/dds");
         suffixToMimeTypeMap.put("dwg", "application/acad");
         suffixToMimeTypeMap.put("dxf", "application/dxf");
