@@ -8,6 +8,11 @@ import org.codehaus.jackson.JsonParser;
 public class GLTFParserContext extends BasicJSONEventParserContext {
     public GLTFParserContext(JsonParser parser) throws IOException {
         super(parser);
+        this.initializeParsers();
     }
-    
+    protected void initializeParsers()
+    {
+        this.registerParser("scene", new GLTFScene());
+        this.registerParser("scenes", new GLTFScenes());
+    }
 }

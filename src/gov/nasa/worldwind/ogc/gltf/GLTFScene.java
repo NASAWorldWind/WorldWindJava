@@ -6,6 +6,14 @@
 
 package gov.nasa.worldwind.ogc.gltf;
 
-public class GLTFScene {
-    
+import gov.nasa.worldwind.formats.json.*;
+import java.io.IOException;
+
+public class GLTFScene extends BasicJSONEventParser {
+    public Object parse(JSONEventParserContext ctx, JSONEvent event) throws IOException
+    {
+        Object foo=super.parse(ctx, event);
+        System.out.println(foo);
+        return foo;
+    }
 }

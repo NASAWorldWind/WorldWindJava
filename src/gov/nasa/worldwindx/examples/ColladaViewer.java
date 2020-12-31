@@ -8,6 +8,7 @@ package gov.nasa.worldwindx.examples;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
+import gov.nasa.worldwind.geom.Vec4;
 import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.ogc.collada.impl.ColladaController;
 import gov.nasa.worldwind.util.*;
@@ -15,7 +16,6 @@ import gov.nasa.worldwind.ogc.collada.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 /**
  * Test loading a COLLADA file directly.
@@ -38,8 +38,8 @@ public class ColladaViewer extends ApplicationTemplate {
         }
 
         /**
-         * Adds the specified <code>colladaRoot</code> to this app frame's <code>WorldWindow</code> as a new
-         * <code>Layer</code>.
+         * Adds the specified <code>colladaRoot</code> to this app frame's
+         * <code>WorldWindow</code> as a new <code>Layer</code>.
          *
          * @param colladaRoot the ColladaRoot to add a new layer for.
          */
@@ -55,42 +55,56 @@ public class ColladaViewer extends ApplicationTemplate {
     }
 
     /**
-     * A <code>Thread</code> that loads a COLLADA file and displays it in an <code>AppFrame</code>.
+     * A <code>Thread</code> that loads a COLLADA file and displays it in an
+     * <code>AppFrame</code>.
      */
     public static class WorkerThread extends Thread {
 
         /**
-         * Indicates the source of the COLLADA file loaded by this thread. Initialized during construction.
+         * Indicates the source of the COLLADA file loaded by this thread.
+         * Initialized during construction.
          */
         protected Object colladaSource;
         /**
-         * Indicates the <code>AppFrame</code> the COLLADA file content is displayed in. Initialized during
-         * construction.
+         * Geographic position of the COLLADA model.
+         */
+        protected Position position;
+        /**
+         * Indicates the <code>AppFrame</code> the COLLADA file content is
+         * displayed in. Initialized during construction.
          */
         protected AppFrame appFrame;
 
         /**
-         * Creates a new worker thread from a specified <code>colladaSource</code> and <code>appFrame</code>.
+         * Creates a new worker thread from a specified
+         * <code>colladaSource</code> and <code>appFrame</code>.
          *
-         * @param colladaSource the source of the COLLADA file to load. May be a {@link java.io.File}, a {@link
-         *                      java.net.URL}, or an {@link java.io.InputStream}, or a {@link String} identifying a file path or URL.
+         * @param colladaSource the source of the COLLADA file to load. May be a
+         * {@link java.io.File}, a {@link
+         *                      java.net.URL}, or an {@link java.io.InputStream}, or a {@link String}
+         * identifying a file path or URL.
          * @param position the geographic position of the COLLADA model.
-         * @param appFrame the <code>AppFrame</code> in which to display the COLLADA source.
+         * @param appFrame the <code>AppFrame</code> in which to display the
+         * COLLADA source.
          */
-        public WorkerThread(Object colladaSource, AppFrame appFrame) {
+        public WorkerThread(Object colladaSource, Position position, AppFrame appFrame) {
             this.colladaSource = colladaSource;
+            this.position = position;
             this.appFrame = appFrame;
         }
 
         /**
          * Loads this worker thread's COLLADA source into a new
-         * <code>{@link gov.nasa.worldwind.ogc.collada.ColladaRoot}</code>, then adds the new <code>ColladaRoot</code>
-         * to this worker thread's <code>AppFrame</code>.
+         * <code>{@link gov.nasa.worldwind.ogc.collada.ColladaRoot}</code>, then
+         * adds the new <code>ColladaRoot</code> to this worker thread's
+         * <code>AppFrame</code>.
          */
         public void run() {
             try {
                 final ColladaRoot colladaRoot = ColladaRoot.createAndParse(this.colladaSource);
+                colladaRoot.setPosition(this.position);
                 colladaRoot.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+                colladaRoot.setModelScale(new Vec4(300, 300, 300, 1));
 
                 // Schedule a task on the EDT to add the parsed document to a layer
                 SwingUtilities.invokeLater(new Runnable() {
@@ -105,14 +119,15 @@ public class ColladaViewer extends ApplicationTemplate {
     }
 
     public static void main(String[] args) {
-        Configuration.setValue(AVKey.INITIAL_LATITUDE, 40.009993372683);
-        Configuration.setValue(AVKey.INITIAL_LONGITUDE, -105.272774533734);
-        Configuration.setValue(AVKey.INITIAL_ALTITUDE, 10000);
+        Configuration.setValue(AVKey.INITIAL_LATITUDE, 40.028);
+        Configuration.setValue(AVKey.INITIAL_LONGITUDE, -105.27284091410579);
+        Configuration.setValue(AVKey.INITIAL_ALTITUDE, 7000);
         Configuration.setValue(AVKey.INITIAL_PITCH, 50);
 
         final AppFrame af = (AppFrame) start("WorldWind COLLADA Viewer", AppFrame.class);
 
-        new WorkerThread("testData/collada/duck.dae", af).start();
+        new WorkerThread("testData/collada/duck.dae",
+                Position.fromDegrees(40.009993372683, -105.272774533734, 300), af).start();
 
     }
 }

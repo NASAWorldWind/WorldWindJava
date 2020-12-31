@@ -40,8 +40,10 @@ public class BasicJSONEventParser implements JSONEventParser
             throw new IllegalArgumentException(message);
         }
 
-        if (event.isStartObject())
+        if (event.isStartObject()) {
+            
             return this.parseObject(ctx, event);
+        }
 
         else if (event.isStartArray())
             return this.parseArray(ctx, event);
