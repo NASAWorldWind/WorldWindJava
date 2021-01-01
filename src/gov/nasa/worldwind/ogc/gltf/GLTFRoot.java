@@ -99,7 +99,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      *
      * @return a new parser context.
      */
-    protected GLTFParserContext createParserContext() throws IOException { //XMLEventReader reader) {
+    protected GLTFParserContext createParserContext() throws IOException { // XMLEventReader reader) {
 //        ColladaParserContext ctx = (ColladaParserContext) XMLEventParserContextFactory.createParserContext(ColladaConstants.COLLADA_MIME_TYPE,
 //                this.getNamespaceURI());
 //        GLTFParserContext ctx=this.gltfDoc.createEventParserContext();
@@ -220,7 +220,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      *
      * @throws XMLStreamException if an exception occurs while attempting to read the event stream.
      */
-    public GLTFRoot parse(Object... args) throws IOException { //throws XMLStreamException {
+    public GLTFRoot parse(Object... args) throws IOException { // throws XMLStreamException {
         GLTFParserContext ctx = this.parserContext;
 
         try {
@@ -266,7 +266,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      * @throws javax.xml.stream.XMLStreamException if the XML stream is not readable.
      * @throws IOException if an error occurs while reading the source.
      */
-    public static GLTFRoot createAndParse(Object docSource) throws IOException { //, XMLStreamException {
+    public static GLTFRoot createAndParse(Object docSource) throws IOException { // XMLStreamException {
         GLTFRoot gltfRoot = GLTFRoot.create(docSource);
 
         if (gltfRoot == null) {

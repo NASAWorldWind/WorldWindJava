@@ -6,9 +6,12 @@
 package gov.nasa.worldwind.formats.json;
 
 import gov.nasa.worldwind.util.Logging;
+import gov.nasa.worldwind.util.typescript.*;
 import org.codehaus.jackson.*;
 
 import java.io.IOException;
+
+@TypeScriptImports(imports="./JSONEvent,./JsonToken")
 
 /**
  * @author dcollins
@@ -19,15 +22,18 @@ public class BasicJSONEvent implements JSONEvent
     protected final JsonToken token;
     protected final String fieldName;
     protected final Object scalarValue;
-
+    
+    @TypeScript(newMethodDecl="constructor(token:JsonToken,fieldName:string) {")
     public BasicJSONEvent(JsonParser parser, JsonToken token, String fieldName) throws IOException
     {
+        // @TypeScript(skipLines=true) 
         if (parser == null)
         {
             String message = Logging.getMessage("nullValue.ParserIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
-        }
+        } 
+        // @TypeScript(skipLines=false) 
 
         if (token == null)
         {

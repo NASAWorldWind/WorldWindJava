@@ -10,11 +10,15 @@ import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.render.PreRenderable;
 import gov.nasa.worldwind.render.Renderable;
 import gov.nasa.worldwind.util.*;
+import gov.nasa.worldwind.util.typescript.*;
+
+@TypeScriptImports(imports="../../../render/IRenderable,../../../render/PreRenderable,../../../render/DrawContext,../../../util/Logger,../GLTFRoot,./GLTFTraversalContext")
 
 /**
  * Executes the mapping from GLTF to WorldWind. Traverses a parsed GLTF document and creates the appropriate
  * WorldWind object to represent the GLTF model.
  */
+@TypeScript(substitute="Renderable,|IRenderable,")
 public class GLTFController  implements Renderable, PreRenderable {
     /**
      * GLTF document rendered by this controller.
