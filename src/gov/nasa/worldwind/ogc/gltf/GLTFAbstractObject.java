@@ -6,9 +6,13 @@
 package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.formats.json.*;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
+
+@TypeScriptImports(imports = "../json/BasicJSONEventParser")
 
 public class GLTFAbstractObject extends BasicJSONEventParser {
-    public GLTFAbstractObject(Object source) {
+    public GLTFAbstractObject() {
+        super();
     }
     
 }

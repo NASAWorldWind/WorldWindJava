@@ -3,13 +3,21 @@ package gov.nasa.worldwind.ogc.gltf;
 import java.io.IOException;
 
 import gov.nasa.worldwind.formats.json.*;
+import gov.nasa.worldwind.util.typescript.*;
+import org.codehaus.jackson.JsonParser;
+@TypeScriptImports(imports = "../json/JSONDoc,../json/JsonParser,../json/JSONEventParserContext,./GLTFParserContext")
 
 public class GLTFDoc extends JSONDoc {
+    @TypeScript(skipMethod=true)
     public GLTFDoc(Object source) {
         super(source);
     }
     
-    public GLTFParserContext createEventParserContext() throws IOException
+    public GLTFDoc(String source) {
+        super(source);
+    }
+    
+    public JSONEventParserContext createEventParserContext(JsonParser parser) throws IOException
     {
         return new GLTFParserContext(this.jsonParser);
     }

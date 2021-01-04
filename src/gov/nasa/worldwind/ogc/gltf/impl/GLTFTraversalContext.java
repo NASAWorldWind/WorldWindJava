@@ -8,8 +8,9 @@ package gov.nasa.worldwind.ogc.gltf.impl;
 
 import gov.nasa.worldwind.geom.Matrix;
 import gov.nasa.worldwind.util.Logging;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 import java.util.Stack;
-
+@TypeScriptImports(imports = "../../../util/Logger,../../../geom/Matrix")
 /**
  * Context to keep track of state while a COLLADA document is traversed. The traversal context keeps track of the
  * transform matrix stack that determines how COLLADA nodes are rendered.
@@ -24,8 +25,7 @@ public class GLTFTraversalContext {
     /** Create a new traversal context. The traversal matrix stack initially contains one element: the identity matrix. */
     public GLTFTraversalContext()
     {
-        this.matrixStack = new Stack<>();
-        this.matrixStack.push(Matrix.IDENTITY);
+        this.initialize();
     }
     
     /**
@@ -48,7 +48,7 @@ public class GLTFTraversalContext {
     /** Reset the context so that it may be used for a fresh traversal. */
     public void initialize()
     {
-        this.matrixStack.clear();
+        this.matrixStack = new Stack<>();
         this.pushMatrix(Matrix.IDENTITY);
     }
 }

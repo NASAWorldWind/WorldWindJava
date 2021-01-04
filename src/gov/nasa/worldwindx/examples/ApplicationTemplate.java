@@ -14,13 +14,14 @@ import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.layers.placename.PlaceNameLayer;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwindx.examples.util.*;
+import gov.nasa.worldwind.formats.json.*;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Provides a base application framework for simple WorldWind examples. Examine other examples in this package to see
- * how it's used.
+ * Provides a base application framework for simple WorldWind examples. Examine
+ * other examples in this package to see how it's used.
  *
  * @version $Id: ApplicationTemplate.java 2115 2014-07-01 17:58:16Z tgaskins $
  */
@@ -94,6 +95,13 @@ public class ApplicationTemplate {
         }
 
         protected void initialize(boolean includeStatusBar, boolean includeLayerPanel, boolean includeStatsPanel) {
+            try {
+                JSONDoc doc = new JSONDoc("/home/mpeterson/d/nasa/WebWorldWindTS/examples/test.json");
+                doc.parse();
+                System.out.println(doc.getRootObject());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             // Create the WorldWindow.
             this.wwjPanel = this.createAppPanel(this.canvasSize, includeStatusBar);
             this.wwjPanel.setPreferredSize(canvasSize);

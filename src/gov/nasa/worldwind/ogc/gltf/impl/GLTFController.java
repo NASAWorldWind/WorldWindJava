@@ -104,4 +104,8 @@ public class GLTFController  implements Renderable, PreRenderable {
         this.initializeTraversalContext(this.getTraversalContext());
         this.gltfRoot.render(this.getTraversalContext(), dc);
     }
+    
+    public String getDisplayName() {
+        return "GLTF Controller";
+    }
 }

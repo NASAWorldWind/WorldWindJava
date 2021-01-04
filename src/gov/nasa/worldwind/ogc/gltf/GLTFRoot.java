@@ -16,24 +16,26 @@ import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.WWIO;
 import gov.nasa.worldwind.formats.json.*;
+import gov.nasa.worldwind.util.typescript.*;
+
+@TypeScriptImports(imports = "../../render/DrawContext,../json/JSONEvent,../json/JSONEventParserContext,../../util/Logger,../../geom/BoundingBox,./GLTFScene,./GLTFDoc,./GLTFParserContext,./GLTFAbstractObject,./impl/GLTFRenderable,../../render/Highlightable,../json/JSONDoc,./impl/GLTFTraversalContext")
 
 public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, Highlightable { //, Animatable {
 
     /**
      * The input stream underlying the event reader.
      */
-    protected InputStream eventStream;
-    
+//    protected InputStream eventStream;
     /**
      * Reference to the ColladaDoc representing the COLLADA file.
      */
     protected GLTFDoc gltfDoc;
-    
+
     /**
      * The parser context for the document.
      */
-    protected GLTFParserContext parserContext;
-    
+    protected JSONEventParserContext parserContext;
+
     /**
      * Indicates whether or not the COLLADA model is highlighted.
      */
@@ -56,10 +58,12 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      * @param docSource the File containing the document.
      *
      * @throws IllegalArgumentException if the document source is null.
-     * @throws IOException if an error occurs while reading the Collada document.
+     * @throws IOException if an error occurs while reading the Collada
+     * document.
      */
+    @TypeScript(skipMethod = true)
     public GLTFRoot(File docSource) throws IOException {
-        super(docSource);
+        super();
 
         if (docSource == null) {
             String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
@@ -72,12 +76,26 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
         this.initialize();
     }
 
+    public GLTFRoot(String jsonString) throws IOException {
+        super();
+        if (jsonString == null) {
+            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        this.gltfDoc = new GLTFDoc(jsonString);
+
+        this.initialize();
+
+    }
 
     /**
-     * Called just before the constructor returns. If overriding this method be sure to invoke
-     * <code>super.initialize()</code>.
+     * Called just before the constructor returns. If overriding this method be
+     * sure to invoke <code>super.initialize()</code>.
      *
-     * @throws java.io.IOException if an I/O error occurs attempting to open the document source.
+     * @throws java.io.IOException if an I/O error occurs attempting to open the
+     * document source.
      */
     protected void initialize() throws IOException {
 //        this.eventStream = new BufferedInputStream(this.getGLTFDoc().getInputStream());
@@ -89,17 +107,16 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
         this.parserContext = this.createParserContext();
     }
 
-
-
     /**
-     * Invoked during {@link #initialize()} to create the parser context. The parser context is created by the global
+     * Invoked during {@link #initialize()} to create the parser context. The
+     * parser context is created by the global
      * {@link gov.nasa.worldwind.util.xml.XMLEventParserContextFactory}.
      *
      * @param reader the reader to associate with the parser context.
      *
      * @return a new parser context.
      */
-    protected GLTFParserContext createParserContext() throws IOException { // XMLEventReader reader) {
+    protected JSONEventParserContext createParserContext() throws IOException { // XMLEventReader reader) {
 //        ColladaParserContext ctx = (ColladaParserContext) XMLEventParserContextFactory.createParserContext(ColladaConstants.COLLADA_MIME_TYPE,
 //                this.getNamespaceURI());
 //        GLTFParserContext ctx=this.gltfDoc.createEventParserContext();
@@ -112,9 +129,9 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
 //        }
 //        ctx.setEventReader(reader);
 
-        return this.gltfDoc.createEventParserContext();
+        return this.gltfDoc.createEventParserContext(null);
     }
-    
+
     /**
      * Indicates the document that is the source of this root.
      *
@@ -123,7 +140,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     protected JSONDoc getGLTFDoc() {
         return this.gltfDoc;
     }
-    
+
     /**
      * Indicates the <i>scene</i> contained in this document.
      *
@@ -147,7 +164,8 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     }
 
     /**
-     * {@inheritDoc} Setting root COLLADA root highlighted causes all parts of the COLLADA model to highlight.
+     * {@inheritDoc} Setting root COLLADA root highlighted causes all parts of
+     * the COLLADA model to highlight.
      */
     @Override
     public void setHighlighted(boolean highlighted) {
@@ -168,60 +186,61 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
         return null;
     }
 
-
-
     /**
-     * Creates a Collada root for an untyped source. The source must be either a {@link File} or a {@link String}
-     * identifying either a file path or a {@link URL}. Null is returned if the source type is not recognized.
+     * Creates a Collada root for an untyped source. The source must be either a
+     * {@link File} or a {@link String} identifying either a file path or a
+     * {@link URL}. Null is returned if the source type is not recognized.
      *
-     * @param docSource either a {@link File} or a {@link String} identifying a file path or {@link URL}.
+     * @param docSource either a {@link File} or a {@link String} identifying a
+     * file path or {@link URL}.
      *
-     * @return a new {@link ColladaRoot} for the specified source, or null if the source type is not supported.
+     * @return a new {@link ColladaRoot} for the specified source, or null if
+     * the source type is not supported.
      *
      * @throws IllegalArgumentException if the source is null.
      * @throws IOException if an error occurs while reading the source.
      */
-    public static GLTFRoot create(Object docSource) throws IOException {
-        if (docSource == null) {
-            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
-        }
-
+//    public static GLTFRoot create(Object docSource) throws IOException {
+//        if (docSource == null) {
+//            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
+//            Logging.logger().severe(message);
+//            throw new IllegalArgumentException(message);
+//        }
+//
 //        if (docSource instanceof File) {
 //            return new GLTFRoot((File) docSource);
 //        } else if (docSource instanceof URL) {
 //            return new GLTFRoot((URL) docSource);
-        // } else 
-        if (docSource instanceof String) {
-            File file = new File((String) docSource);
-            if (file.exists()) {
-                return new GLTFRoot(file);
-            }
-
+//        // } else 
+//        if (docSource instanceof String) {
+//            File file = new File((String) docSource);
+//            if (file.exists()) {
+//                return new GLTFRoot(file);
+//            }
+//
 //            URL url = WWIO.makeURL(docSource);
 //            if (url != null) {
 //                return new GLTFRoot(url);
 //            }
-        } else if (docSource instanceof InputStream) {
+//        } else if (docSource instanceof InputStream) {
 //            return new GLTFRoot((InputStream) docSource);
-        }
-
-        return null;
-    }
-
+//        }
+//
+//        return null;
+//    }
     /**
-     * Starts document parsing. This method initiates parsing of the COLLADA document and returns when the full document
-     * has been parsed.
+     * Starts document parsing. This method initiates parsing of the COLLADA
+     * document and returns when the full document has been parsed.
      *
      * @param args optional arguments to pass to parsers of sub-elements.
      *
      * @return <code>this</code> if parsing is successful, otherwise null.
      *
-     * @throws XMLStreamException if an exception occurs while attempting to read the event stream.
+     * @throws XMLStreamException if an exception occurs while attempting to
+     * read the event stream.
      */
-    public GLTFRoot parse(Object... args) throws IOException { // throws XMLStreamException {
-        GLTFParserContext ctx = this.parserContext;
+    public GLTFRoot parse() throws IOException { // throws XMLStreamException {
+        GLTFParserContext ctx = (GLTFParserContext) this.parserContext;
 
         try {
             for (JSONEvent event = ctx.nextEvent(); ctx.hasNext(); event = ctx.nextEvent()) {
@@ -235,7 +254,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
                 }
             }
         } finally {
-            this.closeEventStream();
+            // this.closeEventStream();
         }
         return null;
     }
@@ -243,31 +262,38 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     /**
      * Closes the event stream associated with this context's XML event reader.
      */
-    protected void closeEventStream() {
-        try {
-            this.eventStream.close();
-            this.eventStream = null;
-        } catch (IOException e) {
-            String message = Logging.getMessage("generic.ExceptionClosingXmlEventReader");
-            Logging.logger().warning(message);
-        }
-    }
-
+//    protected void closeEventStream() {
+//        try {
+//            this.eventStream.close();
+//            this.eventStream = null;
+//        } catch (IOException e) {
+//            String message = Logging.getMessage("generic.ExceptionClosingXmlEventReader");
+//            Logging.logger().warning(message);
+//        }
+//    }
     /**
-     * Creates and parses a Collada root for an untyped source.The source must be either a {@link File} or a
-     * {@link String} identifying either a file path or a {@link URL}. Null is returned if the source type is not
+     * Creates and parses a Collada root for an untyped source.The source must
+     * be either a {@link File} or a {@link String} identifying either a file
+     * path or a {@link URL}. Null is returned if the source type is not
      * recognized.
      *
-     * @param docSource either a {@link File} or a {@link String} identifying a file path or {@link URL}.
+     * @param docSource either a {@link File} or a {@link String} identifying a
+     * file path or {@link URL}.
      *
-     * @return a new {@link ColladaRoot} for the specified source, or null if the source type is not supported.
+     * @return a new {@link ColladaRoot} for the specified source, or null if
+     * the source type is not supported.
      *
      * @throws IllegalArgumentException if the source is null.
-     * @throws javax.xml.stream.XMLStreamException if the XML stream is not readable.
+     * @throws javax.xml.stream.XMLStreamException if the XML stream is not
+     * readable.
      * @throws IOException if an error occurs while reading the source.
      */
     public static GLTFRoot createAndParse(Object docSource) throws IOException { // XMLStreamException {
-        GLTFRoot gltfRoot = GLTFRoot.create(docSource);
+        // GLTFRoot gltfRoot = GLTFRoot.create(docSource);
+        GLTFRoot gltfRoot = null;
+        if (docSource instanceof String) {
+            gltfRoot = new GLTFRoot((String) docSource);
+        }
 
         if (gltfRoot == null) {
             String message = Logging.getMessage("generic.UnrecognizedSourceTypeOrUnavailableSource",

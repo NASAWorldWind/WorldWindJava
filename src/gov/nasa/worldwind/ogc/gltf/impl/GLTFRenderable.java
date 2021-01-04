@@ -8,6 +8,9 @@ package gov.nasa.worldwind.ogc.gltf.impl;
 
 import gov.nasa.worldwind.geom.Box;
 import gov.nasa.worldwind.render.DrawContext;
+import gov.nasa.worldwind.util.typescript.*;
+
+@TypeScriptImports(imports = "../../../render/DrawContext,../../../geom/BoundingBox,./GLTFTraversalContext")
 
 public interface GLTFRenderable {
     /**
