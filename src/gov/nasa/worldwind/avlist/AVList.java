@@ -54,7 +54,7 @@ public interface AVList
     Object getValue(String key);
 
     Collection<Object> getValues();
-
+    
     /**
      * Returns the value for a specified key. The value must be a {@link String}.
      *

@@ -87,6 +87,10 @@ public class AVListImpl implements AVList
         return null;
     }
 
+    synchronized public Set<String> getKeys() {
+        return this.hasAvList() ? this.avList.keySet() : this.createAvList().keySet();
+    }
+
     synchronized public Collection<Object> getValues()
     {
         return this.hasAvList() ? this.avList.values() : this.createAvList().values();

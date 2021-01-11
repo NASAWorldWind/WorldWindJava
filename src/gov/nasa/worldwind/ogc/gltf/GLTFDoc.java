@@ -17,9 +17,9 @@ public class GLTFDoc extends JSONDoc {
         super(source);
     }
     
-    public JSONEventParserContext createEventParserContext(JsonParser parser) throws IOException
+    public JSONEventParserContext createEventParserContext(GLTFRoot gltfRoot, JsonParser parser) throws IOException
     {
-        return new GLTFParserContext(this.jsonParser);
+        return new GLTFParserContext(gltfRoot,this.jsonParser);
     }
 
 //    @Override

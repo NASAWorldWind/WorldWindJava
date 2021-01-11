@@ -10,6 +10,7 @@ import java.net.URL;
 
 import gov.nasa.worldwind.ogc.gltf.impl.*;
 import gov.nasa.worldwind.animation.Animatable;
+import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.geom.Box;
 import gov.nasa.worldwind.render.Highlightable;
 import gov.nasa.worldwind.render.DrawContext;
@@ -17,6 +18,7 @@ import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.WWIO;
 import gov.nasa.worldwind.formats.json.*;
 import gov.nasa.worldwind.util.typescript.*;
+import java.util.ArrayList;
 
 @TypeScriptImports(imports = "../../render/DrawContext,../json/JSONEvent,../json/JSONEventParserContext,../../util/Logger,../../geom/BoundingBox,./GLTFScene,./GLTFDoc,./GLTFParserContext,./GLTFAbstractObject,./impl/GLTFRenderable,../../render/Highlightable,../json/JSONDoc,./impl/GLTFTraversalContext")
 
@@ -48,9 +50,20 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     /**
      * Cached COLLADA scene.
      */
-    protected GLTFScene scene;
+    // protected GLTFNodes scene;
 
     protected int redrawRequested = 0;
+
+    protected GLTFNode[] nodes;
+
+    protected GLTFAccessor[] accessors;
+    protected GLTFBuffer[] buffers;
+    protected GLTFScene[] scenes;
+    protected GLTFBufferView[] bufferViews;
+    protected GLTFAsset asset;
+    protected GLTFMesh[] meshes;
+    protected int scene;
+    protected boolean assembled;
 
     /**
      * Create a new <code>ColladaRoot</code> for a {@link File}.
@@ -72,7 +85,6 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
         }
 
         this.gltfDoc = new GLTFDoc(docSource);
-
         this.initialize();
     }
 
@@ -129,7 +141,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
 //        }
 //        ctx.setEventReader(reader);
 
-        return this.gltfDoc.createEventParserContext(null);
+        return this.gltfDoc.createEventParserContext(this, null);
     }
 
     /**
@@ -146,7 +158,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      *
      * @return The COLLADA <i>scene</i>, or null if there is no scene.
      */
-    public GLTFScene getScene() {
+    public GLTFNodes getScene() {
 //        if (!this.sceneFetched) {
 //            this.scene = (ColladaScene) this.getField("scene");
 //            this.sceneFetched = true;
@@ -249,7 +261,62 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
                 }
 
                 if (event.isStartObject()) {
-                    super.parse(ctx, event);
+                    AVListImpl parsedObject = (AVListImpl) super.parse(ctx, event);
+                    Object[] values = new Object[0];
+                    for (String propName : parsedObject.getKeys()) {
+                        Object value = parsedObject.getValue(propName);
+                        if (value instanceof Object[]) {
+                            values = (Object[]) value;
+                        }
+                        switch (propName) {
+                            case GLTFParserContext.KEY_NODES:
+                                this.nodes = new GLTFNode[values.length];
+                                for (int i = 0; i < values.length; i++) {
+                                    this.nodes[i] = (GLTFNode) values[i];
+                                }
+                                break;
+                            case GLTFParserContext.KEY_ACCESSORS:
+                                this.accessors = new GLTFAccessor[values.length];
+                                for (int i = 0; i < values.length; i++) {
+                                    this.accessors[i] = (GLTFAccessor) values[i];
+                                }
+                                break;
+                            case GLTFParserContext.KEY_BUFFERS:
+                                this.buffers = new GLTFBuffer[values.length];
+                                for (int i = 0; i < values.length; i++) {
+                                    this.buffers[i] = (GLTFBuffer) values[i];
+                                }
+                                break;
+                            case GLTFParserContext.KEY_SCENES:
+                                this.scenes = new GLTFScene[values.length];
+                                for (int i = 0; i < values.length; i++) {
+                                    this.scenes[i] = (GLTFScene) values[i];
+                                }
+                                break;
+                            case GLTFParserContext.KEY_BUFFER_VIEWS:
+                                this.bufferViews = new GLTFBufferView[values.length];
+                                for (int i = 0; i < values.length; i++) {
+                                    this.bufferViews[i] = (GLTFBufferView) values[i];
+                                }
+                                break;
+                            case GLTFParserContext.KEY_ASSET:
+                                this.asset = (GLTFAsset) value;
+                                break;
+                            case GLTFParserContext.KEY_MESHES:
+                                this.meshes = new GLTFMesh[values.length];
+                                for (int i = 0; i < values.length; i++) {
+                                    this.meshes[i] = (GLTFMesh) values[i];
+                                }
+                                break;
+                            case GLTFParserContext.KEY_SCENE:
+                                this.scene = GLTFUtil.getInt(value);
+                                break;
+                            default:
+                                System.out.println("Unsupported");
+                                break;
+                        }
+                    }
+                    this.assembleGeometry();
                     return this;
                 }
             }
@@ -302,8 +369,35 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
         }
 
         gltfRoot.parse();
-
         return gltfRoot;
+    }
+
+    protected void assembleGeometry() {
+        if (this.assembled) {
+            return;
+        }
+
+        GLTFScene defaultScene = this.scenes[this.scene];
+        GLTFNode[] sceneNodes = defaultScene.getSceneNodes(this.nodes);
+        for (GLTFNode node : sceneNodes) {
+            node.assembleGeometry(this);
+        }
+    }
+    
+    public GLTFMesh getMeshForIdx(int idx) {
+        return this.meshes[idx];
+    }
+    
+    public GLTFAccessor getAccessorForIdx(int idx) {
+        return this.accessors[idx];
+    }  
+    
+    public GLTFBufferView getBufferViewForIdx(int idx) {
+        return this.bufferViews[idx];
+    }
+
+    public GLTFBuffer getBufferForIdx(int idx) {
+        return this.buffers[idx];
     }
 
     /**
