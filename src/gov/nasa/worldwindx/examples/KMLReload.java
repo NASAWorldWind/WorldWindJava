@@ -72,7 +72,7 @@ public class KMLReload extends ApplicationTemplate {
             kmlController = null;
             kmlLayer = new RenderableLayer();
 //            loaderThread=new LoaderThread("/gov/nasa/worldwindx/examples/data/IconExpiration.kml");
-            loaderThread = new LoaderThread("http://localhost/tile/doc.kml");
+            loaderThread = new LoaderThread("http://localhost:8000/jump-around.kml");
 //            loaderThread=new LoaderThread("http://localhost/Tile.kmz");
 
             // Add the layer to the model.

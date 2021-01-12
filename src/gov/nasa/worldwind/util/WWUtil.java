@@ -1101,16 +1101,15 @@ public class WWUtil
      * @return the number of milliseconds since 00:00:00 1970 indicated by the date/time string, or null if the input
      *         string is null or the string is not a recognizable format.
      */
-    public static Long parseTimeString(String timeString)
-    {
-        if (timeString == null)
+    public static Long parseTimeString(String timeString) {
+        if (timeString == null) {
             return null;
+        }
 
         // KML allows a hybrid time zone offset that does not contain the leading "GMT", e.g. 1997-05-10T09:30:00+03:00.
         // If the time string has this pattern, we convert it to an RFC 822 time zone so that SimpleDateFormat can
         // parse it.
-        if (isKMLTimeShift(timeString))
-        {
+        if (isKMLTimeShift(timeString)) {
             // Remove the colon from the GMT offset portion of the time string.
             timeString = timeString.trim();
             int colonPosition = timeString.length() - 3;
@@ -1118,49 +1117,34 @@ public class WWUtil
             timeString = newTimeString + timeString.substring(colonPosition + 1, timeString.length());
         }
 
-        try
-        {
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
+            return df.parse(timeString).getTime();
+        } catch (ParseException ignored) {
+        }
+
+        try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sszzzzz");
             return df.parse(timeString).getTime();
-        }
-        catch (ParseException ignored)
-        {
+        } catch (ParseException ignored) {
         }
 
-        try
-        {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            return df.parse(timeString).getTime();
-        }
-        catch (ParseException ignored)
-        {
-        }
-
-        try
-        {
+        try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             return df.parse(timeString).getTime();
-        }
-        catch (ParseException ignored)
-        {
+        } catch (ParseException ignored) {
         }
 
-        try
-        {
+        try {
             DateFormat df = new SimpleDateFormat("yyyy-MM");
             return df.parse(timeString).getTime();
-        }
-        catch (ParseException ignored)
-        {
+        } catch (ParseException ignored) {
         }
 
-        try
-        {
+        try {
             DateFormat df = new SimpleDateFormat("yyyy");
             return df.parse(timeString).getTime();
-        }
-        catch (ParseException ignored)
-        {
+        } catch (ParseException ignored) {
         }
 
         return null;

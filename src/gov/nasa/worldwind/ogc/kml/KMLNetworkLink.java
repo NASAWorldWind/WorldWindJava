@@ -450,17 +450,21 @@ public class KMLNetworkLink extends KMLAbstractContainer implements PropertyChan
      * @return The expiration time of the resource, in milliseconds since the Epoch. Zero indicates that there is no
      *         expiration time.
      */
-    protected long computeExpiryRefreshTime(KMLRoot root, String address)
-    {
+    protected long computeExpiryRefreshTime(KMLRoot root, String address) {
         KMLNetworkLinkControl linkControl = root.getNetworkLinkControl();
-        if (linkControl != null && linkControl.getExpires() != null)
-        {
-            Long time = WWUtil.parseTimeString(linkControl.getExpires());
-            return time != null ? time : 0;
+        Long expiresTime = null;
+        if (linkControl != null && linkControl.getExpires() != null) {
+            expiresTime = WWUtil.parseTimeString(linkControl.getExpires());
         }
-
+        
         // Check for expiration in HTTP headers
-        return this.getRoot().getExpiration(address);
+        long headerExpires = this.getRoot().getExpiration(address);
+        if (expiresTime != null) {
+            return headerExpires > 0 ? Math.min(expiresTime, headerExpires) : expiresTime;
+        } else if (headerExpires > 0) {
+            return headerExpires;
+        }
+        return 0;
     }
 
     /**
