@@ -747,32 +747,27 @@ public class Triangle
      * @throws IllegalArgumentException if the index list or the input or output buffer is null, or if the output buffer
      *                                  size is insufficient.
      */
-    public static void expandTriangleStrip(List<Integer> indices, FloatBuffer inBuf, FloatBuffer outBuf)
-    {
-        if (indices == null)
-        {
+    public static void expandTriangleStrip(List<Integer> indices, FloatBuffer inBuf, FloatBuffer outBuf) {
+        if (indices == null) {
             String msg = Logging.getMessage("nullValue.ListIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        if (inBuf == null || outBuf == null)
-        {
+        if (inBuf == null || outBuf == null) {
             String msg = Logging.getMessage("nullValue.BufferIsNull");
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        int nunTriangles = indices.size() - 2;
-        if (nunTriangles * 3 * 3 > outBuf.limit() - outBuf.position())
-        {
+        int numTriangles = indices.size() - 2;
+        if (numTriangles * 3 * 3 > outBuf.limit() - outBuf.position()) {
             String msg = Logging.getMessage("generic.BufferSize", outBuf.limit() - outBuf.position());
             Logging.logger().severe(msg);
             throw new IllegalArgumentException(msg);
         }
 
-        for (int i = 2; i < indices.size(); i++)
-        {
+        for (int i = 2; i < indices.size(); i++) {
             int k = indices.get(i - 2) * 3;
             outBuf.put(inBuf.get(k)).put(inBuf.get(k + 1)).put(inBuf.get(k + 2));
 

@@ -51,7 +51,7 @@ public class GLTFAccessor extends GLTFArray {
                     this.min = GLTFUtil.retrieveDoubleArray((Object[]) properties.getValue(propName));
                     break;
                 default:
-                    System.out.println("Unsupported");
+                    System.out.println("GLTFAccessor: Unsupported "+propName);
                     break;
             }
         }
@@ -67,7 +67,7 @@ public class GLTFAccessor extends GLTFArray {
         return viewBuffer;
     }
 
-    public float[] getVertexBuffer(GLTFRoot root) {
+    public float[] getCoordBuffer(GLTFRoot root) {
         ByteBuffer srcBuffer = this.retrieveByteBuffer(root);
         float[] ret = null;
         switch (this.componentType) {
@@ -80,13 +80,13 @@ public class GLTFAccessor extends GLTFArray {
                 }
                 break;
             default:
-                System.out.println("Unsupported");
+                System.out.println("GLTFAccessor: Unsupported buffer component type "+this.componentType);
                 break;
         }
         return ret;
     }
     
-    public int[] getVertexIndices(GLTFRoot root) {
+    public int[] getBufferIndices(GLTFRoot root) {
         ByteBuffer srcBuffer = this.retrieveByteBuffer(root);
         int[] ret = null;
         switch (this.componentType) {
@@ -99,7 +99,7 @@ public class GLTFAccessor extends GLTFArray {
                 }
                 break;
             default:
-                System.out.println("Unsupported");
+                System.out.println("GLTFAccessor: Unsupported indices component type "+this.componentType);
                 break;
         }
         return ret;

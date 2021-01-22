@@ -23,7 +23,7 @@ public class GLTFBuffer extends GLTFArray {
                     this.byteLength = GLTFUtil.getInt(properties.getValue(propName));
                     break;
                 default:
-                    System.out.println("Unsupported");
+                    System.out.println("GLTFBuffer: Unsupported "+propName);
                     break;
             }
         }
@@ -42,7 +42,7 @@ public class GLTFBuffer extends GLTFArray {
                 this.byteData = Base64.getDecoder().decode(data);
                 break;
             default:
-                System.out.println("Unsupported.");
+                System.out.println("GLTFBuffer: Unsupported encoding "+encoding);
                 break;
         }
     }

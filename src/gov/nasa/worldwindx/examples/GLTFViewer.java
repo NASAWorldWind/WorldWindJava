@@ -8,10 +8,11 @@ package gov.nasa.worldwindx.examples;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
-//import gov.nasa.worldwind.layers.RenderableLayer;
+import gov.nasa.worldwind.geom.Vec4;
+import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.util.WWUtil;
 import gov.nasa.worldwind.ogc.gltf.*;
-//import gov.nasa.worldwind.ogc.gltf.impl.*;
+import gov.nasa.worldwind.ogc.gltf.impl.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,16 +41,15 @@ public class GLTFViewer extends ApplicationTemplate {
          *
          * @param gltfRoot the GLTFRoot to add a new layer for.
          */
-//        protected void addGLTFLayer(GLTFRoot gltfRoot)
-//        {
-//            // Create a GLTFController to adapt the GLTFRoot to the WorldWind renderable interface.
-//            GLTFController gltfController = new GLTFController(gltfRoot);
-//
-//            // Adds a new layer containing the GLTFRoot to the end of the WorldWindow's layer list.
-//            RenderableLayer layer = new RenderableLayer();
-//            layer.addRenderable(gltfController);
-//            this.getWwd().getModel().getLayers().add(layer);
-//        }
+        protected void addGLTFLayer(GLTFRoot gltfRoot) {
+            // Create a GLTFController to adapt the GLTFRoot to the WorldWind renderable interface.
+            GLTFController gltfController = new GLTFController(gltfRoot);
+
+            // Adds a new layer containing the GLTFRoot to the end of the WorldWindow's layer list.
+            RenderableLayer layer = new RenderableLayer();
+            layer.addRenderable(gltfController);
+            this.getWwd().getModel().getLayers().add(layer);
+        }
     }
 
     /**
@@ -73,6 +73,8 @@ public class GLTFViewer extends ApplicationTemplate {
          */
         protected AppFrame appFrame;
 
+        protected double modelScale;
+
         /**
          * Creates a new worker thread from a specified <code>gltfSource</code>
          * and <code>appFrame</code>.
@@ -85,10 +87,11 @@ public class GLTFViewer extends ApplicationTemplate {
          * @param appFrame the <code>AppFrame</code> in which to display the
          * COLLADA source.
          */
-        public WorkerThread(Object gltfSource, Position position, AppFrame appFrame) {
+        public WorkerThread(Object gltfSource, Position position, double modelScale, AppFrame appFrame) {
             this.gltfSource = gltfSource;
             this.position = position;
             this.appFrame = appFrame;
+            this.modelScale = modelScale;
         }
 
         /**
@@ -100,14 +103,14 @@ public class GLTFViewer extends ApplicationTemplate {
         public void run() {
             try {
                 final GLTFRoot gltfRoot = GLTFRoot.createAndParse(this.gltfSource);
-                System.out.println(gltfRoot);
-//                gltfRoot.setPosition(this.position);
-//                gltfRoot.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+                gltfRoot.setPosition(this.position);
+                gltfRoot.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+                gltfRoot.setModelScale(new Vec4(modelScale, modelScale, modelScale, 1));
 
                 // Schedule a task on the EDT to add the parsed document to a layer
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-//                        appFrame.addGLTFLayer(gltfRoot);
+                        appFrame.addGLTFLayer(gltfRoot);
                     }
                 });
             } catch (Exception e) {
@@ -119,13 +122,17 @@ public class GLTFViewer extends ApplicationTemplate {
     public static void main(String[] args) {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 40.028);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -105.27284091410579);
-        Configuration.setValue(AVKey.INITIAL_ALTITUDE, 4000);
+        Configuration.setValue(AVKey.INITIAL_ALTITUDE, 7000);
         Configuration.setValue(AVKey.INITIAL_PITCH, 50);
 
         final AppFrame af = (AppFrame) start("WorldWind GLTF Viewer", AppFrame.class);
 
-        new WorkerThread("testData/gltf/Triangle/glTF-Embedded/Triangle.gltf",
-                Position.fromDegrees(40.009993372683, -105.272774533734, 300), af).start();
+//        new WorkerThread("testData/gltf/Triangle/glTF-Embedded/Triangle.gltf",
+//                Position.fromDegrees(40.009993372683, -105.272774533734, 300), 3000, af).start();
+        new WorkerThread("testData/gltf/Box/glTF-Embedded/Box.gltf",
+                Position.fromDegrees(40.009993372683, -105.272774533734, 300), 600, af).start();
+//        new WorkerThread("testData/gltf/Box/glTF-Embedded/Box.gltf",
+//                Position.fromDegrees(40.009993372683, -105.272774533734, 300), af).start();
 
     }
 }

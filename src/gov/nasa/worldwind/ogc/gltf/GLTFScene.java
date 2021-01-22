@@ -5,6 +5,7 @@ import gov.nasa.worldwind.avlist.AVListImpl;
 public class GLTFScene extends GLTFArray {
 
     private int[] nodeIndices;
+    private GLTFNode[] nodes;
 
     public GLTFScene(AVListImpl properties) {
         for (String propName : properties.getKeys()) {
@@ -13,17 +14,22 @@ public class GLTFScene extends GLTFArray {
                     this.nodeIndices = GLTFUtil.retrieveIntArray((Object[]) properties.getValue(propName));
                     break;
                 default:
-                    System.out.println("Unsupported");
+                    System.out.println("GLTFScene: Unsupported "+propName);
                     break;
 
             }
         }
     }
     
-    public GLTFNode[] getSceneNodes(GLTFNode[] allNodes) {
-        GLTFNode[] nodes=new GLTFNode[nodeIndices.length];
-        for (int i=0; i<this.nodeIndices.length; i++) {
-            nodes[i]=allNodes[this.nodeIndices[i]];
+    public GLTFNode[] getNodes() {
+        return this.nodes;
+    }
+
+    public GLTFNode[] setSceneNodes(GLTFRoot root) {
+        GLTFNode[] allNodes = root.getNodes();
+        this.nodes = new GLTFNode[nodeIndices.length];
+        for (int i = 0; i < this.nodeIndices.length; i++) {
+            nodes[i] = allNodes[this.nodeIndices[i]];
         }
         return nodes;
     }

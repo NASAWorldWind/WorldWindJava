@@ -104,7 +104,7 @@ public class ColladaViewer extends ApplicationTemplate {
                 final ColladaRoot colladaRoot = ColladaRoot.createAndParse(this.colladaSource);
                 colladaRoot.setPosition(this.position);
                 colladaRoot.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-                colladaRoot.setModelScale(new Vec4(300, 300, 300, 1));
+                colladaRoot.setModelScale(new Vec4(600, 600, 600, 1));
 
                 // Schedule a task on the EDT to add the parsed document to a layer
                 SwingUtilities.invokeLater(new Runnable() {

@@ -45,6 +45,35 @@ public class GLTFTraversalContext {
         this.matrixStack.push(m);
     }
 
+
+    /**
+     * Removes the matrix at the top of the matrix stack.
+     *
+     * @return The matrix that was at the top of the stack.
+     */
+    public Matrix popMatrix()
+    {
+        return this.matrixStack.pop();
+    }
+
+    /**
+     * Multiply the matrix at the top of the stack with another matrix. The product becomes the new top matrix.
+     *
+     * @param m Matrix to multiply. Multiplication is performed as top * m.
+     */
+    public void multiplyMatrix(Matrix m)
+    {
+        if (m == null)
+        {
+            String msg = Logging.getMessage("nullValue.MatrixIsNull");
+            Logging.logger().severe(msg);
+            throw new IllegalArgumentException(msg);
+        }
+
+        Matrix top = this.popMatrix();
+        this.pushMatrix(top.multiply(m));
+    }
+
     /** Reset the context so that it may be used for a fresh traversal. */
     public void initialize()
     {

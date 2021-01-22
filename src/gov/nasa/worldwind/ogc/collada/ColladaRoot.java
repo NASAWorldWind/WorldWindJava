@@ -822,6 +822,7 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
         }
 
         this.matrix = m;
+        System.out.println(m.toString());
         return m;
     }
 

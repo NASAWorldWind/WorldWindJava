@@ -20,7 +20,8 @@ import com.jogamp.opengl.*;
 public class Mesh3D extends AbstractGeneralShape {
 
     /**
-     * Geometry and attributes of a COLLADA {@code triangles} or {@code lines} element.
+     * Geometry and attributes of a COLLADA {@code triangles} or {@code lines}
+     * element.
      */
     public static class Geometry {
 
@@ -30,7 +31,8 @@ public class Mesh3D extends AbstractGeneralShape {
         protected AbstractGeometry nativeGeometry;
 
         /**
-         * Offset (in vertices) into the coord, normal, and texcoord buffers of this coordinates for this geometry.
+         * Offset (in vertices) into the coord, normal, and texcoord buffers of
+         * this coordinates for this geometry.
          */
         protected int offset = -1;
 
@@ -44,11 +46,13 @@ public class Mesh3D extends AbstractGeneralShape {
         protected Material material;
 
         /**
-         * Indicates whether or not the geometry is double sided. If double sided, the geometry must be rendered with
-         * backface culling disabled. This property is determined by the presence of a technique for the "GOOGLEEARTH"
-         * profile that includes a <i>double_sided</i> field.
+         * Indicates whether or not the geometry is double sided. If double
+         * sided, the geometry must be rendered with backface culling disabled.
+         * This property is determined by the presence of a technique for the
+         * "GOOGLEEARTH" profile that includes a <i>double_sided</i> field.
          *
-         * @see ColladaMeshShape#isDoubleSided(gov.nasa.worldwind.ogc.collada.ColladaAbstractGeometry)
+         * @see
+         * ColladaMeshShape#isDoubleSided(gov.nasa.worldwind.ogc.collada.ColladaAbstractGeometry)
          */
         protected boolean doubleSided;
 
@@ -75,8 +79,9 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * Class to represent an instance of the mesh to be drawn as an ordered renderable. We can't use the mesh itself as
-     * the ordered renderable because it may be drawn multiple times with different transforms.
+     * Class to represent an instance of the mesh to be drawn as an ordered
+     * renderable. We can't use the mesh itself as the ordered renderable
+     * because it may be drawn multiple times with different transforms.
      */
     protected static class OrderedMeshShape implements OrderedRenderable {
 
@@ -97,8 +102,10 @@ public class Mesh3D extends AbstractGeneralShape {
          * Create a new ordered renderable.
          *
          * @param mesh Mesh shape to render.
-         * @param renderMatrix Transform matrix to apply when rendering the shape.
-         * @param eyeDistance Distance from the eye position to the shape's reference position.
+         * @param renderMatrix Transform matrix to apply when rendering the
+         * shape.
+         * @param eyeDistance Distance from the eye position to the shape's
+         * reference position.
          */
         public OrderedMeshShape(Mesh3D mesh, Matrix renderMatrix, double eyeDistance) {
             this.orderedMesh = mesh;
@@ -159,7 +166,8 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * This class holds globe-specific data for this shape. It's managed via the shape-data cache in {@link
+     * This class holds globe-specific data for this shape. It's managed via the
+     * shape-data cache in {@link
      * gov.nasa.worldwind.render.AbstractShape.AbstractShapeData}.
      */
     protected static class ShapeData extends AbstractGeneralShape.ShapeData {
@@ -175,14 +183,16 @@ public class Mesh3D extends AbstractGeneralShape {
         }
 
         /**
-         * Matrix to orient the shape on the surface of the globe. Cached result of {@link
+         * Matrix to orient the shape on the surface of the globe. Cached result
+         * of {@link
          * gov.nasa.worldwind.globes.Globe#computeSurfaceOrientationAtPosition(gov.nasa.worldwind.geom.Position)}
          * evaluated at the reference position.
          */
         protected Matrix surfaceOrientationMatrix;
         /**
-         * Transform matrix to apply when rendering the shape. This matrix is determined by the COLLADA traversal
-         * matrix, and {@link #surfaceOrientationMatrix}.
+         * Transform matrix to apply when rendering the shape. This matrix is
+         * determined by the COLLADA traversal matrix, and
+         * {@link #surfaceOrientationMatrix}.
          */
         protected Matrix renderMatrix;
         /**
@@ -193,10 +203,11 @@ public class Mesh3D extends AbstractGeneralShape {
     /**
      * Cache of shape extents computed for different transform matrices.
      */
-    protected Map<ExtentCacheKey, Extent> extentCache = new HashMap<ExtentCacheKey, Extent>();
+    protected Map<ExtentCacheKey, Extent> extentCache = new HashMap<>();
     /**
-     * The vertex data buffer for this shape data. The first part contains vertex coordinates, the second part contains
-     * normals, and the third part contains texture coordinates.
+     * The vertex data buffer for this shape data. The first part contains
+     * vertex coordinates, the second part contains normals, and the third part
+     * contains texture coordinates.
      */
     protected FloatBuffer coordBuffer;
 
@@ -211,12 +222,14 @@ public class Mesh3D extends AbstractGeneralShape {
     protected FloatBuffer textureCoordsBuffer;
 
     /**
-     * Number of vertices per shape. Two in the case of a line mesh, three in the case of a triangle mesh.
+     * Number of vertices per shape. Two in the case of a line mesh, three in
+     * the case of a triangle mesh.
      */
     protected int vertsPerShape;
 
     /**
-     * Total number of shapes (lines or triangles) in this mesh. Equal to the sum of the shapes in each geometry.
+     * Total number of shapes (lines or triangles) in this mesh. Equal to the
+     * sum of the shapes in each geometry.
      */
     protected int shapeCount;
 
@@ -236,7 +249,7 @@ public class Mesh3D extends AbstractGeneralShape {
     /**
      * OpenGL element type for this shape (GL.GL_LINES or GL.GL_TRIANGLES).
      */
-    protected int elementType;
+    protected int elementType=-1;
 
     public Mesh3D(List<? extends AbstractGeometry> geometries) {
         this.setGeometries(geometries);
@@ -245,10 +258,10 @@ public class Mesh3D extends AbstractGeneralShape {
     public Mesh3D() {
 
     }
-    
+
     protected final void addGeometry(AbstractGeometry geometry) {
-            this.geometries.add(new Geometry(geometry));
-            this.shapeCount += geometry.getCount();
+        this.geometries.add(new Geometry(geometry));
+        this.shapeCount += geometry.getCount();
     }
 
     protected final void setGeometries(List<? extends AbstractGeometry> geometries) {
@@ -279,19 +292,19 @@ public class Mesh3D extends AbstractGeneralShape {
      *
      * @param dc Current draw context.
      *
-     * @return The spatial extent of the shape, or null if the extent cannot be determined.
+     * @return The spatial extent of the shape, or null if the extent cannot be
+     * determined.
      */
     protected Extent computeExtent(DrawContext dc) {
         if (this.coordBuffer == null) {
             return null;
         }
-
+//        WWUtil.printFloatBuffer(coordBuffer, 3);
         // Compute a bounding box around the vertices in this shape.
         this.coordBuffer.rewind();
         Box box = Box.computeBoundingBox(new BufferWrapper.FloatBufferWrapper(this.coordBuffer), AbstractGeometry.COORDS_PER_VERTEX);
 
         Matrix matrix = this.computeRenderMatrix(dc);
-
         if (matrix != null) {
             List<Vec4> extrema = new ArrayList<>();
             // Compute the corners of the bounding box and transform with the active transform matrix.
@@ -323,7 +336,8 @@ public class Mesh3D extends AbstractGeneralShape {
      * Render the mesh in a given orientation.
      *
      * @param dc Current draw context.
-     * @param matrix Matrix to be multiply with the current modelview matrix to orient the mesh.
+     * @param matrix Matrix to be multiply with the current modelview matrix to
+     * orient the mesh.
      */
     public void render(DrawContext dc, Matrix matrix) {
         this.currentData = (AbstractShapeData) this.shapeDataCache.getEntry(dc.getGlobe());
@@ -357,7 +371,8 @@ public class Mesh3D extends AbstractGeneralShape {
     /**
      * Computes the minimum distance between this shape and the eye point.
      * <p>
-     * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
+     * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must
+     * be current when this method is called.
      *
      * @param dc the current draw context.
      *
@@ -376,8 +391,9 @@ public class Mesh3D extends AbstractGeneralShape {
 
     /**
      * {@inheritDoc} Overridden because this shape uses
-     * {@link gov.nasa.worldwind.ogc.collada.impl.ColladaMeshShape.OrderedMeshShape} to represent this drawn instance of
-     * the mesh in the ordered renderable queue.
+     * {@link gov.nasa.worldwind.ogc.collada.impl.ColladaMeshShape.OrderedMeshShape}
+     * to represent this drawn instance of the mesh in the ordered renderable
+     * queue.
      */
     @Override
     protected void addOrderedRenderable(DrawContext dc) {
@@ -390,7 +406,8 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * Draw the shape as an OrderedRenderable, using the specified transform matrix.
+     * Draw the shape as an OrderedRenderable, using the specified transform
+     * matrix.
      *
      * @param dc Current draw context.
      * @param pickCandidates Pick candidates for this frame.
@@ -404,9 +421,11 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * Compute enough geometry to determine this shape's extent, reference point and eye distance.
+     * Compute enough geometry to determine this shape's extent, reference point
+     * and eye distance.
      * <p>
-     * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
+     * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must
+     * be current when this method is called.
      *
      * @param dc the current draw context.
      * @param shapeData the current shape data for this shape.
@@ -460,8 +479,7 @@ public class Mesh3D extends AbstractGeneralShape {
      * {@inheritDoc}
      */
     @Override
-    protected boolean doMakeOrderedRenderable(DrawContext dc
-    ) {
+    protected boolean doMakeOrderedRenderable(DrawContext dc) {
         // Clear cached extents because we are creating new geometry.
         this.extentCache.clear();
 
@@ -486,8 +504,12 @@ public class Mesh3D extends AbstractGeneralShape {
      * {@inheritDoc}
      */
     @Override
-    protected void doDrawInterior(DrawContext dc
-    ) {
+    protected void doDrawInterior(DrawContext dc) {
+        if (this.elementType!=GL.GL_LINES && this.elementType!=GL.GL_TRIANGLES) {
+            String msg = Logging.getMessage("generic.InvalidType",this.elementType);
+            Logging.logger().severe(msg);
+            throw new UnsupportedOperationException(msg);
+        }
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
         // Create an OpenGL stack handler to handle matrix stack push/pop. Explicitly track changes to the OpenGL
@@ -500,22 +522,10 @@ public class Mesh3D extends AbstractGeneralShape {
             this.setModelViewMatrix(dc);
 
             Material defaultMaterial = this.activeAttributes.getInteriorMaterial();
-
             // Interior material is applied by super.prepareToDrawInterior. But, we may
             // need to change it if different geometry elements use different materials.
-            Material activeMaterial = defaultMaterial;
+            Material activeMaterial = null; //defaultMaterial;
 
-//            FloatBuffer dump=this.coordBuffer;
-//            dump.rewind();
-//            for (int i=0; i<coordBuffer.capacity(); i++) {
-//                System.out.print(dump.get(i));
-//                if ((i+1) % 3==0) {
-//                    System.out.println();
-//                }
-//                else {
-//                    System.out.print(",");
-//                }
-//            }
             // When drawing with vertex arrays we can bind the vertex buffer once. When using vertex buffer objects
             // we need to check to make sure that the vbo is available each time through the loop because loading
             // textures may force vbos out of the cache (see loop below).
@@ -572,6 +582,7 @@ public class Mesh3D extends AbstractGeneralShape {
                     vboIds = this.getVboIds(dc);
                     if (vboIds == null) {
                         FloatBuffer vb = this.coordBuffer;
+                        WWUtil.printFloatBuffer(vb, 3);
                         gl.glVertexPointer(AbstractGeometry.COORDS_PER_VERTEX, GL.GL_FLOAT, 0, vb.rewind());
                     }
                 }
@@ -611,7 +622,8 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * Create the shape's vertex coordinates. The coordinates are stored in {@link #coordBuffer}.
+     * Create the shape's vertex coordinates. The coordinates are stored in
+     * {@link #coordBuffer}.
      *
      * @param dc Current draw context.
      */
@@ -640,25 +652,13 @@ public class Mesh3D extends AbstractGeneralShape {
             geometry.offset = this.coordBuffer.position() / this.vertsPerShape;
             geometry.nativeGeometry.getVertices(this.coordBuffer);
         }
-
-//        FloatBuffer dump=this.coordBuffer;
-//        dump.rewind();
-//        for (int i=0; i<dump.capacity(); i++) {
-//            System.out.print(dump.get(i));
-//            if ((i+1) % 3==0) {
-//                System.out.println();
-//            }
-//            else {
-//                System.out.print(",");
-//            }
-//        }
-//        System.out.println();
     }
 
     /**
-     * Create this shape's vertex normals. The normals are stored in {@link #normalBuffer}.
+     * Create this shape's vertex normals. The normals are stored in
+     * {@link #normalBuffer}.
      */
-    protected void createNormals() {
+    private void createNormals() {
         this.coordBuffer.position(this.normalBufferPosition);
         this.normalBuffer = this.coordBuffer.slice();
 
@@ -673,7 +673,8 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * Create this shape's texture coordinates. The texture coordinates are stored in {@link #textureCoordsBuffer}.
+     * Create this shape's texture coordinates. The texture coordinates are
+     * stored in {@link #textureCoordsBuffer}.
      */
     protected void createTexCoords() {
         this.coordBuffer.position(this.texCoordBufferPosition);
@@ -681,12 +682,7 @@ public class Mesh3D extends AbstractGeneralShape {
 
         for (Geometry geometry : this.geometries) {
             if (this.mustApplyTexture(geometry)) {
-//                String semantic = this.getTexCoordSemantic(geometry);
                 geometry.nativeGeometry.getTextureCoordinates(this.textureCoordsBuffer);
-//                for (int i=0; i<textureCoordsBuffer.capacity(); i++) {
-//                    System.out.println(textureCoordsBuffer.get(i));
-//                }
-//                System.out.println();
             } else {
                 int thisSize = geometry.nativeGeometry.getCount() * this.vertsPerShape
                         * AbstractGeometry.TEX_COORDS_PER_VERTEX;
@@ -727,7 +723,8 @@ public class Mesh3D extends AbstractGeneralShape {
      *
      * @param dc Current draw context.
      * @param pickPoint Current pick point.
-     * @param matrix Matrix to multiply with the current modelview matrix to orient the mesh.
+     * @param matrix Matrix to multiply with the current modelview matrix to
+     * orient the mesh.
      */
     protected void pick(DrawContext dc, Point pickPoint, Matrix matrix) {
         // This method is called only when ordered renderables are being drawn.
@@ -749,8 +746,8 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * {@inheritDoc} Overridden because ColladaMeshShape uses OrderedMeshShape instead of adding itself to the ordered
-     * renderable queue.
+     * {@inheritDoc} Overridden because ColladaMeshShape uses OrderedMeshShape
+     * instead of adding itself to the ordered renderable queue.
      */
     @Override
     protected void drawBatched(DrawContext dc) {
@@ -809,7 +806,8 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * Create full geometry for the shape, including normals and texture coordinates.
+     * Create full geometry for the shape, including normals and texture
+     * coordinates.
      *
      * @param dc Current draw context.
      */
@@ -832,12 +830,13 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * Called during drawing to set the modelview matrix to apply the correct position, scale and orientation for this
-     * shape.
+     * Called during drawing to set the modelview matrix to apply the correct
+     * position, scale and orientation for this shape.
      *
      * @param dc the current DrawContext
      *
-     * @throws IllegalArgumentException if draw context is null or the draw context GL is null
+     * @throws IllegalArgumentException if draw context is null or the draw
+     * context GL is null
      */
     protected void setModelViewMatrix(DrawContext dc) {
         if (dc.getGL() == null) {
@@ -921,8 +920,9 @@ public class Mesh3D extends AbstractGeneralShape {
      *
      * @param dc Current draw context.
      * @param geometry Geometry to draw.
-     * @param vboIds Array of vertex buffer identifiers. The first element of the array identifies the buffer that
-     * contains vertex coordinates and normal vectors.
+     * @param vboIds Array of vertex buffer identifiers. The first element of
+     * the array identifies the buffer that contains vertex coordinates and
+     * normal vectors.
      */
     protected void doDrawInteriorVBO(DrawContext dc, Geometry geometry, int[] vboIds) {
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
@@ -957,9 +957,10 @@ public class Mesh3D extends AbstractGeneralShape {
     /**
      * {@inheritDoc}
      * <p>
-     * COLLADA shapes do not support intersection tests because the shape may be rendered multiple times with different
-     * transform matrices. It's not possible to determine intersection without the transform matrix applied when the
-     * shape is rendered.
+     * COLLADA shapes do not support intersection tests because the shape may be
+     * rendered multiple times with different transform matrices. It's not
+     * possible to determine intersection without the transform matrix applied
+     * when the shape is rendered.
      *
      * @return Always returns {@code null}.
      */
@@ -969,7 +970,8 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * {@inheritDoc} Overridden to invalidate cached geometry when the model position is changed.
+     * {@inheritDoc} Overridden to invalidate cached geometry when the model
+     * position is changed.
      */
     @Override
     public void setModelPosition(Position modelPosition) {
@@ -1034,8 +1036,8 @@ public class Mesh3D extends AbstractGeneralShape {
      * Indicates the texture applied to this shape.
      *
      * @param geometry The geometry to set the texture from.
-     * @return The texture that must be applied to the shape, or null if there is no texture, or the texture is not
-     * available.
+     * @return The texture that must be applied to the shape, or null if there
+     * is no texture, or the texture is not available.
      */
     protected WWTexture getTexture(Geometry geometry) {
         return null;
@@ -1046,18 +1048,20 @@ public class Mesh3D extends AbstractGeneralShape {
      *
      * @param geometry Geometry for which to find material.
      *
-     * @return Material to apply to the geometry. If the COLLADA document does not define a material, this method return
-     * a default material.
+     * @return Material to apply to the geometry. If the COLLADA document does
+     * not define a material, this method return a default material.
      */
     protected Material getMaterial(AbstractGeometry geometry) {
         return null;
     }
 
     /**
-     * Indicates whether or not a geometry is double sided. A geometry is double sided if its <i>effect</i> element
-     * contains a <i>technique</i> for the profile "GOOGLEEARTH", and the technique includes a <i>double_sided</i>
-     * field. The <i>double_sided</i> field is not part of the COLLADA specification, but many COLLADA models packaged
-     * in KML include the element.
+     * Indicates whether or not a geometry is double sided. A geometry is double
+     * sided if its <i>effect</i> element contains a <i>technique</i> for the
+     * profile "GOOGLEEARTH", and the technique includes a <i>double_sided</i>
+     * field. The <i>double_sided</i> field is not part of the COLLADA
+     * specification, but many COLLADA models packaged in KML include the
+     * element.
      *
      * @param geometry Geometry to test.
      *

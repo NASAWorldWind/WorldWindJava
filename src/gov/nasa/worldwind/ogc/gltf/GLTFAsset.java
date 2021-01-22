@@ -9,6 +9,7 @@ import java.io.IOException;
 public class GLTFAsset extends BasicJSONEventParser {
 
     private String version;
+    private String generator;
 
     public GLTFAsset() {
 
@@ -18,10 +19,13 @@ public class GLTFAsset extends BasicJSONEventParser {
         for (String propName : properties.getKeys()) {
             switch (propName) {
                 case GLTFParserContext.KEY_VERSION:
-                    this.version = properties.getValue(propName).toString();
+                    this.version = properties.getStringValue(propName);
+                    break;
+                case GLTFParserContext.KEY_GENERATOR:
+                    this.generator=properties.getStringValue(propName);
                     break;
                 default:
-                    System.out.println("Unsupported");
+                    System.out.println("GLTFAsset: Unsupported "+propName);
                     break;
             }
         }

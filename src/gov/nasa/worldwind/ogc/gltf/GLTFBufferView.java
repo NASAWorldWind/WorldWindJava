@@ -7,6 +7,7 @@ public class GLTFBufferView  extends GLTFArray  {
     private int byteOffset;
     private int byteLength;
     private int target;
+    private int byteStride;
     
     public GLTFBufferView(AVListImpl properties) {
         for (String propName : properties.getKeys()) {
@@ -23,8 +24,11 @@ public class GLTFBufferView  extends GLTFArray  {
                 case GLTFParserContext.KEY_TARGET:
                     this.target=GLTFUtil.getInt(properties.getValue(propName));
                     break;
+                case GLTFParserContext.KEY_BYTE_STRIDE:
+                    this.byteStride=GLTFUtil.getInt(properties.getValue(propName));
+                    break;
                 default:
-                    System.out.println("Unsupported");
+                    System.out.println("GLTFBufferView: Unsupported "+propName);
                     break;
             }
         }

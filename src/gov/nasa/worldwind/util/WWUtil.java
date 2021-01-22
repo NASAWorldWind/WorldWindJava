@@ -1182,6 +1182,19 @@ public class WWUtil
 
         return 0; // the versions match
     }
+    
+    public static void printFloatBuffer(FloatBuffer buffer, int stride) {
+        buffer.rewind();
+        for (int i = 0; i < buffer.capacity(); i++) {
+            System.out.print(buffer.get(i));
+            if ((i + 1) % stride == 0) {
+                System.out.println();
+            } else {
+                System.out.print(",");
+            }
+        }
+        System.out.println();
+    }
 
     /**
      * Generates average normal vectors for the vertices of a triangle strip.

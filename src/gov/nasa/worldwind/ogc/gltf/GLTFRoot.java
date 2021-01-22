@@ -5,6 +5,8 @@
  */
 package gov.nasa.worldwind.ogc.gltf;
 
+import gov.nasa.worldwind.WorldWind;
+import gov.nasa.worldwind.ogc.gltf.impl.GLTFRenderer;
 import java.io.*;
 import java.net.URL;
 
@@ -17,6 +19,10 @@ import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.util.WWIO;
 import gov.nasa.worldwind.formats.json.*;
+import gov.nasa.worldwind.geom.Angle;
+import gov.nasa.worldwind.geom.Matrix;
+import gov.nasa.worldwind.geom.Position;
+import gov.nasa.worldwind.geom.Vec4;
 import gov.nasa.worldwind.util.typescript.*;
 import java.util.ArrayList;
 
@@ -44,13 +50,9 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     protected boolean highlighted;
 
     /**
-     * Flag to indicate that the scene has been retrieved from the hash map.
-     */
-    protected boolean sceneFetched = false;
-    /**
      * Cached COLLADA scene.
      */
-    // protected GLTFNodes scene;
+    protected GLTFScene defaultScene;
 
     protected int redrawRequested = 0;
 
@@ -62,8 +64,50 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     protected GLTFBufferView[] bufferViews;
     protected GLTFAsset asset;
     protected GLTFMesh[] meshes;
-    protected int scene;
+    protected GLTFMaterial[] materials;
+    protected GLTFCamera[] cameras;
+    protected int sceneIdx;
     protected boolean assembled;
+
+    /**
+     * This shape's heading, positive values are clockwise from north. Null is
+     * an allowed value.
+     */
+    protected Angle heading;
+    /**
+     * This shape's pitch (often called tilt), its rotation about the model's X
+     * axis. Positive values are clockwise. Null is an allowed value.
+     */
+    protected Angle pitch;
+    /**
+     * This shape's roll, its rotation about the model's Y axis. Positive values
+     * are clockwise. Null is an allowed Value.
+     */
+    protected Angle roll;
+
+    /**
+     * A scale to apply to the model. Null is an allowed value.
+     */
+    protected Vec4 modelScale;
+
+    protected GLTFRenderer renderer;
+    /**
+     * Transform matrix computed from the document's scale and orientation. This
+     * matrix is computed and cached during when the document is rendered.
+     */
+    protected Matrix matrix;
+
+    /**
+     * This shape's altitude mode. May be one of {@link WorldWind#CLAMP_TO_GROUND}, {@link
+     * WorldWind#RELATIVE_TO_GROUND}, or {@link WorldWind#ABSOLUTE}.
+     */
+    protected int altitudeMode = WorldWind.CLAMP_TO_GROUND;
+
+    /**
+     * This shape's geographic location. The altitude is relative to this shapes
+     * altitude mode.
+     */
+    protected Position position;
 
     /**
      * Create a new <code>ColladaRoot</code> for a {@link File}.
@@ -110,12 +154,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      * document source.
      */
     protected void initialize() throws IOException {
-//        this.eventStream = new BufferedInputStream(this.getGLTFDoc().getInputStream());
-//        this.eventReader = this.createReader(this.eventStream);
-//        if (this.eventReader == null) {
-//            throw new WWRuntimeException(Logging.getMessage("XML.UnableToOpenDocument", this.getColladaDoc()));
-//        }
-
+        this.renderer = new GLTFRenderer(this);
         this.parserContext = this.createParserContext();
     }
 
@@ -158,13 +197,8 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      *
      * @return The COLLADA <i>scene</i>, or null if there is no scene.
      */
-    public GLTFNodes getScene() {
-//        if (!this.sceneFetched) {
-//            this.scene = (ColladaScene) this.getField("scene");
-//            this.sceneFetched = true;
-//        }
-//        return this.scene;
-        return null;
+    public GLTFScene getDefaultScene() {
+        return this.defaultScene;
     }
 
     /**
@@ -182,6 +216,52 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     @Override
     public void setHighlighted(boolean highlighted) {
         this.highlighted = highlighted;
+    }
+
+    /**
+     * Specifies this shape's altitude mode, one of
+     * {@link WorldWind#ABSOLUTE}, {@link WorldWind#RELATIVE_TO_GROUND} or
+     * {@link WorldWind#CLAMP_TO_GROUND}.
+     * <p>
+     * Note: If the altitude mode is unrecognized, {@link WorldWind#ABSOLUTE} is
+     * used.
+     * <p>
+     * Note: Subclasses may recognize additional altitude modes or may not
+     * recognize the ones described above.
+     *
+     * @param altitudeMode the altitude mode. The default value is
+     * {@link WorldWind#ABSOLUTE}.
+     */
+    public void setAltitudeMode(int altitudeMode) {
+        this.altitudeMode = altitudeMode;
+    }
+
+    /**
+     * Indicates this shape's geographic position.
+     *
+     * @return this shape's geographic position. The position's altitude is
+     * relative to this shape's altitude mode.
+     */
+    public Position getPosition() {
+        return this.position;
+    }
+
+    /**
+     * Specifies this shape's geographic position. The position's altitude is
+     * relative to this shape's altitude mode.
+     *
+     * @param position this shape's geographic position.
+     *
+     * @throws IllegalArgumentException if the position is null.
+     */
+    public void setPosition(Position position) {
+        if (position == null) {
+            String message = Logging.getMessage("nullValue.PositionIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        this.position = position;
     }
 
     public Box getLocalExtent(GLTFTraversalContext tc) {
@@ -251,7 +331,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      * @throws XMLStreamException if an exception occurs while attempting to
      * read the event stream.
      */
-    public GLTFRoot parse() throws IOException { // throws XMLStreamException {
+    public GLTFRoot parse() throws IOException {
         GLTFParserContext ctx = (GLTFParserContext) this.parserContext;
 
         try {
@@ -272,47 +352,59 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
                             case GLTFParserContext.KEY_NODES:
                                 this.nodes = new GLTFNode[values.length];
                                 for (int i = 0; i < values.length; i++) {
-                                    this.nodes[i] = (GLTFNode) values[i];
+                                    this.nodes[i] = new GLTFNode((AVListImpl) values[i]);
                                 }
                                 break;
                             case GLTFParserContext.KEY_ACCESSORS:
                                 this.accessors = new GLTFAccessor[values.length];
                                 for (int i = 0; i < values.length; i++) {
-                                    this.accessors[i] = (GLTFAccessor) values[i];
+                                    this.accessors[i] = new GLTFAccessor((AVListImpl) values[i]);
                                 }
                                 break;
                             case GLTFParserContext.KEY_BUFFERS:
                                 this.buffers = new GLTFBuffer[values.length];
                                 for (int i = 0; i < values.length; i++) {
-                                    this.buffers[i] = (GLTFBuffer) values[i];
+                                    this.buffers[i] = new GLTFBuffer((AVListImpl) values[i]);
                                 }
                                 break;
                             case GLTFParserContext.KEY_SCENES:
                                 this.scenes = new GLTFScene[values.length];
                                 for (int i = 0; i < values.length; i++) {
-                                    this.scenes[i] = (GLTFScene) values[i];
+                                    this.scenes[i] = new GLTFScene((AVListImpl) values[i]);
                                 }
                                 break;
                             case GLTFParserContext.KEY_BUFFER_VIEWS:
                                 this.bufferViews = new GLTFBufferView[values.length];
                                 for (int i = 0; i < values.length; i++) {
-                                    this.bufferViews[i] = (GLTFBufferView) values[i];
+                                    this.bufferViews[i] = new GLTFBufferView((AVListImpl) values[i]);
                                 }
                                 break;
                             case GLTFParserContext.KEY_ASSET:
-                                this.asset = (GLTFAsset) value;
+                                this.asset = new GLTFAsset((AVListImpl) value);
                                 break;
                             case GLTFParserContext.KEY_MESHES:
                                 this.meshes = new GLTFMesh[values.length];
                                 for (int i = 0; i < values.length; i++) {
-                                    this.meshes[i] = (GLTFMesh) values[i];
+                                    this.meshes[i] = new GLTFMesh((AVListImpl) values[i]);
                                 }
                                 break;
                             case GLTFParserContext.KEY_SCENE:
-                                this.scene = GLTFUtil.getInt(value);
+                                this.sceneIdx = GLTFUtil.getInt(value);
+                                break;
+                            case GLTFParserContext.KEY_MATERIALS:
+                                this.materials = new GLTFMaterial[values.length];
+                                for (int i = 0; i < values.length; i++) {
+                                    this.materials[i] = new GLTFMaterial((AVListImpl) values[i]);
+                                }
+                                break;
+                            case GLTFParserContext.KEY_CAMERAS:
+                                this.cameras = new GLTFCamera[values.length];
+                                for (int i = 0; i < values.length; i++) {
+                                    this.cameras[i] = new GLTFCamera((AVListImpl) values[i]);
+                                }
                                 break;
                             default:
-                                System.out.println("Unsupported");
+                                System.out.println("GLTFRoot: Unsupported " + propName);
                                 break;
                         }
                     }
@@ -372,26 +464,30 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
         return gltfRoot;
     }
 
+    public GLTFNode[] getNodes() {
+        return this.nodes;
+    }
+
     protected void assembleGeometry() {
         if (this.assembled) {
             return;
         }
 
-        GLTFScene defaultScene = this.scenes[this.scene];
-        GLTFNode[] sceneNodes = defaultScene.getSceneNodes(this.nodes);
+        this.defaultScene = this.scenes[this.sceneIdx];
+        GLTFNode[] sceneNodes = this.defaultScene.setSceneNodes(this);
         for (GLTFNode node : sceneNodes) {
             node.assembleGeometry(this);
         }
     }
-    
+
     public GLTFMesh getMeshForIdx(int idx) {
         return this.meshes[idx];
     }
-    
+
     public GLTFAccessor getAccessorForIdx(int idx) {
         return this.accessors[idx];
-    }  
-    
+    }
+
     public GLTFBufferView getBufferViewForIdx(int idx) {
         return this.bufferViews[idx];
     }
@@ -401,16 +497,101 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     }
 
     /**
+     * Indicates this shape's scale, if any.
+     *
+     * @return this shape's scale, or null if no scale has been specified.
+     */
+    public Vec4 getModelScale() {
+        return this.modelScale;
+    }
+
+    /**
+     * Specifies this shape's scale. The scale is applied to the shape's model
+     * definition in the model's coordinate system prior to oriented and
+     * positioning the model.
+     *
+     * @param modelScale this shape's scale. May be null, in which case no
+     * scaling is applied.
+     */
+    public void setModelScale(Vec4 modelScale) {
+        this.modelScale = modelScale;
+        this.reset();
+    }
+
+    /**
+     * Clear cached values. Values will be recomputed the next time this
+     * document is rendered.
+     */
+    protected void reset() {
+        this.matrix = null;
+    }
+
+    /**
+     * Indicates the scale factored applied to this document. The scale is
+     * specified by the <code>asset</code>/<code>unit</code> element.
+     *
+     * @return Scale applied to the document. Returns 1.0 if the document does
+     * not specify a scale.
+     */
+    protected double getScale() {
+//        if (!this.scaleFetched) {
+//            this.scale = this.computeScale();
+//            this.scaleFetched = true;
+//        }
+//        return this.scale;
+        return 1;
+    }
+
+    /**
+     * Indicates the transform matrix applied to this document.
+     *
+     * @return Transform matrix.
+     */
+    public Matrix getMatrix() {
+        // If the matrix has already been computed then just return the cached value.
+        if (this.matrix != null) {
+            return this.matrix;
+        }
+
+        Matrix m = Matrix.IDENTITY;
+
+        if (this.heading != null) {
+            m = m.multiply(Matrix.fromRotationZ(Angle.POS360.subtract(this.heading)));
+        }
+
+        if (this.pitch != null) {
+            m = m.multiply(Matrix.fromRotationX(this.pitch));
+        }
+
+        if (this.roll != null) {
+            m = m.multiply(Matrix.fromRotationY(this.roll));
+        }
+
+        // Apply scaling factor to convert file units to meters.
+        double scale = this.getScale();
+        m = m.multiply(Matrix.fromScale(scale));
+
+        if (this.modelScale != null) {
+            m = m.multiply(Matrix.fromScale(this.modelScale));
+        }
+
+        this.matrix = m;
+        System.out.println(m.toString());
+        return m;
+    }
+
+    /**
      * {@inheritDoc} Renders the scene contained in this document.
      */
     @Override
     public void preRender(GLTFTraversalContext tc, DrawContext dc) {
-//        tc.multiplyMatrix(this.getMatrix());
-//
-//        // COLLADA doc contains at most one scene. See COLLADA spec pg 5-67.
-//        ColladaScene scene = this.getScene();
-//        if (scene != null)
-//            scene.preRender(tc, dc);
+        tc.multiplyMatrix(this.getMatrix());
+
+        // COLLADA doc contains at most one scene. See COLLADA spec pg 5-67.
+        GLTFScene scene = this.getDefaultScene();
+        if (scene != null) {
+            this.renderer.preRender(scene, tc, dc);
+        }
     }
 
     /**
@@ -418,12 +599,12 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      */
     @Override
     public void render(GLTFTraversalContext tc, DrawContext dc) {
-//        tc.multiplyMatrix(this.getMatrix());
-//
-//        GLTFScene scene = this.getScene();
-//        if (scene != null) {
-//            scene.render(tc, dc);
-//            dc.setRedrawRequested(this.redrawRequested);
-//        }
+        tc.multiplyMatrix(this.getMatrix());
+
+        GLTFScene scene = this.getDefaultScene();
+        if (scene != null) {
+            this.renderer.render(scene, tc, dc);
+            dc.setRedrawRequested(this.redrawRequested);
+        }
     }
 }
