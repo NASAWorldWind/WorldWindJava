@@ -4,14 +4,18 @@ import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.geom.Matrix;
 
 public class GLTFNode extends GLTFArray {
-
+    
     private int meshIdx;
     private GLTFMesh mesh;
     private Matrix matrix;
     private int childIndices[];
     private GLTFNode[] children;
     private int cameraIdx;
-
+    private double[] rotation;
+    private double[] scale;
+    private double[] translation;
+    private String name;
+    
     public GLTFNode(AVListImpl properties) {
         this.meshIdx = -1;
         for (String propName : properties.getKeys()) {
@@ -21,13 +25,26 @@ public class GLTFNode extends GLTFArray {
                     break;
                 case GLTFParserContext.KEY_MATRIX:
                     double[] matrixValues = GLTFUtil.retrieveDoubleArray((Object[]) properties.getValue(propName));
-                    this.matrix = Matrix.fromArray(matrixValues, 0, true);
+                    this.matrix = Matrix.fromArray(matrixValues, 0, false);
+                    // System.out.println(this.matrix.toString());
                     break;
                 case GLTFParserContext.KEY_CHILDREN:
                     this.childIndices = GLTFUtil.retrieveIntArray((Object[]) properties.getValue(propName));
                     break;
                 case GLTFParserContext.KEY_CAMERA:
-                    this.cameraIdx=GLTFUtil.getInt(properties.getValue(propName));
+                    this.cameraIdx = GLTFUtil.getInt(properties.getValue(propName));
+                    break;
+                case GLTFParserContext.KEY_ROTATION:
+                    this.rotation = GLTFUtil.retrieveDoubleArray((Object[]) properties.getValue(propName));
+                    break;
+                case GLTFParserContext.KEY_SCALE:
+                    this.scale = GLTFUtil.retrieveDoubleArray((Object[]) properties.getValue(propName));
+                    break;
+                case GLTFParserContext.KEY_TRANSLATION:
+                    this.translation = GLTFUtil.retrieveDoubleArray((Object[]) properties.getValue(propName));
+                    break;
+                case GLTFParserContext.KEY_NAME:
+                    this.name = properties.getStringValue(propName);
                     break;
                 default:
                     System.out.println("GLTFNode: Unsupported " + propName);
@@ -35,7 +52,7 @@ public class GLTFNode extends GLTFArray {
             }
         }
     }
-
+    
     public void assembleGeometry(GLTFRoot root) {
         if (this.meshIdx >= 0) {
             this.mesh = root.getMeshForIdx(meshIdx);
@@ -54,9 +71,17 @@ public class GLTFNode extends GLTFArray {
     public GLTFNode[] getChildren() {
         return this.children;
     }
-
+    
     public GLTFMesh getMesh() {
         return this.mesh;
     }
-
+    
+    public boolean hasMatrix() {
+        return this.matrix != null;
+    }
+    
+    public Matrix getMatrix() {
+        return this.matrix;
+    }
+    
 }

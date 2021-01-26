@@ -126,7 +126,7 @@ public class ColladaViewer extends ApplicationTemplate {
 
         final AppFrame af = (AppFrame) start("WorldWind COLLADA Viewer", AppFrame.class);
 
-        new WorkerThread("testData/collada/duck.dae",
+        new WorkerThread("testData/texture-cube.dae",
                 Position.fromDegrees(40.009993372683, -105.272774533734, 300), af).start();
 
     }

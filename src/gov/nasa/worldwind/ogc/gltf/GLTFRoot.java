@@ -23,6 +23,7 @@ import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.Matrix;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.geom.Vec4;
+import gov.nasa.worldwind.render.ShapeAttributes;
 import gov.nasa.worldwind.util.typescript.*;
 import java.util.ArrayList;
 
@@ -68,6 +69,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     protected GLTFCamera[] cameras;
     protected int sceneIdx;
     protected boolean assembled;
+    protected ShapeAttributes attributes;
 
     /**
      * This shape's heading, positive values are clockwise from north. Null is
@@ -483,6 +485,10 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     public GLTFMesh getMeshForIdx(int idx) {
         return this.meshes[idx];
     }
+    
+    public GLTFMaterial getMaterialForIdx(int idx) {
+        return this.materials[idx];
+    }
 
     public GLTFAccessor getAccessorForIdx(int idx) {
         return this.accessors[idx];
@@ -576,10 +582,23 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
         }
 
         this.matrix = m;
-        System.out.println(m.toString());
         return m;
     }
+    
+    public ShapeAttributes getAttributes() {
+        return this.attributes;
+    }
 
+    public void setAttributes(ShapeAttributes attrs) {
+        this.attributes = attrs;
+        this.assembled = false;
+    }
+    
+    
+    public void setRoll(Angle roll) {
+        this.roll=roll;
+    }
+    
     /**
      * {@inheritDoc} Renders the scene contained in this document.
      */
@@ -599,6 +618,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      */
     @Override
     public void render(GLTFTraversalContext tc, DrawContext dc) {
+        tc.initialize();
         tc.multiplyMatrix(this.getMatrix());
 
         GLTFScene scene = this.getDefaultScene();

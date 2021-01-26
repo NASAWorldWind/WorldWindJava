@@ -11,6 +11,9 @@ import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.render.meshes.AbstractGeometry;
 import gov.nasa.worldwind.geom.Matrix;
 import gov.nasa.worldwind.WorldWind;
+import gov.nasa.worldwind.geom.Vec4;
+import gov.nasa.worldwind.render.BasicShapeAttributes;
+import gov.nasa.worldwind.render.ShapeAttributes;
 
 public class GLTFRenderableMesh extends Mesh3D {
 
@@ -83,39 +86,47 @@ public class GLTFRenderableMesh extends Mesh3D {
     }
 
     private GLTFMesh srcMesh;
-    private ArrayList<Geometry> geometries;
+    private ArrayList<Geometry> renderableGeometries;
 
-    public GLTFRenderableMesh(GLTFMesh srcMesh) {
+    public GLTFRenderableMesh(GLTFMesh srcMesh, GLTFRenderer renderContext) {
         this.srcMesh = srcMesh;
         this.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
         this.setElementType(GL.GL_TRIANGLES);
+        ShapeAttributes attrs = renderContext.getAttributes();
+        if (srcMesh.getMaterial() != null) {
+            attrs = new BasicShapeAttributes(attrs);
+            GLTFUtil.computeMaterialAttrs(attrs, srcMesh.getMaterial());
+        }
+        this.setAttributes(attrs);
     }
 
-    protected void assembleGeometries(DrawContext dc) {
+    protected void assembleRenderableGeometries(DrawContext dc) {
         this.setVertsPerShape(3);
-        this.geometries = new ArrayList<>();
-        float[] vtxBuffer = this.srcMesh.getVertexBuffer();
-        float[] normalBuffer = this.srcMesh.getNormalBuffer();
+        this.renderableGeometries = new ArrayList<>();
+        Vec4[] vtxBuffer = this.srcMesh.getVertexBuffer();
+        Vec4[] normalBuffer = this.srcMesh.getNormalBuffer();
         int[] bufferIndices = this.srcMesh.getBufferIndices();
         FloatBuffer vertices = Buffers.newDirectFloatBuffer(bufferIndices.length * 3);
         FloatBuffer normals = null;
         if (normalBuffer != null) {
-            normals = Buffers.newDirectFloatBuffer(normalBuffer.length * 3);
+            normals = Buffers.newDirectFloatBuffer(bufferIndices.length * 3);
         }
 
         for (int i = 0; i < bufferIndices.length; i++) {
-            int offset = bufferIndices[i] * 3;
-            vertices.put(vtxBuffer[offset]);
-            vertices.put(vtxBuffer[offset + 1]);
-            vertices.put(vtxBuffer[offset + 2]);
+            int idx = bufferIndices[i];
+            Vec4 vtx = vtxBuffer[idx];
+            vertices.put((float) vtx.x);
+            vertices.put((float) vtx.y);
+            vertices.put((float) vtx.z);
             if (normals != null) {
-                normals.put(normalBuffer[offset]);
-                normals.put(normalBuffer[offset + 1]);
-                normals.put(normalBuffer[offset + 2]);
+                Vec4 normal = normalBuffer[idx];
+                normals.put((float) normal.x);
+                normals.put((float) normal.y);
+                normals.put((float) normal.z);
             }
         }
-        this.geometries.add(new Geometry(vertices, normals));
-        this.setGeometries(this.geometries);
+        this.renderableGeometries.add(new Geometry(vertices, normals));
+        this.setRenderableGeometries(this.renderableGeometries);
     }
 
     /**
@@ -123,8 +134,8 @@ public class GLTFRenderableMesh extends Mesh3D {
      */
     @Override
     public void render(DrawContext dc, Matrix transform) {
-        if (this.geometries == null) {
-            this.assembleGeometries(dc);
+        if (this.renderableGeometries == null) {
+            this.assembleRenderableGeometries(dc);
         }
 
         super.render(dc, transform);

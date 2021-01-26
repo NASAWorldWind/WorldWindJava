@@ -1,9 +1,9 @@
 package gov.nasa.worldwind.ogc.gltf;
 
-import java.util.*;
 import java.nio.*;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
+import gov.nasa.worldwind.geom.Vec4;
 
 public class GLTFAccessor extends GLTFArray {
 
@@ -51,55 +51,66 @@ public class GLTFAccessor extends GLTFArray {
                     this.min = GLTFUtil.retrieveDoubleArray((Object[]) properties.getValue(propName));
                     break;
                 default:
-                    System.out.println("GLTFAccessor: Unsupported "+propName);
+                    System.out.println("GLTFAccessor: Unsupported " + propName);
                     break;
             }
         }
     }
-    
+
     private ByteBuffer retrieveByteBuffer(GLTFRoot root) {
         GLTFBufferView view = root.getBufferViewForIdx(this.bufferView);
         byte[] srcBuffer = view.getViewData(root, this.byteOffset);
         ByteBuffer viewBuffer = ByteBuffer.allocate(srcBuffer.length);
-        viewBuffer.put(srcBuffer,0,srcBuffer.length);
+        viewBuffer.put(srcBuffer, 0, srcBuffer.length);
         viewBuffer.rewind();
         viewBuffer.order(ByteOrder.LITTLE_ENDIAN);
         return viewBuffer;
     }
 
-    public float[] getCoordBuffer(GLTFRoot root) {
+    public Vec4[] getCoordBuffer(GLTFRoot root) {
+        if (this.type != AccessorType.VEC3) {
+            System.out.println("GLTFAccessor: Unsupported type.");
+            return null;
+        }
         ByteBuffer srcBuffer = this.retrieveByteBuffer(root);
-        float[] ret = null;
+        Vec4[] ret = null;
         switch (this.componentType) {
             case COMPONENT_FLOAT:
                 FloatBuffer floatBuffer = srcBuffer.asFloatBuffer();
-                int n = floatBuffer.limit();
-                ret = new float[n];
-                for (int i = 0; i < n; i++) {
-                    ret[i] = floatBuffer.get();
+                ret = new Vec4[this.count];
+                for (int i = 0; i < this.count; i++) {
+                    float x = floatBuffer.get();
+                    float y = floatBuffer.get();
+                    float z = floatBuffer.get();
+                    ret[i] = new Vec4(x, y, z);
                 }
                 break;
             default:
-                System.out.println("GLTFAccessor: Unsupported buffer component type "+this.componentType);
+                System.out.println("GLTFAccessor: Unsupported buffer component type " + this.componentType);
                 break;
         }
         return ret;
     }
-    
+
     public int[] getBufferIndices(GLTFRoot root) {
         ByteBuffer srcBuffer = this.retrieveByteBuffer(root);
         int[] ret = null;
         switch (this.componentType) {
             case COMPONENT_UNSIGNED_SHORT:
                 ShortBuffer shortBuffer = srcBuffer.asShortBuffer();
-                int n = shortBuffer.limit();
-                ret = new int[n];
-                for (int i = 0; i < n; i++) {
+                ret = new int[this.count];
+                for (int i = 0; i < this.count; i++) {
                     ret[i] = shortBuffer.get();
                 }
                 break;
+            case COMPONENT_UNSIGNED_BYTE:
+                ret = new int[this.count];
+                for (int i = 0; i < this.count; i++) {
+                    ret[i] = srcBuffer.get();
+                }
+                break;
             default:
-                System.out.println("GLTFAccessor: Unsupported indices component type "+this.componentType);
+                System.out.println("GLTFAccessor: Unsupported indices component type " + this.componentType);
                 break;
         }
         return ret;

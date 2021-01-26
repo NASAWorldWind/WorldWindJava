@@ -7,12 +7,14 @@ package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.geom.Vec4;
 import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.util.WWUtil;
 import gov.nasa.worldwind.ogc.gltf.*;
 import gov.nasa.worldwind.ogc.gltf.impl.*;
+import gov.nasa.worldwind.render.BasicShapeAttributes;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +46,9 @@ public class GLTFViewer extends ApplicationTemplate {
         protected void addGLTFLayer(GLTFRoot gltfRoot) {
             // Create a GLTFController to adapt the GLTFRoot to the WorldWind renderable interface.
             GLTFController gltfController = new GLTFController(gltfRoot);
-
+            BasicShapeAttributes attrs=new BasicShapeAttributes();
+            attrs.setEnableLighting(true);
+            gltfController.setAttributes(attrs);
             // Adds a new layer containing the GLTFRoot to the end of the WorldWindow's layer list.
             RenderableLayer layer = new RenderableLayer();
             layer.addRenderable(gltfController);
@@ -106,6 +110,7 @@ public class GLTFViewer extends ApplicationTemplate {
                 gltfRoot.setPosition(this.position);
                 gltfRoot.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
                 gltfRoot.setModelScale(new Vec4(modelScale, modelScale, modelScale, 1));
+//                gltfRoot.setRoll(Angle.fromDegrees(90));
 
                 // Schedule a task on the EDT to add the parsed document to a layer
                 SwingUtilities.invokeLater(new Runnable() {
@@ -129,10 +134,10 @@ public class GLTFViewer extends ApplicationTemplate {
 
 //        new WorkerThread("testData/gltf/Triangle/glTF-Embedded/Triangle.gltf",
 //                Position.fromDegrees(40.009993372683, -105.272774533734, 300), 3000, af).start();
-        new WorkerThread("testData/gltf/Box/glTF-Embedded/Box.gltf",
-                Position.fromDegrees(40.009993372683, -105.272774533734, 300), 600, af).start();
 //        new WorkerThread("testData/gltf/Box/glTF-Embedded/Box.gltf",
-//                Position.fromDegrees(40.009993372683, -105.272774533734, 300), af).start();
+//                Position.fromDegrees(40.009993372683, -105.272774533734, 300), 600, af).start();
+        new WorkerThread("testData/gltf/OrientationTest/glTF-Embedded/OrientationTest.gltf",
+                Position.fromDegrees(40.009993372683, -105.272774533734, 1500), 100, af).start();
 
     }
 }

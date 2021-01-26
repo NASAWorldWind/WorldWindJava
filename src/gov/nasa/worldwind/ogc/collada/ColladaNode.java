@@ -133,7 +133,12 @@ public class ColladaNode extends ColladaAbstractObject implements ColladaRendera
             if (matrix != null && matrix != Matrix.IDENTITY)
             {
                 tc.pushMatrix();
+                System.out.println(tc.peekMatrix().toString());
                 tc.multiplyMatrix(matrix);
+                System.out.println(matrix.toString());
+                System.out.println(tc.peekMatrix().toString());
+                System.out.println(tc.peekMatrix().getRotationY());
+                
             }
 
             ColladaRoot root = this.getRoot();

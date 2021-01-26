@@ -417,7 +417,7 @@ public class ShapefileMultiPatch extends Mesh3D {
 
         this.combineGeometries(dc.getGlobe().computeSurfaceNormalAtPoint(referencePoint));
         this.computeTextureCoordinates(dc.getGlobe().computeSurfaceNormalAtPoint(referencePoint));
-        this.setGeometries(this.patchGeometries);
+        this.setRenderableGeometries(this.patchGeometries);
     }
 
     protected class FaceTriangle extends Triangle {

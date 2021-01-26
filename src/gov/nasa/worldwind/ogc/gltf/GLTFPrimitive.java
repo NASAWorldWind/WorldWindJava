@@ -46,9 +46,13 @@ public class GLTFPrimitive extends GLTFArray {
         }
         return -1;
     }
-    
+
     public int getVertexIndicesAccessorIdx() {
         return this.indicesAccessorIdx;
+    }
+
+    public int getMaterialIdx() {
+        return this.materialIdx;
     }
 
 }

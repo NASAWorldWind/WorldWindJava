@@ -55,6 +55,11 @@ public class GLTFParserContext extends BasicJSONEventParserContext {
     public static final String KEY_YFOV = "yfov";
     public static final String KEY_ZFAR = "zfar";
     public static final String KEY_ZNEAR = "znear";
+    public static final String KEY_ROTATION = "rotation";
+    public static final String KEY_SCALE = "scale";
+    public static final String KEY_TRANSLATION = "translation";
+    public static final String KEY_ROUGHNESS_FACTOR = "roughnessFactor";
+    public static final String KEY_COPYRIGHT = "copyright";
 
     private GLTFRoot gltfRoot;
 

@@ -18,13 +18,17 @@ public class GLTFMaterial extends GLTFArray {
                     this.name = properties.getStringValue(propName);
                     break;
                 case GLTFParserContext.KEY_EMISSIVE_FACTOR:
-                    this.emissiveFactor=GLTFUtil.retrieveDoubleArray((Object[]) properties.getValue(propName));
+                    this.emissiveFactor = GLTFUtil.retrieveDoubleArray((Object[]) properties.getValue(propName));
                     break;
                 default:
-                    System.out.println("GLTFMaterial: Unsupported "+propName);
+                    System.out.println("GLTFMaterial: Unsupported " + propName);
                     break;
             }
         }
+    }
+
+    public GLTFPBRMetallicRoughness getPbrMetallicRoughness() {
+        return this.pbrMetallicRoughness;
     }
 
 }

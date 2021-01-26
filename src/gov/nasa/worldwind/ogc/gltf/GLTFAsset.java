@@ -10,6 +10,7 @@ public class GLTFAsset extends BasicJSONEventParser {
 
     private String version;
     private String generator;
+    private String copyright;
 
     public GLTFAsset() {
 
@@ -23,6 +24,9 @@ public class GLTFAsset extends BasicJSONEventParser {
                     break;
                 case GLTFParserContext.KEY_GENERATOR:
                     this.generator=properties.getStringValue(propName);
+                    break;
+                case GLTFParserContext.KEY_COPYRIGHT:
+                    this.copyright=properties.getStringValue(propName);
                     break;
                 default:
                     System.out.println("GLTFAsset: Unsupported "+propName);

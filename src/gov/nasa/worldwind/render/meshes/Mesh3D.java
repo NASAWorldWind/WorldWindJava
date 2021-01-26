@@ -214,7 +214,7 @@ public class Mesh3D extends AbstractGeneralShape {
     /**
      * Geometry objects that describe different parts of the mesh.
      */
-    protected ArrayList<Geometry> geometries;
+    private ArrayList<Geometry> geometries;
 
     /**
      * Texture coordinates for all geometries in this shape.
@@ -252,22 +252,22 @@ public class Mesh3D extends AbstractGeneralShape {
     protected int elementType=-1;
 
     public Mesh3D(List<? extends AbstractGeometry> geometries) {
-        this.setGeometries(geometries);
+        this.setRenderableGeometries(geometries);
     }
 
     public Mesh3D() {
 
     }
 
-    protected final void addGeometry(AbstractGeometry geometry) {
+    protected final void addRenderableGeometry(AbstractGeometry geometry) {
         this.geometries.add(new Geometry(geometry));
         this.shapeCount += geometry.getCount();
     }
 
-    protected final void setGeometries(List<? extends AbstractGeometry> geometries) {
+    protected final void setRenderableGeometries(List<? extends AbstractGeometry> geometries) {
         this.geometries = new ArrayList<>(geometries.size());
         geometries.forEach((geometry) -> {
-            this.addGeometry(geometry);
+            this.addRenderableGeometry(geometry);
         });
     }
 
@@ -465,9 +465,9 @@ public class Mesh3D extends AbstractGeneralShape {
             current.referenceCenter = this.computeReferenceCenter(dc);
 // TODO: Fix
             Position refPosition = dc.getGlobe().computePositionFromPoint(current.referenceCenter);
-//            current.surfaceOrientationMatrix = dc.getGlobe().computeSurfaceOrientationAtPosition(refPosition);
-            Vec4 point = dc.getGlobe().computeEllipsoidalPointFromPosition(refPosition.latitude, refPosition.longitude, refPosition.elevation);
-            current.surfaceOrientationMatrix = Matrix.fromTranslation(point);
+            current.surfaceOrientationMatrix = dc.getGlobe().computeSurfaceOrientationAtPosition(refPosition);
+            //Vec4 point = dc.getGlobe().computeEllipsoidalPointFromPosition(refPosition.latitude, refPosition.longitude, refPosition.elevation);
+            //current.surfaceOrientationMatrix = Matrix.fromTranslation(point);
         }
         if (current.renderMatrix != null) {
             return current.surfaceOrientationMatrix.multiply(current.renderMatrix);

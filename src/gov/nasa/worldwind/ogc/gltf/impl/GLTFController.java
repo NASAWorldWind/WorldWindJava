@@ -9,6 +9,7 @@ import gov.nasa.worldwind.ogc.gltf.*;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.render.PreRenderable;
 import gov.nasa.worldwind.render.Renderable;
+import gov.nasa.worldwind.render.ShapeAttributes;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.typescript.*;
 
@@ -78,6 +79,10 @@ public class GLTFController  implements Renderable, PreRenderable {
      */
     protected void initializeTraversalContext(GLTFTraversalContext tc) {
         tc.initialize();
+    }
+    
+    public void setAttributes(ShapeAttributes attrs) {
+        this.gltfRoot.setAttributes(attrs);
     }
     
     /**
