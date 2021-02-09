@@ -102,7 +102,8 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
      * when the document is rendered.
      */
     protected Matrix matrix;
-
+    protected URI remoteAddress;
+    
     /** Resource resolver to resolve relative file paths. */
     protected ColladaResourceResolver resourceResolver;
 
@@ -271,6 +272,35 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
             throw new IllegalArgumentException(message);
         }
 
+        colladaRoot.parse();
+
+        return colladaRoot;
+    }
+    
+    public static ColladaRoot createAndParse(URL fileUrl, String remoteAddress) throws
+            IOException, XMLStreamException {
+        if (fileUrl == null) {
+            String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+        if (remoteAddress == null) {
+            String message = Logging.getMessage("nullValue.URLIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+        ColladaRoot colladaRoot = ColladaRoot.create(fileUrl);
+        try {
+            colladaRoot.setRemoteAddress(new URI(remoteAddress));
+        } catch (URISyntaxException ex) {
+            String message = Logging.getMessage("generic.UnableToResolveReference", remoteAddress);
+            Logging.logger().warning(message);
+        }
+        if (colladaRoot == null) {
+            String message = Logging.getMessage("generic.UnrecognizedSourceTypeOrUnavailableSource", fileUrl.toString());
+            throw new IllegalArgumentException(message);
+        }
+        System.out.println("Create and Parse: " + remoteAddress);
         colladaRoot.parse();
 
         return colladaRoot;
@@ -449,6 +479,15 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
         this.reset();
     }
 
+    
+    public URI getRemoteAddress() {
+        return this.remoteAddress;
+    }
+    
+    public void setRemoteAddress(URI address) {
+        this.remoteAddress=address;
+    }
+    
     /**
      * Indicates the resource resolver used to resolve relative file paths.
      *
@@ -480,6 +519,10 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     {
         this.highlighted = highlighted;
     }
+    
+    public boolean isRemoteSource() {
+        return this.remoteAddress!=null;
+    }
 
     /**
      * Resolves a reference to a local or remote file or element. If the link refers to an element in the current
@@ -507,6 +550,10 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
 
         try
         {
+            if (this.isRemoteSource() && !link.startsWith("#")) {
+                link=this.remoteAddress.resolve(link).toString();
+            }
+            
             String[] linkParts = link.split("#");
             String linkBase = linkParts[0];
             String linkRef = linkParts.length > 1 ? linkParts[1] : null;

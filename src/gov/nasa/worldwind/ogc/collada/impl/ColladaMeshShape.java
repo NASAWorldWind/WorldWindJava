@@ -41,6 +41,7 @@ import gov.nasa.worldwind.util.*;
 
 import com.jogamp.opengl.*;
 import java.awt.*;
+import java.net.URI;
 import java.nio.FloatBuffer;
 import java.util.*;
 import java.util.List;
@@ -1071,22 +1072,39 @@ public class ColladaMeshShape extends AbstractGeneralShape
      * @return The texture that must be applied to the shape, or null if there is no texture, or the texture is not
      *         available.
      */
-    protected WWTexture getTexture(Geometry geometry)
-    {
-        if (geometry.texture != null)
+    protected WWTexture getTexture(Geometry geometry) {
+        if (geometry.texture != null) {
             return geometry.texture;
-
-        String source = this.getTextureSource(geometry.colladaGeometry);
-        if (source != null)
-        {
-            Object o = geometry.colladaGeometry.getRoot().resolveReference(source);
-            if (o != null)
-                geometry.texture = new LazilyLoadedTexture(o);
         }
 
+        String source = this.getTextureSource(geometry.colladaGeometry);
+        if (source != null) {
+            System.out.println("Texture Source: " + source);
+            ColladaRoot root = geometry.colladaGeometry.getRoot();
+            if (root.isRemoteSource()) {
+                try {
+                    Object o = root.resolveReference(source);
+                    if (o == null) {
+                        URI textureUri = root.getRemoteAddress().resolve(source);
+                        System.out.println("Texture URI: " + textureUri.toString());
+                        geometry.texture = new LazilyLoadedTexture(textureUri);
+                    } else {
+                        System.out.println("Texture object: " + o.toString());
+                        geometry.texture = new LazilyLoadedTexture(o);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                Object o = root.resolveReference(source);
+                if (o != null) {
+                    geometry.texture = new LazilyLoadedTexture(o);
+                }
+            }
+        }
         return geometry.texture;
     }
-
+    
     /**
      * Apply a material to the active draw context.
      *

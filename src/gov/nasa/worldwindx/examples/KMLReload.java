@@ -27,12 +27,16 @@
  */
 package gov.nasa.worldwindx.examples;
 
+import com.jogamp.opengl.GLAnimatorControl;
+import com.jogamp.opengl.util.FPSAnimator;
+import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.geom.Position;
 import javax.swing.SwingUtilities;
 
 import gov.nasa.worldwind.ogc.kml.KMLRoot;
 import gov.nasa.worldwind.ogc.kml.impl.KMLController;
 import gov.nasa.worldwind.layers.RenderableLayer;
+import gov.nasa.worldwind.terrain.ZeroElevationModel;
 
 public class KMLReload extends ApplicationTemplate {
 
@@ -63,6 +67,7 @@ public class KMLReload extends ApplicationTemplate {
 
     public static class AppFrame extends ApplicationTemplate.AppFrame {
 
+        protected GLAnimatorControl animator;
         private final RenderableLayer kmlLayer;
         private KMLController kmlController;
         private final LoaderThread loaderThread;
@@ -72,12 +77,17 @@ public class KMLReload extends ApplicationTemplate {
             kmlController = null;
             kmlLayer = new RenderableLayer();
 //            loaderThread=new LoaderThread("/gov/nasa/worldwindx/examples/data/IconExpiration.kml");
-            loaderThread = new LoaderThread("http://localhost:8000/jump-around.kml");
+            loaderThread = new LoaderThread("http://localhost:8000/VOGON2.kml");
+//            loaderThread = new LoaderThread("http://localhost:8000/jump-around.kml");
 //            loaderThread=new LoaderThread("http://localhost/Tile.kmz");
 
             // Add the layer to the model.
             insertBeforeCompass(getWwd(), kmlLayer);
             AppFrame.thisFrame = this;
+            AppFrame.thisFrame = this;
+            this.getWwd().getModel().getGlobe().setElevationModel(new ZeroElevationModel());
+            animator = new FPSAnimator((WorldWindowGLCanvas) getWwd(), 10 /*frames per second*/);
+            animator.start();
         }
 
         public void start() {
@@ -93,7 +103,7 @@ public class KMLReload extends ApplicationTemplate {
             kmlLayer.addRenderable(kmlController);
             this.getWwd().redraw();
 
-            getWwd().getView().setEyePosition(Position.fromDegrees(78, 60, 10000000));
+            getWwd().getView().setEyePosition(Position.fromDegrees(-36, 21, 4000000));
         }
 
     }

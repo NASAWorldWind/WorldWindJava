@@ -328,15 +328,24 @@ public class KMLModelPlacemarkImpl extends WWObjectImpl implements KMLRenderable
      * @throws java.io.IOException if a reading error occurs.
      * @throws javax.xml.stream.XMLStreamException if a parsing error occurs.
      */
-    protected void retrieveModel(String address) throws IOException, XMLStreamException
-    {
-        Object o = this.parent.getRoot().resolveReference(address);
-        if (o == null)
+    protected void retrieveModel(String address) throws IOException, XMLStreamException {
+        KMLRoot kmlRoot = this.parent.getRoot();
+        Object o = kmlRoot.resolveReference(address);
+        if (kmlRoot.isRemote()) {
+            address = kmlRoot.getSupportFilePath(address);
+        }
+        if (o == null) {
             return;
+        }
 
-        ColladaRoot root = ColladaRoot.createAndParse(o);
-        if (root == null)
+        if (address.contains("VOGON") && address.contains("dae")) {
+            System.out.println("retrieveModel: " + o + "," + address);
+        }
+
+        ColladaRoot root = ColladaRoot.createAndParse((URL) o, address);
+        if (root == null) {
             return;
+        }
 
         this.setColladaRoot(root);
         this.resourceRetrievalTime.set(System.currentTimeMillis());

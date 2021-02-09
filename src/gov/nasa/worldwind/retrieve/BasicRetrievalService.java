@@ -226,6 +226,9 @@ public final class BasicRetrievalService extends WWObjectImpl
                 ? task.retriever.getStaleRequestLimit() : this.staleRequestLimit;
             if (task.retriever.getBeginTime() - task.retriever.getSubmitTime() > limit)
             {
+                if (task.retriever.getName().contains("VOGON")) {
+                    System.out.println("ejecting: "+task.retriever.getName());
+                }
                 // Task has been sitting on the queue too long
                 Logging.logger().finer(Logging.getMessage("BasicRetrievalService.CancellingTooOldRetrieval",
                     task.getRetriever().getName()));

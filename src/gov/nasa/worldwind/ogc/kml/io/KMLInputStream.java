@@ -132,4 +132,8 @@ public class KMLInputStream implements KMLDoc
         }
         return null;
     }
+    
+    public URI getURI() {
+        return this.uri;
+    }
 }

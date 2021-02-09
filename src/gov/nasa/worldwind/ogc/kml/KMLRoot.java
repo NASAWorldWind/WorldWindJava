@@ -600,7 +600,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
 
         // Store remote files in the WorldWind cache by default. This provides backward compatibility with applications
         // depending on resolveReference's behavior prior to the addition of the cacheRemoteFile parameter.
-        Object o = this.resolveReference(link, true);
+        Object o = this.resolveReference(link, false); //true);
 
         if (o == null)
             absentResourceList.markResourceAbsent(link);
@@ -650,6 +650,9 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
 
         try
         {
+            if (this.isRemote() && !link.startsWith("#")) {
+                link=this.getSupportFilePath(link);
+            }
             String[] linkParts = link.split("#");
             String linkBase = linkParts[0];
             String linkRef = linkParts.length > 1 ? linkParts[1] : null;
@@ -823,6 +826,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
             throw new IllegalArgumentException(message);
         }
 
+        System.out.println("resolveRemoteReference: "+linkBase+","+linkRef);
         try
         {
             // See if it's in the cache. If not, requestFile will start another thread to retrieve it and return null.
@@ -1032,6 +1036,12 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         return 0;
     }
     
+    public boolean isRemote() {
+        if (this.kmlDoc instanceof KMLInputStream) {
+            return ((KMLInputStream) this.kmlDoc).getURI()!=null;
+        }
+        return false;
+    }
     /**
      * Returns true if the resource is present in the file store and available for queries like getExpiration.
      *
