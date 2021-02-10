@@ -342,7 +342,13 @@ public class KMLModelPlacemarkImpl extends WWObjectImpl implements KMLRenderable
             System.out.println("retrieveModel: " + o + "," + address);
         }
 
-        ColladaRoot root = ColladaRoot.createAndParse((URL) o, address);
+        ColladaRoot root = null;
+        if (o instanceof URL) {
+            root = ColladaRoot.createAndParse((URL) o, address);
+        } else {
+            root = ColladaRoot.createAndParse(o);
+        }
+
         if (root == null) {
             return;
         }
