@@ -1079,7 +1079,6 @@ public class ColladaMeshShape extends AbstractGeneralShape
 
         String source = this.getTextureSource(geometry.colladaGeometry);
         if (source != null) {
-            System.out.println("Texture Source: " + source);
             ColladaRoot root = geometry.colladaGeometry.getRoot();
             if (root.isRemoteSource()) {
                 try {

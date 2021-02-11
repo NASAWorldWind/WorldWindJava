@@ -31,6 +31,7 @@ package gov.nasa.worldwind.ogc.kml.io;
 import gov.nasa.worldwind.util.*;
 
 import java.io.*;
+import java.net.URI;
 import java.util.*;
 import java.util.zip.*;
 
@@ -57,6 +58,9 @@ public class KMZInputStream implements KMLDoc
 
     /** The directory to hold files copied from the stream. Both the directory and the files copied there are temporary. */
     protected File tempDir;
+    
+    protected URI resolvingUri;
+
 
     /**
      * Constructs a KMZInputStream instance. Upon return, the new instance's current-entry field refers to the first
@@ -67,7 +71,7 @@ public class KMZInputStream implements KMLDoc
      * @throws IllegalArgumentException if the specified stream is null.
      * @throws java.io.IOException      if an error occurs while accessing the stream.
      */
-    public KMZInputStream(InputStream sourceStream) throws IOException
+    public KMZInputStream(InputStream sourceStream, URI resolvingUri) throws IOException
     {
         if (sourceStream == null)
         {
@@ -78,6 +82,7 @@ public class KMZInputStream implements KMLDoc
 
         this.zipStream = new ZipInputStream(sourceStream);
         this.files = new HashMap<String, File>();
+        this.resolvingUri=resolvingUri;
         this.moveToNextEntry();
     }
 
@@ -222,6 +227,10 @@ public class KMZInputStream implements KMLDoc
         // If the file just copied is the one requested, a recursive call will pick it up immediately. If not, the next
         // entry will be retrieved.
         return this.getSupportFilePath(path);
+    }
+    
+    public URI getResolvingUri() {
+        return this.resolvingUri;
     }
 
     /**

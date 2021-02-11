@@ -30,6 +30,7 @@ package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.cache.SessionCache;
 import gov.nasa.worldwind.event.Message;
 import gov.nasa.worldwind.exception.*;
 import gov.nasa.worldwind.ogc.kml.impl.*;
@@ -283,7 +284,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
                 // We've encountered some zip files that will not open with ZipFile, but will open
                 // with ZipInputStream. Try again, this time opening treating the file as a stream.
                 // See WWJINT-282.
-                this.kmlDoc = new KMZInputStream(new FileInputStream(docSource));
+                this.kmlDoc = new KMZInputStream(new FileInputStream(docSource), null);
             }
         }
         else
@@ -333,9 +334,9 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         }
 
         if (contentType != null && contentType.equals(KMLConstants.KMZ_MIME_TYPE))
-            this.kmlDoc = new KMZInputStream(docSource);
+            this.kmlDoc = new KMZInputStream(docSource,null);
         else if (contentType == null && docSource instanceof ZipInputStream)
-            this.kmlDoc = new KMZInputStream(docSource);
+            this.kmlDoc = new KMZInputStream(docSource,null);
         else
             this.kmlDoc = new KMLInputStream(docSource, null);
 
@@ -396,7 +397,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
             contentType = WWIO.makeMimeTypeForSuffix(WWIO.getSuffix(docSource.getPath()));
 
         if (KMLConstants.KMZ_MIME_TYPE.equals(contentType))
-            this.kmlDoc = new KMZInputStream(conn.getInputStream());
+            this.kmlDoc = new KMZInputStream(conn.getInputStream(), WWIO.makeURI(docSource));
         else
             this.kmlDoc = new KMLInputStream(conn.getInputStream(), WWIO.makeURI(docSource));
 
@@ -826,7 +827,6 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
             throw new IllegalArgumentException(message);
         }
 
-        System.out.println("resolveRemoteReference: "+linkBase+","+linkRef);
         try
         {
             // See if it's in the cache. If not, requestFile will start another thread to retrieve it and return null.
@@ -945,6 +945,13 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
             // If we didn't find a local file, treat it as a remote reference.
             if (o == null)
             {
+                if (this.kmlDoc instanceof KMZInputStream) {
+                    KMZInputStream kmzStream=(KMZInputStream) this.kmlDoc;
+                    URI resolvingUri=kmzStream.getResolvingUri();
+                    if (resolvingUri!=null) {
+                        path=resolvingUri.resolve(path).toString();
+                    }
+                }
                 url = WorldWind.getDataFileStore().requestFile(path, cacheRemoteFile);
                 if (url != null)
                 {
@@ -1106,7 +1113,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         InputStream refStream = url.openStream();
 
         if (KMLConstants.KMZ_MIME_TYPE.equals(contentType))
-            kmlDoc = new KMZInputStream(refStream);
+            kmlDoc = new KMZInputStream(refStream, WWIO.makeURI(linkBase));
         else // Attempt to parse as KML
             kmlDoc = new KMLInputStream(refStream, WWIO.makeURI(linkBase));
 
