@@ -97,6 +97,8 @@ public interface FileStore extends WWObject
      */
     boolean isInstallLocation(String path);
 
+    public boolean isFileRetrieved(String address);
+            
     /**
      * Indicates whether the file store contains a specified file.
      *

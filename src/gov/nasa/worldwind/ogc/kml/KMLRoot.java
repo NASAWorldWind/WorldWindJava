@@ -566,6 +566,19 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
         return this.getKMLDoc().getSupportFilePath(link);
     }
 
+    private String resolveLink(String link) {
+        try {
+            if (this.isRemote() && !link.startsWith("#")) {
+                link = this.getSupportFilePath(link);
+            }
+        } catch (Exception ex) {
+            String message = Logging.getMessage("generic.UnableToResolveReference", link);
+            Logging.logger().warning(message);
+        }
+        
+        return link;
+    }
+    
     /**
      * Resolves a reference to a remote or local element of the form address#identifier, where "address" identifies a
      * local or remote document, including the current document, and and "identifier" is the id of the desired element.
@@ -595,10 +608,16 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
+        
+        link=resolveLink(link);
 
-        if (absentResourceList.isResourceAbsent(link))
-            return null;
-
+        if (absentResourceList.isResourceAbsent(link)) {
+            if (WorldWind.getDataFileStore().isFileRetrieved(link)) {
+                this.absentResourceList.unmarkResourceAbsent(link);
+            } else {
+                return null;
+            }
+        }
         // Store remote files in the WorldWind cache by default. This provides backward compatibility with applications
         // depending on resolveReference's behavior prior to the addition of the cacheRemoteFile parameter.
         Object o = this.resolveReference(link, false); //true);
@@ -651,9 +670,7 @@ public class KMLRoot extends KMLAbstractObject implements KMLRenderable
 
         try
         {
-            if (this.isRemote() && !link.startsWith("#")) {
-                link=this.getSupportFilePath(link);
-            }
+            link=resolveLink(link);
             String[] linkParts = link.split("#");
             String linkBase = linkParts[0];
             String linkRef = linkParts.length > 1 ? linkParts[1] : null;

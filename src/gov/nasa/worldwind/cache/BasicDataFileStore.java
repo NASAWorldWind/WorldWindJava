@@ -214,6 +214,15 @@ public class BasicDataFileStore extends AbstractFileStore
         return entry != null ? entry.contentType : null;
     }
 
+    @Override
+    public boolean isFileRetrieved(String address) {
+        DBEntry entry = (DBEntry) this.db.getObject(address);
+        if (entry == null) {
+            return false;
+        }
+        return entry.state == DBEntry.LOCAL;
+    }
+
     public long getExpirationTime(String address)
     {
         if (address == null)
