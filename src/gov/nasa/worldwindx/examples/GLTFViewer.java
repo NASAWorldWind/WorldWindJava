@@ -127,7 +127,7 @@ public class GLTFViewer extends ApplicationTemplate {
     public static void main(String[] args) {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 40.028);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -105.27284091410579);
-        Configuration.setValue(AVKey.INITIAL_ALTITUDE, 7000);
+        Configuration.setValue(AVKey.INITIAL_ALTITUDE, 21000);
         Configuration.setValue(AVKey.INITIAL_PITCH, 50);
 
         final AppFrame af = (AppFrame) start("WorldWind GLTF Viewer", AppFrame.class);
@@ -136,8 +136,11 @@ public class GLTFViewer extends ApplicationTemplate {
 //                Position.fromDegrees(40.009993372683, -105.272774533734, 300), 3000, af).start();
 //        new WorkerThread("testData/gltf/Box/glTF-Embedded/Box.gltf",
 //                Position.fromDegrees(40.009993372683, -105.272774533734, 300), 600, af).start();
-        new WorkerThread("testData/gltf/OrientationTest/glTF-Embedded/OrientationTest.gltf",
-                Position.fromDegrees(40.009993372683, -105.272774533734, 1500), 100, af).start();
+        new WorkerThread("testData/gltf/2CylinderEngine/glTF-Embedded/2CylinderEngine.gltf",
+                Position.fromDegrees(40.009993372683, -105.272774533734, 1500), 10, af).start();
+        // Miguel work on the use case below.
+//        new WorkerThread("testData/gltf/2CylinderEngine/glTF/2CylinderEngine.gltf",
+//                Position.fromDegrees(40.009993372683, -105.272774533734, 1500), 10, af).start();
 
     }
 }

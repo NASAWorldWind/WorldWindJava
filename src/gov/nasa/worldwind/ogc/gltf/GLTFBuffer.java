@@ -17,6 +17,8 @@ public class GLTFBuffer extends GLTFArray {
                     this.uri = (String) properties.getValue(propName);
                     if (this.uri.startsWith("data:")) {
                         this.unpackData();
+                    } else {
+                        System.out.println("Unsupported URI: "+this.uri);
                     }
                     break;
                 case GLTFParserContext.KEY_BYTE_LENGTH:
