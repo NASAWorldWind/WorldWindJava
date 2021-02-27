@@ -1,6 +1,8 @@
 package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
+@TypeScriptImports(imports = "./GLTFParserContext,./GLTFPerspective,./GLTFUtil,../../avlist/AVListImpl")
 
 public class GLTFCamera {
     

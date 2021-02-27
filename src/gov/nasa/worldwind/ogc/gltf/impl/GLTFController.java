@@ -13,7 +13,7 @@ import gov.nasa.worldwind.render.ShapeAttributes;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.typescript.*;
 
-@TypeScriptImports(imports="../../../render/IRenderable,../../../render/PreRenderable,../../../render/DrawContext,../../../util/Logger,../GLTFRoot,./GLTFTraversalContext")
+@TypeScriptImports(imports="../../../shapes/ShapeAttributes,../../../render/IRenderable,../../../render/PreRenderable,../../../render/DrawContext,../../../util/Logger,../GLTFRoot,./GLTFTraversalContext")
 
 /**
  * Executes the mapping from GLTF to WorldWind. Traverses a parsed GLTF document and creates the appropriate

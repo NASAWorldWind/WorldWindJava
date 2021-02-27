@@ -1,7 +1,9 @@
 package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
+@TypeScriptImports(imports = "./GLTFArray,./GLTFAttributes,./GLTFParserContext,./GLTFUtil,../../avlist/AVListImpl")
 public class GLTFPrimitive extends GLTFArray {
 
     private GLTFAttributes attributes;
@@ -10,6 +12,7 @@ public class GLTFPrimitive extends GLTFArray {
     private int materialIdx;
 
     public GLTFPrimitive(AVListImpl properties) {
+        super();
         this.indicesAccessorIdx = -1;
         for (String propName : properties.getKeys()) {
             switch (propName) {

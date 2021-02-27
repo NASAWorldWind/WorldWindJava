@@ -27,7 +27,7 @@ import gov.nasa.worldwind.render.ShapeAttributes;
 import gov.nasa.worldwind.util.typescript.*;
 import java.util.ArrayList;
 
-@TypeScriptImports(imports = "../../render/DrawContext,../json/JSONEvent,../json/JSONEventParserContext,../../util/Logger,../../geom/BoundingBox,./GLTFScene,./GLTFDoc,./GLTFParserContext,./GLTFAbstractObject,./impl/GLTFRenderable,../../render/Highlightable,../json/JSONDoc,./impl/GLTFTraversalContext")
+@TypeScriptImports(imports = "[AVKey]../../WorldWind,../../WorldWind,./GLTFAsset,./GLTFBufferView,./GLTFBuffer,../../render/DrawContext,../json/JSONEvent,../json/JSONEventParserContext,../../util/Logger,../../geom/BoundingBox,./GLTFScene,./GLTFDoc,./GLTFParserContext,./GLTFAbstractObject,./impl/GLTFRenderable,../../render/Highlightable,../json/JSONDoc,./impl/GLTFTraversalContext,./GLTFNode,./GLTFAccessor,./GLTFMesh,./GLTFMaterial,./GLTFCamera,../../shapes/ShapeAttributes,../../geom/Angle,../../geom/Vec4,../../geom/Matrix,../../geom/Position,./impl/GLTFRenderer,../../avlist/AVListImpl")
 
 public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, Highlightable { //, Animatable {
 
@@ -485,7 +485,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     public GLTFMesh getMeshForIdx(int idx) {
         return this.meshes[idx];
     }
-    
+
     public GLTFMaterial getMaterialForIdx(int idx) {
         return this.materials[idx];
     }
@@ -584,7 +584,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
         this.matrix = m;
         return m;
     }
-    
+
     public ShapeAttributes getAttributes() {
         return this.attributes;
     }
@@ -593,12 +593,11 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
         this.attributes = attrs;
         this.assembled = false;
     }
-    
-    
+
     public void setRoll(Angle roll) {
-        this.roll=roll;
+        this.roll = roll;
     }
-    
+
     /**
      * {@inheritDoc} Renders the scene contained in this document.
      */

@@ -1,7 +1,9 @@
 package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
+@TypeScriptImports(imports = "./GLTFArray,./GLTFPBRMetallicRoughness,./GLTFParserContext,./GLTFUtil,../../avlist/AVListImpl")
 public class GLTFMaterial extends GLTFArray {
 
     private String name;
@@ -9,6 +11,7 @@ public class GLTFMaterial extends GLTFArray {
     private double[] emissiveFactor;
 
     public GLTFMaterial(AVListImpl properties) {
+        super();
         for (String propName : properties.getKeys()) {
             switch (propName) {
                 case GLTFParserContext.KEY_PBR_METALLIC_ROUGHNESS:

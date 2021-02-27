@@ -1,7 +1,9 @@
 package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
+@TypeScriptImports(imports = "./GLTFParserContext,../../avlist/AVListImpl,./GLTFUtil")
 public class GLTFPerspective {
 
     protected double aspectRatio;

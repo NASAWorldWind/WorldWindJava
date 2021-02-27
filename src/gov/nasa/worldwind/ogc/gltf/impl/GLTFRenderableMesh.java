@@ -17,78 +17,12 @@ import gov.nasa.worldwind.render.ShapeAttributes;
 
 public class GLTFRenderableMesh extends Mesh3D {
 
-    protected class Geometry implements AbstractGeometry {
-
-        protected FloatBuffer vertices;
-        protected FloatBuffer texCoords;
-        protected FloatBuffer normals;
-
-        public Geometry(FloatBuffer vertices, FloatBuffer normals) {
-            init(vertices, normals);
-        }
-
-        protected final void init(FloatBuffer vertices, FloatBuffer normals) {
-            this.vertices = vertices;
-            this.normals = normals;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void getVertices(FloatBuffer buffer) {
-            this.vertices.rewind();
-            buffer.put(this.vertices);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public boolean hasNormals() {
-            return this.normals != null;
-        }
-
-        public boolean hasTexCoords() {
-            return this.texCoords != null;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void getNormals(FloatBuffer buffer) {
-            if (this.hasNormals()) {
-                this.normals.rewind();
-                buffer.put(this.normals);
-            }
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public int getCount() {
-            return this.vertices.capacity() / 9;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void getTextureCoordinates(FloatBuffer buffer) {
-            if (this.hasTexCoords()) {
-                this.texCoords.rewind();
-                buffer.put(this.texCoords);
-            }
-        }
-
-    }
 
     private GLTFMesh srcMesh;
-    private ArrayList<Geometry> renderableGeometries;
+    private ArrayList<GLTFMeshGeometry> renderableGeometries;
 
     public GLTFRenderableMesh(GLTFMesh srcMesh, GLTFRenderer renderContext) {
+        super();
         this.srcMesh = srcMesh;
         this.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
         this.setElementType(GL.GL_TRIANGLES);
@@ -125,7 +59,7 @@ public class GLTFRenderableMesh extends Mesh3D {
                 normals.put((float) normal.z);
             }
         }
-        this.renderableGeometries.add(new Geometry(vertices, normals));
+        this.renderableGeometries.add(new GLTFMeshGeometry(vertices, normals));
         this.setRenderableGeometries(this.renderableGeometries);
     }
 

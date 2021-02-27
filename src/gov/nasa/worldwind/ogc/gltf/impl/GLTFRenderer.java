@@ -7,7 +7,9 @@ import gov.nasa.worldwind.ogc.gltf.*;
 import gov.nasa.worldwind.ogc.gltf.impl.GLTFTraversalContext;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.render.ShapeAttributes;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
+@TypeScriptImports(imports = "../GLTFRoot,../GLTFMesh")
 public class GLTFRenderer {
 
     private final GLTFRoot root;

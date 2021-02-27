@@ -1,7 +1,9 @@
 package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
+@TypeScriptImports(imports = "./GLTFArray,./GLTFParserContext,./GLTFUtil,../../avlist/AVListImpl")
 public class GLTFPBRMetallicRoughness extends GLTFArray {
 
     private double[] baseColorFactor;
@@ -9,6 +11,7 @@ public class GLTFPBRMetallicRoughness extends GLTFArray {
     private double roughnessFactor;
 
     public GLTFPBRMetallicRoughness(AVListImpl properties) {
+        super();
         for (String propName : properties.getKeys()) {
             switch (propName) {
                 case GLTFParserContext.KEY_BASE_COLOR_FACTOR:

@@ -1,7 +1,9 @@
 package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
+@TypeScriptImports(imports = "./GLTFParserContext,../../avlist/AVListImpl")
 public class GLTFScene extends GLTFArray {
 
     private int[] nodeIndices;
@@ -9,6 +11,7 @@ public class GLTFScene extends GLTFArray {
     private String name;
 
     public GLTFScene(AVListImpl properties) {
+        super();
         for (String propName : properties.getKeys()) {
             switch (propName) {
                 case GLTFParserContext.KEY_NODES:

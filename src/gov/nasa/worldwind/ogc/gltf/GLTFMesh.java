@@ -2,7 +2,9 @@ package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.geom.Vec4;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
+@TypeScriptImports(imports = "./GLTFAccessor,./GLTFRoot,./GLTFArray,./GLTFPrimitive,../../geom/Vec4,./GLTFMaterial,./GLTFParserContext,../../avlist/AVListImpl")
 public class GLTFMesh extends GLTFArray {
 
     private GLTFPrimitive[] primitives;
@@ -13,6 +15,7 @@ public class GLTFMesh extends GLTFArray {
     private GLTFMaterial material;
 
     public GLTFMesh(AVListImpl properties) {
+        super();
         for (String propName : properties.getKeys()) {
             switch (propName) {
                 case GLTFParserContext.KEY_PRIMITIVES:
@@ -34,9 +37,9 @@ public class GLTFMesh extends GLTFArray {
 
     public void assembleGeometry(GLTFRoot root) {
         for (GLTFPrimitive primitive : this.primitives) {
-            int materialIdx=primitive.getMaterialIdx();
-            this.material=root.getMaterialForIdx(materialIdx);
-            
+            int materialIdx = primitive.getMaterialIdx();
+            this.material = root.getMaterialForIdx(materialIdx);
+
             int vertexAccessorIdx = primitive.getVertexAccessorIdx();
             GLTFAccessor accessor = root.getAccessorForIdx(vertexAccessorIdx);
             this.vertexBuffer = accessor.getCoordBuffer(root);
@@ -65,7 +68,7 @@ public class GLTFMesh extends GLTFArray {
     public int[] getBufferIndices() {
         return this.bufferIndices;
     }
-    
+
     public GLTFMaterial getMaterial() {
         return this.material;
     }

@@ -6,7 +6,7 @@ import gov.nasa.worldwind.formats.json.*;
 import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 import org.codehaus.jackson.JsonParser;
 
-@TypeScriptImports(imports = "../json/JsonParser,../json/BasicJSONEventParserContext,./GLTFScene,./GLTFScenes")
+@TypeScriptImports(imports = "../json/JsonParser,../json/BasicJSONEventParserContext,./GLTFRoot")
 
 public class GLTFParserContext extends BasicJSONEventParserContext {
 
@@ -60,6 +60,8 @@ public class GLTFParserContext extends BasicJSONEventParserContext {
     public static final String KEY_TRANSLATION = "translation";
     public static final String KEY_ROUGHNESS_FACTOR = "roughnessFactor";
     public static final String KEY_COPYRIGHT = "copyright";
+    public static final String KEY_SCALAR = "SCALAR";
+    public static final String KEY_VEC3 = "VEC3";
 
     private GLTFRoot gltfRoot;
 

@@ -2,21 +2,24 @@ package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.geom.Matrix;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
+@TypeScriptImports(imports = "./GLTFArray,./GLTFRoot,./GLTFParserContext,../../geom/Matrix,./GLTFMesh,./GLTFUtil,../../avlist/AVListImpl")
 public class GLTFNode extends GLTFArray {
-    
+
     private int meshIdx;
     private GLTFMesh mesh;
     private Matrix matrix;
-    private int childIndices[];
+    private int[] childIndices;
     private GLTFNode[] children;
     private int cameraIdx;
     private double[] rotation;
     private double[] scale;
     private double[] translation;
     private String name;
-    
+
     public GLTFNode(AVListImpl properties) {
+        super();
         this.meshIdx = -1;
         for (String propName : properties.getKeys()) {
             switch (propName) {
@@ -52,10 +55,10 @@ public class GLTFNode extends GLTFArray {
             }
         }
     }
-    
+
     public void assembleGeometry(GLTFRoot root) {
         if (this.meshIdx >= 0) {
-            this.mesh = root.getMeshForIdx(meshIdx);
+            this.mesh = root.getMeshForIdx(this.meshIdx);
             this.mesh.assembleGeometry(root);
         }
         if (this.childIndices != null) {
@@ -67,21 +70,21 @@ public class GLTFNode extends GLTFArray {
             }
         }
     }
-    
+
     public GLTFNode[] getChildren() {
         return this.children;
     }
-    
+
     public GLTFMesh getMesh() {
         return this.mesh;
     }
-    
+
     public boolean hasMatrix() {
         return this.matrix != null;
     }
-    
+
     public Matrix getMatrix() {
         return this.matrix;
     }
-    
+
 }

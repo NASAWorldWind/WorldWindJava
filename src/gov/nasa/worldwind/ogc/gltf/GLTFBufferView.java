@@ -1,42 +1,48 @@
 package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.avlist.AVListImpl;
+import gov.nasa.worldwind.util.typescript.TypeScript;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
-public class GLTFBufferView  extends GLTFArray  {
+@TypeScriptImports(imports = "./GLTFRoot,./GLTFArray,./GLTFParserContext,./GLTFUtil,./GLTFBuffer,../../avlist/AVListImpl")
+
+public class GLTFBufferView extends GLTFArray {
+
     private int buffer;
     private int byteOffset;
     private int byteLength;
     private int target;
     private int byteStride;
-    
+
     public GLTFBufferView(AVListImpl properties) {
+        super();
         for (String propName : properties.getKeys()) {
             switch (propName) {
                 case GLTFParserContext.KEY_BUFFER:
-                    this.buffer=GLTFUtil.getInt(properties.getValue(propName));
+                    this.buffer = GLTFUtil.getInt(properties.getValue(propName));
                     break;
                 case GLTFParserContext.KEY_BYTE_OFFSET:
-                    this.byteOffset=GLTFUtil.getInt(properties.getValue(propName));
+                    this.byteOffset = GLTFUtil.getInt(properties.getValue(propName));
                     break;
                 case GLTFParserContext.KEY_BYTE_LENGTH:
-                    this.byteLength=GLTFUtil.getInt(properties.getValue(propName));
+                    this.byteLength = GLTFUtil.getInt(properties.getValue(propName));
                     break;
                 case GLTFParserContext.KEY_TARGET:
-                    this.target=GLTFUtil.getInt(properties.getValue(propName));
+                    this.target = GLTFUtil.getInt(properties.getValue(propName));
                     break;
                 case GLTFParserContext.KEY_BYTE_STRIDE:
-                    this.byteStride=GLTFUtil.getInt(properties.getValue(propName));
+                    this.byteStride = GLTFUtil.getInt(properties.getValue(propName));
                     break;
                 default:
-                    System.out.println("GLTFBufferView: Unsupported "+propName);
+                    System.out.println("GLTFBufferView: Unsupported " + propName);
                     break;
             }
         }
     }
-    
-    public byte[] getViewData(GLTFRoot root,int accessorOffset) {
-        GLTFBuffer buffer=root.getBufferForIdx(this.buffer);
-        return buffer.getBytes(this.byteOffset+accessorOffset,this.byteLength);
+
+     public byte[] getViewData(GLTFRoot root, int accessorOffset) {
+        GLTFBuffer buffer = root.getBufferForIdx(this.buffer);
+        return buffer.getBytes(this.byteOffset + accessorOffset, this.byteLength);
     }
-   
+
 }

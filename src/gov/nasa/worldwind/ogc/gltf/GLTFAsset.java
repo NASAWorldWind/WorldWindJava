@@ -4,19 +4,18 @@ import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.formats.json.BasicJSONEventParser;
 import gov.nasa.worldwind.formats.json.JSONEvent;
 import gov.nasa.worldwind.formats.json.JSONEventParserContext;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 import java.io.IOException;
 
+@TypeScriptImports(imports = "../json/JSONEvent,../json/JSONEventParserContext,../json/BasicJSONEventParser,./GLTFParserContext,../../avlist/AVListImpl")
 public class GLTFAsset extends BasicJSONEventParser {
 
     private String version;
     private String generator;
     private String copyright;
 
-    public GLTFAsset() {
-
-    }
-
     public GLTFAsset(AVListImpl properties) {
+        super();
         for (String propName : properties.getKeys()) {
             switch (propName) {
                 case GLTFParserContext.KEY_VERSION:

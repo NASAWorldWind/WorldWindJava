@@ -5,7 +5,7 @@ import java.io.IOException;
 import gov.nasa.worldwind.formats.json.*;
 import gov.nasa.worldwind.util.typescript.*;
 import org.codehaus.jackson.JsonParser;
-@TypeScriptImports(imports = "../json/JSONDoc,../json/JsonParser,../json/JSONEventParserContext,./GLTFParserContext")
+@TypeScriptImports(imports = "../json/JSONDoc,../json/JsonParser,../json/JSONEventParserContext,./GLTFParserContext,./GLTFRoot")
 
 public class GLTFDoc extends JSONDoc {
     @TypeScript(skipMethod=true)
