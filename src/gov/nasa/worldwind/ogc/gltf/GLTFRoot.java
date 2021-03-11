@@ -27,7 +27,7 @@ import gov.nasa.worldwind.render.ShapeAttributes;
 import gov.nasa.worldwind.util.typescript.*;
 import java.util.ArrayList;
 
-@TypeScriptImports(imports = "[AVKey]../../WorldWind,../../WorldWind,./GLTFAsset,./GLTFBufferView,./GLTFBuffer,../../render/DrawContext,../json/JSONEvent,../json/JSONEventParserContext,../../util/Logger,../../geom/BoundingBox,./GLTFScene,./GLTFDoc,./GLTFParserContext,./GLTFAbstractObject,./impl/GLTFRenderable,../../render/Highlightable,../json/JSONDoc,./impl/GLTFTraversalContext,./GLTFNode,./GLTFAccessor,./GLTFMesh,./GLTFMaterial,./GLTFCamera,../../shapes/ShapeAttributes,../../geom/Angle,../../geom/Vec4,../../geom/Matrix,../../geom/Position,./impl/GLTFRenderer,../../avlist/AVListImpl")
+@TypeScriptImports(imports = "[AVKey]../../WorldWind,../../WorldWind,./GLTFAsset,./GLTFBufferView,./GLTFBuffer,../../render/DrawContext,../json/JSONEvent,../json/JSONEventParserContext,../../util/Logger,../../geom/BoundingBox,./GLTFScene,./GLTFDoc,./GLTFParserContext,./GLTFAbstractObject,./impl/GLTFRenderable,../../render/Highlightable,../json/JSONDoc,./impl/GLTFTraversalContext,./GLTFNode,./GLTFAccessor,./GLTFMesh,./GLTFMaterial,./GLTFCamera,../../shapes/ShapeAttributes,../../geom/Angle,../../geom/Vec4,../../geom/Matrix,../../geom/Position,./impl/GLTFRenderer,../../avlist/AVListImpl,./GLTFUtil")
 
 public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, Highlightable { //, Animatable {
 
@@ -134,15 +134,26 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
         this.initialize();
     }
 
-    public GLTFRoot(String jsonString) throws IOException {
+    public GLTFRoot(Object source) throws Exception {
         super();
-        if (jsonString == null) {
+        if (source == null) {
             String message = Logging.getMessage("nullValue.DocumentSourceIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
 
-        this.gltfDoc = new GLTFDoc(jsonString);
+        if (source instanceof GLTFGlbSource) {
+            GLTFGlbSource glbSource = (GLTFGlbSource) source;
+            glbSource.load();
+            this.gltfDoc = new GLTFDoc(new ByteArrayInputStream(glbSource.getJson().getBytes()));
+            ArrayList<GLTFBuffer> glbBuffers = glbSource.getBuffers();
+            this.buffers = new GLTFBuffer[glbBuffers.size()];
+            for (int i = 0; i < glbBuffers.size(); i++) {
+                this.buffers[i] = glbBuffers.get(i);
+            }
+        } else {
+            this.gltfDoc = new GLTFDoc(source.toString());
+        }
 
         this.initialize();
 
@@ -336,86 +347,84 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     public GLTFRoot parse() throws IOException {
         GLTFParserContext ctx = (GLTFParserContext) this.parserContext;
 
-        try {
-            for (JSONEvent event = ctx.nextEvent(); ctx.hasNext(); event = ctx.nextEvent()) {
-                if (event == null) {
-                    continue;
-                }
+        for (JSONEvent event = ctx.nextEvent(); ctx.hasNext(); event = ctx.nextEvent()) {
+            if (event == null) {
+                continue;
+            }
 
-                if (event.isStartObject()) {
-                    AVListImpl parsedObject = (AVListImpl) super.parse(ctx, event);
-                    Object[] values = new Object[0];
-                    for (String propName : parsedObject.getKeys()) {
-                        Object value = parsedObject.getValue(propName);
-                        if (value instanceof Object[]) {
-                            values = (Object[]) value;
-                        }
-                        switch (propName) {
-                            case GLTFParserContext.KEY_NODES:
-                                this.nodes = new GLTFNode[values.length];
-                                for (int i = 0; i < values.length; i++) {
-                                    this.nodes[i] = new GLTFNode((AVListImpl) values[i]);
-                                }
-                                break;
-                            case GLTFParserContext.KEY_ACCESSORS:
-                                this.accessors = new GLTFAccessor[values.length];
-                                for (int i = 0; i < values.length; i++) {
-                                    this.accessors[i] = new GLTFAccessor((AVListImpl) values[i]);
-                                }
-                                break;
-                            case GLTFParserContext.KEY_BUFFERS:
+            if (event.isStartObject()) {
+                AVListImpl parsedObject = (AVListImpl) super.parse(ctx, event);
+                Object[] values = new Object[0];
+                for (String propName : parsedObject.getKeys()) {
+                    Object value = parsedObject.getValue(propName);
+                    if (value instanceof Object[]) {
+                        values = (Object[]) value;
+                    }
+                    switch (propName) {
+                        case GLTFParserContext.KEY_NODES:
+                            this.nodes = new GLTFNode[values.length];
+                            for (int i = 0; i < values.length; i++) {
+                                this.nodes[i] = new GLTFNode((AVListImpl) values[i]);
+                            }
+                            break;
+                        case GLTFParserContext.KEY_ACCESSORS:
+                            this.accessors = new GLTFAccessor[values.length];
+                            for (int i = 0; i < values.length; i++) {
+                                this.accessors[i] = new GLTFAccessor((AVListImpl) values[i]);
+                            }
+                            break;
+                        case GLTFParserContext.KEY_BUFFERS:
+                            if (this.buffers == null) {
                                 this.buffers = new GLTFBuffer[values.length];
                                 for (int i = 0; i < values.length; i++) {
                                     this.buffers[i] = new GLTFBuffer((AVListImpl) values[i]);
                                 }
-                                break;
-                            case GLTFParserContext.KEY_SCENES:
-                                this.scenes = new GLTFScene[values.length];
-                                for (int i = 0; i < values.length; i++) {
-                                    this.scenes[i] = new GLTFScene((AVListImpl) values[i]);
-                                }
-                                break;
-                            case GLTFParserContext.KEY_BUFFER_VIEWS:
-                                this.bufferViews = new GLTFBufferView[values.length];
-                                for (int i = 0; i < values.length; i++) {
-                                    this.bufferViews[i] = new GLTFBufferView((AVListImpl) values[i]);
-                                }
-                                break;
-                            case GLTFParserContext.KEY_ASSET:
-                                this.asset = new GLTFAsset((AVListImpl) value);
-                                break;
-                            case GLTFParserContext.KEY_MESHES:
-                                this.meshes = new GLTFMesh[values.length];
-                                for (int i = 0; i < values.length; i++) {
-                                    this.meshes[i] = new GLTFMesh((AVListImpl) values[i]);
-                                }
-                                break;
-                            case GLTFParserContext.KEY_SCENE:
-                                this.sceneIdx = GLTFUtil.getInt(value);
-                                break;
-                            case GLTFParserContext.KEY_MATERIALS:
-                                this.materials = new GLTFMaterial[values.length];
-                                for (int i = 0; i < values.length; i++) {
-                                    this.materials[i] = new GLTFMaterial((AVListImpl) values[i]);
-                                }
-                                break;
-                            case GLTFParserContext.KEY_CAMERAS:
-                                this.cameras = new GLTFCamera[values.length];
-                                for (int i = 0; i < values.length; i++) {
-                                    this.cameras[i] = new GLTFCamera((AVListImpl) values[i]);
-                                }
-                                break;
-                            default:
-                                System.out.println("GLTFRoot: Unsupported " + propName);
-                                break;
-                        }
+                            }
+                            break;
+                        case GLTFParserContext.KEY_SCENES:
+                            this.scenes = new GLTFScene[values.length];
+                            for (int i = 0; i < values.length; i++) {
+                                this.scenes[i] = new GLTFScene((AVListImpl) values[i]);
+                            }
+                            break;
+                        case GLTFParserContext.KEY_BUFFER_VIEWS:
+                            this.bufferViews = new GLTFBufferView[values.length];
+                            for (int i = 0; i < values.length; i++) {
+                                this.bufferViews[i] = new GLTFBufferView((AVListImpl) values[i]);
+                            }
+                            break;
+                        case GLTFParserContext.KEY_ASSET:
+                            this.asset = new GLTFAsset((AVListImpl) value);
+                            break;
+                        case GLTFParserContext.KEY_MESHES:
+                            this.meshes = new GLTFMesh[values.length];
+                            for (int i = 0; i < values.length; i++) {
+                                this.meshes[i] = new GLTFMesh((AVListImpl) values[i]);
+                            }
+                            break;
+                        case GLTFParserContext.KEY_SCENE:
+                            this.sceneIdx = GLTFUtil.getInt(value);
+                            break;
+                        case GLTFParserContext.KEY_MATERIALS:
+                            this.materials = new GLTFMaterial[values.length];
+                            for (int i = 0; i < values.length; i++) {
+                                this.materials[i] = new GLTFMaterial((AVListImpl) values[i]);
+                            }
+                            break;
+                        case GLTFParserContext.KEY_CAMERAS:
+                            this.cameras = new GLTFCamera[values.length];
+                            for (int i = 0; i < values.length; i++) {
+                                this.cameras[i] = new GLTFCamera((AVListImpl) values[i]);
+                            }
+                            break;
+                        default:
+                            System.out.println("GLTFRoot: Unsupported " + propName);
+                            break;
                     }
-                    this.assembleGeometry();
-                    return this;
                 }
+                this.assembleGeometry();
+                return this;
             }
-        } finally {
-            // this.closeEventStream();
         }
         return null;
     }
@@ -449,16 +458,21 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      * readable.
      * @throws IOException if an error occurs while reading the source.
      */
-    public static GLTFRoot createAndParse(Object docSource) throws IOException { // XMLStreamException {
+    @TypeScript(substitute = "if (docSource instanceof String)| |<string> docSource|docSource.toString()")
+    public static GLTFRoot createAndParse(Object docSource) throws Exception { // XMLStreamException {
         // GLTFRoot gltfRoot = GLTFRoot.create(docSource);
         GLTFRoot gltfRoot = null;
         if (docSource instanceof String) {
-            gltfRoot = new GLTFRoot((String) docSource);
+            String strDocSource = (String) docSource;
+            if (strDocSource.toLowerCase().endsWith(".glb")) {
+                gltfRoot = new GLTFRoot(new GLTFGlbSource(strDocSource));
+            } else {
+                gltfRoot = new GLTFRoot((String) docSource);
+            }
         }
 
         if (gltfRoot == null) {
-            String message = Logging.getMessage("generic.UnrecognizedSourceTypeOrUnavailableSource",
-                    docSource.toString());
+            String message = Logging.getMessage("generic.UnrecognizedSourceTypeOrUnavailableSource", docSource.toString());
             throw new IllegalArgumentException(message);
         }
 
@@ -553,6 +567,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      *
      * @return Transform matrix.
      */
+    @TypeScript(substitute = "fromScale(this.modelScale|fromScaleVec4(this.modelScale")
     public Matrix getMatrix() {
         // If the matrix has already been computed then just return the cached value.
         if (this.matrix != null) {

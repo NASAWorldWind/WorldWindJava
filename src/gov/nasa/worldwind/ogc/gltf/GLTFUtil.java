@@ -2,8 +2,10 @@ package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.render.Material;
 import gov.nasa.worldwind.render.ShapeAttributes;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 import java.awt.Color;
 
+@TypeScriptImports(imports = "./GLTFMaterial,./GLTFPBRMetallicRoughness,../../shapes/ShapeAttributes,../../util/Color")
 public class GLTFUtil {
 
     public static int getInt(Object value) {

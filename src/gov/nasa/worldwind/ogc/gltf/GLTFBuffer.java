@@ -5,6 +5,7 @@ import java.util.*;
 import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.util.typescript.TypeScript;
 import gov.nasa.worldwind.util.typescript.TypeScriptImports;
+
 @TypeScriptImports(imports = "./GLTFArray,./GLTFParserContext,./GLTFUtil,../../util/java/StringTokenizer,../../util/java/Base64,../../avlist/AVListImpl")
 
 public class GLTFBuffer extends GLTFArray {
@@ -15,6 +16,9 @@ public class GLTFBuffer extends GLTFArray {
 
     public GLTFBuffer(AVListImpl properties) {
         super();
+        if (properties == null) {
+            return;
+        }
         for (String propName : properties.getKeys()) {
             switch (propName) {
                 case GLTFParserContext.KEY_URI:
@@ -22,14 +26,14 @@ public class GLTFBuffer extends GLTFArray {
                     if (this.uri.startsWith("data:")) {
                         this.unpackData();
                     } else {
-                        System.out.println("Unsupported URI: "+this.uri);
+                        System.out.println("Unsupported URI: " + this.uri);
                     }
                     break;
                 case GLTFParserContext.KEY_BYTE_LENGTH:
                     this.byteLength = GLTFUtil.getInt(properties.getValue(propName));
                     break;
                 default:
-                    System.out.println("GLTFBuffer: Unsupported "+propName);
+                    System.out.println("GLTFBuffer: Unsupported " + propName);
                     break;
             }
         }
@@ -49,7 +53,7 @@ public class GLTFBuffer extends GLTFArray {
                 this.byteData = Base64.getDecoder().decode(data);
                 break;
             default:
-                System.out.println("GLTFBuffer: Unsupported encoding "+encoding);
+                System.out.println("GLTFBuffer: Unsupported encoding " + encoding);
                 break;
         }
     }
@@ -57,6 +61,13 @@ public class GLTFBuffer extends GLTFArray {
     @TypeScript(substitute = "Arrays.copyOfRange(this.byteData, offset, offset + length)|this.byteData.slice(offset, offset + length)")
     public byte[] getBytes(int offset, int length) {
         return Arrays.copyOfRange(this.byteData, offset, offset + length);
+    }
+
+    public static GLTFBuffer fromBytes(byte[] data) {
+        GLTFBuffer ret = new GLTFBuffer(null);
+        ret.byteLength = data.length;
+        ret.byteData = data;
+        return ret;
     }
 
 }

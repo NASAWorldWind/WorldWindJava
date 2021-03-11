@@ -3,7 +3,7 @@ package gov.nasa.worldwind.ogc.gltf;
 import gov.nasa.worldwind.avlist.AVListImpl;
 import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
-@TypeScriptImports(imports = "./GLTFParserContext,../../avlist/AVListImpl")
+@TypeScriptImports(imports = "./GLTFRoot,./GLTFUtil,./GLTFNode,./GLTFParserContext,../../avlist/AVListImpl,./GLTFArray")
 public class GLTFScene extends GLTFArray {
 
     private int[] nodeIndices;
@@ -34,10 +34,10 @@ public class GLTFScene extends GLTFArray {
 
     public GLTFNode[] setSceneNodes(GLTFRoot root) {
         GLTFNode[] allNodes = root.getNodes();
-        this.nodes = new GLTFNode[nodeIndices.length];
+        this.nodes = new GLTFNode[this.nodeIndices.length];
         for (int i = 0; i < this.nodeIndices.length; i++) {
-            nodes[i] = allNodes[this.nodeIndices[i]];
+            this.nodes[i] = allNodes[this.nodeIndices[i]];
         }
-        return nodes;
+        return this.nodes;
     }
 }

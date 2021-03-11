@@ -95,13 +95,6 @@ public class ApplicationTemplate {
         }
 
         protected void initialize(boolean includeStatusBar, boolean includeLayerPanel, boolean includeStatsPanel) {
-            try {
-                JSONDoc doc = new JSONDoc("/home/mpeterson/d/nasa/WebWorldWindTS/examples/test.json");
-                doc.parse();
-                System.out.println(doc.getRootObject());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
             // Create the WorldWindow.
             this.wwjPanel = this.createAppPanel(this.canvasSize, includeStatusBar);
             this.wwjPanel.setPreferredSize(canvasSize);

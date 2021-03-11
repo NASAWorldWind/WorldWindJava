@@ -14,7 +14,9 @@ import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.geom.Vec4;
 import gov.nasa.worldwind.render.BasicShapeAttributes;
 import gov.nasa.worldwind.render.ShapeAttributes;
+import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
+@TypeScriptImports(imports = "../../../geom/Matrix,../../../util/java/Buffers,../../../util/FloatBuffer,../../../geom/Vec4,../../../render/DrawContext,../GLTFUtil,./GLTFRenderer,./GLTFMeshGeometry,../GLTFMesh,../../../render/meshes/Mesh3D,../../../WorldWind,../../../shapes/ShapeAttributes")
 public class GLTFRenderableMesh extends Mesh3D {
 
 
@@ -67,12 +69,12 @@ public class GLTFRenderableMesh extends Mesh3D {
      * {@inheritDoc}
      */
     @Override
-    public void render(DrawContext dc, Matrix transform) {
+    public void renderOriented(DrawContext dc, Matrix transform) {
         if (this.renderableGeometries == null) {
             this.assembleRenderableGeometries(dc);
         }
 
-        super.render(dc, transform);
+        super.renderOriented(dc, transform);
     }
 
     @Override

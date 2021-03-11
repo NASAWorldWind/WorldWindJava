@@ -122,7 +122,7 @@ public class Mesh3D extends AbstractGeneralShape {
         }
 
         public void render(DrawContext dc) {
-            this.orderedMesh.render(dc, this.renderMatrix);
+            this.orderedMesh.renderOriented(dc, this.renderMatrix);
         }
     }
 
@@ -329,7 +329,7 @@ public class Mesh3D extends AbstractGeneralShape {
      */
     @Override
     public void render(DrawContext dc) {
-        this.render(dc, null);
+        this.renderOriented(dc, null);
     }
 
     /**
@@ -339,7 +339,7 @@ public class Mesh3D extends AbstractGeneralShape {
      * @param matrix Matrix to be multiply with the current modelview matrix to
      * orient the mesh.
      */
-    public void render(DrawContext dc, Matrix matrix) {
+    public void renderOriented(DrawContext dc, Matrix matrix) {
         this.currentData = (AbstractShapeData) this.shapeDataCache.getEntry(dc.getGlobe());
         if (this.currentData == null) {
             this.currentData = this.createCacheEntry(dc);
@@ -738,7 +738,7 @@ public class Mesh3D extends AbstractGeneralShape {
         this.pickSupport.clearPickList();
         try {
             this.pickSupport.beginPicking(dc);
-            this.render(dc, matrix);
+            this.renderOriented(dc, matrix);
         } finally {
             this.pickSupport.endPicking(dc);
             this.pickSupport.resolvePick(dc, pickPoint, this.pickLayer);

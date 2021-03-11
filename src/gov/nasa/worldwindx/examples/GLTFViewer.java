@@ -46,7 +46,7 @@ public class GLTFViewer extends ApplicationTemplate {
         protected void addGLTFLayer(GLTFRoot gltfRoot) {
             // Create a GLTFController to adapt the GLTFRoot to the WorldWind renderable interface.
             GLTFController gltfController = new GLTFController(gltfRoot);
-            BasicShapeAttributes attrs=new BasicShapeAttributes();
+            BasicShapeAttributes attrs = new BasicShapeAttributes();
             attrs.setEnableLighting(true);
             gltfController.setAttributes(attrs);
             // Adds a new layer containing the GLTFRoot to the end of the WorldWindow's layer list.
@@ -88,6 +88,7 @@ public class GLTFViewer extends ApplicationTemplate {
          *                      java.net.URL}, or an {@link java.io.InputStream}, or a {@link String}
          * identifying a file path or URL.
          * @param position the geographic position of the COLLADA model.
+         * @param modelScale
          * @param appFrame the <code>AppFrame</code> in which to display the
          * COLLADA source.
          */
@@ -104,6 +105,7 @@ public class GLTFViewer extends ApplicationTemplate {
          * the new <code>GLTFRoot</code> to this worker thread's
          * <code>AppFrame</code>.
          */
+        @Override
         public void run() {
             try {
                 final GLTFRoot gltfRoot = GLTFRoot.createAndParse(this.gltfSource);
@@ -113,10 +115,8 @@ public class GLTFViewer extends ApplicationTemplate {
 //                gltfRoot.setRoll(Angle.fromDegrees(90));
 
                 // Schedule a task on the EDT to add the parsed document to a layer
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        appFrame.addGLTFLayer(gltfRoot);
-                    }
+                SwingUtilities.invokeLater(() -> {
+                    appFrame.addGLTFLayer(gltfRoot);
                 });
             } catch (Exception e) {
                 e.printStackTrace();
@@ -136,9 +136,13 @@ public class GLTFViewer extends ApplicationTemplate {
 //                Position.fromDegrees(40.009993372683, -105.272774533734, 300), 3000, af).start();
 //        new WorkerThread("testData/gltf/Box/glTF-Embedded/Box.gltf",
 //                Position.fromDegrees(40.009993372683, -105.272774533734, 300), 600, af).start();
-        new WorkerThread("testData/gltf/2CylinderEngine/glTF-Embedded/2CylinderEngine.gltf",
+//        new WorkerThread("testData/gltf/Box/glTF-Binary/Box.glb",
+//                Position.fromDegrees(40.009993372683, -105.272774533734, 300), 600, af).start();
+//        new WorkerThread("testData/gltf/2CylinderEngine/glTF-Embedded/2CylinderEngine.gltf",
+//                Position.fromDegrees(40.009993372683, -105.272774533734, 1500), 10, af).start();
+        new WorkerThread("testData/gltf/2CylinderEngine/glTF-Binary/2CylinderEngine.glb",
                 Position.fromDegrees(40.009993372683, -105.272774533734, 1500), 10, af).start();
-        // Miguel work on the use case below.
+       // Miguel work on the use case below.
 //        new WorkerThread("testData/gltf/2CylinderEngine/glTF/2CylinderEngine.gltf",
 //                Position.fromDegrees(40.009993372683, -105.272774533734, 1500), 10, af).start();
 

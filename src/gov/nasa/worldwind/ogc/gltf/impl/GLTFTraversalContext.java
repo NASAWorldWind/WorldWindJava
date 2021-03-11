@@ -8,10 +8,11 @@ package gov.nasa.worldwind.ogc.gltf.impl;
 import gov.nasa.worldwind.geom.Matrix;
 import gov.nasa.worldwind.render.ShapeAttributes;
 import gov.nasa.worldwind.util.Logging;
+import gov.nasa.worldwind.util.typescript.TypeScript;
 import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 import java.util.Stack;
 
-@TypeScriptImports(imports = "../../../util/Logger,../../../geom/Matrix")
+@TypeScriptImports(imports = "../../../shapes/ShapeAttributes,../../../util/Logger,../../../geom/Matrix")
 /**
  * Context to keep track of state while a COLLADA document is traversed. The
  * traversal context keeps track of the transform matrix stack that determines
@@ -37,12 +38,6 @@ public class GLTFTraversalContext {
         this.initialize();
     }
 
-    /** Clone the matrix at the top of the matrix stack and push the clone onto the stack. */
-    public void pushMatrix()
-    {
-        this.matrixStack.push(this.peekMatrix());
-    }
-
     /**
      * Push a matrix onto the stack.
      *
@@ -51,12 +46,15 @@ public class GLTFTraversalContext {
      */
     public void pushMatrix(Matrix m) {
         if (m == null) {
-            String msg = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(msg);
-            throw new IllegalArgumentException(msg);
-        }
+            /**
+             * Clone the matrix at the top of the matrix stack and push the
+             * clone onto the stack.
+             */
+            this.matrixStack.push(this.peekMatrix());
 
-        this.matrixStack.push(m);
+        } else {
+            this.matrixStack.push(m);
+        }
     }
 
     /**
@@ -67,7 +65,8 @@ public class GLTFTraversalContext {
     public Matrix popMatrix() {
         return this.matrixStack.pop();
     }
-    
+
+    @TypeScript(substitute = "this.matrixStack.peek()|this.matrixStack[this.matrixStack.length-1]")
     public Matrix peekMatrix() {
         return this.matrixStack.peek();
     }

@@ -57,6 +57,7 @@ public class GLTFAccessor extends GLTFArray {
         }
     }
 
+    @TypeScript(substitute="viewBuffer.put(|viewBuffer.putUint8(")
     private ByteBuffer retrieveByteBuffer(GLTFRoot root) {
         GLTFBufferView view = root.getBufferViewForIdx(this.bufferView);
         byte[] srcBuffer = view.getViewData(root, this.byteOffset);

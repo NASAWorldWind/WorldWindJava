@@ -9,7 +9,7 @@ import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.render.ShapeAttributes;
 import gov.nasa.worldwind.util.typescript.TypeScriptImports;
 
-@TypeScriptImports(imports = "../GLTFRoot,../GLTFMesh")
+@TypeScriptImports(imports = "./GLTFRenderableMesh,../GLTFRoot,../GLTFMesh")
 public class GLTFRenderer {
 
     private final GLTFRoot root;
@@ -24,7 +24,7 @@ public class GLTFRenderer {
         return this.root.getAttributes();
     }
 
-    protected void preRender(GLTFMesh mesh, GLTFTraversalContext tc, DrawContext dc) {
+    protected void preRenderMesh(GLTFMesh mesh, GLTFTraversalContext tc, DrawContext dc) {
         GLTFRenderableMesh renderableMesh = meshMap.get(mesh);
         if (renderableMesh == null) {
             renderableMesh = new GLTFRenderableMesh(mesh, this);
@@ -33,36 +33,36 @@ public class GLTFRenderer {
         renderableMesh.preRender(dc);
     }
 
-    protected void render(GLTFMesh mesh, GLTFTraversalContext tc, DrawContext dc) {
+    protected void renderMesh(GLTFMesh mesh, GLTFTraversalContext tc, DrawContext dc) {
         GLTFRenderableMesh renderableMesh = meshMap.get(mesh);
         if (renderableMesh == null) {
             renderableMesh = new GLTFRenderableMesh(mesh, this);
         }
         renderableMesh.setModelPosition(root.getPosition());
-        renderableMesh.render(dc, tc.peekMatrix());
+        renderableMesh.renderOriented(dc, tc.peekMatrix());
     }
 
-    protected void preRender(GLTFNode node, GLTFTraversalContext tc, DrawContext dc) {
+    protected void preRenderNode(GLTFNode node, GLTFTraversalContext tc, DrawContext dc) {
         GLTFMesh mesh = node.getMesh();
         if (mesh != null) {
-            this.preRender(mesh, tc, dc);
+            this.preRenderMesh(mesh, tc, dc);
         }
 
     }
 
-    protected void render(GLTFNode node, GLTFTraversalContext tc, DrawContext dc) {
+    protected void renderNode(GLTFNode node, GLTFTraversalContext tc, DrawContext dc) {
         if (node.hasMatrix()) {
-            tc.pushMatrix();
+            tc.pushMatrix(null);
             tc.multiplyMatrix(node.getMatrix());
         }
         GLTFMesh mesh = node.getMesh();
         if (mesh != null) {
-            this.render(mesh, tc, dc);
+            this.renderMesh(mesh, tc, dc);
         }
         GLTFNode[] children = node.getChildren();
         if (children != null) {
             for (GLTFNode child : children) {
-                this.render(child, tc, dc);
+                this.renderNode(child, tc, dc);
             }
         }
         if (node.hasMatrix()) {
@@ -73,14 +73,14 @@ public class GLTFRenderer {
     public void preRender(GLTFScene scene, GLTFTraversalContext tc, DrawContext dc) {
         GLTFNode[] nodes = scene.getNodes();
         for (GLTFNode node : nodes) {
-            this.preRender(node, tc, dc);
+            this.preRenderNode(node, tc, dc);
         }
     }
 
     public void render(GLTFScene scene, GLTFTraversalContext tc, DrawContext dc) {
         GLTFNode[] nodes = scene.getNodes();
         for (GLTFNode node : nodes) {
-            this.render(node, tc, dc);
+            this.renderNode(node, tc, dc);
         }
 
     }

@@ -156,7 +156,7 @@ public class ColladaNode extends ColladaAbstractObject implements ColladaRendera
                 shape.setAltitudeMode(altitudeMode);
                 shape.setHighlighted(highlighted);
 
-                shape.render(dc, traversalMatrix);
+                shape.renderOriented(dc, traversalMatrix);
             }
 
             for (ColladaRenderable node : this.getChildren())
