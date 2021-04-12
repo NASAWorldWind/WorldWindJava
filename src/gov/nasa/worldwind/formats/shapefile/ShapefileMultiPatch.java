@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2014 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.formats.shapefile;
 
@@ -74,6 +96,11 @@ public class ShapefileMultiPatch extends Mesh3D {
             buffer.put(this.vertices);
         }
 
+        @Override
+        public FloatBuffer getVertexBuffer() {
+            return this.vertices;
+        }
+
         /**
          * {@inheritDoc}
          */
@@ -95,6 +122,11 @@ public class ShapefileMultiPatch extends Mesh3D {
                 this.normals.rewind();
                 buffer.put(this.normals);
             }
+        }
+
+        @Override
+        public FloatBuffer getNormalBuffer() {
+            return this.normals;
         }
 
         /**
@@ -214,20 +246,25 @@ public class ShapefileMultiPatch extends Mesh3D {
     protected ShapeAttributes verticalAttrs;
 
     /**
-     * Creates a new ShapefileMultiPatch with the specified shapefile.The normal attributes, the highlight attributes
-     * and the attribute delegate are optional. Specifying a non-null value for normalAttrs or highlightAttrs causes
-     * each ShapefileRenderable.Record to adopt those attributes. Specifying a non-null value for the attribute delegate
-     * enables callbacks during creation of each ShapefileRenderable.Record. See {@link AttributeDelegate} for more
-     * information.
+     * Creates a new ShapefileMultiPatch with the specified shapefile.The normal
+     * attributes, the highlight attributes and the attribute delegate are
+     * optional. Specifying a non-null value for normalAttrs or highlightAttrs
+     * causes each ShapefileRenderable.Record to adopt those attributes.
+     * Specifying a non-null value for the attribute delegate enables callbacks
+     * during creation of each ShapefileRenderable.Record. See
+     * {@link AttributeDelegate} for more information.
      *
      * @param shapefile The shapefile to display.
-     * @param normalAttrs The normal attributes for each ShapefileRenderable.Record. May be null to use the default
+     * @param normalAttrs The normal attributes for each
+     * ShapefileRenderable.Record. May be null to use the default attributes.
+     * @param highlightAttrs The highlight attributes for each
+     * ShapefileRenderable.Record. May be null to use the default highlight
      * attributes.
-     * @param highlightAttrs The highlight attributes for each ShapefileRenderable.Record. May be null to use the
-     * default highlight attributes.
-     * @param attributeDelegate Optional callback for configuring each ShapefileRenderable.Record's shape attributes and
-     * key-value attributes. May be null.
-     * @param aoiFilter Area of Interest filter for shapes. Shapes external to the filter will not be shown.
+     * @param attributeDelegate Optional callback for configuring each
+     * ShapefileRenderable.Record's shape attributes and key-value attributes.
+     * May be null.
+     * @param aoiFilter Area of Interest filter for shapes. Shapes external to
+     * the filter will not be shown.
      *
      * @throws IllegalArgumentException if the shapefile is null.
      */
@@ -476,23 +513,13 @@ public class ShapefileMultiPatch extends Mesh3D {
         }
 
         public Vec4 getNormal() {
-//            if (this.normal != null) {
-//                return this.normal;
-//            }
-
             this.normal = WWMath.computeTriangleNormal(this.faceTriangles.get(0));
             return this.normal;
         }
 
         public boolean isVertical(Vec4 surfaceNormal) {
-//            Vec4 foo1=new Vec4(-0.6988613881271682, 0.6738621652589978, 0.23979687741382838);
-//            Vec4 foo2=new Vec4(0.6348678412667887, 0.43000133921494077, 0.6419047222124207);
-//            System.out.println(foo1.angleBetween3(foo2));
             double normalAngle = Math.abs(this.getNormal().angleBetween3(surfaceNormal).radians);
             double radians90 = Angle.POS90.radians;
-//            System.out.println(surfaceNormal+","+this.getNormal());
-//            System.out.print(normalAngle+" ");
-//            System.out.println((radians90 - VERTICAL_EPSILON) <= normalAngle && normalAngle <= (radians90 + VERTICAL_EPSILON));
             return (radians90 - VERTICAL_EPSILON) <= normalAngle && normalAngle <= (radians90 + VERTICAL_EPSILON);
         }
 
@@ -508,7 +535,6 @@ public class ShapefileMultiPatch extends Mesh3D {
 
         public boolean adjoins(Triangle that) {
             Vec4 thatNormal = WWMath.computeTriangleNormal(that);
-//            System.out.println(thatNormal.angleBetween3(this.getNormal()).radians);
             if (thatNormal.angleBetween3(this.getNormal()).radians > NORMAL_EPSILON) {
                 return false;
             }
@@ -549,9 +575,6 @@ public class ShapefileMultiPatch extends Mesh3D {
         }
 
         public BoundedPlane calculatePlane(Vec4 surfaceNormal) {
-//            if (this.plane != null) {
-//                return plane;
-//            }
             this.plane = new BoundedPlane(this.getVertices(), surfaceNormal, this.getNormal());
             return this.plane;
         }
@@ -571,17 +594,6 @@ public class ShapefileMultiPatch extends Mesh3D {
         }
 
         return faces;
-    }
-
-    private void printFaceMapping(Face face, HashMap<Integer, Vec4> coordMap) {
-        for (FaceTriangle t : face.faceTriangles) {
-            System.out.println("***");
-            for (Vec4 vtx : t.getVertices()) {
-                System.out.print(String.format("% 6.1f,% 6.1f,% 6.1f", vtx.x, vtx.y, vtx.z));
-                Vec4 uv = coordMap.get(face.getVertexHash(vtx));
-                System.out.println("=>" + String.format("% 6.1f,% 6.1f", uv.x, uv.y));
-            }
-        }
     }
 
     private HashMap<Integer, Vec4> computeFaceTexCoords(ArrayList<Face> faces, Vec4 surfaceNormal) {
@@ -607,10 +619,6 @@ public class ShapefileMultiPatch extends Mesh3D {
             } else {
                 return null;
             }
-//            System.out.println("Face");
-//            this.printFaceMapping(face, coordMap);
-//            System.out.println("End Face");
-
         }
 
         if (coordMap.isEmpty()) {
@@ -676,7 +684,6 @@ public class ShapefileMultiPatch extends Mesh3D {
                 }
             }
             faces = combineAdjoiningFaces(faces);
-            // faces = removeTrivialFaces(faces, surfaceNormal);
             if (faces.isEmpty()) {
                 this.patchGeometries.remove(p);
             } else {
@@ -690,26 +697,6 @@ public class ShapefileMultiPatch extends Mesh3D {
                 pg.setFaces(faces);
             }
         }
-//        boolean geometriesMerged = true;
-//        while (geometriesMerged) {
-//            geometriesMerged = false;
-//            for (int i = 0; i < this.patchGeometries.size() && !geometriesMerged; i++) {
-//                PatchGeometry pgi = this.patchGeometries.get(i);
-//                for (int j = i + 1; j < this.patchGeometries.size() && !geometriesMerged; j++) {
-//                    PatchGeometry pgj = this.patchGeometries.get(j);
-//                    geometriesMerged = moveFaces(pgi, pgj);
-//                    if (pgj.faces.isEmpty()) {
-//                        this.patchGeometries.remove(j);
-//                    }
-//                }
-//            }
-//        }
-//        for (PatchGeometry pg : this.patchGeometries) {
-//            if (pg.isDirty()) {
-//                rebuildGeometry(pg);
-//            }
-//
-//        }
     }
 
     private void rebuildGeometry(PatchGeometry pg) {
@@ -734,18 +721,12 @@ public class ShapefileMultiPatch extends Mesh3D {
                 Face faceI = pg1.faces.get(i);
                 for (int j = 0; j < pg2.faces.size() && !facesMoved; j++) {
                     Face faceJ = pg2.faces.get(j);
-//                    System.out.print(faceI.getNormal().angleBetween3(faceJ.getNormal()).radians);
                     if (faceI.adjoins(faceJ)) {
-//                        System.out.println("pass");
                         facesMoved = true;
                         anyMoved = true;
                         faceI.add(faceJ);
                         pg2.faces.remove(j);
                     }
-//                    else {
-//                        System.out.println("fail");
-//
-//                    }
                 }
             }
 
@@ -759,17 +740,6 @@ public class ShapefileMultiPatch extends Mesh3D {
         }
         for (PatchGeometry pg : this.patchGeometries) {
             ArrayList<Face> faces = pg.faces;
-//            for (Face face : faces) {
-//                System.out.println("Face");
-//                BoundedPlane plane = face.calculatePlane(surfaceNormal);
-//                System.out.println("Plane: " + plane);
-//                System.out.println("Triangles");
-//                for (FaceTriangle ft : face.getTriangles()) {
-//                    BoundedPlane triPlane = new BoundedPlane(ft.getVertices(), surfaceNormal, ft.getNormal());
-//                    System.out.println(ft + "Plane: " + triPlane);
-//                }
-//                System.out.println("End face");
-//            }
             HashMap<Integer, Vec4> textureMap = computeFaceTexCoords(faces, surfaceNormal);
             if (textureMap != null) {
                 pg.texCoords = Buffers.newDirectFloatBuffer((pg.vertices.capacity() / this.vertsPerShape) * 2);
@@ -793,9 +763,6 @@ public class ShapefileMultiPatch extends Mesh3D {
                     }
                 }
             }
-//            else {
-//                System.out.println("skipped");
-//            }
         }
 
     }
@@ -811,15 +778,6 @@ public class ShapefileMultiPatch extends Mesh3D {
         return super.doMakeOrderedRenderable(dc);
     }
 
-//    @Override
-//    protected void recordDidChange(ShapefileRenderable.Record record) {
-//        Tile tile = ((ShapefileMultiPatch.Record) record).tile;
-//        if (tile != null) // tile is null when attributes are specified during construction
-//        {
-//            this.invalidateTileAttributeGroups(tile);
-//        }
-//    }
-//
     /**
      * {@inheritDoc}
      */
@@ -845,8 +803,6 @@ public class ShapefileMultiPatch extends Mesh3D {
             return geometry.getTexture();
         }
 
-//        geometry.setTexture(new LazilyLoadedTexture("testData/white-office-building.jpg"));
-        //geometry.setTexture(new LazilyLoadedTexture("testData/uv-test.jpg"));
         geometry.setTexture(ShapefileMultiPatch.buildingTextures[0].getTexture());
 
         return geometry.getTexture();
@@ -919,12 +875,11 @@ public class ShapefileMultiPatch extends Mesh3D {
         ArrayList<Record> records = assembleRecords(shapefile, aoiFilter);
         ArrayList<ShapefileMultiPatch> shapes = new ArrayList<>();
         records.forEach((record) -> {
-//        Record record = records.get(0);
-        ShapefileMultiPatch shape = new ShapefileMultiPatch(record, normalAttrs, highlightAttrs, attributeDelegate, useTextureMaps);
-        Position modelPos = record.getPartPositions(0)[0];
-        shape.setModelPosition(new Position(modelPos.latitude, modelPos.longitude, 0));
-        shape.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-        shapes.add(shape);
+            ShapefileMultiPatch shape = new ShapefileMultiPatch(record, normalAttrs, highlightAttrs, attributeDelegate, useTextureMaps);
+            Position modelPos = record.getPartPositions(0)[0];
+            shape.setModelPosition(new Position(modelPos.latitude, modelPos.longitude, 0));
+            shape.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+            shapes.add(shape);
 
         });
         return shapes;

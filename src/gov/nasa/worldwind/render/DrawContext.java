@@ -136,7 +136,7 @@ public interface DrawContext extends WWObject, Disposable
      * Assigns a new <code>View</code>. Some layers cannot function properly with a null <code>View</code>. It is
      * recommended that the <code>View</code> is never set to null during a normal render pass.
      *
-     * @param view the enw <code>View</code>
+     * @param view the new <code>View</code>
      *
      * @since 1.5
      */

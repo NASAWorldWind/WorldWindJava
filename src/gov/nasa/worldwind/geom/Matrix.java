@@ -103,6 +103,16 @@ public class Matrix
         this.m44 = m44;
         this.isOrthonormalTransform = isOrthonormalTransform;
     }
+    
+    public Matrix(Matrix that) {
+        this(
+            that.m11, that.m12, that.m13, that.m14,
+            that.m21, that.m22, that.m23, that.m24,
+            that.m31, that.m32, that.m33, that.m34,
+            that.m41, that.m42, that.m43, that.m44,
+            that.isOrthonormalTransform);
+
+    }
 
     public final boolean equals(Object obj)
     {
@@ -1144,6 +1154,10 @@ public class Matrix
             0.0, 2.0 / height, 0.0, 0.0,
             0.0, 0.0, -1.0, 0.0,
             0.0, 0.0, 0.0, 1.0);
+    }
+    
+    public static Matrix fromIdentity() {
+        return new Matrix(Matrix.IDENTITY);
     }
 
     /**

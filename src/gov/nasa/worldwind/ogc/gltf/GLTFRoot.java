@@ -1,8 +1,31 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
+
 package gov.nasa.worldwind.ogc.gltf;
 
 import gov.nasa.worldwind.WorldWind;
@@ -27,7 +50,7 @@ import gov.nasa.worldwind.render.ShapeAttributes;
 import gov.nasa.worldwind.util.typescript.*;
 import java.util.ArrayList;
 
-@TypeScriptImports(imports = "[AVKey]../../WorldWind,../../WorldWind,./GLTFAsset,./GLTFBufferView,./GLTFBuffer,../../render/DrawContext,../json/JSONEvent,../json/JSONEventParserContext,../../util/Logger,../../geom/BoundingBox,./GLTFScene,./GLTFDoc,./GLTFParserContext,./GLTFAbstractObject,./impl/GLTFRenderable,../../render/Highlightable,../json/JSONDoc,./impl/GLTFTraversalContext,./GLTFNode,./GLTFAccessor,./GLTFMesh,./GLTFMaterial,./GLTFCamera,../../shapes/ShapeAttributes,../../geom/Angle,../../geom/Vec4,../../geom/Matrix,../../geom/Position,./impl/GLTFRenderer,../../avlist/AVListImpl,./GLTFUtil")
+@TypeScriptImports(imports = "./GLTFGlbSource,[AVKey]../../WorldWind,../../WorldWind,./GLTFAsset,./GLTFBufferView,./GLTFBuffer,../../render/DrawContext,../json/JSONEvent,../json/JSONEventParserContext,../../util/Logger,../../geom/BoundingBox,./GLTFScene,./GLTFDoc,./GLTFParserContext,./GLTFAbstractObject,./impl/GLTFRenderable,../../render/Highlightable,../json/JSONDoc,./impl/GLTFTraversalContext,./GLTFNode,./GLTFAccessor,./GLTFMesh,./GLTFMaterial,./GLTFCamera,../../shapes/ShapeAttributes,../../geom/Angle,../../geom/Vec4,../../geom/Matrix,../../geom/Position,./impl/GLTFRenderer,../../avlist/AVListImpl,./GLTFUtil")
 
 public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, Highlightable { //, Animatable {
 
@@ -60,7 +83,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     protected GLTFNode[] nodes;
 
     protected GLTFAccessor[] accessors;
-    protected GLTFBuffer[] buffers;
+    protected ArrayList<GLTFBuffer> buffers;
     protected GLTFScene[] scenes;
     protected GLTFBufferView[] bufferViews;
     protected GLTFAsset asset;
@@ -144,13 +167,8 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
 
         if (source instanceof GLTFGlbSource) {
             GLTFGlbSource glbSource = (GLTFGlbSource) source;
-            glbSource.load();
-            this.gltfDoc = new GLTFDoc(new ByteArrayInputStream(glbSource.getJson().getBytes()));
-            ArrayList<GLTFBuffer> glbBuffers = glbSource.getBuffers();
-            this.buffers = new GLTFBuffer[glbBuffers.size()];
-            for (int i = 0; i < glbBuffers.size(); i++) {
-                this.buffers[i] = glbBuffers.get(i);
-            }
+            this.gltfDoc = glbSource.load();
+            this.buffers = glbSource.getBuffers();
         } else {
             this.gltfDoc = new GLTFDoc(source.toString());
         }
@@ -245,6 +263,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      * @param altitudeMode the altitude mode. The default value is
      * {@link WorldWind#ABSOLUTE}.
      */
+    @TypeScript(substitute = "int altitudeMode|AVKey altitudeMode")
     public void setAltitudeMode(int altitudeMode) {
         this.altitudeMode = altitudeMode;
     }
@@ -364,42 +383,42 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
                         case GLTFParserContext.KEY_NODES:
                             this.nodes = new GLTFNode[values.length];
                             for (int i = 0; i < values.length; i++) {
-                                this.nodes[i] = new GLTFNode((AVListImpl) values[i]);
+                                this.nodes[i] = new GLTFNode(GLTFUtil.asAVList(values[i]));
                             }
                             break;
                         case GLTFParserContext.KEY_ACCESSORS:
                             this.accessors = new GLTFAccessor[values.length];
                             for (int i = 0; i < values.length; i++) {
-                                this.accessors[i] = new GLTFAccessor((AVListImpl) values[i]);
+                                this.accessors[i] = new GLTFAccessor(GLTFUtil.asAVList(values[i]));
                             }
                             break;
                         case GLTFParserContext.KEY_BUFFERS:
                             if (this.buffers == null) {
-                                this.buffers = new GLTFBuffer[values.length];
+                                this.buffers = new ArrayList<>();
                                 for (int i = 0; i < values.length; i++) {
-                                    this.buffers[i] = new GLTFBuffer((AVListImpl) values[i]);
+                                    this.buffers.add(new GLTFBuffer(GLTFUtil.asAVList(values[i])));
                                 }
                             }
                             break;
                         case GLTFParserContext.KEY_SCENES:
                             this.scenes = new GLTFScene[values.length];
                             for (int i = 0; i < values.length; i++) {
-                                this.scenes[i] = new GLTFScene((AVListImpl) values[i]);
+                                this.scenes[i] = new GLTFScene(GLTFUtil.asAVList(values[i]));
                             }
                             break;
                         case GLTFParserContext.KEY_BUFFER_VIEWS:
                             this.bufferViews = new GLTFBufferView[values.length];
                             for (int i = 0; i < values.length; i++) {
-                                this.bufferViews[i] = new GLTFBufferView((AVListImpl) values[i]);
+                                this.bufferViews[i] = new GLTFBufferView(GLTFUtil.asAVList(values[i]));
                             }
                             break;
                         case GLTFParserContext.KEY_ASSET:
-                            this.asset = new GLTFAsset((AVListImpl) value);
+                            this.asset = new GLTFAsset(GLTFUtil.asAVList(value));
                             break;
                         case GLTFParserContext.KEY_MESHES:
                             this.meshes = new GLTFMesh[values.length];
                             for (int i = 0; i < values.length; i++) {
-                                this.meshes[i] = new GLTFMesh((AVListImpl) values[i]);
+                                this.meshes[i] = new GLTFMesh(GLTFUtil.asAVList(values[i]));
                             }
                             break;
                         case GLTFParserContext.KEY_SCENE:
@@ -408,13 +427,13 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
                         case GLTFParserContext.KEY_MATERIALS:
                             this.materials = new GLTFMaterial[values.length];
                             for (int i = 0; i < values.length; i++) {
-                                this.materials[i] = new GLTFMaterial((AVListImpl) values[i]);
+                                this.materials[i] = new GLTFMaterial(GLTFUtil.asAVList(values[i]));
                             }
                             break;
                         case GLTFParserContext.KEY_CAMERAS:
                             this.cameras = new GLTFCamera[values.length];
                             for (int i = 0; i < values.length; i++) {
-                                this.cameras[i] = new GLTFCamera((AVListImpl) values[i]);
+                                this.cameras[i] = new GLTFCamera(GLTFUtil.asAVList(values[i]));
                             }
                             break;
                         default:
@@ -458,16 +477,16 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
      * readable.
      * @throws IOException if an error occurs while reading the source.
      */
-    @TypeScript(substitute = "if (docSource instanceof String)| |<string> docSource|docSource.toString()")
+    @TypeScript(substitute = "if (docSource instanceof String)| ")
     public static GLTFRoot createAndParse(Object docSource) throws Exception { // XMLStreamException {
         // GLTFRoot gltfRoot = GLTFRoot.create(docSource);
         GLTFRoot gltfRoot = null;
         if (docSource instanceof String) {
-            String strDocSource = (String) docSource;
+            String strDocSource = docSource.toString();
             if (strDocSource.toLowerCase().endsWith(".glb")) {
                 gltfRoot = new GLTFRoot(new GLTFGlbSource(strDocSource));
             } else {
-                gltfRoot = new GLTFRoot((String) docSource);
+                gltfRoot = new GLTFRoot(docSource);
             }
         }
 
@@ -513,7 +532,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
     }
 
     public GLTFBuffer getBufferForIdx(int idx) {
-        return this.buffers[idx];
+        return this.buffers.get(idx);
     }
 
     /**
@@ -574,7 +593,7 @@ public class GLTFRoot extends GLTFAbstractObject implements GLTFRenderable, High
             return this.matrix;
         }
 
-        Matrix m = Matrix.IDENTITY;
+        Matrix m = Matrix.fromIdentity();
 
         if (this.heading != null) {
             m = m.multiply(Matrix.fromRotationZ(Angle.POS360.subtract(this.heading)));

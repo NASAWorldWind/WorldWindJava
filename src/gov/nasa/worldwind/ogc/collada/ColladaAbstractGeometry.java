@@ -1,8 +1,31 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
+
 package gov.nasa.worldwind.ogc.collada;
 
 import gov.nasa.worldwind.util.Logging;
@@ -16,18 +39,21 @@ import java.util.*;
  * Base class for COLLADA geometry (lines and triangles).
  *
  * @author pabercrombie
- * @version $Id: ColladaAbstractGeometry.java 618 2012-06-01 17:35:11Z pabercrombie $
+ * @version $Id: ColladaAbstractGeometry.java 618 2012-06-01 17:35:11Z
+ * pabercrombie $
  */
 public abstract class ColladaAbstractGeometry extends ColladaAbstractObject implements AbstractGeometry {
 
     /**
-     * Default semantic that identifies texture coordinates. Used the a file does not specify the semantic using a
+     * Default semantic that identifies texture coordinates. Used the a file
+     * does not specify the semantic using a
      * <i>bind_vertex_input</i> element.
      */
     public static final String DEFAULT_TEX_COORD_SEMANTIC = "TEXCOORD";
 
     /**
-     * Inputs for the geometry. Inputs provide the geometry with vertices, texture coordinates, etc.
+     * Inputs for the geometry. Inputs provide the geometry with vertices,
+     * texture coordinates, etc.
      */
     protected List<ColladaInput> inputs = new ArrayList<>();
 
@@ -43,14 +69,16 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject impl
     /**
      * Create a new instance.
      *
-     * @param ns the qualifying namespace URI. May be null to indicate no namespace qualification.
+     * @param ns the qualifying namespace URI. May be null to indicate no
+     * namespace qualification.
      */
     public ColladaAbstractGeometry(String ns) {
         super(ns);
     }
 
     /**
-     * Indicates the inputs that provide vertices, textures coordinates, etc. to the geometry.
+     * Indicates the inputs that provide vertices, textures coordinates, etc. to
+     * the geometry.
      *
      * @return Inputs to the geometry.
      */
@@ -86,6 +114,12 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject impl
         this.getFloatFromAccessor(buffer, this.getVertexAccessor(), "VERTEX", COORDS_PER_VERTEX);
     }
 
+    // Not used.
+    @Override
+    public FloatBuffer getVertexBuffer() {
+        return null;
+    }
+
     /**
      * Retrieves normal vectors in this geometry.
      *
@@ -96,12 +130,18 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject impl
         this.getFloatFromAccessor(buffer, this.getNormalAccessor(), "NORMAL", COORDS_PER_VERTEX);
     }
 
+    // Not used.
+    @Override
+    public FloatBuffer getNormalBuffer() {
+        return null;
+    }
+
     /**
      * Retrieves the texture coordinates of vertices in this geometry.
      *
      * @param buffer Buffer to receive coordinates.
-     * @param semantic String to identify which input holds the texture coordinates. May be null, in which case the
-     * "TEXCOORD" is used.
+     * @param semantic String to identify which input holds the texture
+     * coordinates. May be null, in which case the "TEXCOORD" is used.
      */
     public void getTextureCoordinates(FloatBuffer buffer, String semantic) {
         if (semantic == null) {
@@ -115,7 +155,7 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject impl
      * Retrieves the texture coordinates of vertices in this geometry.
      *
      * @param buffer Buffer to receive coordinates.
-      */
+     */
     @Override
     public void getTextureCoordinates(FloatBuffer buffer) {
         String semantic = null;
@@ -134,7 +174,8 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject impl
      *
      * @param buffer Buffer to receive floats.
      * @param accessor Accessor that will provide floats.
-     * @param semantic Semantic that identifiers the set of indices to use (for example, "VERTEX" or "NORMAL").
+     * @param semantic Semantic that identifiers the set of indices to use (for
+     * example, "VERTEX" or "NORMAL").
      * @param floatsPerVertex Number of floats to read for each vertex.
      */
     protected void getFloatFromAccessor(FloatBuffer buffer, ColladaAccessor accessor, String semantic,
@@ -262,10 +303,11 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject impl
     /**
      * Indicates the accessor for texture coordinates.
      *
-     * @param semantic Semantic that identifies the texture coordinates. May be null, in which case the semantic
-     * "TEXCOORD" is used.
+     * @param semantic Semantic that identifies the texture coordinates. May be
+     * null, in which case the semantic "TEXCOORD" is used.
      *
-     * @return The texture coordinates accessor, or null if the accessor cannot be resolved.
+     * @return The texture coordinates accessor, or null if the accessor cannot
+     * be resolved.
      */
     public ColladaAccessor getTexCoordAccessor(String semantic) {
         if (semantic == null) {
@@ -299,7 +341,7 @@ public abstract class ColladaAbstractGeometry extends ColladaAbstractObject impl
             super.setField(keyName, value);
         }
     }
-    
+
     @Override
     public boolean hasNormals() {
         return this.getNormalAccessor() != null;

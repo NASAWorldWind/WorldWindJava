@@ -20,6 +20,7 @@ public interface AbstractGeometry {
      * @param buffer Buffer to receive coordinates.
      */
     public void getVertices(FloatBuffer buffer);
+    public FloatBuffer getVertexBuffer();
 
     public boolean hasNormals();
     /**
@@ -28,7 +29,7 @@ public interface AbstractGeometry {
      * @param buffer Buffer to receive coordinates.
      */
     public void getNormals(FloatBuffer buffer);
-
+    public FloatBuffer getNormalBuffer();
     /**
      * Indicates the number of shapes (lines or triangles) in the geometry.
      *
