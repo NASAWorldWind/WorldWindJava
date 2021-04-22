@@ -157,14 +157,16 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         Shapefile.SHAPE_POINT_M, Shapefile.SHAPE_POINT_Z,
         Shapefile.SHAPE_MULTI_POINT_M, Shapefile.SHAPE_MULTI_POINT_Z,
         Shapefile.SHAPE_POLYLINE_M, Shapefile.SHAPE_POLYLINE_Z,
-        Shapefile.SHAPE_POLYGON_M, Shapefile.SHAPE_POLYGON_Z
+        Shapefile.SHAPE_POLYGON_M, Shapefile.SHAPE_POLYGON_Z, 
+        Shapefile.SHAPE_MULTI_PATCH
     ));
 
     protected static List<String> zTypes = new ArrayList<String>(Arrays.asList(
         Shapefile.SHAPE_POINT_Z,
         Shapefile.SHAPE_MULTI_POINT_Z,
         Shapefile.SHAPE_POLYLINE_Z,
-        Shapefile.SHAPE_POLYGON_Z
+        Shapefile.SHAPE_POLYGON_Z, 
+        Shapefile.SHAPE_MULTI_PATCH
     ));
 
     protected static class Header
@@ -1353,6 +1355,10 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         {
             return this.createPolygon(buffer);
         }
+        else if (isMultiPatchType(shapeType))
+        {
+            return this.createMultiPatch(buffer);
+        }
         else if (isNullType(shapeType))
         {
             return this.createNull(buffer);
@@ -1407,6 +1413,22 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
         return new ShapefileRecordMultiPoint(this, buffer);
     }
 
+    /**
+     * Returns a new multi-patch {@link gov.nasa.worldwind.formats.shapefile.ShapefileRecord} from the specified
+     * buffer.
+     * <p>
+     * The buffer current position is assumed to be set at the start of the record and will be set to the start of the
+     * next record after this method has completed.
+     *
+     * @param buffer the buffer containing the multi-patch record's content.
+     *
+     * @return a new patch {@link gov.nasa.worldwind.formats.shapefile.ShapefileRecord}.
+     */
+    protected ShapefileRecord createMultiPatch(ByteBuffer buffer)
+    {
+        return new ShapefileRecordMultiPatch(this, buffer);
+    }
+    
     /**
      * Returns a new polyline {@link gov.nasa.worldwind.formats.shapefile.ShapefileRecord} from the specified buffer.
      * <p>
@@ -1502,8 +1524,8 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
             case 28:
                 return SHAPE_MULTI_POINT_M;
 
-//            case 31:
-//                return SHAPE_MULTI_PATCH;
+            case 31:
+                return SHAPE_MULTI_PATCH;
 
             default:
                 return null; // unsupported shape type
@@ -2064,6 +2086,27 @@ public class Shapefile extends AVListImpl implements Closeable, Exportable
 
         return shapeType.equals(Shapefile.SHAPE_MULTI_POINT) || shapeType.equals(Shapefile.SHAPE_MULTI_POINT_Z)
             || shapeType.equals(Shapefile.SHAPE_MULTI_POINT_M);
+    }
+
+    /**
+     * Indicates whether a specified shape type is {@link #SHAPE_MULTI_PATCH}.
+     *
+     * @param shapeType the shape type to analyze.
+     *
+     * @return true if the shape type is a multi-patch type.
+     *
+     * @throws IllegalArgumentException if <code>shapeType</code> is null.
+     */
+    public static boolean isMultiPatchType(String shapeType)
+    {
+        if (shapeType == null)
+        {
+            String message = Logging.getMessage("nullValue.ShapeType");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        return shapeType.equals(Shapefile.SHAPE_MULTI_PATCH);
     }
 
     /**

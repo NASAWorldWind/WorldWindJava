@@ -40,7 +40,6 @@ import java.util.*;
  * Represents a single record of a shapefile.
  *
  * @author Patrick Murris
- * @version $Id: ShapefileRecord.java 2303 2014-09-14 22:33:36Z dcollins $
  */
 public abstract class ShapefileRecord
 {
@@ -384,6 +383,17 @@ public abstract class ShapefileRecord
     }
 
     /**
+     * Indicates whether this is a multi point record. When true, this record may be cast to a ShapefileRecordMultiPatch
+     * by calling {@link #asPointRecord()}.
+     *
+     * @return true if this is a multi patch record, otherwise false.
+     */
+    public boolean isMultiPatchRecord() {
+        return false;
+    }
+
+    /**
+    /**
      * Indicates whether this is a polyline record. When true, this record may be cast to a ShapefileRecordPolyline by
      * calling {@link #asPolylineRecord()}.
      *
@@ -436,6 +446,17 @@ public abstract class ShapefileRecord
     public ShapefileRecordMultiPoint asMultiPointRecord()
     {
         return (ShapefileRecordMultiPoint) this;
+    }
+
+    /**
+     * Returns this record as a ShapefileRecordMultiPatch. This results in a class cast exception if this is not a multi
+     * patch record. Check this record's type using {@link #isMultiPatchRecord()} prior to calling this method.
+     *
+     * @return this record cast as a ShapefileRecordMultiPatch.
+     */
+    public ShapefileRecordMultiPatch asMultiPatchRecord()
+    {
+        return (ShapefileRecordMultiPatch) this;
     }
 
     /**

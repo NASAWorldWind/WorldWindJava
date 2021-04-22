@@ -723,6 +723,11 @@ public class WWMath
         return new Vec4(x / length, y / length, z / length);
     }
 
+    
+    public static Vec4 computeTriangleNormal(Triangle t) {
+        return computeTriangleNormal(t.getA(),t.getB(),t.getC());
+    }
+
     /**
      * Returns the area enclosed by the specified (x, y) points (the z and w coordinates are ignored). If the specified
      * points do not define a closed loop, then the loop is automatically closed by simulating appending the first point
@@ -846,6 +851,14 @@ public class WWMath
         return (area < 0) ? AVKey.CLOCKWISE : AVKey.COUNTER_CLOCKWISE;
     }
 
+    public static String computeWindingOrderOfTriangle(Triangle t) {
+        ArrayList<Vec4> vertices=new ArrayList<>();
+        vertices.add(t.getA());
+        vertices.add(t.getB());
+        vertices.add(t.getC());
+        return computeWindingOrderOfVertices(vertices);
+    }
+    
     /**
      * Returns an array of normalized vectors defining the three principal axes of the x-, y-, and z-coordinates from
      * the specified points Iterable, sorted from the most prominent axis to the least prominent. This returns null if

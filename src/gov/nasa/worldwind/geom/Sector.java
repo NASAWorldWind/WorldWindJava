@@ -380,7 +380,7 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
      *
      * @param globe  a Globe instance.
      * @param center the circle center position.
-     * @param radius the circle radius in meter.
+     * @param radius the circle radius in meters.
      *
      * @return the circle bounding sector.
      */

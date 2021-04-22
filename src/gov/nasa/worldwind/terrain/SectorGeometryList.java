@@ -332,7 +332,7 @@ public class SectorGeometryList extends ArrayList<SectorGeometry>
      *                 considered to be distance above the terrain at the position's latitude and longitude.
      *
      * @return the Cartesian point, in meters, relative to an origin of (0, 0, 0). Will be null if there is no sector
-     *         geometry in this list for the specifed latitude and longitude.
+     *         geometry in this list for the specified latitude and longitude.
      */
     public Vec4 getSurfacePoint(Position position)
     {

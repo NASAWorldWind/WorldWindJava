@@ -39,7 +39,7 @@ import org.w3c.dom.*;
 
 import javax.xml.xpath.*;
 import java.awt.*;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A factory that creates {@link gov.nasa.worldwind.layers.Layer} instances from a shapefile layer configuration source
@@ -711,6 +711,10 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
         {
             this.addRenderablesForPolygons(shp, layer);
         }
+        else if (Shapefile.isMultiPatchType(shp.getShapeType())) 
+        {
+            this.addRenderablesForMultiPatch(shp, layer);
+        }
         else
         {
             String msg = Logging.getMessage("generic.UnrecognizedShapeType", shp.getShapeType());
@@ -755,6 +759,13 @@ public class ShapefileLayerFactory implements Factory, ShapefileRenderable.Attri
         }
     }
 
+    protected void addRenderablesForMultiPatch(Shapefile shp, RenderableLayer layer) 
+    {
+        ArrayList<ShapefileMultiPatch> shapes = ShapefileMultiPatch.createMeshes(shp, this.normalShapeAttributes,
+                this.highlightShapeAttributes, this);
+        layer.addRenderables(shapes);
+    } 
+    
     @SuppressWarnings({"UnusedDeclaration"})
     protected Renderable createPoint(ShapefileRecord record, double latDegrees, double lonDegrees, AVList mappings)
     {
