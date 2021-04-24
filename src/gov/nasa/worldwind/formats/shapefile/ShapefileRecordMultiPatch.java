@@ -27,6 +27,8 @@
  */
 package gov.nasa.worldwind.formats.shapefile;
 
+import gov.nasa.worldwind.util.Logging;
+
 import javax.xml.stream.*;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -122,6 +124,11 @@ public class ShapefileRecordMultiPatch extends ShapefileRecord {
         return this.partZValues[partNo];
     }
 
+    /**
+     * Returns the shape's part types.
+     *
+     * @return the shape's part types.
+     */
     public PartType[] getPartTypes() {
         return this.partTypes;
     }
@@ -245,44 +252,9 @@ public class ShapefileRecordMultiPatch extends ShapefileRecord {
      */
     @Override
     public void exportAsKML(XMLStreamWriter xmlWriter) throws IOException, XMLStreamException {
-//        xmlWriter.writeStartElement("Placemark");
-//        xmlWriter.writeStartElement("name");
-//        xmlWriter.writeCharacters(Integer.toString(this.getRecordNumber()));
-//        xmlWriter.writeEndElement();
-//
-//        // Write geometry
-//        xmlWriter.writeStartElement("MultiGeometry");
-//
-//        String altitudeMode = this.isZType() ? "absolute" : "clampToGround";
-//
-//        Iterable<double[]> points = this.getPoints(0);
-//        double[] zValues = this.getZValues();
-//
-//        int index = 0;
-//        for (double[] point : points) {
-//            xmlWriter.writeStartElement("Point");
-//
-//            double z = 0.0;
-//            if (zValues != null && index < zValues.length) {
-//                z = zValues[index];
-//            }
-//
-//            xmlWriter.writeStartElement("altitudeMode");
-//            xmlWriter.writeCharacters(altitudeMode);
-//            xmlWriter.writeEndElement();
-//
-//            String coordString = String.format("%f,%f,%f", point[0], point[1], z);
-//            xmlWriter.writeStartElement("coordinates");
-//            xmlWriter.writeCharacters(coordString);
-//            xmlWriter.writeEndElement();
-//
-//            xmlWriter.writeEndElement(); // Point
-//            index++;
-//        }
-//
-//        xmlWriter.writeEndElement(); // MultiGeometry
-//        xmlWriter.writeEndElement(); // Placemark
-//
-//        xmlWriter.flush();
+        // TODO: export as Collada
+        String message = Logging.getMessage("generic.UnsupportedOperation");
+        Logging.logger().severe(message);
+        throw new UnsupportedOperationException(message);
     }
 }

@@ -20,16 +20,35 @@ public interface AbstractGeometry {
      * @param buffer Buffer to receive coordinates.
      */
     public void getVertices(FloatBuffer buffer);
+
+    /**
+     * Retrieves the coordinates of vertices in this geometry.
+     *
+     * @return A {@link #FloatBuffer} containing the vertices.
+     */
     public FloatBuffer getVertexBuffer();
 
+    /**
+     * Returns a flag indicating whether the geometry has normals.
+     *
+     * @return True if the geometry has normals, false otherwise.
+     */
     public boolean hasNormals();
+
     /**
      * Retrieves normal vectors in this geometry.
      *
      * @param buffer Buffer to receive coordinates.
      */
     public void getNormals(FloatBuffer buffer);
+
+    /**
+     * Retrieves the coordinates of normals in this geometry.
+     *
+     * @return A {@link #FloatBuffer} containing the normals.
+     */
     public FloatBuffer getNormalBuffer();
+
     /**
      * Indicates the number of shapes (lines or triangles) in the geometry.
      *

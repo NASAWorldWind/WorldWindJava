@@ -280,14 +280,6 @@ public class Mesh3D extends AbstractGeneralShape {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected AbstractShapeData getCurrentData() {
-        return this.currentData;
-    }
-
-    /**
      * Compute the shape's extent, using the active orientation matrix.
      *
      * @param dc Current draw context.
@@ -299,7 +291,7 @@ public class Mesh3D extends AbstractGeneralShape {
         if (this.coordBuffer == null) {
             return null;
         }
-//        WWUtil.printFloatBuffer(coordBuffer, 3);
+        
         // Compute a bounding box around the vertices in this shape.
         this.coordBuffer.rewind();
         Box box = Box.computeBoundingBox(new BufferWrapper.FloatBufferWrapper(this.coordBuffer), AbstractGeometry.COORDS_PER_VERTEX);
@@ -477,50 +469,6 @@ public class Mesh3D extends AbstractGeneralShape {
         // Transform to the cartesian coordinates of (latitude, longitude, metersElevation).
         Matrix transform = Matrix.fromTranslation(this.computeReferenceCenter(dc));
         return transform;
-        
-//        Matrix matrix = Matrix.IDENTITY;
-//        // translate and orient, accounting for altitude mode
-//        Position refPosition = dc.getGlobe().computePositionFromPoint(this.computeReferenceCenter(dc));
-//        matrix = matrix.multiply(dc.getGlobe().computeSurfaceOrientationAtPosition(refPosition));
-//
-//        // now apply the user-specified heading/tilt/roll
-//        // order corresponds to KML rotations (YXZ, positive clockwise)
-//        // roll
-//        if (roll != null) {
-//            matrix = matrix.multiply(Matrix.fromRotationY(Angle.POS360.subtract(this.roll)));
-//        }
-//        // tilt
-//        if (pitch != null) {
-//            matrix = matrix.multiply(Matrix.fromRotationX(Angle.POS360.subtract(this.pitch)));
-//        }
-//        // heading
-//        if (heading != null) {
-//            matrix = matrix.multiply(Matrix.fromRotationZ(Angle.POS360.subtract(this.heading)));
-//        }
-//        //matrix = matrix.multiply(Matrix.fromRotationZ(this.heading));
-//
-////        // apply skew (aka shear) matrix
-////        matrix = matrix.multiply(Matrix.fromSkew(this.skewEastWest, this.skewNorthSouth));
-//        // finally, scale it along each of the axis
-//        if (this.modelScale != null) {
-//            matrix = matrix.multiply(Matrix.fromScale(this.modelScale.x, this.modelScale.y, this.modelScale.z));
-//        }
-//        System.out.println("3dmat="+matrix.toString());
-//        //matrix=matrix.getInverse();
-//        return matrix;
-//        ShapeData current = (ShapeData) this.getCurrent();
-//        if (current.referenceCenter == null || current.isExpired(dc)) {
-//            current.referenceCenter = this.computeReferenceCenter(dc);
-//// TODO: Fix
-//            Position refPosition = dc.getGlobe().computePositionFromPoint(current.referenceCenter);
-//            current.surfaceOrientationMatrix = dc.getGlobe().computeSurfaceOrientationAtPosition(refPosition);
-//            //Vec4 point = dc.getGlobe().computeEllipsoidalPointFromPosition(refPosition.latitude, refPosition.longitude, refPosition.elevation);
-//            //current.surfaceOrientationMatrix = Matrix.fromTranslation(point);
-//        }
-//        if (current.renderMatrix != null) {
-//            return current.surfaceOrientationMatrix.multiply(current.renderMatrix);
-//        }
-//        return current.surfaceOrientationMatrix;
     }
 
     /**
@@ -663,8 +611,7 @@ public class Mesh3D extends AbstractGeneralShape {
      * {@inheritDoc}
      */
     @Override
-    protected boolean isOrderedRenderableValid(DrawContext dc
-    ) {
+    protected boolean isOrderedRenderableValid(DrawContext dc) {
         return this.coordBuffer != null;
     }
 
